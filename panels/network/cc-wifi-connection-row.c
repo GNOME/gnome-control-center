@@ -59,7 +59,8 @@ typedef enum
   NM_AP_SEC_NONE,
   NM_AP_SEC_WEP,
   NM_AP_SEC_WPA,
-  NM_AP_SEC_WPA2
+  NM_AP_SEC_WPA2,
+  NM_AP_SEC_SAE
 } NMAccessPointSecurity;
 
 G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, GTK_TYPE_LIST_BOX_ROW)
@@ -96,6 +97,12 @@ get_access_point_security (NMAccessPoint *ap)
     {
       type = NM_AP_SEC_WPA;
     }
+#if NM_CHECK_VERSION(1,20,6)
+  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_SAE)
+    {
+      type = NM_AP_SEC_SAE;
+    }
+#endif
   else
     {
       type = NM_AP_SEC_WPA2;
@@ -128,6 +135,8 @@ get_connection_security (NMConnection *con)
     return NM_AP_SEC_WPA2;
   else if (strncmp (key_mgmt, "wpa-", 4) == 0)
     return NM_AP_SEC_WPA;
+  else if (g_str_equal (key_mgmt, "sae"))
+    return NM_AP_SEC_SAE;
   else
     return NM_AP_SEC_UNKNOWN;
 }
@@ -244,9 +253,30 @@ update_ui (CcWifiConnectionRow *self)
 
       gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), TRUE);
       if (security == NM_AP_SEC_WEP)
-        icon_name = "channel-insecure-symbolic";
+	{
+          icon_name = "channel-insecure-symbolic";
+	  gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Insecure network (WEP)"));
+	}
+      else if (security == NM_AP_SEC_WPA)
+	{
+          icon_name = "network-wireless-encrypted-symbolic";
+          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA)"));
+	}
+      else if (security == NM_AP_SEC_WPA2)
+	{
+          icon_name = "network-wireless-encrypted-symbolic";
+          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA2)"));
+	}
+	  else if (security == NM_AP_SEC_SAE)
+	{
+          icon_name = "network-wireless-encrypted-symbolic";
+          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA3)"));
+	}
       else
-        icon_name = "network-wireless-encrypted-symbolic";
+	{
+          icon_name = "network-wireless-encrypted-symbolic";
+          gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network"));
+	}
 
       g_object_set (self->encrypted_icon, "icon-name", icon_name, NULL);
     }
@@ -465,23 +495,22 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
 }
 
 static void
-configure_clicked_cb (GtkButton           *btn,
-                      CcWifiConnectionRow *row)
+configure_clicked_cb (CcWifiConnectionRow *self)
 {
-  g_signal_emit_by_name (row, "configure");
+  g_signal_emit_by_name (self, "configure");
 }
 
 void
-cc_wifi_connection_row_init (CcWifiConnectionRow *row)
+cc_wifi_connection_row_init (CcWifiConnectionRow *self)
 {
-  gtk_widget_init_template (GTK_WIDGET (row));
+  gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_signal_connect (row->configure_button, "clicked", G_CALLBACK (configure_clicked_cb), row);
+  g_signal_connect_swapped (self->configure_button, "clicked", G_CALLBACK (configure_clicked_cb), self);
 
-  row->aps = g_ptr_array_new_with_free_func (g_object_unref);
+  self->aps = g_ptr_array_new_with_free_func (g_object_unref);
 
-  g_object_bind_property (row, "checked",
-                          row->checkbutton, "active",
+  g_object_bind_property (self, "checked",
+                          self->checkbutton, "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
 }
 
@@ -500,76 +529,76 @@ cc_wifi_connection_row_new (NMDeviceWifi  *device,
 }
 
 gboolean
-cc_wifi_connection_row_get_checkable (CcWifiConnectionRow  *row)
+cc_wifi_connection_row_get_checkable (CcWifiConnectionRow *self)
 {
-  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), FALSE);
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), FALSE);
 
-  return row->checkable;
+  return self->checkable;
 }
 
 gboolean
-cc_wifi_connection_row_get_checked (CcWifiConnectionRow  *row)
+cc_wifi_connection_row_get_checked (CcWifiConnectionRow *self)
 {
-  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), FALSE);
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), FALSE);
 
-  return row->checked;
+  return self->checked;
 }
 
 NMDeviceWifi*
-cc_wifi_connection_row_get_device (CcWifiConnectionRow  *row)
+cc_wifi_connection_row_get_device (CcWifiConnectionRow *self)
 {
-  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), NULL);
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), NULL);
 
-  return row->device;
+  return self->device;
 }
 
 const GPtrArray*
-cc_wifi_connection_row_get_access_points (CcWifiConnectionRow  *row)
+cc_wifi_connection_row_get_access_points (CcWifiConnectionRow *self)
 {
-  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), NULL);
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), NULL);
 
-  return row->aps;
+  return self->aps;
 }
 
 NMConnection*
-cc_wifi_connection_row_get_connection (CcWifiConnectionRow  *row)
+cc_wifi_connection_row_get_connection (CcWifiConnectionRow *self)
 {
-  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), NULL);
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), NULL);
 
-  return row->connection;
+  return self->connection;
 }
 
 void
-cc_wifi_connection_row_set_checked (CcWifiConnectionRow  *row,
-                                    gboolean              value)
+cc_wifi_connection_row_set_checked (CcWifiConnectionRow *self,
+                                    gboolean             value)
 {
-  g_return_if_fail (CC_WIFI_CONNECTION_ROW (row));
+  g_return_if_fail (CC_WIFI_CONNECTION_ROW (self));
 
-  row->checked = value;
-  g_object_notify_by_pspec (G_OBJECT (row), props[PROP_CHECKED]);
+  self->checked = value;
+  g_object_notify_by_pspec (G_OBJECT (self), props[PROP_CHECKED]);
 }
 
 NMAccessPoint*
-cc_wifi_connection_row_best_access_point (CcWifiConnectionRow  *row)
+cc_wifi_connection_row_best_access_point (CcWifiConnectionRow *self)
 {
   NMAccessPoint *best_ap = NULL;
   NMAccessPoint *active_ap = NULL;
   guint8 strength = 0;
   gint i;
 
-  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), NULL);
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), NULL);
 
-  if (row->aps->len == 0)
+  if (self->aps->len == 0)
     return NULL;
 
-  active_ap = nm_device_wifi_get_active_access_point (row->device);
+  active_ap = nm_device_wifi_get_active_access_point (self->device);
 
-  for (i = 0; i < row->aps->len; i++)
+  for (i = 0; i < self->aps->len; i++)
     {
       NMAccessPoint *cur;
       guint8 cur_strength;
 
-      cur = g_ptr_array_index (row->aps, i);
+      cur = g_ptr_array_index (self->aps, i);
 
       /* Prefer the active AP in all cases */
       if (cur == active_ap)
@@ -588,49 +617,49 @@ cc_wifi_connection_row_best_access_point (CcWifiConnectionRow  *row)
 }
 
 void
-cc_wifi_connection_row_add_access_point (CcWifiConnectionRow  *row,
-                                         NMAccessPoint        *ap)
+cc_wifi_connection_row_add_access_point (CcWifiConnectionRow *self,
+                                         NMAccessPoint       *ap)
 {
-  g_return_if_fail (CC_WIFI_CONNECTION_ROW (row));
+  g_return_if_fail (CC_WIFI_CONNECTION_ROW (self));
 
-  g_ptr_array_add (row->aps, g_object_ref (ap));
-  update_ui (row);
+  g_ptr_array_add (self->aps, g_object_ref (ap));
+  update_ui (self);
 }
 
 gboolean
-cc_wifi_connection_row_remove_access_point (CcWifiConnectionRow  *row,
-                                            NMAccessPoint        *ap)
+cc_wifi_connection_row_remove_access_point (CcWifiConnectionRow *self,
+                                            NMAccessPoint       *ap)
 {
-  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), FALSE);
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), FALSE);
 
-  if (!g_ptr_array_remove (row->aps, g_object_ref (ap)))
+  if (!g_ptr_array_remove (self->aps, g_object_ref (ap)))
     return FALSE;
 
   /* Object might be invalid; this is alright if it is deleted right away */
-  if (row->aps->len > 0 || row->connection)
+  if (self->aps->len > 0 || self->connection)
     {
-      g_object_notify_by_pspec (G_OBJECT (row), props[PROP_APS]);
-      update_ui (row);
+      g_object_notify_by_pspec (G_OBJECT (self), props[PROP_APS]);
+      update_ui (self);
     }
 
-  return row->aps->len == 0;
+  return self->aps->len == 0;
 }
 
 gboolean
-cc_wifi_connection_row_has_access_point (CcWifiConnectionRow  *row,
-                                         NMAccessPoint        *ap)
+cc_wifi_connection_row_has_access_point (CcWifiConnectionRow *self,
+                                         NMAccessPoint       *ap)
 {
-  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (row), FALSE);
+  g_return_val_if_fail (CC_WIFI_CONNECTION_ROW (self), FALSE);
 
-  return g_ptr_array_find (row->aps, ap, NULL);
+  return g_ptr_array_find (self->aps, ap, NULL);
 }
 
 void
-cc_wifi_connection_row_update (CcWifiConnectionRow  *row)
+cc_wifi_connection_row_update (CcWifiConnectionRow *self)
 {
-  update_ui (row);
+  update_ui (self);
 
-  gtk_list_box_row_changed (GTK_LIST_BOX_ROW (row));
+  gtk_list_box_row_changed (GTK_LIST_BOX_ROW (self));
 
 }
 

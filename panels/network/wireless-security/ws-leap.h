@@ -20,11 +20,15 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef WS_LEAP_H
-#define WS_LEAP_H
+#pragma once
 
-typedef struct _WirelessSecurityLEAP WirelessSecurityLEAP;
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
-WirelessSecurityLEAP * ws_leap_new (NMConnection *connection, gboolean secrets_only);
+G_BEGIN_DECLS
 
-#endif /* WS_LEAP_H */
+G_DECLARE_FINAL_TYPE (WirelessSecurityLEAP, ws_leap, WS, LEAP, GtkGrid)
+
+WirelessSecurityLEAP *ws_leap_new (NMConnection *connection);
+
+G_END_DECLS

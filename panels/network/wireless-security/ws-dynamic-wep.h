@@ -20,13 +20,15 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef WS_DYNAMIC_WEP_H
-#define WS_DYNAMIC_WEP_H
+#pragma once
 
-typedef struct _WirelessSecurityDynamicWEP WirelessSecurityDynamicWEP;
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
-WirelessSecurityDynamicWEP *ws_dynamic_wep_new (NMConnection *connection,
-                                                gboolean is_editor,
-                                                gboolean secrets_only);
+G_BEGIN_DECLS
 
-#endif /* WS_DYNAMIC_WEP_H */
+G_DECLARE_FINAL_TYPE (WirelessSecurityDynamicWEP, ws_dynamic_wep, WS, DYNAMIC_WEP, GtkGrid)
+
+WirelessSecurityDynamicWEP *ws_dynamic_wep_new (NMConnection *connection);
+
+G_END_DECLS

@@ -20,14 +20,16 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef WS_WEP_KEY_H
-#define WS_WEP_KEY_H
+#pragma once
 
-typedef struct _WirelessSecurityWEPKey WirelessSecurityWEPKey;
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
+
+G_BEGIN_DECLS
+
+G_DECLARE_FINAL_TYPE (WirelessSecurityWEPKey, ws_wep_key, WS, WEP_KEY, GtkGrid)
 
 WirelessSecurityWEPKey *ws_wep_key_new (NMConnection *connection,
-                                        NMWepKeyType type,
-                                        gboolean adhoc_create,
-                                        gboolean secrets_only);
+                                        NMWepKeyType type);
 
-#endif /* WS_WEP_KEY_H */
+G_END_DECLS

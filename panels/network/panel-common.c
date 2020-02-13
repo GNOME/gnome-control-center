@@ -22,121 +22,9 @@
 
 #include "config.h"
 
-#include <glib.h>
 #include <glib/gi18n.h>
-#include <gtk/gtk.h>
-#define HANDY_USE_UNSTABLE_API
-#include <handy.h>
-#include <NetworkManager.h>
 
 #include "panel-common.h"
-
-/**
- * panel_device_to_icon_name:
- **/
-const gchar *
-panel_device_to_icon_name (NMDevice *device, gboolean symbolic)
-{
-        const gchar *value = NULL;
-        NMDeviceState state;
-        NMDeviceModemCapabilities caps;
-        switch (nm_device_get_device_type (device)) {
-        case NM_DEVICE_TYPE_ETHERNET:
-                state = nm_device_get_state (device);
-                if (state <= NM_DEVICE_STATE_DISCONNECTED) {
-                        value = symbolic ? "network-wired-disconnected-symbolic"
-                                         : "network-wired-disconnected";
-                } else {
-                        value = symbolic ? "network-wired-symbolic"
-                                         : "network-wired";
-                }
-                break;
-        case NM_DEVICE_TYPE_WIFI:
-        case NM_DEVICE_TYPE_BT:
-        case NM_DEVICE_TYPE_OLPC_MESH:
-                value = symbolic ? "network-wireless-signal-excellent-symbolic"
-                                 : "network-wireless";
-                break;
-        case NM_DEVICE_TYPE_MODEM:
-                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
-                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                        value = symbolic ? "network-cellular-signal-excellent-symbolic"
-                                         : "network-cellular";
-                        break;
-                }
-                /* fall thru */
-        default:
-                value = symbolic ? "network-idle-symbolic"
-                                 : "network-idle";
-                break;
-        }
-        return value;
-}
-
-/**
- * panel_device_get_sort_category:
- *
- * Try to return order of approximate connection speed.
- * But sort wifi first, since thats the common case.
- **/
-gint
-panel_device_get_sort_category (NMDevice *device)
-{
-        gint value;
-        NMDeviceModemCapabilities caps;
-        switch (nm_device_get_device_type (device)) {
-        case NM_DEVICE_TYPE_ETHERNET:
-                value = 2;
-                break;
-        case NM_DEVICE_TYPE_WIFI:
-                value = 1;
-                break;
-        case NM_DEVICE_TYPE_MODEM:
-                caps = nm_device_modem_get_current_capabilities (NM_DEVICE_MODEM (device));
-                if ((caps & NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) ||
-                    (caps & NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO)) {
-                        value = 3;
-                }
-                break;
-        case NM_DEVICE_TYPE_BT:
-                value = 4;
-                break;
-        case NM_DEVICE_TYPE_OLPC_MESH:
-                value = 5;
-                break;
-        default:
-                value = 6;
-                break;
-        }
-        return value;
-}
-
-/**
- * panel_ap_mode_to_localized_string:
- **/
-const gchar *
-panel_ap_mode_to_localized_string (NM80211Mode mode)
-{
-        const gchar *value = NULL;
-        switch (mode) {
-        case NM_802_11_MODE_UNKNOWN:
-                /* TRANSLATORS: AP type */
-                value = _("Unknown");
-                break;
-        case NM_802_11_MODE_ADHOC:
-                /* TRANSLATORS: AP type */
-                value = _("Ad-hoc");
-                break;
-        case NM_802_11_MODE_INFRA:
-                /* TRANSLATORS: AP type */
-                value = _("Infrastructure");
-                break;
-        default:
-                break;
-        }
-        return value;
-}
 
 static const gchar *
 device_state_to_localized_string (NMDeviceState state)
@@ -184,48 +72,6 @@ device_state_to_localized_string (NMDeviceState state)
                 break;
         default:
                 /* TRANSLATORS: device status */
-                value = _("Status unknown (missing)");
-                break;
-        }
-        return value;
-}
-
-/**
- * panel_vpn_state_to_localized_string:
- **/
-const gchar *
-panel_vpn_state_to_localized_string (NMVpnConnectionState type)
-{
-        const gchar *value = NULL;
-        switch (type) {
-        case NM_DEVICE_STATE_UNKNOWN:
-                /* TRANSLATORS: VPN status */
-                value = _("Status unknown");
-                break;
-        case NM_VPN_CONNECTION_STATE_PREPARE:
-        case NM_VPN_CONNECTION_STATE_CONNECT:
-        case NM_VPN_CONNECTION_STATE_IP_CONFIG_GET:
-                /* TRANSLATORS: VPN status */
-                value = _("Connecting");
-                break;
-        case NM_VPN_CONNECTION_STATE_NEED_AUTH:
-                /* TRANSLATORS: VPN status */
-                value = _("Authentication required");
-                break;
-        case NM_VPN_CONNECTION_STATE_ACTIVATED:
-                /* TRANSLATORS: VPN status */
-                value = _("Connected");
-                break;
-        case NM_VPN_CONNECTION_STATE_FAILED:
-                /* TRANSLATORS: VPN status */
-                value = _("Connection failed");
-                break;
-        case NM_VPN_CONNECTION_STATE_DISCONNECTED:
-                /* TRANSLATORS: VPN status */
-                value = _("Not connected");
-                break;
-        default:
-                /* TRANSLATORS: VPN status */
                 value = _("Status unknown (missing)");
                 break;
         }
@@ -419,8 +265,78 @@ device_state_reason_to_localized_string (NMDevice *device)
 }
 
 static gchar *
-device_status_to_localized_string (NMDevice *nm_device,
-                                   const gchar *speed)
+get_mac_address_of_connection (NMConnection *connection)
+{
+        if (!connection)
+                return NULL;
+
+        /* check the connection type */
+        if (nm_connection_is_type (connection,
+                                   NM_SETTING_WIRELESS_SETTING_NAME)) {
+                /* check wireless settings */
+                NMSettingWireless *s_wireless = nm_connection_get_setting_wireless (connection);
+                if (!s_wireless)
+                        return NULL;
+                return g_strdup (nm_setting_wireless_get_mac_address (s_wireless));
+        } else if (nm_connection_is_type (connection,
+                                          NM_SETTING_WIRED_SETTING_NAME)) {
+                /* check wired settings */
+                NMSettingWired *s_wired = nm_connection_get_setting_wired (connection);
+                if (!s_wired)
+                        return NULL;
+                return g_strdup (nm_setting_wired_get_mac_address (s_wired));
+        }
+        /* no MAC address found */
+        return NULL;
+}
+
+static const gchar *
+get_mac_address_of_device (NMDevice *device)
+{
+        const gchar *mac = NULL;
+        switch (nm_device_get_device_type (device)) {
+        case NM_DEVICE_TYPE_WIFI:
+        {
+                NMDeviceWifi *device_wifi = NM_DEVICE_WIFI (device);
+                mac = nm_device_wifi_get_hw_address (device_wifi);
+                break;
+        }
+        case NM_DEVICE_TYPE_ETHERNET:
+        {
+                NMDeviceEthernet *device_ethernet = NM_DEVICE_ETHERNET (device);
+                mac = nm_device_ethernet_get_hw_address (device_ethernet);
+                break;
+        }
+        default:
+                break;
+        }
+        /* no MAC address found */
+        return mac;
+}
+
+/* returns TRUE if both MACs are equal */
+static gboolean
+compare_mac_device_with_mac_connection (NMDevice *device,
+                                        NMConnection *connection)
+{
+        const gchar *mac_dev = NULL;
+        g_autofree gchar *mac_conn = NULL;
+
+        mac_dev = get_mac_address_of_device (device);
+        if (mac_dev == NULL)
+                return FALSE;
+
+        mac_conn = get_mac_address_of_connection (connection);
+        if (mac_conn == NULL)
+                return FALSE;
+
+        /* compare both MACs */
+        return g_strcmp0 (mac_dev, mac_conn) == 0;
+}
+
+gchar *
+panel_device_status_to_localized_string (NMDevice *nm_device,
+                                         const gchar *speed)
 {
         NMDeviceState state;
         GString *string;
@@ -463,214 +379,76 @@ device_status_to_localized_string (NMDevice *nm_device,
         return g_string_free (string, FALSE);
 }
 
-void
-panel_set_device_status (GtkBuilder *builder,
-                         const gchar *label_name,
-                         NMDevice *nm_device,
-                         const gchar *speed)
+NMConnection *
+net_device_get_find_connection (NMClient *client, NMDevice *device)
 {
-        GtkLabel *label;
-        gchar *status;
+        GSList *list, *iterator;
+        NMConnection *connection = NULL;
+        NMActiveConnection *ac;
 
-        label = GTK_LABEL (gtk_builder_get_object (builder, label_name));
-        status = device_status_to_localized_string (nm_device, speed);
-        gtk_label_set_label (label, status);
-        g_free (status);
-}
+        /* is the device available in a active connection? */
+        ac = nm_device_get_active_connection (device);
+        if (ac)
+                return (NMConnection*) nm_active_connection_get_connection (ac);
 
-void
-panel_set_device_row_status (GtkBuilder  *builder,
-                             const gchar *row_name,
-                             NMDevice    *nm_device,
-                             const gchar *speed)
-{
-        HdyActionRow *row;
-        g_autofree gchar *status = NULL;
-
-        row = HDY_ACTION_ROW (gtk_builder_get_object (builder, row_name));
-        status = device_status_to_localized_string (nm_device, speed);
-        hdy_action_row_set_title (row, status);
-}
-
-gboolean
-panel_set_device_widget_details (GtkBuilder *builder,
-                                 const gchar *widget_suffix,
-                                 const gchar *value)
-{
-        gchar *heading_id;
-        gchar *label_id;
-        GtkWidget *heading;
-        GtkWidget *widget;
-
-        /* hide the row if there is no value */
-        heading_id = g_strdup_printf ("heading_%s", widget_suffix);
-        label_id = g_strdup_printf ("label_%s", widget_suffix);
-        heading = GTK_WIDGET (gtk_builder_get_object (builder, heading_id));
-        widget = GTK_WIDGET (gtk_builder_get_object (builder, label_id));
-        if (heading == NULL || widget == NULL) {
-                g_critical ("no widgets %s, %s found", heading_id, label_id);
-                return FALSE;
-        }
-        g_free (heading_id);
-        g_free (label_id);
-
-        if (value == NULL) {
-                gtk_widget_hide (heading);
-                gtk_widget_hide (widget);
-        } else {
-                /* there exists a value */
-                gtk_widget_show (heading);
-                gtk_widget_show (widget);
-                gtk_label_set_label (GTK_LABEL (widget), value);
-                gtk_label_set_max_width_chars (GTK_LABEL (widget), 50);
-                gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
-        }
-        return TRUE;
-}
-
-
-gboolean
-panel_set_device_widget_header (GtkBuilder *builder,
-                                const gchar *widget_suffix,
-                                const gchar *heading)
-{
-        gchar *label_id = NULL;
-        GtkWidget *widget;
-
-        label_id = g_strdup_printf ("heading_%s", widget_suffix);
-        widget = GTK_WIDGET (gtk_builder_get_object (builder, label_id));
-        if (widget == NULL) {
-                g_critical ("no widget %s found", label_id);
-                return FALSE;
-        }
-        gtk_label_set_label (GTK_LABEL (widget), heading);
-        g_free (label_id);
-        return TRUE;
-}
-
-gchar *
-panel_get_ip4_address_as_string (NMIPConfig *ip4_config, const char *what)
-{
-        const gchar *str = NULL;
-
-        /* we only care about one address */
-        if (!strcmp (what, "address")) {
-                GPtrArray *array;
-                NMIPAddress *address;
-
-                array = nm_ip_config_get_addresses (ip4_config);
-                if (array->len < 1)
+        /* not found in active connections - check all available connections */
+        list = net_device_get_valid_connections (client, device);
+        if (list != NULL) {
+                /* if list has only one connection, use this connection */
+                if (g_slist_length (list) == 1) {
+                        connection = list->data;
                         goto out;
-                address = array->pdata[0];
-                str = nm_ip_address_get_address (address);
-        } else if (!strcmp (what, "gateway")) {
-                str = nm_ip_config_get_gateway (ip4_config);
+                }
+
+                /* is there connection with the MAC address of the device? */
+                for (iterator = list; iterator; iterator = iterator->next) {
+                        connection = iterator->data;
+                        if (compare_mac_device_with_mac_connection (device,
+                                                                    connection)) {
+                                goto out;
+                        }
+                }
         }
 
+        /* no connection found for the given device */
+        connection = NULL;
 out:
-        return g_strdup (str);
+        g_slist_free (list);
+        return connection;
 }
 
-gchar *
-panel_get_ip4_dns_as_string (NMIPConfig *ip4_config)
+GSList *
+net_device_get_valid_connections (NMClient *client, NMDevice *device)
 {
-        return g_strjoinv (" ",
-                           (char **) nm_ip_config_get_nameservers (ip4_config));
-}
+        GSList *valid;
+        NMConnection *connection;
+        NMSettingConnection *s_con;
+        NMActiveConnection *active_connection;
+        const char *active_uuid;
+        const GPtrArray *all;
+        GPtrArray *filtered;
+        guint i;
 
-gchar *
-panel_get_ip6_address_as_string (NMIPConfig *ip6_config)
-{
-        GPtrArray *array;
-        NMIPAddress *address;
+        all = nm_client_get_connections (client);
+        filtered = nm_device_filter_connections (device, all);
 
-        array = nm_ip_config_get_addresses (ip6_config);
-        if (array->len < 1)
-                return NULL;
-        address = array->pdata[0];
-        return g_strdup (nm_ip_address_get_address (address));
-}
+        active_connection = nm_device_get_active_connection (device);
+        active_uuid = active_connection ? nm_active_connection_get_uuid (active_connection) : NULL;
 
-void
-panel_set_device_widgets (GtkBuilder *builder, NMDevice *device)
-{
-        NMIPConfig *ip4_config = NULL;
-        NMIPConfig *ip6_config = NULL;
-        gboolean has_ip4;
-        gboolean has_ip6;
-        gchar *str_tmp;
+        valid = NULL;
+        for (i = 0; i < filtered->len; i++) {
+                connection = g_ptr_array_index (filtered, i);
+                s_con = nm_connection_get_setting_connection (connection);
+                if (!s_con)
+                        continue;
 
-        /* get IPv4 parameters */
-        ip4_config = nm_device_get_ip4_config (device);
-        if (ip4_config != NULL) {
+                if (nm_setting_connection_get_master (s_con) &&
+                    g_strcmp0 (nm_setting_connection_get_uuid (s_con), active_uuid) != 0)
+                        continue;
 
-                /* IPv4 address */
-                str_tmp = panel_get_ip4_address_as_string (ip4_config, "address");
-                panel_set_device_widget_details (builder,
-                                                 "ipv4",
-                                                 str_tmp);
-                has_ip4 = str_tmp != NULL;
-                g_free (str_tmp);
-
-                /* IPv4 DNS */
-                str_tmp = panel_get_ip4_dns_as_string (ip4_config);
-                panel_set_device_widget_details (builder,
-                                                 "dns",
-                                                 str_tmp);
-                g_free (str_tmp);
-
-                /* IPv4 route */
-                str_tmp = panel_get_ip4_address_as_string (ip4_config, "gateway");
-                panel_set_device_widget_details (builder,
-                                                 "route",
-                                                 str_tmp);
-                g_free (str_tmp);
-
-        } else {
-                /* IPv4 address */
-                panel_set_device_widget_details (builder,
-                                                 "ipv4",
-                                                 NULL);
-                has_ip4 = FALSE;
-
-                /* IPv4 DNS */
-                panel_set_device_widget_details (builder,
-                                                 "dns",
-                                                 NULL);
-
-                /* IPv4 route */
-                panel_set_device_widget_details (builder,
-                                                 "route",
-                                                 NULL);
+                valid = g_slist_prepend (valid, connection);
         }
+        g_ptr_array_free (filtered, FALSE);
 
-        /* get IPv6 parameters */
-        ip6_config = nm_device_get_ip6_config (device);
-        if (ip6_config != NULL) {
-                str_tmp = panel_get_ip6_address_as_string (ip6_config);
-                panel_set_device_widget_details (builder, "ipv6", str_tmp);
-                has_ip6 = str_tmp != NULL;
-                g_free (str_tmp);
-        } else {
-                panel_set_device_widget_details (builder, "ipv6", NULL);
-                has_ip6 = FALSE;
-        }
-
-        if (has_ip4 && has_ip6) {
-                panel_set_device_widget_header (builder, "ipv4", _("IPv4 Address"));
-                panel_set_device_widget_header (builder, "ipv6", _("IPv6 Address"));
-        } else if (has_ip4) {
-                panel_set_device_widget_header (builder, "ipv4", _("IP Address"));
-        } else if (has_ip6) {
-                panel_set_device_widget_header (builder, "ipv6", _("IP Address"));
-        }
-}
-
-void
-panel_unset_device_widgets (GtkBuilder *builder)
-{
-        panel_set_device_widget_details (builder, "ipv4", NULL);
-        panel_set_device_widget_details (builder, "ipv6", NULL);
-        panel_set_device_widget_details (builder, "dns", NULL);
-        panel_set_device_widget_details (builder, "route", NULL);
+        return g_slist_reverse (valid);
 }

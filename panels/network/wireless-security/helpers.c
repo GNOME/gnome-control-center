@@ -20,34 +20,41 @@
  * Copyright 2009 - 2014 Red Hat, Inc.
  */
 
-#include "nm-default.h"
-
 #include "helpers.h"
 
 void
 helper_fill_secret_entry (NMConnection *connection,
-                          GtkBuilder *builder,
-                          const char *entry_name,
+                          GtkEntry *entry,
                           GType setting_type,
                           HelperSecretFunc func)
 {
-	GtkWidget *widget;
 	NMSetting *setting;
 	const char *tmp;
 
 	g_return_if_fail (connection != NULL);
-	g_return_if_fail (builder != NULL);
-	g_return_if_fail (entry_name != NULL);
+	g_return_if_fail (entry != NULL);
 	g_return_if_fail (func != NULL);
 
 	setting = nm_connection_get_setting (connection, setting_type);
 	if (setting) {
 		tmp = (*func) (setting);
 		if (tmp) {
-			widget = GTK_WIDGET (gtk_builder_get_object (builder, entry_name));
-			g_assert (widget);
-			gtk_entry_set_text (GTK_ENTRY (widget), tmp);
+			gtk_entry_set_text (entry, tmp);
 		}
 	}
 }
 
+void
+wireless_security_clear_ciphers (NMConnection *connection)
+{
+	NMSettingWirelessSecurity *s_wireless_sec;
+
+	g_return_if_fail (connection != NULL);
+
+	s_wireless_sec = nm_connection_get_setting_wireless_security (connection);
+	g_assert (s_wireless_sec);
+
+	nm_setting_wireless_security_clear_protos (s_wireless_sec);
+	nm_setting_wireless_security_clear_pairwise (s_wireless_sec);
+	nm_setting_wireless_security_clear_groups (s_wireless_sec);
+}

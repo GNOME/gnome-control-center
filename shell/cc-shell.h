@@ -19,8 +19,7 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
-#ifndef _CC_SHELL_H
-#define _CC_SHELL_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -76,5 +75,3 @@ void            cc_shell_embed_widget_in_header   (CcShell         *shell,
                                                    GtkPositionType  position);
 
 G_END_DECLS
-
-#endif /* _CC_SHELL_H */

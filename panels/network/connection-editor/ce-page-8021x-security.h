@@ -20,44 +20,15 @@
  * (C) Copyright 2008 - 2012 Red Hat, Inc.
  */
 
-#ifndef __CE_PAGE_8021X_SECURITY_H
-#define __CE_PAGE_8021X_SECURITY_H
+#pragma once
 
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
-#include "wireless-security.h"
 
-#include <glib.h>
-#include <glib-object.h>
+G_BEGIN_DECLS
 
-#include "ce-page.h"
+G_DECLARE_FINAL_TYPE (CEPage8021xSecurity, ce_page_8021x_security, CE, PAGE_8021X_SECURITY, GtkGrid)
 
-#define CE_TYPE_PAGE_8021X_SECURITY            (ce_page_8021x_security_get_type ())
-#define CE_PAGE_8021X_SECURITY(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), CE_TYPE_PAGE_8021X_SECURITY, CEPage8021xSecurity))
-#define CE_PAGE_8021X_SECURITY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), CE_TYPE_PAGE_8021X_SECURITY, CEPage8021xSecurityClass))
-#define CE_IS_PAGE_8021X_SECURITY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), CE_TYPE_PAGE_8021X_SECURITY))
-#define CE_IS_PAGE_8021X_SECURITY_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), CE_TYPE_PAGE_8021X_SECURITY))
-#define CE_PAGE_8021X_SECURITY_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), CE_TYPE_PAGE_8021X_SECURITY, CEPage8021xSecurityClass))
+CEPage8021xSecurity *ce_page_8021x_security_new (NMConnection *connection);
 
-typedef struct CEPage8021xSecurity      CEPage8021xSecurity;
-typedef struct CEPage8021xSecurityClass CEPage8021xSecurityClass;
-
-struct CEPage8021xSecurity {
-	CEPage parent;
-
-        GtkSwitch *enabled;
-        GtkWidget *security_widget;
-        WirelessSecurity *security;
-        GtkSizeGroup *group;
-        gboolean initial_have_8021x;
-};
-
-struct CEPage8021xSecurityClass {
-	CEPageClass parent;
-};
-
-GType ce_page_8021x_security_get_type (void);
-
-CEPage *ce_page_8021x_security_new (NMConnection     *connection,
-                                    NMClient         *client);
-
-#endif  /* __CE_PAGE_8021X_SECURITY_H */
+G_END_DECLS

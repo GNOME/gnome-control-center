@@ -40,11 +40,11 @@ sources = files(
 
 resource_data = files(
   'authentication-dialog.ui',
-  'details-dialog.ui',
-  'jobs-dialog.ui',
   'new-printer-dialog.ui',
-  'options-dialog.ui',
   'ppd-selection-dialog.ui',
+  'pp-details-dialog.ui',
+  'pp-jobs-dialog.ui',
+  'pp-options-dialog.ui',
   'printer-entry.ui',
   'printers.ui'
 )
@@ -69,7 +69,7 @@ printers_panel_lib = static_library(
   sources: sources,
   include_directories: [top_inc, common_inc, shell_inc],
   dependencies: deps,
-  c_args: cflags
+  c_args: cflags + cups_cflags,
 )
 panels_libs += [ printers_panel_lib ]
 

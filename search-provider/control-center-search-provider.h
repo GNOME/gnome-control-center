@@ -17,13 +17,14 @@
  *
  */
 
-#ifndef _CONTROL_CENTER_SEARCH_PROVIDER_H
-#define _CONTROL_CENTER_SEARCH_PROVIDER_H
+#pragma once
 
 #include <gtk/gtk.h>
 
 #include <shell/cc-shell-model.h>
 #include "cc-search-provider.h"
+
+G_BEGIN_DECLS
 
 typedef struct {
   GtkApplication parent;
@@ -48,4 +49,4 @@ CcSearchProviderApp *cc_search_provider_app_get (void);
 
 CcShellModel *cc_search_provider_app_get_model (CcSearchProviderApp *application);
 
-#endif
+G_END_DECLS

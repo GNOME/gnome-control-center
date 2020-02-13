@@ -3,6 +3,8 @@ deps = common_deps + network_manager_deps + [
   dependency('gmodule-2.0')
 ]
 
+network_inc = include_directories('.')
+
 subdir('wireless-security')
 subdir('connection-editor')
 
@@ -38,26 +40,27 @@ sources = files(
   'cc-wifi-connection-row.c',
   'cc-wifi-connection-list.c',
   'cc-wifi-panel.c',
-  'net-device.c',
+  'cc-wifi-hotspot-dialog.c',
+  'net-device-bluetooth.c',
   'net-device-ethernet.c',
   'net-device-mobile.c',
-  'net-device-simple.c',
   'net-device-wifi.c',
-  'net-object.c',
   'net-proxy.c',
   'net-vpn.c',
   'network-dialogs.c',
-  'panel-common.c'
+  'panel-common.c',
+  'ui-helpers.c'
 )
 
 resource_data = files(
   'cc-network-panel.ui',
   'cc-wifi-connection-row.ui',
   'cc-wifi-panel.ui',
+  'cc-wifi-hotspot-dialog.ui',
+  'network-bluetooth.ui',
   'network-ethernet.ui',
   'network-mobile.ui',
   'network-proxy.ui',
-  'network-simple.ui',
   'network-vpn.ui',
   'network-wifi.ui',
 )

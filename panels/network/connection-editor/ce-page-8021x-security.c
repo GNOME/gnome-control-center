@@ -22,110 +22,109 @@
 
 #include "config.h"
 
+#include <glib/gi18n.h>
+#include <NetworkManager.h>
 #include <string.h>
 
-#include <gtk/gtk.h>
-#include <glib/gi18n.h>
-
-#include <NetworkManager.h>
-
+#include "ws-wpa-eap.h"
 #include "wireless-security.h"
+#include "ce-page.h"
 #include "ce-page-ethernet.h"
 #include "ce-page-8021x-security.h"
 
-G_DEFINE_TYPE (CEPage8021xSecurity, ce_page_8021x_security, CE_TYPE_PAGE)
+struct _CEPage8021xSecurity {
+	GtkGrid parent;
+
+        GtkBox      *box;
+        GtkSwitch   *enable_8021x_switch;
+        GtkLabel    *security_label;
+
+        NMConnection *connection;
+        WirelessSecurityWPAEAP *security;
+        GtkSizeGroup *group;
+        gboolean initial_have_8021x;
+};
+
+static void ce_page_iface_init (CEPageInterface *);
+
+G_DEFINE_TYPE_WITH_CODE (CEPage8021xSecurity, ce_page_8021x_security, GTK_TYPE_GRID,
+                         G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
-enable_toggled (GObject *sw, GParamSpec *pspec, gpointer user_data)
+enable_toggled (CEPage8021xSecurity *self)
 {
-	CEPage8021xSecurity *page = CE_PAGE_8021X_SECURITY (user_data);
-
-	gtk_widget_set_sensitive (page->security_widget, gtk_switch_get_active (page->enabled));
-	ce_page_changed (CE_PAGE (page));
+	gtk_widget_set_sensitive (GTK_WIDGET (self->security), gtk_switch_get_active (self->enable_8021x_switch));
+	ce_page_changed (CE_PAGE (self));
 }
 
 static void
-stuff_changed (WirelessSecurity *sec, gpointer user_data)
+security_item_changed_cb (CEPage8021xSecurity *self)
 {
-        ce_page_changed (CE_PAGE (user_data));
+        ce_page_changed (CE_PAGE (self));
 }
 
 static void
-finish_setup (CEPage8021xSecurity *page, gpointer unused, GError *error, gpointer user_data)
+finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointer user_data)
 {
 	GtkWidget *parent;
-        GtkWidget *vbox;
-        GtkWidget *heading;
 
 	if (error)
 		return;
 
-        vbox = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "vbox"));
-        heading = GTK_WIDGET (gtk_builder_get_object (CE_PAGE (page)->builder, "heading_sec"));
+        self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-        page->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-
-	page->security = (WirelessSecurity *) ws_wpa_eap_new (CE_PAGE (page)->connection, TRUE, FALSE);
-	if (!page->security) {
+	self->security = ws_wpa_eap_new (self->connection);
+	if (!self->security) {
 		g_warning ("Could not load 802.1x user interface.");
 		return;
 	}
 
-	wireless_security_set_changed_notify (page->security, stuff_changed, page);
-	page->security_widget = wireless_security_get_widget (page->security);
-	parent = gtk_widget_get_parent (page->security_widget);
+        g_signal_connect_object (WIRELESS_SECURITY (self->security), "changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
+	parent = gtk_widget_get_parent (GTK_WIDGET (self->security));
 	if (parent)
-		gtk_container_remove (GTK_CONTAINER (parent), page->security_widget);
+		gtk_container_remove (GTK_CONTAINER (parent), GTK_WIDGET (self->security));
 
-	gtk_switch_set_active (page->enabled, page->initial_have_8021x);
-	g_signal_connect (page->enabled, "notify::active", G_CALLBACK (enable_toggled), page);
-	gtk_widget_set_sensitive (page->security_widget, page->initial_have_8021x);
+	gtk_switch_set_active (self->enable_8021x_switch, self->initial_have_8021x);
+	g_signal_connect_swapped (self->enable_8021x_switch, "notify::active", G_CALLBACK (enable_toggled), self);
+	gtk_widget_set_sensitive (GTK_WIDGET (self->security), self->initial_have_8021x);
 
-        gtk_size_group_add_widget (page->group, heading);
-        wireless_security_add_to_size_group (page->security, page->group);
+        gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
+        wireless_security_add_to_size_group (WIRELESS_SECURITY (self->security), self->group);
 
-	gtk_container_add (GTK_CONTAINER (vbox), page->security_widget);
+	gtk_container_add (GTK_CONTAINER (self->box), GTK_WIDGET (self->security));
 
 }
 
-CEPage *
-ce_page_8021x_security_new (NMConnection     *connection,
-                            NMClient         *client)
+static const gchar *
+ce_page_8021x_security_get_security_setting (CEPage *page)
 {
-	CEPage8021xSecurity *page;
+	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (page);
 
-	page = CE_PAGE_8021X_SECURITY (ce_page_new (CE_TYPE_PAGE_8021X_SECURITY,
-	                                            connection,
-	                                            client,
-	                                            "/org/gnome/control-center/network/8021x-security-page.ui",
-	                                            _("Security")));
+	if (self->initial_have_8021x)
+                return NM_SETTING_802_1X_SETTING_NAME;
 
-	if (nm_connection_get_setting_802_1x (connection))
-		page->initial_have_8021x = TRUE;
+        return NULL;
+}
 
-	page->enabled = GTK_SWITCH (gtk_builder_get_object (CE_PAGE (page)->builder, "8021x_switch"));
-
-	g_signal_connect (page, "initialized", G_CALLBACK (finish_setup), NULL);
-
-	if (page->initial_have_8021x)
-                CE_PAGE (page)->security_setting = NM_SETTING_802_1X_SETTING_NAME;
-
-	return CE_PAGE (page);
+static const gchar *
+ce_page_8021x_security_get_title (CEPage *page)
+{
+        return _("Security");
 }
 
 static gboolean
-validate (CEPage *cepage, NMConnection *connection, GError **error)
+ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GError **error)
 {
-	CEPage8021xSecurity *page = CE_PAGE_8021X_SECURITY (cepage);
+	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (cepage);
 	gboolean valid = TRUE;
 
-	if (gtk_switch_get_active (page->enabled)) {
-		NMConnection *tmp_connection;
+	if (gtk_switch_get_active (self->enable_8021x_switch)) {
 		NMSetting *s_8021x;
 
 		/* FIXME: get failed property and error out of wireless security objects */
-		valid = wireless_security_validate (page->security, error);
+		valid = wireless_security_validate (WIRELESS_SECURITY (self->security), error);
 		if (valid) {
+			g_autoptr(NMConnection) tmp_connection = NULL;
 			NMSetting *s_con;
 
 			/* Here's a nice hack to work around the fact that ws_802_1x_fill_connection needs wireless setting. */
@@ -138,12 +137,10 @@ validate (CEPage *cepage, NMConnection *connection, GError **error)
 			s_con = nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
 			nm_connection_add_setting (tmp_connection, nm_setting_duplicate (s_con));
 
-			ws_802_1x_fill_connection (page->security, "wpa_eap_auth_combo", tmp_connection);
+			ws_wpa_eap_fill_connection (self->security, tmp_connection);
 
 			s_8021x = nm_connection_get_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
 			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
-
-			g_object_unref (tmp_connection);
 		}
 	} else {
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
@@ -154,33 +151,59 @@ validate (CEPage *cepage, NMConnection *connection, GError **error)
 }
 
 static void
-ce_page_8021x_security_init (CEPage8021xSecurity *page)
+ce_page_8021x_security_init (CEPage8021xSecurity *self)
 {
+        gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 static void
-dispose (GObject *object)
+ce_page_8021x_security_dispose (GObject *object)
 {
-	CEPage8021xSecurity *page = CE_PAGE_8021X_SECURITY (object);
+	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (object);
 
-	if (page->security) {
-		wireless_security_unref (page->security);
-                page->security = NULL;
-        }
-
-        g_clear_object (&page->group);
+        g_clear_object (&self->connection);
+        g_clear_object (&self->security);
+        g_clear_object (&self->group);
 
 	G_OBJECT_CLASS (ce_page_8021x_security_parent_class)->dispose (object);
 }
 
 static void
-ce_page_8021x_security_class_init (CEPage8021xSecurityClass *security_class)
+ce_page_8021x_security_class_init (CEPage8021xSecurityClass *klass)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (security_class);
-	CEPageClass *parent_class = CE_PAGE_CLASS (security_class);
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	/* virtual methods */
-	object_class->dispose = dispose;
+	object_class->dispose = ce_page_8021x_security_dispose;
 
-	parent_class->validate = validate;
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/8021x-security-page.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, box);
+        gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, enable_8021x_switch);
+        gtk_widget_class_bind_template_child (widget_class, CEPage8021xSecurity, security_label);
+}
+
+static void
+ce_page_iface_init (CEPageInterface *iface)
+{
+        iface->get_security_setting = ce_page_8021x_security_get_security_setting;
+        iface->get_title = ce_page_8021x_security_get_title;
+	iface->validate = ce_page_8021x_security_validate;
+}
+
+CEPage8021xSecurity *
+ce_page_8021x_security_new (NMConnection *connection)
+{
+	CEPage8021xSecurity *self;
+
+        self = CE_PAGE_8021X_SECURITY (g_object_new (ce_page_8021x_security_get_type (), NULL));
+
+        self->connection = g_object_ref (connection);
+
+	if (nm_connection_get_setting_802_1x (connection))
+		self->initial_have_8021x = TRUE;
+
+	g_signal_connect (self, "initialized", G_CALLBACK (finish_setup), NULL);
+
+	return self;
 }

@@ -96,8 +96,8 @@ launch_panel_activated (GSimpleAction *action,
                         gpointer       user_data)
 {
   CcApplication *self = CC_APPLICATION (user_data);
-  g_autoptr (GVariant) parameters = NULL;
-  g_autoptr (GError) error = NULL;
+  g_autoptr(GVariant) parameters = NULL;
+  g_autoptr(GError) error = NULL;
   gchar *panel_id;
 
   g_variant_get (parameter, "(&s@av)", &panel_id, &parameters);

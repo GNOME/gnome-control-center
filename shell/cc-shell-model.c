@@ -44,19 +44,13 @@ sort_by_name (GtkTreeModel *model,
               GtkTreeIter  *a,
               GtkTreeIter  *b)
 {
-  gchar *a_name = NULL;
-  gchar *b_name = NULL;
-  gint rval = 0;
+  g_autofree gchar *a_name = NULL;
+  g_autofree gchar *b_name = NULL;
 
   gtk_tree_model_get (model, a, COL_CASEFOLDED_NAME, &a_name, -1);
   gtk_tree_model_get (model, b, COL_CASEFOLDED_NAME, &b_name, -1);
 
-  rval = g_strcmp0 (a_name, b_name);
-
-  g_free (a_name);
-  g_free (b_name);
-
-  return rval;
+  return g_strcmp0 (a_name, b_name);
 }
 
 static gint
@@ -66,9 +60,8 @@ sort_by_name_with_terms (GtkTreeModel  *model,
                          gchar        **terms)
 {
   gboolean a_match, b_match;
-  gchar *a_name = NULL;
-  gchar *b_name = NULL;
-  gint rval = 0;
+  g_autofree gchar *a_name = NULL;
+  g_autofree gchar *b_name = NULL;
   gint i;
 
   gtk_tree_model_get (model, a, COL_CASEFOLDED_NAME, &a_name, -1);
@@ -80,21 +73,12 @@ sort_by_name_with_terms (GtkTreeModel  *model,
       b_match = strstr (b_name, terms[i]) != NULL;
 
       if (a_match && !b_match)
-        {
-          rval = -1;
-          break;
-        }
+        return -1;
       else if (!a_match && b_match)
-        {
-          rval = 1;
-          break;
-        }
+        return 1;
     }
 
-  g_free (a_name);
-  g_free (b_name);
-
-  return rval;
+  return 0;
 }
 
 static gint
@@ -123,9 +107,8 @@ sort_by_keywords_with_terms (GtkTreeModel  *model,
                              gchar        **terms)
 {
   gint a_matches, b_matches;
-  gchar **a_keywords = NULL;
-  gchar **b_keywords = NULL;
-  gint rval = 0;
+  g_auto(GStrv) a_keywords = NULL;
+  g_auto(GStrv) b_keywords = NULL;
 
   gtk_tree_model_get (model, a, COL_KEYWORDS, &a_keywords, -1);
   gtk_tree_model_get (model, b, COL_KEYWORDS, &b_keywords, -1);
@@ -134,14 +117,11 @@ sort_by_keywords_with_terms (GtkTreeModel  *model,
   b_matches = count_matches (b_keywords, terms);
 
   if (a_matches > b_matches)
-    rval = -1;
+    return -1;
   else if (a_matches < b_matches)
-    rval = 1;
+    return 1;
 
-  g_strfreev (a_keywords);
-  g_strfreev (b_keywords);
-
-  return rval;
+  return 0;
 }
 
 static gint
@@ -151,30 +131,20 @@ sort_by_description_with_terms (GtkTreeModel  *model,
                                 gchar        **terms)
 {
   gint a_matches, b_matches;
-  gchar *a_description = NULL;
-  gchar *b_description = NULL;
-  gchar **a_description_split = NULL;
-  gchar **b_description_split = NULL;
-  gint rval = 0;
+  g_autofree gchar *a_description = NULL;
+  g_autofree gchar *b_description = NULL;
+  g_auto(GStrv) a_description_split = NULL;
+  g_auto(GStrv) b_description_split = NULL;
 
   gtk_tree_model_get (model, a, COL_DESCRIPTION, &a_description, -1);
   gtk_tree_model_get (model, b, COL_DESCRIPTION, &b_description, -1);
 
   if (a_description && !b_description)
-    {
-      rval = -1;
-      goto out;
-    }
+    return -1;
   else if (!a_description && b_description)
-    {
-      rval = 1;
-      goto out;
-    }
+    return 1;
   else if (!a_description && !b_description)
-    {
-      rval = 0;
-      goto out;
-    }
+    return 0;
 
   a_description_split = g_strsplit (a_description, " ", -1);
   b_description_split = g_strsplit (b_description, " ", -1);
@@ -183,17 +153,11 @@ sort_by_description_with_terms (GtkTreeModel  *model,
   b_matches = count_matches (b_description_split, terms);
 
   if (a_matches > b_matches)
-    rval = -1;
+    return -1;
   else if (a_matches < b_matches)
-    rval = 1;
+    return 1;
 
- out:
-  g_free (a_description);
-  g_free (b_description);
-  g_strfreev (a_description_split);
-  g_strfreev (b_description_split);
-
-  return rval;
+  return 0;
 }
 
 static gint
@@ -255,7 +219,7 @@ static void
 cc_shell_model_init (CcShellModel *self)
 {
   GType types[] = {G_TYPE_STRING, G_TYPE_STRING, G_TYPE_APP_INFO, G_TYPE_STRING, G_TYPE_UINT,
-                   G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV, G_TYPE_UINT };
+                   G_TYPE_STRING, G_TYPE_STRING, G_TYPE_ICON, G_TYPE_STRV, G_TYPE_UINT, G_TYPE_BOOLEAN };
 
   gtk_list_store_set_column_types (GTK_LIST_STORE (self),
                                    N_COLS, types);
@@ -319,13 +283,16 @@ cc_shell_model_add_item (CcShellModel    *model,
   g_autoptr(GIcon) icon = NULL;
   const gchar *name = g_app_info_get_name (appinfo);
   const gchar *comment = g_app_info_get_description (appinfo);
-  char **keywords;
-  char *casefolded_name, *casefolded_description;
+  g_auto(GStrv) keywords = NULL;
+  g_autofree gchar *casefolded_name = NULL;
+  g_autofree gchar *casefolded_description = NULL;
+  gboolean has_sidebar;
 
   casefolded_name = cc_util_normalize_casefold_and_unaccent (name);
   casefolded_description = cc_util_normalize_casefold_and_unaccent (comment);
   keywords = get_casefolded_keywords (appinfo);
   icon = symbolicize_g_icon (g_app_info_get_icon (appinfo));
+  has_sidebar = g_desktop_app_info_get_boolean (G_DESKTOP_APP_INFO (appinfo), "X-GNOME-ControlCenter-HasSidebar");
 
   gtk_list_store_insert_with_values (GTK_LIST_STORE (model), NULL, 0,
                                      COL_NAME, name,
@@ -338,11 +305,8 @@ cc_shell_model_add_item (CcShellModel    *model,
                                      COL_GICON, icon,
                                      COL_KEYWORDS, keywords,
                                      COL_VISIBILITY, CC_PANEL_VISIBLE,
+                                     COL_HAS_SIDEBAR, has_sidebar,
                                      -1);
-
-  g_free (casefolded_name);
-  g_free (casefolded_description);
-  g_strfreev (keywords);
 }
 
 gboolean
@@ -374,9 +338,10 @@ cc_shell_model_iter_matches_search (CcShellModel *model,
                                     GtkTreeIter  *iter,
                                     const char   *term)
 {
-  gchar *name, *description;
+  g_autofree gchar *name = NULL;
+  g_autofree gchar *description = NULL;
   gboolean result;
-  gchar **keywords;
+  g_auto(GStrv) keywords = NULL;
 
   gtk_tree_model_get (GTK_TREE_MODEL (model), iter,
                       COL_CASEFOLDED_NAME, &name,
@@ -396,10 +361,6 @@ cc_shell_model_iter_matches_search (CcShellModel *model,
       for (i = 0; !result && keywords[i]; i++)
         result = (strstr (keywords[i], term) == keywords[i]);
     }
-
-  g_free (name);
-  g_free (description);
-  g_strfreev (keywords);
 
   return result;
 }

@@ -1,5 +1,5 @@
 # gnome-control-center ja.po.
-# Copyright (C) 1998-2013 Free Software Foundation, Inc.
+# Copyright (C) 1998-2019 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998.
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999.
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2013.
@@ -31,8 +31,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2019-09-07 14:25+0000\n"
-"PO-Revision-Date: 2019-09-09 21:30+0900\n"
+"POT-Creation-Date: 2019-09-26 14:24+0000\n"
+"PO-Revision-Date: 2019-09-27 23:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -79,7 +79,7 @@ msgstr "ネットワークアクセス"
 
 #: panels/applications/cc-applications-panel.c:579
 #: panels/applications/cc-applications-panel.c:581
-#: panels/search/cc-search-locations-dialog.c:292
+#: panels/search/cc-search-locations-dialog.c:293
 msgid "Home"
 msgstr "ホーム"
 
@@ -186,7 +186,7 @@ msgstr "アプリケーションがありません"
 
 #: panels/applications/cc-applications-panel.ui:59
 msgid "Install some…"
-msgstr ""
+msgstr "インストール…"
 
 #: panels/applications/cc-applications-panel.ui:99
 msgid "Permissions & Access"
@@ -370,7 +370,7 @@ msgstr "画像の選択"
 #: panels/printers/pp-details-dialog.c:313
 #: panels/privacy/cc-privacy-panel.c:1137 panels/region/cc-format-chooser.ui:24
 #: panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:613
+#: panels/search/cc-search-locations-dialog.c:614
 #: panels/sharing/cc-sharing-panel.c:428
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -1173,12 +1173,12 @@ msgstr "昨日"
 #. Translators: This is a date format string in the style of "Feb 24".
 #: panels/common/cc-util.c:138
 msgid "%b %e"
-msgstr "%B%e日"
+msgstr "%B%-e日"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013".
 #: panels/common/cc-util.c:143
 msgid "%b %e, %Y"
-msgstr "%Y年%B%e日"
+msgstr "%Y年%B%-e日"
 
 #. translators: This is the default hotspot name, need to be less than 32-bytes
 #: panels/common/hostname-helper.c:177
@@ -1204,12 +1204,12 @@ msgstr "年"
 #. Translators: This is the full date and time format used in 12-hour mode.
 #: panels/datetime/cc-datetime-panel.c:334
 msgid "%e %B %Y, %l:%M %p"
-msgstr "%Y年%B%e日 %p%I:%M"
+msgstr "%Y年%B%-e日 %p %I:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
 #: panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %R"
-msgstr "%Y年%B%e日 %H:%M"
+msgstr "%Y年%B%-e日 %H:%M"
 
 #. Translators: "city, country"
 #: panels/datetime/cc-datetime-panel.c:504
@@ -2683,10 +2683,10 @@ msgid "Make available to _other users"
 msgstr "他のユーザーも利用可能(_O)"
 
 #: panels/network/connection-editor/details-page.ui:376
-msgid "Restrict background data usage"
-msgstr "バックグラウンドデータの使用を制限する"
+msgid "Restrict _background data usage"
+msgstr "バックグラウンドデータの使用を制限する(_B)"
 
-#: panels/network/connection-editor/details-page.ui:386
+#: panels/network/connection-editor/details-page.ui:387
 msgid "Appropriate for connections that have data charges or limits."
 msgstr "従量制課金接続のような制限のある接続に適しています。"
 
@@ -4024,19 +4024,19 @@ msgstr "その他"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:626
+#: panels/online-accounts/cc-online-accounts-panel.c:627
 #, c-format
 msgid "%s Account"
 msgstr "%s アカウント"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:923
+#: panels/online-accounts/cc-online-accounts-panel.c:924
 msgid "Error removing account"
 msgstr "アカウント削除に失敗"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:988
+#: panels/online-accounts/cc-online-accounts-panel.c:989
 #, c-format
 msgid "<b>%s</b> removed"
 msgstr "<b>%s</b> 削除しました"
@@ -5655,7 +5655,7 @@ msgstr "入力ソースの追加"
 msgid "Input methods can’t be used on the login screen"
 msgstr "インプットメソッドはログイン画面で使用できません"
 
-#: panels/region/cc-region-panel.c:1511
+#: panels/region/cc-region-panel.c:1512
 msgid "Login _Screen"
 msgstr "ログイン画面(_S)"
 
@@ -5744,11 +5744,11 @@ msgstr ""
 "Language;Layout;Keyboard;Input;言語;レイアウト;キーボード;入力;インプット;"
 "Region;地域;"
 
-#: panels/search/cc-search-locations-dialog.c:610
+#: panels/search/cc-search-locations-dialog.c:611
 msgid "Select Location"
 msgstr "場所の選択"
 
-#: panels/search/cc-search-locations-dialog.c:614
+#: panels/search/cc-search-locations-dialog.c:615
 msgid "_OK"
 msgstr "OK(_O)"
 
@@ -5840,7 +5840,7 @@ msgstr "アクティブ"
 msgid "Choose a Folder"
 msgstr "フォルダーの選択"
 
-#: panels/sharing/cc-sharing-panel.c:725
+#: panels/sharing/cc-sharing-panel.c:726
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5850,7 +5850,7 @@ msgstr ""
 "なたの公開フォルダーを共有できるようにします: <a href=\"dav://%s\">dav://%s</"
 "a>"
 
-#: panels/sharing/cc-sharing-panel.c:727
+#: panels/sharing/cc-sharing-panel.c:728
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5861,7 +5861,7 @@ msgstr ""
 "ドを使用した接続を許可します:\n"
 "<a href=\"ssh %s\">ssh %s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:729
+#: panels/sharing/cc-sharing-panel.c:730
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5870,11 +5870,11 @@ msgstr ""
 "スクリーン共有を許可した場合、リモートユーザーが次の URI に接続して画面の表示"
 "または操作を行うことを許可します: <a href=\"vnc://%s\">vnc://%s</a>"
 
-#: panels/sharing/cc-sharing-panel.c:833
+#: panels/sharing/cc-sharing-panel.c:834
 msgid "Copy"
 msgstr "コピー"
 
-#: panels/sharing/cc-sharing-panel.c:1286
+#: panels/sharing/cc-sharing-panel.c:1287
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "共有"
@@ -6076,7 +6076,7 @@ msgstr "音量"
 msgid "Alert Sound"
 msgstr "警告音"
 
-#: panels/sound/cc-volume-slider.c:63
+#: panels/sound/cc-volume-slider.c:92
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -6971,14 +6971,14 @@ msgstr "先週"
 #: panels/user-accounts/cc-login-history-dialog.c:86
 msgctxt "login history week label"
 msgid "%b %e"
-msgstr "%B%e日"
+msgstr "%B%-e日"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
 #: panels/user-accounts/cc-login-history-dialog.c:91
 msgctxt "login history week label"
 msgid "%b %e, %Y"
-msgstr "%Y年%B%e日"
+msgstr "%Y年%B%-e日"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
@@ -7959,12 +7959,12 @@ msgstr ""
 
 #: shell/org.gnome.ControlCenter.gschema.xml:13
 msgid "Show warning when running a development build of Settings"
-msgstr ""
+msgstr "“設定”の開発版を起動したときに警告を表示する"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:14
 msgid ""
 "Whether Settings should show a warning when running a development build."
-msgstr ""
+msgstr "開発版を起動したときに“設定”が警告を表示するかどうかです。"
 
 #. translators:
 #. * The number of sound outputs on a particular device

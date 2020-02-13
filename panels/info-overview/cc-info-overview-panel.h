@@ -17,8 +17,7 @@
  *
  */
 
-#ifndef CC_INFO_OVERVIEWPANEL_H
-#define CC_INFO_OVERVIEWPANEL_H
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -29,7 +28,4 @@ G_DECLARE_FINAL_TYPE (CcInfoOverviewPanel, cc_info_overview_panel, CC, INFO_OVER
 
 GtkWidget *cc_info_overview_panel_new (void);
 
-
 G_END_DECLS
-
-#endif /* CC_INFO_OVERVIEWPANEL_H */

@@ -18,10 +18,11 @@
  * Author: Felipe Borges <feborges@redhat.com>
  */
 
-#ifndef _CC_MOUSE_CAPS_HELPER_H_
-#define _CC_MOUSE_CAPS_HELPER_H_
+#pragma once
 
 #include <glib.h>
+
+G_BEGIN_DECLS
 
 gboolean cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
                                          gboolean *have_edge_scrolling,
@@ -29,4 +30,4 @@ gboolean cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
 
 gboolean cc_synaptics_check (void);
 
-#endif /* _CC_MOUSE_CAPS_HELPER_H_ */
+G_END_DECLS

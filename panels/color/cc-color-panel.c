@@ -43,7 +43,6 @@ struct _CcColorPanel
   CdDevice      *current_device;
   GPtrArray     *devices;
   GPtrArray     *sensors;
-  GCancellable  *cancellable;
   GDBusProxy    *proxy;
   GSettings     *settings;
   GSettings     *settings_colord;
@@ -218,7 +217,7 @@ gcm_prefs_default_cb (GtkWidget *widget, CcColorPanel *prefs)
 
   /* install somewhere out of $HOME */
   ret = cd_profile_install_system_wide_sync (profile,
-                                             prefs->cancellable,
+                                             cc_panel_get_cancellable (CC_PANEL (prefs)),
                                              &error);
   if (!ret)
     g_warning ("failed to set profile system-wide: %s",
@@ -733,7 +732,7 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
 
   /* get profiles */
   profile_array = cd_client_get_profiles_sync (prefs->client,
-                                               prefs->cancellable,
+                                               cc_panel_get_cancellable (CC_PANEL (prefs)),
                                                &error);
   if (profile_array == NULL)
     {
@@ -749,7 +748,7 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
 
       /* get properties */
       ret = cd_profile_connect_sync (profile_tmp,
-                                     prefs->cancellable,
+                                     cc_panel_get_cancellable (CC_PANEL (prefs)),
                                      &error);
       if (!ret)
         {
@@ -967,7 +966,7 @@ gcm_prefs_profile_remove_cb (GtkWidget *widget, CcColorPanel *prefs)
   /* just remove it, the list store will get ::changed */
   ret = cd_device_remove_profile_sync (prefs->current_device,
                                        profile,
-                                       prefs->cancellable,
+                                       cc_panel_get_cancellable (CC_PANEL (prefs)),
                                        &error);
   if (!ret)
     g_warning ("failed to remove profile: %s", error->message);
@@ -1020,7 +1019,7 @@ gcm_prefs_device_profile_enable_cb (GtkWidget *widget, CcColorPanel *prefs)
            cd_device_get_id (prefs->current_device));
   cd_device_make_profile_default (prefs->current_device,
                                   profile,
-                                  prefs->cancellable,
+                                  cc_panel_get_cancellable (CC_PANEL (prefs)),
                                   (GAsyncReadyCallback) gcm_prefs_make_profile_default_cb,
                                   prefs);
 }
@@ -1133,7 +1132,7 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
     {
       ret = cd_device_set_enabled_sync (prefs->current_device,
                                         TRUE,
-                                        prefs->cancellable,
+                                        cc_panel_get_cancellable (CC_PANEL (prefs)),
                                         &error);
       if (!ret)
         {
@@ -1146,7 +1145,7 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
   ret = cd_device_add_profile_sync (prefs->current_device,
                                     CD_DEVICE_RELATION_HARD,
                                     profile,
-                                    prefs->cancellable,
+                                    cc_panel_get_cancellable (CC_PANEL (prefs)),
                                     &error);
   if (!ret)
     {
@@ -1157,7 +1156,7 @@ gcm_prefs_button_assign_ok_cb (GtkWidget *widget, CcColorPanel *prefs)
   /* make it default */
   cd_device_make_profile_default (prefs->current_device,
                                   profile,
-                                  prefs->cancellable,
+                                  cc_panel_get_cancellable (CC_PANEL (prefs)),
                                   (GAsyncReadyCallback) gcm_prefs_make_profile_default_cb,
                                   prefs);
 }
@@ -1368,7 +1367,7 @@ gcm_prefs_button_assign_import_cb (GtkWidget *widget,
 #if CD_CHECK_VERSION(0,1,12)
   profile = cd_client_import_profile_sync (prefs->client,
                                            file,
-                                           prefs->cancellable,
+                                           cc_panel_get_cancellable (CC_PANEL (prefs)),
                                            &error);
   if (profile == NULL)
     {
@@ -1440,7 +1439,7 @@ gcm_prefs_add_device_profile (CcColorPanel *prefs,
 
   /* get properties */
   ret = cd_profile_connect_sync (profile,
-                                 prefs->cancellable,
+                                 cc_panel_get_cancellable (CC_PANEL (prefs)),
                                  &error);
   if (!ret)
     {
@@ -1636,7 +1635,7 @@ gcm_prefs_add_device (CcColorPanel *prefs, CdDevice *device)
   GtkWidget *widget;
 
   /* get device properties */
-  ret = cd_device_connect_sync (device, prefs->cancellable, &error);
+  ret = cd_device_connect_sync (device, cc_panel_get_cancellable (CC_PANEL (prefs)), &error);
   if (!ret)
     {
       g_warning ("failed to connect to the device: %s", error->message);
@@ -1852,7 +1851,7 @@ gcm_prefs_connect_cb (GObject *object,
 
   /* get devices */
   cd_client_get_devices (prefs->client,
-                         prefs->cancellable,
+                         cc_panel_get_cancellable (CC_PANEL (prefs)),
                          gcm_prefs_get_devices_cb,
                          prefs);
 }
@@ -1955,10 +1954,8 @@ cc_color_panel_dispose (GObject *object)
       g_clear_pointer (&prefs->devices, g_ptr_array_unref);
     }
 
-  g_cancellable_cancel (prefs->cancellable);
   g_clear_object (&prefs->settings);
   g_clear_object (&prefs->settings_colord);
-  g_clear_object (&prefs->cancellable);
   g_clear_object (&prefs->client);
   g_clear_object (&prefs->current_device);
   g_clear_object (&prefs->calibrate);
@@ -2097,7 +2094,6 @@ cc_color_panel_init (CcColorPanel *prefs)
 
   gtk_widget_init_template (GTK_WIDGET (prefs));
 
-  prefs->cancellable = g_cancellable_new ();
   prefs->devices = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
 
   /* can do native display calibration using colord-session */
@@ -2303,7 +2299,7 @@ cc_color_panel_init (CcColorPanel *prefs)
 
   /* connect to colord */
   cd_client_connect (prefs->client,
-                     prefs->cancellable,
+                     cc_panel_get_cancellable (CC_PANEL (prefs)),
                      gcm_prefs_connect_cb,
                      prefs);
 

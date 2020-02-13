@@ -138,12 +138,11 @@ typedef struct _CcDisplayMonitorPrivate CcDisplayMonitorPrivate;
 G_DEFINE_TYPE_WITH_PRIVATE (CcDisplayMonitor,
                             cc_display_monitor,
                             G_TYPE_OBJECT)
-#define CC_DISPLAY_MONITOR_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_DISPLAY_MONITOR, CcDisplayMonitorPrivate))
 
 static void
 cc_display_monitor_init (CcDisplayMonitor *self)
 {
-  CcDisplayMonitorPrivate *priv = CC_DISPLAY_MONITOR_GET_PRIVATE (self);
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
 
   priv->ui_number = 0;
   priv->ui_name = NULL;
@@ -155,7 +154,7 @@ static void
 cc_display_monitor_finalize (GObject *object)
 {
   CcDisplayMonitor *self = CC_DISPLAY_MONITOR (object);
-  CcDisplayMonitorPrivate *priv = CC_DISPLAY_MONITOR_GET_PRIVATE (self);
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
 
   g_clear_pointer (&priv->ui_name, g_free);
   g_clear_pointer (&priv->ui_number_name, g_free);
@@ -350,20 +349,26 @@ cc_display_monitor_set_scale (CcDisplayMonitor *self, double s)
 gboolean
 cc_display_monitor_is_useful (CcDisplayMonitor *self)
 {
-  return CC_DISPLAY_MONITOR_GET_PRIVATE (self)->is_usable &&
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
+
+  return priv->is_usable &&
          cc_display_monitor_is_active (self);
 }
 
 gboolean
 cc_display_monitor_is_usable (CcDisplayMonitor *self)
 {
-  return CC_DISPLAY_MONITOR_GET_PRIVATE (self)->is_usable;
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
+
+  return priv->is_usable;
 }
 
 void
 cc_display_monitor_set_usable (CcDisplayMonitor *self, gboolean is_usable)
 {
-  CC_DISPLAY_MONITOR_GET_PRIVATE (self)->is_usable = is_usable;
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
+
+  priv->is_usable = is_usable;
 
   g_signal_emit_by_name (self, "is-usable");
 }
@@ -371,31 +376,40 @@ cc_display_monitor_set_usable (CcDisplayMonitor *self, gboolean is_usable)
 gint
 cc_display_monitor_get_ui_number (CcDisplayMonitor *self)
 {
-  return CC_DISPLAY_MONITOR_GET_PRIVATE (self)->ui_number;
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
+
+  return priv->ui_number;
 }
 
 const char *
 cc_display_monitor_get_ui_name (CcDisplayMonitor *self)
 {
-  return CC_DISPLAY_MONITOR_GET_PRIVATE (self)->ui_name;
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
+
+  return priv->ui_name;
 }
 
 const char *
 cc_display_monitor_get_ui_number_name (CcDisplayMonitor *self)
 {
-  return CC_DISPLAY_MONITOR_GET_PRIVATE (self)->ui_number_name;
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
+
+  return priv->ui_number_name;
 }
 
 char *
 cc_display_monitor_dup_ui_number_name (CcDisplayMonitor *self)
 {
-  return g_strdup (CC_DISPLAY_MONITOR_GET_PRIVATE (self)->ui_number_name);
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
+
+  return g_strdup (priv->ui_number_name);
 }
 
 static void
 cc_display_monitor_set_ui_info (CcDisplayMonitor *self, gint ui_number, gchar *ui_name)
 {
-  CcDisplayMonitorPrivate *priv = CC_DISPLAY_MONITOR_GET_PRIVATE (self);
+
+  CcDisplayMonitorPrivate *priv = cc_display_monitor_get_instance_private (self);
 
   priv->ui_number = ui_number;
   g_free (priv->ui_name);
@@ -411,12 +425,11 @@ typedef struct _CcDisplayConfigPrivate CcDisplayConfigPrivate;
 G_DEFINE_TYPE_WITH_PRIVATE (CcDisplayConfig,
                             cc_display_config,
                             G_TYPE_OBJECT)
-#define CC_DISPLAY_CONFIG_GET_PRIVATE(o) (G_TYPE_INSTANCE_GET_PRIVATE ((o), CC_TYPE_DISPLAY_CONFIG, CcDisplayConfigPrivate))
 
 static void
 cc_display_config_init (CcDisplayConfig *self)
 {
-  CcDisplayConfigPrivate *priv = CC_DISPLAY_CONFIG_GET_PRIVATE (self);
+  CcDisplayConfigPrivate *priv = cc_display_config_get_instance_private (self);
 
   priv->ui_sorted_monitors = NULL;
 }
@@ -425,7 +438,7 @@ static void
 cc_display_config_constructed (GObject *object)
 {
   CcDisplayConfig *self = CC_DISPLAY_CONFIG (object);
-  CcDisplayConfigPrivate *priv = CC_DISPLAY_CONFIG_GET_PRIVATE (self);
+  CcDisplayConfigPrivate *priv = cc_display_config_get_instance_private (self);
   GList *monitors = cc_display_config_get_monitors (self);
   GList *item;
   gint ui_number = 1;
@@ -456,7 +469,7 @@ static void
 cc_display_config_finalize (GObject *object)
 {
   CcDisplayConfig *self = CC_DISPLAY_CONFIG (object);
-  CcDisplayConfigPrivate *priv = CC_DISPLAY_CONFIG_GET_PRIVATE (self);
+  CcDisplayConfigPrivate *priv = cc_display_config_get_instance_private (self);
 
   g_list_free (priv->ui_sorted_monitors);
 
@@ -488,14 +501,16 @@ cc_display_config_get_monitors (CcDisplayConfig *self)
 GList *
 cc_display_config_get_ui_sorted_monitors (CcDisplayConfig *self)
 {
+  CcDisplayConfigPrivate *priv = cc_display_config_get_instance_private (self);
+
   g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), NULL);
-  return CC_DISPLAY_CONFIG_GET_PRIVATE (self)->ui_sorted_monitors;
+  return priv->ui_sorted_monitors;
 }
 
 int
 cc_display_config_count_useful_monitors (CcDisplayConfig *self)
 {
-  CcDisplayConfigPrivate *priv = CC_DISPLAY_CONFIG_GET_PRIVATE (self);
+  CcDisplayConfigPrivate *priv = cc_display_config_get_instance_private (self);
   GList *outputs, *l;
   guint count = 0;
 

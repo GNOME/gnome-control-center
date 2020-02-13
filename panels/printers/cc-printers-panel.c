@@ -42,6 +42,7 @@
 #include "pp-printer-entry.h"
 #include "pp-job.h"
 
+#include "cc-permission-infobar.h"
 #include "cc-util.h"
 
 #define RENEW_INTERVAL        500
@@ -76,6 +77,7 @@ struct _CcPrintersPanel
   gboolean is_authorized;
 
   GSettings *lockdown_settings;
+  CcPermissionInfobar *permission_infobar;
 
   PpNewPrinterDialog   *pp_new_printer_dialog;
   PpPPDSelectionDialog *pp_ppd_selection_dialog;
@@ -88,13 +90,8 @@ struct _CcPrintersPanel
   guint            dbus_subscription_id;
   guint            remove_printer_timeout_id;
 
-  GtkWidget    *headerbar_buttons;
   GtkRevealer  *notification;
   PPDList      *all_ppds_list;
-  GCancellable *get_all_ppds_cancellable;
-  GCancellable *subscription_renew_cancellable;
-  GCancellable *actualize_printers_list_cancellable;
-  GCancellable *cups_status_check_cancellable;
 
   gchar    *new_printer_name;
   gchar    *new_printer_location;
@@ -115,9 +112,6 @@ struct _CcPrintersPanel
 };
 
 CC_PANEL_REGISTER (CcPrintersPanel, cc_printers_panel)
-
-#define PAGE_LOCK "_lock"
-#define PAGE_ADDPRINTER "_addprinter"
 
 typedef struct
 {
@@ -241,11 +235,10 @@ cc_printers_panel_constructed (GObject *object)
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->constructed (object);
 
   shell = cc_panel_get_shell (CC_PANEL (self));
-  cc_shell_embed_widget_in_header (shell, self->headerbar_buttons, GTK_POS_RIGHT);
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "lock-button");
-  gtk_lock_button_set_permission (GTK_LOCK_BUTTON (widget), self->permission);
+    gtk_builder_get_object (self->builder, "printer-add-button");
+  cc_shell_embed_widget_in_header (shell, widget, GTK_POS_RIGHT);
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "search-button");
@@ -279,11 +272,6 @@ cc_printers_panel_dispose (GObject *object)
 {
   CcPrintersPanel *self = CC_PRINTERS_PANEL (object);
 
-  g_cancellable_cancel (self->subscription_renew_cancellable);
-  g_cancellable_cancel (self->actualize_printers_list_cancellable);
-  g_cancellable_cancel (self->cups_status_check_cancellable);
-  g_cancellable_cancel (self->get_all_ppds_cancellable);
-
   detach_from_cups_notifier (CC_PRINTERS_PANEL (object));
 
   if (self->deleted_printer_name != NULL)
@@ -304,12 +292,8 @@ cc_printers_panel_dispose (GObject *object)
   g_clear_object (&self->builder);
   g_clear_object (&self->lockdown_settings);
   g_clear_object (&self->permission);
-  g_clear_object (&self->subscription_renew_cancellable);
-  g_clear_object (&self->actualize_printers_list_cancellable);
-  g_clear_object (&self->cups_status_check_cancellable);
   g_clear_handle_id (&self->cups_status_check_id, g_source_remove);
   g_clear_handle_id (&self->remove_printer_timeout_id, g_source_remove);
-  g_clear_object (&self->get_all_ppds_cancellable);
   g_clear_pointer (&self->deleted_printer_name, g_free);
   g_clear_pointer (&self->action, g_variant_unref);
   g_clear_pointer (&self->printer_entries, g_hash_table_destroy);
@@ -471,7 +455,7 @@ on_cups_notification (GDBusConnection *connection,
       job = g_object_new (PP_TYPE_JOB, "id", job_id, NULL);
       pp_job_get_attributes_async (job,
                                    requested_attrs,
-                                   NULL,
+                                   cc_panel_get_cancellable (CC_PANEL (self)),
                                    on_get_job_attributes_cb,
                                    self);
     }
@@ -513,7 +497,7 @@ renew_subscription (gpointer data)
                                     self->subscription_id,
                                     subscription_events,
                                     SUBSCRIPTION_DURATION,
-                                    self->subscription_renew_cancellable,
+                                    cc_panel_get_cancellable (CC_PANEL (self)),
                                     renew_subscription_cb,
                                     data);
 
@@ -581,7 +565,7 @@ attach_to_cups_notifier (gpointer data)
                                     self->subscription_id,
                                     subscription_events,
                                     SUBSCRIPTION_DURATION,
-                                    self->subscription_renew_cancellable,
+                                    cc_panel_get_cancellable (CC_PANEL (self)),
                                     attach_to_cups_notifier_cb,
                                     data);
 }
@@ -886,7 +870,7 @@ actualize_printers_list (CcPrintersPanel *self)
 
   cups = pp_cups_new ();
   pp_cups_get_dests_async (cups,
-                           self->actualize_printers_list_cancellable,
+                           cc_panel_get_cancellable (CC_PANEL (self)),
                            actualize_printers_list_cb,
                            self);
 }
@@ -1000,9 +984,6 @@ update_sensitivity (gpointer user_data)
     self->lockdown_settings &&
     !g_settings_get_boolean (self->lockdown_settings, "disable-print-setup");
 
-  gtk_stack_set_visible_child_name (GTK_STACK (self->headerbar_buttons),
-    self->is_authorized ? PAGE_ADDPRINTER : PAGE_LOCK);
-
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "main-vbox");
   if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (widget)), "no-cups-page") == 0)
     no_cups = TRUE;
@@ -1015,9 +996,6 @@ update_sensitivity (gpointer user_data)
       cups_server[0] != '/')
     local_server = FALSE;
 
-  widget = (GtkWidget*) gtk_builder_get_object (self->builder, "headerbar-buttons");
-  gtk_widget_set_visible (widget, !no_cups);
-
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "search-button");
   gtk_widget_set_visible (widget, !no_cups);
 
@@ -1025,7 +1003,7 @@ update_sensitivity (gpointer user_data)
   gtk_widget_set_visible (widget, !no_cups);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button");
-  gtk_widget_set_sensitive (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
+  gtk_widget_set_visible (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button2");
   gtk_widget_set_sensitive (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
@@ -1140,9 +1118,6 @@ get_all_ppds_async_cb (PPDList  *ppds,
   if (self->pp_new_printer_dialog)
     pp_new_printer_dialog_set_ppd_list (self->pp_new_printer_dialog,
                                         self->all_ppds_list);
-
-  g_object_unref (self->get_all_ppds_cancellable);
-  self->get_all_ppds_cancellable = NULL;
 }
 
 static gboolean
@@ -1188,7 +1163,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   GtkWidget              *widget;
   PpCups                 *cups;
   g_autoptr(GError)       error = NULL;
-  gchar                  *objects[] = { "overlay", "headerbar-buttons", "search-button", NULL };
+  gchar                  *objects[] = { "overlay", "permission-infobar", "printer-add-button", "search-button", NULL };
   guint                   builder_result;
 
   g_resources_register (cc_printers_get_resource ());
@@ -1229,8 +1204,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   self->entries_filled = FALSE;
   self->action = NULL;
 
-  self->actualize_printers_list_cancellable = g_cancellable_new ();
-  self->cups_status_check_cancellable = g_cancellable_new ();
+  g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 
   builder_result = gtk_builder_add_objects_from_resource (self->builder,
                                                           "/org/gnome/control-center/printers/printers.ui",
@@ -1243,10 +1217,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
       return;
     }
 
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "headerbar-buttons");
-  self->headerbar_buttons = widget;
-
   self->notification = (GtkRevealer*)
     gtk_builder_get_object (self->builder, "notification");
 
@@ -1257,6 +1227,9 @@ cc_printers_panel_init (CcPrintersPanel *self)
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "notification-dismiss-button");
   g_signal_connect (widget, "clicked", G_CALLBACK (on_notification_dismissed), self);
+
+  self->permission_infobar = (CcPermissionInfobar*)
+    gtk_builder_get_object (self->builder, "permission-infobar");
 
   /* add the top level widget */
   top_widget = (GtkWidget*)
@@ -1300,6 +1273,10 @@ cc_printers_panel_init (CcPrintersPanel *self)
                                G_CALLBACK (on_permission_changed),
                                self,
                                G_CONNECT_AFTER);
+
+      cc_permission_infobar_set_permission (self->permission_infobar,
+                                            self->permission);
+
       on_permission_changed (self->permission, NULL, self);
     }
   else
@@ -1307,20 +1284,17 @@ cc_printers_panel_init (CcPrintersPanel *self)
 \"org.opensuse.cupspkhelper.mechanism.all-edit\" installed. \
 Please check your installation");
 
-  self->subscription_renew_cancellable = g_cancellable_new ();
-
   self->size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
   actualize_printers_list (self);
   attach_to_cups_notifier (self);
 
-  self->get_all_ppds_cancellable = g_cancellable_new ();
-  get_all_ppds_async (self->get_all_ppds_cancellable,
+  get_all_ppds_async (cc_panel_get_cancellable (CC_PANEL (self)),
                       get_all_ppds_async_cb,
                       self);
 
   cups = pp_cups_new ();
-  pp_cups_connection_test_async (cups, self->cups_status_check_cancellable, connection_test_cb, self);
+  pp_cups_connection_test_async (cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
   gtk_container_add (GTK_CONTAINER (self), top_widget);
   gtk_widget_show_all (GTK_WIDGET (self));
 }

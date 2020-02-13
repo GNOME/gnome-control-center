@@ -20,41 +20,40 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_H
-#define EAP_METHOD_H
+#pragma once
 
-typedef struct _EAPMethod EAPMethod;
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
-typedef void        (*EMAddToSizeGroupFunc) (EAPMethod *method, GtkSizeGroup *group);
-typedef void        (*EMFillConnectionFunc) (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags);
-typedef void        (*EMUpdateSecretsFunc)  (EAPMethod *method, NMConnection *connection);
-typedef void        (*EMDestroyFunc)        (EAPMethod *method);
-typedef gboolean    (*EMValidateFunc)       (EAPMethod *method, GError **error);
+G_BEGIN_DECLS
 
-struct _EAPMethod {
-	guint32 refcount;
-	gsize obj_size;
+G_DECLARE_INTERFACE (EAPMethod, eap_method, EAP, METHOD, GObject)
 
-	GtkBuilder *builder;
-	GtkWidget *ui_widget;
+struct _EAPMethodInterface {
+	GTypeInterface g_iface;
 
-	const char *default_field;
-	const char *password_flags_name;
-
-	gboolean phase2;
-	gboolean secrets_only;
-
-	EMAddToSizeGroupFunc add_to_size_group;
-	EMFillConnectionFunc fill_connection;
-	EMUpdateSecretsFunc update_secrets;
-	EMValidateFunc validate;
-	EMDestroyFunc destroy;
+	void         (*add_to_size_group)       (EAPMethod *method, GtkSizeGroup *group);
+	void         (*fill_connection)         (EAPMethod *method, NMConnection *connection, NMSettingSecretFlags flags);
+	void         (*update_secrets)          (EAPMethod *method, NMConnection *connection);
+	gboolean     (*validate)                (EAPMethod *method, GError **error);
+	GtkWidget*   (*get_default_field)       (EAPMethod *method);
+	const gchar* (*get_password_flags_name) (EAPMethod *method);
+	gboolean     (*get_phase2)              (EAPMethod *method);
+	const gchar* (*get_username)            (EAPMethod *method);
+	void         (*set_username)            (EAPMethod *method, const gchar *username);
+	const gchar* (*get_password)            (EAPMethod *method);
+	void         (*set_password)            (EAPMethod *method, const gchar *password);
+	gboolean     (*get_show_password)       (EAPMethod *method);
+	void         (*set_show_password)       (EAPMethod *method, gboolean show_password);
 };
 
-#define EAP_METHOD(x) ((EAPMethod *) x)
+GtkWidget *eap_method_get_default_field (EAPMethod *method);
 
+const gchar *eap_method_get_password_flags_name (EAPMethod *method);
 
-GtkWidget *eap_method_get_widget (EAPMethod *method);
+gboolean eap_method_get_phase2 (EAPMethod *method);
+
+void eap_method_update_secrets (EAPMethod *method, NMConnection *connection);
 
 gboolean eap_method_validate (EAPMethod *method, GError **error);
 
@@ -64,33 +63,21 @@ void eap_method_fill_connection (EAPMethod *method,
                                  NMConnection *connection,
                                  NMSettingSecretFlags flags);
 
-void eap_method_update_secrets (EAPMethod *method, NMConnection *connection);
+void eap_method_emit_changed (EAPMethod *method);
 
-EAPMethod *eap_method_ref (EAPMethod *method);
+const gchar *eap_method_get_username (EAPMethod *method);
 
-void eap_method_unref (EAPMethod *method);
+void eap_method_set_username (EAPMethod *method, const gchar *username);
 
-GType eap_method_get_type (void);
+const gchar *eap_method_get_password (EAPMethod *method);
+
+void eap_method_set_password (EAPMethod *method, const gchar *password);
+
+gboolean eap_method_get_show_password (EAPMethod *method);
+
+void eap_method_set_show_password (EAPMethod *method, gboolean show_password);
 
 /* Below for internal use only */
-
-#include "eap-method-tls.h"
-#include "eap-method-leap.h"
-#include "eap-method-fast.h"
-#include "eap-method-ttls.h"
-#include "eap-method-peap.h"
-#include "eap-method-simple.h"
-
-EAPMethod *eap_method_init (gsize obj_size,
-                            EMValidateFunc validate,
-                            EMAddToSizeGroupFunc add_to_size_group,
-                            EMFillConnectionFunc fill_connection,
-                            EMUpdateSecretsFunc update_secrets,
-                            EMDestroyFunc destroy,
-                            const char *ui_resource,
-                            const char *ui_widget_name,
-                            const char *default_field,
-                            gboolean phase2);
 
 GtkFileFilter * eap_method_default_file_chooser_filter_new (gboolean privkey);
 
@@ -100,24 +87,14 @@ gboolean eap_method_is_encrypted_private_key (const char *path);
 #define TYPE_CA_CERT     1
 #define TYPE_PRIVATE_KEY 2
 
-gboolean eap_method_validate_filepicker (GtkBuilder *builder,
-                                         const char *name,
+gboolean eap_method_validate_filepicker (GtkFileChooser *chooser,
                                          guint32 item_type,
                                          const char *password,
                                          NMSetting8021xCKFormat *out_format,
                                          GError **error);
 
-void eap_method_phase2_update_secrets_helper (EAPMethod *method,
-                                              NMConnection *connection,
-                                              const char *combo_name,
-                                              guint32 column);
-
-gboolean eap_method_ca_cert_required (GtkBuilder *builder,
-                                      const char *id_ca_cert_is_not_required_checkbox,
-                                      const char *id_ca_cert_chooser);
-void eap_method_ca_cert_not_required_toggled (GtkBuilder *builder,
-                                              const char *id_ca_cert_is_not_required_checkbox,
-                                              const char *id_ca_cert_chooser);
+void eap_method_ca_cert_not_required_toggled (GtkToggleButton *id_ca_cert_is_not_required_checkbox,
+                                              GtkFileChooser *id_ca_cert_chooser);
 
 void eap_method_ca_cert_ignore_set (EAPMethod *method,
                                     NMConnection *connection,
@@ -128,4 +105,4 @@ gboolean eap_method_ca_cert_ignore_get (EAPMethod *method, NMConnection *connect
 void eap_method_ca_cert_ignore_save (NMConnection *connection);
 void eap_method_ca_cert_ignore_load (NMConnection *connection);
 
-#endif /* EAP_METHOD_H */
+G_END_DECLS

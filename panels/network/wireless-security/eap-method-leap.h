@@ -20,16 +20,15 @@
  * (C) Copyright 2007 - 2010 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_LEAP_H
-#define EAP_METHOD_LEAP_H
+#pragma once
 
-#include "wireless-security.h"
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
-typedef struct _EAPMethodLEAP EAPMethodLEAP;
+G_BEGIN_DECLS
 
-EAPMethodLEAP *eap_method_leap_new (WirelessSecurity *ws_parent,
-                                    NMConnection *connection,
-                                    gboolean secrets_only);
+G_DECLARE_FINAL_TYPE (EAPMethodLEAP, eap_method_leap, EAP, METHOD_LEAP, GtkGrid)
 
-#endif /* EAP_METHOD_LEAP_H */
+EAPMethodLEAP *eap_method_leap_new (NMConnection *connection);
 
+G_END_DECLS

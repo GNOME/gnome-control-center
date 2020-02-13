@@ -20,17 +20,15 @@
  * (C) Copyright 2012 Red Hat, Inc.
  */
 
-#ifndef EAP_METHOD_FAST_H
-#define EAP_METHOD_FAST_H
+#pragma once
 
-#include "wireless-security.h"
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
-typedef struct _EAPMethodFAST EAPMethodFAST;
+G_BEGIN_DECLS
 
-EAPMethodFAST *eap_method_fast_new (WirelessSecurity *ws_parent,
-                                    NMConnection *connection,
-                                    gboolean is_editor,
-                                    gboolean secrets_only);
+G_DECLARE_FINAL_TYPE (EAPMethodFAST, eap_method_fast, EAP, METHOD_FAST, GtkGrid)
 
-#endif /* EAP_METHOD_FAST_H */
+EAPMethodFAST *eap_method_fast_new (NMConnection *connection);
 
+G_END_DECLS

@@ -96,6 +96,7 @@ drag_begin_cb (CcSearchPanelRow *self,
   gtk_widget_set_size_request (GTK_WIDGET (self->drag_widget), alloc.width, alloc.height);
 
   drag_row = cc_search_panel_row_new (self->app_info);
+  gtk_switch_set_active (drag_row->switcher, gtk_switch_get_active (self->switcher));
   gtk_widget_show (GTK_WIDGET (drag_row));
   gtk_container_add (GTK_CONTAINER (self->drag_widget), GTK_WIDGET (drag_row));
   gtk_list_box_drag_highlight_row (self->drag_widget, GTK_LIST_BOX_ROW (drag_row));

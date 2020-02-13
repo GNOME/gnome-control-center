@@ -1,58 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkAdjustment" id="adjustment1">
+  <object class="GtkAdjustment" id="mtu_adjustment">
     <property name="upper">10000</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkListStore" id="model1">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Automatic</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Twisted Pair (TP)</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Attachment Unit Interface (AUI)</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">BNC</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">Media Independent Interface (MII)</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkListStore" id="model2">
-    <columns>
-      <!-- column-name < -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">Automatic</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">10 Mb/s</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">100 Mb/s</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">1 Gb/s</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">10 Gb/s</col>
-      </row>
-    </data>
-  </object>
-  <object class="GtkGrid" id="page">
+  <template class="CEPageEthernet" parent="GtkGrid">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <property name="margin_start">50</property>
@@ -64,13 +18,13 @@
     <property name="row_spacing">10</property>
     <property name="column_spacing">6</property>
     <child>
-      <object class="GtkLabel" id="heading_name">
+      <object class="GtkLabel">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_Name</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">entry_name</property>
+        <property name="mnemonic_widget">name_entry</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -80,7 +34,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkEntry" id="entry_name">
+      <object class="GtkEntry" id="name_entry">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="invisible_char">●</property>
@@ -93,13 +47,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_mac">
+      <object class="GtkLabel">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_MAC Address</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">combo_mac</property>
+        <property name="mnemonic_widget">mac_combo</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -109,7 +63,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBoxText" id="combo_mac">
+      <object class="GtkComboBoxText" id="mac_combo">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="has_entry">True</property>
@@ -124,7 +78,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkComboBoxText" id="combo_cloned_mac">
+      <object class="GtkComboBoxText" id="cloned_mac_combo">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="has_entry">True</property>
@@ -144,13 +98,13 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_mtu">
+      <object class="GtkLabel">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">M_TU</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">spin_mtu</property>
+        <property name="mnemonic_widget">mtu_spin</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -160,14 +114,14 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="heading_cloned_mac">
+      <object class="GtkLabel">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="valign">center</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_Cloned Address</property>
         <property name="use_underline">True</property>
-        <property name="mnemonic_widget">combo_cloned_mac</property>
+        <property name="mnemonic_widget">cloned_mac_combo</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -177,7 +131,7 @@
       </packing>
     </child>
     <child>
-      <object class="GtkLabel" id="label_mtu">
+      <object class="GtkLabel" id="mtu_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">bytes</property>
@@ -190,12 +144,12 @@
       </packing>
     </child>
     <child>
-      <object class="GtkSpinButton" id="spin_mtu">
+      <object class="GtkSpinButton" id="mtu_spin">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="invisible_char">●</property>
         <property name="invisible_char_set">True</property>
-        <property name="adjustment">adjustment1</property>
+        <property name="adjustment">mtu_adjustment</property>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -219,5 +173,5 @@
     <child>
       <placeholder/>
     </child>
-  </object>
+  </template>
 </interface>

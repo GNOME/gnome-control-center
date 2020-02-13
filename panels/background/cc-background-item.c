@@ -156,7 +156,11 @@ render_at_size (GnomeBG *bg,
         GdkPixbuf *pixbuf;
 
         pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
+#ifdef GNOME_DESKTOP_BG_API_BREAK
+        gnome_bg_draw (bg, pixbuf);
+#else
         gnome_bg_draw (bg, pixbuf, gdk_screen_get_default (), FALSE);
+#endif
 
         return pixbuf;
 }

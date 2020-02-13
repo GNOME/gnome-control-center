@@ -48,7 +48,7 @@ remove_leading_dashes (char *input)
 	for (start = input; *start && (*start == '-'); start++)
 		;
 
-	g_memmove (input, start, strlen (start) + 1);
+	memmove (input, start, strlen (start) + 1);
 
 	return input;
 }
@@ -83,7 +83,7 @@ remove_apostrophes (char *input)
 	char *apo;
 
 	while ((apo = strchr (input, '\'')) != NULL)
-		g_memmove (apo, apo + 1, strlen (apo));
+		memmove (apo, apo + 1, strlen (apo));
 	return input;
 }
 
@@ -93,7 +93,7 @@ remove_duplicate_dashes (char *input)
 	char *dashes;
 
 	while ((dashes = strstr (input, "--")) != NULL)
-		g_memmove (dashes, dashes + 1, strlen (dashes));
+		memmove (dashes, dashes + 1, strlen (dashes));
 	return input;
 }
 

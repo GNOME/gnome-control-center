@@ -40,8 +40,8 @@ wireless_dialog_closure_closure_notify (gpointer data,
                                         GClosure *gclosure)
 {
         WirelessDialogClosure *closure = data;
-        g_object_unref (closure->client);
 
+        g_clear_object (&closure->client);
         g_slice_free (WirelessDialogClosure, data);
 }
 
@@ -49,9 +49,9 @@ static void
 mobile_dialog_closure_free (gpointer data)
 {
         MobileDialogClosure *closure = data;
-        g_object_unref (closure->client);
-        g_object_unref (closure->device);
 
+        g_clear_object (&closure->client);
+        g_clear_object (&closure->device);
         g_slice_free (MobileDialogClosure, data);
 }
 
@@ -76,12 +76,10 @@ activate_existing_cb (GObject *source_object,
                       GAsyncResult *res,
                       gpointer user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
-        if (!nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
+        if (!nm_client_activate_connection_finish (NM_CLIENT (source_object), res, &error))
 		g_warning ("Failed to activate connection: (%d) %s", error->code, error->message);
-		g_error_free (error);
-	}
 }
 
 static void
@@ -89,12 +87,10 @@ activate_new_cb (GObject *source_object,
                  GAsyncResult *res,
                  gpointer user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
-        if (!nm_client_add_and_activate_connection_finish (NM_CLIENT (source_object), res, &error)) {
+        if (!nm_client_add_and_activate_connection_finish (NM_CLIENT (source_object), res, &error))
 		g_warning ("Failed to add new connection: (%d) %s", error->code, error->message);
-		g_error_free (error);
-	}
 }
 
 static void
@@ -104,7 +100,8 @@ wireless_dialog_response_cb (GtkDialog *foo,
 {
 	NMAWifiDialog *dialog = NMA_WIFI_DIALOG (foo);
 	WirelessDialogClosure *closure = user_data;
-	NMConnection *connection, *fuzzy_match = NULL;
+	g_autoptr(NMConnection) connection = NULL;
+	NMConnection *fuzzy_match = NULL;
 	NMDevice *device;
 	NMAccessPoint *ap;
 	const GPtrArray *all;
@@ -167,9 +164,6 @@ wireless_dialog_response_cb (GtkDialog *foo,
 		                                             activate_new_cb,
 		                                             NULL);
 	}
-
-	/* Balance nma_wifi_dialog_get_connection() */
-	g_object_unref (connection);
 
 done:
 	gtk_widget_hide (GTK_WIDGET (dialog));
@@ -234,7 +228,7 @@ cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
 	NMSetting8021x *s_8021x;
 	NM80211ApSecurityFlags wpa_flags, rsn_flags;
 	GtkWidget *dialog;
-	char *uuid;
+	g_autofree gchar *uuid = NULL;
         NMAccessPoint *ap;
 
         g_debug ("connect to 8021x wifi");
@@ -262,7 +256,6 @@ cc_network_panel_connect_to_8021x_network (GtkWidget        *toplevel,
         s_con = (NMSettingConnection *) nm_setting_connection_new ();
         uuid = nm_utils_uuid_generate ();
         g_object_set (s_con, NM_SETTING_CONNECTION_UUID, uuid, NULL);
-        g_free (uuid);
         nm_connection_add_setting (connection, NM_SETTING (s_con));
 
         s_wifi = (NMSettingWireless *) nm_setting_wireless_new ();
@@ -319,7 +312,8 @@ cdma_mobile_wizard_done (NMAMobileWizard *wizard,
 
 	if (!canceled && method) {
 		NMSetting *setting;
-		char *uuid, *id;
+		g_autofree gchar *uuid = NULL;
+		g_autofree gchar *id = NULL;
 
 		if (method->devtype != NM_DEVICE_MODEM_CAPABILITY_CDMA_EVDO) {
 			g_warning ("Unexpected device type (not CDMA).");
@@ -361,8 +355,6 @@ cdma_mobile_wizard_done (NMAMobileWizard *wizard,
 		              NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
 		              NM_SETTING_CONNECTION_UUID, uuid,
 		              NULL);
-		g_free (uuid);
-		g_free (id);
 		nm_connection_add_setting (connection, setting);
 	}
 
@@ -381,7 +373,8 @@ gsm_mobile_wizard_done (NMAMobileWizard *wizard,
 
 	if (!canceled && method) {
 		NMSetting *setting;
-		char *uuid, *id;
+		g_autofree gchar *uuid = NULL;
+		g_autofree gchar *id = NULL;
 
 		if (method->devtype != NM_DEVICE_MODEM_CAPABILITY_GSM_UMTS) {
 			g_warning ("Unexpected device type (not GSM).");
@@ -424,8 +417,6 @@ gsm_mobile_wizard_done (NMAMobileWizard *wizard,
 		              NM_SETTING_CONNECTION_AUTOCONNECT, FALSE,
 		              NM_SETTING_CONNECTION_UUID, uuid,
 		              NULL);
-		g_free (uuid);
-		g_free (id);
 		nm_connection_add_setting (connection, setting);
 	}
 

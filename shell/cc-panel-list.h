@@ -18,8 +18,7 @@
  * Author: Georges Basile Stavracas Neto <gbsneto@gnome.org>
  */
 
-#ifndef CC_PANEL_LIST_H
-#define CC_PANEL_LIST_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -31,8 +30,7 @@ G_BEGIN_DECLS
 typedef enum
 {
   CC_PANEL_LIST_MAIN,
-  CC_PANEL_LIST_DETAILS,
-  CC_PANEL_LIST_DEVICES,
+  CC_PANEL_LIST_PRIVACY,
   CC_PANEL_LIST_WIDGET,
   CC_PANEL_LIST_SEARCH
 } CcPanelListView;
@@ -61,7 +59,8 @@ void                 cc_panel_list_add_panel                     (CcPanelList   
                                                                   const gchar        *description,
                                                                   const GStrv         keywords,
                                                                   const gchar        *icon,
-                                                                  CcPanelVisibility   visibility);
+                                                                  CcPanelVisibility   visibility,
+                                                                  gboolean            has_sidebar);
 
 void                 cc_panel_list_set_active_panel               (CcPanelList       *self,
                                                                    const gchar       *id);
@@ -77,6 +76,3 @@ void                 cc_panel_list_set_selection_mode            (CcPanelList   
                                                                   GtkSelectionMode    selection_mode);
 
 G_END_DECLS
-
-#endif /* CC_PANEL_LIST_H */
-

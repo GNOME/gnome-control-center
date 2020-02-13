@@ -33,13 +33,7 @@
 #include "ce-page.h"
 
 
-G_DEFINE_ABSTRACT_TYPE (CEPage, ce_page, G_TYPE_OBJECT)
-
-enum {
-        PROP_0,
-        PROP_CONNECTION,
-        PROP_INITIALIZED,
-};
+G_DEFINE_INTERFACE (CEPage, ce_page, G_TYPE_OBJECT)
 
 enum {
         CHANGED,
@@ -50,49 +44,15 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 gboolean
-ce_page_validate (CEPage *page, NMConnection *connection, GError **error)
+ce_page_validate (CEPage *self, NMConnection *connection, GError **error)
 {
-        g_return_val_if_fail (CE_IS_PAGE (page), FALSE);
+        g_return_val_if_fail (CE_IS_PAGE (self), FALSE);
         g_return_val_if_fail (NM_IS_CONNECTION (connection), FALSE);
 
-        if (CE_PAGE_GET_CLASS (page)->validate)
-                return CE_PAGE_GET_CLASS (page)->validate (page, connection, error);
+        if (CE_PAGE_GET_IFACE (self)->validate)
+                return CE_PAGE_GET_IFACE (self)->validate (self, connection, error);
 
         return TRUE;
-}
-
-static void
-dispose (GObject *object)
-{
-        CEPage *self = CE_PAGE (object);
-
-        g_clear_object (&self->page);
-        g_clear_object (&self->builder);
-        g_clear_object (&self->connection);
-
-        G_OBJECT_CLASS (ce_page_parent_class)->dispose (object);
-}
-
-static void
-finalize (GObject *object)
-{
-        CEPage *self = CE_PAGE (object);
-
-        g_free (self->title);
-        if (self->cancellable) {
-                g_cancellable_cancel (self->cancellable);
-                g_object_unref (self->cancellable);
-        }
-
-        G_OBJECT_CLASS (ce_page_parent_class)->finalize (object);
-}
-
-GtkWidget *
-ce_page_get_page (CEPage *self)
-{
-        g_return_val_if_fail (CE_IS_PAGE (self), NULL);
-
-        return self->page;
 }
 
 const char *
@@ -100,15 +60,7 @@ ce_page_get_title (CEPage *self)
 {
         g_return_val_if_fail (CE_IS_PAGE (self), NULL);
 
-        return self->title;
-}
-
-gboolean
-ce_page_get_initialized (CEPage *self)
-{
-        g_return_val_if_fail (CE_IS_PAGE (self), FALSE);
-
-        return self->initialized;
+        return CE_PAGE_GET_IFACE (self)->get_title (self);
 }
 
 void
@@ -120,157 +72,48 @@ ce_page_changed (CEPage *self)
 }
 
 static void
-get_property (GObject    *object,
-              guint       prop_id,
-              GValue     *value,
-              GParamSpec *pspec)
+ce_page_default_init (CEPageInterface *iface)
 {
-        CEPage *self = CE_PAGE (object);
-
-        switch (prop_id) {
-        case PROP_CONNECTION:
-                g_value_set_object (value, self->connection);
-                break;
-        case PROP_INITIALIZED:
-                g_value_set_boolean (value, self->initialized);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-set_property (GObject      *object,
-              guint         prop_id,
-              const GValue *value,
-              GParamSpec   *pspec)
-{
-        CEPage *self = CE_PAGE (object);
-
-        switch (prop_id) {
-        case PROP_CONNECTION:
-                if (self->connection)
-                        g_object_unref (self->connection);
-                self->connection = g_value_dup_object (value);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-                break;
-        }
-}
-
-static void
-ce_page_init (CEPage *self)
-{
-        self->builder = gtk_builder_new ();
-        self->cancellable = g_cancellable_new ();
-}
-
-static void
-ce_page_class_init (CEPageClass *page_class)
-{
-        GObjectClass *object_class = G_OBJECT_CLASS (page_class);
-
-        /* virtual methods */
-        object_class->dispose      = dispose;
-        object_class->finalize     = finalize;
-        object_class->get_property = get_property;
-        object_class->set_property = set_property;
-
-        /* Properties */
-        g_object_class_install_property
-                (object_class, PROP_CONNECTION,
-                 g_param_spec_object ("connection",
-                                      "Connection",
-                                      "Connection",
-                                      NM_TYPE_CONNECTION,
-                                      G_PARAM_READABLE | G_PARAM_WRITABLE | G_PARAM_CONSTRUCT_ONLY));
-
-        g_object_class_install_property
-                (object_class, PROP_INITIALIZED,
-                 g_param_spec_boolean ("initialized",
-                                       "Initialized",
-                                       "Initialized",
-                                       FALSE,
-                                       G_PARAM_READABLE));
-
         signals[CHANGED] =
                 g_signal_new ("changed",
-                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_TYPE_FROM_INTERFACE (iface),
                               G_SIGNAL_RUN_FIRST,
-                              G_STRUCT_OFFSET (CEPageClass, changed),
+                              0,
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
 
         signals[INITIALIZED] =
                 g_signal_new ("initialized",
-                              G_OBJECT_CLASS_TYPE (object_class),
+                              G_TYPE_FROM_INTERFACE (iface),
                               G_SIGNAL_RUN_FIRST,
-                              G_STRUCT_OFFSET (CEPageClass, initialized),
+                              0,
                               NULL, NULL,
                               g_cclosure_marshal_VOID__POINTER,
                               G_TYPE_NONE, 1, G_TYPE_POINTER);
 }
 
-CEPage *
-ce_page_new (GType             type,
-             NMConnection     *connection,
-             NMClient         *client,
-             const gchar      *ui_resource,
-             const gchar      *title)
-{
-        CEPage *page;
-        GError *error = NULL;
-
-        page = CE_PAGE (g_object_new (type,
-                                      "connection", connection,
-                                      NULL));
-        page->title = g_strdup (title);
-        page->client = client;
-
-        if (ui_resource) {
-                if (!gtk_builder_add_from_resource (page->builder, ui_resource, &error)) {
-                        g_warning ("Couldn't load builder file: %s", error->message);
-                        g_error_free (error);
-                        g_object_unref (page);
-                        return NULL;
-                }
-                page->page = GTK_WIDGET (gtk_builder_get_object (page->builder, "page"));
-                if (!page->page) {
-                        g_warning ("Couldn't load page widget from %s", ui_resource);
-                        g_object_unref (page);
-                        return NULL;
-                }
-
-                g_object_ref_sink (page->page);
-        }
-
-        return page;
-}
-
 static void
-emit_initialized (CEPage *page,
+emit_initialized (CEPage *self,
                   GError *error)
 {
-        page->initialized = TRUE;
-        g_signal_emit (page, signals[INITIALIZED], 0, error);
+        g_signal_emit (self, signals[INITIALIZED], 0, error);
         g_clear_error (&error);
 }
 
 void
-ce_page_complete_init (CEPage      *page,
-                       const gchar *setting_name,
-                       GVariant    *secrets,
-                       GError      *error)
+ce_page_complete_init (CEPage       *self,
+                       NMConnection *connection,
+                       const gchar  *setting_name,
+                       GVariant     *secrets,
+                       GError       *error)
 {
-	GError *update_error = NULL;
-	GVariant *setting_dict;
+	g_autoptr(GError) update_error = NULL;
+	g_autoptr(GVariant) setting_dict = NULL;
 	gboolean ignore_error = FALSE;
 
-	g_return_if_fail (page != NULL);
-	g_return_if_fail (CE_IS_PAGE (page));
+	g_return_if_fail (self != NULL);
+	g_return_if_fail (CE_IS_PAGE (self));
 
 	if (error) {
 		ignore_error = g_error_matches (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_SETTING_NOT_FOUND) ||
@@ -279,11 +122,11 @@ ce_page_complete_init (CEPage      *page,
 
 	/* Ignore missing settings errors */
 	if (error && !ignore_error) {
-		emit_initialized (page, error);
+		emit_initialized (self, error);
 		return;
 	} else if (!setting_name || !secrets || g_variant_n_children (secrets) == 0) {
 		/* Success, no secrets */
-		emit_initialized (page, NULL);
+		emit_initialized (self, NULL);
 		return;
 	}
 
@@ -293,23 +136,18 @@ ce_page_complete_init (CEPage      *page,
 	setting_dict = g_variant_lookup_value (secrets, setting_name, NM_VARIANT_TYPE_SETTING);
 	if (!setting_dict) {
 		/* Success, no secrets */
-		emit_initialized (page, NULL);
+		emit_initialized (self, NULL);
 		return;
 	}
-	g_variant_unref (setting_dict);
 
 	/* Update the connection with the new secrets */
-	if (nm_connection_update_secrets (page->connection,
-	                                  setting_name,
-	                                  secrets,
-	                                  &update_error)) {
-		/* Success */
-		emit_initialized (page, NULL);
-		return;
-	}
+	if (!nm_connection_update_secrets (connection,
+                                           setting_name,
+                                           secrets,
+                                           &update_error))
+                g_warning ("Couldn't update secrets: %s", update_error->message);
 
-	g_warning ("Failed to update connection secrets due to an unknown error.");
-	emit_initialized (page, NULL);
+	emit_initialized (self, NULL);
 }
 
 gchar **
@@ -326,7 +164,8 @@ ce_page_get_mac_list (NMClient    *client,
         for (i = 0; devices && (i < devices->len); i++) {
                 NMDevice *dev = g_ptr_array_index (devices, i);
                 const char *iface;
-                char *mac, *item;
+                g_autofree gchar *mac = NULL;
+                g_autofree gchar *item = NULL;
 
                 if (!G_TYPE_CHECK_INSTANCE_TYPE (dev, device_type))
                         continue;
@@ -334,8 +173,7 @@ ce_page_get_mac_list (NMClient    *client,
                 g_object_get (G_OBJECT (dev), mac_property, &mac, NULL);
                 iface = nm_device_get_iface (NM_DEVICE (dev));
                 item = g_strdup_printf ("%s (%s)", mac, iface);
-                g_free (mac);
-                g_ptr_array_add (macs, item);
+                g_ptr_array_add (macs, g_steal_pointer (&item));
         }
 
         g_ptr_array_add (macs, NULL);
@@ -424,13 +262,19 @@ ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current)
 char *
 ce_page_cloned_mac_get (GtkComboBoxText *combo)
 {
+       g_autofree gchar *active_text = NULL;
        const char *id;
 
        id = gtk_combo_box_get_active_id (GTK_COMBO_BOX (combo));
        if (id)
                return g_strdup (id);
 
-       return gtk_combo_box_text_get_active_text (combo);
+       active_text = gtk_combo_box_text_get_active_text (combo);
+
+       if (active_text[0] == '\0')
+               return NULL;
+
+       return g_steal_pointer (&active_text);
 }
 
 gboolean
@@ -443,7 +287,7 @@ ce_page_address_is_valid (const gchar *addr)
                 {0x00, 0x30, 0xb4, 0x00, 0x00, 0x00}, /* prism54 dummy MAC */
         };
         guint8 addr_bin[ETH_ALEN];
-        char *trimmed_addr;
+        g_autofree gchar *trimmed_addr = NULL;
         guint i;
 
         if (!addr || *addr == '\0')
@@ -451,17 +295,11 @@ ce_page_address_is_valid (const gchar *addr)
 
         trimmed_addr = ce_page_trim_address (addr);
 
-        if (!nm_utils_hwaddr_valid (trimmed_addr, -1)) {
-                g_free (trimmed_addr);
+        if (!nm_utils_hwaddr_valid (trimmed_addr, -1))
                 return FALSE;
-        }
 
-        if (!nm_utils_hwaddr_aton (trimmed_addr, addr_bin, ETH_ALEN)) {
-                g_free (trimmed_addr);
+        if (!nm_utils_hwaddr_aton (trimmed_addr, addr_bin, ETH_ALEN))
                 return FALSE;
-        }
-
-        g_free (trimmed_addr);
 
         /* Check for multicast address */
         if ((((guint8 *) addr_bin)[0]) & 0x01)
@@ -485,13 +323,16 @@ ce_page_cloned_mac_combo_valid (GtkComboBoxText *combo)
 
        active_text = gtk_combo_box_text_get_active_text (combo);
 
-       return ce_page_address_is_valid (active_text);
+       return active_text[0] == '\0' || ce_page_address_is_valid (active_text);
 }
 
 const gchar *
-ce_page_get_security_setting (CEPage *page)
+ce_page_get_security_setting (CEPage *self)
 {
-        return page->security_setting;
+        if (CE_PAGE_GET_IFACE (self)->get_security_setting)
+                return CE_PAGE_GET_IFACE (self)->get_security_setting (self);
+
+        return NULL;
 }
 
 gint
@@ -526,26 +367,6 @@ ce_get_property_default (NMSetting *setting, const gchar *property_name)
         return 0;
 }
 
-gint
-ce_spin_output_with_default (GtkSpinButton *spin, gpointer user_data)
-{
-        gint defvalue = GPOINTER_TO_INT (user_data);
-        gint val;
-        gchar *buf = NULL;
-
-        val = gtk_spin_button_get_value_as_int (spin);
-        if (val == defvalue)
-                buf = g_strdup (_("automatic"));
-        else
-                buf = g_strdup_printf ("%d", val);
-
-        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (spin))))
-                gtk_entry_set_text (GTK_ENTRY (spin), buf);
-
-        g_free (buf);
-        return TRUE;
-}
-
 gchar *
 ce_page_get_next_available_name (const GPtrArray *connections,
                                  NameFormat format,
@@ -567,7 +388,7 @@ ce_page_get_next_available_name (const GPtrArray *connections,
 
         /* Find the next available unique connection name */
         while (!cname && (i++ < 10000)) {
-                gchar *temp;
+                g_autofree gchar *temp = NULL;
                 gboolean found = FALSE;
 
                 switch (format) {
@@ -588,9 +409,7 @@ ce_page_get_next_available_name (const GPtrArray *connections,
                         }
                 }
                 if (!found)
-                        cname = temp;
-                else
-                        g_free (temp);
+                        cname = g_steal_pointer (&temp);
         }
         g_slist_free (names);
 

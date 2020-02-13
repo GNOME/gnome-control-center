@@ -36,7 +36,7 @@ nm_applet_sources = [
   'ws-wpa-psk.c'
 ]
 
-sources = files(nm_applet_sources) + files('utils.c')
+sources = files(nm_applet_sources)
 
 nm_resource_data = [
   'eap-method-fast.ui',
@@ -63,36 +63,6 @@ sources += gnome.compile_resources(
 libwireless_security = static_library(
   name,
   sources: sources,
-  include_directories: top_inc,
+  include_directories: [top_inc, network_inc],
   dependencies: deps
 )
-
-'''
-# DISABLED
-# FIXME: workaround for updating different sources code
-input_dir = join_paths(meson.source_root(), '..', 'network-manager-applet', 'src', 'wireless-security')
-
-script_conf = configuration_data()
-script_conf.set('program', update_from_gsd.path())
-script_conf.set('input_dir', input_dir)
-script_conf.set('working_dir', meson.current_source_dir())
-script_conf.set('source_files', ' '.join(nm_applet_sources + nm_applet_headers))
-script_conf.set('source_patch', 'nm-connection-editor-to-network-panel.patch')
-script_conf.set('source_message', 'network: Update wireless-security from network-manager-applet')
-script_conf.set('resource_data', ' '.join(nm_resource_data))
-script_conf.set('resource_patch', 'nm-connection-editor-ui-to-network-panel.patch')
-script_conf.set('resource_message', 'network: Update wireless-security UI from network-manager-applet')
-
-script_name = 'update-from-nma'
-
-script = configure_file(
-  input: update_from_nma_in,
-  output: script_name + '.sh',
-  configuration: script_conf
-)
-
-run_target(
-  script_name,
-  command: script
-)
-'''

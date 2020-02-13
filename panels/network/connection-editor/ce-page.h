@@ -19,8 +19,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CE_PAGE_H
-#define __CE_PAGE_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -30,56 +29,25 @@
 
 G_BEGIN_DECLS
 
-#define CE_TYPE_PAGE          (ce_page_get_type ())
-#define CE_PAGE(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), CE_TYPE_PAGE, CEPage))
-#define CE_PAGE_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), CE_TYPE_PAGE, CEPageClass))
-#define CE_IS_PAGE(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), CE_TYPE_PAGE))
-#define CE_IS_PAGE_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), CE_TYPE_PAGE))
-#define CE_PAGE_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), CE_TYPE_PAGE, CEPageClass))
+G_DECLARE_INTERFACE (CEPage, ce_page, CE, PAGE, GObject)
 
-typedef struct _CEPage          CEPage;
-typedef struct _CEPageClass     CEPageClass;
-
-struct _CEPage
+struct _CEPageInterface
 {
-        GObject parent;
+        GTypeInterface g_iface;
 
-        gboolean initialized;
-        GtkBuilder *builder;
-        GtkWidget *page;
-        gchar *title;
-        const gchar *security_setting;
-
-        NMConnection *connection;
-        NMClient *client;
-        GCancellable *cancellable;
+        gboolean     (*validate)             (CEPage *page, NMConnection *connection, GError **error);
+        const gchar *(*get_title)            (CEPage *page);
+        const gchar *(*get_security_setting) (CEPage *page);
 };
 
-struct _CEPageClass
-{
-        GObjectClass parent_class;
-
-        gboolean (*validate) (CEPage *page, NMConnection *connection, GError **error);
-        void (*changed)     (CEPage *page);
-        void (*initialized) (CEPage *page, GError *error);
-};
-
-GType        ce_page_get_type        (void);
-
-GtkWidget   *ce_page_get_page        (CEPage           *page);
 const gchar *ce_page_get_title       (CEPage           *page);
 const gchar *ce_page_get_security_setting (CEPage           *page);
 gboolean     ce_page_validate        (CEPage           *page,
                                       NMConnection     *connection,
                                       GError          **error);
-gboolean     ce_page_get_initialized (CEPage           *page);
 void         ce_page_changed         (CEPage           *page);
-CEPage      *ce_page_new             (GType             type,
-                                      NMConnection     *connection,
-                                      NMClient         *client,
-                                      const gchar      *ui_resource,
-                                      const gchar      *title);
 void         ce_page_complete_init   (CEPage           *page,
+                                      NMConnection     *connection,
                                       const gchar      *setting_name,
                                       GVariant         *variant,
                                       GError           *error);
@@ -94,8 +62,6 @@ void         ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo,
                                              const char      *current);
 gint         ce_get_property_default (NMSetting        *setting,
                                       const gchar      *property_name);
-gint         ce_spin_output_with_default (GtkSpinButton *spin,
-                                          gpointer       user_data);
 gboolean     ce_page_address_is_valid (const gchar *addr);
 gchar       *ce_page_trim_address (const gchar *addr);
 char        *ce_page_cloned_mac_get (GtkComboBoxText *combo);
@@ -110,9 +76,4 @@ gchar * ce_page_get_next_available_name (const GPtrArray *connections,
                                          NameFormat format,
                                          const gchar *type_name);
 
-
-
 G_END_DECLS
-
-#endif /* __CE_PAGE_H */
-

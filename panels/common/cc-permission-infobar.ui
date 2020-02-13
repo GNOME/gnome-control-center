@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcPermissionInfobar" parent="GtkRevealer">
+    <property name="reveal-child">True</property>
+    <property name="valign">start</property>
+    <child>
+      <object class="GtkInfoBar">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox">
+            <property name="can-focus">False</property>
+            <property name="layout-style">end</property>
+            <property name="border-width">10</property>
+            <child>
+              <object class="GtkLockButton" id="lock_button">
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <property name="label" translatable="yes">Unlock…</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child internal-child="content_area">
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="border-width">10</property>
+            <property name="spacing">10</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">system-lock-screen-symbolic</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="hexpand">True</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="halign">start</property>
+                    <property name="label" translatable="yes">Unlock to Change Settings</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="halign">start</property>
+                    <property name="label" translatable="yes">Some settings must be unlocked before they can be changed.</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

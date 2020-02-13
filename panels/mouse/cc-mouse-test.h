@@ -18,8 +18,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _CC_MOUSE_TEST_H
-#define _CC_MOUSE_TEST_H
+#pragma once
 
 #include <gtk/gtk.h>
 
@@ -31,5 +30,3 @@ G_DECLARE_FINAL_TYPE (CcMouseTest, cc_mouse_test, CC, MOUSE_TEST, GtkBin)
 GtkWidget *cc_mouse_test_new (void);
 
 G_END_DECLS
-
-#endif /* _CC_MOUSE_TEST_H */

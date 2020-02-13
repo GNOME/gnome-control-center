@@ -19,50 +19,20 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CE_PAGE_DETAILS_H
-#define __CE_PAGE_DETAILS_H
-
-#include <glib-object.h>
+#pragma once
 
 #include <gtk/gtk.h>
+#include <NetworkManager.h>
+
 #include "net-connection-editor.h"
-#include "ce-page.h"
 
 G_BEGIN_DECLS
 
-#define CE_TYPE_PAGE_DETAILS          (ce_page_details_get_type ())
-#define CE_PAGE_DETAILS(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), CE_TYPE_PAGE_DETAILS, CEPageDetails))
-#define CE_PAGE_DETAILS_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), CE_TYPE_PAGE_DETAILS, CEPageDetailsClass))
-#define CE_IS_PAGE_DETAILS(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), CE_TYPE_PAGE_DETAILS))
-#define CE_IS_PAGE_DETAILS_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), CE_TYPE_PAGE_DETAILS))
-#define CE_PAGE_DETAILS_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), CE_TYPE_PAGE_DETAILS, CEPageDetailsClass))
+G_DECLARE_FINAL_TYPE (CEPageDetails, ce_page_details, CE, PAGE_DETAILS, GtkGrid)
 
-typedef struct _CEPageDetails          CEPageDetails;
-typedef struct _CEPageDetailsClass     CEPageDetailsClass;
-
-struct _CEPageDetails
-{
-        CEPage parent;
-
-        NMDevice *device;
-        NMAccessPoint *ap;
-        NetConnectionEditor *editor;
-};
-
-struct _CEPageDetailsClass
-{
-        CEPageClass parent_class;
-};
-
-GType   ce_page_details_get_type (void);
-
-CEPage *ce_page_details_new      (NMConnection        *connection,
-                                  NMClient            *client,
-                                  NMDevice            *device,
-                                  NMAccessPoint       *ap,
-                                  NetConnectionEditor *editor);
+CEPageDetails *ce_page_details_new (NMConnection        *connection,
+                                    NMDevice            *device,
+                                    NMAccessPoint       *ap,
+                                    NetConnectionEditor *editor);
 
 G_END_DECLS
-
-#endif /* __CE_PAGE_DETAILS_H */
-

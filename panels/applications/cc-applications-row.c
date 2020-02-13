@@ -75,6 +75,7 @@ cc_applications_row_new (GAppInfo *info)
 {
   CcApplicationsRow *self;
   g_autofree gchar *key = NULL;
+  GIcon *icon;
 
   self = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);
 
@@ -83,7 +84,12 @@ cc_applications_row_new (GAppInfo *info)
   key = g_utf8_casefold (g_app_info_get_display_name (info), -1);
   self->sortkey = g_utf8_collate_key (key, -1);
 
-  gtk_image_set_from_gicon (GTK_IMAGE (self->image), g_app_info_get_icon (info), GTK_ICON_SIZE_BUTTON);
+  icon = g_app_info_get_icon (info);
+  if (icon != NULL)
+    gtk_image_set_from_gicon (GTK_IMAGE (self->image), g_app_info_get_icon (info), GTK_ICON_SIZE_BUTTON);
+  else
+    gtk_image_set_from_icon_name (GTK_IMAGE (self->image), "application-x-executable", GTK_ICON_SIZE_BUTTON);
+
   gtk_label_set_label (GTK_LABEL (self->label), g_app_info_get_display_name (info));
 
   return self;

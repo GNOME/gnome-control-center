@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="NetDeviceBluetooth" parent="GtkBox">
+    <property name="can_focus">False</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkSeparator" id="separator">
+        <property name="can_focus">False</property>
+        <property name="orientation">horizontal</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkListBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="selection_mode">none</property>
+        <child>
+          <object class="GtkListBoxRow">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="activatable">False</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">8</property>
+                <property name="margin_bottom">8</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
+                <property name="spacing">12</property>
+                <child>
+                  <object class="GtkLabel" id="device_label">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="xalign">0.0</property>
+                    <property name="label" translatable="yes">Wired</property>
+                    <property name="ellipsize">end</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkSwitch" id="device_off_switch">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                    <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceBluetooth" swapped="yes"/>
+                    <child internal-child="accessible">
+                      <object class="AtkObject">
+                        <property name="accessible-name" translatable="yes">Turn device off</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="options_button">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="valign">center</property>
+                    <property name="use_underline">True</property>
+                    <signal name="clicked" handler="options_button_clicked_cb" object="NetDeviceBluetooth" swapped="yes"/>
+                    <style>
+                      <class name="image-button"/>
+                    </style>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="icon_name">emblem-system-symbolic</property>
+                        <property name="icon_size">1</property>
+                      </object>
+                    </child>
+                    <child internal-child="accessible">
+                      <object class="AtkObject">
+                        <property name="accessible-name" translatable="yes">Options…</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

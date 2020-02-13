@@ -27,7 +27,7 @@ stages:
 .Build procedure: &build_procedure
   echo "== Building ==" &&
   rm -rf _build/ &&
-  meson . _build ${BUILD_OPTS} &&
+  meson . _build ${BUILD_OPTS} -Dprofile=development &&
   ninja -C _build 2>&1 | tee compilation.log
 
 .Run Tests: &run_tests
@@ -337,11 +337,16 @@ ppc64le:
 #############################################
 #          Create CI Docker Images          #
 #############################################
+.Docker common variables: &docker_common_variables
+  # https://about.gitlab.com/blog/2019/07/31/docker-in-docker-with-docker-19-dot-03/
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_DRIVER: overlay
+
 .Docker image template: &create_docker_image
   image: docker:latest
   stage: deploy
   services:
-    - docker:dind
+    - docker:stable-dind
   only:
     variables:
       - $CRON_TASK == "BUILD_CI_IMAGES"
@@ -389,6 +394,7 @@ ppc64le:
 fedora.dev:
   <<: *create_docker_image
   variables:
+    <<: *docker_common_variables
     DOCKER_DRIVER: overlay
     DOCKERFILE: "build-aux/ci/Dockerfile.fedora.30"
     NAME: "fedora.dev"
@@ -396,7 +402,7 @@ fedora.dev:
 fedora.aarch64:
   <<: *create_docker_image
   variables:
-    DOCKER_DRIVER: overlay
+    <<: *docker_common_variables
     DOCKERFILE: "build-aux/ci/Dockerfile.arm64v8.fedora.30"
     NAME: "fedora.aarch64"
     TARGET_ARCH: "aarch64"
@@ -404,7 +410,7 @@ fedora.aarch64:
 fedora.ppc64le:
   <<: *create_docker_image
   variables:
-    DOCKER_DRIVER: overlay
+    <<: *docker_common_variables
     DOCKERFILE: "build-aux/ci/Dockerfile.ppc64le.fedora.latest"
     NAME: "fedora.ppc64le"
     TARGET_ARCH: "ppc64le"

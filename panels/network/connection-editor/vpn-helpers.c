@@ -64,13 +64,13 @@ vpn_get_plugins (void)
 	p = nm_vpn_plugin_info_list_load ();
 	plugins = NULL;
 	while (p) {
-		NMVpnPluginInfo *plugin_info = NM_VPN_PLUGIN_INFO (p->data);
-		GError *error = NULL;
+		g_autoptr(NMVpnPluginInfo) plugin_info = NM_VPN_PLUGIN_INFO (p->data);
+		g_autoptr(GError) error = NULL;
 
 		/* load the editor plugin, and preserve only those NMVpnPluginInfo that can
 		 * successfully load the plugin. */
 		if (nm_vpn_plugin_info_load_editor_plugin (plugin_info, &error))
-			plugins = g_slist_prepend (plugins, plugin_info);
+			plugins = g_slist_prepend (plugins, g_steal_pointer (&plugin_info));
 		else {
 			if (   !nm_vpn_plugin_info_get_plugin (plugin_info)
 			    && nm_vpn_plugin_info_lookup_property (plugin_info, NM_VPN_PLUGIN_INFO_KF_GROUP_GNOME, "properties")) {
@@ -88,8 +88,6 @@ vpn_get_plugins (void)
 				           nm_vpn_plugin_info_get_filename (plugin_info),
 				           error->message);
 			}
-			g_clear_error (&error);
-			g_object_unref (plugin_info);
 		}
 		p = g_slist_delete_link (p, p);
 	}
@@ -107,10 +105,10 @@ typedef struct {
 static void
 import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 {
-	char *filename = NULL;
+	g_autofree gchar *filename = NULL;
 	ActionInfo *info = (ActionInfo *) user_data;
 	NMConnection *connection = NULL;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	GSList *iter;
 
 	if (response != GTK_RESPONSE_ACCEPT)
@@ -132,7 +130,7 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 
 	if (!connection) {
 		GtkWidget *err_dialog;
-		char *bname = g_path_get_basename (filename);
+		g_autofree gchar *bname = g_path_get_basename (filename);
 
 		err_dialog = gtk_message_dialog_new (GTK_WINDOW (dialog),
 		                                     GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -142,13 +140,10 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
 		                                 _("The file “%s” could not be read or does not contain recognized VPN connection information\n\nError: %s."),
 		                                 bname, error ? error->message : "unknown error");
-		g_free (bname);
 		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
 		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_dialog_run (GTK_DIALOG (err_dialog));
 	}
-	g_clear_error (&error);
-	g_free (filename);
 
 out:
 	gtk_widget_hide (dialog);
@@ -198,9 +193,9 @@ vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 static void
 export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 {
-	NMConnection *connection = NM_CONNECTION (user_data);
+	g_autoptr(NMConnection) connection = NM_CONNECTION (user_data);
 	char *filename = NULL;
-	GError *error = NULL;
+	g_autoptr(GError) error = NULL;
 	NMVpnEditorPlugin *plugin;
 	NMSettingConnection *s_con = NULL;
 	NMSettingVpn *s_vpn = NULL;
@@ -220,7 +215,7 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 	if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
 		int replace_response;
 		GtkWidget *replace_dialog;
-		char *bname;
+		g_autofree gchar *bname = NULL;
 
 		bname = g_path_get_basename (filename);
 		replace_dialog = gtk_message_dialog_new (NULL,
@@ -232,7 +227,6 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		gtk_dialog_add_buttons (GTK_DIALOG (replace_dialog), _("_Replace"), GTK_RESPONSE_OK, NULL);
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (replace_dialog),
 							  _("Do you want to replace %s with the VPN connection you are saving?"), bname);
-		g_free (bname);
 		replace_response = gtk_dialog_run (GTK_DIALOG (replace_dialog));
 		gtk_widget_destroy (replace_dialog);
 		if (replace_response != GTK_RESPONSE_OK)
@@ -261,7 +255,7 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 done:
 	if (!success) {
 		GtkWidget *err_dialog;
-		char *bname = filename ? g_path_get_basename (filename) : g_strdup ("(none)");
+		g_autofree gchar *bname = filename ? g_path_get_basename (filename) : g_strdup ("(none)");
 
 		err_dialog = gtk_message_dialog_new (NULL,
 		                                     GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -271,7 +265,6 @@ done:
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
 		                                 _("The VPN connection “%s” could not be exported to %s.\n\nError: %s."),
 		                                 id ? id : "(unknown)", bname, error ? error->message : "unknown error");
-		g_free (bname);
 		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
 		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
 		gtk_widget_show_all (err_dialog);
@@ -279,10 +272,6 @@ done:
 	}
 
 out:
-	if (error)
-		g_error_free (error);
-	g_object_unref (connection);
-
 	gtk_widget_hide (dialog);
 	gtk_widget_destroy (dialog);
 }
@@ -315,38 +304,15 @@ vpn_export (NMConnection *connection)
 
 	plugin = vpn_get_plugin_by_service (service_type);
 	if (plugin) {
-		char *suggested = NULL;
+		g_autofree gchar *suggested = NULL;
 
 		suggested = nm_vpn_editor_plugin_get_suggested_filename (plugin, connection);
-		if (suggested) {
+		if (suggested)
 			gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), suggested);
-			g_free (suggested);
-		}
 	}
 
 	g_signal_connect (G_OBJECT (dialog), "close", G_CALLBACK (gtk_widget_destroy), NULL);
 	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (export_vpn_to_file_cb), g_object_ref (connection));
 	gtk_widget_show_all (dialog);
 	gtk_window_present (GTK_WINDOW (dialog));
-}
-
-gboolean
-vpn_supports_ipv6 (NMConnection *connection)
-{
-	NMSettingVpn *s_vpn;
-	const char *service_type;
-	NMVpnEditorPlugin *plugin;
-	guint32 capabilities;
-
-	s_vpn = nm_connection_get_setting_vpn (connection);
-	g_return_val_if_fail (s_vpn != NULL, FALSE);
-
-	service_type = nm_setting_vpn_get_service_type (s_vpn);
-	g_return_val_if_fail (service_type != NULL, FALSE);
-
-	plugin = vpn_get_plugin_by_service (service_type);
-	g_return_val_if_fail (plugin != NULL, FALSE);
-
-	capabilities = nm_vpn_editor_plugin_get_capabilities (plugin);
-	return (capabilities & NM_VPN_EDITOR_PLUGIN_CAPABILITY_IPV6) != 0;
 }

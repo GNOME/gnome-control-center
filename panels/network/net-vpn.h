@@ -21,17 +21,20 @@
 
 #pragma once
 
-#include <glib-object.h>
+#include <gtk/gtk.h>
 #include <NetworkManager.h>
-
-#include "net-object.h"
 
 G_BEGIN_DECLS
 
-#define NET_TYPE_VPN (net_vpn_get_type ())
-G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, NetObject)
+G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, GtkBox)
 
-void             net_vpn_set_show_separator     (NetVpn   *self,
-                                                 gboolean  show_separator);
+NetVpn       *net_vpn_new                (NMClient     *client,
+                                          NMConnection *connection);
+
+NMConnection *net_vpn_get_connection     (NetVpn       *vpn);
+
+
+void          net_vpn_set_show_separator (NetVpn       *vpn,
+                                          gboolean      show_separator);
 
 G_END_DECLS

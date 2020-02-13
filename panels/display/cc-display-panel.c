@@ -83,7 +83,6 @@ struct _CcDisplayPanel
   gboolean lid_is_closed;
 
   GDBusProxy *shell_proxy;
-  GCancellable *shell_cancellable;
 
   guint       sensor_watch_id;
   GDBusProxy *iio_sensor_proxy;
@@ -343,7 +342,7 @@ monitor_labeler_show (CcDisplayPanel *self)
 static void
 ensure_monitor_labels (CcDisplayPanel *self)
 {
-  g_autoptr(GList) windows;
+  g_autoptr(GList) windows = NULL;
   GList *w;
 
   windows = gtk_window_list_toplevels ();
@@ -431,8 +430,6 @@ cc_display_panel_dispose (GObject *object)
   g_clear_object (&self->current_config);
   g_clear_object (&self->up_client);
 
-  g_cancellable_cancel (self->shell_cancellable);
-  g_clear_object (&self->shell_cancellable);
   g_clear_object (&self->shell_proxy);
 
   g_clear_pointer ((GtkWidget **) &self->night_light_dialog, gtk_widget_destroy);
@@ -1186,7 +1183,7 @@ session_bus_ready (GObject        *source,
 static void
 cc_display_panel_init (CcDisplayPanel *self)
 {
-  g_autoptr (GtkCssProvider) provider = NULL;
+  g_autoptr(GtkCssProvider) provider = NULL;
   GtkCellRenderer *renderer;
 
   g_resources_register (cc_display_get_resource ());
@@ -1244,7 +1241,6 @@ cc_display_panel_init (CcDisplayPanel *self)
 
   g_signal_connect (self, "map", G_CALLBACK (mapped_cb), NULL);
 
-  self->shell_cancellable = g_cancellable_new ();
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
                                        G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
                                        G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
@@ -1252,12 +1248,12 @@ cc_display_panel_init (CcDisplayPanel *self)
                                        "org.gnome.Shell",
                                        "/org/gnome/Shell",
                                        "org.gnome.Shell",
-                                       self->shell_cancellable,
+                                       cc_panel_get_cancellable (CC_PANEL (self)),
                                        (GAsyncReadyCallback) shell_proxy_ready,
                                        self);
 
   g_bus_get (G_BUS_TYPE_SESSION,
-             self->shell_cancellable,
+             cc_panel_get_cancellable (CC_PANEL (self)),
              (GAsyncReadyCallback) session_bus_ready,
              self);
 

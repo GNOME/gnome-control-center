@@ -1,8 +1,8 @@
 project(
   'gnome-control-center', 'c',
-        version : '3.35.0',
+        version : '3.35.90',
         license : 'GPL2+',
-  meson_version : '>= 0.50.0'
+  meson_version : '>= 0.51.0'
 )
 
 control_center_prefix = get_option('prefix')
@@ -41,6 +41,7 @@ set_defines = [
   ['PACKAGE', meson.project_name()],
   ['PACKAGE_VERSION', meson.project_version()],
   ['VERSION', meson.project_version()],
+  ['PROFILE', get_option('profile')],
   # i18n
   ['GETTEXT_PACKAGE', control_center_gettext]
 ]
@@ -119,19 +120,20 @@ accounts_dep = dependency('accountsservice', version: '>= 0.6.39')
 colord_dep = dependency('colord', version: '>= 0.1.34')
 gdk_pixbuf_dep = dependency('gdk-pixbuf-2.0', version: '>= 2.23.0')
 gio_dep = dependency('gio-2.0')
-glib_dep = dependency('glib-2.0', version: '>= 2.53.0')
+glib_dep = dependency('glib-2.0', version: '>= 2.56.0')
 gnome_desktop_dep = dependency('gnome-desktop-3.0', version: '>= 3.33.4')
 gnome_settings_dep = dependency('gnome-settings-daemon', version: '>= 3.27.90')
 goa_dep = dependency('goa-1.0', version: goa_req_version)
 gsettings_desktop_dep = dependency('gsettings-desktop-schemas', version: '>= 3.31.0')
 libxml_dep = dependency('libxml-2.0')
-polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
+polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.114')
 pulse_dep = dependency('libpulse', version: pulse_req_version)
 pulse_mainloop_dep = dependency('libpulse-mainloop-glib', version: pulse_req_version)
 upower_glib_dep = dependency('upower-glib', version: '>= 0.99.8')
-gudev_dep = dependency('gudev-1.0')
+gudev_dep = dependency('gudev-1.0', version: '>= 232')
 x11_dep = dependency('x11')
 xi_dep = dependency('xi', version: '>= 1.2')
+epoxy_dep = dependency('epoxy')
 
 m_dep = cc.find_library('m')
 
@@ -152,7 +154,7 @@ assert(cups_dep.found(), 'CUPS 1.4 or newer not found')
 # https://bugzilla.gnome.org/show_bug.cgi?id=696766
 cups_cflags = []
 if cups_dep.version().version_compare('>= 1.6')
-  cups_cflags += '-D_PPD_DEPRECATED=""'
+  cups_cflags += '-D_PPD_DEPRECATED='
 endif
 
 # cups headers
@@ -164,6 +166,10 @@ check_headers = [
 foreach header: check_headers
   assert(cc.has_header(header[1], args: cups_cflags), 'CUPS headers not found: ' + header[1])
 endforeach
+
+config_h.set10('HAVE_CUPS_HTTPCONNECT2',
+               cc.has_function('httpConnect2', dependencies: cups_dep),
+               description: 'Define if httpConnect2() is available in CUPS')
 
 # Optional dependency for the user accounts panel
 enable_cheese = get_option('cheese')
@@ -188,6 +194,16 @@ config_h.set('HAVE_IBUS', enable_ibus,
 config_h.set10('HAVE_FN_EXPLICIT_BZERO',
                cc.has_function('explicit_bzero', prefix: '''#include <string.h>'''),
                description: 'Define if explicit_bzero is available')
+
+# Snap support
+enable_snap = get_option('snap')
+if enable_snap
+  snapd_glib_deps = [
+    dependency('snapd-glib', version: '>= 1.49')
+  ]
+endif
+config_h.set('HAVE_SNAP', enable_snap,
+             description: 'Define to 1 if Snap support is enabled')
 
 if host_is_linux
   # network manager
@@ -228,12 +244,6 @@ config_h.set('HAVE_WACOM', host_is_linux_not_s390,
 config_h.set('BUILD_THUNDERBOLT', host_is_linux_not_s390,
              description: 'Define to 1 to build the Thunderbolt panel')
 
-# Check for info panel
-gnome_session_libexecdir = get_option('gnome_session_libexecdir')
-if gnome_session_libexecdir == ''
-  gnome_session_libexecdir = control_center_libexecdir
-endif
-
 gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')
@@ -258,7 +268,10 @@ subdir('po')
 subdir('panels')
 subdir('shell')
 subdir('search-provider')
-subdir('tests')
+
+if get_option('tests')
+  subdir('tests')
+endif
 
 if get_option('documentation')
   subdir('man')
@@ -274,8 +287,8 @@ output += '\n        ' + meson.project_name() + ' - ' + meson.project_version() 
 output += '    ===================================\n'
 output += ' Options \n'
 output += '     Documentation .............................. ' + get_option('documentation').to_string() + '\n'
+output += '     Build Tests ................................ ' + get_option('tests').to_string() + '\n'
 output += '     Tracing .................................... ' + enable_tracing.to_string() + '\n'
-output += '     gnome-session libexecdir ................... ' + gnome_session_libexecdir + '\n'
 output += '     Optimized .................................. ' + control_center_optimized.to_string() + '\n'
 output += ' Panels \n'
 output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
@@ -283,5 +296,6 @@ output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.t
 output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_string() + '\n'
 output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
 output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
+output += '     Snap support ............................... ' + enable_snap.to_string() + '\n'
 
 message(output)

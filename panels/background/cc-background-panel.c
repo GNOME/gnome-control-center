@@ -59,8 +59,6 @@ struct _CcBackgroundPanel
   CcBackgroundItem *current_background;
   CcBackgroundItem *current_lock_background;
 
-  GCancellable *copy_cancellable;
-
   CcBackgroundChooser *background_chooser;
   GtkWidget *add_picture_button;
   CcBackgroundPreview *desktop_preview;
@@ -286,12 +284,8 @@ cc_background_panel_dispose (GObject *object)
 {
   CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
 
-  /* cancel any copy operation */
-  g_cancellable_cancel (panel->copy_cancellable);
-
   g_clear_object (&panel->settings);
   g_clear_object (&panel->lock_settings);
-  g_clear_object (&panel->copy_cancellable);
   g_clear_object (&panel->thumb_factory);
 
   g_clear_pointer (&panel->chooser, gtk_widget_destroy);
@@ -355,7 +349,6 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 
   panel->connection = g_application_get_dbus_connection (g_application_get_default ());
 
-  panel->copy_cancellable = g_cancellable_new ();
   panel->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
   panel->settings = g_settings_new (WP_PATH_ID);

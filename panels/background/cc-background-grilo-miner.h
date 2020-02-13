@@ -15,9 +15,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-
-#ifndef _CC_BACKGROUND_GRILO_MINER_H
-#define _CC_BACKGROUND_GRILO_MINER_H
+#pragma once
 
 #include <glib-object.h>
 
@@ -31,5 +29,3 @@ CcBackgroundGriloMiner   *cc_background_grilo_miner_new            (void);
 void                      cc_background_grilo_miner_start          (CcBackgroundGriloMiner *self);
 
 G_END_DECLS
-
-#endif /* _CC_BACKGROUND_GRILO_MINER_H */

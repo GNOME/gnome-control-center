@@ -1577,6 +1577,7 @@ cc_add_user_dialog_init (CcAddUserDialog *self)
         self->local_password_mode = ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
         dialog_validate (self);
         update_password_strength (self);
+        local_username_timeout (self);
 
         enterprise_check_domain (self);
 

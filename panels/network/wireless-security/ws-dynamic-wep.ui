@@ -1,95 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkListStore" id="model7">
+  <object class="GtkListStore" id="auth_model">
     <columns>
-      <!-- column-name gchararray -->
+      <!-- column-name label -->
       <column type="gchararray"/>
+      <!-- column-name id -->
+      <column type="gchararray"/>
+      <!-- column-name visible -->
+      <column type="gboolean"/>
     </columns>
     <data>
       <row>
-        <col id="0"> </col>
+        <col id="0" translatable="yes">TLS</col>
+        <col id="1">tls</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">LEAP</col>
+        <col id="1">leap</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">PWD</col>
+        <col id="1">pwd</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">FAST</col>
+        <col id="1">fast</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Tunneled TLS</col>
+        <col id="1">ttls</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">Protected EAP (PEAP)</col>
+        <col id="1">peap</col>
+        <col id="2">True</col>
       </row>
     </data>
   </object>
-  <object class="GtkNotebook" id="dynamic_wep_notebook">
+  <template class="WirelessSecurityDynamicWEP" parent="GtkGrid">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="show_tabs">False</property>
-    <property name="show_border">False</property>
+    <property name="column_spacing">6</property>
+    <property name="row_spacing">6</property>
     <child>
-      <object class="GtkTable" id="table12">
+      <object class="GtkLabel" id="auth_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="n_rows">3</property>
-        <property name="n_columns">2</property>
-        <property name="column_spacing">6</property>
-        <property name="row_spacing">6</property>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <object class="GtkLabel" id="dynamic_wep_auth_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Au_thentication</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">dynamic_wep_auth_combo</property>
-          </object>
-          <packing>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBox" id="dynamic_wep_auth_combo">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="model">model7</property>
-            <child>
-              <object class="GtkCellRendererText" id="renderer7"/>
-              <attributes>
-                <attribute name="text">0</attribute>
-              </attributes>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="y_options">GTK_FILL</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="dynamic_wep_method_vbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="spacing">6</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="right_attach">2</property>
-            <property name="top_attach">1</property>
-            <property name="bottom_attach">2</property>
-            <property name="x_options">GTK_FILL</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <child type="tab">
-      <object class="GtkLabel" id="label55">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">Au_thentication</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">auth_combo</property>
       </object>
       <packing>
-        <property name="tab_fill">False</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
       </packing>
     </child>
-  </object>
+    <child>
+      <object class="GtkComboBox" id="auth_combo">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="model">auth_model</property>
+        <child>
+          <object class="GtkCellRendererText"/>
+          <attributes>
+            <attribute name="text">0</attribute>
+          </attributes>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="method_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="spacing">6</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="width">2</property>
+        <property name="top_attach">1</property>
+      </packing>
+    </child>
+  </template>
 </interface>

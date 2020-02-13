@@ -23,7 +23,8 @@
 
 #include <glib-object.h>
 #include <glib/gi18n.h>
-
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 #include <NetworkManager.h>
 
 #include "panel-common.h"
@@ -36,50 +37,23 @@
 
 struct _NetDeviceEthernet
 {
-        NetDeviceSimple parent;
+        GtkBox             parent;
 
-        GtkBuilder *builder;
+        GtkListBox        *connection_list;
+        GtkButton         *details_button;
+        GtkFrame          *details_frame;
+        HdyActionRow      *details_row;
+        GtkLabel          *device_label;
+        GtkSwitch         *device_off_switch;
+        GtkScrolledWindow *scrolled_window;
 
-        GtkWidget *list;
-        GtkWidget *scrolled_window;
-        GtkWidget *details;
-        GtkWidget *details_button;
-        GtkWidget *add_profile_button;
-        gboolean   updating_device;
-
-        GHashTable *connections;
+        NMClient          *client;
+        NMDevice          *device;
+        gboolean           updating_device;
+        GHashTable        *connections;
 };
 
-G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, NET_TYPE_DEVICE_SIMPLE)
-
-static char *
-device_ethernet_get_speed (NetDeviceSimple *device_simple)
-{
-        NMDevice *nm_device;
-        guint speed;
-
-        nm_device = net_device_get_nm_device (NET_DEVICE (device_simple));
-
-        speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (nm_device));
-        if (speed > 0) {
-                /* Translators: network device speed */
-                return g_strdup_printf (_("%d Mb/s"), speed);
-        } else
-                return NULL;
-}
-
-static GtkWidget *
-device_ethernet_add_to_stack (NetObject    *object,
-                              GtkStack     *stack,
-                              GtkSizeGroup *heading_size_group)
-{
-        NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
-        GtkWidget *vbox;
-
-        vbox = GTK_WIDGET (gtk_builder_get_object (device->builder, "vbox6"));
-        gtk_stack_add_named (stack, vbox, net_object_get_id (object));
-        return vbox;
-}
+G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, GTK_TYPE_BOX)
 
 static void
 add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar *value)
@@ -107,9 +81,8 @@ add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar
 static gchar *
 get_last_used_string (NMConnection *connection)
 {
-        gchar *last_used = NULL;
-        GDateTime *now = NULL;
-        GDateTime *then = NULL;
+        g_autoptr(GDateTime) now = NULL;
+        g_autoptr(GDateTime) then = NULL;
         gint days;
         GTimeSpan diff;
         guint64 timestamp;
@@ -117,12 +90,10 @@ get_last_used_string (NMConnection *connection)
 
         s_con = nm_connection_get_setting_connection (connection);
         if (s_con == NULL)
-                goto out;
+                return NULL;
         timestamp = nm_setting_connection_get_timestamp (s_con);
-        if (timestamp == 0) {
-                last_used = g_strdup (_("never"));
-                goto out;
-        }
+        if (timestamp == 0)
+                return g_strdup (_("never"));
 
         /* calculate the amount of time that has elapsed */
         now = g_date_time_new_now_utc ();
@@ -130,18 +101,11 @@ get_last_used_string (NMConnection *connection)
         diff = g_date_time_difference  (now, then);
         days = diff / G_TIME_SPAN_DAY;
         if (days == 0)
-                last_used = g_strdup (_("today"));
+                return g_strdup (_("today"));
         else if (days == 1)
-                last_used = g_strdup (_("yesterday"));
+                return g_strdup (_("yesterday"));
         else
-                last_used = g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
-out:
-        if (now != NULL)
-                g_date_time_unref (now);
-        if (then != NULL)
-                g_date_time_unref (then);
-
-        return last_used;
+                return g_strdup_printf (ngettext ("%i day ago", "%i days ago", days), days);
 }
 
 static void
@@ -149,21 +113,30 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
 {
         NMIPConfig *ip4_config = NULL;
         NMIPConfig *ip6_config = NULL;
-        gchar *ip4_address = NULL;
-        gchar *ip4_route = NULL;
-        gchar *ip4_dns = NULL;
-        gchar *ip6_address = NULL;
+        const gchar *ip4_address = NULL;
+        const gchar *ip4_route = NULL;
+        g_autofree gchar *ip4_dns = NULL;
+        const gchar *ip6_address = NULL;
         gint i = 0;
 
         ip4_config = nm_device_get_ip4_config (device);
         if (ip4_config) {
-                ip4_address = panel_get_ip4_address_as_string (ip4_config, "address");
-                ip4_route = panel_get_ip4_address_as_string (ip4_config, "gateway");
-                ip4_dns = panel_get_ip4_dns_as_string (ip4_config);
+                GPtrArray *addresses;
+
+                addresses = nm_ip_config_get_addresses (ip4_config);
+                if (addresses->len > 0)
+                        ip4_address = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
+
+                ip4_route = nm_ip_config_get_gateway (ip4_config);
+                ip4_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ip4_config));
         }
         ip6_config = nm_device_get_ip6_config (device);
         if (ip6_config) {
-                ip6_address = panel_get_ip6_address_as_string (ip6_config);
+                GPtrArray *addresses;
+
+                addresses = nm_ip_config_get_addresses (ip6_config);
+                if (addresses->len > 0)
+                        ip6_address = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
         }
 
         if (ip4_address && ip6_address) {
@@ -184,19 +157,13 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
                 add_details_row (details, i++, _("DNS"), ip4_dns);
 
         if (nm_device_get_state (device) != NM_DEVICE_STATE_ACTIVATED) {
-                gchar *last_used;
+                g_autofree gchar *last_used = NULL;
                 last_used = get_last_used_string (connection);
                 add_details_row (details, i++, _("Last used"), last_used);
-                g_free (last_used);
         }
-
-        g_free (ip4_address);
-        g_free (ip4_route);
-        g_free (ip4_dns);
-        g_free (ip6_address);
 }
 
-static void populate_ui (NetDeviceEthernet *device);
+static void populate_ui (NetDeviceEthernet *self);
 
 static gboolean
 device_state_to_off_switch (NMDeviceState state)
@@ -214,99 +181,91 @@ device_state_to_off_switch (NMDeviceState state)
 }
 
 static void
-device_ethernet_refresh_ui (NetDeviceEthernet *device)
+device_ethernet_refresh_ui (NetDeviceEthernet *self)
 {
-        NMDevice *nm_device;
         NMDeviceState state;
-        GtkWidget *widget;
-        gchar *speed = NULL;
+        g_autofree gchar *speed_text = NULL;
+        g_autofree gchar *status = NULL;
 
-        nm_device = net_device_get_nm_device (NET_DEVICE (device));
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "label_device"));
-        gtk_label_set_label (GTK_LABEL (widget), net_object_get_title (NET_OBJECT (device)));
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device->builder, "device_off_switch"));
-        state = nm_device_get_state (nm_device);
-        gtk_widget_set_sensitive (widget,
+        state = nm_device_get_state (self->device);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->device_off_switch),
                                   state != NM_DEVICE_STATE_UNAVAILABLE
                                   && state != NM_DEVICE_STATE_UNMANAGED);
-        device->updating_device = TRUE;
-        gtk_switch_set_active (GTK_SWITCH (widget), device_state_to_off_switch (state));
-        device->updating_device = FALSE;
+        self->updating_device = TRUE;
+        gtk_switch_set_active (self->device_off_switch, device_state_to_off_switch (state));
+        self->updating_device = FALSE;
 
-        if (state != NM_DEVICE_STATE_UNAVAILABLE)
-                speed = net_device_simple_get_speed (NET_DEVICE_SIMPLE (device));
-        panel_set_device_row_status (device->builder, "details_row", nm_device, speed);
+        if (state != NM_DEVICE_STATE_UNAVAILABLE) {
+                guint speed = nm_device_ethernet_get_speed (NM_DEVICE_ETHERNET (self->device));
+                if (speed > 0) {
+                        /* Translators: network device speed */
+                        speed_text = g_strdup_printf (_("%d Mb/s"), speed);
+                }
+        }
+        status = panel_device_status_to_localized_string (self->device, speed_text);
+        hdy_action_row_set_title (self->details_row, status);
 
-        populate_ui (device);
+        populate_ui (self);
 }
 
 static void
-editor_done (NetConnectionEditor *editor,
-             gboolean             success,
-             NetDeviceEthernet   *device)
+editor_done (NetDeviceEthernet *self)
 {
-        device_ethernet_refresh_ui (device);
+        device_ethernet_refresh_ui (self);
+        g_object_unref (self);
 }
 
 static void
-show_details (GtkButton *button, NetDeviceEthernet *device, const gchar *title)
+show_details (NetDeviceEthernet *self, GtkButton *button, const gchar *title)
 {
         GtkWidget *row;
         NMConnection *connection;
         GtkWidget *window;
         NetConnectionEditor *editor;
-        NMClient *client;
-        NMDevice *nmdev;
 
-        window = gtk_widget_get_toplevel (GTK_WIDGET (button));
+        window = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
         row = g_object_get_data (G_OBJECT (button), "row");
         connection = NM_CONNECTION (g_object_get_data (G_OBJECT (row), "connection"));
 
-        nmdev = net_device_get_nm_device (NET_DEVICE (device));
-        client = net_object_get_client (NET_OBJECT (device));
-        editor = net_connection_editor_new (GTK_WINDOW (window), connection, nmdev, NULL, client);
+        editor = net_connection_editor_new (GTK_WINDOW (window), connection, self->device, NULL, self->client);
         if (title)
                 net_connection_editor_set_title (editor, title);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), device);
+        g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), g_object_ref (self));
         net_connection_editor_run (editor);
 }
 
 static void
-show_details_for_row (GtkButton *button, NetDeviceEthernet *device)
+show_details_for_row (NetDeviceEthernet *self, GtkButton *button)
 {
-        show_details (button, device, NULL);
+        show_details (self, button, NULL);
 }
 
 static void
-show_details_for_wired (GtkButton *button, NetDeviceEthernet *device)
+details_button_clicked_cb (NetDeviceEthernet *self)
 {
         /* Translators: This is used as the title of the connection
          * details window for ethernet, if there is only a single
          * profile. It is also used to display ethernet in the
          * device list.
          */
-        show_details (button, device, _("Wired"));
+        show_details (self, self->details_button, _("Wired"));
 }
 
 static void
-add_row (NetDeviceEthernet *device, NMConnection *connection)
+add_row (NetDeviceEthernet *self, NMConnection *connection)
 {
         GtkWidget *row;
         GtkWidget *widget;
         GtkWidget *box;
         GtkWidget *details;
-        NMDevice *nmdev;
         NMActiveConnection *aconn;
         gboolean active;
         GtkWidget *image;
 
         active = FALSE;
 
-        nmdev = net_device_get_nm_device (NET_DEVICE (device));
-        aconn = nm_device_get_active_connection (nmdev);
+        aconn = nm_device_get_active_connection (self->device);
         if (aconn) {
                 const gchar *uuid1, *uuid2;
                 uuid1 = nm_active_connection_get_uuid (aconn);
@@ -336,7 +295,7 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
 
                 gtk_box_pack_start (GTK_BOX (row), details, FALSE, TRUE, 0);
 
-                add_details (details, nmdev, connection);
+                add_details (details, self->device, connection);
         }
 
         /* filler */
@@ -360,88 +319,82 @@ add_row (NetDeviceEthernet *device, NMConnection *connection)
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
         g_object_set_data (G_OBJECT (widget), "edit", widget);
         g_object_set_data (G_OBJECT (widget), "row", row);
-        g_signal_connect (widget, "clicked",
-                          G_CALLBACK (show_details_for_row), device);
+        g_signal_connect_swapped (widget, "clicked", G_CALLBACK (show_details_for_row), self);
 
         gtk_widget_show_all (row);
 
         g_object_set_data (G_OBJECT (row), "connection", connection);
 
-        gtk_container_add (GTK_CONTAINER (device->list), row);
+        gtk_container_add (GTK_CONTAINER (self->connection_list), row);
 }
 
 static void
-connection_removed (NMClient           *client,
-                    NMRemoteConnection *connection,
-                    NetDeviceEthernet  *device)
+connection_removed (NetDeviceEthernet  *self, NMRemoteConnection *connection)
 {
-        if (g_hash_table_remove (device->connections, connection))
-                device_ethernet_refresh_ui (device);
+        if (g_hash_table_remove (self->connections, connection))
+                device_ethernet_refresh_ui (self);
 }
 
 static void
-populate_ui (NetDeviceEthernet *device)
+populate_ui (NetDeviceEthernet *self)
 {
         GList *children, *c;
         GSList *connections, *l;
         NMConnection *connection;
         gint n_connections;
 
-        children = gtk_container_get_children (GTK_CONTAINER (device->list));
+        children = gtk_container_get_children (GTK_CONTAINER (self->connection_list));
         for (c = children; c; c = c->next) {
-                gtk_container_remove (GTK_CONTAINER (device->list), c->data);
+                gtk_container_remove (GTK_CONTAINER (self->connection_list), c->data);
         }
         g_list_free (children);
 
-        connections = net_device_get_valid_connections (NET_DEVICE (device));
+        connections = net_device_get_valid_connections (self->client, self->device);
         for (l = connections; l; l = l->next) {
                 NMConnection *connection = l->data;
-                if (!g_hash_table_contains (device->connections, connection)) {
-                        g_hash_table_add (device->connections, connection);
+                if (!g_hash_table_contains (self->connections, connection)) {
+                        g_hash_table_add (self->connections, connection);
                 }
         }
         n_connections = g_slist_length (connections);
 
         if (n_connections > 1) {
-                gtk_widget_hide (device->details);
+                gtk_widget_hide (GTK_WIDGET (self->details_frame));
                 for (l = connections; l; l = l->next) {
                         NMConnection *connection = l->data;
-                        add_row (device, connection);
+                        add_row (self, connection);
                 }
-                gtk_widget_show (device->scrolled_window);
+                gtk_widget_show (GTK_WIDGET (self->scrolled_window));
         } else if (n_connections == 1) {
                 connection = connections->data;
-                gtk_widget_hide (device->scrolled_window);
-                gtk_widget_show_all (device->details);
-                g_object_set_data (G_OBJECT (device->details_button), "row", device->details_button);
-                g_object_set_data (G_OBJECT (device->details_button), "connection", connection);
+                gtk_widget_hide (GTK_WIDGET (self->scrolled_window));
+                gtk_widget_show_all (GTK_WIDGET (self->details_frame));
+                g_object_set_data (G_OBJECT (self->details_button), "row", self->details_button);
+                g_object_set_data (G_OBJECT (self->details_button), "connection", connection);
 
         } else {
-                gtk_widget_hide (device->scrolled_window);
-                gtk_widget_hide (device->details);
+                gtk_widget_hide (GTK_WIDGET (self->scrolled_window));
+                gtk_widget_hide (GTK_WIDGET (self->details_frame));
         }
 
         g_slist_free (connections);
 }
 
 static void
-client_connection_added_cb (NMClient           *client,
-                            NMRemoteConnection *connection,
-                            NetDeviceEthernet  *device)
+client_connection_added_cb (NetDeviceEthernet  *self)
 {
-        device_ethernet_refresh_ui (device);
+        device_ethernet_refresh_ui (self);
 }
 
 static void
-add_profile (GtkButton *button, NetDeviceEthernet *device)
+add_profile_button_clicked_cb (NetDeviceEthernet *self)
 {
         NMConnection *connection;
         NMSettingConnection *sc;
-        gchar *uuid, *id;
+        g_autofree gchar *uuid = NULL;
+        g_autofree gchar *id = NULL;
         NetConnectionEditor *editor;
         GtkWidget *window;
-        NMClient *client;
-        NMDevice *nmdev;
         const GPtrArray *connections;
 
         connection = nm_simple_connection_new ();
@@ -450,8 +403,7 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
 
         uuid = nm_utils_uuid_generate ();
 
-        client = net_object_get_client (NET_OBJECT (device));
-        connections = nm_client_get_connections (client);
+        connections = nm_client_get_connections (self->client);
         id = ce_page_get_next_available_name (connections, NAME_FORMAT_PROFILE, NULL);
 
         g_object_set (sc,
@@ -463,165 +415,128 @@ add_profile (GtkButton *button, NetDeviceEthernet *device)
 
         nm_connection_add_setting (connection, nm_setting_wired_new ());
 
-        g_free (uuid);
-        g_free (id);
+        window = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
-        window = gtk_widget_get_toplevel (GTK_WIDGET (button));
-
-        nmdev = net_device_get_nm_device (NET_DEVICE (device));
-        editor = net_connection_editor_new (GTK_WINDOW (window), connection, nmdev, NULL, client);
-        g_signal_connect (editor, "done", G_CALLBACK (editor_done), device);
+        editor = net_connection_editor_new (GTK_WINDOW (window), connection, self->device, NULL, self->client);
+        g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), g_object_ref (self));
         net_connection_editor_run (editor);
 }
 
 static void
-device_off_toggled (GtkSwitch         *sw,
-                    GParamSpec        *pspec,
-                    NetDeviceEthernet *device)
+device_off_switch_changed_cb (NetDeviceEthernet *self)
 {
-        NMClient *client;
-        NMDevice *nm_device;
         NMConnection *connection;
 
-        if (device->updating_device)
+        if (self->updating_device)
                 return;
 
-        client = net_object_get_client (NET_OBJECT (device));
-        nm_device = net_device_get_nm_device (NET_DEVICE (device));
-
-        if (gtk_switch_get_active (sw)) {
-                connection = net_device_get_find_connection (NET_DEVICE (device));
+        if (gtk_switch_get_active (self->device_off_switch)) {
+                connection = net_device_get_find_connection (self->client, self->device);
                 if (connection != NULL) {
-                        nm_client_activate_connection_async (client,
+                        nm_client_activate_connection_async (self->client,
                                                              connection,
-                                                             nm_device,
+                                                             self->device,
                                                              NULL, NULL, NULL, NULL);
                 }
         } else {
-                nm_device_disconnect (nm_device, NULL, NULL);
+                nm_device_disconnect (self->device, NULL, NULL);
         }
 }
 
 static void
-device_title_changed (NetDeviceEthernet *device,
-                      GParamSpec        *pspec,
-                      gpointer           user_data)
+connection_list_row_activated_cb (NetDeviceEthernet *self, GtkListBoxRow *row)
 {
-        device_ethernet_refresh_ui (device);
-}
-
-static void
-connection_activated (GtkListBox *list, GtkListBoxRow *row, NetDeviceEthernet *device)
-{
-        NMClient *client;
-        NMDevice *nm_device;
         NMConnection *connection;
 
-        client = net_object_get_client (NET_OBJECT (device));
-        nm_device = net_device_get_nm_device (NET_DEVICE (device));
-
-        if (!NM_IS_DEVICE_ETHERNET (nm_device) ||
-            !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (nm_device)))
+        if (!NM_IS_DEVICE_ETHERNET (self->device) ||
+            !nm_device_ethernet_get_carrier (NM_DEVICE_ETHERNET (self->device)))
                 return;
 
         connection = NM_CONNECTION (g_object_get_data (G_OBJECT (gtk_bin_get_child (GTK_BIN (row))), "connection"));
 
-        nm_client_activate_connection_async (client,
+        nm_client_activate_connection_async (self->client,
                                              connection,
-                                             nm_device,
+                                             self->device,
                                              NULL, NULL, NULL, NULL);
-}
-
-static void
-device_ethernet_constructed (GObject *object)
-{
-        NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
-        NMClient *client;
-        GtkWidget *list;
-        GtkWidget *swin;
-        GtkWidget *widget;
-
-        widget = GTK_WIDGET (gtk_builder_get_object (device->builder,
-                                                     "device_off_switch"));
-        g_signal_connect (widget, "notify::active",
-                          G_CALLBACK (device_off_toggled), device);
-
-        device->scrolled_window = swin = GTK_WIDGET (gtk_builder_get_object (device->builder, "list"));
-        device->list = list = GTK_WIDGET (gtk_list_box_new ());
-        gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
-        gtk_container_add (GTK_CONTAINER (swin), list);
-        g_signal_connect (list, "row-activated",
-                          G_CALLBACK (connection_activated), device);
-        gtk_widget_show (list);
-
-        device->details = GTK_WIDGET (gtk_builder_get_object (device->builder, "details"));
-
-        device->details_button = GTK_WIDGET (gtk_builder_get_object (device->builder, "details_button"));
-        g_signal_connect (device->details_button, "clicked",
-                          G_CALLBACK (show_details_for_wired), device);
-
-        device->add_profile_button = GTK_WIDGET (gtk_builder_get_object (device->builder, "add_profile_button"));
-        g_signal_connect (device->add_profile_button, "clicked",
-                          G_CALLBACK (add_profile), device);
-
-        client = net_object_get_client (NET_OBJECT (object));
-        g_signal_connect_object (client, NM_CLIENT_CONNECTION_ADDED,
-                                 G_CALLBACK (client_connection_added_cb), object, 0);
-        g_signal_connect_object (client, NM_CLIENT_CONNECTION_REMOVED,
-                                 G_CALLBACK (connection_removed), device, 0);
-
-        device_ethernet_refresh_ui (device);
 }
 
 static void
 device_ethernet_finalize (GObject *object)
 {
-        NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
+        NetDeviceEthernet *self = NET_DEVICE_ETHERNET (object);
 
-        g_object_unref (device->builder);
-        g_hash_table_destroy (device->connections);
+        g_clear_object (&self->client);
+        g_clear_object (&self->device);
+        g_hash_table_destroy (self->connections);
 
         G_OBJECT_CLASS (net_device_ethernet_parent_class)->finalize (object);
 }
 
 static void
-device_ethernet_refresh (NetObject *object)
-{
-        NetDeviceEthernet *device = NET_DEVICE_ETHERNET (object);
-        device_ethernet_refresh_ui (device);
-}
-
-static void
 net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
 {
-        NetDeviceSimpleClass *simple_class = NET_DEVICE_SIMPLE_CLASS (klass);
-        NetObjectClass *obj_class = NET_OBJECT_CLASS (klass);
         GObjectClass *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-        simple_class->get_speed = device_ethernet_get_speed;
-        obj_class->refresh = device_ethernet_refresh;
-        obj_class->add_to_stack = device_ethernet_add_to_stack;
-        object_class->constructed = device_ethernet_constructed;
         object_class->finalize = device_ethernet_finalize;
+
+        gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-ethernet.ui");
+
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, connection_list);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_button);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_frame);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_row);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_off_switch);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, scrolled_window);
+
+        gtk_widget_class_bind_template_callback (widget_class, connection_list_row_activated_cb);
+        gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, details_button_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, add_profile_button_clicked_cb);
 }
 
 static void
-net_device_ethernet_init (NetDeviceEthernet *device)
+net_device_ethernet_init (NetDeviceEthernet *self)
 {
-        GError *error = NULL;
+        gtk_widget_init_template (GTK_WIDGET (self));
 
-        device->builder = gtk_builder_new ();
-        gtk_builder_add_from_resource (device->builder,
-                                       "/org/gnome/control-center/network/network-ethernet.ui",
-                                       &error);
-        if (error != NULL) {
-                g_warning ("Could not load interface file: %s", error->message);
-                g_error_free (error);
-                return;
-        }
+        self->connections = g_hash_table_new (NULL, NULL);
 
-        device->connections = g_hash_table_new (NULL, NULL);
+        gtk_list_box_set_header_func (self->connection_list, cc_list_box_update_header_func, NULL, NULL);
+}
 
-        g_signal_connect (device, "notify::title", G_CALLBACK (device_title_changed), NULL);
+NetDeviceEthernet *
+net_device_ethernet_new (NMClient *client, NMDevice *device)
+{
+        NetDeviceEthernet *self;
+
+        self = g_object_new (net_device_ethernet_get_type (), NULL);
+        self->client = g_object_ref (client);
+        self->device = g_object_ref (device);
+
+        g_signal_connect_object (client, NM_CLIENT_CONNECTION_ADDED,
+                                 G_CALLBACK (client_connection_added_cb), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (client, NM_CLIENT_CONNECTION_REMOVED,
+                                 G_CALLBACK (connection_removed), self, G_CONNECT_SWAPPED);
+
+        g_signal_connect_object (device, "state-changed", G_CALLBACK (device_ethernet_refresh_ui), self, G_CONNECT_SWAPPED);
+
+        device_ethernet_refresh_ui (self);
+
+        return self;
+}
+
+NMDevice *
+net_device_ethernet_get_device (NetDeviceEthernet *self)
+{
+        g_return_val_if_fail (NET_IS_DEVICE_ETHERNET (self), NULL);
+        return self->device;
+}
+
+void
+net_device_ethernet_set_title (NetDeviceEthernet *self, const gchar *title)
+{
+        g_return_if_fail (NET_IS_DEVICE_ETHERNET (self));
+        gtk_label_set_label (self->device_label, title);
 }

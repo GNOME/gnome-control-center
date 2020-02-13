@@ -20,11 +20,15 @@
  * Copyright 2007 - 2014 Red Hat, Inc.
  */
 
-#ifndef WS_WPA_PSK_H
-#define WS_WPA_PSK_H
+#pragma once
 
-typedef struct _WirelessSecurityWPAPSK WirelessSecurityWPAPSK;
+#include <gtk/gtk.h>
+#include <NetworkManager.h>
 
-WirelessSecurityWPAPSK * ws_wpa_psk_new (NMConnection *connection, gboolean secrets_only);
+G_BEGIN_DECLS
 
-#endif /* WS_WEP_KEY_H */
+G_DECLARE_FINAL_TYPE (WirelessSecurityWPAPSK, ws_wpa_psk, WS, WPA_PSK, GtkGrid)
+
+WirelessSecurityWPAPSK *ws_wpa_psk_new (NMConnection *connection);
+
+G_END_DECLS

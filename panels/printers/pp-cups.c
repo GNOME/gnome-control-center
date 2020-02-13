@@ -18,6 +18,8 @@
  * Author: Marek Kasik <mkasik@redhat.com>
  */
 
+#include "config.h"
+
 #include "pp-cups.h"
 
 #if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
@@ -120,7 +122,12 @@ connection_test_thread (GTask        *task,
 {
   http_t *http;
 
+#ifdef HAVE_CUPS_HTTPCONNECT2
+  http = httpConnect2 (cupsServer (), ippPort (), NULL, AF_UNSPEC,
+                       cupsEncryption (), 1, 30000, NULL);
+#else
   http = httpConnectEncrypt (cupsServer (), ippPort (), cupsEncryption ());
+#endif
   httpClose (http);
 
   if (g_task_set_return_on_cancel (task, FALSE))

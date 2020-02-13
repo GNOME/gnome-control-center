@@ -43,10 +43,10 @@ enums_header = files(
 common_sources += gnome.mkenums(
   enums + '.h',
   sources: enums_header,
-  fhead: '#ifndef __GDESKTOP_ENUMS_TYPES_H__\n#define __GDESKTOP_ENUMS_TYPES_H__\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n',
+  fhead: '#pragma once\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n',
   fprod: '/* enumerations from "@filename@" */\n',
   vhead: 'GType @enum_name@_get_type (void) G_GNUC_CONST;\n#define G_DESKTOP_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n',
-  ftail: 'G_END_DECLS\n\n#endif /* __GDESKTOP_ENUMS_TYPES_H__ */'
+  ftail: 'G_END_DECLS\n'
 )
 
 common_sources += gnome.mkenums(
@@ -101,6 +101,10 @@ cflags += [
   '-DDATADIR="@0@"'.format(control_center_datadir),
   '-DGNOME_DESKTOP_USE_UNSTABLE_API'
 ]
+
+if gnome_desktop_dep.version().version_compare('>=3.35.4')
+  cflags += '-DGNOME_DESKTOP_BG_API_BREAK'
+endif
 
 panels_libs += static_library(
   cappletname,

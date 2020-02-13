@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.3 -->
+<interface>
+  <requires lib="gtk+" version="3.12"/>
+  <template class="PpOptionsDialog" parent="GtkDialog">
+    <property name="width_request">500</property>
+    <property name="height_request">400</property>
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="resizable">False</property>
+    <property name="type_hint">dialog</property>
+    <child internal-child="headerbar">
+      <object class="GtkHeaderBar">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes" comments="Translators: This button triggers the printing of a test page.">Test Page</property>
+            <signal name="clicked" handler="test_page_cb" object="PpOptionsDialog" swapped="yes"/>
+          </object>
+          <packing>
+            <property name="pack_type">start</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <child>
+          <object class="GtkStack" id="stack">
+            <property name="visible">True</property>
+            <property name="homogeneous">True</property>
+            <child>
+              <object class="GtkBox" id="main_box">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <child>
+                      <object class="GtkScrolledWindow">
+                        <property name="width_request">120</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="hscrollbar_policy">never</property>
+                        <property name="shadow_type">in</property>
+                        <child>
+                          <object class="GtkTreeView" id="categories_treeview">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="headers_visible">False</property>
+                            <child internal-child="selection">
+                              <object class="GtkTreeSelection" id="categories_selection">
+                                <signal name="changed" handler="category_selection_changed_cb" object="PpOptionsDialog" swapped="yes"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkNotebook" id="notebook">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tab_pos">left</property>
+                        <property name="show_tabs">False</property>
+                      </object>
+                      <packing>
+                        <property name="expand">True</property>
+                        <property name="fill">True</property>
+                        <property name="pack_type">end</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">0</property>
+                  </packing>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinner" id="spinner">
+                <property name="visible">True</property>
+                <property name="width_request">24</property>
+                <property name="height_request">24</property>
+                <property name="can_focus">False</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

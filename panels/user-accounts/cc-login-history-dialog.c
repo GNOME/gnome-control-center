@@ -125,7 +125,7 @@ get_login_history (ActUser *user)
 	value = act_user_get_login_history (user);
 	g_variant_get ((GVariant *) value, "a(xxa{sv})", &iter);
 	while (g_variant_iter_loop (iter, "(xxa{sv})", &history.login_time, &history.logout_time, &iter2)) {
-		while (g_variant_iter_loop (iter2, "{sv}", &key, &variant)) {
+		while (g_variant_iter_loop (iter2, "{&sv}", &key, &variant)) {
 			if (g_strcmp0 (key, "type") == 0) {
 				history.type = g_variant_get_string (variant, NULL);
 			}

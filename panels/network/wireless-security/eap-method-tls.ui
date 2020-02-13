@@ -1,189 +1,171 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkNotebook" id="eap_tls_notebook">
-    <property name="visible">True</property>
+  <template class="EAPMethodTLS" parent="GtkGrid">
     <property name="can_focus">False</property>
-    <property name="show_tabs">False</property>
-    <property name="show_border">False</property>
+    <property name="valign">start</property>
+    <property name="column_spacing">6</property>
+    <property name="row_spacing">6</property>
     <child>
-      <object class="GtkGrid" id="eap_tls_grid">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="valign">start</property>
-        <property name="column_spacing">6</property>
-        <property name="row_spacing">6</property>
-        <child>
-          <placeholder/>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_tls_identity_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">I_dentity</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_tls_identity_entry</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="eap_tls_identity_entry">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="activates_default">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_tls_user_cert_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">_User certificate</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_tls_user_cert_button</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkFileChooserButton" id="eap_tls_user_cert_button">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_tls_ca_cert_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">C_A certificate</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_tls_ca_cert_button</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkFileChooserButton" id="eap_tls_ca_cert_button">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="eap_tls_ca_cert_not_required_checkbox">
-            <property name="label" translatable="yes">No CA certificate is _required</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="receives_default">False</property>
-            <property name="use_underline">True</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_tls_private_key_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Private _key</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_tls_private_key_button</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkFileChooserButton" id="eap_tls_private_key_button">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_tls_private_key_password_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">_Private key password</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_tls_private_key_password_entry</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">5</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="eap_tls_private_key_password_entry">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="visibility">False</property>
-            <property name="activates_default">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">5</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="show_checkbutton_eaptls">
-            <property name="label" translatable="yes">Sho_w password</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="receives_default">False</property>
-            <property name="use_underline">True</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">6</property>
-          </packing>
-        </child>
-      </object>
+      <placeholder/>
     </child>
-    <child type="tab">
-      <object class="GtkLabel" id="label34">
+    <child>
+      <object class="GtkLabel" id="identity_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">I_dentity</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">identity_entry</property>
       </object>
       <packing>
-        <property name="tab_fill">False</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
       </packing>
     </child>
-  </object>
+    <child>
+      <object class="GtkEntry" id="identity_entry">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="activates_default">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="user_cert_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">_User certificate</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">user_cert_button</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkFileChooserButton" id="user_cert_button">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="ca_cert_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">C_A certificate</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">ca_cert_button</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkFileChooserButton" id="ca_cert_button">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="ca_cert_not_required_check">
+        <property name="label" translatable="yes">No CA certificate is _required</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="receives_default">False</property>
+        <property name="use_underline">True</property>
+        <property name="draw_indicator">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="private_key_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">Private _key</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">private_key_button</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkFileChooserButton" id="private_key_button">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="private_key_password_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">_Private key password</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">private_key_password_entry</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">5</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkEntry" id="private_key_password_entry">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="visibility">False</property>
+        <property name="activates_default">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">5</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="show_password_check">
+        <property name="label" translatable="yes">Sho_w password</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="receives_default">False</property>
+        <property name="use_underline">True</property>
+        <property name="draw_indicator">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">6</property>
+      </packing>
+    </child>
+  </template>
 </interface>

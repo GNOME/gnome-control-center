@@ -54,32 +54,31 @@ struct _CcWindow
 {
   GtkApplicationWindow parent;
 
-  GtkWidget  *stack;
-  GtkWidget  *header;
-  GtkWidget  *header_box;
-  GtkWidget  *main_leaflet;
-  GtkWidget  *list_scrolled;
-  GtkWidget  *panel_headerbar;
-  GtkWidget  *search_scrolled;
-  GtkWidget  *panel_list;
-  GtkWidget  *previous_button;
-  GtkWidget  *back_revealer;
-  GtkWidget  *top_left_box;
-  GtkWidget  *top_right_box;
-  GtkWidget  *search_button;
-  GtkWidget  *search_bar;
-  GtkWidget  *search_entry;
-  GtkWidget  *development_warning_dialog;
+  GtkRevealer       *back_revealer;
+  GtkMessageDialog  *development_warning_dialog;
+  GtkHeaderBar      *header;
+  HdyLeaflet        *header_box;
+  HdyHeaderGroup    *header_group;
+  GtkSizeGroup      *header_sizegroup;
+  HdyLeaflet        *main_leaflet;
+  GtkHeaderBar      *panel_headerbar;
+  CcPanelList       *panel_list;
+  GtkButton         *previous_button;
+  GtkSearchBar      *search_bar;
+  GtkToggleButton   *search_button;
+  GtkSearchEntry    *search_entry;
+  GtkBox            *sidebar_box;
+  GtkStack          *stack;
+  GtkBox            *top_left_box;
+  GtkBox            *top_right_box;
+
   GtkWidget  *current_panel;
   char       *current_panel_id;
   GQueue     *previous_panels;
 
-  HdyHeaderGroup *header_group;
-  GtkSizeGroup *header_sizegroup;
-
   GPtrArray  *custom_widgets;
 
-  GtkListStore *store;
+  CcShellModel *store;
 
   CcPanel *active_panel;
   GSettings *settings;
@@ -103,7 +102,7 @@ enum
 static gboolean
 in_flatpak_sandbox (void)
 {
-  return g_file_test ("/.flatpak-info", G_FILE_TEST_EXISTS);
+  return g_strcmp0 (PROFILE, "development") == 0;
 }
 
 static void
@@ -121,7 +120,7 @@ remove_all_custom_widgets (CcWindow *self)
       widget = g_ptr_array_index (self->custom_widgets, i);
       parent = gtk_widget_get_parent (widget);
 
-      g_assert (parent == self->top_right_box || parent == self->top_left_box);
+      g_assert (parent == GTK_WIDGET (self->top_right_box) || parent == GTK_WIDGET (self->top_left_box));
       gtk_container_remove (GTK_CONTAINER (parent), widget);
     }
   g_ptr_array_set_size (self->custom_widgets, 0);
@@ -130,10 +129,23 @@ remove_all_custom_widgets (CcWindow *self)
 }
 
 static void
-on_sidebar_activated_cb (CcPanel  *panel,
-                         CcWindow *self)
+show_panel (CcWindow *self)
 {
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
+  hdy_leaflet_set_visible_child (self->main_leaflet, GTK_WIDGET (self->stack));
+  hdy_leaflet_set_visible_child (self->header_box, GTK_WIDGET (self->panel_headerbar));
+}
+
+static void
+show_sidebar (CcWindow *self)
+{
+  hdy_leaflet_set_visible_child (self->main_leaflet, GTK_WIDGET (self->sidebar_box));
+  hdy_leaflet_set_visible_child (self->header_box, GTK_WIDGET (self->header));
+}
+
+static void
+on_sidebar_activated_cb (CcWindow *self)
+{
+  show_panel (self);
 }
 
 static gboolean
@@ -144,7 +156,7 @@ activate_panel (CcWindow          *self,
                 GIcon             *gicon,
                 CcPanelVisibility  visibility)
 {
-  g_autoptr (GTimer) timer = NULL;
+  g_autoptr(GTimer) timer = NULL;
   GtkWidget *sidebar_widget;
   GtkWidget *title_widget;
   gdouble ellapsed_time;
@@ -173,25 +185,25 @@ activate_panel (CcWindow          *self,
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
   gtk_widget_show (self->current_panel);
 
-  gtk_stack_add_named (GTK_STACK (self->stack), self->current_panel, id);
+  gtk_stack_add_named (self->stack, self->current_panel, id);
 
   /* switch to the new panel */
   gtk_widget_show (self->current_panel);
-  gtk_stack_set_visible_child_name (GTK_STACK (self->stack), id);
+  gtk_stack_set_visible_child_name (self->stack, id);
 
   /* set the title of the window */
   gtk_window_set_role (GTK_WINDOW (self), id);
-  gtk_header_bar_set_title (GTK_HEADER_BAR (self->panel_headerbar), name);
+  gtk_header_bar_set_title (self->panel_headerbar, name);
 
   title_widget = cc_panel_get_title_widget (CC_PANEL (self->current_panel));
-  gtk_header_bar_set_custom_title (GTK_HEADER_BAR (self->panel_headerbar), title_widget);
+  gtk_header_bar_set_custom_title (self->panel_headerbar, title_widget);
 
   sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
-  cc_panel_list_add_sidebar_widget (CC_PANEL_LIST (self->panel_list), sidebar_widget);
+  cc_panel_list_add_sidebar_widget (self->panel_list, sidebar_widget);
   /* Ensure we show the panel when when the leaflet is folded and a sidebar
    * widget's row is activated.
    */
-  g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, 0);
+  g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, G_CONNECT_SWAPPED);
 
   /* Finish profiling */
   g_timer_stop (timer);
@@ -204,14 +216,10 @@ activate_panel (CcWindow          *self,
 }
 
 static void
-add_current_panel_to_history (CcShell    *shell,
+add_current_panel_to_history (CcWindow   *self,
                               const char *start_id)
 {
-  CcWindow *self;
-
   g_return_if_fail (start_id != NULL);
-
-  self = CC_WINDOW (shell);
 
   if (!self->current_panel_id || g_strcmp0 (self->current_panel_id, start_id) == 0)
     return;
@@ -260,17 +268,13 @@ update_list_title (CcWindow *self)
 
   CC_ENTRY;
 
-  view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
+  view = cc_panel_list_get_view (self->panel_list);
   title = NULL;
 
   switch (view)
     {
-    case CC_PANEL_LIST_DETAILS:
-      title = g_strdup (_("Details"));
-      break;
-
-    case CC_PANEL_LIST_DEVICES:
-      title = g_strdup (_("Devices"));
+    case CC_PANEL_LIST_PRIVACY:
+      title = g_strdup (_("Privacy"));
       break;
 
     case CC_PANEL_LIST_MAIN:
@@ -291,16 +295,16 @@ update_list_title (CcWindow *self)
     }
 
   if (title)
-    gtk_header_bar_set_title (GTK_HEADER_BAR (self->header), title);
+    gtk_header_bar_set_title (self->header, title);
 
   CC_EXIT;
 }
 
 static void
-on_row_changed_cb (GtkTreeModel *model,
+on_row_changed_cb (CcWindow     *self,
                    GtkTreePath  *path,
                    GtkTreeIter  *iter,
-                   CcWindow     *self)
+                   GtkTreeModel *model)
 {
   g_autofree gchar *id = NULL;
   CcPanelVisibility visibility;
@@ -310,22 +314,22 @@ on_row_changed_cb (GtkTreeModel *model,
                       COL_VISIBILITY, &visibility,
                       -1);
 
-  cc_panel_list_set_panel_visibility (CC_PANEL_LIST (self->panel_list), id, visibility);
+  cc_panel_list_set_panel_visibility (self->panel_list, id, visibility);
 }
 
 static void
-setup_model (CcWindow *shell)
+setup_model (CcWindow *self)
 {
   GtkTreeModel *model;
   GtkTreeIter iter;
   gboolean valid;
 
   /* CcApplication must have a valid model at this point */
-  g_assert (shell->store != NULL);
+  g_assert (self->store != NULL);
 
-  model = GTK_TREE_MODEL (shell->store);
+  model = GTK_TREE_MODEL (self->store);
 
-  cc_panel_loader_fill_model (CC_SHELL_MODEL (shell->store));
+  cc_panel_loader_fill_model (self->store);
 
   /* Create a row for each panel */
   valid = gtk_tree_model_get_iter_first (model, &iter);
@@ -339,6 +343,7 @@ setup_model (CcWindow *shell)
       g_autofree gchar *id = NULL;
       g_auto(GStrv) keywords = NULL;
       CcPanelVisibility visibility;
+      gboolean has_sidebar;
       const gchar *icon_name = NULL;
 
       gtk_tree_model_get (model, &iter,
@@ -349,25 +354,27 @@ setup_model (CcWindow *shell)
                           COL_NAME, &name,
                           COL_KEYWORDS, &keywords,
                           COL_VISIBILITY, &visibility,
+                          COL_HAS_SIDEBAR, &has_sidebar,
                           -1);
 
       if (G_IS_THEMED_ICON (icon))
         icon_name = g_themed_icon_get_names (G_THEMED_ICON (icon))[0];
 
-      cc_panel_list_add_panel (CC_PANEL_LIST (shell->panel_list),
+      cc_panel_list_add_panel (self->panel_list,
                                category,
                                id,
                                name,
                                description,
                                keywords,
                                icon_name,
-                               visibility);
+                               visibility,
+                               has_sidebar);
 
       valid = gtk_tree_model_iter_next (model, &iter);
     }
 
   /* React to visibility changes */
-  g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), shell, 0);
+  g_signal_connect_object (model, "row-changed", G_CALLBACK (on_row_changed_cb), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -377,10 +384,10 @@ update_headerbar_buttons (CcWindow *self)
 
   CC_ENTRY;
 
-  is_main_view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list)) == CC_PANEL_LIST_MAIN;
+  is_main_view = cc_panel_list_get_view (self->panel_list) == CC_PANEL_LIST_MAIN;
 
-  gtk_widget_set_visible (self->previous_button, !is_main_view);
-  gtk_widget_set_visible (self->search_button, is_main_view);
+  gtk_widget_set_visible (GTK_WIDGET (self->previous_button), !is_main_view);
+  gtk_widget_set_visible (GTK_WIDGET (self->search_button), is_main_view);
 
   update_list_title (self);
 
@@ -388,7 +395,7 @@ update_headerbar_buttons (CcWindow *self)
 }
 
 static gboolean
-set_active_panel_from_id (CcShell      *shell,
+set_active_panel_from_id (CcWindow     *self,
                           const gchar  *start_id,
                           GVariant     *parameters,
                           gboolean      add_to_history,
@@ -400,22 +407,20 @@ set_active_panel_from_id (CcShell      *shell,
   CcPanelVisibility visibility;
   GtkTreeIter iter;
   GtkWidget *old_panel;
-  CcWindow *self;
   CcPanelListView view;
   gboolean activated;
   gboolean found;
 
   CC_ENTRY;
 
-  self = CC_WINDOW (shell);
-  view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
+  view = cc_panel_list_get_view (self->panel_list);
 
   /* When loading the same panel again, just set its parameters */
   if (g_strcmp0 (self->current_panel_id, start_id) == 0)
     {
       g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
       if (force_moving_to_the_panel || self->previous_list_view == view)
-        hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
+        show_panel (self);
       self->previous_list_view = view;
       CC_RETURN (TRUE);
     }
@@ -437,7 +442,7 @@ set_active_panel_from_id (CcShell      *shell,
                       -1);
 
   /* Activate the panel */
-  activated = activate_panel (CC_WINDOW (shell), start_id, parameters, name, gicon, visibility);
+  activated = activate_panel (self, start_id, parameters, name, gicon, visibility);
 
   /* Failed to activate the panel for some reason, let's keep the old
    * panel around instead */
@@ -448,10 +453,10 @@ set_active_panel_from_id (CcShell      *shell,
     }
 
   if (add_to_history)
-    add_current_panel_to_history (shell, start_id);
+    add_current_panel_to_history (self, start_id);
 
   if (force_moving_to_the_panel)
-    hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "panel");
+    show_panel (self);
 
   g_free (self->current_panel_id);
   self->current_panel_id = g_strdup (start_id);
@@ -461,7 +466,7 @@ set_active_panel_from_id (CcShell      *shell,
   if (old_panel)
     gtk_container_remove (GTK_CONTAINER (self->stack), old_panel);
 
-  cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), start_id);
+  cc_panel_list_set_active_panel (self->panel_list, start_id);
 
   update_headerbar_buttons (self);
 
@@ -469,22 +474,22 @@ set_active_panel_from_id (CcShell      *shell,
 }
 
 static void
-set_active_panel (CcWindow *shell,
+set_active_panel (CcWindow *self,
                   CcPanel  *panel)
 {
-  g_return_if_fail (CC_IS_SHELL (shell));
+  g_return_if_fail (CC_IS_SHELL (self));
   g_return_if_fail (panel == NULL || CC_IS_PANEL (panel));
 
-  if (panel != shell->active_panel)
+  if (panel != self->active_panel)
     {
       /* remove the old panel */
-      g_clear_object (&shell->active_panel);
+      g_clear_object (&self->active_panel);
 
       /* set the new panel */
       if (panel)
-        shell->active_panel = g_object_ref (panel);
+        self->active_panel = g_object_ref (panel);
 
-      g_object_notify (G_OBJECT (shell), "active-panel");
+      g_object_notify (G_OBJECT (self), "active-panel");
     }
 }
 
@@ -502,38 +507,34 @@ switch_to_previous_panel (CcWindow *self)
 
   g_debug ("Going to previous panel (%s)", previous_panel_id);
 
-  set_active_panel_from_id (CC_SHELL (self), previous_panel_id, NULL, FALSE, FALSE, NULL);
+  set_active_panel_from_id (self, previous_panel_id, NULL, FALSE, FALSE, NULL);
 
   CC_EXIT;
 }
 
 /* Callbacks */
 static void
-update_fold_state (CcWindow *shell)
+update_fold_state (CcWindow *self)
 {
-  GtkWidget *header_child = hdy_leaflet_get_visible_child (HDY_LEAFLET (shell->header_box));
-  HdyFold fold = hdy_leaflet_get_fold (HDY_LEAFLET (shell->header_box));
+  GtkWidget *header_child = hdy_leaflet_get_visible_child (self->header_box);
+  HdyFold fold = hdy_leaflet_get_fold (self->header_box);
 
-  hdy_header_group_set_focus (shell->header_group, fold == HDY_FOLD_FOLDED ? GTK_HEADER_BAR (header_child) : NULL);
+  hdy_header_group_set_focus (self->header_group, fold == HDY_FOLD_FOLDED ? GTK_HEADER_BAR (header_child) : NULL);
 
-  gtk_widget_set_visible (shell->back_revealer, fold == HDY_FOLD_FOLDED);
-  gtk_revealer_set_reveal_child (GTK_REVEALER (shell->back_revealer), fold == HDY_FOLD_FOLDED);
+  gtk_widget_set_visible (GTK_WIDGET (self->back_revealer), fold == HDY_FOLD_FOLDED);
+  gtk_revealer_set_reveal_child (self->back_revealer, fold == HDY_FOLD_FOLDED);
 }
 
 static void
-notify_header_visible_child_cb (HdyLeaflet *leaflet,
-                                GParamSpec *pspec,
-                                CcWindow   *shell)
+notify_header_visible_child_cb (CcWindow *self)
 {
-  update_fold_state (shell);
+  update_fold_state (self);
 }
 
 static void
-notify_fold_cb (HdyLeaflet *leaflet,
-                GParamSpec *pspec,
-                CcWindow   *shell)
+notify_fold_cb (CcWindow *self)
 {
-  update_fold_state (shell);
+  update_fold_state (self);
 }
 
 static void
@@ -545,60 +546,54 @@ on_main_leaflet_fold_changed_cb (CcWindow *self)
 
   selection_mode = GTK_SELECTION_SINGLE;
 
-  if (hdy_leaflet_get_fold (HDY_LEAFLET (self->main_leaflet)) == HDY_FOLD_FOLDED)
+  if (hdy_leaflet_get_fold (self->main_leaflet) == HDY_FOLD_FOLDED)
     selection_mode = GTK_SELECTION_NONE;
 
-  cc_panel_list_set_selection_mode (CC_PANEL_LIST (self->panel_list), selection_mode);
+  cc_panel_list_set_selection_mode (self->panel_list, selection_mode);
 }
 
 static void
-show_panel_cb (CcPanelList *panel_list,
-               const gchar *panel_id,
-               CcWindow    *self)
+show_panel_cb (CcWindow    *self,
+               const gchar *panel_id)
 {
   if (!panel_id)
     return;
 
-  set_active_panel_from_id (CC_SHELL (self), panel_id, NULL, TRUE, FALSE, NULL);
+  set_active_panel_from_id (self, panel_id, NULL, TRUE, FALSE, NULL);
 }
 
 static void
-search_entry_activate_cb (GtkEntry *entry,
-                          CcWindow *self)
+search_entry_activate_cb (CcWindow *self)
 {
   gboolean changed;
 
-  changed = cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
+  changed = cc_panel_list_activate (self->panel_list);
 
-  gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->search_bar), !changed);
+  gtk_search_bar_set_search_mode (self->search_bar, !changed);
 }
 
 static void
-back_button_clicked_cb (GtkButton *button,
-                        CcWindow  *shell)
+back_button_clicked_cb (CcWindow *self)
 {
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (shell->main_leaflet), "sidebar");
+  show_sidebar (self);
 }
 
 static void
-previous_button_clicked_cb (GtkButton *button,
-                            CcWindow  *shell)
+previous_button_clicked_cb (CcWindow *self)
 {
-  g_debug ("Num previous panels? %d", g_queue_get_length (shell->previous_panels));
+  g_debug ("Num previous panels? %d", g_queue_get_length (self->previous_panels));
 
   /* When in search, simply unsed the search mode */
-  if (gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (shell->search_bar)))
-    gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (shell->search_bar), FALSE);
+  if (gtk_search_bar_get_search_mode (self->search_bar))
+    gtk_search_bar_set_search_mode (self->search_bar, FALSE);
   else
-    cc_panel_list_go_previous (CC_PANEL_LIST (shell->panel_list));
+    cc_panel_list_go_previous (self->panel_list);
 
-  update_headerbar_buttons (shell);
+  update_headerbar_buttons (self);
 }
 
 static void
-gdk_window_set_cb (GObject    *object,
-                   GParamSpec *pspec,
-                   CcWindow   *self)
+gdk_window_set_cb (CcWindow *self)
 {
   GdkWindow *window;
   g_autofree gchar *str = NULL;
@@ -616,9 +611,7 @@ gdk_window_set_cb (GObject    *object,
 }
 
 static gboolean
-window_map_event_cb (GtkWidget *widget,
-                     GdkEvent  *event,
-                     CcWindow  *self)
+window_map_event_cb (CcWindow *self)
 {
   /* If focus ends up in a category icon view one of the items is
    * immediately selected which looks odd when we are starting up, so
@@ -628,9 +621,8 @@ window_map_event_cb (GtkWidget *widget,
 }
 
 static gboolean
-window_key_press_event_cb (GtkWidget   *win,
-                           GdkEventKey *event,
-                           CcWindow    *self)
+window_key_press_event_cb (CcWindow    *self,
+                           GdkEventKey *event)
 {
   GdkModifierType state;
   CcPanelListView view;
@@ -640,16 +632,16 @@ window_key_press_event_cb (GtkWidget   *win,
 
   retval = GDK_EVENT_PROPAGATE;
   state = event->state;
-  keymap = gdk_keymap_get_for_display (gtk_widget_get_display (win));
+  keymap = gdk_keymap_get_for_display (gtk_widget_get_display (GTK_WIDGET (self)));
   gdk_keymap_add_virtual_modifiers (keymap, &state);
 
   state = state & gtk_accelerator_get_default_mod_mask ();
-  is_rtl = gtk_widget_get_direction (win) == GTK_TEXT_DIR_RTL;
-  view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
+  is_rtl = gtk_widget_get_direction (GTK_WIDGET (self)) == GTK_TEXT_DIR_RTL;
+  view = cc_panel_list_get_view (self->panel_list);
 
   /* The search only happens when we're in the MAIN view */
   if (view == CC_PANEL_LIST_MAIN &&
-      gtk_search_bar_handle_event (GTK_SEARCH_BAR (self->search_bar), (GdkEvent*) event) == GDK_EVENT_STOP)
+      gtk_search_bar_handle_event (self->search_bar, (GdkEvent*) event) == GDK_EVENT_STOP)
     {
       return GDK_EVENT_STOP;
     }
@@ -669,10 +661,10 @@ window_key_press_event_cb (GtkWidget   *win,
                 break;
               }
 
-            retval = !gtk_search_bar_get_search_mode (GTK_SEARCH_BAR (self->search_bar));
-            gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (self->search_bar), retval);
+            retval = !gtk_search_bar_get_search_mode (self->search_bar);
+            gtk_search_bar_set_search_mode (self->search_bar, retval);
             if (retval)
-              gtk_widget_grab_focus (self->search_entry);
+              gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
             retval = GDK_EVENT_STOP;
             break;
           case GDK_KEY_Q:
@@ -697,14 +689,12 @@ window_key_press_event_cb (GtkWidget   *win,
 }
 
 static void
-on_development_warning_dialog_responded_cb (GtkWidget *dialog,
-                                            gint       response,
-                                            CcWindow  *self)
+on_development_warning_dialog_responded_cb (CcWindow *self)
 {
   g_debug ("Disabling development build warning dialog");
   g_settings_set_boolean (self->settings, "show-development-warning", FALSE);
 
-  gtk_widget_hide (dialog);
+  gtk_widget_hide (GTK_WIDGET (self->development_warning_dialog));
 }
 
 /* CcShell implementation */
@@ -714,7 +704,7 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
                                     GVariant     *parameters,
                                     GError      **error)
 {
-  return set_active_panel_from_id (shell, start_id, parameters, TRUE, TRUE, error);
+  return set_active_panel_from_id (CC_WINDOW (shell), start_id, parameters, TRUE, TRUE, error);
 }
 
 static void
@@ -752,9 +742,9 @@ cc_window_embed_widget_in_header (CcShell         *shell,
 }
 
 static GtkWidget *
-cc_window_get_toplevel (CcShell *shell)
+cc_window_get_toplevel (CcShell *self)
 {
-  return GTK_WIDGET (shell);
+  return GTK_WIDGET (self);
 }
 
 static void
@@ -808,17 +798,17 @@ cc_window_set_property (GObject      *object,
                         const GValue *value,
                         GParamSpec   *pspec)
 {
-  CcWindow *shell = CC_WINDOW (object);
+  CcWindow *self = CC_WINDOW (object);
 
   switch (property_id)
     {
     case PROP_ACTIVE_PANEL:
-      set_active_panel (shell, g_value_get_object (value));
+      set_active_panel (self, g_value_get_object (value));
       break;
 
     case PROP_MODEL:
-      g_assert (shell->store == NULL);
-      shell->store = g_value_dup_object (value);
+      g_assert (self->store == NULL);
+      self->store = g_value_dup_object (value);
       break;
 
     default:
@@ -829,10 +819,8 @@ cc_window_set_property (GObject      *object,
 static void
 cc_window_constructed (GObject *object)
 {
+  CcWindow *self = CC_WINDOW (object);
   g_autofree char *id = NULL;
-  CcWindow *self;
-
-  self = CC_WINDOW (object);
 
   /* Add the panels */
   setup_model (self);
@@ -840,10 +828,10 @@ cc_window_constructed (GObject *object)
   /* After everything is loaded, select the last used panel, if any,
    * or the first visible panel */
   id = g_settings_get_string (self->settings, "last-panel");
-  if (id != NULL && cc_shell_model_has_panel (CC_SHELL_MODEL (self->store), id))
-    cc_panel_list_set_active_panel (CC_PANEL_LIST (self->panel_list), id);
+  if (id != NULL && cc_shell_model_has_panel (self->store, id))
+    cc_panel_list_set_active_panel (self->panel_list, id);
   else
-    cc_panel_list_activate (CC_PANEL_LIST (self->panel_list));
+    cc_panel_list_activate (self->panel_list);
 
   g_signal_connect_swapped (self->panel_list,
                             "notify::view",
@@ -851,6 +839,7 @@ cc_window_constructed (GObject *object)
                             self);
 
   update_headerbar_buttons (self);
+  show_sidebar (self);
 
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
@@ -916,7 +905,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_group);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, list_scrolled);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, main_leaflet);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
@@ -924,6 +912,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, stack);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, top_left_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, top_right_box);
@@ -954,7 +943,7 @@ cc_window_init (CcWindow *self)
   self->settings = g_settings_new ("org.gnome.ControlCenter");
   self->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
   self->previous_panels = g_queue_new ();
-  self->previous_list_view = cc_panel_list_get_view (CC_PANEL_LIST (self->panel_list));
+  self->previous_list_view = cc_panel_list_get_view (self->panel_list);
 
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())
@@ -984,7 +973,7 @@ void
 cc_window_set_search_item (CcWindow   *center,
                            const char *search)
 {
-  gtk_search_bar_set_search_mode (GTK_SEARCH_BAR (center->search_bar), TRUE);
+  gtk_search_bar_set_search_mode (center->search_bar, TRUE);
   gtk_entry_set_text (GTK_ENTRY (center->search_entry), search);
   gtk_editable_set_position (GTK_EDITABLE (center->search_entry), -1);
 }

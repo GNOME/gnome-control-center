@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkListStore" id="model8">
+  <object class="GtkListStore" id="inner_auth_model">
     <columns>
-      <!-- column-name gchararray -->
+      <!-- column-name label -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0"> </col>
+        <col id="0" translatable="yes">MSCHAPv2</col>
+        <col id="1">mschapv2</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">MD5</col>
+        <col id="1">md5</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">GTC</col>
+        <col id="1">gtc</col>
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model9">
+  <object class="GtkListStore" id="version_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -29,172 +40,154 @@
       </row>
     </data>
   </object>
-  <object class="GtkNotebook" id="eap_peap_notebook">
-    <property name="visible">True</property>
+  <template class="EAPMethodPEAP" parent="GtkGrid">
     <property name="can_focus">False</property>
-    <property name="show_tabs">False</property>
-    <property name="show_border">False</property>
+    <property name="column_spacing">6</property>
+    <property name="row_spacing">6</property>
     <child>
-      <object class="GtkGrid" id="eap_peap_grid">
+      <object class="GtkLabel" id="anon_identity_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="column_spacing">6</property>
-        <property name="row_spacing">6</property>
-        <child>
-          <object class="GtkLabel" id="eap_peap_anon_identity_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Anony_mous identity</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_peap_anon_identity_entry</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="eap_peap_anon_identity_entry">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="activates_default">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_peap_ca_cert_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">C_A certificate</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_peap_ca_cert_button</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkFileChooserButton" id="eap_peap_ca_cert_button">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="eap_peap_ca_cert_not_required_checkbox">
-            <property name="label" translatable="yes">No CA certificate is _required</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="receives_default">False</property>
-            <property name="use_underline">True</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">2</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_peap_version_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">PEAP _version</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_peap_version_combo</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBox" id="eap_peap_version_combo">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-            <property name="model">model9</property>
-            <child>
-              <object class="GtkCellRendererText" id="renderer9"/>
-              <attributes>
-                <attribute name="text">0</attribute>
-              </attributes>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">3</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_peap_inner_auth_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">_Inner authentication</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_peap_inner_auth_combo</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBox" id="eap_peap_inner_auth_combo">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hexpand">True</property>
-            <property name="model">model8</property>
-            <child>
-              <object class="GtkCellRendererText" id="renderer8"/>
-              <attributes>
-                <attribute name="text">0</attribute>
-              </attributes>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="top_attach">4</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="eap_peap_inner_auth_vbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">5</property>
-            <property name="width">2</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <child type="tab">
-      <object class="GtkLabel" id="label61">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">Anony_mous identity</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">anon_identity_entry</property>
       </object>
       <packing>
-        <property name="tab_fill">False</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
       </packing>
     </child>
-  </object>
+    <child>
+      <object class="GtkEntry" id="anon_identity_entry">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="activates_default">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="ca_cert_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">C_A certificate</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">ca_cert_button</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkFileChooserButton" id="ca_cert_button">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="ca_cert_not_required_check">
+        <property name="label" translatable="yes">No CA certificate is _required</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="receives_default">False</property>
+        <property name="use_underline">True</property>
+        <property name="draw_indicator">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="version_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">PEAP _version</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">version_combo</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBox" id="version_combo">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="model">version_model</property>
+        <child>
+          <object class="GtkCellRendererText"/>
+          <attributes>
+            <attribute name="text">0</attribute>
+          </attributes>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="inner_auth_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">_Inner authentication</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">inner_auth_combo</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBox" id="inner_auth_combo">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="model">inner_auth_model</property>
+        <child>
+          <object class="GtkCellRendererText"/>
+          <attributes>
+            <attribute name="text">0</attribute>
+          </attributes>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="inner_auth_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">5</property>
+        <property name="width">2</property>
+      </packing>
+    </child>
+  </template>
 </interface>

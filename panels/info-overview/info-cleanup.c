@@ -37,13 +37,13 @@ prettify_info (const char *info)
   int   i;
   static const ReplaceStrings rs[] = {
     { "Mesa DRI ", ""},
-    { "Intel[(]R[)]", "Intel<sup>\302\256</sup>"},
-    { "Core[(]TM[)]", "Core<sup>\342\204\242</sup>"},
-    { "Atom[(]TM[)]", "Atom<sup>\342\204\242</sup>"},
+    { "Intel[(]R[)]", "Intel\302\256"},
+    { "Core[(]TM[)]", "Core\342\204\242"},
+    { "Atom[(]TM[)]", "Atom\342\204\242"},
     { "Gallium .* on (AMD .*)", "\\1"},
     { "(AMD .*) [(].*", "\\1"},
     { "(AMD [A-Z])(.*)", "\\1\\L\\2\\E"},
-    { "AMD", "AMD<sup>\302\256</sup>"},
+    { "AMD", "AMD\302\256"},
     { "Graphics Controller", "Graphics"},
   };
 
@@ -122,7 +122,7 @@ remove_duplicate_whitespace (const char *old)
 char *
 info_cleanup (const char *input)
 {
-  g_autofree char *pretty;
+  g_autofree char *pretty = NULL;
 
   pretty = prettify_info (input);
   return remove_duplicate_whitespace (pretty);

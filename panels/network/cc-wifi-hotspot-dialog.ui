@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcWifiHotspotDialog" parent="GtkMessageDialog">
+    <property name="modal">1</property>
+    <property name="destroy-with-parent">1</property>
+    <property name="message-type">other</property>
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
+
+    <child internal-child="message_area">
+      <object class="GtkBox">
+        <property name="visible">1</property>
+        <property name="margin-top">0</property>
+
+        <child>
+          <object class="GtkLabel" id="label">
+            <property name="visible">1</property>
+            <property name="wrap">1</property>
+            <property name="max-width-chars">50</property>
+            <property name="label" translatable="yes">Wi-Fi hotspot allows others to share your internet connection, by creating a Wi-Fi network that they can connect to. To do this, you must have an internet connection through a source other than Wi-Fi.</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="connection_label">
+            <property name="visible">1</property>
+            <property name="margin-bottom">18</property>
+            <property name="wrap">1</property>
+            <property name="max-width-chars">40</property>
+            <property name="use-markup">1</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkGrid">
+            <property name="visible">1</property>
+            <property name="row-spacing">6</property>
+            <property name="column-spacing">12</property>
+
+            <!-- Hotspot SSID Name -->
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Network Name</property>
+                <property name="halign">end</property>
+                <property name="visible">1</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="name_entry">
+                <property name="visible">1</property>
+                <property name="hexpand">1</property>
+                <property name="max-length">64</property>
+                <signal name="changed" handler="hotspot_entry_changed_cb" swapped="yes" />
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">0</property>
+              </packing>
+            </child>
+
+            <!-- Hotspot Password -->
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Password</property>
+                <property name="halign">end</property>
+                <property name="visible">1</property>
+              </object>
+              <packing>
+                <property name="left-attach">0</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="password_entry">
+                <property name="visible">1</property>
+                <property name="max-length">64</property>
+                <property name="secondary-icon-name">view-refresh-symbolic</property>
+                <property name="secondary-icon-tooltip-text" translatable="yes">Generate Random Password</property>
+                <property name="placeholder-text" translatable="yes">Autogenerate Password</property>
+                <signal name="icon-press" handler="generate_password_clicked_cb" swapped="yes" />
+                <signal name="changed" handler="hotspot_entry_changed_cb" swapped="yes" />
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">1</property>
+              </packing>
+            </child>
+
+            <!-- Error Label -->
+            <child>
+              <object class="GtkLabel" id="error_label">
+                <property name="halign">start</property>
+                <property name="visible">1</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+                <attributes>
+                  <attribute name="scale" value="0.83"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="left-attach">1</property>
+                <property name="top-attach">2</property>
+              </packing>
+            </child>
+
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child type="action">
+      <object class="GtkButton" id="cancel_button">
+        <property name="visible">1</property>
+        <property name="use-underline">1</property>
+        <property name="label" translatable="yes">_Cancel</property>
+      </object>
+    </child>
+    <child type="action">
+      <object class="GtkButton" id="ok_button">
+        <property name="visible">1</property>
+        <property name="can-default">1</property>
+        <property name="use-underline">1</property>
+        <property name="label" translatable="yes">_Turn On</property>
+      </object>
+    </child>
+
+    <action-widgets>
+      <action-widget response="cancel">cancel_button</action-widget>
+      <action-widget response="apply" default="true">ok_button</action-widget>
+    </action-widgets>
+  </template>
+</interface>

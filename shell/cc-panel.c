@@ -42,13 +42,8 @@
 
 typedef struct
 {
-  gchar    *id;
-  gchar    *display_name;
-  gchar    *category;
-  gchar    *current_location;
-
-  gboolean  is_active;
-  CcShell  *shell;
+  CcShell      *shell;
+  GCancellable *cancellable;
 } CcPanelPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (CcPanel, cc_panel, GTK_TYPE_BIN)
@@ -88,7 +83,7 @@ cc_panel_set_property (GObject      *object,
 
     case PROP_PARAMETERS:
       {
-        g_autoptr (GVariant) v = NULL;
+        g_autoptr(GVariant) v = NULL;
         GVariant *parameters;
         gsize n_parameters;
 
@@ -145,8 +140,8 @@ cc_panel_finalize (GObject *object)
 {
   CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (object));
 
-  g_clear_pointer (&priv->id, g_free);
-  g_clear_pointer (&priv->display_name, g_free);
+  g_cancellable_cancel (priv->cancellable);
+  g_clear_object (&priv->cancellable);
 
   G_OBJECT_CLASS (cc_panel_parent_class)->finalize (object);
 }
@@ -246,4 +241,17 @@ cc_panel_get_sidebar_widget (CcPanel *panel)
     }
 
   return NULL;
+}
+
+GCancellable *
+cc_panel_get_cancellable (CcPanel *panel)
+{
+  CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+
+  g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
+
+  if (priv->cancellable == NULL)
+    priv->cancellable = g_cancellable_new ();
+
+  return priv->cancellable;
 }

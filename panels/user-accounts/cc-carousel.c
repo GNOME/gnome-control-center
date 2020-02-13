@@ -87,18 +87,19 @@ cc_carousel_item_get_x (CcCarouselItem *item,
 {
         GtkWidget *widget, *parent;
         gint width;
-        gint dest_x;
+        gint dest_x = 0;
 
         parent = GTK_WIDGET (carousel->stack);
         widget = GTK_WIDGET (item);
 
         width = gtk_widget_get_allocated_width (widget);
-        gtk_widget_translate_coordinates (widget,
-                                          parent,
-                                          width / 2,
-                                          0,
-                                          &dest_x,
-                                          NULL);
+        if (!gtk_widget_translate_coordinates (widget,
+                                               parent,
+                                               width / 2,
+                                               0,
+                                               &dest_x,
+                                               NULL))
+                return 0;
 
         return CLAMP (dest_x - ARROW_SIZE,
                       0,
@@ -111,6 +112,8 @@ cc_carousel_move_arrow (CcCarousel *self)
         GtkStyleContext *context;
         gchar *css;
         gint end_x;
+        GtkSettings *settings;
+        gboolean animations;
 
         if (!self->selected_item)
                 return;
@@ -122,13 +125,26 @@ cc_carousel_move_arrow (CcCarousel *self)
                 gtk_style_context_remove_provider (context, self->provider);
         g_clear_object (&self->provider);
 
-        css = g_strdup_printf ("@keyframes arrow_keyframes-%d {\n"
-                               "  from { margin-left: %dpx; }\n"
-                               "  to { margin-left: %dpx; }\n"
-                               "}\n"
-                               "* {\n"
-                               "  animation-name: arrow_keyframes-%d;\n"
-                               "}\n", end_x, self->arrow_start_x, end_x, end_x);
+        settings = gtk_widget_get_settings (GTK_WIDGET (self));
+        g_object_get (settings, "gtk-enable-animations", &animations, NULL);
+
+        /* Animate the arrow movement if animations are enabled. Otherwise,
+         * jump the arrow to the right location instantly. */
+        if (animations)
+        {
+                css = g_strdup_printf ("@keyframes arrow_keyframes-%d {\n"
+                                       "  from { margin-left: %dpx; }\n"
+                                       "  to { margin-left: %dpx; }\n"
+                                       "}\n"
+                                       "* {\n"
+                                       "  animation-name: arrow_keyframes-%d;\n"
+                                       "}\n",
+                                       end_x, self->arrow_start_x, end_x, end_x);
+        }
+        else
+        {
+                css = g_strdup_printf ("* { margin-left: %dpx }", end_x);
+        }
 
         self->provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
         gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (self->provider), css, -1, NULL);
@@ -199,8 +215,8 @@ void
 cc_carousel_select_item (CcCarousel     *self,
                          CcCarouselItem *item)
 {
-        gchar *page_name;
         gboolean page_changed = TRUE;
+        GList *children;
 
         /* Select first user if none is specified */
         if (item == NULL)
@@ -227,10 +243,8 @@ cc_carousel_select_item (CcCarousel     *self,
                 return;
         }
 
-        page_name = g_strdup_printf ("%d", self->visible_page);
-        gtk_stack_set_visible_child_name (self->stack, page_name);
-
-        g_free (page_name);
+        children = gtk_container_get_children (GTK_CONTAINER (self->stack));
+        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (g_list_nth_data (children, self->visible_page)));
 
         update_buttons_visibility (self);
 
@@ -301,13 +315,10 @@ cc_carousel_add (GtkContainer *container,
 
         last_box_is_full = ((g_list_length (self->children) - 1) % ITEMS_PER_PAGE == 0);
         if (last_box_is_full) {
-                gchar *page;
-
-                page = g_strdup_printf ("%d", CC_CAROUSEL_ITEM (widget)->page);
                 self->last_box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
                 gtk_widget_show (self->last_box);
                 gtk_widget_set_valign (self->last_box, GTK_ALIGN_CENTER);
-                gtk_stack_add_named (self->stack, self->last_box, page);
+                gtk_container_add (GTK_CONTAINER (self->stack), self->last_box);
         }
 
         gtk_widget_show_all (widget);
@@ -336,8 +347,23 @@ cc_carousel_new (void)
 }
 
 static void
+cc_carousel_dispose (GObject *object)
+{
+        CcCarousel *self = CC_CAROUSEL (object);
+
+        g_clear_object (&self->provider);
+        if (self->children != NULL) {
+                g_list_free (self->children);
+                self->children = NULL;
+        }
+
+        G_OBJECT_CLASS (cc_carousel_parent_class)->dispose (object);
+}
+
+static void
 cc_carousel_class_init (CcCarouselClass *klass)
 {
+        GObjectClass *object_class = G_OBJECT_CLASS (klass);
         GtkWidgetClass *wclass = GTK_WIDGET_CLASS (klass);
         GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
 
@@ -351,6 +377,8 @@ cc_carousel_class_init (CcCarouselClass *klass)
 
         gtk_widget_class_bind_template_callback (wclass, cc_carousel_goto_previous_page);
         gtk_widget_class_bind_template_callback (wclass, cc_carousel_goto_next_page);
+
+        object_class->dispose = cc_carousel_dispose;
 
         container_class->add = cc_carousel_add;
 

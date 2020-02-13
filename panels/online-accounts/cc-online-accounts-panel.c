@@ -869,7 +869,7 @@ get_all_providers_cb (GObject      *source,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  g_autoptr (CcGoaPanel) self = user_data;
+  g_autoptr(CcGoaPanel) self = user_data;
   GList *providers;
   GList *l;
 
@@ -971,7 +971,8 @@ static void
 on_remove_button_clicked (CcGoaPanel *panel)
 {
   GoaAccount *account;
-  gchar *label;
+  g_autofree gchar *id = NULL;
+  g_autofree gchar *label = NULL;
 
   if (panel->active_object == NULL)
     return;
@@ -983,10 +984,11 @@ on_remove_button_clicked (CcGoaPanel *panel)
   panel->active_object = NULL;
 
   account = goa_object_peek_account (panel->removed_object);
+  id = g_strdup_printf ("<b>%s</b>", goa_account_get_presentation_identity (account));
   /* Translators: The %s is the username (eg., debarshi.ray@gmail.com
    * or rishi).
    */
-  label = g_strdup_printf (_("<b>%s</b> removed"), goa_account_get_presentation_identity (account));
+  label = g_strdup_printf (_("%s removed"), id);
   gtk_label_set_markup (GTK_LABEL (panel->notification_label), label);
   gtk_revealer_set_reveal_child (GTK_REVEALER (panel->notification_revealer), TRUE);
 
@@ -994,6 +996,4 @@ on_remove_button_clicked (CcGoaPanel *panel)
   gtk_widget_hide (panel->edit_account_dialog);
 
   panel->remove_account_timeout_id = g_timeout_add_seconds (10, on_remove_account_timeout, panel);
-
-  g_free (label);
 }

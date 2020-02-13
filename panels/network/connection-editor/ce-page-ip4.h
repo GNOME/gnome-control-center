@@ -19,52 +19,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-#ifndef __CE_PAGE_IP4_H
-#define __CE_PAGE_IP4_H
-
-#include <glib-object.h>
+#pragma once
 
 #include <gtk/gtk.h>
-#include "ce-page.h"
+#include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-#define CE_TYPE_PAGE_IP4          (ce_page_ip4_get_type ())
-#define CE_PAGE_IP4(o)            (G_TYPE_CHECK_INSTANCE_CAST ((o), CE_TYPE_PAGE_IP4, CEPageIP4))
-#define CE_PAGE_IP4_CLASS(k)      (G_TYPE_CHECK_CLASS_CAST((k), CE_TYPE_PAGE_IP4, CEPageIP4Class))
-#define CE_IS_PAGE_IP4(o)         (G_TYPE_CHECK_INSTANCE_TYPE ((o), CE_TYPE_PAGE_IP4))
-#define CE_IS_PAGE_IP4_CLASS(k)   (G_TYPE_CHECK_CLASS_TYPE ((k), CE_TYPE_PAGE_IP4))
-#define CE_PAGE_IP4_GET_CLASS(o)  (G_TYPE_INSTANCE_GET_CLASS ((o), CE_TYPE_PAGE_IP4, CEPageIP4Class))
+G_DECLARE_FINAL_TYPE (CEPageIP4, ce_page_ip4, CE, PAGE_IP4, GtkScrolledWindow)
 
-typedef struct _CEPageIP4          CEPageIP4;
-typedef struct _CEPageIP4Class     CEPageIP4Class;
-
-struct _CEPageIP4
-{
-        CEPage parent;
-
-        NMSettingIPConfig *setting;
-
-        GtkToggleButton *disabled;
-        GtkWidget       *address_list;
-        GtkSwitch       *auto_dns;
-        GtkWidget       *dns_entry;
-        GtkSwitch       *auto_routes;
-        GtkWidget       *routes_list;
-        GtkWidget       *never_default;
-};
-
-struct _CEPageIP4Class
-{
-        CEPageClass parent_class;
-};
-
-GType   ce_page_ip4_get_type (void);
-
-CEPage *ce_page_ip4_new      (NMConnection     *connection,
-                              NMClient         *client);
+CEPageIP4 *ce_page_ip4_new (NMConnection     *connection,
+                            NMClient         *client);
 
 G_END_DECLS
-
-#endif /* __CE_PAGE_IP4_H */
-

@@ -69,23 +69,6 @@ get_language_label (const gchar *language_code,
         }
 }
 
-static gchar *
-get_language_label (const gchar *language_code,
-                    const gchar *modifier,
-                    const gchar *locale_id)
-{
-        g_autofree gchar *language = NULL;
-
-        language = gnome_get_language_from_code (language_code, locale_id);
-
-        if (modifier == NULL)
-                return g_steal_pointer (&language);
-        else {
-                g_autofree gchar *t_mod = gnome_get_translated_modifier (modifier, locale_id);
-                return g_strdup_printf ("%s — %s", language, t_mod);
-        }
-}
-
 static GtkWidget *
 language_widget_new (const gchar *locale_id,
                      gboolean     is_extra)

@@ -42,12 +42,12 @@ struct _CcNotificationsPanel {
   GtkScrolledWindow *main_scrolled_window;
   GtkBox            *main_box;
   GtkListBox        *options_listbox;
-  GtkSwitch         *popups_switch;
+  GtkSwitch         *dnd_switch;
   GtkSizeGroup      *sizegroup1;
 
   GSettings         *master_settings;
 
-  GCancellable      *apps_load_cancellable;
+  GCancellable      *cancellable;
 
   GHashTable        *known_applications;
 
@@ -89,8 +89,6 @@ cc_notifications_panel_dispose (GObject *object)
   g_clear_pointer (&panel->sections, g_list_free);
   g_clear_pointer (&panel->sections_reverse, g_list_free);
 
-  g_cancellable_cancel (panel->apps_load_cancellable);
-
   G_OBJECT_CLASS (cc_notifications_panel_parent_class)->dispose (object);
 }
 
@@ -99,7 +97,6 @@ cc_notifications_panel_finalize (GObject *object)
 {
   CcNotificationsPanel *panel = CC_NOTIFICATIONS_PANEL (object);
 
-  g_clear_object (&panel->apps_load_cancellable);
   g_clear_object (&panel->perm_store);
 
   G_OBJECT_CLASS (cc_notifications_panel_parent_class)->finalize (object);
@@ -180,7 +177,7 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
   panel->master_settings = g_settings_new (MASTER_SCHEMA);
 
   g_settings_bind (panel->master_settings, "show-banners",
-                   panel->popups_switch,
+                   panel->dnd_switch,
                    "active", G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (panel->master_settings, "show-in-lock-screen",
                    panel->lock_screen_switch,
@@ -211,7 +208,7 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                             "org.freedesktop.impl.portal.PermissionStore",
                             "/org/freedesktop/impl/portal/PermissionStore",
                             "org.freedesktop.impl.portal.PermissionStore",
-                            panel->apps_load_cancellable,
+                            cc_panel_get_cancellable (CC_PANEL (panel)),
                             on_perm_store_ready,
                             panel);
 }
@@ -244,7 +241,7 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_scrolled_window);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, options_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, popups_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_switch);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, sizegroup1);
 
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed);
@@ -396,7 +393,7 @@ queued_app_info (gpointer data)
   app = data;
   panel = g_steal_pointer (&app->panel);
 
-  if (g_cancellable_is_cancelled (panel->apps_load_cancellable) ||
+  if (g_cancellable_is_cancelled (panel->cancellable) ||
       g_hash_table_contains (panel->known_applications,
                              app->canonical_app_id))
     return FALSE;
@@ -503,8 +500,8 @@ load_apps_async (CcNotificationsPanel *panel)
 {
   g_autoptr(GTask) task = NULL;
 
-  panel->apps_load_cancellable = g_cancellable_new ();
-  task = g_task_new (panel, panel->apps_load_cancellable, NULL, NULL);
+  panel->cancellable = cc_panel_get_cancellable (CC_PANEL (panel)); // FIXME: Storing reference to cancellable because it will be accessed inside the thread
+  task = g_task_new (panel, cc_panel_get_cancellable (CC_PANEL (panel)), NULL, NULL);
   g_task_run_in_thread (task, load_apps_thread);
 }
 

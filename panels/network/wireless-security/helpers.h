@@ -23,13 +23,23 @@
 #ifndef _HELPERS_H_
 #define _HELPERS_H_
 
+#include <NetworkManager.h>
+#include <gtk/gtk.h>
+
+#define NMA_ERROR (g_quark_from_static_string ("nma-error-quark"))
+
+typedef enum  {
+	NMA_ERROR_GENERIC
+} NMAError;
+
 typedef const char * (*HelperSecretFunc)(NMSetting *);
 
 void helper_fill_secret_entry (NMConnection *connection,
-                               GtkBuilder *builder,
-                               const char *entry_name,
+                               GtkEntry *entry,
                                GType setting_type,
                                HelperSecretFunc func);
+
+void wireless_security_clear_ciphers (NMConnection *connection);
 
 #endif  /* _HELPERS_H_ */
 

@@ -8,10 +8,10 @@ enums_header = files('gsd-device-manager.h')
 common_sources += gnome.mkenums(
   enums + '.h',
   sources: enums_header,
-  fhead: '#ifndef GSD_COMMON_ENUMS_H\n#define GSD_COMMON_ENUMS_H\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n',
+  fhead: '#pragma once\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n',
   fprod: '/* enumerations from "@filename@" */\n',
   vhead: 'GType @enum_name@_get_type (void) G_GNUC_CONST;\n#define GSD_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n',
-  ftail: 'G_END_DECLS\n\n#endif /* !GSD_COMMON_ENUMS_H */'
+  ftail: 'G_END_DECLS\n'
 )
 
 common_sources += gnome.mkenums(
@@ -45,10 +45,16 @@ libwidgets_dep = declare_dependency(
 sources = common_sources + files(
   'cc-common-language.c',
   'cc-language-chooser.c',
+  'cc-list-row.c',
+  'cc-permission-infobar.c',
   'cc-util.c'
 )
 
-resource_data = files('cc-language-chooser.ui')
+resource_data = files(
+  'cc-language-chooser.ui',
+  'cc-list-row.ui',
+  'cc-permission-infobar.ui',
+)
 
 sources += gnome.compile_resources(
   'cc-common-resources',
@@ -101,8 +107,12 @@ libdevice_dep = declare_dependency(
   link_with: libdevice
 )
 
-install_data(
-  'gnome-control-center.rules',
+polkit_conf = configuration_data()
+polkit_conf.set('PRIVILEGED_GROUP', get_option('privileged_group'))
+configure_file(
+  input: 'gnome-control-center.rules.in',
+  output: 'gnome-control-center.rules',
+  configuration: polkit_conf,
   install_dir: join_paths(control_center_datadir, 'polkit-1', 'rules.d')
 )
 

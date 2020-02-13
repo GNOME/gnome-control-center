@@ -244,6 +244,18 @@
                               </object>
                             </child>
                             <child>
+                              <object class="CcToggleRow" id="background">
+                                <property name="title" translatable="yes">Run in background</property>
+                                <signal name="notify::allowed" handler="background_cb" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="CcToggleRow" id="wallpaper">
+                                <property name="title" translatable="yes">Set Desktop Background</property>
+                                <signal name="notify::allowed" handler="wallpaper_cb" swapped="yes"/>
+                              </object>
+                            </child>
+                            <child>
                               <object class="CcToggleRow" id="sound">
                                 <property name="title" translatable="yes">Sounds</property>
                                 <signal name="notify::allowed" handler="sound_cb" swapped="yes"/>

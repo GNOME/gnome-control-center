@@ -18,8 +18,7 @@
  * Author: David Zeuthen <davidz@redhat.com>
  */
 
-#ifndef __GOA_PANEL_H__
-#define __GOA_PANEL_H__
+#pragma once
 
 #include <shell/cc-panel.h>
 
@@ -30,5 +29,3 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcGoaPanel, cc_goa_panel, CC, GOA_PANEL, CcPanel)
 
 G_END_DECLS
-
-#endif /* __GOA_PANEL_H__ */

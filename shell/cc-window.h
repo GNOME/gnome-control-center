@@ -18,8 +18,7 @@
  * Author: Thomas Wood <thos@gnome.org>
  */
 
-#ifndef _CC_WINDOW_H
-#define _CC_WINDOW_H
+#pragma once
 
 #include <glib-object.h>
 #include "cc-shell.h"
@@ -38,5 +37,3 @@ void cc_window_set_search_item (CcWindow *center,
                                 const char *search);
 
 G_END_DECLS
-
-#endif /* _CC_WINDOW_H */

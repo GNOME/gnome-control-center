@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.4"/>
-  <object class="GtkListStore" id="model8">
+  <object class="GtkListStore" id="inner_auth_model">
     <columns>
-      <!-- column-name gchararray -->
+      <!-- column-name label -->
+      <column type="gchararray"/>
+      <!-- column-name id -->
       <column type="gchararray"/>
     </columns>
     <data>
       <row>
-        <col id="0"> </col>
+        <col id="0" translatable="yes">GTC</col>
+        <col id="1">gtc</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes">MSCHAPv2</col>
+        <col id="1">mschapv2</col>
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="model9">
+  <object class="GtkListStore" id="pac_provision_model">
     <columns>
       <!-- column-name gchararray -->
       <column type="gchararray"/>
@@ -29,175 +36,140 @@
       </row>
     </data>
   </object>
-  <object class="GtkNotebook" id="eap_fast_notebook">
-    <property name="visible">True</property>
+  <template class="EAPMethodFAST" parent="GtkGrid">
     <property name="can_focus">False</property>
-    <property name="show_tabs">False</property>
-    <property name="show_border">False</property>
+    <property name="valign">start</property>
+    <property name="column_spacing">6</property>
+    <property name="row_spacing">6</property>
     <child>
-      <object class="GtkTable" id="table13">
+      <object class="GtkLabel" id="anon_identity_label">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="n_rows">5</property>
-        <property name="n_columns">2</property>
-        <property name="column_spacing">6</property>
-        <property name="row_spacing">6</property>
-        <child>
-          <object class="GtkLabel" id="eap_fast_anon_identity_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">Anony_mous identity</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_fast_anon_identity_entry</property>
-          </object>
-          <packing>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkEntry" id="eap_fast_anon_identity_entry">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="activates_default">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="y_options"/>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_fast_pac_file_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">PAC _file</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_fast_pac_file_button</property>
-          </object>
-          <packing>
-            <property name="top_attach">2</property>
-            <property name="bottom_attach">3</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkFileChooserButton" id="eap_fast_pac_file_button">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="top_attach">2</property>
-            <property name="bottom_attach">3</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options">GTK_FILL</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkBox" id="eap_fast_inner_auth_vbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="right_attach">2</property>
-            <property name="top_attach">4</property>
-            <property name="bottom_attach">5</property>
-            <property name="x_options">GTK_FILL</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkLabel" id="eap_fast_inner_auth_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="xalign">1</property>
-            <property name="label" translatable="yes">_Inner authentication</property>
-            <property name="use_underline">True</property>
-            <property name="mnemonic_widget">eap_fast_inner_auth_combo</property>
-          </object>
-          <packing>
-            <property name="top_attach">3</property>
-            <property name="bottom_attach">4</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBox" id="eap_fast_inner_auth_combo">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="model">model8</property>
-            <child>
-              <object class="GtkCellRendererText" id="renderer8"/>
-              <attributes>
-                <attribute name="text">0</attribute>
-              </attributes>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="top_attach">3</property>
-            <property name="bottom_attach">4</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options">GTK_FILL</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="eap_fast_pac_provision_checkbutton">
-            <property name="label" translatable="yes">Allow automatic PAC pro_visioning</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">False</property>
-            <property name="use_underline">True</property>
-            <property name="draw_indicator">True</property>
-          </object>
-          <packing>
-            <property name="top_attach">1</property>
-            <property name="bottom_attach">2</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options"/>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkComboBox" id="eap_fast_pac_provision_combo">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="model">model9</property>
-            <child>
-              <object class="GtkCellRendererText" id="renderer9"/>
-              <attributes>
-                <attribute name="text">0</attribute>
-              </attributes>
-            </child>
-          </object>
-          <packing>
-            <property name="left_attach">1</property>
-            <property name="right_attach">2</property>
-            <property name="top_attach">1</property>
-            <property name="bottom_attach">2</property>
-            <property name="x_options">GTK_FILL</property>
-            <property name="y_options">GTK_FILL</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <child type="tab">
-      <object class="GtkLabel" id="label61">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">Anony_mous identity</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">anon_identity_entry</property>
       </object>
       <packing>
-        <property name="tab_fill">False</property>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
       </packing>
     </child>
-  </object>
+    <child>
+      <object class="GtkEntry" id="anon_identity_entry">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="activates_default">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">0</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="pac_file_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">PAC _file</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">pac_file_button</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkFileChooserButton" id="pac_file_button">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">2</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkBox" id="inner_auth_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="width">2</property>
+        <property name="top_attach">4</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="inner_auth_label">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="xalign">1</property>
+        <property name="label" translatable="yes">_Inner authentication</property>
+        <property name="use_underline">True</property>
+        <property name="mnemonic_widget">inner_auth_combo</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBox" id="inner_auth_combo">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="model">inner_auth_model</property>
+        <child>
+          <object class="GtkCellRendererText"/>
+          <attributes>
+            <attribute name="text">0</attribute>
+          </attributes>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">3</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkCheckButton" id="pac_provision_check">
+        <property name="label" translatable="yes">Allow automatic PAC pro_visioning</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="receives_default">False</property>
+        <property name="use_underline">True</property>
+        <property name="draw_indicator">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkComboBox" id="pac_provision_combo">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="model">pac_provision_model</property>
+        <child>
+          <object class="GtkCellRendererText"/>
+          <attributes>
+            <attribute name="text">0</attribute>
+          </attributes>
+        </child>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">1</property>
+      </packing>
+    </child>
+  </template>
 </interface>
