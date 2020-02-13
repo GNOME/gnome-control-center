@@ -165,7 +165,10 @@ cc_wacom_tool_initable_init (GInitable     *initable,
 			tool->id = ids[0];
 	}
 
-	tool->wstylus = libwacom_stylus_get_for_id (wacom_db, tool->id);
+	if (tool->id == 0)
+		tool->wstylus = libwacom_stylus_get_for_id (wacom_db, 0xfffff);
+	else
+		tool->wstylus = libwacom_stylus_get_for_id (wacom_db, tool->id);
 
 	if (!tool->wstylus) {
 		g_set_error (error, 0, 0, "Stylus description not found");
