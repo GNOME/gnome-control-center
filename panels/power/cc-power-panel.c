@@ -1547,11 +1547,16 @@ nm_client_state_changed (NMClient     *client,
   g_signal_handlers_unblock_by_func (self->wifi_switch, wifi_switch_changed, self);
 
   visible = has_mobile_devices (self->nm_client);
+
+  /* Set the switch active, if either of wimax or wwan is enabled. */
   active = nm_client_networking_get_enabled (client) &&
-           nm_client_wimax_get_enabled (client) &&
-           nm_client_wireless_hardware_get_enabled (client);
+           ((nm_client_wimax_get_enabled (client) &&
+             nm_client_wimax_hardware_get_enabled (client)) ||
+            (nm_client_wwan_get_enabled (client) &&
+             nm_client_wwan_hardware_get_enabled (client)));
   sensitive = nm_client_networking_get_enabled (client) &&
-              nm_client_wireless_hardware_get_enabled (client);
+              (nm_client_wwan_hardware_get_enabled (client) ||
+               nm_client_wimax_hardware_get_enabled (client));
 
   g_debug ("mobile state changed to %s", active ? "enabled" : "disabled");
 
