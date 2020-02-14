@@ -47,4 +47,6 @@ void cc_grd_on_vnc_password_entry_notify_text (GtkEntry   *entry,
                                                GParamSpec *pspec,
                                                gpointer    user_data);
 
+void cc_grd_update_password_entry (GtkEntry *entry);
+
 G_END_DECLS
