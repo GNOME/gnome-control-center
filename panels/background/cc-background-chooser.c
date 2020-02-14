@@ -346,7 +346,7 @@ cc_background_chooser_select_file (CcBackgroundChooser *self)
   gtk_window_set_modal (GTK_WINDOW (filechooser), TRUE);
 
   preview = gtk_image_new ();
-  gtk_widget_set_size_request (preview, 256, -1);
+  gtk_widget_set_size_request (preview, 154, -1);
   gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (filechooser), preview);
   gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (filechooser), FALSE);
   gtk_widget_show (preview);
