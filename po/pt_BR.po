@@ -33,8 +33,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-02-05 08:22+0000\n"
-"PO-Revision-Date: 2020-02-06 20:23-0300\n"
+"POT-Creation-Date: 2020-02-13 21:10+0000\n"
+"PO-Revision-Date: 2020-02-14 04:15-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -284,7 +284,6 @@ msgid "Run in background"
 msgstr "Executar em segundo plano"
 
 #: panels/applications/cc-applications-panel.ui:254
-#| msgid "No Desktop Background"
 msgid "Set Desktop Background"
 msgstr "Definir plano de fundo da área de trabalho"
 
@@ -1209,7 +1208,9 @@ msgstr ""
 "Cada dispositivo precisa de uma atualização do perfil de cor para ter "
 "gerenciamento de cor."
 
+#. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:812
+#: panels/diagnostics/cc-diagnostics-panel.c:143
 msgid "Learn more"
 msgstr "Saiba mais"
 
@@ -1773,34 +1774,24 @@ msgstr "Configure os aplicativos padrão"
 msgid "default;application;preferred;media;"
 msgstr "padrão;aplicativo;preferido;mídia;"
 
-#. translators: '%s' is the distributor's name, such as 'Fedora'
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
+#: panels/diagnostics/cc-diagnostics-panel.c:145
 #, c-format
+#| msgid ""
+#| "Sending reports of technical problems helps us improve %s. Reports are "
+#| "sent anonymously and are scrubbed of personal data."
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data."
+"anonymously and are scrubbed of personal data. %s"
 msgstr ""
 "Enviar relatórios de problemas técnicos nos ajuda a melhorar o %s. Os "
-"relatórios são enviados anonimamente e não contém dados pessoais."
-
-#: panels/diagnostics/cc-diagnostics-panel.c:151
-#: panels/diagnostics/cc-diagnostics-panel.ui:53
-msgid "Reports are sent anonymously and are scrubbed of personal data."
-msgstr ""
-"Os relatórios são enviados de forma anônima e não contêm dados pessoais."
+"relatórios são enviados anonimamente e não contêm dados pessoais. %s"
 
 #: panels/diagnostics/cc-diagnostics-panel.ui:30
 msgid "Problem Reporting"
 msgstr "Informe de erros"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:43
-msgid ""
-"Sending reports of technical problems help us improve this operating system."
-msgstr ""
-"Enviar relatórios de problemas técnicos nos ajuda a melhorar este sistema "
-"operacional."
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:78
+#: panels/diagnostics/cc-diagnostics-panel.ui:67
 msgid "_Automatic Problem Reporting"
 msgstr "Relatório _automático de problemas"
 
@@ -7573,12 +7564,10 @@ msgid "User Icon"
 msgstr "Ícone do usuário"
 
 #: panels/user-accounts/cc-user-panel.ui:238
-#| msgid "All Settings"
 msgid "Account Settings"
 msgstr "Configurações da conta"
 
 #: panels/user-accounts/cc-user-panel.ui:265
-#| msgid "Administrator"
 msgid "_Administrator"
 msgstr "_Administrador"
 
@@ -7591,7 +7580,6 @@ msgstr ""
 "configurações para todos os usuários."
 
 #: panels/user-accounts/cc-user-panel.ui:359
-#| msgid "Au_thentication"
 msgid "Authentication & Login"
 msgstr "Autenticação & Início de sessão"
 
@@ -7604,7 +7592,6 @@ msgid "A_utomatic Login"
 msgstr "Início a_utomático de sessão"
 
 #: panels/user-accounts/cc-user-panel.ui:500
-#| msgid "_Account Activity"
 msgid "Account Activity"
 msgstr "Atividade da conta"
 
@@ -8368,6 +8355,17 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "Reports are sent anonymously and are scrubbed of personal data."
+#~ msgstr ""
+#~ "Os relatórios são enviados de forma anônima e não contêm dados pessoais."
+
+#~ msgid ""
+#~ "Sending reports of technical problems help us improve this operating "
+#~ "system."
+#~ msgstr ""
+#~ "Enviar relatórios de problemas técnicos nos ajuda a melhorar este sistema "
+#~ "operacional."
 
 #~ msgid "Last Login"
 #~ msgstr "Última sessão"
