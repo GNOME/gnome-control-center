@@ -232,12 +232,8 @@ on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
                                  CcBackgroundSelectionFlags  flags,
                                  CcBackgroundPanel          *self)
 {
-
-  if (flags & CC_BACKGROUND_SELECTION_DESKTOP)
-    set_background (self, self->settings, item);
-
-  if (flags & CC_BACKGROUND_SELECTION_LOCK_SCREEN)
-    set_background (self, self->lock_settings, item);
+  set_background (self, self->settings, item);
+  set_background (self, self->lock_settings, item);
 }
 
 static void

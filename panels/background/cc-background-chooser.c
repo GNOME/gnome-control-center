@@ -35,10 +35,8 @@ struct _CcBackgroundChooser
   GtkBox              parent;
 
   GtkFlowBox         *flowbox;
-  GtkWidget          *popover_recent_box;
   GtkWidget          *recent_box;
   GtkFlowBox         *recent_flowbox;
-  GtkPopover         *selection_popover;
 
   gboolean            recent_selected;
 
@@ -181,39 +179,12 @@ on_delete_background_clicked_cb (GtkButton           *button,
 }
 
 static void
-on_selection_desktop_lock_clicked_cb (GtkButton           *button,
-                                      CcBackgroundChooser *self)
-{
-  emit_background_chosen (self, CC_BACKGROUND_SELECTION_DESKTOP | CC_BACKGROUND_SELECTION_LOCK_SCREEN);
-  gtk_popover_popdown (self->selection_popover);
-}
-
-static void
-on_selection_desktop_clicked_cb (GtkButton           *button,
-                                 CcBackgroundChooser *self)
-{
-  emit_background_chosen (self, CC_BACKGROUND_SELECTION_DESKTOP);
-  gtk_popover_popdown (self->selection_popover);
-}
-
-static void
-on_selection_lock_clicked_cb (GtkButton           *button,
-                              CcBackgroundChooser *self)
-{
-  emit_background_chosen (self, CC_BACKGROUND_SELECTION_LOCK_SCREEN);
-  gtk_popover_popdown (self->selection_popover);
-}
-
-static void
 on_item_activated_cb (GtkFlowBox          *flowbox,
                       GtkFlowBoxChild     *child,
                       CcBackgroundChooser *self)
 {
   self->recent_selected = flowbox == self->recent_flowbox;
-  gtk_widget_set_visible (self->popover_recent_box, self->recent_selected);
-
-  gtk_popover_set_relative_to (self->selection_popover, GTK_WIDGET (child));
-  gtk_popover_popup (self->selection_popover);
+  emit_background_chosen (self, CC_BACKGROUND_SELECTION_DESKTOP);
 }
 
 static void
@@ -313,16 +284,11 @@ cc_background_chooser_class_init (CcBackgroundChooserClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-chooser.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, flowbox);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, popover_recent_box);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, recent_box);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, recent_flowbox);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, selection_popover);
 
   gtk_widget_class_bind_template_callback (widget_class, on_delete_background_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_item_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_selection_desktop_lock_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_selection_desktop_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_selection_lock_clicked_cb);
 }
 
 static void
