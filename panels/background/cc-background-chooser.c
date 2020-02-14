@@ -72,6 +72,21 @@ emit_background_chosen (CcBackgroundChooser *self)
   gtk_flow_box_unselect_all (flowbox);
 }
 
+static void
+on_delete_background_clicked_cb (GtkButton *button,
+                                 BgRecentSource  *source)
+{
+  GtkWidget *parent;
+  CcBackgroundItem *item;
+
+  parent = gtk_widget_get_parent (gtk_widget_get_parent (GTK_WIDGET (button)));
+  g_assert (GTK_IS_FLOW_BOX_CHILD (parent));
+
+  item = g_object_get_data (G_OBJECT (parent), "item");
+
+  bg_recent_source_remove_item (source, item);
+}
+
 static GtkWidget*
 create_widget_func (gpointer model_item,
                     gpointer user_data)
@@ -82,6 +97,8 @@ create_widget_func (gpointer model_item,
   GtkWidget *child;
   GtkWidget *image;
   GtkWidget *icon;
+  GtkWidget *button_image;
+  GtkWidget *button = NULL;
   BgSource *source;
 
   source = BG_SOURCE (user_data);
@@ -104,9 +121,31 @@ create_widget_func (gpointer model_item,
                        NULL);
   gtk_style_context_add_class (gtk_widget_get_style_context (icon), "slideshow-emblem");
 
+
+  if (BG_IS_RECENT_SOURCE (source)) {
+    button_image = gtk_image_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_BUTTON);
+    button =  g_object_new (GTK_TYPE_BUTTON,
+                            "image", button_image,
+                            "halign", GTK_ALIGN_END,
+                            "valign", GTK_ALIGN_START,
+                            "margin", 6,
+                            "visible", TRUE,
+                            NULL);
+
+    gtk_style_context_add_class (gtk_widget_get_style_context (button), "osd");
+    gtk_style_context_add_class (gtk_widget_get_style_context (button), "remove-button");
+
+    g_signal_connect (button,
+                    "clicked",
+                    G_CALLBACK (on_delete_background_clicked_cb),
+                    source);
+  }
+
   overlay = gtk_overlay_new ();
   gtk_container_add (GTK_CONTAINER (overlay), image);
   gtk_overlay_add_overlay (GTK_OVERLAY (overlay), icon);
+  if (button)
+    gtk_overlay_add_overlay (GTK_OVERLAY (overlay), button);
   gtk_widget_show (overlay);
 
   child = g_object_new (GTK_TYPE_FLOW_BOX_CHILD,
@@ -160,21 +199,6 @@ setup_flowbox (CcBackgroundChooser *self)
                            G_CALLBACK (update_recent_visibility),
                            self,
                            G_CONNECT_SWAPPED);
-}
-
-static void
-on_delete_background_clicked_cb (GtkButton           *button,
-                                 CcBackgroundChooser *self)
-{
-  g_autoptr(GList) list = NULL;
-  CcBackgroundItem *item;
-
-  list = gtk_flow_box_get_selected_children (self->recent_flowbox);
-  g_assert (g_list_length (list) == 1);
-
-  item = g_object_get_data (list->data, "item");
-
-  bg_recent_source_remove_item (self->recent_source, item);
 }
 
 static void
@@ -285,7 +309,6 @@ cc_background_chooser_class_init (CcBackgroundChooserClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, recent_box);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundChooser, recent_flowbox);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_delete_background_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_item_activated_cb);
 }
 
