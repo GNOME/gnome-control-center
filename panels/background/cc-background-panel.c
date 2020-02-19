@@ -57,12 +57,10 @@ struct _CcBackgroundPanel
   GnomeDesktopThumbnailFactory *thumb_factory;
 
   CcBackgroundItem *current_background;
-  CcBackgroundItem *current_lock_background;
 
   CcBackgroundChooser *background_chooser;
   GtkWidget *add_picture_button;
   CcBackgroundPreview *desktop_preview;
-  CcBackgroundPreview *lock_screen_preview;
 
   GtkWidget *spinner;
   GtkWidget *chooser;
@@ -70,67 +68,41 @@ struct _CcBackgroundPanel
 
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
 
-static CcBackgroundItem *
-get_current_background (CcBackgroundPanel *panel,
-                        GSettings         *settings)
-{
-  if (settings == panel->settings)
-    return panel->current_background;
-  else
-    return panel->current_lock_background;
-}
-
 static void
-update_preview (CcBackgroundPanel *panel,
-                GSettings         *settings,
-                CcBackgroundItem  *item)
+update_preview (CcBackgroundPanel *panel)
 {
   CcBackgroundItem *current_background;
 
-  current_background = get_current_background (panel, settings);
-
-  if (item && current_background)
-    {
-      g_object_unref (current_background);
-      current_background = cc_background_item_copy (item);
-      if (settings == panel->settings)
-        panel->current_background = current_background;
-      else
-        panel->current_lock_background = current_background;
-      cc_background_item_load (current_background, NULL);
-    }
-
-  if (settings == panel->settings)
-    cc_background_preview_set_item (panel->desktop_preview, current_background);
-  else
-    cc_background_preview_set_item (panel->lock_screen_preview, current_background);
+  current_background = panel->current_background;
+  cc_background_preview_set_item (panel->desktop_preview, current_background);
 }
 
 static gchar *
-get_save_path (CcBackgroundPanel *panel, GSettings *settings)
+get_save_path (void)
 {
   return g_build_filename (g_get_user_config_dir (),
                            "gnome-control-center",
                            "backgrounds",
-                           settings == panel->settings ? "last-edited.xml" : "last-edited-lock.xml",
+                           "last-edited.xml",
                            NULL);
 }
 
 static void
-reload_current_bg (CcBackgroundPanel *panel,
-                   GSettings         *settings)
+reload_current_bg (CcBackgroundPanel *panel)
 {
   g_autoptr(CcBackgroundItem) saved = NULL;
   CcBackgroundItem *configured;
+  GSettings *settings = NULL;
   g_autofree gchar *uri = NULL;
   g_autofree gchar *pcolor = NULL;
   g_autofree gchar *scolor = NULL;
 
   /* Load the saved configuration */
-  uri = get_save_path (panel, settings);
+  uri = get_save_path ();
   saved = cc_background_xml_get_item (uri);
 
   /* initalise the current background information from settings */
+  settings = panel->settings;
   uri = g_settings_get_string (settings, WP_URI_KEY);
   if (uri && *uri == '\0')
     g_clear_pointer (&uri, g_free);
@@ -162,16 +134,8 @@ reload_current_bg (CcBackgroundPanel *panel,
 		    NULL);
     }
 
-  if (settings == panel->settings)
-    {
-      g_clear_object (&panel->current_background);
-      panel->current_background = configured;
-    }
-  else
-    {
-      g_clear_object (&panel->current_lock_background);
-      panel->current_lock_background = configured;
-    }
+  g_clear_object (&panel->current_background);
+  panel->current_background = configured;
   cc_background_item_load (configured, NULL);
 }
 
@@ -232,24 +196,19 @@ set_background (CcBackgroundPanel *panel,
   g_settings_apply (settings);
 
   /* Save the source XML if there is one */
-  filename = get_save_path (panel, settings);
+  filename = get_save_path ();
   if (create_save_dir ())
-    cc_background_xml_save (get_current_background (panel, settings), filename);
+    cc_background_xml_save (panel->current_background, filename);
 }
 
 
 static void
 on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
                                  CcBackgroundItem           *item,
-                                 CcBackgroundSelectionFlags  flags,
                                  CcBackgroundPanel          *self)
 {
-
-  if (flags & CC_BACKGROUND_SELECTION_DESKTOP)
-    set_background (self, self->settings, item);
-
-  if (flags & CC_BACKGROUND_SELECTION_LOCK_SCREEN)
-    set_background (self, self->lock_settings, item);
+  set_background (self, self->settings, item);
+  set_background (self, self->lock_settings, item);
 }
 
 static void
@@ -299,7 +258,6 @@ cc_background_panel_finalize (GObject *object)
   CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
 
   g_clear_object (&panel->current_background);
-  g_clear_object (&panel->current_lock_background);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->finalize (object);
 }
@@ -325,7 +283,6 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, add_picture_button);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, background_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, desktop_preview);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, lock_screen_preview);
 
   gtk_widget_class_bind_template_callback (widget_class, on_chooser_background_chosen_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_add_picture_button_clicked_cb);
@@ -336,8 +293,8 @@ on_settings_changed (GSettings         *settings,
                      gchar             *key,
                      CcBackgroundPanel *panel)
 {
-  reload_current_bg (panel, settings);
-  update_preview (panel, settings, NULL);
+  reload_current_bg (panel);
+  update_preview (panel);
 }
 
 static void
@@ -353,17 +310,14 @@ cc_background_panel_init (CcBackgroundPanel *panel)
 
   panel->settings = g_settings_new (WP_PATH_ID);
   g_settings_delay (panel->settings);
-
+ 
   panel->lock_settings = g_settings_new (WP_LOCK_PATH_ID);
   g_settings_delay (panel->lock_settings);
 
-  /* Load the backgrounds */
-  reload_current_bg (panel, panel->settings);
-  update_preview (panel, panel->settings, NULL);
-  reload_current_bg (panel, panel->lock_settings);
-  update_preview (panel, panel->lock_settings, NULL);
+  /* Load the background */
+  reload_current_bg (panel);
+  update_preview (panel);
 
   /* Background settings */
   g_signal_connect (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel);
-  g_signal_connect (panel->lock_settings, "changed", G_CALLBACK (on_settings_changed), panel);
 }
