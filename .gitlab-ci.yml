@@ -268,8 +268,8 @@ stop_review:
 
 asan:
   <<: *sanitizer
-  stage: test
-  when: on_success
+  stage: manual
+  when: manual
   variables:
     BUILD_OPTS: "-Db_sanitize=address"
     LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
