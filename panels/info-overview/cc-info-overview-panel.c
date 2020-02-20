@@ -27,6 +27,7 @@
 
 #include "cc-info-overview-resources.h"
 #include "info-cleanup.h"
+#include "cc-util.h"
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -100,6 +101,20 @@ version_data_free (VersionData *data)
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (VersionData, version_data_free);
 
 G_DEFINE_TYPE (CcInfoOverviewPanel, cc_info_overview_panel, CC_TYPE_PANEL)
+
+
+
+static gboolean
+on_attribution_label_link (GtkLinkButton       *link_button,
+                           CcInfoOverviewPanel *self)
+{
+  const gchar *uri = gtk_link_button_get_uri (link_button);
+
+  if (g_strcmp0 (uri, "attribution-link") != 0)
+    return FALSE;
+
+  return cc_util_show_endless_terms_of_use (GTK_WIDGET (link_button));
+}
 
 static void
 version_start_element_handler (GMarkupParseContext      *ctx,
@@ -826,6 +841,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_device_name_entry_changed);
+  gtk_widget_class_bind_template_callback (widget_class, on_attribution_label_link);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);

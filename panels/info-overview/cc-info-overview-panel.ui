@@ -176,6 +176,19 @@
                   </object>
                 </child>
 
+                <!-- Endless license attribution document -->
+                <child>
+                  <object class="GtkLinkButton" id="attribution_link">
+                    <property name="label" translatable="yes" comments="Translators: A link to the terms of use of Endless OS.">_Endless Terms of Use</property>
+                    <property name="visible">True</property>
+                    <property name="use_underline">1</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="halign">GTK_ALIGN_CENTER</property>
+                    <property name="uri">attribution-link</property>
+                    <signal name="activate-link" handler="on_attribution_label_link" object="CcInfoOverviewPanel" swapped="no" />
+                  </object>
+                </child>
               </object>
             </child>
           </object>

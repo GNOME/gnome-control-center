@@ -21,7 +21,10 @@
 #pragma once
 
 #include <glib.h>
+#include <gtk/gtk.h>
 
 char * cc_util_normalize_casefold_and_unaccent (const char *str);
 char * cc_util_get_smart_date                  (GDateTime *date);
 char * cc_util_time_to_string_text             (gint64 msecs);
+
+gboolean cc_util_show_endless_terms_of_use (GtkWidget *widget);
