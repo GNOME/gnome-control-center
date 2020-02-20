@@ -178,7 +178,7 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
 
   g_settings_bind (panel->master_settings, "show-banners",
                    panel->dnd_switch,
-                   "active", G_SETTINGS_BIND_DEFAULT);
+                   "active", G_SETTINGS_BIND_INVERT_BOOLEAN);
   g_settings_bind (panel->master_settings, "show-in-lock-screen",
                    panel->lock_screen_switch,
                    "active", G_SETTINGS_BIND_DEFAULT);
