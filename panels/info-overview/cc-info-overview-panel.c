@@ -61,7 +61,6 @@ struct _CcInfoOverviewPanel
   GtkEntry        *device_name_entry;
   GtkWidget       *rename_button;
   CcListRow       *disk_row;
-  CcListRow       *gnome_version_row;
   CcListRow       *graphics_row;
   GtkListBox      *hardware_box;
   GtkDialog       *hostname_editor;
@@ -69,36 +68,13 @@ struct _CcInfoOverviewPanel
   CcListRow       *hostname_row;
   CcListRow       *memory_row;
   GtkListBox      *os_box;
-  CcListRow       *os_name_row;
+  CcListRow       *os_version_row;
   CcListRow       *os_type_row;
   CcListRow       *processor_row;
   CcListRow       *software_updates_row;
   CcListRow       *virtualization_row;
   CcListRow       *windowing_system_row;
 };
-
-typedef struct
-{
-  char *major;
-  char *minor;
-  char *micro;
-  char *distributor;
-  char *date;
-  char **current;
-} VersionData;
-
-static void
-version_data_free (VersionData *data)
-{
-  g_free (data->major);
-  g_free (data->minor);
-  g_free (data->micro);
-  g_free (data->distributor);
-  g_free (data->date);
-  g_free (data);
-}
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (VersionData, version_data_free);
 
 G_DEFINE_TYPE (CcInfoOverviewPanel, cc_info_overview_panel, CC_TYPE_PANEL)
 
@@ -115,103 +91,6 @@ on_attribution_label_link (GtkLinkButton       *link_button,
 
   return cc_util_show_endless_terms_of_use (GTK_WIDGET (link_button));
 }
-
-static void
-version_start_element_handler (GMarkupParseContext      *ctx,
-                               const char               *element_name,
-                               const char              **attr_names,
-                               const char              **attr_values,
-                               gpointer                  user_data,
-                               GError                  **error)
-{
-  VersionData *data = user_data;
-  if (g_str_equal (element_name, "platform"))
-    data->current = &data->major;
-  else if (g_str_equal (element_name, "minor"))
-    data->current = &data->minor;
-  else if (g_str_equal (element_name, "micro"))
-    data->current = &data->micro;
-  else if (g_str_equal (element_name, "distributor"))
-    data->current = &data->distributor;
-  else if (g_str_equal (element_name, "date"))
-    data->current = &data->date;
-  else
-    data->current = NULL;
-}
-
-static void
-version_end_element_handler (GMarkupParseContext      *ctx,
-                             const char               *element_name,
-                             gpointer                  user_data,
-                             GError                  **error)
-{
-  VersionData *data = user_data;
-  data->current = NULL;
-}
-
-static void
-version_text_handler (GMarkupParseContext *ctx,
-                      const char          *text,
-                      gsize                text_len,
-                      gpointer             user_data,
-                      GError             **error)
-{
-  VersionData *data = user_data;
-  if (data->current != NULL)
-    {
-      g_autofree char *stripped = NULL;
-
-      stripped = g_strstrip (g_strdup (text));
-      g_free (*data->current);
-      *data->current = g_strdup (stripped);
-    }
-}
-
-static gboolean
-load_gnome_version (char **version,
-                    char **distributor,
-                    char **date)
-{
-  GMarkupParser version_parser = {
-    version_start_element_handler,
-    version_end_element_handler,
-    version_text_handler,
-    NULL,
-    NULL,
-  };
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GMarkupParseContext) ctx = NULL;
-  g_autofree char *contents = NULL;
-  gsize length;
-  g_autoptr(VersionData) data = NULL;
-
-  if (!g_file_get_contents (DATADIR "/gnome/gnome-version.xml",
-                            &contents,
-                            &length,
-                            &error))
-    return FALSE;
-
-  data = g_new0 (VersionData, 1);
-  ctx = g_markup_parse_context_new (&version_parser, 0, data, NULL);
-
-  if (!g_markup_parse_context_parse (ctx, contents, length, &error))
-    {
-      g_warning ("Invalid version file: '%s'", error->message);
-    }
-  else
-    {
-      if (version != NULL)
-        *version = g_strdup_printf ("%s.%s.%s", data->major, data->minor, data->micro);
-      if (distributor != NULL)
-        *distributor = g_strdup (data->distributor);
-      if (date != NULL)
-        *date = g_strdup (data->date);
-
-      return TRUE;
-    }
-
-  return FALSE;
-};
 
 static char *
 get_renderer_from_session (void)
@@ -424,42 +303,24 @@ get_graphics_hardware_string (void)
 }
 
 static char *
-get_os_name (void)
+get_os_version (void)
 {
   g_autoptr(GHashTable) os_info = NULL;
-  const gchar *name, *version_id, *pretty_name, *build_id;
+  const gchar *version_id, *build_id;
   gchar *result = NULL;
-  g_autofree gchar *name_version = NULL;
 
   os_info = cc_os_release_get_values ();
 
   if (!os_info)
     return g_strdup (_("Unknown"));
 
-  name = g_hash_table_lookup (os_info, "NAME");
   version_id = g_hash_table_lookup (os_info, "VERSION_ID");
-  pretty_name = g_hash_table_lookup (os_info, "PRETTY_NAME");
   build_id = g_hash_table_lookup (os_info, "BUILD_ID");
 
-  if (pretty_name)
-    name_version = g_strdup (pretty_name);
-  else if (name && version_id)
-    name_version = g_strdup_printf ("%s %s", name, version_id);
+  if (build_id && version_id)
+    result = g_strdup_printf ("%s (%s)", version_id, build_id);
   else
-    name_version = g_strdup (_("Unknown"));
-
-  if (build_id)
-    {
-      /* translators: This is the name of the OS, followed by the build ID, for
-       * example:
-       * "Fedora 25 (Workstation Edition); Build ID: xyz" or
-       * "Ubuntu 16.04 LTS; Build ID: jki" */
-      result = g_strdup_printf (_("%s; Build ID: %s"), name_version, build_id);
-    }
-  else
-    {
-      result = g_strdup (name_version);
-    }
+    result = g_strdup (version_id);
 
   return result;
 }
@@ -690,17 +551,13 @@ get_windowing_system (void)
 static void
 info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 {
-  g_autofree gchar *gnome_version = NULL;
   glibtop_mem mem;
   const glibtop_sysinfo *info;
   g_autofree char *memory_text = NULL;
   g_autofree char *cpu_text = NULL;
   g_autofree char *os_type_text = NULL;
-  g_autofree char *os_name_text = NULL;
+  g_autofree char *os_version_text = NULL;
   g_autofree gchar *graphics_hardware_string = NULL;
-
-  if (load_gnome_version (&gnome_version, NULL, NULL))
-    cc_list_row_set_secondary_label (self->gnome_version_row, gnome_version);
 
   cc_list_row_set_secondary_label (self->windowing_system_row, get_windowing_system ());
 
@@ -716,8 +573,8 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   os_type_text = get_os_type ();
   cc_list_row_set_secondary_label (self->os_type_row, os_type_text);
 
-  os_name_text = get_os_name ();
-  cc_list_row_set_secondary_label (self->os_name_row, os_name_text);
+  os_version_text = get_os_version ();
+  cc_list_row_set_secondary_label (self->os_version_row, os_version_text ? os_version_text : "");
 
   get_primary_disc_info (self);
 
@@ -823,7 +680,6 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, device_name_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_box);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_editor);
@@ -831,7 +687,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, memory_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_box);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_type_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, rename_button);
