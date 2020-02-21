@@ -47,9 +47,20 @@
  * of #CcWwanData changes when SIM is changed.
  */
 
-/* Priority for connections. larger the number, lower the priority */
-#define CC_WWAN_DNS_PRIORITY_LOW  (20)
-#define CC_WWAN_DNS_PRIORITY_HIGH (15)
+/*
+ * Priority for connections. larger the number, lower the priority
+ * https://developer.gnome.org/NetworkManager/stable/nm-settings.html:
+ *
+ *   A lower value is better (higher priority). Zero selects a globally
+ *   configured default value. If the latter is missing or zero too, it
+ *   defaults to 50 for VPNs and 100 for other connections.
+ *
+ * Since WiFi and other network connections will likely get the default
+ * setting of 100, set WWAN DNS priorities higher than the default, with
+ * room to allow multiple modems to set priority above/below each other.
+ */
+#define CC_WWAN_DNS_PRIORITY_LOW  (120)
+#define CC_WWAN_DNS_PRIORITY_HIGH (115)
 
 /* These are to be set as route metric */
 #define CC_WWAN_ROUTE_PRIORITY_LOW  (1050)
