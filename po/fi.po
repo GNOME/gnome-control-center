@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-02-05 08:22+0000\n"
-"PO-Revision-Date: 2020-02-12 22:02+0200\n"
+"POT-Creation-Date: 2020-02-19 10:58+0000\n"
+"PO-Revision-Date: 2020-02-22 17:16+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -55,7 +55,7 @@ msgid "Session Bus"
 msgstr "Istuntoväylä"
 
 #: panels/applications/cc-applications-panel.c:743
-#: panels/power/cc-power-panel.c:2467 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2472 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Laitteet"
@@ -585,11 +585,11 @@ msgstr "Hallitse sovellusten eri oikeuksia ja asetuksia"
 msgid "application;flatpak;permission;setting;"
 msgstr "application;flatpak;permission;setting;sovellus;käyttöoikeudet;asetus;"
 
-#: panels/background/cc-background-chooser.c:350
+#: panels/background/cc-background-chooser.c:340
 msgid "Select a picture"
 msgstr "Valitse kuva"
 
-#: panels/background/cc-background-chooser.c:353
+#: panels/background/cc-background-chooser.c:343
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:240
 #: panels/color/cc-color-panel.c:893 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
@@ -616,29 +616,13 @@ msgstr "Valitse kuva"
 msgid "_Cancel"
 msgstr "_Peru"
 
-#: panels/background/cc-background-chooser.c:354
+#: panels/background/cc-background-chooser.c:344
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:253
 #: panels/sharing/cc-sharing-panel.c:411
 #: panels/user-accounts/cc-avatar-chooser.c:236
 msgid "_Open"
 msgstr "_Avaa"
-
-#: panels/background/cc-background-chooser.ui:104
-msgid "Set Background and Lock Screen"
-msgstr "Aseta taustakuva ja lukitusnäyttö"
-
-#: panels/background/cc-background-chooser.ui:114
-msgid "Set Background"
-msgstr "Aseta taustakuva"
-
-#: panels/background/cc-background-chooser.ui:121
-msgid "Set Lock Screen"
-msgstr "Aseta lukitusnäyttö"
-
-#: panels/background/cc-background-chooser.ui:143
-msgid "Remove Background"
-msgstr "Poista taustakuva"
 
 #: panels/background/cc-background-item.c:140
 msgid "multiple sizes"
@@ -655,11 +639,11 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Ei työpöydän taustaa"
 
-#: panels/background/cc-background-panel.c:143
+#: panels/background/cc-background-panel.c:115
 msgid "Current background"
 msgstr "Nykyinen taustakuva"
 
-#: panels/background/cc-background-panel.ui:63
+#: panels/background/cc-background-panel.ui:55
 msgid "Add Picture…"
 msgstr "Lisää kuva…"
 
@@ -1189,7 +1173,9 @@ msgstr ""
 "Laitteet vaativat ajan tasalla olevan väriprofiilin, jotta niiden värejä on "
 "mahdollista hallita."
 
+#. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:812
+#: panels/diagnostics/cc-diagnostics-panel.c:143
 msgid "Learn more"
 msgstr "Lue lisää"
 
@@ -1743,35 +1729,21 @@ msgstr "Määritä oletussovellukset"
 msgid "default;application;preferred;media;"
 msgstr "default;application;preferred;media;oletussovellus;ensisijainen;"
 
-#. translators: '%s' is the distributor's name, such as 'Fedora'
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
+#: panels/diagnostics/cc-diagnostics-panel.c:145
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
-"anonymously and are scrubbed of personal data."
+"anonymously and are scrubbed of personal data. %s"
 msgstr ""
 "Vikailmoitusten lähettäminen auttaa parantamaan %sa. Ilmoitukset eivät "
-"sisällä henkilökohtaisia tietoja. Ilmoitukset lähetetään anonyymisti."
-
-#: panels/diagnostics/cc-diagnostics-panel.c:151
-#: panels/diagnostics/cc-diagnostics-panel.ui:53
-msgid "Reports are sent anonymously and are scrubbed of personal data."
-msgstr ""
-"Raportit lähetetään anonyymisti, ja niistä poistetaan henkilökohtaiset "
-"tiedot."
+"sisällä henkilökohtaisia tietoja. Ilmoitukset lähetetään anonyymisti. %s"
 
 #: panels/diagnostics/cc-diagnostics-panel.ui:30
 msgid "Problem Reporting"
 msgstr "Vikailmoitukset"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:43
-msgid ""
-"Sending reports of technical problems help us improve this operating system."
-msgstr ""
-"Teknisiin ongelmiin liittyvien raporttien lähettäminen auttaa meitä "
-"parantamaan tätä käyttöjärjestelmää."
-
-#: panels/diagnostics/cc-diagnostics-panel.ui:78
+#: panels/diagnostics/cc-diagnostics-panel.ui:67
 msgid "_Automatic Problem Reporting"
 msgstr "_Automaattiset vikailmoitukset"
 
@@ -2896,7 +2868,6 @@ msgid "Secure network (WPA2)"
 msgstr "Turvallinen verkko (WPA2)"
 
 #: panels/network/cc-wifi-connection-row.c:273
-#| msgid "Secure network (WPA)"
 msgid "Secure network (WPA3)"
 msgstr "Turvallinen verkko (WPA3)"
 
@@ -3238,8 +3209,6 @@ msgid "WPA & WPA2 Enterprise"
 msgstr "WPA & WPA2 Enterprise"
 
 #: panels/network/connection-editor/ce-page-security.c:361
-#| msgctxt "category"
-#| msgid "Personal"
 msgid "WPA3 Personal"
 msgstr "WPA3-Personal"
 
@@ -3608,7 +3577,7 @@ msgstr "Langaton verkkolaite ei tue yhteyspisteeksi asettamista"
 
 #: panels/network/net-proxy.c:70
 #: panels/notifications/cc-notifications-panel.c:267
-#: panels/power/cc-power-panel.c:2063 panels/power/cc-power-panel.c:2074
+#: panels/power/cc-power-panel.c:2068 panels/power/cc-power-panel.c:2079
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:843
 #: panels/universal-access/cc-ua-panel.c:856
@@ -4417,7 +4386,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Näytä viestin sisältö _lukitusnäytöllä"
 
 #: panels/notifications/cc-notifications-panel.c:267
-#: panels/power/cc-power-panel.c:2069 panels/power/cc-power-panel.c:2076
+#: panels/power/cc-power-panel.c:2074 panels/power/cc-power-panel.c:2081
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:843
 #: panels/universal-access/cc-ua-panel.c:856
@@ -4647,7 +4616,7 @@ msgstr "Pelaamiseen tarkoitettu syötelaite"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-power-panel.c:657 panels/power/cc-power-panel.c:939
-#: panels/power/cc-power-panel.c:2420
+#: panels/power/cc-power-panel.c:2425
 msgid "Battery"
 msgstr "Akku"
 
@@ -4695,93 +4664,93 @@ msgstr "Akut"
 msgid "When _idle"
 msgstr "Kun _käyttämättä"
 
-#: panels/power/cc-power-panel.c:1824
+#: panels/power/cc-power-panel.c:1829
 msgid "Power Saving"
 msgstr "Virransäästö"
 
-#: panels/power/cc-power-panel.c:1858
+#: panels/power/cc-power-panel.c:1863
 msgid "_Screen Brightness"
 msgstr "_Näytön kirkkaus"
 
-#: panels/power/cc-power-panel.c:1879
+#: panels/power/cc-power-panel.c:1884
 msgid "Automatic Brightness"
 msgstr "Automaattinen kirkkaus"
 
-#: panels/power/cc-power-panel.c:1892
+#: panels/power/cc-power-panel.c:1897
 msgid "_Keyboard Brightness"
 msgstr "Näppäimistön _kirkkaus"
 
-#: panels/power/cc-power-panel.c:1903
+#: panels/power/cc-power-panel.c:1908
 msgid "_Dim Screen When Inactive"
 msgstr "_Himmennä näyttö koneen ollessa käyttämättä"
 
-#: panels/power/cc-power-panel.c:1921
+#: panels/power/cc-power-panel.c:1926
 msgid "_Blank Screen"
 msgstr "_Tyhjä näyttö"
 
-#: panels/power/cc-power-panel.c:1944
+#: panels/power/cc-power-panel.c:1949
 msgid "_Wi-Fi"
 msgstr "_Wifi"
 
-#: panels/power/cc-power-panel.c:1945
+#: panels/power/cc-power-panel.c:1950
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Wifi voidaan sammuttaa virran säästämiseksi."
 
-#: panels/power/cc-power-panel.c:1961
+#: panels/power/cc-power-panel.c:1966
 msgid "_Mobile Broadband"
 msgstr "_Mobiililaajakaista"
 
-#: panels/power/cc-power-panel.c:1962
+#: panels/power/cc-power-panel.c:1967
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Mobiililaajakaista (3G, 4G, LTE jne.) voidaan sammuttaa virran säästämiseksi."
 
-#: panels/power/cc-power-panel.c:2012
+#: panels/power/cc-power-panel.c:2017
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2013
+#: panels/power/cc-power-panel.c:2018
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth voidaan sammuttaa virran säästämiseksi."
 
-#: panels/power/cc-power-panel.c:2065
+#: panels/power/cc-power-panel.c:2070
 msgid "When on battery power"
 msgstr "Käytettäessä akkua"
 
-#: panels/power/cc-power-panel.c:2067
+#: panels/power/cc-power-panel.c:2072
 msgid "When plugged in"
 msgstr "Käytettäessä verkkovirtaa"
 
-#: panels/power/cc-power-panel.c:2161
+#: panels/power/cc-power-panel.c:2166
 msgid "Suspend"
 msgstr "Valmiustila"
 
-#: panels/power/cc-power-panel.c:2162
+#: panels/power/cc-power-panel.c:2167
 msgid "Power Off"
 msgstr "Virta pois päältä"
 
-#: panels/power/cc-power-panel.c:2163
+#: panels/power/cc-power-panel.c:2168
 msgid "Hibernate"
 msgstr "Lepotila"
 
-#: panels/power/cc-power-panel.c:2164
+#: panels/power/cc-power-panel.c:2169
 msgid "Nothing"
 msgstr "Ei mitään"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2264
+#: panels/power/cc-power-panel.c:2269
 msgid "Suspend & Power Button"
 msgstr "Valmiustila ja virran katkaisu"
 
-#: panels/power/cc-power-panel.c:2305
+#: panels/power/cc-power-panel.c:2310
 msgid "_Automatic Suspend"
 msgstr "_Automaattinen valmiustila"
 
-#: panels/power/cc-power-panel.c:2306
+#: panels/power/cc-power-panel.c:2311
 msgid "Automatic suspend"
 msgstr "Automaattinen valmiustila"
 
-#: panels/power/cc-power-panel.c:2364
+#: panels/power/cc-power-panel.c:2369
 msgid "Po_wer Button Action"
 msgstr "_Virtapainikkeen toiminto"
 
@@ -6007,7 +5976,7 @@ msgstr ""
 msgid "Copy"
 msgstr "Kopioi"
 
-#: panels/sharing/cc-sharing-panel.c:1277
+#: panels/sharing/cc-sharing-panel.c:1279
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Jakaminen"
@@ -8196,7 +8165,7 @@ msgstr "[PANEELI] [ARGUMENTTI…]"
 msgid "Privacy"
 msgstr "Yksityisyys"
 
-#: shell/cc-panel-loader.c:292
+#: shell/cc-panel-loader.c:288
 msgid "Available panels:"
 msgstr "Käytettävissä olevat paneelit:"
 
@@ -8303,6 +8272,30 @@ msgstr[1] "%u sisääntuloa"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Järjestelmän äänet"
+
+#~ msgid "Set Background and Lock Screen"
+#~ msgstr "Aseta taustakuva ja lukitusnäyttö"
+
+#~ msgid "Set Background"
+#~ msgstr "Aseta taustakuva"
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Aseta lukitusnäyttö"
+
+#~ msgid "Remove Background"
+#~ msgstr "Poista taustakuva"
+
+#~ msgid "Reports are sent anonymously and are scrubbed of personal data."
+#~ msgstr ""
+#~ "Raportit lähetetään anonyymisti, ja niistä poistetaan henkilökohtaiset "
+#~ "tiedot."
+
+#~ msgid ""
+#~ "Sending reports of technical problems help us improve this operating "
+#~ "system."
+#~ msgstr ""
+#~ "Teknisiin ongelmiin liittyvien raporttien lähettäminen auttaa meitä "
+#~ "parantamaan tätä käyttöjärjestelmää."
 
 #~ msgid "Notification _Popups"
 #~ msgstr "_Ponnahdusilmoitukset"
