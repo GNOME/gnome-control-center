@@ -1110,7 +1110,7 @@ cc_sharing_panel_setup_screen_sharing_dialog_gnome_remote_desktop (CcSharingPane
                     G_CALLBACK (screen_sharing_hide_cb),
                     self);
 
-  cc_grd_update_password_entry (self->remote_control_password_entry);
+  cc_grd_update_password_entry (GTK_ENTRY (self->remote_control_password_entry));
 
   /* accept at most 8 bytes in password entry */
   g_signal_connect (self->remote_control_password_entry,
