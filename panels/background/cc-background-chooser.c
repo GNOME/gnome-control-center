@@ -220,10 +220,16 @@ on_file_chooser_response_cb (GtkDialog           *filechooser,
 {
   if (response == GTK_RESPONSE_ACCEPT)
     {
-      g_autofree gchar *filename = NULL;
+      g_autoptr(GSList) filenames = NULL;
+      GSList *l;
 
-      filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (filechooser));
-      bg_recent_source_add_file (self->recent_source, filename);
+      filenames = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (filechooser));
+      for (l = filenames; l != NULL; l = l->next)
+        {
+          g_autofree gchar *filename = l->data;
+
+          bg_recent_source_add_file (self->recent_source, filename);
+        }
     }
 
   gtk_widget_destroy (GTK_WIDGET (filechooser));
@@ -349,6 +355,7 @@ cc_background_chooser_select_file (CcBackgroundChooser *self)
   gtk_widget_set_size_request (preview, 154, -1);
   gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (filechooser), preview);
   gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (filechooser), FALSE);
+  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (filechooser), TRUE);
   gtk_widget_show (preview);
 
   factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
