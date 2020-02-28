@@ -58,6 +58,7 @@ struct _CcInfoOverviewPanel
   CcPanel          parent_instance;
 
   GtkEntry        *device_name_entry;
+  GtkWidget       *rename_button;
   CcListRow       *disk_row;
   CcListRow       *gnome_version_row;
   CcListRow       *graphics_row;
@@ -744,6 +745,17 @@ open_software_update (CcInfoOverviewPanel *self)
 }
 
 static void
+on_device_name_entry_changed (CcInfoOverviewPanel *self)
+{
+  const gchar *current_hostname, *new_hostname;
+
+  current_hostname = gtk_entry_get_text (GTK_ENTRY (self->hostname_entry));
+  new_hostname = gtk_entry_get_text (GTK_ENTRY (self->device_name_entry));
+  gtk_widget_set_sensitive (self->rename_button,
+                            g_strcmp0 (current_hostname, new_hostname) != 0);
+}
+
+static void
 open_hostname_edit_dialog (CcInfoOverviewPanel *self)
 {
   GtkWindow *toplevel;
@@ -807,11 +819,13 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_type_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, rename_button);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, software_updates_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, virtualization_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, windowing_system_row);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_device_name_entry_changed);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
