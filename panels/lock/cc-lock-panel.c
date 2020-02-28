@@ -23,6 +23,7 @@
 #include "cc-lock-resources.h"
 #include "cc-util.h"
 
+#include <act/act.h>
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
@@ -39,6 +40,9 @@ struct _CcLockPanel
   GtkComboBox *lock_after_combo;
   GtkListBox  *lock_list_box;
   GtkSwitch   *show_notifications_switch;
+
+  GtkWidget   *automatic_screen_lock_delay_row;
+  GtkWidget   *automatic_screen_lock_row;
 };
 
 CC_PANEL_REGISTER (CcLockPanel, cc_lock_panel)
@@ -205,6 +209,8 @@ cc_lock_panel_class_init (CcLockPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, lock_after_combo);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, lock_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, show_notifications_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcLockPanel, automatic_screen_lock_row);
+  gtk_widget_class_bind_template_child (widget_class, CcLockPanel, automatic_screen_lock_delay_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_blank_screen_delay_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_lock_combo_changed_cb);
@@ -214,6 +220,9 @@ static void
 cc_lock_panel_init (CcLockPanel *self)
 {
   guint value;
+  ActUserManager *um;
+  ActUser *user;
+  gboolean automatic_login;
 
   g_resources_register (cc_lock_get_resource ());
 
@@ -227,17 +236,30 @@ cc_lock_panel_init (CcLockPanel *self)
   self->notification_settings = g_settings_new ("org.gnome.desktop.notifications");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
 
-  g_settings_bind (self->lock_settings,
-                   "lock-enabled",
-                   self->automatic_screen_lock_switch,
-                   "active",
-                   G_SETTINGS_BIND_DEFAULT);
+  um = act_user_manager_get_default ();
+  user = act_user_manager_get_user_by_id (um, getuid ());
+  automatic_login = act_user_get_automatic_login (user);
 
-  g_settings_bind (self->lock_settings,
-                   "lock-enabled",
-                   self->lock_after_combo,
-                   "sensitive",
-                   G_SETTINGS_BIND_GET);
+  if (automatic_login)
+    {
+      gtk_switch_set_active (self->automatic_screen_lock_switch, FALSE);
+      gtk_widget_set_sensitive (self->automatic_screen_lock_row, FALSE);
+      gtk_widget_set_sensitive (self->automatic_screen_lock_delay_row, FALSE);
+    }
+  else
+    {
+      g_settings_bind (self->lock_settings,
+                      "lock-enabled",
+                      self->automatic_screen_lock_switch,
+                      "active",
+                      G_SETTINGS_BIND_DEFAULT);
+
+      g_settings_bind (self->lock_settings,
+                       "lock-enabled",
+                       self->lock_after_combo,
+                       "sensitive",
+                       G_SETTINGS_BIND_GET);
+    }
 
   set_lock_value_for_combo (self->lock_after_combo, self);
 
