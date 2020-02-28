@@ -406,6 +406,7 @@ static const gchar * const panel_order[] = {
   "usage",
   "lock",
   "diagnostics",
+  "metrics",
 
   /* Devices page */
   "sound",

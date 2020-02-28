@@ -13,6 +13,7 @@ panels = [
   'keyboard',
   'location',
   'lock',
+  'metrics',
   'microphone',
   'mouse',
   'notifications',

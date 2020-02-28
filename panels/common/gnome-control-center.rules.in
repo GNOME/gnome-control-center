@@ -1,5 +1,7 @@
 polkit.addRule(function(action, subject) {
-	if ((action.id == "org.freedesktop.locale1.set-locale" ||
+	if ((action.id == "com.endlessm.Metrics.SetEnabled" ||
+	     action.id == "com.endlessm.Metrics.ResetTrackingId" ||
+	     action.id == "org.freedesktop.locale1.set-locale" ||
 	     action.id == "org.freedesktop.locale1.set-keyboard" ||
 	     action.id == "org.freedesktop.hostname1.set-static-hostname" ||
 	     action.id == "org.freedesktop.hostname1.set-hostname" ||
