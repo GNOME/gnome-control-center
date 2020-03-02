@@ -237,11 +237,7 @@ cc_printers_panel_constructed (GObject *object)
   shell = cc_panel_get_shell (CC_PANEL (self));
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "printer-add-button");
-  cc_shell_embed_widget_in_header (shell, widget, GTK_POS_RIGHT);
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "search-button");
+    gtk_builder_get_object (self->builder, "top-right-buttons");
   cc_shell_embed_widget_in_header (shell, widget, GTK_POS_RIGHT);
 
   widget = (GtkWidget*)
@@ -1163,7 +1159,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   GtkWidget              *widget;
   PpCups                 *cups;
   g_autoptr(GError)       error = NULL;
-  gchar                  *objects[] = { "overlay", "permission-infobar", "printer-add-button", "search-button", NULL };
+  gchar                  *objects[] = { "overlay", "permission-infobar", "top-right-buttons", "printer-add-button", "search-button", NULL };
   guint                   builder_result;
 
   g_resources_register (cc_printers_get_resource ());
