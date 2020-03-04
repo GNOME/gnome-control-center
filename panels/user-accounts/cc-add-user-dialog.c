@@ -171,18 +171,18 @@ user_loaded_cb (ActUser         *user,
                 GParamSpec      *pspec,
                 CcAddUserDialog *self)
 {
-  const gchar *password;
+        const gchar *password;
 
-  finish_action (self);
+        finish_action (self);
 
-  /* Set a password for the user */
-  password = gtk_entry_get_text (self->local_password_entry);
-  act_user_set_password_mode (user, self->local_password_mode);
-  if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
+        /* Set a password for the user */
+        password = gtk_entry_get_text (self->local_password_entry);
+        act_user_set_password_mode (user, self->local_password_mode);
+        if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
         act_user_set_password (user, password, "");
 
-  self->user = g_object_ref (user);
-  gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
+        self->user = g_object_ref (user);
+        gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
 }
 
 static void
