@@ -84,6 +84,7 @@ struct _CcApplicationsPanel
   CcInfoRow       *no_camera;
   CcToggleRow     *location;
   CcInfoRow       *no_location;
+  CcToggleRow     *shortcuts;
   CcToggleRow     *microphone;
   CcInfoRow       *no_microphone;
   CcInfoRow       *builtin;
@@ -501,6 +502,42 @@ wallpaper_cb (CcApplicationsPanel *self)
     set_wallpaper_allowed (self, cc_toggle_row_get_allowed (self->wallpaper));
 }
 
+/* --- shortcuts permissions (flatpak) --- */
+
+static void
+get_shortcuts_allowed (CcApplicationsPanel *self,
+                       const gchar         *app_id,
+                       gboolean            *set,
+                       gboolean            *granted)
+{
+  g_auto(GStrv) perms = NULL;
+
+  perms = get_portal_permissions (self, "gnome", "shortcuts-inhibitor", app_id);
+
+  *set = perms != NULL;
+  *granted = (perms != NULL) && g_ascii_strcasecmp (perms[0], "GRANTED") == 0;
+}
+
+static void
+set_shortcuts_allowed (CcApplicationsPanel *self,
+                       gboolean             granted)
+{
+  const gchar *perms[2];
+  g_autofree gchar *desktop_id = g_strconcat (self->current_app_id, ".desktop", NULL);
+
+  perms[0] = granted ? "GRANTED" : "DENIED";
+  perms[1] = NULL;
+
+  set_portal_permissions (self, "gnome", "shortcuts-inhibitor", desktop_id, perms);
+}
+
+static void
+shortcuts_cb (CcApplicationsPanel *self)
+{
+  if (self->current_app_id)
+    set_shortcuts_allowed (self, cc_toggle_row_get_allowed (self->shortcuts));
+}
+
 /* --- device (microphone, camera, speaker) permissions (flatpak) --- */
 
 static void
@@ -836,6 +873,18 @@ update_integration_section (CcApplicationsPanel *self,
   cc_toggle_row_set_allowed (self->search, allowed);
   gtk_widget_set_visible (GTK_WIDGET (self->search), set && !disabled);
   gtk_widget_set_visible (GTK_WIDGET (self->no_search), set && disabled);
+
+  if (app_id != NULL)
+    {
+      g_autofree gchar *desktop_id = g_strconcat (app_id, ".desktop", NULL);
+      get_shortcuts_allowed (self, desktop_id, &set, &allowed);
+      gtk_widget_set_visible (GTK_WIDGET (self->shortcuts), set);
+      cc_toggle_row_set_allowed (self->shortcuts, allowed);
+    }
+  else
+    {
+      gtk_widget_hide (GTK_WIDGET (self->shortcuts));
+    }
 
   if (portal_app_id != NULL)
     {
@@ -1865,6 +1914,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notification);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, background);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, wallpaper);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, shortcuts);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_box);
@@ -1889,6 +1939,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, notification_cb);
   gtk_widget_class_bind_template_callback (widget_class, background_cb);
   gtk_widget_class_bind_template_callback (widget_class, wallpaper_cb);
+  gtk_widget_class_bind_template_callback (widget_class, shortcuts_cb);
   gtk_widget_class_bind_template_callback (widget_class, privacy_link_cb);
   gtk_widget_class_bind_template_callback (widget_class, sound_cb);
   gtk_widget_class_bind_template_callback (widget_class, permission_row_activated_cb);

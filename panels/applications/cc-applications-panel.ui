@@ -264,6 +264,12 @@
                                 <property name="info" translatable="yes">Disabled</property>
                               </object>
                             </child>
+                            <child>
+                              <object class="CcToggleRow" id="shortcuts">
+                                <property name="title" translatable="yes">Inhibit system keyboard shortcuts</property>
+                                <signal name="notify::allowed" handler="shortcuts_cb" swapped="yes"/>
+                              </object>
+                            </child>
                             <style>
                               <class name="view"/>
                               <class name="frame"/>
