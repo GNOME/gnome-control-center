@@ -31,8 +31,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-03-04 21:53+0000\n"
-"PO-Revision-Date: 2020-03-05 07:10+0900\n"
+"POT-Creation-Date: 2020-03-04 22:16+0000\n"
+"PO-Revision-Date: 2020-03-05 21:10+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -2780,7 +2780,7 @@ msgstr "エッジスクロール"
 # Button Label
 #: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:436
 msgid "Test Your _Settings"
-msgstr "設定を確認する(_S)"
+msgstr "設定を確認(_S)"
 
 #: panels/mouse/cc-mouse-test.c:132 panels/mouse/cc-mouse-test.ui:25
 msgid "Try clicking, double clicking, scrolling"
@@ -4482,7 +4482,7 @@ msgstr ""
 
 #: panels/online-accounts/online-accounts.ui:136
 msgid "Add an account"
-msgstr "アカウントを追加"
+msgstr "アカウントの追加"
 
 #: panels/online-accounts/online-accounts.ui:243
 msgid "Remove Account"
@@ -7264,13 +7264,14 @@ msgctxt "login history week label"
 msgid "%s — %s"
 msgstr "%s — %s"
 
+# %k:%M よりも %H:%M の方がガタガタしていなくて見やすい
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
 #: panels/user-accounts/cc-user-panel.c:766
 msgctxt "login date-time"
 msgid "%k:%M"
-msgstr "%k:%M"
+msgstr "%H:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
@@ -8250,13 +8251,15 @@ msgstr "検索をキャンセルする"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
-msgstr ""
+msgstr "最後に開いた設定パネルの識別子"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:6
 msgid ""
 "The identifier for the last Settings panel to be opened. Unrecognised values "
 "will be ignored and the first panel in the list selected."
 msgstr ""
+"最後に開いた設定パネルの識別子です。値を認識できない場合は無視して一覧の最初"
+"のパネルを選択します。"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:13
 msgid "Show warning when running a development build of Settings"
