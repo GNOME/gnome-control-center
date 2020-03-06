@@ -14,7 +14,7 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="transition-type">slide</property>
-        <signal name="notify::fold" handler="on_main_leaflet_fold_changed_cb" object="CcWindow" swapped="yes" />
+        <signal name="notify::folded" handler="on_main_leaflet_folded_changed_cb" object="CcWindow" swapped="yes" />
         <child>
           <object class="GtkBox" id="sidebar_box">
             <property name="visible">True</property>
@@ -113,8 +113,6 @@
             <property name="mode-transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
             <property name="child-transition-duration" bind-source="main_leaflet" bind-property="child-transition-duration" bind-flags="bidirectional|sync-create"/>
             <property name="transition-type" bind-source="main_leaflet" bind-property="transition-type" bind-flags="bidirectional|sync-create"/>
-            <signal name="notify::visible-child" handler="notify_header_visible_child_cb" swapped="yes"/>
-            <signal name="notify::fold" handler="notify_fold_cb" object="CcWindow" after="yes" swapped="yes"/>
             <child>
               <object class="GtkHeaderBar" id="header">
                 <property name="visible">True</property>
@@ -214,6 +212,8 @@
                     <property name="can_focus">False</property>
                     <property name="transition-type">crossfade</property>
                     <property name="transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
+                    <property name="visible" bind-source="header_box" bind-property="folded" bind-flags="sync-create"/>
+                    <property name="reveal-child" bind-source="header_box" bind-property="folded" bind-flags="sync-create"/>
                     <child>
                       <object class="GtkButton" id="back">
                         <property name="visible">True</property>

@@ -513,29 +513,7 @@ switch_to_previous_panel (CcWindow *self)
 
 /* Callbacks */
 static void
-update_fold_state (CcWindow *self)
-{
-  GtkWidget *header_child = hdy_leaflet_get_visible_child (self->header_box);
-  HdyFold fold = hdy_leaflet_get_fold (self->header_box);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->back_revealer), fold == HDY_FOLD_FOLDED);
-  gtk_revealer_set_reveal_child (self->back_revealer, fold == HDY_FOLD_FOLDED);
-}
-
-static void
-notify_header_visible_child_cb (CcWindow *self)
-{
-  update_fold_state (self);
-}
-
-static void
-notify_fold_cb (CcWindow *self)
-{
-  update_fold_state (self);
-}
-
-static void
-on_main_leaflet_fold_changed_cb (CcWindow *self)
+on_main_leaflet_folded_changed_cb (CcWindow *self)
 {
   GtkSelectionMode selection_mode;
 
@@ -543,7 +521,7 @@ on_main_leaflet_fold_changed_cb (CcWindow *self)
 
   selection_mode = GTK_SELECTION_SINGLE;
 
-  if (hdy_leaflet_get_fold (self->main_leaflet) == HDY_FOLD_FOLDED)
+  if (hdy_leaflet_get_folded (self->main_leaflet))
     selection_mode = GTK_SELECTION_NONE;
 
   cc_panel_list_set_selection_mode (self->panel_list, selection_mode);
@@ -915,9 +893,7 @@ cc_window_class_init (CcWindowClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, gdk_window_set_cb);
-  gtk_widget_class_bind_template_callback (widget_class, notify_header_visible_child_cb);
-  gtk_widget_class_bind_template_callback (widget_class, notify_fold_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_main_leaflet_fold_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_main_leaflet_folded_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
@@ -944,8 +920,6 @@ cc_window_init (CcWindow *self)
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())
     gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)), "devel");
-
-  update_fold_state (self);
 }
 
 CcWindow *
