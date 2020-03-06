@@ -1454,7 +1454,7 @@ search_for_remote_printers (THostSearchData *data)
                                  data->dialog);
 
   pp_samba_get_devices_async (self->samba_host,
-                              TRUE,
+                              FALSE,
                               self->remote_host_cancellable,
                               get_samba_host_devices_cb,
                               data->dialog);
