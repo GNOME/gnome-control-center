@@ -651,7 +651,7 @@ main (int argc, char **argv)
   g_setenv ("LC_ALL", "C", TRUE);
 
   gtk_test_init (&argc, &argv, NULL);
-  hdy_init (&argc, &argv);
+  hdy_init ();
 
   g_test_add ("/network-panel-wired/empty-ui",
               NetworkPanelFixture,
