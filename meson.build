@@ -99,7 +99,7 @@ libgvc = subproject(
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
-libhandy_dep = dependency('libhandy-0.0', version: '>= 0.0.9', required: false)
+libhandy_dep = dependency('libhandy-1', version: '>= 0.84.0', required: false)
 if not libhandy_dep.found()
   libhandy = subproject(
     'libhandy',
@@ -107,7 +107,6 @@ if not libhandy_dep.found()
       'examples=false',
       'glade_catalog=disabled',
       'introspection=disabled',
-      'static=true',
       'tests=false',
       'vapi=false',
     ]
