@@ -380,12 +380,21 @@
             ]
         },
         {
+            "name" : "mobile-broadband-provider-info",
+            "buildsystem" : "autotools",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/mobile-broadband-provider-info.git"
+                }
+            ]
+        },
+        {
             "name" : "libnma",
             "buildsystem" : "meson",
             "config-opts" : [
                 "-Dgtk_doc=false",
                 "-Dintrospection=false",
-                "-Dmobile_broadband_provider_info=false",
                 "-Dvapi=false"
             ],
             "sources" : [
@@ -404,8 +413,7 @@
                 "-Dlibnm_gtk=false",
                 "-Dselinux=false",
                 "-Dteam=false",
-                "-Dwwan=false",
-                "-Dmobile_broadband_provider_info=false"
+                "-Dwwan=false"
             ],
             "sources" : [
                 {
