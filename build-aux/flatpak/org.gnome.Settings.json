@@ -380,6 +380,22 @@
             ]
         },
         {
+            "name" : "libnma",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dgtk_doc=false",
+                "-Dintrospection=false",
+                "-Dmobile_broadband_provider_info=false",
+                "-Dvapi=false"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/libnma.git"
+                }
+            ]
+        },
+        {
             "name" : "network-manager-applet",
             "buildsystem" : "meson",
             "config-opts" : [
