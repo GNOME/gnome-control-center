@@ -200,8 +200,8 @@ activate_panel (CcWindow          *self,
 
   sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
   cc_panel_list_add_sidebar_widget (self->panel_list, sidebar_widget);
-  /* Ensure we show the panel when when the leaflet is folded and a sidebar
-   * widget's row is activated.
+  /* Ensure we show the panel when the leaflet is folded and a sidebar widget's
+   * row is activated.
    */
   g_signal_connect_object (self->current_panel, "sidebar-activated", G_CALLBACK (on_sidebar_activated_cb), self, G_CONNECT_SWAPPED);
 
