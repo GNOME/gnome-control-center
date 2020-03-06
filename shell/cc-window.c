@@ -131,14 +131,12 @@ remove_all_custom_widgets (CcWindow *self)
 static void
 show_panel (CcWindow *self)
 {
-  hdy_leaflet_set_visible_child (self->main_leaflet, GTK_WIDGET (self->stack));
   hdy_leaflet_set_visible_child (self->header_box, GTK_WIDGET (self->panel_headerbar));
 }
 
 static void
 show_sidebar (CcWindow *self)
 {
-  hdy_leaflet_set_visible_child (self->main_leaflet, GTK_WIDGET (self->sidebar_box));
   hdy_leaflet_set_visible_child (self->header_box, GTK_WIDGET (self->header));
 }
 
