@@ -24,6 +24,8 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
 
 #include "cc-application.h"
 #include "cc-log.h"
@@ -223,6 +225,8 @@ cc_application_startup (GApplication *application)
                                    self);
 
   G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
+
+  hdy_init ();
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (application),
                                          "app.help", help_accels);
