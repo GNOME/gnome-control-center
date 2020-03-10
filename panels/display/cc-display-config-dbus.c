@@ -1227,6 +1227,7 @@ is_scaled_mode_allowed (CcDisplayConfigDBus *self,
 
 static gboolean
 is_scale_allowed_by_active_monitors (CcDisplayConfigDBus *self,
+                                     CcDisplayMode       *mode,
                                      double               scale)
 {
   GList *l;
@@ -1238,7 +1239,7 @@ is_scale_allowed_by_active_monitors (CcDisplayConfigDBus *self,
       if (!cc_display_monitor_is_active (CC_DISPLAY_MONITOR (m)))
         continue;
 
-      if (!is_scaled_mode_allowed (self, m->current_mode, scale))
+      if (!is_scaled_mode_allowed (self, mode, scale))
         return FALSE;
     }
 
@@ -1266,7 +1267,7 @@ cc_display_config_dbus_is_scaled_mode_valid (CcDisplayConfig *pself,
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
 
   if (self->global_scale_required || cc_display_config_is_cloning (pself))
-    return is_scale_allowed_by_active_monitors (self, scale);
+    return is_scale_allowed_by_active_monitors (self, mode, scale);
 
   return is_scaled_mode_allowed (self, mode, scale);
 }
