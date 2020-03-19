@@ -205,6 +205,14 @@ endif
 config_h.set('HAVE_SNAP', enable_snap,
              description: 'Define to 1 if Snap support is enabled')
 
+# malcontent support
+enable_malcontent = get_option('malcontent')
+if enable_malcontent
+  malcontent_dep = dependency('malcontent-0', version: '>= 0.3.0')
+endif
+config_h.set('HAVE_MALCONTENT', enable_malcontent,
+             description: 'Define to 1 if malcontent support is enabled')
+
 if host_is_linux
   # network manager
   network_manager_deps = [
@@ -297,5 +305,6 @@ output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_
 output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
 output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
 output += '     Snap support ............................... ' + enable_snap.to_string() + '\n'
+output += '     Malcontent support ......................... ' + enable_malcontent.to_string() + '\n'
 
 message(output)
