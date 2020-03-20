@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-02-14 07:18+0000\n"
+"POT-Creation-Date: 2020-03-18 15:48+0000\n"
 "PO-Revision-Date: 2020-02-17 22:36+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
@@ -269,7 +269,7 @@ msgstr "Vykdyti fone"
 
 #: panels/applications/cc-applications-panel.ui:254
 msgid "Set Desktop Background"
-msgstr "Nustatyti darbastalio foną"
+msgstr "Nustatyti darbalaukio foną"
 
 #: panels/applications/cc-applications-panel.ui:260
 #: panels/applications/cc-applications-panel.ui:266
@@ -573,16 +573,16 @@ msgstr "Valdyti įvairius programos leidimus bei nustatymus"
 msgid "application;flatpak;permission;setting;"
 msgstr "programa;flatpak;leidimas;nustatymas;"
 
-#: panels/background/cc-background-chooser.c:350
+#: panels/background/cc-background-chooser.c:340
 msgid "Select a picture"
 msgstr "Pasirinkite paveikslėlį"
 
-#: panels/background/cc-background-chooser.c:353
+#: panels/background/cc-background-chooser.c:343
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:240
 #: panels/color/cc-color-panel.c:893 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
 #: panels/display/cc-display-panel.c:947
-#: panels/info-overview/cc-info-overview-panel.ui:235
+#: panels/info-overview/cc-info-overview-panel.ui:236
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:176
@@ -604,29 +604,13 @@ msgstr "Pasirinkite paveikslėlį"
 msgid "_Cancel"
 msgstr "_Atsisakyti"
 
-#: panels/background/cc-background-chooser.c:354
+#: panels/background/cc-background-chooser.c:344
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:253
 #: panels/sharing/cc-sharing-panel.c:411
 #: panels/user-accounts/cc-avatar-chooser.c:236
 msgid "_Open"
 msgstr "_Atverti"
-
-#: panels/background/cc-background-chooser.ui:104
-msgid "Set Background and Lock Screen"
-msgstr "Nustatyti foną ir užrakinimo ekraną"
-
-#: panels/background/cc-background-chooser.ui:114
-msgid "Set Background"
-msgstr "Nustatyti foną"
-
-#: panels/background/cc-background-chooser.ui:121
-msgid "Set Lock Screen"
-msgstr "Nustatyti užrakinimo ekraną"
-
-#: panels/background/cc-background-chooser.ui:143
-msgid "Remove Background"
-msgstr "Pašalinti foną"
 
 #: panels/background/cc-background-item.c:140
 msgid "multiple sizes"
@@ -641,13 +625,13 @@ msgstr "%d × %d"
 
 #: panels/background/cc-background-item.c:282
 msgid "No Desktop Background"
-msgstr "Nėra darbastalio fono"
+msgstr "Nėra darbalaukio fono"
 
-#: panels/background/cc-background-panel.c:143
+#: panels/background/cc-background-panel.c:115
 msgid "Current background"
 msgstr "Dabartinis fonas"
 
-#: panels/background/cc-background-panel.ui:63
+#: panels/background/cc-background-panel.ui:55
 msgid "Add Picture…"
 msgstr "Pridėti paveikslėlį…"
 
@@ -666,7 +650,7 @@ msgstr "Pakeiskite fono paveikslėlį fonu arba nuotrauka"
 #. Translators: Search terms to find the Background panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
 msgid "Wallpaper;Screen;Desktop;"
-msgstr "Fonas;Ekranas;Darbastalis;"
+msgstr "Fonas;Ekranas;Darbastalis;Darbalaukis;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:31
 msgid "No Bluetooth Found"
@@ -841,7 +825,7 @@ msgstr "Nelieskite kalibravimo įrenginio kol vykdoma"
 
 #: panels/color/cc-color-calibrate.ui:7
 msgid "Display Calibration"
-msgstr "Vaizduoklio kalibravimas"
+msgstr "Ekrano kalibravimas"
 
 #. This starts the calibration process
 #: panels/color/cc-color-calibrate.ui:40
@@ -1057,11 +1041,11 @@ msgstr "Kalibravimo įrenginys"
 
 #: panels/color/cc-color-panel.ui:189
 msgid "Select the type of display that is connected."
-msgstr "Pasirinkite prijungto vaizduoklio tipą."
+msgstr "Pasirinkite prijungto ekrano tipą."
 
 #: panels/color/cc-color-panel.ui:226
 msgid "Display Type"
-msgstr "Vaizduoklio tipas"
+msgstr "Ekrano (vaizduoklio) tipas"
 
 #: panels/color/cc-color-panel.ui:241
 msgid ""
@@ -1080,20 +1064,20 @@ msgid ""
 "Please set the display to a brightness that is typical for you. Color "
 "management will be most accurate at this brightness level."
 msgstr ""
-"Nustatykite jums įprastą vaizduoklio ryškumą. Spalvų tvarkymas bus "
-"tiksliausias šiam ryškumo lygiui."
+"Nustatykite jums įprastą ekrano šviesumą. Spalvų tvarkymas bus "
+"tiksliausias šiam šviesumo lygiui."
 
 #: panels/color/cc-color-panel.ui:307
 msgid ""
 "Alternatively, you can use the brightness level used with one of the other "
 "profiles for this device."
 msgstr ""
-"Taip pat galite naudoti ryškumo lygį, naudotą su kuriuo nors kitu šio "
+"Taip pat galite naudoti šviesumo lygį, naudotą su kuriuo nors kitu šio "
 "įrenginio profiliu."
 
 #: panels/color/cc-color-panel.ui:318
 msgid "Display Brightness"
-msgstr "Vaizduoklio ryškumas"
+msgstr "Ekrano šviesumas"
 
 #: panels/color/cc-color-panel.ui:333
 msgid ""
@@ -1292,11 +1276,11 @@ msgstr "15 minučių"
 
 #: panels/color/cc-color-panel.ui:1127
 msgid "Native to display"
-msgstr "Kūrimo vaizduoklis"
+msgstr "Įprastas ekranui"
 
 #: panels/color/cc-color-panel.ui:1131
 msgid "D50 (Printing and publishing)"
-msgstr "D50 (spaudimas ir pateikimas)"
+msgstr "D50 (spausdinimas ir pateikimas)"
 
 #: panels/color/cc-color-panel.ui:1135
 msgid "D55"
@@ -1394,7 +1378,7 @@ msgstr "Spalva"
 msgid ""
 "Calibrate the color of your devices, such as displays, cameras or printers"
 msgstr ""
-"Kalibruokite savo įrenginių, tokių kaip vaizduokliai, kameros ar "
+"Kalibruokite savo įrenginių, tokių kaip ekranai, vaizduokliai, kameros ar "
 "spausdintuvai, spalvas"
 
 #. Translators: Search terms to find the Color panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
@@ -1739,9 +1723,6 @@ msgstr "numatytoji;programa;pageidaujama;laikmena;"
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
 #: panels/diagnostics/cc-diagnostics-panel.c:145
 #, c-format
-#| msgid ""
-#| "Sending reports of technical problems helps us improve %s. Reports are "
-#| "sent anonymously and are scrubbed of personal data."
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
 "anonymously and are scrubbed of personal data. %s"
@@ -1785,12 +1766,12 @@ msgstr "Taip gali būti dėl aparatinės įrangos apribojimų."
 
 #: panels/display/cc-display-panel.ui:91
 msgid "Single Display"
-msgstr "Vienas vaizduoklis"
+msgstr "Vienas ekranas"
 
 #: panels/display/cc-display-panel.ui:110
 #: panels/display/cc-display-panel.ui:315
 msgid "Join Displays"
-msgstr "Sujungti vaizduoklius"
+msgstr "Sujungti ekranus"
 
 #: panels/display/cc-display-panel.ui:128
 msgid "Mirror"
@@ -1798,7 +1779,7 @@ msgstr "Veidrodis"
 
 #: panels/display/cc-display-panel.ui:153
 msgid "Display Mode"
-msgstr "Vaizduoklio veiksena"
+msgstr "Rodymo veiksena"
 
 #: panels/display/cc-display-panel.ui:222
 msgid "Contains top bar and Activities"
@@ -1806,27 +1787,27 @@ msgstr "Turi viršutinę juostą bei veiklas"
 
 #: panels/display/cc-display-panel.ui:223
 msgid "Primary Display"
-msgstr "Pagrindinis vaizduoklis"
+msgstr "Pagrindinis ekranas"
 
 #: panels/display/cc-display-panel.ui:245
 msgid ""
 "Drag displays to match your physical display setup. Select a display to "
 "change its settings."
 msgstr ""
-"Tempkite vaizduoklius, kad jie atitiktų jūsų fizinį išdėstymą. Pažymėkite "
-"vaizduoklį jo nustatymams keisti."
+"Tempkite ekranų paveikslėlius, kad jie atitiktų jų fizinį išdėstymą. Pažymėkite "
+"ekraną jo nustatymams keisti."
 
 #: panels/display/cc-display-panel.ui:252
 msgid "Display Arrangement"
-msgstr "Vaizduoklių išdėstymas"
+msgstr "Ekranų išdėstymas"
 
 #: panels/display/cc-display-panel.ui:387
 msgid "Active Display"
-msgstr "Aktyvus vaizduoklis"
+msgstr "Aktyvus ekranas"
 
 #: panels/display/cc-display-panel.ui:434
 msgid "Display Configuration"
-msgstr "Vaizduoklio konfigūracija"
+msgstr "Ekranų konfigūracija"
 
 #: panels/display/cc-display-panel.ui:453
 #: panels/display/gnome-display-panel.desktop.in.in:3
@@ -1972,11 +1953,11 @@ msgstr ""
 "Skydelis;Projektorius;xrandr;Ekranas;Raiška;Atnaujinimas;Monitorius;Naktinis;"
 "Apšvietimas;rausvumas;spalva;saulėtekis;saulėlydis;"
 
-#: panels/info-overview/cc-info-overview-panel.c:406
-#: panels/info-overview/cc-info-overview-panel.c:421
-#: panels/info-overview/cc-info-overview-panel.c:433
-#: panels/info-overview/cc-info-overview-panel.c:479
-#: panels/info-overview/cc-info-overview-panel.c:509
+#: panels/info-overview/cc-info-overview-panel.c:407
+#: panels/info-overview/cc-info-overview-panel.c:422
+#: panels/info-overview/cc-info-overview-panel.c:434
+#: panels/info-overview/cc-info-overview-panel.c:480
+#: panels/info-overview/cc-info-overview-panel.c:510
 msgid "Unknown"
 msgstr "Nežinomas"
 
@@ -1984,32 +1965,32 @@ msgstr "Nežinomas"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:441
+#: panels/info-overview/cc-info-overview-panel.c:442
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; Sukūrimo ID: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:456
+#: panels/info-overview/cc-info-overview-panel.c:457
 #, c-format
 msgid "64-bit"
 msgstr "64-bitų"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:459
+#: panels/info-overview/cc-info-overview-panel.c:460
 #, c-format
 msgid "32-bit"
 msgstr "32-bitų"
 
-#: panels/info-overview/cc-info-overview-panel.c:665
+#: panels/info-overview/cc-info-overview-panel.c:666
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:669
+#: panels/info-overview/cc-info-overview-panel.c:670
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:671
+#: panels/info-overview/cc-info-overview-panel.c:672
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Nežinoma"
@@ -2075,7 +2056,7 @@ msgstr ""
 "Įrenginio pavadinimas yra naudojamas šiam įrenginiui identifikuoti, kai jis "
 "matomas per tinklą arba poruojant su Bluetooth įrenginiais."
 
-#: panels/info-overview/cc-info-overview-panel.ui:226
+#: panels/info-overview/cc-info-overview-panel.ui:227
 msgid "_Rename"
 msgstr "_Pervadinti"
 
@@ -2880,7 +2861,7 @@ msgstr "Saugus tinklas"
 #: panels/network/net-device-ethernet.c:318
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:102 panels/network/network-mobile.ui:414
-#: panels/network/network-vpn.ui:78
+#: panels/network/network-vpn.ui:75
 msgid "Options…"
 msgstr "Parametrai..."
 
@@ -4680,15 +4661,15 @@ msgstr "Energijos taupymas"
 
 #: panels/power/cc-power-panel.c:1863
 msgid "_Screen Brightness"
-msgstr "_Ekrano ryškumas"
+msgstr "_Ekrano šviesumas"
 
 #: panels/power/cc-power-panel.c:1884
 msgid "Automatic Brightness"
-msgstr "Automatinis ryškumas"
+msgstr "Automatinis šviesumas"
 
 #: panels/power/cc-power-panel.c:1897
 msgid "_Keyboard Brightness"
-msgstr "_Klaviatūros ryškumas"
+msgstr "_Klaviatūros šviesumas"
 
 #: panels/power/cc-power-panel.c:1908
 msgid "_Dim Screen When Inactive"
@@ -4854,7 +4835,7 @@ msgstr "Rodyti baterijos būseną ir keisti energijos taupymo nustatymus"
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 msgstr ""
-"Energija;Miegoti;Pristabdyti;Užmigdyti;Akumuliatorius;Ryškumas;Pritemdyti;"
+"Energija;Miegoti;Pristabdyti;Užmigdyti;Akumuliatorius;šviesumas;Pritemdyti;"
 "Tuščias;Monitorius;DPMS;Laisva;"
 
 #: panels/printers/authentication-dialog.ui:11
@@ -5507,17 +5488,17 @@ msgstr "Perleisti"
 msgid "Add…"
 msgstr "Pridėti…"
 
-#: panels/printers/printers.ui:174
+#: panels/printers/printers.ui:179
 msgid "No printers"
 msgstr "Spausdintuvų nėra"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:188
+#: panels/printers/printers.ui:193
 msgid "Add a Printer…"
 msgstr "Pridėti spausdintuvą…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:220
+#: panels/printers/printers.ui:225
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -5985,7 +5966,7 @@ msgstr ""
 msgid "Copy"
 msgstr "Kopijuoti"
 
-#: panels/sharing/cc-sharing-panel.c:1277
+#: panels/sharing/cc-sharing-panel.c:1279
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Dalinimasis"
@@ -6875,7 +6856,7 @@ msgstr "_Balta ant juodo:"
 
 #: panels/universal-access/zoom-options.ui:845
 msgid "_Brightness:"
-msgstr "_Ryškumas:"
+msgstr "_šviesumas:"
 
 #: panels/universal-access/zoom-options.ui:866
 msgid "_Contrast:"
@@ -7982,7 +7963,7 @@ msgstr "%d iš %d"
 
 #: panels/wacom/cc-wacom-page.c:516
 msgid "Display Mapping"
-msgstr "Vaizduoklio susiejimas"
+msgstr "Ekrano susiejimas"
 
 #: panels/wacom/cc-wacom-panel.c:806 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
@@ -8022,7 +8003,7 @@ msgstr "Piešimo planšetės nuostatos"
 
 #: panels/wacom/gnome-wacom-properties.ui:44
 msgid "_Help"
-msgstr "_Žinynas"
+msgstr "_Pagalba"
 
 #: panels/wacom/gnome-wacom-properties.ui:125
 msgid "No tablet detected"
@@ -8063,11 +8044,11 @@ msgstr "Koreguokite pelės nustatymus"
 
 #: panels/wacom/gnome-wacom-properties.ui:356
 msgid "Adjust display resolution"
-msgstr "Pritaikyti vaizduoklio raišką"
+msgstr "Pritaikyti ekrano raišką"
 
 #: panels/wacom/gnome-wacom-properties.ui:376
 msgid "Decouple Display"
-msgstr "Atsieti vaizduoklį"
+msgstr "Atsieti ekraną"
 
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:217
 msgid "New shortcut…"
@@ -8132,7 +8113,7 @@ msgstr "GNOME nustatymai"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:8
 msgid "Utility to configure the GNOME desktop"
-msgstr "Įrankis GNOME darbalaukio konfigūravimui"
+msgstr "Įrankis GNOME grafinės aplinkos konfigūravimui"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:10
 msgid "Settings is the primary interface for configuring your system."
@@ -8170,7 +8151,7 @@ msgstr "[SKYDELIS] [ARGUMENTAS…]"
 msgid "Privacy"
 msgstr "Privatumas"
 
-#: shell/cc-panel-loader.c:292
+#: shell/cc-panel-loader.c:288
 msgid "Available panels:"
 msgstr "Prieinami skydeliai:"
 
@@ -8197,7 +8178,7 @@ msgstr ""
 
 #: shell/cc-window.ui:331
 msgid "Help"
-msgstr "Žinynas"
+msgstr "Pagalba"
 
 #. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: shell/gnome-control-center.desktop.in.in:17
@@ -8278,6 +8259,18 @@ msgstr[2] "%u įvesčių"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sistemos garsai"
+
+#~ msgid "Set Background and Lock Screen"
+#~ msgstr "Nustatyti foną ir užrakinimo ekraną"
+
+#~ msgid "Set Background"
+#~ msgstr "Nustatyti foną"
+
+#~ msgid "Set Lock Screen"
+#~ msgstr "Nustatyti užrakinimo ekraną"
+
+#~ msgid "Remove Background"
+#~ msgstr "Pašalinti foną"
 
 #~ msgid "Reports are sent anonymously and are scrubbed of personal data."
 #~ msgstr ""
