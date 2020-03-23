@@ -61,7 +61,8 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [
   polkit_gobject_dep,
-  dependency('libgtop-2.0')
+  dependency('libgtop-2.0'),
+  dependency('udisks2', version: '>= 2.8.2')
 ]
 
 info_panel_lib = static_library(
