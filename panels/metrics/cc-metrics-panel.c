@@ -35,25 +35,47 @@ struct _CcMetricsPanel
   CcListRow     *metrics_identifier_row;
   GtkListBox    *metrics_list_box;
   GtkWidget     *enable_metrics_switch;
+  gboolean       metrics_active;
+  gboolean       changing_state;
   GDBusProxy    *metrics_proxy;
 };
 
 CC_PANEL_REGISTER (CcMetricsPanel, cc_metrics_panel)
 
 static void
-metrics_switch_active_changed_cb (GtkSwitch *widget,
-                                  GParamSpec *pspec,
-                                  CcMetricsPanel *self)
+on_metrics_panel_set_enabled (GObject      *source_object,
+                              GAsyncResult *res,
+                              gpointer      user_data)
 {
-  gboolean metrics_active;
+  CcMetricsPanel *self = CC_METRICS_PANEL (user_data);
+  g_autoptr(GVariant) results;
 
-  metrics_active = gtk_switch_get_active (widget);
+  results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+                                      res,
+                                      NULL);
+
+  gtk_switch_set_state (GTK_SWITCH (self->enable_metrics_switch),
+                        self->metrics_active);
+  self->changing_state = FALSE;
+}
+
+static void
+metrics_switch_active_changed_cb (GtkSwitch *w, gboolean new_state, CcMetricsPanel *self)
+{
+  if (self->changing_state)
+    return TRUE;
+
+  self->changing_state = TRUE;
+  self->metrics_active = new_state;
   g_dbus_proxy_call (self->metrics_proxy,
                      "SetEnabled",
-                     g_variant_new ("(b)", metrics_active),
-                     G_DBUS_CALL_FLAGS_NONE, -1,
+                     g_variant_new ("(b)", self->metrics_active),
+                     G_DBUS_CALL_FLAGS_NONE,
+                     -1,
                      cc_panel_get_cancellable (CC_PANEL (self)),
-                     NULL, NULL);
+                     on_metrics_panel_set_enabled,
+                     self);
+  return TRUE;
 }
 
 static void
@@ -63,14 +85,20 @@ on_metrics_proxy_properties_changed (GDBusProxy *proxy,
                                      CcMetricsPanel *self)
 {
   g_autoptr(GVariant) value = NULL;
-  gboolean metrics_active;
   const gchar *tracking_id;
+  gboolean metrics_active;
 
   value = g_variant_lookup_value (changed_properties, "Enabled", G_VARIANT_TYPE_BOOLEAN);
   if (value)
     {
       metrics_active = g_variant_get_boolean (value);
-      gtk_switch_set_active (GTK_SWITCH (self->enable_metrics_switch), metrics_active);
+
+      /* If the D-Bus property is changed externally (for e.g. via d-feet), sync state */
+      if (self->metrics_active != metrics_active)
+        {
+          gtk_switch_set_state (GTK_SWITCH (self->enable_metrics_switch), metrics_active);
+          self->metrics_active = metrics_active;
+        }
       g_clear_pointer (&value, g_variant_unref);
     }
 
@@ -114,7 +142,10 @@ cc_metrics_panel_dispose (GObject *object)
 {
   CcMetricsPanel *self = CC_METRICS_PANEL (object);
 
-  g_object_unref (self->metrics_proxy);
+  g_signal_handlers_disconnect_by_func (self->metrics_proxy,
+                                        on_metrics_proxy_properties_changed,
+                                        self);
+  g_clear_object (&self->metrics_proxy);
 
   G_OBJECT_CLASS (cc_metrics_panel_parent_class)->dispose (object);
 }
@@ -125,19 +156,12 @@ cc_metrics_panel_constructed (GObject *object)
   CcMetricsPanel *self = CC_METRICS_PANEL (object);
   g_autoptr(GError) error = NULL;
   const gchar *tracking_id;
-  gboolean metrics_active;
   gboolean metrics_can_change;
   GtkWidget *box;
   g_autoptr(GPermission) permission = NULL;
   g_autoptr(GVariant) value = NULL;
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_widget_show (box);
-
-  self->enable_metrics_switch = gtk_switch_new ();
-  gtk_widget_show (self->enable_metrics_switch);
-  gtk_widget_set_valign (self->enable_metrics_switch, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), self->enable_metrics_switch, FALSE, FALSE, 4);
+  G_OBJECT_CLASS (cc_metrics_panel_parent_class)->constructed (object);
 
   self->metrics_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                        G_DBUS_PROXY_FLAGS_NONE,
@@ -149,7 +173,6 @@ cc_metrics_panel_constructed (GObject *object)
   if (error != NULL)
     {
       g_warning ("Unable to create a D-Bus proxy for the metrics daemon: %s", error->message);
-      metrics_active = FALSE;
     }
   else
     {
@@ -157,12 +180,12 @@ cc_metrics_panel_constructed (GObject *object)
                         G_CALLBACK (on_metrics_proxy_properties_changed), self);
 
       value = g_dbus_proxy_get_cached_property (self->metrics_proxy, "Enabled");
-      metrics_active = g_variant_get_boolean (value);
-      g_variant_unref (value);
+      self->metrics_active = g_variant_get_boolean (value);
+      g_clear_pointer (&value, g_variant_unref);
 
       value = g_dbus_proxy_get_cached_property (self->metrics_proxy, "TrackingId");
       tracking_id = g_variant_get_string (value, NULL);
-      g_variant_unref (value);
+      g_clear_pointer (&value, g_variant_unref);
     }
 
   permission = polkit_permission_new_sync ("com.endlessm.Metrics.SetEnabled",
@@ -172,16 +195,24 @@ cc_metrics_panel_constructed (GObject *object)
   else
     metrics_can_change = g_permission_get_allowed (permission);
 
-  g_signal_connect (self->enable_metrics_switch, "state-set",
-                    G_CALLBACK (metrics_switch_active_changed_cb), self);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->enable_metrics_switch), metrics_can_change);
-  gtk_switch_set_active (GTK_SWITCH (self->enable_metrics_switch), metrics_active);
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+  gtk_widget_show (box);
 
-  cc_list_row_set_secondary_label (self->metrics_identifier_row, tracking_id);
+  self->enable_metrics_switch = gtk_switch_new ();
+  gtk_widget_set_valign (self->enable_metrics_switch, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), self->enable_metrics_switch, FALSE, FALSE, 4);
+  gtk_widget_show (self->enable_metrics_switch);
 
   cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
                                    box,
                                    GTK_POS_RIGHT);
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self->enable_metrics_switch), metrics_can_change);
+  gtk_switch_set_state (GTK_SWITCH (self->enable_metrics_switch), self->metrics_active);
+  g_signal_connect (self->enable_metrics_switch, "state-set",
+                    G_CALLBACK (metrics_switch_active_changed_cb), self);
+
+  cc_list_row_set_secondary_label (self->metrics_identifier_row, tracking_id);
 }
 
 static void
