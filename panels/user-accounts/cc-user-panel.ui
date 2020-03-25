@@ -300,6 +300,49 @@
                                   </object>
                                 </child>
                                 <child>
+                                  <object class="GtkListBoxRow" id="parental_controls_row">
+                                    <property name="visible">False</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="border-width">10</property>
+                                        <property name="spacing">10</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="label" translatable="yes">_Parental Controls</property>
+                                            <property name="use_underline">True</property>
+                                            <property name="mnemonic_widget">parental_controls_button_label</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkImage" id="parental_control_go_next">
+                                            <property name="visible">True</property>
+                                            <property name="icon-name">go-next-symbolic</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="pack_type">end</property>
+                                          </packing>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel" id="parental_controls_button_label">
+                                            <property name="visible">True</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="pack_type">end</property>
+                                          </packing>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <child>
                                   <object class="GtkListBoxRow" id="language_row">
                                     <property name="visible">True</property>
                                     <child>
