@@ -30,13 +30,17 @@
 
 struct _CcMetricsPanel
 {
-  CcPanel     parent_instance;
+  CcPanel        parent_instance;
 
+  GtkStack      *stack;
   CcListRow     *metrics_identifier_row;
   GtkListBox    *metrics_list_box;
   GtkWidget     *enable_metrics_switch;
+
   gboolean       metrics_active;
   gboolean       changing_state;
+  gboolean       pending_state;
+
   GDBusProxy    *metrics_proxy;
 };
 
@@ -48,28 +52,41 @@ on_metrics_panel_set_enabled (GObject      *source_object,
                               gpointer      user_data)
 {
   CcMetricsPanel *self = CC_METRICS_PANEL (user_data);
-  g_autoptr(GVariant) results;
+  g_autoptr(GVariant) results = NULL;
+  g_autoptr(GError) error = NULL;
 
   results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
                                       res,
-                                      NULL);
+                                      &error);
+  if (results == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to enable/disable metrics: %s", error->message);
 
+      return;
+    }
+
+  self->changing_state = FALSE;
+  self->metrics_active = self->pending_state;
   gtk_switch_set_state (GTK_SWITCH (self->enable_metrics_switch),
                         self->metrics_active);
-  self->changing_state = FALSE;
 }
 
-static void
-metrics_switch_active_changed_cb (GtkSwitch *w, gboolean new_state, CcMetricsPanel *self)
+static gboolean
+metrics_switch_active_changed_cb (GtkSwitch *widget,
+                                  gboolean   new_state,
+                                  gpointer   user_data)
 {
+  CcMetricsPanel *self = CC_METRICS_PANEL (user_data);
+
   if (self->changing_state)
     return TRUE;
 
   self->changing_state = TRUE;
-  self->metrics_active = new_state;
+  self->pending_state = new_state;
   g_dbus_proxy_call (self->metrics_proxy,
                      "SetEnabled",
-                     g_variant_new ("(b)", self->metrics_active),
+                     g_variant_new ("(b)", self->pending_state),
                      G_DBUS_CALL_FLAGS_NONE,
                      -1,
                      cc_panel_get_cancellable (CC_PANEL (self)),
@@ -79,9 +96,9 @@ metrics_switch_active_changed_cb (GtkSwitch *w, gboolean new_state, CcMetricsPan
 }
 
 static void
-on_metrics_proxy_properties_changed (GDBusProxy *proxy,
-                                     GVariant *changed_properties,
-                                     GStrv invalidated_properties,
+on_metrics_proxy_properties_changed (GDBusProxy     *proxy,
+                                     GVariant       *changed_properties,
+                                     GStrv           invalidated_properties,
                                      CcMetricsPanel *self)
 {
   g_autoptr(GVariant) value = NULL;
@@ -137,15 +154,31 @@ on_attribution_label_link (GtkLinkButton  *link_button,
   return cc_util_show_endless_terms_of_use (GTK_WIDGET (link_button));
 }
 
+static gboolean
+to_child_name (GBinding     *binding,
+               const GValue *from,
+               GValue       *to,
+               gpointer      user_data)
+{
+  if (g_value_get_boolean (from))
+    g_value_set_string (to, "content");
+  else
+    g_value_set_string (to, "empty");
+  return TRUE;
+}
+
 static void
 cc_metrics_panel_dispose (GObject *object)
 {
   CcMetricsPanel *self = CC_METRICS_PANEL (object);
 
-  g_signal_handlers_disconnect_by_func (self->metrics_proxy,
-                                        on_metrics_proxy_properties_changed,
-                                        self);
-  g_clear_object (&self->metrics_proxy);
+  if (self->metrics_proxy)
+    {
+      g_signal_handlers_disconnect_by_func (self->metrics_proxy,
+                                            on_metrics_proxy_properties_changed,
+                                            self);
+      g_clear_object (&self->metrics_proxy);
+    }
 
   G_OBJECT_CLASS (cc_metrics_panel_parent_class)->dispose (object);
 }
@@ -203,16 +236,25 @@ cc_metrics_panel_constructed (GObject *object)
   gtk_box_pack_start (GTK_BOX (box), self->enable_metrics_switch, FALSE, FALSE, 4);
   gtk_widget_show (self->enable_metrics_switch);
 
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-                                   box,
-                                   GTK_POS_RIGHT);
-
   gtk_widget_set_sensitive (GTK_WIDGET (self->enable_metrics_switch), metrics_can_change);
   gtk_switch_set_state (GTK_SWITCH (self->enable_metrics_switch), self->metrics_active);
   g_signal_connect (self->enable_metrics_switch, "state-set",
                     G_CALLBACK (metrics_switch_active_changed_cb), self);
 
   cc_list_row_set_secondary_label (self->metrics_identifier_row, tracking_id);
+
+  g_object_bind_property_full (self->enable_metrics_switch,
+                               "active",
+                               self->stack,
+                               "visible-child-name",
+                               G_BINDING_SYNC_CREATE,
+                               to_child_name,
+                               NULL,
+                               NULL, NULL);
+
+  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
+                                   box,
+                                   GTK_POS_RIGHT);
 }
 
 static void
@@ -226,6 +268,7 @@ cc_metrics_panel_class_init (CcMetricsPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/metrics/cc-metrics-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcMetricsPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcMetricsPanel, metrics_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcMetricsPanel, metrics_identifier_row);
 

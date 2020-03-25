@@ -5,100 +5,148 @@
   <template class="CcMetricsPanel" parent="CcPanel">
     <property name="visible">True</property>
     <child>
-      <object class="GtkScrolledWindow">
-        <property name="visible">1</property>
-        <property name="hscrollbar-policy">never</property>
+      <object class="GtkStack" id="stack">
+        <property name="visible">true</property>
         <child>
-          <object class="HdyColumn">
-            <property name="visible">True</property>
-            <property name="maximum_width">600</property>
-            <property name="linear_growth_width">400</property>
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
-
+          <object class="GtkBox">
+            <property name="visible">true</property>
+            <property name="orientation">vertical</property>
+            <property name="valign">center</property>
             <child>
-              <object class="GtkBox">
-                <property name="visible">1</property>
-                <property name="orientation">vertical</property>
-                <property name="hexpand">1</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">1</property>
-                    <property name="margin-bottom">12</property>
-                    <property name="use_underline">1</property>
-                    <property name="label" translatable="yes">_Metrics</property>
-                    <property name="wrap">1</property>
-                    <property name="max-width-chars">50</property>
-                    <property name="xalign">0</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="metrics_explanation_label">
-                    <property name="visible">1</property>
-                    <property name="margin-bottom">12</property>
-                    <property name="use-markup">1</property>
-                    <property name="wrap">1</property>
-                    <property name="max-width-chars">50</property>
-                    <property name="xalign">0</property>
-                    <property name="use_underline">1</property>
-                    <property name="label" translatable="yes">_Endless collects metrics on user behavior and actions. All data sent is anonymous. We use the data to improve the system.</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="metrics_list_box">
-                    <property name="visible">1</property>
-                    <property name="can-focus">1</property>
-                    <property name="selection-mode">none</property>
-                    <property name="margin_bottom">16</property>
-		    <child>
-                      <object class="CcListRow" id="metrics_identifier_row">
-                        <property name="visible">True</property>
-                        <property name="title" translatable="yes">Your Metrics Identifier</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
+              <object class="GtkImage">
+                <property name="visible">true</property>
+                <property name="valign">start</property>
+                <property name="pixel-size">96</property>
+                <!-- FIXME: use proper icon -->
+                <property name="icon-name">action-unavailable-symbolic</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">true</property>
+                <property name="margin-top">20</property>
+                <property name="margin-bottom">15</property>
+                <property name="label" translatable="yes">Metrics services turned off</property>
+                <attributes>
+                  <attribute name="scale" value="1.44" />
+                </attributes>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">true</property>
+                <property name="label" translatable="yes">No anonymous usage data will be sent to Endless.</property>
+                <style>
+                  <class name="dim-label" />
+                </style>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="name">empty</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">true</property>
+            <property name="hscrollbar-policy">never</property>
+            <child>
+              <object class="HdyColumn">
+                <property name="visible">True</property>
+                <property name="maximum_width">600</property>
+                <property name="linear_growth_width">400</property>
+                <property name="margin_top">32</property>
+                <property name="margin_bottom">32</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">true</property>
+                    <property name="orientation">vertical</property>
                     <property name="hexpand">true</property>
-                    <property name="halign">end</property>
-                    <property name="spacing">12</property>
-                      <!-- Endless license attribution document -->
-                      <child>
-                        <object class="GtkLinkButton" id="attribution_link">
-                          <property name="label" translatable="yes" comments="Translators: A link to the terms of use of Endless OS.">_Endless Terms of Use</property>
-                          <property name="visible">True</property>
-                          <property name="use_underline">1</property>
-                          <property name="can_focus">False</property>
-                          <property name="halign">start</property>
-                          <property name="valign">center</property>
-                          <property name="uri">attribution-link</property>
-                          <signal name="activate-link" handler="on_attribution_label_link" object="CcMetricsPanel" swapped="no" />
-                        </object>
-                      </child>
-                      <!-- Reset metrics ID -->
-                      <child>
-                        <object class="GtkButton" id="reset_metrics_id_button">
-                          <property name="label" translatable="yes">_Reset Metrics Identifier</property>
-                          <property name="visible">1</property>
-                          <property name="use_underline">1</property>
-                          <property name="halign">end</property>
-                          <property name="valign">center</property>
-                          <signal name="clicked" handler="on_reset_metrics_id_button_clicked" object="CcMetricsPanel" swapped="no" />
-                        </object>
-                      </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">true</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="use_underline">true</property>
+                        <property name="label" translatable="yes">_Metrics</property>
+                        <property name="wrap">true</property>
+                        <property name="max-width-chars">50</property>
+                        <property name="xalign">0</property>
+                        <attributes>
+                          <attribute name="weight" value="bold" />
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="metrics_explanation_label">
+                        <property name="visible">true</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="use-markup">true</property>
+                        <property name="wrap">true</property>
+                        <property name="max-width-chars">50</property>
+                        <property name="xalign">0</property>
+                        <property name="use_underline">true</property>
+                        <property name="label" translatable="yes">_Endless collects metrics on user behavior and actions. All data sent is anonymous. We use the data to improve the system.</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkListBox" id="metrics_list_box">
+                        <property name="visible">true</property>
+                        <property name="can-focus">true</property>
+                        <property name="selection-mode">none</property>
+                        <property name="margin_bottom">16</property>
+                        <child>
+                          <object class="CcListRow" id="metrics_identifier_row">
+                            <property name="visible">True</property>
+                            <property name="title" translatable="yes">Your Metrics Identifier</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">true</property>
+                        <property name="hexpand">true</property>
+                        <property name="halign">end</property>
+                        <property name="spacing">12</property>
+                        <!-- Endless license attribution document -->
+                        <child>
+                          <object class="GtkLinkButton" id="attribution_link">
+                            <property name="label" translatable="yes" comments="Translators: A link to the terms of use of Endless OS.">_Endless Terms of Use</property>
+                            <property name="visible">True</property>
+                            <property name="use_underline">true</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">start</property>
+                            <property name="valign">center</property>
+                            <property name="uri">attribution-link</property>
+                            <signal name="activate-link" handler="on_attribution_label_link" object="CcMetricsPanel" swapped="no" />
+                          </object>
+                        </child>
+                        <!-- Reset metrics ID -->
+                        <child>
+                          <object class="GtkButton" id="reset_metrics_id_button">
+                            <property name="label" translatable="yes">_Reset Metrics Identifier</property>
+                            <property name="visible">true</property>
+                            <property name="use_underline">true</property>
+                            <property name="halign">end</property>
+                            <property name="valign">center</property>
+                            <signal name="clicked" handler="on_reset_metrics_id_button_clicked" object="CcMetricsPanel" swapped="no" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
             </child>
           </object>
+          <packing>
+            <property name="name">content</property>
+          </packing>
         </child>
       </object>
     </child>
