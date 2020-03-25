@@ -328,6 +328,18 @@
                                           </packing>
                                         </child>
                                         <child>
+                                          <object class="GtkImage" id="parental_control_information">
+                                            <property name="visible">False</property>
+                                            <property name="icon-name">dialog-information-symbolic</property>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                          <packing>
+                                            <property name="pack_type">end</property>
+                                          </packing>
+                                        </child>
+                                        <child>
                                           <object class="GtkLabel" id="parental_controls_button_label">
                                             <property name="visible">True</property>
                                             <style>
@@ -654,5 +666,18 @@
       <widget name="autologin_row"/>
       <widget name="last_login_row"/>
     </widgets>
+  </object>
+  <object class="GtkPopover" id="parental_controls_unavailable_popover">
+    <property name="can_focus">False</property>
+    <property name="border_width">12</property>
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="wrap">True</property>
+        <property name="label" translatable="yes">Parental controls can now only be applied to non-administrator accounts. See the &lt;a href="https://community.endlessos.com/t/how-have-parental-controls-changed-in-endless-os-3-8/12313"&gt;FAQ entry&lt;/a&gt;.</property>
+        <property name="use-markup">True</property>
+      </object>
+    </child>
   </object>
 </interface>
