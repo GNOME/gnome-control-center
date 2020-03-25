@@ -26,7 +26,9 @@
 #ifdef HAVE_SNAP
 #include <snapd-glib/snapd-glib.h>
 #endif
+#ifdef HAVE_MALCONTENT
 #include <libmalcontent/malcontent.h>
+#endif
 
 #include <gio/gdesktopappinfo.h>
 
@@ -63,13 +65,13 @@ struct _CcApplicationsPanel
   GtkWidget       *title_label;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
-
+#ifdef HAVE_MALCONTENT
   GCancellable    *cancellable;
 
   MctAppFilter    *app_filter;
   MctManager      *manager;
   guint            app_filter_id;
-
+#endif
   gchar           *current_app_id;
   gchar           *current_portal_app_id;
 
@@ -1620,8 +1622,9 @@ populate_applications (CcApplicationsPanel *self)
   GList *l;
 
   container_remove_all (GTK_CONTAINER (self->sidebar_listbox));
-
+#ifdef HAVE_MALCONTENT
   g_signal_handler_block (self->manager, self->app_filter_id);
+#endif
   infos = g_app_info_get_all ();
 
   for (l = infos; l; l = l->next)
@@ -1632,21 +1635,24 @@ populate_applications (CcApplicationsPanel *self)
 
       id = get_app_id (info);
       if (!g_app_info_should_show (info) ||
-          !mct_app_filter_is_appinfo_allowed (self->app_filter, info) ||
           g_str_has_prefix (id, EOS_LINK_PREFIX) ||
           has_replaced_by (info))
         {
           continue;
         }
-
+#ifdef HAVE_MALCONTENT
+      if (!mct_app_filter_is_appinfo_allowed (self->app_filter, info))
+        continue;
+#endif
       row = GTK_WIDGET (cc_applications_row_new (info));
       gtk_list_box_insert (GTK_LIST_BOX (self->sidebar_listbox), row, -1);
 
       if (g_strcmp0 (id, self->current_app_id) == 0)
         gtk_list_box_select_row (GTK_LIST_BOX (self->sidebar_listbox), GTK_LIST_BOX_ROW (row));
     }
-
+#ifdef HAVE_MALCONTENT
   g_signal_handler_unblock (self->manager, self->app_filter_id);
+#endif
 }
 
 static gint
@@ -1680,6 +1686,7 @@ filter_sidebar_rows (GtkListBoxRow *row,
   return g_strstr_len (app_name, -1, search_text) != NULL;
 }
 
+#ifdef HAVE_MALCONTENT
 static void
 app_filter_changed_cb (MctAppFilter        *app_filter,
                        uid_t               uid,
@@ -1687,6 +1694,7 @@ app_filter_changed_cb (MctAppFilter        *app_filter,
 {
   populate_applications (self);
 }
+#endif
 
 static void
 apps_changed (GAppInfoMonitor     *monitor,
@@ -1796,7 +1804,7 @@ static void
 cc_applications_panel_finalize (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
-
+#ifdef HAVE_MALCONTENT
   if (self->app_filter != NULL && self->app_filter_id != 0)
     {
       g_signal_handler_disconnect (self->manager, self->app_filter_id);
@@ -1805,6 +1813,7 @@ cc_applications_panel_finalize (GObject *object)
   g_clear_pointer (&self->app_filter, mct_app_filter_unref);
 
   g_clear_object (&self->manager);
+#endif
   g_clear_object (&self->notification_settings);
   g_clear_object (&self->location_settings);
   g_clear_object (&self->privacy_settings);
@@ -1965,8 +1974,10 @@ static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
   g_autoptr(GtkStyleProvider) provider = NULL;
+#ifdef HAVE_MALCONTENT
   g_autoptr(GDBusConnection) system_bus = NULL;
   g_autoptr(GError) error = NULL;
+#endif
   GtkListBoxRow *row;
 
   g_resources_register (cc_applications_get_resource ());
@@ -2021,7 +2032,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
-
+#ifdef HAVE_MALCONTENT
    /* FIXME: should become asynchronous */
   system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, self->cancellable, &error);
   if (system_bus == NULL)
@@ -2045,7 +2056,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   self->app_filter_id = g_signal_connect (self->manager, "app-filter-changed",
                                           G_CALLBACK (app_filter_changed_cb), self);
-
+#endif
   populate_applications (self);
 
   self->monitor = g_app_info_monitor_get ();
