@@ -71,7 +71,10 @@ ensure_manager (GCancellable *cancellable)
 
         connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, cancellable, &error);
         if (connection == NULL) {
-                g_warning ("Failed to connect to session bus: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        g_warning ("Failed to connect to session bus: %s",
+                                   error->message);
+                }
                 g_error_free (error);
                 return;
         }
@@ -85,7 +88,10 @@ ensure_manager (GCancellable *cancellable)
                                          cancellable,
                                          &error);
         if (manager == NULL) {
-                g_warning ("Failed to create fingerprint manager proxy: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        g_warning ("Failed to create fingerprint manager proxy: %s",
+                                   error->message);
+                }
                 g_error_free (error);
         }
 }
@@ -125,7 +131,10 @@ get_first_device (GCancellable *cancellable)
                                         cancellable,
                                         &error);
         if (device == NULL) {
-                g_warning ("Failed to create fingerprint device proxy: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        g_warning ("Failed to create fingerprint device proxy: %s",
+                                   error->message);
+                }
                 g_error_free (error);
         }
 
