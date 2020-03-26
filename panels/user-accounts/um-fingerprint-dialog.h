@@ -20,7 +20,9 @@
 #include <gtk/gtk.h>
 #include <act/act.h>
 
-gboolean set_fingerprint_label (GtkLabel   *state_label);
+void set_fingerprint_row (GtkWidget *fingerprint_row,
+                          GtkLabel  *state_label);
 void fingerprint_button_clicked (GtkWindow *parent,
+                                 GtkWidget *fingerprint_row,
                                  GtkLabel  *state_label,
                                  ActUser   *user);
