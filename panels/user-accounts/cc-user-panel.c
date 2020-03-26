@@ -849,9 +849,14 @@ show_user (ActUser *user, CcUserPanel *self)
         show = (act_user_get_uid (user) == getuid() &&
                 act_user_is_local_account (user) &&
                 (self->login_screen_settings &&
-                 g_settings_get_boolean (self->login_screen_settings, "enable-fingerprint-authentication")) &&
-                set_fingerprint_label (self->fingerprint_state_label));
-        gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), show);
+                 g_settings_get_boolean (self->login_screen_settings,
+                                         "enable-fingerprint-authentication")));
+
+        gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), FALSE);
+        if (show) {
+                set_fingerprint_row (GTK_WIDGET (self->fingerprint_row),
+                                     self->fingerprint_state_label);
+        }
 
         /* Autologin: show when local account */
         show = act_user_is_local_account (user);
@@ -1081,7 +1086,10 @@ change_fingerprint (CcUserPanel *self)
 
         g_assert (g_strcmp0 (g_get_user_name (), act_user_get_user_name (user)) == 0);
 
-        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))), self->fingerprint_state_label, user);
+        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                                    GTK_WIDGET (self->fingerprint_row),
+                                    self->fingerprint_state_label,
+                                    user);
 }
 
 static void
