@@ -39,6 +39,10 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
+#ifdef HAVE_MALCONTENT
+#include <libmalcontent/malcontent.h>
+#endif
+
 #include "cc-add-user-dialog.h"
 #include "cc-avatar-chooser.h"
 #include "cc-carousel.h"
@@ -87,6 +91,11 @@ struct _CcUserPanel {
         GtkBox          *no_users_box;
         GtkRevealer     *notification_revealer;
         GtkLabel        *password_button_label;
+#ifdef HAVE_MALCONTENT
+        GtkLabel        *parental_controls_button_label;
+        GtkImage        *parental_control_go_next;
+        GtkListBoxRow   *parental_controls_row;
+#endif
         GtkListBoxRow   *password_row;
         CcPermissionInfobar *permission_infobar;
         GtkButton       *remove_user_button;
@@ -289,6 +298,7 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         CcCarouselItem *item = NULL;
         GtkSettings *settings;
         gboolean animations;
+        guint users_count;
 
         settings = gtk_widget_get_settings (GTK_WIDGET (self->carousel));
 
@@ -299,7 +309,8 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         self->other_accounts = 0;
 
         list = act_user_manager_list_users (self->um);
-        g_debug ("Got %d users\n", g_slist_length (list));
+        users_count = g_slist_length (list);
+        g_debug ("Got %d users\n", users_count);
 
         list = g_slist_sort (list, (GCompareFunc) sort_users);
         for (l = list; l; l = l->next) {
@@ -319,6 +330,11 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         cc_carousel_select_item (self->carousel, item);
 
         g_object_set (settings, "gtk-enable-animations", animations, NULL);
+#ifdef HAVE_MALCONTENT
+        /* Parental Controls row not to be shown for single user setups. */
+        if (users_count > 1)
+                gtk_widget_show (GTK_WIDGET (self->parental_controls_row));
+#endif
 }
 
 static gint
@@ -795,6 +811,41 @@ get_autologin_possible (ActUser *user)
 static void on_permission_changed (CcUserPanel *self);
 static void full_name_edit_button_toggled (CcUserPanel *self);
 
+#ifdef HAVE_MALCONTENT
+static gboolean
+is_parental_controls_enabled_for_user (ActUser *user)
+{
+        g_autoptr(MctManager) manager = NULL;
+        g_autoptr(MctAppFilter) app_filter = NULL;
+        g_autoptr(GDBusConnection) system_bus = NULL;
+        g_autoptr(GError) error = NULL;
+
+        /* FIXME: should become asynchronous */
+        system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+        if (system_bus == NULL) {
+	        g_warning ("Error getting system bus while trying to show user details: %s", error->message);
+	        return FALSE;
+        }
+
+        manager = mct_manager_new (system_bus);
+        app_filter = mct_manager_get_app_filter (manager,
+                                                 act_user_get_uid (user),
+                                                 MCT_GET_APP_FILTER_FLAGS_NONE,
+                                                 NULL,
+                                                 &error);
+        if (error) {
+                if (!g_error_matches (error, MCT_MANAGER_ERROR, MCT_MANAGER_ERROR_DISABLED))
+                        g_warning ("Error retrieving app filter for user %s: %s",
+                                   act_user_get_user_name (user),
+                                   error->message);
+
+                return FALSE;
+        }
+
+        return mct_app_filter_is_enabled (app_filter);
+}
+#endif
+
 static void
 show_user (ActUser *user, CcUserPanel *self)
 {
@@ -858,6 +909,24 @@ show_user (ActUser *user, CcUserPanel *self)
         /* Autologin: show when local account */
         show = act_user_is_local_account (user);
         gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), show);
+
+#ifdef HAVE_MALCONTENT
+        /* Parental Controls: Unavailable if user is admin */
+        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
+                gtk_widget_hide (GTK_WIDGET (self->parental_control_go_next));
+                /* TRANSLATORS: Status of Parental Controls setup */
+                gtk_label_set_text (self->parental_controls_button_label, _("Unavailable"));
+        } else {
+                if (is_parental_controls_enabled_for_user (user))
+                        /* TRANSLATORS: Status of Parental Controls setup */
+                        gtk_label_set_text (self->parental_controls_button_label, _("Enabled"));
+                else
+                        /* TRANSLATORS: Status of Parental Controls setup */
+                        gtk_label_set_text (self->parental_controls_button_label, _("Disabled"));
+
+                gtk_widget_show (GTK_WIDGET (self->parental_control_go_next));
+        }
+#endif
 
         /* Language: do not show for current user */
         show = act_user_get_uid (user) != getuid();
@@ -1107,6 +1176,22 @@ show_history (CcUserPanel *self)
         gtk_widget_destroy (GTK_WIDGET (dialog));
 }
 
+#ifdef HAVE_MALCONTENT
+static void
+spawn_malcontent_control (CcUserPanel *self)
+{
+        ActUser *user;
+
+        user = get_selected_user (self);
+
+        /* no-op if the user is administrator */
+        if (act_user_get_account_type (user) != ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
+                const gchar *argv[] = { "malcontent-control", NULL };
+                g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+        }
+}
+#endif
+
 static void
 activate_row (GtkListBox *box, GtkListBoxRow *row, CcUserPanel *self)
 {
@@ -1122,6 +1207,12 @@ activate_row (GtkListBox *box, GtkListBoxRow *row, CcUserPanel *self)
         } else if (row == self->last_login_row) {
                 show_history (self);
         }
+
+#ifdef HAVE_MALCONTENT
+        if (row == self->parental_controls_row) {
+		spawn_malcontent_control (self);
+        }
+#endif
 }
 
 static void
@@ -1335,6 +1426,10 @@ on_permission_changed (CcUserPanel *self)
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), TRUE);
                 remove_unlock_tooltip (GTK_WIDGET (self->last_login_row));
+#ifdef HAVE_MALCONTENT
+                gtk_widget_set_sensitive (GTK_WIDGET (self->parental_controls_row), TRUE);
+                remove_unlock_tooltip (GTK_WIDGET (self->parental_controls_row));
+#endif
         }
         else {
                 gtk_stack_set_visible_child (self->user_icon_stack, GTK_WIDGET (self->user_icon_image));
@@ -1350,6 +1445,10 @@ on_permission_changed (CcUserPanel *self)
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), FALSE);
                 add_unlock_tooltip (GTK_WIDGET (self->last_login_row));
+#ifdef HAVE_MALCONTENT
+                gtk_widget_set_sensitive (GTK_WIDGET (self->parental_controls_row), FALSE);
+                add_unlock_tooltip (GTK_WIDGET (self->parental_controls_row));
+#endif
         }
 }
 
@@ -1524,6 +1623,11 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
+#ifdef HAVE_MALCONTENT
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_controls_button_label);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_control_go_next);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_controls_row);
+#endif
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_button_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, permission_infobar);
