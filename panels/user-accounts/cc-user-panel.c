@@ -856,7 +856,8 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), FALSE);
         if (show) {
                 set_fingerprint_row (GTK_WIDGET (self->fingerprint_row),
-                                     self->fingerprint_state_label);
+                                     self->fingerprint_state_label,
+                                     NULL);
         }
 
         /* Autologin: show when local account */
@@ -1090,7 +1091,8 @@ change_fingerprint (CcUserPanel *self)
         fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
                                     GTK_WIDGET (self->fingerprint_row),
                                     self->fingerprint_state_label,
-                                    user);
+                                    user,
+                                    NULL);
 }
 
 static void
