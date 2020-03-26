@@ -1475,6 +1475,8 @@ cc_user_panel_dispose (GObject *object)
 {
         CcUserPanel *self = CC_USER_PANEL (object);
 
+        g_clear_object (&self->selected_user);
+
         g_clear_object (&self->login_screen_settings);
 
         g_clear_pointer ((GtkWidget **)&self->language_chooser, gtk_widget_destroy);
