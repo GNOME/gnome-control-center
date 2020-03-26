@@ -175,6 +175,10 @@ if enable_cheese
   deps += cheese_deps
 endif
 
+if enable_malcontent
+  deps += malcontent_dep
+endif
+
 cflags += [
   '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir),
   '-DHAVE_LIBPWQUALITY',
