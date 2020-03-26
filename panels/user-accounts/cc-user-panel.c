@@ -174,10 +174,9 @@ set_selected_user (CcUserPanel *self, CcCarouselItem *item)
 {
         uid_t uid;
 
-        g_clear_object (&self->selected_user);
-
         uid = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "uid"));
-        self->selected_user = act_user_manager_get_user_by_id (self->um, uid);
+        g_set_object (&self->selected_user,
+                      act_user_manager_get_user_by_id (self->um, uid));
 
         if (self->selected_user != NULL) {
                 show_user (self->selected_user, self);
@@ -1474,6 +1473,8 @@ static void
 cc_user_panel_dispose (GObject *object)
 {
         CcUserPanel *self = CC_USER_PANEL (object);
+
+        g_clear_object (&self->selected_user);
 
         g_clear_object (&self->login_screen_settings);
 
