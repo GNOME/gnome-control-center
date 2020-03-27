@@ -863,7 +863,8 @@ update_accessx_label (GSettings *settings, const gchar *key, CcUaPanel *self)
 
   on = g_settings_get_boolean (settings, KEY_STICKYKEYS_ENABLED) ||
        g_settings_get_boolean (settings, KEY_SLOWKEYS_ENABLED) ||
-       g_settings_get_boolean (settings, KEY_BOUNCEKEYS_ENABLED);
+       g_settings_get_boolean (settings, KEY_BOUNCEKEYS_ENABLED) ||
+       g_settings_get_boolean (settings, KEY_KEYBOARD_TOGGLE);
 
   gtk_label_set_text (GTK_LABEL (self->value_accessx), on ? _("On") : _("Off"));
 }
