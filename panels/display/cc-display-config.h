@@ -121,6 +121,10 @@ struct _CcDisplayMonitorClass
   gboolean          (*get_underscanning)      (CcDisplayMonitor  *self);
   void              (*set_underscanning)      (CcDisplayMonitor  *self,
                                                gboolean           u);
+  gboolean          (*supports_variable_refresh_rate) (CcDisplayMonitor *self);
+  gboolean          (*get_variable_refresh_rate)      (CcDisplayMonitor *self);
+  void              (*set_variable_refresh_rate)      (CcDisplayMonitor *self,
+                                                       gboolean          u);
   CcDisplayMode*    (*get_mode)               (CcDisplayMonitor  *self);
   CcDisplayMode*    (*get_preferred_mode)     (CcDisplayMonitor  *self);
   GList*            (*get_modes)              (CcDisplayMonitor  *self);
@@ -210,6 +214,11 @@ gboolean          cc_display_monitor_supports_underscanning (CcDisplayMonitor  *
 gboolean          cc_display_monitor_get_underscanning      (CcDisplayMonitor  *monitor);
 void              cc_display_monitor_set_underscanning      (CcDisplayMonitor  *monitor,
                                                              gboolean           underscanning);
+
+gboolean          cc_display_monitor_supports_variable_refresh_rate (CcDisplayMonitor *monitor);
+gboolean          cc_display_monitor_get_variable_refresh_rate      (CcDisplayMonitor *monitor);
+void              cc_display_monitor_set_variable_refresh_rate      (CcDisplayMonitor *monitor,
+                                                                     gboolean          enabled);
 
 CcDisplayMode*    cc_display_monitor_get_mode               (CcDisplayMonitor  *monitor);
 void              cc_display_monitor_get_geometry           (CcDisplayMonitor  *monitor,

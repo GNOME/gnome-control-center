@@ -322,6 +322,26 @@ cc_display_monitor_set_underscanning (CcDisplayMonitor *self,
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_underscanning (self, underscanning);
 }
 
+gboolean
+cc_display_monitor_supports_variable_refresh_rate (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->supports_variable_refresh_rate (self);
+}
+
+gboolean
+cc_display_monitor_get_variable_refresh_rate (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_variable_refresh_rate (self);
+}
+
+void
+cc_display_monitor_set_variable_refresh_rate (CcDisplayMonitor *self,
+                                              gboolean enabled)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_variable_refresh_rate (self, enabled);
+}
+
+
 void
 cc_display_monitor_set_mode (CcDisplayMonitor *self, CcDisplayMode *m)
 {
