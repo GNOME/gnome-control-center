@@ -380,6 +380,31 @@
             ]
         },
         {
+            "name" : "mobile-broadband-provider-info",
+            "buildsystem" : "autotools",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/mobile-broadband-provider-info.git"
+                }
+            ]
+        },
+        {
+            "name" : "libnma",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dgtk_doc=false",
+                "-Dintrospection=false",
+                "-Dvapi=false"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/libnma.git"
+                }
+            ]
+        },
+        {
             "name" : "network-manager-applet",
             "buildsystem" : "meson",
             "config-opts" : [
@@ -388,8 +413,7 @@
                 "-Dlibnm_gtk=false",
                 "-Dselinux=false",
                 "-Dteam=false",
-                "-Dwwan=false",
-                "-Dmobile_broadband_provider_info=false"
+                "-Dwwan=false"
             ],
             "sources" : [
                 {
@@ -563,7 +587,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://source.puri.sm/Librem5/libhandy.git"
+                    "url" : "https://source.puri.sm/Librem5/libhandy.git",
+                    "branch" : "libhandy-0-0"
                 }
             ]
         },
