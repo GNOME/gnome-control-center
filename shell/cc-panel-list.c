@@ -392,6 +392,7 @@ static const gchar * const panel_order[] = {
   "background",
   "notifications",
   "search",
+  "multitasking",
   "applications",
   "privacy",
   "online-accounts",
