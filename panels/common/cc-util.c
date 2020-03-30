@@ -145,7 +145,7 @@ cc_util_get_smart_date (GDateTime *date)
           }
 }
 
-/* Copied from src/properties/bacon-video-widget-properties.c
+/* Copied from src/plugins/properties/bacon-video-widget-properties.c
  * in totem */
 char *
 cc_util_time_to_string_text (gint64 msecs)
@@ -168,13 +168,34 @@ cc_util_time_to_string_text (gint64 msecs)
 
   if (hour > 0)
     {
-      /* 5 hours 2 minutes 12 seconds */
-      return g_strdup_printf (C_("time", "%s %s %s"), hours, mins, secs);
+      if (min > 0 && sec > 0)
+        {
+          /* 5 hours 2 minutes 12 seconds */
+          return g_strdup_printf (C_("hours minutes seconds", "%s %s %s"), hours, mins, secs);
+        }
+      else if (min > 0)
+        {
+          /* 5 hours 2 minutes */
+          return g_strdup_printf (C_("hours minutes", "%s %s"), hours, mins);
+        }
+      else
+        {
+          /* 5 hours */
+          return g_strdup_printf (C_("hours", "%s"), hours);
+        }
     }
   else if (min > 0)
     {
-      /* 2 minutes 12 seconds */
-      return g_strdup_printf (C_("time", "%s %s"), mins, secs);
+      if (sec > 0)
+        {
+          /* 2 minutes 12 seconds */
+          return g_strdup_printf (C_("minutes seconds", "%s %s"), mins, secs);
+        }
+      else
+        {
+          /* 2 minutes */
+          return g_strdup_printf (C_("minutes", "%s"), mins);
+        }
     }
   else if (sec > 0)
     {
