@@ -22,7 +22,7 @@
             <property name="visible">True</property>
             <property name="can-focus">False</property>
             <property name="expand">True</property>
-            <signal name="draw" handler="on_preview_draw_cb" object="CcBackgroundPreview" swapped="no" />
+            <signal name="draw" handler="on_preview_draw_cb" object="CcBackgroundPreview" swapped="yes" />
           </object>
         </child>
 
@@ -34,7 +34,7 @@
             <property name="expand">True</property>
 
             <child>
-              <object class="GtkFrame">
+              <object class="GtkFrame" id="desktop_frame">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="shadow-type">none</property>
@@ -104,14 +104,11 @@
                 </child>
 
               </object>
-              <packing>
-                <property name="name">desktop</property>
-              </packing>
             </child>
 
 
             <child>
-              <object class="GtkFrame">
+              <object class="GtkFrame" id="lock_frame">
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="shadow-type">none</property>
@@ -128,9 +125,6 @@
                   <class name="lock-screen-preview" />
                 </style>
               </object>
-              <packing>
-                <property name="name">lock</property>
-              </packing>
             </child>
           </object>
         </child>

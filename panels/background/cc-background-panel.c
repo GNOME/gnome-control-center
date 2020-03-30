@@ -59,11 +59,8 @@ struct _CcBackgroundPanel
   CcBackgroundItem *current_background;
 
   CcBackgroundChooser *background_chooser;
-  GtkWidget *add_picture_button;
+  GtkButton *add_picture_button;
   CcBackgroundPreview *desktop_preview;
-
-  GtkWidget *spinner;
-  GtkWidget *chooser;
 };
 
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
@@ -203,17 +200,15 @@ set_background (CcBackgroundPanel *panel,
 
 
 static void
-on_chooser_background_chosen_cb (CcBackgroundChooser        *chooser,
-                                 CcBackgroundItem           *item,
-                                 CcBackgroundPanel          *self)
+on_chooser_background_chosen_cb (CcBackgroundPanel          *self,
+                                 CcBackgroundItem           *item)
 {
   set_background (self, self->settings, item);
   set_background (self, self->lock_settings, item);
 }
 
 static void
-on_add_picture_button_clicked_cb (GtkWidget         *button,
-                                  CcBackgroundPanel *self)
+on_add_picture_button_clicked_cb (CcBackgroundPanel *self)
 {
   cc_background_chooser_select_file (self->background_chooser);
 }
@@ -233,7 +228,7 @@ cc_background_panel_constructed (GObject *object)
   self = CC_BACKGROUND_PANEL (object);
   shell = cc_panel_get_shell (CC_PANEL (self));
 
-  cc_shell_embed_widget_in_header (shell, self->add_picture_button, GTK_POS_RIGHT);
+  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->add_picture_button), GTK_POS_RIGHT);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->constructed (object);
 }
@@ -246,8 +241,6 @@ cc_background_panel_dispose (GObject *object)
   g_clear_object (&panel->settings);
   g_clear_object (&panel->lock_settings);
   g_clear_object (&panel->thumb_factory);
-
-  g_clear_pointer (&panel->chooser, gtk_widget_destroy);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
