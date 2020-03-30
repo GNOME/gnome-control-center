@@ -392,7 +392,7 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
                                 gpointer      user_data)
 {
   PpNewPrinter        *self = user_data;
-  GVariant            *output;
+  g_autoptr(GVariant)  output = NULL;
   g_autoptr(GError)    error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -409,8 +409,6 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
         {
           g_warning ("cups-pk-helper: addition of printer %s failed: %s", self->name, ret_error);
         }
-
-      g_variant_unref (output);
     }
   else
     {
@@ -468,8 +466,7 @@ printer_add_real_async (PpNewPrinter *self)
 static PPDName *
 get_ppd_item_from_output (GVariant *output)
 {
-  GVariant *array;
-  PPDName  *ppd_item = NULL;
+  g_autoptr(GVariant) array = NULL;
   gint      j;
   static const char * const match_levels[] = {
              "exact-cmd",
@@ -478,48 +475,42 @@ get_ppd_item_from_output (GVariant *output)
              "generic",
              "none"};
 
-  if (output)
+  if (output == NULL)
+    return NULL;
+
+  g_variant_get (output, "(@a(ss))", &array);
+  for (j = 0; j < G_N_ELEMENTS (match_levels); j++)
     {
-      g_variant_get (output, "(@a(ss))", &array);
-      if (array)
+      g_autoptr(GVariantIter) iter = NULL;
+      const gchar *driver, *match;
+
+      g_variant_get (array, "a(ss)", &iter);
+      while (g_variant_iter_next (iter, "(&s&s)", &driver, &match))
         {
-          GVariantIter *iter;
-          GVariant     *item;
+          PPDName *ppd_item;
 
-          for (j = 0; j < G_N_ELEMENTS (match_levels) && !ppd_item; j++)
-            {
-              g_variant_get (array, "a(ss)", &iter);
-              while ((item = g_variant_iter_next_value (iter)) && !ppd_item)
-                {
-                  const gchar *driver, *match;
+          if (!g_str_equal (match, match_levels[j]))
+            continue;
 
-                  g_variant_get (item, "(&s&s)", &driver, &match);
-                  if (g_str_equal (match, match_levels[j]))
-                    {
-                      ppd_item = g_new0 (PPDName, 1);
-                      ppd_item->ppd_name = g_strdup (driver);
+          ppd_item = g_new0 (PPDName, 1);
+          ppd_item->ppd_name = g_strdup (driver);
 
-                      if (g_strcmp0 (match, "exact-cmd") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
-                      else if (g_strcmp0 (match, "exact") == 0)
-                        ppd_item->ppd_match_level = PPD_EXACT_MATCH;
-                      else if (g_strcmp0 (match, "close") == 0)
-                        ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
-                      else if (g_strcmp0 (match, "generic") == 0)
-                        ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
-                      else if (g_strcmp0 (match, "none") == 0)
-                        ppd_item->ppd_match_level = PPD_NO_MATCH;
-                    }
+          if (g_strcmp0 (match, "exact-cmd") == 0)
+            ppd_item->ppd_match_level = PPD_EXACT_CMD_MATCH;
+          else if (g_strcmp0 (match, "exact") == 0)
+            ppd_item->ppd_match_level = PPD_EXACT_MATCH;
+          else if (g_strcmp0 (match, "close") == 0)
+            ppd_item->ppd_match_level = PPD_CLOSE_MATCH;
+          else if (g_strcmp0 (match, "generic") == 0)
+            ppd_item->ppd_match_level = PPD_GENERIC_MATCH;
+          else if (g_strcmp0 (match, "none") == 0)
+            ppd_item->ppd_match_level = PPD_NO_MATCH;
 
-                  g_variant_unref (item);
-                }
-            }
-
-          g_variant_unref (array);
+          return ppd_item;
         }
     }
 
-  return ppd_item;
+  return NULL;
 }
 
 
@@ -529,7 +520,7 @@ printer_add_async_scb3 (GObject      *source_object,
                         gpointer      user_data)
 {
   PpNewPrinter        *self = user_data;
-  GVariant            *output;
+  g_autoptr(GVariant)  output = NULL;
   PPDName             *ppd_item = NULL;
   g_autoptr(GError)    error = NULL;
 
@@ -541,7 +532,6 @@ printer_add_async_scb3 (GObject      *source_object,
   if (output)
     {
       ppd_item = get_ppd_item_from_output (output);
-      g_variant_unref (output);
     }
   else
     {
@@ -573,7 +563,7 @@ install_printer_drivers_cb (GObject      *source_object,
                             gpointer      user_data)
 {
   PpNewPrinter        *self = user_data;
-  GVariant            *output;
+  g_autoptr(GVariant)  output = NULL;
   g_autoptr(GError)    error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -581,11 +571,7 @@ install_printer_drivers_cb (GObject      *source_object,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
-    {
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
@@ -632,7 +618,7 @@ printer_add_async_scb (GObject      *source_object,
   PpNewPrinter        *self = user_data;
   GDBusConnection     *bus;
   GVariantBuilder      array_builder;
-  GVariant            *output;
+  g_autoptr(GVariant)  output = NULL;
   gboolean             cancelled = FALSE;
   PPDName             *ppd_item = NULL;
   g_autoptr(GError)    error = NULL;
@@ -645,7 +631,6 @@ printer_add_async_scb (GObject      *source_object,
   if (output)
     {
       ppd_item = get_ppd_item_from_output (output);
-      g_variant_unref (output);
     }
   else
     {
@@ -791,20 +776,16 @@ printer_set_accepting_jobs_cb (GObject      *source_object,
                                GAsyncResult *res,
                                gpointer      user_data)
 {
-  GVariant         *output;
-  PCData           *data = (PCData *) user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) output = NULL;
+  PCData             *data = (PCData *) user_data;
+  g_autoptr(GError)   error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
-    {
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
@@ -819,20 +800,16 @@ printer_set_enabled_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  GVariant         *output;
-  PCData           *data = (PCData *) user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) output = NULL;
+  PCData             *data = (PCData *) user_data;
+  g_autoptr(GError)   error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
-    {
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
@@ -889,20 +866,16 @@ install_package_names_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
 {
-  GVariant         *output;
-  IMEData          *data = (IMEData *) user_data;
-  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) output = NULL;
+  IMEData            *data = (IMEData *) user_data;
+  g_autoptr(GError)   error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
   g_object_unref (source_object);
 
-  if (output)
-    {
-      g_variant_unref (output);
-    }
-  else
+  if (output == NULL)
     {
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
@@ -917,10 +890,10 @@ search_files_cb (GObject      *source_object,
                  GAsyncResult *res,
                  gpointer      user_data)
 {
-  GVariant         *output;
-  IMEData          *data = (IMEData *) user_data;
-  g_autoptr(GError) error = NULL;
-  GList            *item;
+  g_autoptr(GVariant) output = NULL;
+  IMEData            *data = (IMEData *) user_data;
+  g_autoptr(GError)   error = NULL;
+  GList              *item;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -937,7 +910,6 @@ search_files_cb (GObject      *source_object,
 
       if (!installed)
         data->packages = g_list_append (data->packages, g_strdup (package));
-      g_variant_unref (output);
     }
   else
     {
@@ -1015,11 +987,11 @@ get_missing_executables_cb (GObject      *source_object,
                             GAsyncResult *res,
                             gpointer      user_data)
 {
-  GVariant         *output;
-  IMEData          *data = (IMEData *) user_data;
-  g_autoptr(GError) error = NULL;
-  GList            *executables = NULL;
-  GList            *item;
+  g_autoptr(GVariant) output = NULL;
+  IMEData            *data = (IMEData *) user_data;
+  g_autoptr(GError)   error = NULL;
+  GList              *executables = NULL;
+  GList              *item;
 
   if (data->ppd_file_name)
     {
@@ -1033,28 +1005,15 @@ get_missing_executables_cb (GObject      *source_object,
 
   if (output)
     {
-      GVariant *array;
+      g_autoptr(GVariant) array = NULL;
+      g_autoptr(GVariantIter) iter = NULL;
+      const gchar *executable;
 
       g_variant_get (output, "(@as)", &array);
 
-      if (array)
-        {
-          GVariantIter *iter;
-          GVariant     *item;
-          gchar        *executable;
-
-          g_variant_get (array, "as", &iter);
-          while ((item = g_variant_iter_next_value (iter)))
-            {
-              g_variant_get (item, "s", &executable);
-              executables = g_list_append (executables, executable);
-              g_variant_unref (item);
-            }
-
-          g_variant_unref (array);
-        }
-
-      g_variant_unref (output);
+      g_variant_get (array, "as", &iter);
+      while (g_variant_iter_next (iter, "&s", &executable))
+        executables = g_list_append (executables, g_strdup (executable));
     }
   else if (error->domain == G_DBUS_ERROR &&
            (error->code == G_DBUS_ERROR_SERVICE_UNKNOWN ||

@@ -895,10 +895,10 @@ group_physical_devices_dbus_cb (GObject      *source_object,
                                 GAsyncResult *res,
                                 gpointer      user_data)
 {
-  GVariant         *output;
-  g_autoptr(GError) error = NULL;
-  gchar          ***result = NULL;
-  gint              i, j;
+  g_autoptr(GVariant) output = NULL;
+  g_autoptr(GError)   error = NULL;
+  gchar            ***result = NULL;
+  gint                i;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -907,44 +907,24 @@ group_physical_devices_dbus_cb (GObject      *source_object,
 
   if (output)
     {
-      GVariant *array;
+      g_autoptr(GVariant) array = NULL;
 
       g_variant_get (output, "(@aas)", &array);
 
       if (array)
         {
-          GVariantIter *iter;
-          GVariantIter *subiter;
-          GVariant     *item;
-          GVariant     *subitem;
-          gchar        *device_uri;
+          g_autoptr(GVariantIter) iter = NULL;
+          GStrv device_uris;
 
           result = g_new0 (gchar **, g_variant_n_children (array) + 1);
           g_variant_get (array, "aas", &iter);
           i = 0;
-          while ((item = g_variant_iter_next_value (iter)))
+          while (g_variant_iter_next (iter, "^as", &device_uris))
             {
-              result[i] = g_new0 (gchar *, g_variant_n_children (item) + 1);
-              g_variant_get (item, "as", &subiter);
-              j = 0;
-              while ((subitem = g_variant_iter_next_value (subiter)))
-                {
-                  g_variant_get (subitem, "s", &device_uri);
-
-                  result[i][j] = device_uri;
-
-                  g_variant_unref (subitem);
-                  j++;
-                }
-
-              g_variant_unref (item);
+              result[i] = device_uris;
               i++;
             }
-
-          g_variant_unref (array);
         }
-
-      g_variant_unref (output);
     }
   else if (error &&
            error->domain == G_DBUS_ERROR &&
