@@ -212,7 +212,6 @@ static void
 editor_done (NetDeviceEthernet *self)
 {
         device_ethernet_refresh_ui (self);
-        g_object_unref (self);
 }
 
 static void
@@ -231,7 +230,7 @@ show_details (NetDeviceEthernet *self, GtkButton *button, const gchar *title)
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, self->device, NULL, self->client);
         if (title)
                 net_connection_editor_set_title (editor, title);
-        g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), g_object_ref (self));
+        g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
         net_connection_editor_run (editor);
 }
 
@@ -319,7 +318,7 @@ add_row (NetDeviceEthernet *self, NMConnection *connection)
         gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
         g_object_set_data (G_OBJECT (widget), "edit", widget);
         g_object_set_data (G_OBJECT (widget), "row", row);
-        g_signal_connect_swapped (widget, "clicked", G_CALLBACK (show_details_for_row), self);
+        g_signal_connect_object (widget, "clicked", G_CALLBACK (show_details_for_row), self, G_CONNECT_SWAPPED);
 
         gtk_widget_show_all (row);
 
@@ -418,7 +417,7 @@ add_profile_button_clicked_cb (NetDeviceEthernet *self)
         window = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
         editor = net_connection_editor_new (GTK_WINDOW (window), connection, self->device, NULL, self->client);
-        g_signal_connect_swapped (editor, "done", G_CALLBACK (editor_done), g_object_ref (self));
+        g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
         net_connection_editor_run (editor);
 }
 

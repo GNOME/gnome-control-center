@@ -94,21 +94,21 @@ connect_ethernet_page (CEPageEthernet *self)
         s_mac_str = nm_setting_wired_get_mac_address (setting);
         ce_page_setup_mac_combo (self->mac_combo, s_mac_str, mac_list);
         g_strfreev (mac_list);
-        g_signal_connect_swapped (self->mac_combo, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->mac_combo, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         /* Cloned MAC address */
         cloned_mac = nm_setting_wired_get_cloned_mac_address (setting);
         ce_page_setup_cloned_mac_combo (self->cloned_mac_combo, cloned_mac);
-        g_signal_connect_swapped (self->cloned_mac_combo, "changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->cloned_mac_combo, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
         /* MTU */
-        g_signal_connect_swapped (self->mtu_spin, "output", G_CALLBACK (mtu_output_cb), self);
+        g_signal_connect_object (self->mtu_spin, "output", G_CALLBACK (mtu_output_cb), self, G_CONNECT_SWAPPED);
         gtk_spin_button_set_value (self->mtu_spin, (gdouble) nm_setting_wired_get_mtu (setting));
-        g_signal_connect_swapped (self->mtu_spin, "value-changed", G_CALLBACK (mtu_changed), self);
+        g_signal_connect_object (self->mtu_spin, "value-changed", G_CALLBACK (mtu_changed), self, G_CONNECT_SWAPPED);
         mtu_changed (self);
 
-        g_signal_connect_swapped (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self);
-        g_signal_connect_swapped (self->mtu_spin, "value-changed", G_CALLBACK (ce_page_changed), self);
+        g_signal_connect_object (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->mtu_spin, "value-changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
 
 static void
