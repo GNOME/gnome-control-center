@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcMultitaskingPanel" parent="CcPanel">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="visible">true</property>
+        <property name="hscrollbar-policy">never</property>
+        <child>
+          <object class="HdyColumn">
+            <property name="visible">True</property>
+            <property name="maximum_width">600</property>
+            <property name="linear_growth_width">400</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
+
+            <child>
+              <object class="GtkBox">
+                <property name="visible">true</property>
+                <property name="can-focus">false</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">12</property>
+
+                <!-- Top Listbox -->
+                <child>
+                  <object class="GtkListBox" id="top_listbox">
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="selection-mode">none</property>
+                    <property name="margin-bottom">24</property>
+                    <signal name="row-activated" handler="on_listbox_row_activated_cb" object="CcMultitaskingPanel" swapped="no" />
+
+                    <style>
+                      <class name="frame"/>
+                    </style>
+
+                    <!-- Hot Corner -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="activatable-widget">hot_corner_switch</property>
+                        <property name="title" translatable="yes">_Hot Corner</property>
+                        <property name="subtitle" translatable="yes">Touch the top-left corner to open the Activities Overview.</property>
+                        <property name="use_underline">True</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="hot_corner_switch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <!-- Drag to Screen Edges -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="activatable-widget">drag_to_screen_edge_switch</property>
+                        <property name="title" translatable="yes">_Drag to Screen Edges</property>
+                        <property name="subtitle" translatable="yes">Drag windows against the top, left, and right screen edges to resize them.</property>
+                        <property name="use_underline">True</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="drag_to_screen_edge_switch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <!-- Keyboard Shortcuts -->
+                    <child>
+                      <object class="HdyActionRow" id="keyboard_shortcuts_row">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="title" translatable="yes">_Keyboard Shortcuts</property>
+                        <property name="use_underline">True</property>
+                        <child type="action">
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="icon-name">go-next-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+
+                <!-- Workspaces -->
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="label" translatable="yes">Workspaces</property>
+                    <property name="xalign">0.0</property>
+                    <attributes>
+                      <attribute name="weight" value="bold" />
+                    </attributes>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="GtkListBox" id="workspaces_listbox">
+                    <property name="visible">true</property>
+                    <property name="can-focus">true</property>
+                    <property name="selection-mode">none</property>
+                    <property name="margin-bottom">24</property>
+
+                    <style>
+                      <class name="frame"/>
+                    </style>
+
+                    <!-- Span Displays -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="activatable-widget">span_displays_switch</property>
+                        <property name="title" translatable="yes">_Span Displays</property>
+                        <property name="use_underline">True</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="span_displays_switch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <!-- Dynamic Workspaces -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="activatable-widget">dynamic_workspaces_switch</property>
+                        <property name="title" translatable="yes">_Automatic Add/Remove</property>
+                        <property name="use_underline">True</property>
+                        <child type="action">
+                          <object class="GtkSwitch" id="dynamic_workspaces_switch">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <!-- Number of Workspaces -->
+                    <child>
+                      <object class="HdyActionRow">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="sensitive" bind-source="dynamic_workspaces_switch" bind-property="active" bind-flags="default|invert-boolean|sync-create" />
+                        <property name="activatable-widget">number_of_workspaces_spin</property>
+                        <property name="title" translatable="yes">_Number of Workspaces</property>
+                        <property name="use_underline">True</property>
+                        <child type="action">
+                          <object class="GtkSpinButton" id="number_of_workspaces_spin">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="valign">center</property>
+                            <property name="adjustment">workspaces_adjustment</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+              </object>
+            </child>
+
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+
+  <object class="GtkAdjustment" id="workspaces_adjustment">
+    <property name="lower">1.0</property>
+    <property name="step-increment">1.0</property>
+    <property name="value">4.0</property>
+    <!-- 36 is the maximum value allowed by Mutter -->
+    <property name="upper">36.0</property>
+  </object>
+</interface>
