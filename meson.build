@@ -92,6 +92,8 @@ libgvc = subproject(
   default_options: [
     'static=true',
     'alsa=false',
+    'package_name=' + control_center_gettext,
+    'package_version=' + meson.project_version(),
   ]
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
