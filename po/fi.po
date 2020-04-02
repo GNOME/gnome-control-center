@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-02-19 10:58+0000\n"
-"PO-Revision-Date: 2020-02-22 17:16+0200\n"
+"POT-Creation-Date: 2020-03-30 15:38+0000\n"
+"PO-Revision-Date: 2020-04-02 13:08+0300\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -585,16 +585,16 @@ msgstr "Hallitse sovellusten eri oikeuksia ja asetuksia"
 msgid "application;flatpak;permission;setting;"
 msgstr "application;flatpak;permission;setting;sovellus;käyttöoikeudet;asetus;"
 
-#: panels/background/cc-background-chooser.c:340
+#: panels/background/cc-background-chooser.c:346
 msgid "Select a picture"
 msgstr "Valitse kuva"
 
-#: panels/background/cc-background-chooser.c:343
+#: panels/background/cc-background-chooser.c:349
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:240
 #: panels/color/cc-color-panel.c:893 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
 #: panels/display/cc-display-panel.c:947
-#: panels/info-overview/cc-info-overview-panel.ui:235
+#: panels/info-overview/cc-info-overview-panel.ui:236
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:176
@@ -616,7 +616,7 @@ msgstr "Valitse kuva"
 msgid "_Cancel"
 msgstr "_Peru"
 
-#: panels/background/cc-background-chooser.c:344
+#: panels/background/cc-background-chooser.c:350
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:253
 #: panels/sharing/cc-sharing-panel.c:411
@@ -1518,7 +1518,7 @@ msgstr "%e. %Bta %Y, %l:%M %p"
 #. Translators: This is the full date and time format used in 24-hour mode.
 #: panels/datetime/cc-datetime-panel.c:339
 msgid "%e %B %Y, %R"
-msgstr "%e. %Bta %Y, %R"
+msgstr "%e. %Bta %Y, %H.%M"
 
 #. Translators: "city, country"
 #: panels/datetime/cc-datetime-panel.c:504
@@ -1549,7 +1549,7 @@ msgstr "%l:%M %p"
 #. Translators: This is the time format used in 24-hour mode.
 #: panels/datetime/cc-datetime-panel.c:548
 msgid "%R"
-msgstr "%R"
+msgstr "%H.%M"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
@@ -1963,11 +1963,11 @@ msgstr ""
 "redshift;color;sunset;sunrise;Paneeli;Projektori;Näyttö;Resoluutio;Tarkkuus;"
 "Virkistystaajuus;yövalo;"
 
-#: panels/info-overview/cc-info-overview-panel.c:406
-#: panels/info-overview/cc-info-overview-panel.c:421
-#: panels/info-overview/cc-info-overview-panel.c:433
-#: panels/info-overview/cc-info-overview-panel.c:479
-#: panels/info-overview/cc-info-overview-panel.c:509
+#: panels/info-overview/cc-info-overview-panel.c:407
+#: panels/info-overview/cc-info-overview-panel.c:422
+#: panels/info-overview/cc-info-overview-panel.c:434
+#: panels/info-overview/cc-info-overview-panel.c:480
+#: panels/info-overview/cc-info-overview-panel.c:510
 msgid "Unknown"
 msgstr "Tuntematon"
 
@@ -1975,32 +1975,32 @@ msgstr "Tuntematon"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:441
+#: panels/info-overview/cc-info-overview-panel.c:442
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; koontitunniste: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:456
+#: panels/info-overview/cc-info-overview-panel.c:457
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:459
+#: panels/info-overview/cc-info-overview-panel.c:460
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:665
+#: panels/info-overview/cc-info-overview-panel.c:666
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:669
+#: panels/info-overview/cc-info-overview-panel.c:670
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:671
+#: panels/info-overview/cc-info-overview-panel.c:672
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Tuntematon"
@@ -2040,7 +2040,7 @@ msgstr "Käyttöjärjestelmän tyyppi"
 
 #: panels/info-overview/cc-info-overview-panel.ui:144
 msgid "GNOME Version"
-msgstr "Gnome-versio"
+msgstr "Gnomen versio"
 
 #: panels/info-overview/cc-info-overview-panel.ui:154
 msgid "Windowing System"
@@ -2066,7 +2066,7 @@ msgstr ""
 "Laitteen nimeä käytetään laitteen tunnistamiseen, kun sitä tarkastellaan "
 "verkossa tai paritetaan Bluetooth-laitteita."
 
-#: panels/info-overview/cc-info-overview-panel.ui:226
+#: panels/info-overview/cc-info-overview-panel.ui:227
 msgid "_Rename"
 msgstr "_Nimeä uudelleen"
 
@@ -2879,7 +2879,7 @@ msgstr "Turvallinen verkko"
 #: panels/network/net-device-ethernet.c:318
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:102 panels/network/network-mobile.ui:414
-#: panels/network/network-vpn.ui:78
+#: panels/network/network-vpn.ui:75
 msgid "Options…"
 msgstr "Valinnat…"
 
@@ -4459,7 +4459,7 @@ msgstr ""
 "yhteystiedot;kontaktit;"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/online-accounts/online-accounts.ui:38 panels/printers/printers.ui:54
+#: panels/online-accounts/online-accounts.ui:38 panels/printers/printers.ui:61
 msgid "Undo"
 msgstr "Kumoa"
 
@@ -4869,18 +4869,18 @@ msgid "Authentication Required"
 msgstr "Tunnistautuminen vaaditaan"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:699
+#: panels/printers/cc-printers-panel.c:695
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Tulostin “%s” on poistettu"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:922
+#: panels/printers/cc-printers-panel.c:918
 msgid "Failed to add new printer."
 msgstr "Uuden tulostimen lisäys epäonnistui."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1216
+#: panels/printers/cc-printers-panel.c:1212
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Käyttöliittymätiedoston lataus epäonnistui: %s"
@@ -5492,21 +5492,21 @@ msgid "Restart"
 msgstr "Käynnistä uudelleen"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:8
+#: panels/printers/printers.ui:12
 msgid "Add…"
 msgstr "Lisää…"
 
-#: panels/printers/printers.ui:174
+#: panels/printers/printers.ui:186
 msgid "No printers"
 msgstr "Ei tulostimia"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:188
+#: panels/printers/printers.ui:200
 msgid "Add a Printer…"
 msgstr "Lisää tulostin…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:220
+#: panels/printers/printers.ui:232
 msgid ""
 "Sorry! The system printing service\n"
 "doesn’t seem to be available."
@@ -6020,44 +6020,44 @@ msgid "Remote Login"
 msgstr "Etäkirjautuminen"
 
 #: panels/sharing/cc-sharing-panel.ui:517
-#: panels/sharing/cc-sharing-panel.ui:763
+#: panels/sharing/cc-sharing-panel.ui:739
 msgid "Screen Sharing"
 msgstr "Näytön jakaminen"
 
-#: panels/sharing/cc-sharing-panel.ui:575
+#: panels/sharing/cc-sharing-panel.ui:571
 msgid "_Allow connections to control the screen"
 msgstr "Sa_lli yhteydet näytön hallintaan"
 
-#: panels/sharing/cc-sharing-panel.ui:620
+#: panels/sharing/cc-sharing-panel.ui:596
 msgid "_Password:"
 msgstr "_Salasana:"
 
-#: panels/sharing/cc-sharing-panel.ui:650
+#: panels/sharing/cc-sharing-panel.ui:626
 msgid "_Show Password"
 msgstr "_Näytä salasana"
 
-#: panels/sharing/cc-sharing-panel.ui:681
+#: panels/sharing/cc-sharing-panel.ui:657
 msgid "Access Options"
 msgstr "Käyttövalinnat"
 
-#: panels/sharing/cc-sharing-panel.ui:695
+#: panels/sharing/cc-sharing-panel.ui:671
 msgid "_New connections must ask for access"
 msgstr "Uusien yhteyksien tulee ky_syä lupa"
 
-#: panels/sharing/cc-sharing-panel.ui:713
+#: panels/sharing/cc-sharing-panel.ui:689
 msgid "_Require a password"
 msgstr "_Vaadi salasana"
 
-#: panels/sharing/cc-sharing-panel.ui:774
-#: panels/sharing/cc-sharing-panel.ui:868
+#: panels/sharing/cc-sharing-panel.ui:750
+#: panels/sharing/cc-sharing-panel.ui:844
 msgid "Media Sharing"
 msgstr "Mediajako"
 
-#: panels/sharing/cc-sharing-panel.ui:807
+#: panels/sharing/cc-sharing-panel.ui:783
 msgid "Share music, photos and videos over the network."
 msgstr "Jaa musiikkia, kuvia ja videoita verkon kautta."
 
-#: panels/sharing/cc-sharing-panel.ui:822
+#: panels/sharing/cc-sharing-panel.ui:798
 msgid "Folders"
 msgstr "Kansiot"
 
@@ -6086,19 +6086,19 @@ msgstr "Etäkirjautumisen hallinta vaatii tunnistautuminen"
 msgid "Custom"
 msgstr "Oma"
 
-#: panels/sound/cc-alert-chooser.ui:12 panels/sound/cc-alert-selector.ui:9
+#: panels/sound/cc-alert-chooser.ui:12
 msgid "Bark"
 msgstr "Haukunta"
 
-#: panels/sound/cc-alert-chooser.ui:19 panels/sound/cc-alert-selector.ui:15
+#: panels/sound/cc-alert-chooser.ui:19
 msgid "Drip"
 msgstr "Vesipisara"
 
-#: panels/sound/cc-alert-chooser.ui:26 panels/sound/cc-alert-selector.ui:21
+#: panels/sound/cc-alert-chooser.ui:26
 msgid "Glass"
 msgstr "Lasi"
 
-#: panels/sound/cc-alert-chooser.ui:33 panels/sound/cc-alert-selector.ui:27
+#: panels/sound/cc-alert-chooser.ui:33
 msgid "Sonar"
 msgstr "Kaikuluotain"
 
