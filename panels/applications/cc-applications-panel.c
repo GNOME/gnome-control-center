@@ -620,8 +620,10 @@ add_snap_permissions (CcApplicationsPanel *self,
   g_autoptr(GList) rows = NULL;
   gint index;
   g_autoptr(SnapdClient) client = NULL;
+  g_autoptr(GPtrArray) interfaces = NULL;
   g_autoptr(GPtrArray) plugs = NULL;
   g_autoptr(GPtrArray) slots = NULL;
+  SnapdInterface *interface = NULL;
   gint added = 0;
   g_autoptr(GError) error = NULL;
 
@@ -634,6 +636,14 @@ add_snap_permissions (CcApplicationsPanel *self,
   g_assert (index >= 0);
 
   client = snapd_client_new ();
+
+  interfaces = snapd_client_get_interfaces2_sync (client,
+                                                  SNAPD_GET_INTERFACES_FLAGS_NONE,
+                                                  NULL,
+                                                  NULL, &error);
+  if (interfaces == NULL)
+    g_warning ("Failed to get snap interfaces: %s", error->message);
+
   if (!snapd_client_get_connections2_sync (client,
                                            SNAPD_GET_CONNECTIONS_FLAGS_NONE,
                                            snap_name, NULL,
@@ -641,7 +651,7 @@ add_snap_permissions (CcApplicationsPanel *self,
                                            &plugs, &slots,
                                            NULL, &error))
     {
-      g_warning ("Failed to get snap interfaces: %s", error->message);
+      g_warning ("Failed to get snap connections: %s", error->message);
       return FALSE;
     }
 
@@ -672,7 +682,14 @@ add_snap_permissions (CcApplicationsPanel *self,
           g_ptr_array_add (available_slots, g_object_ref (slot));
         }
 
-      row = cc_snap_row_new (cc_panel_get_cancellable (CC_PANEL (self)), plug, available_slots);
+      for (int j = 0; j < interfaces->len; j++)
+        {
+          SnapdInterface *i = g_ptr_array_index (interfaces, j);
+          if (g_strcmp0 (snapd_interface_get_name (i), snapd_plug_get_interface (plug)) == 0)
+            interface = i;
+        }
+
+      row = cc_snap_row_new (cc_panel_get_cancellable (CC_PANEL (self)), interface, plug, available_slots);
       gtk_widget_show (GTK_WIDGET (row));
       gtk_list_box_insert (GTK_LIST_BOX (self->permission_list), GTK_WIDGET (row), index);
       index++;
