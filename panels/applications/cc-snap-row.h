@@ -28,8 +28,9 @@ G_BEGIN_DECLS
 #define CC_TYPE_SNAP_ROW (cc_snap_row_get_type())
 G_DECLARE_FINAL_TYPE (CcSnapRow, cc_snap_row, CC, SNAP_ROW, GtkListBoxRow)
 
-CcSnapRow* cc_snap_row_new      (GCancellable *cancellable,
-                                 SnapdPlug    *plug,
-                                 GPtrArray    *slots);
+CcSnapRow* cc_snap_row_new      (GCancellable   *cancellable,
+                                 SnapdInterface *interface,
+                                 SnapdPlug      *plug,
+                                 GPtrArray      *slots);
 
 G_END_DECLS
