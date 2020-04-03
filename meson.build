@@ -201,7 +201,7 @@ config_h.set10('HAVE_FN_EXPLICIT_BZERO',
 enable_snap = get_option('snap')
 if enable_snap
   snapd_glib_deps = [
-    dependency('snapd-glib', version: '>= 1.49')
+    dependency('snapd-glib', version: '>= 1.57')
   ]
 endif
 config_h.set('HAVE_SNAP', enable_snap,
