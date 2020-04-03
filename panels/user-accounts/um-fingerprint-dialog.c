@@ -222,6 +222,7 @@ set_fingerprint_row_cb (GObject      *source_object,
                 gtk_label_set_text (state_label, _("Disabled"));
         }
 
+        gtk_widget_set_sensitive (fingerprint_row, TRUE);
         gtk_widget_set_visible (fingerprint_row, visible);
 }
 
@@ -293,7 +294,10 @@ set_fingerprint_row (GtkWidget    *row,
 }
 
 static void
-delete_fingerprints (GCancellable *cancellable)
+delete_fingerprint_task_func (GTask        *task,
+                              gpointer      source_object,
+                              gpointer      task_data,
+                              GCancellable *cancellable)
 {
         GDBusProxy *device;
         GVariant *result;
@@ -311,6 +315,8 @@ delete_fingerprints (GCancellable *cancellable)
                 g_variant_unref (result);
 
         g_object_unref (device);
+
+        set_fingerprint_task_func (task, source_object, task_data, cancellable);
 }
 
 static void
@@ -341,8 +347,14 @@ delete_fingerprints_question (GtkWindow    *parent,
         gtk_dialog_set_default_response (GTK_DIALOG (question), GTK_RESPONSE_OK);
 
         if (gtk_dialog_run (GTK_DIALOG (question)) == GTK_RESPONSE_OK) {
-                delete_fingerprints (cancellable);
-                set_fingerprint_row (fingerprint_row, state_label, cancellable);
+                g_autoptr(GTask) task = NULL;
+
+                gtk_widget_set_sensitive (fingerprint_row, FALSE);
+
+                task = g_task_new (fingerprint_row, cancellable,
+                                   set_fingerprint_row_cb,
+                                   g_object_ref (state_label));
+                g_task_run_in_thread (task, delete_fingerprint_task_func);
         }
 
         gtk_widget_destroy (question);
