@@ -144,10 +144,27 @@ common_sources += gnome.gdbus_codegen(
   annotations: ['org.freedesktop.realmd.Realm', 'org.gtk.GDBus.C.Name', 'Common']
 )
 
+fprintd_namespace = 'net.reactivated.Fprint'
+common_sources += gnome.gdbus_codegen(
+  'cc-fprintd-generated',
+  sources: [
+    'data' / fprintd_namespace + '.Manager.xml',
+    'data' / fprintd_namespace + '.Device.xml',
+  ],
+  interface_prefix: fprintd_namespace + '.',
+  namespace: 'CcFprintd',
+  autocleanup: 'all',
+)
+
+enum_headers = [
+  'cc-fingerprint-manager.h',
+]
+
 sources = common_sources + files(
   'cc-avatar-chooser.c',
   'cc-carousel.c',
   'cc-crop-area.c',
+  'cc-fingerprint-manager.c',
   'cc-login-history-dialog.c',
   'cc-password-dialog.c',
   'cc-user-image.c',
@@ -155,6 +172,10 @@ sources = common_sources + files(
   'run-passwd.c',
   'um-fingerprint-dialog.c',
 )
+
+sources += gnome.mkenums_simple(
+  'cc-user-accounts-enum-types',
+  sources: files(enum_headers))
 
 # Kerberos support
 krb_dep = dependency('krb5', required: false)
