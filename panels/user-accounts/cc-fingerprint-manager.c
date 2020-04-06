@@ -121,7 +121,7 @@ cc_fingerprint_manager_set_property (GObject      *object,
 static void
 cc_fingerprint_manager_constructed (GObject *object)
 {
-  cc_fingerprint_manager_update_state (CC_FINGERPRINT_MANAGER (object));
+  cc_fingerprint_manager_update_state (CC_FINGERPRINT_MANAGER (object), NULL, NULL);
 }
 
 static void
@@ -327,6 +327,12 @@ set_state (CcFingerprintManager *self,
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_STATE]);
 }
 
+typedef struct
+{
+  guint                     waiting_devices;
+  CcFingerprintStateUpdated callback;
+  gpointer                  user_data;
+} UpdateStateData;
 
 static void
 update_state_callback (GObject      *object,
@@ -337,11 +343,16 @@ update_state_callback (GObject      *object,
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
   g_autoptr(GError) error = NULL;
   CcFingerprintState state;
+  UpdateStateData *data;
+  GTask *task;
 
   g_return_if_fail (g_task_is_valid (res, self));
 
-  priv->current_task = NULL;
-  state = g_task_propagate_int (G_TASK (res), &error);
+  task = G_TASK (res);
+  g_assert (g_steal_pointer (&priv->current_task) == task);
+
+  state = g_task_propagate_int (task, &error);
+  data = g_task_get_task_data (task);
 
   if (error)
     {
@@ -355,6 +366,9 @@ update_state_callback (GObject      *object,
     }
 
   set_state (self, state);
+
+  if (data->callback)
+    data->callback (self, state, data->user_data, error);
 }
 
 static void
@@ -366,16 +380,13 @@ on_device_list_enrolled (GObject      *object,
   g_autoptr(GTask) task = G_TASK (user_data);
   g_autoptr(GError) error = NULL;
   g_auto(GStrv) enrolled_fingers = NULL;
-  guint waiting_devices;
+  UpdateStateData *data = g_task_get_task_data (task);
   guint num_enrolled_fingers;
-
-  waiting_devices = GPOINTER_TO_UINT (g_task_get_task_data (task));
 
   cc_fprintd_device_call_list_enrolled_fingers_finish (fprintd_device,
                                                        &enrolled_fingers,
                                                        res, &error);
-  waiting_devices--;
-  g_task_set_task_data (task, GUINT_TO_POINTER (waiting_devices), NULL);
+  data->waiting_devices--;
 
   if (g_task_get_completed (task))
     return;
@@ -386,7 +397,7 @@ on_device_list_enrolled (GObject      *object,
 
       if (!g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints"))
         {
-          if (waiting_devices == 0)
+          if (data->waiting_devices == 0)
             g_task_return_error (task, g_steal_pointer (&error));
 
           return;
@@ -401,7 +412,7 @@ on_device_list_enrolled (GObject      *object,
 
   if (num_enrolled_fingers > 0)
     g_task_return_int (task, CC_FINGERPRINT_STATE_ENABLED);
-  else if (waiting_devices == 0)
+  else if (data->waiting_devices == 0)
     g_task_return_int (task, CC_FINGERPRINT_STATE_DISABLED);
 }
 
@@ -415,6 +426,7 @@ on_manager_devices_list (GObject      *object,
   g_autolist(CcFprintdDevice) fprintd_devices = NULL;
   g_autoptr(GTask) task = G_TASK (user_data);
   g_autoptr(GError) error = NULL;
+  UpdateStateData *data = g_task_get_task_data (task);
   const char *user_name;
   GList *l;
 
@@ -434,7 +446,6 @@ on_manager_devices_list (GObject      *object,
     }
 
   user_name = act_user_get_user_name (priv->user);
-  g_task_set_task_data (task, GUINT_TO_POINTER (g_list_length (fprintd_devices)), NULL);
 
   for (l = fprintd_devices; l; l = l->next)
     {
@@ -443,6 +454,7 @@ on_manager_devices_list (GObject      *object,
       g_debug ("Connected to device %s, looking for enrolled fingers",
                cc_fprintd_device_get_name (device));
 
+      data->waiting_devices++;
       cc_fprintd_device_call_list_enrolled_fingers (device, user_name,
                                                     g_task_get_cancellable (task),
                                                     on_device_list_enrolled,
@@ -451,10 +463,13 @@ on_manager_devices_list (GObject      *object,
 }
 
 void
-cc_fingerprint_manager_update_state (CcFingerprintManager *self)
+cc_fingerprint_manager_update_state (CcFingerprintManager     *self,
+                                     CcFingerprintStateUpdated callback,
+                                     gpointer                  user_data)
 {
   CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
   g_autoptr(GCancellable) cancellable = NULL;
+  UpdateStateData *data;
 
   g_return_if_fail (priv->current_task == NULL);
 
@@ -465,11 +480,14 @@ cc_fingerprint_manager_update_state (CcFingerprintManager *self)
       return;
     }
 
-
   cancellable = g_cancellable_new ();
+  data = g_new0 (UpdateStateData, 1);
+  data->callback = callback;
+  data->user_data = user_data;
 
   priv->current_task = g_task_new (self, cancellable, update_state_callback, NULL);
   g_task_set_source_tag (priv->current_task, cc_fingerprint_manager_update_state);
+  g_task_set_task_data (priv->current_task, data, g_free);
 
   cc_fingerprint_manager_get_devices (self, cancellable, on_manager_devices_list,
                                       priv->current_task);
