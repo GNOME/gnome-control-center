@@ -45,11 +45,18 @@ typedef enum {
   CC_FINGERPRINT_STATE_DISABLED,
 } CcFingerprintState;
 
+typedef void (*CcFingerprintStateUpdated) (CcFingerprintManager *fp_manager,
+                                           CcFingerprintState    state,
+                                           gpointer              user_data,
+                                           GError               *error);
+
 CcFingerprintManager * cc_fingerprint_manager_new (ActUser *user);
 
 CcFingerprintState cc_fingerprint_manager_get_state (CcFingerprintManager *fp_manager);
 
-void cc_fingerprint_manager_update_state (CcFingerprintManager *fp_manager);
+void cc_fingerprint_manager_update_state (CcFingerprintManager     *fp_manager,
+                                          CcFingerprintStateUpdated callback,
+                                          gpointer                  user_data);
 
 void cc_fingerprint_manager_get_devices (CcFingerprintManager *fp_manager,
                                          GCancellable         *cancellable,

@@ -183,6 +183,17 @@ get_error_dialog (const char *title,
 }
 
 static void
+on_state_updated (CcFingerprintManager *fp_manager,
+                  CcFingerprintState    state,
+                  gpointer              user_data,
+                  GError               *error)
+{
+        g_autoptr (GtkWidget) fingerprint_row = GTK_WIDGET (user_data);
+
+        gtk_widget_set_sensitive (fingerprint_row, TRUE);
+}
+
+static void
 set_fingerprint_row_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
@@ -200,9 +211,8 @@ set_fingerprint_row_cb (GObject      *source_object,
                 }
         }
 
-        gtk_widget_set_sensitive (fingerprint_row, TRUE);
-
-        cc_fingerprint_manager_update_state (fingerprint_manager);
+        cc_fingerprint_manager_update_state (fingerprint_manager, on_state_updated,
+                                             g_object_ref (fingerprint_row));
 }
 
 static void
@@ -412,7 +422,7 @@ static void
 assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 {
         enroll_data_destroy (data);
-        cc_fingerprint_manager_update_state (fingerprint_manager);
+        cc_fingerprint_manager_update_state (fingerprint_manager, NULL, NULL);
 }
 
 static void
