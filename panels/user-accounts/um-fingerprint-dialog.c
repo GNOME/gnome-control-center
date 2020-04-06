@@ -841,4 +841,10 @@ fingerprint_button_clicked (GtkWindow    *parent,
         }
 }
 
+void
+fingerprint_set_enabled (gboolean enabled)
+{
+        is_disable = enabled;
+}
+
 #pragma GCC diagnostic pop
