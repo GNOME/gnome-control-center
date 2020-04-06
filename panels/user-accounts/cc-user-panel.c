@@ -859,8 +859,6 @@ update_fingerprint_row_state (CcUserPanel *self, GParamSpec *spec, CcFingerprint
                 gtk_label_set_text (self->fingerprint_state_label, _("Enabled"));
         else if (state == CC_FINGERPRINT_STATE_DISABLED)
                 gtk_label_set_text (self->fingerprint_state_label, _("Disabled"));
-
-        fingerprint_set_enabled (state == CC_FINGERPRINT_STATE_ENABLED);
 }
 
 static void
@@ -925,6 +923,7 @@ show_user (ActUser *user, CcUserPanel *self)
         if (show) {
                 if (!self->fingerprint_manager) {
                         self->fingerprint_manager = cc_fingerprint_manager_new (user);
+                        fingerprint_set_manager (self->fingerprint_manager);
                         g_signal_connect_object (self->fingerprint_manager,
                                                  "notify::state",
                                                  G_CALLBACK (update_fingerprint_row_state),
@@ -1189,8 +1188,6 @@ change_fingerprint (CcUserPanel *self)
 
         fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
                                     GTK_WIDGET (self->fingerprint_row),
-                                    self->fingerprint_state_label,
-                                    user,
                                     self->fingerprint_cancellable);
 }
 
