@@ -15,6 +15,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "cc-fingerprint-manager.h"
 #include "config.h"
 
 #include <stdlib.h>
@@ -33,7 +34,7 @@
 
 static GDBusProxy *manager = NULL;
 static GDBusConnection *connection = NULL;
-static gboolean is_disable = FALSE;
+static CcFingerprintManager *fingerprint_manager = NULL;
 
 enum {
         STATE_NONE,
@@ -42,9 +43,6 @@ enum {
 };
 
 typedef struct {
-        GtkWidget *fingerprint_row;
-        GtkLabel *state_label;
-
         GtkWidget *ass;
         GtkBuilder *dialog;
 
@@ -189,106 +187,22 @@ set_fingerprint_row_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-        GTask *task;
-        GtkWidget *fingerprint_row;
-        g_autoptr(GtkLabel) state_label = NULL;
+        GTask *task = G_TASK (res);
+        GtkWidget *fingerprint_row = GTK_WIDGET (source_object);
         g_autoptr(GError) error = NULL;
-        gboolean enabled;
-        gboolean visible;
 
-        task = G_TASK (res);
-        fingerprint_row = GTK_WIDGET (source_object);
-        state_label = user_data;
-        enabled = g_task_propagate_boolean (task, &error);
-        visible = TRUE;
+        g_task_propagate_boolean (task, &error);
 
         if (error) {
-                visible = FALSE;
-
                 if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
-                        g_warning ("Fingerprint row not available: %s",
+                        g_message ("Fingerprint operation failed: %s",
                                    error->message);
                 }
         }
 
-        if (enabled) {
-                is_disable = TRUE;
-                gtk_label_set_text (state_label, _("Enabled"));
-        } else {
-                is_disable = FALSE;
-                gtk_label_set_text (state_label, _("Disabled"));
-        }
-
         gtk_widget_set_sensitive (fingerprint_row, TRUE);
-        gtk_widget_set_visible (fingerprint_row, visible);
-}
 
-static void
-set_fingerprint_task_func (GTask        *task,
-                           gpointer      source_object,
-                           gpointer      task_data,
-                           GCancellable *cancellable)
-{
-        GDBusProxy *device;
-        GVariant *result;
-        GVariantIter *fingers;
-        GError *error = NULL;
-
-        ensure_manager (cancellable);
-        if (manager == NULL) {
-                g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_FAILED,
-                                         "Impossible to get fprintd manager");
-                return;
-        }
-
-        device = get_first_device (cancellable);
-        if (device == NULL) {
-                g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_FAILED,
-                                         "Impossible to get fprintd device");
-                return;
-        }
-
-        result = g_dbus_proxy_call_sync (device, "ListEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, cancellable, &error);
-        if (!result) {
-                if (!g_dbus_error_is_remote_error (error) ||
-                    strcmp (g_dbus_error_get_remote_error(error), "net.reactivated.Fprint.Error.NoEnrolledPrints") != 0) {
-                        g_object_unref (device);
-                        g_task_return_error (task, error);
-                        return;
-                }
-        }
-
-        if (result && g_variant_is_of_type (result, G_VARIANT_TYPE ("(as)")))
-                g_variant_get (result, "(as)", &fingers);
-        else
-                fingers = NULL;
-
-        if (g_task_return_error_if_cancelled (task))
-                return;
-
-        if (fingers == NULL || g_variant_iter_n_children (fingers) == 0) {
-                g_task_return_boolean (task, FALSE);
-        } else {
-                g_task_return_boolean (task, TRUE);
-        }
-
-        if (result != NULL)
-                g_variant_unref (result);
-        if (fingers != NULL)
-                g_variant_iter_free (fingers);
-        g_object_unref (device);
-}
-
-void
-set_fingerprint_row (GtkWidget    *row,
-                     GtkLabel     *state_label,
-                     GCancellable *cancellable)
-{
-        g_autoptr(GTask) task = NULL;
-
-        task = g_task_new (row, cancellable, set_fingerprint_row_cb,
-                           g_object_ref (state_label));
-        g_task_run_in_thread (task, set_fingerprint_task_func);
+        cc_fingerprint_manager_update_state (fingerprint_manager);
 }
 
 static void
@@ -299,6 +213,7 @@ delete_fingerprint_task_func (GTask        *task,
 {
         GDBusProxy *device;
         GVariant *result;
+        g_autoptr(GError) error = NULL;
 
         ensure_manager (cancellable);
         if (manager == NULL)
@@ -308,19 +223,21 @@ delete_fingerprint_task_func (GTask        *task,
         if (device == NULL)
                 return;
 
-        result = g_dbus_proxy_call_sync (device, "DeleteEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, cancellable, NULL);
+        result = g_dbus_proxy_call_sync (device, "DeleteEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, cancellable, &error);
         if (result)
                 g_variant_unref (result);
 
         g_object_unref (device);
 
-        set_fingerprint_task_func (task, source_object, task_data, cancellable);
+        if (error)
+                g_task_return_error (task, g_steal_pointer (&error));
+        else
+                g_task_return_boolean (task, TRUE);
 }
 
 static void
 delete_fingerprints_question (GtkWindow    *parent,
                               GtkWidget    *fingerprint_row,
-                              GtkLabel     *state_label,
                               ActUser      *user,
                               GCancellable *cancellable)
 {
@@ -350,8 +267,7 @@ delete_fingerprints_question (GtkWindow    *parent,
                 gtk_widget_set_sensitive (fingerprint_row, FALSE);
 
                 task = g_task_new (fingerprint_row, cancellable,
-                                   set_fingerprint_row_cb,
-                                   g_object_ref (state_label));
+                                   set_fingerprint_row_cb, NULL);
                 g_task_run_in_thread (task, delete_fingerprint_task_func);
         }
 
@@ -495,12 +411,8 @@ finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 static void
 assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 {
-        GtkWidget *fingerprint_row = data->fingerprint_row;
-        GtkLabel *state_label = data->state_label;
-        GCancellable *cancellable = data->cancellable;
-
         enroll_data_destroy (data);
-        set_fingerprint_row (fingerprint_row, state_label, cancellable);
+        cc_fingerprint_manager_update_state (fingerprint_manager);
 }
 
 static void
@@ -701,8 +613,6 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 
 static void
 enroll_fingerprints (GtkWindow    *parent,
-                     GtkWidget    *fingerprint_row,
-                     GtkLabel     *state_label,
                      ActUser      *user,
                      GCancellable *cancellable)
 {
@@ -732,8 +642,6 @@ enroll_fingerprints (GtkWindow    *parent,
         data = g_new0 (EnrollData, 1);
         data->device = device;
         data->cancellable = g_object_ref (cancellable);
-        data->fingerprint_row = fingerprint_row;
-        data->state_label = state_label;
 
         /* Get some details about the device */
         result = g_dbus_connection_call_sync (connection,
@@ -834,26 +742,27 @@ enroll_fingerprints (GtkWindow    *parent,
 void
 fingerprint_button_clicked (GtkWindow    *parent,
                             GtkWidget    *fingerprint_row,
-                            GtkLabel     *state_label,
-                            ActUser      *user,
                             GCancellable *cancellable)
 {
+        ActUser *user;
         bindtextdomain ("fprintd", GNOMELOCALEDIR);
         bind_textdomain_codeset ("fprintd", "UTF-8");
 
-        if (is_disable != FALSE) {
-                delete_fingerprints_question (parent, fingerprint_row,
-                                              state_label, user, cancellable);
+        g_object_get (fingerprint_manager, "user", &user, NULL);
+
+        if (cc_fingerprint_manager_get_state (fingerprint_manager) == CC_FINGERPRINT_STATE_ENABLED) {
+                delete_fingerprints_question (parent, fingerprint_row, user, cancellable);
         } else {
-                enroll_fingerprints (parent, fingerprint_row, state_label, user,
-                                     cancellable);
+                enroll_fingerprints (parent, user, cancellable);
         }
+
+        g_object_unref (user);
 }
 
 void
-fingerprint_set_enabled (gboolean enabled)
+fingerprint_set_manager (CcFingerprintManager *manager)
 {
-        is_disable = enabled;
+        fingerprint_manager = manager;
 }
 
 #pragma GCC diagnostic pop
