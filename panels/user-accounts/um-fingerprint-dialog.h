@@ -20,13 +20,8 @@
 #include <gtk/gtk.h>
 #include <act/act.h>
 
-void fingerprint_set_enabled (gboolean enabled);
+void fingerprint_set_manager (CcFingerprintManager *manager);
 
-void set_fingerprint_row (GtkWidget    *fingerprint_row,
-                          GtkLabel     *state_label,
-                          GCancellable *cancellable);
 void fingerprint_button_clicked (GtkWindow    *parent,
                                  GtkWidget    *fingerprint_row,
-                                 GtkLabel     *state_label,
-                                 ActUser      *user,
                                  GCancellable *cancellable);
