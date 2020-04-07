@@ -52,6 +52,8 @@ enum {
 
 static GParamSpec *properties[N_PROPS];
 
+static void cleanup_cached_devices (CcFingerprintManager *self);
+
 CcFingerprintManager *
 cc_fingerprint_manager_new (ActUser *user)
 {
@@ -71,7 +73,7 @@ cc_fingerprint_manager_dispose (GObject *object)
     }
 
   g_clear_object (&priv->user);
-  g_list_free_full (g_steal_pointer (&priv->cached_devices), g_object_unref);
+  cleanup_cached_devices (self);
 
   G_OBJECT_CLASS (cc_fingerprint_manager_parent_class)->dispose (object);
 }
@@ -172,13 +174,65 @@ object_list_destroy_notify (gpointer data)
 }
 
 static void
+on_device_owner_changed (CcFingerprintManager *self,
+                         GParamSpec           *spec,
+                         CcFprintdDevice      *device)
+{
+  g_autofree char *name_owner = NULL;
+
+  name_owner = g_dbus_proxy_get_name_owner (G_DBUS_PROXY (device));
+
+  if (!name_owner)
+    {
+      g_debug ("Fprintd daemon disappeared, cleaning cache...");
+      cleanup_cached_devices (self);
+    }
+}
+
+static void
+cleanup_cached_devices (CcFingerprintManager *self)
+{
+  CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
+  CcFprintdDevice *target_device;
+
+  if (!priv->cached_devices)
+    return;
+
+  g_return_if_fail (CC_FPRINTD_IS_DEVICE (priv->cached_devices->data));
+
+  target_device = CC_FPRINTD_DEVICE (priv->cached_devices->data);
+
+  g_signal_handlers_disconnect_by_func (target_device, on_device_owner_changed, self);
+  g_list_free_full (g_steal_pointer (&priv->cached_devices), g_object_unref);
+}
+
+static void
+cache_devices (CcFingerprintManager *self,
+               GList                *devices)
+{
+  CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
+  CcFprintdDevice *target_device;
+
+  g_return_if_fail (devices && CC_FPRINTD_IS_DEVICE (devices->data));
+
+  cleanup_cached_devices (self);
+  priv->cached_devices = g_list_copy_deep (devices, (GCopyFunc) g_object_ref, NULL);
+
+  /* We can monitor just the first device name, as the owner is just the same */
+  target_device = CC_FPRINTD_DEVICE (priv->cached_devices->data);
+
+  g_signal_connect_object (target_device, "notify::g-name-owner",
+                           G_CALLBACK (on_device_owner_changed), self,
+                           G_CONNECT_SWAPPED);
+}
+
+static void
 on_device_proxy (GObject *object, GAsyncResult *res, gpointer user_data)
 {
   g_autoptr(CcFprintdDevice) fprintd_device = NULL;
   g_autoptr(GTask) task = G_TASK (user_data);
   g_autoptr(GError) error = NULL;
   CcFingerprintManager *self = g_task_get_source_object (task);
-  CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
   DeviceListData *list_data = g_task_get_task_data (task);
 
   fprintd_device = cc_fprintd_device_proxy_new_for_bus_finish (res, &error);
@@ -200,8 +254,7 @@ on_device_proxy (GObject *object, GAsyncResult *res, gpointer user_data)
 
   if (list_data->waiting_devices == 0)
     {
-      g_list_free_full (g_steal_pointer (&priv->cached_devices), g_object_unref);
-      priv->cached_devices = g_list_copy_deep (list_data->devices, (GCopyFunc) g_object_ref, NULL);
+      cache_devices (self, list_data->devices);
       g_task_return_pointer (task, g_steal_pointer (&list_data->devices), object_list_destroy_notify);
     }
 }
