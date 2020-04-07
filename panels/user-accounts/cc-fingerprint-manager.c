@@ -38,6 +38,7 @@ typedef struct
   ActUser           *user;
   GTask             *current_task;
   CcFingerprintState state;
+  GList             *cached_devices;
 } CcFingerprintManagerPrivate;
 
 G_DEFINE_TYPE_WITH_PRIVATE (CcFingerprintManager, cc_fingerprint_manager, G_TYPE_OBJECT)
@@ -70,6 +71,7 @@ cc_fingerprint_manager_dispose (GObject *object)
     }
 
   g_clear_object (&priv->user);
+  g_list_free_full (g_steal_pointer (&priv->cached_devices), g_object_unref);
 
   G_OBJECT_CLASS (cc_fingerprint_manager_parent_class)->dispose (object);
 }
@@ -175,6 +177,8 @@ on_device_proxy (GObject *object, GAsyncResult *res, gpointer user_data)
   g_autoptr(CcFprintdDevice) fprintd_device = NULL;
   g_autoptr(GTask) task = G_TASK (user_data);
   g_autoptr(GError) error = NULL;
+  CcFingerprintManager *self = g_task_get_source_object (task);
+  CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
   DeviceListData *list_data = g_task_get_task_data (task);
 
   fprintd_device = cc_fprintd_device_proxy_new_for_bus_finish (res, &error);
@@ -195,7 +199,11 @@ on_device_proxy (GObject *object, GAsyncResult *res, gpointer user_data)
   list_data->devices = g_list_append (list_data->devices, g_steal_pointer (&fprintd_device));
 
   if (list_data->waiting_devices == 0)
-    g_task_return_pointer (task, g_steal_pointer (&list_data->devices), object_list_destroy_notify);
+    {
+      g_list_free_full (g_steal_pointer (&priv->cached_devices), g_object_unref);
+      priv->cached_devices = g_list_copy_deep (list_data->devices, (GCopyFunc) g_object_ref, NULL);
+      g_task_return_pointer (task, g_steal_pointer (&list_data->devices), object_list_destroy_notify);
+    }
 }
 
 static void
@@ -286,10 +294,20 @@ cc_fingerprint_manager_get_devices (CcFingerprintManager *self,
                                     GAsyncReadyCallback   callback,
                                     gpointer              user_data)
 {
+  CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
   g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_source_tag (task, cc_fingerprint_manager_get_devices);
+
+  if (priv->cached_devices)
+    {
+      GList *devices;
+
+      devices = g_list_copy_deep (priv->cached_devices, (GCopyFunc) g_object_ref, NULL);
+      g_task_return_pointer (task, devices, object_list_destroy_notify);
+      return;
+    }
 
   fprintd_manager_connect (self, on_manager_proxy, g_steal_pointer (&task));
 }
