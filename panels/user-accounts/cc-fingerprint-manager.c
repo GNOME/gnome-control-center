@@ -573,3 +573,13 @@ cc_fingerprint_manager_get_state (CcFingerprintManager *self)
 
   return priv->state;
 }
+
+ActUser *
+cc_fingerprint_manager_get_user (CcFingerprintManager *self)
+{
+  CcFingerprintManagerPrivate *priv = cc_fingerprint_manager_get_instance_private (self);
+
+  g_return_val_if_fail (CC_IS_FINGERPRINT_MANAGER (self), NULL);
+
+  return priv->user;
+}
