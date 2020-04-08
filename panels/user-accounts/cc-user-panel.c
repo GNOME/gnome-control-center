@@ -94,6 +94,8 @@ struct _CcUserPanel {
 #ifdef HAVE_MALCONTENT
         GtkLabel        *parental_controls_button_label;
         GtkImage        *parental_control_go_next;
+        GtkImage        *parental_control_information;
+        GtkPopover      *parental_controls_unavailable_popover;
         GtkListBoxRow   *parental_controls_row;
 #endif
         GtkListBoxRow   *password_row;
@@ -911,6 +913,8 @@ show_user (ActUser *user, CcUserPanel *self)
         /* Parental Controls: Unavailable if user is admin */
         if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
                 gtk_widget_hide (GTK_WIDGET (self->parental_control_go_next));
+                gtk_widget_set_visible (GTK_WIDGET (self->parental_control_information),
+                                        is_parental_controls_enabled_for_user (user));
                 /* TRANSLATORS: Status of Parental Controls setup */
                 gtk_label_set_text (self->parental_controls_button_label, _("Unavailable"));
         } else {
@@ -922,6 +926,7 @@ show_user (ActUser *user, CcUserPanel *self)
                         gtk_label_set_text (self->parental_controls_button_label, _("Disabled"));
 
                 gtk_widget_show (GTK_WIDGET (self->parental_control_go_next));
+                gtk_widget_hide (GTK_WIDGET (self->parental_control_information));
         }
 #endif
 
@@ -1181,8 +1186,16 @@ spawn_malcontent_control (CcUserPanel *self)
 
         user = get_selected_user (self);
 
-        /* no-op if the user is administrator */
-        if (act_user_get_account_type (user) != ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
+        /* If the user is an administrator, show a popover explaining that
+         * parental controls support is no longer available for administrators.
+         * This is an Endless-specific change and can be dropped from EOS 3.9+
+         * (see https://phabricator.endlessm.com/T29385). */
+        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR &&
+            gtk_widget_get_visible (self->parental_control_information)) {
+                gtk_popover_set_relative_to (self->parental_controls_unavailable_popover,
+                                             GTK_WIDGET (self->parental_control_information));
+                gtk_popover_popup (self->parental_controls_unavailable_popover);
+        } else if (act_user_get_account_type (user) != ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
                 const gchar *argv[] = { "malcontent-control", NULL };
                 g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
         }
@@ -1625,6 +1638,8 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
 #ifdef HAVE_MALCONTENT
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_controls_button_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_control_go_next);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_control_information);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_controls_unavailable_popover);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_controls_row);
 #endif
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_button_label);
