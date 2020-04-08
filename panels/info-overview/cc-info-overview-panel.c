@@ -251,7 +251,7 @@ get_renderer_from_helper (const char **env)
       guint i;
       g_debug ("With environment:");
       envp = g_get_environ ();
-      for (i = 0; env[i] != NULL; i = i + 2)
+      for (i = 0; env != NULL && env[i] != NULL; i = i + 2)
         {
           g_debug ("  %s = %s", env[i], env[i+1]);
           envp = g_environ_setenv (envp, env[i], env[i+1], TRUE);
@@ -343,8 +343,9 @@ get_renderer_from_switcheroo (void)
       g_autoptr(GVariant) name = NULL;
       g_autoptr(GVariant) env = NULL;
       g_autoptr(GVariant) default_variant = NULL;
-      const char *name_s;
+      const char *name_s = 0;
       g_autofree const char **env_s = NULL;
+      gsize env_len;
       g_autofree char *renderer = NULL;
       GpuData *gpu_data;
 
@@ -359,7 +360,15 @@ get_renderer_from_switcheroo (void)
         continue;
       name_s = g_variant_get_string (name, NULL);
       g_debug ("Getting renderer from helper for GPU '%s'", name_s);
-      env_s = g_variant_get_strv (env, NULL);
+      env_s = g_variant_get_strv (env, &env_len);
+      if (env_s != NULL && env_len % 2 != 0)
+        {
+          g_autofree char *debug = NULL;
+          debug = g_strjoinv ("\n", (char **) env_s);
+          g_warning ("Invalid environment returned from switcheroo:\n%s", debug);
+          g_clear_pointer (&env_s, g_free);
+        }
+
       renderer = get_renderer_from_helper (env_s);
       default_variant = g_variant_lookup_value (gpu, "Default", NULL);
 
