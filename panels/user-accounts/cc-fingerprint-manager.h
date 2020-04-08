@@ -54,6 +54,8 @@ CcFingerprintManager * cc_fingerprint_manager_new (ActUser *user);
 
 CcFingerprintState cc_fingerprint_manager_get_state (CcFingerprintManager *fp_manager);
 
+ActUser * cc_fingerprint_manager_get_user (CcFingerprintManager *fp_manager);
+
 void cc_fingerprint_manager_update_state (CcFingerprintManager     *fp_manager,
                                           CcFingerprintStateUpdated callback,
                                           gpointer                  user_data);
