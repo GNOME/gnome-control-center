@@ -21,7 +21,6 @@
 #include "config.h"
 
 #include "cc-user-panel.h"
-#include "cc-fingerprint-manager.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -53,7 +52,8 @@
 #include "cc-realm-manager.h"
 #include "cc-user-accounts-resources.h"
 #include "cc-user-image.h"
-#include "um-fingerprint-dialog.h"
+#include "cc-fingerprint-manager.h"
+#include "cc-fingerprint-dialog.h"
 #include "user-utils.h"
 
 #include "cc-common-language.h"
@@ -113,7 +113,6 @@ struct _CcUserPanel {
 
         CcAvatarChooser *avatar_chooser;
 
-        GCancellable *fingerprint_cancellable;
         CcFingerprintManager *fingerprint_manager;
 
         gint other_accounts;
@@ -928,7 +927,6 @@ show_user (ActUser *user, CcUserPanel *self)
         if (show) {
                 if (!self->fingerprint_manager) {
                         self->fingerprint_manager = cc_fingerprint_manager_new (user);
-                        fingerprint_set_manager (self->fingerprint_manager);
                         g_signal_connect_object (self->fingerprint_manager,
                                                  "notify::state",
                                                  G_CALLBACK (update_fingerprint_row_state),
@@ -1181,19 +1179,16 @@ static void
 change_fingerprint (CcUserPanel *self)
 {
         ActUser *user;
+        GtkWindow *top_level;
+        CcFingerprintDialog *dialog;
 
         user = get_selected_user (self);
+        top_level = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
 
         g_assert (g_strcmp0 (g_get_user_name (), act_user_get_user_name (user)) == 0);
 
-        g_cancellable_cancel (self->fingerprint_cancellable);
-        g_clear_object (&self->fingerprint_cancellable);
-
-        self->fingerprint_cancellable = g_cancellable_new ();
-
-        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-                                    GTK_WIDGET (self->fingerprint_row),
-                                    self->fingerprint_cancellable);
+        dialog = cc_fingerprint_dialog_new (top_level, self->fingerprint_manager);
+        gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 static void
@@ -1601,9 +1596,6 @@ cc_user_panel_dispose (GObject *object)
         g_clear_object (&self->selected_user);
 
         g_clear_object (&self->login_screen_settings);
-
-        g_cancellable_cancel (self->fingerprint_cancellable);
-        g_clear_object (&self->fingerprint_cancellable);
 
         g_clear_pointer ((GtkWidget **)&self->language_chooser, gtk_widget_destroy);
         g_clear_object (&self->permission);

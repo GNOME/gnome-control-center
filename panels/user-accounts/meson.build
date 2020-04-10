@@ -107,22 +107,14 @@ resource_data = files(
   'cc-login-history-dialog.ui',
   'cc-password-dialog.ui',
   'cc-user-panel.ui',
-  'data/icons/left-index-finger.png',
-  'data/icons/left-little-finger.png',
-  'data/icons/left-middle-finger.png',
-  'data/icons/left-ring-finger.png',
-  'data/icons/left-thumb.png',
-  'data/icons/print_error.png',
-  'data/icons/print_ok.png',
-  'data/icons/right-index-finger.png',
-  'data/icons/right-little-finger.png',
-  'data/icons/right-middle-finger.png',
-  'data/icons/right-ring-finger.png',
-  'data/icons/right-thumb.png',
-  'data/account-fingerprint.ui',
+  'cc-fingerprint-dialog.ui',
+  'data/icons/fingerprint-detection-complete-symbolic.svg',
+  'data/icons/fingerprint-detection-symbolic.svg',
+  'data/icons/fingerprint-detection-warning-symbolic.svg',
   'data/carousel.css',
   'data/join-dialog.ui',
   'data/user-accounts-dialog.css',
+  'data/cc-fingerprint-dialog.css',
 )
 
 common_sources += gnome.compile_resources(
@@ -165,12 +157,12 @@ sources = common_sources + files(
   'cc-carousel.c',
   'cc-crop-area.c',
   'cc-fingerprint-manager.c',
+  'cc-fingerprint-dialog.c',
   'cc-login-history-dialog.c',
   'cc-password-dialog.c',
   'cc-user-image.c',
   'cc-user-panel.c',
   'run-passwd.c',
-  'um-fingerprint-dialog.c',
 )
 
 sources += gnome.mkenums_simple(
