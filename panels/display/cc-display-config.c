@@ -614,6 +614,7 @@ cc_display_config_set_minimum_size (CcDisplayConfig *self,
                                     int              width,
                                     int              height)
 {
+  g_return_if_fail (CC_IS_DISPLAY_CONFIG (self));
   CC_DISPLAY_CONFIG_GET_CLASS (self)->set_minimum_size (self, width, height);
 }
 
@@ -622,5 +623,7 @@ cc_display_config_is_scaled_mode_valid (CcDisplayConfig *self,
                                         CcDisplayMode   *mode,
                                         double           scale)
 {
+  g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), FALSE);
+  g_return_val_if_fail (CC_IS_DISPLAY_MODE (mode), FALSE);
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_scaled_mode_valid (self, mode, scale);
 }
