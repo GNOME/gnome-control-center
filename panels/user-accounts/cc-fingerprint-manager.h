@@ -34,6 +34,7 @@ G_DECLARE_FINAL_TYPE (CcFingerprintManager, cc_fingerprint_manager, CC, FINGERPR
 /**
  * CcFingerprintManager:
  * @CC_FINGERPRINT_STATE_NONE: Fingerprint recognition is not available
+ * @CC_FINGERPRINT_STATE_UPDATING: Fingerprint recognition is being fetched
  * @CC_FINGERPRINT_STATE_ENABLED: Fingerprint recognition is enabled
  * @CC_FINGERPRINT_STATE_DISABLED: Fingerprint recognition is disabled
  *
@@ -41,6 +42,7 @@ G_DECLARE_FINAL_TYPE (CcFingerprintManager, cc_fingerprint_manager, CC, FINGERPR
  */
 typedef enum {
   CC_FINGERPRINT_STATE_NONE,
+  CC_FINGERPRINT_STATE_UPDATING,
   CC_FINGERPRINT_STATE_ENABLED,
   CC_FINGERPRINT_STATE_DISABLED,
 } CcFingerprintState;
