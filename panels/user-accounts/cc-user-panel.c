@@ -802,8 +802,13 @@ update_fingerprint_row_state (CcUserPanel *self, GParamSpec *spec, CcFingerprint
 {
         CcFingerprintState state = cc_fingerprint_manager_get_state (fingerprint_manager);
 
-        gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row),
-                                state != CC_FINGERPRINT_STATE_NONE);
+        if (state != CC_FINGERPRINT_STATE_UPDATING) {
+                gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row),
+                                        state != CC_FINGERPRINT_STATE_NONE);
+        }
+
+        gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row),
+                                  state != CC_FINGERPRINT_STATE_UPDATING);
 
         if (state == CC_FINGERPRINT_STATE_ENABLED)
                 gtk_label_set_text (self->fingerprint_state_label, _("Enabled"));
@@ -1359,6 +1364,11 @@ on_permission_changed (CcUserPanel *self)
         }
 
         if (is_authorized || self_selected) {
+                CcFingerprintState fingerprint_state = CC_FINGERPRINT_STATE_NONE;
+
+                if (self->fingerprint_manager)
+                        fingerprint_state = cc_fingerprint_manager_get_state (self->fingerprint_manager);
+
                 gtk_stack_set_visible_child (self->user_icon_stack, GTK_WIDGET (self->user_icon_button));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->language_row), TRUE);
@@ -1367,7 +1377,8 @@ on_permission_changed (CcUserPanel *self)
                 gtk_widget_set_sensitive (GTK_WIDGET (self->password_row), TRUE);
                 remove_unlock_tooltip (GTK_WIDGET (self->password_row));
 
-                gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row), TRUE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row),
+                                          fingerprint_state != CC_FINGERPRINT_STATE_UPDATING);
                 remove_unlock_tooltip (GTK_WIDGET (self->fingerprint_row));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), TRUE);
