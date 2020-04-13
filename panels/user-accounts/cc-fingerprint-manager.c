@@ -570,6 +570,8 @@ cc_fingerprint_manager_update_state (CcFingerprintManager     *self,
   g_task_set_source_tag (priv->current_task, cc_fingerprint_manager_update_state);
   g_task_set_task_data (priv->current_task, data, g_free);
 
+  set_state (self, CC_FINGERPRINT_STATE_UPDATING);
+
   cc_fingerprint_manager_get_devices (self, cancellable, on_manager_devices_list,
                                       priv->current_task);
 }
