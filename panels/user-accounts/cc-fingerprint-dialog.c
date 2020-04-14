@@ -117,6 +117,7 @@ const char * FINGER_IDS[] = {
 
 typedef enum {
   ENROLL_STATE_NORMAL,
+  ENROLL_STATE_RETRY,
   ENROLL_STATE_SUCCESS,
   ENROLL_STATE_WARNING,
   ENROLL_STATE_ERROR,
@@ -126,6 +127,7 @@ typedef enum {
 
 const char * ENROLL_STATE_CLASSES[N_ENROLL_STATES] = {
   "",
+  "retry",
   "success",
   "warning",
   "error",
@@ -314,7 +316,7 @@ fingerprint_icon_new (const char *icon_name,
 
   box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
   gtk_widget_set_name (box, "fingerprint-box");
-  gtk_widget_set_halign (box, GTK_ALIGN_CENTER);
+  gtk_widget_set_hexpand (box, TRUE);
 
   image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DND);
 
@@ -626,8 +628,10 @@ static gboolean
 stage_passed_timeout_cb (gpointer user_data)
 {
   CcFingerprintDialog *self = user_data;
+  const char *current_message;
 
-  set_enroll_result_message (self, ENROLL_STATE_NORMAL, NULL);
+  current_message = gtk_label_get_label (self->enroll_result_message);
+  set_enroll_result_message (self, ENROLL_STATE_NORMAL, current_message);
   self->enroll_stage_passed_id = 0;
 
   return FALSE;
@@ -693,7 +697,10 @@ handle_enroll_signal (CcFingerprintDialog *self,
       is_swipe = g_str_equal (scan_type, "swipe");
 
       message = TR (enroll_result_str_to_msg (result, is_swipe));
-      set_enroll_result_message (self, ENROLL_STATE_NORMAL, message);
+      set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
+
+      self->enroll_stage_passed_id =
+        g_timeout_add (850, stage_passed_timeout_cb, self);
     }
 
   if (done)
