@@ -664,6 +664,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                 }
                 g_free (path);
 
+                g_signal_handlers_disconnect_by_func (data->device, device_signal_cb, data);
                 g_signal_connect (data->device, "g-signal", G_CALLBACK (device_signal_cb), data);
 
                 if (!enroll_start (data, &error)) {
@@ -684,6 +685,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 
                         return;
                 }
+                data->num_stages_done = 0;
                 data->state = STATE_ENROLLING;;
         } else {
                 if (data->state == STATE_ENROLLING) {
