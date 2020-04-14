@@ -31,9 +31,6 @@
 #define TR(s) dgettext("fprintd", s)
 #include "fingerprint-strings.h"
 
-/* This must match the number of images on the 2nd page in the UI file */
-#define MAX_ENROLL_STAGES 10
-
 static GDBusProxy *manager = NULL;
 static GDBusConnection *connection = NULL;
 static gboolean is_disable = FALSE;
@@ -513,14 +510,17 @@ enroll_result (EnrollData *data, const char *result, gboolean done)
         char *msg;
 
         if (g_str_equal (result, "enroll-completed") || g_str_equal (result, "enroll-stage-passed")) {
-                char *name, *path;
+                GtkFlowBoxChild *child;
+                const char *path;
 
                 data->num_stages_done++;
-                name = g_strdup_printf ("image%d", data->num_stages_done);
-                path = g_strdup_printf ("/org/gnome/control-center/user-accounts/print_ok.png");
-                gtk_image_set_from_resource (GTK_IMAGE (WID (name)), path);
-                g_free (name);
-                g_free (path);
+                path = "/org/gnome/control-center/user-accounts/print_ok.png";
+                child = gtk_flow_box_get_child_at_index (GTK_FLOW_BOX (WID ("enroll-flowbox")),
+                                                         data->num_stages_done - 1);
+                if (child) {
+                        GtkImage *image = GTK_IMAGE (gtk_bin_get_child (GTK_BIN (child)));
+                        gtk_image_set_from_resource (image, path);
+                }
         }
         if (g_str_equal (result, "enroll-completed")) {
                 gtk_label_set_text (GTK_LABEL (WID ("status-label")), _("Done!"));
@@ -572,6 +572,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
         if (g_str_equal (name, "enroll")) {
                 GError *error = NULL;
                 GtkBuilder *dialog = data->dialog;
+                GtkWidget *enroll_flowbox;
                 char *path;
                 guint i;
                 GVariant *result;
@@ -637,24 +638,29 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                 }
 
                 data->num_enroll_stages = num_enroll_stages;
+                enroll_flowbox = WID ("enroll-flowbox");
 
                 /* Hide the extra "bulbs" if not needed */
-                for (i = MAX_ENROLL_STAGES; i > data->num_enroll_stages; i--) {
-                        char *name;
-
-                        name = g_strdup_printf ("image%d", i);
-                        gtk_widget_hide (WID (name));
-                        g_free (name);
-                }
                 /* And set the right image */
                 {
                         path = g_strdup_printf ("/org/gnome/control-center/user-accounts/%s.png", data->finger);
                 }
                 for (i = 1; i <= data->num_enroll_stages; i++) {
-                        char *name;
-                        name = g_strdup_printf ("image%d", i);
-                        gtk_image_set_from_resource (GTK_IMAGE (WID (name)), path);
-                        g_free (name);
+                        GtkWidget *image;
+                        GtkFlowBoxChild *child;
+
+                        child = gtk_flow_box_get_child_at_index (GTK_FLOW_BOX (enroll_flowbox), i-1);
+                        if (child) {
+                                image = gtk_bin_get_child (GTK_BIN (child));
+                                gtk_image_set_from_resource (GTK_IMAGE (image), path);
+                        } else {
+                                child = GTK_FLOW_BOX_CHILD (gtk_flow_box_child_new ());
+                                image = gtk_image_new_from_resource (path);
+                                gtk_widget_set_can_focus (GTK_WIDGET (child), FALSE);
+                                gtk_container_add (GTK_CONTAINER (child), image);
+                                gtk_container_add (GTK_CONTAINER (enroll_flowbox), GTK_WIDGET (child));
+                                gtk_widget_show_all (GTK_WIDGET (child));
+                        }
                 }
                 g_free (path);
 
