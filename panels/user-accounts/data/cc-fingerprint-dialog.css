@@ -59,3 +59,23 @@
 .fingerprint-icon.enroll-status.error label:not(:backdrop) {
   color: @error_color;
 }
+
+@keyframes wiggle {
+  /* Unfortunately we can't use translation or xalign, so here's the workaround */
+  10% { padding-left: 0; padding-right: 2px; }
+  20% { padding-left: 4px; padding-right: 0; }
+  30% { padding-left: 0; padding-right: 8px; }
+  40% { padding-left: 8px; padding-right: 0; }
+  50% { padding-left: 0; padding-right: 8px; }
+  60% { padding-left: 8px; padding-right: 0; }
+  70% { padding-left: 0; padding-right: 8px; }
+  80% { padding-left: 4px; padding-right: 0; }
+  90% { padding-left: 0; padding-right: 2px; }
+}
+
+.fingerprint-icon.enroll-status.retry label {
+  animation-name: wiggle;
+  animation-duration: 850ms;
+  animation-timing-function: ease-in;
+  animation-iteration-count: 1;
+}
