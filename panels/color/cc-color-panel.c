@@ -591,13 +591,13 @@ gcm_prefs_calibrate_cb (CcColorPanel *prefs)
 
   /* run with modal set */
   argv = g_ptr_array_new_with_free_func (g_free);
-  g_ptr_array_add (argv, g_build_filename (BINDIR, "gcm-calibrate", NULL));
+  g_ptr_array_add (argv, g_strdup ("gcm-calibrate"));
   g_ptr_array_add (argv, g_strdup ("--device"));
   g_ptr_array_add (argv, g_strdup (cd_device_get_id (prefs->current_device)));
   g_ptr_array_add (argv, g_strdup ("--parent-window"));
   g_ptr_array_add (argv, g_strdup_printf ("%i", xid));
   g_ptr_array_add (argv, NULL);
-  ret = g_spawn_async (NULL, (gchar**) argv->pdata, NULL, 0,
+  ret = g_spawn_async (NULL, (gchar**) argv->pdata, NULL, G_SPAWN_SEARCH_PATH,
                        NULL, NULL, NULL, &error);
   if (!ret)
     g_warning ("failed to run calibrate: %s", error->message);
@@ -1029,13 +1029,13 @@ gcm_prefs_profile_view (CcColorPanel *prefs, CdProfile *profile)
 
   /* open up gcm-viewer as a info pane */
   argv = g_ptr_array_new_with_free_func (g_free);
-  g_ptr_array_add (argv, g_build_filename (BINDIR, "gcm-viewer", NULL));
+  g_ptr_array_add (argv, g_strdup ("gcm-viewer"));
   g_ptr_array_add (argv, g_strdup ("--profile"));
   g_ptr_array_add (argv, g_strdup (cd_profile_get_id (profile)));
   g_ptr_array_add (argv, g_strdup ("--parent-window"));
   g_ptr_array_add (argv, g_strdup_printf ("%i", xid));
   g_ptr_array_add (argv, NULL);
-  ret = g_spawn_async (NULL, (gchar**) argv->pdata, NULL, 0,
+  ret = g_spawn_async (NULL, (gchar**) argv->pdata, NULL, G_SPAWN_SEARCH_PATH,
                        NULL, NULL, NULL, &error);
   if (!ret)
     g_warning ("failed to run calibrate: %s", error->message);
