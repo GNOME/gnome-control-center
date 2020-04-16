@@ -634,8 +634,8 @@ add_snap_permissions (CcApplicationsPanel *self,
 
   client = snapd_client_new ();
   if (!snapd_client_get_connections2_sync (client,
-                                           SNAPD_GET_CONNECTIONS_FLAGS_NONE,
-                                           snap_name, NULL,
+                                           SNAPD_GET_CONNECTIONS_FLAGS_SELECT_ALL,
+                                           NULL, NULL,
                                            NULL, NULL,
                                            &plugs, &slots,
                                            NULL, &error))
@@ -656,6 +656,10 @@ add_snap_permissions (CcApplicationsPanel *self,
                                                   "wayland",
                                                   "x11",
                                                   NULL };
+
+      /* Skip if not relating to this snap */
+      if (g_strcmp0 (snapd_plug_get_snap (plug), snap_name) != 0)
+        continue;
 
       /* Ignore interfaces that are too low level to make sense to show or disable */
       if (g_strv_contains (hidden_interfaces, snapd_plug_get_interface (plug)))
