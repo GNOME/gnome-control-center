@@ -722,13 +722,15 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 static gboolean
 does_gnome_software_exist (void)
 {
-  return g_file_test (BINDIR "/gnome-software", G_FILE_TEST_EXISTS);
+  g_autofree gchar *path = g_find_program_in_path ("gnome-software");
+  return path != NULL;
 }
 
 static gboolean
 does_gpk_update_viewer_exist (void)
 {
-  return g_file_test (BINDIR "/gpk-update-viewer", G_FILE_TEST_EXISTS);
+  g_autofree gchar *path = g_find_program_in_path ("gpk-update-viewer");
+  return path != NULL;
 }
 
 static void
@@ -736,19 +738,20 @@ open_software_update (CcInfoOverviewPanel *self)
 {
   g_autoptr(GError) error = NULL;
   gboolean ret;
-  g_auto(GStrv) argv = NULL;
+  char *argv[3];
 
-  argv = g_new0 (gchar *, 3);
   if (does_gnome_software_exist ())
     {
-      argv[0] = g_build_filename (BINDIR, "gnome-software", NULL);
-      argv[1] = g_strdup_printf ("--mode=updates");
+      argv[0] = "gnome-software";
+      argv[1] = "--mode=updates";
+      argv[2] = NULL;
     }
   else
     {
-      argv[0] = g_build_filename (BINDIR, "gpk-update-viewer", NULL);
+      argv[0] = "gpk-update-viewer";
+      argv[1] = NULL;
     }
-  ret = g_spawn_async (NULL, argv, NULL, 0, NULL, NULL, NULL, &error);
+  ret = g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
   if (!ret)
       g_warning ("Failed to spawn %s: %s", argv[0], error->message);
 }
