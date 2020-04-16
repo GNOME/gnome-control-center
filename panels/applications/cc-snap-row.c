@@ -48,127 +48,6 @@ typedef struct
   SnapdSlot *slot;
 } ConnectData;
 
-static const gchar *
-get_label (const gchar *interface_name)
-{
-  if (strcmp (interface_name, "account-control") == 0)
-    return _("Add user accounts and change passwords");
-  else if (strcmp (interface_name, "alsa") == 0)
-    return _("Play and record sound");
-  else if (strcmp (interface_name, "avahi-observe") == 0)
-    return _("Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)");
-  else if (strcmp (interface_name, "bluetooth-control") == 0)
-    return _("Access bluetooth hardware directly");
-  else if (strcmp (interface_name, "bluez") == 0)
-    return _("Use bluetooth devices");
-  else if (strcmp (interface_name, "camera") == 0)
-    return _("Use your camera");
-  else if (strcmp (interface_name, "cups-control") == 0)
-    return _("Print documents");
-  else if (strcmp (interface_name, "joystick") == 0)
-    return _("Use any connected joystick");
-  else if (strcmp (interface_name, "docker") == 0)
-    return _("Allow connecting to the Docker service");
-  else if (strcmp (interface_name, "gsettings") == 0)
-    return _("Can change settings");
-  else if (strcmp (interface_name, "firewall-control") == 0)
-    return _("Configure network firewall");
-  else if (strcmp (interface_name, "fuse-support") == 0)
-    return _("Setup and use privileged FUSE filesystems");
-  else if (strcmp (interface_name, "fwupd") == 0)
-    return _("Update firmware on this device");
-  else if (strcmp (interface_name, "hardware-observe") == 0)
-    return _("Access hardware information");
-  else if (strcmp (interface_name, "hardware-random-control") == 0)
-    return _("Provide entropy to hardware random number generator");
-  else if (strcmp (interface_name, "hardware-random-observe") == 0)
-    return _("Use hardware-generated random numbers");
-  else if (strcmp (interface_name, "home") == 0)
-    return _("Access files in your home folder");
-  else if (strcmp (interface_name, "libvirt") == 0)
-    return _("Access libvirt service");
-  else if (strcmp (interface_name, "locale-control") == 0)
-    return _("Change system language and region settings");
-  else if (strcmp (interface_name, "location-control") == 0)
-    return _("Change location settings and providers");
-  else if (strcmp (interface_name, "location-observe") == 0)
-    return _("Access your location");
-  else if (strcmp (interface_name, "log-observe") == 0)
-    return _("Read system and application logs");
-  else if (strcmp (interface_name, "lxd") == 0)
-    return _("Access LXD service");
-  else if (strcmp (interface_name, "media-hub") == 0)
-    return _("access the media-hub service");
-  else if (strcmp (interface_name, "modem-manager") == 0)
-    return _("Use and configure modems");
-  else if (strcmp (interface_name, "mount-observe") == 0)
-    return _("Read system mount information and disk quotas");
-  else if (strcmp (interface_name, "mpris") == 0)
-    return _("Control music and video players");
-  else if (strcmp (interface_name, "network") == 0)
-    return _("Has network access");
-  else if (strcmp (interface_name, "network-control") == 0)
-    return _("Change low-level network settings");
-  else if (strcmp (interface_name, "network-manager") == 0)
-    return _("Access the NetworkManager service to read and change network settings");
-  else if (strcmp (interface_name, "network-observe") == 0)
-    return _("Read access to network settings");
-  else if (strcmp (interface_name, "network-setup-control") == 0)
-    return _("Change network settings");
-  else if (strcmp (interface_name, "network-setup-observe") == 0)
-    return _("Read network settings");
-  else if (strcmp (interface_name, "ofono") == 0)
-    return _("Access the ofono service to read and change network settings for mobile telephony");
-  else if (strcmp (interface_name, "openvtswitch") == 0)
-    return _("Control Open vSwitch hardware");
-  else if (strcmp (interface_name, "optical-drive") == 0)
-    return _("Read from CD/DVD");
-  else if (strcmp (interface_name, "password-manager-service") == 0)
-    return _("Read, add, change, or remove saved passwords");
-  else if (strcmp (interface_name, "ppp") == 0)
-    return _("Access pppd and ppp devices for configuring Point-to-Point Protocol connections");
-  else if (strcmp (interface_name, "process-control") == 0)
-    return _("Pause or end any process on the system");
-  else if (strcmp (interface_name, "pulseaudio") == 0)
-    return _("Play and record sound");
-  else if (strcmp (interface_name, "raw-usb") == 0)
-    return _("Access USB hardware directly");
-  else if (strcmp (interface_name, "removable-media") == 0)
-    return _("Read/write files on removable storage devices");
-  else if (strcmp (interface_name, "screen-inhibit-control") == 0)
-    return _("Prevent screen sleep/lock");
-  else if (strcmp (interface_name, "serial-port") == 0)
-    return _("Access serial port hardware");
-  else if (strcmp (interface_name, "shutdown") == 0)
-    return _("Restart or power off the device");
-  else if (strcmp (interface_name, "snapd-control") == 0)
-    return _("Install, remove and configure software");
-  else if (strcmp (interface_name, "storage-framework-service") == 0)
-    return _("Access Storage Framework service");
-  else if (strcmp (interface_name, "system-observe") == 0)
-    return _("Read process and system information");
-  else if (strcmp (interface_name, "system-trace") == 0)
-    return _("Monitor and control any running program");
-  else if (strcmp (interface_name, "time-control") == 0)
-    return _("Change the date and time");
-  else if (strcmp (interface_name, "timeserver-control") == 0)
-    return _("Change time server settings");
-  else if (strcmp (interface_name, "timezone-control") == 0)
-    return _("Change the time zone");
-  else if (strcmp (interface_name, "udisks2") == 0)
-    return _("Access the UDisks2 service for configuring disks and removable media");
-  else if (strcmp (interface_name, "unity8-calendar") == 0)
-    return _("Read/change shared calendar events in Ubuntu Unity 8");
-  else if (strcmp (interface_name, "unity8-contacts") == 0)
-    return _("Read/change shared contacts in Ubuntu Unity 8");
-  else if (strcmp (interface_name, "upower-observe") == 0)
-    return _("Access energy usage data");
-  else if (strcmp (interface_name, "u2f-devices") == 0)
-    return _("Read/write access to U2F devices exposed");
-  else
-    return interface_name;
-}
-
 static void
 update_state (CcSnapRow *self)
 {
@@ -382,10 +261,11 @@ cc_snap_row_init (CcSnapRow *self)
 }
 
 CcSnapRow *
-cc_snap_row_new (GCancellable *cancellable, SnapdPlug *plug, GPtrArray *slots)
+cc_snap_row_new (GCancellable *cancellable, SnapdInterface *interface, SnapdPlug *plug, GPtrArray *slots)
 {
   CcSnapRow *self;
   GPtrArray *connected_slots;
+  g_autofree gchar *label = NULL;
   GtkTreeIter iter;
 
   g_return_val_if_fail (SNAPD_IS_PLUG (plug), NULL);
@@ -411,7 +291,11 @@ cc_snap_row_new (GCancellable *cancellable, SnapdPlug *plug, GPtrArray *slots)
         }
     }
 
-  gtk_label_set_label (self->title_label, get_label (snapd_plug_get_interface (plug)));
+  if (interface != NULL)
+    label = snapd_interface_make_label (interface);
+  else
+    label = g_strdup (snapd_plug_get_interface (plug));
+  gtk_label_set_label (self->title_label, label);
 
   /* Add option into combo box */
   gtk_list_store_append (self->slots_combo_model, &iter);
