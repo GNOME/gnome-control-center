@@ -61,10 +61,6 @@ deps = common_deps + [
   m_dep,
 ]
 
-cflags += [
-  '-DBINDIR="@0@"'.format(control_center_bindir)
-]
-
 panels_libs += static_library(
   cappletname,
   sources: sources,
