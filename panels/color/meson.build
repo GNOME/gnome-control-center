@@ -47,10 +47,6 @@ deps = common_deps + [
   dependency('libsoup-2.4')
 ]
 
-cflags += [
-  '-DBINDIR="@0@"'.format(control_center_bindir)
-]
-
 panels_libs += static_library(
   cappletname,
   sources: sources,
