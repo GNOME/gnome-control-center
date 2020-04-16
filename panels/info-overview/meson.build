@@ -42,7 +42,7 @@ sources += gnome.compile_resources(
 )
 
 deps = common_deps + [
-  dependency('udisks2', version: '>= 2.1.8'),
+  dependency('udisks2', version: '>= 2.8.2'),
   dependency('libgtop-2.0')
 ]
 
