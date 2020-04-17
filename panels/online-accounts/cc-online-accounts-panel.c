@@ -57,7 +57,6 @@ struct _CcGoaPanel
   GoaObject *active_object;
   GoaObject *removed_object;
 
-  gboolean   destroyed;
   guint      remove_account_timeout_id;
 };
 
@@ -400,8 +399,6 @@ cc_goa_panel_dispose (GObject *object)
   /* Must be destroyed in dispose, not finalize. */
   g_clear_pointer ((GtkWidget **) &panel->edit_account_dialog, gtk_widget_destroy);
 
-  panel->destroyed = TRUE;
-
   G_OBJECT_CLASS (cc_goa_panel_parent_class)->dispose (object);
 }
 
@@ -470,7 +467,7 @@ cc_goa_panel_init (CcGoaPanel *panel)
                           G_BINDING_SYNC_CREATE);
 
   /* TODO: probably want to avoid _sync() ... */
-  panel->client = goa_client_new_sync (NULL /* GCancellable */, &error);
+  panel->client = goa_client_new_sync (cc_panel_get_cancellable (CC_PANEL (panel)), &error);
   if (panel->client == NULL)
     {
       g_warning ("Error getting a GoaClient: %s (%s, %d)",
@@ -867,13 +864,16 @@ get_all_providers_cb (GObject      *source,
   g_autoptr(CcGoaPanel) self = user_data;
   GList *providers;
   GList *l;
+  g_autoptr(GError) error = NULL;
 
   providers = NULL;
-  if (!goa_provider_get_all_finish (&providers, res, NULL))
-    return;
+  if (!goa_provider_get_all_finish (&providers, res, &error))
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Failed to get GOA providers: %s", error->message);
 
-  if (self->destroyed)
-    return;
+      return;
+    }
 
   for (l = providers; l != NULL; l = l->next)
     {
@@ -931,7 +931,7 @@ on_notification_closed (GtkButton  *button,
                         CcGoaPanel *self)
 {
   goa_account_call_remove (goa_object_peek_account (self->removed_object),
-                           NULL, /* GCancellable */
+                           cc_panel_get_cancellable (CC_PANEL (self)),
                            (GAsyncReadyCallback) remove_account_cb,
                            g_object_ref (self));
 
