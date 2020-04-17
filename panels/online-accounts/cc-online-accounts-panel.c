@@ -245,9 +245,7 @@ add_account (CcGoaPanel  *self,
              GoaProvider *provider)
 {
   GoaObject *object;
-  GError *error;
-
-  error = NULL;
+  g_autoptr(GError) error = NULL;
 
   gtk_container_foreach (GTK_CONTAINER (self->new_account_vbox),
                          (GtkCallback) gtk_widget_destroy,
@@ -436,8 +434,8 @@ cc_goa_panel_finalize (GObject *object)
 static void
 cc_goa_panel_init (CcGoaPanel *panel)
 {
-  GError *error;
   GNetworkMonitor *monitor;
+  g_autoptr(GError) error = NULL;
 
   g_resources_register (cc_online_accounts_get_resource ());
 
@@ -472,14 +470,12 @@ cc_goa_panel_init (CcGoaPanel *panel)
                           G_BINDING_SYNC_CREATE);
 
   /* TODO: probably want to avoid _sync() ... */
-  error = NULL;
   panel->client = goa_client_new_sync (NULL /* GCancellable */, &error);
   if (panel->client == NULL)
     {
       g_warning ("Error getting a GoaClient: %s (%s, %d)",
                  error->message, g_quark_to_string (error->domain), error->code);
       gtk_widget_set_sensitive (GTK_WIDGET (panel), FALSE);
-      g_error_free (error);
       return;
     }
 
@@ -768,9 +764,9 @@ on_account_added (GoaClient *client,
   CcGoaPanel *self = user_data;
   GtkWidget *row, *icon, *label, *box;
   GoaAccount *account;
-  GError *error;
   GIcon *gicon;
   gchar* title = NULL;
+  g_autoptr(GError) error = NULL;
 
   account = goa_object_peek_account (object);
 
@@ -782,7 +778,6 @@ on_account_added (GoaClient *client,
   icon = gtk_image_new ();
   gtk_widget_show (icon);
 
-  error = NULL;
   gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
   if (error != NULL)
     {
@@ -790,8 +785,6 @@ on_account_added (GoaClient *client,
                  error->message,
                  g_quark_to_string (error->domain),
                  error->code);
-
-      g_clear_error (&error);
     }
   else
     {
@@ -913,9 +906,8 @@ remove_account_cb (GoaAccount    *account,
                    gpointer       user_data)
 {
   CcGoaPanel *panel = CC_GOA_PANEL (user_data);
-  GError *error;
+  g_autoptr(GError) error = NULL;
 
-  error = NULL;
   if (!goa_account_call_remove_finish (account, res, &error))
     {
       GtkWidget *dialog;
@@ -930,7 +922,6 @@ remove_account_cb (GoaAccount    *account,
       gtk_widget_show (dialog);
       gtk_dialog_run (GTK_DIALOG (dialog));
       gtk_widget_destroy (dialog);
-      g_error_free (error);
     }
   g_object_unref (panel);
 }
