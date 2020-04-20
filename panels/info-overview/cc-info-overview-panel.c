@@ -343,7 +343,7 @@ get_renderer_from_switcheroo (void)
       g_autoptr(GVariant) name = NULL;
       g_autoptr(GVariant) env = NULL;
       g_autoptr(GVariant) default_variant = NULL;
-      const char *name_s = 0;
+      const char *name_s;
       g_autofree const char **env_s = NULL;
       gsize env_len;
       g_autofree char *renderer = NULL;
