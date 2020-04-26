@@ -90,6 +90,13 @@ get_default_type_for_security (NMSettingWirelessSecurity *sec)
                         return NMU_SEC_LEAP;
                 return NMU_SEC_DYNAMIC_WEP;
         }
+
+#if NM_CHECK_VERSION(1,24,0)
+        if (!strcmp (key_mgmt, "owe")) {
+                return NMU_SEC_OWE;
+        }
+#endif
+
 #if NM_CHECK_VERSION(1,20,6)
         if (!strcmp (key_mgmt, "sae")) {
                 return NMU_SEC_SAE;
@@ -264,6 +271,18 @@ finish_setup (CEPageSecurity *self)
                         active = item;
                 item++;
         }
+
+#if NM_CHECK_VERSION(1,24,0)
+        if (nm_utils_security_valid (NMU_SEC_OWE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
+		gtk_list_store_insert_with_values (sec_model, &iter, -1,
+                                                   S_NAME_COLUMN, _("Enhanced Open"),
+                                                   S_ADHOC_VALID_COLUMN, FALSE,
+                                                   -1);
+		if (active < 0 && default_type == NMU_SEC_OWE)
+			active = item;
+		item++;
+        }
+#endif
 
         if (nm_utils_security_valid (NMU_SEC_STATIC_WEP, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
                 WirelessSecurityWEPKey *ws_wep;
@@ -503,6 +522,9 @@ ce_page_security_new (NMConnection *connection)
             default_type == NMU_SEC_WPA_PSK ||
 #if NM_CHECK_VERSION(1,20,6)
 	    default_type == NMU_SEC_SAE ||
+#endif
+#if NM_CHECK_VERSION(1,24,0)
+	    default_type == NMU_SEC_OWE ||
 #endif
             default_type == NMU_SEC_WPA2_PSK) {
                 self->security_setting = NM_SETTING_WIRELESS_SECURITY_SETTING_NAME;
