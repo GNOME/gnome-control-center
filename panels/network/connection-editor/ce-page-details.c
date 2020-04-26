@@ -102,6 +102,12 @@ get_ap_security_string (NMAccessPoint *ap)
                         /* TRANSLATORS: this WPA3 WiFi security */
                         g_string_append_printf (str, "%s, ", _("WPA3"));
                 }
+#if NM_CHECK_VERSION(1,24,0)
+		else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE) {
+			/* TRANSLATORS: this Enhanced Open WiFi security */
+                        g_string_append_printf (str, "%s, ", _("Enhanced Open"));
+		}
+#endif
 		else
 #endif
 		{
