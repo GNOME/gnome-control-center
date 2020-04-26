@@ -60,7 +60,8 @@ typedef enum
   NM_AP_SEC_WEP,
   NM_AP_SEC_WPA,
   NM_AP_SEC_WPA2,
-  NM_AP_SEC_SAE
+  NM_AP_SEC_SAE,
+  NM_AP_SEC_OWE
 } NMAccessPointSecurity;
 
 G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, GTK_TYPE_LIST_BOX_ROW)
@@ -103,6 +104,12 @@ get_access_point_security (NMAccessPoint *ap)
       type = NM_AP_SEC_SAE;
     }
 #endif
+#if NM_CHECK_VERSION(1,24,0)
+  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE)
+    {
+      type = NM_AP_SEC_OWE;
+    }
+#endif
   else
     {
       type = NM_AP_SEC_WPA2;
@@ -137,6 +144,8 @@ get_connection_security (NMConnection *con)
     return NM_AP_SEC_WPA;
   else if (g_str_equal (key_mgmt, "sae"))
     return NM_AP_SEC_SAE;
+  else if (g_str_equal (key_mgmt, "owe"))
+    return NM_AP_SEC_OWE;
   else
     return NM_AP_SEC_UNKNOWN;
 }
@@ -247,7 +256,7 @@ update_ui (CcWifiConnectionRow *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->active_icon), active);
 
-  if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE)
+  if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE)
     {
       gchar *icon_name;
 
