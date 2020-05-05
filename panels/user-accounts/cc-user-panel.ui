@@ -4,6 +4,8 @@
     <property name="can_focus">True</property>
     <property name="label" translatable="yes">_Add User…</property>
     <property name="use_underline">True</property>
+    <property name="has_tooltip">True</property>
+    <property name="tooltip_text" translatable="yes">Create a user account</property>
     <signal name="clicked" handler="add_user" object="CcUserPanel" swapped="yes"/>
     <style>
       <class name="suggested-action"/>
@@ -25,6 +27,15 @@
   </object>
   <template class="CcUserPanel" parent="CcPanel">
     <property name="visible">True</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+    <child>
+      <object class="CcPermissionInfobar" id="permission_infobar">
+        <property name="visible">True</property>
+      </object>
+    </child>
     <child>
       <object class="GtkStack" id="stack">
         <property name="visible">True</property>
@@ -86,11 +97,6 @@
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <property name="border_width">0</property>
-                <child>
-                  <object class="CcPermissionInfobar" id="permission_infobar">
-                    <property name="visible">True</property>
-                  </object>
-                </child>
 
                 <child>
                   <object class="CcCarousel" id="carousel">
@@ -592,6 +598,8 @@
             </child>
           </object>
         </child>
+      </object>
+    </child>
       </object>
     </child>
   </template>
