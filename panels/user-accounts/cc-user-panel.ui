@@ -26,6 +26,15 @@
   <template class="CcUserPanel" parent="CcPanel">
     <property name="visible">True</property>
     <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="orientation">vertical</property>
+    <child>
+      <object class="CcPermissionInfobar" id="permission_infobar">
+        <property name="visible">True</property>
+      </object>
+    </child>
+    <child>
       <object class="GtkStack" id="stack">
         <property name="visible">True</property>
         <property name="visible-child">no_users_box</property>
@@ -86,11 +95,6 @@
                 <property name="visible">True</property>
                 <property name="orientation">vertical</property>
                 <property name="border_width">0</property>
-                <child>
-                  <object class="CcPermissionInfobar" id="permission_infobar">
-                    <property name="visible">True</property>
-                  </object>
-                </child>
 
                 <child>
                   <object class="CcCarousel" id="carousel">
@@ -592,6 +596,8 @@
             </child>
           </object>
         </child>
+      </object>
+    </child>
       </object>
     </child>
   </template>
