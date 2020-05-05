@@ -1231,24 +1231,6 @@ on_permission_changed (CcUserPanel *self)
         is_authorized = g_permission_get_allowed (G_PERMISSION (self->permission));
 
         gtk_widget_set_visible (GTK_WIDGET (self->add_user_button), is_authorized);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->add_user_button), is_authorized);
-        if (is_authorized) {
-                setup_tooltip_with_embedded_icon (GTK_WIDGET (self->add_user_button), _("Create a user account"), NULL, NULL);
-        }
-        else {
-                gchar *names[3];
-                GIcon *icon;
-
-                names[0] = "changes-allow-symbolic";
-                names[1] = "changes-allow";
-                names[2] = NULL;
-                icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
-                setup_tooltip_with_embedded_icon (GTK_WIDGET (self->add_user_button),
-                                                  _("To create a user account,\nclick the * icon first"),
-                                                  "*",
-                                                  icon);
-                g_object_unref (icon);
-        }
 
         user = get_selected_user (self);
         if (!user) {
@@ -1377,10 +1359,6 @@ setup_main_window (CcUserPanel *self)
         names[1] = "changes-allow";
         names[2] = NULL;
         icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
-        setup_tooltip_with_embedded_icon (GTK_WIDGET (self->add_user_button),
-                                          _("To create a user account,\nclick the * icon first"),
-                                          "*",
-                                          icon);
         setup_tooltip_with_embedded_icon (GTK_WIDGET (self->remove_user_button),
                                           _("To delete the selected user account,\nclick the * icon first"),
                                           "*",
