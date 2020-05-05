@@ -1229,16 +1229,9 @@ on_permission_changed (CcUserPanel *self)
         gboolean self_selected;
         ActUser *user;
 
-        user = get_selected_user (self);
-        if (!user) {
-                return;
-        }
-
         is_authorized = g_permission_get_allowed (G_PERMISSION (self->permission));
-        self_selected = act_user_get_uid (user) == geteuid ();
 
         gtk_widget_set_visible (GTK_WIDGET (self->add_user_button), is_authorized);
-
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_user_button), is_authorized);
         if (is_authorized) {
                 setup_tooltip_with_embedded_icon (GTK_WIDGET (self->add_user_button), _("Create a user account"), NULL, NULL);
@@ -1258,6 +1251,12 @@ on_permission_changed (CcUserPanel *self)
                 g_object_unref (icon);
         }
 
+        user = get_selected_user (self);
+        if (!user) {
+                return;
+        }
+
+        self_selected = act_user_get_uid (user) == geteuid ();
         gtk_widget_set_sensitive (GTK_WIDGET (self->remove_user_button), is_authorized && !self_selected
                                   && !would_demote_only_admin (user));
         if (is_authorized) {
