@@ -7,6 +7,7 @@ variables:
   FDO_UPSTREAM_REPO: gnome/gnome-control-center
   # Expiry sets fdo.expires on the image
   FDO_EXPIRES_AFTER: 8w
+  FEDORA_IMAGE: "$CI_REGISTRY/$FDO_UPSTREAM_REPO/fedora/$FDO_DISTRIBUTION_VERSION:$FDO_DISTRIBUTION_TAG"
   # NOTES:
   # - gobject-introspection-devel is needed for gsettings-desktop-schemas
   FEDORA_DEPENDENCIES: >
@@ -58,6 +59,7 @@ variables:
     mesa-dri-drivers
     libsecret-devel
 
+image: "$FEDORA_IMAGE"
 
 stages:
   - build
@@ -102,7 +104,6 @@ stages:
 # any of them.
 ##
 build:
-  extends: .fdo.distribution-image@fedora
   <<: *save_untracked_files
   stage: build
 
@@ -129,7 +130,6 @@ build:
 # Runs the unit tests.
 ##
 test:
-  extends: .fdo.distribution-image@fedora
   <<: *save_build_logs
   stage: test
 
@@ -153,7 +153,6 @@ test:
 
 # Runs the coverage test.
 coverage:
-  extends: .fdo.distribution-image@fedora
   <<: *save_build_logs
   stage: test
   variables:
@@ -188,7 +187,6 @@ coverage:
 # Publishes the Coverage Report generated above
 ##
 pages:
-  extends: .fdo.distribution-image@fedora
   stage: deploy
   dependencies:
     - coverage
@@ -274,7 +272,6 @@ flatpak:
 # Starts the Flatpak review process.
 ##
 review:
-  extends: .fdo.distribution-image@fedora
   stage: review
   dependencies:
     - flatpak
@@ -305,7 +302,6 @@ review:
 # Stops the Flatpak review process.
 ##
 stop_review:
-  extends: .fdo.distribution-image@fedora
   stage: review
   script:
     - echo "Stopping flatpak deployment"
@@ -319,7 +315,6 @@ stop_review:
 
 # Runs the sanitizers [address, thread, undefined, and memory].
 .sanitizer: &sanitizer
-  extends: .fdo.distribution-image@fedora
   <<: *save_build_logs
   stage: manual
   when: manual
