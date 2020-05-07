@@ -334,7 +334,7 @@ asan:
   when: manual
   variables:
     BUILD_OPTS: "-Db_sanitize=address"
-    LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
+    LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp:verbosity=1:log_threads=1"
 
 tsan:
   <<: *sanitizer
