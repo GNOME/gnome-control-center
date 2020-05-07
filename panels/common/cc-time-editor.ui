@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcTimeEditor" parent="GtkBin">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="row-spacing">6</property>
+        <property name="column-spacing">6</property>
+
+        <!-- Increment Hour Button -->
+        <child>
+          <object class="GtkButton" id="hour_up_button">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <signal name="button-press-event" handler="editor_change_time_pressed_cb" swapped="yes"/>
+            <signal name="button-release-event" handler="editor_change_time_released_cb" swapped="yes"/>
+            <style>
+              <class name="titlebutton"/>
+              <class name="circular"/>
+              <class name="flat"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">go-up-symbolic</property>
+              </object>
+            </child>
+            <child internal-child="accessible">
+              <object class="AtkObject">
+                <property name="AtkObject::accessible-name" translatable="yes">Increment Hour</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">0</property>
+          </packing>
+        </child>
+
+        <!-- Increment Minute Button -->
+        <child>
+          <object class="GtkButton" id="minute_up_button">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <signal name="button-press-event" handler="editor_change_time_pressed_cb" swapped="yes"/>
+            <signal name="button-release-event" handler="editor_change_time_released_cb" swapped="yes"/>
+            <style>
+              <class name="titlebutton"/>
+              <class name="circular"/>
+              <class name="flat"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">go-up-symbolic</property>
+              </object>
+            </child>
+            <child internal-child="accessible">
+              <object class="AtkObject">
+                <property name="AtkObject::accessible-name" translatable="yes">Increment Minute</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">0</property>
+          </packing>
+        </child>
+
+        <child>
+          <object class="CcTimeEntry" id="time_entry">
+            <property name="visible">True</property>
+            <child internal-child="accessible">
+              <object class="AtkObject">
+                <property name="AtkObject::accessible-description" translatable="yes">Time</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+
+        <!-- Decrement Hour Button -->
+        <child>
+          <object class="GtkButton" id="hour_down_button">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <signal name="button-press-event" handler="editor_change_time_pressed_cb" swapped="yes"/>
+            <signal name="button-release-event" handler="editor_change_time_released_cb" swapped="yes"/>
+            <style>
+              <class name="titlebutton"/>
+              <class name="circular"/>
+              <class name="flat"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">go-down-symbolic</property>
+              </object>
+            </child>
+            <child internal-child="accessible">
+              <object class="AtkObject">
+                <property name="AtkObject::accessible-name" translatable="yes">Decrement Hour</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">2</property>
+          </packing>
+        </child>
+
+        <!-- Decrement Minute Button -->
+        <child>
+          <object class="GtkButton" id="minute_down_button">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="valign">center</property>
+            <property name="halign">center</property>
+            <signal name="button-press-event" handler="editor_change_time_pressed_cb" swapped="yes"/>
+            <signal name="button-release-event" handler="editor_change_time_released_cb" swapped="yes"/>
+            <style>
+              <class name="titlebutton"/>
+              <class name="circular"/>
+              <class name="flat"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">go-down-symbolic</property>
+              </object>
+            </child>
+            <child internal-child="accessible">
+              <object class="AtkObject">
+                <property name="AtkObject::accessible-name" translatable="yes">Decrement Minute</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">2</property>
+          </packing>
+        </child>
+
+        <!-- AM/PM Button -->
+        <child>
+          <object class="GtkButton" id="am_pm_button">
+            <property name="visible">True</property>
+            <property name="valign">center</property>
+            <signal name="clicked" handler="editor_am_pm_button_clicked_cb" swapped="yes"/>
+            <child>
+              <object class="GtkStack" id="am_pm_stack">
+                <property name="visible">True</property>
+                <signal name="notify::visible-child" handler="editor_am_pm_stack_changed_cb" swapped="yes"/>
+                <child>
+                  <object class="GtkLabel" id="am_label">
+                    <property name="visible">True</property>
+                    <attributes>
+                      <attribute name="scale" value="1.4"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="pm_label">
+                    <property name="visible">True</property>
+                    <attributes>
+                      <attribute name="scale" value="1.4"/>
+                    </attributes>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">2</property>
+            <property name="top-attach">1</property>
+          </packing>
+        </child>
+
+      </object>
+    </child>
+  </template>
+</interface>
