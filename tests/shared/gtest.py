@@ -61,7 +61,7 @@ class _GTestMeta(type):
     def make_tests(exe, result):
         env = os.environ.copy()
         env['G_MESSAGES_DEBUG'] = ''
-        test = subprocess.Popen([exe, '-l'], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, env=env)
+        test = subprocess.Popen([exe, '-l'], stdout=subprocess.PIPE, stderr=None, env=env)
         stdout, stderr = test.communicate()
 
         if test.returncode != 0:
