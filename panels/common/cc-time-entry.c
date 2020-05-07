@@ -78,7 +78,7 @@ time_entry_fill_time (CcTimeEntry *self)
 
   g_assert (CC_IS_TIME_ENTRY (self));
 
-  str = g_strdup_printf ("%02d:%02d", self->hour, self->minute);
+  str = g_strdup_printf ("%02d∶%02d", self->hour, self->minute);
 
   g_signal_handler_block (self, self->insert_text_id);
   gtk_entry_set_text (GTK_ENTRY (self), str);
@@ -411,17 +411,6 @@ cc_time_entry_constructed (GObject *object)
 
   /* Use tabular(monospace) letters */
   attribute = pango_attr_font_features_new ("tnum");
-  pango_attr_list_insert (list, attribute);
-
-  attribute = pango_attr_letter_spacing_new (PANGO_SCALE * 12);
-  attribute->start_index = SEPARATOR_INDEX;
-  attribute->end_index = SEPARATOR_INDEX + 1;
-  pango_attr_list_insert (list, attribute);
-
-  /* Raise ‘:’ a bit so that they are well aligned with the text */
-  attribute = pango_attr_rise_new (PANGO_SCALE * 4);
-  attribute->start_index = SEPARATOR_INDEX;
-  attribute->end_index = SEPARATOR_INDEX + 1;
   pango_attr_list_insert (list, attribute);
 
   gtk_entry_set_attributes (GTK_ENTRY (object), list);
