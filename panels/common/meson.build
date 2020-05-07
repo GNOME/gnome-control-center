@@ -26,6 +26,7 @@ common_sources += gnome.mkenums(
 
 sources = files(
   'cc-hostname-entry.c',
+  'cc-time-entry.c',
   'cc-os-release.c',
   'hostname-helper.c',
   'list-box-helper.c',
@@ -46,6 +47,7 @@ sources = common_sources + files(
   'cc-common-language.c',
   'cc-language-chooser.c',
   'cc-list-row.c',
+  'cc-time-editor.c',
   'cc-permission-infobar.c',
   'cc-util.c'
 )
@@ -53,6 +55,7 @@ sources = common_sources + files(
 resource_data = files(
   'cc-language-chooser.ui',
   'cc-list-row.ui',
+  'cc-time-editor.ui',
   'cc-permission-infobar.ui',
 )
 
