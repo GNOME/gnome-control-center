@@ -1,4 +1,61 @@
-image: registry.gitlab.gnome.org/gnome/gnome-control-center:fedora.dev
+include:
+ - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/59de540b620c45739871d1a073d76d5521989d11/templates/fedora.yml'
+
+variables:
+  FDO_DISTRIBUTION_TAG: latest
+  FDO_DISTRIBUTION_VERSION: rawhide
+  FDO_UPSTREAM_REPO: gnome/gnome-control-center
+  # Expiry sets fdo.expires on the image
+  FDO_EXPIRES_AFTER: 8w
+  FEDORA_DEPENDENCIES: >
+    @c-development @development-tools
+    git
+    llvm clang libasan gcovr
+    meson
+    accountsservice-devel
+    cheese-libs-devel
+    chrpath
+    colord-devel colord-gtk-devel
+    cups-devel
+    desktop-file-utils
+    docbook-style-xsl
+    flatpak-devel
+    gdk-pixbuf2-devel
+    gettext
+    glib2-devel
+    gnome-bluetooth-libs-devel
+    gnome-desktop3-devel
+    gnome-online-accounts-devel
+    gnome-settings-daemon-devel
+    grilo-devel
+    gsettings-desktop-schemas-devel
+    gsound-devel
+    gtk3-devel ibus-devel
+    intltool
+    libcanberra-devel
+    libgtop2-devel
+    libgudev-devel
+    libnma-devel
+    libpwquality-devel
+    libsmbclient-devel
+    libsoup-devel
+    libudisks2-devel
+    libwacom-devel
+    libX11-devel
+    libXi-devel
+    libxml2-devel
+    libxslt
+    ModemManager-glib-devel
+    NetworkManager-libnm-devel
+    polkit-devel
+    pulseaudio-libs-devel
+    upower-devel
+    python3-dbusmock
+    xorg-x11-server-Xvfb
+    mesa-dri-drivers
+    libsecret-devel
+
+
 stages:
   - build
   - test
@@ -42,6 +99,7 @@ stages:
 # any of them.
 ##
 build:
+  extends: .fdo.distribution-image@fedora
   <<: *save_untracked_files
   stage: build
 
@@ -68,6 +126,7 @@ build:
 # Runs the unit tests.
 ##
 test:
+  extends: .fdo.distribution-image@fedora
   <<: *save_build_logs
   stage: test
 
@@ -91,6 +150,7 @@ test:
 
 # Runs the coverage test.
 coverage:
+  extends: .fdo.distribution-image@fedora
   <<: *save_build_logs
   stage: test
   variables:
@@ -125,6 +185,7 @@ coverage:
 # Publishes the Coverage Report generated above
 ##
 pages:
+  extends: .fdo.distribution-image@fedora
   stage: deploy
   dependencies:
     - coverage
@@ -210,6 +271,7 @@ flatpak:
 # Starts the Flatpak review process.
 ##
 review:
+  extends: .fdo.distribution-image@fedora
   stage: review
   dependencies:
     - flatpak
@@ -240,6 +302,7 @@ review:
 # Stops the Flatpak review process.
 ##
 stop_review:
+  extends: .fdo.distribution-image@fedora
   stage: review
   script:
     - echo "Stopping flatpak deployment"
@@ -253,6 +316,7 @@ stop_review:
 
 # Runs the sanitizers [address, thread, undefined, and memory].
 .sanitizer: &sanitizer
+  extends: .fdo.distribution-image@fedora
   <<: *save_build_logs
   stage: manual
   when: manual
@@ -290,127 +354,28 @@ msan:
     BUILD_OPTS: "-Db_sanitize=memory"
     CC: "clang"
 
-# Runs multiarch build test.
-.qemu: &multiarch
-  <<: *save_build_logs
-  image: docker:latest
-  services:
-    - docker:dind
-
-  script:
-    # Register QEMU archs
-    - docker run --rm --privileged multiarch/qemu-user-static:register --reset
-
-    # Run the multiarch test job using QEMU
-    - 'docker run -v $(pwd):/cwd $IMAGE bash -e -c "cd /cwd &&
-         echo == Building == &&
-         rm -rf _build/ &&
-         meson . _build ${BUILD_OPTS} &&
-         ninja -C _build 2>&1 | tee compilation.log &&
-
-         echo == Testing == &&
-         ninja -C _build test"
-    '
-
-  except:
-    variables:
-      - $CI_PIPELINE_SOURCE == "schedule"
-      - $CI_COMMIT_TITLE =~ /^Update.*translation$/
-
-armv8:
-  <<: *multiarch
-  stage: manual
-  when: manual
-  variables:
-    DOCKER_DRIVER: overlay
-    IMAGE: "registry.gitlab.gnome.org/gnome/gnome-control-center:fedora.aarch64"
-
-ppc64le:
-  <<: *multiarch
-  stage: manual
-  when: manual
-  allow_failure: true
-  variables:
-    DOCKER_DRIVER: overlay
-    IMAGE: "registry.gitlab.gnome.org/gnome/gnome-control-center:fedora.ppc64le"
-
 #############################################
 #          Create CI Docker Images          #
 #############################################
-.Docker common variables: &docker_common_variables
-  # https://about.gitlab.com/blog/2019/07/31/docker-in-docker-with-docker-19-dot-03/
-  DOCKER_TLS_CERTDIR: ""
-  DOCKER_DRIVER: overlay
 
-.Docker image template: &create_docker_image
-  image: docker:latest
-  stage: deploy
-  services:
-    - docker:stable-dind
+# See also https://gitlab.freedesktop.org/freedesktop/ci-templates
+container_fedora_build:
+  tags: [ privileged ]
+  extends: .fdo.container-build@fedora
+  # The templates reference the local registry, but we need the fdo one
+  image: registry.freedesktop.org/freedesktop/ci-templates/buildah:2020-03-24
   only:
     variables:
-      - $CRON_TASK == "BUILD_CI_IMAGES"
-    changes:
-      - build-aux/ci/Dockerfile.*
-
-
-  script:
-    # Skip the build (if requested)
-    - |
-      if [[ -z "${CI_COMMIT_MESSAGE##*'[skip images]'*}" ]]; then
-        echo "== Nothing to do =="
-        exit 0
-      fi
-
-    - |
-      if [[ "${CI_COMMIT_REF_NAME}" != "master" ]]; then
-        echo "== Exiting, will only build CI images when pushing to master. =="
-        exit 0
-      fi
-
-    # Only when we have somewhere to publish to
-    - |
-      if [[ -z "${CI_REGISTRY}${CI_REGISTRY_IMAGE}${CI_REGISTRY_USER}${CI_REGISTRY_PASSWORD}" ]]; then
-        echo "== Exiting, CI registry not configured. =="
-        exit 0
-      fi
-
-    # Get multiarch stuff
-    - |
-      if [[ -n "${TARGET_ARCH}" ]]; then
-        docker run --rm --privileged multiarch/qemu-user-static:register --reset
-        wget https://github.com/multiarch/qemu-user-static/releases/download/v2.12.0/x86_64_qemu-${TARGET_ARCH}-static.tar.gz
-      fi
-
-    # Build using the Dockerfile
-    - docker build -f "$DOCKERFILE" -t "$CI_REGISTRY_IMAGE:$NAME" .
-
-    # Publish
-    - docker tag "$CI_REGISTRY_IMAGE:$NAME" "$CI_REGISTRY_IMAGE:job-"$CI_JOB_ID"_$NAME"
-    - docker images
-    - docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
-    - docker push "$CI_REGISTRY_IMAGE"
-
-fedora.dev:
-  <<: *create_docker_image
+      - $CI_PIPELINE_SOURCE == "schedule" && $CRON_TASK == "BUILD_CI_IMAGES"
   variables:
-    <<: *docker_common_variables
-    DOCKER_DRIVER: overlay
-    DOCKERFILE: "build-aux/ci/Dockerfile.fedora.30"
-    NAME: "fedora.dev"
+    GIT_STRATEGY: none # no need to pull the whole tree for rebuilding the image
+    FDO_FORCE_REBUILD: 1 # Force rebuilding the image
+    FDO_DISTRIBUTION_PACKAGES: $FEDORA_DEPENDENCIES
+    FDO_DISTRIBUTION_EXEC: |
+      git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
+        cd gsettings-desktop-schemas && \
+        meson . _build --prefix=/usr && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd ..
 
-fedora.aarch64:
-  <<: *create_docker_image
-  variables:
-    <<: *docker_common_variables
-    DOCKERFILE: "build-aux/ci/Dockerfile.arm64v8.fedora.30"
-    NAME: "fedora.aarch64"
-    TARGET_ARCH: "aarch64"
-
-fedora.ppc64le:
-  <<: *create_docker_image
-  variables:
-    <<: *docker_common_variables
-    DOCKERFILE: "build-aux/ci/Dockerfile.ppc64le.fedora.latest"
-    NAME: "fedora.ppc64le"
-    TARGET_ARCH: "ppc64le"
