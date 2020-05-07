@@ -648,7 +648,7 @@ main (int argc, char **argv)
 {
   g_setenv ("GSETTINGS_BACKEND", "memory", TRUE);
   g_setenv ("LIBNM_USE_SESSION_BUS", "1", TRUE);
-  g_setenv ("LC_ALL", "C", TRUE);
+  setlocale ("LC_ALL", "");
 
   gtk_test_init (&argc, &argv, NULL);
   hdy_init (&argc, &argv);
