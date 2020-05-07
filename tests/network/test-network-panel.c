@@ -646,12 +646,21 @@ test_vpn_sorting (NetworkPanelFixture  *fixture,
 int
 main (int argc, char **argv)
 {
+  g_autoptr(GDBusConnection) bus = NULL;
+  g_autoptr(GError) error = NULL;
   g_setenv ("GSETTINGS_BACKEND", "memory", TRUE);
   g_setenv ("LIBNM_USE_SESSION_BUS", "1", TRUE);
   g_setenv ("LC_ALL", "C", TRUE);
 
   gtk_test_init (&argc, &argv, NULL);
   hdy_init (&argc, &argv);
+
+  /* FIXME: This keeps hold of the GBus object. The only reason is that
+   *        there seems to be a race condition in GLib when destroying
+   *        and recreating it. */
+  bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL,  &error);
+  if (!bus)
+    g_error ("Could not get session bus: %s", error->message);
 
   g_test_add ("/network-panel-wired/empty-ui",
               NetworkPanelFixture,
