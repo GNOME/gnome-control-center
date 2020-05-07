@@ -229,6 +229,7 @@ got_the_client (GObject      *source,
     {
       /* error ownership gets transferred to the task */
       g_task_return_error (task, error);
+      g_object_unref (task);
       return;
     }
 
@@ -252,6 +253,7 @@ got_the_bus (GObject      *source,
       g_prefix_error (&error, "could not connect to D-Bus: ");
       /* error ownership gets transferred to the task */
       g_task_return_error (task, error);
+      g_object_unref (task);
       return;
     }
 
