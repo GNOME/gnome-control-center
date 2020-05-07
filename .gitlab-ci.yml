@@ -330,6 +330,8 @@ stop_review:
 
 asan:
   <<: *sanitizer
+  # ASAN requires debugging capabilities
+  tags: [ privileged ]
   stage: manual
   when: manual
   variables:
