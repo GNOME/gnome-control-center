@@ -72,184 +72,37 @@
                     <child>
                       <object class="GtkListBox" id="main_list_box">
                         <property name="visible">True</property>
+                        <property name="selection-mode">none</property>
                         <child>
-                          <object class="GtkListBoxRow" id="personal_file_sharing_button">
+                          <object class="CcListRow" id="personal_file_sharing_row">
                             <property name="visible">True</property>
-                            <child>
-                              <object class="GtkBox" id="box2">
-                                <property name="margin_top">18</property>
-                                <property name="margin_bottom">18</property>
-                                <property name="margin_left">12</property>
-                                <property name="margin_right">12</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel" id="label8">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="xalign">0</property>
-                                    <property translatable="yes" name="label">_File Sharing</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">personal_file_sharing_button</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="personal_file_sharing_status_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label">Off</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
+                            <property name="icon-name">go-next-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="title" translatable="yes">_File Sharing</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBoxRow" id="screen_sharing_button">
+                          <object class="CcListRow" id="screen_sharing_row">
                             <property name="visible">True</property>
-                            <child>
-                              <object class="GtkBox" id="box3">
-                                <property name="margin_top">18</property>
-                                <property name="margin_bottom">18</property>
-                                <property name="margin_left">12</property>
-                                <property name="margin_right">12</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel" id="label9">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="xalign">0</property>
-                                    <property translatable="yes" name="label">_Screen Sharing</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">screen_sharing_button</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="screen_sharing_status_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label">Off</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
+                            <property name="icon-name">go-next-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="title" translatable="yes">_Screen Sharing</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBoxRow" id="media_sharing_button">
+                          <object class="CcListRow" id="media_sharing_row">
                             <property name="visible">True</property>
-                            <child>
-                              <object class="GtkBox" id="box4">
-                                <property name="margin_top">18</property>
-                                <property name="margin_bottom">18</property>
-                                <property name="margin_left">12</property>
-                                <property name="margin_right">12</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel" id="label10">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="xalign">0</property>
-                                    <property translatable="yes" name="label">_Media Sharing</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">media_sharing_button</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="media_sharing_status_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label">Off</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
+                            <property name="icon-name">go-next-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="title" translatable="yes">_Media Sharing</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkListBoxRow" id="remote_login_button">
+                          <object class="CcListRow" id="remote_login_row">
                             <property name="visible">True</property>
-                            <child>
-                              <object class="GtkBox" id="box5">
-                                <property name="margin_top">18</property>
-                                <property name="margin_bottom">18</property>
-                                <property name="margin_left">12</property>
-                                <property name="margin_right">12</property>
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkLabel" id="label11">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="halign">start</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">_Remote Login</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="mnemonic_widget">remote_login_button</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="remote_login_status_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label">Off</property>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
+                            <property name="icon-name">go-next-symbolic</property>
+                            <property name="use-underline">True</property>
+                            <property name="title" translatable="yes">_Remote Login</property>
                           </object>
                         </child>
                       </object>
