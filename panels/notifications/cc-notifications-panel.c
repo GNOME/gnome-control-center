@@ -25,6 +25,7 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 
+#include "cc-list-row.h"
 #include "list-box-helper.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
@@ -38,11 +39,11 @@ struct _CcNotificationsPanel {
   CcPanel            parent_instance;
 
   GtkListBox        *app_listbox;
-  GtkSwitch         *lock_screen_switch;
+  CcListRow         *lock_screen_row;
   GtkScrolledWindow *main_scrolled_window;
   GtkBox            *main_box;
   GtkListBox        *options_listbox;
-  GtkSwitch         *dnd_switch;
+  CcListRow         *dnd_row;
   GtkSizeGroup      *sizegroup1;
 
   GSettings         *master_settings;
@@ -177,10 +178,10 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
   panel->master_settings = g_settings_new (MASTER_SCHEMA);
 
   g_settings_bind (panel->master_settings, "show-banners",
-                   panel->dnd_switch,
+                   panel->dnd_row,
                    "active", G_SETTINGS_BIND_INVERT_BOOLEAN);
   g_settings_bind (panel->master_settings, "show-in-lock-screen",
-                   panel->lock_screen_switch,
+                   panel->lock_screen_row,
                    "active", G_SETTINGS_BIND_DEFAULT);
 
   panel->focus_adjustment = gtk_scrolled_window_get_vadjustment (panel->main_scrolled_window);
@@ -237,11 +238,11 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/notifications/cc-notifications-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, app_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, lock_screen_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, lock_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_scrolled_window);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, options_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_row);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, sizegroup1);
 
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed);
