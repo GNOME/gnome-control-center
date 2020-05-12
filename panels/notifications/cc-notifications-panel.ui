@@ -42,108 +42,21 @@
                             <property name="can_focus">False</property>
                             <property name="hexpand">True</property>
                             <property name="selection_mode">none</property>
-                            <property name="activate_on_single_click">False</property>
                             <signal name="keynav-failed" handler="keynav_failed" object="CcNotificationsPanel" swapped="yes" />
                             <child>
-                              <object class="GtkListBoxRow">
+                              <object class="CcListRow" id="dnd_row">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="activatable">False</property>
-                                <property name="selectable">False</property>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="valign">center</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="height_request">32</property>
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="margin_start">12</property>
-                                        <property name="margin_top">8</property>
-                                        <property name="margin_bottom">8</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="ellipsize">end</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">_Do Not Disturb</property>
-                                        <property name="use_underline">True</property>
-                                        <property name="mnemonic_widget">dnd_switch</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkSwitch" id="dnd_switch">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
-                                        <property name="halign">end</property>
-                                        <property name="valign">center</property>
-                                        <property name="margin_end">12</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                </child>
+                                <property name="title" translatable="yes">_Do Not Disturb</property>
+                                <property name="use-underline">True</property>
+                                <property name="show-switch">True</property>
                               </object>
                             </child>
                             <child>
-                              <object class="GtkListBoxRow">
+                              <object class="CcListRow" id="lock_screen_row">
                                 <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="activatable">False</property>
-                                <property name="selectable">False</property>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="valign">center</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="height_request">32</property>
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="halign">start</property>
-                                        <property name="margin_start">12</property>
-                                        <property name="margin_top">8</property>
-                                        <property name="margin_bottom">8</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="ellipsize">end</property>
-                                        <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">_Lock Screen Notifications</property>
-                                        <property name="use_underline">True</property>
-                                        <property name="mnemonic_widget">lock_screen_switch</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">0</property>
-                                      </packing>
-                                    </child>
-                                    <child>
-                                      <object class="GtkSwitch" id="lock_screen_switch">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
-                                        <property name="halign">end</property>
-                                        <property name="valign">center</property>
-                                        <property name="margin_end">12</property>
-                                      </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="position">1</property>
-                                      </packing>
-                                    </child>
-                                  </object>
-                                </child>
+                                <property name="title" translatable="yes">_Lock Screen Notifications</property>
+                                <property name="use-underline">True</property>
+                                <property name="show-switch">True</property>
                               </object>
                             </child>
                           </object>
