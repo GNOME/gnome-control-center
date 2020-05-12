@@ -515,8 +515,8 @@ setup_photo_popup (CcAvatarChooser *self)
                                  self,
                                  NULL);
 
-        g_signal_connect_object (self->flowbox, "child-activated",
-                                 G_CALLBACK (face_widget_activated), self, G_CONNECT_SWAPPED);
+        g_signal_connect (self->flowbox, "child-activated",
+                          G_CALLBACK (face_widget_activated), self);
 
         settings_facesdirs = get_settings_facesdirs ();
 
