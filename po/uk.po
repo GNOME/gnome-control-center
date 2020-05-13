@@ -10,10 +10,10 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2020-05-05 17:43+0000\n"
-"PO-Revision-Date: 2020-05-06 12:37+0300\n"
+"POT-Creation-Date: 2020-05-13 05:08+0000\n"
+"PO-Revision-Date: 2020-05-13 10:37+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -156,7 +156,7 @@ msgstr "Інші файли"
 #: panels/applications/cc-applications-panel.c:1585
 #: panels/applications/cc-applications-panel.ui:412
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:167
+#: panels/notifications/cc-notifications-panel.ui:80
 msgid "Applications"
 msgstr "Програми"
 
@@ -361,7 +361,7 @@ msgstr "Виберіть зображення"
 #: panels/printers/pp-details-dialog.c:252
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:638
-#: panels/sharing/cc-sharing-panel.c:406 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:398 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
@@ -376,7 +376,7 @@ msgstr "_Скасувати"
 #: panels/background/cc-background-chooser.c:350
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:253
-#: panels/sharing/cc-sharing-panel.c:407
+#: panels/sharing/cc-sharing-panel.c:399
 #: panels/user-accounts/cc-avatar-chooser.c:236
 msgid "_Open"
 msgstr "_Відкрити"
@@ -2327,8 +2327,11 @@ msgstr "Захистіть ваші дані щодо місця перебув�
 
 #. FIXME
 #: panels/lock/cc-lock-panel.ui:29
+#| msgid ""
+#| "Automatically locking the screen prevents others from access the computer "
+#| "while you're away."
 msgid ""
-"Automatically locking the screen prevents others from access the computer "
+"Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
 msgstr ""
 "Автоматичне блокування екрана запобігає доступу інших користувачів до "
@@ -3366,7 +3369,7 @@ msgid "Wireless device does not support Hotspot mode"
 msgstr "Бездротовий пристрій не підтримує режиму гарячої точки"
 
 #: panels/network/net-proxy.c:70
-#: panels/notifications/cc-notifications-panel.c:267
+#: panels/notifications/cc-notifications-panel.c:268
 #: panels/power/cc-power-panel.c:2043 panels/power/cc-power-panel.c:2054
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
@@ -3859,7 +3862,7 @@ msgstr "_Користувач"
 #: panels/network/wireless-security/eap-method-simple.ui:31
 #: panels/network/wireless-security/ws-leap.ui:32
 #: panels/network/wireless-security/ws-wpa-psk.ui:14
-#: panels/sharing/cc-sharing-panel.ui:351
+#: panels/sharing/cc-sharing-panel.ui:204
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
 #: panels/user-accounts/cc-user-panel.ui:391
@@ -4184,7 +4187,7 @@ msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Показувати в_міст повідомлення в заблокованому екрані"
 
-#: panels/notifications/cc-notifications-panel.c:267
+#: panels/notifications/cc-notifications-panel.c:268
 #: panels/power/cc-power-panel.c:2049 panels/power/cc-power-panel.c:2056
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
@@ -4194,11 +4197,11 @@ msgstr "Показувати в_міст повідомлення в забло�
 msgid "On"
 msgstr "Увімкнено"
 
-#: panels/notifications/cc-notifications-panel.ui:70
+#: panels/notifications/cc-notifications-panel.ui:49
 msgid "_Do Not Disturb"
 msgstr "_Не турбувати"
 
-#: panels/notifications/cc-notifications-panel.ui:121
+#: panels/notifications/cc-notifications-panel.ui:57
 msgid "_Lock Screen Notifications"
 msgstr "Сповіщення на за_блокованому екрані"
 
@@ -5716,32 +5719,32 @@ msgstr "Немає жодної вибраної мережі для оприл�
 msgid "Networks"
 msgstr "Мережі"
 
-#: panels/sharing/cc-sharing-panel.c:299
+#: panels/sharing/cc-sharing-panel.c:291
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Увімкнено"
 
-#: panels/sharing/cc-sharing-panel.c:301 panels/sharing/cc-sharing-panel.c:328
+#: panels/sharing/cc-sharing-panel.c:293 panels/sharing/cc-sharing-panel.c:320
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Вимкнено"
 
-#: panels/sharing/cc-sharing-panel.c:331
+#: panels/sharing/cc-sharing-panel.c:323
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Увімкнено"
 
-#: panels/sharing/cc-sharing-panel.c:334
+#: panels/sharing/cc-sharing-panel.c:326
 msgctxt "service is active"
 msgid "Active"
 msgstr "Активний"
 
-#: panels/sharing/cc-sharing-panel.c:403
+#: panels/sharing/cc-sharing-panel.c:395
 msgid "Choose a Folder"
 msgstr "Вибрати теку"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:706
+#: panels/sharing/cc-sharing-panel.c:698
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5751,7 +5754,7 @@ msgstr ""
 "теку із іншими користувачами вашої поточної мережі за допомогою: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:712
+#: panels/sharing/cc-sharing-panel.c:704
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5763,7 +5766,7 @@ msgstr ""
 "%s"
 
 #. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:718
+#: panels/sharing/cc-sharing-panel.c:710
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5772,11 +5775,11 @@ msgstr ""
 "Спільний доступ до екрана надає змогу віддаленим користувачам переглядати "
 "або керувати вашим екраном, під'єднавшись до %s"
 
-#: panels/sharing/cc-sharing-panel.c:823
+#: panels/sharing/cc-sharing-panel.c:815
 msgid "Copy"
 msgstr "Копіювати"
 
-#: panels/sharing/cc-sharing-panel.c:1284
+#: panels/sharing/cc-sharing-panel.c:1276
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Оприлюднення"
@@ -5785,79 +5788,79 @@ msgstr "Оприлюднення"
 msgid "_Computer Name"
 msgstr "Назва _комп'ютера"
 
-#: panels/sharing/cc-sharing-panel.ui:94
+#: panels/sharing/cc-sharing-panel.ui:81
 msgid "_File Sharing"
 msgstr "_Оприлюднення файлів"
 
-#: panels/sharing/cc-sharing-panel.ui:139
+#: panels/sharing/cc-sharing-panel.ui:89
 msgid "_Screen Sharing"
 msgstr "Оприлюднення _екрана"
 
-#: panels/sharing/cc-sharing-panel.ui:184
+#: panels/sharing/cc-sharing-panel.ui:97
 msgid "_Media Sharing"
 msgstr "Оприлюднення _матеріалів"
 
-#: panels/sharing/cc-sharing-panel.ui:229
+#: panels/sharing/cc-sharing-panel.ui:105
 msgid "_Remote Login"
 msgstr "Віддалений в_хід"
 
-#: panels/sharing/cc-sharing-panel.ui:268
+#: panels/sharing/cc-sharing-panel.ui:121
 msgid "Some services are disabled because of no network access."
 msgstr "Деякі служби вимкнено через недоступність мережі."
 
-#: panels/sharing/cc-sharing-panel.ui:286
-#: panels/sharing/cc-sharing-panel.ui:413
+#: panels/sharing/cc-sharing-panel.ui:139
+#: panels/sharing/cc-sharing-panel.ui:266
 msgid "File Sharing"
 msgstr "Оприлюднення файлів"
 
-#: panels/sharing/cc-sharing-panel.ui:333
+#: panels/sharing/cc-sharing-panel.ui:186
 msgid "_Require Password"
 msgstr "Вимагати па_роль"
 
-#: panels/sharing/cc-sharing-panel.ui:424
-#: panels/sharing/cc-sharing-panel.ui:494
+#: panels/sharing/cc-sharing-panel.ui:277
+#: panels/sharing/cc-sharing-panel.ui:347
 msgid "Remote Login"
 msgstr "Віддалений вхід"
 
-#: panels/sharing/cc-sharing-panel.ui:517
-#: panels/sharing/cc-sharing-panel.ui:739
+#: panels/sharing/cc-sharing-panel.ui:370
+#: panels/sharing/cc-sharing-panel.ui:592
 msgid "Screen Sharing"
 msgstr "Оприлюднення екрана"
 
-#: panels/sharing/cc-sharing-panel.ui:571
+#: panels/sharing/cc-sharing-panel.ui:424
 msgid "_Allow connections to control the screen"
 msgstr "_Дозволити під'єднуватись і керувати екраном"
 
-#: panels/sharing/cc-sharing-panel.ui:596
+#: panels/sharing/cc-sharing-panel.ui:449
 msgid "_Password:"
 msgstr "_Пароль:"
 
-#: panels/sharing/cc-sharing-panel.ui:626
+#: panels/sharing/cc-sharing-panel.ui:479
 msgid "_Show Password"
 msgstr "_Показати пароль"
 
-#: panels/sharing/cc-sharing-panel.ui:657
+#: panels/sharing/cc-sharing-panel.ui:510
 msgid "Access Options"
 msgstr "Параметри доступу"
 
-#: panels/sharing/cc-sharing-panel.ui:671
+#: panels/sharing/cc-sharing-panel.ui:524
 msgid "_New connections must ask for access"
 msgstr "_Нові з'єднання мають вимагати доступ"
 
-#: panels/sharing/cc-sharing-panel.ui:689
+#: panels/sharing/cc-sharing-panel.ui:542
 msgid "_Require a password"
 msgstr "Вимагати _пароль"
 
-#: panels/sharing/cc-sharing-panel.ui:750
-#: panels/sharing/cc-sharing-panel.ui:844
+#: panels/sharing/cc-sharing-panel.ui:603
+#: panels/sharing/cc-sharing-panel.ui:697
 msgid "Media Sharing"
 msgstr "Оприлюднення матеріалів"
 
-#: panels/sharing/cc-sharing-panel.ui:783
+#: panels/sharing/cc-sharing-panel.ui:636
 msgid "Share music, photos and videos over the network."
 msgstr "Ділитись музикою, світлинами та відеозаписами через мережу."
 
-#: panels/sharing/cc-sharing-panel.ui:798
+#: panels/sharing/cc-sharing-panel.ui:651
 msgid "Folders"
 msgstr "Теки"
 
@@ -8060,183 +8063,3 @@ msgstr[2] "%u входів"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Системі звуки"
-
-#~ msgid ""
-#~ "To create a user account,\n"
-#~ "click the * icon first"
-#~ msgstr ""
-#~ "Щоб створити обліковий запис користувача,\n"
-#~ "натисніть спочатку на піктограму *"
-
-#~ msgid "Add user accounts and change passwords"
-#~ msgstr "Додавати облікові записи користувачів та змінювати паролі"
-
-#~ msgid "Play and record sound"
-#~ msgstr "Відтворювати й записувати звук"
-
-#~ msgid "Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)"
-#~ msgstr ""
-#~ "Виявляти мережеві пристрої за допомогою mDNS/DNS-SD (Bonjour/zeroconf)"
-
-#~ msgid "Access bluetooth hardware directly"
-#~ msgstr "Отримувати безпосередній доступ до устаткування bluetooth"
-
-#~ msgid "Use bluetooth devices"
-#~ msgstr "Використовувати пристрої bluetooth"
-
-#~ msgid "Use your camera"
-#~ msgstr "Використовувати вашу камеру"
-
-#~ msgid "Print documents"
-#~ msgstr "Друкувати документи"
-
-#~ msgid "Use any connected joystick"
-#~ msgstr "Використовувати будь-який під'єднаний джойстик"
-
-#~ msgid "Allow connecting to the Docker service"
-#~ msgstr "Дозволити з'єднання до служби Docker"
-
-#~ msgid "Configure network firewall"
-#~ msgstr "Налаштувати мережевий екран"
-
-#~ msgid "Setup and use privileged FUSE filesystems"
-#~ msgstr "Встановити і використовувати привілейовані файлові системи FUSE"
-
-#~ msgid "Update firmware on this device"
-#~ msgstr "Оновлення мікропрограми на цьому пристрої"
-
-#~ msgid "Access hardware information"
-#~ msgstr "Доступ до інформації про апаратне забезпечення"
-
-#~ msgid "Provide entropy to hardware random number generator"
-#~ msgstr "Забезпечувати ентропію для апаратного генератора випадкових чисел"
-
-#~ msgid "Use hardware-generated random numbers"
-#~ msgstr "Використовувати випадкові числа апаратного генератора"
-
-#~ msgid "Access files in your home folder"
-#~ msgstr "Доступ до файлів у вашій домашній теці"
-
-#~ msgid "Access libvirt service"
-#~ msgstr "Доступ до служби libvirt"
-
-#~ msgid "Change system language and region settings"
-#~ msgstr "Зміна системної мови та регіональних налаштувань"
-
-#~ msgid "Change location settings and providers"
-#~ msgstr "Зміна налаштувань розташування та постачальників"
-
-#~ msgid "Access your location"
-#~ msgstr "Доступ до місця розташування"
-
-#~ msgid "Read system and application logs"
-#~ msgstr "Читання журналів системи та програм"
-
-#~ msgid "Access LXD service"
-#~ msgstr "Доступ до служби LXD"
-
-#~ msgid "access the media-hub service"
-#~ msgstr "Доступ до служби media-hub"
-
-#~ msgid "Use and configure modems"
-#~ msgstr "Використання і налаштування модемів"
-
-#~ msgid "Read system mount information and disk quotas"
-#~ msgstr "Читання відомостей про монтування та дискові квоти"
-
-#~ msgid "Control music and video players"
-#~ msgstr "Керування програвачами музики та відео"
-
-#~ msgid "Change low-level network settings"
-#~ msgstr "Зміна низькорівневих налаштувань мережі"
-
-#~ msgid ""
-#~ "Access the NetworkManager service to read and change network settings"
-#~ msgstr ""
-#~ "Доступ до служби NetworkManager для читання та зміни налаштувань мережі"
-
-#~ msgid "Read access to network settings"
-#~ msgstr "Доступ до читання налаштувань мережі"
-
-#~ msgid "Change network settings"
-#~ msgstr "Зміна налаштувань мережі"
-
-#~ msgid "Read network settings"
-#~ msgstr "Читання налаштувань мережі"
-
-#~ msgid ""
-#~ "Access the ofono service to read and change network settings for mobile "
-#~ "telephony"
-#~ msgstr ""
-#~ "Доступ до служби ofono для читання та зміни мережевих параметрів для "
-#~ "мобільних телефонів"
-
-#~ msgid "Control Open vSwitch hardware"
-#~ msgstr "Керування обладнанням Open vSwitch"
-
-#~ msgid "Read from CD/DVD"
-#~ msgstr "Читання з CD/DVD"
-
-#~ msgid "Read, add, change, or remove saved passwords"
-#~ msgstr "Читання, додавання, зміна чи вилучення збережених паролів"
-
-#~ msgid ""
-#~ "Access pppd and ppp devices for configuring Point-to-Point Protocol "
-#~ "connections"
-#~ msgstr ""
-#~ "Доступ до обладнання pppd та ppp для налаштування з'єднань за протоколом "
-#~ "Point-to-Point"
-
-#~ msgid "Pause or end any process on the system"
-#~ msgstr "Призупинення чи вимкнення будь-якого процесу в системі"
-
-#~ msgid "Access USB hardware directly"
-#~ msgstr "Прямий доступ до обладнання USB"
-
-#~ msgid "Read/write files on removable storage devices"
-#~ msgstr "Читання/запис файлів на знімних носіях"
-
-#~ msgid "Prevent screen sleep/lock"
-#~ msgstr "Запобігання блокуванню/переходу в режим очікування для екрану"
-
-#~ msgid "Access serial port hardware"
-#~ msgstr "Доступ до обладнання послідовного порту"
-
-#~ msgid "Restart or power off the device"
-#~ msgstr "Перезапуск чи вимкнення пристрою"
-
-#~ msgid "Install, remove and configure software"
-#~ msgstr "Встановлення, вилучення, налаштування програмного забезпечення"
-
-#~ msgid "Access Storage Framework service"
-#~ msgstr "Доступ до служби Storage Framework"
-
-#~ msgid "Read process and system information"
-#~ msgstr "Читання відомостей про процеси та систему"
-
-#~ msgid "Monitor and control any running program"
-#~ msgstr "Моніторинг та керування будь-якою виконуваною програмою"
-
-#~ msgid "Change the date and time"
-#~ msgstr "Змінити дату та час"
-
-#~ msgid "Change time server settings"
-#~ msgstr "Зміна налаштувань сервера часу"
-
-#~ msgid "Change the time zone"
-#~ msgstr "Змінити часовий пояс"
-
-#~ msgid "Access the UDisks2 service for configuring disks and removable media"
-#~ msgstr "Доступ до служби UDisks2 для налаштування дисків та знімних носіїв"
-
-#~ msgid "Read/change shared calendar events in Ubuntu Unity 8"
-#~ msgstr "Читання/редагування спільних подій календаря в Ubuntu Unity 8"
-
-#~ msgid "Read/change shared contacts in Ubuntu Unity 8"
-#~ msgstr "Читання/редагування спільних контактів в Ubuntu Unity 8"
-
-#~ msgid "Access energy usage data"
-#~ msgstr "Доступ до даних про використання енергії"
-
-#~ msgid "Read/write access to U2F devices exposed"
-#~ msgstr "Доступ до читання й запису для впливових пристроїв U2F"
