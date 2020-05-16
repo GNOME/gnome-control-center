@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-05-02 06:16+0000\n"
-"PO-Revision-Date: 2020-05-02 15:59+0800\n"
+"POT-Creation-Date: 2020-05-13 05:08+0000\n"
+"PO-Revision-Date: 2020-05-16 11:42+0800\n"
 "Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
@@ -159,7 +159,7 @@ msgstr "其他檔案"
 #: panels/applications/cc-applications-panel.c:1585
 #: panels/applications/cc-applications-panel.ui:412
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:167
+#: panels/notifications/cc-notifications-panel.ui:80
 msgid "Applications"
 msgstr "程式集"
 
@@ -358,7 +358,7 @@ msgstr "請選擇圖片"
 #: panels/printers/pp-details-dialog.c:252
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:638
-#: panels/sharing/cc-sharing-panel.c:406 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:398 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
@@ -373,7 +373,7 @@ msgstr "取消(_C)"
 #: panels/background/cc-background-chooser.c:350
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:253
-#: panels/sharing/cc-sharing-panel.c:407
+#: panels/sharing/cc-sharing-panel.c:399
 #: panels/user-accounts/cc-avatar-chooser.c:236
 msgid "_Open"
 msgstr "開啟(_O)"
@@ -1204,8 +1204,6 @@ msgstr[0] "%d 秒"
 #. 5 hours 2 minutes 12 seconds
 #: panels/common/cc-util.c:174
 #, c-format
-#| msgctxt "time"
-#| msgid "%s %s %s"
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
@@ -1213,8 +1211,6 @@ msgstr "%s %s %s"
 #. 5 hours 2 minutes
 #: panels/common/cc-util.c:179
 #, c-format
-#| msgctxt "time"
-#| msgid "%s %s"
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
@@ -1229,8 +1225,6 @@ msgstr "%s"
 #. 2 minutes 12 seconds
 #: panels/common/cc-util.c:192
 #, c-format
-#| msgctxt "time"
-#| msgid "%s %s"
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
@@ -2287,9 +2281,9 @@ msgstr "保護您的位置資訊"
 #. FIXME
 #: panels/lock/cc-lock-panel.ui:29
 msgid ""
-"Automatically locking the screen prevents others from access the computer "
+"Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
-msgstr "自動鎖定螢幕能防止其他人在您離開時使用您的電腦。"
+msgstr "自動鎖定螢幕能防止其他人在您離開時取用您的電腦。"
 
 #: panels/lock/cc-lock-panel.ui:46
 msgid "Blank Screen Delay"
@@ -3103,7 +3097,7 @@ msgstr "自動 DNS"
 #: panels/network/connection-editor/ip4-page.ui:258
 #: panels/network/connection-editor/ip6-page.ui:272
 msgid "Separate IP addresses with commas"
-msgstr "請以分號 (;) 分隔 IP 地址"
+msgstr "請以逗號 (,) 分隔 IP 地址"
 
 #: panels/network/connection-editor/ip4-page.ui:279
 #: panels/network/connection-editor/ip6-page.ui:293
@@ -3313,7 +3307,7 @@ msgid "Wireless device does not support Hotspot mode"
 msgstr "無線裝置不支援熱點模式"
 
 #: panels/network/net-proxy.c:70
-#: panels/notifications/cc-notifications-panel.c:267
+#: panels/notifications/cc-notifications-panel.c:268
 #: panels/power/cc-power-panel.c:2043 panels/power/cc-power-panel.c:2054
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
@@ -3804,10 +3798,10 @@ msgstr "使用者名稱(_U)"
 #: panels/network/wireless-security/eap-method-simple.ui:31
 #: panels/network/wireless-security/ws-leap.ui:32
 #: panels/network/wireless-security/ws-wpa-psk.ui:14
-#: panels/sharing/cc-sharing-panel.ui:351
+#: panels/sharing/cc-sharing-panel.ui:204
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:385
+#: panels/user-accounts/cc-user-panel.ui:391
 msgid "_Password"
 msgstr "密碼(_P)"
 
@@ -4120,7 +4114,7 @@ msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "在鎖定畫面中顯示訊息內容(_O)"
 
-#: panels/notifications/cc-notifications-panel.c:267
+#: panels/notifications/cc-notifications-panel.c:268
 #: panels/power/cc-power-panel.c:2049 panels/power/cc-power-panel.c:2056
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
@@ -4130,11 +4124,11 @@ msgstr "在鎖定畫面中顯示訊息內容(_O)"
 msgid "On"
 msgstr "開啟"
 
-#: panels/notifications/cc-notifications-panel.ui:70
+#: panels/notifications/cc-notifications-panel.ui:49
 msgid "_Do Not Disturb"
 msgstr "不要打擾(_D)"
 
-#: panels/notifications/cc-notifications-panel.ui:121
+#: panels/notifications/cc-notifications-panel.ui:57
 msgid "_Lock Screen Notifications"
 msgstr "鎖定畫面通知(_L)"
 
@@ -5325,7 +5319,7 @@ msgid "Login _Screen"
 msgstr "登入畫面(_S)"
 
 #: panels/region/cc-region-panel.ui:64
-#: panels/user-accounts/cc-user-panel.ui:313
+#: panels/user-accounts/cc-user-panel.ui:319
 msgid "_Language"
 msgstr "語言(_L)"
 
@@ -5626,32 +5620,32 @@ msgstr "沒有選擇用來分享的網路"
 msgid "Networks"
 msgstr "網路"
 
-#: panels/sharing/cc-sharing-panel.c:299
+#: panels/sharing/cc-sharing-panel.c:291
 msgctxt "service is enabled"
 msgid "On"
 msgstr "開啟"
 
-#: panels/sharing/cc-sharing-panel.c:301 panels/sharing/cc-sharing-panel.c:328
+#: panels/sharing/cc-sharing-panel.c:293 panels/sharing/cc-sharing-panel.c:320
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "關閉"
 
-#: panels/sharing/cc-sharing-panel.c:331
+#: panels/sharing/cc-sharing-panel.c:323
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "已啟用"
 
-#: panels/sharing/cc-sharing-panel.c:334
+#: panels/sharing/cc-sharing-panel.c:326
 msgctxt "service is active"
 msgid "Active"
 msgstr "使用中"
 
-#: panels/sharing/cc-sharing-panel.c:403
+#: panels/sharing/cc-sharing-panel.c:395
 msgid "Choose a Folder"
 msgstr "選擇一個資料夾"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:706
+#: panels/sharing/cc-sharing-panel.c:698
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5659,7 +5653,7 @@ msgid ""
 msgstr "檔案分享允許您使用下述方式與目前網路上的其他人分享您的公開資料夾：%s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:712
+#: panels/sharing/cc-sharing-panel.c:704
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5670,18 +5664,18 @@ msgstr ""
 "%s"
 
 #. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:718
+#: panels/sharing/cc-sharing-panel.c:710
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to %s"
 msgstr "螢幕分享允許遠端使用者連線到 %s 以檢視或控制您的螢幕"
 
-#: panels/sharing/cc-sharing-panel.c:823
+#: panels/sharing/cc-sharing-panel.c:815
 msgid "Copy"
 msgstr "複製"
 
-#: panels/sharing/cc-sharing-panel.c:1284
+#: panels/sharing/cc-sharing-panel.c:1276
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "分享"
@@ -5690,79 +5684,79 @@ msgstr "分享"
 msgid "_Computer Name"
 msgstr "電腦名稱(_C)"
 
-#: panels/sharing/cc-sharing-panel.ui:94
+#: panels/sharing/cc-sharing-panel.ui:81
 msgid "_File Sharing"
 msgstr "檔案分享(_F)"
 
-#: panels/sharing/cc-sharing-panel.ui:139
+#: panels/sharing/cc-sharing-panel.ui:89
 msgid "_Screen Sharing"
 msgstr "螢幕分享(_S)"
 
-#: panels/sharing/cc-sharing-panel.ui:184
+#: panels/sharing/cc-sharing-panel.ui:97
 msgid "_Media Sharing"
 msgstr "媒體分享(_M)"
 
-#: panels/sharing/cc-sharing-panel.ui:229
+#: panels/sharing/cc-sharing-panel.ui:105
 msgid "_Remote Login"
 msgstr "遠端登入(_R)"
 
-#: panels/sharing/cc-sharing-panel.ui:268
+#: panels/sharing/cc-sharing-panel.ui:121
 msgid "Some services are disabled because of no network access."
 msgstr "由於沒有網路存取，某些服務已停用。"
 
-#: panels/sharing/cc-sharing-panel.ui:286
-#: panels/sharing/cc-sharing-panel.ui:413
+#: panels/sharing/cc-sharing-panel.ui:139
+#: panels/sharing/cc-sharing-panel.ui:266
 msgid "File Sharing"
 msgstr "檔案分享"
 
-#: panels/sharing/cc-sharing-panel.ui:333
+#: panels/sharing/cc-sharing-panel.ui:186
 msgid "_Require Password"
 msgstr "需要密碼(_R)"
 
-#: panels/sharing/cc-sharing-panel.ui:424
-#: panels/sharing/cc-sharing-panel.ui:494
+#: panels/sharing/cc-sharing-panel.ui:277
+#: panels/sharing/cc-sharing-panel.ui:347
 msgid "Remote Login"
 msgstr "遠端登入"
 
-#: panels/sharing/cc-sharing-panel.ui:517
-#: panels/sharing/cc-sharing-panel.ui:739
+#: panels/sharing/cc-sharing-panel.ui:370
+#: panels/sharing/cc-sharing-panel.ui:592
 msgid "Screen Sharing"
 msgstr "螢幕分享"
 
-#: panels/sharing/cc-sharing-panel.ui:571
+#: panels/sharing/cc-sharing-panel.ui:424
 msgid "_Allow connections to control the screen"
 msgstr "允許連線控制螢幕(_A)"
 
-#: panels/sharing/cc-sharing-panel.ui:596
+#: panels/sharing/cc-sharing-panel.ui:449
 msgid "_Password:"
 msgstr "密碼(_P)："
 
-#: panels/sharing/cc-sharing-panel.ui:626
+#: panels/sharing/cc-sharing-panel.ui:479
 msgid "_Show Password"
 msgstr "顯示密碼(_S)"
 
-#: panels/sharing/cc-sharing-panel.ui:657
+#: panels/sharing/cc-sharing-panel.ui:510
 msgid "Access Options"
 msgstr "存取選項"
 
-#: panels/sharing/cc-sharing-panel.ui:671
+#: panels/sharing/cc-sharing-panel.ui:524
 msgid "_New connections must ask for access"
 msgstr "存取新的連線必須詢問(_N)"
 
-#: panels/sharing/cc-sharing-panel.ui:689
+#: panels/sharing/cc-sharing-panel.ui:542
 msgid "_Require a password"
 msgstr "需要密碼(_R)"
 
-#: panels/sharing/cc-sharing-panel.ui:750
-#: panels/sharing/cc-sharing-panel.ui:844
+#: panels/sharing/cc-sharing-panel.ui:603
+#: panels/sharing/cc-sharing-panel.ui:697
 msgid "Media Sharing"
 msgstr "媒體分享"
 
-#: panels/sharing/cc-sharing-panel.ui:783
+#: panels/sharing/cc-sharing-panel.ui:636
 msgid "Share music, photos and videos over the network."
 msgstr "透過網路分享音樂、相片與影片。"
 
-#: panels/sharing/cc-sharing-panel.ui:798
+#: panels/sharing/cc-sharing-panel.ui:651
 msgid "Folders"
 msgstr "資料夾"
 
@@ -6066,7 +6060,6 @@ msgstr "管理 Thunderbolt 裝置"
 
 #. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:19
-#| msgid "Thunderbolt;"
 msgid "Thunderbolt;privacy;"
 msgstr "Thunderbolt;privacy;隱私;"
 
@@ -7129,25 +7122,12 @@ msgstr ""
 "要進行變更，\n"
 "請先點選 * 圖示"
 
-#: panels/user-accounts/cc-user-panel.c:1243
-msgid "Create a user account"
-msgstr "建立新的使用者帳號"
-
-#: panels/user-accounts/cc-user-panel.c:1254
-#: panels/user-accounts/cc-user-panel.c:1382
-msgid ""
-"To create a user account,\n"
-"click the * icon first"
-msgstr ""
-"要建立使用者帳號，\n"
-"請先點選 * 圖示"
-
-#: panels/user-accounts/cc-user-panel.c:1263
+#: panels/user-accounts/cc-user-panel.c:1244
 msgid "Delete the selected user account"
 msgstr "刪除選取的使用者帳號"
 
-#: panels/user-accounts/cc-user-panel.c:1275
-#: panels/user-accounts/cc-user-panel.c:1386
+#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1363
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7159,59 +7139,63 @@ msgstr ""
 msgid "_Add User…"
 msgstr "加入使用者(_A)…"
 
-#: panels/user-accounts/cc-user-panel.ui:52
+#: panels/user-accounts/cc-user-panel.ui:8
+msgid "Create a user account"
+msgstr "建立新的使用者帳號"
+
+#: panels/user-accounts/cc-user-panel.ui:63
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "您的作業階段需要重新啟動以讓變更生效"
 
-#: panels/user-accounts/cc-user-panel.ui:60
+#: panels/user-accounts/cc-user-panel.ui:71
 msgid "Restart Now"
 msgstr "立刻重新啟動"
 
-#: panels/user-accounts/cc-user-panel.ui:146
-#: panels/user-accounts/cc-user-panel.ui:162
+#: panels/user-accounts/cc-user-panel.ui:152
+#: panels/user-accounts/cc-user-panel.ui:168
 msgid "User Icon"
 msgstr "使用者圖示"
 
-#: panels/user-accounts/cc-user-panel.ui:238
+#: panels/user-accounts/cc-user-panel.ui:244
 msgid "Account Settings"
 msgstr "帳號設定值"
 
-#: panels/user-accounts/cc-user-panel.ui:265
+#: panels/user-accounts/cc-user-panel.ui:271
 msgid "_Administrator"
 msgstr "管理員(_A)"
 
-#: panels/user-accounts/cc-user-panel.ui:285
+#: panels/user-accounts/cc-user-panel.ui:291
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
 msgstr "管理員可以加入與移除其他使用者，並且可以改變所有使用者的設定值。"
 
-#: panels/user-accounts/cc-user-panel.ui:359
+#: panels/user-accounts/cc-user-panel.ui:365
 msgid "Authentication & Login"
 msgstr "身分核對與登入"
 
-#: panels/user-accounts/cc-user-panel.ui:428
+#: panels/user-accounts/cc-user-panel.ui:434
 msgid "_Fingerprint Login"
 msgstr "指紋登入(_F)"
 
-#: panels/user-accounts/cc-user-panel.ui:470
+#: panels/user-accounts/cc-user-panel.ui:476
 msgid "A_utomatic Login"
 msgstr "自動登入(_U)"
 
-#: panels/user-accounts/cc-user-panel.ui:500
+#: panels/user-accounts/cc-user-panel.ui:506
 msgid "Account Activity"
 msgstr "帳號活動"
 
-#: panels/user-accounts/cc-user-panel.ui:541
+#: panels/user-accounts/cc-user-panel.ui:547
 msgid "Remove User…"
 msgstr "移除使用者…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:580
+#: panels/user-accounts/cc-user-panel.ui:586
 msgid "No Users Found"
 msgstr "找不到使用者"
 
-#: panels/user-accounts/cc-user-panel.ui:590
+#: panels/user-accounts/cc-user-panel.ui:596
 msgid "Unlock to add a user account."
 msgstr "解除使用者帳號的新增鎖定。"
 
@@ -7933,6 +7917,13 @@ msgstr[0] "%u 輸入"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "系統音效"
+
+#~ msgid ""
+#~ "To create a user account,\n"
+#~ "click the * icon first"
+#~ msgstr ""
+#~ "要建立使用者帳號，\n"
+#~ "請先點選 * 圖示"
 
 #~ msgid "Add user accounts and change passwords"
 #~ msgstr "加入使用者帳戶並變更密碼"
