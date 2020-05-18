@@ -15,16 +15,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 3.3.91\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-05-09 13:53+0000\n"
-"PO-Revision-Date: 2020-05-01 01:32+0800\n"
-"Last-Translator: Cheng-Chia Tseng <pswo10680@gmail.com>\n"
+"POT-Creation-Date: 2020-05-18 13:51+0000\n"
+"PO-Revision-Date: 2020-05-18 22:01+0800\n"
+"Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 
 #: panels/applications/cc-applications-panel.c:741
 msgid "System Bus"
@@ -871,12 +871,12 @@ msgstr "%s 網路攝影機"
 #: panels/color/cc-color-device.c:91
 #, c-format
 msgid "Enable color management for %s"
-msgstr "啟用 %s 的顏色管理"
+msgstr "啟用 %s 的色彩管理"
 
 #: panels/color/cc-color-device.c:94
 #, c-format
 msgid "Show color profiles for %s"
-msgstr "顯示 %s 的顏色描述檔"
+msgstr "顯示 %s 的色彩描述檔"
 
 #. not calibrated
 #: panels/color/cc-color-device.c:303
@@ -992,7 +992,7 @@ msgid ""
 "screen. The longer you spend on calibration, the better the quality of the "
 "color profile."
 msgstr ""
-"校準動作會產生描述檔讓您可以用來管理螢幕的顏色。您花在校準的時間愈長，顏色描"
+"校準動作會產生描述檔讓您可以用來管理螢幕的色彩。您花在校準的時間愈長，色彩描"
 "述檔的品質就愈好。"
 
 #: panels/color/cc-color-panel.ui:38
@@ -1045,7 +1045,7 @@ msgid ""
 "Please set the display to a brightness that is typical for you. Color "
 "management will be most accurate at this brightness level."
 msgstr ""
-"請將顯示器的亮度設定為您常用的狀態。顏色管理會以這個亮度等級調整到最正確。"
+"請將顯示器的亮度設定為您常用的狀態。色彩管理會以這個亮度等級調整到最正確。"
 
 #: panels/color/cc-color-panel.ui:307
 msgid ""
@@ -1061,7 +1061,7 @@ msgstr "顯示亮度"
 msgid ""
 "You can use a color profile on different computers, or even create profiles "
 "for different lighting conditions."
-msgstr "您可以在不同電腦上使用顏色描述檔，或是為不同的亮度條件建立描述檔。"
+msgstr "您可以在不同電腦上使用色彩描述檔，或是為不同的亮度條件建立描述檔。"
 
 #: panels/color/cc-color-panel.ui:348
 msgid "Profile Name:"
@@ -1129,7 +1129,7 @@ msgstr "偵測到問題。描述檔可能無法正常運作。<a href=\"\">顯�
 
 #: panels/color/cc-color-panel.ui:790
 msgid "Each device needs an up to date color profile to be color managed."
-msgstr "每個裝置需要最新的色彩描述檔才能被管理顏色。"
+msgstr "每個裝置需要最新的色彩描述檔才能被管理色彩。"
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:812
@@ -1139,7 +1139,7 @@ msgstr "深入瞭解"
 
 #: panels/color/cc-color-panel.ui:817
 msgid "Learn more about color management"
-msgstr "深入瞭解顏色管理的相關資訊"
+msgstr "深入瞭解色彩管理的相關資訊"
 
 #: panels/color/cc-color-panel.ui:865
 msgid "_Set for all users"
@@ -1176,7 +1176,7 @@ msgstr "檢視詳細資料(_V)"
 
 #: panels/color/cc-color-panel.ui:988
 msgid "Unable to detect any devices that can be color managed"
-msgstr "無法偵測到任何能被管理顏色的裝置"
+msgstr "無法偵測到任何能被管理色彩的裝置"
 
 #: panels/color/cc-color-panel.ui:1032
 msgid "LCD"
@@ -1343,12 +1343,12 @@ msgstr "這個描述檔可能不再準確"
 
 #: panels/color/gnome-color-panel.desktop.in.in:3
 msgid "Color"
-msgstr "顏色"
+msgstr "色彩"
 
 #: panels/color/gnome-color-panel.desktop.in.in:4
 msgid ""
 "Calibrate the color of your devices, such as displays, cameras or printers"
-msgstr "校準您裝置的顏色，像是顯示器、攝影機或印表機"
+msgstr "校準您裝置的色彩，像是顯示器、攝影機或印表機"
 
 #. Translators: Search terms to find the Color panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/color/gnome-color-panel.desktop.in.in:19
@@ -1430,6 +1430,8 @@ msgstr[0] "%d 秒"
 #. 5 hours 2 minutes 12 seconds
 #: panels/common/cc-util.c:172
 #, c-format
+#| msgctxt "hours minutes seconds"
+#| msgid "%s %s %s"
 msgctxt "time"
 msgid "%s %s %s"
 msgstr "%s %s %s"
@@ -1437,6 +1439,8 @@ msgstr "%s %s %s"
 #. 2 minutes 12 seconds
 #: panels/common/cc-util.c:177
 #, c-format
+#| msgctxt "hours minutes"
+#| msgid "%s %s"
 msgctxt "time"
 msgid "%s %s"
 msgstr "%s %s"
@@ -1853,7 +1857,7 @@ msgstr "暫時停用直到明天"
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
-msgstr "夜光讓螢幕顏色變得溫暖。這可以幫助防止眼睛疲勞與失眠。"
+msgstr "夜光讓螢幕色彩變得溫暖。這可以幫助防止眼睛疲勞與失眠。"
 
 #: panels/display/cc-night-light-page.ui:127
 msgid "Schedule"
@@ -1899,7 +1903,7 @@ msgstr "到"
 
 #: panels/display/cc-night-light-page.ui:408
 msgid "Color Temperature"
-msgstr "顏色溫度"
+msgstr "色彩溫度"
 
 #: panels/display/gnome-display-panel.desktop.in.in:4
 msgid "Choose how to use connected monitors and projectors"
@@ -2041,7 +2045,7 @@ msgstr ""
 "device;system;information;hostname;memory;processor;version;default;"
 "application;preferred;cd;dvd;usb;audio;video;disc;removable;media;autorun;裝"
 "置;系統;資訊;記憶體;處理器;版本;預設;應用程式;首選;音訊;視訊;碟片;可移除;媒"
-"體;自動執行;主機名;主機名稱"
+"體;自動執行;主機名;主機名稱;"
 
 #: panels/keyboard/00-multimedia.xml.in:2
 msgid "Sound and Media"
@@ -2472,10 +2476,14 @@ msgstr "保護您的位置資訊"
 
 #. FIXME
 #: panels/lock/cc-lock-panel.ui:29
+#, fuzzy
+#| msgid ""
+#| "Automatically locking the screen prevents others from access the computer "
+#| "while you're away."
 msgid ""
 "Automatically locking the screen prevents others from access the computer "
 "while you're away."
-msgstr "自動鎖定螢幕能防止其他人在您離開時使用您的電腦"
+msgstr "自動鎖定螢幕能防止其他人在您離開時使用您的電腦。"
 
 #: panels/lock/cc-lock-panel.ui:46
 msgid "Blank Screen Delay"
@@ -2641,7 +2649,7 @@ msgstr "允許下列應用程式使用麥克風。"
 
 #: panels/microphone/cc-microphone-panel.ui:107
 msgid "No Applications Have Asked for Microphone Access"
-msgstr "沒有應用程式請求麥克風存取權限。"
+msgstr "沒有應用程式請求麥克風存取權"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in.in:4
 msgid "Protect your conversations"
@@ -5167,7 +5175,7 @@ msgstr "影像品質"
 #: panels/printers/pp-options-dialog.c:670
 msgctxt "Printer Option Group"
 msgid "Color"
-msgstr "顏色"
+msgstr "色彩"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
 #: panels/printers/pp-options-dialog.c:673
@@ -5446,7 +5454,7 @@ msgstr "選擇數字、日期及貨幣的格式。變更會在下次登入時生
 
 #: panels/region/cc-format-chooser.ui:119
 msgid "Search locales..."
-msgstr "搜尋地區…"
+msgstr "搜尋語言地區…"
 
 #: panels/region/cc-format-chooser.ui:160
 msgid "Common Formats"
@@ -6728,7 +6736,7 @@ msgstr "長度(_L)："
 #. The color of the accessibility crosshair
 #: panels/universal-access/zoom-options.ui:626
 msgid "Co_lor:"
-msgstr "顏色(_L)："
+msgstr "色彩(_L)："
 
 #: panels/universal-access/zoom-options.ui:690
 msgid "_Crosshairs:"
@@ -6758,7 +6766,7 @@ msgstr "對比(_C)："
 #: panels/universal-access/zoom-options.ui:886
 msgctxt "universal access, contrast"
 msgid "Co_lor"
-msgstr "顏色(_L)"
+msgstr "色彩(_L)"
 
 #: panels/universal-access/zoom-options.ui:911
 msgctxt "universal access, color"
@@ -6792,11 +6800,11 @@ msgstr "高"
 
 #: panels/universal-access/zoom-options.ui:1139
 msgid "Color Effects:"
-msgstr "顏色效果："
+msgstr "色彩效果："
 
 #: panels/universal-access/zoom-options.ui:1164
 msgid "Color Effects"
-msgstr "顏色效果"
+msgstr "色彩效果"
 
 #: panels/usage/cc-usage-panel.c:155
 msgid "Empty all items from Trash?"
@@ -7682,7 +7690,7 @@ msgstr "刪除指紋(_D)"
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
-msgstr "您確定要刪除已註冊的指紋嗎？這麼一來將會停用指紋登入。"
+msgstr "您確定要刪除註冊的指紋嗎？這麼一來將會停用指紋登入。"
 
 #: panels/user-accounts/um-fingerprint-dialog.c:439
 msgid "Done!"
@@ -7737,8 +7745,7 @@ msgstr "登記指紋"
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
-msgstr ""
-"使用者名稱通常只能有小寫英文字母 a 到 z、數字與下述字元：「-」、「_」。"
+msgstr "使用者名稱通常只能有小寫英文字母 a 到 z、數字與下述字元：- _"
 
 #: panels/user-accounts/user-utils.c:443
 msgid "Sorry, that user name isn’t available. Please try another."
@@ -7892,7 +7899,7 @@ msgstr "左手方向"
 #: panels/wacom/gnome-wacom-properties.ui:296
 #: panels/wacom/gnome-wacom-properties.ui:401
 msgid "Map to Monitor…"
-msgstr "對應至顯示器..."
+msgstr "對應至顯示器…"
 
 #: panels/wacom/gnome-wacom-properties.ui:309
 msgid "Map Buttons…"
@@ -8118,6 +8125,29 @@ msgstr[0] "%u 輸入"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "系統音效"
+
+#~ msgctxt "hours"
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgctxt "minutes seconds"
+#~ msgid "%s %s"
+#~ msgstr "%s %s"
+
+#~ msgctxt "minutes"
+#~ msgid "%s"
+#~ msgstr "%s"
+
+#~ msgid ""
+#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+#~ "network;identity;privacy;"
+#~ msgstr ""
+#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+#~ "network;identity;privacy;螢幕;鎖定;診斷;當掉;崩潰;私人;隱私;最近;暫存;索"
+#~ "引;名稱;網路;身分;"
+
+#~ msgid "Thunderbolt;privacy;"
+#~ msgstr "Thunderbolt;privacy;隱私;"
 
 #~ msgid "Set Background and Lock Screen"
 #~ msgstr "設定背景及鎖定螢幕"
