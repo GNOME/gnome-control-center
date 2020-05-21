@@ -1,5 +1,5 @@
 # gnome-control-center ja.po.
-# Copyright (C) 1998-2020 Free Software Foundation, Inc.
+# Copyright (C) 1998-2001, 2003-2020 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998.
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999.
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2013.
@@ -18,7 +18,7 @@
 # Hideki Yamnane <henrich@debian.org>, 2011.
 # Noriko Mizumoto <noriko@fedoraproject.org>, 2012.
 # Koichi Akabe <vbkaisetsu@debian.or.jp>, 2012.
-# Kentaro KAZUHAMA <kazken3@gmail.com>, 2012, 2018.
+# Kentaro KAZUHAMA <kazken3@gmail.com>, 2012, 2018, 2020.
 # Ikuya Awashiro <ikuya@fruitsbasket.info>, 2014, 2017.
 # Hajime Taira <htaira@redhat.com>, 2015-2018.
 # TakashiUshikoshi <adoredirectg59@gmail.com>, 2016.
@@ -32,7 +32,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2020-05-18 13:56+0000\n"
-"PO-Revision-Date: 2020-03-09 21:00+0900\n"
+"PO-Revision-Date: 2020-05-21 22:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -1244,18 +1244,14 @@ msgstr[0] "%d 秒"
 
 #. 5 hours 2 minutes 12 seconds
 #: panels/common/cc-util.c:174
-#, fuzzy, c-format
-#| msgctxt "time"
-#| msgid "%s %s %s"
+#, c-format
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 5 hours 2 minutes
 #: panels/common/cc-util.c:179
-#, fuzzy, c-format
-#| msgctxt "time"
-#| msgid "%s %s"
+#, c-format
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
@@ -1265,13 +1261,11 @@ msgstr "%s %s"
 #, c-format
 msgctxt "hours"
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. 2 minutes 12 seconds
 #: panels/common/cc-util.c:192
-#, fuzzy, c-format
-#| msgctxt "time"
-#| msgid "%s %s"
+#, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
@@ -1281,7 +1275,7 @@ msgstr "%s %s"
 #, c-format
 msgctxt "minutes"
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. 0 seconds
 #: panels/common/cc-util.c:208
@@ -1563,17 +1557,14 @@ msgstr "問題を報告します"
 #: panels/location/gnome-location-panel.desktop.in.in:20
 #: panels/lock/gnome-lock-panel.desktop.in.in:20
 #: panels/usage/gnome-usage-panel.desktop.in.in:20
-#, fuzzy
-#| msgid ""
-#| "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-#| "network;identity;"
 msgid ""
 "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
 "network;identity;privacy;"
 msgstr ""
 "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-"network;identity;画面;スクリーン;ロック;診断;クラッシュ;プライベート;最近;テ"
-"ンポラリー;一時;インデックス;索引;名前;ネットワーク;Privacy;プライバシー;"
+"network;identity;privacy;画面;スクリーン;ロック;診断;クラッシュ;プライ"
+"ベート;最近;テンポラリー;一時;インデックス;索引;名前;ネットワーク;プラ"
+"イバシー;"
 
 #: panels/display/cc-display-panel.c:955
 #: panels/network/connection-editor/connection-editor.ui:27
@@ -2091,13 +2082,12 @@ msgid "Alternate Characters Key"
 msgstr "代替文字キー"
 
 #: panels/keyboard/cc-alt-chars-key-dialog.ui:28
-#, fuzzy
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
 msgstr ""
-"代替文字キーは AltGr キーのように追加の文字を入力するのに使用します。これら"
-"は AltGr キーと同じように扱われる場合があります。"
+"代替文字キーを使用すると追加の文字を入力できます。追加の文字はキーボード上"
+"に 3 番目のオプションとして印刷されている場合があります。"
 
 #: panels/keyboard/cc-alt-chars-key-dialog.ui:45
 msgid "Left Alt"
@@ -2350,10 +2340,6 @@ msgstr "位置情報を保護します"
 
 #. FIXME
 #: panels/lock/cc-lock-panel.ui:29
-#, fuzzy
-#| msgid ""
-#| "Automatically locking the screen prevents others from access the computer "
-#| "while you're away."
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
@@ -4662,17 +4648,13 @@ msgstr "バッテリー状態の表示、省電力の設定をします"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
-#, fuzzy
-#| msgid ""
-#| "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;"
-#| "Idle;"
 msgid ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 "Energy;"
 msgstr ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
-"電源;スリープ;サスペンド;ハイバネート;バッテリー;明るさ;ブランクスクリーン;モ"
-"ニター;画面;ディスプレイ;アイドル;待機;"
+"Energy;電源;スリープ;サスペンド;ハイバネート;バッテリー;明るさ;ブランクスクリ"
+"ーン;モニター;画面;ディスプレイ;アイドル;待機;電力;エネルギー;"
 
 #: panels/printers/authentication-dialog.ui:11
 msgid " "
@@ -6191,10 +6173,8 @@ msgstr "Thunderbolt デバイスを管理します"
 
 #. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in.in:19
-#, fuzzy
-#| msgid "Thunderbolt;"
 msgid "Thunderbolt;privacy;"
-msgstr "Thunderbolt;"
+msgstr "Thunderbolt;privacy;プライバシー;"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
@@ -7088,7 +7068,7 @@ msgctxt "login history week label"
 msgid "%s — %s"
 msgstr "%s — %s"
 
-# %k:%M よりも %H:%M の方がガタガタしていなくて見やすい
+# %k:%M よりも %H:%M の方がガタガタしていなくて見やすい (sicklylife)
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
@@ -8047,7 +8027,7 @@ msgstr "終了する"
 #: shell/help-overlay.ui:27 shell/help-overlay.ui:48
 msgctxt "shortcut window"
 msgid "Search"
-msgstr "検索する"
+msgstr "検索"
 
 #: shell/help-overlay.ui:35
 msgctxt "shortcut window"
