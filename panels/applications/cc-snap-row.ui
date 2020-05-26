@@ -29,6 +29,7 @@
           <object class="GtkSwitch" id="slot_toggle">
             <property name="visible">True</property>
             <property name="valign">center</property>
+            <property name="xalign">1</property>
             <signal name="notify::active" handler="switch_changed_cb" swapped="yes"/>
           </object>
         </child>
@@ -37,6 +38,7 @@
             <property name="visible">True</property>
             <property name="valign">center</property>
             <property name="model">slots_combo_model</property>
+            <property name="xalign">1</property>
             <signal name="changed" handler="combo_changed_cb" swapped="yes"/>
             <child>
               <object class="GtkCellRendererText">
