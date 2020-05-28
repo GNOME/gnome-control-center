@@ -1,6 +1,7 @@
 /* -*- mode: C; c-file-style: "gnu"; indent-tabs-mode: nil; -*-
  *
  * Copyright (C) 2018 Red Hat, Inc
+ * Copyright (C) 2020 Collabora Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -28,17 +29,23 @@
 
 struct _CcLockPanel
 {
-  CcPanel     parent_instance;
+  CcPanel        parent_instance;
 
-  GSettings   *lock_settings;
-  GSettings   *notification_settings;
-  GSettings   *session_settings;
+  GSettings     *lock_settings;
+  GSettings     *notification_settings;
+  GSettings     *privacy_settings;
+  GSettings     *session_settings;
 
-  GtkSwitch   *automatic_screen_lock_switch;
-  GtkComboBox *blank_screen_combo;
-  GtkComboBox *lock_after_combo;
-  GtkListBox  *lock_list_box;
-  GtkSwitch   *show_notifications_switch;
+  GCancellable  *cancellable;
+
+  GtkSwitch     *automatic_screen_lock_switch;
+  GtkComboBox   *blank_screen_combo;
+  GtkComboBox   *lock_after_combo;
+  GtkListBox    *lock_list_box;
+  GtkSwitch     *show_notifications_switch;
+  GtkSwitch     *usb_protection_switch;
+  GDBusProxy    *usb_proxy;
+  GtkListBoxRow *usb_protection_row;
 };
 
 CC_PANEL_REGISTER (CcLockPanel, cc_lock_panel)
@@ -179,13 +186,69 @@ on_blank_screen_delay_changed_cb (GtkWidget   *widget,
 }
 
 static void
+on_usb_protection_properties_changed_cb (GDBusProxy  *usb_proxy,
+                                         GVariant    *changed_properties,
+                                         GStrv        invalidated_properties,
+                                         CcLockPanel *self)
+{
+  gboolean available = FALSE;
+
+  if (self->usb_proxy)
+    {
+      g_autoptr(GVariant) variant = NULL;
+
+      variant = g_dbus_proxy_get_cached_property (self->usb_proxy, "Available");
+      if (variant != NULL)
+        available = g_variant_get_boolean (variant);
+    }
+
+  /* Show the USB protection row only if the required daemon is up and running */
+  gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_row), available);
+}
+
+static void
+on_usb_protection_param_ready (GObject      *source_object,
+                               GAsyncResult *res,
+                               gpointer      user_data)
+{
+  g_autoptr(GError) error = NULL;
+  CcLockPanel *self;
+  GDBusProxy *proxy;
+
+  self = user_data;
+  proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+  if (error)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Failed to connect to SettingsDaemon.UsbProtection: %s",
+                     error->message);
+        }
+
+      gtk_widget_hide (GTK_WIDGET (self->usb_protection_row));
+      return;
+    }
+  self->usb_proxy = proxy;
+
+  g_signal_connect_object (self->usb_proxy,
+                           "g-properties-changed",
+                           G_CALLBACK (on_usb_protection_properties_changed_cb),
+                           self,
+                           0);
+  on_usb_protection_properties_changed_cb (self->usb_proxy, NULL, NULL, self);
+}
+
+static void
 cc_lock_panel_finalize (GObject *object)
 {
   CcLockPanel *self = CC_LOCK_PANEL (object);
 
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
   g_clear_object (&self->lock_settings);
   g_clear_object (&self->notification_settings);
   g_clear_object (&self->session_settings);
+  g_clear_object (&self->usb_proxy);
 
   G_OBJECT_CLASS (cc_lock_panel_parent_class)->finalize (object);
 }
@@ -205,6 +268,8 @@ cc_lock_panel_class_init (CcLockPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, lock_after_combo);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, lock_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, show_notifications_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcLockPanel, usb_protection_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcLockPanel, usb_protection_row);
 
   gtk_widget_class_bind_template_callback (widget_class, on_blank_screen_delay_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_lock_combo_changed_cb);
@@ -223,7 +288,10 @@ cc_lock_panel_init (CcLockPanel *self)
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
 
+  self->cancellable = g_cancellable_new ();
+
   self->lock_settings = g_settings_new ("org.gnome.desktop.screensaver");
+  self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
   self->notification_settings = g_settings_new ("org.gnome.desktop.notifications");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
 
@@ -249,4 +317,20 @@ cc_lock_panel_init (CcLockPanel *self)
 
   value = g_settings_get_uint (self->session_settings, "idle-delay");
   set_blank_screen_delay_value (self, value);
+
+  g_settings_bind (self->privacy_settings,
+                   "usb-protection",
+                   self->usb_protection_switch,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.gnome.SettingsDaemon.UsbProtection",
+                            "/org/gnome/SettingsDaemon/UsbProtection",
+                            "org.gnome.SettingsDaemon.UsbProtection",
+                            self->cancellable,
+                            on_usb_protection_param_ready,
+                            self);
 }
