@@ -636,11 +636,8 @@ on_printer_deletion_undone (CcPrintersPanel *self)
 }
 
 static void
-on_notification_dismissed (GtkButton *button,
-                           gpointer   user_data)
+on_notification_dismissed (CcPrintersPanel *self)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-
   if (self->deleted_printer_name != NULL)
     {
       PpPrinter *printer;
@@ -660,7 +657,7 @@ on_notification_dismissed (GtkButton *button,
 static gboolean
 on_remove_printer_timeout (gpointer user_data)
 {
-  on_notification_dismissed (NULL, user_data);
+  on_notification_dismissed (user_data);
 
   return G_SOURCE_REMOVE;
 }
@@ -675,7 +672,7 @@ on_printer_deleted (CcPrintersPanel *self,
 
   gtk_widget_hide (GTK_WIDGET (printer_entry));
 
-  on_notification_dismissed (NULL, self);
+  on_notification_dismissed (self);
 
   g_object_get (printer_entry,
                 "printer-name", &printer_name,
