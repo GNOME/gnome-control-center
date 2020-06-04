@@ -614,17 +614,6 @@ free_dests (CcPrintersPanel *self)
 }
 
 static void
-cancel_notification_timeout (CcPrintersPanel *self)
-{
-  if (self->remove_printer_timeout_id == 0)
-    return;
-
-  g_source_remove (self->remove_printer_timeout_id);
-
-  self->remove_printer_timeout_id = 0;
-}
-
-static void
 on_printer_deletion_undone (CcPrintersPanel *self)
 {
   gtk_revealer_set_reveal_child (self->notification, FALSE);
@@ -632,12 +621,14 @@ on_printer_deletion_undone (CcPrintersPanel *self)
   g_clear_pointer (&self->deleted_printer_name, g_free);
   actualize_printers_list (self);
 
-  cancel_notification_timeout (self);
+  g_clear_handle_id (&self->remove_printer_timeout_id, g_source_remove);
 }
 
 static void
 on_notification_dismissed (CcPrintersPanel *self)
 {
+  g_clear_handle_id (&self->remove_printer_timeout_id, g_source_remove);
+
   if (self->deleted_printer_name != NULL)
     {
       PpPrinter *printer;
@@ -655,9 +646,11 @@ on_notification_dismissed (CcPrintersPanel *self)
 }
 
 static gboolean
-on_remove_printer_timeout (gpointer user_data)
+on_remove_printer_timeout (CcPrintersPanel *self)
 {
-  on_notification_dismissed (user_data);
+  self->remove_printer_timeout_id = 0;
+
+  on_notification_dismissed (self);
 
   return G_SOURCE_REMOVE;
 }
@@ -689,7 +682,7 @@ on_printer_deleted (CcPrintersPanel *self,
 
   gtk_revealer_set_reveal_child (self->notification, TRUE);
 
-  self->remove_printer_timeout_id = g_timeout_add_seconds (10, on_remove_printer_timeout, self);
+  self->remove_printer_timeout_id = g_timeout_add_seconds (10, G_SOURCE_FUNC (on_remove_printer_timeout), self);
 }
 
 static void
