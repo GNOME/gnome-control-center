@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-05-13 05:08+0000\n"
-"PO-Revision-Date: 2020-05-14 11:58+0200\n"
+"POT-Creation-Date: 2020-06-02 15:48+0000\n"
+"PO-Revision-Date: 2020-06-03 11:45+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -208,7 +208,7 @@ msgstr "Cámara"
 #: panels/keyboard/cc-keyboard-option.c:378
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:93
 #: panels/keyboard/keyboard-shortcuts.c:425 panels/network/network-proxy.ui:126
-#: panels/user-accounts/um-fingerprint-dialog.c:211
+#: panels/user-accounts/um-fingerprint-dialog.c:219
 #: subprojects/gvc/gvc-mixer-control.c:1876
 msgid "Disabled"
 msgstr "Desactivado"
@@ -374,10 +374,10 @@ msgstr "Seleccionar una imagen"
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:635
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:637
+#: panels/user-accounts/cc-user-panel.c:655
 #: panels/user-accounts/data/join-dialog.ui:20
-#: panels/user-accounts/um-fingerprint-dialog.c:260
+#: panels/user-accounts/um-fingerprint-dialog.c:335
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -904,7 +904,7 @@ msgstr ""
 "\"windows\">Microsoft Windows</a>."
 
 #: panels/color/cc-color-panel.ui:607
-#: panels/user-accounts/um-fingerprint-dialog.c:719
+#: panels/user-accounts/um-fingerprint-dialog.c:818
 msgid "Summary"
 msgstr "Resumen"
 
@@ -2327,9 +2327,6 @@ msgstr "Proteger la información sobre su ubicación"
 
 #. FIXME
 #: panels/lock/cc-lock-panel.ui:29
-#| msgid ""
-#| "Automatically locking the screen prevents others from access the computer "
-#| "while you're away."
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
@@ -2361,110 +2358,122 @@ msgstr "Período después de apagar la pantalla para bloquearla automáticamente
 msgid "Show _Notifications on Lock Screen"
 msgstr "Mostrar _notificaciones en la pantalla de bloqueo"
 
+#: panels/lock/cc-lock-panel.ui:122
+msgid "Forbid new _USB devices"
+msgstr "Prohibir usar nuevos dispositivos _USB"
+
+#: panels/lock/cc-lock-panel.ui:123
+msgid ""
+"Prevent new USB devices from interacting with the system when the screen is "
+"locked."
+msgstr ""
+"Evitar que los nuevos dispositivos USB interactúen con el sistema cuando la "
+"pantalla está bloqueada."
+
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:149
+#: panels/lock/cc-lock-panel.ui:168
 msgctxt "lock_screen"
 msgid "Screen Turns Off"
 msgstr "Se apaga la pantalla"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:153
+#: panels/lock/cc-lock-panel.ui:172
 msgctxt "lock_screen"
 msgid "30 seconds"
 msgstr "30 segundos"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:157
+#: panels/lock/cc-lock-panel.ui:176
 msgctxt "lock_screen"
 msgid "1 minute"
 msgstr "1 minuto"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:161
+#: panels/lock/cc-lock-panel.ui:180
 msgctxt "lock_screen"
 msgid "2 minutes"
 msgstr "2 minutos"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:165
+#: panels/lock/cc-lock-panel.ui:184
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 minutos"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:169
+#: panels/lock/cc-lock-panel.ui:188
 msgctxt "lock_screen"
 msgid "5 minutes"
 msgstr "5 minutos"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:173
+#: panels/lock/cc-lock-panel.ui:192
 msgctxt "lock_screen"
 msgid "30 minutes"
 msgstr "30 minutos"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:177
+#: panels/lock/cc-lock-panel.ui:196
 msgctxt "lock_screen"
 msgid "1 hour"
 msgstr "1 hora"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:192 panels/power/cc-power-panel.ui:63
+#: panels/lock/cc-lock-panel.ui:211 panels/power/cc-power-panel.ui:63
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 minuto"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:196 panels/power/cc-power-panel.ui:67
+#: panels/lock/cc-lock-panel.ui:215 panels/power/cc-power-panel.ui:67
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 minutos"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:200 panels/power/cc-power-panel.ui:71
+#: panels/lock/cc-lock-panel.ui:219 panels/power/cc-power-panel.ui:71
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 minutos"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:204 panels/power/cc-power-panel.ui:75
+#: panels/lock/cc-lock-panel.ui:223 panels/power/cc-power-panel.ui:75
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 minutos"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:208 panels/power/cc-power-panel.ui:79
+#: panels/lock/cc-lock-panel.ui:227 panels/power/cc-power-panel.ui:79
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 minutos"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:212 panels/power/cc-power-panel.ui:83
+#: panels/lock/cc-lock-panel.ui:231 panels/power/cc-power-panel.ui:83
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 minutos"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:216 panels/power/cc-power-panel.ui:87
+#: panels/lock/cc-lock-panel.ui:235 panels/power/cc-power-panel.ui:87
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 minutos"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:220 panels/power/cc-power-panel.ui:91
+#: panels/lock/cc-lock-panel.ui:239 panels/power/cc-power-panel.ui:91
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 minutos"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:224 panels/power/cc-power-panel.ui:95
+#: panels/lock/cc-lock-panel.ui:243 panels/power/cc-power-panel.ui:95
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 minutos"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:228 panels/power/cc-power-panel.ui:99
+#: panels/lock/cc-lock-panel.ui:247 panels/power/cc-power-panel.ui:99
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "Nunca"
@@ -7064,7 +7073,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:765
+#: panels/user-accounts/cc-user-panel.c:767
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7072,7 +7081,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:769
+#: panels/user-accounts/cc-user-panel.c:771
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7157,30 +7166,30 @@ msgstr "Contraseña no válida, inténtelo de nuevo"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "No se pudo conectar al dominio %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:209
+#: panels/user-accounts/cc-user-panel.c:211
 msgid "Your account"
 msgstr "Su cuenta"
 
-#: panels/user-accounts/cc-user-panel.c:384
+#: panels/user-accounts/cc-user-panel.c:386
 msgid "Failed to delete user"
 msgstr "Falló al eliminar el usuario"
 
-#: panels/user-accounts/cc-user-panel.c:442
-#: panels/user-accounts/cc-user-panel.c:501
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:444
+#: panels/user-accounts/cc-user-panel.c:503
+#: panels/user-accounts/cc-user-panel.c:555
 msgid "Failed to revoke remotely managed user"
 msgstr "Falló al revocar remotamente el usuario gestionado"
 
-#: panels/user-accounts/cc-user-panel.c:604
+#: panels/user-accounts/cc-user-panel.c:606
 msgid "You cannot delete your own account."
 msgstr "No puede eliminar su propia cuenta."
 
-#: panels/user-accounts/cc-user-panel.c:613
+#: panels/user-accounts/cc-user-panel.c:615
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aún está registrado en el sistema"
 
-#: panels/user-accounts/cc-user-panel.c:617
+#: panels/user-accounts/cc-user-panel.c:619
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7188,12 +7197,12 @@ msgstr ""
 "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
 "sistema en un estado inconsistente."
 
-#: panels/user-accounts/cc-user-panel.c:626
+#: panels/user-accounts/cc-user-panel.c:628
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "¿Quiere mantener los archivos de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:630
+#: panels/user-accounts/cc-user-panel.c:632
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7201,48 +7210,48 @@ msgstr ""
 "Es posible mantener la carpeta personal, el «spool» del correo y los "
 "archivos temporales al eliminar una cuenta de usuario."
 
-#: panels/user-accounts/cc-user-panel.c:633
+#: panels/user-accounts/cc-user-panel.c:635
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: panels/user-accounts/cc-user-panel.c:634
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Keep Files"
 msgstr "_Mantener archivos"
 
-#: panels/user-accounts/cc-user-panel.c:648
+#: panels/user-accounts/cc-user-panel.c:650
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "¿Está seguro de que quiere revocar remotamente la cuenta gestionada de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:652
+#: panels/user-accounts/cc-user-panel.c:654
 msgid "_Delete"
 msgstr "_Eliminar"
 
-#: panels/user-accounts/cc-user-panel.c:702
+#: panels/user-accounts/cc-user-panel.c:704
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: panels/user-accounts/cc-user-panel.c:710
+#: panels/user-accounts/cc-user-panel.c:712
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: panels/user-accounts/cc-user-panel.c:713
+#: panels/user-accounts/cc-user-panel.c:715
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: panels/user-accounts/cc-user-panel.c:758
+#: panels/user-accounts/cc-user-panel.c:760
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
-#: panels/user-accounts/cc-user-panel.c:1136
+#: panels/user-accounts/cc-user-panel.c:1164
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: panels/user-accounts/cc-user-panel.c:1138
+#: panels/user-accounts/cc-user-panel.c:1166
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
@@ -7250,7 +7259,7 @@ msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1170
+#: panels/user-accounts/cc-user-panel.c:1198
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7258,12 +7267,12 @@ msgstr ""
 "Para realizar los cambios\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/cc-user-panel.c:1244
+#: panels/user-accounts/cc-user-panel.c:1272
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: panels/user-accounts/cc-user-panel.c:1256
-#: panels/user-accounts/cc-user-panel.c:1363
+#: panels/user-accounts/cc-user-panel.c:1284
+#: panels/user-accounts/cc-user-panel.c:1391
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7370,7 +7379,7 @@ msgid "Right little finger"
 msgstr "Dedo meñique derecho"
 
 #: panels/user-accounts/data/account-fingerprint.ui:39
-#: panels/user-accounts/um-fingerprint-dialog.c:676
+#: panels/user-accounts/um-fingerprint-dialog.c:775
 msgid "Enable Fingerprint Login"
 msgstr "Activar el inicio de sesión con huella"
 
@@ -7386,7 +7395,7 @@ msgstr "Dedo índice _izquierdo"
 msgid "_Other finger:"
 msgstr "_Otro dedo:"
 
-#: panels/user-accounts/data/account-fingerprint.ui:324
+#: panels/user-accounts/data/account-fingerprint.ui:222
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
@@ -7597,34 +7606,34 @@ msgstr "La contraseña nueva no contiene suficientes caracteres diferentes"
 msgid "Unknown error"
 msgstr "Error desconocido"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:139
+#: panels/user-accounts/um-fingerprint-dialog.c:147
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr ""
 "No le está permitido acceder al dispositivo. Contacte con el administrador "
 "de su sistema."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:141
+#: panels/user-accounts/um-fingerprint-dialog.c:149
 msgid "The device is already in use."
 msgstr "El dispositivo ya está en uso."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:143
+#: panels/user-accounts/um-fingerprint-dialog.c:151
 msgid "An internal error occurred."
 msgstr "Ocurrió un error interno."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:214
+#: panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "Activada"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:259
+#: panels/user-accounts/um-fingerprint-dialog.c:334
 msgid "Delete registered fingerprints?"
 msgstr "¿Eliminar las huellas registradas?"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:263
+#: panels/user-accounts/um-fingerprint-dialog.c:338
 msgid "_Delete Fingerprints"
 msgstr "_Eliminar huellas"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:269
+#: panels/user-accounts/um-fingerprint-dialog.c:344
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7632,15 +7641,15 @@ msgstr ""
 "¿Quiere eliminar sus huellas registradas y así desactivar el inicio de "
 "sesión con huella?"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:439
+#: panels/user-accounts/um-fingerprint-dialog.c:526
 msgid "Done!"
 msgstr "Hecho"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:500
-#: panels/user-accounts/um-fingerprint-dialog.c:542
+#: panels/user-accounts/um-fingerprint-dialog.c:588
+#: panels/user-accounts/um-fingerprint-dialog.c:630
 #, c-format
 msgid "Could not access “%s” device"
 msgstr "No se pudo acceder al dispositivo «%s»"
@@ -7648,16 +7657,16 @@ msgstr "No se pudo acceder al dispositivo «%s»"
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:583
+#: panels/user-accounts/um-fingerprint-dialog.c:677
 #, c-format
 msgid "Could not start finger capture on “%s” device"
 msgstr "No se pudo iniciar la captura de dedo en el dispositivo «%s»"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:627
+#: panels/user-accounts/um-fingerprint-dialog.c:724
 msgid "Could not access any fingerprint readers"
 msgstr "No se pudo acceder a ninguna lectura de huellas"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:628
+#: panels/user-accounts/um-fingerprint-dialog.c:725
 msgid "Please contact your system administrator for help."
 msgstr "Contacte con el administrador de su sistema para obtener ayuda."
 
@@ -7666,7 +7675,7 @@ msgstr "Contacte con el administrador de su sistema para obtener ayuda."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: panels/user-accounts/um-fingerprint-dialog.c:710
+#: panels/user-accounts/um-fingerprint-dialog.c:809
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -7675,11 +7684,11 @@ msgstr ""
 "Para activar el inicio de sesión con huella debe guardar una de sus huellas "
 "usando el dispositivo «%s»."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:717
+#: panels/user-accounts/um-fingerprint-dialog.c:816
 msgid "Selecting finger"
 msgstr "Seleccionando dedo"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:718
+#: panels/user-accounts/um-fingerprint-dialog.c:817
 msgid "Enrolling fingerprints"
 msgstr "Registrando huellas digitales"
 
