@@ -84,10 +84,6 @@ struct _CcDisplayPanel
 
   GDBusProxy *shell_proxy;
 
-  guint       sensor_watch_id;
-  GDBusProxy *iio_sensor_proxy;
-  gboolean    has_accelerometer;
-
   gchar     *main_title;
   GtkWidget *main_titlebar;
   GtkWidget *apply_titlebar;
@@ -406,14 +402,6 @@ cc_display_panel_dispose (GObject *object)
   CcDisplayPanel *self = CC_DISPLAY_PANEL (object);
 
   reset_titlebar (CC_DISPLAY_PANEL (object));
-
-  if (self->sensor_watch_id > 0)
-    {
-      g_bus_unwatch_name (self->sensor_watch_id);
-      self->sensor_watch_id = 0;
-    }
-
-  g_clear_object (&self->iio_sensor_proxy);
 
   if (self->focus_id)
     {
@@ -860,6 +848,13 @@ rebuild_ui (CcDisplayPanel *panel)
 }
 
 static void
+update_panel_orientation_managed (CcDisplayPanel *panel,
+                                  gboolean        managed)
+{
+  cc_display_settings_set_has_accelerometer (panel->settings, managed);
+}
+
+static void
 reset_current_config (CcDisplayPanel *panel)
 {
   CcDisplayConfig *current;
@@ -875,6 +870,12 @@ reset_current_config (CcDisplayPanel *panel)
   current = cc_display_config_manager_get_current (panel->manager);
   cc_display_config_set_minimum_size (current, MINIMUM_WIDTH, MINIMUM_HEIGHT);
   panel->current_config = current;
+
+  g_signal_connect_object (current, "panel-orientation-managed",
+                           G_CALLBACK (update_panel_orientation_managed), panel,
+                           G_CONNECT_SWAPPED);
+  update_panel_orientation_managed (panel,
+                                    cc_display_config_get_panel_orientation_managed (current));
 
   g_list_store_remove_all (panel->primary_display_list);
   gtk_list_store_clear (panel->output_selection_list);
@@ -1071,85 +1072,6 @@ shell_proxy_ready (GObject        *source,
 }
 
 static void
-update_has_accel (CcDisplayPanel *self)
-{
-  g_autoptr(GVariant) v = NULL;
-
-  if (self->iio_sensor_proxy == NULL)
-    {
-      g_debug ("Has no accelerometer");
-      self->has_accelerometer = FALSE;
-      cc_display_settings_set_has_accelerometer (self->settings, self->has_accelerometer);
-      return;
-    }
-
-  v = g_dbus_proxy_get_cached_property (self->iio_sensor_proxy, "HasAccelerometer");
-  if (v)
-    {
-      self->has_accelerometer = g_variant_get_boolean (v);
-    }
-  else
-    {
-      self->has_accelerometer = FALSE;
-    }
-
-  cc_display_settings_set_has_accelerometer (self->settings, self->has_accelerometer);
-
-  g_debug ("Has %saccelerometer", self->has_accelerometer ? "" : "no ");
-}
-
-static void
-sensor_proxy_properties_changed_cb (CcDisplayPanel *self,
-                                    GVariant       *changed_properties,
-                                    GStrv           invalidated_properties)
-{
-  GVariantDict dict;
-
-  g_variant_dict_init (&dict, changed_properties);
-
-  if (g_variant_dict_contains (&dict, "HasAccelerometer"))
-    update_has_accel (self);
-}
-
-static void
-sensor_proxy_appeared_cb (GDBusConnection *connection,
-                          const gchar     *name,
-                          const gchar     *name_owner,
-                          gpointer         user_data)
-{
-  CcDisplayPanel *self = user_data;
-
-  g_debug ("SensorProxy appeared");
-
-  self->iio_sensor_proxy = g_dbus_proxy_new_sync (connection,
-                                                        G_DBUS_PROXY_FLAGS_NONE,
-                                                        NULL,
-                                                        "net.hadess.SensorProxy",
-                                                        "/net/hadess/SensorProxy",
-                                                        "net.hadess.SensorProxy",
-                                                        NULL,
-                                                        NULL);
-  g_return_if_fail (self->iio_sensor_proxy);
-
-  g_signal_connect_object (self->iio_sensor_proxy, "g-properties-changed",
-                           G_CALLBACK (sensor_proxy_properties_changed_cb), self, G_CONNECT_SWAPPED);
-  update_has_accel (self);
-}
-
-static void
-sensor_proxy_vanished_cb (GDBusConnection *connection,
-                          const gchar     *name,
-                          gpointer         user_data)
-{
-  CcDisplayPanel *self = user_data;
-
-  g_debug ("SensorProxy vanished");
-
-  g_clear_object (&self->iio_sensor_proxy);
-  update_has_accel (self);
-}
-
-static void
 session_bus_ready (GObject        *source,
                    GAsyncResult   *res,
                    CcDisplayPanel *self)
@@ -1250,14 +1172,6 @@ cc_display_panel_init (CcDisplayPanel *self)
              cc_panel_get_cancellable (CC_PANEL (self)),
              (GAsyncReadyCallback) session_bus_ready,
              self);
-
-  self->sensor_watch_id = g_bus_watch_name (G_BUS_TYPE_SYSTEM,
-                                            "net.hadess.SensorProxy",
-                                            G_BUS_NAME_WATCHER_FLAGS_NONE,
-                                            sensor_proxy_appeared_cb,
-                                            sensor_proxy_vanished_cb,
-                                            self,
-                                            NULL);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/display/display-arrangement.css");
