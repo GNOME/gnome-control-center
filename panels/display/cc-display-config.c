@@ -627,3 +627,9 @@ cc_display_config_is_scaled_mode_valid (CcDisplayConfig *self,
   g_return_val_if_fail (CC_IS_DISPLAY_MODE (mode), FALSE);
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->is_scaled_mode_valid (self, mode, scale);
 }
+
+gboolean
+cc_display_config_get_panel_orientation_managed (CcDisplayConfig *self)
+{
+  return CC_DISPLAY_CONFIG_GET_CLASS (self)->get_panel_orientation_managed (self);
+}

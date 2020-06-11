@@ -160,6 +160,7 @@ struct _CcDisplayConfigClass
   gboolean (*is_scaled_mode_valid) (CcDisplayConfig  *self,
                                     CcDisplayMode    *mode,
                                     double            scale);
+  gboolean (* get_panel_orientation_managed) (CcDisplayConfig    *self);
 };
 
 
@@ -186,6 +187,8 @@ void              cc_display_config_set_minimum_size        (CcDisplayConfig    
 gboolean          cc_display_config_is_scaled_mode_valid    (CcDisplayConfig    *self,
                                                              CcDisplayMode      *mode,
                                                              double              scale);
+gboolean          cc_display_config_get_panel_orientation_managed
+                                                            (CcDisplayConfig    *self);
 
 const char*       cc_display_monitor_get_display_name       (CcDisplayMonitor   *monitor);
 gboolean          cc_display_monitor_is_active              (CcDisplayMonitor   *monitor);
