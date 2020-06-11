@@ -848,7 +848,7 @@ up_client_changed (CcPowerPanel *self)
                       "icon-name", "battery-full-symbolic",
                       "power-supply", FALSE,
                       "is-present", TRUE,
-                      "battery-level", UP_DEVICE_LEVEL_NONE,
+                      "battery-level", UP_DEVICE_LEVEL_NORMAL,
                       NULL);
         g_ptr_array_add (self->devices, device);
         device = up_device_new ();
