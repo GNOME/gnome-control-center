@@ -846,6 +846,9 @@ up_client_changed (CcPowerPanel *self)
                       "state", UP_DEVICE_STATE_DISCHARGING,
                       "time-to-empty", 287,
                       "icon-name", "battery-full-symbolic",
+                      "power-supply", FALSE,
+                      "is-present", TRUE,
+                      "battery-level", UP_DEVICE_LEVEL_NONE,
                       NULL);
         g_ptr_array_add (self->devices, device);
         device = up_device_new ();
@@ -857,6 +860,9 @@ up_client_changed (CcPowerPanel *self)
                       "state", UP_DEVICE_STATE_DISCHARGING,
                       "time-to-empty", 250,
                       "icon-name", "battery-good-symbolic",
+                      "power-supply", FALSE,
+                      "is-present", TRUE,
+                      "battery-level", UP_DEVICE_LEVEL_NONE,
                       NULL);
         g_ptr_array_add (self->devices, device);
         device = up_device_new ();
@@ -870,7 +876,11 @@ up_client_changed (CcPowerPanel *self)
                       "energy-full", 55.0,
                       "energy-rate", 15.0,
                       "time-to-empty", 400,
+                      "time-to-full", 0,
                       "icon-name", "battery-full-charged-symbolic",
+                      "power-supply", TRUE,
+                      "is-present", TRUE,
+                      "battery-level", UP_DEVICE_LEVEL_NONE,
                       NULL);
         g_ptr_array_add (self->devices, device);
       }
