@@ -486,6 +486,11 @@ cc_display_config_class_init (CcDisplayConfigClass *klass)
                 G_SIGNAL_RUN_LAST,
                 0, NULL, NULL, NULL,
                 G_TYPE_NONE, 0);
+  g_signal_new ("panel-orientation-managed",
+                CC_TYPE_DISPLAY_CONFIG,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 1, G_TYPE_BOOLEAN);
 
   gobject_class->constructed = cc_display_config_constructed;
   gobject_class->finalize = cc_display_config_finalize;
