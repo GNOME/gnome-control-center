@@ -877,6 +877,7 @@ struct _CcDisplayConfigDBus
 
   GVariant *state;
   GDBusConnection *connection;
+  GDBusProxy *proxy;
 
   int min_width;
   int min_height;
@@ -996,17 +997,13 @@ config_apply (CcDisplayConfigDBus *self,
 
   cc_display_config_dbus_ensure_non_offset_coords (self);
 
-  retval = g_dbus_connection_call_sync (self->connection,
-                                        "org.gnome.Mutter.DisplayConfig",
-                                        "/org/gnome/Mutter/DisplayConfig",
-                                        "org.gnome.Mutter.DisplayConfig",
-                                        "ApplyMonitorsConfig",
-                                        build_apply_parameters (self, method),
-                                        NULL,
-                                        G_DBUS_CALL_FLAGS_NO_AUTO_START,
-                                        -1,
-                                        NULL,
-                                        error);
+  retval = g_dbus_proxy_call_sync (self->proxy,
+                                   "ApplyMonitorsConfig",
+                                   build_apply_parameters (self, method),
+                                   G_DBUS_CALL_FLAGS_NO_AUTO_START,
+                                   -1,
+                                   NULL,
+                                   error);
   return retval != NULL;
 }
 
@@ -1432,6 +1429,7 @@ cc_display_config_dbus_constructed (GObject *object)
   g_autoptr(GVariantIter) monitors = NULL;
   g_autoptr(GVariantIter) logical_monitors = NULL;
   g_autoptr(GVariantIter) props = NULL;
+  g_autoptr(GError) error = NULL;
 
   g_variant_get (self->state,
                  CURRENT_STATE_FORMAT,
@@ -1471,6 +1469,16 @@ cc_display_config_dbus_constructed (GObject *object)
     }
 
   construct_monitors (self, monitors, logical_monitors);
+
+  self->proxy = g_dbus_proxy_new_sync (self->connection,
+                                       G_DBUS_PROXY_FLAGS_NONE,
+                                       NULL,
+                                       "org.gnome.Mutter.DisplayConfig",
+                                       "/org/gnome/Mutter/DisplayConfig",
+                                       "org.gnome.Mutter.DisplayConfig",
+                                       NULL,
+                                       &error);
+  g_assert_no_error (error);
 
   G_OBJECT_CLASS (cc_display_config_dbus_parent_class)->constructed (object);
 }
@@ -1524,6 +1532,7 @@ cc_display_config_dbus_finalize (GObject *object)
 
   g_clear_pointer (&self->state, g_variant_unref);
   g_clear_object (&self->connection);
+  g_clear_object (&self->proxy);
 
   g_list_foreach (self->monitors, (GFunc) g_object_unref, NULL);
   g_clear_pointer (&self->monitors, g_list_free);
