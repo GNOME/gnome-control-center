@@ -831,6 +831,7 @@ up_client_changed (CcPowerPanel *self)
 #ifdef TEST_FAKE_DEVICES
   {
     static gboolean fake_devices_added = FALSE;
+    UpDevice *device;
 
     if (!fake_devices_added)
       {
@@ -879,6 +880,7 @@ up_client_changed (CcPowerPanel *self)
 #ifdef TEST_UPS
   {
     static gboolean fake_devices_added = FALSE;
+    UpDevice *device;
 
     if (!fake_devices_added)
       {
