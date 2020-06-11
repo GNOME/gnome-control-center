@@ -1269,6 +1269,23 @@ cc_display_config_dbus_is_scaled_mode_valid (CcDisplayConfig *pself,
   return is_scaled_mode_allowed (self, mode, scale);
 }
 
+static gboolean
+cc_display_config_dbus_get_panel_orientation_managed (CcDisplayConfig *pself)
+{
+  CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
+  gboolean retval;
+  GVariant *v;
+
+  v = g_dbus_proxy_get_cached_property (self->proxy, "PanelOrientationManaged");
+  if (!v)
+    return FALSE;
+
+  retval = g_variant_get_boolean (v);
+  g_variant_unref (v);
+
+  return retval;
+}
+
 static void
 cc_display_config_dbus_init (CcDisplayConfigDBus *self)
 {
@@ -1564,6 +1581,8 @@ cc_display_config_dbus_class_init (CcDisplayConfigDBusClass *klass)
   parent_class->is_layout_logical = cc_display_config_dbus_is_layout_logical;
   parent_class->is_scaled_mode_valid = cc_display_config_dbus_is_scaled_mode_valid;
   parent_class->set_minimum_size = cc_display_config_dbus_set_minimum_size;
+  parent_class->get_panel_orientation_managed =
+    cc_display_config_dbus_get_panel_orientation_managed;
 
   pspec = g_param_spec_variant ("state",
                                 "GVariant",
