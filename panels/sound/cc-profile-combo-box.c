@@ -119,7 +119,11 @@ cc_profile_combo_box_set_device (CcProfileComboBox *self,
                           -1);
 
       if (g_strcmp0 (gvc_mixer_ui_device_get_active_profile (device), profile->profile) == 0)
-        gtk_combo_box_set_active_iter (GTK_COMBO_BOX (self), &iter);
+        {
+          g_signal_handlers_block_by_func(self, profile_changed_cb, self);
+          gtk_combo_box_set_active_iter (GTK_COMBO_BOX (self), &iter);
+          g_signal_handlers_unblock_by_func(self, profile_changed_cb, self);
+        }
     }
 }
 
