@@ -44,8 +44,7 @@ sources = files(
   'cc-sharing-networks.c',
   'cc-sharing-switch.c',
   'cc-gnome-remote-desktop.c',
-  'file-share-properties.c',
-  'vino-preferences.c'
+  'file-share-properties.c'
 )
 
 resource_data = files(
