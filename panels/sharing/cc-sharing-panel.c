@@ -24,7 +24,6 @@
 
 #include "list-box-helper.h"
 #include "cc-sharing-resources.h"
-#include "vino-preferences.h"
 #include "cc-remote-login.h"
 #include "file-share-properties.h"
 #include "cc-media-sharing.h"
@@ -43,7 +42,6 @@ static void cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self, Gt
 static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
                                                           CcSharingPanel *self);
 
-#define VINO_SCHEMA_ID "org.gnome.Vino"
 #define FILE_SHARING_SCHEMA_ID "org.gnome.desktop.file-sharing"
 #define GNOME_REMOTE_DESKTOP_SCHEMA_ID "org.gnome.desktop.remote-desktop"
 #define GNOME_REMOTE_DESKTOP_VNC_SCHEMA_ID "org.gnome.desktop.remote-desktop.vnc"
@@ -1023,67 +1021,6 @@ screen_sharing_password_insert_text_cb (GtkEditable *editable,
 #undef MAX_PASSWORD_SIZE
 
 static void
-cc_sharing_panel_setup_screen_sharing_dialog_vino (CcSharingPanel *self)
-{
-  GSettings *settings;
-  GtkWidget *networks, *box, *w;
-
-  cc_sharing_panel_bind_switch_to_widgets (self->require_password_radiobutton,
-                                           self->password_grid,
-                                           NULL);
-
-  cc_sharing_panel_setup_label_with_hostname (self,
-                                              self->screen_sharing_label);
-
-  /* settings bindings */
-  settings = g_settings_new (VINO_SCHEMA_ID);
-  g_settings_bind (settings, "view-only", self->remote_control_checkbutton,
-                   "active",
-                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_settings_bind (settings, "prompt-enabled",
-                   self->approve_connections_radiobutton, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind_with_mapping (settings, "authentication-methods",
-                                self->require_password_radiobutton,
-                                "active",
-                                G_SETTINGS_BIND_DEFAULT,
-                                vino_get_authtype, vino_set_authtype, NULL, NULL);
-
-  g_settings_bind_with_mapping (settings, "vnc-password",
-                                self->remote_control_password_entry,
-                                "text",
-                                G_SETTINGS_BIND_DEFAULT,
-                                vino_get_password, vino_set_password, NULL, NULL);
-
-  g_object_bind_property (self->show_password_checkbutton, "active",
-                          self->remote_control_password_entry, "visibility",
-                          G_BINDING_SYNC_CREATE);
-
-  /* make sure the password entry is hidden by default */
-  g_signal_connect (self->screen_sharing_dialog, "show",
-                    G_CALLBACK (screen_sharing_show_cb), self);
-
-  g_signal_connect (self->screen_sharing_dialog, "hide",
-                    G_CALLBACK (screen_sharing_hide_cb), self);
-
-  /* accept at most 8 bytes in password entry */
-  g_signal_connect (self->remote_control_password_entry, "insert-text",
-                    G_CALLBACK (screen_sharing_password_insert_text_cb), self);
-
-  networks = cc_sharing_networks_new (self->sharing_proxy, "vino-server");
-  box = self->remote_control_box;
-  gtk_box_pack_end (GTK_BOX (box), networks, TRUE, TRUE, 0);
-  gtk_widget_show (networks);
-
-  w = cc_sharing_switch_new (networks);
-  gtk_header_bar_pack_start (GTK_HEADER_BAR (self->screen_sharing_headerbar), w);
-  self->screen_sharing_switch = w;
-
-  cc_sharing_panel_bind_networks_to_label (self, networks,
-                                           self->screen_sharing_status_label);
-}
-
-static void
 cc_sharing_panel_setup_screen_sharing_dialog_gnome_remote_desktop (CcSharingPanel *self)
 {
   g_autoptr(GSettings) vnc_settings = NULL;
@@ -1229,18 +1166,8 @@ sharing_proxy_ready (GObject      *source,
   cc_sharing_panel_setup_remote_login_dialog (self);
 
   /* screen sharing */
-#ifdef GDK_WINDOWING_WAYLAND
-  if (GDK_IS_WAYLAND_DISPLAY (gdk_display_get_default ()))
-    {
-      check_remote_desktop_available (self);
-      gtk_widget_hide (self->screen_sharing_button);
-    }
-  else
-#endif
-  if (cc_sharing_panel_check_schema_available (self, VINO_SCHEMA_ID))
-    cc_sharing_panel_setup_screen_sharing_dialog_vino (self);
-  else
-    gtk_widget_hide (self->screen_sharing_button);
+  check_remote_desktop_available (self);
+  gtk_widget_hide (self->screen_sharing_button);
 }
 
 static void
