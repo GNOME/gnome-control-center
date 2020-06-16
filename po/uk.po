@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2020-05-28 13:26+0000\n"
-"PO-Revision-Date: 2020-05-28 18:21+0300\n"
+"POT-Creation-Date: 2020-06-16 14:26+0000\n"
+"PO-Revision-Date: 2020-06-16 17:38+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1186,6 +1186,37 @@ msgstr "Розблокуйте, щоб змінити налаштування"
 msgid "Some settings must be unlocked before they can be changed."
 msgstr "Перед внесенням змін слід розблокувати деякі налаштування."
 
+#: panels/common/cc-time-editor.ui:33
+msgid "Increment Hour"
+msgstr "Збільшити на годину"
+
+#: panels/common/cc-time-editor.ui:65
+msgid "Increment Minute"
+msgstr "Збільшити на хвилину"
+
+#: panels/common/cc-time-editor.ui:80
+#| msgid "Times"
+msgid "Time"
+msgstr "Час"
+
+#: panels/common/cc-time-editor.ui:113
+msgid "Decrement Hour"
+msgstr "Зменшити на годину"
+
+#: panels/common/cc-time-editor.ui:145
+msgid "Decrement Minute"
+msgstr "Зменшити на хвилину"
+
+#: panels/common/cc-time-entry.c:219
+#| msgid "Copy"
+msgid "_Copy"
+msgstr "_Копіювати"
+
+#: panels/common/cc-time-entry.c:225
+#| msgid "Select"
+msgid "Select _All"
+msgstr "Позна_чити все"
+
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:152
 msgid "Today"
@@ -1292,17 +1323,17 @@ msgid "Year"
 msgstr "Рік"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:334
+#: panels/datetime/cc-datetime-panel.c:257
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:339
+#: panels/datetime/cc-datetime-panel.c:262
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:504
+#: panels/datetime/cc-datetime-panel.c:431
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1310,7 +1341,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:531
+#: panels/datetime/cc-datetime-panel.c:458
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1318,23 +1349,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:538
+#: panels/datetime/cc-datetime-panel.c:465
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:543
+#: panels/datetime/cc-datetime-panel.c:470
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:548
+#: panels/datetime/cc-datetime-panel.c:475
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:553
+#: panels/datetime/cc-datetime-panel.c:480
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1393,65 +1424,48 @@ msgstr "Грудень"
 msgid "Date & Time"
 msgstr "Дата й час"
 
-#: panels/datetime/cc-datetime-panel.ui:113
-#: panels/display/cc-night-light-page.ui:194
-#: panels/display/cc-night-light-page.ui:297
-msgid "Hour"
-msgstr "Година"
-
-#. Translator: this is the separator between hours and minutes, like in HH∶MM
-#: panels/datetime/cc-datetime-panel.ui:128
-msgid "∶"
-msgstr "∶"
-
-#: panels/datetime/cc-datetime-panel.ui:152
-#: panels/display/cc-night-light-page.ui:222
-#: panels/display/cc-night-light-page.ui:325
-msgid "Minute"
-msgstr "Хвилина"
-
-#: panels/datetime/cc-datetime-panel.ui:219
+#: panels/datetime/cc-datetime-panel.ui:102
 msgid "Time Zone"
 msgstr "Часовий пояс"
 
-#: panels/datetime/cc-datetime-panel.ui:240
+#: panels/datetime/cc-datetime-panel.ui:123
 msgid "Search for a city"
 msgstr "Пошук за містом"
 
-#: panels/datetime/cc-datetime-panel.ui:313
+#: panels/datetime/cc-datetime-panel.ui:196
 msgid "Automatic _Date & Time"
 msgstr "Автоматичні _дата та час"
 
-#: panels/datetime/cc-datetime-panel.ui:314
+#: panels/datetime/cc-datetime-panel.ui:197
 msgid "Requires internet access"
 msgstr "Потребує зв'язок з інтернетом"
 
-#: panels/datetime/cc-datetime-panel.ui:334
+#: panels/datetime/cc-datetime-panel.ui:217
 msgid "Automatic Time _Zone"
 msgstr "Автоматичні часові _пояси"
 
-#: panels/datetime/cc-datetime-panel.ui:335
+#: panels/datetime/cc-datetime-panel.ui:218
 msgid "Requires location services enabled and internet access"
 msgstr ""
 "Вимагає увімкнених служб даних місця перебування і доступу до інтернету"
 
-#: panels/datetime/cc-datetime-panel.ui:350
+#: panels/datetime/cc-datetime-panel.ui:233
 msgid "Date & _Time"
 msgstr "Дата й _час"
 
-#: panels/datetime/cc-datetime-panel.ui:366
+#: panels/datetime/cc-datetime-panel.ui:249
 msgid "Time Z_one"
 msgstr "_Часовий пояс"
 
-#: panels/datetime/cc-datetime-panel.ui:405
+#: panels/datetime/cc-datetime-panel.ui:288
 msgid "Time _Format"
 msgstr "_Формат часу"
 
-#: panels/datetime/cc-datetime-panel.ui:414
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "24-hour"
 msgstr "24-ох годинний"
 
-#: panels/datetime/cc-datetime-panel.ui:415
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "AM / PM"
 msgstr "До / після полудня "
 
@@ -1717,10 +1731,20 @@ msgstr "Терміни"
 msgid "From"
 msgstr "З"
 
+#: panels/display/cc-night-light-page.ui:194
+#: panels/display/cc-night-light-page.ui:297
+msgid "Hour"
+msgstr "Година"
+
 #: panels/display/cc-night-light-page.ui:203
 #: panels/display/cc-night-light-page.ui:306
 msgid ":"
 msgstr ":"
+
+#: panels/display/cc-night-light-page.ui:222
+#: panels/display/cc-night-light-page.ui:325
+msgid "Minute"
+msgstr "Хвилина"
 
 #. This is the short form for the time period in the morning
 #: panels/display/cc-night-light-page.ui:234
@@ -2367,8 +2391,8 @@ msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
 msgstr ""
-"Заборонити новим пристроям USB взаємодіяти із системою, коли екран"
-" заблоковано."
+"Заборонити новим пристроям USB взаємодіяти із системою, коли екран "
+"заблоковано."
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
 #: panels/lock/cc-lock-panel.ui:168
@@ -4686,18 +4710,18 @@ msgid "Authentication Required"
 msgstr "Потрібно засвідчитись"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:685
+#: panels/printers/cc-printers-panel.c:675
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Принтер «%s» було успішно вилучено"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:903
+#: panels/printers/cc-printers-panel.c:893
 msgid "Failed to add new printer."
 msgstr "Не вдалось додати принтер."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1192
+#: panels/printers/cc-printers-panel.c:1182
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не вдалось завантажити інтерфейс: %s"
@@ -8072,3 +8096,6 @@ msgstr[2] "%u входів"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Системі звуки"
+
+#~ msgid "∶"
+#~ msgstr "∶"
