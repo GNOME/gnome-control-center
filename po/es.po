@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-06-02 15:48+0000\n"
-"PO-Revision-Date: 2020-06-03 11:45+0200\n"
+"POT-Creation-Date: 2020-06-16 14:26+0000\n"
+"PO-Revision-Date: 2020-06-17 13:51+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -1197,6 +1197,38 @@ msgstr "Desbloquear para cambiar la configuración"
 msgid "Some settings must be unlocked before they can be changed."
 msgstr "Algunos ajustes se deben desbloquear antes de poder cambiarlos."
 
+#: panels/common/cc-time-editor.ui:33
+msgid "Increment Hour"
+msgstr "Incrementar hora"
+
+#: panels/common/cc-time-editor.ui:65
+#| msgid "Increase size:"
+msgid "Increment Minute"
+msgstr "Incrementar minuto"
+
+#: panels/common/cc-time-editor.ui:80
+msgid "Time"
+msgstr "Hora"
+
+#: panels/common/cc-time-editor.ui:113
+msgid "Decrement Hour"
+msgstr "Reducir hora"
+
+#: panels/common/cc-time-editor.ui:145
+#| msgid "Decrease size:"
+msgid "Decrement Minute"
+msgstr "Reducir minuto"
+
+#: panels/common/cc-time-entry.c:219
+#| msgid "Copy"
+msgid "_Copy"
+msgstr "_Copiar"
+
+#: panels/common/cc-time-entry.c:225
+#| msgid "Select"
+msgid "Select _All"
+msgstr "Seleccionar _todo"
+
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:152
 msgid "Today"
@@ -1300,17 +1332,17 @@ msgid "Year"
 msgstr "Año"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:334
+#: panels/datetime/cc-datetime-panel.c:257
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%d/%b/%Y, %I:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:339
+#: panels/datetime/cc-datetime-panel.c:262
 msgid "%e %B %Y, %R"
 msgstr "%d/%b/%Y, %H:%M"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:504
+#: panels/datetime/cc-datetime-panel.c:431
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1318,7 +1350,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:531
+#: panels/datetime/cc-datetime-panel.c:458
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1326,23 +1358,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:538
+#: panels/datetime/cc-datetime-panel.c:465
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:543
+#: panels/datetime/cc-datetime-panel.c:470
 msgid "%l:%M %p"
 msgstr "%H:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:548
+#: panels/datetime/cc-datetime-panel.c:475
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:553
+#: panels/datetime/cc-datetime-panel.c:480
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1401,64 +1433,47 @@ msgstr "diciembre"
 msgid "Date & Time"
 msgstr "Fecha y hora"
 
-#: panels/datetime/cc-datetime-panel.ui:113
-#: panels/display/cc-night-light-page.ui:194
-#: panels/display/cc-night-light-page.ui:297
-msgid "Hour"
-msgstr "Hora"
-
-#. Translator: this is the separator between hours and minutes, like in HH∶MM
-#: panels/datetime/cc-datetime-panel.ui:128
-msgid "∶"
-msgstr "∶"
-
-#: panels/datetime/cc-datetime-panel.ui:152
-#: panels/display/cc-night-light-page.ui:222
-#: panels/display/cc-night-light-page.ui:325
-msgid "Minute"
-msgstr "Minuto"
-
-#: panels/datetime/cc-datetime-panel.ui:219
+#: panels/datetime/cc-datetime-panel.ui:102
 msgid "Time Zone"
 msgstr "Zona horaria"
 
-#: panels/datetime/cc-datetime-panel.ui:240
+#: panels/datetime/cc-datetime-panel.ui:123
 msgid "Search for a city"
 msgstr "Buscar una ciudad"
 
-#: panels/datetime/cc-datetime-panel.ui:313
+#: panels/datetime/cc-datetime-panel.ui:196
 msgid "Automatic _Date & Time"
 msgstr "Fecha y _hora automáticas"
 
-#: panels/datetime/cc-datetime-panel.ui:314
+#: panels/datetime/cc-datetime-panel.ui:197
 msgid "Requires internet access"
 msgstr "Requiere conexión a Internet"
 
-#: panels/datetime/cc-datetime-panel.ui:334
+#: panels/datetime/cc-datetime-panel.ui:217
 msgid "Automatic Time _Zone"
 msgstr "_Zona horaria automática"
 
-#: panels/datetime/cc-datetime-panel.ui:335
+#: panels/datetime/cc-datetime-panel.ui:218
 msgid "Requires location services enabled and internet access"
 msgstr "Requiere activar los servicios de ubicación y el acceso a Internet"
 
-#: panels/datetime/cc-datetime-panel.ui:350
+#: panels/datetime/cc-datetime-panel.ui:233
 msgid "Date & _Time"
 msgstr "Fecha y _hora"
 
-#: panels/datetime/cc-datetime-panel.ui:366
+#: panels/datetime/cc-datetime-panel.ui:249
 msgid "Time Z_one"
 msgstr "Z_ona horaria"
 
-#: panels/datetime/cc-datetime-panel.ui:405
+#: panels/datetime/cc-datetime-panel.ui:288
 msgid "Time _Format"
 msgstr "Formato de _fecha"
 
-#: panels/datetime/cc-datetime-panel.ui:414
+#: panels/datetime/cc-datetime-panel.ui:297
 msgid "24-hour"
 msgstr "24 horas"
 
-#: panels/datetime/cc-datetime-panel.ui:415
+#: panels/datetime/cc-datetime-panel.ui:298
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1725,10 +1740,20 @@ msgstr "Horas"
 msgid "From"
 msgstr "De"
 
+#: panels/display/cc-night-light-page.ui:194
+#: panels/display/cc-night-light-page.ui:297
+msgid "Hour"
+msgstr "Hora"
+
 #: panels/display/cc-night-light-page.ui:203
 #: panels/display/cc-night-light-page.ui:306
 msgid ":"
 msgstr ":"
+
+#: panels/display/cc-night-light-page.ui:222
+#: panels/display/cc-night-light-page.ui:325
+msgid "Minute"
+msgstr "Minuto"
 
 #. This is the short form for the time period in the morning
 #: panels/display/cc-night-light-page.ui:234
@@ -4687,18 +4712,18 @@ msgid "Authentication Required"
 msgstr "Se requiere autenticación"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:685
+#: panels/printers/cc-printers-panel.c:675
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Se ha eliminado la impresora «%s»"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:903
+#: panels/printers/cc-printers-panel.c:893
 msgid "Failed to add new printer."
 msgstr "Falló al añadir una impresora nueva."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1192
+#: panels/printers/cc-printers-panel.c:1182
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No se pudo cargar la IU: %s"
@@ -8090,6 +8115,9 @@ msgstr[1] "%u entradas"
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
 
+#~ msgid "∶"
+#~ msgstr "∶"
+
 #~ msgid ""
 #~ "To create a user account,\n"
 #~ "click the * icon first"
@@ -9722,9 +9750,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "Job State"
 #~ msgstr "Estado del trabajo"
 
-#~ msgid "Time"
-#~ msgstr "Hora"
-
 #~ msgid "Done"
 #~ msgstr "Hecho"
 
@@ -11136,12 +11161,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "_Text size:"
 #~ msgstr "_Tamaño del texto:"
-
-#~ msgid "Increase size:"
-#~ msgstr "Aumentar tamaño:"
-
-#~ msgid "Decrease size:"
-#~ msgstr "Reducir tamaño:"
 
 #~ msgctxt "universal access, seeing"
 #~ msgid "Zoom"
