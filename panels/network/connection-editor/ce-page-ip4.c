@@ -152,13 +152,13 @@ update_row_gateway_sensitivity (CEPageIP4 *self)
 }
 
 static void
-remove_row (CEPageIP4 *self)
+remove_row (CEPageIP4 *self, GtkButton *button)
 {
         GtkWidget *list;
         GtkWidget *row;
         GtkWidget *row_box;
 
-        row_box = gtk_widget_get_parent (GTK_WIDGET (self));
+        row_box = gtk_widget_get_parent (GTK_WIDGET (button));
         row = gtk_widget_get_parent (row_box);
         list = gtk_widget_get_parent (row);
 

@@ -135,13 +135,13 @@ update_row_sensitivity (CEPageIP6 *self, GtkWidget *list)
 }
 
 static void
-remove_row (CEPageIP6 *self)
+remove_row (CEPageIP6 *self, GtkButton *button)
 {
         GtkWidget *row;
         GtkWidget *row_box;
         GtkWidget *list;
 
-        row_box = gtk_widget_get_parent (GTK_WIDGET (self));
+        row_box = gtk_widget_get_parent (GTK_WIDGET (button));
         row = gtk_widget_get_parent (row_box);
         list = gtk_widget_get_parent (row);
 
