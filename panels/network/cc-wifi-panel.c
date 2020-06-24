@@ -175,6 +175,42 @@ add_wifi_device (CcWifiPanel *self,
 }
 
 static void
+remove_wifi_device (CcWifiPanel *self,
+                    NMDevice    *device)
+{
+  GtkWidget *child;
+  const gchar *id;
+  guint i;
+
+  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
+    return;
+
+  id = nm_device_get_udi (device);
+
+  /* Destroy all stack pages related to this device */
+  child = gtk_stack_get_child_by_name (self->stack, id);
+  gtk_widget_destroy (child);
+
+  child = gtk_stack_get_child_by_name (self->header_stack, id);
+  gtk_widget_destroy (child);
+
+  /* Remove from the devices list */
+  for (i = 0; i < self->devices->len; i++)
+    {
+      NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
+
+      if (net_device_wifi_get_device (net_device) == device)
+        {
+          g_ptr_array_remove (self->devices, net_device);
+          break;
+        }
+    }
+
+  /* Update the title widget */
+  update_devices_names (self);
+}
+
+static void
 check_main_stack_page (CcWifiPanel *self)
 {
   const gchar *nm_version;
@@ -426,38 +462,7 @@ device_added_cb (CcWifiPanel *self, NMDevice *device)
 static void
 device_removed_cb (CcWifiPanel *self, NMDevice *device)
 {
-  GtkWidget *child;
-  const gchar *id;
-  guint i;
-
-  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
-    return;
-
-  id = nm_device_get_udi (device);
-
-  /* Destroy all stack pages related to this device */
-  child = gtk_stack_get_child_by_name (self->stack, id);
-  gtk_widget_destroy (child);
-
-  child = gtk_stack_get_child_by_name (self->header_stack, id);
-  gtk_widget_destroy (child);
-
-  /* Remove from the devices list */
-  for (i = 0; i < self->devices->len; i++)
-    {
-      NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
-
-      if (net_device_wifi_get_device (net_device) == device)
-        {
-          g_ptr_array_remove (self->devices, net_device);
-          break;
-        }
-    }
-
-  /* Update the title widget */
-  update_devices_names (self);
-
-  /* And check which page should be visible */
+  remove_wifi_device (self, device);
   check_main_stack_page (self);
 }
 
