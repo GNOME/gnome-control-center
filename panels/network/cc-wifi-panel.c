@@ -511,6 +511,10 @@ device_removed_cb (CcWifiPanel *self, NMDevice *device)
 
   remove_wifi_device(self, device);
   check_main_stack_page (self);
+
+  g_signal_handlers_disconnect_by_func (device,
+                                        G_CALLBACK (device_state_changed_cb),
+                                        self);
 }
 
 static void
