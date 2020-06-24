@@ -180,13 +180,6 @@ remove_wifi_device (CcWifiPanel *self,
 
   id = nm_device_get_udi (device);
 
-  /* Destroy all stack pages related to this device */
-  child = gtk_stack_get_child_by_name (self->stack, id);
-  gtk_widget_destroy (child);
-
-  child = gtk_stack_get_child_by_name (self->header_stack, id);
-  gtk_widget_destroy (child);
-
   /* Remove from the devices list */
   for (i = 0; i < self->devices->len; i++)
     {
@@ -198,6 +191,13 @@ remove_wifi_device (CcWifiPanel *self,
           break;
         }
     }
+
+  /* Destroy all stack pages related to this device */
+  child = gtk_stack_get_child_by_name (self->stack, id);
+  gtk_widget_destroy (child);
+
+  child = gtk_stack_get_child_by_name (self->header_stack, id);
+  gtk_widget_destroy (child);
 
   /* Update the title widget */
   update_devices_names (self);
