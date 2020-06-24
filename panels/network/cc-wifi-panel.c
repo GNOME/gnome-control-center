@@ -453,18 +453,54 @@ verify_argv (CcWifiPanel  *self,
 /* Callbacks */
 
 static void
-device_added_cb (CcWifiPanel *self, NMDevice *device)
+device_state_changed_cb (NMDevice *device, GParamSpec *pspec, CcWifiPanel *self)
 {
-  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
+  const gchar *id;
+
+  id = nm_device_get_udi (device);
+  /* Don't add a device that has already been added */
+  if (!NM_IS_DEVICE_WIFI (device) || !id)
     return;
 
-  add_wifi_device (self, device);
-  check_main_stack_page (self);
+  if (nm_device_get_managed (device))
+    {
+      if (gtk_stack_get_child_by_name (self->stack, id))
+        return;
+      add_wifi_device (self, device);
+      check_main_stack_page (self);
+    }
+  else
+    {
+      if (!gtk_stack_get_child_by_name (self->stack, id))
+        return;
+      remove_wifi_device (self, device);
+      check_main_stack_page (self);
+    }
+}
+
+static void
+device_added_cb (CcWifiPanel *self, NMDevice *device)
+{
+  if (!NM_IS_DEVICE_WIFI (device))
+    return;
+
+  if (nm_device_get_managed (device))
+    {
+      add_wifi_device (self, device);
+      check_main_stack_page (self);
+    }
+
+  g_signal_connect (device,
+                    "notify::state",
+                    G_CALLBACK (device_state_changed_cb),
+                    self);
 }
 
 static void
 device_removed_cb (CcWifiPanel *self, NMDevice *device)
 {
+  const gchar *id;
+
   if (!NM_IS_DEVICE_WIFI (device))
     return;
 
