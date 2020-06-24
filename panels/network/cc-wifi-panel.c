@@ -148,10 +148,6 @@ add_wifi_device (CcWifiPanel *self,
   GtkWidget *header_widget;
   NetDeviceWifi *net_device;
 
-  /* Only manage Wi-Fi devices */
-  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
-    return;
-
   /* Create the NetDevice */
   net_device = net_device_wifi_new (CC_PANEL (self),
                                     self->client,
@@ -181,9 +177,6 @@ remove_wifi_device (CcWifiPanel *self,
   GtkWidget *child;
   const gchar *id;
   guint i;
-
-  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
-    return;
 
   id = nm_device_get_udi (device);
 
@@ -243,7 +236,14 @@ load_wifi_devices (CcWifiPanel *self)
   if (devices)
     {
       for (i = 0; i < devices->len; i++)
-        add_wifi_device (self, g_ptr_array_index (devices, i));
+        {
+          NMDevice *device;
+
+          device = g_ptr_array_index (devices, i);
+          if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
+            continue;
+          add_wifi_device (self, device);
+        }
     }
 
   check_main_stack_page (self);
@@ -455,6 +455,9 @@ verify_argv (CcWifiPanel  *self,
 static void
 device_added_cb (CcWifiPanel *self, NMDevice *device)
 {
+  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
+    return;
+
   add_wifi_device (self, device);
   check_main_stack_page (self);
 }
@@ -462,7 +465,10 @@ device_added_cb (CcWifiPanel *self, NMDevice *device)
 static void
 device_removed_cb (CcWifiPanel *self, NMDevice *device)
 {
-  remove_wifi_device (self, device);
+  if (!NM_IS_DEVICE_WIFI (device))
+    return;
+
+  remove_wifi_device(self, device);
   check_main_stack_page (self);
 }
 
