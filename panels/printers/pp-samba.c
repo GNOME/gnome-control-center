@@ -33,9 +33,6 @@ struct _PpSamba
   PpHost    parent_instance;
 
   /* Auth info */
-  gchar    *server;
-  gchar    *share;
-  gchar    *workgroup;
   gchar    *username;
   gchar    *password;
   gboolean  waiting;
@@ -48,9 +45,6 @@ pp_samba_finalize (GObject *object)
 {
   PpSamba *self = PP_SAMBA (object);
 
-  g_clear_pointer (&self->server, g_free);
-  g_clear_pointer (&self->share, g_free);
-  g_clear_pointer (&self->workgroup, g_free);
   g_clear_pointer (&self->username, g_free);
   g_clear_pointer (&self->password, g_free);
 
@@ -150,9 +144,6 @@ auth_fn (SMBCCTX    *smb_context,
 
   if (!data->cancelled)
     {
-      samba->server = g_strdup (server);
-      samba->share = g_strdup (share);
-      samba->workgroup = g_strdup (workgroup);
       samba->username = g_strdup (username);
       samba->password = g_strdup (password);
 

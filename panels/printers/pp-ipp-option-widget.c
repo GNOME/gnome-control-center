@@ -41,7 +41,6 @@ struct _PpIPPOptionWidget
   GtkWidget *switch_button;
   GtkWidget *spin_button;
   GtkWidget *combo;
-  GtkWidget *box;
 
   IPPAttribute *option_supported;
   IPPAttribute *option_default;

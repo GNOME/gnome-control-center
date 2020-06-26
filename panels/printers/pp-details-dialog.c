@@ -52,7 +52,6 @@ struct _PpDetailsDialog {
   GtkButton    *search_for_drivers_button;
 
   gchar        *printer_name;
-  gchar        *printer_location;
   gchar        *ppd_file_name;
   PPDList      *all_ppds_list;
   GCancellable *cancellable;
@@ -306,7 +305,6 @@ pp_details_dialog_dispose (GObject *object)
   PpDetailsDialog *self = PP_DETAILS_DIALOG (object);
 
   g_clear_pointer (&self->printer_name, g_free);
-  g_clear_pointer (&self->printer_location, g_free);
   g_clear_pointer (&self->ppd_file_name, g_free);
 
   if (self->all_ppds_list != NULL)
@@ -363,7 +361,6 @@ pp_details_dialog_new (gchar   *printer_name,
                        NULL);
 
   self->printer_name = g_strdup (printer_name);
-  self->printer_location = g_strdup (printer_location);
   self->ppd_file_name = NULL;
 
   /* Translators: This is the title of the dialog. %s is the printer name. */
