@@ -551,6 +551,10 @@ pp_new_printer_dialog_finalize (GObject *object)
   g_clear_object (&self->local_printer_icon);
   g_clear_object (&self->remote_printer_icon);
   g_clear_object (&self->authenticated_server_icon);
+  g_clear_object (&self->snmp_host);
+  g_clear_object (&self->socket_host);
+  g_clear_object (&self->lpd_host);
+  g_clear_object (&self->remote_cups_host);
   g_clear_object (&self->samba_host);
 
   if (self->num_of_dests > 0)
@@ -1079,18 +1083,13 @@ get_snmp_devices_cb (GObject      *source_object,
                      gpointer      user_data)
 {
   PpNewPrinterDialog        *self = user_data;
-  PpHost                    *host = (PpHost *) source_object;
   g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
-  result = pp_host_get_snmp_devices_finish (host, res, &error);
-  g_object_unref (source_object);
+  result = pp_host_get_snmp_devices_finish (PP_HOST (source_object), res, &error);
 
   if (result)
     {
-      if ((gpointer) source_object == (gpointer) self->snmp_host)
-        self->snmp_host = NULL;
-
       add_devices_to_list (self, result->devices);
 
       update_dialog_state (self);
@@ -1102,9 +1101,6 @@ get_snmp_devices_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           g_warning ("%s", error->message);
-
-          if ((gpointer) source_object == (gpointer) self->snmp_host)
-            self->snmp_host = NULL;
 
           update_dialog_state (self);
         }
@@ -1117,18 +1113,13 @@ get_remote_cups_devices_cb (GObject      *source_object,
                             gpointer      user_data)
 {
   PpNewPrinterDialog        *self = user_data;
-  PpHost                    *host = (PpHost *) source_object;
   g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
-  result = pp_host_get_remote_cups_devices_finish (host, res, &error);
-  g_object_unref (source_object);
+  result = pp_host_get_remote_cups_devices_finish (PP_HOST (source_object), res, &error);
 
   if (result)
     {
-      if ((gpointer) source_object == (gpointer) self->remote_cups_host)
-        self->remote_cups_host = NULL;
-
       add_devices_to_list (self, result->devices);
 
       update_dialog_state (self);
@@ -1140,9 +1131,6 @@ get_remote_cups_devices_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           g_warning ("%s", error->message);
-
-          if ((gpointer) source_object == (gpointer) self->remote_cups_host)
-            self->remote_cups_host = NULL;
 
           update_dialog_state (self);
         }
@@ -1219,18 +1207,13 @@ get_jetdirect_devices_cb (GObject      *source_object,
                           gpointer      user_data)
 {
   PpNewPrinterDialog        *self = user_data;
-  PpHost                    *host = (PpHost *) source_object;
   g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
-  result = pp_host_get_jetdirect_devices_finish (host, res, &error);
-  g_object_unref (source_object);
+  result = pp_host_get_jetdirect_devices_finish (PP_HOST (source_object), res, &error);
 
   if (result != NULL)
     {
-      if ((gpointer) source_object == (gpointer) self->socket_host)
-        self->socket_host = NULL;
-
       add_devices_to_list (self, result->devices);
 
       update_dialog_state (self);
@@ -1242,9 +1225,6 @@ get_jetdirect_devices_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           g_warning ("%s", error->message);
-
-          if ((gpointer) source_object == (gpointer) self->socket_host)
-            self->socket_host = NULL;
 
           update_dialog_state (self);
         }
@@ -1257,18 +1237,13 @@ get_lpd_devices_cb (GObject      *source_object,
                     gpointer      user_data)
 {
   PpNewPrinterDialog        *self = user_data;
-  PpHost                    *host = (PpHost *) source_object;
   g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
-  result = pp_host_get_lpd_devices_finish (host, res, &error);
-  g_object_unref (source_object);
+  result = pp_host_get_lpd_devices_finish (PP_HOST (source_object), res, &error);
 
   if (result != NULL)
     {
-      if ((gpointer) source_object == (gpointer) self->lpd_host)
-        self->lpd_host = NULL;
-
       add_devices_to_list (self, result->devices);
 
       update_dialog_state (self);
@@ -1280,9 +1255,6 @@ get_lpd_devices_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           g_warning ("%s", error->message);
-
-          if ((gpointer) source_object == (gpointer) self->lpd_host)
-            self->lpd_host = NULL;
 
           update_dialog_state (self);
         }
