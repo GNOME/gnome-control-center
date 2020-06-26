@@ -1539,7 +1539,6 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
   success = g_file_copy_finish (G_FILE (source_object),
                                 res,
                                 &error);
-  g_object_unref (source_object);
 
   if (!success)
     {
@@ -1596,7 +1595,7 @@ printer_set_ppd_file_async (const gchar  *printer_name,
 {
   g_autoptr(GFileIOStream) stream = NULL;
   PSPData       *data;
-  GFile         *source_ppd_file;
+  g_autoptr(GFile) source_ppd_file = NULL;
   g_autoptr(GFile) destination_ppd_file = NULL;
 
   data = g_new0 (PSPData, 1);
