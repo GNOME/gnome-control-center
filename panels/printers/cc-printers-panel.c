@@ -255,7 +255,6 @@ printer_removed_cb (GObject      *source_object,
 
   g_object_get (printer, "printer-name", &printer_name, NULL);
   pp_printer_delete_finish (printer, result, &error);
-  g_object_unref (source_object);
 
   if (user_data != NULL)
     {
@@ -291,7 +290,7 @@ cc_printers_panel_dispose (GObject *object)
 
   if (self->deleted_printer_name != NULL)
     {
-      PpPrinter *printer = pp_printer_new (self->deleted_printer_name);
+      g_autoptr(PpPrinter) printer = pp_printer_new (self->deleted_printer_name);
       pp_printer_delete_async (printer,
                                NULL,
                                printer_removed_cb,
@@ -649,7 +648,7 @@ on_notification_dismissed (CcPrintersPanel *self)
 
   if (self->deleted_printer_name != NULL)
     {
-      PpPrinter *printer;
+      g_autoptr(PpPrinter) printer = NULL;
 
       printer = pp_printer_new (self->deleted_printer_name);
       /* The reference tells to the callback whether
