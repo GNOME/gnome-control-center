@@ -350,7 +350,7 @@ on_get_job_attributes_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   const gchar            *job_originating_user_name;
   const gchar            *job_printer_uri;
   g_autoptr(GVariant)     attributes = NULL;
@@ -398,7 +398,7 @@ on_cups_notification (GDBusConnection *connection,
                       GVariant        *parameters,
                       gpointer         user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   gboolean                printer_is_accepting_jobs;
   gchar                  *printer_name = NULL;
   gchar                  *text = NULL;
@@ -484,7 +484,7 @@ renew_subscription_cb (GObject      *source_object,
            GAsyncResult *result,
            gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   gint                    subscription_id;
 
   subscription_id = pp_cups_renew_subscription_finish (PP_CUPS (source_object), result);
@@ -514,7 +514,7 @@ attach_to_cups_notifier_cb (GObject      *source_object,
                             GAsyncResult *result,
                             gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   g_autoptr(GError)       error = NULL;
   gint                    subscription_id;
 
@@ -560,7 +560,7 @@ attach_to_cups_notifier_cb (GObject      *source_object,
 static void
 attach_to_cups_notifier (gpointer data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) data;
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (data);
 
   pp_cups_renew_subscription_async (self->cups,
                                     self->subscription_id,
@@ -582,7 +582,7 @@ subscription_cancel_cb (GObject      *source_object,
 static void
 detach_from_cups_notifier (gpointer data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) data;
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (data);
 
   if (self->dbus_subscription_id != 0) {
     g_dbus_connection_signal_unsubscribe (self->cups_bus_connection,
@@ -766,7 +766,7 @@ set_current_page (GObject      *source_object,
                   GAsyncResult *result,
                   gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel *) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   GtkWidget              *widget;
   gboolean               success;
 
@@ -785,7 +785,7 @@ static void
 destroy_nonexisting_entries (PpPrinterEntry *entry,
                              gpointer        user_data)
 {
-  CcPrintersPanel  *self = (CcPrintersPanel *) user_data;
+  CcPrintersPanel  *self = CC_PRINTERS_PANEL (user_data);
   g_autofree gchar *printer_name = NULL;
   gboolean          exists = FALSE;
   gint              i;
@@ -813,7 +813,7 @@ actualize_printers_list_cb (GObject      *source_object,
                             GAsyncResult *result,
                             gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   GtkWidget              *widget;
   PpCupsDests            *cups_dests;
   gboolean                new_printer_available = FALSE;
@@ -979,7 +979,7 @@ printer_add_cb (CcPrintersPanel *self)
 static void
 update_sensitivity (gpointer user_data)
 {
-  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel         *self = CC_PRINTERS_PANEL (user_data);
   const char              *cups_server = NULL;
   GtkWidget               *widget;
   gboolean                 local_server = TRUE;
@@ -1044,7 +1044,7 @@ cups_status_check_cb (GObject      *source_object,
                       GAsyncResult *result,
                       gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   gboolean                success;
 
   success = pp_cups_connection_test_finish (PP_CUPS (source_object), result, NULL);
@@ -1061,7 +1061,7 @@ cups_status_check_cb (GObject      *source_object,
 static gboolean
 cups_status_check (gpointer user_data)
 {
-  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (user_data);
 
   pp_cups_connection_test_async (self->cups, NULL, cups_status_check_cb, self);
 
@@ -1102,7 +1102,7 @@ static void
 get_all_ppds_async_cb (PPDList  *ppds,
                        gpointer  user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (user_data);
 
   self->all_ppds_list = ppds;
 
@@ -1119,7 +1119,7 @@ static gboolean
 filter_function (GtkListBoxRow *row,
                  gpointer       user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   GtkWidget              *search_entry;
   gboolean                retval;
   g_autofree gchar       *search = NULL;

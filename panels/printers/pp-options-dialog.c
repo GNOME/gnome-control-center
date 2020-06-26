@@ -681,7 +681,7 @@ static void
 printer_get_ppd_cb (const gchar *ppd_filename,
                     gpointer     user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = PP_OPTIONS_DIALOG (user_data);
 
   if (self->ppd_filename)
     {
@@ -703,7 +703,7 @@ static void
 get_named_dest_cb (cups_dest_t *dest,
                    gpointer     user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = PP_OPTIONS_DIALOG (user_data);
 
   if (self->destination)
     cupsFreeDests (1, self->destination);
@@ -722,7 +722,7 @@ static void
 get_ipp_attributes_cb (GHashTable *table,
                        gpointer    user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = PP_OPTIONS_DIALOG (user_data);
 
   if (self->ipp_attributes)
     g_hash_table_unref (self->ipp_attributes);

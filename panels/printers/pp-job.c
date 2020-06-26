@@ -408,7 +408,7 @@ _pp_job_authenticate_thread (GTask        *task,
                              gpointer      task_data,
                              GCancellable *cancellable)
 {
-  PpJob         *self = source_object;
+  PpJob         *self = PP_JOB (source_object);
   gboolean       result = FALSE;
   gchar        **auth_info = task_data;
   ipp_t         *request;

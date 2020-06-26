@@ -819,7 +819,7 @@ static void
 group_physical_devices_cb (gchar    ***device_uris,
                            gpointer    user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   GList                     *iter;
   gint                       i, j;
 
@@ -934,7 +934,7 @@ get_cups_devices_cb (GList    *devices,
                      gboolean  cancelled,
                      gpointer  user_data)
 {
-  PpNewPrinterDialog         *self = user_data;
+  PpNewPrinterDialog         *self = PP_NEW_PRINTER_DIALOG (user_data);
   g_autoptr(GDBusConnection)  bus = NULL;
   GVariantBuilder             device_list;
   GVariantBuilder             device_hash;
@@ -1082,7 +1082,7 @@ get_snmp_devices_cb (GObject      *source_object,
                      GAsyncResult *res,
                      gpointer      user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
@@ -1112,7 +1112,7 @@ get_remote_cups_devices_cb (GObject      *source_object,
                             GAsyncResult *res,
                             gpointer      user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
@@ -1142,7 +1142,7 @@ get_samba_host_devices_cb (GObject      *source_object,
                            GAsyncResult *res,
                            gpointer      user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   PpDevicesList             *result;
   g_autoptr(GError)          error = NULL;
 
@@ -1172,7 +1172,7 @@ get_samba_devices_cb (GObject      *source_object,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   PpDevicesList             *result;
   g_autoptr(GError)          error = NULL;
 
@@ -1206,7 +1206,7 @@ get_jetdirect_devices_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
@@ -1236,7 +1236,7 @@ get_lpd_devices_cb (GObject      *source_object,
                     GAsyncResult *res,
                     gpointer      user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   g_autoptr(GError)          error = NULL;
   PpDevicesList             *result;
 
@@ -1341,7 +1341,7 @@ search_for_remote_printers_free (THostSearchData *data)
 static gboolean
 search_for_remote_printers (THostSearchData *data)
 {
-  PpNewPrinterDialog *self = data->dialog;
+  PpNewPrinterDialog *self = PP_NEW_PRINTER_DIALOG (data->dialog);
 
   g_cancellable_cancel (self->remote_host_cancellable);
   g_clear_object (&self->remote_host_cancellable);
@@ -1720,7 +1720,7 @@ cups_get_dests_cb (GObject      *source_object,
                    GAsyncResult *res,
                    gpointer      user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   PpCupsDests               *dests;
   g_autoptr(GError)          error = NULL;
 
@@ -1778,7 +1778,7 @@ cell_data_func (GtkTreeViewColumn  *tree_column,
                 GtkTreeIter        *iter,
                 gpointer            user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   gboolean                   selected = FALSE;
   g_autofree gchar          *name = NULL;
   g_autofree gchar          *description = NULL;
@@ -1879,7 +1879,7 @@ printer_add_async_cb (GObject      *source_object,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   GtkResponseType            response_id = GTK_RESPONSE_OK;
   gboolean                   success;
   g_autoptr(GError)          error = NULL;
@@ -1908,7 +1908,7 @@ ppd_selection_cb (GtkDialog *_dialog,
                   gint       response_id,
                   gpointer   user_data)
 {
-  PpNewPrinterDialog        *self = user_data;
+  PpNewPrinterDialog        *self = PP_NEW_PRINTER_DIALOG (user_data);
   g_autoptr(PpNewPrinter)    new_printer = NULL;
   GList                     *original_names_list = NULL;
   gchar                     *ppd_name;
