@@ -37,7 +37,6 @@ struct _CcKeyboardManager
 {
   GObject             parent;
 
-  GtkListStore       *shortcuts_model;
   GtkListStore       *sections_store;
 
   GHashTable         *kb_system_sections;
@@ -254,16 +253,6 @@ add_shortcuts (CcKeyboardManager *self)
 
           if (!cc_keyboard_item_is_hidden (item))
             {
-              GtkTreeIter new_row;
-
-              gtk_list_store_append (self->shortcuts_model, &new_row);
-              gtk_list_store_set (self->shortcuts_model,
-                                  &new_row,
-                                  DETAIL_DESCRIPTION_COLUMN, cc_keyboard_item_get_description (item),
-                                  DETAIL_KEYENTRY_COLUMN, item,
-                                  DETAIL_TYPE_COLUMN, SHORTCUT_TYPE_KEY_ENTRY,
-                                  -1);
-
               g_signal_emit (self, signals[SHORTCUT_ADDED],
                              0,
                              item,
@@ -283,7 +272,6 @@ append_section (CcKeyboardManager  *self,
                 BindingGroupType    group,
                 const KeyListEntry *keys_list)
 {
-  GtkTreeModel *shortcut_model;
   GtkTreeIter iter;
   GHashTable *reverse_items;
   GHashTable *hash;
@@ -295,8 +283,6 @@ append_section (CcKeyboardManager  *self,
 
   if (!hash)
     return;
-
-  shortcut_model = GTK_TREE_MODEL (self->shortcuts_model);
 
   /* Add all CcKeyboardItems for this section */
   is_new = FALSE;
@@ -362,7 +348,6 @@ append_section (CcKeyboardManager  *self,
         }
 
       cc_keyboard_item_set_hidden (item, keys_list[i].hidden);
-      cc_keyboard_item_set_model (item, shortcut_model, group);
 
       g_ptr_array_add (keys_array, item);
     }
@@ -515,7 +500,6 @@ append_sections_from_gsettings (CcKeyboardManager *self)
 static void
 reload_sections (CcKeyboardManager *self)
 {
-  GtkTreeModel *shortcut_model;
   GHashTable *loaded_files;
   GDir *dir;
   gchar *default_wm_keybindings[] = { "Mutter", "GNOME Shell", NULL };
@@ -523,11 +507,8 @@ reload_sections (CcKeyboardManager *self)
   const gchar * const * data_dirs;
   guint i;
 
-  shortcut_model = GTK_TREE_MODEL (self->shortcuts_model);
-
   /* Clear previous models and hash tables */
   gtk_list_store_clear (GTK_LIST_STORE (self->sections_store));
-  gtk_list_store_clear (GTK_LIST_STORE (shortcut_model));
 
   g_clear_pointer (&self->kb_system_sections, g_hash_table_destroy);
   self->kb_system_sections = g_hash_table_new_full (g_str_hash,
@@ -703,11 +684,6 @@ cc_keyboard_manager_init (CcKeyboardManager *self)
                                              G_TYPE_STRING,
                                              G_TYPE_INT);
 
-  self->shortcuts_model = gtk_list_store_new (DETAIL_N_COLUMNS,
-                                              G_TYPE_STRING,
-                                              G_TYPE_POINTER,
-                                              G_TYPE_INT);
-
 #ifdef GDK_WINDOWING_X11
   if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
     self->wm_changed_id = wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
@@ -752,8 +728,6 @@ cc_keyboard_manager_create_custom_shortcut (CcKeyboardManager *self)
   settings_path = find_free_settings_path (self->binding_settings);
   cc_keyboard_item_load_from_gsettings_path (item, settings_path, TRUE);
 
-  cc_keyboard_item_set_model (item, GTK_TREE_MODEL (self->shortcuts_model), BINDING_GROUP_USER);
-
   return item;
 }
 
@@ -769,7 +743,6 @@ cc_keyboard_manager_add_custom_shortcut (CcKeyboardManager *self,
                                          CcKeyboardItem    *item)
 {
   GPtrArray *keys_array;
-  GtkTreeIter iter;
   GHashTable *hash;
   GVariantBuilder builder;
   char **settings_paths;
@@ -787,9 +760,6 @@ cc_keyboard_manager_add_custom_shortcut (CcKeyboardManager *self,
     }
 
   g_ptr_array_add (keys_array, item);
-
-  gtk_list_store_append (self->shortcuts_model, &iter);
-  gtk_list_store_set (self->shortcuts_model, &iter, DETAIL_KEYENTRY_COLUMN, item, -1);
 
   settings_paths = g_settings_get_strv (self->binding_settings, "custom-keybindings");
 
@@ -820,37 +790,15 @@ void
 cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager *self,
                                              CcKeyboardItem    *item)
 {
-  GtkTreeModel *model;
-  GtkTreeIter iter;
   GPtrArray *keys_array;
   GVariantBuilder builder;
-  gboolean valid;
   GSettings *settings;
   char **settings_paths;
   int i;
 
   g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
 
-  model = GTK_TREE_MODEL (self->shortcuts_model);
-  valid = gtk_tree_model_get_iter_first (model, &iter);
-
-  /* Search for the iter */
-  while (valid)
-    {
-      CcKeyboardItem  *current_item;
-
-      gtk_tree_model_get (model, &iter,
-                          DETAIL_KEYENTRY_COLUMN, &current_item,
-                          -1);
-
-      if (current_item == item)
-        break;
-
-      valid = gtk_tree_model_iter_next (model, &iter);
-    }
-
-  /* Shortcut not found or not a custom shortcut */
-  g_assert (valid);
+  /* Shortcut not a custom shortcut */
   g_assert (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH);
 
   settings = cc_keyboard_item_get_settings (item);
@@ -876,8 +824,6 @@ cc_keyboard_manager_remove_custom_shortcut  (CcKeyboardManager *self,
 
   keys_array = g_hash_table_lookup (get_hash_for_group (self, BINDING_GROUP_USER), CUSTOM_SHORTCUTS_ID);
   g_ptr_array_remove (keys_array, item);
-
-  gtk_list_store_remove (GTK_LIST_STORE (model), &iter);
 
   g_signal_emit (self, signals[SHORTCUT_REMOVED], 0, item);
 }
