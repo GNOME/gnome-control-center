@@ -1865,12 +1865,10 @@ printer_add_async_cb (GObject      *source_object,
 {
   PpNewPrinterDialog        *self = user_data;
   GtkResponseType            response_id = GTK_RESPONSE_OK;
-  PpNewPrinter              *new_printer = (PpNewPrinter *) source_object;
   gboolean                   success;
   g_autoptr(GError)          error = NULL;
 
-  success = pp_new_printer_add_finish (new_printer, res, &error);
-  g_object_unref (source_object);
+  success = pp_new_printer_add_finish (PP_NEW_PRINTER (source_object), res, &error);
 
   if (success)
     {
@@ -1895,7 +1893,7 @@ ppd_selection_cb (GtkDialog *_dialog,
                   gpointer   user_data)
 {
   PpNewPrinterDialog        *self = user_data;
-  PpNewPrinter              *new_printer;
+  g_autoptr(PpNewPrinter)    new_printer = NULL;
   GList                     *original_names_list = NULL;
   gchar                     *ppd_name;
   gchar                     *ppd_display_name;
