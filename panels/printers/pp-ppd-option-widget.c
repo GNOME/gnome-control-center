@@ -339,11 +339,8 @@ switch_changed_cb (PpPPDOptionWidget *self)
   else
     values[0] = g_strdup ("False");
 
-  if (self->cancellable)
-    {
-      g_cancellable_cancel (self->cancellable);
-      g_object_unref (self->cancellable);
-    }
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   self->cancellable = g_cancellable_new ();
   printer_add_option_async (self->printer_name,
@@ -365,11 +362,8 @@ combo_changed_cb (PpPPDOptionWidget *self)
   values = g_new0 (gchar *, 2);
   values[0] = combo_box_get (self->combo);
 
-  if (self->cancellable)
-    {
-      g_cancellable_cancel (self->cancellable);
-      g_object_unref (self->cancellable);
-    }
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   self->cancellable = g_cancellable_new ();
   printer_add_option_async (self->printer_name,

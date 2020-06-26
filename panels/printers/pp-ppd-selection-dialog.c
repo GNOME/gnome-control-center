@@ -375,7 +375,7 @@ pp_ppd_selection_dialog_free (PpPPDSelectionDialog *self)
 {
   gtk_widget_destroy (GTK_WIDGET (self->dialog));
 
-  g_object_unref (self->builder);
+  g_clear_object (&self->builder);
 
   g_free (self->ppd_name);
 
