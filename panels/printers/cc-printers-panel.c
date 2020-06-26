@@ -1272,41 +1272,12 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   /* initialize main data structure */
   self->builder = gtk_builder_new ();
-  self->dests = NULL;
-  self->num_dests = 0;
-
-  self->pp_new_printer_dialog = NULL;
-
-  self->subscription_id = 0;
-  self->cups_status_check_id = 0;
-  self->subscription_renewal_id = 0;
-  self->cups_proxy = NULL;
-  self->cups_bus_connection = NULL;
-  self->dbus_subscription_id = 0;
-  self->remove_printer_timeout_id = 0;
-
-  self->new_printer_name = NULL;
-  self->new_printer_location = NULL;
-  self->new_printer_make_and_model = NULL;
-  self->new_printer_on_network = FALSE;
-
-  self->renamed_printer_name = NULL;
-  self->old_printer_name = NULL;
-  self->deleted_printer_name = NULL;
-  self->deleted_printers = NULL;
   self->reference = g_object_new (G_TYPE_OBJECT, NULL);
-
-  self->permission = NULL;
-  self->lockdown_settings = NULL;
-
-  self->all_ppds_list = NULL;
 
   self->printer_entries = g_hash_table_new_full (g_str_hash,
                                                  g_str_equal,
                                                  g_free,
                                                  NULL);
-  self->entries_filled = FALSE;
-  self->action = NULL;
 
   g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 

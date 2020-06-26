@@ -898,15 +898,6 @@ pp_options_dialog_new (gchar   *printer_name,
 
   self->printer_name = g_strdup (printer_name);
 
-  self->ppd_filename = NULL;
-  self->ppd_filename_set = FALSE;
-
-  self->destination = NULL;
-  self->destination_set = FALSE;
-
-  self->ipp_attributes = NULL;
-  self->ipp_attributes_set = FALSE;
-
   self->sensitive = sensitive;
 
   gtk_window_set_title (GTK_WINDOW (self), printer_name);
