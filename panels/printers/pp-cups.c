@@ -87,12 +87,11 @@ pp_cups_get_dests_async (PpCups              *self,
                          GAsyncReadyCallback  callback,
                          gpointer             user_data)
 {
-  GTask       *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, (GTaskThreadFunc) _pp_cups_get_dests_thread);
-  g_object_unref (task);
 }
 
 PpCupsDests *
@@ -133,13 +132,11 @@ pp_cups_connection_test_async (PpCups              *self,
                                GAsyncReadyCallback  callback,
                                gpointer             user_data)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, connection_test_thread);
-
-  g_object_unref (task);
 }
 
 gboolean
@@ -186,13 +183,11 @@ pp_cups_cancel_subscription_async (PpCups              *self,
                                    GAsyncReadyCallback  callback,
                                    gpointer             user_data)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, NULL, callback, user_data);
   g_task_set_task_data (task, GINT_TO_POINTER (subscription_id), NULL);
   g_task_run_in_thread (task, cancel_subscription_thread);
-
-  g_object_unref (task);
 }
 
 gboolean
@@ -295,7 +290,7 @@ pp_cups_renew_subscription_async  (PpCups               *self,
                                    gpointer              user_data)
 {
   CRSData *subscription_data;
-  GTask   *task;
+  g_autoptr(GTask) task = NULL;
 
   subscription_data = g_slice_new (CRSData);
   subscription_data->id = subscription_id;
@@ -305,8 +300,6 @@ pp_cups_renew_subscription_async  (PpCups               *self,
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_task_data (task, subscription_data, (GDestroyNotify) crs_data_free);
   g_task_run_in_thread (task, renew_subscription_thread);
-
-  g_object_unref (task);
 }
 
 /* Returns id of renewed subscription or new id */

@@ -259,7 +259,7 @@ printer_removed_cb (GObject      *source_object,
 
   if (user_data != NULL)
     {
-      GObject *reference = G_OBJECT (user_data);
+      g_autoptr(GObject) reference = G_OBJECT (user_data);
 
       if (g_object_get_data (reference, "self") != NULL)
         {
@@ -276,8 +276,6 @@ printer_removed_cb (GObject      *source_object,
                 }
             }
         }
-
-      g_object_unref (reference);
     }
 
   if (error != NULL)

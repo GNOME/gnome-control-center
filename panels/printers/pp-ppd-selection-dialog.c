@@ -68,7 +68,7 @@ static void
 manufacturer_selection_changed_cb (PpPPDSelectionDialog *self)
 {
   GtkTreeView  *treeview;
-  GtkListStore *store;
+  g_autoptr(GtkListStore) store = NULL;
   GtkTreeModel *model;
   GtkTreeIter   iter;
   GtkTreeView  *models_treeview;
@@ -113,7 +113,6 @@ manufacturer_selection_changed_cb (PpPPDSelectionDialog *self)
             }
 
           gtk_tree_view_set_model (models_treeview, GTK_TREE_MODEL (store));
-          g_object_unref (store);
           gtk_tree_view_columns_autosize (models_treeview);
         }
 
@@ -156,7 +155,7 @@ static void
 fill_ppds_list (PpPPDSelectionDialog *self)
 {
   GtkTreeSelection *selection;
-  GtkListStore     *store;
+  g_autoptr(GtkListStore) store = NULL;
   GtkTreePath      *path;
   GtkTreeView      *treeview;
   GtkTreeIter       iter;
@@ -206,8 +205,6 @@ fill_ppds_list (PpPPDSelectionDialog *self)
           gtk_tree_path_free (path);
           gtk_tree_iter_free (preselect_iter);
         }
-
-      g_object_unref (store);
     }
 }
 

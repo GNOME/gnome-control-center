@@ -1595,10 +1595,10 @@ printer_set_ppd_file_async (const gchar  *printer_name,
                             PSPCallback   callback,
                             gpointer      user_data)
 {
-  GFileIOStream *stream;
+  g_autoptr(GFileIOStream) stream = NULL;
   PSPData       *data;
   GFile         *source_ppd_file;
-  GFile         *destination_ppd_file;
+  g_autoptr(GFile) destination_ppd_file = NULL;
 
   data = g_new0 (PSPData, 1);
   if (cancellable)
@@ -1619,7 +1619,6 @@ printer_set_ppd_file_async (const gchar  *printer_name,
    */
   source_ppd_file = g_file_new_for_path (ppd_filename);
   destination_ppd_file = g_file_new_tmp ("g-c-c-XXXXXX.ppd", &stream, NULL);
-  g_object_unref (stream);
   data->ppd_copy = g_strdup (g_file_get_path (destination_ppd_file));
 
   g_file_copy_async (source_ppd_file,
@@ -1631,8 +1630,6 @@ printer_set_ppd_file_async (const gchar  *printer_name,
                      NULL,
                      printer_set_ppd_file_async_scb,
                      data);
-
-  g_object_unref (destination_ppd_file);
 
   return;
 

@@ -387,13 +387,11 @@ pp_job_get_attributes_async (PpJob                *self,
                              GAsyncReadyCallback   callback,
                              gpointer              user_data)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_task_data (task, g_strdupv (attributes_names), (GDestroyNotify) g_strfreev);
   g_task_run_in_thread (task, _pp_job_get_attributes_thread);
-
-  g_object_unref (task);
 }
 
 GVariant *
@@ -450,13 +448,11 @@ pp_job_authenticate_async (PpJob                *self,
                            GAsyncReadyCallback   callback,
                            gpointer              user_data)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_task_data (task, g_strdupv (auth_info), (GDestroyNotify) g_strfreev);
   g_task_run_in_thread (task, _pp_job_authenticate_thread);
-
-  g_object_unref (task);
 }
 
 gboolean
