@@ -96,10 +96,6 @@ const gchar*       cc_keyboard_item_get_key                  (CcKeyboardItem    
 
 CcKeyboardItemType cc_keyboard_item_get_item_type            (CcKeyboardItem     *self);
 
-void               cc_keyboard_item_set_model                (CcKeyboardItem     *self,
-                                                              GtkTreeModel       *model,
-                                                              BindingGroupType    group);
-
 const gchar*       cc_keyboard_item_get_gsettings_path       (CcKeyboardItem     *self);
 
 GSettings*         cc_keyboard_item_get_settings             (CcKeyboardItem     *self);
