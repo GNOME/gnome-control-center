@@ -389,7 +389,7 @@ update_jobs_list_cb (GObject      *source_object,
 static void
 update_jobs_list (PpJobsDialog *self)
 {
-  PpPrinter *printer;
+  g_autoptr(PpPrinter) printer = NULL;
 
   if (self->printer_name != NULL)
     {

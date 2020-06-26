@@ -440,7 +440,7 @@ on_show_printer_details_dialog (GtkButton      *button,
   new_name = pp_details_dialog_get_printer_name (dialog);
   if (g_strcmp0 (self->printer_name, new_name) != 0)
     {
-      PpPrinter *printer = pp_printer_new (self->printer_name);
+      g_autoptr(PpPrinter) printer = pp_printer_new (self->printer_name);
 
       pp_printer_rename_async (printer,
                                new_name,
