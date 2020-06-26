@@ -103,6 +103,9 @@ struct _CcUserPanel {
 
         CcAvatarChooser *avatar_chooser;
 
+        gboolean needs_fingerprint_update;
+        GCancellable *fingerprint_cancellable;
+
         gint other_accounts;
 };
 
@@ -174,10 +177,9 @@ set_selected_user (CcUserPanel *self, CcCarouselItem *item)
 {
         uid_t uid;
 
-        g_clear_object (&self->selected_user);
-
         uid = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "uid"));
-        self->selected_user = act_user_manager_get_user_by_id (self->um, uid);
+        g_set_object (&self->selected_user,
+                      act_user_manager_get_user_by_id (self->um, uid));
 
         if (self->selected_user != NULL) {
                 show_user (self->selected_user, self);
@@ -851,9 +853,26 @@ show_user (ActUser *user, CcUserPanel *self)
         show = (act_user_get_uid (user) == getuid() &&
                 act_user_is_local_account (user) &&
                 (self->login_screen_settings &&
-                 g_settings_get_boolean (self->login_screen_settings, "enable-fingerprint-authentication")) &&
-                set_fingerprint_label (self->fingerprint_state_label));
-        gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), show);
+                 g_settings_get_boolean (self->login_screen_settings,
+                                         "enable-fingerprint-authentication")));
+
+        if (!self->needs_fingerprint_update) {
+                gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), show);
+        } else {
+                gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), FALSE);
+
+                if (show) {
+                        g_cancellable_cancel (self->fingerprint_cancellable);
+                        g_clear_object (&self->fingerprint_cancellable);
+
+                        self->fingerprint_cancellable = g_cancellable_new ();
+                        self->needs_fingerprint_update = FALSE;
+
+                        set_fingerprint_row (GTK_WIDGET (self->fingerprint_row),
+                                             self->fingerprint_state_label,
+                                             self->fingerprint_cancellable);
+                }
+        }
 
         /* Autologin: show when local account */
         show = act_user_is_local_account (user);
@@ -1083,7 +1102,16 @@ change_fingerprint (CcUserPanel *self)
 
         g_assert (g_strcmp0 (g_get_user_name (), act_user_get_user_name (user)) == 0);
 
-        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))), self->fingerprint_state_label, user);
+        g_cancellable_cancel (self->fingerprint_cancellable);
+        g_clear_object (&self->fingerprint_cancellable);
+
+        self->fingerprint_cancellable = g_cancellable_new ();
+
+        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                                    GTK_WIDGET (self->fingerprint_row),
+                                    self->fingerprint_state_label,
+                                    user,
+                                    self->fingerprint_cancellable);
 }
 
 static void
@@ -1455,6 +1483,7 @@ cc_user_panel_init (CcUserPanel *self)
         gtk_widget_init_template (GTK_WIDGET (self));
 
         self->um = act_user_manager_get_default ();
+        self->needs_fingerprint_update = TRUE;
 
         provider = gtk_css_provider_new ();
         gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/user-accounts/user-accounts-dialog.css");
@@ -1474,7 +1503,12 @@ cc_user_panel_dispose (GObject *object)
 {
         CcUserPanel *self = CC_USER_PANEL (object);
 
+        g_clear_object (&self->selected_user);
+
         g_clear_object (&self->login_screen_settings);
+
+        g_cancellable_cancel (self->fingerprint_cancellable);
+        g_clear_object (&self->fingerprint_cancellable);
 
         g_clear_pointer ((GtkWidget **)&self->language_chooser, gtk_widget_destroy);
         g_clear_object (&self->permission);

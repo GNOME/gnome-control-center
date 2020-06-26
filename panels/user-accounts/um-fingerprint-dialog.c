@@ -31,9 +31,6 @@
 #define TR(s) dgettext("fprintd", s)
 #include "fingerprint-strings.h"
 
-/* This must match the number of images on the 2nd page in the UI file */
-#define MAX_ENROLL_STAGES 10
-
 static GDBusProxy *manager = NULL;
 static GDBusConnection *connection = NULL;
 static gboolean is_disable = FALSE;
@@ -45,12 +42,14 @@ enum {
 };
 
 typedef struct {
+        GtkWidget *fingerprint_row;
         GtkLabel *state_label;
 
         GtkWidget *ass;
         GtkBuilder *dialog;
 
         GDBusProxy *device;
+        GCancellable *cancellable;
         gboolean is_swipe;
         int num_enroll_stages;
         int num_stages_done;
@@ -60,16 +59,19 @@ typedef struct {
 } EnrollData;
 
 static void
-ensure_manager (void)
+ensure_manager (GCancellable *cancellable)
 {
         GError *error = NULL;
 
         if (manager != NULL)
                 return;
 
-        connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+        connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, cancellable, &error);
         if (connection == NULL) {
-                g_warning ("Failed to connect to session bus: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        g_warning ("Failed to connect to session bus: %s",
+                                   error->message);
+                }
                 g_error_free (error);
                 return;
         }
@@ -80,16 +82,19 @@ ensure_manager (void)
                                          "net.reactivated.Fprint",
                                          "/net/reactivated/Fprint/Manager",
                                          "net.reactivated.Fprint.Manager",
-                                         NULL,
+                                         cancellable,
                                          &error);
         if (manager == NULL) {
-                g_warning ("Failed to create fingerprint manager proxy: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        g_warning ("Failed to create fingerprint manager proxy: %s",
+                                   error->message);
+                }
                 g_error_free (error);
         }
 }
 
 static GDBusProxy *
-get_first_device (void)
+get_first_device (GCancellable *cancellable)
 {
         GDBusProxy *device;
         GVariant *result;
@@ -101,7 +106,7 @@ get_first_device (void)
                                          g_variant_new ("()"),
                                          G_DBUS_CALL_FLAGS_NONE,
                                          -1,
-                                         NULL,
+                                         cancellable,
                                          NULL);
         if (result == NULL)
                 return NULL;
@@ -120,10 +125,13 @@ get_first_device (void)
                                         "net.reactivated.Fprint",
                                         device_str,
                                         "net.reactivated.Fprint.Device",
-                                        NULL,
+                                        cancellable,
                                         &error);
         if (device == NULL) {
-                g_warning ("Failed to create fingerprint device proxy: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        g_warning ("Failed to create fingerprint device proxy: %s",
+                                   error->message);
+                }
                 g_error_free (error);
         }
 
@@ -176,28 +184,77 @@ get_error_dialog (const char *title,
         return error_dialog;
 }
 
-gboolean
-set_fingerprint_label (GtkLabel *state_label)
+static void
+set_fingerprint_row_cb (GObject      *source_object,
+                        GAsyncResult *res,
+                        gpointer      user_data)
+{
+        GTask *task;
+        GtkWidget *fingerprint_row;
+        g_autoptr(GtkLabel) state_label = NULL;
+        g_autoptr(GError) error = NULL;
+        gboolean enabled;
+        gboolean visible;
+
+        task = G_TASK (res);
+        fingerprint_row = GTK_WIDGET (source_object);
+        state_label = user_data;
+        enabled = g_task_propagate_boolean (task, &error);
+        visible = TRUE;
+
+        if (error) {
+                visible = FALSE;
+
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+                        g_warning ("Fingerprint row not available: %s",
+                                   error->message);
+                }
+        }
+
+        if (enabled) {
+                is_disable = TRUE;
+                gtk_label_set_text (state_label, _("Enabled"));
+        } else {
+                is_disable = FALSE;
+                gtk_label_set_text (state_label, _("Disabled"));
+        }
+
+        gtk_widget_set_sensitive (fingerprint_row, TRUE);
+        gtk_widget_set_visible (fingerprint_row, visible);
+}
+
+static void
+set_fingerprint_task_func (GTask        *task,
+                           gpointer      source_object,
+                           gpointer      task_data,
+                           GCancellable *cancellable)
 {
         GDBusProxy *device;
         GVariant *result;
         GVariantIter *fingers;
         GError *error = NULL;
 
-        ensure_manager ();
-        if (manager == NULL)
-                return FALSE;
+        ensure_manager (cancellable);
+        if (manager == NULL) {
+                g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_FAILED,
+                                         "Impossible to get fprintd manager");
+                return;
+        }
 
-        device = get_first_device ();
-        if (device == NULL)
-                return FALSE;
+        device = get_first_device (cancellable);
+        if (device == NULL) {
+                g_task_return_new_error (task, G_IO_ERROR, G_IO_ERROR_FAILED,
+                                         "Impossible to get fprintd device");
+                return;
+        }
 
-        result = g_dbus_proxy_call_sync (device, "ListEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, NULL, &error);
+        result = g_dbus_proxy_call_sync (device, "ListEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, cancellable, &error);
         if (!result) {
                 if (!g_dbus_error_is_remote_error (error) ||
                     strcmp (g_dbus_error_get_remote_error(error), "net.reactivated.Fprint.Error.NoEnrolledPrints") != 0) {
                         g_object_unref (device);
-                        return FALSE;
+                        g_task_return_error (task, error);
+                        return;
                 }
         }
 
@@ -206,12 +263,13 @@ set_fingerprint_label (GtkLabel *state_label)
         else
                 fingers = NULL;
 
+        if (g_task_return_error_if_cancelled (task))
+                return;
+
         if (fingers == NULL || g_variant_iter_n_children (fingers) == 0) {
-                is_disable = FALSE;
-                gtk_label_set_text (state_label, _("Disabled"));
+                g_task_return_boolean (task, FALSE);
         } else {
-                is_disable = TRUE;
-                gtk_label_set_text (state_label, _("Enabled"));
+                g_task_return_boolean (task, TRUE);
         }
 
         if (result != NULL)
@@ -219,35 +277,52 @@ set_fingerprint_label (GtkLabel *state_label)
         if (fingers != NULL)
                 g_variant_iter_free (fingers);
         g_object_unref (device);
+}
 
-        return TRUE;
+void
+set_fingerprint_row (GtkWidget    *row,
+                     GtkLabel     *state_label,
+                     GCancellable *cancellable)
+{
+        g_autoptr(GTask) task = NULL;
+
+        task = g_task_new (row, cancellable, set_fingerprint_row_cb,
+                           g_object_ref (state_label));
+        g_task_run_in_thread (task, set_fingerprint_task_func);
 }
 
 static void
-delete_fingerprints (void)
+delete_fingerprint_task_func (GTask        *task,
+                              gpointer      source_object,
+                              gpointer      task_data,
+                              GCancellable *cancellable)
 {
         GDBusProxy *device;
         GVariant *result;
 
-        ensure_manager ();
+        ensure_manager (cancellable);
         if (manager == NULL)
                 return;
 
-        device = get_first_device ();
+        device = get_first_device (cancellable);
         if (device == NULL)
                 return;
 
-        result = g_dbus_proxy_call_sync (device, "DeleteEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL);
+        result = g_dbus_proxy_call_sync (device, "DeleteEnrolledFingers", g_variant_new ("(s)", ""), G_DBUS_CALL_FLAGS_NONE, -1, cancellable, NULL);
         if (result)
                 g_variant_unref (result);
 
         g_object_unref (device);
+
+        set_fingerprint_task_func (task, source_object, task_data, cancellable);
 }
 
 static void
-delete_fingerprints_question (GtkWindow *parent,
-                              GtkLabel  *state_label,
-                              ActUser   *user)
+delete_fingerprints_question (GtkWindow    *parent,
+                              GtkWidget    *fingerprint_row,
+                              GtkLabel     *state_label,
+                              ActUser      *user,
+                              GCancellable *cancellable)
 {
         GtkWidget *question;
         GtkWidget *button;
@@ -270,8 +345,14 @@ delete_fingerprints_question (GtkWindow *parent,
         gtk_dialog_set_default_response (GTK_DIALOG (question), GTK_RESPONSE_OK);
 
         if (gtk_dialog_run (GTK_DIALOG (question)) == GTK_RESPONSE_OK) {
-                delete_fingerprints ();
-                set_fingerprint_label (state_label);
+                g_autoptr(GTask) task = NULL;
+
+                gtk_widget_set_sensitive (fingerprint_row, FALSE);
+
+                task = g_task_new (fingerprint_row, cancellable,
+                                   set_fingerprint_row_cb,
+                                   g_object_ref (state_label));
+                g_task_run_in_thread (task, delete_fingerprint_task_func);
         }
 
         gtk_widget_destroy (question);
@@ -339,6 +420,7 @@ enroll_data_destroy (EnrollData *data)
                 g_free (data->name);
                 g_object_unref (data->device);
                 g_object_unref (data->dialog);
+                g_object_unref (data->cancellable);
                 gtk_widget_destroy (data->ass);
 
                 g_free (data);
@@ -413,10 +495,12 @@ finger_combobox_changed (GtkComboBox *combobox, EnrollData *data)
 static void
 assistant_cancelled (GtkAssistant *ass, EnrollData *data)
 {
+        GtkWidget *fingerprint_row = data->fingerprint_row;
         GtkLabel *state_label = data->state_label;
+        GCancellable *cancellable = data->cancellable;
 
         enroll_data_destroy (data);
-        set_fingerprint_label (state_label);
+        set_fingerprint_row (fingerprint_row, state_label, cancellable);
 }
 
 static void
@@ -426,14 +510,17 @@ enroll_result (EnrollData *data, const char *result, gboolean done)
         char *msg;
 
         if (g_str_equal (result, "enroll-completed") || g_str_equal (result, "enroll-stage-passed")) {
-                char *name, *path;
+                GtkFlowBoxChild *child;
+                const char *path;
 
                 data->num_stages_done++;
-                name = g_strdup_printf ("image%d", data->num_stages_done);
-                path = g_strdup_printf ("/org/gnome/control-center/user-accounts/print_ok.png");
-                gtk_image_set_from_resource (GTK_IMAGE (WID (name)), path);
-                g_free (name);
-                g_free (path);
+                path = "/org/gnome/control-center/user-accounts/print_ok.png";
+                child = gtk_flow_box_get_child_at_index (GTK_FLOW_BOX (WID ("enroll-flowbox")),
+                                                         data->num_stages_done - 1);
+                if (child) {
+                        GtkImage *image = GTK_IMAGE (gtk_bin_get_child (GTK_BIN (child)));
+                        gtk_image_set_from_resource (image, path);
+                }
         }
         if (g_str_equal (result, "enroll-completed")) {
                 gtk_label_set_text (GTK_LABEL (WID ("status-label")), _("Done!"));
@@ -485,6 +572,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
         if (g_str_equal (name, "enroll")) {
                 GError *error = NULL;
                 GtkBuilder *dialog = data->dialog;
+                GtkWidget *enroll_flowbox;
                 char *path;
                 guint i;
                 GVariant *result;
@@ -550,27 +638,33 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
                 }
 
                 data->num_enroll_stages = num_enroll_stages;
+                enroll_flowbox = WID ("enroll-flowbox");
 
                 /* Hide the extra "bulbs" if not needed */
-                for (i = MAX_ENROLL_STAGES; i > data->num_enroll_stages; i--) {
-                        char *name;
-
-                        name = g_strdup_printf ("image%d", i);
-                        gtk_widget_hide (WID (name));
-                        g_free (name);
-                }
                 /* And set the right image */
                 {
                         path = g_strdup_printf ("/org/gnome/control-center/user-accounts/%s.png", data->finger);
                 }
                 for (i = 1; i <= data->num_enroll_stages; i++) {
-                        char *name;
-                        name = g_strdup_printf ("image%d", i);
-                        gtk_image_set_from_resource (GTK_IMAGE (WID (name)), path);
-                        g_free (name);
+                        GtkWidget *image;
+                        GtkFlowBoxChild *child;
+
+                        child = gtk_flow_box_get_child_at_index (GTK_FLOW_BOX (enroll_flowbox), i-1);
+                        if (child) {
+                                image = gtk_bin_get_child (GTK_BIN (child));
+                                gtk_image_set_from_resource (GTK_IMAGE (image), path);
+                        } else {
+                                child = GTK_FLOW_BOX_CHILD (gtk_flow_box_child_new ());
+                                image = gtk_image_new_from_resource (path);
+                                gtk_widget_set_can_focus (GTK_WIDGET (child), FALSE);
+                                gtk_container_add (GTK_CONTAINER (child), image);
+                                gtk_container_add (GTK_CONTAINER (enroll_flowbox), GTK_WIDGET (child));
+                                gtk_widget_show_all (GTK_WIDGET (child));
+                        }
                 }
                 g_free (path);
 
+                g_signal_handlers_disconnect_by_func (data->device, device_signal_cb, data);
                 g_signal_connect (data->device, "g-signal", G_CALLBACK (device_signal_cb), data);
 
                 if (!enroll_start (data, &error)) {
@@ -591,6 +685,7 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 
                         return;
                 }
+                data->num_stages_done = 0;
                 data->state = STATE_ENROLLING;;
         } else {
                 if (data->state == STATE_ENROLLING) {
@@ -605,9 +700,11 @@ assistant_prepare (GtkAssistant *ass, GtkWidget *page, EnrollData *data)
 }
 
 static void
-enroll_fingerprints (GtkWindow *parent,
-                     GtkLabel  *state_label,
-                     ActUser   *user)
+enroll_fingerprints (GtkWindow    *parent,
+                     GtkWidget    *fingerprint_row,
+                     GtkLabel     *state_label,
+                     ActUser      *user,
+                     GCancellable *cancellable)
 {
         GDBusProxy *device = NULL;
         GtkBuilder *dialog;
@@ -617,9 +714,9 @@ enroll_fingerprints (GtkWindow *parent,
         GVariant *result;
         GError *error = NULL;
 
-        ensure_manager ();
+        ensure_manager (cancellable);
         if (manager != NULL)
-                device = get_first_device ();
+                device = get_first_device (cancellable);
 
         if (manager == NULL || device == NULL) {
                 GtkWidget *d;
@@ -634,6 +731,8 @@ enroll_fingerprints (GtkWindow *parent,
 
         data = g_new0 (EnrollData, 1);
         data->device = device;
+        data->cancellable = g_object_ref (cancellable);
+        data->fingerprint_row = fingerprint_row;
         data->state_label = state_label;
 
         /* Get some details about the device */
@@ -646,7 +745,7 @@ enroll_fingerprints (GtkWindow *parent,
                                               G_VARIANT_TYPE ("(a{sv})"),
                                               G_DBUS_CALL_FLAGS_NONE,
                                               -1,
-                                              NULL,
+                                              cancellable,
                                               NULL);
         if (result) {
                 GVariant *props;
@@ -733,17 +832,21 @@ enroll_fingerprints (GtkWindow *parent,
 }
 
 void
-fingerprint_button_clicked (GtkWindow *parent,
-                            GtkLabel  *state_label,
-                            ActUser   *user)
+fingerprint_button_clicked (GtkWindow    *parent,
+                            GtkWidget    *fingerprint_row,
+                            GtkLabel     *state_label,
+                            ActUser      *user,
+                            GCancellable *cancellable)
 {
         bindtextdomain ("fprintd", GNOMELOCALEDIR);
         bind_textdomain_codeset ("fprintd", "UTF-8");
 
         if (is_disable != FALSE) {
-                delete_fingerprints_question (parent, state_label, user);
+                delete_fingerprints_question (parent, fingerprint_row,
+                                              state_label, user, cancellable);
         } else {
-                enroll_fingerprints (parent, state_label, user);
+                enroll_fingerprints (parent, fingerprint_row, state_label, user,
+                                     cancellable);
         }
 }
 
