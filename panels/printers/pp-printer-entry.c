@@ -485,24 +485,20 @@ check_clean_heads_maintenance_command_cb (GObject      *source_object,
                                           gpointer      user_data)
 {
   PpPrinterEntry       *self = user_data;
-  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
   gboolean              is_supported = FALSE;
   g_autoptr(GError)     error = NULL;
 
-  is_supported = pp_maintenance_command_is_supported_finish (command, res, &error);
+  is_supported = pp_maintenance_command_is_supported_finish (PP_MAINTENANCE_COMMAND (source_object), res, &error);
   if (error != NULL)
     {
       g_debug ("Could not check 'Clean' maintenance command: %s", error->message);
-      goto out;
+      return;
     }
 
   if (is_supported)
     {
       gtk_widget_show (GTK_WIDGET (self->clean_heads_menuitem));
     }
-
- out:
-  g_object_unref (source_object);
 }
 
 static void
@@ -525,15 +521,11 @@ clean_heads_maintenance_command_cb (GObject      *source_object,
                                     GAsyncResult *res,
                                     gpointer      user_data)
 {
-  PpPrinterEntry       *self = user_data;
-  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
-  g_autoptr(GError)     error = NULL;
+  PpPrinterEntry *self = user_data;
+  g_autoptr(GError) error = NULL;
 
-  if (!pp_maintenance_command_execute_finish (command, res, &error))
-    {
-      g_warning ("Error cleaning print heads for %s: %s", self->printer_name, error->message);
-    }
-  g_object_unref (source_object);
+  if (!pp_maintenance_command_execute_finish (PP_MAINTENANCE_COMMAND (source_object), res, &error))
+    g_warning ("Error cleaning print heads for %s: %s", self->printer_name, error->message);
 }
 
 static void
