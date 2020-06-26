@@ -1427,7 +1427,6 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output)
     {
@@ -1475,7 +1474,7 @@ printer_set_ppd_async (const gchar  *printer_name,
                        PSPCallback   callback,
                        gpointer      user_data)
 {
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   PSPData          *data;
   g_autoptr(GError) error = NULL;
 
@@ -1532,7 +1531,7 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
                                 GAsyncResult *res,
                                 gpointer      user_data)
 {
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   gboolean          success;
   PSPData          *data = (PSPData *) user_data;
   g_autoptr(GError) error = NULL;
@@ -1862,7 +1861,6 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output)
     {
@@ -1958,7 +1956,7 @@ get_device_attributes_cb (gchar    *device_id,
                           gchar    *device_uri,
                           gpointer  user_data)
 {
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GError) error = NULL;
   GPNData          *data = (GPNData *) user_data;
 
@@ -2074,7 +2072,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output)
     {
@@ -2205,8 +2202,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
         }
     }
 
-  g_object_unref (source_object);
-
   if (data->backend_list)
     {
       g_list_free_full (data->backend_list, g_free);
@@ -2228,7 +2223,7 @@ static void
 get_device_attributes_async_scb (GHashTable *result,
                                  gpointer    user_data)
 {
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   GVariantBuilder   include_scheme_builder;
   IPPAttribute     *attr;
   GDAData          *data = (GDAData *) user_data;
@@ -3071,7 +3066,6 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output)
     {
@@ -3106,7 +3100,7 @@ printer_add_option_async (const gchar   *printer_name,
                           gpointer       user_data)
 {
   GVariantBuilder   array_builder;
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   PAOData          *data;
   g_autoptr(GError) error = NULL;
   gint              i;
@@ -3275,7 +3269,6 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
 
       g_list_free_full (data->backend_list, g_free);
       data->backend_list = NULL;
-      g_object_unref (source_object);
       g_clear_object (&data->cancellable);
       g_free (data);
 
@@ -3353,7 +3346,6 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                       data->user_data);
     }
 
-  g_object_unref (source_object);
   g_clear_object (&data->cancellable);
   g_free (data);
 }
@@ -3363,7 +3355,7 @@ get_cups_devices_async (GCancellable *cancellable,
                         GCDCallback   callback,
                         gpointer      user_data)
 {
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   GVariantBuilder   include_scheme_builder;
   GCDData          *data;
   g_autoptr(GError) error = NULL;

@@ -77,14 +77,13 @@ pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           NULL);
-  g_object_unref (source_object);
 }
 
 void
 pp_job_cancel_purge_async (PpJob        *self,
                            gboolean      job_purge)
 {
-  GDBusConnection *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GError) error = NULL;
   gint            *job_id;
 
@@ -123,14 +122,13 @@ pp_job_set_hold_until_async_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           NULL);
-  g_object_unref (source_object);
 }
 
 void
 pp_job_set_hold_until_async (PpJob        *self,
                              const gchar  *job_hold_until)
 {
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GError) error = NULL;
   gint             *job_id;
 

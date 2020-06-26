@@ -398,7 +398,6 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output)
     {
@@ -427,8 +426,8 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
 static void
 printer_add_real_async (PpNewPrinter *self)
 {
-  GDBusConnection     *bus;
-  g_autoptr(GError)    error = NULL;
+  g_autoptr(GDBusConnection) bus = NULL;
+  g_autoptr(GError) error = NULL;
 
   if (!self->ppd_name && !self->ppd_file_name)
     {
@@ -527,7 +526,6 @@ printer_add_async_scb3 (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output)
     {
@@ -569,7 +567,6 @@ install_printer_drivers_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output == NULL)
     {
@@ -579,7 +576,7 @@ install_printer_drivers_cb (GObject      *source_object,
 
   if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
-      GDBusConnection  *bus;
+      g_autoptr(GDBusConnection) bus = NULL;
       g_autoptr(GError) bus_error = NULL;
 
       /* Try whether CUPS has a driver for the new printer */
@@ -616,7 +613,7 @@ printer_add_async_scb (GObject      *source_object,
                        gpointer      user_data)
 {
   PpNewPrinter        *self = user_data;
-  GDBusConnection     *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   GVariantBuilder      array_builder;
   g_autoptr(GVariant)  output = NULL;
   gboolean             cancelled = FALSE;
@@ -626,7 +623,6 @@ printer_add_async_scb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output)
     {
@@ -783,7 +779,6 @@ printer_set_accepting_jobs_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output == NULL)
     {
@@ -807,7 +802,6 @@ printer_set_enabled_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output == NULL)
     {
@@ -873,7 +867,6 @@ install_package_names_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output == NULL)
     {
@@ -976,7 +969,6 @@ search_files_cb (GObject      *source_object,
         }
       else
         {
-          g_object_unref (source_object);
           install_missing_executables_cb (data);
         }
     }
@@ -1056,7 +1048,6 @@ DBus method \"MissingExecutables\" to find missing executables and filters.");
     }
   else
     {
-      g_object_unref (source_object);
       install_missing_executables_cb (data);
     }
 }
@@ -1065,7 +1056,7 @@ static void
 printer_get_ppd_cb (const gchar *ppd_filename,
                     gpointer     user_data)
 {
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   IMEData          *data = (IMEData *) user_data;
   g_autoptr(GError) error = NULL;
 
@@ -1135,7 +1126,7 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
 static void
 printer_configure_async (PpNewPrinter *self)
 {
-  GDBusConnection      *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   PCData               *data;
   IMEData              *ime_data;
   gchar               **values;
@@ -1255,7 +1246,7 @@ pp_new_printer_add_async (PpNewPrinter        *self,
     }
   else if (self->device_id)
     {
-      GDBusConnection  *bus;
+      g_autoptr(GDBusConnection) bus = NULL;
       g_autoptr(GError) error = NULL;
 
       /* Try whether CUPS has a driver for the new printer */
