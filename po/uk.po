@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2020-06-17 12:02+0000\n"
-"PO-Revision-Date: 2020-06-17 20:27+0300\n"
+"POT-Creation-Date: 2020-06-26 01:59+0000\n"
+"PO-Revision-Date: 2020-06-26 07:12+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -201,8 +201,8 @@ msgstr "Камера"
 #: panels/keyboard/cc-keyboard-option.c:378
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:93
 #: panels/keyboard/keyboard-shortcuts.c:425 panels/network/network-proxy.ui:126
-#: panels/user-accounts/cc-user-panel.c:942
-#: panels/user-accounts/um-fingerprint-dialog.c:219
+#: panels/user-accounts/cc-user-panel.c:865
+#: panels/user-accounts/cc-user-panel.c:957
 #: subprojects/gvc/gvc-mixer-control.c:1876
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -367,11 +367,11 @@ msgstr "Виберіть зображення"
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
+#: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:652
 #: panels/user-accounts/cc-user-panel.c:670
 #: panels/user-accounts/data/join-dialog.ui:20
-#: panels/user-accounts/um-fingerprint-dialog.c:335
 msgid "_Cancel"
 msgstr "_Скасувати"
 
@@ -610,6 +610,7 @@ msgstr "_Відновити"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:67 panels/region/cc-format-chooser.ui:64
+#: panels/user-accounts/cc-fingerprint-dialog.ui:73
 msgid "_Done"
 msgstr "_Завершити"
 
@@ -899,7 +900,6 @@ msgstr ""
 "Windows</a> можуть стати в пригоді."
 
 #: panels/color/cc-color-panel.ui:607
-#: panels/user-accounts/um-fingerprint-dialog.c:818
 msgid "Summary"
 msgstr "Підсумок"
 
@@ -3550,7 +3550,7 @@ msgstr "Некерований"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:935
+#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:950
 msgid "Unavailable"
 msgstr "Недоступний"
 
@@ -4710,18 +4710,18 @@ msgid "Authentication Required"
 msgstr "Потрібно засвідчитись"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:675
+#: panels/printers/cc-printers-panel.c:720
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Принтер «%s» було успішно вилучено"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:893
+#: panels/printers/cc-printers-panel.c:989
 msgid "Failed to add new printer."
 msgstr "Не вдалось додати принтер."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1182
+#: panels/printers/cc-printers-panel.c:1321
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не вдалось завантажити інтерфейс: %s"
@@ -5168,12 +5168,12 @@ msgid "Manufacturer"
 msgstr "Виробник"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:593 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:592 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Немає запущених завдань"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:598
+#: panels/printers/pp-printer-entry.c:597
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5181,114 +5181,114 @@ msgstr[0] "%u завдання"
 msgstr[1] "%u завдання"
 msgstr[2] "%u завдань"
 
+#. Translators: Name of job which makes printer to clean its heads
+#: panels/printers/pp-printer-entry.c:715
+msgid "Clean print heads"
+msgstr "Очищення головок принтера"
+
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:744
+#: panels/printers/pp-printer-entry.c:766
 msgid "Low on toner"
 msgstr "Закінчується тонер"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:746
+#: panels/printers/pp-printer-entry.c:768
 msgid "Out of toner"
 msgstr "Вичерпався тонер"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:749
+#: panels/printers/pp-printer-entry.c:771
 msgid "Low on developer"
 msgstr "Закінчується проявник"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:752
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of developer"
 msgstr "Вичерпався проявник"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:754
+#: panels/printers/pp-printer-entry.c:776
 msgid "Low on a marker supply"
 msgstr "Закінчується фарба"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:778
 msgid "Out of a marker supply"
 msgstr "Вичерпано фарбу"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:758
+#: panels/printers/pp-printer-entry.c:780
 msgid "Open cover"
 msgstr "Відкрита кришка"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:760
+#: panels/printers/pp-printer-entry.c:782
 msgid "Open door"
 msgstr "Відкриті двері"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:762
+#: panels/printers/pp-printer-entry.c:784
 msgid "Low on paper"
 msgstr "Закінчується папір"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:764
+#: panels/printers/pp-printer-entry.c:786
 msgid "Out of paper"
 msgstr "Вичерпано папір"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:788
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Вимкнено"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:768
-#: panels/printers/pp-printer-entry.c:896
+#: panels/printers/pp-printer-entry.c:790
+#: panels/printers/pp-printer-entry.c:933
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Зупинено"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:770
+#: panels/printers/pp-printer-entry.c:792
 msgid "Waste receptacle almost full"
 msgstr "Майже повністю витрачено запас"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:772
+#: panels/printers/pp-printer-entry.c:794
 msgid "Waste receptacle full"
 msgstr "Повністю витрачено запас"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:796
 msgid "The optical photo conductor is near end of life"
 msgstr "Оптичний фотопровідник близький до виходу з ладу"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:798
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Оптичний фотопровідник вийшов з ладу"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:882
+#: panels/printers/pp-printer-entry.c:919
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Готовий"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:887
+#: panels/printers/pp-printer-entry.c:924
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Завдання не прийнято"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:892
+#: panels/printers/pp-printer-entry.c:929
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Оброблення"
-
-#. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:916
-msgid "Clean print heads"
-msgstr "Очищення головок принтера"
 
 #: panels/printers/printer-entry.ui:14
 msgid "Printing Options"
@@ -5368,8 +5368,9 @@ msgstr "Метрична"
 msgid "Formats"
 msgstr "Формати"
 
-#: panels/region/cc-format-chooser.ui:48 panels/wacom/wacom-stylus-page.ui:37
-#: shell/cc-window.ui:232
+#: panels/region/cc-format-chooser.ui:48
+#: panels/user-accounts/cc-fingerprint-dialog.ui:53
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:232
 msgid "Back"
 msgstr "Назад"
 
@@ -7047,6 +7048,214 @@ msgstr "Зробити фотографію…"
 msgid "Select a File…"
 msgstr "Вибрати файл…"
 
+#: panels/user-accounts/cc-fingerprint-dialog.ui:8
+#| msgid "_Fingerprint Login"
+msgid "Fingerprint Manager"
+msgstr "Керування відбитками"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:23
+#| msgid "_Fingerprint Login"
+msgid "Fingerprint"
+msgstr "Відбиток"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:118
+msgid "_No"
+msgstr "_Ні"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:128
+msgid "_Yes"
+msgstr "_Так"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:155
+msgid ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+msgstr ""
+"Вилучити зареєстровані відбитки пальців та заборонити вхід через відбитки?"
+
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/user-accounts/cc-fingerprint-dialog.ui:249
+#| msgid "_Fingerprint Login"
+msgid "No Fingerprint device"
+msgstr "Немає пристроїв для зчитування відбитків"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:259
+msgid "Ensure the device is properly connected."
+msgstr "Переконайтеся, що пристрій з'єднано належним чином."
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:264
+#| msgid "Gaming input device"
+msgid "No fingerprint device"
+msgstr "Немає пристроїв для зчитування відбитків"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:280
+msgid "Choose the fingerprint device you want to configure"
+msgstr "Виберіть пристрій для читання відбитків, який ви хочете налаштувати"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:309
+#| msgid "_Fingerprint Login"
+msgid "Fingerprint Device"
+msgstr "Пристрій для зчитування відбитків"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:322
+msgid ""
+"Fingerprint login allows you to unlock and log into your computer with your "
+"finger"
+msgstr ""
+"Вхід за допомогою відбитка пальця надасть вам змогу розблоковувати систему і"
+" входити до вашого облікового запису за допомогою вашого пальця"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:352
+msgid "_Delete Fingerprints"
+msgstr "В_илучити відбитки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:363
+#| msgid "_Fingerprint Login"
+msgid "Fingerprint Login"
+msgstr "Вхід за відбитком пальця"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:412
+#| msgid "_Fingerprint Login"
+msgid "Fingerprint Enroll"
+msgstr "Реєстрація відбитка"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:436
+msgid "_Re-enroll this finger…"
+msgstr "П_еревизначити цей палець…"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:470
+#, c-format
+#| msgid "Failed to upload file: %s"
+msgid "Failed to list fingerprints: %s"
+msgstr "Не вдалося побудувати список відбитків: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:536
+#, c-format
+#| msgid "Failed to delete user"
+msgid "Failed to delete saved fingerprints: %s"
+msgstr "Не вдалося вилучити збережені відбитки пальців: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:565
+msgid "Left thumb"
+msgstr "Великий палець лівої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:567
+msgid "Left middle finger"
+msgstr "Середній палець лівої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:569
+msgid "_Left index finger"
+msgstr "Вказівний палець _лівої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:571
+msgid "Left ring finger"
+msgstr "Безіменний палець лівої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:573
+msgid "Left little finger"
+msgstr "Мізинець лівої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:575
+msgid "Right thumb"
+msgstr "Великий палець правої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:577
+msgid "Right middle finger"
+msgstr "Середній палець правої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:579
+msgid "_Right index finger"
+msgstr "Вказівний палець _правої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:581
+msgid "Right ring finger"
+msgstr "Безіменний палець правої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:583
+msgid "Right little finger"
+msgstr "Мізинець палець правої руки"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:585
+#| msgid "Unknown time"
+msgid "Unknown Finger"
+msgstr "Невідомий палець"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:719
+#| msgid "Complete!"
+msgctxt "Fingerprint enroll state"
+msgid "Complete"
+msgstr "Завершено"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:729
+#| msgid "PPP service disconnected"
+msgid "Fingerprint device disconnected"
+msgstr "Пристрій для зчитування відбитків від'єднано"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:731
+msgid "Fingerprint device storage is full"
+msgstr "Сховище даних пристрою зчитування відбитків переповнено"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:733
+#| msgid "Failed to add new printer."
+msgid "Failed to enroll new fingerprint"
+msgstr "Не вдалося зареєструвати новий відбиток"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:764
+#, c-format
+#| msgid "Failed to upload file: %s"
+msgid "Failed to start enrollment: %s"
+msgstr "Не вдалося розпочати реєстрацію: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:772
+#| msgid "Failed to add new printer."
+msgctxt "Fingerprint enroll state"
+msgid "Failed to enroll new fingerprint"
+msgstr "Не вдалося зареєструвати новий відбиток"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:803
+#, c-format
+#| msgid "Failed to upload file: %s"
+msgid "Failed to stop enrollment: %s"
+msgstr "Не вдалося зупинити реєстрацію: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:847
+msgid ""
+"Repeatedly lift and place your finger on the reader to enroll your "
+"fingerprint"
+msgstr ""
+"Знімайте і притискайте ваш палець до пристрою зчитування, щоб зареєструвати"
+" відбиток пальця"
+
+#. TRANSLATORS: This is the label for the button to enroll a new finger
+#: panels/user-accounts/cc-fingerprint-dialog.c:989
+#| msgid "Enrolling fingerprints"
+msgid "Scan new fingerprint"
+msgstr "Сканувати новий відбиток"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1029
+#, c-format
+#| msgid "Failed to forget device: "
+msgid "Failed to release fingerprint device %s: %s"
+msgstr "Не вдалося звільнити пристрій зчитування відбитків %s: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1100
+#| msgid "Pending Devices"
+msgctxt "Fingerprint enroll state"
+msgid "Problem Reading Device"
+msgstr "Проблема з читанням з пристрою"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1133
+#, c-format
+#| msgid "Failed to forget device: "
+msgid "Failed to claim fingerprint device %s: %s"
+msgstr "Не вдалося зайняти пристрій зчитування відбитків %s: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1270
+#, c-format
+#| msgid "Failed to forget device: "
+msgid "Failed to get fingerprint devices: %s"
+msgstr "Не вдалося отримати список пристроїв для зчитування відбитків: %s"
+
 #: panels/user-accounts/cc-login-history-dialog.c:69
 msgid "This Week"
 msgstr "Цього тижня"
@@ -7256,16 +7465,16 @@ msgid "Logged in"
 msgstr "Увійшов"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:939
-#: panels/user-accounts/um-fingerprint-dialog.c:216
+#: panels/user-accounts/cc-user-panel.c:863
+#: panels/user-accounts/cc-user-panel.c:954
 msgid "Enabled"
 msgstr "Увімкнено"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1265
 msgid "Failed to contact the accounts service"
 msgstr "Не вдалось зв'язатись зі службою облікових записів"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1267
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
@@ -7273,7 +7482,7 @@ msgstr "Будь ласка, переконайтесь, що AccountService в�
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1299
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7281,12 +7490,12 @@ msgstr ""
 "Щоб унести зміни,\n"
 "натисніть спочатку на піктограму *"
 
-#: panels/user-accounts/cc-user-panel.c:1362
+#: panels/user-accounts/cc-user-panel.c:1373
 msgid "Delete the selected user account"
 msgstr "Вилучити вибраний обліковий запис користувача"
 
-#: panels/user-accounts/cc-user-panel.c:1374
-#: panels/user-accounts/cc-user-panel.c:1489
+#: panels/user-accounts/cc-user-panel.c:1385
+#: panels/user-accounts/cc-user-panel.c:1506
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7363,63 +7572,6 @@ msgstr "Не знайдено жодного користувача"
 #: panels/user-accounts/cc-user-panel.ui:641
 msgid "Unlock to add a user account."
 msgstr "Розблокуйте, щоб додати обліковий запис користувача."
-
-#: panels/user-accounts/data/account-fingerprint.ui:12
-msgid "Left thumb"
-msgstr "Великий палець лівої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:15
-msgid "Left middle finger"
-msgstr "Середній палець лівої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:18
-msgid "Left ring finger"
-msgstr "Безіменний палець лівої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:21
-msgid "Left little finger"
-msgstr "Мізинець лівої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:24
-msgid "Right thumb"
-msgstr "Великий палець правої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:27
-msgid "Right middle finger"
-msgstr "Середній палець правої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:30
-msgid "Right ring finger"
-msgstr "Безіменний палець правої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:33
-msgid "Right little finger"
-msgstr "Мізинець палець правої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:39
-#: panels/user-accounts/um-fingerprint-dialog.c:775
-msgid "Enable Fingerprint Login"
-msgstr "Увімкнути вхід у систему за відбитком"
-
-#: panels/user-accounts/data/account-fingerprint.ui:89
-msgid "_Right index finger"
-msgstr "Вказівний палець _правої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:105
-msgid "_Left index finger"
-msgstr "Вказівний палець _лівої руки"
-
-#: panels/user-accounts/data/account-fingerprint.ui:126
-msgid "_Other finger:"
-msgstr "_Інший палець:"
-
-#: panels/user-accounts/data/account-fingerprint.ui:222
-msgid ""
-"Your fingerprint was successfully saved. You should now be able to log in "
-"using your fingerprint reader."
-msgstr ""
-"Відбиток було успішно збережено. Тепер можна увійти у систему з "
-"використанням пристрою сканування відбитків."
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
 msgid "Users"
@@ -7622,87 +7774,6 @@ msgstr "Новий пароль не містити достатньо різн�
 #, c-format
 msgid "Unknown error"
 msgstr "Невідома помилка"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:147
-msgid ""
-"You are not allowed to access the device. Contact your system administrator."
-msgstr ""
-"Доступ до пристрою читання заборонено. Зв'яжіться з системним "
-"адміністратором."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:149
-msgid "The device is already in use."
-msgstr "Пристрій уже використовується."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:151
-msgid "An internal error occurred."
-msgstr "Виникла внутрішня помилка."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:334
-msgid "Delete registered fingerprints?"
-msgstr "Вилучити зареєстровані відбитки?"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:338
-msgid "_Delete Fingerprints"
-msgstr "В_илучити відбитки"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:344
-msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
-msgstr ""
-"Вилучити зареєстровані відбитки пальців та заборонити вхід через відбитки?"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:526
-msgid "Done!"
-msgstr "Зроблено!"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:588
-#: panels/user-accounts/um-fingerprint-dialog.c:630
-#, c-format
-msgid "Could not access “%s” device"
-msgstr "Неможливо одержати доступ до пристрою «%s»"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:677
-#, c-format
-msgid "Could not start finger capture on “%s” device"
-msgstr "Неможливо почати сканування відбитків пальців на «%s»"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:724
-msgid "Could not access any fingerprint readers"
-msgstr "Не вдалось знайти пристрої сканування відбитків"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:725
-msgid "Please contact your system administrator for help."
-msgstr "Зв'яжіться з системним адміністратором за допомогою."
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "To enable fingerprint login, you need to save one of your fingerprints, using the
-#. * 'Digital Persona U.are.U 4000/4000B' device."
-#.
-#: panels/user-accounts/um-fingerprint-dialog.c:809
-#, c-format
-msgid ""
-"To enable fingerprint login, you need to save one of your fingerprints, "
-"using the “%s” device."
-msgstr ""
-"Щоб увімкнути вхід через відбитки пальців, треба зняти один або декілька "
-"зразків, використовуючи пристрій «%s»"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:816
-msgid "Selecting finger"
-msgstr "Вибирання пальця"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:817
-msgid "Enrolling fingerprints"
-msgstr "Зарахування відбитків"
 
 #: panels/user-accounts/user-utils.c:435
 msgid ""
@@ -8102,6 +8173,60 @@ msgstr[2] "%u входів"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Системі звуки"
+
+#~ msgid "Enable Fingerprint Login"
+#~ msgstr "Увімкнути вхід у систему за відбитком"
+
+#~ msgid "_Other finger:"
+#~ msgstr "_Інший палець:"
+
+#~ msgid ""
+#~ "Your fingerprint was successfully saved. You should now be able to log in "
+#~ "using your fingerprint reader."
+#~ msgstr ""
+#~ "Відбиток було успішно збережено. Тепер можна увійти у систему з "
+#~ "використанням пристрою сканування відбитків."
+
+#~ msgid ""
+#~ "You are not allowed to access the device. Contact your system "
+#~ "administrator."
+#~ msgstr ""
+#~ "Доступ до пристрою читання заборонено. Зв'яжіться з системним "
+#~ "адміністратором."
+
+#~ msgid "The device is already in use."
+#~ msgstr "Пристрій уже використовується."
+
+#~ msgid "An internal error occurred."
+#~ msgstr "Виникла внутрішня помилка."
+
+#~ msgid "Delete registered fingerprints?"
+#~ msgstr "Вилучити зареєстровані відбитки?"
+
+#~ msgid "Done!"
+#~ msgstr "Зроблено!"
+
+#~ msgid "Could not access “%s” device"
+#~ msgstr "Неможливо одержати доступ до пристрою «%s»"
+
+#~ msgid "Could not start finger capture on “%s” device"
+#~ msgstr "Неможливо почати сканування відбитків пальців на «%s»"
+
+#~ msgid "Could not access any fingerprint readers"
+#~ msgstr "Не вдалось знайти пристрої сканування відбитків"
+
+#~ msgid "Please contact your system administrator for help."
+#~ msgstr "Зв'яжіться з системним адміністратором за допомогою."
+
+#~ msgid ""
+#~ "To enable fingerprint login, you need to save one of your fingerprints, "
+#~ "using the “%s” device."
+#~ msgstr ""
+#~ "Щоб увімкнути вхід через відбитки пальців, треба зняти один або декілька "
+#~ "зразків, використовуючи пристрій «%s»"
+
+#~ msgid "Selecting finger"
+#~ msgstr "Вибирання пальця"
 
 #~ msgid "∶"
 #~ msgstr "∶"
