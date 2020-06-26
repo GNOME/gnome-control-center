@@ -203,7 +203,7 @@ get_bus_cb (GObject      *source_object,
 {
   GDBusConnection  *bus;
   g_autoptr(GError) error = NULL;
-  GTask            *task = user_data;
+  g_autoptr(GTask)  task = user_data;
 
   bus = g_bus_get_finish (res, &error);
   if (bus != NULL)
@@ -261,7 +261,6 @@ pp_printer_rename_finish (PpPrinter     *self,
                           GError       **error)
 {
   g_return_val_if_fail (g_task_is_valid (res, self), FALSE);
-  g_object_unref (res);
 
   return g_task_propagate_boolean (G_TASK (res), error);
 }
