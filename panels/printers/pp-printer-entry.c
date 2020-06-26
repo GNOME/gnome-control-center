@@ -402,7 +402,7 @@ on_printer_rename_cb (GObject      *source_object,
                       GAsyncResult *result,
                       gpointer      user_data)
 {
-  PpPrinterEntry *self = user_data;
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
   g_autofree gchar *printer_name = NULL;
 
   if (!pp_printer_rename_finish (PP_PRINTER (source_object), result, NULL))
@@ -484,7 +484,7 @@ check_clean_heads_maintenance_command_cb (GObject      *source_object,
                                           GAsyncResult *res,
                                           gpointer      user_data)
 {
-  PpPrinterEntry       *self = user_data;
+  PpPrinterEntry       *self = PP_PRINTER_ENTRY (user_data);
   gboolean              is_supported = FALSE;
   g_autoptr(GError)     error = NULL;
 
@@ -521,7 +521,7 @@ clean_heads_maintenance_command_cb (GObject      *source_object,
                                     GAsyncResult *res,
                                     gpointer      user_data)
 {
-  PpPrinterEntry *self = user_data;
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
   g_autoptr(GError) error = NULL;
 
   if (!pp_maintenance_command_execute_finish (PP_MAINTENANCE_COMMAND (source_object), res, &error))
@@ -554,7 +554,7 @@ get_jobs_cb (GObject      *source_object,
              GAsyncResult *result,
              gpointer      user_data)
 {
-  PpPrinterEntry      *self = user_data;
+  PpPrinterEntry      *self = PP_PRINTER_ENTRY (user_data);
   g_autoptr(GError)    error = NULL;
   g_autoptr(GPtrArray) jobs = NULL;
   g_autofree gchar    *button_label = NULL;
@@ -617,7 +617,7 @@ jobs_dialog_response_cb (GtkDialog  *dialog,
                          gint        response_id,
                          gpointer    user_data)
 {
-  PpPrinterEntry *self = (PpPrinterEntry*) user_data;
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
 
   if (self->pp_jobs_dialog != NULL)
     {

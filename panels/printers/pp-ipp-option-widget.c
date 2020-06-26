@@ -261,7 +261,7 @@ static void
 printer_add_option_async_cb (gboolean success,
                              gpointer user_data)
 {
-  PpIPPOptionWidget *self = user_data;
+  PpIPPOptionWidget *self = PP_IPP_OPTION_WIDGET (user_data);
 
   update_widget (user_data);
   g_clear_object (&self->cancellable);
@@ -530,7 +530,7 @@ static void
 get_ipp_attributes_cb (GHashTable *table,
                        gpointer    user_data)
 {
-  PpIPPOptionWidget *self = user_data;
+  PpIPPOptionWidget *self = PP_IPP_OPTION_WIDGET (user_data);
 
   if (self->ipp_attribute)
     g_hash_table_unref (self->ipp_attribute);

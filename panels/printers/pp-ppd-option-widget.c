@@ -320,7 +320,7 @@ static void
 printer_add_option_async_cb (gboolean success,
                              gpointer user_data)
 {
-  PpPPDOptionWidget *self = user_data;
+  PpPPDOptionWidget *self = PP_PPD_OPTION_WIDGET (user_data);
 
   update_widget (user_data);
   g_clear_object (&self->cancellable);
@@ -531,7 +531,7 @@ static void
 get_named_dest_cb (cups_dest_t *dest,
                    gpointer     user_data)
 {
-  PpPPDOptionWidget *self = user_data;
+  PpPPDOptionWidget *self = PP_PPD_OPTION_WIDGET (user_data);
 
   if (self->destination)
     cupsFreeDests (1, self->destination);
@@ -549,7 +549,7 @@ static void
 printer_get_ppd_cb (const gchar *ppd_filename,
                     gpointer     user_data)
 {
-  PpPPDOptionWidget *self = user_data;
+  PpPPDOptionWidget *self = PP_PPD_OPTION_WIDGET (user_data);
 
   if (self->ppd_filename)
     {

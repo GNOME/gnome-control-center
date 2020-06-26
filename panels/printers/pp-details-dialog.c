@@ -143,7 +143,7 @@ set_ppd_cb (gchar    *printer_name,
             gboolean  success,
             gpointer  user_data)
 {
-  PpDetailsDialog *self = (PpDetailsDialog*) user_data;
+  PpDetailsDialog *self = PP_DETAILS_DIALOG (user_data);
 
   gtk_label_set_text (GTK_LABEL (self->printer_model_label), self->ppd_file_name);
 }
@@ -153,7 +153,7 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
                                   gint       response_id,
                                   gpointer   user_data)
 {
-  PpDetailsDialog *self = (PpDetailsDialog*) user_data;
+  PpDetailsDialog *self = PP_DETAILS_DIALOG (user_data);
 
   if (response_id == GTK_RESPONSE_OK)
     {
@@ -182,7 +182,7 @@ static void
 get_all_ppds_async_cb (PPDList  *ppds,
                        gpointer  user_data)
 {
-  PpDetailsDialog *self = user_data;
+  PpDetailsDialog *self = PP_DETAILS_DIALOG (user_data);
 
   self->all_ppds_list = ppds;
 

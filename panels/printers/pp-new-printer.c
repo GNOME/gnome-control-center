@@ -367,7 +367,7 @@ static void
 printer_add_real_async_cb (cups_dest_t *destination,
                            gpointer     user_data)
 {
-  PpNewPrinter        *self = user_data;
+  PpNewPrinter        *self = PP_NEW_PRINTER (user_data);
   gboolean             success = FALSE;
 
   if (destination)
@@ -391,7 +391,7 @@ printer_add_real_async_dbus_cb (GObject      *source_object,
                                 GAsyncResult *res,
                                 gpointer      user_data)
 {
-  PpNewPrinter        *self = user_data;
+  PpNewPrinter        *self = PP_NEW_PRINTER (user_data);
   g_autoptr(GVariant)  output = NULL;
   g_autoptr(GError)    error = NULL;
 
@@ -518,7 +518,7 @@ printer_add_async_scb3 (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  PpNewPrinter        *self = user_data;
+  PpNewPrinter        *self = PP_NEW_PRINTER (user_data);
   g_autoptr(GVariant)  output = NULL;
   PPDName             *ppd_item = NULL;
   g_autoptr(GError)    error = NULL;
@@ -560,7 +560,7 @@ install_printer_drivers_cb (GObject      *source_object,
                             GAsyncResult *res,
                             gpointer      user_data)
 {
-  PpNewPrinter        *self = user_data;
+  PpNewPrinter        *self = PP_NEW_PRINTER (user_data);
   g_autoptr(GVariant)  output = NULL;
   g_autoptr(GError)    error = NULL;
 
@@ -612,7 +612,7 @@ printer_add_async_scb (GObject      *source_object,
                        GAsyncResult *res,
                        gpointer      user_data)
 {
-  PpNewPrinter        *self = user_data;
+  PpNewPrinter        *self = PP_NEW_PRINTER (user_data);
   g_autoptr(GDBusConnection) bus = NULL;
   GVariantBuilder      array_builder;
   g_autoptr(GVariant)  output = NULL;
@@ -692,7 +692,7 @@ static void
 printer_add_async_scb4 (const gchar *ppd_filename,
                         gpointer     user_data)
 {
-  PpNewPrinter *self = user_data;
+  PpNewPrinter *self = PP_NEW_PRINTER (user_data);
 
   self->ppd_file_name = g_strdup (ppd_filename);
   if (self->ppd_file_name)
@@ -742,7 +742,7 @@ typedef struct
 static void
 printer_configure_async_finish (PCData *data)
 {
-  PpNewPrinter *self = data->new_printer;
+  PpNewPrinter *self = PP_NEW_PRINTER (data->new_printer);
 
   if (data->set_accept_jobs_finished &&
       data->set_enabled_finished &&

@@ -245,7 +245,7 @@ _pp_host_get_snmp_devices_thread (GTask        *task,
                                   gpointer      task_data,
                                   GCancellable *cancellable)
 {
-  PpHost           *self = source_object;
+  PpHost           *self = PP_HOST (source_object);
   PpHostPrivate    *priv = pp_host_get_instance_private (self);
   PpDevicesList    *devices;
   PpPrintDevice    *device;
@@ -340,7 +340,7 @@ _pp_host_get_remote_cups_devices_thread (GTask        *task,
                                          GCancellable *cancellable)
 {
   cups_dest_t   *dests = NULL;
-  PpHost        *self = (PpHost *) source_object;
+  PpHost        *self = PP_HOST (source_object);
   PpHostPrivate *priv = pp_host_get_instance_private (self);
   PpDevicesList *devices;
   PpPrintDevice *device;
@@ -623,7 +623,7 @@ _pp_host_get_lpd_devices_thread (GTask        *task,
 {
   g_autoptr(GSocketConnection) connection = NULL;
   PpPrintDevice               *device;
-  PpHost                      *self = source_object;
+  PpHost                      *self = PP_HOST (source_object);
   PpHostPrivate               *priv = pp_host_get_instance_private (self);
   PpDevicesList               *devices;
   g_autoptr(GSocketClient)     client = NULL;
