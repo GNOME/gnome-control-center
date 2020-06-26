@@ -1452,8 +1452,7 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
                     result,
                     data->user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
 
   if (data->ppd_copy)
     {
@@ -1523,8 +1522,7 @@ printer_set_ppd_async (const gchar  *printer_name,
 out:
   callback (g_strdup (printer_name), FALSE, user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data->printer_name);
   g_free (data);
 }
@@ -1580,8 +1578,7 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
 out:
   data->callback (g_strdup (data->printer_name), FALSE, data->user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data->printer_name);
   g_free (data->ppd_copy);
   g_free (data);
@@ -1642,8 +1639,7 @@ printer_set_ppd_file_async (const gchar  *printer_name,
 out:
   callback (g_strdup (printer_name), FALSE, user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data->printer_name);
   g_free (data);
 }
@@ -1841,8 +1837,7 @@ out:
                   g_cancellable_is_cancelled (data->cancellable),
                   data->user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data->printer_name);
   g_free (data);
 }
@@ -1954,8 +1949,7 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                       g_cancellable_is_cancelled (data->cancellable),
                       data->user_data);
 
-      if (data->cancellable)
-        g_object_unref (data->cancellable);
+      g_clear_object (&data->cancellable);
       g_free (data->printer_name);
       g_free (data);
     }
@@ -2008,8 +2002,7 @@ out:
                   g_cancellable_is_cancelled (data->cancellable),
                   data->user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data->printer_name);
   g_free (data);
 }
@@ -2228,8 +2221,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                   data->device_uri,
                   data->user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data->device_uri);
   g_free (data->printer_name);
   g_free (data);
@@ -2299,8 +2291,7 @@ get_device_attributes_async_scb (GHashTable *result,
 out:
   data->callback (NULL, NULL, NULL, data->user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data->device_uri);
   g_free (data->printer_name);
   g_free (data);
@@ -2413,8 +2404,7 @@ get_all_ppds_data_free (gpointer user_data)
 
   if (data->context)
     g_main_context_unref (data->context);
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data);
 }
 
@@ -3115,8 +3105,7 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
   if (!g_cancellable_is_cancelled (data->cancellable))
     data->callback (success, data->user_data);
 
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data);
 }
 
@@ -3304,8 +3293,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
       g_list_free_full (data->backend_list, g_free);
       data->backend_list = NULL;
       g_object_unref (source_object);
-      if (data->cancellable)
-        g_object_unref (data->cancellable);
+      g_clear_object (&data->cancellable);
       g_free (data);
 
       return;
@@ -3383,8 +3371,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
     }
 
   g_object_unref (source_object);
-  if (data->cancellable)
-    g_object_unref (data->cancellable);
+  g_clear_object (&data->cancellable);
   g_free (data);
 }
 

@@ -614,10 +614,7 @@ detach_from_cups_notifier (gpointer data)
     self->subscription_renewal_id = 0;
   }
 
-  if (self->cups_proxy != NULL) {
-    g_object_unref (self->cups_proxy);
-    self->cups_proxy = NULL;
-  }
+  g_clear_object (&self->cups_proxy);
 }
 
 static void
