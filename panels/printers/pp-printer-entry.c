@@ -555,14 +555,11 @@ get_jobs_cb (GObject      *source_object,
              gpointer      user_data)
 {
   PpPrinterEntry      *self = user_data;
-  PpPrinter           *printer = PP_PRINTER (source_object);
   g_autoptr(GError)    error = NULL;
   g_autoptr(GPtrArray) jobs = NULL;
   g_autofree gchar    *button_label = NULL;
 
-  jobs = pp_printer_get_jobs_finish (printer, result, &error);
-
-  g_object_unref (source_object);
+  jobs = pp_printer_get_jobs_finish (PP_PRINTER (source_object), result, &error);
 
   if (error != NULL)
     {
@@ -599,7 +596,7 @@ get_jobs_cb (GObject      *source_object,
 void
 pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
 {
-  PpPrinter *printer;
+  g_autoptr(PpPrinter) printer = NULL;
 
   g_cancellable_cancel (self->get_jobs_cancellable);
   g_clear_object (&self->get_jobs_cancellable);

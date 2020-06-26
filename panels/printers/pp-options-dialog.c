@@ -820,8 +820,6 @@ print_test_page_cb (GObject      *source_object,
 {
   pp_printer_print_file_finish (PP_PRINTER (source_object),
                                 result, NULL);
-
-  g_object_unref (source_object);
 }
 
 static void
@@ -850,7 +848,7 @@ test_page_cb (PpOptionsDialog *self)
 
       if (filename != NULL)
         {
-          PpPrinter *printer;
+          g_autoptr(PpPrinter) printer = NULL;
 
           printer = pp_printer_new (self->printer_name);
           pp_printer_print_file_async (printer,
