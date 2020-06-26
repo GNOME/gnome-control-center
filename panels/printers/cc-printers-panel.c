@@ -322,12 +322,6 @@ cc_printers_panel_dispose (GObject *object)
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
 
-static void
-cc_printers_panel_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (cc_printers_panel_parent_class)->finalize (object);
-}
-
 static const char *
 cc_printers_panel_get_help_uri (CcPanel *panel)
 {
@@ -344,7 +338,6 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
   object_class->set_property = cc_printers_panel_set_property;
   object_class->constructed = cc_printers_panel_constructed;
   object_class->dispose = cc_printers_panel_dispose;
-  object_class->finalize = cc_printers_panel_finalize;
 
   panel_class->get_help_uri = cc_printers_panel_get_help_uri;
 
