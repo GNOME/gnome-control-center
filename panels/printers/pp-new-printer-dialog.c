@@ -887,7 +887,6 @@ group_physical_devices_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output)
     {
@@ -935,7 +934,7 @@ get_cups_devices_cb (GList    *devices,
                      gpointer  user_data)
 {
   PpNewPrinterDialog         *self = user_data;
-  GDBusConnection            *bus;
+  g_autoptr(GDBusConnection)  bus = NULL;
   GVariantBuilder             device_list;
   GVariantBuilder             device_hash;
   PpPrintDevice             **all_devices;
