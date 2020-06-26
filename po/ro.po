@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-06-17 12:02+0000\n"
-"PO-Revision-Date: 2020-06-17 18:50+0300\n"
+"POT-Creation-Date: 2020-06-26 04:13+0000\n"
+"PO-Revision-Date: 2020-06-26 08:26+0200\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian Gnome Team\n"
@@ -211,8 +211,8 @@ msgstr "Cameră"
 #: panels/keyboard/cc-keyboard-option.c:378
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:93
 #: panels/keyboard/keyboard-shortcuts.c:425 panels/network/network-proxy.ui:126
-#: panels/user-accounts/cc-user-panel.c:942
-#: panels/user-accounts/um-fingerprint-dialog.c:219
+#: panels/user-accounts/cc-user-panel.c:865
+#: panels/user-accounts/cc-user-panel.c:957
 #: subprojects/gvc/gvc-mixer-control.c:1876
 msgid "Disabled"
 msgstr "Dezactivat"
@@ -378,11 +378,11 @@ msgstr "Selectați o fotografie"
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
+#: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:652
 #: panels/user-accounts/cc-user-panel.c:670
 #: panels/user-accounts/data/join-dialog.ui:20
-#: panels/user-accounts/um-fingerprint-dialog.c:335
 msgid "_Cancel"
 msgstr "_Renunță"
 
@@ -620,6 +620,7 @@ msgstr "_Continuă"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:67 panels/region/cc-format-chooser.ui:64
+#: panels/user-accounts/cc-fingerprint-dialog.ui:73
 msgid "_Done"
 msgstr "_Gata"
 
@@ -909,7 +910,6 @@ msgstr ""
 "\"windows\">Microsoft Windows</a>."
 
 #: panels/color/cc-color-panel.ui:607
-#: panels/user-accounts/um-fingerprint-dialog.c:818
 msgid "Summary"
 msgstr "Rezumat"
 
@@ -1390,51 +1390,51 @@ msgstr "%s (%s)"
 
 #: panels/datetime/cc-datetime-panel.ui:26
 msgid "January"
-msgstr "ianuarie"
+msgstr "Ianuarie"
 
 #: panels/datetime/cc-datetime-panel.ui:29
 msgid "February"
-msgstr "februarie"
+msgstr "Februarie"
 
 #: panels/datetime/cc-datetime-panel.ui:32
 msgid "March"
-msgstr "martie"
+msgstr "Martie"
 
 #: panels/datetime/cc-datetime-panel.ui:35
 msgid "April"
-msgstr "aprilie"
+msgstr "Aprilie"
 
 #: panels/datetime/cc-datetime-panel.ui:38
 msgid "May"
-msgstr "mai"
+msgstr "Mai"
 
 #: panels/datetime/cc-datetime-panel.ui:41
 msgid "June"
-msgstr "iunie"
+msgstr "Iunie"
 
 #: panels/datetime/cc-datetime-panel.ui:44
 msgid "July"
-msgstr "iulie"
+msgstr "Iulie"
 
 #: panels/datetime/cc-datetime-panel.ui:47
 msgid "August"
-msgstr "august"
+msgstr "August"
 
 #: panels/datetime/cc-datetime-panel.ui:50
 msgid "September"
-msgstr "septembrie"
+msgstr "Septembrie"
 
 #: panels/datetime/cc-datetime-panel.ui:53
 msgid "October"
-msgstr "octombrie"
+msgstr "Octombrie"
 
 #: panels/datetime/cc-datetime-panel.ui:56
 msgid "November"
-msgstr "noiembrie"
+msgstr "Noiembrie"
 
 #: panels/datetime/cc-datetime-panel.ui:59
 msgid "December"
-msgstr "decembrie"
+msgstr "Decembrie"
 
 #: panels/datetime/cc-datetime-panel.ui:65
 #: panels/datetime/gnome-datetime-panel.desktop.in.in:3
@@ -1753,7 +1753,7 @@ msgstr "De la"
 #: panels/display/cc-night-light-page.ui:194
 #: panels/display/cc-night-light-page.ui:297
 msgid "Hour"
-msgstr "oră"
+msgstr "Oră"
 
 #: panels/display/cc-night-light-page.ui:203
 #: panels/display/cc-night-light-page.ui:306
@@ -1763,7 +1763,7 @@ msgstr ":"
 #: panels/display/cc-night-light-page.ui:222
 #: panels/display/cc-night-light-page.ui:325
 msgid "Minute"
-msgstr "minut"
+msgstr "Minut"
 
 #. This is the short form for the time period in the morning
 #: panels/display/cc-night-light-page.ui:234
@@ -3570,7 +3570,7 @@ msgstr "Negestionat"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:935
+#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:950
 msgid "Unavailable"
 msgstr "Indisponibil"
 
@@ -4733,18 +4733,18 @@ msgid "Authentication Required"
 msgstr "Necesită autentificare"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:675
+#: panels/printers/cc-printers-panel.c:720
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Imprimanta „%s” a fost ștearsă"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:893
+#: panels/printers/cc-printers-panel.c:989
 msgid "Failed to add new printer."
 msgstr "Nu s-a putut adăuga imprimanta nouă."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1182
+#: panels/printers/cc-printers-panel.c:1321
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nu s-a putut încărca interfața cu utilizatorul: %s"
@@ -5195,12 +5195,12 @@ msgid "Manufacturer"
 msgstr "Producător"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:593 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:592 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Nicio sarcină activă"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:598
+#: panels/printers/pp-printer-entry.c:597
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5208,114 +5208,114 @@ msgstr[0] "%u sarcină"
 msgstr[1] "%u sarcini"
 msgstr[2] "%u de sarcini"
 
+#. Translators: Name of job which makes printer to clean its heads
+#: panels/printers/pp-printer-entry.c:715
+msgid "Clean print heads"
+msgstr "Curăță capetele de imprimare"
+
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:744
+#: panels/printers/pp-printer-entry.c:766
 msgid "Low on toner"
 msgstr "Toner puțin"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:746
+#: panels/printers/pp-printer-entry.c:768
 msgid "Out of toner"
 msgstr "Fără toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:749
+#: panels/printers/pp-printer-entry.c:771
 msgid "Low on developer"
 msgstr "Developator puțin"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:752
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of developer"
 msgstr "Fără developator"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:754
+#: panels/printers/pp-printer-entry.c:776
 msgid "Low on a marker supply"
 msgstr "Stoc de culoare scăzut"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:778
 msgid "Out of a marker supply"
 msgstr "Stoc de culoare terminat"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:758
+#: panels/printers/pp-printer-entry.c:780
 msgid "Open cover"
 msgstr "Capac deschis"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:760
+#: panels/printers/pp-printer-entry.c:782
 msgid "Open door"
 msgstr "Ușă deschisă"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:762
+#: panels/printers/pp-printer-entry.c:784
 msgid "Low on paper"
 msgstr "Hârtie puțină"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:764
+#: panels/printers/pp-printer-entry.c:786
 msgid "Out of paper"
 msgstr "Fără hârtie"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:788
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Deconectată"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:768
-#: panels/printers/pp-printer-entry.c:896
+#: panels/printers/pp-printer-entry.c:790
+#: panels/printers/pp-printer-entry.c:933
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Oprită"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:770
+#: panels/printers/pp-printer-entry.c:792
 msgid "Waste receptacle almost full"
 msgstr "Recipientul pentru deșeuri este aproape plin"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:772
+#: panels/printers/pp-printer-entry.c:794
 msgid "Waste receptacle full"
 msgstr "Recipientul pentru deșeuri este plin"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:796
 msgid "The optical photo conductor is near end of life"
 msgstr "Foto-conductorul optic este aproape de sfârșitul vieții"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:798
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Foto-conductorul optic nu mai funcționează"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:882
+#: panels/printers/pp-printer-entry.c:919
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pregătită"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:887
+#: panels/printers/pp-printer-entry.c:924
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nu acceptă sarcini de imprimare"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:892
+#: panels/printers/pp-printer-entry.c:929
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesează"
-
-#. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:916
-msgid "Clean print heads"
-msgstr "Curăță capetele de imprimare"
 
 #: panels/printers/printer-entry.ui:14
 msgid "Printing Options"
@@ -5395,8 +5395,9 @@ msgstr "Metric"
 msgid "Formats"
 msgstr "Formate"
 
-#: panels/region/cc-format-chooser.ui:48 panels/wacom/wacom-stylus-page.ui:37
-#: shell/cc-window.ui:232
+#: panels/region/cc-format-chooser.ui:48
+#: panels/user-accounts/cc-fingerprint-dialog.ui:53
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:232
 msgid "Back"
 msgstr "Înapoi"
 
@@ -7091,6 +7092,194 @@ msgstr "Faceți o fotografie…"
 msgid "Select a File…"
 msgstr "Selectați un fișier…"
 
+#: panels/user-accounts/cc-fingerprint-dialog.ui:8
+msgid "Fingerprint Manager"
+msgstr "Administrator de amprente"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:23
+msgid "Fingerprint"
+msgstr "Amprentă"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:118
+msgid "_No"
+msgstr "_Nu"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:128
+msgid "_Yes"
+msgstr "_Da"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:155
+msgid ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+msgstr ""
+"Doriți să ștergeți amprentele înregistrate astfel încât autentificarea pe "
+"bază de amprente să fie dezactivată?"
+
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/user-accounts/cc-fingerprint-dialog.ui:249
+msgid "No Fingerprint device"
+msgstr "Niciun dispozitiv de amprente"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:259
+msgid "Ensure the device is properly connected."
+msgstr "Asigurați-vă că dispozitivul este conectat corespunzător."
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:264
+msgid "No fingerprint device"
+msgstr "Niciun dispozitiv de amprente"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:280
+msgid "Choose the fingerprint device you want to configure"
+msgstr "Alegeți un dispozitiv pentru amprente pentru configurare"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:309
+msgid "Fingerprint Device"
+msgstr "Dispozitiv de amprente"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:322
+msgid ""
+"Fingerprint login allows you to unlock and log into your computer with your "
+"finger"
+msgstr ""
+"Autentificarea cu amprentă vă permite să deblocați și să vă autentificați la "
+"calculator cu degetul"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:352
+msgid "_Delete Fingerprints"
+msgstr "Ș_terge amprentele"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:363
+msgid "Fingerprint Login"
+msgstr "Autentificare prin amprentă"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:412
+msgid "Fingerprint Enroll"
+msgstr "Înregistrarea amprentei"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:436
+msgid "_Re-enroll this finger…"
+msgstr "_Re-înregistrați acest deget…"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:470
+#, c-format
+msgid "Failed to list fingerprints: %s"
+msgstr "Eșec la listarea amprentelor: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:536
+#, c-format
+msgid "Failed to delete saved fingerprints: %s"
+msgstr "Eșec la ștergerea amprentelor salvate: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:565
+msgid "Left thumb"
+msgstr "Degetul mare stâng"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:567
+msgid "Left middle finger"
+msgstr "Degetul mijlociu stâng"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:569
+msgid "_Left index finger"
+msgstr "Arătătoru_l mâinii stângi"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:571
+msgid "Left ring finger"
+msgstr "Degetul inelar stâng"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:573
+msgid "Left little finger"
+msgstr "Degetul mic stâng"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:575
+msgid "Right thumb"
+msgstr "Degetul mare drept"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:577
+msgid "Right middle finger"
+msgstr "Degetul mijlociu drept"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:579
+msgid "_Right index finger"
+msgstr "Arătătorul mâinii d_repte"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:581
+msgid "Right ring finger"
+msgstr "Degetul inelar drept"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:583
+msgid "Right little finger"
+msgstr "Degetul mic drept"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:585
+msgid "Unknown Finger"
+msgstr "Deget necunoscut"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:719
+msgctxt "Fingerprint enroll state"
+msgid "Complete"
+msgstr "Complet"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:729
+msgid "Fingerprint device disconnected"
+msgstr "Dispozitivul de amprente este deconectat"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:731
+msgid "Fingerprint device storage is full"
+msgstr "Dispozitivul de stocare amprente este plin"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:733
+msgid "Failed to enroll new fingerprint"
+msgstr "Eșec la înregistrarea noii amprente"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:764
+#, c-format
+msgid "Failed to start enrollment: %s"
+msgstr "Eșec la pornirea înregistrării: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:772
+msgctxt "Fingerprint enroll state"
+msgid "Failed to enroll new fingerprint"
+msgstr "Eșec la înregistrarea noii amprente"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:803
+#, c-format
+msgid "Failed to stop enrollment: %s"
+msgstr "Eșec la oprirea înregistrării: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:847
+msgid ""
+"Repeatedly lift and place your finger on the reader to enroll your "
+"fingerprint"
+msgstr ""
+"Ridicați și plasați degetul pe cititor în mod repetat pentru a vă înregistra "
+"amprenta"
+
+#. TRANSLATORS: This is the label for the button to enroll a new finger
+#: panels/user-accounts/cc-fingerprint-dialog.c:989
+msgid "Scan new fingerprint"
+msgstr "Scanați amprentă nouă"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1029
+#, c-format
+msgid "Failed to release fingerprint device %s: %s"
+msgstr "Eșec la detașarea dispozitivului de amprente %s: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1100
+msgctxt "Fingerprint enroll state"
+msgid "Problem Reading Device"
+msgstr "Problemă la citirea dispozitiivului"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1133
+#, c-format
+msgid "Failed to claim fingerprint device %s: %s"
+msgstr "Eșec la asumarea dispozitivului de amprente %s: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1270
+#, c-format
+msgid "Failed to get fingerprint devices: %s"
+msgstr "Eșec la obținerea dispozitivelor de amprente: %s"
+
 #: panels/user-accounts/cc-login-history-dialog.c:69
 msgid "This Week"
 msgstr "Această săptămână"
@@ -7300,16 +7489,16 @@ msgid "Logged in"
 msgstr "Autentificat"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:939
-#: panels/user-accounts/um-fingerprint-dialog.c:216
+#: panels/user-accounts/cc-user-panel.c:863
+#: panels/user-accounts/cc-user-panel.c:954
 msgid "Enabled"
 msgstr "Activat"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1265
 msgid "Failed to contact the accounts service"
 msgstr "Contactarea serviciului pentru conturi a eșuat"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1267
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
 
@@ -7317,7 +7506,7 @@ msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1299
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7325,12 +7514,12 @@ msgstr ""
 "Pentru a face schimbări,\n"
 "dați clic întâi pe iconița *"
 
-#: panels/user-accounts/cc-user-panel.c:1362
+#: panels/user-accounts/cc-user-panel.c:1373
 msgid "Delete the selected user account"
 msgstr "Șterge contul de utilizator selectat"
 
-#: panels/user-accounts/cc-user-panel.c:1374
-#: panels/user-accounts/cc-user-panel.c:1489
+#: panels/user-accounts/cc-user-panel.c:1385
+#: panels/user-accounts/cc-user-panel.c:1506
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7407,63 +7596,6 @@ msgstr "Nu au fost găsiți utilizatori"
 #: panels/user-accounts/cc-user-panel.ui:641
 msgid "Unlock to add a user account."
 msgstr "Deblochează pentru a adăuga un cont de utilizator."
-
-#: panels/user-accounts/data/account-fingerprint.ui:12
-msgid "Left thumb"
-msgstr "Degetul mare stâng"
-
-#: panels/user-accounts/data/account-fingerprint.ui:15
-msgid "Left middle finger"
-msgstr "Degetul mijlociu stâng"
-
-#: panels/user-accounts/data/account-fingerprint.ui:18
-msgid "Left ring finger"
-msgstr "Degetul inelar stâng"
-
-#: panels/user-accounts/data/account-fingerprint.ui:21
-msgid "Left little finger"
-msgstr "Degetul mic stâng"
-
-#: panels/user-accounts/data/account-fingerprint.ui:24
-msgid "Right thumb"
-msgstr "Degetul mare drept"
-
-#: panels/user-accounts/data/account-fingerprint.ui:27
-msgid "Right middle finger"
-msgstr "Degetul mijlociu drept"
-
-#: panels/user-accounts/data/account-fingerprint.ui:30
-msgid "Right ring finger"
-msgstr "Degetul inelar drept"
-
-#: panels/user-accounts/data/account-fingerprint.ui:33
-msgid "Right little finger"
-msgstr "Degetul mic drept"
-
-#: panels/user-accounts/data/account-fingerprint.ui:39
-#: panels/user-accounts/um-fingerprint-dialog.c:775
-msgid "Enable Fingerprint Login"
-msgstr "Autentificare pe bază de amprente"
-
-#: panels/user-accounts/data/account-fingerprint.ui:89
-msgid "_Right index finger"
-msgstr "Arătătorul mâinii d_repte"
-
-#: panels/user-accounts/data/account-fingerprint.ui:105
-msgid "_Left index finger"
-msgstr "Arătătoru_l mâinii stângi"
-
-#: panels/user-accounts/data/account-fingerprint.ui:126
-msgid "_Other finger:"
-msgstr "Al_t deget:"
-
-#: panels/user-accounts/data/account-fingerprint.ui:222
-msgid ""
-"Your fingerprint was successfully saved. You should now be able to log in "
-"using your fingerprint reader."
-msgstr ""
-"Amprenta dumneavoastră a fost salvată cu succes. Acum ar trebui să vă puteți "
-"autentifica folosind cititorul de amprente."
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
 msgid "Users"
@@ -7668,88 +7800,6 @@ msgstr "Noua parolă nu conține suficiente caractere diferite"
 #, c-format
 msgid "Unknown error"
 msgstr "Eroare necunoscută"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:147
-msgid ""
-"You are not allowed to access the device. Contact your system administrator."
-msgstr ""
-"Nu sunteți autorizat să accesați acest dispozitiv. Contactați "
-"administratorul de sistem."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:149
-msgid "The device is already in use."
-msgstr "Acest dispozitivul este deja folosit."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:151
-msgid "An internal error occurred."
-msgstr "A apărut o eroare internă."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:334
-msgid "Delete registered fingerprints?"
-msgstr "Ștergeți amprentele înregistrate?"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:338
-msgid "_Delete Fingerprints"
-msgstr "Ș_terge amprentele"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:344
-msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
-msgstr ""
-"Doriți să ștergeți amprentele înregistrate astfel încât autentificarea pe "
-"bază de amprente să fie dezactivată?"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:526
-msgid "Done!"
-msgstr "Gata!"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:588
-#: panels/user-accounts/um-fingerprint-dialog.c:630
-#, c-format
-msgid "Could not access “%s” device"
-msgstr "Nu s-a putut accesa dispozitivul „%s”"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:677
-#, c-format
-msgid "Could not start finger capture on “%s” device"
-msgstr "Nu s-a putut porni înregistrarea degetului pe dispozitivul „%s”"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:724
-msgid "Could not access any fingerprint readers"
-msgstr "Nu s-a putut accesa niciun cititor de amprente"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:725
-msgid "Please contact your system administrator for help."
-msgstr "Contactați administratorul de sistem pentru ajutor."
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "To enable fingerprint login, you need to save one of your fingerprints, using the
-#. * 'Digital Persona U.are.U 4000/4000B' device."
-#.
-#: panels/user-accounts/um-fingerprint-dialog.c:809
-#, c-format
-msgid ""
-"To enable fingerprint login, you need to save one of your fingerprints, "
-"using the “%s” device."
-msgstr ""
-"Pentru a activa autentificarea pe bază de amprente, trebuie să salvați una "
-"din amprentele dumneavoastră folosind dispozitivul „%s”."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:816
-msgid "Selecting finger"
-msgstr "Selectare deget"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:817
-msgid "Enrolling fingerprints"
-msgstr "Impunere amprente"
 
 #: panels/user-accounts/user-utils.c:435
 msgid ""
@@ -8152,6 +8202,60 @@ msgstr[2] "%u de intrări"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sunete de sistem"
+
+#~ msgid "Enable Fingerprint Login"
+#~ msgstr "Autentificare pe bază de amprente"
+
+#~ msgid "_Other finger:"
+#~ msgstr "Al_t deget:"
+
+#~ msgid ""
+#~ "Your fingerprint was successfully saved. You should now be able to log in "
+#~ "using your fingerprint reader."
+#~ msgstr ""
+#~ "Amprenta dumneavoastră a fost salvată cu succes. Acum ar trebui să vă "
+#~ "puteți autentifica folosind cititorul de amprente."
+
+#~ msgid ""
+#~ "You are not allowed to access the device. Contact your system "
+#~ "administrator."
+#~ msgstr ""
+#~ "Nu sunteți autorizat să accesați acest dispozitiv. Contactați "
+#~ "administratorul de sistem."
+
+#~ msgid "The device is already in use."
+#~ msgstr "Acest dispozitivul este deja folosit."
+
+#~ msgid "An internal error occurred."
+#~ msgstr "A apărut o eroare internă."
+
+#~ msgid "Delete registered fingerprints?"
+#~ msgstr "Ștergeți amprentele înregistrate?"
+
+#~ msgid "Done!"
+#~ msgstr "Gata!"
+
+#~ msgid "Could not access “%s” device"
+#~ msgstr "Nu s-a putut accesa dispozitivul „%s”"
+
+#~ msgid "Could not start finger capture on “%s” device"
+#~ msgstr "Nu s-a putut porni înregistrarea degetului pe dispozitivul „%s”"
+
+#~ msgid "Could not access any fingerprint readers"
+#~ msgstr "Nu s-a putut accesa niciun cititor de amprente"
+
+#~ msgid "Please contact your system administrator for help."
+#~ msgstr "Contactați administratorul de sistem pentru ajutor."
+
+#~ msgid ""
+#~ "To enable fingerprint login, you need to save one of your fingerprints, "
+#~ "using the “%s” device."
+#~ msgstr ""
+#~ "Pentru a activa autentificarea pe bază de amprente, trebuie să salvați "
+#~ "una din amprentele dumneavoastră folosind dispozitivul „%s”."
+
+#~ msgid "Selecting finger"
+#~ msgstr "Selectare deget"
 
 #~ msgid "∶"
 #~ msgstr "∶"
@@ -9281,9 +9385,6 @@ msgstr "Sunete de sistem"
 #~ msgid "Don't _warn me again"
 #~ msgstr "Nu mă mai a_vertiza"
 
-#~ msgid "No"
-#~ msgstr "Nu"
-
 #~ msgid "Yes"
 #~ msgstr "Da"
 
@@ -10105,9 +10206,6 @@ msgstr "Sunete de sistem"
 
 #~ msgid "Sound Output Volume"
 #~ msgstr "Volum ieșire"
-
-#~ msgid "Failed to start Sound Preferences: %s"
-#~ msgstr "Pornirea Preferințelor sunet a eșuat: %s"
 
 #~ msgid "_Mute"
 #~ msgstr "_Mut"
