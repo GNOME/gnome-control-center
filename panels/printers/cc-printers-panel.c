@@ -70,6 +70,8 @@ struct _CcPrintersPanel
 
   GtkBuilder *builder;
 
+  PpCups *cups;
+
   cups_dest_t *dests;
   int num_dests;
 
@@ -297,6 +299,7 @@ cc_printers_panel_dispose (GObject *object)
                                NULL);
     }
 
+  g_clear_object (&self->cups);
   g_clear_object (&self->pp_new_printer_dialog);
   g_clear_pointer (&self->new_printer_name, g_free);
   g_clear_pointer (&self->renamed_printer_name, g_free);
@@ -493,10 +496,8 @@ static gboolean
 renew_subscription (gpointer data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) data;
-  g_autoptr(PpCups) cups = NULL;
 
-  cups = pp_cups_new ();
-  pp_cups_renew_subscription_async (cups,
+  pp_cups_renew_subscription_async (self->cups,
                                     self->subscription_id,
                                     subscription_events,
                                     SUBSCRIPTION_DURATION,
@@ -559,10 +560,8 @@ static void
 attach_to_cups_notifier (gpointer data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) data;
-  g_autoptr(PpCups) cups = NULL;
 
-  cups = pp_cups_new ();
-  pp_cups_renew_subscription_async (cups,
+  pp_cups_renew_subscription_async (self->cups,
                                     self->subscription_id,
                                     subscription_events,
                                     SUBSCRIPTION_DURATION,
@@ -583,7 +582,6 @@ static void
 detach_from_cups_notifier (gpointer data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) data;
-  g_autoptr(PpCups) cups = NULL;
 
   if (self->dbus_subscription_id != 0) {
     g_dbus_connection_signal_unsubscribe (self->cups_bus_connection,
@@ -591,8 +589,7 @@ detach_from_cups_notifier (gpointer data)
     self->dbus_subscription_id = 0;
   }
 
-  cups = pp_cups_new ();
-  pp_cups_cancel_subscription_async (cups,
+  pp_cups_cancel_subscription_async (self->cups,
                                      self->subscription_id,
                                      subscription_cancel_cb,
                                      NULL);
@@ -910,10 +907,7 @@ actualize_printers_list_cb (GObject      *source_object,
 static void
 actualize_printers_list (CcPrintersPanel *self)
 {
-  g_autoptr(PpCups) cups = NULL;
-
-  cups = pp_cups_new ();
-  pp_cups_get_dests_async (cups,
+  pp_cups_get_dests_async (self->cups,
                            cc_panel_get_cancellable (CC_PANEL (self)),
                            actualize_printers_list_cb,
                            self);
@@ -1067,10 +1061,8 @@ static gboolean
 cups_status_check (gpointer user_data)
 {
   CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
-  g_autoptr(PpCups) cups = NULL;
 
-  cups = pp_cups_new ();
-  pp_cups_connection_test_async (cups, NULL, cups_status_check_cb, self);
+  pp_cups_connection_test_async (self->cups, NULL, cups_status_check_cb, self);
 
   return self->cups_status_check_id != 0;
 }
@@ -1218,7 +1210,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
 {
   GtkWidget              *top_widget;
   GtkWidget              *widget;
-  g_autoptr(PpCups)       cups = NULL;
   g_autoptr(GError)       error = NULL;
   gchar                  *objects[] = { "overlay", "permission-infobar", "top-right-buttons", "printer-add-button", "search-button", NULL };
   guint                   builder_result;
@@ -1228,6 +1219,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
   /* initialize main data structure */
   self->builder = gtk_builder_new ();
   self->reference = g_object_new (G_TYPE_OBJECT, NULL);
+
+  self->cups = pp_cups_new ();
 
   self->printer_entries = g_hash_table_new_full (g_str_hash,
                                                  g_str_equal,
@@ -1329,8 +1322,7 @@ Please check your installation");
                       get_all_ppds_async_cb,
                       self);
 
-  cups = pp_cups_new ();
-  pp_cups_connection_test_async (cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
+  pp_cups_connection_test_async (self->cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
   gtk_container_add (GTK_CONTAINER (self), top_widget);
   gtk_widget_show_all (GTK_WIDGET (self));
 }
