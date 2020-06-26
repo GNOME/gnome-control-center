@@ -1706,11 +1706,9 @@ cups_get_dests_cb (GObject      *source_object,
 {
   PpNewPrinterDialog        *self = user_data;
   PpCupsDests               *dests;
-  PpCups                    *cups = (PpCups *) source_object;
   g_autoptr(GError)          error = NULL;
 
-  dests = pp_cups_get_dests_finish (cups, res, &error);
-  g_object_unref (source_object);
+  dests = pp_cups_get_dests_finish (PP_CUPS (source_object), res, &error);
 
   if (dests)
     {
@@ -1809,7 +1807,7 @@ populate_devices_list (PpNewPrinterDialog *self)
   GtkTreeViewColumn         *column;
   g_autoptr(PpSamba)         samba = NULL;
   g_autoptr(GEmblem)         emblem = NULL;
-  PpCups                    *cups;
+  g_autoptr(PpCups)          cups = NULL;
   g_autoptr(GIcon)           icon = NULL;
   g_autoptr(GIcon)           emblem_icon = NULL;
   GtkCellRenderer           *text_renderer;
