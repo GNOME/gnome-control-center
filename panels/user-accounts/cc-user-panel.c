@@ -52,7 +52,8 @@
 #include "cc-realm-manager.h"
 #include "cc-user-accounts-resources.h"
 #include "cc-user-image.h"
-#include "um-fingerprint-dialog.h"
+#include "cc-fingerprint-manager.h"
+#include "cc-fingerprint-dialog.h"
 #include "user-utils.h"
 
 #include "cc-common-language.h"
@@ -112,8 +113,7 @@ struct _CcUserPanel {
 
         CcAvatarChooser *avatar_chooser;
 
-        gboolean needs_fingerprint_update;
-        GCancellable *fingerprint_cancellable;
+        CcFingerprintManager *fingerprint_manager;
 
         gint other_accounts;
 };
@@ -847,6 +847,25 @@ is_parental_controls_enabled_for_user (ActUser *user)
 #endif
 
 static void
+update_fingerprint_row_state (CcUserPanel *self, GParamSpec *spec, CcFingerprintManager *fingerprint_manager)
+{
+        CcFingerprintState state = cc_fingerprint_manager_get_state (fingerprint_manager);
+
+        if (state != CC_FINGERPRINT_STATE_UPDATING) {
+                gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row),
+                                        state != CC_FINGERPRINT_STATE_NONE);
+        }
+
+        gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row),
+                                  state != CC_FINGERPRINT_STATE_UPDATING);
+
+        if (state == CC_FINGERPRINT_STATE_ENABLED)
+                gtk_label_set_text (self->fingerprint_state_label, _("Enabled"));
+        else if (state == CC_FINGERPRINT_STATE_DISABLED)
+                gtk_label_set_text (self->fingerprint_state_label, _("Disabled"));
+}
+
+static void
 show_user (ActUser *user, CcUserPanel *self)
 {
         gchar *lang, *text, *name;
@@ -905,22 +924,18 @@ show_user (ActUser *user, CcUserPanel *self)
                  g_settings_get_boolean (self->login_screen_settings,
                                          "enable-fingerprint-authentication")));
 
-        if (!self->needs_fingerprint_update) {
-                gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), show);
+        if (show) {
+                if (!self->fingerprint_manager) {
+                        self->fingerprint_manager = cc_fingerprint_manager_new (user);
+                        g_signal_connect_object (self->fingerprint_manager,
+                                                 "notify::state",
+                                                 G_CALLBACK (update_fingerprint_row_state),
+                                                 self, G_CONNECT_SWAPPED);
+                }
+
+                update_fingerprint_row_state (self, NULL, self->fingerprint_manager);
         } else {
                 gtk_widget_set_visible (GTK_WIDGET (self->fingerprint_row), FALSE);
-
-                if (show) {
-                        g_cancellable_cancel (self->fingerprint_cancellable);
-                        g_clear_object (&self->fingerprint_cancellable);
-
-                        self->fingerprint_cancellable = g_cancellable_new ();
-                        self->needs_fingerprint_update = FALSE;
-
-                        set_fingerprint_row (GTK_WIDGET (self->fingerprint_row),
-                                             self->fingerprint_state_label,
-                                             self->fingerprint_cancellable);
-                }
         }
 
         /* Autologin: show when local account */
@@ -1164,21 +1179,17 @@ static void
 change_fingerprint (CcUserPanel *self)
 {
         ActUser *user;
+        GtkWindow *top_level;
+        CcFingerprintDialog *dialog;
 
         user = get_selected_user (self);
+        top_level = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
 
         g_assert (g_strcmp0 (g_get_user_name (), act_user_get_user_name (user)) == 0);
 
-        g_cancellable_cancel (self->fingerprint_cancellable);
-        g_clear_object (&self->fingerprint_cancellable);
-
-        self->fingerprint_cancellable = g_cancellable_new ();
-
-        fingerprint_button_clicked (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
-                                    GTK_WIDGET (self->fingerprint_row),
-                                    self->fingerprint_state_label,
-                                    user,
-                                    self->fingerprint_cancellable);
+        dialog = cc_fingerprint_dialog_new (self->fingerprint_manager);
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), top_level);
+        gtk_widget_show (GTK_WIDGET (dialog));
 }
 
 static void
@@ -1420,6 +1431,11 @@ on_permission_changed (CcUserPanel *self)
         }
 
         if (is_authorized || self_selected) {
+                CcFingerprintState fingerprint_state = CC_FINGERPRINT_STATE_NONE;
+
+                if (self->fingerprint_manager)
+                        fingerprint_state = cc_fingerprint_manager_get_state (self->fingerprint_manager);
+
                 gtk_stack_set_visible_child (self->user_icon_stack, GTK_WIDGET (self->user_icon_button));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->language_row), TRUE);
@@ -1428,7 +1444,8 @@ on_permission_changed (CcUserPanel *self)
                 gtk_widget_set_sensitive (GTK_WIDGET (self->password_row), TRUE);
                 remove_unlock_tooltip (GTK_WIDGET (self->password_row));
 
-                gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row), TRUE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row),
+                                          fingerprint_state != CC_FINGERPRINT_STATE_UPDATING);
                 remove_unlock_tooltip (GTK_WIDGET (self->fingerprint_row));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), TRUE);
@@ -1558,7 +1575,6 @@ cc_user_panel_init (CcUserPanel *self)
         gtk_widget_init_template (GTK_WIDGET (self));
 
         self->um = act_user_manager_get_default ();
-        self->needs_fingerprint_update = TRUE;
 
         provider = gtk_css_provider_new ();
         gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/user-accounts/user-accounts-dialog.css");
@@ -1581,9 +1597,6 @@ cc_user_panel_dispose (GObject *object)
         g_clear_object (&self->selected_user);
 
         g_clear_object (&self->login_screen_settings);
-
-        g_cancellable_cancel (self->fingerprint_cancellable);
-        g_clear_object (&self->fingerprint_cancellable);
 
         g_clear_pointer ((GtkWidget **)&self->language_chooser, gtk_widget_destroy);
         g_clear_object (&self->permission);
