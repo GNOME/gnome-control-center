@@ -39,17 +39,8 @@ struct _PpCups
 G_DEFINE_TYPE (PpCups, pp_cups, G_TYPE_OBJECT);
 
 static void
-pp_cups_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (pp_cups_parent_class)->finalize (object);
-}
-
-static void
 pp_cups_class_init (PpCupsClass *klass)
 {
-  GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-
-  gobject_class->finalize = pp_cups_finalize;
 }
 
 static void
