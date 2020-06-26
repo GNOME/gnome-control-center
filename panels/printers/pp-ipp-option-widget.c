@@ -108,19 +108,6 @@ pp_ipp_option_widget_init (PpIPPOptionWidget *self)
 {
   gtk_orientable_set_orientation (GTK_ORIENTABLE (self),
                                   GTK_ORIENTATION_HORIZONTAL);
-
-  self->switch_button = NULL;
-  self->spin_button = NULL;
-  self->combo = NULL;
-  self->box = NULL;
-
-  self->printer_name = NULL;
-  self->option_name = NULL;
-
-  self->option_supported = NULL;
-  self->option_default = NULL;
-
-  self->ipp_attribute = NULL;
 }
 
 static void
