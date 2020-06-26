@@ -272,13 +272,11 @@ pp_maintenance_command_execute_async (PpMaintenanceCommand *self,
                                       GAsyncReadyCallback   callback,
                                       gpointer              user_data)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_check_cancellable (task, TRUE);
   g_task_run_in_thread (task, _pp_maintenance_command_execute_thread);
-
-  g_object_unref (task);
 }
 
 gboolean
@@ -374,13 +372,11 @@ pp_maintenance_command_is_supported_async  (PpMaintenanceCommand *self,
                                             GAsyncReadyCallback   callback,
                                             gpointer              user_data)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_check_cancellable (task, TRUE);
   g_task_run_in_thread (task, _pp_maintenance_command_is_supported_thread);
-
-  g_object_unref (task);
 }
 
 gboolean
