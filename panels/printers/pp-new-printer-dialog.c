@@ -249,14 +249,10 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
   PpDevicesList             *result;
   PpPrintDevice             *device;
   gboolean                   cancelled = FALSE;
-  PpSamba                   *samba = (PpSamba *) source_object;
   g_autoptr(GError)          error = NULL;
   GList                     *iter;
 
-  g_object_ref (samba);
-
-  result = pp_samba_get_devices_finish (samba, res, &error);
-  g_object_unref (source_object);
+  result = pp_samba_get_devices_finish (PP_SAMBA (source_object), res, &error);
 
   if (result != NULL)
     {
@@ -555,6 +551,7 @@ pp_new_printer_dialog_finalize (GObject *object)
   g_clear_object (&self->local_printer_icon);
   g_clear_object (&self->remote_printer_icon);
   g_clear_object (&self->authenticated_server_icon);
+  g_clear_object (&self->samba_host);
 
   if (self->num_of_dests > 0)
     {
@@ -1159,17 +1156,12 @@ get_samba_host_devices_cb (GObject      *source_object,
 {
   PpNewPrinterDialog        *self = user_data;
   PpDevicesList             *result;
-  PpSamba                   *samba = (PpSamba *) source_object;
   g_autoptr(GError)          error = NULL;
 
-  result = pp_samba_get_devices_finish (samba, res, &error);
-  g_object_unref (source_object);
+  result = pp_samba_get_devices_finish (PP_SAMBA (source_object), res, &error);
 
   if (result)
     {
-      if ((gpointer) source_object == (gpointer) self->samba_host)
-        self->samba_host = NULL;
-
       add_devices_to_list (self, result->devices);
 
       update_dialog_state (self);
@@ -1181,9 +1173,6 @@ get_samba_host_devices_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         {
           g_warning ("%s", error->message);
-
-          if ((gpointer) source_object == (gpointer) self->samba_host)
-            self->samba_host = NULL;
 
           update_dialog_state (self);
         }
@@ -1197,11 +1186,9 @@ get_samba_devices_cb (GObject      *source_object,
 {
   PpNewPrinterDialog        *self = user_data;
   PpDevicesList             *result;
-  PpSamba                   *samba = (PpSamba *) source_object;
   g_autoptr(GError)          error = NULL;
 
-  result = pp_samba_get_devices_finish (samba, res, &error);
-  g_object_unref (source_object);
+  result = pp_samba_get_devices_finish (PP_SAMBA (source_object), res, &error);
 
   if (result)
     {
@@ -1864,7 +1851,7 @@ static void
 populate_devices_list (PpNewPrinterDialog *self)
 {
   GtkTreeViewColumn         *column;
-  PpSamba                   *samba;
+  g_autoptr(PpSamba)         samba = NULL;
   g_autoptr(GEmblem)         emblem = NULL;
   PpCups                    *cups;
   g_autoptr(GIcon)           icon = NULL;
