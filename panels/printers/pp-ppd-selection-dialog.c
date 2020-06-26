@@ -52,7 +52,6 @@ enum
 
 struct _PpPPDSelectionDialog {
   GtkBuilder *builder;
-  GtkWidget  *parent;
   GtkWidget  *dialog;
 
   UserResponseCallback user_callback;
@@ -60,7 +59,6 @@ struct _PpPPDSelectionDialog {
 
   gchar           *ppd_name;
   gchar           *ppd_display_name;
-  GtkResponseType  response;
   gchar           *manufacturer;
 
   PPDList *list;
@@ -294,7 +292,6 @@ ppd_selection_dialog_response_cb (PpPPDSelectionDialog *self,
 
   pp_ppd_selection_dialog_hide (self);
 
-  self->response = response_id;
   if (response_id == GTK_RESPONSE_OK)
     {
       models_treeview = (GtkTreeView*)
@@ -336,7 +333,6 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
   self = g_new0 (PpPPDSelectionDialog, 1);
 
   self->builder = gtk_builder_new ();
-  self->parent = GTK_WIDGET (parent);
 
   builder_result = gtk_builder_add_objects_from_resource (self->builder,
                                                           "/org/gnome/control-center/printers/ppd-selection-dialog.ui",
@@ -352,7 +348,6 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
   self->user_callback = user_callback;
   self->user_data = user_data;
 
-  self->response = GTK_RESPONSE_NONE;
   self->list = ppd_list_copy (ppd_list);
 
   self->manufacturer = get_standard_manufacturers_name (manufacturer);

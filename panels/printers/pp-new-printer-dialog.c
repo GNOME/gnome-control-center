@@ -109,9 +109,6 @@ struct _PpNewPrinterDialog
   gboolean  samba_authenticated_searching;
   gboolean  samba_searching;
 
-  GtkCellRenderer *text_renderer;
-  GtkCellRenderer *icon_renderer;
-
   PpPPDSelectionDialog *ppd_selection_dialog;
 
   PpPrintDevice *new_device;
@@ -547,9 +544,6 @@ pp_new_printer_dialog_finalize (GObject *object)
 
   g_cancellable_cancel (self->remote_host_cancellable);
   g_cancellable_cancel (self->cancellable);
-
-  self->text_renderer = NULL;
-  self->icon_renderer = NULL;
 
   g_clear_handle_id (&self->host_search_timeout_id, g_source_remove);
   g_clear_object (&self->remote_host_cancellable);
@@ -1889,6 +1883,8 @@ populate_devices_list (PpNewPrinterDialog *self)
   GEmblem                   *emblem;
   PpCups                    *cups;
   GIcon                     *icon, *emblem_icon;
+  GtkCellRenderer           *text_renderer;
+  GtkCellRenderer           *icon_renderer;
 
   g_signal_connect_object (gtk_tree_view_get_selection (self->treeview),
                            "changed", G_CALLBACK (device_selection_changed_cb), self, G_CONNECT_SWAPPED);
@@ -1909,21 +1905,21 @@ populate_devices_list (PpNewPrinterDialog *self)
   g_object_unref (emblem_icon);
   g_object_unref (emblem);
 
-  self->icon_renderer = gtk_cell_renderer_pixbuf_new ();
-  g_object_set (self->icon_renderer, "stock-size", GTK_ICON_SIZE_DIALOG, NULL);
-  gtk_cell_renderer_set_alignment (self->icon_renderer, 1.0, 0.5);
-  gtk_cell_renderer_set_padding (self->icon_renderer, 4, 4);
-  column = gtk_tree_view_column_new_with_attributes ("Icon", self->icon_renderer,
+  icon_renderer = gtk_cell_renderer_pixbuf_new ();
+  g_object_set (icon_renderer, "stock-size", GTK_ICON_SIZE_DIALOG, NULL);
+  gtk_cell_renderer_set_alignment (icon_renderer, 1.0, 0.5);
+  gtk_cell_renderer_set_padding (icon_renderer, 4, 4);
+  column = gtk_tree_view_column_new_with_attributes ("Icon", icon_renderer,
                                                      "gicon", DEVICE_GICON_COLUMN, NULL);
   gtk_tree_view_column_set_max_width (column, -1);
   gtk_tree_view_column_set_min_width (column, 80);
   gtk_tree_view_append_column (self->treeview, column);
 
 
-  self->text_renderer = gtk_cell_renderer_text_new ();
-  column = gtk_tree_view_column_new_with_attributes ("Devices", self->text_renderer,
+  text_renderer = gtk_cell_renderer_text_new ();
+  column = gtk_tree_view_column_new_with_attributes ("Devices", text_renderer,
                                                      NULL);
-  gtk_tree_view_column_set_cell_data_func (column, self->text_renderer, cell_data_func,
+  gtk_tree_view_column_set_cell_data_func (column, text_renderer, cell_data_func,
                                            self, NULL);
   gtk_tree_view_append_column (self->treeview, column);
 
