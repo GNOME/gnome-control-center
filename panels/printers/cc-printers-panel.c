@@ -353,7 +353,6 @@ on_get_job_attributes_cb (GObject      *source_object,
   g_autoptr(GError)       error = NULL;
 
   attributes = pp_job_get_attributes_finish (PP_JOB (source_object), res, &error);
-  g_object_unref (source_object);
 
   if (attributes != NULL)
     {
@@ -401,7 +400,6 @@ on_cups_notification (GDBusConnection *connection,
   gchar                  *text = NULL;
   gchar                  *printer_uri = NULL;
   gchar                  *printer_state_reasons = NULL;
-  PpJob                  *job;
   gchar                  *job_state_reasons = NULL;
   gchar                  *job_name = NULL;
   guint                   job_id;
@@ -457,6 +455,8 @@ on_cups_notification (GDBusConnection *connection,
   else if (g_strcmp0 (signal_name, "JobCreated") == 0 ||
            g_strcmp0 (signal_name, "JobCompleted") == 0)
     {
+      g_autoptr(PpJob) job = NULL;
+
       job = g_object_new (PP_TYPE_JOB, "id", job_id, NULL);
       pp_job_get_attributes_async (job,
                                    requested_attrs,
