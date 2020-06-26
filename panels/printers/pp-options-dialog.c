@@ -789,11 +789,7 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
                                    GAsyncResult *res,
                                    gpointer      user_data)
 {
-  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
-
-  pp_maintenance_command_execute_finish (command, res, NULL);
-
-  g_object_unref (command);
+  pp_maintenance_command_execute_finish (PP_MAINTENANCE_COMMAND(source_object), res, NULL);
 }
 
 static gchar *
@@ -867,7 +863,7 @@ test_page_cb (PpOptionsDialog *self)
         }
       else
         {
-          PpMaintenanceCommand *command;
+          g_autoptr(PpMaintenanceCommand) command = NULL;
 
           command = pp_maintenance_command_new (self->printer_name,
                                                 "PrintSelfTestPage",

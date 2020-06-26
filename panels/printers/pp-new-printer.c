@@ -1094,13 +1094,11 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
                                    GAsyncResult *res,
                                    gpointer      user_data)
 {
-  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
   g_autoptr(GError)     error = NULL;
   PCData               *data;
   gboolean              result;
 
-  result = pp_maintenance_command_execute_finish (command, res, &error);
-  g_object_unref (source_object);
+  result = pp_maintenance_command_execute_finish (PP_MAINTENANCE_COMMAND (source_object), res, &error);
 
   if (result)
     {
@@ -1193,7 +1191,8 @@ printer_configure_async (PpNewPrinter *self)
   /* Run autoconfiguration of printer */
   if (!self->is_network_device)
     {
-      PpMaintenanceCommand *command;
+      g_autoptr(PpMaintenanceCommand) command = NULL;
+
       command = pp_maintenance_command_new (self->name,
                                             "autoconfigure",
                                             NULL,
