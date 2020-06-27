@@ -21,8 +21,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2020-06-17 12:02+0000\n"
-"PO-Revision-Date: 2020-02-15 13:12+0100\n"
+"POT-Creation-Date: 2020-06-26 04:13+0000\n"
+"PO-Revision-Date: 2020-06-27 23:25+0200\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <info@softcatala.org>\n"
 "Language: ca\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 
 #: panels/applications/cc-applications-panel.c:770
 msgid "System Bus"
@@ -211,8 +211,8 @@ msgstr "Càmera"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:93
 #: panels/keyboard/keyboard-shortcuts.c:425
 #: panels/network/network-proxy.ui:126
-#: panels/user-accounts/cc-user-panel.c:942
-#: panels/user-accounts/um-fingerprint-dialog.c:219
+#: panels/user-accounts/cc-user-panel.c:865
+#: panels/user-accounts/cc-user-panel.c:957
 #: subprojects/gvc/gvc-mixer-control.c:1876
 msgid "Disabled"
 msgstr "Inhabilitat"
@@ -376,11 +376,11 @@ msgstr "Selecciona una imatge"
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
+#: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:652
 #: panels/user-accounts/cc-user-panel.c:670
 #: panels/user-accounts/data/join-dialog.ui:20
-#: panels/user-accounts/um-fingerprint-dialog.c:335
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
@@ -621,6 +621,7 @@ msgstr "_Continua"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:67 panels/region/cc-format-chooser.ui:64
+#: panels/user-accounts/cc-fingerprint-dialog.ui:73
 msgid "_Done"
 msgstr "_Fet"
 
@@ -909,7 +910,6 @@ msgstr ""
 "href=\"windows\">Microsoft Windows</a>."
 
 #: panels/color/cc-color-panel.ui:607
-#: panels/user-accounts/um-fingerprint-dialog.c:818
 msgid "Summary"
 msgstr "Resum"
 
@@ -3581,7 +3581,7 @@ msgstr "No gestionat"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:935
+#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:950
 msgid "Unavailable"
 msgstr "No disponible"
 
@@ -4739,18 +4739,18 @@ msgid "Authentication Required"
 msgstr "Cal autenticació"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:675
+#: panels/printers/cc-printers-panel.c:720
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "S'ha suprimit la impressora «%s»"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:893
+#: panels/printers/cc-printers-panel.c:989
 msgid "Failed to add new printer."
 msgstr "No s'ha pogut afegir una impressora nova."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1182
+#: panels/printers/cc-printers-panel.c:1321
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No s'ha pogut carregar la interfície d'usuari: %s"
@@ -5216,126 +5216,126 @@ msgid "Manufacturer"
 msgstr "Fabricant"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:593 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:592 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "No hi ha tasques actives"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:598
+#: panels/printers/pp-printer-entry.c:597
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
 msgstr[0] "%u tasca"
 msgstr[1] "%u tasques"
 
+#. Translators: Name of job which makes printer to clean its heads
+#: panels/printers/pp-printer-entry.c:715
+msgid "Clean print heads"
+msgstr "Neteja els capçals d'impressió"
+
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:744
+#: panels/printers/pp-printer-entry.c:766
 msgid "Low on toner"
 msgstr "Tòner baix"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:746
+#: panels/printers/pp-printer-entry.c:768
 msgid "Out of toner"
 msgstr "Sense tòner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:749
+#: panels/printers/pp-printer-entry.c:771
 msgid "Low on developer"
 msgstr "Revelador baix"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:752
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of developer"
 msgstr "Sense revelador"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:754
+#: panels/printers/pp-printer-entry.c:776
 msgid "Low on a marker supply"
 msgstr "Marcador baix"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:778
 msgid "Out of a marker supply"
 msgstr "Sense marcador"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:758
+#: panels/printers/pp-printer-entry.c:780
 msgid "Open cover"
 msgstr "Tapa oberta"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:760
+#: panels/printers/pp-printer-entry.c:782
 msgid "Open door"
 msgstr "Porta oberta"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:762
+#: panels/printers/pp-printer-entry.c:784
 msgid "Low on paper"
 msgstr "Té poc paper"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:764
+#: panels/printers/pp-printer-entry.c:786
 msgid "Out of paper"
 msgstr "Sense paper"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:788
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Apagada"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:768
-#: panels/printers/pp-printer-entry.c:896
+#: panels/printers/pp-printer-entry.c:790
+#: panels/printers/pp-printer-entry.c:933
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:770
+#: panels/printers/pp-printer-entry.c:792
 msgid "Waste receptacle almost full"
 msgstr "El receptacle de residus està quasi ple"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:772
+#: panels/printers/pp-printer-entry.c:794
 msgid "Waste receptacle full"
 msgstr "El receptacle de residus està ple"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:796
 msgid "The optical photo conductor is near end of life"
 msgstr "El conductor òptic fotogràfic està al final de la seva vida"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:798
 msgid "The optical photo conductor is no longer functioning"
 msgstr "El conductor òptic fotogràfic ja no funciona"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:882
+#: panels/printers/pp-printer-entry.c:919
 msgctxt "printer state"
 msgid "Ready"
 msgstr "A punt"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:887
+#: panels/printers/pp-printer-entry.c:924
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No accepta tasques"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:892
+#: panels/printers/pp-printer-entry.c:929
 msgctxt "printer state"
 msgid "Processing"
 msgstr "S'està processant"
-
-#. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:916
-msgid "Clean print heads"
-msgstr "Neteja els capçals d'impressió"
 
 #: panels/printers/printer-entry.ui:14
 msgid "Printing Options"
@@ -5416,8 +5416,9 @@ msgstr "Mètric"
 msgid "Formats"
 msgstr "Formats"
 
-#: panels/region/cc-format-chooser.ui:48 panels/wacom/wacom-stylus-page.ui:37
-#: shell/cc-window.ui:232
+#: panels/region/cc-format-chooser.ui:48
+#: panels/user-accounts/cc-fingerprint-dialog.ui:53
+#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:232
 msgid "Back"
 msgstr "Enrere"
 
@@ -7113,6 +7114,204 @@ msgstr "Feu una fotografia…"
 msgid "Select a File…"
 msgstr "Selecciona un fitxer..."
 
+#: panels/user-accounts/cc-fingerprint-dialog.ui:8
+msgid "Fingerprint Manager"
+msgstr "Gestor de l'empremta dactilar"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:23
+msgid "Fingerprint"
+msgstr "Empremta dactilar"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:118
+msgid "_No"
+msgstr "_No"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:128
+msgid "_Yes"
+msgstr "_Sí"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:155
+msgid ""
+"Do you want to delete your registered fingerprints so fingerprint login is "
+"disabled?"
+msgstr ""
+"Voleu suprimir les empremtes dactilars registrades de manera que "
+"s'inhabiliti l'entrada amb empremta dactilar?"
+
+#. Translators: This is the empty state page label which states that there are
+#. no devices ready.
+#: panels/user-accounts/cc-fingerprint-dialog.ui:249
+msgid "No Fingerprint device"
+msgstr "No hi ha cap dispositiu d'empremtes"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:259
+msgid "Ensure the device is properly connected."
+msgstr "Assegureu-vos que el dispositiu està correctament connectat."
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:264
+msgid "No fingerprint device"
+msgstr "No hi ha cap dispositiu d'empremtes"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:280
+msgid "Choose the fingerprint device you want to configure"
+msgstr "Trieu el dispositiu d'empremtes que voleu configurar"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:309
+msgid "Fingerprint Device"
+msgstr "Dispositiu d'empremtes"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:322
+msgid ""
+"Fingerprint login allows you to unlock and log into your computer with your "
+"finger"
+msgstr ""
+"L'inici de sessió amb empremta dactilar permet desbloquejar i iniciar sessió"
+" a l'ordinador amb el dit"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:352
+msgid "_Delete Fingerprints"
+msgstr "_Suprimeix les empremtes dactilars"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:363
+msgid "Fingerprint Login"
+msgstr "Entrada amb empremta dactilar"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:412
+msgid "Fingerprint Enroll"
+msgstr "Afegeix empremta dactilar"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:436
+msgid "_Re-enroll this finger…"
+msgstr "_Torna a afegir aquest dit..."
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:470
+#, fuzzy, c-format
+#| msgid "Failed to upload file: %s"
+msgid "Failed to list fingerprints: %s"
+msgstr "No s'ha pogut pujar el fitxer: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:536
+#, fuzzy, c-format
+#| msgid "Failed to delete user"
+msgid "Failed to delete saved fingerprints: %s"
+msgstr "No s'ha pogut suprimir l'usuari"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:565
+msgid "Left thumb"
+msgstr "Polze esquerre"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:567
+msgid "Left middle finger"
+msgstr "Dit del mig esquerre"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:569
+msgid "_Left index finger"
+msgstr "Dit índex _esquerre"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:571
+msgid "Left ring finger"
+msgstr "Dit anular esquerre"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:573
+msgid "Left little finger"
+msgstr "Dit petit esquerre"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:575
+msgid "Right thumb"
+msgstr "Polze dret"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:577
+msgid "Right middle finger"
+msgstr "Dit del mig dret"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:579
+msgid "_Right index finger"
+msgstr "Dit índex d_ret"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:581
+msgid "Right ring finger"
+msgstr "Dit anular dret"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:583
+msgid "Right little finger"
+msgstr "Dit petit dret"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:585
+msgid "Unknown Finger"
+msgstr "Dit desconegut"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:719
+msgctxt "Fingerprint enroll state"
+msgid "Complete"
+msgstr "Completat"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:729
+msgid "Fingerprint device disconnected"
+msgstr "S'ha desconnectat el dispositiu d'empremtes"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:731
+msgid "Fingerprint device storage is full"
+msgstr "L'emmagatzematge del dispositiu d'empremtes està ple"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:733
+#, fuzzy
+#| msgid "Failed to add new printer."
+msgid "Failed to enroll new fingerprint"
+msgstr "No s'ha pogut afegir una impressora nova."
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:764
+#, fuzzy, c-format
+#| msgid "Failed to upload file: %s"
+msgid "Failed to start enrollment: %s"
+msgstr "No s'ha pogut pujar el fitxer: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:772
+#, fuzzy
+#| msgid "Failed to add new printer."
+msgctxt "Fingerprint enroll state"
+msgid "Failed to enroll new fingerprint"
+msgstr "No s'ha pogut afegir una impressora nova."
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:803
+#, fuzzy, c-format
+#| msgid "Failed to upload file: %s"
+msgid "Failed to stop enrollment: %s"
+msgstr "No s'ha pogut pujar el fitxer: %s"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:847
+msgid ""
+"Repeatedly lift and place your finger on the reader to enroll your "
+"fingerprint"
+msgstr "Aixequeu i poseu el dit al lector per a inscriure la vostra empremta dactilar"
+
+#. TRANSLATORS: This is the label for the button to enroll a new finger
+#: panels/user-accounts/cc-fingerprint-dialog.c:989
+msgid "Scan new fingerprint"
+msgstr "S'estan escanejant les empremtes dactilars noves"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1029
+#, fuzzy, c-format
+#| msgid "Failed to forget device: "
+msgid "Failed to release fingerprint device %s: %s"
+msgstr "S'ha produït un error en alliberar el dispositiu: "
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1100
+msgctxt "Fingerprint enroll state"
+msgid "Problem Reading Device"
+msgstr "Hi ha un problema llegint el dispositiu"
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1133
+#, fuzzy, c-format
+#| msgid "Failed to forget device: "
+msgid "Failed to claim fingerprint device %s: %s"
+msgstr "S'ha produït un error en oblidar el dispositiu: "
+
+#: panels/user-accounts/cc-fingerprint-dialog.c:1270
+#, fuzzy, c-format
+#| msgid "Failed to forget device: "
+msgid "Failed to get fingerprint devices: %s"
+msgstr "S'ha produït un error en oblidar el dispositiu: "
+
 #: panels/user-accounts/cc-login-history-dialog.c:69
 msgid "This Week"
 msgstr "Aquesta setmana"
@@ -7323,16 +7522,16 @@ msgid "Logged in"
 msgstr "Connectat"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:939
-#: panels/user-accounts/um-fingerprint-dialog.c:216
+#: panels/user-accounts/cc-user-panel.c:863
+#: panels/user-accounts/cc-user-panel.c:954
 msgid "Enabled"
 msgstr "Habilitat"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1265
 msgid "Failed to contact the accounts service"
 msgstr "No s'ha pogut contactar amb el servei de comptes"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1267
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Assegureu-vos que el servei de comptes està instal·lat i habilitat."
 
@@ -7340,7 +7539,7 @@ msgstr "Assegureu-vos que el servei de comptes està instal·lat i habilitat."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1299
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7348,12 +7547,12 @@ msgstr ""
 "Per a fer-hi canvis,\n"
 "primer feu clic a la icona *"
 
-#: panels/user-accounts/cc-user-panel.c:1362
+#: panels/user-accounts/cc-user-panel.c:1373
 msgid "Delete the selected user account"
 msgstr "Suprimeix el compte d'usuari seleccionat"
 
-#: panels/user-accounts/cc-user-panel.c:1374
-#: panels/user-accounts/cc-user-panel.c:1489
+#: panels/user-accounts/cc-user-panel.c:1385
+#: panels/user-accounts/cc-user-panel.c:1506
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7431,63 +7630,6 @@ msgstr "No s'ha trobat cap usuari"
 #: panels/user-accounts/cc-user-panel.ui:641
 msgid "Unlock to add a user account."
 msgstr "Desbloqueja per a afegir un compte d'usuari."
-
-#: panels/user-accounts/data/account-fingerprint.ui:12
-msgid "Left thumb"
-msgstr "Polze esquerre"
-
-#: panels/user-accounts/data/account-fingerprint.ui:15
-msgid "Left middle finger"
-msgstr "Dit del mig esquerre"
-
-#: panels/user-accounts/data/account-fingerprint.ui:18
-msgid "Left ring finger"
-msgstr "Dit anular esquerre"
-
-#: panels/user-accounts/data/account-fingerprint.ui:21
-msgid "Left little finger"
-msgstr "Dit petit esquerre"
-
-#: panels/user-accounts/data/account-fingerprint.ui:24
-msgid "Right thumb"
-msgstr "Polze dret"
-
-#: panels/user-accounts/data/account-fingerprint.ui:27
-msgid "Right middle finger"
-msgstr "Dit del mig dret"
-
-#: panels/user-accounts/data/account-fingerprint.ui:30
-msgid "Right ring finger"
-msgstr "Dit anular dret"
-
-#: panels/user-accounts/data/account-fingerprint.ui:33
-msgid "Right little finger"
-msgstr "Dit petit dret"
-
-#: panels/user-accounts/data/account-fingerprint.ui:39
-#: panels/user-accounts/um-fingerprint-dialog.c:775
-msgid "Enable Fingerprint Login"
-msgstr "Habilita l'entrada amb empremta dactilar"
-
-#: panels/user-accounts/data/account-fingerprint.ui:89
-msgid "_Right index finger"
-msgstr "Dit índex d_ret"
-
-#: panels/user-accounts/data/account-fingerprint.ui:105
-msgid "_Left index finger"
-msgstr "Dit índex _esquerre"
-
-#: panels/user-accounts/data/account-fingerprint.ui:126
-msgid "_Other finger:"
-msgstr "Un _altre dit:"
-
-#: panels/user-accounts/data/account-fingerprint.ui:222
-msgid ""
-"Your fingerprint was successfully saved. You should now be able to log in "
-"using your fingerprint reader."
-msgstr ""
-"La vostra empremta dactilar s'ha desat correctament. Hauríeu de poder entrar"
-" utilitzant el lector d'empremtes dactilars."
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
 msgid "Users"
@@ -7695,89 +7837,6 @@ msgstr "La contrasenya nova no conté suficients caràcters diferents"
 #, c-format
 msgid "Unknown error"
 msgstr "Error desconegut"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:147
-msgid ""
-"You are not allowed to access the device. Contact your system administrator."
-msgstr ""
-"No teniu permís per a accedir al dispositiu. Contacteu amb l'administrador "
-"del sistema."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:149
-msgid "The device is already in use."
-msgstr "El dispositiu ja està en ús."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:151
-msgid "An internal error occurred."
-msgstr "S'ha produït un error intern."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:334
-msgid "Delete registered fingerprints?"
-msgstr "Voleu suprimir les empremtes dactilars registrades?"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:338
-msgid "_Delete Fingerprints"
-msgstr "_Suprimeix les empremtes dactilars"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:344
-msgid ""
-"Do you want to delete your registered fingerprints so fingerprint login is "
-"disabled?"
-msgstr ""
-"Voleu suprimir les empremtes dactilars registrades de manera que "
-"s'inhabiliti l'entrada amb empremta dactilar?"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:526
-msgid "Done!"
-msgstr "Fet"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:588
-#: panels/user-accounts/um-fingerprint-dialog.c:630
-#, c-format
-msgid "Could not access “%s” device"
-msgstr "No s'ha pogut accedir al dispositiu «%s»"
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:677
-#, c-format
-msgid "Could not start finger capture on “%s” device"
-msgstr ""
-"No s'ha pogut iniciar la captura de l'empremta dactilar al dispositiu «%s»"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:724
-msgid "Could not access any fingerprint readers"
-msgstr "No s'ha pogut accedir a cap lector d'empremtes dactilars"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:725
-msgid "Please contact your system administrator for help."
-msgstr "Contacteu amb l'administrador del sistema per a obtenir ajuda."
-
-#. translators:
-#. * The variable is the name of the device, for example:
-#. * "To enable fingerprint login, you need to save one of your fingerprints,
-#. using the
-#. * 'Digital Persona U.are.U 4000/4000B' device."
-#: panels/user-accounts/um-fingerprint-dialog.c:809
-#, c-format
-msgid ""
-"To enable fingerprint login, you need to save one of your fingerprints, "
-"using the “%s” device."
-msgstr ""
-"Per a habilitar l'entrada amb empremta dactilar, cal que deseu una de les "
-"vostres empremtes dactilars utilitzant el dispositiu «%s»."
-
-#: panels/user-accounts/um-fingerprint-dialog.c:816
-msgid "Selecting finger"
-msgstr "S'està seleccionant un dit"
-
-#: panels/user-accounts/um-fingerprint-dialog.c:817
-msgid "Enrolling fingerprints"
-msgstr "S'estan registrant les empremtes dactilars"
 
 #: panels/user-accounts/user-utils.c:435
 msgid ""
