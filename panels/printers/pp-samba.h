@@ -36,7 +36,7 @@ void           pp_samba_get_devices_async  (PpSamba             *samba,
                                             GAsyncReadyCallback  callback,
                                             gpointer             user_data);
 
-PpDevicesList *pp_samba_get_devices_finish (PpSamba             *samba,
+GPtrArray     *pp_samba_get_devices_finish (PpSamba             *samba,
                                             GAsyncResult        *result,
                                             GError             **error);
 

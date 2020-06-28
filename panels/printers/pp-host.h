@@ -46,7 +46,7 @@ void           pp_host_get_snmp_devices_async         (PpHost               *hos
                                                        GAsyncReadyCallback   callback,
                                                        gpointer              user_data);
 
-PpDevicesList *pp_host_get_snmp_devices_finish        (PpHost               *host,
+GPtrArray     *pp_host_get_snmp_devices_finish        (PpHost               *host,
                                                        GAsyncResult         *result,
                                                        GError              **error);
 
@@ -55,7 +55,7 @@ void           pp_host_get_remote_cups_devices_async  (PpHost               *hos
                                                        GAsyncReadyCallback   callback,
                                                        gpointer              user_data);
 
-PpDevicesList *pp_host_get_remote_cups_devices_finish (PpHost               *host,
+GPtrArray     *pp_host_get_remote_cups_devices_finish (PpHost               *host,
                                                        GAsyncResult         *result,
                                                        GError              **error);
 
@@ -64,7 +64,7 @@ void           pp_host_get_jetdirect_devices_async    (PpHost               *hos
                                                        GAsyncReadyCallback   callback,
                                                        gpointer              user_data);
 
-PpDevicesList *pp_host_get_jetdirect_devices_finish   (PpHost               *host,
+GPtrArray     *pp_host_get_jetdirect_devices_finish   (PpHost               *host,
                                                        GAsyncResult         *result,
                                                        GError              **error);
 
@@ -73,7 +73,7 @@ void           pp_host_get_lpd_devices_async          (PpHost               *hos
                                                        GAsyncReadyCallback   callback,
                                                        gpointer              user_data);
 
-PpDevicesList *pp_host_get_lpd_devices_finish         (PpHost               *host,
+GPtrArray     *pp_host_get_lpd_devices_finish         (PpHost               *host,
                                                        GAsyncResult         *result,
                                                        GError              **error);
 
