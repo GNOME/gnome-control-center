@@ -2974,16 +2974,6 @@ printer_get_ppd_async (const gchar *printer_name,
     }
 }
 
-void
-pp_devices_list_free (PpDevicesList *result)
-{
-  if (result)
-    {
-      g_list_free_full (result->devices, (GDestroyNotify) g_object_unref);
-      g_free (result);
-    }
-}
-
 typedef struct
 {
   gchar        *printer_name;
@@ -3207,11 +3197,10 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                                 gpointer      user_data)
 
 {
-  PpPrintDevice     **devices = NULL;
+  g_autoptr(GPtrArray) devices = NULL;
   g_autoptr(GVariant) output = NULL;
   GCDData            *data = (GCDData *) user_data;
   g_autoptr(GError)   error = NULL;
-  GList              *result = NULL;
   gint                num_of_devices = 0;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -3249,46 +3238,43 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
           g_autoptr(GVariantIter) iter2 = NULL;
 
           num_of_devices = max_index + 1;
-          devices = g_new0 (PpPrintDevice *, num_of_devices);
+          devices = g_ptr_array_new_with_free_func (g_object_unref);
+          for (i = 0; i < num_of_devices; i++)
+             g_ptr_array_add (devices, pp_print_device_new ());
 
           g_variant_get (devices_variant, "a{ss}", &iter2);
           while (g_variant_iter_next (iter2, "{&s&s}", &key, &value))
             {
+              PpPrintDevice *device;
+
               index = get_suffix_index (key);
               if (index >= 0)
                 {
-                  if (!devices[index])
-                    devices[index] = pp_print_device_new ();
-
+                  device = g_ptr_array_index (devices, i);
                   if (g_str_has_prefix (key, "device-class"))
                     {
                       is_network_device = g_strcmp0 (value, "network") == 0;
-                      g_object_set (devices[index], "is-network-device", is_network_device, NULL);
+                      g_object_set (device, "is-network-device", is_network_device, NULL);
                     }
                   else if (g_str_has_prefix (key, "device-id"))
-                    g_object_set (devices[index], "device-id", value, NULL);
+                    g_object_set (device, "device-id", value, NULL);
                   else if (g_str_has_prefix (key, "device-info"))
-                    g_object_set (devices[index], "device-info", value, NULL);
+                    g_object_set (device, "device-info", value, NULL);
                   else if (g_str_has_prefix (key, "device-make-and-model"))
                     {
-                      g_object_set (devices[index],
+                      g_object_set (device,
                                     "device-make-and-model", value,
                                     "device-name", value,
                                     NULL);
                     }
                   else if (g_str_has_prefix (key, "device-uri"))
-                    g_object_set (devices[index], "device-uri", value, NULL);
+                    g_object_set (device, "device-uri", value, NULL);
                   else if (g_str_has_prefix (key, "device-location"))
-                    g_object_set (devices[index], "device-location", value, NULL);
+                    g_object_set (device, "device-location", value, NULL);
 
-                  g_object_set (devices[index], "acquisition-method", ACQUISITION_METHOD_DEFAULT_CUPS_SERVER, NULL);
+                  g_object_set (device, "acquisition-method", ACQUISITION_METHOD_DEFAULT_CUPS_SERVER, NULL);
                 }
             }
-
-          for (i = 0; i < num_of_devices; i++)
-            result = g_list_append (result, devices[i]);
-
-          g_free (devices);
         }
     }
   else
@@ -3296,7 +3282,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
       if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
         g_warning ("%s", error->message);
 
-      data->callback (result,
+      data->callback (devices,
                       TRUE,
                       g_cancellable_is_cancelled (data->cancellable),
                       data->user_data);
@@ -3321,7 +3307,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
 
           backend_name = data->backend_list->data;
 
-          data->callback (result,
+          data->callback (devices,
                           FALSE,
                           FALSE,
                           data->user_data);
@@ -3365,7 +3351,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
         }
       else
         {
-          data->callback (result,
+          data->callback (devices,
                           TRUE,
                           TRUE,
                           data->user_data);
@@ -3376,7 +3362,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
     }
   else
     {
-      data->callback (result,
+      data->callback (devices,
                       TRUE,
                       g_cancellable_is_cancelled (data->cancellable),
                       data->user_data);
@@ -3510,7 +3496,7 @@ guess_device_hostname (PpPrintDevice *device)
 
 gchar *
 canonicalize_device_name (GList         *device_names,
-                          GList         *local_cups_devices,
+                          GPtrArray     *local_cups_devices,
                           cups_dest_t   *dests,
                           gint           num_of_dests,
                           PpPrintDevice *device)
@@ -3632,9 +3618,9 @@ canonicalize_device_name (GList         *device_names,
             already_present = TRUE;
         }
 
-      for (iter = local_cups_devices; iter; iter = iter->next)
+      for (guint i = 0; i < local_cups_devices->len; i++)
         {
-          item = (PpPrintDevice *) iter->data;
+          item = g_ptr_array_index (local_cups_devices, i);
           if (g_strcmp0 (pp_print_device_get_device_original_name (item), new_name) == 0)
             already_present = TRUE;
         }

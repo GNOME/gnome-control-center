@@ -80,11 +80,6 @@ typedef struct
   gsize                 num_of_manufacturers;
 } PPDList;
 
-typedef struct
-{
-  GList *devices;
-} PpDevicesList;
-
 gchar      *get_tag_value (const gchar *tag_string,
                            const gchar *tag_name);
 
@@ -241,11 +236,9 @@ void        printer_add_option_async (const gchar   *printer_name,
                                       PAOCallback    callback,
                                       gpointer       user_data);
 
-void         pp_devices_list_free (PpDevicesList *result);
-
 const gchar *get_page_size_from_locale (void);
 
-typedef void (*GCDCallback) (GList          *devices,
+typedef void (*GCDCallback) (GPtrArray      *devices,
                              gboolean        finished,
                              gboolean        cancelled,
                              gpointer        user_data);
@@ -257,7 +250,7 @@ void        get_cups_devices_async (GCancellable *cancellable,
 gchar      *guess_device_hostname (PpPrintDevice *device);
 
 gchar      *canonicalize_device_name (GList         *device_names,
-                                      GList         *local_cups_devices,
+                                      GPtrArray     *local_cups_devices,
                                       cups_dest_t   *dests,
                                       gint           num_of_dests,
                                       PpPrintDevice *device);
