@@ -482,6 +482,7 @@ cancel_button_clicked_cb (GtkWidget                *button,
 static void
 change_custom_shortcut_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
+  grab_seat (self);
   set_shortcut_editor_page (self, PAGE_CUSTOM_EDIT);
   set_header_mode (self, HEADER_MODE_NONE);
 }
@@ -490,17 +491,6 @@ static void
 command_entry_changed_cb (CcKeyboardShortcutEditor *self)
 {
   setup_custom_shortcut (self);
-}
-
-static void
-edit_custom_shortcut_button_toggled_cb (CcKeyboardShortcutEditor *self,
-                                        GParamSpec               *pspec,
-                                        GtkToggleButton          *button)
-{
-  if (gtk_toggle_button_get_active (button))
-    grab_seat (self);
-  else
-    release_grab (self);
 }
 
 static void
@@ -636,6 +626,8 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
 
       g_signal_handlers_unblock_by_func (self->command_entry, command_entry_changed_cb, self);
       g_signal_handlers_unblock_by_func (self->name_entry, name_entry_changed_cb, self);
+
+      release_grab (self);
     }
 
   /* Show the apropriate view */
@@ -920,7 +912,6 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, cancel_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_custom_shortcut_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, command_entry_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, edit_custom_shortcut_button_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, name_entry_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, replace_button_clicked_cb);
