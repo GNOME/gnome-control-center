@@ -44,7 +44,6 @@ struct _CcKeyboardItem
 
   CcKeyCombo *primary_combo;
   BindingGroupType group;
-  GtkTreeModel *model;
   char *description;
   gboolean editable;
   GList *key_combos;
@@ -857,14 +856,6 @@ cc_keyboard_item_get_item_type (CcKeyboardItem *item)
 {
   g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (item), CC_KEYBOARD_ITEM_TYPE_NONE);
   return item->type;
-}
-
-void
-cc_keyboard_item_set_model (CcKeyboardItem *item, GtkTreeModel *model, BindingGroupType group)
-{
-  g_return_if_fail (CC_IS_KEYBOARD_ITEM (item));
-  item->model = model;
-  item->group = group;
 }
 
 const gchar *

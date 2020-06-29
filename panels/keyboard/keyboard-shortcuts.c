@@ -210,25 +210,6 @@ parse_start_tag (GMarkupParseContext *ctx,
   g_array_append_val (keylist->entries, key);
 }
 
-void
-fill_xkb_options_shortcuts (GtkTreeModel *model)
-{
-  GList *l;
-  GtkTreeIter iter;
-
-  for (l = cc_keyboard_option_get_all (); l; l = l->next)
-    {
-      CcKeyboardOption *option = l->data;
-
-      gtk_list_store_append (GTK_LIST_STORE (model), &iter);
-      gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-                          DETAIL_DESCRIPTION_COLUMN, cc_keyboard_option_get_description (option),
-                          DETAIL_KEYENTRY_COLUMN, option,
-                          DETAIL_TYPE_COLUMN, SHORTCUT_TYPE_XKB_OPTION,
-                          -1);
-    }
-}
-
 static const guint forbidden_keyvals[] = {
   /* Navigation keys */
   GDK_KEY_Home,
@@ -330,44 +311,6 @@ find_free_settings_path (GSettings *settings)
     }
 
   return g_steal_pointer (&dir);
-}
-
-static gboolean
-poke_xkb_option_row (GtkTreeModel *model,
-                     GtkTreePath  *path,
-                     GtkTreeIter  *iter,
-                     gpointer      option)
-{
-  gpointer item;
-
-  gtk_tree_model_get (model, iter,
-                      DETAIL_KEYENTRY_COLUMN, &item,
-                      -1);
-
-  if (item != option)
-    return FALSE;
-
-  gtk_tree_model_row_changed (model, path, iter);
-  return TRUE;
-}
-
-static void
-xkb_option_changed (CcKeyboardOption *option,
-                    gpointer          data)
-{
-  GtkTreeModel *model = data;
-
-  gtk_tree_model_foreach (model, poke_xkb_option_row, option);
-}
-
-void
-setup_keyboard_options (GtkListStore *store)
-{
-  GList *l;
-
-  for (l = cc_keyboard_option_get_all (); l; l = l->next)
-    g_signal_connect_object (l->data, "changed",
-                             G_CALLBACK (xkb_option_changed), store, 0);
 }
 
 KeyList*
