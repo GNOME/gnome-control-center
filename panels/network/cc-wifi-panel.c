@@ -148,10 +148,6 @@ add_wifi_device (CcWifiPanel *self,
   GtkWidget *header_widget;
   NetDeviceWifi *net_device;
 
-  /* Only manage Wi-Fi devices */
-  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
-    return;
-
   /* Create the NetDevice */
   net_device = net_device_wifi_new (CC_PANEL (self),
                                     self->client,
@@ -172,6 +168,39 @@ add_wifi_device (CcWifiPanel *self,
   gtk_stack_add_titled (self->stack, GTK_WIDGET (net_device),
                         nm_device_get_udi (device),
                         nm_device_get_description (device));
+}
+
+static void
+remove_wifi_device (CcWifiPanel *self,
+                    NMDevice    *device)
+{
+  GtkWidget *child;
+  const gchar *id;
+  guint i;
+
+  id = nm_device_get_udi (device);
+
+  /* Remove from the devices list */
+  for (i = 0; i < self->devices->len; i++)
+    {
+      NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
+
+      if (net_device_wifi_get_device (net_device) == device)
+        {
+          g_ptr_array_remove (self->devices, net_device);
+          break;
+        }
+    }
+
+  /* Destroy all stack pages related to this device */
+  child = gtk_stack_get_child_by_name (self->stack, id);
+  gtk_widget_destroy (child);
+
+  child = gtk_stack_get_child_by_name (self->header_stack, id);
+  gtk_widget_destroy (child);
+
+  /* Update the title widget */
+  update_devices_names (self);
 }
 
 static void
@@ -207,7 +236,14 @@ load_wifi_devices (CcWifiPanel *self)
   if (devices)
     {
       for (i = 0; i < devices->len; i++)
-        add_wifi_device (self, g_ptr_array_index (devices, i));
+        {
+          NMDevice *device;
+
+          device = g_ptr_array_index (devices, i);
+          if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
+            continue;
+          add_wifi_device (self, device);
+        }
     }
 
   check_main_stack_page (self);
@@ -417,48 +453,69 @@ verify_argv (CcWifiPanel  *self,
 /* Callbacks */
 
 static void
+device_state_changed_cb (CcWifiPanel *self, GParamSpec *pspec, NMDevice *device)
+{
+  const gchar *id;
+
+  id = nm_device_get_udi (device);
+  /* Don't add a device that has already been added */
+  if (!NM_IS_DEVICE_WIFI (device) || !id)
+    return;
+
+  if (nm_device_get_managed (device))
+    {
+      if (gtk_stack_get_child_by_name (self->stack, id))
+        return;
+      add_wifi_device (self, device);
+      check_main_stack_page (self);
+    }
+  else
+    {
+      if (!gtk_stack_get_child_by_name (self->stack, id))
+        return;
+      remove_wifi_device (self, device);
+      check_main_stack_page (self);
+    }
+}
+
+static void
 device_added_cb (CcWifiPanel *self, NMDevice *device)
 {
-  add_wifi_device (self, device);
-  check_main_stack_page (self);
+  if (!NM_IS_DEVICE_WIFI (device))
+    return;
+
+  if (nm_device_get_managed (device))
+    {
+      add_wifi_device (self, device);
+      check_main_stack_page (self);
+    }
+
+  g_signal_connect_object (device,
+                           "notify::state",
+                           G_CALLBACK (device_state_changed_cb),
+                           self,
+                           G_CONNECT_SWAPPED);
 }
 
 static void
 device_removed_cb (CcWifiPanel *self, NMDevice *device)
 {
-  GtkWidget *child;
   const gchar *id;
-  guint i;
 
-  if (!NM_IS_DEVICE_WIFI (device) || !nm_device_get_managed (device))
+  if (!NM_IS_DEVICE_WIFI (device))
     return;
 
   id = nm_device_get_udi (device);
+  /* Don't remove a device that has already been removed */
+  if (!gtk_stack_get_child_by_name (self->stack, id))
+    return;
 
-  /* Destroy all stack pages related to this device */
-  child = gtk_stack_get_child_by_name (self->stack, id);
-  gtk_widget_destroy (child);
-
-  child = gtk_stack_get_child_by_name (self->header_stack, id);
-  gtk_widget_destroy (child);
-
-  /* Remove from the devices list */
-  for (i = 0; i < self->devices->len; i++)
-    {
-      NetDeviceWifi *net_device = g_ptr_array_index (self->devices, i);
-
-      if (net_device_wifi_get_device (net_device) == device)
-        {
-          g_ptr_array_remove (self->devices, net_device);
-          break;
-        }
-    }
-
-  /* Update the title widget */
-  update_devices_names (self);
-
-  /* And check which page should be visible */
+  remove_wifi_device (self, device);
   check_main_stack_page (self);
+
+  g_signal_handlers_disconnect_by_func (device,
+                                        G_CALLBACK (device_state_changed_cb),
+                                        self);
 }
 
 static void
