@@ -323,7 +323,8 @@ cc_printers_panel_dispose (GObject *object)
   free_dests (self);
   g_list_free_full (self->deleted_printers, g_free);
   self->deleted_printers = NULL;
-  g_object_set_data (self->reference, "self", NULL);
+  if (self->reference != NULL)
+    g_object_set_data (self->reference, "self", NULL);
   g_clear_object (&self->reference);
 
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
@@ -1309,7 +1310,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 
-  g_object_set_data_full (self->reference, "self", self, g_free);
+  g_object_set_data_full (self->reference, "self", self, NULL);
 
   builder_result = gtk_builder_add_objects_from_resource (self->builder,
                                                           "/org/gnome/control-center/printers/printers.ui",
