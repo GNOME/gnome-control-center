@@ -178,6 +178,7 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 {
   CcDisplayConfigType current_type = config_get_current_type (panel);
   GList *outputs, *l;
+  double current_scale = cc_display_monitor_get_scale(panel->current_output);
 
   /* Do not do anything if the current detected configuration type is
    * identitcal to what we expect. */
@@ -225,6 +226,7 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 
           cc_display_monitor_set_active (output, cc_display_monitor_is_usable (output));
           cc_display_monitor_set_mode (output, cc_display_monitor_get_preferred_mode (output));
+          cc_display_monitor_set_scale (output, current_scale);
         }
       break;
 
@@ -252,7 +254,15 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 
             modes = modes->next;
           }
-        cc_display_config_set_mode_on_all_outputs (panel->current_config, best);
+
+        for (l = outputs; l; l = l->next)
+          {
+            CcDisplayMonitor *output = l->data;
+
+            cc_display_monitor_set_mode (output, best);
+            cc_display_monitor_set_position (output, 0, 0);
+            cc_display_monitor_set_scale (output, current_scale);
+          }
       }
       break;
 
