@@ -94,9 +94,6 @@ struct _CcPrintersPanel
   PPDList      *all_ppds_list;
 
   gchar    *new_printer_name;
-  gchar    *new_printer_location;
-  gchar    *new_printer_make_and_model;
-  gboolean  new_printer_on_network;
 
   gchar    *renamed_printer_name;
   gchar    *old_printer_name;
@@ -109,8 +106,6 @@ struct _CcPrintersPanel
   GVariant   *action;
 
   GtkSizeGroup *size_group;
-
-  gpointer dummy;
 };
 
 CC_PANEL_REGISTER (CcPrintersPanel, cc_printers_panel)
@@ -307,8 +302,6 @@ cc_printers_panel_dispose (GObject *object)
 
   g_clear_object (&self->pp_new_printer_dialog);
   g_clear_pointer (&self->new_printer_name, g_free);
-  g_clear_pointer (&self->new_printer_location, g_free);
-  g_clear_pointer (&self->new_printer_make_and_model, g_free);
   g_clear_pointer (&self->renamed_printer_name, g_free);
   g_clear_pointer (&self->old_printer_name, g_free);
   g_clear_object (&self->builder);
@@ -330,12 +323,6 @@ cc_printers_panel_dispose (GObject *object)
   G_OBJECT_CLASS (cc_printers_panel_parent_class)->dispose (object);
 }
 
-static void
-cc_printers_panel_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (cc_printers_panel_parent_class)->finalize (object);
-}
-
 static const char *
 cc_printers_panel_get_help_uri (CcPanel *panel)
 {
@@ -352,7 +339,6 @@ cc_printers_panel_class_init (CcPrintersPanelClass *klass)
   object_class->set_property = cc_printers_panel_set_property;
   object_class->constructed = cc_printers_panel_constructed;
   object_class->dispose = cc_printers_panel_dispose;
-  object_class->finalize = cc_printers_panel_finalize;
 
   panel_class->get_help_uri = cc_printers_panel_get_help_uri;
 
@@ -961,9 +947,6 @@ new_printer_dialog_pre_response_cb (CcPrintersPanel *self,
                                     gboolean         is_network_device)
 {
   self->new_printer_name = g_strdup (device_name);
-  self->new_printer_location = g_strdup (device_location);
-  self->new_printer_make_and_model = g_strdup (device_make_and_model);
-  self->new_printer_on_network = is_network_device;
 
   actualize_printers_list (self);
 }
@@ -974,9 +957,6 @@ new_printer_dialog_response_cb (CcPrintersPanel *self,
 {
   if (self->pp_new_printer_dialog)
     g_clear_object (&self->pp_new_printer_dialog);
-
-  g_clear_pointer (&self->new_printer_location, g_free);
-  g_clear_pointer (&self->new_printer_make_and_model, g_free);
 
   if (response_id == GTK_RESPONSE_REJECT)
     {
@@ -1272,41 +1252,12 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
   /* initialize main data structure */
   self->builder = gtk_builder_new ();
-  self->dests = NULL;
-  self->num_dests = 0;
-
-  self->pp_new_printer_dialog = NULL;
-
-  self->subscription_id = 0;
-  self->cups_status_check_id = 0;
-  self->subscription_renewal_id = 0;
-  self->cups_proxy = NULL;
-  self->cups_bus_connection = NULL;
-  self->dbus_subscription_id = 0;
-  self->remove_printer_timeout_id = 0;
-
-  self->new_printer_name = NULL;
-  self->new_printer_location = NULL;
-  self->new_printer_make_and_model = NULL;
-  self->new_printer_on_network = FALSE;
-
-  self->renamed_printer_name = NULL;
-  self->old_printer_name = NULL;
-  self->deleted_printer_name = NULL;
-  self->deleted_printers = NULL;
   self->reference = g_object_new (G_TYPE_OBJECT, NULL);
-
-  self->permission = NULL;
-  self->lockdown_settings = NULL;
-
-  self->all_ppds_list = NULL;
 
   self->printer_entries = g_hash_table_new_full (g_str_hash,
                                                  g_str_equal,
                                                  g_free,
                                                  NULL);
-  self->entries_filled = FALSE;
-  self->action = NULL;
 
   g_type_ensure (CC_TYPE_PERMISSION_INFOBAR);
 

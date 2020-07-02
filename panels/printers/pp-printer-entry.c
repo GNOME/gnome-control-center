@@ -46,8 +46,6 @@ struct _PpPrinterEntry
   GtkListBoxRow parent;
 
   gchar    *printer_name;
-  gchar    *ppd_file_name;
-  int       num_jobs;
   gboolean  is_accepting_jobs;
   gchar    *printer_make_and_model;
   gchar    *printer_location;
@@ -79,9 +77,7 @@ struct _PpPrinterEntry
   GtkLabel       *error_status;
 
   /* Dialogs */
-  PpDetailsDialog *pp_details_dialog;
   PpJobsDialog    *pp_jobs_dialog;
-  PpOptionsDialog *pp_options_dialog;
 
   GCancellable *get_jobs_cancellable;
 };

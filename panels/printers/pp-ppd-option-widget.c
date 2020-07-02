@@ -146,20 +146,6 @@ pp_ppd_option_widget_init (PpPPDOptionWidget *self)
 {
   gtk_orientable_set_orientation (GTK_ORIENTABLE (self),
                                   GTK_ORIENTATION_HORIZONTAL);
-
-  self->switch_button = NULL;
-  self->combo = NULL;
-  self->image = NULL;
-  self->box = NULL;
-
-  self->printer_name = NULL;
-  self->option_name = NULL;
-
-  self->destination = NULL;
-  self->destination_set = FALSE;
-
-  self->ppd_filename = NULL;
-  self->ppd_filename_set = FALSE;
 }
 
 static void

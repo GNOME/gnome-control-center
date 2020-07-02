@@ -61,10 +61,6 @@ struct _PpOptionsDialog {
   GHashTable  *ipp_attributes;
   gboolean     ipp_attributes_set;
 
-  gboolean     populating_dialog;
-
-  GtkResponseType response;
-
   gboolean sensitive;
 };
 
@@ -679,8 +675,6 @@ populate_options_real (PpOptionsDialog *self)
   if ((model = gtk_tree_view_get_model (self->categories_treeview)) != NULL &&
       gtk_tree_model_get_iter_first (model, &iter))
     gtk_tree_selection_select_iter (self->categories_selection, &iter);
-
-  self->populating_dialog = FALSE;
 }
 
 static void
@@ -898,20 +892,10 @@ pp_options_dialog_new (gchar   *printer_name,
 
   self->printer_name = g_strdup (printer_name);
 
-  self->ppd_filename = NULL;
-  self->ppd_filename_set = FALSE;
-
-  self->destination = NULL;
-  self->destination_set = FALSE;
-
-  self->ipp_attributes = NULL;
-  self->ipp_attributes_set = FALSE;
-
   self->sensitive = sensitive;
 
   gtk_window_set_title (GTK_WINDOW (self), printer_name);
 
-  self->populating_dialog = TRUE;
   populate_options (self);
 
   return self;

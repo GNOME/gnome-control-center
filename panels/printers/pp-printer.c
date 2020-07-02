@@ -51,12 +51,6 @@ pp_printer_dispose (GObject *object)
 }
 
 static void
-pp_printer_finalize (GObject *object)
-{
-  G_OBJECT_CLASS (pp_printer_parent_class)->finalize (object);
-}
-
-static void
 pp_printer_get_property (GObject    *object,
                          guint       property_id,
                          GValue     *value,
@@ -104,7 +98,6 @@ pp_printer_class_init (PpPrinterClass *klass)
   gobject_class->set_property = pp_printer_set_property;
   gobject_class->get_property = pp_printer_get_property;
   gobject_class->dispose = pp_printer_dispose;
-  gobject_class->finalize = pp_printer_finalize;
 
   g_object_class_install_property (gobject_class, PROP_NAME,
     g_param_spec_string ("printer-name",
