@@ -12,7 +12,7 @@
     <!-- This doesn't seem to work for a template, so it is also hardcoded. -->
     <property name="use_header_bar">1</property>
     <signal name="delete-event" handler="delete_event_cb" swapped="yes"/>
-    <child type="action">
+    <child>
       <object class="GtkButton" id="cancel_button">
         <property name="label" translatable="yes">_Cancel</property>
         <property name="visible">True</property>
@@ -22,7 +22,7 @@
         <signal name="clicked" handler="cancel_clicked_cb" object="NetConnectionEditor" swapped="yes"/>
       </object>
     </child>
-    <child type="action">
+    <child>
       <object class="GtkButton" id="apply_button">
         <property name="label" translatable="yes">_Apply</property>
         <property name="visible">True</property>
