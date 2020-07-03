@@ -43,7 +43,7 @@ typedef struct {
 } Place;
 
 struct _CcSearchLocationsDialog {
-  HdyDialog parent;
+  GtkDialog parent;
 
   GSettings *tracker_preferences;
 
@@ -57,7 +57,7 @@ struct _CcSearchLocationsDialogClass {
   GtkDialogClass parent_class;
 };
 
-G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, HDY_TYPE_DIALOG)
+G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, GTK_TYPE_DIALOG)
 
 static void
 cc_search_locations_dialog_finalize (GObject *object)

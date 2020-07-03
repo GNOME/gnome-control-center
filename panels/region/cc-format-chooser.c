@@ -35,8 +35,11 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
+#define HANDY_USE_UNSTABLE_API
+#include <handy.h>
+
 struct _CcFormatChooser {
-        HdyDialog parent_instance;
+        GtkDialog parent_instance;
 
         GtkWidget *title_bar;
         GtkWidget *title_buttons;
@@ -66,7 +69,7 @@ struct _CcFormatChooser {
         gchar **filter_words;
 };
 
-G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, HDY_TYPE_DIALOG)
+G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, GTK_TYPE_DIALOG)
 
 static void
 display_date (GtkWidget *label, GDateTime *dt, const gchar *format)
