@@ -37,7 +37,7 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 struct _CcLanguageChooser {
-        HdyDialog parent_instance;
+        GtkDialog parent_instance;
 
         GtkWidget *select_button;
         GtkWidget *no_results;
@@ -50,7 +50,7 @@ struct _CcLanguageChooser {
         gchar **filter_words;
 };
 
-G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, HDY_TYPE_DIALOG)
+G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, GTK_TYPE_DIALOG)
 
 static GtkWidget *
 language_widget_new (const gchar *locale_id,
