@@ -49,7 +49,7 @@ static void update_sound_switch (CcAppNotificationsDialog *dialog);
 static void update_notification_switch (CcAppNotificationsDialog *dialog);
 
 struct _CcAppNotificationsDialog {
-  HdyDialog            parent;
+  GtkDialog            parent;
 
   GSettings           *settings;
   GSettings           *master_settings;
@@ -65,7 +65,7 @@ struct _CcAppNotificationsDialog {
   GtkWidget           *lock_screen_content_switch;
 };
 
-G_DEFINE_TYPE (CcAppNotificationsDialog, cc_app_notifications_dialog, HDY_TYPE_DIALOG)
+G_DEFINE_TYPE (CcAppNotificationsDialog, cc_app_notifications_dialog, GTK_TYPE_DIALOG)
 
 static void
 on_perm_store_set_done (GObject *source_object,

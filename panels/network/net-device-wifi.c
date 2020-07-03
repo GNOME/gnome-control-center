@@ -21,9 +21,6 @@
 
 #include "config.h"
 
-#define HANDY_USE_UNSTABLE_API
-#include <handy.h>
-
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
@@ -1059,7 +1056,7 @@ history_button_clicked_cb (NetDeviceWifi *self)
         GtkWidget *list;
         GList *list_rows;
 
-        dialog = g_object_new (HDY_TYPE_DIALOG, "use-header-bar", 1, NULL);
+        dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", 1, NULL);
         window = gtk_widget_get_toplevel (GTK_WIDGET (self));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (window));
         gtk_window_set_title (GTK_WINDOW (dialog), _("Known Wi-Fi Networks"));
