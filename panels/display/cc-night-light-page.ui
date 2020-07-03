@@ -111,7 +111,7 @@
                         <property name="title" translatable="yes">Night Light</property>
                         <property name="activatable-widget">night_light_toggle_switch</property>
 
-                        <child type="action">
+                        <child>
                           <object class="GtkSwitch" id="night_light_toggle_switch">
                             <property name="visible">True</property>
                             <property name="valign">center</property>
@@ -127,7 +127,7 @@
                         <property name="title" translatable="yes">Schedule</property>
                         <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
 
-                        <child type="action">
+                        <child>
                           <object class="GtkComboBoxText" id="schedule_type_combo">
                             <property name="visible">True</property>
                             <property name="valign">center</property>
@@ -148,7 +148,7 @@
                         <property name="title" translatable="yes">Times</property>
                         <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
 
-                        <child type="action">
+                        <child>
                           <object class="GtkBox" id="box_manual">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
@@ -374,7 +374,7 @@
                         <property name="title" translatable="yes">Color Temperature</property>
                         <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
 
-                        <child type="action">
+                        <child>
                           <object class="GtkScale" id="scale_color_temperature">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
