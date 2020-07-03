@@ -444,6 +444,9 @@
         {
             "name" : "gnome-settings-daemon",
             "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dsystemd=false"
+            ],
             "sources" : [
                 {
                     "type" : "git",
