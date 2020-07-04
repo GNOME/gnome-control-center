@@ -121,6 +121,40 @@ fixture_set_up_wired (NetworkPanelFixture  *fixture,
 
 /*****************************************************************************/
 
+static GtkWidget *
+find_label (GtkWidget   *widget,
+            const gchar *label_pattern)
+{
+  GtkWidget *label = NULL;
+
+  if (GTK_IS_LABEL (widget)) {
+    const gchar *text = gtk_label_get_text (GTK_LABEL (widget));
+    if (g_pattern_match_simple (label_pattern, text))
+      return widget;
+  }
+
+  if (HDY_IS_ACTION_ROW (widget)) {
+    const gchar *text = hdy_action_row_get_title (HDY_ACTION_ROW (widget));
+    if (g_pattern_match_simple (label_pattern, text))
+      return widget;
+  }
+
+  if (GTK_IS_CONTAINER (widget)) {
+    g_autoptr(GList) list = gtk_container_get_children (GTK_CONTAINER (widget));
+    GList *node;
+
+    for (node = list; node; node = node->next) {
+      label = gtk_test_find_label (node->data, label_pattern);
+      if (label)
+        break;
+    }
+  }
+
+  return label;
+}
+
+/*****************************************************************************/
+
 #if 0  /* See /network-panel-wired/vpn-sorting note */
 static GtkWidget*
 find_parent_of_type(GtkWidget *widget, GType parent)
@@ -297,7 +331,7 @@ test_unconnected_carrier_plug (NetworkPanelFixture  *fixture,
   nmtst_set_wired_speed (fixture->sinfo, fixture->main_ether, 1234);
   nmtst_set_device_state (fixture->sinfo, fixture->main_ether, NM_DEVICE_STATE_DISCONNECTED, NM_DEVICE_STATE_REASON_CARRIER);
 
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "1234 Mb/s"));
+  g_assert_nonnull (find_label (fixture->shell, "1234 Mb/s"));
 }
 
 
