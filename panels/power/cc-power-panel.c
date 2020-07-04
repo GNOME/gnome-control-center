@@ -1409,7 +1409,6 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
       gtk_widget_hide (self->suspend_on_battery_label);
       gtk_widget_hide (self->suspend_on_battery_delay_label);
       gtk_widget_hide (self->suspend_on_battery_delay_combo);
-      gtk_widget_hide (self->battery_percentage_switch);
       gtk_label_set_label (GTK_LABEL (self->suspend_on_ac_label),
                            _("When _idle"));
     }
