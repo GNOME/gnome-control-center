@@ -59,6 +59,7 @@ struct _CcPowerPanel
 
   GSettings     *gsd_settings;
   GSettings     *session_settings;
+  GSettings     *interface_settings;
   GtkWidget     *main_scroll;
   GtkWidget     *main_box;
   GtkWidget     *vbox_power;
@@ -147,6 +148,7 @@ cc_power_panel_dispose (GObject *object)
   g_clear_pointer (&self->chassis_type, g_free);
   g_clear_object (&self->gsd_settings);
   g_clear_object (&self->session_settings);
+  g_clear_object (&self->interface_settings);
   g_clear_pointer (&self->automatic_suspend_dialog, gtk_widget_destroy);
   g_clear_object (&self->screen_proxy);
   g_clear_object (&self->kbd_proxy);
@@ -2213,6 +2215,37 @@ can_suspend_or_hibernate (CcPowerPanel *self,
 }
 
 static void
+add_battery_percentage (CcPowerPanel *self)
+{
+  GtkWidget *widget, *box, *label, *title;
+  GtkWidget *row;
+  GtkWidget *sw;
+  g_autofree gchar *s = NULL;
+
+  if (!self->has_batteries)
+    return;
+
+  /* Show Battery Percentage */
+  row = no_prelight_row_new ();
+  gtk_widget_show (row);
+  box = row_box_new ();
+  gtk_container_add (GTK_CONTAINER (row), box);
+  title = row_title_new (_("Show Battery _Percentage"), NULL, &label);
+  gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
+
+  sw = gtk_switch_new ();
+  gtk_widget_show (sw);
+  g_settings_bind (self->interface_settings, "show-battery-percentage",
+                   sw, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+  gtk_container_add (GTK_CONTAINER (widget), row);
+  gtk_size_group_add_widget (self->row_sizegroup, row);
+}
+
+static void
 add_general_section (CcPowerPanel *self)
 {
   GtkWidget *widget, *box, *label, *title;
@@ -2223,30 +2256,6 @@ add_general_section (CcPowerPanel *self)
   GtkTreeModel *model;
   GsdPowerButtonActionType button_value;
   gboolean can_suspend, can_hibernate;
-
-  can_suspend = can_suspend_or_hibernate (self, "CanSuspend");
-  can_hibernate = can_suspend_or_hibernate (self, "CanHibernate");
-
-  /* If the machine can neither suspend nor hibernate, we have nothing to do */
-  if (!can_suspend && !can_hibernate)
-    return;
-
-  /* The default values for these settings are unfortunate for us;
-   * timeout == 0, action == suspend means 'do nothing' - just
-   * as timout === anything, action == nothing.
-   * For our switch/combobox combination, the second choice works
-   * much better, so translate the first to the second here.
-   */
-  if (g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout") == 0)
-    {
-      g_settings_set_enum (self->gsd_settings, "sleep-inactive-ac-type", GSD_POWER_ACTION_NOTHING);
-      g_settings_set_int (self->gsd_settings, "sleep-inactive-ac-timeout", 3600);
-    }
-  if (g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout") == 0)
-    {
-      g_settings_set_enum (self->gsd_settings, "sleep-inactive-battery-type", GSD_POWER_ACTION_NOTHING);
-      g_settings_set_int (self->gsd_settings, "sleep-inactive-battery-timeout", 1800);
-    }
 
   /* Frame header */
   s = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Button"));
@@ -2282,6 +2291,26 @@ add_general_section (CcPowerPanel *self)
   gtk_widget_set_margin_bottom (box, 32);
   gtk_container_add (GTK_CONTAINER (box), widget);
   gtk_box_pack_start (GTK_BOX (self->vbox_power), box, FALSE, TRUE, 0);
+
+  can_suspend = can_suspend_or_hibernate (self, "CanSuspend");
+  can_hibernate = can_suspend_or_hibernate (self, "CanHibernate");
+
+  /* The default values for these settings are unfortunate for us;
+   * timeout == 0, action == suspend means 'do nothing' - just
+   * as timout === anything, action == nothing.
+   * For our switch/combobox combination, the second choice works
+   * much better, so translate the first to the second here.
+   */
+  if (g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout") == 0)
+    {
+      g_settings_set_enum (self->gsd_settings, "sleep-inactive-ac-type", GSD_POWER_ACTION_NOTHING);
+      g_settings_set_int (self->gsd_settings, "sleep-inactive-ac-timeout", 3600);
+    }
+  if (g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout") == 0)
+    {
+      g_settings_set_enum (self->gsd_settings, "sleep-inactive-battery-type", GSD_POWER_ACTION_NOTHING);
+      g_settings_set_int (self->gsd_settings, "sleep-inactive-battery-timeout", 1800);
+    }
 
   /* Automatic suspend row */
   if (can_suspend)
@@ -2338,10 +2367,14 @@ add_general_section (CcPowerPanel *self)
       update_automatic_suspend_label (self);
     }
 
-  if (g_strcmp0 (self->chassis_type, "vm") == 0 ||
+  if ((!can_hibernate && !can_suspend) ||
+      g_strcmp0 (self->chassis_type, "vm") == 0 ||
       g_strcmp0 (self->chassis_type, "tablet") == 0 ||
       g_strcmp0 (self->chassis_type, "handset") == 0)
-    return;
+    {
+      add_battery_percentage (self);
+      return;
+    }
 
   /* Power button row */
   row = no_prelight_row_new ();
@@ -2367,6 +2400,8 @@ add_general_section (CcPowerPanel *self)
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->power_button_combo);
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (self->row_sizegroup, row);
+
+  add_battery_percentage (self);
 }
 
 static gint
@@ -2519,6 +2554,7 @@ cc_power_panel_init (CcPowerPanel *self)
 
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
+  self->interface_settings = g_settings_new ("org.gnome.desktop.interface");
 
   self->battery_row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
   self->row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
