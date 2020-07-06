@@ -2003,6 +2003,7 @@ add_power_saving_section (CcPowerPanel *self)
   GtkWidget *sw;
   int value;
   g_autofree gchar *s = NULL;
+  gboolean can_suspend;
 
   s = g_strdup_printf ("<b>%s</b>", _("Power Saving"));
   label = gtk_label_new (s);
@@ -2023,6 +2024,8 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
+  g_signal_connect_object (widget, "row-activated",
+                           G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
   atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (label)),
                                ATK_RELATION_LABEL_FOR,
@@ -2118,6 +2121,82 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->idle_delay_combo);
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (self->row_sizegroup, row);
+
+  can_suspend = can_suspend_or_hibernate (self, "CanSuspend");
+
+  /* The default values for these settings are unfortunate for us;
+   * timeout == 0, action == suspend means 'do nothing' - just
+   * as timout === anything, action == nothing.
+   * For our switch/combobox combination, the second choice works
+   * much better, so translate the first to the second here.
+   */
+  if (g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout") == 0)
+    {
+      g_settings_set_enum (self->gsd_settings, "sleep-inactive-ac-type", GSD_POWER_ACTION_NOTHING);
+      g_settings_set_int (self->gsd_settings, "sleep-inactive-ac-timeout", 3600);
+    }
+  if (g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout") == 0)
+    {
+      g_settings_set_enum (self->gsd_settings, "sleep-inactive-battery-type", GSD_POWER_ACTION_NOTHING);
+      g_settings_set_int (self->gsd_settings, "sleep-inactive-battery-timeout", 1800);
+    }
+
+  /* Automatic suspend row */
+  if (can_suspend)
+    {
+      GtkWidget *dialog;
+
+      self->automatic_suspend_row = row = gtk_list_box_row_new ();
+      gtk_widget_show (row);
+      box = row_box_new ();
+      gtk_container_add (GTK_CONTAINER (row), box);
+      title = row_title_new (_("_Automatic Suspend"), NULL, NULL);
+      atk_object_set_name (ATK_OBJECT (gtk_widget_get_accessible (self->automatic_suspend_row)), _("Automatic suspend"));
+      gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
+
+      self->automatic_suspend_label = gtk_label_new ("");
+      gtk_widget_show (self->automatic_suspend_label);
+      gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->automatic_suspend_label);
+      g_signal_connect_object (self->automatic_suspend_label, "mnemonic-activate",
+                               G_CALLBACK (automatic_suspend_activate), self, G_CONNECT_SWAPPED);
+      gtk_widget_set_halign (self->automatic_suspend_label, GTK_ALIGN_END);
+      gtk_box_pack_start (GTK_BOX (box), self->automatic_suspend_label, FALSE, TRUE, 0);
+      gtk_container_add (GTK_CONTAINER (widget), row);
+      gtk_size_group_add_widget (self->row_sizegroup, row);
+
+      dialog = self->automatic_suspend_dialog;
+      g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
+      g_signal_connect_object (self->gsd_settings, "changed", G_CALLBACK (on_suspend_settings_changed), self, G_CONNECT_SWAPPED);
+
+      g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-battery-type",
+                                    self->suspend_on_battery_switch, "active",
+                                    G_SETTINGS_BIND_DEFAULT,
+                                    get_sleep_type, set_sleep_type, NULL, NULL);
+
+      g_object_set_data (G_OBJECT (self->suspend_on_battery_delay_combo), "_gsettings_key", "sleep-inactive-battery-timeout");
+      value = g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout");
+      set_value_for_combo (GTK_COMBO_BOX (self->suspend_on_battery_delay_combo), value);
+      g_signal_connect_object (self->suspend_on_battery_delay_combo, "changed",
+                               G_CALLBACK (combo_time_changed_cb), self, G_CONNECT_SWAPPED);
+      g_object_bind_property (self->suspend_on_battery_switch, "active", self->suspend_on_battery_delay_combo, "sensitive",
+                              G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+
+      g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-ac-type",
+                                    self->suspend_on_ac_switch, "active",
+                                    G_SETTINGS_BIND_DEFAULT,
+                                    get_sleep_type, set_sleep_type, NULL, NULL);
+
+      g_object_set_data (G_OBJECT (self->suspend_on_ac_delay_combo), "_gsettings_key", "sleep-inactive-ac-timeout");
+      value = g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout");
+      set_value_for_combo (GTK_COMBO_BOX (self->suspend_on_ac_delay_combo), value);
+      g_signal_connect_object (self->suspend_on_ac_delay_combo, "changed",
+                               G_CALLBACK (combo_time_changed_cb), self, G_CONNECT_SWAPPED);
+      g_object_bind_property (self->suspend_on_ac_switch, "active", self->suspend_on_ac_delay_combo, "sensitive",
+                              G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+
+      set_ac_battery_ui_mode (self);
+      update_automatic_suspend_label (self);
+    }
 
 #ifdef HAVE_NETWORK_MANAGER
   self->wifi_row = row = no_prelight_row_new ();
@@ -2251,8 +2330,6 @@ add_general_section (CcPowerPanel *self)
   GtkWidget *widget, *box, *label, *title;
   GtkWidget *row;
   g_autofree gchar *s = NULL;
-  gint value;
-  GtkWidget *dialog;
   GtkTreeModel *model;
   GsdPowerButtonActionType button_value;
   gboolean can_suspend, can_hibernate;
@@ -2275,8 +2352,6 @@ add_general_section (CcPowerPanel *self)
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
-  g_signal_connect_object (widget, "row-activated",
-                           G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
   atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (label)),
                                ATK_RELATION_LABEL_FOR,
@@ -2294,78 +2369,6 @@ add_general_section (CcPowerPanel *self)
 
   can_suspend = can_suspend_or_hibernate (self, "CanSuspend");
   can_hibernate = can_suspend_or_hibernate (self, "CanHibernate");
-
-  /* The default values for these settings are unfortunate for us;
-   * timeout == 0, action == suspend means 'do nothing' - just
-   * as timout === anything, action == nothing.
-   * For our switch/combobox combination, the second choice works
-   * much better, so translate the first to the second here.
-   */
-  if (g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout") == 0)
-    {
-      g_settings_set_enum (self->gsd_settings, "sleep-inactive-ac-type", GSD_POWER_ACTION_NOTHING);
-      g_settings_set_int (self->gsd_settings, "sleep-inactive-ac-timeout", 3600);
-    }
-  if (g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout") == 0)
-    {
-      g_settings_set_enum (self->gsd_settings, "sleep-inactive-battery-type", GSD_POWER_ACTION_NOTHING);
-      g_settings_set_int (self->gsd_settings, "sleep-inactive-battery-timeout", 1800);
-    }
-
-  /* Automatic suspend row */
-  if (can_suspend)
-    {
-      self->automatic_suspend_row = row = gtk_list_box_row_new ();
-      gtk_widget_show (row);
-      box = row_box_new ();
-      gtk_container_add (GTK_CONTAINER (row), box);
-      title = row_title_new (_("_Automatic Suspend"), NULL, NULL);
-      atk_object_set_name (ATK_OBJECT (gtk_widget_get_accessible (self->automatic_suspend_row)), _("Automatic suspend"));
-      gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
-
-      self->automatic_suspend_label = gtk_label_new ("");
-      gtk_widget_show (self->automatic_suspend_label);
-      gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->automatic_suspend_label);
-      g_signal_connect_object (self->automatic_suspend_label, "mnemonic-activate",
-                               G_CALLBACK (automatic_suspend_activate), self, G_CONNECT_SWAPPED);
-      gtk_widget_set_halign (self->automatic_suspend_label, GTK_ALIGN_END);
-      gtk_box_pack_start (GTK_BOX (box), self->automatic_suspend_label, FALSE, TRUE, 0);
-      gtk_container_add (GTK_CONTAINER (widget), row);
-      gtk_size_group_add_widget (self->row_sizegroup, row);
-
-      dialog = self->automatic_suspend_dialog;
-      g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-      g_signal_connect_object (self->gsd_settings, "changed", G_CALLBACK (on_suspend_settings_changed), self, G_CONNECT_SWAPPED);
-
-      g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-battery-type",
-                                    self->suspend_on_battery_switch, "active",
-                                    G_SETTINGS_BIND_DEFAULT,
-                                    get_sleep_type, set_sleep_type, NULL, NULL);
-
-      g_object_set_data (G_OBJECT (self->suspend_on_battery_delay_combo), "_gsettings_key", "sleep-inactive-battery-timeout");
-      value = g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout");
-      set_value_for_combo (GTK_COMBO_BOX (self->suspend_on_battery_delay_combo), value);
-      g_signal_connect_object (self->suspend_on_battery_delay_combo, "changed",
-                               G_CALLBACK (combo_time_changed_cb), self, G_CONNECT_SWAPPED);
-      g_object_bind_property (self->suspend_on_battery_switch, "active", self->suspend_on_battery_delay_combo, "sensitive",
-                              G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
-
-      g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-ac-type",
-                                    self->suspend_on_ac_switch, "active",
-                                    G_SETTINGS_BIND_DEFAULT,
-                                    get_sleep_type, set_sleep_type, NULL, NULL);
-
-      g_object_set_data (G_OBJECT (self->suspend_on_ac_delay_combo), "_gsettings_key", "sleep-inactive-ac-timeout");
-      value = g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout");
-      set_value_for_combo (GTK_COMBO_BOX (self->suspend_on_ac_delay_combo), value);
-      g_signal_connect_object (self->suspend_on_ac_delay_combo, "changed",
-                               G_CALLBACK (combo_time_changed_cb), self, G_CONNECT_SWAPPED);
-      g_object_bind_property (self->suspend_on_ac_switch, "active", self->suspend_on_ac_delay_combo, "sensitive",
-                              G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
-
-      set_ac_battery_ui_mode (self);
-      update_automatic_suspend_label (self);
-    }
 
   if ((!can_hibernate && !can_suspend) ||
       g_strcmp0 (self->chassis_type, "vm") == 0 ||
