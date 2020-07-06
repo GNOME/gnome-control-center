@@ -1807,6 +1807,195 @@ iio_proxy_vanished_cb (GDBusConnection *connection,
 }
 
 static void
+activate_row (CcPowerPanel *self,
+              GtkListBoxRow *row)
+{
+  GtkWidget *w;
+  GtkWidget *toplevel;
+
+  if (row == GTK_LIST_BOX_ROW (self->automatic_suspend_row))
+    {
+      w = self->automatic_suspend_dialog;
+      toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+      gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (toplevel));
+      gtk_window_set_modal (GTK_WINDOW (w), TRUE);
+      gtk_window_present (GTK_WINDOW (w));
+    }
+}
+
+static gboolean
+automatic_suspend_activate (CcPowerPanel *self)
+{
+  activate_row (self, GTK_LIST_BOX_ROW (self->automatic_suspend_row));
+  return TRUE;
+}
+
+static gboolean
+get_sleep_type (GValue   *value,
+                GVariant *variant,
+                gpointer  data)
+{
+  gboolean enabled;
+
+  if (g_strcmp0 (g_variant_get_string (variant, NULL), "nothing") == 0)
+    enabled = FALSE;
+  else
+    enabled = TRUE;
+
+  g_value_set_boolean (value, enabled);
+
+  return TRUE;
+}
+
+static GVariant *
+set_sleep_type (const GValue       *value,
+                const GVariantType *expected_type,
+                gpointer            data)
+{
+  GVariant *res;
+
+  if (g_value_get_boolean (value))
+    res = g_variant_new_string ("suspend");
+  else
+    res = g_variant_new_string ("nothing");
+
+  return res;
+}
+
+static void
+populate_power_button_model (GtkTreeModel *model,
+                             gboolean      can_suspend,
+                             gboolean      can_hibernate)
+{
+  struct {
+    char *name;
+    GsdPowerButtonActionType value;
+  } actions[] = {
+    { N_("Suspend"), GSD_POWER_BUTTON_ACTION_SUSPEND },
+    { N_("Power Off"), GSD_POWER_BUTTON_ACTION_INTERACTIVE },
+    { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE },
+    { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING }
+  };
+  guint i;
+
+  for (i = 0; i < G_N_ELEMENTS (actions); i++)
+    {
+      if (!can_suspend && actions[i].value == GSD_POWER_BUTTON_ACTION_SUSPEND)
+        continue;
+
+      if (!can_hibernate && actions[i].value == GSD_POWER_BUTTON_ACTION_HIBERNATE)
+        continue;
+
+      gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
+                                         NULL, -1,
+                                         0, _(actions[i].name),
+                                         1, actions[i].value,
+                                         -1);
+    }
+}
+
+#define NEVER 0
+
+static void
+update_automatic_suspend_label (CcPowerPanel *self)
+{
+  GsdPowerActionType ac_action;
+  GsdPowerActionType battery_action;
+  gint ac_timeout;
+  gint battery_timeout;
+  const gchar *s;
+
+  ac_action = g_settings_get_enum (self->gsd_settings, "sleep-inactive-ac-type");
+  battery_action = g_settings_get_enum (self->gsd_settings, "sleep-inactive-battery-type");
+  ac_timeout = g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout");
+  battery_timeout = g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout");
+
+  if (ac_timeout < 0)
+    g_warning ("Invalid negative timeout for 'sleep-inactive-ac-timeout': %d", ac_timeout);
+  if (battery_timeout < 0)
+    g_warning ("Invalid negative timeout for 'sleep-inactive-battery-timeout': %d", battery_timeout);
+
+  if (ac_action == GSD_POWER_ACTION_NOTHING || ac_timeout < 0)
+    ac_timeout = NEVER;
+  if (battery_action == GSD_POWER_ACTION_NOTHING || battery_timeout < 0)
+    battery_timeout = NEVER;
+
+  if (self->has_batteries)
+    {
+      if (ac_timeout == NEVER && battery_timeout == NEVER)
+        s = _("Off");
+      else if (ac_timeout == NEVER && battery_timeout > 0)
+        s = _("When on battery power");
+      else if (ac_timeout > 0 && battery_timeout == NEVER)
+        s = _("When plugged in");
+      else
+        s = _("On");
+    }
+  else
+    {
+      if (ac_timeout == NEVER)
+        s = _("Off");
+      else
+        s = _("On");
+    }
+
+  if (self->automatic_suspend_label)
+    gtk_label_set_label (GTK_LABEL (self->automatic_suspend_label), s);
+}
+
+static void
+on_suspend_settings_changed (CcPowerPanel *self,
+                             const char   *key)
+{
+  if (g_str_has_prefix (key, "sleep-inactive-"))
+    {
+      update_automatic_suspend_label (self);
+    }
+}
+
+static gboolean
+can_suspend_or_hibernate (CcPowerPanel *self,
+                          const char   *method_name)
+{
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GError) error = NULL;
+  const char *s;
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
+                               cc_panel_get_cancellable (CC_PANEL (self)),
+                               &error);
+  if (!connection)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("system bus not available: %s", error->message);
+      return FALSE;
+    }
+
+  variant = g_dbus_connection_call_sync (connection,
+                                         "org.freedesktop.login1",
+                                         "/org/freedesktop/login1",
+                                         "org.freedesktop.login1.Manager",
+                                         method_name,
+                                         NULL,
+                                         NULL,
+                                         G_DBUS_CALL_FLAGS_NONE,
+                                         -1,
+                                         cc_panel_get_cancellable (CC_PANEL (self)),
+                                         &error);
+
+  if (!variant)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_debug ("Failed to call %s(): %s", method_name, error->message);
+      return FALSE;
+    }
+
+  g_variant_get (variant, "(&s)", &s);
+  return g_strcmp0 (s, "yes") == 0;
+}
+
+static void
 add_power_saving_section (CcPowerPanel *self)
 {
   GtkWidget *widget, *box, *label, *row;
@@ -2023,195 +2212,6 @@ add_power_saving_section (CcPowerPanel *self)
 
   bt_powered_state_changed (self);
 #endif
-}
-
-#define NEVER 0
-
-static void
-update_automatic_suspend_label (CcPowerPanel *self)
-{
-  GsdPowerActionType ac_action;
-  GsdPowerActionType battery_action;
-  gint ac_timeout;
-  gint battery_timeout;
-  const gchar *s;
-
-  ac_action = g_settings_get_enum (self->gsd_settings, "sleep-inactive-ac-type");
-  battery_action = g_settings_get_enum (self->gsd_settings, "sleep-inactive-battery-type");
-  ac_timeout = g_settings_get_int (self->gsd_settings, "sleep-inactive-ac-timeout");
-  battery_timeout = g_settings_get_int (self->gsd_settings, "sleep-inactive-battery-timeout");
-
-  if (ac_timeout < 0)
-    g_warning ("Invalid negative timeout for 'sleep-inactive-ac-timeout': %d", ac_timeout);
-  if (battery_timeout < 0)
-    g_warning ("Invalid negative timeout for 'sleep-inactive-battery-timeout': %d", battery_timeout);
-
-  if (ac_action == GSD_POWER_ACTION_NOTHING || ac_timeout < 0)
-    ac_timeout = NEVER;
-  if (battery_action == GSD_POWER_ACTION_NOTHING || battery_timeout < 0)
-    battery_timeout = NEVER;
-
-  if (self->has_batteries)
-    {
-      if (ac_timeout == NEVER && battery_timeout == NEVER)
-        s = _("Off");
-      else if (ac_timeout == NEVER && battery_timeout > 0)
-        s = _("When on battery power");
-      else if (ac_timeout > 0 && battery_timeout == NEVER)
-        s = _("When plugged in");
-      else
-        s = _("On");
-    }
-  else
-    {
-      if (ac_timeout == NEVER)
-        s = _("Off");
-      else
-        s = _("On");
-    }
-
-  if (self->automatic_suspend_label)
-    gtk_label_set_label (GTK_LABEL (self->automatic_suspend_label), s);
-}
-
-static void
-on_suspend_settings_changed (CcPowerPanel *self,
-                             const char   *key)
-{
-  if (g_str_has_prefix (key, "sleep-inactive-"))
-    {
-      update_automatic_suspend_label (self);
-    }
-}
-
-static void
-activate_row (CcPowerPanel *self,
-              GtkListBoxRow *row)
-{
-  GtkWidget *w;
-  GtkWidget *toplevel;
-
-  if (row == GTK_LIST_BOX_ROW (self->automatic_suspend_row))
-    {
-      w = self->automatic_suspend_dialog;
-      toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-      gtk_window_set_transient_for (GTK_WINDOW (w), GTK_WINDOW (toplevel));
-      gtk_window_set_modal (GTK_WINDOW (w), TRUE);
-      gtk_window_present (GTK_WINDOW (w));
-    }
-}
-
-static gboolean
-automatic_suspend_activate (CcPowerPanel *self)
-{
-  activate_row (self, GTK_LIST_BOX_ROW (self->automatic_suspend_row));
-  return TRUE;
-}
-
-static gboolean
-get_sleep_type (GValue   *value,
-                GVariant *variant,
-                gpointer  data)
-{
-  gboolean enabled;
-
-  if (g_strcmp0 (g_variant_get_string (variant, NULL), "nothing") == 0)
-    enabled = FALSE;
-  else
-    enabled = TRUE;
-
-  g_value_set_boolean (value, enabled);
-
-  return TRUE;
-}
-
-static GVariant *
-set_sleep_type (const GValue       *value,
-                const GVariantType *expected_type,
-                gpointer            data)
-{
-  GVariant *res;
-
-  if (g_value_get_boolean (value))
-    res = g_variant_new_string ("suspend");
-  else
-    res = g_variant_new_string ("nothing");
-
-  return res;
-}
-
-static void
-populate_power_button_model (GtkTreeModel *model,
-                             gboolean      can_suspend,
-                             gboolean      can_hibernate)
-{
-  struct {
-    char *name;
-    GsdPowerButtonActionType value;
-  } actions[] = {
-    { N_("Suspend"), GSD_POWER_BUTTON_ACTION_SUSPEND },
-    { N_("Power Off"), GSD_POWER_BUTTON_ACTION_INTERACTIVE },
-    { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE },
-    { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING }
-  };
-  guint i;
-
-  for (i = 0; i < G_N_ELEMENTS (actions); i++)
-    {
-      if (!can_suspend && actions[i].value == GSD_POWER_BUTTON_ACTION_SUSPEND)
-        continue;
-
-      if (!can_hibernate && actions[i].value == GSD_POWER_BUTTON_ACTION_HIBERNATE)
-        continue;
-
-      gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
-                                         NULL, -1,
-                                         0, _(actions[i].name),
-                                         1, actions[i].value,
-                                         -1);
-    }
-}
-
-static gboolean
-can_suspend_or_hibernate (CcPowerPanel *self,
-                          const char   *method_name)
-{
-  g_autoptr(GDBusConnection) connection = NULL;
-  g_autoptr(GVariant) variant = NULL;
-  g_autoptr(GError) error = NULL;
-  const char *s;
-
-  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
-                               cc_panel_get_cancellable (CC_PANEL (self)),
-                               &error);
-  if (!connection)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_warning ("system bus not available: %s", error->message);
-      return FALSE;
-    }
-
-  variant = g_dbus_connection_call_sync (connection,
-                                         "org.freedesktop.login1",
-                                         "/org/freedesktop/login1",
-                                         "org.freedesktop.login1.Manager",
-                                         method_name,
-                                         NULL,
-                                         NULL,
-                                         G_DBUS_CALL_FLAGS_NONE,
-                                         -1,
-                                         cc_panel_get_cancellable (CC_PANEL (self)),
-                                         &error);
-
-  if (!variant)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_debug ("Failed to call %s(): %s", method_name, error->message);
-      return FALSE;
-    }
-
-  g_variant_get (variant, "(&s)", &s);
-  return g_strcmp0 (s, "yes") == 0;
 }
 
 static void
