@@ -59,6 +59,7 @@ struct _CcPowerPanel
 
   GSettings     *gsd_settings;
   GSettings     *session_settings;
+  GSettings     *interface_settings;
   GtkWidget     *main_scroll;
   GtkWidget     *main_box;
   GtkWidget     *vbox_power;
@@ -119,6 +120,8 @@ struct _CcPowerPanel
 
   GtkWidget     *power_button_combo;
   GtkWidget     *idle_delay_combo;
+
+  GtkWidget     *battery_percentage_switch;
 
 #ifdef HAVE_NETWORK_MANAGER
   NMClient      *nm_client;
@@ -442,6 +445,47 @@ get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
     }
 
   return details;
+}
+
+static void
+battery_percentage_switch_changed (CcPowerPanel *self)
+{
+  gboolean enabled;
+  enabled = gtk_switch_get_active (GTK_SWITCH (self->battery_percentage_switch));
+  g_debug ("Setting Battery Percentage changed to %s", enabled ? "on" : "off");
+  g_settings_set_boolean (self->interface_settings, "show-battery-percentage", enabled);
+}
+
+static void
+add_battery_percentage_switch(CcPowerPanel *panel)
+{
+  GtkWidget *row, *box, *sw;
+  GtkWidget *label, *title;
+
+  row = no_prelight_row_new ();
+  gtk_widget_show (row);
+  box = row_box_new ();
+  gtk_container_add (GTK_CONTAINER (row), box);
+  title = row_title_new (_("_Show battery percentage"), NULL, &label);
+  gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
+
+  panel->battery_percentage_switch = sw = gtk_switch_new ();
+  gtk_widget_show (sw);
+  gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
+  gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
+  gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
+  gtk_container_add (GTK_CONTAINER (panel->battery_list), row);
+  gtk_size_group_add_widget (panel->battery_row_sizegroup, row);
+
+  if (g_settings_get_boolean (panel->interface_settings, "show-battery-percentage"))
+    gtk_switch_set_active (sw, TRUE);
+  else
+    gtk_switch_set_active (sw, FALSE);
+
+  g_signal_connect_object (panel->battery_percentage_switch, "notify::active",
+    G_CALLBACK (battery_percentage_switch_changed), panel, G_CONNECT_SWAPPED);
+
+  gtk_widget_set_visible (panel->battery_section, TRUE);
 }
 
 static void
@@ -972,6 +1016,9 @@ up_client_changed (CcPowerPanel *self)
           add_device (self, device);
         }
     }
+
+  if (n_batteries > 0)
+    add_battery_percentage_switch (self);
 }
 
 static void
@@ -2507,6 +2554,7 @@ cc_power_panel_init (CcPowerPanel *self)
 
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
+  self->interface_settings = g_settings_new ("org.gnome.desktop.interface");
 
   self->battery_row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
   self->row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
