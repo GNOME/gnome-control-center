@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-06-26 04:13+0000\n"
-"PO-Revision-Date: 2020-06-26 08:26+0200\n"
+"POT-Creation-Date: 2020-07-03 05:29+0000\n"
+"PO-Revision-Date: 2020-07-06 13:42+0200\n"
 "Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
 "gmail [dot] com>\n"
 "Language-Team: Romanian Gnome Team\n"
@@ -209,8 +209,8 @@ msgstr "Cameră"
 #: panels/applications/cc-applications-panel.ui:264
 #: panels/keyboard/cc-keyboard-option.c:259
 #: panels/keyboard/cc-keyboard-option.c:378
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:93
-#: panels/keyboard/keyboard-shortcuts.c:425 panels/network/network-proxy.ui:126
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
+#: panels/keyboard/keyboard-shortcuts.c:368 panels/network/network-proxy.ui:126
 #: panels/user-accounts/cc-user-panel.c:865
 #: panels/user-accounts/cc-user-panel.c:957
 #: subprojects/gvc/gvc-mixer-control.c:1876
@@ -371,7 +371,7 @@ msgstr "Selectați o fotografie"
 #: panels/network/connection-editor/vpn-helpers.c:299
 #: panels/network/net-device-wifi.c:800 panels/network/net-device-wifi.c:908
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:252
+#: panels/printers/pp-details-dialog.c:251
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:638
 #: panels/sharing/cc-sharing-panel.c:398 panels/usage/cc-usage-panel.c:133
@@ -388,7 +388,7 @@ msgstr "_Renunță"
 
 #: panels/background/cc-background-chooser.c:350
 #: panels/network/connection-editor/vpn-helpers.c:177
-#: panels/printers/pp-details-dialog.c:253
+#: panels/printers/pp-details-dialog.c:252
 #: panels/sharing/cc-sharing-panel.c:399
 #: panels/user-accounts/cc-avatar-chooser.c:236
 msgid "_Open"
@@ -472,7 +472,7 @@ msgstr "Opriți modul avion pentru a putea activa Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1670
+#: panels/printers/pp-new-printer-dialog.c:1664
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -2138,9 +2138,9 @@ msgstr "Tasta meniului"
 msgid "Right Ctrl"
 msgstr "Ctrl dreapta"
 
-#: panels/keyboard/cc-keyboard-manager.c:501
-#: panels/keyboard/cc-keyboard-manager.c:509
-#: panels/keyboard/cc-keyboard-manager.c:809
+#: panels/keyboard/cc-keyboard-manager.c:486
+#: panels/keyboard/cc-keyboard-manager.c:494
+#: panels/keyboard/cc-keyboard-manager.c:779
 msgid "Custom Shortcuts"
 msgstr "Scurtături personalizate"
 
@@ -2207,7 +2207,7 @@ msgstr ""
 "acțiune nu poate fi refăcută."
 
 #: panels/keyboard/cc-keyboard-panel.c:208
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:323
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
@@ -2237,75 +2237,74 @@ msgstr "Restabilește toate scurtăturile la valorile implicite"
 msgid "No keyboard shortcut found"
 msgstr "Nicio scurtătură de tastatură găsită"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:419
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:404
 #, c-format
 msgid "%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr ""
 "%s este deja utilizat pentru %s. Dacă îl înlocuiți, %s va fi dezactivat"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:587
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
+msgid "Enter the new shortcut"
+msgstr "Introduceți noua scurtătură"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
 msgid "Set Custom Shortcut"
 msgstr "Stabilește scurtătură personalizată"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:587
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
 msgid "Set Shortcut"
 msgstr "Stabilește scurtătură"
 
 #. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:598
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:575
 #, c-format
 msgid "Enter new shortcut to change %s."
 msgstr "Introduceți o scurtătură nouă pentru a modifica %s."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1028
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1002
 msgid "Add Custom Shortcut"
 msgstr "Adaugă scurtățură personalizată"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:68
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:299
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:60
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr ""
 "Apăsați Esc pentru a anula sau Backspace pentru a dezactiva scurtătura de "
 "tastatură."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:147
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
 msgid "Name"
 msgstr "Nume"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:159
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:147
 msgid "Command"
 msgstr "Comandă"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:171
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:159
 msgid "Shortcut"
 msgstr "Scurtătură"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:250
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:238
 msgid "Set Shortcut…"
 msgstr "Stabilește scurtătura…"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:260
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:248
 msgid "None"
 msgstr "Niciuna"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:284
-msgid "Enter the new shortcut"
-msgstr "Introduceți noua scurtătură"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:334
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:286
 msgid "Remove"
 msgstr "Elimină"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:344
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
 msgid "Add"
 msgstr "Adaugă"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:359
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:311
 msgid "Replace"
 msgstr "Înlocuiește"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:372
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:324
 msgid "Set"
 msgstr "Stabilește"
 
@@ -2784,7 +2783,7 @@ msgstr "Generează automat o parolă"
 msgid "_Turn On"
 msgstr "_Pornește"
 
-#: panels/network/cc-wifi-panel.c:276
+#: panels/network/cc-wifi-panel.c:312
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:233
 msgid "Wi-Fi"
@@ -4733,18 +4732,18 @@ msgid "Authentication Required"
 msgstr "Necesită autentificare"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:720
+#: panels/printers/cc-printers-panel.c:707
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Imprimanta „%s” a fost ștearsă"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:989
+#: panels/printers/cc-printers-panel.c:970
 msgid "Failed to add new printer."
 msgstr "Nu s-a putut adăuga imprimanta nouă."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1321
+#: panels/printers/cc-printers-panel.c:1273
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nu s-a putut încărca interfața cu utilizatorul: %s"
@@ -4766,8 +4765,8 @@ msgstr ""
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:356
-#: panels/printers/pp-new-printer-dialog.c:413
+#: panels/printers/pp-new-printer-dialog.c:353
+#: panels/printers/pp-new-printer-dialog.c:410
 msgid "Add Printer"
 msgstr "Adăugare imprimantă"
 
@@ -4795,21 +4794,21 @@ msgstr ""
 "serverul de imprimare."
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:75
-#: panels/printers/pp-details-dialog.c:370
+#: panels/printers/pp-details-dialog.c:74
+#: panels/printers/pp-details-dialog.c:367
 #, c-format
 msgid "%s Details"
 msgstr "Detalii %s"
 
-#: panels/printers/pp-details-dialog.c:122
+#: panels/printers/pp-details-dialog.c:121
 msgid "No suitable driver found"
 msgstr "Nu s-a găsit un driver potrivit"
 
-#: panels/printers/pp-details-dialog.c:249
+#: panels/printers/pp-details-dialog.c:248
 msgid "Select PPD File"
 msgstr "Specificați fișierul PPD"
 
-#: panels/printers/pp-details-dialog.c:258
+#: panels/printers/pp-details-dialog.c:257
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4823,7 +4822,7 @@ msgstr "Locație"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:250
+#: panels/printers/pp-ppd-selection-dialog.c:248
 msgid "Driver"
 msgstr "Driver"
 
@@ -4867,40 +4866,40 @@ msgid "LPD Printer"
 msgstr "Imprimantă PLD"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:65
+#: panels/printers/pp-ipp-option-widget.c:64
 #: panels/printers/pp-ppd-option-widget.c:69
 msgid "One Sided"
 msgstr "Pe o parte"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:67
+#: panels/printers/pp-ipp-option-widget.c:66
 #: panels/printers/pp-ppd-option-widget.c:71
 msgid "Long Edge (Standard)"
 msgstr "Margine lungă (standard)"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:69
+#: panels/printers/pp-ipp-option-widget.c:68
 #: panels/printers/pp-ppd-option-widget.c:73
 msgid "Short Edge (Flip)"
 msgstr "Margine scurtă (întoarsă)"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:71
+#: panels/printers/pp-ipp-option-widget.c:70
 msgid "Portrait"
 msgstr "Portret"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:73
+#: panels/printers/pp-ipp-option-widget.c:72
 msgid "Landscape"
 msgstr "Peisaj"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:75
+#: panels/printers/pp-ipp-option-widget.c:74
 msgid "Reverse landscape"
 msgstr "Peisaj inversat"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:77
+#: panels/printers/pp-ipp-option-widget.c:76
 msgid "Reverse portrait"
 msgstr "Portret inversat"
 
@@ -4999,157 +4998,157 @@ msgstr "_Autentificare"
 msgid "No Active Printer Jobs"
 msgstr "Nu sunt sarcini active pentru imprimantă"
 
-#: panels/printers/pp-new-printer-dialog.c:371
+#: panels/printers/pp-new-printer-dialog.c:368
 msgid "Unlock Print Server"
 msgstr "Deblocați serverul de imprimare"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:375
+#: panels/printers/pp-new-printer-dialog.c:372
 #, c-format
 msgid "Unlock %s."
 msgstr "Deblochează %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:379
+#: panels/printers/pp-new-printer-dialog.c:376
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduceți numele de utilizator și parola pentru a vedea imprimantele "
 "disponibile pe %s."
 
-#: panels/printers/pp-new-printer-dialog.c:816
+#: panels/printers/pp-new-printer-dialog.c:810
 msgid "Searching for Printers"
 msgstr "Se caută imprimante"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1653
+#: panels/printers/pp-new-printer-dialog.c:1647
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1658
+#: panels/printers/pp-new-printer-dialog.c:1652
 msgid "Serial Port"
 msgstr "Port serial"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1665
+#: panels/printers/pp-new-printer-dialog.c:1659
 msgid "Parallel Port"
 msgstr "Port paralel"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1707
+#: panels/printers/pp-new-printer-dialog.c:1701
 #, c-format
 msgid "Location: %s"
 msgstr "Locație: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1712
+#: panels/printers/pp-new-printer-dialog.c:1706
 #, c-format
 msgid "Address: %s"
 msgstr "Adresă: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1739
+#: panels/printers/pp-new-printer-dialog.c:1733
 msgid "Server requires authentication"
 msgstr "Serverul necesită autentificare"
 
-#: panels/printers/pp-options-dialog.c:91
+#: panels/printers/pp-options-dialog.c:87
 msgid "Two Sided"
 msgstr "Pe ambele părți"
 
-#: panels/printers/pp-options-dialog.c:92
+#: panels/printers/pp-options-dialog.c:88
 msgid "Paper Type"
 msgstr "Tip de hârtie"
 
-#: panels/printers/pp-options-dialog.c:93
+#: panels/printers/pp-options-dialog.c:89
 msgid "Paper Source"
 msgstr "Sursă hârtie"
 
-#: panels/printers/pp-options-dialog.c:94
+#: panels/printers/pp-options-dialog.c:90
 msgid "Output Tray"
 msgstr "Tavă de ieșire"
 
-#: panels/printers/pp-options-dialog.c:95
+#: panels/printers/pp-options-dialog.c:91
 msgctxt "printing option"
 msgid "Resolution"
 msgstr "Rezoluție"
 
-#: panels/printers/pp-options-dialog.c:96
+#: panels/printers/pp-options-dialog.c:92
 msgid "GhostScript pre-filtering"
 msgstr "Pre-filtrare GhostScript"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:534
+#: panels/printers/pp-options-dialog.c:530
 msgid "Pages per side"
 msgstr "Pagini pe foaie"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:546
+#: panels/printers/pp-options-dialog.c:542
 msgid "Two-sided"
 msgstr "Pe ambele părți"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:558
+#: panels/printers/pp-options-dialog.c:554
 msgid "Orientation"
 msgstr "Orientare"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:655
+#: panels/printers/pp-options-dialog.c:651
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "General"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:658
+#: panels/printers/pp-options-dialog.c:654
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Configurare pagină"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:661
+#: panels/printers/pp-options-dialog.c:657
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Opțiuni instalabile"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:664
+#: panels/printers/pp-options-dialog.c:660
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Sarcină"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:667
+#: panels/printers/pp-options-dialog.c:663
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Calitate imagine"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:670
+#: panels/printers/pp-options-dialog.c:666
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Culoare"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:673
+#: panels/printers/pp-options-dialog.c:669
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Se finalizează"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:676
+#: panels/printers/pp-options-dialog.c:672
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Avansat"
 
 #. Translators: Name of job which makes printer to print test page
 #. Translators: This button triggers the printing of a test page.
-#: panels/printers/pp-options-dialog.c:869
+#: panels/printers/pp-options-dialog.c:863
 #: panels/printers/pp-options-dialog.ui:18
 msgid "Test Page"
 msgstr "Pagină de test"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:882
+#: panels/printers/pp-options-dialog.c:876
 msgid "Test page"
 msgstr "Pagină de test"
 
@@ -5190,17 +5189,17 @@ msgid "No pre-filtering"
 msgstr "Fără pre-filtrare"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:233
+#: panels/printers/pp-ppd-selection-dialog.c:231
 msgid "Manufacturer"
 msgstr "Producător"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:592 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:588 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Nicio sarcină activă"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:597
+#: panels/printers/pp-printer-entry.c:593
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5209,110 +5208,110 @@ msgstr[1] "%u sarcini"
 msgstr[2] "%u de sarcini"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:715
+#: panels/printers/pp-printer-entry.c:711
 msgid "Clean print heads"
 msgstr "Curăță capetele de imprimare"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:762
 msgid "Low on toner"
 msgstr "Toner puțin"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:768
+#: panels/printers/pp-printer-entry.c:764
 msgid "Out of toner"
 msgstr "Fără toner"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:767
 msgid "Low on developer"
 msgstr "Developator puțin"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:770
 msgid "Out of developer"
 msgstr "Fără developator"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:772
 msgid "Low on a marker supply"
 msgstr "Stoc de culoare scăzut"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:778
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of a marker supply"
 msgstr "Stoc de culoare terminat"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:776
 msgid "Open cover"
 msgstr "Capac deschis"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:778
 msgid "Open door"
 msgstr "Ușă deschisă"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:784
+#: panels/printers/pp-printer-entry.c:780
 msgid "Low on paper"
 msgstr "Hârtie puțină"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:782
 msgid "Out of paper"
 msgstr "Fără hârtie"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:788
+#: panels/printers/pp-printer-entry.c:784
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Deconectată"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:790
-#: panels/printers/pp-printer-entry.c:933
+#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:929
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Oprită"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:792
+#: panels/printers/pp-printer-entry.c:788
 msgid "Waste receptacle almost full"
 msgstr "Recipientul pentru deșeuri este aproape plin"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:794
+#: panels/printers/pp-printer-entry.c:790
 msgid "Waste receptacle full"
 msgstr "Recipientul pentru deșeuri este plin"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:796
+#: panels/printers/pp-printer-entry.c:792
 msgid "The optical photo conductor is near end of life"
 msgstr "Foto-conductorul optic este aproape de sfârșitul vieții"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:798
+#: panels/printers/pp-printer-entry.c:794
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Foto-conductorul optic nu mai funcționează"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:919
+#: panels/printers/pp-printer-entry.c:915
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pregătită"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:924
+#: panels/printers/pp-printer-entry.c:920
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Nu acceptă sarcini de imprimare"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:929
+#: panels/printers/pp-printer-entry.c:925
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Procesează"
@@ -7512,7 +7511,7 @@ msgid ""
 "click the * icon first"
 msgstr ""
 "Pentru a face schimbări,\n"
-"dați clic întâi pe iconița *"
+"apăsați întâi clic pe iconița *"
 
 #: panels/user-accounts/cc-user-panel.c:1373
 msgid "Delete the selected user account"
