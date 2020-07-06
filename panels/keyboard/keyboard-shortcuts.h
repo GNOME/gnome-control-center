@@ -67,12 +67,12 @@ enum
 
 gchar*   find_free_settings_path        (GSettings *settings);
 
-gboolean is_valid_binding               (CcKeyCombo *combo);
+gboolean is_valid_binding               (const CcKeyCombo *combo);
 
-gboolean is_empty_binding               (CcKeyCombo *combo);
+gboolean is_empty_binding               (const CcKeyCombo *combo);
 
-gboolean is_valid_accel                 (CcKeyCombo *combo);
+gboolean is_valid_accel                 (const CcKeyCombo *combo);
 
 KeyList* parse_keylist_from_file        (const gchar *path);
 
-gchar*   convert_keysym_state_to_string (CcKeyCombo *combo);
+gchar*   convert_keysym_state_to_string (const CcKeyCombo *combo);

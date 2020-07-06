@@ -144,22 +144,12 @@ apply_custom_item_fields (CcKeyboardShortcutEditor *self,
   /* Only setup the binding when it was actually edited */
   if (self->edited)
     {
-      CcKeyCombo *combo = cc_keyboard_item_get_primary_combo (item);
-      g_autofree gchar *binding = NULL;
+      CcKeyCombo *combo = self->custom_combo;
 
-      combo->keycode = self->custom_combo->keycode;
-      combo->keyval = self->custom_combo->keyval;
-      combo->mask = self->custom_combo->mask;
+      cc_keyboard_item_disable (item);
 
-      if (combo->keycode == 0 && combo->keyval == 0 && combo->mask == 0)
-        binding = g_strdup ("");
-      else
-        binding = gtk_accelerator_name_with_keycode (NULL,
-                                                     combo->keyval,
-                                                     combo->keycode,
-                                                     combo->mask);
-
-      g_object_set (G_OBJECT (item), "binding", binding, NULL);
+      if (combo->keycode != 0 || combo->keyval != 0 || combo->mask != 0)
+        cc_keyboard_item_add_key_combo (item, combo);
     }
 
   /* Set the keyboard shortcut name and command for custom entries */
@@ -263,7 +253,7 @@ update_shortcut (CcKeyboardShortcutEditor *self)
 
   /* Eventually disable the conflict shortcut */
   if (self->collision_item)
-    cc_keyboard_manager_disable_shortcut (self->manager, self->collision_item);
+    cc_keyboard_item_disable (self->collision_item);
 
   /* Cleanup whatever was set before */
   clear_custom_entries (self);
@@ -447,7 +437,7 @@ add_button_clicked_cb (CcKeyboardShortcutEditor *self)
 
   /* Eventually disable the conflict shortcut */
   if (self->collision_item)
-    cc_keyboard_manager_disable_shortcut (self->manager, self->collision_item);
+    cc_keyboard_item_disable (self->collision_item);
 
   /* Cleanup everything once we're done */
   clear_custom_entries (self);
@@ -513,14 +503,14 @@ reset_custom_clicked_cb (CcKeyboardShortcutEditor *self)
 static void
 reset_item_clicked_cb (CcKeyboardShortcutEditor *self)
 {
-  CcKeyCombo *combo;
+  CcKeyCombo combo;
   gchar *accel;
 
   /* Reset first, then update the shortcut */
   cc_keyboard_manager_reset_shortcut (self->manager, self->item);
 
   combo = cc_keyboard_item_get_primary_combo (self->item);
-  accel = gtk_accelerator_name (combo->keyval, combo->mask);
+  accel = gtk_accelerator_name (combo.keyval, combo.mask);
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), accel);
 
   g_free (accel);
@@ -537,7 +527,7 @@ static void
 setup_keyboard_item (CcKeyboardShortcutEditor *self,
                      CcKeyboardItem           *item)
 {
-  CcKeyCombo *combo;
+  CcKeyCombo combo;
   gboolean is_custom;
   g_autofree gchar *accel = NULL;
   g_autofree gchar *description_text = NULL;
@@ -550,14 +540,12 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
 
   combo = cc_keyboard_item_get_primary_combo (item);
   is_custom = cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH;
-  accel = gtk_accelerator_name (combo->keyval, combo->mask);
+  accel = gtk_accelerator_name (combo.keyval, combo.mask);
 
   /* To avoid accidentally thinking we unset the current keybinding, set the values
    * of the keyboard item that is being edited */
   self->custom_is_modifier = FALSE;
-  self->custom_combo->keycode = combo->keycode;
-  self->custom_combo->keyval = combo->keyval;
-  self->custom_combo->mask = combo->mask;
+  *self->custom_combo = combo;
 
   /* Headerbar */
   gtk_header_bar_set_title (self->headerbar,

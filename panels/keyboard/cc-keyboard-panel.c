@@ -131,7 +131,7 @@ transform_binding_to_accel (GBinding     *binding,
                             gpointer      user_data)
 {
   CcKeyboardItem *item;
-  CcKeyCombo *combo;
+  CcKeyCombo combo;
   gchar *accelerator;
 
   item = CC_KEYBOARD_ITEM (g_binding_get_source (binding));
@@ -142,13 +142,13 @@ transform_binding_to_accel (GBinding     *binding,
     {
       g_autofree gchar *tmp = NULL;
 
-      tmp = convert_keysym_state_to_string (combo);
+      tmp = convert_keysym_state_to_string (&combo);
 
       accelerator = g_strdup_printf ("<b>%s</b>", tmp);
     }
   else
     {
-      accelerator = convert_keysym_state_to_string (combo);
+      accelerator = convert_keysym_state_to_string (&combo);
     }
 
   g_value_take_string (to_value, accelerator);
@@ -283,10 +283,10 @@ add_item (CcKeyboardPanel *self,
   gtk_size_group_add_widget (self->accelerator_sizegroup, label);
 
   g_object_bind_property_full (item,
-                               "binding",
+                               "key-combos",
                                label,
-                              "label",
-                               G_SETTINGS_BIND_GET | G_BINDING_SYNC_CREATE,
+                               "label",
+			       G_BINDING_SYNC_CREATE,
                                transform_binding_to_accel,
                                NULL, NULL, NULL);
 
@@ -417,18 +417,18 @@ static gboolean
 search_match_shortcut (CcKeyboardItem *item,
                        const gchar    *search)
 {
-  CcKeyCombo *combo = cc_keyboard_item_get_primary_combo (item);
+  CcKeyCombo combo = cc_keyboard_item_get_primary_combo (item);
   GStrv shortcut_tokens, search_tokens;
   g_autofree gchar *normalized_accel = NULL;
   g_autofree gchar *accel = NULL;
   gboolean match;
   guint i;
 
-  if (is_empty_binding (combo))
+  if (is_empty_binding (&combo))
     return FALSE;
 
   match = TRUE;
-  accel = convert_keysym_state_to_string (combo);
+  accel = convert_keysym_state_to_string (&combo);
   normalized_accel = cc_util_normalize_casefold_and_unaccent (accel);
 
   shortcut_tokens = g_strsplit_set (normalized_accel, SHORTCUT_DELIMITERS, -1);

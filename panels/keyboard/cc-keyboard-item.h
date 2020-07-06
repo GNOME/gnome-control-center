@@ -90,7 +90,7 @@ GList*             cc_keyboard_item_get_key_combos           (CcKeyboardItem    
 
 GList*             cc_keyboard_item_get_default_combos       (CcKeyboardItem     *self);
 
-CcKeyCombo*        cc_keyboard_item_get_primary_combo        (CcKeyboardItem     *self);
+CcKeyCombo         cc_keyboard_item_get_primary_combo        (CcKeyboardItem     *self);
 
 const gchar*       cc_keyboard_item_get_key                  (CcKeyboardItem     *self);
 
@@ -99,5 +99,14 @@ CcKeyboardItemType cc_keyboard_item_get_item_type            (CcKeyboardItem    
 const gchar*       cc_keyboard_item_get_gsettings_path       (CcKeyboardItem     *self);
 
 GSettings*         cc_keyboard_item_get_settings             (CcKeyboardItem     *self);
+
+gboolean           cc_keyboard_item_can_set_multiple         (CcKeyboardItem     *self);
+
+void               cc_keyboard_item_add_key_combo            (CcKeyboardItem     *self,
+                                                              CcKeyCombo         *combo);
+
+void               cc_keyboard_item_remove_key_combo         (CcKeyboardItem     *self,
+                                                              CcKeyCombo         *combo);
+void               cc_keyboard_item_disable                  (CcKeyboardItem     *self);
 
 G_END_DECLS
