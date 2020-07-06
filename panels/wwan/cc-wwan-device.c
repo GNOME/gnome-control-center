@@ -1183,12 +1183,16 @@ cc_wwan_device_dup_signal_string (CcWwanDevice *self)
   GString *str;
   gdouble value;
   gboolean recent;
+  guint refresh_rate;
 
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (self), NULL);
 
   modem_signal = mm_object_peek_modem_signal (self->mm_object);
 
-  if (!modem_signal)
+  if (modem_signal)
+    refresh_rate = mm_modem_signal_get_rate (modem_signal);
+
+  if (!modem_signal || !refresh_rate)
     return g_strdup_printf ("%d%%", mm_modem_get_signal_quality (self->modem, &recent));
 
   str = g_string_new ("");
