@@ -447,6 +447,19 @@ get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
 }
 
 static void
+load_custom_css (CcPowerPanel *self)
+{
+  g_autoptr(GtkCssProvider) provider = NULL;
+
+  /* use custom CSS */
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/power/battery-levels.css");
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+}
+
+static void
 set_primary (CcPowerPanel *panel, UpDevice *device)
 {
   g_autofree gchar *details = NULL;
@@ -492,9 +505,9 @@ set_primary (CcPowerPanel *panel, UpDevice *device)
   levelbar = gtk_level_bar_new ();
   gtk_widget_show (levelbar);
   gtk_level_bar_set_value (GTK_LEVEL_BAR (levelbar), percentage / 100.0);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), GTK_LEVEL_BAR_OFFSET_LOW, 0.03);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), GTK_LEVEL_BAR_OFFSET_HIGH, 0.1);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), GTK_LEVEL_BAR_OFFSET_FULL, 0.8);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "warning-battery-offset", 0.03);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "low-battery-offset", 0.1);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "high-battery-offset", 1.0);
   gtk_widget_set_hexpand (levelbar, TRUE);
   gtk_widget_set_halign (levelbar, GTK_ALIGN_FILL);
   gtk_widget_set_valign (levelbar, GTK_ALIGN_CENTER);
@@ -603,9 +616,9 @@ add_battery (CcPowerPanel *panel, UpDevice *device)
   levelbar = gtk_level_bar_new ();
   gtk_widget_show (levelbar);
   gtk_level_bar_set_value (GTK_LEVEL_BAR (levelbar), percentage / 100.0);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), GTK_LEVEL_BAR_OFFSET_LOW, 0.05);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), GTK_LEVEL_BAR_OFFSET_HIGH, 0.1);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), GTK_LEVEL_BAR_OFFSET_FULL, 0.8);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "warning-battery-offset", 0.05);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "low-battery-offset", 0.1);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "high-battery-offset", 1.0);
   gtk_widget_set_hexpand (levelbar, TRUE);
   gtk_widget_set_halign (levelbar, GTK_ALIGN_FILL);
   gtk_widget_set_valign (levelbar, GTK_ALIGN_CENTER);
@@ -793,9 +806,9 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   gtk_widget_set_halign (widget, GTK_ALIGN_FILL);
   gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
   gtk_level_bar_set_value (GTK_LEVEL_BAR (widget), percentage / 100.0f);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), GTK_LEVEL_BAR_OFFSET_LOW, 0.03);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), GTK_LEVEL_BAR_OFFSET_HIGH, 0.1);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), GTK_LEVEL_BAR_OFFSET_FULL, 0.8);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), "warning-battery-offset", 0.03);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), "low-battery-offset", 0.1);
+  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), "high-battery-offset", 1.0);
   gtk_box_pack_start (GTK_BOX (box2), widget, TRUE, TRUE, 0);
   gtk_size_group_add_widget (panel->level_sizegroup, widget);
   gtk_box_pack_start (GTK_BOX (hbox), box2, TRUE, TRUE, 0);
@@ -2533,6 +2546,7 @@ cc_power_panel_init (CcPowerPanel *self)
   g_resources_register (cc_power_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+  load_custom_css (self);
 
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
                                        G_DBUS_PROXY_FLAGS_NONE,
