@@ -2213,7 +2213,7 @@ can_suspend_or_hibernate (CcPowerPanel *self,
 }
 
 static void
-add_suspend_and_power_off_section (CcPowerPanel *self)
+add_general_section (CcPowerPanel *self)
 {
   GtkWidget *widget, *box, *label, *title;
   GtkWidget *row;
@@ -2349,7 +2349,7 @@ add_suspend_and_power_off_section (CcPowerPanel *self)
   box = row_box_new ();
   gtk_container_add (GTK_CONTAINER (row), box);
 
-  title = row_title_new (_("Po_wer Button Action"), NULL, &label);
+  title = row_title_new (_("Po_wer Button Behavior"), NULL, &label);
   gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
 
   self->power_button_combo = gtk_combo_box_text_new ();
@@ -2529,7 +2529,7 @@ cc_power_panel_init (CcPowerPanel *self)
   add_battery_section (self);
   add_device_section (self);
   add_power_saving_section (self);
-  add_suspend_and_power_off_section (self);
+  add_general_section (self);
 
   self->boxes = g_list_copy (self->boxes_reverse);
   self->boxes = g_list_reverse (self->boxes);
