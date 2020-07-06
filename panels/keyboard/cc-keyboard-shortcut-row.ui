@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcKeyboardShortcutRow" parent="GtkListBoxRow">
+    <property name="visible">True</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="spacing">10</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
+        <property name="margin-bottom">4</property>
+        <property name="margin-top">4</property>
+        <child>
+          <object class="GtkLabel" id="description">
+            <property name="visible">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="popover">edit_keybinding_menu</property>
+            <property name="valign">center</property>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-name">view-more-symbolic</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkBox" id="shortcut_box">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="orientation">vertical</property>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </template>
+
+  <object class="GtkPopoverMenu" id="edit_keybinding_menu">
+    <child>
+      <object class="GtkBox" id="edit_keybinding_box">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin">12</property>
+        <property name="spacing">6</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkButton" id="add_shortcut_button">
+            <property name="visible">True</property>
+            <property name="relief">none</property>
+            <property name="halign">start</property>
+            <signal name="clicked" handler="add_shortcut_cb"/>
+            <child>
+              <object class="GtkLabel" id="add_shortcut_button_label">
+                <property name="visible">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="reset_shortcuts_button">
+            <property name="visible">True</property>
+            <property name="relief">none</property>
+            <property name="halign">start</property>
+            <signal name="clicked" handler="reset_shortcut_cb"/>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Reset to default</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="pack_type">end</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

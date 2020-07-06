@@ -874,22 +874,6 @@ cc_keyboard_manager_get_collision (CcKeyboardManager *self,
 }
 
 /**
- * cc_keyboard_manager_disable_shortcut:
- * @self: a #CcKeyboardManager
- * @item: a @CcKeyboardItem
- *
- * Disables the given keyboard shortcut.
- */
-void
-cc_keyboard_manager_disable_shortcut (CcKeyboardManager *self,
-                                      CcKeyboardItem    *item)
-{
-  g_return_if_fail (CC_IS_KEYBOARD_MANAGER (self));
-
-  g_object_set (item, "binding", NULL, NULL);
-}
-
-/**
  * cc_keyboard_manager_reset_shortcut:
  * @self: a #CcKeyboardManager
  * @item: a #CcKeyboardItem
@@ -915,7 +899,7 @@ cc_keyboard_manager_reset_shortcut (CcKeyboardManager *self,
 
       collision = cc_keyboard_manager_get_collision (self, NULL, combo);
       if (collision)
-        cc_keyboard_manager_disable_shortcut (self, collision);
+        cc_keyboard_item_remove_key_combo (collision, combo);
     }
 
   /* Resets the current item */
