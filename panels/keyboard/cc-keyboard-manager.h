@@ -47,9 +47,6 @@ CcKeyboardItem*      cc_keyboard_manager_get_collision           (CcKeyboardMana
                                                                   CcKeyboardItem     *item,
                                                                   CcKeyCombo         *combo);
 
-void                 cc_keyboard_manager_disable_shortcut        (CcKeyboardManager  *self,
-                                                                  CcKeyboardItem     *item);
-
 void                 cc_keyboard_manager_reset_shortcut          (CcKeyboardManager  *self,
                                                                   CcKeyboardItem     *item);
 

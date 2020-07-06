@@ -18,19 +18,6 @@
         <property name="spacing">18</property>
         <property name="border_width">12</property>
         <child>
-          <object class="GtkLabel" id="top_info_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="wrap">True</property>
-            <property name="wrap_mode">word-char</property>
-            <property name="width_chars">15</property>
-            <property name="max_width_chars">20</property>
-          </object>
-          <packing>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
           <object class="GtkStack" id="stack">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
@@ -41,26 +28,19 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">18</property>
+                <property name="spacing">6</property>
                 <property name="expand">True</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <child>
-                  <object class="GtkImage">
+                  <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="resource">/org/gnome/control-center/keyboard/enter-keyboard-shortcut.svg</property>
+                    <property name="label" translatable="yes">Press the key combination to set the shortcut for</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkLabel" id="edit_shortcut_name_label">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="wrap">True</property>
-                    <property name="label" translatable="yes">Press Esc to cancel or Backspace to disable the keyboard shortcut.</property>
-                    <style>
-                      <class name="dim-label" />
-                    </style>
                   </object>
                 </child>
               </object>
@@ -71,7 +51,12 @@
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
                 <property name="orientation">vertical</property>
-                <property name="spacing">18</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkLabel" id="standard_shortcut_name_label">
+                    <property name="visible">True</property>
+                  </object>
+                </child>
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -246,6 +231,15 @@
                         <property name="halign">start</property>
                         <property name="hexpand">True</property>
                         <property name="disabled-text" translatable="yes">None</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="custom_shortcut_set_label">
+                        <property name="visible">True</property>
+                        <property name="label" translatable="yes">Press the key combination to set a shortcut...</property>
+                        <style>
+                          <class name="dim-label" />
+                        </style>
                       </object>
                     </child>
                   </object>
