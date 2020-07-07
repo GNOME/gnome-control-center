@@ -408,6 +408,7 @@
             "name" : "network-manager-applet",
             "buildsystem" : "meson",
             "config-opts" : [
+                "-Dappindicator=no",
                 "-Dgtk_doc=false",
                 "-Dintrospection=false",
                 "-Dlibnm_gtk=false",
@@ -443,10 +444,30 @@
         {
             "name" : "gnome-settings-daemon",
             "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dsystemd=false"
+            ],
             "sources" : [
                 {
                     "type" : "git",
                     "url" : "https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git"
+                }
+            ],
+            "modules": [
+                {
+                    "name": "libcanberra",
+                    "sources": [
+                        {
+                            "type": "archive",
+                            "url": "http://0pointer.de/lennart/projects/libcanberra/libcanberra-0.30.tar.xz",
+                            "sha256": "c2b671e67e0c288a69fc33dc1b6f1b534d07882c2aceed37004bf48c601afa72"
+                        }
+                    ],
+                    "config-opts": [
+                        "--disable-alsa",
+                        "--disable-null",
+                        "--disable-oss"
+                    ]
                 }
             ]
         },
@@ -500,8 +521,8 @@
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "http://downloads.sourceforge.net/sourceforge/libtirpc/libtirpc-1.0.3.tar.bz2",
-                    "sha256" : "86c3a78fc1bddefa96111dd233124c703b22a78884203c55c3e06b3be6a0fd5e"
+                    "url" : "http://downloads.sourceforge.net/sourceforge/libtirpc/libtirpc-1.2.6.tar.bz2",
+                    "sha256" : "4278e9a5181d5af9cd7885322fdecebc444f9a3da87c526e7d47f7a12a37d1cc"
                 }
             ]
         },
