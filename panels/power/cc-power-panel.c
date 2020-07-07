@@ -2313,7 +2313,6 @@ add_battery_percentage (CcPowerPanel *self,
   GtkWidget *box, *label, *title;
   GtkWidget *row;
   GtkWidget *sw;
-  g_autofree gchar *s = NULL;
 
   if (!self->has_batteries)
     return;
