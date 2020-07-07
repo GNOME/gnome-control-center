@@ -2307,9 +2307,10 @@ add_power_saving_section (CcPowerPanel *self)
 }
 
 static void
-add_battery_percentage (CcPowerPanel *self)
+add_battery_percentage (CcPowerPanel *self,
+                        GtkListBox   *listbox)
 {
-  GtkWidget *widget, *box, *label, *title;
+  GtkWidget *box, *label, *title;
   GtkWidget *row;
   GtkWidget *sw;
   g_autofree gchar *s = NULL;
@@ -2333,7 +2334,7 @@ add_battery_percentage (CcPowerPanel *self)
   gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
   gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
-  gtk_container_add (GTK_CONTAINER (widget), row);
+  gtk_container_add (GTK_CONTAINER (listbox), row);
   gtk_size_group_add_widget (self->row_sizegroup, row);
 }
 
@@ -2388,7 +2389,7 @@ add_general_section (CcPowerPanel *self)
       g_strcmp0 (self->chassis_type, "tablet") == 0 ||
       g_strcmp0 (self->chassis_type, "handset") == 0)
     {
-      add_battery_percentage (self);
+      add_battery_percentage (self, GTK_LIST_BOX (widget));
       return;
     }
 
@@ -2417,7 +2418,7 @@ add_general_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (widget), row);
   gtk_size_group_add_widget (self->row_sizegroup, row);
 
-  add_battery_percentage (self);
+  add_battery_percentage (self, GTK_LIST_BOX (widget));
 }
 
 static gint
