@@ -17,10 +17,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-07-03 05:29+0000\n"
-"PO-Revision-Date: 2020-07-06 13:42+0200\n"
-"Last-Translator: Florentina Mușat <florentina [dot] musat [dot] 28 [at] "
-"gmail [dot] com>\n"
+"POT-Creation-Date: 2020-07-07 18:53+0000\n"
+"PO-Revision-Date: 2020-07-08 11:33+0300\n"
+"Last-Translator: Florentina Mușat <florentina.musat.28@gmail.com>\n"
 "Language-Team: Romanian Gnome Team\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +47,7 @@ msgid "Session Bus"
 msgstr "Magistrala sesiunilor"
 
 #: panels/applications/cc-applications-panel.c:776
-#: panels/power/cc-power-panel.c:2443 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2506 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Dispozitive"
@@ -3421,7 +3420,7 @@ msgstr "Dispozitivul wireless nu suporta modul Hotspot"
 
 #: panels/network/net-proxy.c:70
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:2043 panels/power/cc-power-panel.c:2054
+#: panels/power/cc-power-panel.c:1939 panels/power/cc-power-panel.c:1950
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4242,7 +4241,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Arată c_onținutul mesajelor pe ecranul blocat"
 
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:2049 panels/power/cc-power-panel.c:2056
+#: panels/power/cc-power-panel.c:1945 panels/power/cc-power-panel.c:1952
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4336,11 +4335,11 @@ msgstr "Adaugă un cont"
 msgid "Remove Account"
 msgstr "Ștergere cont"
 
-#: panels/power/cc-power-panel.c:334
+#: panels/power/cc-power-panel.c:336
 msgid "Unknown time"
 msgstr "Timp necunoscut"
 
-#: panels/power/cc-power-panel.c:340
+#: panels/power/cc-power-panel.c:342
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -4348,7 +4347,7 @@ msgstr[0] "%i minut"
 msgstr[1] "%i minute"
 msgstr[2] "%i de minute"
 
-#: panels/power/cc-power-panel.c:352
+#: panels/power/cc-power-panel.c:354
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4358,19 +4357,19 @@ msgstr[2] "%i de ore"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:360
+#: panels/power/cc-power-panel.c:362
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:361
+#: panels/power/cc-power-panel.c:363
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "oră"
 msgstr[1] "ore"
 msgstr[2] "de ore"
 
-#: panels/power/cc-power-panel.c:362
+#: panels/power/cc-power-panel.c:364
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minut"
@@ -4378,243 +4377,247 @@ msgstr[1] "minute"
 msgstr[2] "de minute"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:380
+#: panels/power/cc-power-panel.c:382
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s până e încărcată complet"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:387
+#: panels/power/cc-power-panel.c:389
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Atenție: au mai rămas %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:392
+#: panels/power/cc-power-panel.c:394
 #, c-format
 msgid "%s remaining"
 msgstr "au mai rămas %s"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:397 panels/power/cc-power-panel.c:427
+#: panels/power/cc-power-panel.c:399 panels/power/cc-power-panel.c:429
 msgid "Fully charged"
 msgstr "Complet încărcată"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:401 panels/power/cc-power-panel.c:431
+#: panels/power/cc-power-panel.c:403 panels/power/cc-power-panel.c:433
 msgid "Not charging"
 msgstr "Nu se încarcă"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:405 panels/power/cc-power-panel.c:435
+#: panels/power/cc-power-panel.c:407 panels/power/cc-power-panel.c:437
 msgid "Empty"
 msgstr "Descărcată complet"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:418
+#: panels/power/cc-power-panel.c:420
 msgid "Charging"
 msgstr "Se încarcă"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:423
+#: panels/power/cc-power-panel.c:425
 msgid "Discharging"
 msgstr "Se descarcă"
 
-#: panels/power/cc-power-panel.c:556
+#: panels/power/cc-power-panel.c:571
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Principal"
 
-#: panels/power/cc-power-panel.c:558
+#: panels/power/cc-power-panel.c:573
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:633
+#: panels/power/cc-power-panel.c:648
 msgid "Wireless mouse"
 msgstr "Mouse fără fir"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:636
+#: panels/power/cc-power-panel.c:651
 msgid "Wireless keyboard"
 msgstr "Tastatură fără fir"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:639
+#: panels/power/cc-power-panel.c:654
 msgid "Uninterruptible power supply"
 msgstr "Sursă de curent neîntreruptibilă"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:642
+#: panels/power/cc-power-panel.c:657
 msgid "Personal digital assistant"
 msgstr "Asistent personal digital"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:645
+#: panels/power/cc-power-panel.c:660
 msgid "Cellphone"
 msgstr "Telefon celular"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:663
 msgid "Media player"
 msgstr "Player media"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:651 panels/wacom/cc-wacom-panel.c:794
+#: panels/power/cc-power-panel.c:666 panels/wacom/cc-wacom-panel.c:794
 msgid "Tablet"
 msgstr "Tabletă"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:654
+#: panels/power/cc-power-panel.c:669
 msgid "Computer"
 msgstr "Calculator"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:657
+#: panels/power/cc-power-panel.c:672
 msgid "Gaming input device"
 msgstr "Dispozitiv de intrare pentru jocuri"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:660 panels/power/cc-power-panel.c:940
-#: panels/power/cc-power-panel.c:2396
+#: panels/power/cc-power-panel.c:675 panels/power/cc-power-panel.c:967
+#: panels/power/cc-power-panel.c:2459
 msgid "Battery"
 msgstr "Baterie"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:721
+#: panels/power/cc-power-panel.c:736
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Se încarcă"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:728
+#: panels/power/cc-power-panel.c:743
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Atenție"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:748
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Scăzută"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:738
+#: panels/power/cc-power-panel.c:753
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Bună"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:743
+#: panels/power/cc-power-panel.c:758
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Complet încărcată"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:747
+#: panels/power/cc-power-panel.c:762
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Descărcată complet"
 
-#: panels/power/cc-power-panel.c:938
+#: panels/power/cc-power-panel.c:965
 msgid "Batteries"
 msgstr "Baterii"
 
-#: panels/power/cc-power-panel.c:1366
+#: panels/power/cc-power-panel.c:1393
 msgid "When _idle"
 msgstr "Când e _inactiv"
 
-#: panels/power/cc-power-panel.c:1804
+#: panels/power/cc-power-panel.c:1887
+msgid "Suspend"
+msgstr "Suspendă"
+
+#: panels/power/cc-power-panel.c:1888
+msgid "Power Off"
+msgstr "Oprește"
+
+#: panels/power/cc-power-panel.c:1889
+msgid "Hibernate"
+msgstr "Hibernează"
+
+#: panels/power/cc-power-panel.c:1890
+msgid "Nothing"
+msgstr "Nimic"
+
+#: panels/power/cc-power-panel.c:1941
+msgid "When on battery power"
+msgstr "Când funcționează pe baterie"
+
+#: panels/power/cc-power-panel.c:1943
+msgid "When plugged in"
+msgstr "Alimentat de la rețea"
+
+#: panels/power/cc-power-panel.c:2021
 msgid "Power Saving"
 msgstr "Economisire de energie"
 
-#: panels/power/cc-power-panel.c:1838
+#: panels/power/cc-power-panel.c:2057
 msgid "_Screen Brightness"
 msgstr "Luminozitatea _ecranului"
 
-#: panels/power/cc-power-panel.c:1859
+#: panels/power/cc-power-panel.c:2078
 msgid "Automatic Brightness"
 msgstr "Luminozitate automată"
 
-#: panels/power/cc-power-panel.c:1872
+#: panels/power/cc-power-panel.c:2091
 msgid "_Keyboard Brightness"
 msgstr "Luminozitate _tastatură"
 
-#: panels/power/cc-power-panel.c:1883
+#: panels/power/cc-power-panel.c:2102
 msgid "_Dim Screen When Inactive"
 msgstr "_Diminuează luminozitatea la inactivitate"
 
-#: panels/power/cc-power-panel.c:1901
+#: panels/power/cc-power-panel.c:2120
 msgid "_Blank Screen"
 msgstr "Ecran _gol"
 
-#: panels/power/cc-power-panel.c:1924
+#: panels/power/cc-power-panel.c:2166
+msgid "_Automatic Suspend"
+msgstr "Suspendare _automată"
+
+#: panels/power/cc-power-panel.c:2167
+msgid "Automatic suspend"
+msgstr "Suspendare automată"
+
+#: panels/power/cc-power-panel.c:2219
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1925
+#: panels/power/cc-power-panel.c:2220
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Wi-Fi poate fi oprit pentru a economisi energia."
 
-#: panels/power/cc-power-panel.c:1941
+#: panels/power/cc-power-panel.c:2236
 msgid "_Mobile Broadband"
 msgstr "Internet _mobil de bandă largă"
 
-#: panels/power/cc-power-panel.c:1942
+#: panels/power/cc-power-panel.c:2237
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Conexiunea mobilă de bandă largă (3G, 4G, LTE, etc.) poate fi oprită pentru "
 "a economisi energie."
 
-#: panels/power/cc-power-panel.c:1992
+#: panels/power/cc-power-panel.c:2287
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:1993
+#: panels/power/cc-power-panel.c:2288
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth poate fi oprit pentru a economisi energie."
 
-#: panels/power/cc-power-panel.c:2045
-msgid "When on battery power"
-msgstr "Când funcționează pe baterie"
-
-#: panels/power/cc-power-panel.c:2047
-msgid "When plugged in"
-msgstr "Alimentat de la rețea"
-
-#: panels/power/cc-power-panel.c:2138
-msgid "Suspend"
-msgstr "Suspendă"
-
-#: panels/power/cc-power-panel.c:2139
-msgid "Power Off"
-msgstr "Oprește"
-
-#: panels/power/cc-power-panel.c:2140
-msgid "Hibernate"
-msgstr "Hibernează"
-
-#: panels/power/cc-power-panel.c:2141
-msgid "Nothing"
-msgstr "Nimic"
+#: panels/power/cc-power-panel.c:2325
+msgid "Show Battery _Percentage"
+msgstr "Arată _procentajul bateriei"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2240
+#: panels/power/cc-power-panel.c:2351
 msgid "Suspend & Power Button"
 msgstr "Buton de suspendare și oprire"
 
-#: panels/power/cc-power-panel.c:2281
-msgid "_Automatic Suspend"
-msgstr "Suspendare _automată"
-
-#: panels/power/cc-power-panel.c:2282
-msgid "Automatic suspend"
-msgstr "Suspendare automată"
-
-#: panels/power/cc-power-panel.c:2340
-msgid "Po_wer Button Action"
-msgstr "Acțiune buton de p_ornire"
+#: panels/power/cc-power-panel.c:2401
+msgid "Po_wer Button Behavior"
+msgstr "Comportament buton pu_tere"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
