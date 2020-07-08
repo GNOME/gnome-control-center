@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-06-26 01:59+0000\n"
-"PO-Revision-Date: 2020-06-27 23:21+0500\n"
+"POT-Creation-Date: 2020-07-07 18:53+0000\n"
+"PO-Revision-Date: 2020-07-08 08:14+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -35,7 +35,7 @@ msgid "Session Bus"
 msgstr "Сессия шинасы"
 
 #: panels/applications/cc-applications-panel.c:776
-#: panels/power/cc-power-panel.c:2443 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2506 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Құрылғылар"
@@ -196,8 +196,8 @@ msgstr "Камера"
 #: panels/applications/cc-applications-panel.ui:264
 #: panels/keyboard/cc-keyboard-option.c:259
 #: panels/keyboard/cc-keyboard-option.c:378
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:93
-#: panels/keyboard/keyboard-shortcuts.c:425 panels/network/network-proxy.ui:126
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
+#: panels/keyboard/keyboard-shortcuts.c:368 panels/network/network-proxy.ui:126
 #: panels/user-accounts/cc-user-panel.c:865
 #: panels/user-accounts/cc-user-panel.c:957
 #: subprojects/gvc/gvc-mixer-control.c:1876
@@ -356,7 +356,7 @@ msgstr "Суретті таңдау"
 #: panels/network/connection-editor/vpn-helpers.c:299
 #: panels/network/net-device-wifi.c:800 panels/network/net-device-wifi.c:908
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:252
+#: panels/printers/pp-details-dialog.c:251
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:638
 #: panels/sharing/cc-sharing-panel.c:398 panels/usage/cc-usage-panel.c:133
@@ -373,7 +373,7 @@ msgstr "Ба_с тарту"
 
 #: panels/background/cc-background-chooser.c:350
 #: panels/network/connection-editor/vpn-helpers.c:177
-#: panels/printers/pp-details-dialog.c:253
+#: panels/printers/pp-details-dialog.c:252
 #: panels/sharing/cc-sharing-panel.c:399
 #: panels/user-accounts/cc-avatar-chooser.c:236
 msgid "_Open"
@@ -457,7 +457,7 @@ msgstr "Bluetooth іске қосу үшін ұшақтағы режимді с�
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1670
+#: panels/printers/pp-new-printer-dialog.c:1664
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1256,8 +1256,6 @@ msgstr[0] "%d секунд"
 #. 5 hours 2 minutes 12 seconds
 #: panels/common/cc-util.c:174
 #, c-format
-#| msgctxt "time"
-#| msgid "%s %s %s"
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
@@ -1265,8 +1263,6 @@ msgstr "%s %s %s"
 #. 5 hours 2 minutes
 #: panels/common/cc-util.c:179
 #, c-format
-#| msgctxt "time"
-#| msgid "%s %s"
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
@@ -2117,9 +2113,9 @@ msgstr "Menu пернесі"
 msgid "Right Ctrl"
 msgstr "Оң жақ"
 
-#: panels/keyboard/cc-keyboard-manager.c:501
-#: panels/keyboard/cc-keyboard-manager.c:509
-#: panels/keyboard/cc-keyboard-manager.c:809
+#: panels/keyboard/cc-keyboard-manager.c:486
+#: panels/keyboard/cc-keyboard-manager.c:494
+#: panels/keyboard/cc-keyboard-manager.c:779
 msgid "Custom Shortcuts"
 msgstr "Таңдауыңызша жарлықтар"
 
@@ -2186,7 +2182,7 @@ msgstr ""
 "болдырмау мүмкін болмайды."
 
 #: panels/keyboard/cc-keyboard-panel.c:208
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:323
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
@@ -2216,75 +2212,74 @@ msgstr "Барлық жарлықтарды бастапқы мәндеріне 
 msgid "No keyboard shortcut found"
 msgstr "Пернетақта жарлықтары табылмады"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:419
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:404
 #, c-format
 msgid "%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr ""
 "%s жарлығы %s үшін қолданылуда болып тұр. Оны алмастырсаңыз, %s сөндірілетін "
 "болады"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:587
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
+msgid "Enter the new shortcut"
+msgstr "Жаңа пернетақта жарлығын енгізіңіз"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
 msgid "Set Custom Shortcut"
 msgstr "Таңдауыңызша жарлықты орнату"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:587
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
 msgid "Set Shortcut"
 msgstr "Жарлықты орнату"
 
 #. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:598
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:575
 #, c-format
 msgid "Enter new shortcut to change %s."
 msgstr "%s өзгерту үшін жаңа жарлықты енгізіңіз."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1028
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1002
 msgid "Add Custom Shortcut"
 msgstr "Таңдауыңызша жарлықты қосу"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:68
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:299
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:60
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr ""
 "Бас тарту үшін Esc, ал, пернетақта жарлығын сөндіру үшін Backspace басыңыз."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:147
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
 msgid "Name"
 msgstr "Аты"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:159
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:147
 msgid "Command"
 msgstr "Команда"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:171
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:159
 msgid "Shortcut"
 msgstr "Жарлық"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:250
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:238
 msgid "Set Shortcut…"
 msgstr "Жарлықты орнату…"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:260
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:248
 msgid "None"
 msgstr "Ешнәрсе"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:284
-msgid "Enter the new shortcut"
-msgstr "Жаңа пернетақта жарлығын енгізіңіз"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:334
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:286
 msgid "Remove"
 msgstr "Өшіру"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:344
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
 msgid "Add"
 msgstr "Қосу"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:359
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:311
 msgid "Replace"
 msgstr "Алмастыру"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:372
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:324
 msgid "Set"
 msgstr "Орнату"
 
@@ -2763,7 +2758,7 @@ msgstr "Парольді автогенерациялау"
 msgid "_Turn On"
 msgstr "Іс_ке қосу"
 
-#: panels/network/cc-wifi-panel.c:276
+#: panels/network/cc-wifi-panel.c:312
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:233
 msgid "Wi-Fi"
@@ -3402,7 +3397,7 @@ msgstr "Сымсыз құрылғы қатынау нүкте режимін қ�
 
 #: panels/network/net-proxy.c:70
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:2043 panels/power/cc-power-panel.c:2054
+#: panels/power/cc-power-panel.c:1939 panels/power/cc-power-panel.c:1950
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4220,7 +4215,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Блоктау экранында хабарлама құра_масын көрсету"
 
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:2049 panels/power/cc-power-panel.c:2056
+#: panels/power/cc-power-panel.c:1945 panels/power/cc-power-panel.c:1952
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4318,17 +4313,17 @@ msgstr "Тіркелгіні қосу"
 msgid "Remove Account"
 msgstr "Тіркелгіні өшіру"
 
-#: panels/power/cc-power-panel.c:334
+#: panels/power/cc-power-panel.c:336
 msgid "Unknown time"
 msgstr "Уақыты белгісіз"
 
-#: panels/power/cc-power-panel.c:340
+#: panels/power/cc-power-panel.c:342
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i минут"
 
-#: panels/power/cc-power-panel.c:352
+#: panels/power/cc-power-panel.c:354
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4336,259 +4331,263 @@ msgstr[0] "%i сағат"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:360
+#: panels/power/cc-power-panel.c:362
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:361
+#: panels/power/cc-power-panel.c:363
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "сағат"
 
-#: panels/power/cc-power-panel.c:362
+#: panels/power/cc-power-panel.c:364
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "минут"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:380
+#: panels/power/cc-power-panel.c:382
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s толық зарядқа дейін"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:387
+#: panels/power/cc-power-panel.c:389
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Ескерту: %s қалды"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:392
+#: panels/power/cc-power-panel.c:394
 #, c-format
 msgid "%s remaining"
 msgstr "%s қалды"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:397 panels/power/cc-power-panel.c:427
+#: panels/power/cc-power-panel.c:399 panels/power/cc-power-panel.c:429
 msgid "Fully charged"
 msgstr "Толық зарядталған"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:401 panels/power/cc-power-panel.c:431
+#: panels/power/cc-power-panel.c:403 panels/power/cc-power-panel.c:433
 msgid "Not charging"
 msgstr "Зарядталуда емес"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:405 panels/power/cc-power-panel.c:435
+#: panels/power/cc-power-panel.c:407 panels/power/cc-power-panel.c:437
 msgid "Empty"
 msgstr "Бос"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:418
+#: panels/power/cc-power-panel.c:420
 msgid "Charging"
 msgstr "Зарядталуда"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:423
+#: panels/power/cc-power-panel.c:425
 msgid "Discharging"
 msgstr "Зарядын беруде"
 
-#: panels/power/cc-power-panel.c:556
+#: panels/power/cc-power-panel.c:571
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Басты"
 
-#: panels/power/cc-power-panel.c:558
+#: panels/power/cc-power-panel.c:573
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Қосымша"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:633
+#: panels/power/cc-power-panel.c:648
 msgid "Wireless mouse"
 msgstr "Сымсыз тышқан"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:636
+#: panels/power/cc-power-panel.c:651
 msgid "Wireless keyboard"
 msgstr "Сымсыз пернетақта"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:639
+#: panels/power/cc-power-panel.c:654
 msgid "Uninterruptible power supply"
 msgstr "Үзіліссіз эл. қорек көзі"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:642
+#: panels/power/cc-power-panel.c:657
 msgid "Personal digital assistant"
 msgstr "Жеке цифрлық көмекші"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:645
+#: panels/power/cc-power-panel.c:660
 msgid "Cellphone"
 msgstr "Ұялы телефон"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:663
 msgid "Media player"
 msgstr "Медиа плеері"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:651 panels/wacom/cc-wacom-panel.c:794
+#: panels/power/cc-power-panel.c:666 panels/wacom/cc-wacom-panel.c:794
 msgid "Tablet"
 msgstr "Планшет"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:654
+#: panels/power/cc-power-panel.c:669
 msgid "Computer"
 msgstr "Компьютер"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:657
+#: panels/power/cc-power-panel.c:672
 msgid "Gaming input device"
 msgstr "Ойын құрылғысы"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:660 panels/power/cc-power-panel.c:940
-#: panels/power/cc-power-panel.c:2396
+#: panels/power/cc-power-panel.c:675 panels/power/cc-power-panel.c:967
+#: panels/power/cc-power-panel.c:2459
 msgid "Battery"
 msgstr "Батарея"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:721
+#: panels/power/cc-power-panel.c:736
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Зарядталуда"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:728
+#: panels/power/cc-power-panel.c:743
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Назарыңызға"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:748
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Төмен"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:738
+#: panels/power/cc-power-panel.c:753
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Жақсы"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:743
+#: panels/power/cc-power-panel.c:758
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Толық зарядталған"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:747
+#: panels/power/cc-power-panel.c:762
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Бос"
 
-#: panels/power/cc-power-panel.c:938
+#: panels/power/cc-power-panel.c:965
 msgid "Batteries"
 msgstr "Батареялар"
 
-#: panels/power/cc-power-panel.c:1366
+#: panels/power/cc-power-panel.c:1393
 msgid "When _idle"
 msgstr "І_ссіз кезінде"
 
-#: panels/power/cc-power-panel.c:1804
+#: panels/power/cc-power-panel.c:1887
+msgid "Suspend"
+msgstr "Ұйықтату"
+
+#: panels/power/cc-power-panel.c:1888
+msgid "Power Off"
+msgstr "Сөндіру"
+
+#: panels/power/cc-power-panel.c:1889
+msgid "Hibernate"
+msgstr "Гибернация"
+
+#: panels/power/cc-power-panel.c:1890
+msgid "Nothing"
+msgstr "Ешнәрсе"
+
+#: panels/power/cc-power-panel.c:1941
+msgid "When on battery power"
+msgstr "Батареядан жұмыс істеген кезде"
+
+#: panels/power/cc-power-panel.c:1943
+msgid "When plugged in"
+msgstr "Эл. желісінде"
+
+#: panels/power/cc-power-panel.c:2021
 msgid "Power Saving"
 msgstr "Эл. қорегін сақтау"
 
-#: panels/power/cc-power-panel.c:1838
+#: panels/power/cc-power-panel.c:2057
 msgid "_Screen Brightness"
 msgstr "Э_кран жарықтылығы"
 
-#: panels/power/cc-power-panel.c:1859
+#: panels/power/cc-power-panel.c:2078
 msgid "Automatic Brightness"
 msgstr "Автоматты жарықтылық"
 
-#: panels/power/cc-power-panel.c:1872
+#: panels/power/cc-power-panel.c:2091
 msgid "_Keyboard Brightness"
 msgstr "Пер_нетақта жарықтылығы"
 
-#: panels/power/cc-power-panel.c:1883
+#: panels/power/cc-power-panel.c:2102
 msgid "_Dim Screen When Inactive"
 msgstr "Белсенді емес экранды бәсең_дету"
 
-#: panels/power/cc-power-panel.c:1901
+#: panels/power/cc-power-panel.c:2120
 msgid "_Blank Screen"
 msgstr "Экранды _тазарту"
 
-#: panels/power/cc-power-panel.c:1924
+#: panels/power/cc-power-panel.c:2166
+msgid "_Automatic Suspend"
+msgstr "_Автоматты түрде ұйықтату"
+
+#: panels/power/cc-power-panel.c:2167
+msgid "Automatic suspend"
+msgstr "Автоматты түрде ұйықтату"
+
+#: panels/power/cc-power-panel.c:2219
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1925
+#: panels/power/cc-power-panel.c:2220
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Эл. қорегін үнемдеу үшін Wi-Fi сөндіруге болады."
 
-#: panels/power/cc-power-panel.c:1941
+#: panels/power/cc-power-panel.c:2236
 msgid "_Mobile Broadband"
 msgstr "_Мобильді кеңжолақты"
 
-#: panels/power/cc-power-panel.c:1942
+#: panels/power/cc-power-panel.c:2237
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Эл. қорегін үнемдеу үшін сымсыз кеңжолақты құрылғыларды (3G, 4G, LTE, т.б.) "
 "сөндіруге болады."
 
-#: panels/power/cc-power-panel.c:1992
+#: panels/power/cc-power-panel.c:2287
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:1993
+#: panels/power/cc-power-panel.c:2288
 msgid "Bluetooth can be turned off to save power."
 msgstr "Эл. қорегін үнемдеу үшін Bluetooth сөндіруге болады."
 
-#: panels/power/cc-power-panel.c:2045
-msgid "When on battery power"
-msgstr "Батареядан жұмыс істеген кезде"
-
-#: panels/power/cc-power-panel.c:2047
-msgid "When plugged in"
-msgstr "Эл. желісінде"
-
-#: panels/power/cc-power-panel.c:2138
-msgid "Suspend"
-msgstr "Ұйықтату"
-
-#: panels/power/cc-power-panel.c:2139
-msgid "Power Off"
-msgstr "Сөндіру"
-
-#: panels/power/cc-power-panel.c:2140
-msgid "Hibernate"
-msgstr "Гибернация"
-
-#: panels/power/cc-power-panel.c:2141
-msgid "Nothing"
-msgstr "Ешнәрсе"
+#: panels/power/cc-power-panel.c:2325
+msgid "Show Battery _Percentage"
+msgstr "Батарея _пайызын көрсету"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2240
+#: panels/power/cc-power-panel.c:2351
 msgid "Suspend & Power Button"
 msgstr "Ұйықтату және сөндіру батырмасы"
 
-#: panels/power/cc-power-panel.c:2281
-msgid "_Automatic Suspend"
-msgstr "_Автоматты түрде ұйықтату"
-
-#: panels/power/cc-power-panel.c:2282
-msgid "Automatic suspend"
-msgstr "Автоматты түрде ұйықтату"
-
-#: panels/power/cc-power-panel.c:2340
-msgid "Po_wer Button Action"
-msgstr "Эл. қ_орегі батырмасының әрекеті"
+#: panels/power/cc-power-panel.c:2401
+msgid "Po_wer Button Behavior"
+msgstr "Эл. қ_орегі батырмасының мінез-құлығы"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4706,18 +4705,18 @@ msgid "Authentication Required"
 msgstr "Аутентификация керек"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:720
+#: panels/printers/cc-printers-panel.c:707
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "\"%s\" принтері өшірілді"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:989
+#: panels/printers/cc-printers-panel.c:970
 msgid "Failed to add new printer."
 msgstr "Жаңа принтерді қосу сәтсіз аяқталды."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1321
+#: panels/printers/cc-printers-panel.c:1273
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui жүктеу мүмкін емес: %s"
@@ -4741,8 +4740,8 @@ msgstr ""
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:356
-#: panels/printers/pp-new-printer-dialog.c:413
+#: panels/printers/pp-new-printer-dialog.c:353
+#: panels/printers/pp-new-printer-dialog.c:410
 msgid "Add Printer"
 msgstr "Принтерді қосу"
 
@@ -4770,21 +4769,21 @@ msgstr ""
 "пароліңізді енгізіңіз."
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:75
-#: panels/printers/pp-details-dialog.c:370
+#: panels/printers/pp-details-dialog.c:74
+#: panels/printers/pp-details-dialog.c:367
 #, c-format
 msgid "%s Details"
 msgstr "%s ақпараты"
 
-#: panels/printers/pp-details-dialog.c:122
+#: panels/printers/pp-details-dialog.c:121
 msgid "No suitable driver found"
 msgstr "Сәйкес келетін драйвер табылмады"
 
-#: panels/printers/pp-details-dialog.c:249
+#: panels/printers/pp-details-dialog.c:248
 msgid "Select PPD File"
 msgstr "PPD айлын таңдаңыз"
 
-#: panels/printers/pp-details-dialog.c:258
+#: panels/printers/pp-details-dialog.c:257
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4798,7 +4797,7 @@ msgstr "Орналасуы"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:250
+#: panels/printers/pp-ppd-selection-dialog.c:248
 msgid "Driver"
 msgstr "Драйвер"
 
@@ -4842,40 +4841,40 @@ msgid "LPD Printer"
 msgstr "LPD принтері"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:65
+#: panels/printers/pp-ipp-option-widget.c:64
 #: panels/printers/pp-ppd-option-widget.c:69
 msgid "One Sided"
 msgstr "Бір жақты"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:67
+#: panels/printers/pp-ipp-option-widget.c:66
 #: panels/printers/pp-ppd-option-widget.c:71
 msgid "Long Edge (Standard)"
 msgstr "Ұзын жағымен"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:69
+#: panels/printers/pp-ipp-option-widget.c:68
 #: panels/printers/pp-ppd-option-widget.c:73
 msgid "Short Edge (Flip)"
 msgstr "Қысқа жағымен"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:71
+#: panels/printers/pp-ipp-option-widget.c:70
 msgid "Portrait"
 msgstr "Тік"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:73
+#: panels/printers/pp-ipp-option-widget.c:72
 msgid "Landscape"
 msgstr "Жатық"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:75
+#: panels/printers/pp-ipp-option-widget.c:74
 msgid "Reverse landscape"
 msgstr "Теріс жатық"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:77
+#: panels/printers/pp-ipp-option-widget.c:76
 msgid "Reverse portrait"
 msgstr "Теріс тік"
 
@@ -4973,157 +4972,157 @@ msgstr "_Аутентификациялау"
 msgid "No Active Printer Jobs"
 msgstr "Белсенді принтер тапсырмалары жоқ"
 
-#: panels/printers/pp-new-printer-dialog.c:371
+#: panels/printers/pp-new-printer-dialog.c:368
 msgid "Unlock Print Server"
 msgstr "Баспаға шығару серверін блоктаудан босату"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:375
+#: panels/printers/pp-new-printer-dialog.c:372
 #, c-format
 msgid "Unlock %s."
 msgstr "%s босату."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:379
+#: panels/printers/pp-new-printer-dialog.c:376
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "%s жеріндегі принтерлерді қарау үшін пайдаланушы атын және пароліңізді "
 "енгізіңіз."
 
-#: panels/printers/pp-new-printer-dialog.c:816
+#: panels/printers/pp-new-printer-dialog.c:810
 msgid "Searching for Printers"
 msgstr "Принтерлерді іздеу"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1653
+#: panels/printers/pp-new-printer-dialog.c:1647
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1658
+#: panels/printers/pp-new-printer-dialog.c:1652
 msgid "Serial Port"
 msgstr "Тізбектей порт"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1665
+#: panels/printers/pp-new-printer-dialog.c:1659
 msgid "Parallel Port"
 msgstr "Параллельді порт"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1707
+#: panels/printers/pp-new-printer-dialog.c:1701
 #, c-format
 msgid "Location: %s"
 msgstr "Орналасуы: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1712
+#: panels/printers/pp-new-printer-dialog.c:1706
 #, c-format
 msgid "Address: %s"
 msgstr "Адресі: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1739
+#: panels/printers/pp-new-printer-dialog.c:1733
 msgid "Server requires authentication"
 msgstr "Сервер аутентификацияны талап етеді"
 
-#: panels/printers/pp-options-dialog.c:91
+#: panels/printers/pp-options-dialog.c:87
 msgid "Two Sided"
 msgstr "Екі жақты"
 
-#: panels/printers/pp-options-dialog.c:92
+#: panels/printers/pp-options-dialog.c:88
 msgid "Paper Type"
 msgstr "Қағаз түрі"
 
-#: panels/printers/pp-options-dialog.c:93
+#: panels/printers/pp-options-dialog.c:89
 msgid "Paper Source"
 msgstr "Қағаз көзі"
 
-#: panels/printers/pp-options-dialog.c:94
+#: panels/printers/pp-options-dialog.c:90
 msgid "Output Tray"
 msgstr "Шығыс сөресі"
 
-#: panels/printers/pp-options-dialog.c:95
+#: panels/printers/pp-options-dialog.c:91
 msgctxt "printing option"
 msgid "Resolution"
 msgstr "Ажыратылымдығы"
 
-#: panels/printers/pp-options-dialog.c:96
+#: panels/printers/pp-options-dialog.c:92
 msgid "GhostScript pre-filtering"
 msgstr "GhostScript алдын-ала сүзгілеу"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:534
+#: panels/printers/pp-options-dialog.c:530
 msgid "Pages per side"
 msgstr "Бір жақтағы парақтар"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:546
+#: panels/printers/pp-options-dialog.c:542
 msgid "Two-sided"
 msgstr "Екі жақты"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:558
+#: panels/printers/pp-options-dialog.c:554
 msgid "Orientation"
 msgstr "Бағдары"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:655
+#: panels/printers/pp-options-dialog.c:651
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "Жалпы"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:658
+#: panels/printers/pp-options-dialog.c:654
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "Парақ баптаулары"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:661
+#: panels/printers/pp-options-dialog.c:657
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "Орнатуға келетін опциялар"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:664
+#: panels/printers/pp-options-dialog.c:660
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "Тапсырма"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:667
+#: panels/printers/pp-options-dialog.c:663
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "Сурет сапасы"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:670
+#: panels/printers/pp-options-dialog.c:666
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "Түс"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:673
+#: panels/printers/pp-options-dialog.c:669
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "Аяқтау"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:676
+#: panels/printers/pp-options-dialog.c:672
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "Кеңейтілген"
 
 #. Translators: Name of job which makes printer to print test page
 #. Translators: This button triggers the printing of a test page.
-#: panels/printers/pp-options-dialog.c:869
+#: panels/printers/pp-options-dialog.c:863
 #: panels/printers/pp-options-dialog.ui:18
 msgid "Test Page"
 msgstr "Сынау парағы"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:882
+#: panels/printers/pp-options-dialog.c:876
 msgid "Test page"
 msgstr "Сынау парағы"
 
@@ -5164,127 +5163,127 @@ msgid "No pre-filtering"
 msgstr "Алдын-ала сүзгілеу жоқ"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:233
+#: panels/printers/pp-ppd-selection-dialog.c:231
 msgid "Manufacturer"
 msgstr "Шығарушы"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:592 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:588 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Белсенді тапсырмалар жоқ"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:597
+#: panels/printers/pp-printer-entry.c:593
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
 msgstr[0] "%u тапсырма"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:715
+#: panels/printers/pp-printer-entry.c:711
 msgid "Clean print heads"
 msgstr "Баспа бастиектерін тазарту"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:762
 msgid "Low on toner"
 msgstr "Тонер аз"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:768
+#: panels/printers/pp-printer-entry.c:764
 msgid "Out of toner"
 msgstr "Тонер жоқ"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:767
 msgid "Low on developer"
 msgstr "Айқындауышы аз"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:770
 msgid "Out of developer"
 msgstr "Айқындауышы бітті"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:772
 msgid "Low on a marker supply"
 msgstr "Тонер бітіп жатыр"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:778
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of a marker supply"
 msgstr "Тонер бітті"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:776
 msgid "Open cover"
 msgstr "Қақпағы ашық"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:778
 msgid "Open door"
 msgstr "Есігі ашық"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:784
+#: panels/printers/pp-printer-entry.c:780
 msgid "Low on paper"
 msgstr "Қағазы аз"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:782
 msgid "Out of paper"
 msgstr "Қағаз бітті"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:788
+#: panels/printers/pp-printer-entry.c:784
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Желіде емес"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:790
-#: panels/printers/pp-printer-entry.c:933
+#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:929
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Тоқтатылды"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:792
+#: panels/printers/pp-printer-entry.c:788
 msgid "Waste receptacle almost full"
 msgstr "Қоқысты қабылдағыш толуға жақын"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:794
+#: panels/printers/pp-printer-entry.c:790
 msgid "Waste receptacle full"
 msgstr "Қоқысты қабылдағыш толып қалды"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:796
+#: panels/printers/pp-printer-entry.c:792
 msgid "The optical photo conductor is near end of life"
 msgstr "Фоторезист жақында жарамсыз болып қалады"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:798
+#: panels/printers/pp-printer-entry.c:794
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Фоторезист жұмыс істемейді"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:919
+#: panels/printers/pp-printer-entry.c:915
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Дайын"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:924
+#: panels/printers/pp-printer-entry.c:920
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Тапрсырмаларды қабылдамайды"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:929
+#: panels/printers/pp-printer-entry.c:925
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Өңдеуде"
@@ -7061,7 +7060,6 @@ msgid "Fingerprint"
 msgstr "Саусақ ізі"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:118
-#| msgid "No"
 msgid "_No"
 msgstr "_Жоқ"
 
@@ -7223,7 +7221,6 @@ msgstr "Жаңа саусақ ізін сканерлеу"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1029
 #, c-format
-#| msgid "Failed to forget device: "
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Саусақ ізін оқу %s құрылғысын босату сәтсіз аяқталды: %s"
 
