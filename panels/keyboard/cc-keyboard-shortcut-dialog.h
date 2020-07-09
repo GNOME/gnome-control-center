@@ -1,5 +1,6 @@
-/*
- * Copyright (C) 2010 Intel, Inc
+/* cc-keyboard-shortcut-dialog.h
+ *
+ * Copyright (C) 2020 System76, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,19 +15,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  *
- * Author: Thomas Wood <thomas.wood@intel.com>
+ * Author: Ian Douglas Scott <idscott@system76.com>
  *
+ * SPDX-License-Identifier: GPL-2.0-or-later
  */
-
 
 #pragma once
 
-#include <shell/cc-panel.h>
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_KEYBOARD_PANEL (cc_keyboard_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcKeyboardPanel, cc_keyboard_panel, CC, KEYBOARD_PANEL, CcPanel)
+#define CC_TYPE_KEYBOARD_SHORTCUT_DIALOG (cc_keyboard_shortcut_dialog_get_type ())
+
+G_DECLARE_FINAL_TYPE (CcKeyboardShortcutDialog, cc_keyboard_shortcut_dialog, CC, KEYBOARD_SHORTCUT_DIALOG, GtkDialog)
+
+GtkWidget* cc_keyboard_shortcut_dialog_new (void);
 
 G_END_DECLS
