@@ -58,6 +58,7 @@ endforeach
 sources = files(
   'cc-alt-chars-key-dialog.c',
   'cc-keyboard-shortcut-row.c',
+  'cc-keyboard-shortcut-dialog.c',
   'cc-keyboard-panel.c',
   'cc-keyboard-item.c',
   'cc-keyboard-manager.c',
