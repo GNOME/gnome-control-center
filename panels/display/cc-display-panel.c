@@ -979,7 +979,7 @@ show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
   else
     {
       gtk_header_bar_set_title (GTK_HEADER_BAR (panel->apply_titlebar), _("Changes Cannot be Applied"));
-      gtk_header_bar_set_subtitle (GTK_HEADER_BAR (panel->apply_titlebar), _("This could be due to hardware limitations."));
+      gtk_header_bar_set_subtitle (GTK_HEADER_BAR (panel->apply_titlebar), _("This could be due to hardware/software limitations."));
     }
   gtk_widget_set_sensitive (panel->apply_titlebar_apply, is_applicable);
 }
