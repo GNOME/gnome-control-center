@@ -2,18 +2,22 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcKeyboardShortcutDialog" parent="GtkDialog">
-    <signal name="key-press-event" handler="gtk_search_bar_handle_event" object="search_bar" swapped="yes" />
+    <signal name="key-press-event" handler="gtk_search_entry_handle_event" object="search_entry" swapped="yes" />
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="border_width">12</property>
         <child>
-          <object class="GtkSearchBar" id="search_bar">
+          <object class="GtkRevealer" id="search_revealer">
             <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="transition-type">slide-up</property>
             <property name="hexpand">True</property>
+            <property name="halign">center</property>
             <child>
               <object class="GtkSearchEntry" id="search_entry">
                 <property name="visible">True</property>
+                <property name="margin-bottom">10</property>
                 <property name="width_chars">30</property>
                 <signal name="notify::text" handler="search_entry_cb" object="CcKeyboardShortcutDialog" swapped="yes" />
               </object>
@@ -24,7 +28,7 @@
           <object class="GtkStack" id="stack">
             <property name="visible">True</property>
             <child>
-              <object class="GtkScrolledWindow" id="category_scrolled_window">
+              <object class="GtkScrolledWindow" id="section_scrolled_window">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
@@ -34,10 +38,10 @@
                 <property name="propagate_natural_height">True</property>
                 <property name="max_content_height">350</property>
                 <child>
-                  <object class="GtkListBox" id="category_listbox">
+                  <object class="GtkListBox" id="section_listbox">
                     <property name="visible">True</property>
                     <property name="selection-mode">none</property>
-                    <signal name="row-activated" handler="category_row_activated" object="CcKeyboardShortcutDialog" swapped="no" />
+                    <signal name="row-activated" handler="section_row_activated" object="CcKeyboardShortcutDialog" swapped="no" />
                     <style>
                       <class name="frame" />
                     </style>
@@ -74,7 +78,6 @@
       <object class="GtkHeaderBar" id="headerbar">
         <property name="visible">True</property>
         <property name="show_close_button">True</property>
-        <property name="title" translatable="yes">Keyboard Shortcuts</property>
         <child>
           <object class="GtkRevealer" id="back_revealer">
             <property name="visible">True</property>
@@ -109,12 +112,19 @@
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="reset_button">
+          <object class="GtkRevealer" id="reset_all_revealer">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="label" translatable="yes">Reset All…</property>
-            <property name="tooltip-text" translatable="yes">Reset all shortcuts to their default keybindings</property>
-            <signal name="clicked" handler="reset_all_clicked_cb" object="CcKeyboardShortcutDialog" swapped="yes" />
+            <property name="can_focus">False</property>
+            <property name="transition-type">crossfade</property>
+            <child>
+              <object class="GtkButton" id="reset_all_button">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="label" translatable="yes">Reset All…</property>
+                <property name="tooltip-text" translatable="yes">Reset all shortcuts to their default keybindings</property>
+                <signal name="clicked" handler="reset_all_clicked_cb" object="CcKeyboardShortcutDialog" swapped="yes" />
+              </object>
+            </child>
           </object>
           <packing>
             <property name="pack_type">end</property>
@@ -123,4 +133,47 @@
       </object>
     </child>
   </template>
+  <object class="GtkBox" id="empty_search_placeholder">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="halign">center</property>
+    <property name="valign">center</property>
+    <property name="hexpand">True</property>
+    <property name="vexpand">True</property>
+    <property name="border_width">18</property>
+    <property name="orientation">vertical</property>
+    <property name="spacing">6</property>
+    <child>
+      <object class="GtkImage">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="pixel_size">80</property>
+        <property name="icon_name">edit-find-symbolic</property>
+        <style>
+          <class name="dim-label"/>
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">No keyboard shortcut found</property>
+        <attributes>
+          <attribute name="weight" value="bold"/>
+          <attribute name="scale" value="1.44"/>
+        </attributes>
+      </object>
+    </child>
+    <child>
+      <object class="GtkLabel">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Try a different search</property>
+        <style>
+          <class name="dim-label"/>
+        </style>
+      </object>
+    </child>
+  </object>
 </interface>
