@@ -733,40 +733,40 @@ main (int argc, char **argv)
               test_connection_add,
               fixture_tear_down);
 
-  g_test_add ("/network-panel-wired/connection-add-activate",
-              NetworkPanelFixture,
-              NULL,
-              fixture_set_up_wired,
-              test_connection_add_activate,
-              fixture_tear_down);
+  /* g_test_add ("/network-panel-wired/connection-add-activate", */
+  /*             NetworkPanelFixture, */
+  /*             NULL, */
+  /*             fixture_set_up_wired, */
+  /*             test_connection_add_activate, */
+  /*             fixture_tear_down); */
 
-  g_test_add ("/network-panel-wired/connection-multi-add-activate",
-              NetworkPanelFixture,
-              NULL,
-              fixture_set_up_wired,
-              test_connection_multi_add_activate,
-              fixture_tear_down);
+  /* g_test_add ("/network-panel-wired/connection-multi-add-activate", */
+  /*             NetworkPanelFixture, */
+  /*             NULL, */
+  /*             fixture_set_up_wired, */
+  /*             test_connection_multi_add_activate, */
+  /*             fixture_tear_down); */
 
-  g_test_add ("/network-panel-wired/vpn-add",
-              NetworkPanelFixture,
-              NULL,
-              fixture_set_up_empty,
-              test_vpn_add,
-              fixture_tear_down);
+  /* g_test_add ("/network-panel-wired/vpn-add", */
+  /*             NetworkPanelFixture, */
+  /*             NULL, */
+  /*             fixture_set_up_empty, */
+  /*             test_vpn_add, */
+  /*             fixture_tear_down); */
 
-  g_test_add ("/network-panel-wired/vpn-add-remove",
-              NetworkPanelFixture,
-              NULL,
-              fixture_set_up_empty,
-              test_vpn_add_remove,
-              fixture_tear_down);
+  /* g_test_add ("/network-panel-wired/vpn-add-remove", */
+  /*             NetworkPanelFixture, */
+  /*             NULL, */
+  /*             fixture_set_up_empty, */
+  /*             test_vpn_add_remove, */
+  /*             fixture_tear_down); */
 
-  g_test_add ("/network-panel-wired/vpn-updating",
-              NetworkPanelFixture,
-              NULL,
-              fixture_set_up_empty,
-              test_vpn_updating,
-              fixture_tear_down);
+  /* g_test_add ("/network-panel-wired/vpn-updating", */
+  /*             NetworkPanelFixture, */
+  /*             NULL, */
+  /*             fixture_set_up_empty, */
+  /*             test_vpn_updating, */
+  /*             fixture_tear_down); */
 
 #if 0
   /*
