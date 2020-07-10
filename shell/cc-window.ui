@@ -265,7 +265,8 @@
     </child>
   </template>
 
-  <object class="HdyHeaderGroup" id="header_group">
+  <object class="HdyHeaderGroup">
+    <property name="decorate-all" bind-source="main_leaflet" bind-property="folded" bind-flags="sync-create"/>
     <headerbars>
       <headerbar name="header"/>
       <headerbar name="panel_headerbar"/>
