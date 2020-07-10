@@ -58,7 +58,6 @@ struct _CcWindow
   GtkMessageDialog  *development_warning_dialog;
   GtkHeaderBar      *header;
   HdyLeaflet        *header_box;
-  HdyHeaderGroup    *header_group;
   GtkSizeGroup      *header_sizegroup;
   HdyLeaflet        *main_leaflet;
   GtkHeaderBar      *panel_headerbar;
@@ -519,8 +518,6 @@ update_fold_state (CcWindow *self)
   GtkWidget *header_child = hdy_leaflet_get_visible_child (self->header_box);
   HdyFold fold = hdy_leaflet_get_fold (self->header_box);
 
-  hdy_header_group_set_focus (self->header_group, fold == HDY_FOLD_FOLDED ? GTK_HEADER_BAR (header_child) : NULL);
-
   gtk_widget_set_visible (GTK_WIDGET (self->back_revealer), fold == HDY_FOLD_FOLDED);
   gtk_revealer_set_reveal_child (self->back_revealer, fold == HDY_FOLD_FOLDED);
 }
@@ -903,7 +900,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_box);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, header_group);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, main_leaflet);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
