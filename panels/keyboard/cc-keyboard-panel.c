@@ -1,4 +1,4 @@
-/* cc-keyboard-shortcut-panel.c
+/* cc-keyboard-panel.c
  *
  * Copyright (C) 2010 Intel, Inc
  * Copyright (C) 2016 Endless, Inc
@@ -27,20 +27,12 @@
 #include <glib/gi18n.h>
 
 #include "cc-alt-chars-key-dialog.h"
-#include "cc-keyboard-shortcut-row.h"
-#include "cc-keyboard-item.h"
-#include "cc-keyboard-manager.h"
 #include "cc-keyboard-option.h"
 #include "cc-keyboard-panel.h"
 #include "cc-keyboard-resources.h"
-#include "cc-keyboard-shortcut-editor.h"
 #include "cc-keyboard-shortcut-dialog.h"
 
 #include "keyboard-shortcuts.h"
-
-#include "cc-util.h"
-
-#define SHORTCUT_DELIMITERS "+ "
 
 struct _CcKeyboardPanel
 {
@@ -52,8 +44,6 @@ struct _CcKeyboardPanel
   GtkWidget           *value_alternate_chars;
 
   GtkListBoxRow       *common_shortcuts_row;
-
-  GRegex             *pictures_regex;
 };
 
 CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
@@ -176,9 +166,7 @@ static void
 cc_keyboard_panel_finalize (GObject *object)
 {
   CcKeyboardPanel *self = CC_KEYBOARD_PANEL (object);
-  GtkWidget *window;
 
-  g_clear_pointer (&self->pictures_regex, g_regex_unref);
   g_clear_object (&self->input_source_settings);
 
   cc_keyboard_option_clear_all ();
