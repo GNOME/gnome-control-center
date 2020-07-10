@@ -183,10 +183,10 @@ test_empty_ui (NetworkPanelFixture  *fixture,
   GtkWidget *wired_header;
 
   /* There should be no Wired or Bluetooth sections */
-  wired_header = gtk_test_find_label(fixture->shell, "Wired");
+  wired_header = find_label(fixture->shell, "Wired");
   g_assert_false (wired_header && gtk_widget_is_visible(wired_header));
 
-  bt_header = gtk_test_find_label(fixture->shell, "Bluetooth");
+  bt_header = find_label(fixture->shell, "Bluetooth");
   g_assert_false (bt_header && gtk_widget_is_visible(bt_header));
 }
 
@@ -209,7 +209,7 @@ test_device_add (NetworkPanelFixture  *fixture,
   device_path = nm_object_get_path (NM_OBJECT (fixture->main_ether));
   g_debug("Device added: %s\n", device_path);
 
-  g_assert_nonnull (gtk_test_find_label(fixture->shell, "Wired"));
+  g_assert_nonnull (find_label(fixture->shell, "Wired"));
 }
 
 static void
@@ -229,9 +229,9 @@ test_second_device_add (NetworkPanelFixture  *fixture,
   device_path = nm_object_get_path (NM_OBJECT (device));
   g_debug("Second device added: %s\n", device_path);
 
-  g_assert_null (gtk_test_find_label (fixture->shell, "Wired"));
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "Ethernet (eth1000)"));
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "Ethernet (eth1001)"));
+  g_assert_null (find_label (fixture->shell, "Wired"));
+  g_assert_nonnull (find_label (fixture->shell, "Ethernet (eth1000)"));
+  g_assert_nonnull (find_label (fixture->shell, "Ethernet (eth1001)"));
 }
 
 static void
@@ -256,12 +256,12 @@ test_second_device_add_remove (NetworkPanelFixture  *fixture,
   g_debug("Second device removed again\n");
 
   /* eth1000 should be labeled "Wired" again */
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "Wired"));
-  g_assert_null (gtk_test_find_label (fixture->shell, "Ethernet (eth1000)"));
-  g_assert_null (gtk_test_find_label (fixture->shell, "Ethernet (eth1001)"));
+  g_assert_nonnull (find_label (fixture->shell, "Wired"));
+  g_assert_null (find_label (fixture->shell, "Ethernet (eth1000)"));
+  g_assert_null (find_label (fixture->shell, "Ethernet (eth1001)"));
 
   /* Some more checks for unrelated UI not showing up randomly */
-  bt_header = gtk_test_find_label(fixture->shell, "Bluetooth");
+  bt_header = find_label(fixture->shell, "Bluetooth");
   g_assert_false (bt_header && gtk_widget_is_visible(bt_header));
 }
 
@@ -363,7 +363,7 @@ test_connection_add_activate (NetworkPanelFixture  *fixture,
   active_conn = nmtst_add_and_activate_connection (fixture->sinfo, fixture->client, fixture->main_ether, conn);
   g_object_unref (active_conn);
 
-  label = gtk_test_find_label (fixture->shell, "1234 Mb/s");
+  label = find_label (fixture->shell, "1234 Mb/s");
   sw = gtk_test_find_sibling (label, GTK_TYPE_SWITCH);
   g_assert_nonnull (sw);
   g_assert_false (gtk_switch_get_state (GTK_SWITCH (sw)));
@@ -376,7 +376,7 @@ test_connection_add_activate (NetworkPanelFixture  *fixture,
   gtk_switch_set_active (GTK_SWITCH (sw), FALSE);
 
   /* Only one connection, so a generic label. */
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "Connected - 1234 Mb/s"));
+  g_assert_nonnull (find_label (fixture->shell, "Connected - 1234 Mb/s"));
 }
 
 static void
@@ -401,12 +401,12 @@ test_connection_multi_add_activate (NetworkPanelFixture  *fixture,
 
   g_object_unref (nmtst_add_and_activate_connection (fixture->sinfo, fixture->client, fixture->main_ether, conn));
 
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "test-inactive"));
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "test-active"));
-  g_assert_null (gtk_test_find_label (fixture->shell, "52:54:00:ab:db:23"));
+  g_assert_nonnull (find_label (fixture->shell, "test-inactive"));
+  g_assert_nonnull (find_label (fixture->shell, "test-active"));
+  g_assert_null (find_label (fixture->shell, "52:54:00:ab:db:23"));
 
   /* We have no switch if there are multiple connections */
-  sw = gtk_test_find_sibling (gtk_test_find_label (fixture->shell, "test-active"), GTK_TYPE_SWITCH);
+  sw = gtk_test_find_sibling (find_label (fixture->shell, "test-active"), GTK_TYPE_SWITCH);
   if (sw)
     g_assert_false (gtk_widget_is_visible (sw));
 
@@ -414,10 +414,10 @@ test_connection_multi_add_activate (NetworkPanelFixture  *fixture,
   nmtst_set_device_state (fixture->sinfo, fixture->main_ether, NM_DEVICE_STATE_ACTIVATED, NM_DEVICE_STATE_REASON_NONE);
 
   /* Hardware address is shown at this point */
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "52:54:00:ab:db:23"));
+  g_assert_nonnull (find_label (fixture->shell, "52:54:00:ab:db:23"));
 
   /* Some more checks for unrelated UI not showing up randomly */
-  bt_header = gtk_test_find_label(fixture->shell, "Bluetooth");
+  bt_header = find_label(fixture->shell, "Bluetooth");
   g_assert_false (bt_header && gtk_widget_is_visible(bt_header));
 }
 
@@ -450,7 +450,7 @@ test_vpn_add (NetworkPanelFixture  *fixture,
   g_clear_object (&info.rc);
 
   /* Make sure it shows up. */
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "A VPN"));
+  g_assert_nonnull (find_label (fixture->shell, "A VPN"));
 }
 
 /*****************************************************************************/
@@ -478,7 +478,7 @@ test_vpn_add_remove (NetworkPanelFixture  *fixture,
   WAIT_FINISHED(5)
 
   /* Make sure it shows up. */
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "A VPN"));
+  g_assert_nonnull (find_label (fixture->shell, "A VPN"));
 
   /* And delete again */
   nm_remote_connection_delete_async (info.rc, NULL, delete_cb, &info);
@@ -492,7 +492,7 @@ test_vpn_add_remove (NetworkPanelFixture  *fixture,
   g_object_unref (conn);
 
   /* Make sure it does not show up. */
-  g_assert_null (gtk_test_find_label (fixture->shell, "A VPN"));
+  g_assert_null (find_label (fixture->shell, "A VPN"));
 }
 
 /*****************************************************************************/
@@ -523,7 +523,7 @@ test_vpn_updating (NetworkPanelFixture  *fixture,
   g_object_unref (conn);
 
   /* Make sure it shows up. */
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "A VPN"));
+  g_assert_nonnull (find_label (fixture->shell, "A VPN"));
 
   /* Rename VPN from A to B */
   g_variant_builder_init (&builder, G_VARIANT_TYPE ("a{sa{sv}}"));
@@ -564,8 +564,8 @@ test_vpn_updating (NetworkPanelFixture  *fixture,
   g_clear_object (&info.rc);
 
   /* Make sure it the label got renamed. */
-  g_assert_null (gtk_test_find_label (fixture->shell, "A VPN"));
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "B VPN"));
+  g_assert_null (find_label (fixture->shell, "A VPN"));
+  g_assert_nonnull (find_label (fixture->shell, "B VPN"));
 }
 
 /*****************************************************************************/
@@ -615,12 +615,12 @@ test_vpn_sorting (NetworkPanelFixture  *fixture,
   g_object_unref (conn);
 
   /* Make sure both VPNs are there. */
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "A VPN"));
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "1 VPN"));
+  g_assert_nonnull (find_label (fixture->shell, "A VPN"));
+  g_assert_nonnull (find_label (fixture->shell, "1 VPN"));
 
   /* And test that A is after 1 */
-  a = find_parent_of_type (gtk_test_find_label (fixture->shell, "A VPN"), GTK_TYPE_STACK);
-  b = find_parent_of_type (gtk_test_find_label (fixture->shell, "1 VPN"), GTK_TYPE_STACK);
+  a = find_parent_of_type (find_label (fixture->shell, "A VPN"), GTK_TYPE_STACK);
+  b = find_parent_of_type (find_label (fixture->shell, "1 VPN"), GTK_TYPE_STACK);
   container = gtk_widget_get_parent (a);
   list = gtk_container_get_children (GTK_CONTAINER (container));
   g_assert_cmpint (g_list_index (list, a), >, g_list_index (list, b));
@@ -665,13 +665,13 @@ test_vpn_sorting (NetworkPanelFixture  *fixture,
   g_clear_object (&info.rc);
 
   /* Make sure it the label got renamed. */
-  g_assert_null (gtk_test_find_label (fixture->shell, "1 VPN"));
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "A VPN"));
-  g_assert_nonnull (gtk_test_find_label (fixture->shell, "B VPN"));
+  g_assert_null (find_label (fixture->shell, "1 VPN"));
+  g_assert_nonnull (find_label (fixture->shell, "A VPN"));
+  g_assert_nonnull (find_label (fixture->shell, "B VPN"));
 
   /* And test that A is before B */
-  a = find_parent_of_type (gtk_test_find_label (fixture->shell, "A VPN"), GTK_TYPE_STACK);
-  b = find_parent_of_type (gtk_test_find_label (fixture->shell, "B VPN"), GTK_TYPE_STACK);
+  a = find_parent_of_type (find_label (fixture->shell, "A VPN"), GTK_TYPE_STACK);
+  b = find_parent_of_type (find_label (fixture->shell, "B VPN"), GTK_TYPE_STACK);
   container = gtk_widget_get_parent (a);
   list = gtk_container_get_children (GTK_CONTAINER (container));
   g_assert_cmpint (g_list_index (list, a), <, g_list_index (list, b));
@@ -691,6 +691,7 @@ main (int argc, char **argv)
   gtk_test_init (&argc, &argv, NULL);
   hdy_init ();
 
+  /* Marche */
   g_test_add ("/network-panel-wired/empty-ui",
               NetworkPanelFixture,
               NULL,
@@ -698,6 +699,7 @@ main (int argc, char **argv)
               test_empty_ui,
               fixture_tear_down);
 
+  /* Marche. */
   g_test_add ("/network-panel-wired/device-add",
               NetworkPanelFixture,
               NULL,
@@ -705,6 +707,7 @@ main (int argc, char **argv)
               test_device_add,
               fixture_tear_down);
 
+  /* Marche. */
   g_test_add ("/network-panel-wired/second-device-add",
               NetworkPanelFixture,
               NULL,
@@ -712,6 +715,7 @@ main (int argc, char **argv)
               test_second_device_add,
               fixture_tear_down);
 
+  /* Marche. */
   g_test_add ("/network-panel-wired/second-device-add-remove",
               NetworkPanelFixture,
               NULL,
@@ -719,6 +723,7 @@ main (int argc, char **argv)
               test_second_device_add_remove,
               fixture_tear_down);
 
+  /* Marche. */
   g_test_add ("/network-panel-wired/unconnected-carrier-plug",
               NetworkPanelFixture,
               NULL,
@@ -726,6 +731,7 @@ main (int argc, char **argv)
               test_unconnected_carrier_plug,
               fixture_tear_down);
 
+  /* Marche. */
   g_test_add ("/network-panel-wired/connection-add",
               NetworkPanelFixture,
               NULL,
@@ -733,6 +739,7 @@ main (int argc, char **argv)
               test_connection_add,
               fixture_tear_down);
 
+  /* FIXME. */
   g_test_add ("/network-panel-wired/connection-add-activate",
               NetworkPanelFixture,
               NULL,
@@ -740,6 +747,7 @@ main (int argc, char **argv)
               test_connection_add_activate,
               fixture_tear_down);
 
+  /* FIXME. */
   g_test_add ("/network-panel-wired/connection-multi-add-activate",
               NetworkPanelFixture,
               NULL,
@@ -747,6 +755,7 @@ main (int argc, char **argv)
               test_connection_multi_add_activate,
               fixture_tear_down);
 
+  /* FIXME. */
   g_test_add ("/network-panel-wired/vpn-add",
               NetworkPanelFixture,
               NULL,
@@ -754,6 +763,7 @@ main (int argc, char **argv)
               test_vpn_add,
               fixture_tear_down);
 
+  /* FIXME. */
   g_test_add ("/network-panel-wired/vpn-add-remove",
               NetworkPanelFixture,
               NULL,
@@ -761,6 +771,7 @@ main (int argc, char **argv)
               test_vpn_add_remove,
               fixture_tear_down);
 
+  /* FIXME. */
   g_test_add ("/network-panel-wired/vpn-updating",
               NetworkPanelFixture,
               NULL,
