@@ -24,7 +24,7 @@
           <object class="GtkStack" id="stack">
             <property name="visible">True</property>
             <child>
-              <object class="GtkScrolledWindow" id="category_scrolled_window">
+              <object class="GtkScrolledWindow" id="section_scrolled_window">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
@@ -34,10 +34,10 @@
                 <property name="propagate_natural_height">True</property>
                 <property name="max_content_height">350</property>
                 <child>
-                  <object class="GtkListBox" id="category_listbox">
+                  <object class="GtkListBox" id="section_listbox">
                     <property name="visible">True</property>
                     <property name="selection-mode">none</property>
-                    <signal name="row-activated" handler="category_row_activated" object="CcKeyboardShortcutDialog" swapped="no" />
+                    <signal name="row-activated" handler="section_row_activated" object="CcKeyboardShortcutDialog" swapped="no" />
                     <style>
                       <class name="frame" />
                     </style>

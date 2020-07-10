@@ -67,6 +67,15 @@
                             <property name="title" translatable="yes">Alternate Characters Key</property>
                             <property name="subtitle" translatable="yes">Hold down and type to enter different characters</property>
                             <child type="action">
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="icon_name">go-next-symbolic</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child type="action">
                               <object class="GtkLabel" id="value_alternate_chars">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
@@ -102,10 +111,19 @@
                         <property name="width-request">250</property>
                         <signal name="row-activated" handler="keyboard_shortcuts_activated" object="CcKeyboardPanel" swapped="no" />
                         <child>
-                          <object class="CcListRow" id="common_shortcuts_row">
+                          <object class="HdyActionRow" id="common_shortcuts_row">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="title" translatable="yes">View Common Shortcuts</property>
+                            <child type="action">
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="icon_name">go-next-symbolic</property>
+                                <style>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
