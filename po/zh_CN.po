@@ -33,8 +33,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-06-30 10:19+0000\n"
-"PO-Revision-Date: 2020-07-01 10:21-0400\n"
+"POT-Creation-Date: 2020-07-07 18:53+0000\n"
+"PO-Revision-Date: 2020-07-11 14:53-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -60,7 +60,7 @@ msgid "Session Bus"
 msgstr "会话总线"
 
 #: panels/applications/cc-applications-panel.c:776
-#: panels/power/cc-power-panel.c:2443 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2506 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "设备"
@@ -218,7 +218,7 @@ msgstr "相机"
 #: panels/applications/cc-applications-panel.ui:264
 #: panels/keyboard/cc-keyboard-option.c:259
 #: panels/keyboard/cc-keyboard-option.c:378
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:93
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
 #: panels/keyboard/keyboard-shortcuts.c:368 panels/network/network-proxy.ui:126
 #: panels/user-accounts/cc-user-panel.c:865
 #: panels/user-accounts/cc-user-panel.c:957
@@ -376,7 +376,7 @@ msgstr "选择图片"
 #: panels/network/connection-editor/vpn-helpers.c:299
 #: panels/network/net-device-wifi.c:800 panels/network/net-device-wifi.c:908
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:252
+#: panels/printers/pp-details-dialog.c:251
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:638
 #: panels/sharing/cc-sharing-panel.c:398 panels/usage/cc-usage-panel.c:133
@@ -393,7 +393,7 @@ msgstr "取消(_C)"
 
 #: panels/background/cc-background-chooser.c:350
 #: panels/network/connection-editor/vpn-helpers.c:177
-#: panels/printers/pp-details-dialog.c:253
+#: panels/printers/pp-details-dialog.c:252
 #: panels/sharing/cc-sharing-panel.c:399
 #: panels/user-accounts/cc-avatar-chooser.c:236
 msgid "_Open"
@@ -477,7 +477,7 @@ msgstr "关闭飞行模式开关以开启蓝牙。"
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1670
+#: panels/printers/pp-new-printer-dialog.c:1664
 msgid "Bluetooth"
 msgstr "蓝牙"
 
@@ -1186,11 +1186,11 @@ msgstr "某些设置必须先解锁才能更改。"
 
 #: panels/common/cc-time-editor.ui:33
 msgid "Increment Hour"
-msgstr ""
+msgstr "增加小时"
 
 #: panels/common/cc-time-editor.ui:65
 msgid "Increment Minute"
-msgstr ""
+msgstr "增加分钟"
 
 #: panels/common/cc-time-editor.ui:80
 msgid "Time"
@@ -1198,11 +1198,11 @@ msgstr "时间"
 
 #: panels/common/cc-time-editor.ui:113
 msgid "Decrement Hour"
-msgstr ""
+msgstr "减少小时"
 
 #: panels/common/cc-time-editor.ui:145
 msgid "Decrement Minute"
-msgstr ""
+msgstr "减少分钟"
 
 #: panels/common/cc-time-entry.c:219
 msgid "_Copy"
@@ -1269,13 +1269,11 @@ msgstr "%s %s"
 #, c-format
 msgctxt "hours"
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 #. 2 minutes 12 seconds
 #: panels/common/cc-util.c:192
-#, fuzzy, c-format
-#| msgctxt "time"
-#| msgid "%s %s"
+#, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
@@ -2167,7 +2165,7 @@ msgid ""
 msgstr "重新设置快捷键可能影响您的自定义快捷键。此操作无法撤销。"
 
 #: panels/keyboard/cc-keyboard-panel.c:208
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:323
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
@@ -2197,72 +2195,71 @@ msgstr "重置所有快捷键为它们的默认键绑定"
 msgid "No keyboard shortcut found"
 msgstr "未找到键盘快捷键"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:419
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:404
 #, c-format
 msgid "%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr "%s 已被用于 %s。如果您替换了它，%s 将被禁用"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:577
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
+msgid "Enter the new shortcut"
+msgstr "输入新的快捷键"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
 msgid "Set Custom Shortcut"
 msgstr "设置自定义快捷键"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:577
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
 msgid "Set Shortcut"
 msgstr "设置快捷键"
 
 #. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:588
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:575
 #, c-format
 msgid "Enter new shortcut to change %s."
 msgstr "输入新的快捷键以更%s。"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1019
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1002
 msgid "Add Custom Shortcut"
 msgstr "添加自定义快捷键"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:68
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:299
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:60
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr "按 Esc 以取消或 Backspace 以停用此键盘快捷键。"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:147
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
 msgid "Name"
 msgstr "名称"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:159
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:147
 msgid "Command"
 msgstr "命令"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:171
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:159
 msgid "Shortcut"
 msgstr "快捷键"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:250
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:238
 msgid "Set Shortcut…"
 msgstr "设置快捷键…"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:260
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:248
 msgid "None"
 msgstr "无"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:284
-msgid "Enter the new shortcut"
-msgstr "输入新的快捷键"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:334
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:286
 msgid "Remove"
 msgstr "移除"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:344
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
 msgid "Add"
 msgstr "添加"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:359
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:311
 msgid "Replace"
 msgstr "替换"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:372
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:324
 msgid "Set"
 msgstr "设置"
 
@@ -2320,10 +2317,6 @@ msgstr "保护您的位置信息"
 
 #. FIXME
 #: panels/lock/cc-lock-panel.ui:29
-#, fuzzy
-#| msgid ""
-#| "Automatically locking the screen prevents others from access the computer "
-#| "while you're away."
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
@@ -3362,7 +3355,7 @@ msgstr "无线设备不支持热点模式"
 
 #: panels/network/net-proxy.c:70
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:2043 panels/power/cc-power-panel.c:2054
+#: panels/power/cc-power-panel.c:1939 panels/power/cc-power-panel.c:1950
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4171,7 +4164,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "锁屏时显示显示消息内容(_O)"
 
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:2049 panels/power/cc-power-panel.c:2056
+#: panels/power/cc-power-panel.c:1945 panels/power/cc-power-panel.c:1952
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4264,17 +4257,17 @@ msgstr "添加帐号"
 msgid "Remove Account"
 msgstr "移除帐号"
 
-#: panels/power/cc-power-panel.c:334
+#: panels/power/cc-power-panel.c:336
 msgid "Unknown time"
 msgstr "未知时间"
 
-#: panels/power/cc-power-panel.c:340
+#: panels/power/cc-power-panel.c:342
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i 分钟"
 
-#: panels/power/cc-power-panel.c:352
+#: panels/power/cc-power-panel.c:354
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4282,257 +4275,261 @@ msgstr[0] "%i 小时"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:360
+#: panels/power/cc-power-panel.c:362
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:361
+#: panels/power/cc-power-panel.c:363
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "时"
 
-#: panels/power/cc-power-panel.c:362
+#: panels/power/cc-power-panel.c:364
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:380
+#: panels/power/cc-power-panel.c:382
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s 后充满"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:387
+#: panels/power/cc-power-panel.c:389
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "注意：剩余 %s 的电量"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:392
+#: panels/power/cc-power-panel.c:394
 #, c-format
 msgid "%s remaining"
 msgstr "剩余 %s"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:397 panels/power/cc-power-panel.c:427
+#: panels/power/cc-power-panel.c:399 panels/power/cc-power-panel.c:429
 msgid "Fully charged"
 msgstr "已充满"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:401 panels/power/cc-power-panel.c:431
+#: panels/power/cc-power-panel.c:403 panels/power/cc-power-panel.c:433
 msgid "Not charging"
 msgstr "未充电"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:405 panels/power/cc-power-panel.c:435
+#: panels/power/cc-power-panel.c:407 panels/power/cc-power-panel.c:437
 msgid "Empty"
 msgstr "已耗尽"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:418
+#: panels/power/cc-power-panel.c:420
 msgid "Charging"
 msgstr "正在充电"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:423
+#: panels/power/cc-power-panel.c:425
 msgid "Discharging"
 msgstr "正在放电"
 
-#: panels/power/cc-power-panel.c:556
+#: panels/power/cc-power-panel.c:571
 msgctxt "Battery name"
 msgid "Main"
 msgstr "主电池"
 
-#: panels/power/cc-power-panel.c:558
+#: panels/power/cc-power-panel.c:573
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "附加电池"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:633
+#: panels/power/cc-power-panel.c:648
 msgid "Wireless mouse"
 msgstr "无线鼠标"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:636
+#: panels/power/cc-power-panel.c:651
 msgid "Wireless keyboard"
 msgstr "无线键盘"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:639
+#: panels/power/cc-power-panel.c:654
 msgid "Uninterruptible power supply"
 msgstr "不间断电源（UPS）"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:642
+#: panels/power/cc-power-panel.c:657
 msgid "Personal digital assistant"
 msgstr "个人数字助理（PDA）"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:645
+#: panels/power/cc-power-panel.c:660
 msgid "Cellphone"
 msgstr "手机"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:663
 msgid "Media player"
 msgstr "媒体播放器"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:651 panels/wacom/cc-wacom-panel.c:794
+#: panels/power/cc-power-panel.c:666 panels/wacom/cc-wacom-panel.c:794
 msgid "Tablet"
 msgstr "手写板"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:654
+#: panels/power/cc-power-panel.c:669
 msgid "Computer"
 msgstr "计算机"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:657
+#: panels/power/cc-power-panel.c:672
 msgid "Gaming input device"
 msgstr "游戏输入设备"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:660 panels/power/cc-power-panel.c:940
-#: panels/power/cc-power-panel.c:2396
+#: panels/power/cc-power-panel.c:675 panels/power/cc-power-panel.c:967
+#: panels/power/cc-power-panel.c:2459
 msgid "Battery"
 msgstr "电池"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:721
+#: panels/power/cc-power-panel.c:736
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "正在充电"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:728
+#: panels/power/cc-power-panel.c:743
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "警告"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:748
 msgctxt "Battery power"
 msgid "Low"
 msgstr "低"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:738
+#: panels/power/cc-power-panel.c:753
 msgctxt "Battery power"
 msgid "Good"
 msgstr "充足"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:743
+#: panels/power/cc-power-panel.c:758
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "已充满"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:747
+#: panels/power/cc-power-panel.c:762
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "电池已耗尽"
 
-#: panels/power/cc-power-panel.c:938
+#: panels/power/cc-power-panel.c:965
 msgid "Batteries"
 msgstr "电池"
 
-#: panels/power/cc-power-panel.c:1366
+#: panels/power/cc-power-panel.c:1393
 msgid "When _idle"
 msgstr "空闲时(_I)"
 
-#: panels/power/cc-power-panel.c:1804
-msgid "Power Saving"
-msgstr "节电"
-
-#: panels/power/cc-power-panel.c:1838
-msgid "_Screen Brightness"
-msgstr "屏幕亮度(_S)"
-
-#: panels/power/cc-power-panel.c:1859
-msgid "Automatic Brightness"
-msgstr "自动亮度"
-
-#: panels/power/cc-power-panel.c:1872
-msgid "_Keyboard Brightness"
-msgstr "键盘亮度(_K)"
-
-#: panels/power/cc-power-panel.c:1883
-msgid "_Dim Screen When Inactive"
-msgstr "无操作时使屏幕变暗(_D)"
-
-#: panels/power/cc-power-panel.c:1901
-msgid "_Blank Screen"
-msgstr "息屏(_B)"
-
-#: panels/power/cc-power-panel.c:1924
-msgid "_Wi-Fi"
-msgstr "_Wi-Fi"
-
-#: panels/power/cc-power-panel.c:1925
-msgid "Wi-Fi can be turned off to save power."
-msgstr "可以关闭 Wi-Fi 以节省电源。"
-
-#: panels/power/cc-power-panel.c:1941
-msgid "_Mobile Broadband"
-msgstr "移动宽带(_M)"
-
-#: panels/power/cc-power-panel.c:1942
-msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-msgstr "可以关闭移动宽带（LTE、4G、3G 等）以节省电源。"
-
-#: panels/power/cc-power-panel.c:1992
-msgid "_Bluetooth"
-msgstr "蓝牙(_B)"
-
-#: panels/power/cc-power-panel.c:1993
-msgid "Bluetooth can be turned off to save power."
-msgstr "可以关闭蓝牙以节省电源。"
-
-#: panels/power/cc-power-panel.c:2045
-msgid "When on battery power"
-msgstr "电池供电时"
-
-#: panels/power/cc-power-panel.c:2047
-msgid "When plugged in"
-msgstr "插入电源时"
-
-#: panels/power/cc-power-panel.c:2138
+#: panels/power/cc-power-panel.c:1887
 msgid "Suspend"
 msgstr "挂起"
 
-#: panels/power/cc-power-panel.c:2139
+#: panels/power/cc-power-panel.c:1888
 msgid "Power Off"
 msgstr "电源关闭"
 
-#: panels/power/cc-power-panel.c:2140
+#: panels/power/cc-power-panel.c:1889
 msgid "Hibernate"
 msgstr "休眠"
 
-#: panels/power/cc-power-panel.c:2141
+#: panels/power/cc-power-panel.c:1890
 msgid "Nothing"
 msgstr "不处理"
 
-#. Frame header
-#: panels/power/cc-power-panel.c:2240
-msgid "Suspend & Power Button"
-msgstr "挂起和关机按钮"
+#: panels/power/cc-power-panel.c:1941
+msgid "When on battery power"
+msgstr "电池供电时"
 
-#: panels/power/cc-power-panel.c:2281
+#: panels/power/cc-power-panel.c:1943
+msgid "When plugged in"
+msgstr "插入电源时"
+
+#: panels/power/cc-power-panel.c:2021
+msgid "Power Saving"
+msgstr "节电"
+
+#: panels/power/cc-power-panel.c:2057
+msgid "_Screen Brightness"
+msgstr "屏幕亮度(_S)"
+
+#: panels/power/cc-power-panel.c:2078
+msgid "Automatic Brightness"
+msgstr "自动亮度"
+
+#: panels/power/cc-power-panel.c:2091
+msgid "_Keyboard Brightness"
+msgstr "键盘亮度(_K)"
+
+#: panels/power/cc-power-panel.c:2102
+msgid "_Dim Screen When Inactive"
+msgstr "无操作时使屏幕变暗(_D)"
+
+#: panels/power/cc-power-panel.c:2120
+msgid "_Blank Screen"
+msgstr "息屏(_B)"
+
+#: panels/power/cc-power-panel.c:2166
 msgid "_Automatic Suspend"
 msgstr "自动挂起(_A)"
 
-#: panels/power/cc-power-panel.c:2282
+#: panels/power/cc-power-panel.c:2167
 msgid "Automatic suspend"
 msgstr "自动挂起"
 
-#: panels/power/cc-power-panel.c:2340
-msgid "Po_wer Button Action"
-msgstr "电源按钮操作(_W)"
+#: panels/power/cc-power-panel.c:2219
+msgid "_Wi-Fi"
+msgstr "_Wi-Fi"
+
+#: panels/power/cc-power-panel.c:2220
+msgid "Wi-Fi can be turned off to save power."
+msgstr "可以关闭 Wi-Fi 以节省电源。"
+
+#: panels/power/cc-power-panel.c:2236
+msgid "_Mobile Broadband"
+msgstr "移动宽带(_M)"
+
+#: panels/power/cc-power-panel.c:2237
+msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
+msgstr "可以关闭移动宽带（LTE、4G、3G 等）以节省电源。"
+
+#: panels/power/cc-power-panel.c:2287
+msgid "_Bluetooth"
+msgstr "蓝牙(_B)"
+
+#: panels/power/cc-power-panel.c:2288
+msgid "Bluetooth can be turned off to save power."
+msgstr "可以关闭蓝牙以节省电源。"
+
+#: panels/power/cc-power-panel.c:2325
+msgid "Show Battery _Percentage"
+msgstr "显示电池百分比(_P)"
+
+#. Frame header
+#: panels/power/cc-power-panel.c:2351
+msgid "Suspend & Power Button"
+msgstr "挂起和关机按钮"
+
+#: panels/power/cc-power-panel.c:2401
+msgid "Po_wer Button Behavior"
+msgstr "电源按钮行为(_W)"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4649,18 +4646,18 @@ msgid "Authentication Required"
 msgstr "需要认证"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:721
+#: panels/printers/cc-printers-panel.c:707
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "已删除打印机“%s”"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:990
+#: panels/printers/cc-printers-panel.c:970
 msgid "Failed to add new printer."
 msgstr "添加新打印机失败。"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1322
+#: panels/printers/cc-printers-panel.c:1273
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "无法载入界面：%s"
@@ -4682,8 +4679,8 @@ msgstr ""
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:356
-#: panels/printers/pp-new-printer-dialog.c:413
+#: panels/printers/pp-new-printer-dialog.c:353
+#: panels/printers/pp-new-printer-dialog.c:410
 msgid "Add Printer"
 msgstr "添加打印机"
 
@@ -4709,21 +4706,21 @@ msgid "Enter username and password to view printers on Print Server."
 msgstr "输入用户名和密码以查看打印服务器上的打印机。"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
-#: panels/printers/pp-details-dialog.c:75
-#: panels/printers/pp-details-dialog.c:370
+#: panels/printers/pp-details-dialog.c:74
+#: panels/printers/pp-details-dialog.c:367
 #, c-format
 msgid "%s Details"
 msgstr "%s 详细信息"
 
-#: panels/printers/pp-details-dialog.c:122
+#: panels/printers/pp-details-dialog.c:121
 msgid "No suitable driver found"
 msgstr "未找到合适的驱动"
 
-#: panels/printers/pp-details-dialog.c:249
+#: panels/printers/pp-details-dialog.c:248
 msgid "Select PPD File"
 msgstr "选择 PPD 文件"
 
-#: panels/printers/pp-details-dialog.c:258
+#: panels/printers/pp-details-dialog.c:257
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4735,7 +4732,7 @@ msgstr "位置"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:250
+#: panels/printers/pp-ppd-selection-dialog.c:248
 msgid "Driver"
 msgstr "驱动"
 
@@ -4779,40 +4776,40 @@ msgid "LPD Printer"
 msgstr "LPD 打印机"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:65
+#: panels/printers/pp-ipp-option-widget.c:64
 #: panels/printers/pp-ppd-option-widget.c:69
 msgid "One Sided"
 msgstr "单面"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:67
+#: panels/printers/pp-ipp-option-widget.c:66
 #: panels/printers/pp-ppd-option-widget.c:71
 msgid "Long Edge (Standard)"
 msgstr "长边（标准）"
 
 #. Translators: this is an option of "Two Sided"
-#: panels/printers/pp-ipp-option-widget.c:69
+#: panels/printers/pp-ipp-option-widget.c:68
 #: panels/printers/pp-ppd-option-widget.c:73
 msgid "Short Edge (Flip)"
 msgstr "短边（翻转）"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:71
+#: panels/printers/pp-ipp-option-widget.c:70
 msgid "Portrait"
 msgstr "纵向"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:73
+#: panels/printers/pp-ipp-option-widget.c:72
 msgid "Landscape"
 msgstr "横向"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:75
+#: panels/printers/pp-ipp-option-widget.c:74
 msgid "Reverse landscape"
 msgstr "横向倒转"
 
 #. Translators: this is an option of "Orientation"
-#: panels/printers/pp-ipp-option-widget.c:77
+#: panels/printers/pp-ipp-option-widget.c:76
 msgid "Reverse portrait"
 msgstr "纵向倒转"
 
@@ -4909,155 +4906,155 @@ msgstr "认证(_A)"
 msgid "No Active Printer Jobs"
 msgstr "没有活动的打印机任务"
 
-#: panels/printers/pp-new-printer-dialog.c:371
+#: panels/printers/pp-new-printer-dialog.c:368
 msgid "Unlock Print Server"
 msgstr "解锁打印服务器"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:375
+#: panels/printers/pp-new-printer-dialog.c:372
 #, c-format
 msgid "Unlock %s."
 msgstr "解锁 %s。"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:379
+#: panels/printers/pp-new-printer-dialog.c:376
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr "输入用户名和密码以查看 %s 上的打印机。"
 
-#: panels/printers/pp-new-printer-dialog.c:816
+#: panels/printers/pp-new-printer-dialog.c:810
 msgid "Searching for Printers"
 msgstr "正在搜索打印机"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1653
+#: panels/printers/pp-new-printer-dialog.c:1647
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1658
+#: panels/printers/pp-new-printer-dialog.c:1652
 msgid "Serial Port"
 msgstr "串口"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1665
+#: panels/printers/pp-new-printer-dialog.c:1659
 msgid "Parallel Port"
 msgstr "并口"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1707
+#: panels/printers/pp-new-printer-dialog.c:1701
 #, c-format
 msgid "Location: %s"
 msgstr "位置：%s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1712
+#: panels/printers/pp-new-printer-dialog.c:1706
 #, c-format
 msgid "Address: %s"
 msgstr "地址：%s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1739
+#: panels/printers/pp-new-printer-dialog.c:1733
 msgid "Server requires authentication"
 msgstr "服务器要求认证"
 
-#: panels/printers/pp-options-dialog.c:91
+#: panels/printers/pp-options-dialog.c:87
 msgid "Two Sided"
 msgstr "双面"
 
-#: panels/printers/pp-options-dialog.c:92
+#: panels/printers/pp-options-dialog.c:88
 msgid "Paper Type"
 msgstr "纸张类型"
 
-#: panels/printers/pp-options-dialog.c:93
+#: panels/printers/pp-options-dialog.c:89
 msgid "Paper Source"
 msgstr "纸张来源"
 
-#: panels/printers/pp-options-dialog.c:94
+#: panels/printers/pp-options-dialog.c:90
 msgid "Output Tray"
 msgstr "出纸托盘"
 
-#: panels/printers/pp-options-dialog.c:95
+#: panels/printers/pp-options-dialog.c:91
 msgctxt "printing option"
 msgid "Resolution"
 msgstr "分辨率"
 
-#: panels/printers/pp-options-dialog.c:96
+#: panels/printers/pp-options-dialog.c:92
 msgid "GhostScript pre-filtering"
 msgstr "GhostScript 预过滤"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:534
+#: panels/printers/pp-options-dialog.c:530
 msgid "Pages per side"
 msgstr "每面页数"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:546
+#: panels/printers/pp-options-dialog.c:542
 msgid "Two-sided"
 msgstr "双面"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:558
+#: panels/printers/pp-options-dialog.c:554
 msgid "Orientation"
 msgstr "方向"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:655
+#: panels/printers/pp-options-dialog.c:651
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "常规"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:658
+#: panels/printers/pp-options-dialog.c:654
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "页面设置"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:661
+#: panels/printers/pp-options-dialog.c:657
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "可安装选项"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:664
+#: panels/printers/pp-options-dialog.c:660
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "任务"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:667
+#: panels/printers/pp-options-dialog.c:663
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "图像质量"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:670
+#: panels/printers/pp-options-dialog.c:666
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "色彩"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:673
+#: panels/printers/pp-options-dialog.c:669
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "正在完成"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:676
+#: panels/printers/pp-options-dialog.c:672
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "高级"
 
 #. Translators: Name of job which makes printer to print test page
 #. Translators: This button triggers the printing of a test page.
-#: panels/printers/pp-options-dialog.c:869
+#: panels/printers/pp-options-dialog.c:863
 #: panels/printers/pp-options-dialog.ui:18
 msgid "Test Page"
 msgstr "测试页"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:882
+#: panels/printers/pp-options-dialog.c:876
 msgid "Test page"
 msgstr "测试页"
 
@@ -5098,127 +5095,127 @@ msgid "No pre-filtering"
 msgstr "无预过滤"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:233
+#: panels/printers/pp-ppd-selection-dialog.c:231
 msgid "Manufacturer"
 msgstr "厂商"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:592 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:588 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "无活动任务"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:597
+#: panels/printers/pp-printer-entry.c:593
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
 msgstr[0] "%u 项任务"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:715
+#: panels/printers/pp-printer-entry.c:711
 msgid "Clean print heads"
 msgstr "清理喷墨头"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:766
+#: panels/printers/pp-printer-entry.c:762
 msgid "Low on toner"
 msgstr "墨粉不足"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:768
+#: panels/printers/pp-printer-entry.c:764
 msgid "Out of toner"
 msgstr "墨粉用尽"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:767
 msgid "Low on developer"
 msgstr "显影剂不足"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:774
+#: panels/printers/pp-printer-entry.c:770
 msgid "Out of developer"
 msgstr "显影剂用尽"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:776
+#: panels/printers/pp-printer-entry.c:772
 msgid "Low on a marker supply"
 msgstr "标记墨水不足"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:778
+#: panels/printers/pp-printer-entry.c:774
 msgid "Out of a marker supply"
 msgstr "标记墨水用尽"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:780
+#: panels/printers/pp-printer-entry.c:776
 msgid "Open cover"
 msgstr "打开上盖"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:782
+#: panels/printers/pp-printer-entry.c:778
 msgid "Open door"
 msgstr "打开后盖"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:784
+#: panels/printers/pp-printer-entry.c:780
 msgid "Low on paper"
 msgstr "纸张不足"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:782
 msgid "Out of paper"
 msgstr "纸张用尽"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:788
+#: panels/printers/pp-printer-entry.c:784
 msgctxt "printer state"
 msgid "Offline"
 msgstr "离线"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:790
-#: panels/printers/pp-printer-entry.c:933
+#: panels/printers/pp-printer-entry.c:786
+#: panels/printers/pp-printer-entry.c:929
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "已停止"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:792
+#: panels/printers/pp-printer-entry.c:788
 msgid "Waste receptacle almost full"
 msgstr "废粉仓将满"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:794
+#: panels/printers/pp-printer-entry.c:790
 msgid "Waste receptacle full"
 msgstr "废粉仓已满"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:796
+#: panels/printers/pp-printer-entry.c:792
 msgid "The optical photo conductor is near end of life"
 msgstr "感光鼓使用寿命已快耗尽"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:798
+#: panels/printers/pp-printer-entry.c:794
 msgid "The optical photo conductor is no longer functioning"
 msgstr "感光鼓故障"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:919
+#: panels/printers/pp-printer-entry.c:915
 msgctxt "printer state"
 msgid "Ready"
 msgstr "就绪"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:924
+#: panels/printers/pp-printer-entry.c:920
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "不接收任务"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:929
+#: panels/printers/pp-printer-entry.c:925
 msgctxt "printer state"
 msgid "Processing"
 msgstr "正在处理"
@@ -6998,7 +6995,7 @@ msgstr "无指纹设备"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:280
 msgid "Choose the fingerprint device you want to configure"
-msgstr ""
+msgstr "选择您想要配置的指纹设备"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:309
 msgid "Fingerprint Device"
@@ -7008,7 +7005,7 @@ msgstr "指纹设备"
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
-msgstr ""
+msgstr "指纹登录可以帮助您使用手指解锁并登录您的计算机"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:352
 msgid "_Delete Fingerprints"
@@ -7136,7 +7133,7 @@ msgstr "读取设备时出现问题"
 #: panels/user-accounts/cc-fingerprint-dialog.c:1133
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
-msgstr ""
+msgstr "无法请求指纹设备 %s：%s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1270
 #, c-format
@@ -7830,9 +7827,8 @@ msgid "Adjust display resolution"
 msgstr "调整显示分辨率"
 
 #: panels/wacom/gnome-wacom-properties.ui:376
-#, fuzzy
 msgid "Decouple Display"
-msgstr "断开显示器"
+msgstr "显示器解耦"
 
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:217
 msgid "New shortcut…"
