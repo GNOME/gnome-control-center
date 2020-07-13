@@ -20,6 +20,7 @@
 
 #include <glib/gi18n.h>
 #include "cc-keyboard-shortcut-row.h"
+#include "keyboard-shortcuts.h"
 
 struct _CcKeyboardShortcutRow
 {
@@ -125,8 +126,8 @@ update_bindings (CcKeyboardShortcutRow *self)
 {
   GList *children, *key_combos, *l;
   CcKeyCombo *combo;
-  gchar *accel;
-  GtkWidget *shortcut_label, *box, *label, *button;
+  gchar *accel, *remove_text;
+  GtkWidget *shortcut_label, *label, *button;
   PangoAttrList *attrs;
   PangoWeight weight;
   gboolean is_default;
@@ -162,37 +163,40 @@ update_bindings (CcKeyboardShortcutRow *self)
   key_combos = cc_keyboard_item_get_key_combos (self->item);
   for (l = key_combos; l != NULL; l = l->next) {
     combo = l->data;
-    accel = gtk_accelerator_name (combo->keyval, combo->mask);
 
     if (combo->keyval == 0 && combo->mask == 0)
       continue;
 
+    accel = convert_keysym_state_to_string (combo);
+
     // Populate shortcut_box based on item
-    shortcut_label = gtk_shortcut_label_new (accel);
+    shortcut_label = gtk_label_new (accel);
     gtk_widget_set_visible (shortcut_label, TRUE);
+    gtk_label_set_xalign (GTK_LABEL (shortcut_label), 1.0);
+    gtk_style_context_add_class (gtk_widget_get_style_context (shortcut_label), "dim-label");
     gtk_container_add (GTK_CONTAINER (self->shortcut_box), shortcut_label);
 
     // Add option to remove the shortcut to menu
+    remove_text = g_strconcat(_("Remove"), " ", accel, NULL);
     button = gtk_button_new ();
-    box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-    label = gtk_label_new (_("Remove"));
-    shortcut_label = gtk_shortcut_label_new (accel);
+    label = gtk_label_new (remove_text);
     gtk_widget_set_halign (button, GTK_ALIGN_START);
     gtk_button_set_relief (GTK_BUTTON (button), GTK_RELIEF_NONE);
     gtk_widget_set_visible (button, TRUE);
-    gtk_widget_set_visible (box, TRUE);
     gtk_widget_set_visible (label, TRUE);
-    gtk_widget_set_visible (shortcut_label, TRUE);
-    gtk_container_add (GTK_CONTAINER (box), label);
-    gtk_container_add (GTK_CONTAINER (box), shortcut_label);
-    gtk_container_add (GTK_CONTAINER (button), box);
+    gtk_container_add (GTK_CONTAINER (button), label);
     gtk_container_add (GTK_CONTAINER (self->edit_keybinding_box), button);
     g_signal_connect (button, "clicked", G_CALLBACK (remove_shortcut_cb), combo);
+
+    g_free (remove_text);
+    g_free (accel);
   }
 }
 
 CcKeyboardShortcutRow *
-cc_keyboard_shortcut_row_new (CcKeyboardItem *item, CcKeyboardManager *manager, CcKeyboardShortcutEditor *shortcut_editor)
+cc_keyboard_shortcut_row_new (CcKeyboardItem *item,
+                              CcKeyboardManager *manager,
+                              CcKeyboardShortcutEditor *shortcut_editor)
 {
   CcKeyboardShortcutRow *self;
 
