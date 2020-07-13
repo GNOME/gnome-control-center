@@ -66,6 +66,8 @@ struct _CcKeyboardShortcutEditor
 
 static void          command_entry_changed_cb                    (CcKeyboardShortcutEditor *self);
 static void          name_entry_changed_cb                       (CcKeyboardShortcutEditor *self);
+static gboolean      grab_idle                                   (gpointer data);
+
 
 G_DEFINE_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, GTK_TYPE_DIALOG)
 
@@ -489,6 +491,13 @@ reset_custom_clicked_cb (CcKeyboardShortcutEditor *self)
 }
 
 static void
+reset_item_clicked_cb (CcKeyboardShortcutEditor *self)
+{
+  cc_keyboard_shortcut_editor_set_item (self, self->item);
+  self->grab_idle_id = g_timeout_add (100, grab_idle, self);
+}
+
+static void
 set_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
   update_shortcut (self);
@@ -862,6 +871,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, replace_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, reset_custom_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, reset_item_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, set_button_clicked_cb);
 }
 

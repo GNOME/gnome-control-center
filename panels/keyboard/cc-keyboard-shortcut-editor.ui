@@ -74,6 +74,25 @@
                         <property name="disabled-text" translatable="yes">Disabled</property>
                       </object>
                     </child>
+                    <child>
+                      <object class="GtkButton" id="reset_button">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="relief">none</property>
+                        <property name="halign">end</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="icon-name">edit-clear-symbolic</property>
+                          </object>
+                        </child>
+                        <signal name="clicked" handler="reset_item_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+                      </object>
+                      <packing>
+                        <property name="pack_type">end</property>
+                      </packing>
+                    </child>
                   </object>
                 </child>
                 <child>
@@ -317,6 +336,7 @@
       <widget name="cancel_button"/>
       <widget name="add_button"/>
       <widget name="replace_button"/>
+      <widget name="reset_button"/>
     </widgets>
   </object>
 </interface>
