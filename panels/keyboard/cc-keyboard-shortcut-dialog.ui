@@ -89,6 +89,49 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkBox" id="empty_custom_shortcuts_placeholder">
+                        <property name="orientation">vertical</property>
+                        <property name="border_width">18</property>
+                        <property name="spacing">12</property>
+                        <style>
+                          <class name="background"/>
+                        </style>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="visible">True</property>
+                            <property name="icon-name">input-keyboard-symbolic</property>
+                            <property name="pixel-size">128</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Add Custom Shortcuts</property>
+                            <attributes>
+                              <attribute name="weight" value="bold" />
+                            </attributes>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Set up custom shortcuts for launching apps, running scripts, and more.</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="visible">True</property>
+                            <property name="halign">center</property>
+                            <property name="label" translatable="yes">Add Shortcut</property>
+                            <style>
+                              <class name="suggested-action" />
+                            </style>
+                            <signal name="clicked" handler="add_custom_shortcut_clicked_cb" object="CcKeyboardShortcutDialog" swapped="yes" />
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkListBox" id="shortcut_listbox">
                         <property name="visible">True</property>
                         <property name="selection-mode">none</property>
@@ -204,45 +247,6 @@
         <style>
           <class name="dim-label"/>
         </style>
-      </object>
-    </child>
-  </object>
-  <object class="GtkBox" id="empty_custom_shortcuts_placeholder">
-    <property name="visible">True</property>
-    <property name="orientation">vertical</property>
-    <property name="border_width">18</property>
-    <property name="spacing">12</property>
-    <child>
-      <object class="GtkImage">
-        <property name="visible">True</property>
-        <property name="icon-name">input-keyboard-symbolic</property>
-        <property name="pixel-size">128</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="label" translatable="yes">Add Custom Shortcuts</property>
-        <attributes>
-          <attribute name="weight" value="bold" />
-        </attributes>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="label" translatable="yes">Set up custom shortcuts for launching apps, running scripts, and more.</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkButton">
-        <property name="visible">True</property>
-        <property name="halign">center</property>
-        <property name="label" translatable="yes">Add Shortcut</property>
-        <style>
-          <class name="suggested-action" />
-        </style>
-        <signal name="clicked" handler="add_custom_shortcut_clicked_cb" object="CcKeyboardShortcutDialog" swapped="yes" />
       </object>
     </child>
   </object>

@@ -183,6 +183,11 @@ set_custom_shortcut_add_box_visibility (CcKeyboardShortcutDialog *self)
 
   gtk_widget_set_visible (self->custom_shortcut_add_box, is_custom_shortcuts
                                                       && (self->custom_shortcut_count > 0));
+  gtk_widget_set_visible (self->empty_custom_shortcuts_placeholder, is_custom_shortcuts
+                                                                 && (self->custom_shortcut_count == 0));
+  gtk_widget_set_visible (GTK_WIDGET (self->shortcut_listbox),
+                                      !(is_custom_shortcuts
+                                     && (self->custom_shortcut_count == 0)));
 }
  
 static void
@@ -326,7 +331,7 @@ show_shortcut_list (CcKeyboardShortcutDialog *self)
     }
 
   if (is_custom_shortcuts)
-    gtk_list_box_set_placeholder (self->shortcut_listbox, self->empty_custom_shortcuts_placeholder);
+    gtk_list_box_set_placeholder (self->shortcut_listbox, NULL);
   else
     gtk_list_box_set_placeholder (self->shortcut_listbox, self->empty_search_placeholder);
 
