@@ -20,6 +20,7 @@ cflags = [
 foreach unit: test_units
   exe = executable(
                     unit,
+               resources,
            [unit + '.c'],
            dependencies : common_deps + [m_dep, datetime_panel_lib_dep],
                  c_args : cflags
