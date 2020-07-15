@@ -18,7 +18,6 @@ i18n.merge_file(
 )
 
 cflags += [
-  '-DBINDIR="@0@"'.format(control_center_bindir),
   '-DDATADIR="@0@"'.format(control_center_datadir),
   '-DLIBEXECDIR="@0@"'.format(control_center_libexecdir),
 ]
