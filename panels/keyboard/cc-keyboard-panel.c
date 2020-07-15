@@ -64,6 +64,9 @@ struct _CcKeyboardPanel
   GSettings           *input_source_settings;
   GtkWidget           *value_alternate_chars;
 
+  GtkWidget           *value_switch_to_application;
+  GSettings           *shell_keybinding_settings;
+
   /* Custom shortcut dialog */
   GtkWidget          *shortcut_editor;
 
@@ -670,6 +673,64 @@ bail:
 }
 
 static void
+switch_to_application_set (GtkSwitch *widget,
+                           gboolean   state,
+                           CcKeyboardPanel *self)
+{
+  const gchar *key[] = {
+    "switch-to-application-1",
+    "switch-to-application-2",
+    "switch-to-application-3",
+    "switch-to-application-4",
+    "switch-to-application-5",
+    "switch-to-application-6",
+    "switch-to-application-7",
+    "switch-to-application-8",
+    "switch-to-application-9"
+  };
+  const gchar *binding_str[] = {
+    "<Super>1",
+    "<Super>2",
+    "<Super>3",
+    "<Super>4",
+    "<Super>5",
+    "<Super>6",
+    "<Super>7",
+    "<Super>8",
+    "<Super>9"
+  };
+  const gchar *binding_strv[2] = {NULL, NULL};
+  int i;
+
+  for (i = 0; i < 9; i++) {
+    if (state) {
+      binding_strv[0] = binding_str[i];
+    }
+
+    g_settings_set_strv (self->shell_keybinding_settings, key[i], binding_strv);
+  }
+}
+
+static gboolean
+transform_binding_to_switch_to_application (GValue   *value,
+                                            GVariant *variant,
+                                            gpointer  user_data)
+{
+  // Assumes switch-to-application-1 is always bound to [<Super>1] or [],
+  // and the other bindings match. It is not clear what the best behavior
+  // is if the user has manually mapped these keys otherwise with dconf.
+
+  const gchar **items = g_variant_get_strv (variant, NULL);
+
+  if (items && items[0] && (strcmp(items[0], "<Super>1") == 0))
+    g_value_set_boolean (value, TRUE);
+  else
+    g_value_set_boolean (value, FALSE);
+
+  return TRUE;
+}
+
+static void
 cc_keyboard_panel_set_property (GObject      *object,
                                guint         property_id,
                                const GValue *value,
@@ -700,6 +761,7 @@ cc_keyboard_panel_finalize (GObject *object)
   g_clear_pointer (&self->pictures_regex, g_regex_unref);
   g_clear_object (&self->accelerator_sizegroup);
   g_clear_object (&self->input_source_settings);
+  g_clear_object (&self->shell_keybinding_settings);
 
   cc_keyboard_option_clear_all ();
 
@@ -761,10 +823,12 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, shortcuts_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, value_alternate_chars);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, value_switch_to_application);
 
   gtk_widget_class_bind_template_callback (widget_class, reset_all_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, shortcut_row_activated);
   gtk_widget_class_bind_template_callback (widget_class, alternate_chars_activated);
+  gtk_widget_class_bind_template_callback (widget_class, switch_to_application_set);
 }
 
 static void
@@ -796,6 +860,18 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                 transform_binding_to_alt_chars,
                                 NULL,
                                 self->value_alternate_chars,
+                                NULL);
+
+
+  self->shell_keybinding_settings = g_settings_new ("org.gnome.shell.keybindings");
+  g_settings_bind_with_mapping (self->shell_keybinding_settings,
+                                "switch-to-application-1",
+                                self->value_switch_to_application,
+                                "state",
+                                G_SETTINGS_BIND_GET,
+                                transform_binding_to_switch_to_application,
+                                NULL,
+                                self->value_switch_to_application,
                                 NULL);
 
   self->alt_chars_key_dialog = cc_alt_chars_key_dialog_new (self->input_source_settings);
