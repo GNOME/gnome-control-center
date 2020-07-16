@@ -864,7 +864,7 @@ get_all_providers_cb (GObject      *source,
                       GAsyncResult *res,
                       gpointer      user_data)
 {
-  g_autoptr(CcGoaPanel) self = user_data;
+  CcGoaPanel *self = CC_GOA_PANEL (user_data);
   GList *providers;
   GList *l;
 
