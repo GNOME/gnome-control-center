@@ -135,13 +135,13 @@ update_row_sensitivity (CEPageIP6 *self, GtkWidget *list)
 }
 
 static void
-remove_row (CEPageIP6 *self)
+remove_row (GtkWidget *button, CEPageIP6 *self)
 {
         GtkWidget *row;
         GtkWidget *row_box;
         GtkWidget *list;
 
-        row_box = gtk_widget_get_parent (GTK_WIDGET (self));
+        row_box = gtk_widget_get_parent (GTK_WIDGET (button));
         row = gtk_widget_get_parent (row_box);
         list = gtk_widget_get_parent (row);
 
@@ -244,7 +244,7 @@ add_address_row (CEPageIP6   *self,
         delete_button = gtk_button_new ();
         gtk_widget_set_sensitive (delete_button, FALSE);
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
-        g_signal_connect_swapped (delete_button, "clicked", G_CALLBACK (remove_row), self);
+        g_signal_connect (delete_button, "clicked", G_CALLBACK (remove_row), self);
         image = gtk_image_new_from_icon_name ("edit-delete-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete Address"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
@@ -393,7 +393,7 @@ add_route_row (CEPageIP6   *self,
 
         delete_button = gtk_button_new ();
         gtk_style_context_add_class (gtk_widget_get_style_context (delete_button), "image-button");
-        g_signal_connect_swapped (delete_button, "clicked", G_CALLBACK (remove_row), self);
+        g_signal_connect (delete_button, "clicked", G_CALLBACK (remove_row), self);
         image = gtk_image_new_from_icon_name ("edit-delete-symbolic", GTK_ICON_SIZE_MENU);
         atk_object_set_name (gtk_widget_get_accessible (delete_button), _("Delete Route"));
         gtk_button_set_image (GTK_BUTTON (delete_button), image);
