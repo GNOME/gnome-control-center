@@ -499,7 +499,7 @@ connect_ip6_page (CEPageIP6 *self)
         } else if (g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_SHARED) == 0) {
                 method = IP6_METHOD_SHARED;
         } else if (g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_DISABLED ||
-                   g_strcmp_0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE)) == 0) {
+                   g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE)) == 0) {
                 method = IP6_METHOD_DISABLED;
         }
 
