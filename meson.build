@@ -218,7 +218,7 @@ config_h.set('HAVE_MALCONTENT', enable_malcontent,
 if host_is_linux
   # network manager
   network_manager_deps = [
-    dependency('libnm', version: '>= 1.12.0'),
+    dependency('libnm', version: '>= 1.20.0'),
     dependency('libnma', version: '>= 1.8.0'),
     dependency('mm-glib', version: '>= 0.7')
   ]
