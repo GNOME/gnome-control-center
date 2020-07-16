@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcSpeakerTestRow" parent="GtkListBoxRow">
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="spacing">6</property>
+        <property name="margin">12</property>
+
+        <!-- Speaker icon -->
+        <child>
+          <object class="GtkImage" id="speaker_icon">
+            <property name="visible">True</property>
+          </object>
+        </child>
+
+        <!-- Speaker name -->
+        <child>
+          <object class="GtkLabel" id="speaker_label">
+            <property name="visible">True</property>
+            <property name="ellipsize">end</property>
+          </object>
+        </child>
+
+        <!-- Test sound playing icon -->
+        <child>
+          <object class="GtkImage" id="playing_icon">
+            <property name="icon-name">audio-volume-high-symbolic</property>
+          </object>
+          <packing>
+            <property name="pack-type">end</property>
+          </packing>
+        </child>
+
+      </object>
+    </child>
+  </template>
+</interface>
