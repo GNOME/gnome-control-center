@@ -79,7 +79,7 @@ enum {
         IP6_METHOD_MANUAL,
         IP6_METHOD_LINK_LOCAL,
         IP6_METHOD_SHARED,
-        IP6_METHOD_IGNORE
+        IP6_METHOD_DISABLED
 };
 
 static void
@@ -498,8 +498,9 @@ connect_ip6_page (CEPageIP6 *self)
                 method = IP6_METHOD_MANUAL;
         } else if (g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_SHARED) == 0) {
                 method = IP6_METHOD_SHARED;
-        } else if (g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE) == 0) {
-                method = IP6_METHOD_IGNORE;
+        } else if (g_strcmp0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_DISABLED ||
+                   g_strcmp_0 (str_method, NM_SETTING_IP6_CONFIG_METHOD_IGNORE)) == 0) {
+                method = IP6_METHOD_DISABLED;
         }
 
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->never_default_check),
@@ -528,7 +529,7 @@ connect_ip6_page (CEPageIP6 *self)
         case IP6_METHOD_SHARED:
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->shared_radio), TRUE);
                 break;
-        case IP6_METHOD_IGNORE:
+        case IP6_METHOD_DISABLED:
                 gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->disabled_radio), TRUE);
                 break;
         default:
@@ -552,7 +553,7 @@ ui_to_setting (CEPageIP6 *self)
         guint i;
 
         if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->disabled_radio)))
-                method = NM_SETTING_IP6_CONFIG_METHOD_IGNORE;
+                method = NM_SETTING_IP6_CONFIG_METHOD_DISABLED;
         else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->manual_radio)))
                 method = NM_SETTING_IP6_CONFIG_METHOD_MANUAL;
         else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_radio)))
