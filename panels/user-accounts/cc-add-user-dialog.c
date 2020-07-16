@@ -691,7 +691,6 @@ local_password_entry_icon_press_cb (CcAddUserDialog *self)
                 return;
 
         gtk_entry_set_text (self->local_password_entry, pwd);
-        gtk_entry_set_text (self->local_verify_entry, pwd);
         gtk_entry_set_visibility (self->local_password_entry, TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_entry), TRUE);
 
