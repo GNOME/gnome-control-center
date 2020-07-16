@@ -456,7 +456,7 @@ add_routes_box (CEPageIP6 *self)
 
                 route = nm_setting_ip_config_get_route (self->setting, i);
                 prefix = g_strdup_printf ("%u", nm_ip_route_get_prefix (route));
-                metric = g_strdup_printf ("%u", (guint32) MIN (0, nm_ip_route_get_metric (route)));
+                metric = g_strdup_printf ("%u", (guint32) MAX (0, nm_ip_route_get_metric (route)));
                 add_route_row (self, nm_ip_route_get_dest (route),
                                prefix,
                                nm_ip_route_get_next_hop (route),
