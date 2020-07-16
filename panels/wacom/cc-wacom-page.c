@@ -68,7 +68,7 @@ struct _CcWacomPage
 
 	CcWacomPanel   *panel;
 	CcWacomDevice  *stylus;
-	CcWacomDevice  *pad;
+	GList          *pads;
 	GtkBuilder     *builder;
 	GtkWidget      *nav;
 	GtkWidget      *notebook;
@@ -87,6 +87,9 @@ struct _CcWacomPage
 	GtkWidget      *dialog;
 
 	GCancellable   *cancellable;
+
+	/* To reach other grouped devices */
+	GsdDeviceManager *manager;
 };
 
 G_DEFINE_TYPE (CcWacomPage, cc_wacom_page, GTK_TYPE_BOX)
@@ -119,8 +122,8 @@ enum {
 };
 
 static void
-update_tablet_ui (CcWacomPage *page,
-		  int          layout);
+set_page_layout (CcWacomPage *page,
+		 int          layout);
 
 static int
 get_layout_type (CcWacomDevice *device)
@@ -372,15 +375,17 @@ static void
 setup_button_mapping (CcWacomPage *page)
 {
 	GDesktopPadButtonAction action;
+	CcWacomDevice *pad;
 	GtkWidget *list_box;
 	guint i, n_buttons;
 	GSettings *settings;
 
 	list_box = MWID ("shortcuts_list");
-	n_buttons = cc_wacom_device_get_num_buttons (page->pad);
+	pad = page->pads->data;
+	n_buttons = cc_wacom_device_get_num_buttons (pad);
 
 	for (i = 0; i < n_buttons; i++) {
-		settings = cc_wacom_device_get_button_settings (page->pad, i);
+		settings = cc_wacom_device_get_button_settings (pad, i);
 		if (!settings)
 			continue;
 
@@ -464,7 +469,9 @@ set_osd_visibility (CcWacomPage *page)
 	const gchar        *device_path;
 
 	proxy = cc_wacom_panel_get_gsd_wacom_bus_proxy (page->panel);
-	gsd_device = cc_wacom_device_get_device (page->pad);
+
+	/* Pick the first device, the OSD may change later between them */
+	gsd_device = cc_wacom_device_get_device (page->pads->data);
 
 	device_path = gsd_device_get_device_file (gsd_device);
 
@@ -498,7 +505,7 @@ display_mapping_dialog_closed (CcWacomPage *page)
 	page->dialog = NULL;
 	page->mapping = NULL;
 	layout = get_layout_type (page->stylus);
-	update_tablet_ui (page, layout);
+	set_page_layout (page, layout);
 }
 
 static void
@@ -704,6 +711,8 @@ cc_wacom_page_dispose (GObject *object)
 	g_clear_pointer (&self->dialog, gtk_widget_destroy);
 	g_clear_object (&self->builder);
 	g_clear_object (&self->header_group);
+	g_list_free_full (self->pads, g_object_unref);
+	self->pads = NULL;
 
 	self->panel = NULL;
 
@@ -850,8 +859,8 @@ has_monitor (CcWacomPage *page)
 }
 
 static void
-update_tablet_ui (CcWacomPage *page,
-		  int          layout)
+set_page_layout (CcWacomPage *page,
+		 int          layout)
 {
 	WacomIntegrationFlags integration_flags;
 
@@ -862,9 +871,6 @@ update_tablet_ui (CcWacomPage *page,
 		/* FIXME: Check we've got a puck, or a corresponding touchpad device */
 		remove_mouse_link (page);
 	}
-
-	/* Hide the pad buttons if no pad is present */
-	gtk_widget_set_visible (WID ("map-buttons-button"), page->pad != NULL);
 
 	switch (layout) {
 	case LAYOUT_NORMAL:
@@ -897,44 +903,69 @@ update_tablet_ui (CcWacomPage *page,
 	}
 }
 
-gboolean
-cc_wacom_page_update_tools (CcWacomPage   *page,
-			    CcWacomDevice *stylus,
-			    CcWacomDevice *pad)
+static void
+update_pad_availability (CcWacomPage *page)
 {
-	int layout;
-	gboolean changed;
+	gtk_widget_set_visible (WID ("map-buttons-button"), page->pads != NULL);
+}
 
-	/* Type of layout */
-	layout = get_layout_type (stylus);
+static void
+check_add_pad (CcWacomPage *page,
+	       GsdDevice   *gsd_device)
+{
+	CcWacomDevice *wacom_device;
 
-	changed = (page->stylus != stylus || page->pad != pad);
-	if (!changed)
-		return FALSE;
+	if ((gsd_device_get_device_type (gsd_device) & GSD_DEVICE_TYPE_PAD) == 0)
+		return;
 
-	page->stylus = stylus;
-	page->pad = pad;
+	if (!gsd_device_shares_group (cc_wacom_device_get_device (page->stylus),
+				      gsd_device))
+		return;
 
-	update_tablet_ui (CC_WACOM_PAGE (page), layout);
+	wacom_device = cc_wacom_device_new (gsd_device);
+	if (!wacom_device)
+		return;
 
-	return TRUE;
+	page->pads = g_list_prepend (page->pads, wacom_device);
+	update_pad_availability (page);
+}
+
+static void
+check_remove_pad (CcWacomPage *page,
+		  GsdDevice   *gsd_device)
+{
+	GList *l;
+
+	if ((gsd_device_get_device_type (gsd_device) & GSD_DEVICE_TYPE_PAD) == 0)
+		return;
+
+	for (l = page->pads; l; l = l->next) {
+		CcWacomDevice *wacom_device = l->data;
+		if (cc_wacom_device_get_device (wacom_device) == gsd_device) {
+			page->pads = g_list_delete_link (page->pads, l);
+			g_object_unref (wacom_device);
+		}
+	}
+
+	update_pad_availability (page);
 }
 
 GtkWidget *
 cc_wacom_page_new (CcWacomPanel  *panel,
-		   CcWacomDevice *stylus,
-		   CcWacomDevice *pad)
+		   CcWacomDevice *stylus)
 {
+	g_autoptr (GList) pads = NULL;
 	CcWacomPage *page;
+	GList *l;
 
 	g_return_val_if_fail (CC_IS_WACOM_DEVICE (stylus), NULL);
-	g_return_val_if_fail (!pad || CC_IS_WACOM_DEVICE (pad), NULL);
 
 	page = g_object_new (CC_TYPE_WACOM_PAGE, NULL);
 
 	page->panel = panel;
+	page->stylus = stylus;
 
-	cc_wacom_page_update_tools (page, stylus, pad);
+	set_page_layout (page, get_layout_type (stylus));
 
 	/* FIXME move this to construct */
 	page->wacom_settings  = cc_wacom_device_get_settings (stylus);
@@ -951,6 +982,19 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 
 	/* Tablet icon */
 	set_icon_name (page, "image-tablet", cc_wacom_device_get_icon_name (stylus));
+
+	/* Listen to changes in related/paired pads */
+	page->manager = gsd_device_manager_get ();
+	g_signal_connect_object (G_OBJECT (page->manager), "device-added",
+				 G_CALLBACK (check_add_pad), page,
+				 G_CONNECT_SWAPPED);
+	g_signal_connect_object (G_OBJECT (page->manager), "device-removed",
+				 G_CALLBACK (check_remove_pad), page,
+				 G_CONNECT_SWAPPED);
+
+	pads = gsd_device_manager_list_devices (page->manager, GSD_DEVICE_TYPE_PAD);
+	for (l = pads; l ; l = l->next)
+		check_add_pad (page, l->data);
 
 	return GTK_WIDGET (page);
 }

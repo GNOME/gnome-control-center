@@ -42,6 +42,7 @@ typedef struct
 	gchar *device_file;
 	gchar *vendor_id;
 	gchar *product_id;
+	gchar *group;
 	GsdDeviceType type;
 	guint width;
 	guint height;
@@ -63,7 +64,8 @@ enum {
 	PROP_PRODUCT_ID,
 	PROP_TYPE,
 	PROP_WIDTH,
-	PROP_HEIGHT
+	PROP_HEIGHT,
+	PROP_GROUP
 };
 
 enum {
@@ -124,6 +126,9 @@ gsd_device_set_property (GObject      *object,
 	case PROP_HEIGHT:
 		priv->height = g_value_get_uint (value);
 		break;
+	case PROP_GROUP:
+		priv->group = g_value_dup_string (value);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;
@@ -162,6 +167,9 @@ gsd_device_get_property (GObject    *object,
 	case PROP_HEIGHT:
 		g_value_set_uint (value, priv->height);
 		break;
+	case PROP_GROUP:
+		g_value_set_string (value, priv->group);
+		break;
 	default:
 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
 		break;
@@ -179,6 +187,7 @@ gsd_device_finalize (GObject *object)
 	g_free (priv->vendor_id);
 	g_free (priv->product_id);
 	g_free (priv->device_file);
+	g_free (priv->group);
 
 	G_OBJECT_CLASS (gsd_device_parent_class)->finalize (object);
 }
@@ -248,6 +257,14 @@ gsd_device_class_init (GsdDeviceClass *klass)
 							    0, G_MAXUINT, 0,
 							    G_PARAM_READWRITE |
 							    G_PARAM_CONSTRUCT_ONLY));
+	g_object_class_install_property (object_class,
+					 PROP_GROUP,
+					 g_param_spec_string ("group",
+							      "Group",
+							      "Group",
+							      NULL,
+							      G_PARAM_READWRITE |
+							      G_PARAM_CONSTRUCT_ONLY));
 }
 
 static void
@@ -385,7 +402,7 @@ device_is_evdev (GUdevDevice *device)
 static GsdDevice *
 create_device (GUdevDevice *udev_device)
 {
-	const gchar *vendor, *product, *name;
+	const gchar *vendor, *product, *name, *group;
 	guint width, height;
 	g_autoptr(GUdevDevice) parent = NULL;
 
@@ -404,6 +421,8 @@ create_device (GUdevDevice *udev_device)
 	width = g_udev_device_get_property_as_int (udev_device, "ID_INPUT_WIDTH_MM");
 	height = g_udev_device_get_property_as_int (udev_device, "ID_INPUT_HEIGHT_MM");
 
+	group = g_udev_device_get_property (udev_device, "LIBINPUT_DEVICE_GROUP");
+
 	return g_object_new (GSD_TYPE_DEVICE,
 			     "name", name,
 			     "device-file", g_udev_device_get_device_file (udev_device),
@@ -412,6 +431,7 @@ create_device (GUdevDevice *udev_device)
 			     "product-id", product,
 			     "width", width,
 			     "height", height,
+			     "group", group,
 			     NULL);
 }
 
@@ -653,4 +673,20 @@ gsd_device_manager_lookup_gdk_device (GsdDeviceManager *manager,
 		return NULL;
 
 	return klass->lookup_device (manager, gdk_device);
+}
+
+gboolean
+gsd_device_shares_group (GsdDevice *device1,
+			 GsdDevice *device2)
+{
+	GsdDevicePrivate *priv1, *priv2;
+
+	priv1 = gsd_device_get_instance_private (GSD_DEVICE (device1));
+	priv2 = gsd_device_get_instance_private (GSD_DEVICE (device2));
+
+	/* Don't group NULLs together */
+	if (!priv1->group && !priv2->group)
+		return FALSE;
+
+	return g_strcmp0 (priv1->group, priv2->group) == 0;
 }

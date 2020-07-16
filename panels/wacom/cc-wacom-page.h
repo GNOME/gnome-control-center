@@ -30,12 +30,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcWacomPage, cc_wacom_page, CC, WACOM_PAGE, GtkBox)
 
 GtkWidget * cc_wacom_page_new (CcWacomPanel  *panel,
-			       CcWacomDevice *stylus,
-			       CcWacomDevice *pad);
-
-gboolean cc_wacom_page_update_tools (CcWacomPage   *page,
-				     CcWacomDevice *stylus,
-				     CcWacomDevice *pad);
+			       CcWacomDevice *stylus);
 
 void cc_wacom_page_set_navigation (CcWacomPage *page,
 				   GtkNotebook *notebook,
