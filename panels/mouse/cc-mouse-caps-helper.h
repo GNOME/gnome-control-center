@@ -26,7 +26,8 @@ G_BEGIN_DECLS
 
 gboolean cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
                                          gboolean *have_edge_scrolling,
-                                         gboolean *have_tap_to_click);
+                                         gboolean *have_tap_to_click,
+                                         gboolean *have_three_finger_drag);
 
 gboolean cc_synaptics_check (void);
 

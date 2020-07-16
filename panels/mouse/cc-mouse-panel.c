@@ -60,6 +60,8 @@ struct _CcMousePanel
   GtkSwitch         *touchpad_toggle_switch;
   GtkListBoxRow     *two_finger_scrolling_row;
   GtkSwitch         *two_finger_scrolling_switch;
+  GtkListBoxRow     *three_finger_drag_row;
+  GtkSwitch         *three_finger_drag_switch;
 
   GSettings         *mouse_settings;
   GSettings         *gsd_mouse_settings;
@@ -85,19 +87,24 @@ setup_touchpad_options (CcMousePanel *self)
   gboolean have_two_finger_scrolling;
   gboolean have_edge_scrolling;
   gboolean have_tap_to_click;
+  gboolean have_three_finger_drag;
 
   if (self->have_synaptics || !self->have_touchpad) {
     gtk_widget_hide (GTK_WIDGET (self->touchpad_frame));
     return;
   }
 
-  cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
+  cc_touchpad_check_capabilities (&have_two_finger_scrolling,
+                                  &have_edge_scrolling,
+                                  &have_tap_to_click,
+                                  &have_three_finger_drag);
 
   gtk_widget_show (GTK_WIDGET (self->touchpad_frame));
 
   gtk_widget_set_visible (GTK_WIDGET (self->two_finger_scrolling_row), have_two_finger_scrolling);
   gtk_widget_set_visible (GTK_WIDGET (self->edge_scrolling_row), have_edge_scrolling);
   gtk_widget_set_visible (GTK_WIDGET (self->tap_to_click_row), have_tap_to_click);
+  gtk_widget_set_visible (GTK_WIDGET (self->three_finger_drag_row), have_three_finger_drag);
 
   edge_scroll_enabled = g_settings_get_boolean (self->touchpad_settings, "edge-scrolling-enabled");
   two_finger_scroll_enabled = g_settings_get_boolean (self->touchpad_settings, "two-finger-scrolling-enabled");
@@ -280,6 +287,12 @@ setup_dialog (CcMousePanel *self)
                                 touchpad_enabled_get_mapping,
                                 touchpad_enabled_set_mapping,
                                 NULL, NULL);
+  g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
+                                self->three_finger_drag_row, "sensitive",
+                                G_SETTINGS_BIND_GET,
+                                touchpad_enabled_get_mapping,
+                                touchpad_enabled_set_mapping,
+                                NULL, NULL);
 
   g_settings_bind (self->touchpad_settings, "natural-scroll",
                          self->touchpad_natural_scrolling_switch, "active",
@@ -300,6 +313,10 @@ setup_dialog (CcMousePanel *self)
   g_settings_bind (self->touchpad_settings, "edge-scrolling-enabled",
                    self->edge_scrolling_switch, "state",
                    G_SETTINGS_BIND_GET);
+
+  g_settings_bind (self->touchpad_settings, "three-finger-drag",
+                   self->three_finger_drag_switch, "state",
+                   G_SETTINGS_BIND_DEFAULT);
 
   setup_touchpad_options (self);
 }
@@ -444,6 +461,8 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_scrolling_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_scrolling_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, three_finger_drag_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, three_finger_drag_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, edge_scrolling_changed_event);
   gtk_widget_class_bind_template_callback (widget_class, on_content_size_changed);

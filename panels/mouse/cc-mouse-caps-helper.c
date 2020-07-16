@@ -27,7 +27,8 @@
 static gboolean
 touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
                                  gboolean *have_edge_scrolling,
-                                 gboolean *have_tap_to_click)
+                                 gboolean *have_tap_to_click,
+                                 gboolean *have_three_finger_drag)
 {
         GdkDisplay *gdisplay;
         Display *display;
@@ -48,6 +49,7 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 	*have_two_finger_scrolling = FALSE;
 	*have_edge_scrolling = FALSE;
 	*have_tap_to_click = FALSE;
+	*have_three_finger_drag = FALSE;
 
         gdk_x11_display_error_trap_push (gdisplay);
 
@@ -91,16 +93,19 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 gboolean
 cc_touchpad_check_capabilities (gboolean *have_two_finger_scrolling,
                                 gboolean *have_edge_scrolling,
-                                gboolean *have_tap_to_click)
+                                gboolean *have_tap_to_click,
+                                gboolean *have_three_finger_drag)
 {
 	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
 		return touchpad_check_capabilities_x11 (have_two_finger_scrolling,
                                                         have_edge_scrolling,
-                                                        have_tap_to_click);
+                                                        have_tap_to_click,
+                                                        have_three_finger_drag);
 	/* else we unconditionally show all touchpad knobs */
         *have_two_finger_scrolling = TRUE;
         *have_edge_scrolling = TRUE;
         *have_tap_to_click = TRUE;
+        *have_three_finger_drag = TRUE;
 	return FALSE;
 }
 
