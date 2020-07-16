@@ -175,28 +175,6 @@ validate_row (GtkWidget *row)
         return valid;
 }
 
-static gint
-sort_first_last (gconstpointer a, gconstpointer b, gpointer data)
-{
-        gboolean afirst, bfirst, alast, blast;
-
-        afirst = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (a), "first"));
-        bfirst = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (b), "first"));
-        alast = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (a), "last"));
-        blast = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (b), "last"));
-
-        if (afirst)
-                return -1;
-        if (bfirst)
-                return 1;
-        if (alast)
-                return 1;
-        if (blast)
-                return -1;
-
-        return 0;
-}
-
 static void
 add_address_row (CEPageIP6   *self,
                  const gchar *address,
@@ -287,7 +265,6 @@ add_address_box (CEPageIP6 *self)
         self->address_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
-        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (self->address_box), list);
 
         for (i = 0; i < nm_setting_ip_config_get_num_addresses (self->setting); i++) {
@@ -444,7 +421,6 @@ add_routes_box (CEPageIP6 *self)
         self->routes_list = list = gtk_list_box_new ();
         gtk_list_box_set_selection_mode (GTK_LIST_BOX (list), GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
-        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)sort_first_last, NULL, NULL);
         gtk_container_add (GTK_CONTAINER (self->routes_box), list);
         gtk_switch_set_active (self->auto_routes_switch, !nm_setting_ip_config_get_ignore_auto_routes (self->setting));
         g_signal_connect_object (self->auto_routes_switch, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
