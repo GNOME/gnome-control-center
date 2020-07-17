@@ -402,7 +402,7 @@ add_route_row (CEPageIP4   *self,
         g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "gateway", widget);
-        gtk_entry_set_text (GTK_ENTRY (widget), gateway ? gateway : "");
+        gtk_entry_set_text (GTK_ENTRY (widget), gateway ? gateway : "0.0.0.0");
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_container_add (GTK_CONTAINER (row_box), widget);
