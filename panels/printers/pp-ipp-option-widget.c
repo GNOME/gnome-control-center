@@ -168,14 +168,13 @@ static GtkWidget *
 combo_box_new (void)
 {
   GtkCellRenderer *cell;
-  GtkListStore    *store;
+  g_autoptr(GtkListStore) store = NULL;
   GtkWidget       *combo_box;
 
   combo_box = gtk_combo_box_new ();
 
   store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
   gtk_combo_box_set_model (GTK_COMBO_BOX (combo_box), GTK_TREE_MODEL (store));
-  g_object_unref (store);
 
   cell = gtk_cell_renderer_text_new ();
   gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), cell, TRUE);
@@ -262,7 +261,7 @@ static void
 printer_add_option_async_cb (gboolean success,
                              gpointer user_data)
 {
-  PpIPPOptionWidget *self = user_data;
+  PpIPPOptionWidget *self = PP_IPP_OPTION_WIDGET (user_data);
 
   update_widget (user_data);
   g_clear_object (&self->cancellable);
@@ -280,11 +279,8 @@ switch_changed_cb (PpIPPOptionWidget *self)
   else
     values[0] = g_strdup ("False");
 
-  if (self->cancellable)
-    {
-      g_cancellable_cancel (self->cancellable);
-      g_object_unref (self->cancellable);
-    }
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   self->cancellable = g_cancellable_new ();
   printer_add_option_async (self->printer_name,
@@ -306,11 +302,8 @@ combo_changed_cb (PpIPPOptionWidget *self)
   values = g_new0 (gchar *, 2);
   values[0] = combo_box_get (self->combo);
 
-  if (self->cancellable)
-    {
-      g_cancellable_cancel (self->cancellable);
-      g_object_unref (self->cancellable);
-    }
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   self->cancellable = g_cancellable_new ();
   printer_add_option_async (self->printer_name,
@@ -332,11 +325,8 @@ spin_button_changed_cb (PpIPPOptionWidget *self)
   values = g_new0 (gchar *, 2);
   values[0] = g_strdup_printf ("%d", gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (self->spin_button)));
 
-  if (self->cancellable)
-    {
-      g_cancellable_cancel (self->cancellable);
-      g_object_unref (self->cancellable);
-    }
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
 
   self->cancellable = g_cancellable_new ();
   printer_add_option_async (self->printer_name,
@@ -540,7 +530,7 @@ static void
 get_ipp_attributes_cb (GHashTable *table,
                        gpointer    user_data)
 {
-  PpIPPOptionWidget *self = user_data;
+  PpIPPOptionWidget *self = PP_IPP_OPTION_WIDGET (user_data);
 
   if (self->ipp_attribute)
     g_hash_table_unref (self->ipp_attribute);

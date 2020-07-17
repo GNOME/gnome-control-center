@@ -157,7 +157,6 @@ printer_rename_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output != NULL)
     {
@@ -204,7 +203,7 @@ get_bus_cb (GObject      *source_object,
 {
   GDBusConnection  *bus;
   g_autoptr(GError) error = NULL;
-  GTask            *task = user_data;
+  g_autoptr(GTask)  task = user_data;
 
   bus = g_bus_get_finish (res, &error);
   if (bus != NULL)
@@ -262,7 +261,6 @@ pp_printer_rename_finish (PpPrinter     *self,
                           GError       **error)
 {
   g_return_val_if_fail (g_task_is_valid (res, self), FALSE);
-  g_object_unref (res);
 
   return g_task_propagate_boolean (G_TASK (res), error);
 }
@@ -387,7 +385,7 @@ pp_printer_get_jobs_async (PpPrinter           *self,
                            gpointer             user_data)
 {
   GetJobsData *get_jobs_data;
-  GTask       *task;
+  g_autoptr(GTask) task = NULL;
 
   get_jobs_data = g_new (GetJobsData, 1);
   get_jobs_data->myjobs = myjobs;
@@ -397,7 +395,6 @@ pp_printer_get_jobs_async (PpPrinter           *self,
   g_task_set_task_data (task, get_jobs_data, g_free);
   g_task_set_return_on_cancel (task, TRUE);
   g_task_run_in_thread (task, get_jobs_thread);
-  g_object_unref (task);
 }
 
 GPtrArray *
@@ -423,7 +420,6 @@ pp_printer_delete_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           &error);
-  g_object_unref (source_object);
 
   if (output != NULL)
     {
@@ -605,7 +601,7 @@ pp_printer_print_file_async (PpPrinter           *self,
                              gpointer             user_data)
 {
   PrintFileData *print_file_data;
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   print_file_data = g_new (PrintFileData, 1);
   print_file_data->filename = g_strdup (filename);
@@ -617,7 +613,6 @@ pp_printer_print_file_async (PpPrinter           *self,
   g_task_set_task_data (task, print_file_data, (GDestroyNotify) print_file_data_free);
 
   g_task_run_in_thread (task, print_file_thread);
-  g_object_unref (task);
 }
 
 gboolean

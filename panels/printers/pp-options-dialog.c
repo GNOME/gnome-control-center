@@ -681,7 +681,7 @@ static void
 printer_get_ppd_cb (const gchar *ppd_filename,
                     gpointer     user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = PP_OPTIONS_DIALOG (user_data);
 
   if (self->ppd_filename)
     {
@@ -703,7 +703,7 @@ static void
 get_named_dest_cb (cups_dest_t *dest,
                    gpointer     user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = PP_OPTIONS_DIALOG (user_data);
 
   if (self->destination)
     cupsFreeDests (1, self->destination);
@@ -722,7 +722,7 @@ static void
 get_ipp_attributes_cb (GHashTable *table,
                        gpointer    user_data)
 {
-  PpOptionsDialog *self = (PpOptionsDialog *) user_data;
+  PpOptionsDialog *self = PP_OPTIONS_DIALOG (user_data);
 
   if (self->ipp_attributes)
     g_hash_table_unref (self->ipp_attributes);
@@ -789,11 +789,7 @@ pp_maintenance_command_execute_cb (GObject      *source_object,
                                    GAsyncResult *res,
                                    gpointer      user_data)
 {
-  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
-
-  pp_maintenance_command_execute_finish (command, res, NULL);
-
-  g_object_unref (command);
+  pp_maintenance_command_execute_finish (PP_MAINTENANCE_COMMAND(source_object), res, NULL);
 }
 
 static gchar *
@@ -824,8 +820,6 @@ print_test_page_cb (GObject      *source_object,
 {
   pp_printer_print_file_finish (PP_PRINTER (source_object),
                                 result, NULL);
-
-  g_object_unref (source_object);
 }
 
 static void
@@ -854,7 +848,7 @@ test_page_cb (PpOptionsDialog *self)
 
       if (filename != NULL)
         {
-          PpPrinter *printer;
+          g_autoptr(PpPrinter) printer = NULL;
 
           printer = pp_printer_new (self->printer_name);
           pp_printer_print_file_async (printer,
@@ -867,7 +861,7 @@ test_page_cb (PpOptionsDialog *self)
         }
       else
         {
-          PpMaintenanceCommand *command;
+          g_autoptr(PpMaintenanceCommand) command = NULL;
 
           command = pp_maintenance_command_new (self->printer_name,
                                                 "PrintSelfTestPage",

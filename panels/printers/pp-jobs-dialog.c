@@ -300,7 +300,7 @@ update_jobs_list_cb (GObject      *source_object,
                      GAsyncResult *result,
                      gpointer      user_data)
 {
-  PpJobsDialog        *self = user_data;
+  PpJobsDialog        *self = PP_JOBS_DIALOG (user_data);
   PpPrinter           *printer = PP_PRINTER (source_object);
   g_autoptr(GError)    error = NULL;
   g_autoptr(GPtrArray) jobs;
@@ -389,7 +389,7 @@ update_jobs_list_cb (GObject      *source_object,
 static void
 update_jobs_list (PpJobsDialog *self)
 {
-  PpPrinter *printer;
+  g_autoptr(PpPrinter) printer = NULL;
 
   if (self->printer_name != NULL)
     {
@@ -429,7 +429,7 @@ pp_job_authenticate_cb (GObject      *source_object,
                         GAsyncResult *res,
                         gpointer      user_data)
 {
-  PpJobsDialog     *self = user_data;
+  PpJobsDialog     *self = PP_JOBS_DIALOG (user_data);
   gboolean          result;
   g_autoptr(GError) error = NULL;
   PpJob            *job = PP_JOB (source_object);

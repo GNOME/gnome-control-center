@@ -402,7 +402,7 @@ on_printer_rename_cb (GObject      *source_object,
                       GAsyncResult *result,
                       gpointer      user_data)
 {
-  PpPrinterEntry *self = user_data;
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
   g_autofree gchar *printer_name = NULL;
 
   if (!pp_printer_rename_finish (PP_PRINTER (source_object), result, NULL))
@@ -440,7 +440,7 @@ on_show_printer_details_dialog (GtkButton      *button,
   new_name = pp_details_dialog_get_printer_name (dialog);
   if (g_strcmp0 (self->printer_name, new_name) != 0)
     {
-      PpPrinter *printer = pp_printer_new (self->printer_name);
+      g_autoptr(PpPrinter) printer = pp_printer_new (self->printer_name);
 
       pp_printer_rename_async (printer,
                                new_name,
@@ -484,25 +484,21 @@ check_clean_heads_maintenance_command_cb (GObject      *source_object,
                                           GAsyncResult *res,
                                           gpointer      user_data)
 {
-  PpPrinterEntry       *self = user_data;
-  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
+  PpPrinterEntry       *self = PP_PRINTER_ENTRY (user_data);
   gboolean              is_supported = FALSE;
   g_autoptr(GError)     error = NULL;
 
-  is_supported = pp_maintenance_command_is_supported_finish (command, res, &error);
+  is_supported = pp_maintenance_command_is_supported_finish (PP_MAINTENANCE_COMMAND (source_object), res, &error);
   if (error != NULL)
     {
       g_debug ("Could not check 'Clean' maintenance command: %s", error->message);
-      goto out;
+      return;
     }
 
   if (is_supported)
     {
       gtk_widget_show (GTK_WIDGET (self->clean_heads_menuitem));
     }
-
- out:
-  g_object_unref (source_object);
 }
 
 static void
@@ -525,15 +521,11 @@ clean_heads_maintenance_command_cb (GObject      *source_object,
                                     GAsyncResult *res,
                                     gpointer      user_data)
 {
-  PpPrinterEntry       *self = user_data;
-  PpMaintenanceCommand *command = (PpMaintenanceCommand *) source_object;
-  g_autoptr(GError)     error = NULL;
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
+  g_autoptr(GError) error = NULL;
 
-  if (!pp_maintenance_command_execute_finish (command, res, &error))
-    {
-      g_warning ("Error cleaning print heads for %s: %s", self->printer_name, error->message);
-    }
-  g_object_unref (source_object);
+  if (!pp_maintenance_command_execute_finish (PP_MAINTENANCE_COMMAND (source_object), res, &error))
+    g_warning ("Error cleaning print heads for %s: %s", self->printer_name, error->message);
 }
 
 static void
@@ -562,15 +554,12 @@ get_jobs_cb (GObject      *source_object,
              GAsyncResult *result,
              gpointer      user_data)
 {
-  PpPrinterEntry      *self = user_data;
-  PpPrinter           *printer = PP_PRINTER (source_object);
+  PpPrinterEntry      *self = PP_PRINTER_ENTRY (user_data);
   g_autoptr(GError)    error = NULL;
   g_autoptr(GPtrArray) jobs = NULL;
   g_autofree gchar    *button_label = NULL;
 
-  jobs = pp_printer_get_jobs_finish (printer, result, &error);
-
-  g_object_unref (source_object);
+  jobs = pp_printer_get_jobs_finish (PP_PRINTER (source_object), result, &error);
 
   if (error != NULL)
     {
@@ -607,7 +596,7 @@ get_jobs_cb (GObject      *source_object,
 void
 pp_printer_entry_update_jobs_count (PpPrinterEntry *self)
 {
-  PpPrinter *printer;
+  g_autoptr(PpPrinter) printer = NULL;
 
   g_cancellable_cancel (self->get_jobs_cancellable);
   g_clear_object (&self->get_jobs_cancellable);
@@ -628,7 +617,7 @@ jobs_dialog_response_cb (GtkDialog  *dialog,
                          gint        response_id,
                          gpointer    user_data)
 {
-  PpPrinterEntry *self = (PpPrinterEntry*) user_data;
+  PpPrinterEntry *self = PP_PRINTER_ENTRY (user_data);
 
   if (self->pp_jobs_dialog != NULL)
     {

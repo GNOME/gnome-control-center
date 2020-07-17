@@ -77,14 +77,13 @@ pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           NULL);
-  g_object_unref (source_object);
 }
 
 void
 pp_job_cancel_purge_async (PpJob        *self,
                            gboolean      job_purge)
 {
-  GDBusConnection *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GError) error = NULL;
   gint            *job_id;
 
@@ -123,14 +122,13 @@ pp_job_set_hold_until_async_dbus_cb (GObject      *source_object,
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
                                           NULL);
-  g_object_unref (source_object);
 }
 
 void
 pp_job_set_hold_until_async (PpJob        *self,
                              const gchar  *job_hold_until)
 {
-  GDBusConnection  *bus;
+  g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GError) error = NULL;
   gint             *job_id;
 
@@ -387,13 +385,11 @@ pp_job_get_attributes_async (PpJob                *self,
                              GAsyncReadyCallback   callback,
                              gpointer              user_data)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_task_data (task, g_strdupv (attributes_names), (GDestroyNotify) g_strfreev);
   g_task_run_in_thread (task, _pp_job_get_attributes_thread);
-
-  g_object_unref (task);
 }
 
 GVariant *
@@ -412,7 +408,7 @@ _pp_job_authenticate_thread (GTask        *task,
                              gpointer      task_data,
                              GCancellable *cancellable)
 {
-  PpJob         *self = source_object;
+  PpJob         *self = PP_JOB (source_object);
   gboolean       result = FALSE;
   gchar        **auth_info = task_data;
   ipp_t         *request;
@@ -450,13 +446,11 @@ pp_job_authenticate_async (PpJob                *self,
                            GAsyncReadyCallback   callback,
                            gpointer              user_data)
 {
-  GTask *task;
+  g_autoptr(GTask) task = NULL;
 
   task = g_task_new (self, cancellable, callback, user_data);
   g_task_set_task_data (task, g_strdupv (auth_info), (GDestroyNotify) g_strfreev);
   g_task_run_in_thread (task, _pp_job_authenticate_thread);
-
-  g_object_unref (task);
 }
 
 gboolean

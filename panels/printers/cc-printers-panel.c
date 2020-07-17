@@ -70,6 +70,8 @@ struct _CcPrintersPanel
 
   GtkBuilder *builder;
 
+  PpCups *cups;
+
   cups_dest_t *dests;
   int num_dests;
 
@@ -255,11 +257,10 @@ printer_removed_cb (GObject      *source_object,
 
   g_object_get (printer, "printer-name", &printer_name, NULL);
   pp_printer_delete_finish (printer, result, &error);
-  g_object_unref (source_object);
 
   if (user_data != NULL)
     {
-      GObject *reference = G_OBJECT (user_data);
+      g_autoptr(GObject) reference = G_OBJECT (user_data);
 
       if (g_object_get_data (reference, "self") != NULL)
         {
@@ -276,8 +277,6 @@ printer_removed_cb (GObject      *source_object,
                 }
             }
         }
-
-      g_object_unref (reference);
     }
 
   if (error != NULL)
@@ -293,13 +292,14 @@ cc_printers_panel_dispose (GObject *object)
 
   if (self->deleted_printer_name != NULL)
     {
-      PpPrinter *printer = pp_printer_new (self->deleted_printer_name);
+      g_autoptr(PpPrinter) printer = pp_printer_new (self->deleted_printer_name);
       pp_printer_delete_async (printer,
                                NULL,
                                printer_removed_cb,
                                NULL);
     }
 
+  g_clear_object (&self->cups);
   g_clear_object (&self->pp_new_printer_dialog);
   g_clear_pointer (&self->new_printer_name, g_free);
   g_clear_pointer (&self->renamed_printer_name, g_free);
@@ -350,14 +350,13 @@ on_get_job_attributes_cb (GObject      *source_object,
                           GAsyncResult *res,
                           gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   const gchar            *job_originating_user_name;
   const gchar            *job_printer_uri;
   g_autoptr(GVariant)     attributes = NULL;
   g_autoptr(GError)       error = NULL;
 
   attributes = pp_job_get_attributes_finish (PP_JOB (source_object), res, &error);
-  g_object_unref (source_object);
 
   if (attributes != NULL)
     {
@@ -399,13 +398,12 @@ on_cups_notification (GDBusConnection *connection,
                       GVariant        *parameters,
                       gpointer         user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   gboolean                printer_is_accepting_jobs;
   gchar                  *printer_name = NULL;
   gchar                  *text = NULL;
   gchar                  *printer_uri = NULL;
   gchar                  *printer_state_reasons = NULL;
-  PpJob                  *job;
   gchar                  *job_state_reasons = NULL;
   gchar                  *job_name = NULL;
   guint                   job_id;
@@ -461,6 +459,8 @@ on_cups_notification (GDBusConnection *connection,
   else if (g_strcmp0 (signal_name, "JobCreated") == 0 ||
            g_strcmp0 (signal_name, "JobCompleted") == 0)
     {
+      g_autoptr(PpJob) job = NULL;
+
       job = g_object_new (PP_TYPE_JOB, "id", job_id, NULL);
       pp_job_get_attributes_async (job,
                                    requested_attrs,
@@ -484,12 +484,10 @@ renew_subscription_cb (GObject      *source_object,
            GAsyncResult *result,
            gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  PpCups                 *cups = PP_CUPS (source_object);
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   gint                    subscription_id;
 
-  subscription_id = pp_cups_renew_subscription_finish (cups, result);
-  g_object_unref (source_object);
+  subscription_id = pp_cups_renew_subscription_finish (PP_CUPS (source_object), result);
 
   if (subscription_id > 0)
       self->subscription_id = subscription_id;
@@ -499,10 +497,8 @@ static gboolean
 renew_subscription (gpointer data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) data;
-  PpCups                 *cups;
 
-  cups = pp_cups_new ();
-  pp_cups_renew_subscription_async (cups,
+  pp_cups_renew_subscription_async (self->cups,
                                     self->subscription_id,
                                     subscription_events,
                                     SUBSCRIPTION_DURATION,
@@ -518,13 +514,11 @@ attach_to_cups_notifier_cb (GObject      *source_object,
                             GAsyncResult *result,
                             gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
-  PpCups                 *cups = PP_CUPS (source_object);
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   g_autoptr(GError)       error = NULL;
   gint                    subscription_id;
 
-  subscription_id = pp_cups_renew_subscription_finish (cups, result);
-  g_object_unref (source_object);
+  subscription_id = pp_cups_renew_subscription_finish (PP_CUPS (source_object), result);
 
   if (subscription_id > 0)
     {
@@ -566,11 +560,9 @@ attach_to_cups_notifier_cb (GObject      *source_object,
 static void
 attach_to_cups_notifier (gpointer data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) data;
-  PpCups                 *cups;
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (data);
 
-  cups = pp_cups_new ();
-  pp_cups_renew_subscription_async (cups,
+  pp_cups_renew_subscription_async (self->cups,
                                     self->subscription_id,
                                     subscription_events,
                                     SUBSCRIPTION_DURATION,
@@ -584,17 +576,13 @@ subscription_cancel_cb (GObject      *source_object,
                         GAsyncResult *result,
                         gpointer      user_data)
 {
-  PpCups *cups = PP_CUPS (source_object);
-
-  pp_cups_cancel_subscription_finish (cups, result);
-  g_object_unref (source_object);
+  pp_cups_cancel_subscription_finish (PP_CUPS (source_object), result);
 }
 
 static void
 detach_from_cups_notifier (gpointer data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) data;
-  PpCups                 *cups;
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (data);
 
   if (self->dbus_subscription_id != 0) {
     g_dbus_connection_signal_unsubscribe (self->cups_bus_connection,
@@ -602,8 +590,7 @@ detach_from_cups_notifier (gpointer data)
     self->dbus_subscription_id = 0;
   }
 
-  cups = pp_cups_new ();
-  pp_cups_cancel_subscription_async (cups,
+  pp_cups_cancel_subscription_async (self->cups,
                                      self->subscription_id,
                                      subscription_cancel_cb,
                                      NULL);
@@ -615,10 +602,7 @@ detach_from_cups_notifier (gpointer data)
     self->subscription_renewal_id = 0;
   }
 
-  if (self->cups_proxy != NULL) {
-    g_object_unref (self->cups_proxy);
-    self->cups_proxy = NULL;
-  }
+  g_clear_object (&self->cups_proxy);
 }
 
 static void
@@ -654,7 +638,7 @@ on_notification_dismissed (CcPrintersPanel *self)
 
   if (self->deleted_printer_name != NULL)
     {
-      PpPrinter *printer;
+      g_autoptr(PpPrinter) printer = NULL;
 
       printer = pp_printer_new (self->deleted_printer_name);
       /* The reference tells to the callback whether
@@ -782,13 +766,11 @@ set_current_page (GObject      *source_object,
                   GAsyncResult *result,
                   gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel *) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   GtkWidget              *widget;
-  PpCups                 *cups = PP_CUPS (source_object);
   gboolean               success;
 
-  success = pp_cups_connection_test_finish (cups, result, NULL);
-  g_object_unref (source_object);
+  success = pp_cups_connection_test_finish (PP_CUPS (source_object), result, NULL);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "main-vbox");
   if (success)
@@ -803,7 +785,7 @@ static void
 destroy_nonexisting_entries (PpPrinterEntry *entry,
                              gpointer        user_data)
 {
-  CcPrintersPanel  *self = (CcPrintersPanel *) user_data;
+  CcPrintersPanel  *self = CC_PRINTERS_PANEL (user_data);
   g_autofree gchar *printer_name = NULL;
   gboolean          exists = FALSE;
   gint              i;
@@ -831,16 +813,15 @@ actualize_printers_list_cb (GObject      *source_object,
                             GAsyncResult *result,
                             gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   GtkWidget              *widget;
-  PpCups                 *cups = PP_CUPS (source_object);
   PpCupsDests            *cups_dests;
   gboolean                new_printer_available = FALSE;
   g_autoptr(GError)       error = NULL;
   gpointer                item;
   int                     i;
 
-  cups_dests = pp_cups_get_dests_finish (cups, result, &error);
+  cups_dests = pp_cups_get_dests_finish (PP_CUPS (source_object), result, &error);
 
   if (cups_dests == NULL && error != NULL)
     {
@@ -849,7 +830,6 @@ actualize_printers_list_cb (GObject      *source_object,
           g_warning ("Could not get dests: %s", error->message);
         }
 
-      g_object_unref (cups);
       return;
     }
 
@@ -860,7 +840,7 @@ actualize_printers_list_cb (GObject      *source_object,
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "main-vbox");
   if (self->num_dests == 0 && !self->new_printer_name)
-    pp_cups_connection_test_async (g_object_ref (cups), NULL, set_current_page, self);
+    pp_cups_connection_test_async (PP_CUPS (source_object), NULL, set_current_page, self);
   else
     gtk_stack_set_visible_child_name (GTK_STACK (widget), "printers-list");
 
@@ -900,8 +880,6 @@ actualize_printers_list_cb (GObject      *source_object,
 
   update_sensitivity (user_data);
 
-  g_object_unref (cups);
-
   if (self->new_printer_name != NULL)
     {
       GtkScrolledWindow      *scrolled_window;
@@ -930,10 +908,7 @@ actualize_printers_list_cb (GObject      *source_object,
 static void
 actualize_printers_list (CcPrintersPanel *self)
 {
-  PpCups                 *cups;
-
-  cups = pp_cups_new ();
-  pp_cups_get_dests_async (cups,
+  pp_cups_get_dests_async (self->cups,
                            cc_panel_get_cancellable (CC_PANEL (self)),
                            actualize_printers_list_cb,
                            self);
@@ -1004,7 +979,7 @@ printer_add_cb (CcPrintersPanel *self)
 static void
 update_sensitivity (gpointer user_data)
 {
-  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel         *self = CC_PRINTERS_PANEL (user_data);
   const char              *cups_server = NULL;
   GtkWidget               *widget;
   gboolean                 local_server = TRUE;
@@ -1069,11 +1044,10 @@ cups_status_check_cb (GObject      *source_object,
                       GAsyncResult *result,
                       gpointer      user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   gboolean                success;
-  PpCups                 *cups = PP_CUPS (source_object);
 
-  success = pp_cups_connection_test_finish (cups, result, NULL);
+  success = pp_cups_connection_test_finish (PP_CUPS (source_object), result, NULL);
   if (success)
     {
       actualize_printers_list (self);
@@ -1082,18 +1056,14 @@ cups_status_check_cb (GObject      *source_object,
       g_source_remove (self->cups_status_check_id);
       self->cups_status_check_id = 0;
     }
-
-  g_object_unref (cups);
 }
 
 static gboolean
 cups_status_check (gpointer user_data)
 {
-  CcPrintersPanel         *self = (CcPrintersPanel*) user_data;
-  PpCups                  *cups;
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (user_data);
 
-  cups = pp_cups_new ();
-  pp_cups_connection_test_async (cups, NULL, cups_status_check_cb, self);
+  pp_cups_connection_test_async (self->cups, NULL, cups_status_check_cb, self);
 
   return self->cups_status_check_id != 0;
 }
@@ -1105,11 +1075,9 @@ connection_test_cb (GObject      *source_object,
 {
   CcPrintersPanel        *self;
   gboolean                success;
-  PpCups                 *cups = PP_CUPS (source_object);
   g_autoptr(GError)       error = NULL;
 
-  success = pp_cups_connection_test_finish (cups, result, &error);
-  g_object_unref (cups);
+  success = pp_cups_connection_test_finish (PP_CUPS (source_object), result, &error);
 
   if (error != NULL)
     {
@@ -1134,7 +1102,7 @@ static void
 get_all_ppds_async_cb (PPDList  *ppds,
                        gpointer  user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel *self = CC_PRINTERS_PANEL (user_data);
 
   self->all_ppds_list = ppds;
 
@@ -1151,7 +1119,7 @@ static gboolean
 filter_function (GtkListBoxRow *row,
                  gpointer       user_data)
 {
-  CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  CcPrintersPanel        *self = CC_PRINTERS_PANEL (user_data);
   GtkWidget              *search_entry;
   gboolean                retval;
   g_autofree gchar       *search = NULL;
@@ -1243,7 +1211,6 @@ cc_printers_panel_init (CcPrintersPanel *self)
 {
   GtkWidget              *top_widget;
   GtkWidget              *widget;
-  PpCups                 *cups;
   g_autoptr(GError)       error = NULL;
   gchar                  *objects[] = { "overlay", "permission-infobar", "top-right-buttons", "printer-add-button", "search-button", NULL };
   guint                   builder_result;
@@ -1253,6 +1220,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
   /* initialize main data structure */
   self->builder = gtk_builder_new ();
   self->reference = g_object_new (G_TYPE_OBJECT, NULL);
+
+  self->cups = pp_cups_new ();
 
   self->printer_entries = g_hash_table_new_full (g_str_hash,
                                                  g_str_equal,
@@ -1354,8 +1323,7 @@ Please check your installation");
                       get_all_ppds_async_cb,
                       self);
 
-  cups = pp_cups_new ();
-  pp_cups_connection_test_async (cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
+  pp_cups_connection_test_async (self->cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
   gtk_container_add (GTK_CONTAINER (self), top_widget);
   gtk_widget_show_all (GTK_WIDGET (self));
 }
