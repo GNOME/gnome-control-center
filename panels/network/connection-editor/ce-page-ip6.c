@@ -456,7 +456,7 @@ add_routes_box (CEPageIP6 *self)
 
                 route = nm_setting_ip_config_get_route (self->setting, i);
                 prefix = g_strdup_printf ("%u", nm_ip_route_get_prefix (route));
-                metric = g_strdup_printf ("%u", (guint32) MIN (0, nm_ip_route_get_metric (route)));
+                metric = g_strdup_printf ("%" G_GINT64_FORMAT, nm_ip_route_get_metric (route));
                 add_route_row (self, nm_ip_route_get_dest (route),
                                prefix,
                                nm_ip_route_get_next_hop (route),
@@ -686,7 +686,8 @@ ui_to_setting (CEPageIP6 *self)
                 const gchar *text_prefix;
                 const gchar *text_gateway;
                 const gchar *text_metric;
-                guint32 prefix, metric;
+                guint32 prefix;
+                gint64 metric;
                 gchar *end;
                 NMIPRoute *route;
 
@@ -730,10 +731,10 @@ ui_to_setting (CEPageIP6 *self)
                         widget_unset_error (g_object_get_data (G_OBJECT (row), "gateway"));
                 }
 
-                metric = 0;
+                metric = -1;
                 if (*text_metric) {
                         errno = 0;
-                        metric = strtoul (text_metric, NULL, 10);
+                        metric = g_ascii_strtoull (text_metric, NULL, 10);
                         if (errno) {
                                 widget_set_error (g_object_get_data (G_OBJECT (row), "metric"));
                                 ret = FALSE;
