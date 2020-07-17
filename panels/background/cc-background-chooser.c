@@ -91,6 +91,7 @@ create_widget_func (gpointer model_item,
 {
   g_autoptr(GdkPixbuf) pixbuf = NULL;
   CcBackgroundItem *item;
+  cairo_surface_t *cr;
   GtkWidget *overlay;
   GtkWidget *child;
   GtkWidget *image;
@@ -106,7 +107,10 @@ create_widget_func (gpointer model_item,
                                              bg_source_get_thumbnail_width (source),
                                              bg_source_get_thumbnail_height (source),
                                              bg_source_get_scale_factor (source));
-  image = gtk_image_new_from_pixbuf (pixbuf);
+
+  cr = gdk_cairo_surface_create_from_pixbuf (pixbuf, bg_source_get_scale_factor (source), NULL);
+  image = gtk_image_new_from_surface (cr);
+  cairo_surface_destroy (cr);
   gtk_widget_show (image);
 
   icon = g_object_new (GTK_TYPE_IMAGE,
