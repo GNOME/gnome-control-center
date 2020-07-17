@@ -22,7 +22,6 @@
 
 #include <glib/gi18n.h>
 
-#include "cc-alt-chars-key-dialog.h"
 #include "cc-keyboard-shortcut-row.h"
 #include "cc-keyboard-item.h"
 #include "cc-keyboard-manager.h"
@@ -30,6 +29,7 @@
 #include "cc-keyboard-panel.h"
 #include "cc-keyboard-resources.h"
 #include "cc-keyboard-shortcut-editor.h"
+#include "cc-xkb-modifier-dialog.h"
 
 #include "keyboard-shortcuts.h"
 
@@ -61,7 +61,7 @@ struct _CcKeyboardPanel
   GtkSizeGroup       *accelerator_sizegroup;
 
   /* Alternate characters key */
-  CcAltCharsKeyDialog *alt_chars_key_dialog;
+  CcXkbModifierDialog *xkb_modifier_dialog;
   GSettings           *input_source_settings;
   GtkWidget           *value_alternate_chars;
 
@@ -85,19 +85,20 @@ static const gchar* custom_css =
 "    padding: 0;"
 "}";
 
-
-#define DEFAULT_LV3_OPTION 5
-static struct {
-  const char *xkb_option;
-  const char *label;
-  const char *widget_name;
-} lv3_xkb_options[] = {
-  { "lv3:switch", NC_("keyboard key", "Right Ctrl"), "radiobutton_rightctrl" },
-  { "lv3:menu_switch", NC_("keyboard key", "Menu Key"), "radiobutton_menukey" },
-  { "lv3:lwin_switch", NC_("keyboard key", "Left Super"), "radiobutton_leftsuper" },
-  { "lv3:rwin_switch", NC_("keyboard key", "Right Super"), "radiobutton_rightsuper" },
-  { "lv3:lalt_switch", NC_("keyboard key", "Left Alt"), "radiobutton_leftalt" },
-  { "lv3:ralt_switch", NC_("keyboard key", "Right Alt"), "radiobutton_rightalt" },
+static const XkbModifier LV3_MODIFIER = {
+  "lv3:",
+  N_("Alternate Characters Key"),
+  N_("The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your keyboard."),
+  (XkbOption[]){
+    { NC_("keyboard key", "Left Alt"),    "lv3:lalt_switch" },
+    { NC_("keyboard key", "Right Alt"),   "lv3:ralt_switch" },
+    { NC_("keyboard key", "Left Super"),  "lv3:lwin_switch" },
+    { NC_("keyboard key", "Right Super"), "lv3:rwin_switch" },
+    { NC_("keyboard key", "Menu key"),    "lv3:menu_switch" },
+    { NC_("keyboard key", "Right Ctrl"),  "lv3:switch" },
+    { NULL,                               NULL }
+  },
+  "lv3:ralt_switch",
 };
 
 /* RowData functions */
@@ -514,44 +515,8 @@ alternate_chars_activated (GtkWidget       *button,
 
   window = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
 
-  gtk_window_set_transient_for (GTK_WINDOW (self->alt_chars_key_dialog), window);
-  gtk_widget_show (GTK_WIDGET (self->alt_chars_key_dialog));
-}
-
-static gboolean
-transform_binding_to_alt_chars (GValue   *value,
-                                GVariant *variant,
-                                gpointer  user_data)
-{
-  const char **items;
-  guint i;
-
-  items = g_variant_get_strv (variant, NULL);
-  if (!items)
-    goto bail;
-
-  for (i = 0; items[i] != NULL; i++)
-    {
-      guint j;
-
-      if (!g_str_has_prefix (items[i], "lv3:"))
-        continue;
-
-      for (j = 0; j < G_N_ELEMENTS (lv3_xkb_options); j++)
-        {
-          if (!g_str_equal (items[i], lv3_xkb_options[j].xkb_option))
-            continue;
-
-          g_value_set_string (value,
-                              g_dpgettext2 (NULL, "keyboard key", lv3_xkb_options[j].label));
-          return TRUE;
-        }
-    }
-
-bail:
-  g_value_set_string (value,
-                      g_dpgettext2 (NULL, "keyboard key", lv3_xkb_options[DEFAULT_LV3_OPTION].label));
-  return TRUE;
+  gtk_window_set_transient_for (GTK_WINDOW (self->xkb_modifier_dialog), window);
+  gtk_widget_show (GTK_WIDGET (self->xkb_modifier_dialog));
 }
 
 static void
@@ -678,12 +643,12 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                 self->value_alternate_chars,
                                 "label",
                                 G_SETTINGS_BIND_GET,
-                                transform_binding_to_alt_chars,
+                                xcb_modifier_transform_binding_to_label,
                                 NULL,
-                                self->value_alternate_chars,
+                                (gpointer)&LV3_MODIFIER,
                                 NULL);
 
-  self->alt_chars_key_dialog = cc_alt_chars_key_dialog_new (self->input_source_settings);
+  self->xkb_modifier_dialog = cc_xkb_modifier_dialog_new (self->input_source_settings, &LV3_MODIFIER);
 
   /* Shortcut manager */
   self->manager = cc_keyboard_manager_new ();

@@ -56,7 +56,7 @@ foreach file: xml_files
 endforeach
 
 sources = files(
-  'cc-alt-chars-key-dialog.c',
+  'cc-xkb-modifier-dialog.c',
   'cc-keyboard-shortcut-row.c',
   'cc-keyboard-panel.c',
   'cc-keyboard-item.c',

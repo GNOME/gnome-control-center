@@ -1,4 +1,4 @@
-/* cc-alt-chars-key-dialog.h
+/* cc-xkb-modifier-dialog.h
  *
  * Copyright 2019 Bastien Nocera <hadess@hadess.net>
  *
@@ -24,9 +24,26 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_ALT_CHARS_KEY_DIALOG (cc_alt_chars_key_dialog_get_type())
-G_DECLARE_FINAL_TYPE (CcAltCharsKeyDialog, cc_alt_chars_key_dialog, CC, ALT_CHARS_KEY_DIALOG, GtkDialog)
+typedef struct
+{
+  gchar *label;
+  gchar *xkb_option;
+} XkbOption;
 
-CcAltCharsKeyDialog *cc_alt_chars_key_dialog_new (GSettings *input_settings);
+typedef struct
+{
+  gchar *prefix;
+  gchar *title;
+  gchar *description;
+  XkbOption *options;
+  gchar *default_option;
+} XkbModifier;
+
+#define CC_TYPE_XKB_MODIFIER_DIALOG (cc_xkb_modifier_dialog_get_type())
+G_DECLARE_FINAL_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, CC, XKB_MODIFIER_DIALOG, GtkDialog)
+
+CcXkbModifierDialog *cc_xkb_modifier_dialog_new (GSettings *input_settings, const XkbModifier*);
+
+gboolean xcb_modifier_transform_binding_to_label (GValue*, GVariant*, gpointer);
 
 G_END_DECLS
