@@ -277,13 +277,19 @@ cc_display_logical_monitor_class_init (CcDisplayLogicalMonitorClass *klass)
   gobject_class->finalize = cc_display_logical_monitor_finalize;
 }
 
-
 typedef enum _CcDisplayMonitorUnderscanning
 {
   UNDERSCANNING_UNSUPPORTED = 0,
   UNDERSCANNING_DISABLED,
   UNDERSCANNING_ENABLED
 } CcDisplayMonitorUnderscanning;
+
+typedef enum _CcDisplayMonitorVariableRefreshRate
+{
+  VRR_UNSUPPORTED = 0,
+  VRR_DISABLED,
+  VRR_ENABLED
+} CcDisplayMonitorVariableRefreshRate;
 
 struct _CcDisplayMonitorDBus
 {
@@ -300,6 +306,7 @@ struct _CcDisplayMonitorDBus
   int height_mm;
   gboolean builtin;
   CcDisplayMonitorUnderscanning underscanning;
+  CcDisplayMonitorVariableRefreshRate vrr_mode;
   int max_width;
   int max_height;
 
@@ -600,6 +607,37 @@ cc_display_monitor_dbus_set_underscanning (CcDisplayMonitor *pself,
     self->underscanning = UNDERSCANNING_DISABLED;
 }
 
+static gboolean
+cc_display_monitor_dbus_supports_variable_refresh_rate (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->vrr_mode != VRR_UNSUPPORTED;
+}
+
+static gboolean
+cc_display_monitor_dbus_get_variable_refresh_rate (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->vrr_mode == VRR_ENABLED;
+}
+
+static void
+cc_display_monitor_dbus_set_variable_refresh_rate (CcDisplayMonitor *pself,
+                                                   gboolean enabled)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  if (self->vrr_mode == VRR_UNSUPPORTED)
+    return;
+
+  if (enabled)
+    self->vrr_mode = VRR_ENABLED;
+  else
+    self->vrr_mode = VRR_DISABLED;
+}
+
 static CcDisplayMode *
 cc_display_monitor_dbus_get_closest_mode (CcDisplayMonitorDBus *self,
                                           CcDisplayModeDBus *mode)
@@ -712,6 +750,7 @@ static void
 cc_display_monitor_dbus_init (CcDisplayMonitorDBus *self)
 {
   self->underscanning = UNDERSCANNING_UNSUPPORTED;
+  self->vrr_mode = VRR_UNSUPPORTED;
   self->max_width = G_MAXINT;
   self->max_height = G_MAXINT;
 }
@@ -766,6 +805,9 @@ cc_display_monitor_dbus_class_init (CcDisplayMonitorDBusClass *klass)
   parent_class->supports_underscanning = cc_display_monitor_dbus_supports_underscanning;
   parent_class->get_underscanning = cc_display_monitor_dbus_get_underscanning;
   parent_class->set_underscanning = cc_display_monitor_dbus_set_underscanning;
+  parent_class->supports_variable_refresh_rate = cc_display_monitor_dbus_supports_variable_refresh_rate;
+  parent_class->get_variable_refresh_rate = cc_display_monitor_dbus_get_variable_refresh_rate;
+  parent_class->set_variable_refresh_rate = cc_display_monitor_dbus_set_variable_refresh_rate;
   parent_class->set_mode = cc_display_monitor_dbus_set_mode;
   parent_class->set_position = cc_display_monitor_dbus_set_position;
   parent_class->get_scale = cc_display_monitor_dbus_get_scale;
@@ -839,6 +881,15 @@ cc_display_monitor_dbus_new (GVariant *variant,
             self->underscanning = UNDERSCANNING_ENABLED;
           else
             self->underscanning = UNDERSCANNING_DISABLED;
+        }
+      else if (g_str_equal (s, "vrr-enabled"))
+        {
+          gboolean vrr_enabled = FALSE;
+          g_variant_get (v, "b", &vrr_enabled);
+          if (vrr_enabled)
+            self->vrr_mode = VRR_ENABLED;
+          else
+            self->vrr_mode = VRR_DISABLED;
         }
       else if (g_str_equal (s, "max-screen-size"))
         {
@@ -936,6 +987,10 @@ build_monitors_variant (GHashTable *monitors)
       g_variant_builder_add (&props_builder, "{sv}",
                              "underscanning",
                              g_variant_new_boolean (monitor->underscanning == UNDERSCANNING_ENABLED));
+
+      g_variant_builder_add (&props_builder, "{sv}",
+                             "enable_vrr",
+                             g_variant_new_boolean (monitor->vrr_mode == VRR_ENABLED));
 
       mode_dbus = CC_DISPLAY_MODE_DBUS (monitor->current_mode);
       g_variant_builder_add (&builder, "(ss@*)",
@@ -1073,6 +1128,9 @@ cc_display_config_dbus_equal (CcDisplayConfig *pself,
         return FALSE;
 
       if (m1->underscanning != m2->underscanning)
+        return FALSE;
+
+      if (m1->vrr_mode != m2->vrr_mode)
         return FALSE;
 
       if (!cc_display_logical_monitor_equal (m1->logical_monitor, m2->logical_monitor))

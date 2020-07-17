@@ -52,6 +52,23 @@
       </object>
     </child>
     <child>
+      <object class="HdyActionRow" id="variable_refresh_rate_row">
+        <property name="width_request">100</property>
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="title" translatable="yes">Variable Refresh Rate</property>
+        <child type="action">
+          <object class="GtkSwitch" id="variable_refresh_rate_switch">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">end</property>
+            <property name="valign">center</property>
+            <signal name="notify::active" handler="on_variable_refresh_rate_switch_active_changed_cb" swapped="no"/>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
       <object class="HdyActionRow" id="scale_row">
         <property name="width_request">100</property>
         <property name="visible">True</property>
