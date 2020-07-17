@@ -101,6 +101,7 @@ struct _CcDateTimePanel
   GtkWidget *h_spinbutton;
   GtkWidget *listbox1;
   GtkWidget *listbox2;
+  GtkWidget *listbox3;
   GtkLockButton *lock_button;
   GtkWidget *month_combobox;
   GtkListStore *month_liststore;
@@ -936,6 +937,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, format_combobox);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox1);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox2);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox3);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_liststore);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, network_time_switch);
@@ -1039,6 +1041,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   setup_listbox (self, self->listbox1);
   setup_listbox (self, self->listbox2);
+  setup_listbox (self, self->listbox3);
 
   /* set up network time switch */
   bind_switch_to_row (self,
