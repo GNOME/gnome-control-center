@@ -62,6 +62,7 @@ struct _CcInfoOverviewPanel
   CcListRow       *disk_row;
   CcListRow       *gnome_version_row;
   CcListRow       *graphics_row;
+  CcListRow       *hardware_name_row;
   GtkListBox      *hardware_box;
   GtkDialog       *hostname_editor;
   CcHostnameEntry *hostname_entry;
@@ -417,6 +418,21 @@ get_graphics_hardware_string (void)
   return g_strdup (renderer);
 }
 
+static gchar *
+get_hardware_name_string (void)
+{
+  gchar *product_family = NULL;
+  g_autoptr(GError) error = NULL;
+
+  if (!g_file_get_contents ("/sys/devices/virtual/dmi/id/product_family", &product_family, NULL, &error))
+    {
+      if (!g_error_matches (error, G_FILE_ERROR, G_FILE_ERROR_NOENT))
+        return NULL;
+    }
+
+  return g_strchomp (product_family);
+}
+
 static char *
 get_os_name (void)
 {
@@ -692,6 +708,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   g_autofree char *os_type_text = NULL;
   g_autofree char *os_name_text = NULL;
   g_autofree gchar *graphics_hardware_string = NULL;
+  g_autofree gchar *hardware_name_string = NULL;
 
   if (load_gnome_version (&gnome_version, NULL, NULL))
     cc_list_row_set_secondary_label (self->gnome_version_row, gnome_version);
@@ -717,6 +734,9 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   graphics_hardware_string = get_graphics_hardware_string ();
   cc_list_row_set_secondary_markup (self->graphics_row, graphics_hardware_string);
+
+  hardware_name_string = get_hardware_name_string ();
+  cc_list_row_set_secondary_markup (self->hardware_name_row, hardware_name_string);
 }
 
 static gboolean
@@ -820,6 +840,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_box);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_name_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_editor);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_row);
