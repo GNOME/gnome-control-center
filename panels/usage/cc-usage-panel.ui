@@ -8,10 +8,8 @@
         <property name="visible">true</property>
         <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="HdyColumn">
+          <object class="HdyClamp">
             <property name="visible">True</property>
-            <property name="maximum_width">600</property>
-            <property name="linear_growth_width">400</property>
             <property name="margin_top">32</property>
             <property name="margin_bottom">32</property>
             <property name="margin_start">12</property>
@@ -58,7 +56,7 @@
                         <property name="title" translatable="yes">File H_istory</property>
                         <property name="activatable-widget">recently_used_switch</property>
                         <property name="use-underline">true</property>
-                        <child type="action">
+                        <child>
                           <object class="GtkSwitch" id="recently_used_switch">
                             <property name="visible">true</property>
                             <property name="halign">end</property>
@@ -161,7 +159,7 @@
                         <property name="title" translatable="yes">Automatically Delete _Trash Content</property>
                         <property name="activatable-widget">purge_trash_switch</property>
                         <property name="use-underline">true</property>
-                        <child type="action">
+                        <child>
                           <object class="GtkSwitch" id="purge_trash_switch">
                             <property name="visible">true</property>
                             <property name="halign">end</property>
@@ -176,7 +174,7 @@
                         <property name="title" translatable="yes">Automatically Delete Temporary _Files</property>
                         <property name="activatable-widget">purge_temp_switch</property>
                         <property name="use-underline">true</property>
-                        <child type="action">
+                        <child>
                           <object class="GtkSwitch" id="purge_temp_switch">
                             <property name="visible">true</property>
                             <property name="halign">end</property>

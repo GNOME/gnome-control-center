@@ -8,10 +8,8 @@
         <property name="visible">1</property>
         <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="HdyColumn">
+          <object class="HdyClamp">
             <property name="visible">True</property>
-            <property name="maximum_width">600</property>
-            <property name="linear_growth_width">400</property>
             <property name="margin_top">32</property>
             <property name="margin_bottom">32</property>
             <property name="margin_start">12</property>
@@ -48,7 +46,7 @@
                         <property name="activatable-widget">blank_screen_combo</property>
                         <property name="sensitive" bind-source="blank_screen_combo" bind-property="sensitive"/>
                         <property name="use-underline">true</property>
-                        <child type="action">
+                        <child>
                           <object class="GtkComboBoxText" id="blank_screen_combo">
                             <property name="visible">1</property>
                             <property name="valign">center</property>
@@ -67,7 +65,7 @@
                         <property name="title" translatable="yes">Automatic Screen _Lock</property>
                         <property name="activatable-widget">automatic_screen_lock_switch</property>
                         <property name="use-underline">true</property>
-                        <child type="action">
+                        <child>
                           <object class="GtkSwitch" id="automatic_screen_lock_switch">
                             <property name="visible">1</property>
                             <property name="halign">end</property>
@@ -86,7 +84,7 @@
                         <property name="activatable-widget">lock_after_combo</property>
                         <property name="sensitive" bind-source="lock_after_combo" bind-property="sensitive"/>
                         <property name="use-underline">true</property>
-                        <child type="action">
+                        <child>
                           <object class="GtkComboBoxText" id="lock_after_combo">
                             <property name="visible">1</property>
                             <property name="valign">center</property>
@@ -105,7 +103,7 @@
                         <property name="title" translatable="yes">Show _Notifications on Lock Screen</property>
                         <property name="activatable-widget">show_notifications_switch</property>
                         <property name="use-underline">true</property>
-                        <child type="action">
+                        <child>
                           <object class="GtkSwitch" id="show_notifications_switch">
                             <property name="visible">1</property>
                             <property name="halign">end</property>
@@ -123,7 +121,7 @@
                         <property name="subtitle" translatable="yes">Prevent new USB devices from interacting with the system when the screen is locked.</property>
                         <property name="activatable-widget">usb_protection_switch</property>
                         <property name="use-underline">true</property>
-                        <child type="action">
+                        <child>
                           <object class="GtkSwitch" id="usb_protection_switch">
                             <property name="visible">true</property>
                             <property name="halign">end</property>

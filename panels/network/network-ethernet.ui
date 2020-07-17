@@ -82,7 +82,16 @@
                     <property name="can_focus">False</property>
                     <property name="selectable">False</property>
                     <property name="title">Cable unplugged</property>
-                    <child type="action">
+                    <child>
+                      <object class="GtkSwitch" id="device_off_switch">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="halign">end</property>
+                        <property name="valign">center</property>
+                        <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceEthernet" swapped="yes"/>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkButton" id="details_button">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -103,15 +112,6 @@
                           </object>
                        </child>
                      </object>
-                    </child>
-                    <child type="action">
-                      <object class="GtkSwitch" id="device_off_switch">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceEthernet" swapped="yes"/>
-                      </object>
                     </child>
                   </object>
                 </child>

@@ -11,10 +11,8 @@
         <property name="min-content-height">480</property>
         <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="HdyColumn">
+          <object class="HdyClamp">
             <property name="visible">True</property>
-            <property name="maximum_width">600</property>
-            <property name="linear_growth_width">400</property>
             <property name="margin_top">32</property>
             <property name="margin_bottom">32</property>
             <property name="margin_start">12</property>
@@ -184,7 +182,7 @@
     </child>
   </template>
 
-  <object class="HdyDialog" id="hostname_editor">
+  <object class="GtkDialog" id="hostname_editor">
     <property name="visible">False</property>
     <property name="modal">True</property>
     <property name="use-header-bar">1</property>
