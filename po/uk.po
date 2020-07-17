@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2020-07-07 18:53+0000\n"
-"PO-Revision-Date: 2020-07-07 22:03+0300\n"
+"POT-Creation-Date: 2020-07-17 03:41+0000\n"
+"PO-Revision-Date: 2020-07-17 06:57+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -363,7 +363,7 @@ msgstr "Виберіть зображення"
 #: panels/printers/pp-details-dialog.c:251
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
 #: panels/search/cc-search-locations-dialog.c:638
-#: panels/sharing/cc-sharing-panel.c:398 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:396 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
@@ -378,7 +378,7 @@ msgstr "_Скасувати"
 #: panels/background/cc-background-chooser.c:350
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:252
-#: panels/sharing/cc-sharing-panel.c:399
+#: panels/sharing/cc-sharing-panel.c:397
 #: panels/user-accounts/cc-avatar-chooser.c:236
 msgid "_Open"
 msgstr "_Відкрити"
@@ -1217,12 +1217,12 @@ msgid "Select _All"
 msgstr "Позна_чити все"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:152
+#: panels/network/connection-editor/ce-page-details.c:158
 msgid "Today"
 msgstr "Сьогодні"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:154
+#: panels/network/connection-editor/ce-page-details.c:160
 msgid "Yesterday"
 msgstr "Учора"
 
@@ -1322,17 +1322,17 @@ msgid "Year"
 msgstr "Рік"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:257
+#: panels/datetime/cc-datetime-panel.c:258
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:262
+#: panels/datetime/cc-datetime-panel.c:263
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:431
+#: panels/datetime/cc-datetime-panel.c:432
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1340,7 +1340,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:458
+#: panels/datetime/cc-datetime-panel.c:459
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1348,23 +1348,23 @@ msgstr "%s (%s)"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:465
+#: panels/datetime/cc-datetime-panel.c:466
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:470
+#: panels/datetime/cc-datetime-panel.c:471
 msgid "%l:%M %p"
 msgstr "%l:%M %p"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:475
+#: panels/datetime/cc-datetime-panel.c:476
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:480
+#: panels/datetime/cc-datetime-panel.c:481
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
@@ -1440,31 +1440,31 @@ msgid "Requires internet access"
 msgstr "Потребує зв'язок з інтернетом"
 
 #: panels/datetime/cc-datetime-panel.ui:217
+msgid "Date & _Time"
+msgstr "Дата й _час"
+
+#: panels/datetime/cc-datetime-panel.ui:255
 msgid "Automatic Time _Zone"
 msgstr "Автоматичні часові _пояси"
 
-#: panels/datetime/cc-datetime-panel.ui:218
+#: panels/datetime/cc-datetime-panel.ui:256
 msgid "Requires location services enabled and internet access"
 msgstr ""
 "Вимагає увімкнених служб даних місця перебування і доступу до інтернету"
 
-#: panels/datetime/cc-datetime-panel.ui:233
-msgid "Date & _Time"
-msgstr "Дата й _час"
-
-#: panels/datetime/cc-datetime-panel.ui:249
+#: panels/datetime/cc-datetime-panel.ui:271
 msgid "Time Z_one"
 msgstr "_Часовий пояс"
 
-#: panels/datetime/cc-datetime-panel.ui:288
+#: panels/datetime/cc-datetime-panel.ui:310
 msgid "Time _Format"
 msgstr "_Формат часу"
 
-#: panels/datetime/cc-datetime-panel.ui:297
+#: panels/datetime/cc-datetime-panel.ui:319
 msgid "24-hour"
 msgstr "24-ох годинний"
 
-#: panels/datetime/cc-datetime-panel.ui:298
+#: panels/datetime/cc-datetime-panel.ui:320
 msgid "AM / PM"
 msgstr "До / після полудня "
 
@@ -2675,29 +2675,29 @@ msgid "Not set up"
 msgstr "Не налаштовано"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:198
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:258
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Insecure network (WEP)"
 msgstr "Незахищена мережа (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:263
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA)"
 msgstr "Захищена мережа (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA2)"
 msgstr "Захищена мережа (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network (WPA3)"
 msgstr "Захищена мережа (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network"
 msgstr "Захищена мережа"
 
@@ -2807,7 +2807,7 @@ msgid "802.1x _Security"
 msgstr "_Безпека 802.1x"
 
 #: panels/network/connection-editor/ce-page-8021x-security.c:112
-#: panels/network/connection-editor/ce-page-security.c:404
+#: panels/network/connection-editor/ce-page-security.c:423
 #: panels/network/connection-editor/details-page.ui:90
 msgid "Security"
 msgstr "Безпека"
@@ -2860,27 +2860,33 @@ msgstr "WPA"
 msgid "WPA3"
 msgstr "WPA3"
 
+#. TRANSLATORS: this Enhanced Open WiFi security
+#: panels/network/connection-editor/ce-page-details.c:108
+#: panels/network/connection-editor/ce-page-security.c:278
+msgid "Enhanced Open"
+msgstr "Enhanced Open"
+
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:109
+#: panels/network/connection-editor/ce-page-details.c:115
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:115
+#: panels/network/connection-editor/ce-page-details.c:121
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: panels/network/connection-editor/ce-page-details.c:120
+#: panels/network/connection-editor/ce-page-details.c:126
 #: panels/network/net-device-wifi.c:225
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Немає"
 
-#: panels/network/connection-editor/ce-page-details.c:141
+#: panels/network/connection-editor/ce-page-details.c:147
 msgid "Never"
 msgstr "Ніколи"
 
-#: panels/network/connection-editor/ce-page-details.c:156
+#: panels/network/connection-editor/ce-page-details.c:162
 #: panels/network/net-device-ethernet.c:108
 #, c-format
 msgid "%i day ago"
@@ -2889,63 +2895,63 @@ msgstr[0] "%i день тому"
 msgstr[1] "%i дні тому"
 msgstr[2] "%i днів тому"
 
-#: panels/network/connection-editor/ce-page-details.c:281
+#: panels/network/connection-editor/ce-page-details.c:287
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Мб/с (%1.1f ГГц)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:283
+#: panels/network/connection-editor/ce-page-details.c:289
 #: panels/network/net-device-ethernet.c:202
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
-#: panels/network/connection-editor/ce-page-details.c:300
+#: panels/network/connection-editor/ce-page-details.c:306
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 ГГц / 5 ГГц"
 
-#: panels/network/connection-editor/ce-page-details.c:302
+#: panels/network/connection-editor/ce-page-details.c:308
 msgid "2.4 GHz"
 msgstr "2.4 ГГц"
 
-#: panels/network/connection-editor/ce-page-details.c:304
+#: panels/network/connection-editor/ce-page-details.c:310
 msgid "5 GHz"
 msgstr "5 ГГц"
 
-#: panels/network/connection-editor/ce-page-details.c:324
+#: panels/network/connection-editor/ce-page-details.c:330
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Немає"
 
-#: panels/network/connection-editor/ce-page-details.c:326
+#: panels/network/connection-editor/ce-page-details.c:332
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Слабке"
 
-#: panels/network/connection-editor/ce-page-details.c:328
+#: panels/network/connection-editor/ce-page-details.c:334
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Добре"
 
-#: panels/network/connection-editor/ce-page-details.c:330
+#: panels/network/connection-editor/ce-page-details.c:336
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Непогане"
 
-#: panels/network/connection-editor/ce-page-details.c:332
+#: panels/network/connection-editor/ce-page-details.c:338
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Відмінне"
 
-#: panels/network/connection-editor/ce-page-details.c:390
+#: panels/network/connection-editor/ce-page-details.c:396
 #: panels/network/connection-editor/details-page.ui:108
 #: panels/network/net-device-ethernet.c:143
 #: panels/network/net-device-mobile.c:430
 msgid "IPv4 Address"
 msgstr "Адреса IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:391
+#: panels/network/connection-editor/ce-page-details.c:397
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-ethernet.c:148
@@ -2953,27 +2959,27 @@ msgstr "Адреса IPv4"
 msgid "IPv6 Address"
 msgstr "Адреса IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:394
-#: panels/network/connection-editor/ce-page-details.c:395
+#: panels/network/connection-editor/ce-page-details.c:400
+#: panels/network/connection-editor/ce-page-details.c:401
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:434
 #: panels/network/net-device-mobile.c:435 panels/network/network-mobile.ui:183
 msgid "IP Address"
 msgstr "Адреса IP"
 
-#: panels/network/connection-editor/ce-page-details.c:428
+#: panels/network/connection-editor/ce-page-details.c:434
 msgid "Forget Connection"
 msgstr "Забути з'єднання"
 
-#: panels/network/connection-editor/ce-page-details.c:430
+#: panels/network/connection-editor/ce-page-details.c:436
 msgid "Remove Connection Profile"
 msgstr "Вилучити профіль з'єднання"
 
-#: panels/network/connection-editor/ce-page-details.c:432
+#: panels/network/connection-editor/ce-page-details.c:438
 msgid "Remove VPN"
 msgstr "Вилучити VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:450
+#: panels/network/connection-editor/ce-page-details.c:456
 msgid "Details"
 msgstr "Подробиці"
 
@@ -3001,42 +3007,42 @@ msgstr "Вилучити маршрут"
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:782
+#: panels/network/connection-editor/ce-page-ip6.c:783
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:260
+#: panels/network/connection-editor/ce-page-security.c:267
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Немає"
 
-#: panels/network/connection-editor/ce-page-security.c:283
+#: panels/network/connection-editor/ce-page-security.c:302
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "40/128 бітний ключ WEP (шістнадцяткова або ASCII)"
 
-#: panels/network/connection-editor/ce-page-security.c:293
+#: panels/network/connection-editor/ce-page-security.c:312
 msgid "WEP 128-bit Passphrase"
 msgstr "128-ох бітний пароль для WEP"
 
-#: panels/network/connection-editor/ce-page-security.c:306
+#: panels/network/connection-editor/ce-page-security.c:325
 #: panels/network/wireless-security/ws-dynamic-wep.ui:20
 #: panels/network/wireless-security/ws-wpa-eap.ui:25
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:319
+#: panels/network/connection-editor/ce-page-security.c:338
 msgid "Dynamic WEP (802.1x)"
 msgstr "Динамічний WEP (802.1x)"
 
-#: panels/network/connection-editor/ce-page-security.c:333
+#: panels/network/connection-editor/ce-page-security.c:352
 msgid "WPA & WPA2 Personal"
 msgstr "Особистий WPA і WPA2"
 
-#: panels/network/connection-editor/ce-page-security.c:347
+#: panels/network/connection-editor/ce-page-security.c:366
 msgid "WPA & WPA2 Enterprise"
 msgstr "Комерційний WPA & WPA2"
 
-#: panels/network/connection-editor/ce-page-security.c:361
+#: panels/network/connection-editor/ce-page-security.c:380
 msgid "WPA3 Personal"
 msgstr "Особистий WPA3"
 
@@ -4595,7 +4601,6 @@ msgid "Suspend & Power Button"
 msgstr "Кнопка призупинення і вимикання"
 
 #: panels/power/cc-power-panel.c:2401
-#| msgid "Po_wer Button Action"
 msgid "Po_wer Button Behavior"
 msgstr "Поведінка _кнопки живлення"
 
@@ -5757,32 +5762,32 @@ msgstr "Немає жодної вибраної мережі для оприл�
 msgid "Networks"
 msgstr "Мережі"
 
-#: panels/sharing/cc-sharing-panel.c:291
+#: panels/sharing/cc-sharing-panel.c:289
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Увімкнено"
 
-#: panels/sharing/cc-sharing-panel.c:293 panels/sharing/cc-sharing-panel.c:320
+#: panels/sharing/cc-sharing-panel.c:291 panels/sharing/cc-sharing-panel.c:318
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Вимкнено"
 
-#: panels/sharing/cc-sharing-panel.c:323
+#: panels/sharing/cc-sharing-panel.c:321
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Увімкнено"
 
-#: panels/sharing/cc-sharing-panel.c:326
+#: panels/sharing/cc-sharing-panel.c:324
 msgctxt "service is active"
 msgid "Active"
 msgstr "Активний"
 
-#: panels/sharing/cc-sharing-panel.c:395
+#: panels/sharing/cc-sharing-panel.c:393
 msgid "Choose a Folder"
 msgstr "Вибрати теку"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:698
+#: panels/sharing/cc-sharing-panel.c:696
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5792,7 +5797,7 @@ msgstr ""
 "теку із іншими користувачами вашої поточної мережі за допомогою: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:704
+#: panels/sharing/cc-sharing-panel.c:702
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5804,7 +5809,7 @@ msgstr ""
 "%s"
 
 #. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:710
+#: panels/sharing/cc-sharing-panel.c:708
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
@@ -5813,11 +5818,11 @@ msgstr ""
 "Спільний доступ до екрана надає змогу віддаленим користувачам переглядати "
 "або керувати вашим екраном, під'єднавшись до %s"
 
-#: panels/sharing/cc-sharing-panel.c:815
+#: panels/sharing/cc-sharing-panel.c:813
 msgid "Copy"
 msgstr "Копіювати"
 
-#: panels/sharing/cc-sharing-panel.c:1276
+#: panels/sharing/cc-sharing-panel.c:1203
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "Оприлюднення"
