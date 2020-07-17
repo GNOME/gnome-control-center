@@ -500,8 +500,9 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
 
       /* Skip removable devices */
       if (drive == NULL ||
-          udisks_drive_get_removable (drive) ||
-          udisks_drive_get_ejectable (drive))
+          (udisks_drive_get_ejectable (drive) &&
+           udisks_drive_get_removable (drive) &&
+           udisks_drive_get_media_removable (drive)))
         {
           continue;
         }
