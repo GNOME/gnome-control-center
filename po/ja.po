@@ -32,7 +32,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2020-07-17 21:38+0000\n"
-"PO-Revision-Date: 2020-05-21 22:00+0900\n"
+"PO-Revision-Date: 2020-07-18 18:40+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -1208,37 +1208,31 @@ msgstr "一部の設定は変更する前にロックを解除しておく必要
 
 #: panels/common/cc-time-editor.ui:33
 msgid "Increment Hour"
-msgstr ""
+msgstr "一時間単位で時刻を進める"
 
 #: panels/common/cc-time-editor.ui:65
 msgid "Increment Minute"
-msgstr ""
+msgstr "一分単位で時刻を進める"
 
 #: panels/common/cc-time-editor.ui:80
-#, fuzzy
-#| msgid "Times"
 msgid "Time"
 msgstr "時刻"
 
 #: panels/common/cc-time-editor.ui:113
 msgid "Decrement Hour"
-msgstr ""
+msgstr "一時間単位で時刻を戻す"
 
 #: panels/common/cc-time-editor.ui:145
 msgid "Decrement Minute"
-msgstr ""
+msgstr "一分単位で時刻を戻す"
 
 #: panels/common/cc-time-entry.c:219
-#, fuzzy
-#| msgid "Copy"
 msgid "_Copy"
-msgstr "コピー"
+msgstr "コピー(_C)"
 
 #: panels/common/cc-time-entry.c:225
-#, fuzzy
-#| msgid "Select"
 msgid "Select _All"
-msgstr "選択"
+msgstr "すべて選択(_A)"
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:158
@@ -2400,13 +2394,13 @@ msgstr "ロック画面に通知を表示する(_N)"
 
 #: panels/lock/cc-lock-panel.ui:122
 msgid "Forbid new _USB devices"
-msgstr ""
+msgstr "新しい USB デバイスを認識しない(_U)"
 
 #: panels/lock/cc-lock-panel.ui:123
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
-msgstr ""
+msgstr "画面をロックしているときは、新しい USB デバイスとの通信を行いません。"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
 #: panels/lock/cc-lock-panel.ui:168
@@ -2881,7 +2875,7 @@ msgstr "WPA3"
 #: panels/network/connection-editor/ce-page-details.c:108
 #: panels/network/connection-editor/ce-page-security.c:278
 msgid "Enhanced Open"
-msgstr ""
+msgstr "Enhanced Open"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:115
@@ -4598,7 +4592,7 @@ msgstr "Bluetooth をオフにすると節電できます。"
 
 #: panels/power/cc-power-panel.c:2325
 msgid "Show Battery _Percentage"
-msgstr ""
+msgstr "バッテリー残量を表示する(_P)"
 
 #. Frame header
 #: panels/power/cc-power-panel.c:2351
@@ -4606,10 +4600,8 @@ msgid "Suspend & Power Button"
 msgstr "サスペンド, 電源ボタン"
 
 #: panels/power/cc-power-panel.c:2401
-#, fuzzy
-#| msgid "Po_wer Button Action"
 msgid "Po_wer Button Behavior"
-msgstr "電源ボタンの動作(_W)"
+msgstr "電源ボタンの挙動(_W)"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -7087,24 +7079,20 @@ msgid "Select a File…"
 msgstr "ファイルを選択…"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:8
-#, fuzzy
-#| msgid "_Fingerprint Login"
 msgid "Fingerprint Manager"
-msgstr "指紋認証ログイン(_F)"
+msgstr "指紋認証マネージャー"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:23
-#, fuzzy
-#| msgid "_Fingerprint Login"
 msgid "Fingerprint"
-msgstr "指紋認証ログイン(_F)"
+msgstr "指紋認証"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:118
 msgid "_No"
-msgstr ""
+msgstr "いいえ(_N)"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:128
 msgid "_Yes"
-msgstr ""
+msgstr "はい(_Y)"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:155
 msgid ""
@@ -7114,68 +7102,58 @@ msgstr "登録済みの指紋情報を削除して指紋認証を無効にしま
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
 #: panels/user-accounts/cc-fingerprint-dialog.ui:249
-#, fuzzy
-#| msgid "_Fingerprint Login"
 msgid "No Fingerprint device"
-msgstr "指紋認証ログイン(_F)"
+msgstr "指紋認証デバイスがありません"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:259
 msgid "Ensure the device is properly connected."
-msgstr ""
+msgstr "デバイスが正しく接続されていることを確認してください。"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:264
-#, fuzzy
-#| msgid "Gaming input device"
 msgid "No fingerprint device"
-msgstr "ゲーム用入力デバイス"
+msgstr "指紋認証デバイスがありません"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:280
 msgid "Choose the fingerprint device you want to configure"
-msgstr ""
+msgstr "設定する指紋認証デバイスを選択してください"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:309
-#, fuzzy
-#| msgid "_Fingerprint Login"
 msgid "Fingerprint Device"
-msgstr "指紋認証ログイン(_F)"
+msgstr "指紋認証デバイス"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:322
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
 msgstr ""
+"指紋認証ログインは指を使ってコンピューターにログインしたりロックを解除したり"
+"できるようにします"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:352
 msgid "_Delete Fingerprints"
 msgstr "指紋情報を削除(_D)"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:363
-#, fuzzy
-#| msgid "_Fingerprint Login"
 msgid "Fingerprint Login"
-msgstr "指紋認証ログイン(_F)"
+msgstr "指紋認証ログイン"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:412
-#, fuzzy
-#| msgid "_Fingerprint Login"
 msgid "Fingerprint Enroll"
-msgstr "指紋認証ログイン(_F)"
+msgstr "指紋の登録"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:436
 msgid "_Re-enroll this finger…"
-msgstr ""
+msgstr "この指を再登録(_R)…"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:470
-#, fuzzy, c-format
-#| msgid "Failed to upload file: %s"
+#, c-format
 msgid "Failed to list fingerprints: %s"
-msgstr "ファイルのアップロードに失敗しました: %s"
+msgstr "指紋情報の一覧を表示できませんでした: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:536
-#, fuzzy, c-format
-#| msgid "Failed to delete user"
+#, c-format
 msgid "Failed to delete saved fingerprints: %s"
-msgstr "ユーザーの削除に失敗しました"
+msgstr "保存された指紋情報の削除に失敗しました: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:565
 msgid "Left thumb"
@@ -7218,90 +7196,71 @@ msgid "Right little finger"
 msgstr "右の小指"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:585
-#, fuzzy
-#| msgid "Unknown time"
 msgid "Unknown Finger"
-msgstr "残り時間は不明"
+msgstr "不明な指です"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:719
-#, fuzzy
-#| msgid "Complete!"
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
-msgstr "完了しました!"
+msgstr "完了"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:729
-#, fuzzy
-#| msgid "PPP service disconnected"
 msgid "Fingerprint device disconnected"
-msgstr "PPP サービスの接続を切断しました"
+msgstr "指紋認証デバイスが切断されました"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:731
 msgid "Fingerprint device storage is full"
-msgstr ""
+msgstr "指紋認証デバイスの登録数が上限に達しています"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:733
-#, fuzzy
-#| msgid "Failed to add new printer."
 msgid "Failed to enroll new fingerprint"
-msgstr "新しいプリンターを追加できませんでした。"
+msgstr "新しい指紋の登録に失敗しました"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:764
-#, fuzzy, c-format
-#| msgid "Failed to upload file: %s"
+#, c-format
 msgid "Failed to start enrollment: %s"
-msgstr "ファイルのアップロードに失敗しました: %s"
+msgstr "登録を開始できませんでした: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:772
-#, fuzzy
-#| msgid "Failed to add new printer."
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
-msgstr "新しいプリンターを追加できませんでした。"
+msgstr "新しい指紋の登録に失敗しました"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:803
-#, fuzzy, c-format
-#| msgid "Failed to upload file: %s"
+#, c-format
 msgid "Failed to stop enrollment: %s"
-msgstr "ファイルのアップロードに失敗しました: %s"
+msgstr "登録を停止できませんでした: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:847
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
-msgstr ""
+msgstr "指紋リーダーに指を何度か押し付けて指紋を登録してください"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
 #: panels/user-accounts/cc-fingerprint-dialog.c:989
-#, fuzzy
-#| msgid "Enrolling fingerprints"
 msgid "Scan new fingerprint"
-msgstr "指紋の登録"
+msgstr "新しい指紋の採取"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1029
-#, fuzzy, c-format
-#| msgid "Failed to forget device: "
+#, c-format
 msgid "Failed to release fingerprint device %s: %s"
-msgstr "デバイスの削除に失敗しました: "
+msgstr ""
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1100
-#, fuzzy
-#| msgid "Pending Devices"
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
-msgstr "保留中のデバイス"
+msgstr "デバイスの読み取りに問題があります"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1133
-#, fuzzy, c-format
-#| msgid "Failed to forget device: "
+#, c-format
 msgid "Failed to claim fingerprint device %s: %s"
-msgstr "デバイスの削除に失敗しました: "
+msgstr ""
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1270
-#, fuzzy, c-format
-#| msgid "Failed to forget device: "
+#, c-format
 msgid "Failed to get fingerprint devices: %s"
-msgstr "デバイスの削除に失敗しました: "
+msgstr ""
 
 #: panels/user-accounts/cc-login-history-dialog.c:69
 msgid "This Week"
@@ -7588,7 +7547,7 @@ msgstr "管理者は他のユーザーの追加、削除、設定の変更がで
 
 #: panels/user-accounts/cc-user-panel.ui:320
 msgid "_Parental Controls"
-msgstr ""
+msgstr "ペアレンタルコントロール(_P)"
 
 #: panels/user-accounts/cc-user-panel.ui:410
 msgid "Authentication & Login"
