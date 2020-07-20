@@ -92,7 +92,7 @@ static const gchar *allowedd_xkb_compose_options[] = {
 
 /* This list must be kept in sync with what mutter is able to
  * handle. */
-static const gchar *allowdd_xkb_grp_options[] = {
+static const gchar *allowed_xkb_grp_options[] = {
   "grp:toggle",
   "grp:lalt_toggle",
   "grp:lwin_toggle",
@@ -249,7 +249,7 @@ cc_keyboard_option_constructed (GObject *object)
   else if (g_str_equal (self->group, XKB_OPTION_GROUP_COMP))
     self->allowed_xkb_options = allowedd_xkb_compose_options;
   else if (g_str_equal (self->group, XKB_OPTION_GROUP_GRP))
-    self->allowed_xkb_options = allowdd_xkb_grp_options;
+    self->allowed_xkb_options = allowed_xkb_grp_options;
   else
     g_assert_not_reached ();
 
