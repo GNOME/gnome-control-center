@@ -155,7 +155,7 @@ set_calibration (CcWacomDevice  *device,
 	current = g_settings_get_value (settings, "area");
 	g_variant_get_fixed_array (current, &nvalues, sizeof (gdouble));
 	if ((ncal != 4) || (nvalues != 4)) {
-		g_warning("Unable set set device calibration property. Got %"G_GSIZE_FORMAT" items to put in %"G_GSIZE_FORMAT" slots; expected %d items.\n", ncal, nvalues, 4);
+		g_warning("Unable to set device calibration property. Got %"G_GSIZE_FORMAT" items to put in %"G_GSIZE_FORMAT" slots; expected %d items.\n", ncal, nvalues, 4);
 		return;
 	}
 

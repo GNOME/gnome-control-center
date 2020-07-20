@@ -617,7 +617,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
       release_grab (self);
     }
 
-  /* Show the apropriate view */
+  /* Show the appropriate view */
   set_shortcut_editor_page (self, is_custom ? PAGE_CUSTOM : PAGE_EDIT);
 }
 

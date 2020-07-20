@@ -732,7 +732,7 @@ cc_panel_list_class_init (CcPanelListClass *klass)
   /**
    * CcPanelList:show-panel:
    *
-   * Emited when a panel is selected.
+   * Emitted when a panel is selected.
    */
   signals[SHOW_PANEL] = g_signal_new ("show-panel",
                                       CC_TYPE_PANEL_LIST,
@@ -1005,7 +1005,7 @@ cc_panel_list_set_active_panel (CcPanelList *self,
 
       current_row_data = g_hash_table_lookup (self->id_to_data, self->current_panel_id);
 
-      /* We cannot be showing a non-existant panel */
+      /* We cannot be showing a non-existent panel */
       g_assert (current_row_data != NULL);
 
       gtk_widget_set_visible (current_row_data->row, current_row_data->visibility == CC_PANEL_VISIBLE);

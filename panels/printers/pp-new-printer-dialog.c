@@ -648,7 +648,7 @@ add_device_to_list (PpNewPrinterDialog *self,
 {
   PpPrintDevice             *store_device;
   GList                     *original_names_list = NULL;
-  gint                       acquisistion_method;
+  gint                       acquisition_method;
 
   if (device)
     {
@@ -658,16 +658,16 @@ add_device_to_list (PpNewPrinterDialog *self,
           g_object_set (device, "host-name", host_name, NULL);
         }
 
-      acquisistion_method = pp_print_device_get_acquisition_method (device);
+      acquisition_method = pp_print_device_get_acquisition_method (device);
       if (pp_print_device_get_device_id (device) ||
           pp_print_device_get_device_ppd (device) ||
           (pp_print_device_get_host_name (device) &&
-           acquisistion_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER) ||
-           acquisistion_method == ACQUISITION_METHOD_SAMBA_HOST ||
-           acquisistion_method == ACQUISITION_METHOD_SAMBA ||
+           acquisition_method == ACQUISITION_METHOD_REMOTE_CUPS_SERVER) ||
+           acquisition_method == ACQUISITION_METHOD_SAMBA_HOST ||
+           acquisition_method == ACQUISITION_METHOD_SAMBA ||
           (pp_print_device_get_device_uri (device) &&
-           (acquisistion_method == ACQUISITION_METHOD_JETDIRECT ||
-            acquisistion_method == ACQUISITION_METHOD_LPD)))
+           (acquisition_method == ACQUISITION_METHOD_JETDIRECT ||
+            acquisition_method == ACQUISITION_METHOD_LPD)))
         {
           g_autofree gchar *canonicalized_name = NULL;
 

@@ -201,7 +201,7 @@ static struct Calib* main_common(int argc, char** argv)
             /* Display help ? */
             if (strcmp("-h", argv[i]) == 0 ||
                 strcmp("--help", argv[i]) == 0) {
-                fprintf(stderr, "xinput_calibratior, v%s\n\n", "0.0.0");
+                fprintf(stderr, "xinput_calibrator, v%s\n\n", "0.0.0");
                 usage(argv[0], thr_misclick);
                 exit(0);
             } else

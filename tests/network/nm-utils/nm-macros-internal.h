@@ -756,9 +756,9 @@ nm_g_object_ref (gpointer obj)
 static inline void
 nm_g_object_unref (gpointer obj)
 {
-	/* g_object_unref() doesn't accept NULL. Usully, we workaround that
-	 * by using g_clear_object(), but sometimes that is not convinient
-	 * (for example as as destroy function for a hash table that can contain
+	/* g_object_unref() doesn't accept NULL. Usually, we workaround that
+	 * by using g_clear_object(), but sometimes that is not convenient
+	 * (for example as destroy function for a hash table that can contain
 	 * NULL values). */
 	if (obj)
 		g_object_unref (obj);
@@ -1261,7 +1261,7 @@ nm_decode_version (guint version, guint *major, guint *minor, guint *micro)
 
 /**
  * The boolean type _Bool is C99 while we mostly stick to C89. However, _Bool is too
- * convinient to miss and is effectively available in gcc and clang. So, just use it.
+ * convenient to miss and is effectively available in gcc and clang. So, just use it.
  *
  * Usually, one would include "stdbool.h" to get the "bool" define which aliases
  * _Bool. We provide this define here, because we want to make use of it anywhere.

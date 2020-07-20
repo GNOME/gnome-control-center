@@ -1374,7 +1374,7 @@ done_button_clicked_cb (CcFingerprintDialog *self)
 {
   g_return_if_fail (self->enrolling_finger);
 
-  g_debug ("Completeing enroll operation");
+  g_debug ("Completing enroll operation");
   enroll_stop (self);
 }
 

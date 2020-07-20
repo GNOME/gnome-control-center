@@ -387,7 +387,7 @@ test_connection_multi_add_activate (NetworkPanelFixture  *fixture,
   GtkWidget *sw, *bt_header;
   g_autoptr(GError) error = NULL;
 
-  /* Add a single connection (just chainging up to other test). */
+  /* Add a single connection (just changing up to other test). */
   test_connection_add (fixture, user_data);
 
   /* Basically same as test_connection_add_activate but with different assertions. */

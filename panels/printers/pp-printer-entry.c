@@ -203,7 +203,7 @@ sanitize_printer_model (const gchar *printer_make_and_model)
   g_autofree gchar *tmp = NULL;
   gchar             backup;
   size_t            length = 0;
-  gchar            *forbiden[] = {
+  gchar            *forbidden[] = {
     "foomatic",
     ",",
     "hpijs",
@@ -215,9 +215,9 @@ sanitize_printer_model (const gchar *printer_make_and_model)
 
   tmp = g_ascii_strdown (printer_make_and_model, -1);
 
-  for (i = 0; i < g_strv_length (forbiden); i++)
+  for (i = 0; i < g_strv_length (forbidden); i++)
     {
-      tmp2 = g_strrstr (tmp, forbiden[i]);
+      tmp2 = g_strrstr (tmp, forbidden[i]);
       if (breakpoint == NULL ||
          (tmp2 != NULL && tmp2 < breakpoint))
            breakpoint = tmp2;

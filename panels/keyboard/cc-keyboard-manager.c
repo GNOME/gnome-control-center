@@ -632,7 +632,7 @@ cc_keyboard_manager_class_init (CcKeyboardManagerClass *klass)
   /**
    * CcKeyboardManager:shortcut-added:
    *
-   * Emited when a shortcut is added.
+   * Emitted when a shortcut is added.
    */
   signals[SHORTCUT_ADDED] = g_signal_new ("shortcut-added",
                                           CC_TYPE_KEYBOARD_MANAGER,
@@ -647,7 +647,7 @@ cc_keyboard_manager_class_init (CcKeyboardManagerClass *klass)
   /**
    * CcKeyboardManager:shortcut-changed:
    *
-   * Emited when a shortcut is added.
+   * Emitted when a shortcut is added.
    */
   signals[SHORTCUT_CHANGED] = g_signal_new ("shortcut-changed",
                                             CC_TYPE_KEYBOARD_MANAGER,
@@ -661,7 +661,7 @@ cc_keyboard_manager_class_init (CcKeyboardManagerClass *klass)
   /**
    * CcKeyboardManager:shortcut-removed:
    *
-   * Emited when a shortcut is removed.
+   * Emitted when a shortcut is removed.
    */
   signals[SHORTCUT_REMOVED] = g_signal_new ("shortcut-removed",
                                             CC_TYPE_KEYBOARD_MANAGER,

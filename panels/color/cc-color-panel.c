@@ -928,7 +928,7 @@ gcm_prefs_profile_add_cb (CcColorPanel *prefs)
   profiles = cd_device_get_profiles (prefs->current_device);
   gcm_prefs_add_profiles_suitable_for_devices (prefs, profiles);
 
-  /* make insensitve until we have a selection */
+  /* make insensitive until we have a selection */
   gtk_widget_set_sensitive (prefs->button_assign_ok, FALSE);
 
   /* show the dialog */

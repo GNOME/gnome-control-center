@@ -172,7 +172,7 @@ update_buttons_visibility (CcCarousel *self)
 /**
  * cc_carousel_find_item:
  * @carousel: an CcCarousel instance
- * @data: user data passed to the comparation function
+ * @data: user data passed to the comparison function
  * @func: the function to call for each element.
  *      It should return 0 when the desired element is found
  *

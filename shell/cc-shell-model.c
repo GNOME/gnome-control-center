@@ -414,7 +414,7 @@ cc_shell_model_set_panel_visibility (CcShellModel      *self,
   /* If we don't find any panel with the given id, we'll iterate until
    * valid == FALSE, so we can use this variable to determine if the
    * panel was found or not. It is a programming error to try to set
-   * the visibility of a non-existant panel.
+   * the visibility of a non-existent panel.
    */
   g_assert (valid);
 

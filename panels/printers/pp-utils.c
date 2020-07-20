@@ -2537,7 +2537,7 @@ get_all_ppds_func (gpointer user_data)
 
       /*
        * This hash contains all possible names of manufacturers as keys
-       * and values are just first occurences of their equivalents.
+       * and values are just first occurrences of their equivalents.
        * This is for mapping of e.g. "Hewlett Packard" and "HP" to the same name
        * (the one which comes first).
        */

@@ -312,7 +312,7 @@ on_device_ap_added_cb (CcWifiConnectionList *self,
   /* If this is the active AP, then add the active connection to the list. This
    * is a workaround because nm_access_pointer_filter_connections() will not
    * include it otherwise.
-   * So it seems like the dummy AP entry that NM creates internaly is not actually
+   * So it seems like the dummy AP entry that NM creates internally is not actually
    * compatible with the connection that is being activated.
    */
   if (ap == nm_device_wifi_get_active_access_point (device))

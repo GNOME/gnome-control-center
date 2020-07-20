@@ -391,7 +391,7 @@ cc_color_calibrate_get_error_translation (CdSessionError code)
       case CD_SESSION_ERROR_FAILED_TO_FIND_SENSOR:
       case CD_SESSION_ERROR_INTERNAL:
       case CD_SESSION_ERROR_INVALID_VALUE:
-        /* TRANSLATORS: We suck, the calibation failed and we have no
+        /* TRANSLATORS: We suck, the calibration failed and we have no
          * good idea why or any suggestions */
         str = _("An internal error occurred that could not be recovered.");
         break;

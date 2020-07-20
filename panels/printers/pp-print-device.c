@@ -232,7 +232,7 @@ pp_print_device_class_init (PpPrintDeviceClass *klass)
                                    PROP_DISPLAY_NAME,
                                    g_param_spec_string ("display-name",
                                                         "Display name",
-                                                        "Name of the device formated for users",
+                                                        "Name of the device formatted for users",
                                                         NULL,
                                                         G_PARAM_READWRITE));
 
