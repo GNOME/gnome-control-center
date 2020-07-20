@@ -25,6 +25,7 @@ sources = files(
   'cc-input-row.c',
   'cc-input-source.c',
   'cc-input-source-ibus.c',
+  'cc-input-list-box.c',
   'cc-input-source-xkb.c',
 )
 
