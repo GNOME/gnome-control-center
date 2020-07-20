@@ -54,7 +54,7 @@ struct _CcKeyboardOption
   gchar *current_value;
   GtkListStore *store;
 
-  const gchar * const *whitelist;
+  const gchar * const *allowed_xkb_options;
 };
 
 G_DEFINE_TYPE (CcKeyboardOption, cc_keyboard_option, G_TYPE_OBJECT);
@@ -65,7 +65,7 @@ static GnomeXkbInfo *xkb_info = NULL;
 static GSettings *input_sources_settings = NULL;
 static gchar **current_xkb_options = NULL;
 
-static const gchar *xkb_option_lvl3_whitelist[] = {
+static const gchar *allowed_xkb_lvl3_options[] = {
   "lv3:switch",
   "lv3:menu_switch",
   "lv3:rwin_switch",
@@ -78,7 +78,7 @@ static const gchar *xkb_option_lvl3_whitelist[] = {
   NULL
 };
 
-static const gchar *xkb_option_comp_whitelist[] = {
+static const gchar *allowedd_xkb_compose_options[] = {
   "compose:ralt",
   "compose:rwin",
   "compose:menu",
@@ -92,7 +92,7 @@ static const gchar *xkb_option_comp_whitelist[] = {
 
 /* This list must be kept in sync with what mutter is able to
  * handle. */
-static const gchar *xkb_option_grp_whitelist[] = {
+static const gchar *allowdd_xkb_grp_options[] = {
   "grp:toggle",
   "grp:lalt_toggle",
   "grp:lwin_toggle",
@@ -136,7 +136,7 @@ reload_setting (CcKeyboardOption *self)
   gchar **iter;
 
   for (iter = current_xkb_options; *iter; ++iter)
-    if (strv_contains (self->whitelist, *iter))
+    if (strv_contains (self->allowed_xkb_options, *iter))
       {
         if (g_strcmp0 (self->current_value, *iter) != 0)
           {
@@ -245,11 +245,11 @@ cc_keyboard_option_constructed (GObject *object)
   G_OBJECT_CLASS (cc_keyboard_option_parent_class)->constructed (object);
 
   if (g_str_equal (self->group, XKB_OPTION_GROUP_LVL3))
-    self->whitelist = xkb_option_lvl3_whitelist;
+    self->allowed_xkb_options = allowed_xkb_lvl3_options;
   else if (g_str_equal (self->group, XKB_OPTION_GROUP_COMP))
-    self->whitelist = xkb_option_comp_whitelist;
+    self->allowed_xkb_options = allowedd_xkb_compose_options;
   else if (g_str_equal (self->group, XKB_OPTION_GROUP_GRP))
-    self->whitelist = xkb_option_grp_whitelist;
+    self->allowed_xkb_options = allowdd_xkb_grp_options;
   else
     g_assert_not_reached ();
 
@@ -263,7 +263,7 @@ cc_keyboard_option_constructed (GObject *object)
   for (l = options; l; l = l->next)
     {
       option_id = l->data;
-      if (strv_contains (self->whitelist, option_id))
+      if (strv_contains (self->allowed_xkb_options, option_id))
         {
           gtk_list_store_append (self->store, &iter);
           gtk_list_store_set (self->store, &iter,

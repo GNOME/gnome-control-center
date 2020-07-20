@@ -93,7 +93,7 @@ static const struct {
 };
 
 /* keep sorted when changing */
-static const char *page_setup_option_whitelist[] = {
+static const char *allowed_page_setup_options[] = {
   "InputSlot",
   "MediaType",
   "OutputBin",
@@ -101,7 +101,7 @@ static const char *page_setup_option_whitelist[] = {
 };
 
 /* keep sorted when changing */
-static const char *color_option_whitelist[] = {
+static const char *allowed_color_options[] = {
   "BRColorEnhancement",
   "BRColorMatching",
   "BRColorMatching",
@@ -121,7 +121,7 @@ static const char *color_option_whitelist[] = {
 };
 
 /* keep sorted when changing */
-static const char *color_group_whitelist[] = {
+static const char *allowed_color_groups[] = {
   "Color",
   "Color1",
   "Color2",
@@ -145,7 +145,7 @@ static const char *color_group_whitelist[] = {
 };
 
 /* keep sorted when changing */
-static const char *image_quality_option_whitelist[] = {
+static const char *allowed_image_quality_options[] = {
   "BRDocument",
   "BRHalfTonePattern",
   "BRNormalPrt",
@@ -176,7 +176,7 @@ static const char *image_quality_option_whitelist[] = {
 };
 
 /* keep sorted when changing */
-static const char *image_quality_group_whitelist[] = {
+static const char *allowed_image_quality_groups[] = {
   "EPQualitySettings",
   "FPImageQuality1",
   "FPImageQuality2",
@@ -186,7 +186,7 @@ static const char *image_quality_group_whitelist[] = {
 };
 
 /* keep sorted when changing */
-static const char * finishing_option_whitelist[] = {
+static const char * allowed_finishing_options[] = {
   "BindColor",
   "BindEdge",
   "BindType",
@@ -206,13 +206,13 @@ static const char * finishing_option_whitelist[] = {
 };
 
 /* keep sorted when changing */
-static const char *job_group_whitelist[] = {
+static const char *allowed_job_groups[] = {
   "JobHandling",
   "JobLog",
 };
 
 /* keep sorted when changing */
-static const char *finishing_group_whitelist[] = {
+static const char *allowed_finishing_groups[] = {
   "Booklet",
   "BookletCover",
   "BookletModeOptions",
@@ -230,12 +230,12 @@ static const char *finishing_group_whitelist[] = {
 };
 
 /* keep sorted when changing */
-static const char *installable_options_group_whitelist[] = {
+static const char *allowed_installable_options_groups[] = {
   "InstallableOptions",
 };
 
 /* keep sorted when changing */
-static const char *page_setup_group_whitelist[] = {
+static const char *allowed_page_setup_groups[] = {
   "HPMarginAndLayout",
   "OutputControl",
   "PaperHandling",
@@ -244,7 +244,7 @@ static const char *page_setup_group_whitelist[] = {
 };
 
 /* keep sorted when changing */
-static const char *ppd_option_blacklist[] = {
+static const char *disallowed_ppd_options[] = {
   "Collate",
   "Copies",
   "Duplex",
@@ -576,38 +576,38 @@ populate_options_real (PpOptionsDialog *self)
                   grid = NULL;
 
                   if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                       color_group_whitelist))
+                                       allowed_color_groups))
                     grid = color_tab_grid;
                   else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            image_quality_group_whitelist))
+                                            allowed_image_quality_groups))
                     grid = image_quality_tab_grid;
                   else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            job_group_whitelist))
+                                            allowed_job_groups))
                     grid = job_tab_grid;
                   else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            finishing_group_whitelist))
+                                            allowed_finishing_groups))
                     grid = finishing_tab_grid;
                   else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            installable_options_group_whitelist))
+                                            allowed_installable_options_groups))
                     grid = installable_options_tab_grid;
                   else if (STRING_IN_TABLE (ppd_file->groups[i].name,
-                                            page_setup_group_whitelist))
+                                            allowed_page_setup_groups))
                     grid = page_setup_tab_grid;
 
                   if (!STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                        ppd_option_blacklist))
+                                        disallowed_ppd_options))
                     {
                       if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                                    color_option_whitelist))
+                                                    allowed_color_options))
                         grid = color_tab_grid;
                       else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                                         image_quality_option_whitelist))
+                                                         allowed_image_quality_options))
                         grid = image_quality_tab_grid;
                       else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                                         finishing_option_whitelist))
+                                                         allowed_finishing_options))
                         grid = finishing_tab_grid;
                       else if (!grid && STRING_IN_TABLE (ppd_file->groups[i].options[j].keyword,
-                                                         page_setup_option_whitelist))
+                                                         allowed_page_setup_options))
                         grid = page_setup_tab_grid;
 
                       if (!grid)
