@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-07-17 21:38+0000\n"
-"PO-Revision-Date: 2020-07-18 17:03+0300\n"
+"POT-Creation-Date: 2020-07-20 02:20+0000\n"
+"PO-Revision-Date: 2020-07-20 16:52+0300\n"
 "Last-Translator: Florentina Mușat <florentina.musat.28@gmail.com>\n"
 "Language-Team: Romanian Gnome Team\n"
 "Language: ro\n"
@@ -471,7 +471,7 @@ msgstr "Opriți modul avion pentru a putea activa Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1628
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -2064,8 +2064,8 @@ msgstr "Blochează ecranul"
 
 #: panels/keyboard/50-accessibility.xml.in:2
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:3
-msgid "Universal Access"
-msgstr "Acces universal"
+msgid "Acessibility"
+msgstr "Accesibilitate"
 
 #: panels/keyboard/50-accessibility.xml.in:4
 msgid "Turn zoom on or off"
@@ -3012,21 +3012,21 @@ msgstr "automat"
 msgid "Identity"
 msgstr "Identitate"
 
-#: panels/network/connection-editor/ce-page-ip4.c:268
-#: panels/network/connection-editor/ce-page-ip6.c:249
+#: panels/network/connection-editor/ce-page-ip4.c:246
+#: panels/network/connection-editor/ce-page-ip6.c:227
 msgid "Delete Address"
 msgstr "Șterge adresa"
 
-#: panels/network/connection-editor/ce-page-ip4.c:428
-#: panels/network/connection-editor/ce-page-ip6.c:398
+#: panels/network/connection-editor/ce-page-ip4.c:405
+#: panels/network/connection-editor/ce-page-ip6.c:375
 msgid "Delete Route"
 msgstr "Șterge ruta"
 
-#: panels/network/connection-editor/ce-page-ip4.c:851
+#: panels/network/connection-editor/ce-page-ip4.c:827
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:783
+#: panels/network/connection-editor/ce-page-ip6.c:759
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -4774,8 +4774,8 @@ msgstr ""
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:353
-#: panels/printers/pp-new-printer-dialog.c:410
+#: panels/printers/pp-new-printer-dialog.c:348
+#: panels/printers/pp-new-printer-dialog.c:405
 msgid "Add Printer"
 msgstr "Adăugare imprimantă"
 
@@ -4865,12 +4865,12 @@ msgid "Loading drivers database…"
 msgstr "Se încarcă baza de date cu drivere…"
 
 #. Translators: The found device is a JetDirect printer
-#: panels/printers/pp-host.c:479
+#: panels/printers/pp-host.c:478
 msgid "JetDirect Printer"
 msgstr "Imprimantă JetDirect"
 
 #. Translators: The found device is a Line Printer Daemon printer
-#: panels/printers/pp-host.c:714
+#: panels/printers/pp-host.c:713
 msgid "LPD Printer"
 msgstr "Imprimantă PLD"
 
@@ -5007,57 +5007,57 @@ msgstr "_Autentificare"
 msgid "No Active Printer Jobs"
 msgstr "Nu sunt sarcini active pentru imprimantă"
 
-#: panels/printers/pp-new-printer-dialog.c:368
+#: panels/printers/pp-new-printer-dialog.c:363
 msgid "Unlock Print Server"
 msgstr "Deblocați serverul de imprimare"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:372
+#: panels/printers/pp-new-printer-dialog.c:367
 #, c-format
 msgid "Unlock %s."
 msgstr "Deblochează %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:376
+#: panels/printers/pp-new-printer-dialog.c:371
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduceți numele de utilizator și parola pentru a vedea imprimantele "
 "disponibile pe %s."
 
-#: panels/printers/pp-new-printer-dialog.c:810
+#: panels/printers/pp-new-printer-dialog.c:794
 msgid "Searching for Printers"
 msgstr "Se caută imprimante"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1647
+#: panels/printers/pp-new-printer-dialog.c:1611
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1652
+#: panels/printers/pp-new-printer-dialog.c:1616
 msgid "Serial Port"
 msgstr "Port serial"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1659
+#: panels/printers/pp-new-printer-dialog.c:1623
 msgid "Parallel Port"
 msgstr "Port paralel"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1701
+#: panels/printers/pp-new-printer-dialog.c:1665
 #, c-format
 msgid "Location: %s"
 msgstr "Locație: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1706
+#: panels/printers/pp-new-printer-dialog.c:1670
 #, c-format
 msgid "Address: %s"
 msgstr "Adresă: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1733
+#: panels/printers/pp-new-printer-dialog.c:1697
 msgid "Server requires authentication"
 msgstr "Serverul necesită autentificare"
 
@@ -6285,8 +6285,8 @@ msgstr[1] "%d pixeli"
 msgstr[2] "%d de pixeli"
 
 #: panels/universal-access/cc-ua-panel.ui:78
-msgid "_Always Show Universal Access Menu"
-msgstr "_Arată întotdeauna meniul de acces universal"
+msgid "_Always Show Accessibility Menu"
+msgstr "_Arată întotdeauna meniul de accesibilitate"
 
 #: panels/universal-access/cc-ua-panel.ui:120
 msgid "Seeing"
@@ -6615,7 +6615,7 @@ msgid "Make it easier to see, hear, type, point and click"
 msgstr ""
 "Facilitează vederea, auzul, tastatul, mutatul mausului și apăsarea clicului"
 
-#. Translators: Search terms to find the Universal Access panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:19
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Contrast;Cursor;Sound;Zoom;Screen;Reader;"
@@ -8211,6 +8211,9 @@ msgstr[2] "%u de intrări"
 msgid "System Sounds"
 msgstr "Sunete de sistem"
 
+#~ msgid "Universal Access"
+#~ msgstr "Acces universal"
+
 #~ msgid "Enable Fingerprint Login"
 #~ msgstr "Autentificare pe bază de amprente"
 
@@ -9770,9 +9773,6 @@ msgstr "Sunete de sistem"
 
 #~ msgid "Paired"
 #~ msgstr "Asociat"
-
-#~ msgid "Visibility"
-#~ msgstr "Vizibilitate"
 
 #~ msgid "Visibility of “%s”"
 #~ msgstr "Vizibilitatea pentru „%s”"
