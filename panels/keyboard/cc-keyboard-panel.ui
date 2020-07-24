@@ -13,31 +13,28 @@
     <property name="can_focus">False</property>
     <property name="expand">True</property>
     <child>
-      <object class="GtkBox">
+      <object class="GtkScrolledWindow">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
+        <property name="can_focus">True</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
+        <property name="hscrollbar_policy">never</property>
+        <property name="propagate_natural_width">True</property>
+        <property name="propagate_natural_height">True</property>
         <child>
-          <object class="GtkScrolledWindow">
+          <object class="HdyClamp">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="propagate_natural_width">True</property>
-            <property name="propagate_natural_height">True</property>
-            <property name="max_content_height">350</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">12</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
-                <property name="margin_top">32</property>
-                <property name="margin_bottom">32</property>
-                <property name="margin_left">18</property>
-                <property name="margin_right">18</property>
                 <property name="spacing">12</property>
-                <property name="halign">center</property>
+                <property name="hexpand">True</property>
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
