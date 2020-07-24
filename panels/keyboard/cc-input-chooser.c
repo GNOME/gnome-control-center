@@ -1016,7 +1016,7 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
 
   object_class->dispose = cc_input_chooser_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-input-chooser.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-input-chooser.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, add_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputChooser, filter_entry);

@@ -21,19 +21,11 @@ sources = files(
   'cc-region-panel.c',
   'cc-format-chooser.c',
   'cc-format-preview.c',
-  'cc-ibus-utils.c',
-  'cc-input-chooser.c',
-  'cc-input-row.c',
-  'cc-input-source.c',
-  'cc-input-source-ibus.c',
-  'cc-input-list-box.c',
-  'cc-input-source-xkb.c',
 )
 
 resource_data = files(
   'cc-format-chooser.ui',
   'cc-format-preview.ui',
-  'cc-input-chooser.ui',
   'cc-region-panel.ui',
   'view-layout-symbolic.svg',
 )

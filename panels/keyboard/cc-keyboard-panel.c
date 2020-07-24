@@ -29,6 +29,7 @@
 #include "cc-keyboard-panel.h"
 #include "cc-keyboard-resources.h"
 #include "cc-keyboard-shortcut-dialog.h"
+#include "cc-input-list-box.h"
 #include "cc-xkb-modifier-dialog.h"
 
 #include "keyboard-shortcuts.h"
@@ -37,6 +38,11 @@
 struct _CcKeyboardPanel
 {
   CcPanel             parent_instance;
+
+  GtkListBox          *input_source_list;
+
+  GtkRadioButton      *per_window_source;
+  GtkRadioButton      *same_source;
 
   /* "Type Special Characters" section */
   CcXkbModifierDialog *alt_chars_dialog;
@@ -94,6 +100,14 @@ static const XkbModifier COMPOSE_MODIFIER = {
   },
   NULL,
 };
+
+static const gchar *custom_css =
+".keyboard-panel-radio-button {"
+"    padding-left: 6px;"
+"    padding-right: 12px;"
+"    padding-top: 12px;"
+"    padding-bottom: 12px;"
+"}";
 
 static void
 special_chars_activated (GtkWidget       *button,
@@ -179,8 +193,14 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
+  // TODO better way?
+  CC_TYPE_INPUT_LIST_BOX;
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, input_source_list);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, per_window_source);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, same_source);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, special_chars_list);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, alt_chars_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, compose_row);
@@ -195,14 +215,35 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 static void
 cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
+  GtkCssProvider *provider;
+
   g_resources_register (cc_keyboard_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_data (provider, custom_css, -1, NULL);
+
+  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
+                                             GTK_STYLE_PROVIDER (provider),
+                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
+  g_object_unref (provider);
+
+  gtk_list_box_set_header_func (self->input_source_list, cc_list_box_update_header_func, NULL, NULL);
   gtk_list_box_set_header_func (self->special_chars_list, cc_list_box_update_header_func, NULL, NULL);
 
-  /* "Type Special Characters" section */
   self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
+
+  /* "Input Source Switching" section */
+  g_settings_bind (self->input_source_settings, "per-window",
+                   self->per_window_source, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (self->input_source_settings, "per-window",
+                   self->same_source, "active",
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+
+  /* "Type Special Characters" section */
   g_settings_bind_with_mapping (self->input_source_settings,
                                 "xkb-options",
                                 self->value_alternate_chars,
