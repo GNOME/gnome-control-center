@@ -133,12 +133,14 @@ find_label (GtkWidget   *widget,
       return widget;
   }
 
-  if (HDY_IS_ACTION_ROW (widget)) {
-    const gchar *text = hdy_action_row_get_title (HDY_ACTION_ROW (widget));
+  if (HDY_IS_PREFERENCES_ROW (widget)) {
+    const gchar *text = hdy_preferences_row_get_title (HDY_PREFERENCES_ROW (widget));
     if (g_pattern_match_simple (label_pattern, text))
       return widget;
+  }
 
-    text = hdy_action_row_get_subtitle (HDY_ACTION_ROW (widget));
+  if (HDY_IS_ACTION_ROW (widget)) {
+    const gchar *text = hdy_action_row_get_subtitle (HDY_ACTION_ROW (widget));
     if (g_pattern_match_simple (label_pattern, text))
       return widget;
   }

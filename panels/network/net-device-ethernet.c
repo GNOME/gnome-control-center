@@ -203,7 +203,7 @@ device_ethernet_refresh_ui (NetDeviceEthernet *self)
                 }
         }
         status = panel_device_status_to_localized_string (self->device, speed_text);
-        hdy_action_row_set_title (self->details_row, status);
+        hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (self->details_row), status);
 
         populate_ui (self);
 }
