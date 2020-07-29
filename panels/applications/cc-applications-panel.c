@@ -1921,6 +1921,9 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   g_resources_register (cc_applications_get_resource ());
 
+  g_type_ensure(CC_TYPE_TOGGLE_ROW);
+  g_type_ensure(CC_TYPE_INFO_ROW);
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
   provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
