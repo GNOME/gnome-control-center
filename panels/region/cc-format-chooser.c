@@ -31,6 +31,7 @@
 
 #include "list-box-helper.h"
 #include "cc-common-language.h"
+#include "cc-format-preview.h"
 #include "cc-util.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
@@ -53,12 +54,7 @@ struct _CcFormatChooser {
         GtkWidget *common_region_listbox;
         GtkWidget *region_title;
         GtkWidget *region_listbox;
-        GtkWidget *date_format_label;
-        GtkWidget *time_format_label;
-        GtkWidget *date_time_format_label;
-        GtkWidget *number_format_label;
-        GtkWidget *measurement_format_label;
-        GtkWidget *paper_format_label;
+        CcFormatPreview *format_preview;
         gboolean adding;
         gboolean showing_extra;
         gboolean no_results;
@@ -68,110 +64,6 @@ struct _CcFormatChooser {
 };
 
 G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, GTK_TYPE_DIALOG)
-
-static void
-display_date (GtkWidget *label, GDateTime *dt, const gchar *format)
-{
-        g_autofree gchar *s = g_date_time_format (dt, format);
-        gtk_label_set_text (GTK_LABEL (label), g_strstrip (s));
-}
-
-static void
-update_format_examples (CcFormatChooser *chooser,
-                        const gchar     *region)
-{
-        locale_t locale;
-        locale_t old_locale;
-        g_autoptr(GDateTime) dt = NULL;
-        g_autofree gchar *s = NULL;
-        const gchar *fmt;
-        g_autoptr(GtkPaperSize) paper = NULL;
-
-        if (!region || !*region)
-                return;
-
-        locale = newlocale (LC_TIME_MASK, region, (locale_t) 0);
-        if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
-        else
-                old_locale = uselocale (locale);
-
-        dt = g_date_time_new_now_local ();
-        display_date (chooser->date_format_label, dt, "%x");
-        display_date (chooser->time_format_label, dt, "%X");
-        display_date (chooser->date_time_format_label, dt, "%c");
-
-        if (locale != (locale_t) 0) {
-                uselocale (old_locale);
-                freelocale (locale);
-        }
-
-        locale = newlocale (LC_NUMERIC_MASK, region, (locale_t) 0);
-        if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
-        else
-                old_locale = uselocale (locale);
-
-        s = g_strdup_printf ("%'.2f", 123456789.00);
-        gtk_label_set_text (GTK_LABEL (chooser->number_format_label), s);
-
-        if (locale != (locale_t) 0) {
-                uselocale (old_locale);
-                freelocale (locale);
-        }
-
-#if 0
-        locale = newlocale (LC_MONETARY_MASK, region, (locale_t) 0);
-        if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
-        else
-                old_locale = uselocale (locale);
-
-        num_info = localeconv ();
-        if (num_info != NULL)
-                gtk_label_set_text (GTK_LABEL (chooser->currency_format_label), num_info->currency_symbol);
-
-        if (locale != (locale_t) 0) {
-                uselocale (old_locale);
-                freelocale (locale);
-        }
-#endif
-
-#ifdef LC_MEASUREMENT
-        locale = newlocale (LC_MEASUREMENT_MASK, region, (locale_t) 0);
-        if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
-        else
-                old_locale = uselocale (locale);
-
-        fmt = nl_langinfo (_NL_MEASUREMENT_MEASUREMENT);
-        if (fmt && *fmt == 2)
-                gtk_label_set_text (GTK_LABEL (chooser->measurement_format_label), C_("measurement format", "Imperial"));
-        else
-                gtk_label_set_text (GTK_LABEL (chooser->measurement_format_label), C_("measurement format", "Metric"));
-
-        if (locale != (locale_t) 0) {
-                uselocale (old_locale);
-                freelocale (locale);
-        }
-#endif
-
-#ifdef LC_PAPER
-        locale = newlocale (LC_PAPER_MASK, region, (locale_t) 0);
-        if (locale == (locale_t) 0)
-                g_warning ("Failed to create locale %s: %s", region, g_strerror (errno));
-        else
-                old_locale = uselocale (locale);
-
-        paper = gtk_paper_size_new (gtk_paper_size_get_default ());
-        gtk_label_set_text (GTK_LABEL (chooser->paper_format_label), gtk_paper_size_get_display_name (paper));
-
-        if (locale != (locale_t) 0) {
-                uselocale (old_locale);
-                freelocale (locale);
-        }
-#endif
-}
 
 static void
 update_check_button_for_list (GtkWidget   *list_box,
@@ -207,7 +99,7 @@ set_locale_id (CcFormatChooser *chooser,
 
         update_check_button_for_list (chooser->region_listbox, locale_id);
         update_check_button_for_list (chooser->common_region_listbox, locale_id);
-        update_format_examples (chooser, locale_id);
+        cc_format_preview_set_region (chooser->format_preview, locale_id);
 }
 
 static gint
@@ -293,7 +185,7 @@ format_chooser_leaflet_fold_changed_cb (CcFormatChooser *self)
 
   if (!folded)
     {
-      update_format_examples (self, self->region);
+      cc_format_preview_set_region (self->format_preview, self->region);
       gtk_header_bar_set_title (GTK_HEADER_BAR (self->title_bar), _("Formats"));
       hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "region-list");
       gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
@@ -316,7 +208,7 @@ preview_button_clicked_cb (CcFormatChooser *self,
 
   region = g_object_get_data (G_OBJECT (row), "locale-id");
   locale_name = g_object_get_data (G_OBJECT (row), "locale-name");
-  update_format_examples (self, region);
+  cc_format_preview_set_region (self->format_preview, region);
 
   hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "preview");
   gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->back_button);
@@ -568,6 +460,8 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
 
         object_class->dispose = cc_format_chooser_dispose;
 
+        g_type_ensure (CC_TYPE_FORMAT_PREVIEW);
+
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-format-chooser.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, title_bar);
@@ -581,15 +475,10 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_title);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_listbox);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, date_format_label);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, time_format_label);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, date_time_format_label);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, number_format_label);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, measurement_format_label);
-        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, paper_format_label);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, empty_results_view);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
 
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_back_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, format_chooser_leaflet_fold_changed_cb);
