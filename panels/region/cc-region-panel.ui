@@ -27,6 +27,28 @@
                 <property name="spacing">12</property>
                 <property name="hexpand">True</property>
                 <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Language</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">The language used for text in windows and web pages.</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
                   <object class="GtkFrame" id="language_section_frame">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
@@ -36,6 +58,7 @@
                       <object class="GtkListBox" id="language_list">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
+                        <property name="selection-mode">none</property>
                         <child>
                           <object class="GtkListBoxRow" id="language_row">
                             <property name="visible">True</property>
@@ -124,6 +147,42 @@
                             </child>
                           </object>
                         </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Formats</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">The format used for numbers, dates, and currencies.</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkFrame">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="shadow_type">in</property>
+                    <child>
+                      <object class="GtkListBox" id="formats_list">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="selection-mode">none</property>
                         <child>
                           <object class="GtkListBoxRow" id="formats_row">
                             <property name="visible">True</property>
@@ -161,9 +220,6 @@
                           </object>
                         </child>
                       </object>
-                    </child>
-                    <child type="label_item">
-                      <placeholder/>
                     </child>
                   </object>
                 </child>

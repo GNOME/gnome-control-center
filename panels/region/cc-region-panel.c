@@ -50,6 +50,7 @@ struct _CcRegionPanel {
         CcPanel          parent_instance;
 
         GtkLabel        *formats_label;
+        GtkListBox      *formats_list;
         GtkListBoxRow   *formats_row;
         GtkSizeGroup    *input_size_group;
         GtkToggleButton *login_button;
@@ -551,12 +552,16 @@ setup_language_section (CcRegionPanel *self)
         g_signal_connect_object (self->locale_settings, "changed::" KEY_REGION,
                                  G_CALLBACK (update_region_from_setting), self, G_CONNECT_SWAPPED);
 
-        gtk_list_box_set_selection_mode (self->language_list,
-                                         GTK_SELECTION_NONE);
         gtk_list_box_set_header_func (self->language_list,
                                       cc_list_box_update_header_func,
                                       NULL, NULL);
         g_signal_connect_object (self->language_list, "row-activated",
+                                 G_CALLBACK (activate_language_row), self, G_CONNECT_SWAPPED);
+
+        gtk_list_box_set_header_func (self->formats_list,
+                                      cc_list_box_update_header_func,
+                                      NULL, NULL);
+        g_signal_connect_object (self->formats_list, "row-activated",
                                  G_CALLBACK (activate_language_row), self, G_CONNECT_SWAPPED);
 
         update_language_from_user (self);
@@ -776,6 +781,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-region-panel.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
