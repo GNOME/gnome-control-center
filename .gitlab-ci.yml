@@ -65,7 +65,6 @@ stages:
   - build
   - test
   - manual
-  - review
   - deploy
 
 .Log files: &log_files  [./*.log, _build/meson-logs/]
@@ -264,54 +263,6 @@ flatpak:
     - gnome-3-.*
     - master@GNOME/gnome-control-center
 
-##
-# Review
-#
-# Stage: review
-#
-# Starts the Flatpak review process.
-##
-review:
-  stage: review
-  dependencies:
-    - flatpak
-
-  when: manual
-  variables:
-    BUNDLE: "org.gnome.SettingsDevel.flatpak"
-  script:
-    - echo "Generating flatpak deployment"
-  artifacts:
-    paths:
-        - ${BUNDLE}
-    expire_in: 30 days
-  environment:
-    name: review/$CI_COMMIT_REF_NAME
-    url: https://gitlab.gnome.org/$CI_PROJECT_PATH/-/jobs/$CI_JOB_ID/artifacts/raw/${BUNDLE}
-    on_stop: stop_review
-  except:
-    - tags
-    - gnome-3-.*
-    - master@GNOME/gnome-control-center
-
-##
-# Stop Review
-#
-# Stage: review
-#
-# Stops the Flatpak review process.
-##
-stop_review:
-  stage: review
-  script:
-    - echo "Stopping flatpak deployment"
-  when: manual
-  environment:
-    name: review/$CI_COMMIT_REF_NAME
-    action: stop
-  except:
-    variables:
-      - $CI_PIPELINE_SOURCE == "schedule"
 
 # Runs the sanitizers [address, thread, undefined, and memory].
 .sanitizer: &sanitizer
