@@ -57,6 +57,7 @@ struct _NetDeviceWifi
         GtkStack                 parent;
 
         GtkBox                  *center_box;
+        GtkButton               *connect_hidden_button;
         GtkSwitch               *device_off_switch;
         GtkBox                  *header_box;
         GtkBox                  *hotspot_box;
@@ -118,6 +119,7 @@ wireless_enabled_toggled (NetDeviceWifi *self)
         gtk_switch_set_active (self->device_off_switch, enabled);
         if (!enabled)
                 disable_scan_timeout (self);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->connect_hidden_button), enabled);
         self->updating_device = FALSE;
 }
 
@@ -380,6 +382,7 @@ device_off_switch_changed_cb (NetDeviceWifi *self)
         nm_client_wireless_set_enabled (self->client, active);
         if (!active)
                 disable_scan_timeout (self);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->connect_hidden_button), active);
 }
 
 static void
@@ -1149,6 +1152,7 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-wifi.ui");
 
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, center_box);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, connect_hidden_button);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, device_off_switch);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, header_box);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_box);
