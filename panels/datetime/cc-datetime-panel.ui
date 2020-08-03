@@ -16,54 +16,124 @@
   <object class="GtkTreeModelSort" id="city_modelsort">
     <property name="model">city_liststore</property>
   </object>
-  <object class="GtkListStore" id="month_liststore">
-    <columns>
-      <!-- column-name gchararray1 -->
-      <column type="gchararray"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes">January</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">February</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">March</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">April</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">May</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">June</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">July</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">August</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">September</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">October</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">November</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes">December</col>
-      </row>
-    </data>
+  <object class="GtkPopover" id="month_popover">
+    <property name="visible">False</property>
+    <property name="relative-to">month_icon</property>
+    <child>
+      <object class="GtkFlowBox">
+        <property name="visible">True</property>
+        <property name="margin">12</property>
+        <property name="orientation">vertical</property>
+        <property name="max-children-per-line">6</property>
+        <property name="min-children-per-line">4</property>
+        <property name="homogeneous">True</property>
+        <property name="row-spacing">12</property>
+        <property name="column-spacing">12</property>
+        <property name="selection-mode">none</property>
+        <signal name="child-activated" handler="month_row_activated_cb" swapped="yes"/>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">January</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">February</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">March</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">April</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">May</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">June</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">July</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">August</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">September</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">October</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">November</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">December</property>
+            <property name="xalign">0.0</property>
+          </object>
+        </child>
+
+      </object>
+    </child>
   </object>
   <object class="GtkDialog" id="datetime_dialog">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Date &amp; Time</property>
-    <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
     <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
@@ -72,27 +142,141 @@
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">2</property>
+        <property name="margin_top">28</property>
+        <property name="margin_bottom">28</property>
+        <property name="margin_start">12</property>
+        <property name="margin_end">12</property>
+        <property name="spacing">18</property>
         <child>
-          <object class="GtkBox" id="time_box">
+          <object class="CcTimeEditor" id="time_editor">
             <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_start">28</property>
-            <property name="margin_end">40</property>
-            <property name="margin_top">28</property>
-            <property name="margin_bottom">28</property>
-            <property name="spacing">24</property>
+            <property name="halign">center</property>
+            <signal name="time-changed" handler="time_changed_cb" swapped="yes"/>
+          </object>
+        </child>
+
+        <child>
+          <object class="HdyClamp">
+            <property name="visible">True</property>
+            <property name="maximum-size">600</property>
+
             <child>
-              <object class="CcTimeEditor" id="time_editor">
+              <object class="GtkListBox" id="date_box">
                 <property name="visible">True</property>
-                <signal name="time-changed" handler="time_changed_cb" swapped="yes"/>
+                <property name="width-request">320</property>
+                <property name="selection-mode">none</property>
+                <signal name="row-activated" handler="date_box_row_activated_cb" swapped="yes"/>
+                <style>
+                  <class name="frame"/>
+                </style>
+
+                <!-- Year row -->
+                <child>
+                  <object class="GtkListBoxRow" id="year_row">
+                    <property name="visible">True</property>
+                    <property name="activatable">False</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="margin">12</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">Year</property>
+                            <property name="mnemonic-widget">year_spinbutton</property>
+                            <style>
+                              <class name="dim-label"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSpinButton" id="year_spinbutton">
+                            <property name="visible">True</property>
+                            <property name="width-chars">4</property>
+                            <property name="numeric">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- Month row -->
+                <child>
+                  <object class="GtkListBoxRow" id="month_row">
+                    <property name="visible">True</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="margin">12</property>
+                        <property name="spacing">6</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">Month</property>
+                            <style>
+                              <class name="dim-label"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="month_label">
+                            <property name="visible">True</property>
+                            <property name="halign">end</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage" id="month_icon">
+                            <property name="visible">True</property>
+                            <property name="icon-name">pan-down-symbolic</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- Day row -->
+                <child>
+                  <object class="GtkListBoxRow" id="day_row">
+                    <property name="visible">True</property>
+                    <property name="activatable">False</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="margin">12</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="hexpand">True</property>
+                            <property name="halign">start</property>
+                            <property name="label" translatable="yes">Day</property>
+                            <property name="mnemonic-widget">day_spinbutton</property>
+                            <style>
+                              <class name="dim-label"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSpinButton" id="day_spinbutton">
+                            <property name="visible">True</property>
+                            <property name="width-chars">3</property>
+                            <property name="numeric">True</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
               </object>
             </child>
+
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>

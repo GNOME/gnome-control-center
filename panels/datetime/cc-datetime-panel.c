@@ -69,7 +69,6 @@ struct _CcDateTimePanel
 {
   CcPanel parent_instance;
 
-  GtkBuilder *builder;
   GtkWidget *map;
 
   GList *listboxes;
@@ -103,10 +102,13 @@ struct _CcDateTimePanel
   GtkWidget *listbox2;
   GtkWidget *listbox3;
   GtkLockButton *lock_button;
-  GtkWidget *month_combobox;
-  GtkListStore *month_liststore;
+  GtkLabel  *month_label;
+  GtkListBox *date_box;
+  GtkListBoxRow *day_row;
+  GtkListBoxRow *month_row;
+  GtkListBoxRow *year_row;
+  GtkPopover *month_popover;
   GtkWidget *network_time_switch;
-  GtkWidget *time_box;
   GtkWidget *time_editor;
   GtkWidget *timezone_button;
   GtkWidget *timezone_dialog;
@@ -122,6 +124,8 @@ struct _CcDateTimePanel
   GPermission *permission;
   GPermission *tz_permission;
   GSettings *location_settings;
+
+  int        month; /* index starts from 1 */
 };
 
 CC_PANEL_REGISTER (CcDateTimePanel, cc_date_time_panel)
@@ -145,7 +149,6 @@ cc_date_time_panel_dispose (GObject *object)
       panel->toplevels = NULL;
     }
 
-  g_clear_object (&panel->builder);
   g_clear_object (&panel->clock_tracker);
   g_clear_object (&panel->dtm);
   g_clear_object (&panel->permission);
@@ -240,6 +243,7 @@ static void
 update_time (CcDateTimePanel *self)
 {
   g_autofree gchar *label = NULL;
+  g_autofree gchar *month_label = NULL;
   gboolean use_ampm;
 
   if (self->clock_format == G_DESKTOP_CLOCK_FORMAT_12H)
@@ -263,6 +267,9 @@ update_time (CcDateTimePanel *self)
       label = g_date_time_format (self->date, _("%e %B %Y, %R"));
     }
 
+  self->month = g_date_time_get_month (self->date);
+  month_label = g_date_time_format (self->date, "%B");
+  gtk_label_set_text (self->month_label, month_label);
   gtk_label_set_text (GTK_LABEL (self->datetime_label), label);
 }
 
@@ -371,15 +378,14 @@ queue_set_timezone (CcDateTimePanel *self)
 static void
 change_date (CcDateTimePanel *self)
 {
-  guint mon, y, d;
+  guint y, d;
   g_autoptr(GDateTime) old_date = NULL;
 
-  mon = 1 + gtk_combo_box_get_active (GTK_COMBO_BOX (self->month_combobox));
   y = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (self->year_spinbutton));
   d = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (self->day_spinbutton));
 
   old_date = self->date;
-  self->date = g_date_time_new_local (y, mon, d,
+  self->date = g_date_time_new_local (y, self->month, d,
                                       g_date_time_get_hour (old_date),
                                       g_date_time_get_minute (old_date),
                                       g_date_time_get_second (old_date));
@@ -388,6 +394,17 @@ change_date (CcDateTimePanel *self)
                            g_date_time_get_minute (self->date));
 
   queue_set_datetime (self);
+}
+
+static void
+date_box_row_activated_cb (CcDateTimePanel *self,
+                           GtkListBoxRow   *row)
+{
+  g_assert (CC_IS_DATE_TIME_PANEL (self));
+  g_assert (GTK_IS_LIST_BOX_ROW (row));
+
+  if (row == self->month_row)
+    gtk_popover_popup (self->month_popover);
 }
 
 static gboolean
@@ -560,16 +577,15 @@ day_changed (CcDateTimePanel *panel)
 static void
 month_year_changed (CcDateTimePanel *self)
 {
-  guint mon, y;
+  guint y;
   guint num_days;
   GtkAdjustment *adj;
   GtkSpinButton *day_spin;
 
-  mon = 1 + gtk_combo_box_get_active (GTK_COMBO_BOX (self->month_combobox));
   y = gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON (self->year_spinbutton));
 
   /* Check the number of days in that month */
-  num_days = g_date_get_days_in_month (mon, y);
+  num_days = g_date_get_days_in_month (self->month, y);
 
   day_spin = GTK_SPIN_BUTTON (self->day_spinbutton);
   adj = GTK_ADJUSTMENT (gtk_spin_button_get_adjustment (day_spin));
@@ -579,6 +595,25 @@ month_year_changed (CcDateTimePanel *self)
     gtk_spin_button_set_value (day_spin, num_days);
 
   change_date (self);
+}
+
+static void
+month_row_activated_cb (CcDateTimePanel *self,
+                        GtkFlowBoxChild *child,
+                        GtkFlowBox      *box)
+{
+  int i;
+
+  g_assert (CC_IS_DATE_TIME_PANEL (self));
+  g_assert (GTK_IS_FLOW_BOX_CHILD (child));
+  g_assert (GTK_IS_FLOW_BOX (box));
+
+  i = gtk_flow_box_child_get_index (child);
+  g_assert (i >= 0 && i < 12);
+
+  self->month = i + 1;
+  month_year_changed (self);
+  gtk_popover_popdown (self->month_popover);
 }
 
 static void
@@ -868,6 +903,7 @@ setup_datetime_dialog (CcDateTimePanel *self)
   GtkAdjustment *adjustment;
   GdkScreen *screen;
   g_autoptr(GtkCssProvider) provider = NULL;
+  g_autofree char *month = NULL;
   guint num_days;
 
   /* Big time buttons */
@@ -886,10 +922,9 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   /* Month */
-  gtk_combo_box_set_active (GTK_COMBO_BOX (self->month_combobox),
-                            g_date_time_get_month (self->date) - 1);
-  g_signal_connect_object (G_OBJECT (self->month_combobox), "changed",
-                           G_CALLBACK (month_year_changed), self, G_CONNECT_SWAPPED);
+  self->month = g_date_time_get_month (self->date);
+  month = g_date_time_format (self->date, "%B");
+  gtk_label_set_text (self->month_label, month);
 
   /* Day */
   num_days = g_date_get_days_in_month (g_date_time_get_month (self->date),
@@ -909,6 +944,46 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                   adjustment);
   g_signal_connect_object (G_OBJECT (self->year_spinbutton), "value-changed",
                            G_CALLBACK (month_year_changed), self, G_CONNECT_SWAPPED);
+}
+
+static int
+sort_date_box (GtkListBoxRow   *a,
+               GtkListBoxRow   *b,
+               CcDateTimePanel *self)
+{
+  g_assert (CC_IS_DATE_TIME_PANEL (self));
+
+  switch (date_endian_get_default (FALSE)) {
+  case DATE_ENDIANESS_BIG:
+    /* year, month, day */
+    if (a == self->year_row || b == self->day_row)
+      return -1;
+    if (a == self->day_row || b == self->year_row)
+      return 1;
+
+  case DATE_ENDIANESS_LITTLE:
+    /* day, month, year */
+    if (a == self->day_row || b == self->year_row)
+      return -1;
+    if (a == self->year_row || b == self->day_row)
+      return 1;
+
+  case DATE_ENDIANESS_MIDDLE:
+    /* month, day, year */
+    if (a == self->month_row || b == self->year_row)
+      return -1;
+    if (a == self->year_row || b == self->month_row)
+      return 1;
+
+  case DATE_ENDIANESS_YDM:
+    /* year, day, month */
+    if (a == self->year_row || b == self->month_row)
+      return -1;
+    if (a == self->month_row || b == self->year_row)
+      return 1;
+  }
+
+  return 0;
 }
 
 static void
@@ -931,27 +1006,35 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, city_liststore);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, city_modelsort);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, date_box);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_spinbutton);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, format_combobox);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox1);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox2);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox3);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, lock_button);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_liststore);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_popover);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, network_time_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, time_box);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, time_editor);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_label);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_searchentry);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, year_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, year_spinbutton);
 
   gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed);
   gtk_widget_class_bind_template_callback (widget_class, time_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
+  gtk_widget_class_bind_template_callback (widget_class, month_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, date_box_row_activated_cb);
 
   bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 
@@ -962,8 +1045,6 @@ static void
 cc_date_time_panel_init (CcDateTimePanel *self)
 {
   g_autoptr(GError) error = NULL;
-  const char *date_grid_name;
-  g_autofree gchar *tmp = NULL;
 
   g_resources_register (cc_datetime_get_resource ());
 
@@ -982,33 +1063,10 @@ cc_date_time_panel_init (CcDateTimePanel *self)
         return;
   }
 
-  switch (date_endian_get_default (FALSE)) {
-  case DATE_ENDIANESS_BIG:
-    date_grid_name = "big";
-    break;
-  case DATE_ENDIANESS_LITTLE:
-    date_grid_name = "little";
-    break;
-  case DATE_ENDIANESS_MIDDLE:
-    date_grid_name = "middle";
-    break;
-  case DATE_ENDIANESS_YDM:
-    date_grid_name = "ydm";
-    break;
-  default:
-    g_assert_not_reached ();
-  }
-
-  self->builder = gtk_builder_new ();
-  tmp = g_strdup_printf ("/org/gnome/control-center/datetime/%s.ui", date_grid_name);
-  gtk_builder_add_from_resource (self->builder, tmp, NULL);
-  self->date_grid = GTK_WIDGET (gtk_builder_get_object (self->builder, "date_grid"));
-  self->day_spinbutton = GTK_WIDGET (gtk_builder_get_object (self->builder, "day_spinbutton"));
-  self->month_combobox = GTK_WIDGET (gtk_builder_get_object (self->builder, "month_combobox"));
-  gtk_combo_box_set_model (GTK_COMBO_BOX (self->month_combobox), GTK_TREE_MODEL (self->month_liststore));
-  self->year_spinbutton = GTK_WIDGET (gtk_builder_get_object (self->builder, "year_spinbutton"));
-
-  gtk_box_pack_end (GTK_BOX (self->time_box), self->date_grid, FALSE, TRUE, 0);
+  gtk_list_box_set_sort_func (self->date_box,
+                              (GtkListBoxSortFunc)sort_date_box,
+                              self, NULL);
+  gtk_list_box_invalidate_sort (self->date_box);
 
   /* add the lock button */
   self->permission = polkit_permission_new_sync (DATETIME_PERMISSION, NULL, NULL, NULL);

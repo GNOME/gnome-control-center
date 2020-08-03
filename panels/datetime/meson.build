@@ -112,11 +112,7 @@ resource_data = files(
   'data/timezone_-9.png',
   'data/timezone_9.png',
   'backward',
-  'big.ui',
   'cc-datetime-panel.ui',
-  'little.ui',
-  'middle.ui',
-  'ydm.ui'
 )
 
 resources = gnome.compile_resources(
