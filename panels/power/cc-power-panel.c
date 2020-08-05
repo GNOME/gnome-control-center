@@ -31,6 +31,7 @@
 
 #include "shell/cc-object-storage.h"
 #include "list-box-helper.h"
+#include "cc-brightness-scale.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
 #include "cc-util.h"
@@ -75,8 +76,6 @@ struct _CcPowerPanel
   GtkListStore  *liststore_power_button;
   UpClient      *up_client;
   GPtrArray     *devices;
-  GDBusProxy    *screen_proxy;
-  GDBusProxy    *kbd_proxy;
   gboolean       has_batteries;
   char          *chassis_type;
 
@@ -99,11 +98,9 @@ struct _CcPowerPanel
 
   GtkWidget     *dim_screen_row;
   GtkWidget     *brightness_row;
-  GtkWidget     *brightness_scale;
-  gboolean       setting_brightness;
+  CcBrightnessScale *brightness_scale;
   GtkWidget     *kbd_brightness_row;
-  GtkWidget     *kbd_brightness_scale;
-  gboolean       kbd_setting_brightness;
+  CcBrightnessScale *kbd_brightness_scale;
 
   GtkWidget     *automatic_suspend_row;
   GtkWidget     *automatic_suspend_label;
@@ -150,8 +147,6 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&self->session_settings);
   g_clear_object (&self->interface_settings);
   g_clear_pointer (&self->automatic_suspend_dialog, gtk_widget_destroy);
-  g_clear_object (&self->screen_proxy);
-  g_clear_object (&self->kbd_proxy);
   g_clear_pointer (&self->devices, g_ptr_array_unref);
   g_clear_object (&self->up_client);
   g_clear_object (&self->bt_rfkill);
@@ -1035,144 +1030,6 @@ up_client_device_added (CcPowerPanel *self,
 }
 
 static void
-set_brightness_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
-{
-  CcPowerPanel *self = CC_POWER_PANEL (user_data);
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GVariant) result = NULL;
-  GDBusProxy *proxy = G_DBUS_PROXY (source_object);
-
-  /* not setting, so pay attention to changed signals */
-  if (proxy == self->screen_proxy)
-    self->setting_brightness = FALSE;
-  else if (proxy == self->kbd_proxy)
-    self->kbd_setting_brightness = FALSE;
-
-  result = g_dbus_proxy_call_finish (proxy, res, &error);
-  if (result == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_printerr ("Error setting brightness: %s\n", error->message);
-      return;
-    }
-}
-
-static void
-brightness_slider_value_changed_cb (CcPowerPanel *self, GtkRange *range)
-{
-  guint percentage;
-  g_autoptr(GVariant) variant = NULL;
-  GDBusProxy *proxy;
-
-  percentage = (guint) gtk_range_get_value (range);
-
-  if (range == GTK_RANGE (self->brightness_scale))
-    {
-      /* do not loop */
-      if (self->setting_brightness)
-        return;
-
-      self->setting_brightness = TRUE;
-      proxy = self->screen_proxy;
-
-      variant = g_variant_new_parsed ("('org.gnome.SettingsDaemon.Power.Screen',"
-                                      "'Brightness', %v)",
-                                      g_variant_new_int32 (percentage));
-    }
-  else
-    {
-      /* do not loop */
-      if (self->kbd_setting_brightness)
-        return;
-
-      self->kbd_setting_brightness = TRUE;
-      proxy = self->kbd_proxy;
-
-      variant = g_variant_new_parsed ("('org.gnome.SettingsDaemon.Power.Keyboard',"
-                                      "'Brightness', %v)",
-                                      g_variant_new_int32 (percentage));
-    }
-
-  /* push this to g-s-d */
-  g_dbus_proxy_call (proxy,
-                     "org.freedesktop.DBus.Properties.Set",
-                     g_variant_ref_sink (variant),
-                     G_DBUS_CALL_FLAGS_NONE,
-                     -1,
-                     cc_panel_get_cancellable (CC_PANEL (self)),
-                     set_brightness_cb,
-                     self);
-}
-
-static void
-sync_kbd_brightness (CcPowerPanel *self)
-{
-  g_autoptr(GVariant) result = NULL;
-  gint brightness;
-  gboolean visible;
-  GtkRange *range;
-
-  result = g_dbus_proxy_get_cached_property (self->kbd_proxy, "Brightness");
-  if (result)
-    {
-      /* set the slider */
-      brightness = g_variant_get_int32 (result);
-      visible = brightness >= 0.0;
-    }
-  else
-    {
-      visible = FALSE;
-    }
-
-  gtk_widget_set_visible (self->kbd_brightness_row, visible);
-
-  if (visible)
-    {
-      range = GTK_RANGE (self->kbd_brightness_scale);
-      gtk_range_set_range (range, 0, 100);
-      gtk_range_set_increments (range, 1, 10);
-      self->kbd_setting_brightness = TRUE;
-      gtk_range_set_value (range, brightness);
-      self->kbd_setting_brightness = FALSE;
-    }
-}
-
-static void
-sync_screen_brightness (CcPowerPanel *self)
-{
-  g_autoptr(GVariant) result = NULL;
-  gint brightness;
-  gboolean visible;
-  GtkRange *range;
-
-  result = g_dbus_proxy_get_cached_property (self->screen_proxy, "Brightness");
-
-  if (result)
-    {
-      /* set the slider */
-      brightness = g_variant_get_int32 (result);
-      visible = brightness >= 0.0;
-    }
-  else
-    {
-      visible = FALSE;
-    }
-
-  gtk_widget_set_visible (self->brightness_row, visible);
-  gtk_widget_set_visible (self->dim_screen_row, visible);
-
-  if (visible)
-    {
-      range = GTK_RANGE (self->brightness_scale);
-      gtk_range_set_range (range, 0, 100);
-      gtk_range_set_increments (range, 1, 10);
-      self->setting_brightness = TRUE;
-      gtk_range_set_value (range, brightness);
-      self->setting_brightness = FALSE;
-    }
-}
-
-static void
 als_switch_changed (CcPowerPanel *self)
 {
   gboolean enabled;
@@ -1188,12 +1045,7 @@ als_enabled_state_changed (CcPowerPanel *self)
   gboolean has_brightness = FALSE;
   gboolean visible = FALSE;
 
-  if (self->screen_proxy != NULL)
-    {
-      g_autoptr(GVariant) v = g_dbus_proxy_get_cached_property (self->screen_proxy, "Brightness");
-      if (v != NULL)
-        has_brightness = g_variant_get_int32 (v) >= 0.0;
-    }
+  has_brightness = cc_brightness_scale_get_has_brightness (self->brightness_scale);
 
   if (self->iio_proxy != NULL)
     {
@@ -1208,69 +1060,6 @@ als_enabled_state_changed (CcPowerPanel *self)
   gtk_switch_set_active (GTK_SWITCH (self->als_switch), enabled);
   gtk_widget_set_visible (self->als_row, visible && has_brightness);
   g_signal_handlers_unblock_by_func (self->als_switch, als_switch_changed, self);
-}
-
-static void
-on_screen_property_change (CcPowerPanel *self)
-{
-  sync_screen_brightness (self);
-}
-
-static void
-got_screen_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
-{
-  g_autoptr(GError) error = NULL;
-  CcPowerPanel *self;
-  GDBusProxy *screen_proxy;
-
-  screen_proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
-  if (screen_proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_printerr ("Error creating screen proxy: %s\n", error->message);
-      return;
-    }
-
-  self = CC_POWER_PANEL (user_data);
-  self->screen_proxy = screen_proxy;
-
-  /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect_object (screen_proxy, "g-properties-changed",
-                           G_CALLBACK (on_screen_property_change), self, G_CONNECT_SWAPPED);
-
-  sync_screen_brightness (self);
-  als_enabled_state_changed (self);
-}
-
-static void
-on_kbd_property_change (CcPowerPanel *self)
-{
-  sync_kbd_brightness (self);
-}
-
-static void
-got_kbd_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
-{
-  CcPowerPanel *self;
-  g_autoptr(GError) error = NULL;
-  GDBusProxy *kbd_proxy;
-
-  kbd_proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
-  if (kbd_proxy == NULL)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        g_printerr ("Error creating keyboard proxy: %s\n", error->message);
-      return;
-    }
-
-  self = CC_POWER_PANEL (user_data);
-  self->kbd_proxy = kbd_proxy;
-
-  /* we want to change the bar if the user presses brightness buttons */
-  g_signal_connect_object (kbd_proxy, "g-properties-changed",
-                           G_CALLBACK (on_kbd_property_change), self, G_CONNECT_SWAPPED);
-
-  sync_kbd_brightness (self);
 }
 
 static void
@@ -1739,9 +1528,10 @@ combo_power_button_changed_cb (CcPowerPanel *self)
 }
 
 static GtkWidget *
-add_brightness_row (CcPowerPanel  *self,
-		    const char    *text,
-		    GtkWidget    **brightness_scale)
+add_brightness_row (CcPowerPanel       *self,
+                    BrightnessDevice    device,
+		    const char         *text,
+		    CcBrightnessScale **brightness_scale)
 {
   GtkWidget *row, *box, *label, *title, *box2, *w, *scale;
 
@@ -1759,15 +1549,14 @@ add_brightness_row (CcPowerPanel  *self,
   gtk_box_pack_start (GTK_BOX (box2), w, FALSE, TRUE, 0);
   gtk_size_group_add_widget (self->charge_sizegroup, w);
 
-  *brightness_scale = scale = gtk_scale_new_with_range (GTK_ORIENTATION_HORIZONTAL, 0, 100, 1);
+  scale = g_object_new (CC_TYPE_BRIGHTNESS_SCALE,
+                        "device", device,
+                        NULL);
   gtk_widget_show (scale);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), scale);
-  gtk_scale_set_draw_value (GTK_SCALE (scale), FALSE);
   gtk_box_pack_start (GTK_BOX (box2), scale, TRUE, TRUE, 0);
   gtk_size_group_add_widget (self->level_sizegroup, scale);
-  gtk_range_set_round_digits (GTK_RANGE (scale), 0);
-  g_signal_connect_object (scale, "value-changed",
-                           G_CALLBACK (brightness_slider_value_changed_cb), self, G_CONNECT_SWAPPED);
+  *brightness_scale = CC_BRIGHTNESS_SCALE (scale);
 
   gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
 
@@ -2009,6 +1798,32 @@ can_suspend_or_hibernate (CcPowerPanel *self,
 }
 
 static void
+has_brightness_cb (CcPowerPanel *self)
+{
+  gboolean has_brightness;
+
+  has_brightness = cc_brightness_scale_get_has_brightness (self->brightness_scale);
+
+  gtk_widget_set_visible (self->brightness_row, has_brightness);
+  gtk_widget_set_visible (self->dim_screen_row, has_brightness);
+
+  als_enabled_state_changed (self);
+
+}
+
+static void
+has_kbd_brightness_cb (CcPowerPanel *self,
+                       GParamSpec   *pspec,
+                       GObject      *object)
+{
+  gboolean has_brightness;
+
+  has_brightness = cc_brightness_scale_get_has_brightness (self->kbd_brightness_scale);
+
+  gtk_widget_set_visible (self->kbd_brightness_row, has_brightness);
+}
+
+static void
 add_power_saving_section (CcPowerPanel *self)
 {
   GtkWidget *widget, *box, *label, *row;
@@ -2054,7 +1869,9 @@ add_power_saving_section (CcPowerPanel *self)
   gtk_container_add (GTK_CONTAINER (box), widget);
   gtk_box_pack_start (GTK_BOX (self->vbox_power), box, FALSE, TRUE, 0);
 
-  row = add_brightness_row (self, _("_Screen Brightness"), &self->brightness_scale);
+  row = add_brightness_row (self, BRIGHTNESS_DEVICE_SCREEN, _("_Screen Brightness"), &self->brightness_scale);
+  g_signal_connect_object (self->brightness_scale, "notify::has-brightness",
+                           G_CALLBACK (has_brightness_cb), self, G_CONNECT_SWAPPED);
   gtk_widget_show (row);
   self->brightness_row = row;
 
@@ -2088,7 +1905,9 @@ add_power_saving_section (CcPowerPanel *self)
   g_signal_connect_object (self->als_switch, "notify::active",
                            G_CALLBACK (als_switch_changed), self, G_CONNECT_SWAPPED);
 
-  row = add_brightness_row (self, _("_Keyboard Brightness"), &self->kbd_brightness_scale);
+  row = add_brightness_row (self, BRIGHTNESS_DEVICE_KBD, _("_Keyboard Brightness"), &self->kbd_brightness_scale);
+  g_signal_connect_object (self->kbd_brightness_scale, "notify::has-brightness",
+                           G_CALLBACK (has_kbd_brightness_cb), self, G_CONNECT_SWAPPED);
   gtk_widget_show (row);
   self->kbd_brightness_row = row;
 
@@ -2547,23 +2366,6 @@ cc_power_panel_init (CcPowerPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
   load_custom_css (self);
-
-  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
-                                       G_DBUS_PROXY_FLAGS_NONE,
-                                       "org.gnome.SettingsDaemon.Power",
-                                       "/org/gnome/SettingsDaemon/Power",
-                                       "org.gnome.SettingsDaemon.Power.Screen",
-                                       cc_panel_get_cancellable (CC_PANEL (self)),
-                                       got_screen_proxy_cb,
-                                       self);
-  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
-                                       G_DBUS_PROXY_FLAGS_NONE,
-                                       "org.gnome.SettingsDaemon.Power",
-                                       "/org/gnome/SettingsDaemon/Power",
-                                       "org.gnome.SettingsDaemon.Power.Keyboard",
-                                       cc_panel_get_cancellable (CC_PANEL (self)),
-                                       got_kbd_proxy_cb,
-                                       self);
 
   self->chassis_type = get_chassis_type (cc_panel_get_cancellable (CC_PANEL (self)));
 

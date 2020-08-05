@@ -17,7 +17,14 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
-sources = files('cc-power-panel.c')
+sources = files(
+  'cc-brightness-scale.c',
+  'cc-power-panel.c'
+)
+
+sources += gnome.mkenums_simple(
+  'cc-brightness-scale-types',
+  sources: ['cc-brightness-scale.h'])
 
 resource_data = files('cc-power-panel.ui')
 
