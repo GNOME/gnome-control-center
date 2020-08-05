@@ -387,6 +387,7 @@ setup_cheese_camera_device_monitor (CcAvatarChooser *self)
         g_signal_connect_object (G_OBJECT (self->monitor), "added", G_CALLBACK (device_added), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (G_OBJECT (self->monitor), "removed", G_CALLBACK (device_removed), self, G_CONNECT_SWAPPED);
         cheese_camera_device_monitor_coldplug (self->monitor);
+        update_photo_menu_status (self);
 }
 
 static void
