@@ -20,7 +20,8 @@ i18n.merge_file(
 sources = files(
   'cc-battery-row.c',
   'cc-brightness-scale.c',
-  'cc-power-panel.c'
+  'cc-power-panel.c',
+  'cc-power-profile-row.c',
 )
 
 sources += gnome.mkenums_simple(
