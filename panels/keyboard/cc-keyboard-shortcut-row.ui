@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcKeyboardShortcutRow" parent="GtkListBoxRow">
+    <property name="visible">True</property>
+    <property name="selectable">False</property>
+    <property name="activatable">True</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="spacing">18</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
+        <property name="margin-bottom">4</property>
+        <property name="margin-top">4</property>
+        <child>
+          <object class="GtkLabel" id="description_label">
+            <property name="visible">True</property>
+            <property name="xalign">0.0</property>
+	    <property name="wrap">True</property>
+	    <property name="wrap-mode">word-char</property>
+            <property name="hexpand">True</property>
+	  </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="accelerator_label">
+            <property name="visible">True</property>
+            <property name="xalign">0.0</property>
+            <property name="use-markup">True</property>
+            <style>
+              <class name="dim-label" />
+	    </style>
+	  </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="reset_button">
+            <property name="visible">True</property>
+            <property name="valign">center</property>
+            <property name="relief">none</property>
+	    <property name="tooltip-text" translatable="yes">Reset the shortcut to its default value</property>
+	    <child>
+              <object class="GtkImage">
+	        <property name="visible">True</property>
+		<property name="icon-name">edit-clear-symbolic</property>
+		<property name="icon-size">1</property>
+	      </object>
+	    </child>
+	    <style>
+              <class name="flat" />
+              <class name="circular" />
+              <class name="reset-shortcut-button" />
+	    </style>
+	    <signal name="clicked" handler="reset_shortcut_cb" swapped="true"/>
+	  </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
