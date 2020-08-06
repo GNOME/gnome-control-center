@@ -588,6 +588,8 @@ extract_initials_from_name (const gchar *name)
         gunichar unichar;
         gpointer q = NULL;
 
+        g_return_val_if_fail (name != NULL, NULL);
+
         p = g_utf8_strup (name, -1);
         normalized = g_utf8_normalize (g_strstrip (p), -1, G_NORMALIZE_DEFAULT_COMPOSE);
         if (normalized == NULL) {
@@ -744,10 +746,14 @@ set_user_icon_data (ActUser   *user,
 GdkPixbuf *
 generate_default_avatar (ActUser *user, gint size)
 {
+        const gchar *name;
         GdkPixbuf *pixbuf = NULL;
         cairo_surface_t *surface;
 
-        surface = generate_user_picture (act_user_get_real_name (user), size);
+        name = act_user_get_real_name (user);
+        if (name == NULL)
+                name = "";
+        surface = generate_user_picture (name, size);
 
         pixbuf = gdk_pixbuf_get_from_surface (surface, 0, 0, size, size);
         cairo_surface_destroy (surface);
