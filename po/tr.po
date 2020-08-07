@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-07-29 10:09+0000\n"
-"PO-Revision-Date: 2020-08-01 09:48+0300\n"
+"POT-Creation-Date: 2020-08-07 00:02+0000\n"
+"PO-Revision-Date: 2020-08-07 17:36+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4\n"
 
 #: panels/applications/cc-applications-panel.c:815
 msgid "System Bus"
@@ -368,10 +368,11 @@ msgstr "Resim seç"
 #: panels/display/cc-display-panel.c:944
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
+#: panels/network/cc-wifi-panel.c:865
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:176
 #: panels/network/connection-editor/vpn-helpers.c:299
-#: panels/network/net-device-wifi.c:797 panels/network/net-device-wifi.c:905
+#: panels/network/net-device-wifi.c:854
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:251
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
@@ -2651,7 +2652,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
 "Trackpad;İzleme Yüzeyi;İşaretçi;Tıklama;Vurma;Çift;Düğme;Trackball;Kaydırma;"
 
-#: panels/network/cc-network-panel.c:648 panels/network/cc-wifi-panel.ui:304
+#: panels/network/cc-network-panel.c:648 panels/network/cc-wifi-panel.ui:359
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Aahh, birşeyler ters gitti. Lütfen yazılım sağlayıcınıza başvurun."
 
@@ -2736,7 +2737,6 @@ msgstr ""
 "dışındaki bir kaynaktan internet bağlantınızın olması gerekir."
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:44
-#: panels/network/network-wifi.ui:105
 msgid "Network Name"
 msgstr "Ağ Adı"
 
@@ -2761,11 +2761,19 @@ msgstr "Kendiliğinden Parola Oluştur"
 msgid "_Turn On"
 msgstr "_Aç"
 
-#: panels/network/cc-wifi-panel.c:312
+#: panels/network/cc-wifi-panel.c:543
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
-#: panels/network/network-wifi.ui:233
+#: panels/network/network-wifi.ui:53
 msgid "Wi-Fi"
 msgstr "Kablosuz"
+
+#: panels/network/cc-wifi-panel.c:863
+msgid "Stop hotspot and disconnect any users?"
+msgstr "Erişim noktası durdurulup tüm kullanıcıların bağlantısı kesilsin mi?"
+
+#: panels/network/cc-wifi-panel.c:866
+msgid "_Stop Hotspot"
+msgstr "Erişim Noktasını _Durdur"
 
 #: panels/network/cc-wifi-panel.ui:54
 msgid "Airplane Mode"
@@ -2791,11 +2799,23 @@ msgstr "Uçak Kipi Açık"
 msgid "Turn off to use Wi-Fi"
 msgstr "Kablosuz Ağı kullanmak için kapatın"
 
-#: panels/network/cc-wifi-panel.ui:225
+#: panels/network/cc-wifi-panel.ui:236
+msgid "Wi-Fi Hotspot Active"
+msgstr "Kablosuz Erişim Noktası Aktif"
+
+#: panels/network/cc-wifi-panel.ui:247
+msgid "Mobile devices can scan the QR code to connect."
+msgstr "Mobil aygıtlar, QR kodu tarayarak bağlanabilir."
+
+#: panels/network/cc-wifi-panel.ui:257
+msgid "Turn Off Hotspot…"
+msgstr "Kablosuz Erişim Noktasını Kapat…"
+
+#: panels/network/cc-wifi-panel.ui:279
 msgid "Visible Networks"
 msgstr "Görünür Ağlar"
 
-#: panels/network/cc-wifi-panel.ui:293
+#: panels/network/cc-wifi-panel.ui:348
 msgid "NetworkManager needs to be running"
 msgstr "NetworkManager’in çalışıyor olması gerekir"
 
@@ -2842,13 +2862,13 @@ msgstr "Profil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:93
-#: panels/network/net-device-wifi.c:232
+#: panels/network/net-device-wifi.c:229
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:237
+#: panels/network/net-device-wifi.c:234
 msgid "WPA"
 msgstr "WPA"
 
@@ -2874,7 +2894,7 @@ msgid "Enterprise"
 msgstr "Kurumsal"
 
 #: panels/network/connection-editor/ce-page-details.c:126
-#: panels/network/net-device-wifi.c:222
+#: panels/network/net-device-wifi.c:219
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Hiçbiri"
@@ -3363,15 +3383,7 @@ msgstr "Kablolu"
 msgid "Add new connection"
 msgstr "Yeni bağlantı ekle"
 
-#: panels/network/net-device-wifi.c:795
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Erişim noktası durdurulup tüm kullanıcıların bağlantısı kesilsin mi?"
-
-#: panels/network/net-device-wifi.c:798
-msgid "_Stop Hotspot"
-msgstr "Erişim Noktasını _Durdur"
-
-#: panels/network/net-device-wifi.c:902
+#: panels/network/net-device-wifi.c:851
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -3379,25 +3391,25 @@ msgstr ""
 "Seçilen ağlar için ağ ayrıntıları, parolalar ve her türlü özel "
 "yapılandırmalar kaybolacak."
 
-#: panels/network/net-device-wifi.c:906
+#: panels/network/net-device-wifi.c:855
 msgid "_Forget"
 msgstr "_Unut"
 
-#: panels/network/net-device-wifi.c:1062 panels/network/net-device-wifi.c:1069
+#: panels/network/net-device-wifi.c:1011 panels/network/net-device-wifi.c:1018
 msgid "Known Wi-Fi Networks"
 msgstr "Bilinen Wi-Fi Ağları"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1104
+#: panels/network/net-device-wifi.c:1053
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Unut"
 
-#: panels/network/net-device-wifi.c:1268
+#: panels/network/net-device-wifi.c:1212
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Sistem ilkeleri Erişim Noktası olarak kullanmayı yasaklıyor"
 
-#: panels/network/net-device-wifi.c:1271
+#: panels/network/net-device-wifi.c:1215
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Kablosuz aygıt Erişim Noktası kipini desteklememektedir"
 
@@ -3506,36 +3518,34 @@ msgstr "_Yapılandırma URL’si"
 msgid "Turn VPN connection off"
 msgstr "VPN bağlantısını kapat"
 
-#: panels/network/network-wifi.ui:37
-msgid "Wi-Fi Hotspot"
-msgstr "Kablosuz Erişim Noktası"
+#: panels/network/network-wifi.ui:22
+msgctxt "Wi-Fi Hotspot"
+msgid "Network Name"
+msgstr "Ağ Adı"
 
-#: panels/network/network-wifi.ui:55
-msgid "Switch off to connect to a Wi-Fi network"
-msgstr "Kablosuz ağa bağlanmak için kapat"
-
-#: panels/network/network-wifi.ui:123
+#: panels/network/network-wifi.ui:28
+msgctxt "Wi-Fi Hotspot"
 msgid "Security type"
 msgstr "Güvenlik türü"
 
-#: panels/network/network-wifi.ui:175
-msgctxt "Wi-Fi passkey"
+#: panels/network/network-wifi.ui:34
+msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "Parola"
 
-#: panels/network/network-wifi.ui:264
+#: panels/network/network-wifi.ui:84
 msgid "Turn Wi-Fi off"
 msgstr "Kablosuzu Kapat"
 
-#: panels/network/network-wifi.ui:296
+#: panels/network/network-wifi.ui:116
 msgid "_Connect to Hidden Network…"
 msgstr "Gizli Ağa _Bağlan…"
 
-#: panels/network/network-wifi.ui:307
+#: panels/network/network-wifi.ui:127
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "Kablosuz Erişim Nok_tasını Aç…"
 
-#: panels/network/network-wifi.ui:318
+#: panels/network/network-wifi.ui:138
 msgid "_Known Wi-Fi Networks"
 msgstr "_Bilinen Wi-Fi Ağları"
 
@@ -8139,6 +8149,13 @@ msgstr[0] "%u Girdi"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sistem Sesleri"
+
+#~ msgid "Switch off to connect to a Wi-Fi network"
+#~ msgstr "Kablosuz ağa bağlanmak için kapat"
+
+#~ msgctxt "Wi-Fi passkey"
+#~ msgid "Password"
+#~ msgstr "Parola"
 
 #~ msgid "Universal Access"
 #~ msgstr "Evrensel Erişim"
