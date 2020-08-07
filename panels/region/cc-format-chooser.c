@@ -27,6 +27,7 @@
 #include <langinfo.h>
 #include <string.h>
 #include <glib/gi18n.h>
+#include <handy.h>
 
 #include "list-box-helper.h"
 #include "cc-common-language.h"
@@ -34,9 +35,6 @@
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
-
-#define HANDY_USE_UNSTABLE_API
-#include <handy.h>
 
 struct _CcFormatChooser {
         GtkDialog parent_instance;

@@ -23,7 +23,6 @@
 
 #include <glib-object.h>
 #include <glib/gi18n.h>
-#define HANDY_USE_UNSTABLE_API
 #include <handy.h>
 #include <NetworkManager.h>
 

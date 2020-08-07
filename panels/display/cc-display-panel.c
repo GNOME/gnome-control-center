@@ -25,8 +25,6 @@
 #include <stdlib.h>
 #include <gdesktop-enums.h>
 #include <math.h>
-
-#define HANDY_USE_UNSTABLE_API 1
 #include <handy.h>
 
 #include "shell/cc-object-storage.h"

@@ -19,7 +19,6 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
-#define HANDY_USE_UNSTABLE_API 1
 #include <handy.h>
 #include <glib/gi18n.h>
 #include <math.h>

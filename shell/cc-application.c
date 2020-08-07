@@ -24,7 +24,6 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#define HANDY_USE_UNSTABLE_API
 #include <handy.h>
 
 #include "cc-application.h"

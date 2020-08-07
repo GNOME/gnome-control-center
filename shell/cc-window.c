@@ -33,7 +33,6 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <gdk/gdkx.h>
-#define HANDY_USE_UNSTABLE_API
 #include <handy.h>
 #include <string.h>
 #include <time.h>
