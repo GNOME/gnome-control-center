@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2020-07-24 10:28+0000\n"
+"POT-Creation-Date: 2020-08-07 00:02+0000\n"
 "PO-Revision-Date: 2020-07-03 01:12+0200\n"
 "Last-Translator: Gil Forcada <gilforcada@guifi.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -317,7 +317,7 @@ msgid "No results found"
 msgstr "No s'ha trobat cap resultat"
 
 #: panels/applications/cc-applications-panel.ui:484
-#: panels/keyboard/cc-keyboard-panel.ui:188 shell/cc-panel-list.ui:132
+#: panels/keyboard/cc-keyboard-panel.ui:189 shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Proveu amb una cerca diferent"
 
@@ -368,10 +368,11 @@ msgstr "Selecciona una imatge"
 #: panels/display/cc-display-panel.c:944
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
+#: panels/network/cc-wifi-panel.c:865
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:176
 #: panels/network/connection-editor/vpn-helpers.c:299
-#: panels/network/net-device-wifi.c:797 panels/network/net-device-wifi.c:905
+#: panels/network/net-device-wifi.c:854
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:251
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
@@ -2222,15 +2223,15 @@ msgstr "Restableix la drecera al seu valor per omissió"
 msgid "Hold down and type to enter different characters"
 msgstr "Mantingueu premuda i teclegeu per a introduir caràcters diferents"
 
-#: panels/keyboard/cc-keyboard-panel.ui:147
+#: panels/keyboard/cc-keyboard-panel.ui:148
 msgid "Reset All…"
 msgstr "Restableix-ho tot..."
 
-#: panels/keyboard/cc-keyboard-panel.ui:148
+#: panels/keyboard/cc-keyboard-panel.ui:149
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Restableix totes les dreceres als seus valors per omissió"
 
-#: panels/keyboard/cc-keyboard-panel.ui:177
+#: panels/keyboard/cc-keyboard-panel.ui:178
 msgid "No keyboard shortcut found"
 msgstr "No s'ha trobat la tecla de drecera"
 
@@ -2684,7 +2685,7 @@ msgstr ""
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Ratolí tàctil;Punter;Clic;Toc;Doble;Botó;Ratolí de bola;Desplaça;"
 
-#: panels/network/cc-network-panel.c:648 panels/network/cc-wifi-panel.ui:304
+#: panels/network/cc-network-panel.c:648 panels/network/cc-wifi-panel.ui:359
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "S'ha produït un error inesperat. Contacteu el vostre proveïdor de "
@@ -2772,7 +2773,6 @@ msgstr ""
 "de tenir una connexió a Internet per un mitjà que no sigui la Wifi."
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:44
-#: panels/network/network-wifi.ui:105
 msgid "Network Name"
 msgstr "Nom de la xarxa"
 
@@ -2797,11 +2797,19 @@ msgstr "Genera una contrasenya automàticament"
 msgid "_Turn On"
 msgstr "_Activa"
 
-#: panels/network/cc-wifi-panel.c:312
+#: panels/network/cc-wifi-panel.c:543
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
-#: panels/network/network-wifi.ui:233
+#: panels/network/network-wifi.ui:53
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
+
+#: panels/network/cc-wifi-panel.c:863
+msgid "Stop hotspot and disconnect any users?"
+msgstr "Voleu aturar el punt d'accés Wi-Fi i desconnectar els usuaris?"
+
+#: panels/network/cc-wifi-panel.c:866
+msgid "_Stop Hotspot"
+msgstr "_Atura el punt d'accés Wi-Fi"
 
 #: panels/network/cc-wifi-panel.ui:54
 msgid "Airplane Mode"
@@ -2827,11 +2835,23 @@ msgstr "Mode d'avió activat"
 msgid "Turn off to use Wi-Fi"
 msgstr "Desactiveu-lo per a utilitzar la Wifi"
 
-#: panels/network/cc-wifi-panel.ui:225
+#: panels/network/cc-wifi-panel.ui:236
+msgid "Wi-Fi Hotspot Active"
+msgstr "Punt d'accés Wi-Fi actiu"
+
+#: panels/network/cc-wifi-panel.ui:247
+msgid "Mobile devices can scan the QR code to connect."
+msgstr "Els dispositius mòbils poden escanejar el codi QR per a connectar-se."
+
+#: panels/network/cc-wifi-panel.ui:257
+msgid "Turn Off Hotspot…"
+msgstr "Desactiva el punt d'accés Wi-Fi…"
+
+#: panels/network/cc-wifi-panel.ui:279
 msgid "Visible Networks"
 msgstr "Xarxes visibles"
 
-#: panels/network/cc-wifi-panel.ui:293
+#: panels/network/cc-wifi-panel.ui:348
 msgid "NetworkManager needs to be running"
 msgstr "Cal que el NetworkManager estigui executant-se"
 
@@ -2878,13 +2898,13 @@ msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:93
-#: panels/network/net-device-wifi.c:232
+#: panels/network/net-device-wifi.c:229
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:237
+#: panels/network/net-device-wifi.c:234
 msgid "WPA"
 msgstr "WPA"
 
@@ -2910,7 +2930,7 @@ msgid "Enterprise"
 msgstr "Corporativa"
 
 #: panels/network/connection-editor/ce-page-details.c:126
-#: panels/network/net-device-wifi.c:222
+#: panels/network/net-device-wifi.c:219
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Cap"
@@ -3401,15 +3421,7 @@ msgstr "Amb fil"
 msgid "Add new connection"
 msgstr "Afegeix una connexió nova"
 
-#: panels/network/net-device-wifi.c:795
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Voleu aturar el punt d'accés Wi-Fi i desconnectar els usuaris?"
-
-#: panels/network/net-device-wifi.c:798
-msgid "_Stop Hotspot"
-msgstr "_Atura el punt d'accés Wi-Fi"
-
-#: panels/network/net-device-wifi.c:902
+#: panels/network/net-device-wifi.c:851
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -3417,27 +3429,27 @@ msgstr ""
 "Es perdran les dades de xarxa de les xarxes seleccionades, incloent les "
 "contrasenyes i la configuració personalitzada."
 
-#: panels/network/net-device-wifi.c:906
+#: panels/network/net-device-wifi.c:855
 msgid "_Forget"
 msgstr "_Oblida"
 
-#: panels/network/net-device-wifi.c:1062 panels/network/net-device-wifi.c:1069
+#: panels/network/net-device-wifi.c:1011 panels/network/net-device-wifi.c:1018
 msgid "Known Wi-Fi Networks"
 msgstr "Xarxes sense fil conegudes"
 
 #. translators: This is the label for the "Forget wireless network"
 #. functionality
-#: panels/network/net-device-wifi.c:1104
+#: panels/network/net-device-wifi.c:1053
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Oblida"
 
-#: panels/network/net-device-wifi.c:1268
+#: panels/network/net-device-wifi.c:1212
 msgid "System policy prohibits use as a Hotspot"
 msgstr ""
 "La política del sistema prohibeix utilitzar-lo com a punt d'accés Wi-Fi"
 
-#: panels/network/net-device-wifi.c:1271
+#: panels/network/net-device-wifi.c:1215
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositiu sense fil no admet el mode punt d'accés Wi-Fi"
 
@@ -3545,36 +3557,34 @@ msgstr "URL de _configuració"
 msgid "Turn VPN connection off"
 msgstr "Desactiva la connexió VPN"
 
-#: panels/network/network-wifi.ui:37
-msgid "Wi-Fi Hotspot"
-msgstr "Punt d'accés Wi-Fi"
+#: panels/network/network-wifi.ui:22
+msgctxt "Wi-Fi Hotspot"
+msgid "Network Name"
+msgstr "Nom de la xarxa"
 
-#: panels/network/network-wifi.ui:55
-msgid "Switch off to connect to a Wi-Fi network"
-msgstr "Desactiva-ho per a connectar-se a una xarxa Wi-Fi"
-
-#: panels/network/network-wifi.ui:123
+#: panels/network/network-wifi.ui:28
+msgctxt "Wi-Fi Hotspot"
 msgid "Security type"
 msgstr "Tipus de seguretat"
 
-#: panels/network/network-wifi.ui:175
-msgctxt "Wi-Fi passkey"
+#: panels/network/network-wifi.ui:34
+msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "Contrasenya"
 
-#: panels/network/network-wifi.ui:264
+#: panels/network/network-wifi.ui:84
 msgid "Turn Wi-Fi off"
 msgstr "Desactiva el Wi-Fi"
 
-#: panels/network/network-wifi.ui:296
+#: panels/network/network-wifi.ui:116
 msgid "_Connect to Hidden Network…"
 msgstr "_Connecta't a una xarxa oculta…"
 
-#: panels/network/network-wifi.ui:307
+#: panels/network/network-wifi.ui:127
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_Activa el punt d'accés Wi-Fi…"
 
-#: panels/network/network-wifi.ui:318
+#: panels/network/network-wifi.ui:138
 msgid "_Known Wi-Fi Networks"
 msgstr "_Xarxes sense fil conegudes"
 
@@ -7890,8 +7900,8 @@ msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
 msgstr ""
-"Feu un toc als marcadors objectius a mesura que apareguin a la pantalla per a "
-"calibrar la tauleta gràfica."
+"Feu un toc als marcadors objectius a mesura que apareguin a la pantalla per "
+"a calibrar la tauleta gràfica."
 
 #: panels/wacom/calibrator/calibrator.ui:78
 msgid "Mis-click detected, restarting…"
@@ -8243,3 +8253,4 @@ msgstr[1] "%u entrades"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sons del sistema"
+
