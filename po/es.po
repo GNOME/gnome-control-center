@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-07-24 10:28+0000\n"
-"PO-Revision-Date: 2020-07-29 08:47+0200\n"
+"POT-Creation-Date: 2020-08-07 00:02+0000\n"
+"PO-Revision-Date: 2020-08-13 09:53+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -278,7 +278,6 @@ msgid "Sounds"
 msgstr "Sonidos"
 
 #: panels/applications/cc-applications-panel.ui:267
-#| msgid "Keyboard Shortcuts"
 msgid "Inhibit system keyboard shortcuts"
 msgstr "Inhibir los atajos del teclado del sistema"
 
@@ -316,7 +315,7 @@ msgid "No results found"
 msgstr "No se han encontrado resultados"
 
 #: panels/applications/cc-applications-panel.ui:484
-#: panels/keyboard/cc-keyboard-panel.ui:188 shell/cc-panel-list.ui:132
+#: panels/keyboard/cc-keyboard-panel.ui:189 shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Pruebe una búsqueda diferente"
 
@@ -368,10 +367,11 @@ msgstr "Seleccionar una imagen"
 #: panels/display/cc-display-panel.c:944
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
+#: panels/network/cc-wifi-panel.c:865
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:176
 #: panels/network/connection-editor/vpn-helpers.c:299
-#: panels/network/net-device-wifi.c:797 panels/network/net-device-wifi.c:905
+#: panels/network/net-device-wifi.c:854
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:251
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
@@ -2056,7 +2056,6 @@ msgstr "Bloquear la pantalla"
 
 #: panels/keyboard/50-accessibility.xml.in:2
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:3
-#| msgid "_Mouse Accessibility"
 msgid "Accessibility"
 msgstr "Accesibilidad"
 
@@ -2216,15 +2215,15 @@ msgstr "Restablecer el valor predeterminado del atajo"
 msgid "Hold down and type to enter different characters"
 msgstr "Manténgala pulsada y escriba para introducir diferentes caracteres"
 
-#: panels/keyboard/cc-keyboard-panel.ui:147
+#: panels/keyboard/cc-keyboard-panel.ui:148
 msgid "Reset All…"
 msgstr "Restablecer todo…"
 
-#: panels/keyboard/cc-keyboard-panel.ui:148
+#: panels/keyboard/cc-keyboard-panel.ui:149
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Restablecer todos los atajos a sus valores predeterminados"
 
-#: panels/keyboard/cc-keyboard-panel.ui:177
+#: panels/keyboard/cc-keyboard-panel.ui:178
 msgid "No keyboard shortcut found"
 msgstr "No se ha encontrado un atajo del teclado"
 
@@ -2661,7 +2660,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
 "trackpad;puntero;pulsar;pulsación;doble;botón;trackball;desplazamiento;"
 
-#: panels/network/cc-network-panel.c:648 panels/network/cc-wifi-panel.ui:304
+#: panels/network/cc-network-panel.c:648 panels/network/cc-wifi-panel.ui:359
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Algo ha fallado. Contacte con el fabricante del software."
 
@@ -2747,7 +2746,6 @@ msgstr ""
 "conexión inalámbrica."
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:44
-#: panels/network/network-wifi.ui:105
 msgid "Network Name"
 msgstr "Nombre de red"
 
@@ -2772,11 +2770,19 @@ msgstr "Generar una contraseña automáticamente"
 msgid "_Turn On"
 msgstr "_Activar"
 
-#: panels/network/cc-wifi-panel.c:312
+#: panels/network/cc-wifi-panel.c:543
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
-#: panels/network/network-wifi.ui:233
+#: panels/network/network-wifi.ui:53
 msgid "Wi-Fi"
 msgstr "Inalámbrica"
+
+#: panels/network/cc-wifi-panel.c:863
+msgid "Stop hotspot and disconnect any users?"
+msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
+
+#: panels/network/cc-wifi-panel.c:866
+msgid "_Stop Hotspot"
+msgstr "_Detener «hotspot»"
 
 #: panels/network/cc-wifi-panel.ui:54
 msgid "Airplane Mode"
@@ -2802,11 +2808,25 @@ msgstr "Modo avión activado"
 msgid "Turn off to use Wi-Fi"
 msgstr "Apagar para usar la Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:225
+#: panels/network/cc-wifi-panel.ui:236
+#| msgid "Wi-Fi Hotspot"
+msgid "Wi-Fi Hotspot Active"
+msgstr "Punto de acceso Wi-Fi activo"
+
+#: panels/network/cc-wifi-panel.ui:247
+msgid "Mobile devices can scan the QR code to connect."
+msgstr "Los dispositivos móviles pueden leer el código QR para conectarse."
+
+#: panels/network/cc-wifi-panel.ui:257
+#| msgid "_Turn On Wi-Fi Hotspot…"
+msgid "Turn Off Hotspot…"
+msgstr "Apagar el punto de acceso inalámbrico…"
+
+#: panels/network/cc-wifi-panel.ui:279
 msgid "Visible Networks"
 msgstr "Redes visibles"
 
-#: panels/network/cc-wifi-panel.ui:293
+#: panels/network/cc-wifi-panel.ui:348
 msgid "NetworkManager needs to be running"
 msgstr "NetworkManager debe estar en ejecución"
 
@@ -2853,13 +2873,13 @@ msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:93
-#: panels/network/net-device-wifi.c:232
+#: panels/network/net-device-wifi.c:229
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:237
+#: panels/network/net-device-wifi.c:234
 msgid "WPA"
 msgstr "WPA"
 
@@ -2885,7 +2905,7 @@ msgid "Enterprise"
 msgstr "Empresa"
 
 #: panels/network/connection-editor/ce-page-details.c:126
-#: panels/network/net-device-wifi.c:222
+#: panels/network/net-device-wifi.c:219
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ninguna"
@@ -3373,15 +3393,7 @@ msgstr "Cableada"
 msgid "Add new connection"
 msgstr "Añadir una conexión nueva"
 
-#: panels/network/net-device-wifi.c:795
-msgid "Stop hotspot and disconnect any users?"
-msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
-
-#: panels/network/net-device-wifi.c:798
-msgid "_Stop Hotspot"
-msgstr "_Detener «hotspot»"
-
-#: panels/network/net-device-wifi.c:902
+#: panels/network/net-device-wifi.c:851
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -3389,25 +3401,25 @@ msgstr ""
 "Se perderán los detalles de las redes seleccionadas, incluyendo la "
 "contraseña y cualquier configuración personalizada."
 
-#: panels/network/net-device-wifi.c:906
+#: panels/network/net-device-wifi.c:855
 msgid "_Forget"
 msgstr "_Olvidar"
 
-#: panels/network/net-device-wifi.c:1062 panels/network/net-device-wifi.c:1069
+#: panels/network/net-device-wifi.c:1011 panels/network/net-device-wifi.c:1018
 msgid "Known Wi-Fi Networks"
 msgstr "Redes inalámbricas conocidas"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1104
+#: panels/network/net-device-wifi.c:1053
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Olvidar"
 
-#: panels/network/net-device-wifi.c:1268
+#: panels/network/net-device-wifi.c:1212
 msgid "System policy prohibits use as a Hotspot"
 msgstr "La política del sistema prohíbe usarlo como punto de acceso"
 
-#: panels/network/net-device-wifi.c:1271
+#: panels/network/net-device-wifi.c:1215
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositivo inalámbrico no soporta el modo de punto de acceso"
 
@@ -3516,36 +3528,37 @@ msgstr "URL de _configuración"
 msgid "Turn VPN connection off"
 msgstr "Cerrar la conexión VPN"
 
-#: panels/network/network-wifi.ui:37
-msgid "Wi-Fi Hotspot"
-msgstr "Punto de acceso Wi-Fi"
+#: panels/network/network-wifi.ui:22
+#| msgid "Network Name"
+msgctxt "Wi-Fi Hotspot"
+msgid "Network Name"
+msgstr "Nombre de la red"
 
-#: panels/network/network-wifi.ui:55
-msgid "Switch off to connect to a Wi-Fi network"
-msgstr "Apagar para conectarse a una red inalámbrica"
-
-#: panels/network/network-wifi.ui:123
+#: panels/network/network-wifi.ui:28
+#| msgid "Security type"
+msgctxt "Wi-Fi Hotspot"
 msgid "Security type"
 msgstr "Tipo de seguridad"
 
-#: panels/network/network-wifi.ui:175
-msgctxt "Wi-Fi passkey"
+#: panels/network/network-wifi.ui:34
+#| msgid "Password"
+msgctxt "Wi-Fi Hotspot"
 msgid "Password"
 msgstr "Contraseña"
 
-#: panels/network/network-wifi.ui:264
+#: panels/network/network-wifi.ui:84
 msgid "Turn Wi-Fi off"
 msgstr "Apagar la Wi-Fi"
 
-#: panels/network/network-wifi.ui:296
+#: panels/network/network-wifi.ui:116
 msgid "_Connect to Hidden Network…"
 msgstr "Conectar a una red oculta…"
 
-#: panels/network/network-wifi.ui:307
+#: panels/network/network-wifi.ui:127
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_Activar el punto de acceso inalámbrico…"
 
-#: panels/network/network-wifi.ui:318
+#: panels/network/network-wifi.ui:138
 msgid "_Known Wi-Fi Networks"
 msgstr "Redes inalámbricas _conocidas"
 
@@ -4607,7 +4620,6 @@ msgid "Suspend & Power Button"
 msgstr "Botón de suspender y apagar"
 
 #: panels/power/cc-power-panel.c:2401
-#| msgid "Po_wer Button Action"
 msgid "Po_wer Button Behavior"
 msgstr "Comportamiento del botón de _encendido"
 
@@ -6266,7 +6278,6 @@ msgstr[0] "%d píxel"
 msgstr[1] "%d píxeles"
 
 #: panels/universal-access/cc-ua-panel.ui:76
-#| msgid "_Always Show Universal Access Menu"
 msgid "_Always Show Accessibility Menu"
 msgstr "_Mostrar siempre el menú de accesibilidad"
 
@@ -8186,6 +8197,13 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2750
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "Switch off to connect to a Wi-Fi network"
+#~ msgstr "Apagar para conectarse a una red inalámbrica"
+
+#~ msgctxt "Wi-Fi passkey"
+#~ msgid "Password"
+#~ msgstr "Contraseña"
 
 #~ msgid "Universal Access"
 #~ msgstr "Acceso universal"
