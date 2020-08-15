@@ -1,6 +1,6 @@
 
 test_units = [
-  'test-canonicalization',
+  #'test-canonicalization',
   'test-shift'
 ]
 
