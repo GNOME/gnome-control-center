@@ -1525,7 +1525,7 @@ gcm_prefs_find_widget_by_object_path (GList *list,
 }
 
 static void
-gcm_prefs_device_changed_cb (CdDevice *device, CcColorPanel *prefs)
+gcm_prefs_device_changed_cb (CcColorPanel *prefs, CdDevice *device)
 {
   CdDevice *device_tmp;
   CdProfile *profile_tmp;
