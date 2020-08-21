@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-06-03 00:06+0000\n"
-"PO-Revision-Date: 2020-06-04 22:17+0200\n"
+"POT-Creation-Date: 2020-08-19 23:34+0000\n"
+"PO-Revision-Date: 2020-08-21 17:29+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -204,7 +204,7 @@ msgstr "Kamera"
 #: panels/keyboard/cc-keyboard-option.c:378
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:96
 #: panels/keyboard/keyboard-shortcuts.c:425 panels/network/network-proxy.ui:126
-#: panels/user-accounts/um-fingerprint-dialog.c:211
+#: panels/user-accounts/um-fingerprint-dialog.c:219
 #: subprojects/gvc/gvc-mixer-control.c:1876
 msgid "Disabled"
 msgstr "Onemogočeno"
@@ -467,16 +467,12 @@ msgid "Read access to network settings"
 msgstr "Omrežne nastavitve"
 
 #: panels/applications/cc-snap-row.c:117
-#, fuzzy
-#| msgid "Change keyboard settings"
 msgid "Change network settings"
-msgstr "Spremeni nastavitve tipkovnice"
+msgstr "Spremeni omrežne nastavitve"
 
 #: panels/applications/cc-snap-row.c:119
-#, fuzzy
-#| msgid "Network settings"
 msgid "Read network settings"
-msgstr "Omrežne nastavitve"
+msgstr "Preberi omrežne nastavitve"
 
 #: panels/applications/cc-snap-row.c:121
 msgid ""
@@ -614,10 +610,10 @@ msgstr "Izbor slike"
 #: panels/user-accounts/cc-avatar-chooser.c:107
 #: panels/user-accounts/cc-avatar-chooser.c:235
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:636
-#: panels/user-accounts/cc-user-panel.c:654
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
-#: panels/user-accounts/um-fingerprint-dialog.c:260
+#: panels/user-accounts/um-fingerprint-dialog.c:335
 msgid "_Cancel"
 msgstr "_Prekliči"
 
@@ -1152,7 +1148,7 @@ msgstr ""
 "\">Microsoft Windows</a> uporabna."
 
 #: panels/color/cc-color-panel.ui:607
-#: panels/user-accounts/um-fingerprint-dialog.c:719
+#: panels/user-accounts/um-fingerprint-dialog.c:818
 msgid "Summary"
 msgstr "Povzetek"
 
@@ -1432,7 +1428,7 @@ msgstr "_Izberi"
 
 #: panels/common/cc-permission-infobar.ui:20
 msgid "Unlock…"
-msgstr "Odkleni ..."
+msgstr "Odkleni …"
 
 #: panels/common/cc-permission-infobar.ui:45
 msgid "Unlock to Change Settings"
@@ -1816,7 +1812,7 @@ msgstr "Način prikaza"
 
 #: panels/display/cc-display-panel.ui:222
 msgid "Contains top bar and Activities"
-msgstr ""
+msgstr "Vključuje vrhnjo vrstico in pojavno okno dejavnosti"
 
 #: panels/display/cc-display-panel.ui:223
 msgid "Primary Display"
@@ -2288,8 +2284,6 @@ msgstr "Omogoči ali onemogoči visok kontrast slike"
 
 #: panels/keyboard/cc-alt-chars-key-dialog.ui:8
 #: panels/keyboard/cc-keyboard-panel.ui:72
-#, fuzzy
-#| msgid "Alternative Characters Key"
 msgid "Alternate Characters Key"
 msgstr "Drugotna tipka"
 
@@ -5601,10 +5595,8 @@ msgid ""
 msgstr ""
 
 #: panels/region/cc-format-chooser.ui:119
-#, fuzzy
-#| msgid "Search Locations"
 msgid "Search locales..."
-msgstr "Preišči mesta"
+msgstr "Preišči krajevna mesta ..."
 
 #: panels/region/cc-format-chooser.ui:160
 msgid "Common Formats"
@@ -7053,9 +7045,8 @@ msgstr "Samodejno počisti _začasne datoteke"
 
 #: panels/usage/cc-usage-panel.ui:198
 #, fuzzy
-#| msgid "Automatically empty _Trash"
 msgid "Automatically Delete _Period"
-msgstr "Samodejno sprazni _smeti"
+msgstr "Samodejno izbriši _obdobje"
 
 #: panels/usage/cc-usage-panel.ui:240
 msgid "_Empty Trash…"
@@ -7313,7 +7304,7 @@ msgstr "%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:768
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7321,7 +7312,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:772
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7405,30 +7396,30 @@ msgstr "Napačno geslo, poskusite znova."
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Z domeno %s povezava ni mogoča: %s"
 
-#: panels/user-accounts/cc-user-panel.c:209
+#: panels/user-accounts/cc-user-panel.c:211
 msgid "Your account"
 msgstr "Račun"
 
-#: panels/user-accounts/cc-user-panel.c:384
+#: panels/user-accounts/cc-user-panel.c:386
 msgid "Failed to delete user"
 msgstr "Napaka med brisanjem uporabnika"
 
-#: panels/user-accounts/cc-user-panel.c:442
-#: panels/user-accounts/cc-user-panel.c:501
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:444
+#: panels/user-accounts/cc-user-panel.c:503
+#: panels/user-accounts/cc-user-panel.c:555
 msgid "Failed to revoke remotely managed user"
 msgstr "Preklic oddaljeno vodenega uporabnika je spodletel"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "Ni mogoče izbrisati lastnega računa."
 
-#: panels/user-accounts/cc-user-panel.c:614
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s je še vedno prijavljen"
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7436,12 +7427,12 @@ msgstr ""
 "Izbris uporabnika, ki je trenutno prijavljen, lahko vpliva na delovanje "
 "sistema."
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Ali želite obdržati datoteke uporabnika %s?"
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7449,48 +7440,48 @@ msgstr ""
 "Mogoče je ohraniti domačo mapo, vrstilno mapo pošte in začasne datoteke tudi "
 "med brisanjem uporabniškega računa."
 
-#: panels/user-accounts/cc-user-panel.c:634
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "_Izbriši datoteke"
 
-#: panels/user-accounts/cc-user-panel.c:635
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "_Ohrani datoteke"
 
-#: panels/user-accounts/cc-user-panel.c:649
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "Ali ste prepričani, da želite preklicati oddaljeno voden račun uporabnika %s?"
 
-#: panels/user-accounts/cc-user-panel.c:653
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "_Izbriši"
 
-#: panels/user-accounts/cc-user-panel.c:703
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Račun je onemogočen"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastavljeno bo ob naslednji prijavi"
 
-#: panels/user-accounts/cc-user-panel.c:714
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Brez"
 
-#: panels/user-accounts/cc-user-panel.c:759
+#: panels/user-accounts/cc-user-panel.c:761
 msgid "Logged in"
 msgstr "Trenutno dejavna prijava"
 
-#: panels/user-accounts/cc-user-panel.c:1137
+#: panels/user-accounts/cc-user-panel.c:1165
 msgid "Failed to contact the accounts service"
 msgstr "Napaka med povezovanjem s storitvijo računov"
 
-#: panels/user-accounts/cc-user-panel.c:1139
+#: panels/user-accounts/cc-user-panel.c:1167
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 
@@ -7498,7 +7489,7 @@ msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1171
+#: panels/user-accounts/cc-user-panel.c:1199
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7506,12 +7497,12 @@ msgstr ""
 "Za spreminjanje,\n"
 "kliknite na ikono *"
 
-#: panels/user-accounts/cc-user-panel.c:1237
+#: panels/user-accounts/cc-user-panel.c:1265
 msgid "Create a user account"
 msgstr "Ustvari uporabniški račun"
 
-#: panels/user-accounts/cc-user-panel.c:1248
-#: panels/user-accounts/cc-user-panel.c:1382
+#: panels/user-accounts/cc-user-panel.c:1276
+#: panels/user-accounts/cc-user-panel.c:1410
 msgid ""
 "To create a user account,\n"
 "click the * icon first"
@@ -7519,12 +7510,12 @@ msgstr ""
 "Za ustvarjanje uporabniškega\n"
 "računa, kliknite na ikono *"
 
-#: panels/user-accounts/cc-user-panel.c:1263
+#: panels/user-accounts/cc-user-panel.c:1291
 msgid "Delete the selected user account"
 msgstr "Izbriši izbran uporabniški račun"
 
-#: panels/user-accounts/cc-user-panel.c:1275
-#: panels/user-accounts/cc-user-panel.c:1386
+#: panels/user-accounts/cc-user-panel.c:1303
+#: panels/user-accounts/cc-user-panel.c:1414
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7627,7 +7618,7 @@ msgid "Right little finger"
 msgstr "Desni mezinec"
 
 #: panels/user-accounts/data/account-fingerprint.ui:39
-#: panels/user-accounts/um-fingerprint-dialog.c:676
+#: panels/user-accounts/um-fingerprint-dialog.c:775
 msgid "Enable Fingerprint Login"
 msgstr "Omogoči prijavo s prstnimi odtisi"
 
@@ -7643,7 +7634,7 @@ msgstr "_Levi kazalec"
 msgid "_Other finger:"
 msgstr "_Drugi prst:"
 
-#: panels/user-accounts/data/account-fingerprint.ui:324
+#: panels/user-accounts/data/account-fingerprint.ui:222
 msgid ""
 "Your fingerprint was successfully saved. You should now be able to log in "
 "using your fingerprint reader."
@@ -7853,32 +7844,32 @@ msgstr "Novo geslo ne vsebuje dovolj različnih znakov"
 msgid "Unknown error"
 msgstr "Neznana napaka"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:139
+#: panels/user-accounts/um-fingerprint-dialog.c:147
 msgid ""
 "You are not allowed to access the device. Contact your system administrator."
 msgstr "Ni ustreznih dovoljenj za uporabo naprave. Stopite v stik s skrbnikom."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:141
+#: panels/user-accounts/um-fingerprint-dialog.c:149
 msgid "The device is already in use."
 msgstr "Naprava je že v uporabi."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:143
+#: panels/user-accounts/um-fingerprint-dialog.c:151
 msgid "An internal error occurred."
 msgstr "Prišlo je do notranje napake."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:214
+#: panels/user-accounts/um-fingerprint-dialog.c:216
 msgid "Enabled"
 msgstr "Omogočeno"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:259
+#: panels/user-accounts/um-fingerprint-dialog.c:334
 msgid "Delete registered fingerprints?"
 msgstr "Ali naj bodo izbrisani obstoječi prstni odtisi?"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:263
+#: panels/user-accounts/um-fingerprint-dialog.c:338
 msgid "_Delete Fingerprints"
 msgstr "_Izbriši prstne odtise"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:269
+#: panels/user-accounts/um-fingerprint-dialog.c:344
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7886,15 +7877,15 @@ msgstr ""
 "Ali želite izbrisati obstoječe prstne odtise in onemogočiti tak način "
 "prijave?"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:439
+#: panels/user-accounts/um-fingerprint-dialog.c:526
 msgid "Done!"
 msgstr "Končano!"
 
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:500
-#: panels/user-accounts/um-fingerprint-dialog.c:542
+#: panels/user-accounts/um-fingerprint-dialog.c:588
+#: panels/user-accounts/um-fingerprint-dialog.c:630
 #, c-format
 msgid "Could not access “%s” device"
 msgstr "Dostop do naprave »%s« ni mogoč."
@@ -7902,16 +7893,16 @@ msgstr "Dostop do naprave »%s« ni mogoč."
 #. translators:
 #. * The variable is the name of the device, for example:
 #. * "Could you not access "Digital Persona U.are.U 4000/4000B" device
-#: panels/user-accounts/um-fingerprint-dialog.c:583
+#: panels/user-accounts/um-fingerprint-dialog.c:677
 #, c-format
 msgid "Could not start finger capture on “%s” device"
 msgstr "Ni mogoče začeti z branjem prstnih odtisov na napravi »%s«"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:627
+#: panels/user-accounts/um-fingerprint-dialog.c:724
 msgid "Could not access any fingerprint readers"
 msgstr "Ni mogoč dostop do bralnikov prstnih odtisov"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:628
+#: panels/user-accounts/um-fingerprint-dialog.c:725
 msgid "Please contact your system administrator for help."
 msgstr "Za pomoč se obrnite na skrbnika."
 
@@ -7920,7 +7911,7 @@ msgstr "Za pomoč se obrnite na skrbnika."
 #. * "To enable fingerprint login, you need to save one of your fingerprints, using the
 #. * 'Digital Persona U.are.U 4000/4000B' device."
 #.
-#: panels/user-accounts/um-fingerprint-dialog.c:710
+#: panels/user-accounts/um-fingerprint-dialog.c:809
 #, c-format
 msgid ""
 "To enable fingerprint login, you need to save one of your fingerprints, "
@@ -7929,11 +7920,11 @@ msgstr ""
 "Za prijavo s prstnim odtisom, je treba najprej shraniti vaš prstni odtis z "
 "uporabo naprave »%s«."
 
-#: panels/user-accounts/um-fingerprint-dialog.c:717
+#: panels/user-accounts/um-fingerprint-dialog.c:816
 msgid "Selecting finger"
 msgstr "Izbor prsta"
 
-#: panels/user-accounts/um-fingerprint-dialog.c:718
+#: panels/user-accounts/um-fingerprint-dialog.c:817
 msgid "Enrolling fingerprints"
 msgstr "Vpisovanje prstnih odtisov"
 
