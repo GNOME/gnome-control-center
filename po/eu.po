@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2020-08-07 00:02+0000\n"
-"PO-Revision-Date: 2020-08-10 06:00+0100\n"
+"POT-Creation-Date: 2020-08-26 19:21+0000\n"
+"PO-Revision-Date: 2020-08-30 06:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -36,7 +36,7 @@ msgid "Session Bus"
 msgstr "Saioaren bus-a"
 
 #: panels/applications/cc-applications-panel.c:821
-#: panels/power/cc-power-panel.c:2506 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2325 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Gailuak"
@@ -72,8 +72,8 @@ msgid "File System"
 msgstr "Fitxategi-sistema"
 
 #: panels/applications/cc-applications-panel.c:841
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:280
-#: shell/cc-window.c:934 shell/cc-window.ui:121
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
+#: shell/cc-window.c:933 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Ezarpenak"
@@ -345,7 +345,7 @@ msgstr "Hautatu argazki bat"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:944
+#: panels/display/cc-display-panel.c:942
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:865
@@ -1404,27 +1404,27 @@ msgstr "Interneteko konexioa behar da"
 msgid "Date & _Time"
 msgstr "Data eta _ordua"
 
-#: panels/datetime/cc-datetime-panel.ui:253
+#: panels/datetime/cc-datetime-panel.ui:254
 msgid "Automatic Time _Zone"
 msgstr "Ordu-_zona automatikoa"
 
-#: panels/datetime/cc-datetime-panel.ui:254
+#: panels/datetime/cc-datetime-panel.ui:255
 msgid "Requires location services enabled and internet access"
 msgstr "Kokaleku-zerbitzuek gaituta egon behar dute eta Interneterako sarbide eduki behar da"
 
-#: panels/datetime/cc-datetime-panel.ui:269
+#: panels/datetime/cc-datetime-panel.ui:270
 msgid "Time Z_one"
 msgstr "Ordu-_zona"
 
-#: panels/datetime/cc-datetime-panel.ui:308
+#: panels/datetime/cc-datetime-panel.ui:310
 msgid "Time _Format"
 msgstr "Orduaren _formatua"
 
-#: panels/datetime/cc-datetime-panel.ui:317
+#: panels/datetime/cc-datetime-panel.ui:319
 msgid "24-hour"
 msgstr "24 ordu"
 
-#: panels/datetime/cc-datetime-panel.ui:318
+#: panels/datetime/cc-datetime-panel.ui:320
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1518,20 +1518,20 @@ msgid ""
 "network;identity;privacy;"
 msgstr "pantaila;blokeoa;diagnostikoa;kraskadura;pribatua;azkena;aldi baterakoa;tmp;indizea;izena;sarea;identitatea;pribatutasuna;"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:953
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Aplikatu"
 
-#: panels/display/cc-display-panel.c:976
+#: panels/display/cc-display-panel.c:974
 msgid "Apply Changes?"
 msgstr "Aplikatu aldaketak?"
 
-#: panels/display/cc-display-panel.c:981
+#: panels/display/cc-display-panel.c:979
 msgid "Changes Cannot be Applied"
 msgstr "Aldaketak ezin dira aplikatu"
 
-#: panels/display/cc-display-panel.c:982
+#: panels/display/cc-display-panel.c:980
 msgid "This could be due to hardware limitations."
 msgstr "Hardwarearen mugen erruz izan daiteke."
 
@@ -1589,27 +1589,27 @@ msgstr "Pantailak"
 msgid "Night Light"
 msgstr "Gaueko argia"
 
-#: panels/display/cc-display-settings.c:104
+#: panels/display/cc-display-settings.c:103
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Horizontala"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:106
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Bertikala eskuinera"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Bertikala ezkerrera"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Horizontala (iraulita)"
 
-#: panels/display/cc-display-settings.c:187
+#: panels/display/cc-display-settings.c:186
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1674,7 +1674,7 @@ msgid "Manual Schedule"
 msgstr "Eskuzko programazioa"
 
 #: panels/display/cc-night-light-page.ui:148
-#: panels/region/cc-format-chooser.ui:346
+#: panels/region/cc-format-chooser.ui:344
 msgid "Times"
 msgstr "Orduak"
 
@@ -2466,7 +2466,7 @@ msgstr "Botoi nagusia"
 
 #: panels/mouse/cc-mouse-panel.ui:94
 msgid "Sets the order of physical buttons on mice and touchpads."
-msgstr "Saguaren eta ukipen-teklatuaren botoi fisikoen ordena ezartzen du."
+msgstr "Saguaren eta ukipen-panelaren botoi fisikoen ordena ezartzen du."
 
 #: panels/mouse/cc-mouse-panel.ui:123 panels/sound/cc-balance-slider.ui:13
 msgid "Left"
@@ -2556,12 +2556,12 @@ msgstr "Klik bakuna, bigarren mailako botoia"
 
 #: panels/mouse/gnome-mouse-panel.desktop.in.in:3
 msgid "Mouse & Touchpad"
-msgstr "Sagua eta ukipen-teklatua"
+msgstr "Sagua eta ukipen-panela"
 
 #: panels/mouse/gnome-mouse-panel.desktop.in.in:4
 msgid ""
 "Change your mouse or touchpad sensitivity and select right or left-handed"
-msgstr "Aldatu saguaren edo ukipen-teklatuaren sentikortasuna eta hautatu eskuin edo ezkerreko eskuarekin erabiltzea"
+msgstr "Aldatu saguaren edo ukipen-panelaren sentikortasuna eta hautatu eskuin edo ezkerreko eskuarekin erabiltzea"
 
 #. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/mouse/gnome-mouse-panel.desktop.in.in:19
@@ -2617,7 +2617,7 @@ msgid "Secure network"
 msgstr "Sare segurua"
 
 #: panels/network/cc-wifi-connection-row.ui:102
-#: panels/network/net-device-ethernet.c:317
+#: panels/network/net-device-ethernet.c:316
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:414
 #: panels/network/network-vpn.ui:75
@@ -2812,7 +2812,7 @@ msgid "Never"
 msgstr "Inoiz ere ez"
 
 #: panels/network/connection-editor/ce-page-details.c:162
-#: panels/network/net-device-ethernet.c:108
+#: panels/network/net-device-ethernet.c:107
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2826,7 +2826,7 @@ msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:289
-#: panels/network/net-device-ethernet.c:202
+#: panels/network/net-device-ethernet.c:201
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
@@ -2870,22 +2870,22 @@ msgstr "Oso ona"
 
 #: panels/network/connection-editor/ce-page-details.c:396
 #: panels/network/connection-editor/details-page.ui:108
-#: panels/network/net-device-ethernet.c:143
+#: panels/network/net-device-ethernet.c:142
 #: panels/network/net-device-mobile.c:430
 msgid "IPv4 Address"
 msgstr "IPv4 helbidea"
 
 #: panels/network/connection-editor/ce-page-details.c:397
 #: panels/network/connection-editor/details-page.ui:126
-#: panels/network/net-device-ethernet.c:144
-#: panels/network/net-device-ethernet.c:148
+#: panels/network/net-device-ethernet.c:143
+#: panels/network/net-device-ethernet.c:147
 #: panels/network/net-device-mobile.c:431 panels/network/network-mobile.ui:200
 msgid "IPv6 Address"
 msgstr "IPv6 helbidea"
 
 #: panels/network/connection-editor/ce-page-details.c:400
 #: panels/network/connection-editor/ce-page-details.c:401
-#: panels/network/net-device-ethernet.c:146
+#: panels/network/net-device-ethernet.c:145
 #: panels/network/net-device-mobile.c:434
 #: panels/network/net-device-mobile.c:435 panels/network/network-mobile.ui:183
 msgid "IP Address"
@@ -2931,7 +2931,7 @@ msgstr "Ezabatu bidea"
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:759
+#: panels/network/connection-editor/ce-page-ip6.c:760
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -2979,7 +2979,7 @@ msgid "Link speed"
 msgstr "Esteka-abiadura"
 
 #: panels/network/connection-editor/details-page.ui:144
-#: panels/network/net-device-ethernet.c:151
+#: panels/network/net-device-ethernet.c:150
 msgid "Hardware Address"
 msgstr "Hardwarearen helbidea"
 
@@ -2988,7 +2988,7 @@ msgid "Supported Frequencies"
 msgstr "Onartutako maiztasunak"
 
 #: panels/network/connection-editor/details-page.ui:180
-#: panels/network/net-device-ethernet.c:155
+#: panels/network/net-device-ethernet.c:154
 #: panels/network/network-mobile.ui:217
 msgid "Default Route"
 msgstr "Ibilbide lehenetsia"
@@ -2996,7 +2996,7 @@ msgstr "Ibilbide lehenetsia"
 #: panels/network/connection-editor/details-page.ui:199
 #: panels/network/connection-editor/ip4-page.ui:211
 #: panels/network/connection-editor/ip6-page.ui:225
-#: panels/network/net-device-ethernet.c:157
+#: panels/network/net-device-ethernet.c:156
 #: panels/network/network-mobile.ui:235
 msgid "DNS"
 msgstr "DNSa"
@@ -3254,19 +3254,19 @@ msgstr "Kontrolatu haririk gabeko sareetara nola konektatuko zaren"
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr "Sarea;Haririk gabea;Wi-Fia;Wifia;IPa;LANa;Bandazabala;DNSa;Wifigunea;"
 
-#: panels/network/net-device-ethernet.c:96
+#: panels/network/net-device-ethernet.c:95
 msgid "never"
 msgstr "inoiz ere ez"
 
-#: panels/network/net-device-ethernet.c:104
+#: panels/network/net-device-ethernet.c:103
 msgid "today"
 msgstr "gaur"
 
-#: panels/network/net-device-ethernet.c:106
+#: panels/network/net-device-ethernet.c:105
 msgid "yesterday"
 msgstr "atzo"
 
-#: panels/network/net-device-ethernet.c:162
+#: panels/network/net-device-ethernet.c:161
 msgid "Last used"
 msgstr "Erabilitako azkena"
 
@@ -3275,7 +3275,7 @@ msgstr "Erabilitako azkena"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:251
+#: panels/network/net-device-ethernet.c:250
 #: panels/network/network-bluetooth.ui:38 panels/network/network-ethernet.ui:18
 msgid "Wired"
 msgstr "Hariduna"
@@ -3304,17 +3304,17 @@ msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Ahaztu"
 
-#: panels/network/net-device-wifi.c:1212
+#: panels/network/net-device-wifi.c:1193
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Sistemaren arauek wifigune gisa erabiltzea debekatzen dute"
 
-#: panels/network/net-device-wifi.c:1215
+#: panels/network/net-device-wifi.c:1196
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Haririk gabeko gailuak ez du wifigunearen modua onartzen"
 
 #: panels/network/net-proxy.c:70
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1939 panels/power/cc-power-panel.c:1950
+#: panels/power/cc-power-panel.c:1728 panels/power/cc-power-panel.c:1739
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4116,7 +4116,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Erakutsi mezuen e_dukia pantaila blokeatzean"
 
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1945 panels/power/cc-power-panel.c:1952
+#: panels/power/cc-power-panel.c:1734 panels/power/cc-power-panel.c:1741
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4142,14 +4142,14 @@ msgstr "Kontrolatu jakinarazpenak nola bistaratzen diren eta zer erakusten duten
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "jakinarazpenak;iragarkia;mezua;erretilua;laster-leihoa;"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:151
+#: panels/online-accounts/cc-online-accounts-panel.c:150
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Bestelakoa"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:625
+#: panels/online-accounts/cc-online-accounts-panel.c:622
 #, c-format
 msgid "%s Account"
 msgstr "%s kontua"
@@ -4205,18 +4205,18 @@ msgstr "Gehitu kontua"
 msgid "Remove Account"
 msgstr "Kendu kontua"
 
-#: panels/power/cc-power-panel.c:336
+#: panels/power/cc-power-panel.c:331
 msgid "Unknown time"
 msgstr "Denbora ezezaguna"
 
-#: panels/power/cc-power-panel.c:342
+#: panels/power/cc-power-panel.c:337
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "minutu %i"
 msgstr[1] "%i minutu"
 
-#: panels/power/cc-power-panel.c:354
+#: panels/power/cc-power-panel.c:349
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4225,261 +4225,261 @@ msgstr[1] "%i ordu"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:362
+#: panels/power/cc-power-panel.c:357
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:363
+#: panels/power/cc-power-panel.c:358
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "ordu"
 msgstr[1] "ordu"
 
-#: panels/power/cc-power-panel.c:364
+#: panels/power/cc-power-panel.c:359
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minutu"
 msgstr[1] "minutu"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:382
+#: panels/power/cc-power-panel.c:377
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s erabat kargatu arte"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:389
+#: panels/power/cc-power-panel.c:384
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Kontuz: %s falta"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:394
+#: panels/power/cc-power-panel.c:389
 #, c-format
 msgid "%s remaining"
 msgstr "%s falta"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:399 panels/power/cc-power-panel.c:429
+#: panels/power/cc-power-panel.c:394 panels/power/cc-power-panel.c:424
 msgid "Fully charged"
 msgstr "Erabat kargatuta"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:403 panels/power/cc-power-panel.c:433
+#: panels/power/cc-power-panel.c:398 panels/power/cc-power-panel.c:428
 msgid "Not charging"
 msgstr "Kargarik ez"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:407 panels/power/cc-power-panel.c:437
+#: panels/power/cc-power-panel.c:402 panels/power/cc-power-panel.c:432
 msgid "Empty"
 msgstr "Hutsa"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:420
+#: panels/power/cc-power-panel.c:415
 msgid "Charging"
 msgstr "Kargatzen"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:425
+#: panels/power/cc-power-panel.c:420
 msgid "Discharging"
 msgstr "Deskargatzen"
 
-#: panels/power/cc-power-panel.c:571
+#: panels/power/cc-power-panel.c:566
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Nagusia"
 
-#: panels/power/cc-power-panel.c:573
+#: panels/power/cc-power-panel.c:568
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Gehigarria"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:643
 msgid "Wireless mouse"
 msgstr "Haririk gabeko sagua"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:651
+#: panels/power/cc-power-panel.c:646
 msgid "Wireless keyboard"
 msgstr "Haririk gabeko teklatua"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:654
+#: panels/power/cc-power-panel.c:649
 msgid "Uninterruptible power supply"
 msgstr "Etenik gabeko energia hornidura"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:657
+#: panels/power/cc-power-panel.c:652
 msgid "Personal digital assistant"
 msgstr "Laguntzaile digital pertsonala"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:660
+#: panels/power/cc-power-panel.c:655
 msgid "Cellphone"
 msgstr "Telefono mugikorra"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:663
+#: panels/power/cc-power-panel.c:658
 msgid "Media player"
 msgstr "Multimedia-erreproduzigailua"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:666 panels/wacom/cc-wacom-panel.c:794
+#: panels/power/cc-power-panel.c:661 panels/wacom/cc-wacom-panel.c:794
 msgid "Tablet"
 msgstr "Taula"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:669
+#: panels/power/cc-power-panel.c:664
 msgid "Computer"
 msgstr "Ordenagailua"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:672
+#: panels/power/cc-power-panel.c:667
 msgid "Gaming input device"
 msgstr "Jokoetarako sarrerako gailua"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:675 panels/power/cc-power-panel.c:967
-#: panels/power/cc-power-panel.c:2459
+#: panels/power/cc-power-panel.c:670 panels/power/cc-power-panel.c:962
+#: panels/power/cc-power-panel.c:2278
 msgid "Battery"
 msgstr "Bateria"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:736
+#: panels/power/cc-power-panel.c:731
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Kargatzen"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:743
+#: panels/power/cc-power-panel.c:738
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Kontuz"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:748
+#: panels/power/cc-power-panel.c:743
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Baxua"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:753
+#: panels/power/cc-power-panel.c:748
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Ona"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:758
+#: panels/power/cc-power-panel.c:753
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Erabat kargatuta"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:762
+#: panels/power/cc-power-panel.c:757
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Hutsa"
 
-#: panels/power/cc-power-panel.c:965
+#: panels/power/cc-power-panel.c:960
 msgid "Batteries"
 msgstr "Bateriak"
 
-#: panels/power/cc-power-panel.c:1393
+#: panels/power/cc-power-panel.c:1182
 msgid "When _idle"
 msgstr "_Inaktibo dagoenean"
 
-#: panels/power/cc-power-panel.c:1887
+#: panels/power/cc-power-panel.c:1676
 msgid "Suspend"
 msgstr "Eseki"
 
-#: panels/power/cc-power-panel.c:1888
+#: panels/power/cc-power-panel.c:1677
 msgid "Power Off"
 msgstr "Itzali"
 
-#: panels/power/cc-power-panel.c:1889
+#: panels/power/cc-power-panel.c:1678
 msgid "Hibernate"
 msgstr "Hibernatu"
 
-#: panels/power/cc-power-panel.c:1890
+#: panels/power/cc-power-panel.c:1679
 msgid "Nothing"
 msgstr "Ezer ez"
 
-#: panels/power/cc-power-panel.c:1941
+#: panels/power/cc-power-panel.c:1730
 msgid "When on battery power"
 msgstr "Bateriaren energiarekin"
 
-#: panels/power/cc-power-panel.c:1943
+#: panels/power/cc-power-panel.c:1732
 msgid "When plugged in"
 msgstr "Entxufea konektatutakoan"
 
-#: panels/power/cc-power-panel.c:2021
+#: panels/power/cc-power-panel.c:1836
 msgid "Power Saving"
 msgstr "Energia aurreztea"
 
-#: panels/power/cc-power-panel.c:2057
+#: panels/power/cc-power-panel.c:1872
 msgid "_Screen Brightness"
 msgstr "_Pantailaren distira"
 
-#: panels/power/cc-power-panel.c:2078
+#: panels/power/cc-power-panel.c:1895
 msgid "Automatic Brightness"
 msgstr "Distira automatikoa"
 
-#: panels/power/cc-power-panel.c:2091
+#: panels/power/cc-power-panel.c:1908
 msgid "_Keyboard Brightness"
 msgstr "_Teklatuaren distira"
 
-#: panels/power/cc-power-panel.c:2102
+#: panels/power/cc-power-panel.c:1921
 msgid "_Dim Screen When Inactive"
 msgstr "_Ilundu pantaila inaktibo dagoenean"
 
-#: panels/power/cc-power-panel.c:2120
+#: panels/power/cc-power-panel.c:1939
 msgid "_Blank Screen"
 msgstr "_Belztu pantaila"
 
-#: panels/power/cc-power-panel.c:2166
+#: panels/power/cc-power-panel.c:1985
 msgid "_Automatic Suspend"
 msgstr "Eseki _automatikoki"
 
-#: panels/power/cc-power-panel.c:2167
+#: panels/power/cc-power-panel.c:1986
 msgid "Automatic suspend"
 msgstr "Eseki automatikoki"
 
-#: panels/power/cc-power-panel.c:2219
+#: panels/power/cc-power-panel.c:2038
 msgid "_Wi-Fi"
 msgstr "_Wifia"
 
-#: panels/power/cc-power-panel.c:2220
+#: panels/power/cc-power-panel.c:2039
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Haririk gabekoa itzali egin daiteke energia aurrezteko."
 
-#: panels/power/cc-power-panel.c:2236
+#: panels/power/cc-power-panel.c:2055
 msgid "_Mobile Broadband"
 msgstr "Bandazabal _mugikorra"
 
-#: panels/power/cc-power-panel.c:2237
+#: panels/power/cc-power-panel.c:2056
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr "Banda zabala mugikorra (LTE, 4G, 3G eta abar) itzali egin daiteke energia aurrezteko."
 
-#: panels/power/cc-power-panel.c:2287
+#: panels/power/cc-power-panel.c:2106
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2288
+#: panels/power/cc-power-panel.c:2107
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth-a itzali egin daiteke energia aurrezteko."
 
-#: panels/power/cc-power-panel.c:2325
+#: panels/power/cc-power-panel.c:2144
 msgid "Show Battery _Percentage"
 msgstr "Erakutsi bateriaren _ehunekoa"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2351
+#: panels/power/cc-power-panel.c:2170
 msgid "Suspend & Power Button"
 msgstr "Esekitzeko eta itzaltzeko botoia"
 
-#: panels/power/cc-power-panel.c:2401
+#: panels/power/cc-power-panel.c:2220
 msgid "Po_wer Button Behavior"
 msgstr "Pi_zteko botoiaren portaera"
 
@@ -5232,17 +5232,17 @@ msgid ""
 msgstr "Badirudi sistemako inprimatzeko\n"
 "zerbitzua ez dagoela erabilgarri."
 
-#: panels/region/cc-format-chooser.c:151
+#: panels/region/cc-format-chooser.c:149
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Inperiala"
 
-#: panels/region/cc-format-chooser.c:153
+#: panels/region/cc-format-chooser.c:151
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrika"
 
-#: panels/region/cc-format-chooser.c:258 panels/region/cc-format-chooser.c:299
+#: panels/region/cc-format-chooser.c:256 panels/region/cc-format-chooser.c:297
 #: panels/region/cc-format-chooser.ui:6
 msgid "Formats"
 msgstr "Formatuak"
@@ -5253,53 +5253,53 @@ msgstr "Formatuak"
 msgid "Back"
 msgstr "Atzera"
 
-#: panels/region/cc-format-chooser.ui:103
+#: panels/region/cc-format-chooser.ui:101
 msgid ""
 "Choose the format for numbers, dates and currencies. Changes take effect on "
 "next login."
 msgstr "Aukeratu zenbakietarako, datetarako eta monetetarako formatuak. Aldaketak hurrengo saioa hastean sartuko dira indarrean."
 
-#: panels/region/cc-format-chooser.ui:119
+#: panels/region/cc-format-chooser.ui:117
 msgid "Search locales..."
 msgstr "Bilatu hizkuntzak..."
 
-#: panels/region/cc-format-chooser.ui:160
+#: panels/region/cc-format-chooser.ui:158
 msgid "Common Formats"
 msgstr "Formatu arruntak"
 
-#: panels/region/cc-format-chooser.ui:191
+#: panels/region/cc-format-chooser.ui:189
 msgid "All Formats"
 msgstr "Formatu guztiak"
 
-#: panels/region/cc-format-chooser.ui:244
+#: panels/region/cc-format-chooser.ui:242
 msgid "No Search Results"
 msgstr "Bilaketak ez du emaitzarik"
 
-#: panels/region/cc-format-chooser.ui:257
+#: panels/region/cc-format-chooser.ui:255
 msgid "Searches can be for countries or languages."
 msgstr "Bilaketan herrialdeak edo hizkuntzak bilatu daitezke."
 
-#: panels/region/cc-format-chooser.ui:309
+#: panels/region/cc-format-chooser.ui:307
 msgid "Preview"
 msgstr "Aurrebista"
 
-#: panels/region/cc-format-chooser.ui:324
+#: panels/region/cc-format-chooser.ui:322
 msgid "Dates"
 msgstr "Datak"
 
-#: panels/region/cc-format-chooser.ui:368
+#: panels/region/cc-format-chooser.ui:366
 msgid "Dates & Times"
 msgstr "Data eta ordua"
 
-#: panels/region/cc-format-chooser.ui:390
+#: panels/region/cc-format-chooser.ui:388
 msgid "Numbers"
 msgstr "Zenbakiak"
 
-#: panels/region/cc-format-chooser.ui:412
+#: panels/region/cc-format-chooser.ui:410
 msgid "Measurement"
 msgstr "Neurria"
 
-#: panels/region/cc-format-chooser.ui:434
+#: panels/region/cc-format-chooser.ui:432
 msgid "Paper"
 msgstr "Papera"
 
@@ -6416,10 +6416,11 @@ msgstr "Egin errazagoa ikusteko, entzuteko, idazteko, kokatzeko eta klik egiteko
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:19
 msgid ""
-"Keyboard;Mouse;a11y;Accessibility;Contrast;Cursor;Sound;Zoom;Screen;Reader;"
-"big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;"
-"click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;audio;typing;"
-msgstr "Teklatua;Sagua;a11y;Erabilerraztasuna;Kontrastea;Kurtsorea;Soinua;Zooma;Pantaila;Irakurgailua;handia;altua;handia;testua;letra-tipoa;tamaina;AccessX;Itsaskorra;Teklak;Geldoa;Errebotea;Sagua;Bikoitza;klik;Atzerapena;Abiadura;Lagundu;Errepikatu;Keinua;bisuala;entzumena;audioa;idazketa;"
+"Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
+"Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
+"Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
+"audio;typing;"
+msgstr "Teklatua;Sagua;a11y;Irisgarritasuna;Irisgarritasun Unibertsala;Kontrastea;Kurtsorea;Soinua;Zooma;Pantaila;Irakurgailua;handia;altua;handia;testua;letra-tipoa;tamaina;AccessX;Itsaskorra;Teklak;Geldoa;Errebotea;Sagua;Bikoitza;klik;Atzerapena;Abiadura;Lagundu;Errepikatu;Keinua;bisuala;entzumena;audioa;idazketa;"
 
 #: panels/universal-access/zoom-options.c:303
 msgctxt "Distance"
@@ -7036,7 +7037,7 @@ msgstr "Huts egin du erregistroa gelditzeak: %s"
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
-msgstr "Altxatu eta kokatu hatza irakurgailuan behin eta berriro, zure hatz-marka erregistratzeko "
+msgstr "Altxatu eta kokatu hatza irakurgailuan behin eta berriro, zure hatz-marka erregistratzeko"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
 #: panels/user-accounts/cc-fingerprint-dialog.c:989
@@ -7818,31 +7819,31 @@ msgstr "Ezarpenak zure sistema konfiguratzeko interfaze nagusia da."
 msgid "The GNOME Project"
 msgstr "GNOME proiektua"
 
-#: shell/cc-application.c:60
+#: shell/cc-application.c:59
 msgid "Display version number"
 msgstr "Erakutsi bertsio-zenbakia"
 
-#: shell/cc-application.c:61
+#: shell/cc-application.c:60
 msgid "Enable verbose mode"
 msgstr "Gaitu modu xehea"
 
-#: shell/cc-application.c:62
+#: shell/cc-application.c:61
 msgid "Search for the string"
 msgstr "Bilatu katea"
 
-#: shell/cc-application.c:63
+#: shell/cc-application.c:62
 msgid "List possible panel names and exit"
 msgstr "Zerrendatu panel posibleen izenak eta irten"
 
-#: shell/cc-application.c:64
+#: shell/cc-application.c:63
 msgid "Panel to display"
 msgstr "Panela bistaratzeko"
 
-#: shell/cc-application.c:64
+#: shell/cc-application.c:63
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANELA] [ARGUMENTUA…]"
 
-#: shell/cc-panel-list.ui:45 shell/cc-window.c:276
+#: shell/cc-panel-list.ui:45 shell/cc-window.c:275
 msgid "Privacy"
 msgstr "Pribatutasuna"
 
