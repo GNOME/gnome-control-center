@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2020-08-31 15:11+0000\n"
-"PO-Revision-Date: 2020-08-31 21:31+0200\n"
+"PO-Revision-Date: 2020-09-01 18:04+0200\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -272,10 +272,8 @@ msgid "Sounds"
 msgstr "Zvoki"
 
 #: panels/applications/cc-applications-panel.ui:267
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "Inhibit system keyboard shortcuts"
-msgstr "Tipkovne bližnjice"
+msgstr "Zavri delovanje sistemskih tipkovnih bližnjic"
 
 #: panels/applications/cc-applications-panel.ui:300
 msgid "Default Handlers"
@@ -1201,11 +1199,11 @@ msgstr ""
 
 #: panels/common/cc-time-editor.ui:33
 msgid "Increment Hour"
-msgstr ""
+msgstr "Povečanje ure"
 
 #: panels/common/cc-time-editor.ui:65
 msgid "Increment Minute"
-msgstr ""
+msgstr "Povečanje minute"
 
 #: panels/common/cc-time-editor.ui:80
 msgid "Time"
@@ -1213,11 +1211,11 @@ msgstr "Čas"
 
 #: panels/common/cc-time-editor.ui:113
 msgid "Decrement Hour"
-msgstr ""
+msgstr "Zmanjšanje ure"
 
 #: panels/common/cc-time-editor.ui:145
 msgid "Decrement Minute"
-msgstr ""
+msgstr "Zmanjšanje minute"
 
 #: panels/common/cc-time-entry.c:219
 msgid "_Copy"
@@ -1571,16 +1569,12 @@ msgstr "Pošiljajte poročila o težavah"
 #: panels/location/gnome-location-panel.desktop.in.in:20
 #: panels/lock/gnome-lock-panel.desktop.in.in:20
 #: panels/usage/gnome-usage-panel.desktop.in.in:20
-#, fuzzy
-#| msgid ""
-#| "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-#| "network;identity;"
 msgid ""
 "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
 "network;identity;privacy;"
 msgstr ""
-"zaslon;zaklep;diagnostika;zasebnost;hrošči;sesutje;nedavno;začasno;tmp;index;"
-"ime;omrežje;istovetnost;"
+"zaslon;zaklep;diagnostika;crash;sesutje;zasebnost;hrošči;nedavno;začasno;tmp;"
+"index;ime;network;omrežje;istovetnost;identiteta;podatki;"
 
 #: panels/display/cc-display-panel.c:953
 #: panels/network/connection-editor/connection-editor.ui:27
@@ -4635,10 +4629,8 @@ msgid "Suspend & Power Button"
 msgstr "Gumb za izklop in prehod v pripravljenost"
 
 #: panels/power/cc-power-panel.c:2220
-#, fuzzy
-#| msgid "Po_wer Button Action"
 msgid "Po_wer Button Behavior"
-msgstr "Dejanje gumba za _priklop"
+msgstr "Delovanje gumba za _priklop"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -7130,7 +7122,7 @@ msgstr "Ni naprave za branje prstnega odtisa"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:259
 msgid "Ensure the device is properly connected."
-msgstr ""
+msgstr "Zagotovite, da je naprava pravilno povezana."
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:264
 msgid "No fingerprint device"
@@ -7138,7 +7130,7 @@ msgstr "Ni naprave za branje prstnega odtisa"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:280
 msgid "Choose the fingerprint device you want to configure"
-msgstr ""
+msgstr "Izberite napravo za branje prstnega odtisa, ki jo želite nastaviti"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:309
 msgid "Fingerprint Device"
@@ -7149,6 +7141,7 @@ msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
 msgstr ""
+"Prijava s prstnim odtisom omogoča prijavo oziroma odklepanje sistema s prstom"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:352
 msgid "_Delete Fingerprints"
@@ -7164,7 +7157,7 @@ msgstr "Prijava s prstnim odtisom"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:436
 msgid "_Re-enroll this finger…"
-msgstr ""
+msgstr "_Ponovno odčitaj ta prst …"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:470
 #, c-format
@@ -7231,51 +7224,44 @@ msgstr "Naprava za prijavo s prstnim odtisom ni priklopljena"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:731
 msgid "Fingerprint device storage is full"
-msgstr ""
+msgstr "Shramba naprave za branje prstnega odtisa je polna"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:733
-#, fuzzy
-#| msgid "Failed to add new printer."
 msgid "Failed to enroll new fingerprint"
-msgstr "Dodajanje novega tiskalnika je spodletelo."
+msgstr "Odčitavanje novega prstnega odtisa je spodletelo."
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:764
-#, fuzzy, c-format
-#| msgid "Failed to start Sound Preferences: %s"
+#, c-format
 msgid "Failed to start enrollment: %s"
-msgstr "Napaka med zagonom lastnosti zvoka: %s"
+msgstr "Začenjanje odčitavanja je spodletelo: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:772
-#, fuzzy
-#| msgid "Failed to add new printer."
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
-msgstr "Dodajanje novega tiskalnika je spodletelo."
+msgstr "Odčitavanje novega prstnega odtisa je spodletelo."
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:803
-#, fuzzy, c-format
-#| msgid "Failed to start Sound Preferences: %s"
+#, c-format
 msgid "Failed to stop enrollment: %s"
-msgstr "Napaka med zagonom lastnosti zvoka: %s"
+msgstr "Zaustavljanje odčitavanja je spodletelo: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:847
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr ""
+"Ponavljajoče dvignite in položite prst na bralnik za odčitavanje prstnega "
+"odtisa"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
 #: panels/user-accounts/cc-fingerprint-dialog.c:989
-#, fuzzy
-#| msgid "Enrolling fingerprints"
 msgid "Scan new fingerprint"
-msgstr "Vpisovanje prstnih odtisov"
+msgstr "Odčitaj nov prstni odtis"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1029
-#, fuzzy, c-format
-#| msgid "Failed to forget device: "
+#, c-format
 msgid "Failed to release fingerprint device %s: %s"
-msgstr "Pozabljanje naprave je spodletelo: "
+msgstr "Sproščanje naprave za branje prstnega odtisa %s je spodletelo: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1100
 msgctxt "Fingerprint enroll state"
@@ -7283,10 +7269,9 @@ msgid "Problem Reading Device"
 msgstr "Napaka branja naprave"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1133
-#, fuzzy, c-format
-#| msgid "Failed to forget device: "
+#, c-format
 msgid "Failed to claim fingerprint device %s: %s"
-msgstr "Pozabljanje naprave je spodletelo: "
+msgstr "Povezovanje naprave za branje prstnega odtisa %s je spodletelo: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1270
 #, c-format
