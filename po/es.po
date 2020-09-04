@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-08-13 08:32+0000\n"
+"POT-Creation-Date: 2020-08-31 15:11+0000\n"
 "PO-Revision-Date: 2020-08-13 10:37+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
@@ -47,7 +47,7 @@ msgid "Session Bus"
 msgstr "Bus de sesión"
 
 #: panels/applications/cc-applications-panel.c:821
-#: panels/power/cc-power-panel.c:2506 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2325 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Dispositivos"
@@ -83,8 +83,8 @@ msgid "File System"
 msgstr "Sistema de achivos"
 
 #: panels/applications/cc-applications-panel.c:841
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:280
-#: shell/cc-window.c:934 shell/cc-window.ui:121
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
+#: shell/cc-window.c:933 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Configuración"
@@ -364,7 +364,7 @@ msgstr "Seleccionar una imagen"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:944
+#: panels/display/cc-display-panel.c:942
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:865
@@ -1575,20 +1575,20 @@ msgstr ""
 "pantalla;bloqueo;diagnóstico;error;privado;reciente;temporal;tmp;índice;"
 "nombre;red;identidad;privacidad;"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:953
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: panels/display/cc-display-panel.c:976
+#: panels/display/cc-display-panel.c:974
 msgid "Apply Changes?"
 msgstr "¿Aplicar los cambios?"
 
-#: panels/display/cc-display-panel.c:981
+#: panels/display/cc-display-panel.c:979
 msgid "Changes Cannot be Applied"
 msgstr "No se pueden aplicar los cambios"
 
-#: panels/display/cc-display-panel.c:982
+#: panels/display/cc-display-panel.c:980
 msgid "This could be due to hardware limitations."
 msgstr "Esto puede deber a limitaciones hardware."
 
@@ -1648,27 +1648,27 @@ msgstr "Pantallas"
 msgid "Night Light"
 msgstr "Luz nocturna"
 
-#: panels/display/cc-display-settings.c:104
+#: panels/display/cc-display-settings.c:103
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Horizontal"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:106
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Vertical derecha"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Vertical izquierda"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Horizontal (dada la vuelta)"
 
-#: panels/display/cc-display-settings.c:187
+#: panels/display/cc-display-settings.c:186
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -2709,7 +2709,7 @@ msgid "Secure network"
 msgstr "Red segura"
 
 #: panels/network/cc-wifi-connection-row.ui:102
-#: panels/network/net-device-ethernet.c:317
+#: panels/network/net-device-ethernet.c:316
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:414
 #: panels/network/network-vpn.ui:75
@@ -2913,7 +2913,7 @@ msgid "Never"
 msgstr "Nunca"
 
 #: panels/network/connection-editor/ce-page-details.c:162
-#: panels/network/net-device-ethernet.c:108
+#: panels/network/net-device-ethernet.c:107
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2927,7 +2927,7 @@ msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:289
-#: panels/network/net-device-ethernet.c:202
+#: panels/network/net-device-ethernet.c:201
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
@@ -2971,22 +2971,22 @@ msgstr "Excelente"
 
 #: panels/network/connection-editor/ce-page-details.c:396
 #: panels/network/connection-editor/details-page.ui:108
-#: panels/network/net-device-ethernet.c:143
+#: panels/network/net-device-ethernet.c:142
 #: panels/network/net-device-mobile.c:430
 msgid "IPv4 Address"
 msgstr "Dirección IPv4"
 
 #: panels/network/connection-editor/ce-page-details.c:397
 #: panels/network/connection-editor/details-page.ui:126
-#: panels/network/net-device-ethernet.c:144
-#: panels/network/net-device-ethernet.c:148
+#: panels/network/net-device-ethernet.c:143
+#: panels/network/net-device-ethernet.c:147
 #: panels/network/net-device-mobile.c:431 panels/network/network-mobile.ui:200
 msgid "IPv6 Address"
 msgstr "Dirección IPv6"
 
 #: panels/network/connection-editor/ce-page-details.c:400
 #: panels/network/connection-editor/ce-page-details.c:401
-#: panels/network/net-device-ethernet.c:146
+#: panels/network/net-device-ethernet.c:145
 #: panels/network/net-device-mobile.c:434
 #: panels/network/net-device-mobile.c:435 panels/network/network-mobile.ui:183
 msgid "IP Address"
@@ -3080,7 +3080,7 @@ msgid "Link speed"
 msgstr "Velocidad de conexión"
 
 #: panels/network/connection-editor/details-page.ui:144
-#: panels/network/net-device-ethernet.c:151
+#: panels/network/net-device-ethernet.c:150
 msgid "Hardware Address"
 msgstr "Dirección física"
 
@@ -3089,7 +3089,7 @@ msgid "Supported Frequencies"
 msgstr "Frecuencias soportadas"
 
 #: panels/network/connection-editor/details-page.ui:180
-#: panels/network/net-device-ethernet.c:155
+#: panels/network/net-device-ethernet.c:154
 #: panels/network/network-mobile.ui:217
 msgid "Default Route"
 msgstr "Ruta predeterminada"
@@ -3097,7 +3097,7 @@ msgstr "Ruta predeterminada"
 #: panels/network/connection-editor/details-page.ui:199
 #: panels/network/connection-editor/ip4-page.ui:211
 #: panels/network/connection-editor/ip6-page.ui:225
-#: panels/network/net-device-ethernet.c:157
+#: panels/network/net-device-ethernet.c:156
 #: panels/network/network-mobile.ui:235
 msgid "DNS"
 msgstr "DNS"
@@ -3361,19 +3361,19 @@ msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr ""
 "Red;Inalámbrica;Wireless;Wi-Fi;Wifi;IP;LAN;Banda;ancha;DNS;punto;acceso;"
 
-#: panels/network/net-device-ethernet.c:96
+#: panels/network/net-device-ethernet.c:95
 msgid "never"
 msgstr "nunca"
 
-#: panels/network/net-device-ethernet.c:104
+#: panels/network/net-device-ethernet.c:103
 msgid "today"
 msgstr "hoy"
 
-#: panels/network/net-device-ethernet.c:106
+#: panels/network/net-device-ethernet.c:105
 msgid "yesterday"
 msgstr "ayer"
 
-#: panels/network/net-device-ethernet.c:162
+#: panels/network/net-device-ethernet.c:161
 msgid "Last used"
 msgstr "Usada última vez"
 
@@ -3382,7 +3382,7 @@ msgstr "Usada última vez"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:251
+#: panels/network/net-device-ethernet.c:250
 #: panels/network/network-bluetooth.ui:38 panels/network/network-ethernet.ui:18
 msgid "Wired"
 msgstr "Cableada"
@@ -3413,17 +3413,17 @@ msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Olvidar"
 
-#: panels/network/net-device-wifi.c:1212
+#: panels/network/net-device-wifi.c:1193
 msgid "System policy prohibits use as a Hotspot"
 msgstr "La política del sistema prohíbe usarlo como punto de acceso"
 
-#: panels/network/net-device-wifi.c:1215
+#: panels/network/net-device-wifi.c:1196
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositivo inalámbrico no soporta el modo de punto de acceso"
 
 #: panels/network/net-proxy.c:70
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1939 panels/power/cc-power-panel.c:1950
+#: panels/power/cc-power-panel.c:1728 panels/power/cc-power-panel.c:1739
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4246,7 +4246,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Mostrar el c_ontenido del mensaje en la pantalla de bloqueo"
 
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1945 panels/power/cc-power-panel.c:1952
+#: panels/power/cc-power-panel.c:1734 panels/power/cc-power-panel.c:1741
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4338,18 +4338,18 @@ msgstr "Añadir una cuenta"
 msgid "Remove Account"
 msgstr "Quitar cuenta"
 
-#: panels/power/cc-power-panel.c:336
+#: panels/power/cc-power-panel.c:331
 msgid "Unknown time"
 msgstr "Tiempo desconocido"
 
-#: panels/power/cc-power-panel.c:342
+#: panels/power/cc-power-panel.c:337
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minuto"
 msgstr[1] "%i minutos"
 
-#: panels/power/cc-power-panel.c:354
+#: panels/power/cc-power-panel.c:349
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4358,263 +4358,263 @@ msgstr[1] "%i horas"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:362
+#: panels/power/cc-power-panel.c:357
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:363
+#: panels/power/cc-power-panel.c:358
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "hora"
 msgstr[1] "horas"
 
-#: panels/power/cc-power-panel.c:364
+#: panels/power/cc-power-panel.c:359
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:382
+#: panels/power/cc-power-panel.c:377
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s hasta que se cargue del todo"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:389
+#: panels/power/cc-power-panel.c:384
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Advertencia: quedan %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:394
+#: panels/power/cc-power-panel.c:389
 #, c-format
 msgid "%s remaining"
 msgstr "%s restante"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:399 panels/power/cc-power-panel.c:429
+#: panels/power/cc-power-panel.c:394 panels/power/cc-power-panel.c:424
 msgid "Fully charged"
 msgstr "Cargada completamente"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:403 panels/power/cc-power-panel.c:433
+#: panels/power/cc-power-panel.c:398 panels/power/cc-power-panel.c:428
 msgid "Not charging"
 msgstr "No está cargando"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:407 panels/power/cc-power-panel.c:437
+#: panels/power/cc-power-panel.c:402 panels/power/cc-power-panel.c:432
 msgid "Empty"
 msgstr "Vacía"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:420
+#: panels/power/cc-power-panel.c:415
 msgid "Charging"
 msgstr "Cargando"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:425
+#: panels/power/cc-power-panel.c:420
 msgid "Discharging"
 msgstr "Descargando"
 
-#: panels/power/cc-power-panel.c:571
+#: panels/power/cc-power-panel.c:566
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Principal"
 
-#: panels/power/cc-power-panel.c:573
+#: panels/power/cc-power-panel.c:568
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Adicional"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:643
 msgid "Wireless mouse"
 msgstr "Ratón inalámbrico"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:651
+#: panels/power/cc-power-panel.c:646
 msgid "Wireless keyboard"
 msgstr "Teclado inalámbrico"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:654
+#: panels/power/cc-power-panel.c:649
 msgid "Uninterruptible power supply"
 msgstr "Fuente de alimentación no interrumplible"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:657
+#: panels/power/cc-power-panel.c:652
 msgid "Personal digital assistant"
 msgstr "Asistente digital personal"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:660
+#: panels/power/cc-power-panel.c:655
 msgid "Cellphone"
 msgstr "Teléfono móvil"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:663
+#: panels/power/cc-power-panel.c:658
 msgid "Media player"
 msgstr "Reproductor multimedia"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:666 panels/wacom/cc-wacom-panel.c:794
+#: panels/power/cc-power-panel.c:661 panels/wacom/cc-wacom-panel.c:794
 msgid "Tablet"
 msgstr "Tableta"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:669
+#: panels/power/cc-power-panel.c:664
 msgid "Computer"
 msgstr "Equipo"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:672
+#: panels/power/cc-power-panel.c:667
 msgid "Gaming input device"
 msgstr "Mando de juegos"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:675 panels/power/cc-power-panel.c:967
-#: panels/power/cc-power-panel.c:2459
+#: panels/power/cc-power-panel.c:670 panels/power/cc-power-panel.c:962
+#: panels/power/cc-power-panel.c:2278
 msgid "Battery"
 msgstr "Batería"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:736
+#: panels/power/cc-power-panel.c:731
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Cargando"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:743
+#: panels/power/cc-power-panel.c:738
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Precaución"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:748
+#: panels/power/cc-power-panel.c:743
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Baja"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:753
+#: panels/power/cc-power-panel.c:748
 msgctxt "Battery power"
 msgid "Good"
 msgstr "Bien"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:758
+#: panels/power/cc-power-panel.c:753
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Cargada completamente"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:762
+#: panels/power/cc-power-panel.c:757
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Vacía"
 
-#: panels/power/cc-power-panel.c:965
+#: panels/power/cc-power-panel.c:960
 msgid "Batteries"
 msgstr "Baterías"
 
-#: panels/power/cc-power-panel.c:1393
+#: panels/power/cc-power-panel.c:1182
 msgid "When _idle"
 msgstr "Cuando esté _inactivo"
 
-#: panels/power/cc-power-panel.c:1887
+#: panels/power/cc-power-panel.c:1676
 msgid "Suspend"
 msgstr "Suspender"
 
-#: panels/power/cc-power-panel.c:1888
+#: panels/power/cc-power-panel.c:1677
 msgid "Power Off"
 msgstr "Apagar"
 
-#: panels/power/cc-power-panel.c:1889
+#: panels/power/cc-power-panel.c:1678
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: panels/power/cc-power-panel.c:1890
+#: panels/power/cc-power-panel.c:1679
 msgid "Nothing"
 msgstr "Nada"
 
-#: panels/power/cc-power-panel.c:1941
+#: panels/power/cc-power-panel.c:1730
 msgid "When on battery power"
 msgstr "En modo batería"
 
-#: panels/power/cc-power-panel.c:1943
+#: panels/power/cc-power-panel.c:1732
 msgid "When plugged in"
 msgstr "Cuando está conectado a la red"
 
-#: panels/power/cc-power-panel.c:2021
+#: panels/power/cc-power-panel.c:1836
 msgid "Power Saving"
 msgstr "Ahorro de energía"
 
-#: panels/power/cc-power-panel.c:2057
+#: panels/power/cc-power-panel.c:1872
 msgid "_Screen Brightness"
 msgstr "_Brillo de la pantalla"
 
-#: panels/power/cc-power-panel.c:2078
+#: panels/power/cc-power-panel.c:1895
 msgid "Automatic Brightness"
 msgstr "Brillo automático"
 
-#: panels/power/cc-power-panel.c:2091
+#: panels/power/cc-power-panel.c:1908
 msgid "_Keyboard Brightness"
 msgstr "_Brillo del teclado"
 
-#: panels/power/cc-power-panel.c:2102
+#: panels/power/cc-power-panel.c:1921
 msgid "_Dim Screen When Inactive"
 msgstr "_Oscurecer la pantalla cuando esté inactiva"
 
-#: panels/power/cc-power-panel.c:2120
+#: panels/power/cc-power-panel.c:1939
 msgid "_Blank Screen"
 msgstr "_Apagar la pantalla"
 
-#: panels/power/cc-power-panel.c:2166
+#: panels/power/cc-power-panel.c:1985
 msgid "_Automatic Suspend"
 msgstr "Suspender _automáticamente"
 
-#: panels/power/cc-power-panel.c:2167
+#: panels/power/cc-power-panel.c:1986
 msgid "Automatic suspend"
 msgstr "Suspender automáticamente"
 
-#: panels/power/cc-power-panel.c:2219
+#: panels/power/cc-power-panel.c:2038
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:2220
+#: panels/power/cc-power-panel.c:2039
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Se puede apagar la Wi-Fi para ahorrar energía."
 
-#: panels/power/cc-power-panel.c:2236
+#: panels/power/cc-power-panel.c:2055
 msgid "_Mobile Broadband"
 msgstr "Banda ancha _móvil"
 
-#: panels/power/cc-power-panel.c:2237
+#: panels/power/cc-power-panel.c:2056
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Se puede apagar la banda ancha móvil (3G, 4G, LTE, etc.) para ahorrar "
 "energía."
 
-#: panels/power/cc-power-panel.c:2287
+#: panels/power/cc-power-panel.c:2106
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2288
+#: panels/power/cc-power-panel.c:2107
 msgid "Bluetooth can be turned off to save power."
 msgstr "Se puede apagar el Bluetooth para ahorrar energía."
 
-#: panels/power/cc-power-panel.c:2325
+#: panels/power/cc-power-panel.c:2144
 msgid "Show Battery _Percentage"
 msgstr "Mostrar _porcentaje de la batería"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2351
+#: panels/power/cc-power-panel.c:2170
 msgid "Suspend & Power Button"
 msgstr "Botón de suspender y apagar"
 
-#: panels/power/cc-power-panel.c:2401
+#: panels/power/cc-power-panel.c:2220
 msgid "Po_wer Button Behavior"
 msgstr "Comportamiento del botón de _encendido"
 
@@ -5379,17 +5379,17 @@ msgstr ""
 "El servicio del sistema de impresión\n"
 "parece no estar disponible."
 
-#: panels/region/cc-format-chooser.c:151
+#: panels/region/cc-format-chooser.c:149
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperial"
 
-#: panels/region/cc-format-chooser.c:153
+#: panels/region/cc-format-chooser.c:151
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Métrico"
 
-#: panels/region/cc-format-chooser.c:258 panels/region/cc-format-chooser.c:299
+#: panels/region/cc-format-chooser.c:256 panels/region/cc-format-chooser.c:297
 #: panels/region/cc-format-chooser.ui:6
 msgid "Formats"
 msgstr "Formatos"
@@ -6602,11 +6602,6 @@ msgstr "Hacer más sencillo de ver, escuchar, escribir y apuntar y pulsar"
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:19
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Contrast;Cursor;Sound;Zoom;Screen;"
-#| "Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;Bounce;"
-#| "Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;audio;"
-#| "typing;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
@@ -8060,31 +8055,31 @@ msgstr "Configuración es la interfaz principal para configurar su sistema."
 msgid "The GNOME Project"
 msgstr "El Proyecto GNOME"
 
-#: shell/cc-application.c:60
+#: shell/cc-application.c:59
 msgid "Display version number"
 msgstr "Mostrar el número de versión"
 
-#: shell/cc-application.c:61
+#: shell/cc-application.c:60
 msgid "Enable verbose mode"
 msgstr "Activar el modo detallado"
 
-#: shell/cc-application.c:62
+#: shell/cc-application.c:61
 msgid "Search for the string"
 msgstr "Buscar la cadena"
 
-#: shell/cc-application.c:63
+#: shell/cc-application.c:62
 msgid "List possible panel names and exit"
 msgstr "Listar todos los nombres de paneles posibles y salir"
 
-#: shell/cc-application.c:64
+#: shell/cc-application.c:63
 msgid "Panel to display"
 msgstr "Panel que mostrar"
 
-#: shell/cc-application.c:64
+#: shell/cc-application.c:63
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENTO…]"
 
-#: shell/cc-panel-list.ui:45 shell/cc-window.c:276
+#: shell/cc-panel-list.ui:45 shell/cc-window.c:275
 msgid "Privacy"
 msgstr "Privacidad"
 
@@ -9797,7 +9792,7 @@ msgstr "Sonidos del sistema"
 #~ msgstr "_Permitir control remoto"
 
 #~ msgid "Welcome to the Control Center"
-#~ msgstr "Bienvenido al centro de control"
+#~ msgstr "Bienvenido/a al centro de control"
 
 #~ msgid "Select a panel in the sidelist to see the available options"
 #~ msgstr ""
