@@ -30,6 +30,7 @@
 #include "wireless-security.h"
 #include "ws-dynamic-wep.h"
 #include "ws-leap.h"
+#include "ws-sae.h"
 #include "ws-wep-key.h"
 #include "ws-wpa-eap.h"
 #include "ws-wpa-psk.h"
@@ -372,11 +373,11 @@ finish_setup (CEPageSecurity *self)
 
 #if NM_CHECK_VERSION(1,20,6)
         if (nm_utils_security_valid (NMU_SEC_SAE, dev_caps, FALSE, is_adhoc, 0, 0, 0)) {
-                WirelessSecurityWPAPSK *ws_wpa_psk;
+                WirelessSecuritySAE *ws_sae;
 
-                ws_wpa_psk = ws_wpa_psk_new (self->connection);
-                if (ws_wpa_psk) {
-                        add_security_item (self, WIRELESS_SECURITY (ws_wpa_psk), sec_model,
+                ws_sae = ws_sae_new (self->connection);
+                if (ws_sae) {
+                        add_security_item (self, WIRELESS_SECURITY (ws_sae), sec_model,
                                            &iter, _("WPA3 Personal"), FALSE);
                         if ((active < 0) && ((default_type == NMU_SEC_SAE)))
                                 active = item;

@@ -14,6 +14,7 @@ nm_applet_headers = [
   'wireless-security.h',
   'ws-leap.h',
   'ws-dynamic-wep.h',
+  'ws-sae.h',
   'ws-wep-key.h',
   'ws-wpa-eap.h',
   'ws-wpa-psk.h'
@@ -31,6 +32,7 @@ nm_applet_sources = [
   'wireless-security.c',
   'ws-leap.c',
   'ws-dynamic-wep.c',
+  'ws-sae.c',
   'ws-wep-key.c',
   'ws-wpa-eap.c',
   'ws-wpa-psk.c'
@@ -47,6 +49,7 @@ nm_resource_data = [
   'eap-method-ttls.ui',
   'ws-dynamic-wep.ui',
   'ws-leap.ui',
+  'ws-sae.ui',
   'ws-wep-key.ui',
   'ws-wpa-eap.ui',
   'ws-wpa-psk.ui'
