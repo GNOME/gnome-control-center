@@ -43,6 +43,8 @@ struct _CcKeyboardPanel
 
   GtkRadioButton      *per_window_source;
   GtkRadioButton      *same_source;
+  GtkLabel            *value_input_switch;
+  GSettings           *keybindings_settings;
 
   /* "Type Special Characters" section */
   CcXkbModifierDialog *alt_chars_dialog;
@@ -175,6 +177,7 @@ cc_keyboard_panel_finalize (GObject *object)
   CcKeyboardPanel *self = CC_KEYBOARD_PANEL (object);
 
   g_clear_object (&self->input_source_settings);
+  g_clear_object (&self->keybindings_settings);
 
   G_OBJECT_CLASS (cc_keyboard_panel_parent_class)->finalize (object);
 }
@@ -206,10 +209,30 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, compose_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, value_alternate_chars);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, value_compose);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, value_input_switch);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, common_shortcuts_row);
 
   gtk_widget_class_bind_template_callback (widget_class, special_chars_activated);
   gtk_widget_class_bind_template_callback (widget_class, keyboard_shortcuts_activated);
+}
+
+static gboolean
+translate_switch_input_source (GValue *value,
+                               GVariant *variant,
+                               gpointer user_data)
+{
+  g_autofree const gchar **strv = NULL;
+  g_autofree gchar *label = NULL;
+  CcKeyCombo combo = { 0 };
+
+  strv = g_variant_get_strv (variant, NULL);
+
+  gtk_accelerator_parse (strv[0] ? strv[0] : "", &combo.keyval, &combo.mask);
+  label = convert_keysym_state_to_string (&combo);
+
+  g_value_set_string (value, label);
+
+  return TRUE;
 }
 
 static void
@@ -241,7 +264,12 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
   g_settings_bind (self->input_source_settings, "per-window",
                    self->same_source, "active",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-
+  self->keybindings_settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
+  g_settings_bind_with_mapping (self->keybindings_settings, "switch-input-source",
+		                self->value_input_switch, "label",
+				G_SETTINGS_BIND_GET,
+				translate_switch_input_source,
+				NULL, NULL, NULL);
 
   /* "Type Special Characters" section */
   g_settings_bind_with_mapping (self->input_source_settings,
