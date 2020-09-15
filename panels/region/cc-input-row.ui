@@ -69,6 +69,34 @@
         <property name="margin">6</property>
         <property name="orientation">vertical</property>
         <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Move up</property>
+            <signal name="clicked" handler="move_up_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Move down</property>
+            <signal name="clicked" handler="move_down_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="orientation">horizontal</property>
+          </object>
+        </child>
+        <child>
           <object class="GtkButton" id="settings_button">
             <property name="visible">False</property>
             <property name="xalign">0</property>
@@ -80,6 +108,12 @@
           </object>
         </child>
         <child>
+          <object class="GtkSeparator" id="settings_separator">
+            <property name="visible">True</property>
+            <property name="orientation">horizontal</property>
+          </object>
+        </child>
+        <child>
           <object class="GtkButton">
             <property name="visible">True</property>
             <property name="xalign">0</property>
@@ -88,6 +122,12 @@
             <style>
               <class name="flat"/>
             </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="orientation">horizontal</property>
           </object>
         </child>
         <child>

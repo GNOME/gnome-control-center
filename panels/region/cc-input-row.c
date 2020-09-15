@@ -29,6 +29,7 @@ struct _CcInputRow
   GtkLabel        *name_label;
   GtkButton       *remove_button;
   GtkButton       *settings_button;
+  GtkSeparator    *settings_separator;
 
   GtkListBox      *drag_widget;
 };
@@ -113,6 +114,40 @@ drag_data_received_cb (CcInputRow       *self,
 }
 
 static void
+move_up_button_clicked_cb (CcInputRow *self,
+                           GtkButton  *button)
+{
+  GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
+  gint previous_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) - 1;
+  GtkListBoxRow *previous_row = gtk_list_box_get_row_at_index (list_box, previous_idx);
+
+  if (previous_row == NULL)
+    return;
+
+  g_signal_emit (self,
+                 signals[SIGNAL_MOVE_ROW],
+                 0,
+                 previous_row);
+}
+
+static void
+move_down_button_clicked_cb (CcInputRow *self,
+                             GtkButton  *button)
+{
+  GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
+  gint next_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) + 1;
+  GtkListBoxRow *next_row = gtk_list_box_get_row_at_index (list_box, next_idx);
+
+  if (next_row == NULL)
+    return;
+
+  g_signal_emit (next_row,
+                 signals[SIGNAL_MOVE_ROW],
+                 0,
+                 self);
+}
+
+static void
 settings_button_clicked_cb (CcInputRow *self)
 {
   g_signal_emit (self,
@@ -160,14 +195,17 @@ cc_input_row_class_init (CcInputRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, remove_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_button);
+  gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_separator);
 
-  gtk_widget_class_bind_template_callback (widget_class, drag_data_get_cb);
   gtk_widget_class_bind_template_callback (widget_class, drag_begin_cb);
-  gtk_widget_class_bind_template_callback (widget_class, drag_end_cb);
+  gtk_widget_class_bind_template_callback (widget_class, drag_data_get_cb);
   gtk_widget_class_bind_template_callback (widget_class, drag_data_received_cb);
+  gtk_widget_class_bind_template_callback (widget_class, drag_end_cb);
   gtk_widget_class_bind_template_callback (widget_class, layout_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, move_down_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, move_up_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked_cb);
 
   signals[SIGNAL_SHOW_SETTINGS] =
     g_signal_new ("show-settings",
@@ -243,6 +281,7 @@ cc_input_row_new (CcInputSource *source)
   label_changed_cb (self);
 
   gtk_widget_set_visible (GTK_WIDGET (self->settings_button), CC_IS_INPUT_SOURCE_IBUS (source));
+  gtk_widget_set_visible (GTK_WIDGET (self->settings_separator), CC_IS_INPUT_SOURCE_IBUS (source));
 
   return self;
 }
