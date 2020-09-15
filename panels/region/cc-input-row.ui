@@ -39,55 +39,19 @@
               </object>
             </child>
             <child>
-              <object class="GtkButton" id="settings_button">
-                <property name="visible">False</property>
-                <property name="margin_bottom">8</property>
-                <property name="margin_top">8</property>
-                <property name="valign">center</property>
-                <signal name="clicked" handler="settings_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-                <style>
-                  <class name="image-button"/>
-                </style>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="icon_name">emblem-system-symbolic</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton">
+              <object class="GtkMenuButton">
                 <property name="visible">True</property>
                 <property name="margin_bottom">8</property>
                 <property name="margin_top">8</property>
                 <property name="valign">center</property>
-                <signal name="clicked" handler="layout_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+                <property name="popover">popover_menu</property>
                 <style>
-                  <class name="image-button"/>
+                  <class name="flat"/>
                 </style>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
-                    <property name="icon_name">view-layout-symbolic</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="remove_button">
-                <property name="visible">True</property>
-                <property name="margin_bottom">8</property>
-                <property name="margin_top">8</property>
-                <property name="valign">center</property>
-                <signal name="clicked" handler="remove_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-                <style>
-                  <class name="image-button"/>
-                </style>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="icon_name">edit-delete-symbolic</property>
+                    <property name="icon_name">view-more-symbolic</property>
                   </object>
                 </child>
               </object>
@@ -97,4 +61,47 @@
       </object>
     </child>
   </template>
+  <object class="GtkPopoverMenu" id="popover_menu">
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin">6</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkButton" id="settings_button">
+            <property name="visible">False</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Preferences</property>
+            <signal name="clicked" handler="settings_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">View Keyboard Layout</property>
+            <signal name="clicked" handler="layout_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="remove_button">
+            <property name="visible">True</property>
+            <property name="xalign">0</property>
+            <property name="label" translatable="yes">Remove</property>
+            <signal name="clicked" handler="remove_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
 </interface>
