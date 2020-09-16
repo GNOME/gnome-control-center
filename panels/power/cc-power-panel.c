@@ -1297,7 +1297,6 @@ has_mobile_devices (NMClient *client)
       device = g_ptr_array_index (devices, i);
       switch (nm_device_get_device_type (device))
         {
-        case NM_DEVICE_TYPE_WIMAX:
         case NM_DEVICE_TYPE_MODEM:
           return TRUE;
         default:
@@ -1316,8 +1315,6 @@ mobile_switch_changed (CcPowerPanel *self)
   enabled = gtk_switch_get_active (GTK_SWITCH (self->mobile_switch));
   g_debug ("Setting wwan %s", enabled ? "enabled" : "disabled");
   nm_client_wwan_set_enabled (self->nm_client, enabled);
-  g_debug ("Setting wimax %s", enabled ? "enabled" : "disabled");
-  nm_client_wimax_set_enabled (self->nm_client, enabled);
 }
 
 static void
@@ -1344,15 +1341,12 @@ nm_client_state_changed (CcPowerPanel *self)
 
   visible = has_mobile_devices (self->nm_client);
 
-  /* Set the switch active, if either of wimax or wwan is enabled. */
+  /* Set the switch active, if wwan is enabled. */
   active = nm_client_networking_get_enabled (self->nm_client) &&
-           ((nm_client_wimax_get_enabled (self->nm_client) &&
-             nm_client_wimax_hardware_get_enabled (self->nm_client)) ||
-            (nm_client_wwan_get_enabled (self->nm_client) &&
-             nm_client_wwan_hardware_get_enabled (self->nm_client)));
+           (nm_client_wwan_get_enabled (self->nm_client) &&
+            nm_client_wwan_hardware_get_enabled (self->nm_client));
   sensitive = nm_client_networking_get_enabled (self->nm_client) &&
-              (nm_client_wwan_hardware_get_enabled (self->nm_client) ||
-               nm_client_wimax_hardware_get_enabled (self->nm_client));
+              nm_client_wwan_hardware_get_enabled (self->nm_client);
 
   g_debug ("mobile state changed to %s", active ? "enabled" : "disabled");
 
