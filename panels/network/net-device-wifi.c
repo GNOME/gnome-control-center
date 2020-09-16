@@ -1175,7 +1175,7 @@ net_device_wifi_init (NetDeviceWifi *self)
 }
 
 
-void
+static void
 nm_client_on_permission_change (NetDeviceWifi *self) {
         NMClientPermissionResult perm;
         NMDeviceWifiCapabilities caps;
