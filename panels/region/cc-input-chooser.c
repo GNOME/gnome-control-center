@@ -467,6 +467,17 @@ match_all (gchar       **words,
 }
 
 static gboolean
+match_default_source_in_table (gchar         **words,
+                               GtkListBoxRow  *row)
+{
+  const gchar *source_name;
+  source_name = g_object_get_data (G_OBJECT (row), "unaccented-name");
+  if (source_name && match_all (words, source_name))
+    return TRUE;
+  return FALSE;
+}
+
+static gboolean
 match_source_in_table (gchar      **words,
                        GHashTable  *table)
 {
@@ -523,6 +534,11 @@ list_filter (GtkListBoxRow *row,
     }
   else
     {
+      if (info->default_input_source_row &&
+          match_default_source_in_table (self->filter_words, info->default_input_source_row))
+        {
+          return TRUE;
+        }
       if (match_source_in_table (self->filter_words, info->layout_rows_by_id))
         return TRUE;
       if (match_source_in_table (self->filter_words, info->engine_rows_by_id))
