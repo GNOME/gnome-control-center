@@ -69,6 +69,7 @@ struct _CcKeyboardShortcutEditor
 
 static void          command_entry_changed_cb                    (CcKeyboardShortcutEditor *self);
 static void          name_entry_changed_cb                       (CcKeyboardShortcutEditor *self);
+static void          set_button_clicked_cb                       (CcKeyboardShortcutEditor *self);
 
 G_DEFINE_TYPE (CcKeyboardShortcutEditor, cc_keyboard_shortcut_editor, GTK_TYPE_DIALOG)
 
@@ -495,9 +496,10 @@ remove_button_clicked_cb (CcKeyboardShortcutEditor *self)
 static void
 replace_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
-  update_shortcut (self);
-
-  gtk_widget_hide (GTK_WIDGET (self));
+  if (self->mode == CC_SHORTCUT_EDITOR_CREATE)
+    add_button_clicked_cb (self);
+  else
+    set_button_clicked_cb (self);
 }
 
 static void
