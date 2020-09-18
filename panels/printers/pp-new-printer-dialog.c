@@ -1902,7 +1902,7 @@ ppd_selection_cb (GtkDialog *_dialog,
 
   ppd_name = pp_ppd_selection_dialog_get_ppd_name (self->ppd_selection_dialog);
   ppd_display_name = pp_ppd_selection_dialog_get_ppd_display_name (self->ppd_selection_dialog);
-  pp_ppd_selection_dialog_free (self->ppd_selection_dialog);
+  g_clear_object (&self->ppd_selection_dialog);
   self->ppd_selection_dialog = NULL;
 
   if (ppd_name)

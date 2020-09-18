@@ -25,7 +25,8 @@
 
 G_BEGIN_DECLS
 
-typedef struct _PpPPDSelectionDialog PpPPDSelectionDialog;
+#define PP_TYPE_PPD_SELECTION_DIALOG (pp_ppd_selection_dialog_get_type ())
+G_DECLARE_FINAL_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, PP, PPD_SELECTION_DIALOG, GObject)
 
 PpPPDSelectionDialog *pp_ppd_selection_dialog_new                  (GtkWindow                 *parent,
                                                                     PPDList                   *ppd_list,
@@ -36,6 +37,5 @@ gchar                *pp_ppd_selection_dialog_get_ppd_name         (PpPPDSelecti
 gchar                *pp_ppd_selection_dialog_get_ppd_display_name (PpPPDSelectionDialog      *dialog);
 void                  pp_ppd_selection_dialog_set_ppd_list         (PpPPDSelectionDialog      *dialog,
                                                                     PPDList                   *list);
-void                  pp_ppd_selection_dialog_free                 (PpPPDSelectionDialog      *dialog);
 
 G_END_DECLS

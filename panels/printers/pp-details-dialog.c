@@ -174,7 +174,7 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
         }
     }
 
-  pp_ppd_selection_dialog_free (self->pp_ppd_selection_dialog);
+  g_clear_object (&self->pp_ppd_selection_dialog);
   self->pp_ppd_selection_dialog = NULL;
 }
 
