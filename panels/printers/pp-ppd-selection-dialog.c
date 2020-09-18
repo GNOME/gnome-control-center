@@ -51,19 +51,19 @@ enum
 
 
 struct _PpPPDSelectionDialog {
-	GObject parent_instance;
+  GObject parent_instance;
 
-	GtkBuilder *builder;
-	GtkWidget  *dialog;
+  GtkBuilder *builder;
+  GtkWidget  *dialog;
 
-	UserResponseCallback user_callback;
-	gpointer             user_data;
+  UserResponseCallback user_callback;
+  gpointer             user_data;
 
-	gchar           *ppd_name;
-	gchar           *ppd_display_name;
-	gchar           *manufacturer;
+  gchar           *ppd_name;
+  gchar           *ppd_display_name;
+  gchar           *manufacturer;
 
-	PPDList *list;
+  PPDList *list;
 };
 
 G_DEFINE_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, G_TYPE_OBJECT)
@@ -93,7 +93,7 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
   GtkWidget            *widget;
   g_autoptr(GError)     error = NULL;
 
-	self = g_object_new (PP_TYPE_PPD_SELECTION_DIALOG, NULL);
+  self = g_object_new (PP_TYPE_PPD_SELECTION_DIALOG, NULL);
 
   self->user_callback = user_callback;
   self->user_data = user_data;
@@ -108,7 +108,7 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
     gtk_builder_get_object (self->builder, "ppd-spinner");
   gtk_spinner_start (GTK_SPINNER (widget));
 
-	populate_dialog (self);
+  populate_dialog (self);
 
   gtk_window_present (GTK_WINDOW (self->dialog));
   gtk_widget_show_all (GTK_WIDGET (self->dialog));
@@ -394,18 +394,18 @@ pp_ppd_selection_dialog_init (PpPPDSelectionDialog *self)
 static void
 pp_ppd_selection_dialog_finalize (GObject *object)
 {
-	PpPPDSelectionDialog *self = PP_PPD_SELECTION_DIALOG (object);
+  PpPPDSelectionDialog *self = PP_PPD_SELECTION_DIALOG (object);
 
   g_clear_object (&self->builder);
-	g_clear_pointer (&self->dialog, gtk_widget_destroy);
+  g_clear_pointer (&self->dialog, gtk_widget_destroy);
 
-	g_clear_pointer (&self->ppd_name, g_free);
-	g_clear_pointer (&self->ppd_name, g_free);
-	g_clear_pointer (&self->ppd_display_name, g_free);
+  g_clear_pointer (&self->ppd_name, g_free);
+  g_clear_pointer (&self->ppd_name, g_free);
+  g_clear_pointer (&self->ppd_display_name, g_free);
 
-	g_clear_pointer (&self->list, ppd_list_free);
+  g_clear_pointer (&self->list, ppd_list_free);
 
-	G_OBJECT_CLASS (pp_ppd_selection_dialog_parent_class)->finalize (object);
+  G_OBJECT_CLASS (pp_ppd_selection_dialog_parent_class)->finalize (object);
 }
 
 gchar *
