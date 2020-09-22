@@ -31,6 +31,7 @@
 
 #include "shell/cc-object-storage.h"
 #include "list-box-helper.h"
+#include "cc-battery-row.h"
 #include "cc-brightness-scale.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
@@ -316,131 +317,6 @@ get_chassis_type (GCancellable *cancellable)
   return g_variant_dup_string (inner, NULL);
 }
 
-static gchar *
-get_timestring (guint64 time_secs)
-{
-  gchar* timestring = NULL;
-  gint  hours;
-  gint  minutes;
-
-  /* Add 0.5 to do rounding */
-  minutes = (int) ( ( time_secs / 60.0 ) + 0.5 );
-
-  if (minutes == 0)
-    {
-      timestring = g_strdup (_("Unknown time"));
-      return timestring;
-    }
-
-  if (minutes < 60)
-    {
-      timestring = g_strdup_printf (ngettext ("%i minute",
-                                    "%i minutes",
-                                    minutes), minutes);
-      return timestring;
-    }
-
-  hours = minutes / 60;
-  minutes = minutes % 60;
-
-  if (minutes == 0)
-    {
-      timestring = g_strdup_printf (ngettext (
-                                    "%i hour",
-                                    "%i hours",
-                                    hours), hours);
-      return timestring;
-    }
-
-  /* TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
-   * Swap order with "%2$s %2$i %1$s %1$i if needed */
-  timestring = g_strdup_printf (_("%i %s %i %s"),
-                                hours, ngettext ("hour", "hours", hours),
-                                minutes, ngettext ("minute", "minutes", minutes));
-  return timestring;
-}
-
-static gchar *
-get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
-{
-  gchar *details;
-
-  if (time > 0)
-    {
-      g_autofree gchar *time_string = NULL;
-
-      time_string = get_timestring (time);
-      switch (state)
-        {
-          case UP_DEVICE_STATE_CHARGING:
-            /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
-            details = g_strdup_printf (_("%s until fully charged"), time_string);
-            break;
-          case UP_DEVICE_STATE_DISCHARGING:
-          case UP_DEVICE_STATE_PENDING_DISCHARGE:
-            if (percentage < 20)
-              {
-                /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
-                details = g_strdup_printf (_("Caution: %s remaining"), time_string);
-              }
-            else
-              {
-                /* TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes" */
-                details = g_strdup_printf (_("%s remaining"), time_string);
-              }
-            break;
-          case UP_DEVICE_STATE_FULLY_CHARGED:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Fully charged"));
-            break;
-          case UP_DEVICE_STATE_PENDING_CHARGE:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Not charging"));
-            break;
-          case UP_DEVICE_STATE_EMPTY:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Empty"));
-            break;
-          default:
-            details = g_strdup_printf ("error: %s", up_device_state_to_string (state));
-            break;
-        }
-    }
-  else
-    {
-      switch (state)
-        {
-          case UP_DEVICE_STATE_CHARGING:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Charging"));
-            break;
-          case UP_DEVICE_STATE_DISCHARGING:
-          case UP_DEVICE_STATE_PENDING_DISCHARGE:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Discharging"));
-            break;
-          case UP_DEVICE_STATE_FULLY_CHARGED:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Fully charged"));
-            break;
-          case UP_DEVICE_STATE_PENDING_CHARGE:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Not charging"));
-            break;
-          case UP_DEVICE_STATE_EMPTY:
-            /* TRANSLATORS: primary battery */
-            details = g_strdup (_("Empty"));
-            break;
-          default:
-            details = g_strdup_printf ("error: %s",
-                                       up_device_state_to_string (state));
-            break;
-        }
-    }
-
-  return details;
-}
-
 static void
 load_custom_css (CcPowerPanel *self)
 {
@@ -455,181 +331,15 @@ load_custom_css (CcPowerPanel *self)
 }
 
 static void
-set_primary (CcPowerPanel *panel, UpDevice *device)
+add_battery (CcPowerPanel *panel, UpDevice *device, gboolean primary)
 {
-  g_autofree gchar *details = NULL;
-  gdouble percentage;
-  guint64 time_empty, time_full, time;
-  UpDeviceState state;
-  GtkWidget *box, *box2, *label;
-  GtkWidget *levelbar, *row;
-  g_autofree gchar *s = NULL;
-  gdouble energy_full, energy_rate;
+  CcBatteryRow *row = cc_battery_row_new (device, primary);
+  cc_battery_row_set_level_sizegroup (row, panel->level_sizegroup);
+  cc_battery_row_set_row_sizegroup (row, panel->battery_row_sizegroup);
+  cc_battery_row_set_charge_sizegroup (row, panel->charge_sizegroup);
+  cc_battery_row_set_battery_sizegroup (row, panel->battery_sizegroup);
 
-  g_object_get (device,
-                "state", &state,
-                "percentage", &percentage,
-                "time-to-empty", &time_empty,
-                "time-to-full", &time_full,
-                "energy-full", &energy_full,
-                "energy-rate", &energy_rate,
-                NULL);
-  if (state == UP_DEVICE_STATE_DISCHARGING)
-    time = time_empty;
-  else
-    time = time_full;
-
-  /* Sometimes the reported state is fully charged but battery is at 99%,
-     refusing to reach 100%. In these cases, just assume 100%. */
-  if (state == UP_DEVICE_STATE_FULLY_CHARGED && (100.0 - percentage <= 1.0))
-    percentage = 100.0;
-
-  details = get_details_string (percentage, state, time);
-
-  row = no_prelight_row_new ();
-  gtk_widget_show (row);
-  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 10);
-  gtk_widget_show (box);
-  gtk_container_add (GTK_CONTAINER (row), box);
-
-  gtk_widget_set_margin_start (box, 12);
-  gtk_widget_set_margin_end (box, 12);
-  gtk_widget_set_margin_top (box, 16);
-  gtk_widget_set_margin_bottom (box, 14);
-
-  levelbar = gtk_level_bar_new ();
-  gtk_widget_show (levelbar);
-  gtk_level_bar_set_value (GTK_LEVEL_BAR (levelbar), percentage / 100.0);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "warning-battery-offset", 0.03);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "low-battery-offset", 0.1);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "high-battery-offset", 1.0);
-  gtk_widget_set_hexpand (levelbar, TRUE);
-  gtk_widget_set_halign (levelbar, GTK_ALIGN_FILL);
-  gtk_widget_set_valign (levelbar, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), levelbar, TRUE, TRUE, 0);
-
-  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (box2);
-  gtk_box_pack_start (GTK_BOX (box), box2, FALSE, TRUE, 0);
-
-  label = gtk_label_new (details);
-  gtk_widget_show (label);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
-  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-  gtk_box_pack_start (GTK_BOX (box2), label, TRUE, TRUE, 0);
-
-  s = g_strdup_printf ("%d%%", (int)(percentage + 0.5));
-  label = gtk_label_new (s);
-  gtk_widget_show (label);
-  gtk_widget_set_halign (label, GTK_ALIGN_END);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (box2), label, FALSE, TRUE, 0);
-
-  atk_object_add_relationship (gtk_widget_get_accessible (levelbar),
-                               ATK_RELATION_LABELLED_BY,
-                               gtk_widget_get_accessible (label));
-
-  gtk_container_add (GTK_CONTAINER (panel->battery_list), row);
-  gtk_size_group_add_widget (panel->battery_row_sizegroup, row);
-
-  g_object_set_data (G_OBJECT (row), "primary", GINT_TO_POINTER (TRUE));
-
-  gtk_widget_set_visible (panel->battery_section, TRUE);
-}
-
-static void
-add_battery (CcPowerPanel *panel, UpDevice *device)
-{
-  gdouble percentage;
-  UpDeviceKind kind;
-  UpDeviceState state;
-  GtkWidget *row;
-  GtkWidget *box;
-  GtkWidget *box2;
-  GtkWidget *label;
-  GtkWidget *title;
-  GtkWidget *levelbar;
-  GtkWidget *widget;
-  g_autofree gchar *s = NULL;
-  g_autofree gchar *icon_name = NULL;
-  const gchar *name;
-
-  g_object_get (device,
-                "kind", &kind,
-                "state", &state,
-                "percentage", &percentage,
-                "icon-name", &icon_name,
-                NULL);
-
-  if (g_object_get_data (G_OBJECT (device), "is-main-battery") != NULL)
-    name = C_("Battery name", "Main");
-  else
-    name = C_("Battery name", "Extra");
-
-  row = no_prelight_row_new ();
-  gtk_widget_show (row);
-  box = row_box_new ();
-  gtk_box_set_spacing (GTK_BOX (box), 10);
-  gtk_container_add (GTK_CONTAINER (row), box);
-
-  gtk_widget_set_margin_start (box, 12);
-  gtk_widget_set_margin_end (box, 12);
-  gtk_widget_set_margin_top (box, 16);
-  gtk_widget_set_margin_bottom (box, 14);
-
-  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (box2);
-  title = row_title_new (name, NULL, NULL);
-  gtk_size_group_add_widget (panel->battery_sizegroup, box2);
-  gtk_box_pack_start (GTK_BOX (box2), title, FALSE, TRUE, 0);
-  gtk_box_pack_start (GTK_BOX (box), box2, FALSE, TRUE, 0);
-
-#if 1
-  if (icon_name != NULL && *icon_name != '\0')
-    {
-      widget = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_BUTTON);
-      gtk_widget_show (widget);
-      gtk_style_context_add_class (gtk_widget_get_style_context (widget), GTK_STYLE_CLASS_DIM_LABEL);
-      gtk_widget_set_halign (widget, GTK_ALIGN_END);
-      gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-      gtk_box_pack_start (GTK_BOX (box2), widget, TRUE, TRUE, 0);
-    }
-#endif
-
-  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (box2);
-
-  s = g_strdup_printf ("%d%%", (int)percentage);
-  label = gtk_label_new (s);
-  gtk_widget_show (label);
-  gtk_widget_set_halign (label, GTK_ALIGN_END);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (box2), label, FALSE, TRUE, 0);
-  gtk_size_group_add_widget (panel->charge_sizegroup, label);
-
-  levelbar = gtk_level_bar_new ();
-  gtk_widget_show (levelbar);
-  gtk_level_bar_set_value (GTK_LEVEL_BAR (levelbar), percentage / 100.0);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "warning-battery-offset", 0.05);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "low-battery-offset", 0.1);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (levelbar), "high-battery-offset", 1.0);
-  gtk_widget_set_hexpand (levelbar, TRUE);
-  gtk_widget_set_halign (levelbar, GTK_ALIGN_FILL);
-  gtk_widget_set_valign (levelbar, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box2), levelbar, TRUE, TRUE, 0);
-  gtk_size_group_add_widget (panel->level_sizegroup, levelbar);
-  gtk_box_pack_start (GTK_BOX (box), box2, TRUE, TRUE, 0);
-
-  atk_object_add_relationship (gtk_widget_get_accessible (levelbar),
-                               ATK_RELATION_LABELLED_BY,
-                               gtk_widget_get_accessible (label));
-
-
-  g_object_set_data (G_OBJECT (row), "kind", GINT_TO_POINTER (kind));
-  gtk_container_add (GTK_CONTAINER (panel->battery_list), row);
-  gtk_size_group_add_widget (panel->battery_row_sizegroup, row);
-
+  gtk_container_add (GTK_CONTAINER (panel->battery_list), GTK_WIDGET (row));
   gtk_widget_set_visible (panel->battery_section, TRUE);
 }
 
@@ -963,7 +673,7 @@ up_client_changed (CcPowerPanel *self)
   gtk_label_set_label (GTK_LABEL (self->battery_heading), s);
 
   if (!on_ups && n_batteries > 1)
-    set_primary (self, composite);
+    add_battery (self, composite, TRUE);
 
   for (i = 0; self->devices != NULL && i < self->devices->len; i++)
     {
@@ -979,15 +689,15 @@ up_client_changed (CcPowerPanel *self)
         }
       else if (kind == UP_DEVICE_KIND_UPS && on_ups)
         {
-          set_primary (self, device);
+          add_battery (self, device, TRUE);
         }
       else if (kind == UP_DEVICE_KIND_BATTERY && is_power_supply && !on_ups && n_batteries == 1)
         {
-          set_primary (self, device);
+          add_battery (self, device, TRUE);
         }
       else if (kind == UP_DEVICE_KIND_BATTERY && is_power_supply)
         {
-          add_battery (self, device);
+          add_battery (self, device, FALSE);
         }
       else
         {

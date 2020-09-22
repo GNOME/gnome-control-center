@@ -18,6 +18,7 @@ i18n.merge_file(
 )
 
 sources = files(
+  'cc-battery-row.c',
   'cc-brightness-scale.c',
   'cc-power-panel.c'
 )
@@ -26,7 +27,10 @@ sources += gnome.mkenums_simple(
   'cc-brightness-scale-types',
   sources: ['cc-brightness-scale.h'])
 
-resource_data = files('cc-power-panel.ui')
+resource_data = files(
+  'cc-battery-row.ui',
+  'cc-power-panel.ui'
+)
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
