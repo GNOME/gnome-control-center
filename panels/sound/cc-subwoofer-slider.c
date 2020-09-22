@@ -59,7 +59,7 @@ volume_changed_cb (CcSubwooferSlider *self)
 
   volumes = gvc_channel_map_get_volume (self->channel_map);
   g_signal_handlers_block_by_func (self->adjustment, volume_changed_cb, self);
-  gtk_adjustment_set_value (self->adjustment, volumes[BALANCE]);
+  gtk_adjustment_set_value (self->adjustment, volumes[LFE]);
   g_signal_handlers_unblock_by_func (self->adjustment, volume_changed_cb, self);
 }
 
