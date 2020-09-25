@@ -797,13 +797,11 @@ on_account_added (GoaClient *client,
                            goa_account_get_provider_name (account),
                            goa_account_get_presentation_identity (account));
 
-  label = g_object_new (GTK_TYPE_LABEL,
-                        "ellipsize", PANGO_ELLIPSIZE_END,
-                        "label", title,
-                        "xalign", 0.0,
-                        "use-markup", TRUE,
-                        "hexpand", TRUE,
-                        NULL);
+  label = gtk_label_new (NULL);
+  gtk_label_set_markup (GTK_LABEL (label), title);
+  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_widget_set_hexpand (label, TRUE);
   gtk_widget_show (label);
   gtk_container_add (GTK_CONTAINER (box), label);
 
