@@ -203,21 +203,21 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 static GtkWidget *
 no_prelight_row_new (void)
 {
-  return (GtkWidget *) g_object_new (GTK_TYPE_LIST_BOX_ROW,
-                                     "selectable", FALSE,
-                                     "activatable", FALSE,
-                                     NULL);
+  GtkWidget *row = gtk_list_box_row_new ();
+  gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
+  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
+  return row;
 }
 
 static GtkWidget *
 row_box_new (void)
 {
-  return (GtkWidget *) g_object_new (GTK_TYPE_BOX,
-                                     "margin-end", 12,
-                                     "margin-start", 12,
-                                     "spacing", 12,
-                                     "visible", TRUE,
-                                     NULL);
+  GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, FALSE);
+  gtk_widget_set_margin_end (box, 12);
+  gtk_widget_set_margin_start (box, 12);
+  gtk_box_set_spacing (GTK_BOX (box), 12);
+  gtk_widget_show (box);
+  return box;
 }
 
 static GtkWidget *
@@ -228,24 +228,21 @@ row_title_new (const gchar  *title,
   PangoAttrList *attributes;
   GtkWidget *box, *label;
 
-  box = (GtkWidget *) g_object_new (GTK_TYPE_BOX,
-                                    "spacing", 4,
-                                    "margin-bottom", 6,
-                                    "margin-top", 6,
-                                    "orientation", GTK_ORIENTATION_VERTICAL,
-                                    "valign", GTK_ALIGN_CENTER,
-                                    "visible", TRUE,
-                                    NULL);
+  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, FALSE);
+  gtk_widget_show (box);
+  gtk_widget_set_margin_bottom (box, 6);
+  gtk_widget_set_margin_top (box, 6);
+  gtk_box_set_spacing (GTK_BOX (box), 4);
+  gtk_widget_set_valign (box, GTK_ALIGN_CENTER);
 
-  label = (GtkWidget *) g_object_new (GTK_TYPE_LABEL,
-                                      "ellipsize", PANGO_ELLIPSIZE_END,
-                                      "halign", GTK_ALIGN_START,
-                                      "label", title,
-                                      "use-markup", TRUE,
-                                      "use-underline", TRUE,
-                                      "visible", TRUE,
-                                      "xalign", 0.0,
-                                      NULL);
+  label = gtk_label_new (NULL);
+  gtk_widget_show (label);
+  gtk_label_set_markup (GTK_LABEL (label), title);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+
   if (title_label)
     *title_label = label;
   gtk_container_add (GTK_CONTAINER (box), label);
@@ -256,16 +253,14 @@ row_title_new (const gchar  *title,
   attributes = pango_attr_list_new ();
   pango_attr_list_insert (attributes, pango_attr_scale_new (0.9));
 
-  label = (GtkWidget *) g_object_new (GTK_TYPE_LABEL,
-                                      "ellipsize", PANGO_ELLIPSIZE_END,
-                                      "halign", GTK_ALIGN_START,
-                                      "label", subtitle,
-                                      "use-markup", TRUE,
-                                      "use-underline", TRUE,
-                                      "visible", TRUE,
-                                      "xalign", 0.0,
-                                      "attributes", attributes,
-                                      NULL);
+  label = gtk_label_new (NULL);
+  gtk_widget_show (label);
+  gtk_label_set_markup (GTK_LABEL (label), subtitle);
+  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
+  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
+  gtk_widget_set_halign (label, GTK_ALIGN_START);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_label_set_attributes (GTK_LABEL (label), attributes);
   gtk_style_context_add_class (gtk_widget_get_style_context (label),
                                GTK_STYLE_CLASS_DIM_LABEL);
   gtk_container_add (GTK_CONTAINER (box), label);
