@@ -95,7 +95,6 @@ create_widget_func (gpointer model_item,
   GtkWidget *child;
   GtkWidget *image;
   GtkWidget *icon;
-  GtkWidget *button_image;
   GtkWidget *button = NULL;
   BgSource *source;
 
@@ -109,27 +108,28 @@ create_widget_func (gpointer model_item,
   image = gtk_image_new_from_pixbuf (pixbuf);
   gtk_widget_show (image);
 
-  icon = g_object_new (GTK_TYPE_IMAGE,
-                       "icon-name", "slideshow-emblem",
-                       "pixel-size", 16,
-                       "margin", 8,
-                       "halign", GTK_ALIGN_END,
-                       "valign", GTK_ALIGN_END,
-                       "visible", cc_background_item_changes_with_time (item),
-                       NULL);
+  icon = gtk_image_new_from_icon_name("slideshow-emblem", GTK_ICON_SIZE_BUTTON);
+  gtk_image_set_pixel_size (GTK_IMAGE (icon), 16);
+  gtk_widget_set_margin_start (icon, 8);
+  gtk_widget_set_margin_end (icon, 8);
+  gtk_widget_set_margin_top (icon, 8);
+  gtk_widget_set_margin_bottom (icon, 8);
+  gtk_widget_set_halign (icon, GTK_ALIGN_END);
+  gtk_widget_set_valign (icon, GTK_ALIGN_END);
+  gtk_widget_set_visible (icon, cc_background_item_changes_with_time (item));
   gtk_style_context_add_class (gtk_widget_get_style_context (icon), "slideshow-emblem");
 
 
   if (BG_IS_RECENT_SOURCE (source))
     {
-      button_image = gtk_image_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_BUTTON);
-      button =  g_object_new (GTK_TYPE_BUTTON,
-                              "image", button_image,
-                              "halign", GTK_ALIGN_END,
-                              "valign", GTK_ALIGN_START,
-                              "margin", 6,
-                              "visible", TRUE,
-                              NULL);
+      button = gtk_button_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_BUTTON);
+      gtk_widget_set_halign (button, GTK_ALIGN_END);
+      gtk_widget_set_valign (button, GTK_ALIGN_START);
+      gtk_widget_set_margin_start (icon, 6);
+      gtk_widget_set_margin_end (icon, 6);
+      gtk_widget_set_margin_top (icon, 6);
+      gtk_widget_set_margin_bottom (icon, 6);
+      gtk_widget_show (button);
 
       gtk_style_context_add_class (gtk_widget_get_style_context (button), "osd");
       gtk_style_context_add_class (gtk_widget_get_style_context (button), "remove-button");
@@ -147,10 +147,9 @@ create_widget_func (gpointer model_item,
     gtk_overlay_add_overlay (GTK_OVERLAY (overlay), button);
   gtk_widget_show (overlay);
 
-  child = g_object_new (GTK_TYPE_FLOW_BOX_CHILD,
-                        "halign", GTK_ALIGN_CENTER,
-                        "valign", GTK_ALIGN_CENTER,
-                        NULL);
+  child = gtk_flow_box_child_new();
+  gtk_widget_set_halign (child, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (child, GTK_ALIGN_CENTER);
   gtk_container_add (GTK_CONTAINER (child), overlay);
   gtk_widget_show (child);
 
