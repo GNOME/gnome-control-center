@@ -65,7 +65,8 @@ struct _PpPPDSelectionDialog {
 };
 
 static void
-manufacturer_selection_changed_cb (PpPPDSelectionDialog *self)
+manufacturer_selection_changed_cb (GtkTreeSelection *selection,
+                                   PpPPDSelectionDialog *self)
 {
   GtkTreeView  *treeview;
   GtkListStore *store;
@@ -122,7 +123,8 @@ manufacturer_selection_changed_cb (PpPPDSelectionDialog *self)
 }
 
 static void
-model_selection_changed_cb (PpPPDSelectionDialog *self)
+model_selection_changed_cb (GtkTreeSelection *selection,
+                            PpPPDSelectionDialog *self)
 {
   GtkTreeView  *treeview;
   GtkTreeModel *model;
@@ -256,11 +258,11 @@ populate_dialog (PpPPDSelectionDialog *self)
   gtk_tree_view_append_column (models_treeview, column);
 
 
-  g_signal_connect_object (gtk_tree_view_get_selection (models_treeview),
-                           "changed", G_CALLBACK (model_selection_changed_cb), self, G_CONNECT_SWAPPED);
+  g_signal_connect (gtk_tree_view_get_selection (models_treeview),
+                    "changed", G_CALLBACK (model_selection_changed_cb), self);
 
-  g_signal_connect_object (gtk_tree_view_get_selection (manufacturers_treeview),
-                           "changed", G_CALLBACK (manufacturer_selection_changed_cb), self, G_CONNECT_SWAPPED);
+  g_signal_connect (gtk_tree_view_get_selection (manufacturers_treeview),
+                    "changed", G_CALLBACK (manufacturer_selection_changed_cb), self);
 
   gtk_widget_show_all (self->dialog);
 
@@ -282,8 +284,9 @@ populate_dialog (PpPPDSelectionDialog *self)
 }
 
 static void
-ppd_selection_dialog_response_cb (PpPPDSelectionDialog *self,
-                                  gint       response_id)
+ppd_selection_dialog_response_cb (GtkDialog *dialog,
+                                  gint       response_id,
+                                  PpPPDSelectionDialog *self)
 {
   GtkTreeSelection *selection;
   GtkTreeModel     *model;
@@ -354,7 +357,7 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
 
   /* connect signals */
   g_signal_connect (self->dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-  g_signal_connect_object (self->dialog, "response", G_CALLBACK (ppd_selection_dialog_response_cb), self, G_CONNECT_SWAPPED);
+  g_signal_connect (self->dialog, "response", G_CALLBACK (ppd_selection_dialog_response_cb), self);
 
   gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (parent));
 
