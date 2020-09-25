@@ -35,8 +35,6 @@
 
 #include "pp-ppd-selection-dialog.h"
 
-static void pp_ppd_selection_dialog_hide (PpPPDSelectionDialog *dialog);
-
 enum
 {
   PPD_NAMES_COLUMN = 0,
@@ -67,54 +65,6 @@ struct _PpPPDSelectionDialog {
 };
 
 G_DEFINE_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, G_TYPE_OBJECT)
-
-static void populate_dialog (PpPPDSelectionDialog *self);
-
-static void pp_ppd_selection_dialog_finalize (GObject *object);
-
-static void
-pp_ppd_selection_dialog_class_init (PpPPDSelectionDialogClass *klass)
-{
-  GObjectClass *object_class;
-
-  object_class = G_OBJECT_CLASS (klass);
-  object_class->finalize = pp_ppd_selection_dialog_finalize;
-}
-
-
-PpPPDSelectionDialog *
-pp_ppd_selection_dialog_new (GtkWindow            *parent,
-                             PPDList              *ppd_list,
-                             const gchar          *manufacturer,
-                             UserResponseCallback  user_callback,
-                             gpointer              user_data)
-{
-  PpPPDSelectionDialog *self;
-  GtkWidget            *widget;
-  g_autoptr(GError)     error = NULL;
-
-  self = g_object_new (PP_TYPE_PPD_SELECTION_DIALOG, NULL);
-
-  self->user_callback = user_callback;
-  self->user_data = user_data;
-
-  self->list = ppd_list_copy (ppd_list);
-
-  self->manufacturer = get_standard_manufacturers_name (manufacturer);
-
-  gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (parent));
-
-  widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "ppd-spinner");
-  gtk_spinner_start (GTK_SPINNER (widget));
-
-  populate_dialog (self);
-
-  gtk_window_present (GTK_WINDOW (self->dialog));
-  gtk_widget_show_all (GTK_WIDGET (self->dialog));
-
-  return PP_PPD_SELECTION_DIALOG (self);
-}
 
 static void
 manufacturer_selection_changed_cb (PpPPDSelectionDialog *self)
@@ -339,7 +289,7 @@ ppd_selection_dialog_response_cb (PpPPDSelectionDialog *self,
   GtkTreeView      *models_treeview;
   GtkTreeIter       iter;
 
-  pp_ppd_selection_dialog_hide (self);
+  gtk_widget_hide (GTK_WIDGET (self->dialog));
 
   if (response_id == GTK_RESPONSE_OK)
     {
@@ -367,6 +317,65 @@ ppd_selection_dialog_response_cb (PpPPDSelectionDialog *self,
 }
 
 static void
+pp_ppd_selection_dialog_finalize (GObject *object)
+{
+  PpPPDSelectionDialog *self = PP_PPD_SELECTION_DIALOG (object);
+
+  g_clear_object (&self->builder);
+  g_clear_pointer (&self->dialog, gtk_widget_destroy);
+
+  g_clear_pointer (&self->ppd_name, g_free);
+  g_clear_pointer (&self->ppd_name, g_free);
+  g_clear_pointer (&self->ppd_display_name, g_free);
+
+  G_OBJECT_CLASS (pp_ppd_selection_dialog_parent_class)->finalize (object);
+}
+
+static void
+pp_ppd_selection_dialog_class_init (PpPPDSelectionDialogClass *klass)
+{
+  GObjectClass *object_class;
+
+  object_class = G_OBJECT_CLASS (klass);
+  object_class->finalize = pp_ppd_selection_dialog_finalize;
+}
+
+
+PpPPDSelectionDialog *
+pp_ppd_selection_dialog_new (GtkWindow            *parent,
+                             PPDList              *ppd_list,
+                             const gchar          *manufacturer,
+                             UserResponseCallback  user_callback,
+                             gpointer              user_data)
+{
+  PpPPDSelectionDialog *self;
+  GtkWidget            *widget;
+  g_autoptr(GError)     error = NULL;
+
+  self = g_object_new (PP_TYPE_PPD_SELECTION_DIALOG, NULL);
+
+  self->user_callback = user_callback;
+  self->user_data = user_data;
+
+  self->list = ppd_list_copy (ppd_list);
+
+  self->manufacturer = get_standard_manufacturers_name (manufacturer);
+
+  gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (parent));
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (self->builder, "ppd-spinner");
+  gtk_spinner_start (GTK_SPINNER (widget));
+
+  populate_dialog (self);
+
+  gtk_window_present (GTK_WINDOW (self->dialog));
+  gtk_widget_show_all (GTK_WIDGET (self->dialog));
+
+  return PP_PPD_SELECTION_DIALOG (self);
+}
+
+static void
 pp_ppd_selection_dialog_init (PpPPDSelectionDialog *self)
 {
   g_autoptr(GError)     error = NULL;
@@ -391,21 +400,6 @@ pp_ppd_selection_dialog_init (PpPPDSelectionDialog *self)
   g_signal_connect_object (self->dialog, "response", G_CALLBACK (ppd_selection_dialog_response_cb), self, G_CONNECT_SWAPPED);
 }
 
-static void
-pp_ppd_selection_dialog_finalize (GObject *object)
-{
-  PpPPDSelectionDialog *self = PP_PPD_SELECTION_DIALOG (object);
-
-  g_clear_object (&self->builder);
-  g_clear_pointer (&self->dialog, gtk_widget_destroy);
-
-  g_clear_pointer (&self->ppd_name, g_free);
-  g_clear_pointer (&self->ppd_name, g_free);
-  g_clear_pointer (&self->ppd_display_name, g_free);
-
-  G_OBJECT_CLASS (pp_ppd_selection_dialog_parent_class)->finalize (object);
-}
-
 gchar *
 pp_ppd_selection_dialog_get_ppd_name (PpPPDSelectionDialog *self)
 {
@@ -424,10 +418,4 @@ pp_ppd_selection_dialog_set_ppd_list (PpPPDSelectionDialog *self,
 {
   self->list = list;
   fill_ppds_list (self);
-}
-
-static void
-pp_ppd_selection_dialog_hide (PpPPDSelectionDialog *self)
-{
-  gtk_widget_hide (GTK_WIDGET (self->dialog));
 }
