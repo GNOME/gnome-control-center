@@ -282,12 +282,11 @@ row_data_new (CcPanelCategory     category,
   data->keywords = g_strdupv (keywords);
 
   /* Setup the row */
-  grid = g_object_new (GTK_TYPE_GRID,
-                       "visible", TRUE,
-                       "hexpand", TRUE,
-                       "border-width", 12,
-                       "column-spacing", 12,
-                       NULL);
+  grid = gtk_grid_new ();
+  gtk_widget_show (grid);
+  gtk_widget_set_hexpand (grid, TRUE);
+  gtk_container_set_border_width (GTK_CONTAINER (grid), 12);
+  gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
 
   /* Icon */
   image = gtk_image_new_from_icon_name (icon, GTK_ICON_SIZE_BUTTON);
@@ -298,21 +297,17 @@ row_data_new (CcPanelCategory     category,
   gtk_widget_show (image);
 
   /* Name label */
-  label = g_object_new (GTK_TYPE_LABEL,
-                        "label", name,
-                        "visible", TRUE,
-                        "xalign", 0.0,
-                        "hexpand", TRUE,
-                        NULL);
+  label = gtk_label_new (name);
+  gtk_widget_show (label);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_widget_set_hexpand (label, TRUE);
   gtk_grid_attach (GTK_GRID (grid), label, 1, 0, 1, 1);
 
   /* Description label */
-  label = g_object_new (GTK_TYPE_LABEL,
-                        "label", description,
-                        "visible", FALSE,
-                        "xalign", 0.0,
-                        "hexpand", TRUE,
-                        NULL);
+  label = gtk_label_new (description);
+  gtk_widget_show (label);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_widget_set_hexpand (label, TRUE);
   gtk_label_set_max_width_chars (GTK_LABEL (label), 25);
   gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
 
