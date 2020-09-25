@@ -423,12 +423,10 @@ header_function (GtkListBoxRow *row,
       gtk_widget_set_margin_top (box, before ? 18 : 6);
 
       markup = g_strdup_printf ("<b>%s</b>", _(data->section_title));
-      label = g_object_new (GTK_TYPE_LABEL,
-                            "label", markup,
-                            "use-markup", TRUE,
-                            "xalign", 0.0,
-                            "margin-start", 6,
-                            NULL);
+      label = gtk_label_new (NULL);
+      gtk_label_set_markup (GTK_LABEL (label), markup);
+      gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+      gtk_widget_set_margin_start (label, 6);
       gtk_widget_show (label);
       gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
       gtk_container_add (GTK_CONTAINER (box), label);
