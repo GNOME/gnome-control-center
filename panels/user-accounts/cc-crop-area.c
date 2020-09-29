@@ -352,10 +352,10 @@ update_cursor (CcCropArea *area,
         }
 
         if (cursor_type != area->current_cursor) {
-                GdkCursor *cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (area)),
-                                                                cursor_type);
+                g_autoptr(GdkCursor) cursor = NULL;
+                cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (area)),
+                                                     cursor_type);
                 gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (area)), cursor);
-                g_object_unref (cursor);
                 area->current_cursor = cursor_type;
         }
 }
