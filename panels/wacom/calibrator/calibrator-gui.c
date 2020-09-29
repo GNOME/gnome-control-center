@@ -309,7 +309,7 @@ calib_area_new (GdkScreen      *screen,
   GdkMonitor *monitor;
 #ifndef FAKE_AREA
   GdkWindow *window;
-  GdkCursor *cursor;
+  g_autoptr(GdkCursor) cursor = NULL;
 #endif /* FAKE_AREA */
   GtkGesture *press;
 
@@ -344,7 +344,6 @@ calib_area_new (GdkScreen      *screen,
   window = gtk_widget_get_window (calib_area->window);
   cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_BLANK_CURSOR);
   gdk_window_set_cursor (window, cursor);
-  g_object_unref (cursor);
 
   gtk_widget_set_can_focus (calib_area->window, TRUE);
   gtk_window_set_keep_above (GTK_WINDOW (calib_area->window), TRUE);
