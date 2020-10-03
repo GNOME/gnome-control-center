@@ -2,7 +2,7 @@ project(
   'gnome-control-center', 'c',
         version : '40.alpha',
         license : 'GPL2+',
-  meson_version : '>= 0.51.0'
+  meson_version : '>= 0.53.0'
 )
 
 control_center_prefix = get_option('prefix')
@@ -291,21 +291,22 @@ configure_file(
   configuration: config_h
 )
 
-output = ''
-output += '\n        ' + meson.project_name() + ' - ' + meson.project_version() + '\n'
-output += '    ===================================\n'
-output += ' Options \n'
-output += '     Documentation .............................. ' + get_option('documentation').to_string() + '\n'
-output += '     Build Tests ................................ ' + get_option('tests').to_string() + '\n'
-output += '     Tracing .................................... ' + enable_tracing.to_string() + '\n'
-output += '     Optimized .................................. ' + control_center_optimized.to_string() + '\n'
-output += ' Panels \n'
-output += '     GNOME Bluetooth (Bluetooth panel) .......... ' + host_is_linux_not_s390.to_string() + '\n'
-output += '     Cheese (Users panel webcam support) ........ ' + enable_cheese.to_string() + '\n'
-output += '     IBus (Region panel IBus support) ........... ' + enable_ibus.to_string() + '\n'
-output += '     NetworkManager (Network panel) ............. ' + host_is_linux.to_string() + '\n'
-output += '     Wacom (Wacom tablet panel) ................. ' + host_is_linux_not_s390.to_string() + '\n'
-output += '     Snap support ............................... ' + enable_snap.to_string() + '\n'
-output += '     Malcontent support ......................... ' + enable_malcontent.to_string() + '\n'
+summary({
+  'Documentation': get_option('documentation'),
+  'Tests': get_option('tests'),
+  'Tracing': enable_tracing,
+  'Optimized': control_center_optimized,
+})
 
-message(output)
+summary({
+  'GNOME Bluetooth': host_is_linux_not_s390,
+  'NetworkManager': host_is_linux,
+  'Wacom': host_is_linux_not_s390,
+}, section: 'Dependencies')
+
+summary({
+  'Cheese': enable_cheese,
+  'IBus': enable_ibus,
+  'Snap': enable_snap,
+  'Malcontent': enable_malcontent,
+}, section: 'Optional Dependencies')
