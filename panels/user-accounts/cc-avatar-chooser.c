@@ -216,8 +216,16 @@ create_face_widget (gpointer item,
                                                           AVATAR_CHOOSER_PIXEL_SIZE,
                                                           AVATAR_CHOOSER_PIXEL_SIZE,
                                                           NULL);
-        if (source_pixbuf == NULL)
-                return NULL;
+        if (source_pixbuf == NULL) {
+                image = gtk_image_new_from_icon_name ("image-missing");
+                gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
+                gtk_widget_show (image);
+
+                g_object_set_data_full (G_OBJECT (image),
+                                        "filename", g_steal_pointer (&image_path), g_free);
+
+                return image;
+        }
 
         pixbuf = round_image (source_pixbuf);
         image = gtk_image_new_from_pixbuf (pixbuf);
