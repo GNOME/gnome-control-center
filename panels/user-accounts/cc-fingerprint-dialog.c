@@ -839,7 +839,7 @@ get_enrollment_string (CcFingerprintDialog *self,
   if (have_multiple_devices (self))
     device_name = cc_fprintd_device_get_name (self->device);
 
-  ret = TR (finger_str_to_msg (finger_id, device_name, is_swipe));
+  ret = finger_str_to_msg (finger_id, device_name, is_swipe);
 
   if (ret)
     return ret;
@@ -852,8 +852,8 @@ enroll_finger (CcFingerprintDialog *self,
                const char          *finger_id)
 {
   g_auto(GStrv) tmp_finger_name = NULL;
-  g_autofree char *enroll_message = NULL;
   g_autofree char *finger_name = NULL;
+  g_autofree char *enroll_message = NULL;
 
   g_return_if_fail (finger_id);
 
@@ -863,7 +863,7 @@ enroll_finger (CcFingerprintDialog *self,
 
   g_debug ("Enrolling finger %s", finger_id);
 
-  enroll_message = TR (get_enrollment_string (self, finger_id));
+  enroll_message = get_enrollment_string (self, finger_id);
   tmp_finger_name = g_strsplit (get_finger_name (finger_id), "_", -1);
   finger_name = g_strjoinv ("", tmp_finger_name);
 
