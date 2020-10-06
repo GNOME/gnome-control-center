@@ -130,16 +130,16 @@ G_GNUC_UNUSED static const char *verify_result_str_to_msg(const char *result, gb
 
 	if (strcmp (result, "verify-retry-scan") == 0) {
 		if (is_swipe == FALSE)
-			return N_("Place your finger on the reader again");
+			return TR (N_("Place your finger on the reader again"));
 		else
-			return N_("Swipe your finger again");
+			return TR (N_("Swipe your finger again"));
 	}
 	if (strcmp (result, "verify-swipe-too-short") == 0)
-		return N_("Swipe was too short, try again");
+		return TR (N_("Swipe was too short, try again"));
 	if (strcmp (result, "verify-finger-not-centered") == 0)
-		return N_("Your finger was not centered, try swiping your finger again");
+		return TR (N_("Your finger was not centered, try swiping your finger again"));
 	if (strcmp (result, "verify-remove-and-retry") == 0)
-		return N_("Remove your finger, and try swiping your finger again");
+		return TR (N_("Remove your finger, and try swiping your finger again"));
 
 	return NULL;
 }
@@ -156,16 +156,16 @@ G_GNUC_UNUSED static const char *enroll_result_str_to_msg(const char *result, gb
 
 	if (strcmp (result, "enroll-retry-scan") == 0 || strcmp (result, "enroll-stage-passed") == 0) {
 		if (is_swipe == FALSE)
-			return N_("Place your finger on the reader again");
+			return TR (N_("Place your finger on the reader again"));
 		else
-			return N_("Swipe your finger again");
+			return TR (N_("Swipe your finger again"));
 	}
 	if (strcmp (result, "enroll-swipe-too-short") == 0)
-		return N_("Swipe was too short, try again");
+		return TR (N_("Swipe was too short, try again"));
 	if (strcmp (result, "enroll-finger-not-centered") == 0)
-		return N_("Your finger was not centered, try swiping your finger again");
+		return TR (N_("Your finger was not centered, try swiping your finger again"));
 	if (strcmp (result, "enroll-remove-and-retry") == 0)
-		return N_("Remove your finger, and try swiping your finger again");
+		return TR (N_("Remove your finger, and try swiping your finger again"));
 
 	return NULL;
 }

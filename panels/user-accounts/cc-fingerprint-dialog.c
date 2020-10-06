@@ -702,7 +702,7 @@ handle_enroll_signal (CcFingerprintDialog *self,
       scan_type = cc_fprintd_device_get_scan_type (self->device);
       is_swipe = g_str_equal (scan_type, "swipe");
 
-      message = TR (enroll_result_str_to_msg (result, is_swipe));
+      message = enroll_result_str_to_msg (result, is_swipe);
       set_enroll_result_message (self, ENROLL_STATE_RETRY, message);
 
       self->enroll_stage_passed_id =
