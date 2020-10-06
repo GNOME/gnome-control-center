@@ -254,7 +254,8 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
       g_assert_not_reached ();
     }
 
-  rebuild_ui (panel);
+  if (!panel->rebuilding_counter)
+    rebuild_ui (panel);
 }
 
 static void
