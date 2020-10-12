@@ -393,11 +393,9 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   GtkWidget *box2;
   GtkWidget *widget;
   GtkWidget *title;
-  g_autoptr(GString) status = NULL;
   g_autoptr(GString) description = NULL;
   gdouble percentage;
   g_autofree gchar *name = NULL;
-  gboolean show_caution = FALSE;
   gboolean is_present;
   UpDeviceLevel battery_level;
 
@@ -413,53 +411,10 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   if (!is_present)
     return;
 
-  if (kind == UP_DEVICE_KIND_UPS)
-    show_caution = TRUE;
-
   if (name == NULL || *name == '\0')
     description = g_string_new (_(kind_to_description (kind)));
   else
     description = g_string_new (name);
-
-  switch (state)
-    {
-      case UP_DEVICE_STATE_CHARGING:
-      case UP_DEVICE_STATE_PENDING_CHARGE:
-        /* TRANSLATORS: secondary battery */
-        status = g_string_new(C_("Battery power", "Charging"));
-        break;
-      case UP_DEVICE_STATE_DISCHARGING:
-      case UP_DEVICE_STATE_PENDING_DISCHARGE:
-        if (percentage < 10 && show_caution)
-          {
-            /* TRANSLATORS: secondary battery */
-            status = g_string_new (C_("Battery power", "Caution"));
-          }
-        else if (percentage < 30)
-          {
-            /* TRANSLATORS: secondary battery */
-            status = g_string_new (C_("Battery power", "Low"));
-          }
-        else
-          {
-            /* TRANSLATORS: secondary battery */
-            status = g_string_new (C_("Battery power", "Good"));
-          }
-        break;
-      case UP_DEVICE_STATE_FULLY_CHARGED:
-        /* TRANSLATORS: primary battery */
-        status = g_string_new (C_("Battery power", "Fully charged"));
-        break;
-      case UP_DEVICE_STATE_EMPTY:
-        /* TRANSLATORS: primary battery */
-        status = g_string_new (C_("Battery power", "Empty"));
-        break;
-      default:
-        status = g_string_new (up_device_state_to_string (state));
-        break;
-    }
-  g_string_prepend (status, "<small>");
-  g_string_append (status, "</small>");
 
   /* create the new widget */
   row = no_prelight_row_new ();
