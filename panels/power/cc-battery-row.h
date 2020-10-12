@@ -43,4 +43,7 @@ void          cc_battery_row_set_charge_sizegroup    (CcBatteryRow *self,
 void          cc_battery_row_set_battery_sizegroup   (CcBatteryRow *self,
                                                       GtkSizeGroup *sizegroup);
 
+gboolean      cc_battery_row_get_primary             (CcBatteryRow *self);
+UpDeviceKind  cc_battery_row_get_kind                (CcBatteryRow *self);
+
 G_END_DECLS

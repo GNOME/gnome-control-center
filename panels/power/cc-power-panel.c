@@ -343,128 +343,16 @@ add_battery (CcPowerPanel *panel, UpDevice *device, gboolean primary)
   gtk_widget_set_visible (panel->battery_section, TRUE);
 }
 
-static const char *
-kind_to_description (UpDeviceKind kind)
-{
-  switch (kind)
-    {
-      case UP_DEVICE_KIND_MOUSE:
-        /* TRANSLATORS: secondary battery */
-        return N_("Wireless mouse");
-      case UP_DEVICE_KIND_KEYBOARD:
-        /* TRANSLATORS: secondary battery */
-        return N_("Wireless keyboard");
-      case UP_DEVICE_KIND_UPS:
-        /* TRANSLATORS: secondary battery */
-        return N_("Uninterruptible power supply");
-      case UP_DEVICE_KIND_PDA:
-        /* TRANSLATORS: secondary battery */
-        return N_("Personal digital assistant");
-      case UP_DEVICE_KIND_PHONE:
-        /* TRANSLATORS: secondary battery */
-        return N_("Cellphone");
-      case UP_DEVICE_KIND_MEDIA_PLAYER:
-        /* TRANSLATORS: secondary battery */
-        return N_("Media player");
-      case UP_DEVICE_KIND_TABLET:
-        /* TRANSLATORS: secondary battery */
-        return N_("Tablet");
-      case UP_DEVICE_KIND_COMPUTER:
-        /* TRANSLATORS: secondary battery */
-        return N_("Computer");
-      case UP_DEVICE_KIND_GAMING_INPUT:
-        /* TRANSLATORS: secondary battery */
-        return N_("Gaming input device");
-      default:
-        /* TRANSLATORS: secondary battery, misc */
-        return N_("Battery");
-    }
-
-  g_assert_not_reached ();
-}
-
 static void
 add_device (CcPowerPanel *panel, UpDevice *device)
 {
-  UpDeviceKind kind;
-  UpDeviceState state;
-  GtkWidget *row;
-  GtkWidget *hbox;
-  GtkWidget *box2;
-  GtkWidget *widget;
-  GtkWidget *title;
-  g_autoptr(GString) description = NULL;
-  gdouble percentage;
-  g_autofree gchar *name = NULL;
-  gboolean is_present;
-  UpDeviceLevel battery_level;
+  CcBatteryRow *row = cc_battery_row_new (device, FALSE);
+  cc_battery_row_set_level_sizegroup (row, panel->level_sizegroup);
+  cc_battery_row_set_row_sizegroup (row, panel->row_sizegroup);
+  cc_battery_row_set_charge_sizegroup (row, panel->charge_sizegroup);
+  cc_battery_row_set_battery_sizegroup (row, panel->battery_sizegroup);
 
-  g_object_get (device,
-                "kind", &kind,
-                "percentage", &percentage,
-                "state", &state,
-                "model", &name,
-                "is-present", &is_present,
-                "battery-level", &battery_level,
-                NULL);
-
-  if (!is_present)
-    return;
-
-  if (name == NULL || *name == '\0')
-    description = g_string_new (_(kind_to_description (kind)));
-  else
-    description = g_string_new (name);
-
-  /* create the new widget */
-  row = no_prelight_row_new ();
-  gtk_widget_show (row);
-  hbox = row_box_new ();
-  gtk_container_add (GTK_CONTAINER (row), hbox);
-  title = row_title_new (description->str, NULL, NULL);
-  gtk_box_pack_start (GTK_BOX (hbox), title, FALSE, TRUE, 0);
-  gtk_size_group_add_widget (panel->battery_sizegroup, title);
-
-  box2 = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (box2);
-
-  if (battery_level == UP_DEVICE_LEVEL_NONE)
-    {
-      g_autofree gchar *s = NULL;
-
-      s = g_strdup_printf ("%d%%", (int)(percentage + 0.5));
-      widget = gtk_label_new (s);
-    }
-  else
-    {
-      widget = gtk_label_new ("");
-    }
-
-  gtk_widget_show (widget);
-  gtk_widget_set_halign (widget, GTK_ALIGN_END);
-  gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
-  gtk_label_set_xalign (GTK_LABEL (widget), 0.0);
-  gtk_style_context_add_class (gtk_widget_get_style_context (widget), GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_box_pack_start (GTK_BOX (box2), widget, FALSE, TRUE, 0);
-  gtk_size_group_add_widget (panel->charge_sizegroup, widget);
-
-  widget = gtk_level_bar_new ();
-  gtk_widget_show (widget);
-  gtk_widget_set_halign (widget, TRUE);
-  gtk_widget_set_halign (widget, GTK_ALIGN_FILL);
-  gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-  gtk_level_bar_set_value (GTK_LEVEL_BAR (widget), percentage / 100.0f);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), "warning-battery-offset", 0.03);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), "low-battery-offset", 0.1);
-  gtk_level_bar_add_offset_value (GTK_LEVEL_BAR (widget), "high-battery-offset", 1.0);
-  gtk_box_pack_start (GTK_BOX (box2), widget, TRUE, TRUE, 0);
-  gtk_size_group_add_widget (panel->level_sizegroup, widget);
-  gtk_box_pack_start (GTK_BOX (hbox), box2, TRUE, TRUE, 0);
-
-  gtk_container_add (GTK_CONTAINER (panel->device_list), row);
-  gtk_size_group_add_widget (panel->row_sizegroup, row);
-  g_object_set_data (G_OBJECT (row), "kind", GINT_TO_POINTER (kind));
-
+  gtk_container_add (GTK_CONTAINER (panel->device_list), GTK_WIDGET (row));
   gtk_widget_set_visible (panel->device_section, TRUE);
 }
 
@@ -1887,25 +1775,25 @@ add_general_section (CcPowerPanel *self)
 }
 
 static gint
-battery_sort_func (gconstpointer a, gconstpointer b, gpointer data)
+battery_sort_func (GtkListBoxRow *a, GtkListBoxRow *b, gpointer data)
 {
-  GObject *row_a = (GObject*)a;
-  GObject *row_b = (GObject*)b;
+  CcBatteryRow *row_a = CC_BATTERY_ROW (a);
+  CcBatteryRow *row_b = CC_BATTERY_ROW (b);
   gboolean a_primary;
   gboolean b_primary;
-  gint a_kind;
-  gint b_kind;
+  UpDeviceKind a_kind;
+  UpDeviceKind b_kind;
 
-  a_primary = GPOINTER_TO_INT (g_object_get_data (row_a, "primary"));
-  b_primary = GPOINTER_TO_INT (g_object_get_data (row_b, "primary"));
+  a_primary = cc_battery_row_get_primary(row_a);
+  b_primary = cc_battery_row_get_primary(row_b);
 
   if (a_primary)
     return -1;
   else if (b_primary)
     return 1;
 
-  a_kind = GPOINTER_TO_INT (g_object_get_data (row_a, "kind"));
-  b_kind = GPOINTER_TO_INT (g_object_get_data (row_b, "kind"));
+  a_kind = cc_battery_row_get_kind(row_a);
+  b_kind = cc_battery_row_get_kind(row_b);
 
   return a_kind - b_kind;
 }

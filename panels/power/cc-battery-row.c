@@ -36,6 +36,9 @@ struct _CcBatteryRow {
   GtkLabel     *percentage_label;
   GtkBox       *primary_bottom_box;
   GtkLabel     *primary_percentage_label;
+
+  UpDeviceKind  kind;
+  gboolean      primary;
 };
 
 G_DEFINE_TYPE (CcBatteryRow, cc_battery_row, GTK_TYPE_LIST_BOX_ROW)
@@ -178,6 +181,46 @@ get_details_string (gdouble percentage, UpDeviceState state, guint64 time)
   return g_steal_pointer (&details);
 }
 
+static const char *
+kind_to_description (UpDeviceKind kind)
+{
+  switch (kind)
+    {
+      case UP_DEVICE_KIND_MOUSE:
+        /* TRANSLATORS: secondary battery */
+        return N_("Wireless mouse");
+      case UP_DEVICE_KIND_KEYBOARD:
+        /* TRANSLATORS: secondary battery */
+        return N_("Wireless keyboard");
+      case UP_DEVICE_KIND_UPS:
+        /* TRANSLATORS: secondary battery */
+        return N_("Uninterruptible power supply");
+      case UP_DEVICE_KIND_PDA:
+        /* TRANSLATORS: secondary battery */
+        return N_("Personal digital assistant");
+      case UP_DEVICE_KIND_PHONE:
+        /* TRANSLATORS: secondary battery */
+        return N_("Cellphone");
+      case UP_DEVICE_KIND_MEDIA_PLAYER:
+        /* TRANSLATORS: secondary battery */
+        return N_("Media player");
+      case UP_DEVICE_KIND_TABLET:
+        /* TRANSLATORS: secondary battery */
+        return N_("Tablet");
+      case UP_DEVICE_KIND_COMPUTER:
+        /* TRANSLATORS: secondary battery */
+        return N_("Computer");
+      case UP_DEVICE_KIND_GAMING_INPUT:
+        /* TRANSLATORS: secondary battery */
+        return N_("Gaming input device");
+      default:
+        /* TRANSLATORS: secondary battery, misc */
+        return N_("Battery");
+    }
+
+  g_assert_not_reached ();
+}
+
 CcBatteryRow*
 cc_battery_row_new (UpDevice *device,
                     gboolean  primary)
@@ -192,39 +235,55 @@ cc_battery_row_new (UpDevice *device,
   CcBatteryRow *self;
   guint64 time_empty, time_full, time;
   gdouble energy_full, energy_rate;
+  gboolean is_kind_battery;
+  UpDeviceLevel battery_level;
 
   self = g_object_new (CC_TYPE_BATTERY_ROW, NULL);
 
   g_object_get (device,
                 "kind", &kind,
                 "state", &state,
+                "model", &name,
                 "percentage", &percentage,
                 "icon-name", &icon_name,
                 "time-to-empty", &time_empty,
                 "time-to-full", &time_full,
                 "energy-full", &energy_full,
                 "energy-rate", &energy_rate,
+                "battery-level", &battery_level,
                 NULL);
   if (state == UP_DEVICE_STATE_DISCHARGING)
     time = time_empty;
   else
     time = time_full;
 
+  is_kind_battery = (kind == UP_DEVICE_KIND_BATTERY || kind == UP_DEVICE_KIND_UPS);
+
   /* Name label */
-  if (g_object_get_data (G_OBJECT (device), "is-main-battery") != NULL)
-    name = C_("Battery name", "Main");
-  else
-    name = C_("Battery name", "Extra");
+  if (is_kind_battery)
+    {
+      if (g_object_get_data (G_OBJECT (device), "is-main-battery") != NULL)
+        name = C_("Battery name", "Main");
+      else
+        name = C_("Battery name", "Extra");
+    }
+  else if (name == NULL || name[0] == '\0')
+    {
+      name = _(kind_to_description (kind));
+    }
   gtk_label_set_text (self->name_label, name);
 
   /* Icon */
-  if (icon_name != NULL && *icon_name != '\0')
+  if (is_kind_battery && icon_name != NULL && icon_name[0] != '\0')
     gtk_image_set_from_icon_name (self->icon, icon_name, GTK_ICON_SIZE_BUTTON);
 
   /* Percentage label */
-  s = g_strdup_printf ("%d%%", (int)percentage);
-  gtk_label_set_text (self->percentage_label, s);
-  gtk_label_set_text (self->primary_percentage_label, s);
+  if (battery_level == UP_DEVICE_LEVEL_NONE)
+  {
+    s = g_strdup_printf ("%d%%", (int)percentage);
+    gtk_label_set_text (self->percentage_label, s);
+    gtk_label_set_text (self->primary_percentage_label, s);
+  }
 
   /* Level bar */
   gtk_level_bar_set_value (self->levelbar, percentage / 100.0);
@@ -241,9 +300,9 @@ cc_battery_row_new (UpDevice *device,
                                ATK_RELATION_LABELLED_BY,
                                gtk_widget_get_accessible (GTK_WIDGET (primary ? self->primary_percentage_label
                                                                               : self->percentage_label)));
-  g_object_set_data (G_OBJECT (self), "primary", GINT_TO_POINTER (primary));
 
-  g_object_set_data (G_OBJECT (self), "kind", GINT_TO_POINTER (kind));
+  self->kind = kind;
+  self->primary = primary;
 
   return self;
 }
@@ -276,4 +335,16 @@ cc_battery_row_set_battery_sizegroup (CcBatteryRow *self,
                                       GtkSizeGroup *sizegroup)
 {
   gtk_size_group_add_widget (sizegroup, GTK_WIDGET (self->battery_box));
+}
+
+gboolean
+cc_battery_row_get_primary (CcBatteryRow *self)
+{
+  return self->primary;
+}
+
+UpDeviceKind
+cc_battery_row_get_kind (CcBatteryRow *self)
+{
+  return self->kind;
 }
