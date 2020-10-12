@@ -383,18 +383,6 @@ kind_to_description (UpDeviceKind kind)
   g_assert_not_reached ();
 }
 
-static UpDeviceLevel
-get_battery_level (UpDevice *device)
-{
-  UpDeviceLevel battery_level;
-
-  if (!g_object_class_find_property (G_OBJECT_CLASS (G_OBJECT_GET_CLASS (device)), "battery-level"))
-    return UP_DEVICE_LEVEL_NONE;
-
-  g_object_get (device, "battery-level", &battery_level, NULL);
-  return battery_level;
-}
-
 static void
 add_device (CcPowerPanel *panel, UpDevice *device)
 {
@@ -419,8 +407,8 @@ add_device (CcPowerPanel *panel, UpDevice *device)
                 "state", &state,
                 "model", &name,
                 "is-present", &is_present,
+                "battery-level", &battery_level,
                 NULL);
-  battery_level = get_battery_level (device);
 
   if (!is_present)
     return;
