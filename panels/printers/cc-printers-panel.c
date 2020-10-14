@@ -461,7 +461,7 @@ on_cups_notification (GDBusConnection *connection,
     {
       g_autoptr(PpJob) job = NULL;
 
-      job = g_object_new (PP_TYPE_JOB, "id", job_id, NULL);
+      job = pp_job_new (job_id, NULL, 0, NULL);
       pp_job_get_attributes_async (job,
                                    requested_attrs,
                                    cc_panel_get_cancellable (CC_PANEL (self)),

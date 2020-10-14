@@ -357,12 +357,7 @@ get_jobs_thread (GTask        *task,
             }
         }
 
-      job = g_object_new (pp_job_get_type (),
-                          "id",    jobs[i].id,
-                          "title", jobs[i].title,
-                          "state", jobs[i].state,
-                          "auth-info-required", auth_info_is_required ? auth_info_required : NULL,
-                          NULL);
+      job = pp_job_new (jobs[i].id, jobs[i].title, jobs[i].state, auth_info_is_required ? auth_info_required : NULL);
 
       g_ptr_array_add (array, job);
     }

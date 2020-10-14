@@ -27,8 +27,18 @@
 
 G_BEGIN_DECLS
 
-#define PP_TYPE_JOB (pp_job_get_type ())
 G_DECLARE_FINAL_TYPE (PpJob, pp_job, PP, JOB, GObject)
+
+PpJob         *pp_job_new                        (gint                  id,
+                                                  const gchar          *title,
+                                                  gint                  state,
+                                                  GStrv                 auth_info_required);
+
+const gchar   *pp_job_get_title                  (PpJob                *job);
+
+gint           pp_job_get_state                  (PpJob                *job);
+
+GStrv          pp_job_get_auth_info_required     (PpJob                *job);
 
 void           pp_job_set_hold_until_async       (PpJob                *job,
                                                   const gchar          *job_hold_until);

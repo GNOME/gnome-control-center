@@ -50,22 +50,10 @@ struct _PpJob
   gint    id;
   gchar  *title;
   gint    state;
-  gchar **auth_info_required;
+  GStrv   auth_info_required;
 };
 
 G_DEFINE_TYPE (PpJob, pp_job, G_TYPE_OBJECT)
-
-enum
-{
-  PROP_0,
-  PROP_ID,
-  PROP_TITLE,
-  PROP_STATE,
-  PROP_AUTH_INFO_REQUIRED,
-  LAST_PROPERTY
-};
-
-static GParamSpec *properties[LAST_PROPERTY];
 
 static void
 pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,
@@ -79,15 +67,46 @@ pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,
                                           NULL);
 }
 
+PpJob *
+pp_job_new (gint id, const gchar *title, gint state, GStrv auth_info_required)
+{
+   PpJob *job = g_object_new (pp_job_get_type (), NULL);
+
+   job->id = id;
+   job->title = g_strdup (title);
+   job->state = state;
+   job->auth_info_required = g_strdupv (auth_info_required);
+
+   return job;
+}
+
+const gchar *
+pp_job_get_title (PpJob *self)
+{
+   g_return_val_if_fail (PP_IS_JOB(self), NULL);
+   return self->title;
+}
+
+gint
+pp_job_get_state (PpJob *self)
+{
+   g_return_val_if_fail (PP_IS_JOB(self), -1);
+   return self->state;
+}
+
+GStrv
+pp_job_get_auth_info_required (PpJob *self)
+{
+   g_return_val_if_fail (PP_IS_JOB(self), NULL);
+   return self->auth_info_required;
+}
+
 void
 pp_job_cancel_purge_async (PpJob        *self,
                            gboolean      job_purge)
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GError) error = NULL;
-  gint            *job_id;
-
-  g_object_get (self, "id", &job_id, NULL);
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
@@ -102,7 +121,7 @@ pp_job_cancel_purge_async (PpJob        *self,
                           MECHANISM_BUS,
                           "JobCancelPurge",
                           g_variant_new ("(ib)",
-                                         job_id,
+                                         self->id,
                                          job_purge),
                           G_VARIANT_TYPE ("(s)"),
                           G_DBUS_CALL_FLAGS_NONE,
@@ -130,9 +149,6 @@ pp_job_set_hold_until_async (PpJob        *self,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GError) error = NULL;
-  gint             *job_id;
-
-  g_object_get (self, "id", &job_id, NULL);
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
@@ -147,7 +163,7 @@ pp_job_set_hold_until_async (PpJob        *self,
                           MECHANISM_BUS,
                           "JobSetHoldUntil",
                           g_variant_new ("(is)",
-                                         job_id,
+                                         self->id,
                                          job_hold_until),
                           G_VARIANT_TYPE ("(s)"),
                           G_DBUS_CALL_FLAGS_NONE,
@@ -160,63 +176,6 @@ pp_job_set_hold_until_async (PpJob        *self,
 static void
 pp_job_init (PpJob *obj)
 {
-}
-
-static void
-pp_job_get_property (GObject    *object,
-                     guint       property_id,
-                     GValue     *value,
-                     GParamSpec *pspec)
-{
-  PpJob *self = PP_JOB (object);
-
-  switch (property_id)
-    {
-      case PROP_ID:
-        g_value_set_int (value, self->id);
-        break;
-      case PROP_TITLE:
-        g_value_set_string (value, self->title);
-        break;
-      case PROP_STATE:
-        g_value_set_int (value, self->state);
-        break;
-      case PROP_AUTH_INFO_REQUIRED:
-        g_value_set_pointer (value, g_strdupv (self->auth_info_required));
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-        break;
-    }
-}
-
-static void
-pp_job_set_property (GObject      *object,
-                     guint         property_id,
-                     const GValue *value,
-                     GParamSpec   *pspec)
-{
-  PpJob *self = PP_JOB (object);
-
-  switch (property_id)
-    {
-      case PROP_ID:
-        self->id = g_value_get_int (value);
-        break;
-      case PROP_TITLE:
-        g_free (self->title);
-        self->title = g_value_dup_string (value);
-        break;
-      case PROP_STATE:
-        self->state = g_value_get_int (value);
-        break;
-      case PROP_AUTH_INFO_REQUIRED:
-        self->auth_info_required = g_strdupv (g_value_get_pointer (value));
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-        break;
-    }
 }
 
 static void
@@ -235,35 +194,7 @@ pp_job_class_init (PpJobClass *class)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (class);
 
-  object_class->get_property = pp_job_get_property;
-  object_class->set_property = pp_job_set_property;
   object_class->finalize = pp_job_finalize;
-
-  properties[PROP_ID] = g_param_spec_int ("id",
-                                          "Id",
-                                          "Job id",
-                                          0,
-                                          G_MAXINT,
-                                          0,
-                                          G_PARAM_READWRITE);
-  properties[PROP_TITLE] = g_param_spec_string ("title",
-                                                "Title",
-                                                "Title of this print job",
-                                                NULL,
-                                                G_PARAM_READWRITE);
-  properties[PROP_STATE] = g_param_spec_int ("state",
-                                             "State",
-                                             "State of this print job (Paused, Completed, Cancelled,...)",
-                                             0,
-                                             G_MAXINT,
-                                             0,
-                                             G_PARAM_READWRITE);
-  properties[PROP_AUTH_INFO_REQUIRED] = g_param_spec_pointer ("auth-info-required",
-                                                              "Authentication info required",
-                                                              "Which authentication info is required for this print job",
-                                                              G_PARAM_READWRITE);
-
-  g_object_class_install_properties (object_class, LAST_PROPERTY, properties);
 }
 
 static void
