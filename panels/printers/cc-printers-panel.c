@@ -253,9 +253,7 @@ printer_removed_cb (GObject      *source_object,
 {
   PpPrinter *printer = PP_PRINTER (source_object);
   g_autoptr(GError) error = NULL;
-  g_autofree gchar *printer_name = NULL;
 
-  g_object_get (printer, "printer-name", &printer_name, NULL);
   pp_printer_delete_finish (printer, result, &error);
 
   if (user_data != NULL)
@@ -269,7 +267,7 @@ printer_removed_cb (GObject      *source_object,
 
           for (iter = self->deleted_printers; iter != NULL; iter = iter->next)
             {
-              if (g_strcmp0 (iter->data, printer_name) == 0)
+              if (g_strcmp0 (iter->data, pp_printer_get_name (printer)) == 0)
                 {
                   g_free (iter->data);
                   self->deleted_printers = g_list_delete_link (self->deleted_printers, iter);
@@ -678,23 +676,18 @@ on_printer_deleted (CcPrintersPanel *self,
 {
   GtkLabel         *label;
   g_autofree gchar *notification_message = NULL;
-  g_autofree gchar *printer_name = NULL;
   GtkWidget        *widget;
 
   on_notification_dismissed (self);
 
-  g_object_get (printer_entry,
-                "printer-name", &printer_name,
-                NULL);
-
   /* Translators: %s is the printer name */
   notification_message = g_strdup_printf (_("Printer “%s” has been deleted"),
-                                          printer_name);
+                                          pp_printer_entry_get_name (printer_entry));
   label = (GtkLabel*)
     gtk_builder_get_object (self->builder, "notification-label");
   gtk_label_set_label (label, notification_message);
 
-  self->deleted_printer_name = g_strdup (printer_name);
+  self->deleted_printer_name = g_strdup (pp_printer_entry_get_name (printer_entry));
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "content");
   gtk_list_box_invalidate_filter (GTK_LIST_BOX (widget));
@@ -709,10 +702,7 @@ on_printer_renamed (CcPrintersPanel *self,
                     gchar           *new_name,
                     PpPrinterEntry  *printer_entry)
 {
-  g_object_get (printer_entry,
-                "printer-name",
-                &self->old_printer_name,
-                NULL);
+  self->old_printer_name = g_strdup (pp_printer_entry_get_name (printer_entry));
   self->renamed_printer_name = g_strdup (new_name);
 }
 
@@ -786,15 +776,12 @@ destroy_nonexisting_entries (PpPrinterEntry *entry,
                              gpointer        user_data)
 {
   CcPrintersPanel  *self = (CcPrintersPanel *) user_data;
-  g_autofree gchar *printer_name = NULL;
   gboolean          exists = FALSE;
   gint              i;
 
-  g_object_get (G_OBJECT (entry), "printer-name", &printer_name, NULL);
-
   for (i = 0; i < self->num_dests; i++)
     {
-      if (g_strcmp0 (self->dests[i].name, printer_name) == 0)
+      if (g_strcmp0 (self->dests[i].name, pp_printer_entry_get_name (entry)) == 0)
         {
           exists = TRUE;
           break;
@@ -803,8 +790,8 @@ destroy_nonexisting_entries (PpPrinterEntry *entry,
 
   if (!exists)
     {
+      g_hash_table_remove (self->printer_entries, pp_printer_entry_get_name (entry));
       gtk_widget_destroy (GTK_WIDGET (entry));
-      g_hash_table_remove (self->printer_entries, printer_name);
     }
 }
 
@@ -1120,19 +1107,13 @@ filter_function (GtkListBoxRow *row,
                  gpointer       user_data)
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
+  PpPrinterEntry         *entry = PP_PRINTER_ENTRY (row);
   GtkWidget              *search_entry;
   gboolean                retval;
   g_autofree gchar       *search = NULL;
   g_autofree gchar       *name = NULL;
   g_autofree gchar       *location = NULL;
-  g_autofree gchar       *printer_name = NULL;
-  g_autofree gchar       *printer_location = NULL;
   GList                  *iter;
-
-  g_object_get (G_OBJECT (row),
-                "printer-name", &printer_name,
-                "printer-location", &printer_location,
-                NULL);
 
   search_entry = (GtkWidget*)
     gtk_builder_get_object (self->builder, "search-entry");
@@ -1143,8 +1124,8 @@ filter_function (GtkListBoxRow *row,
     }
   else
     {
-      name = cc_util_normalize_casefold_and_unaccent (printer_name);
-      location = cc_util_normalize_casefold_and_unaccent (printer_location);
+      name = cc_util_normalize_casefold_and_unaccent (pp_printer_entry_get_name (entry));
+      location = cc_util_normalize_casefold_and_unaccent (pp_printer_entry_get_location (entry));
 
       search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (search_entry)));
 
@@ -1154,7 +1135,7 @@ filter_function (GtkListBoxRow *row,
     }
 
   if (self->deleted_printer_name != NULL &&
-      g_strcmp0 (self->deleted_printer_name, printer_name) == 0)
+      g_strcmp0 (self->deleted_printer_name, pp_printer_entry_get_name (entry)) == 0)
     {
       retval = FALSE;
     }
@@ -1163,7 +1144,7 @@ filter_function (GtkListBoxRow *row,
     {
       for (iter = self->deleted_printers; iter != NULL; iter = iter->next)
         {
-          if (g_strcmp0 (iter->data, printer_name) == 0)
+          if (g_strcmp0 (iter->data, pp_printer_entry_get_name (entry)) == 0)
             {
               retval = FALSE;
               break;
@@ -1179,27 +1160,19 @@ sort_function (GtkListBoxRow *row1,
                GtkListBoxRow *row2,
                gpointer       user_data)
 {
-  g_autofree gchar *printer_name1 = NULL;
-  g_autofree gchar *printer_name2 = NULL;
+  PpPrinterEntry *entry1 = PP_PRINTER_ENTRY (row1);
+  PpPrinterEntry *entry2 = PP_PRINTER_ENTRY (row2);
 
-  g_object_get (G_OBJECT (row1),
-                "printer-name", &printer_name1,
-                NULL);
-
-  g_object_get (G_OBJECT (row2),
-                "printer-name", &printer_name2,
-                NULL);
-
-  if (printer_name1 != NULL)
+  if (pp_printer_entry_get_name (entry1) != NULL)
     {
-      if (printer_name2 != NULL)
-        return g_ascii_strcasecmp (printer_name1, printer_name2);
+      if (pp_printer_entry_get_name (entry2) != NULL)
+        return g_ascii_strcasecmp (pp_printer_entry_get_name (entry1), pp_printer_entry_get_name (entry2));
       else
         return 1;
     }
   else
     {
-      if (printer_name2 != NULL)
+      if (pp_printer_entry_get_name (entry2) != NULL)
         return -1;
       else
         return 0;

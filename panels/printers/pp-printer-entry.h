@@ -28,6 +28,10 @@ G_DECLARE_FINAL_TYPE (PpPrinterEntry, pp_printer_entry, PP, PRINTER_ENTRY, GtkLi
 PpPrinterEntry *pp_printer_entry_new  (cups_dest_t printer,
                                        gboolean    is_authorized);
 
+const gchar    *pp_printer_entry_get_name (PpPrinterEntry *self);
+
+const gchar    *pp_printer_entry_get_location (PpPrinterEntry *self);
+
 void            pp_printer_entry_update_jobs_count (PpPrinterEntry *self);
 
 GSList         *pp_printer_entry_get_size_group_widgets (PpPrinterEntry *self);

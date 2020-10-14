@@ -94,12 +94,6 @@ struct _PpPrinterEntryClass
 G_DEFINE_TYPE (PpPrinterEntry, pp_printer_entry, GTK_TYPE_LIST_BOX_ROW)
 
 enum {
-  PROP_0,
-  PROP_PRINTER_NAME,
-  PROP_PRINTER_LOCATION,
-};
-
-enum {
   IS_DEFAULT_PRINTER,
   PRINTER_DELETE,
   PRINTER_RENAMED,
@@ -122,49 +116,6 @@ ink_level_data_free (InkLevelData *data)
   g_clear_pointer (&data->marker_colors, g_free);
   g_clear_pointer (&data->marker_types, g_free);
   g_slice_free (InkLevelData, data);
-}
-
-static void
-pp_printer_entry_get_property (GObject    *object,
-                               guint       prop_id,
-                               GValue     *value,
-                               GParamSpec *pspec)
-{
-  PpPrinterEntry *self = PP_PRINTER_ENTRY (object);
-
-  switch (prop_id)
-    {
-      case PROP_PRINTER_NAME:
-        g_value_set_string (value, self->printer_name);
-        break;
-      case PROP_PRINTER_LOCATION:
-        g_value_set_string (value, self->printer_location);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
-}
-
-static void
-pp_printer_entry_set_property (GObject      *object,
-                               guint         prop_id,
-                               const GValue *value,
-                               GParamSpec   *pspec)
-{
-  PpPrinterEntry *self = PP_PRINTER_ENTRY (object);
-
-  switch (prop_id)
-    {
-      case PROP_PRINTER_NAME:
-        self->printer_name = g_value_dup_string (value);
-        break;
-      case PROP_PRINTER_LOCATION:
-        self->printer_location = g_value_dup_string (value);
-        break;
-      default:
-        G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-        break;
-    }
 }
 
 static void
@@ -403,16 +354,11 @@ on_printer_rename_cb (GObject      *source_object,
                       gpointer      user_data)
 {
   PpPrinterEntry *self = user_data;
-  g_autofree gchar *printer_name = NULL;
 
   if (!pp_printer_rename_finish (PP_PRINTER (source_object), result, NULL))
     return;
 
-  g_object_get (PP_PRINTER (source_object),
-                "printer-name", &printer_name,
-                NULL);
-
-  g_signal_emit_by_name (self, "printer-renamed", printer_name);
+  g_signal_emit_by_name (self, "printer-renamed", pp_printer_get_name (PP_PRINTER (source_object)));
 }
 
 static void
@@ -691,7 +637,9 @@ pp_printer_entry_new (cups_dest_t  printer,
 {
   PpPrinterEntry *self;
 
-  self = g_object_new (PP_PRINTER_ENTRY_TYPE, "printer-name", printer.name, NULL);
+  self = g_object_new (PP_PRINTER_ENTRY_TYPE, NULL);
+
+  self->printer_name = g_strdup (printer.name);
 
   self->clean_command = pp_maintenance_command_new (self->printer_name,
                                                     "Clean",
@@ -705,6 +653,20 @@ pp_printer_entry_new (cups_dest_t  printer,
   pp_printer_entry_update (self, printer, is_authorized);
 
   return self;
+}
+
+const gchar *
+pp_printer_entry_get_name (PpPrinterEntry *self)
+{
+  g_return_val_if_fail (PP_IS_PRINTER_ENTRY (self), NULL);
+  return self->printer_name;
+}
+
+const gchar *
+pp_printer_entry_get_location (PpPrinterEntry *self)
+{
+  g_return_val_if_fail (PP_IS_PRINTER_ENTRY (self), NULL);
+  return self->printer_location;
 }
 
 void
@@ -924,7 +886,8 @@ pp_printer_entry_update (PpPrinterEntry *self,
   else
     printer_icon_name = g_strdup ("printer-network");
 
-  g_object_set (self, "printer-location", location, NULL);
+  g_free (self->printer_location);
+  self->printer_location = g_strdup (location);
 
   self->is_accepting_jobs = is_accepting_jobs;
   self->is_authorized = is_authorized;
@@ -1024,25 +987,7 @@ pp_printer_entry_class_init (PpPrinterEntryClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, show_jobs_dialog);
   gtk_widget_class_bind_template_callback (widget_class, restart_printer);
 
-  object_class->get_property = pp_printer_entry_get_property;
-  object_class->set_property = pp_printer_entry_set_property;
   object_class->dispose = pp_printer_entry_dispose;
-
-  g_object_class_install_property (object_class,
-                                   PROP_PRINTER_NAME,
-                                   g_param_spec_string ("printer-name",
-                                                        "Printer Name",
-                                                        "The Printer unique name",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
-
-  g_object_class_install_property (object_class,
-                                   PROP_PRINTER_LOCATION,
-                                   g_param_spec_string ("printer-location",
-                                                        "Printer Location",
-                                                        "Printer location string",
-                                                        NULL,
-                                                        G_PARAM_READWRITE));
 
   signals[IS_DEFAULT_PRINTER] =
     g_signal_new ("printer-changed",

@@ -34,6 +34,8 @@ GType        pp_printer_get_type      (void) G_GNUC_CONST;
 
 PpPrinter   *pp_printer_new           (const gchar          *name);
 
+const gchar *pp_printer_get_name      (PpPrinter            *printer);
+
 void         pp_printer_rename_async  (PpPrinter            *printer,
                                        const gchar          *new_printer_name,
                                        GCancellable         *cancellable,
