@@ -275,9 +275,18 @@
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkSwitch" id="account_type_switch">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
-                                            <signal name="notify::active" handler="account_type_changed" object="CcUserPanel" swapped="yes"/>
+                                            <property name="expand">True</property>
+                                            <child>
+                                              <object class="GtkSwitch" id="account_type_switch">
+                                                <property name="visible">True</property>
+                                                <signal name="notify::active" handler="account_type_changed" object="CcUserPanel" swapped="yes"/>
+                                              </object>
+                                              <packing>
+                                                <property name="pack-type">end</property>
+                                              </packing>
+                                            </child>
                                           </object>
                                           <packing>
                                             <property name="left_attach">1</property>
@@ -311,39 +320,74 @@
                                   <object class="GtkListBoxRow" id="parental_controls_row">
                                     <property name="visible">False</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkGrid">
                                         <property name="visible">True</property>
+                                        <property name="can_focus">False</property>
                                         <property name="border-width">10</property>
-                                        <property name="spacing">10</property>
+                                        <property name="column-spacing">10</property>
                                         <child>
                                           <object class="GtkLabel">
                                             <property name="visible">True</property>
+                                            <property name="halign">GTK_ALIGN_START</property>
+                                            <property name="hexpand">True</property>
                                             <property name="label" translatable="yes">_Parental Controls</property>
                                             <property name="use_underline">True</property>
                                             <property name="mnemonic_widget">parental_controls_button_label</property>
                                           </object>
                                         </child>
                                         <child>
-                                          <object class="GtkImage" id="parental_control_go_next">
+                                          <object class="GtkBox">
+                                            <property name="orientation">horizontal</property>
                                             <property name="visible">True</property>
-                                            <property name="icon-name">go-next-symbolic</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
+                                            <property name="spacing">10</property>
+                                            <child>
+                                              <object class="GtkImage" id="parental_control_go_next">
+                                                <property name="visible">True</property>
+                                                <property name="icon-name">go-next-symbolic</property>
+                                                <style>
+                                                  <class name="dim-label"/>
+                                                </style>
+                                              </object>
+                                              <packing>
+                                                <property name="pack_type">end</property>
+                                              </packing>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel" id="parental_controls_button_label">
+                                                <property name="visible">True</property>
+                                                <property name="valign">0.5</property>
+                                                <style>
+                                                  <class name="dim-label"/>
+                                                </style>
+                                              </object>
+                                              <packing>
+                                                <property name="pack_type">end</property>
+                                              </packing>
+                                            </child>
                                           </object>
                                           <packing>
-                                            <property name="pack_type">end</property>
+                                            <property name="height">2</property>
+                                            <property name="left_attach">1</property>
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel" id="parental_controls_button_label">
+                                          <object class="GtkLabel">
+                                            <property name="expand">True</property>
                                             <property name="visible">True</property>
+                                            <property name="wrap">True</property>
+                                            <property name="xalign">0</property>
+                                            <property name="max-width-chars">48</property>
+                                            <property name="label" translatable="yes">Open the Parental Controls application.</property>
                                             <style>
                                               <class name="dim-label"/>
                                             </style>
+                                            <attributes>
+                                              <attribute name="scale" value="0.9"/>
+                                            </attributes>
                                           </object>
                                           <packing>
-                                            <property name="pack_type">end</property>
+                                            <property name="left_attach">0</property>
+                                            <property name="top_attach">1</property>
                                           </packing>
                                         </child>
                                       </object>
