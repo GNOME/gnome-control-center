@@ -210,6 +210,8 @@ config_h.set('HAVE_SNAP', enable_snap,
 enable_malcontent = get_option('malcontent')
 if enable_malcontent
   malcontent_dep = dependency('malcontent-0', version: '>= 0.7.0')
+  config_h.set('HAVE_MALCONTENT_0_10', malcontent_dep.version().version_compare('>= 0.10.0'),
+               description: 'Define to 1 if malcontent ≥ 0.10.0')
 endif
 config_h.set('HAVE_MALCONTENT', enable_malcontent,
              description: 'Define to 1 if malcontent support is enabled')

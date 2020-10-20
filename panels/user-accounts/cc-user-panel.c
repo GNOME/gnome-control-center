@@ -1223,7 +1223,14 @@ spawn_malcontent_control (CcUserPanel *self)
 
         /* no-op if the user is administrator */
         if (act_user_get_account_type (user) != ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
-                const gchar *argv[] = { "malcontent-control", NULL };
+                const gchar *argv[] = {
+                        "malcontent-control",
+#ifdef HAVE_MALCONTENT_0_10
+                        "--user",
+                        act_user_get_user_name (user),
+#endif  /* HAVE_MALCONTENT_0_10 */
+                        NULL
+                };
                 g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
         }
 }
