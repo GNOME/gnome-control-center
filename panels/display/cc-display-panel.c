@@ -172,6 +172,8 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 {
   CcDisplayConfigType current_type = config_get_current_type (panel);
   GList *outputs, *l;
+  CcDisplayMonitor *current_primary = NULL;
+  gdouble old_primary_scale = -1;
 
   /* Do not do anything if the current detected configuration type is
    * identitcal to what we expect. */
@@ -181,6 +183,17 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
   reset_current_config (panel);
 
   outputs = cc_display_config_get_ui_sorted_monitors (panel->current_config);
+  for (l = outputs; l; l = l->next)
+    {
+      CcDisplayMonitor *output = l->data;
+
+      if (cc_display_monitor_is_primary (output))
+        {
+          current_primary = output;
+          old_primary_scale = cc_display_monitor_get_scale (current_primary);
+          break;
+        }
+    }
 
   switch (type)
     {
@@ -216,15 +229,41 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
       for (l = outputs; l; l = l->next)
         {
           CcDisplayMonitor *output = l->data;
+          gdouble scale;
+          CcDisplayMode *mode;
+
+          mode = cc_display_monitor_get_preferred_mode (output);
+          /* If the monitor was active, try using the current scale, otherwise
+           * try picking the preferred scale. */
+          if (cc_display_monitor_is_active (output))
+            scale = cc_display_monitor_get_scale (output);
+          else
+            scale = cc_display_mode_get_preferred_scale (mode);
+
+          /* If we cannot use the current/preferred scale, try to fall back to
+           * the previously scale of the primary monitor instead.
+           * This is not guaranteed to result in a valid configuration! */
+          if (!cc_display_config_is_scaled_mode_valid (panel->current_config,
+                                                       mode,
+                                                       scale))
+            {
+              if (current_primary &&
+                  cc_display_config_is_scaled_mode_valid (panel->current_config,
+                                                          mode,
+                                                          old_primary_scale))
+                scale = old_primary_scale;
+            }
 
           cc_display_monitor_set_active (output, cc_display_monitor_is_usable (output));
-          cc_display_monitor_set_mode (output, cc_display_monitor_get_preferred_mode (output));
+          cc_display_monitor_set_mode (output, mode);
+          cc_display_monitor_set_scale (output, scale);
         }
       break;
 
     case CC_DISPLAY_CONFIG_CLONE:
       {
         g_debug ("Creating new clone config");
+        gdouble scale;
         GList *modes = cc_display_config_get_cloning_modes (panel->current_config);
         gint bw, bh;
         CcDisplayMode *best = NULL;
@@ -246,7 +285,23 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 
             modes = modes->next;
           }
-        cc_display_config_set_mode_on_all_outputs (panel->current_config, best);
+
+        /* Take the preferred scale by default, */
+        scale = cc_display_mode_get_preferred_scale (best);
+        /* but prefer the old primary scale if that is valid. */
+        if (current_primary &&
+            cc_display_config_is_scaled_mode_valid (panel->current_config,
+                                                    best,
+                                                    old_primary_scale))
+          scale = old_primary_scale;
+
+        for (l = outputs; l; l = l->next)
+          {
+            CcDisplayMonitor *output = l->data;
+
+            cc_display_monitor_set_mode (output, best);
+            cc_display_monitor_set_scale (output, scale);
+          }
       }
       break;
 
