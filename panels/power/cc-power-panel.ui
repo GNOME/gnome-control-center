@@ -50,6 +50,34 @@
       </row>
     </data>
   </object>
+
+  <object class="GtkListStore" id="mobile_time_liststore">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name value -->
+      <column type="gint"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0" translatable="yes" context="automatic_suspend" comments="Translators: Option for &quot;Delay&quot; in &quot;Automatic suspend&quot; dialog.">1 minute</col>
+        <col id="1">60</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="automatic_suspend" comments="Translators: Option for &quot;Delay&quot; in &quot;Automatic suspend&quot; dialog.">2 minutes</col>
+        <col id="1">120</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="automatic_suspend" comments="Translators: Option for &quot;Delay&quot; in &quot;Automatic suspend&quot; dialog.">5 minutes</col>
+        <col id="1">300</col>
+      </row>
+      <row>
+        <col id="0" translatable="yes" context="automatic_suspend" comments="Translators: Option for &quot;Delay&quot; in &quot;Automatic suspend&quot; dialog.">10 minutes</col>
+        <col id="1">600</col>
+      </row>
+    </data>
+  </object>
+
   <template class="CcPowerPanel" parent="CcPanel">
     <property name="child">
       <object class="AdwToolbarView">
