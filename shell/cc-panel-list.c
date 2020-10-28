@@ -305,7 +305,6 @@ row_data_new (CcPanelCategory     category,
 
   /* Description label */
   label = gtk_label_new (description);
-  gtk_widget_show (label);
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_widget_set_hexpand (label, TRUE);
   gtk_label_set_max_width_chars (GTK_LABEL (label), 25);
