@@ -197,9 +197,9 @@ static GtkWidget *
 create_listbox_row (gpointer item,
                     gpointer user_data)
 {
+  PpJob      *job = PP_JOB (item);
   GtkWidget  *widget;
   GtkWidget  *box;
-  PpJob      *job = (PpJob *)item;
   g_autofree gchar *state_string = NULL;
 
   switch (pp_job_get_state (job))
@@ -265,14 +265,14 @@ create_listbox_row (gpointer item,
   widget = gtk_button_new_from_icon_name (pp_job_get_state (job) == IPP_JOB_HELD ? "media-playback-start-symbolic" : "media-playback-pause-symbolic",
                                           GTK_ICON_SIZE_SMALL_TOOLBAR);
   gtk_widget_show (widget);
-  g_signal_connect (widget, "clicked", G_CALLBACK (job_pause_cb), item);
+  g_signal_connect (widget, "clicked", G_CALLBACK (job_pause_cb), job);
   gtk_widget_set_sensitive (widget, pp_job_get_auth_info_required (job) == NULL);
   gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
 
   widget = gtk_button_new_from_icon_name ("edit-delete-symbolic",
                                           GTK_ICON_SIZE_SMALL_TOOLBAR);
   gtk_widget_show (widget);
-  g_signal_connect (widget, "clicked", G_CALLBACK (job_stop_cb), item);
+  g_signal_connect (widget, "clicked", G_CALLBACK (job_stop_cb), job);
   gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
 
   return box;
