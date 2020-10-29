@@ -1448,7 +1448,7 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
   /* Don't call callback if cancelled */
   if (!data->cancellable ||
       !g_cancellable_is_cancelled (data->cancellable))
-    data->callback (g_strdup (data->printer_name),
+    data->callback (data->printer_name,
                     result,
                     data->user_data);
 
@@ -1521,7 +1521,7 @@ printer_set_ppd_async (const gchar  *printer_name,
   return;
 
 out:
-  callback (g_strdup (printer_name), FALSE, user_data);
+  callback (printer_name, FALSE, user_data);
 
   if (data->cancellable)
     g_object_unref (data->cancellable);
@@ -1578,7 +1578,7 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
   return;
 
 out:
-  data->callback (g_strdup (data->printer_name), FALSE, data->user_data);
+  data->callback (data->printer_name, FALSE, data->user_data);
 
   if (data->cancellable)
     g_object_unref (data->cancellable);
@@ -1640,7 +1640,7 @@ printer_set_ppd_file_async (const gchar  *printer_name,
   return;
 
 out:
-  callback (g_strdup (printer_name), FALSE, user_data);
+  callback (printer_name, FALSE, user_data);
 
   if (data->cancellable)
     g_object_unref (data->cancellable);
