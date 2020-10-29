@@ -1335,7 +1335,7 @@ get_ipp_attributes_async (const gchar  *printer_name,
                           gpointer      user_data)
 {
   GIAData          *data;
-  GThread          *thread;
+  g_autoptr(GThread) thread = NULL;
   g_autoptr(GError) error = NULL;
 
   data = g_new0 (GIAData, 1);
@@ -1356,10 +1356,6 @@ get_ipp_attributes_async (const gchar  *printer_name,
       callback (NULL, user_data);
 
       get_ipp_attributes_data_free (data);
-    }
-  else
-    {
-      g_thread_unref (thread);
     }
 }
 
@@ -1734,7 +1730,7 @@ get_ppds_attribute_async (gchar       **ppds_names,
                           gpointer      user_data)
 {
   GPAData          *data;
-  GThread          *thread;
+  g_autoptr(GThread) thread = NULL;
   g_autoptr(GError) error = NULL;
 
   if (!ppds_names || !attribute_name)
@@ -1761,10 +1757,6 @@ get_ppds_attribute_async (gchar       **ppds_names,
       callback (NULL, user_data);
 
       get_ppds_attribute_data_free (data);
-    }
-  else
-    {
-      g_thread_unref (thread);
     }
 }
 
@@ -2718,8 +2710,8 @@ get_all_ppds_async (GCancellable *cancellable,
                     gpointer      user_data)
 {
   GAPData          *data;
-  GThread          *thread;
-  g_autoptr(GError) error = NULL;
+  g_autoptr(GThread) thread;
+  g_autoptr(GError)  error = NULL;
 
   data = g_new0 (GAPData, 1);
   if (cancellable)
@@ -2739,10 +2731,6 @@ get_all_ppds_async (GCancellable *cancellable,
       callback (NULL, user_data);
 
       get_all_ppds_data_free (data);
-    }
-  else
-    {
-      g_thread_unref (thread);
     }
 }
 
@@ -2926,7 +2914,7 @@ printer_get_ppd_async (const gchar *printer_name,
                        gpointer     user_data)
 {
   PGPData          *data;
-  GThread          *thread;
+  g_autoptr(GThread) thread = NULL;
   g_autoptr(GError) error = NULL;
 
   data = g_new0 (PGPData, 1);
@@ -2948,10 +2936,6 @@ printer_get_ppd_async (const gchar *printer_name,
       callback (NULL, user_data);
 
       printer_get_ppd_data_free (data);
-    }
-  else
-    {
-      g_thread_unref (thread);
     }
 }
 
@@ -3018,7 +3002,7 @@ get_named_dest_async (const gchar *printer_name,
                       gpointer     user_data)
 {
   GNDData          *data;
-  GThread          *thread;
+  g_autoptr(GThread) thread = NULL;
   g_autoptr(GError) error = NULL;
 
   data = g_new0 (GNDData, 1);
@@ -3038,10 +3022,6 @@ get_named_dest_async (const gchar *printer_name,
       callback (NULL, user_data);
 
       get_named_dest_data_free (data);
-    }
-  else
-    {
-      g_thread_unref (thread);
     }
 }
 
