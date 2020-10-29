@@ -152,7 +152,7 @@ printer_rename_dbus_cb (GObject      *source_object,
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
   g_autoptr(GError)   error = NULL;
-  GTask              *task = user_data;
+  g_autoptr(GTask)    task = user_data;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
                                           res,
@@ -227,6 +227,7 @@ get_bus_cb (GObject      *source_object,
                               g_task_get_cancellable (task),
                               printer_rename_dbus_cb,
                               task);
+      g_steal_pointer (&task);
     }
   else
     {
