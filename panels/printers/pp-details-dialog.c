@@ -94,7 +94,7 @@ ppd_names_free (gpointer user_data)
     }
 }
 
-static void set_ppd_cb (gchar *printer_name, gboolean success, gpointer user_data);
+static void set_ppd_cb (const gchar *printer_name, gboolean success, gpointer user_data);
 
 static void
 get_ppd_names_cb (PPDName     **names,
@@ -139,7 +139,7 @@ search_for_drivers (PpDetailsDialog *self)
 }
 
 static void
-set_ppd_cb (gchar    *printer_name,
+set_ppd_cb (const gchar *printer_name,
             gboolean  success,
             gpointer  user_data)
 {

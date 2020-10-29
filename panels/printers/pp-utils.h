@@ -133,7 +133,7 @@ gchar      *printer_get_hostname (cups_ptype_t  printer_type,
                                   const gchar  *device_uri,
                                   const gchar  *printer_uri);
 
-typedef void (*PSPCallback) (gchar    *printer_name,
+typedef void (*PSPCallback) (const gchar *printer_name,
                              gboolean  success,
                              gpointer  user_data);
 
