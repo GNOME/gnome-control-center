@@ -35,16 +35,15 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-08-11 22:29+0000\n"
-"PO-Revision-Date: 2020-08-30 11:23+0200\n"
-"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"POT-Creation-Date: 2020-09-06 12:39+0000\n"
+"PO-Revision-Date: 2020-09-16 00:00+0200\n"
+"Last-Translator: scootergrisen\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
 
 #: panels/applications/cc-applications-panel.c:815
 msgid "System Bus"
@@ -62,7 +61,7 @@ msgid "Session Bus"
 msgstr "Sessionsbus"
 
 #: panels/applications/cc-applications-panel.c:821
-#: panels/power/cc-power-panel.c:2506 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2325 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Enheder"
@@ -98,8 +97,8 @@ msgid "File System"
 msgstr "Filsystem"
 
 #: panels/applications/cc-applications-panel.c:841
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:280
-#: shell/cc-window.c:934 shell/cc-window.ui:121
+#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
+#: shell/cc-window.c:933 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Indstillinger"
@@ -378,7 +377,7 @@ msgstr "Vælg et billede"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:944
+#: panels/display/cc-display-panel.c:943
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:865
@@ -1579,20 +1578,20 @@ msgstr ""
 "skærm;lås;diagnostik;baglås;nedbrud;privat;seneste;midlertidig;tmp;indeks;"
 "navn;netværk;identitet;privatliv;"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:954
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Anvend"
 
-#: panels/display/cc-display-panel.c:976
+#: panels/display/cc-display-panel.c:975
 msgid "Apply Changes?"
 msgstr "Anvend ændringer?"
 
-#: panels/display/cc-display-panel.c:981
+#: panels/display/cc-display-panel.c:980
 msgid "Changes Cannot be Applied"
 msgstr "Ændringer kan ikke udføres"
 
-#: panels/display/cc-display-panel.c:982
+#: panels/display/cc-display-panel.c:981
 msgid "This could be due to hardware limitations."
 msgstr "Dette kan skyldes hardwarebegrænsninger."
 
@@ -1605,6 +1604,10 @@ msgstr "Enkelt skærm"
 msgid "Join Displays"
 msgstr "Sammenføj skærme"
 
+# scootergrisen: tjek om det skal være Kloning frem for Klon.
+# scootergrisen: både i gnome-shell og gnome-control-center
+# scootergrisen: lader til Kloning er bedst i gnome-control-center
+# scootergrisen: men det ville nok være bedst hvis de var ens
 #: panels/display/cc-display-panel.ui:126
 msgid "Mirror"
 msgstr "Klon"
@@ -1652,27 +1655,27 @@ msgstr "Skærme"
 msgid "Night Light"
 msgstr "Nattelys"
 
-#: panels/display/cc-display-settings.c:104
+#: panels/display/cc-display-settings.c:103
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Landskab"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:106
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Portræt højre"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Portræt venstre"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Landskab (omvendt)"
 
-#: panels/display/cc-display-settings.c:187
+#: panels/display/cc-display-settings.c:186
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -2609,7 +2612,7 @@ msgstr "Tofingerrulning"
 msgid "Edge Scrolling"
 msgstr "Kantrulning"
 
-#: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:425
+#: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:441
 msgid "Test Your _Settings"
 msgstr "_Afprøv dine indstillinger"
 
@@ -2710,7 +2713,7 @@ msgid "Secure network"
 msgstr "Sikkert netværk"
 
 #: panels/network/cc-wifi-connection-row.ui:102
-#: panels/network/net-device-ethernet.c:317
+#: panels/network/net-device-ethernet.c:316
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:414
 #: panels/network/network-vpn.ui:75
@@ -2913,7 +2916,7 @@ msgid "Never"
 msgstr "Aldrig"
 
 #: panels/network/connection-editor/ce-page-details.c:162
-#: panels/network/net-device-ethernet.c:108
+#: panels/network/net-device-ethernet.c:107
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2927,7 +2930,7 @@ msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:289
-#: panels/network/net-device-ethernet.c:202
+#: panels/network/net-device-ethernet.c:201
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
@@ -2971,22 +2974,22 @@ msgstr "Fremragende"
 
 #: panels/network/connection-editor/ce-page-details.c:396
 #: panels/network/connection-editor/details-page.ui:108
-#: panels/network/net-device-ethernet.c:143
+#: panels/network/net-device-ethernet.c:142
 #: panels/network/net-device-mobile.c:430
 msgid "IPv4 Address"
 msgstr "IPv4-adresse"
 
 #: panels/network/connection-editor/ce-page-details.c:397
 #: panels/network/connection-editor/details-page.ui:126
-#: panels/network/net-device-ethernet.c:144
-#: panels/network/net-device-ethernet.c:148
+#: panels/network/net-device-ethernet.c:143
+#: panels/network/net-device-ethernet.c:147
 #: panels/network/net-device-mobile.c:431 panels/network/network-mobile.ui:200
 msgid "IPv6 Address"
 msgstr "IPv6-adresse"
 
 #: panels/network/connection-editor/ce-page-details.c:400
 #: panels/network/connection-editor/ce-page-details.c:401
-#: panels/network/net-device-ethernet.c:146
+#: panels/network/net-device-ethernet.c:145
 #: panels/network/net-device-mobile.c:434
 #: panels/network/net-device-mobile.c:435 panels/network/network-mobile.ui:183
 msgid "IP Address"
@@ -3080,7 +3083,7 @@ msgid "Link speed"
 msgstr "Forbindelseshastighed"
 
 #: panels/network/connection-editor/details-page.ui:144
-#: panels/network/net-device-ethernet.c:151
+#: panels/network/net-device-ethernet.c:150
 msgid "Hardware Address"
 msgstr "Hardwareadresse"
 
@@ -3089,7 +3092,7 @@ msgid "Supported Frequencies"
 msgstr "Understøttede frekvenser"
 
 #: panels/network/connection-editor/details-page.ui:180
-#: panels/network/net-device-ethernet.c:155
+#: panels/network/net-device-ethernet.c:154
 #: panels/network/network-mobile.ui:217
 msgid "Default Route"
 msgstr "Standardrute"
@@ -3097,7 +3100,7 @@ msgstr "Standardrute"
 #: panels/network/connection-editor/details-page.ui:199
 #: panels/network/connection-editor/ip4-page.ui:211
 #: panels/network/connection-editor/ip6-page.ui:225
-#: panels/network/net-device-ethernet.c:157
+#: panels/network/net-device-ethernet.c:156
 #: panels/network/network-mobile.ui:235
 msgid "DNS"
 msgstr "DNS"
@@ -3362,19 +3365,19 @@ msgstr "Angiv hvordan du forbinder til trådløse netværk"
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr "Netværk;Trådløs;Wi-fi;Wifi;IP;LAN;Bredbånd;DNS;Hotspot;"
 
-#: panels/network/net-device-ethernet.c:96
+#: panels/network/net-device-ethernet.c:95
 msgid "never"
 msgstr "aldrig"
 
-#: panels/network/net-device-ethernet.c:104
+#: panels/network/net-device-ethernet.c:103
 msgid "today"
 msgstr "i dag"
 
-#: panels/network/net-device-ethernet.c:106
+#: panels/network/net-device-ethernet.c:105
 msgid "yesterday"
 msgstr "i går"
 
-#: panels/network/net-device-ethernet.c:162
+#: panels/network/net-device-ethernet.c:161
 msgid "Last used"
 msgstr "Sidst brugt"
 
@@ -3383,7 +3386,7 @@ msgstr "Sidst brugt"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:251
+#: panels/network/net-device-ethernet.c:250
 #: panels/network/network-bluetooth.ui:38 panels/network/network-ethernet.ui:18
 msgid "Wired"
 msgstr "Kabel"
@@ -3414,17 +3417,17 @@ msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Glem"
 
-#: panels/network/net-device-wifi.c:1212
+#: panels/network/net-device-wifi.c:1193
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Systempolitikken forbyder brug som hotspot"
 
-#: panels/network/net-device-wifi.c:1215
+#: panels/network/net-device-wifi.c:1196
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Trådløs enhed understøtter ikke hotspot-tilstand"
 
 #: panels/network/net-proxy.c:70
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1939 panels/power/cc-power-panel.c:1950
+#: panels/power/cc-power-panel.c:1728 panels/power/cc-power-panel.c:1739
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4237,7 +4240,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Vis i_ndhold af meddelelser ved låst skærm"
 
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1945 panels/power/cc-power-panel.c:1952
+#: panels/power/cc-power-panel.c:1734 panels/power/cc-power-panel.c:1741
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4330,18 +4333,18 @@ msgstr "Tilføj en konto"
 msgid "Remove Account"
 msgstr "Fjern konto"
 
-#: panels/power/cc-power-panel.c:336
+#: panels/power/cc-power-panel.c:331
 msgid "Unknown time"
 msgstr "Ukendt tid"
 
-#: panels/power/cc-power-panel.c:342
+#: panels/power/cc-power-panel.c:337
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i minut"
 msgstr[1] "%i minutter"
 
-#: panels/power/cc-power-panel.c:354
+#: panels/power/cc-power-panel.c:349
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4350,261 +4353,261 @@ msgstr[1] "%i timer"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:362
+#: panels/power/cc-power-panel.c:357
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:363
+#: panels/power/cc-power-panel.c:358
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "time"
 msgstr[1] "timer"
 
-#: panels/power/cc-power-panel.c:364
+#: panels/power/cc-power-panel.c:359
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minutter"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:382
+#: panels/power/cc-power-panel.c:377
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s indtil fuldt opladet"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:389
+#: panels/power/cc-power-panel.c:384
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Bemærk: %s tilbage"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:394
+#: panels/power/cc-power-panel.c:389
 #, c-format
 msgid "%s remaining"
 msgstr "%s tilbage"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:399 panels/power/cc-power-panel.c:429
+#: panels/power/cc-power-panel.c:394 panels/power/cc-power-panel.c:424
 msgid "Fully charged"
 msgstr "Fuldt opladet"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:403 panels/power/cc-power-panel.c:433
+#: panels/power/cc-power-panel.c:398 panels/power/cc-power-panel.c:428
 msgid "Not charging"
 msgstr "Oplader ikke"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:407 panels/power/cc-power-panel.c:437
+#: panels/power/cc-power-panel.c:402 panels/power/cc-power-panel.c:432
 msgid "Empty"
 msgstr "Tomt"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:420
+#: panels/power/cc-power-panel.c:415
 msgid "Charging"
 msgstr "Oplader"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:425
+#: panels/power/cc-power-panel.c:420
 msgid "Discharging"
 msgstr "På batteri"
 
-#: panels/power/cc-power-panel.c:571
+#: panels/power/cc-power-panel.c:566
 msgctxt "Battery name"
 msgid "Main"
 msgstr "Hovedbatteri"
 
-#: panels/power/cc-power-panel.c:573
+#: panels/power/cc-power-panel.c:568
 msgctxt "Battery name"
 msgid "Extra"
 msgstr "Ekstra"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:643
 msgid "Wireless mouse"
 msgstr "Trådløs mus"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:651
+#: panels/power/cc-power-panel.c:646
 msgid "Wireless keyboard"
 msgstr "Trådløst tastatur"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:654
+#: panels/power/cc-power-panel.c:649
 msgid "Uninterruptible power supply"
 msgstr "Uafbrydelig strømforsyning"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:657
+#: panels/power/cc-power-panel.c:652
 msgid "Personal digital assistant"
 msgstr "Personlig digital assistent"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:660
+#: panels/power/cc-power-panel.c:655
 msgid "Cellphone"
 msgstr "Mobiltelefon"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:663
+#: panels/power/cc-power-panel.c:658
 msgid "Media player"
 msgstr "Medieafspiller"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:666 panels/wacom/cc-wacom-panel.c:794
+#: panels/power/cc-power-panel.c:661 panels/wacom/cc-wacom-panel.c:728
 msgid "Tablet"
 msgstr "Tegneplade"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:669
+#: panels/power/cc-power-panel.c:664
 msgid "Computer"
 msgstr "Computer"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:672
+#: panels/power/cc-power-panel.c:667
 msgid "Gaming input device"
 msgstr "Spilinputenhed"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:675 panels/power/cc-power-panel.c:967
-#: panels/power/cc-power-panel.c:2459
+#: panels/power/cc-power-panel.c:670 panels/power/cc-power-panel.c:962
+#: panels/power/cc-power-panel.c:2278
 msgid "Battery"
 msgstr "Batteri"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:736
+#: panels/power/cc-power-panel.c:731
 msgctxt "Battery power"
 msgid "Charging"
 msgstr "Oplader"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:743
+#: panels/power/cc-power-panel.c:738
 msgctxt "Battery power"
 msgid "Caution"
 msgstr "Forsigtig"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:748
+#: panels/power/cc-power-panel.c:743
 msgctxt "Battery power"
 msgid "Low"
 msgstr "Lav"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:753
+#: panels/power/cc-power-panel.c:748
 msgctxt "Battery power"
 msgid "Good"
 msgstr "God"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:758
+#: panels/power/cc-power-panel.c:753
 msgctxt "Battery power"
 msgid "Fully charged"
 msgstr "Fuldt opladet"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:762
+#: panels/power/cc-power-panel.c:757
 msgctxt "Battery power"
 msgid "Empty"
 msgstr "Tomt"
 
-#: panels/power/cc-power-panel.c:965
+#: panels/power/cc-power-panel.c:960
 msgid "Batteries"
 msgstr "Batterier"
 
-#: panels/power/cc-power-panel.c:1393
+#: panels/power/cc-power-panel.c:1182
 msgid "When _idle"
 msgstr "Ved _tomgang"
 
-#: panels/power/cc-power-panel.c:1887
+#: panels/power/cc-power-panel.c:1676
 msgid "Suspend"
 msgstr "Hvile"
 
-#: panels/power/cc-power-panel.c:1888
+#: panels/power/cc-power-panel.c:1677
 msgid "Power Off"
 msgstr "Sluk"
 
-#: panels/power/cc-power-panel.c:1889
+#: panels/power/cc-power-panel.c:1678
 msgid "Hibernate"
 msgstr "Dvale"
 
-#: panels/power/cc-power-panel.c:1890
+#: panels/power/cc-power-panel.c:1679
 msgid "Nothing"
 msgstr "Intet"
 
-#: panels/power/cc-power-panel.c:1941
+#: panels/power/cc-power-panel.c:1730
 msgid "When on battery power"
 msgstr "Ved batteridrift"
 
-#: panels/power/cc-power-panel.c:1943
+#: panels/power/cc-power-panel.c:1732
 msgid "When plugged in"
 msgstr "Ved ekstern strøm"
 
-#: panels/power/cc-power-panel.c:2021
+#: panels/power/cc-power-panel.c:1836
 msgid "Power Saving"
 msgstr "Strømbesparelse"
 
-#: panels/power/cc-power-panel.c:2057
+#: panels/power/cc-power-panel.c:1872
 msgid "_Screen Brightness"
 msgstr "_Skærmlysstyrke"
 
-#: panels/power/cc-power-panel.c:2078
+#: panels/power/cc-power-panel.c:1895
 msgid "Automatic Brightness"
 msgstr "Automatisk lysstyrke"
 
-#: panels/power/cc-power-panel.c:2091
+#: panels/power/cc-power-panel.c:1908
 msgid "_Keyboard Brightness"
 msgstr "_Tastaturlysstyrke"
 
-#: panels/power/cc-power-panel.c:2102
+#: panels/power/cc-power-panel.c:1921
 msgid "_Dim Screen When Inactive"
 msgstr "_Dæmp skærmen ved inaktivitet"
 
-#: panels/power/cc-power-panel.c:2120
+#: panels/power/cc-power-panel.c:1939
 msgid "_Blank Screen"
 msgstr "_Sort skærm"
 
-#: panels/power/cc-power-panel.c:2166
+#: panels/power/cc-power-panel.c:1985
 msgid "_Automatic Suspend"
 msgstr "_Automatisk hvile"
 
-#: panels/power/cc-power-panel.c:2167
+#: panels/power/cc-power-panel.c:1986
 msgid "Automatic suspend"
 msgstr "Automatisk hvile"
 
-#: panels/power/cc-power-panel.c:2219
+#: panels/power/cc-power-panel.c:2038
 msgid "_Wi-Fi"
 msgstr "_Wi-fi"
 
-#: panels/power/cc-power-panel.c:2220
+#: panels/power/cc-power-panel.c:2039
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Wi-fi kan slås fra for at spare strøm."
 
-#: panels/power/cc-power-panel.c:2236
+#: panels/power/cc-power-panel.c:2055
 msgid "_Mobile Broadband"
 msgstr "_Mobilt bredbånd"
 
-#: panels/power/cc-power-panel.c:2237
+#: panels/power/cc-power-panel.c:2056
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr "Mobilt bredbånd (LTE, 4G, 3G osv.) kan slås fra for at spare strøm."
 
-#: panels/power/cc-power-panel.c:2287
+#: panels/power/cc-power-panel.c:2106
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2288
+#: panels/power/cc-power-panel.c:2107
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth kan slås fra for at spare strøm."
 
-#: panels/power/cc-power-panel.c:2325
+#: panels/power/cc-power-panel.c:2144
 msgid "Show Battery _Percentage"
 msgstr "Vis _batteriprocent"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2351
+#: panels/power/cc-power-panel.c:2170
 msgid "Suspend & Power Button"
 msgstr "Hvile- og tænd/sluk-knap"
 
-#: panels/power/cc-power-panel.c:2401
+#: panels/power/cc-power-panel.c:2220
 msgid "Po_wer Button Behavior"
 msgstr "Handling for _tænd-/slukknap"
 
@@ -5365,17 +5368,17 @@ msgstr ""
 "Beklager! Systemets udskriftstjeneste\n"
 "synes at være utilgængelig."
 
-#: panels/region/cc-format-chooser.c:151
+#: panels/region/cc-format-chooser.c:149
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Britisk"
 
-#: panels/region/cc-format-chooser.c:153
+#: panels/region/cc-format-chooser.c:151
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrisk"
 
-#: panels/region/cc-format-chooser.c:258 panels/region/cc-format-chooser.c:299
+#: panels/region/cc-format-chooser.c:256 panels/region/cc-format-chooser.c:297
 #: panels/region/cc-format-chooser.ui:6
 msgid "Formats"
 msgstr "Formater"
@@ -7791,7 +7794,7 @@ msgstr ""
 msgid "Map Buttons"
 msgstr "Tildel knapper"
 
-#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:512
+#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:519
 #: panels/wacom/gnome-wacom-properties.ui:60
 msgid "_Close"
 msgstr "_Luk"
@@ -7867,11 +7870,11 @@ msgstr "Afbild til enkelt skærm"
 msgid "%d of %d"
 msgstr "%d af %d"
 
-#: panels/wacom/cc-wacom-page.c:509
+#: panels/wacom/cc-wacom-page.c:516
 msgid "Display Mapping"
 msgstr "Skærmafbildning"
 
-#: panels/wacom/cc-wacom-panel.c:791 panels/wacom/wacom-stylus-page.ui:119
+#: panels/wacom/cc-wacom-panel.c:725 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
 msgstr "Pen"
 
@@ -8038,31 +8041,31 @@ msgstr ""
 msgid "The GNOME Project"
 msgstr "GNOME-projektet"
 
-#: shell/cc-application.c:60
+#: shell/cc-application.c:59
 msgid "Display version number"
 msgstr "Vis versionsnummer"
 
-#: shell/cc-application.c:61
+#: shell/cc-application.c:60
 msgid "Enable verbose mode"
 msgstr "Brug uddybende tilstand"
 
-#: shell/cc-application.c:62
+#: shell/cc-application.c:61
 msgid "Search for the string"
 msgstr "Søg efter strengen"
 
-#: shell/cc-application.c:63
+#: shell/cc-application.c:62
 msgid "List possible panel names and exit"
 msgstr "Vis mulige panelnavne og afslut"
 
-#: shell/cc-application.c:64
+#: shell/cc-application.c:63
 msgid "Panel to display"
 msgstr "Panel der skal vises"
 
-#: shell/cc-application.c:64
+#: shell/cc-application.c:63
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT …]"
 
-#: shell/cc-panel-list.ui:45 shell/cc-window.c:276
+#: shell/cc-panel-list.ui:45 shell/cc-window.c:275
 msgid "Privacy"
 msgstr "Privatliv"
 
