@@ -38,7 +38,8 @@ render_user_icon (ActUser *user,
                   gint     scale)
 {
         g_autoptr(GdkPixbuf) source_pixbuf = NULL;
-        GdkPixbuf    *pixbuf = NULL;
+        g_autoptr(GdkPixbuf) avatar_pixbuf = NULL;
+        g_autoptr(GdkPixbuf) pixbuf = NULL;
         const gchar  *icon_file;
         cairo_surface_t *surface = NULL;
 
@@ -46,7 +47,6 @@ render_user_icon (ActUser *user,
         g_return_val_if_fail (icon_size > 12, NULL);
 
         icon_file = act_user_get_icon_file (user);
-        pixbuf = NULL;
         if (icon_file) {
                 source_pixbuf = gdk_pixbuf_new_from_file_at_size (icon_file,
                                                                   icon_size * scale,
@@ -60,18 +60,13 @@ render_user_icon (ActUser *user,
                 goto out;
         }
 
-        if (source_pixbuf != NULL) {
-                g_object_unref (source_pixbuf);
-        }
-
-        source_pixbuf = generate_default_avatar (user, icon_size * scale);
-        if (source_pixbuf)
-            pixbuf = round_image (source_pixbuf);
+        avatar_pixbuf = generate_default_avatar (user, icon_size * scale);
+        if (avatar_pixbuf)
+            pixbuf = round_image (avatar_pixbuf);
  out:
 
         if (pixbuf != NULL) {
                 surface = gdk_cairo_surface_create_from_pixbuf (pixbuf, scale, NULL);
-                g_object_unref (pixbuf);
         }
 
         return surface;

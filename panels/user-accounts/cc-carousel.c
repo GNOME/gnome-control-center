@@ -110,7 +110,7 @@ static void
 cc_carousel_move_arrow (CcCarousel *self)
 {
         GtkStyleContext *context;
-        gchar *css;
+        g_autofree gchar *css = NULL;
         gint end_x;
         GtkSettings *settings;
         gboolean animations;
@@ -149,8 +149,6 @@ cc_carousel_move_arrow (CcCarousel *self)
         self->provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
         gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (self->provider), css, -1, NULL);
         gtk_style_context_add_provider (context, self->provider, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        g_free (css);
 }
 
 static gint
@@ -413,7 +411,7 @@ on_transition_running (CcCarousel *self)
 static void
 cc_carousel_init (CcCarousel *self)
 {
-        GtkStyleProvider *provider;
+        g_autoptr(GtkStyleProvider) provider = NULL;
 
         gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -424,8 +422,6 @@ cc_carousel_init (CcCarousel *self)
         gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                                    provider,
                                                    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-        g_object_unref (provider);
 
         g_signal_connect_object (self->stack, "size-allocate", G_CALLBACK (on_size_allocate), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->stack, "notify::transition-running", G_CALLBACK (on_transition_running), self, G_CONNECT_SWAPPED);

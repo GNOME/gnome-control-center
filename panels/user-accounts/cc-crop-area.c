@@ -763,10 +763,7 @@ cc_crop_area_set_picture (CcCropArea *area,
         int width;
         int height;
 
-        if (area->browse_pixbuf) {
-                g_object_unref (area->browse_pixbuf);
-                area->browse_pixbuf = NULL;
-        }
+        g_clear_object (&area->browse_pixbuf);
         if (pixbuf) {
                 area->browse_pixbuf = g_object_ref (pixbuf);
                 width = gdk_pixbuf_get_width (pixbuf);

@@ -252,8 +252,6 @@ stop_passwd (PasswdHandler *passwd_handler)
 static void
 free_passwd_resources (PasswdHandler *passwd_handler)
 {
-        GError  *error = NULL;
-
         /* Remove the child watcher */
         if (passwd_handler->backend_child_watch_id != 0) {
 
@@ -265,28 +263,23 @@ free_passwd_resources (PasswdHandler *passwd_handler)
 
         /* Close IO channels (internal file descriptors are automatically closed) */
         if (passwd_handler->backend_stdin != NULL) {
+                g_autoptr(GError) error = NULL;
 
                 if (g_io_channel_shutdown (passwd_handler->backend_stdin, TRUE, &error) != G_IO_STATUS_NORMAL) {
                         g_warning ("Could not shutdown backend_stdin IO channel: %s", error->message);
-                        g_error_free (error);
-                        error = NULL;
                 }
 
-                g_io_channel_unref (passwd_handler->backend_stdin);
-                passwd_handler->backend_stdin = NULL;
+                g_clear_pointer (&passwd_handler->backend_stdin, g_io_channel_unref);
         }
 
         if (passwd_handler->backend_stdout != NULL) {
+                g_autoptr(GError) error = NULL;
 
                 if (g_io_channel_shutdown (passwd_handler->backend_stdout, TRUE, &error) != G_IO_STATUS_NORMAL) {
                         g_warning ("Could not shutdown backend_stdout IO channel: %s", error->message);
-                        g_error_free (error);
-                        error = NULL;
                 }
 
-                g_io_channel_unref (passwd_handler->backend_stdout);
-
-                passwd_handler->backend_stdout = NULL;
+                g_clear_pointer (&passwd_handler->backend_stdout, g_io_channel_unref);
         }
 
         /* Remove IO watcher */
@@ -321,9 +314,9 @@ free_passwd_resources (PasswdHandler *passwd_handler)
 static void
 io_queue_pop (GQueue *queue, GIOChannel *channel)
 {
-        gchar   *buf;
+        g_autofree gchar *buf = NULL;
         gsize   bytes_written;
-        GError  *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         buf = g_queue_pop_head (queue);
 
@@ -331,12 +324,10 @@ io_queue_pop (GQueue *queue, GIOChannel *channel)
 
                 if (g_io_channel_write_chars (channel, buf, -1, &bytes_written, &error) != G_IO_STATUS_NORMAL) {
                         g_warning ("Could not write queue element \"%s\" to channel: %s", buf, error->message);
-                        g_error_free (error);
                 }
 
                 /* Ensure passwords are cleared from memory */
                 memset (buf, 0, strlen (buf));
-                g_free (buf);
         }
 }
 
@@ -377,8 +368,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 
         gchar           buf[BUFSIZE];           /* Temporary buffer */
         gsize           bytes_read;
-        GError          *gio_error = NULL;      /* Error returned by functions */
-        GError          *error = NULL;          /* Error sent to callbacks */
+        g_autoptr(GError) gio_error = NULL;
 
         gboolean        reinit = FALSE;
 
@@ -390,8 +380,6 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
         if (g_io_channel_read_chars (source, buf, BUFSIZE, &bytes_read, &gio_error)
             != G_IO_STATUS_NORMAL) {
                 g_warning ("IO Channel read error: %s", gio_error->message);
-                g_error_free (gio_error);
-
                 return TRUE;
         }
 
@@ -419,6 +407,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
 
                                 } else {
                                         /* Authentication failed */
+                                        g_autoptr(GError) error = NULL;
 
                                         error = g_error_new_literal (PASSWD_ERROR, PASSWD_ERROR_AUTH_FAILED,
                                                                      _("Authentication failed"));
@@ -435,8 +424,6 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                                                 passwd_handler->auth_cb (passwd_handler,
                                                                          error,
                                                                          passwd_handler->auth_cb_data);
-
-                                        g_error_free (error);
                                 }
 
                                 reinit = TRUE;
@@ -492,6 +479,7 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                                 }
                                 else {
                                         /* Ohnoes! */
+                                        g_autoptr(GError) error = NULL;
 
                                         if (strstr (str->str, "recovered") != NULL) {
                                                 /* What does this indicate?
@@ -551,9 +539,6 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                                                 passwd_handler->chpasswd_cb (passwd_handler,
                                                                              error,
                                                                              passwd_handler->chpasswd_cb_data);
-
-                                        g_error_free (error);
-
                                 }
 
                                 reinit = TRUE;
@@ -569,14 +554,13 @@ io_watch_stdout (GIOChannel *source, GIOCondition condition, PasswdHandler *pass
                                  * passwd will immediately ask for the new password,
                                  * so skip the AUTH phase */
                                 if (is_string_complete (str->str, "new", "New", NULL)) {
-                                        gchar *pw;
+                                        g_autofree gchar *pw = NULL;
 
                                         passwd_handler->backend_state = PASSWD_STATE_NEW;
 
                                         /* since passwd didn't ask for our old password
                                          * in this case, simply remove it from the queue */
                                         pw = g_queue_pop_head (passwd_handler->backend_stdin_queue);
-                                        g_free (pw);
 
                                         /* Pop the IO queue, i.e. send new password */
                                         io_queue_pop (passwd_handler->backend_stdin_queue, passwd_handler->backend_stdin);
@@ -679,7 +663,7 @@ passwd_authenticate (PasswdHandler *passwd_handler,
                      PasswdCallback cb,
                      const gpointer user_data)
 {
-        GError *error = NULL;
+        g_autoptr(GError) error = NULL;
 
         /* Don't stop if we've already started changing password */
         if (passwd_handler->changing_password)
@@ -701,8 +685,6 @@ passwd_authenticate (PasswdHandler *passwd_handler,
 
         if (!spawn_passwd (passwd_handler, &error)) {
                 g_warning ("%s", error->message);
-                g_error_free (error);
-
                 return;
         }
 
@@ -717,8 +699,6 @@ passwd_change_password (PasswdHandler *passwd_handler,
                         PasswdCallback cb,
                         const gpointer user_data)
 {
-        GError *error = NULL;
-
         passwd_handler->changing_password = TRUE;
 
         passwd_handler->new_password = new_password;
@@ -736,14 +716,13 @@ passwd_change_password (PasswdHandler *passwd_handler,
          * has occurred but it has not yet exited */
         if (passwd_handler->backend_pid == -1) {
                 /* If it is not, re-run authentication */
+                g_autoptr(GError) error = NULL;
 
                 /* Spawn backend */
                 stop_passwd (passwd_handler);
 
                 if (!spawn_passwd (passwd_handler, &error)) {
                         g_warning ("%s", error->message);
-                        g_error_free (error);
-
                         return FALSE;
                 }
 

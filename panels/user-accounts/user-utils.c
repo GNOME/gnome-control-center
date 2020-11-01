@@ -72,9 +72,9 @@ icon_shape_data_free (gpointer user_data)
 {
         IconShapeData *data = user_data;
 
-        g_free (data->text);
-        g_free (data->placeholder_str);
-        g_object_unref (data->icon);
+        g_clear_pointer (&data->text, g_free);
+        g_clear_pointer (&data->placeholder_str, g_free);
+        g_clear_object (&data->icon);
         g_free (data);
 }
 
@@ -91,8 +91,8 @@ icon_shape_renderer (cairo_t        *cr,
         if (GPOINTER_TO_UINT (attr->data) == data->placeholder) {
                 gdouble ascent;
                 gdouble height;
-                GdkPixbuf *pixbuf;
-                GtkIconInfo *info;
+                g_autoptr(GdkPixbuf) pixbuf = NULL;
+                g_autoptr(GtkIconInfo) info = NULL;
 
                 ascent = pango_units_to_double (attr->ink_rect.y);
                 height = pango_units_to_double (attr->ink_rect.height);
@@ -101,13 +101,11 @@ icon_shape_renderer (cairo_t        *cr,
                                                        (gint)height,
                                                        GTK_ICON_LOOKUP_FORCE_SIZE | GTK_ICON_LOOKUP_USE_BUILTIN);
                 pixbuf = gtk_icon_info_load_icon (info, NULL);
-                g_object_unref (info);
 
                 cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
                 cairo_reset_clip (cr);
                 gdk_cairo_set_source_pixbuf (cr, pixbuf, x, y + ascent);
                 cairo_paint (cr);
-                g_object_unref (pixbuf);
         }
 }
 
@@ -251,13 +249,12 @@ query_tooltip (GtkWidget  *widget,
                GtkTooltip *tooltip,
                gpointer    user_data)
 {
-        gchar *tip;
-
         if (GTK_ENTRY_ICON_SECONDARY == gtk_entry_get_icon_at_pos (GTK_ENTRY (widget), x, y)) {
+                g_autofree gchar *tip = NULL;
+
                 tip = gtk_entry_get_icon_tooltip_text (GTK_ENTRY (widget),
                                                        GTK_ENTRY_ICON_SECONDARY);
                 gtk_tooltip_set_text (tooltip, tip);
-                g_free (tip);
 
                 return TRUE;
         }
@@ -398,8 +395,8 @@ typedef struct {
 static void
 is_valid_username_data_free (isValidUsernameData *data)
 {
-        g_free (data->username);
-        g_free (data->tip);
+        g_clear_pointer (&data->username, g_free);
+        g_clear_pointer (&data->tip, g_free);
         g_free (data);
 }
 
@@ -420,7 +417,7 @@ is_valid_username_child_watch_cb (GPid pid,
                                   gint status,
                                   gpointer user_data)
 {
-        GTask *task = G_TASK (user_data);
+        g_autoptr(GTask) task = G_TASK (user_data);
         isValidUsernameData *data = g_task_get_task_data (task);
         GError *error = NULL;
         gboolean valid = FALSE;
@@ -452,7 +449,6 @@ is_valid_username_child_watch_cb (GPid pid,
         }
 
         g_spawn_close_pid (pid);
-        g_object_unref (task);
 }
 
 void
@@ -461,7 +457,7 @@ is_valid_username_async (const gchar *username,
                          GAsyncReadyCallback callback,
                          gpointer callback_data)
 {
-        GTask *task;
+        g_autoptr(GTask) task = NULL;
         isValidUsernameData *data;
         gchar *argv[6];
         GPid pid;
@@ -476,15 +472,11 @@ is_valid_username_async (const gchar *username,
 
         if (username == NULL || username[0] == '\0') {
                 g_task_return_boolean (task, FALSE);
-                g_object_unref (task);
-
                 return;
         }
         else if (strlen (username) > get_username_max_length ()) {
                 data->tip = g_strdup (_("The username is too long."));
                 g_task_return_boolean (task, FALSE);
-                g_object_unref (task);
-
                 return;
         }
 
@@ -518,12 +510,11 @@ is_valid_username_async (const gchar *username,
                             G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
                             NULL, NULL, &pid, &error)) {
                 g_task_return_error (task, error);
-                g_object_unref (task);
-
                 return;
         }
 
         g_child_watch_add (pid, (GChildWatchFunc) is_valid_username_child_watch_cb, task);
+        g_steal_pointer (&task);
 }
 
 gboolean
@@ -707,31 +698,25 @@ void
 set_user_icon_data (ActUser   *user,
                     GdkPixbuf *pixbuf)
 {
-        gchar *path;
+        g_autofree gchar *path = NULL;
         gint fd;
-        GOutputStream *stream;
-        GError *error;
+        g_autoptr(GOutputStream) stream = NULL;
+        g_autoptr(GError) error = NULL;
 
         path = g_build_filename (g_get_tmp_dir (), "gnome-control-center-user-icon-XXXXXX", NULL);
         fd = g_mkstemp (path);
 
         if (fd == -1) {
                 g_warning ("failed to create temporary file for image data");
-                g_free (path);
                 return;
         }
 
         stream = g_unix_output_stream_new (fd, TRUE);
 
-        error = NULL;
         if (!gdk_pixbuf_save_to_stream (pixbuf, stream, "png", NULL, &error, NULL)) {
                 g_warning ("failed to save image: %s", error->message);
-                g_error_free (error);
-                g_object_unref (stream);
                 return;
         }
-
-        g_object_unref (stream);
 
         act_user_set_icon_file (user, path);
 
@@ -739,8 +724,6 @@ set_user_icon_data (ActUser   *user,
          * to wait for its completion
          */
         g_remove (path);
-
-        g_free (path);
 }
 
 GdkPixbuf *

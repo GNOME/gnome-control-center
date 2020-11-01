@@ -73,7 +73,8 @@ crop_dialog_response (CcAvatarChooser *self,
                       gint             response_id,
                       GtkWidget       *dialog)
 {
-        GdkPixbuf *pb, *pb2;
+        g_autoptr(GdkPixbuf) pb = NULL;
+        g_autoptr(GdkPixbuf) pb2 = NULL;
 
         if (response_id != GTK_RESPONSE_ACCEPT) {
                 self->crop_area = NULL;
@@ -85,9 +86,6 @@ crop_dialog_response (CcAvatarChooser *self,
         pb2 = gdk_pixbuf_scale_simple (pb, PIXEL_SIZE, PIXEL_SIZE, GDK_INTERP_BILINEAR);
 
         set_user_icon_data (self->user, pb2);
-
-        g_object_unref (pb2);
-        g_object_unref (pb);
 
         self->crop_area = NULL;
         gtk_widget_destroy (dialog);
@@ -136,9 +134,10 @@ file_chooser_response (CcAvatarChooser *self,
                        gint             response,
                        GtkDialog       *chooser)
 {
-        gchar *filename;
-        GError *error;
-        GdkPixbuf *pixbuf, *pixbuf2;
+        g_autofree gchar *filename = NULL;
+        g_autoptr(GError) error = NULL;
+        g_autoptr(GdkPixbuf) pixbuf = NULL;
+        g_autoptr(GdkPixbuf) pixbuf2 = NULL;
 
         if (response != GTK_RESPONSE_ACCEPT) {
                 gtk_widget_destroy (GTK_WIDGET (chooser));
@@ -147,36 +146,31 @@ file_chooser_response (CcAvatarChooser *self,
 
         filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
 
-        error = NULL;
         pixbuf = gdk_pixbuf_new_from_file (filename, &error);
         if (pixbuf == NULL) {
                 g_warning ("Failed to load %s: %s", filename, error->message);
-                g_error_free (error);
         }
-        g_free (filename);
 
         pixbuf2 = gdk_pixbuf_apply_embedded_orientation (pixbuf);
-        g_object_unref (pixbuf);
 
         gtk_widget_destroy (GTK_WIDGET (chooser));
 
         cc_avatar_chooser_crop (self, pixbuf2);
-        g_object_unref (pixbuf2);
 }
 
 static void
 update_preview (GtkFileChooser               *chooser,
                 GnomeDesktopThumbnailFactory *thumb_factory)
 {
-        gchar *uri;
+        g_autofree gchar *uri = NULL;
 
         uri = gtk_file_chooser_get_uri (chooser);
 
         if (uri) {
-                GdkPixbuf *pixbuf = NULL;
-                char *mime_type = NULL;
-                GFile *file;
-                GFileInfo *file_info;
+                g_autoptr(GdkPixbuf) pixbuf = NULL;
+                g_autofree char *mime_type = NULL;
+                g_autoptr(GFile) file = NULL;
+                g_autoptr(GFileInfo) file_info = NULL;
                 GtkWidget *preview;
 
                 preview = gtk_file_chooser_get_preview_widget (chooser);
@@ -186,19 +180,16 @@ update_preview (GtkFileChooser               *chooser,
                                                "standard::*",
                                                G_FILE_QUERY_INFO_NONE,
                                                NULL, NULL);
-                g_object_unref (file);
 
                 if (file_info != NULL &&
                     g_file_info_get_file_type (file_info) != G_FILE_TYPE_DIRECTORY) {
                         mime_type = g_strdup (g_file_info_get_content_type (file_info));
-                        g_object_unref (file_info);
                 }
 
                 if (mime_type) {
                         pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (thumb_factory,
                                                                                      uri,
                                                                                      mime_type);
-                        g_free (mime_type);
                 }
 
                 gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser),
@@ -207,15 +198,12 @@ update_preview (GtkFileChooser               *chooser,
 
                 if (pixbuf != NULL) {
                         gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
-                        g_object_unref (pixbuf);
                 }
                 else {
                         gtk_image_set_from_icon_name (GTK_IMAGE (preview),
                                                       "dialog-question",
                                                       GTK_ICON_SIZE_DIALOG);
                 }
-
-                g_free (uri);
         }
 
         gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
@@ -280,15 +268,13 @@ webcam_response_cb (CcAvatarChooser  *self,
                     GtkDialog        *dialog)
 {
         if (response == GTK_RESPONSE_ACCEPT) {
-                GdkPixbuf *pb, *pb2;
+                g_autoptr(GdkPixbuf) pb = NULL;
+                g_autoptr(GdkPixbuf) pb2 = NULL;
 
                 g_object_get (G_OBJECT (dialog), "pixbuf", &pb, NULL);
                 pb2 = gdk_pixbuf_scale_simple (pb, PIXEL_SIZE, PIXEL_SIZE, GDK_INTERP_BILINEAR);
 
                 set_user_icon_data (self->user, pb2);
-
-                g_object_unref (pb2);
-                g_object_unref (pb);
         }
         if (response != GTK_RESPONSE_DELETE_EVENT &&
             response != GTK_RESPONSE_NONE)
@@ -448,15 +434,16 @@ get_system_facesdirs (void)
 static gboolean
 add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
 {
-        GFile *file, *dir;
-        GFileInfo *info;
-        GFileEnumerator *enumerator;
+        GFile *file;
         GFileType type;
         const gchar *target;
         guint i;
         gboolean added_faces = FALSE;
 
         for (i = 0; facesdirs[i] != NULL; i++) {
+                g_autoptr(GFile) dir = NULL;
+                g_autoptr(GFileEnumerator) enumerator = NULL;
+
                 dir = g_file_new_for_path (facesdirs[i]);
 
                 enumerator = g_file_enumerate_children (dir,
@@ -467,34 +454,33 @@ add_faces_from_dirs (GListStore *faces, GStrv facesdirs, gboolean add_all)
                                                         G_FILE_QUERY_INFO_NONE,
                                                         NULL, NULL);
                 if (enumerator == NULL) {
-                        g_object_unref (dir);
                         continue;
                 }
 
-                while ((info = g_file_enumerator_next_file (enumerator, NULL, NULL)) != NULL) {
+                while (TRUE) {
+                        g_autoptr(GFileInfo) info = g_file_enumerator_next_file (enumerator, NULL, NULL);
+                        if (info == NULL) {
+                                break;
+                        }
+
                         type = g_file_info_get_file_type (info);
                         if (type != G_FILE_TYPE_REGULAR &&
                             type != G_FILE_TYPE_SYMBOLIC_LINK) {
-                                g_object_unref (info);
                                 continue;
                         }
 
                         target = g_file_info_get_symlink_target (info);
                         if (target != NULL && g_str_has_prefix (target , "legacy/")) {
-                                g_object_unref (info);
                                 continue;
                         }
 
                         file = g_file_get_child (dir, g_file_info_get_name (info));
                         g_list_store_append (faces, file);
 
-                        g_object_unref (info);
                         added_faces = TRUE;
                 }
 
                 g_file_enumerator_close (enumerator, NULL, NULL);
-                g_object_unref (enumerator);
-                g_object_unref (dir);
 
                 if (added_faces && !add_all)
                         break;
@@ -647,8 +633,7 @@ cc_avatar_chooser_set_user (CcAvatarChooser *self,
 
         if (self->user) {
                 gtk_container_foreach (GTK_CONTAINER (self->user_flowbox), (GtkCallback) gtk_widget_destroy, NULL);
-                g_object_unref (self->user);
-                self->user = NULL;
+                g_clear_object (&self->user);
         }
         self->user = g_object_ref (user);
 

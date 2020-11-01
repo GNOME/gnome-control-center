@@ -62,20 +62,19 @@ cc_realm_error_get_quark (void)
 static gboolean
 is_realm_with_kerberos_and_membership (gpointer object)
 {
-        GDBusInterface *interface;
+        g_autoptr(GDBusInterface) kerberos_interface = NULL;
+        g_autoptr(GDBusInterface) kerberos_membership_interface = NULL;
 
         if (!G_IS_DBUS_OBJECT (object))
                 return FALSE;
 
-        interface = g_dbus_object_get_interface (object, "org.freedesktop.realmd.Kerberos");
-        if (interface == NULL)
+        kerberos_interface = g_dbus_object_get_interface (object, "org.freedesktop.realmd.Kerberos");
+        if (kerberos_interface == NULL)
                 return FALSE;
-        g_object_unref (interface);
 
-        interface = g_dbus_object_get_interface (object, "org.freedesktop.realmd.KerberosMembership");
-        if (interface == NULL)
+        kerberos_membership_interface = g_dbus_object_get_interface (object, "org.freedesktop.realmd.KerberosMembership");
+        if (kerberos_membership_interface == NULL)
                 return FALSE;
-        g_object_unref (interface);
 
         return TRUE;
 }
@@ -167,7 +166,7 @@ on_provider_new (GObject *source,
                  GAsyncResult *result,
                  gpointer user_data)
 {
-        GTask *task = G_TASK (user_data);
+        g_autoptr(GTask) task = G_TASK (user_data);
         CcRealmManager *manager = g_task_get_task_data (task);
         GError *error = NULL;
 
@@ -179,8 +178,6 @@ on_provider_new (GObject *source,
         } else {
                 g_task_return_error (task, error);
         }
-
-        g_object_unref (task);
 }
 
 static void
@@ -188,7 +185,7 @@ on_manager_new (GObject *source,
                 GAsyncResult *result,
                 gpointer user_data)
 {
-        GTask *task = G_TASK (user_data);
+        g_autoptr(GTask) task = G_TASK (user_data);
         CcRealmManager *manager;
         GDBusConnection *connection;
         GError *error = NULL;
@@ -222,9 +219,9 @@ on_manager_new (GObject *source,
                                              "/org/freedesktop/realmd",
                                              g_task_get_cancellable (task),
                                              on_provider_new, task);
+                g_steal_pointer (&task);
         } else {
                 g_task_return_error (task, error);
-                g_object_unref (task);
         }
 }
 
@@ -271,9 +268,8 @@ on_provider_discover (GObject *source,
                       GAsyncResult *result,
                       gpointer user_data)
 {
-        GTask *task = G_TASK (user_data);
+        g_autoptr(GTask) task = G_TASK (user_data);
         CcRealmManager *manager = g_task_get_source_object (task);
-        GDBusObject *object;
         GError *error = NULL;
         gboolean no_membership = FALSE;
         gchar **realms;
@@ -285,17 +281,18 @@ on_provider_discover (GObject *source,
                                                 &realms, result, &error);
         if (error == NULL) {
                 for (i = 0; realms[i]; i++) {
+                        g_autoptr(GDBusObject) object = NULL;
+
                         object = g_dbus_object_manager_get_object (G_DBUS_OBJECT_MANAGER (manager), realms[i]);
                         if (object == NULL) {
                                 g_warning ("Realm is not in object manager: %s", realms[i]);
                         } else {
                                 if (is_realm_with_kerberos_and_membership (object)) {
                                         g_debug ("Discovered realm: %s", realms[i]);
-                                        kerberos_realms = g_list_prepend (kerberos_realms, object);
+                                        kerberos_realms = g_list_prepend (kerberos_realms, g_steal_pointer (&object));
                                 } else {
                                         g_debug ("Realm does not support kerberos membership: %s", realms[i]);
                                         no_membership = TRUE;
-                                        g_object_unref (object);
                                 }
                         }
                 }
@@ -314,8 +311,6 @@ on_provider_discover (GObject *source,
         } else {
                 g_task_return_error (task, error);
         }
-
-        g_object_unref (task);
 }
 
 void
@@ -395,26 +390,23 @@ gchar *
 cc_realm_calculate_login (CcRealmCommon *realm,
                           const gchar *username)
 {
-        GString *string;
         const gchar *const *formats;
-        gchar *login = NULL;
 
         formats = cc_realm_common_get_login_formats (realm);
         if (formats[0] != NULL) {
-                string = g_string_new (formats[0]);
+                GString *string = g_string_new (formats[0]);
                 string_replace (string, "%U", username);
                 string_replace (string, "%D", cc_realm_common_get_name (realm));
-                login = g_string_free (string, FALSE);
+                return g_string_free (string, FALSE);
         }
 
-        return login;
-
+        return NULL;
 }
 
 gboolean
 cc_realm_is_configured (CcRealmObject *realm)
 {
-        CcRealmCommon *common;
+        g_autoptr(CcRealmCommon) common = NULL;
         const gchar *configured;
         gboolean is = FALSE;
 
@@ -422,7 +414,6 @@ cc_realm_is_configured (CcRealmObject *realm)
         if (common != NULL) {
                 configured = cc_realm_common_get_configured (common);
                 is = configured != NULL && !g_str_equal (configured, "");
-                g_object_unref (common);
         }
 
         return is;
@@ -463,7 +454,7 @@ realm_join_as_owner (CcRealmObject *realm,
                      GAsyncReadyCallback callback,
                      gpointer user_data)
 {
-        CcRealmKerberosMembership *membership;
+        g_autoptr(CcRealmKerberosMembership) membership = NULL;
         GVariant *contents;
         GVariant *options;
         GVariant *option;
@@ -476,7 +467,6 @@ realm_join_as_owner (CcRealmObject *realm,
         type = find_supported_credentials (membership, owner);
         if (type == NULL) {
                 g_debug ("Couldn't find supported credential type for owner: %s", owner);
-                g_object_unref (membership);
                 return FALSE;
         }
 
@@ -503,7 +493,6 @@ realm_join_as_owner (CcRealmObject *realm,
 
         cc_realm_kerberos_membership_call_join (membership, creds, options,
                                                 cancellable, callback, user_data);
-        g_object_unref (membership);
 
         return TRUE;
 }
@@ -553,9 +542,9 @@ cc_realm_join_finish (CcRealmObject *realm,
                       GAsyncResult *result,
                       GError **error)
 {
-        CcRealmKerberosMembership *membership;
-        GError *call_error = NULL;
-        gchar *dbus_error;
+        g_autoptr(CcRealmKerberosMembership) membership = NULL;
+        g_autoptr(GError) call_error = NULL;
+        g_autofree gchar *dbus_error = NULL;
 
         g_return_val_if_fail (CC_REALM_IS_OBJECT (realm), FALSE);
         g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
@@ -563,10 +552,7 @@ cc_realm_join_finish (CcRealmObject *realm,
         membership = cc_realm_object_get_kerberos_membership (realm);
         g_return_val_if_fail (membership != NULL, FALSE);
 
-        cc_realm_kerberos_membership_call_join_finish (membership, result, &call_error);
-        g_object_unref (membership);
-
-        if (call_error == NULL) {
+        if (cc_realm_kerberos_membership_call_join_finish (membership, result, &call_error)) {
                 g_debug ("Completed Join() method call");
                 return TRUE;
         }
@@ -574,7 +560,7 @@ cc_realm_join_finish (CcRealmObject *realm,
         dbus_error = g_dbus_error_get_remote_error (call_error);
         if (dbus_error == NULL) {
                 g_debug ("Join() failed because of %s", call_error->message);
-                g_propagate_error (error, call_error);
+                g_propagate_error (error, g_steal_pointer (&call_error));
                 return FALSE;
         }
 
@@ -584,13 +570,11 @@ cc_realm_join_finish (CcRealmObject *realm,
                 g_debug ("Join() failed because of invalid/insufficient credentials");
                 g_set_error (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN,
                              "%s", call_error->message);
-                g_error_free (call_error);
         } else {
                 g_debug ("Join() failed because of %s", call_error->message);
-                g_propagate_error (error, call_error);
+                g_propagate_error (error, g_steal_pointer (&call_error));
         }
 
-        g_free (dbus_error);
         return FALSE;
 }
 
@@ -605,10 +589,10 @@ static void
 login_closure_free (gpointer data)
 {
         LoginClosure *login = data;
-        g_free (login->domain);
-        g_free (login->realm);
-        g_free (login->user);
-        g_free (login->password);
+        g_clear_pointer (&login->domain, g_free);
+        g_clear_pointer (&login->realm, g_free);
+        g_clear_pointer (&login->user, g_free);
+        g_clear_pointer (&login->password, g_free);
         g_slice_free (LoginClosure, login);
 }
 
@@ -624,7 +608,7 @@ login_perform_kinit (krb5_context k5,
         krb5_principal principal;
         krb5_ccache ccache;
         krb5_creds creds;
-        gchar *name;
+        g_autofree gchar *name = NULL;
 
         name = g_strdup_printf ("%s@%s", login, realm);
         code = krb5_parse_name (k5, name, &principal);
@@ -632,12 +616,10 @@ login_perform_kinit (krb5_context k5,
         if (code != 0) {
                 g_debug ("Couldn't parse principal name: %s: %s",
                          name, krb5_get_error_message (k5, code));
-                g_free (name);
                 return code;
         }
 
         g_debug ("Using principal name to kinit: %s", name);
-        g_free (name);
 
         if (filename == NULL)
                 code = krb5_cc_default (k5, &ccache);
@@ -677,16 +659,16 @@ login_perform_kinit (krb5_context k5,
 }
 
 static void
-kinit_thread_func (GTask *task,
+kinit_thread_func (GTask *t,
                    gpointer object,
                    gpointer task_data,
                    GCancellable *cancellable)
 {
+        g_autoptr(GTask) task = t;
         LoginClosure *login = task_data;
         krb5_context k5 = NULL;
         krb5_error_code code;
-        GError *error = NULL;
-        gchar *filename = NULL;
+        g_autofree gchar *filename = NULL;
         gchar *contents;
         gsize length;
         gint temp_fd;
@@ -697,8 +679,7 @@ kinit_thread_func (GTask *task,
         if (temp_fd == -1) {
                 g_warning ("Couldn't create credential cache file: %s: %s",
                            filename, g_strerror (errno));
-                g_free (filename);
-                filename = NULL;
+                g_clear_pointer (&filename, g_free);
         } else {
                 close (temp_fd);
         }
@@ -712,13 +693,13 @@ kinit_thread_func (GTask *task,
         switch (code) {
         case 0:
                 if (filename != NULL) {
-                        g_file_get_contents (filename, &contents, &length, &error);
-                        if (error == NULL) {
+                        g_autoptr(GError) error = NULL;
+
+                        if (g_file_get_contents (filename, &contents, &length, &error)) {
                                 g_debug ("Read in credential cache: %s", filename);
                         } else {
                                 g_warning ("Couldn't read credential cache: %s: %s",
                                            filename, error->message);
-                                g_error_free (error);
                         }
 
                         g_task_return_pointer (task, g_bytes_new_take (contents, length), (GDestroyNotify) g_bytes_unref);
@@ -755,13 +736,10 @@ kinit_thread_func (GTask *task,
         if (filename) {
                 g_unlink (filename);
                 g_debug ("Deleted credential cache: %s", filename);
-                g_free (filename);
         }
 
         if (k5)
                 krb5_free_context (k5);
-
-        g_object_unref (task);
 }
 
 void
@@ -774,7 +752,7 @@ cc_realm_login (CcRealmObject *realm,
 {
         GTask *task;
         LoginClosure *login;
-        CcRealmKerberos *kerberos;
+        g_autoptr(CcRealmKerberos) kerberos = NULL;
 
         g_return_if_fail (CC_REALM_IS_OBJECT (realm));
         g_return_if_fail (user != NULL);
@@ -796,8 +774,6 @@ cc_realm_login (CcRealmObject *realm,
 
         g_task_set_return_on_cancel (task, TRUE);
         g_task_run_in_thread (task, kinit_thread_func);
-
-        g_object_unref (kerberos);
 }
 
 GBytes *
