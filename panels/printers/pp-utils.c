@@ -2710,7 +2710,7 @@ get_all_ppds_async (GCancellable *cancellable,
                     gpointer      user_data)
 {
   GAPData          *data;
-  g_autoptr(GThread) thread;
+  g_autoptr(GThread) thread = NULL;
   g_autoptr(GError)  error = NULL;
 
   data = g_new0 (GAPData, 1);
