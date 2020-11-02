@@ -19,6 +19,7 @@ i18n.merge_file(
 
 sources = files(
   'cc-cursor-size-dialog.c',
+  'cc-repeat-keys-dialog.c',
   'cc-sound-keys-dialog.c',
   'cc-screen-reader-dialog.c',
   'cc-ua-panel.c',
@@ -34,6 +35,7 @@ resource_data = files(
   'left_ptr_64px.png',
   'left_ptr_96px.png',
   'cc-cursor-size-dialog.ui',
+  'cc-repeat-keys-dialog.ui',
   'cc-sound-keys-dialog.ui',
   'cc-screen-reader-dialog.ui',
   'cc-visual-alerts-dialog.ui',

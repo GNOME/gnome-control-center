@@ -31,6 +31,7 @@
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
 #include "cc-cursor-size-dialog.h"
+#include "cc-repeat-keys-dialog.h"
 #include "cc-sound-keys-dialog.h"
 #include "cc-screen-reader-dialog.h"
 #include "cc-visual-alerts-dialog.h"
@@ -122,12 +123,6 @@ struct _CcUaPanel
   GtkWidget *pointing_secondary_click_delay_box;
   GtkWidget *pointing_secondary_click_delay_scale;
   GtkWidget *pointing_secondary_click_switch;
-  GtkWidget *repeat_keys_delay_grid;
-  GtkWidget *repeat_keys_delay_scale;
-  GtkDialog *repeat_keys_dialog;
-  GtkWidget *repeat_keys_speed_grid;
-  GtkWidget *repeat_keys_speed_scale;
-  GtkWidget *repeat_keys_switch;
   GtkListBoxRow *row_accessx;
   GtkListBoxRow *row_click_assist;
   GtkListBoxRow *row_cursor_blinking;
@@ -253,12 +248,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_secondary_click_delay_box);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_secondary_click_delay_scale);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_secondary_click_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_delay_grid);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_delay_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_speed_grid);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_speed_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, row_accessx);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, row_click_assist);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, row_cursor_blinking);
@@ -571,7 +560,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_repeat_keys)
     {
-      show_dialog (self, self->repeat_keys_dialog);
+      run_dialog (self, GTK_DIALOG (cc_repeat_keys_dialog_new ()));
     }
   else if (row == self->row_cursor_blinking)
     {
@@ -676,9 +665,6 @@ on_repeat_keys_toggled (CcUaPanel *self)
   on = g_settings_get_boolean (self->kb_desktop_settings, KEY_REPEAT_KEYS);
 
   gtk_label_set_text (GTK_LABEL (self->value_repeat_keys), on ? _("On") : _("Off"));
-
-  gtk_widget_set_sensitive (self->repeat_keys_delay_grid, on);
-  gtk_widget_set_sensitive (self->repeat_keys_speed_grid, on);
 }
 
 static void
@@ -726,24 +712,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   /* Repeat keys */
   g_signal_connect_object (self->kb_desktop_settings, "changed",
                            G_CALLBACK (on_repeat_keys_toggled), self, G_CONNECT_SWAPPED);
-
-  self->toplevels = g_slist_prepend (self->toplevels, self->repeat_keys_dialog);
-
-  g_signal_connect (self->repeat_keys_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-  sw = self->repeat_keys_switch;
-  g_settings_bind (self->kb_desktop_settings, KEY_REPEAT_KEYS,
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
   on_repeat_keys_toggled (self);
-
-  g_settings_bind (self->kb_desktop_settings, "delay",
-                   gtk_range_get_adjustment (GTK_RANGE (self->repeat_keys_delay_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->kb_desktop_settings, "repeat-interval",
-                   gtk_range_get_adjustment (GTK_RANGE (self->repeat_keys_speed_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
 
   /* Cursor Blinking */
   g_signal_connect_object (self->interface_settings, "changed",
