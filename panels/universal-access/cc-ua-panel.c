@@ -332,7 +332,8 @@ zoom_options_dialog_launch (CcUaPanel *self)
   if (self->zoom_options_dialog == NULL)
     {
       GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
-      self->zoom_options_dialog = cc_zoom_options_dialog_new (window);
+      self->zoom_options_dialog = cc_zoom_options_dialog_new ();
+      gtk_window_set_transient_for (GTK_WINDOW (self->zoom_options_dialog), window);
     }
 
   gtk_window_present_with_time (GTK_WINDOW (self->zoom_options_dialog), GDK_CURRENT_TIME);

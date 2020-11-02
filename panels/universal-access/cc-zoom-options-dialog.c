@@ -450,7 +450,6 @@ cc_zoom_options_dialog_constructed (GObject *object)
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   /* ... Cross hairs: length ... */
-  xhairs_length_add_marks (self, GTK_SCALE (self->crosshair_length_slider));
   g_settings_bind (self->settings, "cross-hairs-length",
                    gtk_range_get_adjustment (GTK_RANGE (self->crosshair_length_slider)), "value",
                    G_SETTINGS_BIND_DEFAULT);
@@ -478,6 +477,16 @@ cc_zoom_options_dialog_constructed (GObject *object)
 }
 
 static void
+cc_zoom_options_dialog_realize (GtkWidget *widget)
+{
+  CcZoomOptionsDialog *self = CC_ZOOM_OPTIONS_DIALOG (widget);
+
+  GTK_WIDGET_CLASS (cc_zoom_options_dialog_parent_class)->realize (widget);
+
+  xhairs_length_add_marks (self, GTK_SCALE (self->crosshair_length_slider));
+}
+
+static void
 cc_zoom_options_dialog_finalize (GObject *object)
 {
   CcZoomOptionsDialog *self = CC_ZOOM_OPTIONS_DIALOG (object);
@@ -496,6 +505,8 @@ cc_zoom_options_dialog_class_init (CcZoomOptionsDialogClass *klass)
 
   object_class->finalize = cc_zoom_options_dialog_finalize;
   object_class->constructed = cc_zoom_options_dialog_constructed;
+
+  widget_class->realize =  cc_zoom_options_dialog_realize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-zoom-options-dialog.ui");
 
@@ -531,10 +542,9 @@ cc_zoom_options_dialog_init (CcZoomOptionsDialog *self)
 }
 
 CcZoomOptionsDialog *
-cc_zoom_options_dialog_new (GtkWindow *parent)
+cc_zoom_options_dialog_new (void)
 {
   return g_object_new (cc_zoom_options_dialog_get_type (),
-                       "transient-for", parent,
                        "use-header-bar", TRUE,
                        NULL);
 }
