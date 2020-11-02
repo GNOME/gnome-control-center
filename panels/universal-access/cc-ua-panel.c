@@ -30,7 +30,7 @@
 #include "list-box-helper.h"
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
-
+#include "cc-cursor-size-dialog.h"
 #include "cc-zoom-options-dialog.h"
 
 #define DPI_FACTOR_LARGE 1.25
@@ -105,8 +105,6 @@ struct _CcUaPanel
   GtkDialog *cursor_blinking_dialog;
   GtkWidget *cursor_blinking_scale;
   GtkWidget *cursor_blinking_switch;
-  GtkDialog *cursor_size_dialog;
-  GtkWidget *cursor_size_grid;
   GtkWidget *list_hearing;
   GtkWidget *list_pointing;
   GtkWidget *list_seeing;
@@ -247,8 +245,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_scale);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_size_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_size_grid);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_hearing);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_pointing);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_seeing);
@@ -320,62 +316,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_test_button);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_window_radio);
-}
-
-/* cursor size dialog */
-static void
-cursor_size_toggled (CcUaPanel *self,
-                     GtkWidget *button)
-{
-  guint cursor_size;
-
-  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button)))
-    return;
-
-  cursor_size = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (button), "cursor-size"));
-  g_settings_set_int (self->interface_settings, KEY_MOUSE_CURSOR_SIZE, cursor_size);
-  g_debug ("Setting cursor size to %d", cursor_size);
-}
-
-static void
-cursor_size_setup (CcUaPanel *self)
-{
-  guint cursor_sizes[] = { 24, 32, 48, 64, 96 };
-  guint current_cursor_size, i;
-  GtkSizeGroup *size_group;
-  GtkWidget *last_radio_button = NULL;
-
-  gtk_style_context_add_class (gtk_widget_get_style_context (self->cursor_size_grid), "linked");
-
-  current_cursor_size = g_settings_get_int (self->interface_settings,
-                                            KEY_MOUSE_CURSOR_SIZE);
-  size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
-
-  for (i = 0; i < G_N_ELEMENTS(cursor_sizes); i++)
-    {
-      GtkWidget *image, *button;
-      g_autofree gchar *cursor_image_name = NULL;
-
-      cursor_image_name = g_strdup_printf ("/org/gnome/control-center/universal-access/left_ptr_%dpx.png", cursor_sizes[i]);
-      image = gtk_image_new_from_resource (cursor_image_name);
-      gtk_widget_show (image);
-
-      button = gtk_radio_button_new_from_widget (GTK_RADIO_BUTTON (last_radio_button));
-      gtk_widget_show (button);
-      last_radio_button = button;
-      gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (button), FALSE);
-      g_object_set_data (G_OBJECT (button), "cursor-size", GUINT_TO_POINTER (cursor_sizes[i]));
-
-      gtk_container_add (GTK_CONTAINER (button), image);
-      gtk_grid_attach (GTK_GRID (self->cursor_size_grid), button, i, 0, 1, 1);
-      gtk_size_group_add_widget (size_group, button);
-
-      g_signal_connect_object (button, "toggled",
-                               G_CALLBACK (cursor_size_toggled), self, G_CONNECT_SWAPPED);
-
-      if (current_cursor_size == cursor_sizes[i])
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
-    }
 }
 
 /* seeing section */
@@ -631,7 +571,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_cursor_size)
     {
-      show_dialog (self, self->cursor_size_dialog);
+      run_dialog (self, GTK_DIALOG (cc_cursor_size_dialog_new ()));
     }
   else if (row == self->row_screen_reader)
     {
@@ -693,18 +633,11 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 
   /* cursor size */
 
-  cursor_size_setup (self);
-
-  g_settings_bind_with_mapping (self->interface_settings, KEY_MOUSE_CURSOR_SIZE,
+  g_settings_bind_with_mapping (self->interface_settings, KEY_MOUSE_CURSOR_SIZE, // FIXME
                                 self->value_cursor_size,
                                 "label", G_SETTINGS_BIND_GET,
                                 cursor_size_label_mapping_get,
                                 NULL, NULL, NULL);
-
-  self->toplevels = g_slist_prepend (self->toplevels, self->cursor_size_dialog);
-
-  g_signal_connect (self->cursor_size_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   /* zoom */
 
