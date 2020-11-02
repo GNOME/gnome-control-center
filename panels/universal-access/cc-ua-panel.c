@@ -30,6 +30,7 @@
 #include "list-box-helper.h"
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
+#include "cc-cursor-blinking-dialog.h"
 #include "cc-cursor-size-dialog.h"
 #include "cc-repeat-keys-dialog.h"
 #include "cc-sound-keys-dialog.h"
@@ -105,9 +106,6 @@ struct _CcUaPanel
 {
   CcPanel    parent_instance;
 
-  GtkDialog *cursor_blinking_dialog;
-  GtkWidget *cursor_blinking_scale;
-  GtkWidget *cursor_blinking_switch;
   GtkWidget *list_hearing;
   GtkWidget *list_pointing;
   GtkWidget *list_seeing;
@@ -230,9 +228,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-ua-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_hearing);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_pointing);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_seeing);
@@ -564,7 +559,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_cursor_blinking)
     {
-      show_dialog (self, self->cursor_blinking_dialog);
+      run_dialog (self, GTK_DIALOG (cc_cursor_blinking_dialog_new ()));
     }
   else if (row == self->row_accessx)
     {
@@ -717,22 +712,7 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   /* Cursor Blinking */
   g_signal_connect_object (self->interface_settings, "changed",
                            G_CALLBACK (on_cursor_blinking_toggled), self, G_CONNECT_SWAPPED);
-
-  self->toplevels = g_slist_prepend (self->toplevels, self->cursor_blinking_dialog);
-
-  g_signal_connect (self->cursor_blinking_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-  sw = self->cursor_blinking_switch;
-  g_settings_bind (self->interface_settings, KEY_CURSOR_BLINKING,
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
   on_cursor_blinking_toggled (self);
-
-  g_settings_bind (self->interface_settings, KEY_CURSOR_BLINKING_TIME,
-                   gtk_range_get_adjustment (GTK_RANGE (self->cursor_blinking_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-
 
   /* accessx */
   g_signal_connect_object (self->kb_settings, "changed",

@@ -18,6 +18,7 @@ i18n.merge_file(
 )
 
 sources = files(
+  'cc-cursor-blinking-dialog.c',
   'cc-cursor-size-dialog.c',
   'cc-repeat-keys-dialog.c',
   'cc-sound-keys-dialog.c',
@@ -34,6 +35,7 @@ resource_data = files(
   'left_ptr_48px.png',
   'left_ptr_64px.png',
   'left_ptr_96px.png',
+  'cc-cursor-blinking-dialog.ui',
   'cc-cursor-size-dialog.ui',
   'cc-repeat-keys-dialog.ui',
   'cc-sound-keys-dialog.ui',
