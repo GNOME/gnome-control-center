@@ -33,6 +33,7 @@
 #include "cc-cursor-size-dialog.h"
 #include "cc-sound-keys-dialog.h"
 #include "cc-screen-reader-dialog.h"
+#include "cc-visual-alerts-dialog.h"
 #include "cc-zoom-options-dialog.h"
 
 #define DPI_FACTOR_LARGE 1.25
@@ -62,7 +63,6 @@
 /* wm settings */
 #define WM_SETTINGS                  "org.gnome.desktop.wm.preferences"
 #define KEY_VISUAL_BELL_ENABLED      "visual-bell"
-#define KEY_VISUAL_BELL_TYPE         "visual-bell-type"
 #define KEY_WM_THEME                 "theme"
 
 /* keyboard settings */
@@ -173,11 +173,6 @@ struct _CcUaPanel
   GtkWidget *value_sound_keys;
   GtkWidget *value_visual_alerts;
   GtkWidget *value_zoom;
-  GtkDialog *visual_alerts_dialog;
-  GtkWidget *visual_alerts_screen_radio;
-  GtkWidget *visual_alerts_switch;
-  GtkWidget *visual_alerts_test_button;
-  GtkWidget *visual_alerts_window_radio;
 
   GSettings *wm_settings;
   GSettings *a11y_settings;
@@ -305,11 +300,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, value_sound_keys);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, value_visual_alerts);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, value_zoom);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_screen_radio);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_test_button);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_window_radio);
 }
 
 /* seeing section */
@@ -577,7 +567,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_visual_alerts)
     {
-      show_dialog (self, self->visual_alerts_dialog);
+      run_dialog (self, GTK_DIALOG (cc_visual_alerts_dialog_new ()));
     }
   else if (row == self->row_repeat_keys)
     {
@@ -659,44 +649,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 }
 
 /* hearing/sound section */
-static void
-visual_bell_type_notify_cb (CcUaPanel *self)
-{
-  GtkWidget *widget;
-  GDesktopVisualBellType type;
-
-  type = g_settings_get_enum (self->wm_settings, KEY_VISUAL_BELL_TYPE);
-
-  if (type == G_DESKTOP_VISUAL_BELL_FRAME_FLASH)
-    widget = self->visual_alerts_window_radio;
-  else
-    widget = self->visual_alerts_screen_radio;
-
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
-}
-
-static void
-visual_bell_type_toggle_cb (CcUaPanel *self)
-{
-  gboolean frame_flash;
-  GDesktopVisualBellType type;
-
-  frame_flash = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->visual_alerts_window_radio));
-
-  if (frame_flash)
-    type = G_DESKTOP_VISUAL_BELL_FRAME_FLASH;
-  else
-    type = G_DESKTOP_VISUAL_BELL_FULLSCREEN_FLASH;
-  g_settings_set_enum (self->wm_settings, KEY_VISUAL_BELL_TYPE, type);
-}
-
-static void
-test_flash (GtkButton *button,
-            gpointer   data)
-{
-  GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (button));
-  gdk_window_beep (gtk_widget_get_window (toplevel));
-}
 
 static void
 cc_ua_panel_init_hearing (CcUaPanel *self)
@@ -708,39 +660,11 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
   g_signal_connect_object (self->list_hearing, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
-  /* set the initial visual bell values */
-  visual_bell_type_notify_cb (self);
-
-  /* and listen */
-  g_settings_bind (self->wm_settings, KEY_VISUAL_BELL_ENABLED,
-                   self->visual_alerts_switch, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
   g_settings_bind_with_mapping (self->wm_settings, KEY_VISUAL_BELL_ENABLED,
                                 self->value_visual_alerts,
                                 "label", G_SETTINGS_BIND_GET,
                                 on_off_label_mapping_get,
                                 NULL, NULL, NULL);
-
-  g_object_bind_property (self->visual_alerts_switch, "active",
-                          self->visual_alerts_window_radio, "sensitive",
-                          G_BINDING_SYNC_CREATE);
-  g_object_bind_property (self->visual_alerts_switch, "active",
-                          self->visual_alerts_screen_radio, "sensitive",
-                          G_BINDING_SYNC_CREATE);
-
-  g_signal_connect_object (self->wm_settings, "changed::" KEY_VISUAL_BELL_TYPE,
-                           G_CALLBACK (visual_bell_type_notify_cb), self, G_CONNECT_SWAPPED);
-  g_signal_connect_object (self->visual_alerts_window_radio,
-                           "toggled", G_CALLBACK (visual_bell_type_toggle_cb), self, G_CONNECT_SWAPPED);
-
-  self->toplevels = g_slist_prepend (self->toplevels, self->visual_alerts_dialog);
-
-  g_signal_connect (self->visual_alerts_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-  g_signal_connect (self->visual_alerts_test_button,
-                    "clicked", G_CALLBACK (test_flash), NULL);
 }
 
 /* typing/keyboard section */
