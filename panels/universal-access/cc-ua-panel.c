@@ -32,6 +32,7 @@
 #include "cc-ua-resources.h"
 #include "cc-cursor-blinking-dialog.h"
 #include "cc-cursor-size-dialog.h"
+#include "cc-pointing-dialog.h"
 #include "cc-repeat-keys-dialog.h"
 #include "cc-sound-keys-dialog.h"
 #include "cc-screen-reader-dialog.h"
@@ -113,15 +114,6 @@ struct _CcUaPanel
   GtkWidget *list_typing;
   GtkWidget *mouse_keys_switch;
   GtkWidget *locate_pointer_switch;
-  GtkDialog *pointing_dialog;
-  GtkWidget *pointing_dwell_delay_box;
-  GtkWidget *pointing_dwell_delay_scale;
-  GtkWidget *pointing_dwell_threshold_box;
-  GtkWidget *pointing_dwell_threshold_scale;
-  GtkWidget *pointing_hover_click_switch;
-  GtkWidget *pointing_secondary_click_delay_box;
-  GtkWidget *pointing_secondary_click_delay_scale;
-  GtkWidget *pointing_secondary_click_switch;
   GtkListBoxRow *row_accessx;
   GtkListBoxRow *row_click_assist;
   GtkListBoxRow *row_cursor_blinking;
@@ -166,8 +158,6 @@ struct _CcUaPanel
 
   GList *sections;
   GList *sections_reverse;
-
-  GSList *toplevels;
 };
 
 CC_PANEL_REGISTER (CcUaPanel, cc_ua_panel)
@@ -176,9 +166,6 @@ static void
 cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanel *self = CC_UA_PANEL (object);
-
-  g_slist_free_full (self->toplevels, (GDestroyNotify)gtk_widget_destroy);
-  self->toplevels = NULL;
 
   g_clear_object (&self->wm_settings);
   g_clear_object (&self->a11y_settings);
@@ -220,15 +207,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, list_typing);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, mouse_keys_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, locate_pointer_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_dwell_delay_box);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_dwell_delay_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_dwell_threshold_box);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_dwell_threshold_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_hover_click_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_secondary_click_delay_box);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_secondary_click_delay_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_secondary_click_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, row_accessx);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, row_click_assist);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, row_cursor_blinking);
@@ -478,14 +456,6 @@ run_dialog (CcUaPanel *self, GtkDialog *dialog)
 }
 
 static void
-show_dialog (CcUaPanel *self, GtkDialog *dialog)
-{
-  gtk_window_set_transient_for (GTK_WINDOW (dialog),
-                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
-  gtk_window_present (GTK_WINDOW (dialog));
-}
-
-static void
 activate_row (CcUaPanel *self, GtkListBoxRow *row)
 {
   if (row == self->row_highcontrast)
@@ -538,7 +508,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_click_assist)
     {
-      show_dialog (self, self->pointing_dialog);
+      run_dialog (self, GTK_DIALOG (cc_pointing_dialog_new ()));
     }
 }
 
@@ -706,8 +676,6 @@ static void
 cc_ua_panel_init_mouse (CcUaPanel *self)
 {
   GtkWidget *list;
-  GtkWidget *sw;
-  GtkWidget *w;
 
   list = self->list_pointing;
   add_section (list, self);
@@ -729,49 +697,11 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
                            G_CALLBACK (update_click_assist_label), self, G_CONNECT_SWAPPED);
   update_click_assist_label (self);
 
-  /* simulated secondary click */
-  sw = self->pointing_secondary_click_switch;
-  g_settings_bind (self->mouse_settings, KEY_SECONDARY_CLICK_ENABLED,
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  w = self->pointing_secondary_click_delay_scale;
-  g_settings_bind (self->mouse_settings, KEY_SECONDARY_CLICK_TIME,
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-  w = self->pointing_secondary_click_delay_box;
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  /* dwell click */
-  sw = self->pointing_hover_click_switch;
-  g_settings_bind (self->mouse_settings, KEY_DWELL_CLICK_ENABLED,
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  w = self->pointing_dwell_delay_scale;
-  g_settings_bind (self->mouse_settings, KEY_DWELL_TIME,
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-  w = self->pointing_dwell_delay_box;
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  w = self->pointing_dwell_threshold_scale;
-  g_settings_bind (self->mouse_settings, KEY_DWELL_THRESHOLD,
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-  w = self->pointing_dwell_threshold_box;
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  self->toplevels = g_slist_prepend (self->toplevels, self->pointing_dialog);
-
   g_settings_bind (self->gsd_mouse_settings, "double-click",
                    gtk_range_get_adjustment (GTK_RANGE (self->scale_double_click_delay)), "value",
                    G_SETTINGS_BIND_DEFAULT);
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_double_click_delay), 400, GTK_POS_BOTTOM, NULL);
-
-  g_signal_connect (self->pointing_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
 
 static void
