@@ -24,6 +24,7 @@
 #include <glib/gi18n.h>
 
 #define TRACKER_SCHEMA "org.freedesktop.Tracker.Miner.Files"
+#define TRACKER3_SCHEMA "org.freedesktop.Tracker3.Miner.Files"
 #define TRACKER_KEY_RECURSIVE_DIRECTORIES "index-recursive-directories"
 #define TRACKER_KEY_SINGLE_DIRECTORIES "index-single-directories"
 
@@ -670,12 +671,20 @@ CcSearchLocationsDialog *
 cc_search_locations_dialog_new (CcSearchPanel *panel)
 {
   CcSearchLocationsDialog *self;
+  GSettingsSchemaSource *source;
+  g_autoptr(GSettingsSchema) schema = NULL;
 
   self = g_object_new (CC_SEARCH_LOCATIONS_DIALOG_TYPE,
                        "use-header-bar", TRUE,
                        NULL);
 
-  self->tracker_preferences = g_settings_new (TRACKER_SCHEMA);
+  source = g_settings_schema_source_get_default ();
+  schema = g_settings_schema_source_lookup (source, TRACKER3_SCHEMA, TRUE);
+  if (schema)
+    self->tracker_preferences = g_settings_new (TRACKER3_SCHEMA);
+  else
+    self->tracker_preferences = g_settings_new (TRACKER_SCHEMA);
+
   populate_list_boxes (self);
 
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->others_list),
@@ -702,8 +711,15 @@ cc_search_locations_dialog_is_available (void)
   if (!source)
     return FALSE;
 
+  schema = g_settings_schema_source_lookup (source, TRACKER3_SCHEMA, TRUE);
+  if (schema)
+    return TRUE;
+
   schema = g_settings_schema_source_lookup (source, TRACKER_SCHEMA, TRUE);
-  return schema != NULL;
+  if (schema)
+    return TRUE;
+
+  return FALSE;
 }
 
 static void
