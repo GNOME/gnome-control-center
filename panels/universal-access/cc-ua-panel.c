@@ -192,8 +192,6 @@ struct _CcUaPanel
   GSettings *application_settings;
   GSettings *gsd_mouse_settings;
 
-  CcZoomOptionsDialog *zoom_options_dialog;
-
   GtkAdjustment *focus_adjustment;
 
   GList *sections;
@@ -209,7 +207,6 @@ cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanel *self = CC_UA_PANEL (object);
 
-  g_clear_pointer ((GtkWidget **)&self->zoom_options_dialog, gtk_widget_destroy);
   g_slist_free_full (self->toplevels, (GDestroyNotify)gtk_widget_destroy);
   self->toplevels = NULL;
 
@@ -323,20 +320,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_test_button);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_window_radio);
-}
-
-/* zoom options dialog */
-static void
-zoom_options_dialog_launch (CcUaPanel *self)
-{
-  if (self->zoom_options_dialog == NULL)
-    {
-      GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
-      self->zoom_options_dialog = cc_zoom_options_dialog_new ();
-      gtk_window_set_transient_for (GTK_WINDOW (self->zoom_options_dialog), window);
-    }
-
-  gtk_window_present_with_time (GTK_WINDOW (self->zoom_options_dialog), GDK_CURRENT_TIME);
 }
 
 /* cursor size dialog */
@@ -607,6 +590,15 @@ toggle_switch (GtkWidget *sw)
 }
 
 static void
+run_dialog (CcUaPanel *self, GtkDialog *dialog)
+{
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+static void
 show_dialog (CcUaPanel *self, GtkDialog *dialog)
 {
   gtk_window_set_transient_for (GTK_WINDOW (dialog),
@@ -635,7 +627,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_zoom)
     {
-      zoom_options_dialog_launch (self);
+      run_dialog (self, GTK_DIALOG (cc_zoom_options_dialog_new ()));
     }
   else if (row == self->row_cursor_size)
     {
