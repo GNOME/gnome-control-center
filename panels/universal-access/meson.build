@@ -19,7 +19,7 @@ i18n.merge_file(
 
 sources = files(
   'cc-ua-panel.c',
-  'zoom-options.c'
+  'cc-zoom-options-dialog.c'
 )
 
 resource_data = files(
@@ -29,7 +29,7 @@ resource_data = files(
   'left_ptr_48px.png',
   'left_ptr_64px.png',
   'left_ptr_96px.png',
-  'zoom-options.ui'
+  'cc-zoom-options-dialog.ui'
 )
 
 sources += gnome.compile_resources(

@@ -71,14 +71,14 @@
       </row>
     </data>
   </object>
-  <template class="ZoomOptions" parent="GtkDialog">
+  <template class="CcZoomOptionsDialog" parent="GtkDialog">
     <property name="modal">True</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="title" translatable="yes">Zoom Options</property>
     <property name="resizable">False</property>
     <property name="type_hint">dialog</property>
-    <signal name="delete-event" handler="gtk_widget_hide_on_delete" object="ZoomOptions" swapped="no" />
+    <signal name="delete-event" handler="gtk_widget_hide_on_delete" object="CcZoomOptionsDialog" swapped="no" />
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
         <property name="visible">True</property>
@@ -357,7 +357,7 @@
                                         <property name="active">True</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="use_underline">True</property>
-                                        <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="ZoomOptions" swapped="yes"/>
+                                        <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="CcZoomOptionsDialog" swapped="yes"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -377,7 +377,7 @@
                                         <property name="draw_indicator">True</property>
                                         <property name="group">centered_radio</property>
                                         <property name="use_underline">True</property>
-                                        <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="ZoomOptions" swapped="yes"/>
+                                        <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="CcZoomOptionsDialog" swapped="yes"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>
@@ -397,7 +397,7 @@
                                         <property name="draw_indicator">True</property>
                                         <property name="group">centered_radio</property>
                                         <property name="use_underline">True</property>
-                                        <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="ZoomOptions" swapped="yes"/>
+                                        <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="CcZoomOptionsDialog" swapped="yes"/>
                                       </object>
                                       <packing>
                                         <property name="expand">False</property>

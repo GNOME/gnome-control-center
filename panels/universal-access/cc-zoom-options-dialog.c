@@ -18,7 +18,7 @@
  * Author: Joseph Scheuhammer <clown@alum.mit.edu>
  */
 
-#include "zoom-options.h"
+#include "cc-zoom-options-dialog.h"
 #include <gdk/gdk.h>
 #include <glib/gi18n.h>
 #include <string.h>
@@ -26,7 +26,7 @@
 #define POSITION_MODEL_VALUE_COLUMN     2
 #define FONT_SCALE                      1.25
 
-struct _ZoomOptions
+struct _CcZoomOptionsDialog
 {
   GtkDialog parent;
 
@@ -53,7 +53,7 @@ struct _ZoomOptions
   GtkWidget *inverse_enabled_switch;
 };
 
-G_DEFINE_TYPE (ZoomOptions, zoom_options, GTK_TYPE_DIALOG);
+G_DEFINE_TYPE (CcZoomOptionsDialog, cc_zoom_options_dialog, GTK_TYPE_DIALOG);
 
 static gchar *brightness_keys[] = {
   "brightness-red",
@@ -69,16 +69,16 @@ static gchar *contrast_keys[] = {
   NULL
 };
 
-static void set_enable_screen_part_ui (ZoomOptions *self);
+static void set_enable_screen_part_ui (CcZoomOptionsDialog *self);
 static void scale_label (GtkBin *toggle, PangoAttrList *attrs);
-static void xhairs_length_add_marks (ZoomOptions *self, GtkScale *scale);
+static void xhairs_length_add_marks (CcZoomOptionsDialog *self, GtkScale *scale);
 static void effects_slider_set_value (GtkRange *slider, GSettings *settings);
-static void brightness_slider_notify_cb (ZoomOptions *self, const gchar *key);
-static void contrast_slider_notify_cb (ZoomOptions *self, const gchar *key);
-static void effects_slider_changed (ZoomOptions *self, GtkRange *slider);
+static void brightness_slider_notify_cb (CcZoomOptionsDialog *self, const gchar *key);
+static void contrast_slider_notify_cb (CcZoomOptionsDialog *self, const gchar *key);
+static void effects_slider_changed (CcZoomOptionsDialog *self, GtkRange *slider);
 
 static void
-mouse_tracking_radio_toggled_cb (ZoomOptions *self, GtkWidget *widget)
+mouse_tracking_radio_toggled_cb (CcZoomOptionsDialog *self, GtkWidget *widget)
 {
   if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
     return;
@@ -92,7 +92,7 @@ mouse_tracking_radio_toggled_cb (ZoomOptions *self, GtkWidget *widget)
 }
 
 static void
-mouse_tracking_notify_cb (ZoomOptions *self)
+mouse_tracking_notify_cb (CcZoomOptionsDialog *self)
 {
     g_autofree gchar *tracking = NULL;
 
@@ -106,7 +106,7 @@ mouse_tracking_notify_cb (ZoomOptions *self)
 }
 
 static void
-init_screen_part_section (ZoomOptions *self, PangoAttrList *pango_attrs)
+init_screen_part_section (CcZoomOptionsDialog *self, PangoAttrList *pango_attrs)
 {
   gboolean lens_mode;
 
@@ -141,7 +141,7 @@ init_screen_part_section (ZoomOptions *self, PangoAttrList *pango_attrs)
 }
 
 static void
-set_enable_screen_part_ui (ZoomOptions *self)
+set_enable_screen_part_ui (CcZoomOptionsDialog *self)
 {
     gboolean screen_part;
 
@@ -171,7 +171,7 @@ scale_label (GtkBin *toggle, PangoAttrList *attrs)
 }
 
 static void
-screen_position_combo_changed_cb (ZoomOptions *self)
+screen_position_combo_changed_cb (CcZoomOptionsDialog *self)
 {
   g_autofree gchar *combo_value = NULL;
   GtkTreeIter iter;
@@ -189,7 +189,7 @@ screen_position_combo_changed_cb (ZoomOptions *self)
 }
 
 static void
-screen_position_notify_cb (ZoomOptions *self,
+screen_position_notify_cb (CcZoomOptionsDialog *self,
                            const gchar *key)
 {
   g_autofree gchar *position = NULL;
@@ -239,13 +239,13 @@ init_xhairs_color_opacity (GtkColorButton *color_button, GSettings *settings)
 }
 
 static void
-xhairs_color_notify_cb (ZoomOptions *self)
+xhairs_color_notify_cb (CcZoomOptionsDialog *self)
 {
     init_xhairs_color_opacity (GTK_COLOR_BUTTON (self->crosshair_picker_color_button), self->settings);
 }
 
 static void
-xhairs_opacity_notify_cb (ZoomOptions *self, gchar *key)
+xhairs_opacity_notify_cb (CcZoomOptionsDialog *self, gchar *key)
 {
     GdkRGBA rgba;
     gdouble opacity;
@@ -258,7 +258,7 @@ xhairs_opacity_notify_cb (ZoomOptions *self, gchar *key)
 
 #define TO_HEX(x) (int) ((gdouble) x * 255.0)
 static void
-xhairs_color_opacity_changed (ZoomOptions *self)
+xhairs_color_opacity_changed (CcZoomOptionsDialog *self)
 {
     GdkRGBA rgba;
     g_autofree gchar *color_string = NULL;
@@ -274,7 +274,7 @@ xhairs_color_opacity_changed (ZoomOptions *self)
     g_settings_set_double (self->settings, "cross-hairs-opacity", rgba.alpha);
 }
 
-static void xhairs_length_add_marks (ZoomOptions *self, GtkScale *scale)
+static void xhairs_length_add_marks (CcZoomOptionsDialog *self, GtkScale *scale)
 {
     GtkAdjustment *scale_model;
     GdkRectangle rect;
@@ -309,7 +309,7 @@ static void xhairs_length_add_marks (ZoomOptions *self, GtkScale *scale)
 
 static void
 init_effects_slider (GtkRange *slider,
-                     ZoomOptions *self,
+                     CcZoomOptionsDialog *self,
                      gchar **keys,
                      GCallback notify_cb)
 {
@@ -352,7 +352,7 @@ effects_slider_set_value (GtkRange *slider, GSettings *settings)
 }
 
 static void
-brightness_slider_notify_cb (ZoomOptions *self,
+brightness_slider_notify_cb (CcZoomOptionsDialog *self,
                              const gchar *key)
 {
   GtkRange *slider = GTK_RANGE (self->brightness_slider);
@@ -363,7 +363,7 @@ brightness_slider_notify_cb (ZoomOptions *self,
 }
 
 static void
-contrast_slider_notify_cb (ZoomOptions *self,
+contrast_slider_notify_cb (CcZoomOptionsDialog *self,
                            const gchar *key)
 {
   GtkRange *slider = GTK_RANGE (self->contrast_slider);
@@ -374,7 +374,7 @@ contrast_slider_notify_cb (ZoomOptions *self,
 }
 
 static void
-effects_slider_changed (ZoomOptions *self, GtkRange *slider)
+effects_slider_changed (CcZoomOptionsDialog *self, GtkRange *slider)
 {
   gchar **keys, **key;
   gdouble value;
@@ -389,15 +389,15 @@ effects_slider_changed (ZoomOptions *self, GtkRange *slider)
 }
 
 static void
-zoom_options_constructed (GObject *object)
+cc_zoom_options_dialog_constructed (GObject *object)
 {
   PangoAttribute *attr;
   PangoAttrList *pango_attrs;
-  ZoomOptions *self;
+  CcZoomOptionsDialog *self;
 
-  self = ZOOM_OPTIONS (object);
+  self = CC_ZOOM_OPTIONS_DIALOG (object);
 
-  G_OBJECT_CLASS (zoom_options_parent_class)->constructed (object);
+  G_OBJECT_CLASS (cc_zoom_options_dialog_parent_class)->constructed (object);
 
   pango_attrs = pango_attr_list_new ();
   attr = pango_attr_scale_new (FONT_SCALE);
@@ -478,51 +478,51 @@ zoom_options_constructed (GObject *object)
 }
 
 static void
-zoom_options_finalize (GObject *object)
+cc_zoom_options_dialog_finalize (GObject *object)
 {
-  ZoomOptions *self = ZOOM_OPTIONS (object);
+  CcZoomOptionsDialog *self = CC_ZOOM_OPTIONS_DIALOG (object);
 
   g_clear_object (&self->settings);
   g_clear_object (&self->application_settings);
 
-  G_OBJECT_CLASS (zoom_options_parent_class)->finalize (object);
+  G_OBJECT_CLASS (cc_zoom_options_dialog_parent_class)->finalize (object);
 }
 
 static void
-zoom_options_class_init (ZoomOptionsClass *klass)
+cc_zoom_options_dialog_class_init (CcZoomOptionsDialogClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->finalize = zoom_options_finalize;
-  object_class->constructed = zoom_options_constructed;
+  object_class->finalize = cc_zoom_options_dialog_finalize;
+  object_class->constructed = cc_zoom_options_dialog_constructed;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/zoom-options.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/universal-access/cc-zoom-options-dialog.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, brightness_slider);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, centered_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, contrast_slider);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_clip_checkbox);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_enabled_switcher);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_length_slider);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_picker_color_button);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, crosshair_thickness_scale);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, extend_beyond_checkbox);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, follow_mouse_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, grayscale_slider);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, inverse_enabled_switch);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, magnifier_factor_spin);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, proportional_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, push_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_part_radio);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, screen_position_combobox);
-  gtk_widget_class_bind_template_child (widget_class, ZoomOptions, seeing_zoom_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, brightness_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, centered_radio);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, contrast_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, crosshair_clip_checkbox);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, crosshair_enabled_switcher);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, crosshair_length_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, crosshair_picker_color_button);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, crosshair_thickness_scale);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, extend_beyond_checkbox);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, follow_mouse_radio);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, grayscale_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, inverse_enabled_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, magnifier_factor_spin);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, proportional_radio);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, push_radio);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, screen_part_radio);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, screen_position_combobox);
+  gtk_widget_class_bind_template_child (widget_class, CcZoomOptionsDialog, seeing_zoom_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, mouse_tracking_radio_toggled_cb);
 }
 
 static void
-zoom_options_init (ZoomOptions *self)
+cc_zoom_options_dialog_init (CcZoomOptionsDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -530,10 +530,10 @@ zoom_options_init (ZoomOptions *self)
   self->application_settings = g_settings_new ("org.gnome.desktop.a11y.applications");
 }
 
-ZoomOptions *
-zoom_options_new (GtkWindow *parent)
+CcZoomOptionsDialog *
+cc_zoom_options_dialog_new (GtkWindow *parent)
 {
-  return g_object_new (ZOOM_TYPE_OPTIONS,
+  return g_object_new (cc_zoom_options_dialog_get_type (),
                        "transient-for", parent,
                        "use-header-bar", TRUE,
                        NULL);

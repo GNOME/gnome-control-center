@@ -24,10 +24,8 @@
 
 G_BEGIN_DECLS
 
-#define ZOOM_TYPE_OPTIONS (zoom_options_get_type())
+G_DECLARE_FINAL_TYPE (CcZoomOptionsDialog, cc_zoom_options_dialog, CC, ZOOM_OPTIONS_DIALOG, GtkDialog)
 
-G_DECLARE_FINAL_TYPE (ZoomOptions, zoom_options, ZOOM, OPTIONS, GtkDialog)
-
-ZoomOptions *zoom_options_new (GtkWindow *parent);
+CcZoomOptionsDialog *cc_zoom_options_dialog_new (GtkWindow *parent);
 
 G_END_DECLS

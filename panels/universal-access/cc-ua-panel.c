@@ -31,7 +31,7 @@
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
 
-#include "zoom-options.h"
+#include "cc-zoom-options-dialog.h"
 
 #define DPI_FACTOR_LARGE 1.25
 #define DPI_FACTOR_NORMAL 1.0
@@ -192,7 +192,7 @@ struct _CcUaPanel
   GSettings *application_settings;
   GSettings *gsd_mouse_settings;
 
-  ZoomOptions *zoom_options;
+  CcZoomOptionsDialog *zoom_options_dialog;
 
   GtkAdjustment *focus_adjustment;
 
@@ -209,7 +209,7 @@ cc_ua_panel_dispose (GObject *object)
 {
   CcUaPanel *self = CC_UA_PANEL (object);
 
-  g_clear_pointer ((GtkWidget **)&self->zoom_options, gtk_widget_destroy);
+  g_clear_pointer ((GtkWidget **)&self->zoom_options_dialog, gtk_widget_destroy);
   g_slist_free_full (self->toplevels, (GDestroyNotify)gtk_widget_destroy);
   self->toplevels = NULL;
 
@@ -327,15 +327,15 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
 
 /* zoom options dialog */
 static void
-zoom_options_launch (CcUaPanel *self)
+zoom_options_dialog_launch (CcUaPanel *self)
 {
-  if (self->zoom_options == NULL)
+  if (self->zoom_options_dialog == NULL)
     {
       GtkWindow *window = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
-      self->zoom_options = zoom_options_new (window);
+      self->zoom_options_dialog = cc_zoom_options_dialog_new (window);
     }
 
-  gtk_window_present_with_time (GTK_WINDOW (self->zoom_options), GDK_CURRENT_TIME);
+  gtk_window_present_with_time (GTK_WINDOW (self->zoom_options_dialog), GDK_CURRENT_TIME);
 }
 
 /* cursor size dialog */
@@ -634,7 +634,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_zoom)
     {
-      zoom_options_launch (self);
+      zoom_options_dialog_launch (self);
     }
   else if (row == self->row_cursor_size)
     {
