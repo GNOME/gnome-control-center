@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcTypingDialog" parent="GtkDialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="title" translatable="yes">Typing Assist</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="use_header_bar">1</property>
+    <child internal-child="vbox">
+      <object class="GtkBox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="margin_start">12</property>
+            <property name="margin_end">6</property>
+            <property name="margin_top">6</property>
+            <property name="margin_bottom">12</property>
+            <property name="orientation">vertical</property>
+            <property name="row_spacing">18</property>
+            <property name="column_spacing">24</property>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">start</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">_Sticky Keys</property>
+                        <property name="mnemonic_widget">stickykeys_switch</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Treats a sequence of modifier keys as a key combination</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">start</property>
+                    <property name="margin_start">10</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkCheckButton" id="stickykeys_disable_two_keys_check">
+                        <property name="label" translatable="yes">_Disable if two keys are pressed together</property>
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="valign">start</property>
+                        <property name="use_underline">True</property>
+                        <property name="xalign">0</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="stickykeys_beep_modifier_check">
+                        <property name="label" translatable="yes">Beep when a _modifier key is pressed</property>
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="valign">start</property>
+                        <property name="use_underline">True</property>
+                        <property name="xalign">0</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="use_underline">True</property>
+                        <property name="label" translatable="yes">S_low Keys</property>
+                        <property name="mnemonic_widget">slowkeys_switch</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Puts a delay between when a key is pressed and when it is accepted</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">start</property>
+                    <property name="margin_start">10</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkBox" id="slowkeys_delay_box">
+                        <property name="visible">True</property>
+                        <property name="sensitive">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">A_cceptance delay:</property>
+                            <property name="use_underline">True</property>
+                            <property name="justify">center</property>
+                            <property name="mnemonic_widget">slowkeys_delay_scale</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">1</property>
+                                <property name="xpad">10</property>
+                                <property name="label" translatable="yes" context="slow keys delay">Short</property>
+                                <attributes>
+                                  <attribute name="scale" value="0.83"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkScale" id="slowkeys_delay_scale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="adjustment">slowkeys_delay_adjustment</property>
+                                <property name="draw_value">False</property>
+                                <property name="hexpand">True</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject">
+                                    <property name="AtkObject::accessible-description" translatable="yes">Slow keys typing delay</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes" context="slow keys delay">Long</property>
+                                <attributes>
+                                  <attribute name="scale" value="0.83"/>
+                                </attributes>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="slowkeys_beep_pressed_check">
+                        <property name="label" translatable="yes">Beep when a key is pr_essed</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="xalign">0</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                        <property name="use_underline">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="slowkeys_beep_accepted_check">
+                        <property name="label" translatable="yes">Beep when a key is _accepted</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="xalign">0</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="slowkeys_beep_rejected_check">
+                        <property name="label" translatable="yes">Beep when a key is _rejected</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="xalign">0</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="use_underline">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">_Bounce Keys</property>
+                        <property name="mnemonic_widget">bouncekeys_switch</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Ignores fast duplicate keypresses</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="valign">start</property>
+                    <property name="margin_start">10</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkBox" id="bouncekeys_delay_box">
+                        <property name="visible">True</property>
+                        <property name="sensitive">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">A_cceptance delay:</property>
+                            <property name="use_underline">True</property>
+                            <property name="justify">center</property>
+                            <property name="mnemonic_widget">bouncekeys_delay_scale</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">1</property>
+                                <property name="xpad">10</property>
+                                <property name="label" translatable="yes" context="bounce keys delay">Short</property>
+                                <attributes>
+                                  <attribute name="scale" value="0.83"/>
+                                </attributes>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkScale" id="bouncekeys_delay_scale">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="adjustment">bouncekeys_delay_adjustment</property>
+                                <property name="draw_value">False</property>
+                                <property name="hexpand">True</property>
+                                <child internal-child="accessible">
+                                  <object class="AtkObject">
+                                    <property name="AtkObject::accessible-description" translatable="yes">Bounce keys typing delay</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes" context="bounce keys delay">Long</property>
+                                <attributes>
+                                  <attribute name="scale" value="0.83"/>
+                                </attributes>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="bouncekeys_beep_rejected_check">
+                        <property name="label" translatable="yes">Beep when a key is _rejected</property>
+                        <property name="visible">True</property>
+                        <property name="sensitive">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="xalign">0</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="stickykeys_switch">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">end</property>
+                <property name="valign">start</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="slowkeys_switch">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">end</property>
+                <property name="valign">start</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="bouncekeys_switch">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">end</property>
+                <property name="valign">start</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="orientation">vertical</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="use_underline">True</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">_Enable by Keyboard</property>
+                    <property name="mnemonic_widget">keyboard_toggle_switch</property>
+                    <attributes>
+                      <attribute name="weight" value="bold"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="xalign">0</property>
+                    <property name="label" translatable="yes">Turn accessibility features on and off using the keyboard</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="keyboard_toggle_switch">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">end</property>
+                <property name="valign">start</property>
+                <property name="hexpand">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+  <object class="GtkAdjustment" id="bouncekeys_delay_adjustment">
+    <property name="upper">900</property>
+    <property name="value">0.5</property>
+    <property name="step_increment">10</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="slowkeys_delay_adjustment">
+    <property name="upper">500</property>
+    <property name="value">0.5</property>
+    <property name="step_increment">10</property>
+    <property name="page_increment">10</property>
+  </object>
+</interface>

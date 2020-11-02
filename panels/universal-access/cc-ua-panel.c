@@ -35,6 +35,7 @@
 #include "cc-repeat-keys-dialog.h"
 #include "cc-sound-keys-dialog.h"
 #include "cc-screen-reader-dialog.h"
+#include "cc-typing-dialog.h"
 #include "cc-visual-alerts-dialog.h"
 #include "cc-zoom-options-dialog.h"
 
@@ -138,21 +139,6 @@ struct _CcUaPanel
   GtkWidget *screen_keyboard_switch;
   GtkWidget *section_status;
   GtkWidget *switch_status;
-  GtkWidget *typing_bouncekeys_beep_rejected_check;
-  GtkWidget *typing_bouncekeys_delay_box;
-  GtkWidget *typing_bouncekeys_delay_scale;
-  GtkWidget *typing_bouncekeys_switch;
-  GtkDialog *typing_dialog;
-  GtkWidget *typing_keyboard_toggle_switch;
-  GtkWidget *typing_slowkeys_beep_accepted_check;
-  GtkWidget *typing_slowkeys_beep_pressed_check;
-  GtkWidget *typing_slowkeys_beep_rejected_check;
-  GtkWidget *typing_slowkeys_delay_box;
-  GtkWidget *typing_slowkeys_delay_scale;
-  GtkWidget *typing_slowkeys_switch;
-  GtkWidget *typing_stickykeys_beep_modifier_check;
-  GtkWidget *typing_stickykeys_disable_two_keys_check;
-  GtkWidget *typing_stickykeys_switch;
   GtkWidget *universal_access_content;
   GtkWidget *universal_access_panel;
   GtkWidget *value_accessx;
@@ -256,21 +242,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_keyboard_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, section_status);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, switch_status);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_bouncekeys_beep_rejected_check);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_bouncekeys_delay_box);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_bouncekeys_delay_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_bouncekeys_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_keyboard_toggle_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_slowkeys_beep_accepted_check);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_slowkeys_beep_pressed_check);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_slowkeys_beep_rejected_check);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_slowkeys_delay_box);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_slowkeys_delay_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_slowkeys_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_stickykeys_beep_modifier_check);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_stickykeys_disable_two_keys_check);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_stickykeys_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, universal_access_content);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, universal_access_panel);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, value_accessx);
@@ -563,7 +534,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_accessx)
     {
-      show_dialog (self, self->typing_dialog);
+      run_dialog (self, GTK_DIALOG (cc_typing_dialog_new ()));
     }
   else if (row == self->row_click_assist)
     {
@@ -688,8 +659,6 @@ static void
 cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
   GtkWidget *list;
-  GtkWidget *w;
-  GtkWidget *sw;
 
   list = self->list_typing;
   add_section (list, self);
@@ -718,85 +687,6 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
   g_signal_connect_object (self->kb_settings, "changed",
                            G_CALLBACK (update_accessx_label), self, G_CONNECT_SWAPPED);
   update_accessx_label (self);
-
-  /* enable shortcuts */
-  sw = self->typing_keyboard_toggle_switch;
-  g_settings_bind (self->kb_settings, KEY_KEYBOARD_TOGGLE,
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  /* sticky keys */
-  sw = self->typing_stickykeys_switch;
-  g_settings_bind (self->kb_settings, KEY_STICKYKEYS_ENABLED,
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  w = self->typing_stickykeys_disable_two_keys_check;
-  g_settings_bind (self->kb_settings, KEY_STICKYKEYS_TWO_KEY_OFF,
-                   w, "active",
-                   G_SETTINGS_BIND_NO_SENSITIVITY);
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  w = self->typing_stickykeys_beep_modifier_check;
-  g_settings_bind (self->kb_settings, KEY_STICKYKEYS_MODIFIER_BEEP,
-                   w, "active",
-                   G_SETTINGS_BIND_NO_SENSITIVITY);
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  /* slow keys */
-  sw = self->typing_slowkeys_switch;
-  g_settings_bind (self->kb_settings, KEY_SLOWKEYS_ENABLED,
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  w = self->typing_slowkeys_delay_scale;
-  g_settings_bind (self->kb_settings, KEY_SLOWKEYS_DELAY,
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-  w = self->typing_slowkeys_delay_box;
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  w = self->typing_slowkeys_beep_pressed_check;
-  g_settings_bind (self->kb_settings, KEY_SLOWKEYS_BEEP_PRESS,
-                   w, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  w = self->typing_slowkeys_beep_accepted_check;
-  g_settings_bind (self->kb_settings, KEY_SLOWKEYS_BEEP_ACCEPT,
-                   w, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  w = self->typing_slowkeys_beep_rejected_check;
-  g_settings_bind (self->kb_settings, KEY_SLOWKEYS_BEEP_REJECT,
-                   w, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  /* bounce keys */
-  sw = self->typing_bouncekeys_switch;
-  g_settings_bind (self->kb_settings, KEY_BOUNCEKEYS_ENABLED,
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  w = self->typing_bouncekeys_delay_scale;
-  g_settings_bind (self->kb_settings, KEY_BOUNCEKEYS_DELAY,
-                   gtk_range_get_adjustment (GTK_RANGE (w)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
-  w = self->typing_bouncekeys_delay_box;
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  w = self->typing_bouncekeys_beep_rejected_check;
-  g_settings_bind (self->kb_settings, KEY_BOUNCEKEYS_BEEP_REJECT,
-                   w, "active",
-                   G_SETTINGS_BIND_NO_SENSITIVITY);
-  g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
-
-  self->toplevels = g_slist_prepend (self->toplevels, self->typing_dialog);
-
-  g_signal_connect (self->typing_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
 
 /* mouse/pointing & clicking section */
