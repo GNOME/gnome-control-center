@@ -2,7 +2,7 @@
 <!-- Generated with glade 3.20.0 -->
 <interface>
   <requires lib="gtk+" version="3.0"/>
-  <object class="GtkAdjustment" id="double-click-delay-adjustment">
+  <object class="GtkAdjustment" id="double_click_delay_adjustment">
     <property name="lower">100</property>
     <property name="upper">1000</property>
     <property name="value">400</property>
@@ -14,13 +14,13 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkScrolledWindow" id="universal_access_panel">
+      <object class="GtkScrolledWindow" id="scrolled_window">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="hscrollbar_policy">never</property>
         <property name="shadow_type">none</property>
         <child>
-          <object class="GtkViewport" id="viewport1">
+          <object class="GtkViewport">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
@@ -38,23 +38,23 @@
                     <property name="margin-start">12</property>
                     <property name="margin-end">12</property>
                     <child>
-                      <object class="GtkBox" id="universal_access_content">
+                      <object class="GtkBox" id="box">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
                         <property name="hexpand">True</property>
                         <child>
-                          <object class="GtkBox" id="section_status">
+                          <object class="GtkBox" id="show_status_box">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_bottom">32</property>
                             <child>
-                              <object class="GtkLabel" id="heading_status">
+                              <object class="GtkLabel">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label" translatable="yes">_Always Show Accessibility Menu</property>
                                 <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">switch_status</property>
+                                <property name="mnemonic_widget">show_status_switch</property>
                               </object>
                               <packing>
                                 <property name="expand">False</property>
@@ -63,7 +63,7 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkSwitch" id="switch_status">
+                              <object class="GtkSwitch" id="show_status_switch">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="halign">end</property>
@@ -82,13 +82,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="section_seeing">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_bottom">32</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkLabel" id="heading_seeing">
+                              <object class="GtkLabel" id="seeing_heading_label">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="margin_end">12</property>
@@ -99,7 +99,7 @@
                                   <attribute name="weight" value="bold"/>
                                 </attributes>
                                 <accessibility>
-                                  <relation target="list_seeing" type="label-for"/>
+                                  <relation target="seeing_listbox" type="label-for"/>
                                 </accessibility>
                               </object>
                               <packing>
@@ -109,30 +109,30 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkFrame" id="frame_seeing">
+                              <object class="GtkFrame">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label_xalign">0</property>
                                 <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkListBox" id="list_seeing">
+                                  <object class="GtkListBox" id="seeing_listbox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="selection-mode">none</property>
                                     <accessibility>
-                                      <relation target="heading_seeing" type="labelled-by"/>
+                                      <relation target="seeing_heading_label" type="labelled-by"/>
                                     </accessibility>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_highcontrast">
+                                      <object class="GtkListBoxRow" id="highcontrast_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="selectable">False</property>
                                         <property name="activatable">False</property>
                                         <child>
-                                          <object class="GtkBox" id="box_highcontrast">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_highcontrast">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -142,7 +142,7 @@
                                                 <property name="xalign">0</property>
                                                 <property name="label" translatable="yes">_High Contrast</property>
                                                 <property name="use_underline">True</property>
-                                                <property name="mnemonic_widget">value_highcontrast</property>
+                                                <property name="mnemonic_widget">highcontrast_enable_switch</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">True</property>
@@ -151,7 +151,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkSwitch" id="value_highcontrast">
+                                              <object class="GtkSwitch" id="highcontrast_enable_switch">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="margin_start">12</property>
@@ -170,16 +170,16 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_large_text">
+                                      <object class="GtkListBoxRow" id="large_text_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="selectable">False</property>
                                         <property name="activatable">False</property>
                                         <child>
-                                          <object class="GtkBox" id="box_large_text">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_large_text">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -189,7 +189,7 @@
                                                 <property name="xalign">0</property>
                                                 <property name="label" translatable="yes">_Large Text</property>
                                                 <property name="use_underline">True</property>
-                                                <property name="mnemonic_widget">value_large_text</property>
+                                                <property name="mnemonic_widget">large_text_enable_switch</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">True</property>
@@ -198,7 +198,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkSwitch" id="value_large_text">
+                                              <object class="GtkSwitch" id="large_text_enable_switch">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="margin_start">12</property>
@@ -217,15 +217,15 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_cursor_size">
+                                      <object class="GtkListBoxRow" id="cursor_size_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_cursor_size">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_cursor_size">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -243,7 +243,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_cursor_size">
+                                              <object class="GtkLabel" id="cursor_size_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -264,14 +264,14 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_zoom">
+                                      <object class="GtkListBoxRow" id="zoom_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_zoom">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_zoom">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -289,7 +289,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_zoom">
+                                              <object class="GtkLabel" id="zoom_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -310,14 +310,14 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_screen_reader">
+                                      <object class="GtkListBoxRow" id="screen_reader_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_screen_reader">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_screen_reader">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -335,7 +335,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_screen_reader">
+                                              <object class="GtkLabel" id="screen_reader_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -356,14 +356,14 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_sound_keys">
+                                      <object class="GtkListBoxRow" id="sound_keys_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_sound_keys">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_sound_keys">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -381,7 +381,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_sound_keys">
+                                              <object class="GtkLabel" id="sound_keys_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -421,13 +421,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="section_hearing">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_bottom">32</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkLabel" id="heading_hearing">
+                              <object class="GtkLabel" id="hearing_heading_label">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="margin_end">12</property>
@@ -438,7 +438,7 @@
                                   <attribute name="weight" value="bold"/>
                                 </attributes>
                                 <accessibility>
-                                  <relation target="list_hearing" type="label-for"/>
+                                  <relation target="hearing_listbox" type="label-for"/>
                                 </accessibility>
                               </object>
                               <packing>
@@ -448,28 +448,28 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkFrame" id="frame_hearing">
+                              <object class="GtkFrame">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label_xalign">0</property>
                                 <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkListBox" id="list_hearing">
+                                  <object class="GtkListBox" id="hearing_listbox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="selection-mode">none</property>
                                     <accessibility>
-                                      <relation target="heading_hearing" type="labelled-by"/>
+                                      <relation target="hearing_heading_label" type="labelled-by"/>
                                     </accessibility>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_visual_alerts">
+                                      <object class="GtkListBoxRow" id="visual_alerts_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_visual_alerts">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_visual_alerts">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -487,7 +487,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_visual_alerts">
+                                              <object class="GtkLabel" id="visual_alerts_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -527,13 +527,13 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="section_typing">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="margin_bottom">32</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkLabel" id="heading_typing">
+                              <object class="GtkLabel" id="typing_heading_label">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="margin_end">12</property>
@@ -544,7 +544,7 @@
                                   <attribute name="weight" value="bold"/>
                                 </attributes>
                                 <accessibility>
-                                  <relation target="list_typing" type="label-for"/>
+                                  <relation target="typing_listbox" type="label-for"/>
                                 </accessibility>
                               </object>
                               <packing>
@@ -554,30 +554,30 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkFrame" id="frame_typing">
+                              <object class="GtkFrame">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label_xalign">0</property>
                                 <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkListBox" id="list_typing">
+                                  <object class="GtkListBox" id="typing_listbox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="selection-mode">none</property>
                                     <accessibility>
-                                      <relation target="heading_typing" type="labelled-by"/>
+                                      <relation target="typing_heading_label" type="labelled-by"/>
                                     </accessibility>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_screen_keyboard">
+                                      <object class="GtkListBoxRow" id="screen_keyboard_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="selectable">False</property>
                                         <property name="activatable">False</property>
                                         <child>
-                                          <object class="GtkBox" id="box_screen_keyboard">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_screen_keyboard">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -587,7 +587,7 @@
                                                 <property name="xalign">0</property>
                                                 <property name="label" translatable="yes">Screen _Keyboard</property>
                                                 <property name="use_underline">True</property>
-                                                <property name="mnemonic_widget">screen_keyboard_switch</property>
+                                                <property name="mnemonic_widget">screen_keyboard_enable_switch</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">True</property>
@@ -596,7 +596,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkSwitch" id="screen_keyboard_switch">
+                                              <object class="GtkSwitch" id="screen_keyboard_enable_switch">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="margin_start">12</property>
@@ -615,14 +615,14 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_repeat_keys">
+                                      <object class="GtkListBoxRow" id="repeat_keys_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_repeat_keys">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_repeat_keys">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -640,7 +640,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_repeat_keys">
+                                              <object class="GtkLabel" id="repeat_keys_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -661,14 +661,14 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_cursor_blinking">
+                                      <object class="GtkListBoxRow" id="cursor_blinking_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_row_cursor_blinking">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_row_cursor_blinking">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -686,7 +686,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_row_cursor_blinking">
+                                              <object class="GtkLabel" id="cursor_blinking_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -707,14 +707,14 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_accessx">
+                                      <object class="GtkListBoxRow" id="accessx_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_accessx">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_accessx">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -732,7 +732,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_accessx">
+                                              <object class="GtkLabel" id="accessx_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -772,12 +772,12 @@
                           </packing>
                         </child>
                         <child>
-                          <object class="GtkBox" id="section_pointing">
+                          <object class="GtkBox">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkLabel" id="heading_pointing">
+                              <object class="GtkLabel" id="pointing_heading_label">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="margin_end">12</property>
@@ -788,7 +788,7 @@
                                   <attribute name="weight" value="bold"/>
                                 </attributes>
                                 <accessibility>
-                                  <relation target="list_pointing" type="label-for"/>
+                                  <relation target="pointing_listbox" type="label-for"/>
                                 </accessibility>
                               </object>
                               <packing>
@@ -798,30 +798,30 @@
                               </packing>
                             </child>
                             <child>
-                              <object class="GtkFrame" id="frame_pointing">
+                              <object class="GtkFrame">
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
                                 <property name="label_xalign">0</property>
                                 <property name="shadow_type">in</property>
                                 <child>
-                                  <object class="GtkListBox" id="list_pointing">
+                                  <object class="GtkListBox" id="pointing_listbox">
                                     <property name="visible">True</property>
                                     <property name="can_focus">True</property>
                                     <property name="selection-mode">none</property>
                                     <accessibility>
-                                      <relation target="heading_pointing" type="labelled-by"/>
+                                      <relation target="pointing_heading_label" type="labelled-by"/>
                                     </accessibility>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_mouse_keys">
+                                      <object class="GtkListBoxRow" id="mouse_keys_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <property name="selectable">False</property>
                                         <property name="activatable">False</property>
                                         <child>
-                                          <object class="GtkBox" id="box_mouse_keys">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_mouse_keys">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -831,7 +831,7 @@
                                                 <property name="xalign">0</property>
                                                 <property name="label" translatable="yes">_Mouse Keys</property>
                                                 <property name="use_underline">True</property>
-                                                <property name="mnemonic_widget">mouse_keys_switch</property>
+                                                <property name="mnemonic_widget">mouse_keys_enable_switch</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">True</property>
@@ -840,7 +840,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkSwitch" id="mouse_keys_switch">
+                                              <object class="GtkSwitch" id="mouse_keys_enable_switch">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="margin_start">12</property>
@@ -876,11 +876,11 @@
                                                 <property name="xalign">0</property>
                                                 <property name="label" translatable="yes">_Locate Pointer</property>
                                                 <property name="use_underline">True</property>
-                                                <property name="mnemonic_widget">locate_pointer_switch</property>
+                                                <property name="mnemonic_widget">locate_pointer_enable_switch</property>
                                               </object>
                                             </child>
                                             <child>
-                                              <object class="GtkSwitch" id="locate_pointer_switch">
+                                              <object class="GtkSwitch" id="locate_pointer_enable_switch">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
                                                 <property name="margin">12</property>
@@ -891,14 +891,14 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_click_assist">
+                                      <object class="GtkListBoxRow" id="click_assist_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_click_assist">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_click_assist">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -916,7 +916,7 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel" id="value_click_assist">
+                                              <object class="GtkLabel" id="click_assist_label">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -937,14 +937,14 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkListBoxRow" id="row_double_click_delay">
+                                      <object class="GtkListBoxRow" id="double_click_delay_row">
                                         <property name="visible">True</property>
                                         <property name="can_focus">True</property>
                                         <child>
-                                          <object class="GtkBox" id="box_double_click_delay">
+                                          <object class="GtkBox">
                                             <property name="visible">True</property>
                                             <child>
-                                              <object class="GtkLabel" id="heading_double_click_delay">
+                                              <object class="GtkLabel">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
                                                 <property name="margin_start">12</property>
@@ -961,17 +961,17 @@
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkScale" id="scale_double_click_delay">
+                                              <object class="GtkScale" id="double_click_delay_scale">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">True</property>
-                                                <property name="adjustment">double-click-delay-adjustment</property>
+                                                <property name="adjustment">double_click_delay_adjustment</property>
                                                 <property name="draw_value">False</property>
                                                 <property name="margin_start">12</property>
                                                 <property name="margin_end">12</property>
                                                 <property name="margin_top">12</property>
                                                 <property name="margin_bottom">12</property>
                                                 <child internal-child="accessible">
-                                                  <object class="AtkObject" id="double_click_scale-atkobject">
+                                                  <object class="AtkObject">
                                                     <property name="AtkObject::accessible-description" translatable="yes">Double-Click Delay</property>
                                                   </object>
                                                 </child>
@@ -1017,26 +1017,20 @@
       </object>
     </child>
   </template>
-  <object class="GtkAdjustment" id="text_scaling_factor_adjustment">
-    <property name="lower">0.5</property>
-    <property name="upper">3</property>
-    <property name="value">1</property>
-    <property name="step_increment">0.1</property>
-  </object>
-  <object class="GtkSizeGroup" id="rows_sizegroup">
+  <object class="GtkSizeGroup">
     <property name="mode">vertical</property>
     <widgets>
-      <widget name="row_highcontrast"/>
-      <widget name="row_large_text"/>
-      <widget name="row_cursor_size"/>
-      <widget name="row_zoom"/>
-      <widget name="row_screen_reader"/>
-      <widget name="row_sound_keys"/>
-      <widget name="row_visual_alerts"/>
-      <widget name="row_screen_keyboard"/>
-      <widget name="row_accessx"/>
-      <widget name="row_mouse_keys"/>
-      <widget name="row_click_assist"/>
+      <widget name="highcontrast_row"/>
+      <widget name="large_text_row"/>
+      <widget name="cursor_size_row"/>
+      <widget name="zoom_row"/>
+      <widget name="screen_reader_row"/>
+      <widget name="sound_keys_row"/>
+      <widget name="visual_alerts_row"/>
+      <widget name="screen_keyboard_row"/>
+      <widget name="accessx_row"/>
+      <widget name="mouse_keys_row"/>
+      <widget name="click_assist_row"/>
     </widgets>
   </object>
 </interface>
