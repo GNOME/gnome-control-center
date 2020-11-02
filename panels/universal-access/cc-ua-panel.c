@@ -31,6 +31,7 @@
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
 #include "cc-cursor-size-dialog.h"
+#include "cc-sound-keys-dialog.h"
 #include "cc-screen-reader-dialog.h"
 #include "cc-zoom-options-dialog.h"
 
@@ -143,8 +144,6 @@ struct _CcUaPanel
   GtkWidget *scale_double_click_delay;
   GtkWidget *screen_keyboard_switch;
   GtkWidget *section_status;
-  GtkDialog *sound_keys_dialog;
-  GtkWidget *sound_keys_switch;
   GtkWidget *switch_status;
   GtkWidget *typing_bouncekeys_beep_rejected_check;
   GtkWidget *typing_bouncekeys_delay_box;
@@ -277,8 +276,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, scale_double_click_delay);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_keyboard_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, section_status);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, switch_status);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_bouncekeys_beep_rejected_check);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, typing_bouncekeys_delay_box);
@@ -576,7 +573,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_sound_keys)
     {
-      show_dialog (self, self->sound_keys_dialog);
+      run_dialog (self, GTK_DIALOG (cc_sound_keys_dialog_new ()));
     }
   else if (row == self->row_visual_alerts)
     {
@@ -659,15 +656,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 G_SETTINGS_BIND_GET,
                                 on_off_label_mapping_get,
                                 NULL, NULL, NULL);
-
-  g_settings_bind (self->kb_settings, KEY_TOGGLEKEYS_ENABLED,
-                   self->sound_keys_switch, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  self->toplevels = g_slist_prepend (self->toplevels, self->sound_keys_dialog);
-
-  g_signal_connect (self->sound_keys_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
 
 /* hearing/sound section */
