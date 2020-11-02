@@ -102,10 +102,10 @@ struct _CcUaPanel
 {
   CcPanel    parent_instance;
 
-  GtkWidget *cursor_blinking_dialog;
+  GtkDialog *cursor_blinking_dialog;
   GtkWidget *cursor_blinking_scale;
   GtkWidget *cursor_blinking_switch;
-  GtkWidget *cursor_size_dialog;
+  GtkDialog *cursor_size_dialog;
   GtkWidget *cursor_size_grid;
   GtkWidget *list_hearing;
   GtkWidget *list_pointing;
@@ -113,7 +113,7 @@ struct _CcUaPanel
   GtkWidget *list_typing;
   GtkWidget *mouse_keys_switch;
   GtkWidget *locate_pointer_switch;
-  GtkWidget *pointing_dialog;
+  GtkDialog *pointing_dialog;
   GtkWidget *pointing_dwell_delay_box;
   GtkWidget *pointing_dwell_delay_scale;
   GtkWidget *pointing_dwell_threshold_box;
@@ -124,32 +124,36 @@ struct _CcUaPanel
   GtkWidget *pointing_secondary_click_switch;
   GtkWidget *repeat_keys_delay_grid;
   GtkWidget *repeat_keys_delay_scale;
-  GtkWidget *repeat_keys_dialog;
+  GtkDialog *repeat_keys_dialog;
   GtkWidget *repeat_keys_speed_grid;
   GtkWidget *repeat_keys_speed_scale;
   GtkWidget *repeat_keys_switch;
-  GtkWidget *row_accessx;
-  GtkWidget *row_click_assist;
-  GtkWidget *row_cursor_blinking;
-  GtkWidget *row_cursor_size;
-  GtkWidget *row_repeat_keys;
-  GtkWidget *row_screen_reader;
-  GtkWidget *row_sound_keys;
-  GtkWidget *row_visual_alerts;
-  GtkWidget *row_zoom;
+  GtkListBoxRow *row_accessx;
+  GtkListBoxRow *row_click_assist;
+  GtkListBoxRow *row_cursor_blinking;
+  GtkListBoxRow *row_cursor_size;
+  GtkListBoxRow *row_highcontrast;
+  GtkListBoxRow *row_large_text;
+  GtkListBoxRow *row_mouse_keys;
+  GtkListBoxRow *row_repeat_keys;
+  GtkListBoxRow *row_screen_keyboard;
+  GtkListBoxRow *row_screen_reader;
+  GtkListBoxRow *row_sound_keys;
+  GtkListBoxRow *row_visual_alerts;
+  GtkListBoxRow *row_zoom;
   GtkWidget *scale_double_click_delay;
   GtkWidget *screen_keyboard_switch;
-  GtkWidget *screen_reader_dialog;
+  GtkDialog *screen_reader_dialog;
   GtkWidget *screen_reader_switch;
   GtkWidget *section_status;
-  GtkWidget *sound_keys_dialog;
+  GtkDialog *sound_keys_dialog;
   GtkWidget *sound_keys_switch;
   GtkWidget *switch_status;
   GtkWidget *typing_bouncekeys_beep_rejected_check;
   GtkWidget *typing_bouncekeys_delay_box;
   GtkWidget *typing_bouncekeys_delay_scale;
   GtkWidget *typing_bouncekeys_switch;
-  GtkWidget *typing_dialog;
+  GtkDialog *typing_dialog;
   GtkWidget *typing_keyboard_toggle_switch;
   GtkWidget *typing_slowkeys_beep_accepted_check;
   GtkWidget *typing_slowkeys_beep_pressed_check;
@@ -173,7 +177,7 @@ struct _CcUaPanel
   GtkWidget *value_sound_keys;
   GtkWidget *value_visual_alerts;
   GtkWidget *value_zoom;
-  GtkWidget *visual_alerts_dialog;
+  GtkDialog *visual_alerts_dialog;
   GtkWidget *visual_alerts_screen_radio;
   GtkWidget *visual_alerts_switch;
   GtkWidget *visual_alerts_test_button;
@@ -602,53 +606,68 @@ toggle_switch (GtkWidget *sw)
 }
 
 static void
-activate_row (CcUaPanel *self, GtkListBoxRow *row)
+show_dialog (CcUaPanel *self, GtkDialog *dialog)
 {
-  GtkWidget *dialog;
-  const gchar *dialog_id;
-  const gchar *widget_name;
-
-  /* Check switches to toggle */
-  widget_name = gtk_buildable_get_name (GTK_BUILDABLE (row));
-  if (widget_name)
-    {
-      if (!g_strcmp0 (widget_name, "row_highcontrast"))
-        {
-          toggle_switch (self->value_highcontrast);
-          return;
-        }
-      if (!g_strcmp0 (widget_name, "row_large_text"))
-        {
-          toggle_switch (self->value_large_text);
-          return;
-        }
-      if (!g_strcmp0 (widget_name, "row_screen_keyboard"))
-        {
-          toggle_switch (self->screen_keyboard_switch);
-          return;
-        }
-      if (!g_strcmp0 (widget_name, "row_mouse_keys"))
-        {
-          toggle_switch (self->mouse_keys_switch);
-          return;
-        }
-    }
-
-  /* Check dialog to open */
-  dialog_id = (const gchar *)g_object_get_data (G_OBJECT (row), "dialog-id");
-  if (g_strcmp0 (dialog_id, "zoom") == 0)
-    {
-      zoom_options_launch (self);
-      return;
-    }
-
-  dialog = (GtkWidget *)g_object_get_data (G_OBJECT (row), "dialog");
-  if (dialog == NULL)
-    return;
-
   gtk_window_set_transient_for (GTK_WINDOW (dialog),
                                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
   gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
+activate_row (CcUaPanel *self, GtkListBoxRow *row)
+{
+  if (row == self->row_highcontrast)
+    {
+      toggle_switch (self->value_highcontrast);
+    }
+  else if (row == self->row_large_text)
+    {
+      toggle_switch (self->value_large_text);
+    }
+  else if (row == self->row_screen_keyboard)
+    {
+      toggle_switch (self->screen_keyboard_switch);
+    }
+  else if (row == self->row_mouse_keys)
+    {
+      toggle_switch (self->mouse_keys_switch);
+    }
+  else if (row == self->row_zoom)
+    {
+      zoom_options_launch (self);
+    }
+  else if (row == self->row_cursor_size)
+    {
+      show_dialog (self, self->cursor_size_dialog);
+    }
+  else if (row == self->row_screen_reader)
+    {
+      show_dialog (self, self->screen_reader_dialog);
+    }
+  else if (row == self->row_sound_keys)
+    {
+      show_dialog (self, self->sound_keys_dialog);
+    }
+  else if (row == self->row_visual_alerts)
+    {
+      show_dialog (self, self->visual_alerts_dialog);
+    }
+  else if (row == self->row_repeat_keys)
+    {
+      show_dialog (self, self->repeat_keys_dialog);
+    }
+  else if (row == self->row_cursor_blinking)
+    {
+      show_dialog (self, self->cursor_blinking_dialog);
+    }
+  else if (row == self->row_accessx)
+    {
+      show_dialog (self, self->typing_dialog);
+    }
+  else if (row == self->row_click_assist)
+    {
+      show_dialog (self, self->pointing_dialog);
+    }
 }
 
 static void
@@ -691,7 +710,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 
   self->toplevels = g_slist_prepend (self->toplevels, self->cursor_size_dialog);
 
-  g_object_set_data (G_OBJECT (self->row_cursor_size), "dialog", self->cursor_size_dialog);
   g_signal_connect (self->cursor_size_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -702,8 +720,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 "label", G_SETTINGS_BIND_GET,
                                 on_off_label_mapping_get,
                                 NULL, NULL, NULL);
-
-  g_object_set_data (G_OBJECT (self->row_zoom), "dialog-id", "zoom");
 
   /* screen reader */
 
@@ -719,7 +735,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 
   self->toplevels = g_slist_prepend (self->toplevels, self->screen_reader_dialog);
 
-  g_object_set_data (G_OBJECT (self->row_screen_reader), "dialog", self->screen_reader_dialog);
   g_signal_connect (self->screen_reader_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -737,7 +752,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 
   self->toplevels = g_slist_prepend (self->toplevels, self->sound_keys_dialog);
 
-  g_object_set_data (G_OBJECT (self->row_sound_keys), "dialog", self->sound_keys_dialog);
   g_signal_connect (self->sound_keys_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
@@ -820,8 +834,6 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
 
   self->toplevels = g_slist_prepend (self->toplevels, self->visual_alerts_dialog);
 
-  g_object_set_data (G_OBJECT (self->row_visual_alerts), "dialog", self->visual_alerts_dialog);
-
   g_signal_connect (self->visual_alerts_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -891,8 +903,6 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   self->toplevels = g_slist_prepend (self->toplevels, self->repeat_keys_dialog);
 
-  g_object_set_data (G_OBJECT (self->row_repeat_keys), "dialog", self->repeat_keys_dialog);
-
   g_signal_connect (self->repeat_keys_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
@@ -914,8 +924,6 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
                            G_CALLBACK (on_cursor_blinking_toggled), self, G_CONNECT_SWAPPED);
 
   self->toplevels = g_slist_prepend (self->toplevels, self->cursor_blinking_dialog);
-
-  g_object_set_data (G_OBJECT (self->row_cursor_blinking), "dialog", self->cursor_blinking_dialog);
 
   g_signal_connect (self->cursor_blinking_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
@@ -1012,8 +1020,6 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 
   self->toplevels = g_slist_prepend (self->toplevels, self->typing_dialog);
 
-  g_object_set_data (G_OBJECT (self->row_accessx), "dialog", self->typing_dialog);
-
   g_signal_connect (self->typing_dialog, "delete-event",
                     G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 }
@@ -1092,8 +1098,6 @@ cc_ua_panel_init_mouse (CcUaPanel *self)
   g_object_bind_property (sw, "active", w, "sensitive", G_BINDING_SYNC_CREATE);
 
   self->toplevels = g_slist_prepend (self->toplevels, self->pointing_dialog);
-
-  g_object_set_data (G_OBJECT (self->row_click_assist), "dialog", self->pointing_dialog);
 
   g_settings_bind (self->gsd_mouse_settings, "double-click",
                    gtk_range_get_adjustment (GTK_RANGE (self->scale_double_click_delay)), "value",
