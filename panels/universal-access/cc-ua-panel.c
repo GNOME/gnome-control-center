@@ -31,6 +31,7 @@
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
 #include "cc-cursor-size-dialog.h"
+#include "cc-screen-reader-dialog.h"
 #include "cc-zoom-options-dialog.h"
 
 #define DPI_FACTOR_LARGE 1.25
@@ -141,8 +142,6 @@ struct _CcUaPanel
   GtkListBoxRow *row_zoom;
   GtkWidget *scale_double_click_delay;
   GtkWidget *screen_keyboard_switch;
-  GtkDialog *screen_reader_dialog;
-  GtkWidget *screen_reader_switch;
   GtkWidget *section_status;
   GtkDialog *sound_keys_dialog;
   GtkWidget *sound_keys_switch;
@@ -277,8 +276,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, row_zoom);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, scale_double_click_delay);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_keyboard_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, section_status);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_switch);
@@ -575,7 +572,7 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
     }
   else if (row == self->row_screen_reader)
     {
-      show_dialog (self, self->screen_reader_dialog);
+      run_dialog (self, GTK_DIALOG (cc_screen_reader_dialog_new ()));
     }
   else if (row == self->row_sound_keys)
     {
@@ -654,15 +651,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 G_SETTINGS_BIND_GET,
                                 on_off_label_mapping_get,
                                 NULL, NULL, NULL);
-
-  g_settings_bind (self->application_settings, "screen-reader-enabled",
-                   self->screen_reader_switch, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  self->toplevels = g_slist_prepend (self->toplevels, self->screen_reader_dialog);
-
-  g_signal_connect (self->screen_reader_dialog, "delete-event",
-                    G_CALLBACK (gtk_widget_hide_on_delete), NULL);
 
   /* sound keys */
 
