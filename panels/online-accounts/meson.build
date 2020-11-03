@@ -20,9 +20,13 @@ cflags += [
   '-DLIBEXECDIR="@0@"'.format(control_center_libexecdir),
 ]
 
-sources = files('cc-online-accounts-panel.c')
+sources = files(
+  'cc-online-account-provider-row.c',
+  'cc-online-accounts-panel.c',
+)
 
 resource_data = files(
+  'cc-online-account-provider-row.ui',
   'cc-online-accounts-panel.ui',
   'online-accounts.css',
 )

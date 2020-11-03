@@ -28,6 +28,7 @@
 #include <goa/goa.h>
 
 #include "cc-online-accounts-panel.h"
+#include "cc-online-account-provider-row.h"
 #include "cc-online-accounts-resources.h"
 
 #ifdef GDK_WINDOWING_X11
@@ -391,57 +392,12 @@ static void
 add_provider_row (CcOnlineAccountsPanel *self,
                   GVariant              *provider)
 {
-  g_autofree char *name = NULL;
-  g_autoptr(GIcon) icon = NULL;
-  GtkWidget *image;
-  GtkWidget *row;
+  CcOnlineAccountProviderRow *row;
 
-  row = adw_action_row_new ();
-  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+  row = cc_online_account_provider_row_new (provider);
 
-  if (provider == NULL)
-    {
-      g_object_set_data (G_OBJECT (row), "goa-provider", NULL);
-      icon = g_themed_icon_new_with_default_fallbacks ("goa-account");
-      name = g_strdup (C_("Online Account", "Other"));
-    }
-  else
-    {
-      g_autoptr(GVariant) icon_variant = NULL;
-
-      g_object_set_data_full (G_OBJECT (row),
-                              "goa-provider",
-                              g_variant_ref (provider),
-                              (GDestroyNotify) g_variant_unref);
-
-      g_variant_get (provider, "(ssviu)",
-                     NULL,
-                     &name,
-                     &icon_variant,
-                     NULL,
-                     NULL);
-
-      icon = g_icon_deserialize (icon_variant);
-    }
-
-  image = gtk_image_new_from_gicon (icon);
-  gtk_widget_set_halign (image, GTK_ALIGN_CENTER);
-  gtk_widget_set_valign (image, GTK_ALIGN_CENTER);
-  if (is_gicon_symbolic (image, icon))
-    {
-      gtk_image_set_icon_size (GTK_IMAGE (image), GTK_ICON_SIZE_NORMAL);
-      gtk_widget_add_css_class (image, "symbolic-circular");
-    }
-  else
-    {
-      gtk_image_set_icon_size (GTK_IMAGE (image), GTK_ICON_SIZE_LARGE);
-      gtk_widget_add_css_class (image, "lowres-icon");
-    }
-  adw_action_row_add_prefix (ADW_ACTION_ROW (row), image);
-
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), name);
-
-  gtk_list_box_append (self->providers_listbox, row);
+  gtk_widget_show (GTK_WIDGET (row));
+  gtk_list_box_append (self->providers_listbox, GTK_WIDGET (row));
 }
 
 static void
@@ -667,7 +623,7 @@ command_add (CcOnlineAccountsPanel *self,
         {
           g_autofree gchar *provider_type = NULL;
 
-          provider = g_object_get_data (G_OBJECT (child), "goa-provider");
+          provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (child));
           g_variant_get (provider, "(ssviu)", &provider_type, NULL, NULL, NULL, NULL);
 
           if (g_strcmp0 (provider_type, provider_name) == 0)
@@ -724,8 +680,8 @@ sort_providers_func (GtkListBoxRow *a,
   gboolean a_branded, b_branded;
   gint a_features, b_features;
 
-  a_provider = g_object_get_data (G_OBJECT (a), "goa-provider");
-  b_provider = g_object_get_data (G_OBJECT (b), "goa-provider");
+  a_provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (a));
+  b_provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (b));
 
   g_variant_get (a_provider, "(ssviu)", NULL, NULL, NULL, &a_features, NULL);
   g_variant_get (b_provider, "(ssviu)", NULL, NULL, NULL, &b_features, NULL);
@@ -839,7 +795,7 @@ static void
 on_provider_row_activated_cb (CcOnlineAccountsPanel *self,
                               GtkListBoxRow         *activated_row)
 {
-  GVariant *provider = g_object_get_data (G_OBJECT (activated_row), "goa-provider");
+  GVariant *provider = cc_online_account_provider_row_get_provider (CC_ONLINE_ACCOUNT_PROVIDER_ROW (activated_row));
 
   create_account (self, provider);
 }
