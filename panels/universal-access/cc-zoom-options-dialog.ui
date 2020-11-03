@@ -96,24 +96,6 @@
                   <attribute name="scale" value="1.25"/>
                 </attributes>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSwitch" id="seeing_zoom_switch">
@@ -123,15 +105,10 @@
                 <property name="use_action_appearance">False</property>
               </object>
               <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
+                <property name="pack_type">end</property>
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-          </packing>
         </child>
         <child>
           <object class="GtkNotebook">
@@ -157,6 +134,7 @@
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow_type">none</property>
+                    <property name="margin-start">4</property>
                     <child>
                       <placeholder/>
                     </child>
@@ -178,10 +156,6 @@
                               <attribute name="scale" value="1.25"/>
                             </attributes>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkSpinButton" id="magnifier_factor_spin">
@@ -192,21 +166,13 @@
                             <property name="invisible_char_set">True</property>
                             <property name="adjustment">magnifier_factor_adjustment</property>
                             <property name="digits">2</property>
+                            <property name="hexpand">True</property>
+                            <property name="margin-start">21</property>
                           </object>
-                          <packing>
-                            <property name="expand">True</property>
-                            <property name="fill">True</property>
-                            <property name="padding">21</property>
-                          </packing>
                         </child>
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">True</property>
-                    <property name="fill">True</property>
-                    <property name="padding">4</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkFrame">
@@ -214,6 +180,7 @@
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow_type">none</property>
+                    <property name="margin-start">4</property>
                     <child>
                       <object class="GtkAlignment">
                         <property name="visible">True</property>
@@ -295,10 +262,6 @@
                                   <placeholder/>
                                 </child>
                               </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                              </packing>
                             </child>
                             <child>
                               <object class="GtkAlignment">
@@ -321,12 +284,8 @@
                                         <property name="xalign">0</property>
                                         <property name="draw_indicator">True</property>
                                         <property name="use_underline">True</property>
+                                        <property name="margin-start">2</property>
                                       </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                        <property name="padding">2</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="centered_radio">
@@ -342,10 +301,6 @@
                                         <property name="use_underline">True</property>
                                         <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="CcZoomOptionsDialog" swapped="yes"/>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="push_radio">
@@ -361,10 +316,6 @@
                                         <property name="use_underline">True</property>
                                         <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="CcZoomOptionsDialog" swapped="yes"/>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkRadioButton" id="proportional_radio">
@@ -380,18 +331,10 @@
                                         <property name="use_underline">True</property>
                                         <signal name="toggled" handler="mouse_tracking_radio_toggled_cb" object="CcZoomOptionsDialog" swapped="yes"/>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                   </object>
                                 </child>
                               </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                              </packing>
                             </child>
                           </object>
                         </child>
@@ -409,11 +352,6 @@
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">False</property>
-                    <property name="padding">4</property>
-                  </packing>
                 </child>
               </object>
             </child>
@@ -443,6 +381,7 @@
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow_type">none</property>
+                    <property name="margin-start">4</property>
                     <child>
                       <object class="GtkAlignment">
                         <property name="visible">True</property>
@@ -500,10 +439,6 @@
                                           <attribute name="scale" value="1.25"/>
                                         </attributes>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkScale" id="crosshair_thickness_scale">
@@ -514,10 +449,6 @@
                                         <property name="draw_value">False</property>
                                         <property name="value_pos">right</property>
                                       </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkLabel">
@@ -526,15 +457,11 @@
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes" context="universal access, thickness">Thick</property>
                                         <property name="justify">center</property>
+                                        <property name="margin-start">8</property>
                                         <attributes>
                                           <attribute name="scale" value="1.25"/>
                                         </attributes>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="padding">8</property>
-                                      </packing>
                                     </child>
                                   </object>
                                   <packing>
@@ -579,10 +506,6 @@
                                         <property name="draw_value">False</property>
                                         <property name="value_pos">right</property>
                                       </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                   </object>
                                   <packing>
@@ -627,10 +550,6 @@
                                         <property name="use_alpha">True</property>
                                         <property name="color">#ffff00000000</property>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                   </object>
                                   <packing>
@@ -641,10 +560,6 @@
                                   </packing>
                                 </child>
                               </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                              </packing>
                             </child>
                           </object>
                         </child>
@@ -668,10 +583,6 @@
                               <attribute name="scale" value="1.25"/>
                             </attributes>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkBox">
@@ -688,19 +599,11 @@
                                 <property name="can_focus">True</property>
                                 <property name="use_action_appearance">False</property>
                               </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                              </packing>
                             </child>
                             <child>
                               <placeholder/>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkCheckButton" id="crosshair_clip_checkbox">
@@ -717,19 +620,10 @@
                             <property name="draw_indicator">True</property>
                             <property name="use_underline">True</property>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                          </packing>
                         </child>
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="padding">4</property>
-                  </packing>
                 </child>
               </object>
             </child>
@@ -759,6 +653,7 @@
                     <property name="can_focus">False</property>
                     <property name="label_xalign">0</property>
                     <property name="shadow_type">none</property>
+                    <property name="margin_start">4</property>
                     <child>
                       <object class="GtkAlignment">
                         <property name="visible">True</property>
@@ -877,10 +772,6 @@
                                           <attribute name="scale" value="1.25"/>
                                         </attributes>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkScale" id="grayscale_slider">
@@ -891,10 +782,6 @@
                                         <property name="draw_value">False</property>
                                         <property name="value_pos">right</property>
                                       </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkLabel">
@@ -903,15 +790,11 @@
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes" context="universal access, color">Full</property>
                                         <property name="justify">center</property>
+                                        <property name="margin-start">8</property>
                                         <attributes>
                                           <attribute name="scale" value="1.25"/>
                                         </attributes>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="padding">8</property>
-                                      </packing>
                                     </child>
                                   </object>
                                   <packing>
@@ -936,10 +819,6 @@
                                         <property name="can_focus">True</property>
                                         <property name="use_action_appearance">False</property>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <placeholder/>
@@ -968,10 +847,6 @@
                                           <attribute name="scale" value="1.25"/>
                                         </attributes>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkScale" id="brightness_slider">
@@ -983,10 +858,6 @@
                                         <property name="draw_value">False</property>
                                         <property name="value_pos">left</property>
                                       </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkLabel">
@@ -995,15 +866,11 @@
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes" context="universal access, brightness">High</property>
                                         <property name="justify">center</property>
+                                        <property name="margin-start">8</property>
                                         <attributes>
                                           <attribute name="scale" value="1.25"/>
                                         </attributes>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="padding">8</property>
-                                      </packing>
                                     </child>
                                   </object>
                                   <packing>
@@ -1029,10 +896,6 @@
                                           <attribute name="scale" value="1.25"/>
                                         </attributes>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkScale" id="contrast_slider">
@@ -1044,10 +907,6 @@
                                         <property name="draw_value">False</property>
                                         <property name="value_pos">left</property>
                                       </object>
-                                      <packing>
-                                        <property name="expand">True</property>
-                                        <property name="fill">True</property>
-                                      </packing>
                                     </child>
                                     <child>
                                       <object class="GtkLabel">
@@ -1056,15 +915,11 @@
                                         <property name="xalign">0</property>
                                         <property name="label" translatable="yes" context="universal access, contrast">High</property>
                                         <property name="justify">center</property>
+                                        <property name="margin-start">8</property>
                                         <attributes>
                                           <attribute name="scale" value="1.25"/>
                                         </attributes>
                                       </object>
-                                      <packing>
-                                        <property name="expand">False</property>
-                                        <property name="fill">True</property>
-                                        <property name="padding">8</property>
-                                      </packing>
                                     </child>
                                   </object>
                                   <packing>
@@ -1075,10 +930,6 @@
                                   </packing>
                                 </child>
                               </object>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">True</property>
-                              </packing>
                             </child>
                           </object>
                         </child>
@@ -1097,11 +948,6 @@
                       </object>
                     </child>
                   </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="padding">4</property>
-                  </packing>
                 </child>
               </object>
             </child>
@@ -1116,10 +962,6 @@
               </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-          </packing>
         </child>
       </object>
     </child>
