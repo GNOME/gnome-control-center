@@ -29,6 +29,7 @@
 
 #include "cc-online-accounts-panel.h"
 #include "cc-online-account-provider-row.h"
+#include "cc-online-account-row.h"
 #include "cc-online-accounts-resources.h"
 
 #ifdef GDK_WINDOWING_X11
@@ -125,7 +126,7 @@ modify_row_for_account (CcOnlineAccountsPanel *self,
     {
       GoaObject *row_object;
 
-      row_object = g_object_get_data (G_OBJECT (l->data), "goa-object");
+      row_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (l->data));
       if (row_object == object)
         {
           GtkWidget *row = GTK_WIDGET (l->data);
@@ -370,24 +371,6 @@ create_account (CcOnlineAccountsPanel *self,
                         self);
 }
 
-static gboolean
-is_gicon_symbolic (GtkWidget *widget,
-                   GIcon     *icon)
-{
-  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
-  GtkIconTheme *icon_theme;
-
-  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
-  icon_paintable = gtk_icon_theme_lookup_by_gicon (icon_theme,
-                                                   icon,
-                                                   32,
-                                                   gtk_widget_get_scale_factor (widget),
-                                                   gtk_widget_get_direction (widget),
-                                                   0);
-
-  return icon_paintable && gtk_icon_paintable_is_symbolic (icon_paintable);
-}
-
 static void
 add_provider_row (CcOnlineAccountsPanel *self,
                   GVariant              *provider)
@@ -432,64 +415,12 @@ static void
 add_account (CcOnlineAccountsPanel *self,
              GoaObject             *object)
 {
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GIcon) gicon = NULL;
-  GoaAccount *account;
-  GtkWidget *row, *icon;
+  CcOnlineAccountRow *row;
 
-  account = goa_object_peek_account (object);
-
-  row = adw_action_row_new ();
-  g_object_set_data (G_OBJECT (row), "goa-object", object);
-  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
-
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
-                                 goa_account_get_provider_name (account));
-  adw_action_row_set_subtitle (ADW_ACTION_ROW (row),
-                               goa_account_get_presentation_identity (account));
-
-  /* The provider icon */
-  icon = gtk_image_new ();
-  gtk_widget_set_halign (icon, GTK_ALIGN_CENTER);
-  gtk_widget_set_valign (icon, GTK_ALIGN_CENTER);
-
-  gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
-  if (error != NULL)
-    {
-      g_warning ("Error creating GIcon for account: %s (%s, %d)",
-                 error->message,
-                 g_quark_to_string (error->domain),
-                 error->code);
-    }
-  else
-    {
-      gtk_image_set_from_gicon (GTK_IMAGE (icon), gicon);
-
-      if (is_gicon_symbolic (icon, gicon))
-        {
-          gtk_image_set_icon_size (GTK_IMAGE (icon), GTK_ICON_SIZE_NORMAL);
-          gtk_widget_add_css_class (icon, "symbolic-circular");
-        }
-      else
-        {
-          gtk_image_set_icon_size (GTK_IMAGE (icon), GTK_ICON_SIZE_LARGE);
-          gtk_widget_add_css_class (icon, "lowres-icon");
-        }
-
-    }
-  adw_action_row_add_prefix (ADW_ACTION_ROW (row), icon);
-
-  /* "Needs attention" icon */
-  icon = gtk_image_new_from_icon_name ("dialog-warning-symbolic");
-  g_object_bind_property (account,
-                          "attention-needed",
-                          icon,
-                          "visible",
-                          G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
-  adw_action_row_add_suffix (ADW_ACTION_ROW (row), icon);
+  row = cc_online_account_row_new (object);
 
   /* Add to the listbox */
-  gtk_list_box_append (self->accounts_listbox, row);
+  gtk_list_box_append (self->accounts_listbox, GTK_WIDGET (row));
   gtk_widget_show (GTK_WIDGET (self->accounts_frame));
 }
 
@@ -575,7 +506,7 @@ select_account_by_id (CcOnlineAccountsPanel  *self,
       GoaAccount *account;
       GoaObject *row_object;
 
-      row_object = g_object_get_data (G_OBJECT (child), "goa-object");
+      row_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (child));
       account = goa_object_peek_account (row_object);
 
       if (g_strcmp0 (goa_account_get_id (account), account_id) == 0)
@@ -662,10 +593,10 @@ sort_accounts_func (GtkListBoxRow *a,
   GoaAccount *a_account, *b_account;
   GoaObject *a_object, *b_object;
 
-  a_object = g_object_get_data (G_OBJECT (a), "goa-object");
+  a_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (a));
   a_account = goa_object_peek_account (a_object);
 
-  b_object = g_object_get_data (G_OBJECT (b), "goa-object");
+  b_object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (b));
   b_account = goa_object_peek_account (b_object);
 
   return g_strcmp0 (goa_account_get_id (a_account), goa_account_get_id (b_account));
@@ -734,7 +665,7 @@ static void
 on_accounts_listbox_row_activated (CcOnlineAccountsPanel *self,
                                    GtkListBoxRow         *activated_row)
 {
-  GoaObject *object = g_object_get_data (G_OBJECT (activated_row), "goa-object");
+  GoaObject *object = cc_online_account_row_get_object (CC_ONLINE_ACCOUNT_ROW (activated_row));
 
   show_account (self, object);
 }
