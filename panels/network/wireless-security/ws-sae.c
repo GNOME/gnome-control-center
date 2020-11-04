@@ -52,7 +52,7 @@ show_toggled_cb (WirelessSecuritySAE *self)
   gboolean visible;
 
   visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
-  gtk_entry_set_visibility (self->show_password_check, visible);
+  gtk_entry_set_visibility (self->password_entry, visible);
 }
 
 static gboolean
