@@ -290,30 +290,6 @@ get_mac_address_of_connection (NMConnection *connection)
         return NULL;
 }
 
-static const gchar *
-get_mac_address_of_device (NMDevice *device)
-{
-        const gchar *mac = NULL;
-        switch (nm_device_get_device_type (device)) {
-        case NM_DEVICE_TYPE_WIFI:
-        {
-                NMDeviceWifi *device_wifi = NM_DEVICE_WIFI (device);
-                mac = nm_device_wifi_get_hw_address (device_wifi);
-                break;
-        }
-        case NM_DEVICE_TYPE_ETHERNET:
-        {
-                NMDeviceEthernet *device_ethernet = NM_DEVICE_ETHERNET (device);
-                mac = nm_device_ethernet_get_hw_address (device_ethernet);
-                break;
-        }
-        default:
-                break;
-        }
-        /* no MAC address found */
-        return mac;
-}
-
 /* returns TRUE if both MACs are equal */
 static gboolean
 compare_mac_device_with_mac_connection (NMDevice *device,
@@ -322,7 +298,7 @@ compare_mac_device_with_mac_connection (NMDevice *device,
         const gchar *mac_dev = NULL;
         g_autofree gchar *mac_conn = NULL;
 
-        mac_dev = get_mac_address_of_device (device);
+        mac_dev = nm_device_get_hw_address (device);
         if (mac_dev == NULL)
                 return FALSE;
 

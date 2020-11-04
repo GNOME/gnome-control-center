@@ -147,8 +147,7 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
                 add_details_row (details, i++, _("IPv6 Address"), ip6_address);
         }
 
-        add_details_row (details, i++, _("Hardware Address"),
-                         nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (device)));
+        add_details_row (details, i++, _("Hardware Address"), nm_device_get_hw_address (device));
 
         if (ip4_route)
                 add_details_row (details, i++, _("Default Route"), ip4_route);

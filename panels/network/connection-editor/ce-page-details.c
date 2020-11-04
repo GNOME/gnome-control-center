@@ -291,11 +291,7 @@ connect_details_page (CEPageDetails *self)
         gtk_widget_set_visible (GTK_WIDGET (self->speed_heading_label), speed_label != NULL);
         gtk_widget_set_visible (GTK_WIDGET (self->speed_label), speed_label != NULL);
 
-        if (NM_IS_DEVICE_WIFI (self->device))
-                hw_address = nm_device_wifi_get_hw_address (NM_DEVICE_WIFI (self->device));
-        else if (NM_IS_DEVICE_ETHERNET (self->device))
-                hw_address = nm_device_ethernet_get_hw_address (NM_DEVICE_ETHERNET (self->device));
-
+        hw_address = nm_device_get_hw_address (self->device);
         gtk_label_set_label (self->mac_label, hw_address);
         gtk_widget_set_visible (GTK_WIDGET (self->mac_heading_label), hw_address != NULL);
         gtk_widget_set_visible (GTK_WIDGET (self->mac_label), hw_address != NULL);
