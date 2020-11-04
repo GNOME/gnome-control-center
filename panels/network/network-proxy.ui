@@ -64,9 +64,10 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkButton" id="dialog_button">
+                  <object class="GtkButton">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
+                    <signal name="clicked" handler="show_dialog_cb" object="NetProxy" swapped="yes"/>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -107,6 +108,7 @@
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
             <property name="group">none_radio</property>
+            <signal name="toggled" handler="panel_proxy_mode_radio_changed_cb" object="NetProxy" swapped="yes"/>
           </object>
         </child>
         <child>
@@ -117,6 +119,7 @@
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
             <property name="group">none_radio</property>
+            <signal name="toggled" handler="panel_proxy_mode_radio_changed_cb" object="NetProxy" swapped="yes"/>
           </object>
         </child>
         <child>
@@ -126,6 +129,7 @@
             <property name="label" translatable="yes">Disabled</property>
             <property name="receives_default">False</property>
             <property name="draw_indicator">True</property>
+            <signal name="toggled" handler="panel_proxy_mode_radio_changed_cb" object="NetProxy" swapped="yes"/>
           </object>
         </child>
         <child>

@@ -40,7 +40,6 @@ struct _NetProxy
 
         GtkRadioButton   *automatic_radio;
         GtkDialog        *dialog;
-        GtkButton        *dialog_button;
         GtkRadioButton   *manual_radio;
         GtkRadioButton   *none_radio;
         GtkEntry         *proxy_ftp_entry;
@@ -212,7 +211,6 @@ net_proxy_class_init (NetProxyClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, NetProxy, automatic_radio);
         gtk_widget_class_bind_template_child (widget_class, NetProxy, dialog);
-        gtk_widget_class_bind_template_child (widget_class, NetProxy, dialog_button);
         gtk_widget_class_bind_template_child (widget_class, NetProxy, manual_radio);
         gtk_widget_class_bind_template_child (widget_class, NetProxy, none_radio);
         gtk_widget_class_bind_template_child (widget_class, NetProxy, proxy_ftp_entry);
@@ -228,6 +226,9 @@ net_proxy_class_init (NetProxyClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetProxy, proxy_warning_label);
         gtk_widget_class_bind_template_child (widget_class, NetProxy, stack);
         gtk_widget_class_bind_template_child (widget_class, NetProxy, status_label);
+
+        gtk_widget_class_bind_template_callback (widget_class, panel_proxy_mode_radio_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, show_dialog_cb);
 }
 
 static gboolean
@@ -362,17 +363,6 @@ net_proxy_init (NetProxy *self)
         }
         panel_proxy_mode_setup_widgets (self, value);
         panel_update_status_label (self, value);
-
-        g_signal_connect_object (self->none_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self, G_CONNECT_SWAPPED);
-        g_signal_connect_object (self->manual_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self, G_CONNECT_SWAPPED);
-        g_signal_connect_object (self->automatic_radio, "toggled", G_CALLBACK (panel_proxy_mode_radio_changed_cb), self, G_CONNECT_SWAPPED);
-
-        /* show dialog button */
-        g_signal_connect_object (self->dialog_button,
-                                 "clicked",
-                                 G_CALLBACK (show_dialog_cb),
-                                 self,
-                                 G_CONNECT_SWAPPED);
 
         /* prevent the dialog from being destroyed */
         g_signal_connect_object (self->dialog,

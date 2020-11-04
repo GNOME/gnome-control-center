@@ -35,7 +35,6 @@ struct _CcWifiConnectionRow
   GtkImage        *active_icon;
   GtkStack        *button_stack;
   GtkCheckButton  *checkbutton;
-  GtkButton       *configure_button;
   GtkSpinner      *connecting_spinner;
   GtkImage        *encrypted_icon;
   GtkLabel        *name_label;
@@ -67,6 +66,8 @@ typedef enum
 G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, GTK_TYPE_LIST_BOX_ROW)
 
 static GParamSpec *props[PROP_LAST];
+
+static void configure_clicked_cb (CcWifiConnectionRow *self);
 
 static NMAccessPointSecurity
 get_access_point_security (NMAccessPoint *ap)
@@ -460,11 +461,12 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, active_icon);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, button_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, checkbutton);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, configure_button);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, connecting_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, encrypted_icon);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, strength_icon);
+
+  gtk_widget_class_bind_template_callback (widget_class, configure_clicked_cb);
 
   props[PROP_CHECKABLE] = g_param_spec_boolean ("checkable", "checkable",
                                                 "Whether to show a checkbox to select the row",
@@ -513,8 +515,6 @@ void
 cc_wifi_connection_row_init (CcWifiConnectionRow *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  g_signal_connect_object (self->configure_button, "clicked", G_CALLBACK (configure_clicked_cb), self, G_CONNECT_SWAPPED);
 
   self->aps = g_ptr_array_new_with_free_func (g_object_unref);
 

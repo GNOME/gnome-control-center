@@ -82,13 +82,14 @@
             <property name="halign">end</property>
             <property name="hexpand">False</property>
             <child>
-              <object class="GtkButton" id="configure_button">
+              <object class="GtkButton">
                 <property name="name">options_button</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
+                <signal name="clicked" handler="configure_clicked_cb" object="CcWifiConnectionRow" swapped="yes"/>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>

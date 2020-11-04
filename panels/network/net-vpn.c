@@ -38,7 +38,6 @@ struct _NetVpn
         GtkBox                  *box;
         GtkLabel                *device_label;
         GtkSwitch               *device_off_switch;
-        GtkButton               *options_button;
         GtkSeparator            *separator;
 
         NMClient                *client;
@@ -155,7 +154,7 @@ edit_connection (NetVpn *self)
         NetConnectionEditor *editor;
         g_autofree gchar *title = NULL;
 
-        window = gtk_widget_get_toplevel (GTK_WIDGET (self->options_button));
+        window = gtk_widget_get_toplevel (GTK_WIDGET (self));
 
         editor = net_connection_editor_new (GTK_WINDOW (window),
                                             self->connection,
@@ -196,20 +195,16 @@ net_vpn_class_init (NetVpnClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, NetVpn, device_label);
         gtk_widget_class_bind_template_child (widget_class, NetVpn, device_off_switch);
-        gtk_widget_class_bind_template_child (widget_class, NetVpn, options_button);
         gtk_widget_class_bind_template_child (widget_class, NetVpn, separator);
+
+        gtk_widget_class_bind_template_callback (widget_class, device_off_toggled);
+        gtk_widget_class_bind_template_callback (widget_class, edit_connection);
 }
 
 static void
 net_vpn_init (NetVpn *self)
 {
         gtk_widget_init_template (GTK_WIDGET (self));
-
-        g_signal_connect_object (self->device_off_switch, "notify::active",
-                                 G_CALLBACK (device_off_toggled), self, G_CONNECT_SWAPPED);
-
-        g_signal_connect_object (self->options_button, "clicked",
-                                 G_CALLBACK (edit_connection), self, G_CONNECT_SWAPPED);
 }
 
 NetVpn *
