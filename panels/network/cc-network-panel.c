@@ -391,9 +391,6 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         NetDeviceBluetooth *device_bluetooth;
         g_autoptr(GDBusObject) modem_object = NULL;
 
-        if (!nm_device_get_managed (device))
-                return;
-
         /* does already exist */
         if (g_hash_table_lookup (self->nm_device_to_device, device) != NULL)
                 return;
@@ -517,11 +514,24 @@ active_connections_changed (CcNetworkPanel *self)
 }
 
 static void
+device_managed_cb (CcNetworkPanel *self, GParamSpec *pspec, NMDevice *device)
+{
+        if (!nm_device_get_managed (device))
+                return;
+
+        panel_add_device (self, device);
+        panel_refresh_device_titles (self);
+}
+
+static void
 device_added_cb (CcNetworkPanel *self, NMDevice *device)
 {
         g_debug ("New device added");
-        panel_add_device (self, device);
-        panel_refresh_device_titles (self);
+
+        if (nm_device_get_managed (device))
+                device_managed_cb (self, NULL, device);
+        else
+                g_signal_connect_object (device, "notify::managed", G_CALLBACK (device_managed_cb), self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -530,6 +540,10 @@ device_removed_cb (CcNetworkPanel *self, NMDevice *device)
         g_debug ("Device removed");
         panel_remove_device (self, device);
         panel_refresh_device_titles (self);
+
+        g_signal_handlers_disconnect_by_func (device,
+                                              G_CALLBACK (device_managed_cb),
+                                              self);
 }
 
 static void
@@ -537,7 +551,6 @@ manager_running (CcNetworkPanel *self)
 {
         const GPtrArray *devices;
         int i;
-        NMDevice *device_tmp;
 
         /* clear all devices we added */
         if (!nm_client_get_nm_running (self->client)) {
@@ -552,8 +565,8 @@ manager_running (CcNetworkPanel *self)
                 return;
         }
         for (i = 0; i < devices->len; i++) {
-                device_tmp = g_ptr_array_index (devices, i);
-                panel_add_device (self, device_tmp);
+                NMDevice *device = g_ptr_array_index (devices, i);
+                device_added_cb (self, device);
         }
 out:
         panel_refresh_device_titles (self);
