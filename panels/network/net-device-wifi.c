@@ -918,11 +918,36 @@ history_sort (gconstpointer a, gconstpointer b, gpointer data)
 static gint
 ap_sort (gconstpointer a, gconstpointer b, gpointer data)
 {
+        NetDeviceWifi *self = data;
+        CcWifiConnectionRow *a_row = CC_WIFI_CONNECTION_ROW ((gpointer) a);
+        CcWifiConnectionRow *b_row = CC_WIFI_CONNECTION_ROW ((gpointer) b);
+        NMActiveConnection *active_connection;
+        gboolean a_configured, b_configured;
         NMAccessPoint *apa, *apb;
         guint sa, sb;
 
-        apa = cc_wifi_connection_row_best_access_point (CC_WIFI_CONNECTION_ROW ((gpointer) a));
-        apb = cc_wifi_connection_row_best_access_point (CC_WIFI_CONNECTION_ROW ((gpointer) b));
+        /* Show the connected AP first */
+        active_connection = nm_device_get_active_connection (NM_DEVICE (self->device));
+        if (active_connection != NULL) {
+                NMConnection *connection = NM_CONNECTION (nm_active_connection_get_connection (active_connection));
+                if (connection == cc_wifi_connection_row_get_connection (a_row))
+                        return -1;
+                else if (connection == cc_wifi_connection_row_get_connection (b_row))
+                        return 1;
+        }
+
+        /* Show configured networks before non-configured */
+        a_configured = cc_wifi_connection_row_get_connection (a_row) != NULL;
+        b_configured = cc_wifi_connection_row_get_connection (b_row) != NULL;
+        if (a_configured != b_configured) {
+                if (a_configured) return -1;
+                if (b_configured) return 1;
+        }
+
+        /* Show higher strength networks above lower strength ones */
+
+        apa = cc_wifi_connection_row_best_access_point (a_row);
+        apb = cc_wifi_connection_row_best_access_point (b_row);
 
         if (apa)
                 sa = nm_access_point_get_strength (apa);
@@ -1225,7 +1250,7 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
         gtk_container_add (GTK_CONTAINER (self->listbox_box), list);
 
         gtk_list_box_set_header_func (GTK_LIST_BOX (list), cc_list_box_update_header_func, NULL, NULL);
-        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)ap_sort, NULL, NULL);
+        gtk_list_box_set_sort_func (GTK_LIST_BOX (list), (GtkListBoxSortFunc)ap_sort, self, NULL);
 
         g_signal_connect_object (list, "row-activated",
                                  G_CALLBACK (ap_activated), self, G_CONNECT_SWAPPED);
