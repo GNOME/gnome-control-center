@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2020-10-03 23:01+0000\n"
-"PO-Revision-Date: 2020-10-05 18:28+0300\n"
+"POT-Creation-Date: 2020-11-01 13:19+0000\n"
+"PO-Revision-Date: 2020-11-07 21:05+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -39,7 +39,7 @@ msgid "Session Bus"
 msgstr "Шина сеансів"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:2319 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2170 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Пристрої"
@@ -200,6 +200,7 @@ msgstr "Камера"
 #: panels/keyboard/cc-keyboard-option.c:259
 #: panels/keyboard/cc-keyboard-option.c:378
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
+#: panels/keyboard/cc-xkb-modifier-dialog.c:355
 #: panels/keyboard/keyboard-shortcuts.c:368 panels/network/network-proxy.ui:126
 #: panels/user-accounts/cc-user-panel.c:865
 #: panels/user-accounts/cc-user-panel.c:957
@@ -307,7 +308,7 @@ msgid "No results found"
 msgstr "Не знайдено жодного результату"
 
 #: panels/applications/cc-applications-panel.ui:484
-#: panels/keyboard/cc-keyboard-panel.ui:189 shell/cc-panel-list.ui:132
+#: panels/keyboard/cc-keyboard-panel.ui:198 shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Спробуйте пошукати по-інакшому"
 
@@ -348,15 +349,15 @@ msgstr "Керування різними дозволами й налаштув
 msgid "application;flatpak;permission;setting;"
 msgstr "програма;flatpak;дозвіл;налаштування;application;permission;setting;"
 
-#: panels/background/cc-background-chooser.c:346
+#: panels/background/cc-background-chooser.c:345
 msgid "Select a picture"
 msgstr "Виберіть зображення"
 
-#: panels/background/cc-background-chooser.c:349
+#: panels/background/cc-background-chooser.c:348
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:943
+#: panels/display/cc-display-panel.c:999
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:865
@@ -380,7 +381,7 @@ msgstr "Виберіть зображення"
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: panels/background/cc-background-chooser.c:350
+#: panels/background/cc-background-chooser.c:349
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:252
 #: panels/sharing/cc-sharing-panel.c:397
@@ -1564,20 +1565,20 @@ msgstr ""
 "екран;блокування;діагностика;крах;особисте;нещодавнє;тимчасове;tmp;індекс;"
 "назва;мережа;засвідчення;конфіденційність;"
 
-#: panels/display/cc-display-panel.c:954
+#: panels/display/cc-display-panel.c:1010
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Застосувати"
 
-#: panels/display/cc-display-panel.c:975
+#: panels/display/cc-display-panel.c:1031
 msgid "Apply Changes?"
 msgstr "Застосувати зміни?"
 
-#: panels/display/cc-display-panel.c:980
+#: panels/display/cc-display-panel.c:1036
 msgid "Changes Cannot be Applied"
 msgstr "Не вдалося застосувати зміни"
 
-#: panels/display/cc-display-panel.c:981
+#: panels/display/cc-display-panel.c:1037
 msgid "This could be due to hardware limitations."
 msgstr "Причиною можуть бути апаратні обмеження."
 
@@ -2082,44 +2083,6 @@ msgstr "Зменшити розмір тексту"
 msgid "High contrast on or off"
 msgstr "Увімкнути або вимкнути високий контраст"
 
-#: panels/keyboard/cc-alt-chars-key-dialog.ui:8
-#: panels/keyboard/cc-keyboard-panel.ui:72
-msgid "Alternate Characters Key"
-msgstr "Клавіша альтернативних символів"
-
-#: panels/keyboard/cc-alt-chars-key-dialog.ui:28
-msgid ""
-"The alternate characters key can be used to enter additional characters. "
-"These are sometimes printed as a third-option on your keyboard."
-msgstr ""
-"Клавіша альтернативних символів може використовуватися для уведення "
-"додаткових символів. Вони інколи зображені на кнопках клавіатури як третій "
-"варіант."
-
-#: panels/keyboard/cc-alt-chars-key-dialog.ui:45
-msgid "Left Alt"
-msgstr "Ліва Alt"
-
-#: panels/keyboard/cc-alt-chars-key-dialog.ui:61
-msgid "Right Alt"
-msgstr "Права Alt"
-
-#: panels/keyboard/cc-alt-chars-key-dialog.ui:77
-msgid "Left Super"
-msgstr "Ліва Super"
-
-#: panels/keyboard/cc-alt-chars-key-dialog.ui:93
-msgid "Right Super"
-msgstr "Права Super"
-
-#: panels/keyboard/cc-alt-chars-key-dialog.ui:109
-msgid "Menu key"
-msgstr "Кнопка меню"
-
-#: panels/keyboard/cc-alt-chars-key-dialog.ui:125
-msgid "Right Ctrl"
-msgstr "Права Ctrl"
-
 #: panels/keyboard/cc-keyboard-manager.c:486
 #: panels/keyboard/cc-keyboard-manager.c:494
 #: panels/keyboard/cc-keyboard-manager.c:779
@@ -2146,41 +2109,56 @@ msgstr "Скомпонувати клавіші"
 msgid "Modifiers-only switch to next source"
 msgstr "Тільки модифікатори перемикають наступне джерело"
 
-#: panels/keyboard/cc-keyboard-panel.c:95
-msgctxt "keyboard key"
-msgid "Right Ctrl"
-msgstr "Права Ctrl"
+#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.ui:72
+msgid "Alternate Characters Key"
+msgstr "Клавіша альтернативних символів"
 
-#: panels/keyboard/cc-keyboard-panel.c:96
-msgctxt "keyboard key"
-msgid "Menu Key"
-msgstr "Кнопка меню"
+#: panels/keyboard/cc-keyboard-panel.c:91
+msgid ""
+"The alternate characters key can be used to enter additional characters. "
+"These are sometimes printed as a third-option on your keyboard."
+msgstr ""
+"Клавіша альтернативних символів може використовуватися для уведення "
+"додаткових символів. Вони інколи зображені на кнопках клавіатури як третій "
+"варіант."
 
-#: panels/keyboard/cc-keyboard-panel.c:97
-msgctxt "keyboard key"
-msgid "Left Super"
-msgstr "Ліва Super"
-
-#: panels/keyboard/cc-keyboard-panel.c:98
-msgctxt "keyboard key"
-msgid "Right Super"
-msgstr "Права Super"
-
-#: panels/keyboard/cc-keyboard-panel.c:99
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Ліва Alt"
 
-#: panels/keyboard/cc-keyboard-panel.c:100
+#: panels/keyboard/cc-keyboard-panel.c:94
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Права Alt"
 
-#: panels/keyboard/cc-keyboard-panel.c:162
+#: panels/keyboard/cc-keyboard-panel.c:95
+msgctxt "keyboard key"
+msgid "Left Super"
+msgstr "Ліва Super"
+
+#: panels/keyboard/cc-keyboard-panel.c:96
+msgctxt "keyboard key"
+msgid "Right Super"
+msgstr "Права Super"
+
+#: panels/keyboard/cc-keyboard-panel.c:97
+#| msgid "Menu key"
+msgctxt "keyboard key"
+msgid "Menu key"
+msgstr "Клавіша меню"
+
+#: panels/keyboard/cc-keyboard-panel.c:98
+msgctxt "keyboard key"
+msgid "Right Ctrl"
+msgstr "Права Ctrl"
+
+#: panels/keyboard/cc-keyboard-panel.c:163
 msgid "Reset All Shortcuts?"
 msgstr "Скинути всі скорочення?"
 
-#: panels/keyboard/cc-keyboard-panel.c:165
+#: panels/keyboard/cc-keyboard-panel.c:166
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2188,14 +2166,14 @@ msgstr ""
 "Скидання скорочень може вплинути і на ваші власні скорочення. Це неможливо "
 "вернути."
 
-#: panels/keyboard/cc-keyboard-panel.c:169
+#: panels/keyboard/cc-keyboard-panel.c:170
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: panels/keyboard/cc-keyboard-panel.c:170
+#: panels/keyboard/cc-keyboard-panel.c:171
 msgid "Reset All"
 msgstr "Скинути все"
 
@@ -2203,15 +2181,15 @@ msgstr "Скинути все"
 msgid "Hold down and type to enter different characters"
 msgstr "Затисніть кнопку і друкуйте для уведення різноманітних символів"
 
-#: panels/keyboard/cc-keyboard-panel.ui:148
+#: panels/keyboard/cc-keyboard-panel.ui:157
 msgid "Reset All…"
 msgstr "Скинути все…"
 
-#: panels/keyboard/cc-keyboard-panel.ui:149
+#: panels/keyboard/cc-keyboard-panel.ui:158
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Скинути всі скорочення до їхніх типових значень"
 
-#: panels/keyboard/cc-keyboard-panel.ui:178
+#: panels/keyboard/cc-keyboard-panel.ui:187
 msgid "No keyboard shortcut found"
 msgstr "Не знайдено клавіатурного скорочення"
 
@@ -3422,7 +3400,7 @@ msgstr "Бездротовий пристрій не підтримує режи
 
 #: panels/network/net-proxy.c:70
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1722 panels/power/cc-power-panel.c:1733
+#: panels/power/cc-power-panel.c:1265 panels/power/cc-power-panel.c:1276
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4246,7 +4224,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Показувати в_міст повідомлення в заблокованому екрані"
 
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1728 panels/power/cc-power-panel.c:1735
+#: panels/power/cc-power-panel.c:1271 panels/power/cc-power-panel.c:1278
 #: panels/universal-access/cc-ua-panel.c:480
 #: panels/universal-access/cc-ua-panel.c:840
 #: panels/universal-access/cc-ua-panel.c:853
@@ -4284,14 +4262,14 @@ msgstr "Інше"
 msgid "%s Account"
 msgstr "Обліковий запис %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:918
+#: panels/online-accounts/cc-online-accounts-panel.c:916
 msgid "Error removing account"
 msgstr "Помилка вилучення облікового запису"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:984
+#: panels/online-accounts/cc-online-accounts-panel.c:982
 #, c-format
 msgid "%s removed"
 msgstr "%s вилучений"
@@ -4340,11 +4318,11 @@ msgstr "Додати обліковий запис"
 msgid "Remove Account"
 msgstr "Вилучити обліковий запис"
 
-#: panels/power/cc-power-panel.c:331
+#: panels/power/cc-battery-row.c:80
 msgid "Unknown time"
 msgstr "Час невідомий"
 
-#: panels/power/cc-power-panel.c:337
+#: panels/power/cc-battery-row.c:83
 #, c-format
 msgid "%i minute"
 msgid_plural "%i minutes"
@@ -4352,7 +4330,7 @@ msgstr[0] "%i хвилина"
 msgstr[1] "%i хвилини"
 msgstr[2] "%i хвилин"
 
-#: panels/power/cc-power-panel.c:349
+#: panels/power/cc-battery-row.c:92
 #, c-format
 msgid "%i hour"
 msgid_plural "%i hours"
@@ -4362,19 +4340,19 @@ msgstr[2] "%i годин"
 
 #. TRANSLATOR: "%i %s %i %s" are "%i hours %i minutes"
 #. * Swap order with "%2$s %2$i %1$s %1$i if needed
-#: panels/power/cc-power-panel.c:357
+#: panels/power/cc-battery-row.c:98
 #, c-format
 msgid "%i %s %i %s"
 msgstr "%i %s %i %s"
 
-#: panels/power/cc-power-panel.c:358
+#: panels/power/cc-battery-row.c:99
 msgid "hour"
 msgid_plural "hours"
 msgstr[0] "година"
 msgstr[1] "години"
 msgstr[2] "годин"
 
-#: panels/power/cc-power-panel.c:359
+#: panels/power/cc-battery-row.c:100
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "хвилина"
@@ -4382,245 +4360,218 @@ msgstr[1] "хвилини"
 msgstr[2] "хвилин"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:377
+#: panels/power/cc-battery-row.c:117
 #, c-format
 msgid "%s until fully charged"
 msgstr "%s до повного зарядження"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:384
+#: panels/power/cc-battery-row.c:124
 #, c-format
 msgid "Caution: %s remaining"
 msgstr "Обережно: залишилось %s"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
-#: panels/power/cc-power-panel.c:389
+#: panels/power/cc-battery-row.c:129
 #, c-format
 msgid "%s remaining"
 msgstr "Залишилось %s"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:394 panels/power/cc-power-panel.c:424
+#: panels/power/cc-battery-row.c:134 panels/power/cc-battery-row.c:164
 msgid "Fully charged"
 msgstr "Повністю заряджено"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:398 panels/power/cc-power-panel.c:428
+#: panels/power/cc-battery-row.c:138 panels/power/cc-battery-row.c:168
 msgid "Not charging"
 msgstr "Не заряджається"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:402 panels/power/cc-power-panel.c:432
+#: panels/power/cc-battery-row.c:142 panels/power/cc-battery-row.c:172
 msgid "Empty"
 msgstr "Вичерпано"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:415
+#: panels/power/cc-battery-row.c:155
 msgid "Charging"
 msgstr "Заряджання"
 
 #. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:420
+#: panels/power/cc-battery-row.c:160
 msgid "Discharging"
 msgstr "Розряджається"
 
-#: panels/power/cc-power-panel.c:566
-msgctxt "Battery name"
-msgid "Main"
-msgstr "Основна"
-
-#: panels/power/cc-power-panel.c:568
-msgctxt "Battery name"
-msgid "Extra"
-msgstr "Додаткова"
-
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:643
+#: panels/power/cc-battery-row.c:191
 msgid "Wireless mouse"
 msgstr "Бездротова миша"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:646
+#: panels/power/cc-battery-row.c:194
 msgid "Wireless keyboard"
 msgstr "Бездротова клавіатура"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:649
+#: panels/power/cc-battery-row.c:197
 msgid "Uninterruptible power supply"
 msgstr "Постачання безперебійного живлення"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:652
+#: panels/power/cc-battery-row.c:200
 msgid "Personal digital assistant"
 msgstr "Особистий цифровий помічник"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:655
+#: panels/power/cc-battery-row.c:203
 msgid "Cellphone"
 msgstr "Мобільний телефон"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:658
+#: panels/power/cc-battery-row.c:206
 msgid "Media player"
 msgstr "Програвач"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:661 panels/wacom/cc-wacom-panel.c:728
+#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:728
 msgid "Tablet"
 msgstr "Планшет"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:664
+#: panels/power/cc-battery-row.c:212
 msgid "Computer"
 msgstr "Комп'ютер"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:667
+#: panels/power/cc-battery-row.c:215
 msgid "Gaming input device"
 msgstr "Ігровий пристрій введення"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-power-panel.c:670 panels/power/cc-power-panel.c:962
-#: panels/power/cc-power-panel.c:2272
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:505
+#: panels/power/cc-power-panel.c:2123
 msgid "Battery"
 msgstr "Батарея"
 
-#. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:731
-msgctxt "Battery power"
-msgid "Charging"
-msgstr "Заряджання"
+#: panels/power/cc-battery-row.c:266
+msgctxt "Battery name"
+msgid "Main"
+msgstr "Основна"
 
-#. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:738
-msgctxt "Battery power"
-msgid "Caution"
-msgstr "Застереження"
+#: panels/power/cc-battery-row.c:268
+msgctxt "Battery name"
+msgid "Extra"
+msgstr "Додаткова"
 
-#. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:743
-msgctxt "Battery power"
-msgid "Low"
-msgstr "Низько"
-
-#. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:748
-msgctxt "Battery power"
-msgid "Good"
-msgstr "Працездатно"
-
-#. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:753
-msgctxt "Battery power"
-msgid "Fully charged"
-msgstr "Повністю заряджено"
-
-#. TRANSLATORS: primary battery
-#: panels/power/cc-power-panel.c:757
-msgctxt "Battery power"
-msgid "Empty"
-msgstr "Вичерпано"
-
-#: panels/power/cc-power-panel.c:960
+#: panels/power/cc-power-panel.c:503
 msgid "Batteries"
 msgstr "Батареї"
 
-#: panels/power/cc-power-panel.c:1182
+#: panels/power/cc-power-panel.c:725
 msgid "When _idle"
 msgstr "Коли _бездіяльний"
 
-#: panels/power/cc-power-panel.c:1670
+#: panels/power/cc-power-panel.c:1213
 msgid "Suspend"
 msgstr "Призупинити"
 
-#: panels/power/cc-power-panel.c:1671
+#: panels/power/cc-power-panel.c:1214
 msgid "Power Off"
 msgstr "Вимкнути"
 
-#: panels/power/cc-power-panel.c:1672
+#: panels/power/cc-power-panel.c:1215
 msgid "Hibernate"
 msgstr "Приспати"
 
-#: panels/power/cc-power-panel.c:1673
+#: panels/power/cc-power-panel.c:1216
 msgid "Nothing"
 msgstr "Нічого"
 
-#: panels/power/cc-power-panel.c:1724
+#: panels/power/cc-power-panel.c:1267
 msgid "When on battery power"
 msgstr "Коли живлення від батареї"
 
-#: panels/power/cc-power-panel.c:1726
+#: panels/power/cc-power-panel.c:1269
 msgid "When plugged in"
 msgstr "Коли під'єднано"
 
-#: panels/power/cc-power-panel.c:1830
+#: panels/power/cc-power-panel.c:1373
 msgid "Power Saving"
 msgstr "Заощадження енергії"
 
-#: panels/power/cc-power-panel.c:1866
+#: panels/power/cc-power-panel.c:1409
 msgid "_Screen Brightness"
 msgstr "_Яскравість екрана"
 
-#: panels/power/cc-power-panel.c:1889
+#: panels/power/cc-power-panel.c:1432
 msgid "Automatic Brightness"
 msgstr "Автоматична яскравість"
 
-#: panels/power/cc-power-panel.c:1902
+#: panels/power/cc-power-panel.c:1445
 msgid "_Keyboard Brightness"
 msgstr "_Яскравість клавіатури"
 
-#: panels/power/cc-power-panel.c:1915
+#: panels/power/cc-power-panel.c:1458
 msgid "_Dim Screen When Inactive"
 msgstr "Пр_итлумлювати яскравість екрана, якщо немає дій"
 
-#: panels/power/cc-power-panel.c:1933
+#: panels/power/cc-power-panel.c:1476
 msgid "_Blank Screen"
 msgstr "По_гасити екран"
 
-#: panels/power/cc-power-panel.c:1979
+#: panels/power/cc-power-panel.c:1522
 msgid "_Automatic Suspend"
 msgstr "_Автоматично призупиняти"
 
-#: panels/power/cc-power-panel.c:1980
+#: panels/power/cc-power-panel.c:1523
 msgid "Automatic suspend"
 msgstr "Автоматично призупиняти роботу"
 
-#: panels/power/cc-power-panel.c:2032
+#: panels/power/cc-power-panel.c:1575
 msgid "_Wi-Fi"
 msgstr "Wi_-Fi"
 
-#: panels/power/cc-power-panel.c:2033
+#: panels/power/cc-power-panel.c:1576
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Wi-Fi може бути вимкнений для заощадження енергії."
 
-#: panels/power/cc-power-panel.c:2049
+#: panels/power/cc-power-panel.c:1592
 msgid "_Mobile Broadband"
 msgstr "_Мобільна широкосмугова радіомережа"
 
-#: panels/power/cc-power-panel.c:2050
+#: panels/power/cc-power-panel.c:1593
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Мобільна мережа (LTE, 4G, 3G тощо) може бути вимкнена для заощадження "
 "енергії."
 
-#: panels/power/cc-power-panel.c:2100
+#: panels/power/cc-power-panel.c:1643
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:2101
+#: panels/power/cc-power-panel.c:1644
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth може бути вимкнений для заощадження енергії."
 
-#: panels/power/cc-power-panel.c:2138
+#: panels/power/cc-power-panel.c:1880
+#| msgid "Power"
+msgid "Power Mode"
+msgstr "Режим живлення"
+
+#: panels/power/cc-power-panel.c:1889
+msgid "Affects system performance and power usage."
+msgstr "Впливає на швидкодію системи та споживання енергії."
+
+#: panels/power/cc-power-panel.c:1989
 msgid "Show Battery _Percentage"
 msgstr "Показувати _відсоток заряду акумулятора"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:2164
+#: panels/power/cc-power-panel.c:2015
 msgid "Suspend & Power Button"
 msgstr "Кнопка призупинення і вимикання"
 
-#: panels/power/cc-power-panel.c:2214
+#: panels/power/cc-power-panel.c:2065
 msgid "Po_wer Button Behavior"
 msgstr "Поведінка _кнопки живлення"
 
@@ -4701,6 +4652,46 @@ msgstr "Живлення від _батареї"
 msgid "Delay"
 msgstr "Затримка"
 
+#: panels/power/cc-power-profile-row.c:67
+msgid "Lap detected: performance mode unavailable"
+msgstr "Виявлено перекриття: режим високої швидкодії недоступний"
+
+#: panels/power/cc-power-profile-row.c:69
+msgid "High hardware temperature: performance mode unavailable"
+msgstr "Висока температура обладнання: режим найвищої швидкодії недоступний"
+
+#: panels/power/cc-power-profile-row.c:70
+msgid "Performance mode unavailable"
+msgstr "Режим високої швидкодії недоступний"
+
+#: panels/power/cc-power-profile-row.c:92
+#: panels/power/cc-power-profile-row.c:240
+msgid "High performance and power usage."
+msgstr "Висока швидкодія та споживання енергії."
+
+#: panels/power/cc-power-profile-row.c:239
+#| msgid "Permanent"
+msgid "Performance"
+msgstr "Швидкодія"
+
+#: panels/power/cc-power-profile-row.c:245
+#| msgid "Balance"
+msgid "Balanced Power"
+msgstr "Збалансоване споживання"
+
+#: panels/power/cc-power-profile-row.c:246
+msgid "Standard performance and power usage."
+msgstr "Стандартна швидкодія та споживання енергії."
+
+#: panels/power/cc-power-profile-row.c:251
+#| msgid "Power Saving"
+msgid "Power Saver"
+msgstr "Заощадження енергії"
+
+#: panels/power/cc-power-profile-row.c:252
+msgid "Reduced performance and power usage."
+msgstr "Знижена швидкодія та споживання енергії."
+
 #: panels/power/gnome-power-panel.desktop.in.in:3
 msgid "Power"
 msgstr "Живлення"
@@ -4739,18 +4730,18 @@ msgid "Authentication Required"
 msgstr "Потрібно засвідчитись"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:691
+#: panels/printers/cc-printers-panel.c:684
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Принтер «%s» було успішно вилучено"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:945
+#: panels/printers/cc-printers-panel.c:932
 msgid "Failed to add new printer."
 msgstr "Не вдалось додати принтер."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1242
+#: panels/printers/cc-printers-panel.c:1215
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не вдалось завантажити інтерфейс: %s"
@@ -4908,55 +4899,55 @@ msgid "Reverse portrait"
 msgstr "Зворотна книжкова"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-jobs-dialog.c:222
+#: panels/printers/pp-jobs-dialog.c:209
 msgctxt "print job"
 msgid "Pending"
 msgstr "Очікування"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-jobs-dialog.c:228
+#: panels/printers/pp-jobs-dialog.c:215
 msgctxt "print job"
 msgid "Paused"
 msgstr "Призупинено"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-jobs-dialog.c:233
+#: panels/printers/pp-jobs-dialog.c:220
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Слід пройти розпізнавання"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-jobs-dialog.c:238
+#: panels/printers/pp-jobs-dialog.c:225
 msgctxt "print job"
 msgid "Processing"
 msgstr "Оброблення"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-jobs-dialog.c:242
+#: panels/printers/pp-jobs-dialog.c:229
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Зупинено"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-jobs-dialog.c:246
+#: panels/printers/pp-jobs-dialog.c:233
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Скасовано"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-jobs-dialog.c:250
+#: panels/printers/pp-jobs-dialog.c:237
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Припинено"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-jobs-dialog.c:254
+#: panels/printers/pp-jobs-dialog.c:241
 msgctxt "print job"
 msgid "Completed"
 msgstr "Завершено"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:363
+#: panels/printers/pp-jobs-dialog.c:342
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -4965,14 +4956,14 @@ msgstr[1] "Для %u завдань слід пройти розпізнаван
 msgstr[2] "Для %u завдань слід пройти розпізнавання"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:520
+#: panels/printers/pp-jobs-dialog.c:494
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — запущені завдання"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:524
+#: panels/printers/pp-jobs-dialog.c:498
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Для друку з %s введіть реєстраційні дані."
@@ -5197,12 +5188,12 @@ msgid "Manufacturer"
 msgstr "Виробник"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:577 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:523 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Немає запущених завдань"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:582
+#: panels/printers/pp-printer-entry.c:528
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5211,110 +5202,110 @@ msgstr[1] "%u завдання"
 msgstr[2] "%u завдань"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:700
+#: panels/printers/pp-printer-entry.c:648
 msgid "Clean print heads"
 msgstr "Очищення головок принтера"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:751
+#: panels/printers/pp-printer-entry.c:713
 msgid "Low on toner"
 msgstr "Закінчується тонер"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:753
+#: panels/printers/pp-printer-entry.c:715
 msgid "Out of toner"
 msgstr "Вичерпався тонер"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:718
 msgid "Low on developer"
 msgstr "Закінчується проявник"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:759
+#: panels/printers/pp-printer-entry.c:721
 msgid "Out of developer"
 msgstr "Вичерпався проявник"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:761
+#: panels/printers/pp-printer-entry.c:723
 msgid "Low on a marker supply"
 msgstr "Закінчується фарба"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:763
+#: panels/printers/pp-printer-entry.c:725
 msgid "Out of a marker supply"
 msgstr "Вичерпано фарбу"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:765
+#: panels/printers/pp-printer-entry.c:727
 msgid "Open cover"
 msgstr "Відкрита кришка"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:767
+#: panels/printers/pp-printer-entry.c:729
 msgid "Open door"
 msgstr "Відкриті двері"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:769
+#: panels/printers/pp-printer-entry.c:731
 msgid "Low on paper"
 msgstr "Закінчується папір"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:733
 msgid "Out of paper"
 msgstr "Вичерпано папір"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:773
+#: panels/printers/pp-printer-entry.c:735
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Вимкнено"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:775
-#: panels/printers/pp-printer-entry.c:918
+#: panels/printers/pp-printer-entry.c:737
+#: panels/printers/pp-printer-entry.c:880
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Зупинено"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:777
+#: panels/printers/pp-printer-entry.c:739
 msgid "Waste receptacle almost full"
 msgstr "Майже повністю витрачено запас"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:779
+#: panels/printers/pp-printer-entry.c:741
 msgid "Waste receptacle full"
 msgstr "Повністю витрачено запас"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:781
+#: panels/printers/pp-printer-entry.c:743
 msgid "The optical photo conductor is near end of life"
 msgstr "Оптичний фотопровідник близький до виходу з ладу"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:783
+#: panels/printers/pp-printer-entry.c:745
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Оптичний фотопровідник вийшов з ладу"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:904
+#: panels/printers/pp-printer-entry.c:866
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Готовий"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:909
+#: panels/printers/pp-printer-entry.c:871
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "Завдання не прийнято"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:914
+#: panels/printers/pp-printer-entry.c:876
 msgctxt "printer state"
 msgid "Processing"
 msgstr "Оброблення"
@@ -7498,11 +7489,11 @@ msgstr "Увійшов"
 msgid "Enabled"
 msgstr "Увімкнено"
 
-#: panels/user-accounts/cc-user-panel.c:1265
+#: panels/user-accounts/cc-user-panel.c:1272
 msgid "Failed to contact the accounts service"
 msgstr "Не вдалось зв'язатись зі службою облікових записів"
 
-#: panels/user-accounts/cc-user-panel.c:1267
+#: panels/user-accounts/cc-user-panel.c:1274
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
@@ -7510,7 +7501,7 @@ msgstr "Будь ласка, переконайтесь, що AccountService в�
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1299
+#: panels/user-accounts/cc-user-panel.c:1306
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7518,12 +7509,12 @@ msgstr ""
 "Щоб унести зміни,\n"
 "натисніть спочатку на піктограму *"
 
-#: panels/user-accounts/cc-user-panel.c:1373
+#: panels/user-accounts/cc-user-panel.c:1380
 msgid "Delete the selected user account"
 msgstr "Вилучити вибраний обліковий запис користувача"
 
-#: panels/user-accounts/cc-user-panel.c:1385
-#: panels/user-accounts/cc-user-panel.c:1506
+#: panels/user-accounts/cc-user-panel.c:1392
+#: panels/user-accounts/cc-user-panel.c:1513
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8201,3 +8192,46 @@ msgstr[2] "%u входів"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Left Alt"
+#~ msgstr "Ліва Alt"
+
+#~ msgid "Right Alt"
+#~ msgstr "Права Alt"
+
+#~ msgid "Left Super"
+#~ msgstr "Ліва Super"
+
+#~ msgid "Right Super"
+#~ msgstr "Права Super"
+
+#~ msgid "Right Ctrl"
+#~ msgstr "Права Ctrl"
+
+#~ msgctxt "keyboard key"
+#~ msgid "Menu Key"
+#~ msgstr "Кнопка меню"
+
+#~ msgctxt "Battery power"
+#~ msgid "Charging"
+#~ msgstr "Заряджання"
+
+#~ msgctxt "Battery power"
+#~ msgid "Caution"
+#~ msgstr "Застереження"
+
+#~ msgctxt "Battery power"
+#~ msgid "Low"
+#~ msgstr "Низько"
+
+#~ msgctxt "Battery power"
+#~ msgid "Good"
+#~ msgstr "Працездатно"
+
+#~ msgctxt "Battery power"
+#~ msgid "Fully charged"
+#~ msgstr "Повністю заряджено"
+
+#~ msgctxt "Battery power"
+#~ msgid "Empty"
+#~ msgstr "Вичерпано"
