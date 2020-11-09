@@ -721,6 +721,7 @@ add_printer_entry (CcPrintersPanel *self,
   content = (GtkWidget*) gtk_builder_get_object (self->builder, "content");
 
   printer_entry = pp_printer_entry_new (printer, self->is_authorized);
+  gtk_widget_show (GTK_WIDGET (printer_entry));
 
   widgets = pp_printer_entry_get_size_group_widgets (printer_entry);
   for (l = widgets; l != NULL; l = l->next)
@@ -744,7 +745,6 @@ add_printer_entry (CcPrintersPanel *self,
                            G_CONNECT_SWAPPED);
 
   gtk_list_box_insert (GTK_LIST_BOX (content), GTK_WIDGET (printer_entry), -1);
-  gtk_widget_show_all (content);
 
   g_hash_table_insert (self->printer_entries, g_strdup (printer.name), printer_entry);
 }
@@ -1292,5 +1292,5 @@ Please check your installation");
 
   pp_cups_connection_test_async (self->cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
   gtk_container_add (GTK_CONTAINER (self), top_widget);
-  gtk_widget_show_all (GTK_WIDGET (self));
+  gtk_widget_show (GTK_WIDGET (self));
 }

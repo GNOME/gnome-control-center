@@ -261,18 +261,13 @@ populate_dialog (PpPPDSelectionDialog *self)
   g_signal_connect_object (gtk_tree_view_get_selection (manufacturers_treeview),
                            "changed", G_CALLBACK (manufacturer_selection_changed_cb), self, G_CONNECT_SWAPPED);
 
-  gtk_widget_show_all (self->dialog);
+  gtk_widget_show (self->dialog);
 
   if (!self->list)
     {
       widget = (GtkWidget*)
         gtk_builder_get_object (self->builder, "ppd-spinner");
-      gtk_widget_show (widget);
       gtk_spinner_start (GTK_SPINNER (widget));
-
-      widget = (GtkWidget*)
-        gtk_builder_get_object (self->builder, "progress-label");
-      gtk_widget_show (widget);
     }
   else
     {
@@ -370,7 +365,6 @@ pp_ppd_selection_dialog_new (GtkWindow            *parent,
   populate_dialog (self);
 
   gtk_window_present (GTK_WINDOW (self->dialog));
-  gtk_widget_show_all (GTK_WIDGET (self->dialog));
 
   return PP_PPD_SELECTION_DIALOG (self);
 }

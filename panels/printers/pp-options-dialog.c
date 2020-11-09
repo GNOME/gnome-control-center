@@ -355,7 +355,7 @@ ipp_option_add (IPPAttribute *attr_supported,
                                                    printer_name);
   if (widget)
     {
-      gtk_widget_show_all (widget);
+      gtk_widget_show (widget);
       gtk_widget_set_sensitive (widget, sensitive);
       position = grid_get_height (grid);
 
@@ -390,7 +390,7 @@ ppd_option_add (ppd_option_t  option,
   widget = (GtkWidget *) pp_ppd_option_widget_new (&option, printer_name);
   if (widget)
     {
-      gtk_widget_show_all (widget);
+      gtk_widget_show (widget);
       gtk_widget_set_sensitive (widget, sensitive);
       position = grid_get_height (grid);
 

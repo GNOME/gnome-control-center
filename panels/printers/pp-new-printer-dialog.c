@@ -195,7 +195,7 @@ pp_new_printer_dialog_new (GtkWindow *parent,
 
   gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (parent));
 
-  gtk_widget_show_all (self->dialog);
+  gtk_widget_show (self->dialog);
 
   return PP_NEW_PRINTER_DIALOG (self);
 }

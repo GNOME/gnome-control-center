@@ -243,16 +243,19 @@ create_listbox_row (gpointer item,
     }
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
+  gtk_widget_show (box);
   g_object_set (box, "margin", 6, NULL);
   gtk_container_set_border_width (GTK_CONTAINER (box), 2);
 
   widget = gtk_label_new (pp_job_get_title (job));
+  gtk_widget_show (widget);
   gtk_label_set_max_width_chars (GTK_LABEL (widget), 40);
   gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
   gtk_widget_set_halign (widget, GTK_ALIGN_START);
   gtk_box_pack_start (GTK_BOX (box), widget, TRUE, TRUE, 10);
 
   widget = gtk_label_new (NULL);
+  gtk_widget_show (widget);
   gtk_label_set_markup (GTK_LABEL (widget), state_string);
   gtk_widget_set_halign (widget, GTK_ALIGN_END);
   gtk_widget_set_margin_end (widget, 64);
@@ -261,16 +264,16 @@ create_listbox_row (gpointer item,
 
   widget = gtk_button_new_from_icon_name (pp_job_get_state (job) == IPP_JOB_HELD ? "media-playback-start-symbolic" : "media-playback-pause-symbolic",
                                           GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_widget_show (widget);
   g_signal_connect (widget, "clicked", G_CALLBACK (job_pause_cb), item);
   gtk_widget_set_sensitive (widget, pp_job_get_auth_info_required (job) == NULL);
   gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
 
   widget = gtk_button_new_from_icon_name ("edit-delete-symbolic",
                                           GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_widget_show (widget);
   g_signal_connect (widget, "clicked", G_CALLBACK (job_stop_cb), item);
   gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 4);
-
-  gtk_widget_show_all (box);
 
   return box;
 }

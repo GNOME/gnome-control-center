@@ -388,12 +388,15 @@ construct_widget (PpPPDOptionWidget *self)
         {
           case PPD_UI_BOOLEAN:
               self->switch_button = gtk_switch_new ();
+              gtk_widget_show (self->switch_button);
+
               g_signal_connect_object (self->switch_button, "notify::active", G_CALLBACK (switch_changed_cb), self, G_CONNECT_SWAPPED);
               gtk_box_pack_start (GTK_BOX (self), self->switch_button, FALSE, FALSE, 0);
               break;
 
           case PPD_UI_PICKONE:
               self->combo = combo_box_new ();
+              gtk_widget_show (self->combo);
 
               for (i = 0; i < self->option->num_choices; i++)
                 {
@@ -408,6 +411,7 @@ construct_widget (PpPPDOptionWidget *self)
 
           case PPD_UI_PICKMANY:
               self->combo = combo_box_new ();
+              gtk_widget_show (self->combo);
 
               for (i = 0; i < self->option->num_choices; i++)
                 {
@@ -427,6 +431,7 @@ construct_widget (PpPPDOptionWidget *self)
       self->image = gtk_image_new_from_icon_name ("dialog-warning-symbolic", GTK_ICON_SIZE_MENU);
       if (!self->image)
         self->image = gtk_image_new_from_icon_name ("dialog-warning", GTK_ICON_SIZE_MENU);
+      gtk_widget_show (self->image);
       gtk_box_pack_start (GTK_BOX (self), self->image, FALSE, FALSE, 0);
       gtk_widget_set_no_show_all (GTK_WIDGET (self->image), TRUE);
 
