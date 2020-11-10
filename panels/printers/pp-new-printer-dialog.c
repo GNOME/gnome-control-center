@@ -1895,8 +1895,8 @@ ppd_selection_cb (GtkDialog *_dialog,
   PpNewPrinterDialog        *self = user_data;
   g_autoptr(PpNewPrinter)    new_printer = NULL;
   GList                     *original_names_list = NULL;
-  gchar                     *ppd_name;
-  gchar                     *ppd_display_name;
+  g_autofree gchar          *ppd_name = NULL;
+  g_autofree gchar          *ppd_display_name = NULL;
   guint                      window_id = 0;
   gint                       acquisition_method;
 
