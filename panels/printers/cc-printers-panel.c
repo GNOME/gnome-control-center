@@ -36,7 +36,6 @@
 #include <math.h>
 
 #include "pp-new-printer-dialog.h"
-#include "pp-ppd-selection-dialog.h"
 #include "pp-utils.h"
 #include "pp-cups.h"
 #include "pp-printer-entry.h"
@@ -82,7 +81,6 @@ struct _CcPrintersPanel
   CcPermissionInfobar *permission_infobar;
 
   PpNewPrinterDialog   *pp_new_printer_dialog;
-  PpPPDSelectionDialog *pp_ppd_selection_dialog;
 
   GDBusProxy      *cups_proxy;
   GDBusConnection *cups_bus_connection;
@@ -1092,10 +1090,6 @@ get_all_ppds_async_cb (PPDList  *ppds,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
 
   self->all_ppds_list = ppds;
-
-  if (self->pp_ppd_selection_dialog)
-    pp_ppd_selection_dialog_set_ppd_list (self->pp_ppd_selection_dialog,
-                                          self->all_ppds_list);
 
   if (self->pp_new_printer_dialog)
     pp_new_printer_dialog_set_ppd_list (self->pp_new_printer_dialog,
