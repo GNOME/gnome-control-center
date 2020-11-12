@@ -25,7 +25,6 @@
  */
 
 #include <glib/gi18n.h>
-#define HANDY_USE_UNSTABLE_API
 #include <handy.h>
 
 #include "cc-keyboard-shortcut-dialog.h"
@@ -136,42 +135,21 @@ add_section (CcKeyboardShortcutDialog *self,
              const gchar     *section_id,
              const gchar     *section_title)
 {
-  GtkWidget *icon, *modified_label, *label, *box;
-  GtkListBoxRow *row;
+  GtkWidget *icon, *modified_label, *row;
 
-  icon = g_object_new (GTK_TYPE_IMAGE,
-                       "visible", 1,
-                       "icon_name", "go-next-symbolic",
-                       NULL);
+  icon = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
   gtk_style_context_add_class (gtk_widget_get_style_context (icon), "dim-label");
 
-  modified_label = g_object_new (GTK_TYPE_LABEL,
-                                 "visible", 1,
-                                 NULL);
+  modified_label = gtk_label_new (NULL);
   gtk_style_context_add_class (gtk_widget_get_style_context (modified_label), "dim-label");
 
-  label = g_object_new (GTK_TYPE_LABEL,
-                        "visible", 1,
-                        "label", _(section_title),
-                        NULL);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label), "row-label");
+  row = hdy_action_row_new ();
+  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+  hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (row), _(section_title));
+  gtk_container_add (GTK_CONTAINER (row), modified_label);
+  gtk_container_add (GTK_CONTAINER (row), icon);
 
-  box = g_object_new (GTK_TYPE_BOX,
-                      "visible", 1,
-                      "spacing", 8,
-                      "margin_left", 12,
-                      "margin_right", 12,
-                      "margin_top", 8,
-                      "margin_bottom", 8,
-                      NULL);
-  gtk_container_add (GTK_CONTAINER (box), label);
-  gtk_box_pack_end (GTK_BOX (box), icon, FALSE, FALSE, 0);
-  gtk_box_pack_end (GTK_BOX (box), modified_label, FALSE, FALSE, 0);
-
-  row = g_object_new (GTK_TYPE_LIST_BOX_ROW,
-                      "visible", 1,
-                      NULL);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  gtk_widget_show_all (GTK_WIDGET (row));
 
   g_object_set_data_full (G_OBJECT (row),
                           "data",
@@ -181,7 +159,7 @@ add_section (CcKeyboardShortcutDialog *self,
   g_hash_table_insert (self->sections, g_strdup (section_id), row);
   gtk_container_add (GTK_CONTAINER (self->section_listbox), GTK_WIDGET (row));
 
-  return row;
+  return GTK_LIST_BOX_ROW (row);
 }
 
 static void

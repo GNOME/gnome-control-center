@@ -21,6 +21,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <handy.h>
 #include "cc-keyboard-item.h"
 #include "cc-keyboard-manager.h"
 #include "cc-keyboard-shortcut-editor.h"
@@ -29,7 +30,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_KEYBOARD_SHORTCUT_ROW (cc_keyboard_shortcut_row_get_type())
 
-G_DECLARE_FINAL_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, CC, KEYBOARD_SHORTCUT_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, CC, KEYBOARD_SHORTCUT_ROW, HdyActionRow)
 
 
 CcKeyboardShortcutRow *cc_keyboard_shortcut_row_new (CcKeyboardItem*, CcKeyboardManager*, CcKeyboardShortcutEditor*, GtkSizeGroup*);

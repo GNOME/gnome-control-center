@@ -24,10 +24,9 @@
 
 struct _CcKeyboardShortcutRow
 {
-  GtkListBoxRow             parent_instance;
+  HdyActionRow              parent_instance;
 
   GtkLabel                 *accelerator_label;
-  GtkLabel                 *description_label;
   GtkButton                *reset_button;
 
   CcKeyboardItem           *item;
@@ -35,7 +34,7 @@ struct _CcKeyboardShortcutRow
   CcKeyboardShortcutEditor *shortcut_editor;
 };
 
-G_DEFINE_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, HDY_TYPE_ACTION_ROW)
 
 static void
 reset_shortcut_cb (CcKeyboardShortcutRow *self)
@@ -50,7 +49,6 @@ cc_keyboard_shortcut_row_class_init (CcKeyboardShortcutRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-shortcut-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, description_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, accelerator_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, reset_button);
 
@@ -115,7 +113,7 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem *item,
   self->manager = manager;
   self->shortcut_editor = shortcut_editor;
 
-  gtk_label_set_text (self->description_label, cc_keyboard_item_get_description (item));
+  hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (self), cc_keyboard_item_get_description (item));
 
   g_object_bind_property_full (item,
                                "key-combos",
