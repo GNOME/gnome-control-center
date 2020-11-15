@@ -66,29 +66,6 @@
                     <property name="border_width">12</property>
                     <property name="spacing">12</property>
                     <child>
-                      <object class="GtkListBox" id="custom_shortcut_add_box">
-                        <property name="selection-mode">none</property>
-                        <style>
-                          <class name="frame" />
-                        </style>
-                        <child>
-                          <object class="HdyActionRow">
-                            <property name="visible">True</property>
-                            <property name="title" translatable="yes">Add Custom Shortcuts</property>
-                            <property name="subtitle" translatable="yes">Set up custom shortcuts for launching apps, running scripts, and more.</property>
-                            <child>
-                              <object class="GtkButton">
-                                <property name="visible">True</property>
-                                <property name="valign">center</property>
-                                <property name="label" translatable="yes">Add Shortcut</property>
-                                <signal name="clicked" handler="add_custom_shortcut_clicked_cb" object="CcKeyboardShortcutDialog" swapped="yes" />
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkListBox" id="shortcut_listbox">
                         <property name="visible">True</property>
                         <property name="selection-mode">none</property>
@@ -96,6 +73,19 @@
                           <class name="frame" />
                         </style>
                         <signal name="row-activated" handler="shortcut_row_activated" object="CcKeyboardShortcutDialog" swapped="no" />
+                        <child>
+                          <object class="GtkListBoxRow" id="custom_shortcut_add_row">
+                             <property name="visible">True</property>
+                             <child>
+                              <object class="GtkImage">
+                                <property name="visible">True</property>
+                                <property name="hexpand">True</property>
+                                <property name="icon_name">list-add-symbolic</property>
+                                <property name="height_request">48</property>
+                              </object>
+                             </child>
+                           </object>
+                        </child>
                       </object>
                     </child>
                   </object>
