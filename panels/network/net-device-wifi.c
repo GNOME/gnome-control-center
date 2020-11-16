@@ -178,7 +178,7 @@ get_secrets_cb (GObject            *source_object,
                 gpointer            data)
 {
         NetDeviceWifi *self = data;
-        GVariant *secrets;
+        g_autoptr(GVariant) secrets = NULL;
         g_autoptr(GError) error = NULL;
 
         secrets = nm_remote_connection_get_secrets_finish (NM_REMOTE_CONNECTION (source_object), res, &error);
