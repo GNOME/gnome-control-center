@@ -48,6 +48,8 @@ struct _CcWifiHotspotDialog
   GtkLabel        *error_label;
   GtkButton       *ok_button;
 
+  GCancellable    *cancellable;
+
   NMDeviceWifi    *device;
   NMConnection    *connection;
   gchar           *host_name;
@@ -135,15 +137,53 @@ wifi_hotspot_dialog_update_main_label (CcWifiHotspotDialog *self)
 }
 
 static void
+get_secrets_cb (GObject            *source_object,
+                GAsyncResult       *res,
+                gpointer            data)
+{
+  CcWifiHotspotDialog *self;
+  g_autoptr(GVariant) secrets = NULL;
+  NMSettingWirelessSecurity *security_setting;
+  const gchar *key;
+  g_autoptr(GError) error = NULL;
+
+  secrets = nm_remote_connection_get_secrets_finish (NM_REMOTE_CONNECTION (source_object), res, &error);
+  if (!secrets)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("Could not get secrets: %s", error->message);
+      return;
+    }
+
+  self = CC_WIFI_HOTSPOT_DIALOG (data);
+
+  nm_connection_update_secrets (self->connection,
+                                NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
+                                secrets, &error);
+  if (error)
+    {
+      g_warning ("Error updating secrets: %s", error->message);
+      return;
+    }
+
+  security_setting = nm_connection_get_setting_wireless_security (self->connection);
+  if (self->wpa_supported)
+    key = nm_setting_wireless_security_get_psk (security_setting);
+  else
+    key = nm_setting_wireless_security_get_wep_key (security_setting, 0);
+
+  if (key)
+    gtk_entry_set_text (self->password_entry, key);
+
+  nm_connection_clear_secrets (self->connection);
+}
+
+static void
 wifi_hotspot_dialog_update_entries (CcWifiHotspotDialog *self)
 {
-  NMSettingWirelessSecurity *security_setting;
   NMSettingWireless *setting;
   GBytes *ssid;
-  g_autoptr(GVariant) secrets = NULL;
-  g_autoptr(GError) error = NULL;
   g_autofree gchar *ssid_text = NULL;
-  const gchar *key;
 
   g_assert (CC_IS_WIFI_HOTSPOT_DIALOG (self));
 
@@ -154,7 +194,6 @@ wifi_hotspot_dialog_update_entries (CcWifiHotspotDialog *self)
     return;
 
   setting = nm_connection_get_setting_wireless (self->connection);
-  security_setting = nm_connection_get_setting_wireless_security (self->connection);
 
   ssid = nm_setting_wireless_get_ssid (setting);
   ssid_text = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
@@ -169,33 +208,11 @@ wifi_hotspot_dialog_update_entries (CcWifiHotspotDialog *self)
     return;
 
   /* Secrets may not be already loaded, we have to manually load it. */
-  secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (self->connection),
-                                              NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                              NULL, &error);
-  if (error)
-    {
-      g_warning ("Error loading secrets: %s", error->message);
-      return;
-    }
-
-  nm_connection_update_secrets (self->connection,
-                                NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                secrets, &error);
-  if (error)
-    {
-      g_warning ("Error updating secrets: %s", error->message);
-      return;
-    }
-
-  if (self->wpa_supported)
-    key = nm_setting_wireless_security_get_psk (security_setting);
-  else
-    key = nm_setting_wireless_security_get_wep_key (security_setting, 0);
-
-  if (key)
-    gtk_entry_set_text (self->password_entry, key);
-
-  nm_connection_clear_secrets (self->connection);
+  nm_remote_connection_get_secrets_async (NM_REMOTE_CONNECTION (self->connection),
+                                          NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
+                                          self->cancellable,
+                                          get_secrets_cb,
+                                          self);
 }
 
 static gboolean
@@ -365,6 +382,8 @@ cc_wifi_hotspot_dialog_finalize (GObject *object)
 {
   CcWifiHotspotDialog *self = (CcWifiHotspotDialog *)object;
 
+  g_cancellable_cancel(self->cancellable);
+  g_clear_object (&self->cancellable);
   g_clear_pointer (&self->host_name, g_free);
   g_clear_object (&self->device);
   g_clear_object (&self->connection);
@@ -452,6 +471,8 @@ static void
 cc_wifi_hotspot_dialog_init (CcWifiHotspotDialog *self)
 {
   g_autofree gchar *title = NULL;
+
+  self->cancellable = g_cancellable_new ();
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
