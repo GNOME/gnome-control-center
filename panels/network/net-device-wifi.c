@@ -47,9 +47,6 @@
 static void nm_device_wifi_refresh_ui (NetDeviceWifi *self);
 static void show_wifi_list (NetDeviceWifi *self);
 static void show_hotspot_ui (NetDeviceWifi *self);
-static void ap_activated (NetDeviceWifi *self, GtkListBoxRow *row);
-static gint ap_sort (gconstpointer a, gconstpointer b, gpointer data);
-static void show_details_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnectionList *list );
 
 
 struct _NetDeviceWifi
