@@ -27,9 +27,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-08-31 15:11+0000\n"
-"PO-Revision-Date: 2020-08-31 22:28+0200\n"
-"Last-Translator: Christian Kirbach <christian.kirbach@gmail.com>\n"
+"POT-Creation-Date: 2020-10-23 19:17+0000\n"
+"PO-Revision-Date: 2020-11-17 17:09+0100\n"
+"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -219,7 +219,7 @@ msgstr "Kamera"
 #: panels/keyboard/keyboard-shortcuts.c:368 panels/network/network-proxy.ui:126
 #: panels/user-accounts/cc-user-panel.c:865
 #: panels/user-accounts/cc-user-panel.c:957
-#: subprojects/gvc/gvc-mixer-control.c:1876
+#: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Deaktiviert"
 
@@ -371,7 +371,7 @@ msgstr "Ein Bild wählen"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:942
+#: panels/display/cc-display-panel.c:943
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:865
@@ -1590,20 +1590,20 @@ msgstr ""
 "Bildschirm;Sperre;Diagnose;Absturz;Crash;Privat;temporär;Index;Name;Netzwerk;"
 "Identität;Privatsphäre;"
 
-#: panels/display/cc-display-panel.c:953
+#: panels/display/cc-display-panel.c:954
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "An_wenden"
 
-#: panels/display/cc-display-panel.c:974
+#: panels/display/cc-display-panel.c:975
 msgid "Apply Changes?"
 msgstr "Änderungen anwenden?"
 
-#: panels/display/cc-display-panel.c:979
+#: panels/display/cc-display-panel.c:980
 msgid "Changes Cannot be Applied"
 msgstr "Änderungen können nicht angewendet werden"
 
-#: panels/display/cc-display-panel.c:980
+#: panels/display/cc-display-panel.c:981
 msgid "This could be due to hardware limitations."
 msgstr "Das könnte an Einschränkungen der Hardware liegen."
 
@@ -2245,39 +2245,39 @@ msgstr "Alle Tastenkombinationen auf die Vorgabe zurücksetzen"
 msgid "No keyboard shortcut found"
 msgstr "Keine Tastenkombination gefunden"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:404
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:405
 #, c-format
 msgid "%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr ""
 "%s wird bereits für %s verwendet. Wenn Sie diese ersetzen, so wird %s "
 "deaktiviert"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:549
 msgid "Enter the new shortcut"
 msgstr "Neue Tastenkombination eingeben"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:566
 msgid "Set Custom Shortcut"
 msgstr "Eigene Tastenkombination festlegen"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:566
 msgid "Set Shortcut"
 msgstr "Tastenkombination festlegen"
 
 #. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:575
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:577
 #, c-format
 msgid "Enter new shortcut to change %s."
 msgstr "Geben Sie die neue Tastenkombination ein, um %s zu ändern."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1002
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1004
 msgid "Add Custom Shortcut"
 msgstr "Individuelle Tastenkombination hinzufügen"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:60
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr ""
-"Drücken Sie Esc zum Abbrechen oder die Löschtaste, um die Tastenkombination "
+"Drücken Sie Esc zum Abbrechen oder die Rücktaste, um die Tastenkombination "
 "zu deaktivieren."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
@@ -2631,7 +2631,7 @@ msgstr "Bildlauf mit zwei Fingern"
 msgid "Edge Scrolling"
 msgstr "Bildlauf am Rand"
 
-#: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:425
+#: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:441
 msgid "Test Your _Settings"
 msgstr "_Testen Sie Ihre Einstellungen"
 
@@ -4497,7 +4497,7 @@ msgid "Media player"
 msgstr "Medienwiedergabegerät"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:661 panels/wacom/cc-wacom-panel.c:794
+#: panels/power/cc-power-panel.c:661 panels/wacom/cc-wacom-panel.c:728
 msgid "Tablet"
 msgstr "Grafiktablett"
 
@@ -4866,7 +4866,7 @@ msgstr "Ort"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:248
+#: panels/printers/pp-ppd-selection-dialog.c:250
 msgid "Driver"
 msgstr "Treiber"
 
@@ -5232,7 +5232,7 @@ msgid "No pre-filtering"
 msgstr "Keine Vorfilterung"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:231
+#: panels/printers/pp-ppd-selection-dialog.c:233
 msgid "Manufacturer"
 msgstr "Hersteller"
 
@@ -7894,7 +7894,7 @@ msgstr ""
 msgid "Map Buttons"
 msgstr "Knöpfe zuweisen"
 
-#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:512
+#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:519
 #: panels/wacom/gnome-wacom-properties.ui:60
 msgid "_Close"
 msgstr "S_chließen"
@@ -7970,11 +7970,11 @@ msgstr "Einem einzigen Bildschirm zuordnen"
 msgid "%d of %d"
 msgstr "%d von %d"
 
-#: panels/wacom/cc-wacom-page.c:509
+#: panels/wacom/cc-wacom-page.c:516
 msgid "Display Mapping"
 msgstr "Zuordnung anzeigen"
 
-#: panels/wacom/cc-wacom-panel.c:791 panels/wacom/wacom-stylus-page.ui:119
+#: panels/wacom/cc-wacom-panel.c:725 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
 msgstr "Stylus"
 
@@ -8255,7 +8255,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1883
+#: subprojects/gvc/gvc-mixer-control.c:1907
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -8264,14 +8264,14 @@ msgstr[1] "%u Ausgänge"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1893
+#: subprojects/gvc/gvc-mixer-control.c:1917
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u Eingang"
 msgstr[1] "%u Eingänge"
 
-#: subprojects/gvc/gvc-mixer-control.c:2750
+#: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Systemklänge"
 
