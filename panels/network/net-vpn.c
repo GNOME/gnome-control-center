@@ -159,7 +159,7 @@ edit_connection (NetVpn *self)
         net_connection_editor_set_title (editor, title);
 
         g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
-        net_connection_editor_run (editor);
+        gtk_window_present (GTK_WINDOW (editor));
 }
 
 static void

@@ -227,7 +227,7 @@ show_details (NetDeviceEthernet *self, GtkButton *button, const gchar *title)
         if (title)
                 net_connection_editor_set_title (editor, title);
         g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
-        net_connection_editor_run (editor);
+        gtk_window_present (GTK_WINDOW (editor));
 }
 
 static void
@@ -412,7 +412,7 @@ add_profile_button_clicked_cb (NetDeviceEthernet *self)
         editor = net_connection_editor_new (connection, self->device, NULL, self->client);
         gtk_window_set_transient_for (GTK_WINDOW (editor), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
         g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
-        net_connection_editor_run (editor);
+        gtk_window_present (GTK_WINDOW (editor));
 }
 
 static void

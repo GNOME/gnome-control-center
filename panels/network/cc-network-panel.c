@@ -685,7 +685,7 @@ create_connection_cb (GtkWidget      *button,
 
         editor = net_connection_editor_new (NULL, NULL, NULL, self->client);
         gtk_window_set_transient_for (GTK_WINDOW (editor), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
-        net_connection_editor_run (editor);
+        gtk_window_present (GTK_WINDOW (editor));
 }
 
 static void

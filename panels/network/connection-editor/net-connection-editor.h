@@ -34,7 +34,6 @@ NetConnectionEditor *net_connection_editor_new      (NMConnection     *connectio
                                                      NMClient         *client);
 void                 net_connection_editor_set_title (NetConnectionEditor  *editor,
                                                       const gchar          *title);
-void                 net_connection_editor_run      (NetConnectionEditor   *editor);
 void                 net_connection_editor_forget   (NetConnectionEditor   *editor);
 
 G_END_DECLS

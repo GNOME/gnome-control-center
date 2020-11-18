@@ -74,7 +74,6 @@ struct _NetConnectionEditor
         NMClientPermissionResult can_modify;
 
         gboolean          title_set;
-        gboolean          show_when_initialized;
 };
 
 G_DEFINE_TYPE (NetConnectionEditor, net_connection_editor, GTK_TYPE_DIALOG)
@@ -396,10 +395,8 @@ recheck_initialization (NetConnectionEditor *self)
         if (!editor_is_initialized (self))
                 return;
 
+        gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->notebook));
         gtk_notebook_set_current_page (self->notebook, 0);
-
-        if (self->show_when_initialized)
-                gtk_window_present (GTK_WINDOW (self));
 
         g_idle_add (idle_validate, self);
 }
@@ -812,16 +809,6 @@ net_connection_editor_new (NMConnection     *connection,
                 net_connection_editor_add_connection (self);
 
         return self;
-}
-
-void
-net_connection_editor_run (NetConnectionEditor *self)
-{
-        if (!editor_is_initialized (self)) {
-                self->show_when_initialized = TRUE;
-                return;
-        }
-        gtk_window_present (GTK_WINDOW (self));
 }
 
 static void
