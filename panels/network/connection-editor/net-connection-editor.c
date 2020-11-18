@@ -190,10 +190,6 @@ static void
 net_connection_editor_finalize (GObject *object)
 {
         NetConnectionEditor *self = NET_CONNECTION_EDITOR (object);
-        GSList *l;
-
-        for (l = self->pages; l != NULL; l = l->next)
-                g_signal_handlers_disconnect_by_func (l->data, page_changed, self);
 
         g_clear_object (&self->connection);
         g_clear_object (&self->orig_connection);
