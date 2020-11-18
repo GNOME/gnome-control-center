@@ -59,7 +59,6 @@ struct _NetConnectionEditor
         GtkNotebook      *notebook;
         GtkStack         *toplevel_stack;
 
-        GtkWidget        *parent_window;
         NMClient         *client;
         NMDevice         *device;
 
@@ -199,7 +198,6 @@ net_connection_editor_finalize (GObject *object)
 
         g_clear_object (&self->connection);
         g_clear_object (&self->orig_connection);
-        g_clear_object (&self->parent_window);
         g_clear_object (&self->device);
         g_clear_object (&self->client);
         g_clear_object (&self->ap);
@@ -250,7 +248,7 @@ net_connection_editor_error_dialog (NetConnectionEditor *self,
         if (gtk_widget_is_visible (GTK_WIDGET (self)))
                 parent = GTK_WINDOW (self);
         else
-                parent = GTK_WINDOW (self->parent_window);
+                parent = gtk_window_get_transient_for (GTK_WINDOW (self));
 
         dialog = gtk_message_dialog_new (parent,
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -786,8 +784,7 @@ permission_changed (NetConnectionEditor      *self,
 }
 
 NetConnectionEditor *
-net_connection_editor_new (GtkWindow        *parent_window,
-                           NMConnection     *connection,
+net_connection_editor_new (NMConnection     *connection,
                            NMDevice         *device,
                            NMAccessPoint    *ap,
                            NMClient         *client)
@@ -799,11 +796,6 @@ net_connection_editor_new (GtkWindow        *parent_window,
                              "use-header-bar", 1,
                              NULL);
 
-        if (parent_window) {
-                self->parent_window = GTK_WIDGET (g_object_ref (parent_window));
-                gtk_window_set_transient_for (GTK_WINDOW (self),
-                                              parent_window);
-        }
         if (ap)
                 self->ap = g_object_ref (ap);
         if (device)

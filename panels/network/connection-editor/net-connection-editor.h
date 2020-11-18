@@ -28,8 +28,7 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (NetConnectionEditor, net_connection_editor, NET, CONNECTION_EDITOR, GtkDialog)
 
-NetConnectionEditor *net_connection_editor_new      (GtkWindow        *parent_window,
-                                                     NMConnection     *connection,
+NetConnectionEditor *net_connection_editor_new      (NMConnection     *connection,
                                                      NMDevice         *device,
                                                      NMAccessPoint    *ap,
                                                      NMClient         *client);
