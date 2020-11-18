@@ -69,7 +69,6 @@ struct _NetConnectionEditor
         NMAccessPoint    *ap;
 
         GSList *initializing_pages;
-        GSList *pages;
 
         NMClientPermissionResult can_modify;
 
@@ -324,7 +323,7 @@ update_sensitivity (NetConnectionEditor *self)
 {
         NMSettingConnection *sc;
         gboolean sensitive;
-        GSList *l;
+        GList *pages;
 
         if (!editor_is_initialized (self))
                 return;
@@ -337,29 +336,34 @@ update_sensitivity (NetConnectionEditor *self)
                 sensitive = self->can_modify;
         }
 
-        for (l = self->pages; l; l = l->next)
-                gtk_widget_set_sensitive (GTK_WIDGET (l->data), sensitive);
+        pages = gtk_container_get_children (GTK_CONTAINER (self->notebook));
+        for (GList *l = pages; l; l = l->next) {
+                CEPage *page = l->data;
+                gtk_widget_set_sensitive (GTK_WIDGET (page), sensitive);
+        }
 }
 
 static void
 validate (NetConnectionEditor *self)
 {
         gboolean valid = FALSE;
-        GSList *l;
+        GList *pages;
 
         if (!editor_is_initialized (self))
                 goto done;
 
         valid = TRUE;
-        for (l = self->pages; l; l = l->next) {
+        pages = gtk_container_get_children (GTK_CONTAINER (self->notebook));
+        for (GList *l = pages; l; l = l->next) {
+                CEPage *page = l->data;
                 g_autoptr(GError) error = NULL;
 
-                if (!ce_page_validate (CE_PAGE (l->data), self->connection, &error)) {
+                if (!ce_page_validate (page, self->connection, &error)) {
                         valid = FALSE;
                         if (error) {
-                                g_debug ("Invalid setting %s: %s", ce_page_get_title (CE_PAGE (l->data)), error->message);
+                                g_debug ("Invalid setting %s: %s", ce_page_get_title (page), error->message);
                         } else {
-                                g_debug ("Invalid setting %s", ce_page_get_title (CE_PAGE (l->data)));
+                                g_debug ("Invalid setting %s", ce_page_get_title (page));
                         }
                 }
         }
@@ -420,7 +424,6 @@ page_initialized (NetConnectionEditor *self, GError *error, CEPage *page)
         gtk_notebook_insert_page (self->notebook, GTK_WIDGET (page), label, i);
 
         self->initializing_pages = g_slist_remove (self->initializing_pages, page);
-        self->pages = g_slist_append (self->pages, page);
 
         recheck_initialization (self);
 }
