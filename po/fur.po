@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-10-20 13:05+0000\n"
-"PO-Revision-Date: 2020-10-21 18:24+0200\n"
+"POT-Creation-Date: 2020-11-17 16:13+0000\n"
+"PO-Revision-Date: 2020-11-19 04:40+0100\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -36,7 +36,7 @@ msgid "Session Bus"
 msgstr "Bus di session"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:1855 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:2170 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Dispositîfs"
@@ -57,7 +57,7 @@ msgstr "Al à acès ae rêt"
 
 #: panels/applications/cc-applications-panel.c:838
 #: panels/applications/cc-applications-panel.c:840
-#: panels/search/cc-search-locations-dialog.c:361
+#: panels/search/cc-search-locations-dialog.c:362
 msgid "Home"
 msgstr "Cjase"
 
@@ -198,7 +198,7 @@ msgstr "Fotocjamare"
 #: panels/keyboard/cc-keyboard-option.c:378
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
 #: panels/keyboard/cc-xkb-modifier-dialog.c:355
-#: panels/keyboard/keyboard-shortcuts.c:368 panels/network/network-proxy.ui:126
+#: panels/keyboard/keyboard-shortcuts.c:368 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:865
 #: panels/user-accounts/cc-user-panel.c:957
 #: subprojects/gvc/gvc-mixer-control.c:1900
@@ -354,7 +354,7 @@ msgstr "Selezione un imagjin"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:944
+#: panels/display/cc-display-panel.c:999
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:865
@@ -365,7 +365,7 @@ msgstr "Selezione un imagjin"
 #: panels/printers/new-printer-dialog.ui:45
 #: panels/printers/pp-details-dialog.c:251
 #: panels/region/cc-format-chooser.ui:28 panels/region/cc-input-chooser.ui:11
-#: panels/search/cc-search-locations-dialog.c:638
+#: panels/search/cc-search-locations-dialog.c:639
 #: panels/sharing/cc-sharing-panel.c:396 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:107
@@ -1562,20 +1562,20 @@ msgstr ""
 "schermi;visôr;bloc;diagnostiche;colàs;crash;privât;resint;temporani;tmp;"
 "indiç;tabele;non;rêt;identitât;privacy;riservatece;"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:1010
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Apliche"
 
-#: panels/display/cc-display-panel.c:976
+#: panels/display/cc-display-panel.c:1031
 msgid "Apply Changes?"
 msgstr "Aplicâ lis modifichis?"
 
-#: panels/display/cc-display-panel.c:981
+#: panels/display/cc-display-panel.c:1036
 msgid "Changes Cannot be Applied"
 msgstr "Lis modifichis no puedin jessi aplicadis"
 
-#: panels/display/cc-display-panel.c:982
+#: panels/display/cc-display-panel.c:1037
 msgid "This could be due to hardware limitations."
 msgstr "Chest al podarès jessi par vie di limitazions hardware."
 
@@ -1956,7 +1956,7 @@ msgid "Eject"
 msgstr "Pare fûr"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:563
+#: panels/universal-access/cc-ua-panel.ui:542
 msgid "Typing"
 msgstr "Digjitazion"
 
@@ -2649,37 +2649,42 @@ msgid "Not set up"
 msgstr "No configurade"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:207
+#: panels/network/cc-wifi-connection-row.c:208
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:267
+#: panels/network/cc-wifi-connection-row.c:268
 msgid "Insecure network (WEP)"
 msgstr "Rêt no sigure (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:272
+#: panels/network/cc-wifi-connection-row.c:273
 msgid "Secure network (WPA)"
 msgstr "Rêt sigure (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Secure network (WPA2)"
 msgstr "Rêt sigure (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Secure network (WPA3)"
 msgstr "Rêt sigure (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:287
+#: panels/network/cc-wifi-connection-row.c:288
 msgid "Secure network"
 msgstr "Rêt sigure"
 
-#: panels/network/cc-wifi-connection-row.ui:102
-#: panels/network/net-device-ethernet.c:316
+#. TRANSLATORS: device status
+#: panels/network/cc-wifi-connection-row.ui:68 panels/network/panel-common.c:63
+msgid "Connected"
+msgstr "Tacât"
+
+#: panels/network/cc-wifi-connection-row.ui:100
+#: panels/network/net-device-ethernet.c:315
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:414
-#: panels/network/network-vpn.ui:75
+#: panels/network/network-vpn.ui:77
 msgid "Options…"
 msgstr "Opzions…"
 
@@ -2894,56 +2899,56 @@ msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:289
-#: panels/network/net-device-ethernet.c:201
+#: panels/network/net-device-ethernet.c:200
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:306
+#: panels/network/connection-editor/ce-page-details.c:302
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:308
+#: panels/network/connection-editor/ce-page-details.c:304
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:310
+#: panels/network/connection-editor/ce-page-details.c:306
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:330
+#: panels/network/connection-editor/ce-page-details.c:326
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nissune"
 
-#: panels/network/connection-editor/ce-page-details.c:332
+#: panels/network/connection-editor/ce-page-details.c:328
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Debul"
 
-#: panels/network/connection-editor/ce-page-details.c:334
+#: panels/network/connection-editor/ce-page-details.c:330
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
-#: panels/network/connection-editor/ce-page-details.c:336
+#: panels/network/connection-editor/ce-page-details.c:332
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bon"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:334
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Ecelent"
 
-#: panels/network/connection-editor/ce-page-details.c:396
+#: panels/network/connection-editor/ce-page-details.c:392
 #: panels/network/connection-editor/details-page.ui:108
 #: panels/network/net-device-ethernet.c:142
 #: panels/network/net-device-mobile.c:430
 msgid "IPv4 Address"
 msgstr "Direzion IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:397
+#: panels/network/connection-editor/ce-page-details.c:393
 #: panels/network/connection-editor/details-page.ui:126
 #: panels/network/net-device-ethernet.c:143
 #: panels/network/net-device-ethernet.c:147
@@ -2951,27 +2956,27 @@ msgstr "Direzion IPv4"
 msgid "IPv6 Address"
 msgstr "Direzion IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:400
-#: panels/network/connection-editor/ce-page-details.c:401
+#: panels/network/connection-editor/ce-page-details.c:396
+#: panels/network/connection-editor/ce-page-details.c:397
 #: panels/network/net-device-ethernet.c:145
 #: panels/network/net-device-mobile.c:434
 #: panels/network/net-device-mobile.c:435 panels/network/network-mobile.ui:183
 msgid "IP Address"
 msgstr "Direzions IP"
 
-#: panels/network/connection-editor/ce-page-details.c:434
+#: panels/network/connection-editor/ce-page-details.c:430
 msgid "Forget Connection"
 msgstr "Dismentee conession"
 
-#: panels/network/connection-editor/ce-page-details.c:436
+#: panels/network/connection-editor/ce-page-details.c:432
 msgid "Remove Connection Profile"
 msgstr "Gjave profîl conession"
 
-#: panels/network/connection-editor/ce-page-details.c:438
+#: panels/network/connection-editor/ce-page-details.c:434
 msgid "Remove VPN"
 msgstr "Gjave VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:456
+#: panels/network/connection-editor/ce-page-details.c:452
 msgid "Details"
 msgstr "Detais"
 
@@ -3056,7 +3061,7 @@ msgid "Supported Frequencies"
 msgstr "Frecuencis supuartadis"
 
 #: panels/network/connection-editor/details-page.ui:180
-#: panels/network/net-device-ethernet.c:154
+#: panels/network/net-device-ethernet.c:153
 #: panels/network/network-mobile.ui:217
 msgid "Default Route"
 msgstr "Instradament predefinît"
@@ -3064,7 +3069,7 @@ msgstr "Instradament predefinît"
 #: panels/network/connection-editor/details-page.ui:199
 #: panels/network/connection-editor/ip4-page.ui:211
 #: panels/network/connection-editor/ip6-page.ui:225
-#: panels/network/net-device-ethernet.c:156
+#: panels/network/net-device-ethernet.c:155
 #: panels/network/network-mobile.ui:235
 msgid "DNS"
 msgstr "DNS"
@@ -3131,7 +3136,7 @@ msgstr "Nome Link-Local"
 
 #: panels/network/connection-editor/ip4-page.ui:69
 #: panels/network/connection-editor/ip6-page.ui:83
-#: panels/network/net-proxy.c:72 panels/network/network-proxy.ui:116
+#: panels/network/net-proxy.c:71 panels/network/network-proxy.ui:118
 msgid "Manual"
 msgstr "Manuâl"
 
@@ -3175,7 +3180,7 @@ msgstr "Gateway"
 #: panels/network/connection-editor/ip6-page.ui:42
 #: panels/network/connection-editor/ip6-page.ui:237
 #: panels/network/connection-editor/ip6-page.ui:305
-#: panels/network/net-proxy.c:74 panels/network/network-proxy.ui:106
+#: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:107
 #: panels/network/wireless-security/eap-method-peap.ui:33
 msgid "Automatic"
 msgstr "Automatic"
@@ -3343,7 +3348,7 @@ msgstr "vuê"
 msgid "yesterday"
 msgstr "îr"
 
-#: panels/network/net-device-ethernet.c:161
+#: panels/network/net-device-ethernet.c:160
 msgid "Last used"
 msgstr "Ultime volte doprât"
 
@@ -3352,7 +3357,7 @@ msgstr "Ultime volte doprât"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:250
+#: panels/network/net-device-ethernet.c:249
 #: panels/network/network-bluetooth.ui:38 panels/network/network-ethernet.ui:18
 msgid "Wired"
 msgstr "Fîl"
@@ -3373,45 +3378,45 @@ msgstr ""
 msgid "_Forget"
 msgstr "_Dismentee"
 
-#: panels/network/net-device-wifi.c:1014 panels/network/net-device-wifi.c:1021
+#: panels/network/net-device-wifi.c:1039 panels/network/net-device-wifi.c:1046
 msgid "Known Wi-Fi Networks"
 msgstr "Rêts Wi-Fi cognossudis"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1056
+#: panels/network/net-device-wifi.c:1081
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Dismentee"
 
-#: panels/network/net-device-wifi.c:1197
+#: panels/network/net-device-wifi.c:1222
 msgid "System policy prohibits use as a Hotspot"
 msgstr "La politiche di sisteme e proibìs l'ûs come Hotspot"
 
-#: panels/network/net-device-wifi.c:1200
+#: panels/network/net-device-wifi.c:1225
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Il dispositîf wireless nol supuarte la modalitât Hotspot"
 
-#: panels/network/net-proxy.c:70
+#: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1258 panels/power/cc-power-panel.c:1269
-#: panels/universal-access/cc-ua-panel.c:480
-#: panels/universal-access/cc-ua-panel.c:840
-#: panels/universal-access/cc-ua-panel.c:853
-#: panels/universal-access/cc-ua-panel.c:865
-#: panels/universal-access/cc-ua-panel.c:1030
-#: panels/universal-access/cc-ua-panel.ui:321
-#: panels/universal-access/cc-ua-panel.ui:367
-#: panels/universal-access/cc-ua-panel.ui:413
-#: panels/universal-access/cc-ua-panel.ui:519
-#: panels/universal-access/cc-ua-panel.ui:672
-#: panels/universal-access/cc-ua-panel.ui:718
-#: panels/universal-access/cc-ua-panel.ui:764
-#: panels/universal-access/cc-ua-panel.ui:948
+#: panels/power/cc-power-panel.c:1265 panels/power/cc-power-panel.c:1276
+#: panels/universal-access/cc-ua-panel.c:329
+#: panels/universal-access/cc-ua-panel.c:604
+#: panels/universal-access/cc-ua-panel.c:614
+#: panels/universal-access/cc-ua-panel.c:626
+#: panels/universal-access/cc-ua-panel.c:669
+#: panels/universal-access/cc-ua-panel.ui:300
+#: panels/universal-access/cc-ua-panel.ui:346
+#: panels/universal-access/cc-ua-panel.ui:392
+#: panels/universal-access/cc-ua-panel.ui:498
+#: panels/universal-access/cc-ua-panel.ui:651
+#: panels/universal-access/cc-ua-panel.ui:697
+#: panels/universal-access/cc-ua-panel.ui:743
+#: panels/universal-access/cc-ua-panel.ui:927
 msgid "Off"
 msgstr "Distudât"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
-#: panels/network/net-proxy.c:113
+#: panels/network/net-proxy.c:112
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgstr ""
@@ -3422,7 +3427,7 @@ msgstr ""
 #. * network, then anyone else on that network can tell your
 #. * machine that it should proxy all of your web traffic
 #. * through them.
-#: panels/network/net-proxy.c:121
+#: panels/network/net-proxy.c:120
 msgid "This is not recommended for untrusted public networks."
 msgstr "Nol è conseât par rêts publichis no fidadis."
 
@@ -3431,7 +3436,7 @@ msgstr "Nol è conseât par rêts publichis no fidadis."
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/net-vpn.c:66 panels/network/net-vpn.c:163
+#: panels/network/net-vpn.c:65 panels/network/net-vpn.c:162
 #, c-format
 msgid "%s VPN"
 msgstr "VPN %s"
@@ -3448,51 +3453,51 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "Provider"
 
-#: panels/network/network-proxy.ui:47 panels/network/network-proxy.ui:95
+#: panels/network/network-proxy.ui:47 panels/network/network-proxy.ui:96
 msgid "Network Proxy"
 msgstr "Proxy di rêt"
 
-#: panels/network/network-proxy.ui:176
+#: panels/network/network-proxy.ui:180
 msgid "_HTTP Proxy"
 msgstr "Proxy _HTTP"
 
-#: panels/network/network-proxy.ui:195
+#: panels/network/network-proxy.ui:199
 msgid "H_TTPS Proxy"
 msgstr "Proxy H_TTPS"
 
-#: panels/network/network-proxy.ui:214
+#: panels/network/network-proxy.ui:218
 msgid "_FTP Proxy"
 msgstr "Proxy _FTP"
 
-#: panels/network/network-proxy.ui:233
+#: panels/network/network-proxy.ui:237
 msgid "_Socks Host"
 msgstr "Host _Socks"
 
-#: panels/network/network-proxy.ui:252
+#: panels/network/network-proxy.ui:256
 msgid "_Ignore Hosts"
 msgstr "Host di _ignorâ"
 
-#: panels/network/network-proxy.ui:290
+#: panels/network/network-proxy.ui:294
 msgid "HTTP proxy port"
 msgstr "Puarte proxy HTTP"
 
-#: panels/network/network-proxy.ui:367
+#: panels/network/network-proxy.ui:371
 msgid "HTTPS proxy port"
 msgstr "Puarte proxy HTTPS"
 
-#: panels/network/network-proxy.ui:388
+#: panels/network/network-proxy.ui:392
 msgid "FTP proxy port"
 msgstr "Puarte proxy FTP"
 
-#: panels/network/network-proxy.ui:409
+#: panels/network/network-proxy.ui:413
 msgid "Socks proxy port"
 msgstr "Puarte proxy Socks"
 
-#: panels/network/network-proxy.ui:438
+#: panels/network/network-proxy.ui:442
 msgid "_Configuration URL"
 msgstr "URL di _configurazion"
 
-#: panels/network/network-vpn.ui:55
+#: panels/network/network-vpn.ui:56
 msgid "Turn VPN connection off"
 msgstr "Distude la conession VPN"
 
@@ -3552,11 +3557,6 @@ msgstr "Daûr a coneti"
 #: panels/network/panel-common.c:59
 msgid "Authentication required"
 msgstr "Autenticazion necessarie"
-
-#. TRANSLATORS: device status
-#: panels/network/panel-common.c:63
-msgid "Connected"
-msgstr "Tacât"
 
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:67
@@ -3779,12 +3779,12 @@ msgid "Connection dependency failed"
 msgstr "Dipendence de conession falide"
 
 #. TRANSLATORS: device status
-#: panels/network/panel-common.c:351
+#: panels/network/panel-common.c:327
 msgid "Firmware missing"
 msgstr "Firmware mancjant"
 
 #. TRANSLATORS: device status
-#: panels/network/panel-common.c:355
+#: panels/network/panel-common.c:331
 msgid "Cable unplugged"
 msgstr "Fil stacât"
 
@@ -4219,12 +4219,12 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Mostrâ i c_ontignûts dal messaç sul schermi blocât"
 
 #: panels/notifications/cc-notifications-panel.c:268
-#: panels/power/cc-power-panel.c:1264 panels/power/cc-power-panel.c:1271
-#: panels/universal-access/cc-ua-panel.c:480
-#: panels/universal-access/cc-ua-panel.c:840
-#: panels/universal-access/cc-ua-panel.c:853
-#: panels/universal-access/cc-ua-panel.c:865
-#: panels/universal-access/cc-ua-panel.c:1030
+#: panels/power/cc-power-panel.c:1271 panels/power/cc-power-panel.c:1278
+#: panels/universal-access/cc-ua-panel.c:329
+#: panels/universal-access/cc-ua-panel.c:604
+#: panels/universal-access/cc-ua-panel.c:614
+#: panels/universal-access/cc-ua-panel.c:626
+#: panels/universal-access/cc-ua-panel.c:669
 msgid "On"
 msgstr "Impiât"
 
@@ -4438,8 +4438,8 @@ msgid "Gaming input device"
 msgstr "Dispositîf di input par zuiâ"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:498
-#: panels/power/cc-power-panel.c:1808
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:505
+#: panels/power/cc-power-panel.c:2123
 msgid "Battery"
 msgstr "Batarie"
 
@@ -4453,106 +4453,114 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Adizionâl"
 
-#: panels/power/cc-power-panel.c:496
+#: panels/power/cc-power-panel.c:503
 msgid "Batteries"
 msgstr "Batariis"
 
-#: panels/power/cc-power-panel.c:718
+#: panels/power/cc-power-panel.c:725
 msgid "When _idle"
 msgstr "Cuant _inatîf"
 
-#: panels/power/cc-power-panel.c:1206
+#: panels/power/cc-power-panel.c:1213
 msgid "Suspend"
 msgstr "Sospindi"
 
-#: panels/power/cc-power-panel.c:1207
+#: panels/power/cc-power-panel.c:1214
 msgid "Power Off"
 msgstr "Distudâ"
 
-#: panels/power/cc-power-panel.c:1208
+#: panels/power/cc-power-panel.c:1215
 msgid "Hibernate"
 msgstr "Ibernâ"
 
-#: panels/power/cc-power-panel.c:1209
+#: panels/power/cc-power-panel.c:1216
 msgid "Nothing"
 msgstr "Nissune azion"
 
-#: panels/power/cc-power-panel.c:1260
+#: panels/power/cc-power-panel.c:1267
 msgid "When on battery power"
 msgstr "Cuant che si dopre la batarie"
 
-#: panels/power/cc-power-panel.c:1262
+#: panels/power/cc-power-panel.c:1269
 msgid "When plugged in"
 msgstr "Cuant che al è alimentât"
 
-#: panels/power/cc-power-panel.c:1366
+#: panels/power/cc-power-panel.c:1373
 msgid "Power Saving"
 msgstr "Sparagn energjetic"
 
-#: panels/power/cc-power-panel.c:1402
+#: panels/power/cc-power-panel.c:1409
 msgid "_Screen Brightness"
 msgstr "Luminositât dal _schermi"
 
-#: panels/power/cc-power-panel.c:1425
+#: panels/power/cc-power-panel.c:1432
 msgid "Automatic Brightness"
 msgstr "Luminositât automatiche"
 
-#: panels/power/cc-power-panel.c:1438
+#: panels/power/cc-power-panel.c:1445
 msgid "_Keyboard Brightness"
 msgstr "Luminositât de _tastiere"
 
-#: panels/power/cc-power-panel.c:1451
+#: panels/power/cc-power-panel.c:1458
 msgid "_Dim Screen When Inactive"
 msgstr "_Scurî il schermi cuant che al è inatîf"
 
-#: panels/power/cc-power-panel.c:1469
+#: panels/power/cc-power-panel.c:1476
 msgid "_Blank Screen"
 msgstr "Schermi _neri"
 
-#: panels/power/cc-power-panel.c:1515
+#: panels/power/cc-power-panel.c:1522
 msgid "_Automatic Suspend"
 msgstr "Sospension _automatiche"
 
-#: panels/power/cc-power-panel.c:1516
+#: panels/power/cc-power-panel.c:1523
 msgid "Automatic suspend"
 msgstr "Sospension automatiche"
 
-#: panels/power/cc-power-panel.c:1568
+#: panels/power/cc-power-panel.c:1575
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.c:1569
+#: panels/power/cc-power-panel.c:1576
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Si pues distudâ il Wi-Fi par sparagnâ curint."
 
-#: panels/power/cc-power-panel.c:1585
+#: panels/power/cc-power-panel.c:1592
 msgid "_Mobile Broadband"
 msgstr "Bande largje _mobile"
 
-#: panels/power/cc-power-panel.c:1586
+#: panels/power/cc-power-panel.c:1593
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Si pues distudâ la bande largje mobile (3G, 4G, LTE, ecc.) par sparagnâ "
 "curint."
 
-#: panels/power/cc-power-panel.c:1636
+#: panels/power/cc-power-panel.c:1643
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.c:1637
+#: panels/power/cc-power-panel.c:1644
 msgid "Bluetooth can be turned off to save power."
 msgstr "Si pues distudâ il Bluetooth par sparagnâ curint."
 
-#: panels/power/cc-power-panel.c:1674
+#: panels/power/cc-power-panel.c:1880
+msgid "Power Mode"
+msgstr "Modalitât potence"
+
+#: panels/power/cc-power-panel.c:1889
+msgid "Affects system performance and power usage."
+msgstr "Al influìs su lis prestazions dal sisteme e sul consum energjetic."
+
+#: panels/power/cc-power-panel.c:1989
 msgid "Show Battery _Percentage"
 msgstr "Mostre _percentuâl batarie"
 
 #. Frame header
-#: panels/power/cc-power-panel.c:1700
+#: panels/power/cc-power-panel.c:2015
 msgid "Suspend & Power Button"
 msgstr "Sospension e boton par distudâ"
 
-#: panels/power/cc-power-panel.c:1750
+#: panels/power/cc-power-panel.c:2065
 msgid "Po_wer Button Behavior"
 msgstr "Compuartament boton par _impiâ"
 
@@ -4629,9 +4637,48 @@ msgid "On _Battery Power"
 msgstr "Cuant a _batarie"
 
 #: panels/power/cc-power-panel.ui:231 panels/power/cc-power-panel.ui:291
-#: panels/universal-access/cc-ua-panel.ui:1525
+#: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Ritart"
+
+# Lap?
+#: panels/power/cc-power-profile-row.c:67
+#, fuzzy
+msgid "Lap detected: performance mode unavailable"
+msgstr "Portatil rilevât: modalitât prestazions no disponibile"
+
+#: panels/power/cc-power-profile-row.c:69
+msgid "High hardware temperature: performance mode unavailable"
+msgstr "Temperadure hardware elevade: modalitât prestazions no disponibile"
+
+#: panels/power/cc-power-profile-row.c:70
+msgid "Performance mode unavailable"
+msgstr "Modalitât prestazions no disponibile"
+
+#: panels/power/cc-power-profile-row.c:92
+#: panels/power/cc-power-profile-row.c:240
+msgid "High performance and power usage."
+msgstr "Prestazions elevadis e consum energjetic."
+
+#: panels/power/cc-power-profile-row.c:239
+msgid "Performance"
+msgstr "Prestazions"
+
+#: panels/power/cc-power-profile-row.c:245
+msgid "Balanced Power"
+msgstr "Belançament energjetic"
+
+#: panels/power/cc-power-profile-row.c:246
+msgid "Standard performance and power usage."
+msgstr "Prestazions normâls e consum energjetic."
+
+#: panels/power/cc-power-profile-row.c:251
+msgid "Power Saver"
+msgstr "Sparagn energjetic"
+
+#: panels/power/cc-power-profile-row.c:252
+msgid "Reduced performance and power usage."
+msgstr "Prestazions ridotis e consum energjetic."
 
 #: panels/power/gnome-power-panel.desktop.in.in:3
 msgid "Power"
@@ -4672,18 +4719,18 @@ msgid "Authentication Required"
 msgstr "Autenticazion necessarie"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:691
+#: panels/printers/cc-printers-panel.c:682
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "La stampant “%s” e je stade eliminade"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:945
+#: panels/printers/cc-printers-panel.c:930
 msgid "Failed to add new printer."
 msgstr "Zonte de gnove stampant falide."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1242
+#: panels/printers/cc-printers-panel.c:1209
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Impussibil cjariâ la interface: %s"
@@ -4841,55 +4888,55 @@ msgid "Reverse portrait"
 msgstr "Verticâl invertît"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-jobs-dialog.c:222
+#: panels/printers/pp-jobs-dialog.c:209
 msgctxt "print job"
 msgid "Pending"
 msgstr "In atese"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-jobs-dialog.c:228
+#: panels/printers/pp-jobs-dialog.c:215
 msgctxt "print job"
 msgid "Paused"
 msgstr "In pause"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-jobs-dialog.c:233
+#: panels/printers/pp-jobs-dialog.c:220
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Autenticazion necessarie"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-jobs-dialog.c:238
+#: panels/printers/pp-jobs-dialog.c:225
 msgctxt "print job"
 msgid "Processing"
 msgstr "In elaborazion"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-jobs-dialog.c:242
+#: panels/printers/pp-jobs-dialog.c:229
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Fermât"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-jobs-dialog.c:246
+#: panels/printers/pp-jobs-dialog.c:233
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Anulât"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-jobs-dialog.c:250
+#: panels/printers/pp-jobs-dialog.c:237
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Interot"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-jobs-dialog.c:254
+#: panels/printers/pp-jobs-dialog.c:241
 msgctxt "print job"
 msgid "Completed"
 msgstr "Finît"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:363
+#: panels/printers/pp-jobs-dialog.c:342
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -4897,14 +4944,14 @@ msgstr[0] "%u lavôr al domande autenticazion"
 msgstr[1] "%u lavôrs a domandin autenticazion"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:520
+#: panels/printers/pp-jobs-dialog.c:494
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Lavôrs Atîfs"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:524
+#: panels/printers/pp-jobs-dialog.c:498
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Inserìs lis credenziâls par stampâ di %s."
@@ -5128,12 +5175,12 @@ msgid "Manufacturer"
 msgstr "Produtôr"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:577 panels/printers/printer-entry.ui:166
+#: panels/printers/pp-printer-entry.c:523 panels/printers/printer-entry.ui:166
 msgid "No Active Jobs"
 msgstr "Nissun lavôr atîf"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:582
+#: panels/printers/pp-printer-entry.c:528
 #, c-format
 msgid "%u Job"
 msgid_plural "%u Jobs"
@@ -5141,110 +5188,110 @@ msgstr[0] "%u Lavôr"
 msgstr[1] "%u Lavôrs"
 
 #. Translators: Name of job which makes printer to clean its heads
-#: panels/printers/pp-printer-entry.c:700
+#: panels/printers/pp-printer-entry.c:648
 msgid "Clean print heads"
 msgstr "Nete testinis stampant"
 
 #. Translators: The printer is low on toner
-#: panels/printers/pp-printer-entry.c:751
+#: panels/printers/pp-printer-entry.c:713
 msgid "Low on toner"
 msgstr "Toner in esauriment"
 
 #. Translators: The printer has no toner left
-#: panels/printers/pp-printer-entry.c:753
+#: panels/printers/pp-printer-entry.c:715
 msgid "Out of toner"
 msgstr "Toner esaurît"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:756
+#: panels/printers/pp-printer-entry.c:718
 msgid "Low on developer"
 msgstr "Developer in esauriment"
 
 #. Translators: "Developer" is a chemical for photo development,
 #. * http://en.wikipedia.org/wiki/Photographic_developer
-#: panels/printers/pp-printer-entry.c:759
+#: panels/printers/pp-printer-entry.c:721
 msgid "Out of developer"
 msgstr "Developer esaurît"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:761
+#: panels/printers/pp-printer-entry.c:723
 msgid "Low on a marker supply"
 msgstr "Furnidure toner in esauriment"
 
 #. Translators: "marker" is one color bin of the printer
-#: panels/printers/pp-printer-entry.c:763
+#: panels/printers/pp-printer-entry.c:725
 msgid "Out of a marker supply"
 msgstr "Furnidure toner esauride"
 
 #. Translators: One or more covers on the printer are open
-#: panels/printers/pp-printer-entry.c:765
+#: panels/printers/pp-printer-entry.c:727
 msgid "Open cover"
 msgstr "Tapon viert"
 
 #. Translators: One or more doors on the printer are open
-#: panels/printers/pp-printer-entry.c:767
+#: panels/printers/pp-printer-entry.c:729
 msgid "Open door"
 msgstr "Sportel viert"
 
 #. Translators: At least one input tray is low on media
-#: panels/printers/pp-printer-entry.c:769
+#: panels/printers/pp-printer-entry.c:731
 msgid "Low on paper"
 msgstr "Cjarte in esauriment"
 
 #. Translators: At least one input tray is empty
-#: panels/printers/pp-printer-entry.c:771
+#: panels/printers/pp-printer-entry.c:733
 msgid "Out of paper"
 msgstr "Cjarte esauride"
 
 #. Translators: The printer is offline
-#: panels/printers/pp-printer-entry.c:773
+#: panels/printers/pp-printer-entry.c:735
 msgctxt "printer state"
 msgid "Offline"
 msgstr "Fûr rêt"
 
 #. Translators: Someone has stopped the Printer
 #. Translators: Printer's state (no jobs can be processed)
-#: panels/printers/pp-printer-entry.c:775
-#: panels/printers/pp-printer-entry.c:918
+#: panels/printers/pp-printer-entry.c:737
+#: panels/printers/pp-printer-entry.c:880
 msgctxt "printer state"
 msgid "Stopped"
 msgstr "Ferme"
 
 #. Translators: The printer marker supply waste receptacle is almost full
-#: panels/printers/pp-printer-entry.c:777
+#: panels/printers/pp-printer-entry.c:739
 msgid "Waste receptacle almost full"
 msgstr "Bidon scovacis cuasi plen"
 
 #. Translators: The printer marker supply waste receptacle is full
-#: panels/printers/pp-printer-entry.c:779
+#: panels/printers/pp-printer-entry.c:741
 msgid "Waste receptacle full"
 msgstr "Bidon scovacis plen"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:781
+#: panels/printers/pp-printer-entry.c:743
 msgid "The optical photo conductor is near end of life"
 msgstr "Il fotocondutôr otic al sta par terminâ il sô timp di operativitât"
 
 #. Translators: Optical photo conductors are used in laser printers
-#: panels/printers/pp-printer-entry.c:783
+#: panels/printers/pp-printer-entry.c:745
 msgid "The optical photo conductor is no longer functioning"
 msgstr "Il fotocondutôr otic nol funzione plui"
 
 #. Translators: Printer's state (can start new job without waiting)
-#: panels/printers/pp-printer-entry.c:904
+#: panels/printers/pp-printer-entry.c:866
 msgctxt "printer state"
 msgid "Ready"
 msgstr "Pronte"
 
 #. Translators: Printer's state (printer is ready but doesn't accept new jobs)
-#: panels/printers/pp-printer-entry.c:909
+#: panels/printers/pp-printer-entry.c:871
 msgctxt "printer state"
 msgid "Does not accept jobs"
 msgstr "No acete lavôrs"
 
 #. Translators: Printer's state (jobs are processing)
-#: panels/printers/pp-printer-entry.c:914
+#: panels/printers/pp-printer-entry.c:876
 msgctxt "printer state"
 msgid "Processing"
 msgstr "In elaborazion"
@@ -5657,11 +5704,11 @@ msgstr ""
 "dispositîf;sisteme;predefinît;preferît;preferide;cd;dvd;usb;audio;video;disc;"
 "estraibil;multimedia;esecuzion;autorun;"
 
-#: panels/search/cc-search-locations-dialog.c:635
+#: panels/search/cc-search-locations-dialog.c:636
 msgid "Select Location"
 msgstr "Selezione posizion"
 
-#: panels/search/cc-search-locations-dialog.c:639
+#: panels/search/cc-search-locations-dialog.c:640
 msgid "_OK"
 msgstr "_OK"
 
@@ -6185,360 +6232,536 @@ msgstr "Gjestìs i dispositîfs Thunderbolt"
 msgid "Thunderbolt;privacy;"
 msgstr "Thunderbolt;privacy;riservatece;"
 
-#. translators: the labels will read:
-#. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:500
-msgctxt "cursor size"
-msgid "Default"
-msgstr "Predefinide"
+#: panels/universal-access/cc-cursor-blinking-dialog.ui:7
+msgid "Cursor Blinking"
+msgstr "Lampâ dal cursôr"
 
-#: panels/universal-access/cc-ua-panel.c:503
-msgctxt "cursor size"
-msgid "Medium"
-msgstr "Medie"
+#: panels/universal-access/cc-cursor-blinking-dialog.ui:37
+msgid "Cursor blinks in text fields."
+msgstr "Il cursôr al lampe intai cjamps di test."
 
-#: panels/universal-access/cc-ua-panel.c:506
-msgctxt "cursor size"
-msgid "Large"
-msgstr "Grant"
+#: panels/universal-access/cc-cursor-blinking-dialog.ui:74
+#: panels/universal-access/cc-repeat-keys-dialog.ui:145
+msgid "Speed"
+msgstr "Velocitât"
 
-#: panels/universal-access/cc-ua-panel.c:509
-msgctxt "cursor size"
-msgid "Larger"
-msgstr "Plui grant"
+#: panels/universal-access/cc-cursor-blinking-dialog.ui:101
+msgid "Cursor blinking speed"
+msgstr "Velocitât dal lampâ dal cursôr"
 
-#: panels/universal-access/cc-ua-panel.c:512
-msgctxt "cursor size"
-msgid "Largest"
-msgstr "Il plui grant"
-
-#: panels/universal-access/cc-ua-panel.c:516
-#, c-format
-msgid "%d pixel"
-msgid_plural "%d pixels"
-msgstr[0] "%d pixel"
-msgstr[1] "%d pixel"
-
-#: panels/universal-access/cc-ua-panel.ui:76
-msgid "_Always Show Accessibility Menu"
-msgstr "_Mostre simpri il menù di acessibilitât"
-
-#: panels/universal-access/cc-ua-panel.ui:118
-msgid "Seeing"
-msgstr "Viste"
-
-#: panels/universal-access/cc-ua-panel.ui:164
-msgid "_High Contrast"
-msgstr "Contrast _elevât"
-
-#: panels/universal-access/cc-ua-panel.ui:211
-msgid "_Large Text"
-msgstr "Test _larc"
-
-#: panels/universal-access/cc-ua-panel.ui:256
-msgid "C_ursor Size"
-msgstr "Dimension c_ursôr"
-
-#: panels/universal-access/cc-ua-panel.ui:303
-#: panels/universal-access/zoom-options.ui:99
-msgid "_Zoom"
-msgstr "_Ingrandiment"
-
-#: panels/universal-access/cc-ua-panel.ui:349
-msgid "Screen _Reader"
-msgstr "_Letôr schermi"
-
-#: panels/universal-access/cc-ua-panel.ui:395
-#: panels/universal-access/cc-ua-panel.ui:1261
-msgid "_Sound Keys"
-msgstr "_Sun tascj"
-
-#: panels/universal-access/cc-ua-panel.ui:457
-msgid "Hearing"
-msgstr "Uldide"
-
-#: panels/universal-access/cc-ua-panel.ui:501
-#: panels/universal-access/cc-ua-panel.ui:1364
-msgid "_Visual Alerts"
-msgstr "Avîs _visibii"
-
-#: panels/universal-access/cc-ua-panel.ui:609
-msgid "Screen _Keyboard"
-msgstr "_Tastiere a visôr"
-
-#: panels/universal-access/cc-ua-panel.ui:654
-msgid "R_epeat Keys"
-msgstr "Rip_et tascj"
-
-#: panels/universal-access/cc-ua-panel.ui:700
-msgid "Cursor _Blinking"
-msgstr "_Lampâ dal cursôr"
-
-#: panels/universal-access/cc-ua-panel.ui:746
-msgid "_Typing Assist (AccessX)"
-msgstr "_Assistent di digjitazion (AccessX)"
-
-#: panels/universal-access/cc-ua-panel.ui:807
-msgid "Pointing & Clicking"
-msgstr "Pontament e clic"
-
-#: panels/universal-access/cc-ua-panel.ui:853
-msgid "_Mouse Keys"
-msgstr "_Mouse di tastiere"
-
-#: panels/universal-access/cc-ua-panel.ui:898
-msgid "_Locate Pointer"
-msgstr "_Localize il pontadôr"
-
-#: panels/universal-access/cc-ua-panel.ui:930
-msgid "_Click Assist"
-msgstr "Assistent _clic"
-
-#: panels/universal-access/cc-ua-panel.ui:976
-msgid "_Double-Click Delay"
-msgstr "Ritart _Dopli-clic"
-
-#: panels/universal-access/cc-ua-panel.ui:996
-msgid "Double-Click Delay"
-msgstr "Ritart Dopli-clic"
-
-#: panels/universal-access/cc-ua-panel.ui:1066
+#: panels/universal-access/cc-cursor-size-dialog.ui:7
 msgid "Cursor Size"
 msgstr "Dimension cursôr"
 
-#: panels/universal-access/cc-ua-panel.ui:1093
+#: panels/universal-access/cc-cursor-size-dialog.ui:29
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr ""
 "La dimension dal cursôr e pues jessi cumbinade cul ingrandiment par fâ viodi "
 "miôr il cursôr."
 
-#: panels/universal-access/cc-ua-panel.ui:1129
-msgid "Screen Reader"
-msgstr "Letôr schermi"
-
-#: panels/universal-access/cc-ua-panel.ui:1146
-msgid "The screen reader reads displayed text as you move the focus."
-msgstr "Il letôr di schermi al lei il test mostrât al spostament dal focus."
-
-#: panels/universal-access/cc-ua-panel.ui:1179
-msgid "_Screen Reader"
-msgstr "Letôr _schermi"
-
-#: panels/universal-access/cc-ua-panel.ui:1218
-msgid "Sound Keys"
-msgstr "Sun tascj"
-
-#: panels/universal-access/cc-ua-panel.ui:1236
-msgid "Beep when Num Lock or Caps Lock are turned on or off."
-msgstr ""
-"Fâs un sun cuant che BlocNum o BlocMaiusc a vegnin ativâts o disativâts."
-
-#: panels/universal-access/cc-ua-panel.ui:1306
-msgid "Visual Alerts"
-msgstr "Avîs visibii"
-
-#: panels/universal-access/cc-ua-panel.ui:1310
-msgid "_Test flash"
-msgstr "_Prove lampe"
-
-#: panels/universal-access/cc-ua-panel.ui:1339
-msgid "Use a visual indication when an alert sound occurs."
-msgstr "Dopre une indicazion visive in presince di un avîs audio."
-
-#: panels/universal-access/cc-ua-panel.ui:1390
-msgid "Flash the entire _window"
-msgstr "Iluminâ dut il _barcon"
-
-#: panels/universal-access/cc-ua-panel.ui:1408
-msgid "Flash the entire _screen"
-msgstr "Iluminâ dut il _visôr"
-
-#: panels/universal-access/cc-ua-panel.ui:1453
-msgid "Repeat Keys"
-msgstr "Ripet tascj"
-
-#: panels/universal-access/cc-ua-panel.ui:1483
-msgid "Key presses repeat when key is held down."
-msgstr "Il fracâ dal tast al ripet il caratar fintremai che al reste fracât."
-
-#: panels/universal-access/cc-ua-panel.ui:1563
-msgid "Repeat keys delay"
-msgstr "Ritart di ripetizion tascj"
-
-#: panels/universal-access/cc-ua-panel.ui:1611
-#: panels/universal-access/cc-ua-panel.ui:1746
-msgid "Speed"
-msgstr "Velocitât"
-
-#: panels/universal-access/cc-ua-panel.ui:1650
-msgid "Repeat keys speed"
-msgstr "Velocitât di ripetizion tascj"
-
-#: panels/universal-access/cc-ua-panel.ui:1674
-msgid "Cursor Blinking"
-msgstr "Lampâ dal cursôr"
-
-#: panels/universal-access/cc-ua-panel.ui:1704
-msgid "Cursor blinks in text fields."
-msgstr "Il cursôr al lampe intai cjamps di test."
-
-#: panels/universal-access/cc-ua-panel.ui:1783
-msgid "Cursor blinking speed"
-msgstr "Velocitât dal lampâ dal cursôr"
-
-#: panels/universal-access/cc-ua-panel.ui:1819
-msgid "Typing Assist"
-msgstr "Assistent di digjitazion"
-
-#: panels/universal-access/cc-ua-panel.ui:1858
-msgid "_Sticky Keys"
-msgstr "Tascj _singui"
-
-#: panels/universal-access/cc-ua-panel.ui:1875
-msgid "Treats a sequence of modifier keys as a key combination"
-msgstr "Trate une secuence di tascj di modifiche come une cumbinazion di tascj"
-
-#: panels/universal-access/cc-ua-panel.ui:1899
-msgid "_Disable if two keys are pressed together"
-msgstr "_No sta abilitâ se doi tascj a vegnin fracâts tal stes moment"
-
-#: panels/universal-access/cc-ua-panel.ui:1917
-msgid "Beep when a _modifier key is pressed"
-msgstr "Avîs sonôr cuant che al ven scliçât un tast di _modifiche"
-
-#: panels/universal-access/cc-ua-panel.ui:1965
-msgid "S_low Keys"
-msgstr "Tascj _lents"
-
-#: panels/universal-access/cc-ua-panel.ui:1982
-msgid "Puts a delay between when a key is pressed and when it is accepted"
-msgstr "Imposte un ritart jenfri la pression di un tast e la sô acetazion"
-
-#: panels/universal-access/cc-ua-panel.ui:2015
-#: panels/universal-access/cc-ua-panel.ui:2228
-#: panels/universal-access/cc-ua-panel.ui:2565
-msgid "A_cceptance delay:"
-msgstr "Ritart di a_cetazion:"
-
-#: panels/universal-access/cc-ua-panel.ui:2037
-msgctxt "slow keys delay"
-msgid "Short"
-msgstr "Curt"
-
-#: panels/universal-access/cc-ua-panel.ui:2056
-msgid "Slow keys typing delay"
-msgstr "Ritart digjitazion tascj lents"
-
-#: panels/universal-access/cc-ua-panel.ui:2071
-msgctxt "slow keys delay"
-msgid "Long"
-msgstr "Lunc"
-
-#: panels/universal-access/cc-ua-panel.ui:2098
-msgid "Beep when a key is pr_essed"
-msgstr "Avîs sonôr cuant che un tast al ven _scliçât"
-
-#: panels/universal-access/cc-ua-panel.ui:2115
-msgid "Beep when a key is _accepted"
-msgstr "Avîs sonôr cuant che un tast al ven _acetât"
-
-#: panels/universal-access/cc-ua-panel.ui:2132
-#: panels/universal-access/cc-ua-panel.ui:2311
-msgid "Beep when a key is _rejected"
-msgstr "Avîs sonôr cuant che un tast al ven _refudât"
-
-#: panels/universal-access/cc-ua-panel.ui:2178
-msgid "_Bounce Keys"
-msgstr "Tascj s_balçâts"
-
-#: panels/universal-access/cc-ua-panel.ui:2195
-msgid "Ignores fast duplicate keypresses"
-msgstr "Ignore rapidis pressions dopleadis di tascj"
-
-#: panels/universal-access/cc-ua-panel.ui:2250
-msgctxt "bounce keys delay"
-msgid "Short"
-msgstr "Curt"
-
-#: panels/universal-access/cc-ua-panel.ui:2269
-msgid "Bounce keys typing delay"
-msgstr "Ritart digjitazion tascj sbalçâts"
-
-#: panels/universal-access/cc-ua-panel.ui:2284
-msgctxt "bounce keys delay"
-msgid "Long"
-msgstr "Lunc"
-
-#: panels/universal-access/cc-ua-panel.ui:2397
-msgid "_Enable by Keyboard"
-msgstr "Abilite di _tastiere"
-
-#: panels/universal-access/cc-ua-panel.ui:2414
-msgid "Turn accessibility features on and off using the keyboard"
-msgstr "Tache e stache lis funzions di acessibilitât doprant la tastiere"
-
-#: panels/universal-access/cc-ua-panel.ui:2478
+#: panels/universal-access/cc-pointing-dialog.ui:7
 msgid "Click Assist"
 msgstr "Assistent clic"
 
-#: panels/universal-access/cc-ua-panel.ui:2514
+#: panels/universal-access/cc-pointing-dialog.ui:43
 msgid "_Simulated Secondary Click"
 msgstr "Clic secondari _simulât"
 
-#: panels/universal-access/cc-ua-panel.ui:2532
+#: panels/universal-access/cc-pointing-dialog.ui:56
 msgid "Trigger a secondary click by holding down the primary button"
 msgstr "Eseguìs un clic secondari tignint scliçât il pulsant primari"
 
-#: panels/universal-access/cc-ua-panel.ui:2586
+#: panels/universal-access/cc-pointing-dialog.ui:79
+#: panels/universal-access/cc-typing-dialog.ui:158
+#: panels/universal-access/cc-typing-dialog.ui:307
+msgid "A_cceptance delay:"
+msgstr "Ritart di a_cetazion:"
+
+#: panels/universal-access/cc-pointing-dialog.ui:95
 msgctxt "secondary click"
 msgid "Short"
 msgstr "Curt"
 
-#: panels/universal-access/cc-ua-panel.ui:2605
+#: panels/universal-access/cc-pointing-dialog.ui:110
 msgid "Secondary click delay"
 msgstr "Ritart clic secondari"
 
-#: panels/universal-access/cc-ua-panel.ui:2620
+#: panels/universal-access/cc-pointing-dialog.ui:120
 msgctxt "secondary click delay"
 msgid "Long"
 msgstr "Lunc"
 
-#: panels/universal-access/cc-ua-panel.ui:2677
+#: panels/universal-access/cc-pointing-dialog.ui:157
 msgid "_Hover Click"
 msgstr "Clic automatic tal fermâsi"
 
-#: panels/universal-access/cc-ua-panel.ui:2695
+#: panels/universal-access/cc-pointing-dialog.ui:170
 msgid "Trigger a click when the pointer hovers"
 msgstr "Eseguìs in automatic un clic cuant che si ferme il cursôr"
 
-#: panels/universal-access/cc-ua-panel.ui:2728
+#: panels/universal-access/cc-pointing-dialog.ui:193
 msgid "D_elay:"
 msgstr "R_itart:"
 
-#: panels/universal-access/cc-ua-panel.ui:2750
+#: panels/universal-access/cc-pointing-dialog.ui:210
 msgctxt "dwell click delay"
 msgid "Short"
 msgstr "Curt"
 
-#: panels/universal-access/cc-ua-panel.ui:2781
+#: panels/universal-access/cc-pointing-dialog.ui:232
 msgctxt "dwell click delay"
 msgid "Long"
 msgstr "Lunc"
 
-#: panels/universal-access/cc-ua-panel.ui:2817
+#: panels/universal-access/cc-pointing-dialog.ui:253
 msgid "Motion _threshold:"
 msgstr "Principi di m_oviment:"
 
-#: panels/universal-access/cc-ua-panel.ui:2839
+#: panels/universal-access/cc-pointing-dialog.ui:270
 msgctxt "dwell click threshold"
 msgid "Small"
 msgstr "Piçul"
 
-#: panels/universal-access/cc-ua-panel.ui:2870
+#: panels/universal-access/cc-pointing-dialog.ui:292
 msgctxt "dwell click threshold"
 msgid "Large"
 msgstr "Grant"
+
+#: panels/universal-access/cc-repeat-keys-dialog.ui:7
+msgid "Repeat Keys"
+msgstr "Ripet tascj"
+
+#: panels/universal-access/cc-repeat-keys-dialog.ui:37
+msgid "Key presses repeat when key is held down."
+msgstr "Il fracâ dal tast al ripet il caratar fintremai che al reste fracât."
+
+#: panels/universal-access/cc-repeat-keys-dialog.ui:102
+msgid "Repeat keys delay"
+msgstr "Ritart di ripetizion tascj"
+
+#: panels/universal-access/cc-repeat-keys-dialog.ui:174
+msgid "Repeat keys speed"
+msgstr "Velocitât di ripetizion tascj"
+
+#: panels/universal-access/cc-sound-keys-dialog.ui:7
+msgid "Sound Keys"
+msgstr "Sun tascj"
+
+#: panels/universal-access/cc-sound-keys-dialog.ui:25
+msgid "Beep when Num Lock or Caps Lock are turned on or off."
+msgstr ""
+"Fâs un sun cuant che BlocNum o BlocMaiusc a vegnin ativâts o disativâts."
+
+#: panels/universal-access/cc-sound-keys-dialog.ui:45
+#: panels/universal-access/cc-ua-panel.ui:374
+msgid "_Sound Keys"
+msgstr "_Sun tascj"
+
+#: panels/universal-access/cc-screen-reader-dialog.ui:7
+msgid "Screen Reader"
+msgstr "Letôr schermi"
+
+#: panels/universal-access/cc-screen-reader-dialog.ui:24
+msgid "The screen reader reads displayed text as you move the focus."
+msgstr "Il letôr di schermi al lei il test mostrât al spostament dal focus."
+
+#: panels/universal-access/cc-screen-reader-dialog.ui:52
+msgid "_Screen Reader"
+msgstr "Letôr _schermi"
+
+#: panels/universal-access/cc-typing-dialog.ui:7
+msgid "Typing Assist"
+msgstr "Assistent di digjitazion"
+
+#: panels/universal-access/cc-typing-dialog.ui:46
+msgid "_Sticky Keys"
+msgstr "Tascj _singui"
+
+#: panels/universal-access/cc-typing-dialog.ui:58
+msgid "Treats a sequence of modifier keys as a key combination"
+msgstr "Trate une secuence di tascj di modifiche come une cumbinazion di tascj"
+
+#: panels/universal-access/cc-typing-dialog.ui:72
+msgid "_Disable if two keys are pressed together"
+msgstr "_No sta abilitâ se doi tascj a vegnin fracâts tal stes moment"
+
+#: panels/universal-access/cc-typing-dialog.ui:85
+msgid "Beep when a _modifier key is pressed"
+msgstr "Avîs sonôr cuant che al ven scliçât un tast di _modifiche"
+
+#: panels/universal-access/cc-typing-dialog.ui:123
+msgid "S_low Keys"
+msgstr "Tascj _lents"
+
+#: panels/universal-access/cc-typing-dialog.ui:135
+msgid "Puts a delay between when a key is pressed and when it is accepted"
+msgstr "Imposte un ritart jenfri la pression di un tast e la sô acetazion"
+
+#: panels/universal-access/cc-typing-dialog.ui:175
+msgctxt "slow keys delay"
+msgid "Short"
+msgstr "Curt"
+
+#: panels/universal-access/cc-typing-dialog.ui:190
+msgid "Slow keys typing delay"
+msgstr "Ritart digjitazion tascj lents"
+
+#: panels/universal-access/cc-typing-dialog.ui:200
+msgctxt "slow keys delay"
+msgid "Long"
+msgstr "Lunc"
+
+#: panels/universal-access/cc-typing-dialog.ui:212
+msgid "Beep when a key is pr_essed"
+msgstr "Avîs sonôr cuant che un tast al ven _scliçât"
+
+#: panels/universal-access/cc-typing-dialog.ui:224
+msgid "Beep when a key is _accepted"
+msgstr "Avîs sonôr cuant che un tast al ven _acetât"
+
+#: panels/universal-access/cc-typing-dialog.ui:236
+#: panels/universal-access/cc-typing-dialog.ui:361
+msgid "Beep when a key is _rejected"
+msgstr "Avîs sonôr cuant che un tast al ven _refudât"
+
+#: panels/universal-access/cc-typing-dialog.ui:272
+msgid "_Bounce Keys"
+msgstr "Tascj s_balçâts"
+
+#: panels/universal-access/cc-typing-dialog.ui:284
+msgid "Ignores fast duplicate keypresses"
+msgstr "Ignore rapidis pressions dopleadis di tascj"
+
+#: panels/universal-access/cc-typing-dialog.ui:324
+msgctxt "bounce keys delay"
+msgid "Short"
+msgstr "Curt"
+
+#: panels/universal-access/cc-typing-dialog.ui:339
+msgid "Bounce keys typing delay"
+msgstr "Ritart digjitazion tascj sbalçâts"
+
+#: panels/universal-access/cc-typing-dialog.ui:349
+msgctxt "bounce keys delay"
+msgid "Long"
+msgstr "Lunc"
+
+#: panels/universal-access/cc-typing-dialog.ui:437
+msgid "_Enable by Keyboard"
+msgstr "Abilite di _tastiere"
+
+#: panels/universal-access/cc-typing-dialog.ui:449
+msgid "Turn accessibility features on and off using the keyboard"
+msgstr "Tache e stache lis funzions di acessibilitât doprant la tastiere"
+
+#. translators: the labels will read:
+#. * Cursor Size: Default
+#: panels/universal-access/cc-ua-panel.c:349
+msgctxt "cursor size"
+msgid "Default"
+msgstr "Predefinide"
+
+#: panels/universal-access/cc-ua-panel.c:352
+msgctxt "cursor size"
+msgid "Medium"
+msgstr "Medie"
+
+#: panels/universal-access/cc-ua-panel.c:355
+msgctxt "cursor size"
+msgid "Large"
+msgstr "Grant"
+
+#: panels/universal-access/cc-ua-panel.c:358
+msgctxt "cursor size"
+msgid "Larger"
+msgstr "Plui grant"
+
+#: panels/universal-access/cc-ua-panel.c:361
+msgctxt "cursor size"
+msgid "Largest"
+msgstr "Il plui grant"
+
+#: panels/universal-access/cc-ua-panel.c:365
+#, c-format
+msgid "%d pixel"
+msgid_plural "%d pixels"
+msgstr[0] "%d pixel"
+msgstr[1] "%d pixel"
+
+#: panels/universal-access/cc-ua-panel.ui:55
+msgid "_Always Show Accessibility Menu"
+msgstr "_Mostre simpri il menù di acessibilitât"
+
+#: panels/universal-access/cc-ua-panel.ui:97
+msgid "Seeing"
+msgstr "Viste"
+
+#: panels/universal-access/cc-ua-panel.ui:143
+msgid "_High Contrast"
+msgstr "Contrast _elevât"
+
+#: panels/universal-access/cc-ua-panel.ui:190
+msgid "_Large Text"
+msgstr "Test _larc"
+
+#: panels/universal-access/cc-ua-panel.ui:235
+msgid "C_ursor Size"
+msgstr "Dimension c_ursôr"
+
+#: panels/universal-access/cc-ua-panel.ui:282
+#: panels/universal-access/cc-zoom-options-dialog.ui:91
+msgid "_Zoom"
+msgstr "_Ingrandiment"
+
+#: panels/universal-access/cc-ua-panel.ui:328
+msgid "Screen _Reader"
+msgstr "_Letôr schermi"
+
+#: panels/universal-access/cc-ua-panel.ui:436
+msgid "Hearing"
+msgstr "Uldide"
+
+#: panels/universal-access/cc-ua-panel.ui:480
+#: panels/universal-access/cc-visual-alerts-dialog.ui:68
+msgid "_Visual Alerts"
+msgstr "Avîs _visibii"
+
+#: panels/universal-access/cc-ua-panel.ui:588
+msgid "Screen _Keyboard"
+msgstr "_Tastiere a visôr"
+
+#: panels/universal-access/cc-ua-panel.ui:633
+msgid "R_epeat Keys"
+msgstr "Rip_et tascj"
+
+#: panels/universal-access/cc-ua-panel.ui:679
+msgid "Cursor _Blinking"
+msgstr "_Lampâ dal cursôr"
+
+#: panels/universal-access/cc-ua-panel.ui:725
+msgid "_Typing Assist (AccessX)"
+msgstr "_Assistent di digjitazion (AccessX)"
+
+#: panels/universal-access/cc-ua-panel.ui:786
+msgid "Pointing & Clicking"
+msgstr "Pontament e clic"
+
+#: panels/universal-access/cc-ua-panel.ui:832
+msgid "_Mouse Keys"
+msgstr "_Mouse di tastiere"
+
+#: panels/universal-access/cc-ua-panel.ui:877
+msgid "_Locate Pointer"
+msgstr "_Localize il pontadôr"
+
+#: panels/universal-access/cc-ua-panel.ui:909
+msgid "_Click Assist"
+msgstr "Assistent _clic"
+
+#: panels/universal-access/cc-ua-panel.ui:955
+msgid "_Double-Click Delay"
+msgstr "Ritart _Dopli-clic"
+
+#: panels/universal-access/cc-ua-panel.ui:975
+msgid "Double-Click Delay"
+msgstr "Ritart Dopli-clic"
+
+#: panels/universal-access/cc-visual-alerts-dialog.ui:15
+msgid "Visual Alerts"
+msgstr "Avîs visibii"
+
+#: panels/universal-access/cc-visual-alerts-dialog.ui:19
+msgid "_Test flash"
+msgstr "_Prove lampe"
+
+#: panels/universal-access/cc-visual-alerts-dialog.ui:48
+msgid "Use a visual indication when an alert sound occurs."
+msgstr "Dopre une indicazion visive in presince di un avîs audio."
+
+#: panels/universal-access/cc-visual-alerts-dialog.ui:94
+msgid "Flash the entire _window"
+msgstr "Iluminâ dut il _barcon"
+
+#: panels/universal-access/cc-visual-alerts-dialog.ui:112
+msgid "Flash the entire _screen"
+msgstr "Iluminâ dut il _visôr"
+
+#: panels/universal-access/cc-zoom-options-dialog.c:303
+msgctxt "Distance"
+msgid "Short"
+msgstr "Curt"
+
+#: panels/universal-access/cc-zoom-options-dialog.c:304
+msgctxt "Distance"
+msgid "¼ Screen"
+msgstr "¼ di schermi"
+
+#: panels/universal-access/cc-zoom-options-dialog.c:305
+msgctxt "Distance"
+msgid "½ Screen"
+msgstr "½ schermi"
+
+#: panels/universal-access/cc-zoom-options-dialog.c:306
+msgctxt "Distance"
+msgid "¾ Screen"
+msgstr "¾ di schermi"
+
+#: panels/universal-access/cc-zoom-options-dialog.c:307
+msgctxt "Distance"
+msgid "Long"
+msgstr "Lungje"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:40
+msgid "Full Screen"
+msgstr "Plen visôr"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:45
+msgid "Top Half"
+msgstr "Metât superiôr"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:50
+msgid "Bottom Half"
+msgstr "Metât inferiôr"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:55
+msgid "Left Half"
+msgstr "Metât çampe"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:60
+msgid "Right Half"
+msgstr "Metât diestre"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:70
+msgid "Zoom Options"
+msgstr "Opzions di ingrandiment"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:151
+msgid "_Magnification:"
+msgstr "In_grandiment:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:201
+msgid "_Follow mouse cursor"
+msgstr "_Cor daûr dal cursôr dal mouse"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:221
+msgid "_Screen part:"
+msgstr "Part di _schermi:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:278
+msgid "Magnifier _extends outside of screen"
+msgstr "L'ingranditôr si _slargje fûr dal visôr"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:292
+msgid "_Keep magnifier cursor centered"
+msgstr "_Tegnî il cursôr dal ingranditôr tal mieç"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:307
+msgid "Magnifier cursor _pushes contents around"
+msgstr "Il cursôr dal ingranditôr al _sburte il contignût"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:322
+msgid "Magnifier cursor moves with _contents"
+msgstr "Il cursôr dal ingranditôr si sposte cui _contignûts"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:347
+msgid "Magnifier Position:"
+msgstr "Posizion dal ingranditôr:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:362
+msgid "Magnifier"
+msgstr "Ingranditôr"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:410
+msgid "_Thickness:"
+msgstr "_Spessôr:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:436
+msgctxt "universal access, thickness"
+msgid "Thin"
+msgstr "Fin"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:458
+msgctxt "universal access, thickness"
+msgid "Thick"
+msgstr "Spes"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:479
+msgid "_Length:"
+msgstr "_Lungjece:"
+
+#. The color of the accessibility crosshair
+#: panels/universal-access/cc-zoom-options-dialog.ui:523
+msgid "Co_lor:"
+msgstr "Co_lôr:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:577
+msgid "_Crosshairs:"
+msgstr "S_mire:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:610
+msgid "_Overlaps mouse cursor"
+msgstr "_Al sta parsore dal cursôr dal mouse"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:634
+msgid "Crosshairs"
+msgstr "Smiris"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:683
+msgid "_White on black:"
+msgstr "Blanc su _neri:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:703
+msgid "_Brightness:"
+msgstr "L_uminositât:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:724
+msgid "_Contrast:"
+msgstr "_Contrast:"
+
+#. The contrast scale goes from Color to None (grayscale)
+#: panels/universal-access/cc-zoom-options-dialog.ui:744
+msgctxt "universal access, contrast"
+msgid "Co_lor"
+msgstr "Co_lôr"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:769
+msgctxt "universal access, color"
+msgid "None"
+msgstr "Nissun"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:791
+msgctxt "universal access, color"
+msgid "Full"
+msgstr "Plen"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:844
+msgctxt "universal access, brightness"
+msgid "Low"
+msgstr "Basse"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:867
+msgctxt "universal access, brightness"
+msgid "High"
+msgstr "Alte"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:893
+msgctxt "universal access, contrast"
+msgid "Low"
+msgstr "Ridot"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:916
+msgctxt "universal access, contrast"
+msgid "High"
+msgstr "Elevât"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:942
+msgid "Color Effects:"
+msgstr "Efiets colôr:"
+
+#: panels/universal-access/cc-zoom-options-dialog.ui:958
+msgid "Color Effects"
+msgstr "Efiets colôr"
 
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:4
 msgid "Make it easier to see, hear, type, point and click"
@@ -6557,182 +6780,6 @@ msgstr ""
 "font;dimension;AccessX;Tascj;Singui;Tacadiçs;Sticky;Lents;Slow;Sbalçâts;"
 "Bounce;Mouse;Dopli;clic;Ritart;Assist;Ripet;Lampâ;visuâl;sintî;audio;"
 "scriture;"
-
-#: panels/universal-access/zoom-options.c:303
-msgctxt "Distance"
-msgid "Short"
-msgstr "Curt"
-
-#: panels/universal-access/zoom-options.c:304
-msgctxt "Distance"
-msgid "¼ Screen"
-msgstr "¼ di schermi"
-
-#: panels/universal-access/zoom-options.c:305
-msgctxt "Distance"
-msgid "½ Screen"
-msgstr "½ schermi"
-
-#: panels/universal-access/zoom-options.c:306
-msgctxt "Distance"
-msgid "¾ Screen"
-msgstr "¾ di schermi"
-
-#: panels/universal-access/zoom-options.c:307
-msgctxt "Distance"
-msgid "Long"
-msgstr "Lungje"
-
-#: panels/universal-access/zoom-options.ui:48
-msgid "Full Screen"
-msgstr "Plen visôr"
-
-#: panels/universal-access/zoom-options.ui:53
-msgid "Top Half"
-msgstr "Metât superiôr"
-
-#: panels/universal-access/zoom-options.ui:58
-msgid "Bottom Half"
-msgstr "Metât inferiôr"
-
-#: panels/universal-access/zoom-options.ui:63
-msgid "Left Half"
-msgstr "Metât çampe"
-
-#: panels/universal-access/zoom-options.ui:68
-msgid "Right Half"
-msgstr "Metât diestre"
-
-#: panels/universal-access/zoom-options.ui:78
-msgid "Zoom Options"
-msgstr "Opzions di ingrandiment"
-
-#: panels/universal-access/zoom-options.ui:185
-msgid "_Magnification:"
-msgstr "In_grandiment:"
-
-#: panels/universal-access/zoom-options.ui:249
-msgid "_Follow mouse cursor"
-msgstr "_Cor daûr dal cursôr dal mouse"
-
-#: panels/universal-access/zoom-options.ui:269
-msgid "_Screen part:"
-msgstr "Part di _schermi:"
-
-#: panels/universal-access/zoom-options.ui:331
-msgid "Magnifier _extends outside of screen"
-msgstr "L'ingranditôr si _slargje fûr dal visôr"
-
-#: panels/universal-access/zoom-options.ui:350
-msgid "_Keep magnifier cursor centered"
-msgstr "_Tegnî il cursôr dal ingranditôr tal mieç"
-
-#: panels/universal-access/zoom-options.ui:370
-msgid "Magnifier cursor _pushes contents around"
-msgstr "Il cursôr dal ingranditôr al _sburte il contignût"
-
-#: panels/universal-access/zoom-options.ui:390
-msgid "Magnifier cursor moves with _contents"
-msgstr "Il cursôr dal ingranditôr si sposte cui _contignûts"
-
-#: panels/universal-access/zoom-options.ui:425
-msgid "Magnifier Position:"
-msgstr "Posizion dal ingranditôr:"
-
-#: panels/universal-access/zoom-options.ui:446
-msgid "Magnifier"
-msgstr "Ingranditôr"
-
-#: panels/universal-access/zoom-options.ui:493
-msgid "_Thickness:"
-msgstr "_Spessôr:"
-
-#: panels/universal-access/zoom-options.ui:519
-msgctxt "universal access, thickness"
-msgid "Thin"
-msgstr "Fin"
-
-#: panels/universal-access/zoom-options.ui:551
-msgctxt "universal access, thickness"
-msgid "Thick"
-msgstr "Spes"
-
-#: panels/universal-access/zoom-options.ui:577
-msgid "_Length:"
-msgstr "_Lungjece:"
-
-#. The color of the accessibility crosshair
-#: panels/universal-access/zoom-options.ui:626
-msgid "Co_lor:"
-msgstr "Co_lôr:"
-
-#: panels/universal-access/zoom-options.ui:690
-msgid "_Crosshairs:"
-msgstr "S_mire:"
-
-#: panels/universal-access/zoom-options.ui:738
-msgid "_Overlaps mouse cursor"
-msgstr "_Al sta parsore dal cursôr dal mouse"
-
-#: panels/universal-access/zoom-options.ui:776
-msgid "Crosshairs"
-msgstr "Smiris"
-
-#: panels/universal-access/zoom-options.ui:825
-msgid "_White on black:"
-msgstr "Blanc su _neri:"
-
-#: panels/universal-access/zoom-options.ui:845
-msgid "_Brightness:"
-msgstr "L_uminositât:"
-
-#: panels/universal-access/zoom-options.ui:866
-msgid "_Contrast:"
-msgstr "_Contrast:"
-
-#. The contrast scale goes from Color to None (grayscale)
-#: panels/universal-access/zoom-options.ui:886
-msgctxt "universal access, contrast"
-msgid "Co_lor"
-msgstr "Co_lôr"
-
-#: panels/universal-access/zoom-options.ui:911
-msgctxt "universal access, color"
-msgid "None"
-msgstr "Nissun"
-
-#: panels/universal-access/zoom-options.ui:943
-msgctxt "universal access, color"
-msgid "Full"
-msgstr "Plen"
-
-#: panels/universal-access/zoom-options.ui:1006
-msgctxt "universal access, brightness"
-msgid "Low"
-msgstr "Basse"
-
-#: panels/universal-access/zoom-options.ui:1039
-msgctxt "universal access, brightness"
-msgid "High"
-msgstr "Alte"
-
-#: panels/universal-access/zoom-options.ui:1070
-msgctxt "universal access, contrast"
-msgid "Low"
-msgstr "Ridot"
-
-#: panels/universal-access/zoom-options.ui:1103
-msgctxt "universal access, contrast"
-msgid "High"
-msgstr "Elevât"
-
-#: panels/universal-access/zoom-options.ui:1139
-msgid "Color Effects:"
-msgstr "Efiets colôr:"
-
-#: panels/universal-access/zoom-options.ui:1164
-msgid "Color Effects"
-msgstr "Efiets colôr"
 
 #: panels/usage/cc-usage-panel.c:154
 msgid "Empty all items from Trash?"
