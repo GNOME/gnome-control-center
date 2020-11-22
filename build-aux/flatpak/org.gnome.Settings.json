@@ -189,9 +189,10 @@
         },
         {
             "name" : "gudev",
-            "buildsystem" : "autotools",
+            "buildsystem" : "meson",
             "config-opts" : [
-                "--disable-umockdev"
+                "-Dtests=disabled",
+                "-Dintrospection=disabled"
             ],
             "sources" : [
                 {
