@@ -34,10 +34,13 @@ struct _CcPowerProfileRow
 {
   GtkListBoxRow parent_instance;
 
+  GtkRadioButton *button;
+  GtkImage       *icon_image;
+  GtkLabel       *subtitle_label;
+  GtkLabel       *title_label;
+
   CcPowerProfile power_profile;
   char *performance_inhibited;
-  GtkRadioButton *button;
-  GtkWidget *subtext;
 };
 
 G_DEFINE_TYPE (CcPowerProfileRow, cc_power_profile_row, GTK_TYPE_LIST_BOX_ROW)
@@ -72,9 +75,9 @@ performance_profile_set_inhibited (CcPowerProfileRow *self,
   if (self->power_profile != CC_POWER_PROFILE_PERFORMANCE)
     return;
 
-  gtk_style_context_remove_class (gtk_widget_get_style_context (self->subtext),
+  gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self->subtitle_label)),
                                   GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_style_context_remove_class (gtk_widget_get_style_context (self->subtext),
+  gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self->subtitle_label)),
                                   GTK_STYLE_CLASS_ERROR);
 
   text = get_performance_inhibited_text (performance_inhibited);
@@ -82,84 +85,11 @@ performance_profile_set_inhibited (CcPowerProfileRow *self,
     inhibited = TRUE;
   else
     text = _("High performance and power usage.");
-  gtk_label_set_text (GTK_LABEL (self->subtext), text);
+  gtk_label_set_text (GTK_LABEL (self->subtitle_label), text);
 
-  gtk_style_context_add_class (gtk_widget_get_style_context (self->subtext),
+  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->subtitle_label)),
                                inhibited ? GTK_STYLE_CLASS_ERROR : GTK_STYLE_CLASS_DIM_LABEL);
   gtk_widget_set_sensitive (GTK_WIDGET (self), !inhibited);
-}
-
-static GtkWidget *
-performance_row_new (const gchar  *title,
-                     const gchar  *icon_name,
-                     const gchar  *class_name,
-                     const gchar  *subtitle)
-{
-  PangoAttrList *attributes;
-  GtkWidget *grid, *button, *label, *image;
-  GtkStyleContext *context;
-
-  grid = gtk_grid_new ();
-  g_object_set (G_OBJECT (grid),
-                "margin-top", 6,
-                "margin-bottom", 6,
-                NULL);
-  gtk_widget_show (grid);
-
-  button = gtk_radio_button_new (NULL);
-  g_object_set (G_OBJECT (button),
-                "margin-end", 18,
-                "margin-start", 6,
-                NULL);
-  gtk_widget_show (button);
-  g_object_set_data (G_OBJECT (grid), "button", button);
-  gtk_grid_attach (GTK_GRID (grid), button, 0, 0, 1, 2);
-
-  image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
-  gtk_widget_set_margin_end (image, 6);
-  gtk_widget_show (image);
-  gtk_grid_attach (GTK_GRID (grid), image, 1, 0, 1, 1);
-
-  context = gtk_widget_get_style_context (image);
-  gtk_style_context_add_class (context, "power-profile");
-  if (class_name != NULL)
-    gtk_style_context_add_class (context, class_name);
-
-  label = gtk_label_new (title);
-  g_object_set (G_OBJECT (label),
-                "ellipsize", PANGO_ELLIPSIZE_END,
-                "halign", GTK_ALIGN_START,
-                "expand", TRUE,
-                "use-markup", TRUE,
-                "use-underline", TRUE,
-                "visible", TRUE,
-                "xalign", 0.0,
-                NULL);
-  gtk_widget_show (label);
-  gtk_grid_attach (GTK_GRID (grid), label, 2, 0, 1, 1);
-
-  attributes = pango_attr_list_new ();
-  pango_attr_list_insert (attributes, pango_attr_scale_new (0.9));
-
-  label = gtk_label_new (subtitle);
-  g_object_set (G_OBJECT (label),
-                "ellipsize", PANGO_ELLIPSIZE_END,
-                "halign", GTK_ALIGN_START,
-                "expand", TRUE,
-                "use-markup", TRUE,
-                "use-underline", TRUE,
-                "visible", TRUE,
-                "xalign", 0.0,
-                "attributes", attributes,
-                NULL);
-  gtk_style_context_add_class (gtk_widget_get_style_context (label),
-                               GTK_STYLE_CLASS_DIM_LABEL);
-  g_object_set_data (G_OBJECT (grid), "subtext", label);
-  gtk_grid_attach (GTK_GRID (grid), label, 1, 1, 2, 1);
-
-  pango_attr_list_unref (attributes);
-
-  return grid;
 }
 
 static void
@@ -171,6 +101,17 @@ cc_power_profile_row_button_toggled_cb (CcPowerProfileRow *self)
 static void
 cc_power_profile_row_class_init (CcPowerProfileRowClass *klass)
 {
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-profile-row.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, button);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, icon_image);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, subtitle_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, title_label);
+
+  gtk_widget_class_bind_template_callback (widget_class, cc_power_profile_row_button_toggled_cb);
+
   signals[BUTTON_TOGGLED] =
     g_signal_new ("button-toggled",
                   G_TYPE_FROM_CLASS (klass),
@@ -183,6 +124,7 @@ cc_power_profile_row_class_init (CcPowerProfileRowClass *klass)
 static void
 cc_power_profile_row_init (CcPowerProfileRow *self)
 {
+  gtk_widget_init_template (GTK_WIDGET (self));
 }
 
 CcPowerProfile
@@ -229,19 +171,15 @@ cc_power_profile_row_get_active (CcPowerProfileRow *self)
   return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->button));
 }
 
-GtkWidget *
-cc_power_profile_row_new (CcPowerProfile  power_profile,
-                          const char     *performance_inhibited)
+CcPowerProfileRow *
+cc_power_profile_row_new (CcPowerProfile power_profile)
 {
   CcPowerProfileRow *self;
   const char *text, *subtext, *icon_name, *class_name;
-  GtkWidget *box, *title;
 
   self = g_object_new (CC_TYPE_POWER_PROFILE_ROW, NULL);
 
   self->power_profile = power_profile;
-  cc_power_profile_row_set_performance_inhibited (self, performance_inhibited);
-
   switch (self->power_profile)
     {
       case CC_POWER_PROFILE_PERFORMANCE:
@@ -266,27 +204,13 @@ cc_power_profile_row_new (CcPowerProfile  power_profile,
         g_assert_not_reached ();
     }
 
-  gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (self), FALSE);
-  gtk_widget_show (GTK_WIDGET (self));
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  g_object_set (G_OBJECT (box),
-                "margin-end", 12,
-                "margin-start", 12,
-                "visible", TRUE,
-                NULL);
-  gtk_container_add (GTK_CONTAINER (self), box);
+  gtk_label_set_markup (self->title_label, text);
+  gtk_label_set_markup (self->subtitle_label, subtext);
+  gtk_image_set_from_icon_name (self->icon_image, icon_name, GTK_ICON_SIZE_MENU);
+  if (class_name != NULL)
+    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->icon_image)), class_name);
 
-  title = performance_row_new (text, icon_name, class_name, subtext);
-  self->subtext = g_object_get_data (G_OBJECT (title), "subtext");
-  self->button = g_object_get_data (G_OBJECT (title), "button");
-  g_signal_connect_object (G_OBJECT (self->button), "toggled",
-                           G_CALLBACK (cc_power_profile_row_button_toggled_cb),
-                           self, G_CONNECT_SWAPPED);
-  if (self->power_profile == CC_POWER_PROFILE_PERFORMANCE)
-    performance_profile_set_inhibited (self, self->performance_inhibited);
-  gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
-
-  return GTK_WIDGET (self);
+  return self;
 }
 
 CcPowerProfile

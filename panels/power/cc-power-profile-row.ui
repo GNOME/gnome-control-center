@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <template class="CcPowerProfileRow" parent="GtkListBoxRow">
+    <property name="selectable">False</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="orientation">horizontal</property>
+        <property name="margin-start">12</property>
+        <property name="margin-end">12</property>
+        <property name="spacing">12</property>
+        <child>
+          <object class="GtkGrid">
+            <property name="visible">True</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
+            <child>
+              <object class="GtkRadioButton" id="button">
+                <property name="visible">True</property>
+                <property name="margin-start">6</property>
+                <property name="margin-end">18</property>
+                <signal name="toggled" handler="cc_power_profile_row_button_toggled_cb" object="CcPowerProfileRow" swapped="yes"/>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+                <property name="height">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkImage" id="icon_image">
+                <property name="visible">True</property>
+                <property name="margin-end">6</property>
+                <style>
+                  <class name="power-profile"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="title_label">
+                <property name="visible">True</property>
+                <property name="halign">start</property>
+                <property name="ellipsize">end</property>
+                <property name="expand">True</property>
+                <property name="use-markup">True</property>
+                <property name="use-underline">True</property>
+                <property name="xalign">0</property>
+                <property name="margin-end">6</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="subtitle_label">
+                <property name="visible">True</property>
+                <property name="ellipsize">end</property>
+                <property name="halign">start</property>
+                <property name="expand">True</property>
+                <property name="use-markup">True</property>
+                <property name="use-underline">True</property>
+                <property name="xalign">0</property>
+                <property name="margin-end">6</property>
+                <attributes>
+                  <attribute name="scale" value="0.9"/>
+                </attributes>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+                <property name="width">2</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>
+

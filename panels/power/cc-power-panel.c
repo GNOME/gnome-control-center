@@ -133,7 +133,7 @@ struct _CcPowerPanel
 
   GDBusProxy    *power_profiles_proxy;
   guint          power_profiles_prop_id;
-  GtkWidget     *power_profiles_row[NUM_CC_POWER_PROFILES];
+  CcPowerProfileRow *power_profiles_row[NUM_CC_POWER_PROFILES];
   gboolean       power_profiles_in_update;
 
 #ifdef HAVE_NETWORK_MANAGER
@@ -1360,12 +1360,11 @@ static void
 performance_profile_set_inhibited (CcPowerPanel  *self,
                                    const char    *performance_inhibited)
 {
-  GtkWidget *row;
+  CcPowerProfileRow *row;
 
   row = self->power_profiles_row[CC_POWER_PROFILE_PERFORMANCE];
   g_assert (row != NULL);
-  cc_power_profile_row_set_performance_inhibited (CC_POWER_PROFILE_ROW (row),
-                                                  performance_inhibited);
+  cc_power_profile_row_set_performance_inhibited (row, performance_inhibited);
 }
 
 static void
@@ -1574,7 +1573,7 @@ setup_power_profiles (CcPowerPanel *self)
       const char *name;
       GtkRadioButton *button;
       CcPowerProfile profile;
-      GtkWidget *row;
+      CcPowerProfileRow *row;
 
       profile_variant = g_variant_get_child_value (profiles, i);
       if (!profile_variant ||
@@ -1588,18 +1587,18 @@ setup_power_profiles (CcPowerPanel *self)
                name, variant_lookup_string (profile_variant, "Driver"));
 
       profile = cc_power_profile_from_str (name);
-      row = cc_power_profile_row_new (cc_power_profile_from_str (name),
-                                      performance_inhibited);
+      row = cc_power_profile_row_new (cc_power_profile_from_str (name));
+      cc_power_profile_row_set_performance_inhibited (row, performance_inhibited);
       g_signal_connect_object (G_OBJECT (row), "button-toggled",
                                G_CALLBACK (power_profile_button_toggled_cb), self,
                                0);
       self->power_profiles_row[profile] = row;
-      gtk_widget_show (row);
-      gtk_container_add (GTK_CONTAINER (self->power_profile_listbox), row);
-      gtk_size_group_add_widget (self->row_sizegroup, row);
+      gtk_widget_show (GTK_WIDGET (row));
+      gtk_container_add (GTK_CONTAINER (self->power_profile_listbox), GTK_WIDGET (row));
+      gtk_size_group_add_widget (self->row_sizegroup, GTK_WIDGET (row));
 
       /* Connect radio button to group */
-      button = cc_power_profile_row_get_radio_button (CC_POWER_PROFILE_ROW (row));
+      button = cc_power_profile_row_get_radio_button (row);
       gtk_radio_button_join_group (button, last_button);
       last_button = button;
     }
