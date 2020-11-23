@@ -539,6 +539,8 @@ pp_new_printer_dialog_finalize (GObject *object)
   g_clear_pointer (&self->list, ppd_list_free);
   g_clear_object (&self->builder);
   g_clear_pointer (&self->local_cups_devices, g_ptr_array_unref);
+  g_clear_object (&self->ppd_selection_dialog);
+  g_clear_object (&self->new_device);
   g_clear_object (&self->local_printer_icon);
   g_clear_object (&self->remote_printer_icon);
   g_clear_object (&self->authenticated_server_icon);
