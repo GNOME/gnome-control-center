@@ -76,6 +76,9 @@ struct _CcPowerPanel
   GtkScrolledWindow *main_scroll;
   HdyClamp          *main_box;
   GtkListStore      *power_button_liststore;
+  GtkLabel          *power_profile_heading;
+  GtkListBox        *power_profile_listbox;
+  GtkBox            *power_profile_section;
   GtkBox            *power_vbox;
   GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
@@ -1782,10 +1785,8 @@ power_profile_button_toggled_cb (CcPowerProfileRow *row,
 }
 
 static void
-add_power_profiles_section (CcPowerPanel *self)
+setup_power_profiles (CcPowerPanel *self)
 {
-  GtkWidget *widget, *box, *label, *row;
-  g_autofree gchar *s = NULL;
   g_autoptr(GDBusConnection) connection = NULL;
   g_autoptr(GVariant) variant = NULL;
   g_autoptr(GVariant) props = NULL;
@@ -1841,48 +1842,9 @@ add_power_profiles_section (CcPowerPanel *self)
       return;
     }
 
-  s = g_strdup_printf ("<b>%s</b>", _("Power Mode"));
-  label = gtk_label_new (s);
-  gtk_widget_show (label);
-  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
-  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_box_pack_start (self->power_vbox, label, FALSE, TRUE, 0);
+  gtk_widget_show (GTK_WIDGET (self->power_profile_section));
 
-  label = gtk_label_new (_("Affects system performance and power usage."));
-  gtk_widget_show (label);
-  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-  gtk_widget_set_margin_bottom (label, 6);
-  gtk_box_pack_start (self->power_vbox, label, FALSE, TRUE, 0);
-
-  widget = gtk_list_box_new ();
-  gtk_widget_show (widget);
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, widget);
-  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed_cb), self, G_CONNECT_SWAPPED);
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
-                              perf_profile_list_box_sort,
-                              NULL, NULL);
-  g_signal_connect_object (G_OBJECT (widget), "row-activated",
-                           G_CALLBACK (power_profiles_row_activated_cb), NULL, 0);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (label)),
-                               ATK_RELATION_LABEL_FOR,
-                               ATK_OBJECT (gtk_widget_get_accessible (widget)));
-  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (widget)),
-                               ATK_RELATION_LABELLED_BY,
-                               ATK_OBJECT (gtk_widget_get_accessible (label)));
-
-  box = gtk_frame_new (NULL);
-  gtk_widget_show (box);
-  gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_IN);
-  gtk_widget_set_margin_bottom (box, 32);
-  gtk_container_add (GTK_CONTAINER (box), widget);
-  gtk_box_pack_start (self->power_vbox, box, FALSE, TRUE, 0);
+  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->power_profile_listbox);
 
   props = g_variant_get_child_value (variant, 0);
   performance_inhibited = variant_lookup_string (props, "PerformanceInhibited");
@@ -1897,6 +1859,7 @@ add_power_profiles_section (CcPowerPanel *self)
       const char *name;
       GtkRadioButton *button;
       CcPowerProfile profile;
+      GtkWidget *row;
 
       profile_variant = g_variant_get_child_value (profiles, i);
       if (!profile_variant ||
@@ -1917,7 +1880,7 @@ add_power_profiles_section (CcPowerPanel *self)
                                0);
       self->power_profiles_row[profile] = row;
       gtk_widget_show (row);
-      gtk_container_add (GTK_CONTAINER (widget), row);
+      gtk_container_add (GTK_CONTAINER (self->power_profile_listbox), row);
       gtk_size_group_add_widget (self->row_sizegroup, row);
 
       /* Connect radio button to group */
@@ -2099,6 +2062,9 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_scroll);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_liststore);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_heading);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
@@ -2110,6 +2076,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, power_profiles_row_activated_cb);
 }
 
 static void
@@ -2117,6 +2084,7 @@ cc_power_panel_init (CcPowerPanel *self)
 {
   g_autofree gchar *battery_label = NULL;
   g_autofree gchar *device_label = NULL;
+  g_autofree gchar *power_profile_label = NULL;
   guint i;
 
   g_resources_register (cc_power_get_resource ());
@@ -2153,7 +2121,16 @@ cc_power_panel_init (CcPowerPanel *self)
   gtk_list_box_set_sort_func (self->device_listbox,
                               (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
 
-  add_power_profiles_section (self);
+  power_profile_label = g_strdup_printf ("<b>%s</b>", _("Power Mode"));
+  gtk_label_set_markup (self->power_profile_heading, power_profile_label);
+  gtk_list_box_set_sort_func (self->power_profile_listbox,
+                              perf_profile_list_box_sort,
+                              NULL, NULL);
+  gtk_list_box_set_header_func (self->power_profile_listbox,
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+  setup_power_profiles (self);
+
   add_power_saving_section (self);
   add_general_section (self);
 

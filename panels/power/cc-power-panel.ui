@@ -202,6 +202,50 @@
                     </child>
                   </object>
                 </child>
+                <child>
+                  <object class="GtkBox" id="power_profile_section">
+                    <property name="visible">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="margin_bottom">32</property>
+                    <child>
+                      <object class="GtkLabel" id="power_profile_heading">
+                        <property name="visible">True</property>
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="use-markup">True</property>
+                        <property name="halign">start</property>
+                        <accessibility>
+                          <relation target="power_profile_listbox" type="label-for"/>
+                        </accessibility>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="xalign">0</property>
+                        <property name="margin-bottom">6</property>
+                        <property name="label" translatable="yes">Affects system performance and power usage.</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <object class="GtkListBox" id="power_profile_listbox">
+                            <property name="visible">True</property>
+                            <property name="selection-mode">none</property>
+                            <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                            <signal name="row-activated" handler="power_profiles_row_activated_cb" object="CcPowerPanel" swapped="yes"/>
+                            <accessibility>
+                              <relation target="device_heading" type="labelled-by"/>
+                            </accessibility>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -398,4 +442,3 @@
     </child>
   </object>
 </interface>
-
