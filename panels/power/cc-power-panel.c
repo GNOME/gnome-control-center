@@ -2014,12 +2014,14 @@ add_general_section (CcPowerPanel *self)
   /* Frame header */
   s = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Button"));
   label = gtk_label_new (s);
+  gtk_widget_show (label);
   gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
   gtk_widget_set_margin_bottom (label, 12);
   gtk_box_pack_start (GTK_BOX (self->vbox_power), label, FALSE, TRUE, 0);
 
   widget = gtk_list_box_new ();
+  gtk_widget_show (widget);
   self->boxes_reverse = g_list_prepend (self->boxes_reverse, widget);
   g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed), self, G_CONNECT_SWAPPED);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
@@ -2035,6 +2037,7 @@ add_general_section (CcPowerPanel *self)
                                ATK_OBJECT (gtk_widget_get_accessible (label)));
 
   box = gtk_frame_new (NULL);
+  gtk_widget_show (box);
   gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_IN);
   gtk_widget_set_margin_bottom (box, 32);
   gtk_container_add (GTK_CONTAINER (box), widget);
@@ -2051,10 +2054,6 @@ add_general_section (CcPowerPanel *self)
       add_battery_percentage (self, GTK_LIST_BOX (widget));
       return;
     }
-
-  gtk_widget_show (label);
-  gtk_widget_show (widget);
-  gtk_widget_show (box);
 
   /* Power button row */
   row = no_prelight_row_new ();
