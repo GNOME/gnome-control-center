@@ -62,7 +62,10 @@ struct _CcPowerPanel
   CcPanel            parent_instance;
 
   GtkDialog         *automatic_suspend_dialog;
+  GtkLabel          *battery_heading;
+  GtkListBox        *battery_listbox;
   GtkSizeGroup      *battery_row_sizegroup;
+  GtkBox            *battery_section;
   GtkSizeGroup      *battery_sizegroup;
   GtkSizeGroup      *charge_sizegroup;
   GtkListStore      *idle_time_liststore;
@@ -90,10 +93,6 @@ struct _CcPowerPanel
 
   GList         *boxes;
   GList         *boxes_reverse;
-
-  GtkWidget     *battery_heading;
-  GtkWidget     *battery_section;
-  GtkWidget     *battery_list;
 
   GtkWidget     *device_heading;
   GtkWidget     *device_section;
@@ -176,40 +175,6 @@ static const char *
 cc_power_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/power";
-}
-
-static void
-cc_power_panel_class_init (CcPowerPanelClass *klass)
-{
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
-
-  object_class->dispose = cc_power_panel_dispose;
-
-  panel_class->get_help_uri = cc_power_panel_get_help_uri;
-
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-panel.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_row_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, charge_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, idle_time_liststore);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_scroll);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_box);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_liststore);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_vbox);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_label);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_label);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_delay_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_label);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch);
-
 }
 
 static GtkWidget *
@@ -347,8 +312,8 @@ add_battery (CcPowerPanel *panel, UpDevice *device, gboolean primary)
   cc_battery_row_set_charge_sizegroup (row, panel->charge_sizegroup);
   cc_battery_row_set_battery_sizegroup (row, panel->battery_sizegroup);
 
-  gtk_container_add (GTK_CONTAINER (panel->battery_list), GTK_WIDGET (row));
-  gtk_widget_set_visible (panel->battery_section, TRUE);
+  gtk_container_add (GTK_CONTAINER (panel->battery_listbox), GTK_WIDGET (row));
+  gtk_widget_set_visible (GTK_WIDGET (panel->battery_section), TRUE);
 }
 
 static void
@@ -377,10 +342,10 @@ up_client_changed (CcPowerPanel *self)
   g_autoptr(UpDevice) composite = NULL;
   g_autofree gchar *s = NULL;
 
-  battery_children = gtk_container_get_children (GTK_CONTAINER (self->battery_list));
+  battery_children = gtk_container_get_children (GTK_CONTAINER (self->battery_listbox));
   for (l = battery_children; l != NULL; l = l->next)
-    gtk_container_remove (GTK_CONTAINER (self->battery_list), l->data);
-  gtk_widget_hide (self->battery_section);
+    gtk_container_remove (GTK_CONTAINER (self->battery_listbox), l->data);
+  gtk_widget_hide (GTK_WIDGET (self->battery_section));
 
   device_children = gtk_container_get_children (GTK_CONTAINER (self->device_list));
   for (l = device_children; l != NULL; l = l->next)
@@ -965,7 +930,7 @@ nm_client_ready_cb (GObject *source_object,
 #endif
 
 static gboolean
-keynav_failed (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *list)
+keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *list)
 {
   GtkWidget *next_list = NULL;
   GList *item, *boxes_list;
@@ -1387,7 +1352,7 @@ add_power_saving_section (CcPowerPanel *self)
   widget = gtk_list_box_new ();
   gtk_widget_show (widget);
   self->boxes_reverse = g_list_prepend (self->boxes_reverse, widget);
-  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed_cb), self, G_CONNECT_SWAPPED);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
                                 cc_list_box_update_header_func,
@@ -1895,7 +1860,7 @@ add_power_profiles_section (CcPowerPanel *self)
   widget = gtk_list_box_new ();
   gtk_widget_show (widget);
   self->boxes_reverse = g_list_prepend (self->boxes_reverse, widget);
-  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed_cb), self, G_CONNECT_SWAPPED);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
                               perf_profile_list_box_sort,
@@ -2023,7 +1988,7 @@ add_general_section (CcPowerPanel *self)
   widget = gtk_list_box_new ();
   gtk_widget_show (widget);
   self->boxes_reverse = g_list_prepend (self->boxes_reverse, widget);
-  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed_cb), self, G_CONNECT_SWAPPED);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
                                 cc_list_box_update_header_func,
@@ -2108,52 +2073,6 @@ battery_sort_func (GtkListBoxRow *a, GtkListBoxRow *b, gpointer data)
 }
 
 static void
-add_battery_section (CcPowerPanel *self)
-{
-  GtkWidget *widget, *box;
-  GtkWidget *frame;
-  g_autofree gchar *s = NULL;
-
-  self->battery_section = box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_widget_show (box);
-  gtk_widget_set_margin_bottom (box, 32);
-  gtk_box_pack_start (self->power_vbox, box, FALSE, TRUE, 0);
-
-  s = g_markup_printf_escaped ("<b>%s</b>", _("Battery"));
-  self->battery_heading = widget = gtk_label_new (s);
-  gtk_widget_show (widget);
-  gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-  gtk_widget_set_halign (widget, GTK_ALIGN_START);
-  gtk_widget_set_margin_bottom (widget, 12);
-  gtk_widget_set_margin_bottom (box, 32);
-  gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
-
-  self->battery_list = widget = GTK_WIDGET (gtk_list_box_new ());
-  gtk_widget_show (widget);
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->battery_list);
-  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed), self, G_CONNECT_SWAPPED);
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
-                              (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
-
-  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (self->battery_heading)),
-                               ATK_RELATION_LABEL_FOR,
-                               ATK_OBJECT (gtk_widget_get_accessible (self->battery_list)));
-  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (self->battery_list)),
-                               ATK_RELATION_LABELLED_BY,
-                               ATK_OBJECT (gtk_widget_get_accessible (self->battery_heading)));
-
-  frame = gtk_frame_new (NULL);
-  gtk_widget_show (frame);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-  gtk_container_add (GTK_CONTAINER (frame), widget);
-  gtk_box_pack_start (GTK_BOX (box), frame, FALSE, TRUE, 0);
-}
-
-static void
 add_device_section (CcPowerPanel *self)
 {
   GtkWidget *widget, *box;
@@ -2179,7 +2098,7 @@ add_device_section (CcPowerPanel *self)
   self->device_list = widget = gtk_list_box_new ();
   gtk_widget_show (widget);
   self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->device_list);
-  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed_cb), self, G_CONNECT_SWAPPED);
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
   gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
                                 cc_list_box_update_header_func,
@@ -2202,8 +2121,47 @@ add_device_section (CcPowerPanel *self)
 }
 
 static void
+cc_power_panel_class_init (CcPowerPanelClass *klass)
+{
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
+
+  object_class->dispose = cc_power_panel_dispose;
+
+  panel_class->get_help_uri = cc_power_panel_get_help_uri;
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-panel.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_heading);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_row_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, charge_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, idle_time_liststore);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_scroll);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_box);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_liststore);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_vbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_delay_combo);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_label);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch);
+
+  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
+}
+
+static void
 cc_power_panel_init (CcPowerPanel *self)
 {
+  g_autofree gchar *battery_label = NULL;
   guint i;
 
   g_resources_register (cc_power_get_resource ());
@@ -2220,7 +2178,16 @@ cc_power_panel_init (CcPowerPanel *self)
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
   self->interface_settings = g_settings_new ("org.gnome.desktop.interface");
 
-  add_battery_section (self);
+  battery_label = g_markup_printf_escaped ("<b>%s</b>", _("Battery"));
+  gtk_label_set_markup (self->battery_heading, battery_label);
+
+  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->battery_listbox);
+  gtk_list_box_set_header_func (self->battery_listbox,
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+  gtk_list_box_set_sort_func (self->battery_listbox,
+                              (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
+
   add_device_section (self);
   add_power_profiles_section (self);
   add_power_saving_section (self);
