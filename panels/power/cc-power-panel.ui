@@ -710,6 +710,114 @@
                     </child>
                   </object>
                 </child>
+                <child>
+                  <object class="GtkBox" id="general_section">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="margin-top">6</property>
+                    <property name="margin-bottom">32</property>
+                    <child>
+                      <object class="GtkLabel" id="general_heading">
+                        <property name="visible">True</property>
+                        <property name="use-markup">True</property>
+                        <property name="halign">start</property>
+                        <property name="margin_bottom">12</property>
+                        <accessibility>
+                          <relation target="general_listbox" type="label-for"/>
+                        </accessibility>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <object class="GtkListBox" id="general_listbox">
+                            <property name="visible">True</property>
+                            <property name="selection-mode">none</property>
+                            <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                            <accessibility>
+                              <relation target="general_heading" type="labelled-by"/>
+                            </accessibility>
+                            <child>
+                              <object class="GtkListBoxRow" id="power_button_row">
+                                <property name="visible">False</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="use-markup">True</property>
+                                        <property name="use-underline">True</property>
+                                        <property name="ellipsize">end</property>
+                                        <property name="label" translatable="yes">Po_wer Button Behavior</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="expand">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="mnemonic_widget">power_button_combo</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkComboBoxText" id="power_button_combo">
+                                        <property name="visible">True</property>
+                                        <property name="valign">center</property>
+                                        <property name="entry-text-column">0</property>
+                                        <property name="model">power_button_liststore</property>
+                                        <signal name="changed" handler="power_button_combo_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="battery_percentage_row">
+                                <property name="visible">False</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="use-markup">True</property>
+                                        <property name="use-underline">True</property>
+                                        <property name="ellipsize">end</property>
+                                        <property name="label" translatable="yes">Show Battery _Percentage</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="expand">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="mnemonic_widget">battery_percentage_switch</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSwitch" id="battery_percentage_switch">
+                                        <property name="visible">True</property>
+                                        <property name="valign">center</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -753,6 +861,8 @@
       <widget name="wifi_row"/>
       <widget name="mobile_row"/>
       <widget name="bt_row"/>
+      <widget name="power_button_row"/>
+      <widget name="battery_percentage_row"/>
     </widgets>
   </object>
 

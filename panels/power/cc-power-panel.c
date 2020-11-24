@@ -68,6 +68,8 @@ struct _CcPowerPanel
   GtkListBoxRow     *automatic_suspend_row;
   GtkLabel          *battery_heading;
   GtkListBox        *battery_listbox;
+  GtkListBoxRow     *battery_percentage_row;
+  GtkSwitch         *battery_percentage_switch;
   GtkSizeGroup      *battery_row_sizegroup;
   GtkBox            *battery_section;
   GtkSizeGroup      *battery_sizegroup;
@@ -82,6 +84,9 @@ struct _CcPowerPanel
   GtkBox            *device_section;
   GtkListBoxRow     *dim_screen_row;
   GtkSwitch         *dim_screen_switch;
+  GtkLabel          *general_heading;
+  GtkListBox        *general_listbox;
+  GtkBox            *general_section;
   GtkComboBox       *idle_delay_combo;
   GtkListBoxRow     *kbd_brightness_row;
   CcBrightnessScale *kbd_brightness_scale;
@@ -90,13 +95,14 @@ struct _CcPowerPanel
   HdyClamp          *main_box;
   GtkListBoxRow     *mobile_row;
   GtkSwitch         *mobile_switch;
+  GtkComboBox       *power_button_combo;
   GtkListStore      *power_button_liststore;
+  GtkListBoxRow     *power_button_row;
   GtkLabel          *power_profile_heading;
   GtkListBox        *power_profile_listbox;
   GtkBox            *power_profile_section;
   GtkLabel          *power_saving_heading;
   GtkListBox        *power_saving_listbox;
-  GtkBox            *power_vbox;
   GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
   GtkLabel          *suspend_on_battery_delay_label;
@@ -129,8 +135,6 @@ struct _CcPowerPanel
   guint          power_profiles_prop_id;
   GtkWidget     *power_profiles_row[NUM_CC_POWER_PROFILES];
   gboolean       power_profiles_in_update;
-
-  GtkWidget     *power_button_combo;
 
 #ifdef HAVE_NETWORK_MANAGER
   NMClient      *nm_client;
@@ -178,54 +182,6 @@ static const char *
 cc_power_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/power";
-}
-
-static GtkWidget *
-no_prelight_row_new (void)
-{
-  GtkWidget *row = gtk_list_box_row_new ();
-  gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
-  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
-  return row;
-}
-
-static GtkWidget *
-row_box_new (void)
-{
-  GtkWidget *box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, FALSE);
-  gtk_widget_set_margin_end (box, 12);
-  gtk_widget_set_margin_start (box, 12);
-  gtk_box_set_spacing (GTK_BOX (box), 12);
-  gtk_widget_show (box);
-  return box;
-}
-
-static GtkWidget *
-row_title_new (const gchar  *title,
-               GtkWidget   **title_label)
-{
-  GtkWidget *box, *label;
-
-  box = gtk_box_new (GTK_ORIENTATION_VERTICAL, FALSE);
-  gtk_widget_show (box);
-  gtk_widget_set_margin_bottom (box, 6);
-  gtk_widget_set_margin_top (box, 6);
-  gtk_box_set_spacing (GTK_BOX (box), 4);
-  gtk_widget_set_valign (box, GTK_ALIGN_CENTER);
-
-  label = gtk_label_new (NULL);
-  gtk_widget_show (label);
-  gtk_label_set_markup (GTK_LABEL (label), title);
-  gtk_label_set_use_underline (GTK_LABEL (label), TRUE);
-  gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
-
-  if (title_label)
-    *title_label = label;
-  gtk_container_add (GTK_CONTAINER (box), label);
-
-  return box;
 }
 
 static char *
@@ -993,7 +949,7 @@ idle_delay_combo_changed_cb (CcPowerPanel *self)
 }
 
 static void
-combo_power_button_changed_cb (CcPowerPanel *self)
+power_button_combo_changed_cb (CcPowerPanel *self)
 {
   GtkTreeIter iter;
   GtkTreeModel *model;
@@ -1657,116 +1613,40 @@ setup_power_profiles (CcPowerPanel *self)
 }
 
 static void
-add_battery_percentage (CcPowerPanel *self,
-                        GtkListBox   *listbox)
+setup_general_section (CcPowerPanel *self)
 {
-  GtkWidget *box, *label, *title;
-  GtkWidget *row;
-  GtkWidget *sw;
-
-  if (!self->has_batteries)
-    return;
-
-  /* Show Battery Percentage */
-  row = no_prelight_row_new ();
-  gtk_widget_show (row);
-  box = row_box_new ();
-  gtk_container_add (GTK_CONTAINER (row), box);
-  title = row_title_new (_("Show Battery _Percentage"), &label);
-  gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
-
-  sw = gtk_switch_new ();
-  gtk_widget_show (sw);
-  g_settings_bind (self->interface_settings, "show-battery-percentage",
-                   sw, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  gtk_widget_set_valign (sw, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), sw, FALSE, TRUE, 0);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), sw);
-  gtk_container_add (GTK_CONTAINER (listbox), row);
-  gtk_size_group_add_widget (self->row_sizegroup, row);
-}
-
-static void
-add_general_section (CcPowerPanel *self)
-{
-  GtkWidget *widget, *box, *label, *title;
-  GtkWidget *row;
-  g_autofree gchar *s = NULL;
-  GtkTreeModel *model;
-  GsdPowerButtonActionType button_value;
-  gboolean can_suspend, can_hibernate;
-
-  /* Frame header */
-  s = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Button"));
-  label = gtk_label_new (s);
-  gtk_widget_show (label);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_widget_set_margin_bottom (label, 12);
-  gtk_box_pack_start (self->power_vbox, label, FALSE, TRUE, 0);
-
-  widget = gtk_list_box_new ();
-  gtk_widget_show (widget);
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, widget);
-  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed_cb), self, G_CONNECT_SWAPPED);
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (label)),
-                               ATK_RELATION_LABEL_FOR,
-                               ATK_OBJECT (gtk_widget_get_accessible (widget)));
-  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (widget)),
-                               ATK_RELATION_LABELLED_BY,
-                               ATK_OBJECT (gtk_widget_get_accessible (label)));
-
-  box = gtk_frame_new (NULL);
-  gtk_widget_show (box);
-  gtk_frame_set_shadow_type (GTK_FRAME (box), GTK_SHADOW_IN);
-  gtk_widget_set_margin_bottom (box, 32);
-  gtk_container_add (GTK_CONTAINER (box), widget);
-  gtk_box_pack_start (self->power_vbox, box, FALSE, TRUE, 0);
+  gboolean can_suspend, can_hibernate, show_section = FALSE;
 
   can_suspend = can_suspend_or_hibernate (self, "CanSuspend");
   can_hibernate = can_suspend_or_hibernate (self, "CanHibernate");
 
-  if ((!can_hibernate && !can_suspend) ||
-      g_strcmp0 (self->chassis_type, "vm") == 0 ||
-      g_strcmp0 (self->chassis_type, "tablet") == 0 ||
-      g_strcmp0 (self->chassis_type, "handset") == 0)
+  if ((can_hibernate || can_suspend) &&
+      g_strcmp0 (self->chassis_type, "vm") != 0 &&
+      g_strcmp0 (self->chassis_type, "tablet") != 0 &&
+      g_strcmp0 (self->chassis_type, "handset") != 0)
     {
-      add_battery_percentage (self, GTK_LIST_BOX (widget));
-      return;
+      gtk_widget_show (GTK_WIDGET (self->power_button_row));
+
+      populate_power_button_model (GTK_TREE_MODEL (self->power_button_liststore), can_suspend, can_hibernate);
+      g_signal_handlers_block_by_func (self->power_button_combo, power_button_combo_changed_cb, self);
+      set_value_for_combo (self->power_button_combo, g_settings_get_enum (self->gsd_settings, "power-button-action"));
+      g_signal_handlers_unblock_by_func (self->power_button_combo, power_button_combo_changed_cb, self);
+
+      show_section = TRUE;
     }
 
-  /* Power button row */
-  row = no_prelight_row_new ();
-  gtk_widget_show (row);
-  box = row_box_new ();
-  gtk_container_add (GTK_CONTAINER (row), box);
+  if (self->has_batteries)
+    {
+      gtk_widget_show (GTK_WIDGET (self->battery_percentage_row));
 
-  title = row_title_new (_("Po_wer Button Behavior"), &label);
-  gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
+      g_settings_bind (self->interface_settings, "show-battery-percentage",
+                       self->battery_percentage_switch, "active",
+                       G_SETTINGS_BIND_DEFAULT);
 
-  self->power_button_combo = gtk_combo_box_text_new ();
-  gtk_widget_show (self->power_button_combo);
-  gtk_combo_box_set_entry_text_column (GTK_COMBO_BOX (self->power_button_combo), 0);
-  model = GTK_TREE_MODEL (self->power_button_liststore);
-  populate_power_button_model (model, can_suspend, can_hibernate);
-  gtk_combo_box_set_model (GTK_COMBO_BOX (self->power_button_combo), model);
-  button_value = g_settings_get_enum (self->gsd_settings, "power-button-action");
-  set_value_for_combo (GTK_COMBO_BOX (self->power_button_combo), button_value);
-  g_signal_connect_object (self->power_button_combo, "changed",
-                           G_CALLBACK (combo_power_button_changed_cb), self, G_CONNECT_SWAPPED);
-  gtk_widget_set_valign (self->power_button_combo, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), self->power_button_combo, FALSE, TRUE, 0);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), self->power_button_combo);
-  gtk_container_add (GTK_CONTAINER (widget), row);
-  gtk_size_group_add_widget (self->row_sizegroup, row);
+      show_section = TRUE;
+    }
 
-  add_battery_percentage (self, GTK_LIST_BOX (widget));
+  gtk_widget_set_visible (GTK_WIDGET (self->general_section), show_section);
 }
 
 static gint
@@ -1813,6 +1693,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_sizegroup);
@@ -1827,6 +1709,9 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_heading);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, idle_delay_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_scale);
@@ -1835,13 +1720,14 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_liststore);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saving_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saving_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_label);
@@ -1861,6 +1747,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, idle_delay_combo_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, mobile_switch_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, power_button_combo_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_profiles_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_saving_listbox_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, wifi_switch_changed_cb);
@@ -1873,6 +1760,7 @@ cc_power_panel_init (CcPowerPanel *self)
   g_autofree gchar *device_label = NULL;
   g_autofree gchar *power_profile_label = NULL;
   g_autofree gchar *power_saving_label = NULL;
+  g_autofree gchar *general_label = NULL;
   guint i;
 
   g_resources_register (cc_power_get_resource ());
@@ -1927,7 +1815,13 @@ cc_power_panel_init (CcPowerPanel *self)
                                 NULL, NULL);
   setup_power_saving (self);
 
-  add_general_section (self);
+  general_label = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Button"));
+  gtk_label_set_markup (self->general_heading, general_label);
+  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->general_listbox);
+  gtk_list_box_set_header_func (self->general_listbox,
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+  setup_general_section (self);
 
   self->boxes = g_list_copy (self->boxes_reverse);
   self->boxes = g_list_reverse (self->boxes);
