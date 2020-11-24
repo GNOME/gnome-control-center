@@ -62,11 +62,16 @@ struct _CcPowerPanel
   CcPanel            parent_instance;
 
   GtkDialog         *automatic_suspend_dialog;
+  GtkSizeGroup      *battery_row_sizegroup;
+  GtkSizeGroup      *battery_sizegroup;
+  GtkSizeGroup      *charge_sizegroup;
   GtkListStore      *idle_time_liststore;
+  GtkSizeGroup      *level_sizegroup;
   GtkScrolledWindow *main_scroll;
   HdyClamp          *main_box;
   GtkListStore      *power_button_liststore;
   GtkBox            *power_vbox;
+  GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
   GtkLabel          *suspend_on_battery_delay_label;
   GtkLabel          *suspend_on_battery_label;
@@ -85,12 +90,6 @@ struct _CcPowerPanel
 
   GList         *boxes;
   GList         *boxes_reverse;
-
-  GtkSizeGroup  *battery_row_sizegroup;
-  GtkSizeGroup  *row_sizegroup;
-  GtkSizeGroup  *battery_sizegroup;
-  GtkSizeGroup  *charge_sizegroup;
-  GtkSizeGroup  *level_sizegroup;
 
   GtkWidget     *battery_heading;
   GtkWidget     *battery_section;
@@ -193,11 +192,16 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_row_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, charge_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, idle_time_liststore);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_scroll);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_liststore);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_vbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_label);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_label);
@@ -2215,12 +2219,6 @@ cc_power_panel_init (CcPowerPanel *self)
   self->gsd_settings = g_settings_new ("org.gnome.settings-daemon.plugins.power");
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
   self->interface_settings = g_settings_new ("org.gnome.desktop.interface");
-
-  self->battery_row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
-  self->row_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
-  self->battery_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-  self->charge_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
-  self->level_sizegroup = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
   add_battery_section (self);
   add_device_section (self);
