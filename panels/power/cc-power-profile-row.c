@@ -43,18 +43,10 @@ struct _CcPowerProfileRow
 G_DEFINE_TYPE (CcPowerProfileRow, cc_power_profile_row, GTK_TYPE_LIST_BOX_ROW)
 
 enum {
-  PROP_0,
-  PROP_POWER_PROFILE,
-  PROP_PERFORMANCE_INHIBITED,
-  N_PROPS
-};
-
-enum {
   BUTTON_TOGGLED,
   N_SIGNALS
 };
 
-static GParamSpec *properties[N_PROPS];
 static guint signals[N_SIGNALS];
 
 static const char *
@@ -95,54 +87,6 @@ performance_profile_set_inhibited (CcPowerProfileRow *self,
   gtk_style_context_add_class (gtk_widget_get_style_context (self->subtext),
                                inhibited ? GTK_STYLE_CLASS_ERROR : GTK_STYLE_CLASS_DIM_LABEL);
   gtk_widget_set_sensitive (GTK_WIDGET (self), !inhibited);
-}
-
-static void
-cc_power_profile_row_get_property (GObject    *object,
-                          guint       prop_id,
-                          GValue     *value,
-                          GParamSpec *pspec)
-{
-  CcPowerProfileRow *self = (CcPowerProfileRow *)object;
-
-  switch (prop_id)
-    {
-    case PROP_POWER_PROFILE:
-      g_value_set_int (value, self->power_profile);
-      break;
-
-    case PROP_PERFORMANCE_INHIBITED:
-      g_value_set_string (value, self->performance_inhibited);
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
-}
-
-static void
-cc_power_profile_row_set_property (GObject      *object,
-                          guint         prop_id,
-                          const GValue *value,
-                          GParamSpec   *pspec)
-{
-  CcPowerProfileRow *self = (CcPowerProfileRow *)object;
-
-  switch (prop_id)
-    {
-    case PROP_POWER_PROFILE:
-      g_assert (self->power_profile == -1);
-      self->power_profile = g_value_get_int (value);
-      g_assert (self->power_profile != -1);
-      break;
-
-    case PROP_PERFORMANCE_INHIBITED:
-      cc_power_profile_row_set_performance_inhibited (self, g_value_get_string (value));
-      break;
-
-    default:
-      G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
-    }
 }
 
 static GtkWidget *
@@ -225,83 +169,8 @@ cc_power_profile_row_button_toggled_cb (CcPowerProfileRow *self)
 }
 
 static void
-cc_power_profile_row_constructed (GObject *object)
-{
-  CcPowerProfileRow *self;
-  GtkWidget *box, *title;
-  const char *text, *subtext, *icon_name, *class_name;
-
-  self = CC_POWER_PROFILE_ROW (object);
-
-  switch (self->power_profile)
-    {
-      case CC_POWER_PROFILE_PERFORMANCE:
-        text = _("Performance");
-        subtext = _("High performance and power usage.");
-        icon_name = "power-profile-performance-symbolic";
-        class_name = "performance";
-        break;
-      case CC_POWER_PROFILE_BALANCED:
-        text = _("Balanced Power");
-        subtext = _("Standard performance and power usage.");
-        icon_name = "power-profile-balanced-symbolic";
-        class_name = NULL;
-        break;
-      case CC_POWER_PROFILE_POWER_SAVER:
-        text = _("Power Saver");
-        subtext = _("Reduced performance and power usage.");
-        icon_name = "power-profile-power-saver-symbolic";
-        class_name = "low-power";
-        break;
-      default:
-        g_assert_not_reached ();
-    }
-
-  gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (self), FALSE);
-  gtk_widget_show (GTK_WIDGET (self));
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  g_object_set (G_OBJECT (box),
-                "margin-end", 12,
-                "margin-start", 12,
-                "visible", TRUE,
-                NULL);
-  gtk_container_add (GTK_CONTAINER (self), box);
-
-  title = performance_row_new (text, icon_name, class_name, subtext);
-  self->subtext = g_object_get_data (G_OBJECT (title), "subtext");
-  self->button = g_object_get_data (G_OBJECT (title), "button");
-  g_signal_connect_object (G_OBJECT (self->button), "toggled",
-                           G_CALLBACK (cc_power_profile_row_button_toggled_cb),
-                           self, G_CONNECT_SWAPPED);
-  if (self->power_profile == CC_POWER_PROFILE_PERFORMANCE)
-    performance_profile_set_inhibited (self, self->performance_inhibited);
-  gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
-}
-
-static void
 cc_power_profile_row_class_init (CcPowerProfileRowClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
-
-  object_class->get_property = cc_power_profile_row_get_property;
-  object_class->set_property = cc_power_profile_row_set_property;
-  object_class->constructed = cc_power_profile_row_constructed;
-
-  properties[PROP_POWER_PROFILE] =
-    g_param_spec_int ("power-profile",
-                      "Power Profile",
-                      "Power profile for the row",
-                      -1, CC_POWER_PROFILE_POWER_SAVER,
-                      -1,
-                      G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS | G_PARAM_CONSTRUCT_ONLY);
-
-  properties[PROP_PERFORMANCE_INHIBITED] =
-    g_param_spec_string ("performance-inhibited",
-                         "Performance Inhibited",
-                         "Performance inhibition reason",
-                         NULL,
-                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
-
   signals[BUTTON_TOGGLED] =
     g_signal_new ("button-toggled",
                   G_TYPE_FROM_CLASS (klass),
@@ -309,14 +178,11 @@ cc_power_profile_row_class_init (CcPowerProfileRowClass *klass)
                   0, NULL, NULL,
                   NULL,
                   G_TYPE_NONE, 0);
-
-  g_object_class_install_properties (object_class, N_PROPS, properties);
 }
 
 static void
 cc_power_profile_row_init (CcPowerProfileRow *self)
 {
-  self->power_profile = -1;
 }
 
 CcPowerProfile
@@ -367,10 +233,60 @@ GtkWidget *
 cc_power_profile_row_new (CcPowerProfile  power_profile,
                           const char     *performance_inhibited)
 {
-  return g_object_new (CC_TYPE_POWER_PROFILE_ROW,
-                       "power-profile", power_profile,
-                       "performance-inhibited", performance_inhibited,
-                       NULL);
+  CcPowerProfileRow *self;
+  const char *text, *subtext, *icon_name, *class_name;
+  GtkWidget *box, *title;
+
+  self = g_object_new (CC_TYPE_POWER_PROFILE_ROW, NULL);
+
+  self->power_profile = power_profile;
+  cc_power_profile_row_set_performance_inhibited (self, performance_inhibited);
+
+  switch (self->power_profile)
+    {
+      case CC_POWER_PROFILE_PERFORMANCE:
+        text = _("Performance");
+        subtext = _("High performance and power usage.");
+        icon_name = "power-profile-performance-symbolic";
+        class_name = "performance";
+        break;
+      case CC_POWER_PROFILE_BALANCED:
+        text = _("Balanced Power");
+        subtext = _("Standard performance and power usage.");
+        icon_name = "power-profile-balanced-symbolic";
+        class_name = NULL;
+        break;
+      case CC_POWER_PROFILE_POWER_SAVER:
+        text = _("Power Saver");
+        subtext = _("Reduced performance and power usage.");
+        icon_name = "power-profile-power-saver-symbolic";
+        class_name = "low-power";
+        break;
+      default:
+        g_assert_not_reached ();
+    }
+
+  gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (self), FALSE);
+  gtk_widget_show (GTK_WIDGET (self));
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
+  g_object_set (G_OBJECT (box),
+                "margin-end", 12,
+                "margin-start", 12,
+                "visible", TRUE,
+                NULL);
+  gtk_container_add (GTK_CONTAINER (self), box);
+
+  title = performance_row_new (text, icon_name, class_name, subtext);
+  self->subtext = g_object_get_data (G_OBJECT (title), "subtext");
+  self->button = g_object_get_data (G_OBJECT (title), "button");
+  g_signal_connect_object (G_OBJECT (self->button), "toggled",
+                           G_CALLBACK (cc_power_profile_row_button_toggled_cb),
+                           self, G_CONNECT_SWAPPED);
+  if (self->power_profile == CC_POWER_PROFILE_PERFORMANCE)
+    performance_profile_set_inhibited (self, self->performance_inhibited);
+  gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
+
+  return GTK_WIDGET (self);
 }
 
 CcPowerProfile
