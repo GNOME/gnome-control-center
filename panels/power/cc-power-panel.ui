@@ -246,6 +246,470 @@
                     </child>
                   </object>
                 </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="margin_bottom">32</property>
+                    <child>
+                      <object class="GtkLabel" id="power_saving_heading">
+                        <property name="visible">True</property>
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="use-markup">True</property>
+                        <property name="halign">start</property>
+                        <property name="margin_bottom">12</property>
+                        <accessibility>
+                          <relation target="power_saving_listbox" type="label-for"/>
+                        </accessibility>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <object class="GtkListBox" id="power_saving_listbox">
+                            <property name="visible">True</property>
+                            <property name="selection-mode">none</property>
+                            <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                            <signal name="row-activated" handler="power_saving_listbox_row_activated_cb" object="CcPowerPanel" swapped="yes"/>
+                            <accessibility>
+                              <relation target="power_saving_heading" type="labelled-by"/>
+                            </accessibility>
+                            <child>
+                              <object class="GtkListBoxRow" id="brightness_row">
+                                <property name="visible">True</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel" id="brightness_label">
+                                        <property name="visible">True</property>
+                                        <property name="use-markup">True</property>
+                                        <property name="use-underline">True</property>
+                                        <property name="ellipsize">end</property>
+                                        <property name="label" translatable="yes">_Screen Brightness</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="xalign">0</property>
+                                        <property name="mnemonic_widget">brightness_scale</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="spacing">12</property>
+                                        <property name="expand">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="brightness_spacer">
+                                            <property name="visible">True</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="CcBrightnessScale" id="brightness_scale">
+                                            <property name="visible">True</property>
+                                            <property name="valign">center</property>
+                                            <property name="expand">True</property>
+                                            <property name="device">screen</property>
+                                            <signal name="notify::has-brightness" handler="has_brightness_cb" object="CcPowerPanel" swapped="yes"/>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="als_row">
+                                <property name="visible">True</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="use-markup">True</property>
+                                        <property name="use-underline">True</property>
+                                        <property name="ellipsize">end</property>
+                                        <property name="label" translatable="yes">Automatic Brightness</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="expand">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="mnemonic_widget">als_switch</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSwitch" id="als_switch">
+                                        <property name="visible">True</property>
+                                        <property name="valign">center</property>
+                                        <signal name="notify::active" handler="als_switch_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="kbd_brightness_row">
+                                <property name="visible">True</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel" id="kbd_brightness_label">
+                                        <property name="visible">True</property>
+                                        <property name="use-markup">True</property>
+                                        <property name="use-underline">True</property>
+                                        <property name="ellipsize">end</property>
+                                        <property name="label" translatable="yes">_Keyboard Brightness</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="xalign">0</property>
+                                        <property name="mnemonic_widget">kbd_brightness_scale</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="spacing">12</property>
+                                        <property name="expand">True</property>
+                                        <child>
+                                          <object class="GtkLabel" id="kbd_brightness_spacer">
+                                            <property name="visible">True</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="CcBrightnessScale" id="kbd_brightness_scale">
+                                            <property name="visible">True</property>
+                                            <property name="valign">center</property>
+                                            <property name="expand">True</property>
+                                            <property name="device">kbd</property>
+                                            <signal name="notify::has-brightness" handler="has_kbd_brightness_cb" object="CcPowerPanel" swapped="yes"/>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="dim_screen_row">
+                                <property name="visible">True</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="use-markup">True</property>
+                                        <property name="use-underline">True</property>
+                                        <property name="ellipsize">end</property>
+                                        <property name="label" translatable="yes">Dim Screen When Inactive</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="expand">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="mnemonic_widget">dim_screen_switch</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSwitch" id="dim_screen_switch">
+                                        <property name="visible">True</property>
+                                        <property name="valign">center</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="blank_screen_row">
+                                <property name="visible">True</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="use-markup">True</property>
+                                        <property name="use-underline">True</property>
+                                        <property name="ellipsize">end</property>
+                                        <property name="label" translatable="yes">_Blank Screen</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="expand">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="mnemonic_widget">idle_delay_combo</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkComboBoxText" id="idle_delay_combo">
+                                        <property name="visible">True</property>
+                                        <property name="valign">center</property>
+                                        <property name="entry-text-column">0</property>
+                                        <property name="model">idle_time_liststore</property>
+                                        <signal name="changed" handler="idle_delay_combo_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="automatic_suspend_row">
+                                <property name="visible">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="visible">True</property>
+                                        <property name="use-markup">True</property>
+                                        <property name="use-underline">True</property>
+                                        <property name="ellipsize">end</property>
+                                        <property name="label" translatable="yes">_Automatic Suspend</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="expand">True</property>
+                                        <property name="xalign">0</property>
+                                        <property name="mnemonic_widget">automatic_suspend_label</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel" id="automatic_suspend_label">
+                                        <property name="visible">True</property>
+                                        <property name="halign">end</property>
+                                        <signal name="mnemonic-activate" handler="automatic_suspend_label_mnemonic_activate_cb" object="CcPowerPanel" swapped="yes"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="wifi_row">
+                                <property name="visible">False</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="spacing">4</property>
+                                        <property name="valign">center</property>
+                                        <property name="expand">True</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="use-markup">True</property>
+                                            <property name="use-underline">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="label" translatable="yes">_Wi-Fi</property>
+                                            <property name="halign">start</property>
+                                            <property name="xalign">0</property>
+                                            <property name="mnemonic_widget">wifi_switch</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="use-markup">True</property>
+                                            <property name="use-underline">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="label" translatable="yes">Wi-Fi can be turned off to save power.</property>
+                                            <property name="halign">start</property>
+                                            <property name="xalign">0</property>
+                                            <attributes>
+                                              <attribute name="scale" value="0.9"/>
+                                            </attributes>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSwitch" id="wifi_switch">
+                                        <property name="visible">True</property>
+                                        <property name="valign">center</property>
+                                        <signal name="notify::active" handler="wifi_switch_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="mobile_row">
+                                <property name="visible">False</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="spacing">4</property>
+                                        <property name="valign">center</property>
+                                        <property name="expand">True</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="use-markup">True</property>
+                                            <property name="use-underline">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="label" translatable="yes">_Mobile Broadband</property>
+                                            <property name="halign">start</property>
+                                            <property name="xalign">0</property>
+                                            <property name="mnemonic_widget">mobile_switch</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="use-markup">True</property>
+                                            <property name="use-underline">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="label" translatable="yes">Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power.</property>
+                                            <property name="halign">start</property>
+                                            <property name="xalign">0</property>
+                                            <attributes>
+                                              <attribute name="scale" value="0.9"/>
+                                            </attributes>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSwitch" id="mobile_switch">
+                                        <property name="visible">True</property>
+                                        <property name="valign">center</property>
+                                        <signal name="notify::active" handler="mobile_switch_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkListBoxRow" id="bt_row">
+                                <property name="visible">False</property>
+                                <property name="selectable">False</property>
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="visible">True</property>
+                                    <property name="margin-start">12</property>
+                                    <property name="margin-end">12</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="visible">True</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="margin-top">6</property>
+                                        <property name="margin-bottom">6</property>
+                                        <property name="spacing">4</property>
+                                        <property name="valign">center</property>
+                                        <property name="expand">True</property>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="use-markup">True</property>
+                                            <property name="use-underline">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="label" translatable="yes">_Bluetooth</property>
+                                            <property name="halign">start</property>
+                                            <property name="xalign">0</property>
+                                            <property name="mnemonic_widget">bt_switch</property>
+                                          </object>
+                                        </child>
+                                        <child>
+                                          <object class="GtkLabel">
+                                            <property name="visible">True</property>
+                                            <property name="use-markup">True</property>
+                                            <property name="use-underline">True</property>
+                                            <property name="ellipsize">end</property>
+                                            <property name="label" translatable="yes">Bluetooth can be turned off to save power.</property>
+                                            <property name="halign">start</property>
+                                            <property name="xalign">0</property>
+                                            <attributes>
+                                              <attribute name="scale" value="0.9"/>
+                                            </attributes>
+                                            <style>
+                                              <class name="dim-label"/>
+                                            </style>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkSwitch" id="bt_switch">
+                                        <property name="visible">True</property>
+                                        <property name="valign">center</property>
+                                        <signal name="notify::active" handler="bt_switch_changed_cb" object="CcPowerPanel" swapped="yes"/>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
@@ -258,15 +722,38 @@
   </object>
   <object class="GtkSizeGroup" id="battery_sizegroup">
     <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="brightness_label"/>
+      <widget name="kbd_brightness_label"/>
+    </widgets>
   </object>
   <object class="GtkSizeGroup" id="charge_sizegroup">
     <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="brightness_spacer"/>
+      <widget name="kbd_brightness_spacer"/>
+    </widgets>
   </object>
   <object class="GtkSizeGroup" id="level_sizegroup">
     <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="brightness_scale"/>
+      <widget name="kbd_brightness_scale"/>
+    </widgets>
   </object>
   <object class="GtkSizeGroup" id="row_sizegroup">
     <property name="mode">vertical</property>
+    <widgets>
+      <widget name="brightness_row"/>
+      <widget name="als_row"/>
+      <widget name="kbd_brightness_row"/>
+      <widget name="dim_screen_row"/>
+      <widget name="blank_screen_row"/>
+      <widget name="automatic_suspend_row"/>
+      <widget name="wifi_row"/>
+      <widget name="mobile_row"/>
+      <widget name="bt_row"/>
+    </widgets>
   </object>
 
   <object class="GtkDialog" id="automatic_suspend_dialog">
