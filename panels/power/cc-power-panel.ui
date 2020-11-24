@@ -165,6 +165,43 @@
                     </child>
                   </object>
                 </child>
+                <child>
+                  <object class="GtkBox" id="device_section">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="margin-top">6</property>
+                    <property name="margin-bottom">32</property>
+                    <child>
+                      <object class="GtkLabel" id="device_heading">
+                        <property name="visible">True</property>
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="use-markup">True</property>
+                        <property name="halign">start</property>
+                        <property name="margin_bottom">12</property>
+                        <accessibility>
+                          <relation target="device_listbox" type="label-for"/>
+                        </accessibility>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkFrame">
+                        <property name="visible">True</property>
+                        <property name="shadow-type">in</property>
+                        <child>
+                          <object class="GtkListBox" id="device_listbox">
+                            <property name="visible">True</property>
+                            <property name="selection-mode">none</property>
+                            <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                            <accessibility>
+                              <relation target="device_heading" type="labelled-by"/>
+                            </accessibility>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </child>
           </object>

@@ -68,6 +68,9 @@ struct _CcPowerPanel
   GtkBox            *battery_section;
   GtkSizeGroup      *battery_sizegroup;
   GtkSizeGroup      *charge_sizegroup;
+  GtkLabel          *device_heading;
+  GtkListBox        *device_listbox;
+  GtkBox            *device_section;
   GtkListStore      *idle_time_liststore;
   GtkSizeGroup      *level_sizegroup;
   GtkScrolledWindow *main_scroll;
@@ -93,10 +96,6 @@ struct _CcPowerPanel
 
   GList         *boxes;
   GList         *boxes_reverse;
-
-  GtkWidget     *device_heading;
-  GtkWidget     *device_section;
-  GtkWidget     *device_list;
 
   GtkWidget     *dim_screen_row;
   GtkWidget     *brightness_row;
@@ -325,8 +324,8 @@ add_device (CcPowerPanel *panel, UpDevice *device)
   cc_battery_row_set_charge_sizegroup (row, panel->charge_sizegroup);
   cc_battery_row_set_battery_sizegroup (row, panel->battery_sizegroup);
 
-  gtk_container_add (GTK_CONTAINER (panel->device_list), GTK_WIDGET (row));
-  gtk_widget_set_visible (panel->device_section, TRUE);
+  gtk_container_add (GTK_CONTAINER (panel->device_listbox), GTK_WIDGET (row));
+  gtk_widget_set_visible (GTK_WIDGET (panel->device_section), TRUE);
 }
 
 static void
@@ -347,10 +346,10 @@ up_client_changed (CcPowerPanel *self)
     gtk_container_remove (GTK_CONTAINER (self->battery_listbox), l->data);
   gtk_widget_hide (GTK_WIDGET (self->battery_section));
 
-  device_children = gtk_container_get_children (GTK_CONTAINER (self->device_list));
+  device_children = gtk_container_get_children (GTK_CONTAINER (self->device_listbox));
   for (l = device_children; l != NULL; l = l->next)
-    gtk_container_remove (GTK_CONTAINER (self->device_list), l->data);
-  gtk_widget_hide (self->device_section);
+    gtk_container_remove (GTK_CONTAINER (self->device_listbox), l->data);
+  gtk_widget_hide (GTK_WIDGET (self->device_section));
 
 #ifdef TEST_FAKE_DEVICES
   {
@@ -2073,54 +2072,6 @@ battery_sort_func (GtkListBoxRow *a, GtkListBoxRow *b, gpointer data)
 }
 
 static void
-add_device_section (CcPowerPanel *self)
-{
-  GtkWidget *widget, *box;
-  GtkWidget *frame;
-  g_autofree gchar *s = NULL;
-
-  self->device_section = box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
-  gtk_widget_show (box);
-  gtk_widget_set_margin_top (box, 6);
-  gtk_widget_set_margin_bottom (box, 32);
-  gtk_box_pack_start (self->power_vbox, box, FALSE, TRUE, 0);
-
-  s = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
-  self->device_heading = widget = gtk_label_new (s);
-  gtk_widget_show (widget);
-  gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
-  gtk_label_set_xalign (GTK_LABEL (widget), 0.0);
-  gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-  gtk_widget_set_halign (widget, GTK_ALIGN_START);
-  gtk_widget_set_margin_bottom (widget, 12);
-  gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
-
-  self->device_list = widget = gtk_list_box_new ();
-  gtk_widget_show (widget);
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->device_list);
-  g_signal_connect_object (widget, "keynav-failed", G_CALLBACK (keynav_failed_cb), self, G_CONNECT_SWAPPED);
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (widget), GTK_SELECTION_NONE);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (widget),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (widget),
-                              (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
-
-  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (self->device_heading)),
-                               ATK_RELATION_LABEL_FOR,
-                               ATK_OBJECT (gtk_widget_get_accessible (self->device_list)));
-  atk_object_add_relationship (ATK_OBJECT (gtk_widget_get_accessible (self->device_list)),
-                               ATK_RELATION_LABELLED_BY,
-                               ATK_OBJECT (gtk_widget_get_accessible (self->device_heading)));
-
-  frame = gtk_frame_new (NULL);
-  gtk_widget_show (frame);
-  gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_IN);
-  gtk_container_add (GTK_CONTAINER (frame), widget);
-  gtk_box_pack_start (GTK_BOX (box), frame, FALSE, TRUE, 0);
-}
-
-static void
 cc_power_panel_class_init (CcPowerPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -2140,6 +2091,9 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, charge_sizegroup);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_heading);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, idle_time_liststore);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_scroll);
@@ -2162,6 +2116,7 @@ static void
 cc_power_panel_init (CcPowerPanel *self)
 {
   g_autofree gchar *battery_label = NULL;
+  g_autofree gchar *device_label = NULL;
   guint i;
 
   g_resources_register (cc_power_get_resource ());
@@ -2188,7 +2143,16 @@ cc_power_panel_init (CcPowerPanel *self)
   gtk_list_box_set_sort_func (self->battery_listbox,
                               (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
 
-  add_device_section (self);
+  device_label = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
+  gtk_label_set_markup (self->device_heading, device_label);
+
+  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->device_listbox);
+  gtk_list_box_set_header_func (self->device_listbox,
+                                cc_list_box_update_header_func,
+                                NULL, NULL);
+  gtk_list_box_set_sort_func (self->device_listbox,
+                              (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
+
   add_power_profiles_section (self);
   add_power_saving_section (self);
   add_general_section (self);
