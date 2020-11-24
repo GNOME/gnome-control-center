@@ -254,16 +254,16 @@ add_battery (CcPowerPanel *panel, UpDevice *device, gboolean primary)
 }
 
 static void
-add_device (CcPowerPanel *panel, UpDevice *device)
+add_device (CcPowerPanel *self, UpDevice *device)
 {
   CcBatteryRow *row = cc_battery_row_new (device, FALSE);
-  cc_battery_row_set_level_sizegroup (row, panel->level_sizegroup);
-  cc_battery_row_set_row_sizegroup (row, panel->row_sizegroup);
-  cc_battery_row_set_charge_sizegroup (row, panel->charge_sizegroup);
-  cc_battery_row_set_battery_sizegroup (row, panel->battery_sizegroup);
+  cc_battery_row_set_level_sizegroup (row, self->level_sizegroup);
+  cc_battery_row_set_row_sizegroup (row, self->row_sizegroup);
+  cc_battery_row_set_charge_sizegroup (row, self->charge_sizegroup);
+  cc_battery_row_set_battery_sizegroup (row, self->battery_sizegroup);
 
-  gtk_container_add (GTK_CONTAINER (panel->device_listbox), GTK_WIDGET (row));
-  gtk_widget_set_visible (GTK_WIDGET (panel->device_section), TRUE);
+  gtk_container_add (GTK_CONTAINER (self->device_listbox), GTK_WIDGET (row));
+  gtk_widget_set_visible (GTK_WIDGET (self->device_section), TRUE);
 }
 
 static void
@@ -660,32 +660,32 @@ bt_switch_changed_cb (CcPowerPanel *self)
 }
 
 static void
-bt_powered_state_changed (CcPowerPanel *panel)
+bt_powered_state_changed (CcPowerPanel *self)
 {
   gboolean powered, has_airplane_mode;
   g_autoptr(GVariant) v1 = NULL;
   g_autoptr(GVariant) v2 = NULL;
 
-  v1 = g_dbus_proxy_get_cached_property (panel->bt_rfkill, "BluetoothHasAirplaneMode");
+  v1 = g_dbus_proxy_get_cached_property (self->bt_rfkill, "BluetoothHasAirplaneMode");
   has_airplane_mode = g_variant_get_boolean (v1);
 
   if (!has_airplane_mode)
     {
       g_debug ("BluetoothHasAirplaneMode is false, hiding Bluetooth power row");
-      gtk_widget_hide (GTK_WIDGET (panel->bt_row));
+      gtk_widget_hide (GTK_WIDGET (self->bt_row));
       return;
     }
 
-  v2 = g_dbus_proxy_get_cached_property (panel->bt_rfkill, "BluetoothAirplaneMode");
+  v2 = g_dbus_proxy_get_cached_property (self->bt_rfkill, "BluetoothAirplaneMode");
   powered = !g_variant_get_boolean (v2);
 
   g_debug ("bt powered state changed to %s", powered ? "on" : "off");
 
-  gtk_widget_show (GTK_WIDGET (panel->bt_row));
+  gtk_widget_show (GTK_WIDGET (self->bt_row));
 
-  g_signal_handlers_block_by_func (panel->bt_switch, bt_switch_changed_cb, panel);
-  gtk_switch_set_active (panel->bt_switch, powered);
-  g_signal_handlers_unblock_by_func (panel->bt_switch, bt_switch_changed_cb, panel);
+  g_signal_handlers_block_by_func (self->bt_switch, bt_switch_changed_cb, self);
+  gtk_switch_set_active (self->bt_switch, powered);
+  g_signal_handlers_unblock_by_func (self->bt_switch, bt_switch_changed_cb, self);
 }
 
 #ifdef HAVE_NETWORK_MANAGER

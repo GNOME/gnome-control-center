@@ -33,6 +33,6 @@ typedef enum {
 #define CC_TYPE_BRIGHTNESS_SCALE (cc_brightness_scale_get_type())
 G_DECLARE_FINAL_TYPE (CcBrightnessScale, cc_brightness_scale, CC, BRIGHTNESS_SCALE, GtkBox)
 
-gboolean cc_brightness_scale_get_has_brightness (CcBrightnessScale*);
+gboolean cc_brightness_scale_get_has_brightness (CcBrightnessScale *scale);
 
 G_END_DECLS

@@ -44,7 +44,7 @@ GtkWidget *cc_power_profile_row_new                   (CcPowerProfile  power_pro
 CcPowerProfile cc_power_profile_row_get_profile       (CcPowerProfileRow *row);
 GtkRadioButton *cc_power_profile_row_get_radio_button (CcPowerProfileRow *row);
 void cc_power_profile_row_set_active                  (CcPowerProfileRow *row, gboolean active);
-gboolean cc_power_profile_row_get_active              (CcPowerProfileRow *self);
+gboolean cc_power_profile_row_get_active              (CcPowerProfileRow *row);
 void cc_power_profile_row_set_performance_inhibited   (CcPowerProfileRow *row,
                                                        const char        *performance_inhibited);
 

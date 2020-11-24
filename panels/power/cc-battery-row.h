@@ -31,19 +31,19 @@ G_DECLARE_FINAL_TYPE (CcBatteryRow, cc_battery_row, CC, BATTERY_ROW, GtkListBoxR
 CcBatteryRow* cc_battery_row_new                    (UpDevice *device,
                                                      gboolean  primary);
 
-void          cc_battery_row_set_level_sizegroup     (CcBatteryRow *self,
+void          cc_battery_row_set_level_sizegroup     (CcBatteryRow *row,
                                                       GtkSizeGroup *sizegroup);
 
-void          cc_battery_row_set_row_sizegroup       (CcBatteryRow *self,
+void          cc_battery_row_set_row_sizegroup       (CcBatteryRow *row,
                                                       GtkSizeGroup *sizegroup);
 
-void          cc_battery_row_set_charge_sizegroup    (CcBatteryRow *self,
+void          cc_battery_row_set_charge_sizegroup    (CcBatteryRow *row,
                                                       GtkSizeGroup *sizegroup);
 
-void          cc_battery_row_set_battery_sizegroup   (CcBatteryRow *self,
+void          cc_battery_row_set_battery_sizegroup   (CcBatteryRow *row,
                                                       GtkSizeGroup *sizegroup);
 
-gboolean      cc_battery_row_get_primary             (CcBatteryRow *self);
-UpDeviceKind  cc_battery_row_get_kind                (CcBatteryRow *self);
+gboolean      cc_battery_row_get_primary             (CcBatteryRow *row);
+UpDeviceKind  cc_battery_row_get_kind                (CcBatteryRow *row);
 
 G_END_DECLS

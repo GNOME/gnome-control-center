@@ -71,18 +71,18 @@ get_performance_inhibited_text (const char *inhibited)
 }
 
 static void
-performance_profile_set_inhibited (CcPowerProfileRow *row,
+performance_profile_set_inhibited (CcPowerProfileRow *self,
                                    const char        *performance_inhibited)
 {
   const char *text;
   gboolean inhibited = FALSE;
 
-  if (row->power_profile != CC_POWER_PROFILE_PERFORMANCE)
+  if (self->power_profile != CC_POWER_PROFILE_PERFORMANCE)
     return;
 
-  gtk_style_context_remove_class (gtk_widget_get_style_context (row->subtext),
+  gtk_style_context_remove_class (gtk_widget_get_style_context (self->subtext),
                                   GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_style_context_remove_class (gtk_widget_get_style_context (row->subtext),
+  gtk_style_context_remove_class (gtk_widget_get_style_context (self->subtext),
                                   GTK_STYLE_CLASS_ERROR);
 
   text = get_performance_inhibited_text (performance_inhibited);
@@ -90,11 +90,11 @@ performance_profile_set_inhibited (CcPowerProfileRow *row,
     inhibited = TRUE;
   else
     text = _("High performance and power usage.");
-  gtk_label_set_text (GTK_LABEL (row->subtext), text);
+  gtk_label_set_text (GTK_LABEL (self->subtext), text);
 
-  gtk_style_context_add_class (gtk_widget_get_style_context (row->subtext),
+  gtk_style_context_add_class (gtk_widget_get_style_context (self->subtext),
                                inhibited ? GTK_STYLE_CLASS_ERROR : GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_widget_set_sensitive (GTK_WIDGET (row), !inhibited);
+  gtk_widget_set_sensitive (GTK_WIDGET (self), !inhibited);
 }
 
 static void
@@ -126,18 +126,18 @@ cc_power_profile_row_set_property (GObject      *object,
                           const GValue *value,
                           GParamSpec   *pspec)
 {
-  CcPowerProfileRow *row = (CcPowerProfileRow *)object;
+  CcPowerProfileRow *self = (CcPowerProfileRow *)object;
 
   switch (prop_id)
     {
     case PROP_POWER_PROFILE:
-      g_assert (row->power_profile == -1);
-      row->power_profile = g_value_get_int (value);
-      g_assert (row->power_profile != -1);
+      g_assert (self->power_profile == -1);
+      self->power_profile = g_value_get_int (value);
+      g_assert (self->power_profile != -1);
       break;
 
     case PROP_PERFORMANCE_INHIBITED:
-      cc_power_profile_row_set_performance_inhibited (row, g_value_get_string (value));
+      cc_power_profile_row_set_performance_inhibited (self, g_value_get_string (value));
       break;
 
     default:
@@ -219,21 +219,21 @@ performance_row_new (const gchar  *title,
 }
 
 static void
-cc_power_profile_row_button_toggled_cb (GObject *row)
+cc_power_profile_row_button_toggled_cb (CcPowerProfileRow *self)
 {
-  g_signal_emit (row, signals[BUTTON_TOGGLED], 0);
+  g_signal_emit (self, signals[BUTTON_TOGGLED], 0);
 }
 
 static void
 cc_power_profile_row_constructed (GObject *object)
 {
-  CcPowerProfileRow *row;
+  CcPowerProfileRow *self;
   GtkWidget *box, *title;
   const char *text, *subtext, *icon_name, *class_name;
 
-  row = CC_POWER_PROFILE_ROW (object);
+  self = CC_POWER_PROFILE_ROW (object);
 
-  switch (row->power_profile)
+  switch (self->power_profile)
     {
       case CC_POWER_PROFILE_PERFORMANCE:
         text = _("Performance");
@@ -257,24 +257,24 @@ cc_power_profile_row_constructed (GObject *object)
         g_assert_not_reached ();
     }
 
-  gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (row), FALSE);
-  gtk_widget_show (GTK_WIDGET (row));
+  gtk_list_box_row_set_selectable (GTK_LIST_BOX_ROW (self), FALSE);
+  gtk_widget_show (GTK_WIDGET (self));
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   g_object_set (G_OBJECT (box),
                 "margin-end", 12,
                 "margin-start", 12,
                 "visible", TRUE,
                 NULL);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  gtk_container_add (GTK_CONTAINER (self), box);
 
   title = performance_row_new (text, icon_name, class_name, subtext);
-  row->subtext = g_object_get_data (G_OBJECT (title), "subtext");
-  row->button = g_object_get_data (G_OBJECT (title), "button");
-  g_signal_connect_object (G_OBJECT (row->button), "toggled",
+  self->subtext = g_object_get_data (G_OBJECT (title), "subtext");
+  self->button = g_object_get_data (G_OBJECT (title), "button");
+  g_signal_connect_object (G_OBJECT (self->button), "toggled",
                            G_CALLBACK (cc_power_profile_row_button_toggled_cb),
-                           row, G_CONNECT_SWAPPED);
-  if (row->power_profile == CC_POWER_PROFILE_PERFORMANCE)
-    performance_profile_set_inhibited (row, row->performance_inhibited);
+                           self, G_CONNECT_SWAPPED);
+  if (self->power_profile == CC_POWER_PROFILE_PERFORMANCE)
+    performance_profile_set_inhibited (self, self->performance_inhibited);
   gtk_box_pack_start (GTK_BOX (box), title, TRUE, TRUE, 0);
 }
 
@@ -314,45 +314,45 @@ cc_power_profile_row_class_init (CcPowerProfileRowClass *klass)
 }
 
 static void
-cc_power_profile_row_init (CcPowerProfileRow *row)
+cc_power_profile_row_init (CcPowerProfileRow *self)
 {
-  row->power_profile = -1;
+  self->power_profile = -1;
 }
 
 CcPowerProfile
-cc_power_profile_row_get_profile (CcPowerProfileRow *row)
+cc_power_profile_row_get_profile (CcPowerProfileRow *self)
 {
-  g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (row), -1);
+  g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), -1);
 
-  return row->power_profile;
+  return self->power_profile;
 }
 
 GtkRadioButton *
-cc_power_profile_row_get_radio_button (CcPowerProfileRow *row)
+cc_power_profile_row_get_radio_button (CcPowerProfileRow *self)
 {
-  g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (row), NULL);
+  g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), NULL);
 
-  return row->button;
+  return self->button;
 }
 
 void
-cc_power_profile_row_set_active (CcPowerProfileRow *row,
+cc_power_profile_row_set_active (CcPowerProfileRow *self,
                                  gboolean           active)
 {
-  g_return_if_fail (CC_IS_POWER_PROFILE_ROW (row));
+  g_return_if_fail (CC_IS_POWER_PROFILE_ROW (self));
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (row->button), active);
+  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->button), active);
 }
 
 void
-cc_power_profile_row_set_performance_inhibited (CcPowerProfileRow *row,
+cc_power_profile_row_set_performance_inhibited (CcPowerProfileRow *self,
                                                 const char        *performance_inhibited)
 {
-  g_return_if_fail (CC_IS_POWER_PROFILE_ROW (row));
+  g_return_if_fail (CC_IS_POWER_PROFILE_ROW (self));
 
-  g_clear_pointer (&row->performance_inhibited, g_free);
-  row->performance_inhibited = g_strdup (performance_inhibited);
-  performance_profile_set_inhibited (row, row->performance_inhibited);
+  g_clear_pointer (&self->performance_inhibited, g_free);
+  self->performance_inhibited = g_strdup (performance_inhibited);
+  performance_profile_set_inhibited (self, self->performance_inhibited);
 }
 
 gboolean
