@@ -63,6 +63,7 @@ struct _CcInfoOverviewPanel
   CcListRow       *gnome_version_row;
   CcListRow       *graphics_row;
   GtkListBox      *hardware_box;
+  CcListRow       *hardware_model_row;
   GtkDialog       *hostname_editor;
   CcHostnameEntry *hostname_entry;
   CcListRow       *hostname_row;
@@ -520,6 +521,57 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
     }
 }
 
+static void
+get_hardware_model (CcInfoOverviewPanel *self)
+{
+  g_autoptr(GDBusProxy) hostnamed_proxy = NULL;
+  g_autoptr(GVariant) vendor_variant = NULL;
+  g_autoptr(GVariant) model_variant = NULL;
+  const char *vendor_string, *model_string;
+  g_autoptr(GError) error = NULL;
+
+  hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                   G_DBUS_PROXY_FLAGS_NONE,
+                                                   NULL,
+                                                   "org.freedesktop.hostname1",
+                                                   "/org/freedesktop/hostname1",
+                                                   "org.freedesktop.hostname1",
+                                                   NULL,
+                                                   &error);
+  if (hostnamed_proxy == NULL)
+    {
+      g_debug ("Couldn't get hostnamed to start, bailing: %s", error->message);
+      return;
+    }
+
+  vendor_variant = g_dbus_proxy_get_cached_property (hostnamed_proxy, "HardwareVendor");
+  if (!vendor_variant)
+    {
+      g_debug ("Unable to retrieve org.freedesktop.hostname1.HardwareVendor property");
+      return;
+    }
+
+  model_variant = g_dbus_proxy_get_cached_property (hostnamed_proxy, "HardwareModel");
+  if (!model_variant)
+    {
+      g_debug ("Unable to retrieve org.freedesktop.hostname1.HardwareModel property");
+      return;
+    }
+
+  vendor_string = g_variant_get_string (vendor_variant, NULL),
+  model_string = g_variant_get_string (model_variant, NULL);
+
+  if (vendor_string && g_strcmp0 (vendor_string, "") != 0)
+    {
+      g_autofree gchar *vendor_model = NULL;
+
+      vendor_model = g_strdup_printf ("%s %s", vendor_string, model_string);
+
+      cc_list_row_set_secondary_label (self->hardware_model_row, vendor_model);
+      gtk_widget_set_visible (GTK_WIDGET (self->hardware_model_row), TRUE);
+    }
+}
+
 static char *
 get_cpu_info (const glibtop_sysinfo *info)
 {
@@ -698,6 +750,8 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   cc_list_row_set_secondary_label (self->windowing_system_row, get_windowing_system ());
 
+  get_hardware_model (self);
+
   glibtop_get_mem (&mem);
   memory_text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
   cc_list_row_set_secondary_label (self->memory_row, memory_text);
@@ -823,6 +877,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_box);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_model_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_editor);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_row);
