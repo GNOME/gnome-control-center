@@ -134,7 +134,7 @@ setup_information_label (CcMouseTest *self)
 	}
 
 	if (self->double_click_state == DOUBLE_CLICK_TEST_GEGL) {
-		message = _("Five clicks, GEGL time!"), "</b>";
+		message = _("Five clicks, GEGL time!");
 	} else {
 		double_click = (self->double_click_state >= DOUBLE_CLICK_TEST_ON);
 		switch (self->button_state) {
