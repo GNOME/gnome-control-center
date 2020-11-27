@@ -55,11 +55,16 @@ info_panel_lib = static_library(
 )
 panels_libs += info_panel_lib
 
+print_renderer_deps = [
+  dependency('gtk+-3.0'),
+  epoxy_dep
+]
+
 executable(
   'gnome-control-center-print-renderer',
   'gnome-control-center-print-renderer.c',
   include_directories: [ top_inc ],
-  dependencies: [ deps, epoxy_dep ],
+  dependencies: [ print_renderer_deps ],
   c_args: cflags,
   install: true,
   install_dir: control_center_libexecdir,
