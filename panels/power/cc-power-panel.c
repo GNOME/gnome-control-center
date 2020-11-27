@@ -319,14 +319,14 @@ get_chassis_type (GCancellable *cancellable)
 }
 
 static void
-load_custom_css (CcPowerPanel *self)
+load_custom_css (CcPowerPanel *self,
+                 const char   *path)
 {
   g_autoptr(GtkCssProvider) provider = NULL;
 
   /* use custom CSS */
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/power/battery-levels.css");
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/power/power-profiles.css");
+  gtk_css_provider_load_from_resource (provider, path);
   gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
                                              GTK_STYLE_PROVIDER (provider),
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -2210,7 +2210,8 @@ cc_power_panel_init (CcPowerPanel *self)
   g_resources_register (cc_power_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-  load_custom_css (self);
+  load_custom_css (self, "/org/gnome/control-center/power/battery-levels.css");
+  load_custom_css (self, "/org/gnome/control-center/power/power-profiles.css");
 
   self->chassis_type = get_chassis_type (cc_panel_get_cancellable (CC_PANEL (self)));
 
