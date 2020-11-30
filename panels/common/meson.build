@@ -46,6 +46,7 @@ libwidgets_dep = declare_dependency(
 sources = common_sources + files(
   'cc-common-language.c',
   'cc-language-chooser.c',
+  'cc-language-row.c',
   'cc-list-row.c',
   'cc-time-editor.c',
   'cc-permission-infobar.c',
@@ -54,6 +55,7 @@ sources = common_sources + files(
 
 resource_data = files(
   'cc-language-chooser.ui',
+  'cc-language-row.ui',
   'cc-list-row.ui',
   'cc-time-editor.ui',
   'cc-permission-infobar.ui',
