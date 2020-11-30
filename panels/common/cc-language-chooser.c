@@ -41,7 +41,6 @@ struct _CcLanguageChooser {
         GtkDialog parent_instance;
 
         GtkWidget *select_button;
-        GtkWidget *no_results;
         GtkListBoxRow *more_item;
         GtkWidget *search_bar;
         GtkWidget *language_filter_entry;
@@ -73,16 +72,6 @@ more_widget_new (void)
         gtk_box_pack_start (GTK_BOX (box), arrow, TRUE, TRUE, 0);
 
         return GTK_LIST_BOX_ROW (row);
-}
-
-static GtkWidget *
-no_results_widget_new (void)
-{
-        GtkWidget *widget;
-
-        widget = gtk_label_new (_("No languages found"));
-        gtk_widget_set_sensitive (widget, FALSE);
-        return widget;
 }
 
 static void
@@ -216,11 +205,9 @@ filter_changed (CcLanguageChooser *chooser)
                 cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (chooser->language_filter_entry)));
         if (!filter_contents) {
                 gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->language_listbox));
-                gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->language_listbox), NULL);
                 return;
         }
         chooser->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
-        gtk_list_box_set_placeholder (GTK_LIST_BOX (chooser->language_listbox), chooser->no_results);
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->language_listbox));
 }
 
@@ -323,9 +310,6 @@ cc_language_chooser_init (CcLanguageChooser *chooser)
 
         chooser->more_item = more_widget_new ();
         gtk_widget_show (GTK_WIDGET (chooser->more_item));
-        /* We ref-sink here so we can reuse this widget multiple times */
-        chooser->no_results = g_object_ref_sink (no_results_widget_new ());
-        gtk_widget_show (chooser->no_results);
 
         gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->language_listbox),
                                     sort_languages, chooser, NULL);
@@ -354,7 +338,6 @@ cc_language_chooser_dispose (GObject *object)
 {
         CcLanguageChooser *chooser = CC_LANGUAGE_CHOOSER (object);
 
-        g_clear_object (&chooser->no_results);
         g_clear_pointer (&chooser->filter_words, g_strfreev);
         g_clear_pointer (&chooser->language, g_free);
 
