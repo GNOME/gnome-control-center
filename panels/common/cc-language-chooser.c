@@ -52,28 +52,6 @@ struct _CcLanguageChooser {
 
 G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, GTK_TYPE_DIALOG)
 
-static GtkListBoxRow *
-more_widget_new (void)
-{
-        GtkWidget *box, *row;
-        GtkWidget *arrow;
-
-        row = gtk_list_box_row_new ();
-        box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-        gtk_widget_show (box);
-        gtk_container_add (GTK_CONTAINER (row), box);
-        gtk_widget_set_tooltip_text (box, _("More…"));
-
-        arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
-        gtk_widget_show (arrow);
-        gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
-        gtk_widget_set_margin_top (box, 10);
-        gtk_widget_set_margin_bottom (box, 10);
-        gtk_box_pack_start (GTK_BOX (box), arrow, TRUE, TRUE, 0);
-
-        return GTK_LIST_BOX_ROW (row);
-}
-
 static void
 add_languages (CcLanguageChooser *chooser,
                gchar            **locale_ids,
@@ -94,10 +72,8 @@ add_languages (CcLanguageChooser *chooser,
                 row = cc_language_row_new (locale_id);
                 cc_language_row_set_is_extra (row, !is_initial);
                 gtk_widget_show (GTK_WIDGET (row));
-                gtk_container_add (GTK_CONTAINER (chooser->language_listbox), GTK_WIDGET (row));
+                gtk_list_box_prepend (GTK_LIST_BOX (chooser->language_listbox), GTK_WIDGET (row));
         }
-
-        gtk_container_add (GTK_CONTAINER (chooser->language_listbox), GTK_WIDGET (chooser->more_item));
 }
 
 static void
@@ -308,9 +284,6 @@ cc_language_chooser_init (CcLanguageChooser *chooser)
 
         gtk_widget_init_template (GTK_WIDGET (chooser));
 
-        chooser->more_item = more_widget_new ();
-        gtk_widget_show (GTK_WIDGET (chooser->more_item));
-
         gtk_list_box_set_sort_func (GTK_LIST_BOX (chooser->language_listbox),
                                     sort_languages, chooser, NULL);
         gtk_list_box_set_filter_func (GTK_LIST_BOX (chooser->language_listbox),
@@ -358,6 +331,7 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, search_bar);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_filter_entry);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, language_listbox);
+        gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, more_item);
 }
 
 CcLanguageChooser *
