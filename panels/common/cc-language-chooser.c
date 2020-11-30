@@ -158,7 +158,7 @@ sort_languages (GtkListBoxRow *a,
 }
 
 static void
-filter_changed (CcLanguageChooser *chooser)
+language_filter_entry_search_changed_cb (CcLanguageChooser *chooser)
 {
         g_autofree gchar *filter_contents = NULL;
 
@@ -225,8 +225,7 @@ set_locale_id (CcLanguageChooser *chooser,
 }
 
 static void
-row_activated (CcLanguageChooser *chooser,
-               GtkListBoxRow     *row)
+language_listbox_row_activated_cb (CcLanguageChooser *chooser, GtkListBoxRow *row)
 {
         const gchar *new_locale_id;
 
@@ -249,7 +248,7 @@ row_activated (CcLanguageChooser *chooser,
 }
 
 static void
-activate_default (CcLanguageChooser *chooser)
+activate_default_cb (CcLanguageChooser *chooser)
 {
         GtkWidget *focus;
 
@@ -281,16 +280,7 @@ cc_language_chooser_init (CcLanguageChooser *chooser)
                                       cc_list_box_update_header_func, NULL, NULL);
         add_all_languages (chooser);
 
-        g_signal_connect_object (chooser->language_filter_entry, "search-changed",
-                                 G_CALLBACK (filter_changed), chooser, G_CONNECT_SWAPPED);
-
-        g_signal_connect_object (chooser->language_listbox, "row-activated",
-                                 G_CALLBACK (row_activated), chooser, G_CONNECT_SWAPPED);
-
         gtk_list_box_invalidate_filter (chooser->language_listbox);
-
-        g_signal_connect (chooser, "activate-default",
-                          G_CALLBACK (activate_default), NULL);
 }
 
 static void
@@ -319,6 +309,10 @@ cc_language_chooser_class_init (CcLanguageChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, more_row);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, search_bar);
         gtk_widget_class_bind_template_child (widget_class, CcLanguageChooser, select_button);
+
+        gtk_widget_class_bind_template_callback (widget_class, activate_default_cb);
+        gtk_widget_class_bind_template_callback (widget_class, language_filter_entry_search_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, language_listbox_row_activated_cb);
 }
 
 CcLanguageChooser *

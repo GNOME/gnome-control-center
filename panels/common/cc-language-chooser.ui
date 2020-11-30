@@ -7,6 +7,7 @@
     <property name="destroy_with_parent">True</property>
     <property name="default_width">340</property>
     <property name="default_height">475</property>
+    <signal name="activate-default" handler="activate_default_cb"/>
     <child type="action">
       <object class="GtkButton" id="select_button">
         <property name="label" translatable="yes">_Select</property>
@@ -42,6 +43,7 @@
               <object class="GtkSearchEntry" id="language_filter_entry">
                 <property name="visible">True</property>
                 <property name="width_chars">30</property>
+                <signal name="search-changed" handler="language_filter_entry_search_changed_cb" object="CcLanguageChooser" swapped="yes"/>
               </object>
             </child>
           </object>
@@ -60,6 +62,7 @@
                 <property name="vexpand">True</property>
                 <property name="halign">fill</property>
                 <property name="valign">fill</property>
+                <signal name="row-activated" handler="language_listbox_row_activated_cb" object="CcLanguageChooser" swapped="yes"/>
                 <child type="placeholder">
                   <object class="GtkLabel">
                     <property name="visible">True</property>
