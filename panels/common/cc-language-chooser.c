@@ -54,40 +54,26 @@ struct _CcLanguageChooser {
 G_DEFINE_TYPE (CcLanguageChooser, cc_language_chooser, GTK_TYPE_DIALOG)
 
 static void
-add_languages (CcLanguageChooser *chooser,
-               gchar            **locale_ids,
-               GHashTable        *initial)
-{
-        while (*locale_ids) {
-                gchar *locale_id;
-                gboolean is_initial;
-                CcLanguageRow *row;
-
-                locale_id = *locale_ids;
-                locale_ids ++;
-
-                if (!cc_common_language_has_font (locale_id))
-                        continue;
-
-                is_initial = (g_hash_table_lookup (initial, locale_id) != NULL);
-                row = cc_language_row_new (locale_id);
-                cc_language_row_set_is_extra (row, !is_initial);
-                gtk_widget_show (GTK_WIDGET (row));
-                gtk_list_box_prepend (chooser->language_listbox, GTK_WIDGET (row));
-        }
-}
-
-static void
 add_all_languages (CcLanguageChooser *chooser)
 {
-        gchar **locale_ids;
-        GHashTable *initial;
+        g_auto(GStrv) locale_ids = NULL;
+        g_autoptr(GHashTable) initial = NULL;
 
         locale_ids = gnome_get_all_locales ();
         initial = cc_common_language_get_initial_languages ();
-        add_languages (chooser, locale_ids, initial);
-        g_hash_table_destroy (initial);
-        g_strfreev (locale_ids);
+        for (int i = 0; locale_ids[i] != NULL; i++) {
+                CcLanguageRow *row;
+                gboolean is_initial;
+
+                if (!cc_common_language_has_font (locale_ids[i]))
+                        continue;
+
+                row = cc_language_row_new (locale_ids[i]);
+                gtk_widget_show (GTK_WIDGET (row));
+                is_initial = (g_hash_table_lookup (initial, locale_ids[i]) != NULL);
+                cc_language_row_set_is_extra (row, !is_initial);
+                gtk_list_box_prepend (chooser->language_listbox, GTK_WIDGET (row));
+        }
 }
 
 static gboolean
