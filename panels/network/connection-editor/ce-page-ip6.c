@@ -111,11 +111,11 @@ method_changed (CEPageIP6 *self)
 static void
 update_row_sensitivity (CEPageIP6 *self, GtkWidget *list)
 {
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
         gint rows = 0, i = 0;
 
         children = gtk_container_get_children (GTK_CONTAINER (list));
-        for (l = children; l; l = l->next) {
+        for (GList *l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkWidget *button;
 
@@ -123,7 +123,7 @@ update_row_sensitivity (CEPageIP6 *self, GtkWidget *list)
                 if (button != NULL)
                         rows++;
         }
-        for (l = children; l; l = l->next) {
+        for (GList *l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkWidget *button;
 
@@ -131,7 +131,6 @@ update_row_sensitivity (CEPageIP6 *self, GtkWidget *list)
                 if (button != NULL)
                         gtk_widget_set_sensitive (button, rows > 1 && ++i < rows);
         }
-        g_list_free (children);
 }
 
 static void
@@ -156,21 +155,19 @@ static gboolean
 validate_row (GtkWidget *row)
 {
         GtkWidget *box;
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
         gboolean valid;
 
         valid = FALSE;
         box = gtk_bin_get_child (GTK_BIN (row));
         children = gtk_container_get_children (GTK_CONTAINER (box));
 
-        for (l = children; l != NULL; l = l->next) {
+        for (GList *l = children; l != NULL; l = l->next) {
                 if (!GTK_IS_ENTRY (l->data))
                         continue;
 
                 valid = valid || gtk_entry_get_text_length (l->data) > 0;
         }
-
-        g_list_free (children);
 
         return valid;
 }
@@ -241,19 +238,15 @@ add_address_row (CEPageIP6   *self,
 static void
 ensure_empty_address_row (CEPageIP6 *self)
 {
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
+        GList *l;
 
         children = gtk_container_get_children (GTK_CONTAINER (self->address_list));
-        l = children;
-
-        while (l && l->next)
-                l = l->next;
+        l = g_list_last (children);
 
         /* Add the last, stub row if needed*/
         if (!l || validate_row (l->data))
                 add_address_row (self, "", "", "");
-
-        g_list_free (children);
 }
 
 static void
@@ -391,10 +384,11 @@ add_route_row (CEPageIP6   *self,
 static void
 ensure_empty_routes_row (CEPageIP6 *self)
 {
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
+        GList *l;
 
         children = gtk_container_get_children (GTK_CONTAINER (self->routes_list));
-        l = children;
+        l = g_list_last (children);
 
         while (l && l->next)
                 l = l->next;
@@ -402,8 +396,6 @@ ensure_empty_routes_row (CEPageIP6 *self)
         /* Add the last, stub row if needed*/
         if (!l || validate_row (l->data))
                 add_route_row (self, "", NULL, "", NULL);
-
-        g_list_free (children);
 }
 
 static void
@@ -522,7 +514,8 @@ ui_to_setting (CEPageIP6 *self)
         gboolean ignore_auto_dns;
         gboolean ignore_auto_routes;
         gboolean never_default;
-        GList *children, *l;
+        g_autoptr(GList) address_children = NULL;
+        g_autoptr(GList) routes_children = NULL;
         gboolean ret = TRUE;
         GStrv dns_addresses = NULL;
         gchar *dns_text = NULL;
@@ -543,15 +536,14 @@ ui_to_setting (CEPageIP6 *self)
 
         nm_setting_ip_config_clear_addresses (self->setting);
         if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL)) {
-                children = gtk_container_get_children (GTK_CONTAINER (self->address_list));
+                address_children = gtk_container_get_children (GTK_CONTAINER (self->address_list));
         } else {
                 g_object_set (G_OBJECT (self->setting),
                               NM_SETTING_IP_CONFIG_GATEWAY, NULL,
                               NULL);
-                children = NULL;
        }
 
-        for (l = children; l; l = l->next) {
+        for (GList *l = address_children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
                 const gchar *text_address;
@@ -615,7 +607,6 @@ ui_to_setting (CEPageIP6 *self)
                 if (!l || !l->next)
                         ensure_empty_address_row (self);
         }
-        g_list_free (children);
 
         nm_setting_ip_config_clear_dns (self->setting);
         dns_text = g_strstrip (g_strdup (gtk_entry_get_text (GTK_ENTRY (self->dns_entry))));
@@ -651,11 +642,9 @@ ui_to_setting (CEPageIP6 *self)
         if (g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_AUTO) ||
             g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_DHCP) ||
             g_str_equal (method, NM_SETTING_IP6_CONFIG_METHOD_MANUAL))
-                children = gtk_container_get_children (GTK_CONTAINER (self->routes_list));
-        else
-                children = NULL;
+                routes_children = gtk_container_get_children (GTK_CONTAINER (self->routes_list));
 
-        for (l = children; l; l = l->next) {
+        for (GList *l = routes_children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
                 const gchar *text_address;
@@ -731,7 +720,6 @@ ui_to_setting (CEPageIP6 *self)
                 if (!l || !l->next)
                         ensure_empty_routes_row (self);
         }
-        g_list_free (children);
 
         if (!ret)
                 goto out;

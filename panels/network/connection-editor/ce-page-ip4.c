@@ -108,11 +108,11 @@ method_changed (CEPageIP4 *self)
 static void
 update_row_sensitivity (CEPageIP4 *self, GtkWidget *list)
 {
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
         gint rows = 0, i = 0;
 
         children = gtk_container_get_children (GTK_CONTAINER (list));
-        for (l = children; l; l = l->next) {
+        for (GList *l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkWidget *button;
 
@@ -120,7 +120,7 @@ update_row_sensitivity (CEPageIP4 *self, GtkWidget *list)
                 if (button != NULL)
                         rows++;
         }
-        for (l = children; l; l = l->next) {
+        for (GList *l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkWidget *button;
 
@@ -128,17 +128,16 @@ update_row_sensitivity (CEPageIP4 *self, GtkWidget *list)
                 if (button != NULL)
                         gtk_widget_set_sensitive (button, rows > 1 && ++i < rows);
         }
-        g_list_free (children);
 }
 
 static void
 update_row_gateway_sensitivity (CEPageIP4 *self)
 {
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
         gint rows = 0;
 
         children = gtk_container_get_children (GTK_CONTAINER (self->address_list));
-        for (l = children; l; l = l->next) {
+        for (GList *l = children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkWidget *entry;
 
@@ -148,7 +147,6 @@ update_row_gateway_sensitivity (CEPageIP4 *self)
 
                 rows++;
         }
-        g_list_free (children);
 }
 
 static void
@@ -175,21 +173,19 @@ static gboolean
 validate_row (GtkWidget *row)
 {
         GtkWidget *box;
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
         gboolean valid;
 
         valid = FALSE;
         box = gtk_bin_get_child (GTK_BIN (row));
         children = gtk_container_get_children (GTK_CONTAINER (box));
 
-        for (l = children; l != NULL; l = l->next) {
+        for (GList *l = children; l != NULL; l = l->next) {
                 if (!GTK_IS_ENTRY (l->data))
                         continue;
 
                 valid = valid || gtk_entry_get_text_length (l->data) > 0;
         }
-
-        g_list_free (children);
 
         return valid;
 }
@@ -261,19 +257,15 @@ add_address_row (CEPageIP4   *self,
 static void
 ensure_empty_address_row (CEPageIP4 *self)
 {
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
+        GList *l;
 
         children = gtk_container_get_children (GTK_CONTAINER (self->address_list));
-        l = children;
-
-        while (l && l->next)
-                l = l->next;
+        l = g_list_last (children);
 
         /* Add the last, stub row if needed*/
         if (!l || validate_row (l->data))
                 add_address_row (self, "", "", "");
-
-        g_list_free (children);
 }
 
 static void
@@ -421,19 +413,15 @@ add_route_row (CEPageIP4   *self,
 static void
 ensure_empty_routes_row (CEPageIP4 *self)
 {
-        GList *children, *l;
+        g_autoptr(GList) children = NULL;
+        GList *l;
 
         children = gtk_container_get_children (GTK_CONTAINER (self->routes_list));
-        l = children;
-
-        while (l && l->next)
-                l = l->next;
+        l = g_list_last (children);
 
         /* Add the last, stub row if needed*/
         if (!l || validate_row (l->data))
                 add_route_row (self, "", "", "", -1);
-
-        g_list_free (children);
 }
 
 static void
@@ -574,7 +562,8 @@ ui_to_setting (CEPageIP4 *self)
         GPtrArray *dns_servers = NULL;
         GPtrArray *routes = NULL;
         GStrv dns_addresses = NULL;
-        GList *children, *l;
+        g_autoptr(GList) address_children = NULL;
+        g_autoptr(GList) routes_children = NULL;
         gboolean ret = TRUE;
         const char *default_gateway = NULL;
         gchar *dns_text = NULL;
@@ -593,11 +582,9 @@ ui_to_setting (CEPageIP4 *self)
 
         addresses = g_ptr_array_new_with_free_func ((GDestroyNotify) nm_ip_address_unref);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
-                children = gtk_container_get_children (GTK_CONTAINER (self->address_list));
-        else
-                children = NULL;
+                address_children = gtk_container_get_children (GTK_CONTAINER (self->address_list));
 
-        for (l = children; l; l = l->next) {
+        for (GList *l = address_children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
                 GtkEntry *gateway_entry;
@@ -660,7 +647,6 @@ ui_to_setting (CEPageIP4 *self)
                 if (!l || !l->next)
                         ensure_empty_address_row (self);
         }
-        g_list_free (children);
 
         if (addresses->len == 0) {
                 g_ptr_array_free (addresses, TRUE);
@@ -705,11 +691,9 @@ ui_to_setting (CEPageIP4 *self)
         routes = g_ptr_array_new_with_free_func ((GDestroyNotify) nm_ip_route_unref);
         if (g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_AUTO) ||
             g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL))
-                children = gtk_container_get_children (GTK_CONTAINER (self->routes_list));
-        else
-                children = NULL;
+                routes_children = gtk_container_get_children (GTK_CONTAINER (self->routes_list));
 
-        for (l = children; l; l = l->next) {
+        for (GList *l = routes_children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 GtkEntry *entry;
                 const gchar *text_address;
@@ -779,7 +763,6 @@ ui_to_setting (CEPageIP4 *self)
                 if (!l || !l->next)
                         ensure_empty_routes_row (self);
         }
-        g_list_free (children);
 
         if (routes->len == 0) {
                 g_ptr_array_free (routes, TRUE);
