@@ -29,6 +29,7 @@
 
 #include "list-box-helper.h"
 #include "ce-ip-address-entry.h"
+#include "ce-netmask-entry.h"
 #include "ce-page.h"
 #include "ce-page-ip4.h"
 #include "ui-helpers.h"
@@ -217,10 +218,10 @@ add_address_row (CEPageIP4   *self,
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
-        widget = gtk_entry_new ();
+        widget = GTK_WIDGET (ce_netmask_entry_new ());
         g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_address_row), self, G_CONNECT_SWAPPED);
-        g_object_set_data (G_OBJECT (row), "network", widget);
+        g_object_set_data (G_OBJECT (row), "netmask", widget);
         gtk_entry_set_text (GTK_ENTRY (widget), network);
         gtk_entry_set_width_chars (GTK_ENTRY (widget), 16);
         gtk_widget_set_hexpand (widget, TRUE);
@@ -527,32 +528,6 @@ connect_ip4_page (CEPageIP4 *self)
 }
 
 static gboolean
-parse_netmask (const char *str, guint32 *prefix)
-{
-        struct in_addr tmp_addr;
-        glong tmp_prefix;
-
-        errno = 0;
-
-        /* Is it a prefix? */
-        if (!strchr (str, '.')) {
-                tmp_prefix = strtol (str, NULL, 10);
-                if (!errno && tmp_prefix >= 0 && tmp_prefix <= 32) {
-                        *prefix = tmp_prefix;
-                        return TRUE;
-                }
-        }
-
-        /* Is it a netmask? */
-        if (inet_pton (AF_INET, str, &tmp_addr) > 0) {
-                *prefix = nm_utils_ip4_netmask_to_prefix (tmp_addr.s_addr);
-                return TRUE;
-        }
-
-        return FALSE;
-}
-
-static gboolean
 ui_to_setting (CEPageIP4 *self)
 {
         const gchar *method;
@@ -588,33 +563,27 @@ ui_to_setting (CEPageIP4 *self)
         for (GList *l = address_children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 CEIPAddressEntry *address_entry;
+                CENetmaskEntry *netmask_entry;
                 CEIPAddressEntry *gateway_entry;
-                const gchar *text_netmask;
                 NMIPAddress *addr;
-                guint32 prefix;
 
                 address_entry = CE_IP_ADDRESS_ENTRY (g_object_get_data (G_OBJECT (row), "address"));
                 if (!address_entry)
                         continue;
 
-                text_netmask = gtk_entry_get_text (GTK_ENTRY (g_object_get_data (G_OBJECT (row), "network")));
+                netmask_entry = CE_NETMASK_ENTRY (g_object_get_data (G_OBJECT (row), "netmask"));
                 gateway_entry = CE_IP_ADDRESS_ENTRY (g_object_get_data (G_OBJECT (row), "gateway"));
 
-                if (ce_ip_address_entry_is_empty (address_entry) && !*text_netmask && ce_ip_address_entry_is_empty (gateway_entry)) {
+                if (ce_ip_address_entry_is_empty (address_entry) && ce_netmask_entry_is_empty (netmask_entry) && ce_ip_address_entry_is_empty (gateway_entry)) {
                         /* ignore empty rows */
-                        widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
                         continue;
                 }
 
                 if (!ce_ip_address_entry_is_valid (address_entry))
                         ret = FALSE;
 
-                if (!parse_netmask (text_netmask, &prefix)) {
-                        widget_set_error (g_object_get_data (G_OBJECT (row), "network"));
+                if (!ce_netmask_entry_is_valid (netmask_entry))
                         ret = FALSE;
-                } else {
-                        widget_unset_error (g_object_get_data (G_OBJECT (row), "network"));
-                }
 
                 if (!ce_ip_address_entry_is_valid (gateway_entry)) {
                         ret = FALSE;
@@ -628,7 +597,7 @@ ui_to_setting (CEPageIP4 *self)
                 if (!ret)
                         continue;
 
-                addr = nm_ip_address_new (AF_INET, gtk_entry_get_text (GTK_ENTRY (address_entry)), prefix, NULL);
+                addr = nm_ip_address_new (AF_INET, gtk_entry_get_text (GTK_ENTRY (address_entry)), ce_netmask_entry_get_prefix (netmask_entry), NULL);
                 if (addr)
                         g_ptr_array_add (addresses, addr);
 
@@ -684,22 +653,21 @@ ui_to_setting (CEPageIP4 *self)
         for (GList *l = routes_children; l; l = l->next) {
                 GtkWidget *row = l->data;
                 CEIPAddressEntry *address_entry;
+                CENetmaskEntry *netmask_entry;
                 CEIPAddressEntry *gateway_entry;
-                const gchar *text_netmask;
                 const gchar *text_metric;
                 gint64 metric;
-                guint32 netmask;
                 NMIPRoute *route;
 
                 address_entry = CE_IP_ADDRESS_ENTRY (g_object_get_data (G_OBJECT (row), "address"));
                 if (!address_entry)
                         continue;
 
-                text_netmask = gtk_entry_get_text (GTK_ENTRY (g_object_get_data (G_OBJECT (row), "netmask")));
+                netmask_entry = CE_NETMASK_ENTRY (g_object_get_data (G_OBJECT (row), "netmask"));
                 gateway_entry = CE_IP_ADDRESS_ENTRY (g_object_get_data (G_OBJECT (row), "gateway"));
                 text_metric = gtk_entry_get_text (GTK_ENTRY (g_object_get_data (G_OBJECT (row), "metric")));
 
-                if (ce_ip_address_entry_is_empty (address_entry) && !*text_netmask && ce_ip_address_entry_is_empty (gateway_entry) && !*text_metric) {
+                if (ce_ip_address_entry_is_empty (address_entry) && ce_netmask_entry_is_empty (netmask_entry) && ce_ip_address_entry_is_empty (gateway_entry) && !*text_metric) {
                         /* ignore empty rows */
                         continue;
                 }
@@ -707,12 +675,8 @@ ui_to_setting (CEPageIP4 *self)
                 if (!ce_ip_address_entry_is_valid (address_entry))
                         ret = FALSE;
 
-                if (!parse_netmask (text_netmask, &netmask)) {
-                        widget_set_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "netmask")));
+                if (!ce_netmask_entry_is_valid (netmask_entry))
                         ret = FALSE;
-                } else {
-                        widget_unset_error (GTK_WIDGET (g_object_get_data (G_OBJECT (row), "netmask")));
-                }
 
                 if (!ce_ip_address_entry_is_valid (gateway_entry))
                         ret = FALSE;
@@ -734,7 +698,7 @@ ui_to_setting (CEPageIP4 *self)
                 if (!ret)
                         continue;
 
-                route = nm_ip_route_new (AF_INET, gtk_entry_get_text (GTK_ENTRY (address_entry)), netmask, gtk_entry_get_text (GTK_ENTRY (gateway_entry)), metric, NULL);
+                route = nm_ip_route_new (AF_INET, gtk_entry_get_text (GTK_ENTRY (address_entry)), ce_netmask_entry_get_prefix (netmask_entry), gtk_entry_get_text (GTK_ENTRY (gateway_entry)), metric, NULL);
                 if (route)
                         g_ptr_array_add (routes, route);
 
