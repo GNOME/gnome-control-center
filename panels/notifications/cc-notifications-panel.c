@@ -39,6 +39,7 @@ struct _CcNotificationsPanel {
   CcPanel            parent_instance;
 
   GtkListBox        *app_listbox;
+  GtkAdjustment     *focus_adjustment;
   CcListRow         *lock_screen_row;
   GtkScrolledWindow *main_scrolled_window;
   GtkBox            *main_box;
@@ -51,8 +52,6 @@ struct _CcNotificationsPanel {
   GCancellable      *cancellable;
 
   GHashTable        *known_applications;
-
-  GtkAdjustment     *focus_adjustment;
 
   GList             *sections;
   GList             *sections_reverse;
@@ -184,8 +183,6 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                    panel->lock_screen_row,
                    "active", G_SETTINGS_BIND_DEFAULT);
 
-  panel->focus_adjustment = gtk_scrolled_window_get_vadjustment (panel->main_scrolled_window);
-
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (panel->main_box), panel->focus_adjustment);
 
   panel->sections = g_list_append (panel->sections, panel->options_listbox);
@@ -238,6 +235,7 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/notifications/cc-notifications-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, app_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, focus_adjustment);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, lock_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_scrolled_window);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_box);
