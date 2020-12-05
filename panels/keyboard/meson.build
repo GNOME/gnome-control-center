@@ -61,7 +61,6 @@ sources = files(
   'cc-keyboard-panel.c',
   'cc-keyboard-item.c',
   'cc-keyboard-manager.c',
-  'cc-keyboard-option.c',
   'cc-keyboard-shortcut-editor.c',
   'wm-common.c',
   'keyboard-shortcuts.c'

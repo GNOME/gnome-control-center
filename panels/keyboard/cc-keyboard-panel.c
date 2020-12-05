@@ -25,7 +25,6 @@
 #include "cc-keyboard-shortcut-row.h"
 #include "cc-keyboard-item.h"
 #include "cc-keyboard-manager.h"
-#include "cc-keyboard-option.h"
 #include "cc-keyboard-panel.h"
 #include "cc-keyboard-resources.h"
 #include "cc-keyboard-shortcut-editor.h"
@@ -548,8 +547,6 @@ cc_keyboard_panel_finalize (GObject *object)
   g_clear_pointer (&self->pictures_regex, g_regex_unref);
   g_clear_object (&self->accelerator_sizegroup);
   g_clear_object (&self->input_source_settings);
-
-  cc_keyboard_option_clear_all ();
 
   if (self->search_bar_handler_id != 0)
     {
