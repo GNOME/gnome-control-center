@@ -1366,7 +1366,7 @@ on_permission_changed (CcUserPanel *self)
 
         is_authorized = g_permission_get_allowed (G_PERMISSION (self->permission));
 
-        gtk_widget_set_visible (GTK_WIDGET (self->add_user_button), is_authorized);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->add_user_button), is_authorized);
 
         user = get_selected_user (self);
         if (!user) {
