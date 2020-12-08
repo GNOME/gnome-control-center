@@ -31,4 +31,7 @@ G_DECLARE_FINAL_TYPE (CcPermissionInfobar, cc_permission_infobar, CC, PERMISSION
 void            cc_permission_infobar_set_permission (CcPermissionInfobar *self,
                                                       GPermission         *permission);
 
+void            cc_permission_infobar_set_title      (CcPermissionInfobar *self,
+                                                      const gchar         *title);
+
 G_END_DECLS

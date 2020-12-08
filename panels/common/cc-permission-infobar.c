@@ -27,12 +27,15 @@
 # include <config.h>
 #endif
 
+#include <glib/gi18n.h>
+
 #include "cc-permission-infobar.h"
 
 struct _CcPermissionInfobar
 {
   GtkRevealer    parent_instance;
 
+  GtkLabel      *title;
   GtkLockButton *lock_button;
 };
 
@@ -59,6 +62,7 @@ cc_permission_infobar_class_init (CcPermissionInfobarClass *klass)
                                                "/org/gnome/control-center/"
                                                "common/cc-permission-infobar.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, title);
   gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, lock_button);
 }
 
@@ -66,6 +70,9 @@ static void
 cc_permission_infobar_init (CcPermissionInfobar *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  /* Set the default title. */
+  cc_permission_infobar_set_title (self, NULL);
 }
 
 void
@@ -81,4 +88,23 @@ cc_permission_infobar_set_permission (CcPermissionInfobar *self,
                            self,
                            G_CONNECT_SWAPPED);
   on_permission_changed (self);
+}
+
+/**
+ * cc_permission_infobar_set_title:
+ * @self: a #CcPermissionInfobar
+ * @title: (nullable): title to display in the infobar, or %NULL for the default
+ *
+ * Set the title text to display in the infobar.
+ */
+void
+cc_permission_infobar_set_title (CcPermissionInfobar *self,
+                                 const gchar         *title)
+{
+  g_return_if_fail (CC_IS_PERMISSION_INFOBAR (self));
+
+  if (title == NULL)
+    title = _("Unlock to Change Settings");
+
+  gtk_label_set_text (self->title, title);
 }
