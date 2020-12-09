@@ -66,11 +66,11 @@ enum {
   PROP_PARAMETERS
 };
 
-static const XkbModifier LV3_MODIFIER = {
+static const CcXkbModifier LV3_MODIFIER = {
   "lv3:",
   N_("Alternate Characters Key"),
   N_("The alternate characters key can be used to enter additional characters. These are sometimes printed as a third-option on your keyboard."),
-  (XkbOption[]){
+  (CcXkbOption[]){
     { NC_("keyboard key", "Left Alt"),    "lv3:lalt_switch" },
     { NC_("keyboard key", "Right Alt"),   "lv3:ralt_switch" },
     { NC_("keyboard key", "Left Super"),  "lv3:lwin_switch" },
@@ -82,13 +82,13 @@ static const XkbModifier LV3_MODIFIER = {
   "lv3:ralt_switch",
 };
 
-static const XkbModifier COMPOSE_MODIFIER = {
+static const CcXkbModifier COMPOSE_MODIFIER = {
   "compose:",
   N_("Compose Key"),
   N_("The compose key allows a wide variety of characters to be entered. To use it, press compose then a sequence of characters. "
      " For example, compose key followed by <b>C</b> and <b>o</b> will enter <b>©</b>, "
      "<b>a</b> followed by <b>'</b> will enter <b>á</b>."),
-  (XkbOption[]){
+  (CcXkbOption[]){
     { NC_("keyboard key", "Left Alt"),     "compose:lalt" },
     { NC_("keyboard key", "Right Alt"),    "compose:ralt" },
     { NC_("keyboard key", "Left Super"),   "compose:lwin" },

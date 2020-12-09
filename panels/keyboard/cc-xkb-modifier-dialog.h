@@ -28,21 +28,21 @@ typedef struct
 {
   gchar *label;
   gchar *xkb_option;
-} XkbOption;
+} CcXkbOption;
 
 typedef struct
 {
   gchar *prefix;
   gchar *title;
   gchar *description;
-  XkbOption *options;
+  CcXkbOption *options;
   gchar *default_option;
-} XkbModifier;
+} CcXkbModifier;
 
 #define CC_TYPE_XKB_MODIFIER_DIALOG (cc_xkb_modifier_dialog_get_type())
 G_DECLARE_FINAL_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, CC, XKB_MODIFIER_DIALOG, GtkDialog)
 
-CcXkbModifierDialog *cc_xkb_modifier_dialog_new (GSettings *input_settings, const XkbModifier*);
+CcXkbModifierDialog *cc_xkb_modifier_dialog_new (GSettings *input_settings, const CcXkbModifier*);
 
 gboolean xcb_modifier_transform_binding_to_label (GValue*, GVariant*, gpointer);
 

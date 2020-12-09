@@ -36,7 +36,7 @@ struct _CcXkbModifierDialog
   HdyActionRow   *switch_row;
 
   GSettings      *input_source_settings;
-  const XkbModifier *modifier;
+  const CcXkbModifier *modifier;
   GSList         *radio_group;
 };
 
@@ -47,10 +47,10 @@ static const gchar *custom_css =
 "    padding: 12px"
 "}";
 
-static const XkbOption*
-get_xkb_option_from_name (const XkbModifier *modifier, const gchar* name)
+static const CcXkbOption*
+get_xkb_option_from_name (const CcXkbModifier *modifier, const gchar* name)
 {
-  const XkbOption *options = modifier->options;
+  const CcXkbOption *options = modifier->options;
   int i;
 
   for (i = 0; options[i].label && options[i].xkb_option; i++)
@@ -84,7 +84,7 @@ update_active_radio (CcXkbModifierDialog *self)
 {
   g_auto(GStrv) options = NULL;
   GtkRadioButton *rightalt_radio;
-  const XkbOption *default_option;
+  const CcXkbOption *default_option;
   guint i;
 
   options = g_settings_get_strv (self->input_source_settings, "xkb-options");
@@ -246,7 +246,7 @@ static void
 add_radio_buttons (CcXkbModifierDialog *self)
 {
   GtkWidget *row, *radio_button, *label, *last_button = NULL;
-  XkbOption *options = self->modifier->options;
+  CcXkbOption *options = self->modifier->options;
   int i;
 
   for (i = 0; options[i].label && options[i].xkb_option; i++)
@@ -310,7 +310,7 @@ cc_xkb_modifier_dialog_init (CcXkbModifierDialog *self)
 
 CcXkbModifierDialog *
 cc_xkb_modifier_dialog_new (GSettings *input_settings,
-                            const XkbModifier *modifier)
+                            const CcXkbModifier *modifier)
 {
   CcXkbModifierDialog *self;
 
@@ -336,8 +336,8 @@ xcb_modifier_transform_binding_to_label (GValue   *value,
                                          GVariant *variant,
                                          gpointer  user_data)
 {
-  const XkbModifier *modifier = user_data;
-  const XkbOption *entry = NULL;
+  const CcXkbModifier *modifier = user_data;
+  const CcXkbOption *entry = NULL;
   const char **items;
   guint i;
 
