@@ -1,5 +1,5 @@
 include:
- - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/59de540b620c45739871d1a073d76d5521989d11/templates/fedora.yml'
+ - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/5888c7388134cbe4661600222fe9befb10441f6e/templates/fedora.yml'
 
 variables:
   FDO_DISTRIBUTION_TAG: latest
@@ -283,7 +283,7 @@ flatpak:
 asan:
   <<: *sanitizer
   # ASAN requires debugging capabilities
-  tags: [ privileged ]
+  tags: [ asan ]
   stage: manual
   when: manual
   variables:
@@ -312,10 +312,8 @@ msan:
 
 # See also https://gitlab.freedesktop.org/freedesktop/ci-templates
 container_fedora_build:
-  tags: [ privileged ]
   extends: .fdo.container-build@fedora
   # The templates reference the local registry, but we need the fdo one
-  image: registry.freedesktop.org/freedesktop/ci-templates/buildah:2020-03-24
   only:
     variables:
       - $CI_PIPELINE_SOURCE == "schedule" && $CRON_TASK == "BUILD_CI_IMAGES"
