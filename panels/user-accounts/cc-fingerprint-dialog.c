@@ -732,7 +732,6 @@ handle_enroll_signal (CcFingerprintDialog *self,
           else
             message = _("Failed to enroll new fingerprint");
 
-          self->enrolling_finger = NULL;
           set_enroll_result_message (self, ENROLL_STATE_WARNING, message);
         }
     }
