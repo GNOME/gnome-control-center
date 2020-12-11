@@ -35,6 +35,21 @@
 #define TR(s) dgettext ("fprintd", s)
 #include "fingerprint-strings.h"
 
+typedef enum {
+  DIALOG_STATE_NONE                   = 0,
+  DIALOG_STATE_DEVICES_LISTING        = (1 << 0),
+  DIALOG_STATE_DEVICE_CLAIMING        = (1 << 1),
+  DIALOG_STATE_DEVICE_CLAIMED         = (1 << 2),
+  DIALOG_STATE_DEVICE_PRINTS_LISTING  = (1 << 3),
+  DIALOG_STATE_DEVICE_RELEASING       = (1 << 4),
+  DIALOG_STATE_DEVICE_ENROLL_STARTING = (1 << 5),
+  DIALOG_STATE_DEVICE_ENROLLING       = (1 << 6),
+  DIALOG_STATE_DEVICE_ENROLL_STOPPING = (1 << 7),
+  DIALOG_STATE_DEVICE_DELETING        = (1 << 8),
+
+  DIALOG_STATE_IDLE = DIALOG_STATE_DEVICE_CLAIMED | DIALOG_STATE_DEVICE_ENROLLING,
+} DialogState;
+
 struct _CcFingerprintDialog
 {
   GtkWindow parent_instance;
@@ -68,14 +83,12 @@ struct _CcFingerprintDialog
   GtkWidget      *prints_manager;
 
   CcFingerprintManager *manager;
+  DialogState           dialog_state;
   CcFprintdDevice      *device;
-  gboolean              claiming;
-  gboolean              device_claimed;
   gulong                device_signal_id;
   gulong                device_name_owner_id;
   GCancellable         *cancellable;
   GStrv                 enrolled_fingers;
-  const char           *enrolling_finger;
   guint                 enroll_stages_passed;
   guint                 enroll_stage_passed_id;
   gdouble               enroll_progress;
@@ -144,6 +157,42 @@ cc_fingerprint_dialog_new (CcFingerprintManager *manager)
                        NULL);
 }
 
+static gboolean
+update_dialog_state (CcFingerprintDialog *self,
+                     DialogState         state)
+{
+  if (self->dialog_state == state)
+    return FALSE;
+
+  self->dialog_state = state;
+
+  if (self->dialog_state == DIALOG_STATE_NONE ||
+      self->dialog_state == (self->dialog_state & DIALOG_STATE_IDLE))
+    {
+      gtk_spinner_stop (self->spinner);
+    }
+  else
+    {
+      gtk_spinner_start (self->spinner);
+    }
+
+  return TRUE;
+}
+
+static gboolean
+add_dialog_state (CcFingerprintDialog *self,
+                  DialogState          state)
+{
+  return update_dialog_state (self, (self->dialog_state | state));
+}
+
+static gboolean
+remove_dialog_state (CcFingerprintDialog *self,
+                     DialogState          state)
+{
+  return update_dialog_state (self, (self->dialog_state & ~state));
+}
+
 static void
 disconnect_device_signals (CcFingerprintDialog *self)
 {
@@ -170,11 +219,11 @@ cc_fingerprint_dialog_dispose (GObject *object)
 
   g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
 
-  if (self->device && self->device_claimed)
+  if (self->device && (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
     {
       disconnect_device_signals (self);
 
-      if (self->enrolling_finger)
+      if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
         cc_fprintd_device_call_enroll_stop_sync (self->device, NULL, NULL);
       cc_fprintd_device_call_release (self->device, NULL, NULL, NULL);
     }
@@ -453,10 +502,10 @@ list_enrolled_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  gtk_spinner_stop (self->spinner);
+  remove_dialog_state (self, DIALOG_STATE_DEVICE_PRINTS_LISTING);
   gtk_widget_set_sensitive (GTK_WIDGET (self->add_print_icon), TRUE);
 
-  if (self->device_claimed)
+  if (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)
     gtk_widget_set_sensitive (GTK_WIDGET (self->prints_manager), TRUE);
 
   if (error)
@@ -501,7 +550,9 @@ update_prints_store (CcFingerprintDialog *self)
 
   g_assert_true (CC_FPRINTD_IS_DEVICE (self->device));
 
-  gtk_spinner_start (self->spinner);
+  if (!add_dialog_state (self, DIALOG_STATE_DEVICE_PRINTS_LISTING))
+    return;
+
   gtk_widget_set_sensitive (GTK_WIDGET (self->add_print_icon), FALSE);
   gtk_widget_hide (GTK_WIDGET (self->delete_prints_button));
 
@@ -548,10 +599,12 @@ delete_prints_cb (GObject      *object,
 static void
 delete_enrolled_prints (CcFingerprintDialog *self)
 {
-  g_return_if_fail (self->device_claimed);
+  g_return_if_fail (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED);
+
+  if (!add_dialog_state (self, DIALOG_STATE_DEVICE_DELETING))
+    return;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->prints_manager), FALSE);
-  gtk_spinner_start (self->spinner);
 
   cc_fprintd_device_call_delete_enrolled_fingers2 (self->device,
                                                    self->cancellable,
@@ -651,7 +704,7 @@ handle_enroll_signal (CcFingerprintDialog *self,
 {
   gboolean completed;
 
-  g_return_if_fail (self->enrolling_finger);
+  g_return_if_fail (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING);
 
   g_debug ("Device enroll result message: %s, done: %d", result, done);
 
@@ -752,13 +805,13 @@ enroll_start_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  gtk_spinner_stop (self->spinner);
+  remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLL_STARTING);
 
   if (error)
     {
       g_autofree char *error_message = NULL;
 
-      self->enrolling_finger = NULL;
+      remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING);
 
       g_dbus_error_strip_remote_error (error);
       error_message = g_strdup_printf (_("Failed to start enrollment: %s"),
@@ -790,8 +843,8 @@ enroll_stop_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  self->enrolling_finger = NULL;
-  gtk_spinner_stop (self->spinner);
+  remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING |
+                             DIALOG_STATE_DEVICE_ENROLL_STOPPING);
   gtk_widget_set_sensitive (self->enrollment_view, TRUE);
   gtk_stack_set_visible_child (self->stack, self->prints_manager);
 
@@ -815,9 +868,11 @@ enroll_stop_cb (GObject      *object,
 static void
 enroll_stop (CcFingerprintDialog *self)
 {
-  g_return_if_fail (self->enrolling_finger);
+  g_return_if_fail (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING);
 
-  gtk_spinner_start (self->spinner);
+  if (!add_dialog_state (self, DIALOG_STATE_DEVICE_ENROLL_STOPPING))
+    return;
+
   gtk_widget_set_sensitive (self->enrollment_view, FALSE);
   cc_fprintd_device_call_enroll_stop (self->device, self->cancellable,
                                       enroll_stop_cb, self);
@@ -857,7 +912,10 @@ enroll_finger (CcFingerprintDialog *self,
 
   g_return_if_fail (finger_id);
 
-  self->enrolling_finger = finger_id;
+  if (!add_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING |
+                               DIALOG_STATE_DEVICE_ENROLL_STARTING))
+    return;
+
   self->enroll_progress = 0;
   self->enroll_stages_passed = 0;
 
@@ -871,7 +929,6 @@ enroll_finger (CcFingerprintDialog *self,
   gtk_stack_set_visible_child (self->stack, self->enrollment_view);
   gtk_label_set_label (self->enroll_message, enroll_message);
   gtk_entry_set_text (self->enroll_print_entry, finger_name);
-  gtk_spinner_start (self->spinner);
 
   cc_fprintd_device_call_enroll_start (self->device, finger_id, self->cancellable,
                                        enroll_start_cb, self);
@@ -1035,13 +1092,13 @@ release_device_cb (GObject      *object,
       return;
     }
 
-  self->device_claimed = FALSE;
+  remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED);
 }
 
 static void
 release_device (CcFingerprintDialog *self)
 {
-  if (!self->device || !self->device_claimed)
+  if (!self->device || !(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
     return;
 
   disconnect_device_signals (self);
@@ -1089,19 +1146,18 @@ on_device_owner_changed (CcFprintdDevice     *device,
 
   if (!name_owner)
     {
-      if (self->device_claimed)
+      if (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)
         {
           disconnect_device_signals (self);
 
-          if (self->enrolling_finger)
+          if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
             {
               set_enroll_result_message (self, ENROLL_STATE_ERROR,
                                          C_("Fingerprint enroll state",
                                             "Problem Reading Device"));
-              self->enrolling_finger = NULL;
             }
 
-          self->device_claimed = FALSE;
+          remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED);
           claim_device (self);
         }
     }
@@ -1121,7 +1177,7 @@ claim_device_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  self->claiming = FALSE;
+  remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMING);
 
   if (error)
     {
@@ -1129,7 +1185,7 @@ claim_device_cb (GObject      *object,
       g_autofree char *error_message = NULL;
 
       if (dbus_error && g_str_has_suffix (dbus_error, ".Error.AlreadyInUse") &&
-          self->device_claimed)
+          (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
          return;
 
       g_dbus_error_strip_remote_error (error);
@@ -1141,8 +1197,10 @@ claim_device_cb (GObject      *object,
       return;
     }
 
+  if (!add_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED))
+    return;
+
   gtk_widget_set_sensitive (self->prints_manager, TRUE);
-  self->device_claimed = TRUE;
   self->device_signal_id = g_signal_connect_object (self->device, "g-signal",
                                                     G_CALLBACK (on_device_signal),
                                                     self, G_CONNECT_SWAPPED);
@@ -1156,14 +1214,13 @@ claim_device (CcFingerprintDialog *self)
 {
   ActUser *user;
 
-  g_return_if_fail (!self->device_claimed);
+  g_return_if_fail (!(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED));
 
-  if (self->claiming)
+  if (!add_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMING))
     return;
 
   user = cc_fingerprint_manager_get_user (self->manager);
   gtk_widget_set_sensitive (self->prints_manager, FALSE);
-  self->claiming = TRUE;
 
   cc_fprintd_device_call_claim (self->device,
                                 act_user_get_user_name (user),
@@ -1194,7 +1251,7 @@ on_stack_child_changed (CcFingerprintDialog *self)
       notify_error (self, NULL);
       update_prints_store (self);
 
-      if (!self->device_claimed)
+      if (!(self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
         claim_device (self);
     }
   else if (visible_child == self->enrollment_view)
@@ -1267,7 +1324,11 @@ on_devices_list (GObject      *object,
 
   fprintd_devices = cc_fingerprint_manager_get_devices_finish (fingerprint_manager,
                                                                res, &error);
-  gtk_spinner_stop (self->spinner);
+
+  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+    return;
+
+  remove_dialog_state (self, DIALOG_STATE_DEVICES_LISTING);
 
   if (fprintd_devices == NULL)
     {
@@ -1322,7 +1383,7 @@ cc_fingerprint_dialog_constructed (GObject *object)
   bindtextdomain ("fprintd", GNOMELOCALEDIR);
   bind_textdomain_codeset ("fprintd", "UTF-8");
 
-  gtk_spinner_start (self->spinner);
+  add_dialog_state (self, DIALOG_STATE_DEVICES_LISTING);
   cc_fingerprint_manager_get_devices (self->manager, self->cancellable,
                                       on_devices_list, self);
 }
@@ -1364,7 +1425,7 @@ delete_prints_button_clicked_cb (CcFingerprintDialog *self)
 static void
 cancel_button_clicked_cb (CcFingerprintDialog *self)
 {
-  if (self->enrolling_finger)
+  if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
     {
       g_cancellable_cancel (self->cancellable);
       g_set_object (&self->cancellable, g_cancellable_new ());
@@ -1381,7 +1442,7 @@ cancel_button_clicked_cb (CcFingerprintDialog *self)
 static void
 done_button_clicked_cb (CcFingerprintDialog *self)
 {
-  g_return_if_fail (self->enrolling_finger);
+  g_return_if_fail (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING);
 
   g_debug ("Completing enroll operation");
   enroll_stop (self);
