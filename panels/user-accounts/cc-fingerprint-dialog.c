@@ -1027,7 +1027,7 @@ release_device_cb (GObject      *object,
 
       g_dbus_error_strip_remote_error (error);
       error_message = g_strdup_printf (_("Failed to release fingerprint device %s: %s"),
-                                       cc_fprintd_device_get_name (self->device),
+                                       cc_fprintd_device_get_name (fprintd_device),
                                        error->message);
       g_warning ("%s", error_message);
 
