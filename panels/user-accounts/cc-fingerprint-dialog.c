@@ -31,6 +31,8 @@
 
 #include "config.h"
 
+#define CC_FPRINTD_NAME "net.reactivated.Fprint"
+
 /* Translate fprintd strings */
 #define TR(s) dgettext ("fprintd", s)
 #include "fingerprint-strings.h"
@@ -191,6 +193,39 @@ remove_dialog_state (CcFingerprintDialog *self,
                      DialogState          state)
 {
   return update_dialog_state (self, (self->dialog_state & ~state));
+}
+
+static const char *
+dbus_error_to_human (CcFingerprintDialog *self,
+                     GError              *error)
+{
+  g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
+
+  if (dbus_error == NULL)
+    { /* Fallback to generic */ }
+  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.ClaimDevice"))
+    return _("the device needs to be claimed to perform this action");
+  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.AlreadyInUse"))
+    return _("the device is already claimed by another process");
+  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.PermissionDenied"))
+    return _("you do not have permission to perform the action");
+  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints"))
+    return _("no prints have been enrolled");
+  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoActionInProgress"))
+    { /* Fallback to generic */ }
+  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.InvalidFingername"))
+    { /* Fallback to generic */ }
+  else if (g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.Internal"))
+    { /* Fallback to generic */ }
+
+  if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
+    return _("Failed to communicate with the device during enrollment");
+
+  if (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED ||
+      self->dialog_state & DIALOG_STATE_DEVICE_CLAIMING)
+    return _("Failed to communicate with the fingerprint reader");
+
+  return _("Failed to communicate with the fingerprint daemon");
 }
 
 static void
@@ -516,9 +551,8 @@ list_enrolled_cb (GObject      *object,
         {
           g_autofree char *error_message = NULL;
 
-          g_dbus_error_strip_remote_error (error);
           error_message = g_strdup_printf (_("Failed to list fingerprints: %s"),
-                                           error->message);
+                                           dbus_error_to_human (self, error));
           g_warning ("Listing of fingerprints on device %s failed: %s",
                      cc_fprintd_device_get_name (self->device), error->message);
           notify_error (self, error_message);
@@ -584,9 +618,8 @@ delete_prints_cb (GObject      *object,
     {
       g_autofree char *error_message = NULL;
 
-      g_dbus_error_strip_remote_error (error);
       error_message = g_strdup_printf (_("Failed to delete saved fingerprints: %s"),
-                                       error->message);
+                                       dbus_error_to_human (self, error));
       g_warning ("Deletion of fingerprints on device %s failed: %s",
                  cc_fprintd_device_get_name (self->device), error->message);
       notify_error (self, error_message);
@@ -821,9 +854,8 @@ enroll_start_cb (GObject      *object,
 
       remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING);
 
-      g_dbus_error_strip_remote_error (error);
       error_message = g_strdup_printf (_("Failed to start enrollment: %s"),
-                                       error->message);
+                                       dbus_error_to_human (self, error));
       g_warning ("Enrollment on device %s failed: %s",
                  cc_fprintd_device_get_name (self->device), error->message);
       notify_error (self, error_message);
@@ -860,9 +892,8 @@ enroll_stop_cb (GObject      *object,
     {
       g_autofree char *error_message = NULL;
 
-      g_dbus_error_strip_remote_error (error);
       error_message = g_strdup_printf (_("Failed to stop enrollment: %s"),
-                                       error->message);
+                                       dbus_error_to_human (self, error));
       g_warning ("Stopping enrollment on device %s failed: %s",
                  cc_fprintd_device_get_name (self->device), error->message);
       notify_error (self, error_message);
@@ -1090,11 +1121,11 @@ release_device_cb (GObject      *object,
     {
       g_autofree char *error_message = NULL;
 
-      g_dbus_error_strip_remote_error (error);
       error_message = g_strdup_printf (_("Failed to release fingerprint device %s: %s"),
                                        cc_fprintd_device_get_name (fprintd_device),
-                                       error->message);
-      g_warning ("%s", error_message);
+                                       dbus_error_to_human (self, error));
+      g_warning ("Releasing device %s failed: %s",
+                 cc_fprintd_device_get_name (self->device), error->message);
 
       notify_error (self, error_message);
       return;
@@ -1196,11 +1227,11 @@ claim_device_cb (GObject      *object,
           (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
          return;
 
-      g_dbus_error_strip_remote_error (error);
       error_message = g_strdup_printf (_("Failed to claim fingerprint device %s: %s"),
                                        cc_fprintd_device_get_name (self->device),
-                                       error->message);
-      g_warning ("%s", error_message);
+                                       dbus_error_to_human (self, error));
+      g_warning ("Claiming device %s failed: %s",
+                 cc_fprintd_device_get_name (self->device), error->message);
       notify_error (self, error_message);
       return;
     }
@@ -1344,10 +1375,9 @@ on_devices_list (GObject      *object,
         {
           g_autofree char *error_message = NULL;
 
-          g_dbus_error_strip_remote_error (error);
           error_message = g_strdup_printf (_("Failed to get fingerprint devices: %s"),
-                                           error->message);
-          g_warning ("%s", error_message);
+                                           dbus_error_to_human (self, error));
+          g_warning ("Retrieving fingerprint devices failed: %s", error->message);
           notify_error (self, error_message);
         }
 
