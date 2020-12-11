@@ -195,6 +195,35 @@ remove_dialog_state (CcFingerprintDialog *self,
   return update_dialog_state (self, (self->dialog_state & ~state));
 }
 
+typedef struct
+{
+  CcFingerprintDialog *dialog;
+  DialogState          state;
+} DialogStateRemover;
+
+static DialogStateRemover *
+auto_state_remover (CcFingerprintDialog *self,
+                    DialogState          state)
+{
+  DialogStateRemover *state_remover;
+
+  state_remover = g_new0 (DialogStateRemover, 1);
+  state_remover->dialog = g_object_ref (self);
+  state_remover->state = state;
+
+  return state_remover;
+}
+
+static void
+auto_state_remover_cleanup (DialogStateRemover *state_remover)
+{
+  remove_dialog_state (state_remover->dialog, state_remover->state);
+  g_clear_object (&state_remover->dialog);
+  g_free (state_remover);
+}
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (DialogStateRemover, auto_state_remover_cleanup);
+
 static const char *
 dbus_error_to_human (CcFingerprintDialog *self,
                      GError              *error)
@@ -526,6 +555,7 @@ list_enrolled_cb (GObject      *object,
 {
   g_auto(GStrv) enrolled_fingers = NULL;
   g_autoptr(GError) error = NULL;
+  g_autoptr(DialogStateRemover) state_remover = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
   guint n_enrolled_fingers = 0;
@@ -537,7 +567,8 @@ list_enrolled_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  remove_dialog_state (self, DIALOG_STATE_DEVICE_PRINTS_LISTING);
+  state_remover = auto_state_remover (self, DIALOG_STATE_DEVICE_PRINTS_LISTING);
+
   gtk_widget_set_sensitive (GTK_WIDGET (self->add_print_icon), TRUE);
 
   if (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED)
@@ -838,6 +869,7 @@ enroll_start_cb (GObject      *object,
                  gpointer      user_data)
 {
   g_autoptr(GError) error = NULL;
+  g_autoptr(DialogStateRemover) state_remover = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
 
@@ -846,7 +878,7 @@ enroll_start_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLL_STARTING);
+  state_remover = auto_state_remover (self, DIALOG_STATE_DEVICE_ENROLL_STARTING);
 
   if (error)
     {
@@ -875,6 +907,7 @@ enroll_stop_cb (GObject      *object,
                 gpointer      user_data)
 {
   g_autoptr(GError) error = NULL;
+  g_autoptr(DialogStateRemover) state_remover = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
 
@@ -883,8 +916,8 @@ enroll_stop_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  remove_dialog_state (self, DIALOG_STATE_DEVICE_ENROLLING |
-                             DIALOG_STATE_DEVICE_ENROLL_STOPPING);
+  state_remover = auto_state_remover (self, DIALOG_STATE_DEVICE_ENROLLING |
+                                            DIALOG_STATE_DEVICE_ENROLL_STOPPING);
   gtk_widget_set_sensitive (self->enrollment_view, TRUE);
   gtk_stack_set_visible_child (self->stack, self->prints_manager);
 
@@ -1208,6 +1241,7 @@ claim_device_cb (GObject      *object,
                  gpointer      user_data)
 {
   g_autoptr(GError) error = NULL;
+  g_autoptr(DialogStateRemover) state_remover = NULL;
   CcFprintdDevice *fprintd_device = CC_FPRINTD_DEVICE (object);
   CcFingerprintDialog *self = user_data;
 
@@ -1216,7 +1250,7 @@ claim_device_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMING);
+  state_remover = auto_state_remover (self, DIALOG_STATE_DEVICE_CLAIMING);
 
   if (error)
     {
@@ -1357,6 +1391,7 @@ on_devices_list (GObject      *object,
                  gpointer      user_data)
 {
   g_autolist (CcFprintdDevice) fprintd_devices = NULL;
+  g_autoptr(DialogStateRemover) state_remover = NULL;
   g_autoptr(GError) error = NULL;
   CcFingerprintManager *fingerprint_manager = CC_FINGERPRINT_MANAGER (object);
   CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (user_data);
@@ -1367,7 +1402,7 @@ on_devices_list (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
-  remove_dialog_state (self, DIALOG_STATE_DEVICES_LISTING);
+  state_remover = auto_state_remover (self, DIALOG_STATE_DEVICES_LISTING);
 
   if (fprintd_devices == NULL)
     {
