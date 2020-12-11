@@ -547,7 +547,7 @@ list_enrolled_cb (GObject      *object,
     {
       g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
 
-      if (!dbus_error || !g_str_has_suffix (dbus_error, ".Error.NoEnrolledPrints"))
+      if (!dbus_error || !g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.NoEnrolledPrints"))
         {
           g_autofree char *error_message = NULL;
 
@@ -1223,7 +1223,7 @@ claim_device_cb (GObject      *object,
       g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
       g_autofree char *error_message = NULL;
 
-      if (dbus_error && g_str_has_suffix (dbus_error, ".Error.AlreadyInUse") &&
+      if (dbus_error && g_str_equal (dbus_error, CC_FPRINTD_NAME ".Error.AlreadyInUse") &&
           (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
          return;
 
