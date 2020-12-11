@@ -780,11 +780,19 @@ handle_enroll_signal (CcFingerprintDialog *self,
           const char *message;
 
           if (g_str_equal (result, "enroll-disconnected"))
-            message = _("Fingerprint device disconnected");
+            {
+              message = _("Fingerprint device disconnected");
+              remove_dialog_state (self, DIALOG_STATE_DEVICE_CLAIMED |
+                                         DIALOG_STATE_DEVICE_ENROLLING);
+            }
           else if (g_str_equal (result, "enroll-data-full"))
-            message = _("Fingerprint device storage is full");
+            {
+              message = _("Fingerprint device storage is full");
+            }
           else
-            message = _("Failed to enroll new fingerprint");
+            {
+              message = _("Failed to enroll new fingerprint");
+            }
 
           set_enroll_result_message (self, ENROLL_STATE_WARNING, message);
         }
