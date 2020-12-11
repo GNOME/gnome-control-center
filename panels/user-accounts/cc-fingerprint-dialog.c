@@ -69,6 +69,7 @@ struct _CcFingerprintDialog
 
   CcFingerprintManager *manager;
   CcFprintdDevice      *device;
+  gboolean              claiming;
   gboolean              device_claimed;
   gulong                device_signal_id;
   gulong                device_name_owner_id;
@@ -1120,13 +1121,16 @@ claim_device_cb (GObject      *object,
   if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return;
 
+  self->claiming = FALSE;
+
   if (error)
     {
       g_autofree char *dbus_error = g_dbus_error_get_remote_error (error);
       g_autofree char *error_message = NULL;
 
-      if (dbus_error && g_str_has_suffix (dbus_error, ".Error.AlreadyInUse"))
-        self->device_claimed = TRUE;
+      if (dbus_error && g_str_has_suffix (dbus_error, ".Error.AlreadyInUse") &&
+          self->device_claimed)
+         return;
 
       g_dbus_error_strip_remote_error (error);
       error_message = g_strdup_printf (_("Failed to claim fingerprint device %s: %s"),
@@ -1152,8 +1156,14 @@ claim_device (CcFingerprintDialog *self)
 {
   ActUser *user;
 
+  g_return_if_fail (!self->device_claimed);
+
+  if (self->claiming)
+    return;
+
   user = cc_fingerprint_manager_get_user (self->manager);
   gtk_widget_set_sensitive (self->prints_manager, FALSE);
+  self->claiming = TRUE;
 
   cc_fprintd_device_call_claim (self->device,
                                 act_user_get_user_name (user),
