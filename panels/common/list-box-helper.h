@@ -20,12 +20,6 @@
 
 #include <gtk/gtk.h>
 
-#define CC_TYPE_LIST_BOX_ROW (cc_list_box_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcListBoxRow, cc_list_box_row, CC, LIST_BOX_ROW, GtkListBoxRow)
-
-#define CC_TYPE_LIST_BOX (cc_list_box_get_type ())
-G_DECLARE_FINAL_TYPE (CcListBox, cc_list_box, CC, LIST_BOX, GtkListBox)
-
 void
 cc_list_box_update_header_func (GtkListBoxRow *row,
                                 GtkListBoxRow *before,

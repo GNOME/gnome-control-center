@@ -20,49 +20,6 @@
 
 #define MAX_ROWS_VISIBLE 5
 
-struct _CcListBoxRow
-{
-  GtkListBoxRow parent_instance;
-};
-G_DEFINE_TYPE (CcListBoxRow, cc_list_box_row, GTK_TYPE_LIST_BOX_ROW)
-enum
-{
-  BOX_ROW_ACTIVATED,
-  LAST_BOX_ROW_SIGNAL
-};
-static guint cc_list_box_row_signals[LAST_BOX_ROW_SIGNAL] = { 0 };
-static void
-cc_list_box_row_class_init (CcListBoxRowClass *klass)
-{
-  cc_list_box_row_signals[BOX_ROW_ACTIVATED] =
-    g_signal_new ("activated",
-                  CC_TYPE_LIST_BOX_ROW,
-                  G_SIGNAL_RUN_LAST,
-                  0, NULL, NULL, NULL,
-                  G_TYPE_NONE, 0);
-}
-static void cc_list_box_row_init (CcListBoxRow *self) {}
-
-struct _CcListBox
-{
-  GtkListBox parent_instance;
-};
-G_DEFINE_TYPE (CcListBox, cc_list_box, GTK_TYPE_LIST_BOX)
-static void
-cc_list_box_row_activated (GtkListBox *box, GtkListBoxRow *row)
-{
-  if (CC_IS_LIST_BOX_ROW (row))
-    g_signal_emit (row, cc_list_box_row_signals[BOX_ROW_ACTIVATED], 0);
-}
-static void
-cc_list_box_class_init (CcListBoxClass *klass)
-{
-  GtkListBoxClass *parent_class = GTK_LIST_BOX_CLASS (klass);
-  parent_class->row_activated = cc_list_box_row_activated;
-}
-static void cc_list_box_init (CcListBox *self) {}
-
-
 void
 cc_list_box_update_header_func (GtkListBoxRow *row,
                                 GtkListBoxRow *before,
