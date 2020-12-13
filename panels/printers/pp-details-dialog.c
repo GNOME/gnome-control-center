@@ -174,7 +174,7 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
         }
     }
 
-  g_clear_object (&self->pp_ppd_selection_dialog);
+  gtk_widget_destroy (GTK_WIDGET (self->pp_ppd_selection_dialog));
   self->pp_ppd_selection_dialog = NULL;
 }
 
@@ -231,11 +231,15 @@ select_ppd_in_dialog (PpDetailsDialog *self)
          }
 
         self->pp_ppd_selection_dialog = pp_ppd_selection_dialog_new (
-          GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
           self->all_ppds_list,
           manufacturer,
           ppd_selection_dialog_response_cb,
           self);
+
+        gtk_window_set_transient_for (GTK_WINDOW (self->pp_ppd_selection_dialog),
+                                      GTK_WINDOW (self));
+
+        gtk_dialog_run (GTK_DIALOG (self->pp_ppd_selection_dialog));
     }
 }
 

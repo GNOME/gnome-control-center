@@ -539,7 +539,6 @@ pp_new_printer_dialog_finalize (GObject *object)
   g_clear_pointer (&self->list, ppd_list_free);
   g_clear_object (&self->builder);
   g_clear_pointer (&self->local_cups_devices, g_ptr_array_unref);
-  g_clear_object (&self->ppd_selection_dialog);
   g_clear_object (&self->new_device);
   g_clear_object (&self->local_printer_icon);
   g_clear_object (&self->remote_printer_icon);
@@ -1902,14 +1901,13 @@ ppd_selection_cb (GtkDialog *_dialog,
   guint                      window_id = 0;
   gint                       acquisition_method;
 
-  if (response_id != GTK_RESPONSE_OK) {
-      emit_response (self, GTK_RESPONSE_CANCEL);
-      return;
+  if (response_id == GTK_RESPONSE_OK) {
+      ppd_name = pp_ppd_selection_dialog_get_ppd_name (self->ppd_selection_dialog);
+      ppd_display_name = pp_ppd_selection_dialog_get_ppd_display_name (self->ppd_selection_dialog);
   }
-
-  ppd_name = pp_ppd_selection_dialog_get_ppd_name (self->ppd_selection_dialog);
-  ppd_display_name = pp_ppd_selection_dialog_get_ppd_display_name (self->ppd_selection_dialog);
-  g_clear_object (&self->ppd_selection_dialog);
+  else {
+      emit_response (self, GTK_RESPONSE_CANCEL);
+  }
 
   if (ppd_name)
     {
@@ -1980,6 +1978,8 @@ ppd_selection_cb (GtkDialog *_dialog,
 
       g_clear_object (&self->new_device);
     }
+
+  gtk_widget_destroy (GTK_WIDGET (self->ppd_selection_dialog));
 }
 
 static void
@@ -2018,11 +2018,15 @@ new_printer_dialog_response_cb (PpNewPrinterDialog *self,
             {
               self->new_device = pp_print_device_copy (device);
               self->ppd_selection_dialog =
-                pp_ppd_selection_dialog_new (self->parent,
-                                             self->list,
+                pp_ppd_selection_dialog_new (self->list,
                                              NULL,
                                              ppd_selection_cb,
                                              self);
+
+              gtk_window_set_transient_for (GTK_WINDOW (self->ppd_selection_dialog),
+                                            GTK_WINDOW (self->parent));
+
+              gtk_dialog_run (GTK_DIALOG (self->ppd_selection_dialog));
             }
           else
             {

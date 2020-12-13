@@ -26,10 +26,9 @@
 G_BEGIN_DECLS
 
 #define PP_TYPE_PPD_SELECTION_DIALOG (pp_ppd_selection_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, PP, PPD_SELECTION_DIALOG, GObject)
+G_DECLARE_FINAL_TYPE (PpPPDSelectionDialog, pp_ppd_selection_dialog, PP, PPD_SELECTION_DIALOG, GtkDialog)
 
-PpPPDSelectionDialog *pp_ppd_selection_dialog_new                  (GtkWindow                 *parent,
-                                                                    PPDList                   *ppd_list,
+PpPPDSelectionDialog *pp_ppd_selection_dialog_new                  (PPDList                   *ppd_list,
                                                                     const gchar               *manufacturer,
                                                                     UserResponseCallback       user_callback,
                                                                     gpointer                   user_data);
