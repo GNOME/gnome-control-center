@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-12-12 12:02+0000\n"
-"PO-Revision-Date: 2020-12-12 20:41+0200\n"
+"POT-Creation-Date: 2020-12-13 21:00+0000\n"
+"PO-Revision-Date: 2020-12-14 21:25+0200\n"
 "Last-Translator: Florentina Mușat <florentina.musat.28@gmail.com>\n"
 "Language-Team: Romanian Gnome Team\n"
 "Language: ro\n"
@@ -47,7 +47,7 @@ msgid "Session Bus"
 msgstr "Magistrala sesiunilor"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:2170 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:1790 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Dispozitive"
@@ -3400,7 +3400,7 @@ msgstr "Dispozitivul wireless nu suporta modul Hotspot"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:266
-#: panels/power/cc-power-panel.c:1265 panels/power/cc-power-panel.c:1276
+#: panels/power/cc-power-panel.c:1133 panels/power/cc-power-panel.c:1144
 #: panels/universal-access/cc-ua-panel.c:329
 #: panels/universal-access/cc-ua-panel.c:604
 #: panels/universal-access/cc-ua-panel.c:614
@@ -4221,7 +4221,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Arată c_onținutul mesajelor pe ecranul blocat"
 
 #: panels/notifications/cc-notifications-panel.c:266
-#: panels/power/cc-power-panel.c:1271 panels/power/cc-power-panel.c:1278
+#: panels/power/cc-power-panel.c:1139 panels/power/cc-power-panel.c:1146
 #: panels/universal-access/cc-ua-panel.c:329
 #: panels/universal-access/cc-ua-panel.c:604
 #: panels/universal-access/cc-ua-panel.c:614
@@ -4445,8 +4445,8 @@ msgid "Gaming input device"
 msgstr "Dispozitiv de intrare pentru jocuri"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:505
-#: panels/power/cc-power-panel.c:2123
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:413
+#: panels/power/cc-power-panel.c:1780
 msgid "Battery"
 msgstr "Baterie"
 
@@ -4460,116 +4460,53 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
-#: panels/power/cc-power-panel.c:503
+#: panels/power/cc-power-panel.c:411
 msgid "Batteries"
 msgstr "Baterii"
 
-#: panels/power/cc-power-panel.c:725
+#: panels/power/cc-power-panel.c:632
 msgid "When _idle"
 msgstr "Când e _inactiv"
 
-#: panels/power/cc-power-panel.c:1213
+#: panels/power/cc-power-panel.c:1081
 msgid "Suspend"
 msgstr "Suspendă"
 
-#: panels/power/cc-power-panel.c:1214
+#: panels/power/cc-power-panel.c:1082
 msgid "Power Off"
 msgstr "Oprește"
 
-#: panels/power/cc-power-panel.c:1215
+#: panels/power/cc-power-panel.c:1083
 msgid "Hibernate"
 msgstr "Hibernează"
 
-#: panels/power/cc-power-panel.c:1216
+#: panels/power/cc-power-panel.c:1084
 msgid "Nothing"
 msgstr "Nimic"
 
-#: panels/power/cc-power-panel.c:1267
+#: panels/power/cc-power-panel.c:1135
 msgid "When on battery power"
 msgstr "Când funcționează pe baterie"
 
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1137
 msgid "When plugged in"
 msgstr "Alimentat de la rețea"
 
-#: panels/power/cc-power-panel.c:1373
-msgid "Power Saving"
-msgstr "Economisire de energie"
-
-#: panels/power/cc-power-panel.c:1409
-msgid "_Screen Brightness"
-msgstr "Luminozitatea _ecranului"
-
-#: panels/power/cc-power-panel.c:1432
-msgid "Automatic Brightness"
-msgstr "Luminozitate automată"
-
-#: panels/power/cc-power-panel.c:1445
-msgid "_Keyboard Brightness"
-msgstr "Luminozitate _tastatură"
-
-#: panels/power/cc-power-panel.c:1458
-msgid "_Dim Screen When Inactive"
-msgstr "_Diminuează luminozitatea la inactivitate"
-
-#: panels/power/cc-power-panel.c:1476
-msgid "_Blank Screen"
-msgstr "Ecran _gol"
-
-#: panels/power/cc-power-panel.c:1522
-msgid "_Automatic Suspend"
-msgstr "Suspendare _automată"
-
-#: panels/power/cc-power-panel.c:1523
+#: panels/power/cc-power-panel.c:1277
 msgid "Automatic suspend"
 msgstr "Suspendare automată"
 
-#: panels/power/cc-power-panel.c:1575
-msgid "_Wi-Fi"
-msgstr "_Wi-Fi"
-
-#: panels/power/cc-power-panel.c:1576
-msgid "Wi-Fi can be turned off to save power."
-msgstr "Wi-Fi poate fi oprit pentru a economisi energia."
-
-#: panels/power/cc-power-panel.c:1592
-msgid "_Mobile Broadband"
-msgstr "Internet _mobil de bandă largă"
-
-#: panels/power/cc-power-panel.c:1593
-msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-msgstr ""
-"Conexiunea mobilă de bandă largă (3G, 4G, LTE, etc.) poate fi oprită pentru "
-"a economisi energie."
-
-#: panels/power/cc-power-panel.c:1643
-msgid "_Bluetooth"
-msgstr "_Bluetooth"
-
-#: panels/power/cc-power-panel.c:1644
-msgid "Bluetooth can be turned off to save power."
-msgstr "Bluetooth poate fi oprit pentru a economisi energie."
-
-#: panels/power/cc-power-panel.c:1880
+#: panels/power/cc-power-panel.c:1800
 msgid "Power Mode"
 msgstr "Modul de alimentare"
 
-#: panels/power/cc-power-panel.c:1889
-msgid "Affects system performance and power usage."
-msgstr "Afectează performanța sistemului și consumul de energie."
+#: panels/power/cc-power-panel.c:1810
+msgid "Power Saving"
+msgstr "Economisire de energie"
 
-#: panels/power/cc-power-panel.c:1989
-msgid "Show Battery _Percentage"
-msgstr "Arată _procentajul bateriei"
-
-#. Frame header
-#: panels/power/cc-power-panel.c:2015
+#: panels/power/cc-power-panel.c:1818
 msgid "Suspend & Power Button"
 msgstr "Buton de suspendare și oprire"
-
-#: panels/power/cc-power-panel.c:2065
-msgid "Po_wer Button Behavior"
-msgstr "Comportament buton pu_tere"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4631,19 +4568,81 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "două ore"
 
-#: panels/power/cc-power-panel.ui:145
+#: panels/power/cc-power-panel.ui:227
+msgid "Affects system performance and power usage."
+msgstr "Afectează performanța sistemului și consumul de energie."
+
+#: panels/power/cc-power-panel.ui:297
+msgid "_Screen Brightness"
+msgstr "Luminozitatea _ecranului"
+
+#: panels/power/cc-power-panel.ui:346
+msgid "Automatic Brightness"
+msgstr "Luminozitate automată"
+
+#: panels/power/cc-power-panel.ui:382
+msgid "_Keyboard Brightness"
+msgstr "Luminozitate _tastatură"
+
+#: panels/power/cc-power-panel.ui:431
+msgid "Dim Screen When Inactive"
+msgstr "Diminuează luminozitatea la inactivitate"
+
+#: panels/power/cc-power-panel.ui:466
+msgid "_Blank Screen"
+msgstr "Ecran _gol"
+
+#: panels/power/cc-power-panel.ui:502
+msgid "_Automatic Suspend"
+msgstr "Suspendare _automată"
+
+#: panels/power/cc-power-panel.ui:547
+msgid "_Wi-Fi"
+msgstr "_Wi-Fi"
+
+#: panels/power/cc-power-panel.ui:559
+msgid "Wi-Fi can be turned off to save power."
+msgstr "Wi-Fi poate fi oprit pentru a economisi energia."
+
+#: panels/power/cc-power-panel.ui:609
+msgid "_Mobile Broadband"
+msgstr "Internet _mobil de bandă largă"
+
+#: panels/power/cc-power-panel.ui:621
+msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
+msgstr ""
+"Conexiunea mobilă de bandă largă (3G, 4G, LTE, etc.) poate fi oprită pentru "
+"a economisi energie."
+
+#: panels/power/cc-power-panel.ui:671
+msgid "_Bluetooth"
+msgstr "_Bluetooth"
+
+#: panels/power/cc-power-panel.ui:683
+msgid "Bluetooth can be turned off to save power."
+msgstr "Bluetooth poate fi oprit pentru a economisi energie."
+
+#: panels/power/cc-power-panel.ui:759
+msgid "Po_wer Button Behavior"
+msgstr "Comportament buton pu_tere"
+
+#: panels/power/cc-power-panel.ui:797
+msgid "Show Battery _Percentage"
+msgstr "Arată _procentajul bateriei"
+
+#: panels/power/cc-power-panel.ui:872
 msgid "Automatic Suspend"
 msgstr "Suspendare automată"
 
-#: panels/power/cc-power-panel.ui:170
+#: panels/power/cc-power-panel.ui:897
 msgid "_Plugged In"
 msgstr "Alimentat la _rețea"
 
-#: panels/power/cc-power-panel.ui:186
+#: panels/power/cc-power-panel.ui:913
 msgid "On _Battery Power"
 msgstr "Pe _baterie"
 
-#: panels/power/cc-power-panel.ui:231 panels/power/cc-power-panel.ui:291
+#: panels/power/cc-power-panel.ui:958 panels/power/cc-power-panel.ui:1018
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Întârziere"
@@ -4896,55 +4895,55 @@ msgid "Reverse portrait"
 msgstr "Portret inversat"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-jobs-dialog.c:209
+#: panels/printers/pp-job-row.c:106
 msgctxt "print job"
 msgid "Pending"
 msgstr "În așteptare"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-jobs-dialog.c:215
+#: panels/printers/pp-job-row.c:112
 msgctxt "print job"
 msgid "Paused"
 msgstr "În pauză"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-jobs-dialog.c:220
+#: panels/printers/pp-job-row.c:117
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Autentificare necesară"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-jobs-dialog.c:225
+#: panels/printers/pp-job-row.c:122
 msgctxt "print job"
 msgid "Processing"
 msgstr "Se procesează"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-jobs-dialog.c:229
+#: panels/printers/pp-job-row.c:126
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Oprită"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-jobs-dialog.c:233
+#: panels/printers/pp-job-row.c:130
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Anulată"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-jobs-dialog.c:237
+#: panels/printers/pp-job-row.c:134
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Oprită forțat"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-jobs-dialog.c:241
+#: panels/printers/pp-job-row.c:138
 msgctxt "print job"
 msgid "Completed"
 msgstr "Finalizată"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:345
+#: panels/printers/pp-jobs-dialog.c:249
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -4953,14 +4952,14 @@ msgstr[1] "%u sarcini necesită autentificare"
 msgstr[2] "%u de sarcini necesită autentificare"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:497
+#: panels/printers/pp-jobs-dialog.c:401
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — sarcini active"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:501
+#: panels/printers/pp-jobs-dialog.c:405
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Introduceți credențialele pentru a tipări de la %s."
