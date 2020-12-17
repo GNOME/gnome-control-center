@@ -26,78 +26,26 @@
 
                 <!-- Airplane Mode -->
                 <child>
-                  <object class="GtkFrame" id="rfkill_widget">
+                  <object class="GtkListBox" id="rfkill_widget">
                     <property name="visible">True</property>
-                    <property name="vexpand">False</property>
                     <property name="margin_bottom">32</property>
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="frame"/>
+                    </style>
                     <child>
-                      <object class="GtkListBox">
+                      <object class="CcListRow" id="rfkill_row">
                         <property name="visible">True</property>
-                        <property name="selection-mode">none</property>
-                        <child>
-                          <object class="GtkListBoxRow">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="activatable">False</property>
-                            <child>
-                              <object class="GtkGrid">
-                                <property name="visible">True</property>
-                                <property name="border-width">12</property>
-                                <property name="margin_left">6</property>
-                                <property name="margin_right">6</property>
-                                <property name="column-spacing">12</property>
-                                <property name="row-spacing">2</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="label" translatable="yes">Airplane Mode</property>
-                                    <property name="xalign">0.0</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"/>
-                                    </attributes>
-                                  </object>
-                                  <packing>
-                                    <property name="left-attach">0</property>
-                                    <property name="top-attach">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="wrap">True</property>
-                                    <property name="label" translatable="yes">Disables Wi-Fi, Bluetooth and mobile broadband</property>
-                                    <property name="xalign">0.0</property>
-                                    <attributes>
-                                      <attribute name="scale" value="0.88"/>
-                                    </attributes>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                  <packing>
-                                    <property name="left-attach">0</property>
-                                    <property name="top-attach">1</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkSwitch" id="rfkill_switch">
-                                    <property name="visible">True</property>
-                                    <property name="can-focus">True</property>
-                                    <property name="valign">center</property>
-                                    <signal name="notify::active" handler="rfkill_switch_notify_activate_cb" object="CcWifiPanel" swapped="no" />
-                                  </object>
-                                  <packing>
-                                    <property name="left-attach">1</property>
-                                    <property name="top-attach">0</property>
-                                    <property name="height">2</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="margin-top">6</property>
+                        <property name="margin-bottom">6</property>
+                        <property name="activatable">False</property>
+                        <property name="show-switch">True</property>
+                        <property name="bold">True</property>
+                        <property name="title" translatable="yes">Airplane Mode</property>
+                        <property name="subtitle" translatable="yes">Disables Wi-Fi, Bluetooth and mobile broadband</property>
+                        <signal name="notify::active" handler="rfkill_switch_notify_activate_cb" object="CcWifiPanel" swapped="no" />
                       </object>
                     </child>
                   </object>

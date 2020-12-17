@@ -23,6 +23,7 @@
 #include "net-device-wifi.h"
 #include "network-dialogs.h"
 #include "panel-common.h"
+#include "cc-list-row.h"
 
 #include "shell/cc-application.h"
 #include "shell/cc-debug.h"
@@ -48,7 +49,7 @@ struct _CcWifiPanel
 
   /* RFKill (Airplane Mode) */
   GDBusProxy         *rfkill_proxy;
-  GtkSwitch          *rfkill_switch;
+  CcListRow          *rfkill_row;
   GtkWidget          *rfkill_widget;
 
   /* Main widgets */
@@ -74,7 +75,7 @@ struct _CcWifiPanel
   gchar              *arg_access_point;
 };
 
-static void          rfkill_switch_notify_activate_cb            (GtkSwitch          *rfkill_switch,
+static void          rfkill_switch_notify_activate_cb            (CcListRow          *rfkill_row,
                                                                   GParamSpec         *pspec,
                                                                   CcWifiPanel        *self);
 
@@ -443,7 +444,7 @@ check_main_stack_page (CcWifiPanel *self)
 
   nm_version = nm_client_get_version (self->client);
   wireless_enabled = nm_client_wireless_get_enabled (self->client);
-  airplane_mode_active = gtk_switch_get_active (self->rfkill_switch);
+  airplane_mode_active = cc_list_row_get_active (self->rfkill_row);
 
   if (!nm_version)
     gtk_stack_set_visible_child_name (self->main_stack, "nm-not-running");
@@ -507,19 +508,19 @@ sync_airplane_mode_switch (CcWifiPanel *self)
 
   enabled |= hw_enabled;
 
-  if (enabled != gtk_switch_get_active (self->rfkill_switch))
+  if (enabled != cc_list_row_get_active (self->rfkill_row))
     {
-      g_signal_handlers_block_by_func (self->rfkill_switch,
+      g_signal_handlers_block_by_func (self->rfkill_row,
                                        rfkill_switch_notify_activate_cb,
                                        self);
-      gtk_switch_set_active (self->rfkill_switch, enabled);
+      g_object_set (self->rfkill_row, "active", enabled, NULL);
       check_main_stack_page (self);
-      g_signal_handlers_unblock_by_func (self->rfkill_switch,
+      g_signal_handlers_unblock_by_func (self->rfkill_row,
                                          rfkill_switch_notify_activate_cb,
                                          self);
   }
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->rfkill_switch), !hw_enabled);
+  cc_list_row_set_switch_sensitive (self->rfkill_row, !hw_enabled);
 
   check_main_stack_page (self);
 }
@@ -796,13 +797,13 @@ rfkill_proxy_acquired_cb (GObject      *source_object,
 }
 
 static void
-rfkill_switch_notify_activate_cb (GtkSwitch   *rfkill_switch,
+rfkill_switch_notify_activate_cb (CcListRow   *row,
                                   GParamSpec  *pspec,
                                   CcWifiPanel *self)
 {
   gboolean enable;
 
-  enable = gtk_switch_get_active (rfkill_switch);
+  enable = cc_list_row_get_active (row);
 
   g_dbus_proxy_call (self->rfkill_proxy,
                      "org.freedesktop.DBus.Properties.Set",
@@ -1013,7 +1014,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, hotspot_box);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, list_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, main_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_row);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, rfkill_widget);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, stack);
