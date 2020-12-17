@@ -388,3 +388,12 @@ cc_list_row_set_secondary_markup (CcListRow   *self,
   gtk_label_set_markup (self->secondary_label, markup);
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SECONDARY_LABEL]);
 }
+
+void
+cc_list_row_set_switch_sensitive (CcListRow *self,
+                                  gboolean   sensitive)
+{
+  g_return_if_fail (CC_IS_LIST_ROW (self));
+
+  gtk_widget_set_sensitive (GTK_WIDGET (self->enable_switch), sensitive);
+}

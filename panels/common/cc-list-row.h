@@ -41,5 +41,7 @@ void       cc_list_row_set_secondary_label  (CcListRow   *self,
                                              const gchar *label);
 void       cc_list_row_set_secondary_markup (CcListRow   *self,
                                              const gchar *markup);
+void       cc_list_row_set_switch_sensitive (CcListRow   *self,
+                                             gboolean     sensitive);
 
 G_END_DECLS
