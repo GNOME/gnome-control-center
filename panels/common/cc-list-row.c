@@ -58,6 +58,7 @@ enum {
   PROP_ICON_NAME,
   PROP_SHOW_SWITCH,
   PROP_ACTIVE,
+  PROP_BOLD,
   PROP_USE_UNDERLINE,
   N_PROPS
 };
@@ -141,6 +142,8 @@ cc_list_row_set_property (GObject      *object,
                           GParamSpec   *pspec)
 {
   CcListRow *self = (CcListRow *)object;
+  PangoAttrList *attributes;
+  PangoAttribute *attribute;
   gint margin;
 
   switch (prop_id)
@@ -190,6 +193,24 @@ cc_list_row_set_property (GObject      *object,
       self->switch_active = g_value_get_boolean (value);
       g_signal_handlers_unblock_by_func (self->enable_switch,
                                          cc_list_row_switch_active_cb, self);
+      break;
+
+    case PROP_BOLD:
+      if (g_value_get_boolean (value))
+        attribute = pango_attr_weight_new (PANGO_WEIGHT_BOLD);
+      else
+        attribute = pango_attr_weight_new (PANGO_WEIGHT_NORMAL);
+
+      attributes = gtk_label_get_attributes (self->title);
+
+      if (!attributes)
+        attributes = pango_attr_list_new ();
+      else
+        pango_attr_list_ref (attributes);
+
+      pango_attr_list_change (attributes, attribute);
+      gtk_label_set_attributes (self->title, attributes);
+      pango_attr_list_unref (attributes);
       break;
 
     default:
@@ -245,6 +266,13 @@ cc_list_row_class_init (CcListRowClass *klass)
     g_param_spec_boolean ("active",
                           "Active",
                           "The active state of the switch",
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_BOLD] =
+    g_param_spec_boolean ("bold",
+                          "Bold",
+                          "Whether title is bold or not",
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
