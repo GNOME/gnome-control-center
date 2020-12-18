@@ -28,6 +28,7 @@ struct _CcKeyboardShortcutRow
 
   GtkLabel                 *accelerator_label;
   GtkButton                *reset_button;
+  GtkRevealer              *reset_revealer;
 
   CcKeyboardItem           *item;
   CcKeyboardManager        *manager;
@@ -51,6 +52,7 @@ cc_keyboard_shortcut_row_class_init (CcKeyboardShortcutRowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, accelerator_label);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, reset_button);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutRow, reset_revealer);
 
   gtk_widget_class_bind_template_callback (widget_class, reset_shortcut_cb);
 }
@@ -64,7 +66,7 @@ cc_keyboard_shortcut_row_init (CcKeyboardShortcutRow *self)
 static void
 shortcut_modified_changed_cb (CcKeyboardShortcutRow *self)
 {
-  gtk_widget_set_child_visible (GTK_WIDGET (self->reset_button),
+  gtk_revealer_set_reveal_child (self->reset_revealer,
 		                !cc_keyboard_item_is_value_default (self->item));
 }
 
@@ -123,7 +125,7 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem *item,
                                transform_binding_to_accel,
                                NULL, NULL, NULL);
 
-  gtk_widget_set_child_visible (GTK_WIDGET (self->reset_button),
+  gtk_revealer_set_reveal_child (self->reset_revealer,
 		                !cc_keyboard_item_is_value_default (item));
   g_signal_connect_object (item,
                            "notify::key-combos",
