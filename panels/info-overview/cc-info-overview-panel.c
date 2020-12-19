@@ -69,6 +69,7 @@ struct _CcInfoOverviewPanel
   CcListRow       *hostname_row;
   CcListRow       *memory_row;
   GtkListBox      *os_box;
+  GtkImage        *os_logo;
   CcListRow       *os_name_row;
   CcListRow       *os_type_row;
   CcListRow       *processor_row;
@@ -866,6 +867,21 @@ cc_info_panel_row_activated_cb (CcInfoOverviewPanel *self,
 }
 
 static void
+setup_os_logo (CcInfoOverviewPanel *panel)
+{
+  g_autofree char *logo_name = g_get_os_info ("LOGO");
+  if (logo_name != NULL)
+    {
+      gtk_image_set_from_icon_name (panel->os_logo, logo_name, GTK_ICON_SIZE_INVALID);
+      gtk_image_set_pixel_size (panel->os_logo, 256);
+    }
+  else
+    {
+      gtk_image_set_from_resource (panel->os_logo, "/org/gnome/control-center/info-overview/GnomeLogoVerticalMedium.svg");
+    }
+}
+
+static void
 cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -883,6 +899,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, memory_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_box);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_logo);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_type_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
@@ -912,6 +929,8 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
+
+  setup_os_logo (self);
 }
 
 GtkWidget *
