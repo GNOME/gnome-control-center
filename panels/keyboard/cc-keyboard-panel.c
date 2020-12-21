@@ -45,9 +45,6 @@ struct _CcKeyboardPanel
   GtkRadioButton      *same_source;
   GSettings           *keybindings_settings;
 
-  /* "Type Special Characters" section */
-  CcXkbModifierDialog *alt_chars_dialog;
-  CcXkbModifierDialog *compose_dialog;
   GSettings           *input_source_settings;
   GtkLabel            *input_switch_description;
   GtkListBox          *special_chars_list;
@@ -116,16 +113,19 @@ special_chars_activated (GtkWidget       *button,
                          GtkListBoxRow   *row,
                          CcKeyboardPanel *self)
 {
+  const CcXkbModifier *modifier;
   GtkWindow *window, *dialog;
 
   window = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
 
   if (row == self->alt_chars_row)
-    dialog = GTK_WINDOW (self->alt_chars_dialog);
+    modifier = &LV3_MODIFIER;
   else if (row == self->compose_row)
-    dialog = GTK_WINDOW (self->compose_dialog);
+    modifier = &COMPOSE_MODIFIER;
   else
     return;
+
+  dialog = GTK_WINDOW (cc_xkb_modifier_dialog_new (self->input_source_settings, modifier));
 
   gtk_window_set_transient_for (dialog, window);
   gtk_widget_show (GTK_WIDGET (dialog));
@@ -295,7 +295,4 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                 NULL,
                                 (gpointer)&COMPOSE_MODIFIER,
                                 NULL);
-
-  self->alt_chars_dialog = cc_xkb_modifier_dialog_new (self->input_source_settings, &LV3_MODIFIER);
-  self->compose_dialog = cc_xkb_modifier_dialog_new (self->input_source_settings, &COMPOSE_MODIFIER);
 }
