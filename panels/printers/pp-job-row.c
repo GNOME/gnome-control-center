@@ -30,6 +30,7 @@ struct _PpJobRow
 
   GtkButton *pause_button;
   GtkImage  *pause_image;
+  GtkButton *priority_button;
   GtkLabel  *state_label;
   GtkLabel  *title_label;
 
@@ -37,6 +38,13 @@ struct _PpJobRow
 };
 
 G_DEFINE_TYPE (PpJobRow, pp_job_row, GTK_TYPE_LIST_BOX_ROW)
+
+enum {
+  PRIORITY_CHANGED,
+  LAST_SIGNAL,
+};
+
+static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
 pause_cb (PpJobRow *self)
@@ -52,6 +60,12 @@ static void
 stop_cb (PpJobRow *self)
 {
   pp_job_cancel_purge_async (self->job, FALSE);
+}
+
+static void
+priority_cb (PpJobRow *self)
+{
+  g_signal_emit_by_name (self, "priority-changed");
 }
 
 static void
@@ -76,11 +90,21 @@ pp_job_row_class_init (PpJobRowClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, pause_button);
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, pause_image);
+  gtk_widget_class_bind_template_child (widget_class, PpJobRow, priority_button);
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, state_label);
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, title_label);
 
   gtk_widget_class_bind_template_callback (widget_class, pause_cb);
   gtk_widget_class_bind_template_callback (widget_class, stop_cb);
+  gtk_widget_class_bind_template_callback (widget_class, priority_cb);
+
+  signals[PRIORITY_CHANGED] =
+    g_signal_new ("priority-changed",
+                  G_TYPE_FROM_CLASS (klass),
+                  G_SIGNAL_RUN_LAST,
+                  0,
+                  NULL, NULL, NULL,
+                  G_TYPE_NONE, 0);
 }
 
 static void
@@ -89,10 +113,17 @@ pp_job_row_init (PpJobRow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
+PpJob *
+pp_job_row_get_job (PpJobRow *self)
+{
+  return self->job;
+}
+
 PpJobRow *
 pp_job_row_new (PpJob *job)
 {
   PpJobRow *self;
+  gboolean  status;
   g_autofree gchar *state_string = NULL;
 
   self = g_object_new (PP_TYPE_JOB_ROW, NULL);
@@ -138,10 +169,14 @@ pp_job_row_new (PpJob *job)
         state_string = g_strdup (C_("print job", "Completed"));
         break;
     }
-
   gtk_label_set_text (self->title_label, pp_job_get_title (job));
   gtk_label_set_markup (self->state_label, state_string);
   gtk_widget_set_sensitive (GTK_WIDGET (self->pause_button), pp_job_get_auth_info_required (job) == NULL);
+  status = pp_job_priority_get_sensitive (job);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->priority_button), status);
+  if (status)
+    /* Translators: Clicking this button prioritizes printing of this print job */
+    gtk_widget_set_tooltip_text (GTK_WIDGET (self->priority_button), _("Move this job to the top of the queue"));
   gtk_image_set_from_icon_name (self->pause_image,
                                 pp_job_get_state (self->job) == IPP_JOB_HELD ?
                                                   "media-playback-start-symbolic" : "media-playback-pause-symbolic",

@@ -70,6 +70,7 @@ struct _PpJobsDialog {
   gchar    **actual_auth_info_required;
   gboolean   jobs_filled;
   gboolean   pop_up_authentication_popup;
+  gint       max_priority;
 
   GCancellable *get_jobs_cancellable;
 };
@@ -175,11 +176,54 @@ authenticate_popover_update (PpJobsDialog *self)
   gtk_widget_set_sensitive (GTK_WIDGET (self->authenticate_button), FALSE);
 }
 
+static void
+pp_job_update_cb (GObject      *source_object,
+                  GAsyncResult *res,
+                  gpointer      user_data)
+{
+  PpJobsDialog     *self = user_data;
+  gboolean          result;
+  g_autoptr(GError) error = NULL;
+  PpJob            *job = PP_JOB (source_object);
+
+  result = pp_job_set_priority_finish (job, res, &error);
+  if (result)
+    {
+      pp_jobs_dialog_update (self);
+    }
+  else if (error != NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        {
+          g_warning ("Could not set job priority: %s", error->message);
+        }
+    }
+}
+
+static void
+on_priority_changed (PpJobRow     *job_row,
+                     PpJobsDialog *self)
+{
+  PpJob *job;
+
+  job = pp_job_row_get_job (job_row);
+  pp_job_set_priority_async (job, ++self->max_priority, NULL, pp_job_update_cb, self);
+}
+
 static GtkWidget *
 create_listbox_row (gpointer item,
                     gpointer user_data)
 {
-  return GTK_WIDGET (pp_job_row_new (PP_JOB (item)));
+  PpJobRow *job_row;
+
+  job_row = pp_job_row_new (PP_JOB (item));
+
+  g_signal_connect (job_row,
+                    "priority-changed",
+                    G_CALLBACK (on_priority_changed),
+                    user_data);
+
+  return GTK_WIDGET (job_row);
 }
 
 static void
@@ -200,7 +244,11 @@ update_jobs_list_cb (GObject      *source_object,
   g_autoptr(GPtrArray) jobs;
   PpJob               *job;
   gint                 num_of_auth_jobs = 0;
+  gint                 job_priority;
+  guint                state;
   guint                i;
+  gint                 current_max_value = 1;
+  gint                 first_unprocessed_job = -1;
 
   g_list_store_remove_all (self->store);
 
@@ -227,8 +275,30 @@ update_jobs_list_cb (GObject      *source_object,
     }
 
   for (i = 0; i < jobs->len; i++)
+  {
+    job = PP_JOB (g_ptr_array_index (jobs, i));
+    state = pp_job_get_state (job);
+
+    if (state == IPP_JOB_PENDING || state == IPP_JOB_HELD)
+      {
+        if (first_unprocessed_job == -1)
+          {
+            first_unprocessed_job = i;
+            break;
+          }
+      }
+  }
+
+  for (i = 0; i < jobs->len; i++)
     {
       job = PP_JOB (g_ptr_array_index (jobs, i));
+      job_priority = pp_job_get_priority (job);
+      pp_job_priority_set_sensitive (job, (pp_job_get_state (job) == IPP_JOB_PENDING ||
+                                     pp_job_get_state (job) == IPP_JOB_HELD) &&
+                                     i > first_unprocessed_job);
+
+      if (job_priority >= current_max_value && job_priority != 100)
+        current_max_value = job_priority;
 
       g_list_store_append (self->store, g_object_ref (job));
 
@@ -240,7 +310,7 @@ update_jobs_list_cb (GObject      *source_object,
             self->actual_auth_info_required = g_strdupv (pp_job_get_auth_info_required (job));
         }
     }
-
+  self->max_priority = current_max_value;
   if (num_of_auth_jobs > 0)
     {
       g_autofree gchar *text = NULL;
@@ -409,7 +479,7 @@ pp_jobs_dialog_new (const gchar *printer_name)
                                 cc_list_box_update_header_func, NULL, NULL);
   self->store = g_list_store_new (pp_job_get_type ());
   gtk_list_box_bind_model (self->jobs_listbox, G_LIST_MODEL (self->store),
-                           create_listbox_row, NULL, NULL);
+                           create_listbox_row, self, NULL);
 
   update_jobs_list (self);
 

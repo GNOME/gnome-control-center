@@ -29,6 +29,8 @@ G_BEGIN_DECLS
 #define PP_TYPE_JOB_ROW (pp_job_row_get_type())
 G_DECLARE_FINAL_TYPE (PpJobRow, pp_job_row, PP, JOB_ROW, GtkListBoxRow)
 
-PpJobRow* pp_job_row_new (PpJob *job);
+PpJobRow* pp_job_row_new     (PpJob    *job);
+
+PpJob*    pp_job_row_get_job (PpJobRow *self);
 
 G_END_DECLS

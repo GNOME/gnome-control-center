@@ -27,6 +27,24 @@
           </object>
         </child>
         <child>
+          <object class="GtkButton" id="priority_button">
+            <property name="visible">True</property>
+            <property name="margin-left">4</property>
+            <property name="margin-right">4</property>
+            <signal name="clicked" handler="priority_cb" object="PpJobRow" swapped="yes" />
+            <style>
+              <class name="image-button"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="visible">True</property>
+                <property name="icon-size">2</property>
+                <property name="icon-name">go-top-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
           <object class="GtkButton" id="pause_button">
             <property name="visible">True</property>
             <property name="margin-left">4</property>

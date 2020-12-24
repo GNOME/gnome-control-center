@@ -32,11 +32,22 @@ G_DECLARE_FINAL_TYPE (PpJob, pp_job, PP, JOB, GObject)
 PpJob         *pp_job_new                        (gint                  id,
                                                   const gchar          *title,
                                                   gint                  state,
+                                                  gint                  priority,
                                                   GStrv                 auth_info_required);
 
 const gchar   *pp_job_get_title                  (PpJob                *job);
 
 gint           pp_job_get_state                  (PpJob                *job);
+
+gboolean       pp_job_priority_get_sensitive     (PpJob                *job);
+
+void           pp_job_priority_set_sensitive     (PpJob                *job,
+                                                  gboolean              sensitive);
+
+gint           pp_job_get_priority               (PpJob                *job);
+
+void           pp_job_set_priority               (PpJob                *job,
+                                                  gint                  priority);
 
 GStrv          pp_job_get_auth_info_required     (PpJob                *job);
 
@@ -63,6 +74,16 @@ void           pp_job_authenticate_async         (PpJob                *job,
                                                   gpointer              user_data);
 
 gboolean       pp_job_authenticate_finish        (PpJob                *job,
+                                                  GAsyncResult         *result,
+                                                  GError              **error);
+
+void           pp_job_set_priority_async         (PpJob                *job,
+                                                  gint                  priority,
+                                                  GCancellable         *cancellable,
+                                                  GAsyncReadyCallback   callback,
+                                                  gpointer              user_data);
+
+gboolean       pp_job_set_priority_finish        (PpJob                *job,
                                                   GAsyncResult         *result,
                                                   GError              **error);
 

@@ -45,6 +45,7 @@
 #include "cc-permission-infobar.h"
 #include "cc-util.h"
 
+#define JOB_DEFAULT_PRIORITY  50
 #define RENEW_INTERVAL        500
 #define SUBSCRIPTION_DURATION 600
 
@@ -457,7 +458,7 @@ on_cups_notification (GDBusConnection *connection,
     {
       g_autoptr(PpJob) job = NULL;
 
-      job = pp_job_new (job_id, NULL, 0, NULL);
+      job = pp_job_new (job_id, NULL, 0, JOB_DEFAULT_PRIORITY, NULL);
       pp_job_get_attributes_async (job,
                                    requested_attrs,
                                    cc_panel_get_cancellable (CC_PANEL (self)),

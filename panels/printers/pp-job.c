@@ -47,9 +47,12 @@ struct _PpJob
 {
   GObject parent_instance;
 
-  gint    id;
-  gchar  *title;
-  gint    state;
+  gint     id;
+  gchar   *title;
+  gint     state;
+  gint     priority;
+  gboolean sensitive;
+
   GStrv   auth_info_required;
 };
 
@@ -68,13 +71,15 @@ pp_job_cancel_purge_async_dbus_cb (GObject      *source_object,
 }
 
 PpJob *
-pp_job_new (gint id, const gchar *title, gint state, GStrv auth_info_required)
+pp_job_new (gint id, const gchar *title, gint state, gint priority, GStrv auth_info_required)
 {
    PpJob *job = g_object_new (pp_job_get_type (), NULL);
 
    job->id = id;
    job->title = g_strdup (title);
    job->state = state;
+   job->priority = priority;
+   job->sensitive = FALSE;
    job->auth_info_required = g_strdupv (auth_info_required);
 
    return job;
@@ -92,6 +97,34 @@ pp_job_get_state (PpJob *self)
 {
    g_return_val_if_fail (PP_IS_JOB(self), -1);
    return self->state;
+}
+
+void
+pp_job_priority_set_sensitive (PpJob    *self,
+                               gboolean  sensitive)
+{
+   self->sensitive = sensitive;
+}
+
+gboolean
+pp_job_priority_get_sensitive (PpJob *self)
+{
+   g_return_val_if_fail (PP_IS_JOB (self), FALSE);
+   return self->sensitive;
+}
+
+gint
+pp_job_get_priority (PpJob *self)
+{
+   g_return_val_if_fail (PP_IS_JOB (self), -1);
+   return self->priority;
+}
+
+void
+pp_job_set_priority (PpJob *self,
+                     gint   priority)
+{
+   self->priority = priority;
 }
 
 GStrv
@@ -386,6 +419,63 @@ pp_job_authenticate_async (PpJob                *self,
 
 gboolean
 pp_job_authenticate_finish (PpJob         *self,
+                            GAsyncResult  *result,
+                            GError       **error)
+{
+  g_return_val_if_fail (g_task_is_valid (result, self), FALSE);
+
+  return g_task_propagate_boolean (G_TASK (result), error);
+}
+
+static void
+pp_job_set_priority_thread (GTask        *task,
+                            gpointer      source_object,
+                            gpointer      task_data,
+                            GCancellable *cancellable)
+{
+  PpJob            *self = source_object;
+  gint              priority = GPOINTER_TO_INT (task_data);
+  ipp_t            *request;
+  gboolean          result = TRUE;
+  g_autofree gchar *uri = NULL;
+
+  request = ippNewRequest (IPP_SET_JOB_ATTRIBUTES);
+  uri = g_strdup_printf ("ipp://localhost/jobs/%d", self->id);
+  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
+               "job-uri", NULL, uri);
+  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
+               "requesting-user-name", NULL, cupsUser ());
+
+  ippAddInteger (request, IPP_TAG_JOB, IPP_TAG_INTEGER,
+                "job-priority", priority);
+
+  ippDelete (cupsDoRequest (CUPS_HTTP_DEFAULT, request, "/"));
+
+  if (cupsLastError () > IPP_OK_CONFLICT)
+    {
+      g_warning ("Failed to set job priority: %s", cupsLastErrorString ());
+      result = FALSE;
+    }
+
+  g_task_return_boolean (task, result);
+}
+
+void
+pp_job_set_priority_async (PpJob                *self,
+                           gint                  priority,
+                           GCancellable         *cancellable,
+                           GAsyncReadyCallback   callback,
+                           gpointer              user_data)
+{
+  g_autoptr(GTask) task = NULL;
+
+  task = g_task_new (self, cancellable, callback, user_data);
+  g_task_set_task_data (task, GINT_TO_POINTER (priority), NULL);
+  g_task_run_in_thread (task, pp_job_set_priority_thread);
+}
+
+gboolean
+pp_job_set_priority_finish (PpJob         *self,
                             GAsyncResult  *result,
                             GError       **error)
 {
