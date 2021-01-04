@@ -42,8 +42,8 @@
  * Note that WIDTH is assumed to be the larger size and we accept portrait
  * mode too effectively (in principle we should probably restrict the rotation
  * setting in that case). */
-#define MINIMUM_WIDTH 740
-#define MINIMUM_HEIGHT 530
+#define MINIMUM_WIDTH  720
+#define MINIMUM_HEIGHT 360
 
 #define PANEL_PADDING   32
 #define SECTION_PADDING 32
