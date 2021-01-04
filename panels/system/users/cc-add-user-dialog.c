@@ -189,7 +189,7 @@ create_user (CcAddUserDialog *self)
                                             self);
 }
 
-static gint
+static gboolean
 update_password_strength (CcAddUserDialog *self)
 {
         const gchar *password;
@@ -197,7 +197,7 @@ update_password_strength (CcAddUserDialog *self)
         const gchar *hint;
         const gchar *verify;
         gint strength_level;
-        gboolean valid;
+        gboolean valid, enforcing, accept;
 
         password = gtk_editable_get_text (GTK_EDITABLE (self->password_row));
         username = gtk_editable_get_text (GTK_EDITABLE (self->username_row));
@@ -205,21 +205,22 @@ update_password_strength (CcAddUserDialog *self)
         if (strlen (password) == 0) {
                 cc_entry_feedback_reset (self->password_hint);
 
-                return 0;
+                return FALSE;
         }
 
-        pw_strength (password, NULL, username, &hint, &strength_level);
+        pw_strength (password, NULL, username, &hint, &strength_level, &enforcing);
         valid = strength_level > 1;
+        accept = valid || !enforcing;
 
         gtk_level_bar_set_value (self->strength_indicator, strength_level);
         cc_entry_feedback_update (self->password_hint, valid ? "emblem-ok" : "dialog-warning", hint);
 
         verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
         if (strlen (verify) == 0) {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->verify_password_row), valid);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->verify_password_row), accept);
         }
 
-        return strength_level;
+        return accept;
 }
 
 static gboolean
@@ -227,13 +228,13 @@ validate_password (CcAddUserDialog *self)
 {
         const gchar *password;
         const gchar *verify;
-        gint strength;
+        gboolean accept;
 
         password = gtk_editable_get_text (GTK_EDITABLE (self->password_row));
         verify = gtk_editable_get_text (GTK_EDITABLE (self->verify_password_row));
-        strength = update_password_strength (self);
+        accept = update_password_strength (self);
 
-        return strength > 1 && strcmp (password, verify) == 0;
+        return accept && strcmp (password, verify) == 0;
 }
 
 static void dialog_validate_cb (GObject *source_object,

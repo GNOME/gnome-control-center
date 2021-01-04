@@ -138,9 +138,10 @@ pw_strength (const gchar  *password,
              const gchar  *old_password,
              const gchar  *username,
              const gchar **hint,
-             gint         *strength_level)
+             gint         *strength_level,
+             gboolean     *enforcing)
 {
-        gint rv, level, length = 0;
+        gint rv, level, length = 0, enforcing_val;
         gdouble strength = 0.0;
         void *auxerror;
 
@@ -174,6 +175,9 @@ pw_strength (const gchar  *password,
 
         if (strength_level)
                 *strength_level = level;
+
+        pwquality_get_int_value (get_pwq(), PWQ_SETTING_ENFORCING, &enforcing_val);
+        *enforcing = enforcing_val != 0;
 
         return strength;
 }
