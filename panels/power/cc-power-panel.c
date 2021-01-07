@@ -122,9 +122,6 @@ struct _CcPowerPanel
   gboolean       has_batteries;
   char          *chassis_type;
 
-  GList         *boxes;
-  GList         *boxes_reverse;
-
   GDBusProxy    *bt_rfkill;
   GDBusProxy    *bt_properties;
 
@@ -169,8 +166,6 @@ cc_power_panel_dispose (GObject *object)
 #ifdef HAVE_NETWORK_MANAGER
   g_clear_object (&self->nm_client);
 #endif
-  g_clear_pointer (&self->boxes, g_list_free);
-  g_clear_pointer (&self->boxes_reverse, g_list_free);
   if (self->iio_proxy_watch_id != 0)
     g_bus_unwatch_name (self->iio_proxy_watch_id);
   self->iio_proxy_watch_id = 0;
@@ -869,60 +864,12 @@ nm_client_ready_cb (GObject *source_object,
 static gboolean
 keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *list)
 {
-  GtkWidget *next_list = NULL;
-  GList *item, *boxes_list;
-  gdouble value, lower, upper, page;
+  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
+    return FALSE;
 
-  /* Find the list in the list of GtkListBoxes */
-  if (direction == GTK_DIR_DOWN)
-    boxes_list = self->boxes;
-  else
-    boxes_list = self->boxes_reverse;
+  direction == GTK_DIR_UP ? GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD;
 
-  item = g_list_find (boxes_list, list);
-  g_assert (item);
-  item = item->next;
-  while (1)
-    {
-      if (item == NULL)
-        item = boxes_list;
-
-      /* Avoid looping */
-      if (item->data == list)
-        break;
-
-      if (gtk_widget_is_visible (item->data))
-        {
-          next_list = item->data;
-          break;
-        }
-
-    item = item->next;
-  }
-
-  if (next_list)
-    {
-      gtk_widget_child_focus (next_list, direction);
-      return TRUE;
-    }
-
-  value = gtk_adjustment_get_value (self->focus_adjustment);
-  lower = gtk_adjustment_get_lower (self->focus_adjustment);
-  upper = gtk_adjustment_get_upper (self->focus_adjustment);
-  page  = gtk_adjustment_get_page_size (self->focus_adjustment);
-
-  if (direction == GTK_DIR_UP && value > lower)
-    {
-      gtk_adjustment_set_value (self->focus_adjustment, lower);
-      return TRUE;
-    }
-  else if (direction == GTK_DIR_DOWN && value < upper - page)
-    {
-      gtk_adjustment_set_value (self->focus_adjustment, upper - page);
-      return TRUE;
-    }
-
-  return FALSE;
+  return gtk_widget_child_focus (GTK_WIDGET (self), direction);
 }
 
 static void
@@ -1559,8 +1506,6 @@ setup_power_profiles (CcPowerPanel *self)
 
   gtk_widget_show (GTK_WIDGET (self->power_profile_section));
 
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->power_profile_listbox);
-
   props = g_variant_get_child_value (variant, 0);
   performance_inhibited = variant_lookup_string (props, "PerformanceInhibited");
   active_profile = variant_lookup_string (props, "ActiveProfile");
@@ -1780,7 +1725,6 @@ cc_power_panel_init (CcPowerPanel *self)
   battery_label = g_markup_printf_escaped ("<b>%s</b>", _("Battery"));
   gtk_label_set_markup (self->battery_heading, battery_label);
 
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->battery_listbox);
   gtk_list_box_set_header_func (self->battery_listbox,
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
@@ -1790,7 +1734,6 @@ cc_power_panel_init (CcPowerPanel *self)
   device_label = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
   gtk_label_set_markup (self->device_heading, device_label);
 
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->device_listbox);
   gtk_list_box_set_header_func (self->device_listbox,
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
@@ -1809,7 +1752,6 @@ cc_power_panel_init (CcPowerPanel *self)
 
   power_saving_label = g_strdup_printf ("<b>%s</b>", _("Power Saving"));
   gtk_label_set_markup (self->power_saving_heading, power_saving_label);
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->power_saving_listbox);
   gtk_list_box_set_header_func (self->power_saving_listbox,
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
@@ -1817,14 +1759,10 @@ cc_power_panel_init (CcPowerPanel *self)
 
   general_label = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Button"));
   gtk_label_set_markup (self->general_heading, general_label);
-  self->boxes_reverse = g_list_prepend (self->boxes_reverse, self->general_listbox);
   gtk_list_box_set_header_func (self->general_listbox,
                                 cc_list_box_update_header_func,
                                 NULL, NULL);
   setup_general_section (self);
-
-  self->boxes = g_list_copy (self->boxes_reverse);
-  self->boxes = g_list_reverse (self->boxes);
 
   /* populate batteries */
   g_signal_connect_object (self->up_client, "device-added", G_CALLBACK (up_client_device_added), self, G_CONNECT_SWAPPED);
