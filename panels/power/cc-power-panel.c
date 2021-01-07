@@ -66,36 +66,29 @@ struct _CcPowerPanel
   GtkDialog         *automatic_suspend_dialog;
   GtkLabel          *automatic_suspend_label;
   GtkListBoxRow     *automatic_suspend_row;
-  GtkLabel          *battery_heading;
   GtkListBox        *battery_listbox;
   HdyActionRow      *battery_percentage_row;
   GtkSwitch         *battery_percentage_switch;
   GtkSizeGroup      *battery_row_sizegroup;
-  GtkBox            *battery_section;
+  HdyPreferencesGroup *battery_section;
   HdyComboRow       *blank_screen_row;
   GtkListBoxRow     *brightness_row;
   CcBrightnessScale *brightness_scale;
   GtkListBoxRow     *bt_row;
   GtkSwitch         *bt_switch;
-  GtkLabel          *device_heading;
   GtkListBox        *device_listbox;
-  GtkBox            *device_section;
+  HdyPreferencesGroup *device_section;
   GtkListBoxRow     *dim_screen_row;
   GtkSwitch         *dim_screen_switch;
-  GtkLabel          *general_heading;
-  GtkListBox        *general_listbox;
-  GtkBox            *general_section;
+  HdyPreferencesGroup *general_section;
   GtkListBoxRow     *kbd_brightness_row;
   CcBrightnessScale *kbd_brightness_scale;
   GtkSizeGroup      *level_sizegroup;
   GtkListBoxRow     *mobile_row;
   GtkSwitch         *mobile_switch;
   HdyComboRow       *power_button_row;
-  GtkLabel          *power_profile_heading;
   GtkListBox        *power_profile_listbox;
-  GtkBox            *power_profile_section;
-  GtkLabel          *power_saving_heading;
-  GtkListBox        *power_saving_listbox;
+  HdyPreferencesGroup *power_profile_section;
   GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
   GtkLabel          *suspend_on_battery_delay_label;
@@ -259,7 +252,6 @@ up_client_changed (CcPowerPanel *self)
   guint n_batteries;
   gboolean on_ups;
   g_autoptr(UpDevice) composite = NULL;
-  g_autofree gchar *s = NULL;
 
   battery_children = gtk_container_get_children (GTK_CONTAINER (self->battery_listbox));
   for (l = battery_children; l != NULL; l = l->next)
@@ -390,10 +382,9 @@ up_client_changed (CcPowerPanel *self)
     }
 
   if (n_batteries > 1)
-    s = g_strdup_printf ("<b>%s</b>", _("Batteries"));
+    hdy_preferences_group_set_title (self->battery_section, _("Batteries"));
   else
-    s = g_strdup_printf ("<b>%s</b>", _("Battery"));
-  gtk_label_set_label (GTK_LABEL (self->battery_heading), s);
+    hdy_preferences_group_set_title (self->battery_section, _("Battery"));
 
   if (!on_ups && n_batteries > 1)
     add_battery (self, composite, TRUE);
@@ -1697,7 +1688,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_label);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, automatic_suspend_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_percentage_switch);
@@ -1708,13 +1698,10 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, brightness_scale);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, bt_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, bt_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_heading);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_scale);
@@ -1722,11 +1709,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saving_heading);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saving_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_label);
@@ -1755,11 +1739,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 static void
 cc_power_panel_init (CcPowerPanel *self)
 {
-  g_autofree gchar *battery_label = NULL;
-  g_autofree gchar *device_label = NULL;
-  g_autofree gchar *power_profile_label = NULL;
-  g_autofree gchar *power_saving_label = NULL;
-  g_autofree gchar *general_label = NULL;
   guint i;
 
   g_resources_register (cc_power_get_resource ());
@@ -1776,46 +1755,19 @@ cc_power_panel_init (CcPowerPanel *self)
   self->session_settings = g_settings_new ("org.gnome.desktop.session");
   self->interface_settings = g_settings_new ("org.gnome.desktop.interface");
 
-  battery_label = g_markup_printf_escaped ("<b>%s</b>", _("Battery"));
-  gtk_label_set_markup (self->battery_heading, battery_label);
-
-  gtk_list_box_set_header_func (self->battery_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
   gtk_list_box_set_sort_func (self->battery_listbox,
                               (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
 
-  device_label = g_markup_printf_escaped ("<b>%s</b>", _("Devices"));
-  gtk_label_set_markup (self->device_heading, device_label);
-
-  gtk_list_box_set_header_func (self->device_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
   gtk_list_box_set_sort_func (self->device_listbox,
                               (GtkListBoxSortFunc)battery_sort_func, NULL, NULL);
 
-  power_profile_label = g_strdup_printf ("<b>%s</b>", _("Power Mode"));
-  gtk_label_set_markup (self->power_profile_heading, power_profile_label);
   gtk_list_box_set_sort_func (self->power_profile_listbox,
                               perf_profile_list_box_sort,
                               NULL, NULL);
-  gtk_list_box_set_header_func (self->power_profile_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
   setup_power_profiles (self);
 
-  power_saving_label = g_strdup_printf ("<b>%s</b>", _("Power Saving"));
-  gtk_label_set_markup (self->power_saving_heading, power_saving_label);
-  gtk_list_box_set_header_func (self->power_saving_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
   setup_power_saving (self);
 
-  general_label = g_markup_printf_escaped ("<b>%s</b>", _("Suspend & Power Button"));
-  gtk_label_set_markup (self->general_heading, general_label);
-  gtk_list_box_set_header_func (self->general_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
   setup_general_section (self);
 
   /* populate batteries */

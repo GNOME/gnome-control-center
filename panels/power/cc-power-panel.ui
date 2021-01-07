@@ -55,124 +55,60 @@
     <property name="visible">True</property>
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkScrolledWindow">
+      <object class="HdyPreferencesPage">
         <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="hscrollbar_policy">never</property>
-        <child>
-          <object class="HdyClamp">
-            <property name="visible">True</property>
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
-            <child>
-              <object class="GtkBox" id="power_vbox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">3</property>
-                <property name="hexpand">True</property>
                 <child>
-                  <object class="GtkBox" id="battery_section">
+                  <object class="HdyPreferencesGroup" id="battery_section">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <property name="margin_bottom">32</property>
-                    <child>
-                      <object class="GtkLabel" id="battery_heading">
-                        <property name="visible">True</property>
-                        <property name="use-markup">True</property>
-                        <property name="halign">start</property>
-                        <property name="margin_bottom">12</property>
+                    <property name="title" translatable="yes">Battery</property>
                         <accessibility>
                           <relation target="battery_listbox" type="label-for"/>
                         </accessibility>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkFrame">
-                        <property name="visible">True</property>
-                        <property name="shadow-type">in</property>
                         <child>
                           <object class="GtkListBox" id="battery_listbox">
                             <property name="visible">True</property>
                             <property name="selection-mode">none</property>
                             <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
                             <accessibility>
-                              <relation target="battery_heading" type="labelled-by"/>
+                              <relation target="battery_section" type="labelled-by"/>
                             </accessibility>
+                            <style>
+                              <class name="content"/>
+                            </style>
                           </object>
                         </child>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox" id="device_section">
+                  <object class="HdyPreferencesGroup" id="device_section">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <property name="margin-top">6</property>
-                    <property name="margin-bottom">32</property>
-                    <child>
-                      <object class="GtkLabel" id="device_heading">
-                        <property name="visible">True</property>
-                        <property name="ellipsize">end</property>
-                        <property name="xalign">0</property>
-                        <property name="use-markup">True</property>
-                        <property name="halign">start</property>
-                        <property name="margin_bottom">12</property>
+                    <property name="title" translatable="yes">Devices</property>
                         <accessibility>
                           <relation target="device_listbox" type="label-for"/>
                         </accessibility>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkFrame">
-                        <property name="visible">True</property>
-                        <property name="shadow-type">in</property>
                         <child>
                           <object class="GtkListBox" id="device_listbox">
                             <property name="visible">True</property>
                             <property name="selection-mode">none</property>
                             <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
                             <accessibility>
-                              <relation target="device_heading" type="labelled-by"/>
+                              <relation target="device_section" type="labelled-by"/>
                             </accessibility>
+                            <style>
+                              <class name="content"/>
+                            </style>
                           </object>
                         </child>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox" id="power_profile_section">
+                  <object class="HdyPreferencesGroup" id="power_profile_section">
                     <property name="visible">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="margin_bottom">32</property>
-                    <child>
-                      <object class="GtkLabel" id="power_profile_heading">
-                        <property name="visible">True</property>
-                        <property name="ellipsize">end</property>
-                        <property name="xalign">0</property>
-                        <property name="use-markup">True</property>
-                        <property name="halign">start</property>
+                    <property name="title" translatable="yes">Power Mode</property>
+                    <property name="description" translatable="yes">Affects system performance and power usage.</property>
                         <accessibility>
                           <relation target="power_profile_listbox" type="label-for"/>
                         </accessibility>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="xalign">0</property>
-                        <property name="margin-bottom">6</property>
-                        <property name="label" translatable="yes">Affects system performance and power usage.</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkFrame">
-                        <property name="visible">True</property>
-                        <property name="shadow-type">in</property>
                         <child>
                           <object class="GtkListBox" id="power_profile_listbox">
                             <property name="visible">True</property>
@@ -180,45 +116,19 @@
                             <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
                             <signal name="row-activated" handler="power_profiles_row_activated_cb" object="CcPowerPanel" swapped="yes"/>
                             <accessibility>
-                              <relation target="device_heading" type="labelled-by"/>
+                              <relation target="power_profile_section" type="labelled-by"/>
                             </accessibility>
+                            <style>
+                              <class name="content"/>
+                            </style>
                           </object>
                         </child>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox">
+                  <object class="HdyPreferencesGroup" id="power_saving_section">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <property name="margin_bottom">32</property>
-                    <child>
-                      <object class="GtkLabel" id="power_saving_heading">
-                        <property name="visible">True</property>
-                        <property name="ellipsize">end</property>
-                        <property name="xalign">0</property>
-                        <property name="use-markup">True</property>
-                        <property name="halign">start</property>
-                        <property name="margin_bottom">12</property>
-                        <accessibility>
-                          <relation target="power_saving_listbox" type="label-for"/>
-                        </accessibility>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkFrame">
-                        <property name="visible">True</property>
-                        <property name="shadow-type">in</property>
-                        <child>
-                          <object class="GtkListBox" id="power_saving_listbox">
-                            <property name="visible">True</property>
-                            <property name="selection-mode">none</property>
-                            <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-                            <signal name="row-activated" handler="power_saving_listbox_row_activated_cb" object="CcPowerPanel" swapped="yes"/>
-                            <accessibility>
-                              <relation target="power_saving_heading" type="labelled-by"/>
-                            </accessibility>
+                    <property name="title" translatable="yes">Power Saving</property>
                             <child>
                               <object class="HdyActionRow" id="brightness_row">
                                 <property name="visible">True</property>
@@ -349,41 +259,12 @@
                                 </child>
                               </object>
                             </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkBox" id="general_section">
+                  <object class="HdyPreferencesGroup" id="general_section">
                     <property name="visible">True</property>
-                    <property name="orientation">vertical</property>
-                    <property name="margin-top">6</property>
-                    <property name="margin-bottom">32</property>
-                    <child>
-                      <object class="GtkLabel" id="general_heading">
-                        <property name="visible">True</property>
-                        <property name="use-markup">True</property>
-                        <property name="halign">start</property>
-                        <property name="margin_bottom">12</property>
-                        <accessibility>
-                          <relation target="general_listbox" type="label-for"/>
-                        </accessibility>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkFrame">
-                        <property name="visible">True</property>
-                        <property name="shadow-type">in</property>
-                        <child>
-                          <object class="GtkListBox" id="general_listbox">
-                            <property name="visible">True</property>
-                            <property name="selection-mode">none</property>
-                            <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
-                            <accessibility>
-                              <relation target="general_heading" type="labelled-by"/>
-                            </accessibility>
+                    <property name="title" translatable="yes">Suspend &amp; Power Button</property>
                             <child>
                               <object class="HdyComboRow" id="power_button_row">
                                 <property name="visible">False</property>
@@ -406,16 +287,8 @@
                                 </child>
                               </object>
                             </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
                   </object>
                 </child>
-              </object>
-            </child>
-          </object>
-        </child>
       </object>
     </child>
   </template>
