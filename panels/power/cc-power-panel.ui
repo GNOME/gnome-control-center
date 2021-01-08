@@ -51,56 +51,6 @@
       </row>
     </data>
   </object>
-  <object class="GtkListStore" id="idle_time_liststore">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-      <!-- column-name value -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">1 minute</col>
-        <col id="1">60</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">2 minutes</col>
-        <col id="1">120</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">3 minutes</col>
-        <col id="1">180</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">4 minutes</col>
-        <col id="1">240</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">5 minutes</col>
-        <col id="1">300</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">8 minutes</col>
-        <col id="1">480</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">10 minutes</col>
-        <col id="1">600</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">12 minutes</col>
-        <col id="1">720</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">15 minutes</col>
-        <col id="1">900</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">Never</col>
-        <col id="1">0</col>
-      </row>
-    </data>
-  </object>
   <object class="GtkListStore" id="power_button_liststore">
     <columns>
       <!-- column-name name -->
@@ -447,41 +397,11 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkListBoxRow" id="blank_screen_row">
+                              <object class="HdyComboRow" id="blank_screen_row">
                                 <property name="visible">True</property>
-                                <property name="selectable">False</property>
-                                <property name="activatable">False</property>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="margin-start">12</property>
-                                    <property name="margin-end">12</property>
-                                    <property name="spacing">12</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="use-markup">True</property>
-                                        <property name="use-underline">True</property>
-                                        <property name="ellipsize">end</property>
-                                        <property name="label" translatable="yes">_Blank Screen</property>
-                                        <property name="margin-top">6</property>
-                                        <property name="margin-bottom">6</property>
-                                        <property name="expand">True</property>
-                                        <property name="xalign">0</property>
-                                        <property name="mnemonic_widget">idle_delay_combo</property>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkComboBoxText" id="idle_delay_combo">
-                                        <property name="visible">True</property>
-                                        <property name="valign">center</property>
-                                        <property name="entry-text-column">0</property>
-                                        <property name="model">idle_time_liststore</property>
-                                        <signal name="changed" handler="idle_delay_combo_changed_cb" object="CcPowerPanel" swapped="yes"/>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
+                                <property name="title" translatable="yes">_Blank Screen</property>
+                                <property name="use_underline">True</property>
+                                <signal name="notify::selected-index" handler="blank_screen_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>

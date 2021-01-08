@@ -73,7 +73,7 @@ struct _CcPowerPanel
   GtkSizeGroup      *battery_row_sizegroup;
   GtkBox            *battery_section;
   GtkSizeGroup      *battery_sizegroup;
-  GtkListBoxRow     *blank_screen_row;
+  HdyComboRow       *blank_screen_row;
   GtkListBoxRow     *brightness_row;
   CcBrightnessScale *brightness_scale;
   GtkListBoxRow     *bt_row;
@@ -87,7 +87,6 @@ struct _CcPowerPanel
   GtkLabel          *general_heading;
   GtkListBox        *general_listbox;
   GtkBox            *general_section;
-  GtkComboBox       *idle_delay_combo;
   GtkListBoxRow     *kbd_brightness_row;
   CcBrightnessScale *kbd_brightness_scale;
   GtkSizeGroup      *level_sizegroup;
@@ -578,6 +577,49 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
 }
 
 static void
+set_value_for_combo_row (HdyComboRow *combo_row, gint value)
+{
+  gboolean insert = FALSE;
+  guint insert_before = 0;
+  guint i;
+  HdyValueObject *new;
+  GListModel *model;
+  gint value_last = 0;
+  g_autofree gchar *text = NULL;
+
+  /* try to make the UI match the setting */
+  model = hdy_combo_row_get_model (combo_row);
+  for (i = 0; i < g_list_model_get_n_items (model); i++)
+    {
+      HdyValueObject *value_object = g_list_model_get_item (model, i);
+      gint value_tmp = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (value_object), "value"));
+      if (value_tmp == value)
+        {
+          hdy_combo_row_set_selected_index (combo_row, i);
+          return;
+        }
+
+      /* Insert before if the next value is larger or the value is lower
+       * again (i.e. "Never" is zero and last). */
+      if (!insert && (value_tmp > value || value_last > value_tmp))
+        {
+          insert = TRUE;
+          insert_before = i;
+        }
+
+      value_last = value_tmp;
+    }
+
+  /* The value is not listed, so add it at the best point (or the end). */
+  text = cc_util_time_to_string_text (value * 1000);
+  new = hdy_value_object_new_string (text);
+  g_object_set_data (G_OBJECT (new), "value",
+                     GUINT_TO_POINTER (value));
+  g_list_store_insert (G_LIST_STORE (model), insert_before, new);
+  hdy_combo_row_set_selected_index (combo_row, insert_before);
+}
+
+static void
 set_ac_battery_ui_mode (CcPowerPanel *self)
 {
   gboolean has_batteries = FALSE;
@@ -869,25 +911,18 @@ keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *lis
 }
 
 static void
-idle_delay_combo_changed_cb (CcPowerPanel *self)
+blank_screen_row_changed_cb (CcPowerPanel *self)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
+  GListModel *model;
+  gint selected_index;
+  HdyValueObject *value_object;
   gint value;
-  gboolean ret;
 
-  /* no selection */
-  ret = gtk_combo_box_get_active_iter (self->idle_delay_combo, &iter);
-  if (!ret)
-    return;
+  model = hdy_combo_row_get_model (self->blank_screen_row);
+  selected_index = hdy_combo_row_get_selected_index (self->blank_screen_row);
+  value_object = g_list_model_get_item (model, selected_index);
+  value = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (value_object), "value"));
 
-  /* get entry */
-  model = gtk_combo_box_get_model (self->idle_delay_combo);
-  gtk_tree_model_get (model, &iter,
-                      1, &value,
-                      -1);
-
-  /* set both keys */
   g_settings_set_uint (self->session_settings, "idle-delay", value);
 }
 
@@ -1172,6 +1207,37 @@ has_kbd_brightness_cb (CcPowerPanel *self,
 }
 
 static void
+populate_blank_screen_row (HdyComboRow *combo_row)
+{
+  g_autoptr (GListStore) list_store = g_list_store_new (HDY_TYPE_VALUE_OBJECT);
+  gint minutes[] = { 1, 2, 3, 4, 5, 8, 10, 12, 15 };
+  guint i;
+  g_autoptr (HdyValueObject) never_value_object = NULL;
+
+  for (i = 0; i < G_N_ELEMENTS (minutes); i++)
+    {
+      gchar *text = NULL;
+      g_autoptr (HdyValueObject) value_object = NULL;
+
+      /* Translators: Option for "Blank Screen" in "Power" panel */
+      text = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute", "%d minutes", minutes[i]), minutes[i]);
+      value_object = hdy_value_object_new_take_string (text);
+
+      g_object_set_data (G_OBJECT (value_object), "value", GUINT_TO_POINTER (minutes[i] * 60));
+      g_list_store_append (list_store, value_object);
+    }
+
+  never_value_object = hdy_value_object_new_string (C_("Idle time", "Never"));
+  g_object_set_data (G_OBJECT (never_value_object), "value", GUINT_TO_POINTER (0));
+  g_list_store_append (list_store, never_value_object);
+
+  hdy_combo_row_bind_name_model (combo_row,
+                                 G_LIST_MODEL (list_store),
+                                 (HdyComboRowGetNameFunc) hdy_value_object_dup_string,
+                                 NULL, NULL);
+}
+
+static void
 setup_power_saving (CcPowerPanel *self)
 {
   int value;
@@ -1191,10 +1257,11 @@ setup_power_saving (CcPowerPanel *self)
                    self->dim_screen_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
+  g_signal_handlers_block_by_func (self->blank_screen_row, blank_screen_row_changed_cb, self);
+  populate_blank_screen_row (self->blank_screen_row);
   value = g_settings_get_uint (self->session_settings, "idle-delay");
-  g_signal_handlers_block_by_func (self->idle_delay_combo, idle_delay_combo_changed_cb, self);
-  set_value_for_combo (self->idle_delay_combo, value);
-  g_signal_handlers_unblock_by_func (self->idle_delay_combo, idle_delay_combo_changed_cb, self);
+  set_value_for_combo_row (self->blank_screen_row, value);
+  g_signal_handlers_unblock_by_func (self->blank_screen_row, blank_screen_row_changed_cb, self);
 
   /* The default values for these settings are unfortunate for us;
    * timeout == 0, action == suspend means 'do nothing' - just
@@ -1653,7 +1720,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, idle_delay_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_scale);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
@@ -1683,7 +1749,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, bt_switch_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, has_brightness_cb);
   gtk_widget_class_bind_template_callback (widget_class, has_kbd_brightness_cb);
-  gtk_widget_class_bind_template_callback (widget_class, idle_delay_combo_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, blank_screen_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, mobile_switch_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_button_combo_changed_cb);
