@@ -91,8 +91,6 @@ struct _CcPowerPanel
   GtkListBoxRow     *kbd_brightness_row;
   CcBrightnessScale *kbd_brightness_scale;
   GtkSizeGroup      *level_sizegroup;
-  GtkScrolledWindow *main_scroll;
-  HdyClamp          *main_box;
   GtkListBoxRow     *mobile_row;
   GtkSwitch         *mobile_switch;
   GtkComboBox       *power_button_combo;
@@ -136,8 +134,6 @@ struct _CcPowerPanel
 #ifdef HAVE_NETWORK_MANAGER
   NMClient      *nm_client;
 #endif
-
-  GtkAdjustment *focus_adjustment;
 };
 
 CC_PANEL_REGISTER (CcPowerPanel, cc_power_panel)
@@ -1661,8 +1657,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_scale);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_scroll);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_combo);
@@ -1775,7 +1769,4 @@ cc_power_panel_init (CcPowerPanel *self)
                              G_CALLBACK (up_client_changed), self, G_CONNECT_SWAPPED);
   }
   up_client_changed (self);
-
-  self->focus_adjustment = gtk_scrolled_window_get_vadjustment (self->main_scroll);
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->main_box), self->focus_adjustment);
 }
