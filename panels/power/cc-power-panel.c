@@ -92,9 +92,7 @@ struct _CcPowerPanel
   GtkSizeGroup      *level_sizegroup;
   GtkListBoxRow     *mobile_row;
   GtkSwitch         *mobile_switch;
-  GtkComboBox       *power_button_combo;
-  GtkListStore      *power_button_liststore;
-  GtkListBoxRow     *power_button_row;
+  HdyComboRow       *power_button_row;
   GtkLabel          *power_profile_heading;
   GtkListBox        *power_profile_listbox;
   GtkBox            *power_profile_section;
@@ -927,25 +925,18 @@ blank_screen_row_changed_cb (CcPowerPanel *self)
 }
 
 static void
-power_button_combo_changed_cb (CcPowerPanel *self)
+power_button_row_changed_cb (CcPowerPanel *self)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
+  GListModel *model;
+  gint selected_index;
+  HdyValueObject *value_object;
   gint value;
-  gboolean ret;
 
-  /* no selection */
-  ret = gtk_combo_box_get_active_iter (GTK_COMBO_BOX (self->power_button_combo), &iter);
-  if (!ret)
-    return;
+  model = hdy_combo_row_get_model (self->power_button_row);
+  selected_index = hdy_combo_row_get_selected_index (self->power_button_row);
+  value_object = g_list_model_get_item (model, selected_index);
+  value = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (value_object), "value"));
 
-  /* get entry */
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (self->power_button_combo));
-  gtk_tree_model_get (model, &iter,
-                      1, &value,
-                      -1);
-
-  /* set both keys */
   g_settings_set_enum (self->gsd_settings, "power-button-action", value);
 }
 
@@ -1048,10 +1039,11 @@ set_sleep_type (const GValue       *value,
 }
 
 static void
-populate_power_button_model (GtkTreeModel *model,
-                             gboolean      can_suspend,
-                             gboolean      can_hibernate)
+populate_power_button_row (HdyComboRow *combo_row,
+                           gboolean     can_suspend,
+                           gboolean     can_hibernate)
 {
+  g_autoptr (GListStore) list_store = NULL;
   struct {
     char *name;
     GsdPowerButtonActionType value;
@@ -1063,20 +1055,28 @@ populate_power_button_model (GtkTreeModel *model,
   };
   guint i;
 
+  list_store = g_list_store_new (HDY_TYPE_VALUE_OBJECT);
   for (i = 0; i < G_N_ELEMENTS (actions); i++)
     {
+      g_autoptr (HdyValueObject) value_object = NULL;
+
       if (!can_suspend && actions[i].value == GSD_POWER_BUTTON_ACTION_SUSPEND)
         continue;
 
       if (!can_hibernate && actions[i].value == GSD_POWER_BUTTON_ACTION_HIBERNATE)
         continue;
 
-      gtk_list_store_insert_with_values (GTK_LIST_STORE (model),
-                                         NULL, -1,
-                                         0, _(actions[i].name),
-                                         1, actions[i].value,
-                                         -1);
+      value_object = hdy_value_object_new_string (actions[i].name);
+      g_object_set_data (G_OBJECT (value_object),
+                         "value",
+                         GUINT_TO_POINTER (actions[i].value));
+      g_list_store_append (list_store, value_object);
     }
+
+  hdy_combo_row_bind_name_model (combo_row,
+                                 G_LIST_MODEL (list_store),
+                                 (HdyComboRowGetNameFunc) hdy_value_object_dup_string,
+                                 NULL, NULL);
 }
 
 #define NEVER 0
@@ -1635,10 +1635,17 @@ setup_general_section (CcPowerPanel *self)
     {
       gtk_widget_show (GTK_WIDGET (self->power_button_row));
 
-      populate_power_button_model (GTK_TREE_MODEL (self->power_button_liststore), can_suspend, can_hibernate);
-      g_signal_handlers_block_by_func (self->power_button_combo, power_button_combo_changed_cb, self);
-      set_value_for_combo (self->power_button_combo, g_settings_get_enum (self->gsd_settings, "power-button-action"));
-      g_signal_handlers_unblock_by_func (self->power_button_combo, power_button_combo_changed_cb, self);
+      g_signal_handlers_block_by_func (self->power_button_row,
+                                       power_button_row_changed_cb,
+                                       self);
+      populate_power_button_row (self->power_button_row,
+                                 can_suspend,
+                                 can_hibernate);
+      set_value_for_combo_row (self->power_button_row,
+                               g_settings_get_enum (self->gsd_settings, "power-button-action"));
+      g_signal_handlers_unblock_by_func (self->power_button_row,
+                                         power_button_row_changed_cb,
+                                         self);
 
       show_section = TRUE;
     }
@@ -1725,8 +1732,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_liststore);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
@@ -1752,7 +1757,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, mobile_switch_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, power_button_combo_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, power_button_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_profiles_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_saving_listbox_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, wifi_switch_changed_cb);
