@@ -413,6 +413,8 @@ cc_time_entry_constructed (GObject *object)
   pango_attr_list_insert (list, attribute);
 
   gtk_entry_set_attributes (GTK_ENTRY (object), list);
+
+  pango_attr_list_unref (list);
 }
 
 static void
