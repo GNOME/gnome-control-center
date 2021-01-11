@@ -751,12 +751,23 @@ cc_keyboard_shortcut_dialog_constructed (GObject *object)
 }
 
 static void
+cc_keyboard_shortcut_dialog_finalize (GObject *object)
+{
+  CcKeyboardShortcutDialog *self = CC_KEYBOARD_SHORTCUT_DIALOG (object);
+
+  g_clear_object (&self->manager);
+  g_clear_pointer (&self->sections, g_hash_table_destroy);
+  g_clear_pointer (&self->shortcut_editor, gtk_widget_destroy);
+}
+
+static void
 cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->constructed = cc_keyboard_shortcut_dialog_constructed;
+  object_class->finalize = cc_keyboard_shortcut_dialog_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-shortcut-dialog.ui");
 
