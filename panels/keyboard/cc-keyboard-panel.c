@@ -196,8 +196,7 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
-  // TODO better way?
-  CC_TYPE_INPUT_LIST_BOX;
+  g_type_ensure (CC_TYPE_INPUT_LIST_BOX);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-panel.ui");
 
