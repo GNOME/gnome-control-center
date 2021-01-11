@@ -34,8 +34,10 @@ struct _CEPageDetails
 
         GtkCheckButton *all_user_check;
         GtkCheckButton *auto_connect_check;
-        GtkLabel *dns_heading_label;
-        GtkLabel *dns_label;
+        GtkLabel *dns4_heading_label;
+        GtkLabel *dns4_label;
+        GtkLabel *dns6_heading_label;
+        GtkLabel *dns6_label;
         GtkButton *forget_button;
         GtkLabel *freq_heading_label;
         GtkLabel *freq_label;
@@ -243,6 +245,8 @@ connect_details_page (CEPageDetails *self)
         gboolean device_is_active;
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
         gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
+        gboolean have_dns4 = FALSE, have_dns6 = FALSE;
+
 
         sc = nm_connection_get_setting_connection (self->connection);
         type = nm_setting_connection_get_connection_type (sc);
@@ -345,7 +349,7 @@ connect_details_page (CEPageDetails *self)
         if (ipv4_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv4_text = NULL;
-                g_autofree gchar *dns_text = NULL;
+                g_autofree gchar *ip4_dns = NULL;
                 const gchar *route_text;
 
                 addresses = nm_ip_config_get_addresses (ipv4_config);
@@ -356,10 +360,13 @@ connect_details_page (CEPageDetails *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv4_label), ipv4_text != NULL);
                 have_ipv4_address = ipv4_text != NULL;
 
-                dns_text = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ipv4_config));
-                gtk_label_set_label (self->dns_label, dns_text);
-                gtk_widget_set_visible (GTK_WIDGET (self->dns_heading_label), dns_text != NULL);
-                gtk_widget_set_visible (GTK_WIDGET (self->dns_label), dns_text != NULL);
+                ip4_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ipv4_config));
+                if (!*ip4_dns)
+                        ip4_dns = NULL;
+                gtk_label_set_label (self->dns4_label, ip4_dns);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns4_heading_label), ip4_dns != NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns4_label), ip4_dns != NULL);
+                have_dns4 = ip4_dns != NULL;
 
                 route_text = nm_ip_config_get_gateway (ipv4_config);
                 gtk_label_set_label (self->route_label, route_text);
@@ -368,8 +375,8 @@ connect_details_page (CEPageDetails *self)
         } else {
                 gtk_widget_hide (GTK_WIDGET (self->ipv4_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->ipv4_label));
-                gtk_widget_hide (GTK_WIDGET (self->dns_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->dns_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns4_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns4_label));
                 gtk_widget_hide (GTK_WIDGET (self->route_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->route_label));
         }
@@ -379,6 +386,7 @@ connect_details_page (CEPageDetails *self)
         if (ipv6_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv6_text = NULL;
+                g_autofree gchar *ip6_dns = NULL;
 
                 addresses = nm_ip_config_get_addresses (ipv6_config);
                 if (addresses->len > 0)
@@ -387,9 +395,19 @@ connect_details_page (CEPageDetails *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv6_heading_label), ipv6_text != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv6_label), ipv6_text != NULL);
                 have_ipv6_address = ipv6_text != NULL;
+
+                ip6_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ipv6_config));
+                if (!*ip6_dns)
+                        ip6_dns = NULL;
+                gtk_label_set_label (self->dns6_label, ip6_dns);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns6_heading_label), ip6_dns != NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns6_label), ip6_dns != NULL);
+                have_dns6 = ip6_dns != NULL;
         } else {
                 gtk_widget_hide (GTK_WIDGET (self->ipv6_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->ipv6_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns6_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns6_label));
         }
 
         if (have_ipv4_address && have_ipv6_address) {
@@ -399,6 +417,15 @@ connect_details_page (CEPageDetails *self)
         else {
                 gtk_label_set_label (self->ipv4_heading_label, _("IP Address"));
                 gtk_label_set_label (self->ipv6_heading_label, _("IP Address"));
+        }
+
+        if (have_dns4 && have_dns6) {
+                gtk_label_set_label (self->dns4_heading_label, _("DNS4"));
+                gtk_label_set_label (self->dns6_heading_label, _("DNS6"));
+        }
+        else {
+                gtk_label_set_label (self->dns4_heading_label, _("DNS"));
+                gtk_label_set_label (self->dns6_heading_label, _("DNS"));
         }
 
         if (!device_is_active && self->connection)
@@ -474,8 +501,10 @@ ce_page_details_class_init (CEPageDetailsClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, all_user_check);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, auto_connect_check);
-        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns_heading_label);
-        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns4_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns4_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns6_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, dns6_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, forget_button);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, freq_heading_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, freq_label);

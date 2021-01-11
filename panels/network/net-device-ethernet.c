@@ -116,6 +116,7 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
         const gchar *ip4_route = NULL;
         g_autofree gchar *ip4_dns = NULL;
         const gchar *ip6_address = NULL;
+        g_autofree gchar *ip6_dns = NULL;
         gint i = 0;
 
         ip4_config = nm_device_get_ip4_config (device);
@@ -128,6 +129,8 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
 
                 ip4_route = nm_ip_config_get_gateway (ip4_config);
                 ip4_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ip4_config));
+                if (!*ip4_dns)
+                        ip4_dns = NULL;
         }
         ip6_config = nm_device_get_ip6_config (device);
         if (ip6_config) {
@@ -136,6 +139,10 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
                 addresses = nm_ip_config_get_addresses (ip6_config);
                 if (addresses->len > 0)
                         ip6_address = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
+
+                ip6_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ip6_config));
+                if (!*ip6_dns)
+                        ip6_dns = NULL;
         }
 
         if (ip4_address && ip6_address) {
@@ -144,7 +151,7 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
         } else if (ip4_address) {
                 add_details_row (details, i++, _("IP Address"), ip4_address);
         } else if (ip6_address) {
-                add_details_row (details, i++, _("IPv6 Address"), ip6_address);
+                add_details_row (details, i++, _("IP Address"), ip6_address);
         }
 
         add_details_row (details, i++, _("Hardware Address"),
@@ -152,8 +159,15 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
 
         if (ip4_route)
                 add_details_row (details, i++, _("Default Route"), ip4_route);
-        if (ip4_dns)
+
+        if (ip4_dns && ip6_dns) {
+                add_details_row (details, i++, _("DNS4"), ip4_dns);
+                add_details_row (details, i++, _("DNS6"), ip6_dns);
+        } else if (ip4_dns) {
                 add_details_row (details, i++, _("DNS"), ip4_dns);
+        } else if (ip6_dns) {
+                add_details_row (details, i++, _("DNS"), ip6_dns);
+        }
 
         if (nm_device_get_state (device) != NM_DEVICE_STATE_ACTIVATED) {
                 g_autofree gchar *last_used = NULL;
