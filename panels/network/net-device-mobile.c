@@ -41,8 +41,10 @@ struct _NetDeviceMobile
 
         GtkLabel     *device_label;
         GtkSwitch    *device_off_switch;
-        GtkLabel     *dns_heading_label;
-        GtkLabel     *dns_label;
+        GtkLabel     *dns4_heading_label;
+        GtkLabel     *dns4_label;
+        GtkLabel     *dns6_heading_label;
+        GtkLabel     *dns6_label;
         GtkLabel     *imei_heading_label;
         GtkLabel     *imei_label;
         GtkLabel     *ipv4_heading_label;
@@ -349,6 +351,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         g_autofree gchar *status = NULL;
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
         gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
+        gboolean have_dns4 = FALSE, have_dns6 = FALSE;
 
         /* set up the device on/off switch */
         gtk_widget_show (GTK_WIDGET (self->device_off_switch));
@@ -380,7 +383,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         if (ipv4_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv4_text = NULL;
-                g_autofree gchar *dns_text = NULL;
+                g_autofree gchar *ip4_dns = NULL;
                 const gchar *route_text;
 
                 addresses = nm_ip_config_get_addresses (ipv4_config);
@@ -391,10 +394,13 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv4_label), ipv4_text != NULL);
                 have_ipv4_address = ipv4_text != NULL;
 
-                dns_text = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ipv4_config));
-                gtk_label_set_label (self->dns_label, dns_text);
-                gtk_widget_set_visible (GTK_WIDGET (self->dns_heading_label), dns_text != NULL);
-                gtk_widget_set_visible (GTK_WIDGET (self->dns_label), dns_text != NULL);
+                ip4_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ipv4_config));
+                if (!*ip4_dns)
+                        ip4_dns = NULL;
+                gtk_label_set_label (self->dns4_label, ip4_dns);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns4_heading_label), ip4_dns != NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns4_label), ip4_dns != NULL);
+                have_dns4 = ip4_dns != NULL;
 
                 route_text = nm_ip_config_get_gateway (ipv4_config);
                 gtk_label_set_label (self->route_label, route_text);
@@ -403,8 +409,8 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         } else {
                 gtk_widget_hide (GTK_WIDGET (self->ipv4_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->ipv4_label));
-                gtk_widget_hide (GTK_WIDGET (self->dns_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->dns_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns4_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns4_label));
                 gtk_widget_hide (GTK_WIDGET (self->route_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->route_label));
         }
@@ -413,6 +419,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         if (ipv6_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv6_text = NULL;
+                g_autofree gchar *ip6_dns = NULL;
 
                 addresses = nm_ip_config_get_addresses (ipv6_config);
                 if (addresses->len > 0)
@@ -421,9 +428,19 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv6_heading_label), ipv6_text != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv6_label), ipv6_text != NULL);
                 have_ipv6_address = ipv6_text != NULL;
+
+                ip6_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ipv6_config));
+                if (!*ip6_dns)
+                        ip6_dns = NULL;
+                gtk_label_set_label (self->dns6_label, ip6_dns);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns6_heading_label), ip6_dns != NULL);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns6_label), ip6_dns != NULL);
+                have_dns6 = ip6_dns != NULL;
         } else {
                 gtk_widget_hide (GTK_WIDGET (self->ipv6_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->ipv6_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns6_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->dns6_label));
         }
 
         if (have_ipv4_address && have_ipv6_address) {
@@ -433,6 +450,14 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         else {
                 gtk_label_set_label (self->ipv4_heading_label, _("IP Address"));
                 gtk_label_set_label (self->ipv6_heading_label, _("IP Address"));
+        }
+
+        if (have_dns4 && have_dns6) {
+                gtk_label_set_label (self->dns4_heading_label, _("DNS4"));
+                gtk_label_set_label (self->dns6_heading_label, _("DNS6"));
+        } else {
+                gtk_label_set_label (self->dns4_heading_label, _("DNS"));
+                gtk_label_set_label (self->dns6_heading_label, _("DNS"));
         }
 }
 
@@ -738,8 +763,10 @@ net_device_mobile_class_init (NetDeviceMobileClass *klass)
 
         gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, device_label);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, device_off_switch);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns_heading_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns4_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns4_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns6_heading_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, dns6_label);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, imei_heading_label);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, imei_label);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceMobile, ipv4_heading_label);
