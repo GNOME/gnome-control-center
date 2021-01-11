@@ -616,7 +616,6 @@ cc_keyboard_shortcut_editor_finalize (GObject *object)
   g_clear_object (&self->manager);
 
   g_clear_pointer (&self->custom_combo, g_free);
-  g_clear_pointer (&self->reset_item_binding, g_binding_unbind);
 
   G_OBJECT_CLASS (cc_keyboard_shortcut_editor_parent_class)->finalize (object);
 }
