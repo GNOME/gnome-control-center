@@ -59,9 +59,16 @@ static gboolean
 validate (WirelessSecurity *security, GError **error)
 {
 	WirelessSecurityWPAPSK *self = WS_WPA_PSK (security);
+	NMSettingSecretFlags secret_flags;
 	const char *key;
 	gsize len;
 	int i;
+
+	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->password_entry));
+	if (secret_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED) {
+		widget_unset_error (GTK_WIDGET (self->password_entry));
+		return TRUE;
+	}
 
 	key = gtk_entry_get_text (self->password_entry);
 	len = key ? strlen (key) : 0;

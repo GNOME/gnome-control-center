@@ -79,6 +79,7 @@ validate (EAPMethod *method, GError **error)
 {
 	EAPMethodTLS *self = EAP_METHOD_TLS (method);
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
+	NMSettingSecretFlags secret_flags;
 	const char *password, *identity;
 	g_autoptr(GError) ca_cert_error = NULL;
 	g_autoptr(GError) private_key_error = NULL;
@@ -115,6 +116,9 @@ validate (EAPMethod *method, GError **error)
 	}
 
 	password = gtk_entry_get_text (self->private_key_password_entry);
+	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->private_key_password_entry));
+	if (secret_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED)
+		password = NULL;
 
 	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (self->private_key_button),
 	                                     TYPE_PRIVATE_KEY,

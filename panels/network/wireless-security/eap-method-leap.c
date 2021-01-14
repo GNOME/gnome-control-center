@@ -55,6 +55,7 @@ static gboolean
 validate (EAPMethod *parent, GError **error)
 {
 	EAPMethodLEAP *self = (EAPMethodLEAP *)parent;
+	NMSettingSecretFlags secret_flags;
 	const char *text;
 	gboolean ret = TRUE;
 
@@ -65,6 +66,12 @@ validate (EAPMethod *parent, GError **error)
 		ret = FALSE;
 	} else
 		widget_unset_error (GTK_WIDGET (self->username_entry));
+
+	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->password_entry));
+	if (secret_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED) {
+		widget_unset_error (GTK_WIDGET (self->password_entry));
+		return TRUE;
+	}
 
 	text = gtk_entry_get_text (self->password_entry);
 	if (!text || !strlen (text)) {

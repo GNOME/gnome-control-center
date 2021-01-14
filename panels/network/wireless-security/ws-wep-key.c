@@ -98,8 +98,15 @@ static gboolean
 validate (WirelessSecurity *security, GError **error)
 {
 	WirelessSecurityWEPKey *self = WS_WEP_KEY (security);
+	NMSettingSecretFlags secret_flags;
 	const char *key;
 	int i;
+
+	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->key_entry));
+	if (secret_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED) {
+		widget_unset_error (GTK_WIDGET (self->key_entry));
+		return TRUE;
+	}
 
 	key = gtk_entry_get_text (self->key_entry);
 	if (!key) {
