@@ -186,6 +186,9 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 
 	/* TLS private key */
 	password = gtk_entry_get_text (self->private_key_password_entry);
+	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->private_key_password_entry));
+	if (secret_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED)
+		password = NULL;
 
 	pk_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->private_key_button));
 	g_assert (pk_filename);
@@ -194,7 +197,6 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 		g_warning ("Couldn't read private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
 
 	/* Save 802.1X password flags to the connection */
-	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->private_key_password_entry));
 	nm_setting_set_secret_flags (NM_SETTING (s_8021x), NM_SETTING_802_1X_PRIVATE_KEY_PASSWORD,
 	                             secret_flags, NULL);
 
