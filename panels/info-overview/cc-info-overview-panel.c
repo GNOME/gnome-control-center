@@ -771,6 +771,28 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 }
 
 static gboolean
+does_gnome_software_allow_updates (void)
+{
+  const gchar *schema_id  = "org.gnome.software";
+  GSettingsSchemaSource *source;
+  g_autoptr(GSettingsSchema) schema;
+  g_autoptr(GSettings) settings;
+  
+  source = g_settings_schema_source_get_default ();
+
+  if (source == NULL)
+    return FALSE;
+
+  schema = g_settings_schema_source_lookup (source, schema_id, FALSE);
+
+  if (schema == NULL)
+    return FALSE;
+
+  settings = g_settings_new (schema_id);
+  return g_settings_get_boolean (settings, "allow-updates");
+}
+
+static gboolean
 does_gnome_software_exist (void)
 {
   g_autofree gchar *path = g_find_program_in_path ("gnome-software");
@@ -918,7 +940,7 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 
   g_resources_register (cc_info_overview_get_resource ());
 
-  if (!does_gnome_software_exist () && !does_gpk_update_viewer_exist ())
+  if ((!does_gnome_software_exist () || !does_gnome_software_allow_updates ()) && !does_gpk_update_viewer_exist ())
     gtk_widget_hide (GTK_WIDGET (self->software_updates_row));
 
   info_overview_panel_setup_overview (self);
