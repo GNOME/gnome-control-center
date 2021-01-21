@@ -208,11 +208,12 @@ sort_modes_by_area_desc (CcDisplayMode *a, CcDisplayMode *b)
   cc_display_mode_get_resolution (a, &wa, &ha);
   cc_display_mode_get_resolution (b, &wb, &hb);
 
-  /* Prefer wide screen if the size is equal */
-  res = wb*hb - wa*ha;
-  if (res == 0)
-    return wb - wa;
-  return res;
+  /* Sort first by width, then height.
+   * We used to sort by area, but that can be confusing. */
+  res = wb - wa;
+  if (res)
+    return res;
+  return hb - ha;
 }
 
 static gint
