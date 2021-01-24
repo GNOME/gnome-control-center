@@ -326,7 +326,6 @@ cc_subscription_register_dialog_init (CcSubscriptionRegisterDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->cancellable = g_cancellable_new ();
   self->state = DIALOG_STATE_REGISTER;
 
   gtk_entry_set_text (self->url_entry, SERVER_URL);
@@ -391,13 +390,27 @@ cc_subscription_register_dialog_class_init (CcSubscriptionRegisterDialogClass *k
   gtk_widget_class_bind_template_callback (widget_class, register_with_activation_keys_radio_toggled_cb);
 }
 
+static void
+on_dialog_cancelled (CcSubscriptionRegisterDialog *self)
+{
+  gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
+}
+
 CcSubscriptionRegisterDialog *
-cc_subscription_register_dialog_new (GDBusProxy *subscription_proxy)
+cc_subscription_register_dialog_new (GDBusProxy *subscription_proxy,
+                                     GCancellable *cancellable)
 {
   CcSubscriptionRegisterDialog *self;
 
   self = g_object_new (CC_TYPE_SUBSCRIPTION_REGISTER_DIALOG, "use-header-bar", TRUE, NULL);
   self->subscription_proxy = g_object_ref (subscription_proxy);
+  self->cancellable = g_object_ref (cancellable);
+
+  g_signal_connect_object (G_OBJECT (self->cancellable),
+                           "cancelled",
+                           G_CALLBACK (on_dialog_cancelled),
+                           self,
+                           G_CONNECT_SWAPPED);
 
   return self;
 }

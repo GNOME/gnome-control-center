@@ -27,6 +27,7 @@ G_BEGIN_DECLS
 #define CC_TYPE_SUBSCRIPTION_DETAILS_DIALOG (cc_subscription_details_dialog_get_type ())
 G_DECLARE_FINAL_TYPE (CcSubscriptionDetailsDialog, cc_subscription_details_dialog, CC, SUBSCRIPTION_DETAILS_DIALOG, GtkDialog)
 
-CcSubscriptionDetailsDialog *cc_subscription_details_dialog_new (GDBusProxy *subscription_proxy);
+CcSubscriptionDetailsDialog *cc_subscription_details_dialog_new (GDBusProxy   *subscription_proxy,
+                                                                 GCancellable *cancellable);
 
 G_END_DECLS

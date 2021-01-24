@@ -87,6 +87,7 @@ typedef struct
   char           *gnome_date;
 
   GCancellable   *cancellable;
+  GCancellable   *subscription_cancellable;
 
   /* Free space */
   GList          *primary_mounts;
@@ -848,14 +849,13 @@ on_details_button_clicked (GtkWidget           *widget,
   CcSubscriptionDetailsDialog *dialog;
   GtkWindow *toplevel;
 
-  dialog = cc_subscription_details_dialog_new (priv->subscription_proxy);
+  dialog = cc_subscription_details_dialog_new (priv->subscription_proxy,
+                                               priv->subscription_cancellable);
   toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
 
   gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (GTK_WIDGET (dialog));
-
-  reload_subscription_status (self);
 }
 
 static void
@@ -866,12 +866,27 @@ on_register_button_clicked (GtkWidget           *widget,
   CcSubscriptionRegisterDialog *dialog;
   GtkWindow *toplevel;
 
-  dialog = cc_subscription_register_dialog_new (priv->subscription_proxy);
+  dialog = cc_subscription_register_dialog_new (priv->subscription_proxy,
+                                                priv->subscription_cancellable);
   toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
   gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
 
   gtk_dialog_run (GTK_DIALOG (dialog));
   gtk_widget_destroy (GTK_WIDGET (dialog));
+}
+
+static void
+on_subscription_status_changed (GDBusProxy *proxy,
+                                GVariant *changed_properties,
+                                GStrv invalidated_properties,
+                                CcInfoOverviewPanel *self)
+{
+  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
+
+  g_cancellable_cancel (priv->subscription_cancellable);
+  g_object_unref (priv->subscription_cancellable);
+
+  priv->subscription_cancellable = g_cancellable_new ();
 
   reload_subscription_status (self);
 }
@@ -896,6 +911,9 @@ info_overview_panel_setup_subscriptions (CcInfoOverviewPanel *self)
       reload_subscription_status (self);
       return;
     }
+
+  g_signal_connect (priv->subscription_proxy, "g-properties-changed",
+                    G_CALLBACK (on_subscription_status_changed), self);
 
   g_signal_connect (priv->details_button, "clicked", G_CALLBACK (on_details_button_clicked), self);
   g_signal_connect (priv->register_button, "clicked", G_CALLBACK (on_register_button_clicked), self);
@@ -952,6 +970,12 @@ static void
 cc_info_overview_panel_finalize (GObject *object)
 {
   CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (CC_INFO_OVERVIEW_PANEL (object));
+
+  if (priv->subscription_cancellable)
+    {
+      g_cancellable_cancel (priv->subscription_cancellable);
+      g_clear_object (&priv->subscription_cancellable);
+    }
 
   if (priv->cancellable)
     {
@@ -1014,6 +1038,7 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
   g_resources_register (cc_info_get_resource ());
 
   priv->cancellable = g_cancellable_new ();
+  priv->subscription_cancellable = g_cancellable_new ();
 
   priv->graphics_data = get_graphics_data ();
 

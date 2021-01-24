@@ -338,7 +338,6 @@ cc_subscription_details_dialog_init (CcSubscriptionDetailsDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->cancellable = g_cancellable_new ();
   self->products = g_ptr_array_new_with_free_func ((GDestroyNotify) product_data_free);
   self->state = DIALOG_STATE_SHOW_DETAILS;
 }
@@ -392,13 +391,27 @@ cc_subscription_details_dialog_class_init (CcSubscriptionDetailsDialogClass *kla
   gtk_widget_class_bind_template_callback (widget_class, dismiss_notification);
 }
 
+static void
+on_dialog_cancelled (CcSubscriptionDetailsDialog *self)
+{
+  gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_CLOSE);
+}
+
 CcSubscriptionDetailsDialog *
-cc_subscription_details_dialog_new (GDBusProxy *subscription_proxy)
+cc_subscription_details_dialog_new (GDBusProxy *subscription_proxy,
+                                    GCancellable *cancellable)
 {
   CcSubscriptionDetailsDialog *self;
 
   self = g_object_new (CC_TYPE_SUBSCRIPTION_DETAILS_DIALOG, "use-header-bar", TRUE, NULL);
   self->subscription_proxy = g_object_ref (subscription_proxy);
+  self->cancellable = g_object_ref (cancellable);
+
+  g_signal_connect_object (G_OBJECT (self->cancellable),
+                           "cancelled",
+                           G_CALLBACK (on_dialog_cancelled),
+                           self,
+                           G_CONNECT_SWAPPED);
 
   load_installed_products (self);
   dialog_reload (self);
