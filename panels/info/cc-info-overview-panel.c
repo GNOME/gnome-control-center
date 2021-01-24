@@ -24,6 +24,7 @@
 #include "shell/cc-hostname-entry.h"
 
 #include "cc-info-resources.h"
+#include "cc-subscription-common.h"
 #include "cc-subscription-details-dialog.h"
 #include "cc-subscription-register-dialog.h"
 #include "info-cleanup.h"
@@ -800,35 +801,6 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   gtk_label_set_markup (GTK_LABEL (priv->graphics_label), priv->graphics_data->hardware_string);
 }
 
-typedef enum {
-  GSD_SUBMAN_SUBSCRIPTION_STATUS_UNKNOWN,
-  GSD_SUBMAN_SUBSCRIPTION_STATUS_VALID,
-  GSD_SUBMAN_SUBSCRIPTION_STATUS_INVALID,
-  GSD_SUBMAN_SUBSCRIPTION_STATUS_DISABLED,
-  GSD_SUBMAN_SUBSCRIPTION_STATUS_PARTIALLY_VALID,
-  GSD_SUBMAN_SUBSCRIPTION_STATUS_LAST
-} GsdSubmanSubscriptionStatus;
-
-static gboolean
-get_subscription_status (CcInfoOverviewPanel *self, GsdSubmanSubscriptionStatus *status)
-{
-  CcInfoOverviewPanelPrivate *priv = cc_info_overview_panel_get_instance_private (self);
-  g_autoptr(GVariant) status_variant = NULL;
-  guint32 u;
-
-  status_variant = g_dbus_proxy_get_cached_property (priv->subscription_proxy, "SubscriptionStatus");
-  if (!status_variant)
-    {
-      g_debug ("Unable to get SubscriptionStatus property");
-      return FALSE;
-    }
-
-  g_variant_get (status_variant, "u", &u);
-  *status = u;
-
-  return TRUE;
-}
-
 static void
 reload_subscription_status (CcInfoOverviewPanel *self)
 {
@@ -841,7 +813,7 @@ reload_subscription_status (CcInfoOverviewPanel *self)
       return;
     }
 
-  if (!get_subscription_status (self, &status))
+  if (!get_subscription_status (priv->subscription_proxy, &status))
     {
       gtk_widget_hide (priv->subscription_stack);
       return;
