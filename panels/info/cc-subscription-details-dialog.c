@@ -25,11 +25,14 @@
 #include <gtk/gtk.h>
 
 #include "cc-subscription-details-dialog.h"
+#include "cc-subscription-common.h"
 
 #define DBUS_TIMEOUT 300000 /* 5 minutes */
 
 typedef enum {
   DIALOG_STATE_SHOW_DETAILS,
+  DIALOG_STATE_SUBSCRIBE,
+  DIALOG_STATE_SUBSCRIBING,
   DIALOG_STATE_UNREGISTER,
   DIALOG_STATE_UNREGISTERING
 } DialogState;
@@ -46,16 +49,24 @@ struct _CcSubscriptionDetailsDialog
   /* template widgets */
   GtkButton    *back_button;
   GtkSpinner   *spinner;
+  GtkStack     *header_stack;
+  GtkButton    *header_subscribe_button;
   GtkButton    *header_unregister_button;
   GtkRevealer  *notification_revealer;
   GtkLabel     *error_label;
   GtkStack     *stack;
+  GtkStack     *status_stack;
   GtkBox       *products_box1;
   GtkBox       *products_box2;
+  GtkBox       *products_box3;
+  GtkButton    *subscribe_button;
+  GtkSeparator *separator;
   GtkButton    *unregister_button;
 };
 
 G_DEFINE_TYPE (CcSubscriptionDetailsDialog, cc_subscription_details_dialog, GTK_TYPE_DIALOG);
+
+static void reload_installed_products (CcSubscriptionDetailsDialog *self);
 
 typedef struct
 {
@@ -105,15 +116,17 @@ add_product_row (GtkGrid *product_grid, const gchar *name, const gchar *value, g
 }
 
 static GtkWidget *
-add_product (CcSubscriptionDetailsDialog *self, ProductData *product)
+add_product (CcSubscriptionDetailsDialog *self, ProductData *product, GsdSubmanSubscriptionStatus status)
 {
   GtkGrid *product_grid;
   const gchar *status_text;
 
   if (g_strcmp0 (product->status, "subscribed") == 0)
     status_text = _("Subscribed");
+  else if (status == GSD_SUBMAN_SUBSCRIPTION_STATUS_DISABLED)
+    status_text = _("No Specific Subscription");
   else
-    status_text = _("Not Subscribed (Not supported by a valid subscription.)");
+    status_text = _("Not Subscribed");
 
   product_grid = GTK_GRID (gtk_grid_new ());
   gtk_grid_set_column_spacing (product_grid, 12);
@@ -127,8 +140,12 @@ add_product (CcSubscriptionDetailsDialog *self, ProductData *product)
   add_product_row (product_grid, _("Version"), product->version, 2);
   add_product_row (product_grid, _("Arch"), product->arch, 3);
   add_product_row (product_grid, _("Status"), status_text, 4);
-  add_product_row (product_grid, _("Starts"), product->starts, 5);
-  add_product_row (product_grid, _("Ends"), product->ends, 6);
+
+  if (product->starts[0] != '\0' && product->ends[0] != '\0')
+    {
+      add_product_row (product_grid, _("Starts"), product->starts, 5);
+      add_product_row (product_grid, _("Ends"), product->ends, 6);
+    }
 
   return GTK_WIDGET (product_grid);
 }
@@ -146,6 +163,9 @@ static void
 dialog_reload (CcSubscriptionDetailsDialog *self)
 {
   GtkHeaderBar *header = GTK_HEADER_BAR (gtk_dialog_get_header_bar (GTK_DIALOG (self)));
+  GsdSubmanSubscriptionStatus status = GSD_SUBMAN_SUBSCRIPTION_STATUS_UNKNOWN;
+
+  reload_installed_products (self);
 
   switch (self->state)
     {
@@ -154,11 +174,39 @@ dialog_reload (CcSubscriptionDetailsDialog *self)
 
       gtk_window_set_title (GTK_WINDOW (self), _("Registration Details"));
       gtk_widget_set_sensitive (GTK_WIDGET (self->header_unregister_button), TRUE);
+      gtk_widget_set_sensitive (GTK_WIDGET (self->header_subscribe_button), TRUE);
 
       gtk_widget_hide (GTK_WIDGET (self->back_button));
-      gtk_widget_hide (GTK_WIDGET (self->header_unregister_button));
+      gtk_widget_hide (GTK_WIDGET (self->header_stack));
 
       gtk_stack_set_visible_child_name (self->stack, "show-details");
+      break;
+
+    case DIALOG_STATE_SUBSCRIBE:
+      gtk_header_bar_set_show_close_button (header, FALSE);
+      gtk_stack_set_visible_child_name (self->header_stack, "subscribe");
+      gtk_window_set_title (GTK_WINDOW (self), _("Subscribe System"));
+      gtk_widget_set_sensitive (GTK_WIDGET (self->header_subscribe_button), TRUE);
+
+      gtk_widget_show (GTK_WIDGET (self->back_button));
+
+      gtk_stack_set_visible_child_name (self->header_stack, "subscribe");
+      gtk_widget_show (GTK_WIDGET (self->header_stack));
+
+      gtk_stack_set_visible_child_name (self->stack, "subscribe");
+      break;
+
+    case DIALOG_STATE_SUBSCRIBING:
+      gtk_header_bar_set_show_close_button (header, FALSE);
+      gtk_window_set_title (GTK_WINDOW (self), _("Looking For Available Subscriptions…"));
+      gtk_widget_set_sensitive (GTK_WIDGET (self->header_subscribe_button), FALSE);
+
+      gtk_widget_show (GTK_WIDGET (self->back_button));
+
+      gtk_stack_set_visible_child_name (self->header_stack, "subscribe");
+      gtk_widget_show (GTK_WIDGET (self->header_stack));
+
+      gtk_stack_set_visible_child_name (self->stack, "subscribe");
       break;
 
     case DIALOG_STATE_UNREGISTER:
@@ -168,7 +216,9 @@ dialog_reload (CcSubscriptionDetailsDialog *self)
       gtk_widget_set_sensitive (GTK_WIDGET (self->header_unregister_button), TRUE);
 
       gtk_widget_show (GTK_WIDGET (self->back_button));
-      gtk_widget_show (GTK_WIDGET (self->header_unregister_button));
+
+      gtk_stack_set_visible_child_name (self->header_stack, "unregister");
+      gtk_widget_show (GTK_WIDGET (self->header_stack));
 
       gtk_stack_set_visible_child_name (self->stack, "unregister");
       break;
@@ -180,7 +230,9 @@ dialog_reload (CcSubscriptionDetailsDialog *self)
       gtk_widget_set_sensitive (GTK_WIDGET (self->header_unregister_button), FALSE);
 
       gtk_widget_show (GTK_WIDGET (self->back_button));
-      gtk_widget_show (GTK_WIDGET (self->header_unregister_button));
+
+      gtk_stack_set_visible_child_name (self->header_stack, "unregister");
+      gtk_widget_show (GTK_WIDGET (self->header_stack));
 
       gtk_stack_set_visible_child_name (self->stack, "unregister");
       break;
@@ -192,28 +244,68 @@ dialog_reload (CcSubscriptionDetailsDialog *self)
 
   remove_all_children (GTK_CONTAINER (self->products_box1));
   remove_all_children (GTK_CONTAINER (self->products_box2));
+  remove_all_children (GTK_CONTAINER (self->products_box3));
 
   if (self->products == NULL || self->products->len == 0)
     {
       /* the widgets are duplicate to allow sliding between two stack pages */
       GtkWidget *w1 = gtk_label_new (_("No installed products detected."));
       GtkWidget *w2 = gtk_label_new (_("No installed products detected."));
+      GtkWidget *w3 = gtk_label_new (_("No installed products detected."));
       gtk_widget_show (w1);
       gtk_widget_show (w2);
+      gtk_widget_show (w3);
       gtk_container_add (GTK_CONTAINER (self->products_box1), w1);
       gtk_container_add (GTK_CONTAINER (self->products_box2), w2);
+      gtk_container_add (GTK_CONTAINER (self->products_box3), w3);
+      gtk_stack_set_visible_child_name (self->status_stack, "no-installed-products");
+
+      gtk_widget_hide (GTK_WIDGET (self->subscribe_button));
+      gtk_widget_hide (GTK_WIDGET (self->separator));
       return;
     }
+
+  get_subscription_status (self->subscription_proxy, &status);
 
   for (guint i = 0; i < self->products->len; i++)
     {
       ProductData *product = g_ptr_array_index (self->products, i);
       /* the widgets are duplicate to allow sliding between two stack pages */
-      GtkWidget *w1 = add_product (self, product);
-      GtkWidget *w2 = add_product (self, product);
+      GtkWidget *w1 = add_product (self, product, status);
+      GtkWidget *w2 = add_product (self, product, status);
+      GtkWidget *w3 = add_product (self, product, status);
       gtk_container_add (GTK_CONTAINER (self->products_box1), w1);
       gtk_container_add (GTK_CONTAINER (self->products_box2), w2);
+      gtk_container_add (GTK_CONTAINER (self->products_box3), w3);
     }
+
+  switch (status)
+    {
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_VALID:
+      gtk_stack_set_visible_child_name (self->status_stack, "fully-subscribed");
+      gtk_widget_hide (GTK_WIDGET (self->subscribe_button));
+      break;
+
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_PARTIALLY_VALID:
+      gtk_stack_set_visible_child_name (self->status_stack, "partly-subscribed");
+      gtk_widget_show (GTK_WIDGET (self->subscribe_button));
+      break;
+
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_DISABLED:
+      gtk_stack_set_visible_child_name (self->status_stack, "subscription-not-needed");
+      gtk_widget_hide (GTK_WIDGET (self->subscribe_button));
+      break;
+
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_UNKNOWN:
+    default:
+      gtk_stack_set_visible_child_name (self->status_stack, "not-subscribed");
+      gtk_widget_show (GTK_WIDGET (self->subscribe_button));
+      break;
+    }
+
+  gtk_widget_set_visible (GTK_WIDGET (self->separator),
+                          gtk_widget_get_visible (GTK_WIDGET (self->subscribe_button)));
+
 }
 
 static ProductData *
@@ -236,7 +328,7 @@ parse_product_variant (GVariant *product_variant)
 }
 
 static void
-load_installed_products (CcSubscriptionDetailsDialog *self)
+reload_installed_products (CcSubscriptionDetailsDialog *self)
 {
   GVariantIter iter_array;
   GVariant *child;
@@ -258,6 +350,58 @@ load_installed_products (CcSubscriptionDetailsDialog *self)
       g_autoptr(GVariant) product_variant = g_steal_pointer (&child);
       g_ptr_array_add (self->products, parse_product_variant (product_variant));
     }
+}
+
+static void
+subscription_done_cb (GObject      *source_object,
+                      GAsyncResult *res,
+                      gpointer      user_data)
+{
+  CcSubscriptionDetailsDialog *self = (CcSubscriptionDetailsDialog *) user_data;
+  g_autoptr(GVariant) results = NULL;
+  g_autoptr(GError) error = NULL;
+
+  results = g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+                                      res,
+                                      &error);
+  if (results == NULL)
+    {
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        return;
+
+      g_dbus_error_strip_remote_error (error);
+      gtk_label_set_text (self->error_label, error->message);
+      gtk_revealer_set_reveal_child (self->notification_revealer, TRUE);
+
+      gtk_spinner_stop (self->spinner);
+
+      self->state = DIALOG_STATE_SUBSCRIBE;
+      dialog_reload (self);
+      return;
+    }
+
+  gtk_spinner_stop (self->spinner);
+
+  self->state = DIALOG_STATE_SHOW_DETAILS;
+  dialog_reload (self);
+}
+
+static void
+header_subscribe_button_clicked_cb (CcSubscriptionDetailsDialog *self)
+{
+  gtk_spinner_start (self->spinner);
+
+  self->state = DIALOG_STATE_SUBSCRIBING;
+  dialog_reload (self);
+
+  g_dbus_proxy_call (self->subscription_proxy,
+                     "Attach",
+                     NULL,
+                     G_DBUS_CALL_FLAGS_NONE,
+                     DBUS_TIMEOUT,
+                     self->cancellable,
+                     subscription_done_cb,
+                     self);
 }
 
 static void
@@ -321,6 +465,13 @@ back_button_clicked_cb (CcSubscriptionDetailsDialog *self)
 }
 
 static void
+subscribe_button_clicked_cb (CcSubscriptionDetailsDialog *self)
+{
+  self->state = DIALOG_STATE_SUBSCRIBE;
+  dialog_reload (self);
+}
+
+static void
 unregister_button_clicked_cb (CcSubscriptionDetailsDialog *self)
 {
   self->state = DIALOG_STATE_UNREGISTER;
@@ -377,16 +528,24 @@ cc_subscription_details_dialog_class_init (CcSubscriptionDetailsDialogClass *kla
 
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, back_button);
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, spinner);
+  gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, header_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, header_subscribe_button);
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, header_unregister_button);
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, notification_revealer);
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, error_label);
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, status_stack);
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, products_box1);
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, products_box2);
+  gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, products_box3);
+  gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, subscribe_button);
+  gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, separator);
   gtk_widget_class_bind_template_child (widget_class, CcSubscriptionDetailsDialog, unregister_button);
 
   gtk_widget_class_bind_template_callback (widget_class, back_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, header_subscribe_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, header_unregister_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, subscribe_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, unregister_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, dismiss_notification);
 }
@@ -413,7 +572,6 @@ cc_subscription_details_dialog_new (GDBusProxy *subscription_proxy,
                            self,
                            G_CONNECT_SWAPPED);
 
-  load_installed_products (self);
   dialog_reload (self);
 
   return self;

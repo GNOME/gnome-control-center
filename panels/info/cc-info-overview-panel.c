@@ -76,6 +76,7 @@ typedef struct
   GtkWidget      *register_button;
   GtkWidget      *updates_separator;
   GtkWidget      *updates_button;
+  GtkWidget      *updates_stack;
 
   /* Virtualisation labels */
   GtkWidget      *label8;
@@ -823,18 +824,31 @@ reload_subscription_status (CcInfoOverviewPanel *self)
   switch (status)
     {
     case GSD_SUBMAN_SUBSCRIPTION_STATUS_UNKNOWN:
-    case GSD_SUBMAN_SUBSCRIPTION_STATUS_INVALID:
-    case GSD_SUBMAN_SUBSCRIPTION_STATUS_DISABLED:
-    case GSD_SUBMAN_SUBSCRIPTION_STATUS_PARTIALLY_VALID:
       gtk_stack_set_visible_child_name (GTK_STACK (priv->subscription_stack), "not-registered");
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->updates_stack), "no-updates");
       gtk_widget_set_sensitive (priv->updates_button, FALSE);
       break;
-
-    case GSD_SUBMAN_SUBSCRIPTION_STATUS_VALID:
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_DISABLED:
       gtk_stack_set_visible_child_name (GTK_STACK (priv->subscription_stack), "registered");
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->updates_stack), "updates");
       gtk_widget_set_sensitive (priv->updates_button, TRUE);
       break;
-
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_VALID:
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_PARTIALLY_VALID:
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->subscription_stack), "registered");
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->updates_stack), "updates");
+      gtk_widget_set_sensitive (priv->updates_button, TRUE);
+      break;
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_INVALID:
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->subscription_stack), "registered");
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->updates_stack), "no-updates");
+      gtk_widget_set_sensitive (priv->updates_button, FALSE);
+      break;
+    case GSD_SUBMAN_SUBSCRIPTION_STATUS_NO_INSTALLED_PRODUCTS:
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->subscription_stack), "not-registered");
+      gtk_stack_set_visible_child_name (GTK_STACK (priv->updates_stack), "no-updates");
+      gtk_widget_set_sensitive (priv->updates_button, FALSE);
+      break;
     default:
       g_assert_not_reached ();
       break;
@@ -1021,6 +1035,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, register_button);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_separator);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_button);
+  gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, updates_stack);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label8);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, grid1);
   gtk_widget_class_bind_template_child_private (widget_class, CcInfoOverviewPanel, label18);

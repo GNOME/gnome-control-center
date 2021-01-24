@@ -33,21 +33,52 @@
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="header_unregister_button">
-            <property name="label" translatable="yes">_Unregister</property>
+          <object class="GtkStack" id="header_stack">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="can_default">True</property>
-            <property name="has_default">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
-            <property name="use_underline">True</property>
-            <property name="valign">center</property>
-            <signal name="clicked" handler="header_unregister_button_clicked_cb" object="CcSubscriptionDetailsDialog" swapped="yes"/>
-            <style>
-              <class name="text-button"/>
-              <class name="destructive-action"/>
-            </style>
+            <property name="can_focus">False</property>
+            <property name="transition-type">slide-left-right</property>
+            <child>
+              <object class="GtkButton" id="header_unregister_button">
+                <property name="label" translatable="yes">_Unregister</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_underline">True</property>
+                <property name="valign">center</property>
+                <signal name="clicked" handler="header_unregister_button_clicked_cb" object="CcSubscriptionDetailsDialog" swapped="yes"/>
+                <style>
+                  <class name="text-button"/>
+                  <class name="destructive-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="name">unregister</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="header_subscribe_button">
+                <property name="label" translatable="yes">_Subscribe</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_underline">True</property>
+                <property name="valign">center</property>
+                <signal name="clicked" handler="header_subscribe_button_clicked_cb" object="CcSubscriptionDetailsDialog" swapped="yes"/>
+                <style>
+                  <class name="text-button"/>
+                  <class name="suggested-action"/>
+                </style>
+              </object>
+              <packing>
+                <property name="name">subscribe</property>
+              </packing>
+            </child>
           </object>
           <packing>
             <property name="pack_type">end</property>
@@ -153,25 +184,186 @@
                     <property name="orientation">vertical</property>
                     <property name="margin_top">24</property>
                     <property name="margin_start">32</property>
+                    <property name="margin_end">12</property>
+                    <property name="margin_bottom">12</property>
+                    <child>
+                      <object class="GtkStack" id="status_stack">
+                         <property name="visible">True</property>
+                         <property name="can_focus">False</property>
+                         <child>
+                           <object class="GtkLabel">
+                             <property name="visible">True</property>
+                             <property name="can_focus">False</property>
+                             <property name="label" translatable="yes">This system is subscribed to receive software updates.</property>
+                             <property name="width_chars">45</property>
+                             <property name="max_width_chars">45</property>
+                             <property name="xalign">0</property>
+                             <property name="halign">start</property>
+                             <property name="wrap">True</property>
+                             <style>
+                               <class name="dim-label"/>
+                             </style>
+                           </object>
+                           <packing>
+                             <property name="name">fully-subscribed</property>
+                           </packing>
+                         </child>
+                         <child>
+                           <object class="GtkLabel">
+                             <property name="visible">True</property>
+                             <property name="can_focus">False</property>
+                             <property name="label" translatable="yes">This system lacks subscriptions to receive updates for some installed software.</property>
+                             <property name="width_chars">45</property>
+                             <property name="max_width_chars">45</property>
+                             <property name="xalign">0</property>
+                             <property name="halign">start</property>
+                             <property name="wrap">True</property>
+                             <style>
+                               <class name="dim-label"/>
+                             </style>
+                           </object>
+                           <packing>
+                             <property name="name">partly-subscribed</property>
+                           </packing>
+                         </child>
+                         <child>
+                           <object class="GtkLabel">
+                             <property name="visible">True</property>
+                             <property name="can_focus">False</property>
+                             <property name="label" translatable="yes">This system lacks subscriptions to receive software updates.</property>
+                             <property name="width_chars">45</property>
+                             <property name="max_width_chars">45</property>
+                             <property name="xalign">0</property>
+                             <property name="halign">start</property>
+                             <property name="wrap">True</property>
+                             <style>
+                               <class name="dim-label"/>
+                             </style>
+                           </object>
+                           <packing>
+                             <property name="name">not-subscribed</property>
+                           </packing>
+                         </child>
+                         <child>
+                           <object class="GtkLabel">
+                             <property name="visible">True</property>
+                             <property name="can_focus">False</property>
+                             <property name="label" translatable="yes">This system is registered to receive software updates.</property>
+                             <property name="width_chars">45</property>
+                             <property name="max_width_chars">45</property>
+                             <property name="xalign">0</property>
+                             <property name="halign">start</property>
+                             <property name="wrap">True</property>
+                             <style>
+                               <class name="dim-label"/>
+                             </style>
+                           </object>
+                           <packing>
+                             <property name="name">subscription-not-needed</property>
+                           </packing>
+                         </child>
+                         <child>
+                           <object class="GtkLabel">
+                             <property name="visible">True</property>
+                             <property name="can_focus">False</property>
+                             <property name="label" translatable="yes">This system has no supported software installed.</property>
+                             <property name="width_chars">45</property>
+                             <property name="max_width_chars">45</property>
+                             <property name="xalign">0</property>
+                             <property name="halign">start</property>
+                             <property name="wrap">True</property>
+                             <style>
+                               <class name="dim-label"/>
+                             </style>
+                           </object>
+                           <packing>
+                             <property name="name">no-installed-products</property>
+                           </packing>
+                         </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="products_box1">
+                        <property name="visible">True</property>
+                        <property name="orientation">vertical</property>
+                        <property name="hexpand">True</property>
+                        <property name="margin_top">6</property>
+                        <property name="margin_bottom">6</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">12</property>
+                        <property name="halign">end</property>
+                        <child>
+                          <object class="GtkButton" id="unregister_button">
+                            <property name="label" translatable="yes">_Unregister…</property>
+                            <property name="can_focus">True</property>
+                            <property name="use_underline">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="halign">end</property>
+                            <property name="visible">True</property>
+                            <signal name="clicked" handler="unregister_button_clicked_cb" object="CcSubscriptionDetailsDialog" swapped="yes"/>
+                            <style>
+                              <class name="text-button"/>
+                              <class name="destructive-action"/>
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkSeparator" id="separator">
+                            <property name="visible">True</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="subscribe_button">
+                            <property name="label" translatable="yes">_Subscribe…</property>
+                            <property name="can_focus">True</property>
+                            <property name="use_underline">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="use_action_appearance">False</property>
+                            <property name="halign">end</property>
+                            <property name="visible">True</property>
+                            <signal name="clicked" handler="subscribe_button_clicked_cb" object="CcSubscriptionDetailsDialog" swapped="yes"/>
+                            <style>
+                              <class name="text-button"/>
+                              <class name="suggested-action"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">show-details</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="visible">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="margin_top">24</property>
+                    <property name="margin_start">32</property>
                     <property name="margin_end">32</property>
                     <property name="margin_bottom">20</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Registration with Red Hat allows this system to receive software updates.</property>
+                        <property name="label" translatable="yes">Subscribing with Red Hat will allow this system to receive software updates.</property>
                         <property name="width_chars">45</property>
                         <property name="max_width_chars">45</property>
                         <property name="xalign">0</property>
                         <property name="halign">start</property>
                         <property name="wrap">True</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox" id="products_box1">
+                      <object class="GtkBox" id="products_box2">
                         <property name="visible">True</property>
                         <property name="orientation">vertical</property>
                         <property name="margin_top">6</property>
@@ -179,24 +371,9 @@
                         <property name="hexpand">True</property>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkButton" id="unregister_button">
-                        <property name="label" translatable="yes">_Unregister…</property>
-                        <property name="can_focus">True</property>
-                        <property name="use_underline">True</property>
-                        <property name="receives_default">True</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="halign">end</property>
-                        <property name="visible">True</property>
-                        <signal name="clicked" handler="unregister_button_clicked_cb" object="CcSubscriptionDetailsDialog" swapped="yes"/>
-                        <style>
-                          <class name="text-button"/>
-                        </style>
-                      </object>
-                    </child>
                   </object>
                   <packing>
-                    <property name="name">show-details</property>
+                    <property name="name">subscribe</property>
                   </packing>
                 </child>
                 <child>
@@ -220,7 +397,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkBox" id="products_box2">
+                      <object class="GtkBox" id="products_box3">
                         <property name="visible">True</property>
                         <property name="orientation">vertical</property>
                         <property name="margin_top">6</property>
