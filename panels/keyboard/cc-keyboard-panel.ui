@@ -36,14 +36,34 @@
                 <property name="spacing">12</property>
                 <property name="hexpand">True</property>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Input Sources</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Input Sources</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Includes keyboard layouts and input methods.</property>
+                        <property name="wrap">True</property>
+                        <property name="max-width-chars">50</property>
+                        <style>
+                          <class name="dim-label" />
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>
@@ -59,14 +79,33 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Input Source Switching</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Input Source Switching</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="input_switch_description">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="wrap">True</property>
+                        <property name="max-width-chars">50</property>
+                        <style>
+                          <class name="dim-label" />
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>
@@ -130,34 +169,39 @@
                             </child>
                           </object>
                         </child>
-                        <child>
-                          <object class="HdyActionRow">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="selectable">False</property>
-                            <property name="title" translatable="yes">Keyboard Shortcut</property>
-                            <property name="subtitle" translatable="yes">This can be changed in Customize Shortcuts</property>
-                            <child>
-                              <object class="GtkLabel" id="value_input_switch">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                              </object>
-                            </child>
-			  </object>
-			</child>
                       </object>
                     </child>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkBox">
                     <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Type Special Characters</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Special Character Entry</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Methods for entering symbols and letter variants using the keyboard.</property>
+                        <property name="wrap">True</property>
+                        <property name="max-width-chars">50</property>
+                        <style>
+                          <class name="dim-label" />
+                        </style>
+                      </object>
+                    </child>
                   </object>
                 </child>
                 <child>
@@ -177,7 +221,6 @@
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
                             <property name="title" translatable="yes">Alternate Characters Key</property>
-                            <property name="subtitle" translatable="yes">Hold down and type to enter different characters</property>
                             <property name="activatable">True</property>
                             <child>
                               <object class="GtkLabel" id="value_alternate_chars">
@@ -250,7 +293,7 @@
                           <object class="HdyActionRow" id="common_shortcuts_row">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="title" translatable="yes">Customize Shortcuts</property>
+                            <property name="title" translatable="yes">View and Customize Shortcuts</property>
                             <property name="activatable">True</property>
                             <child>
                               <object class="GtkImage">
