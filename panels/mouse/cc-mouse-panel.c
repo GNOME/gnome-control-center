@@ -62,7 +62,6 @@ struct _CcMousePanel
   GtkSwitch         *two_finger_scrolling_switch;
 
   GSettings         *mouse_settings;
-  GSettings         *gsd_mouse_settings;
   GSettings         *touchpad_settings;
 
   gboolean           have_mouse;
@@ -340,7 +339,6 @@ cc_mouse_panel_dispose (GObject *object)
   CcMousePanel *self = CC_MOUSE_PANEL (object);
 
   g_clear_object (&self->mouse_settings);
-  g_clear_object (&self->gsd_mouse_settings);
   g_clear_object (&self->touchpad_settings);
   g_clear_object (&self->right_gesture);
   g_clear_object (&self->left_gesture);
@@ -387,7 +385,6 @@ cc_mouse_panel_init (CcMousePanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->mouse_settings = g_settings_new ("org.gnome.desktop.peripherals.mouse");
-  self->gsd_mouse_settings = g_settings_new ("org.gnome.settings-daemon.peripherals.mouse");
   self->touchpad_settings = g_settings_new ("org.gnome.desktop.peripherals.touchpad");
 
   device_manager = gsd_device_manager_get ();
