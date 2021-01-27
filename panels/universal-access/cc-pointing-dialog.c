@@ -25,7 +25,6 @@
 #define KEY_DWELL_TIME               "dwell-time"
 #define KEY_DWELL_THRESHOLD          "dwell-threshold"
 
-#define GSD_MOUSE_SETTINGS           "org.gnome.settings-daemon.peripherals.mouse"
 #define KEY_DOUBLE_CLICK_DELAY       "double-click"
 
 struct _CcPointingDialog
@@ -42,7 +41,6 @@ struct _CcPointingDialog
   GtkSwitch *secondary_click_switch;
 
   GSettings *mouse_settings;
-  GSettings *gsd_mouse_settings;
 };
 
 G_DEFINE_TYPE (CcPointingDialog, cc_pointing_dialog, GTK_TYPE_DIALOG);
@@ -53,7 +51,6 @@ cc_pointing_dialog_dispose (GObject *object)
   CcPointingDialog *self = CC_POINTING_DIALOG (object);
 
   g_clear_object (&self->mouse_settings);
-  g_clear_object (&self->gsd_mouse_settings);
 
   G_OBJECT_CLASS (cc_pointing_dialog_parent_class)->dispose (object);
 }
@@ -84,7 +81,6 @@ cc_pointing_dialog_init (CcPointingDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->mouse_settings = g_settings_new (MOUSE_SETTINGS);
-  self->gsd_mouse_settings = g_settings_new (GSD_MOUSE_SETTINGS);
 
   /* simulated secondary click */
   g_settings_bind (self->mouse_settings, KEY_SECONDARY_CLICK_ENABLED,
