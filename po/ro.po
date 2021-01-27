@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-12-19 11:06+0000\n"
-"PO-Revision-Date: 2020-12-19 15:53+0200\n"
+"POT-Creation-Date: 2021-01-27 13:50+0000\n"
+"PO-Revision-Date: 2021-01-27 16:40+0100\n"
 "Last-Translator: Florentina Mușat <florentina.musat.28@gmail.com>\n"
 "Language-Team: Romanian Gnome Team\n"
 "Language: ro\n"
@@ -47,7 +47,7 @@ msgid "Session Bus"
 msgstr "Magistrala sesiunilor"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:1790 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:1789 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Dispozitive"
@@ -209,8 +209,8 @@ msgstr "Cameră"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
 #: panels/keyboard/cc-xkb-modifier-dialog.c:355
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
-#: panels/user-accounts/cc-user-panel.c:865
-#: panels/user-accounts/cc-user-panel.c:957
+#: panels/user-accounts/cc-user-panel.c:843
+#: panels/user-accounts/cc-user-panel.c:933
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Dezactivat"
@@ -367,35 +367,35 @@ msgstr "Selectați o fotografie"
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
 #: panels/display/cc-display-panel.c:1003
-#: panels/info-overview/cc-info-overview-panel.ui:234
+#: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
-#: panels/network/cc-wifi-panel.c:865
+#: panels/network/cc-wifi-panel.c:866
 #: panels/network/connection-editor/connection-editor.ui:17
 #: panels/network/connection-editor/vpn-helpers.c:176
 #: panels/network/connection-editor/vpn-helpers.c:299
 #: panels/network/net-device-wifi.c:854
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:251
+#: panels/printers/pp-details-dialog.c:255
 #: panels/region/cc-format-chooser.ui:28
 #: panels/search/cc-search-locations-dialog.c:639
 #: panels/sharing/cc-sharing-panel.c:396 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:107
-#: panels/user-accounts/cc-avatar-chooser.c:235
+#: panels/user-accounts/cc-avatar-chooser.c:105
+#: panels/user-accounts/cc-avatar-chooser.c:223
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:652
-#: panels/user-accounts/cc-user-panel.c:670
+#: panels/user-accounts/cc-user-panel.c:633
+#: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
 msgid "_Cancel"
 msgstr "_Renunță"
 
 #: panels/background/cc-background-chooser.c:349
 #: panels/network/connection-editor/vpn-helpers.c:177
-#: panels/printers/pp-details-dialog.c:252
+#: panels/printers/pp-details-dialog.c:256
 #: panels/sharing/cc-sharing-panel.c:397
-#: panels/user-accounts/cc-avatar-chooser.c:236
+#: panels/user-accounts/cc-avatar-chooser.c:224
 msgid "_Open"
 msgstr "_Deschide"
 
@@ -477,7 +477,7 @@ msgstr "Opriți modul avion pentru a putea activa Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1596
+#: panels/printers/pp-new-printer-dialog.c:1595
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1801,11 +1801,11 @@ msgstr ""
 "redshift;color;sunset;sunrise;Panou;Proiector;Ecran;Rezoluție;Lumină;"
 "Albastru;culoare;apus;răsărit;"
 
-#: panels/info-overview/cc-info-overview-panel.c:416
-#: panels/info-overview/cc-info-overview-panel.c:431
-#: panels/info-overview/cc-info-overview-panel.c:443
-#: panels/info-overview/cc-info-overview-panel.c:489
-#: panels/info-overview/cc-info-overview-panel.c:519
+#: panels/info-overview/cc-info-overview-panel.c:417
+#: panels/info-overview/cc-info-overview-panel.c:432
+#: panels/info-overview/cc-info-overview-panel.c:444
+#: panels/info-overview/cc-info-overview-panel.c:490
+#: panels/info-overview/cc-info-overview-panel.c:520
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -1813,32 +1813,32 @@ msgstr "Necunoscut"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:451
+#: panels/info-overview/cc-info-overview-panel.c:452
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; ID-ul compilării: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:466
+#: panels/info-overview/cc-info-overview-panel.c:467
 #, c-format
 msgid "64-bit"
 msgstr "64-biți"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:469
+#: panels/info-overview/cc-info-overview-panel.c:470
 #, c-format
 msgid "32-bit"
 msgstr "32-biți"
 
-#: panels/info-overview/cc-info-overview-panel.c:675
+#: panels/info-overview/cc-info-overview-panel.c:727
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:679
+#: panels/info-overview/cc-info-overview-panel.c:731
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:681
+#: panels/info-overview/cc-info-overview-panel.c:733
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Necunoscut"
@@ -1848,55 +1848,59 @@ msgid "Device Name"
 msgstr "Nume dispozitiv"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
+msgid "Hardware Model"
+msgstr "Model hardware"
+
+#: panels/info-overview/cc-info-overview-panel.ui:83
 msgid "Memory"
 msgstr "Memorie"
 
-#: panels/info-overview/cc-info-overview-panel.ui:83
+#: panels/info-overview/cc-info-overview-panel.ui:92
 msgid "Processor"
 msgstr "Procesor"
 
-#: panels/info-overview/cc-info-overview-panel.ui:92
+#: panels/info-overview/cc-info-overview-panel.ui:101
 msgid "Graphics"
 msgstr "Grafică"
 
-#: panels/info-overview/cc-info-overview-panel.ui:101
+#: panels/info-overview/cc-info-overview-panel.ui:110
 msgid "Disk Capacity"
 msgstr "Capacitate disc"
 
-#: panels/info-overview/cc-info-overview-panel.ui:102
+#: panels/info-overview/cc-info-overview-panel.ui:111
 msgid "Calculating…"
 msgstr "Se calculează…"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:124
+#: panels/info-overview/cc-info-overview-panel.ui:133
 msgid "OS Name"
 msgstr "Nume SO"
 
-#: panels/info-overview/cc-info-overview-panel.ui:133
+#: panels/info-overview/cc-info-overview-panel.ui:142
 msgid "OS Type"
 msgstr "Tip de SO"
 
-#: panels/info-overview/cc-info-overview-panel.ui:142
+#: panels/info-overview/cc-info-overview-panel.ui:151
 msgid "GNOME Version"
 msgstr "Versiune GNOME"
 
-#: panels/info-overview/cc-info-overview-panel.ui:152
+#: panels/info-overview/cc-info-overview-panel.ui:161
 msgid "Windowing System"
 msgstr "Sistem de ferestre"
 
-#: panels/info-overview/cc-info-overview-panel.ui:160
+#: panels/info-overview/cc-info-overview-panel.ui:169
 msgid "Virtualization"
 msgstr "Virtualizare"
 
-#: panels/info-overview/cc-info-overview-panel.ui:169
+#: panels/info-overview/cc-info-overview-panel.ui:178
 msgid "Software Updates"
 msgstr "Actualizări software"
 
-#: panels/info-overview/cc-info-overview-panel.ui:190
+#: panels/info-overview/cc-info-overview-panel.ui:199
 msgid "Rename Device"
 msgstr "Redenumește dispozitivul"
 
-#: panels/info-overview/cc-info-overview-panel.ui:207
+#: panels/info-overview/cc-info-overview-panel.ui:216
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -1904,7 +1908,7 @@ msgstr ""
 "Numele dispozitivului este utilizat pentru a identifica acest dispozitiv "
 "când este vizualizat prin rețea, sau la asocierea dispozitivelor Bluetooth."
 
-#: panels/info-overview/cc-info-overview-panel.ui:225
+#: panels/info-overview/cc-info-overview-panel.ui:234
 msgid "_Rename"
 msgstr "_Redenumește"
 
@@ -2358,7 +2362,7 @@ msgstr "Stabilește scurtătură"
 msgid "Enter new shortcut to change %s."
 msgstr "Introduceți o scurtătură nouă pentru a modifica %s."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:988
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:987
 msgid "Add Custom Shortcut"
 msgstr "Adaugă scurtățură personalizată"
 
@@ -2718,35 +2722,35 @@ msgstr "Derulare pe margini"
 msgid "Test Your _Settings"
 msgstr "Te_stează configurările"
 
-#: panels/mouse/cc-mouse-test.c:132 panels/mouse/cc-mouse-test.ui:25
+#: panels/mouse/cc-mouse-test.c:131 panels/mouse/cc-mouse-test.ui:25
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Încercați să efectuați clic, clic dublu și derulare"
 
-#: panels/mouse/cc-mouse-test.c:137
+#: panels/mouse/cc-mouse-test.c:136
 msgid "Five clicks, GEGL time!"
 msgstr "Cinci clicuri, e timpul pentru GEGL!"
 
-#: panels/mouse/cc-mouse-test.c:142
+#: panels/mouse/cc-mouse-test.c:141
 msgid "Double click, primary button"
 msgstr "Dublu clic, buton principal"
 
-#: panels/mouse/cc-mouse-test.c:142
+#: panels/mouse/cc-mouse-test.c:141
 msgid "Single click, primary button"
 msgstr "Un clic, buton principal"
 
-#: panels/mouse/cc-mouse-test.c:145
+#: panels/mouse/cc-mouse-test.c:144
 msgid "Double click, middle button"
 msgstr "Dublu clic, buton mijloc"
 
-#: panels/mouse/cc-mouse-test.c:145
+#: panels/mouse/cc-mouse-test.c:144
 msgid "Single click, middle button"
 msgstr "Un clic, buton mijloc"
 
-#: panels/mouse/cc-mouse-test.c:148
+#: panels/mouse/cc-mouse-test.c:147
 msgid "Double click, secondary button"
 msgstr "Dublu clic, buton secundar"
 
-#: panels/mouse/cc-mouse-test.c:148
+#: panels/mouse/cc-mouse-test.c:147
 msgid "Single click, secondary button"
 msgstr "Un clic, buton secundar"
 
@@ -2767,7 +2771,7 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
 "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;Clic;Derulare;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:359
+#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ups, ceva nu a funcționat corect. Vă rugăm să contactați distribuitorul de "
@@ -2831,7 +2835,7 @@ msgid "Options…"
 msgstr "Opțiuni…"
 
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
-#: panels/network/cc-wifi-hotspot-dialog.c:132
+#: panels/network/cc-wifi-hotspot-dialog.c:134
 #, c-format
 msgid ""
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
@@ -2840,11 +2844,11 @@ msgstr ""
 "Activarea hotspot-ului vă va deconecta de la %s, și nu va fi posibil să "
 "accesați internetul prin Wi-Fi."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:248
+#: panels/network/cc-wifi-hotspot-dialog.c:265
 msgid "Must have a minimum of 8 characters"
 msgstr "Trebuie să aibă minimum 8 caractere"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:458
+#: panels/network/cc-wifi-hotspot-dialog.c:479
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Porinți hotspot Wi-Fi?"
 
@@ -2883,61 +2887,61 @@ msgstr "Generează automat o parolă"
 msgid "_Turn On"
 msgstr "_Pornește"
 
-#: panels/network/cc-wifi-panel.c:543
+#: panels/network/cc-wifi-panel.c:544
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:53
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:863
+#: panels/network/cc-wifi-panel.c:864
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Oprire hotspot și deconectare utilizatori?"
 
-#: panels/network/cc-wifi-panel.c:866
+#: panels/network/cc-wifi-panel.c:867
 msgid "_Stop Hotspot"
 msgstr "Oprire hot_spot"
 
-#: panels/network/cc-wifi-panel.ui:54
+#: panels/network/cc-wifi-panel.ui:46
 msgid "Airplane Mode"
 msgstr "Modul avion"
 
-#: panels/network/cc-wifi-panel.ui:70
+#: panels/network/cc-wifi-panel.ui:47
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "Dezactivează Wi-Fi, Bluetooth și conexiunea de date mobile"
 
-#: panels/network/cc-wifi-panel.ui:139
+#: panels/network/cc-wifi-panel.ui:87
 msgid "No Wi-Fi Adapter Found"
 msgstr "Nu au fost găsit niciun adaptor Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:151
+#: panels/network/cc-wifi-panel.ui:99
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Asigurați-vă că aveți un adaptor Wi-Fi conectat și pornit"
 
-#: panels/network/cc-wifi-panel.ui:186
+#: panels/network/cc-wifi-panel.ui:134
 msgid "Airplane Mode On"
 msgstr "Modul avion este pornit"
 
-#: panels/network/cc-wifi-panel.ui:198
+#: panels/network/cc-wifi-panel.ui:146
 msgid "Turn off to use Wi-Fi"
 msgstr "Opriți pentru a utiliza Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:236
+#: panels/network/cc-wifi-panel.ui:184
 msgid "Wi-Fi Hotspot Active"
 msgstr "Hotspot Wi-Fi activ"
 
-#: panels/network/cc-wifi-panel.ui:247
+#: panels/network/cc-wifi-panel.ui:195
 msgid "Mobile devices can scan the QR code to connect."
 msgstr "Dispozitivele mobile pot scana codul QR pentru a se conecta."
 
-#: panels/network/cc-wifi-panel.ui:257
+#: panels/network/cc-wifi-panel.ui:205
 msgid "Turn Off Hotspot…"
 msgstr "Oprește hotspot-ul…"
 
-#: panels/network/cc-wifi-panel.ui:279
+#: panels/network/cc-wifi-panel.ui:227
 msgid "Visible Networks"
 msgstr "Rețele vizibile"
 
-#: panels/network/cc-wifi-panel.ui:348
+#: panels/network/cc-wifi-panel.ui:296
 msgid "NetworkManager needs to be running"
 msgstr "NetworkManager trebuie să funcționeze"
 
@@ -3540,11 +3544,11 @@ msgstr "Dispozitivul wireless nu suporta modul Hotspot"
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:266
 #: panels/power/cc-power-panel.c:1133 panels/power/cc-power-panel.c:1144
-#: panels/universal-access/cc-ua-panel.c:329
-#: panels/universal-access/cc-ua-panel.c:604
-#: panels/universal-access/cc-ua-panel.c:614
-#: panels/universal-access/cc-ua-panel.c:626
-#: panels/universal-access/cc-ua-panel.c:669
+#: panels/universal-access/cc-ua-panel.c:324
+#: panels/universal-access/cc-ua-panel.c:599
+#: panels/universal-access/cc-ua-panel.c:609
+#: panels/universal-access/cc-ua-panel.c:621
+#: panels/universal-access/cc-ua-panel.c:664
 #: panels/universal-access/cc-ua-panel.ui:300
 #: panels/universal-access/cc-ua-panel.ui:346
 #: panels/universal-access/cc-ua-panel.ui:392
@@ -3685,7 +3689,7 @@ msgstr "Negestionat"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:950
+#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:926
 msgid "Unavailable"
 msgstr "Indisponibil"
 
@@ -4361,11 +4365,11 @@ msgstr "Arată c_onținutul mesajelor pe ecranul blocat"
 
 #: panels/notifications/cc-notifications-panel.c:266
 #: panels/power/cc-power-panel.c:1139 panels/power/cc-power-panel.c:1146
-#: panels/universal-access/cc-ua-panel.c:329
-#: panels/universal-access/cc-ua-panel.c:604
-#: panels/universal-access/cc-ua-panel.c:614
-#: panels/universal-access/cc-ua-panel.c:626
-#: panels/universal-access/cc-ua-panel.c:669
+#: panels/universal-access/cc-ua-panel.c:324
+#: panels/universal-access/cc-ua-panel.c:599
+#: panels/universal-access/cc-ua-panel.c:609
+#: panels/universal-access/cc-ua-panel.c:621
+#: panels/universal-access/cc-ua-panel.c:664
 msgid "On"
 msgstr "Pornit"
 
@@ -4585,7 +4589,7 @@ msgstr "Dispozitiv de intrare pentru jocuri"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:413
-#: panels/power/cc-power-panel.c:1780
+#: panels/power/cc-power-panel.c:1779
 msgid "Battery"
 msgstr "Baterie"
 
@@ -4635,15 +4639,15 @@ msgstr "Alimentat de la rețea"
 msgid "Automatic suspend"
 msgstr "Suspendare automată"
 
-#: panels/power/cc-power-panel.c:1800
+#: panels/power/cc-power-panel.c:1799
 msgid "Power Mode"
 msgstr "Modul de alimentare"
 
-#: panels/power/cc-power-panel.c:1810
+#: panels/power/cc-power-panel.c:1809
 msgid "Power Saving"
 msgstr "Economisire de energie"
 
-#: panels/power/cc-power-panel.c:1818
+#: panels/power/cc-power-panel.c:1817
 msgid "Suspend & Power Button"
 msgstr "Buton de suspendare și oprire"
 
@@ -4786,40 +4790,40 @@ msgstr "Pe _baterie"
 msgid "Delay"
 msgstr "Întârziere"
 
-#: panels/power/cc-power-profile-row.c:67
+#: panels/power/cc-power-profile-row.c:62
 msgid "Lap detected: performance mode unavailable"
 msgstr "Etapă detectată: modul de performanță nedisponibil"
 
-#: panels/power/cc-power-profile-row.c:69
+#: panels/power/cc-power-profile-row.c:64
 msgid "High hardware temperature: performance mode unavailable"
 msgstr "Temperatură de hardware ridicată: modul de performanță nedisponibil"
 
-#: panels/power/cc-power-profile-row.c:70
+#: panels/power/cc-power-profile-row.c:65
 msgid "Performance mode unavailable"
 msgstr "Modul de performanță nedisponibil"
 
-#: panels/power/cc-power-profile-row.c:92
-#: panels/power/cc-power-profile-row.c:240
+#: panels/power/cc-power-profile-row.c:87
+#: panels/power/cc-power-profile-row.c:187
 msgid "High performance and power usage."
 msgstr "Performanță și consum de energie ridicate."
 
-#: panels/power/cc-power-profile-row.c:239
+#: panels/power/cc-power-profile-row.c:186
 msgid "Performance"
 msgstr "Performanță"
 
-#: panels/power/cc-power-profile-row.c:245
+#: panels/power/cc-power-profile-row.c:192
 msgid "Balanced Power"
 msgstr "Consum echilibrat"
 
-#: panels/power/cc-power-profile-row.c:246
+#: panels/power/cc-power-profile-row.c:193
 msgid "Standard performance and power usage."
 msgstr "Performanță și consum de energie standard."
 
-#: panels/power/cc-power-profile-row.c:251
+#: panels/power/cc-power-profile-row.c:198
 msgid "Power Saver"
 msgstr "Economizor de energie"
 
-#: panels/power/cc-power-profile-row.c:252
+#: panels/power/cc-power-profile-row.c:199
 msgid "Reduced performance and power usage."
 msgstr "Performanță și consum de energie reduse."
 
@@ -4925,7 +4929,7 @@ msgstr ""
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
-#: panels/printers/pp-details-dialog.c:367
+#: panels/printers/pp-details-dialog.c:371
 #, c-format
 msgid "%s Details"
 msgstr "Detalii %s"
@@ -4934,11 +4938,11 @@ msgstr "Detalii %s"
 msgid "No suitable driver found"
 msgstr "Nu s-a găsit un driver potrivit"
 
-#: panels/printers/pp-details-dialog.c:248
+#: panels/printers/pp-details-dialog.c:252
 msgid "Select PPD File"
 msgstr "Specificați fișierul PPD"
 
-#: panels/printers/pp-details-dialog.c:257
+#: panels/printers/pp-details-dialog.c:261
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4952,7 +4956,7 @@ msgstr "Locație"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:247
+#: panels/printers/pp-ppd-selection-dialog.c:239
 msgid "Driver"
 msgstr "Driver"
 
@@ -4977,7 +4981,7 @@ msgid "Select Printer Driver"
 msgstr "Selectați driverul imprimantei"
 
 #: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:109
+#: panels/user-accounts/cc-avatar-chooser.c:107
 msgid "Select"
 msgstr "Selectează"
 
@@ -5146,39 +5150,39 @@ msgstr ""
 "Introduceți numele de utilizator și parola pentru a vedea imprimantele "
 "disponibile pe %s."
 
-#: panels/printers/pp-new-printer-dialog.c:791
+#: panels/printers/pp-new-printer-dialog.c:790
 msgid "Searching for Printers"
 msgstr "Se caută imprimante"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1579
+#: panels/printers/pp-new-printer-dialog.c:1578
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1584
+#: panels/printers/pp-new-printer-dialog.c:1583
 msgid "Serial Port"
 msgstr "Port serial"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1591
+#: panels/printers/pp-new-printer-dialog.c:1590
 msgid "Parallel Port"
 msgstr "Port paralel"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1633
+#: panels/printers/pp-new-printer-dialog.c:1632
 #, c-format
 msgid "Location: %s"
 msgstr "Locație: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1638
+#: panels/printers/pp-new-printer-dialog.c:1637
 #, c-format
 msgid "Address: %s"
 msgstr "Adresă: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1665
+#: panels/printers/pp-new-printer-dialog.c:1664
 msgid "Server requires authentication"
 msgstr "Serverul necesită autentificare"
 
@@ -5319,7 +5323,7 @@ msgid "No pre-filtering"
 msgstr "Fără pre-filtrare"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:230
+#: panels/printers/pp-ppd-selection-dialog.c:223
 msgid "Manufacturer"
 msgstr "Producător"
 
@@ -5576,7 +5580,7 @@ msgstr "Unități de măsură"
 msgid "Paper"
 msgstr "Hârtie"
 
-#: panels/region/cc-region-panel.c:732
+#: panels/region/cc-region-panel.c:740
 msgid "Login _Screen"
 msgstr "_Ecran de autentificare"
 
@@ -6540,32 +6544,32 @@ msgstr ""
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:349
+#: panels/universal-access/cc-ua-panel.c:344
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Implicită"
 
-#: panels/universal-access/cc-ua-panel.c:352
+#: panels/universal-access/cc-ua-panel.c:347
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Medie"
 
-#: panels/universal-access/cc-ua-panel.c:355
+#: panels/universal-access/cc-ua-panel.c:350
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Mare"
 
-#: panels/universal-access/cc-ua-panel.c:358
+#: panels/universal-access/cc-ua-panel.c:353
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Mai mare"
 
-#: panels/universal-access/cc-ua-panel.c:361
+#: panels/universal-access/cc-ua-panel.c:356
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Cel mai mare"
 
-#: panels/universal-access/cc-ua-panel.c:365
+#: panels/universal-access/cc-ua-panel.c:360
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -7048,30 +7052,30 @@ msgstr "Nu lăsa urme"
 msgid "Should match the web address of your login provider."
 msgstr "Trebuie să potriviți adresele web a furnizorului de logare."
 
-#: panels/user-accounts/cc-add-user-dialog.c:205
+#: panels/user-accounts/cc-add-user-dialog.c:204
 msgid "Failed to add account"
 msgstr "Eșec la adăugarea contului"
 
-#: panels/user-accounts/cc-add-user-dialog.c:676
+#: panels/user-accounts/cc-add-user-dialog.c:661
 #: panels/user-accounts/cc-password-dialog.c:261
 msgid "The passwords do not match."
 msgstr "Parolele nu se potrivesc."
 
-#: panels/user-accounts/cc-add-user-dialog.c:896
-#: panels/user-accounts/cc-add-user-dialog.c:942
-#: panels/user-accounts/cc-add-user-dialog.c:963
+#: panels/user-accounts/cc-add-user-dialog.c:875
+#: panels/user-accounts/cc-add-user-dialog.c:914
+#: panels/user-accounts/cc-add-user-dialog.c:932
 msgid "Failed to register account"
 msgstr "Eșec la înregistrarea contului"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1084
+#: panels/user-accounts/cc-add-user-dialog.c:1047
 msgid "No supported way to authenticate with this domain"
 msgstr "Nici o metodă suportată pentru autentificarea cu acest domeniu"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1157
+#: panels/user-accounts/cc-add-user-dialog.c:1111
 msgid "Failed to join domain"
 msgstr "Eșec la înregistrarea domeniului"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1218
+#: panels/user-accounts/cc-add-user-dialog.c:1166
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7079,7 +7083,7 @@ msgstr ""
 "Numele de autentificare nu a funcționat.\n"
 "Încercați din nou."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1225
+#: panels/user-accounts/cc-add-user-dialog.c:1173
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7087,11 +7091,11 @@ msgstr ""
 "Parola de autentificare nu a funcționat.\n"
 "Încercați din nou."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1233
+#: panels/user-accounts/cc-add-user-dialog.c:1181
 msgid "Failed to log into domain"
 msgstr "Eșec la conectarea în domeniu"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1291
+#: panels/user-accounts/cc-add-user-dialog.c:1236
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Nu se poate găsi domeniul. Poate l-ați scris greșit?"
 
@@ -7152,7 +7156,7 @@ msgstr ""
 msgid "_Enterprise Login"
 msgstr "Autentificare _enterprise"
 
-#: panels/user-accounts/cc-avatar-chooser.c:232
+#: panels/user-accounts/cc-avatar-chooser.c:220
 msgid "Browse for more pictures"
 msgstr "Răsfoiește pentru mai multe imagini"
 
@@ -7417,7 +7421,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:782
+#: panels/user-accounts/cc-user-panel.c:766
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7425,7 +7429,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:786
+#: panels/user-accounts/cc-user-panel.c:770
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7486,53 +7490,53 @@ msgstr "Permite utilizatorului să-și schimbe parola la următoarea logare"
 msgid "Set a password now"
 msgstr "Definește o parolă nouă"
 
-#: panels/user-accounts/cc-realm-manager.c:306
+#: panels/user-accounts/cc-realm-manager.c:303
 msgid "Cannot automatically join this type of domain"
 msgstr "Nu se poate conecta automat la acest tip de domeniu"
 
-#: panels/user-accounts/cc-realm-manager.c:309
+#: panels/user-accounts/cc-realm-manager.c:306
 msgid "No such domain or realm found"
 msgstr "Nu este găsit niciun domeniu și nicio valoare reală"
 
-#: panels/user-accounts/cc-realm-manager.c:731
-#: panels/user-accounts/cc-realm-manager.c:745
+#: panels/user-accounts/cc-realm-manager.c:712
+#: panels/user-accounts/cc-realm-manager.c:726
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
 msgstr "Nu se poate realiza conectarea ca %s în domeniul %s"
 
-#: panels/user-accounts/cc-realm-manager.c:737
+#: panels/user-accounts/cc-realm-manager.c:718
 msgid "Invalid password, please try again"
 msgstr "Parola nu este validă, încercați din nou"
 
-#: panels/user-accounts/cc-realm-manager.c:750
+#: panels/user-accounts/cc-realm-manager.c:731
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nu se poate realiza conectarea la domeniul %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:220
+#: panels/user-accounts/cc-user-panel.c:222
 msgid "Your account"
 msgstr "Contul tău"
 
-#: panels/user-accounts/cc-user-panel.c:401
+#: panels/user-accounts/cc-user-panel.c:397
 msgid "Failed to delete user"
 msgstr "Ștergerea utilizatorului a eșuat"
 
-#: panels/user-accounts/cc-user-panel.c:459
-#: panels/user-accounts/cc-user-panel.c:518
-#: panels/user-accounts/cc-user-panel.c:570
+#: panels/user-accounts/cc-user-panel.c:452
+#: panels/user-accounts/cc-user-panel.c:507
+#: panels/user-accounts/cc-user-panel.c:553
 msgid "Failed to revoke remotely managed user"
 msgstr "A eșuat eliminarea utilizatorului gestionat la distanță"
 
-#: panels/user-accounts/cc-user-panel.c:621
+#: panels/user-accounts/cc-user-panel.c:602
 msgid "You cannot delete your own account."
 msgstr "Nu vă puteți șterge propriul cont."
 
-#: panels/user-accounts/cc-user-panel.c:630
+#: panels/user-accounts/cc-user-panel.c:611
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s este încă autentificat"
 
-#: panels/user-accounts/cc-user-panel.c:634
+#: panels/user-accounts/cc-user-panel.c:615
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7540,12 +7544,12 @@ msgstr ""
 "Ștergerea unui utilizator când acesta este încă autentificat poate aduce "
 "sistemul într-o stare inconsistentă."
 
-#: panels/user-accounts/cc-user-panel.c:643
+#: panels/user-accounts/cc-user-panel.c:624
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Doriți să păstrați fișierele lui %s?"
 
-#: panels/user-accounts/cc-user-panel.c:647
+#: panels/user-accounts/cc-user-panel.c:628
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7553,53 +7557,53 @@ msgstr ""
 "Este posibil să păstrați dosarul personal, emailurile și fișierele temporare "
 "după ștergerea unui cont."
 
-#: panels/user-accounts/cc-user-panel.c:650
+#: panels/user-accounts/cc-user-panel.c:631
 msgid "_Delete Files"
 msgstr "Ș_terge fișierele"
 
-#: panels/user-accounts/cc-user-panel.c:651
+#: panels/user-accounts/cc-user-panel.c:632
 msgid "_Keep Files"
 msgstr "_Păstrează fișierele"
 
-#: panels/user-accounts/cc-user-panel.c:665
+#: panels/user-accounts/cc-user-panel.c:646
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Sigur doriți să eliminați contul %s gestionat de la distanță?"
 
-#: panels/user-accounts/cc-user-panel.c:669
+#: panels/user-accounts/cc-user-panel.c:650
 msgid "_Delete"
 msgstr "Ș_terge fișierele"
 
-#: panels/user-accounts/cc-user-panel.c:719
+#: panels/user-accounts/cc-user-panel.c:700
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cont dezactivat"
 
-#: panels/user-accounts/cc-user-panel.c:727
+#: panels/user-accounts/cc-user-panel.c:708
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Va fi definită la următoarea autentificare"
 
-#: panels/user-accounts/cc-user-panel.c:730
+#: panels/user-accounts/cc-user-panel.c:711
 msgctxt "Password mode"
 msgid "None"
 msgstr "Niciuna"
 
-#: panels/user-accounts/cc-user-panel.c:775
+#: panels/user-accounts/cc-user-panel.c:754
 msgid "Logged in"
 msgstr "Autentificat"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:863
-#: panels/user-accounts/cc-user-panel.c:954
+#: panels/user-accounts/cc-user-panel.c:841
+#: panels/user-accounts/cc-user-panel.c:930
 msgid "Enabled"
 msgstr "Activat"
 
-#: panels/user-accounts/cc-user-panel.c:1272
+#: panels/user-accounts/cc-user-panel.c:1248
 msgid "Failed to contact the accounts service"
 msgstr "Contactarea serviciului pentru conturi a eșuat"
 
-#: panels/user-accounts/cc-user-panel.c:1274
+#: panels/user-accounts/cc-user-panel.c:1250
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
 
@@ -7607,7 +7611,7 @@ msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1306
+#: panels/user-accounts/cc-user-panel.c:1282
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7615,12 +7619,12 @@ msgstr ""
 "Pentru a face schimbări,\n"
 "apăsați întâi clic pe iconița *"
 
-#: panels/user-accounts/cc-user-panel.c:1380
+#: panels/user-accounts/cc-user-panel.c:1355
 msgid "Delete the selected user account"
 msgstr "Șterge contul de utilizator selectat"
 
-#: panels/user-accounts/cc-user-panel.c:1392
-#: panels/user-accounts/cc-user-panel.c:1513
+#: panels/user-accounts/cc-user-panel.c:1367
+#: panels/user-accounts/cc-user-panel.c:1486
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7628,7 +7632,7 @@ msgstr ""
 "Pentru a șterge un cont de utilizator,\n"
 "efectuați clic pe iconița *"
 
-#: panels/user-accounts/cc-user-panel.c:1567
+#: panels/user-accounts/cc-user-panel.c:1539
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Deblocați pentru a adăuga utilizatori și schimba configurări"
 
@@ -7857,56 +7861,56 @@ msgstr ""
 "Adăugând mai multe litere, numere și semne de punctuație va face parola mai "
 "puternică."
 
-#: panels/user-accounts/run-passwd.c:424
+#: panels/user-accounts/run-passwd.c:413
 msgid "Authentication failed"
 msgstr "Autentificarea a eșuat"
 
-#: panels/user-accounts/run-passwd.c:504
+#: panels/user-accounts/run-passwd.c:492
 #, c-format
 msgid "The new password is too short"
 msgstr "Parola nouă este prea scurtă"
 
-#: panels/user-accounts/run-passwd.c:510
+#: panels/user-accounts/run-passwd.c:498
 #, c-format
 msgid "The new password is too simple"
 msgstr "Parola nouă este prea simplă"
 
-#: panels/user-accounts/run-passwd.c:516
+#: panels/user-accounts/run-passwd.c:504
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "Vechea și noua parolă sunt foarte asemănătoare"
 
-#: panels/user-accounts/run-passwd.c:519
+#: panels/user-accounts/run-passwd.c:507
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "Noua parolă a mai fost utilizată recent."
 
-#: panels/user-accounts/run-passwd.c:522
+#: panels/user-accounts/run-passwd.c:510
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "Noua parolă trebuie să conțină caractere numerice sau speciale"
 
-#: panels/user-accounts/run-passwd.c:526
+#: panels/user-accounts/run-passwd.c:514
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "Noua și vechea parolă sunt identice"
 
-#: panels/user-accounts/run-passwd.c:530
+#: panels/user-accounts/run-passwd.c:518
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "Vi s-a modificat parola de când v-ați autentificat!"
 
-#: panels/user-accounts/run-passwd.c:534
+#: panels/user-accounts/run-passwd.c:522
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "Noua parolă nu conține suficiente caractere diferite"
 
-#: panels/user-accounts/run-passwd.c:538
+#: panels/user-accounts/run-passwd.c:526
 #, c-format
 msgid "Unknown error"
 msgstr "Eroare necunoscută"
 
-#: panels/user-accounts/user-utils.c:435
+#: panels/user-accounts/user-utils.c:432
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
@@ -7914,16 +7918,16 @@ msgstr ""
 "Numele de utilizator poate conține numai litere mari și mici de la a la z, "
 "cifre și următoarele caractere: - _"
 
-#: panels/user-accounts/user-utils.c:439
+#: panels/user-accounts/user-utils.c:436
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr ""
 "Ne pare rău dar numele de utilizator nu este disponibil. Încercați altul."
 
-#: panels/user-accounts/user-utils.c:484
+#: panels/user-accounts/user-utils.c:478
 msgid "The username is too long."
 msgstr "Numele utilizatorului este prea lung."
 
-#: panels/user-accounts/user-utils.c:546
+#: panels/user-accounts/user-utils.c:537
 msgid "This will be used to name your home folder and can’t be changed."
 msgstr ""
 "Aceasta va fi folosit pentru denumirea dosarului personal și nu poate fi "
