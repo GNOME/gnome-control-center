@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-01-27 13:50+0000\n"
-"PO-Revision-Date: 2021-01-28 10:07+0200\n"
+"POT-Creation-Date: 2021-02-01 09:13+0000\n"
+"PO-Revision-Date: 2021-02-01 12:39+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -199,7 +199,7 @@ msgstr "Камера"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:355
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
-#: panels/user-accounts/cc-user-panel.c:933
+#: panels/user-accounts/cc-user-panel.c:938
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -353,7 +353,7 @@ msgstr "Виберіть зображення"
 #: panels/background/cc-background-chooser.c:348
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
-#: panels/common/cc-language-chooser.ui:24
+#: panels/common/cc-language-chooser.ui:25
 #: panels/display/cc-display-panel.c:1003
 #: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
@@ -1163,22 +1163,22 @@ msgstr "Колір;ICC;Профіль;Калібрування;Принтер;Е
 msgid "Other…"
 msgstr "Інше…"
 
-#: panels/common/cc-language-chooser.c:145
-#: panels/keyboard/cc-input-chooser.c:178
-msgid "More…"
-msgstr "Більше…"
-
-#: panels/common/cc-language-chooser.c:162
-msgid "No languages found"
-msgstr "Не знайдено мов"
-
 #: panels/common/cc-language-chooser.ui:5
 msgid "Select Language"
 msgstr "Виберіть мову"
 
-#: panels/common/cc-language-chooser.ui:12
+#: panels/common/cc-language-chooser.ui:13
 msgid "_Select"
 msgstr "_Вибрати"
+
+#: panels/common/cc-language-chooser.ui:69
+msgid "No languages found"
+msgstr "Не знайдено мов"
+
+#: panels/common/cc-language-chooser.ui:78
+#: panels/keyboard/cc-input-chooser.c:178
+msgid "More…"
+msgstr "Більше…"
 
 #: panels/common/cc-permission-infobar.c:107
 msgid "Unlock to Change Settings"
@@ -1826,7 +1826,6 @@ msgid "Device Name"
 msgstr "Назва пристрою"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
-#| msgid "Hardware Address"
 msgid "Hardware Model"
 msgstr "Модель обладнання"
 
@@ -3671,7 +3670,7 @@ msgstr "Некерований"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:926
+#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:928
 msgid "Unavailable"
 msgstr "Недоступний"
 
@@ -3991,11 +3990,11 @@ msgstr "Вн_утрішнє засвідчення"
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Дозволити автоматичне за_готовлення PAC"
 
-#: panels/network/wireless-security/eap-method-leap.c:64
+#: panels/network/wireless-security/eap-method-leap.c:65
 msgid "missing EAP-LEAP username"
 msgstr "бракує користувача EAP-LEAP"
 
-#: panels/network/wireless-security/eap-method-leap.c:73
+#: panels/network/wireless-security/eap-method-leap.c:80
 msgid "missing EAP-LEAP password"
 msgstr "бракує паролю EAP-LEAP"
 
@@ -4015,7 +4014,7 @@ msgstr "_Користувач"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:437
+#: panels/user-accounts/cc-user-panel.ui:478
 msgid "_Password"
 msgstr "_Пароль"
 
@@ -4038,7 +4037,7 @@ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
 msgstr "Неправильний сертифікат ЦС EAP-PEAP: не вказано сертифікату"
 
 #: panels/network/wireless-security/eap-method-peap.c:328
-#: panels/network/wireless-security/eap-method-tls.c:507
+#: panels/network/wireless-security/eap-method-tls.c:513
 #: panels/network/wireless-security/eap-method-ttls.c:336
 msgid "Choose a Certificate Authority certificate"
 msgstr "Виберіть сертифікат видавця"
@@ -4081,34 +4080,34 @@ msgstr "бракує користувача EAP"
 msgid "missing EAP password"
 msgstr "бракує паролю EAP"
 
-#: panels/network/wireless-security/eap-method-tls.c:91
+#: panels/network/wireless-security/eap-method-tls.c:92
 msgid "missing EAP-TLS identity"
 msgstr "бракує ототожнення EAP-TLS"
 
-#: panels/network/wireless-security/eap-method-tls.c:101
+#: panels/network/wireless-security/eap-method-tls.c:102
 #, c-format
 msgid "invalid EAP-TLS CA certificate: %s"
 msgstr "неправильний сертифікат ЦС EAP-TLS: %s"
 
-#: panels/network/wireless-security/eap-method-tls.c:111
+#: panels/network/wireless-security/eap-method-tls.c:112
 msgid "invalid EAP-TLS CA certificate: no certificate specified"
 msgstr "Неправильний сертифікат ЦА EAP-TLS: не вказано сертифікату"
 
-#: panels/network/wireless-security/eap-method-tls.c:125
+#: panels/network/wireless-security/eap-method-tls.c:129
 #, c-format
 msgid "invalid EAP-TLS private-key: %s"
 msgstr "неправильний закритий ключ EAP-TLS: %s"
 
-#: panels/network/wireless-security/eap-method-tls.c:135
+#: panels/network/wireless-security/eap-method-tls.c:139
 #, c-format
 msgid "invalid EAP-TLS user-certificate: %s"
 msgstr "неправильний сертифікат користувача EAP-TLS: %s"
 
-#: panels/network/wireless-security/eap-method-tls.c:266
+#: panels/network/wireless-security/eap-method-tls.c:272
 msgid "Unencrypted private keys are insecure"
 msgstr "Небезпечно використовувати секретні ключі без шифрування"
 
-#: panels/network/wireless-security/eap-method-tls.c:269
+#: panels/network/wireless-security/eap-method-tls.c:275
 msgid ""
 "The selected private key does not appear to be protected by a password. This "
 "could allow your security credentials to be compromised. Please select a "
@@ -4122,11 +4121,11 @@ msgstr ""
 "\n"
 "(Ви можете захистити закритий ключ за допомогою openssl)"
 
-#: panels/network/wireless-security/eap-method-tls.c:500
+#: panels/network/wireless-security/eap-method-tls.c:506
 msgid "Choose your personal certificate"
 msgstr "Виберіть ваш особистий сертифікат"
 
-#: panels/network/wireless-security/eap-method-tls.c:514
+#: panels/network/wireless-security/eap-method-tls.c:520
 msgid "Choose your private key"
 msgstr "Виберіть ваш особистий ключ"
 
@@ -4212,15 +4211,15 @@ msgstr "Захищений EAP (PEAP)"
 msgid "Au_thentication"
 msgstr "За_свідчення"
 
-#: panels/network/wireless-security/ws-leap.c:65
+#: panels/network/wireless-security/ws-leap.c:66
 msgid "missing leap-username"
 msgstr "бракує користувача LEAP"
 
-#: panels/network/wireless-security/ws-leap.c:74
+#: panels/network/wireless-security/ws-leap.c:81
 msgid "missing leap-password"
 msgstr "бракує паролю LEAP"
 
-#: panels/network/wireless-security/ws-sae.c:69
+#: panels/network/wireless-security/ws-sae.c:77
 msgid "Wi-Fi password is missing."
 msgstr "Бракує пароля Wi-Fi."
 
@@ -4229,18 +4228,18 @@ msgstr "Бракує пароля Wi-Fi."
 msgid "_Type"
 msgstr "_Тип"
 
-#: panels/network/wireless-security/ws-wep-key.c:107
+#: panels/network/wireless-security/ws-wep-key.c:114
 msgid "missing wep-key"
 msgstr "бракує ключа WEP"
 
-#: panels/network/wireless-security/ws-wep-key.c:116
+#: panels/network/wireless-security/ws-wep-key.c:123
 #, c-format
 msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
 msgstr ""
 "неправильний ключ WEP: ключ з довжиною %zu мусить містити тільки "
 "шістнадцяткові значення"
 
-#: panels/network/wireless-security/ws-wep-key.c:124
+#: panels/network/wireless-security/ws-wep-key.c:131
 #, c-format
 msgid ""
 "invalid wep-key: key with a length of %zu must contain only ascii characters"
@@ -4248,7 +4247,7 @@ msgstr ""
 "неправильний ключ WEP: ключ з довжиною %zu мусить містити тільки символи "
 "ascii"
 
-#: panels/network/wireless-security/ws-wep-key.c:130
+#: panels/network/wireless-security/ws-wep-key.c:137
 #, c-format
 msgid ""
 "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
@@ -4257,11 +4256,11 @@ msgstr ""
 "неправильний ключ WEP: хибний довжина ключа %zu. Ключ має бути: або довжина "
 "5/13 (ascii), або 10/26 (шістнадцятковий)"
 
-#: panels/network/wireless-security/ws-wep-key.c:137
+#: panels/network/wireless-security/ws-wep-key.c:144
 msgid "invalid wep-key: passphrase must be non-empty"
 msgstr "неправильний ключ WEP: пароль не може бути порожній"
 
-#: panels/network/wireless-security/ws-wep-key.c:139
+#: panels/network/wireless-security/ws-wep-key.c:146
 msgid "invalid wep-key: passphrase must be shorter than 64 characters"
 msgstr "неправильний ключ WEP: пароль не може перевищувати 64 символи"
 
@@ -4289,7 +4288,7 @@ msgstr "П_оказати ключ"
 msgid "WEP inde_x"
 msgstr "_Індекс WEP"
 
-#: panels/network/wireless-security/ws-wpa-psk.c:70
+#: panels/network/wireless-security/ws-wpa-psk.c:77
 #, c-format
 msgid ""
 "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
@@ -4298,7 +4297,7 @@ msgstr ""
 "неправильний ключ PSK: неправильна довжина ключа %zu. Має бути [8,63] біти "
 "або 64 шістнадцяткових значення"
 
-#: panels/network/wireless-security/ws-wpa-psk.c:79
+#: panels/network/wireless-security/ws-wpa-psk.c:86
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
 msgstr ""
 "неправильний WPA-PSK: неможливо означити ключ з 64 шістнадцятковими бітами"
@@ -5568,7 +5567,7 @@ msgid "The language used for text in windows and web pages."
 msgstr "Мова, яку буде використано у тексті вікон та вебсторінок."
 
 #: panels/region/cc-region-panel.ui:85
-#: panels/user-accounts/cc-user-panel.ui:365
+#: panels/user-accounts/cc-user-panel.ui:406
 msgid "_Language"
 msgstr "_Мова"
 
@@ -7553,15 +7552,15 @@ msgstr "Увійшов"
 
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
-#: panels/user-accounts/cc-user-panel.c:930
+#: panels/user-accounts/cc-user-panel.c:935
 msgid "Enabled"
 msgstr "Увімкнено"
 
-#: panels/user-accounts/cc-user-panel.c:1248
+#: panels/user-accounts/cc-user-panel.c:1254
 msgid "Failed to contact the accounts service"
 msgstr "Не вдалось зв'язатись зі службою облікових записів"
 
-#: panels/user-accounts/cc-user-panel.c:1250
+#: panels/user-accounts/cc-user-panel.c:1256
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
@@ -7569,7 +7568,7 @@ msgstr "Будь ласка, переконайтесь, що AccountService в�
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1282
+#: panels/user-accounts/cc-user-panel.c:1288
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7577,12 +7576,12 @@ msgstr ""
 "Щоб унести зміни,\n"
 "натисніть спочатку на піктограму *"
 
-#: panels/user-accounts/cc-user-panel.c:1355
+#: panels/user-accounts/cc-user-panel.c:1361
 msgid "Delete the selected user account"
 msgstr "Вилучити вибраний обліковий запис користувача"
 
-#: panels/user-accounts/cc-user-panel.c:1367
-#: panels/user-accounts/cc-user-panel.c:1486
+#: panels/user-accounts/cc-user-panel.c:1373
+#: panels/user-accounts/cc-user-panel.c:1492
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7590,7 +7589,7 @@ msgstr ""
 "Щоб вилучити вибраний обліковий запис користувача,\n"
 "натисніть спочатку на піктограму *"
 
-#: panels/user-accounts/cc-user-panel.c:1539
+#: panels/user-accounts/cc-user-panel.c:1545
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Розблокуйте, щоб додати користувачів і змінити налаштування"
 
@@ -7623,7 +7622,7 @@ msgstr "Параметри облікового запису"
 msgid "_Administrator"
 msgstr "_Адміністратор"
 
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:301
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7631,36 +7630,41 @@ msgstr ""
 "Адміністратори можуть додавати або вилучати інших користувачів, а також "
 "змінювати параметри для усіх користувачів."
 
-#: panels/user-accounts/cc-user-panel.ui:321
+#: panels/user-accounts/cc-user-panel.ui:333
 msgid "_Parental Controls"
 msgstr "_Батьківський контроль"
 
-#: panels/user-accounts/cc-user-panel.ui:411
+#: panels/user-accounts/cc-user-panel.ui:377
+msgid "Open the Parental Controls application."
+msgstr ""
+"Відкрийте вікно програми «Батьківський контроль»."
+
+#: panels/user-accounts/cc-user-panel.ui:452
 msgid "Authentication & Login"
 msgstr "Автентифікація та вхід"
 
-#: panels/user-accounts/cc-user-panel.ui:480
+#: panels/user-accounts/cc-user-panel.ui:521
 msgid "_Fingerprint Login"
 msgstr "Вхід через відбитки _пальців"
 
-#: panels/user-accounts/cc-user-panel.ui:522
+#: panels/user-accounts/cc-user-panel.ui:563
 msgid "A_utomatic Login"
 msgstr "_Автоматичний вхід"
 
-#: panels/user-accounts/cc-user-panel.ui:552
+#: panels/user-accounts/cc-user-panel.ui:593
 msgid "Account Activity"
 msgstr "Активність облікового запису"
 
-#: panels/user-accounts/cc-user-panel.ui:593
+#: panels/user-accounts/cc-user-panel.ui:634
 msgid "Remove User…"
 msgstr "Вилучити користувача…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:632
+#: panels/user-accounts/cc-user-panel.ui:673
 msgid "No Users Found"
 msgstr "Не знайдено жодного користувача"
 
-#: panels/user-accounts/cc-user-panel.ui:642
+#: panels/user-accounts/cc-user-panel.ui:683
 msgid "Unlock to add a user account."
 msgstr "Розблокуйте, щоб додати обліковий запис користувача."
 
@@ -8199,7 +8203,7 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Вийти"
 
-#: shell/help-overlay.ui:27 shell/help-overlay.ui:48
+#: shell/help-overlay.ui:27 shell/help-overlay.ui:57
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Пошук"
@@ -8209,12 +8213,12 @@ msgctxt "shortcut window"
 msgid "Panels"
 msgstr "Панелі"
 
-#: shell/help-overlay.ui:40
+#: shell/help-overlay.ui:41 shell/help-overlay.ui:49
 msgctxt "shortcut window"
 msgid "Go back to previous panel"
 msgstr "Повернутися на попередню панель"
 
-#: shell/help-overlay.ui:53
+#: shell/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Скасувати пошук"
