@@ -30,7 +30,8 @@ sources += gnome.mkenums_simple(
 
 resource_data = files(
   'cc-battery-row.ui',
-  'cc-power-panel.ui'
+  'cc-power-panel.ui',
+  'energy-star-logo.svg'
 )
 
 sources += gnome.compile_resources(
@@ -43,7 +44,8 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [
   gnome_settings_dep,
-  upower_glib_dep
+  upower_glib_dep,
+  gudev_dep
 ]
 
 if host_is_linux

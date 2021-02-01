@@ -22,6 +22,7 @@
 #include <config.h>
 
 #include <libupower-glib/upower.h>
+#include <gudev/gudev.h>
 #include <glib/gi18n.h>
 #include <gnome-settings-daemon/gsd-enums.h>
 #include <handy.h>
@@ -84,6 +85,7 @@ struct _CcPowerPanel
   GtkBox            *device_section;
   GtkListBoxRow     *dim_screen_row;
   GtkSwitch         *dim_screen_switch;
+  GtkBox            *energystar_section;
   GtkLabel          *general_heading;
   GtkListBox        *general_listbox;
   GtkBox            *general_section;
@@ -1708,6 +1710,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, energystar_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_heading);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
@@ -1755,11 +1758,14 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 static void
 cc_power_panel_init (CcPowerPanel *self)
 {
+  g_autoptr(GUdevClient) udev_client = NULL;
+  g_autoptr(GUdevDevice) dmi_device = NULL;
   g_autofree gchar *battery_label = NULL;
   g_autofree gchar *device_label = NULL;
   g_autofree gchar *power_profile_label = NULL;
   g_autofree gchar *power_saving_label = NULL;
   g_autofree gchar *general_label = NULL;
+  const char *energy_star_certification_info = NULL;
   guint i;
 
   g_resources_register (cc_power_get_resource ());
@@ -1836,6 +1842,16 @@ cc_power_panel_init (CcPowerPanel *self)
                              G_CALLBACK (up_client_changed), self, G_CONNECT_SWAPPED);
   }
   up_client_changed (self);
+
+  /* Check whether device is ENERGY STAR certified. */
+  udev_client = g_udev_client_new (NULL);
+  if (udev_client)
+    dmi_device = g_udev_client_query_by_sysfs_path (udev_client, "/sys/devices/virtual/dmi/id");
+  if (dmi_device)
+    energy_star_certification_info = g_udev_device_get_property (dmi_device, "ENERGY_STAR_CERTIFIED");
+  g_message("%s", energy_star_certification_info);
+  if (energy_star_certification_info)
+    gtk_widget_set_visible (GTK_WIDGET (self->energystar_section), TRUE);
 
   self->focus_adjustment = gtk_scrolled_window_get_vadjustment (self->main_scroll);
   gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->main_box), self->focus_adjustment);

@@ -132,6 +132,33 @@
                 <property name="spacing">3</property>
                 <property name="hexpand">True</property>
                 <child>
+                  <!-- NOTE: Be careful when making changes here, as we must
+                  meet the ENERGY STAR requirements on how the logo is displayed.
+                  The rules are not very strict though, basically:
+                   - Must be at least 76 pixels x 78 pixels
+                   - Must be shown in the power settings
+                   - Must be one of the three standard colors
+                  For details, see the ENERGY STAR specification and logo guidelines.
+                  -->
+                  <object class="GtkBox" id="energystar_section">
+                    <property name="visible">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="margin_bottom">32</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="resource">/org/gnome/control-center/power/energy-star-logo.svg</property>
+                        <property name="tooltip-text" translatable="yes" comments="Translators: The registered trademark is capitalised ENERGY STAR.">This device is ENERGY STAR Certified.</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">False</property>
+                      </packing>
+                    </child>
+                  </object>
+                </child>
+                <child>
                   <object class="GtkBox" id="battery_section">
                     <property name="visible">True</property>
                     <property name="orientation">vertical</property>
