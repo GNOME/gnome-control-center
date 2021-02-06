@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-01-13 14:19+0000\n"
-"PO-Revision-Date: 2021-01-13 21:36+0100\n"
+"POT-Creation-Date: 2021-02-06 15:44+0000\n"
+"PO-Revision-Date: 2021-02-06 19:13+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -52,7 +52,7 @@ msgstr "Poln dostop do mape /dev"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:252
+#: panels/network/network-mobile.ui:288
 msgid "Network"
 msgstr "Omrežje"
 
@@ -203,7 +203,7 @@ msgstr "Kamera"
 #: panels/keyboard/cc-xkb-modifier-dialog.c:355
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
-#: panels/user-accounts/cc-user-panel.c:933
+#: panels/user-accounts/cc-user-panel.c:938
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Onemogočeno"
@@ -357,9 +357,9 @@ msgstr "Izbor slike"
 #: panels/background/cc-background-chooser.c:348
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
-#: panels/common/cc-language-chooser.ui:24
+#: panels/common/cc-language-chooser.ui:25
 #: panels/display/cc-display-panel.c:1003
-#: panels/info-overview/cc-info-overview-panel.ui:234
+#: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:866
@@ -1167,22 +1167,22 @@ msgstr "Barva;ICC;Profil;Umerjanje;Tiskalnik;Zaslon;"
 msgid "Other…"
 msgstr "Drugo …"
 
-#: panels/common/cc-language-chooser.c:145
-#: panels/keyboard/cc-input-chooser.c:178
-msgid "More…"
-msgstr "Več …"
-
-#: panels/common/cc-language-chooser.c:162
-msgid "No languages found"
-msgstr "Ni najdenih jezikov"
-
 #: panels/common/cc-language-chooser.ui:5
 msgid "Select Language"
 msgstr "Izbor jezika"
 
-#: panels/common/cc-language-chooser.ui:12
+#: panels/common/cc-language-chooser.ui:13
 msgid "_Select"
 msgstr "_Izberi"
+
+#: panels/common/cc-language-chooser.ui:69
+msgid "No languages found"
+msgstr "Ni najdenih jezikov"
+
+#: panels/common/cc-language-chooser.ui:78
+#: panels/keyboard/cc-input-chooser.c:178
+msgid "More…"
+msgstr "Več …"
 
 #: panels/common/cc-permission-infobar.c:107
 msgid "Unlock to Change Settings"
@@ -1227,12 +1227,12 @@ msgid "Select _All"
 msgstr "Izberi _vse"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:158
+#: panels/network/connection-editor/ce-page-details.c:160
 msgid "Today"
 msgstr "Danes"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:160
+#: panels/network/connection-editor/ce-page-details.c:162
 msgid "Yesterday"
 msgstr "Včeraj"
 
@@ -1790,11 +1790,11 @@ msgstr ""
 "pult;panel;projektor;xrandr;zaslon;ločljivost;osveževanje;monitor;noč;"
 "svetloba;svetlost;modra;rdeči zamik;zora;mrak;barve;"
 
-#: panels/info-overview/cc-info-overview-panel.c:416
-#: panels/info-overview/cc-info-overview-panel.c:431
-#: panels/info-overview/cc-info-overview-panel.c:443
-#: panels/info-overview/cc-info-overview-panel.c:489
-#: panels/info-overview/cc-info-overview-panel.c:519
+#: panels/info-overview/cc-info-overview-panel.c:417
+#: panels/info-overview/cc-info-overview-panel.c:432
+#: panels/info-overview/cc-info-overview-panel.c:444
+#: panels/info-overview/cc-info-overview-panel.c:490
+#: panels/info-overview/cc-info-overview-panel.c:520
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -1802,32 +1802,32 @@ msgstr "Neznano"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:451
+#: panels/info-overview/cc-info-overview-panel.c:452
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s, ID izgradnje: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:466
+#: panels/info-overview/cc-info-overview-panel.c:467
 #, c-format
 msgid "64-bit"
 msgstr "64-bitni sistem"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:469
+#: panels/info-overview/cc-info-overview-panel.c:470
 #, c-format
 msgid "32-bit"
 msgstr "32-bitni sistem"
 
-#: panels/info-overview/cc-info-overview-panel.c:675
+#: panels/info-overview/cc-info-overview-panel.c:727
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:679
+#: panels/info-overview/cc-info-overview-panel.c:731
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:681
+#: panels/info-overview/cc-info-overview-panel.c:733
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Neznano"
@@ -1837,55 +1837,59 @@ msgid "Device Name"
 msgstr "Ime naprave"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
+msgid "Hardware Model"
+msgstr "Strojni model"
+
+#: panels/info-overview/cc-info-overview-panel.ui:83
 msgid "Memory"
 msgstr "Pomnilnik"
 
-#: panels/info-overview/cc-info-overview-panel.ui:83
+#: panels/info-overview/cc-info-overview-panel.ui:92
 msgid "Processor"
 msgstr "Procesor"
 
-#: panels/info-overview/cc-info-overview-panel.ui:92
+#: panels/info-overview/cc-info-overview-panel.ui:101
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panels/info-overview/cc-info-overview-panel.ui:101
+#: panels/info-overview/cc-info-overview-panel.ui:110
 msgid "Disk Capacity"
 msgstr "Zmogljivost diska"
 
-#: panels/info-overview/cc-info-overview-panel.ui:102
+#: panels/info-overview/cc-info-overview-panel.ui:111
 msgid "Calculating…"
 msgstr "Poteka preračunavanje …"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:124
+#: panels/info-overview/cc-info-overview-panel.ui:133
 msgid "OS Name"
 msgstr "Naziv OS"
 
-#: panels/info-overview/cc-info-overview-panel.ui:133
+#: panels/info-overview/cc-info-overview-panel.ui:142
 msgid "OS Type"
 msgstr "Vrsta OS"
 
-#: panels/info-overview/cc-info-overview-panel.ui:142
+#: panels/info-overview/cc-info-overview-panel.ui:151
 msgid "GNOME Version"
 msgstr "Različica GNOME"
 
-#: panels/info-overview/cc-info-overview-panel.ui:152
+#: panels/info-overview/cc-info-overview-panel.ui:161
 msgid "Windowing System"
 msgstr "Sistem izrisovanja oken"
 
-#: panels/info-overview/cc-info-overview-panel.ui:160
+#: panels/info-overview/cc-info-overview-panel.ui:169
 msgid "Virtualization"
 msgstr "Ustvarjanje navideznih naprav"
 
-#: panels/info-overview/cc-info-overview-panel.ui:169
+#: panels/info-overview/cc-info-overview-panel.ui:178
 msgid "Software Updates"
 msgstr "Posodobitve programske opreme"
 
-#: panels/info-overview/cc-info-overview-panel.ui:190
+#: panels/info-overview/cc-info-overview-panel.ui:199
 msgid "Rename Device"
 msgstr "Preimenuj napravo"
 
-#: panels/info-overview/cc-info-overview-panel.ui:207
+#: panels/info-overview/cc-info-overview-panel.ui:216
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -1893,7 +1897,7 @@ msgstr ""
 "Ime naprave se uporablja za določitev naprave, kadar je ta prikazana prek "
 "omrežja oziroma ob povezovanju naprav Bluetooth."
 
-#: panels/info-overview/cc-info-overview-panel.ui:225
+#: panels/info-overview/cc-info-overview-panel.ui:234
 msgid "_Rename"
 msgstr "_Preimenuj"
 
@@ -2220,20 +2224,16 @@ msgid "Input Sources"
 msgstr "Vhodni viri – tipkovnica"
 
 #: panels/keyboard/cc-keyboard-panel.ui:66
-#, fuzzy
-#| msgid "Input Source Options"
 msgid "Input Source Switching"
-msgstr "Možnosti vhodnega vira"
+msgstr "Preklapljanje vhodnega vira"
 
 #: panels/keyboard/cc-keyboard-panel.ui:99
 msgid "Use the _same source for all windows"
 msgstr "Uporabi _enak vir v vseh oknih"
 
 #: panels/keyboard/cc-keyboard-panel.ui:126
-#, fuzzy
-#| msgid "Allow _different sources for each window"
 msgid "Switch input sources _individually for each window"
-msgstr "Dovoli _različne vire za različna okna"
+msgstr "Preklopi vhodni vir za vsako okno _posebej"
 
 #: panels/keyboard/cc-keyboard-panel.ui:138
 msgid "Keyboard Shortcut"
@@ -2241,7 +2241,7 @@ msgstr "Tipkovne bližnjice"
 
 #: panels/keyboard/cc-keyboard-panel.ui:139
 msgid "This can be changed in Customize Shortcuts"
-msgstr ""
+msgstr "Nastavitve je mogoče spremeniti med prilagajanjem tipkovnih bližnjic"
 
 #: panels/keyboard/cc-keyboard-panel.ui:157
 msgid "Type Special Characters"
@@ -2295,6 +2295,8 @@ msgstr "Dodaj bližnjice po meri"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr ""
+"Nastavi tipkovne bližnjice po meri za zaganjanje programov, izvajanje "
+"skriptov in drugih opravil."
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:131
 msgid "Add Shortcut"
@@ -2699,35 +2701,35 @@ msgstr "Robni drsnik"
 msgid "Test Your _Settings"
 msgstr "Preizkus uporabljenih _nastavitev"
 
-#: panels/mouse/cc-mouse-test.c:132 panels/mouse/cc-mouse-test.ui:25
+#: panels/mouse/cc-mouse-test.c:131 panels/mouse/cc-mouse-test.ui:25
 msgid "Try clicking, double clicking, scrolling"
 msgstr "Poskusite klikniti, dvojno klikniti in drseti"
 
-#: panels/mouse/cc-mouse-test.c:137
+#: panels/mouse/cc-mouse-test.c:136
 msgid "Five clicks, GEGL time!"
 msgstr "Pet klikov za GEGL!"
 
-#: panels/mouse/cc-mouse-test.c:142
+#: panels/mouse/cc-mouse-test.c:141
 msgid "Double click, primary button"
 msgstr "Dvojni klik, osnovni gumb"
 
-#: panels/mouse/cc-mouse-test.c:142
+#: panels/mouse/cc-mouse-test.c:141
 msgid "Single click, primary button"
 msgstr "Enojni klik, osnovni gumb"
 
-#: panels/mouse/cc-mouse-test.c:145
+#: panels/mouse/cc-mouse-test.c:144
 msgid "Double click, middle button"
 msgstr "Dvojni klik, srednji gumb"
 
-#: panels/mouse/cc-mouse-test.c:145
+#: panels/mouse/cc-mouse-test.c:144
 msgid "Single click, middle button"
 msgstr "Enojni klik, srednji gumb"
 
-#: panels/mouse/cc-mouse-test.c:148
+#: panels/mouse/cc-mouse-test.c:147
 msgid "Double click, secondary button"
 msgstr "Dvojni klik, drugi gumb"
 
-#: panels/mouse/cc-mouse-test.c:148
+#: panels/mouse/cc-mouse-test.c:147
 msgid "Single click, secondary button"
 msgstr "Enojni klik, drugi gumb"
 
@@ -2804,9 +2806,9 @@ msgid "Connected"
 msgstr "Povezano"
 
 #: panels/network/cc-wifi-connection-row.ui:100
-#: panels/network/net-device-ethernet.c:313
+#: panels/network/net-device-ethernet.c:327
 #: panels/network/network-bluetooth.ui:76
-#: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:414
+#: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
 #: panels/network/network-vpn.ui:77
 msgid "Options…"
 msgstr "Možnosti …"
@@ -2966,49 +2968,49 @@ msgid "Profile %d"
 msgstr "Profil %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:93
+#: panels/network/connection-editor/ce-page-details.c:95
 #: panels/network/net-device-wifi.c:228
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:97
+#: panels/network/connection-editor/ce-page-details.c:99
 #: panels/network/net-device-wifi.c:233
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:103
+#: panels/network/connection-editor/ce-page-details.c:105
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:108
+#: panels/network/connection-editor/ce-page-details.c:110
 #: panels/network/connection-editor/ce-page-security.c:279
 msgid "Enhanced Open"
 msgstr "Napredno odpiranje"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:115
+#: panels/network/connection-editor/ce-page-details.c:117
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:121
+#: panels/network/connection-editor/ce-page-details.c:123
 msgid "Enterprise"
 msgstr "Podjetniški"
 
-#: panels/network/connection-editor/ce-page-details.c:126
+#: panels/network/connection-editor/ce-page-details.c:128
 #: panels/network/net-device-wifi.c:218
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Brez"
 
-#: panels/network/connection-editor/ce-page-details.c:147
+#: panels/network/connection-editor/ce-page-details.c:149
 msgid "Never"
 msgstr "Nikoli"
 
-#: panels/network/connection-editor/ce-page-details.c:162
+#: panels/network/connection-editor/ce-page-details.c:164
 #: panels/network/net-device-ethernet.c:107
 #, c-format
 msgid "%i day ago"
@@ -3018,91 +3020,117 @@ msgstr[1] "pred %i dnem"
 msgstr[2] "pred %i dnevoma"
 msgstr[3] "pred %i dnevi"
 
-#: panels/network/connection-editor/ce-page-details.c:287
+#: panels/network/connection-editor/ce-page-details.c:291
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:289
-#: panels/network/net-device-ethernet.c:200
+#: panels/network/connection-editor/ce-page-details.c:293
+#: panels/network/net-device-ethernet.c:214
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:302
+#: panels/network/connection-editor/ce-page-details.c:306
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:304
+#: panels/network/connection-editor/ce-page-details.c:308
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:306
+#: panels/network/connection-editor/ce-page-details.c:310
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:326
+#: panels/network/connection-editor/ce-page-details.c:330
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Brez"
 
-#: panels/network/connection-editor/ce-page-details.c:328
+#: panels/network/connection-editor/ce-page-details.c:332
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Šibko"
 
-#: panels/network/connection-editor/ce-page-details.c:330
+#: panels/network/connection-editor/ce-page-details.c:334
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "V redu"
 
-#: panels/network/connection-editor/ce-page-details.c:332
+#: panels/network/connection-editor/ce-page-details.c:336
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Dobro"
 
-#: panels/network/connection-editor/ce-page-details.c:334
+#: panels/network/connection-editor/ce-page-details.c:338
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Odlično"
 
-#: panels/network/connection-editor/ce-page-details.c:392
+#: panels/network/connection-editor/ce-page-details.c:410
 #: panels/network/connection-editor/details-page.ui:108
-#: panels/network/net-device-ethernet.c:142
-#: panels/network/net-device-mobile.c:430
+#: panels/network/net-device-ethernet.c:149
+#: panels/network/net-device-mobile.c:447
 msgid "IPv4 Address"
 msgstr "Naslov IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:393
+#: panels/network/connection-editor/ce-page-details.c:411
 #: panels/network/connection-editor/details-page.ui:126
-#: panels/network/net-device-ethernet.c:143
-#: panels/network/net-device-ethernet.c:147
-#: panels/network/net-device-mobile.c:431 panels/network/network-mobile.ui:200
+#: panels/network/net-device-ethernet.c:150
+#: panels/network/net-device-mobile.c:448 panels/network/network-mobile.ui:218
 msgid "IPv6 Address"
 msgstr "Naslov IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:396
-#: panels/network/connection-editor/ce-page-details.c:397
-#: panels/network/net-device-ethernet.c:145
-#: panels/network/net-device-mobile.c:434
-#: panels/network/net-device-mobile.c:435 panels/network/network-mobile.ui:183
+#: panels/network/connection-editor/ce-page-details.c:414
+#: panels/network/connection-editor/ce-page-details.c:415
+#: panels/network/net-device-ethernet.c:152
+#: panels/network/net-device-ethernet.c:154
+#: panels/network/net-device-mobile.c:451
+#: panels/network/net-device-mobile.c:452 panels/network/network-mobile.ui:201
 msgid "IP Address"
 msgstr "IP naslov"
 
-#: panels/network/connection-editor/ce-page-details.c:430
+#: panels/network/connection-editor/ce-page-details.c:419
+#: panels/network/net-device-ethernet.c:163
+#: panels/network/net-device-mobile.c:456
+msgid "DNS4"
+msgstr "DNS4"
+
+#: panels/network/connection-editor/ce-page-details.c:420
+#: panels/network/net-device-ethernet.c:164
+#: panels/network/net-device-mobile.c:457
+msgid "DNS6"
+msgstr "DNS6"
+
+#: panels/network/connection-editor/ce-page-details.c:423
+#: panels/network/connection-editor/ce-page-details.c:424
+#: panels/network/connection-editor/details-page.ui:199
+#: panels/network/connection-editor/details-page.ui:218
+#: panels/network/connection-editor/ip4-page.ui:211
+#: panels/network/connection-editor/ip6-page.ui:225
+#: panels/network/net-device-ethernet.c:166
+#: panels/network/net-device-ethernet.c:168
+#: panels/network/net-device-mobile.c:459
+#: panels/network/net-device-mobile.c:460 panels/network/network-mobile.ui:253
+#: panels/network/network-mobile.ui:271
+msgid "DNS"
+msgstr "DNS"
+
+#: panels/network/connection-editor/ce-page-details.c:457
 msgid "Forget Connection"
 msgstr "Pozabi povezavo"
 
-#: panels/network/connection-editor/ce-page-details.c:432
+#: panels/network/connection-editor/ce-page-details.c:459
 msgid "Remove Connection Profile"
 msgstr "Odstrani profil povezave"
 
-#: panels/network/connection-editor/ce-page-details.c:434
+#: panels/network/connection-editor/ce-page-details.c:461
 msgid "Remove VPN"
 msgstr "Odstrani VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:452
+#: panels/network/connection-editor/ce-page-details.c:479
 msgid "Details"
 msgstr "Podrobnosti"
 
@@ -3178,7 +3206,7 @@ msgid "Link speed"
 msgstr "Hitrost povezave"
 
 #: panels/network/connection-editor/details-page.ui:144
-#: panels/network/net-device-ethernet.c:150
+#: panels/network/net-device-ethernet.c:157
 msgid "Hardware Address"
 msgstr "Strojni naslov"
 
@@ -3187,37 +3215,29 @@ msgid "Supported Frequencies"
 msgstr "Podprte frekvence"
 
 #: panels/network/connection-editor/details-page.ui:180
-#: panels/network/net-device-ethernet.c:153
-#: panels/network/network-mobile.ui:217
+#: panels/network/net-device-ethernet.c:160
+#: panels/network/network-mobile.ui:235
 msgid "Default Route"
 msgstr "Privzeta smer"
 
-#: panels/network/connection-editor/details-page.ui:199
-#: panels/network/connection-editor/ip4-page.ui:211
-#: panels/network/connection-editor/ip6-page.ui:225
-#: panels/network/net-device-ethernet.c:155
-#: panels/network/network-mobile.ui:235
-msgid "DNS"
-msgstr "DNS"
-
-#: panels/network/connection-editor/details-page.ui:217
+#: panels/network/connection-editor/details-page.ui:236
 msgid "Last Used"
 msgstr "Nazadnje uporabljeno"
 
-#: panels/network/connection-editor/details-page.ui:376
+#: panels/network/connection-editor/details-page.ui:415
 msgid "Connect _automatically"
 msgstr "_Samodejna povezava"
 
-#: panels/network/connection-editor/details-page.ui:395
+#: panels/network/connection-editor/details-page.ui:434
 msgid "Make available to _other users"
 msgstr "Na voljo tudi _drugim uporabnikom"
 
-#: panels/network/connection-editor/details-page.ui:428
+#: panels/network/connection-editor/details-page.ui:467
 msgid "_Metered connection: has data limits or can incur charges"
 msgstr ""
 "_Merjena povezava: obstajajo podatkovne omejitve oziroma dodatni stroški"
 
-#: panels/network/connection-editor/details-page.ui:439
+#: panels/network/connection-editor/details-page.ui:478
 msgid ""
 "Software updates and other large downloads will not be started automatically."
 msgstr ""
@@ -3477,7 +3497,7 @@ msgstr "danes"
 msgid "yesterday"
 msgstr "včeraj"
 
-#: panels/network/net-device-ethernet.c:160
+#: panels/network/net-device-ethernet.c:174
 msgid "Last used"
 msgstr "Nazadnje uporabljeno"
 
@@ -3486,12 +3506,12 @@ msgstr "Nazadnje uporabljeno"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:247
+#: panels/network/net-device-ethernet.c:261
 #: panels/network/network-bluetooth.ui:38 panels/network/network-ethernet.ui:18
 msgid "Wired"
 msgstr "Žično"
 
-#: panels/network/net-device-mobile.c:207
+#: panels/network/net-device-mobile.c:209
 msgid "Add new connection"
 msgstr "Dodaj novo povezavo"
 
@@ -3528,11 +3548,11 @@ msgstr "Brezžična naprava ne podpira načina vročih točk"
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:266
 #: panels/power/cc-power-panel.c:1133 panels/power/cc-power-panel.c:1144
-#: panels/universal-access/cc-ua-panel.c:329
-#: panels/universal-access/cc-ua-panel.c:604
-#: panels/universal-access/cc-ua-panel.c:614
-#: panels/universal-access/cc-ua-panel.c:626
-#: panels/universal-access/cc-ua-panel.c:669
+#: panels/universal-access/cc-ua-panel.c:324
+#: panels/universal-access/cc-ua-panel.c:599
+#: panels/universal-access/cc-ua-panel.c:609
+#: panels/universal-access/cc-ua-panel.c:621
+#: panels/universal-access/cc-ua-panel.c:664
 #: panels/universal-access/cc-ua-panel.ui:300
 #: panels/universal-access/cc-ua-panel.ui:346
 #: panels/universal-access/cc-ua-panel.ui:392
@@ -3673,7 +3693,7 @@ msgstr "Neupravljano"
 
 #. TRANSLATORS: device status
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:926
+#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:928
 msgid "Unavailable"
 msgstr "Nedostopno"
 
@@ -3993,11 +4013,11 @@ msgstr "_Notranja overitev"
 msgid "Allow automatic PAC pro_visioning"
 msgstr "Dovoli samodejno _odbiro PAC"
 
-#: panels/network/wireless-security/eap-method-leap.c:64
+#: panels/network/wireless-security/eap-method-leap.c:65
 msgid "missing EAP-LEAP username"
 msgstr "manjka uporabniško ime EAP-LEAP"
 
-#: panels/network/wireless-security/eap-method-leap.c:73
+#: panels/network/wireless-security/eap-method-leap.c:80
 msgid "missing EAP-LEAP password"
 msgstr "manjka geslo EAP-LEAP"
 
@@ -4017,7 +4037,7 @@ msgstr "_Uporabniško ime"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:437
+#: panels/user-accounts/cc-user-panel.ui:478
 msgid "_Password"
 msgstr "_Geslo"
 
@@ -4040,7 +4060,7 @@ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
 msgstr "neveljavno potrdilo EAP-PEAP CA: potrdilo ni določeno"
 
 #: panels/network/wireless-security/eap-method-peap.c:328
-#: panels/network/wireless-security/eap-method-tls.c:507
+#: panels/network/wireless-security/eap-method-tls.c:513
 #: panels/network/wireless-security/eap-method-ttls.c:336
 msgid "Choose a Certificate Authority certificate"
 msgstr "Izbor potrdila pooblastitelja"
@@ -4083,34 +4103,34 @@ msgstr "manjka uporabniško ime EAP"
 msgid "missing EAP password"
 msgstr "manjka geslo EAP"
 
-#: panels/network/wireless-security/eap-method-tls.c:91
+#: panels/network/wireless-security/eap-method-tls.c:92
 msgid "missing EAP-TLS identity"
 msgstr "manjka istovetnost EAP"
 
-#: panels/network/wireless-security/eap-method-tls.c:101
+#: panels/network/wireless-security/eap-method-tls.c:102
 #, c-format
 msgid "invalid EAP-TLS CA certificate: %s"
 msgstr "neveljavno potrdilo EAP-TLS CA: %s"
 
-#: panels/network/wireless-security/eap-method-tls.c:111
+#: panels/network/wireless-security/eap-method-tls.c:112
 msgid "invalid EAP-TLS CA certificate: no certificate specified"
 msgstr "neveljavno potrdilo EAP-TLS CA: potrdilo ni določeno"
 
-#: panels/network/wireless-security/eap-method-tls.c:125
+#: panels/network/wireless-security/eap-method-tls.c:129
 #, c-format
 msgid "invalid EAP-TLS private-key: %s"
 msgstr "neveljaven zasebni ključ EAP-TLS: %s"
 
-#: panels/network/wireless-security/eap-method-tls.c:135
+#: panels/network/wireless-security/eap-method-tls.c:139
 #, c-format
 msgid "invalid EAP-TLS user-certificate: %s"
 msgstr "neveljavno uporabniško potrdilo EAP-TLS: %s"
 
-#: panels/network/wireless-security/eap-method-tls.c:266
+#: panels/network/wireless-security/eap-method-tls.c:272
 msgid "Unencrypted private keys are insecure"
 msgstr "Nešifrirani zasebni ključi niso varni"
 
-#: panels/network/wireless-security/eap-method-tls.c:269
+#: panels/network/wireless-security/eap-method-tls.c:275
 msgid ""
 "The selected private key does not appear to be protected by a password. This "
 "could allow your security credentials to be compromised. Please select a "
@@ -4123,11 +4143,11 @@ msgstr ""
 "\n"
 "(Zasebne ključe lahko zaščitite z geslom z OpenSSL.)"
 
-#: panels/network/wireless-security/eap-method-tls.c:500
+#: panels/network/wireless-security/eap-method-tls.c:506
 msgid "Choose your personal certificate"
 msgstr "Izbor osebnega potrdila"
 
-#: panels/network/wireless-security/eap-method-tls.c:514
+#: panels/network/wireless-security/eap-method-tls.c:520
 msgid "Choose your private key"
 msgstr "Izbor osebnega ključa"
 
@@ -4213,15 +4233,15 @@ msgstr "Varovani EAP (PEAP)"
 msgid "Au_thentication"
 msgstr "_Overitev"
 
-#: panels/network/wireless-security/ws-leap.c:65
+#: panels/network/wireless-security/ws-leap.c:66
 msgid "missing leap-username"
 msgstr "manjka uporabniško ime za leap"
 
-#: panels/network/wireless-security/ws-leap.c:74
+#: panels/network/wireless-security/ws-leap.c:81
 msgid "missing leap-password"
 msgstr "manjka geslo leap"
 
-#: panels/network/wireless-security/ws-sae.c:69
+#: panels/network/wireless-security/ws-sae.c:77
 msgid "Wi-Fi password is missing."
 msgstr "Ni vpisanega gesla za Wi-Fi"
 
@@ -4230,25 +4250,25 @@ msgstr "Ni vpisanega gesla za Wi-Fi"
 msgid "_Type"
 msgstr "_Vrsta"
 
-#: panels/network/wireless-security/ws-wep-key.c:107
+#: panels/network/wireless-security/ws-wep-key.c:114
 msgid "missing wep-key"
 msgstr "manjka ključ wep"
 
-#: panels/network/wireless-security/ws-wep-key.c:116
+#: panels/network/wireless-security/ws-wep-key.c:123
 #, c-format
 msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
 msgstr ""
 "neveljavni podatki wpa-psk: ključ dolžine %zu mora vsebovati le števila v "
 "šestnajstiškem sistemu"
 
-#: panels/network/wireless-security/ws-wep-key.c:124
+#: panels/network/wireless-security/ws-wep-key.c:131
 #, c-format
 msgid ""
 "invalid wep-key: key with a length of %zu must contain only ascii characters"
 msgstr ""
 "neveljavni podatki wpa-psk: ključ dolžine %zu mora vsebovati le znake ASCII"
 
-#: panels/network/wireless-security/ws-wep-key.c:130
+#: panels/network/wireless-security/ws-wep-key.c:137
 #, c-format
 msgid ""
 "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
@@ -4257,11 +4277,11 @@ msgstr ""
 "neveljavni podatki wpa-psk: napačna dolžina ključa %zu. Biti mora biti ali "
 "5/13 (ASCII) oziroma 10/26 (šestnajstiško)"
 
-#: panels/network/wireless-security/ws-wep-key.c:137
+#: panels/network/wireless-security/ws-wep-key.c:144
 msgid "invalid wep-key: passphrase must be non-empty"
 msgstr "neveljavni podatki wpa-psk: šifrirna koda mora biti vpisana"
 
-#: panels/network/wireless-security/ws-wep-key.c:139
+#: panels/network/wireless-security/ws-wep-key.c:146
 msgid "invalid wep-key: passphrase must be shorter than 64 characters"
 msgstr ""
 "neveljavni podatki wpa-psk: šifrirna koda mura biti krajša od 64 znakov"
@@ -4290,7 +4310,7 @@ msgstr "_Pokaži ključ"
 msgid "WEP inde_x"
 msgstr "Določilo _WEP"
 
-#: panels/network/wireless-security/ws-wpa-psk.c:70
+#: panels/network/wireless-security/ws-wpa-psk.c:77
 #, c-format
 msgid ""
 "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
@@ -4299,7 +4319,7 @@ msgstr ""
 "neveljavni podatki wpa-psk: neustrezna dolžina ključa %zu. Biti mora [8,63] "
 "bajtov oziroma 64 števil v šestnajstiškem sistemu"
 
-#: panels/network/wireless-security/ws-wpa-psk.c:79
+#: panels/network/wireless-security/ws-wpa-psk.c:86
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
 msgstr ""
 "neveljavni podatki wpa-psk: ni mogoče tolmačiti 64-bitnega ključa v "
@@ -4348,11 +4368,11 @@ msgstr "Pokaži _sporočila tudi na zaklenjenem zaslonu"
 
 #: panels/notifications/cc-notifications-panel.c:266
 #: panels/power/cc-power-panel.c:1139 panels/power/cc-power-panel.c:1146
-#: panels/universal-access/cc-ua-panel.c:329
-#: panels/universal-access/cc-ua-panel.c:604
-#: panels/universal-access/cc-ua-panel.c:614
-#: panels/universal-access/cc-ua-panel.c:626
-#: panels/universal-access/cc-ua-panel.c:669
+#: panels/universal-access/cc-ua-panel.c:324
+#: panels/universal-access/cc-ua-panel.c:599
+#: panels/universal-access/cc-ua-panel.c:609
+#: panels/universal-access/cc-ua-panel.c:621
+#: panels/universal-access/cc-ua-panel.c:664
 msgid "On"
 msgstr "Omogočeno"
 
@@ -4627,10 +4647,8 @@ msgid "Automatic suspend"
 msgstr "Samodejen prehod v pripravljenost"
 
 #: panels/power/cc-power-panel.c:1799
-#, fuzzy
-#| msgid "Power off"
 msgid "Power Mode"
-msgstr "Izključi"
+msgstr "Način delovanja"
 
 #: panels/power/cc-power-panel.c:1809
 msgid "Power Saving"
@@ -4702,7 +4720,7 @@ msgstr "2 uri"
 
 #: panels/power/cc-power-panel.ui:227
 msgid "Affects system performance and power usage."
-msgstr ""
+msgstr "Vpliva na učinkovitost delovanja in porabo energije."
 
 #: panels/power/cc-power-panel.ui:297
 msgid "_Screen Brightness"
@@ -4717,10 +4735,8 @@ msgid "_Keyboard Brightness"
 msgstr "_Svetlost tipkovnice"
 
 #: panels/power/cc-power-panel.ui:431
-#, fuzzy
-#| msgid "_Dim Screen When Inactive"
 msgid "Dim Screen When Inactive"
-msgstr "_Zamegli zaslon ob nedejavnosti"
+msgstr "Zamegli zaslon ob nedejavnosti"
 
 #: panels/power/cc-power-panel.ui:466
 msgid "_Blank Screen"
@@ -4783,7 +4799,7 @@ msgstr "Časovni zamik"
 
 #: panels/power/cc-power-profile-row.c:62
 msgid "Lap detected: performance mode unavailable"
-msgstr ""
+msgstr "Zaznava: način učinkovitosti delovanja ni na voljo"
 
 #: panels/power/cc-power-profile-row.c:64
 msgid "High hardware temperature: performance mode unavailable"
@@ -4791,36 +4807,32 @@ msgstr ""
 
 #: panels/power/cc-power-profile-row.c:65
 msgid "Performance mode unavailable"
-msgstr ""
+msgstr "Način učinkovitosti delovanja ni na voljo"
 
 #: panels/power/cc-power-profile-row.c:87
 #: panels/power/cc-power-profile-row.c:187
 msgid "High performance and power usage."
-msgstr ""
+msgstr "Visoka učinkovitost delovanja in poraba energije."
 
 #: panels/power/cc-power-profile-row.c:186
 msgid "Performance"
 msgstr "Zmogljivost"
 
 #: panels/power/cc-power-profile-row.c:192
-#, fuzzy
-#| msgid "Balance"
 msgid "Balanced Power"
-msgstr "Uravnoteženost"
+msgstr "Uravnotežena poraba"
 
 #: panels/power/cc-power-profile-row.c:193
 msgid "Standard performance and power usage."
-msgstr ""
+msgstr "Običajna učinkovitost delovanja in poraba energije."
 
 #: panels/power/cc-power-profile-row.c:198
-#, fuzzy
-#| msgid "Power Saving"
 msgid "Power Saver"
-msgstr "Varčevanje"
+msgstr "Ohranjevalnik energije"
 
 #: panels/power/cc-power-profile-row.c:199
 msgid "Reduced performance and power usage."
-msgstr ""
+msgstr "Zmanjšana učinkovitost delovanja in poraba energije."
 
 #: panels/power/gnome-power-panel.desktop.in.in:3
 msgid "Power"
@@ -5584,10 +5596,10 @@ msgstr "Jezik"
 
 #: panels/region/cc-region-panel.ui:45
 msgid "The language used for text in windows and web pages."
-msgstr ""
+msgstr "Jezik, uporabljen za besedilo oken in spletnih strani."
 
 #: panels/region/cc-region-panel.ui:85
-#: panels/user-accounts/cc-user-panel.ui:365
+#: panels/user-accounts/cc-user-panel.ui:406
 msgid "_Language"
 msgstr "_Jezik"
 
@@ -6527,32 +6539,32 @@ msgstr "Vklopi ali izklopi zmožnosti dostopnosti s tipkovnico"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:349
+#: panels/universal-access/cc-ua-panel.c:344
 msgctxt "cursor size"
 msgid "Default"
 msgstr "privzeta"
 
-#: panels/universal-access/cc-ua-panel.c:352
+#: panels/universal-access/cc-ua-panel.c:347
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "srednja"
 
-#: panels/universal-access/cc-ua-panel.c:355
+#: panels/universal-access/cc-ua-panel.c:350
 msgctxt "cursor size"
 msgid "Large"
 msgstr "velika"
 
-#: panels/universal-access/cc-ua-panel.c:358
+#: panels/universal-access/cc-ua-panel.c:353
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "zelo velika"
 
-#: panels/universal-access/cc-ua-panel.c:361
+#: panels/universal-access/cc-ua-panel.c:356
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "največja"
 
-#: panels/universal-access/cc-ua-panel.c:365
+#: panels/universal-access/cc-ua-panel.c:360
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -7216,6 +7228,7 @@ msgstr "_Ponovno odčitaj ta prst …"
 #: panels/user-accounts/cc-fingerprint-dialog.c:236
 msgid "the device needs to be claimed to perform this action"
 msgstr ""
+"pred izvajanjem tega opravila mora biti vzpostavljena povezava z napravo"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:238
 msgid "the device is already claimed by another process"
@@ -7223,7 +7236,7 @@ msgstr "naprava je že v uporabi v drugem opravilu"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:240
 msgid "you do not have permission to perform the action"
-msgstr ""
+msgstr "n ustreznih dovoljenj za izvajanje tega dejanja"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:242
 msgid "no prints have been enrolled"
@@ -7572,15 +7585,15 @@ msgstr "Trenutno dejavna prijava"
 
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
-#: panels/user-accounts/cc-user-panel.c:930
+#: panels/user-accounts/cc-user-panel.c:935
 msgid "Enabled"
 msgstr "Omogočeno"
 
-#: panels/user-accounts/cc-user-panel.c:1248
+#: panels/user-accounts/cc-user-panel.c:1254
 msgid "Failed to contact the accounts service"
 msgstr "Napaka med povezovanjem s storitvijo računov"
 
-#: panels/user-accounts/cc-user-panel.c:1250
+#: panels/user-accounts/cc-user-panel.c:1256
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 
@@ -7588,7 +7601,7 @@ msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1282
+#: panels/user-accounts/cc-user-panel.c:1288
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7596,12 +7609,12 @@ msgstr ""
 "Za spreminjanje,\n"
 "kliknite na ikono *"
 
-#: panels/user-accounts/cc-user-panel.c:1355
+#: panels/user-accounts/cc-user-panel.c:1361
 msgid "Delete the selected user account"
 msgstr "Izbriši izbran uporabniški račun"
 
-#: panels/user-accounts/cc-user-panel.c:1367
-#: panels/user-accounts/cc-user-panel.c:1486
+#: panels/user-accounts/cc-user-panel.c:1373
+#: panels/user-accounts/cc-user-panel.c:1492
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7609,7 +7622,7 @@ msgstr ""
 "Za izbris izbranega uporabniškega\n"
 "računa, kliknite na ikono *"
 
-#: panels/user-accounts/cc-user-panel.c:1539
+#: panels/user-accounts/cc-user-panel.c:1545
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Odklenite za spreminjanje nastavitev in uporabnikov"
 
@@ -7642,7 +7655,7 @@ msgstr "Nastavitve računa"
 msgid "_Administrator"
 msgstr "_Skrbnik"
 
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:301
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7650,36 +7663,40 @@ msgstr ""
 "Skrbniki lahko dodajo in odstranijo druge uporabnike in vsem spreminjajo "
 "nastavitve."
 
-#: panels/user-accounts/cc-user-panel.ui:321
+#: panels/user-accounts/cc-user-panel.ui:333
 msgid "_Parental Controls"
 msgstr "_Starševski nadzor"
 
-#: panels/user-accounts/cc-user-panel.ui:411
+#: panels/user-accounts/cc-user-panel.ui:377
+msgid "Open the Parental Controls application."
+msgstr "Odpri nadrejen nastavitveni program"
+
+#: panels/user-accounts/cc-user-panel.ui:452
 msgid "Authentication & Login"
 msgstr "Overitev in prijava"
 
-#: panels/user-accounts/cc-user-panel.ui:480
+#: panels/user-accounts/cc-user-panel.ui:521
 msgid "_Fingerprint Login"
 msgstr "Prijava s _prstnimi odtisi"
 
-#: panels/user-accounts/cc-user-panel.ui:522
+#: panels/user-accounts/cc-user-panel.ui:563
 msgid "A_utomatic Login"
 msgstr "_Samodejna prijava"
 
-#: panels/user-accounts/cc-user-panel.ui:552
+#: panels/user-accounts/cc-user-panel.ui:593
 msgid "Account Activity"
 msgstr "Dejavnost računa"
 
-#: panels/user-accounts/cc-user-panel.ui:593
+#: panels/user-accounts/cc-user-panel.ui:634
 msgid "Remove User…"
 msgstr "Odstrani uporabnika …"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:632
+#: panels/user-accounts/cc-user-panel.ui:673
 msgid "No Users Found"
 msgstr "Ni najdenih uporabnikov"
 
-#: panels/user-accounts/cc-user-panel.ui:642
+#: panels/user-accounts/cc-user-panel.ui:683
 msgid "Unlock to add a user account."
 msgstr "Odklenite za dodajanje uporabniškega računa."
 
@@ -8217,7 +8234,7 @@ msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Konča program"
 
-#: shell/help-overlay.ui:27 shell/help-overlay.ui:48
+#: shell/help-overlay.ui:27 shell/help-overlay.ui:57
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Iskanje"
@@ -8227,12 +8244,12 @@ msgctxt "shortcut window"
 msgid "Panels"
 msgstr "Pulti"
 
-#: shell/help-overlay.ui:40
+#: shell/help-overlay.ui:41 shell/help-overlay.ui:49
 msgctxt "shortcut window"
 msgid "Go back to previous panel"
 msgstr "Pokaže predhodni pult"
 
-#: shell/help-overlay.ui:53
+#: shell/help-overlay.ui:62
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Prekliče iskanje"
