@@ -79,6 +79,9 @@ struct _CcKeyboardShortcutDialog
  };
 
 G_DEFINE_TYPE (CcKeyboardShortcutDialog, cc_keyboard_shortcut_dialog, GTK_TYPE_DIALOG)
+static gboolean
+is_matched_shortcut_present (GtkListBox *listbox,
+                             gpointer user_data);
 
 static SectionRowData*
 section_row_data_new (const gchar *section_id,
@@ -320,12 +323,6 @@ show_shortcut_list (CcKeyboardShortcutDialog *self)
       is_custom_shortcuts = (strcmp (section_data->section_id, "custom") == 0);
       gtk_stack_set_transition_type (self->stack, GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT);
     }
-
-  if (is_custom_shortcuts)
-    gtk_list_box_set_placeholder (self->shortcut_listbox, NULL);
-  else
-    gtk_list_box_set_placeholder (self->shortcut_listbox, self->empty_search_placeholder);
-
   gtk_list_box_invalidate_filter (self->shortcut_listbox);
 
   if (is_custom_shortcuts && (self->custom_shortcut_count == 0))
@@ -458,7 +455,10 @@ reset_all_clicked_cb (CcKeyboardShortcutDialog *self)
 static void
 search_entry_cb (CcKeyboardShortcutDialog *self)
 {
-  if (gtk_entry_get_text_length (GTK_ENTRY (self->search_entry)) == 0 && self->section_row == NULL)
+  gboolean is_shortcut = is_matched_shortcut_present (self->shortcut_listbox, self);
+  if (!is_shortcut)
+      gtk_stack_set_visible_child (self->stack, self->empty_search_placeholder);
+  else if (gtk_entry_get_text_length (GTK_ENTRY (self->search_entry)) == 0 && self->section_row == NULL)
     show_section_list (self);
   else if (gtk_stack_get_visible_child (self->stack) != GTK_WIDGET (self->shortcut_scrolled_window))
     show_shortcut_list (self);
@@ -662,6 +662,20 @@ shortcut_filter_function (GtkListBoxRow *row,
     }
 
   return retval;
+}
+
+static gboolean
+is_matched_shortcut_present (GtkListBox* listbox,
+                             gpointer user_data)
+{
+  for (gint i = 0; ; i++)
+    {
+      GtkListBoxRow *current = gtk_list_box_get_row_at_index (listbox, i);
+      if (!current)
+        return FALSE;
+      if (shortcut_filter_function (current, user_data))
+        return TRUE;
+    }
 }
 
 static void
