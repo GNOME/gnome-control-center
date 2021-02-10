@@ -24,6 +24,7 @@
 #include <glib.h>
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <libhandy-1/handy.h>
 
 #include "cc-list-row.h"
 #include "list-box-helper.h"
@@ -36,27 +37,26 @@
 #define APP_PREFIX "/org/gnome/desktop/notifications/application/"
 
 struct _CcNotificationsPanel {
-  CcPanel            parent_instance;
+  CcPanel             parent_instance;
 
-  GtkListBox        *app_listbox;
-  GtkAdjustment     *focus_adjustment;
-  CcListRow         *lock_screen_row;
-  GtkScrolledWindow *main_scrolled_window;
-  GtkBox            *main_box;
-  GtkListBox        *options_listbox;
-  CcListRow         *dnd_row;
-  GtkSizeGroup      *sizegroup1;
+  HdyPreferencesPage *page;
+  GtkListBox         *app_listbox;
+  GtkAdjustment      *focus_adjustment;
+  CcListRow          *lock_screen_row;
+  GtkListBox         *options_listbox;
+  CcListRow          *dnd_row;
+  GtkSizeGroup       *sizegroup1;
 
-  GSettings         *master_settings;
+  GSettings          *master_settings;
 
-  GCancellable      *cancellable;
+  GCancellable       *cancellable;
 
-  GHashTable        *known_applications;
+  GHashTable         *known_applications;
 
-  GList             *sections;
-  GList             *sections_reverse;
+  GList              *sections;
+  GList              *sections_reverse;
 
-  GDBusProxy        *perm_store;
+  GDBusProxy         *perm_store;
 };
 
 struct _CcNotificationsPanelClass {
@@ -107,7 +107,6 @@ keynav_failed (CcNotificationsPanel *panel,
                GtkDirectionType      direction,
                GtkWidget            *widget)
 {
-  gdouble  value, lower, upper, page;
   GList   *item, *sections;
 
   /* Find the widget in the list of GtkWidgets */
@@ -121,22 +120,6 @@ keynav_failed (CcNotificationsPanel *panel,
   if (item->next)
     {
       gtk_widget_child_focus (GTK_WIDGET (item->next->data), direction);
-      return TRUE;
-    }
-
-  value = gtk_adjustment_get_value (panel->focus_adjustment);
-  lower = gtk_adjustment_get_lower (panel->focus_adjustment);
-  upper = gtk_adjustment_get_upper (panel->focus_adjustment);
-  page  = gtk_adjustment_get_page_size (panel->focus_adjustment);
-
-  if (direction == GTK_DIR_UP && value > lower)
-    {
-      gtk_adjustment_set_value (panel->focus_adjustment, lower);
-      return TRUE;
-    }
-  else if (direction == GTK_DIR_DOWN && value < upper - page)
-    {
-      gtk_adjustment_set_value (panel->focus_adjustment, upper - page);
       return TRUE;
     }
 
@@ -183,20 +166,14 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                    panel->lock_screen_row,
                    "active", G_SETTINGS_BIND_DEFAULT);
 
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (panel->main_box), panel->focus_adjustment);
+  gtk_container_set_focus_vadjustment (GTK_CONTAINER (panel->page), panel->focus_adjustment);
 
   panel->sections = g_list_append (panel->sections, panel->options_listbox);
   panel->sections_reverse = g_list_prepend (panel->sections_reverse, panel->options_listbox);
-  gtk_list_box_set_header_func (panel->options_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 
   panel->sections = g_list_append (panel->sections, panel->app_listbox);
   panel->sections_reverse = g_list_prepend (panel->sections_reverse, panel->app_listbox);
   gtk_list_box_set_sort_func (panel->app_listbox, (GtkListBoxSortFunc)sort_apps, NULL, NULL);
-  gtk_list_box_set_header_func (panel->app_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 
   build_app_store (panel);
 
@@ -234,11 +211,10 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/notifications/cc-notifications-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, page);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, app_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, focus_adjustment);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, lock_screen_row);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_scrolled_window);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, options_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_row);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, sizegroup1);
