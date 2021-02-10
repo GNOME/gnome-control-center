@@ -264,14 +264,6 @@ cc_usage_panel_init (CcUsagePanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_list_box_set_header_func (self->usage_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->trash_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
   g_settings_bind (self->privacy_settings,
