@@ -64,19 +64,11 @@
           </object>
         </child>
         <child>
-          <object class="GtkScrolledWindow">
+          <object class="HdyPreferencesPage">
             <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="min_content_height">500</property>
             <child>
-              <object class="HdyClamp">
+              <object class="HdyPreferencesGroup">
                 <property name="visible">True</property>
-                <property name="margin_top">32</property>
-                <property name="margin_bottom">32</property>
-                <property name="margin_start">12</property>
-                <property name="margin_end">12</property>
-
                 <child>
                   <object class="GtkBox">
                     <property name="visible">True</property>
@@ -84,7 +76,6 @@
                     <property name="spacing">12</property>
                     <property name="orientation">vertical</property>
                     <property name="hexpand">True</property>
-
                     <child>
                       <object class="GtkLabel" id="accounts_label">
                         <property name="visible">True</property>
@@ -109,69 +100,60 @@
                         <property name="label" translatable="yes">No internet connection — connect to set up new online accounts</property>
                       </object>
                     </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="HdyPreferencesGroup" id="accounts_group">
+                <property name="visible">True</property>
+                <child>
+                  <object class="GtkListBox" id="accounts_listbox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="selection_mode">none</property>
+                    <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
+                    <accessibility>
+                      <relation target="accounts_label" type="labelled-by"/>
+                    </accessibility>
+                    <style>
+                      <class name="content"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="HdyPreferencesGroup" id="providers_group">
+                <property name="visible">True</property>
+                <property name="title" translatable="yes">Add an account</property>
+                <child>
+                  <object class="GtkListBox" id="providers_listbox">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="selection_mode">none</property>
+                    <signal name="row-activated" handler="on_provider_row_activated" object="CcGoaPanel" swapped="yes" />
+                    <accessibility>
+                      <relation target="providers_group" type="labelled-by"/>
+                    </accessibility>
                     <child>
-                      <object class="GtkFrame" id="accounts_frame">
-                        <property name="can_focus">False</property>
+                      <object class="GtkListBoxRow" id="more_providers_row">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
                         <child>
-                          <object class="GtkListBox" id="accounts_listbox">
+                          <object class="GtkImage">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="selection_mode">none</property>
-                            <signal name="row-activated" handler="on_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
-                            <accessibility>
-                              <relation target="accounts_label" type="labelled-by"/>
-                            </accessibility>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="margin">22</property>
+                            <property name="icon-name">view-more-symbolic</property>
                           </object>
                         </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="GtkLabel" id="providers_label">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="margin-top">20</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Add an account</property>
-                        <attributes>
-                          <attribute name="weight" value="bold" />
-                        </attributes>
-                        <accessibility>
-                          <relation target="providers_listbox" type="label-for"/>
-                        </accessibility>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkFrame">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <child>
-                          <object class="GtkListBox" id="providers_listbox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="selection_mode">none</property>
-                            <signal name="row-activated" handler="on_provider_row_activated" object="CcGoaPanel" swapped="yes" />
-                            <accessibility>
-                              <relation target="providers_label" type="labelled-by"/>
-                            </accessibility>
-                            <child>
-                              <object class="GtkListBoxRow" id="more_providers_row">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="hexpand">True</property>
-                                    <property name="margin">22</property>
-                                    <property name="icon-name">view-more-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                    <style>
+                      <class name="content"/>
+                    </style>
                   </object>
                 </child>
               </object>

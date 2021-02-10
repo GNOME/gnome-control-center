@@ -23,6 +23,7 @@
 #include <gio/gio.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
+#include <handy.h>
 
 #define GOA_API_IS_SUBJECT_TO_CHANGE
 #include <goa/goa.h>
@@ -38,20 +39,20 @@ struct _CcGoaPanel
 {
   CcPanel parent_instance;
 
-  GtkFrame      *accounts_frame;
-  GtkListBox    *accounts_listbox;
-  GtkDialog     *edit_account_dialog;
-  GtkHeaderBar  *edit_account_headerbar;
-  GtkBox        *editor_box;
-  GtkListBoxRow *more_providers_row;
-  GtkBox        *new_account_vbox;
-  GtkLabel      *notification_label;
-  GtkRevealer   *notification_revealer;
-  GtkLabel      *offline_label;
-  GtkListBox    *providers_listbox;
-  GtkButton     *remove_account_button;
-  GtkStack      *stack;
-  GtkBox        *accounts_vbox;
+  HdyPreferencesGroup *accounts_group;
+  GtkListBox          *accounts_listbox;
+  GtkDialog           *edit_account_dialog;
+  GtkHeaderBar        *edit_account_headerbar;
+  GtkBox              *editor_box;
+  GtkListBoxRow       *more_providers_row;
+  GtkBox              *new_account_vbox;
+  GtkLabel            *notification_label;
+  GtkRevealer         *notification_revealer;
+  GtkLabel            *offline_label;
+  GtkListBox          *providers_listbox;
+  GtkButton           *remove_account_button;
+  GtkStack            *stack;
+  GtkBox              *accounts_vbox;
 
   GoaClient *client;
   GoaObject *active_object;
@@ -438,19 +439,11 @@ cc_goa_panel_init (CcGoaPanel *panel)
 
   gtk_widget_init_template (GTK_WIDGET (panel));
 
-  gtk_list_box_set_header_func (panel->accounts_listbox,
-                                cc_list_box_update_header_func,
-                                NULL,
-                                NULL);
   gtk_list_box_set_sort_func (panel->accounts_listbox,
                               sort_func,
                               panel,
                               NULL);
 
-  gtk_list_box_set_header_func (panel->providers_listbox,
-                                cc_list_box_update_header_func,
-                                NULL,
-                                NULL);
   gtk_list_box_set_sort_func (panel->providers_listbox,
                               sort_providers_func,
                               panel,
@@ -536,7 +529,7 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/online-accounts/online-accounts.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_group);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, accounts_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_dialog);
@@ -706,21 +699,21 @@ static void
 hide_row_for_account (CcGoaPanel *self, GtkWidget *row, GList *other_rows)
 {
   gtk_widget_hide (row);
-  gtk_widget_set_visible (GTK_WIDGET (self->accounts_frame), other_rows != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->accounts_group), other_rows != NULL);
 }
 
 static void
 remove_row_for_account (CcGoaPanel *self, GtkWidget *row, GList *other_rows)
 {
   gtk_widget_destroy (row);
-  gtk_widget_set_visible (GTK_WIDGET (self->accounts_frame), other_rows != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->accounts_group), other_rows != NULL);
 }
 
 static void
 show_row_for_account (CcGoaPanel *self, GtkWidget *row, GList *other_rows)
 {
   gtk_widget_show (row);
-  gtk_widget_show (GTK_WIDGET (self->accounts_frame));
+  gtk_widget_show (GTK_WIDGET (self->accounts_group));
 }
 
 static void
@@ -824,7 +817,7 @@ on_account_added (GoaClient *client,
 
   /* Add to the listbox */
   gtk_container_add (GTK_CONTAINER (self->accounts_listbox), row);
-  gtk_widget_show (GTK_WIDGET (self->accounts_frame));
+  gtk_widget_show (GTK_WIDGET (self->accounts_group));
 
   g_clear_pointer (&title, g_free);
   g_clear_object (&gicon);
