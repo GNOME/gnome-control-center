@@ -851,7 +851,6 @@ static void
 setup_listbox (CcDateTimePanel *self,
                GtkWidget       *listbox)
 {
-  gtk_list_box_set_header_func (GTK_LIST_BOX (listbox), cc_list_box_update_header_func, NULL, NULL);
   self->listboxes = g_list_append (self->listboxes, listbox);
   self->listboxes_reverse = g_list_prepend (self->listboxes_reverse, listbox);
 }

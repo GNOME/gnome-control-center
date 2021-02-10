@@ -24,7 +24,7 @@
 #include <glib.h>
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
-#include <libhandy-1/handy.h>
+#include <handy.h>
 
 #include "cc-list-row.h"
 #include "list-box-helper.h"
