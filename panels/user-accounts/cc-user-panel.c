@@ -921,14 +921,14 @@ show_user (ActUser *user, CcUserPanel *self)
 #ifdef HAVE_MALCONTENT
         /* Parental Controls: Unavailable if user is admin */
         if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
-                GtkStyleContext *context = gtk_widget_get_style_context (self->parental_controls_button_label);
+                GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (self->parental_controls_button_label));
 
                 gtk_widget_hide (GTK_WIDGET (self->parental_control_go_next));
                 /* TRANSLATORS: Status of Parental Controls setup */
                 gtk_label_set_text (self->parental_controls_button_label, _("Unavailable"));
                 gtk_style_context_add_class (context, "dim-label");
         } else {
-                GtkStyleContext *context = gtk_widget_get_style_context (self->parental_controls_button_label);
+                GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (self->parental_controls_button_label));
 
                 if (is_parental_controls_enabled_for_user (user))
                         /* TRANSLATORS: Status of Parental Controls setup */
