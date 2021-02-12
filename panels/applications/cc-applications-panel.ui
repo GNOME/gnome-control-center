@@ -4,72 +4,72 @@
     <property name="visible">True</property>
     <property name="can-focus">False</property>
     <child>
-      <object class="GtkScrolledWindow" id="main_scroll">
+      <object class="GtkStack" id="stack">
         <property name="visible">1</property>
-        <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="HdyClamp">
-            <property name="visible">True</property>
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
+          <object class="GtkBox" id="empty_box">
+            <property name="visible">1</property>
+            <property name="orientation">vertical</property>
+            <property name="valign">center</property>
             <child>
-              <object class="GtkStack" id="stack">
+              <object class="GtkImage">
                 <property name="visible">1</property>
+                <property name="valign">start</property>
+                <property name="pixel-size">80</property>
+                <property name="icon-name">org.gnome.Software-symbolic</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+              </object>
+              <packing>
+                <property name="fill">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">1</property>
+                <property name="margin-bottom">15</property>
+                <property name="label" translatable="yes">No applications</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
+                <attributes>
+                  <attribute name="scale" value="1.2"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="install_button">
+                <property name="label" translatable="yes">Install some…</property>
+                <property name="visible">1</property>
+                <property name="can-focus">1</property>
+                <property name="receives-default">1</property>
+                <property name="halign">center</property>
+                <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
+              </object>
+              <packing>
+                <property name="fill">0</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="settings_page">
+            <property name="visible">1</property>
+            <property name="hscrollbar-policy">never</property>
+            <child>
+              <object class="HdyClamp">
+                <property name="visible">True</property>
+                <property name="margin_top">32</property>
+                <property name="margin_bottom">32</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
                 <child>
-                  <object class="GtkBox" id="empty_box">
-                    <property name="visible">1</property>
-                    <property name="orientation">vertical</property>
-                    <property name="valign">center</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">1</property>
-                        <property name="valign">start</property>
-                        <property name="pixel-size">80</property>
-                        <property name="icon-name">org.gnome.Software-symbolic</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="fill">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">1</property>
-                        <property name="margin-bottom">15</property>
-                        <property name="label" translatable="yes">No applications</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                        <attributes>
-                          <attribute name="scale" value="1.2"/>
-                        </attributes>
-                      </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="install_button">
-                        <property name="label" translatable="yes">Install some…</property>
-                        <property name="visible">1</property>
-                        <property name="can-focus">1</property>
-                        <property name="receives-default">1</property>
-                        <property name="halign">center</property>
-                        <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
-                      </object>
-                      <packing>
-                        <property name="fill">0</property>
-                        <property name="position">2</property>
-                      </packing>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox" id="settings_box">
+                  <object class="GtkBox">
                     <property name="visible">1</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">24</property>
