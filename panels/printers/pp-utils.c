@@ -1502,14 +1502,16 @@ printer_set_ppd_async (const gchar  *printer_name,
   if (printer_name == NULL ||
       printer_name[0] == '\0')
     {
-      goto out;
+      callback (printer_name, FALSE, user_data);
+      return;
     }
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      goto out;
+      callback (printer_name, FALSE, user_data);
+      return;
     }
 
   g_dbus_connection_call (bus,
@@ -1529,11 +1531,6 @@ printer_set_ppd_async (const gchar  *printer_name,
                           cancellable,
                           printer_set_ppd_async_dbus_cb,
                           psp_data_new (printer_name, NULL, cancellable, callback, user_data));
-
-  return;
-
-out:
-  callback (printer_name, FALSE, user_data);
 }
 
 static void
@@ -1553,14 +1550,16 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
   if (!success)
     {
       g_warning ("%s", error->message);
-      goto out;
+      data->callback (data->printer_name, FALSE, data->user_data);
+      return;
     }
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      goto out;
+      data->callback (data->printer_name, FALSE, data->user_data);
+      return;
     }
 
   g_dbus_connection_call (bus,
@@ -1581,11 +1580,6 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
                           printer_set_ppd_async_dbus_cb,
                           data);
    g_steal_pointer (&data);
-
-  return;
-
-out:
-  data->callback (data->printer_name, FALSE, data->user_data);
 }
 
 /*
@@ -1606,7 +1600,8 @@ printer_set_ppd_file_async (const gchar  *printer_name,
   if (printer_name == NULL ||
       printer_name[0] == '\0')
     {
-      goto out;
+      callback (printer_name, FALSE, user_data);
+      return;
     }
 
   /*
@@ -1625,14 +1620,7 @@ printer_set_ppd_file_async (const gchar  *printer_name,
                      NULL,
                      printer_set_ppd_file_async_scb,
                      psp_data_new (printer_name, g_file_get_path (destination_ppd_file), cancellable, callback, user_data));
-
-  return;
-
-out:
-  callback (printer_name, FALSE, user_data);
 }
-
-
 
 typedef void (*GPACallback) (gchar    **attribute_values,
                              gpointer   user_data);
@@ -1863,7 +1851,11 @@ get_ppd_names_async_cb (gchar    **attribute_values,
       g_free (data->result);
       data->result = NULL;
 
-      goto out;
+      data->callback (NULL,
+                      data->printer_name,
+                      TRUE,
+                      data->user_data);
+      return;
     }
 
   if (attribute_values)
@@ -1874,10 +1866,9 @@ get_ppd_names_async_cb (gchar    **attribute_values,
       g_free (attribute_values);
     }
 
-out:
   data->callback (data->result,
                   data->printer_name,
-                  g_cancellable_is_cancelled (data->cancellable),
+                  FALSE,
                   data->user_data);
 }
 
@@ -2001,16 +1992,32 @@ get_device_attributes_cb (gchar    *device_id,
   g_autoptr(GPNData) data = user_data;
 
   if (g_cancellable_is_cancelled (data->cancellable))
-    goto out;
+    {
+      data->callback (NULL,
+                      data->printer_name,
+                      TRUE,
+                      data->user_data);
+      return;
+    }
 
   if (!device_id || !device_make_and_model || !device_uri)
-    goto out;
+    {
+      data->callback (NULL,
+                      data->printer_name,
+                      FALSE,
+                      data->user_data);
+      return;
+    }
 
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, &error);
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      goto out;
+      data->callback (NULL,
+                      data->printer_name,
+                      FALSE,
+                      data->user_data);
+      return;
     }
 
   g_dbus_connection_call (bus,
@@ -2029,14 +2036,6 @@ get_device_attributes_cb (gchar    *device_id,
                           get_ppd_names_async_dbus_scb,
                           data);
   g_steal_pointer (&data);
-
-  return;
-
-out:
-  data->callback (NULL,
-                  data->printer_name,
-                  g_cancellable_is_cancelled (data->cancellable),
-                  data->user_data);
 }
 
 /*
@@ -2273,16 +2272,23 @@ get_device_attributes_async_scb (GHashTable *result,
     }
 
   if (g_cancellable_is_cancelled (data->cancellable))
-    goto out;
+    {
+      data->callback (NULL, NULL, NULL, data->user_data);
+      return;
+    }
 
   if (!data->device_uri)
-    goto out;
+    {
+      data->callback (NULL, NULL, NULL, data->user_data);
+      return;
+    }
 
   bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
   if (!bus)
     {
       g_warning ("Failed to get system bus: %s", error->message);
-      goto out;
+      data->callback (NULL, NULL, NULL, data->user_data);
+      return;
     }
 
   data->backend_list = create_backends_list ();
@@ -2311,11 +2317,6 @@ get_device_attributes_async_scb (GHashTable *result,
                           get_device_attributes_async_dbus_cb,
                           data);
    g_steal_pointer (&data);
-
-  return;
-
-out:
-  data->callback (NULL, NULL, NULL, data->user_data);
 }
 
 /*
