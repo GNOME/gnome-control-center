@@ -164,7 +164,7 @@ get_all_ppds_async_cb (PPDList  *ppds,
 {
   PpDetailsDialog *self = user_data;
 
-  self->all_ppds_list = ppds;
+  self->all_ppds_list = ppd_list_copy (ppds);
 
   if (self->pp_ppd_selection_dialog)
     pp_ppd_selection_dialog_set_ppd_list (self->pp_ppd_selection_dialog,

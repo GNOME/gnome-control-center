@@ -1089,7 +1089,7 @@ get_all_ppds_async_cb (PPDList  *ppds,
 {
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
 
-  self->all_ppds_list = ppds;
+  self->all_ppds_list = ppd_list_copy (ppds);
 
   if (self->pp_new_printer_dialog)
     pp_new_printer_dialog_set_ppd_list (self->pp_new_printer_dialog,

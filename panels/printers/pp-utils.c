@@ -2396,6 +2396,8 @@ gap_data_new (GCancellable *cancellable, GAPCallback callback, gpointer user_dat
 static void
 gap_data_free (GAPData *data)
 {
+  if (data->result != NULL)
+    ppd_list_free (data->result);
   g_clear_object (&data->cancellable);
   if (data->context)
     g_main_context_unref (data->context);
@@ -2405,19 +2407,10 @@ gap_data_free (GAPData *data)
 static gboolean
 get_all_ppds_idle_cb (gpointer user_data)
 {
-  GAPData *data = (GAPData *) user_data;
+  GAPData *data = user_data;
 
-  /* Don't call callback if cancelled */
-  if (data->cancellable &&
-      g_cancellable_is_cancelled (data->cancellable))
-    {
-      ppd_list_free (data->result);
-      data->result = NULL;
-    }
-  else
-    {
-      data->callback (data->result, data->user_data);
-    }
+  if (!g_cancellable_is_cancelled (data->cancellable))
+    data->callback (data->result, data->user_data);
 
   return FALSE;
 }
