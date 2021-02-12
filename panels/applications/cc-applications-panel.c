@@ -56,92 +56,92 @@
 
 struct _CcApplicationsPanel
 {
-  CcPanel            parent;
+  CcPanel              parent;
 
-  GtkBox            *sidebar_box;
-  GtkListBox        *sidebar_listbox;
-  GtkEntry          *sidebar_search_entry;
-  GtkButton         *header_button;
-  GtkLabel          *title_label;
-  GAppInfoMonitor   *monitor;
-  gulong             monitor_id;
+  GtkBox              *sidebar_box;
+  GtkListBox          *sidebar_listbox;
+  GtkEntry            *sidebar_search_entry;
+  GtkButton           *header_button;
+  GtkLabel            *title_label;
+  GAppInfoMonitor     *monitor;
+  gulong               monitor_id;
 #ifdef HAVE_MALCONTENT
-  GCancellable      *cancellable;
+  GCancellable        *cancellable;
 
-  MctAppFilter      *app_filter;
-  MctManager        *manager;
-  guint              app_filter_id;
+  MctAppFilter        *app_filter;
+  MctManager          *manager;
+  guint                app_filter_id;
 #endif
 
-  gchar             *current_app_id;
-  gchar             *current_portal_app_id;
+  gchar               *current_app_id;
+  gchar               *current_portal_app_id;
 
-  GHashTable        *globs;
-  GHashTable        *search_providers;
+  GHashTable          *globs;
+  GHashTable          *search_providers;
 
-  GDBusProxy        *perm_store;
-  GSettings         *notification_settings;
-  GSettings         *location_settings;
-  GSettings         *privacy_settings;
-  GSettings         *search_settings;
+  GDBusProxy          *perm_store;
+  GSettings           *notification_settings;
+  GSettings           *location_settings;
+  GSettings           *privacy_settings;
+  GSettings           *search_settings;
 
-  GtkStack          *stack;
-  HdyStatusPage     *empty_page;
-  GtkScrolledWindow *settings_page;
-  GtkButton         *install_button;
+  GtkStack            *stack;
+  HdyStatusPage       *empty_page;
+  HdyPreferencesPage  *settings_page;
+  GtkButton           *install_button;
 
-  GtkBox            *permission_section;
-  GtkListBox        *permission_list;
-  CcToggleRow       *camera;
-  CcInfoRow         *no_camera;
-  CcToggleRow       *location;
-  CcInfoRow         *no_location;
-  CcToggleRow       *shortcuts;
-  CcToggleRow       *microphone;
-  CcInfoRow         *no_microphone;
-  CcInfoRow         *builtin;
-  GtkDialog         *builtin_dialog;
-  GtkLabel          *builtin_label;
-  GtkListBox        *builtin_list;
+  HdyPreferencesGroup *permission_section;
+  GtkListBox          *permission_list;
+  CcToggleRow         *camera;
+  CcInfoRow           *no_camera;
+  CcToggleRow         *location;
+  CcInfoRow           *no_location;
+  CcToggleRow         *shortcuts;
+  CcToggleRow         *microphone;
+  CcInfoRow           *no_microphone;
+  CcInfoRow           *builtin;
+  GtkDialog           *builtin_dialog;
+  GtkLabel            *builtin_label;
+  GtkListBox          *builtin_list;
 
-  GtkBox            *integration_section;
-  GtkListBox        *integration_list;
-  CcToggleRow       *notification;
-  CcToggleRow       *background;
-  CcToggleRow       *wallpaper;
-  CcToggleRow       *sound;
-  CcInfoRow         *no_sound;
-  CcToggleRow       *search;
-  CcInfoRow         *no_search;
+  HdyPreferencesGroup *integration_section;
+  GtkListBox          *integration_list;
+  CcToggleRow         *notification;
+  CcToggleRow         *background;
+  CcToggleRow         *wallpaper;
+  CcToggleRow         *sound;
+  CcInfoRow           *no_sound;
+  CcToggleRow         *search;
+  CcInfoRow           *no_search;
 
-  GtkBox            *handler_section;
-  GtkButton         *handler_reset;
-  GtkListBox        *handler_list;
-  CcInfoRow         *hypertext;
-  CcInfoRow         *text;
-  CcInfoRow         *images;
-  CcInfoRow         *fonts;
-  CcInfoRow         *archives;
-  CcInfoRow         *packages;
-  CcInfoRow         *audio;
-  CcInfoRow         *video;
-  CcInfoRow         *other;
-  CcInfoRow         *link;
+  GtkBox              *handler_section;
+  GtkButton           *handler_reset;
+  GtkListBox          *handler_list;
+  CcInfoRow           *hypertext;
+  CcInfoRow           *text;
+  CcInfoRow           *images;
+  CcInfoRow           *fonts;
+  CcInfoRow           *archives;
+  CcInfoRow           *packages;
+  CcInfoRow           *audio;
+  CcInfoRow           *video;
+  CcInfoRow           *other;
+  CcInfoRow           *link;
 
-  GtkBox            *usage_section;
-  GtkListBox        *usage_list;
-  CcInfoRow         *storage;
-  GtkDialog         *storage_dialog;
-  GtkListBox        *storage_list;
-  CcInfoRow         *app;
-  CcInfoRow         *data;
-  CcInfoRow         *cache;
-  CcInfoRow         *total;
-  GtkButton         *clear_cache_button;
+  GtkBox              *usage_section;
+  GtkListBox          *usage_list;
+  CcInfoRow           *storage;
+  GtkDialog           *storage_dialog;
+  GtkListBox          *storage_list;
+  CcInfoRow           *app;
+  CcInfoRow           *data;
+  CcInfoRow           *cache;
+  CcInfoRow           *total;
+  GtkButton           *clear_cache_button;
 
-  guint64            app_size;
-  guint64            cache_size;
-  guint64            data_size;
+  guint64              app_size;
+  guint64              cache_size;
+  guint64              data_size;
 };
 
 static void select_app (CcApplicationsPanel *self,
@@ -2067,30 +2067,6 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                            G_CALLBACK (row_activated_cb), self, G_CONNECT_SWAPPED);
 
   g_signal_connect_object (self->header_button, "clicked", G_CALLBACK (open_software_cb), self, G_CONNECT_SWAPPED);
-
-  gtk_list_box_set_header_func (self->permission_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->integration_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->handler_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->usage_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->builtin_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->storage_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 
   gtk_list_box_set_sort_func (self->sidebar_listbox,
                               compare_rows,
