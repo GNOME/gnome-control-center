@@ -218,6 +218,7 @@ void        printer_get_ppd_async (const gchar *printer_name,
                                    PGPCallback  callback,
                                    gpointer     user_data);
 
+/* NOTE: 'destination' is passed with ownership as cupsCopyDest doesn't seem to work as expected */
 typedef void (*GNDCallback) (cups_dest_t *destination,
                              gpointer     user_data);
 
