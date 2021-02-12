@@ -1436,7 +1436,11 @@ static void
 psp_data_free (PSPData *data)
 {
   g_free (data->printer_name);
-  g_free (data->ppd_copy);
+  if (data->ppd_copy != NULL)
+    {
+      g_unlink (data->ppd_copy);
+      g_free (data->ppd_copy);
+    }
   g_clear_object (&data->cancellable);
   g_free (data);
 }
@@ -1479,12 +1483,6 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
     data->callback (data->printer_name,
                     result,
                     data->user_data);
-
-  if (data->ppd_copy)
-    {
-      g_unlink (data->ppd_copy);
-      g_free (data->ppd_copy);
-    }
 }
 
 /*
