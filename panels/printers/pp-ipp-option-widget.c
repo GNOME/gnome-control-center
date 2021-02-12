@@ -539,7 +539,7 @@ get_ipp_attributes_cb (GHashTable *table,
   if (self->ipp_attribute)
     g_hash_table_unref (self->ipp_attribute);
 
-  self->ipp_attribute = table;
+  self->ipp_attribute = g_hash_table_ref (table);
 
   update_widget_real (self);
 }

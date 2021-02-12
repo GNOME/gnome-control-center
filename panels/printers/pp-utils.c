@@ -1200,6 +1200,8 @@ gia_data_free (GIAData *data)
   g_free (data->printer_name);
   if (data->attributes_names)
     g_strfreev (data->attributes_names);
+  if (data->result)
+    g_hash_table_unref (data->result);
   if (data->context)
     g_main_context_unref (data->context);
   g_free (data);

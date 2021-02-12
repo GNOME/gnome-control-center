@@ -727,7 +727,7 @@ get_ipp_attributes_cb (GHashTable *table,
   if (self->ipp_attributes)
     g_hash_table_unref (self->ipp_attributes);
 
-  self->ipp_attributes = table;
+  self->ipp_attributes = g_hash_table_ref (table);
   self->ipp_attributes_set = TRUE;
 
   if (self->ppd_filename_set &&
