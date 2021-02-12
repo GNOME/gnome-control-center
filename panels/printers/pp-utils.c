@@ -1767,8 +1767,8 @@ typedef struct
 {
   gchar        *printer_name;
   gchar        *device_uri;
-  GCancellable *cancellable;
   GList        *backend_list;
+  GCancellable *cancellable;
   GDACallback   callback;
   gpointer      user_data;
 } GDAData;
@@ -1793,6 +1793,7 @@ gda_data_free (GDAData *data)
 {
   g_free (data->printer_name);
   g_free (data->device_uri);
+  g_list_free_full(data->backend_list, g_free);
   g_clear_object (&data->cancellable);
   g_free (data);
 }
@@ -2100,7 +2101,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
   g_autoptr(GVariant) output = NULL;
   g_autoptr(GDAData)  data = user_data;
   g_autoptr(GError)   error = NULL;
-  GList              *tmp;
   gchar              *device_id = NULL;
   gchar              *device_make_and_model = NULL;
 
@@ -2206,9 +2206,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
               exclude_scheme_builder = create_other_backends_array ();
             }
 
-          tmp = data->backend_list;
-          data->backend_list = g_list_remove_link (data->backend_list, tmp);
-          g_list_free_full (tmp, g_free);
+          data->backend_list = g_list_delete_link (data->backend_list, data->backend_list);
 
           g_dbus_connection_call (G_DBUS_CONNECTION (g_object_ref (source_object)),
                                   MECHANISM_BUS,
@@ -2238,12 +2236,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
         }
     }
 
-  if (data->backend_list)
-    {
-      g_list_free_full (data->backend_list, g_free);
-      data->backend_list = NULL;
-    }
-
   data->callback (device_id,
                   device_make_and_model,
                   data->device_uri,
@@ -2259,7 +2251,6 @@ get_device_attributes_async_scb (GHashTable *result,
   IPPAttribute     *attr;
   g_autoptr(GDAData) data = user_data;
   g_autoptr(GError) error = NULL;
-  GList            *tmp;
 
   if (result)
     {
@@ -2295,9 +2286,7 @@ get_device_attributes_async_scb (GHashTable *result,
   g_variant_builder_init (&include_scheme_builder, G_VARIANT_TYPE ("as"));
   g_variant_builder_add (&include_scheme_builder, "s", data->backend_list->data);
 
-  tmp = data->backend_list;
-  data->backend_list = g_list_remove_link (data->backend_list, tmp);
-  g_list_free_full (tmp, g_free);
+  data->backend_list = g_list_delete_link (data->backend_list, data->backend_list);
 
   g_dbus_connection_call (g_object_ref (bus),
                           MECHANISM_BUS,
@@ -3169,10 +3158,10 @@ printer_add_option_async (const gchar   *printer_name,
 
 typedef struct
 {
+  GList        *backend_list;
   GCancellable *cancellable;
   GCDCallback   callback;
   gpointer      user_data;
-  GList        *backend_list;
 } GCDData;
 
 static GCDData *
@@ -3342,7 +3331,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
               exclude_scheme_builder = create_other_backends_array ();
             }
 
-          data->backend_list = g_list_remove_link (data->backend_list, data->backend_list);
+          data->backend_list = g_list_delete_link (data->backend_list, data->backend_list);
 
           g_dbus_connection_call (G_DBUS_CONNECTION (g_object_ref (source_object)),
                                   MECHANISM_BUS,
@@ -3376,9 +3365,6 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                           TRUE,
                           TRUE,
                           data->user_data);
-
-          g_list_free_full (data->backend_list, g_free);
-          data->backend_list = NULL;
         }
     }
   else
@@ -3416,7 +3402,7 @@ get_cups_devices_async (GCancellable *cancellable,
   g_variant_builder_init (&include_scheme_builder, G_VARIANT_TYPE ("as"));
   g_variant_builder_add (&include_scheme_builder, "s", backend_name);
 
-  backend_list = g_list_remove_link (backend_list, backend_list);
+  backend_list = g_list_delete_link (backend_list, backend_list);
 
   g_dbus_connection_call (bus,
                           MECHANISM_BUS,
