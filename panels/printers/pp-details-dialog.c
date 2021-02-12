@@ -75,25 +75,6 @@ printer_name_changed (PpDetailsDialog *self)
   gtk_label_set_label (self->dialog_title, title);
 }
 
-static void
-ppd_names_free (gpointer user_data)
-{
-  PPDName **names = (PPDName **) user_data;
-  gint      i;
-
-  if (names)
-    {
-      for (i = 0; names[i]; i++)
-        {
-          g_free (names[i]->ppd_name);
-          g_free (names[i]->ppd_display_name);
-          g_free (names[i]);
-        }
-
-      g_free (names);
-    }
-}
-
 static void set_ppd_cb (const gchar *printer_name, gboolean success, gpointer user_data);
 
 static void
@@ -114,7 +95,6 @@ get_ppd_names_cb (PPDName     **names,
                                  self->cancellable,
                                  set_ppd_cb,
                                  self);
-          ppd_names_free (names);
         }
       else
         {

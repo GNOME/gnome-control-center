@@ -1627,8 +1627,8 @@ typedef void (*GPACallback) (gchar    **attribute_values,
 
 typedef struct
 {
-  gchar         *attribute_name;
   gchar        **ppds_names;
+  gchar         *attribute_name;
   gchar        **result;
   GPACallback    callback;
   gpointer       user_data;
@@ -1655,6 +1655,8 @@ gpa_data_free (GPAData *data)
 {
   g_free (data->attribute_name);
   g_strfreev (data->ppds_names);
+  if (data->result != NULL)
+    g_strfreev (data->result);
   if (data->context)
     g_main_context_unref (data->context);
   g_free (data);
@@ -1825,6 +1827,16 @@ static void
 gpn_data_free (GPNData *data)
 {
   g_free (data->printer_name);
+  if (data->result != NULL)
+    {
+      for (int i = 0; data->result[i]; i++)
+        {
+           g_free (data->result[i]->ppd_name);
+           g_free (data->result[i]->ppd_display_name);
+           g_free (data->result[i]);
+        }
+      g_free (data->result);
+    }
   g_clear_object (&data->cancellable);
   g_free (data);
 }
@@ -1840,17 +1852,6 @@ get_ppd_names_async_cb (gchar    **attribute_values,
 
   if (g_cancellable_is_cancelled (data->cancellable))
     {
-      g_strfreev (attribute_values);
-
-      for (i = 0; data->result[i]; i++)
-        {
-          g_free (data->result[i]->ppd_name);
-          g_free (data->result[i]);
-        }
-
-      g_free (data->result);
-      data->result = NULL;
-
       data->callback (NULL,
                       data->printer_name,
                       TRUE,
@@ -1861,9 +1862,7 @@ get_ppd_names_async_cb (gchar    **attribute_values,
   if (attribute_values)
     {
       for (i = 0; attribute_values[i]; i++)
-        data->result[i]->ppd_display_name = attribute_values[i];
-
-      g_free (attribute_values);
+        data->result[i]->ppd_display_name = g_strdup (attribute_values[i]);
     }
 
   data->callback (data->result,
@@ -1956,7 +1955,7 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
 
   if (result)
     {
-      gchar **ppds_names;
+      g_auto(GStrv) ppds_names = NULL;
 
       data->result = result;
 
@@ -1969,8 +1968,6 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                                 get_ppd_names_async_cb,
                                 data);
       g_steal_pointer (&data);
-
-      g_strfreev (ppds_names);
     }
   else
     {
