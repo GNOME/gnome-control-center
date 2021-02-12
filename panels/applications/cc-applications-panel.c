@@ -23,6 +23,7 @@
 
 #include <config.h>
 #include <glib/gi18n.h>
+#include <handy.h>
 #ifdef HAVE_SNAP
 #include <snapd-glib/snapd-glib.h>
 #endif
@@ -85,7 +86,7 @@ struct _CcApplicationsPanel
   GSettings         *search_settings;
 
   GtkStack          *stack;
-  GtkBox            *empty_box;
+  HdyStatusPage     *empty_page;
   GtkScrolledWindow *settings_page;
   GtkButton         *install_button;
 
@@ -1658,7 +1659,7 @@ update_panel (CcApplicationsPanel *self,
   if (row == NULL)
     {
       gtk_label_set_label (self->title_label, _("Applications"));
-      gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->empty_box));
+      gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->empty_page));
       gtk_widget_hide (GTK_WIDGET (GTK_WIDGET (self->header_button)));
       return;
     }
@@ -1978,7 +1979,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_box);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
