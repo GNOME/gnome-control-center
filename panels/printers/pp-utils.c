@@ -1219,7 +1219,7 @@ static void
 get_ipp_attributes_cb (gpointer user_data)
 {
   GIAData *data = user_data;
-  GSource *idle_source;
+  g_autoptr(GSource) idle_source = NULL;
 
   idle_source = g_idle_source_new ();
   g_source_set_callback (idle_source,
@@ -1227,7 +1227,6 @@ get_ipp_attributes_cb (gpointer user_data)
                          data,
                          (GDestroyNotify) gia_data_free);
   g_source_attach (idle_source, data->context);
-  g_source_unref (idle_source);
 }
 
 static void
@@ -1440,6 +1439,8 @@ psp_data_free (PSPData *data)
   g_free (data);
 }
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (PSPData, psp_data_free)
+
 static void
 printer_set_ppd_async_dbus_cb (GObject      *source_object,
                                GAsyncResult *res,
@@ -1447,7 +1448,7 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
 {
   g_autoptr(GVariant) output = NULL;
   gboolean            result = FALSE;
-  PSPData            *data = user_data;
+  g_autoptr(PSPData)  data = user_data;
   g_autoptr(GError)   error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -1482,8 +1483,6 @@ printer_set_ppd_async_dbus_cb (GObject      *source_object,
       g_unlink (data->ppd_copy);
       g_free (data->ppd_copy);
     }
-
-  psp_data_free (data);
 }
 
 /*
@@ -1544,7 +1543,7 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   gboolean          success;
-  PSPData          *data = user_data;
+  g_autoptr(PSPData) data = user_data;
   g_autoptr(GError) error = NULL;
 
   success = g_file_copy_finish (G_FILE (source_object),
@@ -1581,13 +1580,12 @@ printer_set_ppd_file_async_scb (GObject      *source_object,
                           data->cancellable,
                           printer_set_ppd_async_dbus_cb,
                           data);
+   g_steal_pointer (&data);
 
   return;
 
 out:
   data->callback (data->printer_name, FALSE, data->user_data);
-
-  psp_data_free (data);
 }
 
 /*
@@ -1688,7 +1686,7 @@ static void
 get_ppds_attribute_cb (gpointer user_data)
 {
   GPAData *data = (GPAData *) user_data;
-  GSource *idle_source;
+  g_autoptr(GSource) idle_source = NULL;
 
   idle_source = g_idle_source_new ();
   g_source_set_callback (idle_source,
@@ -1696,7 +1694,6 @@ get_ppds_attribute_cb (gpointer user_data)
                          data,
                          (GDestroyNotify) gpa_data_free);
   g_source_attach (idle_source, data->context);
-  g_source_unref (idle_source);
 }
 
 static gpointer
@@ -1808,6 +1805,8 @@ gda_data_free (GDAData *data)
   g_free (data);
 }
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GDAData, gda_data_free)
+
 typedef struct
 {
   gchar         *printer_name;
@@ -1842,11 +1841,13 @@ gpn_data_free (GPNData *data)
   g_free (data);
 }
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GPNData, gpn_data_free)
+
 static void
 get_ppd_names_async_cb (gchar    **attribute_values,
                         gpointer   user_data)
 {
-  GPNData *data = user_data;
+  g_autoptr(GPNData) data = user_data;
   gint     i;
 
   if (g_cancellable_is_cancelled (data->cancellable))
@@ -1878,8 +1879,6 @@ out:
                   data->printer_name,
                   g_cancellable_is_cancelled (data->cancellable),
                   data->user_data);
-
-  gpn_data_free (data);
 }
 
 static void
@@ -1890,7 +1889,7 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
   g_autoptr(GVariant) output = NULL;
   PPDName            *ppd_item;
   PPDName           **result = NULL;
-  GPNData            *data = user_data;
+  g_autoptr(GPNData)  data = user_data;
   g_autoptr(GError)   error = NULL;
   GList              *driver_list = NULL;
   GList              *iter;
@@ -1978,6 +1977,7 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                                 "NickName",
                                 get_ppd_names_async_cb,
                                 data);
+      g_steal_pointer (&data);
 
       g_strfreev (ppds_names);
     }
@@ -1987,8 +1987,6 @@ get_ppd_names_async_dbus_scb (GObject      *source_object,
                       data->printer_name,
                       g_cancellable_is_cancelled (data->cancellable),
                       data->user_data);
-
-      gpn_data_free (data);
     }
 }
 
@@ -2000,7 +1998,7 @@ get_device_attributes_cb (gchar    *device_id,
 {
   g_autoptr(GDBusConnection) bus = NULL;
   g_autoptr(GError) error = NULL;
-  GPNData          *data = (GPNData *) user_data;
+  g_autoptr(GPNData) data = user_data;
 
   if (g_cancellable_is_cancelled (data->cancellable))
     goto out;
@@ -2030,6 +2028,7 @@ get_device_attributes_cb (gchar    *device_id,
                           data->cancellable,
                           get_ppd_names_async_dbus_scb,
                           data);
+  g_steal_pointer (&data);
 
   return;
 
@@ -2038,8 +2037,6 @@ out:
                   data->printer_name,
                   g_cancellable_is_cancelled (data->cancellable),
                   data->user_data);
-
-  gpn_data_free (data);
 }
 
 /*
@@ -2103,7 +2100,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
 
 {
   g_autoptr(GVariant) output = NULL;
-  GDAData            *data = user_data;
+  g_autoptr(GDAData)  data = user_data;
   g_autoptr(GError)   error = NULL;
   GList              *tmp;
   gchar              *device_id = NULL;
@@ -2231,6 +2228,7 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                                   data->cancellable,
                                   get_device_attributes_async_dbus_cb,
                                   data);
+          g_steal_pointer (&data);
 
           if (include_scheme_builder)
             g_variant_builder_unref (include_scheme_builder);
@@ -2252,8 +2250,6 @@ get_device_attributes_async_dbus_cb (GObject      *source_object,
                   device_make_and_model,
                   data->device_uri,
                   data->user_data);
-
-  gda_data_free (data);
 }
 
 static void
@@ -2263,7 +2259,7 @@ get_device_attributes_async_scb (GHashTable *result,
   g_autoptr(GDBusConnection) bus = NULL;
   GVariantBuilder   include_scheme_builder;
   IPPAttribute     *attr;
-  GDAData          *data = user_data;
+  g_autoptr(GDAData) data = user_data;
   g_autoptr(GError) error = NULL;
   GList            *tmp;
 
@@ -2314,13 +2310,12 @@ get_device_attributes_async_scb (GHashTable *result,
                           data->cancellable,
                           get_device_attributes_async_dbus_cb,
                           data);
+   g_steal_pointer (&data);
 
   return;
 
 out:
   data->callback (NULL, NULL, NULL, data->user_data);
-
-  gda_data_free (data);
 }
 
 /*
@@ -2332,7 +2327,7 @@ get_device_attributes_async (const gchar  *printer_name,
                              GDACallback   callback,
                              gpointer      user_data)
 {
-  gchar   **attributes;
+  g_auto(GStrv) attributes = NULL;
 
   if (!printer_name)
    {
@@ -2347,8 +2342,6 @@ get_device_attributes_async (const gchar  *printer_name,
                             attributes,
                             get_device_attributes_async_scb,
                             gda_data_new (printer_name, cancellable, callback, user_data));
-
-  g_strfreev (attributes);
 }
 
 /*
@@ -2433,7 +2426,7 @@ static void
 get_all_ppds_cb (gpointer user_data)
 {
   GAPData *data = user_data;
-  GSource *idle_source;
+  g_autoptr(GSource) idle_source = NULL;
 
   idle_source = g_idle_source_new ();
   g_source_set_callback (idle_source,
@@ -2441,7 +2434,6 @@ get_all_ppds_cb (gpointer user_data)
                          data,
                          (GDestroyNotify) gap_data_free);
   g_source_attach (idle_source, data->context);
-  g_source_unref (idle_source);
 }
 
 static const struct {
@@ -2911,7 +2903,7 @@ static void
 printer_get_ppd_cb (gpointer user_data)
 {
   PGPData *data = user_data;
-  GSource *idle_source;
+  g_autoptr(GSource) idle_source = NULL;
 
   idle_source = g_idle_source_new ();
   g_source_set_callback (idle_source,
@@ -2919,7 +2911,6 @@ printer_get_ppd_cb (gpointer user_data)
                          data,
                          (GDestroyNotify) pgp_data_free);
   g_source_attach (idle_source, data->context);
-  g_source_unref (idle_source);
 }
 
 static gpointer
@@ -3026,7 +3017,7 @@ static void
 get_named_dest_cb (gpointer user_data)
 {
   GNDData *data = user_data;
-  GSource *idle_source;
+  g_autoptr(GSource) idle_source = NULL;
 
   idle_source = g_idle_source_new ();
   g_source_set_callback (idle_source,
@@ -3034,7 +3025,6 @@ get_named_dest_cb (gpointer user_data)
                          data,
                          (GDestroyNotify) gnd_data_free);
   g_source_attach (idle_source, data->context);
-  g_source_unref (idle_source);
 }
 
 static gpointer
@@ -3101,6 +3091,8 @@ pao_data_free (PAOData *data)
   g_free (data);
 }
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (PAOData, pao_data_free)
+
 static void
 printer_add_option_async_dbus_cb (GObject      *source_object,
                                   GAsyncResult *res,
@@ -3108,7 +3100,7 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
 {
   g_autoptr(GVariant) output = NULL;
   gboolean            success = FALSE;
-  PAOData            *data = user_data;
+  g_autoptr(PAOData)  data = user_data;
   g_autoptr(GError)   error = NULL;
 
   output = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object),
@@ -3133,8 +3125,6 @@ printer_add_option_async_dbus_cb (GObject      *source_object,
 
   if (!g_cancellable_is_cancelled (data->cancellable))
     data->callback (success, data->user_data);
-
-  pao_data_free (data);
 }
 
 void
@@ -3215,6 +3205,8 @@ gcd_data_free (GCDData *data)
   g_free (data);
 }
 
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (GCDData, gcd_data_free)
+
 static gint
 get_suffix_index (const gchar *string)
 {
@@ -3242,7 +3234,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
 {
   g_autoptr(GPtrArray) devices = NULL;
   g_autoptr(GVariant) output = NULL;
-  GCDData            *data = user_data;
+  g_autoptr(GCDData)  data = user_data;
   g_autoptr(GError)   error = NULL;
   gint                num_of_devices = 0;
 
@@ -3329,9 +3321,6 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                       TRUE,
                       g_cancellable_is_cancelled (data->cancellable),
                       data->user_data);
-
-      gcd_data_free (data);
-
       return;
     }
 
@@ -3378,6 +3367,7 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                                   data->cancellable,
                                   get_cups_devices_async_dbus_cb,
                                   data);
+          g_steal_pointer (&data);
 
           if (include_scheme_builder)
             g_variant_builder_unref (include_scheme_builder);
@@ -3405,8 +3395,6 @@ get_cups_devices_async_dbus_cb (GObject      *source_object,
                       g_cancellable_is_cancelled (data->cancellable),
                       data->user_data);
     }
-
-  gcd_data_free (data);
 }
 
 void
