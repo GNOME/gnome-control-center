@@ -136,8 +136,6 @@ got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
   CcBrightnessScale *self;
   GDBusProxy *proxy;
 
-  self = CC_BRIGHTNESS_SCALE (user_data);
-
   proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
   if (proxy == NULL)
     {
@@ -146,6 +144,7 @@ got_proxy_cb (GObject *source_object, GAsyncResult *res, gpointer user_data)
       return;
     }
 
+  self = CC_BRIGHTNESS_SCALE (user_data);
   self->proxy = proxy;
 
   g_signal_connect_object (proxy, "g-properties-changed",
