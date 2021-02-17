@@ -5,15 +5,15 @@
 # Andraž Tori <andraz.tori1@guest.arnes.si>, 2004.
 # Matjaž Horvat <m@owca.info>, 2005–2006.
 # Matic Žgur <mr.zgur@gmail.com>, 2006–2007.
-# Matej Urbančič <mateju@svn.gnome.org>, + 2007–2020.
+# Matej Urbančič <mateju@svn.gnome.org>, + 2007–2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-02-06 15:44+0000\n"
-"PO-Revision-Date: 2021-02-06 19:13+0100\n"
+"POT-Creation-Date: 2021-02-16 14:48+0000\n"
+"PO-Revision-Date: 2021-02-17 20:10+0100\n"
 "Last-Translator: Matej Urbančič <mateju@svn.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -308,7 +308,7 @@ msgid "No results found"
 msgstr "Ni najdenih zadetkov"
 
 #: panels/applications/cc-applications-panel.ui:484
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:239
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:177
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Poskusite z drugačnim iskalnim nizom"
@@ -359,7 +359,7 @@ msgstr "Izbor slike"
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
 #: panels/display/cc-display-panel.c:1003
-#: panels/info-overview/cc-info-overview-panel.ui:243
+#: panels/info-overview/cc-info-overview-panel.ui:242
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:866
@@ -368,7 +368,7 @@ msgstr "Izbor slike"
 #: panels/network/connection-editor/vpn-helpers.c:299
 #: panels/network/net-device-wifi.c:854
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:255
+#: panels/printers/pp-details-dialog.c:235
 #: panels/region/cc-format-chooser.ui:28
 #: panels/search/cc-search-locations-dialog.c:639
 #: panels/sharing/cc-sharing-panel.c:396 panels/usage/cc-usage-panel.c:133
@@ -385,7 +385,7 @@ msgstr "_Prekliči"
 
 #: panels/background/cc-background-chooser.c:349
 #: panels/network/connection-editor/vpn-helpers.c:177
-#: panels/printers/pp-details-dialog.c:256
+#: panels/printers/pp-details-dialog.c:236
 #: panels/sharing/cc-sharing-panel.c:397
 #: panels/user-accounts/cc-avatar-chooser.c:224
 msgid "_Open"
@@ -1790,11 +1790,11 @@ msgstr ""
 "pult;panel;projektor;xrandr;zaslon;ločljivost;osveževanje;monitor;noč;"
 "svetloba;svetlost;modra;rdeči zamik;zora;mrak;barve;"
 
-#: panels/info-overview/cc-info-overview-panel.c:417
-#: panels/info-overview/cc-info-overview-panel.c:432
-#: panels/info-overview/cc-info-overview-panel.c:444
-#: panels/info-overview/cc-info-overview-panel.c:490
-#: panels/info-overview/cc-info-overview-panel.c:520
+#: panels/info-overview/cc-info-overview-panel.c:418
+#: panels/info-overview/cc-info-overview-panel.c:433
+#: panels/info-overview/cc-info-overview-panel.c:445
+#: panels/info-overview/cc-info-overview-panel.c:491
+#: panels/info-overview/cc-info-overview-panel.c:521
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -1802,94 +1802,94 @@ msgstr "Neznano"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:452
+#: panels/info-overview/cc-info-overview-panel.c:453
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s, ID izgradnje: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:467
+#: panels/info-overview/cc-info-overview-panel.c:468
 #, c-format
 msgid "64-bit"
 msgstr "64-bitni sistem"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:470
+#: panels/info-overview/cc-info-overview-panel.c:471
 #, c-format
 msgid "32-bit"
 msgstr "32-bitni sistem"
 
-#: panels/info-overview/cc-info-overview-panel.c:727
+#: panels/info-overview/cc-info-overview-panel.c:728
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:731
+#: panels/info-overview/cc-info-overview-panel.c:732
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:733
+#: panels/info-overview/cc-info-overview-panel.c:734
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Neznano"
 
-#: panels/info-overview/cc-info-overview-panel.ui:52
+#: panels/info-overview/cc-info-overview-panel.ui:51
 msgid "Device Name"
 msgstr "Ime naprave"
 
-#: panels/info-overview/cc-info-overview-panel.ui:74
+#: panels/info-overview/cc-info-overview-panel.ui:73
 msgid "Hardware Model"
 msgstr "Strojni model"
 
-#: panels/info-overview/cc-info-overview-panel.ui:83
+#: panels/info-overview/cc-info-overview-panel.ui:82
 msgid "Memory"
 msgstr "Pomnilnik"
 
-#: panels/info-overview/cc-info-overview-panel.ui:92
+#: panels/info-overview/cc-info-overview-panel.ui:91
 msgid "Processor"
 msgstr "Procesor"
 
-#: panels/info-overview/cc-info-overview-panel.ui:101
+#: panels/info-overview/cc-info-overview-panel.ui:100
 msgid "Graphics"
 msgstr "Grafika"
 
-#: panels/info-overview/cc-info-overview-panel.ui:110
+#: panels/info-overview/cc-info-overview-panel.ui:109
 msgid "Disk Capacity"
 msgstr "Zmogljivost diska"
 
-#: panels/info-overview/cc-info-overview-panel.ui:111
+#: panels/info-overview/cc-info-overview-panel.ui:110
 msgid "Calculating…"
 msgstr "Poteka preračunavanje …"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:133
+#: panels/info-overview/cc-info-overview-panel.ui:132
 msgid "OS Name"
 msgstr "Naziv OS"
 
-#: panels/info-overview/cc-info-overview-panel.ui:142
+#: panels/info-overview/cc-info-overview-panel.ui:141
 msgid "OS Type"
 msgstr "Vrsta OS"
 
-#: panels/info-overview/cc-info-overview-panel.ui:151
+#: panels/info-overview/cc-info-overview-panel.ui:150
 msgid "GNOME Version"
 msgstr "Različica GNOME"
 
-#: panels/info-overview/cc-info-overview-panel.ui:161
+#: panels/info-overview/cc-info-overview-panel.ui:160
 msgid "Windowing System"
 msgstr "Sistem izrisovanja oken"
 
-#: panels/info-overview/cc-info-overview-panel.ui:169
+#: panels/info-overview/cc-info-overview-panel.ui:168
 msgid "Virtualization"
 msgstr "Ustvarjanje navideznih naprav"
 
-#: panels/info-overview/cc-info-overview-panel.ui:178
+#: panels/info-overview/cc-info-overview-panel.ui:177
 msgid "Software Updates"
 msgstr "Posodobitve programske opreme"
 
-#: panels/info-overview/cc-info-overview-panel.ui:199
+#: panels/info-overview/cc-info-overview-panel.ui:198
 msgid "Rename Device"
 msgstr "Preimenuj napravo"
 
-#: panels/info-overview/cc-info-overview-panel.ui:216
+#: panels/info-overview/cc-info-overview-panel.ui:215
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -1897,7 +1897,7 @@ msgstr ""
 "Ime naprave se uporablja za določitev naprave, kadar je ta prikazana prek "
 "omrežja oziroma ob povezovanju naprav Bluetooth."
 
-#: panels/info-overview/cc-info-overview-panel.ui:234
+#: panels/info-overview/cc-info-overview-panel.ui:233
 msgid "_Rename"
 msgstr "_Preimenuj"
 
@@ -2203,6 +2203,11 @@ msgid ""
 "followed by <b>C</b> and <b>o</b> will enter <b>©</b>, <b>a</b> followed by "
 "<b>'</b> will enter <b>á</b>."
 msgstr ""
+"Sestavljalna tipka omogoča vnos velikega števila različnih znakov. Za "
+"uporabo najprej pritisnite sestavljalno tipko, nato pa zaporedje drugih "
+"znakov. Na primer; pritisnite sestavljalko, potem <b>C</b> in nato <b>o</b>. "
+"Izpisal se bo znak <b>©</b>. Z zaporedjem sestavljalka, <b>a</b> in nato "
+"<b>'</b> pa ustvari znak <b>á</b>."
 
 #: panels/keyboard/cc-keyboard-panel.c:98
 msgctxt "keyboard key"
@@ -2252,8 +2257,8 @@ msgid "Hold down and type to enter different characters"
 msgstr "Pritisnite in vpišite različne znake"
 
 #: panels/keyboard/cc-keyboard-panel.ui:232
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:298
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:314 shell/cc-window.ui:326
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:301
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:317 shell/cc-window.ui:326
 msgid "Keyboard Shortcuts"
 msgstr "Tipkovne bližnjice"
 
@@ -2261,15 +2266,15 @@ msgstr "Tipkovne bližnjice"
 msgid "Customize Shortcuts"
 msgstr "Prilagodi bližnjice"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:278
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:281
 msgid "modified"
 msgstr "spremenjeno"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:426
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:423
 msgid "Reset All Shortcuts?"
 msgstr "Ali želite ponastaviti vse tipkovne bližnjice?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:429
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:426
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2277,14 +2282,14 @@ msgstr ""
 "Ponastavljanje tipkovnih bližnjic lahko vpliva na tiste po meri. Dejanja ni "
 "mogoče povrniti."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:433
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:430
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:434
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
 msgid "Reset All"
 msgstr "Ponastavi vse"
 
@@ -2303,23 +2308,23 @@ msgid "Add Shortcut"
 msgstr "Dodaj tipkovno bližnjico"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:166
+msgid "No keyboard shortcut found"
+msgstr "Ni določene tipkovne bližnjice"
+
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
 #: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
 msgid "Back"
 msgstr "Nazaj"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:190
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:235
 msgid "Reset All…"
 msgstr "Počisti vse …"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:191
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:236
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Ponastavi vse tipkovne bližnjice na privzete vrednosti"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:228
-msgid "No keyboard shortcut found"
-msgstr "Ni določene tipkovne bližnjice"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
 #, c-format
@@ -4803,7 +4808,7 @@ msgstr "Zaznava: način učinkovitosti delovanja ni na voljo"
 
 #: panels/power/cc-power-profile-row.c:64
 msgid "High hardware temperature: performance mode unavailable"
-msgstr ""
+msgstr "Visoka temperatura strojne opreme: zmogljivostni način ni na volje"
 
 #: panels/power/cc-power-profile-row.c:65
 msgid "Performance mode unavailable"
@@ -4935,20 +4940,20 @@ msgstr ""
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
-#: panels/printers/pp-details-dialog.c:371
+#: panels/printers/pp-details-dialog.c:351
 #, c-format
 msgid "%s Details"
 msgstr "Podrobnosti %s"
 
-#: panels/printers/pp-details-dialog.c:121
+#: panels/printers/pp-details-dialog.c:101
 msgid "No suitable driver found"
 msgstr "Ni mogoče najti ustreznega gonilnika"
 
-#: panels/printers/pp-details-dialog.c:252
+#: panels/printers/pp-details-dialog.c:232
 msgid "Select PPD File"
 msgstr "Izbor datoteke PPD"
 
-#: panels/printers/pp-details-dialog.c:261
+#: panels/printers/pp-details-dialog.c:241
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -7236,11 +7241,11 @@ msgstr "naprava je že v uporabi v drugem opravilu"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:240
 msgid "you do not have permission to perform the action"
-msgstr "n ustreznih dovoljenj za izvajanje tega dejanja"
+msgstr "ni ustreznih dovoljenj za izvajanje tega dejanja"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:242
 msgid "no prints have been enrolled"
-msgstr ""
+msgstr "ni poslanih opravil za tiskanje"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:251
 msgid "Failed to communicate with the device during enrollment"
