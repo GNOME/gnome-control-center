@@ -235,27 +235,16 @@
                         </child>
 
                         <child>
-                          <object class="GtkBox" id="account_settings_box">
+                          <object class="HdyPreferencesGroup" id="account_settings_group">
                             <property name="visible">True</property>
-                            <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
-                            <property name="spacing">10</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">Account Settings</property>
-                                <property name="halign">GTK_ALIGN_START</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                            </child>
+                            <property name="title" translatable="yes">Account Settings</property>
                             <child>
                               <object class="GtkListBox" id="account_settings_listbox">
                                 <property name="visible">True</property>
                                 <property name="selection-mode">GTK_SELECTION_NONE</property>
                                 <signal name="row-activated" handler="activate_row"/>
                                 <style>
-                                  <class name="frame"/>
+                                  <class name="content"/>
                                 </style>
                                 <child>
                                   <object class="GtkListBoxRow" id="account_type_row">
@@ -441,28 +430,17 @@
                         </child>
 
                         <child>
-                          <object class="GtkBox" id="authentication_and_login_box">
+                          <object class="HdyPreferencesGroup" id="authentication_and_login_group">
                             <property name="visible">True</property>
-                            <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
-                            <property name="spacing">10</property>
-                            <property name="margin-top">10</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes">Authentication &amp; Login</property>
-                                <property name="halign">GTK_ALIGN_START</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                            </child>
+                            <property name="title" translatable="yes">Authentication &amp; Login</property>
+                            <property name="margin-top">12</property>
                             <child>
                               <object class="GtkListBox" id="authentication_and_login_listbox">
                                 <property name="visible">True</property>
                                 <property name="selection-mode">GTK_SELECTION_NONE</property>
                                 <signal name="row-activated" handler="activate_row"/>
                                 <style>
-                                  <class name="frame"/>
+                                  <class name="content"/>
                                 </style>
                                 <child>
                                   <object class="GtkListBoxRow" id="password_row">

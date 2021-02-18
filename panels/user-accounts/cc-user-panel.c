@@ -32,6 +32,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <libhandy-1/handy.h>
 #include <polkit/polkit.h>
 #include <act/act.h>
 #include <cairo-gobject.h>
@@ -70,7 +71,7 @@ struct _CcUserPanel {
         GSettings *login_screen_settings;
 
         GtkBox          *accounts_box;
-        GtkBox          *account_settings_box;
+        HdyPreferencesGroup *account_settings_group;
         GtkListBox      *account_settings_listbox;
         GtkListBox      *authentication_and_login_listbox;
         GtkListBoxRow   *account_type_row;
@@ -872,7 +873,7 @@ show_user (ActUser *user, CcUserPanel *self)
 
         /* Do not show the "Account Type" option when there's a single user account. */
         show = (self->other_accounts != 0);
-        gtk_widget_set_visible (GTK_WIDGET (self->account_settings_box), show);
+        gtk_widget_set_visible (GTK_WIDGET (self->account_settings_group), show);
 
         gtk_label_set_label (self->password_button_label, get_password_mode_text (user));
         enable = act_user_is_local_account (user);
@@ -1498,13 +1499,6 @@ setup_main_window (CcUserPanel *self)
                 users_loaded (self);
         else
                 g_signal_connect_object (self->um, "notify::is-loaded", G_CALLBACK (users_loaded), self, G_CONNECT_SWAPPED);
-
-        gtk_list_box_set_header_func (self->account_settings_listbox,
-                                      cc_list_box_update_header_func,
-                                      NULL, NULL);
-        gtk_list_box_set_header_func (self->authentication_and_login_listbox,
-                                      cc_list_box_update_header_func,
-                                      NULL, NULL);
 }
 
 static GSettings *
@@ -1608,7 +1602,7 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/cc-user-panel.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, accounts_box);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_settings_box);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_settings_group);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_settings_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, authentication_and_login_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_type_row);
