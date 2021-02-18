@@ -23,6 +23,7 @@
 
 #include <gdesktop-enums.h>
 #include <gtk/gtk.h>
+#include <libhandy-1/handy.h>
 
 #include "cc-mouse-caps-helper.h"
 #include "cc-mouse-panel.h"
@@ -34,44 +35,44 @@
 
 struct _CcMousePanel
 {
-  CcPanel            parent_instance;
+  CcPanel              parent_instance;
 
-  GtkListBoxRow     *edge_scrolling_row;
-  GtkSwitch         *edge_scrolling_switch;
-  GtkListBox        *general_listbox;
-  GtkFrame          *mouse_frame;
-  GtkListBox        *mouse_listbox;
-  GtkSwitch         *mouse_natural_scrolling_switch;
-  GtkScale          *mouse_speed_scale;
-  CcMouseTest       *mouse_test;
-  GtkRadioButton    *primary_button_left;
-  GtkRadioButton    *primary_button_right;
-  GtkScrolledWindow *scrolled_window;
-  GtkStack          *stack;
-  GtkListBoxRow     *tap_to_click_row;
-  GtkSwitch         *tap_to_click_switch;
-  GtkButton         *test_button;
-  GtkFrame          *touchpad_frame;
-  GtkListBox        *touchpad_listbox;
-  GtkListBoxRow     *touchpad_natural_scrolling_row;
-  GtkSwitch         *touchpad_natural_scrolling_switch;
-  GtkListBoxRow     *touchpad_speed_row;
-  GtkScale          *touchpad_speed_scale;
-  GtkSwitch         *touchpad_toggle_switch;
-  GtkListBoxRow     *two_finger_scrolling_row;
-  GtkSwitch         *two_finger_scrolling_switch;
+  GtkListBoxRow       *edge_scrolling_row;
+  GtkSwitch           *edge_scrolling_switch;
+  GtkListBox          *general_listbox;
+  HdyPreferencesGroup *mouse_group;
+  GtkListBox          *mouse_listbox;
+  GtkSwitch           *mouse_natural_scrolling_switch;
+  GtkScale            *mouse_speed_scale;
+  CcMouseTest         *mouse_test;
+  GtkRadioButton      *primary_button_left;
+  GtkRadioButton      *primary_button_right;
+  HdyPreferencesPage  *preference_page;
+  GtkStack            *stack;
+  GtkListBoxRow       *tap_to_click_row;
+  GtkSwitch           *tap_to_click_switch;
+  GtkButton           *test_button;
+  HdyPreferencesGroup *touchpad_group;
+  GtkListBox          *touchpad_listbox;
+  GtkListBoxRow       *touchpad_natural_scrolling_row;
+  GtkSwitch           *touchpad_natural_scrolling_switch;
+  GtkListBoxRow       *touchpad_speed_row;
+  GtkScale            *touchpad_speed_scale;
+  GtkSwitch           *touchpad_toggle_switch;
+  GtkListBoxRow       *two_finger_scrolling_row;
+  GtkSwitch           *two_finger_scrolling_switch;
 
-  GSettings         *mouse_settings;
-  GSettings         *touchpad_settings;
+  GSettings           *mouse_settings;
+  GSettings           *touchpad_settings;
 
-  gboolean           have_mouse;
-  gboolean           have_touchpad;
-  gboolean           have_touchscreen;
-  gboolean           have_synaptics;
+  gboolean             have_mouse;
+  gboolean             have_touchpad;
+  gboolean             have_touchscreen;
+  gboolean             have_synaptics;
 
-  gboolean           left_handed;
-  GtkGesture        *left_gesture;
-  GtkGesture        *right_gesture;
+  gboolean             left_handed;
+  GtkGesture          *left_gesture;
+  GtkGesture          *right_gesture;
 };
 
 CC_PANEL_REGISTER (CcMousePanel, cc_mouse_panel)
@@ -86,13 +87,13 @@ setup_touchpad_options (CcMousePanel *self)
   gboolean have_tap_to_click;
 
   if (self->have_synaptics || !self->have_touchpad) {
-    gtk_widget_hide (GTK_WIDGET (self->touchpad_frame));
+    gtk_widget_hide (GTK_WIDGET (self->touchpad_group));
     return;
   }
 
   cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
 
-  gtk_widget_show (GTK_WIDGET (self->touchpad_frame));
+  gtk_widget_show (GTK_WIDGET (self->touchpad_group));
 
   gtk_widget_set_visible (GTK_WIDGET (self->two_finger_scrolling_row), have_two_finger_scrolling);
   gtk_widget_set_visible (GTK_WIDGET (self->edge_scrolling_row), have_edge_scrolling);
@@ -228,17 +229,12 @@ setup_dialog (CcMousePanel *self)
        self->mouse_natural_scrolling_switch, "active",
        G_SETTINGS_BIND_DEFAULT);
 
-  gtk_list_box_set_header_func (self->general_listbox, cc_list_box_update_header_func, NULL, NULL);
-  gtk_list_box_set_header_func (self->touchpad_listbox, cc_list_box_update_header_func, NULL, NULL);
-
   /* Mouse section */
-  gtk_widget_set_visible (GTK_WIDGET (self->mouse_frame), self->have_mouse);
+  gtk_widget_set_visible (GTK_WIDGET (self->mouse_group), self->have_mouse);
 
   g_settings_bind (self->mouse_settings, "speed",
                    gtk_range_get_adjustment (GTK_RANGE (self->mouse_speed_scale)), "value",
                    G_SETTINGS_BIND_DEFAULT);
-
-  gtk_list_box_set_header_func (self->mouse_listbox, cc_list_box_update_header_func, NULL, NULL);
 
   /* Touchpad section */
   gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_switch), show_touchpad_enabling_switch (self));
@@ -312,25 +308,8 @@ device_changed (CcMousePanel *self)
   setup_touchpad_options (self);
 
   self->have_mouse = mouse_is_present ();
-  gtk_widget_set_visible (GTK_WIDGET (self->mouse_frame), self->have_mouse);
+  gtk_widget_set_visible (GTK_WIDGET (self->mouse_group), self->have_mouse);
   gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_switch), show_touchpad_enabling_switch (self));
-}
-
-static void
-on_content_size_changed (CcMousePanel  *self,
-                         GtkAllocation *allocation)
-{
-  if (allocation->height < 490)
-  {
-    gtk_scrolled_window_set_policy (self->scrolled_window,
-                                    GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  }
-  else
-  {
-    gtk_scrolled_window_set_policy (self->scrolled_window,
-                                    GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_min_content_height (self->scrolled_window, 490);
-  }
 }
 
 static void
@@ -358,7 +337,7 @@ test_button_toggled_cb (CcMousePanel *self)
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->test_button)))
     gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->mouse_test));
   else
-    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->scrolled_window));
+    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->preference_page));
 }
 
 static void
@@ -420,19 +399,19 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, edge_scrolling_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, edge_scrolling_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, general_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_natural_scrolling_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_speed_scale);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_test);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_left);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_right);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, scrolled_window);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, preference_page);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, test_button);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_natural_scrolling_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_natural_scrolling_switch);
@@ -443,7 +422,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_scrolling_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, edge_scrolling_changed_event);
-  gtk_widget_class_bind_template_callback (widget_class, on_content_size_changed);
   gtk_widget_class_bind_template_callback (widget_class, test_button_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, two_finger_scrolling_changed_event);
 }
