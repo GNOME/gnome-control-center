@@ -8,41 +8,11 @@
       <object class="GtkStack" id="stack">
         <property name="visible">true</property>
         <child>
-          <object class="GtkBox">
+          <object class="HdyStatusPage">
             <property name="visible">true</property>
-            <property name="orientation">vertical</property>
-            <property name="valign">center</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">true</property>
-                <property name="valign">start</property>
-                <property name="pixel-size">96</property>
-                <property name="icon-name">location-services-disabled-symbolic</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">true</property>
-                <property name="margin-top">20</property>
-                <property name="margin-bottom">15</property>
-                <property name="label" translatable="yes">Location services turned off</property>
-                <attributes>
-                  <attribute name="scale" value="1.44"/>
-                </attributes>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">true</property>
-                <property name="label" translatable="yes">No applications can obtain location information.</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
+            <property name="icon-name">location-services-disabled-symbolic</property>
+            <property name="title" translatable="yes">Location Services Turned Off</property>
+            <property name="description" translatable="yes">No applications can obtain location information.</property>
           </object>
           <packing>
             <property name="name">empty</property>
