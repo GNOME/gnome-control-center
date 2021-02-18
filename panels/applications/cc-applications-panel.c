@@ -818,6 +818,10 @@ add_static_permissions (CcApplicationsPanel *self,
   if (keyfile == NULL)
     return FALSE;
 
+  str = g_key_file_get_string (keyfile, "Session Bus Policy", "org.freedesktop.Flatpak", NULL);
+  if (str && g_str_equal (str, "talk"))
+    added += add_static_permission_row (self, _("Sandbox Escape"), _("Can circumvent all imposed restrictions"));
+
   sockets = g_key_file_get_string_list (keyfile, "Context", "sockets", NULL, NULL);
   if (sockets && g_strv_contains ((const gchar * const*)sockets, "system-bus"))
     added += add_static_permission_row (self, _("System Bus"), _("Full access"));
