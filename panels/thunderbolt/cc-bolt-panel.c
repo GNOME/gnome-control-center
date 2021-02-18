@@ -23,6 +23,7 @@
 #include <list-box-helper.h>
 
 #include <glib/gi18n.h>
+#include <libhandy-1/handy.h>
 #include <polkit/polkit.h>
 
 #include "cc-bolt-device-dialog.h"
@@ -49,8 +50,7 @@ struct _CcBoltPanel
   GtkStack           *container;
 
   /* empty state */
-  GtkLabel           *notb_caption;
-  GtkLabel           *notb_details;
+  HdyStatusPage      *notb_page;
 
   /* notifications */
   GtkLabel           *notification_label;
@@ -175,7 +175,7 @@ bolt_client_ready (GObject      *source,
       text = _("The Thunderbolt subsystem (boltd) is not installed or "
                "not set up properly.");
 
-      gtk_label_set_label (panel->notb_details, text);
+      hdy_status_page_set_description (panel->notb_page, text);
       gtk_stack_set_visible_child_name (panel->container, "no-thunderbolt");
 
       return;
@@ -471,7 +471,7 @@ cc_bolt_panel_set_no_thunderbolt (CcBoltPanel *panel,
               "an unsupported security level in the BIOS.");
     }
 
-  gtk_label_set_label (panel->notb_details, msg);
+  hdy_status_page_set_description (panel->notb_page, msg);
   gtk_stack_set_visible_child_name (panel->container, "no-thunderbolt");
 }
 
@@ -940,8 +940,7 @@ cc_bolt_panel_class_init (CcBoltPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, devices_stack);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, headerbar_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, lock_button);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notb_caption);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notb_details);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notb_page);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notification_label);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notification_revealer);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, pending_box);

@@ -96,85 +96,13 @@
             <!-- No tunderbolt -->
 
             <child>
-              <object class="GtkBox">
+              <object class="HdyStatusPage" id="notb_page">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="expand">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="orientation">vertical</property>
-                <property name="spacing">10</property>
-                <property name="margin">18</property>
-                <child type="center" >
-                  <object class="GtkGrid">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_start">12</property>
-                    <property name="margin_end">6</property>
-                    <property name="margin_top">12</property>
-                    <property name="margin_bottom">12</property>
-                    <property name="row_spacing">12</property>
-                    <property name="column_spacing">24</property>
-
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">thunderbolt-symbolic</property>
-                        <property name="pixel_size">96</property>
-                        <property name="yalign">0</property>
-                        <style>
-                          <class name="dim-label" />
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                        <property name="height">2</property>
-                      </packing>
-                    </child>
-
-                    <child>
-                      <object class="GtkLabel" id="notb_caption">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="wrap">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">No Thunderbolt support</property>
-                        <attributes>
-                          <attribute name="scale" value="1.2" />
-                        </attributes>
-                        <style>
-                          <class name="dim-label" />
-                        </style>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-
-                    <child>
-                      <object class="GtkLabel" id="notb_details">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="hexpand">True</property>
-                        <property name="max-width-chars">40</property>
-                        <property name="use_markup">True</property>
-                        <property name="xalign">0</property>
-                        <property name="yalign">0</property>
-                        <property name="wrap">True</property>
-                        <property name="label" translatable="no">Could not connect to the thunderbolt subsystem.</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">1</property>
-                      </packing>
-                    </child>
-
-                  </object>
-                </child>
-
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="icon_name">thunderbolt-symbolic</property>
+                <property name="title" translatable="yes">No Thunderbolt support</property>
+                <property name="description" translatable="no">Could not connect to the thunderbolt subsystem.</property>
               </object>
               <packing>
                 <property name="name">no-thunderbolt</property>
