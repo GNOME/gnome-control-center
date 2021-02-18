@@ -32,8 +32,7 @@ struct _CcSearchPanel
   CcPanel     parent_instance;
 
   GtkWidget  *list_box;
-  GtkWidget  *search_vbox;
-  GtkWidget  *search_frame;
+  GtkWidget  *search_page;
   GtkWidget  *settings_button;
   CcSearchPanelRow  *selected_row;
 
@@ -647,7 +646,7 @@ cc_search_panel_constructed (GObject *object)
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   g_object_bind_property (widget, "active",
-                          self->search_vbox, "sensitive",
+                          self->search_page, "sensitive",
                           G_BINDING_DEFAULT |
                           G_BINDING_SYNC_CREATE);
 
@@ -664,7 +663,6 @@ cc_search_panel_init (CcSearchPanel *self)
 
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->list_box),
                               (GtkListBoxSortFunc)list_sort_func, self, NULL);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->list_box), cc_list_box_update_header_func, NULL, NULL);
 
   gtk_widget_set_sensitive (self->settings_button, cc_search_locations_dialog_is_available ());
 
@@ -691,8 +689,7 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
                                                "/org/gnome/control-center/search/cc-search-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_vbox);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_page);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_button);
 
   gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked);

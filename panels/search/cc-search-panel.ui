@@ -6,46 +6,20 @@
     <property name="can_focus">False</property>
 
     <child>
-      <object class="GtkScrolledWindow" id="search_vbox">
+      <object class="HdyPreferencesPage" id="search_page">
         <property name="visible">True</property>
-        <property name="hscrollbar_policy">never</property>
-        <property name="can_focus">False</property>
         <child>
-          <object class="HdyClamp">
+          <object class="HdyPreferencesGroup">
             <property name="visible">True</property>
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
+            <property name="description" translatable="yes">Control which search results are shown in the Activities Overview. The order of search results can also be changed by moving rows in the list.</property>
             <child>
-              <object class="GtkBox">
+              <object class="GtkListBox" id="list_box">
                 <property name="visible">True</property>
-                <property name="orientation">vertical</property>
-                <property name="hexpand">True</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="xalign">0.0</property>
-                    <property name="margin-bottom">20</property>
-                    <property name="wrap">True</property>
-                    <property name="label" translatable="yes">Control which search results are shown in the Activities Overview. The order of search results can also be changed by moving rows in the list.</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkFrame" id="search_frame">
-                    <property name="visible">True</property>
-                    <child>
-                      <object class="GtkListBox" id="list_box">
-                        <property name="visible">True</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+                <style>
+                  <class name="content"/>
+                </style>
               </object>
-           </child>
+            </child>
           </object>
         </child>
       </object>
