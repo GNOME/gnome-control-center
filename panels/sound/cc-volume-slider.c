@@ -53,7 +53,7 @@ update_volume_icon (CcVolumeSlider *self)
 
   if (gtk_toggle_button_get_active (self->mute_button))
     icon_name = "audio-volume-muted-symbolic";
-  else if (fraction > 0.0 && fraction < 30.0)
+  else if (fraction < 30.0)
     icon_name = "audio-volume-low-symbolic";
   else if (fraction > 30.0 && fraction < 70.0)
     icon_name = "audio-volume-medium-symbolic";
