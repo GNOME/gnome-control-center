@@ -92,6 +92,8 @@ notify_volume_cb (CcVolumeSlider *self)
   else
     gtk_adjustment_set_value (self->volume_adjustment, gvc_mixer_stream_get_volume (self->stream));
 
+  update_volume_icon (self);
+
   g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
 }
 
@@ -242,7 +244,6 @@ cc_volume_slider_set_stream (CcVolumeSlider *self,
                                                                   self, G_CONNECT_SWAPPED);
       notify_volume_cb (self);
       notify_is_muted_cb (self);
-      update_volume_icon (self);
     }
 }
 
