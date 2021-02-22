@@ -43,7 +43,6 @@ struct _CcGoaPanel
   GtkDialog     *edit_account_dialog;
   GtkHeaderBar  *edit_account_headerbar;
   GtkBox        *editor_box;
-  GtkListBoxRow *more_providers_row;
   GtkBox        *new_account_vbox;
   GtkLabel      *notification_label;
   GtkRevealer   *notification_revealer;
@@ -127,7 +126,6 @@ add_provider_row (CcGoaPanel  *self,
                   GoaProvider *provider)
 {
   GIcon *icon;
-  GoaProviderFeatures features;
   GtkWidget *image;
   GtkWidget *label;
   GtkWidget *row;
@@ -170,12 +168,7 @@ add_provider_row (CcGoaPanel  *self,
   gtk_label_set_markup (GTK_LABEL (label), markup);
   gtk_container_add (GTK_CONTAINER (row_grid), label);
 
-  /* Check if the row should be shown initially */
-  features = goa_provider_get_provider_features (provider);
-
-  if ((features & GOA_PROVIDER_FEATURE_BRANDED) != 0)
-    gtk_widget_show (row);
-
+  gtk_widget_show (row);
   gtk_container_add (GTK_CONTAINER (self->providers_listbox), row);
 
   g_free (markup);
@@ -189,15 +182,7 @@ sort_providers_func (GtkListBoxRow *a,
                      gpointer       user_data)
 {
   GoaProvider *a_provider, *b_provider;
-  CcGoaPanel *self;
   gboolean a_branded, b_branded;
-
-  self = user_data;
-
-  if (a == self->more_providers_row)
-    return 1;
-  else if (b == self->more_providers_row)
-    return -1;
 
   a_provider = g_object_get_data (G_OBJECT (a), "goa-provider");
   b_provider = g_object_get_data (G_OBJECT (b), "goa-provider");
@@ -214,29 +199,6 @@ sort_providers_func (GtkListBoxRow *a,
     }
 
   return gtk_list_box_row_get_index (b) - gtk_list_box_row_get_index (a);
-}
-
-static void
-show_non_branded_providers (CcGoaPanel *self)
-{
-  GList *children, *l;
-
-  children = gtk_container_get_children (GTK_CONTAINER (self->providers_listbox));
-
-  for (l = children; l != NULL; l = l->next)
-    {
-      GoaProvider *provider = g_object_get_data (l->data, "goa-provider");
-
-      if (!provider)
-        continue;
-
-      if ((goa_provider_get_provider_features (provider) & GOA_PROVIDER_FEATURE_BRANDED) == 0)
-        gtk_widget_show (l->data);
-    }
-
-  gtk_widget_hide (GTK_WIDGET (self->more_providers_row));
-
-  g_list_free (children);
 }
 
 static void
@@ -276,13 +238,6 @@ on_provider_row_activated (CcGoaPanel    *self,
                            GtkListBoxRow *activated_row)
 {
   GoaProvider *provider;
-
-  /* Show More row */
-  if (activated_row == self->more_providers_row)
-    {
-      show_non_branded_providers (self);
-      return;
-    }
 
   provider = g_object_get_data (G_OBJECT (activated_row), "goa-provider");
 
@@ -542,7 +497,6 @@ cc_goa_panel_class_init (CcGoaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, edit_account_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, editor_box);
-  gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, more_providers_row);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, new_account_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, notification_label);
   gtk_widget_class_bind_template_child (widget_class, CcGoaPanel, notification_revealer);
