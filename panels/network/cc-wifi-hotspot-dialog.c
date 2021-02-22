@@ -262,7 +262,16 @@ hotspot_entry_changed_cb (CcWifiHotspotDialog *self)
     }
   else
     {
-      error_label = _("Must have a minimum of 8 characters");
+      if (strlen (password) < 8)
+        {
+          error_label = _("Must have a minimum of 8 characters");
+        }
+      else
+        {
+          guint max_chars = self->wpa_supported ? 63 : 16;
+          error_label = g_strdup_printf (_("Must have a maximum of %d characters"), max_chars);
+        }
+
       widget_set_error (GTK_WIDGET(self->password_entry));
     }
 
