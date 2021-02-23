@@ -518,7 +518,13 @@ location_changed_cb (CcDateTimePanel *self,
 
   self->current_location = location;
 
-  timezone = g_time_zone_new (location->zone);
+  timezone = g_time_zone_new_identifier (location->zone);
+  if (!timezone)
+    {
+      g_warning ("Could not find timezone \"%s\", using UTC instead", location->zone);
+      timezone = g_time_zone_new_utc ();
+    }
+
   old_date = self->date;
   self->date = g_date_time_to_timezone (old_date, timezone);
   cc_time_editor_set_time (CC_TIME_EDITOR (self->time_editor),
