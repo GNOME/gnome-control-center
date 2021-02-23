@@ -84,6 +84,26 @@ cc_bluetooth_panel_constructed (GObject *object)
 }
 
 static void
+airplane_mode_changed_cb (GObject *source_object,
+			  GAsyncResult *res,
+			  gpointer user_data)
+{
+	g_autoptr(GVariant) ret = NULL;
+	g_autoptr(GError) error = NULL;
+	gboolean state = GPOINTER_TO_UINT (user_data);
+
+	if (!g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
+				       res, &error)) {
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+			g_warning ("Failed to change Bluetooth killswitch state to %s: %s",
+				   state ? "on" : "off", error->message);
+	} else {
+		g_debug ("Changed Bluetooth killswitch state to %s",
+			 state ? "on" : "off");
+	}
+}
+
+static void
 enable_switch_changed_cb (CcBluetoothPanel *self)
 {
 	gboolean state;
@@ -97,7 +117,7 @@ enable_switch_changed_cb (CcBluetoothPanel *self)
 			   G_DBUS_CALL_FLAGS_NONE,
 			   -1,
 			   cc_panel_get_cancellable (CC_PANEL (self)),
-			   NULL, NULL);
+			   airplane_mode_changed_cb, GUINT_TO_POINTER(state));
 }
 
 static void
