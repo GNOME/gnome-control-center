@@ -105,7 +105,7 @@ create_widget_func (gpointer model_item,
                                              bg_source_get_thumbnail_width (source),
                                              bg_source_get_thumbnail_height (source),
                                              bg_source_get_scale_factor (source));
-  image = gtk_image_new_from_pixbuf (pixbuf);
+  image = gtk_image_new_from_gicon (G_ICON (pixbuf), GTK_ICON_SIZE_DIALOG);
   gtk_widget_show (image);
 
   icon = gtk_image_new_from_icon_name("slideshow-emblem", GTK_ICON_SIZE_BUTTON);
