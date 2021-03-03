@@ -24,6 +24,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include <config.h>
 #include <glib/gi18n.h>
 #include <handy.h>
 
@@ -278,7 +279,11 @@ update_modified_counts (CcKeyboardShortcutDialog *self)
       section_data = g_object_get_data (G_OBJECT (l->data), "data");
       if (section_data->modified_count > 0)
         {
-          modified_text = g_strdup_printf ("%d %s", section_data->modified_count, _("modified"));
+          modified_text = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
+                                                        "%d modified",
+                                                        "%d modified",
+                                                        section_data->modified_count),
+                                           section_data->modified_count);
           gtk_label_set_text (section_data->modified_label, modified_text);
         }
       else
