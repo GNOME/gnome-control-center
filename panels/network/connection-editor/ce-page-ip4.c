@@ -360,7 +360,7 @@ add_route_row (CEPageIP4   *self,
         gtk_widget_set_hexpand (widget, TRUE);
         gtk_container_add (GTK_CONTAINER (row_box), widget);
 
-        widget = gtk_entry_new ();
+        widget = GTK_WIDGET (ce_netmask_entry_new ());
         g_signal_connect_object (widget, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (widget, "activate", G_CALLBACK (ensure_empty_routes_row), self, G_CONNECT_SWAPPED);
         g_object_set_data (G_OBJECT (row), "netmask", widget);
