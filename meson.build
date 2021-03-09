@@ -50,6 +50,17 @@ foreach define: set_defines
   config_h.set_quoted(define[0], define[1])
 endforeach
 
+distributor_logo = get_option('distributor_logo')
+if (distributor_logo != '')
+  config_h.set_quoted('DISTRIBUTOR_LOGO', distributor_logo,
+                      description: 'Define to absolute path of distributor logo')
+  dark_mode_distributor_logo = get_option('dark_mode_distributor_logo')
+  if (dark_mode_distributor_logo != '')
+    config_h.set_quoted('DARK_MODE_DISTRIBUTOR_LOGO', dark_mode_distributor_logo,
+                        description: 'Define to absolute path of distributor logo for use in dark mode')
+  endif
+endif
+
 # meson does not support octal values, so it must be handled as a
 # string. See: https://github.com/mesonbuild/meson/issues/2047
 config_h.set('USER_DIR_MODE', '0700',

@@ -879,6 +879,7 @@ cc_info_panel_row_activated_cb (CcInfoOverviewPanel *self,
     open_software_update (self);
 }
 
+#if !defined(DISTRIBUTOR_LOGO) || defined(DARK_MODE_DISTRIBUTOR_LOGO)
 static gboolean
 use_dark_theme (CcInfoOverviewPanel *panel)
 {
@@ -886,10 +887,22 @@ use_dark_theme (CcInfoOverviewPanel *panel)
 
   return adw_style_manager_get_dark (style_manager);
 }
+#endif
 
 static void
 setup_os_logo (CcInfoOverviewPanel *panel)
 {
+#ifdef DISTRIBUTOR_LOGO
+#ifdef DARK_MODE_DISTRIBUTOR_LOGO
+  if (use_dark_theme (panel))
+    {
+      gtk_picture_set_filename (panel->os_logo, DARK_MODE_DISTRIBUTOR_LOGO);
+      return;
+    }
+#endif
+  gtk_picture_set_filename (panel->os_logo, DISTRIBUTOR_LOGO);
+  return;
+#else
   GtkIconTheme *icon_theme;
   g_autofree char *logo_name = g_get_os_info ("LOGO");
   g_autoptr(GtkIconPaintable) icon_paintable = NULL;
@@ -917,6 +930,7 @@ setup_os_logo (CcInfoOverviewPanel *panel)
                                                    gtk_widget_get_direction (GTK_WIDGET (panel)),
                                                    0);
   gtk_picture_set_paintable (panel->os_logo, GDK_PAINTABLE (icon_paintable));
+#endif
 }
 
 static void
