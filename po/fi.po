@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-02-01 20:21+0000\n"
-"PO-Revision-Date: 2021-02-21 17:20+0200\n"
+"POT-Creation-Date: 2021-03-09 06:41+0000\n"
+"PO-Revision-Date: 2021-03-12 19:23+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -309,7 +309,7 @@ msgid "How much resources this application is using."
 msgstr "Kuinka paljon resursseja tämä sovellus käyttää."
 
 #: panels/applications/cc-applications-panel.ui:391
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:536
 msgid "Storage"
 msgstr "Tallennustila"
 
@@ -322,35 +322,35 @@ msgid "No results found"
 msgstr "Tuloksia ei löytynyt"
 
 #: panels/applications/cc-applications-panel.ui:484
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:239
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:177
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Yritä eri hakuehdoilla"
 
-#: panels/applications/cc-applications-panel.ui:552
+#: panels/applications/cc-applications-panel.ui:554
 msgid ""
 "How much disk space this application is occupying with app data and caches."
 msgstr ""
 "Kuinka paljon levytilaa tämä sovellus varaa sovellustiedoin ja välimuistin "
 "kera."
 
-#: panels/applications/cc-applications-panel.ui:561
+#: panels/applications/cc-applications-panel.ui:563
 msgid "Application"
 msgstr "Sovellus"
 
-#: panels/applications/cc-applications-panel.ui:567
+#: panels/applications/cc-applications-panel.ui:569
 msgid "Data"
 msgstr "Tiedot"
 
-#: panels/applications/cc-applications-panel.ui:573
+#: panels/applications/cc-applications-panel.ui:575
 msgid "Cache"
 msgstr "Välimuisti"
 
-#: panels/applications/cc-applications-panel.ui:579
+#: panels/applications/cc-applications-panel.ui:581
 msgid "<b>Total</b>"
 msgstr "<b>Yhteensä</b>"
 
-#: panels/applications/cc-applications-panel.ui:596
+#: panels/applications/cc-applications-panel.ui:598
 msgid "Clear Cache…"
 msgstr "Tyhjennä välimuisti…"
 
@@ -373,7 +373,7 @@ msgstr "Valitse kuva"
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
 #: panels/display/cc-display-panel.c:1003
-#: panels/info-overview/cc-info-overview-panel.ui:243
+#: panels/info-overview/cc-info-overview-panel.ui:242
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:866
@@ -382,7 +382,7 @@ msgstr "Valitse kuva"
 #: panels/network/connection-editor/vpn-helpers.c:299
 #: panels/network/net-device-wifi.c:854
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:255
+#: panels/printers/pp-details-dialog.c:235
 #: panels/region/cc-format-chooser.ui:28
 #: panels/search/cc-search-locations-dialog.c:639
 #: panels/sharing/cc-sharing-panel.c:396 panels/usage/cc-usage-panel.c:133
@@ -399,7 +399,7 @@ msgstr "_Peru"
 
 #: panels/background/cc-background-chooser.c:349
 #: panels/network/connection-editor/vpn-helpers.c:177
-#: panels/printers/pp-details-dialog.c:256
+#: panels/printers/pp-details-dialog.c:236
 #: panels/sharing/cc-sharing-panel.c:397
 #: panels/user-accounts/cc-avatar-chooser.c:224
 msgid "_Open"
@@ -1189,7 +1189,7 @@ msgstr "_Valitse"
 msgid "No languages found"
 msgstr "Kieli ei löytynyt"
 
-#: panels/common/cc-language-chooser.ui:78
+#: panels/common/cc-language-chooser.ui:82
 #: panels/keyboard/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Lisää…"
@@ -1792,11 +1792,11 @@ msgstr ""
 "redshift;color;sunset;sunrise;Paneeli;Projektori;Näyttö;Resoluutio;Tarkkuus;"
 "Virkistystaajuus;yövalo;"
 
-#: panels/info-overview/cc-info-overview-panel.c:417
-#: panels/info-overview/cc-info-overview-panel.c:432
-#: panels/info-overview/cc-info-overview-panel.c:444
-#: panels/info-overview/cc-info-overview-panel.c:490
-#: panels/info-overview/cc-info-overview-panel.c:520
+#: panels/info-overview/cc-info-overview-panel.c:418
+#: panels/info-overview/cc-info-overview-panel.c:433
+#: panels/info-overview/cc-info-overview-panel.c:445
+#: panels/info-overview/cc-info-overview-panel.c:491
+#: panels/info-overview/cc-info-overview-panel.c:521
 msgid "Unknown"
 msgstr "Tuntematon"
 
@@ -1804,94 +1804,94 @@ msgstr "Tuntematon"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:452
+#: panels/info-overview/cc-info-overview-panel.c:453
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; koontitunniste: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:467
+#: panels/info-overview/cc-info-overview-panel.c:468
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:470
+#: panels/info-overview/cc-info-overview-panel.c:471
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:727
+#: panels/info-overview/cc-info-overview-panel.c:728
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:731
+#: panels/info-overview/cc-info-overview-panel.c:732
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:733
+#: panels/info-overview/cc-info-overview-panel.c:734
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Tuntematon"
 
-#: panels/info-overview/cc-info-overview-panel.ui:52
+#: panels/info-overview/cc-info-overview-panel.ui:51
 msgid "Device Name"
 msgstr "Laitteen nimi"
 
-#: panels/info-overview/cc-info-overview-panel.ui:74
+#: panels/info-overview/cc-info-overview-panel.ui:73
 msgid "Hardware Model"
 msgstr "Laitemalli"
 
-#: panels/info-overview/cc-info-overview-panel.ui:83
+#: panels/info-overview/cc-info-overview-panel.ui:82
 msgid "Memory"
 msgstr "Muisti"
 
-#: panels/info-overview/cc-info-overview-panel.ui:92
+#: panels/info-overview/cc-info-overview-panel.ui:91
 msgid "Processor"
 msgstr "Suoritin"
 
-#: panels/info-overview/cc-info-overview-panel.ui:101
+#: panels/info-overview/cc-info-overview-panel.ui:100
 msgid "Graphics"
 msgstr "Grafiikka"
 
-#: panels/info-overview/cc-info-overview-panel.ui:110
+#: panels/info-overview/cc-info-overview-panel.ui:109
 msgid "Disk Capacity"
 msgstr "Levyn kapasiteetti"
 
-#: panels/info-overview/cc-info-overview-panel.ui:111
+#: panels/info-overview/cc-info-overview-panel.ui:110
 msgid "Calculating…"
 msgstr "Lasketaan…"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:133
+#: panels/info-overview/cc-info-overview-panel.ui:132
 msgid "OS Name"
 msgstr "Käyttöjärjestelmän nimi"
 
-#: panels/info-overview/cc-info-overview-panel.ui:142
+#: panels/info-overview/cc-info-overview-panel.ui:141
 msgid "OS Type"
 msgstr "Käyttöjärjestelmän tyyppi"
 
-#: panels/info-overview/cc-info-overview-panel.ui:151
+#: panels/info-overview/cc-info-overview-panel.ui:150
 msgid "GNOME Version"
 msgstr "Gnomen versio"
 
-#: panels/info-overview/cc-info-overview-panel.ui:161
+#: panels/info-overview/cc-info-overview-panel.ui:160
 msgid "Windowing System"
 msgstr "Ikkunointijärjestelmä"
 
-#: panels/info-overview/cc-info-overview-panel.ui:169
+#: panels/info-overview/cc-info-overview-panel.ui:168
 msgid "Virtualization"
 msgstr "Virtualisointi"
 
-#: panels/info-overview/cc-info-overview-panel.ui:178
+#: panels/info-overview/cc-info-overview-panel.ui:177
 msgid "Software Updates"
 msgstr "Ohjelmistopäivitykset"
 
-#: panels/info-overview/cc-info-overview-panel.ui:199
+#: panels/info-overview/cc-info-overview-panel.ui:198
 msgid "Rename Device"
 msgstr "Nimeä laite uudelleen"
 
-#: panels/info-overview/cc-info-overview-panel.ui:216
+#: panels/info-overview/cc-info-overview-panel.ui:215
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -1899,7 +1899,7 @@ msgstr ""
 "Laitteen nimeä käytetään laitteen tunnistamiseen, kun sitä tarkastellaan "
 "verkossa tai paritetaan Bluetooth-laitteita."
 
-#: panels/info-overview/cc-info-overview-panel.ui:234
+#: panels/info-overview/cc-info-overview-panel.ui:233
 msgid "_Rename"
 msgstr "_Nimeä uudelleen"
 
@@ -2185,7 +2185,6 @@ msgstr "Oikea Super"
 
 #: panels/keyboard/cc-keyboard-panel.c:78
 #: panels/keyboard/cc-keyboard-panel.c:96
-#| msgid "Menu key"
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Valikkonäppäin"
@@ -2219,13 +2218,11 @@ msgid "Caps Lock"
 msgstr "Caps Lock"
 
 #: panels/keyboard/cc-keyboard-panel.c:99
-#| msgid "Scroll Left"
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
 #: panels/keyboard/cc-keyboard-panel.c:100
-#| msgid "Login _Screen"
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Print Screen"
@@ -2263,8 +2260,8 @@ msgid "Hold down and type to enter different characters"
 msgstr "Pidä alhaalla ja näppäile kirjoittaaksesi eri merkkejä"
 
 #: panels/keyboard/cc-keyboard-panel.ui:232
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:298
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:314 shell/cc-window.ui:326
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:301
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:317 shell/cc-window.ui:326
 msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
@@ -2272,15 +2269,15 @@ msgstr "Pikanäppäimet"
 msgid "Customize Shortcuts"
 msgstr "Mukauta pikanäppäimiä"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:278
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:281
 msgid "modified"
 msgstr "muokattu"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:426
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:423
 msgid "Reset All Shortcuts?"
 msgstr "Palautetaanko kaikkien pikanäppäinten oletukset?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:429
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:426
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2288,14 +2285,14 @@ msgstr ""
 "Pikanäppäinten oletusten palauttaminen vaikuttaa asettamiisi pikanäppäimiin. "
 "Tätä toimintoa ei voi perua."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:433
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:430
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "Peru"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:434
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
 msgid "Reset All"
 msgstr "Palauta kaikki oletusasetukset"
 
@@ -2314,23 +2311,23 @@ msgid "Add Shortcut"
 msgstr "Lisää pikanäppäin"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:166
+msgid "No keyboard shortcut found"
+msgstr "Näppäimistön pikanäppäintä ei löytynyt"
+
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
 #: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
 msgid "Back"
 msgstr "Takaisin"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:190
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:235
 msgid "Reset All…"
 msgstr "Palauta kaikki oletusasetukset…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:191
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:236
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Palauta kaikki pikanäppäimet oletusarvoihin"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:228
-msgid "No keyboard shortcut found"
-msgstr "Näppäimistön pikanäppäintä ei löytynyt"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
 #, c-format
@@ -3557,11 +3554,11 @@ msgstr "Langaton verkkolaite ei tue yhteyspisteeksi asettamista"
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:266
 #: panels/power/cc-power-panel.c:1133 panels/power/cc-power-panel.c:1144
-#: panels/universal-access/cc-ua-panel.c:324
-#: panels/universal-access/cc-ua-panel.c:599
-#: panels/universal-access/cc-ua-panel.c:609
-#: panels/universal-access/cc-ua-panel.c:621
-#: panels/universal-access/cc-ua-panel.c:664
+#: panels/universal-access/cc-ua-panel.c:328
+#: panels/universal-access/cc-ua-panel.c:603
+#: panels/universal-access/cc-ua-panel.c:613
+#: panels/universal-access/cc-ua-panel.c:625
+#: panels/universal-access/cc-ua-panel.c:668
 #: panels/universal-access/cc-ua-panel.ui:300
 #: panels/universal-access/cc-ua-panel.ui:346
 #: panels/universal-access/cc-ua-panel.ui:392
@@ -4266,6 +4263,8 @@ msgstr "puuttuva wep-avain"
 #, c-format
 msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
 msgstr ""
+"virheellinen wep-key: avaimen jonka pituus on %zu tulee sisältää vain "
+"heksanumeroita"
 
 #: panels/network/wireless-security/ws-wep-key.c:131
 #, c-format
@@ -4280,6 +4279,8 @@ msgid ""
 "invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
 "(ascii) or 10/26 (hex)"
 msgstr ""
+"virheellinen wep-key: väärä avaimen pituus %zu. Avaimen tulee olla "
+"pituudeltaan joko 5/13 (ascii) tai 10/26 (hex)"
 
 #: panels/network/wireless-security/ws-wep-key.c:144
 msgid "invalid wep-key: passphrase must be non-empty"
@@ -4320,10 +4321,12 @@ msgid ""
 "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
 "digits"
 msgstr ""
+"virheellinen wpa-psk: virheellinen avaimen pituus %zu. Tulee olla [8,63] "
+"tavua tai 64 heksanumeroa"
 
 #: panels/network/wireless-security/ws-wpa-psk.c:86
 msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-msgstr ""
+msgstr "virheellinen wpa-psk: ei voi tulkita 64 tavun avainta heksana"
 
 #. This is the per application switch for message tray usage.
 #: panels/notifications/cc-app-notifications-dialog.ui:60
@@ -4367,11 +4370,11 @@ msgstr "Näytä viestin sisältö _lukitusnäytöllä"
 
 #: panels/notifications/cc-notifications-panel.c:266
 #: panels/power/cc-power-panel.c:1139 panels/power/cc-power-panel.c:1146
-#: panels/universal-access/cc-ua-panel.c:324
-#: panels/universal-access/cc-ua-panel.c:599
-#: panels/universal-access/cc-ua-panel.c:609
-#: panels/universal-access/cc-ua-panel.c:621
-#: panels/universal-access/cc-ua-panel.c:664
+#: panels/universal-access/cc-ua-panel.c:328
+#: panels/universal-access/cc-ua-panel.c:603
+#: panels/universal-access/cc-ua-panel.c:613
+#: panels/universal-access/cc-ua-panel.c:625
+#: panels/universal-access/cc-ua-panel.c:668
 msgid "On"
 msgstr "Päällä"
 
@@ -4637,10 +4640,8 @@ msgid "Automatic suspend"
 msgstr "Automaattinen valmiustila"
 
 #: panels/power/cc-power-panel.c:1799
-#, fuzzy
-#| msgid "Power off"
 msgid "Power Mode"
-msgstr "Virta pois päältä"
+msgstr "Tehotila"
 
 #: panels/power/cc-power-panel.c:1809
 msgid "Power Saving"
@@ -4927,20 +4928,20 @@ msgstr ""
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
-#: panels/printers/pp-details-dialog.c:371
+#: panels/printers/pp-details-dialog.c:351
 #, c-format
 msgid "%s Details"
 msgstr "Tulostimen %s tiedot"
 
-#: panels/printers/pp-details-dialog.c:121
+#: panels/printers/pp-details-dialog.c:101
 msgid "No suitable driver found"
 msgstr "Soveltuvaa ajuria ei löytynyt"
 
-#: panels/printers/pp-details-dialog.c:252
+#: panels/printers/pp-details-dialog.c:232
 msgid "Select PPD File"
 msgstr "Valitse PPD-tiedosto"
 
-#: panels/printers/pp-details-dialog.c:261
+#: panels/printers/pp-details-dialog.c:241
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -6108,7 +6109,7 @@ msgstr "Äänenvoimakkuus"
 msgid "Alert Sound"
 msgstr "Hälytysääni"
 
-#: panels/sound/cc-volume-slider.c:115
+#: panels/sound/cc-volume-slider.c:117
 msgctxt "volume"
 msgid "100%"
 msgstr "100 %"
@@ -6531,32 +6532,32 @@ msgstr ""
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:344
+#: panels/universal-access/cc-ua-panel.c:348
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Oletus"
 
-#: panels/universal-access/cc-ua-panel.c:347
+#: panels/universal-access/cc-ua-panel.c:351
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Keskikoko"
 
-#: panels/universal-access/cc-ua-panel.c:350
+#: panels/universal-access/cc-ua-panel.c:354
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Suuri"
 
-#: panels/universal-access/cc-ua-panel.c:353
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Suurempi"
 
-#: panels/universal-access/cc-ua-panel.c:356
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Suurin"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:364
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -8253,13 +8254,15 @@ msgstr "Peru haku"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
-msgstr ""
+msgstr "Viimeksi avattavan asetuspaneelin tunniste"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:6
 msgid ""
 "The identifier for the last Settings panel to be opened. Unrecognised values "
 "will be ignored and the first panel in the list selected."
 msgstr ""
+"Viimeksi avattavan asetuspaneelin tunniste. Tuntemattomat arvot ohitetaan ja "
+"luettelossa ensimmäisenä oleva paneeli valitaan."
 
 #: shell/org.gnome.ControlCenter.gschema.xml:13
 msgid "Show warning when running a development build of Settings"
