@@ -258,179 +258,66 @@
                                   <class name="frame"/>
                                 </style>
                                 <child>
-                                  <object class="GtkListBoxRow" id="account_type_row">
+                                  <object class="HdyActionRow" id="account_type_row">
                                     <property name="visible">True</property>
+                                    <property name="title" translatable="yes">_Administrator</property>
+                                    <property name="subtitle" translatable="yes">Administrators can add and remove other users, and can change settings for all users.</property>
+                                    <property name="subtitle-lines">0</property>
+                                    <property name="use_underline">True</property>
                                     <child>
-                                      <object class="GtkGrid">
+                                      <object class="GtkSwitch" id="account_type_switch">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="border-width">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="halign">GTK_ALIGN_START</property>
-                                            <property name="label" translatable="yes">_Administrator</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="mnemonic_widget">account_type_switch</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="visible">True</property>
-                                            <property name="expand">True</property>
-                                            <child>
-                                              <object class="GtkSwitch" id="account_type_switch">
-                                                <property name="visible">True</property>
-                                                <signal name="notify::active" handler="account_type_changed" object="CcUserPanel" swapped="yes"/>
-                                              </object>
-                                              <packing>
-                                                <property name="pack-type">end</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="wrap">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="max-width-chars">48</property>
-                                            <property name="label" translatable="yes">Administrators can add and remove other users, and can change settings for all users.</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                            <attributes>
-                                              <attribute name="scale" value="0.9"/>
-                                            </attributes>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">0</property>
-                                            <property name="top_attach">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="valign">center</property>
+                                        <signal name="notify::active" handler="account_type_changed" object="CcUserPanel" swapped="yes"/>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
 
                                 <child>
-                                  <object class="GtkListBoxRow" id="parental_controls_row">
+                                  <object class="HdyActionRow" id="parental_controls_row">
                                     <property name="visible">False</property>
+                                    <property name="title" translatable="yes">_Parental Controls</property>
+                                    <property name="subtitle" translatable="yes">Open the Parental Controls application.</property>
+                                    <property name="subtitle-lines">0</property>
                                     <child>
-                                      <object class="GtkGrid">
+                                      <object class="GtkLabel" id="parental_controls_button_label">
                                         <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="border-width">10</property>
-                                        <property name="column-spacing">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="halign">GTK_ALIGN_START</property>
-                                            <property name="hexpand">True</property>
-                                            <property name="label" translatable="yes">_Parental Controls</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="mnemonic_widget">parental_controls_button_label</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkBox">
-                                            <property name="orientation">horizontal</property>
-                                            <property name="visible">True</property>
-                                            <property name="spacing">10</property>
-                                            <child>
-                                              <object class="GtkImage" id="parental_control_go_next">
-                                                <property name="visible">True</property>
-                                                <property name="icon-name">go-next-symbolic</property>
-                                                <style>
-                                                  <class name="dim-label"/>
-                                                </style>
-                                              </object>
-                                              <packing>
-                                                <property name="pack_type">end</property>
-                                              </packing>
-                                            </child>
-                                            <child>
-                                              <object class="GtkLabel" id="parental_controls_button_label">
-                                                <property name="visible">True</property>
-                                                <property name="valign">0.5</property>
-                                              </object>
-                                              <packing>
-                                                <property name="pack_type">end</property>
-                                              </packing>
-                                            </child>
-                                          </object>
-                                          <packing>
-                                            <property name="height">2</property>
-                                            <property name="left_attach">1</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="expand">True</property>
-                                            <property name="visible">True</property>
-                                            <property name="wrap">True</property>
-                                            <property name="xalign">0</property>
-                                            <property name="max-width-chars">48</property>
-                                            <property name="label" translatable="yes">Open the Parental Controls application.</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                            <attributes>
-                                              <attribute name="scale" value="0.9"/>
-                                            </attributes>
-                                          </object>
-                                          <packing>
-                                            <property name="left_attach">0</property>
-                                            <property name="top_attach">1</property>
-                                          </packing>
-                                        </child>
+                                        <property name="valign">0.5</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage" id="parental_control_go_next">
+                                        <property name="visible">True</property>
+                                        <property name="icon-name">go-next-symbolic</property>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
 
                                 <child>
-                                  <object class="GtkListBoxRow" id="language_row">
+                                  <object class="HdyActionRow" id="language_row">
                                     <property name="visible">True</property>
+                                    <property name="title" translatable="yes">_Language</property>
+                                    <property name="use_underline">True</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkLabel" id="language_button_label">
+                                         <property name="visible">True</property>
+                                         <style>
+                                            <class name="dim-label"/>
+                                          </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
                                         <property name="visible">True</property>
-                                        <property name="border-width">10</property>
-                                        <property name="spacing">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">_Language</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="mnemonic_widget">language_button_label</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="icon-name">go-next-symbolic</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="language_button_label">
-                                            <property name="visible">True</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
+                                        <property name="icon-name">go-next-symbolic</property>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
                                       </object>
                                     </child>
                                   </object>
@@ -465,159 +352,87 @@
                                   <class name="frame"/>
                                 </style>
                                 <child>
-                                  <object class="GtkListBoxRow" id="password_row">
+                                  <object class="HdyActionRow" id="password_row">
                                     <property name="visible">True</property>
+                                    <property name="title" translatable="yes">_Password</property>
+                                    <property name="use_underline">True</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkLabel" id="password_button_label">
                                         <property name="visible">True</property>
-                                        <property name="border-width">10</property>
-                                        <property name="spacing">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">_Password</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="mnemonic_widget">password_button_label</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="icon-name">go-next-symbolic</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="password_button_label">
-                                            <property name="visible">True</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="icon-name">go-next-symbolic</property>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkListBoxRow" id="fingerprint_row">
+                                  <object class="HdyActionRow" id="fingerprint_row">
                                     <property name="visible">True</property>
+                                    <property name="title" translatable="yes">_Fingerprint Login</property>
+                                    <property name="use_underline">True</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkLabel" id="fingerprint_state_label">
                                         <property name="visible">True</property>
-                                        <property name="border-width">10</property>
-                                        <property name="spacing">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">_Fingerprint Login</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="mnemonic_widget">fingerprint_state_label</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="icon-name">go-next-symbolic</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="fingerprint_state_label">
-                                            <property name="visible">True</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="icon-name">go-next-symbolic</property>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkListBoxRow" id="autologin_row">
+                                  <object class="HdyActionRow" id="autologin_row">
                                     <property name="visible">True</property>
+                                    <property name="title" translatable="yes">A_utomatic Login</property>
+                                    <property name="use_underline">True</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkSwitch" id="autologin_switch">
                                         <property name="visible">True</property>
-                                        <property name="border-width">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="label" translatable="yes">A_utomatic Login</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="mnemonic_widget">autologin_switch</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkSwitch" id="autologin_switch">
-                                            <property name="visible">True</property>
-                                            <signal name="notify::active" handler="autologin_changed" object="CcUserPanel" swapped="yes"/>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
+                                        <property name="valign">center</property>
+                                        <signal name="notify::active" handler="autologin_changed" object="CcUserPanel" swapped="yes"/>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
                                 <child>
-                                  <object class="GtkListBoxRow" id="last_login_row">
+                                  <object class="HdyActionRow" id="last_login_row">
                                     <property name="visible">True</property>
+                                    <property name="title" translatable="yes">Account Activity</property>
+                                    <property name="use_underline">True</property>
                                     <child>
-                                      <object class="GtkBox">
+                                      <object class="GtkLabel" id="last_login_button_label">
                                         <property name="visible">True</property>
-                                        <property name="border-width">10</property>
-                                        <property name="spacing">10</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="xalign">1</property>
-                                            <property name="label" translatable="yes">Account Activity</property>
-                                            <property name="use_underline">True</property>
-                                            <property name="mnemonic_widget">last_login_button_label</property>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkImage">
-                                            <property name="visible">True</property>
-                                            <property name="icon-name">go-next-symbolic</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
-                                        <child>
-                                          <object class="GtkLabel" id="last_login_button_label">
-                                            <property name="visible">True</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                          </object>
-                                          <packing>
-                                            <property name="pack_type">end</property>
-                                          </packing>
-                                        </child>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkImage">
+                                        <property name="visible">True</property>
+                                        <property name="icon-name">go-next-symbolic</property>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
                                       </object>
                                     </child>
                                   </object>
