@@ -915,8 +915,6 @@ static void
 cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-  gtk_list_box_set_header_func (self->hardware_box, cc_list_box_update_header_func, NULL, NULL);
-  gtk_list_box_set_header_func (self->os_box, cc_list_box_update_header_func, NULL, NULL);
 
   g_resources_register (cc_info_overview_get_resource ());
 
