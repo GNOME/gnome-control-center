@@ -82,7 +82,6 @@ typedef struct
 {
   char *major;
   char *minor;
-  char *micro;
   char *distributor;
   char *date;
   char **current;
@@ -93,7 +92,6 @@ version_data_free (VersionData *data)
 {
   g_free (data->major);
   g_free (data->minor);
-  g_free (data->micro);
   g_free (data->distributor);
   g_free (data->date);
   g_free (data);
@@ -116,8 +114,6 @@ version_start_element_handler (GMarkupParseContext      *ctx,
     data->current = &data->major;
   else if (g_str_equal (element_name, "minor"))
     data->current = &data->minor;
-  else if (g_str_equal (element_name, "micro"))
-    data->current = &data->micro;
   else if (g_str_equal (element_name, "distributor"))
     data->current = &data->distributor;
   else if (g_str_equal (element_name, "date"))
@@ -188,7 +184,7 @@ load_gnome_version (char **version,
   else
     {
       if (version != NULL)
-        *version = g_strdup_printf ("%s.%s.%s", data->major, data->minor, data->micro);
+        *version = g_strdup_printf ("%s.%s", data->major, data->minor);
       if (distributor != NULL)
         *distributor = g_strdup (data->distributor);
       if (date != NULL)
