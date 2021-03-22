@@ -428,3 +428,22 @@ net_device_get_valid_connections (NMClient *client, NMDevice *device)
 
         return g_slist_reverse (valid);
 }
+
+gchar *
+net_device_get_ip6_addresses (NMIPConfig *ipv6_config)
+{
+        g_autoptr(GPtrArray) ipv6 = NULL;
+        GPtrArray *addresses;
+
+        addresses = nm_ip_config_get_addresses (ipv6_config);
+        if (addresses->len == 0) {
+                return NULL;
+        }
+        ipv6 = g_ptr_array_sized_new (addresses->len + 1);
+
+        for (int i = 0; i < addresses->len; i++) {
+                g_ptr_array_add (ipv6, (char *) nm_ip_address_get_address (g_ptr_array_index (addresses, i)));
+        }
+        g_ptr_array_add (ipv6, NULL);
+        return g_strjoinv ("\n", (char **) ipv6->pdata);
+}
