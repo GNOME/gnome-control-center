@@ -334,6 +334,12 @@ cc_display_monitor_set_underscanning (CcDisplayMonitor *self,
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_underscanning (self, underscanning);
 }
 
+CcDisplayMonitorPrivacy
+cc_display_monitor_get_privacy (CcDisplayMonitor *self)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->get_privacy (self);
+}
+
 void
 cc_display_monitor_set_mode (CcDisplayMonitor *self, CcDisplayMode *m)
 {

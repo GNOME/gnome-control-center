@@ -340,6 +340,7 @@ struct _CcDisplayMonitorDBus
   int height_mm;
   gboolean builtin;
   CcDisplayMonitorUnderscanning underscanning;
+  CcDisplayMonitorPrivacy privacy_screen;
   int max_width;
   int max_height;
 
@@ -625,6 +626,14 @@ cc_display_monitor_dbus_get_underscanning (CcDisplayMonitor *pself)
   return self->underscanning == UNDERSCANNING_ENABLED;
 }
 
+static CcDisplayMonitorPrivacy
+cc_display_monitor_dbus_get_privacy (CcDisplayMonitor *pself)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+
+  return self->privacy_screen;
+}
+
 static void
 cc_display_monitor_dbus_set_underscanning (CcDisplayMonitor *pself,
                                            gboolean underscanning)
@@ -843,6 +852,7 @@ cc_display_monitor_dbus_class_init (CcDisplayMonitorDBusClass *klass)
   parent_class->supports_underscanning = cc_display_monitor_dbus_supports_underscanning;
   parent_class->get_underscanning = cc_display_monitor_dbus_get_underscanning;
   parent_class->set_underscanning = cc_display_monitor_dbus_set_underscanning;
+  parent_class->get_privacy = cc_display_monitor_dbus_get_privacy;
   parent_class->set_mode = cc_display_monitor_dbus_set_mode;
   parent_class->set_compatible_clone_mode = cc_display_monitor_dbus_set_compatible_clone_mode;
   parent_class->set_position = cc_display_monitor_dbus_set_position;
@@ -931,6 +941,20 @@ cc_display_monitor_dbus_new (GVariant *variant,
       else if (g_str_equal (s, "display-name"))
         {
           g_variant_get (v, "s", &self->display_name);
+        }
+      else if (g_str_equal (s, "privacy-screen-state"))
+        {
+          gboolean enabled;
+          gboolean locked;
+          g_variant_get (v, "(bb)", &enabled, &locked);
+
+          if (enabled)
+            self->privacy_screen = CC_DISPLAY_MONITOR_PRIVACY_ENABLED;
+          else
+            self->privacy_screen = CC_DISPLAY_MONITOR_PRIVACY_DISABLED;
+
+          if (locked)
+            self->privacy_screen |= CC_DISPLAY_MONITOR_PRIVACY_LOCKED;
         }
     }
 

@@ -68,6 +68,14 @@ typedef enum _CcDisplayRotation
   CC_DISPLAY_ROTATION_270_FLIPPED,
 } CcDisplayRotation;
 
+typedef enum _CcDisplayMonitorPrivacy
+{
+  CC_DISPLAY_MONITOR_PRIVACY_UNSUPPORTED = 0,
+  CC_DISPLAY_MONITOR_PRIVACY_DISABLED = 1 << 0,
+  CC_DISPLAY_MONITOR_PRIVACY_ENABLED = 1 << 1,
+  CC_DISPLAY_MONITOR_PRIVACY_LOCKED = 1 << 2,
+} CcDisplayMonitorPrivacy;
+
 
 #define CC_TYPE_DISPLAY_MODE (cc_display_mode_get_type ())
 G_DECLARE_DERIVABLE_TYPE (CcDisplayMode, cc_display_mode,
@@ -123,6 +131,7 @@ struct _CcDisplayMonitorClass
   gboolean          (*get_underscanning)      (CcDisplayMonitor  *self);
   void              (*set_underscanning)      (CcDisplayMonitor  *self,
                                                gboolean           u);
+  CcDisplayMonitorPrivacy (*get_privacy)      (CcDisplayMonitor  *self);
   CcDisplayMode*    (*get_mode)               (CcDisplayMonitor  *self);
   CcDisplayMode*    (*get_preferred_mode)     (CcDisplayMonitor  *self);
   GList*            (*get_modes)              (CcDisplayMonitor  *self);
@@ -217,6 +226,8 @@ gboolean          cc_display_monitor_supports_underscanning (CcDisplayMonitor  *
 gboolean          cc_display_monitor_get_underscanning      (CcDisplayMonitor  *monitor);
 void              cc_display_monitor_set_underscanning      (CcDisplayMonitor  *monitor,
                                                              gboolean           underscanning);
+
+CcDisplayMonitorPrivacy cc_display_monitor_get_privacy      (CcDisplayMonitor *self);
 
 CcDisplayMode*    cc_display_monitor_get_mode               (CcDisplayMonitor  *monitor);
 void              cc_display_monitor_get_geometry           (CcDisplayMonitor  *monitor,
