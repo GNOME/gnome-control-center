@@ -63,6 +63,7 @@ add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar
         heading_label = gtk_label_new (heading);
         gtk_style_context_add_class (gtk_widget_get_style_context (heading_label), "dim-label");
         gtk_widget_set_halign (heading_label, GTK_ALIGN_END);
+        gtk_widget_set_valign (heading_label, GTK_ALIGN_START);
         gtk_widget_set_hexpand (heading_label, TRUE);
 
         gtk_grid_attach (GTK_GRID (details), heading_label, 0, top, 1, 1);
@@ -115,7 +116,7 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
         const gchar *ip4_address = NULL;
         const gchar *ip4_route = NULL;
         g_autofree gchar *ip4_dns = NULL;
-        const gchar *ip6_address = NULL;
+        g_autofree gchar *ip6_addresses = NULL;
         g_autofree gchar *ip6_dns = NULL;
         gint i = 0;
 
@@ -134,24 +135,21 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
         }
         ip6_config = nm_device_get_ip6_config (device);
         if (ip6_config) {
-                GPtrArray *addresses;
-
-                addresses = nm_ip_config_get_addresses (ip6_config);
-                if (addresses->len > 0)
-                        ip6_address = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
-
+                ip6_addresses = net_device_get_ip6_addresses (ip6_config);
                 ip6_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ip6_config));
                 if (!*ip6_dns)
                         ip6_dns = NULL;
         }
 
-        if (ip4_address && ip6_address) {
+        if (ip4_address && ip6_addresses) {
                 add_details_row (details, i++, _("IPv4 Address"), ip4_address);
-                add_details_row (details, i++, _("IPv6 Address"), ip6_address);
+                gtk_widget_set_valign (details, GTK_ALIGN_START);
+                add_details_row (details, i++, _("IPv6 Address"), ip6_addresses);
+                gtk_widget_set_valign (details, GTK_ALIGN_START);
         } else if (ip4_address) {
                 add_details_row (details, i++, _("IP Address"), ip4_address);
-        } else if (ip6_address) {
-                add_details_row (details, i++, _("IP Address"), ip6_address);
+        } else if (ip6_addresses) {
+                add_details_row (details, i++, _("IP Address"), ip6_addresses);
         }
 
         add_details_row (details, i++, _("Hardware Address"), nm_device_get_hw_address (device));

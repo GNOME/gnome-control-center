@@ -34,4 +34,6 @@ NMConnection *net_device_get_find_connection   (NMClient *client,
 GSList       *net_device_get_valid_connections (NMClient *client,
                                                 NMDevice *device);
 
+gchar   *net_device_get_ip6_addresses (NMIPConfig *ipv6_config);
+
 G_END_DECLS

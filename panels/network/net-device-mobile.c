@@ -417,15 +417,13 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 
         ipv6_config = nm_device_get_ip6_config (self->device);
         if (ipv6_config != NULL) {
-                GPtrArray *addresses;
-                const gchar *ipv6_text = NULL;
+                g_autofree gchar *ipv6_text = NULL;
                 g_autofree gchar *ip6_dns = NULL;
 
-                addresses = nm_ip_config_get_addresses (ipv6_config);
-                if (addresses->len > 0)
-                        ipv6_text = nm_ip_address_get_address (g_ptr_array_index (addresses, 0));
+                ipv6_text = net_device_get_ip6_addresses (ipv6_config);
                 gtk_label_set_label (self->ipv6_label, ipv6_text);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv6_heading_label), ipv6_text != NULL);
+                gtk_widget_set_valign (GTK_WIDGET (self->ipv6_heading_label), GTK_ALIGN_START);
                 gtk_widget_set_visible (GTK_WIDGET (self->ipv6_label), ipv6_text != NULL);
                 have_ipv6_address = ipv6_text != NULL;
 
