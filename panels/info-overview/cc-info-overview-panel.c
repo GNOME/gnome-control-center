@@ -188,7 +188,7 @@ load_gnome_version (char **version,
   else
     {
       if (version != NULL)
-        *version = g_strdup_printf ("%s.%s.%s", data->major, data->minor, data->micro);
+        *version = g_strdup_printf ("%s.%s", data->major, data->minor);
       if (distributor != NULL)
         *distributor = g_strdup (data->distributor);
       if (date != NULL)
