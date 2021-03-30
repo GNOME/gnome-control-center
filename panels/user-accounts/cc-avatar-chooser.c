@@ -134,21 +134,26 @@ file_chooser_response (CcAvatarChooser *self,
                        gint             response,
                        GtkDialog       *chooser)
 {
-        g_autofree gchar *filename = NULL;
+        g_autofree gchar *fileuri = NULL;
         g_autoptr(GError) error = NULL;
         g_autoptr(GdkPixbuf) pixbuf = NULL;
         g_autoptr(GdkPixbuf) pixbuf2 = NULL;
+        g_autoptr(GFile) file = NULL;
+        g_autoptr(GFileInputStream) stream = NULL;
 
         if (response != GTK_RESPONSE_ACCEPT) {
                 gtk_widget_destroy (GTK_WIDGET (chooser));
                 return;
         }
 
-        filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+        fileuri = gtk_file_chooser_get_uri (GTK_FILE_CHOOSER (chooser));
+        file = g_file_new_for_uri (fileuri);
 
-        pixbuf = gdk_pixbuf_new_from_file (filename, &error);
+        stream = g_file_read (file, NULL, &error);
+        pixbuf = gdk_pixbuf_new_from_stream (G_INPUT_STREAM (stream),
+                                             NULL, &error);
         if (pixbuf == NULL) {
-                g_warning ("Failed to load %s: %s", filename, error->message);
+                g_warning ("Failed to load %s: %s", fileuri, error->message);
         }
 
         pixbuf2 = gdk_pixbuf_apply_embedded_orientation (pixbuf);
@@ -230,6 +235,7 @@ cc_avatar_chooser_select_file (CcAvatarChooser *self)
         gtk_widget_set_size_request (preview, 128, -1);
         gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (chooser), preview);
         gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (chooser), FALSE);
+        gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), FALSE);
         gtk_widget_show (preview);
 
         /* Preview has to be generated after default handler of "selection-changed"
