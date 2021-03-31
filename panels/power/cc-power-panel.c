@@ -1363,7 +1363,8 @@ performance_profile_set_inhibited (CcPowerPanel  *self,
   CcPowerProfileRow *row;
 
   row = self->power_profiles_row[CC_POWER_PROFILE_PERFORMANCE];
-  g_assert (row != NULL);
+  if (!row)
+      return;
   cc_power_profile_row_set_performance_inhibited (row, performance_inhibited);
 }
 
