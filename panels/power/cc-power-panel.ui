@@ -123,6 +123,17 @@
                 </style>
               </object>
             </child>
+            <child>
+              <object class="GtkListBox" id="power_profile_info_listbox">
+                <property name="visible">False</property>
+                <property name="selection-mode">none</property>
+                <property name="margin_top">12</property>
+                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcPowerPanel" swapped="yes"/>
+                <style>
+                  <class name="content"/>
+                </style>
+              </object>
+            </child>
           </object>
         </child>
         <child>

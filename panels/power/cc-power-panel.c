@@ -89,6 +89,7 @@ struct _CcPowerPanel
   GtkSwitch         *mobile_switch;
   HdyComboRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
+  GtkListBox        *power_profile_info_listbox;
   HdyPreferencesGroup *power_profile_section;
   GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
@@ -119,6 +120,7 @@ struct _CcPowerPanel
   guint          power_profiles_prop_id;
   CcPowerProfileRow *power_profiles_row[NUM_CC_POWER_PROFILES];
   gboolean       power_profiles_in_update;
+  gboolean       has_performance_degraded;
 
 #ifdef HAVE_NETWORK_MANAGER
   NMClient      *nm_client;
@@ -1366,6 +1368,37 @@ performance_profile_set_inhibited (CcPowerPanel  *self,
 }
 
 static void
+performance_profile_set_degraded (CcPowerPanel *self)
+{
+  g_autoptr(GVariant) variant = NULL;
+  const char *degraded, *text;
+  CcPowerProfileInfoRow *row;
+
+  empty_listbox (self->power_profile_info_listbox);
+  gtk_widget_hide (GTK_WIDGET (self->power_profile_info_listbox));
+
+  variant = g_dbus_proxy_get_cached_property (self->power_profiles_proxy, "PerformanceDegraded");
+  if (!variant)
+    return;
+  degraded = g_variant_get_string (variant, NULL);
+  if (*degraded == '\0')
+    return;
+
+  gtk_widget_show (GTK_WIDGET (self->power_profile_info_listbox));
+
+  if (g_str_equal (degraded, "high-operating-temperature"))
+    text = _("Performance mode temporarily disabled due to high operating temperature.");
+  else if (g_str_equal (degraded, "lap-detected"))
+    text = _("Lap detected: performance mode temporarily disabled. Move the device to a stable surface to restore.");
+  else
+    text = _("Performance mode temporarily disabled.");
+
+  row = cc_power_profile_info_row_new (text);
+  gtk_widget_show (GTK_WIDGET (row));
+  gtk_container_add (GTK_CONTAINER (self->power_profile_info_listbox), GTK_WIDGET (row));
+}
+
+static void
 power_profiles_row_activated_cb (GtkListBox    *box,
                                  GtkListBoxRow *box_row,
                                  gpointer       user_data)
@@ -1420,8 +1453,13 @@ power_profiles_properties_changed_cb (CcPowerPanel *self,
     {
       if (g_strcmp0 (key, "PerformanceInhibited") == 0)
         {
-          performance_profile_set_inhibited (self,
-                                             g_variant_get_string (value, NULL));
+          if (!self->has_performance_degraded)
+            performance_profile_set_inhibited (self,
+                                               g_variant_get_string (value, NULL));
+        }
+      else if (g_strcmp0 (key, "PerformanceDegraded") == 0)
+        {
+          performance_profile_set_degraded (self);
         }
       else if (g_strcmp0 (key, "ActiveProfile") == 0)
         {
@@ -1504,7 +1542,8 @@ setup_power_profiles (CcPowerPanel *self)
   g_autoptr(GVariant) props = NULL;
   guint i, num_children;
   g_autoptr(GError) error = NULL;
-  const char *performance_inhibited;
+  const char *performance_inhibited = NULL;
+  const char *performance_degraded;
   const char *active_profile;
   g_autoptr(GVariant) profiles = NULL;
   GtkRadioButton *last_button;
@@ -1557,7 +1596,12 @@ setup_power_profiles (CcPowerPanel *self)
   gtk_widget_show (GTK_WIDGET (self->power_profile_section));
 
   props = g_variant_get_child_value (variant, 0);
-  performance_inhibited = variant_lookup_string (props, "PerformanceInhibited");
+  performance_degraded = variant_lookup_string (props, "PerformanceDegraded");
+  self->has_performance_degraded = performance_degraded != NULL;
+  if (performance_degraded == NULL)
+    performance_inhibited = variant_lookup_string (props, "PerformanceInhibited");
+  else
+    performance_profile_set_degraded (self);
   active_profile = variant_lookup_string (props, "ActiveProfile");
 
   last_button = NULL;
@@ -1715,6 +1759,7 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
