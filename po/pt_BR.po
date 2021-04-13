@@ -24,26 +24,26 @@
 # Djavan Fagundes <djavan@comum.org>, 2012.
 # Gustavo Marques <gutodisse@gmail.com>, 2015, 2016.
 # Artur de Aquino Morais <artur.morais93@outlook.com>, 2016.
-# Enrico Nicoletto <liverig@gmail.com>, 2012-2016, 2018, 2019.
 # Georges Basile Stavracas Neto <georges.stavracas@gmail.com>, 2013-2019.
 # Bruno Lopes <brunolopesdsilv@gmail.com>, 2021.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2012-2021.
+# Enrico Nicoletto <liverig@gmail.com>, 2012-2016, 2018-2019, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-03-11 21:55+0000\n"
-"PO-Revision-Date: 2021-03-17 04:01-0300\n"
-"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"POT-Creation-Date: 2021-04-13 01:37+0000\n"
+"PO-Revision-Date: 2021-04-12 22:44-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 3.38.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Project-Style: gnome\n"
 
 #: panels/applications/cc-applications-panel.c:823
@@ -62,7 +62,7 @@ msgid "Session Bus"
 msgstr "Barramento de sessão"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:1789 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:1790 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Dispositivos"
@@ -1820,11 +1820,11 @@ msgstr ""
 "Noturna;Luz;Azul;Desvio para o vermelho;redshift;cor;pôr do sol;nascer do "
 "sol;"
 
-#: panels/info-overview/cc-info-overview-panel.c:418
-#: panels/info-overview/cc-info-overview-panel.c:433
-#: panels/info-overview/cc-info-overview-panel.c:445
-#: panels/info-overview/cc-info-overview-panel.c:491
-#: panels/info-overview/cc-info-overview-panel.c:521
+#: panels/info-overview/cc-info-overview-panel.c:414
+#: panels/info-overview/cc-info-overview-panel.c:429
+#: panels/info-overview/cc-info-overview-panel.c:441
+#: panels/info-overview/cc-info-overview-panel.c:487
+#: panels/info-overview/cc-info-overview-panel.c:517
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -1832,32 +1832,32 @@ msgstr "Desconhecido"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:453
+#: panels/info-overview/cc-info-overview-panel.c:449
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; ID de compilação: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:468
+#: panels/info-overview/cc-info-overview-panel.c:464
 #, c-format
 msgid "64-bit"
 msgstr "64 bits"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:471
+#: panels/info-overview/cc-info-overview-panel.c:467
 #, c-format
 msgid "32-bit"
 msgstr "32 bits"
 
-#: panels/info-overview/cc-info-overview-panel.c:728
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:732
+#: panels/info-overview/cc-info-overview-panel.c:728
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:734
+#: panels/info-overview/cc-info-overview-panel.c:730
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Desconhecido"
@@ -2290,8 +2290,8 @@ msgid "Hold down and type to enter different characters"
 msgstr "Mantenha pressionado e digite para inserir caracteres diferentes"
 
 #: panels/keyboard/cc-keyboard-panel.ui:232
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:301
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:317 shell/cc-window.ui:326
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:306
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:322 shell/cc-window.ui:326
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
@@ -2299,15 +2299,18 @@ msgstr "Atalhos de teclado"
 msgid "Customize Shortcuts"
 msgstr "Personalizar atalhos"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:281
-msgid "modified"
-msgstr "modificado"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:283
+#, c-format
+msgid "%d modified"
+msgid_plural "%d modified"
+msgstr[0] "%d modificado"
+msgstr[1] "%d modificados"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:423
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:428
 msgid "Reset All Shortcuts?"
 msgstr "Redefinir todos os atalhos?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:426
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2315,14 +2318,14 @@ msgstr ""
 "Redefinir os atalhos pode afetar seus atalhos personalizados. Isso não pode "
 "ser desfeito."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:430
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:435
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:436
 msgid "Reset All"
 msgstr "Redefinir todos"
 
@@ -2471,11 +2474,11 @@ msgstr ""
 "Usa o Serviço de Localização do Mozilla: <a href='https://location.services."
 "mozilla.com/privacy'>Política de Privacidade</a>"
 
-#: panels/location/cc-location-panel.ui:93
+#: panels/location/cc-location-panel.ui:94
 msgid "Allow the applications below to determine your location."
 msgstr "Permite que os aplicativos abaixo determinem sua localização."
 
-#: panels/location/cc-location-panel.ui:113
+#: panels/location/cc-location-panel.ui:114
 msgid "No Applications Have Asked for Location Access"
 msgstr "Nenhum aplicativo pediu por acesso à localização"
 
@@ -4441,26 +4444,26 @@ msgstr "Controle quais notificações são exibidas e o que elas mostram"
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Notificações;Banner;Mensagem;Bandeja;Janelas instantâneas;"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:150
+#: panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Outro"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:622
+#: panels/online-accounts/cc-online-accounts-panel.c:576
 #, c-format
 msgid "%s Account"
 msgstr "Conta %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:916
+#: panels/online-accounts/cc-online-accounts-panel.c:870
 msgid "Error removing account"
 msgstr "Erro ao remover conta"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:982
+#: panels/online-accounts/cc-online-accounts-panel.c:936
 #, c-format
 msgid "%s removed"
 msgstr "%s removido(a)"
@@ -4505,7 +4508,7 @@ msgstr ""
 msgid "Add an account"
 msgstr "Adicionar uma conta"
 
-#: panels/online-accounts/online-accounts.ui:238
+#: panels/online-accounts/online-accounts.ui:223
 msgid "Remove Account"
 msgstr "Remover conta"
 
@@ -4637,7 +4640,7 @@ msgstr "Dispositivo de entrada de jogo"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:413
-#: panels/power/cc-power-panel.c:1779
+#: panels/power/cc-power-panel.c:1780
 msgid "Battery"
 msgstr "Bateria"
 
@@ -4687,15 +4690,15 @@ msgstr "Ligado na tomada"
 msgid "Automatic suspend"
 msgstr "Suspensão automática"
 
-#: panels/power/cc-power-panel.c:1799
+#: panels/power/cc-power-panel.c:1800
 msgid "Power Mode"
 msgstr "Modo de energia"
 
-#: panels/power/cc-power-panel.c:1809
+#: panels/power/cc-power-panel.c:1810
 msgid "Power Saving"
 msgstr "Economia de energia"
 
-#: panels/power/cc-power-panel.c:1817
+#: panels/power/cc-power-panel.c:1818
 msgid "Suspend & Power Button"
 msgstr "Botão de suspender & desligar"
 
