@@ -35,8 +35,6 @@
 #include "cc-background-resources.h"
 #include "cc-background-xml.h"
 
-#include "bg-pictures-source.h"
-
 #define WP_PATH_ID "org.gnome.desktop.background"
 #define WP_LOCK_PATH_ID "org.gnome.desktop.screensaver"
 #define WP_URI_KEY "picture-uri"

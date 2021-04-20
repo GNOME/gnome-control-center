@@ -25,7 +25,6 @@
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 
 #include "bg-colors-source.h"
-#include "bg-pictures-source.h"
 #include "bg-recent-source.h"
 #include "bg-wallpapers-source.h"
 #include "cc-background-chooser.h"

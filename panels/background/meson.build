@@ -76,12 +76,10 @@ common_sources += gnome.compile_resources(
 
 sources = common_sources + files(
   'bg-colors-source.c',
-  'bg-pictures-source.c',
   'bg-recent-source.c',
   'bg-source.c',
   'bg-wallpapers-source.c',
   'cc-background-chooser.c',
-  'cc-background-grilo-miner.c',
   'cc-background-item.c',
   'cc-background-panel.c',
   'cc-background-preview.c',
@@ -91,10 +89,8 @@ sources = common_sources + files(
 deps = common_deps + [
   gdk_pixbuf_dep,
   gnome_desktop_dep,
-  goa_dep,
   libxml_dep,
   dependency('cairo-gobject'),
-  dependency('grilo-0.3', version: '>= 0.3.0')
 ]
 
 cflags += [
