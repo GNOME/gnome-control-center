@@ -585,12 +585,17 @@ gdk_window_set_cb (CcWindow *self)
 }
 
 static gboolean
-window_map_event_cb (CcWindow *self)
+window_map_event_cb (CcWindow *self,
+                     GdkEvent *event)
 {
-  /* If focus ends up in a category icon view one of the items is
-   * immediately selected which looks odd when we are starting up, so
-   * we explicitly unset the focus here. */
-  gtk_window_set_focus (GTK_WINDOW (self), NULL);
+  if (event->any.window == gtk_widget_get_window (GTK_WIDGET (self)))
+    {
+      /* If focus ends up in a category icon view one of the items is
+       * immediately selected which looks odd when we are starting up, so
+       * we  explicitly unset the focus here. */
+      gtk_window_set_focus (GTK_WINDOW (self), NULL);
+    }
+
   return GDK_EVENT_PROPAGATE;
 }
 
