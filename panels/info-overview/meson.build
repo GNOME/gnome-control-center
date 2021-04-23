@@ -28,7 +28,6 @@ sources = files(
 )
 
 resource_data = files(
-  'GnomeLogoVerticalMedium.svg',
   'cc-info-overview-panel.ui'
 )
 
@@ -67,4 +66,9 @@ executable(
   c_args: cflags,
   install: true,
   install_dir: control_center_libexecdir,
+)
+
+install_data(
+  [ 'gnome-logo-text.svg', 'gnome-logo-text-dark.svg' ],
+  install_dir: join_paths(control_center_datadir, 'icons')
 )

@@ -906,18 +906,14 @@ static void
 setup_os_logo (CcInfoOverviewPanel *panel)
 {
   g_autofree char *logo_name = g_get_os_info ("LOGO");
-  if (logo_name != NULL)
-    {
-      g_autofree char *logo_name_with_variant = NULL;
+  g_autofree char *logo_name_with_variant = NULL;
 
-      logo_name_with_variant = g_strdup_printf ("%s-text%s", logo_name, get_asset_suffix (panel));
-      gtk_image_set_from_icon_name (panel->os_logo, logo_name_with_variant, GTK_ICON_SIZE_INVALID);
-      gtk_image_set_pixel_size (panel->os_logo, 256);
-    }
-  else
-    {
-      gtk_image_set_from_resource (panel->os_logo, "/org/gnome/control-center/info-overview/GnomeLogoVerticalMedium.svg");
-    }
+  if (logo_name == NULL)
+    logo_name = g_strdup ("gnome-logo");
+
+  logo_name_with_variant = g_strdup_printf ("%s-text%s", logo_name, get_asset_suffix (panel));
+  gtk_image_set_from_icon_name (panel->os_logo, logo_name_with_variant, GTK_ICON_SIZE_INVALID);
+  gtk_image_set_pixel_size (panel->os_logo, 256);
 }
 
 static void
