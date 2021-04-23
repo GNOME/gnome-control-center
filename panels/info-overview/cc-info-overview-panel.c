@@ -884,13 +884,34 @@ cc_info_panel_row_activated_cb (CcInfoOverviewPanel *self,
     open_software_update (self);
 }
 
+static const char *
+get_asset_suffix (CcInfoOverviewPanel *panel)
+{
+  GdkScreen *screen;
+  GtkSettings *settings;
+  g_autofree char *theme_name = NULL;
+
+  theme_name = g_strdup (g_getenv ("GTK_THEME"));
+  if (theme_name != NULL)
+    return g_str_has_suffix (theme_name, "dark") ? "-dark" : "";
+
+  screen = gtk_widget_get_screen (GTK_WIDGET (panel));
+  settings = gtk_settings_get_for_screen (screen);
+
+  g_object_get (settings, "gtk-theme-name", &theme_name, NULL);
+  return (theme_name != NULL && g_str_has_suffix (theme_name, "dark")) ? "-dark" : "";
+}
+
 static void
 setup_os_logo (CcInfoOverviewPanel *panel)
 {
   g_autofree char *logo_name = g_get_os_info ("LOGO");
   if (logo_name != NULL)
     {
-      gtk_image_set_from_icon_name (panel->os_logo, logo_name, GTK_ICON_SIZE_INVALID);
+      g_autofree char *logo_name_with_variant = NULL;
+
+      logo_name_with_variant = g_strdup_printf ("%s-text%s", logo_name, get_asset_suffix (panel));
+      gtk_image_set_from_icon_name (panel->os_logo, logo_name_with_variant, GTK_ICON_SIZE_INVALID);
       gtk_image_set_pixel_size (panel->os_logo, 256);
     }
   else
