@@ -913,7 +913,7 @@ setup_os_logo (CcInfoOverviewPanel *panel)
 
   logo_name_with_variant = g_strdup_printf ("%s-text%s", logo_name, get_asset_suffix (panel));
   gtk_image_set_from_icon_name (panel->os_logo, logo_name_with_variant, GTK_ICON_SIZE_INVALID);
-  gtk_image_set_pixel_size (panel->os_logo, 256);
+  gtk_image_set_pixel_size (panel->os_logo, -1);
 }
 
 static void
