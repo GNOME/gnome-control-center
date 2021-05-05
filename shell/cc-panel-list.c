@@ -377,7 +377,6 @@ static const gchar * const panel_order[] = {
   "mouse",
   "keyboard",
   "printers",
-  "removable-media",
   "wacom",
   "color",
 
@@ -385,7 +384,6 @@ static const gchar * const panel_order[] = {
   "region",
   "universal-access",
   "user-accounts",
-  "default-apps",
   "reset-settings",
   "datetime",
   "info-overview",

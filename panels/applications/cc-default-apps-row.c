@@ -55,7 +55,7 @@ notify_selected_item_cb (CcDefaultAppsRow *self)
 
   if (g_app_info_set_as_default_for_type (info, self->content_type, &error) == FALSE)
     {
-      g_warning ("Failed to set '%s' as the default application for '%s': %s",
+      g_warning ("Failed to set '%s' as the default app for '%s': %s",
                  g_app_info_get_name (info), self->content_type, error->message);
     }
   else
@@ -96,7 +96,7 @@ notify_selected_item_cb (CcDefaultAppsRow *self)
 
           if (g_app_info_set_as_default_for_type (info, mime_types[i], &local_error) == FALSE)
             {
-              g_warning ("Failed to set '%s' as the default application for secondary "
+              g_warning ("Failed to set '%s' as the default app for secondary "
                          "content type '%s': %s",
                          g_app_info_get_name (info), mime_types[i], local_error->message);
             }

@@ -24,9 +24,8 @@
 #include <libmm-glib.h>
 #endif
 
-#include "cc-default-apps-panel.h"
+#include "cc-default-apps-page.h"
 #include "cc-default-apps-row.h"
-#include "cc-default-apps-resources.h"
 
 #include "shell/cc-object-storage.h"
 
@@ -39,11 +38,9 @@ typedef struct
   const char *extra_type_filter;
 } DefaultAppData;
 
-struct _CcDefaultAppsPanel
+struct _CcDefaultAppsPage
 {
-  CcPanel    parent_instance;
-
-  GtkWidget *default_apps_grid;
+  AdwPreferencesGroup  parent;
 
   GtkWidget *web_row;
   GtkWidget *mail_row;
@@ -60,11 +57,11 @@ struct _CcDefaultAppsPanel
 };
 
 
-G_DEFINE_TYPE (CcDefaultAppsPanel, cc_default_apps_panel, CC_TYPE_PANEL)
+G_DEFINE_TYPE (CcDefaultAppsPage, cc_default_apps_page, ADW_TYPE_PREFERENCES_GROUP)
 
 #ifdef BUILD_WWAN
 static void
-update_modem_apps_visibility (CcDefaultAppsPanel *self)
+update_modem_apps_visibility (CcDefaultAppsPage *self)
 {
   GList *devices;
   gboolean has_mm_objects;
@@ -80,26 +77,24 @@ update_modem_apps_visibility (CcDefaultAppsPanel *self)
 #endif
 
 static void
-cc_default_apps_panel_class_init (CcDefaultAppsPanelClass *klass)
+cc_default_apps_page_class_init (CcDefaultAppsPageClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/default-apps/cc-default-apps-panel.ui");
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, web_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, mail_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calendar_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, music_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, video_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, photos_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calls_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, sms_row);
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-default-apps-page.ui");
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, web_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, mail_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, calendar_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, music_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, video_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, photos_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, calls_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPage, sms_row);
 }
 
 static void
-cc_default_apps_panel_init (CcDefaultAppsPanel *self)
+cc_default_apps_page_init (CcDefaultAppsPage *self)
 {
-  g_resources_register (cc_default_apps_get_resource ());
-
   g_type_ensure (CC_TYPE_DEFAULT_APPS_ROW);
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -119,9 +114,9 @@ cc_default_apps_panel_init (CcDefaultAppsPanel *self)
 #endif
 }
 
-GtkWidget *
-cc_default_apps_panel_new (void)
+CcDefaultAppsPage *
+cc_default_apps_page_new (void)
 {
-  return g_object_new (CC_TYPE_DEFAULT_APPS_PANEL,
+  return g_object_new (CC_TYPE_DEFAULT_APPS_PAGE,
                        NULL);
 }

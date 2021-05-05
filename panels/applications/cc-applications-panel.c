@@ -35,6 +35,8 @@
 #include "cc-applications-panel.h"
 #include "cc-applications-row.h"
 #include "cc-info-row.h"
+#include "cc-default-apps-page.h"
+#include "cc-removable-media-settings.h"
 #include "cc-applications-resources.h"
 #include "cc-util.h"
 #ifdef HAVE_SNAP
@@ -53,6 +55,8 @@
 struct _CcApplicationsPanel
 {
   CcPanel          parent;
+  CcDefaultAppsPage *default_apps_page;
+  CcRemovableMediaSettings *removable_media_settings;
 
   AdwNavigationView *navigation_view;
   AdwNavigationPage *app_settings_page;
@@ -1407,7 +1411,7 @@ update_panel (CcApplicationsPanel *self,
 
   if (row == NULL)
     {
-      g_message ("No application selected, try again");
+      g_message ("No app selected, try again");
       return;
     }
 
@@ -1596,7 +1600,7 @@ on_launch_button_clicked_cb (CcApplicationsPanel *self)
                      &error);
 
   if (error)
-    g_warning ("Error launching application: %s", error->message);
+    g_warning ("Error launching app: %s", error->message);
 }
 
 static void
@@ -1728,6 +1732,9 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  g_type_ensure (CC_TYPE_DEFAULT_APPS_PAGE);
+  g_type_ensure (CC_TYPE_REMOVABLE_MEDIA_SETTINGS);
+
   object_class->dispose = cc_applications_panel_dispose;
   object_class->finalize = cc_applications_panel_finalize;
   object_class->constructed = cc_applications_panel_constructed;
@@ -1751,6 +1758,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, default_apps_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_search_placeholder);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_page);
@@ -1772,6 +1780,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notification);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, background);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, wallpaper);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, removable_media_settings);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, screenshot);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, shortcuts);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, search);

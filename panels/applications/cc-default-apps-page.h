@@ -19,13 +19,13 @@
 
 #pragma once
 
-#include <shell/cc-panel.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_REMOVABLE_MEDIA_PANEL (cc_removable_media_panel_get_type ())
-G_DECLARE_FINAL_TYPE (CcRemovableMediaPanel, cc_removable_media_panel, CC, REMOVABLE_MEDIA_PANEL, CcPanel)
+#define CC_TYPE_DEFAULT_APPS_PAGE (cc_default_apps_page_get_type ())
+G_DECLARE_FINAL_TYPE (CcDefaultAppsPage, cc_default_apps_page, CC, DEFAULT_APPS_PAGE, AdwPreferencesGroup)
 
-GtkWidget *cc_removable_media_panel_new (void);
+CcDefaultAppsPage *cc_default_apps_page_new (void);
 
 G_END_DECLS

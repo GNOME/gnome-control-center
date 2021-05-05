@@ -14,19 +14,33 @@ sources = files(
   'cc-applications-panel.c',
   'cc-applications-row.c',
   'cc-info-row.c',
+  'cc-default-apps-page.c',
+  'cc-default-apps-row.c',
+  'cc-removable-media-settings.c',
   'globs.c',
   'search.c',
   'utils.c',
+)
+
+resource_data = files(
+  'cc-applications-panel.ui',
+  'cc-default-apps-page.ui',
+  'cc-removable-media-settings.ui',
 )
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
   c_name : 'cc_' + cappletname,
+  dependencies: resource_data,
   export : true
 )
 
 deps = common_deps
+
+if host_is_linux
+  deps += mm_dep
+endif
 
 if enable_snap
   deps += snapd_glib_deps
