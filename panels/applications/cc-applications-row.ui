@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcApplicationsRow" parent="GtkListBoxRow">
-    <child>
-      <object class="GtkBox" id="box">
-        <property name="margin-top">6</property>
-        <property name="margin-bottom">6</property>
-        <property name="margin-start">6</property>
-        <property name="margin-end">6</property>
-        <property name="spacing">12</property>
-        <child>
-          <object class="GtkImage" id="image">
-            <property name="pixel-size">32</property>
-            <style>
-              <class name="lowres-icon"/>
-            </style>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="label">
-            <property name="xalign">0</property>
-            <property name="ellipsize">end</property>
-          </object>
-        </child>
+  <template class="CcApplicationsRow" parent="AdwActionRow">
+
+    <child type="suffix">
+      <object class="GtkImage">
+        <property name="icon-name">go-next-symbolic</property>
       </object>
     </child>
+
   </template>
 </interface>

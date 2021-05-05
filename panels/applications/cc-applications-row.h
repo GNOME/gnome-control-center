@@ -21,11 +21,12 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_APPLICATIONS_ROW (cc_applications_row_get_type())
-G_DECLARE_FINAL_TYPE (CcApplicationsRow, cc_applications_row, CC, APPLICATIONS_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcApplicationsRow, cc_applications_row, CC, APPLICATIONS_ROW, AdwActionRow)
 
 CcApplicationsRow* cc_applications_row_new          (GAppInfo          *info);
 

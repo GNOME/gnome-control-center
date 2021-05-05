@@ -26,17 +26,13 @@
 
 struct _CcApplicationsRow
 {
-  GtkListBoxRow parent;
+  AdwActionRow  parent;
 
   GAppInfo     *info;
   gchar        *sortkey;
-
-  GtkWidget    *box;
-  GtkWidget    *image;
-  GtkWidget    *label;
 };
 
-G_DEFINE_TYPE (CcApplicationsRow, cc_applications_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcApplicationsRow, cc_applications_row, ADW_TYPE_ACTION_ROW)
 
 static void
 cc_applications_row_finalize (GObject *object)
@@ -58,10 +54,6 @@ cc_applications_row_class_init (CcApplicationsRowClass *klass)
   object_class->finalize = cc_applications_row_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-applications-row.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsRow, box);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsRow, image);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsRow, label);
 }
 
 static void
@@ -75,7 +67,8 @@ cc_applications_row_new (GAppInfo *info)
 {
   CcApplicationsRow *self;
   g_autofree gchar *key = NULL;
-  GIcon *icon;
+  g_autoptr(GIcon) icon = NULL;
+  GtkWidget *w;
 
   self = g_object_new (CC_TYPE_APPLICATIONS_ROW, NULL);
 
@@ -84,13 +77,19 @@ cc_applications_row_new (GAppInfo *info)
   key = g_utf8_casefold (g_app_info_get_display_name (info), -1);
   self->sortkey = g_utf8_collate_key (key, -1);
 
+  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), TRUE);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
+                                 g_markup_escape_text (g_app_info_get_display_name (info), -1));
+
   icon = g_app_info_get_icon (info);
   if (icon != NULL)
-    gtk_image_set_from_gicon (GTK_IMAGE (self->image), g_app_info_get_icon (info));
+    g_object_ref (icon);
   else
-    gtk_image_set_from_icon_name (GTK_IMAGE (self->image), "application-x-executable");
-
-  gtk_label_set_label (GTK_LABEL (self->label), g_app_info_get_display_name (info));
+    icon = g_themed_icon_new ("application-x-executable");
+  w = gtk_image_new_from_gicon (icon);
+  gtk_style_context_add_class (gtk_widget_get_style_context (w), "lowres-icon");
+  gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
+  adw_action_row_add_prefix (ADW_ACTION_ROW (self), w);
 
   return self;
 }

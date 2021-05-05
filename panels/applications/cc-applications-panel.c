@@ -54,9 +54,11 @@ struct _CcApplicationsPanel
 {
   CcPanel          parent;
 
-  AdwNavigationPage *sidebar_box;
-  GtkListBox      *sidebar_listbox;
-  GtkEntry        *sidebar_search_entry;
+  AdwNavigationView *navigation_view;
+  AdwNavigationPage *app_settings_page;
+  GtkListBox      *app_listbox;
+  GtkEntry        *app_search_entry;
+  GtkWidget       *empty_search_placeholder;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
 #ifdef HAVE_MALCONTENT
@@ -85,9 +87,6 @@ struct _CcApplicationsPanel
   GSettings       *privacy_settings;
   GSettings       *search_settings;
 
-  GtkStack        *stack;
-  GtkWidget       *empty_box;
-  GtkWidget       *settings_box;
   GtkButton       *install_button;
 
   AdwPreferencesGroup *integration_section;
@@ -995,7 +994,7 @@ unset_cb (CcApplicationsPanel *self,
   GtkListBoxRow *selected;
   GAppInfo *info;
 
-  selected = gtk_list_box_get_selected_row (self->sidebar_listbox);
+  selected = gtk_list_box_get_selected_row (self->app_listbox);
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));
 
   type = (const gchar *)g_object_get_data (G_OBJECT (button), "type");
@@ -1110,7 +1109,7 @@ handler_reset_cb (CcApplicationsPanel *self)
   const gchar **types;
   gint i;
 
-  selected = gtk_list_box_get_selected_row (self->sidebar_listbox);
+  selected = gtk_list_box_get_selected_row (self->app_listbox);
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));
 
   types = g_app_info_get_supported_types (info);
@@ -1408,17 +1407,15 @@ update_panel (CcApplicationsPanel *self,
 
   if (row == NULL)
     {
-      adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self), _("Apps"));
-      gtk_stack_set_visible_child (self->stack, self->empty_box);
-      gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), FALSE);
+      g_message ("No application selected, try again");
       return;
     }
 
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
 
-  adw_navigation_page_set_title (ADW_NAVIGATION_PAGE (self),
+  adw_navigation_page_set_title (self->app_settings_page,
                                  g_app_info_get_display_name (info));
-  gtk_stack_set_visible_child (self->stack, self->settings_box);
+  adw_navigation_view_push_by_tag(self->navigation_view, "settings-box");
   gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), gnome_software_is_installed ());
 
   g_clear_pointer (&self->current_app_id, g_free);
@@ -1440,12 +1437,18 @@ populate_applications (CcApplicationsPanel *self)
   g_autolist(GObject) infos = NULL;
   GList *l;
 
-  listbox_remove_all (self->sidebar_listbox);
+  listbox_remove_all (self->app_listbox);
+  gtk_list_box_set_placeholder (self->app_listbox, self->empty_search_placeholder);
 #ifdef HAVE_MALCONTENT
   g_signal_handler_block (self->manager, self->app_filter_id);
 #endif
 
   infos = g_app_info_get_all ();
+
+  if (!infos)
+    gtk_widget_set_visible (GTK_WIDGET (self->app_search_entry), 0);
+  else
+    gtk_widget_set_visible (GTK_WIDGET (self->app_search_entry), 1);
 
   for (l = infos; l; l = l->next)
     {
@@ -1462,11 +1465,11 @@ populate_applications (CcApplicationsPanel *self)
 #endif
 
       row = GTK_WIDGET (cc_applications_row_new (info));
-      gtk_list_box_insert (self->sidebar_listbox, row, -1);
+      gtk_list_box_insert (self->app_listbox, row, -1);
 
       id = get_app_id (info);
       if (g_strcmp0 (id, self->current_app_id) == 0)
-        gtk_list_box_select_row (self->sidebar_listbox, GTK_LIST_BOX_ROW (row));
+        gtk_list_box_select_row (self->app_listbox, GTK_LIST_BOX_ROW (row));
     }
 #ifdef HAVE_MALCONTENT
   g_signal_handler_unblock (self->manager, self->app_filter_id);
@@ -1485,8 +1488,8 @@ compare_rows (GtkListBoxRow *row1,
 }
 
 static gboolean
-filter_sidebar_rows (GtkListBoxRow *row,
-                     gpointer       data)
+filter_app_rows (GtkListBoxRow *row,
+                 gpointer       data)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (data);
   g_autofree gchar *app_name = NULL;
@@ -1494,7 +1497,7 @@ filter_sidebar_rows (GtkListBoxRow *row,
   const gchar *text;
   GAppInfo *info;
 
-  text = gtk_editable_get_text (GTK_EDITABLE (self->sidebar_search_entry));
+  text = gtk_editable_get_text (GTK_EDITABLE (self->app_search_entry));
 
   /* Only filter after the second character */
   if (g_utf8_strlen (text, -1) < 2)
@@ -1528,7 +1531,6 @@ row_activated_cb (CcApplicationsPanel *self,
                   GtkListBoxRow       *row)
 {
   update_panel (self, row);
-  g_signal_emit_by_name (self, "sidebar-activated");
 }
 
 static void
@@ -1550,8 +1552,6 @@ on_perm_store_ready (GObject      *source_object,
     }
 
   self->perm_store = proxy;
-
-  update_panel (self, gtk_list_box_get_selected_row (self->sidebar_listbox));
 }
 
 static void
@@ -1561,7 +1561,7 @@ select_app (CcApplicationsPanel *self,
 {
   GtkWidget *child;
 
-  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->sidebar_listbox));
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->app_listbox));
        child;
        child = gtk_widget_get_next_sibling (child))
     {
@@ -1569,7 +1569,7 @@ select_app (CcApplicationsPanel *self,
       GAppInfo *info = cc_applications_row_get_info (row);
       if (g_str_has_prefix (g_app_info_get_id (info), app_id))
         {
-          gtk_list_box_select_row (self->sidebar_listbox, GTK_LIST_BOX_ROW (row));
+          gtk_list_box_select_row (self->app_listbox, GTK_LIST_BOX_ROW (row));
           if (emit_activate)
             g_signal_emit_by_name (row, "activate");
           break;
@@ -1600,34 +1600,34 @@ on_launch_button_clicked_cb (CcApplicationsPanel *self)
 }
 
 static void
-on_sidebar_search_entry_activated_cb (CcApplicationsPanel *self)
+on_app_search_entry_activated_cb (CcApplicationsPanel *self)
 {
   GtkListBoxRow *row;
 
-  row = gtk_list_box_get_row_at_y (self->sidebar_listbox, 0);
+  row = gtk_list_box_get_row_at_y (self->app_listbox, 0);
 
   if (!row)
     return;
 
   /* Show the app */
-  gtk_list_box_select_row (self->sidebar_listbox, row);
+  gtk_list_box_select_row (self->app_listbox, row);
   g_signal_emit_by_name (row, "activate");
 
   /* Cleanup the entry */
-  gtk_editable_set_text (GTK_EDITABLE (self->sidebar_search_entry), "");
-  gtk_widget_grab_focus (GTK_WIDGET (self->sidebar_search_entry));
+  gtk_editable_set_text (GTK_EDITABLE (self->app_search_entry), "");
+  gtk_widget_grab_focus (GTK_WIDGET (self->app_search_entry));
 }
 
 static void
-on_sidebar_search_entry_search_changed_cb (CcApplicationsPanel *self)
+on_app_search_entry_search_changed_cb (CcApplicationsPanel *self)
 {
-  gtk_list_box_invalidate_filter (self->sidebar_listbox);
+  gtk_list_box_invalidate_filter (self->app_listbox);
 }
 
 static void
-on_sidebar_search_entry_search_stopped_cb (CcApplicationsPanel *self)
+on_app_search_entry_search_stopped_cb (CcApplicationsPanel *self)
 {
-  gtk_editable_set_text (GTK_EDITABLE (self->sidebar_search_entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (self->app_search_entry), "");
 }
 
 static void
@@ -1718,82 +1718,13 @@ static void
 cc_applications_panel_constructed (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
-  GtkListBoxRow *row;
 
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->constructed (object);
-
-  /* Select the first row */
-  row = gtk_list_box_get_row_at_index (self->sidebar_listbox, 0);
-  gtk_list_box_select_row (self->sidebar_listbox, row);
-}
-
-static void
-notify_collapsed_cb (CcApplicationsPanel *self)
-{
-  GtkSelectionMode selection_mode;
-  gboolean collapsed;
-  GtkRoot *root;
-
-  g_assert (CC_IS_APPLICATIONS_PANEL (self));
-
-  root = gtk_widget_get_root (GTK_WIDGET (self));
-  g_object_get (root, "collapsed", &collapsed, NULL);
-
-  selection_mode = collapsed ? GTK_SELECTION_NONE : GTK_SELECTION_SINGLE;
-
-  gtk_list_box_set_selection_mode (self->sidebar_listbox, selection_mode);
-
-  if (!collapsed)
-    {
-      if (self->current_app_id)
-        select_app (self, self->current_app_id, FALSE);
-      else
-        {
-          GtkListBoxRow *row;
-
-          row = gtk_list_box_get_row_at_index (self->sidebar_listbox, 0);
-          row_activated_cb (self, row);
-        }
-    }
-}
-
-static void
-cc_applications_panel_root (GtkWidget *widget)
-{
-  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (widget);
-  GtkRoot *root;
-
-  GTK_WIDGET_CLASS (cc_applications_panel_parent_class)->root (widget);
-
-  root = gtk_widget_get_root (widget);
-
-  g_signal_connect_swapped (root, "notify::collapsed", G_CALLBACK (notify_collapsed_cb), self);
-
-  notify_collapsed_cb (self);
-}
-
-static void
-cc_applications_panel_unroot (GtkWidget *widget)
-{
-  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (widget);
-  GtkRoot *root = gtk_widget_get_root (widget);
-
-  g_signal_handlers_disconnect_by_func (root, notify_collapsed_cb, self);
-
-  GTK_WIDGET_CLASS (cc_applications_panel_parent_class)->unroot (widget);
-}
-
-static AdwNavigationPage*
-cc_applications_panel_get_sidebar_widget (CcPanel *panel)
-{
-  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (panel);
-  return self->sidebar_box;
 }
 
 static void
 cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
 {
-  CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
@@ -1802,18 +1733,16 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   object_class->constructed = cc_applications_panel_constructed;
   object_class->set_property = cc_applications_panel_set_property;
 
-  widget_class->root = cc_applications_panel_root;
-  widget_class->unroot = cc_applications_panel_unroot;
-
-  panel_class->get_sidebar_widget = cc_applications_panel_get_sidebar_widget;
-
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-applications-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_icon_image);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_name_label);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_search_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_settings_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_page);
@@ -1822,7 +1751,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_box);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_search_placeholder);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_file_group);
@@ -1834,6 +1763,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, launch_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, location);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, microphone);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, navigation_view);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_camera);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_location);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, no_microphone);
@@ -1844,13 +1774,8 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, wallpaper);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, screenshot);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, shortcuts);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_box);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, search);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, settings_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sound);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, total);
@@ -1874,11 +1799,12 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_builtin_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_handler_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_launch_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_stopped_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_app_search_entry_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_app_search_entry_search_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_app_search_entry_search_stopped_cb);
 
-  gtk_widget_class_bind_template_callback (widget_class, on_storage_row_activated_cb);}
+  gtk_widget_class_bind_template_callback (widget_class, on_storage_row_activated_cb);
+}
 
 static void
 cc_applications_panel_init (CcApplicationsPanel *self)
@@ -1896,7 +1822,7 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->install_button), gnome_software_is_installed ());
 
-  g_signal_connect_object (self->sidebar_listbox, "row-activated",
+  g_signal_connect_object (self->app_listbox, "row-activated",
                            G_CALLBACK (row_activated_cb), self, G_CONNECT_SWAPPED);
 
   g_signal_connect_object (self->view_details_button,
@@ -1905,13 +1831,15 @@ cc_applications_panel_init (CcApplicationsPanel *self)
                            self,
                            G_CONNECT_SWAPPED);
 
-  gtk_list_box_set_sort_func (self->sidebar_listbox,
+  gtk_list_box_set_sort_func (self->app_listbox,
                               compare_rows,
                               NULL, NULL);
 
-  gtk_list_box_set_filter_func (self->sidebar_listbox,
-                                filter_sidebar_rows,
+  gtk_list_box_set_filter_func (self->app_listbox,
+                                filter_app_rows,
                                 self, NULL);
+
+  gtk_list_box_set_placeholder (self->app_listbox, self->empty_search_placeholder);
 
   self->location_settings = g_settings_new ("org.gnome.system.location");
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
