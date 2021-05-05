@@ -538,3 +538,10 @@ cc_removable_media_panel_init (CcRemovableMediaPanel *self)
 
   info_panel_setup_media (self);
 }
+
+GtkWidget *
+cc_removable_media_panel_new (void)
+{
+  return g_object_new (CC_TYPE_REMOVABLE_MEDIA_PANEL,
+                       NULL);
+}

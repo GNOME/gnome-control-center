@@ -26,4 +26,6 @@ G_BEGIN_DECLS
 #define CC_TYPE_REMOVABLE_MEDIA_PANEL (cc_removable_media_panel_get_type ())
 G_DECLARE_FINAL_TYPE (CcRemovableMediaPanel, cc_removable_media_panel, CC, REMOVABLE_MEDIA_PANEL, CcPanel)
 
+GtkWidget *cc_removable_media_panel_new (void);
+
 G_END_DECLS
