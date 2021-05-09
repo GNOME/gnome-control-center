@@ -4,197 +4,106 @@
   <template class="CcRemovableMediaSettings" parent="AdwPreferencesGroup">
     <property name="title" translatable="yes">Removable Media</property>
     <property name="description" translatable="yes">Apps which are launched when media or drives are connected</property>
-    <child type="content">
-      <object class="AdwClamp">
-        <child>
-          <object class="GtkBox">
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">24</property>
-            <property name="margin_end">24</property>
-            <property name="spacing">18</property>
-            <property name="orientation">vertical</property>
-            <child>
-              <object class="GtkBox" id="handlers_box">
-                <property name="spacing">10</property>
-                <property name="valign">start</property>
-                <property name="vexpand">False</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="spacing">10</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="spacing">18</property>
-                        <property name="margin-start">12</property>
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkGrid">
-                            <property name="hexpand">True</property>
-                            <property name="column-spacing">6</property>
-                            <property name="row-spacing">12</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="xalign">1</property>
-                                <property name="label" translatable="yes">CD _audio</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">audio_cdda_chooser</property>
-                                <layout>
-                                  <property name="row">0</property>
-                                  <property name="column">0</property>
-                                </layout>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="xalign">1</property>
-                                <property name="label" translatable="yes">_DVD video</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">video_dvd_chooser</property>
-                                <layout>
-                                  <property name="row">1</property>
-                                  <property name="column">0</property>
-                                </layout>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkAppChooserButton" id="audio_cdda_chooser">
-                                <property name="hexpand">True</property>
-                                <property name="content_type">x-content/audio-cdda</property>
-                                <layout>
-                                  <property name="row">0</property>
-                                  <property name="column">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkAppChooserButton" id="video_dvd_chooser">
-                                <property name="hexpand">True</property>
-                                <property name="content_type">x-content/video-dvd</property>
-                                <layout>
-                                  <property name="row">1</property>
-                                  <property name="column">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="xalign">1</property>
-                                <property name="label" translatable="yes">_Music player</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">music_player_chooser</property>
-                                <layout>
-                                  <property name="row">2</property>
-                                  <property name="column">0</property>
-                                </layout>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkAppChooserButton" id="music_player_chooser">
-                                <property name="hexpand">True</property>
-                                <property name="content_type">x-content/audio-player</property>
-                                <layout>
-                                  <property name="row">2</property>
-                                  <property name="column">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="xalign">1</property>
-                                <property name="label" translatable="yes">_Photos</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">dcf_chooser</property>
-                                <layout>
-                                  <property name="row">3</property>
-                                  <property name="column">0</property>
-                                </layout>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkAppChooserButton" id="dcf_chooser">
-                                <property name="hexpand">True</property>
-                                <property name="content_type">x-content/image-dcf</property>
-                                <layout>
-                                  <property name="row">3</property>
-                                  <property name="column">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="xalign">1</property>
-                                <property name="label" translatable="yes">_Software</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">software_chooser</property>
-                                <layout>
-                                  <property name="row">4</property>
-                                  <property name="column">0</property>
-                                </layout>
-                                <style>
-                                  <class name="dim-label"/>
-                                </style>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkAppChooserButton" id="software_chooser">
-                                <property name="hexpand">True</property>
-                                <property name="content_type">x-content/unix-software</property>
-                                <layout>
-                                  <property name="row">4</property>
-                                  <property name="column">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="extra_options_button">
-                            <property name="label" translatable="yes">_Other Media…</property>
-                            <property name="halign">end</property>
-                            <property name="use_underline">True</property>
-                            <signal name="clicked" handler="on_extra_options_button_clicked" object="CcRemovableMediaSettings" swapped="yes"/>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkCheckButton" id="autorun_never_checkbutton">
-                <property name="valign">end</property>
-                <property name="vexpand">False</property>
-                <property name="child">
-                  <object class="GtkLabel">
-                    <property name="use_underline">True</property>
-                    <property name="label" translatable="yes">_Never prompt or start apps on media insertion</property>
-                    <property name="wrap">True</property>
-                  </object>
-                </property>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
+      <child>
+        <object class="AdwActionRow" id="disable_autostart_row">
+          <property name="title" translatable="yes">D_isable Autostart</property>
+          <property name="subtitle" translatable="yes">Never prompt or start programs on media insertion</property>
+          <property name="use_underline">True</property>
+          <child>
+            <object class="GtkSwitch" id="autorun_never_switch">
+              <property name="receives_default">False</property>
+              <property name="valign">center</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwActionRow" id="cd_audio_row">
+          <property name="title" translatable="yes">CD _audio</property>
+          <property name="use_underline">True</property>
+          <child>
+            <object class="GtkAppChooserButton" id="audio_cdda_chooser">
+              <property name="valign">center</property>
+              <property name="content_type">x-content/audio-cdda</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwActionRow" id="dvd_video_row">
+          <property name="title" translatable="yes">_DVD video</property>
+          <property name="use_underline">True</property>
+          <child>
+            <object class="GtkAppChooserButton" id="video_dvd_chooser">
+              <property name="valign">center</property>
+              <property name="content_type">x-content/video-dvd</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwActionRow" id="music_player_row">
+          <property name="title" translatable="yes">_Music player</property>
+          <property name="use_underline">True</property>
+          <child>
+            <object class="GtkAppChooserButton" id="music_player_chooser">
+              <property name="valign">center</property>
+              <property name="content_type">x-content/audio-player</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwActionRow" id="photos_row">
+          <property name="title" translatable="yes">_Photos</property>
+          <property name="use_underline">True</property>
+          <child>
+            <object class="GtkAppChooserButton" id="dcf_chooser">
+              <property name="valign">center</property>
+              <property name="content_type">x-content/image-dcf</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwActionRow" id="software_row">
+          <property name="title" translatable="yes">_Software</property>
+          <property name="use_underline">True</property>
+          <child>
+            <object class="GtkAppChooserButton" id="software_chooser">
+              <property name="valign">center</property>
+              <property name="content_type">x-content/unix-software</property>
+            </object>
+          </child>
+        </object>
+      </child>
+      <child>
+        <object class="AdwActionRow" id="other_media_row">
+          <property name="title" translatable="yes">_Other Media…</property>
+          <property name="use_underline">True</property>
+          <child>
+            <object class="GtkButton" id="extra_options_button">
+              <property name="label" translatable="yes">_Configure action</property>
+              <property name="receives_default">True</property>
+              <property name="valign">center</property>
+              <property name="use_underline">True</property>
+              <signal name="clicked" handler="on_extra_options_button_clicked" object="CcRemovableMediaSettings" swapped="yes"/>
+            </object>
+          </child>
+        </object>
+      </child>
   </template>
+
+  <object class="GtkSizeGroup">
+    <widgets>
+      <widget name="audio_cdda_chooser"/>
+      <widget name="video_dvd_chooser"/>
+      <widget name="music_player_chooser"/>
+      <widget name="dcf_chooser"/>
+      <widget name="software_chooser"/>
+      <widget name="extra_options_button"/>
+    </widgets>
+  </object>
 
   <object class="AdwWindow" id="other_type_dialog">
     <property name="resizable">False</property>
