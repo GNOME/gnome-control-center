@@ -1498,13 +1498,6 @@ setup_main_window (CcUserPanel *self)
                 users_loaded (self);
         else
                 g_signal_connect_object (self->um, "notify::is-loaded", G_CALLBACK (users_loaded), self, G_CONNECT_SWAPPED);
-
-        gtk_list_box_set_header_func (self->account_settings_listbox,
-                                      cc_list_box_update_header_func,
-                                      NULL, NULL);
-        gtk_list_box_set_header_func (self->authentication_and_login_listbox,
-                                      cc_list_box_update_header_func,
-                                      NULL, NULL);
 }
 
 static GSettings *
