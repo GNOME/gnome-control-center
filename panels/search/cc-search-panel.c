@@ -33,7 +33,6 @@ struct _CcSearchPanel
 
   GtkWidget  *list_box;
   GtkWidget  *search_vbox;
-  GtkWidget  *search_frame;
   GtkWidget  *settings_button;
   CcSearchPanelRow  *selected_row;
 
@@ -664,7 +663,6 @@ cc_search_panel_init (CcSearchPanel *self)
 
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->list_box),
                               (GtkListBoxSortFunc)list_sort_func, self, NULL);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->list_box), cc_list_box_update_header_func, NULL, NULL);
 
   gtk_widget_set_sensitive (self->settings_button, cc_search_locations_dialog_is_available ());
 
@@ -692,7 +690,6 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_vbox);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_frame);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_button);
 
   gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked);
