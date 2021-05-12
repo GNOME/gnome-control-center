@@ -299,8 +299,6 @@ cc_xkb_modifier_dialog_init (CcXkbModifierDialog *self)
 
   self->modifier = NULL;
 
-  gtk_list_box_set_header_func (self->listbox, cc_list_box_update_header_func, NULL, NULL);
-
   self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
   g_signal_connect_object (self->input_source_settings,
                            "changed::xkb-options",

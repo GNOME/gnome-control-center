@@ -762,10 +762,6 @@ cc_input_list_box_init (CcInputListBox *self)
   maybe_start_ibus ();
 #endif
 
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
   g_signal_connect_object (self->input_settings, "changed::" KEY_INPUT_SOURCES,
                            G_CALLBACK (input_sources_changed), self, G_CONNECT_SWAPPED);
 

@@ -257,9 +257,6 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
   g_object_unref (provider);
 
-  gtk_list_box_set_header_func (self->input_source_list, cc_list_box_update_header_func, NULL, NULL);
-  gtk_list_box_set_header_func (self->special_chars_list, cc_list_box_update_header_func, NULL, NULL);
-
   self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
 
   /* "Input Source Switching" section */
