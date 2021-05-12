@@ -258,16 +258,6 @@ cc_sound_panel_init (CcSoundPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_list_box_set_header_func (self->input_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-  gtk_list_box_set_header_func (self->output_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->stream_list_box),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
   self->sound_settings = g_settings_new (KEY_SOUNDS_SCHEMA);
   g_signal_connect_object (self->sound_settings,
                            "changed::allow-volume-above-100-percent",
