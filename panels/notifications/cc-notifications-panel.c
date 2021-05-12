@@ -187,16 +187,10 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
 
   panel->sections = g_list_append (panel->sections, panel->options_listbox);
   panel->sections_reverse = g_list_prepend (panel->sections_reverse, panel->options_listbox);
-  gtk_list_box_set_header_func (panel->options_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 
   panel->sections = g_list_append (panel->sections, panel->app_listbox);
   panel->sections_reverse = g_list_prepend (panel->sections_reverse, panel->app_listbox);
   gtk_list_box_set_sort_func (panel->app_listbox, (GtkListBoxSortFunc)sort_apps, NULL, NULL);
-  gtk_list_box_set_header_func (panel->app_listbox,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 
   build_app_store (panel);
 

@@ -28,40 +28,31 @@
                     <property name="orientation">vertical</property>
                     <property name="hexpand">True</property>
                     <child>
-                      <object class="GtkFrame">
+                      <object class="GtkListBox" id="options_listbox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="margin_bottom">32</property>
                         <property name="hexpand">True</property>
-                        <property name="label_xalign">0</property>
-                        <property name="shadow_type">in</property>
+                        <property name="selection_mode">none</property>
+                        <property name="margin_bottom">32</property>
+                        <signal name="keynav-failed" handler="keynav_failed" object="CcNotificationsPanel" swapped="yes" />
+                        <style>
+                          <class name="content"/>
+                        </style>
                         <child>
-                          <object class="GtkListBox" id="options_listbox">
+                          <object class="CcListRow" id="dnd_row">
                             <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="hexpand">True</property>
-                            <property name="selection_mode">none</property>
-                            <signal name="keynav-failed" handler="keynav_failed" object="CcNotificationsPanel" swapped="yes" />
-                            <child>
-                              <object class="CcListRow" id="dnd_row">
-                                <property name="visible">True</property>
-                                <property name="title" translatable="yes">_Do Not Disturb</property>
-                                <property name="use-underline">True</property>
-                                <property name="show-switch">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="CcListRow" id="lock_screen_row">
-                                <property name="visible">True</property>
-                                <property name="title" translatable="yes">_Lock Screen Notifications</property>
-                                <property name="use-underline">True</property>
-                                <property name="show-switch">True</property>
-                              </object>
-                            </child>
+                            <property name="title" translatable="yes">_Do Not Disturb</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-switch">True</property>
                           </object>
                         </child>
-                        <child type="label_item">
-                          <placeholder/>
+                        <child>
+                          <object class="CcListRow" id="lock_screen_row">
+                            <property name="visible">True</property>
+                            <property name="title" translatable="yes">_Lock Screen Notifications</property>
+                            <property name="use-underline">True</property>
+                            <property name="show-switch">True</property>
+                          </object>
                         </child>
                       </object>
                       <packing>
@@ -91,28 +82,19 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkFrame">
+                      <object class="GtkListBox" id="app_listbox">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
-                        <property name="label_xalign">0</property>
-                        <property name="shadow_type">in</property>
-                        <child>
-                          <object class="GtkListBox" id="app_listbox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="hexpand">True</property>
-                            <property name="selection_mode">none</property>
-                            <signal name="keynav-failed" handler="keynav_failed" object="CcNotificationsPanel" swapped="yes" />
-                            <signal name="row-activated" handler="select_app" object="CcNotificationsPanel" swapped="yes" />
-                            <accessibility>
-                              <relation type="labelled-by" target="app_list_heading_label"/>
-                            </accessibility>
-                          </object>
-                        </child>
-                        <child>
-                          <placeholder/>
-                        </child>
+                        <property name="selection_mode">none</property>
+                        <signal name="keynav-failed" handler="keynav_failed" object="CcNotificationsPanel" swapped="yes" />
+                        <signal name="row-activated" handler="select_app" object="CcNotificationsPanel" swapped="yes" />
+                        <style>
+                          <class name="content"/>
+                        </style>
+                        <accessibility>
+                          <relation type="labelled-by" target="app_list_heading_label"/>
+                        </accessibility>
                       </object>
                       <packing>
                         <property name="expand">False</property>
