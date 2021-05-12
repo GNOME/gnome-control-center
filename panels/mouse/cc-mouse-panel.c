@@ -231,17 +231,12 @@ setup_dialog (CcMousePanel *self)
        self->mouse_natural_scrolling_switch, "active",
        G_SETTINGS_BIND_DEFAULT);
 
-  gtk_list_box_set_header_func (self->general_listbox, cc_list_box_update_header_func, NULL, NULL);
-  gtk_list_box_set_header_func (self->touchpad_listbox, cc_list_box_update_header_func, NULL, NULL);
-
   /* Mouse section */
   gtk_widget_set_visible (GTK_WIDGET (self->mouse_frame), self->have_mouse);
 
   g_settings_bind (self->mouse_settings, "speed",
                    gtk_range_get_adjustment (GTK_RANGE (self->mouse_speed_scale)), "value",
                    G_SETTINGS_BIND_DEFAULT);
-
-  gtk_list_box_set_header_func (self->mouse_listbox, cc_list_box_update_header_func, NULL, NULL);
 
   /* Touchpad section */
   gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_switch), show_touchpad_enabling_switch (self));
