@@ -117,6 +117,7 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
         const gchar *ip4_route = NULL;
         g_autofree gchar *ip4_dns = NULL;
         g_autofree gchar *ip6_addresses = NULL;
+        const gchar *ip6_route = NULL;
         g_autofree gchar *ip6_dns = NULL;
         gint i = 0;
 
@@ -136,6 +137,7 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
         ip6_config = nm_device_get_ip6_config (device);
         if (ip6_config) {
                 ip6_addresses = net_device_get_ip6_addresses (ip6_config);
+                ip6_route = nm_ip_config_get_gateway (ip6_config);
                 ip6_dns = g_strjoinv (" ", (char **) nm_ip_config_get_nameservers (ip6_config));
                 if (!*ip6_dns)
                         ip6_dns = NULL;
@@ -154,8 +156,14 @@ add_details (GtkWidget *details, NMDevice *device, NMConnection *connection)
 
         add_details_row (details, i++, _("Hardware Address"), nm_device_get_hw_address (device));
 
-        if (ip4_route)
+        if (ip4_route && ip6_route) {
+                g_autofree gchar *ip_routes = g_strjoin ("\n", ip4_route, ip6_route, NULL);
+                add_details_row (details, i++, _("Default Route"), ip_routes);
+        } else if (ip4_route) {
                 add_details_row (details, i++, _("Default Route"), ip4_route);
+        } else if (ip6_route) {
+                add_details_row (details, i++, _("Default Route"), ip6_route);
+        }
 
         if (ip4_dns && ip6_dns) {
                 add_details_row (details, i++, _("DNS4"), ip4_dns);
