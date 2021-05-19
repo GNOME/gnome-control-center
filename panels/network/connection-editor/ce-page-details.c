@@ -248,7 +248,7 @@ connect_details_page (CEPageDetails *self)
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
         gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
         gboolean have_dns4 = FALSE, have_dns6 = FALSE;
-
+        const gchar *route4_text = NULL, *route6_text = NULL;
 
         sc = nm_connection_get_setting_connection (self->connection);
         type = nm_setting_connection_get_connection_type (sc);
@@ -342,13 +342,15 @@ connect_details_page (CEPageDetails *self)
         gtk_widget_set_visible (GTK_WIDGET (self->strength_heading_label), strength_label != NULL);
         gtk_widget_set_visible (GTK_WIDGET (self->strength_label), strength_label != NULL);
 
-        if (device_is_active && self->device != NULL)
+        if (device_is_active && self->device != NULL) {
                 ipv4_config = nm_device_get_ip4_config (self->device);
+                ipv6_config = nm_device_get_ip6_config (self->device);
+        }
+
         if (ipv4_config != NULL) {
                 GPtrArray *addresses;
                 const gchar *ipv4_text = NULL;
                 g_autofree gchar *ip4_dns = NULL;
-                const gchar *route_text;
 
                 addresses = nm_ip_config_get_addresses (ipv4_config);
                 if (addresses->len > 0)
@@ -366,21 +368,14 @@ connect_details_page (CEPageDetails *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->dns4_label), ip4_dns != NULL);
                 have_dns4 = ip4_dns != NULL;
 
-                route_text = nm_ip_config_get_gateway (ipv4_config);
-                gtk_label_set_label (self->route_label, route_text);
-                gtk_widget_set_visible (GTK_WIDGET (self->route_heading_label), route_text != NULL);
-                gtk_widget_set_visible (GTK_WIDGET (self->route_label), route_text != NULL);
+                route4_text = nm_ip_config_get_gateway (ipv4_config);
         } else {
                 gtk_widget_hide (GTK_WIDGET (self->ipv4_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->ipv4_label));
                 gtk_widget_hide (GTK_WIDGET (self->dns4_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->dns4_label));
-                gtk_widget_hide (GTK_WIDGET (self->route_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->route_label));
         }
 
-        if (device_is_active && self->device != NULL)
-                ipv6_config = nm_device_get_ip6_config (self->device);
         if (ipv6_config != NULL) {
                 g_autofree gchar *ipv6_text = NULL;
                 g_autofree gchar *ip6_dns = NULL;
@@ -399,6 +394,8 @@ connect_details_page (CEPageDetails *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->dns6_heading_label), ip6_dns != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->dns6_label), ip6_dns != NULL);
                 have_dns6 = ip6_dns != NULL;
+
+                route6_text = nm_ip_config_get_gateway (ipv6_config);
         } else {
                 gtk_widget_hide (GTK_WIDGET (self->ipv6_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->ipv6_label));
@@ -409,8 +406,7 @@ connect_details_page (CEPageDetails *self)
         if (have_ipv4_address && have_ipv6_address) {
                 gtk_label_set_label (self->ipv4_heading_label, _("IPv4 Address"));
                 gtk_label_set_label (self->ipv6_heading_label, _("IPv6 Address"));
-        }
-        else {
+        } else {
                 gtk_label_set_label (self->ipv4_heading_label, _("IP Address"));
                 gtk_label_set_label (self->ipv6_heading_label, _("IP Address"));
         }
@@ -418,10 +414,28 @@ connect_details_page (CEPageDetails *self)
         if (have_dns4 && have_dns6) {
                 gtk_label_set_label (self->dns4_heading_label, _("DNS4"));
                 gtk_label_set_label (self->dns6_heading_label, _("DNS6"));
-        }
-        else {
+        } else {
                 gtk_label_set_label (self->dns4_heading_label, _("DNS"));
                 gtk_label_set_label (self->dns6_heading_label, _("DNS"));
+        }
+
+        if (route4_text != NULL || route6_text != NULL) {
+                g_autofree const gchar *routes_text = NULL;
+
+                if (route4_text == NULL) {
+                        routes_text = g_strdup (route6_text);
+                } else if (route6_text == NULL) {
+                        routes_text = g_strdup (route4_text);
+                } else {
+                        routes_text = g_strjoin ("\n", route4_text, route6_text, NULL);
+                }
+                gtk_label_set_label (self->route_label, routes_text);
+                gtk_widget_set_visible (GTK_WIDGET (self->route_heading_label), routes_text != NULL);
+                gtk_widget_set_valign (GTK_WIDGET (self->route_heading_label), GTK_ALIGN_START);
+                gtk_widget_set_visible (GTK_WIDGET (self->route_label), routes_text != NULL);
+        } else {
+                gtk_widget_hide (GTK_WIDGET (self->route_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->route_label));
         }
 
         if (!device_is_active && self->connection)

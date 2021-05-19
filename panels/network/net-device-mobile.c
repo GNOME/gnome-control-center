@@ -352,6 +352,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         NMIPConfig *ipv4_config = NULL, *ipv6_config = NULL;
         gboolean have_ipv4_address = FALSE, have_ipv6_address = FALSE;
         gboolean have_dns4 = FALSE, have_dns6 = FALSE;
+        const gchar *route4_text = NULL, *route6_text = NULL;
 
         /* set up the device on/off switch */
         gtk_widget_show (GTK_WIDGET (self->device_off_switch));
@@ -384,7 +385,6 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 GPtrArray *addresses;
                 const gchar *ipv4_text = NULL;
                 g_autofree gchar *ip4_dns = NULL;
-                const gchar *route_text;
 
                 addresses = nm_ip_config_get_addresses (ipv4_config);
                 if (addresses->len > 0)
@@ -402,17 +402,12 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->dns4_label), ip4_dns != NULL);
                 have_dns4 = ip4_dns != NULL;
 
-                route_text = nm_ip_config_get_gateway (ipv4_config);
-                gtk_label_set_label (self->route_label, route_text);
-                gtk_widget_set_visible (GTK_WIDGET (self->route_heading_label), route_text != NULL);
-                gtk_widget_set_visible (GTK_WIDGET (self->route_label), route_text != NULL);
+                route4_text = nm_ip_config_get_gateway (ipv4_config);
         } else {
                 gtk_widget_hide (GTK_WIDGET (self->ipv4_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->ipv4_label));
                 gtk_widget_hide (GTK_WIDGET (self->dns4_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->dns4_label));
-                gtk_widget_hide (GTK_WIDGET (self->route_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->route_label));
         }
 
         ipv6_config = nm_device_get_ip6_config (self->device);
@@ -434,6 +429,8 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 gtk_widget_set_visible (GTK_WIDGET (self->dns6_heading_label), ip6_dns != NULL);
                 gtk_widget_set_visible (GTK_WIDGET (self->dns6_label), ip6_dns != NULL);
                 have_dns6 = ip6_dns != NULL;
+
+                route6_text =  nm_ip_config_get_gateway (ipv6_config);
         } else {
                 gtk_widget_hide (GTK_WIDGET (self->ipv6_heading_label));
                 gtk_widget_hide (GTK_WIDGET (self->ipv6_label));
@@ -456,6 +453,25 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         } else {
                 gtk_label_set_label (self->dns4_heading_label, _("DNS"));
                 gtk_label_set_label (self->dns6_heading_label, _("DNS"));
+        }
+
+        if (route4_text != NULL || route6_text != NULL) {
+                g_autofree const gchar *routes_text = NULL;
+
+                if (route4_text == NULL) {
+                        routes_text = g_strdup (route6_text);
+                } else if (route6_text == NULL) {
+                        routes_text = g_strdup (route4_text);
+                } else {
+                        routes_text = g_strjoin ("\n", route4_text, route6_text, NULL);
+                }
+                gtk_label_set_label (self->route_label, routes_text);
+                gtk_widget_set_visible (GTK_WIDGET (self->route_heading_label), routes_text != NULL);
+                gtk_widget_set_valign (GTK_WIDGET (self->route_heading_label), GTK_ALIGN_START);
+                gtk_widget_set_visible (GTK_WIDGET (self->route_label), routes_text != NULL);
+        } else {
+                gtk_widget_hide (GTK_WIDGET (self->route_heading_label));
+                gtk_widget_hide (GTK_WIDGET (self->route_label));
         }
 }
 
