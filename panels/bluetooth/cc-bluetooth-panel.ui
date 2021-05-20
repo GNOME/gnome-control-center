@@ -186,7 +186,7 @@
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="valign">center</property>
-        <signal name="notify::active" handler="enable_switch_changed_cb" object="CcBluetoothPanel" swapped="yes"/>
+        <signal name="state-set" handler="enable_switch_state_set_cb" object="CcBluetoothPanel" swapped="yes"/>
       </object>
       <packing>
         <property name="expand">False</property>

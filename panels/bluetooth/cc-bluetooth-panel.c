@@ -104,11 +104,8 @@ airplane_mode_changed_cb (GObject *source_object,
 }
 
 static void
-enable_switch_changed_cb (CcBluetoothPanel *self)
+enable_switch_state_set_cb (CcBluetoothPanel *self, gboolean state)
 {
-	gboolean state;
-
-	state = gtk_switch_get_active (self->enable_switch);
 	g_debug ("Power switched to %s", state ? "on" : "off");
 	g_dbus_proxy_call (self->properties,
 			   "Set",
@@ -117,20 +114,19 @@ enable_switch_changed_cb (CcBluetoothPanel *self)
 			   G_DBUS_CALL_FLAGS_NONE,
 			   -1,
 			   cc_panel_get_cancellable (CC_PANEL (self)),
-			   airplane_mode_changed_cb, GUINT_TO_POINTER(state));
+			   airplane_mode_changed_cb, self);
 }
 
 static void
 adapter_status_changed_cb (CcBluetoothPanel *self)
 {
 	GtkAlign valign;
-	gboolean sensitive, powered, change_powered;
+	gboolean sensitive, powered;
 	GtkWidget *page;
 
 	g_debug ("Updating airplane mode: BluetoothHasAirplaneMode %d, BluetoothHardwareAirplaneMode %d, BluetoothAirplaneMode %d, AirplaneMode %d",
 		 self->has_airplane_mode, self->hardware_airplane_mode, self->bt_airplane_mode, self->airplane_mode);
 
-	change_powered = TRUE;
 	valign = GTK_ALIGN_CENTER;
 
 	if (self->has_airplane_mode == FALSE) {
@@ -150,9 +146,9 @@ adapter_status_changed_cb (CcBluetoothPanel *self)
 		page = GTK_WIDGET (self->airplane_box);
 	} else if (self->bt_airplane_mode ||
 		   !bluetooth_settings_widget_get_default_adapter_powered (self->settings_widget)) {
-		g_debug ("Default adapter is unpowered, but should be available");
+		g_debug ("Default adapter is unpowered");
 		sensitive = TRUE;
-		change_powered = FALSE;
+		powered = FALSE;
 		page = GTK_WIDGET (self->disabled_box);
 	} else {
 		g_debug ("Bluetooth is available and powered");
@@ -164,12 +160,9 @@ adapter_status_changed_cb (CcBluetoothPanel *self)
 
 	gtk_widget_set_valign (GTK_WIDGET (self->stack), valign);
 	gtk_widget_set_sensitive (GTK_WIDGET (self->header_box), sensitive);
-
-	if (change_powered) {
-		g_signal_handlers_block_by_func (self->enable_switch, enable_switch_changed_cb, self);
-		gtk_switch_set_active (self->enable_switch, powered);
-		g_signal_handlers_unblock_by_func (self->enable_switch, enable_switch_changed_cb, self);
-	}
+	g_signal_handlers_block_by_func (self->enable_switch, enable_switch_state_set_cb, self);
+	gtk_switch_set_state (self->enable_switch, powered);
+	g_signal_handlers_unblock_by_func (self->enable_switch, enable_switch_state_set_cb, self);
 
 	gtk_stack_set_visible_child (self->stack, page);
 }
@@ -249,7 +242,7 @@ cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 
 	gtk_widget_class_bind_template_callback (widget_class, adapter_status_changed_cb);
 	gtk_widget_class_bind_template_callback (widget_class, airplane_mode_off_button_clicked_cb);
-	gtk_widget_class_bind_template_callback (widget_class, enable_switch_changed_cb);
+	gtk_widget_class_bind_template_callback (widget_class, enable_switch_state_set_cb);
 	gtk_widget_class_bind_template_callback (widget_class, panel_changed_cb);
 }
 
