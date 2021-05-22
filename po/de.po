@@ -29,9 +29,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-02-28 14:11+0000\n"
-"PO-Revision-Date: 2021-03-07 11:34+0100\n"
-"Last-Translator: Tim Sabsch <tim@sabsch.com>\n"
+"POT-Creation-Date: 2021-05-13 11:02+0000\n"
+"PO-Revision-Date: 2021-05-18 16:27+0200\n"
+"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -56,7 +56,7 @@ msgid "Session Bus"
 msgstr "Sitzungs-Bus"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:1789 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.c:1790 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Geräte"
@@ -93,7 +93,7 @@ msgstr "Dateisystem"
 
 #: panels/applications/cc-applications-panel.c:849
 #: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:933 shell/cc-window.ui:121
+#: shell/cc-window.c:938 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Einstellungen"
@@ -1204,7 +1204,7 @@ msgstr "A_uswählen"
 msgid "No languages found"
 msgstr "Keine Sprachen gefunden"
 
-#: panels/common/cc-language-chooser.ui:81
+#: panels/common/cc-language-chooser.ui:82
 #: panels/keyboard/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Mehr …"
@@ -1809,11 +1809,11 @@ msgstr ""
 "Panel;Projektor;xrandr;Anzeige;Auflösung;Aktualisieren;Bildschirm;Monitor;"
 "Nacht;Tag;Blau;Rotverschiebung;Farbe;Sonnenuntergang;Sonnenaufgang;"
 
-#: panels/info-overview/cc-info-overview-panel.c:418
-#: panels/info-overview/cc-info-overview-panel.c:433
-#: panels/info-overview/cc-info-overview-panel.c:445
-#: panels/info-overview/cc-info-overview-panel.c:491
-#: panels/info-overview/cc-info-overview-panel.c:521
+#: panels/info-overview/cc-info-overview-panel.c:414
+#: panels/info-overview/cc-info-overview-panel.c:429
+#: panels/info-overview/cc-info-overview-panel.c:441
+#: panels/info-overview/cc-info-overview-panel.c:487
+#: panels/info-overview/cc-info-overview-panel.c:517
 msgid "Unknown"
 msgstr "Unbekannt"
 
@@ -1821,32 +1821,32 @@ msgstr "Unbekannt"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:453
+#: panels/info-overview/cc-info-overview-panel.c:449
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; Build-ID: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:468
+#: panels/info-overview/cc-info-overview-panel.c:464
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:471
+#: panels/info-overview/cc-info-overview-panel.c:467
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:728
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:732
+#: panels/info-overview/cc-info-overview-panel.c:728
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:734
+#: panels/info-overview/cc-info-overview-panel.c:730
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Unbekannt"
@@ -2461,11 +2461,11 @@ msgstr ""
 "Verwendet den Mozilla-Ortungsdienst: <a href='https://location.services."
 "mozilla.com/privacy'>Regeln zum Schutz der Privatsphäre</a>"
 
-#: panels/location/cc-location-panel.ui:93
+#: panels/location/cc-location-panel.ui:94
 msgid "Allow the applications below to determine your location."
 msgstr "Den nachfolgenden Anwendungen Zugriff auf Ihren Standort erlauben."
 
-#: panels/location/cc-location-panel.ui:113
+#: panels/location/cc-location-panel.ui:114
 msgid "No Applications Have Asked for Location Access"
 msgstr "Es hat keine Anwendung um Standortzugriff gebeten"
 
@@ -4378,7 +4378,7 @@ msgstr "Kl_anghinweise"
 #: panels/notifications/cc-app-notifications-dialog.ui:168
 msgctxt "notifications"
 msgid "Notification _Popups"
-msgstr "Be_nachrichtigungen"
+msgstr "Be_nachrichtigungsbanner"
 
 #: panels/notifications/cc-app-notifications-dialog.ui:184
 msgid ""
@@ -4392,7 +4392,7 @@ msgstr ""
 #: panels/notifications/cc-app-notifications-dialog.ui:249
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
-msgstr "Nachri_chten auf Bannern zeigen"
+msgstr "Benachrichtigungs_details auf Bannern zeigen"
 
 # Mit weichen Trennzeichen, die die Stelle einen Textumbruch vorschlagen
 #: panels/notifications/cc-app-notifications-dialog.ui:300
@@ -4403,7 +4403,7 @@ msgstr "Benachrichtigungen auf dem Sperrbi_ldschirm"
 #: panels/notifications/cc-app-notifications-dialog.ui:351
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
-msgstr "Nachrichten im _Sperrbildschirm zeigen"
+msgstr "Benachrichtigungsdetails auf dem _Sperrbildschirm zeigen"
 
 #: panels/notifications/cc-notifications-panel.c:266
 #: panels/power/cc-power-panel.c:1139 panels/power/cc-power-panel.c:1146
@@ -4628,7 +4628,7 @@ msgstr "Spiel-Eingabegerät"
 
 #. TRANSLATORS: secondary battery, misc
 #: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:413
-#: panels/power/cc-power-panel.c:1779
+#: panels/power/cc-power-panel.c:1780
 msgid "Battery"
 msgstr "Akku"
 
@@ -4678,15 +4678,15 @@ msgstr "Wenn angeschlossen"
 msgid "Automatic suspend"
 msgstr "Automatisch in Bereitschaft gehen"
 
-#: panels/power/cc-power-panel.c:1799
+#: panels/power/cc-power-panel.c:1800
 msgid "Power Mode"
 msgstr "Energie-Modus"
 
-#: panels/power/cc-power-panel.c:1809
+#: panels/power/cc-power-panel.c:1810
 msgid "Power Saving"
 msgstr "Energie sparen"
 
-#: panels/power/cc-power-panel.c:1817
+#: panels/power/cc-power-panel.c:1818
 msgid "Suspend & Power Button"
 msgstr "Taste für Bereitschaft und Ausschalten"
 
