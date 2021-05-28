@@ -87,12 +87,12 @@ cc_display_mode_dbus_get_resolution (CcDisplayMode *pself,
     *h = self->height;
 }
 
-static const double *
+static GArray *
 cc_display_mode_dbus_get_supported_scales (CcDisplayMode *pself)
 {
   CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
 
-  return (const double *) self->supported_scales->data;
+  return g_array_ref (self->supported_scales);
 }
 
 static double
@@ -148,7 +148,7 @@ cc_display_mode_dbus_get_freq_f (CcDisplayMode *pself)
 static void
 cc_display_mode_dbus_init (CcDisplayModeDBus *self)
 {
-  self->supported_scales = g_array_new (TRUE, TRUE, sizeof (double));
+  self->supported_scales = g_array_new (FALSE, FALSE, sizeof (double));
 }
 
 static void

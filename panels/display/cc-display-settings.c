@@ -19,6 +19,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <float.h>
 #include <handy.h>
 #include <glib/gi18n.h>
 #include <float.h>
@@ -233,7 +234,8 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   CcDisplayMode *current_mode;
   GtkRadioButton *group = NULL;
   gint buttons = 0;
-  const gdouble *scales, *scale;
+  g_autoptr(GArray) scales = NULL;
+  gint i;
 
   self->idle_udpate_id = 0;
 
@@ -392,19 +394,20 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   /* Scale row is usually shown. */
   gtk_container_foreach (GTK_CONTAINER (self->scale_bbox), (GtkCallback) gtk_widget_destroy, NULL);
   scales = cc_display_mode_get_supported_scales (current_mode);
-  for (scale = scales; *scale != 0.0; scale++)
+  for (i = 0; i < scales->len; i++)
     {
       g_autofree gchar *scale_str = NULL;
+      double scale = g_array_index (scales, double, i);
       GtkWidget *scale_btn;
 
       if (!cc_display_config_is_scaled_mode_valid (self->config,
                                                    current_mode,
-                                                   *scale) &&
+                                                   scale) &&
           !G_APPROX_VALUE (cc_display_monitor_get_scale (self->selected_output),
-                           *scale, DBL_EPSILON))
+                           scale, DBL_EPSILON))
         continue;
 
-      scale_str = make_scale_string (*scale);
+      scale_str = make_scale_string (scale);
 
       scale_btn = gtk_radio_button_new_with_label_from_widget (group, scale_str);
       if (!group)
@@ -412,7 +415,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (scale_btn), FALSE);
       g_object_set_data_full (G_OBJECT (scale_btn),
                               "scale",
-                              g_memdup (scale, sizeof (gdouble)),
+                              g_memdup (&scale, sizeof (gdouble)),
                               g_free);
       gtk_widget_show (scale_btn);
       gtk_container_add (GTK_CONTAINER (self->scale_bbox), scale_btn);
@@ -422,7 +425,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
                                self, 0);
 
       if (G_APPROX_VALUE (cc_display_monitor_get_scale (self->selected_output),
-                          *scale, DBL_EPSILON))
+                          scale, DBL_EPSILON))
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scale_btn), TRUE);
 
       buttons += 1;

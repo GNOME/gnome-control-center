@@ -96,7 +96,7 @@ cc_display_mode_get_resolution (CcDisplayMode *self, int *w, int *h)
   return CC_DISPLAY_MODE_GET_CLASS (self)->get_resolution (self, w, h);
 }
 
-const double *
+GArray *
 cc_display_mode_get_supported_scales (CcDisplayMode *self)
 {
   return CC_DISPLAY_MODE_GET_CLASS (self)->get_supported_scales (self);
