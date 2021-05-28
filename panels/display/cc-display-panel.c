@@ -382,7 +382,10 @@ monitor_labeler_show (CcDisplayPanel *self)
   g_variant_builder_close (&builder);
 
   if (number < 2)
-    return monitor_labeler_hide (self);
+    {
+      g_variant_builder_clear (&builder);
+      return monitor_labeler_hide (self);
+    }
 
   g_dbus_proxy_call (self->shell_proxy,
                      "ShowMonitorLabels",
