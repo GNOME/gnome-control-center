@@ -17,6 +17,7 @@
  *
  */
 
+#include <float.h>
 #include <math.h>
 #include <gio/gio.h>
 
@@ -110,8 +111,12 @@ cc_display_mode_dbus_is_supported_scale (CcDisplayMode *pself,
 
   guint i;
   for (i = 0; i < self->supported_scales->len; i++)
-    if (g_array_index (self->supported_scales, double, i) == scale)
-      return TRUE;
+    {
+      double v = g_array_index (self->supported_scales, double, i);
+
+      if (G_APPROX_VALUE (v, scale, DBL_EPSILON))
+        return TRUE;
+    }
   return FALSE;
 }
 
@@ -246,7 +251,7 @@ cc_display_logical_monitor_equal (const CcDisplayLogicalMonitor *m1,
 
   return m1->x == m2->x &&
     m1->y == m2->y &&
-    m1->scale == m2->scale &&
+    G_APPROX_VALUE (m1->scale, m2->scale, DBL_EPSILON) &&
     m1->rotation == m2->rotation &&
     m1->primary == m2->primary;
 }
@@ -700,7 +705,7 @@ cc_display_monitor_dbus_set_scale (CcDisplayMonitor *pself,
   if (!self->logical_monitor)
     return;
 
-  if (self->logical_monitor->scale != scale)
+  if (!G_APPROX_VALUE (self->logical_monitor->scale, scale, DBL_EPSILON))
     {
       self->logical_monitor->scale = scale;
 

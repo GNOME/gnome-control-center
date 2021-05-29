@@ -21,6 +21,7 @@
 
 #include <handy.h>
 #include <glib/gi18n.h>
+#include <float.h>
 #include <math.h>
 #include "list-box-helper.h"
 #include "cc-display-settings.h"
@@ -399,7 +400,8 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       if (!cc_display_config_is_scaled_mode_valid (self->config,
                                                    current_mode,
                                                    *scale) &&
-          cc_display_monitor_get_scale (self->selected_output) != *scale)
+          !G_APPROX_VALUE (cc_display_monitor_get_scale (self->selected_output),
+                           *scale, DBL_EPSILON))
         continue;
 
       scale_str = make_scale_string (*scale);
@@ -419,7 +421,8 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
                                G_CALLBACK (on_scale_btn_active_changed_cb),
                                self, 0);
 
-      if (cc_display_monitor_get_scale (self->selected_output) == *scale)
+      if (G_APPROX_VALUE (cc_display_monitor_get_scale (self->selected_output),
+                          *scale, DBL_EPSILON))
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scale_btn), TRUE);
 
       buttons += 1;
