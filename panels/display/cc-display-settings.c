@@ -233,7 +233,6 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   gint width, height;
   CcDisplayMode *current_mode;
   GtkRadioButton *group = NULL;
-  gint buttons = 0;
   g_autoptr(GArray) scales = NULL;
   gint i;
 
@@ -359,10 +358,6 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       gint w, h;
       CcDisplayMode *mode = CC_DISPLAY_MODE (item->data);
 
-      /* Exclude unusable low resolutions */
-      if (!cc_display_config_is_scaled_mode_valid (self->config, mode, 1.0))
-        continue;
-
       cc_display_mode_get_resolution (mode, &w, &h);
 
       /* Find the appropriate insertion point. */
@@ -394,18 +389,11 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   /* Scale row is usually shown. */
   gtk_container_foreach (GTK_CONTAINER (self->scale_bbox), (GtkCallback) gtk_widget_destroy, NULL);
   scales = cc_display_mode_get_supported_scales (current_mode);
-  for (i = 0; i < scales->len; i++)
+  for (i = 0; i < MIN (MAX_SCALE_BUTTONS, scales->len); i++)
     {
       g_autofree gchar *scale_str = NULL;
       double scale = g_array_index (scales, double, i);
       GtkWidget *scale_btn;
-
-      if (!cc_display_config_is_scaled_mode_valid (self->config,
-                                                   current_mode,
-                                                   scale) &&
-          !G_APPROX_VALUE (cc_display_monitor_get_scale (self->selected_output),
-                           scale, DBL_EPSILON))
-        continue;
 
       scale_str = make_scale_string (scale);
 
@@ -427,13 +415,9 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       if (G_APPROX_VALUE (cc_display_monitor_get_scale (self->selected_output),
                           scale, DBL_EPSILON))
         gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scale_btn), TRUE);
-
-      buttons += 1;
-      if (buttons >= MAX_SCALE_BUTTONS)
-        break;
     }
 
-  gtk_widget_set_visible (self->scale_row, buttons > 1);
+  gtk_widget_set_visible (self->scale_row, scales->len > 1);
 
   gtk_widget_set_visible (self->underscanning_row,
                           cc_display_monitor_supports_underscanning (self->selected_output) &&
