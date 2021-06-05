@@ -21,7 +21,6 @@
 #include "list-box-helper.h"
 #include "cc-diagnostics-panel.h"
 #include "cc-diagnostics-resources.h"
-#include "cc-os-release.h"
 #include "cc-util.h"
 #include "shell/cc-application.h"
 
@@ -135,8 +134,10 @@ cc_diagnostics_panel_init (CcDiagnosticsPanel *self)
                    self->abrt_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  os_name = cc_os_release_get_value ("NAME");
-  url = cc_os_release_get_value ("PRIVACY_POLICY_URL");
+  os_name = g_get_os_info (G_OS_INFO_KEY_NAME);
+  if (!os_name)
+    os_name = g_strdup ("GNOME");
+  url = g_get_os_info (G_OS_INFO_KEY_PRIVACY_POLICY_URL);
   if (!url)
     url = g_strdup ("http://www.gnome.org/privacy-policy");
   /* translators: Text used in link to privacy policy */

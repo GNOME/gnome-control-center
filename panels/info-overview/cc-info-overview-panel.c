@@ -23,7 +23,6 @@
 #include <config.h>
 
 #include "cc-hostname-entry.h"
-#include "cc-os-release.h"
 
 #include "cc-info-overview-resources.h"
 #include "info-cleanup.h"
@@ -418,20 +417,17 @@ get_graphics_hardware_string (void)
 static char *
 get_os_name (void)
 {
-  g_autoptr(GHashTable) os_info = NULL;
-  const gchar *name, *version_id, *pretty_name, *build_id;
-  gchar *result = NULL;
+  g_autofree gchar *name = NULL;
+  g_autofree gchar *version_id = NULL;
+  g_autofree gchar *pretty_name = NULL;
+  g_autofree gchar *build_id = NULL;
   g_autofree gchar *name_version = NULL;
+  gchar *result = NULL;
 
-  os_info = cc_os_release_get_values ();
-
-  if (!os_info)
-    return g_strdup (_("Unknown"));
-
-  name = g_hash_table_lookup (os_info, "NAME");
-  version_id = g_hash_table_lookup (os_info, "VERSION_ID");
-  pretty_name = g_hash_table_lookup (os_info, "PRETTY_NAME");
-  build_id = g_hash_table_lookup (os_info, "BUILD_ID");
+  name = g_get_os_info (G_OS_INFO_KEY_NAME);
+  version_id = g_get_os_info (G_OS_INFO_KEY_VERSION_ID);
+  pretty_name = g_get_os_info (G_OS_INFO_KEY_PRETTY_NAME);
+  build_id = g_get_os_info ("BUILD_ID");
 
   if (pretty_name)
     name_version = g_strdup (pretty_name);
