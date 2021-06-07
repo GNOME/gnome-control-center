@@ -53,11 +53,16 @@ static void help_activated         (GSimpleAction *action,
                                     GVariant      *parameter,
                                     gpointer       user_data);
 
+static gboolean cmd_verbose_cb     (const char    *option_name,
+                                    const char    *value,
+                                    gpointer       data,
+                                    GError       **error);
+
 G_DEFINE_TYPE (CcApplication, cc_application, ADW_TYPE_APPLICATION)
 
 const GOptionEntry all_options[] = {
   { "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },
-  { "verbose", 'v', 0, G_OPTION_ARG_NONE, NULL, N_("Enable verbose mode"), NULL },
+  { "verbose", 'v', G_OPTION_FLAG_NO_ARG, G_OPTION_ARG_CALLBACK, cmd_verbose_cb, N_("Enable verbose mode"), NULL },
   { "search", 's', 0, G_OPTION_ARG_STRING, NULL, N_("Search for the string"), "SEARCH" },
   { "list", 'l', 0, G_OPTION_ARG_NONE, NULL, N_("List possible panel names and exit"), NULL },
   { G_OPTION_REMAINING, '\0', 0, G_OPTION_ARG_FILENAME_ARRAY, NULL, N_("Panel to display"), N_("[PANEL] [ARGUMENT…]") },
@@ -88,6 +93,17 @@ help_activated (GSimpleAction *action,
   gtk_show_uri (GTK_WINDOW (window),
                 uri ? uri : "help:gnome-help/prefs",
                 GDK_CURRENT_TIME);
+}
+
+static gboolean
+cmd_verbose_cb (const char  *option_name,
+                const char  *value,
+                gpointer     data,
+                GError     **error)
+{
+  cc_log_increase_verbosity ();
+
+  return TRUE;
 }
 
 static void

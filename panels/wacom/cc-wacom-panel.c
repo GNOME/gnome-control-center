@@ -26,7 +26,7 @@
 #include <glib/gi18n-lib.h>
 
 #include "shell/cc-application.h"
-#include "shell/cc-debug.h"
+#include "shell/cc-log.h"
 #include "cc-wacom-panel.h"
 #include "cc-wacom-page.h"
 #include "cc-wacom-ekr-page.h"

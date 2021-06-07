@@ -25,9 +25,6 @@ host_is_linux_not_s390 = host_is_linux and not host_machine.cpu().contains('s390
 
 cc = meson.get_compiler('c')
 
-# Tracing
-enable_tracing = get_option('tracing')
-
 config_h = configuration_data()
 
 py = import('python')
@@ -313,7 +310,6 @@ configure_file(
 summary({
   'Documentation': get_option('documentation'),
   'Tests': get_option('tests'),
-  'Tracing': enable_tracing,
   'Optimized': control_center_optimized,
 })
 

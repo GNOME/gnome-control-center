@@ -36,7 +36,7 @@
 #include "cc-wwan-resources.h"
 
 #include "shell/cc-application.h"
-#include "shell/cc-debug.h"
+#include "shell/cc-log.h"
 #include "shell/cc-object-storage.h"
 
 typedef enum {

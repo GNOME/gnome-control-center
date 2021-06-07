@@ -22,7 +22,7 @@
 
 #include <string.h>
 
-#include "cc-debug.h"
+#include "cc-log.h"
 #include "cc-panel-list.h"
 #include "cc-util.h"
 

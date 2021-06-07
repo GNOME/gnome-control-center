@@ -26,7 +26,7 @@
 #include "cc-list-row.h"
 
 #include "shell/cc-application.h"
-#include "shell/cc-debug.h"
+#include "shell/cc-log.h"
 #include "shell/cc-object-storage.h"
 
 #include <glib/gi18n.h>

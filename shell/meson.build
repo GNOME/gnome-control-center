@@ -56,17 +56,6 @@ common_sources = files(
 
 generated_sources = files()
 
-# Debug
-debug_conf = configuration_data()
-debug_conf.set('BUGREPORT_URL', 'https://gitlab.gnome.org/GNOME/' + meson.project_name() + '/issues/new')
-debug_conf.set10('ENABLE_TRACING', enable_tracing)
-
-generated_sources += configure_file(
-          input : 'cc-debug.h.in',
-         output : 'cc-debug.h',
-  configuration : debug_conf
-)
-
 #Resources
 resource_data = files(
   'cc-panel-list.ui',

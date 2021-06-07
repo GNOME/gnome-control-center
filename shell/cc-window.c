@@ -24,7 +24,7 @@
 
 #include <config.h>
 
-#include "cc-debug.h"
+#include "cc-log.h"
 #include "cc-window.h"
 
 #include <glib/gi18n.h>

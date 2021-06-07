@@ -30,6 +30,7 @@
 #include <X11/Xlib.h>
 #endif
 
+#include "cc-log.h"
 #include "cc-application.h"
 
 static void
@@ -52,6 +53,7 @@ main (gint    argc,
   textdomain (GETTEXT_PACKAGE);
 
   setlocale (LC_ALL, "");
+  cc_log_init ();
 
   initialize_dependencies (&argc, &argv);
 
