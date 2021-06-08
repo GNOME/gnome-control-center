@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-02-28 14:11+0000\n"
-"PO-Revision-Date: 2021-03-07 23:08+0300\n"
+"POT-Creation-Date: 2021-05-11 12:04+0000\n"
+"PO-Revision-Date: 2021-06-08 16:21+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.3\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -48,7 +48,7 @@ msgid "Session Bus"
 msgstr "Oturum Veriyolu"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:1789 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.ui:85 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Aygıtlar"
@@ -85,7 +85,7 @@ msgstr "Dosya Sistemi"
 
 #: panels/applications/cc-applications-panel.c:849
 #: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:933 shell/cc-window.ui:121
+#: shell/cc-window.c:938 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Ayarlar"
@@ -357,11 +357,11 @@ msgstr "Türlü uygulama izinlerini ve ayarlarını denetle"
 msgid "application;flatpak;permission;setting;"
 msgstr "uygulama;flatpak;izin;yetki;ayar;"
 
-#: panels/background/cc-background-chooser.c:345
+#: panels/background/cc-background-chooser.c:344
 msgid "Select a picture"
 msgstr "Resim seç"
 
-#: panels/background/cc-background-chooser.c:348
+#: panels/background/cc-background-chooser.c:347
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
@@ -381,7 +381,7 @@ msgstr "Resim seç"
 #: panels/sharing/cc-sharing-panel.c:396 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:105
-#: panels/user-accounts/cc-avatar-chooser.c:223
+#: panels/user-accounts/cc-avatar-chooser.c:228
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:633
@@ -390,11 +390,11 @@ msgstr "Resim seç"
 msgid "_Cancel"
 msgstr "_İptal"
 
-#: panels/background/cc-background-chooser.c:349
+#: panels/background/cc-background-chooser.c:348
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:236
 #: panels/sharing/cc-sharing-panel.c:397
-#: panels/user-accounts/cc-avatar-chooser.c:224
+#: panels/user-accounts/cc-avatar-chooser.c:229
 msgid "_Open"
 msgstr "_Aç"
 
@@ -413,7 +413,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Masaüstü Arka Planı Yok"
 
-#: panels/background/cc-background-panel.c:112
+#: panels/background/cc-background-panel.c:110
 msgid "Current background"
 msgstr "Geçerli arka plan"
 
@@ -1180,7 +1180,7 @@ msgstr "_Seç"
 msgid "No languages found"
 msgstr "Dil bulunamadı"
 
-#: panels/common/cc-language-chooser.ui:81
+#: panels/common/cc-language-chooser.ui:82
 #: panels/keyboard/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Daha çok…"
@@ -1251,7 +1251,8 @@ msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d saat"
 
-#: panels/common/cc-util.c:166
+#. Translators: Option for "Blank Screen" in "Power" panel
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1205
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1779,11 +1780,11 @@ msgstr ""
 "Panel;Projektör;Gösterici;xrandr;Ekran;Çözünürlük;Tazele;Yenile;Monitör;Gece;"
 "Işık;Mavi;redshift;renk;gün doğumu;gün batımı;"
 
-#: panels/info-overview/cc-info-overview-panel.c:418
-#: panels/info-overview/cc-info-overview-panel.c:433
-#: panels/info-overview/cc-info-overview-panel.c:445
-#: panels/info-overview/cc-info-overview-panel.c:491
-#: panels/info-overview/cc-info-overview-panel.c:521
+#: panels/info-overview/cc-info-overview-panel.c:414
+#: panels/info-overview/cc-info-overview-panel.c:429
+#: panels/info-overview/cc-info-overview-panel.c:441
+#: panels/info-overview/cc-info-overview-panel.c:487
+#: panels/info-overview/cc-info-overview-panel.c:517
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
@@ -1791,32 +1792,32 @@ msgstr "Bilinmeyen"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:453
+#: panels/info-overview/cc-info-overview-panel.c:449
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; İnşa Kimliği: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:468
+#: panels/info-overview/cc-info-overview-panel.c:464
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:471
+#: panels/info-overview/cc-info-overview-panel.c:467
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:728
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:732
+#: panels/info-overview/cc-info-overview-panel.c:728
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:734
+#: panels/info-overview/cc-info-overview-panel.c:730
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Bilinmiyor"
@@ -2132,7 +2133,7 @@ msgid "Custom Shortcuts"
 msgstr "Özel Kısayollar"
 
 #: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.ui:179
+#: panels/keyboard/cc-keyboard-panel.ui:223
 msgid "Alternate Characters Key"
 msgstr "Karakterler Tuşunu Değiştir"
 
@@ -2181,7 +2182,7 @@ msgid "Right Ctrl"
 msgstr "Sağ Ctrl"
 
 #: panels/keyboard/cc-keyboard-panel.c:87
-#: panels/keyboard/cc-keyboard-panel.ui:204
+#: panels/keyboard/cc-keyboard-panel.ui:247
 msgid "Compose Key"
 msgstr "Birleştirme Tuşu"
 
@@ -2212,71 +2213,78 @@ msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Print Screen"
 
-#: panels/keyboard/cc-keyboard-panel.ui:43
+#: panels/keyboard/cc-keyboard-panel.c:233
+#, c-format
+msgid ""
+"Input sources can be switched using the %s keyboard shortcut.\n"
+"This can be changed in the keyboard shortcut settings."
+msgstr ""
+"%s klavye kısayoluyla girdi kaynakları arasında geçiş yapılabilir.\n"
+"Bu, klavye kısayolları ayarlarından değiştirilebilir."
+
+#: panels/keyboard/cc-keyboard-panel.ui:48
 msgid "Input Sources"
 msgstr "Girdi Kaynakları"
 
-#: panels/keyboard/cc-keyboard-panel.ui:66
+#: panels/keyboard/cc-keyboard-panel.ui:59
+msgid "Includes keyboard layouts and input methods."
+msgstr "Klavye düzenleri ve girdi yöntemlerini içerir."
+
+#: panels/keyboard/cc-keyboard-panel.ui:91
 msgid "Input Source Switching"
 msgstr "Girdi Kaynağı Geçişi"
 
-#: panels/keyboard/cc-keyboard-panel.ui:99
+#: panels/keyboard/cc-keyboard-panel.ui:138
 msgid "Use the _same source for all windows"
 msgstr "Tüm pencereler için _aynı kaynağı kullan"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:165
 msgid "Switch input sources _individually for each window"
 msgstr "Girdi kaynaklarını her pencere için _ayrı ayrı değiştir"
 
-#: panels/keyboard/cc-keyboard-panel.ui:138
-msgid "Keyboard Shortcut"
-msgstr "Klavye Kısayolu"
+#: panels/keyboard/cc-keyboard-panel.ui:186
+msgid "Special Character Entry"
+msgstr "Özel Karakter Girdisi"
 
-#: panels/keyboard/cc-keyboard-panel.ui:139
-msgid "This can be changed in Customize Shortcuts"
-msgstr "Bu, Kısayolları Özelleştir’te değiştirilebilir"
+#: panels/keyboard/cc-keyboard-panel.ui:197
+msgid "Methods for entering symbols and letter variants using the keyboard."
+msgstr "Klavye kullanarak simge ve değişik harfler girmek için yöntemler."
 
-#: panels/keyboard/cc-keyboard-panel.ui:157
-msgid "Type Special Characters"
-msgstr "Özel Karakterler Yaz"
-
-#: panels/keyboard/cc-keyboard-panel.ui:180
-msgid "Hold down and type to enter different characters"
-msgstr "Basılı tut ve başka karakterler girmek için yaz"
-
-#: panels/keyboard/cc-keyboard-panel.ui:232
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:301
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:317 shell/cc-window.ui:326
+#: panels/keyboard/cc-keyboard-panel.ui:275
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:306
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:322 shell/cc-window.ui:326
 msgid "Keyboard Shortcuts"
 msgstr "Klavye Kısayolları"
 
-#: panels/keyboard/cc-keyboard-panel.ui:253
-msgid "Customize Shortcuts"
-msgstr "Kısayolları Özelleştir"
+#: panels/keyboard/cc-keyboard-panel.ui:296
+msgid "View and Customize Shortcuts"
+msgstr "Kısayolları Gör ve Özelleştir"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:281
-msgid "modified"
-msgstr "değiştirildi"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:283
+#, c-format
+msgid "%d modified"
+msgid_plural "%d modified"
+msgstr[0] "%d değiştirildi"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:423
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:428
 msgid "Reset All Shortcuts?"
 msgstr "Tüm Kısayolları Sıfırla?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:426
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
 msgstr ""
 "Kısayolları sıfırlamak özel kısayollarınızı etkileyebilir. Bu geri alınamaz."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:430
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:435
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
 msgid "Cancel"
 msgstr "İptal"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:436
 msgid "Reset All"
 msgstr "Tümünü Sıfırla"
 
@@ -2416,8 +2424,8 @@ msgid ""
 "Location services allow applications to know your location. Using Wi-Fi and "
 "mobile broadband increases accuracy."
 msgstr ""
-"Konum hizmetleri, uygulamaların konumunuzu bilmesine olanak tanır. Wi-Fi ve "
-"mobil genişbant kullanmak hassasiyeti artırır."
+"Konum hizmetleri, uygulamaların konumunuzu bilmesini sağlar. Wi-Fi ve mobil "
+"genişbant kullanmak hassasiyeti artırır."
 
 #: panels/location/cc-location-panel.ui:81
 msgid ""
@@ -2427,11 +2435,11 @@ msgstr ""
 "Mozilla Konum Hizmetiʼni Kullanır: <a href='https://location.services."
 "mozilla.com/privacy'>Gizlilik Politikası</a>"
 
-#: panels/location/cc-location-panel.ui:93
+#: panels/location/cc-location-panel.ui:94
 msgid "Allow the applications below to determine your location."
 msgstr "Aşağıdaki uygulamaların konumunuzu saptamasına izin verin."
 
-#: panels/location/cc-location-panel.ui:113
+#: panels/location/cc-location-panel.ui:114
 msgid "No Applications Have Asked for Location Access"
 msgstr "Hiçbir Uygulama Konum Erişimi İsteği Yapmadı"
 
@@ -2532,61 +2540,61 @@ msgid "1 hour"
 msgstr "1 saat"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:209 panels/power/cc-power-panel.ui:63
+#: panels/lock/cc-lock-panel.ui:209
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:213 panels/power/cc-power-panel.ui:67
+#: panels/lock/cc-lock-panel.ui:213
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:217 panels/power/cc-power-panel.ui:71
+#: panels/lock/cc-lock-panel.ui:217
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:221 panels/power/cc-power-panel.ui:75
+#: panels/lock/cc-lock-panel.ui:221
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:225 panels/power/cc-power-panel.ui:79
+#: panels/lock/cc-lock-panel.ui:225
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:229 panels/power/cc-power-panel.ui:83
+#: panels/lock/cc-lock-panel.ui:229
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:233 panels/power/cc-power-panel.ui:87
+#: panels/lock/cc-lock-panel.ui:233
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:237 panels/power/cc-power-panel.ui:91
+#: panels/lock/cc-lock-panel.ui:237
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:241 panels/power/cc-power-panel.ui:95
+#: panels/lock/cc-lock-panel.ui:241
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 dakika"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:245 panels/power/cc-power-panel.ui:99
+#: panels/lock/cc-lock-panel.ui:245
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "Asla"
@@ -2817,11 +2825,16 @@ msgstr ""
 "Erişim noktasını açmak %s bağlantısını kesecek ve internete Wi-Fi üzerinden "
 "erişilemeyecek."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:265
+#: panels/network/cc-wifi-hotspot-dialog.c:267
 msgid "Must have a minimum of 8 characters"
 msgstr "En az 8 karakter içermelidir"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:479
+#: panels/network/cc-wifi-hotspot-dialog.c:272
+#, c-format
+msgid "Must have a maximum of %d characters"
+msgstr "En çok %d karakter içermelidir"
+
+#: panels/network/cc-wifi-hotspot-dialog.c:488
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Kablosuz Erişim Noktasını Aç?"
 
@@ -3133,21 +3146,21 @@ msgstr "kendiliğinden"
 msgid "Identity"
 msgstr "Kimlik"
 
-#: panels/network/connection-editor/ce-page-ip4.c:244
-#: panels/network/connection-editor/ce-page-ip6.c:225
+#: panels/network/connection-editor/ce-page-ip4.c:245
+#: panels/network/connection-editor/ce-page-ip6.c:226
 msgid "Delete Address"
 msgstr "Adresi Sil"
 
-#: panels/network/connection-editor/ce-page-ip4.c:399
-#: panels/network/connection-editor/ce-page-ip6.c:369
+#: panels/network/connection-editor/ce-page-ip4.c:400
+#: panels/network/connection-editor/ce-page-ip6.c:370
 msgid "Delete Route"
 msgstr "Rotayı Sil"
 
-#: panels/network/connection-editor/ce-page-ip4.c:750
+#: panels/network/connection-editor/ce-page-ip4.c:754
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:722
+#: panels/network/connection-editor/ce-page-ip6.c:726
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3532,7 +3545,7 @@ msgstr "Kablosuz aygıt Erişim Noktası kipini desteklememektedir"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:266
-#: panels/power/cc-power-panel.c:1133 panels/power/cc-power-panel.c:1144
+#: panels/power/cc-power-panel.c:1093 panels/power/cc-power-panel.c:1104
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4022,7 +4035,7 @@ msgstr "K_ullanıcı adı"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:478
+#: panels/user-accounts/cc-user-panel.ui:361
 msgid "_Password"
 msgstr "_Parola"
 
@@ -4350,7 +4363,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Kilit Ekranında İleti İ_çeriğini Göster"
 
 #: panels/notifications/cc-notifications-panel.c:266
-#: panels/power/cc-power-panel.c:1139 panels/power/cc-power-panel.c:1146
+#: panels/power/cc-power-panel.c:1099 panels/power/cc-power-panel.c:1106
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4376,26 +4389,26 @@ msgstr "Hangi bildirimlerin gösterileceğini ve ne göstereceklerini ayarlayın
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Bildirimler;Pencerecik;İleti;Mesaj;Tepsi;Açılır Pencere;"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:150
+#: panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Diğer"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:622
+#: panels/online-accounts/cc-online-accounts-panel.c:576
 #, c-format
 msgid "%s Account"
 msgstr "%s Hesabı"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:916
+#: panels/online-accounts/cc-online-accounts-panel.c:870
 msgid "Error removing account"
 msgstr "Hesap silinirken hata oluştu"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:982
+#: panels/online-accounts/cc-online-accounts-panel.c:936
 #, c-format
 msgid "%s removed"
 msgstr "%s kaldırıldı"
@@ -4439,7 +4452,7 @@ msgstr "İnternet bağlantısı yok — yeni çevrim içi hesaplar kurmak için 
 msgid "Add an account"
 msgstr "Hesap ekle"
 
-#: panels/online-accounts/online-accounts.ui:238
+#: panels/online-accounts/online-accounts.ui:223
 msgid "Remove Account"
 msgstr "Hesabı Kaldır"
 
@@ -4565,8 +4578,8 @@ msgid "Gaming input device"
 msgstr "Oyun girdi aygıtı"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:413
-#: panels/power/cc-power-panel.c:1779
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:387
+#: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Pil"
 
@@ -4580,53 +4593,46 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Ek"
 
-#: panels/power/cc-power-panel.c:411
+#: panels/power/cc-power-panel.c:385
 msgid "Batteries"
 msgstr "Piller"
 
-#: panels/power/cc-power-panel.c:632
+#: panels/power/cc-power-panel.c:648
 msgid "When _idle"
 msgstr "Bo_şta olduğunda"
 
-#: panels/power/cc-power-panel.c:1081
+#: panels/power/cc-power-panel.c:1033
 msgid "Suspend"
 msgstr "Askıya al"
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1034
 msgid "Power Off"
 msgstr "Kapat"
 
-#: panels/power/cc-power-panel.c:1083
+#: panels/power/cc-power-panel.c:1035
 msgid "Hibernate"
 msgstr "Derin uyku"
 
-#: panels/power/cc-power-panel.c:1084
+#: panels/power/cc-power-panel.c:1036
 msgid "Nothing"
 msgstr "Hiçbir şey"
 
-#: panels/power/cc-power-panel.c:1135
+#: panels/power/cc-power-panel.c:1095
 msgid "When on battery power"
 msgstr "Pille çalışırken"
 
-#: panels/power/cc-power-panel.c:1137
+#: panels/power/cc-power-panel.c:1097
 msgid "When plugged in"
 msgstr "Fişe takıldığında"
 
-#: panels/power/cc-power-panel.c:1277
+#: panels/power/cc-power-panel.c:1212
+msgctxt "Idle time"
+msgid "Never"
+msgstr "Asla"
+
+#: panels/power/cc-power-panel.c:1269
 msgid "Automatic suspend"
 msgstr "Kendiliğinden askıya al"
-
-#: panels/power/cc-power-panel.c:1799
-msgid "Power Mode"
-msgstr "Güç Kipi"
-
-#: panels/power/cc-power-panel.c:1809
-msgid "Power Saving"
-msgstr "Güç Tasarrufu"
-
-#: panels/power/cc-power-panel.c:1817
-msgid "Suspend & Power Button"
-msgstr "Askıya Alma ve Güç Düğmesi"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4688,79 +4694,91 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 saat"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:107
+msgid "Power Mode"
+msgstr "Güç Kipi"
+
+#: panels/power/cc-power-panel.ui:108
 msgid "Affects system performance and power usage."
 msgstr "Sistem başarımını ve güç kullanımını etkiler."
 
-#: panels/power/cc-power-panel.ui:297
+#: panels/power/cc-power-panel.ui:131
+msgid "Power Saving"
+msgstr "Güç Tasarrufu"
+
+#: panels/power/cc-power-panel.ui:135
 msgid "_Screen Brightness"
 msgstr "_Ekran Parlaklığı"
 
-#: panels/power/cc-power-panel.ui:346
+#: panels/power/cc-power-panel.ui:151
 msgid "Automatic Brightness"
 msgstr "Kendiliğinden Parlaklık"
 
-#: panels/power/cc-power-panel.ui:382
+#: panels/power/cc-power-panel.ui:164
 msgid "_Keyboard Brightness"
 msgstr "_Klavye Parlaklığı"
 
-#: panels/power/cc-power-panel.ui:431
+#: panels/power/cc-power-panel.ui:180
 msgid "Dim Screen When Inactive"
 msgstr "Etkin Değilken Ekranı Karart"
 
-#: panels/power/cc-power-panel.ui:466
+#: panels/power/cc-power-panel.ui:193
 msgid "_Blank Screen"
 msgstr "_Ekranı Karart"
 
-#: panels/power/cc-power-panel.ui:502
+#: panels/power/cc-power-panel.ui:201
 msgid "_Automatic Suspend"
 msgstr "_Kendiliğinden Askıya Al"
 
-#: panels/power/cc-power-panel.ui:547
+#: panels/power/cc-power-panel.ui:217
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.ui:559
+#: panels/power/cc-power-panel.ui:218
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Kablosuz Ağ, güç tasarrufu için kapatılabilir."
 
-#: panels/power/cc-power-panel.ui:609
+#: panels/power/cc-power-panel.ui:233
 msgid "_Mobile Broadband"
 msgstr "_Mobil Genişbant"
 
-#: panels/power/cc-power-panel.ui:621
+#: panels/power/cc-power-panel.ui:234
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr "Mobil genişbant (LTE, 4G, 3G, vb.), güç tasarrufu için kapatılabilir."
 
-#: panels/power/cc-power-panel.ui:671
+#: panels/power/cc-power-panel.ui:249
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.ui:683
+#: panels/power/cc-power-panel.ui:250
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth, güç tasarrufu için kapatılabilir."
 
-#: panels/power/cc-power-panel.ui:759
+#: panels/power/cc-power-panel.ui:267
+msgid "Suspend & Power Button"
+msgstr "Askıya Alma ve Güç Düğmesi"
+
+#: panels/power/cc-power-panel.ui:271
 msgid "Po_wer Button Behavior"
 msgstr "_Güç Düğmesi Davranışı"
 
-#: panels/power/cc-power-panel.ui:797
+#: panels/power/cc-power-panel.ui:279
 msgid "Show Battery _Percentage"
 msgstr "Pil _Yüzdesini Göster"
 
-#: panels/power/cc-power-panel.ui:872
+#: panels/power/cc-power-panel.ui:325
 msgid "Automatic Suspend"
 msgstr "Kendiliğinden Askıya Al"
 
-#: panels/power/cc-power-panel.ui:897
+#: panels/power/cc-power-panel.ui:350
 msgid "_Plugged In"
 msgstr "_Fişe Takılıyken"
 
-#: panels/power/cc-power-panel.ui:913
+#: panels/power/cc-power-panel.ui:366
 msgid "On _Battery Power"
 msgstr "_Pil ile Çalışırken"
 
-#: panels/power/cc-power-panel.ui:958 panels/power/cc-power-panel.ui:1018
+#: panels/power/cc-power-panel.ui:411 panels/power/cc-power-panel.ui:471
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Gecikme"
@@ -5561,7 +5579,7 @@ msgid "The language used for text in windows and web pages."
 msgstr "Pencereler ve web sayfalarındaki metinlerde kullanılacak dil."
 
 #: panels/region/cc-region-panel.ui:85
-#: panels/user-accounts/cc-user-panel.ui:406
+#: panels/user-accounts/cc-user-panel.ui:308
 msgid "_Language"
 msgstr "Di_l"
 
@@ -7104,7 +7122,7 @@ msgstr "Kurumsal kullanıcıları eklemek için çevrim içi olmalısınız."
 msgid "_Enterprise Login"
 msgstr "_Kurumsal Giriş"
 
-#: panels/user-accounts/cc-avatar-chooser.c:220
+#: panels/user-accounts/cc-avatar-chooser.c:225
 msgid "Browse for more pictures"
 msgstr "Daha çok resim için göz at"
 
@@ -7598,20 +7616,20 @@ msgstr "Değişikliklerin etkin olması için oturumunuzu yeniden başlatmalıs�
 msgid "Restart Now"
 msgstr "Yeniden Başlat"
 
-#: panels/user-accounts/cc-user-panel.ui:153
-#: panels/user-accounts/cc-user-panel.ui:169
+#: panels/user-accounts/cc-user-panel.ui:157
+#: panels/user-accounts/cc-user-panel.ui:173
 msgid "User Icon"
 msgstr "Kullanıcı Simgesi"
 
-#: panels/user-accounts/cc-user-panel.ui:245
+#: panels/user-accounts/cc-user-panel.ui:249
 msgid "Account Settings"
 msgstr "Hesap Ayarları"
 
-#: panels/user-accounts/cc-user-panel.ui:272
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid "_Administrator"
 msgstr "_Yönetici"
 
-#: panels/user-accounts/cc-user-panel.ui:301
+#: panels/user-accounts/cc-user-panel.ui:268
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7619,40 +7637,40 @@ msgstr ""
 "Yöneticiler diğer kullanıcıları ekleyebilir veya kaldırabilir ve diğer tüm "
 "kullanıcılar için ayarları değiştirebilir."
 
-#: panels/user-accounts/cc-user-panel.ui:333
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "_Parental Controls"
 msgstr "_Ebeveyn Denetimleri"
 
-#: panels/user-accounts/cc-user-panel.ui:377
+#: panels/user-accounts/cc-user-panel.ui:285
 msgid "Open the Parental Controls application."
 msgstr "Ebeveyn Denetimleri uygulamasını aç."
 
-#: panels/user-accounts/cc-user-panel.ui:452
+#: panels/user-accounts/cc-user-panel.ui:343
 msgid "Authentication & Login"
 msgstr "Kimlik Doğrulaması ve Giriş"
 
-#: panels/user-accounts/cc-user-panel.ui:521
+#: panels/user-accounts/cc-user-panel.ui:385
 msgid "_Fingerprint Login"
 msgstr "_Parmak İziyle Giriş"
 
-#: panels/user-accounts/cc-user-panel.ui:563
+#: panels/user-accounts/cc-user-panel.ui:409
 msgid "A_utomatic Login"
 msgstr "_Kendiliğinden Giriş"
 
-#: panels/user-accounts/cc-user-panel.ui:593
+#: panels/user-accounts/cc-user-panel.ui:423
 msgid "Account Activity"
 msgstr "Hesap Etkinliği"
 
-#: panels/user-accounts/cc-user-panel.ui:634
+#: panels/user-accounts/cc-user-panel.ui:453
 msgid "Remove User…"
 msgstr "Kullanıcı Hesabını Kaldır…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:673
+#: panels/user-accounts/cc-user-panel.ui:494
 msgid "No Users Found"
 msgstr "Kullanıcı Bulunamadı"
 
-#: panels/user-accounts/cc-user-panel.ui:683
+#: panels/user-accounts/cc-user-panel.ui:504
 msgid "Unlock to add a user account."
 msgstr "Kullanıcı hesabı eklemek için kilidi kaldır."
 
@@ -8256,6 +8274,15 @@ msgstr[0] "%u Girdi"
 msgid "System Sounds"
 msgstr "Sistem Sesleri"
 
+#~ msgid "Keyboard Shortcut"
+#~ msgstr "Klavye Kısayolu"
+
+#~ msgid "This can be changed in Customize Shortcuts"
+#~ msgstr "Bu, Kısayolları Özelleştir’te değiştirilebilir"
+
+#~ msgid "Hold down and type to enter different characters"
+#~ msgstr "Basılı tut ve başka karakterler girmek için yaz"
+
 #~ msgid "Left Alt"
 #~ msgstr "Sol Alt"
 
@@ -8305,9 +8332,6 @@ msgstr "Sistem Sesleri"
 #~ msgid "Empty"
 #~ msgstr "Boş"
 
-#~ msgid "Choose keyboard layouts or input methods."
-#~ msgstr "Klavye düzenleri veya girdi yöntemleri seç."
-
 #~ msgid "Previous source"
 #~ msgstr "Önceki kaynak"
 
@@ -8322,9 +8346,6 @@ msgstr "Sistem Sesleri"
 
 #~ msgid "Left+Right Alt"
 #~ msgstr "Sol+Sağ Alt"
-
-#~ msgid "These keyboard shortcuts can be changed in the keyboard settings"
-#~ msgstr "Bu klavye kısayolları klavye ayarlarından değiştirilebilir"
 
 #~ msgid "Switch off to connect to a Wi-Fi network"
 #~ msgstr "Kablosuz ağa bağlanmak için kapat"
