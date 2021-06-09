@@ -995,7 +995,7 @@ update_sensitivity (gpointer user_data)
   gtk_widget_set_visible (widget, !no_cups);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button");
-  gtk_widget_set_visible (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
+  gtk_widget_set_sensitive (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button2");
   gtk_widget_set_sensitive (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
@@ -1273,6 +1273,8 @@ cc_printers_panel_init (CcPrintersPanel *self)
 
       cc_permission_infobar_set_permission (self->permission_infobar,
                                             self->permission);
+      cc_permission_infobar_set_title (self->permission_infobar,
+				       _("Unlock to Add Printers and Change Settings"));
 
       on_permission_changed (self);
     }
