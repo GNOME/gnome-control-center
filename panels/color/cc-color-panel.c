@@ -786,8 +786,8 @@ gcm_prefs_calib_upload_cb (CcColorPanel *prefs)
   g_autofree gchar *data = NULL;
   g_autoptr(GError) error = NULL;
   gsize length;
-  guint status_code;
-  g_autoptr(SoupBuffer) buffer = NULL;
+  g_autoptr(GBytes) buffer = NULL;
+  g_autoptr(GBytes) body = NULL;
   g_autoptr(SoupMessage) msg = NULL;
   g_autoptr(SoupMultipart) multipart = NULL;
   g_autoptr(SoupSession) session = NULL;
@@ -812,38 +812,32 @@ gcm_prefs_calib_upload_cb (CcColorPanel *prefs)
     }
 
   /* setup the session */
-  session = soup_session_new_with_options (SOUP_SESSION_USER_AGENT, "gnome-control-center",
-                                           SOUP_SESSION_TIMEOUT, 5000,
+  session = soup_session_new_with_options ("user-agent", "gnome-control-center",
+                                           "timeout", 5000,
                                            NULL);
-  if (session == NULL)
-  {
-    g_warning ("Failed to setup networking");
-    return;
-  }
-  soup_session_add_feature_by_type (session, SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
-
   /* create multipart form and upload file */
   multipart = soup_multipart_new (SOUP_FORM_MIME_TYPE_MULTIPART);
-  buffer = soup_buffer_new (SOUP_MEMORY_STATIC, data, length);
+  buffer = g_bytes_new_static (data, length);
   soup_multipart_append_form_file (multipart,
                                    "upload",
                                    cd_profile_get_filename (profile),
                                    NULL,
                                    buffer);
   upload_uri = g_settings_get_string (prefs->settings_colord, "profile-upload-uri");
-  msg = soup_form_request_new_from_multipart (upload_uri, multipart);
-  status_code = soup_session_send_message (session, msg);
-  if (status_code != 201)
+  msg = soup_message_new_from_multipart (upload_uri, multipart);
+  body = soup_session_send_and_read (session, msg, NULL, &error);
+  if (soup_message_get_status != 201 || !body)
     {
       /* TRANSLATORS: this is when the upload of the profile failed */
-      msg_result = g_strdup_printf (_("Failed to upload file: %s"), msg->reason_phrase),
+      msg_result = g_strdup_printf (_("Failed to upload file: %s"),
+                                    error ? error->message : soup_message_get_reason_phrase (msg));
       gtk_label_set_label (GTK_LABEL (prefs->label_calib_upload_location), msg_result);
       gtk_widget_show (prefs->label_calib_upload_location);
       return;
     }
 
   /* show instructions to the user */
-  uri = soup_message_headers_get_one (msg->response_headers, "Location");
+  uri = soup_message_headers_get_one (soup_message_get_response_headers (msg), "Location");
   msg_result = g_strdup_printf ("%s %s\n\n• %s\n• %s\n• %s",
                                 /* TRANSLATORS: these are instructions on how to recover
                                  * the ICC profile on the native operating system and are
