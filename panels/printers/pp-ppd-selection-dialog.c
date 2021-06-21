@@ -30,9 +30,6 @@
 #include <glib/gstdio.h>
 #include <gtk/gtk.h>
 
-#include <cups/cups.h>
-#include <cups/ppd.h>
-
 #include "pp-ppd-selection-dialog.h"
 
 enum
@@ -334,6 +331,7 @@ pp_ppd_selection_dialog_dispose (GObject *object)
   g_clear_pointer (&self->ppd_name, g_free);
   g_clear_pointer (&self->ppd_display_name, g_free);
   g_clear_pointer (&self->manufacturer, g_free);
+  g_clear_pointer (&self->list, ppd_list_free);
 
   G_OBJECT_CLASS (pp_ppd_selection_dialog_parent_class)->dispose (object);
 }

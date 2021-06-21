@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.14"/>
-  <object class="GtkListStore" id="devices-liststore">
+  <object class="GtkListStore" id="devices_liststore">
     <columns>
       <!-- column-name device_gicon -->
       <column type="GIcon"/>
@@ -19,10 +19,10 @@
       <column type="PpPrintDevice"/>
     </columns>
   </object>
-  <object class="GtkTreeModelFilter" id="devices-model-filter">
-    <property name="child_model">devices-liststore</property>
+  <object class="GtkTreeModelFilter" id="devices_model_filter">
+    <property name="child_model">devices_liststore</property>
   </object>
-  <object class="GtkDialog" id="dialog">
+  <template class="PpNewPrinterDialog" parent="GtkDialog">
     <property name="width_request">480</property>
     <property name="height_request">490</property>
     <property name="can_focus">False</property>
@@ -37,11 +37,11 @@
         <property name="visible">True</property>
         <property name="show-close-button">False</property>
         <child>
-          <object class="GtkStack" id="headerbar-topleft-buttons">
+          <object class="GtkStack" id="headerbar_topleft_buttons">
             <property name="visible">True</property>
             <property name="valign">center</property>
             <child>
-              <object class="GtkButton" id="new-printer-cancel-button">
+              <object class="GtkButton" id="new_printer_cancel_button">
                 <property name="label" translatable="yes">_Cancel</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -53,7 +53,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="go-back-button">
+              <object class="GtkButton" id="go_back_button">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -72,11 +72,11 @@
           </object>
         </child>
         <child>
-          <object class="GtkStack" id="headerbar-topright-buttons">
+          <object class="GtkStack" id="headerbar_topright_buttons">
             <property name="visible">True</property>
             <property name="valign">center</property>
             <child>
-              <object class="GtkButton" id="new-printer-add-button">
+              <object class="GtkButton" id="new_printer_add_button">
                 <property name="label" translatable="yes">_Add</property>
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
@@ -92,7 +92,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="unlock-button">
+              <object class="GtkButton" id="unlock_button">
                 <property name="label" translatable="yes" comments="Translators: This button opens authentication dialog for selected server.">_Unlock</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -103,11 +103,11 @@
                 </style>
               </object>
               <packing>
-                <property name="name">unlock-button</property>
+                <property name="name">unlock_button</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="authenticate-button">
+              <object class="GtkButton" id="authenticate_button">
                 <property name="label" translatable="yes" comments="Translators: This buttons submits the credentials for the selected server.">_Unlock</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -138,7 +138,7 @@
         <property name="spacing">10</property>
         <property name="border_width">0</property>
         <child>
-          <object class="GtkStack" id="dialog-stack">
+          <object class="GtkStack" id="dialog_stack">
             <property name="visible">True</property>
             <property name="border_width">0</property>
             <child>
@@ -162,10 +162,10 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkTreeView" id="devices-treeview">
+                          <object class="GtkTreeView" id="devices_treeview">
                             <property name="visible">True</property>
                             <property name="can_focus">True</property>
-                            <property name="model">devices-model-filter</property>
+                            <property name="model">devices_model_filter</property>
                             <property name="headers_visible">False</property>
                             <property name="enable-grid-lines">GTK_TREE_VIEW_GRID_LINES_HORIZONTAL</property>
                             <child internal-child="selection">
@@ -274,7 +274,7 @@
                             <property name="can_focus">False</property>
                             <property name="border_width">4</property>
                             <child>
-                              <object class="GtkSearchEntry" id="search-entry">
+                              <object class="GtkSearchEntry" id="search_entry">
                                 <property name="visible">True</property>
                                 <property name="can_focus">True</property>
                                 <property name="has_tooltip">True</property>
@@ -334,7 +334,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="authentication-title">
+                  <object class="GtkLabel" id="authentication_title">
                     <property name="visible">True</property>
                     <property name="label" translatable="yes">Authentication Required</property>
                     <property name="xalign">0</property>
@@ -348,7 +348,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkLabel" id="authentication-text">
+                  <object class="GtkLabel" id="authentication_text">
                     <property name="visible">True</property>
                     <property name="wrap">True</property>
                     <property name="max_width_chars">36</property>
@@ -371,7 +371,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="username-entry">
+                  <object class="GtkEntry" id="username_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="invisible_char">●</property>
@@ -394,7 +394,7 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkEntry" id="password-entry">
+                  <object class="GtkEntry" id="password_entry">
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="visibility">False</property>
@@ -417,14 +417,14 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="-6">new-printer-cancel-button</action-widget>
-      <action-widget response="-5">new-printer-add-button</action-widget>
+      <action-widget response="-6">new_printer_cancel_button</action-widget>
+      <action-widget response="-5">new_printer_add_button</action-widget>
     </action-widgets>
-  </object>
+  </template>
   <object class="GtkSizeGroup">
     <widgets>
-      <widget name="new-printer-cancel-button"/>
-      <widget name="headerbar-topright-buttons"/>
+      <widget name="new_printer_cancel_button"/>
+      <widget name="headerbar_topright_buttons"/>
     </widgets>
   </object>
 </interface>

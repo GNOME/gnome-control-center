@@ -19,18 +19,19 @@
 
 #pragma once
 
-#include "pp-utils.h"
-
 #include <gtk/gtk.h>
+#include "pp-utils.h"
 
 G_BEGIN_DECLS
 
 #define PP_TYPE_NEW_PRINTER_DIALOG (pp_new_printer_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, PP, NEW_PRINTER_DIALOG, GObject)
+G_DECLARE_FINAL_TYPE (PpNewPrinterDialog, pp_new_printer_dialog, PP, NEW_PRINTER_DIALOG, GtkDialog)
 
-PpNewPrinterDialog *pp_new_printer_dialog_new          (GtkWindow          *parent,
-                                                        PPDList            *ppd_list);
-void                pp_new_printer_dialog_set_ppd_list (PpNewPrinterDialog *dialog,
-                                                        PPDList            *list);
+PpNewPrinterDialog *pp_new_printer_dialog_new                  (PPDList              *ppd_list,
+                                                                UserResponseCallback  user_callback,
+                                                                gpointer              user_data);
+void                pp_new_printer_dialog_set_ppd_list         (PpNewPrinterDialog *dialog,
+                                                                PPDList            *list);
+PpPrintDevice      *pp_new_printer_dialog_get_new_print_device (PpNewPrinterDialog *dialog);
 
 G_END_DECLS
