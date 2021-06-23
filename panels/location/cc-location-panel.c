@@ -27,8 +27,8 @@
 #include <glib/gi18n.h>
 
 #define LOCATION_ENABLED "enabled"
-#define APP_PERMISSIONS_TABLE "location"
-#define APP_PERMISSIONS_ID "location"
+#define APP_PERMISSIONS_TABLE "gnome"
+#define APP_PERMISSIONS_ID "geolocation"
 
 struct _CcLocationPanel
 {
