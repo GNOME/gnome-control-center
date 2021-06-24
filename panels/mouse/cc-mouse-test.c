@@ -300,7 +300,7 @@ setup_dialog (CcMouseTest *self)
 				  gtk_adjustment_get_upper (adjustment));
 
 	provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
-	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider), "* {background: #565854}", -1, NULL);
+	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider), "* {background: #26a269}", -1, NULL);
 	gtk_style_context_add_provider (gtk_widget_get_style_context (self->viewport),
 					provider,
 					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
