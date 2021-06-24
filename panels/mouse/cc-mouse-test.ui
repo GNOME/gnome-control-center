@@ -48,7 +48,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <child>
-                  <object class="GtkGrid" id="grid1">
+                  <object class="GtkOverlay" id="grid1">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
@@ -59,32 +59,20 @@
                         <property name="margin_end">25</property>
                         <property name="resource">/org/gnome/control-center/mouse/scroll-test.svg</property>
                       </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
-                      </packing>
                     </child>
-                    <child>
+                    <child type="overlay">
                       <object class="GtkDrawingArea" id="button_drawing_area">
                         <property name="width_request">180</property>
                         <property name="height_request">180</property>
                         <property name="visible">True</property>
+                        <property name="valign">end</property>
                         <property name="can_focus">False</property>
                         <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_STRUCTURE_MASK</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">20</property>
-                        <property name="hexpand">True</property>
                         <signal name="button_press_event" handler="button_drawing_area_button_press_event" object="CcMouseTest" swapped="yes"/>
                         <signal name="draw" handler="button_drawing_area_draw_event" object="CcMouseTest" swapped="yes"/>
                       </object>
-                      <packing>
-                        <property name="left_attach">0</property>
-                        <property name="top_attach">1</property>
-                        <property name="width">1</property>
-                        <property name="height">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
