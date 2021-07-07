@@ -57,6 +57,7 @@
 #define KEY_CURSOR_BLINKING_TIME     "cursor-blink-time"
 #define KEY_MOUSE_CURSOR_SIZE        "cursor-size"
 #define KEY_LOCATE_POINTER           "locate-pointer"
+#define KEY_ENABLE_ANIMATIONS        "enable-animations"
 
 /* application settings */
 #define APPLICATION_SETTINGS         "org.gnome.desktop.a11y.applications"
@@ -117,6 +118,7 @@ struct _CcUaPanel
   GtkLabel          *cursor_size_label;
   GtkListBoxRow     *cursor_size_row;
   GtkScale          *double_click_delay_scale;
+  GtkSwitch         *enable_animations_switch;
   GtkListBox        *hearing_listbox;
   GtkSwitch         *highcontrast_enable_switch;
   GtkListBoxRow     *highcontrast_row;
@@ -210,6 +212,7 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_size_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_size_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, double_click_delay_scale);
+  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, enable_animations_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, hearing_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, highcontrast_enable_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, highcontrast_row);
@@ -529,6 +532,12 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 set_contrast_mapping,
                                 self,
                                 NULL);
+
+  /* enable animation */
+  g_settings_bind (self->interface_settings, KEY_ENABLE_ANIMATIONS,
+                   self->enable_animations_switch, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
 
   /* large text */
 
