@@ -20,6 +20,7 @@
 #pragma once
 
 #include <gtk/gtk.h>
+#include "pp-new-printer.h"
 #include "pp-utils.h"
 
 G_BEGIN_DECLS
@@ -32,6 +33,6 @@ PpNewPrinterDialog *pp_new_printer_dialog_new                  (PPDList         
                                                                 gpointer              user_data);
 void                pp_new_printer_dialog_set_ppd_list         (PpNewPrinterDialog *dialog,
                                                                 PPDList            *list);
-PpPrintDevice      *pp_new_printer_dialog_get_new_print_device (PpNewPrinterDialog *dialog);
+PpNewPrinter       *pp_new_printer_dialog_get_new_printer (PpNewPrinterDialog *dialog);
 
 G_END_DECLS

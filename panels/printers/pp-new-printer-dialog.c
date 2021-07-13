@@ -29,11 +29,12 @@
 #include <gtk/gtk.h>
 
 #include "pp-new-printer-dialog.h"
-#include "pp-ppd-selection-dialog.h"
-#include "pp-utils.h"
-#include "pp-host.h"
 #include "pp-cups.h"
+#include "pp-host.h"
+#include "pp-new-printer.h"
+#include "pp-ppd-selection-dialog.h"
 #include "pp-samba.h"
+#include "pp-utils.h"
 
 #if (CUPS_VERSION_MAJOR > 1) || (CUPS_VERSION_MINOR > 5)
 #define HAVE_CUPS_1_6 1
@@ -1754,7 +1755,7 @@ new_printer_dialog_response_cb (PpNewPrinterDialog *self,
                                             GTK_WINDOW (self));
 
               //New device will be set at return from ppd selection
-              gtk_dialog_run (GTK_DIALOG (self->ppd_selection_dialog));
+              gtk_widget_show_all (self->ppd_selection_dialog);
             }
           else
             {
@@ -1914,8 +1915,30 @@ pp_new_printer_dialog_set_ppd_list (PpNewPrinterDialog *self,
     pp_ppd_selection_dialog_set_ppd_list (self->ppd_selection_dialog, self->list);
 }
 
-PpPrintDevice *
-pp_new_printer_dialog_get_new_print_device (PpNewPrinterDialog *self)
+PpNewPrinter *
+pp_new_printer_dialog_get_new_printer (PpNewPrinterDialog *self)
 {
-  return pp_print_device_copy (self->new_device);
+  PpNewPrinter *new_printer = NULL;
+  guint         window_id = 0;
+
+  window_id = (guint) GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (gtk_window_get_transient_for (GTK_WINDOW (self)))));
+
+  new_printer = pp_new_printer_new ();
+  g_object_set (new_printer,
+                "name", pp_print_device_get_device_name (self->new_device),
+                "original-name", pp_print_device_get_device_original_name (self->new_device),
+                "device-uri", pp_print_device_get_device_uri (self->new_device),
+                "device-id", pp_print_device_get_device_id (self->new_device),
+                "ppd-name", pp_print_device_get_device_ppd (self->new_device),
+                "ppd-file-name", pp_print_device_get_device_ppd (self->new_device),
+                "info", pp_print_device_get_device_info (self->new_device),
+                "location", pp_print_device_get_device_location (self->new_device),
+                "make-and-model", pp_print_device_get_device_make_and_model (self->new_device),
+                "host-name", pp_print_device_get_host_name (self->new_device),
+                "host-port", pp_print_device_get_host_port (self->new_device),
+                "is-network-device", pp_print_device_is_network_device (self->new_device),
+                "window-id", window_id,
+                NULL);
+
+  return new_printer;
 }
