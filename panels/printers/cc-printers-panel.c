@@ -967,8 +967,8 @@ printer_add_cb (CcPrintersPanel *self)
 
   toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
   self->pp_new_printer_dialog = pp_new_printer_dialog_new (self->all_ppds_list,
-                                                     new_printer_dialog_response_cb,
-                                                     self);
+                                                           new_printer_dialog_response_cb,
+                                                           self);
 
   gtk_window_set_transient_for (GTK_WINDOW (self->pp_new_printer_dialog),
                                             GTK_WINDOW (toplevel));
