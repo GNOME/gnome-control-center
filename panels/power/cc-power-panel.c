@@ -35,6 +35,7 @@
 #include "cc-battery-row.h"
 #include "cc-brightness-scale.h"
 #include "cc-power-profile-row.h"
+#include "cc-power-profile-info-row.h"
 #include "cc-power-panel.h"
 #include "cc-power-resources.h"
 #include "cc-util.h"

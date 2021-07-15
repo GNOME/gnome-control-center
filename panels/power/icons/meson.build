@@ -13,3 +13,8 @@ foreach icon_size: icon_sizes
     install_dir: join_paths(control_center_icondir, 'hicolor', icon_size, 'apps')
   )
 endforeach
+
+install_data(
+  'info-symbolic.svg',
+  install_dir: join_paths(control_center_icondir, 'hicolor', 'scalable', 'status')
+)

@@ -22,6 +22,7 @@ sources = files(
   'cc-brightness-scale.c',
   'cc-power-panel.c',
   'cc-power-profile-row.c',
+  'cc-power-profile-info-row.c'
 )
 
 sources += gnome.mkenums_simple(
