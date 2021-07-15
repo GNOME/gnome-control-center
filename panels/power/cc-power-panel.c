@@ -242,25 +242,29 @@ add_device (CcPowerPanel *self, UpDevice *device)
 }
 
 static void
+empty_listbox (GtkListBox *listbox)
+{
+  g_autoptr(GList) children = NULL;
+  GList *l;
+
+  children = gtk_container_get_children (GTK_CONTAINER (listbox));
+  for (l = children; l != NULL; l = l->next)
+    gtk_container_remove (GTK_CONTAINER (listbox), l->data);
+}
+
+static void
 up_client_changed (CcPowerPanel *self)
 {
-  g_autoptr(GList) battery_children = NULL;
-  g_autoptr(GList) device_children = NULL;
-  GList *l;
   gint i;
   UpDeviceKind kind;
   guint n_batteries;
   gboolean on_ups;
   g_autoptr(UpDevice) composite = NULL;
 
-  battery_children = gtk_container_get_children (GTK_CONTAINER (self->battery_listbox));
-  for (l = battery_children; l != NULL; l = l->next)
-    gtk_container_remove (GTK_CONTAINER (self->battery_listbox), l->data);
+  empty_listbox (self->battery_listbox);
   gtk_widget_hide (GTK_WIDGET (self->battery_section));
 
-  device_children = gtk_container_get_children (GTK_CONTAINER (self->device_listbox));
-  for (l = device_children; l != NULL; l = l->next)
-    gtk_container_remove (GTK_CONTAINER (self->device_listbox), l->data);
+  empty_listbox (self->device_listbox);
   gtk_widget_hide (GTK_WIDGET (self->device_section));
 
 #ifdef TEST_FAKE_DEVICES
