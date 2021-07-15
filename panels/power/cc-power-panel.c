@@ -888,7 +888,7 @@ keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *lis
   if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
     return FALSE;
 
-  direction == GTK_DIR_UP ? GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD;
+  direction = GTK_DIR_UP ? GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD;
 
   return gtk_widget_child_focus (GTK_WIDGET (self), direction);
 }
