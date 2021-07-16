@@ -1368,34 +1368,35 @@ performance_profile_set_inhibited (CcPowerPanel  *self,
 }
 
 static void
-performance_profile_set_degraded (CcPowerPanel *self)
+power_profile_update_info_boxes (CcPowerPanel *self)
 {
-  g_autoptr(GVariant) variant = NULL;
-  const char *degraded, *text;
+  g_autoptr(GVariant) degraded_variant = NULL;
+  const char *degraded = NULL;
   CcPowerProfileInfoRow *row;
 
   empty_listbox (self->power_profile_info_listbox);
   gtk_widget_hide (GTK_WIDGET (self->power_profile_info_listbox));
 
-  variant = g_dbus_proxy_get_cached_property (self->power_profiles_proxy, "PerformanceDegraded");
-  if (!variant)
-    return;
-  degraded = g_variant_get_string (variant, NULL);
-  if (*degraded == '\0')
-    return;
+  degraded_variant = g_dbus_proxy_get_cached_property (self->power_profiles_proxy, "PerformanceDegraded");
+  if (degraded_variant)
+    degraded = g_variant_get_string (degraded_variant, NULL);
+  if (degraded && *degraded != '\0')
+    {
+      const char *text;
 
-  gtk_widget_show (GTK_WIDGET (self->power_profile_info_listbox));
+      gtk_widget_show (GTK_WIDGET (self->power_profile_info_listbox));
 
-  if (g_str_equal (degraded, "high-operating-temperature"))
-    text = _("Performance mode temporarily disabled due to high operating temperature.");
-  else if (g_str_equal (degraded, "lap-detected"))
-    text = _("Lap detected: performance mode temporarily disabled. Move the device to a stable surface to restore.");
-  else
-    text = _("Performance mode temporarily disabled.");
+      if (g_str_equal (degraded, "high-operating-temperature"))
+        text = _("Performance mode temporarily disabled due to high operating temperature.");
+      else if (g_str_equal (degraded, "lap-detected"))
+        text = _("Lap detected: performance mode temporarily disabled. Move the device to a stable surface to restore.");
+      else
+        text = _("Performance mode temporarily disabled.");
 
-  row = cc_power_profile_info_row_new (text);
-  gtk_widget_show (GTK_WIDGET (row));
-  gtk_container_add (GTK_CONTAINER (self->power_profile_info_listbox), GTK_WIDGET (row));
+      row = cc_power_profile_info_row_new (text);
+      gtk_widget_show (GTK_WIDGET (row));
+      gtk_container_add (GTK_CONTAINER (self->power_profile_info_listbox), GTK_WIDGET (row));
+    }
 }
 
 static void
@@ -1459,7 +1460,7 @@ power_profiles_properties_changed_cb (CcPowerPanel *self,
         }
       else if (g_strcmp0 (key, "PerformanceDegraded") == 0)
         {
-          performance_profile_set_degraded (self);
+          power_profile_update_info_boxes (self);
         }
       else if (g_strcmp0 (key, "ActiveProfile") == 0)
         {
@@ -1600,8 +1601,6 @@ setup_power_profiles (CcPowerPanel *self)
   self->has_performance_degraded = performance_degraded != NULL;
   if (performance_degraded == NULL)
     performance_inhibited = variant_lookup_string (props, "PerformanceInhibited");
-  else
-    performance_profile_set_degraded (self);
   active_profile = variant_lookup_string (props, "ActiveProfile");
 
   last_button = NULL;
@@ -1649,6 +1648,9 @@ setup_power_profiles (CcPowerPanel *self)
 
   self->power_profiles_prop_id = g_signal_connect_object (G_OBJECT (self->power_profiles_proxy), "g-properties-changed",
                                                           G_CALLBACK (power_profiles_properties_changed_cb), self, G_CONNECT_SWAPPED);
+
+  if (self->has_performance_degraded)
+    power_profile_update_info_boxes (self);
 }
 
 static void
