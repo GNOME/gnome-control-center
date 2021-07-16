@@ -1415,7 +1415,7 @@ power_profile_update_info_boxes (CcPowerPanel *self)
       if (g_str_equal (degraded, "high-operating-temperature"))
         text = _("Performance mode temporarily disabled due to high operating temperature.");
       else if (g_str_equal (degraded, "lap-detected"))
-        text = _("Lap detected: performance mode temporarily disabled. Move the device to a stable surface to restore.");
+        text = _("Lap detected: performance mode temporarily unavailable. Move the device to a stable surface to restore.");
       else
         text = _("Performance mode temporarily disabled.");
 
