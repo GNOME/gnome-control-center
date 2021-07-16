@@ -331,7 +331,6 @@ pp_ppd_selection_dialog_dispose (GObject *object)
   g_clear_pointer (&self->ppd_name, g_free);
   g_clear_pointer (&self->ppd_display_name, g_free);
   g_clear_pointer (&self->manufacturer, g_free);
-  g_clear_pointer (&self->list, ppd_list_free);
 
   G_OBJECT_CLASS (pp_ppd_selection_dialog_parent_class)->dispose (object);
 }
