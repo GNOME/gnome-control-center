@@ -973,7 +973,7 @@ printer_add_cb (CcPrintersPanel *self)
   gtk_window_set_transient_for (GTK_WINDOW (self->pp_new_printer_dialog),
                                             GTK_WINDOW (toplevel));
 
-  gtk_widget_show_all (self->pp_new_printer_dialog);
+  gtk_widget_show (self->pp_new_printer_dialog);
 }
 
 static void
