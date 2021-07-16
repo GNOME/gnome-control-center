@@ -1343,6 +1343,18 @@ setup_power_saving (CcPowerPanel *self)
 #endif
 }
 
+static const char *
+variant_lookup_string (GVariant   *dict,
+                       const char *key)
+{
+  GVariant *variant;
+
+  variant = g_variant_lookup_value (dict, key, G_VARIANT_TYPE_STRING);
+  if (!variant)
+    return NULL;
+  return g_variant_get_string (variant, NULL);
+}
+
 static void
 performance_profile_set_active (CcPowerPanel  *self,
                                 const char    *profile_str)
@@ -1425,18 +1437,6 @@ perf_profile_list_box_sort (GtkListBoxRow *row1,
   if (row1_profile > row2_profile)
     return 1;
   return 0;
-}
-
-static const char *
-variant_lookup_string (GVariant   *dict,
-                       const char *key)
-{
-  GVariant *variant;
-
-  variant = g_variant_lookup_value (dict, key, G_VARIANT_TYPE_STRING);
-  if (!variant)
-    return NULL;
-  return g_variant_get_string (variant, NULL);
 }
 
 static void
