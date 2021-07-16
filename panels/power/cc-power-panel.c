@@ -24,6 +24,7 @@
 #include <libupower-glib/upower.h>
 #include <glib/gi18n.h>
 #include <gnome-settings-daemon/gsd-enums.h>
+#include <gio/gdesktopappinfo.h>
 #include <handy.h>
 
 #ifdef HAVE_NETWORK_MANAGER
@@ -1383,11 +1384,24 @@ static void
 power_profile_update_info_boxes (CcPowerPanel *self)
 {
   g_autoptr(GVariant) degraded_variant = NULL;
+  g_autoptr(GVariant) holds_variant = NULL;
+  g_autoptr(GVariant) profile_variant = NULL;
+  guint i, num_children;
   const char *degraded = NULL;
+  const char *profile;
   CcPowerProfileInfoRow *row;
+  int next_insert = 0;
 
   empty_listbox (self->power_profile_info_listbox);
   gtk_widget_hide (GTK_WIDGET (self->power_profile_info_listbox));
+
+  profile_variant = g_dbus_proxy_get_cached_property (self->power_profiles_proxy, "ActiveProfile");
+  if (!profile_variant)
+    {
+      g_warning ("No 'ActiveProfile' property on power-profiles-daemon service");
+      return;
+    }
+  profile = g_variant_get_string (profile_variant, NULL);
 
   degraded_variant = g_dbus_proxy_get_cached_property (self->power_profiles_proxy, "PerformanceDegraded");
   if (degraded_variant)
@@ -1408,6 +1422,66 @@ power_profile_update_info_boxes (CcPowerPanel *self)
       row = cc_power_profile_info_row_new (text);
       gtk_widget_show (GTK_WIDGET (row));
       gtk_container_add (GTK_CONTAINER (self->power_profile_info_listbox), GTK_WIDGET (row));
+      if (g_str_equal (profile, "performance"))
+        next_insert = 1;
+    }
+
+  holds_variant = g_dbus_proxy_get_cached_property (self->power_profiles_proxy, "ActiveProfileHolds");
+  if (!holds_variant)
+    {
+      g_warning ("No 'ActiveProfileHolds' property on power-profiles-daemon service");
+      return;
+    }
+
+  num_children = g_variant_n_children (holds_variant);
+  for (i = 0; i < num_children; i++)
+    {
+      g_autoptr(GDesktopAppInfo) app_info = NULL;
+      g_autoptr(GVariant) hold_variant = NULL;
+      g_autofree char *text = NULL;
+      const char *app_id, *held_profile, *reason, *name;
+
+      hold_variant = g_variant_get_child_value (holds_variant, i);
+      if (!hold_variant || !g_variant_is_of_type (hold_variant, G_VARIANT_TYPE ("a{sv}")))
+        continue;
+
+      app_id = variant_lookup_string (hold_variant, "ApplicationId");
+      if (!app_id)
+        continue;
+      app_info = g_desktop_app_info_new (app_id);
+      name = app_info ? g_app_info_get_name (G_APP_INFO (app_info)) : app_id;
+      held_profile = variant_lookup_string (hold_variant, "Profile");
+      reason = variant_lookup_string (hold_variant, "Reason");
+      g_debug ("Adding info row for %s hold by %s: %s", held_profile, app_id, reason);
+
+      if (g_strcmp0 (held_profile, "power-saver") == 0 &&
+          g_strcmp0 (app_id, "org.gnome.SettingsDaemon.Power") == 0)
+        {
+          text = g_strdup (_("Low battery: power saver enabled. Previous mode will be restored when battery is sufficiently charged."));
+        }
+      else
+        {
+          switch (cc_power_profile_from_str (held_profile))
+          {
+          case CC_POWER_PROFILE_POWER_SAVER:
+            /* translators: "%s" is an application name */
+            text = g_strdup_printf (_("Power Saver mode activated by “%s”."), name);
+            break;
+          case CC_POWER_PROFILE_PERFORMANCE:
+            /* translators: "%s" is an application name */
+            text = g_strdup_printf (_("Performance mode activated by “%s”."), name);
+            break;
+          default:
+            g_assert_not_reached ();
+          }
+        }
+
+      row = cc_power_profile_info_row_new (text);
+      gtk_widget_show (GTK_WIDGET (row));
+      if (g_strcmp0 (held_profile, profile) != 0)
+        gtk_list_box_insert (GTK_LIST_BOX (self->power_profile_info_listbox), GTK_WIDGET (row), -1);
+      else
+        gtk_list_box_insert (GTK_LIST_BOX (self->power_profile_info_listbox), GTK_WIDGET (row), next_insert);
     }
 }
 
@@ -1458,7 +1532,8 @@ power_profiles_properties_changed_cb (CcPowerPanel *self,
             performance_profile_set_inhibited (self,
                                                g_variant_get_string (value, NULL));
         }
-      else if (g_strcmp0 (key, "PerformanceDegraded") == 0)
+      else if (g_strcmp0 (key, "PerformanceDegraded") == 0 ||
+               g_strcmp0 (key, "ActiveProfileHolds") == 0)
         {
           power_profile_update_info_boxes (self);
         }
