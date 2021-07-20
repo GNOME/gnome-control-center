@@ -537,6 +537,45 @@
             ]
         },
         {
+            "name": "perl",
+            "no-autogen": true,
+            "config-opts": [
+                "-des"
+            ],
+           "post-install": [
+               "find $FLATPAK_DEST/lib/perl5/5.32.1/x86_64-linux/auto/ -name \\*.so -exec chmod u+w {} +"
+           ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://www.cpan.org/src/5.0/perl-5.32.1.tar.gz",
+                    "sha256": "03b693901cd8ae807231b1787798cf1f2e0b8a56218d07b7da44f784a7caeb2c"
+                },
+               {
+                   "type": "script",
+                   "dest-filename": "configure",
+                   "commands": [
+                       "exec ./configure.gnu $@"
+                   ]
+               }
+            ]
+        },
+        {
+            "name": "yapp-driver",
+            "buildsystem": "simple",
+            "build-commands": [
+                "perl Makefile.PL PREFIX=/app",
+                "make install -j1"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://cpan.metacpan.org/authors/id/W/WB/WBRASWELL/Parse-Yapp-1.21.tar.gz",
+                    "sha256": "3810e998308fba2e0f4f26043035032b027ce51ce5c8a52a8b8e340ca65f13e5"
+                }
+            ]
+        },
+        {
             "name" : "samba",
             "buildsystem" : "autotools",
             "config-opts" : [
@@ -547,8 +586,8 @@
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://download.samba.org/pub/samba/stable/samba-4.11.0.tar.gz",
-                    "sha256" : "6adf1c74afff1f3f7e14060cc5a36111a6721d644ea51ed1b22da46051e48e9c"
+                    "url" : "https://download.samba.org/pub/samba/stable/samba-4.14.5.tar.gz",
+                    "sha256" : "bb6ef5d2f16b85288d823578abc453d9a80514c42e5a2ea2c4e3c60dc42335c3"
                 }
             ]
         },
