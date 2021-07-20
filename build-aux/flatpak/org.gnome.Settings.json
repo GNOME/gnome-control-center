@@ -537,6 +537,28 @@
             ]
         },
         {
+            "name": "yapp-driver",
+            "buildsystem": "simple",
+            "build-commands": [
+                "perl Makefile.PL",
+                "make install -j1"
+            ],
+            "build-options" : {
+                "env" :  {
+                    "PERL5LIB": "/app/lib/perl5/",
+                    "PERL_MM_OPT": "INSTALL_BASE=/app"
+                }
+            },
+            "cleanup": [ "*" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://cpan.metacpan.org/authors/id/W/WB/WBRASWELL/Parse-Yapp-1.21.tar.gz",
+                    "sha256": "3810e998308fba2e0f4f26043035032b027ce51ce5c8a52a8b8e340ca65f13e5"
+                }
+            ]
+        },
+        {
             "name" : "samba",
             "buildsystem" : "autotools",
             "config-opts" : [
@@ -544,11 +566,17 @@
                 "--without-ad-dc",
                 "--without-pam"
             ],
+            "build-options" : {
+                "env" :  {
+                    "PERL5LIB": "/app/lib/perl5/",
+                    "PERL_MM_OPT": "INSTALL_BASE=/app"
+                }
+            },
             "sources" : [
                 {
                     "type" : "archive",
-                    "url" : "https://download.samba.org/pub/samba/stable/samba-4.11.0.tar.gz",
-                    "sha256" : "6adf1c74afff1f3f7e14060cc5a36111a6721d644ea51ed1b22da46051e48e9c"
+                    "url" : "https://download.samba.org/pub/samba/stable/samba-4.14.5.tar.gz",
+                    "sha256" : "bb6ef5d2f16b85288d823578abc453d9a80514c42e5a2ea2c4e3c60dc42335c3"
                 }
             ]
         },
