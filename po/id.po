@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-07-13 19:46+0000\n"
-"PO-Revision-Date: 2021-07-17 21:52+0700\n"
+"POT-Creation-Date: 2021-07-19 22:59+0000\n"
+"PO-Revision-Date: 2021-07-20 20:31+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -1250,7 +1250,7 @@ msgstr[0] "%d jam"
 msgstr[1] "%d jam"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1205
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1213
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3542,7 +3542,7 @@ msgstr "Perangkat nirkabel tak mendukung mode Hotspot"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1093 panels/power/cc-power-panel.c:1104
+#: panels/power/cc-power-panel.c:1101 panels/power/cc-power-panel.c:1112
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4359,7 +4359,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "_Tampilkan Isi Pesan dalam Layar Kunci"
 
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1099 panels/power/cc-power-panel.c:1106
+#: panels/power/cc-power-panel.c:1107 panels/power/cc-power-panel.c:1114
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4578,7 +4578,7 @@ msgid "Gaming input device"
 msgstr "Perangkat masukan permainan"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:387
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:395
 #: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Baterai"
@@ -4593,46 +4593,84 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Ekstra"
 
-#: panels/power/cc-power-panel.c:385
+#: panels/power/cc-power-panel.c:393
 msgid "Batteries"
 msgstr "Batera"
 
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:656
 msgid "When _idle"
 msgstr "Ket_ika menganggur"
 
-#: panels/power/cc-power-panel.c:1033
+#: panels/power/cc-power-panel.c:1041
 msgid "Suspend"
 msgstr "Suspensi"
 
-#: panels/power/cc-power-panel.c:1034
+#: panels/power/cc-power-panel.c:1042
 msgid "Power Off"
 msgstr "Matikan"
 
-#: panels/power/cc-power-panel.c:1035
+#: panels/power/cc-power-panel.c:1043
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1044
 msgid "Nothing"
 msgstr "Bukan apapun"
 
-#: panels/power/cc-power-panel.c:1095
+#: panels/power/cc-power-panel.c:1103
 msgid "When on battery power"
 msgstr "Ketika memakai baterai"
 
-#: panels/power/cc-power-panel.c:1097
+#: panels/power/cc-power-panel.c:1105
 msgid "When plugged in"
 msgstr "Ketika ditancapkan"
 
-#: panels/power/cc-power-panel.c:1212
+#: panels/power/cc-power-panel.c:1220
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Tak pernah"
 
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1277
 msgid "Automatic suspend"
 msgstr "Suspensi otomatis"
+
+#: panels/power/cc-power-panel.c:1416
+msgid ""
+"Performance mode temporarily disabled due to high operating temperature."
+msgstr ""
+"Mode kinerja dinonaktifkan sementara karena suhu pengoperasian yang tinggi."
+
+#: panels/power/cc-power-panel.c:1418
+msgid ""
+"Lap detected: performance mode temporarily unavailable. Move the device to a "
+"stable surface to restore."
+msgstr ""
+"Putaran terdeteksi: mode kinerja untuk sementara tidak tersedia. Pindahkan "
+"perangkat ke permukaan yang stabil untuk memulihkan."
+
+#: panels/power/cc-power-panel.c:1420
+msgid "Performance mode temporarily disabled."
+msgstr "Mode kinerja dinonaktifkan untuk sementara."
+
+#: panels/power/cc-power-panel.c:1460
+msgid ""
+"Low battery: power saver enabled. Previous mode will be restored when "
+"battery is sufficiently charged."
+msgstr ""
+"Baterai rendah: penghemat daya diaktifkan. Mode sebelumnya akan dipulihkan "
+"ketika baterai terisi cukup."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1468
+#, c-format
+msgid "Power Saver mode activated by “%s”."
+msgstr "Mode Penghemat Daya diaktifkan oleh \"%s\"."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1472
+#, c-format
+msgid "Performance mode activated by “%s”."
+msgstr "Mode kinerja diaktifkan oleh \"%s\"."
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4702,83 +4740,83 @@ msgstr "Mode Daya"
 msgid "Affects system performance and power usage."
 msgstr "Mempengaruhi kinerja sistem dan penggunaan daya."
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:142
 msgid "Power Saving"
 msgstr "Penghematan Daya"
 
-#: panels/power/cc-power-panel.ui:135
+#: panels/power/cc-power-panel.ui:146
 msgid "_Screen Brightness"
 msgstr "Kecerahan _Layar"
 
-#: panels/power/cc-power-panel.ui:151
+#: panels/power/cc-power-panel.ui:162
 msgid "Automatic Brightness"
 msgstr "Kecerahan Otomatis"
 
-#: panels/power/cc-power-panel.ui:164
+#: panels/power/cc-power-panel.ui:175
 msgid "_Keyboard Brightness"
 msgstr "_Kecerahan Papan Tik"
 
-#: panels/power/cc-power-panel.ui:180
+#: panels/power/cc-power-panel.ui:191
 msgid "Dim Screen When Inactive"
 msgstr "Redupkan Layar Ketika Tak Aktif"
 
-#: panels/power/cc-power-panel.ui:193
+#: panels/power/cc-power-panel.ui:204
 msgid "_Blank Screen"
 msgstr "K_osongkan Layar"
 
-#: panels/power/cc-power-panel.ui:201
+#: panels/power/cc-power-panel.ui:212
 msgid "_Automatic Suspend"
 msgstr "Suspensi Otom_atis"
 
-#: panels/power/cc-power-panel.ui:217
+#: panels/power/cc-power-panel.ui:228
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.ui:218
+#: panels/power/cc-power-panel.ui:229
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Wi-Fi dapat dimatikan untuk menghemat daya."
 
-#: panels/power/cc-power-panel.ui:233
+#: panels/power/cc-power-panel.ui:244
 msgid "_Mobile Broadband"
 msgstr "Data _Seluler"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:245
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr "Data seluler (3G, 4G, LTE, dsb.) dapat dimatikan untuk menghemat daya."
 
-#: panels/power/cc-power-panel.ui:249
+#: panels/power/cc-power-panel.ui:260
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.ui:250
+#: panels/power/cc-power-panel.ui:261
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth dapat dimatikan untuk menghemat daya."
 
-#: panels/power/cc-power-panel.ui:267
+#: panels/power/cc-power-panel.ui:278
 msgid "Suspend & Power Button"
 msgstr "Tombol Suspensi & Daya"
 
-#: panels/power/cc-power-panel.ui:271
+#: panels/power/cc-power-panel.ui:282
 msgid "Po_wer Button Behavior"
 msgstr "Perilaku Tombol Da_ya"
 
-#: panels/power/cc-power-panel.ui:279
+#: panels/power/cc-power-panel.ui:290
 msgid "Show Battery _Percentage"
 msgstr "Tampilkan _Persentase Baterai"
 
-#: panels/power/cc-power-panel.ui:325
+#: panels/power/cc-power-panel.ui:336
 msgid "Automatic Suspend"
 msgstr "Suspensi Otomatis"
 
-#: panels/power/cc-power-panel.ui:350
+#: panels/power/cc-power-panel.ui:361
 msgid "_Plugged In"
 msgstr "Ditanca_pkan"
 
-#: panels/power/cc-power-panel.ui:366
+#: panels/power/cc-power-panel.ui:377
 msgid "On _Battery Power"
 msgstr "Memakai Tenaga _Baterai"
 
-#: panels/power/cc-power-panel.ui:411 panels/power/cc-power-panel.ui:471
+#: panels/power/cc-power-panel.ui:422 panels/power/cc-power-panel.ui:482
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Tunda"
