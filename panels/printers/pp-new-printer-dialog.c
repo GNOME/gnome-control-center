@@ -390,7 +390,7 @@ device_selection_changed_cb (PpNewPrinterDialog *self)
       gtk_widget_set_sensitive (GTK_WIDGET (self->unlock_button), authentication_needed);
 
       if (authentication_needed)
-        gtk_stack_set_visible_child_name (self->headerbar_topright_buttons, "unlock-button");
+        gtk_stack_set_visible_child_name (self->headerbar_topright_buttons, "unlock_button");
       else
         gtk_stack_set_visible_child_name (self->headerbar_topright_buttons, ADDPRINTER_PAGE);
     }
@@ -1755,7 +1755,7 @@ new_printer_dialog_response_cb (PpNewPrinterDialog *self,
                                             GTK_WINDOW (self));
 
               /* New device will be set at return from ppd selection */
-              gtk_widget_show (self->ppd_selection_dialog);
+              gtk_widget_show (GTK_WIDGET (self->ppd_selection_dialog));
             }
           else
             {

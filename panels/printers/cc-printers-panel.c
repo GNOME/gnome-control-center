@@ -944,17 +944,18 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
   PpNewPrinterDialog      *pp_new_printer_dialog =  PP_NEW_PRINTER_DIALOG (_dialog);
   g_autoptr(PpNewPrinter)  new_printer = NULL;
 
-  if (response_id == GTK_RESPONSE_OK) {
-    new_printer = pp_new_printer_dialog_get_new_printer (pp_new_printer_dialog);
-    g_object_get(G_OBJECT (new_printer), "name", &self->new_printer_name, NULL);
+  if (response_id == GTK_RESPONSE_OK)
+    {
+      new_printer = pp_new_printer_dialog_get_new_printer (pp_new_printer_dialog);
+      g_object_get(G_OBJECT (new_printer), "name", &self->new_printer_name, NULL);
 
-    actualize_printers_list (self);
+      actualize_printers_list (self);
 
-    pp_new_printer_add_async (new_printer,
-                              cc_panel_get_cancellable (CC_PANEL (self)),
-                              printer_add_async_cb,
-                              self);
-  }
+      pp_new_printer_add_async (new_printer,
+                                cc_panel_get_cancellable (CC_PANEL (self)),
+                                printer_add_async_cb,
+                                self);
+    }
 
   gtk_widget_destroy (GTK_WIDGET (pp_new_printer_dialog));
   self->pp_new_printer_dialog = NULL;
@@ -973,7 +974,7 @@ printer_add_cb (CcPrintersPanel *self)
   gtk_window_set_transient_for (GTK_WINDOW (self->pp_new_printer_dialog),
                                             GTK_WINDOW (toplevel));
 
-  gtk_widget_show (self->pp_new_printer_dialog);
+  gtk_widget_show (GTK_WIDGET (self->pp_new_printer_dialog));
 }
 
 static void

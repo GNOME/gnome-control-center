@@ -219,7 +219,7 @@ select_ppd_in_dialog (PpDetailsDialog *self)
         gtk_window_set_transient_for (GTK_WINDOW (self->pp_ppd_selection_dialog),
                                       GTK_WINDOW (self));
 
-        gtk_widget_show (self->pp_ppd_selection_dialog);
+        gtk_widget_show (GTK_WIDGET (self->pp_ppd_selection_dialog));
     }
 }
 
