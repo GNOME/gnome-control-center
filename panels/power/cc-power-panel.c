@@ -92,6 +92,8 @@ struct _CcPowerPanel
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
   HdyPreferencesGroup *power_profile_section;
+  HdyActionRow      *power_saver_low_battery_row;
+  GtkSwitch         *power_saver_low_battery_switch;
   GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
   GtkLabel          *suspend_on_battery_delay_label;
@@ -254,6 +256,24 @@ empty_listbox (GtkListBox *listbox)
   children = gtk_container_get_children (GTK_CONTAINER (listbox));
   for (l = children; l != NULL; l = l->next)
     gtk_container_remove (GTK_CONTAINER (listbox), l->data);
+}
+
+static void
+update_power_saver_low_battery_row_visibility (CcPowerPanel *self)
+{
+  g_autoptr(UpDevice) composite = NULL;
+  UpDeviceKind kind;
+
+  composite = up_client_get_display_device (self->up_client);
+  g_object_get (composite, "kind", &kind, NULL);
+  if (kind != UP_DEVICE_KIND_BATTERY ||
+      !self->power_profiles_proxy)
+    {
+      gtk_widget_hide (GTK_WIDGET (self->power_saver_low_battery_row));
+      return;
+    }
+
+  gtk_widget_show (GTK_WIDGET (self->power_saver_low_battery_row));
 }
 
 static void
@@ -426,6 +446,8 @@ up_client_changed (CcPowerPanel *self)
           add_device (self, device);
         }
     }
+
+  update_power_saver_low_battery_row_visibility (self);
 }
 
 static void
@@ -1726,6 +1748,8 @@ setup_power_profiles (CcPowerPanel *self)
 
   if (self->has_performance_degraded)
     power_profile_update_info_boxes (self);
+
+  update_power_saver_low_battery_row_visibility (self);
 }
 
 static void
@@ -1838,6 +1862,8 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_section);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_row);
+  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_saver_low_battery_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_battery_delay_label);
@@ -1894,6 +1920,9 @@ cc_power_panel_init (CcPowerPanel *self)
   setup_power_profiles (self);
 
   setup_power_saving (self);
+  g_settings_bind (self->gsd_settings, "power-saver-profile-on-low-battery",
+                   self->power_saver_low_battery_switch, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   setup_general_section (self);
 
