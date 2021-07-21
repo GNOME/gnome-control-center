@@ -166,6 +166,7 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&self->bt_rfkill);
   g_clear_object (&self->bt_properties);
   g_clear_object (&self->iio_proxy);
+  g_clear_object (&self->power_profiles_proxy);
 #ifdef HAVE_NETWORK_MANAGER
   g_clear_object (&self->nm_client);
 #endif
