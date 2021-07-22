@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-06-20 05:33+0000\n"
-"PO-Revision-Date: 2021-06-25 19:20+0100\n"
+"POT-Creation-Date: 2021-07-19 22:59+0000\n"
+"PO-Revision-Date: 2021-07-22 11:27+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -1262,7 +1262,7 @@ msgstr[0] "%d hora"
 msgstr[1] "%d horas"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1205
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1213
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3560,7 +3560,7 @@ msgstr "O dispositivo sem-fio não suporta o modo ponto de acesso"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1093 panels/power/cc-power-panel.c:1104
+#: panels/power/cc-power-panel.c:1101 panels/power/cc-power-panel.c:1112
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4382,7 +4382,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Ver o _conteúdo da mensagem no ecrã bloqueado"
 
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1099 panels/power/cc-power-panel.c:1106
+#: panels/power/cc-power-panel.c:1107 panels/power/cc-power-panel.c:1114
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4599,7 +4599,7 @@ msgid "Gaming input device"
 msgstr "Dispositivo para jogos"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:387
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:395
 #: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Bateria"
@@ -4614,46 +4614,85 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
-#: panels/power/cc-power-panel.c:385
+#: panels/power/cc-power-panel.c:393
 msgid "Batteries"
 msgstr "Baterias"
 
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:656
 msgid "When _idle"
 msgstr "Quando _inativo"
 
-#: panels/power/cc-power-panel.c:1033
+#: panels/power/cc-power-panel.c:1041
 msgid "Suspend"
 msgstr "Suspender"
 
-#: panels/power/cc-power-panel.c:1034
+#: panels/power/cc-power-panel.c:1042
 msgid "Power Off"
 msgstr "Desligar"
 
-#: panels/power/cc-power-panel.c:1035
+#: panels/power/cc-power-panel.c:1043
 msgid "Hibernate"
 msgstr "Hibernar"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1044
 msgid "Nothing"
 msgstr "Nada"
 
-#: panels/power/cc-power-panel.c:1095
+#: panels/power/cc-power-panel.c:1103
 msgid "When on battery power"
 msgstr "Quando funciona da bateria"
 
-#: panels/power/cc-power-panel.c:1097
+#: panels/power/cc-power-panel.c:1105
 msgid "When plugged in"
 msgstr "Quando ligado à corrente"
 
-#: panels/power/cc-power-panel.c:1212
+#: panels/power/cc-power-panel.c:1220
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Nunca"
 
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1277
 msgid "Automatic suspend"
 msgstr "Suspender automaticamente"
+
+#: panels/power/cc-power-panel.c:1416
+msgid ""
+"Performance mode temporarily disabled due to high operating temperature."
+msgstr ""
+"Modo de desempenho temporariamente desativado devido à alta temperatura de "
+"funcionamento."
+
+#: panels/power/cc-power-panel.c:1418
+msgid ""
+"Lap detected: performance mode temporarily unavailable. Move the device to a "
+"stable surface to restore."
+msgstr ""
+"Colo detetado: modo de desempenho temporariamente indisponível. Mova o "
+"dispositivo para uma superfície estável para restaurar."
+
+#: panels/power/cc-power-panel.c:1420
+msgid "Performance mode temporarily disabled."
+msgstr "Modo de desempenho temporariamente desativado."
+
+#: panels/power/cc-power-panel.c:1460
+msgid ""
+"Low battery: power saver enabled. Previous mode will be restored when "
+"battery is sufficiently charged."
+msgstr ""
+"Bateria fraca: poupança de energia ativada. O modo anterior será restaurado "
+"quando a bateria estiver suficientemente carregada."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1468
+#, c-format
+msgid "Power Saver mode activated by “%s”."
+msgstr "Modo poupança de energia ativado por \"%s\"."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1472
+#, c-format
+msgid "Performance mode activated by “%s”."
+msgstr "Modo de desempenho ativado por \"%s\"."
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4723,85 +4762,85 @@ msgstr "Modo de energia"
 msgid "Affects system performance and power usage."
 msgstr "Afeta o desempenho do sistema e o uso de energia."
 
-#: panels/power/cc-power-panel.ui:131
+#: panels/power/cc-power-panel.ui:142
 msgid "Power Saving"
 msgstr "Poupança de energia"
 
-#: panels/power/cc-power-panel.ui:135
+#: panels/power/cc-power-panel.ui:146
 msgid "_Screen Brightness"
 msgstr "_Brilho do ecrã"
 
-#: panels/power/cc-power-panel.ui:151
+#: panels/power/cc-power-panel.ui:162
 msgid "Automatic Brightness"
 msgstr "Brilho automático"
 
-#: panels/power/cc-power-panel.ui:164
+#: panels/power/cc-power-panel.ui:175
 msgid "_Keyboard Brightness"
 msgstr "_Brilho do teclado"
 
-#: panels/power/cc-power-panel.ui:180
+#: panels/power/cc-power-panel.ui:191
 msgid "Dim Screen When Inactive"
 msgstr "Escurecer o ecrã quando inativo"
 
-#: panels/power/cc-power-panel.ui:193
+#: panels/power/cc-power-panel.ui:204
 msgid "_Blank Screen"
 msgstr "Ecrã _desligado"
 
-#: panels/power/cc-power-panel.ui:201
+#: panels/power/cc-power-panel.ui:212
 msgid "_Automatic Suspend"
 msgstr "_Suspender automaticamente"
 
-#: panels/power/cc-power-panel.ui:217
+#: panels/power/cc-power-panel.ui:228
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.ui:218
+#: panels/power/cc-power-panel.ui:229
 msgid "Wi-Fi can be turned off to save power."
 msgstr "O Wi-Fi pode desligar-se para poupar energia."
 
-#: panels/power/cc-power-panel.ui:233
+#: panels/power/cc-power-panel.ui:244
 msgid "_Mobile Broadband"
 msgstr "Banda larga _móvel"
 
-#: panels/power/cc-power-panel.ui:234
+#: panels/power/cc-power-panel.ui:245
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "A banda larga móvel (3G, 4G, LTE, etc.) pode ser desligada para poupar "
 "energia."
 
-#: panels/power/cc-power-panel.ui:249
+#: panels/power/cc-power-panel.ui:260
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.ui:250
+#: panels/power/cc-power-panel.ui:261
 msgid "Bluetooth can be turned off to save power."
 msgstr "O Bluetooth pode ser desligado para poupar energia."
 
-#: panels/power/cc-power-panel.ui:267
+#: panels/power/cc-power-panel.ui:278
 msgid "Suspend & Power Button"
 msgstr "Botão de suspender e desligar"
 
-#: panels/power/cc-power-panel.ui:271
+#: panels/power/cc-power-panel.ui:282
 msgid "Po_wer Button Behavior"
 msgstr "Comportamento do botão de desligar"
 
-#: panels/power/cc-power-panel.ui:279
+#: panels/power/cc-power-panel.ui:290
 msgid "Show Battery _Percentage"
 msgstr "Ver a percentagem da bateria"
 
-#: panels/power/cc-power-panel.ui:325
+#: panels/power/cc-power-panel.ui:336
 msgid "Automatic Suspend"
 msgstr "Suspender automaticamente"
 
-#: panels/power/cc-power-panel.ui:350
+#: panels/power/cc-power-panel.ui:361
 msgid "_Plugged In"
 msgstr "_Ligado à corrente"
 
-#: panels/power/cc-power-panel.ui:366
+#: panels/power/cc-power-panel.ui:377
 msgid "On _Battery Power"
 msgstr "A funcionar da _bateria"
 
-#: panels/power/cc-power-panel.ui:411 panels/power/cc-power-panel.ui:471
+#: panels/power/cc-power-panel.ui:422 panels/power/cc-power-panel.ui:482
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Atraso"
