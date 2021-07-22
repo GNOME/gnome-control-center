@@ -72,8 +72,6 @@ struct _CcPowerPanel
   HdyComboRow       *blank_screen_row;
   GtkListBoxRow     *brightness_row;
   CcBrightnessScale *brightness_scale;
-  GtkListBoxRow     *bt_row;
-  GtkSwitch         *bt_switch;
   GtkListBox        *device_listbox;
   HdyPreferencesGroup *device_section;
   GtkListBoxRow     *dim_screen_row;
@@ -105,9 +103,6 @@ struct _CcPowerPanel
   gboolean       has_batteries;
   char          *chassis_type;
 
-  GDBusProxy    *bt_rfkill;
-  GDBusProxy    *bt_properties;
-
   GDBusProxy    *iio_proxy;
   guint          iio_proxy_watch_id;
 
@@ -138,8 +133,6 @@ cc_power_panel_dispose (GObject *object)
   g_clear_pointer ((GtkWidget **) &self->automatic_suspend_dialog, gtk_widget_destroy);
   g_clear_pointer (&self->devices, g_ptr_array_unref);
   g_clear_object (&self->up_client);
-  g_clear_object (&self->bt_rfkill);
-  g_clear_object (&self->bt_properties);
   g_clear_object (&self->iio_proxy);
   g_clear_object (&self->power_profiles_proxy);
   if (self->iio_proxy_watch_id != 0)
@@ -659,61 +652,6 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
     }
 }
 
-static void
-bt_set_powered (CcPowerPanel *self,
-                gboolean      powered)
-{
-  g_dbus_proxy_call (self->bt_properties,
-		     "Set",
-		     g_variant_new_parsed ("('org.gnome.SettingsDaemon.Rfkill', 'BluetoothAirplaneMode', %v)",
-					   g_variant_new_boolean (!powered)),
-		     G_DBUS_CALL_FLAGS_NONE,
-		     -1,
-		     cc_panel_get_cancellable (CC_PANEL (self)),
-		     NULL, NULL);
-}
-
-static void
-bt_switch_changed_cb (CcPowerPanel *self)
-{
-  gboolean powered;
-
-  powered = gtk_switch_get_active (self->bt_switch);
-
-  g_debug ("Setting bt power %s", powered ? "on" : "off");
-
-  bt_set_powered (self, powered);
-}
-
-static void
-bt_powered_state_changed (CcPowerPanel *self)
-{
-  gboolean powered, has_airplane_mode;
-  g_autoptr(GVariant) v1 = NULL;
-  g_autoptr(GVariant) v2 = NULL;
-
-  v1 = g_dbus_proxy_get_cached_property (self->bt_rfkill, "BluetoothHasAirplaneMode");
-  has_airplane_mode = g_variant_get_boolean (v1);
-
-  if (!has_airplane_mode)
-    {
-      g_debug ("BluetoothHasAirplaneMode is false, hiding Bluetooth power row");
-      gtk_widget_hide (GTK_WIDGET (self->bt_row));
-      return;
-    }
-
-  v2 = g_dbus_proxy_get_cached_property (self->bt_rfkill, "BluetoothAirplaneMode");
-  powered = !g_variant_get_boolean (v2);
-
-  g_debug ("bt powered state changed to %s", powered ? "on" : "off");
-
-  gtk_widget_show (GTK_WIDGET (self->bt_row));
-
-  g_signal_handlers_block_by_func (self->bt_switch, bt_switch_changed_cb, self);
-  gtk_switch_set_active (self->bt_switch, powered);
-  g_signal_handlers_unblock_by_func (self->bt_switch, bt_switch_changed_cb, self);
-}
-
 static gboolean
 keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *list)
 {
@@ -1132,32 +1070,6 @@ setup_power_saving (CcPowerPanel *self)
       set_ac_battery_ui_mode (self);
       update_automatic_suspend_label (self);
     }
-
-#ifdef HAVE_BLUETOOTH
-  self->bt_rfkill = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
-                                                              G_DBUS_PROXY_FLAGS_NONE,
-                                                              "org.gnome.SettingsDaemon.Rfkill",
-                                                              "/org/gnome/SettingsDaemon/Rfkill",
-                                                              "org.gnome.SettingsDaemon.Rfkill",
-                                                              NULL,
-                                                              NULL);
-
-  if (self->bt_rfkill)
-    {
-      self->bt_properties = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
-                                                                      G_DBUS_PROXY_FLAGS_NONE,
-                                                                      "org.gnome.SettingsDaemon.Rfkill",
-                                                                      "/org/gnome/SettingsDaemon/Rfkill",
-                                                                      "org.freedesktop.DBus.Properties",
-                                                                      NULL,
-                                                                      NULL);
-    }
-
-  g_signal_connect_object (self->bt_rfkill, "g-properties-changed",
-                           G_CALLBACK (bt_powered_state_changed), self, G_CONNECT_SWAPPED);
-
-  bt_powered_state_changed (self);
-#endif
 }
 
 static const char *
@@ -1643,8 +1555,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, brightness_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, brightness_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, bt_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, bt_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
@@ -1670,7 +1580,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, als_switch_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, automatic_suspend_label_mnemonic_activate_cb);
-  gtk_widget_class_bind_template_callback (widget_class, bt_switch_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, has_brightness_cb);
   gtk_widget_class_bind_template_callback (widget_class, has_kbd_brightness_cb);
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_row_changed_cb);
