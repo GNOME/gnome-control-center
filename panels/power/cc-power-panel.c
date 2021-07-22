@@ -27,10 +27,6 @@
 #include <gio/gdesktopappinfo.h>
 #include <handy.h>
 
-#ifdef HAVE_NETWORK_MANAGER
-#include <NetworkManager.h>
-#endif
-
 #include "shell/cc-object-storage.h"
 #include "list-box-helper.h"
 #include "cc-battery-row.h"
@@ -86,8 +82,6 @@ struct _CcPowerPanel
   GtkListBoxRow     *kbd_brightness_row;
   CcBrightnessScale *kbd_brightness_scale;
   GtkSizeGroup      *level_sizegroup;
-  GtkListBoxRow     *mobile_row;
-  GtkSwitch         *mobile_switch;
   HdyComboRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
@@ -102,8 +96,6 @@ struct _CcPowerPanel
   GtkComboBox       *suspend_on_ac_delay_combo;
   GtkLabel          *suspend_on_ac_label;
   GtkSwitch         *suspend_on_ac_switch;
-  GtkListBoxRow     *wifi_row;
-  GtkSwitch         *wifi_switch;
 
   GSettings     *gsd_settings;
   GSettings     *session_settings;
@@ -124,10 +116,6 @@ struct _CcPowerPanel
   CcPowerProfileRow *power_profiles_row[NUM_CC_POWER_PROFILES];
   gboolean       power_profiles_in_update;
   gboolean       has_performance_degraded;
-
-#ifdef HAVE_NETWORK_MANAGER
-  NMClient      *nm_client;
-#endif
 };
 
 CC_PANEL_REGISTER (CcPowerPanel, cc_power_panel)
@@ -154,9 +142,6 @@ cc_power_panel_dispose (GObject *object)
   g_clear_object (&self->bt_properties);
   g_clear_object (&self->iio_proxy);
   g_clear_object (&self->power_profiles_proxy);
-#ifdef HAVE_NETWORK_MANAGER
-  g_clear_object (&self->nm_client);
-#endif
   if (self->iio_proxy_watch_id != 0)
     g_bus_unwatch_name (self->iio_proxy_watch_id);
   self->iio_proxy_watch_id = 0;
@@ -729,184 +714,6 @@ bt_powered_state_changed (CcPowerPanel *self)
   g_signal_handlers_unblock_by_func (self->bt_switch, bt_switch_changed_cb, self);
 }
 
-#ifdef HAVE_NETWORK_MANAGER
-static gboolean
-has_wifi_devices (NMClient *client)
-{
-  const GPtrArray *devices;
-  NMDevice *device;
-  gint i;
-
-  if (!nm_client_get_nm_running (client))
-    return FALSE;
-
-  devices = nm_client_get_devices (client);
-  if (devices == NULL)
-    return FALSE;
-
-  for (i = 0; i < devices->len; i++)
-    {
-      device = g_ptr_array_index (devices, i);
-      switch (nm_device_get_device_type (device))
-        {
-        case NM_DEVICE_TYPE_WIFI:
-          return TRUE;
-        default:
-          break;
-        }
-    }
-
-  return FALSE;
-}
-
-static void
-wifi_switch_changed_cb (CcPowerPanel *self)
-{
-  gboolean enabled;
-
-  enabled = gtk_switch_get_active (self->wifi_switch);
-  g_debug ("Setting wifi %s", enabled ? "enabled" : "disabled");
-  nm_client_wireless_set_enabled (self->nm_client, enabled);
-}
-
-static gboolean
-has_mobile_devices (NMClient *client)
-{
-  const GPtrArray *devices;
-  NMDevice *device;
-  gint i;
-
-  if (!nm_client_get_nm_running (client))
-    return FALSE;
-
-  devices = nm_client_get_devices (client);
-  if (devices == NULL)
-    return FALSE;
-
-  for (i = 0; i < devices->len; i++)
-    {
-      device = g_ptr_array_index (devices, i);
-      switch (nm_device_get_device_type (device))
-        {
-        case NM_DEVICE_TYPE_MODEM:
-          return TRUE;
-        default:
-          break;
-        }
-    }
-
-  return FALSE;
-}
-
-static void
-mobile_switch_changed_cb (CcPowerPanel *self)
-{
-  gboolean enabled;
-
-  enabled = gtk_switch_get_active (self->mobile_switch);
-  g_debug ("Setting wwan %s", enabled ? "enabled" : "disabled");
-  nm_client_wwan_set_enabled (self->nm_client, enabled);
-}
-
-static void
-nm_client_state_changed (CcPowerPanel *self)
-{
-  gboolean visible;
-  gboolean active;
-  gboolean sensitive;
-
-  visible = has_wifi_devices (self->nm_client);
-  active = nm_client_networking_get_enabled (self->nm_client) &&
-           nm_client_wireless_get_enabled (self->nm_client) &&
-           nm_client_wireless_hardware_get_enabled (self->nm_client);
-  sensitive = nm_client_networking_get_enabled (self->nm_client) &&
-              nm_client_wireless_hardware_get_enabled (self->nm_client);
-
-  g_debug ("wifi state changed to %s", active ? "enabled" : "disabled");
-
-  g_signal_handlers_block_by_func (self->wifi_switch, wifi_switch_changed_cb, self);
-  gtk_switch_set_active (self->wifi_switch, active);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->wifi_switch), sensitive);
-  gtk_widget_set_visible (GTK_WIDGET (self->wifi_row), visible);
-  g_signal_handlers_unblock_by_func (self->wifi_switch, wifi_switch_changed_cb, self);
-
-  visible = has_mobile_devices (self->nm_client);
-
-  /* Set the switch active, if wwan is enabled. */
-  active = nm_client_networking_get_enabled (self->nm_client) &&
-           (nm_client_wwan_get_enabled (self->nm_client) &&
-            nm_client_wwan_hardware_get_enabled (self->nm_client));
-  sensitive = nm_client_networking_get_enabled (self->nm_client) &&
-              nm_client_wwan_hardware_get_enabled (self->nm_client);
-
-  g_debug ("mobile state changed to %s", active ? "enabled" : "disabled");
-
-  g_signal_handlers_block_by_func (self->mobile_switch, mobile_switch_changed_cb, self);
-  gtk_switch_set_active (self->mobile_switch, active);
-  gtk_widget_set_sensitive (GTK_WIDGET (self->mobile_switch), sensitive);
-  gtk_widget_set_visible (GTK_WIDGET (self->mobile_row), visible);
-  g_signal_handlers_unblock_by_func (self->mobile_switch, mobile_switch_changed_cb, self);
-}
-
-static void
-nm_device_changed (CcPowerPanel *self)
-{
-  gtk_widget_set_visible (GTK_WIDGET (self->wifi_row), has_wifi_devices (self->nm_client));
-  gtk_widget_set_visible (GTK_WIDGET (self->mobile_row), has_mobile_devices (self->nm_client));
-}
-
-static void
-setup_nm_client (CcPowerPanel *self,
-                 NMClient     *client)
-{
-  self->nm_client = client;
-
-  g_signal_connect_object (self->nm_client, "notify",
-                           G_CALLBACK (nm_client_state_changed), self, G_CONNECT_SWAPPED);
-  g_signal_connect_object (self->nm_client, "device-added",
-                           G_CALLBACK (nm_device_changed), self, G_CONNECT_SWAPPED);
-  g_signal_connect_object (self->nm_client, "device-removed",
-                           G_CALLBACK (nm_device_changed), self, G_CONNECT_SWAPPED);
-
-  nm_client_state_changed (self);
-  nm_device_changed (self);
-}
-
-static void
-nm_client_ready_cb (GObject *source_object,
-                    GAsyncResult *res,
-                    gpointer user_data)
-{
-  CcPowerPanel *self;
-  NMClient *client;
-  g_autoptr(GError) error = NULL;
-
-  client = nm_client_new_finish (res, &error);
-  if (!client)
-    {
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_warning ("Failed to create NetworkManager client: %s",
-                     error->message);
-
-          self = user_data;
-          gtk_widget_set_sensitive (GTK_WIDGET (self->wifi_row), FALSE);
-          gtk_widget_set_sensitive (GTK_WIDGET (self->mobile_row), FALSE);
-        }
-      return;
-    }
-
-  self = user_data;
-
-  /* Setup the client */
-  setup_nm_client (self, client);
-
-  /* Store the object in the cache too */
-  cc_object_storage_add_object (CC_OBJECT_NMCLIENT, client);
-}
-
-#endif
-
 static gboolean
 keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *list)
 {
@@ -1325,14 +1132,6 @@ setup_power_saving (CcPowerPanel *self)
       set_ac_battery_ui_mode (self);
       update_automatic_suspend_label (self);
     }
-
-#ifdef HAVE_NETWORK_MANAGER
-  /* Create and store a NMClient instance if it doesn't exist yet */
-  if (cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
-    setup_nm_client (self, cc_object_storage_get_object (CC_OBJECT_NMCLIENT));
-  else
-    nm_client_new_async (cc_panel_get_cancellable (CC_PANEL (self)), nm_client_ready_cb, self);
-#endif
 
 #ifdef HAVE_BLUETOOTH
   self->bt_rfkill = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SESSION,
@@ -1854,8 +1653,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_scale);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, mobile_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_info_listbox);
@@ -1870,8 +1667,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_delay_combo);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_label);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, suspend_on_ac_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, wifi_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, wifi_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, als_switch_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, automatic_suspend_label_mnemonic_activate_cb);
@@ -1880,11 +1675,9 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, has_kbd_brightness_cb);
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, mobile_switch_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_button_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_profiles_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, automatic_suspend_row_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, wifi_switch_changed_cb);
 }
 
 static void

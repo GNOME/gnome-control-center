@@ -47,10 +47,6 @@ deps = common_deps + [
   upower_glib_dep
 ]
 
-if host_is_linux
-  deps += network_manager_deps
-endif
-
 if host_is_linux_not_s390
   deps += gnome_bluetooth_dep
 endif
