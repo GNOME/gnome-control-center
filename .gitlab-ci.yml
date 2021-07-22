@@ -2,67 +2,10 @@ include:
  - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/5888c7388134cbe4661600222fe9befb10441f6e/templates/fedora.yml'
 
 variables:
-  FDO_DISTRIBUTION_TAG: latest
-  FDO_DISTRIBUTION_VERSION: rawhide
   FDO_UPSTREAM_REPO: gnome/gnome-control-center
-  # Expiry sets fdo.expires on the image
-  FDO_EXPIRES_AFTER: 8w
-  FEDORA_IMAGE: "$CI_REGISTRY/$FDO_UPSTREAM_REPO/fedora/$FDO_DISTRIBUTION_VERSION:$FDO_DISTRIBUTION_TAG"
-  # NOTES:
-  # - gobject-introspection-devel is needed for gsettings-desktop-schemas
-  FEDORA_DEPENDENCIES: >
-    @c-development @development-tools
-    git
-    llvm clang libasan libtsan libubsan gcovr
-    meson
-    accountsservice-devel
-    cheese-libs-devel
-    chrpath
-    colord-devel colord-gtk-devel
-    cups-devel
-    desktop-file-utils
-    docbook-style-xsl
-    flatpak-devel
-    gdk-pixbuf2-devel
-    gettext
-    glib2-devel
-    gobject-introspection-devel
-    gnome-bluetooth-libs-devel
-    gnome-desktop3-devel
-    gnome-online-accounts-devel
-    gnome-settings-daemon-devel
-    grilo-devel
-    gsettings-desktop-schemas-devel
-    gsound-devel
-    gtk3-devel ibus-devel
-    intltool
-    libcanberra-devel
-    libgtop2-devel
-    libgudev-devel
-    libnma-devel
-    libpwquality-devel
-    libsmbclient-devel
-    libsoup-devel
-    libudisks2-devel
-    libwacom-devel
-    libX11-devel
-    libXi-devel
-    libxml2-devel
-    libxslt
-    ModemManager-glib-devel
-    NetworkManager-libnm-devel
-    polkit-devel
-    pulseaudio-libs-devel
-    upower-devel
-    python3-dbusmock
-    xorg-x11-server-Xvfb
-    mesa-dri-drivers
-    libsecret-devel
-  GIT_SUBMODULE_STRATEGY: normal
-
-image: "$FEDORA_IMAGE"
 
 stages:
+  - prepare
   - build
   - test
   - manual
@@ -96,6 +39,90 @@ stages:
   echo "== Testing ==" &&
   meson test -C _build --verbose --no-stdsplit
 
+.fedora.container.common:
+  variables:
+    # When branching a stable release, change 'main'
+    # to the release number/branch to ensure that
+    # a new image will be created, tailored for the
+    # stable branch.
+    # Could probably also switch away from rawhide,
+    # to stable fedora branch as well.
+    FDO_DISTRIBUTION_TAG: '2021-07-22.0-main'
+    FDO_DISTRIBUTION_VERSION: rawhide
+
+#############################################
+#          Create CI Docker Images          #
+#############################################
+
+# See also https://gitlab.freedesktop.org/freedesktop/ci-templates
+build.container.fedora@x86_64:
+  extends:
+  - '.fdo.container-build@fedora'
+  - '.fedora.container.common'
+  stage: 'prepare'
+  variables:
+    # no need to pull the whole tree for rebuilding the image
+    GIT_STRATEGY: none
+    # Expiry sets fdo.expires on the image
+    FDO_EXPIRES_AFTER: 8w
+    # NOTES:
+    # - gobject-introspection-devel is needed for gsettings-desktop-schemas
+    FDO_DISTRIBUTION_PACKAGES: >-
+      @c-development @development-tools
+      git
+      llvm clang libasan libtsan libubsan gcovr
+      meson
+      accountsservice-devel
+      cheese-libs-devel
+      chrpath
+      colord-devel colord-gtk-devel
+      cups-devel
+      desktop-file-utils
+      docbook-style-xsl
+      flatpak-devel
+      gdk-pixbuf2-devel
+      gettext
+      glib2-devel
+      gobject-introspection-devel
+      gnome-bluetooth-libs-devel
+      gnome-desktop3-devel
+      gnome-online-accounts-devel
+      gnome-settings-daemon-devel
+      grilo-devel
+      gsettings-desktop-schemas-devel
+      gsound-devel
+      gtk3-devel ibus-devel
+      intltool
+      libcanberra-devel
+      libgtop2-devel
+      libgudev-devel
+      libnma-devel
+      libpwquality-devel
+      libsmbclient-devel
+      libsoup-devel
+      libudisks2-devel
+      libwacom-devel
+      libX11-devel
+      libXi-devel
+      libxml2-devel
+      libxslt
+      ModemManager-glib-devel
+      NetworkManager-libnm-devel
+      polkit-devel
+      pulseaudio-libs-devel
+      upower-devel
+      python3-dbusmock
+      xorg-x11-server-Xvfb
+      mesa-dri-drivers
+      libsecret-devel
+    FDO_DISTRIBUTION_EXEC: |-
+      git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
+        cd gsettings-desktop-schemas && \
+        meson . _build --prefix=/usr && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd ..
+
 ##
 # Stage: Build
 #
@@ -104,6 +131,10 @@ stages:
 # any of them.
 ##
 build:
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
+
   <<: *save_untracked_files
   stage: build
 
@@ -130,6 +161,9 @@ build:
 # Runs the unit tests.
 ##
 test:
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
   <<: *save_build_logs
   stage: test
 
@@ -153,6 +187,9 @@ test:
 
 # Runs the coverage test.
 coverage:
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
   <<: *save_build_logs
   stage: test
   variables:
@@ -187,6 +224,9 @@ coverage:
 # Publishes the Coverage Report generated above
 ##
 pages:
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
   stage: deploy
   dependencies:
     - coverage
@@ -267,6 +307,9 @@ flatpak:
 
 # Runs the sanitizers [address, thread, undefined, and memory].
 .sanitizer: &sanitizer
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
   <<: *save_build_logs
   stage: manual
   when: manual
@@ -281,6 +324,9 @@ flatpak:
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
 asan:
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
   <<: *sanitizer
   # ASAN requires debugging capabilities
   tags: [ asan ]
@@ -291,41 +337,26 @@ asan:
     LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
 
 tsan:
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=thread"
 
 ubsan:
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=undefined"
 
 msan:
+  extends:
+    - '.fdo.distribution-image@fedora'
+    - '.fedora.container.common'
   <<: *sanitizer
   variables:
     BUILD_OPTS: "-Db_sanitize=memory"
     CC: "clang"
-
-#############################################
-#          Create CI Docker Images          #
-#############################################
-
-# See also https://gitlab.freedesktop.org/freedesktop/ci-templates
-container_fedora_build:
-  extends: .fdo.container-build@fedora
-  # The templates reference the local registry, but we need the fdo one
-  only:
-    variables:
-      - $CI_PIPELINE_SOURCE == "schedule" && $CRON_TASK == "BUILD_CI_IMAGES"
-  variables:
-    GIT_STRATEGY: none # no need to pull the whole tree for rebuilding the image
-    FDO_FORCE_REBUILD: 1 # Force rebuilding the image
-    FDO_DISTRIBUTION_PACKAGES: $FEDORA_DEPENDENCIES
-    FDO_DISTRIBUTION_EXEC: |
-      git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
-        cd gsettings-desktop-schemas && \
-        meson . _build --prefix=/usr && \
-        ninja -C _build && \
-        ninja -C _build install && \
-        cd ..
-
