@@ -139,7 +139,7 @@
         <child>
           <object class="HdyPreferencesGroup" id="power_saving_section">
             <property name="visible">True</property>
-            <property name="title" translatable="yes">Power Saving</property>
+            <property name="title" translatable="yes">Power Saving Options</property>
             <child>
               <object class="HdyActionRow" id="brightness_row">
                 <property name="visible">True</property>
@@ -188,7 +188,8 @@
             <child>
               <object class="HdyActionRow" id="dim_screen_row">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Dim Screen When Inactive</property>
+                <property name="title" translatable="yes">Dim Screen</property>
+                <property name="subtitle" translatable="yes">Reduces the screen brightness when the computer is inactive.</property>
                 <property name="activatable_widget">dim_screen_switch</property>
                 <child>
                   <object class="GtkSwitch" id="dim_screen_switch">
@@ -201,7 +202,8 @@
             <child>
               <object class="HdyComboRow" id="blank_screen_row">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">_Blank Screen</property>
+                <property name="title" translatable="yes">Screen _Blank</property>
+                <property name="subtitle" translatable="yes">Turns the screen off after a period of inactivity.</property>
                 <property name="use_underline">True</property>
                 <signal name="notify::selected-index" handler="blank_screen_row_changed_cb" object="CcPowerPanel" swapped="yes"/>
               </object>
@@ -225,6 +227,7 @@
               <object class="HdyActionRow" id="automatic_suspend_row">
                 <property name="visible">False</property>
                 <property name="title" translatable="yes">_Automatic Suspend</property>
+                <property name="subtitle" translatable="yes">Pauses the computer after a period of inactivity.</property>
                 <property name="use_underline">True</property>
                 <property name="activatable">True</property>
                 <signal name="activated" handler="automatic_suspend_row_activated_cb" swapped="yes"/>
