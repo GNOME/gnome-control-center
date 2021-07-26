@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-07-19 22:59+0000\n"
-"PO-Revision-Date: 2021-07-20 15:04+0300\n"
+"POT-Creation-Date: 2021-07-26 16:56+0000\n"
+"PO-Revision-Date: 2021-07-26 20:35+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -465,7 +465,7 @@ msgstr "Вимкнути перемикання режиму «у літаку»
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1595
+#: panels/printers/pp-new-printer-dialog.c:1392
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1250,7 +1250,7 @@ msgstr[2] "%d годин"
 msgstr[3] "%d година"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1213
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1230
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3564,7 +3564,7 @@ msgstr "Бездротовий пристрій не підтримує режи
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1101 panels/power/cc-power-panel.c:1112
+#: panels/power/cc-power-panel.c:1118 panels/power/cc-power-panel.c:1129
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4383,7 +4383,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Показувати в_міст повідомлення в заблокованому екрані"
 
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1107 panels/power/cc-power-panel.c:1114
+#: panels/power/cc-power-panel.c:1124 panels/power/cc-power-panel.c:1131
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4611,7 +4611,7 @@ msgid "Gaming input device"
 msgstr "Ігровий пристрій введення"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:395
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:410
 #: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Батарея"
@@ -4626,83 +4626,84 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Додаткова"
 
-#: panels/power/cc-power-panel.c:393
+#: panels/power/cc-power-panel.c:408
 msgid "Batteries"
 msgstr "Батареї"
 
-#: panels/power/cc-power-panel.c:656
+#: panels/power/cc-power-panel.c:673
 msgid "When _idle"
 msgstr "Коли _бездіяльний"
 
-#: panels/power/cc-power-panel.c:1041
+#: panels/power/cc-power-panel.c:1058
 msgid "Suspend"
 msgstr "Призупинити"
 
-#: panels/power/cc-power-panel.c:1042
+#: panels/power/cc-power-panel.c:1059
 msgid "Power Off"
 msgstr "Вимкнути"
 
-#: panels/power/cc-power-panel.c:1043
+#: panels/power/cc-power-panel.c:1060
 msgid "Hibernate"
 msgstr "Приспати"
 
-#: panels/power/cc-power-panel.c:1044
+#: panels/power/cc-power-panel.c:1061
 msgid "Nothing"
 msgstr "Нічого"
 
-#: panels/power/cc-power-panel.c:1103
+#: panels/power/cc-power-panel.c:1120
 msgid "When on battery power"
 msgstr "Коли живлення від батареї"
 
-#: panels/power/cc-power-panel.c:1105
+#: panels/power/cc-power-panel.c:1122
 msgid "When plugged in"
 msgstr "Коли під'єднано"
 
-#: panels/power/cc-power-panel.c:1220
+#: panels/power/cc-power-panel.c:1237
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Ніколи"
 
-#: panels/power/cc-power-panel.c:1277
+#: panels/power/cc-power-panel.c:1294
 msgid "Automatic suspend"
 msgstr "Автоматично призупиняти роботу"
 
-#: panels/power/cc-power-panel.c:1416
+#: panels/power/cc-power-panel.c:1433
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
-"Режим підвищеної швидкодії тимчасово вимкнено через високу операційну температуру."
+"Режим підвищеної швидкодії тимчасово вимкнено через високу операційну "
+"температуру."
 
-#: panels/power/cc-power-panel.c:1418
+#: panels/power/cc-power-panel.c:1435
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr ""
-"Виявлено розташування на нетривкій поверхні: режим високої швидкодії тимчасово недоступний. Перенесіть пристрій на стабільну поверхню, щоб відновити доступ."
+"Виявлено розташування на нетривкій поверхні: режим високої швидкодії "
+"тимчасово недоступний. Перенесіть пристрій на стабільну поверхню, щоб "
+"відновити доступ."
 
-#: panels/power/cc-power-panel.c:1420
-#| msgid "Performance mode unavailable"
+#: panels/power/cc-power-panel.c:1437
 msgid "Performance mode temporarily disabled."
 msgstr "Режим підвищеної швидкодії тимчасово вимкнено."
 
-#: panels/power/cc-power-panel.c:1460
+#: panels/power/cc-power-panel.c:1477
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr ""
-"Низький рівень заряду акумулятора: увімкнено заощадження енергії. Попередній режим буде відновлено за достатнього рівня заряду акумулятора."
+"Низький рівень заряду акумулятора: увімкнено заощадження енергії. Попередній "
+"режим буде відновлено за достатнього рівня заряду акумулятора."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1468
+#: panels/power/cc-power-panel.c:1485
 #, c-format
 msgid "Power Saver mode activated by “%s”."
-msgstr ""
-"Режим заощадження енергії активовано «%s»."
+msgstr "Режим заощадження енергії активовано «%s»."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1472
+#: panels/power/cc-power-panel.c:1489
 #, c-format
-#| msgid "Performance mode unavailable"
 msgid "Performance mode activated by “%s”."
 msgstr "Режим високої швидкодії активовано «%s»."
 
@@ -4799,67 +4800,79 @@ msgid "_Blank Screen"
 msgstr "По_гасити екран"
 
 #: panels/power/cc-power-panel.ui:212
+#| msgid "Power Saver"
+msgid "Automatic Power Saver"
+msgstr "Автоматичне заощадження енергії"
+
+#: panels/power/cc-power-panel.ui:213
+msgid "Enables power saver mode when battery is low."
+msgstr ""
+"Вмикає режим заощадження енергії при низькому рівні заряду акумулятора."
+
+#: panels/power/cc-power-panel.ui:227
 msgid "_Automatic Suspend"
 msgstr "_Автоматично призупиняти"
 
-#: panels/power/cc-power-panel.ui:228
+#: panels/power/cc-power-panel.ui:243
 msgid "_Wi-Fi"
 msgstr "Wi_-Fi"
 
-#: panels/power/cc-power-panel.ui:229
+#: panels/power/cc-power-panel.ui:244
 msgid "Wi-Fi can be turned off to save power."
 msgstr "Wi-Fi може бути вимкнений для заощадження енергії."
 
-#: panels/power/cc-power-panel.ui:244
+#: panels/power/cc-power-panel.ui:259
 msgid "_Mobile Broadband"
 msgstr "_Мобільна широкосмугова радіомережа"
 
-#: panels/power/cc-power-panel.ui:245
+#: panels/power/cc-power-panel.ui:260
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "Мобільна мережа (LTE, 4G, 3G тощо) може бути вимкнена для заощадження "
 "енергії."
 
-#: panels/power/cc-power-panel.ui:260
+#: panels/power/cc-power-panel.ui:275
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.ui:261
+#: panels/power/cc-power-panel.ui:276
 msgid "Bluetooth can be turned off to save power."
 msgstr "Bluetooth може бути вимкнений для заощадження енергії."
 
-#: panels/power/cc-power-panel.ui:278
+#: panels/power/cc-power-panel.ui:293
 msgid "Suspend & Power Button"
 msgstr "Кнопка призупинення і вимикання"
 
-#: panels/power/cc-power-panel.ui:282
+#: panels/power/cc-power-panel.ui:297
 msgid "Po_wer Button Behavior"
 msgstr "Поведінка _кнопки живлення"
 
-#: panels/power/cc-power-panel.ui:290
+#: panels/power/cc-power-panel.ui:305
 msgid "Show Battery _Percentage"
 msgstr "Показувати _відсоток заряду акумулятора"
 
-#: panels/power/cc-power-panel.ui:336
+#: panels/power/cc-power-panel.ui:351
 msgid "Automatic Suspend"
 msgstr "Автоматично призупиняти"
 
-#: panels/power/cc-power-panel.ui:361
+#: panels/power/cc-power-panel.ui:376
 msgid "_Plugged In"
 msgstr "_Під'єднано"
 
-#: panels/power/cc-power-panel.ui:377
+#: panels/power/cc-power-panel.ui:392
 msgid "On _Battery Power"
 msgstr "Живлення від _батареї"
 
-#: panels/power/cc-power-panel.ui:422 panels/power/cc-power-panel.ui:482
+#: panels/power/cc-power-panel.ui:437 panels/power/cc-power-panel.ui:497
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Затримка"
 
 #: panels/power/cc-power-profile-row.c:62
 msgid "Lap detected: performance mode unavailable"
-msgstr "Виявлено розташування на нетривкій поверхні: режим високої швидкодії недоступний"
+msgstr ""
+"Виявлено розташування на нетривкій поверхні: режим високої швидкодії "
+"недоступний"
 
 #: panels/power/cc-power-profile-row.c:64
 msgid "High hardware temperature: performance mode unavailable"
@@ -4938,17 +4951,17 @@ msgid "Printer “%s” has been deleted"
 msgstr "Принтер «%s» було успішно вилучено"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:930
+#: panels/printers/cc-printers-panel.c:926
 msgid "Failed to add new printer."
 msgstr "Не вдалось додати принтер."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1209
+#: panels/printers/cc-printers-panel.c:1225
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не вдалось завантажити інтерфейс: %s"
 
-#: panels/printers/cc-printers-panel.c:1277
+#: panels/printers/cc-printers-panel.c:1293
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Розблокуйте, щоб додати принтери і змінити налаштування"
 
@@ -4968,8 +4981,8 @@ msgstr "Принтер;Черга;Друк;Папір;Чорнило;Тонер;
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:344
-#: panels/printers/pp-new-printer-dialog.c:401
+#: panels/printers/pp-new-printer-dialog.c:254
+#: panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "Додати принтер"
 
@@ -5023,7 +5036,7 @@ msgstr "Адреса"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:239
+#: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Драйвер"
 
@@ -5200,56 +5213,56 @@ msgstr "_Автентифікація"
 msgid "No Active Printer Jobs"
 msgstr "Немає робочих завдань для принтерів"
 
-#: panels/printers/pp-new-printer-dialog.c:359
+#: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
 msgstr "Розблокувати сервер друкування"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "Розблокувати %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:367
+#: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Введіть користувача та пароль, щоб переглянути доступні принтери на %s."
 
-#: panels/printers/pp-new-printer-dialog.c:790
+#: panels/printers/pp-new-printer-dialog.c:587
 msgid "Searching for Printers"
 msgstr "Шукати принтери"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1578
+#: panels/printers/pp-new-printer-dialog.c:1375
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1583
+#: panels/printers/pp-new-printer-dialog.c:1380
 msgid "Serial Port"
 msgstr "Послідовний порт"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1590
+#: panels/printers/pp-new-printer-dialog.c:1387
 msgid "Parallel Port"
 msgstr "Паралельний порт"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1632
+#: panels/printers/pp-new-printer-dialog.c:1429
 #, c-format
 msgid "Location: %s"
 msgstr "Розміщення: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1637
+#: panels/printers/pp-new-printer-dialog.c:1434
 #, c-format
 msgid "Address: %s"
 msgstr "Адреса: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1461
 msgid "Server requires authentication"
 msgstr "Сервер потребує засвідчення"
 
@@ -5390,7 +5403,7 @@ msgid "No pre-filtering"
 msgstr "Без попереднього відсіювання"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:223
+#: panels/printers/pp-ppd-selection-dialog.c:220
 msgid "Manufacturer"
 msgstr "Виробник"
 
