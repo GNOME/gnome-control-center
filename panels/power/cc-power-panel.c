@@ -30,7 +30,6 @@
 #include "shell/cc-object-storage.h"
 #include "list-box-helper.h"
 #include "cc-battery-row.h"
-#include "cc-brightness-scale.h"
 #include "cc-power-profile-row.h"
 #include "cc-power-profile-info-row.h"
 #include "cc-power-panel.h"
@@ -70,15 +69,11 @@ struct _CcPowerPanel
   GtkSizeGroup      *battery_row_sizegroup;
   HdyPreferencesGroup *battery_section;
   HdyComboRow       *blank_screen_row;
-  GtkListBoxRow     *brightness_row;
-  CcBrightnessScale *brightness_scale;
   GtkListBox        *device_listbox;
   HdyPreferencesGroup *device_section;
   GtkListBoxRow     *dim_screen_row;
   GtkSwitch         *dim_screen_switch;
   HdyPreferencesGroup *general_section;
-  GtkListBoxRow     *kbd_brightness_row;
-  CcBrightnessScale *kbd_brightness_scale;
   GtkSizeGroup      *level_sizegroup;
   HdyComboRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
@@ -105,6 +100,7 @@ struct _CcPowerPanel
 
   GDBusProxy    *iio_proxy;
   guint          iio_proxy_watch_id;
+  gboolean       has_brightness;
 
   GDBusProxy    *power_profiles_proxy;
   guint          power_profiles_prop_id;
@@ -469,10 +465,7 @@ static void
 als_enabled_state_changed (CcPowerPanel *self)
 {
   gboolean enabled;
-  gboolean has_brightness = FALSE;
   gboolean visible = FALSE;
-
-  has_brightness = cc_brightness_scale_get_has_brightness (self->brightness_scale);
 
   if (self->iio_proxy != NULL)
     {
@@ -485,7 +478,7 @@ als_enabled_state_changed (CcPowerPanel *self)
   g_debug ("ALS enabled: %s", enabled ? "on" : "off");
   g_signal_handlers_block_by_func (self->als_switch, als_switch_changed_cb, self);
   gtk_switch_set_active (self->als_switch, enabled);
-  gtk_widget_set_visible (GTK_WIDGET (self->als_row), visible && has_brightness);
+  gtk_widget_set_visible (GTK_WIDGET (self->als_row), visible && self->has_brightness);
   g_signal_handlers_unblock_by_func (self->als_switch, als_switch_changed_cb, self);
 }
 
@@ -933,29 +926,34 @@ can_suspend_or_hibernate (CcPowerPanel *self,
 }
 
 static void
-has_brightness_cb (CcPowerPanel *self)
+got_brightness_cb (GObject      *source_object,
+                   GAsyncResult *res,
+                   gpointer      user_data)
 {
-  gboolean has_brightness;
+  g_autoptr(GVariant) result = NULL;
+  g_autoptr(GError) error = NULL;
+  gint32 brightness = -1.0;
+  CcPowerPanel *self;
 
-  has_brightness = cc_brightness_scale_get_has_brightness (self->brightness_scale);
+  result = g_dbus_connection_call_finish (G_DBUS_CONNECTION (source_object), res, &error);
+  if (!result)
+    {
+      g_debug ("Failed to get Brightness property: %s", error->message);
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        return;
+    }
+  else
+    {
+      g_autoptr(GVariant) v = NULL;
+      g_variant_get (result, "(v)", &v);
+      brightness = v ? g_variant_get_int32 (v) : -1.0;
+    }
 
-  gtk_widget_set_visible (GTK_WIDGET (self->brightness_row), has_brightness);
-  gtk_widget_set_visible (GTK_WIDGET (self->dim_screen_row), has_brightness);
+  self = user_data;
+  self->has_brightness = brightness >= 0.0;
 
+  gtk_widget_set_visible (GTK_WIDGET (self->dim_screen_row), self->has_brightness);
   als_enabled_state_changed (self);
-
-}
-
-static void
-has_kbd_brightness_cb (CcPowerPanel *self,
-                       GParamSpec   *pspec,
-                       GObject      *object)
-{
-  gboolean has_brightness;
-
-  has_brightness = cc_brightness_scale_get_has_brightness (self->kbd_brightness_scale);
-
-  gtk_widget_set_visible (GTK_WIDGET (self->kbd_brightness_row), has_brightness);
 }
 
 static void
@@ -992,6 +990,8 @@ populate_blank_screen_row (HdyComboRow *combo_row)
 static void
 setup_power_saving (CcPowerPanel *self)
 {
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
   int value;
 
   /* ambient light sensor */
@@ -1004,6 +1004,33 @@ setup_power_saving (CcPowerPanel *self)
                       self, NULL);
   g_signal_connect_object (self->gsd_settings, "changed",
                            G_CALLBACK (als_enabled_setting_changed), self, G_CONNECT_SWAPPED);
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SESSION,
+                               cc_panel_get_cancellable (CC_PANEL (self)),
+                               &error);
+  if (connection)
+    {
+      g_dbus_connection_call (connection,
+                              "org.gnome.SettingsDaemon.Power",
+                              "/org/gnome/SettingsDaemon/Power",
+                              "org.freedesktop.DBus.Properties",
+                              "Get",
+                              g_variant_new ("(ss)",
+                                             "org.gnome.SettingsDaemon.Power.Screen",
+                                             "Brightness"),
+                              NULL,
+                              G_DBUS_CALL_FLAGS_NONE,
+                              -1,
+                              cc_panel_get_cancellable (CC_PANEL (self)),
+                              got_brightness_cb,
+                              self);
+    }
+  else
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("session bus not available: %s", error->message);
+    }
+
 
   g_settings_bind (self->gsd_settings, "idle-dim",
                    self->dim_screen_switch, "active",
@@ -1553,15 +1580,11 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_row_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, battery_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, blank_screen_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, brightness_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, brightness_scale);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, device_section);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, dim_screen_switch);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, general_section);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_row);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, kbd_brightness_scale);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, level_sizegroup);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_button_row);
   gtk_widget_class_bind_template_child (widget_class, CcPowerPanel, power_profile_listbox);
@@ -1580,8 +1603,6 @@ cc_power_panel_class_init (CcPowerPanelClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, als_switch_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, automatic_suspend_label_mnemonic_activate_cb);
-  gtk_widget_class_bind_template_callback (widget_class, has_brightness_cb);
-  gtk_widget_class_bind_template_callback (widget_class, has_kbd_brightness_cb);
   gtk_widget_class_bind_template_callback (widget_class, blank_screen_row_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
   gtk_widget_class_bind_template_callback (widget_class, power_button_row_changed_cb);
