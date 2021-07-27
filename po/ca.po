@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-07-22 10:29+0000\n"
+"POT-Creation-Date: 2021-07-26 16:56+0000\n"
 "PO-Revision-Date: 2020-12-21 13:29+0100\n"
 "Last-Translator: Miquel-Àngel Burgos i Fradeja <miquel.angel.burgos@gmail.com>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -478,7 +478,7 @@ msgstr "Desactiveu el mode d'avió per a habilitar el Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1595
+#: panels/printers/pp-new-printer-dialog.c:1392
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1266,7 +1266,7 @@ msgstr[0] "%d hora"
 msgstr[1] "%d hores"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1214
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1230
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -3593,7 +3593,7 @@ msgstr "El dispositiu sense fil no admet el mode punt d'accés Wi-Fi"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1102 panels/power/cc-power-panel.c:1113
+#: panels/power/cc-power-panel.c:1118 panels/power/cc-power-panel.c:1129
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4410,7 +4410,7 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "_Mostra el contingut dels missatges a la pantalla de bloqueig"
 
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1108 panels/power/cc-power-panel.c:1115
+#: panels/power/cc-power-panel.c:1124 panels/power/cc-power-panel.c:1131
 #: panels/universal-access/cc-ua-panel.c:328
 #: panels/universal-access/cc-ua-panel.c:603
 #: panels/universal-access/cc-ua-panel.c:613
@@ -4630,7 +4630,7 @@ msgid "Gaming input device"
 msgstr "Dispositiu d'entrada de joc"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:396
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:410
 #: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Bateria"
@@ -4645,67 +4645,68 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Addicional"
 
-#: panels/power/cc-power-panel.c:394
+#: panels/power/cc-power-panel.c:408
 msgid "Batteries"
 msgstr "Bateries"
 
-#: panels/power/cc-power-panel.c:657
+#: panels/power/cc-power-panel.c:673
 msgid "When _idle"
 msgstr "Quan estigui _inactiu"
 
-#: panels/power/cc-power-panel.c:1042
+#: panels/power/cc-power-panel.c:1058
 msgid "Suspend"
 msgstr "Atura temporalment"
 
-#: panels/power/cc-power-panel.c:1043
+#: panels/power/cc-power-panel.c:1059
 msgid "Power Off"
 msgstr "Apaga"
 
-#: panels/power/cc-power-panel.c:1044
+#: panels/power/cc-power-panel.c:1060
 msgid "Hibernate"
 msgstr "Hiberna"
 
-#: panels/power/cc-power-panel.c:1045
+#: panels/power/cc-power-panel.c:1061
 msgid "Nothing"
 msgstr "Res"
 
-#: panels/power/cc-power-panel.c:1104
+#: panels/power/cc-power-panel.c:1120
 msgid "When on battery power"
 msgstr "Quan s'utilitzi la bateria"
 
-#: panels/power/cc-power-panel.c:1106
+#: panels/power/cc-power-panel.c:1122
 msgid "When plugged in"
 msgstr "Quan estigui endollat"
 
-#: panels/power/cc-power-panel.c:1221
+#: panels/power/cc-power-panel.c:1237
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Mai"
 
-#: panels/power/cc-power-panel.c:1278
+#: panels/power/cc-power-panel.c:1294
 msgid "Automatic suspend"
 msgstr "Aturada temporal automàtica"
 
-#: panels/power/cc-power-panel.c:1417
+#: panels/power/cc-power-panel.c:1433
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "El mode de rendiment està temporalment inhabilitat a causa de l'alta "
 "temperatura d'operació."
 
-#: panels/power/cc-power-panel.c:1419
+#: panels/power/cc-power-panel.c:1435
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a"
 " stable surface to restore."
 msgstr ""
 "S'ha detectat una volta: el mode de rendiment no està disponible "
-"temporalment. Moveu el dispositiu a una superfície estable per a restaurar-lo."
+"temporalment. Moveu el dispositiu a una superfície estable per a restaurar-"
+"lo."
 
-#: panels/power/cc-power-panel.c:1421
+#: panels/power/cc-power-panel.c:1437
 msgid "Performance mode temporarily disabled."
 msgstr "Mode de rendiment inhabilitat temporalment."
 
-#: panels/power/cc-power-panel.c:1461
+#: panels/power/cc-power-panel.c:1477
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4714,13 +4715,13 @@ msgstr ""
 "restaurarà quan la bateria estigui prou carregada."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1469
+#: panels/power/cc-power-panel.c:1485
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Mode d'estalvi d'energia activat per «%s»."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1473
+#: panels/power/cc-power-panel.c:1489
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Mode de rendiment activat per «%s»."
@@ -4818,60 +4819,68 @@ msgid "_Blank Screen"
 msgstr "Pantalla en _blanc"
 
 #: panels/power/cc-power-panel.ui:212
+msgid "Automatic Power Saver"
+msgstr "Estalvi d'energia automàtic"
+
+#: panels/power/cc-power-panel.ui:213
+msgid "Enables power saver mode when battery is low."
+msgstr "Activa el mode d'estalvi d'energia quan la bateria estigui baixa."
+
+#: panels/power/cc-power-panel.ui:227
 msgid "_Automatic Suspend"
 msgstr "_Atura temporalment automàticament"
 
-#: panels/power/cc-power-panel.ui:228
+#: panels/power/cc-power-panel.ui:243
 msgid "_Wi-Fi"
 msgstr "_Wi-Fi"
 
-#: panels/power/cc-power-panel.ui:229
+#: panels/power/cc-power-panel.ui:244
 msgid "Wi-Fi can be turned off to save power."
 msgstr "La Wi-Fi pot ser desactivada per a estalviar energia."
 
-#: panels/power/cc-power-panel.ui:244
+#: panels/power/cc-power-panel.ui:259
 msgid "_Mobile Broadband"
 msgstr "Banda ampla _mòbil"
 
-#: panels/power/cc-power-panel.ui:245
+#: panels/power/cc-power-panel.ui:260
 msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 msgstr ""
 "La banda ampla mòbil (LTE, 4G, 3G, etc.) pot ser desactivada per a estalviar"
 " energia."
 
-#: panels/power/cc-power-panel.ui:260
+#: panels/power/cc-power-panel.ui:275
 msgid "_Bluetooth"
 msgstr "_Bluetooth"
 
-#: panels/power/cc-power-panel.ui:261
+#: panels/power/cc-power-panel.ui:276
 msgid "Bluetooth can be turned off to save power."
 msgstr "El Bluetooth pot ser desactivat per a estalviar energia."
 
-#: panels/power/cc-power-panel.ui:278
+#: panels/power/cc-power-panel.ui:293
 msgid "Suspend & Power Button"
 msgstr "Botó d'aturada temporal i d'engegada"
 
-#: panels/power/cc-power-panel.ui:282
+#: panels/power/cc-power-panel.ui:297
 msgid "Po_wer Button Behavior"
 msgstr "_Comportament del botó d'engegada"
 
-#: panels/power/cc-power-panel.ui:290
+#: panels/power/cc-power-panel.ui:305
 msgid "Show Battery _Percentage"
 msgstr "_Mostra el percentatge de la bateria"
 
-#: panels/power/cc-power-panel.ui:336
+#: panels/power/cc-power-panel.ui:351
 msgid "Automatic Suspend"
 msgstr "Atura temporalment automàticament"
 
-#: panels/power/cc-power-panel.ui:361
+#: panels/power/cc-power-panel.ui:376
 msgid "_Plugged In"
 msgstr "_Endollat"
 
-#: panels/power/cc-power-panel.ui:377
+#: panels/power/cc-power-panel.ui:392
 msgid "On _Battery Power"
 msgstr "Quan s'utilitza la _bateria"
 
-#: panels/power/cc-power-panel.ui:422 panels/power/cc-power-panel.ui:482
+#: panels/power/cc-power-panel.ui:437 panels/power/cc-power-panel.ui:497
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Retard"
@@ -4961,17 +4970,17 @@ msgid "Printer “%s” has been deleted"
 msgstr "S'ha suprimit la impressora «%s»"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:930
+#: panels/printers/cc-printers-panel.c:926
 msgid "Failed to add new printer."
 msgstr "No s'ha pogut afegir una impressora nova."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1209
+#: panels/printers/cc-printers-panel.c:1225
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "No s'ha pogut carregar la interfície d'usuari: %s"
 
-#: panels/printers/cc-printers-panel.c:1277
+#: panels/printers/cc-printers-panel.c:1293
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Desbloqueja per a afegir usuaris i modificar els paràmetres"
 
@@ -4993,8 +5002,8 @@ msgstr "Impressora;Cua;Imprimir;Paper;Tinta;Tòner;"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:344
-#: panels/printers/pp-new-printer-dialog.c:401
+#: panels/printers/pp-new-printer-dialog.c:254
+#: panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "Afegeix una impressora"
 
@@ -5052,7 +5061,7 @@ msgstr "Ubicació"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:239
+#: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Controlador"
 
@@ -5233,60 +5242,60 @@ msgstr "_Autentica"
 msgid "No Active Printer Jobs"
 msgstr "No hi ha tasques d'impressió actives"
 
-#: panels/printers/pp-new-printer-dialog.c:359
+#: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
 msgstr "Desbloqueja el servidor d'impressió"
 
 #. Translators: Samba server needs authentication of the user to show list of
 #. its printers.
-#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "Desbloqueja %s."
 
 #. Translators: Samba server needs authentication of the user to show list of
 #. its printers.
-#: panels/printers/pp-new-printer-dialog.c:367
+#: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduïu el nom d'usuari i la contrasenya per a visualitzar les impressores"
 " a %s."
 
-#: panels/printers/pp-new-printer-dialog.c:790
+#: panels/printers/pp-new-printer-dialog.c:587
 msgid "Searching for Printers"
 msgstr "S'estan cercant les impressores"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1578
+#: panels/printers/pp-new-printer-dialog.c:1375
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1583
+#: panels/printers/pp-new-printer-dialog.c:1380
 msgid "Serial Port"
 msgstr "Port en sèrie"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1590
+#: panels/printers/pp-new-printer-dialog.c:1387
 msgid "Parallel Port"
 msgstr "Port paral·lel"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1632
+#: panels/printers/pp-new-printer-dialog.c:1429
 #, c-format
 msgid "Location: %s"
 msgstr "Ubicació: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1637
+#: panels/printers/pp-new-printer-dialog.c:1434
 #, c-format
 msgid "Address: %s"
 msgstr "Adreça: %s"
 
 #. Translators: This item is a server which needs authentication to show its
 #. printers
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1461
 msgid "Server requires authentication"
 msgstr "El servidor requereix autenticació"
 
@@ -5431,7 +5440,7 @@ msgid "No pre-filtering"
 msgstr "Sense filtrat previ"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:223
+#: panels/printers/pp-ppd-selection-dialog.c:220
 msgid "Manufacturer"
 msgstr "Fabricant"
 
