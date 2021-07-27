@@ -1465,6 +1465,9 @@ power_profile_update_info_boxes (CcPowerPanel *self)
       app_id = variant_lookup_string (hold_variant, "ApplicationId");
       if (!app_id)
         continue;
+
+      gtk_widget_show (GTK_WIDGET (self->power_profile_info_listbox));
+
       app_info = g_desktop_app_info_new (app_id);
       name = app_info ? g_app_info_get_name (G_APP_INFO (app_info)) : app_id;
       held_profile = variant_lookup_string (hold_variant, "Profile");
