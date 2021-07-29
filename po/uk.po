@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-07-28 11:58+0000\n"
-"PO-Revision-Date: 2021-07-28 15:16+0300\n"
+"POT-Creation-Date: 2021-07-28 17:51+0000\n"
+"PO-Revision-Date: 2021-07-29 13:08+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1967,7 +1967,7 @@ msgid "Eject"
 msgstr "Витягнути"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:542
+#: panels/universal-access/cc-ua-panel.ui:580
 msgid "Typing"
 msgstr "Набирання"
 
@@ -3565,19 +3565,19 @@ msgstr "Бездротовий пристрій не підтримує режи
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
 #: panels/power/cc-power-panel.c:856 panels/power/cc-power-panel.c:867
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
-#: panels/universal-access/cc-ua-panel.ui:300
-#: panels/universal-access/cc-ua-panel.ui:346
-#: panels/universal-access/cc-ua-panel.ui:392
-#: panels/universal-access/cc-ua-panel.ui:498
-#: panels/universal-access/cc-ua-panel.ui:651
-#: panels/universal-access/cc-ua-panel.ui:697
-#: panels/universal-access/cc-ua-panel.ui:743
-#: panels/universal-access/cc-ua-panel.ui:927
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
+#: panels/universal-access/cc-ua-panel.ui:338
+#: panels/universal-access/cc-ua-panel.ui:384
+#: panels/universal-access/cc-ua-panel.ui:430
+#: panels/universal-access/cc-ua-panel.ui:536
+#: panels/universal-access/cc-ua-panel.ui:689
+#: panels/universal-access/cc-ua-panel.ui:735
+#: panels/universal-access/cc-ua-panel.ui:781
+#: panels/universal-access/cc-ua-panel.ui:965
 msgid "Off"
 msgstr "Вимкнено"
 
@@ -4384,11 +4384,11 @@ msgstr "Показувати в_міст повідомлення в забло�
 
 #: panels/notifications/cc-notifications-panel.c:260
 #: panels/power/cc-power-panel.c:862 panels/power/cc-power-panel.c:869
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
 msgid "On"
 msgstr "Увімкнено"
 
@@ -4776,32 +4776,26 @@ msgid "Affects system performance and power usage."
 msgstr "Впливає на швидкодію системи та споживання енергії."
 
 #: panels/power/cc-power-panel.ui:142
-#| msgid "Power Saving"
 msgid "Power Saving Options"
 msgstr "Параметри заощадження енергії"
 
 #: panels/power/cc-power-panel.ui:146
-#| msgid "Automatic Brightness"
 msgid "Automatic Screen Brightness"
 msgstr "Автоматична яскравість екрана"
 
 #: panels/power/cc-power-panel.ui:147
 msgid "Screen brightness adjusts to the surrounding light."
-msgstr ""
-"Яскравість екрана коригується за зовнішнім освітленням."
+msgstr "Яскравість екрана коригується за зовнішнім освітленням."
 
 #: panels/power/cc-power-panel.ui:160
-#| msgid "Screen"
 msgid "Dim Screen"
 msgstr "Притлумлення екрана"
 
 #: panels/power/cc-power-panel.ui:161
 msgid "Reduces the screen brightness when the computer is inactive."
-msgstr ""
-"Зменшує яскравість екрана, якщо комп'ютер є бездіяльним."
+msgstr "Зменшує яскравість екрана, якщо комп'ютер є бездіяльним."
 
 #: panels/power/cc-power-panel.ui:174
-#| msgid "Screen _Reader"
 msgid "Screen _Blank"
 msgstr "В_имикання екрана"
 
@@ -4826,7 +4820,8 @@ msgstr "_Автоматично призупиняти"
 #: panels/power/cc-power-panel.ui:199
 msgid "Pauses the computer after a period of inactivity."
 msgstr ""
-"Призупиняє роботу комп'ютера, якщо той є неактивним протягом певного періоду часу."
+"Призупиняє роботу комп'ютера, якщо той є неактивним протягом певного періоду "
+"часу."
 
 #: panels/power/cc-power-panel.ui:217
 msgid "Suspend & Power Button"
@@ -6498,7 +6493,7 @@ msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Подавати гудок, коли перемикається Num Lock або Caps Lock."
 
 #: panels/universal-access/cc-sound-keys-dialog.ui:45
-#: panels/universal-access/cc-ua-panel.ui:374
+#: panels/universal-access/cc-ua-panel.ui:412
 msgid "_Sound Keys"
 msgstr "Зв_укові клавіші"
 
@@ -6601,32 +6596,32 @@ msgstr "Вмикати і вимикати можливості доступно
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:348
+#: panels/universal-access/cc-ua-panel.c:351
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Типовий"
 
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:354
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Середній"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Великий"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Більший"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Найбільший"
 
-#: panels/universal-access/cc-ua-panel.c:364
+#: panels/universal-access/cc-ua-panel.c:367
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6651,65 +6646,70 @@ msgstr "_Висока контрастність"
 msgid "_Large Text"
 msgstr "Ве_ликий текст"
 
-#: panels/universal-access/cc-ua-panel.ui:235
+#: panels/universal-access/cc-ua-panel.ui:238
+msgid "Enable A_nimations"
+msgstr ""
+"Увімкнути _анімацію"
+
+#: panels/universal-access/cc-ua-panel.ui:273
 msgid "C_ursor Size"
 msgstr "Розмір к_урсора"
 
-#: panels/universal-access/cc-ua-panel.ui:282
+#: panels/universal-access/cc-ua-panel.ui:320
 #: panels/universal-access/cc-zoom-options-dialog.ui:91
 msgid "_Zoom"
 msgstr "_Масштаб"
 
-#: panels/universal-access/cc-ua-panel.ui:328
+#: panels/universal-access/cc-ua-panel.ui:366
 msgid "Screen _Reader"
 msgstr "З_читувач екрана"
 
-#: panels/universal-access/cc-ua-panel.ui:436
+#: panels/universal-access/cc-ua-panel.ui:474
 msgid "Hearing"
 msgstr "Слухання"
 
-#: panels/universal-access/cc-ua-panel.ui:480
+#: panels/universal-access/cc-ua-panel.ui:518
 #: panels/universal-access/cc-visual-alerts-dialog.ui:68
 msgid "_Visual Alerts"
 msgstr "В_ізуальні попередження"
 
-#: panels/universal-access/cc-ua-panel.ui:588
+#: panels/universal-access/cc-ua-panel.ui:626
 msgid "Screen _Keyboard"
 msgstr "Екранна _клавіатура"
 
-#: panels/universal-access/cc-ua-panel.ui:633
+#: panels/universal-access/cc-ua-panel.ui:671
 msgid "R_epeat Keys"
 msgstr "Пов_торення клавіш"
 
-#: panels/universal-access/cc-ua-panel.ui:679
+#: panels/universal-access/cc-ua-panel.ui:717
 msgid "Cursor _Blinking"
 msgstr "_Блимання курсора"
 
-#: panels/universal-access/cc-ua-panel.ui:725
+#: panels/universal-access/cc-ua-panel.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "Асистент з _набирання (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:786
+#: panels/universal-access/cc-ua-panel.ui:824
 msgid "Pointing & Clicking"
 msgstr "Вказування та натискання"
 
-#: panels/universal-access/cc-ua-panel.ui:832
+#: panels/universal-access/cc-ua-panel.ui:870
 msgid "_Mouse Keys"
 msgstr "Кнопки ми_ші"
 
-#: panels/universal-access/cc-ua-panel.ui:877
+#: panels/universal-access/cc-ua-panel.ui:915
 msgid "_Locate Pointer"
 msgstr "Ви_явити принтер"
 
-#: panels/universal-access/cc-ua-panel.ui:909
+#: panels/universal-access/cc-ua-panel.ui:947
 msgid "_Click Assist"
 msgstr "Асистент з на_тискання"
 
-#: panels/universal-access/cc-ua-panel.ui:955
+#: panels/universal-access/cc-ua-panel.ui:993
 msgid "_Double-Click Delay"
 msgstr "Затримка п_одвійного клацання"
 
-#: panels/universal-access/cc-ua-panel.ui:975
+#: panels/universal-access/cc-ua-panel.ui:1013
 msgid "Double-Click Delay"
 msgstr "Затримка подвійного клацання"
 
