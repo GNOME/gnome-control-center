@@ -429,13 +429,14 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
           gtk_toggle_button_set_mode (GTK_TOGGLE_BUTTON (scale_btn), FALSE);
           gtk_widget_show (scale_btn);
           gtk_container_add (GTK_CONTAINER (self->scale_bbox), scale_btn);
+          /* Set active before connecting the signal */
+          if (is_selected)
+            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scale_btn), TRUE);
+
           g_signal_connect_object (scale_btn,
                                    "notify::active",
                                    G_CALLBACK (on_scale_btn_active_changed_cb),
                                    self, 0);
-
-          if (is_selected)
-            gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (scale_btn), TRUE);
         }
     }
 
