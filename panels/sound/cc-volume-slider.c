@@ -247,6 +247,14 @@ cc_volume_slider_set_stream (CcVolumeSlider *self,
     }
 }
 
+GvcMixerStream *
+cc_volume_slider_get_stream (CcVolumeSlider *self)
+{
+  g_return_val_if_fail (CC_IS_VOLUME_SLIDER (self), NULL);
+
+  return self->stream;
+}
+
 void
 cc_volume_slider_set_is_amplified (CcVolumeSlider *self,
                                    gboolean        is_amplified)
