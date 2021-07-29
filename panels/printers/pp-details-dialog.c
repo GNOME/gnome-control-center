@@ -45,6 +45,7 @@ struct _PpDetailsDialog {
   GtkBox       *driver_buttons;
   GtkBox       *loading_box;
   GtkLabel     *printer_address_label;
+  GtkRevealer  *print_name_hint_revealer;
   GtkEntry     *printer_location_entry;
   GtkLabel     *printer_model_label;
   GtkStack     *printer_model_stack;
@@ -70,9 +71,14 @@ printer_name_changed (PpDetailsDialog *self)
 
   name = pp_details_dialog_get_printer_name (self);
 
-  /* Translators: This is the title of the dialog. %s is the printer name. */
-  title = g_strdup_printf (_("%s Details"), name);
-  gtk_label_set_label (self->dialog_title, title);
+  if (printer_name_is_valid (name)){
+    /* Translators: This is the title of the dialog. %s is the printer name. */
+    title = g_strdup_printf (_("%s Details"), name);
+    gtk_revealer_set_reveal_child (self->print_name_hint_revealer, FALSE);
+    gtk_label_set_label (self->dialog_title, title);
+  } else {
+    gtk_revealer_set_reveal_child (self->print_name_hint_revealer, TRUE);
+  }
 }
 
 static void set_ppd_cb (const gchar *printer_name, gboolean success, gpointer user_data);
@@ -328,6 +334,7 @@ pp_details_dialog_class_init (PpDetailsDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-details-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, dialog_title);
+  gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, print_name_hint_revealer);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, driver_buttons);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, loading_box);
   gtk_widget_class_bind_template_child (widget_class, PpDetailsDialog, printer_address_label);

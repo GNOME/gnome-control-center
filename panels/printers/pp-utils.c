@@ -3636,3 +3636,10 @@ shift_string_left (gchar *str)
       memmove (str, next, strlen (next) + 1);
     }
 }
+
+gboolean
+printer_name_is_valid (gchar *str)
+{
+  const gchar *invalid_chars = " \t#/";
+  return strlen(str) == strcspn(str, invalid_chars);
+}

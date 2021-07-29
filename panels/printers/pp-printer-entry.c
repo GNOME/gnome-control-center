@@ -371,7 +371,7 @@ show_printer_details_response_cb (PpDetailsDialog *dialog,
     printer_set_location (self->printer_name, new_location);
 
   new_name = pp_details_dialog_get_printer_name (dialog);
-  if (g_strcmp0 (self->printer_name, new_name) != 0)
+  if (g_strcmp0 (self->printer_name, new_name) != 0 && printer_name_is_valid (new_name))
     {
       g_autoptr(PpPrinter) printer = pp_printer_new (self->printer_name);
 
