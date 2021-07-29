@@ -40,4 +40,6 @@ void cc_volume_slider_set_stream        (CcVolumeSlider  *slider,
 void cc_volume_slider_set_is_amplified  (CcVolumeSlider  *slider,
                                          gboolean         is_amplified);
 
+GvcMixerStream *cc_volume_slider_get_stream (CcVolumeSlider *slider);
+
 G_END_DECLS
