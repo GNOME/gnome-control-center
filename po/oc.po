@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-07-22 10:29+0000\n"
-"PO-Revision-Date: 2021-07-22 19:54+0200\n"
+"POT-Creation-Date: 2021-07-28 17:51+0000\n"
+"PO-Revision-Date: 2021-07-31 15:53+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -219,7 +219,7 @@ msgid "Location Services"
 msgstr "Servicis de localizacion"
 
 #: panels/applications/cc-applications-panel.ui:157
-#: panels/applications/cc-applications-panel.ui:499
+#: panels/applications/cc-applications-panel.ui:500
 msgid "Built-in Permissions"
 msgstr "Permissions integradas"
 
@@ -293,47 +293,47 @@ msgid "How much resources this application is using."
 msgstr "Quantitat de ressorsas utilizadas per aquesta aplicacion."
 
 #: panels/applications/cc-applications-panel.ui:391
-#: panels/applications/cc-applications-panel.ui:536
+#: panels/applications/cc-applications-panel.ui:537
 msgid "Storage"
 msgstr "Emmagazinatge"
 
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:424
 msgid "Open in Software"
 msgstr "Dobrir dins Logicials"
 
-#: panels/applications/cc-applications-panel.ui:473 shell/cc-panel-list.ui:121
+#: panels/applications/cc-applications-panel.ui:474 shell/cc-panel-list.ui:121
 msgid "No results found"
 msgstr "Cap de resultat pas trobat"
 
-#: panels/applications/cc-applications-panel.ui:484
+#: panels/applications/cc-applications-panel.ui:485
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:177
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Ensajatz una autra recèrca"
 
-#: panels/applications/cc-applications-panel.ui:554
+#: panels/applications/cc-applications-panel.ui:555
 msgid ""
 "How much disk space this application is occupying with app data and caches."
 msgstr ""
 "Espaci de disc consumit per aquesta aplicacion per sas donadas e son cache."
 
-#: panels/applications/cc-applications-panel.ui:563
+#: panels/applications/cc-applications-panel.ui:564
 msgid "Application"
 msgstr "Aplicacion"
 
-#: panels/applications/cc-applications-panel.ui:569
+#: panels/applications/cc-applications-panel.ui:570
 msgid "Data"
 msgstr "Donadas"
 
-#: panels/applications/cc-applications-panel.ui:575
+#: panels/applications/cc-applications-panel.ui:576
 msgid "Cache"
 msgstr "Cache"
 
-#: panels/applications/cc-applications-panel.ui:581
+#: panels/applications/cc-applications-panel.ui:582
 msgid "<b>Total</b>"
 msgstr "<b>Total</b>"
 
-#: panels/applications/cc-applications-panel.ui:598
+#: panels/applications/cc-applications-panel.ui:599
 msgid "Clear Cache…"
 msgstr "Escafar lo cache…"
 
@@ -467,7 +467,7 @@ msgstr "Desactivatz lo mòde avion per activar lo Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1595
+#: panels/printers/pp-new-printer-dialog.c:1392
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -1255,7 +1255,7 @@ msgstr[0] "%d ora"
 msgstr[1] "%d oras"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1214
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:973
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1968,7 +1968,7 @@ msgid "Eject"
 msgstr "Ejectar"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:542
+#: panels/universal-access/cc-ua-panel.ui:580
 msgid "Typing"
 msgstr "Picada"
 
@@ -2149,6 +2149,8 @@ msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
 msgstr ""
+"Las claus de caractèrs s'utilizan per picar de caractèrs addicionals. De "
+"còps que i a son imprimits coma una tèrça opcion sul clavièr."
 
 #: panels/keyboard/cc-keyboard-panel.c:71
 #: panels/keyboard/cc-keyboard-panel.c:89
@@ -2198,6 +2200,10 @@ msgid ""
 "followed by <b>C</b> and <b>o</b> will enter <b>©</b>, <b>a</b> followed by "
 "<b>'</b> will enter <b>á</b>."
 msgstr ""
+"La tòca de composicion permet de picar una brava varietat de caractèrs. Per "
+"l’utilizar, tenètz-la quichada e quichatz una sequéncia de caractèrs. Per "
+"exemple, la tòca de composicion seguida de <b>C</b> e <b>o</b> donarà <b>©</"
+"b>, <b>a</b> seguit de <b>'</b> donarà <b>á</b>."
 
 #: panels/keyboard/cc-keyboard-panel.c:95
 msgctxt "keyboard key"
@@ -2299,6 +2305,8 @@ msgstr "Apondre un acorchi personalizat"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr ""
+"Definir d'acorchis personalizats per lançar las aplicacions, executar de "
+"scripts e encara mai."
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:131
 msgid "Add Shortcut"
@@ -3552,20 +3560,20 @@ msgstr "Lo periferic sens fial pren pas en carga lo mòde « punt d'accès »"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1102 panels/power/cc-power-panel.c:1113
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
-#: panels/universal-access/cc-ua-panel.ui:300
-#: panels/universal-access/cc-ua-panel.ui:346
-#: panels/universal-access/cc-ua-panel.ui:392
-#: panels/universal-access/cc-ua-panel.ui:498
-#: panels/universal-access/cc-ua-panel.ui:651
-#: panels/universal-access/cc-ua-panel.ui:697
-#: panels/universal-access/cc-ua-panel.ui:743
-#: panels/universal-access/cc-ua-panel.ui:927
+#: panels/power/cc-power-panel.c:856 panels/power/cc-power-panel.c:867
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
+#: panels/universal-access/cc-ua-panel.ui:338
+#: panels/universal-access/cc-ua-panel.ui:384
+#: panels/universal-access/cc-ua-panel.ui:430
+#: panels/universal-access/cc-ua-panel.ui:536
+#: panels/universal-access/cc-ua-panel.ui:689
+#: panels/universal-access/cc-ua-panel.ui:735
+#: panels/universal-access/cc-ua-panel.ui:781
+#: panels/universal-access/cc-ua-panel.ui:965
 msgid "Off"
 msgstr "O"
 
@@ -4373,12 +4381,12 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Afichar lo c_ontengut del messatge sus l'ecran verrolhat"
 
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1108 panels/power/cc-power-panel.c:1115
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
+#: panels/power/cc-power-panel.c:862 panels/power/cc-power-panel.c:869
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
 msgid "On"
 msgstr "I"
 
@@ -4592,7 +4600,7 @@ msgid "Gaming input device"
 msgstr "Periferic d’entrada per jòcs"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:396
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:384
 #: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Batariá"
@@ -4607,76 +4615,78 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Segondària"
 
-#: panels/power/cc-power-panel.c:394
+#: panels/power/cc-power-panel.c:382
 msgid "Batteries"
 msgstr "Batariás"
 
-#: panels/power/cc-power-panel.c:657
+#: panels/power/cc-power-panel.c:644
 msgid "When _idle"
 msgstr "Quand _inactiu"
 
-#: panels/power/cc-power-panel.c:1042
+#: panels/power/cc-power-panel.c:796
 msgid "Suspend"
 msgstr "Metre en velha"
 
-#: panels/power/cc-power-panel.c:1043
+#: panels/power/cc-power-panel.c:797
 msgid "Power Off"
 msgstr "Atudar"
 
-#: panels/power/cc-power-panel.c:1044
+#: panels/power/cc-power-panel.c:798
 msgid "Hibernate"
 msgstr "Ivernar"
 
-#: panels/power/cc-power-panel.c:1045
+#: panels/power/cc-power-panel.c:799
 msgid "Nothing"
 msgstr "Pas res"
 
-#: panels/power/cc-power-panel.c:1104
+#: panels/power/cc-power-panel.c:858
 msgid "When on battery power"
 msgstr "Quand sus batariá"
 
-#: panels/power/cc-power-panel.c:1106
+#: panels/power/cc-power-panel.c:860
 msgid "When plugged in"
 msgstr "Quand lo cable es brancat"
 
-#: panels/power/cc-power-panel.c:1221
+#: panels/power/cc-power-panel.c:980
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Pas jamai"
 
-#: panels/power/cc-power-panel.c:1278
+#: panels/power/cc-power-panel.c:1066
 msgid "Automatic suspend"
 msgstr "Mesa en _velha automatica"
 
-#: panels/power/cc-power-panel.c:1417
+#: panels/power/cc-power-panel.c:1171
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
+"Mòde performàncias temporàriament indisponible a causa d’una temperatura de "
+"foncionament nauta."
 
-#: panels/power/cc-power-panel.c:1419
+#: panels/power/cc-power-panel.c:1173
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr ""
 
-#: panels/power/cc-power-panel.c:1421
+#: panels/power/cc-power-panel.c:1175
 msgid "Performance mode temporarily disabled."
 msgstr "Mòde performàncias temporàriament indisponible"
 
-#: panels/power/cc-power-panel.c:1461
+#: panels/power/cc-power-panel.c:1218
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr ""
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1469
+#: panels/power/cc-power-panel.c:1226
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Mòde estalvi activat per « %s »."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1473
+#: panels/power/cc-power-panel.c:1230
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Mòde performàncias activat per « %s »."
@@ -4750,84 +4760,74 @@ msgid "Affects system performance and power usage."
 msgstr "Tòca las performàncias del sistèma e l’utilizacion energetica."
 
 #: panels/power/cc-power-panel.ui:142
-msgid "Power Saving"
-msgstr "Estalvi d'energia"
+msgid "Power Saving Options"
+msgstr "Opcions d'estalvi d'energia"
 
 #: panels/power/cc-power-panel.ui:146
-msgid "_Screen Brightness"
-msgstr "Luminositat de l’e_cran"
+msgid "Automatic Screen Brightness"
+msgstr "Luminositat d'ecran automatica"
 
-#: panels/power/cc-power-panel.ui:162
-msgid "Automatic Brightness"
-msgstr "Luminositat automatica"
+#: panels/power/cc-power-panel.ui:147
+msgid "Screen brightness adjusts to the surrounding light."
+msgstr "La luminositat de l'ecran s’adapta a la luminositat ambienta."
+
+#: panels/power/cc-power-panel.ui:160
+msgid "Dim Screen"
+msgstr "Escuresir l’ecran"
+
+#: panels/power/cc-power-panel.ui:161
+msgid "Reduces the screen brightness when the computer is inactive."
+msgstr "Redusís la luminositat de l’ecran quand l'ordenador es inactiu."
+
+#: panels/power/cc-power-panel.ui:174
+msgid "Screen _Blank"
+msgstr "Ecran void"
 
 #: panels/power/cc-power-panel.ui:175
-msgid "_Keyboard Brightness"
-msgstr "Luminositat del _clavièr"
+msgid "Turns the screen off after a period of inactivity."
+msgstr "Atuda l’ecran aprèp un periòde d’inactivitat."
 
-#: panels/power/cc-power-panel.ui:191
-msgid "Dim Screen When Inactive"
-msgstr "E_scurezir l’ecran se inactiu"
+#: panels/power/cc-power-panel.ui:183
+msgid "Automatic Power Saver"
+msgstr "Estalviador d'energia automatic"
 
-#: panels/power/cc-power-panel.ui:204
-msgid "_Blank Screen"
-msgstr "Ecran _negre"
+#: panels/power/cc-power-panel.ui:184
+msgid "Enables power saver mode when battery is low."
+msgstr ""
 
-#: panels/power/cc-power-panel.ui:212
+#: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
 msgstr "Mesa en velha _automatica"
 
-#: panels/power/cc-power-panel.ui:228
-msgid "_Wi-Fi"
-msgstr "_Wi-Fi"
+#: panels/power/cc-power-panel.ui:199
+msgid "Pauses the computer after a period of inactivity."
+msgstr "Met en pausa l’ordenador aprèp un periòde d’inactivitat."
 
-#: panels/power/cc-power-panel.ui:229
-msgid "Wi-Fi can be turned off to save power."
-msgstr "Lo Wi-Fi pòt èsser atudat per estalviar d’energia."
-
-#: panels/power/cc-power-panel.ui:244
-msgid "_Mobile Broadband"
-msgstr "_Mobil de larga benda"
-
-#: panels/power/cc-power-panel.ui:245
-msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-msgstr ""
-"Los periferics mobils de larga benda (LTE, 4G, 3G, etc.) pòdon èsser atudats "
-"per estalviar d’energia."
-
-#: panels/power/cc-power-panel.ui:260
-msgid "_Bluetooth"
-msgstr "_Bluetooth"
-
-#: panels/power/cc-power-panel.ui:261
-msgid "Bluetooth can be turned off to save power."
-msgstr "Lo Bluetooth pòt èsser atudat per estalviar d’energia."
-
-#: panels/power/cc-power-panel.ui:278
+#: panels/power/cc-power-panel.ui:217
 msgid "Suspend & Power Button"
 msgstr "Metre en velha & atudar"
 
-#: panels/power/cc-power-panel.ui:282
+#: panels/power/cc-power-panel.ui:221
 msgid "Po_wer Button Behavior"
 msgstr "Accion del boton d’e_xtinccion"
 
-#: panels/power/cc-power-panel.ui:290
+#: panels/power/cc-power-panel.ui:229
 msgid "Show Battery _Percentage"
 msgstr "Afichar lo _percentatge de batariá"
 
-#: panels/power/cc-power-panel.ui:336
+#: panels/power/cc-power-panel.ui:268
 msgid "Automatic Suspend"
 msgstr "Mesa en velha automatica"
 
-#: panels/power/cc-power-panel.ui:361
+#: panels/power/cc-power-panel.ui:293
 msgid "_Plugged In"
 msgstr "_Cable brancat"
 
-#: panels/power/cc-power-panel.ui:377
+#: panels/power/cc-power-panel.ui:309
 msgid "On _Battery Power"
 msgstr "Sus _batariá"
 
-#: panels/power/cc-power-panel.ui:422 panels/power/cc-power-panel.ui:482
+#: panels/power/cc-power-panel.ui:354 panels/power/cc-power-panel.ui:414
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Relambi"
@@ -4915,17 +4915,17 @@ msgid "Printer “%s” has been deleted"
 msgstr "L’imprimenta « %s » es estada suprimida"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:930
+#: panels/printers/cc-printers-panel.c:926
 msgid "Failed to add new printer."
 msgstr "L'apondon de la novèla imprimenta a fracassat."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1209
+#: panels/printers/cc-printers-panel.c:1225
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Impossible de cargar l'interfàcia d'utilizaire : %s"
 
-#: panels/printers/cc-printers-panel.c:1277
+#: panels/printers/cc-printers-panel.c:1293
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Desverrolhar per apondre d‘imprimentas e modificar los paramètres"
 
@@ -4945,8 +4945,8 @@ msgstr "Imprimenta;Fila;Coa;Impression;Papièr;Tinta;Toner;"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:344
-#: panels/printers/pp-new-printer-dialog.c:401
+#: panels/printers/pp-new-printer-dialog.c:254
+#: panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "Apondre una imprimenta"
 
@@ -5002,7 +5002,7 @@ msgstr "Emplaçament"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:239
+#: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Pilòt"
 
@@ -5178,57 +5178,57 @@ msgstr "_Autentificacion"
 msgid "No Active Printer Jobs"
 msgstr "Pas de prètzfaits d'impression actius"
 
-#: panels/printers/pp-new-printer-dialog.c:359
+#: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
 msgstr "Desverrolhar lo servidor d’imprimentas"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "Desverrolhar %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:367
+#: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Picatz vòstre nom d’utilizaire e vòtre senhal per afichar las imprimentas "
 "sus %s."
 
-#: panels/printers/pp-new-printer-dialog.c:790
+#: panels/printers/pp-new-printer-dialog.c:587
 msgid "Searching for Printers"
 msgstr "Recèrca d’imprimentas"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1578
+#: panels/printers/pp-new-printer-dialog.c:1375
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1583
+#: panels/printers/pp-new-printer-dialog.c:1380
 msgid "Serial Port"
 msgstr "Pòrt seria"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1590
+#: panels/printers/pp-new-printer-dialog.c:1387
 msgid "Parallel Port"
 msgstr "Pòrt parallèl"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1632
+#: panels/printers/pp-new-printer-dialog.c:1429
 #, c-format
 msgid "Location: %s"
 msgstr "Emplaçament : %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1637
+#: panels/printers/pp-new-printer-dialog.c:1434
 #, c-format
 msgid "Address: %s"
 msgstr "Adreça : %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1461
 msgid "Server requires authentication"
 msgstr "Lo servidor necessita una autentificacion"
 
@@ -5369,7 +5369,7 @@ msgid "No pre-filtering"
 msgstr "Pas cap de prefiltratge"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:223
+#: panels/printers/pp-ppd-selection-dialog.c:220
 msgid "Manufacturer"
 msgstr "Fabricant"
 
@@ -6479,7 +6479,7 @@ msgstr ""
 "Emet un bip al moment d'una quichada sus las tòcas Verr. Num. o Verr. Maj."
 
 #: panels/universal-access/cc-sound-keys-dialog.ui:45
-#: panels/universal-access/cc-ua-panel.ui:374
+#: panels/universal-access/cc-ua-panel.ui:412
 msgid "_Sound Keys"
 msgstr "Tòcas _son"
 
@@ -6586,32 +6586,32 @@ msgstr ""
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:348
+#: panels/universal-access/cc-ua-panel.c:351
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Per defaut"
 
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:354
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Mejan"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Grand"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Mai grand"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Lo mai grand"
 
-#: panels/universal-access/cc-ua-panel.c:364
+#: panels/universal-access/cc-ua-panel.c:367
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6634,65 +6634,69 @@ msgstr "Contraste e_levat"
 msgid "_Large Text"
 msgstr "_Grand tèxte"
 
-#: panels/universal-access/cc-ua-panel.ui:235
+#: panels/universal-access/cc-ua-panel.ui:238
+msgid "Enable A_nimations"
+msgstr "Activar las a_nimacions"
+
+#: panels/universal-access/cc-ua-panel.ui:273
 msgid "C_ursor Size"
 msgstr "Talha del c_ursor"
 
-#: panels/universal-access/cc-ua-panel.ui:282
+#: panels/universal-access/cc-ua-panel.ui:320
 #: panels/universal-access/cc-zoom-options-dialog.ui:91
 msgid "_Zoom"
 msgstr "_Zoom"
 
-#: panels/universal-access/cc-ua-panel.ui:328
+#: panels/universal-access/cc-ua-panel.ui:366
 msgid "Screen _Reader"
 msgstr "_Lector d'ecran"
 
-#: panels/universal-access/cc-ua-panel.ui:436
+#: panels/universal-access/cc-ua-panel.ui:474
 msgid "Hearing"
 msgstr "Audicion"
 
-#: panels/universal-access/cc-ua-panel.ui:480
+#: panels/universal-access/cc-ua-panel.ui:518
 #: panels/universal-access/cc-visual-alerts-dialog.ui:68
 msgid "_Visual Alerts"
 msgstr "Alèrtas _visualas"
 
-#: panels/universal-access/cc-ua-panel.ui:588
+#: panels/universal-access/cc-ua-panel.ui:626
 msgid "Screen _Keyboard"
 msgstr "Cla_vièr visual"
 
-#: panels/universal-access/cc-ua-panel.ui:633
+#: panels/universal-access/cc-ua-panel.ui:671
 msgid "R_epeat Keys"
 msgstr "Tòcas de r_epeticion"
 
-#: panels/universal-access/cc-ua-panel.ui:679
+#: panels/universal-access/cc-ua-panel.ui:717
 msgid "Cursor _Blinking"
 msgstr "Cluque_jament del cursor"
 
-#: panels/universal-access/cc-ua-panel.ui:725
+#: panels/universal-access/cc-ua-panel.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "Assistent de _picada (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:786
+#: panels/universal-access/cc-ua-panel.ui:824
 msgid "Pointing & Clicking"
 msgstr "Puntatge e clic de mirga"
 
-#: panels/universal-access/cc-ua-panel.ui:832
+#: panels/universal-access/cc-ua-panel.ui:870
 msgid "_Mouse Keys"
 msgstr "Tòcas de la m_irga"
 
-#: panels/universal-access/cc-ua-panel.ui:877
+#: panels/universal-access/cc-ua-panel.ui:915
 msgid "_Locate Pointer"
 msgstr "_Localizar lo puntador"
 
-#: panels/universal-access/cc-ua-panel.ui:909
+#: panels/universal-access/cc-ua-panel.ui:947
 msgid "_Click Assist"
 msgstr "Assistent de _clic"
 
-#: panels/universal-access/cc-ua-panel.ui:955
+#: panels/universal-access/cc-ua-panel.ui:993
 msgid "_Double-Click Delay"
 msgstr "Relambi del _clic doble"
 
-#: panels/universal-access/cc-ua-panel.ui:975
+#: panels/universal-access/cc-ua-panel.ui:1013
 msgid "Double-Click Delay"
 msgstr "Relambi del clic doble"
 
@@ -8350,6 +8354,39 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#~ msgid "_Screen Brightness"
+#~ msgstr "Luminositat de l’e_cran"
+
+#~ msgid "_Keyboard Brightness"
+#~ msgstr "Luminositat del _clavièr"
+
+#~ msgid "Dim Screen When Inactive"
+#~ msgstr "E_scurezir l’ecran se inactiu"
+
+#~ msgid "_Blank Screen"
+#~ msgstr "Ecran _negre"
+
+#~ msgid "_Wi-Fi"
+#~ msgstr "_Wi-Fi"
+
+#~ msgid "Wi-Fi can be turned off to save power."
+#~ msgstr "Lo Wi-Fi pòt èsser atudat per estalviar d’energia."
+
+#~ msgid "_Mobile Broadband"
+#~ msgstr "_Mobil de larga benda"
+
+#~ msgid ""
+#~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
+#~ msgstr ""
+#~ "Los periferics mobils de larga benda (LTE, 4G, 3G, etc.) pòdon èsser "
+#~ "atudats per estalviar d’energia."
+
+#~ msgid "_Bluetooth"
+#~ msgstr "_Bluetooth"
+
+#~ msgid "Bluetooth can be turned off to save power."
+#~ msgstr "Lo Bluetooth pòt èsser atudat per estalviar d’energia."
 
 #~| msgid "Show in Lock Screen"
 #~ msgid "Set Background and Lock Screen"
@@ -10689,9 +10726,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "Brightness & Lock"
 #~ msgstr "Luminositat & verrolhatge"
-
-#~ msgid "Screen brightness and lock settings"
-#~ msgstr "Paramètres de luminositat de l'ecran e de verrolhatge"
 
 #~ msgid "Brightness;Lock;Dim;Blank;Monitor;"
 #~ msgstr "Luminositat;Verrolhatge;Verrolhar;Estomper;Velha;Atudar;Ecran;"
