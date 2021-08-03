@@ -413,7 +413,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
           value_object = hdy_value_object_new_collect (G_TYPE_STRING, scale_str);
           g_list_store_append (self->scale_list, value_object);
           g_object_set_data_full (G_OBJECT (value_object), "scale",
-                                  g_memdup (&scale, sizeof (double)), g_free);
+                                  g_memdup2 (&scale, sizeof (double)), g_free);
           if (is_selected)
             hdy_combo_row_set_selected_index (HDY_COMBO_ROW (self->scale_combo_row),
                                               g_list_model_get_n_items (G_LIST_MODEL (self->scale_list)) - 1);
@@ -422,7 +422,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
         {
           GtkWidget *scale_btn = gtk_radio_button_new_with_label_from_widget (group, scale_str);
           g_object_set_data_full (G_OBJECT (scale_btn), "scale",
-                                  g_memdup (&scale, sizeof (double)), g_free);
+                                  g_memdup2 (&scale, sizeof (double)), g_free);
 
           if (!group)
             group = GTK_RADIO_BUTTON (scale_btn);
