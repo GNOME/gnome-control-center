@@ -76,11 +76,11 @@ transform_binding_to_accel (GBinding     *binding,
                             GValue       *to_value,
                             gpointer      user_data)
 {
-  CcKeyboardItem *item;
+  g_autoptr(CcKeyboardItem) item = NULL;
   CcKeyCombo combo;
   gchar *accelerator;
 
-  item = CC_KEYBOARD_ITEM (g_binding_get_source (binding));
+  item = CC_KEYBOARD_ITEM (g_binding_dup_source (binding));
   combo = cc_keyboard_item_get_primary_combo (item);
 
   /* Embolden the label when the shortcut is modified */
