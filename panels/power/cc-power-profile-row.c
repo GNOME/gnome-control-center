@@ -35,7 +35,6 @@ struct _CcPowerProfileRow
   GtkListBoxRow parent_instance;
 
   GtkRadioButton *button;
-  GtkImage       *icon_image;
   GtkLabel       *subtitle_label;
   GtkLabel       *title_label;
 
@@ -106,7 +105,6 @@ cc_power_profile_row_class_init (CcPowerProfileRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/power/cc-power-profile-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, button);
-  gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, icon_image);
   gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, subtitle_label);
   gtk_widget_class_bind_template_child (widget_class, CcPowerProfileRow, title_label);
 
@@ -175,7 +173,7 @@ CcPowerProfileRow *
 cc_power_profile_row_new (CcPowerProfile power_profile)
 {
   CcPowerProfileRow *self;
-  const char *text, *subtext, *icon_name, *class_name;
+  const char *text, *subtext;
 
   self = g_object_new (CC_TYPE_POWER_PROFILE_ROW, NULL);
 
@@ -185,20 +183,14 @@ cc_power_profile_row_new (CcPowerProfile power_profile)
       case CC_POWER_PROFILE_PERFORMANCE:
         text = _("Performance");
         subtext = _("High performance and power usage.");
-        icon_name = "power-profile-performance-symbolic";
-        class_name = "performance";
         break;
       case CC_POWER_PROFILE_BALANCED:
         text = _("Balanced Power");
         subtext = _("Standard performance and power usage.");
-        icon_name = "power-profile-balanced-symbolic";
-        class_name = NULL;
         break;
       case CC_POWER_PROFILE_POWER_SAVER:
         text = _("Power Saver");
         subtext = _("Reduced performance and power usage.");
-        icon_name = "power-profile-power-saver-symbolic";
-        class_name = "low-power";
         break;
       default:
         g_assert_not_reached ();
@@ -206,9 +198,6 @@ cc_power_profile_row_new (CcPowerProfile power_profile)
 
   gtk_label_set_markup (self->title_label, text);
   gtk_label_set_markup (self->subtitle_label, subtext);
-  gtk_image_set_from_icon_name (self->icon_image, icon_name, GTK_ICON_SIZE_MENU);
-  if (class_name != NULL)
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->icon_image)), class_name);
 
   return self;
 }
