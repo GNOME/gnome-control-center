@@ -181,15 +181,15 @@ cc_power_profile_row_new (CcPowerProfile power_profile)
   switch (self->power_profile)
     {
       case CC_POWER_PROFILE_PERFORMANCE:
-        text = _("Performance");
+        text = C_("Power profile", "Performance");
         subtext = _("High performance and power usage.");
         break;
       case CC_POWER_PROFILE_BALANCED:
-        text = _("Balanced");
+        text = C_("Power profile", "Balanced");
         subtext = _("Standard performance and power usage.");
         break;
       case CC_POWER_PROFILE_POWER_SAVER:
-        text = _("Power Saver");
+        text = C_("Power profile", "Power Saver");
         subtext = _("Reduced performance and power usage.");
         break;
       default:
