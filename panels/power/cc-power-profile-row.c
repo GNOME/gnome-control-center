@@ -185,7 +185,7 @@ cc_power_profile_row_new (CcPowerProfile power_profile)
         subtext = _("High performance and power usage.");
         break;
       case CC_POWER_PROFILE_BALANCED:
-        text = _("Balanced Power");
+        text = _("Balanced");
         subtext = _("Standard performance and power usage.");
         break;
       case CC_POWER_PROFILE_POWER_SAVER:
