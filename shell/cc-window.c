@@ -82,6 +82,10 @@ struct _CcWindow
   GSettings *settings;
 
   CcPanelListView previous_list_view;
+
+  gint current_width;
+  gint current_height;
+  gboolean is_maximized;
 };
 
 static void     cc_shell_iface_init         (CcShellInterface      *iface);
@@ -97,6 +101,33 @@ enum
 };
 
 /* Auxiliary methods */
+static void
+store_window_state (CcWindow *self)
+{
+  g_settings_set (self->settings,
+                 "window-state",
+                 "(iib)",
+                 self->current_width,
+                 self->current_height,
+                 self->is_maximized);
+}
+
+static void
+load_window_state (CcWindow *self)
+{
+  g_settings_get (self->settings,
+                 "window-state",
+                 "(iib)",
+                 &self->current_width,
+                 &self->current_height,
+                 &self->is_maximized);
+
+  if (self->current_width != -1 && self->current_height != -1)
+    gtk_window_set_default_size (GTK_WINDOW (self), self->current_width, self->current_height);
+  if (self->is_maximized)
+    gtk_window_maximize (GTK_WINDOW (self));
+}
+
 static gboolean
 in_flatpak_sandbox (void)
 {
@@ -676,6 +707,39 @@ on_development_warning_dialog_responded_cb (CcWindow *self)
   gtk_widget_hide (GTK_WIDGET (self->development_warning_dialog));
 }
 
+static void
+on_window_size_allocate (GtkWidget     *widget,
+                         GtkAllocation *allocation)
+{
+  CcWindow *self = CC_WINDOW (widget);
+
+  GTK_WIDGET_CLASS (cc_window_parent_class)->size_allocate (widget, allocation);
+
+  if (!self->is_maximized)
+    gtk_window_get_size (GTK_WINDOW (widget), &self->current_width, &self->current_height);
+}
+
+static gboolean
+on_window_state_event (GtkWidget           *widget,
+                       GdkEventWindowState *event)
+{
+  CcWindow *self = CC_WINDOW (widget);
+
+  self->is_maximized = (event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED) != 0;
+
+  return GTK_WIDGET_CLASS (cc_window_parent_class)->window_state_event (widget, event);
+}
+
+static void
+on_window_destroy (GtkWidget *widget)
+{
+  CcWindow *self = CC_WINDOW (widget);
+
+  store_window_state (self);
+
+  GTK_WIDGET_CLASS (cc_window_parent_class)->destroy (widget);
+}
+
 /* CcShell implementation */
 static gboolean
 cc_window_set_active_panel_from_id (CcShell      *shell,
@@ -801,6 +865,8 @@ cc_window_constructed (GObject *object)
   CcWindow *self = CC_WINDOW (object);
   g_autofree char *id = NULL;
 
+  load_window_state (self);
+
   /* Add the panels */
   setup_model (self);
 
@@ -816,6 +882,20 @@ cc_window_constructed (GObject *object)
                             "notify::view",
                             G_CALLBACK (update_headerbar_buttons),
                             self);
+
+  g_signal_connect (self,
+                    "size-allocate",
+                    G_CALLBACK (on_window_size_allocate),
+                    NULL);
+
+  g_signal_connect (self,
+                    "window-state-event",
+                    G_CALLBACK (on_window_state_event),
+                    NULL);
+  g_signal_connect (self,
+                    "destroy",
+                    G_CALLBACK (on_window_destroy),
+                    NULL);
 
   update_headerbar_buttons (self);
   show_sidebar (self);
