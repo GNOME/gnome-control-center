@@ -771,9 +771,9 @@ does_gnome_software_allow_updates (void)
 {
   const gchar *schema_id  = "org.gnome.software";
   GSettingsSchemaSource *source;
-  g_autoptr(GSettingsSchema) schema;
-  g_autoptr(GSettings) settings;
-  
+  g_autoptr(GSettingsSchema) schema = NULL;
+  g_autoptr(GSettings) settings = NULL;
+
   source = g_settings_schema_source_get_default ();
 
   if (source == NULL)
