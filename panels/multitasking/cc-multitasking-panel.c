@@ -31,7 +31,6 @@ struct _CcMultitaskingPanel
 
   GSettings       *interface_settings;
   GSettings       *mutter_settings;
-  GSettings       *overrides_settings;
   GSettings       *shell_settings;
   GSettings       *wm_settings;
 
@@ -56,7 +55,6 @@ cc_multitasking_panel_finalize (GObject *object)
 
   g_clear_object (&self->interface_settings);
   g_clear_object (&self->mutter_settings);
-  g_clear_object (&self->overrides_settings);
   g_clear_object (&self->shell_settings);
   g_clear_object (&self->wm_settings);
 
@@ -117,14 +115,12 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
-  self->overrides_settings = g_settings_new ("org.gnome.shell.overrides");
-
-  if (g_settings_get_boolean (self->overrides_settings, "dynamic-workspaces"))
+  if (g_settings_get_boolean (self->mutter_settings, "dynamic-workspaces"))
     gtk_toggle_button_set_active (self->dynamic_workspaces_radio, TRUE);
   else
     gtk_toggle_button_set_active (self->fixed_workspaces_radio, TRUE);
 
-  g_settings_bind (self->overrides_settings,
+  g_settings_bind (self->mutter_settings,
                    "dynamic-workspaces",
                    self->dynamic_workspaces_radio,
                    "active",
