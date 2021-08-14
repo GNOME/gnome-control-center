@@ -26,24 +26,24 @@
 # Artur de Aquino Morais <artur.morais93@outlook.com>, 2016.
 # Georges Basile Stavracas Neto <georges.stavracas@gmail.com>, 2013-2019.
 # Bruno Lopes <brunolopesdsilv@gmail.com>, 2021.
-# Enrico Nicoletto <liverig@gmail.com>, 2012-2016, 2018-2019, 2021.
 # Rafael Fontenelle <rafaelff@gnome.org>, 2012-2021.
+# Enrico Nicoletto <liverig@gmail.com>, 2012-2016, 2018-2019, 2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-09 13:53+0000\n"
-"PO-Revision-Date: 2021-08-10 09:38-0300\n"
-"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"POT-Creation-Date: 2021-08-14 12:39+0000\n"
+"PO-Revision-Date: 2021-08-14 16:23-0300\n"
+"Last-Translator: Enrico Nicoletto <liverig@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 40.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0\n"
 "X-Project-Style: gnome\n"
 
 #: panels/applications/cc-applications-panel.c:823
@@ -73,7 +73,8 @@ msgstr "Acesso completo a /dev"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Rede"
 
@@ -90,7 +91,7 @@ msgstr "Pasta pessoal"
 #: panels/applications/cc-applications-panel.c:840
 #: panels/applications/cc-applications-panel.c:845
 msgid "Read-only"
-msgstr "somente leitura"
+msgstr "Somente leitura"
 
 #: panels/applications/cc-applications-panel.c:843
 #: panels/applications/cc-applications-panel.c:845
@@ -226,6 +227,7 @@ msgstr "Câmera"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Desabilitado"
@@ -403,6 +405,9 @@ msgstr "Selecionar uma imagem"
 #: panels/user-accounts/cc-user-panel.c:633
 #: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -778,6 +783,7 @@ msgstr "Salvar perfil"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Salvar"
 
@@ -1826,6 +1832,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:437
 #: panels/info-overview/cc-info-overview-panel.c:483
 #: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -2328,6 +2335,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -2356,7 +2364,8 @@ msgstr "Nenhum atalho de teclado localizado"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Voltar"
 
@@ -2404,6 +2413,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Nome"
 
@@ -2424,6 +2434,7 @@ msgid "None"
 msgstr "Nenhum"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Adicionar"
 
@@ -2689,6 +2700,7 @@ msgstr "Projeta suas conversas"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Geral"
 
@@ -2808,11 +2820,95 @@ msgstr ""
 "Trackpad;Ponteiro;Clicar;Tap;Toque;Batida;Duplo;Botão;Trackball;Rolagem;"
 "Scroll;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+# Traduzido como "Canto ativo" conforme tradução do Módulo "gsettings-desktop-schemas" - Enrico.
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "Canto at_ivo"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr "Toque o canto superior esquerdo para abrir o Panorama de Atividades."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "Bordas de tela _ativas"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Arrasta janelas para as bordas de tela superior, esquerda e direita para "
+"redimensioná-las."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "Espaços de trabalho"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "Espaços de trabalho _dinâmicos"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "Remove automaticamente espaços de trabalho vazios."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "Número _fixo de espaços de trabalho"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "Especifica um número permanente de espaços de trabalho."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "_Número de espaços de trabalho"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+#| msgid "%s Monitor"
+msgid "Multi-Monitor"
+msgstr "Multi-Monitor"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "Espaços de trabalho somente na tela _principal"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "Espaços de trabalho em todas as t_elas"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "Alternador de aplicativos"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "Incluir aplicativos de todos os es_paços de trabalho"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "Incluir aplicativos somente do espaço de trabalho at_ual"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "Multitarefas"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "Gerencie preferências para produtividade e multitarefas"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr ""
+"Multitarefa;Multitarefas;Produtividade;Personalizar;Customizar;Área de "
+"trabalho;Desktop;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Oops, algo deu errado. Por favor contate o seu fornecedor de software."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "O NetworkManager precisa estar em execução."
 
@@ -2913,6 +3009,7 @@ msgstr "Nome da rede"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Senha"
 
@@ -2960,7 +3057,7 @@ msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Certifique-se de que você tenha um adaptador Wi-Fi conectado e ligado"
 
 # Traduções viáveis são "Modo avião", "Modo voo" ou até "Modo de avião". Achei por melhor manter a primeira opção
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Modo avião ativado"
 
@@ -3258,6 +3355,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 pessoal"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Força do sinal"
 
@@ -3655,6 +3753,7 @@ msgid "Turn device off"
 msgstr "Desligar dispositivo"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3980,7 +4079,7 @@ msgid "SIM Puk required"
 msgstr "Puk do SIM obrigatório"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "SIM errado"
 
@@ -4906,13 +5005,11 @@ msgid "High performance and power usage."
 msgstr "Desempenho e uso de energia altos."
 
 #: panels/power/cc-power-profile-row.c:184
-#| msgid "Performance"
 msgctxt "Power profile"
 msgid "Performance"
 msgstr "Desempenho"
 
 #: panels/power/cc-power-profile-row.c:188
-#| msgid "Balanced"
 msgctxt "Power profile"
 msgid "Balanced"
 msgstr "Balanceado"
@@ -4922,7 +5019,6 @@ msgid "Standard performance and power usage."
 msgstr "Desempenho e uso de energia padrão."
 
 #: panels/power/cc-power-profile-row.c:192
-#| msgid "Power Saver"
 msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Economia de energia"
@@ -4938,7 +5034,7 @@ msgstr "Energia"
 #: panels/power/gnome-power-panel.desktop.in.in:4
 msgid "View your battery status and change power saving settings"
 msgstr ""
-"Veja o status da sua bateria e altere as configurações de economia de energia"
+"Veja o estado da sua bateria e altere as configurações de economia de energia"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
@@ -4947,7 +5043,7 @@ msgid ""
 "Energy;"
 msgstr ""
 "Energia;Dormir;Suspender;Hibernar;Bateria;Brilho;Escurecer;Vazio;Branca;"
-"Monitor;DPMS;Inativo;Bateria"
+"Monitor;DPMS;Inativo;Bateria;"
 
 #: panels/printers/authentication-dialog.ui:11
 msgid " "
@@ -4960,7 +5056,7 @@ msgstr "Autenticar"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Nome de usuário"
 
@@ -5016,6 +5112,7 @@ msgstr "Adicionar impressora"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Desbloquear"
 
@@ -5429,6 +5526,7 @@ msgstr "Nenhum pré-filtro"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Fabricante"
 
@@ -5577,6 +5675,7 @@ msgid "Remove Printer"
 msgstr "Remover impressora"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Modelo"
 
@@ -6331,7 +6430,7 @@ msgstr "Nome:"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:141
 msgid "Status:"
-msgstr "Status:"
+msgstr "Estado:"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:174
 msgid "UUID:"
@@ -7701,6 +7800,7 @@ msgstr "Acesso autorizado"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Habilitado"
 
@@ -8016,6 +8116,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "A nova senha não contém caracteres diferentes o bastante"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Erro desconhecido"
@@ -8265,6 +8366,485 @@ msgstr "Botão inferior"
 msgid "Tip Pressure Feel"
 msgstr "Sensação de pressão da ponta"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "Pontos de acesso"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+#| msgid "VPN"
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "Operação cancelada"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>Erro:</b> Acesso negado ao alterar configurações"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Erro:</b> Erro de Equipamento Móvel"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "Não registrado"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+#| msgid "Yesterday"
+msgid "Registered"
+msgstr "Registrado"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "Roaming"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "Pesquisando"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "Negado"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "Detalhes do modem"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+#| msgid "Status:"
+msgid "Modem Status"
+msgstr "Estado do Modem"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "Transportadora"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "Tipo da rede"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "Estado da Rede"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "Número próprio"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "Detalhes do dispositivo"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "Versão do firmware"
+
+#: panels/wwan/cc-wwan-device.c:982
+#| msgid "Preferences"
+msgid " (Preferred)"
+msgstr " (Preferido)"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid " Only"
+msgstr " Somente"
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "Desbloquear cartão SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "Desbloquear"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "Por gentileza forneça o código PIN para o SIM %d"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr "Digite o PIN para desbloquear seu cartão SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "Por gentileza forneça o código PUK para o SIM %d"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr "Digite o PUK para desbloquear seu cartão SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "Informada senha incorreta. Você tem %1$u tentativa restante"
+msgstr[1] "Informada senha incorreta. Você tem %1$u tentativas restantes"
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "Você tem %u tentativa restante"
+msgstr[1] "Você tem %u tentativas restantes"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "Informada senha incorreta."
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr "Código PUK deve ser um número de 8 dígitos"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "Digite novo PIN"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "Código PIN deve ser um número entre 4-8 dígitos"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+msgid "Unlocking..."
+msgstr "Desbloqueando…"
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "Nenhum SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "Insira um cartão SIM para usar esse modem"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM Bloqueado"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "Dados _móveis"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "Acessar dados usando a rede móvel"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "Roaming de _dados"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "Use dados móveis quando estiver em roaming"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "Modo de _rede"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "Re_de"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "Avançado"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "Nomes de ponto de _acesso"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "Bloqueio _SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "Bloquear SIM com PIN"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "Detalhes do M_odem"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "Telefone falhou"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "Sem conexão com telefone"
+
+#: panels/wwan/cc-wwan-errors-private.h:42
+msgid "Phone-adaptor link reserved"
+msgstr "Link de adaptador-telefone reservado"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "Operação não permitida"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "Não há suporte para a operação"
+
+#: panels/wwan/cc-wwan-errors-private.h:45
+msgid "PH-SIM PIN required"
+msgstr "PIN do PH-SIM obrigatório"
+
+#: panels/wwan/cc-wwan-errors-private.h:46
+msgid "PH-FSIM PIN required"
+msgstr "PIN do PH-FSIM obrigatório"
+
+#: panels/wwan/cc-wwan-errors-private.h:47
+msgid "PH-FSIM PUK required"
+msgstr "PUK do PH-FSIM obrigatório"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "SIM não inserido"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "PIN do SIM obrigatório"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "PUK do SIM obrigatório"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "SIM falhou"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "SIM ocupado"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "Senha incorreta"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "PIN2 do SIM obrigatório"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "PUK2 do SIM obrigatório"
+
+#: panels/wwan/cc-wwan-errors-private.h:57
+msgid "Memory full"
+msgstr "Memória cheia"
+
+#: panels/wwan/cc-wwan-errors-private.h:58
+msgid "Invalid index"
+msgstr "Índice inválido"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "Não localizado"
+
+#: panels/wwan/cc-wwan-errors-private.h:60
+msgid "Memory failure"
+msgstr "Memória falhou"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "Sem serviço de rede"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "Tempo esgotado de rede"
+
+#: panels/wwan/cc-wwan-errors-private.h:63
+msgid "Network not allowed - emergency calls only"
+msgstr "Rede não permitida - somente chamadas de emergência"
+
+#: panels/wwan/cc-wwan-errors-private.h:64
+msgid "Network personalization PIN required"
+msgstr "PIN obrigatório para personalização de rede"
+
+#: panels/wwan/cc-wwan-errors-private.h:65
+msgid "Network personalization PUK required"
+msgstr "PUK obrigatório para personalização de rede"
+
+#: panels/wwan/cc-wwan-errors-private.h:66
+msgid "Network subset personalization PIN required"
+msgstr "PIN obrigatório para personalização de subconjunto de rede"
+
+#: panels/wwan/cc-wwan-errors-private.h:67
+msgid "Network subset personalization PUK required"
+msgstr "PUK obrigatório para personalização de subconjunto de rede"
+
+#: panels/wwan/cc-wwan-errors-private.h:68
+msgid "Service provider personalization PIN required"
+msgstr "PIN obrigatório para personalização de provedor de serviço"
+
+#: panels/wwan/cc-wwan-errors-private.h:69
+msgid "Service provider personalization PUK required"
+msgstr "PUK obrigatório para personalização de provedor de serviço"
+
+#: panels/wwan/cc-wwan-errors-private.h:70
+msgid "Corporate personalization PIN required"
+msgstr "PIN obrigatório para personalização de corporação"
+
+#: panels/wwan/cc-wwan-errors-private.h:71
+msgid "Corporate personalization PUK required"
+msgstr "PUK obrigatório para personalização de corporação"
+
+#: panels/wwan/cc-wwan-errors-private.h:73
+msgid "Illegal MS"
+msgstr "MS ilegal"
+
+#: panels/wwan/cc-wwan-errors-private.h:74
+msgid "Illegal ME"
+msgstr "ME ilegal"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "Serviços de GPRS não permitidos"
+
+#: panels/wwan/cc-wwan-errors-private.h:76
+msgid "PLMN not allowed"
+msgstr "PLMN não permitido"
+
+#: panels/wwan/cc-wwan-errors-private.h:77
+msgid "Location area not allowed"
+msgstr "Área de localização não permitida"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "Roaming não permitido nesta área de localização"
+
+#: panels/wwan/cc-wwan-errors-private.h:79
+msgid "Service option not supported"
+msgstr "Não há suporte à opção de serviço"
+
+#: panels/wwan/cc-wwan-errors-private.h:80
+msgid "Requested service option not subscribed"
+msgstr "Não há assinatura para o serviço solicitado"
+
+#: panels/wwan/cc-wwan-errors-private.h:81
+msgid "Service option temporarily out of order"
+msgstr "Opção de serviço temporariamente fora de funcionamento"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Erro GPRS não especificado"
+
+#: panels/wwan/cc-wwan-errors-private.h:83
+msgid "PDP authentication failure"
+msgstr "Falha na autenticação PDP"
+
+#: panels/wwan/cc-wwan-errors-private.h:84
+msgid "Invalid mobile class"
+msgstr "Classe móvel inválida"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "Ação cancelada"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "Acesso negado"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "Erro desconhecido"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "Modo de rede"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "De_finir"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Fechar"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "_Automático"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "Escolha a rede"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "Atualizar provedores de rede"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "Nenhum adaptador WWAN localizado"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Certifique-se de que você tenha um dispositivo celular/WAN sem fio"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "Ao ligar o modo avião, a WAN sem fio é desativada."
+
+# Traduções viáveis são "Modo avião", "Modo voo" ou até "Modo de avião". Achei por melhor manter a primeira opção
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "Desli_gar modo avião"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "Conexão de dados"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "Cartão SIM usado para internet"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "Habilitar rede móvel"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "Bloqueio de SIM"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "Pró_ximo"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "_Bloquear SIM com PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "Alterar PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr "Digite o PIN atual para alterar as configurações de bloqueio do SIM"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "Rede móvel"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "Configure telefonia e conexões de dados móveis"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr "célula;celular;wwan;telefonia;sim;mobile;móvel;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "Configurações do GNOME"
@@ -8309,7 +8889,7 @@ msgstr "[PAINEL] [ARGUMENTO…]"
 msgid "Privacy"
 msgstr "Privacidade"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Painéis disponíveis:"
 
@@ -8421,1866 +9001,3 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons do sistema"
-
-#~ msgid "Balanced Power"
-#~ msgstr "Energia balanceada"
-
-#~ msgid "_Screen Brightness"
-#~ msgstr "_Brilho da tela"
-
-#~ msgid "_Keyboard Brightness"
-#~ msgstr "Brilho do _teclado"
-
-#~ msgid "Dim Screen When Inactive"
-#~ msgstr "Escurecer a tela quando inativo"
-
-#~ msgid "_Blank Screen"
-#~ msgstr "A_pagar a tela"
-
-#~ msgid "_Wi-Fi"
-#~ msgstr "_Wi-Fi"
-
-#~ msgid "Wi-Fi can be turned off to save power."
-#~ msgstr "Wi-Fi pode ser desligado para poupar energia."
-
-#~ msgid "_Mobile Broadband"
-#~ msgstr "Banda larga _móvel"
-
-#~ msgid ""
-#~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-#~ msgstr ""
-#~ "Banda larga móvel (LTE, 4G, 3G, etc.) pode ser desligada para poupar "
-#~ "energia."
-
-#~ msgid "_Bluetooth"
-#~ msgstr "_Bluetooth"
-
-#~ msgid "Bluetooth can be turned off to save power."
-#~ msgstr "Bluetooth pode ser desligado para poupar energia."
-
-#~ msgid "Keyboard Shortcut"
-#~ msgstr "Atalho de teclado"
-
-#~ msgid "This can be changed in Customize Shortcuts"
-#~ msgstr "Isto pode ser alterado em Personalizar atalhos"
-
-#~ msgid "Hold down and type to enter different characters"
-#~ msgstr "Mantenha pressionado e digite para inserir caracteres diferentes"
-
-#~ msgid "Add…"
-#~ msgstr "Adicionar…"
-
-#~ msgid "Left Alt"
-#~ msgstr "Alt da esquerda"
-
-#~ msgid "Right Alt"
-#~ msgstr "Alt da direita"
-
-#~ msgid "Left Super"
-#~ msgstr "Super da esquerda"
-
-#~ msgid "Right Super"
-#~ msgstr "Super da direita"
-
-#~ msgid "Right Ctrl"
-#~ msgstr "Ctrl da direita"
-
-#~ msgid "Alternative Characters Key"
-#~ msgstr "Teclas de caracteres alternativos"
-
-#~ msgid "Modifiers-only switch to next source"
-#~ msgstr "Modificadores alternam para próxima fonte"
-
-#~ msgctxt "keyboard key"
-#~ msgid "Menu Key"
-#~ msgstr "Tecla de menu"
-
-#~ msgctxt "Battery power"
-#~ msgid "Charging"
-#~ msgstr "Carregando"
-
-#~ msgctxt "Battery power"
-#~ msgid "Caution"
-#~ msgstr "Cuidado"
-
-#~ msgctxt "Battery power"
-#~ msgid "Low"
-#~ msgstr "Baixa"
-
-#~ msgctxt "Battery power"
-#~ msgid "Good"
-#~ msgstr "Boa"
-
-#~ msgctxt "Battery power"
-#~ msgid "Fully charged"
-#~ msgstr "Carga completa"
-
-#~ msgctxt "Battery power"
-#~ msgid "Empty"
-#~ msgstr "Vazia"
-
-#~ msgid "Previous source"
-#~ msgstr "Fonte anterior"
-
-#~ msgid "Super+Shift+Space"
-#~ msgstr "Super+Shift+Espaço"
-
-#~ msgid "Next source"
-#~ msgstr "Próxima fonte"
-
-#~ msgid "Super+Space"
-#~ msgstr "Super+Espaço"
-
-#~ msgid "Left+Right Alt"
-#~ msgstr "Alt da esquerda+direita"
-
-#~ msgid "Switch off to connect to a Wi-Fi network"
-#~ msgstr "Desligue para se conectar a uma rede wi-fi"
-
-#~ msgctxt "Wi-Fi passkey"
-#~ msgid "Password"
-#~ msgstr "Senha"
-
-#~ msgid "Universal Access"
-#~ msgstr "Acessibilidade"
-
-#~ msgid "Add user accounts and change passwords"
-#~ msgstr "Adicionar contas de usuários e alterar senhas"
-
-#~ msgid "Play and record sound"
-#~ msgstr "Reproduzir e gravar som"
-
-#~ msgid "Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)"
-#~ msgstr "Detectar dispositivos de rede usando mDNS/DNS-SD (Bonjour/zeroconf)"
-
-#~ msgid "Access bluetooth hardware directly"
-#~ msgstr "Acessar hardware Bluetooth diretamente"
-
-#~ msgid "Use bluetooth devices"
-#~ msgstr "Usar dispositivos Bluetooth"
-
-#~ msgid "Use your camera"
-#~ msgstr "Usar sua câmera"
-
-#~ msgid "Print documents"
-#~ msgstr "Imprimir documentos"
-
-#~ msgid "Use any connected joystick"
-#~ msgstr "Usar qualquer joystick conectado"
-
-#~ msgid "Allow connecting to the Docker service"
-#~ msgstr "Permitir conectar ao serviço do Docker"
-
-#~ msgid "Configure network firewall"
-#~ msgstr "Configurar firewall de rede"
-
-#~ msgid "Setup and use privileged FUSE filesystems"
-#~ msgstr "Configurar e usar sistemas de arquivos FUSE privilegiados"
-
-#~ msgid "Update firmware on this device"
-#~ msgstr "Atualizar firmware neste dispositivo"
-
-#~ msgid "Access hardware information"
-#~ msgstr "Acessar informações de hardware"
-
-#~ msgid "Provide entropy to hardware random number generator"
-#~ msgstr "Fornecer entropia para gerador de número aleatório de hardware"
-
-#~ msgid "Use hardware-generated random numbers"
-#~ msgstr "Usar números aleatórios gerados por hardware"
-
-#~ msgid "Access files in your home folder"
-#~ msgstr "Acessar arquivos em sua pasta pessoal"
-
-#~ msgid "Access libvirt service"
-#~ msgstr "Acessar serviço do libvirt"
-
-#~ msgid "Change system language and region settings"
-#~ msgstr "Alterar o idioma do sistema e configurações de região"
-
-#~ msgid "Change location settings and providers"
-#~ msgstr "Alterar configurações de local e provedores"
-
-#~ msgid "Access your location"
-#~ msgstr "Acessar seu local"
-
-#~ msgid "Read system and application logs"
-#~ msgstr "Ler logs do sistema e de aplicativos"
-
-#~ msgid "Access LXD service"
-#~ msgstr "Acessar serviço do LXD"
-
-#~ msgid "access the media-hub service"
-#~ msgstr "Acessar o serviço de comutação de mídia"
-
-#~ msgid "Use and configure modems"
-#~ msgstr "Usar e configurar modems"
-
-#~ msgid "Read system mount information and disk quotas"
-#~ msgstr "Ler informações de montagem e cotas de disco do sistema"
-
-#~ msgid "Control music and video players"
-#~ msgstr "Controlar reprodutores de música e vídeo"
-
-#~ msgid "Change low-level network settings"
-#~ msgstr "Alterar configurações de rede de baixo nível"
-
-#~ msgid ""
-#~ "Access the NetworkManager service to read and change network settings"
-#~ msgstr ""
-#~ "Acessar o serviço do NetworkManager para ler e alterar as configurações "
-#~ "de rede"
-
-#~ msgid "Read access to network settings"
-#~ msgstr "Ler acesso às configurações de rede"
-
-#~ msgid "Change network settings"
-#~ msgstr "Alterar configurações de rede"
-
-#~ msgid "Read network settings"
-#~ msgstr "Ler configurações de rede"
-
-#~ msgid ""
-#~ "Access the ofono service to read and change network settings for mobile "
-#~ "telephony"
-#~ msgstr ""
-#~ "Acessar o serviço do ofono para ler e alterar configurações para "
-#~ "telefonia móvel"
-
-#~ msgid "Control Open vSwitch hardware"
-#~ msgstr "Controlar hardware de Open vSwitch"
-
-#~ msgid "Read from CD/DVD"
-#~ msgstr "Ler de CD/DVD"
-
-#~ msgid "Read, add, change, or remove saved passwords"
-#~ msgstr "Ler, adicionar, alterar ou remover senhas salvas"
-
-#~ msgid ""
-#~ "Access pppd and ppp devices for configuring Point-to-Point Protocol "
-#~ "connections"
-#~ msgstr ""
-#~ "Acessar dispositivos pppd e ppp para continuar conexões do Protocolo "
-#~ "Ponto a Ponto"
-
-#~ msgid "Pause or end any process on the system"
-#~ msgstr "Pausar e encerrar qualquer processo no sistema"
-
-#~ msgid "Access USB hardware directly"
-#~ msgstr "Acessar hardware USB diretamente"
-
-#~ msgid "Read/write files on removable storage devices"
-#~ msgstr "Ler/escrever arquivos em dispositivos de armazenamento removíveis"
-
-#~ msgid "Prevent screen sleep/lock"
-#~ msgstr "Impedir suspensão/bloqueio de tela"
-
-#~ msgid "Access serial port hardware"
-#~ msgstr "Acessar hardware de porta serial"
-
-#~ msgid "Restart or power off the device"
-#~ msgstr "Reiniciar ou desligar o dispositivo"
-
-#~ msgid "Install, remove and configure software"
-#~ msgstr "Instalar, remover e configurar software"
-
-#~ msgid "Access Storage Framework service"
-#~ msgstr "Acessar serviço de framework de armazenamento"
-
-#~ msgid "Read process and system information"
-#~ msgstr "Ler informações de processos e do sistema"
-
-#~ msgid "Monitor and control any running program"
-#~ msgstr "Monitorar e controlar qualquer programa em execução"
-
-#~ msgid "Change the date and time"
-#~ msgstr "Alterar a data e hora"
-
-#~ msgid "Change time server settings"
-#~ msgstr "Alterar configurações de servidor de hora"
-
-#~ msgid "Change the time zone"
-#~ msgstr "Alterar o fuso horário"
-
-#~ msgid "Access the UDisks2 service for configuring disks and removable media"
-#~ msgstr ""
-#~ "Acessar o serviço do UDisks2 para configurar discos e mídias removíveis"
-
-#~ msgid "Read/change shared calendar events in Ubuntu Unity 8"
-#~ msgstr "Ler/alterar eventos de calendário compartilhado no Ubuntu Unity 8"
-
-#~ msgid "Read/change shared contacts in Ubuntu Unity 8"
-#~ msgstr "Ler/alterar contatos compartilhados no Ubuntu Unity 8"
-
-#~ msgid "Access energy usage data"
-#~ msgstr "Acessar dados de uso de energia"
-
-#~ msgid "Read/write access to U2F devices exposed"
-#~ msgstr "Acesso de leitura/gravação a dispositivos U2F expostos"
-
-# Este separador usa um caractere que se parece com o sinal de dois pontos, porém não é o mesmo caractere de dois pontos. --Enrico
-#~ msgid "∶"
-#~ msgstr "∶"
-
-#~ msgid ""
-#~ "To create a user account,\n"
-#~ "click the * icon first"
-#~ msgstr ""
-#~ "Para criar uma conta de usuário,\n"
-#~ "clique primeiro no ícone *"
-
-#~ msgid "Enable Fingerprint Login"
-#~ msgstr "Habilita o início de sessão por impressão digital"
-
-#~ msgid "_Other finger:"
-#~ msgstr "_Outro dedo:"
-
-#~ msgid ""
-#~ "Your fingerprint was successfully saved. You should now be able to log in "
-#~ "using your fingerprint reader."
-#~ msgstr ""
-#~ "Sua impressão digital foi salva com sucesso. Você deve estar pronto para "
-#~ "iniciar a sessão usando seu leitor de impressão digital."
-
-#~ msgid ""
-#~ "You are not allowed to access the device. Contact your system "
-#~ "administrator."
-#~ msgstr ""
-#~ "Você não tem permissão para acessar o dispositivo. Contate seu "
-#~ "administrador de sistemas."
-
-#~ msgid "An internal error occurred."
-#~ msgstr "Ocorreu um erro interno."
-
-#~ msgid "Delete registered fingerprints?"
-#~ msgstr "Excluir impressões digitais registradas?"
-
-#~ msgid "Done!"
-#~ msgstr "Feito!"
-
-#~ msgid "Could not access “%s” device"
-#~ msgstr "Não foi possível acessar o dispositivo “%s”"
-
-#~ msgid "Could not start finger capture on “%s” device"
-#~ msgstr ""
-#~ "Não foi possível iniciar o dispositivo de captura de impressões digitais "
-#~ "“%s”"
-
-#~ msgid "Could not access any fingerprint readers"
-#~ msgstr "Não foi possível acessar qualquer leitor de impressões digitais"
-
-#~ msgid "Please contact your system administrator for help."
-#~ msgstr "Por favor, contate seu administrador de sistemas para ajuda."
-
-#~ msgid ""
-#~ "To enable fingerprint login, you need to save one of your fingerprints, "
-#~ "using the “%s” device."
-#~ msgstr ""
-#~ "Para habilitar o início de sessão por impressão digital, você precisa "
-#~ "salvar uma de suas impressões digitais, usando o dispositivo “%s”."
-
-#~ msgid "Selecting finger"
-#~ msgstr "Selecionando dedo"
-
-#~ msgid "Set Background and Lock Screen"
-#~ msgstr "Definir plano de fundo e tela de bloqueio"
-
-#~ msgid "Set Background"
-#~ msgstr "Definir plano de fundo"
-
-#~ msgid "Set Lock Screen"
-#~ msgstr "Definir tela de bloqueio"
-
-#~ msgid "Remove Background"
-#~ msgstr "Remover plano de fundo"
-
-#~ msgid "Reports are sent anonymously and are scrubbed of personal data."
-#~ msgstr ""
-#~ "Os relatórios são enviados de forma anônima e não contêm dados pessoais."
-
-#~ msgid ""
-#~ "Sending reports of technical problems help us improve this operating "
-#~ "system."
-#~ msgstr ""
-#~ "Enviar relatórios de problemas técnicos nos ajuda a melhorar este sistema "
-#~ "operacional."
-
-#~ msgid "Last Login"
-#~ msgstr "Última sessão"
-
-#~ msgid "Notification _Popups"
-#~ msgstr "Notificação por _janelas instantâneas"
-
-#~ msgid "Restrict _background data usage"
-#~ msgstr "Restringir o uso de dados em _segundo plano"
-
-#~ msgid "Appropriate for connections that have data charges or limits."
-#~ msgstr "Apropriado para conexões que possuem cobrança de dados ou limites."
-
-#~ msgid "No regions found"
-#~ msgstr "Nenhuma região encontrada"
-
-#~ msgid "Version %s"
-#~ msgstr "Versão %s"
-
-#~ msgid "OS name"
-#~ msgstr "Nome do SO"
-
-#~ msgid "OS type"
-#~ msgstr "Tipo do SO"
-
-#~ msgid "Disk"
-#~ msgstr "Disco"
-
-#~ msgid "Check for updates"
-#~ msgstr "Verificar atualizações"
-
-#~ msgid "Network proxy"
-#~ msgstr "Proxy da rede"
-
-#~ msgid "page 1"
-#~ msgstr "página 1"
-
-#~ msgid "Inner _authentication"
-#~ msgstr "_Autenticação interna"
-
-#~ msgid "page 2"
-#~ msgstr "página 2"
-
-#~ msgid "Twisted Pair (TP)"
-#~ msgstr "Par trançado (TP)"
-
-#~ msgid "Attachment Unit Interface (AUI)"
-#~ msgstr "Attachment Unit Interface (AUI)"
-
-#~ msgid "BNC"
-#~ msgstr "BNC"
-
-#~ msgid "Media Independent Interface (MII)"
-#~ msgstr "Media Independent Interface (MII)"
-
-#~ msgid "10 Mb/s"
-#~ msgstr "10 Mb/s"
-
-#~ msgid "100 Mb/s"
-#~ msgstr "100 Mb/s"
-
-#~ msgid "1 Gb/s"
-#~ msgstr "1 Gb/s"
-
-#~ msgid "10 Gb/s"
-#~ msgstr "10 Gb/s"
-
-#~ msgid ""
-#~ "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-#~ msgstr ""
-#~ "Trocar de ponto de acesso de conexão sem fio irá desconectar você de <b>"
-#~ "%s</b>."
-
-#~ msgid ""
-#~ "It is not possible to access the Internet through your wireless while the "
-#~ "hotspot is active."
-#~ msgstr ""
-#~ "Não é possível acessar a Internet através da sua conexão sem fio enquanto "
-#~ "o ponto de acesso estiver ativo."
-
-#~ msgid ""
-#~ "Wi-Fi hotspots are usually used to share an additional Internet "
-#~ "connection over Wi-Fi."
-#~ msgstr ""
-#~ "Pontos de acessos Wi-Fi são geralmente usados para compartilhar uma "
-#~ "conexão Internet adicional pelo Wi-Fi."
-
-#~ msgid "Automatic _Connect"
-#~ msgstr "Cone_xão automática"
-
-#~ msgid "details"
-#~ msgstr "detalhes"
-
-#~ msgid "Show P_assword"
-#~ msgstr "_Mostrar senha"
-
-#~ msgid "Make available to other users"
-#~ msgstr "Disponibilizar para outros usuários"
-
-#~ msgid "identity"
-#~ msgstr "identidade"
-
-#~ msgid "IPv_4"
-#~ msgstr "IPv_4"
-
-#~ msgid "_Addresses"
-#~ msgstr "_Endereços"
-
-#~ msgid "Automatic (DHCP) addresses only"
-#~ msgstr "Apenas endereços (DHCP) automáticos"
-
-#~ msgid "Link-local only"
-#~ msgstr "Apenas conexão local"
-
-#~ msgid "_Ignore automatically obtained routes"
-#~ msgstr "_Ignorar automaticamente rotas obtidas"
-
-#~ msgid "ipv4"
-#~ msgstr "ipv4"
-
-#~ msgid "IPv_6"
-#~ msgstr "IPv_6"
-
-#~ msgid "ipv6"
-#~ msgstr "ipv6"
-
-#~ msgid "_Cloned MAC Address"
-#~ msgstr "Endereço MAC _clonado"
-
-#~ msgid "_Reset"
-#~ msgstr "_Restaurar"
-
-#~ msgid ""
-#~ "Reset the settings for this connection to their defaults, but remember as "
-#~ "a preferred connection."
-#~ msgstr ""
-#~ "Restaurar as configurações desta conexão para os padrão, mas lembrá-la "
-#~ "como uma conexão preferida."
-
-#~ msgid ""
-#~ "Remove all details relating to this network and do not try to "
-#~ "automatically connect to it."
-#~ msgstr ""
-#~ "Remover todos os detalhes relacionados a esta rede e não tentar conectar "
-#~ "automaticamente a ela."
-
-#~ msgid "Hardware"
-#~ msgstr "Hardware"
-
-#~ msgctxt "tab"
-#~ msgid "Reset"
-#~ msgstr "Restaurar"
-
-#~ msgid "Connected Devices"
-#~ msgstr "Dispositivos conectados"
-
-#~ msgid "Ad-hoc"
-#~ msgstr "Ad-hoc"
-
-#~ msgid "Infrastructure"
-#~ msgstr "Infraestrutura"
-
-#~ msgid "Not connected"
-#~ msgstr "Não conectado"
-
-#~ msgid "In use"
-#~ msgstr "Em uso"
-
-#~ msgctxt "Location services status"
-#~ msgid "On"
-#~ msgstr "Ativado"
-
-#~ msgctxt "Location services status"
-#~ msgid "Off"
-#~ msgstr "Desativado"
-
-#~ msgctxt "Camera status"
-#~ msgid "Off"
-#~ msgstr "Desativada"
-
-#~ msgctxt "Camera status"
-#~ msgid "On"
-#~ msgstr "Ativada"
-
-#~ msgctxt "Microphone status"
-#~ msgid "Off"
-#~ msgstr "Desativado"
-
-#~ msgctxt "Microphone status"
-#~ msgid "On"
-#~ msgstr "Ativado"
-
-#~ msgid "Usage & History"
-#~ msgstr "Uso & histórico"
-
-#~ msgid "Privacy Policy"
-#~ msgstr "Política de privacidade"
-
-#~ msgid ""
-#~ "Remembering your history makes things easier to find again. These items "
-#~ "are never shared over the network."
-#~ msgstr ""
-#~ "Lembrar do seu histórico facilita localizar novamente suas coisas. Esses "
-#~ "itens nunca são compartilhados com a rede."
-
-#~ msgid "_Recently Used"
-#~ msgstr "Usados _recentemente"
-
-#~ msgid "Retain _History"
-#~ msgstr "Reter _histórico"
-
-#~ msgid "The Screen Lock protects your privacy when you are away."
-#~ msgstr ""
-#~ "A tela de bloqueio protege sua privacidade enquanto você está ausente."
-
-#~ msgid "Lock screen _after blank for"
-#~ msgstr "Bloquear a tela _após apagada por"
-
-#~ msgid "Lock Screen _Notifications"
-#~ msgstr "_Notificações na tela de bloqueio"
-
-#~ msgid ""
-#~ "Automatically purge the Trash and temporary files to help keep your "
-#~ "computer free of unnecessary sensitive information."
-#~ msgstr ""
-#~ "Exclui permanentemente, de forma automática, os arquivos da lixeira e "
-#~ "temporários para ajudar a manter seu computador livre de informações "
-#~ "sensíveis e desnecessárias."
-
-#~ msgid "Purge _After"
-#~ msgstr "Excluir permanentemente _após"
-
-#~ msgid ""
-#~ "Sending us information about which software you use helps us provide you "
-#~ "with more accurate recommendations. It also helps us to improve our "
-#~ "software.\n"
-#~ "\n"
-#~ "All the information we collect is made anonymous, and we will never share "
-#~ "your data with third parties."
-#~ msgstr ""
-#~ "Ao nos enviar informações sobre qual software você utiliza, você irá nos "
-#~ "ajudar a lhe oferecer recomendações mais precisas. Isto também nos "
-#~ "auxilia a melhorar nosso software.\n"
-#~ "\n"
-#~ "Todas as informações que coletamos é tornada anônima e jamais iremos "
-#~ "compartilhar seus dados com terceiros."
-
-#~ msgid "_Send software usage statistics"
-#~ msgstr "En_viar estatísticas de utilização do software"
-
-#~ msgid "_Camera"
-#~ msgstr "_Câmera"
-
-#~ msgid "_Microphone"
-#~ msgstr "_Microfone"
-
-#~ msgid "_Location Services"
-#~ msgstr "Serviços de _localização"
-
-#~ msgid "Protect your personal information and control what others might see"
-#~ msgstr ""
-#~ "Proteja suas informações pessoais e controle o que os outros podem ver"
-
-#~ msgid "Flash the _window title"
-#~ msgstr "Piscar título da _janela"
-
-#~| msgid "Select Background"
-#~ msgid "Delete Background"
-#~ msgstr "Excluir plano de fundo"
-
-#~ msgid "The username cannot start with a “-”."
-#~ msgstr "O nome de usuário não pode começar com um “-”."
-
-#~ msgid "_Background"
-#~ msgstr "Plano de _fundo"
-
-#~ msgid "Changes throughout the day"
-#~ msgstr "Alterações durante o dia"
-
-#~ msgctxt "background, style"
-#~ msgid "Tile"
-#~ msgstr "Lado a lado"
-
-#~ msgctxt "background, style"
-#~ msgid "Zoom"
-#~ msgstr "Ampliar"
-
-#~ msgctxt "background, style"
-#~ msgid "Center"
-#~ msgstr "Centro"
-
-#~ msgctxt "background, style"
-#~ msgid "Scale"
-#~ msgstr "Escala"
-
-#~ msgctxt "background, style"
-#~ msgid "Fill"
-#~ msgstr "Preencher"
-
-#~ msgctxt "background, style"
-#~ msgid "Span"
-#~ msgstr "Expandir"
-
-#~ msgid "Wallpapers"
-#~ msgstr "Papéis de parede"
-
-#~ msgid "Colors"
-#~ msgstr "Cores"
-
-#~ msgid "Pictures"
-#~ msgstr "Imagens"
-
-#~ msgid "No Pictures Found"
-#~ msgstr "Nenhuma imagem encontrada"
-
-#~ msgid "You can add images to your %s folder and they will show up here"
-#~ msgstr "Você pode adicionar imagens para a pasta %s e elas aparecerão aqui"
-
-#~ msgid "_Off"
-#~ msgstr "_Desligar"
-
-#~ msgid "Connection/SSID"
-#~ msgstr "Conexão/SSID"
-
-#~ msgid "_Automatic suspend"
-#~ msgstr "Suspensão _automática"
-
-#~ msgid "_When the Power Button is pressed"
-#~ msgstr "_Quando o botão de energia for pressionado"
-
-#~ msgid "application-x-executable"
-#~ msgstr "application-x-executable"
-
-#~ msgid "preferences-desktop-wallpaper"
-#~ msgstr "preferences-desktop-wallpaper"
-
-#~ msgid "bluetooth"
-#~ msgstr "bluetooth"
-
-#~ msgid "preferences-color"
-#~ msgstr "preferences-color"
-
-#~ msgid "preferences-system-time"
-#~ msgstr "preferences-system-time"
-
-#~ msgid "preferences-desktop-display"
-#~ msgstr "preferences-desktop-display"
-
-#~ msgid "starred"
-#~ msgstr "starred"
-
-#~ msgid "help-about"
-#~ msgstr "help-about"
-
-#~ msgid "media-removable"
-#~ msgstr "media-removable"
-
-#~ msgid "input-keyboard"
-#~ msgstr "input-keyboard"
-
-#~ msgid "input-mouse"
-#~ msgstr "input-mouse"
-
-#~ msgid "network-workgroup"
-#~ msgstr "network-workgroup"
-
-#~ msgid "network-wireless"
-#~ msgstr "network-wireless"
-
-#~ msgid "preferences-system-notifications"
-#~ msgstr "preferences-system-notifications"
-
-#~ msgid "goa-panel"
-#~ msgstr "goa-panel"
-
-#~ msgid "gnome-power-manager"
-#~ msgstr "gnome-power-manager"
-
-#~ msgid "printer"
-#~ msgstr "printer"
-
-#~ msgid "preferences-system-privacy"
-#~ msgstr "preferences-system-privacy"
-
-#~ msgid "preferences-desktop-locale"
-#~ msgstr "preferences-desktop-locale"
-
-#~ msgid "preferences-system-search"
-#~ msgstr "preferences-system-search"
-
-#~ msgid "preferences-system-sharing"
-#~ msgstr "preferences-system-sharing"
-
-#~ msgid "multimedia-volume-control"
-#~ msgstr "multimedia-volume-control"
-
-#~ msgid "thunderbolt"
-#~ msgstr "thunderbolt"
-
-#~ msgid "preferences-desktop-accessibility"
-#~ msgstr "preferences-desktop-accessibility"
-
-#~ msgid "system-users"
-#~ msgstr "system-users"
-
-#~ msgid "input-tablet"
-#~ msgstr "input-tablet"
-
-#~ msgid "org.gnome.Settings"
-#~ msgstr "org.gnome.Settings"
-
-#~ msgid "_Night Light"
-#~ msgstr "Luz _noturna"
-
-#~ msgid "Could not get screen information"
-#~ msgstr "Não foi possível obter informação sobre a tela"
-
-#~ msgid "My Home Network"
-#~ msgstr "Minha rede pessoal"
-
-#~ msgid "hardware"
-#~ msgstr "hardware"
-
-#~ msgid "Switch to previous source"
-#~ msgstr "Trocar para a fonte anterior"
-
-#~ msgid "Switch to next source"
-#~ msgstr "Trocar para a próxima fonte"
-
-#~ msgid "Alternative switch to next source"
-#~ msgstr "Troca alternativa para próxima fonte"
-
-#~ msgid "English (United Kingdom)"
-#~ msgstr "Inglês (Reino Unido)"
-
-#~ msgid "United Kingdom"
-#~ msgstr "Reino Unido"
-
-#~ msgid "_Options"
-#~ msgstr "_Opções"
-
-#~ msgid "Add input source"
-#~ msgstr "Adicionar fonte de entrada"
-
-#~ msgid "Remove input source"
-#~ msgstr "Remover fonte de entrada"
-
-#~ msgid "Move input source up"
-#~ msgstr "Mover fonte de entrada para cima"
-
-#~ msgid "Move input source down"
-#~ msgstr "Mover fonte de entrada para baixo"
-
-#~ msgid "Show input source keyboard layout"
-#~ msgstr "Mostrar layout de teclado da fonte de entrada"
-
-#~ msgctxt "balance"
-#~ msgid "Left"
-#~ msgstr "Esquerda"
-
-#~ msgctxt "balance"
-#~ msgid "Right"
-#~ msgstr "Direita"
-
-#~ msgctxt "balance"
-#~ msgid "Minimum"
-#~ msgstr "Minimizar"
-
-#~ msgctxt "balance"
-#~ msgid "Maximum"
-#~ msgstr "Maximizar"
-
-#~ msgid "_Subwoofer:"
-#~ msgstr "_Subwoofer:"
-
-#~ msgid "_Profile:"
-#~ msgstr "_Perfil:"
-
-#~ msgid "_Test Speakers"
-#~ msgstr "_Testar alto-falantes"
-
-#~ msgid "Peak detect"
-#~ msgstr "Detectar pico"
-
-#~ msgid "Device"
-#~ msgstr "Dispositivo"
-
-#~ msgid "Speaker Testing for %s"
-#~ msgstr "Testando alto-falantes para %s"
-
-#~ msgid "C_hoose a device for sound output:"
-#~ msgstr "Escol_ha um dispositivo para saída de som:"
-
-#~ msgid "Settings for the selected device:"
-#~ msgstr "Configurações para o dispositivo selecionado:"
-
-#~ msgid "_Input volume:"
-#~ msgstr "Volume de _entrada:"
-
-#~ msgid "C_hoose a device for sound input:"
-#~ msgstr "Escol_ha um dispositivo para entrada de som:"
-
-#~ msgid "Sound Effects"
-#~ msgstr "Efeitos de som"
-
-#~ msgid "Built-in"
-#~ msgstr "Embutido"
-
-#~ msgid "Sound Preferences"
-#~ msgstr "Preferências de som"
-
-#~ msgid "Testing event sound"
-#~ msgstr "Testando eventos de som"
-
-#~ msgid "From theme"
-#~ msgstr "Do tema"
-
-#~ msgid "C_hoose an alert sound:"
-#~ msgstr "Escol_ha um alerta de som:"
-
-#~ msgid "Stop"
-#~ msgstr "Parar"
-
-#~ msgctxt "Account type"
-#~ msgid "Standard"
-#~ msgstr "Padrão"
-
-#~ msgctxt "Account type"
-#~ msgid "Administrator"
-#~ msgstr "Administrador"
-
-#~ msgid "page 3"
-#~ msgstr "página 3"
-
-#~ msgid "GNOME Control Center"
-#~ msgstr "Centro de controle GNOME"
-
-#~ msgid ""
-#~ "The control center is GNOME’s main interface for configuration of various "
-#~ "aspects of your desktop."
-#~ msgstr ""
-#~ "O centro de controle é a interface principal do GNOME para configuração "
-#~ "de vários aspectos de seu ambiente."
-
-#~ msgid "Quit"
-#~ msgstr "Sair"
-
-#~ msgid "gnome-control-center"
-#~ msgstr "gnome-control-center"
-
-#~ msgid "_Verify New Password"
-#~ msgstr "_Verificar nova senha"
-
-#~ msgid "Passwords do not match."
-#~ msgstr "As senhas não conferem."
-
-#~ msgid "Show the overview"
-#~ msgstr "Mostrar uma visão geral"
-
-#~ msgid "Back­ground"
-#~ msgstr "Plano de fundo"
-
-#~ msgid "Blue­tooth"
-#~ msgstr "Bluetooth"
-
-#~ msgid "Co­lor"
-#~ msgstr "Cor"
-
-#~ msgid "Section"
-#~ msgstr "Seção"
-
-#~ msgid "Overview"
-#~ msgstr "Visão geral"
-
-#~ msgid "Defa­ult Applications"
-#~ msgstr "Aplicativos padrão"
-
-#~ msgid "Ab­out"
-#~ msgstr "Sobre"
-
-#~ msgid "De­tails"
-#~ msgstr "Detalhes"
-
-#~ msgid "Remo­vable Media"
-#~ msgstr "Mídia removível"
-
-#~ msgid "Net­work"
-#~ msgstr "Rede"
-
-#~ msgid "No­ti­fi­ca­tions"
-#~ msgstr "Notificações"
-
-#~ msgid "Po­wer"
-#~ msgstr "Energia"
-
-#~ msgid "Pri­va­cy"
-#~ msgstr "Privacidade"
-
-#~ msgid "Sha­ring"
-#~ msgstr "Compartilhar"
-
-#~ msgid "Uni­ver­sal Access"
-#~ msgstr "Acessibilidade"
-
-#~ msgid "Disable image"
-#~ msgstr "Desabilitar imagem"
-
-#~ msgid "Browse for more pictures…"
-#~ msgstr "Procurar por mais imagens…"
-
-#~ msgid "Used by %s"
-#~ msgstr "Usado por %s"
-
-#~ msgid "Wa­com Tab­let"
-#~ msgstr "Tablet Wacom"
-
-#~ msgctxt "category"
-#~ msgid "Hardware"
-#~ msgstr "Hardware"
-
-#~ msgctxt "category"
-#~ msgid "System"
-#~ msgstr "Sistema"
-
-#~ msgid "Lid Closed"
-#~ msgstr "Tampa fechada"
-
-#~ msgid "Mirrored"
-#~ msgstr "Espelhadas"
-
-#~ msgid "Secondary"
-#~ msgstr "Secundária"
-
-#~ msgid "Arrange Combined Displays"
-#~ msgstr "Organizar telas combinadas"
-
-#~ msgid "Drag displays to rearrange them"
-#~ msgstr "Arraste as telas para organizá-las"
-
-#~ msgid "%d Hz (NTSC)"
-#~ msgstr "%d Hz (NTSC)"
-
-#~ msgid "%d Hz"
-#~ msgstr "%d Hz"
-
-#~ msgid "Rotate counterclockwise by 90°"
-#~ msgstr "Girar em 90° no sentido anti-horário"
-
-#~ msgid "Rotate by 180°"
-#~ msgstr "Girar em 180°"
-
-#~ msgid "Rotate clockwise by 90°"
-#~ msgstr "Girar em 90° no sentido horário"
-
-#~ msgid "Size"
-#~ msgstr "Tamanho"
-
-#~ msgid "Aspect Ratio"
-#~ msgstr "Taxa de proporção"
-
-# Geralmente o "panorama de atividades" é mencionado em maiúsculo. Seria o caso aqui?
-#~ msgid "Show the top bar and Activities Overview on this display"
-#~ msgstr "Mostrar a barra superior e o panorama de atividades nesta tela"
-
-#~ msgid "Join this display with another to create an extra workspace"
-#~ msgstr "Une esta tela a outra para criar um espaço de trabalho extra"
-
-#~ msgid "Presentation"
-#~ msgstr "Apresentação"
-
-#~ msgid "Show slideshows and media only"
-#~ msgstr "Mostra apenas apresentações de slides e mídia"
-
-#~ msgid "Show your existing view on both displays"
-#~ msgstr "Mostra sua visão existente em ambas as telas"
-
-#~ msgid "Turn Off"
-#~ msgstr "Desligar"
-
-#~ msgid "Don’t use this display"
-#~ msgstr "Não usar esta tela"
-
-#~ msgid "_Arrange Combined Displays"
-#~ msgstr "Organiz_ar telas combinadas"
-
-#~ msgid "%s %d-bit (Build ID: %s)"
-#~ msgstr "%s %d bits (ID de compilação: %s)"
-
-#~ msgid "%s %d-bit"
-#~ msgstr "%s %d-bit"
-
-#~ msgid "Base system"
-#~ msgstr "Sistema base"
-
-#~ msgid "Shortcut;Repeat;Blink;"
-#~ msgstr "Atalho;Repetir;Piscar;"
-
-#~ msgid "Press Esc to cancel."
-#~ msgstr "Pressione Esc para cancelar."
-
-#~ msgid "Server"
-#~ msgstr "Servidor"
-
-#~ msgid "Delete DNS Server"
-#~ msgstr "Excluir servidor DNS"
-
-#~ msgid "Make available to other _users"
-#~ msgstr "Disponibilizar para outros _usuários"
-
-#~ msgid "Firewall _Zone"
-#~ msgstr "_Zona de firewall"
-
-#~ msgctxt "Firewall zone"
-#~ msgid "Default"
-#~ msgstr "Padrão"
-
-#~ msgid "The zone defines the trust level of the connection"
-#~ msgstr "A zona define o nível de confiança da conexão"
-
-#~ msgid ""
-#~ "Reset the settings for this network, including passwords, but remember it "
-#~ "as a preferred network"
-#~ msgstr ""
-#~ "Restaura as configurações desta rede, incluindo senhas, mas lembrando "
-#~ "dela como uma rede preferida"
-
-#~ msgid ""
-#~ "Remove all details relating to this network and do not try to "
-#~ "automatically connect"
-#~ msgstr ""
-#~ "Remove todos os detalhes relacionados a esta rede e não tenta conectar "
-#~ "automaticamente"
-
-#~ msgid ""
-#~ "If you have a connection to the Internet other than wireless, you can set "
-#~ "up a wireless hotspot to share the connection with others."
-#~ msgstr ""
-#~ "Se você tiver uma conexão com a Internet que não seja a sem fio, você "
-#~ "pode configurar um ponto de acesso sem fio para compartilhar sua conexão "
-#~ "de Internet com outras pessoas."
-
-#~ msgid "Proxy"
-#~ msgstr "Proxy"
-
-#~ msgid "_Add Profile…"
-#~ msgstr "_Adicionar perfil…"
-
-#~ msgctxt "proxy method"
-#~ msgid "None"
-#~ msgstr "Nenhum"
-
-#~ msgctxt "proxy method"
-#~ msgid "Manual"
-#~ msgstr "Manual"
-
-#~ msgctxt "proxy method"
-#~ msgid "Automatic"
-#~ msgstr "Automático"
-
-#~ msgid "VPN Type"
-#~ msgstr "Tipo de VPN"
-
-#~ msgid "Group Name"
-#~ msgstr "Nome do grupo"
-
-#~ msgid "_Use as Hotspot…"
-#~ msgstr "_Usar como ponto de acesso…"
-
-#~ msgid "_History"
-#~ msgstr "_Histórico"
-
-#~ msgid "2"
-#~ msgstr "2"
-
-#~ msgid "3"
-#~ msgstr "3"
-
-#~ msgid "4"
-#~ msgstr "4"
-
-#~ msgid "Loading options…"
-#~ msgstr "Carregando opções…"
-
-#~ msgctxt "Password hint"
-#~ msgid "Try to add more letters, numbers and symbols."
-#~ msgstr "Tente adicionar mais de letras, números e símbolos."
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Weak"
-#~ msgstr "Força: Fraca"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Low"
-#~ msgstr "Força: Baixa"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Medium"
-#~ msgstr "Força: Média"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: Good"
-#~ msgstr "Força: Boa"
-
-#~ msgctxt "Password strength"
-#~ msgid "Strength: High"
-#~ msgstr "Força: Alta"
-
-#~ msgid "0"
-#~ msgstr "0"
-
-#~ msgid "<small>Your account</small>"
-#~ msgstr "<small>Sua conta</small>"
-
-#~ msgid "Edit"
-#~ msgstr "Editar"
-
-#~ msgctxt "button"
-#~ msgid "Set Shortcut"
-#~ msgstr "Definir atalho"
-
-#~ msgctxt "notifications"
-#~ msgid "Notification _Banners"
-#~ msgstr "_Banners de notificação"
-
-#~ msgid "Notification _Banners"
-#~ msgstr "_Banners de notificação"
-
-#~ msgid "Add Account"
-#~ msgstr "Adicionar conta"
-
-#~ msgid "Mail"
-#~ msgstr "Correio"
-
-#~ msgid "Calendar"
-#~ msgstr "Agenda"
-
-#~ msgid "Contacts"
-#~ msgstr "Contatos"
-
-#~ msgid "Chat"
-#~ msgstr "Bate-papo"
-
-#~ msgctxt "printer state"
-#~ msgid "Configuring"
-#~ msgstr "Configurando"
-
-#~ msgid "Toner Level"
-#~ msgstr "Nível do toner"
-
-#~ msgid "Supply Level"
-#~ msgstr "Nível de suprimento"
-
-#~ msgctxt "printer state"
-#~ msgid "Installing"
-#~ msgstr "Instalando"
-
-#~ msgid "%u active"
-#~ msgid_plural "%u active"
-#~ msgstr[0] "%u ativo"
-#~ msgstr[1] "%u ativos"
-
-#~ msgid "Supply"
-#~ msgstr "Suprimento"
-
-#~ msgid "Jobs"
-#~ msgstr "Trabalhos"
-
-#~ msgid "Show _Jobs"
-#~ msgstr "Mostrar _trabalhos"
-
-#~ msgid "label"
-#~ msgstr "rótulo"
-
-#~ msgid "Setting new driver…"
-#~ msgstr "Definindo novo driver…"
-
-#~ msgid "Print _Test Page"
-#~ msgstr "Imprimir página de _teste"
-
-#~ msgid "Other Accounts"
-#~ msgstr "Outras contas"
-
-#~ msgid "Error creating account"
-#~ msgstr "Erro ao criar conta"
-
-#~ msgid "Are you sure you want to remove the account?"
-#~ msgstr "Tem certeza de que deseja remover a conta?"
-
-#~ msgid "This will not remove the account on the server."
-#~ msgstr "Isso não irá remover a conta no servidor."
-
-#~ msgid "_Remove"
-#~ msgstr "_Remover"
-
-#~ msgid "No online accounts configured"
-#~ msgstr "Nenhuma conta on-line configurada"
-
-#~ msgid ""
-#~ "Adding an account allows your applications to access it for documents, "
-#~ "mail, contacts, calendar, chat and more."
-#~ msgstr ""
-#~ "Ao adicionar uma conta é permitido ao seus aplicativos acessá-la para "
-#~ "documentos, e-mails, contatos, calendários, bate-papo e muito mais."
-
-#~ msgid "Add a New Printer"
-#~ msgstr "Adicionar uma nova impressora"
-
-#~ msgid "No printers detected."
-#~ msgstr "Nenhuma impressora detectada."
-
-#~ msgctxt "login history week label"
-#~ msgid "%s - %s"
-#~ msgstr "%s - %s"
-
-# Não consigo ver a GUI. "Para cima" seria melhor? - Rafael
-#~ msgctxt "Wacom tablet button"
-#~ msgid "Up"
-#~ msgstr "Acima"
-
-# Não consigo ver a GUI. "Para baixo" seria melhor? - Rafael
-#~ msgctxt "Wacom tablet button"
-#~ msgid "Down"
-#~ msgstr "Abaixo"
-
-#~ msgctxt "Wacom action-type"
-#~ msgid "None"
-#~ msgstr "Nenhum"
-
-#~ msgid "Left Ring"
-#~ msgstr "Anel esquerdo"
-
-#~ msgid "Left Ring Mode #%d"
-#~ msgstr "Modo de anel esquerdo #%d"
-
-#~ msgid "Right Ring Mode #%d"
-#~ msgstr "Modo de anel direito #%d"
-
-#~ msgid "Left Touchstrip"
-#~ msgstr "Touchstrip esquerdo"
-
-#~ msgid "Left Touchstrip Mode #%d"
-#~ msgstr "Modo touchstrip esquerdo #%d"
-
-#~ msgid "Right Touchstrip"
-#~ msgstr "Touchstrip direito"
-
-#~ msgid "Right Touchstrip Mode #%d"
-#~ msgstr "Modo touchstrip direito #%d"
-
-#~ msgid "Left Touchring Mode Switch"
-#~ msgstr "Modo alternador Touchring esquerdo"
-
-#~ msgid "Right Touchring Mode Switch"
-#~ msgstr "Modo alternador Touchring direito"
-
-#~ msgid "Left Touchstrip Mode Switch"
-#~ msgstr "Modo alternador Touchstrip esquerdo"
-
-#~ msgid "Right Touchstrip Mode Switch"
-#~ msgstr "Modo alternador Touchstrip direito"
-
-#~ msgid "Mode Switch #%d"
-#~ msgstr "Modo alternador #%d"
-
-#~ msgid "Left Button #%d"
-#~ msgstr "Botão esquerdo #%d"
-
-#~ msgid "Right Button #%d"
-#~ msgstr "Botão direito #%d"
-
-#~ msgid "Top Button #%d"
-#~ msgstr "Botão superior #%d"
-
-#~ msgid "Bottom Button #%d"
-#~ msgstr "Botão inferior #%d"
-
-#~ msgid "No Action"
-#~ msgstr "Nenhuma ação"
-
-#~ msgid "Left Mouse Button Click"
-#~ msgstr "Clique no botão esquerdo do mouse"
-
-#~ msgid "Scroll Up"
-#~ msgstr "Rolagem para cima"
-
-#~ msgid "Scroll Down"
-#~ msgstr "Rolagem para baixo"
-
-#~ msgid "Scroll Right"
-#~ msgstr "Rolagem para direita"
-
-#~ msgid "Keyboard shortcut for <b>%s</b>. Enter new shortcut to change."
-#~ msgstr ""
-#~ "O atalho de teclado para <b>%s</b>. Digite um novo atalho para alterá-lo."
-
-#~ msgid ""
-#~ "To edit a shortcut, click the row and hold down the new keys or press "
-#~ "Backspace to clear."
-#~ msgstr ""
-#~ "Para editar um atalho, clique na linha e mantenha pressionada as novas "
-#~ "teclas ou pressione a tecla Backspace para limpar."
-
-#~ msgid "Remove Shortcut"
-#~ msgstr "Excluir atalho"
-
-#~ msgid "<Unknown Action>"
-#~ msgstr "<Ação desconhecida>"
-
-#~ msgid ""
-#~ "The shortcut \"%s\" cannot be used because it will become impossible to "
-#~ "type using this key.\n"
-#~ "Please try with a key such as Control, Alt or Shift at the same time."
-#~ msgstr ""
-#~ "O atalho \"%s\" não pode ser usado porque se tornaria impossível digitar "
-#~ "usando esta tecla.\n"
-#~ "Por favor, tente usar uma tecla como Control, Alt ou Shift "
-#~ "simultaneamente."
-
-#~ msgid ""
-#~ "The shortcut \"%s\" is already used for\n"
-#~ "\"%s\""
-#~ msgstr ""
-#~ "O atalho \"%s\" já está sendo usado por\n"
-#~ "\"%s\""
-
-#~ msgid ""
-#~ "If you reassign the shortcut to \"%s\", the \"%s\" shortcut will be "
-#~ "disabled."
-#~ msgstr ""
-#~ "Se você reatribuir o atalho para \"%s\", o atalho \"%s\" será desativado."
-
-#~ msgid "_Reassign"
-#~ msgstr "_Reatribuir"
-
-#~ msgid ""
-#~ "The \"%s\" shortcut has an associated \"%s\" shortcut. Do you want to "
-#~ "automatically set it to \"%s\"?"
-#~ msgstr ""
-#~ "O atalho \"%s\" possui um atalho \"%s\" associado. Você deseja defini-lo "
-#~ "automaticamente para \"%s\"?"
-
-#~ msgid ""
-#~ "\"%s\" is currently associated with \"%s\", this shortcut will be "
-#~ "disabled if you move forward."
-#~ msgstr ""
-#~ "\"%s\" está atualmente associado a \"%s\", este atalho será desativado "
-#~ "caso você prossiga."
-
-#~ msgid "_Assign"
-#~ msgstr "A_tribuir"
-
-#~ msgid "Error logging into the account"
-#~ msgstr "Erro ao iniciar sessão com a conta"
-
-#~ msgid "Credentials have expired."
-#~ msgstr "As credenciais expiraram."
-
-#~ msgid "Sign in to enable this account."
-#~ msgstr "Autentique para habilitar esta conta."
-
-#~ msgid "_Sign In"
-#~ msgstr "_Autenticar"
-
-#~ msgid "Add User Account"
-#~ msgstr "Adicionar conta de usuário"
-
-#~ msgid "Login History"
-#~ msgstr "Histórico de início de sessão"
-
-#~ msgid "Add Network Connection"
-#~ msgstr "Adicionar conexão de rede"
-
-#~ msgid "Personal File Sharing"
-#~ msgstr "Compartilhamento de arquivos pessoais"
-
-#~ msgid "_Allow Remote Control"
-#~ msgstr "Permitir _acesso remoto"
-
-#, fuzzy
-#~| msgid "GNOME Control Center"
-#~ msgid "Welcome to the Control Center"
-#~ msgstr "Centro de controle GNOME"
-
-#~ msgid "Bond"
-#~ msgstr "Vínculo"
-
-# Refere-se a tipo de conexão -- Enrico
-#~ msgid "Team"
-#~ msgstr "União"
-
-#~ msgid "Bridge"
-#~ msgstr "Ponte"
-
-#~ msgid "VLAN"
-#~ msgstr "VLAN"
-
-#~ msgid "Could not load VPN plugins"
-#~ msgstr "Não foi possível carregar os plug-ins de VPN"
-
-#~ msgid "Bond slaves"
-#~ msgstr "Vínculos escravos"
-
-#~ msgid "(none)"
-#~ msgstr "(nenhum)"
-
-#~ msgid "Bridge slaves"
-#~ msgstr "Pontes escravas"
-
-#~ msgid "Team slaves"
-#~ msgstr "Uniões escravas"
-
-#~ msgid "InfiniBand device does not support connected mode"
-#~ msgstr "Dispositivo de InfiniBand não tem suporte ao modo conectado"
-
-#~ msgid "No Certificate Authority certificate chosen"
-#~ msgstr "Nenhuma certificado de autoridade certificadora escolhido"
-
-#~ msgid ""
-#~ "Not using a Certificate Authority (CA) certificate can result in "
-#~ "connections to insecure, rogue Wi-Fi networks.  Would you like to choose "
-#~ "a Certificate Authority certificate?"
-#~ msgstr ""
-#~ "Não usar um certificado de uma autoridade certificadora (AC) pode "
-#~ "resultar em conexões a redes sem fio inseguras e arriscadas. Deseja "
-#~ "escolher um certificado de autoridade certificadora?"
-
-#~ msgid "Ignore"
-#~ msgstr "Ignorar"
-
-#~ msgid "Choose CA Certificate"
-#~ msgstr "Escolher certificado de AC"
-
-#~ msgid "As_k for this password every time"
-#~ msgstr "_Pedir esta senha todas as vezes"
-
-#~ msgid "Don't _warn me again"
-#~ msgstr "Não me a_vise novamente"
-
-#~ msgid "Yes"
-#~ msgstr "Sim"
-
-#~ msgctxt "Search Location"
-#~ msgid "Other"
-#~ msgstr "Outro"
-
-#~ msgid "_Verify"
-#~ msgstr "_Verificar"
-
-# Substituído usuário por conta a fim de evitar redundância --Enrico
-#~ msgid "A user with the username '%s' already exists."
-#~ msgstr "Já existe uma conta com o nome de usuário \"%s\"."
-
-#~ msgid "Used to determine your geographical location"
-#~ msgstr "É usado para determinar sua localização geográfica"
-
-#~ msgid "Done"
-#~ msgstr "Concluído"
-
-#~ msgid "Time _Zone"
-#~ msgstr "Fuso _horário"
-
-#~ msgid "Close"
-#~ msgstr "Fechar"
-
-#~ msgid "Resume Printing"
-#~ msgstr "Continuar impressão"
-
-#~ msgid "Pause Printing"
-#~ msgstr "Pausar impressão"
-
-#~ msgctxt "print job"
-#~ msgid "Held"
-#~ msgstr "Repetido"
-
-#~ msgid "Job Title"
-#~ msgstr "Título do trabalho"
-
-#~ msgid "Job State"
-#~ msgstr "Estado do trabalho"
-
-#~ msgid "Options"
-#~ msgstr "Opções"
-
-#~ msgid "Password:"
-#~ msgstr "Senha:"
-
-#~ msgid "_Repeat Keys"
-#~ msgstr "_Repetição de teclas"
-
-#~ msgid "_Cursor Blinking"
-#~ msgstr "_Cursor intermitente"
-
-#~ msgid "Zoom"
-#~ msgstr "Ampliação"
-
-#~ msgctxt "universal access, contrast"
-#~ msgid "Color"
-#~ msgstr "Colorido"
-
-#~ msgid "_Delay:"
-#~ msgstr "Interv_alo:"
-
-#~ msgctxt "keyboard, delay"
-#~ msgid "Short"
-#~ msgstr "Curto"
-
-#~ msgctxt "keyboard, speed"
-#~ msgid "Slow"
-#~ msgstr "Lenta"
-
-#~ msgctxt "keyboard, delay"
-#~ msgid "Long"
-#~ msgstr "Longo"
-
-#~ msgctxt "keyboard, speed"
-#~ msgid "Fast"
-#~ msgstr "Rápida"
-
-#~ msgid "S_peed:"
-#~ msgstr "V_elocidade:"
-
-#~ msgid "Test Your Settings"
-#~ msgstr "Testar suas configurações"
-
-#~ msgctxt "double click, speed"
-#~ msgid "Slow"
-#~ msgstr "Lento"
-
-#~ msgctxt "double click, speed"
-#~ msgid "Fast"
-#~ msgstr "Rápido"
-
-#~ msgctxt "mouse, left button as primary"
-#~ msgid "_Left"
-#~ msgstr "_Esquerdo"
-
-#~ msgctxt "mouse, right button as primary"
-#~ msgid "_Right"
-#~ msgstr "_Direito"
-
-#~ msgid "_Pointer speed"
-#~ msgstr "Velocidade do _ponteiro"
-
-#~ msgctxt "mouse pointer, speed"
-#~ msgid "Slow"
-#~ msgstr "Lento"
-
-#~ msgctxt "mouse pointer, speed"
-#~ msgid "Fast"
-#~ msgstr "Rápido"
-
-#~ msgctxt "touchpad pointer, speed"
-#~ msgid "Slow"
-#~ msgstr "Lento"
-
-#~ msgctxt "touchpad pointer, speed"
-#~ msgid "Fast"
-#~ msgstr "Rápido"
-
-#~ msgid "No printers available"
-#~ msgstr "Nenhuma impressora disponível"
-
-#~ msgid "Add New Printer"
-#~ msgstr "Adicionar nova impressora"
-
-#~ msgid "Bluetooth is disabled"
-#~ msgstr "Bluetooth está desativado"
-
-#~ msgid "Wireless devices require extra power"
-#~ msgstr "Dispositivos sem fio demandam energia extra"
-
-#~ msgid "When battery power is _critical"
-#~ msgstr "Quando a energia da bateria estiver _crítica"
-
-#~ msgid ""
-#~ "Bluetooth Sharing allows you to share files with other Bluetooth enabled "
-#~ "devices"
-#~ msgstr ""
-#~ "O compartilhamento Bluetooth permite que você compartilhe arquivos com "
-#~ "outros dispositivos Bluetooth habilitados"
-
-#~ msgid "Only Receive From Trusted Devices"
-#~ msgstr "Apenas receber de dispositivos confiáveis"
-
-#~ msgid "Save Received Files to Downloads Folder"
-#~ msgstr "Salvar arquivos recebidos na pasta de Downloads"
-
-#~ msgid "Show help options"
-#~ msgstr "Exibe opções de ajuda"
-
-#~ msgid ""
-#~ "%s\n"
-#~ "Run '%s --help' to see a full list of available command line options.\n"
-#~ msgstr ""
-#~ "%s\n"
-#~ "Execute '%s --help' para ver uma lista completa de opções de linha de "
-#~ "comando disponíveis.\n"
-
-#~ msgid "Turns off wireless devices"
-#~ msgstr "Desliga dispositivos de rede sem fio"
-
-#~ msgid "Disable while _typing"
-#~ msgstr "Desabilitar enquanto digi_ta"
-
-#~ msgid "The system network services are not compatible with this version."
-#~ msgstr "Os serviços de rede do sistema não são compatíveis com esta versão."
-
-#~ msgctxt "notifications"
-#~ msgid "Show Popup Banners"
-#~ msgstr "Mostrar janelas instantâneas de banners"
-
-#~ msgctxt "notifications"
-#~ msgid "View in Lock Screen"
-#~ msgstr "Ver na tela de bloqueio"
-
-#~ msgid "Show Pop Up Banners"
-#~ msgstr "Mostrar janelas instantâneas de banners"
-
-#~ msgid "Enter address of a printer or a text to filter results"
-#~ msgstr ""
-#~ "Digite o endereço de uma impressora ou um texto para filtrar resultados"
-
-#~ msgid "United States"
-#~ msgstr "Estados Unidos"
-
-#~ msgid "France"
-#~ msgstr "França"
-
-#~ msgid "Spain"
-#~ msgstr "Espanha"
-
-#~ msgid "China"
-#~ msgstr "China"
-
-#~ msgid "Sorry"
-#~ msgstr "Sinto muito"
-
-#~ msgid "Share Media On This Network"
-#~ msgstr "Compartilhar multimídia nesta rede"
-
-#~ msgid "Shared Folders"
-#~ msgstr "Pastas compartilhadas"
-
-#~ msgid "column"
-#~ msgstr "coluna"
-
-#~ msgid "Remove Folder"
-#~ msgstr "Remover pasta"
-
-#~ msgid "Share Public Folder On This Network"
-#~ msgstr "Compartilhar pasta pública nesta rede"
-
-#~ msgid "Immediately"
-#~ msgstr "Imediatamente"
-
-#~ msgid "Remote View"
-#~ msgstr "Visão remota"
-
-#~ msgid "Approve All Connections"
-#~ msgstr "Aprovar todas as conexões"
-
-#~ msgid "Flickr"
-#~ msgstr "Flickr"
-
-#~ msgid "Install Updates"
-#~ msgstr "Instalar atualizações"
-
-#~ msgid "System Up-To-Date"
-#~ msgstr "Sistema atualizado"
-
-#~ msgid "Search for network printers or filter result"
-#~ msgstr "Pesquisar por impressoras de rede ou resultado de filtro"
-
-#~ msgid "_Default"
-#~ msgstr "Pa_drão"
-
-#~ msgid "Set Up New Device"
-#~ msgstr "Configurar um novo dispositivo"
-
-#~ msgid "Paired"
-#~ msgstr "Pareado"
-
-#~ msgid "Mouse & Touchpad Settings"
-#~ msgstr "Configurações de mouse & touchpad"
-
-#~ msgid "Keyboard Settings"
-#~ msgstr "Configurações do teclado"
-
-#~ msgid "Send Files…"
-#~ msgstr "Enviar arquivos…"
-
-#~ msgid "Visibility of “%s”"
-#~ msgstr "Visibilidade de \"%s\""
-
-#~ msgid "Remove '%s' from the list of devices?"
-#~ msgstr "Remover \"%s\" da lista de dispositivos?"
-
-#~ msgid ""
-#~ "If you remove the device, you will have to set it up again before next "
-#~ "use."
-#~ msgstr ""
-#~ "Se você excluir este dispositivo, você terá de configurá-lo novamente "
-#~ "antes do próximo uso."
-
-#~ msgctxt "Language"
-#~ msgid "None"
-#~ msgstr "Nenhum"
-
-#~ msgid "Share Public Folder"
-#~ msgstr "Compartilhar pasta pública"
-
-#~ msgid "Only share with Trusted Devices"
-#~ msgstr "Apenas compartilhar com dispositivos confiáveis"
-
-#~ msgid "Device type:"
-#~ msgstr "Tipo de dispositivo:"
-
-#~ msgid "Manufacturer:"
-#~ msgstr "Fabricante:"
-
-#~ msgid "Model:"
-#~ msgstr "Modelo:"
-
-#~ msgid ""
-#~ "Image files can be dragged on this window to auto-complete the above "
-#~ "fields."
-#~ msgstr ""
-#~ "Arquivos de imagem podem ser arrastados sobre esta janela para completar "
-#~ "automaticamente os campos acima."
-
-#~ msgid "Show your primary display on this screen also"
-#~ msgstr "Mostra sua tela primária também nesta tela"
-
-#~ msgid "Combine"
-#~ msgstr "Combinar"
-
-#~ msgid "Join with the primary display to create an extra space"
-#~ msgstr "Junta com a tela primária para criar um expaço extra"
-
-#~ msgid "Don't use the display"
-#~ msgstr "Não usa a tela"
-
-#~ msgid "Mouse Preferences"
-#~ msgstr "Preferências do mouse"
-
-#~ msgid "Select the interface to use for the new service"
-#~ msgstr "Selecione a interface para usar o novo serviço"
-
-#~ msgid "C_reate…"
-#~ msgstr "C_riar…"
-
-#~ msgid "_Interface"
-#~ msgstr "_Interface"
-
-#~ msgid "Changing photo for:"
-#~ msgstr "Alterando foto para:"
-
-#~ msgid ""
-#~ "Choose a picture that will be shown at the login screen for this account."
-#~ msgstr ""
-#~ "Escolha a imagem que será mostrada na tela de início de sessão para esta "
-#~ "conta."
-
-#~ msgid "Gallery"
-#~ msgstr "Galeria"
-
-#~ msgid "Take a photograph"
-#~ msgstr "Tirar uma foto"
-
-#~ msgid "Browse"
-#~ msgstr "Navegar"
-
-#~ msgid "Photograph"
-#~ msgstr "Fotografia"
-
-#~ msgid "Switch between AM and PM."
-#~ msgstr "Alternar entre AM e PM."
-
-#~ msgid "Estimated battery capacity: %s"
-#~ msgstr "Capacidade da bateria estimada: %s"
