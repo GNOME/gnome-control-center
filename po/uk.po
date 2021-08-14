@@ -8,18 +8,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
-"es\n"
-"POT-Creation-Date: 2021-08-09 13:53+0000\n"
-"PO-Revision-Date: 2021-08-09 17:40+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
+"POT-Creation-Date: 2021-08-13 21:47+0000\n"
+"PO-Revision-Date: 2021-08-14 09:07+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 "X-Project-Style: gnome\n"
 
@@ -50,7 +48,8 @@ msgstr "Повний доступ до /dev"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Мережа"
 
@@ -202,6 +201,7 @@ msgstr "Камера"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -378,6 +378,9 @@ msgstr "Виберіть зображення"
 #: panels/user-accounts/cc-user-panel.c:633
 #: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "_Скасувати"
 
@@ -751,6 +754,7 @@ msgstr "Зберегти профіль"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "З_берегти"
 
@@ -1790,6 +1794,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:437
 #: panels/info-overview/cc-info-overview-panel.c:483
 #: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Невідома"
 
@@ -2294,6 +2299,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -2322,7 +2328,8 @@ msgstr "Не знайдено клавіатурного скорочення"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Назад"
 
@@ -2370,6 +2377,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Назва"
 
@@ -2390,6 +2398,7 @@ msgid "None"
 msgstr "Немає"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Додати"
 
@@ -2657,6 +2666,7 @@ msgstr "Захистіть ваш обмін повідомленнями"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Загальне"
 
@@ -2768,12 +2778,110 @@ msgstr "Змінити чутливість вашої миші та сенсо�
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Сенсор;Вказівник;Клік;Стукіт;Подвійний;Кнопка;Кулька;Прокрутити;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr ""
+"_Гарячий кут"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr ""
+"Торкніться верхнього лівого кута, щоб відкрити огляд «Діяльності»."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr ""
+"_Активні краї екрана"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Перетягніть вікна до верхнього, лівого або правого країв екрана, щоб змінити їхній розмір."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+#| msgid "Colorspace: "
+msgid "Workspaces"
+msgstr "Робочі простори"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr ""
+"_Динамічні робочі простори"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+#| msgid "Automatically Delete Temporary _Files"
+msgid "Automatically removes empty workspaces."
+msgstr "Автоматично вилучає порожні робочі простори."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr ""
+"_Фіксована кількість робочих просторів"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr ""
+"Вкажіть кількість сталих робочих просторів."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr ""
+"_Кількість робочих просторів"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+#| msgid "%s Monitor"
+msgid "Multi-Monitor"
+msgstr "Декілька моніторів"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr ""
+"Робочі простори _лише на основному дисплеї"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr ""
+"Робочі простори на усіх д_исплеях"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+#| msgctxt "Wacom action-type"
+#| msgid "Application defined"
+msgid "Application Switching"
+msgstr "Перемикання програм"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr ""
+"Включити програми з усіх _робочих просторів"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr ""
+"Включити лише програми з пото_чного робочого простору"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr ""
+"Багатозадачність"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr ""
+"Керування параметрами продуктивності та багатозадачності"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr ""
+"Multitasking;Multitask;Productivity;Customize;Desktop;багатозадачність;задача;завдання;продуктивність;налаштовування;налаштування;стільниця;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Отакої, щось не так. Зв'яжіться з вашим постачальником програмних засобів."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "Потрібно запустити NetworkManager."
 
@@ -2919,7 +3027,7 @@ msgstr "Жодного адаптера Wi-Fi не знайдено"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Впевніться, що адаптер Wi-Fi приєднано та увімкнено"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Режим польоту увімкнено"
 
@@ -3220,6 +3328,7 @@ msgid "WPA3 Personal"
 msgstr "Особистий WPA3"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Потужність сигналу"
 
@@ -3614,6 +3723,7 @@ msgid "Turn device off"
 msgstr "Вимкнути пристрій"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3937,7 +4047,7 @@ msgid "SIM Puk required"
 msgstr "Потрібно SIM Puk"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "Неправильний SIM"
 
@@ -4874,13 +4984,11 @@ msgid "High performance and power usage."
 msgstr "Висока швидкодія та споживання енергії."
 
 #: panels/power/cc-power-profile-row.c:184
-#| msgid "Performance"
 msgctxt "Power profile"
 msgid "Performance"
 msgstr "Швидкодія"
 
 #: panels/power/cc-power-profile-row.c:188
-#| msgid "Balanced"
 msgctxt "Power profile"
 msgid "Balanced"
 msgstr "Баланс"
@@ -4890,7 +4998,6 @@ msgid "Standard performance and power usage."
 msgstr "Стандартна швидкодія та споживання енергії."
 
 #: panels/power/cc-power-profile-row.c:192
-#| msgid "Power Saver"
 msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Заощадження"
@@ -4927,7 +5034,7 @@ msgstr "Засвідчення"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Користувач"
 
@@ -4982,6 +5089,7 @@ msgstr "Додати принтер"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Розблокувати"
 
@@ -5396,6 +5504,7 @@ msgstr "Без попереднього відсіювання"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Виробник"
 
@@ -5546,6 +5655,7 @@ msgid "Remove Printer"
 msgstr "Вилучити принтер"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Модель"
 
@@ -7662,6 +7772,7 @@ msgstr "Увійшов"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Увімкнено"
 
@@ -7974,6 +8085,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "Новий пароль не містити достатньо різноманітних символів"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Невідома помилка"
@@ -8222,6 +8334,612 @@ msgstr "Найнижча кнопка"
 msgid "Tip Pressure Feel"
 msgstr "Чутливість дотику"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+#| msgid "Access Options"
+msgid "Access Points"
+msgstr "Точки доступу"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+#| msgid "VPN"
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
+#| msgid "Password"
+msgid "Passsword"
+msgstr "Пароль"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr ""
+"Дію скасовано"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr ""
+"<b>Помилка:</b> відмовлено у доступі до зміни параметрів"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr ""
+"<b>Помилка:</b> помилка мобільного обладнання"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr ""
+"Не зареєстровано"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+#| msgid "Yesterday"
+msgid "Registered"
+msgstr "Зареєстровано"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr ""
+"Роумінг"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+#| msgid "Search"
+msgid "Searching"
+msgstr "Пошук"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr ""
+"Відмовлено"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+#| msgid "Details"
+msgid "Modem Details"
+msgstr "Параметри модема"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+#| msgid "Status:"
+msgid "Modem Status"
+msgstr "Стан модему"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr ""
+"Носій сигналу"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+#| msgid "Network Name"
+msgid "Network Type"
+msgstr "Тип мережі"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+#| msgid "Networks"
+msgid "Network Status"
+msgstr "Стан мережі"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+#| msgid "Numbers"
+msgid "Own Number"
+msgstr "Власний номер"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+#| msgid "Printer Details"
+msgid "Device Details"
+msgstr "Дані щодо пристрою"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+#| msgid "Firmware missing"
+msgid "Firmware Version"
+msgstr "Версія мікропрограми"
+
+#: panels/wwan/cc-wwan-device.c:982
+#| msgid "Preferences"
+msgid " (Preferred)"
+msgstr " (Бажаний)"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid " Only"
+msgstr ""
+" лише"
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr ""
+"Розблокувати SIM-картку"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#| msgid "_Unlock"
+msgid "Unlock"
+msgstr "Розблокувати"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr ""
+"Будь ласка, вкажіть пінкод для SIM-картки %d"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr ""
+"Введіть пінкод для розблокування вашої SIM-картки"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr ""
+"Будь ласка, вкажіть PUK-код для SIM-картки %d"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr ""
+"Введіть PUK-код для розблокування вашої SIM-картки"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] ""
+"Введено помилковий пароль. У вас лишилася %1$u спроба"
+msgstr[1] ""
+"Введено помилковий пароль. У вас лишилося %1$u спроби"
+msgstr[2] ""
+"Введено помилковий пароль. У вас лишилося %1$u спроб"
+msgstr[3] ""
+"Введено помилковий пароль. У вас лишилася %1$u спроба"
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] ""
+"У вас лишилася %u спроба"
+msgstr[1] ""
+"У вас лишилося %u спроби"
+msgstr[2] ""
+"У вас лишилося %u спроб"
+msgstr[3] ""
+"У вас лишилася одна спроба"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr ""
+"Введено помилковий пароль."
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr ""
+"PUK-код має бути 8-цифровим числом"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr ""
+"Введіть новий пінкод"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr ""
+"Пінкод має бути числом, у якому має бути від 4 до 8 цифр"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+#| msgid "Unlock %s."
+msgid "Unlocking..."
+msgstr "Розблоковування…"
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr ""
+"Немає SIM-картки"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr ""
+"Вставте SIM-картку, щоб скористатися цим модемом"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr ""
+"SIM-картку заблоковано"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+#| msgid "_Mobile Broadband"
+msgid "_Mobile Data"
+msgstr "_Мобільні дані"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr ""
+"Доступ до даних за допомогою мобільної мережі"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr ""
+"Роумінг _даних"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr ""
+"Використовувати мобільний доступ до даних при роумінгу"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+#| msgid "Network Name"
+msgid "_Network Mode"
+msgstr "Режим _мережі"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+#| msgid "Network"
+msgid "N_etwork"
+msgstr "М_ережа"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+#| msgctxt "Printer Option Group"
+#| msgid "Advanced"
+msgid "Advanced"
+msgstr "Додатково"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+#| msgid "Access Options"
+msgid "_Access Point Names"
+msgstr "Назви _точок доступу"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+#| msgid "Screen Lock"
+msgid "_SIM Lock"
+msgstr "Б_локування SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr ""
+"Заблокувати SIM-картку за допомогою пінкоду"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+#| msgid "%s Details"
+msgid "M_odem Details"
+msgstr "Параметри м_одему"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+#| msgid "PIN check failed"
+msgid "Phone failure"
+msgstr "Помилка телефону"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+#| msgid "Turn VPN connection off"
+msgid "No connection to phone"
+msgstr "Немає з'єднання з телефоном"
+
+#: panels/wwan/cc-wwan-errors-private.h:42
+msgid "Phone-adaptor link reserved"
+msgstr ""
+"Зв'язок телефон-адаптер зарезервовано"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr ""
+"Дію заборонено"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr ""
+"Підтримки дії не передбачено"
+
+#: panels/wwan/cc-wwan-errors-private.h:45
+#| msgid "SIM Pin required"
+msgid "PH-SIM PIN required"
+msgstr "Потрібен пінкод PH-SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:46
+#| msgid "SIM Pin required"
+msgid "PH-FSIM PIN required"
+msgstr "Потрібен пінкод PH-FSIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:47
+#| msgid "SIM Pin required"
+msgid "PH-FSIM PUK required"
+msgstr "Потрібен PUK-код PH-FSIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+#| msgid "SIM Card not inserted"
+msgid "SIM not inserted"
+msgstr "SIM не вставлено"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+#| msgid "SIM Pin required"
+msgid "SIM PIN required"
+msgstr "Потрібен пінкод SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+#| msgid "SIM Pin required"
+msgid "SIM PUK required"
+msgstr "Потрібен PUK-код SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr ""
+"Помилка SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr ""
+"SIM зайнято"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+#| msgid "Current _Password"
+msgid "Incorrect password"
+msgstr "Помилковий пароль"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+#| msgid "SIM Pin required"
+msgid "SIM PIN2 required"
+msgstr "Потрібен PIN2-код SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+#| msgid "SIM Pin required"
+msgid "SIM PUK2 required"
+msgstr "Потрібен PUK2-код SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:57
+#| msgid "Memory"
+msgid "Memory full"
+msgstr "Пам'ять переповнено"
+
+#: panels/wwan/cc-wwan-errors-private.h:58
+msgid "Invalid index"
+msgstr ""
+"Некоректний індекс"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+#| msgid "No stylus found"
+msgid "Not found"
+msgstr "Не знайдено"
+
+#: panels/wwan/cc-wwan-errors-private.h:60
+#| msgid "Memory"
+msgid "Memory failure"
+msgstr "Помилка пам'яті"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+#| msgid "Networks"
+msgid "No network service"
+msgstr "Немає мережевої служби"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+#| msgid "Network Name"
+msgid "Network timeout"
+msgstr "Час очікування на мережу"
+
+#: panels/wwan/cc-wwan-errors-private.h:63
+msgid "Network not allowed - emergency calls only"
+msgstr ""
+"З'єднання з мережею заборонено — лише термінові виклики"
+
+#: panels/wwan/cc-wwan-errors-private.h:64
+#| msgid "Network registration denied"
+msgid "Network personalization PIN required"
+msgstr "Потрібен мережевий пінкод персоналізації"
+
+#: panels/wwan/cc-wwan-errors-private.h:65
+#| msgid "Network registration denied"
+msgid "Network personalization PUK required"
+msgstr "Потрібен мережевий PUK-код персоналізації"
+
+#: panels/wwan/cc-wwan-errors-private.h:66
+#| msgid "Network registration denied"
+msgid "Network subset personalization PIN required"
+msgstr "Потрібен пінкод персоналізації підмережі"
+
+#: panels/wwan/cc-wwan-errors-private.h:67
+#| msgid "Network registration denied"
+msgid "Network subset personalization PUK required"
+msgstr "Потрібен PUK-код персоналізації підмережі"
+
+#: panels/wwan/cc-wwan-errors-private.h:68
+msgid "Service provider personalization PIN required"
+msgstr ""
+"Потрібен пінкод персоналізації надавача послуг"
+
+#: panels/wwan/cc-wwan-errors-private.h:69
+msgid "Service provider personalization PUK required"
+msgstr ""
+"Потрібен PUK-код персоналізації надавача послуг"
+
+#: panels/wwan/cc-wwan-errors-private.h:70
+msgid "Corporate personalization PIN required"
+msgstr ""
+"Потрібен корпоративний пінкод персоналізації"
+
+#: panels/wwan/cc-wwan-errors-private.h:71
+msgid "Corporate personalization PUK required"
+msgstr ""
+"Потрібен корпоративний PUK-код персоналізації"
+
+#: panels/wwan/cc-wwan-errors-private.h:73
+msgid "Illegal MS"
+msgstr ""
+"Заборонений MS"
+
+#: panels/wwan/cc-wwan-errors-private.h:74
+msgid "Illegal ME"
+msgstr ""
+"Заборонений ME"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+#| msgid "AutoIP service failed"
+msgid "GPRS services not allowed"
+msgstr "Служби GPRS заборонено"
+
+#: panels/wwan/cc-wwan-errors-private.h:76
+msgid "PLMN not allowed"
+msgstr ""
+"PLMN заборонено"
+
+#: panels/wwan/cc-wwan-errors-private.h:77
+msgid "Location area not allowed"
+msgstr ""
+"Обслуговування у цій місцевості заборонено"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr ""
+"Роумінґ у цій місцевості заборонено"
+
+#: panels/wwan/cc-wwan-errors-private.h:79
+#| msgid "The device type is not currently supported."
+msgid "Service option not supported"
+msgstr "Підтримки варіанта служби не передбачено"
+
+#: panels/wwan/cc-wwan-errors-private.h:80
+msgid "Requested service option not subscribed"
+msgstr ""
+"Немає передплати на запитану службу"
+
+#: panels/wwan/cc-wwan-errors-private.h:81
+msgid "Service option temporarily out of order"
+msgstr ""
+"Варіант служби тимчасово не працює"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr ""
+"Невказана помилка GPRS"
+
+#: panels/wwan/cc-wwan-errors-private.h:83
+#| msgid "Authentication failed"
+msgid "PDP authentication failure"
+msgstr "Помилка розпізнавання у PDP"
+
+#: panels/wwan/cc-wwan-errors-private.h:84
+msgid "Invalid mobile class"
+msgstr ""
+"Некоректний клас мобільного"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+#| msgctxt "print job"
+#| msgid "Canceled"
+msgid "Action Cancelled"
+msgstr "Дію скасовано"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr ""
+"Доступ заборонено"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+#| msgid "Unknown error"
+msgid "Unknown Error"
+msgstr "Невідома помилка"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+#| msgid "Network Name"
+msgid "Network Mode"
+msgstr "Режим мережі"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr ""
+"_Встановити"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+#| msgid "_Close"
+msgid "Close"
+msgstr "Закрити"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+#| msgid "Automatic"
+msgid "_Automatic"
+msgstr "_Автоматично"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+#| msgid "Visible Networks"
+msgid "Choose Network"
+msgstr "Виберіть мережу"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr ""
+"Освіжити список надавачів послуг мережі"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr ""
+"SIM-картка %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+#| msgid "No Wi-Fi Adapter Found"
+msgid "No WWAN Adapter Found"
+msgstr "Не знайдено жодного адаптера WWAN"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+#| msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Переконайтеся, що у вас є пристрій бездротової WAN або стільникової мережі"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+#| msgid "Bluetooth is disabled when airplane mode is on."
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "Бездротову WAN вимкнено, коли увімкнено режим польоту"
+
+#: panels/wwan/cc-wwan-panel.ui:163
+#| msgid "Turn Off Airplane Mode"
+msgid "_Turn off Airplane Mode"
+msgstr "Ви_мкнути режим польоту"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+#| msgid "Forget Connection"
+msgid "Data Connection"
+msgstr "З'єднання із передаванням даних"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+#| msgid "SIM Card not inserted"
+msgid "SIM card used for internet"
+msgstr "SIM-картка для інтернету"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+#| msgid "_Enable by Keyboard"
+msgid "Enable Mobile Network"
+msgstr "Увімкнути мобільну мережу"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+#| msgid "Screen Lock"
+msgid "SIM Lock"
+msgstr "Блокування SIM"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr ""
+"_Далі"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr ""
+"За_блокувати SIM-картку за допомогою пінкоду"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+#| msgid "Ch_ange"
+msgid "Change PIN"
+msgstr "Змінити пінкод"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr ""
+"Введіть поточний пінкод, щоб змінити параметри блокування SIM-картки"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+#| msgid "Visible Networks"
+msgid "Mobile Network"
+msgstr "Мобільна мережа"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+#| msgid "Configure Removable Media settings"
+msgid "Configure Telephony and mobile data connections"
+msgstr "Налаштовування телефонії та мобільних з'єднань для передавання даних"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr ""
+"cellular;wwan;telephony;sim;mobile;стільниковий;телефонія;телефон;сім;картка;мобільний;вван;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "Параметри GNOME"
@@ -8266,7 +8984,7 @@ msgstr "[ПАНЕЛЬ] [АРГУМЕНТ…]"
 msgid "Privacy"
 msgstr "Конфіденційність"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Доступні панелі:"
 
@@ -8399,9 +9117,6 @@ msgstr "Системні звуки"
 
 #~ msgid "Wi-Fi can be turned off to save power."
 #~ msgstr "Wi-Fi може бути вимкнений для заощадження енергії."
-
-#~ msgid "_Mobile Broadband"
-#~ msgstr "_Мобільна широкосмугова радіомережа"
 
 #~ msgid ""
 #~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
