@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-09 13:53+0000\n"
-"PO-Revision-Date: 2021-08-13 11:05+0100\n"
+"POT-Creation-Date: 2021-08-14 12:39+0000\n"
+"PO-Revision-Date: 2021-08-14 19:39+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -56,7 +56,8 @@ msgstr "Acesso total a /dev"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Rede"
 
@@ -208,6 +209,7 @@ msgstr "Câmara"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Inativo"
@@ -384,6 +386,9 @@ msgstr "Selecionar uma foto"
 #: panels/user-accounts/cc-user-panel.c:633
 #: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "_Cancelar"
 
@@ -758,6 +763,7 @@ msgstr "Gravar o perfil"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Gravar"
 
@@ -1797,6 +1803,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:437
 #: panels/info-overview/cc-info-overview-panel.c:483
 #: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Desconhecido"
 
@@ -2296,6 +2303,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -2324,7 +2332,8 @@ msgstr "Nenhum atalho de teclado encontrado"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Recuar"
 
@@ -2370,6 +2379,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Nome"
 
@@ -2390,6 +2400,7 @@ msgid "None"
 msgstr "Nenhum"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Adicionar"
 
@@ -2651,6 +2662,7 @@ msgstr "Proteja suas conversas"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Geral"
 
@@ -2764,11 +2776,92 @@ msgstr ""
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Trackpad;Cursor;Clique;Toque;Duplo;Botão;Trackball;Deslocar;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "Canto ativo"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr ""
+"Toque no canto superior esquerdo para abrir a Visão geral das Atividades."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "Margens de ecrã ativas"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Arraste janelas contra a parte superior, esquerda e direita do ecrã para as "
+"redimensionar."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "Áreas de trabalho"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "Áreas de trabalho _dinâmicas"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "Remove automaticamente áreas de trabalho vazias."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "Número fixo de áreas de trabalho"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "Especifique um número de áreas de trabalho permanentes."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "_Número de áreas de trabalho"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+msgid "Multi-Monitor"
+msgstr "Multi-Monitor"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "Áreas de trabalho apenas no ecrã _principal"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "Áreas de trabalho em todos os ecrãs"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "Comutação de aplicações"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "Incluir aplicações de todas as áreas de trabalho"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "Incluir apenas aplicações da área de trabalho atual"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "Multitarefa"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "Gerir preferências para produtividade e multitarefa"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr "Multitasking;Multitask;Productivity;Customize;Desktop;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Algo correu mal. Por favor, contacte o seu fornecedor do programa."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "O gestor de redes tem de estar em execução."
 
@@ -2868,6 +2961,7 @@ msgstr "Nome da rede"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Palavra-passe"
 
@@ -2913,7 +3007,7 @@ msgstr "Nenhum adaptador Wi-Fi encontrado"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Tenha a certeza de que tem um adaptador Wi-Fi ligado e ativado"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Modo avião ligado"
 
@@ -3212,6 +3306,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 pessoal"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Força do sinal"
 
@@ -3609,6 +3704,7 @@ msgid "Turn device off"
 msgstr "Desligar o dispositivo"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3932,7 +4028,7 @@ msgid "SIM Puk required"
 msgstr "Necessário o PUK do SIM"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "SIM incorreto"
 
@@ -4904,7 +5000,7 @@ msgstr "Autenticar"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Utilizador"
 
@@ -4960,6 +5056,7 @@ msgstr "Adicionar impressora"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Desbloquear"
 
@@ -5375,6 +5472,7 @@ msgstr "Nenhuma pré-filtragem"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Fabricante"
 
@@ -5523,6 +5621,7 @@ msgid "Remove Printer"
 msgstr "Remover a impressora"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Modelo"
 
@@ -7644,6 +7743,7 @@ msgstr "Com sessão ativa"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Ativo"
 
@@ -7961,6 +8061,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "A nova palavra-passe não contém caracteres distintos suficientes"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Erro desconhecido"
@@ -8212,6 +8313,482 @@ msgstr "Botão mais ao fundo"
 msgid "Tip Pressure Feel"
 msgstr "Sensibilidade da pressão da caneta"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "Pontos de acesso"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "Operação cancelada"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>Error:</b> Acesso negado a alteração de definições"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Error:</b> Erro de equipamento móvel"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "Não registado"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+msgid "Registered"
+msgstr "Registado"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "Roaming"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "A procurar"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "Negado"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "Detalhes do modem"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "Estado do modem"
+
+# Aqui creio que o termo certo é Operadora
+# Tipo "Operadora de telecomunicações"
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "Operadora"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "Tipo de rede"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "Estado da rede"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "Número próprio"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "Detalhes do dispositivo"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "Versão de firmware"
+
+#: panels/wwan/cc-wwan-device.c:982
+msgid " (Preferred)"
+msgstr " (Preferencial)"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid " Only"
+msgstr " Apenas"
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "Desbloquear o cartão SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "Desbloquear"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "Forneça o código PIN do SIM %d"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr "Inserir o PIN para desbloquear o cartão SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "Forneça o código PUK do SIM %d"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr "Inserir o PUK para desbloquear o cartão SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "Palavra-passe incorreta introduzida. Ainda tem %1$u tentativa"
+msgstr[1] "Palavra-passe incorreta introduzida. Ainda tem %1$u tentativas"
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "Tem %u tentativa restante"
+msgstr[1] "Tem %u tentativas restantes"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "Palavra-passe incorreta introduzida."
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr "O código PUK deve ser um número de 8 dígitos"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "Introduza novo PIN"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "O código PIN deve ser um número de 4-8 dígitos"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+msgid "Unlocking..."
+msgstr "A desbloquear..."
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "Sem SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "Insira um cartão SIM para usar este modem"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM Bloqueado"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "Dados _moveis"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "Aceder aos dados utilizando a rede móvel"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "Roaming de _dados"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "Utilizar dados móveis em roaming"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "Modo de rede"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "R_ede"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "Avançado"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "Nomes de pontos de _acesso"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "Bloqueio _SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "Bloquear SIM com PIN"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "Detalhes do m_odem"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "Falha no telemóvel"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "Sem ligação ao telemóvel"
+
+#: panels/wwan/cc-wwan-errors-private.h:42
+msgid "Phone-adaptor link reserved"
+msgstr "Ligação de adaptador de telefone reservada"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "Operação não permitida"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "Operação não suportada"
+
+#: panels/wwan/cc-wwan-errors-private.h:45
+msgid "PH-SIM PIN required"
+msgstr "PIN PH-SIM necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:46
+msgid "PH-FSIM PIN required"
+msgstr "PIN PH-FSIM necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:47
+msgid "PH-FSIM PUK required"
+msgstr "PUK PH-FSIM necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "Cartão SIM não está inserido"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "Necessário PIN do cartão SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "Necessário PUK do cartão SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "Falha no cartão SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "Cartão SIM ocupado"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "Palavra-passe incorreta"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "Necessário PIN2 do cartão SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "Necessário PUK2 do cartão SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:57
+msgid "Memory full"
+msgstr "Memória cheia"
+
+#: panels/wwan/cc-wwan-errors-private.h:58
+msgid "Invalid index"
+msgstr "Índice inválido"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "Não encontrado"
+
+#: panels/wwan/cc-wwan-errors-private.h:60
+msgid "Memory failure"
+msgstr "Falha de memória"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "Sem serviço de rede"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "Tempo limite de rede"
+
+#: panels/wwan/cc-wwan-errors-private.h:63
+msgid "Network not allowed - emergency calls only"
+msgstr "Rede não permitida - apenas chamadas de emergência"
+
+#: panels/wwan/cc-wwan-errors-private.h:64
+msgid "Network personalization PIN required"
+msgstr "PIN de personalização de rede necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:65
+msgid "Network personalization PUK required"
+msgstr "PUK de personalização de rede necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:66
+msgid "Network subset personalization PIN required"
+msgstr "PIN de personalização de subconjunto de rede necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:67
+msgid "Network subset personalization PUK required"
+msgstr "Personalização do subconjunto de rede PUK necessária"
+
+#: panels/wwan/cc-wwan-errors-private.h:68
+msgid "Service provider personalization PIN required"
+msgstr "PIN de personalização do prestador de serviços necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:69
+msgid "Service provider personalization PUK required"
+msgstr "PUK de personalização do prestador de serviços necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:70
+msgid "Corporate personalization PIN required"
+msgstr "PIN de personalização corporativa necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:71
+msgid "Corporate personalization PUK required"
+msgstr "PUK de personalização corporativa necessário"
+
+#: panels/wwan/cc-wwan-errors-private.h:73
+msgid "Illegal MS"
+msgstr "MS ilegal"
+
+#: panels/wwan/cc-wwan-errors-private.h:74
+msgid "Illegal ME"
+msgstr "Me ilegal"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "Serviços GPRS não permitidos"
+
+#: panels/wwan/cc-wwan-errors-private.h:76
+msgid "PLMN not allowed"
+msgstr "PLMN não permitido"
+
+#: panels/wwan/cc-wwan-errors-private.h:77
+msgid "Location area not allowed"
+msgstr "Área de localização não permitida"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "Roaming não permitido nesta área de localização"
+
+#: panels/wwan/cc-wwan-errors-private.h:79
+msgid "Service option not supported"
+msgstr "Opção de serviço não suportada"
+
+#: panels/wwan/cc-wwan-errors-private.h:80
+msgid "Requested service option not subscribed"
+msgstr "Opção de serviço solicitada não subscrita"
+
+#: panels/wwan/cc-wwan-errors-private.h:81
+msgid "Service option temporarily out of order"
+msgstr "Opção de serviço temporariamente fora de serviço"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Erro GPRS não especificado"
+
+#: panels/wwan/cc-wwan-errors-private.h:83
+msgid "PDP authentication failure"
+msgstr "Falha na autenticação do PDP"
+
+#: panels/wwan/cc-wwan-errors-private.h:84
+msgid "Invalid mobile class"
+msgstr "Classe móvel inválida"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "Ação cancelada"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "Acesso negado"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "Erro desconhecido"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "Modo de rede"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "Definir"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Fechar"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "_Automático"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "Escolha a rede"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "Atualizar operadoras de rede"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "Nenhum adaptador WWAN encontrado"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Certifique-se de que tem um dispositivo sem fios Wan/Celular"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "A Wan sem fios é desativada quando o modo de avião está ligado"
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "Desligar o Modo de avião"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "Ligação de dados"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "Cartão SIM usado para internet"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "Ativar rede móvel"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "Bloqueio SIM"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "_Seguinte"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "Bloquear SIM com PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "Alterar PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr "Introduza o PIN atual para alterar as definições de bloqueio do SIM"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "Rede móvel"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "Configurar ligações telefónicas e de dados móveis"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr "cellular;wwan;telephony;sim;mobile;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "Definições do GNOME"
@@ -8256,7 +8833,7 @@ msgstr "[PAINEL] [ARGUMENTO…]"
 msgid "Privacy"
 msgstr "Privacidade"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Painéis disponíveis:"
 
@@ -8388,9 +8965,6 @@ msgstr "Sons de sistema"
 
 #~ msgid "Wi-Fi can be turned off to save power."
 #~ msgstr "O Wi-Fi pode desligar-se para poupar energia."
-
-#~ msgid "_Mobile Broadband"
-#~ msgstr "Banda larga _móvel"
 
 #~ msgid ""
 #~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
@@ -8753,9 +9327,6 @@ msgstr "Sons de sistema"
 #~ "Remover todos os detalhes relacionados com esta rede e não tentar ligar-"
 #~ "se automaticamente"
 
-#~ msgid "My Home Network"
-#~ msgstr "Minha rede caseira"
-
 #~ msgid "Net­work"
 #~ msgstr "Rede"
 
@@ -8856,9 +9427,6 @@ msgstr "Sons de sistema"
 
 #~ msgid "Infrastructure"
 #~ msgstr "Infraestrutura"
-
-#~ msgid "Not connected"
-#~ msgstr "Desligado"
 
 #~ msgid "2"
 #~ msgstr "2"
