@@ -1813,6 +1813,7 @@ select_app (CcApplicationsPanel *self,
       if (g_str_has_prefix (g_app_info_get_id (info), app_id))
         {
           gtk_list_box_select_row (self->sidebar_listbox, GTK_LIST_BOX_ROW (row));
+          g_signal_emit_by_name (row, "activate");
           break;
         }
     }
