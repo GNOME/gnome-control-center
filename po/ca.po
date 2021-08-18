@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-08-14 12:39+0000\n"
+"POT-Creation-Date: 2021-08-15 20:34+0000\n"
 "PO-Revision-Date: 2020-12-21 13:29+0100\n"
 "Last-Translator: Jordi Mas <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -471,7 +471,7 @@ msgstr "El Bluetooth està inhabilitat quan el mode d'avió està activat."
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:124
 msgid "Turn Off Airplane Mode"
-msgstr "Desactiveu el mode d'avió"
+msgstr "Desactiva el mode d'avió"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:154
 msgid "Hardware Airplane Mode is on"
@@ -479,7 +479,7 @@ msgstr "El mode d'avió del maquinari està activat"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:165
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
-msgstr "Desactiveu el mode d'avió per a habilitar el Bluetooth."
+msgstr "Desactiva el mode d'avió per a habilitar el Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
@@ -2058,7 +2058,7 @@ msgstr "Copia una captura de pantalla d'una àrea al porta-retalls"
 
 #: panels/keyboard/01-screenshot.xml.in:26
 msgid "Record a short screencast"
-msgstr "Enregistra un screencast curt"
+msgstr "Enregistra un vídeo de la pantalla curt"
 
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
@@ -2825,9 +2825,17 @@ msgstr ""
 "Arrossegueu les finestres contra les vores superior, esquerra i dreta de la "
 "pantalla per a redimensionar-les."
 
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "Espais de treball"
+
 #: panels/multitasking/cc-multitasking-panel.ui:139
 msgid "_Dynamic workspaces"
 msgstr "_Espais de treball dinàmics"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "Suprimeix automàticament els espais de treball buits."
 
 #: panels/multitasking/cc-multitasking-panel.ui:158
 msgid "_Fixed number of workspaces"
@@ -2841,6 +2849,10 @@ msgstr "Especifiqueu un nombre d'espais de treball permanents."
 msgid "_Number of Workspaces"
 msgstr "_Nombre d'espais de treball"
 
+#: panels/multitasking/cc-multitasking-panel.ui:200
+msgid "Multi-Monitor"
+msgstr "Multi-Monitor"
+
 #: panels/multitasking/cc-multitasking-panel.ui:225
 msgid "Workspaces on _primary display only"
 msgstr "_Només espais de treball en la visualització primària"
@@ -2848,6 +2860,10 @@ msgstr "_Només espais de treball en la visualització primària"
 #: panels/multitasking/cc-multitasking-panel.ui:252
 msgid "Workspaces on all d_isplays"
 msgstr "_Espais de treball en totes les pantalles"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "Commutació d'aplicacions"
 
 #: panels/multitasking/cc-multitasking-panel.ui:307
 msgid "Include applications from all _workspaces"
@@ -4968,9 +4984,24 @@ msgstr "Mode de rendiment no disponible"
 msgid "High performance and power usage."
 msgstr "Alt rendiment i ús d'energia."
 
+#: panels/power/cc-power-profile-row.c:184
+msgctxt "Power profile"
+msgid "Performance"
+msgstr "Rendiment"
+
+#: panels/power/cc-power-profile-row.c:188
+msgctxt "Power profile"
+msgid "Balanced"
+msgstr "Equilibrat"
+
 #: panels/power/cc-power-profile-row.c:189
 msgid "Standard performance and power usage."
 msgstr "Rendiment estàndard i ús d'energia."
+
+#: panels/power/cc-power-profile-row.c:192
+msgctxt "Power profile"
+msgid "Power Saver"
+msgstr "Estalvi d'energia"
 
 #: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
@@ -5752,6 +5783,14 @@ msgstr "Mesura"
 #: panels/region/cc-format-preview.ui:128
 msgid "Paper"
 msgstr "Paper"
+
+#: panels/region/cc-region-panel.ui:42
+msgid "My Account"
+msgstr "El meu compte"
+
+#: panels/region/cc-region-panel.ui:53
+msgid "Login Screen"
+msgstr "Pantalla d'inici de sessió"
 
 #: panels/region/cc-region-panel.ui:78
 msgid "Language"
@@ -8339,6 +8378,14 @@ msgstr "Botó inferior"
 msgid "Tip Pressure Feel"
 msgstr "Sensibilitat de pressió del llapis"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "Punts d'accés"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+msgid "APN"
+msgstr "APN"
+
 #: panels/wwan/cc-wwan-data.c:543
 msgid "Operation Cancelled"
 msgstr "Operació cancel·lada"
@@ -8355,17 +8402,57 @@ msgstr "<b>Error:</b> error de l'equipament mòbil"
 msgid "Not Registered"
 msgstr "Sense registrar"
 
+#: panels/wwan/cc-wwan-details-dialog.c:85
+msgid "Registered"
+msgstr "Registrat"
+
 #: panels/wwan/cc-wwan-details-dialog.c:89
 msgid "Roaming"
 msgstr "Itinerància"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "S'està cercant"
 
 #: panels/wwan/cc-wwan-details-dialog.c:97
 msgid "Denied"
 msgstr "Denegat"
 
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "Detalls del mòdem"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "Estat del mòdem"
+
 #: panels/wwan/cc-wwan-details-dialog.ui:53
 msgid "Carrier"
 msgstr "Operador"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "Tipus de xarxa"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "Estat de la xarxa"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "Número propi"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "Detalls del dispositiu"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "Versió del microprogramari"
+
+#: panels/wwan/cc-wwan-device.c:982
+msgid " (Preferred)"
+msgstr " (preferit)"
 
 #: panels/wwan/cc-wwan-device.c:1007
 msgid " Only"
@@ -8374,6 +8461,10 @@ msgstr " Només"
 #: panels/wwan/cc-wwan-device-page.c:141
 msgid "Unlock SIM card"
 msgstr "Desbloqueja la targeta SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "Desbloqueja"
 
 #: panels/wwan/cc-wwan-device-page.c:147
 #, c-format
@@ -8423,6 +8514,10 @@ msgstr "Introduïu un PIN nou"
 msgid "PIN code should be a 4-8 digit number"
 msgstr "El codi PIN ha de ser un número de 4-8 dígits"
 
+#: panels/wwan/cc-wwan-device-page.c:270
+msgid "Unlocking..."
+msgstr "S'està desblocant..."
+
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
 msgstr "Sense SIM"
@@ -8451,9 +8546,41 @@ msgstr "_Itinerància de dades"
 msgid "Use mobile data when roaming"
 msgstr "Utilitza dades mòbils quan s'estigui en itinerància"
 
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "_Mode de xarxa"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "_Xarxa"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "Avançat"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "_Noms dels punts d'accés"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "_Bloqueig de la SIM"
+
 #: panels/wwan/cc-wwan-device-page.ui:236
 msgid "Lock SIM with PIN"
 msgstr "Bloqueja la SIM amb el PIN"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "_Detalls del mòdem"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "Error del telèfon"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "No hi ha connexió al telèfon"
 
 #: panels/wwan/cc-wwan-errors-private.h:42
 msgid "Phone-adaptor link reserved"
@@ -8467,6 +8594,30 @@ msgstr "Operació no permesa"
 msgid "Operation not supported"
 msgstr "Operació no admesa"
 
+#: panels/wwan/cc-wwan-errors-private.h:45
+msgid "PH-SIM PIN required"
+msgstr "Cal un PIN de PH-SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:46
+msgid "PH-FSIM PIN required"
+msgstr "Cal un PIN de PH-FSIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:47
+msgid "PH-FSIM PUK required"
+msgstr "Cal un PUK PH-FSIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "No s'ha inserit la SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "Cal el PIN de la SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "Cal el PUK de la SIM"
+
 #: panels/wwan/cc-wwan-errors-private.h:51
 msgid "SIM failure"
 msgstr "Error de la SIM"
@@ -8475,13 +8626,61 @@ msgstr "Error de la SIM"
 msgid "SIM busy"
 msgstr "SIM ocupada"
 
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "Contrasenya incorrecta"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "Cal el PIN2 de la SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "Cal el PUK2 de la SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:57
+msgid "Memory full"
+msgstr "Memòria plena"
+
 #: panels/wwan/cc-wwan-errors-private.h:58
 msgid "Invalid index"
 msgstr "Índex no vàlid"
 
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "No s'ha trobat"
+
+#: panels/wwan/cc-wwan-errors-private.h:60
+msgid "Memory failure"
+msgstr "Error de memòria"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "Sense servei de xarxa"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "Temps d'espera de la xarxa"
+
 #: panels/wwan/cc-wwan-errors-private.h:63
 msgid "Network not allowed - emergency calls only"
 msgstr "Xarxa no permesa - només trucades d'emergència"
+
+#: panels/wwan/cc-wwan-errors-private.h:64
+msgid "Network personalization PIN required"
+msgstr "Cal un PIN de personalització de xarxa"
+
+#: panels/wwan/cc-wwan-errors-private.h:65
+msgid "Network personalization PUK required"
+msgstr "Cal un PUK de personalització de xarxa"
+
+#: panels/wwan/cc-wwan-errors-private.h:66
+msgid "Network subset personalization PIN required"
+msgstr "Cal un PIN de personalització del subconjunt de la xarxa"
+
+#: panels/wwan/cc-wwan-errors-private.h:67
+msgid "Network subset personalization PUK required"
+msgstr "Cal un PUK de personalització del subconjunt de la xarxa"
 
 #: panels/wwan/cc-wwan-errors-private.h:68
 msgid "Service provider personalization PIN required"
@@ -8507,6 +8706,10 @@ msgstr "MS no vàlid"
 msgid "Illegal ME"
 msgstr "ME no vàlid"
 
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "No es permeten els serveis GPRS"
+
 #: panels/wwan/cc-wwan-errors-private.h:76
 msgid "PLMN not allowed"
 msgstr "No s'admet PLMN"
@@ -8518,6 +8721,10 @@ msgstr "No es permet l'àrea d'ubicació"
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
 msgstr "No es permet la itinerància en aquesta àrea d'ubicació"
+
+#: panels/wwan/cc-wwan-errors-private.h:79
+msgid "Service option not supported"
+msgstr "No s'admet l'opció de servei"
 
 #: panels/wwan/cc-wwan-errors-private.h:80
 msgid "Requested service option not subscribed"
@@ -8531,19 +8738,48 @@ msgstr "L'opció de servei està temporalment fora de servei"
 msgid "Unspecified GPRS error"
 msgstr "S'ha produït un error GPRS no especificat"
 
+#: panels/wwan/cc-wwan-errors-private.h:83
+msgid "PDP authentication failure"
+msgstr "Error d'autenticació PDP"
+
 #: panels/wwan/cc-wwan-errors-private.h:84
 msgid "Invalid mobile class"
 msgstr "Classe de mòbil no vàlida"
 
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "Acció cancel·lada"
+
 #: panels/wwan/cc-wwan-errors-private.h:94
 msgid "Access denied"
 msgstr "Accés denegat"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "Error desconegut"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "Mode de xarxa"
 
 #: panels/wwan/cc-wwan-mode-dialog.ui:44
 #: panels/wwan/cc-wwan-network-dialog.ui:175
 #: panels/wwan/cc-wwan-sim-lock-dialog.c:230
 msgid "_Set"
 msgstr "_Estableix"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Tanca"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "_Automàtic"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "Tria una xarxa"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:118
 msgid "Refresh Network Providers"
@@ -8554,6 +8790,38 @@ msgstr "Actualitza els proveïdors de xarxa"
 msgid "SIM %d"
 msgstr "SIM %d"
 
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "No s'ha trobat cap adaptador WWAN"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Assegureu-vos de tenir un dispositiu de xarxa o mòbil sense fil"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "El Wan sense fil està desactivat quan el mode d'avió està activat"
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "_Desactiva el mode d'avió"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "Connexió de dades"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "Targeta SIM utilitzada per a Internet"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "Habilita la xarxa mòbil"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "Bloqueig de la SIM"
+
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
 msgid "_Next"
 msgstr "_Següent"
@@ -8562,10 +8830,22 @@ msgstr "_Següent"
 msgid "_Lock SIM with PIN"
 msgstr "_Bloqueja la SIM amb el PIN"
 
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "Canvia el PIN"
+
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
 msgid "Enter current PIN to change SIM lock settings"
 msgstr ""
 "Introduïu el PIN actual per a canviar la configuració de bloqueig de la SIM"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "Xarxa mòbil"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "Configura les connexions de dades de telefonia i mòbils"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or
