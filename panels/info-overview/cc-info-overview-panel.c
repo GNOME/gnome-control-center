@@ -880,8 +880,8 @@ cc_info_panel_row_activated_cb (CcInfoOverviewPanel *self,
     open_software_update (self);
 }
 
-static const char *
-get_asset_suffix (CcInfoOverviewPanel *panel)
+static gboolean
+use_dark_theme (CcInfoOverviewPanel *panel)
 {
   GdkScreen *screen;
   GtkSettings *settings;
@@ -889,27 +889,37 @@ get_asset_suffix (CcInfoOverviewPanel *panel)
 
   theme_name = g_strdup (g_getenv ("GTK_THEME"));
   if (theme_name != NULL)
-    return g_str_has_suffix (theme_name, "dark") ? "-dark" : "";
+    return g_str_has_suffix (theme_name, "dark") ? TRUE : FALSE;
 
   screen = gtk_widget_get_screen (GTK_WIDGET (panel));
   settings = gtk_settings_get_for_screen (screen);
 
   g_object_get (settings, "gtk-theme-name", &theme_name, NULL);
-  return (theme_name != NULL && g_str_has_suffix (theme_name, "dark")) ? "-dark" : "";
+  return (theme_name != NULL && g_str_has_suffix (theme_name, "dark")) ? TRUE : FALSE;
 }
 
 static void
 setup_os_logo (CcInfoOverviewPanel *panel)
 {
   g_autofree char *logo_name = g_get_os_info ("LOGO");
-  g_autofree char *logo_name_with_variant = NULL;
+  g_autoptr(GPtrArray) array = NULL;
+  g_autoptr(GIcon) icon = NULL;
+  gboolean dark;
 
+  dark = use_dark_theme (panel);
   if (logo_name == NULL)
     logo_name = g_strdup ("gnome-logo");
 
-  logo_name_with_variant = g_strdup_printf ("%s-text%s", logo_name, get_asset_suffix (panel));
-  gtk_image_set_from_icon_name (panel->os_logo, logo_name_with_variant, GTK_ICON_SIZE_INVALID);
-  gtk_image_set_pixel_size (panel->os_logo, -1);
+  array = g_ptr_array_new_with_free_func (g_free);
+  if (dark)
+    g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s-text-dark", logo_name));
+  g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s-text", logo_name));
+  if (dark)
+    g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s-dark", logo_name));
+  g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s", logo_name));
+
+  icon = g_themed_icon_new_from_names ((char **) array->pdata, array->len);
+  gtk_image_set_from_gicon (panel->os_logo, icon, GTK_ICON_SIZE_INVALID);
 }
 
 static void
