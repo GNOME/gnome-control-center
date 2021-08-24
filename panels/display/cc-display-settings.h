@@ -39,6 +39,8 @@ void                cc_display_settings_set_config            (CcDisplaySettings
 CcDisplayMonitor*   cc_display_settings_get_selected_output   (CcDisplaySettings    *settings);
 void                cc_display_settings_set_selected_output   (CcDisplaySettings    *settings,
                                                                CcDisplayMonitor     *output);
+void                cc_display_settings_refresh_layout        (CcDisplaySettings    *settings,
+                                                               gboolean              folded);
 
 G_END_DECLS
 
