@@ -81,6 +81,8 @@ struct _CcWindow
   CcPanel *active_panel;
   GSettings *settings;
 
+  gboolean folded;
+
   CcPanelListView previous_list_view;
 
   gint current_width;
@@ -97,7 +99,8 @@ enum
 {
   PROP_0,
   PROP_ACTIVE_PANEL,
-  PROP_MODEL
+  PROP_MODEL,
+  PROP_FOLDED,
 };
 
 /* Auxiliary methods */
@@ -830,6 +833,10 @@ cc_window_get_property (GObject    *object,
       g_value_set_object (value, self->store);
       break;
 
+    case PROP_FOLDED:
+      g_value_set_boolean (value, self->folded);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
     }
@@ -852,6 +859,10 @@ cc_window_set_property (GObject      *object,
     case PROP_MODEL:
       g_assert (self->store == NULL);
       self->store = g_value_dup_object (value);
+      break;
+
+    case PROP_FOLDED:
+      self->folded = g_value_get_boolean (value);
       break;
 
     default:
@@ -956,6 +967,14 @@ cc_window_class_init (CcWindowClass *klass)
                                                         CC_TYPE_SHELL_MODEL,
                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS));
 
+  g_object_class_install_property (object_class,
+                                   PROP_FOLDED,
+                                   g_param_spec_boolean ("folded",
+                                                         "Folded",
+                                                         "Whether the window is foled",
+                                                         FALSE,
+                                                         G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS));
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/cc-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWindow, back_revealer);
@@ -1000,6 +1019,12 @@ cc_window_init (CcWindow *self)
   self->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
   self->previous_panels = g_queue_new ();
   self->previous_list_view = cc_panel_list_get_view (self->panel_list);
+
+  g_object_bind_property (self->main_leaflet,
+                          "folded",
+                          self,
+                          "folded",
+                          G_BINDING_SYNC_CREATE);
 
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())
