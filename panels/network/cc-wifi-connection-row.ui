@@ -72,64 +72,39 @@
           </object>
         </child>
         <child>
-          <object class="GtkStack" id="button_stack">
-            <property name="name">button_stack</property>
+          <object class="GtkSpinner" id="connecting_spinner">
+            <property name="name">connecting_spinner</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="hexpand">False</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton">
+            <property name="name">options_button</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">center</property>
+            <signal name="clicked" handler="configure_clicked_cb" object="CcWifiConnectionRow" swapped="yes"/>
             <child>
-              <object class="GtkButton">
-                <property name="name">options_button</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <signal name="clicked" handler="configure_clicked_cb" object="CcWifiConnectionRow" swapped="yes"/>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">emblem-system-symbolic</property>
-                    <property name="icon_size">1</property>
-                  </object>
-                </child>
-                <child internal-child="accessible">
-                  <object class="AtkObject">
-                    <property name="AtkObject::accessible-name" translatable="yes">Options…</property>
-                  </object>
-                </child>
-                <style>
-                  <class name="image-button"/>
-                </style>
-              </object>
-              <packing>
-                <property name="name">configure</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinner" id="connecting_spinner">
-                <property name="name">connecting_spinner</property>
+              <object class="GtkImage">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
+                <property name="icon_name">emblem-system-symbolic</property>
+                <property name="icon_size">1</property>
               </object>
-              <packing>
-                <property name="name">connecting</property>
-                <property name="position">1</property>
-              </packing>
             </child>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="name">empty_box</property>
+            <child internal-child="accessible">
+              <object class="AtkObject">
+                <property name="AtkObject::accessible-name" translatable="yes">Options…</property>
               </object>
-              <packing>
-                <property name="name">empty</property>
-              </packing>
             </child>
+            <style>
+              <class name="image-button"/>
+            </style>
           </object>
         </child>
       </object>
