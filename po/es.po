@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-14 12:39+0000\n"
-"PO-Revision-Date: 2021-08-17 13:21+0200\n"
+"POT-Creation-Date: 2021-08-24 15:50+0000\n"
+"PO-Revision-Date: 2021-08-25 17:07+0200\n"
 "Last-Translator: Daniel Mustieles <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -2785,7 +2785,7 @@ msgstr "_Esquina activa"
 
 #: panels/multitasking/cc-multitasking-panel.ui:57
 msgid "Touch the top-left corner to open the Activities Overview."
-msgstr ""
+msgstr "Toque la esquina superior izquierda para abrir la vista de Actividades"
 
 #: panels/multitasking/cc-multitasking-panel.ui:84
 msgid "_Active Screen Edges"
@@ -2795,9 +2795,10 @@ msgstr "_Activar bordes de la pantalla"
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them."
 msgstr ""
+"Arrastre ventanas a los bordes superior, izquierdo y derecho para "
+"redimensionarlas."
 
 #: panels/multitasking/cc-multitasking-panel.ui:114
-#| msgid "Colorspace: "
 msgid "Workspaces"
 msgstr "Áreas de trabajo"
 
@@ -2806,41 +2807,36 @@ msgid "_Dynamic workspaces"
 msgstr "Áreas de trabajo _dinámicas"
 
 #: panels/multitasking/cc-multitasking-panel.ui:140
-#, fuzzy
 #| msgid "Automatically Delete Temporary _Files"
 msgid "Automatically removes empty workspaces."
-msgstr "Eliminar los a_rchivos temporales automáticamente"
+msgstr "Quita las áreas de trabajo vacías automáticamente"
 
 #: panels/multitasking/cc-multitasking-panel.ui:158
 msgid "_Fixed number of workspaces"
-msgstr ""
+msgstr "Número _fijo de áreas de trabajo"
 
 #: panels/multitasking/cc-multitasking-panel.ui:159
 msgid "Specify a number of permanent workspaces."
-msgstr ""
+msgstr "Especifique un número de áreas de trabajo permanentes."
 
 #: panels/multitasking/cc-multitasking-panel.ui:179
 msgid "_Number of Workspaces"
 msgstr "_Número de áreas de trabajo"
 
 #: panels/multitasking/cc-multitasking-panel.ui:200
-#| msgid "Monitor"
 msgid "Multi-Monitor"
 msgstr "Multi-pantalla"
 
 #: panels/multitasking/cc-multitasking-panel.ui:225
-#, fuzzy
 #| msgid "Drag to change primary display."
 msgid "Workspaces on _primary display only"
-msgstr "Arrastrar para cambiar la pantalla principal."
+msgstr "Áreas de trabajo sólo en la pantalla _primaria"
 
 #: panels/multitasking/cc-multitasking-panel.ui:252
 msgid "Workspaces on all d_isplays"
-msgstr ""
+msgstr "Áreas de trabajo en todas las pa_ntallas"
 
 #: panels/multitasking/cc-multitasking-panel.ui:282
-#| msgctxt "Wacom action-type"
-#| msgid "Application defined"
 msgid "Application Switching"
 msgstr "Cambio de aplicaciones"
 
@@ -2850,7 +2846,7 @@ msgstr "Incluir aplicaciones de todas las áreas de trabajo"
 
 #: panels/multitasking/cc-multitasking-panel.ui:325
 msgid "Include applications from the _current workspace only"
-msgstr ""
+msgstr "Incluir aplicaciones sólo del área de trabajo a_ctual"
 
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
 msgid "Multitasking"
@@ -2858,12 +2854,12 @@ msgstr "Multitarea"
 
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
 msgid "Manage preferences for productivity and multitasking"
-msgstr ""
+msgstr "Gestionar las preferencias para productividad y multitarea"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
 msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
-msgstr ""
+msgstr "multitarea;productividad;personalizar;escritorio;"
 
 #: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
@@ -4764,15 +4760,18 @@ msgstr "Suspender automáticamente"
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
+"Modo rendimiento desactivado temporalmente debido a la alta temperatura de "
+"operación."
 
 #: panels/power/cc-power-panel.c:1173
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr ""
+"Portátil detectado: modo rendimiento desactivado temporalmente. Mueva el "
+"dispositivo a una superficie estable para restaurarlo."
 
 #: panels/power/cc-power-panel.c:1175
-#| msgid "Performance mode unavailable"
 msgid "Performance mode temporarily disabled."
 msgstr "Modo de rendimiento desactivado temporalmente."
 
@@ -4781,6 +4780,8 @@ msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr ""
+"Batería baja: ahorro de energía activado. El modo anterior se restaurará "
+"cuando la batería esté suficientemente cargada."
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1226
@@ -4791,7 +4792,6 @@ msgstr "Modo de ahorro de energía activado por «%s»."
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1230
 #, c-format
-#| msgid "Performance mode unavailable"
 msgid "Performance mode activated by “%s”."
 msgstr "Modo de rendimiento activado por «%s»."
 
@@ -4864,57 +4864,50 @@ msgid "Affects system performance and power usage."
 msgstr "Afecta al rendimiento del sistema y el uso de energía."
 
 #: panels/power/cc-power-panel.ui:142
-#| msgid "Power Saving"
 msgid "Power Saving Options"
 msgstr "Opciones de ahorro de energía"
 
 #: panels/power/cc-power-panel.ui:146
-#| msgid "Automatic Brightness"
 msgid "Automatic Screen Brightness"
 msgstr "Brillo de pantalla automático"
 
 #: panels/power/cc-power-panel.ui:147
-#, fuzzy
 #| msgid "Screen brightness and lock settings"
 msgid "Screen brightness adjusts to the surrounding light."
-msgstr "Brillo y ajustes de bloqueo de la pantalla"
+msgstr "El brillo de la pantalla se ajusta a la luz ambiental."
 
 #: panels/power/cc-power-panel.ui:160
-#| msgid "Screen"
 msgid "Dim Screen"
 msgstr "Oscurecer la pantalla"
 
 #: panels/power/cc-power-panel.ui:161
 msgid "Reduces the screen brightness when the computer is inactive."
-msgstr ""
+msgstr "Reduce el brillo de la pantalla cuando el equipo no está activo."
 
 #: panels/power/cc-power-panel.ui:174
-#| msgid "Screen _Reader"
 msgid "Screen _Blank"
 msgstr "_Apagar la pantalla"
 
 #: panels/power/cc-power-panel.ui:175
 msgid "Turns the screen off after a period of inactivity."
-msgstr ""
+msgstr "Apaga la pantalla después de un período de inactividad."
 
 #: panels/power/cc-power-panel.ui:183
-#| msgid "Power Saver"
 msgid "Automatic Power Saver"
 msgstr "Ahorro de energía automático"
 
 #: panels/power/cc-power-panel.ui:184
 msgid "Enables power saver mode when battery is low."
-msgstr ""
+msgstr "Activa el modo de ahorro de energía cuando la batería está baja."
 
 #: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
 msgstr "Suspender _automáticamente"
 
 #: panels/power/cc-power-panel.ui:199
-#, fuzzy
 #| msgid "Put the computer to sleep when inactive:"
 msgid "Pauses the computer after a period of inactivity."
-msgstr "Poner el equipo a dormir si está inactivo durante:"
+msgstr "Pausa el equipo después de un período de inactividad."
 
 #: panels/power/cc-power-panel.ui:217
 msgid "Suspend & Power Button"
@@ -4963,13 +4956,11 @@ msgid "High performance and power usage."
 msgstr "Alto rendimiento y uso de energía"
 
 #: panels/power/cc-power-profile-row.c:184
-#| msgid "Performance"
 msgctxt "Power profile"
 msgid "Performance"
 msgstr "Rendimiento"
 
 #: panels/power/cc-power-profile-row.c:188
-#| msgid "Balance"
 msgctxt "Power profile"
 msgid "Balanced"
 msgstr "Balanceado"
@@ -4979,7 +4970,6 @@ msgid "Standard performance and power usage."
 msgstr "Rendimiento estándar y uso de energía."
 
 #: panels/power/cc-power-profile-row.c:192
-#| msgid "Power Saver"
 msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Ahorro de energía"
@@ -5751,7 +5741,6 @@ msgid "My Account"
 msgstr "Mi cuenta"
 
 #: panels/region/cc-region-panel.ui:53
-#| msgid "Login _Screen"
 msgid "Login Screen"
 msgstr "Pantalla de inicio de sesión"
 
@@ -6760,7 +6749,6 @@ msgid "_Large Text"
 msgstr "_Texto grande"
 
 #: panels/universal-access/cc-ua-panel.ui:238
-#| msgid "Manage notifications"
 msgid "Enable A_nimations"
 msgstr "Activar a_nimaciones"
 
@@ -8328,12 +8316,10 @@ msgid "Tip Pressure Feel"
 msgstr "Sensibilidad de presión del lápiz"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:11
-#| msgid "Access Options"
 msgid "Access Points"
 msgstr "Puntos de acceso"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:160
-#| msgid "VPN"
 msgid "APN"
 msgstr "APN"
 
@@ -8347,14 +8333,13 @@ msgstr "<b>Error:</b> acceso denegado para modificar la configuración"
 
 #: panels/wwan/cc-wwan-data.c:549
 msgid "<b>Error:</b> Mobile Equipment Error"
-msgstr ""
+msgstr "<b>Error:</b> error del equipo móvil"
 
 #: panels/wwan/cc-wwan-details-dialog.c:81
 msgid "Not Registered"
 msgstr "No registrado"
 
 #: panels/wwan/cc-wwan-details-dialog.c:85
-#| msgid "Centered"
 msgid "Registered"
 msgstr "Registrado"
 
@@ -8363,7 +8348,6 @@ msgid "Roaming"
 msgstr "Itinerancia"
 
 #: panels/wwan/cc-wwan-details-dialog.c:93
-#| msgid "Search"
 msgid "Searching"
 msgstr "Buscando"
 
@@ -8372,12 +8356,10 @@ msgid "Denied"
 msgstr "Denegado"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:4
-#| msgid "Details"
 msgid "Modem Details"
 msgstr "Detalles del módem"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:33
-#| msgid "Status:"
 msgid "Modem Status"
 msgstr "Estado del módem"
 
@@ -8386,32 +8368,26 @@ msgid "Carrier"
 msgstr "Operador"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:79
-#| msgid "_Network Time"
 msgid "Network Type"
 msgstr "Tipo de red"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:131
-#| msgid "Networks"
 msgid "Network Status"
 msgstr "Estado de la red"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:158
-#| msgid "Numbers"
 msgid "Own Number"
 msgstr "Número del propietaro"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:185
-#| msgid "Device types"
 msgid "Device Details"
 msgstr "Detalles del dispositivos"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:257
-#| msgid "Firmware missing"
 msgid "Firmware Version"
 msgstr "Versión de firmware"
 
 #: panels/wwan/cc-wwan-device.c:982
-#| msgid "Preferences"
 msgid " (Preferred)"
 msgstr "(Preferido)"
 
@@ -8424,34 +8400,33 @@ msgid "Unlock SIM card"
 msgstr "Desbloquear tarjeta SIM"
 
 #: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
-#| msgid "_Unlock"
 msgid "Unlock"
 msgstr "Desbloquear"
 
 #: panels/wwan/cc-wwan-device-page.c:147
 #, c-format
 msgid "Please provide PIN code for SIM %d"
-msgstr ""
+msgstr "Proporcione el código PIN para la SIM %d"
 
 #: panels/wwan/cc-wwan-device-page.c:148
 msgid "Enter PIN to unlock your SIM card"
-msgstr ""
+msgstr "Introduzca el PIN para desbloquear su tarjeta SIM"
 
 #: panels/wwan/cc-wwan-device-page.c:152
 #, c-format
 msgid "Please provide PUK code for SIM %d"
-msgstr ""
+msgstr "Proporcione el código PUK para la SIM %d"
 
 #: panels/wwan/cc-wwan-device-page.c:153
 msgid "Enter PUK to unlock your SIM card"
-msgstr ""
+msgstr "Introduzca el PUK para desbloquear su tarjeta SIM"
 
 #: panels/wwan/cc-wwan-device-page.c:171
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Contraseña introducida incorrecta. Le queda %1$u intento"
+msgstr[1] "Contraseña introducida incorrecta. Le quedan %1$u intentos"
 
 #: panels/wwan/cc-wwan-device-page.c:174
 #, c-format
@@ -8461,27 +8436,25 @@ msgstr[0] "Le queda %u intento"
 msgstr[1] "Le quedan %u intentos"
 
 #: panels/wwan/cc-wwan-device-page.c:179
-#| msgid "Show password hints"
 msgid "Wrong password entered."
 msgstr "Contraseña incorrecta."
 
 #: panels/wwan/cc-wwan-device-page.c:224
 msgid "PUK code should be an 8 digit number"
-msgstr ""
+msgstr "El código PUK debe ser un número de 8 cifras"
 
 #: panels/wwan/cc-wwan-device-page.c:248
 msgid "Enter New PIN"
-msgstr ""
+msgstr "Introduzca un nuevo PIN"
 
 #: panels/wwan/cc-wwan-device-page.c:252
 msgid "PIN code should be a 4-8 digit number"
-msgstr ""
+msgstr "El código PIN debe ser un número de 4-8 cifras"
 
 #: panels/wwan/cc-wwan-device-page.c:270
-#, fuzzy
 #| msgid "Unlock %s."
 msgid "Unlocking..."
-msgstr "Desbloquear %s."
+msgstr "Desbloqueando..."
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
@@ -8489,53 +8462,45 @@ msgstr "No hay tarjeta SIM"
 
 #: panels/wwan/cc-wwan-device-page.ui:45
 msgid "Insert a SIM card to use this modem"
-msgstr ""
+msgstr "Inserte una tarjeta SIM para usar éste módem"
 
 #: panels/wwan/cc-wwan-device-page.ui:78
-#| msgid "Locked"
 msgid "SIM Locked"
 msgstr "SIM bloqueada"
 
 #: panels/wwan/cc-wwan-device-page.ui:139
-#| msgid "_Mobile Broadband"
 msgid "_Mobile Data"
 msgstr "Datos _móviles"
 
 #: panels/wwan/cc-wwan-device-page.ui:140
 msgid "Access data using mobile network"
-msgstr ""
+msgstr "Acceso a datos usando la red móvil"
 
 #: panels/wwan/cc-wwan-device-page.ui:151
 msgid "_Data Roaming"
-msgstr "_Datos de roaming"
+msgstr "_Datos de itinerancia"
 
 #: panels/wwan/cc-wwan-device-page.ui:152
 msgid "Use mobile data when roaming"
-msgstr ""
+msgstr "Usar datos móviles en itinerancia"
 
 #: panels/wwan/cc-wwan-device-page.ui:177
-#| msgid "_Network Time"
 msgid "_Network Mode"
 msgstr "_Modo de red"
 
 #: panels/wwan/cc-wwan-device-page.ui:187
-#| msgid "Network"
 msgid "N_etwork"
 msgstr "R_ed"
 
 #: panels/wwan/cc-wwan-device-page.ui:199
-#| msgctxt "Printer Option Group"
-#| msgid "Advanced"
 msgid "Advanced"
 msgstr "Avanzado"
 
 #: panels/wwan/cc-wwan-device-page.ui:225
-#| msgid "Access Options"
 msgid "_Access Point Names"
 msgstr "Nombres de puntos de _acceso"
 
 #: panels/wwan/cc-wwan-device-page.ui:235
-#| msgid "Lock"
 msgid "_SIM Lock"
 msgstr "Bloquear _SIM"
 
@@ -8544,23 +8509,16 @@ msgid "Lock SIM with PIN"
 msgstr "Bloquear SIM con PIN"
 
 #: panels/wwan/cc-wwan-device-page.ui:246
-#| msgid "%s Details"
 msgid "M_odem Details"
 msgstr "Detalles del mód_em"
 
 #: panels/wwan/cc-wwan-errors-private.h:40
-#| msgid "PIN check failed"
 msgid "Phone failure"
 msgstr "Falló del teléfono"
 
 #: panels/wwan/cc-wwan-errors-private.h:41
-#| msgid "Not connected"
 msgid "No connection to phone"
 msgstr "No hay conexión con el teléfono"
-
-#: panels/wwan/cc-wwan-errors-private.h:42
-msgid "Phone-adaptor link reserved"
-msgstr ""
 
 #: panels/wwan/cc-wwan-errors-private.h:43
 msgid "Operation not allowed"
@@ -8570,33 +8528,15 @@ msgstr "Operación no permitida"
 msgid "Operation not supported"
 msgstr "Operación no soportada"
 
-#: panels/wwan/cc-wwan-errors-private.h:45
-#| msgid "SIM Pin required"
-msgid "PH-SIM PIN required"
-msgstr "Se necesita el PIN de la PH-SIM"
-
-#: panels/wwan/cc-wwan-errors-private.h:46
-#| msgid "SIM Pin required"
-msgid "PH-FSIM PIN required"
-msgstr "Se necesita el PIN de la PH-FSIM"
-
-#: panels/wwan/cc-wwan-errors-private.h:47
-#| msgid "SIM Pin required"
-msgid "PH-FSIM PUK required"
-msgstr "Se necesita el PUK de la PH-FSIM"
-
 #: panels/wwan/cc-wwan-errors-private.h:48
-#| msgid "SIM Card not inserted"
 msgid "SIM not inserted"
 msgstr "Tarjeta SIM no insertada"
 
 #: panels/wwan/cc-wwan-errors-private.h:49
-#| msgid "SIM Pin required"
 msgid "SIM PIN required"
 msgstr "Se necesita el PIN de la SIM"
 
 #: panels/wwan/cc-wwan-errors-private.h:50
-#| msgid "SIM Pin required"
 msgid "SIM PUK required"
 msgstr "Se necesita el PUK de la SIM"
 
@@ -8609,165 +8549,54 @@ msgid "SIM busy"
 msgstr "Tarjeta SIM ocupada"
 
 #: panels/wwan/cc-wwan-errors-private.h:54
-#| msgid "Current _Password"
 msgid "Incorrect password"
 msgstr "Contraseña incorrecta"
 
 #: panels/wwan/cc-wwan-errors-private.h:55
-#| msgid "SIM Pin required"
 msgid "SIM PIN2 required"
 msgstr "Se necesita el PIN2 de la SIM"
 
 #: panels/wwan/cc-wwan-errors-private.h:56
-#| msgid "SIM Pin required"
 msgid "SIM PUK2 required"
 msgstr "Se necesita el PUK2 de la SIM"
 
-#: panels/wwan/cc-wwan-errors-private.h:57
-#| msgid "Memory"
-msgid "Memory full"
-msgstr "Memoria llena"
-
-#: panels/wwan/cc-wwan-errors-private.h:58
-msgid "Invalid index"
-msgstr "Índice no válido"
-
 #: panels/wwan/cc-wwan-errors-private.h:59
-#| msgid "No stylus found"
 msgid "Not found"
 msgstr "No encontrado"
 
-#: panels/wwan/cc-wwan-errors-private.h:60
-#| msgid "Memory"
-msgid "Memory failure"
-msgstr "Fallo de la memoria"
-
 #: panels/wwan/cc-wwan-errors-private.h:61
-#| msgid "_Network Time"
 msgid "No network service"
 msgstr "No hay servicio de red"
 
 #: panels/wwan/cc-wwan-errors-private.h:62
-#| msgid "_Network Time"
 msgid "Network timeout"
 msgstr "Tiempo de expiración de la red"
 
-#: panels/wwan/cc-wwan-errors-private.h:63
-msgid "Network not allowed - emergency calls only"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:64
-#, fuzzy
-#| msgid "Network registration denied"
-msgid "Network personalization PIN required"
-msgstr "Registro de la red denegado"
-
-#: panels/wwan/cc-wwan-errors-private.h:65
-#, fuzzy
-#| msgid "Network registration denied"
-msgid "Network personalization PUK required"
-msgstr "Registro de la red denegado"
-
-#: panels/wwan/cc-wwan-errors-private.h:66
-#, fuzzy
-#| msgid "Network registration denied"
-msgid "Network subset personalization PIN required"
-msgstr "Registro de la red denegado"
-
-#: panels/wwan/cc-wwan-errors-private.h:67
-#, fuzzy
-#| msgid "Network registration denied"
-msgid "Network subset personalization PUK required"
-msgstr "Registro de la red denegado"
-
-#: panels/wwan/cc-wwan-errors-private.h:68
-msgid "Service provider personalization PIN required"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:69
-msgid "Service provider personalization PUK required"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:70
-msgid "Corporate personalization PIN required"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:71
-msgid "Corporate personalization PUK required"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:73
-msgid "Illegal MS"
-msgstr "MS ilegal"
-
-#: panels/wwan/cc-wwan-errors-private.h:74
-msgid "Illegal ME"
-msgstr "ME ilegal"
-
 #: panels/wwan/cc-wwan-errors-private.h:75
-#| msgid "AutoIP service failed"
 msgid "GPRS services not allowed"
 msgstr "Servicios GPRS no permitidos"
 
-#: panels/wwan/cc-wwan-errors-private.h:76
-msgid "PLMN not allowed"
-msgstr "PLMN no permitido"
-
-#: panels/wwan/cc-wwan-errors-private.h:77
-#, fuzzy
-#| msgid "Location already exists"
-msgid "Location area not allowed"
-msgstr "El lugar ya existe"
-
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:79
-#| msgid "The device type is not currently supported."
-msgid "Service option not supported"
-msgstr "Opción de servicio no soportada"
-
-#: panels/wwan/cc-wwan-errors-private.h:80
-msgid "Requested service option not subscribed"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:81
-msgid "Service option temporarily out of order"
-msgstr ""
+msgstr "Itinerancia no permitida en esta área"
 
 #: panels/wwan/cc-wwan-errors-private.h:82
-#| msgid "Unspecified"
 msgid "Unspecified GPRS error"
 msgstr "Error GPRS no especificado"
 
-#: panels/wwan/cc-wwan-errors-private.h:83
-#| msgid "Authentication failed"
-msgid "PDP authentication failure"
-msgstr "Falló la autenticación PDP"
-
-#: panels/wwan/cc-wwan-errors-private.h:84
-msgid "Invalid mobile class"
-msgstr "Clase de móvil no válida"
-
 #: panels/wwan/cc-wwan-errors-private.h:91
-#| msgctxt "print job"
-#| msgid "Canceled"
 msgid "Action Cancelled"
 msgstr "Acción cancelada"
 
 #: panels/wwan/cc-wwan-errors-private.h:94
-#| msgid "Access LXD service"
 msgid "Access denied"
 msgstr "Acceso denegado"
 
 #: panels/wwan/cc-wwan-errors-private.h:103
-#| msgid "Unknown error"
 msgid "Unknown Error"
 msgstr "Error desconocido"
 
 #: panels/wwan/cc-wwan-mode-dialog.ui:4
-#| msgid "Network Name"
 msgid "Network Mode"
 msgstr "Modo de red"
 
@@ -8783,12 +8612,10 @@ msgid "Close"
 msgstr "Cerrar"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:84
-#| msgid "Automatic"
 msgid "_Automatic"
 msgstr "_Automática"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:100
-#| msgid "My Home Network"
 msgid "Choose Network"
 msgstr "Elegir red"
 
@@ -8802,42 +8629,34 @@ msgid "SIM %d"
 msgstr "SIM %d"
 
 #: panels/wwan/cc-wwan-panel.ui:101
-#| msgid "No Wi-Fi Adapter Found"
 msgid "No WWAN Adapter Found"
 msgstr "No se han encontrado ningún adaptador WWAN"
 
 #: panels/wwan/cc-wwan-panel.ui:112
-#| msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgid "Make sure you have a Wireless Wan/Cellular device"
 msgstr "Asegúrese de que tiene un adaptador inalámbrico o móvil"
 
 #: panels/wwan/cc-wwan-panel.ui:154
-#| msgid "Bluetooth is disabled when airplane mode is on."
 msgid "Wireless Wan is disabled when airplane mode is on"
 msgstr "La red WWAN está desactivada cuando el modo avión está activado"
 
 #: panels/wwan/cc-wwan-panel.ui:163
-#| msgid "Turn Off Airplane Mode"
 msgid "_Turn off Airplane Mode"
 msgstr "_Apagar el modo avión"
 
 #: panels/wwan/cc-wwan-panel.ui:210
-#| msgid "Forget Connection"
 msgid "Data Connection"
 msgstr "Conexión de datos"
 
 #: panels/wwan/cc-wwan-panel.ui:224
-#| msgid "SIM Card not inserted"
 msgid "SIM card used for internet"
 msgstr "Tarjeta SIM usada para Internet"
 
 #: panels/wwan/cc-wwan-panel.ui:332
-#| msgid "My Home Network"
 msgid "Enable Mobile Network"
 msgstr "Activar red móvil"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
-#| msgid "Lock"
 msgid "SIM Lock"
 msgstr "Bloqueo de SIM"
 
@@ -8850,21 +8669,19 @@ msgid "_Lock SIM with PIN"
 msgstr "_Bloquear tarjeta SIM con PIN"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
-#| msgid "Ch_ange"
 msgid "Change PIN"
 msgstr "Cambiar PIN"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
 msgid "Enter current PIN to change SIM lock settings"
 msgstr ""
+"Introduzca el PIN actual para cambiar la configuración de bloqueo de la SIM"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:3
-#| msgid "My Home Network"
 msgid "Mobile Network"
 msgstr "Red móvil"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:4
-#| msgid "Configure Removable Media settings"
 msgid "Configure Telephony and mobile data connections"
 msgstr "Configurar telefonía y conexiones de datos móviles"
 
@@ -9028,6 +8845,74 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~| msgid "SIM Pin required"
+#~ msgid "PH-SIM PIN required"
+#~ msgstr "Se necesita el PIN de la PH-SIM"
+
+#~| msgid "SIM Pin required"
+#~ msgid "PH-FSIM PIN required"
+#~ msgstr "Se necesita el PIN de la PH-FSIM"
+
+#~| msgid "SIM Pin required"
+#~ msgid "PH-FSIM PUK required"
+#~ msgstr "Se necesita el PUK de la PH-FSIM"
+
+#~| msgid "Memory"
+#~ msgid "Memory full"
+#~ msgstr "Memoria llena"
+
+#~ msgid "Invalid index"
+#~ msgstr "Índice no válido"
+
+#~| msgid "Memory"
+#~ msgid "Memory failure"
+#~ msgstr "Fallo de la memoria"
+
+#, fuzzy
+#~| msgid "Network registration denied"
+#~ msgid "Network personalization PIN required"
+#~ msgstr "Registro de la red denegado"
+
+#, fuzzy
+#~| msgid "Network registration denied"
+#~ msgid "Network personalization PUK required"
+#~ msgstr "Registro de la red denegado"
+
+#, fuzzy
+#~| msgid "Network registration denied"
+#~ msgid "Network subset personalization PIN required"
+#~ msgstr "Registro de la red denegado"
+
+#, fuzzy
+#~| msgid "Network registration denied"
+#~ msgid "Network subset personalization PUK required"
+#~ msgstr "Registro de la red denegado"
+
+#~ msgid "Illegal MS"
+#~ msgstr "MS ilegal"
+
+#~ msgid "Illegal ME"
+#~ msgstr "ME ilegal"
+
+#~ msgid "PLMN not allowed"
+#~ msgstr "PLMN no permitido"
+
+#, fuzzy
+#~| msgid "Location already exists"
+#~ msgid "Location area not allowed"
+#~ msgstr "El lugar ya existe"
+
+#~| msgid "The device type is not currently supported."
+#~ msgid "Service option not supported"
+#~ msgstr "Opción de servicio no soportada"
+
+#~| msgid "Authentication failed"
+#~ msgid "PDP authentication failure"
+#~ msgstr "Falló la autenticación PDP"
+
+#~ msgid "Invalid mobile class"
+#~ msgstr "Clase de móvil no válida"
 
 #~ msgid "_Screen Brightness"
 #~ msgstr "_Brillo de la pantalla"
