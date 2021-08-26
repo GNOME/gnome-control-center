@@ -1214,7 +1214,11 @@ spawn_malcontent_control (CcUserPanel *self)
 #endif  /* HAVE_MALCONTENT_0_10 */
                         NULL
                 };
-                g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, NULL);
+                g_autoptr(GError) error = NULL;
+                if (!g_spawn_async (NULL, (char **)argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error))
+                        g_debug ("Couldn't launch malcontent-control: %s", error->message);
+        } else {
+                g_debug ("Not launching malcontent because selected user is an admin");
         }
 }
 #endif
