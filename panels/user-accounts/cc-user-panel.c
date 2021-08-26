@@ -1438,10 +1438,6 @@ on_permission_changed (CcUserPanel *self)
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), TRUE);
                 remove_unlock_tooltip (GTK_WIDGET (self->last_login_row));
-#ifdef HAVE_MALCONTENT
-                gtk_widget_set_sensitive (GTK_WIDGET (self->parental_controls_row), TRUE);
-                remove_unlock_tooltip (GTK_WIDGET (self->parental_controls_row));
-#endif
         }
         else {
                 gtk_stack_set_visible_child (self->user_icon_stack, GTK_WIDGET (self->user_icon_image));
@@ -1457,10 +1453,6 @@ on_permission_changed (CcUserPanel *self)
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), FALSE);
                 add_unlock_tooltip (GTK_WIDGET (self->last_login_row));
-#ifdef HAVE_MALCONTENT
-                gtk_widget_set_sensitive (GTK_WIDGET (self->parental_controls_row), FALSE);
-                add_unlock_tooltip (GTK_WIDGET (self->parental_controls_row));
-#endif
         }
 }
 
