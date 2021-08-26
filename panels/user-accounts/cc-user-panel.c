@@ -331,7 +331,12 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         g_object_set (settings, "gtk-enable-animations", animations, NULL);
 #ifdef HAVE_MALCONTENT
         /* Parental Controls row not to be shown for single user setups. */
-        gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row), users_count > 1);
+        if (selected_user != NULL) {
+                gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row),
+                                        act_user_get_account_type (selected_user) != ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
+        } else {
+                gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row), users_count > 1);
+        }
 #endif
 }
 
@@ -921,12 +926,7 @@ show_user (ActUser *user, CcUserPanel *self)
 #ifdef HAVE_MALCONTENT
         /* Parental Controls: Unavailable if user is admin */
         if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
-                GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (self->parental_controls_button_label));
-
-                gtk_widget_hide (GTK_WIDGET (self->parental_control_go_next));
-                /* TRANSLATORS: Status of Parental Controls setup */
-                gtk_label_set_text (self->parental_controls_button_label, _("Unavailable"));
-                gtk_style_context_add_class (context, "dim-label");
+                gtk_widget_hide (GTK_WIDGET (self->parental_controls_row));
         } else {
                 GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (self->parental_controls_button_label));
 
@@ -939,6 +939,7 @@ show_user (ActUser *user, CcUserPanel *self)
 
                 gtk_style_context_remove_class (context, "dim-label");
                 gtk_widget_show (GTK_WIDGET (self->parental_control_go_next));
+                gtk_widget_show (GTK_WIDGET (self->parental_controls_row));
         }
 #endif
 
