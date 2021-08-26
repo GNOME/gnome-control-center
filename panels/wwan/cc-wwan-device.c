@@ -974,14 +974,6 @@ cc_wwan_device_get_supported_modes (CcWwanDevice *self,
   return TRUE;
 }
 
-#define APPEND_MODE_TO_STRING(_str, _now, _preferred, _mode_str) do { \
-    if (_str->len > 0)                                                \
-      g_string_append (_str, ", ");                                   \
-    g_string_append (_str, _mode_str);                                \
-    if (_preferred == _now)                                           \
-      g_string_append (_str, _(" (Preferred)"));                      \
-  } while (0)
-
 gchar *
 cc_wwan_device_get_string_from_mode (CcWwanDevice *self,
                                      MMModemMode   allowed,
@@ -992,26 +984,66 @@ cc_wwan_device_get_string_from_mode (CcWwanDevice *self,
   g_return_val_if_fail (CC_IS_WWAN_DEVICE (self), NULL);
   g_return_val_if_fail (allowed != 0, NULL);
 
+  if (allowed == MM_MODEM_MODE_2G)
+    return g_strdup (_("2G Only"));
+
+  if (allowed == MM_MODEM_MODE_3G)
+    return g_strdup (_("3G Only"));
+
+  if (allowed == MM_MODEM_MODE_4G)
+    return g_strdup (_("4G Only"));
+
   str = g_string_sized_new (10);
 
-  if (allowed & MM_MODEM_MODE_2G)
-    APPEND_MODE_TO_STRING (str, MM_MODEM_MODE_2G, preferred, "2G");
-  if (allowed & MM_MODEM_MODE_3G)
-    APPEND_MODE_TO_STRING (str, MM_MODEM_MODE_3G, preferred, "3G");
-  if (allowed & MM_MODEM_MODE_4G)
-    APPEND_MODE_TO_STRING (str, MM_MODEM_MODE_4G, preferred, "4G");
+  if (allowed & MM_MODEM_MODE_2G &&
+      allowed & MM_MODEM_MODE_3G &&
+      allowed & MM_MODEM_MODE_4G)
+    {
+      if (preferred & MM_MODEM_MODE_4G)
+        g_string_append (str, _("2G, 3G, 4G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_3G)
+        g_string_append (str, _("2G, 3G (Preferred), 4G"));
+      else if (preferred & MM_MODEM_MODE_2G)
+        g_string_append (str, _("2G (Preferred), 3G, 4G"));
+      else
+        g_string_append (str, _("2G, 3G, 4G"));
+    }
+  else if (allowed & MM_MODEM_MODE_3G &&
+           allowed & MM_MODEM_MODE_4G)
+    {
+      if (preferred & MM_MODEM_MODE_4G)
+        g_string_append (str, _("3G, 4G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_3G)
+        g_string_append (str, _("3G (Preferred), 4G"));
+      else
+        g_string_append (str, _("3G, 4G"));
+    }
+  else if (allowed & MM_MODEM_MODE_2G &&
+           allowed & MM_MODEM_MODE_4G)
+    {
+      if (preferred & MM_MODEM_MODE_4G)
+        g_string_append (str, _("2G, 4G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_2G)
+        g_string_append (str, _("2G (Preferred), 4G"));
+      else
+        g_string_append (str, _("2G, 4G"));
+    }
+  else if (allowed & MM_MODEM_MODE_2G &&
+           allowed & MM_MODEM_MODE_3G)
+    {
+      if (preferred & MM_MODEM_MODE_3G)
+        g_string_append (str, _("2G, 3G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_2G)
+        g_string_append (str, _("2G (Preferred), 3G"));
+      else
+        g_string_append (str, _("2G, 3G"));
+    }
 
-  if (allowed == MM_MODEM_MODE_2G ||
-      allowed == MM_MODEM_MODE_3G ||
-      allowed == MM_MODEM_MODE_4G)
-    g_string_append (str, _(" Only"));
+  if (!str->len)
+    g_string_append (str, C_("Network mode", "Unknown"));
 
-  if (str->len == 0)
-    return g_string_free (str, TRUE);
-  else
-    return g_string_free (str, FALSE);
+  return g_string_free (str, FALSE);
 }
-#undef APPEND_MODE_TO_STRING
 
 static void
 wwan_network_list_free (GList *network_list)
