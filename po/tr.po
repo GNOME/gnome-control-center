@@ -13,16 +13,16 @@
 # Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>, 2018.
 # Çağatay Yiğit Şahin <cyigitsahin@outlook.com>, 2018.
 # Sabri Ünal <libreajans@gmail.com>, 2014, 2019.
-# Emin Tufan Çetin <etcetin@gmail.com>, 2013-2021.
 # Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
+# Emin Tufan Çetin <etcetin@gmail.com>, 2013-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-05 22:04+0000\n"
-"PO-Revision-Date: 2021-08-06 23:48+0300\n"
+"POT-Creation-Date: 2021-08-24 15:50+0000\n"
+"PO-Revision-Date: 2021-08-28 00:00+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnometurk@gnome.org>\n"
 "Language: tr\n"
@@ -59,7 +59,8 @@ msgstr "/dev konumuna tam erişim"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Ağ"
 
@@ -211,6 +212,7 @@ msgstr "Kamera"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Devre dışı"
@@ -387,6 +389,9 @@ msgstr "Resim seç"
 #: panels/user-accounts/cc-user-panel.c:633
 #: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "_İptal"
 
@@ -755,6 +760,7 @@ msgstr "Profili Kaydet"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Kaydet"
 
@@ -1785,6 +1791,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:437
 #: panels/info-overview/cc-info-overview-panel.c:483
 #: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
@@ -2281,6 +2288,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "İptal"
 
@@ -2309,7 +2317,8 @@ msgstr "Klavye kısayolu bulunamadı"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Geri"
 
@@ -2358,6 +2367,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Ad"
 
@@ -2378,6 +2388,7 @@ msgid "None"
 msgstr "Hiçbiri"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Ekle"
 
@@ -2639,6 +2650,7 @@ msgstr "Konuşmalarınızı koruyun"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Genel"
 
@@ -2754,11 +2766,90 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
 "Trackpad;İzleme Yüzeyi;İşaretçi;Tıklama;Vurma;Çift;Düğme;Trackball;Kaydırma;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "_Sıcak Köşe"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr "Etkinlikler Genel Görünümünü açmak için sol üst köşeye dokun."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "_Etkin Ekran Köşeleri"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Pencereleri üste, sola ve sağa sürükleyerek yeniden boyutlandır."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "Çalışma Alanları"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "_Dinamik çalışma alanları"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "Boş çalışma alanlarını kendiliğinden kaldırır."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "_Belirli sayıda çalışma alanları"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "Kalıcı çalışma alanı sayısını belirt."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "Çalışma Alanı _Sayısı"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+msgid "Multi-Monitor"
+msgstr "Çoklu Monitör"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "Çalışma alanları yalnızca _birincil ekranda"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "Çalışma alanları tüm _ekranlarda"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "Uygulama Geçişi"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "Tüm _çalışma alanlarından uygulamaları içer"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "Yalnızca _geçerli çalışma alanından uygulamaları içer"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "Çoklu Görev"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "Verimlilik ve çoklu görev için tercihleri yönet"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr "Çoklugörev;Çoğulgörev;Verimlilik;Üretkenlik;Özelleştir;Masaüstü;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Tüh, bir şeyler ters gitti. Lütfen yazılım sağlayıcınıza başvurun."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager’in çalışması gerekir."
 
@@ -2858,6 +2949,7 @@ msgstr "Ağ Adı"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Parola"
 
@@ -2903,7 +2995,7 @@ msgstr "Wi-Fi Bağdaştırıcısı Bulunamadı"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Wi-Fi bağdaştırıcınızın takılı ve açık olduğundan emin olun"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Uçak Kipi Açık"
 
@@ -3200,6 +3292,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 Kişisel"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Sinyal Gücü"
 
@@ -3595,6 +3688,7 @@ msgid "Turn device off"
 msgstr "Aygıtı kapat"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3918,7 +4012,7 @@ msgid "SIM Puk required"
 msgstr "SIM Puk gerekli"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "Yanlış SIM"
 
@@ -4834,10 +4928,12 @@ msgid "High performance and power usage."
 msgstr "Yüksek başarım ve güç kullanımı."
 
 #: panels/power/cc-power-profile-row.c:184
+msgctxt "Power profile"
 msgid "Performance"
 msgstr "Başarım"
 
 #: panels/power/cc-power-profile-row.c:188
+msgctxt "Power profile"
 msgid "Balanced"
 msgstr "Dengeli"
 
@@ -4846,6 +4942,7 @@ msgid "Standard performance and power usage."
 msgstr "Temel başarım ve güç kullanımı."
 
 #: panels/power/cc-power-profile-row.c:192
+msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Güç Kazanımı"
 
@@ -4881,7 +4978,7 @@ msgstr "Kimlik doğrulama"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Kullanıcı Adı"
 
@@ -4937,6 +5034,7 @@ msgstr "Yazıcı Ekle"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Kilidi Aç"
 
@@ -5349,6 +5447,7 @@ msgstr "Ön-süzgeçleme yok"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Üretici"
 
@@ -5496,6 +5595,7 @@ msgid "Remove Printer"
 msgstr "Yazıcıyı Kaldır"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Model"
 
@@ -7605,6 +7705,7 @@ msgstr "Oturum açık"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Etkin"
 
@@ -7920,6 +8021,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "Yeni parola yeterli sayıda farklı karakterler içermiyor"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Bilinmeyen hata"
@@ -8169,6 +8271,378 @@ msgstr "En Aşağı Düğme"
 msgid "Tip Pressure Feel"
 msgstr "Parmak Ucu Basınç Hissi"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "Erişim Noktaları"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "İşlem İptal Edildi"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>Hata:</b> Ayar değiştirme izni reddedildi"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Hata:</b> Mobil Donanım Hatası"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "Kayıtlı Değil"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+msgid "Registered"
+msgstr "Kayıtlı"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "Dolaşım"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "Aranıyor"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "Reddedildi"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "Modem Ayrıntıları"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "Modem Durumu"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "Taşıyıcı"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "Ağ Türü"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "Ağ Durumu"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "Kendi Numarası"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "Aygıt Ayrıntıları"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "Donanım Yazılımı Sürümü"
+
+#: panels/wwan/cc-wwan-device.c:982
+msgid " (Preferred)"
+msgstr " (Yeğlenen)"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid " Only"
+msgstr " Yalnızca"
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "SIM kart kilidini aç"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "Kilidi Aç"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "Lütfen SIM %d için PIN kodu sağlayın"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr "SIM kartınızın kilidini açmak için PIN girin"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "Lütfen SIM %d için PUK kodu sağlayın"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr "SIM kartınızın kilidini açmak için PUK girin"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "Yanlış parola girildi. %1$u hakkınız kaldı"
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "%u hakkınız kaldı"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "Yanlış parola girildi."
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr "PUK kodu 8 haneli sayı olmalıdır"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "Yeni PIN Gir"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "PIN kodu 4-8 haneli sayı olmalıdır"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+msgid "Unlocking..."
+msgstr "Kilit Açılıyor..."
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "SIM Yok"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "Bu modemi kullanmak için SIM kartı yerleştir"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM Kilitli"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "_Mobil Veri"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "Mobil ağ kullanarak veriye eriş"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "_Veri Dolaşımı"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "Dolaşımda mobil veriyi kullan"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "_Ağ Kipi"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "A_ğ"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "Gelişmiş"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "_Erişim Noktası Adları"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "_SIM Kilidi"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "SIM’i PIN ile kilitle"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "M_odem Ayrıntıları"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "Telefon başarısız"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "Telefona bağlantı yok"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "İşleme izin verilmedi"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "İşlem desteklenmiyor"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "SIM takılı değil"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "SIM PIN gerekli"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "SIM PUK gerekli"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "SIM başarısız"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "SIM meşgul"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "Geçersiz parola"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "SIM PIN2 gerekli"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "SIM PUK2 gerekli"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "Bulunamadı"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "Ağ servisi yok"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "Ağ zaman aşımı"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "GPRS servislerine izin verilmedi"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "Bu konum alanında dolaşıma izin verilmedi"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Belirtilmemiş GPRS hatası"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "Eylem İptal Edildi"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "Erişim reddedildi"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "Bilinmeyen Hata"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "Ağ Kipi"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "_Belirle"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Kapat"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "_Kendiliğinden"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "Ağ Seç"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "Ağ Sağlayıcılarını Yenile"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "WWAN Bağdaştırıcısı Bulunamadı"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Kablosuz Wan/Hücresel aygıtınızın olduğundan emin olun"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "Uçak kipi açıldığında Kablosuz Wan devre dışı kalır."
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "Uçak Kipini _Kapat"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "Veri Bağlantısı"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "SIM kart internette kullanıldı"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "Mobil Ağı Etkinleştir"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "SIM Kilidi"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "_Sonraki"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "SIM’i PIN ile _Kilitle"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "PIN Değiştir"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr "SIM kilit ayarlarını değiştirmek için geçerli PIN’i gir"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "Mobil Ağ"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "Telefon ve mobil veri bağlantılarını yapılandır"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr "hücresel;wwan;telefon;telefonculuk;sim;mobil;taşınabilir;taşınır;seyyar;gezici;gezgin;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "GNOME Ayarlar"
@@ -8213,7 +8687,7 @@ msgstr "[PANEL] [BAĞIMSIZ DEĞİŞKEN…]"
 msgid "Privacy"
 msgstr "Gizlilik"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Kullanılabilir Paneller:"
 
@@ -8336,9 +8810,6 @@ msgstr "Sistem Sesleri"
 
 #~ msgid "Wi-Fi can be turned off to save power."
 #~ msgstr "Kablosuz Ağ, güç tasarrufu için kapatılabilir."
-
-#~ msgid "_Mobile Broadband"
-#~ msgstr "_Mobil Genişbant"
 
 #~ msgid ""
 #~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
@@ -8563,9 +9034,6 @@ msgstr "Sistem Sesleri"
 #~ msgid "Read system and application logs"
 #~ msgstr "Sistem ve uygulama günlüklerini oku"
 
-#~ msgid "Access LXD service"
-#~ msgstr "LXD hizmetine eriş"
-
 #~ msgid "access the media-hub service"
 #~ msgstr "media-hub hizmetine eriş"
 
@@ -8591,9 +9059,6 @@ msgstr "Sistem Sesleri"
 
 #~ msgid "Change network settings"
 #~ msgstr "Ağ ayarlarını değiştir"
-
-#~ msgid "Read network settings"
-#~ msgstr "Ağ ayarlarını oku"
 
 #~ msgid ""
 #~ "Access the ofono service to read and change network settings for mobile "
@@ -8858,9 +9323,6 @@ msgstr "Sistem Sesleri"
 
 #~ msgid "Infrastructure"
 #~ msgstr "Altyapı"
-
-#~ msgid "Not connected"
-#~ msgstr "Bağlı değil"
 
 #~ msgid "In use"
 #~ msgstr "Kullanımda"
@@ -9228,9 +9690,6 @@ msgstr "Sistem Sesleri"
 
 #~ msgid "gnome-control-center"
 #~ msgstr "gnome-control-center"
-
-#~ msgid "My Home Network"
-#~ msgstr "Ev Ağı"
 
 #~ msgid "hardware"
 #~ msgstr "donanım"
@@ -9847,9 +10306,6 @@ msgstr "Sistem Sesleri"
 
 #~ msgid "Time _Zone"
 #~ msgstr "Saat _Dilimi"
-
-#~ msgid "Close"
-#~ msgstr "Kapat"
 
 #~ msgid "Resume Printing"
 #~ msgstr "Yazdırmayı Devam Ettir"
