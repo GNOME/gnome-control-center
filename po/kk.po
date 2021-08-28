@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-02-21 15:21+0000\n"
-"PO-Revision-Date: 2021-02-26 15:57+0500\n"
+"POT-Creation-Date: 2021-08-24 15:50+0000\n"
+"PO-Revision-Date: 2021-08-28 14:22+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -35,7 +35,7 @@ msgid "Session Bus"
 msgstr "Сессия шинасы"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:1789 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.ui:85 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Құрылғылар"
@@ -46,7 +46,8 @@ msgstr "/dev бумасына толық қатынау құқығы"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Желі"
 
@@ -72,7 +73,7 @@ msgstr "Файлдық жүйе"
 
 #: panels/applications/cc-applications-panel.c:849
 #: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:933 shell/cc-window.ui:121
+#: shell/cc-window.c:938 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Баптаулар"
@@ -153,7 +154,7 @@ msgstr "Баска файлдар"
 #: panels/applications/cc-applications-panel.c:1660
 #: panels/applications/cc-applications-panel.ui:416
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:79
+#: panels/notifications/cc-notifications-panel.ui:70
 msgid "Applications"
 msgstr "Қолданбалар"
 
@@ -195,10 +196,11 @@ msgstr "Камера"
 #: panels/applications/cc-applications-panel.ui:232
 #: panels/applications/cc-applications-panel.ui:262
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
-#: panels/keyboard/cc-xkb-modifier-dialog.c:355
+#: panels/keyboard/cc-xkb-modifier-dialog.c:353
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Сөндірулі"
@@ -216,7 +218,7 @@ msgid "Location Services"
 msgstr "Орналасулар қызметі"
 
 #: panels/applications/cc-applications-panel.ui:157
-#: panels/applications/cc-applications-panel.ui:499
+#: panels/applications/cc-applications-panel.ui:500
 msgid "Built-in Permissions"
 msgstr "Құрамындағы рұқсаттар"
 
@@ -290,47 +292,47 @@ msgid "How much resources this application is using."
 msgstr "Бұл қолданба қолданатын ресурстар шамасы."
 
 #: panels/applications/cc-applications-panel.ui:391
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:537
 msgid "Storage"
 msgstr "Сақтау құрылғылары"
 
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:424
 msgid "Open in Software"
 msgstr "БҚ қолданбасында ашу"
 
-#: panels/applications/cc-applications-panel.ui:473 shell/cc-panel-list.ui:121
+#: panels/applications/cc-applications-panel.ui:474 shell/cc-panel-list.ui:121
 msgid "No results found"
 msgstr "Нәтижелер табылмады"
 
-#: panels/applications/cc-applications-panel.ui:484
+#: panels/applications/cc-applications-panel.ui:485
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:177
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Басқа сөздерді іздеп көріңіз"
 
-#: panels/applications/cc-applications-panel.ui:552
+#: panels/applications/cc-applications-panel.ui:555
 msgid ""
 "How much disk space this application is occupying with app data and caches."
 msgstr ""
 "Бұл қолданба өз деректері мен кэш деректерімен қанша диск орнын алып тұр."
 
-#: panels/applications/cc-applications-panel.ui:561
+#: panels/applications/cc-applications-panel.ui:564
 msgid "Application"
 msgstr "Қолданба"
 
-#: panels/applications/cc-applications-panel.ui:567
+#: panels/applications/cc-applications-panel.ui:570
 msgid "Data"
 msgstr "Деректер"
 
-#: panels/applications/cc-applications-panel.ui:573
+#: panels/applications/cc-applications-panel.ui:576
 msgid "Cache"
 msgstr "Кэш"
 
-#: panels/applications/cc-applications-panel.ui:579
+#: panels/applications/cc-applications-panel.ui:582
 msgid "<b>Total</b>"
 msgstr "<b>Жалпы</b>"
 
-#: panels/applications/cc-applications-panel.ui:596
+#: panels/applications/cc-applications-panel.ui:599
 msgid "Clear Cache…"
 msgstr "Кэшті тазарту…"
 
@@ -344,16 +346,16 @@ msgstr "Қолданбалардың түрлі рұқсаттарын және 
 msgid "application;flatpak;permission;setting;"
 msgstr "application;flatpak;permission;setting;қолданба;рұқсат;баптау;"
 
-#: panels/background/cc-background-chooser.c:345
+#: panels/background/cc-background-chooser.c:344
 msgid "Select a picture"
 msgstr "Суретті таңдау"
 
-#: panels/background/cc-background-chooser.c:348
+#: panels/background/cc-background-chooser.c:347
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
-#: panels/display/cc-display-panel.c:1003
-#: panels/info-overview/cc-info-overview-panel.ui:242
+#: panels/display/cc-display-panel.c:1006
+#: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:866
@@ -368,20 +370,23 @@ msgstr "Суретті таңдау"
 #: panels/sharing/cc-sharing-panel.c:396 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:105
-#: panels/user-accounts/cc-avatar-chooser.c:223
+#: panels/user-accounts/cc-avatar-chooser.c:228
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:633
 #: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "Ба_с тарту"
 
-#: panels/background/cc-background-chooser.c:349
+#: panels/background/cc-background-chooser.c:348
 #: panels/network/connection-editor/vpn-helpers.c:177
 #: panels/printers/pp-details-dialog.c:236
 #: panels/sharing/cc-sharing-panel.c:397
-#: panels/user-accounts/cc-avatar-chooser.c:224
+#: panels/user-accounts/cc-avatar-chooser.c:229
 msgid "_Open"
 msgstr "А_шу"
 
@@ -400,7 +405,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Түсқағаз жоқ"
 
-#: panels/background/cc-background-panel.c:112
+#: panels/background/cc-background-panel.c:110
 msgid "Current background"
 msgstr "Ағымдағы фон"
 
@@ -463,7 +468,7 @@ msgstr "Bluetooth іске қосу үшін ұшақтағы режимді с�
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1595
+#: panels/printers/pp-new-printer-dialog.c:1392
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -744,6 +749,7 @@ msgstr "Профильді сақтау"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Сақтау"
 
@@ -934,7 +940,7 @@ msgstr ""
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:810
-#: panels/diagnostics/cc-diagnostics-panel.c:143
+#: panels/diagnostics/cc-diagnostics-panel.c:144
 msgid "Learn more"
 msgstr "Көбірек білу"
 
@@ -1176,7 +1182,7 @@ msgstr "Таң_дау"
 msgid "No languages found"
 msgstr "Тілдер табылмады"
 
-#: panels/common/cc-language-chooser.ui:78
+#: panels/common/cc-language-chooser.ui:82
 #: panels/keyboard/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Көбірек…"
@@ -1222,12 +1228,12 @@ msgid "Select _All"
 msgstr "Б_арлығын таңдау"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:160
+#: panels/network/connection-editor/ce-page-details.c:162
 msgid "Today"
 msgstr "Бүгін"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:162
+#: panels/network/connection-editor/ce-page-details.c:164
 msgid "Yesterday"
 msgstr "Кеше"
 
@@ -1247,7 +1253,8 @@ msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d сағат"
 
-#: panels/common/cc-util.c:166
+#. Translators: Option for "Blank Screen" in "Power" panel
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:973
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1427,40 +1434,40 @@ msgstr "Уақыт белдеуі"
 msgid "Search for a city"
 msgstr "Қаланы іздеу"
 
-#: panels/datetime/cc-datetime-panel.ui:378
+#: panels/datetime/cc-datetime-panel.ui:375
 msgid "Automatic _Date & Time"
 msgstr "Автоматты түрде _күн және уақыт"
 
-#: panels/datetime/cc-datetime-panel.ui:379
+#: panels/datetime/cc-datetime-panel.ui:376
 msgid "Requires internet access"
 msgstr "Интернетпен байланысты талап етеді"
 
-#: panels/datetime/cc-datetime-panel.ui:399
+#: panels/datetime/cc-datetime-panel.ui:396
 msgid "Date & _Time"
 msgstr "Күн және уақы_т"
 
-#: panels/datetime/cc-datetime-panel.ui:438
+#: panels/datetime/cc-datetime-panel.ui:430
 msgid "Automatic Time _Zone"
 msgstr "Автоматты түрде _уақыт белдеуі"
 
-#: panels/datetime/cc-datetime-panel.ui:439
+#: panels/datetime/cc-datetime-panel.ui:431
 msgid "Requires location services enabled and internet access"
 msgstr ""
 "Орналасулар қызметінің іске қосылуын және интернетке қатынауды талап етеді"
 
-#: panels/datetime/cc-datetime-panel.ui:454
+#: panels/datetime/cc-datetime-panel.ui:446
 msgid "Time Z_one"
 msgstr "Уақыт бе_лдеуі"
 
-#: panels/datetime/cc-datetime-panel.ui:494
+#: panels/datetime/cc-datetime-panel.ui:481
 msgid "Time _Format"
 msgstr "Уақыт пі_шімі"
 
-#: panels/datetime/cc-datetime-panel.ui:503
+#: panels/datetime/cc-datetime-panel.ui:490
 msgid "24-hour"
 msgstr "24 сағат"
 
-#: panels/datetime/cc-datetime-panel.ui:504
+#: panels/datetime/cc-datetime-panel.ui:491
 msgid "AM / PM"
 msgstr "AM / PM"
 
@@ -1521,7 +1528,7 @@ msgstr ""
 "default;application;preferred;media;үнсіз келісім;қолданба;таңдамалы;тасушы;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:145
+#: panels/diagnostics/cc-diagnostics-panel.c:146
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -1561,20 +1568,20 @@ msgstr ""
 "network;identity;privacy;экран;блоктау;диагностика;құлау;жеке;жуырдағы;"
 "уақытша;индекс;аты;желі;анықтағыш;жекелік;"
 
-#: panels/display/cc-display-panel.c:1014
+#: panels/display/cc-display-panel.c:1017
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "Іске _асыру"
 
-#: panels/display/cc-display-panel.c:1035
+#: panels/display/cc-display-panel.c:1038
 msgid "Apply Changes?"
 msgstr "Өзгеірстерді іске асыру керек пе?"
 
-#: panels/display/cc-display-panel.c:1040
+#: panels/display/cc-display-panel.c:1043
 msgid "Changes Cannot be Applied"
 msgstr "Өзгерістерді іске асыру мүмкін емес"
 
-#: panels/display/cc-display-panel.c:1041
+#: panels/display/cc-display-panel.c:1044
 msgid "This could be due to hardware limitations."
 msgstr "Бұл құрылғылық шектеулерден болуы мүмкін."
 
@@ -1634,27 +1641,27 @@ msgstr "Экран­дар"
 msgid "Night Light"
 msgstr "Түнгі жарық"
 
-#: panels/display/cc-display-settings.c:103
+#: panels/display/cc-display-settings.c:107
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Жатық"
 
-#: panels/display/cc-display-settings.c:106
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Тік, оң жақ"
 
-#: panels/display/cc-display-settings.c:109
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Тік, сол жақ"
 
-#: panels/display/cc-display-settings.c:112
+#: panels/display/cc-display-settings.c:116
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Жатық (айналған)"
 
-#: panels/display/cc-display-settings.c:186
+#: panels/display/cc-display-settings.c:190
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Гц"
@@ -1678,6 +1685,7 @@ msgid "Adjust for TV"
 msgstr "Теледидар үшін баптау"
 
 #: panels/display/cc-display-settings.ui:59
+#: panels/display/cc-display-settings.ui:76
 msgctxt "display setting"
 msgid "Scale"
 msgstr "Масштабтау"
@@ -1778,11 +1786,11 @@ msgstr ""
 "redshift;color;sunset;sunrise;Панель;Проектор;xrandr;Экран;Ажыратылымдығы;"
 "Жаңарту;Монитор;Түн;Жарық;Көк;түс;күннің шығуы;күннің батуы;"
 
-#: panels/info-overview/cc-info-overview-panel.c:418
-#: panels/info-overview/cc-info-overview-panel.c:433
-#: panels/info-overview/cc-info-overview-panel.c:445
-#: panels/info-overview/cc-info-overview-panel.c:491
-#: panels/info-overview/cc-info-overview-panel.c:521
+#: panels/info-overview/cc-info-overview-panel.c:413
+#: panels/info-overview/cc-info-overview-panel.c:437
+#: panels/info-overview/cc-info-overview-panel.c:483
+#: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Белгісіз"
 
@@ -1790,94 +1798,94 @@ msgstr "Белгісіз"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:453
+#: panels/info-overview/cc-info-overview-panel.c:445
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; Жинақ ID: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:468
+#: panels/info-overview/cc-info-overview-panel.c:460
 #, c-format
 msgid "64-bit"
 msgstr "64-биттік"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:471
+#: panels/info-overview/cc-info-overview-panel.c:463
 #, c-format
 msgid "32-bit"
 msgstr "32-биттік"
 
-#: panels/info-overview/cc-info-overview-panel.c:728
+#: panels/info-overview/cc-info-overview-panel.c:720
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:732
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:734
+#: panels/info-overview/cc-info-overview-panel.c:726
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Белгісіз"
 
-#: panels/info-overview/cc-info-overview-panel.ui:51
+#: panels/info-overview/cc-info-overview-panel.ui:52
 msgid "Device Name"
 msgstr "Құрылғы атауы"
 
-#: panels/info-overview/cc-info-overview-panel.ui:73
+#: panels/info-overview/cc-info-overview-panel.ui:74
 msgid "Hardware Model"
 msgstr "Құрылғы моделі"
 
-#: panels/info-overview/cc-info-overview-panel.ui:82
+#: panels/info-overview/cc-info-overview-panel.ui:83
 msgid "Memory"
 msgstr "Жады"
 
-#: panels/info-overview/cc-info-overview-panel.ui:91
+#: panels/info-overview/cc-info-overview-panel.ui:92
 msgid "Processor"
 msgstr "Процессор"
 
-#: panels/info-overview/cc-info-overview-panel.ui:100
+#: panels/info-overview/cc-info-overview-panel.ui:101
 msgid "Graphics"
 msgstr "Графика"
 
-#: panels/info-overview/cc-info-overview-panel.ui:109
+#: panels/info-overview/cc-info-overview-panel.ui:110
 msgid "Disk Capacity"
 msgstr "Диск сыйымдылығы"
 
-#: panels/info-overview/cc-info-overview-panel.ui:110
+#: panels/info-overview/cc-info-overview-panel.ui:111
 msgid "Calculating…"
 msgstr "Есептеу…"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:132
+#: panels/info-overview/cc-info-overview-panel.ui:133
 msgid "OS Name"
 msgstr "ОЖ атауы"
 
-#: panels/info-overview/cc-info-overview-panel.ui:141
+#: panels/info-overview/cc-info-overview-panel.ui:142
 msgid "OS Type"
 msgstr "ОЖ түрі"
 
-#: panels/info-overview/cc-info-overview-panel.ui:150
+#: panels/info-overview/cc-info-overview-panel.ui:151
 msgid "GNOME Version"
 msgstr "GNOME нұсқасы"
 
-#: panels/info-overview/cc-info-overview-panel.ui:160
+#: panels/info-overview/cc-info-overview-panel.ui:161
 msgid "Windowing System"
 msgstr "Терезе жүйесі"
 
-#: panels/info-overview/cc-info-overview-panel.ui:168
+#: panels/info-overview/cc-info-overview-panel.ui:169
 msgid "Virtualization"
 msgstr "Виртуализация"
 
-#: panels/info-overview/cc-info-overview-panel.ui:177
+#: panels/info-overview/cc-info-overview-panel.ui:178
 msgid "Software Updates"
 msgstr "Бағд. қамтама жаңартулары"
 
-#: panels/info-overview/cc-info-overview-panel.ui:198
+#: panels/info-overview/cc-info-overview-panel.ui:199
 msgid "Rename Device"
 msgstr "Құрылғы атын ауыстыру"
 
-#: panels/info-overview/cc-info-overview-panel.ui:215
+#: panels/info-overview/cc-info-overview-panel.ui:216
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -1885,7 +1893,7 @@ msgstr ""
 "Құрылғы атауы бұл құрылғыны желі арқылы қараған кезде немесе Bluetooth "
 "құрылғыларымен жұпталып жатқанда анықтау үшін қолданылады."
 
-#: panels/info-overview/cc-info-overview-panel.ui:233
+#: panels/info-overview/cc-info-overview-panel.ui:234
 msgid "_Rename"
 msgstr "Атын ауысты_ру"
 
@@ -1961,7 +1969,7 @@ msgid "Eject"
 msgstr "Шығару"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:542
+#: panels/universal-access/cc-ua-panel.ui:580
 msgid "Typing"
 msgstr "Теру"
 
@@ -2100,7 +2108,7 @@ msgstr "Кіріс қайнар көзін қосу"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Енгізу тәсілдерін жүйеге кіру экранында қолдануға болмайды"
 
-#: panels/keyboard/cc-input-list-box.ui:20
+#: panels/keyboard/cc-input-list-box.ui:23
 msgid "No input source selected"
 msgstr "Кіріс қайнар көзді таңдалмады"
 
@@ -2131,12 +2139,12 @@ msgstr "Өшіру"
 msgid "Custom Shortcuts"
 msgstr "Таңдауыңызша жарлықтар"
 
-#: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.ui:179
+#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.ui:213
 msgid "Alternate Characters Key"
 msgstr "Альтернативті таңбалар пернесі"
 
-#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:69
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
@@ -2144,48 +2152,48 @@ msgstr ""
 "Балама таңбалар пернесін қосымша таңбаларды енгізу үшін пайдалануға болады. "
 "Олар кейде пернетақтадағы үшінші параметр ретінде көрсетіледі."
 
-#: panels/keyboard/cc-keyboard-panel.c:74
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:71
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Сол жақ Alt"
 
-#: panels/keyboard/cc-keyboard-panel.c:75
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Оң жақ Alt"
 
-#: panels/keyboard/cc-keyboard-panel.c:76
-#: panels/keyboard/cc-keyboard-panel.c:94
+#: panels/keyboard/cc-keyboard-panel.c:73
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Сол жақ Super"
 
-#: panels/keyboard/cc-keyboard-panel.c:77
-#: panels/keyboard/cc-keyboard-panel.c:95
+#: panels/keyboard/cc-keyboard-panel.c:74
+#: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Оң жақ Super"
 
-#: panels/keyboard/cc-keyboard-panel.c:78
-#: panels/keyboard/cc-keyboard-panel.c:96
+#: panels/keyboard/cc-keyboard-panel.c:75
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Menu пернесі"
 
-#: panels/keyboard/cc-keyboard-panel.c:79
-#: panels/keyboard/cc-keyboard-panel.c:97
+#: panels/keyboard/cc-keyboard-panel.c:76
+#: panels/keyboard/cc-keyboard-panel.c:94
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Оң жақ Ctrl"
 
-#: panels/keyboard/cc-keyboard-panel.c:87
-#: panels/keyboard/cc-keyboard-panel.ui:204
+#: panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.ui:237
 msgid "Compose Key"
 msgstr "Compose пернесі"
 
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2197,75 +2205,79 @@ msgstr ""
 "теріңіз. Мысалы, түрлендіру пернесінен кейін <b>C</b> және <b>o</b> басылса, "
 "<b>©</b> енгізіледі, <b>a</b> мен <b>'</b> басылса, <b>á</b> егізіледі."
 
-#: panels/keyboard/cc-keyboard-panel.c:98
-#| msgid "Caps"
+#: panels/keyboard/cc-keyboard-panel.c:95
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:99
-#| msgid "Scroll Left"
+#: panels/keyboard/cc-keyboard-panel.c:96
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:100
-#| msgid "Login _Screen"
+#: panels/keyboard/cc-keyboard-panel.c:97
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Print Screen"
 
-#: panels/keyboard/cc-keyboard-panel.ui:43
+#: panels/keyboard/cc-keyboard-panel.c:233
+#, c-format
+msgid ""
+"Input sources can be switched using the %s keyboard shortcut.\n"
+"This can be changed in the keyboard shortcut settings."
+msgstr ""
+"Енгізу қайнар көздерін %s пернетақта жарлығы көмегімен ауыстыруға болады.\n"
+"Бұл жарлықты пернетақта баптауларында өзгертуге болады."
+
+#: panels/keyboard/cc-keyboard-panel.ui:48
 msgid "Input Sources"
 msgstr "Кіріс қайнар көздері"
 
-#: panels/keyboard/cc-keyboard-panel.ui:66
+#: panels/keyboard/cc-keyboard-panel.ui:59
+msgid "Includes keyboard layouts and input methods."
+msgstr "Пернетақта жаймалары және енгізу тәсілдерін қамтиды."
+
+#: panels/keyboard/cc-keyboard-panel.ui:85
 msgid "Input Source Switching"
 msgstr "Кіріс қайнар көзін ауыстыру"
 
-#: panels/keyboard/cc-keyboard-panel.ui:99
+#: panels/keyboard/cc-keyboard-panel.ui:131
 msgid "Use the _same source for all windows"
 msgstr "Бір кірі_с қайнар көзін барлық терезелер үшін қолдану"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:158
 msgid "Switch input sources _individually for each window"
 msgstr "Әр терезе үшін кіріс қайнар көзін бө_лек өзгерту"
 
-#: panels/keyboard/cc-keyboard-panel.ui:138
-msgid "Keyboard Shortcut"
-msgstr "Пернетақта жарлығы"
+#: panels/keyboard/cc-keyboard-panel.ui:177
+msgid "Special Character Entry"
+msgstr "Арнайы таңбаларды енгізу"
 
-#: panels/keyboard/cc-keyboard-panel.ui:139
-msgid "This can be changed in Customize Shortcuts"
-msgstr "Бұны Жарлықтарды баптауда өзгертуге болады"
+#: panels/keyboard/cc-keyboard-panel.ui:188
+msgid "Methods for entering symbols and letter variants using the keyboard."
+msgstr "Пернетақтаны пайдаланып таңбалар мен әріп нұсқаларын енгізу әдістері."
 
-#: panels/keyboard/cc-keyboard-panel.ui:157
-msgid "Type Special Characters"
-msgstr "Арнайы таңбаларды теру"
-
-#: panels/keyboard/cc-keyboard-panel.ui:180
-msgid "Hold down and type to enter different characters"
-msgstr "Әр түрлі таңбаларды енгізу үшін басып ұстап, теріңіз"
-
-#: panels/keyboard/cc-keyboard-panel.ui:232
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:301
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:317 shell/cc-window.ui:326
+#: panels/keyboard/cc-keyboard-panel.ui:263
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:306
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:322 shell/cc-window.ui:326
 msgid "Keyboard Shortcuts"
 msgstr "Пернетақта жарлықтары"
 
-#: panels/keyboard/cc-keyboard-panel.ui:253
-msgid "Customize Shortcuts"
-msgstr "Жарлықтарды баптау"
+#: panels/keyboard/cc-keyboard-panel.ui:283
+msgid "View and Customize Shortcuts"
+msgstr "Жарлықтарды қарау және баптау"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:281
-msgid "modified"
-msgstr "өзгертілген"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:283
+#, c-format
+msgid "%d modified"
+msgid_plural "%d modified"
+msgstr[0] "%d өзгертілген"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:423
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:428
 msgid "Reset All Shortcuts?"
 msgstr "Барлық жарлықтарды тастау керек пе?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:426
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2273,14 +2285,15 @@ msgstr ""
 "Жарлықтарды тастау таңдауыңызша жарлықтарды кетіруі мүмкін. Бұл әрекетті "
 "болдырмау мүмкін болмайды."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:430
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:435
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "Болдырмау"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:436
 msgid "Reset All"
 msgstr "Барлығын тастау"
 
@@ -2305,7 +2318,8 @@ msgstr "Пернетақта жарлықтары табылмады"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Артқа"
 
@@ -2353,6 +2367,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Аты"
 
@@ -2373,6 +2388,7 @@ msgid "None"
 msgstr "Ешнәрсе"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Қосу"
 
@@ -2430,11 +2446,11 @@ msgstr ""
 "Mozilla орналасулар қызметін қолданады: <a href='https://location.services."
 "mozilla.com/privacy'>Жекелік саясаты</a>"
 
-#: panels/location/cc-location-panel.ui:93
+#: panels/location/cc-location-panel.ui:94
 msgid "Allow the applications below to determine your location."
 msgstr "Төмендегі қолданбаларға орналасуыңызды анықтауды рұқсат ету."
 
-#: panels/location/cc-location-panel.ui:113
+#: panels/location/cc-location-panel.ui:114
 msgid "No Applications Have Asked for Location Access"
 msgstr "Ешбір қолданба Орналасуға қатынау рұқсатын сұрамады"
 
@@ -2537,61 +2553,61 @@ msgid "1 hour"
 msgstr "1 сағат"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:209 panels/power/cc-power-panel.ui:63
+#: panels/lock/cc-lock-panel.ui:209
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:213 panels/power/cc-power-panel.ui:67
+#: panels/lock/cc-lock-panel.ui:213
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:217 panels/power/cc-power-panel.ui:71
+#: panels/lock/cc-lock-panel.ui:217
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:221 panels/power/cc-power-panel.ui:75
+#: panels/lock/cc-lock-panel.ui:221
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:225 panels/power/cc-power-panel.ui:79
+#: panels/lock/cc-lock-panel.ui:225
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:229 panels/power/cc-power-panel.ui:83
+#: panels/lock/cc-lock-panel.ui:229
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:233 panels/power/cc-power-panel.ui:87
+#: panels/lock/cc-lock-panel.ui:233
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:237 panels/power/cc-power-panel.ui:91
+#: panels/lock/cc-lock-panel.ui:237
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:241 panels/power/cc-power-panel.ui:95
+#: panels/lock/cc-lock-panel.ui:241
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 минут"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:245 panels/power/cc-power-panel.ui:99
+#: panels/lock/cc-lock-panel.ui:245
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "Ешқашан"
@@ -2637,68 +2653,69 @@ msgstr "Сөйлесулерді қорғау"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Жалпы"
 
-#: panels/mouse/cc-mouse-panel.ui:75
+#: panels/mouse/cc-mouse-panel.ui:57
 msgid "Primary Button"
 msgstr "Біріншілік батырма"
 
-#: panels/mouse/cc-mouse-panel.ui:94
+#: panels/mouse/cc-mouse-panel.ui:58
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Тышқандар және тачпадтарда физикалық батырмалар ретін орнатады."
 
-#: panels/mouse/cc-mouse-panel.ui:123 panels/sound/cc-balance-slider.ui:13
+#: panels/mouse/cc-mouse-panel.ui:84 panels/sound/cc-balance-slider.ui:13
 msgid "Left"
 msgstr "Сол жақ"
 
-#: panels/mouse/cc-mouse-panel.ui:133 panels/sound/cc-balance-slider.ui:15
+#: panels/mouse/cc-mouse-panel.ui:94 panels/sound/cc-balance-slider.ui:15
 msgid "Right"
 msgstr "Оң жақ"
 
-#: panels/mouse/cc-mouse-panel.ui:169
+#: panels/mouse/cc-mouse-panel.ui:122
 msgid "Mouse"
 msgstr "Тышқан"
 
-#: panels/mouse/cc-mouse-panel.ui:208
+#: panels/mouse/cc-mouse-panel.ui:142
 msgid "Mouse Speed"
 msgstr "Тышқан курсорының жылдамдығы"
 
-#: panels/mouse/cc-mouse-panel.ui:230 panels/mouse/cc-mouse-panel.ui:522
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:258
 msgid "Double-click timeout"
 msgstr "Қос шерту кідірісі"
 
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:267 panels/mouse/cc-mouse-panel.ui:430
+#: panels/mouse/cc-mouse-panel.ui:166 panels/mouse/cc-mouse-panel.ui:230
 msgid "Natural Scrolling"
 msgstr "Табиғи айналдыру"
 
-#: panels/mouse/cc-mouse-panel.ui:283 panels/mouse/cc-mouse-panel.ui:446
+#: panels/mouse/cc-mouse-panel.ui:167 panels/mouse/cc-mouse-panel.ui:231
 msgid "Scrolling moves the content, not the view."
 msgstr "Айналдыру көріністі емес, құраманы жылжытады."
 
-#: panels/mouse/cc-mouse-panel.ui:333 panels/mouse/cc-mouse-panel.ui:378
+#: panels/mouse/cc-mouse-panel.ui:193 panels/mouse/cc-mouse-panel.ui:213
 msgid "Touchpad"
 msgstr "Тачпад"
 
-#: panels/mouse/cc-mouse-panel.ui:501
+#: panels/mouse/cc-mouse-panel.ui:247
 msgid "Touchpad Speed"
 msgstr "Тачпад жылдамдығы"
 
-#: panels/mouse/cc-mouse-panel.ui:560
+#: panels/mouse/cc-mouse-panel.ui:270
 msgid "Tap to Click"
 msgstr "Шерту үшін тию"
 
-#: panels/mouse/cc-mouse-panel.ui:612
+#: panels/mouse/cc-mouse-panel.ui:286
 msgid "Two-finger Scrolling"
 msgstr "Қос саусақпен айналдыру"
 
-#: panels/mouse/cc-mouse-panel.ui:665
+#: panels/mouse/cc-mouse-panel.ui:303
 msgid "Edge Scrolling"
 msgstr "Бұрышпен айналдыру"
 
-#: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:441
+#: panels/mouse/cc-mouse-panel.ui:335 panels/wacom/cc-wacom-panel.c:441
 msgid "Test Your _Settings"
 msgstr "Ба_птауларды тексеру"
 
@@ -2752,11 +2769,93 @@ msgstr ""
 "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;Трекпад;Курсор;"
 "Шерту;Тию;Қос;Батырма;Трекбол;Скролл;Айналдыру;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "_Ыстық бұрыш"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr "Белсенділіктер көрінісін ашу үшін, жоғарғы сол жақ бұрышына тиіңіз."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "_Белсенді экран шеттері"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Терезелер өлшемін өзгерту үшін оларды жоғарғы, сол және оң жақ экран "
+"шеттеріне тартып апарыңыз."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "Жұмыс орындары"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "_Динамикалық жұмыс орындары"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "Бос жұмыс орындарын автоматты түрде өшіреді."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "Жұмыс орындарының _бекітілген саны"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "Тұрақты жұмыс орындар санын көрсетіңіз."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "Жұмыс орындар са_ны"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+msgid "Multi-Monitor"
+msgstr "Көпмониторлы"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "Жұмыс орындары тек _біріншілік экранда"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "Жұмыс орындары барлық э_крандарда"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "Қолданбалар арасында ауысу"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "Барлық _жұмыс орындарынан қолданбаларды есепке алу"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "Тек ағымдағы _жұмыс орнынан қолданбаларды есепке алу"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "Көптапсырмалылық"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "Өнімділік және көптапсырмалылық баптауларын басқару"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr ""
+"Multitasking;Multitask;Productivity;Customize;Desktop;көптапсырмалылық;"
+"өнімділік;баптау;жұмыс үстелі;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Қап, бірнәрсе қате кетті. БҚ өндірушісіне хабарласыңыз."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager орындалып тұруы тиіс."
 
@@ -2806,7 +2905,7 @@ msgid "Connected"
 msgstr "Байланысқан"
 
 #: panels/network/cc-wifi-connection-row.ui:100
-#: panels/network/net-device-ethernet.c:327
+#: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
 #: panels/network/network-vpn.ui:77
@@ -2823,11 +2922,16 @@ msgstr ""
 "Қатынау нүктесін іске қосу нәтежесінде %s желісі ажыратылады, интернетке Wi-"
 "Fi арқылы байланысуға мүмкін болмайды."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:265
+#: panels/network/cc-wifi-hotspot-dialog.c:267
 msgid "Must have a minimum of 8 characters"
 msgstr "Кем дегенде 8 таңбадан тұруы тиіс"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:479
+#: panels/network/cc-wifi-hotspot-dialog.c:272
+#, c-format
+msgid "Must have a maximum of %d characters"
+msgstr "Кем дегенде %d таңбадан тұруы тиіс"
+
+#: panels/network/cc-wifi-hotspot-dialog.c:488
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Wi-Fi қатынау нүктесін іске қосу керек пе?"
 
@@ -2851,6 +2955,7 @@ msgstr "Желі атауы"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Пароль"
 
@@ -2897,7 +3002,7 @@ msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr ""
 "Сізде Wi-Fi адаптерінің бар болғанын, және оның іске қосылғанын тексеріңіз"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Ұшақтағы режимі іске қосулы"
 
@@ -2967,166 +3072,166 @@ msgid "Profile %d"
 msgstr "Профиль %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:95
+#: panels/network/connection-editor/ce-page-details.c:97
 #: panels/network/net-device-wifi.c:228
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:99
+#: panels/network/connection-editor/ce-page-details.c:101
 #: panels/network/net-device-wifi.c:233
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:105
+#: panels/network/connection-editor/ce-page-details.c:107
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:110
+#: panels/network/connection-editor/ce-page-details.c:112
 #: panels/network/connection-editor/ce-page-security.c:279
 msgid "Enhanced Open"
 msgstr "Жақсартылған ашық"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:117
+#: panels/network/connection-editor/ce-page-details.c:119
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:123
+#: panels/network/connection-editor/ce-page-details.c:125
 msgid "Enterprise"
 msgstr "Кәсіпорын"
 
-#: panels/network/connection-editor/ce-page-details.c:128
+#: panels/network/connection-editor/ce-page-details.c:130
 #: panels/network/net-device-wifi.c:218
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Жоқ"
 
-#: panels/network/connection-editor/ce-page-details.c:149
+#: panels/network/connection-editor/ce-page-details.c:151
 msgid "Never"
 msgstr "Ешқашан"
 
-#: panels/network/connection-editor/ce-page-details.c:164
-#: panels/network/net-device-ethernet.c:107
+#: panels/network/connection-editor/ce-page-details.c:166
+#: panels/network/net-device-ethernet.c:108
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
 msgstr[0] "%i күн бұрын"
 
-#: panels/network/connection-editor/ce-page-details.c:291
+#: panels/network/connection-editor/ce-page-details.c:293
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Мб/с (%1.1f ГГц)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:293
-#: panels/network/net-device-ethernet.c:214
+#: panels/network/connection-editor/ce-page-details.c:295
+#: panels/network/net-device-ethernet.c:220
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Мб/с"
 
-#: panels/network/connection-editor/ce-page-details.c:306
+#: panels/network/connection-editor/ce-page-details.c:308
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:308
+#: panels/network/connection-editor/ce-page-details.c:310
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:310
+#: panels/network/connection-editor/ce-page-details.c:312
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:330
+#: panels/network/connection-editor/ce-page-details.c:332
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Жоқ"
 
-#: panels/network/connection-editor/ce-page-details.c:332
+#: panels/network/connection-editor/ce-page-details.c:334
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Әлсіз"
 
-#: panels/network/connection-editor/ce-page-details.c:334
+#: panels/network/connection-editor/ce-page-details.c:336
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "ОК"
 
-#: panels/network/connection-editor/ce-page-details.c:336
+#: panels/network/connection-editor/ce-page-details.c:338
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Жақсы"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:340
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Тамаша"
 
-#: panels/network/connection-editor/ce-page-details.c:410
+#: panels/network/connection-editor/ce-page-details.c:407
 #: panels/network/connection-editor/details-page.ui:108
-#: panels/network/net-device-ethernet.c:149
-#: panels/network/net-device-mobile.c:447
+#: panels/network/net-device-ethernet.c:147
+#: panels/network/net-device-mobile.c:442
 msgid "IPv4 Address"
 msgstr "IPv4 адресі"
 
-#: panels/network/connection-editor/ce-page-details.c:411
+#: panels/network/connection-editor/ce-page-details.c:408
 #: panels/network/connection-editor/details-page.ui:126
-#: panels/network/net-device-ethernet.c:150
-#: panels/network/net-device-mobile.c:448 panels/network/network-mobile.ui:218
+#: panels/network/net-device-ethernet.c:149
+#: panels/network/net-device-mobile.c:443 panels/network/network-mobile.ui:218
 msgid "IPv6 Address"
 msgstr "IPv6 адресі"
 
-#: panels/network/connection-editor/ce-page-details.c:414
-#: panels/network/connection-editor/ce-page-details.c:415
+#: panels/network/connection-editor/ce-page-details.c:410
+#: panels/network/connection-editor/ce-page-details.c:411
 #: panels/network/net-device-ethernet.c:152
 #: panels/network/net-device-ethernet.c:154
-#: panels/network/net-device-mobile.c:451
-#: panels/network/net-device-mobile.c:452 panels/network/network-mobile.ui:201
+#: panels/network/net-device-mobile.c:446
+#: panels/network/net-device-mobile.c:447 panels/network/network-mobile.ui:201
 msgid "IP Address"
 msgstr "IP адресі"
 
-#: panels/network/connection-editor/ce-page-details.c:419
-#: panels/network/net-device-ethernet.c:163
-#: panels/network/net-device-mobile.c:456
+#: panels/network/connection-editor/ce-page-details.c:415
+#: panels/network/net-device-ethernet.c:169
+#: panels/network/net-device-mobile.c:451
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:420
-#: panels/network/net-device-ethernet.c:164
-#: panels/network/net-device-mobile.c:457
+#: panels/network/connection-editor/ce-page-details.c:416
+#: panels/network/net-device-ethernet.c:170
+#: panels/network/net-device-mobile.c:452
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:423
-#: panels/network/connection-editor/ce-page-details.c:424
+#: panels/network/connection-editor/ce-page-details.c:418
+#: panels/network/connection-editor/ce-page-details.c:419
 #: panels/network/connection-editor/details-page.ui:199
 #: panels/network/connection-editor/details-page.ui:218
 #: panels/network/connection-editor/ip4-page.ui:211
 #: panels/network/connection-editor/ip6-page.ui:225
-#: panels/network/net-device-ethernet.c:166
-#: panels/network/net-device-ethernet.c:168
-#: panels/network/net-device-mobile.c:459
-#: panels/network/net-device-mobile.c:460 panels/network/network-mobile.ui:253
+#: panels/network/net-device-ethernet.c:172
+#: panels/network/net-device-ethernet.c:174
+#: panels/network/net-device-mobile.c:454
+#: panels/network/net-device-mobile.c:455 panels/network/network-mobile.ui:253
 #: panels/network/network-mobile.ui:271
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:457
+#: panels/network/connection-editor/ce-page-details.c:471
 msgid "Forget Connection"
 msgstr "Байланысты ұмыту"
 
-#: panels/network/connection-editor/ce-page-details.c:459
+#: panels/network/connection-editor/ce-page-details.c:473
 msgid "Remove Connection Profile"
 msgstr "Байланыс профилін өшіру"
 
-#: panels/network/connection-editor/ce-page-details.c:461
+#: panels/network/connection-editor/ce-page-details.c:475
 msgid "Remove VPN"
 msgstr "VPN өшіру"
 
-#: panels/network/connection-editor/ce-page-details.c:479
+#: panels/network/connection-editor/ce-page-details.c:493
 msgid "Details"
 msgstr "Көбірек білу"
 
@@ -3140,21 +3245,21 @@ msgstr "автоматты"
 msgid "Identity"
 msgstr "Идентификация"
 
-#: panels/network/connection-editor/ce-page-ip4.c:244
-#: panels/network/connection-editor/ce-page-ip6.c:225
+#: panels/network/connection-editor/ce-page-ip4.c:245
+#: panels/network/connection-editor/ce-page-ip6.c:226
 msgid "Delete Address"
 msgstr "Адресті өшіру"
 
-#: panels/network/connection-editor/ce-page-ip4.c:399
-#: panels/network/connection-editor/ce-page-ip6.c:369
+#: panels/network/connection-editor/ce-page-ip4.c:400
+#: panels/network/connection-editor/ce-page-ip6.c:370
 msgid "Delete Route"
 msgstr "Маршрутты өшіру"
 
-#: panels/network/connection-editor/ce-page-ip4.c:750
+#: panels/network/connection-editor/ce-page-ip4.c:754
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:722
+#: panels/network/connection-editor/ce-page-ip6.c:726
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3194,6 +3299,7 @@ msgid "WPA3 Personal"
 msgstr "Жеке WPA3"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Сигнал деңгейі"
 
@@ -3211,7 +3317,9 @@ msgid "Supported Frequencies"
 msgstr "Қолдауы бар жиіліктер"
 
 #: panels/network/connection-editor/details-page.ui:180
-#: panels/network/net-device-ethernet.c:160
+#: panels/network/net-device-ethernet.c:161
+#: panels/network/net-device-ethernet.c:163
+#: panels/network/net-device-ethernet.c:165
 #: panels/network/network-mobile.ui:235
 msgid "Default Route"
 msgstr "Үнсіз келісім бойынша маршруты"
@@ -3479,19 +3587,19 @@ msgstr ""
 "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;Желі;Сымсыз;"
 "Кеңжолақты;Қатынау;"
 
-#: panels/network/net-device-ethernet.c:95
+#: panels/network/net-device-ethernet.c:96
 msgid "never"
 msgstr "ешқашан"
 
-#: panels/network/net-device-ethernet.c:103
+#: panels/network/net-device-ethernet.c:104
 msgid "today"
 msgstr "бүгін"
 
-#: panels/network/net-device-ethernet.c:105
+#: panels/network/net-device-ethernet.c:106
 msgid "yesterday"
 msgstr "кеше"
 
-#: panels/network/net-device-ethernet.c:174
+#: panels/network/net-device-ethernet.c:180
 msgid "Last used"
 msgstr "Соңғы қолданылған"
 
@@ -3500,7 +3608,7 @@ msgstr "Соңғы қолданылған"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:261
+#: panels/network/net-device-ethernet.c:267
 #: panels/network/network-bluetooth.ui:38 panels/network/network-ethernet.ui:18
 msgid "Wired"
 msgstr "Сымды"
@@ -3540,21 +3648,21 @@ msgid "Wireless device does not support Hotspot mode"
 msgstr "Сымсыз құрылғы қатынау нүкте режимін қолдамайды"
 
 #: panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:266
-#: panels/power/cc-power-panel.c:1133 panels/power/cc-power-panel.c:1144
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
-#: panels/universal-access/cc-ua-panel.ui:300
-#: panels/universal-access/cc-ua-panel.ui:346
-#: panels/universal-access/cc-ua-panel.ui:392
-#: panels/universal-access/cc-ua-panel.ui:498
-#: panels/universal-access/cc-ua-panel.ui:651
-#: panels/universal-access/cc-ua-panel.ui:697
-#: panels/universal-access/cc-ua-panel.ui:743
-#: panels/universal-access/cc-ua-panel.ui:927
+#: panels/notifications/cc-notifications-panel.c:260
+#: panels/power/cc-power-panel.c:856 panels/power/cc-power-panel.c:867
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
+#: panels/universal-access/cc-ua-panel.ui:338
+#: panels/universal-access/cc-ua-panel.ui:384
+#: panels/universal-access/cc-ua-panel.ui:430
+#: panels/universal-access/cc-ua-panel.ui:536
+#: panels/universal-access/cc-ua-panel.ui:689
+#: panels/universal-access/cc-ua-panel.ui:735
+#: panels/universal-access/cc-ua-panel.ui:781
+#: panels/universal-access/cc-ua-panel.ui:965
 msgid "Off"
 msgstr "Off"
 
@@ -3588,6 +3696,7 @@ msgid "Turn device off"
 msgstr "Құрылғыны сөндіру"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3911,7 +4020,7 @@ msgid "SIM Puk required"
 msgstr "SIM Puk коды керек"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "SIM қате"
 
@@ -4030,7 +4139,7 @@ msgstr "Па_йдаланушы аты"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:478
+#: panels/user-accounts/cc-user-panel.ui:363
 msgid "_Password"
 msgstr "_Пароль"
 
@@ -4358,21 +4467,21 @@ msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Блоктау экранында хабарлама құра_масын көрсету"
 
-#: panels/notifications/cc-notifications-panel.c:266
-#: panels/power/cc-power-panel.c:1139 panels/power/cc-power-panel.c:1146
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
+#: panels/notifications/cc-notifications-panel.c:260
+#: panels/power/cc-power-panel.c:862 panels/power/cc-power-panel.c:869
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
 msgid "On"
 msgstr "Іске қосулы"
 
-#: panels/notifications/cc-notifications-panel.ui:48
+#: panels/notifications/cc-notifications-panel.ui:44
 msgid "_Do Not Disturb"
 msgstr "_Мазаламаңыз"
 
-#: panels/notifications/cc-notifications-panel.ui:56
+#: panels/notifications/cc-notifications-panel.ui:52
 msgid "_Lock Screen Notifications"
 msgstr "Б_локтау экранының хабарламалары"
 
@@ -4387,26 +4496,26 @@ msgstr ""
 "Notifications;Banner;Message;Tray;Popup;Хабарлаулар;Баннер;Хабарлама;Трей;"
 "Қалқымалы;"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:150
+#: panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Басқа"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:622
+#: panels/online-accounts/cc-online-accounts-panel.c:576
 #, c-format
 msgid "%s Account"
 msgstr "%s тіркелгісі"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:916
+#: panels/online-accounts/cc-online-accounts-panel.c:870
 msgid "Error removing account"
 msgstr "Тіркелгіні өшіру қатесі"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:982
+#: panels/online-accounts/cc-online-accounts-panel.c:936
 #, c-format
 msgid "%s removed"
 msgstr "%s өшірілді"
@@ -4453,7 +4562,7 @@ msgstr ""
 msgid "Add an account"
 msgstr "Тіркелгіні қосу"
 
-#: panels/online-accounts/online-accounts.ui:238
+#: panels/online-accounts/online-accounts.ui:223
 msgid "Remove Account"
 msgstr "Тіркелгіні өшіру"
 
@@ -4579,8 +4688,8 @@ msgid "Gaming input device"
 msgstr "Ойын құрылғысы"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:413
-#: panels/power/cc-power-panel.c:1779
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:384
+#: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Батарея"
 
@@ -4594,53 +4703,83 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Қосымша"
 
-#: panels/power/cc-power-panel.c:411
+#: panels/power/cc-power-panel.c:382
 msgid "Batteries"
 msgstr "Батареялар"
 
-#: panels/power/cc-power-panel.c:632
+#: panels/power/cc-power-panel.c:644
 msgid "When _idle"
 msgstr "І_ссіз кезінде"
 
-#: panels/power/cc-power-panel.c:1081
+#: panels/power/cc-power-panel.c:796
 msgid "Suspend"
 msgstr "Ұйықтату"
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:797
 msgid "Power Off"
 msgstr "Сөндіру"
 
-#: panels/power/cc-power-panel.c:1083
+#: panels/power/cc-power-panel.c:798
 msgid "Hibernate"
 msgstr "Гибернация"
 
-#: panels/power/cc-power-panel.c:1084
+#: panels/power/cc-power-panel.c:799
 msgid "Nothing"
 msgstr "Ешнәрсе"
 
-#: panels/power/cc-power-panel.c:1135
+#: panels/power/cc-power-panel.c:858
 msgid "When on battery power"
 msgstr "Батареядан жұмыс істеген кезде"
 
-#: panels/power/cc-power-panel.c:1137
+#: panels/power/cc-power-panel.c:860
 msgid "When plugged in"
 msgstr "Эл. желісінде"
 
-#: panels/power/cc-power-panel.c:1277
+#: panels/power/cc-power-panel.c:980
+msgctxt "Idle time"
+msgid "Never"
+msgstr "Ешқашан"
+
+#: panels/power/cc-power-panel.c:1066
 msgid "Automatic suspend"
 msgstr "Автоматты түрде ұйықтату"
 
-#: panels/power/cc-power-panel.c:1799
-msgid "Power Mode"
-msgstr "Эл. қуаты режимі"
+#: panels/power/cc-power-panel.c:1171
+msgid ""
+"Performance mode temporarily disabled due to high operating temperature."
+msgstr "Өнімділік режимі уақытша жоғары температура салдарынан сөндірілген."
 
-#: panels/power/cc-power-panel.c:1809
-msgid "Power Saving"
-msgstr "Эл. қорегін сақтау"
+#: panels/power/cc-power-panel.c:1173
+msgid ""
+"Lap detected: performance mode temporarily unavailable. Move the device to a "
+"stable surface to restore."
+msgstr ""
+"Тізе анықталды: өнімділік режимі уақытша қолжетімсіз. Оны қалпына келтіру "
+"үшін, құрылғыны тұрақты жерге ораластырыңыз."
 
-#: panels/power/cc-power-panel.c:1817
-msgid "Suspend & Power Button"
-msgstr "Ұйықтату және сөндіру батырмасы"
+#: panels/power/cc-power-panel.c:1175
+msgid "Performance mode temporarily disabled."
+msgstr "Өнімділік режимі уақытша сөндірілген."
+
+#: panels/power/cc-power-panel.c:1218
+msgid ""
+"Low battery: power saver enabled. Previous mode will be restored when "
+"battery is sufficiently charged."
+msgstr ""
+"Батарея заряды аз: эл. қорегін үнемдеу іске қосылған. Батарея жеткілікті "
+"зарядталған кезде алдыңғы режим қалпына келтіріледі."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1226
+#, c-format
+msgid "Power Saver mode activated by “%s”."
+msgstr "Эл. корегін сақтау режимін \"%s\" белсендірген."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1230
+#, c-format
+msgid "Performance mode activated by “%s”."
+msgstr "Өнімділік режимін \"%s\" белсендірген."
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4702,119 +4841,124 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 сағат"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:107
+msgid "Power Mode"
+msgstr "Эл. қуаты режимі"
+
+#: panels/power/cc-power-panel.ui:108
 msgid "Affects system performance and power usage."
 msgstr "Жүйе өнімділігіне мен қуат қолданысына әсер етеді."
 
-#: panels/power/cc-power-panel.ui:297
-msgid "_Screen Brightness"
-msgstr "Э_кран жарықтылығы"
+#: panels/power/cc-power-panel.ui:142
+msgid "Power Saving Options"
+msgstr "Эл. қорегін сақтау опциялары"
 
-#: panels/power/cc-power-panel.ui:346
-msgid "Automatic Brightness"
-msgstr "Автоматты жарықтылық"
+#: panels/power/cc-power-panel.ui:146
+msgid "Automatic Screen Brightness"
+msgstr "Автоматты экран жарықтылығы"
 
-#: panels/power/cc-power-panel.ui:382
-msgid "_Keyboard Brightness"
-msgstr "Пер_нетақта жарықтылығы"
+#: panels/power/cc-power-panel.ui:147
+msgid "Screen brightness adjusts to the surrounding light."
+msgstr "Экран жарықтылығы айналадағы жарыққа бейімделеді."
 
-#: panels/power/cc-power-panel.ui:431
-msgid "Dim Screen When Inactive"
-msgstr "Белсенді емес экранды бәсеңдету"
+#: panels/power/cc-power-panel.ui:160
+msgid "Dim Screen"
+msgstr "Экранды бәсеңдету"
 
-#: panels/power/cc-power-panel.ui:466
-msgid "_Blank Screen"
-msgstr "Экранды _тазарту"
+#: panels/power/cc-power-panel.ui:161
+msgid "Reduces the screen brightness when the computer is inactive."
+msgstr "Компьютер жұмыс істемей тұрғанда экран жарықтығын төмендетеді."
 
-#: panels/power/cc-power-panel.ui:502
+#: panels/power/cc-power-panel.ui:174
+msgid "Screen _Blank"
+msgstr "Экранды _бос қылу"
+
+#: panels/power/cc-power-panel.ui:175
+msgid "Turns the screen off after a period of inactivity."
+msgstr "Әрекетсіздік кезеңінен кейін экранды сөндіреді."
+
+#: panels/power/cc-power-panel.ui:183
+msgid "Automatic Power Saver"
+msgstr "Автоматты түрде эл. қорегін сақтау"
+
+#: panels/power/cc-power-panel.ui:184
+msgid "Enables power saver mode when battery is low."
+msgstr "Батарея төмен болғанда эл. қорек үнемдеу режимін іске қосу."
+
+#: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
 msgstr "_Автоматты түрде ұйықтату"
 
-#: panels/power/cc-power-panel.ui:547
-msgid "_Wi-Fi"
-msgstr "_Wi-Fi"
+#: panels/power/cc-power-panel.ui:199
+msgid "Pauses the computer after a period of inactivity."
+msgstr "Компьютерді әрекетсіздік кезеңнен кейін аялдатады."
 
-#: panels/power/cc-power-panel.ui:559
-msgid "Wi-Fi can be turned off to save power."
-msgstr "Эл. қорегін үнемдеу үшін Wi-Fi сөндіруге болады."
+#: panels/power/cc-power-panel.ui:217
+msgid "Suspend & Power Button"
+msgstr "Ұйықтату және сөндіру батырмасы"
 
-#: panels/power/cc-power-panel.ui:609
-msgid "_Mobile Broadband"
-msgstr "_Мобильді кеңжолақты"
-
-#: panels/power/cc-power-panel.ui:621
-msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-msgstr ""
-"Эл. қорегін үнемдеу үшін сымсыз кеңжолақты құрылғыларды (3G, 4G, LTE, т.б.) "
-"сөндіруге болады."
-
-#: panels/power/cc-power-panel.ui:671
-msgid "_Bluetooth"
-msgstr "_Bluetooth"
-
-#: panels/power/cc-power-panel.ui:683
-msgid "Bluetooth can be turned off to save power."
-msgstr "Эл. қорегін үнемдеу үшін Bluetooth сөндіруге болады."
-
-#: panels/power/cc-power-panel.ui:759
+#: panels/power/cc-power-panel.ui:221
 msgid "Po_wer Button Behavior"
 msgstr "Эл. қ_орегі батырмасының мінез-құлығы"
 
-#: panels/power/cc-power-panel.ui:797
+#: panels/power/cc-power-panel.ui:229
 msgid "Show Battery _Percentage"
 msgstr "Батарея _пайызын көрсету"
 
-#: panels/power/cc-power-panel.ui:872
+#: panels/power/cc-power-panel.ui:268
 msgid "Automatic Suspend"
 msgstr "Автоматты түрде ұйықтату"
 
-#: panels/power/cc-power-panel.ui:897
+#: panels/power/cc-power-panel.ui:293
 msgid "_Plugged In"
 msgstr "Эл. желісіне қосы_лған кезде"
 
-#: panels/power/cc-power-panel.ui:913
+#: panels/power/cc-power-panel.ui:309
 msgid "On _Battery Power"
 msgstr "_Батареядан жұмыс істеу кезінде"
 
-#: panels/power/cc-power-panel.ui:958 panels/power/cc-power-panel.ui:1018
+#: panels/power/cc-power-panel.ui:354 panels/power/cc-power-panel.ui:414
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Кідіріс"
 
-#: panels/power/cc-power-profile-row.c:62
+#: panels/power/cc-power-profile-row.c:61
 msgid "Lap detected: performance mode unavailable"
 msgstr "Қабаттасу анықталды: өнімділік режимі қолжетімсіз"
 
-#: panels/power/cc-power-profile-row.c:64
+#: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
 msgstr "Құрылғылық температура жоғары: өнімділік режимі қолжетімсіз"
 
-#: panels/power/cc-power-profile-row.c:65
+#: panels/power/cc-power-profile-row.c:64
 msgid "Performance mode unavailable"
 msgstr "Өнімділік режимі қолжетімсіз"
 
-#: panels/power/cc-power-profile-row.c:87
-#: panels/power/cc-power-profile-row.c:187
+#: panels/power/cc-power-profile-row.c:86
+#: panels/power/cc-power-profile-row.c:185
 msgid "High performance and power usage."
 msgstr "Жоғары өнімділік және қуатты пайдалану."
 
-#: panels/power/cc-power-profile-row.c:186
+#: panels/power/cc-power-profile-row.c:184
+msgctxt "Power profile"
 msgid "Performance"
 msgstr "Өнімділік"
 
-#: panels/power/cc-power-profile-row.c:192
-msgid "Balanced Power"
-msgstr "Теңгерімді қуат"
+#: panels/power/cc-power-profile-row.c:188
+msgctxt "Power profile"
+msgid "Balanced"
+msgstr "Баланс"
 
-#: panels/power/cc-power-profile-row.c:193
+#: panels/power/cc-power-profile-row.c:189
 msgid "Standard performance and power usage."
 msgstr "Стандартты өнімділік және қуатты пайдалану."
 
-#: panels/power/cc-power-profile-row.c:198
+#: panels/power/cc-power-profile-row.c:192
+msgctxt "Power profile"
 msgid "Power Saver"
-msgstr "Эл. қорегін сақтау"
+msgstr "Қорек үнемдеу"
 
-#: panels/power/cc-power-profile-row.c:199
+#: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
 msgstr "Төмендетілген өнімділік және қуатты пайдалану."
 
@@ -4847,7 +4991,7 @@ msgstr "Аутентификация"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Пайдаланушы аты"
 
@@ -4863,15 +5007,19 @@ msgid "Printer “%s” has been deleted"
 msgstr "\"%s\" принтері өшірілді"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:930
+#: panels/printers/cc-printers-panel.c:926
 msgid "Failed to add new printer."
 msgstr "Жаңа принтерді қосу сәтсіз аяқталды."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1209
+#: panels/printers/cc-printers-panel.c:1225
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ui жүктеу мүмкін емес: %s"
+
+#: panels/printers/cc-printers-panel.c:1293
+msgid "Unlock to Add Printers and Change Settings"
+msgstr "Принтерлерді қосу және параметрлерді өзгерту үшін бұғаттауын шешіңіз"
 
 #: panels/printers/gnome-printers-panel.desktop.in.in:3
 msgid "Printers"
@@ -4892,8 +5040,8 @@ msgstr ""
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:344
-#: panels/printers/pp-new-printer-dialog.c:401
+#: panels/printers/pp-new-printer-dialog.c:254
+#: panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "Принтерді қосу"
 
@@ -4901,6 +5049,7 @@ msgstr "Принтерді қосу"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Босату"
 
@@ -4949,7 +5098,7 @@ msgstr "Орналасуы"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:239
+#: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Драйвер"
 
@@ -5124,57 +5273,57 @@ msgstr "_Аутентификациялау"
 msgid "No Active Printer Jobs"
 msgstr "Белсенді принтер тапсырмалары жоқ"
 
-#: panels/printers/pp-new-printer-dialog.c:359
+#: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
 msgstr "Баспаға шығару серверін блоктаудан босату"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "%s босату."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:367
+#: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "%s жеріндегі принтерлерді қарау үшін пайдаланушы атын және пароліңізді "
 "енгізіңіз."
 
-#: panels/printers/pp-new-printer-dialog.c:790
+#: panels/printers/pp-new-printer-dialog.c:587
 msgid "Searching for Printers"
 msgstr "Принтерлерді іздеу"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1578
+#: panels/printers/pp-new-printer-dialog.c:1375
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1583
+#: panels/printers/pp-new-printer-dialog.c:1380
 msgid "Serial Port"
 msgstr "Тізбектей порт"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1590
+#: panels/printers/pp-new-printer-dialog.c:1387
 msgid "Parallel Port"
 msgstr "Параллельді порт"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1632
+#: panels/printers/pp-new-printer-dialog.c:1429
 #, c-format
 msgid "Location: %s"
 msgstr "Орналасуы: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1637
+#: panels/printers/pp-new-printer-dialog.c:1434
 #, c-format
 msgid "Address: %s"
 msgstr "Адресі: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1461
 msgid "Server requires authentication"
 msgstr "Сервер аутентификацияны талап етеді"
 
@@ -5315,7 +5464,8 @@ msgid "No pre-filtering"
 msgstr "Алдын-ала сүзгілеу жоқ"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:223
+#: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Шығарушы"
 
@@ -5463,6 +5613,7 @@ msgid "Remove Printer"
 msgstr "Принтерді өшіру"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Модель"
 
@@ -5482,8 +5633,8 @@ msgstr "Қайта қосу"
 
 #. Translators: This button adds new printer.
 #: panels/printers/printers.ui:12
-msgid "Add…"
-msgstr "Қосу…"
+msgid "Add Printer…"
+msgstr "Принтерді қосу…"
 
 #: panels/printers/printers.ui:187
 msgid "No printers"
@@ -5504,7 +5655,7 @@ msgstr ""
 "қолжетерлік емес сияқты."
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:189
-#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:159
+#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:203
 msgid "Formats"
 msgstr "Пішімдер"
 
@@ -5570,40 +5721,44 @@ msgstr "Өлшем бірліктері"
 msgid "Paper"
 msgstr "Қағаз"
 
-#: panels/region/cc-region-panel.c:740
-msgid "Login _Screen"
-msgstr "Жүйеге кіру _экраны"
+#: panels/region/cc-region-panel.ui:42
+msgid "My Account"
+msgstr "Менің тіркелгім"
 
-#: panels/region/cc-region-panel.ui:34
+#: panels/region/cc-region-panel.ui:53
+msgid "Login Screen"
+msgstr "Жүйеге кіру экраны"
+
+#: panels/region/cc-region-panel.ui:78
 msgid "Language"
 msgstr "Тіл"
 
-#: panels/region/cc-region-panel.ui:45
+#: panels/region/cc-region-panel.ui:89
 msgid "The language used for text in windows and web pages."
 msgstr "Терезелер мен веб-беттердегі мәтін үшін қолданылатын тіл."
 
-#: panels/region/cc-region-panel.ui:85
-#: panels/user-accounts/cc-user-panel.ui:406
+#: panels/region/cc-region-panel.ui:129
+#: panels/user-accounts/cc-user-panel.ui:309
 msgid "_Language"
 msgstr "_Тіл"
 
-#: panels/region/cc-region-panel.ui:120
+#: panels/region/cc-region-panel.ui:164
 msgid "Restart the session for changes to take effect"
 msgstr "Өзгерістер іске асуы үшін сессияңызды қайта қосу керек"
 
-#: panels/region/cc-region-panel.ui:135
+#: panels/region/cc-region-panel.ui:179
 msgid "Restart…"
 msgstr "Қайта қосу…"
 
-#: panels/region/cc-region-panel.ui:170
+#: panels/region/cc-region-panel.ui:214
 msgid "The format used for numbers, dates, and currencies."
 msgstr "Сандар, күндер және валюталар үшін қолданылатын пішім."
 
-#: panels/region/cc-region-panel.ui:204
+#: panels/region/cc-region-panel.ui:248
 msgid "_Formats"
 msgstr "_Пішімдер"
 
-#: panels/region/cc-region-panel.ui:231
+#: panels/region/cc-region-panel.ui:275
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Жүйеге кіру баптаулары осы жүйеге кіретін барлық пайдаланушылармен "
@@ -5780,7 +5935,7 @@ msgid "_OK"
 msgstr "_ОК"
 
 #: panels/search/cc-search-locations-dialog.ui:9
-#: panels/search/cc-search-panel.ui:59
+#: panels/search/cc-search-panel.ui:57
 msgid "Search Locations"
 msgstr "Іздеу орналасулары"
 
@@ -5805,7 +5960,7 @@ msgstr "Бетбелгілер"
 msgid "Other"
 msgstr "Басқа"
 
-#: panels/search/cc-search-panel.c:152
+#: panels/search/cc-search-panel.c:151
 msgid "No applications found"
 msgstr "Қолданбалар табылмады"
 
@@ -6059,51 +6214,51 @@ msgstr "Жұйелік дыбыс"
 msgid "Volume Levels"
 msgstr "Дыбыс деңгейлері"
 
-#: panels/sound/cc-sound-panel.ui:65
+#: panels/sound/cc-sound-panel.ui:63
 msgid "Output"
 msgstr "Шығыс"
 
-#: panels/sound/cc-sound-panel.ui:92
+#: panels/sound/cc-sound-panel.ui:90
 msgid "Output Device"
 msgstr "Шығыс құрылғысы"
 
-#: panels/sound/cc-sound-panel.ui:115
+#: panels/sound/cc-sound-panel.ui:113
 msgid "Test"
 msgstr "Сынау"
 
-#: panels/sound/cc-sound-panel.ui:146 panels/sound/cc-sound-panel.ui:323
+#: panels/sound/cc-sound-panel.ui:144 panels/sound/cc-sound-panel.ui:319
 msgid "Configuration"
 msgstr "Баптаулар"
 
-#: panels/sound/cc-sound-panel.ui:179
+#: panels/sound/cc-sound-panel.ui:177
 msgid "Balance"
 msgstr "Теңгерім"
 
-#: panels/sound/cc-sound-panel.ui:206
+#: panels/sound/cc-sound-panel.ui:204
 msgid "Fade"
 msgstr "Сөндіру"
 
-#: panels/sound/cc-sound-panel.ui:233
+#: panels/sound/cc-sound-panel.ui:231
 msgid "Subwoofer"
 msgstr "Сабвуфер"
 
-#: panels/sound/cc-sound-panel.ui:255
+#: panels/sound/cc-sound-panel.ui:251
 msgid "Input"
 msgstr "Кіріс"
 
-#: panels/sound/cc-sound-panel.ui:282
+#: panels/sound/cc-sound-panel.ui:278
 msgid "Input Device"
 msgstr "Енгізу құрылғысы"
 
-#: panels/sound/cc-sound-panel.ui:356
+#: panels/sound/cc-sound-panel.ui:352
 msgid "Volume"
 msgstr "Том"
 
-#: panels/sound/cc-sound-panel.ui:378
+#: panels/sound/cc-sound-panel.ui:372
 msgid "Alert Sound"
 msgstr "Хабарлама дыбысы"
 
-#: panels/sound/cc-volume-slider.c:115
+#: panels/sound/cc-volume-slider.c:117
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -6419,7 +6574,7 @@ msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Num Lock немесе Caps Lock іске қосулы/сөндірулі кезінде дыбыс беру."
 
 #: panels/universal-access/cc-sound-keys-dialog.ui:45
-#: panels/universal-access/cc-ua-panel.ui:374
+#: panels/universal-access/cc-ua-panel.ui:412
 msgid "_Sound Keys"
 msgstr "_Дыбыс пернелері"
 
@@ -6524,32 +6679,32 @@ msgstr "Арнайы мүмкіндіктерді пернетақта көме�
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:348
+#: panels/universal-access/cc-ua-panel.c:351
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Бастапқы"
 
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:354
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Орташа"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Үлкен"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Үлкенірек"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Ең үлкен"
 
-#: panels/universal-access/cc-ua-panel.c:364
+#: panels/universal-access/cc-ua-panel.c:367
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6571,65 +6726,69 @@ msgstr "Ж_оғары контраст"
 msgid "_Large Text"
 msgstr "Ү_лкен мәтін"
 
-#: panels/universal-access/cc-ua-panel.ui:235
+#: panels/universal-access/cc-ua-panel.ui:238
+msgid "Enable A_nimations"
+msgstr "А_нимацияларды іске қосу"
+
+#: panels/universal-access/cc-ua-panel.ui:273
 msgid "C_ursor Size"
 msgstr "К_урсор өлшемі"
 
-#: panels/universal-access/cc-ua-panel.ui:282
+#: panels/universal-access/cc-ua-panel.ui:320
 #: panels/universal-access/cc-zoom-options-dialog.ui:91
 msgid "_Zoom"
 msgstr "_Масштаб"
 
-#: panels/universal-access/cc-ua-panel.ui:328
+#: panels/universal-access/cc-ua-panel.ui:366
 msgid "Screen _Reader"
 msgstr "Экраннан оқитын қол_данба"
 
-#: panels/universal-access/cc-ua-panel.ui:436
+#: panels/universal-access/cc-ua-panel.ui:474
 msgid "Hearing"
 msgstr "Есту"
 
-#: panels/universal-access/cc-ua-panel.ui:480
+#: panels/universal-access/cc-ua-panel.ui:518
 #: panels/universal-access/cc-visual-alerts-dialog.ui:68
 msgid "_Visual Alerts"
 msgstr "_Визуалды хабарлаулар"
 
-#: panels/universal-access/cc-ua-panel.ui:588
+#: panels/universal-access/cc-ua-panel.ui:626
 msgid "Screen _Keyboard"
 msgstr "Экрандағы перне_тақта"
 
-#: panels/universal-access/cc-ua-panel.ui:633
+#: panels/universal-access/cc-ua-panel.ui:671
 msgid "R_epeat Keys"
 msgstr "П_ернелер қайталануы"
 
-#: panels/universal-access/cc-ua-panel.ui:679
+#: panels/universal-access/cc-ua-panel.ui:717
 msgid "Cursor _Blinking"
 msgstr "Курсор _жыпылықтауы"
 
-#: panels/universal-access/cc-ua-panel.ui:725
+#: panels/universal-access/cc-ua-panel.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "_Теру көмекшісі (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:786
+#: panels/universal-access/cc-ua-panel.ui:824
 msgid "Pointing & Clicking"
 msgstr "Көрсету және шерту"
 
-#: panels/universal-access/cc-ua-panel.ui:832
+#: panels/universal-access/cc-ua-panel.ui:870
 msgid "_Mouse Keys"
 msgstr "Ты_шқан пернелері"
 
-#: panels/universal-access/cc-ua-panel.ui:877
+#: panels/universal-access/cc-ua-panel.ui:915
 msgid "_Locate Pointer"
 msgstr "Курсорды _табу"
 
-#: panels/universal-access/cc-ua-panel.ui:909
+#: panels/universal-access/cc-ua-panel.ui:947
 msgid "_Click Assist"
 msgstr "_Шертулер көмекшісі"
 
-#: panels/universal-access/cc-ua-panel.ui:955
+#: panels/universal-access/cc-ua-panel.ui:993
 msgid "_Double-Click Delay"
 msgstr "Қ_ос шерту кідірісі"
 
-#: panels/universal-access/cc-ua-panel.ui:975
+#: panels/universal-access/cc-ua-panel.ui:1013
 msgid "Double-Click Delay"
 msgstr "Қос шерту кідірісі"
 
@@ -7134,7 +7293,7 @@ msgstr "Кәсіпорын пайдаланушыларын қосу үшін ж
 msgid "_Enterprise Login"
 msgstr "Кәсіпорын тірк_елгісі"
 
-#: panels/user-accounts/cc-avatar-chooser.c:220
+#: panels/user-accounts/cc-avatar-chooser.c:225
 msgid "Browse for more pictures"
 msgstr "Көбірек суретті шолу"
 
@@ -7574,6 +7733,7 @@ msgstr "Жүйеге кіріп тұр"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Іске қосулы"
 
@@ -7610,7 +7770,7 @@ msgstr ""
 "Таңдалған пайдаланушы тіркелгісін өшіру үшін,\n"
 "алдымен * таңбашасына шертіңіз"
 
-#: panels/user-accounts/cc-user-panel.c:1545
+#: panels/user-accounts/cc-user-panel.c:1538
 msgid "Unlock to Add Users and Change Settings"
 msgstr ""
 "Пайдаланушыларды қосу және параметрлерді өзгерту үшін бұғаттауын шешіңіз"
@@ -7631,20 +7791,20 @@ msgstr "Өзгерістер іске асуы үшін сессияңызды �
 msgid "Restart Now"
 msgstr "Қазір қайта қосу"
 
-#: panels/user-accounts/cc-user-panel.ui:153
-#: panels/user-accounts/cc-user-panel.ui:169
+#: panels/user-accounts/cc-user-panel.ui:157
+#: panels/user-accounts/cc-user-panel.ui:173
 msgid "User Icon"
 msgstr "Пайдаланушы таңбашасы"
 
-#: panels/user-accounts/cc-user-panel.ui:245
+#: panels/user-accounts/cc-user-panel.ui:249
 msgid "Account Settings"
 msgstr "Тіркелгі баптаулары"
 
-#: panels/user-accounts/cc-user-panel.ui:272
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid "_Administrator"
 msgstr "Ә_кімші"
 
-#: panels/user-accounts/cc-user-panel.ui:301
+#: panels/user-accounts/cc-user-panel.ui:268
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7652,40 +7812,40 @@ msgstr ""
 "Әкімшілер басқа пайдаланушыларды қосып, өшіре алады және барлық "
 "пайдаланушылар үшін параметрлерді өзгерте алады."
 
-#: panels/user-accounts/cc-user-panel.ui:333
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "_Parental Controls"
 msgstr "А_та-ана бақылауы"
 
-#: panels/user-accounts/cc-user-panel.ui:377
+#: panels/user-accounts/cc-user-panel.ui:285
 msgid "Open the Parental Controls application."
 msgstr "Ата-ана бақылауы қолданбасын ашу."
 
-#: panels/user-accounts/cc-user-panel.ui:452
+#: panels/user-accounts/cc-user-panel.ui:345
 msgid "Authentication & Login"
 msgstr "Аутентификация және жүйеге кіру"
 
-#: panels/user-accounts/cc-user-panel.ui:521
+#: panels/user-accounts/cc-user-panel.ui:388
 msgid "_Fingerprint Login"
 msgstr "Са_усақ ізімен кіру"
 
-#: panels/user-accounts/cc-user-panel.ui:563
+#: panels/user-accounts/cc-user-panel.ui:413
 msgid "A_utomatic Login"
 msgstr "А_втокіру"
 
-#: panels/user-accounts/cc-user-panel.ui:593
+#: panels/user-accounts/cc-user-panel.ui:427
 msgid "Account Activity"
 msgstr "Тіркелгі белсенділігі"
 
-#: panels/user-accounts/cc-user-panel.ui:634
+#: panels/user-accounts/cc-user-panel.ui:458
 msgid "Remove User…"
 msgstr "Пайдаланушыны өшіру…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:673
+#: panels/user-accounts/cc-user-panel.ui:499
 msgid "No Users Found"
 msgstr "Пайдаланушылар табылмады"
 
-#: panels/user-accounts/cc-user-panel.ui:683
+#: panels/user-accounts/cc-user-panel.ui:509
 msgid "Unlock to add a user account."
 msgstr "Пайдаланушы тіркелгісін жасау үшін босатыңыз."
 
@@ -7891,6 +8051,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "Жаңа парольде жеткілікті түрде әр түрлі таңбалар жоқ"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Белгісіз қате"
@@ -8140,6 +8301,383 @@ msgstr "Төменгі батырма"
 msgid "Tip Pressure Feel"
 msgstr "Қалам басуының сезімталдылығы"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "Қатынау нүктелері"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+#| msgid "VPN"
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "Әрекеттен бас тартылды"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>Қате:</b> Баптауларды өзгерту рұқсат етілмеген"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Қате:</b> Мобильді құрылғылық қамтама қатесі"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "Тіркелмеген"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+msgid "Registered"
+msgstr "Тіркелген"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "Роуминг"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "Іздеу"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "Рұқсат етілмеген"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "Модем ақпараты"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "Модем қалып-күйі"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "Қызмет көрсетуші"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "Желі түрі"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "Желі қалып-күйі"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "Өз нөмірі"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "Құрылғы ақпараты"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "Бинарлы кодтар нұсқасы"
+
+#: panels/wwan/cc-wwan-device.c:982
+#| msgid "Preferences"
+msgid " (Preferred)"
+msgstr " (Таңдамалы)"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid " Only"
+msgstr " Тек"
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "SIM карта бұғаттауын шешу"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "Бұғаттауды шешу"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "%d SIM картасы үшін PIN кодын енгізіңіз"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr "SIM картаңыздың бұғаттауын шешу үшін PIN кодын енгізіңіз"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "%d SIM картасы үшін PUK кодын енгізіңіз"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr "SIM картаңыздың бұғаттауын шешу үшін PUK кодын енгізіңіз"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "Қате пароль енгізілген. Сізде %1$u қайталау талабы қалды"
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "Сізде %1$u қайталау талабы қалды"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "Қате пароль енгізілген."
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr "PUK коды 8 цифрлық сан болуы тиіс"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "Жаңа PIN кодын енгізіңіз"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "PIN коды 4-8 цифрлық сан болуы тиіс"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+#| msgid "Unlock %s."
+msgid "Unlocking..."
+msgstr "Бұғаттауын шешу..."
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "SIM картасы жоқ"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "Бұл модемді пайдалану үшін SIM-картаны салыңыз"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM құлыпталған"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "_Мобильді деректер"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "Деректерге мобильді желі арқылы қатынау"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "_Деректер роумингі"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "Роуминг кезінде мобильді деректерді пайдалану"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "_Желі режимі"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "Ж_елі"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "Кеңейтілген"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "Қ_атынау нүкте атаулары"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+#| msgid "Lock"
+msgid "_SIM Lock"
+msgstr "_SIM құлыптау"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "SIM картаны PIN кодымен бұғаттау"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+#| msgid "%s Details"
+msgid "M_odem Details"
+msgstr "М_одем ақпараты"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "Телефон ақаулығы"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "Телефонға байланыспаған"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "Әрекетке рұқсат жоқ"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "Әрекетке қолдау жоқ"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "SIM картасы салынбаған"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "SIM PIN коды керек"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "SIM PUK коды керек"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "SIM ақаулығы"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "SIM бос емес"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "Пароль қате"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "SIM PIN2 коды керек"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "SIM PUK2 коды керек"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "Табылмады"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "Желілік қызметі жоқ"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "Желі күту уақыты аяқталды"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "GPRS қызметтері рұқсат етілмеген"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "Роуминг бұл аймақта рұқсат етілмеген"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Көрсетілмеген GPRS қатесі"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "Әрекеттен бас тартылған"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "Қатынауға тыйым салынған"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "Белгісіз қате"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "Желі режимі"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "_Орнату"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Жабу"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "_Автоматты түрде"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "Желіні таңдау"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "Желілік провайдерлерді жаңарту"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "WWAN адаптерлері табылмады"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Сізде сымсыз Wan/ұялы құрылғының бар болғанын тексеріңіз"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "Ұшақтағы режим іске қосулы кезінде сымсыз Wan сөндірілген болады."
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "Ұшақтағы режимді _сөндіру"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "Деректер байланысы"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "Интернет үшін қолданылатын SIM картасы"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "Мобильді желіні іске қосу"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "SIM құлыптау"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "_Келесі"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "SIM картаны PIN кодымен _бұғаттау"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "PIN кодын өзгерту"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr "SIM құылыптау баптауларын өзгерту үшін, ағымдағы PIN кодын енгізіңіз"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "Мобильді желі"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "Телефония және мобильді деректер байланыстарын баптау"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr "cellular;wwan;telephony;sim;mobile;ұялы;телефония;сим;мобильді;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "GNOME баптаулары"
@@ -8185,7 +8723,7 @@ msgstr "[ПАНЕЛЬ] [АРГУМЕНТ…]"
 msgid "Privacy"
 msgstr "Жекелік"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Қолжетерлік панельдер:"
 
@@ -8293,6 +8831,51 @@ msgstr[0] "%u кіріс"
 msgid "System Sounds"
 msgstr "Жүйелік дыбыстар"
 
+#~ msgid "Keyboard Shortcut"
+#~ msgstr "Пернетақта жарлығы"
+
+#~ msgid "This can be changed in Customize Shortcuts"
+#~ msgstr "Бұны Жарлықтарды баптауда өзгертуге болады"
+
+#~ msgid "Hold down and type to enter different characters"
+#~ msgstr "Әр түрлі таңбаларды енгізу үшін басып ұстап, теріңіз"
+
+#~ msgid "_Screen Brightness"
+#~ msgstr "Э_кран жарықтылығы"
+
+#~ msgid "_Keyboard Brightness"
+#~ msgstr "Пер_нетақта жарықтылығы"
+
+#~ msgid "Dim Screen When Inactive"
+#~ msgstr "Белсенді емес экранды бәсеңдету"
+
+#~ msgid "_Blank Screen"
+#~ msgstr "Экранды _тазарту"
+
+#~ msgid "_Wi-Fi"
+#~ msgstr "_Wi-Fi"
+
+#~ msgid "Wi-Fi can be turned off to save power."
+#~ msgstr "Эл. қорегін үнемдеу үшін Wi-Fi сөндіруге болады."
+
+#~ msgid ""
+#~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
+#~ msgstr ""
+#~ "Эл. қорегін үнемдеу үшін сымсыз кеңжолақты құрылғыларды (3G, 4G, LTE, т."
+#~ "б.) сөндіруге болады."
+
+#~ msgid "_Bluetooth"
+#~ msgstr "_Bluetooth"
+
+#~ msgid "Bluetooth can be turned off to save power."
+#~ msgstr "Эл. қорегін үнемдеу үшін Bluetooth сөндіруге болады."
+
+#~ msgid "Balanced Power"
+#~ msgstr "Теңгерімді қуат"
+
+#~ msgid "Add…"
+#~ msgstr "Қосу…"
+
 #~ msgid "Left Alt"
 #~ msgstr "Сол жақ"
 
@@ -8342,9 +8925,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgid "Empty"
 #~ msgstr "Бос"
 
-#~ msgid "Choose keyboard layouts or input methods."
-#~ msgstr "Пернетақта жаймаларын немесе енгізу тәсілдерін таңдау."
-
 #~ msgid "Previous source"
 #~ msgstr "Алдыңғы қайнар көзі"
 
@@ -8359,9 +8939,6 @@ msgstr "Жүйелік дыбыстар"
 
 #~ msgid "Left+Right Alt"
 #~ msgstr "Сол+Оң жақ Alt"
-
-#~ msgid "These keyboard shortcuts can be changed in the keyboard settings"
-#~ msgstr "Бұл жарлықтарды пернетақта баптауларында өзгертуге болады"
 
 #~ msgid "Switch off to connect to a Wi-Fi network"
 #~ msgstr "Wi-Fi желісіне байланысу үшін сөндіру"
@@ -8436,9 +9013,6 @@ msgstr "Жүйелік дыбыстар"
 
 #~ msgid "Read system and application logs"
 #~ msgstr "Жүйелік және қолданба журналдарын оқу"
-
-#~ msgid "Access LXD service"
-#~ msgstr "LXD қызметіне қатынау"
 
 #~ msgid "access the media-hub service"
 #~ msgstr "media-hub қызметіне қатынау"
@@ -8861,9 +9435,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgid "Infrastructure"
 #~ msgstr "Инфраструктура"
 
-#~ msgid "Not connected"
-#~ msgstr "Байланыспаған"
-
 #~ msgid "Notification _Popups"
 #~ msgstr "Хабарламалық _баннерлер"
 
@@ -9026,9 +9597,6 @@ msgstr "Жүйелік дыбыстар"
 
 #~ msgid "Could not get screen information"
 #~ msgstr "Экран ақпаратын алу мүмкін емес"
-
-#~ msgid "My Home Network"
-#~ msgstr "Менің үй желім"
 
 #~ msgid "hardware"
 #~ msgstr "құрылғы"
@@ -9492,9 +10060,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgid "Other Accounts"
 #~ msgstr "Басқа тіркелгілер"
 
-#~ msgid "My Account"
-#~ msgstr "Менің тіркелгім"
-
 #~ msgid "Edit"
 #~ msgstr "Түзету"
 
@@ -9787,9 +10352,6 @@ msgstr "Жүйелік дыбыстар"
 
 #~ msgid "Time _Zone"
 #~ msgstr "Уақыт _белдеуі"
-
-#~ msgid "Close"
-#~ msgstr "Жабу"
 
 #~ msgid "Resume Printing"
 #~ msgstr "Баспаға шығаруды жалғастыру"
@@ -10150,9 +10712,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgid "_City:"
 #~ msgstr "Қа_ла:"
 
-#~ msgid "_Network Time"
-#~ msgstr "Же_лілік уақыт"
-
 #~ msgid "AM/PM"
 #~ msgstr "AM/PM"
 
@@ -10167,9 +10726,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgctxt "display panel, rotation"
 #~ msgid "180 Degrees"
 #~ msgstr "180 градус"
-
-#~ msgid "Monitor"
-#~ msgstr "Монитор"
 
 #~ msgid "%a %R"
 #~ msgstr "%a %R"
@@ -10493,9 +11049,6 @@ msgstr "Жүйелік дыбыстар"
 #~ msgid "Brightness & Lock"
 #~ msgstr "Жарықтылық пен блоктау"
 
-#~ msgid "Screen brightness and lock settings"
-#~ msgstr "Экран жарықтылығы мен блоктау баптаулары"
-
 #~ msgid "_Dim screen to save power"
 #~ msgstr "Эл. қоре_гін сақтау үшін экран жарықтылығын азайту"
 
@@ -10504,9 +11057,6 @@ msgstr "Жүйелік дыбыстар"
 
 #~ msgid "Locations..."
 #~ msgstr "Орналасу..."
-
-#~ msgid "Lock"
-#~ msgstr "Блоктау"
 
 #~ msgid "Enable debugging code"
 #~ msgstr "Жөндеу кодын іске қосу"
