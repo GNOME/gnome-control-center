@@ -5,7 +5,7 @@
 # Mohammad DAMT <mdamt@bisnisweb.com>, 2003.
 # Ahmad Riza H Nst  <rizahnst@gnome.org>, 2006.
 # Dirgita <dirgitadevina@yahoo.co.id>, 2010, 2012, 2014.
-# Andika Triwidada <andika@gmail.com>, 2009, 2011-2015, 2017.
+# Andika Triwidada <andika@gmail.com>, 2009, 2011-2015, 2017, 2021.
 # Kukuh Syafaat <kukuhsyafaat@gnome.org>, 2017-2021.
 # Sofyan Sugianto <ssugianto@gnome.org>, 2020
 msgid ""
@@ -13,16 +13,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-07-19 22:59+0000\n"
-"PO-Revision-Date: 2021-07-20 20:31+0700\n"
-"Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
+"POT-Creation-Date: 2021-08-24 15:50+0000\n"
+"PO-Revision-Date: 2021-08-28 09:02+0700\n"
+"Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural= n!=1;\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 2.4.2\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -51,7 +51,8 @@ msgstr "Akses penuh ke /dev"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Jaringan"
 
@@ -203,6 +204,7 @@ msgstr "Kamera"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Dimatikan"
@@ -220,7 +222,7 @@ msgid "Location Services"
 msgstr "Layanan Lokasi"
 
 #: panels/applications/cc-applications-panel.ui:157
-#: panels/applications/cc-applications-panel.ui:499
+#: panels/applications/cc-applications-panel.ui:500
 msgid "Built-in Permissions"
 msgstr "Izin Bawaan"
 
@@ -294,48 +296,48 @@ msgid "How much resources this application is using."
 msgstr "Berapa banyak sumber daya yang digunakan aplikasi ini."
 
 #: panels/applications/cc-applications-panel.ui:391
-#: panels/applications/cc-applications-panel.ui:536
+#: panels/applications/cc-applications-panel.ui:537
 msgid "Storage"
 msgstr "Penyimpanan"
 
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:424
 msgid "Open in Software"
 msgstr "Buka di Perangkat Lunak"
 
-#: panels/applications/cc-applications-panel.ui:473 shell/cc-panel-list.ui:121
+#: panels/applications/cc-applications-panel.ui:474 shell/cc-panel-list.ui:121
 msgid "No results found"
 msgstr "Hasil tak ditemukan"
 
-#: panels/applications/cc-applications-panel.ui:484
+#: panels/applications/cc-applications-panel.ui:485
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:177
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Cobalah pencarian lain"
 
-#: panels/applications/cc-applications-panel.ui:554
+#: panels/applications/cc-applications-panel.ui:555
 msgid ""
 "How much disk space this application is occupying with app data and caches."
 msgstr ""
 "Berapa banyak ruang diska yang ditempati aplikasi ini dengan data aplikasi "
 "dan tembolok."
 
-#: panels/applications/cc-applications-panel.ui:563
+#: panels/applications/cc-applications-panel.ui:564
 msgid "Application"
 msgstr "Aplikasi"
 
-#: panels/applications/cc-applications-panel.ui:569
+#: panels/applications/cc-applications-panel.ui:570
 msgid "Data"
 msgstr "Data"
 
-#: panels/applications/cc-applications-panel.ui:575
+#: panels/applications/cc-applications-panel.ui:576
 msgid "Cache"
 msgstr "Tembolok"
 
-#: panels/applications/cc-applications-panel.ui:581
+#: panels/applications/cc-applications-panel.ui:582
 msgid "<b>Total</b>"
 msgstr "<b>Total</b>"
 
-#: panels/applications/cc-applications-panel.ui:598
+#: panels/applications/cc-applications-panel.ui:599
 msgid "Clear Cache…"
 msgstr "Bersihkan Tembolok…"
 
@@ -379,6 +381,9 @@ msgstr "Pilih gambar"
 #: panels/user-accounts/cc-user-panel.c:633
 #: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "Ba_tal"
 
@@ -468,7 +473,7 @@ msgstr "Matikan saklar mode Pesawat Terbang untuk memfungsikan Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1595
+#: panels/printers/pp-new-printer-dialog.c:1392
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -749,6 +754,7 @@ msgstr "Simpan profil"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Simpan"
 
@@ -1250,7 +1256,7 @@ msgstr[0] "%d jam"
 msgstr[1] "%d jam"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1213
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:973
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1783,6 +1789,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:437
 #: panels/info-overview/cc-info-overview-panel.c:483
 #: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Unknown"
 
@@ -1959,7 +1966,7 @@ msgid "Eject"
 msgstr "Keluarkan"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:542
+#: panels/universal-access/cc-ua-panel.ui:580
 msgid "Typing"
 msgstr "Mengetik"
 
@@ -2280,6 +2287,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "Batal"
 
@@ -2308,7 +2316,8 @@ msgstr "Tak ditemukan tombol pintas"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Mundur"
 
@@ -2356,6 +2365,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Nama"
 
@@ -2376,6 +2386,7 @@ msgid "None"
 msgstr "Tak Ada"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Tambah"
 
@@ -2636,6 +2647,7 @@ msgstr "Lindungi percakapan Anda"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Umum"
 
@@ -2748,12 +2760,93 @@ msgstr ""
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Trackpad;Pointer;Klik;Sentuh;Ganda;Tombol;Trackball;Gulir;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "_Pojok Panas"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr "Sentuh pojok kiri atas untuk membuka Ringkasan Aktivitas."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "Tepi Layar _Aktif"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Seret jendela ke tepi layar puncak, kiri, dan kanan untuk mengubah ukuran "
+"mereka."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "Ruang kerja"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "Ruang kerja _dinamis"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "Secara otomatis menghapus ruang kerja yang kosong."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "_Cacah tetap ruang kerja"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "Nyatakan banyaknya ruang kerja permanen."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "Cacah rua_ng kerja"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+#| msgid "%s Monitor"
+msgid "Multi-Monitor"
+msgstr "Multi-Monitor"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "Ruang kerja hanya pada tampilan _primer"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "Ruang kerja pada semua tampilan"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "Pengalihan Aplikasi"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "Sertakan aplikasi dari semua ruang _kerja"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "Sertakan aplikasi dari ruang kerja saat _ini saja"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "Multitasking"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "Mengelola preferensi untuk produktivitas dan multitasking"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr "Multitasking;Multitask;Produktivitas;Menyesuaikan;Desktop;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ups, ada sesuatu yang salah. Harap hubungi vendor perangkat lunak Anda."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager perlu berjalan."
 
@@ -2853,6 +2946,7 @@ msgstr "Nama Jaringan"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Kata Sandi"
 
@@ -2898,7 +2992,7 @@ msgstr "Tidak ada Adaptor Wifi yang Ditemukan"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Pastikan adaptor Wi-Fi terpasang dan dinyalakan"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Mode Pesawat Terbang Aktif"
 
@@ -3196,6 +3290,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 Pribadi"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Kuat Sinyal"
 
@@ -3542,20 +3637,20 @@ msgstr "Perangkat nirkabel tak mendukung mode Hotspot"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1101 panels/power/cc-power-panel.c:1112
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
-#: panels/universal-access/cc-ua-panel.ui:300
-#: panels/universal-access/cc-ua-panel.ui:346
-#: panels/universal-access/cc-ua-panel.ui:392
-#: panels/universal-access/cc-ua-panel.ui:498
-#: panels/universal-access/cc-ua-panel.ui:651
-#: panels/universal-access/cc-ua-panel.ui:697
-#: panels/universal-access/cc-ua-panel.ui:743
-#: panels/universal-access/cc-ua-panel.ui:927
+#: panels/power/cc-power-panel.c:856 panels/power/cc-power-panel.c:867
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
+#: panels/universal-access/cc-ua-panel.ui:338
+#: panels/universal-access/cc-ua-panel.ui:384
+#: panels/universal-access/cc-ua-panel.ui:430
+#: panels/universal-access/cc-ua-panel.ui:536
+#: panels/universal-access/cc-ua-panel.ui:689
+#: panels/universal-access/cc-ua-panel.ui:735
+#: panels/universal-access/cc-ua-panel.ui:781
+#: panels/universal-access/cc-ua-panel.ui:965
 msgid "Off"
 msgstr "Mati"
 
@@ -3589,6 +3684,7 @@ msgid "Turn device off"
 msgstr "Matikan perangkat"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3912,7 +4008,7 @@ msgid "SIM Puk required"
 msgstr "Perlu PUK SIM"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "SIM salah"
 
@@ -4359,12 +4455,12 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "_Tampilkan Isi Pesan dalam Layar Kunci"
 
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1107 panels/power/cc-power-panel.c:1114
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
+#: panels/power/cc-power-panel.c:862 panels/power/cc-power-panel.c:869
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
 msgid "On"
 msgstr "Nyala"
 
@@ -4578,7 +4674,7 @@ msgid "Gaming input device"
 msgstr "Perangkat masukan permainan"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:395
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:384
 #: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Baterai"
@@ -4593,54 +4689,54 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Ekstra"
 
-#: panels/power/cc-power-panel.c:393
+#: panels/power/cc-power-panel.c:382
 msgid "Batteries"
 msgstr "Batera"
 
-#: panels/power/cc-power-panel.c:656
+#: panels/power/cc-power-panel.c:644
 msgid "When _idle"
 msgstr "Ket_ika menganggur"
 
-#: panels/power/cc-power-panel.c:1041
+#: panels/power/cc-power-panel.c:796
 msgid "Suspend"
 msgstr "Suspensi"
 
-#: panels/power/cc-power-panel.c:1042
+#: panels/power/cc-power-panel.c:797
 msgid "Power Off"
 msgstr "Matikan"
 
-#: panels/power/cc-power-panel.c:1043
+#: panels/power/cc-power-panel.c:798
 msgid "Hibernate"
 msgstr "Hibernasi"
 
-#: panels/power/cc-power-panel.c:1044
+#: panels/power/cc-power-panel.c:799
 msgid "Nothing"
 msgstr "Bukan apapun"
 
-#: panels/power/cc-power-panel.c:1103
+#: panels/power/cc-power-panel.c:858
 msgid "When on battery power"
 msgstr "Ketika memakai baterai"
 
-#: panels/power/cc-power-panel.c:1105
+#: panels/power/cc-power-panel.c:860
 msgid "When plugged in"
 msgstr "Ketika ditancapkan"
 
-#: panels/power/cc-power-panel.c:1220
+#: panels/power/cc-power-panel.c:980
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Tak pernah"
 
-#: panels/power/cc-power-panel.c:1277
+#: panels/power/cc-power-panel.c:1066
 msgid "Automatic suspend"
 msgstr "Suspensi otomatis"
 
-#: panels/power/cc-power-panel.c:1416
+#: panels/power/cc-power-panel.c:1171
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Mode kinerja dinonaktifkan sementara karena suhu pengoperasian yang tinggi."
 
-#: panels/power/cc-power-panel.c:1418
+#: panels/power/cc-power-panel.c:1173
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4648,11 +4744,11 @@ msgstr ""
 "Putaran terdeteksi: mode kinerja untuk sementara tidak tersedia. Pindahkan "
 "perangkat ke permukaan yang stabil untuk memulihkan."
 
-#: panels/power/cc-power-panel.c:1420
+#: panels/power/cc-power-panel.c:1175
 msgid "Performance mode temporarily disabled."
 msgstr "Mode kinerja dinonaktifkan untuk sementara."
 
-#: panels/power/cc-power-panel.c:1460
+#: panels/power/cc-power-panel.c:1218
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4661,13 +4757,13 @@ msgstr ""
 "ketika baterai terisi cukup."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1468
+#: panels/power/cc-power-panel.c:1226
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Mode Penghemat Daya diaktifkan oleh \"%s\"."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1472
+#: panels/power/cc-power-panel.c:1230
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Mode kinerja diaktifkan oleh \"%s\"."
@@ -4741,120 +4837,115 @@ msgid "Affects system performance and power usage."
 msgstr "Mempengaruhi kinerja sistem dan penggunaan daya."
 
 #: panels/power/cc-power-panel.ui:142
-msgid "Power Saving"
-msgstr "Penghematan Daya"
+msgid "Power Saving Options"
+msgstr "Opsi Penghematan Daya"
 
 #: panels/power/cc-power-panel.ui:146
-msgid "_Screen Brightness"
-msgstr "Kecerahan _Layar"
+msgid "Automatic Screen Brightness"
+msgstr "Kecerahan Layar Otomatis"
 
-#: panels/power/cc-power-panel.ui:162
-msgid "Automatic Brightness"
-msgstr "Kecerahan Otomatis"
+#: panels/power/cc-power-panel.ui:147
+msgid "Screen brightness adjusts to the surrounding light."
+msgstr "Kecerahan layar menyesuaikan dengan cahaya di sekitarnya."
+
+#: panels/power/cc-power-panel.ui:160
+msgid "Dim Screen"
+msgstr "Redupkan Layar"
+
+#: panels/power/cc-power-panel.ui:161
+msgid "Reduces the screen brightness when the computer is inactive."
+msgstr "Mengurangi kecerahan layar saat komputer tidak aktif."
+
+#: panels/power/cc-power-panel.ui:174
+msgid "Screen _Blank"
+msgstr "_Pengosongan Layar"
 
 #: panels/power/cc-power-panel.ui:175
-msgid "_Keyboard Brightness"
-msgstr "_Kecerahan Papan Tik"
+msgid "Turns the screen off after a period of inactivity."
+msgstr "Mematikan layar setelah periode tidak aktif."
 
-#: panels/power/cc-power-panel.ui:191
-msgid "Dim Screen When Inactive"
-msgstr "Redupkan Layar Ketika Tak Aktif"
+#: panels/power/cc-power-panel.ui:183
+msgid "Automatic Power Saver"
+msgstr "Penghemat Daya Otomatis"
 
-#: panels/power/cc-power-panel.ui:204
-msgid "_Blank Screen"
-msgstr "K_osongkan Layar"
+#: panels/power/cc-power-panel.ui:184
+msgid "Enables power saver mode when battery is low."
+msgstr "Mengaktifkan mode penghemat daya saat baterai rendah."
 
-#: panels/power/cc-power-panel.ui:212
+#: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
 msgstr "Suspensi Otom_atis"
 
-#: panels/power/cc-power-panel.ui:228
-msgid "_Wi-Fi"
-msgstr "_Wi-Fi"
+#: panels/power/cc-power-panel.ui:199
+msgid "Pauses the computer after a period of inactivity."
+msgstr "Menjeda komputer setelah periode tidak aktif."
 
-#: panels/power/cc-power-panel.ui:229
-msgid "Wi-Fi can be turned off to save power."
-msgstr "Wi-Fi dapat dimatikan untuk menghemat daya."
-
-#: panels/power/cc-power-panel.ui:244
-msgid "_Mobile Broadband"
-msgstr "Data _Seluler"
-
-#: panels/power/cc-power-panel.ui:245
-msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-msgstr "Data seluler (3G, 4G, LTE, dsb.) dapat dimatikan untuk menghemat daya."
-
-#: panels/power/cc-power-panel.ui:260
-msgid "_Bluetooth"
-msgstr "_Bluetooth"
-
-#: panels/power/cc-power-panel.ui:261
-msgid "Bluetooth can be turned off to save power."
-msgstr "Bluetooth dapat dimatikan untuk menghemat daya."
-
-#: panels/power/cc-power-panel.ui:278
+#: panels/power/cc-power-panel.ui:217
 msgid "Suspend & Power Button"
 msgstr "Tombol Suspensi & Daya"
 
-#: panels/power/cc-power-panel.ui:282
+#: panels/power/cc-power-panel.ui:221
 msgid "Po_wer Button Behavior"
 msgstr "Perilaku Tombol Da_ya"
 
-#: panels/power/cc-power-panel.ui:290
+#: panels/power/cc-power-panel.ui:229
 msgid "Show Battery _Percentage"
 msgstr "Tampilkan _Persentase Baterai"
 
-#: panels/power/cc-power-panel.ui:336
+#: panels/power/cc-power-panel.ui:268
 msgid "Automatic Suspend"
 msgstr "Suspensi Otomatis"
 
-#: panels/power/cc-power-panel.ui:361
+#: panels/power/cc-power-panel.ui:293
 msgid "_Plugged In"
 msgstr "Ditanca_pkan"
 
-#: panels/power/cc-power-panel.ui:377
+#: panels/power/cc-power-panel.ui:309
 msgid "On _Battery Power"
 msgstr "Memakai Tenaga _Baterai"
 
-#: panels/power/cc-power-panel.ui:422 panels/power/cc-power-panel.ui:482
+#: panels/power/cc-power-panel.ui:354 panels/power/cc-power-panel.ui:414
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Tunda"
 
-#: panels/power/cc-power-profile-row.c:62
+#: panels/power/cc-power-profile-row.c:61
 msgid "Lap detected: performance mode unavailable"
 msgstr "Putaran terdeteksi: mode kinerja tidak tersedia"
 
-#: panels/power/cc-power-profile-row.c:64
+#: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
 msgstr "Suhu perangkat keras tinggi: mode kinerja tidak tersedia"
 
-#: panels/power/cc-power-profile-row.c:65
+#: panels/power/cc-power-profile-row.c:64
 msgid "Performance mode unavailable"
 msgstr "Mode kinerja tidak tersedia"
 
-#: panels/power/cc-power-profile-row.c:87
-#: panels/power/cc-power-profile-row.c:187
+#: panels/power/cc-power-profile-row.c:86
+#: panels/power/cc-power-profile-row.c:185
 msgid "High performance and power usage."
 msgstr "Kinerja tinggi dan penggunaan daya."
 
-#: panels/power/cc-power-profile-row.c:186
+#: panels/power/cc-power-profile-row.c:184
+msgctxt "Power profile"
 msgid "Performance"
-msgstr "Performa"
+msgstr "Kinerja"
 
-#: panels/power/cc-power-profile-row.c:192
-msgid "Balanced Power"
-msgstr "Daya Seimbang"
+#: panels/power/cc-power-profile-row.c:188
+msgctxt "Power profile"
+msgid "Balanced"
+msgstr "Seimbang"
 
-#: panels/power/cc-power-profile-row.c:193
+#: panels/power/cc-power-profile-row.c:189
 msgid "Standard performance and power usage."
 msgstr "Kinerja standar dan penggunaan daya."
 
-#: panels/power/cc-power-profile-row.c:198
+#: panels/power/cc-power-profile-row.c:192
+msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Penghemat Daya"
 
-#: panels/power/cc-power-profile-row.c:199
+#: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
 msgstr "Kurangi kinerja dan penggunaan daya."
 
@@ -4886,7 +4977,7 @@ msgstr "Autentikasikan"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Nama Pengguna"
 
@@ -4902,17 +4993,17 @@ msgid "Printer “%s” has been deleted"
 msgstr "Pencetak “%s” telah dihapus"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:930
+#: panels/printers/cc-printers-panel.c:926
 msgid "Failed to add new printer."
 msgstr "Gagal menambah pencetak baru."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1209
+#: panels/printers/cc-printers-panel.c:1225
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Tak dapat memuat ui: %s"
 
-#: panels/printers/cc-printers-panel.c:1277
+#: panels/printers/cc-printers-panel.c:1293
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Buka Kunci untuk Menambahkan Pencetak dan Mengubah Pengaturan"
 
@@ -4933,8 +5024,8 @@ msgstr "Pencetak;Antrian;Cetak;Kertas;Tinta;Pewarna;"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:344
-#: panels/printers/pp-new-printer-dialog.c:401
+#: panels/printers/pp-new-printer-dialog.c:254
+#: panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "Tambah Pencetak"
 
@@ -4942,6 +5033,7 @@ msgstr "Tambah Pencetak"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Buka Kunci"
 
@@ -4990,7 +5082,7 @@ msgstr "Lokasi"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:239
+#: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Penggerak"
 
@@ -5165,56 +5257,56 @@ msgstr "_Autentikasikan"
 msgid "No Active Printer Jobs"
 msgstr "Tidak Ada Tugas Pencetak Yang Aktif"
 
-#: panels/printers/pp-new-printer-dialog.c:359
+#: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
 msgstr "Pilih Peladen Pencetak"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "Buka Kunci %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:367
+#: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Masukkan nama pengguna dan kata sandi Anda untuk melihat pencetak pada %s."
 
-#: panels/printers/pp-new-printer-dialog.c:790
+#: panels/printers/pp-new-printer-dialog.c:587
 msgid "Searching for Printers"
 msgstr "Mencari Pencetak"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1578
+#: panels/printers/pp-new-printer-dialog.c:1375
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1583
+#: panels/printers/pp-new-printer-dialog.c:1380
 msgid "Serial Port"
 msgstr "Porta Serial"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1590
+#: panels/printers/pp-new-printer-dialog.c:1387
 msgid "Parallel Port"
 msgstr "Porta Paralel"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1632
+#: panels/printers/pp-new-printer-dialog.c:1429
 #, c-format
 msgid "Location: %s"
 msgstr "Lokasi: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1637
+#: panels/printers/pp-new-printer-dialog.c:1434
 #, c-format
 msgid "Address: %s"
 msgstr "Alamat: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1461
 msgid "Server requires authentication"
 msgstr "Server memerlukan autentikasi"
 
@@ -5355,7 +5447,8 @@ msgid "No pre-filtering"
 msgstr "Tanpa pra penapisan"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:223
+#: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Pabrikan"
 
@@ -5504,6 +5597,7 @@ msgid "Remove Printer"
 msgstr "Hapus Pencetak"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Model"
 
@@ -5524,7 +5618,7 @@ msgstr "Nyalakan Ulang"
 #. Translators: This button adds new printer.
 #: panels/printers/printers.ui:12
 msgid "Add Printer…"
-msgstr "Tambah Pencetak..."
+msgstr "Tambah Pencetak…"
 
 #: panels/printers/printers.ui:187
 msgid "No printers"
@@ -5545,7 +5639,7 @@ msgstr ""
 "sepertinya tak tersedia."
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:189
-#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:159
+#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:203
 msgid "Formats"
 msgstr "Format"
 
@@ -5611,40 +5705,44 @@ msgstr "Pengukuran"
 msgid "Paper"
 msgstr "Kertas"
 
-#: panels/region/cc-region-panel.c:740
-msgid "Login _Screen"
-msgstr "Layar Log Ma_suk"
+#: panels/region/cc-region-panel.ui:42
+msgid "My Account"
+msgstr "Akunku"
 
-#: panels/region/cc-region-panel.ui:34
+#: panels/region/cc-region-panel.ui:53
+msgid "Login Screen"
+msgstr "Layar Log Masuk"
+
+#: panels/region/cc-region-panel.ui:78
 msgid "Language"
 msgstr "Bahasa"
 
-#: panels/region/cc-region-panel.ui:45
+#: panels/region/cc-region-panel.ui:89
 msgid "The language used for text in windows and web pages."
 msgstr "Bahasa yang digunakan untuk teks di jendela dan halaman web."
 
-#: panels/region/cc-region-panel.ui:85
+#: panels/region/cc-region-panel.ui:129
 #: panels/user-accounts/cc-user-panel.ui:309
 msgid "_Language"
 msgstr "_Bahasa"
 
-#: panels/region/cc-region-panel.ui:120
+#: panels/region/cc-region-panel.ui:164
 msgid "Restart the session for changes to take effect"
 msgstr "Mulai ulang sesi agar perubahan diterapkan"
 
-#: panels/region/cc-region-panel.ui:135
+#: panels/region/cc-region-panel.ui:179
 msgid "Restart…"
 msgstr "Mulai Ulang…"
 
-#: panels/region/cc-region-panel.ui:170
+#: panels/region/cc-region-panel.ui:214
 msgid "The format used for numbers, dates, and currencies."
 msgstr "Format yang digunakan untuk angka, tanggal, dan mata uang."
 
-#: panels/region/cc-region-panel.ui:204
+#: panels/region/cc-region-panel.ui:248
 msgid "_Formats"
 msgstr "_Format"
 
-#: panels/region/cc-region-panel.ui:231
+#: panels/region/cc-region-panel.ui:275
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Pengaturan log masuk dipakai oleh semua pengguna ketika log masuk ke dalam "
@@ -6457,7 +6555,7 @@ msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Bip ketika Num Lock atau Caps Lock dinyalakan atau dimatikan."
 
 #: panels/universal-access/cc-sound-keys-dialog.ui:45
-#: panels/universal-access/cc-ua-panel.ui:374
+#: panels/universal-access/cc-ua-panel.ui:412
 msgid "_Sound Keys"
 msgstr "_Suara Tombol"
 
@@ -6562,32 +6660,32 @@ msgstr "Nyalakan dan matikan fitur aksesibilitas memakai papan tik"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:348
+#: panels/universal-access/cc-ua-panel.c:351
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Bawaan"
 
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:354
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Sedang"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Besar"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Lebih Besar"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Terbesar"
 
-#: panels/universal-access/cc-ua-panel.c:364
+#: panels/universal-access/cc-ua-panel.c:367
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6610,65 +6708,69 @@ msgstr "Kontras _Tinggi"
 msgid "_Large Text"
 msgstr "Teks _Besar"
 
-#: panels/universal-access/cc-ua-panel.ui:235
+#: panels/universal-access/cc-ua-panel.ui:238
+msgid "Enable A_nimations"
+msgstr "Fungsikan A_nimations"
+
+#: panels/universal-access/cc-ua-panel.ui:273
 msgid "C_ursor Size"
 msgstr "Ukuran K_ursor"
 
-#: panels/universal-access/cc-ua-panel.ui:282
+#: panels/universal-access/cc-ua-panel.ui:320
 #: panels/universal-access/cc-zoom-options-dialog.ui:91
 msgid "_Zoom"
 msgstr "_Zum"
 
-#: panels/universal-access/cc-ua-panel.ui:328
+#: panels/universal-access/cc-ua-panel.ui:366
 msgid "Screen _Reader"
 msgstr "Pembaca Laya_r"
 
-#: panels/universal-access/cc-ua-panel.ui:436
+#: panels/universal-access/cc-ua-panel.ui:474
 msgid "Hearing"
 msgstr "Pendengaran"
 
-#: panels/universal-access/cc-ua-panel.ui:480
+#: panels/universal-access/cc-ua-panel.ui:518
 #: panels/universal-access/cc-visual-alerts-dialog.ui:68
 msgid "_Visual Alerts"
 msgstr "Peringatan _Visual"
 
-#: panels/universal-access/cc-ua-panel.ui:588
+#: panels/universal-access/cc-ua-panel.ui:626
 msgid "Screen _Keyboard"
 msgstr "Papan Ti_k di Layar"
 
-#: panels/universal-access/cc-ua-panel.ui:633
+#: panels/universal-access/cc-ua-panel.ui:671
 msgid "R_epeat Keys"
 msgstr "P_engulangan Tombol"
 
-#: panels/universal-access/cc-ua-panel.ui:679
+#: panels/universal-access/cc-ua-panel.ui:717
 msgid "Cursor _Blinking"
 msgstr "Kursor _Berkedip"
 
-#: panels/universal-access/cc-ua-panel.ui:725
+#: panels/universal-access/cc-ua-panel.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "Bantuan Penge_tikan (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:786
+#: panels/universal-access/cc-ua-panel.ui:824
 msgid "Pointing & Clicking"
 msgstr "Menunjuk & Mengklik"
 
-#: panels/universal-access/cc-ua-panel.ui:832
+#: panels/universal-access/cc-ua-panel.ui:870
 msgid "_Mouse Keys"
 msgstr "To_mbol Tetikus"
 
-#: panels/universal-access/cc-ua-panel.ui:877
+#: panels/universal-access/cc-ua-panel.ui:915
 msgid "_Locate Pointer"
 msgstr "Temukan _Penunjuk"
 
-#: panels/universal-access/cc-ua-panel.ui:909
+#: panels/universal-access/cc-ua-panel.ui:947
 msgid "_Click Assist"
 msgstr "Bantuan _Klik"
 
-#: panels/universal-access/cc-ua-panel.ui:955
+#: panels/universal-access/cc-ua-panel.ui:993
 msgid "_Double-Click Delay"
 msgstr "Tun_daan Klik Ganda"
 
-#: panels/universal-access/cc-ua-panel.ui:975
+#: panels/universal-access/cc-ua-panel.ui:1013
 msgid "Double-Click Delay"
 msgstr "Tundaan Klik Ganda"
 
@@ -7608,6 +7710,7 @@ msgstr "Log masuk"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Diaktifkan"
 
@@ -7922,6 +8025,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "Kata sandi baru tidak memuat cukup banyak karakter berbeda"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Galat tak dikenal"
@@ -8167,6 +8271,381 @@ msgstr "Tombol Paling Bawah"
 msgid "Tip Pressure Feel"
 msgstr "Perasaan Tekanan Ujung"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "Titik Akses"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+#| msgid "VPN"
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "Operasi Dibatalkan"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>Galat:</b> Akses ditolak saat mengubah pengaturan"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Galat:</b> Galat Peralatan Seluler"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "Tidak Terdaftar"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+msgid "Registered"
+msgstr "Terdaftar"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "Roaming"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "Mencari"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "Ditolak"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "Rincian Modem"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "Status Modem"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "Operator Seluler"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "Tipe Jaringan"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "Status Jaringan"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "Nomor Ini"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "Rincian Peranti"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "Versi Firmware"
+
+#: panels/wwan/cc-wwan-device.c:982
+msgid " (Preferred)"
+msgstr " (Disukai)"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid " Only"
+msgstr "Hanya"
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "Buka kunci kartu SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "Buka Kunci"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "Harap berikan kode PIN untuk SIM %d"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr "Masukkan PIN untuk membuka kunci kartu SIM Anda"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "Harap berikan kode PUK untuk SIM %d"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr "Masukkan PUK untuk membuka kunci kartu SIM Anda"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "Kata sandi yang dimasukkan salah. Anda punya sisa %1$u percobaan"
+msgstr[1] "Kata sandi yang dimasukkan salah. Anda punya sisa %1$u percobaan"
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "Anda punya sisa %u percobaan"
+msgstr[1] "Anda punya sisa %u percobaan"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "Kata sandi yang dimasukkan salah."
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr "Kode PUK mesti berupa suatu angka 8 digit"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "Masukkan PIN Baru"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "Kode PIN mesti berupa suatu angka 4-8 digit"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+msgid "Unlocking..."
+msgstr "Membuka kunci..."
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "Tidak ada SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "Pasang sebuah kartu SIM untuk memakai modem ini"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM Terkunci"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "Data _Seluler"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "Akses data memakai jaringan data seluler"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "Roaming _Data"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "Gunakan data seluler ketika roaming"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "Mode Jari_ngan"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "J_aringan"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "Tingkat Lanjut"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "Nama _Access Point"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "Kunci _SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "Kunci SIM dengan PIN"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "Rincian Modem"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "Kegagalan telepon"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "Tidak ada koneksi ke telepon"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "Operasi tak diizinkan"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "Operasi tak didukung"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "SIM tak dipasang"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "Perlu PIN SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "Perlu PUK SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "Kegagalan SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "SIM sibuk"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "Kata sandi salah"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "Perlu PIN2 SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "Perlu PUK2 SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "Tak ditemukan"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "Tidak ada layanan jaringan"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "Jaringan habis waktu"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "Layanan GPS tak diizinkan"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "Roaming tak diizinkan di wilayah lokasi ini"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Galat GPS yang tak dinyatakan"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "Aksi Dibatalkan"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "Akses ditolak"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "Galat Tak Dikenal"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "Mode Jaringan"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "A_tur"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Tutup"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "Otom_atis"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "Pilih Jaringan"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "Segarkan Penyedia Jaringan"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "Tidak Ditemukan Adaptor WWAN"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Pastikan Anda punya suatu perangkat Seluler/Wan Nirkabel"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "Wan Nirkabel dinonaktifkan ketika mode pesawat aktif"
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "Ma_tikan Mode Pesawat Terbang"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "Koneksi Data"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "Kartu SIM dipakai untuk internet"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "Fungsikan Jaringan Seluler"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "Kunci SIM"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "Sela_njutnya"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "_Kunci SIM dengan PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "Ubah PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr "Masukkan PIN saat ini untuk mengubah pengaturan kunci SIM"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "Jaringan Seluler"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "Mengkonfigurasi koneksi data seluler dan telefoni"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr "seluler;wwan;telefoni;sim;mobile;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "GNOME Pengaturan"
@@ -8211,7 +8690,7 @@ msgstr "[PANEL] [ARGUMEN…]"
 msgid "Privacy"
 msgstr "Privasi"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Panel yang tersedia:"
 
@@ -8322,1052 +8801,3 @@ msgstr[1] "%u Masukan"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Suara Sistem"
-
-#~ msgid "Keyboard Shortcut"
-#~ msgstr "Pintasan Papan Tik"
-
-#~ msgid "This can be changed in Customize Shortcuts"
-#~ msgstr "Ini dapat diubah di Pintasan Gubahan"
-
-#~ msgid "Hold down and type to enter different characters"
-#~ msgstr "Tahan dan ketik untuk memasukkan karakter lain"
-
-#~ msgid "Add…"
-#~ msgstr "Tambah…"
-
-#~ msgid "Left Alt"
-#~ msgstr "Alt Kiri"
-
-#~ msgid "Right Alt"
-#~ msgstr "Alt Kanan"
-
-#~ msgid "Left Super"
-#~ msgstr "Super Kiri"
-
-#~ msgid "Right Super"
-#~ msgstr "Super kanan"
-
-#~ msgid "Right Ctrl"
-#~ msgstr "Ctrl Kanan"
-
-#~ msgid "Alternative Characters Key"
-#~ msgstr "Tombol Karakter Alternatif"
-
-#~ msgid "Modifiers-only switch to next source"
-#~ msgstr "Hanya modifier bertukar ke sumber selanjutnya"
-
-#~ msgctxt "keyboard key"
-#~ msgid "Menu Key"
-#~ msgstr "Tombol Menu"
-
-#~ msgctxt "Battery power"
-#~ msgid "Charging"
-#~ msgstr "Mengisi"
-
-#~ msgctxt "Battery power"
-#~ msgid "Caution"
-#~ msgstr "Awas"
-
-#~ msgctxt "Battery power"
-#~ msgid "Low"
-#~ msgstr "Lemah"
-
-#~ msgctxt "Battery power"
-#~ msgid "Good"
-#~ msgstr "Bagus"
-
-#~ msgctxt "Battery power"
-#~ msgid "Fully charged"
-#~ msgstr "Terisi penuh"
-
-#~ msgctxt "Battery power"
-#~ msgid "Empty"
-#~ msgstr "Kosong"
-
-#~ msgid "Previous source"
-#~ msgstr "Sumber sebelumnya"
-
-#~ msgid "Super+Shift+Space"
-#~ msgstr "Super+Shift+Spasi"
-
-#~ msgid "Next source"
-#~ msgstr "Sumber selanjutnya"
-
-#~ msgid "Super+Space"
-#~ msgstr "Super+Spasi"
-
-#~ msgid "Left+Right Alt"
-#~ msgstr "Alt Kiri+Kanan"
-
-#~ msgid "Universal Access"
-#~ msgstr "Akses Universal"
-
-#~ msgid "Switch off to connect to a Wi-Fi network"
-#~ msgstr "Matikan untuk menyambung ke jaringan Wi-Fi"
-
-#~ msgctxt "Wi-Fi passkey"
-#~ msgid "Password"
-#~ msgstr "Kata Sandi"
-
-#~ msgid "Enable Fingerprint Login"
-#~ msgstr "Fungsikan Log Masuk Sidik Jari"
-
-#~ msgid "_Other finger:"
-#~ msgstr "Jari _lain:"
-
-#~ msgid ""
-#~ "Your fingerprint was successfully saved. You should now be able to log in "
-#~ "using your fingerprint reader."
-#~ msgstr ""
-#~ "Sidik jari Anda telah berhasil disimpan. Anda sekarang dapat log masuk "
-#~ "memakai pembaca sidik jari Anda."
-
-#~ msgid ""
-#~ "You are not allowed to access the device. Contact your system "
-#~ "administrator."
-#~ msgstr ""
-#~ "Anda tidak diizinkan mengakses perangkat. Hubungi administrator sistem "
-#~ "Anda."
-
-#~ msgid "An internal error occurred."
-#~ msgstr "Terjadi galat internal."
-
-#~ msgid "Delete registered fingerprints?"
-#~ msgstr "Hapus sidik jari yang telah terdaftar?"
-
-#~ msgid "Done!"
-#~ msgstr "Selesai!"
-
-#~ msgid "Could not access “%s” device"
-#~ msgstr "Tak dapat mengakses perangkat \"'%s\""
-
-#~ msgid "Could not start finger capture on “%s” device"
-#~ msgstr "Tak dapat memulai penangkapan sidik jari pada perangkat \"%s\""
-
-#~ msgid "Could not access any fingerprint readers"
-#~ msgstr "Tak dapat mengakses pembaca sidik jari manapun"
-
-#~ msgid "Please contact your system administrator for help."
-#~ msgstr "Silahkan hubungi administrator sistem Anda untuk bantuan."
-
-#~ msgid ""
-#~ "To enable fingerprint login, you need to save one of your fingerprints, "
-#~ "using the “%s” device."
-#~ msgstr ""
-#~ "Untuk memfungsikan log masuk sidik jari, Anda perlu menyimpan sidik jari "
-#~ "Anda, memakai perangkat \"%s\"."
-
-#~ msgid "Selecting finger"
-#~ msgstr "Memilih jari"
-
-#~ msgid "∶"
-#~ msgstr "∶"
-
-#~ msgid "Add user accounts and change passwords"
-#~ msgstr "Tambah akun dan ubah kata sandi pengguna"
-
-#~ msgid "Play and record sound"
-#~ msgstr "Putar dan rekam suara"
-
-#~ msgid "Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)"
-#~ msgstr ""
-#~ "Deteksi perangkat jaringan menggunakan mDNS/DNS-SD (Bonjour/zeroconf)"
-
-#~ msgid "Access bluetooth hardware directly"
-#~ msgstr "Akses perangkat bluetooth secara langsung"
-
-#~ msgid "Use bluetooth devices"
-#~ msgstr "Gunakan perangkat bluetooth"
-
-#~ msgid "Use your camera"
-#~ msgstr "Gunakan kamera Anda"
-
-#~ msgid "Print documents"
-#~ msgstr "Cetak dokumen"
-
-#~ msgid "Use any connected joystick"
-#~ msgstr "Gunakan sembarang joystick yang terhubung"
-
-#~ msgid "Allow connecting to the Docker service"
-#~ msgstr "Izinkan menyambung dengan layanan Docker"
-
-#~ msgid "Configure network firewall"
-#~ msgstr "Atur firewall jaringan"
-
-#~ msgid "Setup and use privileged FUSE filesystems"
-#~ msgstr "Atur dan gunakan sistem berkas FUSE dengan hak istimewa"
-
-#~ msgid "Update firmware on this device"
-#~ msgstr "Perbarui firmware perangkat ini"
-
-#~ msgid "Access hardware information"
-#~ msgstr "Akses informasi perangkat keras"
-
-#~ msgid "Provide entropy to hardware random number generator"
-#~ msgstr "Lengkapi entropi untuk generator angka acak perangkat keras"
-
-#~ msgid "Use hardware-generated random numbers"
-#~ msgstr "Gunakan nomor acak yang dihasilkan perangkat keras"
-
-#~ msgid "Access files in your home folder"
-#~ msgstr "Akses berkas dalam folder rumah"
-
-#~ msgid "Access libvirt service"
-#~ msgstr "Akses layanan libvirt"
-
-#~ msgid "Change system language and region settings"
-#~ msgstr "Ubah pengaturan bahasa dan wilayah sistem"
-
-#~ msgid "Change location settings and providers"
-#~ msgstr "Ubah pengaturan lokasi dan penyedia"
-
-#~ msgid "Access your location"
-#~ msgstr "Akses lokasi Anda"
-
-#~ msgid "Read system and application logs"
-#~ msgstr "Baca log sistem dan aplikasi"
-
-#~ msgid "Access LXD service"
-#~ msgstr "Akses layanan LXD"
-
-#~ msgid "access the media-hub service"
-#~ msgstr "akses layanan media-hub"
-
-#~ msgid "Use and configure modems"
-#~ msgstr "Atur dan gunakan modem"
-
-#~ msgid "Read system mount information and disk quotas"
-#~ msgstr "Baca informasi sistem kait dan kuota diska"
-
-#~ msgid "Control music and video players"
-#~ msgstr "Kontrol pemutar musik dan video"
-
-#~ msgid "Change low-level network settings"
-#~ msgstr "Ubah pengaturan jaringan tingkat-rendah"
-
-#~ msgid ""
-#~ "Access the NetworkManager service to read and change network settings"
-#~ msgstr ""
-#~ "Akses layanan NetworkManager untuk membaca dan mengubah pengaturan "
-#~ "jaringan"
-
-#~ msgid "Read access to network settings"
-#~ msgstr "Akses baca untuk pengaturan jaringan"
-
-#~ msgid "Change network settings"
-#~ msgstr "Ubah pengaturan jaringan"
-
-#~ msgid "Read network settings"
-#~ msgstr "Baca pengaturan jaringan"
-
-#~ msgid ""
-#~ "Access the ofono service to read and change network settings for mobile "
-#~ "telephony"
-#~ msgstr ""
-#~ "Akses layanan ofono untuk membaca dan mengubah pengaturan jaringan untuk "
-#~ "telepon seluler"
-
-#~ msgid "Control Open vSwitch hardware"
-#~ msgstr "Kontrol perangkat keras Open vSwitch"
-
-#~ msgid "Read from CD/DVD"
-#~ msgstr "Baca dari CD/DVD"
-
-#~ msgid "Read, add, change, or remove saved passwords"
-#~ msgstr "Baca, tambah, ubah, atau hapus kata sandi tersimpan"
-
-#~ msgid ""
-#~ "Access pppd and ppp devices for configuring Point-to-Point Protocol "
-#~ "connections"
-#~ msgstr ""
-#~ "Akses perangkat pppd dan ppp untuk mengatur koneksi Protokol Point-to-"
-#~ "Point"
-
-#~ msgid "Pause or end any process on the system"
-#~ msgstr "Jeda atau akhiri semua proses pada sistem"
-
-#~ msgid "Access USB hardware directly"
-#~ msgstr "Akses perangkat USB langsung"
-
-#~ msgid "Read/write files on removable storage devices"
-#~ msgstr "Baca/tulis berkas ke dalam perangkat penyimpanan lepasan"
-
-#~ msgid "Prevent screen sleep/lock"
-#~ msgstr "Cegah tidur/kunci layar"
-
-#~ msgid "Access serial port hardware"
-#~ msgstr "Akses perangkat keras port serial"
-
-#~ msgid "Restart or power off the device"
-#~ msgstr "Nyalakan ulang atau matikan perangkat"
-
-#~ msgid "Install, remove and configure software"
-#~ msgstr "Pasang, hapus, dan konfigurasi perangkat lunak"
-
-#~ msgid "Access Storage Framework service"
-#~ msgstr "Akses layanan Storage Framework"
-
-#~ msgid "Read process and system information"
-#~ msgstr "Baca informasi proses dan sistem"
-
-#~ msgid "Monitor and control any running program"
-#~ msgstr "Monitor dan kontrol semua program berjalan"
-
-#~ msgid "Change the date and time"
-#~ msgstr "Ubah tanggal dan waktu"
-
-#~ msgid "Change time server settings"
-#~ msgstr "Ubah pengaturan waktu peladen"
-
-#~ msgid "Change the time zone"
-#~ msgstr "Ubah zona waktu"
-
-#~ msgid "Access the UDisks2 service for configuring disks and removable media"
-#~ msgstr "Akses layanan UDisk2 untuk mengkonfigurasi diska dan media lepasan"
-
-#~ msgid "Read/change shared calendar events in Ubuntu Unity 8"
-#~ msgstr "Baca/ubah acara kalender bersama di Ubuntu Unity 8"
-
-#~ msgid "Read/change shared contacts in Ubuntu Unity 8"
-#~ msgstr "Baca/ubah kontak bersama di Ubuntu Unity 8"
-
-#~ msgid "Access energy usage data"
-#~ msgstr "Akses data penggunaan energi"
-
-#~ msgid "Read/write access to U2F devices exposed"
-#~ msgstr "Baca/tulis akses ke perangkat U2F terbuka"
-
-#~ msgid ""
-#~ "To create a user account,\n"
-#~ "click the * icon first"
-#~ msgstr ""
-#~ "Untuk membuat akun pengguna,\n"
-#~ "pertama kali klik ikon *"
-
-#~ msgid "Set Background and Lock Screen"
-#~ msgstr "Atur Latar Belakang dan Layar Kunci"
-
-#~ msgid "Set Background"
-#~ msgstr "Atur Latar Belakang"
-
-#~ msgid "Set Lock Screen"
-#~ msgstr "Atur Layar Kunci"
-
-#~ msgid "Remove Background"
-#~ msgstr "Hapus Latar Belakang"
-
-#~ msgid "Reports are sent anonymously and are scrubbed of personal data."
-#~ msgstr "Laporan dikirim secara anonim dan dibersihkan dari data pribadi."
-
-#~ msgid ""
-#~ "Sending reports of technical problems help us improve this operating "
-#~ "system."
-#~ msgstr ""
-#~ "Mengirim laporan masalah teknis membantu kami memperbaiki sistem operasi "
-#~ "ini."
-
-#~ msgid "Last Login"
-#~ msgstr "Log Masuk Terakhir"
-
-#~ msgid "Notification _Popups"
-#~ msgstr "_Popup Notifikasi"
-
-#~ msgid "Restrict _background data usage"
-#~ msgstr "Batasi _penggunaan data di belakang"
-
-#~ msgid "Appropriate for connections that have data charges or limits."
-#~ msgstr "Cocok untuk koneksi yang memiliki biaya atau batas data."
-
-#~ msgid "Version %s"
-#~ msgstr "Versi %s"
-
-#~ msgid "OS name"
-#~ msgstr "Nama SO (Sistem Operasi)"
-
-#~ msgid "OS type"
-#~ msgstr "Tipe SO (Sistem Operasi)"
-
-#~ msgid "Disk"
-#~ msgstr "Diska"
-
-#~ msgid "Check for updates"
-#~ msgstr "Memeriksa pemutakhiran"
-
-#~ msgid "Network proxy"
-#~ msgstr "Proxy jaringan"
-
-#~ msgid "page 1"
-#~ msgstr "halaman 1"
-
-#~ msgid "Inner _authentication"
-#~ msgstr "Otentik_asi dalam"
-
-#~ msgid "page 2"
-#~ msgstr "halaman 2"
-
-#~ msgid "Twisted Pair (TP)"
-#~ msgstr "Twisted Pair (TP)"
-
-#~ msgid "Attachment Unit Interface (AUI)"
-#~ msgstr "Attachment Unit Interface (AUI)"
-
-#~ msgid "BNC"
-#~ msgstr "BNC"
-
-#~ msgid "Media Independent Interface (MII)"
-#~ msgstr "Media Independent Interface (MII)"
-
-#~ msgid "10 Mb/s"
-#~ msgstr "10 Mb/s"
-
-#~ msgid "100 Mb/s"
-#~ msgstr "100 Mb/s"
-
-#~ msgid "1 Gb/s"
-#~ msgstr "1 Gb/s"
-
-#~ msgid "10 Gb/s"
-#~ msgstr "10 Gb/s"
-
-#~ msgid ""
-#~ "Switching on the wireless hotspot will disconnect you from <b>%s</b>."
-#~ msgstr "Mengaktifkan hotspot nirkabel akan memutuskan Anda dari <b>%s</b>."
-
-#~ msgid ""
-#~ "It is not possible to access the Internet through your wireless while the "
-#~ "hotspot is active."
-#~ msgstr ""
-#~ "Anda tidak dapat mengakses Internet melalui nirkabel Anda selama hotspot "
-#~ "aktif."
-
-#~ msgid ""
-#~ "Wi-Fi hotspots are usually used to share an additional Internet "
-#~ "connection over Wi-Fi."
-#~ msgstr ""
-#~ "Wi-Fi hotspot biasanya digunakan untuk berbagi koneksi internet tambahan "
-#~ "melalui Wi-Fi."
-
-#~ msgid "Automatic _Connect"
-#~ msgstr "_Menyambung Otomatis"
-
-#~ msgid "details"
-#~ msgstr "rincian"
-
-#~ msgid "Show P_assword"
-#~ msgstr "Tampilkan Kata S_andi"
-
-#~ msgid "Make available to other users"
-#~ msgstr "Jadikan tersedia bagi pengguna lain"
-
-#~ msgid "identity"
-#~ msgstr "identitas"
-
-#~ msgid "IPv_4"
-#~ msgstr "IPv_4"
-
-#~ msgid "_Addresses"
-#~ msgstr "_Alamat"
-
-#~ msgid "Automatic (DHCP) addresses only"
-#~ msgstr "Otomatis (DHCP) hanya alamat"
-
-#~ msgid "Link-local only"
-#~ msgstr "Hanya link-Lokal"
-
-#~ msgid "_Ignore automatically obtained routes"
-#~ msgstr "Aba_ikan route yang diperoleh secara otomatis"
-
-#~ msgid "ipv4"
-#~ msgstr "ipv4"
-
-#~ msgid "IPv_6"
-#~ msgstr "IPv_6"
-
-#~ msgid "ipv6"
-#~ msgstr "ipv6"
-
-#~ msgid "_Cloned MAC Address"
-#~ msgstr "Alamat MA_C yang diklon"
-
-#~ msgid "_Reset"
-#~ msgstr "_Reset"
-
-#~ msgid ""
-#~ "Reset the settings for this connection to their defaults, but remember as "
-#~ "a preferred connection."
-#~ msgstr ""
-#~ "Reset pengaturan bagi koneksi ini ke nilai bakunya, tapi ingat sebagai "
-#~ "koneksi yang disukai."
-
-#~ msgid ""
-#~ "Remove all details relating to this network and do not try to "
-#~ "automatically connect to it."
-#~ msgstr ""
-#~ "Hapus semua rincian terkait jaringan ini dan jangan coba menyambung "
-#~ "secara otmatis kepadanya."
-
-#~ msgid "Hardware"
-#~ msgstr "Perangkat keras"
-
-#~ msgctxt "tab"
-#~ msgid "Reset"
-#~ msgstr "Reset"
-
-#~ msgid "Connected Devices"
-#~ msgstr "Perangkat Yang Tersambung"
-
-#~ msgid "Ad-hoc"
-#~ msgstr "Ad-Hoc"
-
-#~ msgid "Infrastructure"
-#~ msgstr "Infrastruktur"
-
-#~ msgid "Not connected"
-#~ msgstr "Tak tersambung"
-
-#~ msgid "In use"
-#~ msgstr "Dipakai"
-
-#~ msgctxt "Location services status"
-#~ msgid "On"
-#~ msgstr "Nyala"
-
-#~ msgctxt "Location services status"
-#~ msgid "Off"
-#~ msgstr "Mati"
-
-#~ msgctxt "Camera status"
-#~ msgid "Off"
-#~ msgstr "Mati"
-
-#~ msgctxt "Camera status"
-#~ msgid "On"
-#~ msgstr "Nyala"
-
-#~ msgctxt "Microphone status"
-#~ msgid "Off"
-#~ msgstr "Mati"
-
-#~ msgctxt "Microphone status"
-#~ msgid "On"
-#~ msgstr "Nyala"
-
-#~ msgid "Privacy Policy"
-#~ msgstr "Kebijakan Privasi"
-
-#~ msgid ""
-#~ "Remembering your history makes things easier to find again. These items "
-#~ "are never shared over the network."
-#~ msgstr ""
-#~ "Mengingat riwayat Anda membuat lebih mudah mencari lagi berbagai hal. "
-#~ "Butir-butir ini tak pernah diungkap melalui jaringan."
-
-#~ msgid "_Recently Used"
-#~ msgstr "Ba_ru-baru Ini Dipakai"
-
-#~ msgid "Retain _History"
-#~ msgstr "Perta_hankan Riwayat"
-
-#~ msgid "The Screen Lock protects your privacy when you are away."
-#~ msgstr "Kuncian Layar melindungi privasi Anda ketika Anda pergi."
-
-#~ msgid "Lock screen _after blank for"
-#~ msgstr "Kunci layar setel_ah kosong selama"
-
-#~ msgid "Lock Screen _Notifications"
-#~ msgstr "_Notifikasi Layar Kunci"
-
-#~ msgid ""
-#~ "Automatically purge the Trash and temporary files to help keep your "
-#~ "computer free of unnecessary sensitive information."
-#~ msgstr ""
-#~ "Secara otomatis membersihkan Tong sampah dan berkas temporer untuk "
-#~ "membantu menjaga komputer Anda bebas dari informasi sensitif yang tak "
-#~ "diperlukan."
-
-#~ msgid "Purge _After"
-#~ msgstr "Bersihkan Setel_ah"
-
-#~ msgid ""
-#~ "Sending us information about which software you use helps us provide you "
-#~ "with more accurate recommendations. It also helps us to improve our "
-#~ "software.\n"
-#~ "\n"
-#~ "All the information we collect is made anonymous, and we will never share "
-#~ "your data with third parties."
-#~ msgstr ""
-#~ "Mengirimi kami informasi tentang perangkat lunak mana yang Anda pakai "
-#~ "membantu kami menyediakan rekomendasi yang lebih akurat. Itu juga "
-#~ "membantu kami memperbaiki perangkat lunak kami.\n"
-#~ "\n"
-#~ "Semua informasi yang kami kumpulkan dibuat anonim, dan kami tak akan "
-#~ "pernah membagikan data Anda dengan pihak ketiga."
-
-#~ msgid "_Send software usage statistics"
-#~ msgstr "Kirim _statistik penggunaan perangkat lunak"
-
-#~ msgid "_Camera"
-#~ msgstr "_Kamera"
-
-#~ msgid "_Microphone"
-#~ msgstr "_Mikrofon"
-
-#~ msgid "_Location Services"
-#~ msgstr "Layanan _Lokasi"
-
-#~ msgid "Protect your personal information and control what others might see"
-#~ msgstr ""
-#~ "Lindungi informasi pribadi Anda dan kendalikan apa yang mungkin dilihat "
-#~ "oleh orang"
-
-#~ msgid "No regions found"
-#~ msgstr "Wilayah tak ditemukan"
-
-#~ msgid "Flash the _window title"
-#~ msgstr "Kedipkan judul _jendela"
-
-#~ msgid "The username cannot start with a “-”."
-#~ msgstr "Nama pengguna tak boleh diawali dengan \"-\"."
-
-#~ msgid "Delete Background"
-#~ msgstr "Hapus Latar Belakang"
-
-#~ msgid "_Off"
-#~ msgstr "Mat_i"
-
-#~ msgid "_Automatic suspend"
-#~ msgstr "Suspensi otom_atis"
-
-#~ msgid "_When the Power Button is pressed"
-#~ msgstr "Ketika Tombol Po_wer ditekan"
-
-#~ msgid "_Background"
-#~ msgstr "Latar _Belakang"
-
-#~ msgid "Changes throughout the day"
-#~ msgstr "Perubahan sepanjang hari"
-
-#~ msgctxt "background, style"
-#~ msgid "Tile"
-#~ msgstr "Ubin"
-
-#~ msgctxt "background, style"
-#~ msgid "Zoom"
-#~ msgstr "Zum"
-
-#~ msgctxt "background, style"
-#~ msgid "Center"
-#~ msgstr "Pusat"
-
-#~ msgctxt "background, style"
-#~ msgid "Scale"
-#~ msgstr "Skala"
-
-#~ msgctxt "background, style"
-#~ msgid "Fill"
-#~ msgstr "Isi"
-
-#~ msgctxt "background, style"
-#~ msgid "Span"
-#~ msgstr "Jarak"
-
-#~ msgid "Wallpapers"
-#~ msgstr "Gambar latar"
-
-#~ msgid "Colors"
-#~ msgstr "Warna"
-
-#~ msgid "Pictures"
-#~ msgstr "Gambar"
-
-#~ msgid "No Pictures Found"
-#~ msgstr "Tak Ditemukan Gambar"
-
-#~ msgid "You can add images to your %s folder and they will show up here"
-#~ msgstr ""
-#~ "Anda dapat menambahkan citra ke folder %s Anda dan mereka akan muncul di "
-#~ "sini"
-
-#~ msgid "application-x-executable"
-#~ msgstr "application-x-executable"
-
-#~ msgid "preferences-desktop-wallpaper"
-#~ msgstr "preferences-desktop-wallpaper"
-
-#~ msgid "bluetooth"
-#~ msgstr "bluetooth"
-
-#~ msgid "preferences-color"
-#~ msgstr "preferences-color"
-
-#~ msgid "preferences-system-time"
-#~ msgstr "preferences-system-time"
-
-#~ msgid "preferences-desktop-display"
-#~ msgstr "preferences-desktop-display"
-
-#~ msgid "starred"
-#~ msgstr "starred"
-
-#~ msgid "help-about"
-#~ msgstr "help-about"
-
-#~ msgid "media-removable"
-#~ msgstr "media-removable"
-
-#~ msgid "input-keyboard"
-#~ msgstr "input-keyboard"
-
-#~ msgid "input-mouse"
-#~ msgstr "input-mouse"
-
-#~ msgid "Connection/SSID"
-#~ msgstr "Koneksi/SSID"
-
-#~ msgid "network-workgroup"
-#~ msgstr "network-workgroup"
-
-#~ msgid "network-wireless"
-#~ msgstr "network-wireless"
-
-#~ msgid "preferences-system-notifications"
-#~ msgstr "preferences-system-notifications"
-
-#~ msgid "goa-panel"
-#~ msgstr "goa-panel"
-
-#~ msgid "gnome-power-manager"
-#~ msgstr "gnome-power-manager"
-
-#~ msgid "printer"
-#~ msgstr "printer"
-
-#~ msgid "preferences-system-privacy"
-#~ msgstr "preferences-system-privacy"
-
-#~ msgid "preferences-desktop-locale"
-#~ msgstr "preferences-desktop-locale"
-
-#~ msgid "preferences-system-search"
-#~ msgstr "preferences-system-search"
-
-#~ msgid "preferences-system-sharing"
-#~ msgstr "preferences-system-sharing"
-
-#~ msgid "multimedia-volume-control"
-#~ msgstr "multimedia-volume-control"
-
-#~ msgid "thunderbolt"
-#~ msgstr "thunderbolt"
-
-#~ msgid "preferences-desktop-accessibility"
-#~ msgstr "preferences-desktop-accessibility"
-
-#~ msgid "system-users"
-#~ msgstr "system-users"
-
-#~ msgid "input-tablet"
-#~ msgstr "input-tablet"
-
-#~ msgid "org.gnome.Settings"
-#~ msgstr "org.gnome.Settings"
-
-#~ msgid "_Night Light"
-#~ msgstr "Tera_ng Malam"
-
-#~ msgid "Could not get screen information"
-#~ msgstr "Tak mendapatkan informasi layar"
-
-#~ msgid "My Home Network"
-#~ msgstr "Jaringan Rumahku"
-
-#~ msgid "hardware"
-#~ msgstr "perangkat keras"
-
-#~ msgid "Switch to previous source"
-#~ msgstr "Bertukar ke sumber sebelumnya"
-
-#~ msgid "Switch to next source"
-#~ msgstr "Bertukar ke sumber selanjutnya"
-
-#~ msgid "Alternative switch to next source"
-#~ msgstr "Penukaran alternatif ke sumber selanjutnya"
-
-#~ msgid "English (United Kingdom)"
-#~ msgstr "Inggris (Britania)"
-
-#~ msgid "United Kingdom"
-#~ msgstr "Kerajaan Britania"
-
-#~ msgid "_Options"
-#~ msgstr "_Pilihan"
-
-#~ msgid "Add input source"
-#~ msgstr "Tambah sumber masukan"
-
-#~ msgid "Remove input source"
-#~ msgstr "Hapus sumber masukan"
-
-#~ msgid "Move input source up"
-#~ msgstr "Naikkan sumber masukan"
-
-#~ msgid "Move input source down"
-#~ msgstr "Turunkan sumber masukan"
-
-#~ msgid "Show input source keyboard layout"
-#~ msgstr "Tampilkan tata letak papan tik sumber masukan"
-
-#~ msgctxt "balance"
-#~ msgid "Left"
-#~ msgstr "Kiri"
-
-#~ msgctxt "balance"
-#~ msgid "Right"
-#~ msgstr "Kanan"
-
-#~ msgctxt "balance"
-#~ msgid "Minimum"
-#~ msgstr "Minimal"
-
-#~ msgctxt "balance"
-#~ msgid "Maximum"
-#~ msgstr "Maksimal"
-
-#~ msgid "_Subwoofer:"
-#~ msgstr "_Subwoofer:"
-
-#~ msgid "_Profile:"
-#~ msgstr "_Profil:"
-
-#~ msgid "_Test Speakers"
-#~ msgstr "_Uji Speaker"
-
-#~ msgid "Peak detect"
-#~ msgstr "Deteksi puncak"
-
-#~ msgid "Device"
-#~ msgstr "Perangkat"
-
-#~ msgid "Speaker Testing for %s"
-#~ msgstr "Pengujian Speaker bagi %s"
-
-#~ msgid "C_hoose a device for sound output:"
-#~ msgstr "Pili_h perangkat bagi keluaran suara:"
-
-#~ msgid "Settings for the selected device:"
-#~ msgstr "Tatanan bagi perangkat yang dipilih:"
-
-#~ msgid "_Input volume:"
-#~ msgstr "Volume _masukan:"
-
-#~ msgid "C_hoose a device for sound input:"
-#~ msgstr "Pili_h perangkat bagi masukan suara:"
-
-#~ msgid "Sound Effects"
-#~ msgstr "Efek Suara"
-
-#~ msgid "Built-in"
-#~ msgstr "Bawaan"
-
-#~ msgid "Sound Preferences"
-#~ msgstr "Preferensi Suara"
-
-#~ msgid "Testing event sound"
-#~ msgstr "Menguji suara peristiwa"
-
-#~ msgid "From theme"
-#~ msgstr "Dari tema"
-
-#~ msgid "C_hoose an alert sound:"
-#~ msgstr "Pili_h suara waspada:"
-
-#~ msgid "Stop"
-#~ msgstr "Berhenti"
-
-#~ msgctxt "Account type"
-#~ msgid "Standard"
-#~ msgstr "Standar"
-
-#~ msgctxt "Account type"
-#~ msgid "Administrator"
-#~ msgstr "Administrator"
-
-#~ msgid "page 3"
-#~ msgstr "halaman 3"
-
-#~ msgid "GNOME Control Center"
-#~ msgstr "Pusat Kendali GNOME"
-
-#~ msgid ""
-#~ "The control center is GNOME’s main interface for configuration of various "
-#~ "aspects of your desktop."
-#~ msgstr ""
-#~ "Pusat kendali adalah antar muka utama GNOME untuk mengatur berbagai aspek "
-#~ "destop Anda."
-
-#~ msgid "Quit"
-#~ msgstr "Keluar"
-
-#~ msgid "gnome-control-center"
-#~ msgstr "gnome-control-center"
-
-#~ msgid "_Verify New Password"
-#~ msgstr "_Verifikasi Sandi Baru"
-
-#~ msgid "Passwords do not match."
-#~ msgstr "Sandi tak cocok."
-
-#~ msgid "Show the overview"
-#~ msgstr "Tampilkan ringkasan"
-
-#~ msgid "Place your left thumb on %s"
-#~ msgstr "Letakkan ibu jari kiri pada %s"
-
-#~ msgid "Swipe your left thumb on %s"
-#~ msgstr "Gesek jempol kiri Anda pada %s"
-
-#~ msgid "Place your left index finger on %s"
-#~ msgstr "LEtakkan jari telunjuk kiri Anda pada %s"
-
-#~ msgid "Swipe your left index finger on %s"
-#~ msgstr "Gesek jari telunjuk kiri Anda pada %s"
-
-#~ msgid "Place your left middle finger on %s"
-#~ msgstr "Letakkan jari tengah kiri Anda pada %s"
-
-#~ msgid "Swipe your left middle finger on %s"
-#~ msgstr "Gesek jari tengah kiri Anda pada %s"
-
-#~ msgid "Place your left ring finger on %s"
-#~ msgstr "Letakkan jari manis kiri Anda pada %s"
-
-#~ msgid "Swipe your left ring finger on %s"
-#~ msgstr "Gesek jari manis kiri Anda pada %s"
-
-#~ msgid "Place your left little finger on %s"
-#~ msgstr "Letakkan jari kelingking kiri Anda pada %s"
-
-#~ msgid "Swipe your left little finger on %s"
-#~ msgstr "Gesek jari kelingking kiri Anda pada %s"
-
-#~ msgid "Place your right thumb on %s"
-#~ msgstr "Letakkan ibu jari kanan pada %s"
-
-#~ msgid "Swipe your right thumb on %s"
-#~ msgstr "Gesek jempol kanan Anda pada %s"
-
-#~ msgid "Place your right index finger on %s"
-#~ msgstr "Letakkan jari telunjuk kanan Anda pada %s"
-
-#~ msgid "Swipe your right index finger on %s"
-#~ msgstr "Gesek jari telunjuk kanan Anda pada %s"
-
-#~ msgid "Place your right middle finger on %s"
-#~ msgstr "Letakkan jari tengah kanan Anda pada %s"
-
-#~ msgid "Swipe your right middle finger on %s"
-#~ msgstr "Gesek jari tengah kanan Anda pada %s"
-
-#~ msgid "Place your right ring finger on %s"
-#~ msgstr "Letakkan jari manis kanan Anda di %s"
-
-#~ msgid "Swipe your right ring finger on %s"
-#~ msgstr "Gesek jari manis kanan Anda pada %s"
-
-#~ msgid "Place your right little finger on %s"
-#~ msgstr "Letakkan jari kelingking kanan Anda pada %s"
-
-#~ msgid "Swipe your right little finger on %s"
-#~ msgstr "Gesek jari kelingking kanan Anda pada %s"
-
-#~ msgid "Place your finger on the reader again"
-#~ msgstr "Letakkan jari Anda di pembaca lagi"
-
-#~ msgid "Swipe your finger again"
-#~ msgstr "Gesek jari Anda lagi"
-
-#~ msgid "Swipe was too short; try again"
-#~ msgstr "Gesek terlalu pendek; coba lagi"
-
-#~ msgid "Your finger was not centered; try swiping your finger again"
-#~ msgstr "Jari Anda tidak terpusat; coba gesek jari Anda lagi"
-
-#~ msgid "Remove your finger and try swiping it again"
-#~ msgstr "Lepaskan jari Anda dan coba gesek lagi"
-
-#~ msgid "Swipe was too short, try again"
-#~ msgstr "Gesek terlalu pendek, coba lagi"
-
-#~ msgid "Your finger was not centered, try swiping your finger again"
-#~ msgstr "Jari Anda tidak terpusat, coba gesek jari Anda lagi"
-
-#~ msgid "Remove your finger, and try swiping your finger again"
-#~ msgstr "Lepaskan jari Anda, dan coba gesek jari Anda lagi"
-
-#~ msgid "Disable image"
-#~ msgstr "Tanpa gambar"
-
-#~ msgid "Browse for more pictures…"
-#~ msgstr "Ramban lebih banyak gambar…"
-
-#~ msgid "Used by %s"
-#~ msgstr "Dipakai oleh %s"
-
-#~ msgid "Back­ground"
-#~ msgstr "Latar Belakang"
-
-#~ msgid "Blue­tooth"
-#~ msgstr "Bluetooth"
-
-#~ msgid "Co­lor"
-#~ msgstr "Warna"
-
-#~ msgid "Section"
-#~ msgstr "Seksi"
-
-#~ msgid "Overview"
-#~ msgstr "Ringkasan"
-
-#~ msgid "Defa­ult Applications"
-#~ msgstr "Aplikasi Bawaan"
-
-#~ msgid "Ab­out"
-#~ msgstr "Tentang"
-
-#~ msgid "De­tails"
-#~ msgstr "Rincian"
-
-#~ msgid "Remo­vable Media"
-#~ msgstr "Media Lepasan"
-
-#~ msgid "Net­work"
-#~ msgstr "Jaringan"
-
-#~ msgid "No­ti­fi­ca­tions"
-#~ msgstr "Notifikasi"
-
-#~ msgid "Po­wer"
-#~ msgstr "Daya"
-
-#~ msgid "Pri­va­cy"
-#~ msgstr "Privasi"
-
-#~ msgid "Sha­ring"
-#~ msgstr "Berbagi"
-
-#~ msgid "Uni­ver­sal Access"
-#~ msgstr "Akses Universal"
-
-#~ msgid "Wa­com Tab­let"
-#~ msgstr "Tablet Wacom"
-
-#~ msgctxt "category"
-#~ msgid "Hardware"
-#~ msgstr "Perangkat keras"
-
-#~ msgctxt "category"
-#~ msgid "System"
-#~ msgstr "Sistem"
-
-#~ msgid "Apply"
-#~ msgstr "Terapkan"
