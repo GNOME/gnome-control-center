@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-10 12:39+0000\n"
-"PO-Revision-Date: 2021-08-12 09:35+0200\n"
+"POT-Creation-Date: 2021-08-30 13:20+0000\n"
+"PO-Revision-Date: 2021-08-31 21:53+0200\n"
 "Last-Translator: Matej Urbančič <mateju@src.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -52,7 +52,8 @@ msgstr "Poln dostop do mape /dev"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Omrežje"
 
@@ -204,6 +205,7 @@ msgstr "Kamera"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Onemogočeno"
@@ -380,6 +382,9 @@ msgstr "Izbor slike"
 #: panels/user-accounts/cc-user-panel.c:633
 #: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "_Prekliči"
 
@@ -752,6 +757,7 @@ msgstr "Shrani profil"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Shrani"
 
@@ -1796,6 +1802,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:437
 #: panels/info-overview/cc-info-overview-panel.c:483
 #: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Neznano"
 
@@ -2297,6 +2304,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "Prekliči"
 
@@ -2325,7 +2333,8 @@ msgstr "Ni določene tipkovne bližnjice"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Nazaj"
 
@@ -2372,6 +2381,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Ime"
 
@@ -2392,6 +2402,7 @@ msgid "None"
 msgstr "Brez"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Dodaj"
 
@@ -2652,6 +2663,7 @@ msgstr "Zaščita pogovorov"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Splošno"
 
@@ -2767,12 +2779,96 @@ msgstr ""
 "Sledilna ploščica;Kazalnik;Klik;Udarjanje;Dvojni;Gumb;Sledilna kroglica;"
 "Drsnik;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "_Vroči kot"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr "Dotik levega zgornjega kota odpre pregled dejavnosti."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "_Dejavni robovi zaslona"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Dotik okna z zgornjim, levim ali desnim robom sproži dejanje prilagajanja "
+"velikosti okna."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "Delovne površine"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "_Dinamične delovne površine"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "Samodejno odstrani prazne delovne površine"
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "_Določeno število delovnih površin"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "Število števila prikazanih delovnih površin"
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "_Število delovnih površin"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+#, fuzzy
+#| msgid "Monitor"
+msgid "Multi-Monitor"
+msgstr "Zaslon"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+#, fuzzy
+#| msgid "Drag to change primary display."
+msgid "Workspaces on _primary display only"
+msgstr "Vlecite za spremembo glavnega zaslona."
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "_Delovne površine naj bodo na vseh zaslonih"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "Preklapljanje programov"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "Vključi programe _vseh delovnih površin"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr ""
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "Večopravilnost"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "Upravljanje nastavitev za učinkovito delo in večopravilnost"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr ""
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ojoj, prišlo je do napake. Stopite v stik s ponudnikom programske opreme."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "Program NetworkManager mora biti zagnan."
 
@@ -2790,29 +2886,29 @@ msgid "Not set up"
 msgstr "Ni nastavljeno"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:208
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:262
 msgid "Insecure network (WEP)"
 msgstr "Ne-varno omrežje (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Varno omrežje (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA2)"
 msgstr "Varno omrežje (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA3)"
 msgstr "Varno omrežje (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:288
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "Varno omrežje"
 
@@ -2821,7 +2917,7 @@ msgstr "Varno omrežje"
 msgid "Connected"
 msgstr "Povezano"
 
-#: panels/network/cc-wifi-connection-row.ui:100
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
@@ -2872,6 +2968,7 @@ msgstr "Ime omrežja"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Geslo"
 
@@ -2919,7 +3016,7 @@ msgstr "Ni najdenega vmesnika Wi-Fi"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Prepričajte se, da je vmesnik Wi-Fi priklopljen in omogočen."
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Letalski način je omogočen"
 
@@ -3219,6 +3316,7 @@ msgid "WPA3 Personal"
 msgstr "Osebni WPA3"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Moč signala"
 
@@ -3618,6 +3716,7 @@ msgid "Turn device off"
 msgstr "Izklopi napravo"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3941,7 +4040,7 @@ msgid "SIM Puk required"
 msgstr "Zahtevana je šifra SIM PUK"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "Kartica SIM je neustrezna"
 
@@ -4060,7 +4159,7 @@ msgstr "_Uporabniško ime"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:363
+#: panels/user-accounts/cc-user-panel.ui:364
 msgid "_Password"
 msgstr "_Geslo"
 
@@ -4923,7 +5022,7 @@ msgstr "Overi"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Uporabniško ime"
 
@@ -4979,6 +5078,7 @@ msgstr "Dodaj tiskalnik"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Odkleni"
 
@@ -5393,6 +5493,7 @@ msgstr "Brez predhodnega filtriranja"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Proizvajalec"
 
@@ -5543,6 +5644,7 @@ msgid "Remove Printer"
 msgstr "Odstrani tiskalnik"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Model"
 
@@ -5667,7 +5769,7 @@ msgid "The language used for text in windows and web pages."
 msgstr "Jezik, uporabljen za besedilo oken in spletnih strani."
 
 #: panels/region/cc-region-panel.ui:129
-#: panels/user-accounts/cc-user-panel.ui:309
+#: panels/user-accounts/cc-user-panel.ui:310
 msgid "_Language"
 msgstr "_Jezik"
 
@@ -7660,6 +7762,7 @@ msgstr "Trenutno dejavna prijava"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Omogočeno"
 
@@ -7745,32 +7848,32 @@ msgstr "_Starševski nadzor"
 msgid "Open the Parental Controls application."
 msgstr "Odpri nadrejen nastavitveni program"
 
-#: panels/user-accounts/cc-user-panel.ui:345
+#: panels/user-accounts/cc-user-panel.ui:346
 msgid "Authentication & Login"
 msgstr "Overitev in prijava"
 
-#: panels/user-accounts/cc-user-panel.ui:388
+#: panels/user-accounts/cc-user-panel.ui:389
 msgid "_Fingerprint Login"
 msgstr "Prijava s _prstnimi odtisi"
 
-#: panels/user-accounts/cc-user-panel.ui:413
+#: panels/user-accounts/cc-user-panel.ui:414
 msgid "A_utomatic Login"
 msgstr "_Samodejna prijava"
 
-#: panels/user-accounts/cc-user-panel.ui:427
+#: panels/user-accounts/cc-user-panel.ui:428
 msgid "Account Activity"
 msgstr "Dejavnost računa"
 
-#: panels/user-accounts/cc-user-panel.ui:458
+#: panels/user-accounts/cc-user-panel.ui:459
 msgid "Remove User…"
 msgstr "Odstrani uporabnika …"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:499
+#: panels/user-accounts/cc-user-panel.ui:500
 msgid "No Users Found"
 msgstr "Ni najdenih uporabnikov"
 
-#: panels/user-accounts/cc-user-panel.ui:509
+#: panels/user-accounts/cc-user-panel.ui:510
 msgid "Unlock to add a user account."
 msgstr "Odklenite za dodajanje uporabniškega računa."
 
@@ -7972,6 +8075,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "Novo geslo ne vsebuje dovolj različnih znakov"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Neznana napaka"
@@ -8219,6 +8323,397 @@ msgstr "Spodnji gumb"
 msgid "Tip Pressure Feel"
 msgstr "Občutek pritiska konice"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "Dostopne točke"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+#| msgid "VPN"
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "Opravilo je preklicano"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>Napakar:</b> dostop do spreminjanja nastavitev je onemogočen"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Napaka:</b> Napaka mobilne naprave"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr ""
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+#, fuzzy
+#| msgid "Yesterday"
+msgid "Registered"
+msgstr "Včeraj"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr ""
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "Poteka iskanje ..."
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "Zavrnjeno"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "Podrobnosti modema"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "Stanje modema"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr ""
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "Vrsta omrežja"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "Stanje omrežja"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+#, fuzzy
+#| msgid "Numbers"
+msgid "Own Number"
+msgstr "Števila"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "Podrobnosti naprave"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "Različica strojne programske opreme"
+
+#: panels/wwan/cc-wwan-device.c:982
+msgid " (Preferred)"
+msgstr "(prednostno)"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid " Only"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "Odkleni kartico SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "Odkleni"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "Vpisano je napačno geslo"
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "Vpiši novo kodo PIN"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "Koda PIN mora biti dolžine 4–8 znakov"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+msgid "Unlocking..."
+msgstr "Poteka odklepanje ..."
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "Ni vstavljene kartice SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "Za uporabo modema je treba vstaviti kartico PIN"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "Kartica SIM je zaklenjena"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "_Mobilni podatki"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "Omrežni _način"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "_Omrežje"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "Napredno"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "Imena _dostopnih točk"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "Zaklep kartice _SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "Podrobnosti _modema"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+#, fuzzy
+#| msgid "PIN check failed"
+msgid "Phone failure"
+msgstr "Preverjanje PIN je spodletelo"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+#, fuzzy
+#| msgid "Not connected"
+msgid "No connection to phone"
+msgstr "Brez povezave"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr ""
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "Opravilo ni podprto"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "Kartica SIM ni vstavljena"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "Zahtevana je koda PIN za kartico SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "Zahtevana je koda PUK za kartico SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "Kartica SIM je nedostopna"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "Kartica SIM je zasedena"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "Neveljavno geslo"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "Zahtevana je koda PIN2 za kartico SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "Zahtevana je koda PIN2 za kartico SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "Predmeta ni mogoče najti"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "Ni dostopnih omrežnih storitev"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "Zakasnitev omrežja"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "Uporaba storitve GPRS ni dovoljena"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr ""
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Nedoločena napaka GPRS"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "Dejanje je preklicano"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "Dostop je zavrnjen"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "Neznana napaka"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "Način omrežja"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "_Nastavi"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Zapri"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "_Samodejno"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "Izbor omrežja"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr ""
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "Ni najdenega vmesnika WWAN"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+#, fuzzy
+#| msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Prepričajte se, da je vmesnik Wi-Fi priklopljen in omogočen."
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "Brezžično omrežje Wan je onemogočeno, kadar je omogočen letalski način"
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "_Onemogoči letalski način"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "Podatkovna povezava"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "Kartica SIM za dostop do interneta"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "Omogoči mobilno omrežje"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "Zaklep kartice SIM"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "_Naprej"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "_Zakleni kartico SIM s kodo PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "Spremeni kodo PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr ""
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "Mobilno omrežje"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+#, fuzzy
+#| msgid "Configure Removable Media settings"
+msgid "Configure Telephony and mobile data connections"
+msgstr "Nastavitve odstranljivih nosilcev"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr ""
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "Nastavitve GNOME"
@@ -8263,7 +8758,7 @@ msgstr "[PULT][ARGUMENT …]"
 msgid "Privacy"
 msgstr "Zasebnost"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Razpoložljivi pulti:"
 
@@ -8393,9 +8888,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "Wi-Fi can be turned off to save power."
 #~ msgstr "Delovanje Wi-Fi je mogoče izklopiti za varčevanje z energijo."
-
-#~ msgid "_Mobile Broadband"
-#~ msgstr "_Mobilni širokopasovni dostop"
 
 #~ msgid ""
 #~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
@@ -8551,9 +9043,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "Read system and application logs"
 #~ msgstr "Branje sistemskih in programskih dnevnikov"
-
-#~ msgid "Access LXD service"
-#~ msgstr "Dostop do storitev LXD"
 
 #~ msgid "access the media-hub service"
 #~ msgstr "dostop do storitev media-hub"
@@ -8897,9 +9386,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "Infrastructure"
 #~ msgstr "Infrastruktura"
-
-#~ msgid "Not connected"
-#~ msgstr "Brez povezave"
 
 #~ msgid "Notification _Popups"
 #~ msgstr "Pojavna _obvestila"
@@ -9278,9 +9764,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "gnome-control-center"
 #~ msgstr "gnome-control-center"
-
-#~ msgid "My Home Network"
-#~ msgstr "Domače omrežje"
 
 #~ msgid "hardware"
 #~ msgstr "strojna oprema"
@@ -9906,9 +10389,6 @@ msgstr "Sistemski zvoki"
 #~ msgid "Remove profile"
 #~ msgstr "Odstrani profil"
 
-#~ msgid "View details"
-#~ msgstr "Pogled podrobnosti"
-
 #~ msgid "Time _Zone"
 #~ msgstr "Časovni _pas"
 
@@ -10021,9 +10501,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "No printers available"
 #~ msgstr "Ni tiskalnikov na voljo"
-
-#~ msgid "Close"
-#~ msgstr "Zapri"
 
 #~ msgid "Resume Printing"
 #~ msgstr "Nadaljuj tiskanje"
@@ -10349,9 +10826,6 @@ msgstr "Sistemski zvoki"
 #~ msgid "_City:"
 #~ msgstr "_Mesto:"
 
-#~ msgid "_Network Time"
-#~ msgstr "Omrežni _čas"
-
 #~ msgid "Set the time one hour ahead."
 #~ msgstr "Nastavi čas za eno uro naprej."
 
@@ -10378,12 +10852,6 @@ msgstr "Sistemski zvoki"
 #~ msgctxt "display panel, rotation"
 #~ msgid "180 Degrees"
 #~ msgstr "180 stopinj"
-
-#~ msgid "Monitor"
-#~ msgstr "Zaslon"
-
-#~ msgid "Drag to change primary display."
-#~ msgstr "Vlecite za spremembo glavnega zaslona."
 
 #~ msgid ""
 #~ "Select a monitor to change its properties; drag it to rearrange its "
@@ -10956,9 +11424,6 @@ msgstr "Sistemski zvoki"
 #~ msgid "Arabic"
 #~ msgstr "arabsko"
 
-#~ msgid "Unspecified"
-#~ msgstr "Nedoločeno"
-
 #~ msgid "%d x %d"
 #~ msgstr "%d x %d"
 
@@ -11074,9 +11539,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "Locations..."
 #~ msgstr "Mesta ..."
-
-#~ msgid "Lock"
-#~ msgstr "Zakleni"
 
 #~ msgid "Enable debugging code"
 #~ msgstr "Omogoči razhroščevanje kode"
