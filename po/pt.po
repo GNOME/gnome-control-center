@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-14 12:39+0000\n"
-"PO-Revision-Date: 2021-08-14 19:39+0100\n"
+"POT-Creation-Date: 2021-08-31 19:57+0000\n"
+"PO-Revision-Date: 2021-09-03 23:14+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -2793,7 +2793,7 @@ msgstr "Margens de ecrã ativas"
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them."
 msgstr ""
-"Arraste janelas contra a parte superior, esquerda e direita do ecrã para as "
+"Arraste janelas contra os lados ou a parte superior do ecrã para as "
 "redimensionar."
 
 #: panels/multitasking/cc-multitasking-panel.ui:114
@@ -2879,29 +2879,29 @@ msgid "Not set up"
 msgstr "Indefinido"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:208
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:262
 msgid "Insecure network (WEP)"
 msgstr "Rede insegura (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Rede segura (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA2)"
 msgstr "Rede segura (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA3)"
 msgstr "Rede segura (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:288
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "Rede segura"
 
@@ -2910,7 +2910,7 @@ msgstr "Rede segura"
 msgid "Connected"
 msgstr "Ligado"
 
-#: panels/network/cc-wifi-connection-row.ui:100
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
@@ -4147,7 +4147,7 @@ msgstr "_Utilizador"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:363
+#: panels/user-accounts/cc-user-panel.ui:364
 msgid "_Password"
 msgstr "P_alavra-passe"
 
@@ -5746,7 +5746,7 @@ msgid "The language used for text in windows and web pages."
 msgstr "O idioma utilizado para o texto em janelas e páginas web."
 
 #: panels/region/cc-region-panel.ui:129
-#: panels/user-accounts/cc-user-panel.ui:309
+#: panels/user-accounts/cc-user-panel.ui:310
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -7830,32 +7830,32 @@ msgstr "_Controlo Parental"
 msgid "Open the Parental Controls application."
 msgstr "Abrir a aplicação de Controlo Parental."
 
-#: panels/user-accounts/cc-user-panel.ui:345
+#: panels/user-accounts/cc-user-panel.ui:346
 msgid "Authentication & Login"
 msgstr "Autenticação e início de sessão"
 
-#: panels/user-accounts/cc-user-panel.ui:388
+#: panels/user-accounts/cc-user-panel.ui:389
 msgid "_Fingerprint Login"
 msgstr "Início de sessão com _impressão digital"
 
-#: panels/user-accounts/cc-user-panel.ui:413
+#: panels/user-accounts/cc-user-panel.ui:414
 msgid "A_utomatic Login"
 msgstr "Início de sessão a_utomático"
 
-#: panels/user-accounts/cc-user-panel.ui:427
+#: panels/user-accounts/cc-user-panel.ui:428
 msgid "Account Activity"
 msgstr "_Atividade da conta"
 
-#: panels/user-accounts/cc-user-panel.ui:458
+#: panels/user-accounts/cc-user-panel.ui:459
 msgid "Remove User…"
 msgstr "Remover utilizador…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:499
+#: panels/user-accounts/cc-user-panel.ui:500
 msgid "No Users Found"
 msgstr "Sem utilizadores"
 
-#: panels/user-accounts/cc-user-panel.ui:509
+#: panels/user-accounts/cc-user-panel.ui:510
 msgid "Unlock to add a user account."
 msgstr "Desbloquear para criar uma conta de utilizador."
 
@@ -8519,10 +8519,6 @@ msgstr "Falha no telemóvel"
 msgid "No connection to phone"
 msgstr "Sem ligação ao telemóvel"
 
-#: panels/wwan/cc-wwan-errors-private.h:42
-msgid "Phone-adaptor link reserved"
-msgstr "Ligação de adaptador de telefone reservada"
-
 #: panels/wwan/cc-wwan-errors-private.h:43
 msgid "Operation not allowed"
 msgstr "Operação não permitida"
@@ -8530,18 +8526,6 @@ msgstr "Operação não permitida"
 #: panels/wwan/cc-wwan-errors-private.h:44
 msgid "Operation not supported"
 msgstr "Operação não suportada"
-
-#: panels/wwan/cc-wwan-errors-private.h:45
-msgid "PH-SIM PIN required"
-msgstr "PIN PH-SIM necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:46
-msgid "PH-FSIM PIN required"
-msgstr "PIN PH-FSIM necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:47
-msgid "PH-FSIM PUK required"
-msgstr "PUK PH-FSIM necessário"
 
 #: panels/wwan/cc-wwan-errors-private.h:48
 msgid "SIM not inserted"
@@ -8575,21 +8559,9 @@ msgstr "Necessário PIN2 do cartão SIM"
 msgid "SIM PUK2 required"
 msgstr "Necessário PUK2 do cartão SIM"
 
-#: panels/wwan/cc-wwan-errors-private.h:57
-msgid "Memory full"
-msgstr "Memória cheia"
-
-#: panels/wwan/cc-wwan-errors-private.h:58
-msgid "Invalid index"
-msgstr "Índice inválido"
-
 #: panels/wwan/cc-wwan-errors-private.h:59
 msgid "Not found"
 msgstr "Não encontrado"
-
-#: panels/wwan/cc-wwan-errors-private.h:60
-msgid "Memory failure"
-msgstr "Falha de memória"
 
 #: panels/wwan/cc-wwan-errors-private.h:61
 msgid "No network service"
@@ -8599,89 +8571,17 @@ msgstr "Sem serviço de rede"
 msgid "Network timeout"
 msgstr "Tempo limite de rede"
 
-#: panels/wwan/cc-wwan-errors-private.h:63
-msgid "Network not allowed - emergency calls only"
-msgstr "Rede não permitida - apenas chamadas de emergência"
-
-#: panels/wwan/cc-wwan-errors-private.h:64
-msgid "Network personalization PIN required"
-msgstr "PIN de personalização de rede necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:65
-msgid "Network personalization PUK required"
-msgstr "PUK de personalização de rede necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:66
-msgid "Network subset personalization PIN required"
-msgstr "PIN de personalização de subconjunto de rede necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:67
-msgid "Network subset personalization PUK required"
-msgstr "Personalização do subconjunto de rede PUK necessária"
-
-#: panels/wwan/cc-wwan-errors-private.h:68
-msgid "Service provider personalization PIN required"
-msgstr "PIN de personalização do prestador de serviços necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:69
-msgid "Service provider personalization PUK required"
-msgstr "PUK de personalização do prestador de serviços necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:70
-msgid "Corporate personalization PIN required"
-msgstr "PIN de personalização corporativa necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:71
-msgid "Corporate personalization PUK required"
-msgstr "PUK de personalização corporativa necessário"
-
-#: panels/wwan/cc-wwan-errors-private.h:73
-msgid "Illegal MS"
-msgstr "MS ilegal"
-
-#: panels/wwan/cc-wwan-errors-private.h:74
-msgid "Illegal ME"
-msgstr "Me ilegal"
-
 #: panels/wwan/cc-wwan-errors-private.h:75
 msgid "GPRS services not allowed"
 msgstr "Serviços GPRS não permitidos"
-
-#: panels/wwan/cc-wwan-errors-private.h:76
-msgid "PLMN not allowed"
-msgstr "PLMN não permitido"
-
-#: panels/wwan/cc-wwan-errors-private.h:77
-msgid "Location area not allowed"
-msgstr "Área de localização não permitida"
 
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
 msgstr "Roaming não permitido nesta área de localização"
 
-#: panels/wwan/cc-wwan-errors-private.h:79
-msgid "Service option not supported"
-msgstr "Opção de serviço não suportada"
-
-#: panels/wwan/cc-wwan-errors-private.h:80
-msgid "Requested service option not subscribed"
-msgstr "Opção de serviço solicitada não subscrita"
-
-#: panels/wwan/cc-wwan-errors-private.h:81
-msgid "Service option temporarily out of order"
-msgstr "Opção de serviço temporariamente fora de serviço"
-
 #: panels/wwan/cc-wwan-errors-private.h:82
 msgid "Unspecified GPRS error"
 msgstr "Erro GPRS não especificado"
-
-#: panels/wwan/cc-wwan-errors-private.h:83
-msgid "PDP authentication failure"
-msgstr "Falha na autenticação do PDP"
-
-#: panels/wwan/cc-wwan-errors-private.h:84
-msgid "Invalid mobile class"
-msgstr "Classe móvel inválida"
 
 #: panels/wwan/cc-wwan-errors-private.h:91
 msgid "Action Cancelled"
@@ -8944,6 +8844,81 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons de sistema"
+
+#~ msgid "Phone-adaptor link reserved"
+#~ msgstr "Ligação de adaptador de telefone reservada"
+
+#~ msgid "PH-SIM PIN required"
+#~ msgstr "PIN PH-SIM necessário"
+
+#~ msgid "PH-FSIM PIN required"
+#~ msgstr "PIN PH-FSIM necessário"
+
+#~ msgid "PH-FSIM PUK required"
+#~ msgstr "PUK PH-FSIM necessário"
+
+#~ msgid "Memory full"
+#~ msgstr "Memória cheia"
+
+#~ msgid "Invalid index"
+#~ msgstr "Índice inválido"
+
+#~ msgid "Memory failure"
+#~ msgstr "Falha de memória"
+
+#~ msgid "Network not allowed - emergency calls only"
+#~ msgstr "Rede não permitida - apenas chamadas de emergência"
+
+#~ msgid "Network personalization PIN required"
+#~ msgstr "PIN de personalização de rede necessário"
+
+#~ msgid "Network personalization PUK required"
+#~ msgstr "PUK de personalização de rede necessário"
+
+#~ msgid "Network subset personalization PIN required"
+#~ msgstr "PIN de personalização de subconjunto de rede necessário"
+
+#~ msgid "Network subset personalization PUK required"
+#~ msgstr "Personalização do subconjunto de rede PUK necessária"
+
+#~ msgid "Service provider personalization PIN required"
+#~ msgstr "PIN de personalização do prestador de serviços necessário"
+
+#~ msgid "Service provider personalization PUK required"
+#~ msgstr "PUK de personalização do prestador de serviços necessário"
+
+#~ msgid "Corporate personalization PIN required"
+#~ msgstr "PIN de personalização corporativa necessário"
+
+#~ msgid "Corporate personalization PUK required"
+#~ msgstr "PUK de personalização corporativa necessário"
+
+#~ msgid "Illegal MS"
+#~ msgstr "MS ilegal"
+
+#~ msgid "Illegal ME"
+#~ msgstr "Me ilegal"
+
+#~ msgid "PLMN not allowed"
+#~ msgstr "PLMN não permitido"
+
+#~ msgid "Location area not allowed"
+#~ msgstr "Área de localização não permitida"
+
+#~ msgid "Service option not supported"
+#~ msgstr "Opção de serviço não suportada"
+
+#~ msgid "Requested service option not subscribed"
+#~ msgstr "Opção de serviço solicitada não subscrita"
+
+#~ msgid "Service option temporarily out of order"
+#~ msgstr "Opção de serviço temporariamente fora de serviço"
+
+#~ msgid "PDP authentication failure"
+#~ msgstr "Falha na autenticação do PDP"
+
+#~ msgid "Invalid mobile class"
+#~ msgstr "Classe móvel inválida"
 
 #~ msgid "Balanced Power"
 #~ msgstr "Energia equilibrada"
