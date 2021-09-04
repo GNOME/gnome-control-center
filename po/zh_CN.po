@@ -34,8 +34,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-02 14:00+0000\n"
-"PO-Revision-Date: 2021-08-02 16:43-0400\n"
+"POT-Creation-Date: 2021-08-31 19:57+0000\n"
+"PO-Revision-Date: 2021-09-04 13:02-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -72,7 +72,8 @@ msgstr "对 /dev 的完全访问"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "网络"
 
@@ -105,7 +106,7 @@ msgstr "设置"
 
 #: panels/applications/cc-applications-panel.c:849
 msgid "Can change settings"
-msgstr "可以修改设置"
+msgstr "可以更改设置"
 
 #: panels/applications/cc-applications-panel.c:851
 #, c-format
@@ -222,6 +223,7 @@ msgstr "相机"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:843
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "已禁用"
@@ -245,7 +247,7 @@ msgstr "内置权限"
 
 #: panels/applications/cc-applications-panel.ui:158
 msgid "Cannot be changed"
-msgstr "无法被修改"
+msgstr "无法被更改"
 
 #: panels/applications/cc-applications-panel.ui:175
 msgid ""
@@ -395,6 +397,9 @@ msgstr "选择图片"
 #: panels/user-accounts/cc-user-panel.c:633
 #: panels/user-accounts/cc-user-panel.c:651
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "取消(_C)"
 
@@ -762,6 +767,7 @@ msgstr "保存配置"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "保存(_S)"
 
@@ -1477,7 +1483,7 @@ msgstr "更改系统时间和日期设置"
 
 #: panels/datetime/org.gnome.controlcenter.datetime.policy.in:12
 msgid "To change time or date settings, you need to authenticate."
-msgstr "修改时间或日期设置需要认证。"
+msgstr "更改时间或日期设置需要认证。"
 
 #: panels/default-apps/cc-default-apps-panel.ui:31
 msgid "_Web"
@@ -1773,6 +1779,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:437
 #: panels/info-overview/cc-info-overview-panel.c:483
 #: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "未知"
 
@@ -1841,7 +1848,7 @@ msgstr "正在计算…"
 #. translators: this field contains the distro name and version
 #: panels/info-overview/cc-info-overview-panel.ui:133
 msgid "OS Name"
-msgstr "系统名称"
+msgstr "操作系统名称"
 
 #: panels/info-overview/cc-info-overview-panel.ui:142
 msgid "OS Type"
@@ -2205,7 +2212,7 @@ msgid ""
 "This can be changed in the keyboard shortcut settings."
 msgstr ""
 "使用键盘快捷键 %s 可以切换输入源。\n"
-"这可以在键盘快捷方式设置中更改。"
+"这可以在键盘快捷键设置中更改。"
 
 #: panels/keyboard/cc-keyboard-panel.ui:48
 msgid "Input Sources"
@@ -2249,7 +2256,7 @@ msgstr "查看及自定义快捷键"
 #, c-format
 msgid "%d modified"
 msgid_plural "%d modified"
-msgstr[0] "%d 已修改"
+msgstr[0] "已修改 %d 个"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:428
 msgid "Reset All Shortcuts?"
@@ -2265,6 +2272,7 @@ msgstr "重新设置快捷键可能影响您的自定义快捷键。此操作无
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "取消"
 
@@ -2291,7 +2299,8 @@ msgstr "未找到键盘快捷键"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "后退"
 
@@ -2336,6 +2345,7 @@ msgstr "按 Esc 以取消或 Backspace 以停用此键盘快捷键。"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "名称"
 
@@ -2356,6 +2366,7 @@ msgid "None"
 msgstr "无"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "添加"
 
@@ -2611,6 +2622,7 @@ msgstr "保护对话"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "常规"
 
@@ -2724,11 +2736,91 @@ msgstr ""
 "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;触摸板;指针;触摸;单"
 "击;双击;按钮;轨迹球;滚动;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "热区(_H)"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr "触碰屏幕左上角以打开活动概览界面。"
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "激活屏幕边缘(_A)"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr "将窗口拖曳至顶部、底部、左侧和右侧边缘以更改其大小。"
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "工作空间"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "动态工作空间(_D)"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "自动移除空的工作空间。"
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "固定数量的工作空间(_F)"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "指定永久存在的工作空间的数量。"
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "工作空间数量(_N)"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+msgid "Multi-Monitor"
+msgstr "多显示器"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "工作空间仅位于主显示器上(_P)"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "工作空间位于所有显示器上(_I)"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "应用程序切换"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "包括所有工作空间的应用程序(_W)"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "仅包括当前工作空间中的应用程序(_C)"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "多任务"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "管理生产力和多任务的首选项"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr ""
+"Multitasking;Multitask;Productivity;Customize;Desktop;多任务;多进程;生产力;自"
+"定义;桌面;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "抱歉，发生错误。请联系软件提供商。"
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "需要运行 NetworkManager。"
 
@@ -2746,29 +2838,29 @@ msgid "Not set up"
 msgstr "未设置"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:208
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:262
 msgid "Insecure network (WEP)"
 msgstr "不安全网络（WEP）"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "安全网络（WPA）"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA2)"
 msgstr "安全网络（WPA2）"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA3)"
 msgstr "安全网络（WPA3）"
 
-#: panels/network/cc-wifi-connection-row.c:288
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "安全网络"
 
@@ -2777,7 +2869,7 @@ msgstr "安全网络"
 msgid "Connected"
 msgstr "已连接"
 
-#: panels/network/cc-wifi-connection-row.ui:100
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
@@ -2800,7 +2892,7 @@ msgstr "至少包含 8 个字符"
 #: panels/network/cc-wifi-hotspot-dialog.c:272
 #, c-format
 msgid "Must have a maximum of %d characters"
-msgstr "最多包含 %d 个字符"
+msgstr "至多包含 %d 个字符"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:488
 msgid "Turn On Wi-Fi Hotspot?"
@@ -2825,6 +2917,7 @@ msgstr "网络名称"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "密码"
 
@@ -2870,7 +2963,7 @@ msgstr "未找到 Wi-Fi 适配器"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "请确保您已插入并打开了 Wi-Fi 适配器"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "飞行模式已开启"
 
@@ -3166,6 +3259,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3个人"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "信号强度"
 
@@ -3555,6 +3649,7 @@ msgid "Turn device off"
 msgstr "关闭设备"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3878,7 +3973,7 @@ msgid "SIM Puk required"
 msgstr "需要 SIM PUK 码"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "SIM 错误"
 
@@ -3997,7 +4092,7 @@ msgstr "用户名(_U)"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:363
+#: panels/user-accounts/cc-user-panel.ui:364
 msgid "_Password"
 msgstr "密码(_P)"
 
@@ -4614,7 +4709,7 @@ msgstr "电池电量低：节电模式已启用。电池充满电时，将恢复
 #: panels/power/cc-power-panel.c:1226
 #, c-format
 msgid "Power Saver mode activated by “%s”."
-msgstr "节电模式由“%s”激活"
+msgstr "节电模式由“%s”激活。"
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1230
@@ -4763,40 +4858,43 @@ msgstr "使用电池时(_B)"
 msgid "Delay"
 msgstr "延迟"
 
-#: panels/power/cc-power-profile-row.c:62
+#: panels/power/cc-power-profile-row.c:61
 msgid "Lap detected: performance mode unavailable"
 msgstr "检测到膝上使用：性能模式不可用"
 
-#: panels/power/cc-power-profile-row.c:64
+#: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
 msgstr "硬件温度过高：性能模式不可用"
 
-#: panels/power/cc-power-profile-row.c:65
+#: panels/power/cc-power-profile-row.c:64
 msgid "Performance mode unavailable"
 msgstr "性能模式不可用"
 
-#: panels/power/cc-power-profile-row.c:87
-#: panels/power/cc-power-profile-row.c:187
+#: panels/power/cc-power-profile-row.c:86
+#: panels/power/cc-power-profile-row.c:185
 msgid "High performance and power usage."
 msgstr "高性能和功耗。"
 
-#: panels/power/cc-power-profile-row.c:186
+#: panels/power/cc-power-profile-row.c:184
+msgctxt "Power profile"
 msgid "Performance"
 msgstr "性能"
 
-#: panels/power/cc-power-profile-row.c:192
-msgid "Balanced Power"
-msgstr "平衡"
+#: panels/power/cc-power-profile-row.c:188
+msgctxt "Power profile"
+msgid "Balanced"
+msgstr "均衡"
 
-#: panels/power/cc-power-profile-row.c:193
+#: panels/power/cc-power-profile-row.c:189
 msgid "Standard performance and power usage."
 msgstr "标准性能和功耗。"
 
-#: panels/power/cc-power-profile-row.c:198
+#: panels/power/cc-power-profile-row.c:192
+msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "节电"
 
-#: panels/power/cc-power-profile-row.c:199
+#: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
 msgstr "降低性能和功耗。"
 
@@ -4828,7 +4926,7 @@ msgstr "认证"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "用户名"
 
@@ -4884,6 +4982,7 @@ msgstr "添加打印机"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "解锁(_U)"
 
@@ -5292,6 +5391,7 @@ msgstr "无预过滤"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "厂商"
 
@@ -5439,6 +5539,7 @@ msgid "Remove Printer"
 msgstr "移除打印机"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "型号"
 
@@ -5559,7 +5660,7 @@ msgid "The language used for text in windows and web pages."
 msgstr "窗口和网页使用的语言。"
 
 #: panels/region/cc-region-panel.ui:129
-#: panels/user-accounts/cc-user-panel.ui:309
+#: panels/user-accounts/cc-user-panel.ui:310
 msgid "_Language"
 msgstr "语言(_L)"
 
@@ -7521,6 +7622,7 @@ msgstr "已登录"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:841
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "已启用"
 
@@ -7571,7 +7673,7 @@ msgstr "创建用户帐号"
 
 #: panels/user-accounts/cc-user-panel.ui:64
 msgid "Your session needs to be restarted for changes to take effect"
-msgstr "修改需要重启会话才能生效"
+msgstr "更改需要重启会话才能生效"
 
 #: panels/user-accounts/cc-user-panel.ui:72
 msgid "Restart Now"
@@ -7604,32 +7706,32 @@ msgstr "家长控制(_P)"
 msgid "Open the Parental Controls application."
 msgstr "打开家长控制应用程序。"
 
-#: panels/user-accounts/cc-user-panel.ui:345
+#: panels/user-accounts/cc-user-panel.ui:346
 msgid "Authentication & Login"
 msgstr "认证与登录"
 
-#: panels/user-accounts/cc-user-panel.ui:388
+#: panels/user-accounts/cc-user-panel.ui:389
 msgid "_Fingerprint Login"
 msgstr "指纹登录(_F)"
 
-#: panels/user-accounts/cc-user-panel.ui:413
+#: panels/user-accounts/cc-user-panel.ui:414
 msgid "A_utomatic Login"
 msgstr "自动登录(_U)"
 
-#: panels/user-accounts/cc-user-panel.ui:427
+#: panels/user-accounts/cc-user-panel.ui:428
 msgid "Account Activity"
 msgstr "帐号活动"
 
-#: panels/user-accounts/cc-user-panel.ui:458
+#: panels/user-accounts/cc-user-panel.ui:459
 msgid "Remove User…"
 msgstr "移除用户…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:499
+#: panels/user-accounts/cc-user-panel.ui:500
 msgid "No Users Found"
 msgstr "未找到用户"
 
-#: panels/user-accounts/cc-user-panel.ui:509
+#: panels/user-accounts/cc-user-panel.ui:510
 msgid "Unlock to add a user account."
 msgstr "解锁以添加用户帐号。"
 
@@ -7827,6 +7929,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "新密码必须一定量不同的字符"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "未知错误"
@@ -8070,6 +8173,378 @@ msgstr "底部按钮"
 msgid "Tip Pressure Feel"
 msgstr "笔尖压感"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "接入点"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "操作已取消"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>错误：</b>更改设置被拒绝"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>错误：</b>移动设备错误"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "未注册"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+msgid "Registered"
+msgstr "已注册"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "漫游"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "正在搜索"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "已拒绝"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "调制解调器详细信息"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "调制解调器状态"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "运营商"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "网络类型"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "网络状态"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "所有号码"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "设备详细信息"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "固件版本"
+
+#: panels/wwan/cc-wwan-device.c:982
+msgid " (Preferred)"
+msgstr "（首选）"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid " Only"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "解锁 SIM 卡"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "解锁"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "请提供 SIM 卡 %d 的 PIN 码"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr "输入 PIN 以解锁您的 SIM 卡"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "请提供 SIM 卡 %d 的 PUK 码"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr "输入 PUK 以解锁您的 SIM 卡"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "密码输入错误。您还有 %1$u 次尝试机会"
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "您还有 %u 次尝试机会"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "密码输入错误。"
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr "PUK 码应为 8 位数字"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "输入新 PIN"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "PIN 码应为 4 到 8 位数字"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+msgid "Unlocking..."
+msgstr "正在解锁…"
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "无 SIM 卡"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "插入 SIM 卡以使用该调制解调器"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM 卡已锁定"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "移动数据(_M)"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "使用移动网络访问数据"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "数据漫游(_D)"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "漫游时使用移动数据"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "网络模式(_N)"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "网络(_E)"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "高级"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "接入点名称"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "SIM 锁(_S)"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "使用 PIN 锁定 SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "调制解调器详细信息(_O)"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "移动电话错误"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "没有到电话的连接"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "操作不允许"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "操作不支持"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "SIM 卡未插入"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "需要 SIM PIN"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "需要 SIM PUK"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "SIM 卡失败"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "SIM 卡忙"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "密码不正确"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "需要 SIM PIN2"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "需要 SIM PUK2"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "未找到"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "无网络服务"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "网络超时"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "不允许 GPRS 服务"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "此位置区域不允许漫游"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "未指定的 GPRS 错误"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "操作已取消"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "拒绝访问"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "未知错误"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "网络模式"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "设置(_S)"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "关闭"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "自动(_A)"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "选择网络"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "刷新网络提供商"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "未找到 WWAN 适配器"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "请确保您拥有无线 Wan/蜂窝设备"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "无线 Wan 在飞行模式下已禁用"
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "关闭飞行模式(_T)"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "数据连接"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "用于互联网的 SIM 卡"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "启用移动网络"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "SIM 锁"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr ""
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "使用 PIN 锁定 SIM (_L)"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "更改 PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr "输入当前 PIN 以更改 SIM 锁设置"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "移动网络"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "配置电话和移动数据连接"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr "cellular;wwan;telephony;sim;mobile;蜂窝;移动;无线;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "GNOME 设置"
@@ -8114,7 +8589,7 @@ msgstr "[面板] [参数…]"
 msgid "Privacy"
 msgstr "隐私"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "可用面板："
 
@@ -8217,6 +8692,9 @@ msgstr[0] "%u 路输入"
 msgid "System Sounds"
 msgstr "系统声音"
 
+#~ msgid "Balanced Power"
+#~ msgstr "平衡"
+
 #~ msgid "Keyboard Shortcut"
 #~ msgstr "键盘快捷键"
 
@@ -8243,9 +8721,6 @@ msgstr "系统声音"
 
 #~ msgid "Wi-Fi can be turned off to save power."
 #~ msgstr "可以关闭 Wi-Fi 以节省电源。"
-
-#~ msgid "_Mobile Broadband"
-#~ msgstr "移动宽带(_M)"
 
 #~ msgid ""
 #~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
@@ -8397,9 +8872,6 @@ msgstr "系统声音"
 #~ msgid "Read system and application logs"
 #~ msgstr "读取系统和应用程序日志"
 
-#~ msgid "Access LXD service"
-#~ msgstr "访问LXD服务"
-
 #~ msgid "access the media-hub service"
 #~ msgstr "访问媒体中心服务"
 
@@ -8424,9 +8896,6 @@ msgstr "系统声音"
 
 #~ msgid "Change network settings"
 #~ msgstr "更改网络设置"
-
-#~ msgid "Read network settings"
-#~ msgstr "读取网络设置"
 
 #~ msgid ""
 #~ "Access the ofono service to read and change network settings for mobile "
@@ -8717,9 +9186,6 @@ msgstr "系统声音"
 
 #~ msgid "Infrastructure"
 #~ msgstr "架构"
-
-#~ msgid "Not connected"
-#~ msgstr "未连接"
 
 #~ msgid "Notification _Popups"
 #~ msgstr "通知弹窗(_P)"
@@ -9087,9 +9553,6 @@ msgstr "系统声音"
 
 #~ msgid "gnome-control-center"
 #~ msgstr "gnome-control-center"
-
-#~ msgid "My Home Network"
-#~ msgstr "家庭网络"
 
 #~ msgid "hardware"
 #~ msgstr "硬件"
@@ -9664,9 +10127,6 @@ msgstr "系统声音"
 
 #~ msgid "Time _Zone"
 #~ msgstr "时区(_Z)"
-
-#~ msgid "Close"
-#~ msgstr "关闭"
 
 #~ msgid "Resume Printing"
 #~ msgstr "恢复打印"
