@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-30 13:20+0000\n"
-"PO-Revision-Date: 2021-08-31 21:53+0200\n"
+"POT-Creation-Date: 2021-09-07 17:04+0000\n"
+"PO-Revision-Date: 2021-09-07 21:15+0200\n"
 "Last-Translator: Matej Urbančič <mateju@src.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -203,7 +203,7 @@ msgstr "Kamera"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
 #: panels/keyboard/cc-xkb-modifier-dialog.c:353
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
-#: panels/user-accounts/cc-user-panel.c:843
+#: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
 #: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
@@ -379,8 +379,8 @@ msgstr "Izbor slike"
 #: panels/user-accounts/cc-avatar-chooser.c:228
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:633
-#: panels/user-accounts/cc-user-panel.c:651
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/wwan/cc-wwan-mode-dialog.ui:35
 #: panels/wwan/cc-wwan-network-dialog.ui:166
@@ -2423,8 +2423,12 @@ msgid "Keyboard"
 msgstr "Tipkovnica"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-msgid "View and change keyboard shortcuts and set your typing preferences"
-msgstr "Ogled in sprememba tipkovnih bližnjic in nastvite možnosti tipkanja"
+msgid ""
+"Change keyboard shortcuts and set your typing preferences, keyboard layouts "
+"and input sources"
+msgstr ""
+"Prilagajanje tipkovnih bližnjic, nastavite možnosti tipkanja, razporeditve "
+"in vhodni viri"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
@@ -2823,16 +2827,12 @@ msgid "_Number of Workspaces"
 msgstr "_Število delovnih površin"
 
 #: panels/multitasking/cc-multitasking-panel.ui:200
-#, fuzzy
-#| msgid "Monitor"
 msgid "Multi-Monitor"
-msgstr "Zaslon"
+msgstr "Podpora več monitorjem"
 
 #: panels/multitasking/cc-multitasking-panel.ui:225
-#, fuzzy
-#| msgid "Drag to change primary display."
 msgid "Workspaces on _primary display only"
-msgstr "Vlecite za spremembo glavnega zaslona."
+msgstr "Delovne površine le na _osnovnem zaslonu"
 
 #: panels/multitasking/cc-multitasking-panel.ui:252
 msgid "Workspaces on all d_isplays"
@@ -2848,7 +2848,7 @@ msgstr "Vključi programe _vseh delovnih površin"
 
 #: panels/multitasking/cc-multitasking-panel.ui:325
 msgid "Include applications from the _current workspace only"
-msgstr ""
+msgstr "Vključi le programe s _trenutne delovne površine"
 
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
 msgid "Multitasking"
@@ -2862,6 +2862,8 @@ msgstr "Upravljanje nastavitev za učinkovito delo in večopravilnost"
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
 msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
 msgstr ""
+"Multitasking;Multitask;Productivity;Customize;Desktop;Namizje;Večopravilnost;"
+"Učinkovitost;Prilagajanje;Delo;"
 
 #: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
@@ -3814,8 +3816,7 @@ msgid "Unmanaged"
 msgstr "Neupravljano"
 
 #. TRANSLATORS: device status
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:928
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "Nedostopno"
 
@@ -4159,7 +4160,7 @@ msgstr "_Uporabniško ime"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:364
+#: panels/user-accounts/cc-user-panel.ui:365
 msgid "_Password"
 msgstr "_Geslo"
 
@@ -5769,7 +5770,7 @@ msgid "The language used for text in windows and web pages."
 msgstr "Jezik, uporabljen za besedilo oken in spletnih strani."
 
 #: panels/region/cc-region-panel.ui:129
-#: panels/user-accounts/cc-user-panel.ui:310
+#: panels/user-accounts/cc-user-panel.ui:311
 msgid "_Language"
 msgstr "_Jezik"
 
@@ -5799,9 +5800,8 @@ msgid "Region & Language"
 msgstr "Področje in Jezik"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-msgid ""
-"Select your display language, formats, keyboard layouts and input sources"
-msgstr "Izberite jezik prikaza, oblike, razporeditve tipk in vnosne vire"
+msgid "Select your display language and formats"
+msgstr "Izbor jezika za zapisov"
 
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
@@ -7586,7 +7586,7 @@ msgstr "%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7594,7 +7594,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7682,26 +7682,26 @@ msgstr "Z domeno %s povezava ni mogoča: %s"
 msgid "Your account"
 msgstr "Račun"
 
-#: panels/user-accounts/cc-user-panel.c:397
+#: panels/user-accounts/cc-user-panel.c:402
 msgid "Failed to delete user"
 msgstr "Napaka med brisanjem uporabnika"
 
-#: panels/user-accounts/cc-user-panel.c:452
-#: panels/user-accounts/cc-user-panel.c:507
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:457
+#: panels/user-accounts/cc-user-panel.c:512
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
 msgstr "Preklic oddaljeno vodenega uporabnika je spodletel"
 
-#: panels/user-accounts/cc-user-panel.c:602
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "Ni mogoče izbrisati lastnega računa."
 
-#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s je še vedno prijavljen"
 
-#: panels/user-accounts/cc-user-panel.c:615
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7709,12 +7709,12 @@ msgstr ""
 "Izbris uporabnika, ki je trenutno prijavljen, lahko vpliva na delovanje "
 "sistema."
 
-#: panels/user-accounts/cc-user-panel.c:624
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Ali želite obdržati datoteke uporabnika %s?"
 
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7722,55 +7722,55 @@ msgstr ""
 "Mogoče je ohraniti domačo mapo, vrstilno mapo pošte in začasne datoteke tudi "
 "med brisanjem uporabniškega računa."
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "_Izbriši datoteke"
 
-#: panels/user-accounts/cc-user-panel.c:632
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "_Ohrani datoteke"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "Ali ste prepričani, da želite preklicati oddaljeno voden račun uporabnika %s?"
 
-#: panels/user-accounts/cc-user-panel.c:650
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "_Izbriši"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Račun je onemogočen"
 
-#: panels/user-accounts/cc-user-panel.c:708
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastavljeno bo ob naslednji prijavi"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Brez"
 
-#: panels/user-accounts/cc-user-panel.c:754
+#: panels/user-accounts/cc-user-panel.c:759
 msgid "Logged in"
 msgstr "Trenutno dejavna prijava"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:841
+#: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
 #: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Omogočeno"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1259
 msgid "Failed to contact the accounts service"
 msgstr "Napaka med povezovanjem s storitvijo računov"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1261
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 
@@ -7778,7 +7778,7 @@ msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7786,12 +7786,12 @@ msgstr ""
 "Za spreminjanje,\n"
 "kliknite na ikono *"
 
-#: panels/user-accounts/cc-user-panel.c:1361
+#: panels/user-accounts/cc-user-panel.c:1366
 msgid "Delete the selected user account"
 msgstr "Izbriši izbran uporabniški račun"
 
-#: panels/user-accounts/cc-user-panel.c:1373
-#: panels/user-accounts/cc-user-panel.c:1492
+#: panels/user-accounts/cc-user-panel.c:1378
+#: panels/user-accounts/cc-user-panel.c:1489
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7799,7 +7799,7 @@ msgstr ""
 "Za izbris izbranega uporabniškega\n"
 "računa, kliknite na ikono *"
 
-#: panels/user-accounts/cc-user-panel.c:1538
+#: panels/user-accounts/cc-user-panel.c:1535
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Odklenite za spreminjanje nastavitev in uporabnikov"
 
@@ -7848,32 +7848,32 @@ msgstr "_Starševski nadzor"
 msgid "Open the Parental Controls application."
 msgstr "Odpri nadrejen nastavitveni program"
 
-#: panels/user-accounts/cc-user-panel.ui:346
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Authentication & Login"
 msgstr "Overitev in prijava"
 
-#: panels/user-accounts/cc-user-panel.ui:389
+#: panels/user-accounts/cc-user-panel.ui:390
 msgid "_Fingerprint Login"
 msgstr "Prijava s _prstnimi odtisi"
 
-#: panels/user-accounts/cc-user-panel.ui:414
+#: panels/user-accounts/cc-user-panel.ui:415
 msgid "A_utomatic Login"
 msgstr "_Samodejna prijava"
 
-#: panels/user-accounts/cc-user-panel.ui:428
+#: panels/user-accounts/cc-user-panel.ui:429
 msgid "Account Activity"
 msgstr "Dejavnost računa"
 
-#: panels/user-accounts/cc-user-panel.ui:459
+#: panels/user-accounts/cc-user-panel.ui:460
 msgid "Remove User…"
 msgstr "Odstrani uporabnika …"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:500
+#: panels/user-accounts/cc-user-panel.ui:501
 msgid "No Users Found"
 msgstr "Ni najdenih uporabnikov"
 
-#: panels/user-accounts/cc-user-panel.ui:510
+#: panels/user-accounts/cc-user-panel.ui:511
 msgid "Unlock to add a user account."
 msgstr "Odklenite za dodajanje uporabniškega računa."
 
@@ -8328,7 +8328,6 @@ msgid "Access Points"
 msgstr "Dostopne točke"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:160
-#| msgid "VPN"
 msgid "APN"
 msgstr "APN"
 
@@ -8346,17 +8345,15 @@ msgstr "<b>Napaka:</b> Napaka mobilne naprave"
 
 #: panels/wwan/cc-wwan-details-dialog.c:81
 msgid "Not Registered"
-msgstr ""
+msgstr "Ni registrirano"
 
 #: panels/wwan/cc-wwan-details-dialog.c:85
-#, fuzzy
-#| msgid "Yesterday"
 msgid "Registered"
-msgstr "Včeraj"
+msgstr "Registrirano"
 
 #: panels/wwan/cc-wwan-details-dialog.c:89
 msgid "Roaming"
-msgstr ""
+msgstr "Gostovanje"
 
 #: panels/wwan/cc-wwan-details-dialog.c:93
 msgid "Searching"
@@ -8376,7 +8373,7 @@ msgstr "Stanje modema"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:53
 msgid "Carrier"
-msgstr ""
+msgstr "Ponudnik signala"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:79
 msgid "Network Type"
@@ -8387,10 +8384,8 @@ msgid "Network Status"
 msgstr "Stanje omrežja"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:158
-#, fuzzy
-#| msgid "Numbers"
 msgid "Own Number"
-msgstr "Števila"
+msgstr "Lastna številka"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:185
 msgid "Device Details"
@@ -8400,13 +8395,83 @@ msgstr "Podrobnosti naprave"
 msgid "Firmware Version"
 msgstr "Različica strojne programske opreme"
 
-#: panels/wwan/cc-wwan-device.c:982
-msgid " (Preferred)"
-msgstr "(prednostno)"
+#: panels/wwan/cc-wwan-device.c:988
+msgid "2G Only"
+msgstr "Le G2"
+
+#: panels/wwan/cc-wwan-device.c:991
+msgid "3G Only"
+msgstr "Le G3"
+
+#: panels/wwan/cc-wwan-device.c:994
+msgid "4G Only"
+msgstr "Le G4"
+
+#: panels/wwan/cc-wwan-device.c:1003
+#| msgid " (Preferred)"
+msgid "2G, 3G, 4G (Preferred)"
+msgstr "2G, 3G, 4G (prednostno)"
+
+#: panels/wwan/cc-wwan-device.c:1005
+#| msgid " (Preferred)"
+msgid "2G, 3G (Preferred), 4G"
+msgstr "2G, 3G (prednostno), 4G"
 
 #: panels/wwan/cc-wwan-device.c:1007
-msgid " Only"
-msgstr ""
+#| msgid " (Preferred)"
+msgid "2G (Preferred), 3G, 4G"
+msgstr "2G (prednostno), 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1009
+msgid "2G, 3G, 4G"
+msgstr "2G, 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1015
+#| msgid " (Preferred)"
+msgid "3G, 4G (Preferred)"
+msgstr "3G, 4G (prednostno)"
+
+#: panels/wwan/cc-wwan-device.c:1017
+#| msgid " (Preferred)"
+msgid "3G (Preferred), 4G"
+msgstr "3G (prednostno), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1019
+msgid "3G, 4G"
+msgstr "3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1025
+#| msgid " (Preferred)"
+msgid "2G, 4G (Preferred)"
+msgstr "2G, 4G (prednostno)"
+
+#: panels/wwan/cc-wwan-device.c:1027
+#| msgid " (Preferred)"
+msgid "2G (Preferred), 4G"
+msgstr "2G (prednostno), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1029
+msgid "2G, 4G"
+msgstr "2G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1035
+#| msgid " (Preferred)"
+msgid "2G, 3G (Preferred)"
+msgstr "2G, 3G (prednostno)"
+
+#: panels/wwan/cc-wwan-device.c:1037
+#| msgid " (Preferred)"
+msgid "2G (Preferred), 3G"
+msgstr "2G (prednostno), 3G"
+
+#: panels/wwan/cc-wwan-device.c:1039
+msgid "2G, 3G"
+msgstr "2G, 3G"
+
+#: panels/wwan/cc-wwan-device.c:1043
+msgctxt "Network mode"
+msgid "Unknown"
+msgstr "Neznano"
 
 #: panels/wwan/cc-wwan-device-page.c:141
 msgid "Unlock SIM card"
@@ -8419,38 +8484,38 @@ msgstr "Odkleni"
 #: panels/wwan/cc-wwan-device-page.c:147
 #, c-format
 msgid "Please provide PIN code for SIM %d"
-msgstr ""
+msgstr "Vpisati je treba kodo PIN za kartico SIM %d"
 
 #: panels/wwan/cc-wwan-device-page.c:148
 msgid "Enter PIN to unlock your SIM card"
-msgstr ""
+msgstr "Vpišite kodo PIN za odklepanje kartice SIM"
 
 #: panels/wwan/cc-wwan-device-page.c:152
 #, c-format
 msgid "Please provide PUK code for SIM %d"
-msgstr ""
+msgstr "Vpisati je treba kodo PUK za kartico SIM %d"
 
 #: panels/wwan/cc-wwan-device-page.c:153
 msgid "Enter PUK to unlock your SIM card"
-msgstr ""
+msgstr "Vpišite kodo PUK za odklepanje kartice SIM"
 
 #: panels/wwan/cc-wwan-device-page.c:171
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Vpisano je napačno geslo. Na voljo imate še %u poskusov."
+msgstr[1] "Vpisano je napačno geslo. Na voljo imate še %u poskus."
+msgstr[2] "Vpisano je napačno geslo. Na voljo imate še %u poskusa."
+msgstr[3] "Vpisano je napačno geslo. Na voljo imate še %u poskuse."
 
 #: panels/wwan/cc-wwan-device-page.c:174
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Na voljo imate še %u poskusov."
+msgstr[1] "Na voljo imate še %u poskus."
+msgstr[2] "Na voljo imate še %u poskusa"
+msgstr[3] "Na voljo imate še %u poskuse."
 
 #: panels/wwan/cc-wwan-device-page.c:179
 msgid "Wrong password entered."
@@ -8458,7 +8523,7 @@ msgstr "Vpisano je napačno geslo"
 
 #: panels/wwan/cc-wwan-device-page.c:224
 msgid "PUK code should be an 8 digit number"
-msgstr ""
+msgstr "Koda PUK mora biti 8-znakovna vrednost"
 
 #: panels/wwan/cc-wwan-device-page.c:248
 msgid "Enter New PIN"
@@ -8490,15 +8555,15 @@ msgstr "_Mobilni podatki"
 
 #: panels/wwan/cc-wwan-device-page.ui:140
 msgid "Access data using mobile network"
-msgstr ""
+msgstr "Dostop do podatkov z uporabo mobilnega omrežja"
 
 #: panels/wwan/cc-wwan-device-page.ui:151
 msgid "_Data Roaming"
-msgstr ""
+msgstr "_Podatkovno gostovanje"
 
 #: panels/wwan/cc-wwan-device-page.ui:152
 msgid "Use mobile data when roaming"
-msgstr ""
+msgstr "Med gostovanjem uporabljaj mobilne podatke"
 
 #: panels/wwan/cc-wwan-device-page.ui:177
 msgid "_Network Mode"
@@ -8522,27 +8587,23 @@ msgstr "Zaklep kartice _SIM"
 
 #: panels/wwan/cc-wwan-device-page.ui:236
 msgid "Lock SIM with PIN"
-msgstr ""
+msgstr "Zakleni kartico SIM s kodo PIN"
 
 #: panels/wwan/cc-wwan-device-page.ui:246
 msgid "M_odem Details"
 msgstr "Podrobnosti _modema"
 
 #: panels/wwan/cc-wwan-errors-private.h:40
-#, fuzzy
-#| msgid "PIN check failed"
 msgid "Phone failure"
-msgstr "Preverjanje PIN je spodletelo"
+msgstr "Delovanje telefona je spodletelo"
 
 #: panels/wwan/cc-wwan-errors-private.h:41
-#, fuzzy
-#| msgid "Not connected"
 msgid "No connection to phone"
-msgstr "Brez povezave"
+msgstr "NI vzpostavljene povezave s telefonom"
 
 #: panels/wwan/cc-wwan-errors-private.h:43
 msgid "Operation not allowed"
-msgstr ""
+msgstr "Opravilo ni dovoljeno!"
 
 #: panels/wwan/cc-wwan-errors-private.h:44
 msgid "Operation not supported"
@@ -8598,7 +8659,7 @@ msgstr "Uporaba storitve GPRS ni dovoljena"
 
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
-msgstr ""
+msgstr "Gostovanje na tem območju ni dovoljeno"
 
 #: panels/wwan/cc-wwan-errors-private.h:82
 msgid "Unspecified GPRS error"
@@ -8641,7 +8702,7 @@ msgstr "Izbor omrežja"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:118
 msgid "Refresh Network Providers"
-msgstr ""
+msgstr "Osveži omrežne ponudnike"
 
 #: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
 #, c-format
@@ -8653,10 +8714,8 @@ msgid "No WWAN Adapter Found"
 msgstr "Ni najdenega vmesnika WWAN"
 
 #: panels/wwan/cc-wwan-panel.ui:112
-#, fuzzy
-#| msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgid "Make sure you have a Wireless Wan/Cellular device"
-msgstr "Prepričajte se, da je vmesnik Wi-Fi priklopljen in omogočen."
+msgstr "Prepričajte se, da naprava podpira brezžični protokol WAN/Cellular"
 
 #: panels/wwan/cc-wwan-panel.ui:154
 msgid "Wireless Wan is disabled when airplane mode is on"
@@ -8696,23 +8755,21 @@ msgstr "Spremeni kodo PIN"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
 msgid "Enter current PIN to change SIM lock settings"
-msgstr ""
+msgstr "Vpišite kodo PIN za spreminjanje nastavitev zaklepanja kartice SIM"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:3
 msgid "Mobile Network"
 msgstr "Mobilno omrežje"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:4
-#, fuzzy
-#| msgid "Configure Removable Media settings"
 msgid "Configure Telephony and mobile data connections"
-msgstr "Nastavitve odstranljivih nosilcev"
+msgstr "Nastavitve telefonije in mobilnih podatkovnih povezav"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:17
 msgid "cellular;wwan;telephony;sim;mobile;"
-msgstr ""
+msgstr "cellular;wwan;telephony;telefon;kartica;klicanje;mobilno;sim;mobile;"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
@@ -8870,6 +8927,10 @@ msgstr[3] "%u vhodi"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistemski zvoki"
+
+#~ msgid ""
+#~ "Select your display language, formats, keyboard layouts and input sources"
+#~ msgstr "Izberite jezik prikaza, oblike, razporeditve tipk in vnosne vire"
 
 #~ msgid "_Screen Brightness"
 #~ msgstr "_Svetlost zaslona"
@@ -11271,9 +11332,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "Region and Language"
 #~ msgstr "Področje in jezik"
-
-#~ msgid "Select a display language"
-#~ msgstr "Izbor jezika za prikaz"
 
 #~ msgid "Add Language"
 #~ msgstr "Dodaj jezik"
