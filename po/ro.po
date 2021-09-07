@@ -17,8 +17,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-06-09 13:38+0000\n"
-"PO-Revision-Date: 2021-07-02 19:09+0300\n"
+"POT-Creation-Date: 2021-09-07 09:53+0000\n"
+"PO-Revision-Date: 2021-09-07 17:45+0200\n"
 "Last-Translator: Florentina Mușat <florentina.musat.28@gmail.com>\n"
 "Language-Team: Romanian Gnome Team\n"
 "Language: ro\n"
@@ -58,7 +58,8 @@ msgstr "Acces total la /dev"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Rețea"
 
@@ -209,8 +210,9 @@ msgstr "Cameră"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
 #: panels/keyboard/cc-xkb-modifier-dialog.c:353
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
-#: panels/user-accounts/cc-user-panel.c:843
+#: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Dezactivat"
@@ -228,7 +230,7 @@ msgid "Location Services"
 msgstr "Servicii de locație"
 
 #: panels/applications/cc-applications-panel.ui:157
-#: panels/applications/cc-applications-panel.ui:499
+#: panels/applications/cc-applications-panel.ui:500
 msgid "Built-in Permissions"
 msgstr "Permisiuni încorporate"
 
@@ -302,48 +304,48 @@ msgid "How much resources this application is using."
 msgstr "Cât de multe resurse utilizează această aplicație."
 
 #: panels/applications/cc-applications-panel.ui:391
-#: panels/applications/cc-applications-panel.ui:536
+#: panels/applications/cc-applications-panel.ui:537
 msgid "Storage"
 msgstr "Stocare"
 
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:424
 msgid "Open in Software"
 msgstr "Deschide în Aplicații"
 
-#: panels/applications/cc-applications-panel.ui:473 shell/cc-panel-list.ui:121
+#: panels/applications/cc-applications-panel.ui:474 shell/cc-panel-list.ui:121
 msgid "No results found"
 msgstr "Nu s-au găsit rezultate"
 
-#: panels/applications/cc-applications-panel.ui:484
+#: panels/applications/cc-applications-panel.ui:485
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:177
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Încercați o căutare diferită"
 
-#: panels/applications/cc-applications-panel.ui:554
+#: panels/applications/cc-applications-panel.ui:555
 msgid ""
 "How much disk space this application is occupying with app data and caches."
 msgstr ""
 "Cât de mult spațiu pe disc ocupă această aplicație cu date și date "
 "prestocate."
 
-#: panels/applications/cc-applications-panel.ui:563
+#: panels/applications/cc-applications-panel.ui:564
 msgid "Application"
 msgstr "Aplicație"
 
-#: panels/applications/cc-applications-panel.ui:569
+#: panels/applications/cc-applications-panel.ui:570
 msgid "Data"
 msgstr "Date"
 
-#: panels/applications/cc-applications-panel.ui:575
+#: panels/applications/cc-applications-panel.ui:576
 msgid "Cache"
 msgstr "Date prestocate"
 
-#: panels/applications/cc-applications-panel.ui:581
+#: panels/applications/cc-applications-panel.ui:582
 msgid "<b>Total</b>"
 msgstr "<b>Total</b>"
 
-#: panels/applications/cc-applications-panel.ui:598
+#: panels/applications/cc-applications-panel.ui:599
 msgid "Clear Cache…"
 msgstr "Curăță datele prestocate…"
 
@@ -366,7 +368,7 @@ msgstr "Selectați o fotografie"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
-#: panels/display/cc-display-panel.c:1003
+#: panels/display/cc-display-panel.c:1006
 #: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
@@ -385,9 +387,12 @@ msgstr "Selectați o fotografie"
 #: panels/user-accounts/cc-avatar-chooser.c:228
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:633
-#: panels/user-accounts/cc-user-panel.c:651
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "_Renunță"
 
@@ -477,7 +482,7 @@ msgstr "Opriți modul avion pentru a putea activa Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1595
+#: panels/printers/pp-new-printer-dialog.c:1392
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -759,6 +764,7 @@ msgstr "Salvare profil"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Salvare"
 
@@ -949,7 +955,7 @@ msgstr ""
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:810
-#: panels/diagnostics/cc-diagnostics-panel.c:143
+#: panels/diagnostics/cc-diagnostics-panel.c:144
 msgid "Learn more"
 msgstr "Aflați mai multe"
 
@@ -1268,7 +1274,7 @@ msgstr[1] "%d ore"
 msgstr[2] "%d de ore"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1205
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:973
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1546,7 +1552,7 @@ msgstr ""
 "preferată;preferate;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:145
+#: panels/diagnostics/cc-diagnostics-panel.c:146
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -1585,20 +1591,20 @@ msgstr ""
 "network;identity;privacy;ecran;blocare;diagnostice;pană;privat;temporar;nume;"
 "rețeaidentitate;confidențialitate;"
 
-#: panels/display/cc-display-panel.c:1014
+#: panels/display/cc-display-panel.c:1017
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Aplică"
 
-#: panels/display/cc-display-panel.c:1035
+#: panels/display/cc-display-panel.c:1038
 msgid "Apply Changes?"
 msgstr "Aplicați modificările?"
 
-#: panels/display/cc-display-panel.c:1040
+#: panels/display/cc-display-panel.c:1043
 msgid "Changes Cannot be Applied"
 msgstr "Nu se pot aplica modificările"
 
-#: panels/display/cc-display-panel.c:1041
+#: panels/display/cc-display-panel.c:1044
 msgid "This could be due to hardware limitations."
 msgstr "Aceasta poate fi din cauza limitărilor de hardware."
 
@@ -1658,27 +1664,27 @@ msgstr "Ecrane"
 msgid "Night Light"
 msgstr "Lumină nocturnă"
 
-#: panels/display/cc-display-settings.c:103
+#: panels/display/cc-display-settings.c:107
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Peisaj"
 
-#: panels/display/cc-display-settings.c:106
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Portret dreapta"
 
-#: panels/display/cc-display-settings.c:109
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Portret stânga"
 
-#: panels/display/cc-display-settings.c:112
+#: panels/display/cc-display-settings.c:116
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Peisaj (inversat)"
 
-#: panels/display/cc-display-settings.c:186
+#: panels/display/cc-display-settings.c:190
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1702,6 +1708,7 @@ msgid "Adjust for TV"
 msgstr "Reglează pentru TV"
 
 #: panels/display/cc-display-settings.ui:59
+#: panels/display/cc-display-settings.ui:76
 msgctxt "display setting"
 msgid "Scale"
 msgstr "Scalare"
@@ -1802,11 +1809,11 @@ msgstr ""
 "redshift;color;sunset;sunrise;Panou;Proiector;Ecran;Rezoluție;Lumină;"
 "Albastru;culoare;apus;răsărit;"
 
-#: panels/info-overview/cc-info-overview-panel.c:414
-#: panels/info-overview/cc-info-overview-panel.c:429
-#: panels/info-overview/cc-info-overview-panel.c:441
-#: panels/info-overview/cc-info-overview-panel.c:487
-#: panels/info-overview/cc-info-overview-panel.c:517
+#: panels/info-overview/cc-info-overview-panel.c:413
+#: panels/info-overview/cc-info-overview-panel.c:437
+#: panels/info-overview/cc-info-overview-panel.c:483
+#: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Necunoscut"
 
@@ -1814,32 +1821,32 @@ msgstr "Necunoscut"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:449
+#: panels/info-overview/cc-info-overview-panel.c:445
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; ID-ul compilării: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:464
+#: panels/info-overview/cc-info-overview-panel.c:460
 #, c-format
 msgid "64-bit"
 msgstr "64-biți"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:467
+#: panels/info-overview/cc-info-overview-panel.c:463
 #, c-format
 msgid "32-bit"
 msgstr "32-biți"
 
-#: panels/info-overview/cc-info-overview-panel.c:724
+#: panels/info-overview/cc-info-overview-panel.c:720
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:728
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:730
+#: panels/info-overview/cc-info-overview-panel.c:726
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Necunoscut"
@@ -1985,7 +1992,7 @@ msgid "Eject"
 msgstr "Ejectează"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:542
+#: panels/universal-access/cc-ua-panel.ui:580
 msgid "Typing"
 msgstr "Tastare"
 
@@ -2309,6 +2316,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "Renunță"
 
@@ -2337,7 +2345,8 @@ msgstr "Nicio scurtătură de tastatură găsită"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Înapoi"
 
@@ -2385,6 +2394,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Nume"
 
@@ -2405,6 +2415,7 @@ msgid "None"
 msgstr "Niciuna"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Adaugă"
 
@@ -2425,10 +2436,12 @@ msgid "Keyboard"
 msgstr "Tastatură"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-msgid "View and change keyboard shortcuts and set your typing preferences"
+msgid ""
+"Change keyboard shortcuts and set your typing preferences, keyboard layouts "
+"and input sources"
 msgstr ""
-"Vedeți și schimbați scurtăturile de tastatură și configurați preferințele de "
-"tastare"
+"Modificați scurtăturile de tastatură și configurați preferințele de tastare, "
+"aranjamentele de tastatură și sursele de intrare"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
@@ -2668,6 +2681,7 @@ msgstr "Protejați conversațiile"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Generale"
 
@@ -2782,13 +2796,99 @@ msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr ""
 "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;Clic;Derulare;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "Colț _important"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr ""
+"Atingeți colțul din dreapta sus pentru a deschide Vederea de ansamblu a "
+"Activităților"
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "Margini de ecran _active"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Trageți ferestrele spre marginile de sus, stânga și dreapta pentru a le "
+"redimensiona."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "Spații de lucru"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "Spații de lucru _dinamice"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "Elimină automat spații de lucru goale."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "Spații de lucru _fixe"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "Specifică un număr permanent de spații de lucru."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "_Număr de spații de lucru"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+msgid "Multi-Monitor"
+msgstr "Monitoare multiple"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "Spațiile de lucru doar pe afișajul _principal"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "Spații de lucru pe toate _ecranele"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "Schimbarea între aplicații"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "Include aplicații de pe toate _spațiile de lucru"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "Include aplicații numai de pe spațiul de lucru _curent"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "Sarcini multiple"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr ""
+"Administrează preferințele pentru productivitate și efectuarea de sarcini "
+"multiple"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr ""
+"Multitasking;Multitask;Productivity;Customize;Desktop;Sarcini;Sarcini "
+"multiple;Productivitate;Personalizează;Personalizare;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ups, ceva nu a funcționat corect. Vă rugăm să contactați distribuitorul de "
 "software."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager trebuie să funcționeze."
 
@@ -2806,29 +2906,29 @@ msgid "Not set up"
 msgstr "Neconfigurat"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:208
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:262
 msgid "Insecure network (WEP)"
 msgstr "Rețea nesigură (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Rețea sigură (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA2)"
 msgstr "Rețea sigură (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA3)"
 msgstr "Rețea sigură (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:288
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "Rețea securizată"
 
@@ -2837,7 +2937,7 @@ msgstr "Rețea securizată"
 msgid "Connected"
 msgstr "Conectat"
 
-#: panels/network/cc-wifi-connection-row.ui:100
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
@@ -2888,6 +2988,7 @@ msgstr "Nume rețea"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Parolă"
 
@@ -2933,7 +3034,7 @@ msgstr "Nu au fost găsit niciun adaptor Wi-Fi"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Asigurați-vă că aveți un adaptor Wi-Fi conectat și pornit"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Modul avion este pornit"
 
@@ -3233,6 +3334,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 personal"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Putere semnal"
 
@@ -3579,20 +3681,20 @@ msgstr "Dispozitivul wireless nu suporta modul Hotspot"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1093 panels/power/cc-power-panel.c:1104
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
-#: panels/universal-access/cc-ua-panel.ui:300
-#: panels/universal-access/cc-ua-panel.ui:346
-#: panels/universal-access/cc-ua-panel.ui:392
-#: panels/universal-access/cc-ua-panel.ui:498
-#: panels/universal-access/cc-ua-panel.ui:651
-#: panels/universal-access/cc-ua-panel.ui:697
-#: panels/universal-access/cc-ua-panel.ui:743
-#: panels/universal-access/cc-ua-panel.ui:927
+#: panels/power/cc-power-panel.c:856 panels/power/cc-power-panel.c:867
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
+#: panels/universal-access/cc-ua-panel.ui:338
+#: panels/universal-access/cc-ua-panel.ui:384
+#: panels/universal-access/cc-ua-panel.ui:430
+#: panels/universal-access/cc-ua-panel.ui:536
+#: panels/universal-access/cc-ua-panel.ui:689
+#: panels/universal-access/cc-ua-panel.ui:735
+#: panels/universal-access/cc-ua-panel.ui:781
+#: panels/universal-access/cc-ua-panel.ui:965
 msgid "Off"
 msgstr "Oprit"
 
@@ -3627,6 +3729,7 @@ msgid "Turn device off"
 msgstr "Închide dispozitivul"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3724,8 +3827,7 @@ msgid "Unmanaged"
 msgstr "Negestionat"
 
 #. TRANSLATORS: device status
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:928
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "Indisponibil"
 
@@ -3950,7 +4052,7 @@ msgid "SIM Puk required"
 msgstr "Este necesar PUK-ul pentru SIM"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "SIM greșit"
 
@@ -4069,7 +4171,7 @@ msgstr "Nume _utilizator"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:363
+#: panels/user-accounts/cc-user-panel.ui:365
 msgid "_Password"
 msgstr "_Parolă"
 
@@ -4400,12 +4502,12 @@ msgid "Show Message C_ontent on Lock Screen"
 msgstr "Arată c_onținutul mesajelor pe ecranul blocat"
 
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1099 panels/power/cc-power-panel.c:1106
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
+#: panels/power/cc-power-panel.c:862 panels/power/cc-power-panel.c:869
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
 msgid "On"
 msgstr "Pornit"
 
@@ -4624,7 +4726,7 @@ msgid "Gaming input device"
 msgstr "Dispozitiv de intrare pentru jocuri"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:387
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:384
 #: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Baterie"
@@ -4639,46 +4741,85 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
-#: panels/power/cc-power-panel.c:385
+#: panels/power/cc-power-panel.c:382
 msgid "Batteries"
 msgstr "Baterii"
 
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:644
 msgid "When _idle"
 msgstr "Când e _inactiv"
 
-#: panels/power/cc-power-panel.c:1033
+#: panels/power/cc-power-panel.c:796
 msgid "Suspend"
 msgstr "Suspendă"
 
-#: panels/power/cc-power-panel.c:1034
+#: panels/power/cc-power-panel.c:797
 msgid "Power Off"
 msgstr "Oprește"
 
-#: panels/power/cc-power-panel.c:1035
+#: panels/power/cc-power-panel.c:798
 msgid "Hibernate"
 msgstr "Hibernează"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:799
 msgid "Nothing"
 msgstr "Nimic"
 
-#: panels/power/cc-power-panel.c:1095
+#: panels/power/cc-power-panel.c:858
 msgid "When on battery power"
 msgstr "Când funcționează pe baterie"
 
-#: panels/power/cc-power-panel.c:1097
+#: panels/power/cc-power-panel.c:860
 msgid "When plugged in"
 msgstr "Alimentat de la rețea"
 
-#: panels/power/cc-power-panel.c:1212
+#: panels/power/cc-power-panel.c:980
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Niciodată"
 
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1066
 msgid "Automatic suspend"
 msgstr "Suspendare automată"
+
+#: panels/power/cc-power-panel.c:1171
+msgid ""
+"Performance mode temporarily disabled due to high operating temperature."
+msgstr ""
+"Modul de performanță este dezactivat temporar din cauza temperaturii înalte "
+"de operare."
+
+#: panels/power/cc-power-panel.c:1173
+msgid ""
+"Lap detected: performance mode temporarily unavailable. Move the device to a "
+"stable surface to restore."
+msgstr ""
+"Suprafață neregulată detectată: modul de performanță este indisponibil. "
+"Mutați dispozitivul la o suprafață stabilă pentru restaurare."
+
+#: panels/power/cc-power-panel.c:1175
+msgid "Performance mode temporarily disabled."
+msgstr "Modul de performanță este dezactivat temporar."
+
+#: panels/power/cc-power-panel.c:1218
+msgid ""
+"Low battery: power saver enabled. Previous mode will be restored when "
+"battery is sufficiently charged."
+msgstr ""
+"Baterie pe terminate: economizorul de energie activat. Modul anterior va fi "
+"restaurat când bateria este încărcată suficient."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1226
+#, c-format
+msgid "Power Saver mode activated by “%s”."
+msgstr "Modul de economizare energie activat de „%s”."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1230
+#, c-format
+msgid "Performance mode activated by “%s”."
+msgstr "Modul de performanță a fost activat de „%s”"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4748,124 +4889,117 @@ msgstr "Modul de alimentare"
 msgid "Affects system performance and power usage."
 msgstr "Afectează performanța sistemului și consumul de energie."
 
-#: panels/power/cc-power-panel.ui:131
-msgid "Power Saving"
-msgstr "Economisire de energie"
+#: panels/power/cc-power-panel.ui:142
+msgid "Power Saving Options"
+msgstr "Opțiuni de economisire de energie"
 
-#: panels/power/cc-power-panel.ui:135
-msgid "_Screen Brightness"
-msgstr "Luminozitatea _ecranului"
+#: panels/power/cc-power-panel.ui:146
+msgid "Automatic Screen Brightness"
+msgstr "Luminozitate automată pentru ecran"
 
-#: panels/power/cc-power-panel.ui:151
-msgid "Automatic Brightness"
-msgstr "Luminozitate automată"
+#: panels/power/cc-power-panel.ui:147
+msgid "Screen brightness adjusts to the surrounding light."
+msgstr "Luminozitatea ecranului se ajustează după lumina ambientală."
 
-#: panels/power/cc-power-panel.ui:164
-msgid "_Keyboard Brightness"
-msgstr "Luminozitate _tastatură"
+#: panels/power/cc-power-panel.ui:160
+msgid "Dim Screen"
+msgstr "Diminuează luminozitatea ecranului"
 
-#: panels/power/cc-power-panel.ui:180
-msgid "Dim Screen When Inactive"
-msgstr "Diminuează luminozitatea la inactivitate"
+#: panels/power/cc-power-panel.ui:161
+msgid "Reduces the screen brightness when the computer is inactive."
+msgstr "Reduce luminozitatea ecranului când calculatorul este inactiv."
 
-# This is the "blank screen" setting label under the power settings. It is connected with a drop-down where you can choose the amount of minutes until the screen goes black.
-#: panels/power/cc-power-panel.ui:193
-msgid "_Blank Screen"
-msgstr "Întunecă _ecranul"
+#: panels/power/cc-power-panel.ui:174
+msgid "Screen _Blank"
+msgstr "Înnegrește ecranul"
 
-#: panels/power/cc-power-panel.ui:201
+#: panels/power/cc-power-panel.ui:175
+msgid "Turns the screen off after a period of inactivity."
+msgstr "Oprește ecranul după o perioadă de inactivitate."
+
+#: panels/power/cc-power-panel.ui:183
+msgid "Automatic Power Saver"
+msgstr "Economizor de energie automat"
+
+#: panels/power/cc-power-panel.ui:184
+msgid "Enables power saver mode when battery is low."
+msgstr ""
+"Activează modul de economizare de energie când bateria este pe terminate."
+
+#: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
 msgstr "Suspendare _automată"
 
+#: panels/power/cc-power-panel.ui:199
+msgid "Pauses the computer after a period of inactivity."
+msgstr "Pune calculatorul pe pauză după o perioadă de inactivitate."
+
 #: panels/power/cc-power-panel.ui:217
-msgid "_Wi-Fi"
-msgstr "_Wi-Fi"
-
-#: panels/power/cc-power-panel.ui:218
-msgid "Wi-Fi can be turned off to save power."
-msgstr "Wi-Fi poate fi oprit pentru a economisi energia."
-
-#: panels/power/cc-power-panel.ui:233
-msgid "_Mobile Broadband"
-msgstr "Internet _mobil de bandă largă"
-
-#: panels/power/cc-power-panel.ui:234
-msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-msgstr ""
-"Conexiunea mobilă de bandă largă (3G, 4G, LTE, etc.) poate fi oprită pentru "
-"a economisi energie."
-
-#: panels/power/cc-power-panel.ui:249
-msgid "_Bluetooth"
-msgstr "_Bluetooth"
-
-#: panels/power/cc-power-panel.ui:250
-msgid "Bluetooth can be turned off to save power."
-msgstr "Bluetooth poate fi oprit pentru a economisi energie."
-
-#: panels/power/cc-power-panel.ui:267
 msgid "Suspend & Power Button"
 msgstr "Buton de suspendare și oprire"
 
-#: panels/power/cc-power-panel.ui:271
+#: panels/power/cc-power-panel.ui:221
 msgid "Po_wer Button Behavior"
 msgstr "Comportament butonului de alimen_tare"
 
-#: panels/power/cc-power-panel.ui:279
+#: panels/power/cc-power-panel.ui:229
 msgid "Show Battery _Percentage"
 msgstr "Arată _procentajul bateriei"
 
-#: panels/power/cc-power-panel.ui:325
+#: panels/power/cc-power-panel.ui:268
 msgid "Automatic Suspend"
 msgstr "Suspendare automată"
 
-#: panels/power/cc-power-panel.ui:350
+#: panels/power/cc-power-panel.ui:293
 msgid "_Plugged In"
 msgstr "Alimentat la _rețea"
 
-#: panels/power/cc-power-panel.ui:366
+#: panels/power/cc-power-panel.ui:309
 msgid "On _Battery Power"
 msgstr "Pe _baterie"
 
-#: panels/power/cc-power-panel.ui:411 panels/power/cc-power-panel.ui:471
+#: panels/power/cc-power-panel.ui:354 panels/power/cc-power-panel.ui:414
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Întârziere"
 
-#: panels/power/cc-power-profile-row.c:62
+#: panels/power/cc-power-profile-row.c:61
 msgid "Lap detected: performance mode unavailable"
 msgstr "Etapă detectată: modul de performanță nedisponibil"
 
-#: panels/power/cc-power-profile-row.c:64
+#: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
 msgstr "Temperatură de hardware ridicată: modul de performanță nedisponibil"
 
-#: panels/power/cc-power-profile-row.c:65
+#: panels/power/cc-power-profile-row.c:64
 msgid "Performance mode unavailable"
 msgstr "Modul de performanță nedisponibil"
 
-#: panels/power/cc-power-profile-row.c:87
-#: panels/power/cc-power-profile-row.c:187
+#: panels/power/cc-power-profile-row.c:86
+#: panels/power/cc-power-profile-row.c:185
 msgid "High performance and power usage."
 msgstr "Performanță și consum de energie ridicate."
 
-#: panels/power/cc-power-profile-row.c:186
+#: panels/power/cc-power-profile-row.c:184
+msgctxt "Power profile"
 msgid "Performance"
 msgstr "Performanță"
 
-#: panels/power/cc-power-profile-row.c:192
-msgid "Balanced Power"
-msgstr "Consum echilibrat"
+#: panels/power/cc-power-profile-row.c:188
+msgctxt "Power profile"
+msgid "Balanced"
+msgstr "Echilibrată"
 
-#: panels/power/cc-power-profile-row.c:193
+#: panels/power/cc-power-profile-row.c:189
 msgid "Standard performance and power usage."
 msgstr "Performanță și consum de energie standard."
 
-#: panels/power/cc-power-profile-row.c:198
+#: panels/power/cc-power-profile-row.c:192
+msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Economizor de energie"
 
-#: panels/power/cc-power-profile-row.c:199
+#: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
 msgstr "Performanță și consum de energie reduse."
 
@@ -4898,7 +5032,7 @@ msgstr "Autentificare"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Nume utilizator"
 
@@ -4914,17 +5048,17 @@ msgid "Printer “%s” has been deleted"
 msgstr "Imprimanta „%s” a fost ștearsă"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:930
+#: panels/printers/cc-printers-panel.c:926
 msgid "Failed to add new printer."
 msgstr "Nu s-a putut adăuga imprimanta nouă."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1209
+#: panels/printers/cc-printers-panel.c:1225
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nu s-a putut încărca interfața cu utilizatorul: %s"
 
-#: panels/printers/cc-printers-panel.c:1277
+#: panels/printers/cc-printers-panel.c:1293
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Deblocați pentru a adăuga imprimante și schimba configurări"
 
@@ -4945,8 +5079,8 @@ msgstr ""
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:344
-#: panels/printers/pp-new-printer-dialog.c:401
+#: panels/printers/pp-new-printer-dialog.c:254
+#: panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "Adăugare imprimantă"
 
@@ -4954,6 +5088,7 @@ msgstr "Adăugare imprimantă"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Deblochează"
 
@@ -5002,7 +5137,7 @@ msgstr "Locație"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:239
+#: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Driver"
 
@@ -5178,57 +5313,57 @@ msgstr "_Autentificare"
 msgid "No Active Printer Jobs"
 msgstr "Nu sunt sarcini active pentru imprimantă"
 
-#: panels/printers/pp-new-printer-dialog.c:359
+#: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
 msgstr "Deblocați serverul de imprimare"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "Deblochează %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:367
+#: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Introduceți numele de utilizator și parola pentru a vedea imprimantele "
 "disponibile pe %s."
 
-#: panels/printers/pp-new-printer-dialog.c:790
+#: panels/printers/pp-new-printer-dialog.c:587
 msgid "Searching for Printers"
 msgstr "Se caută imprimante"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1578
+#: panels/printers/pp-new-printer-dialog.c:1375
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1583
+#: panels/printers/pp-new-printer-dialog.c:1380
 msgid "Serial Port"
 msgstr "Port serial"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1590
+#: panels/printers/pp-new-printer-dialog.c:1387
 msgid "Parallel Port"
 msgstr "Port paralel"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1632
+#: panels/printers/pp-new-printer-dialog.c:1429
 #, c-format
 msgid "Location: %s"
 msgstr "Locație: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1637
+#: panels/printers/pp-new-printer-dialog.c:1434
 #, c-format
 msgid "Address: %s"
 msgstr "Adresă: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1461
 msgid "Server requires authentication"
 msgstr "Serverul necesită autentificare"
 
@@ -5369,7 +5504,8 @@ msgid "No pre-filtering"
 msgstr "Fără pre-filtrare"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:223
+#: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Producător"
 
@@ -5519,6 +5655,7 @@ msgid "Remove Printer"
 msgstr "Ștergere imprimantă"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Model"
 
@@ -5560,7 +5697,7 @@ msgstr ""
 "de tipărire al sistemului nu este disponibil."
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:189
-#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:159
+#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:203
 msgid "Formats"
 msgstr "Formate"
 
@@ -5626,40 +5763,44 @@ msgstr "Unități de măsură"
 msgid "Paper"
 msgstr "Hârtie"
 
-#: panels/region/cc-region-panel.c:740
-msgid "Login _Screen"
-msgstr "_Ecran de autentificare"
+#: panels/region/cc-region-panel.ui:42
+msgid "My Account"
+msgstr "Contul meu"
 
-#: panels/region/cc-region-panel.ui:34
+#: panels/region/cc-region-panel.ui:53
+msgid "Login Screen"
+msgstr "Ecran de autentificare"
+
+#: panels/region/cc-region-panel.ui:78
 msgid "Language"
 msgstr "Limba"
 
-#: panels/region/cc-region-panel.ui:45
+#: panels/region/cc-region-panel.ui:89
 msgid "The language used for text in windows and web pages."
 msgstr "Limba străină utilizată pentru text în ferestre și pagini web."
 
-#: panels/region/cc-region-panel.ui:85
-#: panels/user-accounts/cc-user-panel.ui:309
+#: panels/region/cc-region-panel.ui:129
+#: panels/user-accounts/cc-user-panel.ui:311
 msgid "_Language"
 msgstr "_Limbă"
 
-#: panels/region/cc-region-panel.ui:120
+#: panels/region/cc-region-panel.ui:164
 msgid "Restart the session for changes to take effect"
 msgstr "Reporniți sesiunea pentru ca modificările să aibă efect"
 
-#: panels/region/cc-region-panel.ui:135
+#: panels/region/cc-region-panel.ui:179
 msgid "Restart…"
 msgstr "Repornește…"
 
-#: panels/region/cc-region-panel.ui:170
+#: panels/region/cc-region-panel.ui:214
 msgid "The format used for numbers, dates, and currencies."
 msgstr "Formatul utilizat pentru numere, date și monede."
 
-#: panels/region/cc-region-panel.ui:204
+#: panels/region/cc-region-panel.ui:248
 msgid "_Formats"
 msgstr "_Formate"
 
-#: panels/region/cc-region-panel.ui:231
+#: panels/region/cc-region-panel.ui:275
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Configurările de autentificare sunt folosite pentru toți utilizatorii la "
@@ -5670,10 +5811,8 @@ msgid "Region & Language"
 msgstr "Regiune și limbă"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-msgid ""
-"Select your display language, formats, keyboard layouts and input sources"
-msgstr ""
-"Selectați limba afișată, formate, aranjamente de taste și surse de intrare"
+msgid "Select your display language and formats"
+msgstr "Selectați limba afișată și formatele"
 
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
@@ -6483,7 +6622,7 @@ msgstr ""
 "Alertează atunci când Num Lock sau Caps Lock sunt activate sau dezactivate."
 
 #: panels/universal-access/cc-sound-keys-dialog.ui:45
-#: panels/universal-access/cc-ua-panel.ui:374
+#: panels/universal-access/cc-ua-panel.ui:412
 msgid "_Sound Keys"
 msgstr "Taste pentru control _sunet"
 
@@ -6590,32 +6729,32 @@ msgstr ""
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:348
+#: panels/universal-access/cc-ua-panel.c:351
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Implicită"
 
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:354
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Medie"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Mare"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Mai mare"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Cel mai mare"
 
-#: panels/universal-access/cc-ua-panel.c:364
+#: panels/universal-access/cc-ua-panel.c:367
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6639,65 +6778,69 @@ msgstr "_Contrast ridicat"
 msgid "_Large Text"
 msgstr "_Text mărit"
 
-#: panels/universal-access/cc-ua-panel.ui:235
+#: panels/universal-access/cc-ua-panel.ui:238
+msgid "Enable A_nimations"
+msgstr "Activează a_nimații"
+
+#: panels/universal-access/cc-ua-panel.ui:273
 msgid "C_ursor Size"
 msgstr "Dimenisunea c_ursorului"
 
-#: panels/universal-access/cc-ua-panel.ui:282
+#: panels/universal-access/cc-ua-panel.ui:320
 #: panels/universal-access/cc-zoom-options-dialog.ui:91
 msgid "_Zoom"
 msgstr "_Zoom"
 
-#: panels/universal-access/cc-ua-panel.ui:328
+#: panels/universal-access/cc-ua-panel.ui:366
 msgid "Screen _Reader"
 msgstr "Cititor de ec_ran"
 
-#: panels/universal-access/cc-ua-panel.ui:436
+#: panels/universal-access/cc-ua-panel.ui:474
 msgid "Hearing"
 msgstr "Auz"
 
-#: panels/universal-access/cc-ua-panel.ui:480
+#: panels/universal-access/cc-ua-panel.ui:518
 #: panels/universal-access/cc-visual-alerts-dialog.ui:68
 msgid "_Visual Alerts"
 msgstr "Alerte _vizuale"
 
-#: panels/universal-access/cc-ua-panel.ui:588
+#: panels/universal-access/cc-ua-panel.ui:626
 msgid "Screen _Keyboard"
 msgstr "Tastatura pe ecra_n"
 
-#: panels/universal-access/cc-ua-panel.ui:633
+#: panels/universal-access/cc-ua-panel.ui:671
 msgid "R_epeat Keys"
 msgstr "R_epetare taste"
 
-#: panels/universal-access/cc-ua-panel.ui:679
+#: panels/universal-access/cc-ua-panel.ui:717
 msgid "Cursor _Blinking"
 msgstr "Cursor _clipitor"
 
-#: panels/universal-access/cc-ua-panel.ui:725
+#: panels/universal-access/cc-ua-panel.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "Asistență la tastare (Acces_X)"
 
-#: panels/universal-access/cc-ua-panel.ui:786
+#: panels/universal-access/cc-ua-panel.ui:824
 msgid "Pointing & Clicking"
 msgstr "Cursor și maus"
 
-#: panels/universal-access/cc-ua-panel.ui:832
+#: panels/universal-access/cc-ua-panel.ui:870
 msgid "_Mouse Keys"
 msgstr "Taste _Maus"
 
-#: panels/universal-access/cc-ua-panel.ui:877
+#: panels/universal-access/cc-ua-panel.ui:915
 msgid "_Locate Pointer"
 msgstr "_Localizează indicatorul"
 
-#: panels/universal-access/cc-ua-panel.ui:909
+#: panels/universal-access/cc-ua-panel.ui:947
 msgid "_Click Assist"
 msgstr "Asistență la _clic"
 
-#: panels/universal-access/cc-ua-panel.ui:955
+#: panels/universal-access/cc-ua-panel.ui:993
 msgid "_Double-Click Delay"
 msgstr "Întârziere pentru clic-_dublu"
 
-#: panels/universal-access/cc-ua-panel.ui:975
+#: panels/universal-access/cc-ua-panel.ui:1013
 msgid "Double-Click Delay"
 msgstr "Întârziere pentru clic-dublu"
 
@@ -7467,7 +7610,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7475,7 +7618,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7563,26 +7706,26 @@ msgstr "Nu se poate realiza conectarea la domeniul %s: %s"
 msgid "Your account"
 msgstr "Contul tău"
 
-#: panels/user-accounts/cc-user-panel.c:397
+#: panels/user-accounts/cc-user-panel.c:402
 msgid "Failed to delete user"
 msgstr "Ștergerea utilizatorului a eșuat"
 
-#: panels/user-accounts/cc-user-panel.c:452
-#: panels/user-accounts/cc-user-panel.c:507
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:457
+#: panels/user-accounts/cc-user-panel.c:512
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
 msgstr "A eșuat eliminarea utilizatorului gestionat la distanță"
 
-#: panels/user-accounts/cc-user-panel.c:602
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "Nu vă puteți șterge propriul cont."
 
-#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s este încă autentificat"
 
-#: panels/user-accounts/cc-user-panel.c:615
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7590,12 +7733,12 @@ msgstr ""
 "Ștergerea unui utilizator când acesta este încă autentificat poate aduce "
 "sistemul într-o stare inconsistentă."
 
-#: panels/user-accounts/cc-user-panel.c:624
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Doriți să păstrați fișierele lui %s?"
 
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7603,53 +7746,54 @@ msgstr ""
 "Este posibil să păstrați dosarul personal, emailurile și fișierele temporare "
 "după ștergerea unui cont."
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "Ș_terge fișierele"
 
-#: panels/user-accounts/cc-user-panel.c:632
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "_Păstrează fișierele"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Sigur doriți să eliminați contul %s gestionat de la distanță?"
 
-#: panels/user-accounts/cc-user-panel.c:650
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "Ș_terge fișierele"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cont dezactivat"
 
-#: panels/user-accounts/cc-user-panel.c:708
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Va fi definită la următoarea autentificare"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Niciuna"
 
-#: panels/user-accounts/cc-user-panel.c:754
+#: panels/user-accounts/cc-user-panel.c:759
 msgid "Logged in"
 msgstr "Autentificat"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:841
+#: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Activat"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1259
 msgid "Failed to contact the accounts service"
 msgstr "Contactarea serviciului pentru conturi a eșuat"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1261
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
 
@@ -7657,7 +7801,7 @@ msgstr "Asigurați-vă că aplicația AccountService este corect instalată."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7665,12 +7809,12 @@ msgstr ""
 "Pentru a face schimbări,\n"
 "apăsați întâi clic pe iconița *"
 
-#: panels/user-accounts/cc-user-panel.c:1361
+#: panels/user-accounts/cc-user-panel.c:1366
 msgid "Delete the selected user account"
 msgstr "Șterge contul de utilizator selectat"
 
-#: panels/user-accounts/cc-user-panel.c:1373
-#: panels/user-accounts/cc-user-panel.c:1492
+#: panels/user-accounts/cc-user-panel.c:1378
+#: panels/user-accounts/cc-user-panel.c:1489
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7678,7 +7822,7 @@ msgstr ""
 "Pentru a șterge un cont de utilizator,\n"
 "efectuați clic pe iconița *"
 
-#: panels/user-accounts/cc-user-panel.c:1538
+#: panels/user-accounts/cc-user-panel.c:1535
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Deblocați pentru a adăuga utilizatori și schimba configurări"
 
@@ -7727,32 +7871,32 @@ msgstr "Control _parental"
 msgid "Open the Parental Controls application."
 msgstr "Deschide aplicația de Control parental."
 
-#: panels/user-accounts/cc-user-panel.ui:345
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Authentication & Login"
 msgstr "Autentificare și login"
 
-#: panels/user-accounts/cc-user-panel.ui:388
+#: panels/user-accounts/cc-user-panel.ui:390
 msgid "_Fingerprint Login"
 msgstr "Autenti_ficare cu amprentă digitală"
 
-#: panels/user-accounts/cc-user-panel.ui:413
+#: panels/user-accounts/cc-user-panel.ui:415
 msgid "A_utomatic Login"
 msgstr "Autentificare a_utomată"
 
-#: panels/user-accounts/cc-user-panel.ui:427
+#: panels/user-accounts/cc-user-panel.ui:429
 msgid "Account Activity"
 msgstr "Activitate cont"
 
-#: panels/user-accounts/cc-user-panel.ui:458
+#: panels/user-accounts/cc-user-panel.ui:460
 msgid "Remove User…"
 msgstr "Șterge utilizator…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:499
+#: panels/user-accounts/cc-user-panel.ui:501
 msgid "No Users Found"
 msgstr "Nu au fost găsiți utilizatori"
 
-#: panels/user-accounts/cc-user-panel.ui:509
+#: panels/user-accounts/cc-user-panel.ui:511
 msgid "Unlock to add a user account."
 msgstr "Deblochează pentru a adăuga un cont de utilizator."
 
@@ -7956,6 +8100,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "Noua parolă nu conține suficiente caractere diferite"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Eroare necunoscută"
@@ -8205,6 +8350,445 @@ msgstr "Buton inferior"
 msgid "Tip Pressure Feel"
 msgstr "Presiune vârf"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "Puncte de acces"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "Operație anulată"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>Eroare:</b> Accesul restricționat la modificarea configurărilor"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Eroare:</b> Eroare la echipamentul mobil"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "Neînregistrat"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+msgid "Registered"
+msgstr "Înregistrat"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "Roaming"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "Căutare"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "Refuzat"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "Detalii modem"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "Stare modem"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "Furnizor"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "Tip de rețea"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "Starea rețelei"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "Numărul propriu"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "Detaliile dispozitivului"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "Versiune firmware"
+
+#: panels/wwan/cc-wwan-device.c:988
+msgid "2G Only"
+msgstr "Numai 2G"
+
+#: panels/wwan/cc-wwan-device.c:991
+msgid "3G Only"
+msgstr "Numai 3G"
+
+#: panels/wwan/cc-wwan-device.c:994
+msgid "4G Only"
+msgstr "Numai 4G"
+
+#: panels/wwan/cc-wwan-device.c:1003
+msgid "2G, 3G, 4G (Preferred)"
+msgstr "2G, 3G, 4G (Preferat)"
+
+#: panels/wwan/cc-wwan-device.c:1005
+msgid "2G, 3G (Preferred), 4G"
+msgstr "2G, 3G (Preferat), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid "2G (Preferred), 3G, 4G"
+msgstr "2G (Preferat), 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1009
+msgid "2G, 3G, 4G"
+msgstr "2G, 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1015
+msgid "3G, 4G (Preferred)"
+msgstr "3G, 4G (Preferat)"
+
+#: panels/wwan/cc-wwan-device.c:1017
+msgid "3G (Preferred), 4G"
+msgstr "3G (Preferat), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1019
+msgid "3G, 4G"
+msgstr "3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1025
+msgid "2G, 4G (Preferred)"
+msgstr "2G, 4G (Preferat)"
+
+#: panels/wwan/cc-wwan-device.c:1027
+msgid "2G (Preferred), 4G"
+msgstr "2G (Preferat), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1029
+msgid "2G, 4G"
+msgstr "2G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1035
+msgid "2G, 3G (Preferred)"
+msgstr "2G, 3G (Preferat)"
+
+#: panels/wwan/cc-wwan-device.c:1037
+msgid "2G (Preferred), 3G"
+msgstr "2G (Preferat), 3G"
+
+#: panels/wwan/cc-wwan-device.c:1039
+msgid "2G, 3G"
+msgstr "2G, 3G"
+
+#: panels/wwan/cc-wwan-device.c:1043
+msgctxt "Network mode"
+msgid "Unknown"
+msgstr "Necunoscută"
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "Deblochează cardul SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+msgid "Unlock"
+msgstr "Deblochează"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "Oferiți codul PIN pentru SIM-ul %d"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr "Introduceți PIN-ul pentru a debloca cardul SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "Oferiți codul PUK pentru SIM-ul %d"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr "Introduceți PUK-ul pentru a debloca cardul SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "Parola introdusă a fost greșită. Mai aveți %1$u încercare rămasă"
+msgstr[1] "Parola introdusă a fost greșită. Mai aveți %1$u încercări rămase"
+msgstr[2] "Parola introdusă a fost greșită. Mai aveți %1$u de încercări rămase"
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "Mai aveți %u încercare rămasă"
+msgstr[1] "Mai aveți %u încercări rămase"
+msgstr[2] "Mai aveți %u de încercări rămase"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "Parola introdusă a fost greșită."
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr "Codul PUK ar trebui să fie un număr natural de 8 cifre"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "Introduceți noul PIN"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "Codul PIN ar trebui să fie un număr natural de 4-8 cifre"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+msgid "Unlocking..."
+msgstr "Se deblochează..."
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "Niciun SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "Introduceți un card SIM pentru a utiliza acest modem"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM blocat"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "Date _mobile"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "Accesați datele utilizând o rețea mobilă"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "Roaming de _date"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "Utilizați datele mobile în roaming"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "_Mod de rețea"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "R_ețea"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "Avansate"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "Nume puncte de _acces"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "Blocare _SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "Blochează SIM-ul cu un PIN"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "Detalii m_odem"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "Eșec telefon"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "Nicio conexiune la telefon"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "Operația nu este permisă"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "Operația nu este suportată"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "SIM-ul nu este inserat"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "PIN-ul SIM necesar"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "PUK-ul SIM necesar"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "Eșec SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "SIM ocupat"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "Parolă incorectă"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "PIN2 SIM necesar"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "PUK2 SIM necesar"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "Negăsit"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "Nu este semnal de rețea"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "Timp expirat"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "Serviciile GPRS nu sunt permise"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "Roaming-ul nu este permis la această locație"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Eroare GPRS nespecificată"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "Acțiune anulată"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "Acces refuzat"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "Eroare necunoscută"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "Mod de rețea"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "Stabilește"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Închide"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "_Automată"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "Alegeți rețeaua"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "Reîmprospătează Furnizorii de rețea"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "Nu au fost găsit niciun adaptor WWAN"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Asigurați-vă că aveți un adaptor Wireless Wan/Dispozitiv celular"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "Wireless Wan este dezactivat când modul avion este pornit."
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "Î_nchide modul Avion"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "Conexiune de date"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "Cartela SIM folosită pentru internet"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "Activează rețeaua mobilă"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "Blocare SIM"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "_Următorul"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "B_lochează SIM-ul cu un PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "Schimbați PIN-ul"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr ""
+"Introduceți PIN-ul curent pentru a modifica configurările de blocare ale SIM-"
+"ului"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "Rețea mobilă"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "Configurează Telefonia și conexiunile de date mobile"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr "cellular;wwan;telephony;sim;mobile;celular;telefonie;mobilă;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "Configurări GNOME"
@@ -8249,7 +8833,7 @@ msgstr "[PANEL] [ARGUMENT…]"
 msgid "Privacy"
 msgstr "Confidențialitate"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Panouri disponibile:"
 
@@ -8361,6 +8945,40 @@ msgstr[2] "%u de intrări"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sunete de sistem"
+
+#~ msgid "_Screen Brightness"
+#~ msgstr "Luminozitatea _ecranului"
+
+#~ msgid "_Keyboard Brightness"
+#~ msgstr "Luminozitate _tastatură"
+
+#~ msgid "Dim Screen When Inactive"
+#~ msgstr "Diminuează luminozitatea la inactivitate"
+
+# This is the "blank screen" setting label under the power settings. It is connected with a drop-down where you can choose the amount of minutes until the screen goes black.
+#~ msgid "_Blank Screen"
+#~ msgstr "Întunecă _ecranul"
+
+#~ msgid "_Wi-Fi"
+#~ msgstr "_Wi-Fi"
+
+#~ msgid "Wi-Fi can be turned off to save power."
+#~ msgstr "Wi-Fi poate fi oprit pentru a economisi energia."
+
+#~ msgid ""
+#~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
+#~ msgstr ""
+#~ "Conexiunea mobilă de bandă largă (3G, 4G, LTE, etc.) poate fi oprită "
+#~ "pentru a economisi energie."
+
+#~ msgid "_Bluetooth"
+#~ msgstr "_Bluetooth"
+
+#~ msgid "Bluetooth can be turned off to save power."
+#~ msgstr "Bluetooth poate fi oprit pentru a economisi energie."
+
+#~ msgid "Balanced Power"
+#~ msgstr "Consum echilibrat"
 
 #~ msgid "Keyboard Shortcut"
 #~ msgstr "Scurtătură de tastatură"
@@ -8591,9 +9209,6 @@ msgstr "Sunete de sistem"
 
 #~ msgid "Read system and application logs"
 #~ msgstr "Citește jurnalele de sistem și ale aplicațiilor"
-
-#~ msgid "Access LXD service"
-#~ msgstr "Accesează serviciul LXD"
 
 #~ msgid "access the media-hub service"
 #~ msgstr "accesează serviciul media-hub"
@@ -8875,9 +9490,6 @@ msgstr "Sunete de sistem"
 #~ msgid "Infrastructure"
 #~ msgstr "Infrastructură"
 
-#~ msgid "Not connected"
-#~ msgstr "Neconectat"
-
 #~ msgid "Notification _Popups"
 #~ msgstr "Notificări _popup"
 
@@ -9138,9 +9750,6 @@ msgstr "Sunete de sistem"
 
 #~ msgid "Could not get screen information"
 #~ msgstr "Nu s-au putut obține informații despre ecran"
-
-#~ msgid "My Home Network"
-#~ msgstr "Rețeaua mea locală"
 
 #~ msgid "hardware"
 #~ msgstr "hardware"
@@ -9923,9 +10532,6 @@ msgstr "Sunete de sistem"
 #~ msgid "No printers available"
 #~ msgstr "Nicio imprimantă disponibilă"
 
-#~ msgid "Close"
-#~ msgstr "Închide"
-
 #~ msgid "Resume Printing"
 #~ msgstr "Reia tipărirea"
 
@@ -10036,9 +10642,6 @@ msgstr "Sunete de sistem"
 #~ msgid "_City:"
 #~ msgstr "_Oraș:"
 
-#~ msgid "_Network Time"
-#~ msgstr "Cea_s configurat de rețea"
-
 #~ msgid "Set the time one hour ahead."
 #~ msgstr "Configurați ceasul cu o oră în avans."
 
@@ -10068,12 +10671,6 @@ msgstr "Sunete de sistem"
 #~ msgctxt "display panel, rotation"
 #~ msgid "180 Degrees"
 #~ msgstr "180 de grade"
-
-#~ msgid "Monitor"
-#~ msgstr "Monitor"
-
-#~ msgid "Drag to change primary display."
-#~ msgstr "Trage pentru a schimba afișajul principal."
 
 #~ msgid ""
 #~ "Select a monitor to change its properties; drag it to rearrange its "
@@ -10331,9 +10928,6 @@ msgstr "Sunete de sistem"
 #~ msgid "_Options..."
 #~ msgstr "_Opțiuni..."
 
-#~ msgid "Unspecified"
-#~ msgstr "Nespecificat"
-
 #~ msgid "Date and Time preferences panel"
 #~ msgstr "Panoul de preferințe pentru dată și oră"
 
@@ -10408,9 +11002,6 @@ msgstr "Sunete de sistem"
 
 #~ msgid "Brightness;Lock;Dim;Blank;Monitor;"
 #~ msgstr "Brightness;Lock;Dim;Blank;Luminozitate;Blocare;Spațiu;Neclar;"
-
-#~ msgid "Screen brightness and lock settings"
-#~ msgstr "Configurări de luminozitate și blocare a ecranului"
 
 #~ msgid "Don't lock when at home"
 #~ msgstr "Nu bloca ecranul când sunt acasă"
