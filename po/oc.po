@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-20 20:44+0000\n"
-"PO-Revision-Date: 2021-08-23 19:30+0200\n"
+"POT-Creation-Date: 2021-09-07 09:53+0000\n"
+"PO-Revision-Date: 2021-09-08 00:05+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -201,7 +201,7 @@ msgstr "Camèra"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
 #: panels/keyboard/cc-xkb-modifier-dialog.c:353
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
-#: panels/user-accounts/cc-user-panel.c:843
+#: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
 #: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
@@ -376,8 +376,8 @@ msgstr "Seleccionar un imatge"
 #: panels/user-accounts/cc-avatar-chooser.c:228
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:633
-#: panels/user-accounts/cc-user-panel.c:651
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
 #: panels/wwan/cc-wwan-mode-dialog.ui:35
 #: panels/wwan/cc-wwan-network-dialog.ui:166
@@ -1154,7 +1154,7 @@ msgstr ""
 
 #: panels/color/cc-color-profile.c:219
 msgid "This profile may no longer be accurate"
-msgstr "Benlèu qu'aqueste perfil es pas pro precís."
+msgstr "Benlèu qu'aqueste perfil es pas pus precís"
 
 #: panels/color/gnome-color-panel.desktop.in.in:3
 msgid "Color"
@@ -2046,7 +2046,7 @@ msgstr "Copiar la captura d'una partida de l'ecran dins lo quichapapièrs"
 
 #: panels/keyboard/01-screenshot.xml.in:26
 msgid "Record a short screencast"
-msgstr "Enregistrar una corta captura vidèo "
+msgstr "Enregistrar una corta captura vidèo"
 
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
@@ -2234,7 +2234,8 @@ msgid ""
 "This can be changed in the keyboard shortcut settings."
 msgstr ""
 "Òm pòt bascular las fonts d’entradas en utilizant l’acorchi de clavièr %s.\n"
-"Se pòt modificar aqueste acorchi de clavièr dins las preferéncias del clavièr"
+"Se pòt modificar aqueste acorchi de clavièr dins las preferéncias del "
+"clavièr."
 
 #: panels/keyboard/cc-keyboard-panel.ui:48
 msgid "Input Sources"
@@ -2416,10 +2417,12 @@ msgid "Keyboard"
 msgstr "Clavièr"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-msgid "View and change keyboard shortcuts and set your typing preferences"
+msgid ""
+"Change keyboard shortcuts and set your typing preferences, keyboard layouts "
+"and input sources"
 msgstr ""
-"Afichar, modificar los acorchis de clavièr e definir vòstras preferéncias de "
-"picada"
+"Codificar los acorchis de clavièr e definir vòstras preferéncias de picada, "
+"agençament de clavièr e fonts d’entrada"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
@@ -2799,17 +2802,15 @@ msgstr "Espacis de trabalh"
 
 #: panels/multitasking/cc-multitasking-panel.ui:139
 msgid "_Dynamic workspaces"
-msgstr ""
+msgstr "_Espacis de trabalh dinamics"
 
 #: panels/multitasking/cc-multitasking-panel.ui:140
-#, fuzzy
-#| msgid "Automatically Delete Temporary _Files"
 msgid "Automatically removes empty workspaces."
-msgstr "Suprimir automaticament los _fichièrs temporaris"
+msgstr "Suprimir automaticament los espacis de trabalhs voids."
 
 #: panels/multitasking/cc-multitasking-panel.ui:158
 msgid "_Fixed number of workspaces"
-msgstr ""
+msgstr "_Nombre d’espacis de trabalh fixe"
 
 #: panels/multitasking/cc-multitasking-panel.ui:159
 msgid "Specify a number of permanent workspaces."
@@ -2820,27 +2821,20 @@ msgid "_Number of Workspaces"
 msgstr "_Nombre d’espacis de trabalh"
 
 #: panels/multitasking/cc-multitasking-panel.ui:200
-#, fuzzy
-#| msgid "Monitor"
 msgid "Multi-Monitor"
-msgstr "Ecran"
+msgstr "Multi monitor"
 
 #: panels/multitasking/cc-multitasking-panel.ui:225
-#, fuzzy
-#| msgid "Drag to change primary display."
 msgid "Workspaces on _primary display only"
-msgstr "Far lisar per cambiar l'ecran principal."
+msgstr "Espacis de trabalh solament sus l’ecran _principal"
 
 #: panels/multitasking/cc-multitasking-panel.ui:252
 msgid "Workspaces on all d_isplays"
 msgstr ""
 
 #: panels/multitasking/cc-multitasking-panel.ui:282
-#, fuzzy
-#| msgctxt "Wacom action-type"
-#| msgid "Application defined"
 msgid "Application Switching"
-msgstr "Definit per l’aplicacion"
+msgstr "Alternància entre aplicacions"
 
 #: panels/multitasking/cc-multitasking-panel.ui:307
 msgid "Include applications from all _workspaces"
@@ -2885,29 +2879,29 @@ msgid "Not set up"
 msgstr "Pas configurat"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:208
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID : %s)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:262
 msgid "Insecure network (WEP)"
 msgstr "Ret pas segur (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Ret segur (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA2)"
 msgstr "Ret segur (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA3)"
 msgstr "Ret segur (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:288
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "Ret segur"
 
@@ -2916,7 +2910,7 @@ msgstr "Ret segur"
 msgid "Connected"
 msgstr "Connectat"
 
-#: panels/network/cc-wifi-connection-row.ui:100
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
@@ -3806,8 +3800,7 @@ msgid "Unmanaged"
 msgstr "Pas gerit"
 
 #. TRANSLATORS: device status
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:928
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "Indisponible"
 
@@ -4151,7 +4144,7 @@ msgstr "Nom d'_utilizaire"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:363
+#: panels/user-accounts/cc-user-panel.ui:365
 msgid "_Password"
 msgstr "Se_nhal"
 
@@ -4772,7 +4765,7 @@ msgstr ""
 
 #: panels/power/cc-power-panel.c:1175
 msgid "Performance mode temporarily disabled."
-msgstr "Mòde performança temporàriament indisponible"
+msgstr "Mòde performança temporàriament indisponible."
 
 #: panels/power/cc-power-panel.c:1218
 msgid ""
@@ -4935,7 +4928,7 @@ msgstr "Relambi"
 
 #: panels/power/cc-power-profile-row.c:61
 msgid "Lap detected: performance mode unavailable"
-msgstr ""
+msgstr "Genolh detectat : mòde performança indisponible"
 
 #: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
@@ -5645,7 +5638,7 @@ msgstr "Reaviar"
 #. Translators: This button adds new printer.
 #: panels/printers/printers.ui:12
 msgid "Add Printer…"
-msgstr "Apondre una imprimenta"
+msgstr "Apondre una imprimenta…"
 
 #: panels/printers/printers.ui:187
 msgid "No printers"
@@ -5749,7 +5742,7 @@ msgid "The language used for text in windows and web pages."
 msgstr "La lenga d'utilizar pel tèxt de las fenèstras e de las paginas web."
 
 #: panels/region/cc-region-panel.ui:129
-#: panels/user-accounts/cc-user-panel.ui:309
+#: panels/user-accounts/cc-user-panel.ui:311
 msgid "_Language"
 msgstr "_Lenga"
 
@@ -5780,11 +5773,8 @@ msgid "Region & Language"
 msgstr "País e lenga"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-msgid ""
-"Select your display language, formats, keyboard layouts and input sources"
-msgstr ""
-"Seleccionatz la lenga, los formats, l'agençament clavièr e las fonts "
-"d'entradas"
+msgid "Select your display language and formats"
+msgstr "Seleccionatz la lenga e lo format d’afichatge"
 
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
@@ -7572,7 +7562,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7580,7 +7570,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7668,26 +7658,26 @@ msgstr "Connexion al domeni %s impossible : %s"
 msgid "Your account"
 msgstr "Vòstre compte"
 
-#: panels/user-accounts/cc-user-panel.c:397
+#: panels/user-accounts/cc-user-panel.c:402
 msgid "Failed to delete user"
 msgstr "La supression de l'utilizaire a fracassat"
 
-#: panels/user-accounts/cc-user-panel.c:452
-#: panels/user-accounts/cc-user-panel.c:507
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:457
+#: panels/user-accounts/cc-user-panel.c:512
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
 msgstr "La revocacion de l'utilizaire gerit a distància a fracassat"
 
-#: panels/user-accounts/cc-user-panel.c:602
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "Podètz pas suprimir vòstre pròpri compte."
 
-#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s es encara connectat"
 
-#: panels/user-accounts/cc-user-panel.c:615
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7695,12 +7685,12 @@ msgstr ""
 "Suprimir un utilizaire mentre qu'es connectat pòt daissar lo sistèma dins un "
 "estat instable."
 
-#: panels/user-accounts/cc-user-panel.c:624
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Volètz conservar los fichièrs de %s ?"
 
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7709,54 +7699,54 @@ msgstr ""
 "espèra (lo « spool ») e los fichièrs temporaris d'un compte d'utilizaire al "
 "moment de sa supression."
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "_Suprimir los fichièrs"
 
-#: panels/user-accounts/cc-user-panel.c:632
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "_Conservar los fichièrs"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Sètz segur que volètz revocar lo compte distant de %s ?"
 
-#: panels/user-accounts/cc-user-panel.c:650
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "_Suprimir"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Compte desactivat"
 
-#: panels/user-accounts/cc-user-panel.c:708
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "De definir al moment de la connexion que ven"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Pas cap"
 
-#: panels/user-accounts/cc-user-panel.c:754
+#: panels/user-accounts/cc-user-panel.c:759
 msgid "Logged in"
 msgstr "Connectat"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:841
+#: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
 #: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Activat"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1259
 msgid "Failed to contact the accounts service"
 msgstr "La connexion al servici dels comptes a fracassat"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1261
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Verificatz qu'AccountService es installat e activat."
 
@@ -7764,7 +7754,7 @@ msgstr "Verificatz qu'AccountService es installat e activat."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7772,12 +7762,12 @@ msgstr ""
 "Per efectuar las modificacions,\n"
 "clicatz primièr sus l'icòna *"
 
-#: panels/user-accounts/cc-user-panel.c:1361
+#: panels/user-accounts/cc-user-panel.c:1366
 msgid "Delete the selected user account"
 msgstr "Suprimir lo compte d'utilizaire seleccionat"
 
-#: panels/user-accounts/cc-user-panel.c:1373
-#: panels/user-accounts/cc-user-panel.c:1492
+#: panels/user-accounts/cc-user-panel.c:1378
+#: panels/user-accounts/cc-user-panel.c:1489
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7785,7 +7775,7 @@ msgstr ""
 "Per suprimir lo compte d'utilizaire seleccionat,\n"
 "clicatz primièr sus l'icòna *"
 
-#: panels/user-accounts/cc-user-panel.c:1538
+#: panels/user-accounts/cc-user-panel.c:1535
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Desverrolhar per apondre d'utilizaires e modificar los paramètres"
 
@@ -7834,32 +7824,32 @@ msgstr "Contròle _parental"
 msgid "Open the Parental Controls application."
 msgstr "Dobrir l'aplicacion de Contraròtle parental."
 
-#: panels/user-accounts/cc-user-panel.ui:345
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Authentication & Login"
 msgstr "Autentificacion e connexion"
 
-#: panels/user-accounts/cc-user-panel.ui:388
+#: panels/user-accounts/cc-user-panel.ui:390
 msgid "_Fingerprint Login"
 msgstr "Connexion per _reconeissença d'emprentas"
 
-#: panels/user-accounts/cc-user-panel.ui:413
+#: panels/user-accounts/cc-user-panel.ui:415
 msgid "A_utomatic Login"
 msgstr "Connexion a_utomatica"
 
-#: panels/user-accounts/cc-user-panel.ui:427
+#: panels/user-accounts/cc-user-panel.ui:429
 msgid "Account Activity"
 msgstr "Activitat del compte"
 
-#: panels/user-accounts/cc-user-panel.ui:458
+#: panels/user-accounts/cc-user-panel.ui:460
 msgid "Remove User…"
 msgstr "Suprimir l’utilizaire…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:499
+#: panels/user-accounts/cc-user-panel.ui:501
 msgid "No Users Found"
 msgstr "Cap d'utilizaire pas trobat"
 
-#: panels/user-accounts/cc-user-panel.ui:509
+#: panels/user-accounts/cc-user-panel.ui:511
 msgid "Unlock to add a user account."
 msgstr "Desverrolhatz per crear un compte d'utilizaire."
 
@@ -7924,7 +7914,7 @@ msgstr "Ensajatz de cambiar qualques letras e chifras."
 #: panels/user-accounts/pw-utils.c:98 panels/user-accounts/pw-utils.c:106
 msgctxt "Password hint"
 msgid "Try changing the password a bit more."
-msgstr "Ensajatz de modificar un pauc mai lo senhal"
+msgstr "Ensajatz de modificar un pauc mai lo senhal."
 
 #: panels/user-accounts/pw-utils.c:100
 msgctxt "Password hint"
@@ -8330,7 +8320,7 @@ msgstr ""
 
 #: panels/wwan/cc-wwan-data.c:549
 msgid "<b>Error:</b> Mobile Equipment Error"
-msgstr ""
+msgstr "<b>Error :</b> error de l’aparelh mobil"
 
 #: panels/wwan/cc-wwan-details-dialog.c:81
 msgid "Not Registered"
@@ -8384,13 +8374,74 @@ msgstr "Detalhs del periferic"
 msgid "Firmware Version"
 msgstr "Version del micrologicial"
 
-#: panels/wwan/cc-wwan-device.c:982
-msgid " (Preferred)"
-msgstr "(Preferida)"
+#: panels/wwan/cc-wwan-device.c:988
+msgid "2G Only"
+msgstr "2G sonque"
+
+#: panels/wwan/cc-wwan-device.c:991
+msgid "3G Only"
+msgstr "3G sonque"
+
+#: panels/wwan/cc-wwan-device.c:994
+msgid "4G Only"
+msgstr "4G sonque"
+
+#: panels/wwan/cc-wwan-device.c:1003
+msgid "2G, 3G, 4G (Preferred)"
+msgstr "2G, 3G, 4G (Preferida)"
+
+#: panels/wwan/cc-wwan-device.c:1005
+msgid "2G, 3G (Preferred), 4G"
+msgstr "2G, 3G (Preferida), 4G"
 
 #: panels/wwan/cc-wwan-device.c:1007
-msgid " Only"
-msgstr "Sonque"
+msgid "2G (Preferred), 3G, 4G"
+msgstr "2G (Preferida), 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1009
+msgid "2G, 3G, 4G"
+msgstr "2G, 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1015
+msgid "3G, 4G (Preferred)"
+msgstr "3G, 4G (Preferida)"
+
+#: panels/wwan/cc-wwan-device.c:1017
+msgid "3G (Preferred), 4G"
+msgstr "3G (Preferida), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1019
+msgid "3G, 4G"
+msgstr "3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1025
+msgid "2G, 4G (Preferred)"
+msgstr "2G, 4G (Preferida)"
+
+#: panels/wwan/cc-wwan-device.c:1027
+msgid "2G (Preferred), 4G"
+msgstr "2G (Preferida), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1029
+msgid "2G, 4G"
+msgstr "2G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1035
+msgid "2G, 3G (Preferred)"
+msgstr "2G, 3G (Preferida)"
+
+#: panels/wwan/cc-wwan-device.c:1037
+msgid "2G (Preferred), 3G"
+msgstr "2G (Preferida), 3G"
+
+#: panels/wwan/cc-wwan-device.c:1039
+msgid "2G, 3G"
+msgstr "2G, 3G"
+
+#: panels/wwan/cc-wwan-device.c:1043
+msgctxt "Network mode"
+msgid "Unknown"
+msgstr "Desconegut"
 
 #: panels/wwan/cc-wwan-device-page.c:141
 msgid "Unlock SIM card"
@@ -8438,7 +8489,7 @@ msgstr "Marrit senhal picat."
 
 #: panels/wwan/cc-wwan-device-page.c:224
 msgid "PUK code should be an 8 digit number"
-msgstr ""
+msgstr "Lo còdi PIM deu èsser un nombre de 8 chifras"
 
 #: panels/wwan/cc-wwan-device-page.c:248
 msgid "Enter New PIN"
@@ -8446,7 +8497,7 @@ msgstr "Picatz lo novèl còdi PIN"
 
 #: panels/wwan/cc-wwan-device-page.c:252
 msgid "PIN code should be a 4-8 digit number"
-msgstr ""
+msgstr "Lo còdi PIM deu èsser un nombre de 4 a 8 chifras"
 
 #: panels/wwan/cc-wwan-device-page.c:270
 msgid "Unlocking..."
@@ -8458,7 +8509,7 @@ msgstr "Cap de carta SIM"
 
 #: panels/wwan/cc-wwan-device-page.ui:45
 msgid "Insert a SIM card to use this modem"
-msgstr ""
+msgstr "Inserissètz una carta SIM per utilizar aqueste modem"
 
 #: panels/wwan/cc-wwan-device-page.ui:78
 msgid "SIM Locked"
@@ -8470,7 +8521,7 @@ msgstr "_Donadas mobil"
 
 #: panels/wwan/cc-wwan-device-page.ui:140
 msgid "Access data using mobile network"
-msgstr ""
+msgstr "Accès donada en utilizant lo ret mobil"
 
 #: panels/wwan/cc-wwan-device-page.ui:151
 msgid "_Data Roaming"
@@ -8516,10 +8567,6 @@ msgstr "Error del telefòn"
 msgid "No connection to phone"
 msgstr "Cap de connexion al telefòn"
 
-#: panels/wwan/cc-wwan-errors-private.h:42
-msgid "Phone-adaptor link reserved"
-msgstr ""
-
 #: panels/wwan/cc-wwan-errors-private.h:43
 msgid "Operation not allowed"
 msgstr "Operacion pas permesa"
@@ -8527,24 +8574,6 @@ msgstr "Operacion pas permesa"
 #: panels/wwan/cc-wwan-errors-private.h:44
 msgid "Operation not supported"
 msgstr "Operacion pas presa en carga"
-
-#: panels/wwan/cc-wwan-errors-private.h:45
-#, fuzzy
-#| msgid "SIM Pin required"
-msgid "PH-SIM PIN required"
-msgstr "Lo còdi PIN de la SIM es necessari"
-
-#: panels/wwan/cc-wwan-errors-private.h:46
-#, fuzzy
-#| msgid "SIM Pin required"
-msgid "PH-FSIM PIN required"
-msgstr "Lo còdi PIN de la SIM es necessari"
-
-#: panels/wwan/cc-wwan-errors-private.h:47
-#, fuzzy
-#| msgid "SIM Pin required"
-msgid "PH-FSIM PUK required"
-msgstr "Lo còdi PIN de la SIM es necessari"
 
 #: panels/wwan/cc-wwan-errors-private.h:48
 msgid "SIM not inserted"
@@ -8578,21 +8607,9 @@ msgstr "Còdi PIN2 de la SIM requerit"
 msgid "SIM PUK2 required"
 msgstr "Còdi PUK2 de la SIM requerit"
 
-#: panels/wwan/cc-wwan-errors-private.h:57
-msgid "Memory full"
-msgstr "Memòria plena"
-
-#: panels/wwan/cc-wwan-errors-private.h:58
-msgid "Invalid index"
-msgstr "Indèx invalid"
-
 #: panels/wwan/cc-wwan-errors-private.h:59
 msgid "Not found"
 msgstr "Pas trobat"
-
-#: panels/wwan/cc-wwan-errors-private.h:60
-msgid "Memory failure"
-msgstr "Fracàs memòria"
 
 #: panels/wwan/cc-wwan-errors-private.h:61
 msgid "No network service"
@@ -8602,99 +8619,17 @@ msgstr "Cap de servici telefonic"
 msgid "Network timeout"
 msgstr "Relambi d'espèra de la ret"
 
-#: panels/wwan/cc-wwan-errors-private.h:63
-msgid "Network not allowed - emergency calls only"
-msgstr "Ret pas autorizda - sonadas d’urgéncia sonque"
-
-#: panels/wwan/cc-wwan-errors-private.h:64
-#, fuzzy
-#| msgid "Network registration denied"
-msgid "Network personalization PIN required"
-msgstr "Enregistrament a la ret refusat"
-
-#: panels/wwan/cc-wwan-errors-private.h:65
-#, fuzzy
-#| msgid "Network registration denied"
-msgid "Network personalization PUK required"
-msgstr "Enregistrament a la ret refusat"
-
-#: panels/wwan/cc-wwan-errors-private.h:66
-#, fuzzy
-#| msgid "Network registration denied"
-msgid "Network subset personalization PIN required"
-msgstr "Enregistrament a la ret refusat"
-
-#: panels/wwan/cc-wwan-errors-private.h:67
-#, fuzzy
-#| msgid "Network registration denied"
-msgid "Network subset personalization PUK required"
-msgstr "Enregistrament a la ret refusat"
-
-#: panels/wwan/cc-wwan-errors-private.h:68
-msgid "Service provider personalization PIN required"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:69
-msgid "Service provider personalization PUK required"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:70
-msgid "Corporate personalization PIN required"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:71
-msgid "Corporate personalization PUK required"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:73
-msgid "Illegal MS"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:74
-msgid "Illegal ME"
-msgstr ""
-
 #: panels/wwan/cc-wwan-errors-private.h:75
 msgid "GPRS services not allowed"
 msgstr "Servicis GPRS pas autorizats"
 
-#: panels/wwan/cc-wwan-errors-private.h:76
-msgid "PLMN not allowed"
-msgstr "PLMN pas autorizat"
-
-#: panels/wwan/cc-wwan-errors-private.h:77
-msgid "Location area not allowed"
-msgstr ""
-
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:79
-#, fuzzy
-#| msgid "The device type is not currently supported."
-msgid "Service option not supported"
-msgstr "Lo tipe de periferic es pas actualament pres en carga."
-
-#: panels/wwan/cc-wwan-errors-private.h:80
-msgid "Requested service option not subscribed"
-msgstr ""
-
-#: panels/wwan/cc-wwan-errors-private.h:81
-msgid "Service option temporarily out of order"
-msgstr ""
+msgstr "L’itinerança es pas permesa dins aqueste airal"
 
 #: panels/wwan/cc-wwan-errors-private.h:82
 msgid "Unspecified GPRS error"
 msgstr "Error GPRS pas especificada"
-
-#: panels/wwan/cc-wwan-errors-private.h:83
-msgid "PDP authentication failure"
-msgstr "Fracàs d'autentificacion PDP"
-
-#: panels/wwan/cc-wwan-errors-private.h:84
-msgid "Invalid mobile class"
-msgstr ""
 
 #: panels/wwan/cc-wwan-errors-private.h:91
 msgid "Action Cancelled"
@@ -8749,10 +8684,8 @@ msgid "Make sure you have a Wireless Wan/Cellular device"
 msgstr "Asseguratz-vos qu'avètz un aparelh sens fial/mobil"
 
 #: panels/wwan/cc-wwan-panel.ui:154
-#, fuzzy
-#| msgid "Bluetooth is disabled when airplane mode is on."
 msgid "Wireless Wan is disabled when airplane mode is on"
-msgstr "Lo comutator material del Bluetooth es desactivat."
+msgstr "Lo ret sens fial es desactivat en mòde avion"
 
 #: panels/wwan/cc-wwan-panel.ui:163
 msgid "_Turn off Airplane Mode"
@@ -8792,13 +8725,11 @@ msgstr "Picatz lo PIN actual per modificar los paramètres de verrolhatge SIM"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:3
 msgid "Mobile Network"
-msgstr "Ret mobila."
+msgstr "Ret mobila"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:4
-#, fuzzy
-#| msgid "Configure Removable Media settings"
 msgid "Configure Telephony and mobile data connections"
-msgstr "Configurar los paramètres dels mèdia amovibles"
+msgstr "Configurar la telefonia e las connexion de donadas mobil"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
@@ -8873,8 +8804,8 @@ msgid ""
 "issues. "
 msgstr ""
 "Aquesta version de Paramètres deuriá èsser utilizada sonque pel "
-"desvolopament. Poiriatz rencontrar de comportaments incorrèctes del sistèma, "
-"de pèrdas de donadas e d’autres problèmes imprevistes."
+"desvolopament. Poiriatz rescontrar de compòrtaments incorrèctes del sistèma, "
+"de pèrdas de donadas e d’autres problèmas imprevistes. "
 
 #: shell/cc-window.ui:330
 msgid "Help"
@@ -8961,6 +8892,64 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#, fuzzy
+#~| msgid "SIM Pin required"
+#~ msgid "PH-SIM PIN required"
+#~ msgstr "Lo còdi PIN de la SIM es necessari"
+
+#, fuzzy
+#~| msgid "SIM Pin required"
+#~ msgid "PH-FSIM PIN required"
+#~ msgstr "Lo còdi PIN de la SIM es necessari"
+
+#, fuzzy
+#~| msgid "SIM Pin required"
+#~ msgid "PH-FSIM PUK required"
+#~ msgstr "Lo còdi PIN de la SIM es necessari"
+
+#~ msgid "Memory full"
+#~ msgstr "Memòria plena"
+
+#~ msgid "Invalid index"
+#~ msgstr "Indèx invalid"
+
+#~ msgid "Memory failure"
+#~ msgstr "Fracàs memòria"
+
+#~ msgid "Network not allowed - emergency calls only"
+#~ msgstr "Ret pas autorizda - sonadas d’urgéncia sonque"
+
+#, fuzzy
+#~| msgid "Network registration denied"
+#~ msgid "Network personalization PIN required"
+#~ msgstr "Enregistrament a la ret refusat"
+
+#, fuzzy
+#~| msgid "Network registration denied"
+#~ msgid "Network personalization PUK required"
+#~ msgstr "Enregistrament a la ret refusat"
+
+#, fuzzy
+#~| msgid "Network registration denied"
+#~ msgid "Network subset personalization PIN required"
+#~ msgstr "Enregistrament a la ret refusat"
+
+#, fuzzy
+#~| msgid "Network registration denied"
+#~ msgid "Network subset personalization PUK required"
+#~ msgstr "Enregistrament a la ret refusat"
+
+#~ msgid "PLMN not allowed"
+#~ msgstr "PLMN pas autorizat"
+
+#, fuzzy
+#~| msgid "The device type is not currently supported."
+#~ msgid "Service option not supported"
+#~ msgstr "Lo tipe de periferic es pas actualament pres en carga."
+
+#~ msgid "PDP authentication failure"
+#~ msgstr "Fracàs d'autentificacion PDP"
 
 #~ msgid "Balanced Power"
 #~ msgstr "Equilibri"
