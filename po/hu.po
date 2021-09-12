@@ -13,22 +13,22 @@
 # Richard Somloi <ricsipontaz at gmail dot com>, 2011, 2012.
 # Peter Trombitas <trombipeti at gmail dot com>, 2012.
 # Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
-# Balázs Meskó <mesko.balazs at fsf dot hu>, 2019, 2020.
+# Balázs Meskó <mesko.balazs at fsf dot hu>, 2019, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
-"issues\n"
-"POT-Creation-Date: 2021-02-02 07:02+0000\n"
-"PO-Revision-Date: 2021-02-12 08:53+0100\n"
-"Last-Translator: Meskó Balázs <mesko.balazs@fsf.hu>\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
+"es\n"
+"POT-Creation-Date: 2021-09-08 08:29+0000\n"
+"PO-Revision-Date: 2021-09-12 08:24+0200\n"
+"Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Lokalize 19.12.3\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -46,7 +46,7 @@ msgid "Session Bus"
 msgstr "Munkamenetbusz"
 
 #: panels/applications/cc-applications-panel.c:829
-#: panels/power/cc-power-panel.c:1789 panels/thunderbolt/cc-bolt-panel.ui:466
+#: panels/power/cc-power-panel.ui:85 panels/thunderbolt/cc-bolt-panel.ui:466
 #: panels/thunderbolt/cc-bolt-panel.ui:525
 msgid "Devices"
 msgstr "Eszközök"
@@ -57,7 +57,8 @@ msgstr "Teljes hozzáférés a /dev-hez"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Hálózat"
 
@@ -83,7 +84,7 @@ msgstr "Fájlrendszer"
 
 #: panels/applications/cc-applications-panel.c:849
 #: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:933 shell/cc-window.ui:121
+#: shell/cc-window.c:938 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Beállítások"
@@ -164,7 +165,7 @@ msgstr "Egyéb fájlok"
 #: panels/applications/cc-applications-panel.c:1660
 #: panels/applications/cc-applications-panel.ui:416
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:79
+#: panels/notifications/cc-notifications-panel.ui:70
 msgid "Applications"
 msgstr "Alkalmazások"
 
@@ -206,10 +207,11 @@ msgstr "Kamera"
 #: panels/applications/cc-applications-panel.ui:232
 #: panels/applications/cc-applications-panel.ui:262
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
-#: panels/keyboard/cc-xkb-modifier-dialog.c:355
+#: panels/keyboard/cc-xkb-modifier-dialog.c:353
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
-#: panels/user-accounts/cc-user-panel.c:843
+#: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:445
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Tiltva"
@@ -227,7 +229,7 @@ msgid "Location Services"
 msgstr "Helymeghatározó szolgáltatások"
 
 #: panels/applications/cc-applications-panel.ui:157
-#: panels/applications/cc-applications-panel.ui:499
+#: panels/applications/cc-applications-panel.ui:500
 msgid "Built-in Permissions"
 msgstr "Beépített jogosultságok"
 
@@ -301,47 +303,47 @@ msgid "How much resources this application is using."
 msgstr "Mennyi erőforrást használ ez az alkalmazás."
 
 #: panels/applications/cc-applications-panel.ui:391
-#: panels/applications/cc-applications-panel.ui:535
+#: panels/applications/cc-applications-panel.ui:537
 msgid "Storage"
 msgstr "Tároló"
 
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:424
 msgid "Open in Software"
 msgstr "Megnyitás a Szoftverekben"
 
-#: panels/applications/cc-applications-panel.ui:473 shell/cc-panel-list.ui:121
+#: panels/applications/cc-applications-panel.ui:474 shell/cc-panel-list.ui:121
 msgid "No results found"
 msgstr "Nincs találat"
 
-#: panels/applications/cc-applications-panel.ui:484
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:239
+#: panels/applications/cc-applications-panel.ui:485
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:177
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Próbáljon valami mást keresni"
 
-#: panels/applications/cc-applications-panel.ui:552
+#: panels/applications/cc-applications-panel.ui:555
 msgid ""
 "How much disk space this application is occupying with app data and caches."
 msgstr ""
 "Mennyi tárhelyet foglal ez az alkalmazás az adataival és a gyorsítótáraival."
 
-#: panels/applications/cc-applications-panel.ui:561
+#: panels/applications/cc-applications-panel.ui:564
 msgid "Application"
 msgstr "Alkalmazás"
 
-#: panels/applications/cc-applications-panel.ui:567
+#: panels/applications/cc-applications-panel.ui:570
 msgid "Data"
 msgstr "Adatok"
 
-#: panels/applications/cc-applications-panel.ui:573
+#: panels/applications/cc-applications-panel.ui:576
 msgid "Cache"
 msgstr "Gyorsítótár"
 
-#: panels/applications/cc-applications-panel.ui:579
+#: panels/applications/cc-applications-panel.ui:582
 msgid "<b>Total</b>"
 msgstr "<b>Összesen</b>"
 
-#: panels/applications/cc-applications-panel.ui:596
+#: panels/applications/cc-applications-panel.ui:599
 msgid "Clear Cache…"
 msgstr "Gyorsítótár ürítése…"
 
@@ -355,15 +357,15 @@ msgstr "Különböző alkalmazások jogosultságainak és beállításainak vez�
 msgid "application;flatpak;permission;setting;"
 msgstr "alkalmazás;flatpak;jogosultság;beállítás;"
 
-#: panels/background/cc-background-chooser.c:345
+#: panels/background/cc-background-chooser.c:344
 msgid "Select a picture"
 msgstr "Fénykép kiválasztása"
 
-#: panels/background/cc-background-chooser.c:348
+#: panels/background/cc-background-chooser.c:347
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
-#: panels/display/cc-display-panel.c:1003
+#: panels/display/cc-display-panel.c:1006
 #: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
@@ -373,26 +375,29 @@ msgstr "Fénykép kiválasztása"
 #: panels/network/connection-editor/vpn-helpers.c:299
 #: panels/network/net-device-wifi.c:854
 #: panels/printers/new-printer-dialog.ui:45
-#: panels/printers/pp-details-dialog.c:255
+#: panels/printers/pp-details-dialog.c:235
 #: panels/region/cc-format-chooser.ui:28
 #: panels/search/cc-search-locations-dialog.c:639
 #: panels/sharing/cc-sharing-panel.c:396 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:105
-#: panels/user-accounts/cc-avatar-chooser.c:223
+#: panels/user-accounts/cc-avatar-chooser.c:228
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:633
-#: panels/user-accounts/cc-user-panel.c:651
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "Mé_gse"
 
-#: panels/background/cc-background-chooser.c:349
+#: panels/background/cc-background-chooser.c:348
 #: panels/network/connection-editor/vpn-helpers.c:177
-#: panels/printers/pp-details-dialog.c:256
+#: panels/printers/pp-details-dialog.c:236
 #: panels/sharing/cc-sharing-panel.c:397
-#: panels/user-accounts/cc-avatar-chooser.c:224
+#: panels/user-accounts/cc-avatar-chooser.c:229
 msgid "_Open"
 msgstr "_Megnyitás"
 
@@ -411,7 +416,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Nincs asztalháttér"
 
-#: panels/background/cc-background-panel.c:112
+#: panels/background/cc-background-panel.c:110
 msgid "Current background"
 msgstr "Jelenlegi háttér"
 
@@ -475,7 +480,7 @@ msgstr ""
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1595
+#: panels/printers/pp-new-printer-dialog.c:1392
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -761,6 +766,7 @@ msgstr "Profil mentése"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "M_entés"
 
@@ -947,7 +953,7 @@ msgstr "Minden eszköz esetén a színkezeléshez friss színprofil szükséges.
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:810
-#: panels/diagnostics/cc-diagnostics-panel.c:143
+#: panels/diagnostics/cc-diagnostics-panel.c:144
 msgid "Learn more"
 msgstr "További információk"
 
@@ -1185,7 +1191,7 @@ msgstr "_Kijelölés"
 msgid "No languages found"
 msgstr "Nem találhatók nyelvek"
 
-#: panels/common/cc-language-chooser.ui:78
+#: panels/common/cc-language-chooser.ui:82
 #: panels/keyboard/cc-input-chooser.c:178
 msgid "More…"
 msgstr "Tovább…"
@@ -1231,12 +1237,12 @@ msgid "Select _All"
 msgstr "Öss_zes kijelölése"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:160
+#: panels/network/connection-editor/ce-page-details.c:162
 msgid "Today"
 msgstr "Ma"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:162
+#: panels/network/connection-editor/ce-page-details.c:164
 msgid "Yesterday"
 msgstr "Tegnap"
 
@@ -1257,7 +1263,8 @@ msgid_plural "%d hours"
 msgstr[0] "%d óra"
 msgstr[1] "%d óra"
 
-#: panels/common/cc-util.c:166
+#. Translators: Option for "Blank Screen" in "Power" panel
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:973
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1439,41 +1446,41 @@ msgstr "Időzóna"
 msgid "Search for a city"
 msgstr "Város keresése"
 
-#: panels/datetime/cc-datetime-panel.ui:378
+#: panels/datetime/cc-datetime-panel.ui:375
 msgid "Automatic _Date & Time"
 msgstr "A_utomatikus dátum és idő"
 
-#: panels/datetime/cc-datetime-panel.ui:379
+#: panels/datetime/cc-datetime-panel.ui:376
 msgid "Requires internet access"
 msgstr "Internet-hozzáférést igényel"
 
-#: panels/datetime/cc-datetime-panel.ui:399
+#: panels/datetime/cc-datetime-panel.ui:396
 msgid "Date & _Time"
 msgstr "Dátu_m és idő"
 
-#: panels/datetime/cc-datetime-panel.ui:438
+#: panels/datetime/cc-datetime-panel.ui:430
 msgid "Automatic Time _Zone"
 msgstr "Automatikus idő_zóna"
 
-#: panels/datetime/cc-datetime-panel.ui:439
+#: panels/datetime/cc-datetime-panel.ui:431
 msgid "Requires location services enabled and internet access"
 msgstr ""
 "A helymeghatározó szolgáltatások engedélyezését és internetkapcsolatot "
 "igényel"
 
-#: panels/datetime/cc-datetime-panel.ui:454
+#: panels/datetime/cc-datetime-panel.ui:446
 msgid "Time Z_one"
 msgstr "Idő_zóna"
 
-#: panels/datetime/cc-datetime-panel.ui:494
+#: panels/datetime/cc-datetime-panel.ui:481
 msgid "Time _Format"
 msgstr "Idő_formátum"
 
-#: panels/datetime/cc-datetime-panel.ui:503
+#: panels/datetime/cc-datetime-panel.ui:490
 msgid "24-hour"
 msgstr "24 órás"
 
-#: panels/datetime/cc-datetime-panel.ui:504
+#: panels/datetime/cc-datetime-panel.ui:491
 msgid "AM / PM"
 msgstr "12 órás"
 
@@ -1533,7 +1540,7 @@ msgid "default;application;preferred;media;"
 msgstr "alap;alapértelmezett;alkalmazás;előnyben részesített;média;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:145
+#: panels/diagnostics/cc-diagnostics-panel.c:146
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -1572,20 +1579,20 @@ msgstr ""
 "képernyő;zárolás;diagnosztika;összeomlás;magán;privát;legutóbbi;nemrégi;"
 "ideiglenes;temp;index;név;hálózat;azonosság;identitás;adatvédelem;"
 
-#: panels/display/cc-display-panel.c:1014
+#: panels/display/cc-display-panel.c:1017
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Alkalmaz"
 
-#: panels/display/cc-display-panel.c:1035
+#: panels/display/cc-display-panel.c:1038
 msgid "Apply Changes?"
 msgstr "Módosítások alkalmazása?"
 
-#: panels/display/cc-display-panel.c:1040
+#: panels/display/cc-display-panel.c:1043
 msgid "Changes Cannot be Applied"
 msgstr "A módosítások nem alkalmazhatóak"
 
-#: panels/display/cc-display-panel.c:1041
+#: panels/display/cc-display-panel.c:1044
 msgid "This could be due to hardware limitations."
 msgstr "Ez hardveres korlátozások miatt is lehet."
 
@@ -1645,27 +1652,27 @@ msgstr "Ki­jel­zők"
 msgid "Night Light"
 msgstr "Éjszakai fény"
 
-#: panels/display/cc-display-settings.c:103
+#: panels/display/cc-display-settings.c:107
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Fekvő"
 
-#: panels/display/cc-display-settings.c:106
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Álló (jobbra)"
 
-#: panels/display/cc-display-settings.c:109
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Álló (balra)"
 
-#: panels/display/cc-display-settings.c:112
+#: panels/display/cc-display-settings.c:116
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Fekvő (fordított)"
 
-#: panels/display/cc-display-settings.c:186
+#: panels/display/cc-display-settings.c:190
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1689,6 +1696,7 @@ msgid "Adjust for TV"
 msgstr "Igazítás a TV-hez"
 
 #: panels/display/cc-display-settings.ui:59
+#: panels/display/cc-display-settings.ui:76
 msgctxt "display setting"
 msgid "Scale"
 msgstr "Méretezés"
@@ -1788,11 +1796,11 @@ msgstr ""
 "Panel;Projektor;xrandr;Képernyő;Felbontás;Frissítés;Monitor;Éjszakai;fény;"
 "redshift;szín;napkelte;napnyugta;"
 
-#: panels/info-overview/cc-info-overview-panel.c:417
-#: panels/info-overview/cc-info-overview-panel.c:432
-#: panels/info-overview/cc-info-overview-panel.c:444
-#: panels/info-overview/cc-info-overview-panel.c:490
-#: panels/info-overview/cc-info-overview-panel.c:520
+#: panels/info-overview/cc-info-overview-panel.c:413
+#: panels/info-overview/cc-info-overview-panel.c:437
+#: panels/info-overview/cc-info-overview-panel.c:483
+#: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Ismeretlen"
 
@@ -1800,32 +1808,32 @@ msgstr "Ismeretlen"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:452
+#: panels/info-overview/cc-info-overview-panel.c:445
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; Összeállítás-azonosító: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:467
+#: panels/info-overview/cc-info-overview-panel.c:460
 #, c-format
 msgid "64-bit"
 msgstr "64 bites"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:470
+#: panels/info-overview/cc-info-overview-panel.c:463
 #, c-format
 msgid "32-bit"
 msgstr "32 bites"
 
-#: panels/info-overview/cc-info-overview-panel.c:727
+#: panels/info-overview/cc-info-overview-panel.c:720
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:731
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:733
+#: panels/info-overview/cc-info-overview-panel.c:726
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Ismeretlen"
@@ -1970,7 +1978,7 @@ msgid "Eject"
 msgstr "Kiadás"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:542
+#: panels/universal-access/cc-ua-panel.ui:580
 msgid "Typing"
 msgstr "Gépelés"
 
@@ -2109,7 +2117,7 @@ msgstr "Bemeneti forrás hozzáadása"
 msgid "Input methods can’t be used on the login screen"
 msgstr "Nem használhatók bemeneti módszerek a bejelentkezési képernyőn"
 
-#: panels/keyboard/cc-input-list-box.ui:20
+#: panels/keyboard/cc-input-list-box.ui:23
 msgid "No input source selected"
 msgstr "Nincs kiválasztva bemeneti forrás"
 
@@ -2140,12 +2148,12 @@ msgstr "Eltávolítás"
 msgid "Custom Shortcuts"
 msgstr "Egyéni gyorsbillentyűk"
 
-#: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.ui:179
+#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.ui:213
 msgid "Alternate Characters Key"
 msgstr "Alternatív karakterek billentyű"
 
-#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:69
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
@@ -2154,48 +2162,48 @@ msgstr ""
 "használható. Ezek néha harmadik lehetőségként vannak felfestve a "
 "billentyűzetre."
 
-#: panels/keyboard/cc-keyboard-panel.c:74
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:71
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Bal Alt"
 
-#: panels/keyboard/cc-keyboard-panel.c:75
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Jobb Alt"
 
-#: panels/keyboard/cc-keyboard-panel.c:76
-#: panels/keyboard/cc-keyboard-panel.c:94
+#: panels/keyboard/cc-keyboard-panel.c:73
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Bal Szuper"
 
-#: panels/keyboard/cc-keyboard-panel.c:77
-#: panels/keyboard/cc-keyboard-panel.c:95
+#: panels/keyboard/cc-keyboard-panel.c:74
+#: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Jobb Szuper"
 
-#: panels/keyboard/cc-keyboard-panel.c:78
-#: panels/keyboard/cc-keyboard-panel.c:96
+#: panels/keyboard/cc-keyboard-panel.c:75
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Menügomb"
 
-#: panels/keyboard/cc-keyboard-panel.c:79
-#: panels/keyboard/cc-keyboard-panel.c:97
+#: panels/keyboard/cc-keyboard-panel.c:76
+#: panels/keyboard/cc-keyboard-panel.c:94
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Jobb Ctrl"
 
-#: panels/keyboard/cc-keyboard-panel.c:87
-#: panels/keyboard/cc-keyboard-panel.ui:204
+#: panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.ui:237
 msgid "Compose Key"
 msgstr "Kombináló billentyű"
 
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2207,72 +2215,86 @@ msgstr ""
 "kombináló billentyű után a <b>C</b> és az <b>o</b> a <b>©</b> karaktert írja "
 "be, az <b>a</b> után a <b>'</b> az <b>á</b> betűt írja be."
 
-#: panels/keyboard/cc-keyboard-panel.c:98
+#: panels/keyboard/cc-keyboard-panel.c:95
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:99
+#: panels/keyboard/cc-keyboard-panel.c:96
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:100
+#: panels/keyboard/cc-keyboard-panel.c:97
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Print Screen"
 
-#: panels/keyboard/cc-keyboard-panel.ui:43
+#: panels/keyboard/cc-keyboard-panel.c:233
+#, c-format
+#| msgid "These keyboard shortcuts can be changed in the keyboard settings"
+msgid ""
+"Input sources can be switched using the %s keyboard shortcut.\n"
+"This can be changed in the keyboard shortcut settings."
+msgstr ""
+"A bemeneti források a(z) %s gyorsbillentyűvel válthatóak át.\n"
+"Ezt a gyorsbillentyűk beállításaiban lehet megváltoztatni."
+
+#: panels/keyboard/cc-keyboard-panel.ui:48
 msgid "Input Sources"
 msgstr "Bemeneti források"
 
-#: panels/keyboard/cc-keyboard-panel.ui:66
+#: panels/keyboard/cc-keyboard-panel.ui:59
+#| msgid "Choose keyboard layouts or input methods."
+msgid "Includes keyboard layouts and input methods."
+msgstr "Tartalmazza a billentyűzetkiosztásokat és a beviteli módokat."
+
+#: panels/keyboard/cc-keyboard-panel.ui:85
 msgid "Input Source Switching"
 msgstr "Bemeneti forrás váltása"
 
-#: panels/keyboard/cc-keyboard-panel.ui:99
+#: panels/keyboard/cc-keyboard-panel.ui:131
 msgid "Use the _same source for all windows"
 msgstr "_Azonos forrás használata az összes ablakhoz"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:158
 msgid "Switch input sources _individually for each window"
 msgstr "Források váltása _egyesével az összes ablaknál"
 
-#: panels/keyboard/cc-keyboard-panel.ui:138
-msgid "Keyboard Shortcut"
-msgstr "Gyorsbillentyű"
-
-#: panels/keyboard/cc-keyboard-panel.ui:139
-msgid "This can be changed in Customize Shortcuts"
-msgstr "Ez a Gyorsbillentyűk személyre szabásában változtatható meg"
-
-#: panels/keyboard/cc-keyboard-panel.ui:157
-msgid "Type Special Characters"
+#: panels/keyboard/cc-keyboard-panel.ui:177
+#| msgid "Type Special Characters"
+msgid "Special Character Entry"
 msgstr "Különleges karakterek beírása"
 
-#: panels/keyboard/cc-keyboard-panel.ui:180
-msgid "Hold down and type to enter different characters"
-msgstr "Tartsa lenyomva és gépeljen, hogy más karaktereket adjon meg"
+#: panels/keyboard/cc-keyboard-panel.ui:188
+msgid "Methods for entering symbols and letter variants using the keyboard."
+msgstr ""
+"Módok a szimbólumok és betűváltozatok beírására a billentyűzet segítségével."
 
-#: panels/keyboard/cc-keyboard-panel.ui:232
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:298
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:314 shell/cc-window.ui:326
+#: panels/keyboard/cc-keyboard-panel.ui:263
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:306
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:322 shell/cc-window.ui:326
 msgid "Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk"
 
-#: panels/keyboard/cc-keyboard-panel.ui:253
-msgid "Customize Shortcuts"
-msgstr "Gyorsbillentyűk személyre szabása"
+#: panels/keyboard/cc-keyboard-panel.ui:283
+#| msgid "Customize Shortcuts"
+msgid "View and Customize Shortcuts"
+msgstr "Gyorsbillentyűk megtekintése és testreszabása"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:278
-msgid "modified"
-msgstr "módosítva"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:283
+#, c-format
+#| msgid "modified"
+msgid "%d modified"
+msgid_plural "%d modified"
+msgstr[0] "%d módosítva"
+msgstr[1] "%d módosítva"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:426
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:428
 msgid "Reset All Shortcuts?"
 msgstr "Minden gyorsbillentyű visszaállítása?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:429
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:431
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2280,14 +2302,15 @@ msgstr ""
 "A gyorsbillentyűk visszaállítása az egyéni gyorsbillentyűket is érintheti. "
 "Ez nem vonható vissza."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:433
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:435
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:143
 msgid "Cancel"
 msgstr "Mégse"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:434
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:436
 msgid "Reset All"
 msgstr "Összes visszaállítása"
 
@@ -2306,23 +2329,24 @@ msgid "Add Shortcut"
 msgstr "Gyorsbillentyű hozzáadása"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:166
+msgid "No keyboard shortcut found"
+msgstr "Nem található gyorsbillentyű"
+
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Vissza"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:190
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:235
 msgid "Reset All…"
 msgstr "Összes visszaállítása…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:191
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:236
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Az összes gyorsbillentyű visszaállítása az alapértelmezett értékekre"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:228
-msgid "No keyboard shortcut found"
-msgstr "Nem található gyorsbillentyű"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
 #, c-format
@@ -2361,6 +2385,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Név"
 
@@ -2381,6 +2406,7 @@ msgid "None"
 msgstr "Nincs"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Hozzáadás"
 
@@ -2401,9 +2427,13 @@ msgid "Keyboard"
 msgstr "Billentyűzet"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-msgid "View and change keyboard shortcuts and set your typing preferences"
+#| msgid "View and change keyboard shortcuts and set your typing preferences"
+msgid ""
+"Change keyboard shortcuts and set your typing preferences, keyboard layouts "
+"and input sources"
 msgstr ""
-"Gyorsbillentyűk megjelenítése és módosítása, gépelési beállítások megadása"
+"Gyorsbillentyűk módosítása és gépelési beállítások megadása, "
+"billentyűzetkiosztások és bemeneti források"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
@@ -2438,12 +2468,12 @@ msgstr ""
 "A Mozilla helymeghatározási szolgáltatást használja: <a href='https://"
 "location.services.mozilla.com/privacy'>adatvédelmi irányelvek</a>"
 
-#: panels/location/cc-location-panel.ui:93
+#: panels/location/cc-location-panel.ui:94
 msgid "Allow the applications below to determine your location."
 msgstr ""
 "A helyadatok meghatározásának engedélyezése a lenti alkalmazások számára."
 
-#: panels/location/cc-location-panel.ui:113
+#: panels/location/cc-location-panel.ui:114
 msgid "No Applications Have Asked for Location Access"
 msgstr "Egyetlen alkalmazás sem kérte a helyadatok elérését"
 
@@ -2547,61 +2577,61 @@ msgid "1 hour"
 msgstr "1 óra"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:209 panels/power/cc-power-panel.ui:63
+#: panels/lock/cc-lock-panel.ui:209
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:213 panels/power/cc-power-panel.ui:67
+#: panels/lock/cc-lock-panel.ui:213
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:217 panels/power/cc-power-panel.ui:71
+#: panels/lock/cc-lock-panel.ui:217
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:221 panels/power/cc-power-panel.ui:75
+#: panels/lock/cc-lock-panel.ui:221
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:225 panels/power/cc-power-panel.ui:79
+#: panels/lock/cc-lock-panel.ui:225
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:229 panels/power/cc-power-panel.ui:83
+#: panels/lock/cc-lock-panel.ui:229
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:233 panels/power/cc-power-panel.ui:87
+#: panels/lock/cc-lock-panel.ui:233
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:237 panels/power/cc-power-panel.ui:91
+#: panels/lock/cc-lock-panel.ui:237
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:241 panels/power/cc-power-panel.ui:95
+#: panels/lock/cc-lock-panel.ui:241
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 perc"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:245 panels/power/cc-power-panel.ui:99
+#: panels/lock/cc-lock-panel.ui:245
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "Soha"
@@ -2647,68 +2677,69 @@ msgstr "A beszélgetései védelme"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Általános"
 
-#: panels/mouse/cc-mouse-panel.ui:75
+#: panels/mouse/cc-mouse-panel.ui:57
 msgid "Primary Button"
 msgstr "Elsődleges gomb"
 
-#: panels/mouse/cc-mouse-panel.ui:94
+#: panels/mouse/cc-mouse-panel.ui:58
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Beállítja a fizikai gombok sorrendjét egereken és érintőtáblákon."
 
-#: panels/mouse/cc-mouse-panel.ui:123 panels/sound/cc-balance-slider.ui:13
+#: panels/mouse/cc-mouse-panel.ui:84 panels/sound/cc-balance-slider.ui:13
 msgid "Left"
 msgstr "Bal"
 
-#: panels/mouse/cc-mouse-panel.ui:133 panels/sound/cc-balance-slider.ui:15
+#: panels/mouse/cc-mouse-panel.ui:94 panels/sound/cc-balance-slider.ui:15
 msgid "Right"
 msgstr "Jobb"
 
-#: panels/mouse/cc-mouse-panel.ui:169
+#: panels/mouse/cc-mouse-panel.ui:122
 msgid "Mouse"
 msgstr "Egér"
 
-#: panels/mouse/cc-mouse-panel.ui:208
+#: panels/mouse/cc-mouse-panel.ui:142
 msgid "Mouse Speed"
 msgstr "Egér sebessége"
 
-#: panels/mouse/cc-mouse-panel.ui:230 panels/mouse/cc-mouse-panel.ui:522
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:258
 msgid "Double-click timeout"
 msgstr "Dupla kattintás időköze"
 
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:267 panels/mouse/cc-mouse-panel.ui:430
+#: panels/mouse/cc-mouse-panel.ui:166 panels/mouse/cc-mouse-panel.ui:230
 msgid "Natural Scrolling"
 msgstr "Természetes görgetés"
 
-#: panels/mouse/cc-mouse-panel.ui:283 panels/mouse/cc-mouse-panel.ui:446
+#: panels/mouse/cc-mouse-panel.ui:167 panels/mouse/cc-mouse-panel.ui:231
 msgid "Scrolling moves the content, not the view."
 msgstr "A görgetés a tartalmat mozgatja, nem a nézetet."
 
-#: panels/mouse/cc-mouse-panel.ui:333 panels/mouse/cc-mouse-panel.ui:378
+#: panels/mouse/cc-mouse-panel.ui:193 panels/mouse/cc-mouse-panel.ui:213
 msgid "Touchpad"
 msgstr "Érintőtábla"
 
-#: panels/mouse/cc-mouse-panel.ui:501
+#: panels/mouse/cc-mouse-panel.ui:247
 msgid "Touchpad Speed"
 msgstr "Érintőtábla sebessége"
 
-#: panels/mouse/cc-mouse-panel.ui:560
+#: panels/mouse/cc-mouse-panel.ui:270
 msgid "Tap to Click"
 msgstr "Koppintás a kattintáshoz"
 
-#: panels/mouse/cc-mouse-panel.ui:612
+#: panels/mouse/cc-mouse-panel.ui:286
 msgid "Two-finger Scrolling"
 msgstr "Kétujjas görgetés"
 
-#: panels/mouse/cc-mouse-panel.ui:665
+#: panels/mouse/cc-mouse-panel.ui:303
 msgid "Edge Scrolling"
 msgstr "Görgetés a szélen"
 
-#: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:441
+#: panels/mouse/cc-mouse-panel.ui:335 panels/wacom/cc-wacom-panel.c:441
 msgid "Test Your _Settings"
 msgstr "Beállítás_ok tesztelése"
 
@@ -2761,11 +2792,97 @@ msgstr ""
 "Érintőtábla;Tapipad;Mutató;Kattintás;Koppintás;Dupla;Gomb;Hanyattegér;"
 "Görgetés;Gördítés;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "_Forró sarok"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr ""
+"Érintse meg a bal felső sarkot, hogy megnyissa a Tevékenységek áttekintést."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "_Aktív képernyőszegélyek"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"Húzza az ablakokat a képernyő felső, bal és jobb szegélyéhez, hogy "
+"átméretezze őket."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+#| msgid "Colorspace: "
+msgid "Workspaces"
+msgstr "Munkaterületek"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "_Dinamikus munkaterületek"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+#| msgid "Automatically Delete Temporary _Files"
+msgid "Automatically removes empty workspaces."
+msgstr "Automatikusan eltávolítja az üres munkaterületeket."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "_Kötött számú munkaterület"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "Adja meg az állandó munkaterületek számát."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "Munkaterületek _száma"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+#| msgid "%s Monitor"
+msgid "Multi-Monitor"
+msgstr "Több kijelző"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "Munkaterületek csak az _elsődleges kijelzőn"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "Munkaterületek az összes _kijelzőn"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+#| msgctxt "Wacom action-type"
+#| msgid "Application defined"
+msgid "Application Switching"
+msgstr "Alkalmazásváltás"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "Az összes munkaterületen szereplő alkalmazás belevétele"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "Csak a _jelenlegi munkaterületen szereplő alkalmazások belevétele"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "Többfeladatos munkavégzés"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "A hatékony többfeladatos munkavégzés beállításainak kezelése"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr "Többfeladatos;Hatékony;Testreszabás;Asztal;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Hoppá, valami elromlott. Lépjen kapcsolatba a szoftver szállítójával."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "A Hálózatkezelőnek futnia kell."
 
@@ -2783,29 +2900,29 @@ msgid "Not set up"
 msgstr "Nincs beállítva"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:208
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:262
 msgid "Insecure network (WEP)"
 msgstr "Nem biztonságos hálózat (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Biztonságos hálózat (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA2)"
 msgstr "Biztonságos hálózat (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA3)"
 msgstr "Biztonságos hálózat (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:288
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "Biztonságos hálózat"
 
@@ -2814,8 +2931,8 @@ msgstr "Biztonságos hálózat"
 msgid "Connected"
 msgstr "Kapcsolódva"
 
-#: panels/network/cc-wifi-connection-row.ui:100
-#: panels/network/net-device-ethernet.c:327
+#: panels/network/cc-wifi-connection-row.ui:102
+#: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
 #: panels/network/network-vpn.ui:77
@@ -2832,11 +2949,17 @@ msgstr ""
 "A hotspot bekapcsolása le fogja választani a(z) %s Wi-Fi hálózatról, és nem "
 "lesz lehetséges elérni az internetet Wi-Fi használatával."
 
-#: panels/network/cc-wifi-hotspot-dialog.c:265
+#: panels/network/cc-wifi-hotspot-dialog.c:267
 msgid "Must have a minimum of 8 characters"
 msgstr "Legalább 8 karakter szükséges"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:479
+#: panels/network/cc-wifi-hotspot-dialog.c:272
+#, c-format
+#| msgid "Must have a minimum of 8 characters"
+msgid "Must have a maximum of %d characters"
+msgstr "Legfeljebb %d karakter szükséges"
+
+#: panels/network/cc-wifi-hotspot-dialog.c:488
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Bekapcsolja a Wi-Fi hotspotot?"
 
@@ -2861,6 +2984,7 @@ msgstr "Hálózat neve"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Jelszó"
 
@@ -2907,7 +3031,7 @@ msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr ""
 "Győződjön meg róla, hogy a Wi-Fi adapter be van dugva, és be van kapcsolva"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Repülőgép üzemmód be"
 
@@ -2977,167 +3101,167 @@ msgid "Profile %d"
 msgstr "%d. profil"
 
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:95
+#: panels/network/connection-editor/ce-page-details.c:97
 #: panels/network/net-device-wifi.c:228
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:99
+#: panels/network/connection-editor/ce-page-details.c:101
 #: panels/network/net-device-wifi.c:233
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:105
+#: panels/network/connection-editor/ce-page-details.c:107
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:110
+#: panels/network/connection-editor/ce-page-details.c:112
 #: panels/network/connection-editor/ce-page-security.c:279
 msgid "Enhanced Open"
 msgstr "Javított megnyitás"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:117
+#: panels/network/connection-editor/ce-page-details.c:119
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:123
+#: panels/network/connection-editor/ce-page-details.c:125
 msgid "Enterprise"
 msgstr "Enterprise"
 
-#: panels/network/connection-editor/ce-page-details.c:128
+#: panels/network/connection-editor/ce-page-details.c:130
 #: panels/network/net-device-wifi.c:218
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nincs"
 
-#: panels/network/connection-editor/ce-page-details.c:149
+#: panels/network/connection-editor/ce-page-details.c:151
 msgid "Never"
 msgstr "Soha"
 
-#: panels/network/connection-editor/ce-page-details.c:164
-#: panels/network/net-device-ethernet.c:107
+#: panels/network/connection-editor/ce-page-details.c:166
+#: panels/network/net-device-ethernet.c:108
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
 msgstr[0] "%i napja"
 msgstr[1] "%i napja"
 
-#: panels/network/connection-editor/ce-page-details.c:291
+#: panels/network/connection-editor/ce-page-details.c:293
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:293
-#: panels/network/net-device-ethernet.c:214
+#: panels/network/connection-editor/ce-page-details.c:295
+#: panels/network/net-device-ethernet.c:220
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:306
+#: panels/network/connection-editor/ce-page-details.c:308
 msgid "2.4 GHz / 5 GHz"
 msgstr "2,4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:308
+#: panels/network/connection-editor/ce-page-details.c:310
 msgid "2.4 GHz"
 msgstr "2,4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:310
+#: panels/network/connection-editor/ce-page-details.c:312
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:330
+#: panels/network/connection-editor/ce-page-details.c:332
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nincs"
 
-#: panels/network/connection-editor/ce-page-details.c:332
+#: panels/network/connection-editor/ce-page-details.c:334
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Gyenge"
 
-#: panels/network/connection-editor/ce-page-details.c:334
+#: panels/network/connection-editor/ce-page-details.c:336
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Ok"
 
-#: panels/network/connection-editor/ce-page-details.c:336
+#: panels/network/connection-editor/ce-page-details.c:338
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Jó"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:340
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Kitűnő"
 
-#: panels/network/connection-editor/ce-page-details.c:410
+#: panels/network/connection-editor/ce-page-details.c:407
 #: panels/network/connection-editor/details-page.ui:108
-#: panels/network/net-device-ethernet.c:149
-#: panels/network/net-device-mobile.c:447
+#: panels/network/net-device-ethernet.c:147
+#: panels/network/net-device-mobile.c:442
 msgid "IPv4 Address"
 msgstr "IPv4-cím"
 
-#: panels/network/connection-editor/ce-page-details.c:411
+#: panels/network/connection-editor/ce-page-details.c:408
 #: panels/network/connection-editor/details-page.ui:126
-#: panels/network/net-device-ethernet.c:150
-#: panels/network/net-device-mobile.c:448 panels/network/network-mobile.ui:218
+#: panels/network/net-device-ethernet.c:149
+#: panels/network/net-device-mobile.c:443 panels/network/network-mobile.ui:218
 msgid "IPv6 Address"
 msgstr "IPv6-cím"
 
-#: panels/network/connection-editor/ce-page-details.c:414
-#: panels/network/connection-editor/ce-page-details.c:415
+#: panels/network/connection-editor/ce-page-details.c:410
+#: panels/network/connection-editor/ce-page-details.c:411
 #: panels/network/net-device-ethernet.c:152
 #: panels/network/net-device-ethernet.c:154
-#: panels/network/net-device-mobile.c:451
-#: panels/network/net-device-mobile.c:452 panels/network/network-mobile.ui:201
+#: panels/network/net-device-mobile.c:446
+#: panels/network/net-device-mobile.c:447 panels/network/network-mobile.ui:201
 msgid "IP Address"
 msgstr "IP-cím"
 
-#: panels/network/connection-editor/ce-page-details.c:419
-#: panels/network/net-device-ethernet.c:163
-#: panels/network/net-device-mobile.c:456
+#: panels/network/connection-editor/ce-page-details.c:415
+#: panels/network/net-device-ethernet.c:169
+#: panels/network/net-device-mobile.c:451
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:420
-#: panels/network/net-device-ethernet.c:164
-#: panels/network/net-device-mobile.c:457
+#: panels/network/connection-editor/ce-page-details.c:416
+#: panels/network/net-device-ethernet.c:170
+#: panels/network/net-device-mobile.c:452
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:423
-#: panels/network/connection-editor/ce-page-details.c:424
+#: panels/network/connection-editor/ce-page-details.c:418
+#: panels/network/connection-editor/ce-page-details.c:419
 #: panels/network/connection-editor/details-page.ui:199
 #: panels/network/connection-editor/details-page.ui:218
 #: panels/network/connection-editor/ip4-page.ui:211
 #: panels/network/connection-editor/ip6-page.ui:225
-#: panels/network/net-device-ethernet.c:166
-#: panels/network/net-device-ethernet.c:168
-#: panels/network/net-device-mobile.c:459
-#: panels/network/net-device-mobile.c:460 panels/network/network-mobile.ui:253
+#: panels/network/net-device-ethernet.c:172
+#: panels/network/net-device-ethernet.c:174
+#: panels/network/net-device-mobile.c:454
+#: panels/network/net-device-mobile.c:455 panels/network/network-mobile.ui:253
 #: panels/network/network-mobile.ui:271
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:457
+#: panels/network/connection-editor/ce-page-details.c:471
 msgid "Forget Connection"
 msgstr "Kapcsolat elfelejtése"
 
-#: panels/network/connection-editor/ce-page-details.c:459
+#: panels/network/connection-editor/ce-page-details.c:473
 msgid "Remove Connection Profile"
 msgstr "Kapcsolatprofil eltávolítása"
 
-#: panels/network/connection-editor/ce-page-details.c:461
+#: panels/network/connection-editor/ce-page-details.c:475
 msgid "Remove VPN"
 msgstr "VPN eltávolítása"
 
-#: panels/network/connection-editor/ce-page-details.c:479
+#: panels/network/connection-editor/ce-page-details.c:493
 msgid "Details"
 msgstr "Részletek"
 
@@ -3151,21 +3275,21 @@ msgstr "automatikus"
 msgid "Identity"
 msgstr "Személyazonosság"
 
-#: panels/network/connection-editor/ce-page-ip4.c:244
-#: panels/network/connection-editor/ce-page-ip6.c:225
+#: panels/network/connection-editor/ce-page-ip4.c:245
+#: panels/network/connection-editor/ce-page-ip6.c:226
 msgid "Delete Address"
 msgstr "Cím törlése"
 
-#: panels/network/connection-editor/ce-page-ip4.c:399
-#: panels/network/connection-editor/ce-page-ip6.c:369
+#: panels/network/connection-editor/ce-page-ip4.c:400
+#: panels/network/connection-editor/ce-page-ip6.c:370
 msgid "Delete Route"
 msgstr "Útvonal törlése"
 
-#: panels/network/connection-editor/ce-page-ip4.c:750
+#: panels/network/connection-editor/ce-page-ip4.c:754
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:722
+#: panels/network/connection-editor/ce-page-ip6.c:726
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3205,6 +3329,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Jelerősség"
 
@@ -3222,7 +3347,9 @@ msgid "Supported Frequencies"
 msgstr "Támogatott frekvenciák"
 
 #: panels/network/connection-editor/details-page.ui:180
-#: panels/network/net-device-ethernet.c:160
+#: panels/network/net-device-ethernet.c:161
+#: panels/network/net-device-ethernet.c:163
+#: panels/network/net-device-ethernet.c:165
 #: panels/network/network-mobile.ui:235
 msgid "Default Route"
 msgstr "Alapértelmezett útvonal"
@@ -3487,19 +3614,19 @@ msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr ""
 "Hálózat;Vezeték nélküli;Wi-Fi;Wifi;IP;LAN;Széles sáv;Szélessáv;DNS;Hotspot;"
 
-#: panels/network/net-device-ethernet.c:95
+#: panels/network/net-device-ethernet.c:96
 msgid "never"
 msgstr "soha"
 
-#: panels/network/net-device-ethernet.c:103
+#: panels/network/net-device-ethernet.c:104
 msgid "today"
 msgstr "ma"
 
-#: panels/network/net-device-ethernet.c:105
+#: panels/network/net-device-ethernet.c:106
 msgid "yesterday"
 msgstr "tegnap"
 
-#: panels/network/net-device-ethernet.c:174
+#: panels/network/net-device-ethernet.c:180
 msgid "Last used"
 msgstr "Utolsó használat"
 
@@ -3508,7 +3635,7 @@ msgstr "Utolsó használat"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:261
+#: panels/network/net-device-ethernet.c:267
 #: panels/network/network-bluetooth.ui:38 panels/network/network-ethernet.ui:18
 msgid "Wired"
 msgstr "Vezetékes"
@@ -3548,21 +3675,21 @@ msgid "Wireless device does not support Hotspot mode"
 msgstr "A vezeték nélküli eszköz nem támogatja a hotspot módot"
 
 #: panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:266
-#: panels/power/cc-power-panel.c:1133 panels/power/cc-power-panel.c:1144
-#: panels/universal-access/cc-ua-panel.c:324
-#: panels/universal-access/cc-ua-panel.c:599
-#: panels/universal-access/cc-ua-panel.c:609
-#: panels/universal-access/cc-ua-panel.c:621
-#: panels/universal-access/cc-ua-panel.c:664
-#: panels/universal-access/cc-ua-panel.ui:300
-#: panels/universal-access/cc-ua-panel.ui:346
-#: panels/universal-access/cc-ua-panel.ui:392
-#: panels/universal-access/cc-ua-panel.ui:498
-#: panels/universal-access/cc-ua-panel.ui:651
-#: panels/universal-access/cc-ua-panel.ui:697
-#: panels/universal-access/cc-ua-panel.ui:743
-#: panels/universal-access/cc-ua-panel.ui:927
+#: panels/notifications/cc-notifications-panel.c:260
+#: panels/power/cc-power-panel.c:856 panels/power/cc-power-panel.c:867
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
+#: panels/universal-access/cc-ua-panel.ui:338
+#: panels/universal-access/cc-ua-panel.ui:384
+#: panels/universal-access/cc-ua-panel.ui:430
+#: panels/universal-access/cc-ua-panel.ui:536
+#: panels/universal-access/cc-ua-panel.ui:689
+#: panels/universal-access/cc-ua-panel.ui:735
+#: panels/universal-access/cc-ua-panel.ui:781
+#: panels/universal-access/cc-ua-panel.ui:965
 msgid "Off"
 msgstr "Ki"
 
@@ -3597,6 +3724,7 @@ msgid "Turn device off"
 msgstr "Eszköz kikapcsolása"
 
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -3694,8 +3822,7 @@ msgid "Unmanaged"
 msgstr "Felügyeletlen"
 
 #. TRANSLATORS: device status
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:928
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "Nem érhető el"
 
@@ -3920,7 +4047,7 @@ msgid "SIM Puk required"
 msgstr "A SIM Puk szükséges"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "A SIM hibás"
 
@@ -4039,7 +4166,7 @@ msgstr "_Felhasználónév"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:478
+#: panels/user-accounts/cc-user-panel.ui:365
 msgid "_Password"
 msgstr "Jels_zó"
 
@@ -4368,21 +4495,21 @@ msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Üzenet_tartalom megjelenítése a zárolási képernyőn"
 
-#: panels/notifications/cc-notifications-panel.c:266
-#: panels/power/cc-power-panel.c:1139 panels/power/cc-power-panel.c:1146
-#: panels/universal-access/cc-ua-panel.c:324
-#: panels/universal-access/cc-ua-panel.c:599
-#: panels/universal-access/cc-ua-panel.c:609
-#: panels/universal-access/cc-ua-panel.c:621
-#: panels/universal-access/cc-ua-panel.c:664
+#: panels/notifications/cc-notifications-panel.c:260
+#: panels/power/cc-power-panel.c:862 panels/power/cc-power-panel.c:869
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
 msgid "On"
 msgstr "Be"
 
-#: panels/notifications/cc-notifications-panel.ui:48
+#: panels/notifications/cc-notifications-panel.ui:44
 msgid "_Do Not Disturb"
 msgstr "_Ne zavarjanak"
 
-#: panels/notifications/cc-notifications-panel.ui:56
+#: panels/notifications/cc-notifications-panel.ui:52
 msgid "_Lock Screen Notifications"
 msgstr "_Zárolási képernyő értesítések"
 
@@ -4395,26 +4522,26 @@ msgstr "Az értesítések megjelenítésének és tartalmuk beállítása"
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Értesítések;Felugró sáv;Üzenet;Sáv;Tálca;Figyelmeztetés;"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:150
+#: panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Egyéb"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:622
+#: panels/online-accounts/cc-online-accounts-panel.c:576
 #, c-format
 msgid "%s Account"
 msgstr "%s fiók"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:916
+#: panels/online-accounts/cc-online-accounts-panel.c:870
 msgid "Error removing account"
 msgstr "Hiba a fiók eltávolításakor"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:982
+#: panels/online-accounts/cc-online-accounts-panel.c:936
 #, c-format
 msgid "%s removed"
 msgstr "%s eltávolítva"
@@ -4456,7 +4583,7 @@ msgstr "Nincs internetkapcsolat – csatlakozzon új online fiókok beállítás
 msgid "Add an account"
 msgstr "Fiók hozzáadása"
 
-#: panels/online-accounts/online-accounts.ui:238
+#: panels/online-accounts/online-accounts.ui:223
 msgid "Remove Account"
 msgstr "Fiók eltávolítása"
 
@@ -4586,8 +4713,8 @@ msgid "Gaming input device"
 msgstr "Bemeneti eszköz játékokhoz"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:413
-#: panels/power/cc-power-panel.c:1779
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:384
+#: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Akkumulátor"
 
@@ -4601,53 +4728,88 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Extra"
 
-#: panels/power/cc-power-panel.c:411
+#: panels/power/cc-power-panel.c:382
 msgid "Batteries"
 msgstr "Akkumulátorok"
 
-#: panels/power/cc-power-panel.c:632
+#: panels/power/cc-power-panel.c:644
 msgid "When _idle"
 msgstr "Ü_resjáratban"
 
-#: panels/power/cc-power-panel.c:1081
+#: panels/power/cc-power-panel.c:796
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:797
 msgid "Power Off"
 msgstr "Kikapcsolás"
 
-#: panels/power/cc-power-panel.c:1083
+#: panels/power/cc-power-panel.c:798
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: panels/power/cc-power-panel.c:1084
+#: panels/power/cc-power-panel.c:799
 msgid "Nothing"
 msgstr "Ne tegyen semmit"
 
-#: panels/power/cc-power-panel.c:1135
+#: panels/power/cc-power-panel.c:858
 msgid "When on battery power"
 msgstr "Akkumulátoron"
 
-#: panels/power/cc-power-panel.c:1137
+#: panels/power/cc-power-panel.c:860
 msgid "When plugged in"
 msgstr "Ha csatlakoztatva van"
 
-#: panels/power/cc-power-panel.c:1277
+#: panels/power/cc-power-panel.c:980
+#| msgid "Never"
+msgctxt "Idle time"
+msgid "Never"
+msgstr "Soha"
+
+#: panels/power/cc-power-panel.c:1066
 msgid "Automatic suspend"
 msgstr "Automatikus felfüggesztés"
 
-#: panels/power/cc-power-panel.c:1799
-msgid "Power Mode"
-msgstr "Energiagazdálkodási mód"
+#: panels/power/cc-power-panel.c:1171
+msgid ""
+"Performance mode temporarily disabled due to high operating temperature."
+msgstr ""
+"A teljesítményközpontú mód átmenetileg letiltva a magas működési "
+"hőmérséklet miatt."
 
-#: panels/power/cc-power-panel.c:1809
-msgid "Power Saving"
-msgstr "Energiatakarékosság"
+#: panels/power/cc-power-panel.c:1173
+msgid ""
+"Lap detected: performance mode temporarily unavailable. Move the device to a "
+"stable surface to restore."
+msgstr ""
+"Ölben használat észlelve: a teljesítményközpontú mód átmenetileg nem érhető "
+"el. A helyreállításhoz helyezze stabil felületre az eszközt."
 
-#: panels/power/cc-power-panel.c:1817
-msgid "Suspend & Power Button"
-msgstr "Felfüggesztés és kikapcsolás gombok"
+#: panels/power/cc-power-panel.c:1175
+#| msgid "Performance mode unavailable"
+msgid "Performance mode temporarily disabled."
+msgstr "Teljesítményközpontú mód átmenetileg letiltva."
+
+#: panels/power/cc-power-panel.c:1218
+msgid ""
+"Low battery: power saver enabled. Previous mode will be restored when "
+"battery is sufficiently charged."
+msgstr ""
+"Alacsony töltés: energiatakarékos mód bekapcsolva. Az előző mód visszaáll, "
+"amint elég töltés lesz az akkumulátorban."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1226
+#, c-format
+msgid "Power Saver mode activated by “%s”."
+msgstr "A(z) „%s” aktiválta az energiatakarékos módot."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1230
+#, c-format
+#| msgid "Performance mode unavailable"
+msgid "Performance mode activated by “%s”."
+msgstr "A(z) „%s” aktiválta az teljesítményközpontú módot."
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4709,119 +4871,134 @@ msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 óra"
 
-#: panels/power/cc-power-panel.ui:227
+#: panels/power/cc-power-panel.ui:107
+msgid "Power Mode"
+msgstr "Energiagazdálkodási mód"
+
+#: panels/power/cc-power-panel.ui:108
 msgid "Affects system performance and power usage."
 msgstr "Befolyásolja a rendszer teljesítményét és energiagazdálkodását."
 
-#: panels/power/cc-power-panel.ui:297
-msgid "_Screen Brightness"
-msgstr "_Képernyő fényereje"
+#: panels/power/cc-power-panel.ui:142
+#| msgid "Power Saving"
+msgid "Power Saving Options"
+msgstr "Energiatakarékossági beállítások"
 
-#: panels/power/cc-power-panel.ui:346
-msgid "Automatic Brightness"
-msgstr "Automatikus fényerő"
+#: panels/power/cc-power-panel.ui:146
+#| msgid "Automatic Brightness"
+msgid "Automatic Screen Brightness"
+msgstr "Automatikus képernyőfényerő"
 
-#: panels/power/cc-power-panel.ui:382
-msgid "_Keyboard Brightness"
-msgstr "Billentyűzet _fényereje"
+#: panels/power/cc-power-panel.ui:147
+msgid "Screen brightness adjusts to the surrounding light."
+msgstr "A képernyő fényereje a környező fényhez lesz igazítva."
 
-#: panels/power/cc-power-panel.ui:431
-msgid "Dim Screen When Inactive"
-msgstr "Képernyő elhalványítása, ha inaktív"
+#: panels/power/cc-power-panel.ui:160
+#| msgid "Screen"
+msgid "Dim Screen"
+msgstr "Képernyő elhalványítása"
 
-#: panels/power/cc-power-panel.ui:466
-msgid "_Blank Screen"
-msgstr "Képernyő _elsötétítése"
+#: panels/power/cc-power-panel.ui:161
+msgid "Reduces the screen brightness when the computer is inactive."
+msgstr "Csökkenti a képernyő fényerejét, ha a számítógép tétlen."
 
-#: panels/power/cc-power-panel.ui:502
+#: panels/power/cc-power-panel.ui:174
+#| msgid "Screen _Reader"
+msgid "Screen _Blank"
+msgstr "Képernyő el_sötétítése"
+
+#: panels/power/cc-power-panel.ui:175
+msgid "Turns the screen off after a period of inactivity."
+msgstr "Bizonyos hosszúságú tétlenség után kikapcsolja a képernyőt."
+
+#: panels/power/cc-power-panel.ui:183
+#| msgid "Power Saver"
+msgid "Automatic Power Saver"
+msgstr "Automatikus energiatakarékosság"
+
+#: panels/power/cc-power-panel.ui:184
+msgid "Enables power saver mode when battery is low."
+msgstr ""
+"Engedélyezi az energiatakarékos módot, ha az akkumulátor töltöttsége "
+"alacsony."
+
+#: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
 msgstr "_Automatikus felfüggesztés"
 
-#: panels/power/cc-power-panel.ui:547
-msgid "_Wi-Fi"
-msgstr "_Wi-Fi"
+#: panels/power/cc-power-panel.ui:199
+msgid "Pauses the computer after a period of inactivity."
+msgstr "Bizonyos hosszúságú tétlenség után szünetelteti a számítógépet."
 
-#: panels/power/cc-power-panel.ui:559
-msgid "Wi-Fi can be turned off to save power."
-msgstr "A Wi-Fi kikapcsolható az energiatakarékosság érdekében."
+#: panels/power/cc-power-panel.ui:217
+msgid "Suspend & Power Button"
+msgstr "Felfüggesztés és kikapcsolás gombok"
 
-#: panels/power/cc-power-panel.ui:609
-msgid "_Mobile Broadband"
-msgstr "_Mobil széles sáv"
-
-#: panels/power/cc-power-panel.ui:621
-msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-msgstr ""
-"A mobil szélessáv (LTE, 4G, 3G stb.) kikapcsolható az energiatakarékosság "
-"érdekében."
-
-#: panels/power/cc-power-panel.ui:671
-msgid "_Bluetooth"
-msgstr "Bl_uetooth"
-
-#: panels/power/cc-power-panel.ui:683
-msgid "Bluetooth can be turned off to save power."
-msgstr "A Bluetooth kikapcsolható az energiatakarékosság érdekében."
-
-#: panels/power/cc-power-panel.ui:759
+#: panels/power/cc-power-panel.ui:221
 msgid "Po_wer Button Behavior"
 msgstr "_Kikapcsolás gomb művelete"
 
-#: panels/power/cc-power-panel.ui:797
+#: panels/power/cc-power-panel.ui:229
 msgid "Show Battery _Percentage"
 msgstr "_Akkumulátorszázalék megjelenítése"
 
-#: panels/power/cc-power-panel.ui:872
+#: panels/power/cc-power-panel.ui:268
 msgid "Automatic Suspend"
 msgstr "Automatikus felfüggesztés"
 
-#: panels/power/cc-power-panel.ui:897
+#: panels/power/cc-power-panel.ui:293
 msgid "_Plugged In"
 msgstr "Csa_tlakoztatva"
 
-#: panels/power/cc-power-panel.ui:913
+#: panels/power/cc-power-panel.ui:309
 msgid "On _Battery Power"
 msgstr "_Akkumulátoron"
 
-#: panels/power/cc-power-panel.ui:958 panels/power/cc-power-panel.ui:1018
+#: panels/power/cc-power-panel.ui:354 panels/power/cc-power-panel.ui:414
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Késleltetés"
 
-#: panels/power/cc-power-profile-row.c:62
+#: panels/power/cc-power-profile-row.c:61
 msgid "Lap detected: performance mode unavailable"
 msgstr "Ölben történő használat észlelve: a teljesítmény mód nem érhető el"
 
-#: panels/power/cc-power-profile-row.c:64
+#: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
 msgstr "Magas hardverhőmérséklet: a teljesítmény mód nem érhető el"
 
-#: panels/power/cc-power-profile-row.c:65
+#: panels/power/cc-power-profile-row.c:64
 msgid "Performance mode unavailable"
 msgstr "A teljesítmény mód nem érhető el"
 
-#: panels/power/cc-power-profile-row.c:87
-#: panels/power/cc-power-profile-row.c:187
+#: panels/power/cc-power-profile-row.c:86
+#: panels/power/cc-power-profile-row.c:185
 msgid "High performance and power usage."
 msgstr "Magas teljesítmény és fogyasztás."
 
-#: panels/power/cc-power-profile-row.c:186
+#: panels/power/cc-power-profile-row.c:184
+#| msgid "Performance"
+msgctxt "Power profile"
 msgid "Performance"
 msgstr "Teljesítmény"
 
-#: panels/power/cc-power-profile-row.c:192
-msgid "Balanced Power"
+#: panels/power/cc-power-profile-row.c:188
+#| msgid "Balance"
+msgctxt "Power profile"
+msgid "Balanced"
 msgstr "Kiegyensúlyozott"
 
-#: panels/power/cc-power-profile-row.c:193
+#: panels/power/cc-power-profile-row.c:189
 msgid "Standard performance and power usage."
 msgstr "Szokásos teljesítmény és fogyasztás."
 
-#: panels/power/cc-power-profile-row.c:198
+#: panels/power/cc-power-profile-row.c:192
+#| msgid "Power Saver"
+msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Energiatakarékos"
 
-#: panels/power/cc-power-profile-row.c:199
+#: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
 msgstr "Csökkentett teljesítmény és fogyasztás."
 
@@ -4855,7 +5032,7 @@ msgstr "Hitelesítés"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Felhasználónév"
 
@@ -4871,15 +5048,20 @@ msgid "Printer “%s” has been deleted"
 msgstr "A(z) „%s” nyomtató törölve lett"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:930
+#: panels/printers/cc-printers-panel.c:926
 msgid "Failed to add new printer."
 msgstr "Az új nyomtató hozzáadása meghiúsult."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1209
+#: panels/printers/cc-printers-panel.c:1225
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "A felület nem tölthető be: %s"
+
+#: panels/printers/cc-printers-panel.c:1293
+#| msgid "Unlock to Add Users and Change Settings"
+msgid "Unlock to Add Printers and Change Settings"
+msgstr "Feloldás a nyomtatók hozzáadásához és a beállítások módosításához"
 
 #: panels/printers/gnome-printers-panel.desktop.in.in:3
 msgid "Printers"
@@ -4898,8 +5080,8 @@ msgstr "Nyomtató;Sor;Nyomtatás;Papír;Tinta;Festékkazetta;"
 
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:344
-#: panels/printers/pp-new-printer-dialog.c:401
+#: panels/printers/pp-new-printer-dialog.c:254
+#: panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "Nyomtató hozzáadása"
 
@@ -4907,6 +5089,7 @@ msgstr "Nyomtató hozzáadása"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_Feloldás"
 
@@ -4928,20 +5111,20 @@ msgstr ""
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
-#: panels/printers/pp-details-dialog.c:371
+#: panels/printers/pp-details-dialog.c:351
 #, c-format
 msgid "%s Details"
 msgstr "%s adatai"
 
-#: panels/printers/pp-details-dialog.c:121
+#: panels/printers/pp-details-dialog.c:101
 msgid "No suitable driver found"
 msgstr "Nem található megfelelő illesztőprogram"
 
-#: panels/printers/pp-details-dialog.c:252
+#: panels/printers/pp-details-dialog.c:232
 msgid "Select PPD File"
 msgstr "Válasszon PPD fájlt"
 
-#: panels/printers/pp-details-dialog.c:261
+#: panels/printers/pp-details-dialog.c:241
 msgid ""
 "PostScript Printer Description files (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
@@ -4954,7 +5137,7 @@ msgstr "Hely"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:239
+#: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Illesztőprogram"
 
@@ -5129,56 +5312,56 @@ msgstr "_Hitelesítés"
 msgid "No Active Printer Jobs"
 msgstr "Nincsenek aktív nyomtatási feladatok"
 
-#: panels/printers/pp-new-printer-dialog.c:359
+#: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
 msgstr "Nyomtatókiszolgáló feloldása"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "%s feloldása."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:367
+#: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Adja meg felhasználónevét és jelszavát a nyomtatók megjelenítéséhez ezen: %s."
 
-#: panels/printers/pp-new-printer-dialog.c:790
+#: panels/printers/pp-new-printer-dialog.c:587
 msgid "Searching for Printers"
 msgstr "Nyomtatók keresése"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1578
+#: panels/printers/pp-new-printer-dialog.c:1375
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1583
+#: panels/printers/pp-new-printer-dialog.c:1380
 msgid "Serial Port"
 msgstr "Soros port"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1590
+#: panels/printers/pp-new-printer-dialog.c:1387
 msgid "Parallel Port"
 msgstr "Párhuzamos port"
 
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1632
+#: panels/printers/pp-new-printer-dialog.c:1429
 #, c-format
 msgid "Location: %s"
 msgstr "Hely: %s"
 
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1637
+#: panels/printers/pp-new-printer-dialog.c:1434
 #, c-format
 msgid "Address: %s"
 msgstr "Cím: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1461
 msgid "Server requires authentication"
 msgstr "A kiszolgáló hitelesítést igényel"
 
@@ -5319,7 +5502,8 @@ msgid "No pre-filtering"
 msgstr "Nincs előszűrés"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:223
+#: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Gyártó"
 
@@ -5468,6 +5652,7 @@ msgid "Remove Printer"
 msgstr "Nyomtató eltávolítása"
 
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Modell"
 
@@ -5487,8 +5672,9 @@ msgstr "Újraindítás"
 
 #. Translators: This button adds new printer.
 #: panels/printers/printers.ui:12
-msgid "Add…"
-msgstr "Hozzáadás…"
+#| msgid "Add a Printer…"
+msgid "Add Printer…"
+msgstr "Nyomtató hozzáadása…"
 
 #: panels/printers/printers.ui:187
 msgid "No printers"
@@ -5509,7 +5695,7 @@ msgstr ""
 "nem tűnik elérhetőnek."
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:189
-#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:159
+#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:203
 msgid "Formats"
 msgstr "Formátumok"
 
@@ -5575,40 +5761,46 @@ msgstr "Mértékegység"
 msgid "Paper"
 msgstr "Papír"
 
-#: panels/region/cc-region-panel.c:740
-msgid "Login _Screen"
-msgstr "Bejelentkezési _képernyő"
+#: panels/region/cc-region-panel.ui:42
+#| msgid "%s Account"
+msgid "My Account"
+msgstr "Saját fiók"
 
-#: panels/region/cc-region-panel.ui:34
+#: panels/region/cc-region-panel.ui:53
+#| msgid "Login _Screen"
+msgid "Login Screen"
+msgstr "Bejelentkezési képernyő"
+
+#: panels/region/cc-region-panel.ui:78
 msgid "Language"
 msgstr "Nyelv"
 
-#: panels/region/cc-region-panel.ui:45
+#: panels/region/cc-region-panel.ui:89
 msgid "The language used for text in windows and web pages."
 msgstr "Az ablakokban és weboldalakon lévő szövegekhez használt nyelv."
 
-#: panels/region/cc-region-panel.ui:85
-#: panels/user-accounts/cc-user-panel.ui:406
+#: panels/region/cc-region-panel.ui:129
+#: panels/user-accounts/cc-user-panel.ui:311
 msgid "_Language"
 msgstr "_Nyelv"
 
-#: panels/region/cc-region-panel.ui:120
+#: panels/region/cc-region-panel.ui:164
 msgid "Restart the session for changes to take effect"
 msgstr "A változtatások életbe léptetéséhez lépjen ki, majd újra be"
 
-#: panels/region/cc-region-panel.ui:135
+#: panels/region/cc-region-panel.ui:179
 msgid "Restart…"
 msgstr "Újraindítás…"
 
-#: panels/region/cc-region-panel.ui:170
+#: panels/region/cc-region-panel.ui:214
 msgid "The format used for numbers, dates, and currencies."
 msgstr "A számokhoz, dátumokhoz és pénzösszegekhez használt formátum."
 
-#: panels/region/cc-region-panel.ui:204
+#: panels/region/cc-region-panel.ui:248
 msgid "_Formats"
 msgstr "_Formátumok"
 
-#: panels/region/cc-region-panel.ui:231
+#: panels/region/cc-region-panel.ui:275
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "A bejelentkezési beállításokat minden felhasználó használja a rendszerre "
@@ -5619,11 +5811,10 @@ msgid "Region & Language"
 msgstr "Terület és nyelv"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-msgid ""
-"Select your display language, formats, keyboard layouts and input sources"
-msgstr ""
-"Válassza ki a felület nyelvét, az adatformátumokat, billentyűkiosztásokat és "
-"beviteli forrásokat"
+#| msgid ""
+#| "Select your display language, formats, keyboard layouts and input sources"
+msgid "Select your display language and formats"
+msgstr "Válassza ki a felület nyelvét és az adatformátumokat"
 
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
@@ -5787,7 +5978,7 @@ msgid "_OK"
 msgstr "_OK"
 
 #: panels/search/cc-search-locations-dialog.ui:9
-#: panels/search/cc-search-panel.ui:59
+#: panels/search/cc-search-panel.ui:57
 msgid "Search Locations"
 msgstr "Keresési helyek"
 
@@ -5813,7 +6004,7 @@ msgstr "Könyvjelzők"
 msgid "Other"
 msgstr "Egyéb"
 
-#: panels/search/cc-search-panel.c:152
+#: panels/search/cc-search-panel.c:151
 msgid "No applications found"
 msgstr "Nem találhatók alkalmazások"
 
@@ -6066,51 +6257,51 @@ msgstr "Rendszerhangerő"
 msgid "Volume Levels"
 msgstr "Hangerőszintek"
 
-#: panels/sound/cc-sound-panel.ui:65
+#: panels/sound/cc-sound-panel.ui:63
 msgid "Output"
 msgstr "Kimenet"
 
-#: panels/sound/cc-sound-panel.ui:92
+#: panels/sound/cc-sound-panel.ui:90
 msgid "Output Device"
 msgstr "Kimeneti eszköz"
 
-#: panels/sound/cc-sound-panel.ui:115
+#: panels/sound/cc-sound-panel.ui:113
 msgid "Test"
 msgstr "Teszt"
 
-#: panels/sound/cc-sound-panel.ui:146 panels/sound/cc-sound-panel.ui:323
+#: panels/sound/cc-sound-panel.ui:144 panels/sound/cc-sound-panel.ui:319
 msgid "Configuration"
 msgstr "Beállítások"
 
-#: panels/sound/cc-sound-panel.ui:179
+#: panels/sound/cc-sound-panel.ui:177
 msgid "Balance"
 msgstr "Egyensúly"
 
-#: panels/sound/cc-sound-panel.ui:206
+#: panels/sound/cc-sound-panel.ui:204
 msgid "Fade"
 msgstr "Elhalás"
 
-#: panels/sound/cc-sound-panel.ui:233
+#: panels/sound/cc-sound-panel.ui:231
 msgid "Subwoofer"
 msgstr "Mélysugárzó"
 
-#: panels/sound/cc-sound-panel.ui:255
+#: panels/sound/cc-sound-panel.ui:251
 msgid "Input"
 msgstr "Bemenet"
 
-#: panels/sound/cc-sound-panel.ui:282
+#: panels/sound/cc-sound-panel.ui:278
 msgid "Input Device"
 msgstr "Bemeneti eszköz"
 
-#: panels/sound/cc-sound-panel.ui:356
+#: panels/sound/cc-sound-panel.ui:352
 msgid "Volume"
 msgstr "Hangerő"
 
-#: panels/sound/cc-sound-panel.ui:378
+#: panels/sound/cc-sound-panel.ui:372
 msgid "Alert Sound"
 msgstr "Riasztási hang"
 
-#: panels/sound/cc-volume-slider.c:115
+#: panels/sound/cc-volume-slider.c:117
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
@@ -6427,7 +6618,7 @@ msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "Hangjelzés a Num Lock vagy Caps Lock ki- és bekapcsolásakor."
 
 #: panels/universal-access/cc-sound-keys-dialog.ui:45
-#: panels/universal-access/cc-ua-panel.ui:374
+#: panels/universal-access/cc-ua-panel.ui:412
 msgid "_Sound Keys"
 msgstr "Billentyű_hangok"
 
@@ -6533,32 +6724,32 @@ msgstr ""
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:344
+#: panels/universal-access/cc-ua-panel.c:351
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Alapértelmezett"
 
-#: panels/universal-access/cc-ua-panel.c:347
+#: panels/universal-access/cc-ua-panel.c:354
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Közepes"
 
-#: panels/universal-access/cc-ua-panel.c:350
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Nagy"
 
-#: panels/universal-access/cc-ua-panel.c:353
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Nagyobb"
 
-#: panels/universal-access/cc-ua-panel.c:356
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Legnagyobb"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:367
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6581,65 +6772,69 @@ msgstr "Nagy k_ontraszt"
 msgid "_Large Text"
 msgstr "Nagy s_zöveg"
 
-#: panels/universal-access/cc-ua-panel.ui:235
+#: panels/universal-access/cc-ua-panel.ui:238
+msgid "Enable A_nimations"
+msgstr "A_nimációk engedélyezése"
+
+#: panels/universal-access/cc-ua-panel.ui:273
 msgid "C_ursor Size"
 msgstr "K_urzorméret"
 
-#: panels/universal-access/cc-ua-panel.ui:282
+#: panels/universal-access/cc-ua-panel.ui:320
 #: panels/universal-access/cc-zoom-options-dialog.ui:91
 msgid "_Zoom"
 msgstr "_Nagyítás"
 
-#: panels/universal-access/cc-ua-panel.ui:328
+#: panels/universal-access/cc-ua-panel.ui:366
 msgid "Screen _Reader"
 msgstr "_Képernyőolvasó"
 
-#: panels/universal-access/cc-ua-panel.ui:436
+#: panels/universal-access/cc-ua-panel.ui:474
 msgid "Hearing"
 msgstr "Hallás"
 
-#: panels/universal-access/cc-ua-panel.ui:480
+#: panels/universal-access/cc-ua-panel.ui:518
 #: panels/universal-access/cc-visual-alerts-dialog.ui:68
 msgid "_Visual Alerts"
 msgstr "_Vizuális figyelmeztetések"
 
-#: panels/universal-access/cc-ua-panel.ui:588
+#: panels/universal-access/cc-ua-panel.ui:626
 msgid "Screen _Keyboard"
 msgstr "Képe_rnyő-billentyűzet"
 
-#: panels/universal-access/cc-ua-panel.ui:633
+#: panels/universal-access/cc-ua-panel.ui:671
 msgid "R_epeat Keys"
 msgstr "Billentyűk _ismétlése"
 
-#: panels/universal-access/cc-ua-panel.ui:679
+#: panels/universal-access/cc-ua-panel.ui:717
 msgid "Cursor _Blinking"
 msgstr "_Villogó kurzor"
 
-#: panels/universal-access/cc-ua-panel.ui:725
+#: panels/universal-access/cc-ua-panel.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "_Gépelési segéd (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:786
+#: panels/universal-access/cc-ua-panel.ui:824
 msgid "Pointing & Clicking"
 msgstr "Mutatás és kattintás"
 
-#: panels/universal-access/cc-ua-panel.ui:832
+#: panels/universal-access/cc-ua-panel.ui:870
 msgid "_Mouse Keys"
 msgstr "_Egérbillentyűk"
 
-#: panels/universal-access/cc-ua-panel.ui:877
+#: panels/universal-access/cc-ua-panel.ui:915
 msgid "_Locate Pointer"
 msgstr "Mutató _megkeresése"
 
-#: panels/universal-access/cc-ua-panel.ui:909
+#: panels/universal-access/cc-ua-panel.ui:947
 msgid "_Click Assist"
 msgstr "Kattintássegé_d"
 
-#: panels/universal-access/cc-ua-panel.ui:955
+#: panels/universal-access/cc-ua-panel.ui:993
 msgid "_Double-Click Delay"
 msgstr "_Dupla kattintás késleltetése"
 
-#: panels/universal-access/cc-ua-panel.ui:975
+#: panels/universal-access/cc-ua-panel.ui:1013
 msgid "Double-Click Delay"
 msgstr "Dupla kattintás késleltetése"
 
@@ -7139,7 +7334,7 @@ msgstr ""
 msgid "_Enterprise Login"
 msgstr "_Vállalati bejelentkezés"
 
-#: panels/user-accounts/cc-avatar-chooser.c:220
+#: panels/user-accounts/cc-avatar-chooser.c:225
 msgid "Browse for more pictures"
 msgstr "További képek tallózása"
 
@@ -7403,7 +7598,7 @@ msgstr "%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%H:%M"
@@ -7411,7 +7606,7 @@ msgstr "%H:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7499,26 +7694,26 @@ msgstr "Nem lehet csatlakozni a(z) %s tartományhoz: %s"
 msgid "Your account"
 msgstr "Az Ön fiókja"
 
-#: panels/user-accounts/cc-user-panel.c:397
+#: panels/user-accounts/cc-user-panel.c:402
 msgid "Failed to delete user"
 msgstr "A felhasználó törlése meghiúsult"
 
-#: panels/user-accounts/cc-user-panel.c:452
-#: panels/user-accounts/cc-user-panel.c:507
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:457
+#: panels/user-accounts/cc-user-panel.c:512
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
 msgstr "A távmenedzselt felhasználó visszavonása meghiúsult"
 
-#: panels/user-accounts/cc-user-panel.c:602
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "Nem törölheti saját fiókját."
 
-#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s még be van jelentkezve"
 
-#: panels/user-accounts/cc-user-panel.c:615
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7526,12 +7721,12 @@ msgstr ""
 "A bejelentkezett felhasználók törlése a rendszert inkonzisztens állapotban "
 "hagyhatja."
 
-#: panels/user-accounts/cc-user-panel.c:624
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Meg szeretné tartani %s fájljait?"
 
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7539,53 +7734,54 @@ msgstr ""
 "Felhasználói fiók törlésekor lehetősége van a saját könyvtár, a levelezési "
 "várólista és az ideiglenes fájlok megtartására."
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "Fájlok _törlése"
 
-#: panels/user-accounts/cc-user-panel.c:632
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "Fájlok _megtartása"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Biztosan vissza szeretné vonni a távmenedzselt %s fiókját?"
 
-#: panels/user-accounts/cc-user-panel.c:650
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "_Törlés"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Fiók letiltva"
 
-#: panels/user-accounts/cc-user-panel.c:708
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Következő belépéskor állítandó be"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nincs"
 
-#: panels/user-accounts/cc-user-panel.c:754
+#: panels/user-accounts/cc-user-panel.c:759
 msgid "Logged in"
 msgstr "Bejelentkezve"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:841
+#: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:443
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1259
 msgid "Failed to contact the accounts service"
 msgstr "A fiókszolgáltatás nem érhető el"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1261
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Győződjön meg róla, hogy az AccountService telepítve van és fut."
 
@@ -7593,7 +7789,7 @@ msgstr "Győződjön meg róla, hogy az AccountService telepítve van és fut."
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7601,12 +7797,12 @@ msgstr ""
 "A módosítások végrehajtásához\n"
 "előbb kattintson a * ikonra"
 
-#: panels/user-accounts/cc-user-panel.c:1361
+#: panels/user-accounts/cc-user-panel.c:1366
 msgid "Delete the selected user account"
 msgstr "Kijelölt felhasználói fiók törlése"
 
-#: panels/user-accounts/cc-user-panel.c:1373
-#: panels/user-accounts/cc-user-panel.c:1492
+#: panels/user-accounts/cc-user-panel.c:1378
+#: panels/user-accounts/cc-user-panel.c:1489
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7614,7 +7810,7 @@ msgstr ""
 "A kijelölt felhasználói fiók törléséhez\n"
 "először kattintson a * ikonra"
 
-#: panels/user-accounts/cc-user-panel.c:1545
+#: panels/user-accounts/cc-user-panel.c:1535
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Feloldás a felhasználók hozzáadásához és a beállítások módosításához"
 
@@ -7634,20 +7830,20 @@ msgstr "A változtatások életbe léptetéséhez lépjen ki, majd újra be"
 msgid "Restart Now"
 msgstr "Újraindítás most"
 
-#: panels/user-accounts/cc-user-panel.ui:153
-#: panels/user-accounts/cc-user-panel.ui:169
+#: panels/user-accounts/cc-user-panel.ui:157
+#: panels/user-accounts/cc-user-panel.ui:173
 msgid "User Icon"
 msgstr "Felhasználói ikon"
 
-#: panels/user-accounts/cc-user-panel.ui:245
+#: panels/user-accounts/cc-user-panel.ui:249
 msgid "Account Settings"
 msgstr "Fiókbeállítások"
 
-#: panels/user-accounts/cc-user-panel.ui:272
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid "_Administrator"
 msgstr "_Rendszergazda"
 
-#: panels/user-accounts/cc-user-panel.ui:301
+#: panels/user-accounts/cc-user-panel.ui:268
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7655,40 +7851,40 @@ msgstr ""
 "A rendszergazdák hozzáadhatnak és eltávolíthatnak más felhasználókat, és "
 "módosíthatják az összes felhasználó beállításait."
 
-#: panels/user-accounts/cc-user-panel.ui:333
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "_Parental Controls"
 msgstr "Szülői _felügyeleti eszközök"
 
-#: panels/user-accounts/cc-user-panel.ui:377
+#: panels/user-accounts/cc-user-panel.ui:285
 msgid "Open the Parental Controls application."
 msgstr "A Szülői felügyeleti eszközök alkalmazás megnyitása."
 
-#: panels/user-accounts/cc-user-panel.ui:452
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Authentication & Login"
 msgstr "Hitelesítés és bejelentkezés"
 
-#: panels/user-accounts/cc-user-panel.ui:521
+#: panels/user-accounts/cc-user-panel.ui:390
 msgid "_Fingerprint Login"
 msgstr "_Ujjlenyomatos bejelentkezés"
 
-#: panels/user-accounts/cc-user-panel.ui:563
+#: panels/user-accounts/cc-user-panel.ui:415
 msgid "A_utomatic Login"
 msgstr "A_utomatikus bejelentkezés"
 
-#: panels/user-accounts/cc-user-panel.ui:593
+#: panels/user-accounts/cc-user-panel.ui:429
 msgid "Account Activity"
 msgstr "Fióktevékenység"
 
-#: panels/user-accounts/cc-user-panel.ui:634
+#: panels/user-accounts/cc-user-panel.ui:460
 msgid "Remove User…"
 msgstr "Felhasználó eltávolítása…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:673
+#: panels/user-accounts/cc-user-panel.ui:501
 msgid "No Users Found"
 msgstr "Nem találhatók felhasználók"
 
-#: panels/user-accounts/cc-user-panel.ui:683
+#: panels/user-accounts/cc-user-panel.ui:511
 msgid "Unlock to add a user account."
 msgstr "Feloldás felhasználói fiók hozzáadásához."
 
@@ -7702,8 +7898,13 @@ msgstr "Felhasználók hozzáadása vagy eltávolítása és jelszómódosítás
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:20
-msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
-msgstr "Bejelentkezés;Név;Ujjlenyomat;Avatar;Logó;Arckép;Jelszó;"
+msgid ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+msgstr ""
+"Bejelentkezés;Név;Ujjlenyomat;Profilkép;Logó;Arc;Jelszó;Szülői"
+" felügyelet;Képernyőidő;Alkalmazáskorlátozások;Webes"
+" korlátozások;Használat;Limit;Gyermek;Gyerek;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -7891,6 +8092,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "Az új jelszó nem tartalmaz elég eltérő karaktert"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Ismeretlen hiba"
@@ -8137,6 +8339,497 @@ msgstr "Legalsó gomb"
 msgid "Tip Pressure Feel"
 msgstr "Hegy nyomásérzékenysége"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+#| msgid "Access Options"
+msgid "Access Points"
+msgstr "Hozzáférési pontok"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+#| msgid "VPN"
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "Művelet megszakítva"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "<b>Hiba:</b> Hozzáférés megtagadva a beállítások módosításakor"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Hiba:</b> Mobilfelszerelést érintő hiba"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "Nem regisztrált"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+#| msgid "Yesterday"
+msgid "Registered"
+msgstr "Regisztrált"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "Barangolás"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+#| msgid "Search"
+msgid "Searching"
+msgstr "Keresés"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "Megtagadva"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+#| msgid "Details"
+msgid "Modem Details"
+msgstr "Modem részletei"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+#| msgid "Status:"
+msgid "Modem Status"
+msgstr "Modem állapota"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "Szolgáltató"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+#| msgid "Network Name"
+msgid "Network Type"
+msgstr "Hálózattípus"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+#| msgid "Networks"
+msgid "Network Status"
+msgstr "Hálózati állapot"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+#| msgid "Numbers"
+msgid "Own Number"
+msgstr "Saját szám"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+#| msgid "Printer Details"
+msgid "Device Details"
+msgstr "Eszköz adatai"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+#| msgid "Firmware missing"
+msgid "Firmware Version"
+msgstr "Firmware verzió"
+
+#: panels/wwan/cc-wwan-device.c:988
+msgid "2G Only"
+msgstr "Csak 2G"
+
+#: panels/wwan/cc-wwan-device.c:991
+msgid "3G Only"
+msgstr "Csak 3G"
+
+#: panels/wwan/cc-wwan-device.c:994
+msgid "4G Only"
+msgstr "Csak 4G"
+
+#: panels/wwan/cc-wwan-device.c:1003
+msgid "2G, 3G, 4G (Preferred)"
+msgstr "2G, 3G, 4G (előnyben részesített)"
+
+#: panels/wwan/cc-wwan-device.c:1005
+msgid "2G, 3G (Preferred), 4G"
+msgstr "2G, 3G (előnyben részesített), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid "2G (Preferred), 3G, 4G"
+msgstr "2G (előnyben részesített), 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1009
+msgid "2G, 3G, 4G"
+msgstr "2G, 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1015
+msgid "3G, 4G (Preferred)"
+msgstr "3G, 4G (előnyben részesített)"
+
+#: panels/wwan/cc-wwan-device.c:1017
+msgid "3G (Preferred), 4G"
+msgstr "3G (előnyben részesített), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1019
+msgid "3G, 4G"
+msgstr "3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1025
+msgid "2G, 4G (Preferred)"
+msgstr "2G, 4G (előnyben részesített)"
+
+#: panels/wwan/cc-wwan-device.c:1027
+msgid "2G (Preferred), 4G"
+msgstr "2G (előnyben részesített), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1029
+msgid "2G, 4G"
+msgstr "2G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1035
+msgid "2G, 3G (Preferred)"
+msgstr "2G, 3G (előnyben részesített)"
+
+#: panels/wwan/cc-wwan-device.c:1037
+msgid "2G (Preferred), 3G"
+msgstr "2G (előnyben részesített), 3G"
+
+#: panels/wwan/cc-wwan-device.c:1039
+msgid "2G, 3G"
+msgstr "2G, 3G"
+
+#: panels/wwan/cc-wwan-device.c:1043
+#| msgid "Unknown"
+msgctxt "Network mode"
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: panels/wwan/cc-wwan-device-page.c:141
+msgid "Unlock SIM card"
+msgstr "SIM-kártya feloldása"
+
+#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#| msgid "_Unlock"
+msgid "Unlock"
+msgstr "Feloldás"
+
+#: panels/wwan/cc-wwan-device-page.c:147
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "Adja meg a PIN-kódot a(z) %d. SIM-kártyához"
+
+#: panels/wwan/cc-wwan-device-page.c:148
+msgid "Enter PIN to unlock your SIM card"
+msgstr "Adja meg a PIN-kódot a SIM-kártyája feloldásához"
+
+#: panels/wwan/cc-wwan-device-page.c:152
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "Adja meg a PUK-kódot a(z) %d. SIM-kártyához"
+
+#: panels/wwan/cc-wwan-device-page.c:153
+msgid "Enter PUK to unlock your SIM card"
+msgstr "Adja meg a PUK-kódot a SIM-kártyája feloldásához"
+
+#: panels/wwan/cc-wwan-device-page.c:171
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "Hibás jelszó lett megadva. Még %1$u próbálkozása maradt."
+msgstr[1] "Hibás jelszó lett megadva. Még %1$u próbálkozása maradt."
+
+#: panels/wwan/cc-wwan-device-page.c:174
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "%u próbálkozása maradt"
+msgstr[1] "%u próbálkozása maradt"
+
+#: panels/wwan/cc-wwan-device-page.c:179
+msgid "Wrong password entered."
+msgstr "Hibás jelszó lett megadva."
+
+#: panels/wwan/cc-wwan-device-page.c:224
+msgid "PUK code should be an 8 digit number"
+msgstr "A PUK-kódnak 8 számjegyűnek kell lennie"
+
+#: panels/wwan/cc-wwan-device-page.c:248
+msgid "Enter New PIN"
+msgstr "Új PIN-kód megadása"
+
+#: panels/wwan/cc-wwan-device-page.c:252
+msgid "PIN code should be a 4-8 digit number"
+msgstr "A PIN-kódnak 4-8 számjegyűnek kell lennie"
+
+#: panels/wwan/cc-wwan-device-page.c:270
+#| msgid "Unlock %s."
+msgid "Unlocking..."
+msgstr "Feloldás…"
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "Nincs SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "Helyezzen be egy SIM-kártyát a modem használatához"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM zárolva"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+#| msgid "_Mobile Broadband"
+msgid "_Mobile Data"
+msgstr "_Mobil adatkapcsolat"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "Adatkapcsolat mobilhálózat használatával"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "_Adatbarangolás"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "Mobil adatkapcsolat használata barangolás közben"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+#| msgid "Network Name"
+msgid "_Network Mode"
+msgstr "Hálózati _mód"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+#| msgid "Network"
+msgid "N_etwork"
+msgstr "_Hálózat"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+#| msgctxt "Printer Option Group"
+#| msgid "Advanced"
+msgid "Advanced"
+msgstr "Speciális"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+#| msgid "Access Options"
+msgid "_Access Point Names"
+msgstr "_Hozzáférési pontok nevei"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+#| msgid "Screen Lock"
+msgid "_SIM Lock"
+msgstr "_SIM zárolása"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "SIM zárolása PIN-kóddal"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+#| msgid "%s Details"
+msgid "M_odem Details"
+msgstr "M_odem részletei"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+#| msgid "PIN check failed"
+msgid "Phone failure"
+msgstr "Telefonhiba"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+#| msgid "Turn VPN connection off"
+msgid "No connection to phone"
+msgstr "Nincs kapcsolat a telefon felé"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "A művelet nem engedélyezett"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "A művelet nem támogatott"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+#| msgid "SIM Card not inserted"
+msgid "SIM not inserted"
+msgstr "A SIM-kártya nincs behelyezve"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+#| msgid "SIM Pin required"
+msgid "SIM PIN required"
+msgstr "A SIM-kártya PIN-kódja szükséges"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+#| msgid "SIM Pin required"
+msgid "SIM PUK required"
+msgstr "A SIM-kártya PUK-kódja szükséges"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "SIM-kártya hiba"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "A SIM-kártya foglalt"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+#| msgid "Current _Password"
+msgid "Incorrect password"
+msgstr "Helytelen jelszó"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+#| msgid "SIM Pin required"
+msgid "SIM PIN2 required"
+msgstr "A SIM-kártya PIN2-kódja szükséges"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+#| msgid "SIM Pin required"
+msgid "SIM PUK2 required"
+msgstr "A SIM-kártya PUK2-kódja szükséges"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+#| msgid "No stylus found"
+msgid "Not found"
+msgstr "Nem található"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+#| msgid "Read network settings"
+msgid "No network service"
+msgstr "Nincs hálózati szolgáltatás"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+#| msgid "Network Name"
+msgid "Network timeout"
+msgstr "Hálózat időtúllépése"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+#| msgid "AutoIP service failed"
+msgid "GPRS services not allowed"
+msgstr "A GPRS szolgáltatások nem engedélyezettek"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "A barangolás nem engedélyezett ezen a területen"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Meghatározatlan GPRS hiba"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+#| msgctxt "print job"
+#| msgid "Canceled"
+msgid "Action Cancelled"
+msgstr "Művelet megszakítva"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+#| msgid "Access LXD service"
+msgid "Access denied"
+msgstr "Hozzáférés megtagadva"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+#| msgid "Unknown error"
+msgid "Unknown Error"
+msgstr "Ismeretlen hiba"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+#| msgid "Network Name"
+msgid "Network Mode"
+msgstr "Hálózati mód"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "_Beállítás"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+#| msgid "_Close"
+msgid "Close"
+msgstr "Bezárás"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+#| msgid "Automatic"
+msgid "_Automatic"
+msgstr "_Automatikus"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+#| msgid "Visible Networks"
+msgid "Choose Network"
+msgstr "Válasszon hálózatot"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "Hálózati szolgáltatók frissítése"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "%d. SIM"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+#| msgid "No Wi-Fi Adapter Found"
+msgid "No WWAN Adapter Found"
+msgstr "Nem található WWAN adapter"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+#| msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr ""
+"Győződjön meg róla, hogy rendelkezik vezeték nélküli WAN/mobil eszközzel"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+#| msgid "Bluetooth is disabled when airplane mode is on."
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "A vezeték nélküli WAN ki van kapcsolva repülőgép üzemmódban"
+
+#: panels/wwan/cc-wwan-panel.ui:163
+#| msgid "Turn Off Airplane Mode"
+msgid "_Turn off Airplane Mode"
+msgstr "Repülőgép üzemmód _kikapcsolása"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+#| msgid "Forget Connection"
+msgid "Data Connection"
+msgstr "Adatkapcsolat"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+#| msgid "SIM Card not inserted"
+msgid "SIM card used for internet"
+msgstr "Internethez használandó SIM-kártya"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+#| msgid "_Enable by Keyboard"
+msgid "Enable Mobile Network"
+msgstr "Mobilhálózat engedélyezése"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+#| msgid "Screen Lock"
+msgid "SIM Lock"
+msgstr "SIM-kártya zár"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "_Következő"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "SIM-kártya _zárolása PIN-kóddal"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+#| msgid "Ch_ange"
+msgid "Change PIN"
+msgstr "PIN-kód módosítása"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr ""
+"Adja meg a jelenlegi PIN-kódot a SIM-kártya zárolási beállításainak"
+" módosításához"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+#| msgid "Visible Networks"
+msgid "Mobile Network"
+msgstr "Mobilhálózat"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+#| msgid "Configure Removable Media settings"
+msgid "Configure Telephony and mobile data connections"
+msgstr "Telefónia és mobil adatkapcsolatok beállítása"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr "mobil;wwan;telefónia;sim;telefon;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "GNOME Beállítások"
@@ -8181,7 +8874,7 @@ msgstr "[PANEL] [ARGUMENTUM…]"
 msgid "Privacy"
 msgstr "Adatvédelem"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Elérhető panelek:"
 
@@ -8205,7 +8898,7 @@ msgid ""
 msgstr ""
 "A Beállítások ezen verziója csak fejlesztési célokra használandó. Nem "
 "megfelelő rendszerműködést, adatvesztést és más váratlan problémákat "
-"tapasztalhat."
+"tapasztalhat. "
 
 #: shell/cc-window.ui:330
 msgid "Help"
@@ -8292,336 +8985,3 @@ msgstr[1] "%u bemenet"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Rendszerhangok"
-
-#~ msgid "Left Alt"
-#~ msgstr "Bal Alt"
-
-#~ msgid "Right Alt"
-#~ msgstr "Jobb Alt"
-
-#~ msgid "Left Super"
-#~ msgstr "Bal Szuper"
-
-#~ msgid "Right Super"
-#~ msgstr "Jobb Szuper"
-
-#~ msgid "Right Ctrl"
-#~ msgstr "Jobb Ctrl"
-
-#~ msgid "Alternative Characters Key"
-#~ msgstr "Alternatív karakterek billentyű"
-
-#~ msgid "Modifiers-only switch to next source"
-#~ msgstr "Módosítók csak a következő forrásra váltanak"
-
-#~ msgctxt "keyboard key"
-#~ msgid "Menu Key"
-#~ msgstr "Menügomb"
-
-#~ msgctxt "Battery power"
-#~ msgid "Charging"
-#~ msgstr "Töltés"
-
-#~ msgctxt "Battery power"
-#~ msgid "Caution"
-#~ msgstr "Figyelem"
-
-#~ msgctxt "Battery power"
-#~ msgid "Low"
-#~ msgstr "Alacsony"
-
-#~ msgctxt "Battery power"
-#~ msgid "Good"
-#~ msgstr "Jó"
-
-#~ msgctxt "Battery power"
-#~ msgid "Fully charged"
-#~ msgstr "Teljesen feltöltve"
-
-#~ msgctxt "Battery power"
-#~ msgid "Empty"
-#~ msgstr "Üres"
-
-#~ msgid "Choose keyboard layouts or input methods."
-#~ msgstr "Válasszon billentyűzetkiosztást vagy beviteli módokat."
-
-#~ msgid "Previous source"
-#~ msgstr "Előző forrás"
-
-#~ msgid "Super+Shift+Space"
-#~ msgstr "Super+Shift+Szóköz"
-
-#~ msgid "Next source"
-#~ msgstr "Következő forrás"
-
-#~ msgid "Super+Space"
-#~ msgstr "Super+Szóköz"
-
-#~ msgid "Left+Right Alt"
-#~ msgstr "Bal+jobb Alt"
-
-#~ msgid "These keyboard shortcuts can be changed in the keyboard settings"
-#~ msgstr ""
-#~ "Ezeket a gyorsbillentyűket a billentyűzet beállításai között lehet "
-#~ "módosítani"
-
-#~| msgid "Add or remove users and change your password"
-#~ msgid "Add user accounts and change passwords"
-#~ msgstr "Felhasználói fiókok hozzáadása és jelszavak módosítása"
-
-#~ msgid "Play and record sound"
-#~ msgstr "Hang lejátszása és rögzítése"
-
-#~ msgid "Detect network devices using mDNS/DNS-SD (Bonjour/zeroconf)"
-#~ msgstr ""
-#~ "Hálózati eszközök észlelése mDNS/DNS-SD használatával (Bonjour/zeroconf)"
-
-#~ msgid "Access bluetooth hardware directly"
-#~ msgstr "Bluetooth hardver közvetlen elérése"
-
-#~| msgid "Bluetooth Settings"
-#~ msgid "Use bluetooth devices"
-#~ msgstr "Bluetooth eszközök használata"
-
-#~ msgid "Use your camera"
-#~ msgstr "Kamera használata"
-
-#~| msgid "Printers"
-#~ msgid "Print documents"
-#~ msgstr "Dokumentumok nyomtatása"
-
-#~ msgid "Use any connected joystick"
-#~ msgstr "Csatlakoztatott botkormányok használata"
-
-#~| msgid "_Allow connections to control the screen"
-#~ msgid "Allow connecting to the Docker service"
-#~ msgstr "A Docker szolgáltatáshoz való kapcsolódás engedélyezése"
-
-#~| msgid "Configuration failed"
-#~ msgid "Configure network firewall"
-#~ msgstr "Hálózati tűzfal beállítása"
-
-#~ msgid "Setup and use privileged FUSE filesystems"
-#~ msgstr "Privilegizált FUSE fájlrendszerek beállítása és használata"
-
-#~| msgid "Calibrate the device"
-#~ msgid "Update firmware on this device"
-#~ msgstr "Eszköz firmware-ének frissítése"
-
-#~ msgid "Access hardware information"
-#~ msgstr "Hardverinformációk elérése"
-
-#~ msgid "Provide entropy to hardware random number generator"
-#~ msgstr "Entrópia biztosítása a hardveres véletlenszám-generátorhoz"
-
-#~ msgid "Use hardware-generated random numbers"
-#~ msgstr "Hardveresen előállított véletlenszámok használata"
-
-#~ msgid "Access files in your home folder"
-#~ msgstr "Fájlok elérése a saját mappában"
-
-#~ msgid "Access libvirt service"
-#~ msgstr "Libvirt szolgáltatás elérése"
-
-#~| msgid "Change system time and date settings"
-#~ msgid "Change system language and region settings"
-#~ msgstr "Rendszer nyelvi és területi beállításainak módosítása"
-
-#~ msgid "Change location settings and providers"
-#~ msgstr "Helybeállítások és -szolgáltatók módosítása"
-
-#~| msgid "Access Options"
-#~ msgid "Access your location"
-#~ msgstr "Helyadatok elérése"
-
-#~ msgid "Read system and application logs"
-#~ msgstr "Rendszer- és alkalmazásnaplók olvasása"
-
-#~ msgid "Access LXD service"
-#~ msgstr "LXD szolgáltatás elérése"
-
-#~ msgid "access the media-hub service"
-#~ msgstr "a media-hub szolgáltatás elérése"
-
-#~ msgid "Use and configure modems"
-#~ msgstr "Modemek használata és beállítása"
-
-#~ msgid "Read system mount information and disk quotas"
-#~ msgstr "Rendszer csatolási információinak és lemezkvóták olvasása"
-
-#~ msgid "Control music and video players"
-#~ msgstr "Zene- és videólejátszók vezérlése"
-
-#~| msgid "Change system time and date settings"
-#~ msgid "Change low-level network settings"
-#~ msgstr "A rendszer alacsony szintű hálózati beállításainak módosítása"
-
-#~ msgid ""
-#~ "Access the NetworkManager service to read and change network settings"
-#~ msgstr ""
-#~ "A NetworkManager szolgáltatás elérése a hálózati beállítások olvasásához "
-#~ "és módosításához"
-
-#~ msgid "Read access to network settings"
-#~ msgstr "Olvasási hozzáférés a hálózati beállításokhoz"
-
-#~| msgid "Can change settings"
-#~ msgid "Change network settings"
-#~ msgstr "Hálózati beállítások módosítása"
-
-#~| msgid "Can change settings"
-#~ msgid "Read network settings"
-#~ msgstr "Hálózati beállítások olvasása"
-
-#~ msgid ""
-#~ "Access the ofono service to read and change network settings for mobile "
-#~ "telephony"
-#~ msgstr ""
-#~ "Az ofono szolgáltatás elérése a hálózati és mobil telefóniás beállítások "
-#~ "olvasásához és módosításához"
-
-#~ msgid "Control Open vSwitch hardware"
-#~ msgstr "Open vSwitch hardverek vezérlése"
-
-#~ msgid "Read from CD/DVD"
-#~ msgstr "CD/DVD-ről olvasás"
-
-#~ msgid "Read, add, change, or remove saved passwords"
-#~ msgstr ""
-#~ "Mentett jelszavak olvasása, hozzáadása, módosítása vagy eltávolítása"
-
-#~ msgid ""
-#~ "Access pppd and ppp devices for configuring Point-to-Point Protocol "
-#~ "connections"
-#~ msgstr ""
-#~ "A pppd és ppp-eszközök elérése Point-to-Point protokoll kapcsolatok "
-#~ "beállításához"
-
-#~ msgid "Pause or end any process on the system"
-#~ msgstr "A rendszer tetszőleges folyamatának szüneteltetése vagy befejezése"
-
-#~ msgid "Access USB hardware directly"
-#~ msgstr "USB hardverek közvetlen elérése"
-
-#~ msgid "Read/write files on removable storage devices"
-#~ msgstr "Külső adathordozó eszközökön lévő fájlok olvasása/írása"
-
-#~ msgid "Prevent screen sleep/lock"
-#~ msgstr "Képernyő altatásának/zárolásának megakadályozása"
-
-#~ msgid "Access serial port hardware"
-#~ msgstr "Soros portos hardver elérése"
-
-#~ msgid "Restart or power off the device"
-#~ msgstr "Az eszköz újraindítása vagy kikapcsolása"
-
-#~ msgid "Install, remove and configure software"
-#~ msgstr "Szoftverek telepítése, eltávolítása és beállítása"
-
-#~ msgid "Access Storage Framework service"
-#~ msgstr "Tárolási keretrendszer szolgáltatás elérése"
-
-#~ msgid "Read process and system information"
-#~ msgstr "Folyamat- és rendszer-információk olvasása"
-
-#~ msgid "Monitor and control any running program"
-#~ msgstr "Futó program figyelése és vezérlése"
-
-#~| msgid "Change the date and time, including time zone"
-#~ msgid "Change the date and time"
-#~ msgstr "Dátum és idő módosítása"
-
-#~| msgid "Change system time and date settings"
-#~ msgid "Change time server settings"
-#~ msgstr "Időkiszolgáló beállításainak módosítása"
-
-#~| msgid "Change the date and time, including time zone"
-#~ msgid "Change the time zone"
-#~ msgstr "Időzóna módosítása"
-
-#~ msgid "Access the UDisks2 service for configuring disks and removable media"
-#~ msgstr ""
-#~ "A UDisks2 szolgáltatás elérése a lemezek és külső adathordozók "
-#~ "beállításához"
-
-#~ msgid "Read/change shared calendar events in Ubuntu Unity 8"
-#~ msgstr ""
-#~ "Megosztott naptáresemények olvasása/módosítása az Ubuntu Unity 8-ban"
-
-#~ msgid "Read/change shared contacts in Ubuntu Unity 8"
-#~ msgstr "Megosztott névjegyek olvasása/módosítása az Ubuntu Unity 8-ban"
-
-#~ msgid "Access energy usage data"
-#~ msgstr "Energiahasználati adatok elérése"
-
-#~ msgid "Read/write access to U2F devices exposed"
-#~ msgstr "Olvasási/írási hozzáférés a szabad U2F eszközökhöz"
-
-#~ msgid "∶"
-#~ msgstr ":"
-
-#~ msgid "Universal Access"
-#~ msgstr "Akadály­mentesítés"
-
-#~ msgid "Switch off to connect to a Wi-Fi network"
-#~ msgstr "Kapcsolja ki a Wi-Fi hálózathoz kapcsolódáshoz"
-
-#~ msgctxt "Wi-Fi passkey"
-#~ msgid "Password"
-#~ msgstr "Jelszó"
-
-#~ msgid ""
-#~ "To create a user account,\n"
-#~ "click the * icon first"
-#~ msgstr ""
-#~ "Felhasználói fiók létrehozásához\n"
-#~ "először kattintson a * ikonra"
-
-#~ msgid "Enable Fingerprint Login"
-#~ msgstr "Ujjlenyomatos bejelentkezés engedélyezése"
-
-#~ msgid "_Other finger:"
-#~ msgstr "_Más ujj:"
-
-#~ msgid ""
-#~ "Your fingerprint was successfully saved. You should now be able to log in "
-#~ "using your fingerprint reader."
-#~ msgstr ""
-#~ "Az ujjlenyomata sikeresen mentve. Mostantól bejelentkezhet az ujjlenyomat-"
-#~ "olvasója segítségével."
-
-#~ msgid ""
-#~ "You are not allowed to access the device. Contact your system "
-#~ "administrator."
-#~ msgstr "Nem jogosult az eszköz elérésére. Keresse meg a rendszergazdáját."
-
-#~ msgid "An internal error occurred."
-#~ msgstr "Belső hiba történt."
-
-#~ msgid "Delete registered fingerprints?"
-#~ msgstr "Törli a regisztrált ujjlenyomatokat?"
-
-#~ msgid "Done!"
-#~ msgstr "Kész!"
-
-#~ msgid "Could not access “%s” device"
-#~ msgstr "Az eszköz („%s”) nem érhető el"
-
-#~ msgid "Could not start finger capture on “%s” device"
-#~ msgstr "Nem indítható az ujjak beolvasása a(z) „%s” eszközön"
-
-#~ msgid "Could not access any fingerprint readers"
-#~ msgstr "Nem érhető el ujjlenyomat-olvasó"
-
-#~ msgid "Please contact your system administrator for help."
-#~ msgstr "Segítségért keresse meg rendszergazdáját."
-
-#~ msgid ""
-#~ "To enable fingerprint login, you need to save one of your fingerprints, "
-#~ "using the “%s” device."
-#~ msgstr ""
-#~ "Az ujjlenyomatos bejelentkezés engedélyezéséhez a(z) „%s” eszköz "
-#~ "segítségével el kell mentenie az egyik ujjlenyomatát."
-
-#~ msgid "Selecting finger"
-#~ msgstr "Ujj kiválasztása"
