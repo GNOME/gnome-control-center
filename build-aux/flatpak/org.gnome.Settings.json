@@ -306,13 +306,12 @@
         },
         {
             "name" : "upower",
-            "buildsystem" : "autotools",
+            "buildsystem" : "meson",
             "config-opts" : [
-            	"--prefix=/app",
-            	"--with-systemdsystemunitdir=/app/lib/systemd/system",
-            	"--disable-gtk-doc",
-            	"--disable-man-pages",
-            	"--disable-tests"
+                "-Dsystemdsystemunitdir=/app/lib/systemd/system",
+                "-Dgtk-doc=false",
+                "-Dman=false",
+                "-Dintrospection=disabled"
             ],
             "sources" : [
                 {
