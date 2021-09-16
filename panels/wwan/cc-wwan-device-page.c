@@ -107,6 +107,48 @@ enum {
 static GParamSpec *properties[N_PROPS];
 
 static void
+wwan_device_page_handle_data_row (CcWwanDevicePage *self,
+                                  CcListRow        *data_row)
+{
+  gboolean active;
+
+  /* The user dismissed the dialog for selecting default APN */
+  if (cc_wwan_data_get_default_apn (self->wwan_data) == NULL)
+    {
+      self->is_self_change = TRUE;
+      gtk_widget_activate (GTK_WIDGET (data_row));
+
+      return;
+    }
+
+  active = cc_list_row_get_active (data_row);
+
+  if (data_row == self->data_enable_row)
+    cc_wwan_data_set_enabled (self->wwan_data, active);
+  else
+    cc_wwan_data_set_roaming_enabled (self->wwan_data, active);
+
+  cc_wwan_data_save_settings (self->wwan_data, NULL, NULL, NULL);
+}
+
+static gboolean
+wwan_apn_dialog_closed_cb (CcWwanDevicePage *self)
+{
+  CcListRow *data_row;
+
+  if (gtk_widget_in_destruction (GTK_WIDGET (self)))
+    return FALSE;
+
+  data_row = g_object_get_data (G_OBJECT (self->apn_dialog), "row");
+  g_object_set_data (G_OBJECT (self->apn_dialog), "row", NULL);
+
+  if (data_row)
+    wwan_device_page_handle_data_row (self, data_row);
+
+  return FALSE;
+}
+
+static void
 wwan_data_show_apn_dialog (CcWwanDevicePage *self)
 {
   GtkWindow *top_level;
@@ -114,7 +156,12 @@ wwan_data_show_apn_dialog (CcWwanDevicePage *self)
   top_level = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
 
   if (!self->apn_dialog)
-    self->apn_dialog = cc_wwan_apn_dialog_new (top_level, self->device);
+    {
+      self->apn_dialog = cc_wwan_apn_dialog_new (top_level, self->device);
+      g_signal_connect_object (self->apn_dialog, "unmap",
+                               G_CALLBACK (wwan_apn_dialog_closed_cb),
+                               self, G_CONNECT_SWAPPED);
+    }
 
   gtk_widget_show (GTK_WIDGET (self->apn_dialog));
 }
@@ -293,8 +340,6 @@ wwan_data_settings_changed_cb (CcWwanDevicePage *self,
                                GParamSpec       *pspec,
                                CcListRow        *data_row)
 {
-  gboolean active;
-
   if (self->is_self_change)
     {
       self->is_self_change = FALSE;
@@ -302,25 +347,14 @@ wwan_data_settings_changed_cb (CcWwanDevicePage *self,
     }
 
   if (cc_wwan_data_get_default_apn (self->wwan_data) == NULL)
-    wwan_data_show_apn_dialog (self);
-
-  /* The user dismissed the dialog for selecting default APN */
-  if (cc_wwan_data_get_default_apn (self->wwan_data) == NULL)
     {
-      self->is_self_change = TRUE;
-      gtk_widget_activate (GTK_WIDGET (data_row));
-
-      return;
+      wwan_data_show_apn_dialog (self);
+      g_object_set_data (G_OBJECT (self->apn_dialog), "row", data_row);
     }
-
-  active = cc_list_row_get_active (data_row);
-
-  if (data_row == self->data_enable_row)
-    cc_wwan_data_set_enabled (self->wwan_data, active);
   else
-    cc_wwan_data_set_roaming_enabled (self->wwan_data, active);
-
-  cc_wwan_data_save_settings (self->wwan_data, NULL, NULL, NULL);
+    {
+      wwan_device_page_handle_data_row (self, data_row);
+    }
 }
 
 static void
