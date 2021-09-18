@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2021-09-08 08:29+0000\n"
-"PO-Revision-Date: 2021-09-08 20:59-0700\n"
+"POT-Creation-Date: 2021-09-18 09:55+0000\n"
+"PO-Revision-Date: 2021-09-18 16:30-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjabi-users@list.sf.net>\n"
 "Language: pa\n"
@@ -204,7 +204,7 @@ msgstr "ਕੈਮਰਾ"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "ਅਸਮਰੱਥ ਹੈ"
@@ -2228,22 +2228,23 @@ msgid "Print Screen"
 msgstr "ਪਰਿੰਟ ਸਕਰੀਨ"
 
 #: panels/keyboard/cc-keyboard-panel.c:233
-#, fuzzy, c-format
+#, c-format
 #| msgid "These keyboard shortcuts can be changed in the keyboard settings"
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
 "This can be changed in the keyboard shortcut settings."
-msgstr "ਇਹ ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਕੀਬੋਰਡ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਬਦਲਿਆ ਜਾ ਸਕਦਾ ਹੈ"
+msgstr ""
+"ਇਨਪੁੱਟ ਸਰੋਤਾਂ ਨੂੰ %s ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਵਰਤ ਕੇ ਬਦਲਿਆ ਜਾ ਸਕਦਾ ਹੈ।\n"
+"ਇਹ ਸ਼ਾਰਟਕੱਟਾਂ ਨੂੰ ਕੀਬੋਰਡ ਸੈਟਿੰਗਾਂ ਵਿੱਚ ਬਦਲਿਆ ਜਾ ਸਕਦਾ ਹੈ"
 
 #: panels/keyboard/cc-keyboard-panel.ui:48
 msgid "Input Sources"
 msgstr "ਇਨਪੁੱਟ ਸਰੋਤ"
 
 #: panels/keyboard/cc-keyboard-panel.ui:59
-#, fuzzy
 #| msgid "Choose keyboard layouts or input methods."
 msgid "Includes keyboard layouts and input methods."
-msgstr "ਕੀਬੋਰਡ ਲੇਆਉਟ ਜਾਂ ਇੰਪੁੱਟ ਢੰਗ ਚੁਣੋ।"
+msgstr "ਇਸ ਵਿੱਚ ਕੀਬੋਰਡ ਲੇਆਉਟ ਅਤੇ ਇਨਪੁੱਟ ਢੰਗ ਸ਼ਾਮਲ ਹਨ।"
 
 #: panels/keyboard/cc-keyboard-panel.ui:85
 msgid "Input Source Switching"
@@ -2255,16 +2256,15 @@ msgstr "ਸਭ ਵਿੰਡੋਆਂ ਲਈ ਇੱਕੋ ਸਰੋਤ ਵਰਤ�
 
 #: panels/keyboard/cc-keyboard-panel.ui:158
 msgid "Switch input sources _individually for each window"
-msgstr "ਹਰੇਕ ਵਿੰਡੋ ਲਈ ਵੱਖਰਾ ਇਨਪੁੱਟ ਸਰੋਤ ਬਦਲੋ(_i)"
+msgstr "ਹਰੇਕ ਵਿੰਡੋ ਲਈ ਵੱਖੋ-ਵੱਖਰਾ ਇਨਪੁੱਟ ਸਰੋਤ ਬਦਲੋ(_i)"
 
 #: panels/keyboard/cc-keyboard-panel.ui:177
-#| msgid "Type Special Characters"
 msgid "Special Character Entry"
 msgstr "ਖਾਸ ਅੱਖਰ ਲਿਖੋ"
 
 #: panels/keyboard/cc-keyboard-panel.ui:188
 msgid "Methods for entering symbols and letter variants using the keyboard."
-msgstr ""
+msgstr "ਕੀਬੋਰਡ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਚਿੰਨ੍ਹ, ਅੱਖਰਾਂ ਦੇ ਵੱਖੋ-ਵੱਖਰੇ ਰੂਪ ਦੇਣ ਦੇ ਢੰਗ।"
 
 #: panels/keyboard/cc-keyboard-panel.ui:263
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:306
@@ -2273,13 +2273,11 @@ msgid "Keyboard Shortcuts"
 msgstr "ਕੀ-ਬੋਰਡ ਸ਼ਾਰਟਕੱਟ"
 
 #: panels/keyboard/cc-keyboard-panel.ui:283
-#| msgid "Customize Shortcuts"
 msgid "View and Customize Shortcuts"
 msgstr "ਸ਼ਾਰਟਕੱਟ ਵੇਖੋ ਤੇ ਕਸਟਮਾਈਜ਼ ਕਰੋ"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:283
 #, c-format
-#| msgid "modified"
 msgid "%d modified"
 msgid_plural "%d modified"
 msgstr[0] "%d ਸੋਧਿਆ"
@@ -2302,7 +2300,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "ਰੱਦ ਕਰੋ"
 
@@ -2419,12 +2417,13 @@ msgid "Keyboard"
 msgstr "ਕੀ-ਬੋਰਡ"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-#, fuzzy
 #| msgid "View and change keyboard shortcuts and set your typing preferences"
 msgid ""
 "Change keyboard shortcuts and set your typing preferences, keyboard layouts "
 "and input sources"
-msgstr "ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਵੇਖੋ ਤੇ ਬਦਲੋ ਅਤੇ ਆਪਣੀ ਟਾਈਪ ਕਰਨ ਲਈ ਪਸੰਦ ਦਿਉ"
+msgstr ""
+"ਕੀਬੋਰਡ ਸ਼ਾਰਟਕੱਟ ਵੇਖੋ ਤੇ ਬਦਲੋ ਅਤੇ ਆਪਣੀ ਟਾਈਪ ਕਰਨ ਲਈ ਪਸੰਦ ਦਿਓ, ਕੀਬੋਰਡ ਖਾਕੇ ਅਤੇ"
+" ਇਨਪੁੱਟ ਢੰਗ"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
@@ -2796,7 +2795,6 @@ msgid ""
 msgstr ""
 
 #: panels/multitasking/cc-multitasking-panel.ui:114
-#| msgid "Colorspace: "
 msgid "Workspaces"
 msgstr "ਵਰਕਸਪੇਸ"
 
@@ -2805,7 +2803,6 @@ msgid "_Dynamic workspaces"
 msgstr "ਸਫ਼ਰੀ ਵਰਕਸਪੇਸ(_D)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:140
-#| msgid "Automatically Delete Temporary _Files"
 msgid "Automatically removes empty workspaces."
 msgstr "ਖਾਲੀ ਵਰਕਸਪੇਸਾਂ ਨੂੰ ਆਪਣੇ-ਆਪ ਹਟਾਓ।"
 
@@ -2822,12 +2819,10 @@ msgid "_Number of Workspaces"
 msgstr "ਵਰਕਸਪੇਸਾਂ ਦੀ ਗਿਣਤੀ(_N)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:200
-#| msgid "Monitor"
 msgid "Multi-Monitor"
 msgstr "ਬਹੁ-ਮਾਨੀਟਰ"
 
 #: panels/multitasking/cc-multitasking-panel.ui:225
-#| msgid "Drag to change primary display."
 msgid "Workspaces on _primary display only"
 msgstr "ਵਰਕਸੇਪਸ ਸਿਰਫ਼ ਪ੍ਰਾਇਮਰੀ ਡਿਸਪਲੇਅ ਉੱਤੇ(_p)"
 
@@ -2836,8 +2831,6 @@ msgid "Workspaces on all d_isplays"
 msgstr "ਸਾਰੇ ਡਿਸਪਲੇਅ ਉੱਤੇ ਵਰਕਸਪੇਸ(_i)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:282
-#| msgctxt "Wacom action-type"
-#| msgid "Application defined"
 msgid "Application Switching"
 msgstr "ਐਪਲੀਕੇਸ਼ਨ ਬਦਲਣੀਆਂ"
 
@@ -2860,7 +2853,7 @@ msgstr "ਉਤਪਾਦਨ ਤੇ ਬਹੁ-ਕੰਮਕਾਜ ਲਈ ਤਜਰ�
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
 msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
-msgstr ""
+msgstr "ਬਹੁ-ਕੰਮ;ਮਲਟੀ-ਟਾਸਕ;ਉਤਪਾਦਨ,ਕਸਟਮਾਈਜ਼ ਡੈਸਕਟਾਪ;"
 
 #: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
@@ -2940,7 +2933,6 @@ msgstr "ਘੱਟੋ-ਘੱਟ 8 ਅੱਖਰ ਹੋਣੇ ਚਾਹੀਦੇ �
 
 #: panels/network/cc-wifi-hotspot-dialog.c:272
 #, c-format
-#| msgid "Must have a minimum of 8 characters"
 msgid "Must have a maximum of %d characters"
 msgstr "ਵੱਧ ਤੋਂ ਵੱਧ %d ਅੱਖਰ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ"
 
@@ -4744,7 +4736,6 @@ msgid "When plugged in"
 msgstr "ਜਦੋਂ ਪਲੱਗ ਲੱਗਾ ਹੋਵੇ"
 
 #: panels/power/cc-power-panel.c:980
-#| msgid "Never"
 msgctxt "Idle time"
 msgid "Never"
 msgstr "ਕਦੇ ਨਹੀਂ"
@@ -4757,15 +4748,17 @@ msgstr "ਆਟੋਮੈਟਿਕ ਸਸਪੈਂਡ ਕਰੋ"
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
+"ਵੱਧ ਕਾਰਜਕਾਰੀ ਤਾਪਮਾਨ ਹੋਣ ਕਰਕੇ ਕਾਰਗੁਜ਼ਾਰੀ ਢੰਗ ਨੂੰ ਆਰਜ਼ੀ ਤੌਰ ਉੱਤੇ ਅਸਮਰੱਥ ਕੀਤਾ ਹੈ।"
 
 #: panels/power/cc-power-panel.c:1173
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr ""
+"ਲੈਪ ਖੋਜਿਆ: ਕਾਰਜਗੁਜ਼ਾਰੀ ਢੰਗ ਆਰਜ਼ੀ ਤੌਰ ਉੱਤੇ ਅਸਮਰੱਥ ਹੈ। ਬਹਾਲ ਕਰਨ ਲਈ ਡਿਵਾਈਸ ਨੂੰ"
+" ਸਥਿਰ ਤਲ ਉੱਤੇ ਰੱਖੋ।"
 
 #: panels/power/cc-power-panel.c:1175
-#| msgid "Performance mode unavailable"
 msgid "Performance mode temporarily disabled."
 msgstr "ਕਾਰਗੁਜ਼ਾਰੀ ਢੰਗ ਆਰਜ਼ੀ ਤੌਰ ਉੱਤੇ ਅਸਮਰੱਥ ਹੈ।"
 
@@ -4774,6 +4767,8 @@ msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr ""
+"ਘੱਟ ਬੈਟਰੀ: ਪਾਵਰ ਬੱਚਤ ਸਮਰੱਥ ਹੈ। ਜਦੋਂ ਬੈਟਰੀ ਠੀਕ-ਠਾਕ ਚਾਰਜ ਹੋ ਗਈ ਤਾਂ ਪਿਛਲੇ ਮੋਡ"
+" ਨੂੰ ਬਹਾਲ ਕੀਤਾ ਜਾਵੇਗਾ।"
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1226
@@ -4784,7 +4779,6 @@ msgstr "“%s” ਨੇ ਪਾਵਰਪ ਬੱਚਤ ਢੰਗ ਸਰਗਰਮ �
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1230
 #, c-format
-#| msgid "Performance mode unavailable"
 msgid "Performance mode activated by “%s”."
 msgstr "“%s” ਨੇ ਕਾਰਗੁਜ਼ਾਰੀ ਢੰਗ ਸਰਗਰਮ ਕੀਤਾ ਹੈ।"
 
@@ -4857,41 +4851,35 @@ msgid "Affects system performance and power usage."
 msgstr "ਸਿਸਟਮ ਕਾਰਗੁਜ਼ਾਰੀ ਤੇ ਪਾਵਰ ਵਰਤੋਂ ਨੂੰ ਪ੍ਰਭਾਵਿਤ ਕਰਦਾ ਹੈ।"
 
 #: panels/power/cc-power-panel.ui:142
-#| msgid "Power Saving"
 msgid "Power Saving Options"
 msgstr "ਪਾਵਰ ਬੱਚਤ ਚੋਣਾਂ"
 
 #: panels/power/cc-power-panel.ui:146
-#| msgid "Automatic Brightness"
 msgid "Automatic Screen Brightness"
 msgstr "ਆਟੋਮੈਟਿਕ ਸਕਰੀਨ ਚਮਕ"
 
 #: panels/power/cc-power-panel.ui:147
-#, fuzzy
 #| msgid "Screen brightness and lock settings"
 msgid "Screen brightness adjusts to the surrounding light."
-msgstr "ਸਕਰੀਨ ਚਮਕ ਅਤੇ ਲਾਕ ਸੈਟਿੰਗ"
+msgstr "ਆਲੇ-ਦੁਆਲੇ ਦੀ ਰੋਸ਼ਨੀ ਮੁਤਾਬਕ ਸਕਰੀਨ ਦੀ ਚਮਕ ਢਾਲੋ।"
 
 #: panels/power/cc-power-panel.ui:160
-#| msgid "Screen"
 msgid "Dim Screen"
 msgstr "ਸਕਰੀਨ ਡਿਮ ਕਰੋ"
 
 #: panels/power/cc-power-panel.ui:161
 msgid "Reduces the screen brightness when the computer is inactive."
-msgstr ""
+msgstr "ਜਦੋਂ ਕੰਪਿਊਟਰ ਨਾ-ਸਰਗਰਮ ਹੋਵੇ ਤਾਂ ਸਕਰੀਨ ਦੀ ਚਮਕ ਨੂੰ ਘਟਾਉਂਦਾ ਹੈ।"
 
 #: panels/power/cc-power-panel.ui:174
-#| msgid "Screen _Reader"
 msgid "Screen _Blank"
 msgstr "ਖਾਲੀ ਸਕਰੀਨ(_B)"
 
 #: panels/power/cc-power-panel.ui:175
 msgid "Turns the screen off after a period of inactivity."
-msgstr ""
+msgstr "ਕੁਝ ਦੇਰ ਤੱਕ ਨਾ-ਸਰਗਰਮੀ ਦੇ ਬਾਅਦ ਸਕਰੀਨ ਨੂੰ ਬੰਦ ਕਰੋ।"
 
 #: panels/power/cc-power-panel.ui:183
-#| msgid "Power Saver"
 msgid "Automatic Power Saver"
 msgstr "ਆਪਣੇ-ਆਪ ਪਾਵਰ ਬੱਚਤ"
 
@@ -4904,10 +4892,9 @@ msgid "_Automatic Suspend"
 msgstr "ਆਪਣੇ-ਆਪ ਸਸਪੈਂਡ ਕਰੋ(_A)"
 
 #: panels/power/cc-power-panel.ui:199
-#, fuzzy
 #| msgid "Put the computer to sleep when inactive:"
 msgid "Pauses the computer after a period of inactivity."
-msgstr "ਕੰਪਿਊਟਰ ਨੂੰ ਸਲੀਪ ਮੋਡ 'ਚ ਭੇਜੋ, ਜਦੋਂ ਨਾ-ਸਰਗਰਮ ਹੋਵੇ:"
+msgstr "ਕੁਝ ਦੇਰ ਤੱਕ ਨਾ-ਸਰਗਰਮੀ ਦੇ ਬਾਅਦ ਕੰਪਿਊਟਰ ਨੂੰ ਵਿਰਾਮ ਕਰੋ।"
 
 #: panels/power/cc-power-panel.ui:217
 msgid "Suspend & Power Button"
@@ -4956,13 +4943,11 @@ msgid "High performance and power usage."
 msgstr "ਵੱਧ ਕਾਰਗੁਜ਼ਾਰੀ ਅਤੇ ਊਰਜਾ ਖ਼ਪਤ ਹੈ।"
 
 #: panels/power/cc-power-profile-row.c:184
-#| msgid "Performance"
 msgctxt "Power profile"
 msgid "Performance"
 msgstr "ਕਾਰਗੁਜ਼ਾਰੀ"
 
 #: panels/power/cc-power-profile-row.c:188
-#| msgid "Balance"
 msgctxt "Power profile"
 msgid "Balanced"
 msgstr "ਸੰਤੁਲਿਤ"
@@ -4972,7 +4957,6 @@ msgid "Standard performance and power usage."
 msgstr "ਮਿਆਰੀ ਕਾਰਗੁਜ਼ਾਰੀ ਤੇ ਊਰਜਾ ਖਪਤ ਹੈ।"
 
 #: panels/power/cc-power-profile-row.c:192
-#| msgid "Power Saver"
 msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "ਪਾਵਰ ਬੱਚਤ"
@@ -5037,7 +5021,6 @@ msgid "Could not load ui: %s"
 msgstr "ui ਲੋਡ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਿਆ: %s"
 
 #: panels/printers/cc-printers-panel.c:1293
-#| msgid "Unlock to Add Users and Change Settings"
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "ਪਰਿੰਟਰ ਜੋੜਨ ਅਤੇ ਸੈਟਿੰਗਾਂ ਬਦਲਣ ਲਈ ਅਣ-ਲਾਕ ਕਰੋ"
 
@@ -5647,7 +5630,6 @@ msgstr "ਮੁੜ-ਚਾਲੂ ਕਰੋ"
 
 #. Translators: This button adds new printer.
 #: panels/printers/printers.ui:12
-#| msgid "Add a Printer…"
 msgid "Add Printer…"
 msgstr "…ਪਰਿੰਟਰ ਜੋੜੋ"
 
@@ -5737,12 +5719,10 @@ msgid "Paper"
 msgstr "ਪੇਪਰ"
 
 #: panels/region/cc-region-panel.ui:42
-#| msgid "%s Account"
 msgid "My Account"
 msgstr "ਮੇਰਾ ਖਾਤਾ"
 
 #: panels/region/cc-region-panel.ui:53
-#| msgid "Login _Screen"
 msgid "Login Screen"
 msgstr "ਲਾਗਇਨ ਸਕਰੀਨ"
 
@@ -5786,7 +5766,6 @@ msgid "Region & Language"
 msgstr "ਇਲਾਕਾ ਅਤੇ ਭਾਸ਼ਾ"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-#| msgid "Select a display language"
 msgid "Select your display language and formats"
 msgstr "ਆਪਣੀ ਦਿਖਾਉਣ ਵਾਲੀ ਭਾਸ਼ਾ ਤੇ ਫਾਰਮੈਟ ਚੁਣੋ"
 
@@ -6745,7 +6724,6 @@ msgid "_Large Text"
 msgstr "ਵੱਡਾ ਟੈਕਸਟ(_L)"
 
 #: panels/universal-access/cc-ua-panel.ui:238
-#| msgid "Manage notifications"
 msgid "Enable A_nimations"
 msgstr "ਐਨੀਮੇਸ਼ਨ ਸਮਰੱਥ ਕਰੋ(_n)"
 
@@ -7749,7 +7727,7 @@ msgstr "ਲਾਗਇਨ ਕੀਤਾ"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "ਯੋਗ ਕੀਤਾ"
 
@@ -7829,15 +7807,15 @@ msgstr ""
 
 #: panels/user-accounts/cc-user-panel.ui:284
 msgid "_Parental Controls"
-msgstr "ਮਾਪਿਆਂ ਲਈ ਕੰਟਰੋਲ(_P)"
+msgstr "ਮਾਪਿਆਂ ਕੋਲ ਕੰਟਰੋਲ(_P)"
 
 #: panels/user-accounts/cc-user-panel.ui:285
 msgid "Open the Parental Controls application."
-msgstr "ਮਾਪਿਆਂ ਦੇ ਕੰਟਰੋਲ ਵਾਲੀ ਐਪਲੀਕੇਸ਼ਨ ਖੋਲ੍ਹੋ।"
+msgstr "ਮਾਪਿਆਂ ਕੋਲ ਕੰਟਰੋਲ ਵਾਲੀ ਐਪਲੀਕੇਸ਼ਨ ਖੋਲ੍ਹੋ।"
 
 #: panels/user-accounts/cc-user-panel.ui:347
 msgid "Authentication & Login"
-msgstr "ਪਰਮਾਣਿਕਤਾ ਤੇ ਲਾਗਇਨ"
+msgstr "ਪਰਮਾਣਿਕਤਾ ਅਤੇ ਲਾਗਇਨ"
 
 #: panels/user-accounts/cc-user-panel.ui:390
 msgid "_Fingerprint Login"
@@ -7870,7 +7848,7 @@ msgstr "ਵਰਤੋਂਕਾਰ"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:4
 msgid "Add or remove users and change your password"
-msgstr "ਵਰਤੋਂਕਾਰਾਂ ਨੂੰ ਜੋੜੋ ਜਾਂ ਹਟਾਉ, ਅਤੇ ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲੋ"
+msgstr "ਵਰਤੋਂਕਾਰਾਂ ਨੂੰ ਜੋੜੋ ਜਾਂ ਹਟਾਓ ਅਤੇ ਆਪਣਾ ਪਾਸਵਰਡ ਬਦਲੋ"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:20
@@ -7878,6 +7856,8 @@ msgid ""
 "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
 "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgstr ""
+"ਲਾਗਇਨ;ਲੌਗਇਨ;ਨਾਂ;ਨਾਮ;ਫਿੰਗਰ-ਪਰਿੰਟ;ਉਂਗਲ-ਨਿਸ਼ਾਨ;ਅਵਾਤਰ,ਲੋਗੋ,ਮੂੰਹ;ਪਾਸਵਰਡ;ਚਿਹਰਾ;ਮਾਪਿਆਂ"
+" ਕੋਲ ਕੰਟਰੋਲ;ਸਕਰੀਨ ਸਮਾਂ;ਐਪ ਪਾਬੰਦੀਆਂ;ਵੈਬ ਪਾਬੰਦੀਆਂ;ਵਰਤੋ;ਹੱਦ;ਸੀਮ,ਬੱਚੇ;ਜਵਾਕ;ਨਿਆਣੇ;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -8310,12 +8290,10 @@ msgid "Tip Pressure Feel"
 msgstr "ਟਿੱਪ ਦਬਾਉ ਮਹਿਸੂਸ"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:11
-#| msgid "Access Options"
 msgid "Access Points"
 msgstr "ਐਕਸੈਸ ਪੁਆਇੰਟ"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:160
-#| msgid "VPN"
 msgid "APN"
 msgstr "APN"
 
@@ -8325,18 +8303,17 @@ msgstr "ਕਾਰਵਾਈ ਰੱਦ ਕੀਤੀ ਗਈ ਸੀ"
 
 #: panels/wwan/cc-wwan-data.c:546
 msgid "<b>Error:</b> Access denied changing settings"
-msgstr ""
+msgstr "<b>ਗਲਤੀ:</b> ਸੈਟਿੰਗਾਂ ਬਦਲਣ ਲਈ ਪਹੁੰਚ ਉੱਤੇ ਪਾਬੰਦੀ ਹੈ"
 
 #: panels/wwan/cc-wwan-data.c:549
 msgid "<b>Error:</b> Mobile Equipment Error"
-msgstr ""
+msgstr "<b>ਗਲਤੀ:</b> ਮੋਬਾਈਲ ਯੰਤਰ ਗ਼ਲਤੀ"
 
 #: panels/wwan/cc-wwan-details-dialog.c:81
 msgid "Not Registered"
 msgstr "ਰਜਿਸਟਰ ਨਹੀਂ ਹੈ"
 
 #: panels/wwan/cc-wwan-details-dialog.c:85
-#| msgid "Yesterday"
 msgid "Registered"
 msgstr "ਰਜਿਸਟਰ ਹੈ"
 
@@ -8345,7 +8322,6 @@ msgid "Roaming"
 msgstr "ਰੋਮਿੰਗ"
 
 #: panels/wwan/cc-wwan-details-dialog.c:93
-#| msgid "Search"
 msgid "Searching"
 msgstr "ਖੋਜ ਜਾਰੀ ਹੈ"
 
@@ -8354,12 +8330,10 @@ msgid "Denied"
 msgstr "ਇਨਕਾਰ"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:4
-#| msgid "Details"
 msgid "Modem Details"
 msgstr "ਮਾਡਮ ਦੇ ਵੇਰਵੇ"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:33
-#| msgid "Status:"
 msgid "Modem Status"
 msgstr "ਮਾਡਮ ਦੀ ਹਾਲਤ"
 
@@ -8368,27 +8342,22 @@ msgid "Carrier"
 msgstr "ਕੈਰੀਅਰ"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:79
-#| msgid "_Network Time"
 msgid "Network Type"
 msgstr "ਨੈੱਟਵਰਕ ਦੀ ਕਿਸਮ"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:131
-#| msgid "Networks"
 msgid "Network Status"
 msgstr "ਨੈੱਟਵਰਕ ਹਾਲਤ"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:158
-#| msgid "Numbers"
 msgid "Own Number"
 msgstr "ਖੁਦ ਦਾ ਨੰਬਰ"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:185
-#| msgid "Device types"
 msgid "Device Details"
 msgstr "ਡਿਵਾਈਸ ਦੇ ਵੇਰਵੇ"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:257
-#| msgid "Firmware missing"
 msgid "Firmware Version"
 msgstr "ਫਿਰਮਵੇਅਰ ਵਰਜ਼ਨ"
 
@@ -8457,71 +8426,67 @@ msgid "2G, 3G"
 msgstr "2G, 3G"
 
 #: panels/wwan/cc-wwan-device.c:1043
-#| msgid "Unknown"
 msgctxt "Network mode"
 msgid "Unknown"
 msgstr "ਅਣਪਛਾਤਾ"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
-msgstr ""
+msgstr "ਸਿਮ ਕਾਰਡ ਅਣ-ਲਾਕ ਕਰੋ"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
-#| msgid "_Unlock"
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "ਅਣ-ਲਾਕ ਕਰੋ"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
-msgstr ""
+msgstr "ਸਿਮ %d ਲਈ ਪਿੰਨ ਕੋਡ ਦਿਓ"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
-msgstr ""
+msgstr "ਆਪਣੇ ਸਿਮ ਨੂੰ ਅਣ-ਲਾਕ ਕਰਨ ਲਈ ਪਿੰਨ ਦਿਓ"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
-msgstr ""
+msgstr "ਸਿਮ %d ਲਈ PUK ਕੋਡ ਦਿਓ"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
-msgstr ""
+msgstr "ਆਪਣਾ ਸਿਮ ਕਾਰਡ ਅਣ-ਲਾਕ ਕਰਨ ਲਈ PUK ਦਿਓ"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "ਗਲਤ ਪਾਸਵਰਡ ਦਿੱਤਾ ਗਿਆ। ਤੁਹਾਡੇ ਕੋਲ %1$u ਕੋਸ਼ਿਸ਼ ਬਾਕੀ ਹੈ"
+msgstr[1] "ਗਲਤ ਪਾਸਵਰਡ ਦਿੱਤਾ ਗਿਆ। ਤੁਹਾਡੇ ਕੋਲ %1$u ਕੋਸ਼ਿਸ਼ਾਂ ਬਾਕੀ ਹਨ"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
 msgstr[0] "ਤੁਹਾਡੇ ਕੋਲ %u ਕੋਸ਼ਿਸ਼ ਬਾਕੀ ਹੈ"
 msgstr[1] "ਤੁਹਾਡੇ ਕੋਲ %u ਕੋਸ਼ਿਸ਼ਾਂ ਬਾਕੀ ਹਨ"
 
-#: panels/wwan/cc-wwan-device-page.c:179
-#| msgid "Show password hints"
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "ਗਲਤ ਪਾਸਵਰਡ ਦਿੱਤਾ ਗਿਆ।"
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
-msgstr ""
+msgstr "PUK ਕੋਡ 8 ਅੰਕਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "ਨਵਾਂ ਪਿੰਨ ਦਿਓ"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
-msgstr ""
+msgstr "ਪਿੰਨ ਕੋਡ 4-8 ਅੰਕਾਂ ਦਾ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ"
 
-#: panels/wwan/cc-wwan-device-page.c:270
-#| msgid "Unlock %s."
+#: panels/wwan/cc-wwan-device-page.c:317
 msgid "Unlocking..."
 msgstr "…ਅਣ-ਲਾਕ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
@@ -8531,15 +8496,13 @@ msgstr "ਕੋਈ ਸਿਮ ਨਹੀਂ"
 
 #: panels/wwan/cc-wwan-device-page.ui:45
 msgid "Insert a SIM card to use this modem"
-msgstr ""
+msgstr "ਇਹ ਮਾਡਮ ਵਰਤਣ ਲਈ ਸਿਮ ਕਾਰਡ ਪਾਓ"
 
 #: panels/wwan/cc-wwan-device-page.ui:78
-#| msgid "Locked"
 msgid "SIM Locked"
 msgstr "ਸਿਮ ਲਾਕ ਹੈ"
 
 #: panels/wwan/cc-wwan-device-page.ui:139
-#| msgid "_Mobile Broadband"
 msgid "_Mobile Data"
 msgstr "ਮੋਬਾਇਲ ਡਾਟਾ(_M)"
 
@@ -8553,50 +8516,41 @@ msgstr "ਡਾਟਾ ਰੋਮਿੰਗ(_D)"
 
 #: panels/wwan/cc-wwan-device-page.ui:152
 msgid "Use mobile data when roaming"
-msgstr ""
+msgstr "ਜਦੋਂ ਰੋਮਿੰਗ ਵਿੱਚ ਹੋਵੋ ਤਾਂ ਮੋਬਾਈਲ ਡਾਟਾ ਵਰਤੋ"
 
 #: panels/wwan/cc-wwan-device-page.ui:177
-#| msgid "_Network Time"
 msgid "_Network Mode"
 msgstr "ਨੈੱਟਵਰਕ ਢੰਗ(_N)"
 
 #: panels/wwan/cc-wwan-device-page.ui:187
-#| msgid "Network"
 msgid "N_etwork"
 msgstr "ਨੈੱਟਵਰਕ(_e)"
 
 #: panels/wwan/cc-wwan-device-page.ui:199
-#| msgctxt "Printer Option Group"
-#| msgid "Advanced"
 msgid "Advanced"
 msgstr "ਤਕਨੀਕੀ"
 
 #: panels/wwan/cc-wwan-device-page.ui:225
-#| msgid "Access Options"
 msgid "_Access Point Names"
 msgstr "ਐਕਸੈਸ ਪੁਆਇੰਟ ਦੇ ਨਾਂ(_A)"
 
 #: panels/wwan/cc-wwan-device-page.ui:235
-#| msgid "Lock"
 msgid "_SIM Lock"
 msgstr "ਸਿਮ ਲਾਕ ਕਰੋ(_S)"
 
 #: panels/wwan/cc-wwan-device-page.ui:236
 msgid "Lock SIM with PIN"
-msgstr ""
+msgstr "ਪਿੰਨ ਨਾਲ ਸਿਮ ਲਾਕ ਕਰੋ"
 
 #: panels/wwan/cc-wwan-device-page.ui:246
-#| msgid "%s Details"
 msgid "M_odem Details"
 msgstr "ਮਾਡਮ ਦੇ ਵੇਰਵਾ(_o)"
 
 #: panels/wwan/cc-wwan-errors-private.h:40
-#| msgid "PIN check failed"
 msgid "Phone failure"
 msgstr "ਫ਼ੋਨ ਅਸਫ਼ਲ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:41
-#| msgid "Not connected"
 msgid "No connection to phone"
 msgstr "ਫ਼ੋਨ ਲਈ ਕੋਈ ਕਨੈਕਸ਼ਨ ਨਹੀਂ ਹੈ"
 
@@ -8609,20 +8563,16 @@ msgid "Operation not supported"
 msgstr "ਕਾਰਵਾਈ ਸਹਾਇਕ ਨਹੀਂ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:48
-#| msgid "SIM Card not inserted"
 msgid "SIM not inserted"
 msgstr "ਸਿਮ ਨਹੀਂ ਪਾਇਆ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:49
-#| msgid "SIM Pin required"
 msgid "SIM PIN required"
 msgstr "ਸਿਮ ਪਿੰਨ ਚਾਹੀਦਾ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:50
-#, fuzzy
-#| msgid "SIM Pin required"
 msgid "SIM PUK required"
-msgstr ""
+msgstr "ਸਿਮ PUK required"
 
 #: panels/wwan/cc-wwan-errors-private.h:51
 msgid "SIM failure"
@@ -8630,74 +8580,61 @@ msgstr "ਸਿਮ ਅਸਫ਼ਲ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:52
 msgid "SIM busy"
-msgstr ""
+msgstr "ਸਿਮ ਰੁੱਝਿਆ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:54
-#| msgid "Current _Password"
 msgid "Incorrect password"
 msgstr "ਗ਼ਲਤ ਪਾਸਵਰਡ"
 
 #: panels/wwan/cc-wwan-errors-private.h:55
-#| msgid "SIM Pin required"
 msgid "SIM PIN2 required"
 msgstr "SIM ਪਿੰਨ2 ਚਾਹੀਦਾ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:56
-#, fuzzy
 #| msgid "SIM Pin required"
 msgid "SIM PUK2 required"
-msgstr "SIM ਪਿੰਨ ਚਾਹੀਦਾ ਹੈ"
+msgstr "SIM PUK2 ਚਾਹੀਦਾ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:59
-#| msgid "No sounds"
 msgid "Not found"
 msgstr "ਨਹੀਂ ਲੱਭਿਆ"
 
 #: panels/wwan/cc-wwan-errors-private.h:61
-#| msgid "_Network Time"
 msgid "No network service"
 msgstr "ਕੋਈ ਨੈੱਟਵਰਕ ਸੇਵਾ ਨਹੀਂ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:62
-#| msgid "_Network Time"
 msgid "Network timeout"
 msgstr "ਨੈੱਟਵਰਕ ਸਮਾਂ-ਸਮਾਪਤ"
 
 #: panels/wwan/cc-wwan-errors-private.h:75
-#, fuzzy
 #| msgid "AutoIP service failed"
 msgid "GPRS services not allowed"
-msgstr "ਆਟੋ-IP ਸਰਵਿਸ ਫੇਲ੍ਹ ਹੋਈ"
+msgstr "GPRS ਸੇਵਾਵਾਂ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
-msgstr ""
+msgstr "ਇਸ ਟਿਕਾਣੇ ਉੱਤੇ ਰੋਮਿੰਗ ਦੀ ਇਜਾਜ਼ਤ ਨਹੀਂ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:82
-#, fuzzy
 #| msgid "Unspecified"
 msgid "Unspecified GPRS error"
-msgstr "ਅਣਦੱਸੀ"
+msgstr "ਅਣਦੱਸੀ GPRS ਗ਼ਲਤੀ"
 
 #: panels/wwan/cc-wwan-errors-private.h:91
-#| msgctxt "print job"
-#| msgid "Canceled"
 msgid "Action Cancelled"
 msgstr "ਕਾਰਵਾਈ ਰੱਦ ਕੀਤੀ"
 
 #: panels/wwan/cc-wwan-errors-private.h:94
-#, fuzzy
 #| msgid "Access LXD service"
 msgid "Access denied"
-msgstr "LXD ਸੇਵਾ ਲਈ ਪਹੁੰਚ"
+msgstr "ਪਹੁੰਚ ਲਈ ਪਾਬੰਦੀ ਹੈ"
 
 #: panels/wwan/cc-wwan-errors-private.h:103
-#| msgid "Unknown error"
 msgid "Unknown Error"
 msgstr "ਅਣਪਛਾਤੀ ਗਲਤੀ"
 
 #: panels/wwan/cc-wwan-mode-dialog.ui:4
-#| msgid "Network Name"
 msgid "Network Mode"
 msgstr "ਨੈੱਟਵਰਕ ਢੰਗ"
 
@@ -8705,7 +8642,7 @@ msgstr "ਨੈੱਟਵਰਕ ਢੰਗ"
 #: panels/wwan/cc-wwan-network-dialog.ui:175
 #: panels/wwan/cc-wwan-sim-lock-dialog.c:230
 msgid "_Set"
-msgstr "ਸੈੱਟ ਕਰੋ(_S)"
+msgstr "ਸੈੱਟ(_S)"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
@@ -8713,12 +8650,10 @@ msgid "Close"
 msgstr "ਬੰਦ ਕਰੋ"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:84
-#| msgid "Automatic"
 msgid "_Automatic"
 msgstr "ਆਟੋਮੈਟਿਕ(_A)"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:100
-#| msgid "My Home Network"
 msgid "Choose Network"
 msgstr "ਨੈੱਟਵਰਕ ਚੁਣੋ"
 
@@ -8729,49 +8664,41 @@ msgstr "ਨੈੱਟਵਰਕ ਪੂਰਕਾਂ ਨੂੰ ਤਾਜ਼ਾ ਕਰ�
 #: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
 #, c-format
 msgid "SIM %d"
-msgstr "SIM %d"
+msgstr "ਸਿਮ %d"
 
 #: panels/wwan/cc-wwan-panel.ui:101
-#, fuzzy
 #| msgid "No Wi-Fi Adapter Found"
 msgid "No WWAN Adapter Found"
-msgstr "ਕੋਈ Wi-Fi ਅਡੈਪਟਰ ਨਹੀਂ ਲੱਭਿਆ"
+msgstr "ਕੋਈ WWAN ਅਡੈਪਟਰ ਨਹੀਂ ਲੱਭਿਆ"
 
 #: panels/wwan/cc-wwan-panel.ui:112
-#, fuzzy
 #| msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgid "Make sure you have a Wireless Wan/Cellular device"
-msgstr "ਪੱਕਾ ਕਰੋ ਕਿ ਤੁਸੀਂ Wi-Fi ਅਡੈਪਟਰ ਲਗਾਇਆ ਹੈ ਅਤੇ ਇਹ ਚਾਲੂ ਹੈ"
+msgstr "ਪੱਕਾ ਕਰੋ ਕਿ ਤੁਹਾਡੇ ਕੋਲ ਬੇਤਾਰ ਵੈਨ/ਸੈਲੂਲਰ ਡਿਵਾਈਸ ਹੈ"
 
 #: panels/wwan/cc-wwan-panel.ui:154
-#, fuzzy
 #| msgid "Bluetooth is disabled when airplane mode is on."
 msgid "Wireless Wan is disabled when airplane mode is on"
-msgstr "ਬਲੂਟੁੱਥ ਬੰਦ ਹੁੰਦਾ ਹੈ, ਜਦੋਂ ਏਅਰਪਲੇਨ ਮੋਡ ਚਾਲੂ ਹੈ।"
+msgstr "ਜਦੋਂ ਏਅਰਪਲਾਨ ਢੰਗ ਚਾਲੂ ਹੁੰਦਾ ਹੈ ਤਾਂ ਬੇਤਾਰ ਵੈਨ ਅਸਮਰੱਥ ਹੁੰਦਾ ਹੈ"
 
 #: panels/wwan/cc-wwan-panel.ui:163
-#| msgid "Turn Off Airplane Mode"
 msgid "_Turn off Airplane Mode"
 msgstr "ਏਅਰਪਲੇਨ ਮੋਡ ਬੰਦ ਕਰੋ(_T)"
 
 #: panels/wwan/cc-wwan-panel.ui:210
-#| msgid "Forget Connection"
 msgid "Data Connection"
 msgstr "ਡਾਟਾ ਕਨੈਕਸ਼ਨ"
 
 #: panels/wwan/cc-wwan-panel.ui:224
-#, fuzzy
 #| msgid "SIM Card not inserted"
 msgid "SIM card used for internet"
-msgstr "SIM ਕਾਰਡ ਨਹੀਂ ਪਾਇਆ"
+msgstr "ਸਿਮ ਕਾਰਡ ਇੰਟਰਨੈੱਟ ਲਈ ਵਰਤਿਆ ਜਾਂਦਾ ਹੈ"
 
 #: panels/wwan/cc-wwan-panel.ui:332
-#| msgid "My Home Network"
 msgid "Enable Mobile Network"
 msgstr "ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਸਮਰੱਥ ਕਰੋ"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
-#| msgid "Lock"
 msgid "SIM Lock"
 msgstr "ਸਿਮ ਲਾਕ"
 
@@ -8781,33 +8708,30 @@ msgstr "ਅੱਗੇ(_N)"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
 msgid "_Lock SIM with PIN"
-msgstr ""
+msgstr "ਪਿੰਨ ਨਾਲ ਸਿਮ ਲਾਕ ਕਰੋ(_L)"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
-#| msgid "Ch_ange"
 msgid "Change PIN"
 msgstr "ਪਿੰਨ ਬਦਲੋ"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
 msgid "Enter current PIN to change SIM lock settings"
-msgstr ""
+msgstr "ਸਿਮ ਲਾਕ ਸੈਟਿੰਗਾਂ ਬਦਲਣ ਲਈ ਮੌਜੂਦਾ ਪਿੰਨ ਦਿਓ"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:3
-#| msgid "My Home Network"
 msgid "Mobile Network"
 msgstr "ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:4
-#, fuzzy
 #| msgid "Configure Removable Media settings"
 msgid "Configure Telephony and mobile data connections"
-msgstr "ਹਟਾਉਣਯੋਗ ਮੀਡੀਏ ਦੀਆਂ ਸੈਟਿੰਗਾਂ ਦੀ ਸੰਰਚਨਾ"
+msgstr "ਟੈਲੀਫ਼ੋਨੀ ਤੇ ਮੋਬਾਈਲ ਡਾਟਾ ਕਨੈਕਸ਼ਨਾਂ ਦੀ ਸੰਰਚਨਾ ਕਰੋ"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:17
 msgid "cellular;wwan;telephony;sim;mobile;"
-msgstr "ਸੈਲੂਲਰ;ਵੈੱਨ;ਟੈਲੀਫ਼ੋਨੀ;ਸਿਮ;ਮੋਬਾਈਲ;ਮੋਬਾਇਲ;"
+msgstr "ਸੈਲੂਲਰ;ਵੈਨ;ਵੈੱਨ;ਟੈਲੀਫ਼ੋਨੀ;ਸਿਮ;ਮੋਬਾਈਲ;ਮੋਬਾਇਲ;"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
