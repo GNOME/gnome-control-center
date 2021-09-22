@@ -329,7 +329,8 @@ wwan_data_update_apn_list (CcWwanData *self)
   const GPtrArray *nm_connections;
   guint i;
 
-  if (self->apn_list || !self->sim)
+  if (self->apn_list || !self->sim || !self->nm_device ||
+      nm_device_get_state (self->nm_device) <= NM_DEVICE_STATE_UNAVAILABLE)
     return;
 
   if (!self->apn_list)
