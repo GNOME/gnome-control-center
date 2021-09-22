@@ -90,6 +90,7 @@ struct _CcWwanData
   gint     priority;
   gboolean data_enabled; /* autoconnect enabled */
   gboolean home_only;    /* Data roaming */
+  gboolean apn_list_updated;    /* APN list updated from mobile-provider-info */
 };
 
 G_DEFINE_TYPE (CcWwanData, cc_wwan_data, G_TYPE_OBJECT)
@@ -277,7 +278,7 @@ wwan_data_update_apn_list_db (CcWwanData *self)
   g_autoptr(GError) error = NULL;
   guint i = 0;
 
-  if (!self->sim || !self->operator_code)
+  if (!self->sim || !self->operator_code || self->apn_list_updated)
     return;
 
   if (!self->apn_list)
@@ -298,6 +299,8 @@ wwan_data_update_apn_list_db (CcWwanData *self)
 
   if (self->apn_provider)
     apn_methods = nma_mobile_provider_get_methods (self->apn_provider);
+
+  self->apn_list_updated = TRUE;
 
   for (l = apn_methods; l; l = l->next, i++)
     {
