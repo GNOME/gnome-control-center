@@ -386,6 +386,25 @@ wwan_device_state_changed_cb (CcWwanData *self)
 }
 
 static void
+wwan_device_3gpp_operator_code_changd_cb (CcWwanData *self)
+{
+  MMModem3gpp *modem_3gpp;
+
+  modem_3gpp = mm_object_peek_modem_3gpp (self->mm_object);
+
+  if (!self->operator_code)
+    {
+      self->operator_code = mm_modem_3gpp_dup_operator_code (modem_3gpp);
+
+      if (self->operator_code)
+        {
+          wwan_data_update_apn_list (self);
+          wwan_data_update_apn_list_db (self);
+        }
+    }
+}
+
+static void
 cc_wwan_data_get_property (GObject    *object,
                            guint       prop_id,
                            GValue     *value,
@@ -511,7 +530,12 @@ cc_wwan_data_new (MMObject *mm_object,
 
       modem_3gpp = mm_object_peek_modem_3gpp (mm_object);
       if (modem_3gpp)
-        self->operator_code = mm_modem_3gpp_dup_operator_code (modem_3gpp);
+        {
+          g_signal_connect_object (modem_3gpp, "notify::operator-code",
+                                   G_CALLBACK (wwan_device_3gpp_operator_code_changd_cb),
+                                   self, G_CONNECT_SWAPPED);
+          wwan_device_3gpp_operator_code_changd_cb (self);
+        }
     }
 
   if (self->active_connection)
