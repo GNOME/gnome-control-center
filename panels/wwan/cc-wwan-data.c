@@ -316,6 +316,7 @@ wwan_data_update_apn_list_db (CcWwanData *self)
       if (!apn)
         {
           apn = cc_wwan_data_apn_new ();
+          apn->access_method = l->data;
           g_list_store_insert (self->apn_list, i, apn);
         }
 
