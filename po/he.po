@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-08-05 22:04+0000\n"
-"PO-Revision-Date: 2021-08-07 19:47+0300\n"
+"POT-Creation-Date: 2021-09-18 09:55+0000\n"
+"PO-Revision-Date: 2021-09-23 10:57+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -51,7 +51,8 @@ msgstr "גישה מלאה אל ‎/dev"
 
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "רשת"
 
@@ -93,7 +94,7 @@ msgid ""
 "concerned about these permissions, consider removing this application."
 msgstr ""
 "ליישום %s יש את ההרשאות הבאות בצורה מובנית. לא ניתן לשנות זאת. אם הדבר מדאיג "
-"אותך, כדאי לשקול הסרת היישום."
+"אותך, כדאי לשקול את הסרת היישום."
 
 #: panels/applications/cc-applications-panel.c:1024
 msgid "Web Links"
@@ -135,7 +136,7 @@ msgstr "קובצי גופנים"
 
 #: panels/applications/cc-applications-panel.c:1252
 msgid "Archive Files"
-msgstr "קובצי ארכיב"
+msgstr "קובצי ארכיון"
 
 #: panels/applications/cc-applications-panel.c:1272
 msgid "Package Files"
@@ -199,11 +200,11 @@ msgstr "מצלמה"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
 #: panels/keyboard/cc-xkb-modifier-dialog.c:353
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
-#: panels/user-accounts/cc-user-panel.c:843
-#: panels/user-accounts/cc-user-panel.c:938
+#: panels/user-accounts/cc-user-panel.c:848
+#: panels/user-accounts/cc-user-panel.c:938 panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
-msgstr "מנוטרל"
+msgstr "מושבת"
 
 #: panels/applications/cc-applications-panel.ui:133
 #: panels/applications/cc-applications-panel.ui:139
@@ -250,7 +251,7 @@ msgstr "חיפוש"
 #: panels/applications/cc-applications-panel.ui:237
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:3
 msgid "Notifications"
-msgstr "התרעות"
+msgstr "התראות"
 
 #: panels/applications/cc-applications-panel.ui:243
 msgid "Run in background"
@@ -326,7 +327,7 @@ msgstr "מטמון"
 
 #: panels/applications/cc-applications-panel.ui:582
 msgid "<b>Total</b>"
-msgstr "<b>סך הכל</b>"
+msgstr "‫<b>סך הכול</b>"
 
 #: panels/applications/cc-applications-panel.ui:599
 msgid "Clear Cache…"
@@ -366,9 +367,12 @@ msgstr "בחירת תמונה"
 #: panels/user-accounts/cc-avatar-chooser.c:228
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:633
-#: panels/user-accounts/cc-user-panel.c:651
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "_ביטול"
 
@@ -684,7 +688,7 @@ msgstr "בחירת פרופיל ICC"
 
 #: panels/color/cc-color-panel.c:239
 msgid "_Import"
-msgstr "י_בוא"
+msgstr "יי_בוא"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: panels/color/cc-color-panel.c:250
@@ -716,7 +720,7 @@ msgstr "הפרופיל הועלה אל:"
 
 #: panels/color/cc-color-panel.c:853
 msgid "Write down this URL."
-msgstr "כדאי לכתוב את הכתובת הזאת."
+msgstr "כדאי לכתוב לך את הכתובת הזאת."
 
 #: panels/color/cc-color-panel.c:854
 msgid "Restart this computer and boot your normal operating system."
@@ -733,6 +737,7 @@ msgstr "שמירת הפרופיל"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_שמירה"
 
@@ -791,7 +796,7 @@ msgstr "איכות הכיול"
 
 #: panels/color/cc-color-panel.ui:137
 msgid "Select the sensor device you want to use for calibration."
-msgstr "יש לבחור את התקן החישה בו ברצונך להשתמש לכיול."
+msgstr "נא לבחור את התקן החישה לטובת כיול."
 
 #: panels/color/cc-color-panel.ui:174
 msgid "Calibration Device"
@@ -889,7 +894,7 @@ msgstr "הוספת פרופיל"
 
 #: panels/color/cc-color-panel.ui:643
 msgid "_Import File…"
-msgstr "_יבוא קובץ…"
+msgstr "_ייבוא קובץ…"
 
 #: panels/color/cc-color-panel.ui:672 panels/keyboard/cc-input-chooser.ui:20
 #: panels/network/connection-editor/net-connection-editor.c:504
@@ -902,7 +907,7 @@ msgstr "הו_ספה"
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
-msgstr "התגלו בעיות. יתכן שהפרופיל לא יעבוד כראוי. <a href=\"\">הצגת פרטים.</a>"
+msgstr "התגלו בעיות. אולי הפרופיל לא יעבוד כראוי. <a href=\"\">הצגת פרטים.</a>"
 
 #: panels/color/cc-color-panel.ui:788
 msgid "Each device needs an up to date color profile to be color managed."
@@ -1154,7 +1159,7 @@ msgstr "עוד…"
 
 #: panels/common/cc-permission-infobar.c:107
 msgid "Unlock to Change Settings"
-msgstr "שחרור לשינוי הגדרות"
+msgstr "יש לשחרר לשינוי הגדרות"
 
 #: panels/common/cc-permission-infobar.ui:20
 msgid "Unlock…"
@@ -1186,11 +1191,11 @@ msgstr "הפחתת דקה"
 
 #: panels/common/cc-time-entry.c:219
 msgid "_Copy"
-msgstr "_העתקה"
+msgstr "ה_עתקה"
 
 #: panels/common/cc-time-entry.c:225
 msgid "Select _All"
-msgstr "בחיר _הכל"
+msgstr "בחירה בה_כול"
 
 #: panels/common/cc-util.c:127
 #: panels/network/connection-editor/ce-page-details.c:162
@@ -1235,7 +1240,7 @@ msgstr[3] "‏‫%d דקות"
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
-msgstr[0] "שנייה אחת"
+msgstr[0] "שנייה"
 msgstr[1] "שתי שניות"
 msgstr[2] "‫%d שניות"
 msgstr[3] "‏‫%d שניות"
@@ -1410,7 +1415,7 @@ msgstr "חיפוש עיר"
 
 #: panels/datetime/cc-datetime-panel.ui:375
 msgid "Automatic _Date & Time"
-msgstr "תאריך ושעה _אוטומטי"
+msgstr "תאריך ושעה _אוטומטיים"
 
 #: panels/datetime/cc-datetime-panel.ui:376
 msgid "Requires internet access"
@@ -1422,7 +1427,7 @@ msgstr "תאריך ו_שעה"
 
 #: panels/datetime/cc-datetime-panel.ui:430
 msgid "Automatic Time _Zone"
-msgstr "הת_חברות אוטומטית"
+msgstr "אזור _זמן אוטומטי"
 
 #: panels/datetime/cc-datetime-panel.ui:431
 msgid "Requires location services enabled and internet access"
@@ -1545,31 +1550,31 @@ msgstr "ה_חלה"
 
 #: panels/display/cc-display-panel.c:1038
 msgid "Apply Changes?"
-msgstr "החלת שינויים?"
+msgstr "להחיל שינויים?"
 
 #: panels/display/cc-display-panel.c:1043
 msgid "Changes Cannot be Applied"
-msgstr "השינויים לא ניתנים להחלה"
+msgstr "אי אפשר להחיל את השינויים"
 
 #: panels/display/cc-display-panel.c:1044
 msgid "This could be due to hardware limitations."
-msgstr "יתכן וזה קשור למגבלות חומרה."
+msgstr "אולי זה קשור למגבלות חומרה."
 
 #: panels/display/cc-display-panel.ui:89
 msgid "Single Display"
-msgstr "צג יחידה"
+msgstr "צג יחיד"
 
 #: panels/display/cc-display-panel.ui:108 panels/display/cc-display-panel.ui:310
 msgid "Join Displays"
-msgstr "הוספת צגים"
+msgstr "צירוף צגים"
 
 #: panels/display/cc-display-panel.ui:126
 msgid "Mirror"
-msgstr "שגיאה"
+msgstr "מראה"
 
 #: panels/display/cc-display-panel.ui:151
 msgid "Display Mode"
-msgstr "סוג צג"
+msgstr "מצב תצוגה"
 
 #: panels/display/cc-display-panel.ui:220
 msgid "Contains top bar and Activities"
@@ -1584,25 +1589,25 @@ msgid ""
 "Drag displays to match your physical display setup. Select a display to change "
 "its settings."
 msgstr ""
-"יש לגרור את הצגים על מנת להתאימם לסדר הפיזי שלהם. יש לבחור צג על מנת לשנות את "
+"ניתן לגרור את הצגים על מנת להתאימם למיקום הפיזי שלהם. בחירה בצג תאפשר לשנות את "
 "ההגדרות שלו."
 
 #: panels/display/cc-display-panel.ui:250
 msgid "Display Arrangement"
-msgstr "סידור צג"
+msgstr "סידור צגים"
 
 #: panels/display/cc-display-panel.ui:374
 msgid "Active Display"
-msgstr "הפעלת צג"
+msgstr "צג פעיל"
 
 #: panels/display/cc-display-panel.ui:421
 msgid "Display Configuration"
-msgstr "הגדרת צג"
+msgstr "הגדרות צג"
 
 #: panels/display/cc-display-panel.ui:440
 #: panels/display/gnome-display-panel.desktop.in.in:3
 msgid "Displays"
-msgstr "צג"
+msgstr "תצוגות"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.ui:451
@@ -1704,7 +1709,7 @@ msgstr "זמנים"
 
 #: panels/display/cc-night-light-page.ui:165
 msgid "From"
-msgstr "מ"
+msgstr "מ־"
 
 #: panels/display/cc-night-light-page.ui:194
 #: panels/display/cc-night-light-page.ui:297
@@ -1739,7 +1744,7 @@ msgstr "עד"
 
 #: panels/display/cc-night-light-page.ui:374
 msgid "Color Temperature"
-msgstr "צבע טמפרטורה"
+msgstr "טמפרטורת הצבע"
 
 #: panels/display/gnome-display-panel.desktop.in.in:4
 msgid "Choose how to use connected monitors and projectors"
@@ -1758,6 +1763,7 @@ msgstr ""
 #: panels/info-overview/cc-info-overview-panel.c:437
 #: panels/info-overview/cc-info-overview-panel.c:483
 #: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "לא ידוע"
 
@@ -2251,12 +2257,13 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "ביטול"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:436
 msgid "Reset All"
-msgstr "איפוס הכל"
+msgstr "איפוס הכול"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
 msgid "Add Custom Shortcuts"
@@ -2277,13 +2284,14 @@ msgstr "לא נמצאו צירופי מקשים"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "חזרה"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:235
 msgid "Reset All…"
-msgstr "איפוס הכל…"
+msgstr "איפוס של הכול…"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:236
 msgid "Reset all shortcuts to their default keybindings"
@@ -2292,11 +2300,11 @@ msgstr "איפוס כל צירופי המקשים לערכי ברירת המחד
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
 #, c-format
 msgid "%s is already being used for %s. If you replace it, %s will be disabled"
-msgstr "‏%s כבר משויך אל %s. אם ברצונך להחליף בו, %s יושבת"
+msgstr "‫%s כבר בשימוש על ידי %s. החלפה שלו, תשבית את %s"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:535
 msgid "Enter the new shortcut"
-msgstr "יש להקיש על צירוף המקשים החדש"
+msgstr "יש להקיש את צירוף המקשים החדש"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:550
 msgid "Set Custom Shortcut"
@@ -2321,7 +2329,7 @@ msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr "יש ללחוץ Esc לביטול או Backspace להשבתת צירופי המקשים."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
-#: panels/printers/pp-details-dialog.ui:40
+#: panels/printers/pp-details-dialog.ui:40 panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "שם"
 
@@ -2342,6 +2350,7 @@ msgid "None"
 msgstr "ללא"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "הוספה"
 
@@ -2355,15 +2364,17 @@ msgstr "הגדרה"
 
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:27
 msgid "Reset the shortcut to its default value"
-msgstr "איפוס צירופי המקשים לערך ברירת המחדל"
+msgstr "איפוס צירופי המקשים לערך בררת המחדל"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
 msgid "Keyboard"
 msgstr "מקלדת"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-msgid "View and change keyboard shortcuts and set your typing preferences"
-msgstr "הצגה ושינוי צירופי מקשים להעדפות ההקלדה שלך"
+msgid ""
+"Change keyboard shortcuts and set your typing preferences, keyboard layouts "
+"and input sources"
+msgstr "החלפת קיצורי המקשים שלך והגדרת העדפות ההקלדה, פריסות המקלדת ומקורות הקלט"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
@@ -2406,7 +2417,7 @@ msgstr "אף יישום לא ביקש גישה למיקום"
 
 #: panels/location/gnome-location-panel.desktop.in.in:4
 msgid "Protect your location information"
-msgstr "הגנה על מידע על המיקום שלך"
+msgstr "הגנה על פרטי המיקום שלך"
 
 #. FIXME
 #: panels/lock/cc-lock-panel.ui:27
@@ -2438,7 +2449,7 @@ msgstr "פרק הזמן שלאחר החשכת המסך כאשר המסך ננע�
 
 #: panels/lock/cc-lock-panel.ui:103
 msgid "Show _Notifications on Lock Screen"
-msgstr "הצגת הת_רעות במסך נעילה"
+msgstr "הצגת הת_ראות במסך נעילה"
 
 #: panels/lock/cc-lock-panel.ui:120
 msgid "Forbid new _USB devices"
@@ -2460,13 +2471,13 @@ msgstr "המסך יכבה"
 #: panels/lock/cc-lock-panel.ui:170
 msgctxt "lock_screen"
 msgid "30 seconds"
-msgstr "30 שניות"
+msgstr "חצי דקה"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
 #: panels/lock/cc-lock-panel.ui:174
 msgctxt "lock_screen"
 msgid "1 minute"
-msgstr "דקה אחת"
+msgstr "דקה"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
 #: panels/lock/cc-lock-panel.ui:178
@@ -2597,6 +2608,7 @@ msgstr "הגנה על השיחות שלך"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "כללי"
 
@@ -2707,11 +2719,92 @@ msgstr "שינוי העכבר שלך או רגישות משטח מגע ובחי�
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "משטח מגע;סמן;לחיצה;טפיחה;כפולה;לחצן;כדור שליטה;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "_פינה חמה"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr "נגיעה בפינה השמאלית העליונה תפתח את סקירת הפעילויות."
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "_קצוות מסך פעילים"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+"גרירה של החלונות כלפי השוליים העליונים, שמאליים וימנים של המסך תשנה את גודלם."
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+msgid "Workspaces"
+msgstr "מרחבי עבודה"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "מרחבי עבודה _גמישים"
+
+#: panels/multitasking/cc-multitasking-panel.ui:140
+msgid "Automatically removes empty workspaces."
+msgstr "מסיר מרחבי עבודה ריקים אוטומטית."
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "מספר _קבוע של מרחבי עבודה"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr "נא לציין מספר של מרחבי עבודה קבועים."
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "מ_ספר מרחבי עבודה"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+msgid "Multi-Monitor"
+msgstr "ריבוי צגים"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "מרחבי עבודה בצג ה_ראשי בלבד"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "מרחבי עבודה ב_כל הצגים"
+
+#: panels/multitasking/cc-multitasking-panel.ui:282
+msgid "Application Switching"
+msgstr "החלפת יישומים"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr "לכלול יישומים מ_כל מרחבי העבודה"
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr "לכלול יישומים ממרחב העבודה ה_נוכחי בלבד"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr "ריבוי משימות"
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr "ניהול העדפות ליעילות וריבוי משימות"
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr ""
+"ריבוי משימות;ביצוע מפוצל;יעילות;פרודוקטיביות;מולטיטאסקינג;מולטיטסקינג;התאמה;"
+"שינוי;עריכה;שולחן עבודה;התאמה אישית;"
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "אופס, משהו השתבש. נא ליצור קשר עם ספק התכנה שלך."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "‏NetworkManager צריך לפעול."
 
@@ -2729,29 +2822,29 @@ msgid "Not set up"
 msgstr "לא מוגדר"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:208
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "‏%s ‏(SSID: ‏%s)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:262
 msgid "Insecure network (WEP)"
 msgstr "רשת לא מאובטחת (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "רשת מאובטחת (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA2)"
 msgstr "רשת מאובטחת (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA3)"
 msgstr "רשת מאובטחת (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:288
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "רשת מאובטחת"
 
@@ -2760,7 +2853,7 @@ msgstr "רשת מאובטחת"
 msgid "Connected"
 msgstr "מחובר"
 
-#: panels/network/cc-wifi-connection-row.ui:100
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76 panels/network/network-ethernet.ui:111
 #: panels/network/network-mobile.ui:450 panels/network/network-vpn.ui:77
@@ -2808,6 +2901,7 @@ msgstr "שם הרשת"
 #: panels/printers/authentication-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:389 panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "ססמה"
 
@@ -2843,7 +2937,7 @@ msgstr "מצב טיסה"
 
 #: panels/network/cc-wifi-panel.ui:47
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
-msgstr "השבתת רשת אלחוטית, בלוטות' ורשת ניידת בפס רחב"
+msgstr "השבתת רשת אלחוטית, בלוטות' ורשת סלולרית"
 
 #: panels/network/cc-wifi-panel.ui:87
 msgid "No Wi-Fi Adapter Found"
@@ -2853,7 +2947,7 @@ msgstr "לא נמצא מתאם לרשת אלחוטית"
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "יש לוודא כי ברשותך מתאם לרשת אלחוטית מחובר ופועל"
 
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "מצב טיסה פועל"
 
@@ -2867,7 +2961,7 @@ msgstr "נקודת גישה אלחוטית פעילה"
 
 #: panels/network/cc-wifi-panel.ui:195
 msgid "Mobile devices can scan the QR code to connect."
-msgstr "התקנים ניידים יכולים לסרוק את קוד ה־QR על מנת להתחבר."
+msgstr "התקנים ניידים יכולים לסרוק את קוד ה־QR כדי להתחבר."
 
 #: panels/network/cc-wifi-panel.ui:205
 msgid "Turn Off Hotspot…"
@@ -3152,6 +3246,7 @@ msgid "WPA3 Personal"
 msgstr "‏WPA3 אישי"
 
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "עצמת הקליטה"
 
@@ -3538,7 +3633,7 @@ msgstr "%s VPN"
 msgid "Turn device off"
 msgstr "כיבוי ההתקן"
 
-#: panels/network/network-mobile.ui:29
+#: panels/network/network-mobile.ui:29 panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI (מס׳ ברזל)"
 
@@ -3636,8 +3731,7 @@ msgid "Unmanaged"
 msgstr "לא מנוהל"
 
 #. TRANSLATORS: device status
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:928
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "לא זמין"
 
@@ -3862,7 +3956,7 @@ msgid "SIM Puk required"
 msgstr "נדרש ה־Puk של ה־SIM"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "ה־SIM שגוי"
 
@@ -3981,7 +4075,7 @@ msgstr "_שם משתמש"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:363
+#: panels/user-accounts/cc-user-panel.ui:365
 msgid "_Password"
 msgstr "_ססמה"
 
@@ -4114,11 +4208,11 @@ msgstr "ססמה למפתח ה_פרטי"
 #: panels/network/wireless-security/eap-method-ttls.c:98
 #, c-format
 msgid "invalid EAP-TTLS CA certificate: %s"
-msgstr "אישור  EAP-TTLS CA לא תקף: %s"
+msgstr "אישור רשות אישורים מסוג EAP-TTLS לא תקף: %s"
 
 #: panels/network/wireless-security/eap-method-ttls.c:106
 msgid "invalid EAP-TTLS CA certificate: no certificate specified"
-msgstr "אישור  EAP-TTLS CA לא תקף: לא סופקו אישורים"
+msgstr "אישור רשות אישורים מסוג EAP-TTLS לא תקף: לא צוין אישור"
 
 #: panels/network/wireless-security/eap-method-ttls.ui:13
 msgid "PAP"
@@ -4187,7 +4281,7 @@ msgstr "חסרה ססמת leap"
 
 #: panels/network/wireless-security/ws-sae.c:77
 msgid "Wi-Fi password is missing."
-msgstr "חסרה ססמת אינטרנט אלחוטי (Wi-Fi)"
+msgstr "חסרה ססמת רשת אלחוטית."
 
 #: panels/network/wireless-security/ws-sae.ui:42
 #: panels/network/wireless-security/ws-wpa-psk.ui:42
@@ -4266,35 +4360,35 @@ msgstr "‏wpa-psk לא תקף: לא נתן לפענח מפתח עם 64 בתים
 #: panels/notifications/cc-app-notifications-dialog.ui:60
 msgctxt "notifications"
 msgid "_Notifications"
-msgstr "ה_תרעות"
+msgstr "ה_תראות"
 
 #. This is the setting to configure sounds associated with notifications.
 #: panels/notifications/cc-app-notifications-dialog.ui:112
 msgctxt "notifications"
 msgid "Sound _Alerts"
-msgstr "ה_תרעות צליל"
+msgstr "ה_תראות צליל"
 
 #: panels/notifications/cc-app-notifications-dialog.ui:168
 msgctxt "notifications"
 msgid "Notification _Popups"
-msgstr "התרעות _קופצות"
+msgstr "התראות _קופצות"
 
 #: panels/notifications/cc-app-notifications-dialog.ui:184
 msgid ""
 "Notifications will continue to appear in the notification list when popups are "
 "disabled."
-msgstr "התרעות תמשכנה להופיע ברשימה ההתרעות כאשר ההתרעות הקופצות מושבתות."
+msgstr "התראות עדיין תופענה ברשימה ההתראות כאשר חלוניות קופצות מושבתות."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
 #: panels/notifications/cc-app-notifications-dialog.ui:249
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
-msgstr "הצגת תוכן ההודעה בחלון קופ_ץ"
+msgstr "הצגת תוכן הודעה בחלונות קופ_צים"
 
 #: panels/notifications/cc-app-notifications-dialog.ui:300
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
-msgstr "התרעות במסך _נעילה"
+msgstr "התראות במסך _נעילה"
 
 #: panels/notifications/cc-app-notifications-dialog.ui:351
 msgctxt "notifications"
@@ -4317,16 +4411,16 @@ msgstr "_נא לא להפריע"
 
 #: panels/notifications/cc-notifications-panel.ui:52
 msgid "_Lock Screen Notifications"
-msgstr "התרעות במסך _נעילה"
+msgstr "התראות במסך _נעילה"
 
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:4
 msgid "Control which notifications are displayed and what they show"
-msgstr "שליטה בהתרעות שתוצגנה ומה הן תצגנה"
+msgstr "שליטה בהתראות שתוצגנה ומה הן תצגנה"
 
 #. Translators: Search terms to find the Notifications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:20
 msgid "Notifications;Banner;Message;Tray;Popup;"
-msgstr "התרעות;באנר;הודעה;אזור דיווחים;הודעה קופצת;"
+msgstr "התראות;התרעות;באנר;הודעה;אזור דיווחים;הודעה קופצת;חלונית קופצת;"
 
 #: panels/online-accounts/cc-online-accounts-panel.c:148
 msgctxt "Online Account"
@@ -4358,7 +4452,7 @@ msgstr "חשבונות מקוונים"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:4
 msgid "Connect to your online accounts and decide what to use them for"
-msgstr "התחברות לחשבונות המקוונים שלך ולהחליט למה לשמש אותם"
+msgstr "אפשר להתחבר לחשבון המקוונים שלך ולהחליט כיצד להשתמש בהם"
 
 #. Translators: Search terms to find the Online Accounts panel.
 #. Do NOT translate or localize the semicolons!
@@ -4572,7 +4666,7 @@ msgstr "בעת הפעלה מהסוללה"
 
 #: panels/power/cc-power-panel.c:860
 msgid "When plugged in"
-msgstr "כאשר מחובר לחשמל"
+msgstr "עם חיבור לחשמל"
 
 #: panels/power/cc-power-panel.c:980
 msgctxt "Idle time"
@@ -4664,7 +4758,7 @@ msgstr "80 דקות"
 #: panels/power/cc-power-panel.ui:41
 msgctxt "automatic_suspend"
 msgid "90 minutes"
-msgstr "90 דקות"
+msgstr "שעה וחצי"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:45
@@ -4761,7 +4855,7 @@ msgstr "השהיה"
 
 #: panels/power/cc-power-profile-row.c:61
 msgid "Lap detected: performance mode unavailable"
-msgstr "התגלו ברכיים: מצב ביצועים לא זמין"
+msgstr "התגלו ירכיים: מצב ביצועים לא זמין"
 
 #: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
@@ -4776,10 +4870,12 @@ msgid "High performance and power usage."
 msgstr "ביצועים גבוהים וצריכת חשמל מוגברת."
 
 #: panels/power/cc-power-profile-row.c:184
+msgctxt "Power profile"
 msgid "Performance"
 msgstr "ביצועים"
 
 #: panels/power/cc-power-profile-row.c:188
+msgctxt "Power profile"
 msgid "Balanced"
 msgstr "מאוזן"
 
@@ -4788,6 +4884,7 @@ msgid "Standard performance and power usage."
 msgstr "ביצועים רגילים וצריכת חשמל רגילה."
 
 #: panels/power/cc-power-profile-row.c:192
+msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "חיסכון בחשמל"
 
@@ -4823,6 +4920,7 @@ msgstr "אימות"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366 panels/printers/pp-jobs-dialog.ui:57
+#: panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "שם משתמש"
 
@@ -4835,7 +4933,7 @@ msgstr "נדרש אימות"
 #: panels/printers/cc-printers-panel.c:682
 #, c-format
 msgid "Printer “%s” has been deleted"
-msgstr "מדפסת „%s” הוסרה"
+msgstr "המדפסת „%s” נמחקה"
 
 #. Translators: Addition of the new printer failed.
 #: panels/printers/cc-printers-panel.c:926
@@ -4876,6 +4974,7 @@ msgstr "הוספת מדפסת"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "_שחרור"
 
@@ -5287,6 +5386,7 @@ msgstr "אין סינון קדם"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "יצרן"
 
@@ -5435,7 +5535,7 @@ msgstr "ניקוי ראשי ההדפסה"
 msgid "Remove Printer"
 msgstr "הסרת מדפסת"
 
-#: panels/printers/printer-entry.ui:193
+#: panels/printers/printer-entry.ui:193 panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "דגם"
 
@@ -5489,7 +5589,7 @@ msgstr "בחירת תבנית עבור מספרים, תאריכים ומטבעו
 
 #: panels/region/cc-format-chooser.ui:117
 msgid "Search locales..."
-msgstr "חיפוש מקומות…"
+msgstr "חיפוש שפות…"
 
 #: panels/region/cc-format-chooser.ui:158
 msgid "Common Formats"
@@ -5514,12 +5614,12 @@ msgstr "תצוגה מקדימה"
 #: panels/region/cc-format-preview.c:135
 msgctxt "measurement format"
 msgid "Imperial"
-msgstr "אימפריאלי"
+msgstr "אימפריאלית"
 
 #: panels/region/cc-format-preview.c:137
 msgctxt "measurement format"
 msgid "Metric"
-msgstr "מטרי"
+msgstr "מטרית"
 
 #: panels/region/cc-format-preview.ui:18
 msgid "Dates"
@@ -5557,7 +5657,7 @@ msgstr "שפה"
 msgid "The language used for text in windows and web pages."
 msgstr "השפה שתשמש עבור הטקסט בחלונות ובדפי האינטרנט."
 
-#: panels/region/cc-region-panel.ui:129 panels/user-accounts/cc-user-panel.ui:309
+#: panels/region/cc-region-panel.ui:129 panels/user-accounts/cc-user-panel.ui:311
 msgid "_Language"
 msgstr "_שפה"
 
@@ -5586,8 +5686,8 @@ msgid "Region & Language"
 msgstr "אזור ושפה"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-msgid "Select your display language, formats, keyboard layouts and input sources"
-msgstr "ניתן לבחור את שפת התצוגה, התבניות, פריסות המקלדת ומקורות הקלט"
+msgid "Select your display language and formats"
+msgstr "בחירת שפת התצוגה והתצורות המקומיות"
 
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
@@ -5897,7 +5997,7 @@ msgstr "כניסה מ_רוחקת"
 
 #: panels/sharing/cc-sharing-panel.ui:119
 msgid "Some services are disabled because of no network access."
-msgstr "יתכן שחלק מהשירותים ינוטרלו עקב ניתוק הגישה לרשת."
+msgstr "יתכן שחלק מהשירותים יושבתו עקב העדר גישה לרשת."
 
 #: panels/sharing/cc-sharing-panel.ui:137 panels/sharing/cc-sharing-panel.ui:264
 msgid "File Sharing"
@@ -5953,7 +6053,7 @@ msgstr "תיקיות"
 
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:4
 msgid "Control what you want to share with others"
-msgstr "שליטה במה שברצונך לשתף עם אחרים"
+msgstr "שליטה במה שמעניין אותך לשתף עם אחרים"
 
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:16
@@ -6015,7 +6115,7 @@ msgstr "עצמת צלילי מערכת"
 
 #: panels/sound/cc-sound-panel.ui:43
 msgid "Volume Levels"
-msgstr "עצמת צלילי שכבות"
+msgstr "דרגות עצמת שמע"
 
 #: panels/sound/cc-sound-panel.ui:63
 msgid "Output"
@@ -6119,7 +6219,7 @@ msgstr "תפקוד ירוד"
 #: panels/thunderbolt/cc-bolt-device-dialog.c:115
 msgctxt "Thunderbolt Device Status"
 msgid "Connected & Authorized"
-msgstr "התקנים מחובריםמחובר ומאומת"
+msgstr "התקנים מחוברים ומאומתים"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:121
 #: panels/thunderbolt/cc-bolt-device-entry.c:152
@@ -6145,7 +6245,7 @@ msgstr "נרשם ב־:"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:264
 msgid "Failed to authorize device: "
-msgstr "אירע כשל באימות ההתקן: "
+msgstr "אימות ההתקן נכשל: "
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:333
 msgid "Failed to forget device: "
@@ -7027,7 +7127,7 @@ msgstr "ההתחברות למתחם נכשלה"
 
 #: panels/user-accounts/cc-add-user-dialog.c:1236
 msgid "Unable to find the domain. Maybe you misspelled it?"
-msgstr "לא ניתן למצוא את המתחם. אולי שגית באיות?"
+msgstr "לא ניתן למצוא את התחום. אולי שגית באיות?"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:18
 #: panels/user-accounts/data/join-dialog.ui:11
@@ -7078,7 +7178,7 @@ msgstr "התנתקת"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:751
 msgid "You must be online in order to add enterprise users."
-msgstr "יש להיות מחובר לאינטרנט על מנת להוסיף משתמש ארגוני."
+msgstr "עליך להתחבר לרשת כדי להוסיף משתמשים ארגוניים."
 
 #: panels/user-accounts/cc-add-user-dialog.ui:782
 msgid "_Enterprise Login"
@@ -7098,7 +7198,7 @@ msgstr "בחירת קובץ…"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:8
 msgid "Fingerprint Manager"
-msgstr "ניהול טביעת אצבע"
+msgstr "ניהול טביעות אצבע"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:23
 msgid "Fingerprint"
@@ -7116,9 +7216,7 @@ msgstr "_כן"
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
-msgstr ""
-"האם ברצונך למחוק את טביעות האצבעות הרשומות שלך כדי לבטל את ההתחברות באמצעות "
-"טביעת אצבע?"
+msgstr "למחוק את טביעות האצבעות שלך שנרשמו כך שכניסה עם טביעת אצבע תושבת?"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
 #: panels/user-accounts/cc-fingerprint-dialog.ui:249
@@ -7135,7 +7233,7 @@ msgstr "אין התקן טביעת אצבע"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:280
 msgid "Choose the fingerprint device you want to configure"
-msgstr "יש לבחור את התקן טביעת האצבע שברצונך להגדיר"
+msgstr "נא לבחור את התקן טביעות האצבע להגדרה"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:309
 msgid "Fingerprint Device"
@@ -7183,25 +7281,25 @@ msgstr "אין הדפסות רשומות"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:251
 msgid "Failed to communicate with the device during enrollment"
-msgstr "ארע כשל בהתקשורת עם ההתקן בעת הרישום"
+msgstr "ההתקשורת עם ההתקן בעת הרישום נכשלה"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:255
 msgid "Failed to communicate with the fingerprint reader"
-msgstr "ארע כשל בהתקשרות עם קורא טביעות האצבע"
+msgstr "ההתקשרות עם קורא טביעות האצבע נכשלה"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:257
 msgid "Failed to communicate with the fingerprint daemon"
-msgstr "ארע כשל בהתקשרות עם שרת קורא טביעת האצבע"
+msgstr "ההתקשרות עם שרת קורא טביעות האצבע נכשלה"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:585
 #, c-format
 msgid "Failed to list fingerprints: %s"
-msgstr "ארע כשל ברישום טביעות האצבע: %s"
+msgstr "הצגת טביעות האצבעות נכשלה: %s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:652
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
-msgstr "אירע כשל במחיקת טביעות אצבע שמורות: ‏%s"
+msgstr "מחיקת טביעות אצבע שמורות נכשלה: ‏%s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:683
 msgid "Left thumb"
@@ -7209,7 +7307,7 @@ msgstr "אגודל שמאלית"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:685
 msgid "Left middle finger"
-msgstr "אצבע האמצעית השמאלית"
+msgstr "אמה שמאלית"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:687
 msgid "_Left index finger"
@@ -7229,7 +7327,7 @@ msgstr "אגודל ימנית"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:695
 msgid "Right middle finger"
-msgstr "אצבע האמצעית הימנית"
+msgstr "אמה ימנית"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:697
 msgid "_Right index finger"
@@ -7262,28 +7360,27 @@ msgstr "אחסון התקן טביעת האצבע מלא"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:858
 msgid "Failed to enroll new fingerprint"
-msgstr "ארע כשל ברישום טביעת אצבע חדשה"
+msgstr "רישום טביעת אצבע חדשה נכשל"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:889
 #, c-format
 msgid "Failed to start enrollment: %s"
-msgstr "ארע כשל בהתחלת הרישום: ‏%s"
+msgstr "התחלת הרישום נכשלה: ‏%s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:897
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
-msgstr "ארע כשל ברישום טביעת אצבע חדשה"
+msgstr "רישום טביעת אצבע חדשה נכשל"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:928
 #, c-format
 msgid "Failed to stop enrollment: %s"
-msgstr "ארע כשל בעצירת הרישום: ‏%s"
+msgstr "עצירת הרישום נכשלה: ‏%s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:974
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your fingerprint"
-msgstr ""
-"יש להרים את האצבע שלך שוב ולמקם אותה על הקורא על מנת לרשום את טביעת האצבע"
+msgstr "יש לחזור על הרמת והנחת האצבע על הקורא כדי לרשום את טביעת האצבע שלך"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
 #: panels/user-accounts/cc-fingerprint-dialog.c:1118
@@ -7293,22 +7390,22 @@ msgstr "סריקת טביעת אצבע חדשה"
 #: panels/user-accounts/cc-fingerprint-dialog.c:1157
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
-msgstr "ארע כשל בשחרור התקן טביעת אצבע %s: ‏%s"
+msgstr "שחרור התקן טביעת אצבע %s נכשל: ‏%s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1229
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
-msgstr "בעיה בקריאת ההתקן"
+msgstr "בעיה בקריאת התקן"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1264
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
-msgstr "ארע כשל בטעינת התקן טביעת אצבע %s: ‏%s"
+msgstr "טעינת התקן טביעת אצבע %s נכשלה: ‏%s"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:1413
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
-msgstr "אירע כשל בקבלת התקני טביעת אצבע: ‏%s"
+msgstr "קבלת התקני טביעת אצבע נכשלה: ‏%s"
 
 #: panels/user-accounts/cc-login-history-dialog.c:69
 msgid "This Week"
@@ -7346,7 +7443,7 @@ msgstr "‏%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7354,7 +7451,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7417,17 +7514,17 @@ msgstr "הגדרת ססמה כעת"
 
 #: panels/user-accounts/cc-realm-manager.c:303
 msgid "Cannot automatically join this type of domain"
-msgstr "לא ניתן להצטרף אוטומטית לסוג כזה של מתחם"
+msgstr "לא ניתן להצטרף אוטומטית לסוג כזה של תחום"
 
 #: panels/user-accounts/cc-realm-manager.c:306
 msgid "No such domain or realm found"
-msgstr "לא נמצאו מתחם או תחום כאלה"
+msgstr "לא נמצאו תחום או מתחם כאלה"
 
 #: panels/user-accounts/cc-realm-manager.c:712
 #: panels/user-accounts/cc-realm-manager.c:726
 #, c-format
 msgid "Cannot log in as %s at the %s domain"
-msgstr "לא ניתן להיכנס בשם %s למתחם %s"
+msgstr "לא ניתן להיכנס בשם %s לתחום %s"
 
 #: panels/user-accounts/cc-realm-manager.c:718
 msgid "Invalid password, please try again"
@@ -7436,43 +7533,43 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 #: panels/user-accounts/cc-realm-manager.c:731
 #, c-format
 msgid "Couldn’t connect to the %s domain: %s"
-msgstr "לא ניתן להתחבר אל המתחם %s:‏ %s"
+msgstr "לא ניתן להתחבר אל התחום %s:‏ %s"
 
 #: panels/user-accounts/cc-user-panel.c:222
 msgid "Your account"
 msgstr "החשבון שלך"
 
-#: panels/user-accounts/cc-user-panel.c:397
+#: panels/user-accounts/cc-user-panel.c:402
 msgid "Failed to delete user"
-msgstr "אירע כשל במחיקת משתמש"
+msgstr "מחיקת משתמש נכשלה"
 
-#: panels/user-accounts/cc-user-panel.c:452
-#: panels/user-accounts/cc-user-panel.c:507
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:457
+#: panels/user-accounts/cc-user-panel.c:512
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
-msgstr "אירע כשל בביטול המשתמש המנוהל מרחוק"
+msgstr "ביטול המשתמש המנוהל מרחוק נכשל"
 
-#: panels/user-accounts/cc-user-panel.c:602
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
-msgstr "אין באפשרותך למחוק את החשבון שלך."
+msgstr "מחיקת החשבון שלך על ידיך אינה אפשרית."
 
-#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: panels/user-accounts/cc-user-panel.c:615
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: panels/user-accounts/cc-user-panel.c:624
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
-msgstr "האם ברצונך לשמור את הקבצים של %s?"
+msgstr "לשמור על הקבצים של %s?"
 
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7480,53 +7577,53 @@ msgstr ""
 "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
 "משתמש."
 
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: panels/user-accounts/cc-user-panel.c:632
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "_שמירת הקבצים"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
-msgstr "האם אכן ברצונך למחוק את החשבון המנוהל מרחוק %s?"
+msgstr "לשלול את החשבון של %s שמנוהל מרחוק?"
 
-#: panels/user-accounts/cc-user-panel.c:650
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
-msgstr "_מחיקה"
+msgstr "מ_חיקה"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
-msgstr "חשבון מנוטרל"
+msgstr "חשבון מושבת"
 
-#: panels/user-accounts/cc-user-panel.c:708
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: panels/user-accounts/cc-user-panel.c:754
+#: panels/user-accounts/cc-user-panel.c:759
 msgid "Logged in"
 msgstr "נכנסת"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:841
-#: panels/user-accounts/cc-user-panel.c:935
+#: panels/user-accounts/cc-user-panel.c:846
+#: panels/user-accounts/cc-user-panel.c:935 panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "פעיל"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1259
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1261
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
@@ -7534,7 +7631,7 @@ msgstr "נא לוודא ששירות החשבונות (AccountService) מותק�
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -7542,12 +7639,12 @@ msgstr ""
 "כדי לערוך שינויים,\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1361
+#: panels/user-accounts/cc-user-panel.c:1366
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: panels/user-accounts/cc-user-panel.c:1373
-#: panels/user-accounts/cc-user-panel.c:1492
+#: panels/user-accounts/cc-user-panel.c:1378
+#: panels/user-accounts/cc-user-panel.c:1489
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7555,7 +7652,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1538
+#: panels/user-accounts/cc-user-panel.c:1535
 msgid "Unlock to Add Users and Change Settings"
 msgstr "שחרור להוספת משתמשים ולשינוי הגדרות"
 
@@ -7603,32 +7700,32 @@ msgstr "_בקרת הורים"
 msgid "Open the Parental Controls application."
 msgstr "פתיחת יישום בקרת הורים."
 
-#: panels/user-accounts/cc-user-panel.ui:345
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Authentication & Login"
 msgstr "אימות והתחברות"
 
-#: panels/user-accounts/cc-user-panel.ui:388
+#: panels/user-accounts/cc-user-panel.ui:390
 msgid "_Fingerprint Login"
 msgstr "כניסה באמצעות _טביעת אצבע"
 
-#: panels/user-accounts/cc-user-panel.ui:413
+#: panels/user-accounts/cc-user-panel.ui:415
 msgid "A_utomatic Login"
 msgstr "כניסה _אוטומטית"
 
-#: panels/user-accounts/cc-user-panel.ui:427
+#: panels/user-accounts/cc-user-panel.ui:429
 msgid "Account Activity"
 msgstr "פעילות בחשבון"
 
-#: panels/user-accounts/cc-user-panel.ui:458
+#: panels/user-accounts/cc-user-panel.ui:460
 msgid "Remove User…"
 msgstr "הסרת משתמש…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:499
+#: panels/user-accounts/cc-user-panel.ui:501
 msgid "No Users Found"
 msgstr "לא נמצאו משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:509
+#: panels/user-accounts/cc-user-panel.ui:511
 msgid "Unlock to add a user account."
 msgstr "שחרור על מנת להוסיף משתמש."
 
@@ -7642,8 +7739,13 @@ msgstr "הוספה או הסרה של משתמשים והחלפת הססמה ש�
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:20
-msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
-msgstr "כניסה;שם;טביעת אצבע;תמונה אישית;לוגו;פרצוף;פנים;ססמה;"
+msgid ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen Time;"
+"App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+msgstr ""
+"כניסה;שם משתמש;שם;טביעת אצבע;טביעות אצבע;תמונת משתמש;תמונה ייצוגית;לוגו;פנים;"
+"ססמה;סיסמה;סיסמא;ססמא;בקרת הורים;זמן מסך;מגבלות יישומים;הגבלות;מגבלות אינטרנט;"
+"הגבלות אינטרנט;שימוש;מגבלת שימוש;הגבלת שימוש;ילד;ילדים;ילדות;ילדה;בן;בת;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -7708,7 +7810,7 @@ msgstr "כדאי לנסות להימנע משימוש בשם שלך בססמה."
 #: panels/user-accounts/pw-utils.c:104
 msgctxt "Password hint"
 msgid "Try to avoid some of the words included in the password."
-msgstr "כדאי לנסות להימנע מכמה מהמילים הכלולים בססמה."
+msgstr "כדאי לנסות להימנע מכמה מהמילים הכלולות בססמה."
 
 #: panels/user-accounts/pw-utils.c:108
 msgctxt "Password hint"
@@ -7762,7 +7864,7 @@ msgstr ""
 #: panels/user-accounts/pw-utils.c:126
 msgctxt "Password hint"
 msgid "Try to avoid sequences like 1234 or abcd."
-msgstr "כדאי להימנע מרצפים כמו 1234 או abcd או אבגד."
+msgstr "כדאי להימנע מרצפים כמו 1234, abcd או אבגד."
 
 #: panels/user-accounts/pw-utils.c:128
 msgctxt "Password hint"
@@ -7804,7 +7906,7 @@ msgstr "הססמאות הישנה והחדשה דומות מדי"
 #: panels/user-accounts/run-passwd.c:507
 #, c-format
 msgid "The new password has already been used recently."
-msgstr "כבר נעשה שימוש לאחרונה בססמה החדשה."
+msgstr "הססמה החדשה כבר הייתה בשימוש לאחרונה."
 
 #: panels/user-accounts/run-passwd.c:510
 #, c-format
@@ -7826,7 +7928,7 @@ msgstr "ססמתך הוחלפה מאז שביצעת אימות לראשונה!"
 msgid "The new password does not contain enough different characters"
 msgstr "הססמה החדשה לא מכילה מספיק תווים השונים זה מזה"
 
-#: panels/user-accounts/run-passwd.c:526
+#: panels/user-accounts/run-passwd.c:526 panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "שגיאה בלתי ידועה"
@@ -7884,12 +7986,12 @@ msgstr "זוהתה לחיצה שגויה, הפעולה תתחיל מההתחלה
 #: panels/wacom/cc-wacom-button-row.c:244
 #, c-format
 msgid "Button %d"
-msgstr "לחצן %d"
+msgstr "כפתור %d"
 
 #: panels/wacom/cc-wacom-button-row.h:34
 msgctxt "Wacom action-type"
 msgid "Application defined"
-msgstr "הגדרת יישום"
+msgstr "יישום מוגדר"
 
 #: panels/wacom/cc-wacom-button-row.h:35
 msgctxt "Wacom action-type"
@@ -8068,6 +8170,447 @@ msgstr "הלחצן הנמוך יותר"
 msgid "Tip Pressure Feel"
 msgstr "תחושת לחץ החוד"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+msgid "Access Points"
+msgstr "נקודות גישה"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+msgid "APN"
+msgstr "הגדרות גלישה"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "הפעולה בוטלה"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr "‫<b>שגיאה:</b> הגישה לשינוי ההגדרות נדחתה"
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "‫<b>שגיאה:</b> שגיאה בציוד התקשורת הסלולרית"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "לא רשום"
+
+#: panels/wwan/cc-wwan-details-dialog.c:85
+msgid "Registered"
+msgstr "רשום"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "ניוד"
+
+#: panels/wwan/cc-wwan-details-dialog.c:93
+msgid "Searching"
+msgstr "בחיפוש"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr "נדחה"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+msgid "Modem Details"
+msgstr "פרטי המודם"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+msgid "Modem Status"
+msgstr "מצב המודם"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr "מפעילה"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+msgid "Network Type"
+msgstr "סוג הרשת"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+msgid "Network Status"
+msgstr "מצב הרשת"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+msgid "Own Number"
+msgstr "המספר העצמי"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+msgid "Device Details"
+msgstr "פרטי ההתקן"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+msgid "Firmware Version"
+msgstr "גרסת קושחה"
+
+#: panels/wwan/cc-wwan-device.c:988
+msgid "2G Only"
+msgstr "‫2G בלבד"
+
+#: panels/wwan/cc-wwan-device.c:991
+msgid "3G Only"
+msgstr "‫3G בלבד"
+
+#: panels/wwan/cc-wwan-device.c:994
+msgid "4G Only"
+msgstr "‫4G בלבד"
+
+#: panels/wwan/cc-wwan-device.c:1003
+msgid "2G, 3G, 4G (Preferred)"
+msgstr "‫2G,‏ 3G,‏ 4G (עדיפה)"
+
+#: panels/wwan/cc-wwan-device.c:1005
+msgid "2G, 3G (Preferred), 4G"
+msgstr "‫2G,‏ 3G (עדיפה), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid "2G (Preferred), 3G, 4G"
+msgstr "‫2G (עדיפה), 3G,‏ 4G"
+
+#: panels/wwan/cc-wwan-device.c:1009
+msgid "2G, 3G, 4G"
+msgstr "‫2G,‏ 3G,‏ 4G"
+
+#: panels/wwan/cc-wwan-device.c:1015
+msgid "3G, 4G (Preferred)"
+msgstr "‫3G,‏ 4G (עדיפה)"
+
+#: panels/wwan/cc-wwan-device.c:1017
+msgid "3G (Preferred), 4G"
+msgstr "‫3G (עדיפה), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1019
+msgid "3G, 4G"
+msgstr "‫3G,‏ 4G"
+
+#: panels/wwan/cc-wwan-device.c:1025
+msgid "2G, 4G (Preferred)"
+msgstr "‫2G,‏ 4G (עדיפה)"
+
+#: panels/wwan/cc-wwan-device.c:1027
+msgid "2G (Preferred), 4G"
+msgstr "‫2G (עדיפה), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1029
+msgid "2G, 4G"
+msgstr "‫2G,‏ 4G"
+
+#: panels/wwan/cc-wwan-device.c:1035
+msgid "2G, 3G (Preferred)"
+msgstr "‫2G,‏ 3G (עדיפה)"
+
+#: panels/wwan/cc-wwan-device.c:1037
+msgid "2G (Preferred), 3G"
+msgstr "‫2G (עדיפה), 3G"
+
+#: panels/wwan/cc-wwan-device.c:1039
+msgid "2G, 3G"
+msgstr "‫2G,‏ 3G"
+
+#: panels/wwan/cc-wwan-device.c:1043
+msgctxt "Network mode"
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: panels/wwan/cc-wwan-device-page.c:188
+msgid "Unlock SIM card"
+msgstr "שחרור כרטיס SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
+msgid "Unlock"
+msgstr "שחרור"
+
+#: panels/wwan/cc-wwan-device-page.c:194
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr "נא לספק קוד PIN עבור SIM %d"
+
+#: panels/wwan/cc-wwan-device-page.c:195
+msgid "Enter PIN to unlock your SIM card"
+msgstr "נא להקליד PIN לשחרור כרטיס ה־SIM שלך"
+
+#: panels/wwan/cc-wwan-device-page.c:199
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr "נא לספק קוד PUK ל־SIM %d"
+
+#: panels/wwan/cc-wwan-device-page.c:200
+msgid "Enter PUK to unlock your SIM card"
+msgstr "נא להקליד PUK לשחרור כרטיס ה־SIM שלך"
+
+#: panels/wwan/cc-wwan-device-page.c:218
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] "הוקלדה ססמה שגויה. נותר לך עוד ניסיון אחד"
+msgstr[1] "הוקלדה ססמה שגויה. נותרו לך עוד שני ניסיונות"
+msgstr[2] "הוקלדה ססמה שגויה. נותרו לך עוד %1$u ניסיונות"
+msgstr[3] "הוקלדה ססמה שגויה. נותרו לך עוד %1$u ניסיונות"
+
+#: panels/wwan/cc-wwan-device-page.c:221
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "נותר לך ניסיון אחד"
+msgstr[1] "נותרו לך שני ניסיונות"
+msgstr[2] "נותרו לך %u ניסיונות"
+msgstr[3] "נותרו לך %u ניסיונות"
+
+#: panels/wwan/cc-wwan-device-page.c:226
+msgid "Wrong password entered."
+msgstr "הססמה שהוקלדה שגויה."
+
+#: panels/wwan/cc-wwan-device-page.c:271
+msgid "PUK code should be an 8 digit number"
+msgstr "קוד ה־PUK אמור להיות באורך 8 ספרות"
+
+#: panels/wwan/cc-wwan-device-page.c:295
+msgid "Enter New PIN"
+msgstr "נא להקליד PIN חדש"
+
+#: panels/wwan/cc-wwan-device-page.c:299
+msgid "PIN code should be a 4-8 digit number"
+msgstr "קוד ה־PIN אמור להיות מספר באורך 4-8 ספרות"
+
+#: panels/wwan/cc-wwan-device-page.c:317
+msgid "Unlocking..."
+msgstr "מתבצע שחרור…"
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "אין SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr "נא להכניס כרטיס SIM כדי להשתמש במודם הזה"
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "‫SIM נעול"
+
+#: panels/wwan/cc-wwan-device-page.ui:139
+msgid "_Mobile Data"
+msgstr "_נתונים סלולריים"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr "גישה לנתונים דרך רשת סלולרית"
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "_ניוד נתונים"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "להשתמש ברשת סלולרית בעת ניוד"
+
+#: panels/wwan/cc-wwan-device-page.ui:177
+msgid "_Network Mode"
+msgstr "מ_צב רשת"
+
+#: panels/wwan/cc-wwan-device-page.ui:187
+msgid "N_etwork"
+msgstr "_רשת"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+msgid "Advanced"
+msgstr "מתקדם"
+
+#: panels/wwan/cc-wwan-device-page.ui:225
+msgid "_Access Point Names"
+msgstr "_שמות נקודות גישה"
+
+#: panels/wwan/cc-wwan-device-page.ui:235
+msgid "_SIM Lock"
+msgstr "_נעילת SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "נעילת SIM ב־PIN"
+
+#: panels/wwan/cc-wwan-device-page.ui:246
+msgid "M_odem Details"
+msgstr "_פרטי מודם"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+msgid "Phone failure"
+msgstr "שגיאת טלפון"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+msgid "No connection to phone"
+msgstr "אין חיבור לטלפון"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "הפעולה אסורה"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "הפעולה אינה נתמכת"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+msgid "SIM not inserted"
+msgstr "לא הוכנס SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+msgid "SIM PIN required"
+msgstr "נדרש PIN ל־SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+msgid "SIM PUK required"
+msgstr "נדרש PUK ל־SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "כשל ב־SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "ה־SIM עסוק"
+
+#: panels/wwan/cc-wwan-errors-private.h:54
+msgid "Incorrect password"
+msgstr "ססמה שגויה"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+msgid "SIM PIN2 required"
+msgstr "נדרש PIN2 ל־SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+msgid "SIM PUK2 required"
+msgstr "נדרש PUK2 ל־SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+msgid "Not found"
+msgstr "לא נמצא"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+msgid "No network service"
+msgstr "אין שירות רשת"
+
+#: panels/wwan/cc-wwan-errors-private.h:62
+msgid "Network timeout"
+msgstr "תום זמן המתנה לרשת"
+
+#: panels/wwan/cc-wwan-errors-private.h:75
+msgid "GPRS services not allowed"
+msgstr "שירותי GPRS אסורים"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr "ניוד אסור באזור זה"
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "שגיאת GPRS לא ידועה"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+msgid "Action Cancelled"
+msgstr "הפעולה בוטלה"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+msgid "Access denied"
+msgstr "הגישה נדחתה"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+msgid "Unknown Error"
+msgstr "שגיאה לא ידועה"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+msgid "Network Mode"
+msgstr "מצב רשת"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "ה_גדרה"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "סגירה"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+msgid "_Automatic"
+msgstr "_אוטומטי"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+msgid "Choose Network"
+msgstr "בחירת רשת"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "רענון ספקי רשת"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "SIM %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+msgid "No WWAN Adapter Found"
+msgstr "לא נמצא מתאם לרשת אלחוטית מרחבית"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "כדאי לוודא כי יש לך התקן רשת אלחוטית מרחבית/סלולרי"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "‏בלוטות' מושבת כאשר מצב טיסה פועל"
+
+#: panels/wwan/cc-wwan-panel.ui:163
+msgid "_Turn off Airplane Mode"
+msgstr "_כיבוי מצב טיסה"
+
+#: panels/wwan/cc-wwan-panel.ui:210
+msgid "Data Connection"
+msgstr "חיבור נתונים"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+msgid "SIM card used for internet"
+msgstr "כרטיס SIM משמש לאינטרנט"
+
+#: panels/wwan/cc-wwan-panel.ui:332
+msgid "Enable Mobile Network"
+msgstr "הפעלת רשת סלולרית"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+msgid "SIM Lock"
+msgstr "נעילת SIM"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "ה_בא"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "_נעילת SIM ב־PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+msgid "Change PIN"
+msgstr "החלפת PIN"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr "נא להקליד את ה־PIN הנוכחי כדי לשנות את הגדרות נעילת ה־SIM"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+msgid "Mobile Network"
+msgstr "רשת סלולרית"
+
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+msgid "Configure Telephony and mobile data connections"
+msgstr "הגדרת טלפוניה וחיבורי נתונים סלולריים"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr ""
+"סלולרי;אלחוטי;סים;SIM;נייד;תקשורת;מובייל;פלאפון;סלקום;פרטנר;רמי לוי;גולן;טלקום;"
+"טלפוניה;חיוג;טלפון;"
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "הגדרות GNOME"
@@ -8086,23 +8629,23 @@ msgstr "מיזם GNOME"
 
 #: shell/cc-application.c:59
 msgid "Display version number"
-msgstr "Display version number"
+msgstr "הצגת מספר הגרסה"
 
 #: shell/cc-application.c:60
 msgid "Enable verbose mode"
-msgstr "Enable verbose mode"
+msgstr "הפעלת מצב מפורט"
 
 #: shell/cc-application.c:61
 msgid "Search for the string"
-msgstr "Search for the string"
+msgstr "חיפוש אחר מחרוזת"
 
 #: shell/cc-application.c:62
 msgid "List possible panel names and exit"
-msgstr "List possible panel names and exit"
+msgstr "הצגת שמות הלוחות האפשריים ואז לצאת"
 
 #: shell/cc-application.c:63
 msgid "Panel to display"
-msgstr "Panel to display"
+msgstr "לוח להצגה"
 
 #: shell/cc-application.c:63
 msgid "[PANEL] [ARGUMENT…]"
@@ -8112,9 +8655,9 @@ msgstr "[PANEL] [ARGUMENT…]"
 msgid "Privacy"
 msgstr "פרטיות"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
-msgstr "Available panels:"
+msgstr "לוחות זמינים:"
 
 #: shell/cc-window.ui:136
 msgid "All Settings"
@@ -8168,7 +8711,7 @@ msgstr "לוחות"
 #: shell/help-overlay.ui:41 shell/help-overlay.ui:49
 msgctxt "shortcut window"
 msgid "Go back to previous panel"
-msgstr "לחזור חזרה ללוח הקודם"
+msgstr "חזרה ללוח הקודם"
 
 #: shell/help-overlay.ui:62
 msgctxt "shortcut window"
@@ -8221,6 +8764,13 @@ msgstr[3] "‏‫%u ערוצי קלט"
 msgid "System Sounds"
 msgstr "צלילי מערכת"
 
+#~ msgid ""
+#~ "Select your display language, formats, keyboard layouts and input sources"
+#~ msgstr "ניתן לבחור את שפת התצוגה, התבניות, פריסות המקלדת ומקורות הקלט"
+
+#~ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+#~ msgstr "כניסה;שם;טביעת אצבע;תמונה אישית;לוגו;פרצוף;פנים;ססמה;"
+
 #~ msgid "Keyboard Shortcut"
 #~ msgstr "צירופי מקשים"
 
@@ -8247,9 +8797,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Wi-Fi can be turned off to save power."
 #~ msgstr "ניתן לכבות את הרשת האל־חוטי על מנת לשמור סוללה."
-
-#~ msgid "_Mobile Broadband"
-#~ msgstr "רשת ניידת בפס _רחב"
 
 #~ msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
 #~ msgstr "ניתן לכבות פס רחב נייד (‏‏LTE, 4G, 3G וכו׳) על מנת לשמור סוללה."
@@ -8392,9 +8939,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Read system and application logs"
 #~ msgstr "קריאת יומני המערכת והיישומים"
-
-#~ msgid "Access LXD service"
-#~ msgstr "גישה לשירות LXD"
 
 #~ msgid "access the media-hub service"
 #~ msgstr "גישה לשירותי MediaHub"
@@ -8791,9 +9335,6 @@ msgstr "צלילי מערכת"
 #~ "connect"
 #~ msgstr "הסרת כל הפרטים הקשורים לרשת זו ולא לנסות להתחבר אליה אוטומטית"
 
-#~ msgid "My Home Network"
-#~ msgstr "הרשת הביתית שלי"
-
 #~ msgid "Net­work"
 #~ msgstr "רשת"
 
@@ -8900,9 +9441,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Infrastructure"
 #~ msgstr "תשתית"
-
-#~ msgid "Not connected"
-#~ msgstr "לא מחובר"
 
 #~ msgid "2"
 #~ msgstr "2"
@@ -9529,9 +10067,6 @@ msgstr "צלילי מערכת"
 #~ msgid "Time _Zone"
 #~ msgstr "אזור _זמן"
 
-#~ msgid "Close"
-#~ msgstr "סגירה"
-
 #~ msgid "Resume Printing"
 #~ msgstr "המשך פעולת מדפסת"
 
@@ -9858,9 +10393,6 @@ msgstr "צלילי מערכת"
 #~ msgid "_City:"
 #~ msgstr "_עיר"
 
-#~ msgid "_Network Time"
-#~ msgstr "_זמן הרשת"
-
 #~ msgid "Set the time one hour ahead."
 #~ msgstr "קידום הזמן בשעה אחת."
 
@@ -9890,12 +10422,6 @@ msgstr "צלילי מערכת"
 #~ msgctxt "display panel, rotation"
 #~ msgid "180 Degrees"
 #~ msgstr "180 מעלות"
-
-#~ msgid "Monitor"
-#~ msgstr "צג"
-
-#~ msgid "Drag to change primary display."
-#~ msgstr "יש לגרור כדי לשנות את התצוגה הראשית."
 
 #~ msgid ""
 #~ "Select a monitor to change its properties; drag it to rearrange its "
@@ -10334,9 +10860,6 @@ msgstr "צלילי מערכת"
 #~ msgid "Region and Language"
 #~ msgstr "אזור ושפה"
 
-#~ msgid "Select a display language"
-#~ msgstr "נא לבחור בשפת תצוגה"
-
 #~ msgid "Add Language"
 #~ msgstr "הוספת שפה"
 
@@ -10445,9 +10968,6 @@ msgstr "צלילי מערכת"
 #~ msgid "Remove a device"
 #~ msgstr "הסרת התקן"
 
-#~ msgid "Unspecified"
-#~ msgstr "לא צוין"
-
 #~ msgid "Out of range"
 #~ msgstr "מחוץ לטווח"
 
@@ -10521,9 +11041,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Locations…"
 #~ msgstr "מקומות…"
-
-#~ msgid "Lock"
-#~ msgstr "נעילה"
 
 #~ msgid "No user with the name '%s' exists."
 #~ msgstr "לא קיים משתמש בשם '%s'."
@@ -10714,9 +11231,6 @@ msgstr "צלילי מערכת"
 #~ msgctxt "printer type"
 #~ msgid "Network"
 #~ msgstr "רשת"
-
-#~ msgid "Device types"
-#~ msgstr "סוגי התקנים"
 
 #~ msgid "Automatic configuration"
 #~ msgstr "תצורה אוטומטית"
@@ -10945,9 +11459,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Always"
 #~ msgstr "תמיד"
-
-#~ msgid "Centered"
-#~ msgstr "ממורכז"
 
 #~ msgid "Color and Opacity"
 #~ msgstr "צבע ואטימות"
@@ -11180,9 +11691,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Use previous window's layout in new windows"
 #~ msgstr "יש להשתמש בפריסת החלון הקודם בחלונות חדשים"
-
-#~ msgid "Locked"
-#~ msgstr "נעול"
 
 #~ msgid ""
 #~ "Dialog is unlocked.\n"
@@ -11444,9 +11952,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Show list of users"
 #~ msgstr "הצגת רשימת משתמשים"
-
-#~ msgid "Show password hints"
-#~ msgstr "הצגת רמזים לססמה"
 
 #~ msgid "_Pointer can be controlled using the keypad"
 #~ msgstr "_ניתן לשלוט בסמן העכבר בעזרת המקלדת"
