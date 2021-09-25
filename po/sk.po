@@ -6,24 +6,24 @@
 # Peter Tuhársky <tuharsky@misbb.sk>, 2007.
 # Pavol Šimo <palo.simo@gmail.com>, 2007-2011.
 # Pavol Klačanský <pavol@klacansky.com>, 2012, 2013.
-# Dušan Kazik <prescott66@gmail.com>, 2013-2020.
+# Dušan Kazik <prescott66@gmail.com>, 2013-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-06-11 06:29+0000\n"
-"PO-Revision-Date: 2021-06-11 08:37+0200\n"
+"POT-Creation-Date: 2021-09-24 15:42+0000\n"
+"PO-Revision-Date: 2021-09-25 11:16+0200\n"
 "Last-Translator: Dušan Kazik <prescott66@gmail.com>\n"
 "Language-Team: Slovak <gnome-sk-list@gnome.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0\n"
 "X-Launchpad-Export-Date: 2012-10-06 09:48+0000\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -56,7 +56,8 @@ msgstr "Plný prístup k adresáru /dev"
 # desktop entry name
 #: panels/applications/cc-applications-panel.c:833
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:288
+#: panels/network/network-mobile.ui:288 panels/wwan/cc-wwan-device-page.ui:114
+#: panels/wwan/cc-wwan-network-dialog.ui:4
 msgid "Network"
 msgstr "Sieť"
 
@@ -219,8 +220,9 @@ msgstr "Kamera"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:85
 #: panels/keyboard/cc-xkb-modifier-dialog.c:353
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
-#: panels/user-accounts/cc-user-panel.c:843
+#: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Zakázané"
@@ -238,7 +240,7 @@ msgid "Location Services"
 msgstr "Služby umiestnenia"
 
 #: panels/applications/cc-applications-panel.ui:157
-#: panels/applications/cc-applications-panel.ui:499
+#: panels/applications/cc-applications-panel.ui:500
 msgid "Built-in Permissions"
 msgstr "Zabudované oprávnenia"
 
@@ -318,26 +320,26 @@ msgid "How much resources this application is using."
 msgstr "Koľko prostriedkov táto aplikácia využíva."
 
 #: panels/applications/cc-applications-panel.ui:391
-#: panels/applications/cc-applications-panel.ui:536
+#: panels/applications/cc-applications-panel.ui:537
 msgid "Storage"
 msgstr "Úložisko"
 
 # GtkLabel label
-#: panels/applications/cc-applications-panel.ui:423
+#: panels/applications/cc-applications-panel.ui:424
 msgid "Open in Software"
 msgstr "Otvoriť v aplikácii Softvér"
 
-#: panels/applications/cc-applications-panel.ui:473 shell/cc-panel-list.ui:121
+#: panels/applications/cc-applications-panel.ui:474 shell/cc-panel-list.ui:121
 msgid "No results found"
 msgstr "Nenašli sa žiadne výsledky"
 
-#: panels/applications/cc-applications-panel.ui:484
+#: panels/applications/cc-applications-panel.ui:485
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:177
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "Skúste vyhľadať niečo iné"
 
-#: panels/applications/cc-applications-panel.ui:554
+#: panels/applications/cc-applications-panel.ui:555
 msgid ""
 "How much disk space this application is occupying with app data and caches."
 msgstr ""
@@ -345,23 +347,23 @@ msgstr ""
 "vyrovnávacími pamäťami."
 
 # tab
-#: panels/applications/cc-applications-panel.ui:563
+#: panels/applications/cc-applications-panel.ui:564
 msgid "Application"
 msgstr "Aplikácia"
 
-#: panels/applications/cc-applications-panel.ui:569
+#: panels/applications/cc-applications-panel.ui:570
 msgid "Data"
 msgstr "Údaje"
 
-#: panels/applications/cc-applications-panel.ui:575
+#: panels/applications/cc-applications-panel.ui:576
 msgid "Cache"
 msgstr "Vyrovnávacia pamäť"
 
-#: panels/applications/cc-applications-panel.ui:581
+#: panels/applications/cc-applications-panel.ui:582
 msgid "<b>Total</b>"
 msgstr "<b>Celkom</b>"
 
-#: panels/applications/cc-applications-panel.ui:598
+#: panels/applications/cc-applications-panel.ui:599
 msgid "Clear Cache…"
 msgstr "Vymazať vyrovnávaciu pamäť…"
 
@@ -385,7 +387,7 @@ msgstr "Výber obrázka"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
-#: panels/display/cc-display-panel.c:1003
+#: panels/display/cc-display-panel.c:1006
 #: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
@@ -404,9 +406,12 @@ msgstr "Výber obrázka"
 #: panels/user-accounts/cc-avatar-chooser.c:228
 #: panels/user-accounts/cc-fingerprint-dialog.ui:36
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:633
-#: panels/user-accounts/cc-user-panel.c:651
+#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
+#: panels/wwan/cc-wwan-mode-dialog.ui:35
+#: panels/wwan/cc-wwan-network-dialog.ui:166
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:297
 msgid "_Cancel"
 msgstr "_Zrušiť"
 
@@ -505,7 +510,7 @@ msgstr "Vypnite prepínač režimu v lietadle na povolenie rozhrania Bluetooth."
 # desktop entry name
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
-#: panels/printers/pp-new-printer-dialog.c:1595
+#: panels/printers/pp-new-printer-dialog.c:1392
 msgid "Bluetooth"
 msgstr "Bluetooth"
 
@@ -801,6 +806,7 @@ msgstr "Uloženie profilu"
 
 #: panels/color/cc-color-panel.c:887
 #: panels/network/connection-editor/vpn-helpers.c:300
+#: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Uložiť"
 
@@ -1017,7 +1023,7 @@ msgstr "Každé zariadenie potrebuje na správu farieb aktuálny profil farieb."
 # GtkLinkButton label
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:810
-#: panels/diagnostics/cc-diagnostics-panel.c:143
+#: panels/diagnostics/cc-diagnostics-panel.c:144
 msgid "Learn more"
 msgstr "Zistiť viac"
 
@@ -1373,7 +1379,7 @@ msgstr[1] "%d hodina"
 msgstr[2] "%d hodiny"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:1205
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:973
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1697,7 +1703,7 @@ msgstr ""
 "uprednostňované;médium;médiá;nosič,nosiče;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:145
+#: panels/diagnostics/cc-diagnostics-panel.c:146
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -1736,20 +1742,20 @@ msgstr ""
 "index;meno;názov;sieť;identita;súkromie;"
 
 # GtkButton label
-#: panels/display/cc-display-panel.c:1014
+#: panels/display/cc-display-panel.c:1017
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Použiť"
 
-#: panels/display/cc-display-panel.c:1035
+#: panels/display/cc-display-panel.c:1038
 msgid "Apply Changes?"
 msgstr "Použiť zmeny?"
 
-#: panels/display/cc-display-panel.c:1040
+#: panels/display/cc-display-panel.c:1043
 msgid "Changes Cannot be Applied"
 msgstr "Zmeny sa nedajú použiť"
 
-#: panels/display/cc-display-panel.c:1041
+#: panels/display/cc-display-panel.c:1044
 msgid "This could be due to hardware limitations."
 msgstr "Môže to byť spôsobené obmedzeniami hardvéru."
 
@@ -1820,27 +1826,27 @@ msgstr "Displeje"
 msgid "Night Light"
 msgstr "Nočné osvetlenie"
 
-#: panels/display/cc-display-settings.c:103
+#: panels/display/cc-display-settings.c:107
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Na šírku"
 
-#: panels/display/cc-display-settings.c:106
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Na výšku doprava"
 
-#: panels/display/cc-display-settings.c:109
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Na výšku doľava"
 
-#: panels/display/cc-display-settings.c:112
+#: panels/display/cc-display-settings.c:116
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Na šírku (obrátene)"
 
-#: panels/display/cc-display-settings.c:186
+#: panels/display/cc-display-settings.c:190
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1864,6 +1870,7 @@ msgid "Adjust for TV"
 msgstr "Úprava pre TV"
 
 #: panels/display/cc-display-settings.ui:59
+#: panels/display/cc-display-settings.ui:76
 msgctxt "display setting"
 msgid "Scale"
 msgstr "Mierka"
@@ -1968,11 +1975,11 @@ msgstr ""
 
 # * https://bugzilla.gnome.org/show_bug.cgi?id=695517
 # grafika, AP typ
-#: panels/info-overview/cc-info-overview-panel.c:414
-#: panels/info-overview/cc-info-overview-panel.c:429
-#: panels/info-overview/cc-info-overview-panel.c:441
-#: panels/info-overview/cc-info-overview-panel.c:487
-#: panels/info-overview/cc-info-overview-panel.c:517
+#: panels/info-overview/cc-info-overview-panel.c:413
+#: panels/info-overview/cc-info-overview-panel.c:437
+#: panels/info-overview/cc-info-overview-panel.c:483
+#: panels/info-overview/cc-info-overview-panel.c:513
+#: panels/wwan/cc-wwan-details-dialog.c:101
 msgid "Unknown"
 msgstr "Neznámy"
 
@@ -1980,36 +1987,36 @@ msgstr "Neznámy"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:449
+#: panels/info-overview/cc-info-overview-panel.c:445
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; ID zostavy: %s"
 
 # Typ OS
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:464
+#: panels/info-overview/cc-info-overview-panel.c:460
 #, c-format
 msgid "64-bit"
 msgstr "64-bitový"
 
 # Typ OS
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:467
+#: panels/info-overview/cc-info-overview-panel.c:463
 #, c-format
 msgid "32-bit"
 msgstr "32-bitový"
 
-#: panels/info-overview/cc-info-overview-panel.c:724
+#: panels/info-overview/cc-info-overview-panel.c:720
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:728
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "Wayland"
 msgstr "Wayland"
 
 # * https://bugzilla.gnome.org/show_bug.cgi?id=695517
 # grafika, AP typ
-#: panels/info-overview/cc-info-overview-panel.c:730
+#: panels/info-overview/cc-info-overview-panel.c:726
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Neznámy"
@@ -2181,7 +2188,7 @@ msgstr "Vysunúť"
 
 # 1. KeyListEntries name; tab; tab;
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:542
+#: panels/universal-access/cc-ua-panel.ui:580
 msgid "Typing"
 msgstr "Písanie"
 
@@ -2557,6 +2564,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "Zrušiť"
 
@@ -2589,7 +2597,8 @@ msgstr "Nenašla sa žiadna klávesová skratka"
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:211
 #: panels/region/cc-format-chooser.ui:48
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wacom/wacom-stylus-page.ui:37 shell/cc-window.ui:230
+#: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: shell/cc-window.ui:230
 msgid "Back"
 msgstr "Späť"
 
@@ -2645,6 +2654,7 @@ msgstr ""
 # tree view column
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:135
 #: panels/printers/pp-details-dialog.ui:40
+#: panels/wwan/cc-wwan-apn-dialog.ui:132
 msgid "Name"
 msgstr "Názov"
 
@@ -2671,6 +2681,7 @@ msgstr "Žiadne"
 
 # button atk
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:296
+#: panels/wwan/cc-wwan-apn-dialog.ui:44
 msgid "Add"
 msgstr "Pridať"
 
@@ -2695,7 +2706,11 @@ msgstr "Klávesnica"
 
 # desktop entry comment
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-msgid "View and change keyboard shortcuts and set your typing preferences"
+#, fuzzy
+#| msgid "View and change keyboard shortcuts and set your typing preferences"
+msgid ""
+"Change keyboard shortcuts and set your typing preferences, keyboard layouts "
+"and input sources"
 msgstr ""
 "Zobrazuje a mení klávesové skratky a tiež nastavuje vami preferované voľby "
 "písania"
@@ -3003,6 +3018,7 @@ msgstr "Ochráňte vaše konverzácie"
 # GtkLabel label
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:37
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "General"
 msgstr "Všeobecné"
 
@@ -3131,12 +3147,99 @@ msgstr ""
 "Trackpad;Ukazovateľ;Kurzor;Klik;Dotyk;Dvojité;Tlačidlo;Trackball;Rolovanie;"
 "Posúvanie;"
 
-#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:307
+#: panels/multitasking/cc-multitasking-panel.ui:56
+msgid "_Hot Corner"
+msgstr "Aktívny _roh"
+
+#: panels/multitasking/cc-multitasking-panel.ui:57
+msgid "Touch the top-left corner to open the Activities Overview."
+msgstr ""
+
+#: panels/multitasking/cc-multitasking-panel.ui:84
+msgid "_Active Screen Edges"
+msgstr "_Aktívne rohy obrazovky"
+
+#: panels/multitasking/cc-multitasking-panel.ui:85
+msgid ""
+"Drag windows against the top, left, and right screen edges to resize them."
+msgstr ""
+
+#: panels/multitasking/cc-multitasking-panel.ui:114
+#| msgid "Colorspace: "
+msgid "Workspaces"
+msgstr "Pracovné priestory"
+
+#: panels/multitasking/cc-multitasking-panel.ui:139
+msgid "_Dynamic workspaces"
+msgstr "_Dynamické pracovné priestory"
+
+# GtkLabel label
+#: panels/multitasking/cc-multitasking-panel.ui:140
+#, fuzzy
+#| msgid "Automatically Delete Temporary _Files"
+msgid "Automatically removes empty workspaces."
+msgstr "Automaticky odstrániť Dočasné _súbory"
+
+#: panels/multitasking/cc-multitasking-panel.ui:158
+msgid "_Fixed number of workspaces"
+msgstr "_Pevný počet pracovných priestorov"
+
+#: panels/multitasking/cc-multitasking-panel.ui:159
+msgid "Specify a number of permanent workspaces."
+msgstr ""
+
+#: panels/multitasking/cc-multitasking-panel.ui:179
+msgid "_Number of Workspaces"
+msgstr "_Počet pracovných priestorov"
+
+#: panels/multitasking/cc-multitasking-panel.ui:200
+#| msgid "%s Monitor"
+msgid "Multi-Monitor"
+msgstr "Viacero monitorov"
+
+#: panels/multitasking/cc-multitasking-panel.ui:225
+msgid "Workspaces on _primary display only"
+msgstr "Pracovné priestory iba na _hlavnom displeji"
+
+#: panels/multitasking/cc-multitasking-panel.ui:252
+msgid "Workspaces on all d_isplays"
+msgstr "Pracovné priestory na všetkých _displejoch"
+
+# tab
+#: panels/multitasking/cc-multitasking-panel.ui:282
+#, fuzzy
+#| msgctxt "Wacom action-type"
+#| msgid "Application defined"
+msgid "Application Switching"
+msgstr "Definované aplikáciou"
+
+#: panels/multitasking/cc-multitasking-panel.ui:307
+msgid "Include applications from all _workspaces"
+msgstr ""
+
+#: panels/multitasking/cc-multitasking-panel.ui:325
+msgid "Include applications from the _current workspace only"
+msgstr ""
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
+msgid "Multitasking"
+msgstr ""
+
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
+msgid "Manage preferences for productivity and multitasking"
+msgstr ""
+
+#. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
+msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
+msgstr ""
+
+#: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 "Ale nie. Niekde nastala chyba. Prosím, kontaktuje vášho dodávateľa softvéru."
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:692
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager musí byť spustený."
 
@@ -3155,29 +3258,29 @@ msgid "Not set up"
 msgstr "Nenastavené"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:208
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:268
+#: panels/network/cc-wifi-connection-row.c:262
 msgid "Insecure network (WEP)"
 msgstr "Nezabezpečená sieť (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Zabezpečená sieť (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA2)"
 msgstr "Zabezpečená sieť (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:277
 msgid "Secure network (WPA3)"
 msgstr "Zabezpečená sieť (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:288
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "Zabezpečená sieť"
 
@@ -3187,7 +3290,7 @@ msgid "Connected"
 msgstr "Pripojené"
 
 # button atk;
-#: panels/network/cc-wifi-connection-row.ui:100
+#: panels/network/cc-wifi-connection-row.ui:102
 #: panels/network/net-device-ethernet.c:333
 #: panels/network/network-bluetooth.ui:76
 #: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
@@ -3242,6 +3345,7 @@ msgstr "Názov siete"
 #: panels/printers/new-printer-dialog.ui:389
 #: panels/printers/pp-jobs-dialog.ui:70
 #: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/wwan/cc-wwan-apn-dialog.ui:214
 msgid "Password"
 msgstr "Heslo"
 
@@ -3294,7 +3398,7 @@ msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "Uistite sa, že máte Wi-Fi adaptér pripojený a zapnutý"
 
 # label
-#: panels/network/cc-wifi-panel.ui:134
+#: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
 msgstr "Režim v lietadle zapnutý"
 
@@ -3632,6 +3736,7 @@ msgstr "Osobný WPA3"
 
 # GtkLabel label
 #: panels/network/connection-editor/details-page.ui:18
+#: panels/wwan/cc-wwan-details-dialog.ui:105
 msgid "Signal Strength"
 msgstr "Signál"
 
@@ -4035,20 +4140,20 @@ msgstr "Bezdrôtové zariadenie nepodporuje režim prístupového bodu"
 # * https://bugzilla.gnome.org/show_bug.cgi?id=708580
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1093 panels/power/cc-power-panel.c:1104
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
-#: panels/universal-access/cc-ua-panel.ui:300
-#: panels/universal-access/cc-ua-panel.ui:346
-#: panels/universal-access/cc-ua-panel.ui:392
-#: panels/universal-access/cc-ua-panel.ui:498
-#: panels/universal-access/cc-ua-panel.ui:651
-#: panels/universal-access/cc-ua-panel.ui:697
-#: panels/universal-access/cc-ua-panel.ui:743
-#: panels/universal-access/cc-ua-panel.ui:927
+#: panels/power/cc-power-panel.c:856 panels/power/cc-power-panel.c:867
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
+#: panels/universal-access/cc-ua-panel.ui:338
+#: panels/universal-access/cc-ua-panel.ui:384
+#: panels/universal-access/cc-ua-panel.ui:430
+#: panels/universal-access/cc-ua-panel.ui:536
+#: panels/universal-access/cc-ua-panel.ui:689
+#: panels/universal-access/cc-ua-panel.ui:735
+#: panels/universal-access/cc-ua-panel.ui:781
+#: panels/universal-access/cc-ua-panel.ui:965
 msgid "Off"
 msgstr "Vypnuté"
 
@@ -4085,6 +4190,7 @@ msgstr "Vypnúť zariadenie"
 
 # GtkLabel label
 #: panels/network/network-mobile.ui:29
+#: panels/wwan/cc-wwan-details-dialog.ui:286
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -4200,8 +4306,7 @@ msgid "Unmanaged"
 msgstr "Nespravované"
 
 #. TRANSLATORS: device status
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/network/panel-common.c:45 panels/user-accounts/cc-user-panel.c:928
+#: panels/network/panel-common.c:45
 msgid "Unavailable"
 msgstr "Nedostupné"
 
@@ -4427,7 +4532,7 @@ msgid "SIM Puk required"
 msgstr "Vyžadovaný kód Puk pre kartu SIM"
 
 #. TRANSLATORS: device status reason
-#: panels/network/panel-common.c:252
+#: panels/network/panel-common.c:252 panels/wwan/cc-wwan-errors-private.h:53
 msgid "SIM wrong"
 msgstr "Zlá karta SIM"
 
@@ -4564,7 +4669,7 @@ msgstr "_Používateľské meno"
 #: panels/sharing/cc-sharing-panel.ui:202
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:363
+#: panels/user-accounts/cc-user-panel.ui:365
 msgid "_Password"
 msgstr "_Heslo"
 
@@ -4940,12 +5045,12 @@ msgstr "Zobrazovať _obsah správ v uzamknutej obrazovke"
 
 #
 #: panels/notifications/cc-notifications-panel.c:260
-#: panels/power/cc-power-panel.c:1099 panels/power/cc-power-panel.c:1106
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:603
-#: panels/universal-access/cc-ua-panel.c:613
-#: panels/universal-access/cc-ua-panel.c:625
-#: panels/universal-access/cc-ua-panel.c:668
+#: panels/power/cc-power-panel.c:862 panels/power/cc-power-panel.c:869
+#: panels/universal-access/cc-ua-panel.c:331
+#: panels/universal-access/cc-ua-panel.c:612
+#: panels/universal-access/cc-ua-panel.c:622
+#: panels/universal-access/cc-ua-panel.c:634
+#: panels/universal-access/cc-ua-panel.c:677
 msgid "On"
 msgstr "Zapnuté"
 
@@ -5171,7 +5276,7 @@ msgid "Gaming input device"
 msgstr "Herné vstupné zariadenie"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:387
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:384
 #: panels/power/cc-power-panel.ui:63
 msgid "Battery"
 msgstr "Batéria"
@@ -5186,54 +5291,90 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Dodatočná"
 
-#: panels/power/cc-power-panel.c:385
+#: panels/power/cc-power-panel.c:382
 msgid "Batteries"
 msgstr "Batérie"
 
-#: panels/power/cc-power-panel.c:648
+#: panels/power/cc-power-panel.c:644
 msgid "When _idle"
 msgstr "Pri neč_innosti"
 
-#: panels/power/cc-power-panel.c:1033
+#: panels/power/cc-power-panel.c:796
 msgid "Suspend"
 msgstr "Uspať"
 
 # label
-#: panels/power/cc-power-panel.c:1034
+#: panels/power/cc-power-panel.c:797
 msgid "Power Off"
 msgstr "Vypnúť"
 
 # GtkListStore item
-#: panels/power/cc-power-panel.c:1035
+#: panels/power/cc-power-panel.c:798
 msgid "Hibernate"
 msgstr "Hibernovať"
 
 # chooser_button
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:799
 msgid "Nothing"
 msgstr "Nespraviť nič"
 
 #  label
-#: panels/power/cc-power-panel.c:1095
+#: panels/power/cc-power-panel.c:858
 msgid "When on battery power"
 msgstr "Pri napájaní z batérie"
 
 # PK: ked je zastrceny v zasuvke
 #  label
-#: panels/power/cc-power-panel.c:1097
+#: panels/power/cc-power-panel.c:860
 msgid "When plugged in"
 msgstr "Pri napájaní zo siete"
 
 # naposledy použité
-#: panels/power/cc-power-panel.c:1212
+#: panels/power/cc-power-panel.c:980
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Nikdy"
 
 # label
-#: panels/power/cc-power-panel.c:1269
+#: panels/power/cc-power-panel.c:1066
 msgid "Automatic suspend"
 msgstr "Automatické uspanie"
+
+#: panels/power/cc-power-panel.c:1171
+msgid ""
+"Performance mode temporarily disabled due to high operating temperature."
+msgstr ""
+
+#: panels/power/cc-power-panel.c:1173
+msgid ""
+"Lap detected: performance mode temporarily unavailable. Move the device to a "
+"stable surface to restore."
+msgstr ""
+
+#: panels/power/cc-power-panel.c:1175
+#, fuzzy
+#| msgid "Performance mode unavailable"
+msgid "Performance mode temporarily disabled."
+msgstr "Výkonný režim nie je dostupný"
+
+#: panels/power/cc-power-panel.c:1218
+msgid ""
+"Low battery: power saver enabled. Previous mode will be restored when "
+"battery is sufficiently charged."
+msgstr ""
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1226
+#, c-format
+msgid "Power Saver mode activated by “%s”."
+msgstr "Režim šetriča energie aktivovaný aplikáciou „%s“."
+
+#. translators: "%s" is an application name
+#: panels/power/cc-power-panel.c:1230
+#, fuzzy, c-format
+#| msgid "Performance mode unavailable"
+msgid "Performance mode activated by “%s”."
+msgstr "Výkonný režim nie je dostupný"
 
 #  * https://bugzilla.gnome.org/show_bug.cgi?id=695517
 # approx_time; Oneskorenie
@@ -5333,143 +5474,140 @@ msgid "Affects system performance and power usage."
 msgstr "Ovplyvní výkon systému a spotrebu energie."
 
 # label
-#: panels/power/cc-power-panel.ui:131
-msgid "Power Saving"
-msgstr "Šetrenie energie"
-
-# label
-#: panels/power/cc-power-panel.ui:135
-msgid "_Screen Brightness"
-msgstr "_Jas obrazovky"
+#: panels/power/cc-power-panel.ui:142
+#| msgid "Power Saving"
+msgid "Power Saving Options"
+msgstr "Voľby šetrenia energie"
 
 # GtkSwitch AtkObject
-#: panels/power/cc-power-panel.ui:151
-msgid "Automatic Brightness"
-msgstr "Automatický jas"
+#: panels/power/cc-power-panel.ui:146
+#| msgid "Automatic Brightness"
+msgid "Automatic Screen Brightness"
+msgstr "Automatický jas obrazovky"
+
+#: panels/power/cc-power-panel.ui:147
+msgid "Screen brightness adjusts to the surrounding light."
+msgstr "Jas obrazovky sa upraví podľa okolitého svetla."
+
+#: panels/power/cc-power-panel.ui:160
+#| msgid "Screen"
+msgid "Dim Screen"
+msgstr "Stmaviť obrazovku"
+
+#: panels/power/cc-power-panel.ui:161
+msgid "Reduces the screen brightness when the computer is inactive."
+msgstr ""
+
+# MČ: nemám to ako teraz posúdiť, ale nie sú na rovnakej obrazovke s "High Contrast"? Potom je tam problém s akcelerátorom.
+# PM: je to v samostatnom okne vid web glade runner
+# GtkLabel
+#: panels/power/cc-power-panel.ui:174
+#, fuzzy
+#| msgid "Screen _Reader"
+msgid "Screen _Blank"
+msgstr "Čítačka _obrazovky"
+
+#: panels/power/cc-power-panel.ui:175
+msgid "Turns the screen off after a period of inactivity."
+msgstr ""
 
 # label
-#: panels/power/cc-power-panel.ui:164
-msgid "_Keyboard Brightness"
-msgstr "Jas _klávesnice"
+#: panels/power/cc-power-panel.ui:183
+#, fuzzy
+#| msgid "Power Saver"
+msgid "Automatic Power Saver"
+msgstr "Šetrič energie"
 
-# label
-#: panels/power/cc-power-panel.ui:180
-msgid "Dim Screen When Inactive"
-msgstr "Stmaviť obrazovku pri neaktivite"
-
-# PK: toto je divne, skor vypnut obrazovku
-# PM: no blank screen praveze nie je vypnutie obrazovky, balnk screen je vyplnenie obrazovky čiernou ale je stále zapnutá. Používa sa to pri starých monitoroch, ktoré zobrazujú pri ATM hlásku ze nie je signál.
-# label
-#: panels/power/cc-power-panel.ui:193
-msgid "_Blank Screen"
-msgstr "Vy_prázdniť obrazovku o"
+#: panels/power/cc-power-panel.ui:184
+msgid "Enables power saver mode when battery is low."
+msgstr "Povolí režim šetriča energie, keď je batéria vybitá."
 
 # GtkDialog title
-#: panels/power/cc-power-panel.ui:201
+#: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
 msgstr "_Automatické uspanie"
 
-# PM: pozerám že je tam aj reťazec Turns off wireless devices ako label, nemá byť aj on na preklad?
-# PK: nie, je to label v tom dialogu hruby a potom prepinac
+#: panels/power/cc-power-panel.ui:199
+msgid "Pauses the computer after a period of inactivity."
+msgstr "Pozastaví počítač po časovom úseku nečinnosti."
+
 # label
 #: panels/power/cc-power-panel.ui:217
-msgid "_Wi-Fi"
-msgstr "_Wi-Fi"
-
-#: panels/power/cc-power-panel.ui:218
-msgid "Wi-Fi can be turned off to save power."
-msgstr "Sieť Wi-Fi môže byť vypnutá kvôli šetreniu energie."
-
-# label
-#: panels/power/cc-power-panel.ui:233
-msgid "_Mobile Broadband"
-msgstr "Širokopásmové _mobilné pripojenie"
-
-#: panels/power/cc-power-panel.ui:234
-msgid "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
-msgstr ""
-"Šírokopásmové mobilné zariadenia (3G, 4G, LTE, atď) môžu byť vypnuté kvôli "
-"šetreniu energie."
-
-# label
-#: panels/power/cc-power-panel.ui:249
-msgid "_Bluetooth"
-msgstr "_Bluetooth"
-
-#: panels/power/cc-power-panel.ui:250
-msgid "Bluetooth can be turned off to save power."
-msgstr "Rozhranie Bluetooth môže byť vypnuté kvôli šetreniu energie."
-
-# label
-#: panels/power/cc-power-panel.ui:267
 msgid "Suspend & Power Button"
 msgstr "Tlačidlo uspania a napájania"
 
-#: panels/power/cc-power-panel.ui:271
+#: panels/power/cc-power-panel.ui:221
 msgid "Po_wer Button Behavior"
 msgstr "Správanie _tlačidla napájania"
 
-#: panels/power/cc-power-panel.ui:279
+#: panels/power/cc-power-panel.ui:229
 msgid "Show Battery _Percentage"
 msgstr "Zobraziť _percentá batérie"
 
 # GtkDialog title
-#: panels/power/cc-power-panel.ui:325
+#: panels/power/cc-power-panel.ui:268
 msgid "Automatic Suspend"
 msgstr "Automatické uspanie"
 
 # GtkLabel label
-#: panels/power/cc-power-panel.ui:350
+#: panels/power/cc-power-panel.ui:293
 msgid "_Plugged In"
 msgstr "_Pripojený k sieti"
 
 # GtkLabel label
-#: panels/power/cc-power-panel.ui:366
+#: panels/power/cc-power-panel.ui:309
 msgid "On _Battery Power"
 msgstr "Napájaný z _batérie"
 
 # GtkLabel label
-#: panels/power/cc-power-panel.ui:411 panels/power/cc-power-panel.ui:471
+#: panels/power/cc-power-panel.ui:354 panels/power/cc-power-panel.ui:414
 #: panels/universal-access/cc-repeat-keys-dialog.ui:74
 msgid "Delay"
 msgstr "Oddialiť o"
 
-#: panels/power/cc-power-profile-row.c:62
+#: panels/power/cc-power-profile-row.c:61
 msgid "Lap detected: performance mode unavailable"
 msgstr "Zistené lono: výkonný režim nie je dostupný"
 
-#: panels/power/cc-power-profile-row.c:64
+#: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
 msgstr "Vysoká teplota hardvéru: výkonný režim nie je dostupný"
 
-#: panels/power/cc-power-profile-row.c:65
+#: panels/power/cc-power-profile-row.c:64
 msgid "Performance mode unavailable"
 msgstr "Výkonný režim nie je dostupný"
 
-#: panels/power/cc-power-profile-row.c:87
-#: panels/power/cc-power-profile-row.c:187
+#: panels/power/cc-power-profile-row.c:86
+#: panels/power/cc-power-profile-row.c:185
 msgid "High performance and power usage."
 msgstr "Vysoký výkon a spotreba energie."
 
-#: panels/power/cc-power-profile-row.c:186
+#: panels/power/cc-power-profile-row.c:184
+#| msgid "Performance"
+msgctxt "Power profile"
 msgid "Performance"
 msgstr "Výkon"
 
 # vľavo - vpravo
-#: panels/power/cc-power-profile-row.c:192
-msgid "Balanced Power"
-msgstr "Vyvážená spotreba energie"
+#: panels/power/cc-power-profile-row.c:188
+#, fuzzy
+#| msgid "Balance"
+msgctxt "Power profile"
+msgid "Balanced"
+msgstr "Rovnováha"
 
-#: panels/power/cc-power-profile-row.c:193
+#: panels/power/cc-power-profile-row.c:189
 msgid "Standard performance and power usage."
 msgstr "Štandardný výkon a spotreba energie."
 
 # label
-#: panels/power/cc-power-profile-row.c:198
+#: panels/power/cc-power-profile-row.c:192
+#| msgid "Power Saver"
+msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Šetrič energie"
 
-#: panels/power/cc-power-profile-row.c:199
+#: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
 msgstr "Znížený výkon a spotreba energie."
 
@@ -5508,7 +5646,7 @@ msgstr "Overeniť totožnosť"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:80
 #: panels/printers/new-printer-dialog.ui:366
-#: panels/printers/pp-jobs-dialog.ui:57
+#: panels/printers/pp-jobs-dialog.ui:57 panels/wwan/cc-wwan-apn-dialog.ui:188
 msgid "Username"
 msgstr "Meno používateľa"
 
@@ -5525,17 +5663,17 @@ msgid "Printer “%s” has been deleted"
 msgstr "Tlačiareň „%s“ bola odstránená"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:930
+#: panels/printers/cc-printers-panel.c:926
 msgid "Failed to add new printer."
 msgstr "Pridávanie novej tlačiarne zlyhalo."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1209
+#: panels/printers/cc-printers-panel.c:1225
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepodarilo sa načítať súbor používateľského rozhrania: %s"
 
-#: panels/printers/cc-printers-panel.c:1277
+#: panels/printers/cc-printers-panel.c:1293
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Odomknutím pridáte tlačiarne a zmeníte nastavenia"
 
@@ -5559,8 +5697,8 @@ msgstr "Tlačiareň;Rad;Tlač;Papier;Atrament;Toner;"
 # GtkToolButton label
 #. Translators: This is the title presented at top of the dialog.
 #: panels/printers/new-printer-dialog.ui:29
-#: panels/printers/pp-new-printer-dialog.c:344
-#: panels/printers/pp-new-printer-dialog.c:401
+#: panels/printers/pp-new-printer-dialog.c:254
+#: panels/printers/pp-new-printer-dialog.c:311
 msgid "Add Printer"
 msgstr "Pridať tlačiareň"
 
@@ -5568,6 +5706,7 @@ msgstr "Pridať tlačiareň"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:96
 #: panels/printers/new-printer-dialog.ui:111
+#: panels/wwan/cc-wwan-device-page.ui:90
 msgid "_Unlock"
 msgstr "Odo_mknúť"
 
@@ -5620,7 +5759,7 @@ msgstr "Umiestnenie"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:239
+#: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Ovládač"
 
@@ -5811,58 +5950,58 @@ msgid "No Active Printer Jobs"
 msgstr "Žiadne aktívne úlohy tlačiarne"
 
 # headerbar
-#: panels/printers/pp-new-printer-dialog.c:359
+#: panels/printers/pp-new-printer-dialog.c:269
 msgid "Unlock Print Server"
 msgstr "Odomknutie tlačového servera"
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:363
+#: panels/printers/pp-new-printer-dialog.c:273
 #, c-format
 msgid "Unlock %s."
 msgstr "Odomknúť %s."
 
 #. Translators: Samba server needs authentication of the user to show list of its printers.
-#: panels/printers/pp-new-printer-dialog.c:367
+#: panels/printers/pp-new-printer-dialog.c:277
 #, c-format
 msgid "Enter username and password to view printers on %s."
 msgstr ""
 "Zadajte používateľské meno a heslo pre zobrazenie tlačiarní na serveri %s."
 
-#: panels/printers/pp-new-printer-dialog.c:790
+#: panels/printers/pp-new-printer-dialog.c:587
 msgid "Searching for Printers"
 msgstr "Vyhľadávajú sa tlačiarne"
 
 #. Translators: The found device is a printer connected via USB
-#: panels/printers/pp-new-printer-dialog.c:1578
+#: panels/printers/pp-new-printer-dialog.c:1375
 msgid "USB"
 msgstr "USB"
 
 #. Translators: The found device is a printer connected via serial port
-#: panels/printers/pp-new-printer-dialog.c:1583
+#: panels/printers/pp-new-printer-dialog.c:1380
 msgid "Serial Port"
 msgstr "Sériový Port"
 
 #. Translators: The found device is a printer connected via parallel port
-#: panels/printers/pp-new-printer-dialog.c:1590
+#: panels/printers/pp-new-printer-dialog.c:1387
 msgid "Parallel Port"
 msgstr "Paralelný port"
 
 # GtkLabel label
 #. Translators: Location of found network printer (e.g. Kitchen, Reception)
-#: panels/printers/pp-new-printer-dialog.c:1632
+#: panels/printers/pp-new-printer-dialog.c:1429
 #, c-format
 msgid "Location: %s"
 msgstr "Umiestnenie: %s"
 
 # GtkLabel label
 #. Translators: Network address of found printer
-#: panels/printers/pp-new-printer-dialog.c:1637
+#: panels/printers/pp-new-printer-dialog.c:1434
 #, c-format
 msgid "Address: %s"
 msgstr "Adresa: %s"
 
 #. Translators: This item is a server which needs authentication to show its printers
-#: panels/printers/pp-new-printer-dialog.c:1664
+#: panels/printers/pp-new-printer-dialog.c:1461
 msgid "Server requires authentication"
 msgstr "Server vyžaduje overenie totožnosti"
 
@@ -6006,7 +6145,8 @@ msgid "No pre-filtering"
 msgstr "Žiadne predfiltrovanie"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:223
+#: panels/printers/pp-ppd-selection-dialog.c:220
+#: panels/wwan/cc-wwan-details-dialog.ui:203
 msgid "Manufacturer"
 msgstr "Výrobca"
 
@@ -6161,6 +6301,7 @@ msgstr "Odstrániť tlačiareň"
 
 # GtkLabel label
 #: panels/printers/printer-entry.ui:193
+#: panels/wwan/cc-wwan-details-dialog.ui:229
 msgid "Model"
 msgstr "Model"
 
@@ -6208,7 +6349,7 @@ msgstr ""
 # TODO lepšia alternatíva?
 # GtkDialog title; GtkLabel label
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:189
-#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:159
+#: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:203
 msgid "Formats"
 msgstr "Formáty"
 
@@ -6284,48 +6425,53 @@ msgstr "Miery"
 msgid "Paper"
 msgstr "Papier"
 
+#: panels/region/cc-region-panel.ui:42
+msgid "My Account"
+msgstr "Môj účet"
+
 # toggle button
-#: panels/region/cc-region-panel.c:740
-msgid "Login _Screen"
-msgstr "_Prihlasovacia obrazovka"
+#: panels/region/cc-region-panel.ui:53
+#| msgid "Login _Screen"
+msgid "Login Screen"
+msgstr "Prihlasovacia obrazovka"
 
 # GtkLabel
-#: panels/region/cc-region-panel.ui:34
+#: panels/region/cc-region-panel.ui:78
 msgid "Language"
 msgstr "Jazyk"
 
-#: panels/region/cc-region-panel.ui:45
+#: panels/region/cc-region-panel.ui:89
 msgid "The language used for text in windows and web pages."
 msgstr "Jazyk použitý pre text okien a webových stránok."
 
 # GtkLabel
-#: panels/region/cc-region-panel.ui:85
-#: panels/user-accounts/cc-user-panel.ui:309
+#: panels/region/cc-region-panel.ui:129
+#: panels/user-accounts/cc-user-panel.ui:311
 msgid "_Language"
 msgstr "_Jazyk"
 
 # label
-#: panels/region/cc-region-panel.ui:120
+#: panels/region/cc-region-panel.ui:164
 msgid "Restart the session for changes to take effect"
 msgstr "Aby sa prejavili zmeny, musíte reštartovať reláciu"
 
 # button
-#: panels/region/cc-region-panel.ui:135
+#: panels/region/cc-region-panel.ui:179
 msgid "Restart…"
 msgstr "Reštartovať…"
 
-#: panels/region/cc-region-panel.ui:170
+#: panels/region/cc-region-panel.ui:214
 msgid "The format used for numbers, dates, and currencies."
 msgstr "Formát použitý pre čísla, dátumy a meny."
 
 # TODO lepšia alternatíva?
 # GtkDialog title; GtkLabel label
-#: panels/region/cc-region-panel.ui:204
+#: panels/region/cc-region-panel.ui:248
 msgid "_Formats"
 msgstr "_Formáty"
 
 # GtkLabel label
-#: panels/region/cc-region-panel.ui:231
+#: panels/region/cc-region-panel.ui:275
 msgid "Login settings are used by all users when logging into the system"
 msgstr ""
 "Nastavenia prihlásenia sú používané všetkými používateľmi na tomto systéme"
@@ -6337,10 +6483,10 @@ msgstr "Región a jazyk"
 
 # desktop entry comment
 #: panels/region/gnome-region-panel.desktop.in.in:4
-msgid ""
-"Select your display language, formats, keyboard layouts and input sources"
-msgstr ""
-"Umožňuje výber jazyka, formátov, rozloženia klávesnice a zdrojov vstupu"
+#| msgid ""
+#| "Select your display language, formats, keyboard layouts and input sources"
+msgid "Select your display language and formats"
+msgstr "Vyberá váš zobrazovaný jazyk a formáty"
 
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
@@ -7262,7 +7408,7 @@ msgstr "Pípnuť pri zapnutí alebo vypnutí funkcie Num Lock alebo Caps Lock."
 
 # GtkLabel
 #: panels/universal-access/cc-sound-keys-dialog.ui:45
-#: panels/universal-access/cc-ua-panel.ui:374
+#: panels/universal-access/cc-ua-panel.ui:412
 msgid "_Sound Keys"
 msgstr "_Zvukové klávesy"
 
@@ -7391,32 +7537,32 @@ msgstr "Zapnúť funkcie sprístupnenia z klávesnice"
 # sound id
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:348
+#: panels/universal-access/cc-ua-panel.c:351
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Predvolená"
 
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:354
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Stredná"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Veľká"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Väčšia"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Najväčšia"
 
-#: panels/universal-access/cc-ua-panel.c:364
+#: panels/universal-access/cc-ua-panel.c:367
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -7444,12 +7590,16 @@ msgstr "Vys_oký kontrast"
 msgid "_Large Text"
 msgstr "_Veľký text"
 
-#: panels/universal-access/cc-ua-panel.ui:235
+#: panels/universal-access/cc-ua-panel.ui:238
+msgid "Enable A_nimations"
+msgstr "Povoliť a_nimácie"
+
+#: panels/universal-access/cc-ua-panel.ui:273
 msgid "C_ursor Size"
 msgstr "Veľkosť k_urzora"
 
 # GtkLabel
-#: panels/universal-access/cc-ua-panel.ui:282
+#: panels/universal-access/cc-ua-panel.ui:320
 #: panels/universal-access/cc-zoom-options-dialog.ui:91
 msgid "_Zoom"
 msgstr "_Lupa"
@@ -7457,65 +7607,65 @@ msgstr "_Lupa"
 # MČ: nemám to ako teraz posúdiť, ale nie sú na rovnakej obrazovke s "High Contrast"? Potom je tam problém s akcelerátorom.
 # PM: je to v samostatnom okne vid web glade runner
 # GtkLabel
-#: panels/universal-access/cc-ua-panel.ui:328
+#: panels/universal-access/cc-ua-panel.ui:366
 msgid "Screen _Reader"
 msgstr "Čítačka _obrazovky"
 
 # tab
-#: panels/universal-access/cc-ua-panel.ui:436
+#: panels/universal-access/cc-ua-panel.ui:474
 msgid "Hearing"
 msgstr "Sluch"
 
 # GtkLabel
-#: panels/universal-access/cc-ua-panel.ui:480
+#: panels/universal-access/cc-ua-panel.ui:518
 #: panels/universal-access/cc-visual-alerts-dialog.ui:68
 msgid "_Visual Alerts"
 msgstr "_Vizuálne varovania"
 
 # GtkLabel
-#: panels/universal-access/cc-ua-panel.ui:588
+#: panels/universal-access/cc-ua-panel.ui:626
 msgid "Screen _Keyboard"
 msgstr "_Klávesnica na obrazovke"
 
 # GtkLabel label
-#: panels/universal-access/cc-ua-panel.ui:633
+#: panels/universal-access/cc-ua-panel.ui:671
 msgid "R_epeat Keys"
 msgstr "O_pakovanie klávesov"
 
 # GtkLabel label
-#: panels/universal-access/cc-ua-panel.ui:679
+#: panels/universal-access/cc-ua-panel.ui:717
 msgid "Cursor _Blinking"
 msgstr "_Blikanie kurzora"
 
-#: panels/universal-access/cc-ua-panel.ui:725
+#: panels/universal-access/cc-ua-panel.ui:763
 msgid "_Typing Assist (AccessX)"
 msgstr "Asistované _písanie (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:786
+#: panels/universal-access/cc-ua-panel.ui:824
 msgid "Pointing & Clicking"
 msgstr "Ukazovanie a klikanie"
 
 # GtkLabel
-#: panels/universal-access/cc-ua-panel.ui:832
+#: panels/universal-access/cc-ua-panel.ui:870
 msgid "_Mouse Keys"
 msgstr "_Myš klávesmi"
 
 # GtkToolButton label
-#: panels/universal-access/cc-ua-panel.ui:877
+#: panels/universal-access/cc-ua-panel.ui:915
 msgid "_Locate Pointer"
 msgstr "_Lokalizovať ukazovateľ"
 
-#: panels/universal-access/cc-ua-panel.ui:909
+#: panels/universal-access/cc-ua-panel.ui:947
 msgid "_Click Assist"
 msgstr "Asistované _kliknutie"
 
 # GtkLabel label
-#: panels/universal-access/cc-ua-panel.ui:955
+#: panels/universal-access/cc-ua-panel.ui:993
 msgid "_Double-Click Delay"
 msgstr "Oneskorenie _dvojkliku"
 
 # GtkLabel label
-#: panels/universal-access/cc-ua-panel.ui:975
+#: panels/universal-access/cc-ua-panel.ui:1013
 msgid "Double-Click Delay"
 msgstr "Oneskorenie _dvojkliku"
 
@@ -8389,7 +8539,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:766
+#: panels/user-accounts/cc-user-panel.c:771
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -8397,7 +8547,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:770
+#: panels/user-accounts/cc-user-panel.c:775
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -8493,38 +8643,38 @@ msgstr "Nepodarilo sa pripojiť k doméne %s: %s"
 msgid "Your account"
 msgstr "Váš účet"
 
-#: panels/user-accounts/cc-user-panel.c:397
+#: panels/user-accounts/cc-user-panel.c:402
 msgid "Failed to delete user"
 msgstr "Odstránenie používateľa zlyhalo"
 
-#: panels/user-accounts/cc-user-panel.c:452
-#: panels/user-accounts/cc-user-panel.c:507
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:457
+#: panels/user-accounts/cc-user-panel.c:512
+#: panels/user-accounts/cc-user-panel.c:558
 msgid "Failed to revoke remotely managed user"
 msgstr "Zlyhalo zrušenie na diaľku spravovaného používateľa"
 
-#: panels/user-accounts/cc-user-panel.c:602
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "You cannot delete your own account."
 msgstr "Nemôžete odstrániť vlastný účet."
 
-#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:616
 #, c-format
 msgid "%s is still logged in"
 msgstr "Používateľ %s je stále prihlásený"
 
-#: panels/user-accounts/cc-user-panel.c:615
+#: panels/user-accounts/cc-user-panel.c:620
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 "Odstránenie prihláseného používateľa môže spôsobiť nestabilitu systému."
 
-#: panels/user-accounts/cc-user-panel.c:624
+#: panels/user-accounts/cc-user-panel.c:629
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Chcete ponechať súbory používateľa %s?"
 
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:633
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8533,56 +8683,57 @@ msgstr ""
 "súbory pošty a dočasné súbory."
 
 # button
-#: panels/user-accounts/cc-user-panel.c:631
+#: panels/user-accounts/cc-user-panel.c:636
 msgid "_Delete Files"
 msgstr "O_dstrániť súbory"
 
 # button
-#: panels/user-accounts/cc-user-panel.c:632
+#: panels/user-accounts/cc-user-panel.c:637
 msgid "_Keep Files"
 msgstr "Po_nechať súbory"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:651
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Naozaj chcete zrušiť na diaľku spravovaný účet používateľa %s?"
 
 # button
-#: panels/user-accounts/cc-user-panel.c:650
+#: panels/user-accounts/cc-user-panel.c:655
 msgid "_Delete"
 msgstr "O_dstrániť"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:705
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Účet je zakázaný"
 
-#: panels/user-accounts/cc-user-panel.c:708
+#: panels/user-accounts/cc-user-panel.c:713
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastaviť pri najbližšom prihlásení"
 
-#: panels/user-accounts/cc-user-panel.c:711
+#: panels/user-accounts/cc-user-panel.c:716
 msgctxt "Password mode"
 msgid "None"
 msgstr "Žiadne"
 
-#: panels/user-accounts/cc-user-panel.c:754
+#: panels/user-accounts/cc-user-panel.c:759
 msgid "Logged in"
 msgstr "Prihlásený"
 
 # zariadenie
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:841
+#: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "Povolené"
 
-#: panels/user-accounts/cc-user-panel.c:1254
+#: panels/user-accounts/cc-user-panel.c:1259
 msgid "Failed to contact the accounts service"
 msgstr "Spojenie so službou účtov zlyhalo"
 
-#: panels/user-accounts/cc-user-panel.c:1256
+#: panels/user-accounts/cc-user-panel.c:1261
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Uistite sa, prosím, že je služba AccountService nainštalovaná a povolená."
@@ -8592,7 +8743,7 @@ msgstr ""
 #. * We split the line in 2 here to "make it look good", as there's
 #. * no good way to do this in GTK+ for tooltips. See:
 #. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1288
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid ""
 "To make changes,\n"
 "click the * icon first"
@@ -8601,13 +8752,13 @@ msgstr ""
 "kliknite najskôr na ikonu *"
 
 # tooltip
-#: panels/user-accounts/cc-user-panel.c:1361
+#: panels/user-accounts/cc-user-panel.c:1366
 msgid "Delete the selected user account"
 msgstr "Odstráni vybraný používateľský účet"
 
 # tooltip
-#: panels/user-accounts/cc-user-panel.c:1373
-#: panels/user-accounts/cc-user-panel.c:1492
+#: panels/user-accounts/cc-user-panel.c:1378
+#: panels/user-accounts/cc-user-panel.c:1489
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8615,7 +8766,7 @@ msgstr ""
 "Keď chcete odstrániť používateľský účet,\n"
 "kliknite najskôr na ikonu *"
 
-#: panels/user-accounts/cc-user-panel.c:1538
+#: panels/user-accounts/cc-user-panel.c:1535
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Odomknutím pridáte používateľov a zmeníte nastavenia"
 
@@ -8671,36 +8822,36 @@ msgid "Open the Parental Controls application."
 msgstr "Otvoriť aplikáciu Rodičovská kontrola."
 
 # GtkLabel label
-#: panels/user-accounts/cc-user-panel.ui:345
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Authentication & Login"
 msgstr "Overenie totožnosti a prihlásenie"
 
 # GtkLabel
-#: panels/user-accounts/cc-user-panel.ui:388
+#: panels/user-accounts/cc-user-panel.ui:390
 msgid "_Fingerprint Login"
 msgstr "Prihlásenie _odtlačkom prsta"
 
 # GtkLabel
-#: panels/user-accounts/cc-user-panel.ui:413
+#: panels/user-accounts/cc-user-panel.ui:415
 msgid "A_utomatic Login"
 msgstr "A_utomatické prihlásenie"
 
-#: panels/user-accounts/cc-user-panel.ui:427
+#: panels/user-accounts/cc-user-panel.ui:429
 msgid "Account Activity"
 msgstr "Aktivita účtu"
 
 # GtkToolButton label
-#: panels/user-accounts/cc-user-panel.ui:458
+#: panels/user-accounts/cc-user-panel.ui:460
 msgid "Remove User…"
 msgstr "Odstrániť používateľský účet…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:499
+#: panels/user-accounts/cc-user-panel.ui:501
 msgid "No Users Found"
 msgstr "Nenašli sa žiadni používatelia"
 
 # tooltip
-#: panels/user-accounts/cc-user-panel.ui:509
+#: panels/user-accounts/cc-user-panel.ui:511
 msgid "Unlock to add a user account."
 msgstr "Odomknutím pridáte používateľský účet."
 
@@ -8715,8 +8866,10 @@ msgstr "Pridáva alebo odstraňuje používateľov a mení vaše heslo"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:20
-msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
-msgstr "Prihlásenie;Meno;Odtlačok prsta;Podobizeň;Logo;Tvár;Heslo;"
+msgid ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+msgstr ""
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -8910,6 +9063,7 @@ msgid "The new password does not contain enough different characters"
 msgstr "Nové heslo neobsahuje dostatočný počet rôznych znakov"
 
 #: panels/user-accounts/run-passwd.c:526
+#: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
 msgstr "Neznáma chyba"
@@ -9194,6 +9348,542 @@ msgstr "Najspodnejšie tlačidlo"
 msgid "Tip Pressure Feel"
 msgstr "Pocit tlaku hrotu"
 
+# GtkButton label
+#: panels/wwan/cc-wwan-apn-dialog.ui:11
+#, fuzzy
+#| msgid "Access Options"
+msgid "Access Points"
+msgstr "Voľby prístupu"
+
+#: panels/wwan/cc-wwan-apn-dialog.ui:160
+#| msgid "VPN"
+msgid "APN"
+msgstr "APN"
+
+#: panels/wwan/cc-wwan-data.c:543
+msgid "Operation Cancelled"
+msgstr "Operácia zrušená"
+
+#: panels/wwan/cc-wwan-data.c:546
+msgid "<b>Error:</b> Access denied changing settings"
+msgstr ""
+
+#: panels/wwan/cc-wwan-data.c:549
+msgid "<b>Error:</b> Mobile Equipment Error"
+msgstr "<b>Chyba:</b> Chyba mobilného vybavenia"
+
+#: panels/wwan/cc-wwan-details-dialog.c:81
+msgid "Not Registered"
+msgstr "Neregistrovaná"
+
+# naposledy použité
+#: panels/wwan/cc-wwan-details-dialog.c:85
+#| msgid "Yesterday"
+msgid "Registered"
+msgstr "Registrovaná"
+
+#: panels/wwan/cc-wwan-details-dialog.c:89
+msgid "Roaming"
+msgstr "Roaming"
+
+# desktop entry name
+#: panels/wwan/cc-wwan-details-dialog.c:93
+#, fuzzy
+#| msgid "Search"
+msgid "Searching"
+msgstr "Vyhľadávanie"
+
+#: panels/wwan/cc-wwan-details-dialog.c:97
+msgid "Denied"
+msgstr ""
+
+# 1.desktop entry name;2. page; 3. GtkListStore item
+#: panels/wwan/cc-wwan-details-dialog.ui:4
+#| msgid "Details"
+msgid "Modem Details"
+msgstr "Podrobnosti o modeme"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:33
+#| msgid "Status:"
+msgid "Modem Status"
+msgstr "Stav modemu"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:53
+msgid "Carrier"
+msgstr ""
+
+# GtkLabel label
+#: panels/wwan/cc-wwan-details-dialog.ui:79
+#| msgid "Network Name"
+msgid "Network Type"
+msgstr "Typ siete"
+
+# desktop entry name
+#: panels/wwan/cc-wwan-details-dialog.ui:131
+#| msgid "Networks"
+msgid "Network Status"
+msgstr "Stav siete"
+
+# GtkLabel label
+#: panels/wwan/cc-wwan-details-dialog.ui:158
+#| msgid "Numbers"
+msgid "Own Number"
+msgstr "Vlastné číslo"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:185
+#| msgid "Printer Details"
+msgid "Device Details"
+msgstr "Podrobnosti o zariadení"
+
+#: panels/wwan/cc-wwan-details-dialog.ui:257
+#| msgid "Firmware missing"
+msgid "Firmware Version"
+msgstr "Verzia firmvéru"
+
+#: panels/wwan/cc-wwan-device.c:988
+msgid "2G Only"
+msgstr "Iba 2G"
+
+#: panels/wwan/cc-wwan-device.c:991
+msgid "3G Only"
+msgstr "Iba 3G"
+
+#: panels/wwan/cc-wwan-device.c:994
+msgid "4G Only"
+msgstr "Iba 4G"
+
+#: panels/wwan/cc-wwan-device.c:1003
+msgid "2G, 3G, 4G (Preferred)"
+msgstr "2G, 3G, 4G (uprednostňované)"
+
+#: panels/wwan/cc-wwan-device.c:1005
+msgid "2G, 3G (Preferred), 4G"
+msgstr "2G, 3G (uprednostňované), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid "2G (Preferred), 3G, 4G"
+msgstr "2G (uprednostňované), 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1009
+msgid "2G, 3G, 4G"
+msgstr "2G, 3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1015
+msgid "3G, 4G (Preferred)"
+msgstr "3G, 4G (uprednostňované)"
+
+#: panels/wwan/cc-wwan-device.c:1017
+msgid "3G (Preferred), 4G"
+msgstr "3G (uprednostňované), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1019
+msgid "3G, 4G"
+msgstr "3G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1025
+msgid "2G, 4G (Preferred)"
+msgstr "2G, 4G (uprednostňované)"
+
+#: panels/wwan/cc-wwan-device.c:1027
+msgid "2G (Preferred), 4G"
+msgstr "2G (uprednostňované), 4G"
+
+#: panels/wwan/cc-wwan-device.c:1029
+msgid "2G, 4G"
+msgstr "2G, 4G"
+
+#: panels/wwan/cc-wwan-device.c:1035
+msgid "2G, 3G (Preferred)"
+msgstr "2G, 3G (uprednostňované)"
+
+#: panels/wwan/cc-wwan-device.c:1037
+msgid "2G (Preferred), 3G"
+msgstr "2G (uprednostňované), 3G"
+
+#: panels/wwan/cc-wwan-device.c:1039
+msgid "2G, 3G"
+msgstr "2G, 3G"
+
+# * https://bugzilla.gnome.org/show_bug.cgi?id=695517
+# grafika, AP typ
+#: panels/wwan/cc-wwan-device.c:1043
+#, fuzzy
+#| msgid "Unknown"
+msgctxt "Network mode"
+msgid "Unknown"
+msgstr "Neznámy"
+
+#: panels/wwan/cc-wwan-device-page.c:188
+msgid "Unlock SIM card"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
+#, fuzzy
+#| msgid "_Unlock"
+msgid "Unlock"
+msgstr "Odo_mknúť"
+
+#: panels/wwan/cc-wwan-device-page.c:194
+#, c-format
+msgid "Please provide PIN code for SIM %d"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:195
+msgid "Enter PIN to unlock your SIM card"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:199
+#, c-format
+msgid "Please provide PUK code for SIM %d"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:200
+msgid "Enter PUK to unlock your SIM card"
+msgstr "Zadajte kód PUK na odomknutie vašej karty SIM"
+
+#: panels/wwan/cc-wwan-device-page.c:218
+#, c-format
+msgid "Wrong password entered. You have %1$u try left"
+msgid_plural "Wrong password entered. You have %1$u tries left"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+
+#: panels/wwan/cc-wwan-device-page.c:221
+#, c-format
+msgid "You have %u try left"
+msgid_plural "You have %u tries left"
+msgstr[0] "Zostáva vám %u pokusov"
+msgstr[1] "Zostáva vám %u pokus"
+msgstr[2] "Zostávajú vám %u pokusy"
+
+#: panels/wwan/cc-wwan-device-page.c:226
+msgid "Wrong password entered."
+msgstr "Bolo zadané nesprávne heslo."
+
+#: panels/wwan/cc-wwan-device-page.c:271
+msgid "PUK code should be an 8 digit number"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:295
+msgid "Enter New PIN"
+msgstr "Zadajte nový kód PIN"
+
+#: panels/wwan/cc-wwan-device-page.c:299
+msgid "PIN code should be a 4-8 digit number"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.c:317
+#| msgid "Unlock %s."
+msgid "Unlocking..."
+msgstr "Odomyká sa..."
+
+#: panels/wwan/cc-wwan-device-page.ui:34
+msgid "No SIM"
+msgstr "Žiadna karta SIM"
+
+#: panels/wwan/cc-wwan-device-page.ui:45
+msgid "Insert a SIM card to use this modem"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.ui:78
+msgid "SIM Locked"
+msgstr "SIM uzamknutá"
+
+# label
+#: panels/wwan/cc-wwan-device-page.ui:139
+#| msgid "_Mobile Broadband"
+msgid "_Mobile Data"
+msgstr "_Mobilné dáta"
+
+#: panels/wwan/cc-wwan-device-page.ui:140
+msgid "Access data using mobile network"
+msgstr ""
+
+#: panels/wwan/cc-wwan-device-page.ui:151
+msgid "_Data Roaming"
+msgstr "_Dátový roaming"
+
+#: panels/wwan/cc-wwan-device-page.ui:152
+msgid "Use mobile data when roaming"
+msgstr "Použitie mobilných dát počas roamingu"
+
+# GtkLabel label
+#: panels/wwan/cc-wwan-device-page.ui:177
+#| msgid "Network Name"
+msgid "_Network Mode"
+msgstr "_Režim siete"
+
+# desktop entry name
+#: panels/wwan/cc-wwan-device-page.ui:187
+#| msgid "Network"
+msgid "N_etwork"
+msgstr "Si_eť"
+
+#: panels/wwan/cc-wwan-device-page.ui:199
+#| msgctxt "Printer Option Group"
+#| msgid "Advanced"
+msgid "Advanced"
+msgstr "Pokročilé"
+
+# GtkButton label
+#: panels/wwan/cc-wwan-device-page.ui:225
+#| msgid "Access Options"
+msgid "_Access Point Names"
+msgstr "_Názvy prístupových bodov"
+
+# 2 GtkDialog title
+#: panels/wwan/cc-wwan-device-page.ui:235
+#, fuzzy
+#| msgid "Screen Lock"
+msgid "_SIM Lock"
+msgstr "Uzamknutie obrazovky"
+
+#: panels/wwan/cc-wwan-device-page.ui:236
+msgid "Lock SIM with PIN"
+msgstr "Uzamknutie karty SIM pomocou kódu PIN"
+
+# 1.desktop entry name;2. page; 3. GtkListStore item
+#: panels/wwan/cc-wwan-device-page.ui:246
+#| msgid "%s Details"
+msgid "M_odem Details"
+msgstr "Podrobnosti o m_odeme"
+
+#: panels/wwan/cc-wwan-errors-private.h:40
+#| msgid "PIN check failed"
+msgid "Phone failure"
+msgstr "Zlyhanie telefónu"
+
+#: panels/wwan/cc-wwan-errors-private.h:41
+#, fuzzy
+#| msgid "Not connected"
+msgid "No connection to phone"
+msgstr "Nepripojené"
+
+#: panels/wwan/cc-wwan-errors-private.h:43
+msgid "Operation not allowed"
+msgstr "Operácia nie je umožnená"
+
+#: panels/wwan/cc-wwan-errors-private.h:44
+msgid "Operation not supported"
+msgstr "Operácia nie je podporovaná"
+
+#: panels/wwan/cc-wwan-errors-private.h:48
+#| msgid "SIM Card not inserted"
+msgid "SIM not inserted"
+msgstr "Karta SIM nie je vložená"
+
+#: panels/wwan/cc-wwan-errors-private.h:49
+#, fuzzy
+#| msgid "SIM Pin required"
+msgid "SIM PIN required"
+msgstr "Vyžadovaný kód Pin pre kartu SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:50
+#, fuzzy
+#| msgid "SIM Pin required"
+msgid "SIM PUK required"
+msgstr "Vyžadovaný kód Pin pre kartu SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:51
+msgid "SIM failure"
+msgstr "Zlyhanie karty SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:52
+msgid "SIM busy"
+msgstr "Karta SIM je zaneprázdnená"
+
+# GtkLabel
+#: panels/wwan/cc-wwan-errors-private.h:54
+#| msgid "Current _Password"
+msgid "Incorrect password"
+msgstr "Nesprávne heslo"
+
+#: panels/wwan/cc-wwan-errors-private.h:55
+#, fuzzy
+#| msgid "SIM Pin required"
+msgid "SIM PIN2 required"
+msgstr "Vyžadovaný kód Pin pre kartu SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:56
+#, fuzzy
+#| msgid "SIM Pin required"
+msgid "SIM PUK2 required"
+msgstr "Vyžadovaný kód Pin pre kartu SIM"
+
+#: panels/wwan/cc-wwan-errors-private.h:59
+#, fuzzy
+#| msgid "No stylus found"
+msgid "Not found"
+msgstr "Nenašlo sa žiadne pero"
+
+#: panels/wwan/cc-wwan-errors-private.h:61
+#| msgid "Read network settings"
+msgid "No network service"
+msgstr "Žiadna sieťová služba"
+
+# GtkLabel label
+#: panels/wwan/cc-wwan-errors-private.h:62
+#| msgid "Network Name"
+msgid "Network timeout"
+msgstr "Čas siete vypršal"
+
+# AutoIP je termin, ako napr. DHCP
+#: panels/wwan/cc-wwan-errors-private.h:75
+#, fuzzy
+#| msgid "AutoIP service failed"
+msgid "GPRS services not allowed"
+msgstr "Služba AutoIP zlyhala"
+
+#: panels/wwan/cc-wwan-errors-private.h:78
+msgid "Roaming not allowed in this location area"
+msgstr ""
+
+#: panels/wwan/cc-wwan-errors-private.h:82
+msgid "Unspecified GPRS error"
+msgstr "Nešpecifikovaná chyba siete GPRS"
+
+#: panels/wwan/cc-wwan-errors-private.h:91
+#| msgctxt "print job"
+#| msgid "Canceled"
+msgid "Action Cancelled"
+msgstr "Akcia bola zrušená"
+
+#: panels/wwan/cc-wwan-errors-private.h:94
+#| msgid "Access LXD service"
+msgid "Access denied"
+msgstr "Prístup zamietnutý"
+
+#: panels/wwan/cc-wwan-errors-private.h:103
+#| msgid "Unknown error"
+msgid "Unknown Error"
+msgstr "Neznáma chyba"
+
+# GtkLabel label
+#: panels/wwan/cc-wwan-mode-dialog.ui:4
+#| msgid "Network Name"
+msgid "Network Mode"
+msgstr "Režim siete"
+
+#: panels/wwan/cc-wwan-mode-dialog.ui:44
+#: panels/wwan/cc-wwan-network-dialog.ui:175
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:230
+msgid "_Set"
+msgstr "_Nastaviť"
+
+# GtkButton label
+#: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
+msgid "Close"
+msgstr "Zavrieť"
+
+# GtkListStore (tp;aui;bnc;mii); GtkListStore (10Mb/s, 100Mb/s ...)
+#: panels/wwan/cc-wwan-network-dialog.ui:84
+#, fuzzy
+#| msgid "Automatic"
+msgid "_Automatic"
+msgstr "Zistiť automaticky"
+
+# GtkEntry text
+#: panels/wwan/cc-wwan-network-dialog.ui:100
+#, fuzzy
+#| msgid "My Home Network"
+msgid "Choose Network"
+msgstr "Moja domáca sieť"
+
+#: panels/wwan/cc-wwan-network-dialog.ui:118
+msgid "Refresh Network Providers"
+msgstr "Obnoviť poskytovateľov siete"
+
+#: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
+#, c-format
+msgid "SIM %d"
+msgstr "Karta SIM č. %d"
+
+#: panels/wwan/cc-wwan-panel.ui:101
+#| msgid "No Wi-Fi Adapter Found"
+msgid "No WWAN Adapter Found"
+msgstr "Nenašiel sa žiadny adaptér WWAN"
+
+#: panels/wwan/cc-wwan-panel.ui:112
+#, fuzzy
+#| msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
+msgid "Make sure you have a Wireless Wan/Cellular device"
+msgstr "Uistite sa, že máte Wi-Fi adaptér pripojený a zapnutý"
+
+#: panels/wwan/cc-wwan-panel.ui:154
+#, fuzzy
+#| msgid "Bluetooth is disabled when airplane mode is on."
+msgid "Wireless Wan is disabled when airplane mode is on"
+msgstr "Bluetooth je zakázaný, keď je zapnutý režim v lietadle."
+
+# label
+#: panels/wwan/cc-wwan-panel.ui:163
+#| msgid "Turn Off Airplane Mode"
+msgid "_Turn off Airplane Mode"
+msgstr "Vy_pnúť režim v lietadle"
+
+# gtk button
+#: panels/wwan/cc-wwan-panel.ui:210
+#| msgid "Forget Connection"
+msgid "Data Connection"
+msgstr "Dátové pripojenie"
+
+#: panels/wwan/cc-wwan-panel.ui:224
+#| msgid "SIM Card not inserted"
+msgid "SIM card used for internet"
+msgstr "Karta SIM použitá pre internet"
+
+# GtkEntry text
+#: panels/wwan/cc-wwan-panel.ui:332
+#| msgid "My Home Network"
+msgid "Enable Mobile Network"
+msgstr "Povoliť mobilnú sieť"
+
+# 2 GtkDialog title
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
+#| msgid "Screen Lock"
+msgid "SIM Lock"
+msgstr "Uzamknutie karty SIM"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
+msgid "_Next"
+msgstr "Ď_alej"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
+msgid "_Lock SIM with PIN"
+msgstr "_Uzamknúť kartu SIM pomocou kódu PIN"
+
+# GtkButton label
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
+#, fuzzy
+#| msgid "Ch_ange"
+msgid "Change PIN"
+msgstr "Zm_eniť"
+
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
+msgid "Enter current PIN to change SIM lock settings"
+msgstr "Zadajte aktuálny kód PIN na zmenu nastavení uzamknutia karty SIM"
+
+# GtkEntry text
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:3
+#| msgid "My Home Network"
+msgid "Mobile Network"
+msgstr "Mobilná sieť"
+
+# 1. listore item; tab
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:4
+#, fuzzy
+#| msgid "Configure Removable Media settings"
+msgid "Configure Telephony and mobile data connections"
+msgstr "Nastavuje vymeniteľné nosiče"
+
+#. FIXME
+#. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+msgid "cellular;wwan;telephony;sim;mobile;"
+msgstr ""
+
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
 msgstr "Nastavenia prostredia GNOME"
@@ -9247,7 +9937,7 @@ msgstr "[PANEL] [PARAMETER…]"
 msgid "Privacy"
 msgstr "Súkromie"
 
-#: shell/cc-panel-loader.c:288
+#: shell/cc-panel-loader.c:299
 msgid "Available panels:"
 msgstr "Dostupné panely:"
 
@@ -9363,6 +10053,53 @@ msgstr[2] "%u vstupy"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Systémové zvuky"
+
+# label
+#~ msgid "_Screen Brightness"
+#~ msgstr "_Jas obrazovky"
+
+# label
+#~ msgid "_Keyboard Brightness"
+#~ msgstr "Jas _klávesnice"
+
+# label
+#~ msgid "Dim Screen When Inactive"
+#~ msgstr "Stmaviť obrazovku pri neaktivite"
+
+# PK: toto je divne, skor vypnut obrazovku
+# PM: no blank screen praveze nie je vypnutie obrazovky, balnk screen je vyplnenie obrazovky čiernou ale je stále zapnutá. Používa sa to pri starých monitoroch, ktoré zobrazujú pri ATM hlásku ze nie je signál.
+# label
+#~ msgid "_Blank Screen"
+#~ msgstr "Vy_prázdniť obrazovku o"
+
+# PM: pozerám že je tam aj reťazec Turns off wireless devices ako label, nemá byť aj on na preklad?
+# PK: nie, je to label v tom dialogu hruby a potom prepinac
+# label
+#~ msgid "_Wi-Fi"
+#~ msgstr "_Wi-Fi"
+
+#~ msgid "Wi-Fi can be turned off to save power."
+#~ msgstr "Sieť Wi-Fi môže byť vypnutá kvôli šetreniu energie."
+
+#~ msgid ""
+#~ "Mobile broadband (LTE, 4G, 3G, etc.) can be turned off to save power."
+#~ msgstr ""
+#~ "Šírokopásmové mobilné zariadenia (3G, 4G, LTE, atď) môžu byť vypnuté "
+#~ "kvôli šetreniu energie."
+
+# label
+#~ msgid "_Bluetooth"
+#~ msgstr "_Bluetooth"
+
+#~ msgid "Bluetooth can be turned off to save power."
+#~ msgstr "Rozhranie Bluetooth môže byť vypnuté kvôli šetreniu energie."
+
+# vľavo - vpravo
+#~ msgid "Balanced Power"
+#~ msgstr "Vyvážená spotreba energie"
+
+#~ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
+#~ msgstr "Prihlásenie;Meno;Odtlačok prsta;Podobizeň;Logo;Tvár;Heslo;"
 
 # GtkLabel label
 #~ msgid "Keyboard Shortcut"
@@ -9522,9 +10259,6 @@ msgstr "Systémové zvuky"
 #~ msgid "Read system and application logs"
 #~ msgstr "Čítanie systémových a aplikačných záznamov"
 
-#~ msgid "Access LXD service"
-#~ msgstr "Prístup k službe LXD"
-
 #~ msgid "access the media-hub service"
 #~ msgstr "Prístup k službe media-hub"
 
@@ -9551,9 +10285,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "Change network settings"
 #~ msgstr "Zmena nastavení siete"
-
-#~ msgid "Read network settings"
-#~ msgstr "Čítanie nastavení siete"
 
 #~ msgid ""
 #~ "Access the ofono service to read and change network settings for mobile "
@@ -9941,9 +10672,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "Infrastructure"
 #~ msgstr "Infraštruktúra"
-
-#~ msgid "Not connected"
-#~ msgstr "Nepripojené"
 
 #~ msgid "In use"
 #~ msgstr "Používa sa"
@@ -10353,10 +11081,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "gnome-control-center"
 #~ msgstr "gnome-control-center"
-
-# GtkEntry text
-#~ msgid "My Home Network"
-#~ msgstr "Moja domáca sieť"
 
 # tab
 #~ msgid "hardware"
@@ -10780,9 +11504,6 @@ msgstr "Systémové zvuky"
 #~ msgid "Other Accounts"
 #~ msgstr "Iné účty"
 
-#~ msgid "My Account"
-#~ msgstr "Môj účet"
-
 # policy_settings
 #~ msgctxt "notifications"
 #~ msgid "Notification _Banners"
@@ -11118,10 +11839,6 @@ msgstr "Systémové zvuky"
 
 #~ msgid "Time _Zone"
 #~ msgstr "Časové _pásmo"
-
-# GtkButton label
-#~ msgid "Close"
-#~ msgstr "Zavrieť"
 
 # GtkButton label
 #~ msgid "Options"
