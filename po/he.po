@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-09-24 15:42+0000\n"
+"POT-Creation-Date: 2021-09-24 23:51+0000\n"
 "PO-Revision-Date: 2021-09-23 10:57+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
@@ -77,8 +77,9 @@ msgid "File System"
 msgstr "מערכת הפעלה"
 
 #: panels/applications/cc-applications-panel.c:849
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:938 shell/cc-window.ui:121
+#: panels/keyboard/01-launchers.xml.in:6
+#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:310
+#: shell/cc-window.c:1018 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "הגדרות"
@@ -8662,10 +8663,6 @@ msgstr ""
 "סלולרי;אלחוטי;סים;SIM;נייד;תקשורת;מובייל;פלאפון;סלקום;פרטנר;רמי לוי;גולן;"
 "טלקום;טלפוניה;חיוג;טלפון;"
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:7
-msgid "GNOME Settings"
-msgstr "הגדרות GNOME"
-
 #: shell/appdata/gnome-control-center.appdata.xml.in:8
 msgid "Utility to configure the GNOME desktop"
 msgstr "כלים להגדרת שולחן העבודה GNOME"
@@ -8702,7 +8699,7 @@ msgstr "לוח להצגה"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT…]"
 
-#: shell/cc-panel-list.ui:45 shell/cc-window.c:275
+#: shell/cc-panel-list.ui:45 shell/cc-window.c:306
 msgid "Privacy"
 msgstr "פרטיות"
 
@@ -8792,6 +8789,16 @@ msgid ""
 msgstr ""
 "Whether Settings should show a warning when running a development build."
 
+#: shell/org.gnome.ControlCenter.gschema.xml:20
+msgid "Initial state of the window"
+msgstr ""
+
+#: shell/org.gnome.ControlCenter.gschema.xml:21
+msgid ""
+"A tuple containing the initial width, height and maximized state of the "
+"application window."
+msgstr ""
+
 #. translators:
 #. * The number of sound outputs on a particular device
 #: subprojects/gvc/gvc-mixer-control.c:1907
@@ -8817,6 +8824,9 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "GNOME Settings"
+#~ msgstr "הגדרות GNOME"
 
 #~ msgid ""
 #~ "Select your display language, formats, keyboard layouts and input sources"
