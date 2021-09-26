@@ -1,5 +1,5 @@
 # Serbian translation of gnome-control-center
-# Courtesy of Prevod.org team (http://prevod.org/) -- 2003—2021.
+# Courtesy of Prevod.org team (http://prevod.org/) -- 2003–2021.
 # This file is distributed under the same license as the gnome-control-center package.
 # Вељко М. Станојевић <veljko@vms.homelinux.net>
 # Данило Шеган <danilo@gnome.org>, 2005.
@@ -7,15 +7,15 @@
 # Милош Поповић <gpopac@gmail.com>, 2010, 2011.
 # Марко М. Костић <marko.m.kostic@gmail.com>, 2016.
 # Борисав Живановић <borisavzivanovic@gmail.com>, 2017-2018.
-# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011—2021.
+# Мирослав Николић <miroslavnikolic@rocketmail.com>, 2011–2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-09-08 08:29+0000\n"
-"PO-Revision-Date: 2021-09-20 07:04+0200\n"
-"Last-Translator: Марко М. Костић <marko.m.kostic@gmail.com>\n"
+"POT-Creation-Date: 2021-09-24 15:42+0000\n"
+"PO-Revision-Date: 2021-09-26 08:19+0200\n"
+"Last-Translator: Мирослав Николић <miroslavnikolic@rocketmail.com>\n"
 "Language-Team: српски <gnome-sr@googlegroups.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Project-Style: gnome\n"
-"X-Generator: Poedit 3.0\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -206,7 +205,7 @@ msgstr "Камера"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Искључено"
@@ -2312,7 +2311,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "Откажи"
 
@@ -2958,10 +2957,10 @@ msgid "Must have a minimum of 8 characters"
 msgstr "Мора садржати најмање осам знакова"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:272
-#, fuzzy, c-format
+#, c-format
 #| msgid "Must have a minimum of 8 characters"
 msgid "Must have a maximum of %d characters"
-msgstr "Мора садржати најмање осам знакова"
+msgstr "Мора садржати највише %d знака"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:488
 msgid "Turn On Wi-Fi Hotspot?"
@@ -4804,29 +4803,30 @@ msgstr ""
 "неку стабилну површину за омогућавање најбржег рада."
 
 #: panels/power/cc-power-panel.c:1175
-#, fuzzy
 #| msgid "Performance mode unavailable"
 msgid "Performance mode temporarily disabled."
-msgstr "Режим учинковитости није доступан"
+msgstr "Режим учинковитости је тренутно искључен."
 
 #: panels/power/cc-power-panel.c:1218
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr ""
+"Батерија је скоро празна: штедиша енергије је укључен. Претходни режим биће "
+"враћен када се батерија довољно напуни."
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1226
 #, c-format
 msgid "Power Saver mode activated by “%s”."
-msgstr ""
+msgstr "Режим штедише напајања је укључио „%s“."
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1230
-#, fuzzy, c-format
+#, c-format
 #| msgid "Performance mode unavailable"
 msgid "Performance mode activated by “%s”."
-msgstr "Режим учинковитости није доступан"
+msgstr "Режим учинковитости је покренуо „%s“."
 
 # bug(danilo): plural-forms
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
@@ -4910,7 +4910,7 @@ msgstr "Самостално осветљење екрана"
 
 #: panels/power/cc-power-panel.ui:147
 msgid "Screen brightness adjusts to the surrounding light."
-msgstr ""
+msgstr "Осветљеност екрана се подешава на светлост окружења."
 
 #: panels/power/cc-power-panel.ui:160
 msgid "Dim Screen"
@@ -4918,7 +4918,7 @@ msgstr "Затамни екран"
 
 #: panels/power/cc-power-panel.ui:161
 msgid "Reduces the screen brightness when the computer is inactive."
-msgstr ""
+msgstr "Смањује осветљеност екрана када је рачунар неактиван."
 
 #: panels/power/cc-power-panel.ui:174
 msgid "Screen _Blank"
@@ -4934,7 +4934,7 @@ msgstr "Самостална уштеда напајања"
 
 #: panels/power/cc-power-panel.ui:184
 msgid "Enables power saver mode when battery is low."
-msgstr ""
+msgstr "Укључује режим штедише напајања када је батерија скоро празна."
 
 #: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
@@ -7795,7 +7795,7 @@ msgstr "Пријављен сам"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "Омогућено"
 
@@ -7924,6 +7924,9 @@ msgid ""
 "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
 "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgstr ""
+"пријава;име;назив;отисак;аватар;лого;лице;лозинка;родитељска контрола;време "
+"екрана;ограничени програми;ограничења веба;коришћење;ограничење "
+"коришћења;дете;деца;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -8368,15 +8371,15 @@ msgstr "АПН"
 
 #: panels/wwan/cc-wwan-data.c:543
 msgid "Operation Cancelled"
-msgstr ""
+msgstr "Радња је отказана"
 
 #: panels/wwan/cc-wwan-data.c:546
 msgid "<b>Error:</b> Access denied changing settings"
-msgstr ""
+msgstr "<b>Грешка:</b> Приступ забрањује промену подешавања"
 
 #: panels/wwan/cc-wwan-data.c:549
 msgid "<b>Error:</b> Mobile Equipment Error"
-msgstr ""
+msgstr "<b>Грешка:</b> Грешка мобилне опреме"
 
 #: panels/wwan/cc-wwan-details-dialog.c:81
 msgid "Not Registered"
@@ -8499,81 +8502,81 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Непознато"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "Откључај СИМ картицу"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "Откључај"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
-msgstr ""
+msgstr "Доставите ПИН код за СИМ %d"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
-msgstr ""
+msgstr "Упишите ПИН да откључате вашу СИМ картицу"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
-msgstr ""
+msgstr "Доставите ПУК код за СИМ %d"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
-msgstr ""
+msgstr "Упишите ПУК да откључате вашу СИМ картицу"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Уписана је погрешна лозинка. Остао вам је %1$u покушај"
+msgstr[1] "Уписана је погрешна лозинка. Остала су вам %1$u покушаја"
+msgstr[2] "Уписана је погрешна лозинка. Остало вам је %1$u покушаја"
+msgstr[3] "Уписана је погрешна лозинка. Остао вам је један покушај"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "Остао вам је %u покушај"
+msgstr[1] "Остала су вам %u покушаја"
+msgstr[2] "Остало вам је %u покушаја"
+msgstr[3] "Остао вам је један покушај"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
-msgstr ""
+msgstr "Уписали сте погрешну лозинку."
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
-msgstr ""
+msgstr "ПУК код треба бити број од 8 цифара"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
-msgstr ""
+msgstr "Упишите нови ПИН"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
-msgstr ""
+msgstr "ПИН код треба бити број од 4-8 цифара"
 
-#: panels/wwan/cc-wwan-device-page.c:270
+#: panels/wwan/cc-wwan-device-page.c:317
 msgid "Unlocking..."
 msgstr "Откључавам..."
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
-msgstr ""
+msgstr "Нема СИМ-а"
 
 #: panels/wwan/cc-wwan-device-page.ui:45
 msgid "Insert a SIM card to use this modem"
-msgstr ""
+msgstr "Уметните СИМ картицу да бисте користили овај модем"
 
 #: panels/wwan/cc-wwan-device-page.ui:78
 msgid "SIM Locked"
-msgstr ""
+msgstr "СИМ је закључана"
 
 #: panels/wwan/cc-wwan-device-page.ui:139
 msgid "_Mobile Data"
@@ -8581,15 +8584,15 @@ msgstr "_Мобилни подаци"
 
 #: panels/wwan/cc-wwan-device-page.ui:140
 msgid "Access data using mobile network"
-msgstr ""
+msgstr "Приступите подацима користећи мобилну мрежу"
 
 #: panels/wwan/cc-wwan-device-page.ui:151
 msgid "_Data Roaming"
-msgstr ""
+msgstr "_Роминг података"
 
 #: panels/wwan/cc-wwan-device-page.ui:152
 msgid "Use mobile data when roaming"
-msgstr ""
+msgstr "Користите мобилне податке када сте у ромингу"
 
 #: panels/wwan/cc-wwan-device-page.ui:177
 msgid "_Network Mode"
@@ -8604,20 +8607,18 @@ msgid "Advanced"
 msgstr "Напредно"
 
 #: panels/wwan/cc-wwan-device-page.ui:225
-#, fuzzy
 #| msgid "Access Options"
 msgid "_Access Point Names"
-msgstr "Могућности приступа"
+msgstr "_Називи приступне тачке"
 
 #: panels/wwan/cc-wwan-device-page.ui:235
-#, fuzzy
 #| msgid "Screen Lock"
 msgid "_SIM Lock"
-msgstr "Закључавање екрана"
+msgstr "Закључај _СИМ"
 
 #: panels/wwan/cc-wwan-device-page.ui:236
 msgid "Lock SIM with PIN"
-msgstr ""
+msgstr "Закључајте СИМ ПИН-ом"
 
 #: panels/wwan/cc-wwan-device-page.ui:246
 msgid "M_odem Details"
@@ -8633,11 +8634,11 @@ msgstr "Нема везе са телефоном"
 
 #: panels/wwan/cc-wwan-errors-private.h:43
 msgid "Operation not allowed"
-msgstr ""
+msgstr "Радња није допуштена"
 
 #: panels/wwan/cc-wwan-errors-private.h:44
 msgid "Operation not supported"
-msgstr ""
+msgstr "Радња није подржана"
 
 #: panels/wwan/cc-wwan-errors-private.h:48
 msgid "SIM not inserted"
@@ -8653,11 +8654,11 @@ msgstr "Потребан је СИМ ПУК"
 
 #: panels/wwan/cc-wwan-errors-private.h:51
 msgid "SIM failure"
-msgstr ""
+msgstr "Неуспех СИМ-а"
 
 #: panels/wwan/cc-wwan-errors-private.h:52
 msgid "SIM busy"
-msgstr ""
+msgstr "СИМ је заузета"
 
 #: panels/wwan/cc-wwan-errors-private.h:54
 msgid "Incorrect password"
@@ -8684,25 +8685,23 @@ msgid "Network timeout"
 msgstr "Мрежа је истекла"
 
 #: panels/wwan/cc-wwan-errors-private.h:75
-#, fuzzy
 #| msgid "AutoIP service failed"
 msgid "GPRS services not allowed"
-msgstr "Услуга самосталног ИП-а није успела"
+msgstr "ГПРС услуге нису дозвољене"
 
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
-msgstr ""
+msgstr "Ромин није дозвољен у овој области"
 
 #: panels/wwan/cc-wwan-errors-private.h:82
 msgid "Unspecified GPRS error"
-msgstr ""
+msgstr "Неодређена ГПРС грешка"
 
 #: panels/wwan/cc-wwan-errors-private.h:91
-#, fuzzy
 #| msgctxt "print job"
 #| msgid "Canceled"
 msgid "Action Cancelled"
-msgstr "Отказан"
+msgstr "Радња је отказана"
 
 #: panels/wwan/cc-wwan-errors-private.h:94
 msgid "Access denied"
@@ -8720,7 +8719,7 @@ msgstr "Мрежни режим"
 #: panels/wwan/cc-wwan-network-dialog.ui:175
 #: panels/wwan/cc-wwan-sim-lock-dialog.c:230
 msgid "_Set"
-msgstr ""
+msgstr "_Постави"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
@@ -8737,12 +8736,12 @@ msgstr "Изабери мрежу"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:118
 msgid "Refresh Network Providers"
-msgstr ""
+msgstr "Освежите достављаче мреже"
 
 #: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
 #, c-format
 msgid "SIM %d"
-msgstr ""
+msgstr "СИМ %d"
 
 #: panels/wwan/cc-wwan-panel.ui:101
 msgid "No WWAN Adapter Found"
@@ -8778,11 +8777,11 @@ msgstr "СИМ закључавање"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
 msgid "_Next"
-msgstr ""
+msgstr "_Следеће"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
 msgid "_Lock SIM with PIN"
-msgstr ""
+msgstr "_Закључај СИМ ПИН-ом"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
 msgid "Change PIN"
@@ -8790,23 +8789,22 @@ msgstr "Промени ПИН"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
 msgid "Enter current PIN to change SIM lock settings"
-msgstr ""
+msgstr "Упишите текући ПИН да измените поставке закључавања СИМ-а"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:3
 msgid "Mobile Network"
 msgstr "Мобилна мрежа"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:4
-#, fuzzy
 #| msgid "Configure Removable Media settings"
 msgid "Configure Telephony and mobile data connections"
-msgstr "Подесите преносне медије"
+msgstr "Подесите везе мобилних података и телефоније"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:17
 msgid "cellular;wwan;telephony;sim;mobile;"
-msgstr ""
+msgstr "целулар;телефонија;сим;мобилна;cellular;wwan;telephony;sim;mobile;"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
