@@ -21,7 +21,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-09-08 08:29+0000\n"
+"POT-Creation-Date: 2021-09-24 15:42+0000\n"
 "PO-Revision-Date: 2021-09-09 22:32+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnometurk@gnome.org>\n"
@@ -212,7 +212,7 @@ msgstr "Kamera"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Devre dışı"
@@ -2288,7 +2288,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "İptal"
 
@@ -4754,14 +4754,14 @@ msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr ""
-"Düşük pil: güç kazanımı etkinleştirildi. Pil yeterince dolduğunda önceki "
+"Düşük pil: güç tutumu etkinleştirildi. Pil yeterince dolduğunda önceki "
 "kipe dönülecek."
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1226
 #, c-format
 msgid "Power Saver mode activated by “%s”."
-msgstr "“%s”, Güç Kazanım kipini aktifleştirdi."
+msgstr "“%s”, Güç Tutum kipini aktifleştirdi."
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1230
@@ -4867,11 +4867,11 @@ msgstr "Bir süre aktif olunmadığında ekranı kapatır."
 
 #: panels/power/cc-power-panel.ui:183
 msgid "Automatic Power Saver"
-msgstr "Kendiliğinden Güç Kazanımı"
+msgstr "Kendiliğinden Güç Tutumu"
 
 #: panels/power/cc-power-panel.ui:184
 msgid "Enables power saver mode when battery is low."
-msgstr "Pil düşükken güç kazanım kipini etkinleştirir."
+msgstr "Pil düşükken güç tutum kipini etkinleştirir."
 
 #: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
@@ -4944,7 +4944,7 @@ msgstr "Temel başarım ve güç kullanımı."
 #: panels/power/cc-power-profile-row.c:192
 msgctxt "Power profile"
 msgid "Power Saver"
-msgstr "Güç Kazanımı"
+msgstr "Güç Tutumu"
 
 #: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
@@ -7702,7 +7702,7 @@ msgstr "Oturum açık"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "Etkin"
 
@@ -8413,61 +8413,61 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Bilinmeyen"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "SIM kart kilidini aç"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "Kilidi Aç"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Lütfen SIM %d için PIN kodu sağlayın"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
 msgstr "SIM kartınızın kilidini açmak için PIN girin"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Lütfen SIM %d için PUK kodu sağlayın"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
 msgstr "SIM kartınızın kilidini açmak için PUK girin"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
 msgstr[0] "Yanlış parola girildi. %1$u hakkınız kaldı"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
 msgstr[0] "%u hakkınız kaldı"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "Yanlış parola girildi."
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
 msgstr "PUK kodu 8 haneli sayı olmalıdır"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "Yeni PIN Gir"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
 msgstr "PIN kodu 4-8 haneli sayı olmalıdır"
 
-#: panels/wwan/cc-wwan-device-page.c:270
+#: panels/wwan/cc-wwan-device-page.c:317
 msgid "Unlocking..."
 msgstr "Kilit Açılıyor..."
 
