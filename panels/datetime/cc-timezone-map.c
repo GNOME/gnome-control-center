@@ -426,8 +426,8 @@ set_location (CcTimezoneMap *map,
 
   info = tz_info_from_location (map->location);
 
-  map->selected_offset = tz_location_get_utc_offset (map->location)
-    / (60.0*60.0) + ((info->daylight) ? -1.0 : 0.0);
+  map->selected_offset = tz_location_get_base_utc_offset (map->location)
+    / (60.0*60.0);
   gtk_widget_queue_draw (GTK_WIDGET (map));
 
   g_signal_emit (map, signals[LOCATION_CHANGED], 0, map->location);
