@@ -215,19 +215,10 @@ tz_info_from_location (TzLocation *loc)
 	curzone = localtime (&curtime);
 
 #ifndef __sun
-	/* Currently this solution doesnt seem to work - I get that */
-	/* America/Phoenix uses daylight savings, which is wrong    */
-	tzinfo->tzname_normal = g_strdup (curzone->tm_zone);
-	if (curzone->tm_isdst) 
-		tzinfo->tzname_daylight =
-			g_strdup (&curzone->tm_zone[curzone->tm_isdst]);
-	else
-		tzinfo->tzname_daylight = NULL;
-
+	tzinfo->tzname = g_strdup (curzone->tm_zone);
 	tzinfo->utc_offset = curzone->tm_gmtoff;
 #else
-	tzinfo->tzname_normal = NULL;
-	tzinfo->tzname_daylight = NULL;
+	tzinfo->tzname = NULL;
 	tzinfo->utc_offset = 0;
 #endif
 
@@ -247,8 +238,7 @@ tz_info_free (TzInfo *tzinfo)
 {
 	g_return_if_fail (tzinfo != NULL);
 	
-	if (tzinfo->tzname_normal) g_free (tzinfo->tzname_normal);
-	if (tzinfo->tzname_daylight) g_free (tzinfo->tzname_daylight);
+	if (tzinfo->tzname) g_free (tzinfo->tzname);
 	g_free (tzinfo);
 }
 

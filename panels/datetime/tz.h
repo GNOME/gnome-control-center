@@ -56,15 +56,13 @@ struct _TzLocation
 };
 
 /* see the glibc info page information on time zone information */
-/*  tzname_normal    is the default name for the timezone */
-/*  tzname_daylight  is the name of the zone when in daylight savings */
+/*  tzname           is the default name for the timezone */
 /*  utc_offset       is offset in seconds from utc */
 /*  daylight         if non-zero then location obeys daylight savings */
 
 struct _TzInfo
 {
-	gchar *tzname_normal;
-	gchar *tzname_daylight;
+	gchar *tzname;
 	glong utc_offset;
 	gint daylight;
 };
