@@ -99,21 +99,6 @@ libgvc = subproject(
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
-libhandy_dep = dependency('libhandy-1', version: '>= 1.2.0', required: false)
-if not libhandy_dep.found()
-  libhandy = subproject(
-    'libhandy',
-    default_options: [
-      'examples=false',
-      'glade_catalog=disabled',
-      'introspection=disabled',
-      'tests=false',
-      'vapi=false',
-    ]
-  )
-  libhandy_dep = libhandy.get_variable('libhandy_dep')
-endif
-
 goa_req_version = '>= 3.25.3'
 pulse_req_version = '>= 2.0'
 
@@ -126,6 +111,7 @@ gnome_desktop_dep = dependency('gnome-desktop-3.0', version: '>= 3.33.4')
 gnome_settings_dep = dependency('gnome-settings-daemon', version: '>= 3.27.90')
 goa_dep = dependency('goa-1.0', version: goa_req_version)
 gsettings_desktop_dep = dependency('gsettings-desktop-schemas', version: '>= 40.alpha')
+libhandy_dep = dependency('libhandy-1', version: '>= 1.2.0')
 libxml_dep = dependency('libxml-2.0')
 pulse_dep = dependency('libpulse', version: pulse_req_version)
 pulse_mainloop_dep = dependency('libpulse-mainloop-glib', version: pulse_req_version)
