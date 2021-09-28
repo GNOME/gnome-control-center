@@ -314,7 +314,7 @@ wwan_device_unlock_clicked_cb (CcWwanDevicePage *self)
   if (!pin)
     return;
 
-  gtk_button_set_label (self->unlock_button, _("Unlocking..."));
+  gtk_button_set_label (self->unlock_button, _("Unlocking…"));
   gtk_widget_set_sensitive (GTK_WIDGET (self->unlock_button), FALSE);
 
   if (lock == MM_MODEM_LOCK_SIM_PIN)
