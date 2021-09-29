@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-09-08 08:29+0000\n"
-"PO-Revision-Date: 2021-09-08 12:56+0300\n"
+"POT-Creation-Date: 2021-09-28 13:34+0000\n"
+"PO-Revision-Date: 2021-09-29 15:55+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -74,8 +74,9 @@ msgid "File System"
 msgstr "Файлова система"
 
 #: panels/applications/cc-applications-panel.c:849
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:938 shell/cc-window.ui:121
+#: panels/keyboard/01-launchers.xml.in:6
+#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:313
+#: shell/cc-window.c:1043 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Параметри"
@@ -201,7 +202,7 @@ msgstr "Камера"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -356,7 +357,7 @@ msgstr "Виберіть зображення"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
-#: panels/display/cc-display-panel.c:1006
+#: panels/display/cc-display-panel.c:1023
 #: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
@@ -1573,20 +1574,20 @@ msgstr ""
 "екран;блокування;діагностика;крах;особисте;нещодавнє;тимчасове;tmp;індекс;"
 "назва;мережа;засвідчення;конфіденційність;"
 
-#: panels/display/cc-display-panel.c:1017
+#: panels/display/cc-display-panel.c:1034
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Застосувати"
 
-#: panels/display/cc-display-panel.c:1038
+#: panels/display/cc-display-panel.c:1055
 msgid "Apply Changes?"
 msgstr "Застосувати зміни?"
 
-#: panels/display/cc-display-panel.c:1043
+#: panels/display/cc-display-panel.c:1060
 msgid "Changes Cannot be Applied"
 msgstr "Не вдалося застосувати зміни"
 
-#: panels/display/cc-display-panel.c:1044
+#: panels/display/cc-display-panel.c:1061
 msgid "This could be due to hardware limitations."
 msgstr "Причиною можуть бути апаратні обмеження."
 
@@ -1646,27 +1647,27 @@ msgstr "Дисплеї"
 msgid "Night Light"
 msgstr "Нічне світло"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Альбомна"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Портретна праворуч"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:115
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Портретна ліворуч"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:118
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Альбомна перевернута"
 
-#: panels/display/cc-display-settings.c:190
+#: panels/display/cc-display-settings.c:192
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Гц"
@@ -2299,7 +2300,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -5697,7 +5698,8 @@ msgstr ""
 "вході до системи."
 
 #: panels/region/cc-format-chooser.ui:117
-msgid "Search locales..."
+#| msgid "Search locales..."
+msgid "Search locales…"
 msgstr "Пошук локалей…"
 
 #: panels/region/cc-format-chooser.ui:158
@@ -7758,7 +7760,7 @@ msgstr "Увійшов"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "Увімкнено"
 
@@ -7888,7 +7890,10 @@ msgid ""
 "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgstr ""
 "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;вхід;логін;лоґін;назва;ім'я;відбиток;аватар;логотип;обличчя;пароль;батьківський контроль;час за екраном;обмеження програм;обмеження інтернету;використання;користування;обмеження користування;діти;дитина;дитячий;"
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;вхід;"
+"логін;лоґін;назва;ім'я;відбиток;аватар;логотип;обличчя;пароль;батьківський "
+"контроль;час за екраном;обмеження програм;обмеження інтернету;використання;"
+"користування;обмеження користування;діти;дитина;дитячий;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -8465,33 +8470,33 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "Розблокувати SIM-картку"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "Розблокувати"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Будь ласка, вкажіть пінкод для SIM-картки %d"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
 msgstr "Введіть пінкод для розблокування вашої SIM-картки"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Будь ласка, вкажіть PUK-код для SIM-картки %d"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
 msgstr "Введіть PUK-код для розблокування вашої SIM-картки"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
@@ -8500,7 +8505,7 @@ msgstr[1] "Введено помилковий пароль. У вас лиши�
 msgstr[2] "Введено помилковий пароль. У вас лишилося %1$u спроб"
 msgstr[3] "Введено помилковий пароль. У вас лишилася %1$u спроба"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
@@ -8509,25 +8514,26 @@ msgstr[1] "У вас лишилося %u спроби"
 msgstr[2] "У вас лишилося %u спроб"
 msgstr[3] "У вас лишилася одна спроба"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "Введено помилковий пароль."
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
 msgstr "PUK-код має бути 8-цифровим числом"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "Введіть новий пінкод"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
 msgstr "Пінкод має бути числом, у якому має бути від 4 до 8 цифр"
 
-#: panels/wwan/cc-wwan-device-page.c:270
-msgid "Unlocking..."
-msgstr "Розблоковування…"
+#: panels/wwan/cc-wwan-device-page.c:317
+#| msgid "Unlock…"
+msgid "Unlocking…"
+msgstr "Розблокування…"
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
@@ -8760,15 +8766,11 @@ msgstr "Налаштовування телефонії та мобільних 
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:16
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr ""
 "cellular;wwan;telephony;sim;mobile;стільниковий;телефонія;телефон;сім;картка;"
 "мобільний;вван;"
-
-#: shell/appdata/gnome-control-center.appdata.xml.in:7
-msgid "GNOME Settings"
-msgstr "Параметри GNOME"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:8
 msgid "Utility to configure the GNOME desktop"
@@ -8806,7 +8808,7 @@ msgstr "Панель для показу"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[ПАНЕЛЬ] [АРГУМЕНТ…]"
 
-#: shell/cc-panel-list.ui:45 shell/cc-window.c:275
+#: shell/cc-panel-list.ui:45 shell/cc-window.c:309
 msgid "Privacy"
 msgstr "Конфіденційність"
 
@@ -8897,6 +8899,18 @@ msgid ""
 msgstr ""
 "Чи «Параметри» показуватимуть попередження при запуску розробницької збірки."
 
+#: shell/org.gnome.ControlCenter.gschema.xml:20
+msgid "Initial state of the window"
+msgstr ""
+"Початковий стан вікна"
+
+#: shell/org.gnome.ControlCenter.gschema.xml:21
+msgid ""
+"A tuple containing the initial width, height and maximized state of the "
+"application window."
+msgstr ""
+"Кортеж, що містить початкову ширину, висоту і стан максимізації вікна програми."
+
 #. translators:
 #. * The number of sound outputs on a particular device
 #: subprojects/gvc/gvc-mixer-control.c:1907
@@ -8922,6 +8936,12 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Unlocking..."
+#~ msgstr "Розблоковування…"
+
+#~ msgid "GNOME Settings"
+#~ msgstr "Параметри GNOME"
 
 #~ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 #~ msgstr "Вхід;Назва;Відбитки;Аватар;Логотип;Лице;Пароль;"
