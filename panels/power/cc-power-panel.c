@@ -811,7 +811,7 @@ populate_power_button_row (HdyComboRow *combo_row,
       if (!can_hibernate && actions[i].value == GSD_POWER_BUTTON_ACTION_HIBERNATE)
         continue;
 
-      value_object = hdy_value_object_new_string (actions[i].name);
+      value_object = hdy_value_object_new_string (_(actions[i].name));
       g_object_set_data (G_OBJECT (value_object),
                          "value",
                          GUINT_TO_POINTER (actions[i].value));
