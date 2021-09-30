@@ -26,24 +26,24 @@
 # Mingye Wang <arthur2e5@aosc.xyz>, 2015.
 # Mingcong Bai <jeffbai@aosc.xyz>, 2015, 2016, 2018.
 # Yuchen Guo <egyc@live.com>, 2020.
-# Dingzhong Chen <wsxy162@gmail.com>, 2016-2021.
 # Liu Tao <lyuutau@outlook.com>, 2021.
+# Dingzhong Chen <wsxy162@gmail.com>, 2016-2021.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-09-08 08:29+0000\n"
-"PO-Revision-Date: 2021-09-14 18:51+0800\n"
-"Last-Translator: lumingzh <lumingzh@qq.com>\n"
+"POT-Creation-Date: 2021-09-28 13:34+0000\n"
+"PO-Revision-Date: 2021-09-30 01:46+0800\n"
+"Last-Translator: Dingzhong Chen <wsxy162@gmail.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 40.0\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -98,8 +98,9 @@ msgid "File System"
 msgstr "文件系统"
 
 #: panels/applications/cc-applications-panel.c:849
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:938 shell/cc-window.ui:121
+#: panels/keyboard/01-launchers.xml.in:6
+#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:313
+#: shell/cc-window.c:1043 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "设置"
@@ -223,7 +224,7 @@ msgstr "相机"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "已禁用"
@@ -375,7 +376,7 @@ msgstr "选择图片"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
-#: panels/display/cc-display-panel.c:1006
+#: panels/display/cc-display-panel.c:1023
 #: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
@@ -1561,20 +1562,20 @@ msgstr ""
 "network;identity;privacy;屏幕;锁;诊断;崩溃;私有;最近;临时;索引;名称;网络;认"
 "证;标志;身份;隐私;"
 
-#: panels/display/cc-display-panel.c:1017
+#: panels/display/cc-display-panel.c:1034
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "应用(_A)"
 
-#: panels/display/cc-display-panel.c:1038
+#: panels/display/cc-display-panel.c:1055
 msgid "Apply Changes?"
 msgstr "应用更改？"
 
-#: panels/display/cc-display-panel.c:1043
+#: panels/display/cc-display-panel.c:1060
 msgid "Changes Cannot be Applied"
 msgstr "无法应用更改"
 
-#: panels/display/cc-display-panel.c:1044
+#: panels/display/cc-display-panel.c:1061
 msgid "This could be due to hardware limitations."
 msgstr "这可能是硬件限制造成的。"
 
@@ -1597,7 +1598,7 @@ msgstr "显示模式"
 
 #: panels/display/cc-display-panel.ui:220
 msgid "Contains top bar and Activities"
-msgstr "包含顶栏和“活动”"
+msgstr "包含顶栏和活动按钮"
 
 #: panels/display/cc-display-panel.ui:221
 msgid "Primary Display"
@@ -1632,27 +1633,27 @@ msgstr "显示器"
 msgid "Night Light"
 msgstr "夜灯"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "横向"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "纵向，朝右"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:115
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "纵向，朝左"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:118
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "横向翻转"
 
-#: panels/display/cc-display-settings.c:190
+#: panels/display/cc-display-settings.c:192
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf 赫兹"
@@ -1835,7 +1836,7 @@ msgstr "处理器"
 
 #: panels/info-overview/cc-info-overview-panel.ui:101
 msgid "Graphics"
-msgstr "图形"
+msgstr "显卡"
 
 #: panels/info-overview/cc-info-overview-panel.ui:110
 msgid "Disk Capacity"
@@ -1843,7 +1844,7 @@ msgstr "磁盘容量"
 
 #: panels/info-overview/cc-info-overview-panel.ui:111
 msgid "Calculating…"
-msgstr "正在计算…"
+msgstr "正在计算……"
 
 #. translators: this field contains the distro name and version
 #: panels/info-overview/cc-info-overview-panel.ui:133
@@ -2272,7 +2273,7 @@ msgstr "重新设置快捷键可能影响您的自定义快捷键。此操作无
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "取消"
 
@@ -2387,7 +2388,6 @@ msgid "Keyboard"
 msgstr "键盘"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-#| msgid "View and change keyboard shortcuts and set your typing preferences"
 msgid ""
 "Change keyboard shortcuts and set your typing preferences, keyboard layouts "
 "and input sources"
@@ -5592,8 +5592,9 @@ msgid ""
 msgstr "选择数字，日期和货币的格式。 更改将在下次登录时生效。"
 
 #: panels/region/cc-format-chooser.ui:117
-msgid "Search locales..."
-msgstr "搜索地区…"
+#| msgid "Search locales..."
+msgid "Search locales…"
+msgstr "搜索区域…"
 
 #: panels/region/cc-format-chooser.ui:158
 msgid "Common Formats"
@@ -5691,8 +5692,6 @@ msgid "Region & Language"
 msgstr "区域与语言"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-#| msgid ""
-#| "Select your display language, formats, keyboard layouts and input sources"
 msgid "Select your display language and formats"
 msgstr "选择您的显示语言和格式"
 
@@ -7625,7 +7624,7 @@ msgstr "已登录"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "已启用"
 
@@ -8210,11 +8209,11 @@ msgstr "已注册"
 
 #: panels/wwan/cc-wwan-details-dialog.c:89
 msgid "Roaming"
-msgstr "漫游"
+msgstr "漫游中"
 
 #: panels/wwan/cc-wwan-details-dialog.c:93
 msgid "Searching"
-msgstr "正在搜索"
+msgstr "搜索中"
 
 #: panels/wwan/cc-wwan-details-dialog.c:97
 msgid "Denied"
@@ -8266,118 +8265,119 @@ msgstr "仅 4G"
 
 #: panels/wwan/cc-wwan-device.c:1003
 msgid "2G, 3G, 4G (Preferred)"
-msgstr "2G, 3G, 4G（首选）"
+msgstr "2G、3G、4G（首选）"
 
 #: panels/wwan/cc-wwan-device.c:1005
 msgid "2G, 3G (Preferred), 4G"
-msgstr "2G, 3G（首选）, 4G"
+msgstr "2G、3G（首选）、4G"
 
 #: panels/wwan/cc-wwan-device.c:1007
 msgid "2G (Preferred), 3G, 4G"
-msgstr "2G（首选）, 3G, 4G"
+msgstr "2G（首选）、3G、4G"
 
 #: panels/wwan/cc-wwan-device.c:1009
 msgid "2G, 3G, 4G"
-msgstr "2G, 3G, 4G"
+msgstr "2G、3G、4G"
 
 #: panels/wwan/cc-wwan-device.c:1015
 msgid "3G, 4G (Preferred)"
-msgstr "3G, 4G（首选）"
+msgstr "3G、4G（首选）"
 
 #: panels/wwan/cc-wwan-device.c:1017
 msgid "3G (Preferred), 4G"
-msgstr "3G（首选）, 4G"
+msgstr "3G（首选）、4G"
 
 #: panels/wwan/cc-wwan-device.c:1019
 msgid "3G, 4G"
-msgstr "3G, 4G"
+msgstr "3G、4G"
 
 #: panels/wwan/cc-wwan-device.c:1025
 msgid "2G, 4G (Preferred)"
-msgstr "2G, 4G（首选）"
+msgstr "2G、4G（首选）"
 
 #: panels/wwan/cc-wwan-device.c:1027
 msgid "2G (Preferred), 4G"
-msgstr "2G（首选）, 4G"
+msgstr "2G（首选）、4G"
 
 #: panels/wwan/cc-wwan-device.c:1029
 msgid "2G, 4G"
-msgstr "2G, 4G"
+msgstr "2G、4G"
 
 #: panels/wwan/cc-wwan-device.c:1035
 msgid "2G, 3G (Preferred)"
-msgstr "2G, 3G（首选）"
+msgstr "2G、3G（首选）"
 
 #: panels/wwan/cc-wwan-device.c:1037
 msgid "2G (Preferred), 3G"
-msgstr "2G（首选）, 3G"
+msgstr "2G（首选）、3G"
 
 #: panels/wwan/cc-wwan-device.c:1039
 msgid "2G, 3G"
-msgstr "2G, 3G"
+msgstr "2G、3G"
 
 #: panels/wwan/cc-wwan-device.c:1043
 msgctxt "Network mode"
 msgid "Unknown"
 msgstr "未知"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "解锁 SIM 卡"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "解锁"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "请提供 SIM 卡 %d 的 PIN 码"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
 msgstr "输入 PIN 以解锁您的 SIM 卡"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "请提供 SIM 卡 %d 的 PUK 码"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
 msgstr "输入 PUK 以解锁您的 SIM 卡"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
 msgstr[0] "密码输入错误。您还有 %1$u 次尝试机会"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
 msgstr[0] "您还有 %u 次尝试机会"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "密码输入错误。"
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
 msgstr "PUK 码应为 8 位数字"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "输入新 PIN"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
 msgstr "PIN 码应为 4 到 8 位数字"
 
-#: panels/wwan/cc-wwan-device-page.c:270
-msgid "Unlocking..."
-msgstr "正在解锁…"
+#: panels/wwan/cc-wwan-device-page.c:317
+#| msgid "Unlock…"
+msgid "Unlocking…"
+msgstr "正在解锁……"
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
@@ -8609,13 +8609,9 @@ msgstr "配置电话和移动数据连接"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:16
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "cellular;wwan;telephony;sim;mobile;蜂窝;移动;无线;"
-
-#: shell/appdata/gnome-control-center.appdata.xml.in:7
-msgid "GNOME Settings"
-msgstr "GNOME 设置"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:8
 msgid "Utility to configure the GNOME desktop"
@@ -8653,7 +8649,7 @@ msgstr "要显示的面板"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[面板] [参数…]"
 
-#: shell/cc-panel-list.ui:45 shell/cc-window.c:275
+#: shell/cc-panel-list.ui:45 shell/cc-window.c:309
 msgid "Privacy"
 msgstr "隐私"
 
@@ -8740,6 +8736,16 @@ msgid ""
 "Whether Settings should show a warning when running a development build."
 msgstr "是否在运行开发版本的 GNOME 设置时显示警告。"
 
+#: shell/org.gnome.ControlCenter.gschema.xml:20
+msgid "Initial state of the window"
+msgstr "窗口初始状态"
+
+#: shell/org.gnome.ControlCenter.gschema.xml:21
+msgid ""
+"A tuple containing the initial width, height and maximized state of the "
+"application window."
+msgstr "元组类型的值，包含应用程序窗口的初始宽度、高度和最大化状态。"
+
 #. translators:
 #. * The number of sound outputs on a particular device
 #: subprojects/gvc/gvc-mixer-control.c:1907
@@ -8759,6 +8765,12 @@ msgstr[0] "%u 路输入"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "系统声音"
+
+#~ msgid "Unlocking..."
+#~ msgstr "正在解锁…"
+
+#~ msgid "GNOME Settings"
+#~ msgstr "GNOME 设置"
 
 #~ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 #~ msgstr ""
