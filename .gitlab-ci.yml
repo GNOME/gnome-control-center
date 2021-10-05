@@ -47,7 +47,7 @@ stages:
     # stable branch.
     # Could probably also switch away from rawhide,
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2021-07-22.0-main'
+    FDO_DISTRIBUTION_TAG: '2021-10-05.0-main'
     FDO_DISTRIBUTION_VERSION: rawhide
 
 #############################################
@@ -96,6 +96,7 @@ build.container.fedora@x86_64:
       libcanberra-devel
       libgtop2-devel
       libgudev-devel
+      libnghttp2-devel
       libnma-devel
       libpwquality-devel
       libsmbclient-devel
@@ -118,6 +119,12 @@ build.container.fedora@x86_64:
     FDO_DISTRIBUTION_EXEC: |-
       git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
+        meson . _build --prefix=/usr && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd .. && \
+      git clone https://gitlab.gnome.org/GNOME/libsoup.git && \
+        cd libsoup && \
         meson . _build --prefix=/usr && \
         ninja -C _build && \
         ninja -C _build install && \
