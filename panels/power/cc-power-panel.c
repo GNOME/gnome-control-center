@@ -960,7 +960,7 @@ static void
 populate_blank_screen_row (HdyComboRow *combo_row)
 {
   g_autoptr (GListStore) list_store = g_list_store_new (HDY_TYPE_VALUE_OBJECT);
-  gint minutes[] = { 1, 2, 3, 4, 5, 8, 10, 12, 15 };
+  gint minutes[] = { 1, 2, 3, 4, 5, 8, 10, 12, 15, 30, 60 };
   guint i;
   g_autoptr (HdyValueObject) never_value_object = NULL;
 
