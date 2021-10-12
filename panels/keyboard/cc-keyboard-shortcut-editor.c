@@ -308,7 +308,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
   HeaderMode mode;
   gboolean is_custom, is_accel_empty;
   gboolean valid, accel_valid;
-  gchar *accel;
+  g_autofree char *accel = NULL;
 
   is_custom = is_custom_shortcut (self);
   accel_valid = is_valid_binding (self->custom_combo) &&
