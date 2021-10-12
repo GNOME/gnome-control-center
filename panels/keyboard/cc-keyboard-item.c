@@ -472,12 +472,12 @@ variant_get_key_combos (GVariant *variant)
 
   for (str = bindings; *str; str++)
     {
-      CcKeyCombo *combo = g_new (CcKeyCombo, 1);
+      g_autofree CcKeyCombo *combo = g_new (CcKeyCombo, 1);
 
       binding_from_string (*str, combo);
 
       if (combo->keyval != 0 || combo->keycode != 0 || combo->mask != 0)
-        combos = g_list_prepend (combos, combo);
+        combos = g_list_prepend (combos, g_steal_pointer (&combo));
     }
 
   return g_list_reverse (combos);
