@@ -400,14 +400,10 @@ device_is_evdev (GUdevDevice *device)
 }
 
 static GsdDevice *
-create_device (GUdevDevice *udev_device)
+create_device (GUdevDevice *udev_device, GUdevDevice *parent)
 {
 	const gchar *vendor, *product, *name, *group;
 	guint width, height;
-	g_autoptr(GUdevDevice) parent = NULL;
-
-	parent = g_udev_device_get_parent (udev_device);
-	g_assert (parent != NULL);
 
 	name = g_udev_device_get_sysfs_attr (parent, "name");
 	vendor = g_udev_device_get_property (udev_device, "ID_VENDOR_ID");
@@ -440,7 +436,7 @@ add_device (GsdDeviceManager *manager,
 	    GUdevDevice	     *udev_device)
 {
         GsdDeviceManagerPrivate *priv = gsd_device_manager_get_instance_private (manager);
-	GUdevDevice *parent;
+	g_autoptr(GUdevDevice) parent = NULL;
 	GsdDevice *device;
 	const gchar *syspath;
 
@@ -449,7 +445,7 @@ add_device (GsdDeviceManager *manager,
 	if (!parent)
 		return;
 
-	device = create_device (udev_device);
+	device = create_device (udev_device, parent);
 	syspath = g_udev_device_get_sysfs_path (udev_device);
 	g_hash_table_insert (priv->devices, g_strdup (syspath), device);
 	g_signal_emit_by_name (manager, "device-added", device);
