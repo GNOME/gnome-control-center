@@ -596,6 +596,7 @@ cc_keyboard_manager_finalize (GObject *object)
   g_clear_pointer (&self->kb_apps_sections, g_hash_table_destroy);
   g_clear_pointer (&self->kb_user_sections, g_hash_table_destroy);
   g_clear_object (&self->binding_settings);
+  g_clear_object (&self->sections_store);
 
   g_clear_pointer (&self->wm_changed_id, wm_common_unregister_window_manager_change);
 
