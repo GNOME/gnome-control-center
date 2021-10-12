@@ -581,6 +581,7 @@ cc_keyboard_manager_finalize (GObject *object)
   g_clear_pointer (&self->kb_apps_sections, g_hash_table_destroy);
   g_clear_pointer (&self->kb_user_sections, g_hash_table_destroy);
   g_clear_object (&self->binding_settings);
+  g_clear_object (&self->sections_store);
 
   G_OBJECT_CLASS (cc_keyboard_manager_parent_class)->finalize (object);
 }
