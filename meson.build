@@ -127,7 +127,6 @@ gnome_settings_dep = dependency('gnome-settings-daemon', version: '>= 3.27.90')
 goa_dep = dependency('goa-1.0', version: goa_req_version)
 gsettings_desktop_dep = dependency('gsettings-desktop-schemas', version: '>= 40.alpha')
 libxml_dep = dependency('libxml-2.0')
-polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
 pulse_dep = dependency('libpulse', version: pulse_req_version)
 pulse_mainloop_dep = dependency('libpulse-mainloop-glib', version: pulse_req_version)
 upower_glib_dep = dependency('upower-glib', version: '>= 0.99.8')
@@ -147,6 +146,15 @@ common_deps = [
   dependency('gthread-2.0'),
   dependency('gtk+-3.0', version: '>= 3.22.20')
 ]
+
+polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
+# Also verify that polkit ITS files exist:
+# https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/491
+polkit_files = [ 'gettext/its/polkit.its', 'gettext/its/polkit.loc' ]
+foreach polkit_file: polkit_files
+  r = run_command('build-aux/meson/find_xdg_file.py', polkit_file)
+  assert(r.returncode() == 0, 'ITS support missing from polkit, please upgrade or contact your distribution')
+endforeach
 
 # Check for CUPS 1.4 or newer
 cups_dep = dependency('cups', version : '>= 1.4', required: false)
