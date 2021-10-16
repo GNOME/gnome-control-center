@@ -47,7 +47,7 @@ stages:
     # stable branch.
     # Could probably also switch away from rawhide,
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2022-01-05.0-main'
+    FDO_DISTRIBUTION_TAG: '2022-01-10.0-main'
     FDO_DISTRIBUTION_VERSION: rawhide
 
 #############################################
@@ -87,7 +87,6 @@ build.container.fedora@x86_64:
       gnome-bluetooth-libs-devel
       gnome-desktop3-devel
       gnome-online-accounts-devel
-      gnome-settings-daemon-devel
       grilo-devel
       gsettings-desktop-schemas-devel
       gsound-devel
@@ -118,6 +117,14 @@ build.container.fedora@x86_64:
       xorg-x11-server-Xvfb
       mesa-dri-drivers
       libsecret-devel
+      geocode-glib-devel
+      libgweather-devel
+      lcms2-devel
+      geoclue2-devel
+      libnotify-devel
+      alsa-lib-devel
+      nss-devel
+      gcr-devel
     FDO_DISTRIBUTION_EXEC: |-
       git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
@@ -146,6 +153,12 @@ build.container.fedora@x86_64:
       git clone https://github.com/hughsie/colord-gtk.git && \
         cd colord-gtk && \
         meson . _build --prefix=/usr -Dgtk4=true -Ddocs=false -Dtests=false -Dman=false && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd .. && \
+      git clone https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git && \
+        cd gnome-settings-daemon && \
+        meson . _build --prefix=/usr && \
         ninja -C _build && \
         ninja -C _build install && \
         cd ..
