@@ -47,7 +47,7 @@ stages:
     # stable branch.
     # Could probably also switch away from rawhide,
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2021-07-22.0-main'
+    FDO_DISTRIBUTION_TAG: '2021-10-18.0-main'
     FDO_DISTRIBUTION_VERSION: rawhide
 
 #############################################
@@ -87,7 +87,6 @@ build.container.fedora@x86_64:
       gnome-bluetooth-libs-devel
       gnome-desktop3-devel
       gnome-online-accounts-devel
-      gnome-settings-daemon-devel
       grilo-devel
       gsettings-desktop-schemas-devel
       gsound-devel
@@ -115,6 +114,13 @@ build.container.fedora@x86_64:
       xorg-x11-server-Xvfb
       mesa-dri-drivers
       libsecret-devel
+      geocode-glib-devel
+      libgweather-devel
+      lcms2-devel
+      geoclue2-devel
+      libnotify-devel
+      alsa-lib-devel
+      nss-devel
     FDO_DISTRIBUTION_EXEC: |-
       git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
@@ -122,6 +128,20 @@ build.container.fedora@x86_64:
         ninja -C _build && \
         ninja -C _build install && \
         cd ..
+
+.Compile and Install gsd: &compile_and_install_gsd
+  git clone https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git &&
+      cd gnome-settings-daemon &&
+      meson . _build --prefix=/usr &&
+      ninja -C _build &&
+      ninja -C _build install &&
+      cd ..
+
+.Install gsd: &install_gsd
+  cd gnome-settings-daemon &&
+      ninja -C _build install &&
+      cd ..
+
 
 ##
 # Stage: Build
@@ -140,6 +160,7 @@ build:
 
   script:
     - dnf -y install gcr-devel
+    - *compile_and_install_gsd
     - *environment_information
     - *build_procedure
 
@@ -173,6 +194,7 @@ test:
 
   script:
     - dnf -y install gcr-devel
+    - *install_gsd
     - *environment_information
     - *run_tests
 
@@ -202,6 +224,7 @@ coverage:
 
   script:
     - dnf -y install gcr-devel
+    - *compile_and_install_gsd
     - *environment_information
     - *build_procedure
     - *run_tests
@@ -318,6 +341,7 @@ flatpak:
   when: manual
   script:
     - dnf -y install gcr-devel
+    - *compile_and_install_gsd
     - *environment_information
     - *build_procedure
     - *run_tests
