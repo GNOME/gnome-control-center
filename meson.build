@@ -99,23 +99,14 @@ libgvc = subproject(
 )
 libgvc_dep = libgvc.get_variable('libgvc_dep')
 
-libhandy_dep = dependency('libhandy-1', version: '>= 1.2.0', required: false)
-if not libhandy_dep.found()
-  libhandy = subproject(
-    'libhandy',
-    default_options: [
-      'examples=false',
-      'glade_catalog=disabled',
-      'introspection=disabled',
-      'tests=false',
-      'vapi=false',
-    ]
-  )
-  libhandy_dep = libhandy.get_variable('libhandy_dep')
-endif
-
 goa_req_version = '>= 3.25.3'
 pulse_req_version = '>= 2.0'
+
+libadwaita_dep = dependency(
+  'libadwaita-1',
+  fallback: ['libadwaita', 'libadwaita_dep'],
+  default_options: ['examples=false', 'introspection=disabled', 'tests=false', 'vapi=false'],
+)
 
 accounts_dep = dependency('accountsservice', version: '>= 0.6.39')
 colord_dep = dependency('colord', version: '>= 0.1.34')
@@ -141,10 +132,10 @@ common_deps = [
   gio_dep,
   glib_dep,
   gsettings_desktop_dep,
-  libhandy_dep,
+  libadwaita_dep,
   dependency('gio-unix-2.0'),
   dependency('gthread-2.0'),
-  dependency('gtk+-3.0', version: '>= 3.22.20')
+  dependency('gtk4', version: '>= 4.4'),
 ]
 
 polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
