@@ -36,6 +36,7 @@ struct _CcWifiConnectionRow
   GtkCheckButton  *checkbutton;
   GtkSpinner      *connecting_spinner;
   GtkImage        *encrypted_icon;
+  GtkButton       *options_button;
   GtkImage        *strength_icon;
 };
 
@@ -249,6 +250,7 @@ update_ui (CcWifiConnectionRow *self)
     }
 
   gtk_widget_set_visible (GTK_WIDGET (self->active_label), active);
+  gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting);
 
   if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE)
     {
@@ -438,6 +440,7 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, connecting_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, encrypted_icon);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, options_button);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, strength_icon);
 
   gtk_widget_class_bind_template_callback (widget_class, configure_clicked_cb);
