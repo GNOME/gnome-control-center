@@ -184,10 +184,6 @@ deps = common_deps + [
   dependency('pwquality', version: '>= 1.2.2')
 ]
 
-if enable_cheese
-  deps += cheese_deps
-endif
-
 if enable_malcontent
   deps += malcontent_dep
 endif

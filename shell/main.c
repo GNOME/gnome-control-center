@@ -29,10 +29,6 @@
 #include <X11/Xlib.h>
 #endif
 
-#ifdef HAVE_CHEESE
-#include <cheese-gtk.h>
-#endif /* HAVE_CHEESE */
-
 #include "cc-application.h"
 
 static void
@@ -42,10 +38,6 @@ initialize_dependencies (gint    *argc,
   #ifdef GDK_WINDOWING_X11
     XInitThreads ();
   #endif
-
-  #ifdef HAVE_CHEESE
-    cheese_gtk_init (argc, argv);
-  #endif /* HAVE_CHEESE */
 }
 
 int

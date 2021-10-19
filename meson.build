@@ -171,17 +171,6 @@ config_h.set10('HAVE_CUPS_HTTPCONNECT2',
                cc.has_function('httpConnect2', dependencies: cups_dep),
                description: 'Define if httpConnect2() is available in CUPS')
 
-# Optional dependency for the user accounts panel
-enable_cheese = get_option('cheese')
-if enable_cheese
-  cheese_deps = [
-    dependency('cheese', version: '>= 3.28.0'),
-    dependency('cheese-gtk', version: '>= 3.5.91')
-  ]
-endif
-config_h.set('HAVE_CHEESE', enable_cheese,
-             description: 'Define to 1 to enable cheese webcam support')
-
 # IBus support
 enable_ibus = get_option('ibus')
 if enable_ibus
@@ -310,7 +299,6 @@ summary({
 }, section: 'Dependencies')
 
 summary({
-  'Cheese': enable_cheese,
   'IBus': enable_ibus,
   'Snap': enable_snap,
   'Malcontent': enable_malcontent,
