@@ -41,7 +41,9 @@
 
 struct _CcTimeEntry
 {
-  GtkEntry   parent_instance;
+  GtkWidget  parent_instance;
+
+  GtkWidget   *text;
 
   guint      insert_text_id;
   guint      time_changed_id;
@@ -51,7 +53,17 @@ struct _CcTimeEntry
   gboolean   is_am; /* AM if TRUE. PM if FALSE. valid iff is_am_pm set */
 };
 
-G_DEFINE_TYPE (CcTimeEntry, cc_time_entry, GTK_TYPE_ENTRY)
+
+static void editable_insert_text_cb (GtkText     *text,
+                                     char        *new_text,
+                                     gint         new_text_length,
+                                     gint        *position,
+                                     CcTimeEntry *self);
+
+static void gtk_editable_interface_init (GtkEditableInterface *iface);
+
+G_DEFINE_TYPE_WITH_CODE (CcTimeEntry, cc_time_entry, GTK_TYPE_WIDGET,
+                         G_IMPLEMENT_INTERFACE (GTK_TYPE_EDITABLE, gtk_editable_interface_init));
 
 enum {
   CHANGE_VALUE,
@@ -80,9 +92,9 @@ time_entry_fill_time (CcTimeEntry *self)
 
   str = g_strdup_printf ("%02d∶%02d", self->hour, self->minute);
 
-  g_signal_handler_block (self, self->insert_text_id);
-  gtk_entry_set_text (GTK_ENTRY (self), str);
-  g_signal_handler_unblock (self, self->insert_text_id);
+  g_signal_handlers_block_by_func (self->text, editable_insert_text_cb, self);
+  gtk_editable_set_text (GTK_EDITABLE (self->text), str);
+  g_signal_handlers_unblock_by_func (self->text, editable_insert_text_cb, self);
 }
 
 static void
@@ -94,18 +106,18 @@ cursor_position_changed_cb (CcTimeEntry *self)
 
   current_pos = gtk_editable_get_position (GTK_EDITABLE (self));
 
-  g_signal_handlers_block_by_func (self, cursor_position_changed_cb, self);
+  g_signal_handlers_block_by_func (self->text, cursor_position_changed_cb, self);
 
   /* If cursor is on ‘:’ move to the next field */
   if (current_pos == SEPARATOR_INDEX)
-    gtk_editable_set_position (GTK_EDITABLE (self), current_pos + 1);
+    gtk_editable_set_position (GTK_EDITABLE (self->text), current_pos + 1);
 
   /* If cursor is after the last digit and without selection, move to last digit */
   if (current_pos > END_INDEX &&
-      !gtk_editable_get_selection_bounds (GTK_EDITABLE (self), NULL, NULL))
-    gtk_editable_set_position (GTK_EDITABLE (self), END_INDEX);
+      !gtk_editable_get_selection_bounds (GTK_EDITABLE (self->text), NULL, NULL))
+    gtk_editable_set_position (GTK_EDITABLE (self->text), END_INDEX);
 
-  g_signal_handlers_unblock_by_func (self, cursor_position_changed_cb, self);
+  g_signal_handlers_unblock_by_func (self->text, cursor_position_changed_cb, self);
 }
 
 static void
@@ -115,23 +127,24 @@ entry_selection_changed_cb (CcTimeEntry *self)
 
   g_assert (CC_IS_TIME_ENTRY (self));
 
-  editable = GTK_EDITABLE (self);
+  editable = GTK_EDITABLE (self->text);
 
-  g_signal_handlers_block_by_func (self, cursor_position_changed_cb, self);
+  g_signal_handlers_block_by_func (self->text, cursor_position_changed_cb, self);
 
   /* If cursor is after the last digit and without selection, move to last digit */
   if (gtk_editable_get_position (editable) > END_INDEX &&
       !gtk_editable_get_selection_bounds (editable, NULL, NULL))
     gtk_editable_set_position (editable, END_INDEX);
 
-  g_signal_handlers_unblock_by_func (self, cursor_position_changed_cb, self);
+  g_signal_handlers_unblock_by_func (self->text, cursor_position_changed_cb, self);
 }
 
 static void
-editable_insert_text_cb (CcTimeEntry *self,
+editable_insert_text_cb (GtkText     *text,
                          char        *new_text,
                          gint         new_text_length,
-                         gint        *position)
+                         gint        *position,
+                         CcTimeEntry *self)
 {
   g_assert (CC_IS_TIME_ENTRY (self));
 
@@ -140,9 +153,10 @@ editable_insert_text_cb (CcTimeEntry *self,
 
   if (new_text_length == 5)
     {
+      const gchar *text = gtk_editable_get_text (GTK_EDITABLE (self));
       guint16 text_length;
 
-      text_length = gtk_entry_get_text_length (GTK_ENTRY (self));
+      text_length = g_utf8_strlen (text, -1);
 
       /* Return if the text matches XX:XX template (where X is a number) */
       if (text_length == 0 &&
@@ -176,7 +190,7 @@ editable_insert_text_cb (CcTimeEntry *self,
 
       self->minute = CLAMP (self->minute, 0, 59);
 
-      g_signal_stop_emission_by_name (self, "insert-text");
+      g_signal_stop_emission_by_name (text, "insert-text");
       time_entry_fill_time (self);
       *position = pos + 1;
 
@@ -187,56 +201,23 @@ editable_insert_text_cb (CcTimeEntry *self,
     }
 
   /* Warn otherwise */
-  g_signal_stop_emission_by_name (self, "insert-text");
+  g_signal_stop_emission_by_name (text, "insert-text");
   gtk_widget_error_bell (GTK_WIDGET (self));
 }
 
 
-static void
-entry_select_all (CcTimeEntry *self)
+static gboolean
+change_value_cb (GtkWidget *widget,
+                 GVariant  *arguments,
+                 gpointer   user_data)
 {
-  gtk_editable_select_region (GTK_EDITABLE (self), 0, -1);
-}
-
-static void
-entry_populate_popup_cb (CcTimeEntry *self,
-                         GtkWidget   *widget)
-{
-  GList *children;
-
-  if (!GTK_IS_CONTAINER (widget))
-    return;
-
-  children = gtk_container_get_children (GTK_CONTAINER (widget));
-
-  if (GTK_IS_MENU (widget))
-    {
-      GtkWidget *menu_item;
-
-      for (GList *child = children; child; child = child->next)
-        gtk_container_remove (GTK_CONTAINER (widget), child->data);
-
-      menu_item = gtk_menu_item_new_with_mnemonic (_("_Copy"));
-      gtk_widget_set_sensitive (menu_item, gtk_editable_get_selection_bounds (GTK_EDITABLE (self), NULL, NULL));
-      g_signal_connect_swapped (menu_item, "activate", G_CALLBACK (gtk_editable_copy_clipboard), self);
-      gtk_widget_show (menu_item);
-      gtk_menu_shell_append (GTK_MENU_SHELL (widget), menu_item);
-
-      menu_item = gtk_menu_item_new_with_mnemonic (_("Select _All"));
-      gtk_widget_set_sensitive (menu_item, gtk_entry_get_text_length (GTK_ENTRY (self)) > 0);
-      g_signal_connect_swapped (menu_item, "activate", G_CALLBACK (entry_select_all), self);
-      gtk_widget_show (menu_item);
-      gtk_menu_shell_append (GTK_MENU_SHELL (widget), menu_item);
-    }
-}
-
-static void
-time_entry_change_value_cb (CcTimeEntry   *self,
-                            GtkScrollType  type)
-{
+  CcTimeEntry *self = CC_TIME_ENTRY (widget);
+  GtkScrollType type;
   int position;
+
   g_assert (CC_IS_TIME_ENTRY (self));
 
+  type = g_variant_get_int32 (arguments);
   position = gtk_editable_get_position (GTK_EDITABLE (self));
 
   if (position > SEPARATOR_INDEX)
@@ -280,17 +261,38 @@ time_entry_change_value_cb (CcTimeEntry   *self,
   g_clear_handle_id (&self->time_changed_id, g_source_remove);
   self->time_changed_id = g_timeout_add (EMIT_CHANGED_TIMEOUT,
                                          (GSourceFunc)emit_time_changed, self);
+
+  return GDK_EVENT_STOP;
 }
 
 static void
-cc_entry_move_cursor (GtkEntry        *entry,
-                      GtkMovementStep  step,
-                      gint             count,
-                      gboolean         extend_selection)
+on_text_cut_clipboard_cb (GtkText     *text,
+                          CcTimeEntry *self)
+{
+  gtk_widget_error_bell (GTK_WIDGET (self));
+  g_signal_stop_emission_by_name (text, "cut-clipboard");
+}
+
+static void
+on_text_delete_from_cursor_cb (GtkText       *text,
+                               GtkDeleteType *type,
+                               gint           count,
+                               CcTimeEntry   *self)
+{
+  gtk_widget_error_bell (GTK_WIDGET (self));
+  g_signal_stop_emission_by_name (text, "delete-from-cursor");
+}
+
+static void
+on_text_move_cursor_cb (GtkText         *text,
+                        GtkMovementStep  step,
+                        gint             count,
+                        gboolean         extend,
+                        CcTimeEntry     *self)
 {
   int current_pos;
 
-  current_pos = gtk_editable_get_position (GTK_EDITABLE (entry));
+  current_pos = gtk_editable_get_position (GTK_EDITABLE (self));
 
   /* If cursor is on ‘:’ move backward/forward depending on the current movement */
   if ((step == GTK_MOVEMENT_LOGICAL_POSITIONS ||
@@ -298,61 +300,54 @@ cc_entry_move_cursor (GtkEntry        *entry,
       current_pos + count == SEPARATOR_INDEX)
     count > 0 ? count++ : count--;
 
-  GTK_ENTRY_CLASS (cc_time_entry_parent_class)->move_cursor (entry, step, count, extend_selection);
+  g_signal_handlers_block_by_func (text, on_text_move_cursor_cb, self);
+  gtk_editable_set_position (GTK_EDITABLE (text), current_pos + count);
+  g_signal_handlers_unblock_by_func (text, on_text_move_cursor_cb, self);
+
+  g_signal_stop_emission_by_name (text, "move-cursor");
 }
 
 static void
-cc_time_entry_error_bell (GtkEntry *entry)
+on_text_paste_clipboard_cb (GtkText     *text,
+                            CcTimeEntry *self)
 {
-  gtk_widget_error_bell (GTK_WIDGET (entry));
+  gtk_widget_error_bell (GTK_WIDGET (self));
+  g_signal_stop_emission_by_name (text, "paste-clipboard");
 }
 
 static void
-cc_time_entry_delete_from_cursor (GtkEntry      *entry,
-                                  GtkDeleteType  type,
-                                  gint            count)
+on_text_toggle_overwrite_cb (GtkText     *text,
+                             CcTimeEntry *self)
 {
-  gtk_widget_error_bell (GTK_WIDGET (entry));
+  gtk_widget_error_bell (GTK_WIDGET (self));
+  g_signal_stop_emission_by_name (text, "toggle-overwrite");
 }
 
 static gboolean
-cc_time_entry_drag_motion (GtkWidget      *widget,
-                           GdkDragContext *context,
-                           gint            x,
-                           gint            y,
-                           guint           time)
+on_key_pressed_cb (GtkEventControllerKey *key_controller,
+                   guint                  keyval,
+                   guint                  keycode,
+                   GdkModifierType        state,
+                   CcTimeEntry           *self)
 {
-  return TRUE;
-}
-
-static gboolean
-cc_time_entry_key_press (GtkWidget   *widget,
-                         GdkEventKey *event)
-{
-  CcTimeEntry *self = (CcTimeEntry *)widget;
-
   /* Allow entering numbers */
-  if (!(event->state & GDK_SHIFT_MASK) &&
-      ((event->keyval >= GDK_KEY_KP_0 &&
-        event->keyval <= GDK_KEY_KP_9) ||
-       (event->keyval >= GDK_KEY_0 &&
-        event->keyval <= GDK_KEY_9)))
-    return GTK_WIDGET_CLASS (cc_time_entry_parent_class)->key_press_event (widget, event);
+  if (!(state & GDK_SHIFT_MASK) &&
+      ((keyval >= GDK_KEY_KP_0 && keyval <= GDK_KEY_KP_9) ||
+       (keyval >= GDK_KEY_0 && keyval <= GDK_KEY_9)))
+    return GDK_EVENT_PROPAGATE;
 
   /* Allow navigation keys */
-  if ((event->keyval >= GDK_KEY_Left &&
-       event->keyval <= GDK_KEY_Down) ||
-      (event->keyval >= GDK_KEY_KP_Left &&
-       event->keyval <= GDK_KEY_KP_Down) ||
-      event->keyval == GDK_KEY_Home ||
-      event->keyval == GDK_KEY_End ||
-      event->keyval == GDK_KEY_Menu)
-    return GTK_WIDGET_CLASS (cc_time_entry_parent_class)->key_press_event (widget, event);
+  if ((keyval >= GDK_KEY_Left && keyval <= GDK_KEY_Down) ||
+      (keyval >= GDK_KEY_KP_Left && keyval <= GDK_KEY_KP_Down) ||
+      keyval == GDK_KEY_Home ||
+      keyval == GDK_KEY_End ||
+      keyval == GDK_KEY_Menu)
+    return GDK_EVENT_PROPAGATE;
 
-  if (event->state & (GDK_CONTROL_MASK | GDK_MOD1_MASK))
-    return GTK_WIDGET_CLASS (cc_time_entry_parent_class)->key_press_event (widget, event);
+  if (state & (GDK_CONTROL_MASK | GDK_ALT_MASK))
+    return GDK_EVENT_PROPAGATE;
 
-  if (event->keyval == GDK_KEY_Tab)
+  if (keyval == GDK_KEY_Tab)
     {
       /* If focus is on Hour field skip to minute field */
       if (gtk_editable_get_position (GTK_EDITABLE (self)) <= 1)
@@ -362,11 +357,11 @@ cc_time_entry_key_press (GtkWidget   *widget,
           return GDK_EVENT_STOP;
         }
 
-      return GTK_WIDGET_CLASS (cc_time_entry_parent_class)->key_press_event (widget, event);
+      return GDK_EVENT_PROPAGATE;
     }
 
   /* Shift-Tab */
-  if (event->keyval == GDK_KEY_ISO_Left_Tab)
+  if (keyval == GDK_KEY_ISO_Left_Tab)
     {
       /* If focus is on Minute field skip back to Hour field */
       if (gtk_editable_get_position (GTK_EDITABLE (self)) >= 2)
@@ -376,27 +371,33 @@ cc_time_entry_key_press (GtkWidget   *widget,
           return GDK_EVENT_STOP;
         }
 
-      return GTK_WIDGET_CLASS (cc_time_entry_parent_class)->key_press_event (widget, event);
+      return GDK_EVENT_PROPAGATE;
     }
 
   return GDK_EVENT_STOP;
 }
 
+static GtkEditable *
+cc_time_entry_get_delegate (GtkEditable *editable)
+{
+  CcTimeEntry *self = CC_TIME_ENTRY (editable);
+  return GTK_EDITABLE (self->text);
+}
+
+static void
+gtk_editable_interface_init (GtkEditableInterface *iface)
+{
+  iface->get_delegate = cc_time_entry_get_delegate;
+}
+
 static void
 cc_time_entry_constructed (GObject *object)
 {
+  CcTimeEntry *self = CC_TIME_ENTRY (object);
   PangoAttrList *list;
   PangoAttribute *attribute;
 
   G_OBJECT_CLASS (cc_time_entry_parent_class)->constructed (object);
-
-  g_object_set (object,
-                "input-purpose", GTK_INPUT_PURPOSE_DIGITS,
-                "input-hints", GTK_INPUT_HINT_NO_EMOJI,
-                "overwrite-mode", TRUE,
-                "xalign", 0.5,
-                "max-length", 5,
-                NULL);
 
   time_entry_fill_time (CC_TIME_ENTRY (object));
 
@@ -412,9 +413,44 @@ cc_time_entry_constructed (GObject *object)
   attribute = pango_attr_font_features_new ("tnum");
   pango_attr_list_insert (list, attribute);
 
-  gtk_entry_set_attributes (GTK_ENTRY (object), list);
+  gtk_text_set_attributes (GTK_TEXT (self->text), list);
 
   pango_attr_list_unref (list);
+}
+
+static void
+cc_time_entry_dispose (GObject *object)
+{
+  CcTimeEntry *self = CC_TIME_ENTRY (object);
+
+  gtk_editable_finish_delegate (GTK_EDITABLE (self));
+  g_clear_pointer (&self->text, gtk_widget_unparent);
+
+  G_OBJECT_CLASS (cc_time_entry_parent_class)->dispose (object);
+}
+
+static void
+cc_time_entry_get_property (GObject    *object,
+                            guint       property_id,
+                            GValue     *value,
+                            GParamSpec *pspec)
+{
+  if (gtk_editable_delegate_get_property (object, property_id, value, pspec))
+    return;
+
+  G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+}
+
+static void
+cc_time_entry_set_property (GObject      *object,
+                            guint         property_id,
+                            const GValue *value,
+                            GParamSpec   *pspec)
+{
+  if (gtk_editable_delegate_set_property (object, property_id, value, pspec))
+    return;
+
+  G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
 }
 
 static void
@@ -422,20 +458,11 @@ cc_time_entry_class_init (CcTimeEntryClass *klass)
 {
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GtkEntryClass  *entry_class  = GTK_ENTRY_CLASS (klass);
-  GtkBindingSet  *binding_set;
 
   object_class->constructed = cc_time_entry_constructed;
-
-  widget_class->drag_motion = cc_time_entry_drag_motion;
-  widget_class->key_press_event = cc_time_entry_key_press;
-
-  entry_class->delete_from_cursor = cc_time_entry_delete_from_cursor;
-  entry_class->move_cursor = cc_entry_move_cursor;
-  entry_class->toggle_overwrite = cc_time_entry_error_bell;
-  entry_class->backspace = cc_time_entry_error_bell;
-  entry_class->cut_clipboard = cc_time_entry_error_bell;
-  entry_class->paste_clipboard = cc_time_entry_error_bell;
+  object_class->dispose = cc_time_entry_dispose;
+  object_class->get_property = cc_time_entry_get_property;
+  object_class->set_property = cc_time_entry_set_property;
 
   signals[CHANGE_VALUE] =
     g_signal_new ("change-value",
@@ -454,36 +481,50 @@ cc_time_entry_class_init (CcTimeEntryClass *klass)
                   NULL,
                   G_TYPE_NONE, 0);
 
-  binding_set = gtk_binding_set_by_class (klass);
+  gtk_editable_install_properties (object_class, 1);
 
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Up, 0,
-                                "change-value", 1,
-                                GTK_TYPE_SCROLL_TYPE, GTK_SCROLL_STEP_UP);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Up, 0,
-                                "change-value", 1,
-                                GTK_TYPE_SCROLL_TYPE, GTK_SCROLL_STEP_UP);
+  gtk_widget_class_set_css_name (widget_class, "entry");
+  gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);
 
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_Down, 0,
-                                "change-value", 1,
-                                GTK_TYPE_SCROLL_TYPE, GTK_SCROLL_STEP_DOWN);
-  gtk_binding_entry_add_signal (binding_set, GDK_KEY_KP_Down, 0,
-                                "change-value", 1,
-                                GTK_TYPE_SCROLL_TYPE, GTK_SCROLL_STEP_DOWN);
+  gtk_widget_class_add_binding (widget_class, GDK_KEY_Up, 0,
+                                change_value_cb, "i", GTK_SCROLL_STEP_UP);
+  gtk_widget_class_add_binding (widget_class, GDK_KEY_KP_Up, 0,
+                                change_value_cb, "i", GTK_SCROLL_STEP_UP);
+  gtk_widget_class_add_binding (widget_class, GDK_KEY_Down, 0,
+                                change_value_cb, "i", GTK_SCROLL_STEP_DOWN);
+  gtk_widget_class_add_binding (widget_class, GDK_KEY_KP_Down, 0,
+                                change_value_cb, "i", GTK_SCROLL_STEP_DOWN);
 }
 
 static void
 cc_time_entry_init (CcTimeEntry *self)
 {
-  g_signal_connect_after (self, "notify::cursor-position",
-                          G_CALLBACK (cursor_position_changed_cb), NULL);
-  g_signal_connect_after (self, "notify::selection-bound",
-                          G_CALLBACK (entry_selection_changed_cb), NULL);
-  self->insert_text_id = g_signal_connect (self, "insert-text",
-                                           G_CALLBACK (editable_insert_text_cb), NULL);
-  g_signal_connect_after (self, "populate-popup",
-                          G_CALLBACK (entry_populate_popup_cb), NULL);
-  g_signal_connect (self, "change-value",
-                    G_CALLBACK (time_entry_change_value_cb), NULL);
+  GtkEventController *key_controller;
+
+  key_controller = gtk_event_controller_key_new ();
+  gtk_event_controller_set_propagation_phase (key_controller, GTK_PHASE_CAPTURE);
+  g_signal_connect (key_controller, "key-pressed", G_CALLBACK (on_key_pressed_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self), key_controller);
+
+  self->text = g_object_new (GTK_TYPE_TEXT,
+                             "input-purpose", GTK_INPUT_PURPOSE_DIGITS,
+                             "input-hints", GTK_INPUT_HINT_NO_EMOJI,
+                             "overwrite-mode", TRUE,
+                             "xalign", 0.5,
+                             "max-length", 5,
+                             NULL);
+  gtk_widget_set_parent (self->text, GTK_WIDGET (self));
+  gtk_editable_init_delegate (GTK_EDITABLE (self));
+  g_object_connect (self->text,
+                    "signal::cut-clipboard", on_text_cut_clipboard_cb, self,
+                    "signal::delete-from-cursor", on_text_delete_from_cursor_cb, self,
+                    "signal::insert-text", editable_insert_text_cb, self,
+                    "signal::move-cursor", on_text_move_cursor_cb, self,
+                    "swapped-signal::notify::cursor-position", cursor_position_changed_cb, self,
+                    "swapped-signal::notify::selection-bound", entry_selection_changed_cb, self,
+                    "signal::paste-clipboard", on_text_paste_clipboard_cb, self,
+                    "signal::toggle-overwrite", on_text_toggle_overwrite_cb, self,
+                    NULL);
 }
 
 GtkWidget *

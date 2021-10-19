@@ -1,7 +1,7 @@
 /* Stub to replace gnome-settings-daemon's
  * gnome-settings-bus.h helpers */
 
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 
 #ifdef GDK_WINDOWING_WAYLAND
 

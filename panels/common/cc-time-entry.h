@@ -29,8 +29,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_TIME_ENTRY (cc_time_entry_get_type ())
-
-G_DECLARE_FINAL_TYPE (CcTimeEntry, cc_time_entry, CC, TIME_ENTRY, GtkEntry)
+G_DECLARE_FINAL_TYPE (CcTimeEntry, cc_time_entry, CC, TIME_ENTRY, GtkWidget)
 
 GtkWidget *cc_time_entry_new        (void);
 void       cc_time_entry_set_time   (CcTimeEntry *self,

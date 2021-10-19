@@ -29,6 +29,7 @@
 # include <config.h>
 #endif
 
+#include "cc-common-resources.h"
 #include "cc-list-row.h"
 
 struct _CcListRow
@@ -302,6 +303,8 @@ cc_list_row_class_init (CcListRowClass *klass)
 static void
 cc_list_row_init (CcListRow *self)
 {
+  g_resources_register (cc_common_get_resource ());
+
   gtk_widget_init_template (GTK_WIDGET (self));
   g_signal_connect_object (self, "notify::parent",
                            G_CALLBACK (cc_list_row_parent_changed_cb),

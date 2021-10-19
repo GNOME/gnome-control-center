@@ -28,7 +28,6 @@ sources = files(
   'cc-hostname-entry.c',
   'cc-time-entry.c',
   'hostname-helper.c',
-  'list-box-helper.c',
 )
 
 libwidgets = static_library(

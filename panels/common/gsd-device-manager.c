@@ -30,10 +30,10 @@
 #include "gsd-input-helper.h"
 
 #ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 #endif
 #ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
+#include <gdk/wayland/gdkwayland.h>
 #endif
 
 typedef struct
@@ -522,18 +522,18 @@ GsdDeviceManager *
 gsd_device_manager_get (void)
 {
 	GsdDeviceManager *manager;
-	GdkScreen *screen;
+	GdkDisplay *display;
 
-	screen = gdk_screen_get_default ();
-	g_return_val_if_fail (screen != NULL, NULL);
+	display = gdk_display_get_default ();
+	g_return_val_if_fail (display != NULL, NULL);
 
-	manager = g_object_get_data (G_OBJECT (screen), "gsd-device-manager-data");
+	manager = g_object_get_data (G_OBJECT (display), "gsd-device-manager-data");
 
 	if (!manager) {
                 manager = g_object_new (GSD_TYPE_DEVICE_MANAGER,
                                         NULL);
 
-		g_object_set_data_full (G_OBJECT (screen), "gsd-device-manager-data",
+		g_object_set_data_full (G_OBJECT (display), "gsd-device-manager-data",
 					manager, (GDestroyNotify) g_object_unref);
 	}
 

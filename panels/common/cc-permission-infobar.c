@@ -33,13 +33,14 @@
 
 struct _CcPermissionInfobar
 {
-  GtkRevealer    parent_instance;
+  AdwBin         parent_instance;
 
+  GtkRevealer   *revealer;
   GtkLabel      *title;
   GtkLockButton *lock_button;
 };
 
-G_DEFINE_TYPE (CcPermissionInfobar, cc_permission_infobar, GTK_TYPE_REVEALER)
+G_DEFINE_TYPE (CcPermissionInfobar, cc_permission_infobar, ADW_TYPE_BIN)
 
 static void
 on_permission_changed (CcPermissionInfobar *self)
@@ -50,7 +51,7 @@ on_permission_changed (CcPermissionInfobar *self)
   permission = gtk_lock_button_get_permission (self->lock_button);
   is_authorized = g_permission_get_allowed (permission);
 
-  gtk_revealer_set_reveal_child (GTK_REVEALER (self), !is_authorized);
+  gtk_revealer_set_reveal_child (self->revealer, !is_authorized);
 }
 
 static void
@@ -62,6 +63,7 @@ cc_permission_infobar_class_init (CcPermissionInfobarClass *klass)
                                                "/org/gnome/control-center/"
                                                "common/cc-permission-infobar.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, revealer);
   gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, title);
   gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, lock_button);
 }

@@ -21,12 +21,12 @@
  */
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_PERMISSION_INFOBAR (cc_permission_infobar_get_type())
-G_DECLARE_FINAL_TYPE (CcPermissionInfobar, cc_permission_infobar, CC, PERMISSION_INFOBAR, GtkRevealer)
+G_DECLARE_FINAL_TYPE (CcPermissionInfobar, cc_permission_infobar, CC, PERMISSION_INFOBAR, AdwBin)
 
 void            cc_permission_infobar_set_permission (CcPermissionInfobar *self,
                                                       GPermission         *permission);

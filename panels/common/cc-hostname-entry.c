@@ -19,6 +19,7 @@
  */
 
 
+#include "cc-common-resources.h"
 #include "cc-hostname-entry.h"
 #include "hostname-helper.h"
 
@@ -46,7 +47,7 @@ cc_hostname_entry_set_hostname (CcHostnameEntry *self)
   g_autoptr(GError) static_error = NULL;
   const gchar *text;
 
-  text = gtk_entry_get_text (GTK_ENTRY (self));
+  text = gtk_editable_get_text (GTK_EDITABLE (self));
 
   g_debug ("Setting PrettyHostname to '%s'", text);
   pretty_result = g_dbus_proxy_call_sync (self->hostnamed_proxy,
@@ -229,9 +230,9 @@ cc_hostname_entry_constructed (GObject *object)
   str = cc_hostname_entry_get_display_hostname (CC_HOSTNAME_ENTRY (self));
 
   if (str != NULL)
-    gtk_entry_set_text (GTK_ENTRY (self), str);
+    gtk_editable_set_text (GTK_EDITABLE (self), str);
   else
-    gtk_entry_set_text (GTK_ENTRY (self), "");
+    gtk_editable_set_text (GTK_EDITABLE (self), "");
 
   g_signal_connect (self, "changed", G_CALLBACK (text_changed_cb), NULL);
 }
@@ -248,6 +249,7 @@ cc_hostname_entry_class_init (CcHostnameEntryClass *klass)
 static void
 cc_hostname_entry_init (CcHostnameEntry *self)
 {
+  g_resources_register (cc_common_get_resource ());
 }
 
 CcHostnameEntry *

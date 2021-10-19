@@ -22,7 +22,7 @@
 #include <string.h>
 
 #include <gdk/gdk.h>
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 
 #include <sys/types.h>
 #include <X11/Xatom.h>

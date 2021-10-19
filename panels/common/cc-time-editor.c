@@ -51,7 +51,7 @@
 
 struct _CcTimeEditor
 {
-  GtkBin     parent_instance;
+  AdwBin     parent_instance;
 
   GtkButton *am_pm_button;
   GtkStack  *am_pm_stack;
@@ -70,7 +70,7 @@ struct _CcTimeEditor
   guint      timer_id;
 };
 
-G_DEFINE_TYPE (CcTimeEditor, cc_time_editor, GTK_TYPE_BIN)
+G_DEFINE_TYPE (CcTimeEditor, cc_time_editor, ADW_TYPE_BIN)
 
 
 enum {
@@ -171,18 +171,24 @@ editor_change_time_cb (CcTimeEditor *self)
 }
 
 static gboolean
-editor_change_time_pressed_cb (CcTimeEditor *self,
-                               GdkEvent     *event,
-                               GtkButton    *button)
+editor_change_time_pressed_cb (CcTimeEditor    *self,
+                               gint             n_press,
+                               gdouble          x,
+                               gdouble          y,
+                               GtkGestureClick *click_gesture)
 {
+  GtkWidget *button;
+
   g_assert (CC_IS_TIME_EDITOR (self));
 
-  self->clicked_button = button;
+  button = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (click_gesture));
+
+  self->clicked_button = GTK_BUTTON (button);
   /* Keep changing time until the press is released */
   self->timer_id = g_timeout_add (TIMEOUT_INITIAL,
                                   (GSourceFunc)editor_change_time_cb,
                                   self);
-  editor_change_time_clicked_cb (self, button);
+  editor_change_time_clicked_cb (self, GTK_BUTTON (button));
   return FALSE;
 }
 
@@ -212,19 +218,16 @@ editor_am_pm_button_clicked_cb (CcTimeEditor *self)
 static void
 editor_am_pm_stack_changed_cb (CcTimeEditor *self)
 {
-  AtkObject *accessible;
   GtkWidget *label;
   const gchar *text;
 
   g_assert (CC_IS_TIME_EDITOR (self));
 
-  accessible = gtk_widget_get_accessible (GTK_WIDGET (self->am_pm_button));
-  if (accessible == NULL)
-    return;
-
   label = gtk_stack_get_visible_child (self->am_pm_stack);
   text = gtk_label_get_text (GTK_LABEL (label));
-  atk_object_set_name (accessible, text);
+  gtk_accessible_update_property (GTK_ACCESSIBLE (self->am_pm_button),
+                                  GTK_ACCESSIBLE_PROPERTY_LABEL, text,
+                                  -1);
 }
 
 static void
