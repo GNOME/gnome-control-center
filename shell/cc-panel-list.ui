@@ -1,147 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <requires lib="gtk+" version="3.20"/>
-  <template class="CcPanelList" parent="GtkStack">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="vhomogeneous">False</property>
-    <property name="hhomogeneous">True</property>
-    <property name="transition_type">slide-left-right</property>
-    <child>
-      <object class="GtkListBox" id="main_listbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <signal name="row-activated" handler="row_activated_cb" object="CcPanelList" swapped="no" />
-        <child>
-          <object class="GtkListBoxRow" id="privacy_row">
-            <property name="visible">False</property>
-            <property name="can_focus">True</property>
-            <child>
-              <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="border_width">12</property>
-                <property name="spacing">12</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">preferences-system-privacy-symbolic</property>
-                    <style>
-                      <class name="sidebar-icon" />
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Privacy</property>
-                    <property name="xalign">0</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="icon_name">go-next-symbolic</property>
-                    <style>
-                      <class name="sidebar-icon" />
-                    </style>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-      <packing>
-        <property name="name">main</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkListBox" id="privacy_listbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <signal name="row-activated" handler="row_activated_cb" object="CcPanelList" swapped="no" />
-      </object>
-      <packing>
-        <property name="name">privacy</property>
-        <property name="position">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkListBox" id="search_listbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <signal name="row-activated" handler="search_row_activated_cb" object="CcPanelList" swapped="no" />
+  <template class="CcPanelList" parent="AdwBin">
 
-        <!-- Placeholder -->
-        <child type="placeholder">
-          <object class="GtkBox" id="empty_search_placeholder">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">center</property>
-            <property name="valign">center</property>
-            <property name="expand">True</property>
-            <property name="border_width">18</property>
-            <property name="orientation">vertical</property>
-            <property name="spacing">6</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="pixel_size">64</property>
-                <property name="icon_name">edit-find-symbolic</property>
+    <child>
+      <object class="GtkStack" id="stack">
+        <property name="vhomogeneous">False</property>
+        <property name="hhomogeneous">True</property>
+        <property name="transition_type">slide-left-right</property>
+
+        <child>
+          <object class="GtkStackPage">
+            <property name="name">main</property>
+            <property name="child">
+              <object class="GtkListBox" id="main_listbox">
+                <signal name="row-activated" handler="row_activated_cb" object="CcPanelList" swapped="no" />
                 <style>
-                  <class name="dim-label"/>
+                  <class name="navigation-sidebar" />
                 </style>
+                <child>
+                  <object class="GtkListBoxRow" id="privacy_row">
+                    <property name="visible">False</property>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
+                        <property name="margin-top">12</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon_name">preferences-system-privacy-symbolic</property>
+                            <style>
+                              <class name="sidebar-icon" />
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="hexpand">True</property>
+                            <property name="label" translatable="yes">Privacy</property>
+                            <property name="xalign">0</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon_name">go-next-symbolic</property>
+                            <style>
+                              <class name="sidebar-icon" />
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">No results found</property>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                  <attribute name="scale" value="1.44"/>
-                </attributes>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Try a different search</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
+            </property>
           </object>
         </child>
+
+        <child>
+          <object class="GtkStackPage">
+            <property name="name">privacy</property>
+            <property name="child">
+              <object class="GtkListBox" id="privacy_listbox">
+                <signal name="row-activated" handler="row_activated_cb" object="CcPanelList" swapped="no" />
+                <style>
+                  <class name="navigation-sidebar" />
+                </style>
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkStackPage">
+            <property name="name">search</property>
+            <property name="child">
+              <object class="GtkListBox" id="search_listbox">
+                <signal name="row-activated" handler="search_row_activated_cb" object="CcPanelList" swapped="no" />
+                <style>
+                  <class name="navigation-sidebar" />
+                </style>
+
+                <!-- Placeholder -->
+                <child type="placeholder">
+                  <object class="GtkBox" id="empty_search_placeholder">
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="margin-start">18</property>
+                    <property name="margin-end">18</property>
+                    <property name="margin-top">18</property>
+                    <property name="margin-bottom">18</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="pixel_size">64</property>
+                        <property name="icon_name">edit-find-symbolic</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">No results found</property>
+                        <attributes>
+                          <attribute name="weight" value="bold"/>
+                          <attribute name="scale" value="1.44"/>
+                        </attributes>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label" translatable="yes">Try a different search</property>
+                        <style>
+                          <class name="dim-label"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
+
       </object>
-      <packing>
-        <property name="name">search</property>
-        <property name="position">3</property>
-      </packing>
     </child>
   </template>
 </interface>

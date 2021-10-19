@@ -40,11 +40,12 @@ typedef struct
 
 struct _CcPanelList
 {
-  GtkStack            parent;
+  AdwBin              parent;
 
   GtkWidget          *privacy_listbox;
   GtkWidget          *main_listbox;
   GtkWidget          *search_listbox;
+  GtkStack           *stack;
 
   /* When clicking on Details or Devices row, show it
    * automatically select the first panel of the list.
@@ -62,7 +63,7 @@ struct _CcPanelList
   GHashTable         *id_to_search_data;
 };
 
-G_DEFINE_TYPE (CcPanelList, cc_panel_list, GTK_TYPE_STACK)
+G_DEFINE_TYPE (CcPanelList, cc_panel_list, ADW_TYPE_BIN)
 
 enum
 {
@@ -101,7 +102,7 @@ get_widget_from_view (CcPanelList     *self,
       return self->search_listbox;
 
     case CC_PANEL_LIST_WIDGET:
-      return gtk_stack_get_child_by_name (GTK_STACK (self), "custom-widget");
+      return gtk_stack_get_child_by_name (self->stack, "custom-widget");
 
     default:
       return NULL;
@@ -184,13 +185,13 @@ switch_to_view (CcPanelList     *self,
   should_crossfade = view == CC_PANEL_LIST_SEARCH ||
                      self->previous_view == CC_PANEL_LIST_SEARCH;
 
-  gtk_stack_set_transition_type (GTK_STACK (self),
+  gtk_stack_set_transition_type (self->stack,
                                  should_crossfade ? GTK_STACK_TRANSITION_TYPE_CROSSFADE :
                                                     GTK_STACK_TRANSITION_TYPE_SLIDE_LEFT_RIGHT);
 
   visible_child = get_widget_from_view (self, view);
 
-  gtk_stack_set_visible_child (GTK_STACK (self), visible_child);
+  gtk_stack_set_visible_child (self->stack, visible_child);
 
   /* For non-search views, make sure the displayed panel matches the
    * newly selected row
@@ -283,22 +284,21 @@ row_data_new (CcPanelCategory     category,
 
   /* Setup the row */
   grid = gtk_grid_new ();
-  gtk_widget_show (grid);
   gtk_widget_set_hexpand (grid, TRUE);
-  gtk_container_set_border_width (GTK_CONTAINER (grid), 12);
+  gtk_widget_set_margin_top (grid, 12);
+  gtk_widget_set_margin_bottom (grid, 12);
+  gtk_widget_set_margin_start (grid, 12);
+  gtk_widget_set_margin_end (grid, 12);
   gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
 
   /* Icon */
-  image = gtk_image_new_from_icon_name (icon, GTK_ICON_SIZE_BUTTON);
+  image = gtk_image_new_from_icon_name (icon);
   gtk_style_context_add_class (gtk_widget_get_style_context (image), "sidebar-icon");
 
   gtk_grid_attach (GTK_GRID (grid), image, 0, 0, 1, 1);
 
-  gtk_widget_show (image);
-
   /* Name label */
   label = gtk_label_new (name);
-  gtk_widget_show (label);
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_widget_set_hexpand (label, TRUE);
   gtk_grid_attach (GTK_GRID (grid), label, 1, 0, 1, 1);
@@ -308,14 +308,14 @@ row_data_new (CcPanelCategory     category,
   gtk_label_set_xalign (GTK_LABEL (label), 0.0);
   gtk_widget_set_hexpand (label, TRUE);
   gtk_label_set_max_width_chars (GTK_LABEL (label), 25);
-  gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+  gtk_label_set_wrap (GTK_LABEL (label), TRUE);
+  gtk_widget_hide (label);
 
   if (has_sidebar)
     {
-      image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
+      image = gtk_image_new_from_icon_name ("go-next-symbolic");
       gtk_style_context_add_class (gtk_widget_get_style_context (image), "sidebar-icon");
       gtk_grid_attach (GTK_GRID (grid), image, 2, 0, 1, 1);
-      gtk_widget_show (image);
     }
 
   gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
@@ -323,8 +323,7 @@ row_data_new (CcPanelCategory     category,
 
   data->description_label = label;
 
-  gtk_container_add (GTK_CONTAINER (data->row), grid);
-  gtk_widget_show (data->row);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (data->row), grid);
 
   g_object_set_data_full (G_OBJECT (data->row), "data", data, (GDestroyNotify) row_data_free);
 
@@ -577,7 +576,7 @@ row_activated_cb (GtkWidget     *listbox,
    */
   if (g_strcmp0 (data->id, self->current_panel_id) == 0 &&
       self->previous_view != CC_PANEL_LIST_SEARCH &&
-      gtk_stack_get_child_by_name (GTK_STACK (self), "custom-widget") != NULL)
+      gtk_stack_get_child_by_name (self->stack, "custom-widget") != NULL)
     {
       CC_TRACE_MSG ("Switching to panel widget");
 
@@ -600,8 +599,8 @@ search_row_activated_cb (GtkWidget     *listbox,
                          CcPanelList   *self)
 {
   GtkWidget *real_listbox;
+  GtkWidget *child;
   RowData *data;
-  GList *children, *l;
 
   CC_ENTRY;
 
@@ -613,13 +612,13 @@ search_row_activated_cb (GtkWidget     *listbox,
     real_listbox = self->main_listbox;
 
   /* Select the correct row */
-  children = gtk_container_get_children (GTK_CONTAINER (real_listbox));
-
-  for (l = children; l != NULL; l = l->next)
+  for (child = gtk_widget_get_first_child (real_listbox);
+       child != NULL;
+       child = gtk_widget_get_next_sibling (child))
     {
       RowData *real_row_data;
 
-      real_row_data = g_object_get_data (l->data, "data");
+      real_row_data = g_object_get_data (G_OBJECT (child), "data");
 
       /*
        * The main listbox has the Details & Devices rows, and neither
@@ -642,8 +641,6 @@ search_row_activated_cb (GtkWidget     *listbox,
           break;
         }
     }
-
-  g_list_free (children);
 
   CC_EXIT;
 }
@@ -781,6 +778,7 @@ cc_panel_list_class_init (CcPanelListClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, privacy_row);
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, main_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcPanelList, search_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcPanelList, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_row_activated_cb);
@@ -947,13 +945,13 @@ cc_panel_list_add_panel (CcPanelList        *self,
   gtk_widget_set_visible (data->row, visibility == CC_PANEL_VISIBLE);
 
   listbox = get_listbox_from_category (self, category);
-  gtk_container_add (GTK_CONTAINER (listbox), data->row);
+  gtk_list_box_append (GTK_LIST_BOX (listbox), data->row);
 
   /* And add to the search listbox too */
   search_data = row_data_new (category, id, title, description, keywords, icon, visibility, has_sidebar);
   gtk_widget_set_visible (search_data->row, visibility != CC_PANEL_HIDDEN);
 
-  gtk_container_add (GTK_CONTAINER (self->search_listbox), search_data->row);
+  gtk_list_box_append (GTK_LIST_BOX (self->search_listbox), search_data->row);
 
   g_hash_table_insert (self->id_to_data, data->id, data);
   g_hash_table_insert (self->id_to_search_data, search_data->id, search_data);
@@ -1076,11 +1074,11 @@ cc_panel_list_add_sidebar_widget (CcPanelList *self,
 
   previous = get_widget_from_view (self, CC_PANEL_LIST_WIDGET);
   if (previous)
-    gtk_container_remove (GTK_CONTAINER (self), previous);
+    gtk_stack_remove (self->stack, previous);
 
   if (widget)
     {
-      gtk_stack_add_named (GTK_STACK (self), widget, "custom-widget");
+      gtk_stack_add_named (self->stack, widget, "custom-widget");
       switch_to_view (self, CC_PANEL_LIST_WIDGET);
     }
 }
