@@ -24,7 +24,7 @@
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gio/gio.h>
-#include <handy.h>
+#include <adwaita.h>
 
 #include "cc-application.h"
 #include "cc-log.h"
@@ -34,7 +34,7 @@
 
 struct _CcApplication
 {
-  GtkApplication  parent;
+  AdwApplication  parent;
 
   CcShellModel   *model;
 
@@ -53,7 +53,7 @@ static void help_activated         (GSimpleAction *action,
                                     GVariant      *parameter,
                                     gpointer       user_data);
 
-G_DEFINE_TYPE (CcApplication, cc_application, GTK_TYPE_APPLICATION)
+G_DEFINE_TYPE (CcApplication, cc_application, ADW_TYPE_APPLICATION)
 
 const GOptionEntry all_options[] = {
   { "version", 0, 0, G_OPTION_ARG_NONE, NULL, N_("Display version number"), NULL },
@@ -85,10 +85,9 @@ help_activated (GSimpleAction *action,
     uri = cc_panel_get_help_uri (panel);
 
   window = cc_shell_get_toplevel (CC_SHELL (self->window));
-  gtk_show_uri_on_window (GTK_WINDOW (window),
-                          uri ? uri : "help:gnome-help/prefs",
-                          GDK_CURRENT_TIME,
-                          NULL);
+  gtk_show_uri (GTK_WINDOW (window),
+                uri ? uri : "help:gnome-help/prefs",
+                GDK_CURRENT_TIME);
 }
 
 static void
@@ -200,7 +199,7 @@ cc_application_quit (GSimpleAction *simple,
 {
   CcApplication *self = CC_APPLICATION (user_data);
 
-  gtk_widget_destroy (GTK_WIDGET (self->window));
+  gtk_window_destroy (GTK_WINDOW (self->window));
 }
 
 
@@ -224,8 +223,6 @@ cc_application_startup (GApplication *application)
                                    self);
 
   G_APPLICATION_CLASS (cc_application_parent_class)->startup (application);
-
-  hdy_init ();
 
   gtk_application_set_accels_for_action (GTK_APPLICATION (application),
                                          "app.help", help_accels);
@@ -287,9 +284,9 @@ cc_application_init (CcApplication *self)
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, "/org/gnome/ControlCenter/gtk/style.css");
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 GtkApplication *
