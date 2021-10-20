@@ -2,31 +2,27 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcSearchLocationsDialog" parent="GtkDialog">
-    <property name="can_focus">False</property>
     <property name="default_height">400</property>
     <property name="default_width">360</property>
     <property name="modal">True</property>
     <property name="title" translatable="yes">Search Locations</property>
-    <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
-        <property name="can_focus">False</property>
+    <child>
+      <object class="GtkBox">
         <property name="orientation">vertical</property>
-        <property name="border-width">0</property>
         <child>
           <object class="GtkNotebook">
             <property name="show-border">False</property>
-            <property name="visible">True</property>
             <child>
               <object class="GtkBox">
-                <property name="visible">True</property>
                 <property name="vexpand">True</property>
-                <property name="border-width">35</property>
+                <property name="margin-top">35</property>
+                <property name="margin-bottom">35</property>
+                <property name="margin-start">35</property>
+                <property name="margin-end">35</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
                     <property name="wrap">True</property>
                     <property name="margin-bottom">35</property>
                     <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
@@ -34,36 +30,29 @@
                 </child>
                 <child>
                   <object class="GtkListBox" id="places_list">
-                    <property name="visible">True</property>
-                    <property name="expand">True</property>
-                    <child>
-                      <placeholder/>
-                    </child>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="tab-expand">True</property>
-              </packing>
             </child>
             <child type="tab">
               <object class="GtkLabel">
-                <property name="visible">True</property>
                 <property name="label" translatable="yes">Places</property>
               </object>
             </child>
             <child>
               <object class="GtkScrolledWindow">
-                <property name="visible">True</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="vexpand">True</property>
-                    <property name="border-width">35</property>
+                    <property name="margin-top">35</property>
+                    <property name="margin-bottom">35</property>
+                    <property name="margin-start">35</property>
+                    <property name="margin-end">35</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
                         <property name="wrap">True</property>
                         <property name="margin-bottom">35</property>
                         <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
@@ -71,64 +60,53 @@
                     </child>
                     <child>
                       <object class="GtkListBox" id="bookmarks_list">
-                        <property name="visible">True</property>
-                        <property name="expand">True</property>
-                        <child>
-                          <placeholder/>
-                        </child>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">True</property>
                       </object>
                     </child>
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="tab-expand">True</property>
-              </packing>
             </child>
             <child type="tab">
               <object class="GtkLabel">
-                <property name="visible">True</property>
                 <property name="label" translatable="yes">Bookmarks</property>
               </object>
             </child>
             <child>
               <object class="GtkScrolledWindow">
-                <property name="visible">True</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="vexpand">True</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
                         <property name="wrap">True</property>
-                        <property name="margin">35</property>
+                        <property name="margin-top">35</property>
+                        <property name="margin-bottom">35</property>
+                        <property name="margin-start">35</property>
+                        <property name="margin-end">35</property>
                         <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkListBox" id="others_list">
-                        <property name="visible">True</property>
-                        <child>
-                          <placeholder/>
-                        </child>
                       </object>
                     </child>
                     <child>
                       <object class="GtkSeparator">
-                        <property name="visible">True</property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkButton" id="locations_add">
-                        <property name="visible">True</property>
                         <property name="halign">center</property>
-                        <property name="margin">5</property>
+                        <property name="margin-top">6</property>
+                        <property name="margin-bottom">6</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
                         <signal name="clicked" handler="add_button_clicked" object="CcSearchLocationsDialog" swapped="yes"/>
                         <child>
                           <object class="GtkImage">
-                            <property name="visible">True</property>
                             <property name="icon-name">list-add-symbolic</property>
                             <property name="icon-size">1</property>
                           </object>
@@ -140,19 +118,14 @@
                     </child>
                     <child>
                       <object class="GtkSeparator">
-                        <property name="visible">True</property>
                       </object>
                     </child>
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="tab-expand">True</property>
-              </packing>
             </child>
             <child type="tab">
               <object class="GtkLabel">
-                <property name="visible">True</property>
                 <property name="label" translatable="yes">Other</property>
               </object>
             </child>

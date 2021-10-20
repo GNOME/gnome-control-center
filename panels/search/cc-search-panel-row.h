@@ -20,13 +20,13 @@
 #pragma once
 
 #include <gio/gdesktopappinfo.h>
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_SEARCH_PANEL_ROW (cc_search_panel_row_get_type())
 
-G_DECLARE_FINAL_TYPE (CcSearchPanelRow, cc_search_panel_row, CC, SEARCH_PANEL_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcSearchPanelRow, cc_search_panel_row, CC, SEARCH_PANEL_ROW, AdwBin)
 
 
 CcSearchPanelRow *cc_search_panel_row_new          (GAppInfo *app_info);

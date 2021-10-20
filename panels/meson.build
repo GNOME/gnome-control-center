@@ -22,7 +22,7 @@ panels = [
 #  'printers',
 #  'region',
   'removable-media',
-#  'search',
+  'search',
 #  'sharing',
   'sound',
   'universal-access',

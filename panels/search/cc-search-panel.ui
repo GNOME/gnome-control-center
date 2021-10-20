@@ -3,15 +3,13 @@
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcSearchPanel" parent="CcPanel">
     <property name="visible">True</property>
-    <property name="can_focus">False</property>
 
     <child>
       <object class="GtkScrolledWindow" id="search_vbox">
         <property name="visible">True</property>
         <property name="hscrollbar_policy">never</property>
-        <property name="can_focus">False</property>
         <child>
-          <object class="HdyClamp">
+          <object class="AdwClamp">
             <property name="visible">True</property>
             <property name="margin_top">32</property>
             <property name="margin_bottom">32</property>
@@ -53,7 +51,6 @@
   <!-- Header widget -->
   <object class="GtkButton" id="settings_button">
     <property name="visible">True</property>
-    <property name="can-focus">True</property>
     <property name="label" translatable="yes">Search Locations</property>
     <signal name="clicked" handler="settings_button_clicked" object="CcSearchPanel" swapped="no"/>
   </object>
