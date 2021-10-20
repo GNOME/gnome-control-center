@@ -20,7 +20,7 @@
 
 #pragma once
 
-#include <glib-object.h>
+#include <adwaita.h>
 #include "cc-shell.h"
 #include "cc-shell-model.h"
 
@@ -28,7 +28,7 @@ G_BEGIN_DECLS
 
 #define CC_TYPE_WINDOW (cc_window_get_type ())
 
-G_DECLARE_FINAL_TYPE (CcWindow, cc_window, CC, WINDOW, GtkApplicationWindow)
+G_DECLARE_FINAL_TYPE (CcWindow, cc_window, CC, WINDOW, AdwApplicationWindow)
 
 CcWindow *cc_window_new (GtkApplication *application,
                          CcShellModel   *model);
