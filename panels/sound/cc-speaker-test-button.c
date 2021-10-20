@@ -80,9 +80,7 @@ get_icon_name (CcSpeakerTestButton *self)
 static void
 update_icon (CcSpeakerTestButton *self)
 {
-  gtk_image_set_from_icon_name (self->image,
-                                get_icon_name (self),
-                                GTK_ICON_SIZE_DIALOG);
+  gtk_image_set_from_icon_name (self->image, get_icon_name (self));
 }
 
 static GStrv

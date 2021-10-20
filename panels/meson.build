@@ -24,7 +24,7 @@ panels = [
 #  'removable-media',
 #  'search',
 #  'sharing',
-#  'sound',
+  'sound',
 #  'universal-access',
 #  'usage',
 #  'user-accounts',

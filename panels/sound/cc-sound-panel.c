@@ -30,7 +30,6 @@
 #include <pulse/pulseaudio.h>
 #include <gvc-mixer-control.h>
 
-#include "list-box-helper.h"
 #include "cc-alert-chooser.h"
 #include "cc-balance-slider.h"
 #include "cc-device-combo-box.h"
@@ -202,15 +201,19 @@ test_output_configuration_button_clicked_cb (CcSoundPanel *self)
   GvcMixerUIDevice *device;
   GvcMixerStream *stream = NULL;
   CcOutputTestDialog *dialog;
+  GtkWidget *toplevel;
+  CcShell *shell;
 
   device = cc_device_combo_box_get_device (self->output_device_combo_box);
   if (device != NULL)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
 
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = cc_shell_get_toplevel (shell);
+
   dialog = cc_output_test_dialog_new (device, stream);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
-  gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static const char *

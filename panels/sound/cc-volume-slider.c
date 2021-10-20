@@ -60,7 +60,7 @@ update_volume_icon (CcVolumeSlider *self)
   else
     icon_name = "audio-volume-high-symbolic";
 
-  gtk_image_set_from_icon_name (self->stream_type_icon, icon_name, GTK_ICON_SIZE_BUTTON);
+  gtk_image_set_from_icon_name (self->stream_type_icon, icon_name);
 }
 
 static void
@@ -215,14 +215,12 @@ cc_volume_slider_set_stream (CcVolumeSlider *self,
     {
     case CC_STREAM_TYPE_INPUT:
       gtk_image_set_from_icon_name (self->stream_type_icon,
-                                    "microphone-sensitivity-muted-symbolic",
-                                    GTK_ICON_SIZE_BUTTON);
+                                    "microphone-sensitivity-muted-symbolic");
       break;
 
     case CC_STREAM_TYPE_OUTPUT:
       gtk_image_set_from_icon_name (self->stream_type_icon,
-                                    "audio-volume-muted-symbolic",
-                                    GTK_ICON_SIZE_BUTTON);
+                                    "audio-volume-muted-symbolic");
       break;
 
     default:

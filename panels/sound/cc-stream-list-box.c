@@ -23,11 +23,13 @@
 #include "cc-stream-list-box.h"
 #include "cc-stream-row.h"
 #include "cc-sound-enums.h"
+#include "cc-sound-resources.h"
 
 struct _CcStreamListBox
 {
-  GtkListBox       parent_instance;
+  GtkBox           parent_instance;
 
+  GtkListBox      *listbox;
   GtkSizeGroup    *label_size_group;
   GvcMixerControl *mixer_control;
   CcStreamType     stream_type;
@@ -35,7 +37,7 @@ struct _CcStreamListBox
   guint            stream_removed_handler_id;
 };
 
-G_DEFINE_TYPE (CcStreamListBox, cc_stream_list_box, GTK_TYPE_LIST_BOX)
+G_DEFINE_TYPE (CcStreamListBox, cc_stream_list_box, GTK_TYPE_BOX)
 
 enum
 {
@@ -100,28 +102,24 @@ stream_added_cb (CcStreamListBox *self,
     }
 
   row = cc_stream_row_new (self->label_size_group, stream, id, self->stream_type, self->mixer_control);
-  gtk_widget_show (GTK_WIDGET (row));
-  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), FALSE);
-  gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (row));
+  gtk_list_box_append (self->listbox, GTK_WIDGET (row));
 }
 
-static CcStreamRow *
+static GtkWidget *
 find_row (CcStreamListBox *self,
           guint            id)
 {
-  g_autoptr(GList) children = NULL;
-  GList *link;
+  GtkWidget *child;
 
-  children = gtk_container_get_children (GTK_CONTAINER (self));
-  for (link = children; link; link = link->next)
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->listbox));
+       child;
+       child = gtk_widget_get_next_sibling (child))
     {
-      CcStreamRow *row = link->data;
-
-      if (!CC_IS_STREAM_ROW (row))
+      if (!CC_IS_STREAM_ROW (child))
         continue;
 
-      if (id == cc_stream_row_get_id (row))
-        return row;
+      if (id == cc_stream_row_get_id (CC_STREAM_ROW (child)))
+        return child;
     }
 
   return NULL;
@@ -131,11 +129,11 @@ static void
 stream_removed_cb (CcStreamListBox *self,
                    guint            id)
 {
-  CcStreamRow *row;
+  GtkWidget *row;
 
   row = find_row (self, id);
   if (row != NULL)
-    gtk_container_remove (GTK_CONTAINER (self), GTK_WIDGET (row));
+    gtk_list_box_remove (self->listbox, row);
 }
 
 static void
@@ -186,6 +184,7 @@ void
 cc_stream_list_box_class_init (CcStreamListBoxClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->set_property = cc_stream_list_box_set_property;
   object_class->get_property = cc_stream_list_box_get_property;
@@ -197,13 +196,20 @@ cc_stream_list_box_class_init (CcStreamListBoxClass *klass)
                                                         NULL,
                                                         GTK_TYPE_SIZE_GROUP,
                                                         G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-stream-list-box.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcStreamListBox, listbox);
 }
 
 void
 cc_stream_list_box_init (CcStreamListBox *self)
 {
-  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self), GTK_SELECTION_NONE);
-  gtk_list_box_set_sort_func (GTK_LIST_BOX (self), sort_cb, self, NULL);
+  g_resources_register (cc_sound_get_resource ());
+
+  gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_list_box_set_sort_func (self->listbox, sort_cb, self, NULL);
 }
 
 void

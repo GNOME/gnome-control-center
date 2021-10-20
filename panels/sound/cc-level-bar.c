@@ -103,37 +103,42 @@ suspended_cb (pa_stream *stream,
 }
 
 static void
-cc_level_bar_get_preferred_height (GtkWidget *widget,
-                                   gint      *minimum,
-                                   gint      *natural)
+cc_level_bar_measure (GtkWidget      *widget,
+                      GtkOrientation  orientation,
+                      int             for_size,
+                      int            *minimum,
+                      int            *natural,
+                      int            *minimum_baseline,
+                      int            *natural_baseline)
 {
-  *minimum = *natural = LED_HEIGHT;
+  if (orientation == GTK_ORIENTATION_VERTICAL)
+    {
+      *minimum = *natural = LED_HEIGHT;
+    }
+  else
+    {
+      GTK_WIDGET_CLASS (cc_level_bar_parent_class)->measure (widget,
+                                                             orientation,
+                                                             for_size,
+                                                             minimum,
+                                                             natural,
+                                                             minimum_baseline,
+                                                             natural_baseline);
+    }
 }
 
 static void
-set_source_blend (cairo_t *cr, GdkRGBA *a, GdkRGBA *b, gdouble f)
-{
-  cairo_set_source_rgb (cr,
-                        (1.0 - f) * a->red   + f * b->red,
-                        (1.0 - f) * a->green + f * b->green,
-                        (1.0 - f) * a->blue  + f * b->blue);
-}
-
-static gboolean
-cc_level_bar_draw (GtkWidget *widget,
-                   cairo_t   *cr)
+cc_level_bar_snapshot (GtkWidget   *widget,
+                       GtkSnapshot *snapshot)
 {
   CcLevelBar *self = CC_LEVEL_BAR (widget);
-  GtkAllocation allocation;
   GdkRGBA inactive_color, active_color;
   int i, n_leds;
   double level;
   double spacing, x_offset = 0.0;
 
-  gtk_widget_get_allocation (widget, &allocation);
-
-  n_leds = allocation.width / (LED_WIDTH + LED_SPACING);
-  spacing = (double) (allocation.width - (n_leds * LED_WIDTH)) / (n_leds - 1);
+  n_leds = gtk_widget_get_width (widget) / (LED_WIDTH + LED_SPACING);
+  spacing = (double) (gtk_widget_get_width (widget) - (n_leds * LED_WIDTH)) / (n_leds - 1);
   level = self->value * n_leds;
 
   gdk_rgba_parse (&inactive_color, "#C0C0C0");
@@ -150,6 +155,7 @@ cc_level_bar_draw (GtkWidget *widget,
 
   for (i = 0; i < n_leds; i++)
   {
+    GdkRGBA blended_color;
     double led_level;
 
     led_level = level - i;
@@ -158,15 +164,20 @@ cc_level_bar_draw (GtkWidget *widget,
     else if (led_level > 1.0)
       led_level = 1.0;
 
-    cairo_rectangle (cr,
-                     x_offset, 0,
-                     LED_WIDTH, allocation.height);
-    set_source_blend (cr, &inactive_color, &active_color, led_level);
-    cairo_fill (cr);
+    blended_color = (GdkRGBA) {
+      .red = (1.0 - led_level) * inactive_color.red + led_level * active_color.red,
+      .green = (1.0 - led_level) * inactive_color.green + led_level * active_color.green,
+      .blue = (1.0 - led_level) * inactive_color.blue + led_level * active_color.blue,
+      .alpha = 1.0,
+    };
+
+    gtk_snapshot_append_color (snapshot,
+                               &blended_color,
+                               &GRAPHENE_RECT_INIT (x_offset, 0,
+                                                    LED_WIDTH,
+                                                    gtk_widget_get_height (widget)));
     x_offset += LED_WIDTH + spacing;
   }
-
-  return FALSE;
 }
 
 static void
@@ -202,14 +213,13 @@ cc_level_bar_class_init (CcLevelBarClass *klass)
 
   object_class->dispose = cc_level_bar_dispose;
 
-  widget_class->get_preferred_height = cc_level_bar_get_preferred_height;
-  widget_class->draw = cc_level_bar_draw;
+  widget_class->measure = cc_level_bar_measure;
+  widget_class->snapshot = cc_level_bar_snapshot;
 }
 
 void
 cc_level_bar_init (CcLevelBar *self)
 {
-  gtk_widget_set_has_window (GTK_WIDGET (self), FALSE);
 }
 
 void

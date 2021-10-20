@@ -80,7 +80,7 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
                    GvcMixerControl *mixer_control)
 {
   CcStreamRow *self;
-  g_autoptr(GtkIconInfo) icon_info = NULL;
+  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
   g_autoptr(GIcon) gicon = NULL;
   const gchar *stream_name;
   const gchar *icon_name;
@@ -101,19 +101,22 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
   /* Explicitly lookup for the icon, since some streams may give us an
    * icon name (e.g. "audio") that doesn't really exist in the theme.
    */
-  icon_info = gtk_icon_theme_lookup_icon (gtk_icon_theme_get_default (),
-                                          icon_name,
-                                          24,
-                                          GTK_ICON_LOOKUP_GENERIC_FALLBACK);
+  icon_paintable = gtk_icon_theme_lookup_icon (gtk_icon_theme_get_for_display (gdk_display_get_default ()),
+                                               icon_name,
+                                               NULL,
+                                               24,
+                                               gtk_widget_get_scale_factor (GTK_WIDGET (self)),
+                                               GTK_TEXT_DIR_RTL,
+                                               0);
 
-  if (icon_info)
+  if (icon_paintable)
     gicon = g_themed_icon_new_with_default_fallbacks (symbolic_icon_name);
   else if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
     gicon = g_themed_icon_new_with_default_fallbacks ("preferences-desktop-accessibility-symbolic");
   else
     gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable-symbolic");
 
-  gtk_image_set_from_gicon (self->icon_image, gicon, GTK_ICON_SIZE_LARGE_TOOLBAR);
+  gtk_image_set_from_gicon (self->icon_image, gicon);
 
   gtk_label_set_label (self->name_label, gvc_mixer_stream_get_name (stream));
   cc_volume_slider_set_stream (self->volume_slider, stream, stream_type);

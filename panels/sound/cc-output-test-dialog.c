@@ -96,7 +96,7 @@ cc_output_test_dialog_init (CcOutputTestDialog *self)
   gsound_context_set_attributes (self->context, NULL,
                                  GSOUND_ATTR_APPLICATION_ID, "org.gnome.VolumeControl",
                                  NULL);
-  settings = gtk_settings_get_for_screen (gdk_screen_get_default ());
+  settings = gtk_settings_get_for_display (gdk_display_get_default ());
   g_object_get (G_OBJECT (settings),
                 "gtk-sound-theme-name", &theme_name,
                 NULL);
@@ -132,7 +132,7 @@ cc_output_test_dialog_new (GvcMixerUIDevice *device,
   self->device = g_object_ref (device);
 
   title = g_strdup_printf (_("Testing %s"), gvc_mixer_ui_device_get_description (device));
-  gtk_header_bar_set_title (GTK_HEADER_BAR (gtk_dialog_get_header_bar (GTK_DIALOG (self))), title);
+  gtk_window_set_title (GTK_WINDOW (self), title);
 
   map = gvc_mixer_stream_get_channel_map (stream);
   gtk_widget_set_visible (GTK_WIDGET (self->front_left_speaker_button), gvc_channel_map_has_position (map, PA_CHANNEL_POSITION_FRONT_LEFT));
