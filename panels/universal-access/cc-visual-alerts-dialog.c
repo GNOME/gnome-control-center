@@ -29,9 +29,9 @@ struct _CcVisualAlertsDialog
   GtkDialog parent;
 
   GtkSwitch *enable_switch;
-  GtkRadioButton *screen_radio;
+  GtkCheckButton *screen_radio;
   GtkButton *test_button;
-  GtkRadioButton *window_radio;
+  GtkCheckButton *window_radio;
 
   GSettings *wm_settings;
 };
@@ -41,7 +41,7 @@ G_DEFINE_TYPE (CcVisualAlertsDialog, cc_visual_alerts_dialog, GTK_TYPE_DIALOG);
 static void
 visual_bell_type_notify_cb (CcVisualAlertsDialog *self)
 {
-  GtkRadioButton *widget;
+  GtkCheckButton *widget;
   GDesktopVisualBellType type;
 
   type = g_settings_get_enum (self->wm_settings, KEY_VISUAL_BELL_TYPE);
@@ -51,7 +51,7 @@ visual_bell_type_notify_cb (CcVisualAlertsDialog *self)
   else
     widget = self->screen_radio;
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (widget), TRUE);
+  gtk_check_button_set_active (widget, TRUE);
 }
 
 static void
@@ -60,7 +60,7 @@ visual_bell_type_toggle_cb (CcVisualAlertsDialog *self)
   gboolean frame_flash;
   GDesktopVisualBellType type;
 
-  frame_flash = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->window_radio));
+  frame_flash = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->window_radio));
 
   if (frame_flash)
     type = G_DESKTOP_VISUAL_BELL_FRAME_FLASH;
@@ -72,8 +72,10 @@ visual_bell_type_toggle_cb (CcVisualAlertsDialog *self)
 static void
 test_flash (CcVisualAlertsDialog *self)
 {
-  GtkWidget *toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-  gdk_window_beep (gtk_widget_get_window (toplevel));
+  GtkNative *native = gtk_widget_get_native (GTK_WIDGET (self));
+  GdkSurface *surface = gtk_native_get_surface (native);
+
+  gdk_surface_beep (surface);
 }
 
 static void

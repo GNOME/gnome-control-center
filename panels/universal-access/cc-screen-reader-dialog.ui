@@ -2,19 +2,18 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcScreenReaderDialog" parent="GtkDialog">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="title" translatable="yes">Screen Reader</property>
-    <property name="type_hint">dialog</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="use_header_bar">1</property>
-    <child internal-child="vbox">
+    <child>
       <object class="GtkBox">
-        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">12</property>
-        <property name="margin">12</property>
+        <property name="margin_start">12</property>
+        <property name="margin_end">12</property>
+        <property name="margin_top">12</property>
+        <property name="margin_bottom">12</property>
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
@@ -27,51 +26,30 @@
         </child>
         <child>
           <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <style>
               <class name="frame"/>
               <class name="view"/>
             </style>
             <child>
-              <object class="GtkGrid">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
+              <object class="GtkBox">
                 <property name="margin_start">12</property>
                 <property name="margin_end">6</property>
                 <property name="margin_top">12</property>
                 <property name="margin_bottom">12</property>
-                <property name="row_spacing">12</property>
-                <property name="column_spacing">6</property>
+                <property name="spacing">12</property>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">_Screen Reader</property>
                     <property name="use_underline">True</property>
                     <property name="mnemonic_widget">enable_switch</property>
                   </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkSwitch" id="enable_switch">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
                     <property name="halign">end</property>
                   </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
                 </child>
               </object>
             </child>

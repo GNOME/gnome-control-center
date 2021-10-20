@@ -27,7 +27,6 @@
 #include <glib/gi18n-lib.h>
 #include <gdesktop-enums.h>
 
-#include "list-box-helper.h"
 #include "cc-ua-panel.h"
 #include "cc-ua-resources.h"
 #include "cc-cursor-blinking-dialog.h"
@@ -376,12 +375,6 @@ cursor_size_label_mapping_get (GValue   *value,
   return TRUE;
 }
 
-static void
-add_separators (GtkListBox *list)
-{
-  gtk_list_box_set_header_func (list, cc_list_box_update_header_func, NULL, NULL);
-}
-
 static gboolean
 keynav_failed (CcUaPanel *self, GtkDirectionType direction, GtkWidget *list)
 {
@@ -452,10 +445,10 @@ toggle_switch (GtkSwitch *sw)
 static void
 run_dialog (CcUaPanel *self, GtkDialog *dialog)
 {
-  gtk_window_set_transient_for (GTK_WINDOW (dialog),
-                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
-  gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  GtkNative *native = gtk_widget_get_native (GTK_WIDGET (self));
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (native));
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
@@ -519,8 +512,6 @@ static void
 cc_ua_panel_init_seeing (CcUaPanel *self)
 {
   add_section (self->seeing_listbox, self);
-
-  add_separators (self->seeing_listbox);
 
   g_signal_connect_object (self->seeing_listbox, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
@@ -589,8 +580,6 @@ cc_ua_panel_init_hearing (CcUaPanel *self)
 {
   add_section (self->hearing_listbox, self);
 
-  add_separators (self->hearing_listbox);
-
   g_signal_connect_object (self->hearing_listbox, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
@@ -639,8 +628,6 @@ cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
   add_section (self->typing_listbox, self);
 
-  add_separators (self->typing_listbox);
-
   g_signal_connect_object (self->typing_listbox, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
@@ -682,8 +669,6 @@ static void
 cc_ua_panel_init_mouse (CcUaPanel *self)
 {
   add_section (self->pointing_listbox, self);
-
-  add_separators (self->pointing_listbox);
 
   g_signal_connect_object (self->pointing_listbox, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
@@ -732,5 +717,4 @@ cc_ua_panel_init (CcUaPanel *self)
   gtk_scrolled_window_set_min_content_height (self->scrolled_window, SCROLL_HEIGHT);
 
   self->focus_adjustment = gtk_scrolled_window_get_vadjustment (self->scrolled_window);
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (self->box), self->focus_adjustment);
 }

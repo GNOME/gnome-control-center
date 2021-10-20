@@ -2,22 +2,19 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcPointingDialog" parent="GtkDialog">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
     <property name="title" translatable="yes">Click Assist</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
-    <property name="type_hint">dialog</property>
     <property name="use_header_bar">1</property>
-    <child internal-child="vbox">
+    <child>
       <object class="GtkBox">
-        <property name="can_focus">False</property>
+        <property name="margin_start">12</property>
+        <property name="margin_end">12</property>
+        <property name="margin_top">12</property>
+        <property name="margin_bottom">12</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">0</property>
         <child>
           <object class="GtkGrid">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="margin_end">6</property>
             <property name="margin_top">6</property>
             <property name="margin_bottom">12</property>
@@ -25,20 +22,18 @@
             <property name="column_spacing">24</property>
             <child>
               <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="valign">start</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">_Simulated Secondary Click</property>
                         <property name="use_underline">True</property>
@@ -50,8 +45,6 @@
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Trigger a secondary click by holding down the primary button</property>
                       </object>
@@ -60,21 +53,15 @@
                 </child>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="valign">start</property>
                     <property name="margin_start">10</property>
                     <property name="margin_end">10</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkBox" id="secondary_click_delay_box">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="secondary_click_delay_label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">A_cceptance delay:</property>
                             <property name="use_underline">True</property>
@@ -84,13 +71,9 @@
                         </child>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes" context="secondary click">Short</property>
                                 <attributes>
@@ -100,22 +83,16 @@
                             </child>
                             <child>
                               <object class="GtkScale" id="secondary_click_delay_scale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
                                 <property name="adjustment">click_delay_adjustment</property>
                                 <property name="draw_value">False</property>
                                 <property name="hexpand">True</property>
-                                <child internal-child="accessible">
-                                  <object class="AtkObject">
-                                    <property name="AtkObject::accessible-description" translatable="yes">Secondary click delay</property>
-                                  </object>
-                                </child>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Secondary click delay</property>
+                                </accessibility>
                               </object>
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes" context="secondary click delay">Long</property>
                                 <attributes>
@@ -130,29 +107,21 @@
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
             </child>
             <child>
               <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="valign">start</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">6</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                </layout>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">_Hover Click</property>
                         <property name="use_underline">True</property>
@@ -164,8 +133,6 @@
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Trigger a click when the pointer hovers</property>
                       </object>
@@ -174,21 +141,15 @@
                 </child>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="valign">start</property>
                     <property name="margin_start">10</property>
                     <property name="margin_end">10</property>
                     <property name="orientation">vertical</property>
                     <child>
                       <object class="GtkBox" id="dwell_delay_box">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="dwell_delay_label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">D_elay:</property>
                             <property name="use_underline">True</property>
@@ -198,14 +159,9 @@
                         </child>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes" context="dwell click delay">Short</property>
                                 <property name="justify">center</property>
@@ -216,8 +172,6 @@
                             </child>
                             <child>
                               <object class="GtkScale" id="dwell_delay_scale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
                                 <property name="adjustment">dwell_time_adjustment</property>
                                 <property name="draw_value">False</property>
                                 <property name="value_pos">right</property>
@@ -226,8 +180,6 @@
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes" context="dwell click delay">Long</property>
                                 <property name="justify">center</property>
@@ -242,13 +194,9 @@
                     </child>
                     <child>
                       <object class="GtkBox" id="dwell_threshold_box">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">12</property>
                         <child>
                           <object class="GtkLabel" id="dwell_threshold_label">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="xalign">0</property>
                             <property name="label" translatable="yes">Motion _threshold:</property>
                             <property name="use_underline">True</property>
@@ -258,14 +206,9 @@
                         </child>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">1</property>
                                 <property name="label" translatable="yes" context="dwell click threshold">Small</property>
                                 <property name="justify">center</property>
@@ -276,8 +219,6 @@
                             </child>
                             <child>
                               <object class="GtkScale" id="dwell_threshold_scale">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
                                 <property name="adjustment">dwell_threshold_adjustment</property>
                                 <property name="digits">0</property>
                                 <property name="draw_value">False</property>
@@ -286,8 +227,6 @@
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes" context="dwell click threshold">Large</property>
                                 <property name="justify">center</property>
@@ -303,42 +242,28 @@
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSwitch" id="secondary_click_switch">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">0</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSwitch" id="hover_click_switch">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
             </child>
           </object>
         </child>

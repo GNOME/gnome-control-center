@@ -70,7 +70,7 @@ static gchar *contrast_keys[] = {
 };
 
 static void set_enable_screen_part_ui (CcZoomOptionsDialog *self);
-static void scale_label (GtkBin *toggle, PangoAttrList *attrs);
+static void scale_label (GtkWidget *check, PangoAttrList *attrs);
 static void xhairs_length_add_marks (CcZoomOptionsDialog *self, GtkScale *scale);
 static void effects_slider_set_value (GtkRange *slider, GSettings *settings);
 static void brightness_slider_notify_cb (CcZoomOptionsDialog *self, const gchar *key);
@@ -80,7 +80,7 @@ static void effects_slider_changed (CcZoomOptionsDialog *self, GtkRange *slider)
 static void
 mouse_tracking_radio_toggled_cb (CcZoomOptionsDialog *self, GtkWidget *widget)
 {
-  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+  if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (widget)))
     return;
 
   if (widget == self->centered_radio)
@@ -98,11 +98,11 @@ mouse_tracking_notify_cb (CcZoomOptionsDialog *self)
 
     tracking = g_settings_get_string (self->settings, "mouse-tracking");
     if (g_strcmp0 (tracking, "centered") == 0)
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->centered_radio), TRUE);
+      gtk_check_button_set_active (GTK_CHECK_BUTTON (self->centered_radio), TRUE);
     else if (g_strcmp0 (tracking, "proportional") == 0)
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->proportional_radio), TRUE);
+      gtk_check_button_set_active (GTK_CHECK_BUTTON (self->proportional_radio), TRUE);
     else
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->push_radio), TRUE);
+      gtk_check_button_set_active (GTK_CHECK_BUTTON (self->push_radio), TRUE);
 }
 
 static void
@@ -111,16 +111,16 @@ init_screen_part_section (CcZoomOptionsDialog *self, PangoAttrList *pango_attrs)
   gboolean lens_mode;
 
   /* Scale the labels of the toggles */
-  scale_label (GTK_BIN (self->follow_mouse_radio), pango_attrs);
-  scale_label (GTK_BIN (self->screen_part_radio), pango_attrs);
-  scale_label (GTK_BIN (self->centered_radio), pango_attrs);
-  scale_label (GTK_BIN (self->push_radio), pango_attrs);
-  scale_label (GTK_BIN (self->proportional_radio), pango_attrs);
-  scale_label (GTK_BIN (self->extend_beyond_checkbox), pango_attrs);
+  scale_label (self->follow_mouse_radio, pango_attrs);
+  scale_label (self->screen_part_radio, pango_attrs);
+  scale_label (self->centered_radio, pango_attrs);
+  scale_label (self->push_radio, pango_attrs);
+  scale_label (self->proportional_radio, pango_attrs);
+  scale_label (self->extend_beyond_checkbox, pango_attrs);
 
   lens_mode = g_settings_get_boolean (self->settings, "lens-mode");
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->follow_mouse_radio), lens_mode);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->screen_part_radio), !lens_mode);
+  gtk_check_button_set_active (GTK_CHECK_BUTTON (self->follow_mouse_radio), lens_mode);
+  gtk_check_button_set_active (GTK_CHECK_BUTTON (self->screen_part_radio), !lens_mode);
 
   set_enable_screen_part_ui (self);
 
@@ -148,7 +148,7 @@ set_enable_screen_part_ui (CcZoomOptionsDialog *self)
     /* If the "screen part" radio is not checked, then the "follow mouse" radio
      * is checked (== lens mode). Set mouse tracking back to the default.
      */
-    screen_part = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->screen_part_radio));
+    screen_part = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->screen_part_radio));
     if (!screen_part)
       {
         g_settings_set_string (self->settings,
@@ -162,11 +162,12 @@ set_enable_screen_part_ui (CcZoomOptionsDialog *self)
 }
 
 static void
-scale_label (GtkBin *toggle, PangoAttrList *attrs)
+scale_label (GtkWidget *check, PangoAttrList *attrs)
 {
   GtkWidget *label;
 
-  label = gtk_bin_get_child (toggle);
+  label = gtk_widget_get_first_child (check);
+  label = gtk_widget_get_next_sibling (label);
   gtk_label_set_attributes (GTK_LABEL (label), attrs);
 }
 
@@ -280,14 +281,16 @@ static void xhairs_length_add_marks (CcZoomOptionsDialog *self, GtkScale *scale)
     GdkRectangle rect;
     GdkMonitor *monitor;
     GdkDisplay *display;
+    GdkSurface *surface;
     GtkWindow *transient_for;
     gint length, quarter_length;
 
     /* Get maximum dimension of the monitor */
     transient_for = gtk_window_get_transient_for (GTK_WINDOW (self));
     display = gtk_widget_get_display (GTK_WIDGET (transient_for));
-    monitor = gdk_display_get_monitor_at_window (display, gtk_widget_get_window (GTK_WIDGET (transient_for)));
-    gdk_monitor_get_workarea (monitor, &rect);
+    surface = gtk_native_get_surface (GTK_NATIVE (transient_for));
+    monitor = gdk_display_get_monitor_at_surface (display, surface);
+    gdk_monitor_get_geometry (monitor, &rect);
 
     length = MAX (rect.width, rect.height);
     scale_model = gtk_range_get_adjustment (GTK_RANGE (scale));
@@ -444,7 +447,7 @@ cc_zoom_options_dialog_constructed (GObject *object)
                    G_SETTINGS_BIND_DEFAULT);
 
   /* ... Cross hairs: clip ... */
-  scale_label (GTK_BIN (self->crosshair_clip_checkbox), pango_attrs);
+  scale_label (self->crosshair_clip_checkbox, pango_attrs);
   g_settings_bind (self->settings, "cross-hairs-clip",
                    self->crosshair_clip_checkbox, "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
