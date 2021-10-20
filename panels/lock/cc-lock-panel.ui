@@ -2,14 +2,11 @@
 <!-- Generated with glade 3.18.1 -->
 <interface>
   <template class="CcLockPanel" parent="CcPanel">
-    <property name="visible">True</property>
     <child>
       <object class="GtkScrolledWindow">
-        <property name="visible">1</property>
         <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="HdyClamp">
-            <property name="visible">True</property>
+          <object class="AdwClamp">
             <property name="margin_top">32</property>
             <property name="margin_bottom">32</property>
             <property name="margin_start">12</property>
@@ -17,12 +14,10 @@
 
             <child>
               <object class="GtkBox">
-                <property name="visible">1</property>
                 <property name="orientation">vertical</property>
                 <property name="hexpand">1</property>
                 <child>
                   <object class="GtkLabel" id="lock_description_label">
-                    <property name="visible">1</property>
                     <property name="margin-bottom">12</property>
                     <property name="label" translatable="yes">Automatically locking the screen prevents others from accessing the computer while you're away.</property>
                     <property name="wrap">1</property>
@@ -33,14 +28,15 @@
 
                 <child>
                   <object class="GtkListBox" id="lock_list_box">
-                    <property name="visible">1</property>
-                    <property name="can-focus">1</property>
                     <property name="selection-mode">none</property>
+
+                    <style>
+                      <class name="content" />
+                    </style>
 
                     <!-- Blank Screen Delay row -->
                     <child>
-                      <object class="HdyActionRow">
-                        <property name="visible">true</property>
+                      <object class="AdwActionRow">
                         <property name="title" translatable="yes">Blank Screen Delay</property>
                         <property name="subtitle" translatable="yes">Period of inactivity after which the screen will go blank.</property>
                         <property name="subtitle-lines">2</property>
@@ -49,7 +45,6 @@
                         <property name="use-underline">true</property>
                         <child>
                           <object class="GtkComboBoxText" id="blank_screen_combo">
-                            <property name="visible">1</property>
                             <property name="valign">center</property>
                             <property name="entry_text_column">0</property>
                             <property name="model">blank_screen_model</property>
@@ -61,14 +56,12 @@
 
                     <!-- Automatic Screen Lock row -->
                     <child>
-                      <object class="HdyActionRow">
-                        <property name="visible">true</property>
+                      <object class="AdwActionRow">
                         <property name="title" translatable="yes">Automatic Screen _Lock</property>
                         <property name="activatable-widget">automatic_screen_lock_switch</property>
                         <property name="use-underline">true</property>
                         <child>
                           <object class="GtkSwitch" id="automatic_screen_lock_switch">
-                            <property name="visible">1</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
                           </object>
@@ -78,8 +71,7 @@
 
                     <!-- Automatic Screen Lock Delay row -->
                     <child>
-                      <object class="HdyActionRow">
-                        <property name="visible">true</property>
+                      <object class="AdwActionRow">
                         <property name="title" translatable="yes">Automatic _Screen Lock Delay</property>
                         <property name="subtitle" translatable="yes">Period after the screen blanks when the screen is automatically locked.</property>
                         <property name="subtitle-lines">2</property>
@@ -88,7 +80,6 @@
                         <property name="use-underline">true</property>
                         <child>
                           <object class="GtkComboBoxText" id="lock_after_combo">
-                            <property name="visible">1</property>
                             <property name="valign">center</property>
                             <property name="entry_text_column">0</property>
                             <property name="model">lock_after_model</property>
@@ -100,14 +91,12 @@
 
                     <!-- Show Notifications row -->
                     <child>
-                      <object class="HdyActionRow">
-                        <property name="visible">true</property>
+                      <object class="AdwActionRow">
                         <property name="title" translatable="yes">Show _Notifications on Lock Screen</property>
                         <property name="activatable-widget">show_notifications_switch</property>
                         <property name="use-underline">true</property>
                         <child>
                           <object class="GtkSwitch" id="show_notifications_switch">
-                            <property name="visible">1</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
                           </object>
@@ -117,7 +106,7 @@
 
                     <!-- USB protection row -->
                     <child>
-                      <object class="HdyActionRow" id="usb_protection_row">
+                      <object class="AdwActionRow" id="usb_protection_row">
                         <property name="visible">false</property>
                         <property name="title" translatable="yes">Forbid new _USB devices</property>
                         <property name="subtitle" translatable="yes">Prevent new USB devices from interacting with the system when the screen is locked.</property>
@@ -126,7 +115,6 @@
                         <property name="use-underline">true</property>
                         <child>
                           <object class="GtkSwitch" id="usb_protection_switch">
-                            <property name="visible">true</property>
                             <property name="halign">end</property>
                             <property name="valign">center</property>
                           </object>

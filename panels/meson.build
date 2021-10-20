@@ -12,7 +12,7 @@ panels = [
   'info-overview',
 #  'keyboard',
   'location',
-#  'lock',
+  'lock',
 #  'microphone',
 #  'mouse',
 #  'multitasking',

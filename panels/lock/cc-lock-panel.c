@@ -19,7 +19,6 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "list-box-helper.h"
 #include "cc-lock-panel.h"
 #include "cc-lock-resources.h"
 #include "cc-util.h"
@@ -283,10 +282,6 @@ cc_lock_panel_init (CcLockPanel *self)
   g_resources_register (cc_lock_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_list_box_set_header_func (self->lock_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 
   self->cancellable = g_cancellable_new ();
 
