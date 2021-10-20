@@ -269,7 +269,8 @@ hotspot_entry_changed_cb (CcWifiHotspotDialog *self)
       else
         {
           guint max_chars = self->wpa_supported ? 63 : 16;
-          error_label = g_strdup_printf (_("Must have a maximum of %d characters"), max_chars);
+          error_label = g_strdup_printf (ngettext ("Must have a maximum of %d character",
+                                                   "Must have a maximum of %d characters", max_chars), max_chars);
         }
 
       widget_set_error (GTK_WIDGET(self->password_entry));
