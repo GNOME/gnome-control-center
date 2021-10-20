@@ -28,13 +28,17 @@
 static char *
 get_gtk_gles_renderer (void)
 {
+        GdkSurface *surface;
+        GtkNative *native;
         GtkWidget *win;
         GdkGLContext *context;
         char *renderer = NULL;
 
-        win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+        win = gtk_window_new ();
         gtk_widget_realize (win);
-        context = gdk_window_create_gl_context (gtk_widget_get_window (win), NULL);
+        native = gtk_widget_get_native (win);
+        surface = gtk_native_get_surface (native);
+        context = gdk_surface_create_gl_context (surface, NULL);
         if (!context)
                 return NULL;
         gdk_gl_context_make_current (context);
@@ -50,7 +54,7 @@ main (int argc, char **argv)
 {
         g_autofree char *renderer_string = NULL;
 
-        gtk_init (NULL, NULL);
+        gtk_init ();
 
         renderer_string = get_gtk_gles_renderer ();
         if (renderer_string) {

@@ -42,14 +42,13 @@
 #include <gdk/gdk.h>
 
 #ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
+#include <gdk/wayland/gdkwayland.h>
 #endif
 #ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 #endif
 
 #include "cc-list-row.h"
-#include "list-box-helper.h"
 #include "cc-info-overview-panel.h"
 
 struct _CcInfoOverviewPanel
@@ -68,7 +67,7 @@ struct _CcInfoOverviewPanel
   CcListRow       *hostname_row;
   CcListRow       *memory_row;
   GtkListBox      *os_box;
-  GtkImage        *os_logo;
+  GtkPicture      *os_logo;
   CcListRow       *os_name_row;
   CcListRow       *os_type_row;
   CcListRow       *processor_row;
@@ -830,10 +829,29 @@ on_device_name_entry_changed (CcInfoOverviewPanel *self)
 {
   const gchar *current_hostname, *new_hostname;
 
-  current_hostname = gtk_entry_get_text (GTK_ENTRY (self->hostname_entry));
-  new_hostname = gtk_entry_get_text (GTK_ENTRY (self->device_name_entry));
+  current_hostname = gtk_editable_get_text (GTK_EDITABLE (self->hostname_entry));
+  new_hostname = gtk_editable_get_text (GTK_EDITABLE (self->device_name_entry));
   gtk_widget_set_sensitive (self->rename_button,
                             g_strcmp0 (current_hostname, new_hostname) != 0);
+}
+
+static void
+on_hostname_editor_dialog_response_cb (GtkDialog           *dialog,
+                                       gint                 response,
+                                       CcInfoOverviewPanel *self)
+{
+  if (response == GTK_RESPONSE_APPLY)
+    {
+      const gchar *hostname;
+
+      /* We simply change the CcHostnameEntry text.  CcHostnameEntry
+       * listens to changes and updates hostname on change.
+       */
+      hostname = gtk_editable_get_text (GTK_EDITABLE (self->device_name_entry));
+      gtk_editable_set_text (GTK_EDITABLE (self->hostname_entry), hostname);
+    }
+
+  gtk_window_close (GTK_WINDOW (dialog));
 }
 
 static void
@@ -842,7 +860,6 @@ open_hostname_edit_dialog (CcInfoOverviewPanel *self)
   GtkWindow *toplevel;
   CcShell *shell;
   const gchar *hostname;
-  gint response;
 
   g_assert (CC_IS_INFO_OVERVIEW_PANEL (self));
 
@@ -850,21 +867,12 @@ open_hostname_edit_dialog (CcInfoOverviewPanel *self)
   toplevel = GTK_WINDOW (cc_shell_get_toplevel (shell));
   gtk_window_set_transient_for (GTK_WINDOW (self->hostname_editor), toplevel);
 
-  hostname = gtk_entry_get_text (GTK_ENTRY (self->hostname_entry));
-  gtk_entry_set_text (self->device_name_entry, hostname);
+  hostname = gtk_editable_get_text (GTK_EDITABLE (self->hostname_entry));
+  gtk_editable_set_text (GTK_EDITABLE (self->device_name_entry), hostname);
   gtk_widget_grab_focus (GTK_WIDGET (self->device_name_entry));
 
-  response = gtk_dialog_run (self->hostname_editor);
-  gtk_widget_hide (GTK_WIDGET (self->hostname_editor));
+  gtk_window_present (GTK_WINDOW (self->hostname_editor));
 
-  if (response != GTK_RESPONSE_APPLY)
-    return;
-
-  /* We simply change the CcHostnameEntry text.  CcHostnameEntry
-   * listens to changes and updates hostname on change.
-   */
-  hostname = gtk_entry_get_text (self->device_name_entry);
-  gtk_entry_set_text (GTK_ENTRY (self->hostname_entry), hostname);
 }
 
 static void
@@ -883,25 +891,17 @@ cc_info_panel_row_activated_cb (CcInfoOverviewPanel *self,
 static gboolean
 use_dark_theme (CcInfoOverviewPanel *panel)
 {
-  GdkScreen *screen;
-  GtkSettings *settings;
-  g_autofree char *theme_name = NULL;
+  AdwStyleManager *style_manager = adw_style_manager_get_default ();
 
-  theme_name = g_strdup (g_getenv ("GTK_THEME"));
-  if (theme_name != NULL)
-    return g_str_has_suffix (theme_name, "dark") ? TRUE : FALSE;
-
-  screen = gtk_widget_get_screen (GTK_WIDGET (panel));
-  settings = gtk_settings_get_for_screen (screen);
-
-  g_object_get (settings, "gtk-theme-name", &theme_name, NULL);
-  return (theme_name != NULL && g_str_has_suffix (theme_name, "dark")) ? TRUE : FALSE;
+  return adw_style_manager_get_dark (style_manager);
 }
 
 static void
 setup_os_logo (CcInfoOverviewPanel *panel)
 {
+  GtkIconTheme *icon_theme;
   g_autofree char *logo_name = g_get_os_info ("LOGO");
+  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
   g_autoptr(GPtrArray) array = NULL;
   g_autoptr(GIcon) icon = NULL;
   gboolean dark;
@@ -919,7 +919,13 @@ setup_os_logo (CcInfoOverviewPanel *panel)
   g_ptr_array_add (array, (gpointer) g_strdup_printf ("%s", logo_name));
 
   icon = g_themed_icon_new_from_names ((char **) array->pdata, array->len);
-  gtk_image_set_from_gicon (panel->os_logo, icon, GTK_ICON_SIZE_INVALID);
+  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
+  icon_paintable = gtk_icon_theme_lookup_by_gicon (icon_theme, icon,
+                                                   192,
+                                                   gtk_widget_get_scale_factor (GTK_WIDGET (panel)),
+                                                   gtk_widget_get_direction (GTK_WIDGET (panel)),
+                                                   0);
+  gtk_picture_set_paintable (panel->os_logo, GDK_PAINTABLE (icon_paintable));
 }
 
 static void
@@ -951,6 +957,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_device_name_entry_changed);
+  gtk_widget_class_bind_template_callback (widget_class, on_hostname_editor_dialog_response_cb);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);

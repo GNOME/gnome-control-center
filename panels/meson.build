@@ -9,7 +9,7 @@ panels = [
 #  'default-apps',
 #  'diagnostics',
 #  'display',
-#  'info-overview',
+  'info-overview',
 #  'keyboard',
 #  'location',
 #  'lock',

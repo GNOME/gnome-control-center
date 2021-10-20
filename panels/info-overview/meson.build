@@ -54,7 +54,7 @@ info_panel_lib = static_library(
 panels_libs += info_panel_lib
 
 print_renderer_deps = [
-  dependency('gtk+-3.0'),
+  dependency('gtk4'),
   epoxy_dep
 ]
 
