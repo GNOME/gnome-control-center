@@ -21,7 +21,7 @@ panels = [
 #  'power',
 #  'printers',
 #  'region',
-#  'removable-media',
+  'removable-media',
 #  'search',
 #  'sharing',
   'sound',

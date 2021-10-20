@@ -64,17 +64,6 @@ struct _CcRemovableMediaPanel
 
 G_DEFINE_TYPE (CcRemovableMediaPanel, cc_removable_media_panel, CC_TYPE_PANEL)
 
-static void
-ellipsize_cell_layout (GtkCellLayout *cell_layout)
-{
-  g_autoptr(GList) cells = gtk_cell_layout_get_cells (cell_layout);
-  GList *cell;
-
-  for (cell = cells; cell; cell = cell->next)
-    if (GTK_IS_CELL_RENDERER_TEXT (cell->data))
-      g_object_set (G_OBJECT (cell->data), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
-}
-
 static char **
 remove_elem_from_str_array (char       **v,
                             const char  *s)
@@ -309,14 +298,13 @@ on_other_type_combo_box_changed (CcRemovableMediaPanel *self)
                       -1);
 
   if (self->other_application_chooser != NULL) {
-    gtk_widget_destroy (GTK_WIDGET (self->other_application_chooser));
+    gtk_box_remove (self->other_action_box, GTK_WIDGET (self->other_application_chooser));
+    self->other_application_chooser = NULL;
   }
 
   self->other_application_chooser = GTK_APP_CHOOSER_BUTTON (gtk_app_chooser_button_new (x_content_type));
-  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->other_application_chooser));
-  gtk_box_pack_start (self->other_action_box, GTK_WIDGET (self->other_application_chooser), TRUE, TRUE, 0);
+  gtk_box_append (self->other_action_box, GTK_WIDGET (self->other_application_chooser));
   prepare_chooser (self, self->other_application_chooser, NULL);
-  gtk_widget_show (GTK_WIDGET (self->other_application_chooser));
 
   gtk_label_set_mnemonic_widget (self->other_action_label, GTK_WIDGET (self->other_application_chooser));
 }
@@ -327,7 +315,7 @@ on_extra_options_dialog_response (CcRemovableMediaPanel *self)
   gtk_widget_hide (GTK_WIDGET (self->other_type_dialog));
 
   if (self->other_application_chooser != NULL) {
-    gtk_widget_destroy (GTK_WIDGET (self->other_application_chooser));
+    gtk_box_remove (self->other_action_box, GTK_WIDGET (self->other_application_chooser));
     self->other_application_chooser = NULL;
   }
 }
@@ -335,8 +323,10 @@ on_extra_options_dialog_response (CcRemovableMediaPanel *self)
 static void
 on_extra_options_button_clicked (CcRemovableMediaPanel *self)
 {
-  gtk_window_set_transient_for (GTK_WINDOW (self->other_type_dialog),
-                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
+  GtkWidget *toplevel = cc_shell_get_toplevel (shell);
+
+  gtk_window_set_transient_for (GTK_WINDOW (self->other_type_dialog), GTK_WINDOW (toplevel));
   gtk_window_set_modal (GTK_WINDOW (self->other_type_dialog), TRUE);
   gtk_window_set_title (GTK_WINDOW (self->other_type_dialog), _("Other Media"));
   /* update other_application_chooser */
@@ -474,7 +464,7 @@ cc_removable_media_panel_dispose (GObject *object)
 {
   CcRemovableMediaPanel *self = CC_REMOVABLE_MEDIA_PANEL (object);
 
-  g_clear_pointer ((GtkWidget **) &self->other_type_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWindow **) &self->other_type_dialog, gtk_window_destroy);
 
   G_OBJECT_CLASS (cc_removable_media_panel_parent_class)->dispose (object);
 }
@@ -516,13 +506,6 @@ cc_removable_media_panel_init (CcRemovableMediaPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
   self->settings = g_settings_new (MEDIA_HANDLING_SCHEMA);
-
-  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->audio_cdda_chooser));
-  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->video_dvd_chooser));
-  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->music_player_chooser));
-  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->dcf_chooser));
-  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->software_chooser));
-  ellipsize_cell_layout (GTK_CELL_LAYOUT (self->other_type_combo_box));
 
   info_panel_setup_media (self);
 }
