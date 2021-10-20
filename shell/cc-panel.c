@@ -46,7 +46,7 @@ typedef struct
   GCancellable *cancellable;
 } CcPanelPrivate;
 
-G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (CcPanel, cc_panel, GTK_TYPE_BIN)
+G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (CcPanel, cc_panel, ADW_TYPE_BIN)
 
 enum
 {

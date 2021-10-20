@@ -22,8 +22,7 @@
 
 #pragma once
 
-#include <glib-object.h>
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 /**
  * Utility macro used to register panels
@@ -47,7 +46,7 @@ typedef void (*CcPanelStaticInitFunc) (void);
 
 
 #define CC_TYPE_PANEL (cc_panel_get_type())
-G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, GtkBin)
+G_DECLARE_DERIVABLE_TYPE (CcPanel, cc_panel, CC, PANEL, AdwBin)
 
 /**
  * CcPanelVisibility:
@@ -76,7 +75,7 @@ G_BEGIN_DECLS
 struct _CcPanelClass
 {
   /*< private >*/
-  GtkBinClass   parent_class;
+  AdwBinClass   parent_class;
 
   const gchar* (*get_help_uri)       (CcPanel *panel);
 
