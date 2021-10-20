@@ -11,7 +11,7 @@ panels = [
 #  'display',
   'info-overview',
 #  'keyboard',
-#  'location',
+  'location',
 #  'lock',
 #  'microphone',
 #  'mouse',

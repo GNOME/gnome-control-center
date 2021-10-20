@@ -18,7 +18,6 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "list-box-helper.h"
 #include "cc-location-panel.h"
 #include "cc-location-resources.h"
 #include "cc-util.h"
@@ -170,52 +169,46 @@ add_location_app (CcLocationPanel *self,
       return;
 
   row = gtk_list_box_row_new ();
-  gtk_widget_show (row);
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_widget_show (box);
+  gtk_widget_set_hexpand (box, TRUE);
   gtk_widget_set_margin_start (box, 12);
   gtk_widget_set_margin_end (box, 6);
   gtk_widget_set_margin_top (box, 12);
   gtk_widget_set_margin_bottom (box, 12);
-  gtk_container_add (GTK_CONTAINER (row), box);
-  gtk_widget_set_hexpand (box, TRUE);
-  gtk_container_add (GTK_CONTAINER (self->location_apps_list_box), row);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
+  gtk_list_box_append (self->location_apps_list_box, row);
 
   icon = g_app_info_get_icon (G_APP_INFO (app_info));
-  w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_LARGE_TOOLBAR);
-  gtk_widget_show (w);
+  w = gtk_image_new_from_gicon (icon);
   gtk_widget_set_halign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_size_group_add_widget (self->location_icon_size_group, w);
-  gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), w);
 
   w = gtk_label_new (g_app_info_get_name (G_APP_INFO (app_info)));
-  gtk_widget_show (w);
   gtk_widget_set_margin_start (w, 12);
   gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_halign (w, GTK_ALIGN_START);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_label_set_xalign (GTK_LABEL (w), 0);
-  gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), w);
 
   t = g_date_time_new_from_unix_utc (last_used);
   last_used_str = cc_util_get_smart_date (t);
   w = gtk_label_new (last_used_str);
-  gtk_widget_show (w);
   g_free (last_used_str);
   gtk_style_context_add_class (gtk_widget_get_style_context (w), "dim-label");
   gtk_widget_set_margin_start (w, 12);
   gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_halign (w, GTK_ALIGN_END);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), w, TRUE, TRUE, 0);
+  gtk_box_append (GTK_BOX (box), w);
 
   w = gtk_switch_new ();
-  gtk_widget_show (w);
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
   gtk_widget_set_halign (w, GTK_ALIGN_END);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_box_pack_start (GTK_BOX (box), w, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), w);
   g_settings_bind (self->location_settings, LOCATION_ENABLED,
                    w, "sensitive",
                    G_SETTINGS_BIND_DEFAULT);
@@ -396,12 +389,9 @@ cc_location_panel_constructed (GObject *object)
   G_OBJECT_CLASS (cc_location_panel_parent_class)->constructed (object);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_widget_show (box);
-
   widget = gtk_switch_new ();
-  gtk_widget_show (widget);
   gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-  gtk_container_add (GTK_CONTAINER (box), widget);
+  gtk_box_append (GTK_BOX (box), widget);
 
   g_settings_bind (self->location_settings,
                    LOCATION_ENABLED,
@@ -448,9 +438,6 @@ cc_location_panel_init (CcLocationPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_list_box_set_header_func (self->location_apps_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
   self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   self->location_settings = g_settings_new ("org.gnome.system.location");
 
