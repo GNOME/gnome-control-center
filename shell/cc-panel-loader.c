@@ -69,7 +69,7 @@ extern GType cc_notifications_panel_get_type (void);
 //extern GType cc_wwan_panel_get_type (void);
 #endif /* BUILD_WWAN */
 //extern GType cc_location_panel_get_type (void);
-//extern GType cc_camera_panel_get_type (void);
+extern GType cc_camera_panel_get_type (void);
 //extern GType cc_microphone_panel_get_type (void);
 //extern GType cc_usage_panel_get_type (void);
 //extern GType cc_lock_panel_get_type (void);
@@ -102,7 +102,7 @@ static CcPanelLoaderVtable default_panels[] =
 #ifdef BUILD_BLUETOOTH
   //PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type,            NULL),
 #endif
-  //PANEL_TYPE("camera",           cc_camera_panel_get_type,               NULL),
+  PANEL_TYPE("camera",           cc_camera_panel_get_type,               NULL),
   //PANEL_TYPE("color",            cc_color_panel_get_type,                NULL),
   //PANEL_TYPE("datetime",         cc_date_time_panel_get_type,            NULL),
   //PANEL_TYPE("default-apps",     cc_default_apps_panel_get_type,         NULL),

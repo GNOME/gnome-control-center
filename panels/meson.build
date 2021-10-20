@@ -3,7 +3,7 @@ subdir('common')
 panels = [
 #  'applications',
 #  'background',
-#  'camera',
+  'camera',
 #  'color',
 #  'datetime',
 #  'default-apps',

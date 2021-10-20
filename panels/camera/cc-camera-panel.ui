@@ -3,125 +3,119 @@
 <interface>
   <requires lib="gtk+" version="3.14"/>
   <template class="CcCameraPanel" parent="CcPanel">
-    <property name="visible">True</property>
     <child>
       <object class="GtkStack" id="stack">
-        <property name="visible">true</property>
+
+        <!-- Empty page -->
         <child>
-          <object class="GtkBox">
-            <property name="visible">true</property>
-            <property name="orientation">vertical</property>
-            <property name="valign">center</property>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">true</property>
-                <property name="valign">start</property>
-                <property name="pixel-size">96</property>
-                <property name="icon-name">camera-disabled-symbolic</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-              <packing>
-                <property name="fill">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">true</property>
-                <property name="margin-top">20</property>
-                <property name="margin-bottom">15</property>
-                <property name="label" translatable="yes">Camera is turned off</property>
-                <attributes>
-                  <attribute name="scale" value="1.44"/>
-                </attributes>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="visible">true</property>
-                <property name="label" translatable="yes">No applications can capture photos or video.</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-          </object>
-          <packing>
+          <object class="GtkStackPage">
             <property name="name">empty</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkScrolledWindow">
-            <property name="visible">true</property>
-            <property name="hscrollbar-policy">never</property>
-            <child>
-              <object class="HdyClamp">
-                <property name="visible">True</property>
-                <property name="margin_top">32</property>
-                <property name="margin_bottom">32</property>
-                <property name="margin_start">12</property>
-                <property name="margin_end">12</property>
-
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+                <property name="valign">center</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="visible">true</property>
-                    <property name="orientation">vertical</property>
-                    <property name="hexpand">1</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">true</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="label" translatable="yes">Use of the camera allows applications to capture photos and video. Disabling the camera may cause some applications to not function properly.</property>
-                        <property name="wrap">1</property>
-                        <property name="max-width-chars">50</property>
-                        <property name="xalign">0</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">true</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="label" translatable="yes">Allow the applications below to use your camera.</property>
-                        <property name="wrap">1</property>
-                        <property name="max-width-chars">50</property>
-                        <property name="xalign">0</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkListBox" id="camera_apps_list_box">
-                        <property name="visible">true</property>
-                        <property name="can-focus">1</property>
-                        <property name="selection-mode">none</property>
-                        <style>
-                          <class name="view"/>
-                          <class name="frame"/>
-                        </style>
+                  <object class="GtkImage">
+                    <property name="valign">start</property>
+                    <property name="pixel-size">96</property>
+                    <property name="icon-name">camera-disabled-symbolic</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="margin-top">20</property>
+                    <property name="margin-bottom">15</property>
+                    <property name="label" translatable="yes">Camera is turned off</property>
+                    <attributes>
+                      <attribute name="scale" value="1.44"/>
+                    </attributes>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">No applications can capture photos or video.</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </property>
+          </object>
+        </child>
 
-                        <child type="placeholder">
+        <!-- Cameras -->
+        <child>
+          <object class="GtkStackPage">
+            <property name="name">content</property>
+            <property name="child">
+              <object class="GtkScrolledWindow">
+                <property name="hscrollbar-policy">never</property>
+                <child>
+                  <object class="AdwClamp">
+                    <property name="margin_top">32</property>
+                    <property name="margin_bottom">32</property>
+                    <property name="margin_start">12</property>
+                    <property name="margin_end">12</property>
+
+                    <child>
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <property name="hexpand">1</property>
+                        <child>
                           <object class="GtkLabel">
-                            <property name="visible">true</property>
-                            <property name="margin">18</property>
-                            <property name="label" translatable="yes">No Applications Have Asked for Camera Access</property>
-                            <property name="wrap">true</property>
+                            <property name="margin-bottom">12</property>
+                            <property name="label" translatable="yes">Use of the camera allows applications to capture photos and video. Disabling the camera may cause some applications to not function properly.</property>
+                            <property name="wrap">1</property>
                             <property name="max-width-chars">50</property>
+                            <property name="xalign">0</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="margin-bottom">12</property>
+                            <property name="label" translatable="yes">Allow the applications below to use your camera.</property>
+                            <property name="wrap">1</property>
+                            <property name="max-width-chars">50</property>
+                            <property name="xalign">0</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkListBox" id="camera_apps_list_box">
+                            <property name="selection-mode">none</property>
                             <style>
-                              <class name="dim-label" />
+                              <class name="content"/>
                             </style>
+
+                            <child type="placeholder">
+                              <object class="GtkLabel">
+                                <property name="margin-start">18</property>
+                                <property name="margin-end">18</property>
+                                <property name="margin-top">18</property>
+                                <property name="margin-bottom">18</property>
+                                <property name="label" translatable="yes">No Applications Have Asked for Camera Access</property>
+                                <property name="wrap">true</property>
+                                <property name="max-width-chars">50</property>
+                                <style>
+                                  <class name="dim-label" />
+                                </style>
+                              </object>
+                            </child>
                           </object>
                         </child>
                       </object>
                     </child>
+
                   </object>
                 </child>
-
               </object>
-            </child>
+            </property>
           </object>
-          <packing>
-            <property name="name">content</property>
-          </packing>
         </child>
+
       </object>
     </child>
   </template>
