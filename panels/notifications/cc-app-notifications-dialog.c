@@ -26,7 +26,6 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 
-#include "list-box-helper.h"
 #include "cc-notifications-panel.h"
 #include "cc-app-notifications-dialog.h"
 
@@ -375,10 +374,6 @@ void
 cc_app_notifications_dialog_init (CcAppNotificationsDialog *dialog)
 {
   gtk_widget_init_template (GTK_WIDGET (dialog));
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (dialog->main_listbox),
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 }
 
 CcAppNotificationsDialog *

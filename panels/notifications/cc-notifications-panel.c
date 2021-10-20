@@ -26,7 +26,6 @@
 #include <gio/gdesktopappinfo.h>
 
 #include "cc-list-row.h"
-#include "list-box-helper.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
 #include "cc-app-notifications-dialog.h"
@@ -183,8 +182,6 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                    panel->lock_screen_row,
                    "active", G_SETTINGS_BIND_DEFAULT);
 
-  gtk_container_set_focus_vadjustment (GTK_CONTAINER (panel->main_box), panel->focus_adjustment);
-
   panel->sections = g_list_append (panel->sections, panel->options_listbox);
   panel->sections_reverse = g_list_prepend (panel->sections_reverse, panel->options_listbox);
 
@@ -225,6 +222,8 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
    * gets finalized */
   object_class->dispose = cc_notifications_panel_dispose;
   object_class->finalize = cc_notifications_panel_finalize;
+
+  g_type_ensure (CC_TYPE_LIST_ROW);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/notifications/cc-notifications-panel.ui");
 
@@ -281,7 +280,6 @@ add_application (CcNotificationsPanel *panel,
   GtkWidget *box, *w, *row;
   g_autoptr(GIcon) icon = NULL;
   const gchar *app_name;
-  int size;
 
   app_name = g_app_info_get_name (app->app_info);
   if (app_name == NULL || *app_name == '\0')
@@ -294,33 +292,31 @@ add_application (CcNotificationsPanel *panel,
     g_object_ref (icon);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-  gtk_widget_show (box);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 10);
+  gtk_widget_set_margin_top (box, 10);
+  gtk_widget_set_margin_bottom (box, 10);
+  gtk_widget_set_margin_start (box, 10);
+  gtk_widget_set_margin_end (box, 10);
 
   row = gtk_list_box_row_new ();
-  gtk_widget_show (row);
   g_object_set_qdata_full (G_OBJECT (row), application_quark (),
                            app, (GDestroyNotify) application_free);
 
-  gtk_container_add (GTK_CONTAINER (panel->app_listbox), row);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  gtk_list_box_append (panel->app_listbox, row);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
-  w = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_DIALOG);
+  w = gtk_image_new_from_gicon (icon);
   gtk_style_context_add_class (gtk_widget_get_style_context (w), "lowres-icon");
-  gtk_widget_show (w);
-  gtk_icon_size_lookup (GTK_ICON_SIZE_DND, &size, NULL);
-  gtk_image_set_pixel_size (GTK_IMAGE (w), size);
+  gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
   gtk_size_group_add_widget (panel->sizegroup1, w);
-  gtk_container_add (GTK_CONTAINER (box), w);
+  gtk_box_append (GTK_BOX (box), w);
 
   w = gtk_label_new (app_name);
-  gtk_widget_show (w);
+  gtk_widget_set_hexpand (w, TRUE);
   gtk_label_set_ellipsize (GTK_LABEL (w), PANGO_ELLIPSIZE_END);
   gtk_label_set_xalign (GTK_LABEL (w), 0.0f);
-  gtk_container_add (GTK_CONTAINER (box), w);
+  gtk_box_append (GTK_BOX (box), w);
 
   w = gtk_label_new ("");
-  gtk_widget_show (w);
   g_settings_bind_with_mapping (app->settings, "enable",
                                 w, "label",
                                 G_SETTINGS_BIND_GET |
@@ -331,7 +327,7 @@ add_application (CcNotificationsPanel *panel,
                                 NULL);
   gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), w);
 
   g_hash_table_add (panel->known_applications, g_strdup (app->canonical_app_id));
 }
@@ -499,6 +495,11 @@ select_app (CcNotificationsPanel *panel,
   Application *app;
   g_autofree gchar *app_id = NULL;
   CcAppNotificationsDialog *dialog;
+  GtkWidget *toplevel;
+  CcShell *shell;
+
+  shell = cc_panel_get_shell (CC_PANEL (panel));
+  toplevel = cc_shell_get_toplevel (shell);
 
   app = g_object_get_qdata (G_OBJECT (row), application_quark ());
 
@@ -507,7 +508,7 @@ select_app (CcNotificationsPanel *panel,
     app_id[strlen (app_id) - strlen (".desktop")] = '\0';
 
   dialog = cc_app_notifications_dialog_new (app_id, g_app_info_get_name (app->app_info), app->settings, panel->master_settings, panel->perm_store);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (panel))));
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
   gtk_widget_show (GTK_WIDGET (dialog));
 }
 

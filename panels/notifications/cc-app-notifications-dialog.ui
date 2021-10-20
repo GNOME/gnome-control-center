@@ -2,58 +2,29 @@
 <interface>
   <template class="CcAppNotificationsDialog" parent="GtkDialog">
     <property name="width_request">360</property>
-    <property name="can_focus">False</property>
     <property name="modal">True</property>
-    <property name="type_hint">dialog</property>
-    <signal name="response" handler="gtk_widget_destroy" swapped="no"/>
-    <child internal-child="vbox">
+    <child>
       <object class="GtkBox">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <property name="border_width">0</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
         <child>
           <object class="GtkListBox" id="main_listbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="selection_mode">none</property>
+            <property name="show-separators">True</property>
             <property name="activate_on_single_click">False</property>
             <child>
               <object class="GtkListBoxRow">
                 <property name="width_request">100</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="activatable">False</property>
                 <property name="selectable">False</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="margin_start">15</property>
                     <property name="margin_end">15</property>
                     <property name="margin_top">12</property>
                     <property name="margin_bottom">12</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="xalign">0</property>
@@ -61,26 +32,14 @@
                         <property name="use_underline">True</property>
                         <property name="mnemonic_widget">notifications_switch</property>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="notifications_switch">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
                         <property name="active">True</property>
                         <signal name="notify::active" handler="notifications_switch_state_set_cb" swapped="no"/>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -89,22 +48,16 @@
             <child>
               <object class="GtkListBoxRow">
                 <property name="width_request">100</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="activatable">False</property>
                 <property name="selectable">False</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="margin_start">15</property>
                     <property name="margin_end">15</property>
                     <property name="margin_top">12</property>
                     <property name="margin_bottom">12</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="xalign">0</property>
@@ -113,25 +66,13 @@
                         <property name="use_underline">True</property>
                         <property name="mnemonic_widget">sound_alerts_switch</property>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="sound_alerts_switch">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
                         <signal name="notify::active" handler="sound_alerts_switch_state_set_cb" swapped="no"/>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -140,27 +81,19 @@
             <child>
               <object class="GtkListBoxRow">
                 <property name="width_request">100</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="activatable">False</property>
                 <property name="selectable">False</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="margin_start">15</property>
                     <property name="margin_end">15</property>
                     <property name="margin_top">12</property>
                     <property name="margin_bottom">12</property>
                     <child>
                       <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="hexpand">True</property>
                             <property name="vexpand">True</property>
                             <property name="xalign">0</property>
@@ -169,16 +102,9 @@
                             <property name="use_underline">True</property>
                             <property name="mnemonic_widget">notification_banners_switch</property>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
                         </child>
                         <child>
                           <object class="GtkLabel">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="max-width-chars">42</property>
                             <property name="wrap-mode">word</property>
                             <property name="label" translatable="yes">Notifications will continue to appear in the notification list when popups are disabled.</property>
@@ -192,32 +118,15 @@
                               <attribute name="scale" value="0.83"/>
                             </attributes>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">True</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="notification_banners_switch">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
                         <signal name="notify::active" handler="notification_banners_switch_state_set_cb" swapped="no"/>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -226,14 +135,10 @@
             <child>
               <object class="GtkListBoxRow">
                 <property name="width_request">100</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="activatable">False</property>
                 <property name="selectable">False</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="margin_start">15</property>
                     <property name="margin_end">15</property>
                     <property name="margin_top">12</property>
@@ -241,7 +146,6 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="xalign">0</property>
@@ -250,25 +154,13 @@
                         <property name="use_underline">True</property>
                         <property name="mnemonic_widget">notification_banners_content_switch</property>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="notification_banners_content_switch">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
                         <signal name="notify::active" handler="notification_banners_content_switch_state_set_cb" swapped="no"/>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -277,22 +169,16 @@
             <child>
               <object class="GtkListBoxRow">
                 <property name="width_request">100</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="activatable">False</property>
                 <property name="selectable">False</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="margin_start">15</property>
                     <property name="margin_end">15</property>
                     <property name="margin_top">12</property>
                     <property name="margin_bottom">12</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="xalign">0</property>
@@ -301,25 +187,13 @@
                         <property name="use_underline">True</property>
                         <property name="mnemonic_widget">lock_screen_notifications_switch</property>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="lock_screen_notifications_switch">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
                         <signal name="notify::active" handler="lock_screen_notifications_switch_state_set_cb" swapped="no"/>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -328,22 +202,16 @@
             <child>
               <object class="GtkListBoxRow">
                 <property name="width_request">100</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="activatable">False</property>
                 <property name="selectable">False</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="margin_start">15</property>
                     <property name="margin_end">15</property>
                     <property name="margin_top">12</property>
                     <property name="margin_bottom">12</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="vexpand">True</property>
                         <property name="xalign">0</property>
@@ -352,36 +220,19 @@
                         <property name="use_underline">True</property>
                         <property name="mnemonic_widget">lock_screen_content_switch</property>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkSwitch" id="lock_screen_content_switch">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
                         <property name="halign">end</property>
                         <property name="valign">center</property>
                         <signal name="notify::active" handler="lock_screen_content_switch_state_set_cb" swapped="no"/>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
               </object>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>

@@ -2,35 +2,24 @@
 <interface>
   <requires lib="gtk+" version="3.12"/>
   <template class="CcNotificationsPanel" parent="CcPanel">
-    <property name="visible">True</property>
     <child>
       <object class="GtkScrolledWindow" id="main_scrolled_window">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hscrollbar_policy">never</property>
-        <property name="shadow_type">none</property>
         <property name="vadjustment">focus_adjustment</property>
         <child>
           <object class="GtkViewport">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <child>
-              <object class="HdyClamp">
-                <property name="visible">True</property>
+              <object class="AdwClamp">
                 <property name="margin_top">32</property>
                 <property name="margin_bottom">32</property>
                 <property name="margin_start">12</property>
                 <property name="margin_end">12</property>
                 <child>
                   <object class="GtkBox" id="main_box">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="orientation">vertical</property>
                     <property name="hexpand">True</property>
                     <child>
                       <object class="GtkListBox" id="options_listbox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="selection_mode">none</property>
                         <property name="margin_bottom">32</property>
@@ -40,7 +29,6 @@
                         </style>
                         <child>
                           <object class="CcListRow" id="dnd_row">
-                            <property name="visible">True</property>
                             <property name="title" translatable="yes">_Do Not Disturb</property>
                             <property name="use-underline">True</property>
                             <property name="show-switch">True</property>
@@ -48,43 +36,25 @@
                         </child>
                         <child>
                           <object class="CcListRow" id="lock_screen_row">
-                            <property name="visible">True</property>
                             <property name="title" translatable="yes">_Lock Screen Notifications</property>
                             <property name="use-underline">True</property>
                             <property name="show-switch">True</property>
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkLabel" id="app_list_heading_label">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="margin_bottom">12</property>
                         <property name="label" translatable="yes" comments="List of applications.">Applications</property>
                         <attributes>
                           <attribute name="weight" value="bold"/>
                         </attributes>
-                        <accessibility>
-                          <relation type="label-for" target="app_listbox"/>
-                        </accessibility>
                         </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkListBox" id="app_listbox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="hexpand">True</property>
                         <property name="selection_mode">none</property>
                         <signal name="keynav-failed" handler="keynav_failed" object="CcNotificationsPanel" swapped="yes" />
@@ -93,14 +63,9 @@
                           <class name="content"/>
                         </style>
                         <accessibility>
-                          <relation type="labelled-by" target="app_list_heading_label"/>
+                          <relation name="labelled-by">app_list_heading_label</relation>
                         </accessibility>
                       </object>
-                      <packing>
-                        <property name="expand">False</property>
-                        <property name="fill">True</property>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
