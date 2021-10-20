@@ -130,23 +130,15 @@ info_panel_setup_default_app (CcDefaultAppsPanel *self,
 {
   GtkWidget *button;
   GtkWidget *label;
-  g_autoptr(GList) cells = NULL;
-  GList *cell;
 
   button = gtk_app_chooser_button_new (data->content_type);
   g_object_set_data (G_OBJECT (button), "cc-default-app-data", data);
-
-  cells = gtk_cell_layout_get_cells (GTK_CELL_LAYOUT (button));
-  for (cell = cells; cell; cell = cell->next)
-    if (GTK_IS_CELL_RENDERER_TEXT (cell->data))
-      g_object_set (G_OBJECT (cell->data), "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 
   gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
   gtk_grid_attach (GTK_GRID (self->default_apps_grid), button, left_attach, top_attach,
                    1, 1);
   g_signal_connect_object (G_OBJECT (button), "changed",
                            G_CALLBACK (default_app_changed), self, G_CONNECT_SWAPPED);
-  gtk_widget_show (button);
 
   label = WIDGET_FROM_OFFSET (data->label_offset);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
