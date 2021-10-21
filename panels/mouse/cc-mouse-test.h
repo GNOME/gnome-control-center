@@ -20,12 +20,12 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_MOUSE_TEST (cc_mouse_test_get_type ())
-G_DECLARE_FINAL_TYPE (CcMouseTest, cc_mouse_test, CC, MOUSE_TEST, GtkBin)
+G_DECLARE_FINAL_TYPE (CcMouseTest, cc_mouse_test, CC, MOUSE_TEST, AdwBin)
 
 GtkWidget *cc_mouse_test_new (void);
 

@@ -14,7 +14,7 @@ panels = [
   'location',
   'lock',
   'microphone',
-#  'mouse',
+  'mouse',
   'multitasking',
   'notifications',
 #  'online-accounts',

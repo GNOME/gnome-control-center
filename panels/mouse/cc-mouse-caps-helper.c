@@ -18,7 +18,7 @@
  * Author: Felipe Borges <feborges@redhat.com>
  */
 
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 #include <X11/Xatom.h>
 #include <X11/extensions/XInput2.h>
 
@@ -51,8 +51,8 @@ touchpad_check_capabilities_x11 (gboolean *have_two_finger_scrolling,
 
         gdk_x11_display_error_trap_push (gdisplay);
 
-	devicelist = gdk_seat_get_slaves (gdk_display_get_default_seat (gdk_display_get_default ()),
-                                          GDK_SEAT_CAPABILITY_ALL_POINTING);
+	devicelist = gdk_seat_get_devices (gdk_display_get_default_seat (gdk_display_get_default ()),
+                                           GDK_SEAT_CAPABILITY_ALL_POINTING);
 	for (l = devicelist; l != NULL; l = l->next) {
                 GdkDevice *device = l->data;
                 if (gdk_device_get_source (device) != GDK_SOURCE_TOUCHPAD)
@@ -126,8 +126,8 @@ cc_synaptics_check (void)
 
         gdk_x11_display_error_trap_push (gdisplay);
 
-        devicelist = gdk_seat_get_slaves (gdk_display_get_default_seat (gdk_display_get_default ()),
-                                          GDK_SEAT_CAPABILITY_ALL_POINTING);
+        devicelist = gdk_seat_get_devices (gdk_display_get_default_seat (gdk_display_get_default ()),
+                                           GDK_SEAT_CAPABILITY_ALL_POINTING);
         for (l = devicelist; l != NULL; l = l->next) {
                 GdkDevice *device = l->data;
 

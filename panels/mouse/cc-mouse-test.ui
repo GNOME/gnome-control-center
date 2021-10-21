@@ -7,71 +7,45 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <template class="CcMouseTest" parent="GtkBin">
+  <template class="CcMouseTest" parent="AdwBin">
     <child>
-      <object class="GtkGrid" id="test_widget">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+      <object class="GtkBox" id="test_widget">
         <property name="hexpand">True</property>
         <property name="vexpand">True</property>
-        <child>
-          <object class="GtkLabel" id="information_label">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-            <property name="margin_top">10</property>
-            <property name="margin_bottom">5</property>
-            <property name="hexpand">True</property>
-            <property name="label" translatable="yes">Try clicking, double clicking, scrolling</property>
-            <property name="wrap">True</property>
-          </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">1</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
-        </child>
+        <property name="orientation">vertical</property>
         <child>
           <object class="GtkScrolledWindow" id="scrolledwindow">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
             <property name="vadjustment">scrolled_window_adjustment</property>
             <property name="hscrollbar_policy">automatic</property>
             <property name="vscrollbar_policy">always</property>
-            <property name="shadow_type">in</property>
             <property name="max_content_height">440</property>
             <child>
               <object class="GtkViewport" id="viewport">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <child>
                   <object class="GtkOverlay" id="grid1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImage" id="image">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                      <object class="GtkPicture" id="image">
                         <property name="margin_start">25</property>
                         <property name="margin_end">25</property>
-                        <property name="resource">/org/gnome/control-center/mouse/scroll-test.svg</property>
+                        <property name="can-shrink">False</property>
+                        <property name="file">resource:///org/gnome/control-center/mouse/scroll-test.svg</property>
                       </object>
                     </child>
                     <child type="overlay">
                       <object class="GtkDrawingArea" id="button_drawing_area">
                         <property name="width_request">180</property>
                         <property name="height_request">180</property>
-                        <property name="visible">True</property>
                         <property name="valign">end</property>
-                        <property name="can_focus">False</property>
-                        <property name="events">GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_STRUCTURE_MASK</property>
                         <property name="margin_top">20</property>
                         <property name="margin_bottom">20</property>
-                        <signal name="button_press_event" handler="button_drawing_area_button_press_event" object="CcMouseTest" swapped="yes"/>
-                        <signal name="draw" handler="button_drawing_area_draw_event" object="CcMouseTest" swapped="yes"/>
+                        <child>
+                          <object class="GtkGestureClick">
+                            <property name="button">0</property>
+                            <signal name="pressed" handler="button_drawing_area_button_pressed_cb" object="CcMouseTest" swapped="no"/>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
@@ -79,12 +53,15 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="left_attach">0</property>
-            <property name="top_attach">0</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
-          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="information_label">
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">5</property>
+            <property name="hexpand">True</property>
+            <property name="label" translatable="yes">Try clicking, double clicking, scrolling</property>
+            <property name="wrap">True</property>
+          </object>
         </child>
       </object>
     </child>

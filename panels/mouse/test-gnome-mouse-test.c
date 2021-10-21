@@ -4,30 +4,21 @@
 #include "cc-mouse-resources.h"
 #include "cc-mouse-test.h"
 
-static gboolean
-delete_event_cb (GtkWidget *widget, GdkEvent *event, gpointer user_data)
-{
-  gtk_main_quit ();
-
-  return FALSE;
-}
-
 int main (int argc, char **argv)
 {
   GtkWidget *widget;
   GtkWidget *window;
 
-  gtk_init (&argc, &argv);
+  gtk_init ();
 
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_widget_show (window);
   widget = cc_mouse_test_new ();
-  gtk_widget_show (widget);
-  gtk_container_add (GTK_CONTAINER (window), widget);
 
-  g_signal_connect (G_OBJECT (window), "delete-event", G_CALLBACK (delete_event_cb), NULL);
+  window = gtk_window_new ();
+  gtk_window_set_child (GTK_WINDOW (window), widget);
+  gtk_window_present (GTK_WINDOW (window));
 
-  gtk_main ();
+  while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
+    g_main_context_iteration (NULL, TRUE);
 
   return 0;
 }

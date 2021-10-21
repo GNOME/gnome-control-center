@@ -30,7 +30,6 @@
 #include "cc-mouse-test.h"
 #include "gsd-device-manager.h"
 #include "gsd-input-helper.h"
-#include "list-box-helper.h"
 
 struct _CcMousePanel
 {
@@ -39,20 +38,20 @@ struct _CcMousePanel
   GtkListBoxRow     *edge_scrolling_row;
   GtkSwitch         *edge_scrolling_switch;
   GtkListBox        *general_listbox;
-  GtkFrame          *mouse_frame;
+  AdwPreferencesGroup *mouse_group;
   GtkListBox        *mouse_listbox;
   GtkSwitch         *mouse_natural_scrolling_switch;
   GtkScale          *mouse_speed_scale;
   CcMouseTest       *mouse_test;
   GtkBox            *primary_button_box;
-  GtkRadioButton    *primary_button_left;
-  GtkRadioButton    *primary_button_right;
-  GtkScrolledWindow *scrolled_window;
+  GtkToggleButton   *primary_button_left;
+  GtkToggleButton   *primary_button_right;
+  AdwPreferencesPage*preferences;
   GtkStack          *stack;
   GtkListBoxRow     *tap_to_click_row;
   GtkSwitch         *tap_to_click_switch;
   GtkButton         *test_button;
-  GtkFrame          *touchpad_frame;
+  AdwPreferencesGroup *touchpad_group;
   GtkListBox        *touchpad_listbox;
   GtkListBoxRow     *touchpad_natural_scrolling_row;
   GtkSwitch         *touchpad_natural_scrolling_switch;
@@ -87,13 +86,13 @@ setup_touchpad_options (CcMousePanel *self)
   gboolean have_tap_to_click;
 
   if (self->have_synaptics || !self->have_touchpad) {
-    gtk_widget_hide (GTK_WIDGET (self->touchpad_frame));
+    gtk_widget_hide (GTK_WIDGET (self->touchpad_group));
     return;
   }
 
   cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
 
-  gtk_widget_show (GTK_WIDGET (self->touchpad_frame));
+  gtk_widget_show (GTK_WIDGET (self->touchpad_group));
 
   gtk_widget_set_visible (GTK_WIDGET (self->two_finger_scrolling_row), have_two_finger_scrolling);
   gtk_widget_set_visible (GTK_WIDGET (self->edge_scrolling_row), have_edge_scrolling);
@@ -189,22 +188,29 @@ touchpad_enabled_set_mapping (const GValue              *value,
 }
 
 static void
-handle_secondary_button (CcMousePanel   *self,
-                         GtkRadioButton *button,
-                         GtkGesture     *gesture)
+pressed_cb (GtkButton *button)
+{
+  g_signal_emit_by_name (button, "activate");
+}
+
+static void
+handle_secondary_button (CcMousePanel    *self,
+                         GtkToggleButton *button,
+                         GtkGesture      *gesture)
 {
   gtk_gesture_single_set_touch_only (GTK_GESTURE_SINGLE (gesture), FALSE);
   gtk_gesture_single_set_exclusive (GTK_GESTURE_SINGLE (gesture), TRUE);
   gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (gesture), GDK_BUTTON_SECONDARY);
-  g_signal_connect_swapped (gesture, "pressed", G_CALLBACK (gtk_button_clicked), button);
+  g_signal_connect_swapped (gesture, "pressed", G_CALLBACK (pressed_cb), button);
   gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (gesture), GTK_PHASE_BUBBLE);
+  gtk_widget_add_controller (GTK_WIDGET (button), GTK_EVENT_CONTROLLER (gesture));
 }
 
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (CcMousePanel *self)
 {
-  GtkRadioButton *button;
+  GtkToggleButton *button;
 
   gtk_widget_set_direction (GTK_WIDGET (self->primary_button_box), GTK_TEXT_DIR_LTR);
 
@@ -221,10 +227,10 @@ setup_dialog (CcMousePanel *self)
 
   /* Allow changing orientation with either button */
   button = self->primary_button_right;
-  self->right_gesture = gtk_gesture_multi_press_new (GTK_WIDGET (button));
+  self->right_gesture = gtk_gesture_click_new ();
   handle_secondary_button (self, button, self->right_gesture);
   button = self->primary_button_left;
-  self->left_gesture = gtk_gesture_multi_press_new (GTK_WIDGET (button));
+  self->left_gesture = gtk_gesture_click_new ();
   handle_secondary_button (self, button, self->left_gesture);
 
   g_settings_bind (self->mouse_settings, "natural-scroll",
@@ -232,7 +238,7 @@ setup_dialog (CcMousePanel *self)
        G_SETTINGS_BIND_DEFAULT);
 
   /* Mouse section */
-  gtk_widget_set_visible (GTK_WIDGET (self->mouse_frame), self->have_mouse);
+  gtk_widget_set_visible (GTK_WIDGET (self->mouse_group), self->have_mouse);
 
   g_settings_bind (self->mouse_settings, "speed",
                    gtk_range_get_adjustment (GTK_RANGE (self->mouse_speed_scale)), "value",
@@ -310,25 +316,8 @@ device_changed (CcMousePanel *self)
   setup_touchpad_options (self);
 
   self->have_mouse = mouse_is_present ();
-  gtk_widget_set_visible (GTK_WIDGET (self->mouse_frame), self->have_mouse);
+  gtk_widget_set_visible (GTK_WIDGET (self->mouse_group), self->have_mouse);
   gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_switch), show_touchpad_enabling_switch (self));
-}
-
-static void
-on_content_size_changed (CcMousePanel  *self,
-                         GtkAllocation *allocation)
-{
-  if (allocation->height < 490)
-  {
-    gtk_scrolled_window_set_policy (self->scrolled_window,
-                                    GTK_POLICY_NEVER, GTK_POLICY_NEVER);
-  }
-  else
-  {
-    gtk_scrolled_window_set_policy (self->scrolled_window,
-                                    GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-    gtk_scrolled_window_set_min_content_height (self->scrolled_window, 490);
-  }
 }
 
 static void
@@ -338,8 +327,6 @@ cc_mouse_panel_dispose (GObject *object)
 
   g_clear_object (&self->mouse_settings);
   g_clear_object (&self->touchpad_settings);
-  g_clear_object (&self->right_gesture);
-  g_clear_object (&self->left_gesture);
 
   G_OBJECT_CLASS (cc_mouse_panel_parent_class)->dispose (object);
 }
@@ -356,7 +343,7 @@ test_button_toggled_cb (CcMousePanel *self)
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->test_button)))
     gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->mouse_test));
   else
-    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->scrolled_window));
+    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->preferences));
 }
 
 static void
@@ -418,7 +405,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, edge_scrolling_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, edge_scrolling_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, general_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_natural_scrolling_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_speed_scale);
@@ -426,12 +413,12 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_box);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_left);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_right);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, scrolled_window);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, preferences);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, test_button);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_frame);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_natural_scrolling_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_natural_scrolling_switch);
@@ -442,7 +429,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_scrolling_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, edge_scrolling_changed_event);
-  gtk_widget_class_bind_template_callback (widget_class, on_content_size_changed);
   gtk_widget_class_bind_template_callback (widget_class, test_button_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, two_finger_scrolling_changed_event);
 }

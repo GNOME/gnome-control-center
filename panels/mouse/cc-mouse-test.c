@@ -23,7 +23,7 @@
 #include <glib/gi18n.h>
 #include <string.h>
 #include <gdk/gdk.h>
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 #include <math.h>
 
 #include "cc-mouse-test.h"
@@ -54,7 +54,7 @@ enum
 
 struct _CcMouseTest
 {
-	GtkBin parent_instance;
+	AdwBin parent_instance;
 
 	GtkWidget *button_drawing_area;
 	GtkWidget *information_label;
@@ -73,7 +73,7 @@ struct _CcMouseTest
 	gint scroll_image_timeout_id;
 };
 
-G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, GTK_TYPE_BIN);
+G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_BIN);
 
 /* Timeout for the double click test */
 
@@ -171,7 +171,7 @@ setup_scroll_image (CcMouseTest *self)
 		resource = "/org/gnome/control-center/mouse/scroll-test-gegl.svg";
 	else
 		resource = "/org/gnome/control-center/mouse/scroll-test.svg";
-	gtk_image_set_from_resource (GTK_IMAGE (self->image), resource);
+	gtk_picture_set_resource (GTK_PICTURE (self->image), resource);
 
 	if (self->double_click_state != DOUBLE_CLICK_TEST_GEGL)
 		return;
@@ -181,13 +181,21 @@ setup_scroll_image (CcMouseTest *self)
 
 /* Callback issued when the user clicks the double click testing area. */
 
-static gboolean
-button_drawing_area_button_press_event (CcMouseTest *self, GdkEventButton *event)
+static void
+button_drawing_area_button_pressed_cb (GtkGestureClick *click_gesture,
+                                       gint             n_press,
+                                       gdouble          x,
+                                       gdouble          y,
+                                       CcMouseTest     *self)
 {
+	guint32 event_time;
+	guint current_button;
 	gint double_click_time;
 
-	if (event->type != GDK_BUTTON_PRESS || event->button > 3)
-		return FALSE;
+	current_button = gtk_gesture_single_get_current_button (GTK_GESTURE_SINGLE (click_gesture));
+
+	if (current_button > 3)
+		return;
 
 	double_click_time = g_settings_get_int (self->mouse_settings, "double-click");
 
@@ -197,9 +205,10 @@ button_drawing_area_button_press_event (CcMouseTest *self, GdkEventButton *event
 	}
 
 	/* Ignore fake double click using different buttons. */
-	if (self->double_click_state != DOUBLE_CLICK_TEST_OFF && self->button_state != event->button)
+	if (self->double_click_state != DOUBLE_CLICK_TEST_OFF && self->button_state != current_button)
 		self->double_click_state = DOUBLE_CLICK_TEST_OFF;
 
+	event_time = gtk_event_controller_get_current_event_time (GTK_EVENT_CONTROLLER (click_gesture));
 	switch (self->double_click_state) {
 	case DOUBLE_CLICK_TEST_OFF:
 		self->double_click_state = DOUBLE_CLICK_TEST_MAYBE;
@@ -209,7 +218,7 @@ button_drawing_area_button_press_event (CcMouseTest *self, GdkEventButton *event
 	case DOUBLE_CLICK_TEST_ON:
 	case DOUBLE_CLICK_TEST_STILL_ON:
 	case DOUBLE_CLICK_TEST_ALMOST_THERE:
-		if (event->time - self->double_click_timestamp < double_click_time) {
+		if (event_time - self->double_click_timestamp < double_click_time) {
 			self->double_click_state++;
 			self->button_drawing_area_timeout_id = g_timeout_add (2500, (GSourceFunc) test_maybe_timeout, self);
 		} else {
@@ -221,28 +230,30 @@ button_drawing_area_button_press_event (CcMouseTest *self, GdkEventButton *event
 		break;
 	}
 
-	self->double_click_timestamp = event->time;
+	self->double_click_timestamp = event_time;
 
 	gtk_widget_queue_draw (self->button_drawing_area);
 
-	self->button_state = event->button;
+	self->button_state = current_button;
 	setup_information_label (self);
 	setup_scroll_image (self);
-
-	return TRUE;
 }
 
-static gboolean
-button_drawing_area_draw_event (CcMouseTest *self,
-                                cairo_t     *cr)
+static void
+button_drawing_area_draw_func (GtkDrawingArea *drawing_area,
+                               cairo_t        *cr,
+                               int             width,
+                               int             height,
+                               gpointer        user_data)
 {
+	CcMouseTest *self = CC_MOUSE_TEST (user_data);
 	gdouble center_x, center_y, size;
 	GdkRGBA inner_color, outer_color;
 	cairo_pattern_t *pattern;
 
-	size = MAX (MIN (gtk_widget_get_allocated_width (self->button_drawing_area), gtk_widget_get_allocated_height (self->button_drawing_area)), 1);
-	center_x = gtk_widget_get_allocated_width (self->button_drawing_area) / 2.0;
-	center_y = gtk_widget_get_allocated_height (self->button_drawing_area) / 2.0;
+	size = MAX (MIN (width, height), 1);
+	center_x = width / 2.0;
+	center_y = height / 2.0;
 
 	switch (self->double_click_state) {
 	case DOUBLE_CLICK_TEST_ON:
@@ -285,8 +296,6 @@ button_drawing_area_draw_event (CcMouseTest *self,
 		   0, 2 * G_PI);
 	gdk_cairo_set_source_rgba (cr, &inner_color);
 	cairo_fill (cr);
-
-	return FALSE;
 }
 
 static void
@@ -300,11 +309,8 @@ setup_dialog (CcMouseTest *self)
 				  gtk_adjustment_get_upper (adjustment));
 
 	provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
-	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider), "* {background: #26a269}", -1, NULL);
+	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider), "* {background: #26a269;}", -1);
 	gtk_style_context_add_provider (gtk_widget_get_style_context (self->viewport),
-					provider,
-					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	gtk_style_context_add_provider (gtk_widget_get_style_context (self->button_drawing_area),
 					provider,
 					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 	g_object_unref (provider);
@@ -351,16 +357,17 @@ cc_mouse_test_class_init (CcMouseTestClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, scrolled_window_adjustment);
 	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, viewport);
 
-	gtk_widget_class_bind_template_callback (widget_class, button_drawing_area_button_press_event);
-	gtk_widget_class_bind_template_callback (widget_class, button_drawing_area_draw_event);
+	gtk_widget_class_bind_template_callback (widget_class, button_drawing_area_button_pressed_cb);
 }
 
 static void
 cc_mouse_test_init (CcMouseTest *self)
 {
-	g_autoptr(GError) error = NULL;
-
 	gtk_widget_init_template (GTK_WIDGET (self));
+
+	gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (self->button_drawing_area),
+					button_drawing_area_draw_func,
+					self, NULL);
 
 	self->double_click_timestamp = 0;
 	self->double_click_state = DOUBLE_CLICK_TEST_OFF;
