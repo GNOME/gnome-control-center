@@ -23,7 +23,7 @@
 
 struct _CcMultitaskingRow
 {
-  HdyPreferencesRow  parent;
+  AdwPreferencesRow  parent;
 
   GtkBox            *artwork_box;
   GtkBox            *header;
@@ -42,9 +42,11 @@ struct _CcMultitaskingRow
   GtkWidget         *activatable_widget;
 };
 
+static GtkBuildableIface *parent_buildable_iface;
+
 static void cc_multitasking_row_buildable_init (GtkBuildableIface *iface);
 
-G_DEFINE_TYPE_WITH_CODE (CcMultitaskingRow, cc_multitasking_row, HDY_TYPE_PREFERENCES_ROW,
+G_DEFINE_TYPE_WITH_CODE (CcMultitaskingRow, cc_multitasking_row, ADW_TYPE_PREFERENCES_ROW,
                          G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, cc_multitasking_row_buildable_init))
 
 enum
@@ -181,145 +183,10 @@ cc_multitasking_row_dispose (GObject *object)
     self->previous_parent = NULL;
   }
 
-  G_OBJECT_CLASS (cc_multitasking_row_parent_class)->dispose (object);
-}
-
-static void
-cc_multitasking_row_show_all (GtkWidget *widget)
-{
-  CcMultitaskingRow *self = CC_MULTITASKING_ROW (widget);
-
-  g_return_if_fail (CC_IS_MULTITASKING_ROW (self));
-
-  gtk_container_foreach (GTK_CONTAINER (self->prefixes),
-                         (GtkCallback) gtk_widget_show_all,
-                         NULL);
-
-  gtk_container_foreach (GTK_CONTAINER (self->suffixes),
-                         (GtkCallback) gtk_widget_show_all,
-                         NULL);
-
-  GTK_WIDGET_CLASS (cc_multitasking_row_parent_class)->show_all (widget);
-}
-
-static void
-cc_multitasking_row_destroy (GtkWidget *widget)
-{
-  CcMultitaskingRow *self = CC_MULTITASKING_ROW (widget);
-
-  if (self->header)
-    {
-      gtk_widget_destroy (GTK_WIDGET (self->header));
-      self->header = NULL;
-    }
-
   cc_multitasking_row_set_activatable_widget (self, NULL);
+  g_clear_pointer ((GtkWidget**)&self->header, gtk_widget_unparent);
 
-  self->prefixes = NULL;
-  self->suffixes = NULL;
-
-  GTK_WIDGET_CLASS (cc_multitasking_row_parent_class)->destroy (widget);
-}
-
-static void
-cc_multitasking_row_add (GtkContainer *container,
-                    GtkWidget    *child)
-{
-  CcMultitaskingRow *self = CC_MULTITASKING_ROW (container);
-
-  /* When constructing the widget, we want the box to be added as the child of
-   * the GtkListBoxRow, as an implementation detail.
-   */
-  if (!self->header)
-    {
-      GTK_CONTAINER_CLASS (cc_multitasking_row_parent_class)->add (container, child);
-    }
-  else
-    {
-      gtk_container_add (GTK_CONTAINER (self->suffixes), child);
-      gtk_widget_show (GTK_WIDGET (self->suffixes));
-    }
-}
-
-static void
-cc_multitasking_row_remove (GtkContainer *container,
-                       GtkWidget    *child)
-{
-  CcMultitaskingRow *self = CC_MULTITASKING_ROW (container);
-
-  if (child == GTK_WIDGET (self->header))
-    GTK_CONTAINER_CLASS (cc_multitasking_row_parent_class)->remove (container, child);
-  else if (gtk_widget_get_parent (child) == GTK_WIDGET (self->prefixes))
-    gtk_container_remove (GTK_CONTAINER (self->prefixes), child);
-  else
-    gtk_container_remove (GTK_CONTAINER (self->suffixes), child);
-}
-
-typedef struct {
-  CcMultitaskingRow *row;
-  GtkCallback callback;
-  gpointer callback_data;
-} ForallData;
-
-static void
-for_non_internal_child (GtkWidget *widget,
-                        gpointer   callback_data)
-{
-  ForallData *data = callback_data;
-  CcMultitaskingRow *self = data->row;
-
-  if (widget != (GtkWidget *) self->image &&
-      widget != (GtkWidget *) self->prefixes &&
-      widget != (GtkWidget *) self->suffixes &&
-      widget != (GtkWidget *) self->title_box)
-    {
-      data->callback (widget, data->callback_data);
-    }
-}
-
-static void
-cc_multitasking_row_forall (GtkContainer *container,
-                       gboolean      include_internals,
-                       GtkCallback   callback,
-                       gpointer      callback_data)
-{
-  CcMultitaskingRow *self = CC_MULTITASKING_ROW (container);
-  ForallData data;
-
-  if (include_internals)
-    {
-      GTK_CONTAINER_CLASS (cc_multitasking_row_parent_class)->forall (GTK_CONTAINER (self),
-                                                                      include_internals,
-                                                                      callback,
-                                                                      callback_data);
-      return;
-    }
-
-  data.row = self;
-  data.callback = callback;
-  data.callback_data = callback_data;
-
-  if (self->prefixes)
-    {
-      GTK_CONTAINER_GET_CLASS (self->prefixes)->forall (GTK_CONTAINER (self->prefixes),
-                                                        include_internals,
-                                                        for_non_internal_child,
-                                                        &data);
-    }
-  if (self->suffixes)
-    {
-      GTK_CONTAINER_GET_CLASS (self->suffixes)->forall (GTK_CONTAINER (self->suffixes),
-                                                        include_internals,
-                                                        for_non_internal_child,
-                                                        &data);
-    }
-  if (self->header)
-    {
-      GTK_CONTAINER_GET_CLASS (self->header)->forall (GTK_CONTAINER (self->header),
-                                                      include_internals,
-                                                      for_non_internal_child,
-                                                      &data);
-    }
+  G_OBJECT_CLASS (cc_multitasking_row_parent_class)->dispose (object);
 }
 
 static void
@@ -327,18 +194,10 @@ cc_multitasking_row_class_init (CcMultitaskingRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-  GtkContainerClass *container_class = GTK_CONTAINER_CLASS (klass);
 
   object_class->get_property = cc_multitasking_row_get_property;
   object_class->set_property = cc_multitasking_row_set_property;
   object_class->dispose = cc_multitasking_row_dispose;
-
-  widget_class->destroy = cc_multitasking_row_destroy;
-  widget_class->show_all = cc_multitasking_row_show_all;
-
-  container_class->add = cc_multitasking_row_add;
-  container_class->remove = cc_multitasking_row_remove;
-  container_class->forall = cc_multitasking_row_forall;
 
   props[PROP_ICON_NAME] =
     g_param_spec_string ("icon-name",
@@ -447,19 +306,25 @@ cc_multitasking_row_buildable_add_child (GtkBuildable *buildable,
 {
   CcMultitaskingRow *self = CC_MULTITASKING_ROW (buildable);
 
-  if (self->header == NULL || !type)
-    gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (child));
+  if (!self->header)
+    parent_buildable_iface->add_child (buildable, builder, child, type);
   else if (type && strcmp (type, "prefix") == 0)
     cc_multitasking_row_add_prefix (self, GTK_WIDGET (child));
   else if (type && strcmp (type, "artwork") == 0)
-    cc_multitasking_row_add_artwork(self, GTK_WIDGET (child));
+    cc_multitasking_row_add_artwork (self, GTK_WIDGET (child));
+  else if (!type && GTK_IS_WIDGET (child))
+    {
+      gtk_box_append (self->suffixes, GTK_WIDGET (child));
+      gtk_widget_show (GTK_WIDGET (self->suffixes));
+    }
   else
-    GTK_BUILDER_WARN_INVALID_CHILD_TYPE (self, type);
+    parent_buildable_iface->add_child (buildable, builder, child, type);
 }
 
 static void
 cc_multitasking_row_buildable_init (GtkBuildableIface *iface)
 {
+  parent_buildable_iface = g_type_interface_peek_parent (iface);
   iface->add_child = cc_multitasking_row_buildable_add_child;
 }
 
@@ -490,13 +355,9 @@ cc_multitasking_row_set_subtitle (CcMultitaskingRow *self,
 const gchar *
 cc_multitasking_row_get_icon_name (CcMultitaskingRow *self)
 {
-  const gchar *icon_name;
-
   g_return_val_if_fail (CC_IS_MULTITASKING_ROW (self), NULL);
 
-  gtk_image_get_icon_name (self->image, &icon_name, NULL);
-
-  return icon_name;
+  return gtk_image_get_icon_name (self->image);
 }
 
 void
@@ -507,11 +368,11 @@ cc_multitasking_row_set_icon_name (CcMultitaskingRow *self,
 
   g_return_if_fail (CC_IS_MULTITASKING_ROW (self));
 
-  gtk_image_get_icon_name (self->image, &old_icon_name, NULL);
+  old_icon_name = gtk_image_get_icon_name (self->image);
   if (g_strcmp0 (old_icon_name, icon_name) == 0)
     return;
 
-  gtk_image_set_from_icon_name (self->image, icon_name, GTK_ICON_SIZE_INVALID);
+  gtk_image_set_from_icon_name (self->image, icon_name);
   gtk_widget_set_visible (GTK_WIDGET (self->image),
                           icon_name != NULL && g_strcmp0 (icon_name, "") != 0);
 
@@ -584,7 +445,7 @@ cc_multitasking_row_set_use_underline (CcMultitaskingRow *self,
     return;
 
   self->use_underline = use_underline;
-  hdy_preferences_row_set_use_underline (HDY_PREFERENCES_ROW (self), self->use_underline);
+  adw_preferences_row_set_use_underline (ADW_PREFERENCES_ROW (self), self->use_underline);
   gtk_label_set_use_underline (self->title, self->use_underline);
   gtk_label_set_use_underline (self->subtitle, self->use_underline);
   gtk_label_set_mnemonic_widget (self->title, GTK_WIDGET (self));
@@ -652,7 +513,7 @@ cc_multitasking_row_add_prefix (CcMultitaskingRow *self,
   g_return_if_fail (CC_IS_MULTITASKING_ROW (self));
   g_return_if_fail (GTK_IS_WIDGET (self));
 
-  gtk_box_pack_start (self->prefixes, widget, FALSE, TRUE, 0);
+  gtk_box_append (self->prefixes, widget);
   gtk_widget_show (GTK_WIDGET (self->prefixes));
 }
 
@@ -668,7 +529,7 @@ cc_multitasking_row_add_artwork (CcMultitaskingRow *self,
    */
   gtk_widget_set_margin_top (GTK_WIDGET (self->header), 12);
 
-  gtk_box_pack_start (self->artwork_box, widget, FALSE, TRUE, 0);
+  gtk_box_append (self->artwork_box, widget);
   gtk_widget_show (GTK_WIDGET (self->artwork_box));
 }
 
@@ -682,3 +543,25 @@ cc_multitasking_row_activate (CcMultitaskingRow *self)
 
   g_signal_emit (self, signals[SIGNAL_ACTIVATED], 0);
 }
+
+void
+cc_multitasking_row_remove (CcMultitaskingRow *self,
+                            GtkWidget         *child)
+{
+  GtkWidget *parent;
+
+  g_return_if_fail (CC_IS_MULTITASKING_ROW (self));
+  g_return_if_fail (GTK_IS_WIDGET (child));
+
+  parent = gtk_widget_get_parent (child);
+
+  if (parent == GTK_WIDGET (self->prefixes))
+    gtk_box_remove (self->prefixes, child);
+  else if (parent == GTK_WIDGET (self->suffixes))
+    gtk_box_remove (self->suffixes, child);
+  else if (parent == GTK_WIDGET (self->artwork_box))
+    gtk_box_remove (self->artwork_box, child);
+  else
+    g_warning ("%p is not a child of %p", child, self);
+}
+

@@ -43,7 +43,7 @@ extern GType cc_default_apps_panel_get_type (void);
 extern GType cc_info_overview_panel_get_type (void);
 //extern GType cc_keyboard_panel_get_type (void);
 //extern GType cc_mouse_panel_get_type (void);
-//extern GType cc_multitasking_panel_get_type (void);
+extern GType cc_multitasking_panel_get_type (void);
 #ifdef BUILD_NETWORK
 //extern GType cc_network_panel_get_type (void);
 //extern GType cc_wifi_panel_get_type (void);
@@ -114,7 +114,7 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("lock",             cc_lock_panel_get_type,                 NULL),
   PANEL_TYPE("microphone",       cc_microphone_panel_get_type,           NULL),
   //PANEL_TYPE("mouse",            cc_mouse_panel_get_type,                NULL),
-  //PANEL_TYPE("multitasking",     cc_multitasking_panel_get_type,         NULL),
+  PANEL_TYPE("multitasking",     cc_multitasking_panel_get_type,         NULL),
 #ifdef BUILD_NETWORK
   //PANEL_TYPE("network",          cc_network_panel_get_type,              NULL),
   //PANEL_TYPE("wifi",             cc_wifi_panel_get_type,                 cc_wifi_panel_static_init_func),

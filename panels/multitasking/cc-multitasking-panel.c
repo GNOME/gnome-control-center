@@ -23,7 +23,6 @@
 
 #include "cc-multitasking-resources.h"
 #include "cc-multitasking-row.h"
-#include "list-box-helper.h"
 
 struct _CcMultitaskingPanel
 {
@@ -35,13 +34,13 @@ struct _CcMultitaskingPanel
   GSettings       *wm_settings;
 
   GtkSwitch       *active_screen_edges_switch;
-  GtkToggleButton *current_workspace_radio;
-  GtkToggleButton *dynamic_workspaces_radio;
-  GtkToggleButton *fixed_workspaces_radio;
+  GtkCheckButton  *current_workspace_radio;
+  GtkCheckButton  *dynamic_workspaces_radio;
+  GtkCheckButton  *fixed_workspaces_radio;
   GtkSwitch       *hot_corner_switch;
   GtkSpinButton   *number_of_workspaces_spin;
-  GtkToggleButton *workspaces_primary_display_radio;
-  GtkToggleButton *workspaces_span_displays_radio;
+  GtkCheckButton  *workspaces_primary_display_radio;
+  GtkCheckButton  *workspaces_span_displays_radio;
 };
 
 CC_PANEL_REGISTER (CcMultitaskingPanel, cc_multitasking_panel)
@@ -100,9 +99,9 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
   self->mutter_settings = g_settings_new ("org.gnome.mutter");
 
   if (g_settings_get_boolean (self->mutter_settings, "workspaces-only-on-primary"))
-    gtk_toggle_button_set_active (self->workspaces_primary_display_radio, TRUE);
+    gtk_check_button_set_active (self->workspaces_primary_display_radio, TRUE);
   else
-    gtk_toggle_button_set_active (self->workspaces_span_displays_radio, TRUE);
+    gtk_check_button_set_active (self->workspaces_span_displays_radio, TRUE);
 
   g_settings_bind (self->mutter_settings,
                    "workspaces-only-on-primary",
@@ -116,9 +115,9 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   if (g_settings_get_boolean (self->mutter_settings, "dynamic-workspaces"))
-    gtk_toggle_button_set_active (self->dynamic_workspaces_radio, TRUE);
+    gtk_check_button_set_active (self->dynamic_workspaces_radio, TRUE);
   else
-    gtk_toggle_button_set_active (self->fixed_workspaces_radio, TRUE);
+    gtk_check_button_set_active (self->fixed_workspaces_radio, TRUE);
 
   g_settings_bind (self->mutter_settings,
                    "dynamic-workspaces",
@@ -136,7 +135,7 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
   self->shell_settings = g_settings_new ("org.gnome.shell.app-switcher");
 
   if (g_settings_get_boolean (self->shell_settings, "current-workspace-only"))
-    gtk_toggle_button_set_active (self->current_workspace_radio, TRUE);
+    gtk_check_button_set_active (self->current_workspace_radio, TRUE);
 
   g_settings_bind (self->shell_settings,
                    "current-workspace-only",

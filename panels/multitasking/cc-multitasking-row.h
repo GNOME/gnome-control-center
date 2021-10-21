@@ -21,12 +21,12 @@
 
 #pragma once
 
-#include <handy.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_MULTITASKING_ROW (cc_multitasking_row_get_type())
-G_DECLARE_FINAL_TYPE (CcMultitaskingRow, cc_multitasking_row, CC, MULTITASKING_ROW, HdyPreferencesRow)
+G_DECLARE_FINAL_TYPE (CcMultitaskingRow, cc_multitasking_row, CC, MULTITASKING_ROW, AdwPreferencesRow)
 
 const gchar *cc_multitasking_row_get_subtitle (CcMultitaskingRow *self);
 void         cc_multitasking_row_set_subtitle (CcMultitaskingRow *self,
@@ -59,5 +59,8 @@ void cc_multitasking_row_add_artwork (CcMultitaskingRow *self,
                                       GtkWidget         *widget);
 
 void cc_multitasking_row_activate (CcMultitaskingRow *self);
+
+void cc_multitasking_row_remove (CcMultitaskingRow *self,
+                                 GtkWidget         *child);
 
 G_END_DECLS
