@@ -73,10 +73,10 @@ extern GType cc_camera_panel_get_type (void);
 extern GType cc_microphone_panel_get_type (void);
 extern GType cc_usage_panel_get_type (void);
 extern GType cc_lock_panel_get_type (void);
-//extern GType cc_diagnostics_panel_get_type (void);
+extern GType cc_diagnostics_panel_get_type (void);
 
 /* Static init functions */
-//extern void cc_diagnostics_panel_static_init_func (void);
+extern void cc_diagnostics_panel_static_init_func (void);
 #ifdef BUILD_NETWORK
 //extern void cc_wifi_panel_static_init_func (void);
 #endif /* BUILD_NETWORK */
@@ -106,7 +106,7 @@ static CcPanelLoaderVtable default_panels[] =
   //PANEL_TYPE("color",            cc_color_panel_get_type,                NULL),
   //PANEL_TYPE("datetime",         cc_date_time_panel_get_type,            NULL),
   PANEL_TYPE("default-apps",     cc_default_apps_panel_get_type,         NULL),
-  //PANEL_TYPE("diagnostics",      cc_diagnostics_panel_get_type,          cc_diagnostics_panel_static_init_func),
+  PANEL_TYPE("diagnostics",      cc_diagnostics_panel_get_type,          cc_diagnostics_panel_static_init_func),
   //PANEL_TYPE("display",          cc_display_panel_get_type,              NULL),
   PANEL_TYPE("info-overview",    cc_info_overview_panel_get_type,        NULL),
   //PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
