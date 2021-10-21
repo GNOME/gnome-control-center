@@ -18,7 +18,6 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "list-box-helper.h"
 #include "cc-usage-panel.h"
 #include "cc-usage-resources.h"
 #include "cc-util.h"
@@ -108,7 +107,7 @@ set_purge_after_value_for_combo (GtkComboBox  *combo_box,
   gtk_combo_box_set_active (combo_box, i - 1);
 }
 
-static gboolean
+static GtkDialog *
 run_warning (CcUsagePanel *self,
              const gchar  *prompt,
              const gchar  *text,
@@ -117,12 +116,13 @@ run_warning (CcUsagePanel *self,
   GtkWindow *parent;
   GtkWidget *dialog;
   GtkWidget *button;
-  int result;
+  CcShell *shell;
 
-  parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  parent = GTK_WINDOW (cc_shell_get_toplevel (shell));
 
   dialog = gtk_message_dialog_new (parent,
-                                   0,
+                                   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                    GTK_MESSAGE_WARNING,
                                    GTK_BUTTONS_NONE,
                                    NULL);
@@ -138,25 +138,20 @@ run_warning (CcUsagePanel *self,
   button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
   gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
 
-  result = gtk_dialog_run (GTK_DIALOG (dialog));
-  gtk_widget_destroy (dialog);
+  gtk_window_present (GTK_WINDOW (dialog));
 
-  return result == GTK_RESPONSE_OK;
+  return GTK_DIALOG (dialog);
 }
 
 static void
-empty_trash (CcUsagePanel *self)
+on_empty_trash_warning_response_cb (GtkDialog    *dialog,
+                                    gint          response,
+                                    CcUsagePanel *self)
 {
   g_autoptr(GDBusConnection) bus = NULL;
-  gboolean result;
 
-  result = run_warning (self,
-                        _("Empty all items from Trash?"),
-                        _("All items in the Trash will be permanently deleted."),
-                        _("_Empty Trash"));
-
-  if (!result)
-    return;
+  if (response != GTK_RESPONSE_OK)
+    goto out;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,
@@ -165,21 +160,37 @@ empty_trash (CcUsagePanel *self)
                           "org.gnome.SettingsDaemon.Housekeeping",
                           "EmptyTrash",
                           NULL, NULL, 0, -1, NULL, NULL, NULL);
+
+out:
+  gtk_window_destroy (GTK_WINDOW (dialog));
 }
 
 static void
-purge_temp (CcUsagePanel *self)
+empty_trash (CcUsagePanel *self)
+{
+  GtkDialog *dialog;
+
+  dialog = run_warning (self,
+                        _("Empty all items from Trash?"),
+                        _("All items in the Trash will be permanently deleted."),
+                        _("_Empty Trash"));
+
+  g_signal_connect_object (dialog,
+                           "response",
+                           G_CALLBACK (on_empty_trash_warning_response_cb),
+                           self,
+                           0);
+}
+
+static void
+on_purge_temp_warning_response_cb (GtkDialog    *dialog,
+                                   gint          response,
+                                   CcUsagePanel *self)
 {
   g_autoptr(GDBusConnection) bus = NULL;
-  gboolean result;
 
-  result = run_warning (self,
-                        _("Delete all the temporary files?"),
-                        _("All the temporary files will be permanently deleted."),
-                        _("_Purge Temporary Files"));
-
-  if (!result)
-    return;
+  if (response != GTK_RESPONSE_OK)
+    goto out;
 
   bus = g_bus_get_sync (G_BUS_TYPE_SESSION, NULL, NULL);
   g_dbus_connection_call (bus,
@@ -188,6 +199,25 @@ purge_temp (CcUsagePanel *self)
                           "org.gnome.SettingsDaemon.Housekeeping",
                           "RemoveTempFiles",
                           NULL, NULL, 0, -1, NULL, NULL, NULL);
+
+out:
+  gtk_window_destroy (GTK_WINDOW (dialog));
+}
+static void
+purge_temp (CcUsagePanel *self)
+{
+  GtkDialog *dialog;
+
+  dialog = run_warning (self,
+                        _("Delete all the temporary files?"),
+                        _("All the temporary files will be permanently deleted."),
+                        _("_Purge Temporary Files"));
+
+  g_signal_connect_object (dialog,
+                           "response",
+                           G_CALLBACK (on_purge_temp_warning_response_cb),
+                           self,
+                           0);
 }
 
 static void
@@ -263,14 +293,6 @@ cc_usage_panel_init (CcUsagePanel *self)
   g_resources_register (cc_usage_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_list_box_set_header_func (self->usage_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->trash_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
