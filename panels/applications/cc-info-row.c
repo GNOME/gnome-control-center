@@ -87,11 +87,11 @@ static void
 update_expander (CcInfoRow *row)
 {
   if (row->link)
-    gtk_image_set_from_icon_name (GTK_IMAGE (row->expander), "go-next-symbolic", GTK_ICON_SIZE_BUTTON);
+    gtk_image_set_from_icon_name (GTK_IMAGE (row->expander), "go-next-symbolic");
   else if (row->expanded)
-    gtk_image_set_from_icon_name (GTK_IMAGE (row->expander), "pan-down-symbolic", GTK_ICON_SIZE_BUTTON);
+    gtk_image_set_from_icon_name (GTK_IMAGE (row->expander), "pan-down-symbolic");
   else
-    gtk_image_set_from_icon_name (GTK_IMAGE (row->expander), "pan-end-symbolic", GTK_ICON_SIZE_BUTTON);
+    gtk_image_set_from_icon_name (GTK_IMAGE (row->expander), "pan-end-symbolic");
 }
 
 static void

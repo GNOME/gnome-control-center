@@ -31,7 +31,7 @@
 #ifndef CC_PANEL_LOADER_NO_GTYPES
 
 /* Extension points */
-//extern GType cc_applications_panel_get_type (void);
+extern GType cc_applications_panel_get_type (void);
 //extern GType cc_background_panel_get_type (void);
 #ifdef BUILD_BLUETOOTH
 //extern GType cc_bluetooth_panel_get_type (void);
@@ -97,7 +97,7 @@ extern GType cc_lock_panel_get_type (void);
 
 static CcPanelLoaderVtable default_panels[] =
 {
-  //PANEL_TYPE("applications",     cc_applications_panel_get_type,         NULL),
+  PANEL_TYPE("applications",     cc_applications_panel_get_type,         NULL),
   //PANEL_TYPE("background",       cc_background_panel_get_type,           NULL),
 #ifdef BUILD_BLUETOOTH
   //PANEL_TYPE("bluetooth",        cc_bluetooth_panel_get_type,            NULL),

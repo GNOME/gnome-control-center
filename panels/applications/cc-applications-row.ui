@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcApplicationsRow" parent="GtkListBoxRow">
-    <property name="visible">True</property>
-    <property name="can-focus">True</property>
     <child>
       <object class="GtkBox" id="box">
-        <property name="visible">1</property>
-        <property name="border-width">6</property>
+        <property name="margin-top">6</property>
+        <property name="margin-bottom">6</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
         <property name="spacing">12</property>
         <child>
           <object class="GtkImage" id="image">
-            <property name="visible">1</property>
             <property name="pixel-size">32</property>
             <style>
               <class name="sidebar-icon"/>
@@ -21,7 +20,6 @@
         </child>
         <child>
           <object class="GtkLabel" id="label">
-            <property name="visible">1</property>
             <property name="xalign">0</property>
             <property name="ellipsize">end</property>
           </object>

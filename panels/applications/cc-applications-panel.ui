@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcApplicationsPanel" parent="CcPanel">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <child>
       <object class="GtkScrolledWindow" id="main_scroll">
-        <property name="visible">1</property>
         <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="HdyClamp">
-            <property name="visible">True</property>
+          <object class="AdwClamp">
             <property name="margin_top">32</property>
             <property name="margin_bottom">32</property>
             <property name="margin_start">12</property>
             <property name="margin_end">12</property>
             <child>
               <object class="GtkStack" id="stack">
-                <property name="visible">1</property>
+
                 <child>
                   <object class="GtkBox" id="empty_box">
-                    <property name="visible">1</property>
                     <property name="orientation">vertical</property>
                     <property name="valign">center</property>
                     <child>
                       <object class="GtkImage">
-                        <property name="visible">1</property>
                         <property name="valign">start</property>
                         <property name="pixel-size">80</property>
                         <property name="icon-name">org.gnome.Software-symbolic</property>
@@ -32,13 +26,9 @@
                           <class name="dim-label"/>
                         </style>
                       </object>
-                      <packing>
-                        <property name="fill">0</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">1</property>
                         <property name="margin-bottom">15</property>
                         <property name="label" translatable="yes">No applications</property>
                         <style>
@@ -48,35 +38,24 @@
                           <attribute name="scale" value="1.2"/>
                         </attributes>
                       </object>
-                      <packing>
-                        <property name="position">1</property>
-                      </packing>
                     </child>
                     <child>
                       <object class="GtkButton" id="install_button">
                         <property name="label" translatable="yes">Install some…</property>
-                        <property name="visible">1</property>
-                        <property name="can-focus">1</property>
                         <property name="receives-default">1</property>
                         <property name="halign">center</property>
                         <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
                       </object>
-                      <packing>
-                        <property name="fill">0</property>
-                        <property name="position">2</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
                 <child>
                   <object class="GtkBox" id="settings_box">
-                    <property name="visible">1</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">24</property>
                     <property name="hexpand">1</property>
                     <child>
                       <object class="GtkBox" id="permission_section">
-                        <property name="visible">1</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
                         <style>
@@ -84,12 +63,10 @@
                         </style>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">1</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">1</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Permissions &amp; Access</property>
                                 <style>
@@ -99,7 +76,6 @@
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">1</property>
                                 <property name="xalign">0</property>
                                 <property name="wrap">1</property>
                                 <property name="max-width-chars">50</property>
@@ -113,9 +89,11 @@
                         </child>
                         <child>
                           <object class="GtkListBox" id="permission_list">
-                            <property name="visible">1</property>
                             <property name="selection-mode">none</property>
                             <signal name="row-activated" handler="permission_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
+                            <style>
+                              <class name="content"/>
+                            </style>
                             <child>
                               <object class="CcToggleRow" id="camera">
                                 <property name="title" translatable="yes">Camera</property>
@@ -168,7 +146,6 @@
                         </child>
                         <child>
                           <object class="GtkLabel">
-                            <property name="visible">1</property>
                             <property name="xalign">0</property>
                             <property name="wrap">1</property>
                             <property name="max-width-chars">50</property>
@@ -181,7 +158,6 @@
                     </child>
                     <child>
                       <object class="GtkBox" id="integration_section">
-                        <property name="visible">1</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
                         <style>
@@ -189,12 +165,10 @@
                         </style>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">1</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">1</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Integration</property>
                                 <style>
@@ -204,7 +178,6 @@
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">1</property>
                                 <property name="xalign">0</property>
                                 <property name="wrap">1</property>
                                 <property name="max-width-chars">50</property>
@@ -218,8 +191,10 @@
                         </child>
                         <child>
                           <object class="GtkListBox" id="integration_list">
-                            <property name="visible">1</property>
                             <property name="selection-mode">none</property>
+                            <style>
+                              <class name="content"/>
+                            </style>
                             <child>
                               <object class="CcToggleRow" id="search">
                                 <property name="title" translatable="yes">Search</property>
@@ -278,7 +253,6 @@
                     </child>
                     <child>
                       <object class="GtkBox" id="handler_section">
-                        <property name="visible">1</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
                         <style>
@@ -286,16 +260,13 @@
                         </style>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">1</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkBox">
-                                <property name="visible">1</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">6</property>
                                 <child>
                                   <object class="GtkLabel">
-                                    <property name="visible">1</property>
                                     <property name="xalign">0</property>
                                     <property name="label" translatable="yes">Default Handlers</property>
                                     <style>
@@ -305,7 +276,7 @@
                                 </child>
                                 <child>
                                   <object class="GtkLabel">
-                                    <property name="visible">1</property>
+                                    <property name="hexpand">True</property>
                                     <property name="xalign">0</property>
                                     <property name="wrap">1</property>
                                     <property name="max-width-chars">50</property>
@@ -316,13 +287,9 @@
                                   </object>
                                 </child>
                               </object>
-                              <packing>
-                                <property name="expand">1</property>
-                              </packing>
                             </child>
                             <child>
                               <object class="GtkButton" id="handler_reset">
-                                <property name="visible">1</property>
                                 <property name="halign">end</property>
                                 <property name="valign">center</property>
                                 <property name="label" translatable="yes">Reset</property>
@@ -333,12 +300,10 @@
                         </child>
                         <child>
                           <object class="GtkListBox" id="handler_list">
-                            <property name="visible">1</property>
                             <property name="selection-mode">none</property>
                             <signal name="row-activated" handler="handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
                             <style>
-                              <class name="view"/>
-                              <class name="frame"/>
+                              <class name="content"/>
                             </style>
                           </object>
                         </child>
@@ -346,7 +311,6 @@
                     </child>
                     <child>
                       <object class="GtkBox" id="usage_section">
-                        <property name="visible">1</property>
                         <property name="orientation">vertical</property>
                         <property name="spacing">12</property>
                         <style>
@@ -354,12 +318,10 @@
                         </style>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">1</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">1</property>
                                 <property name="xalign">0</property>
                                 <property name="label" translatable="yes">Usage</property>
                                 <style>
@@ -369,7 +331,6 @@
                             </child>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">1</property>
                                 <property name="xalign">0</property>
                                 <property name="wrap">1</property>
                                 <property name="max-width-chars">50</property>
@@ -383,9 +344,11 @@
                         </child>
                         <child>
                           <object class="GtkListBox" id="usage_list">
-                            <property name="visible">1</property>
                             <property name="selection-mode">none</property>
                             <signal name="row-activated" handler="storage_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
+                            <style>
+                              <class name="content"/>
+                            </style>
                             <child>
                               <object class="CcInfoRow" id="storage">
                                 <property name="title" translatable="yes">Storage</property>
@@ -412,7 +375,6 @@
     </child>
   </template>
   <object class="GtkLabel" id="title_label">
-    <property name="visible">1</property>
     <property name="label" translatable="yes">Applications</property>
     <property name="ellipsize">end</property>
     <style>
@@ -420,21 +382,18 @@
     </style>
   </object>
   <object class="GtkButton" id="header_button">
-    <property name="visible">1</property>
     <property name="label" translatable="yes">Open in Software</property>
   </object>
 
   <!-- Sidebar -->
   <object class="GtkBox" id="sidebar_box">
-    <property name="visible">True</property>
     <property name="orientation">vertical</property>
     <child>
       <object class="GtkSearchEntry" id="sidebar_search_entry">
-        <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="has-focus">True</property>
-        <property name="margin">12</property>
+        <property name="margin-top">12</property>
         <property name="margin-bottom">6</property>
+        <property name="margin-start">12</property>
+        <property name="margin-end">12</property>
         <signal name="activate" handler="on_sidebar_search_entry_activated_cb" object="CcApplicationsPanel" swapped="yes" />
         <signal name="search-changed" handler="on_sidebar_search_entry_search_changed_cb" object="CcApplicationsPanel" swapped="yes" />
         <signal name="stop-search" handler="on_sidebar_search_entry_search_stopped_cb" object="CcApplicationsPanel" swapped="yes" />
@@ -442,23 +401,27 @@
     </child>
     <child>
       <object class="GtkListBox" id="sidebar_listbox">
-        <property name="visible">True</property>
         <property name="vexpand">True</property>
         <property name="selection-mode">browse</property>
+        <style>
+          <class name="navigation-sidebar" />
+        </style>
 
         <child type="placeholder">
           <object class="GtkBox" id="empty_search_placeholder">
-            <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">center</property>
             <property name="valign">center</property>
-            <property name="expand">True</property>
-            <property name="border_width">18</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <property name="margin-top">18</property>
+            <property name="margin-bottom">18</property>
+            <property name="margin-start">18</property>
+            <property name="margin-end">18</property>
             <property name="orientation">vertical</property>
             <property name="spacing">6</property>
             <child>
               <object class="GtkImage">
-                <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="pixel_size">64</property>
                 <property name="icon_name">edit-find-symbolic</property>
@@ -469,7 +432,6 @@
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">No results found</property>
                 <attributes>
@@ -480,7 +442,6 @@
             </child>
             <child>
               <object class="GtkLabel">
-                <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Try a different search</property>
                 <style>
@@ -499,19 +460,19 @@
   <object class="GtkDialog" id="builtin_dialog">
     <property name="title" translatable="yes">Built-in Permissions</property>
     <property name="modal">1</property>
-    <property name="type-hint">dialog</property>
     <property name="use-header-bar">1</property>
     <property name="resizable">0</property>
-    <property name="border-width">24</property>
-    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
-    <child internal-child="vbox">
+    <property name="hide-on-close">True</property>
+    <child>
       <object class="GtkBox">
-        <property name="visible">1</property>
+        <property name="margin-top">24</property>
+        <property name="margin-bottom">24</property>
+        <property name="margin-start">24</property>
+        <property name="margin-end">24</property>
         <property name="orientation">vertical</property>
         <property name="spacing">12</property>
         <child>
           <object class="GtkLabel" id="builtin_label">
-            <property name="visible">1</property>
             <property name="xalign">0</property>
             <property name="wrap">1</property>
             <property name="max-width-chars">50</property>
@@ -520,11 +481,9 @@
         </child>
         <child>
           <object class="GtkListBox" id="builtin_list">
-            <property name="visible">1</property>
             <property name="selection-mode">none</property>
             <style>
-              <class name="view"/>
-              <class name="frame"/>
+              <class name="content"/>
             </style>
           </object>
         </child>
@@ -536,19 +495,19 @@
   <object class="GtkDialog" id="storage_dialog">
     <property name="title" translatable="yes">Storage</property>
     <property name="modal">1</property>
-    <property name="type-hint">dialog</property>
     <property name="use-header-bar">1</property>
     <property name="resizable">0</property>
-    <property name="border-width">24</property>
-    <signal name="delete-event" handler="gtk_widget_hide_on_delete"/>
-    <child internal-child="vbox">
+    <property name="hide-on-close">True</property>
+    <child>
       <object class="GtkBox">
-        <property name="visible">1</property>
+        <property name="margin-top">24</property>
+        <property name="margin-bottom">24</property>
+        <property name="margin-start">24</property>
+        <property name="margin-end">24</property>
         <property name="orientation">vertical</property>
         <property name="spacing">12</property>
         <child>
           <object class="GtkLabel">
-            <property name="visible">1</property>
             <property name="xalign">0</property>
             <property name="wrap">1</property>
             <property name="max-width-chars">50</property>
@@ -557,8 +516,10 @@
         </child>
         <child>
           <object class="GtkListBox" id="storage_list">
-            <property name="visible">1</property>
             <property name="selection-mode">none</property>
+            <style>
+              <class name="content"/>
+            </style>
             <child>
               <object class="CcInfoRow" id="app">
                 <property name="title" translatable="yes">Application</property>
@@ -592,16 +553,11 @@
         </child>
         <child>
           <object class="GtkBox">
-            <property name="visible">1</property>
             <child>
               <object class="GtkButton" id="clear_cache_button">
-                <property name="visible">1</property>
                 <property name="label" translatable="yes">Clear Cache…</property>
                 <signal name="clicked" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
           </object>
         </child>

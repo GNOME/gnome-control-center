@@ -43,7 +43,6 @@
 #include "cc-snap-row.h"
 #endif
 #include "globs.h"
-#include "list-box-helper.h"
 #include "search.h"
 #include "utils.h"
 
@@ -782,7 +781,7 @@ add_static_permission_row (CcApplicationsPanel *self,
                       "title", title,
                       "info", subtitle,
                       NULL);
-  gtk_container_add (GTK_CONTAINER (self->builtin_list), row);
+  gtk_list_box_append (self->builtin_list, row);
 
   return 1;
 }
@@ -793,8 +792,10 @@ permission_row_activated_cb (CcApplicationsPanel *self,
 {
   if (list_row == GTK_LIST_BOX_ROW (self->builtin))
     {
+      CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
+
       gtk_window_set_transient_for (GTK_WINDOW (self->builtin_dialog),
-                                    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+                                    GTK_WINDOW (cc_shell_get_toplevel (shell)));
       gtk_window_present (GTK_WINDOW (self->builtin_dialog));
     }
 }
@@ -857,7 +858,7 @@ add_static_permissions (CcApplicationsPanel *self,
 static void
 remove_static_permissions (CcApplicationsPanel *self)
 {
-  container_remove_all (GTK_CONTAINER (self->builtin_list));
+  listbox_remove_all (self->builtin_list);
 }
 
 static void
@@ -1431,7 +1432,7 @@ update_handler_sections (CcApplicationsPanel *self,
   const gchar **types;
   gint i;
 
-  container_remove_all (GTK_CONTAINER (self->handler_list));
+  listbox_remove_all (self->handler_list);
 
   self->hypertext = NULL;
   self->text = NULL;
@@ -1479,8 +1480,10 @@ storage_row_activated_cb (CcApplicationsPanel *self,
 {
   if (list_row == GTK_LIST_BOX_ROW (self->storage))
     {
+      CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
+
       gtk_window_set_transient_for (GTK_WINDOW (self->storage_dialog),
-                                    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+                                    GTK_WINDOW (cc_shell_get_toplevel (shell)));
       gtk_window_present (GTK_WINDOW (self->storage_dialog));
     }
 }
@@ -1687,7 +1690,7 @@ populate_applications (CcApplicationsPanel *self)
   g_autolist(GObject) infos = NULL;
   GList *l;
 
-  container_remove_all (GTK_CONTAINER (self->sidebar_listbox));
+  listbox_remove_all (self->sidebar_listbox);
 #ifdef HAVE_MALCONTENT
   g_signal_handler_block (self->manager, self->app_filter_id);
 #endif
@@ -1738,15 +1741,18 @@ filter_sidebar_rows (GtkListBoxRow *row,
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (data);
   g_autofree gchar *app_name = NULL;
   g_autofree gchar *search_text = NULL;
+  const gchar *text;
   GAppInfo *info;
 
+  text = gtk_editable_get_text (GTK_EDITABLE (self->sidebar_search_entry));
+
   /* Only filter after the second character */
-  if (gtk_entry_get_text_length (self->sidebar_search_entry) < 2)
+  if (g_utf8_strlen (text, -1) < 2)
     return TRUE;
 
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
   app_name = cc_util_normalize_casefold_and_unaccent (g_app_info_get_name (info));
-  search_text = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (self->sidebar_search_entry));
+  search_text = cc_util_normalize_casefold_and_unaccent (text);
 
   return g_strstr_len (app_name, -1, search_text) != NULL;
 }
@@ -1802,13 +1808,13 @@ static void
 select_app (CcApplicationsPanel *self,
             const gchar         *app_id)
 {
-  g_autoptr(GList) children = NULL;
-  GList *l;
+  GtkWidget *child;
 
-  children = gtk_container_get_children (GTK_CONTAINER (self->sidebar_listbox));
-  for (l = children; l; l = l->next)
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->sidebar_listbox));
+       child;
+       child = gtk_widget_get_next_sibling (child))
     {
-      CcApplicationsRow *row = CC_APPLICATIONS_ROW (l->data);
+      CcApplicationsRow *row = CC_APPLICATIONS_ROW (child);
       GAppInfo *info = cc_applications_row_get_info (row);
       if (g_str_has_prefix (g_app_info_get_id (info), app_id))
         {
@@ -1834,7 +1840,7 @@ on_sidebar_search_entry_activated_cb (CcApplicationsPanel *self)
   g_signal_emit_by_name (row, "activate");
 
   /* Cleanup the entry */
-  gtk_entry_set_text (self->sidebar_search_entry, "");
+  gtk_editable_set_text (GTK_EDITABLE (self->sidebar_search_entry), "");
   gtk_widget_grab_focus (GTK_WIDGET (self->sidebar_search_entry));
 }
 
@@ -1847,7 +1853,7 @@ on_sidebar_search_entry_search_changed_cb (CcApplicationsPanel *self)
 static void
 on_sidebar_search_entry_search_stopped_cb (CcApplicationsPanel *self)
 {
-  gtk_entry_set_text (self->sidebar_search_entry, "");
+  gtk_editable_set_text (GTK_EDITABLE (self->sidebar_search_entry), "");
 }
 
 static void
@@ -1929,12 +1935,17 @@ static void
 cc_applications_panel_constructed (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
+  GtkListBoxRow *row;
   CcShell *shell;
 
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->constructed (object);
 
   shell = cc_panel_get_shell (CC_PANEL (self));
   cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->header_button), GTK_POS_RIGHT);
+
+  /* Select the first row */
+  row = gtk_list_box_get_row_at_index (self->sidebar_listbox, 0);
+  gtk_list_box_select_row (self->sidebar_listbox, row);
 }
 
 static GtkWidget*
@@ -2040,7 +2051,6 @@ static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
   g_autoptr(GtkStyleProvider) provider = NULL;
-  GtkListBoxRow *row;
 #ifdef HAVE_MALCONTENT
   g_autoptr(GDBusConnection) system_bus = NULL;
   g_autoptr(GError) error = NULL;
@@ -2059,38 +2069,14 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   gtk_css_provider_load_from_resource (GTK_CSS_PROVIDER (provider),
                                        "/org/gnome/control-center/applications/cc-applications-panel.css");
 
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             provider,
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              provider,
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   g_signal_connect_object (self->sidebar_listbox, "row-activated",
                            G_CALLBACK (row_activated_cb), self, G_CONNECT_SWAPPED);
 
   g_signal_connect_object (self->header_button, "clicked", G_CALLBACK (open_software_cb), self, G_CONNECT_SWAPPED);
-
-  gtk_list_box_set_header_func (self->permission_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->integration_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->handler_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->usage_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->builtin_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->storage_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 
   gtk_list_box_set_sort_func (self->sidebar_listbox,
                               compare_rows,
@@ -2145,9 +2131,4 @@ cc_applications_panel_init (CcApplicationsPanel *self)
 
   self->globs = parse_globs ();
   self->search_providers = parse_search_providers ();
-
-  /* Select the first row */
-  row = gtk_list_box_get_row_at_index (self->sidebar_listbox, 0);
-  gtk_list_box_select_row (self->sidebar_listbox, row);
-  g_signal_emit_by_name (row, "activate");
 }
