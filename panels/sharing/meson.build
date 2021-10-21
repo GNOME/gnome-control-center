@@ -42,7 +42,6 @@ sources = files(
   'cc-media-sharing.c',
   'cc-remote-login.c',
   'cc-sharing-networks.c',
-  'cc-sharing-switch.c',
   'cc-gnome-remote-desktop.c',
   'file-share-properties.c',
 )

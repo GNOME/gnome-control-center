@@ -19,12 +19,12 @@
 
 #pragma once
 
-#include <gtk/gtkgrid.h>
+#include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_SHARING_NETWORKS (cc_sharing_networks_get_type ())
-G_DECLARE_FINAL_TYPE (CcSharingNetworks, cc_sharing_networks, CC, SHARING_NETWORKS, GtkGrid)
+G_DECLARE_FINAL_TYPE (CcSharingNetworks, cc_sharing_networks, CC, SHARING_NETWORKS, GtkBox)
 
 typedef enum {
   CC_SHARING_STATUS_UNSET,

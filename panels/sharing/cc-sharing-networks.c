@@ -19,22 +19,20 @@
 
 #include "config.h"
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <gio/gio.h>
 #include <glib/gi18n.h>
 
 #include "cc-sharing-networks.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 #include "gsd-sharing-enums.h"
-#include "list-box-helper.h"
 
 struct _CcSharingNetworks {
-  GtkGrid parent_instance;
+  GtkBox parent_instance;
 
   GtkWidget *listbox;
 
   GtkWidget *current_row;
-  GtkWidget *current_label;
   GtkWidget *current_icon;
   GtkWidget *current_switch;
 
@@ -48,7 +46,7 @@ struct _CcSharingNetworks {
 };
 
 
-G_DEFINE_TYPE (CcSharingNetworks, cc_sharing_networks, GTK_TYPE_GRID)
+G_DEFINE_TYPE (CcSharingNetworks, cc_sharing_networks, GTK_TYPE_BOX)
 
 enum {
   PROP_0,
@@ -115,7 +113,6 @@ cc_sharing_update_networks (CcSharingNetworks *self)
     g_dbus_proxy_set_cached_property (G_DBUS_PROXY (self->proxy),
 				      "SharingStatus",
 				      g_variant_new_uint32 (GSD_SHARING_STATUS_OFFLINE));
-    cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->listbox));
     return;
   }
 
@@ -130,7 +127,6 @@ cc_sharing_update_networks (CcSharingNetworks *self)
     self->networks = g_list_prepend (self->networks, net);
   }
   self->networks = g_list_reverse (self->networks);
-  cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->listbox));
 }
 
 static void
@@ -203,15 +199,10 @@ cc_sharing_networks_new_row (const char        *uuid,
 			     const char        *carrier_type,
 			     CcSharingNetworks *self)
 {
-  GtkWidget *row, *box, *w;
+  GtkWidget *row, *w;
   const char *icon_name;
 
-  row = gtk_list_box_row_new ();
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_widget_show (box);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 3);
-  gtk_widget_set_margin_start (box, 6);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  row = adw_action_row_new ();
 
   if (g_strcmp0 (carrier_type, "802-11-wireless") == 0) {
     icon_name = "network-wireless-offline-symbolic";
@@ -221,26 +212,14 @@ cc_sharing_networks_new_row (const char        *uuid,
     icon_name = "network-wired-symbolic";
   }
 
-  w = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_MENU);
-  gtk_widget_show (w);
-  gtk_widget_set_margin_end (w, 12);
-  gtk_container_add (GTK_CONTAINER (box), w);
-
-  /* Label */
-  w = gtk_label_new (network_name);
-  gtk_widget_show (w);
-  gtk_widget_set_margin_end (w, 12);
-  gtk_container_add (GTK_CONTAINER (box), w);
+  adw_action_row_set_icon_name (ADW_ACTION_ROW (row), icon_name);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->current_row), network_name);
 
   /* Remove button */
-  w = gtk_button_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_SMALL_TOOLBAR);
-  gtk_widget_show (w);
-  gtk_button_set_relief (GTK_BUTTON (w), GTK_RELIEF_NONE);
-  gtk_widget_set_margin_top (w, 3);
-  gtk_widget_set_margin_bottom (w, 3);
-  gtk_widget_set_margin_end (w, 12);
+  w = gtk_button_new_from_icon_name ("window-close-symbolic");
+  gtk_widget_add_css_class (w, "flat");
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
   g_signal_connect_object (G_OBJECT (w), "clicked",
                            G_CALLBACK (cc_sharing_networks_remove_network), self, G_CONNECT_SWAPPED);
   g_object_set_data (G_OBJECT (w), "row", row);
@@ -253,36 +232,18 @@ cc_sharing_networks_new_row (const char        *uuid,
 static GtkWidget *
 cc_sharing_networks_new_current_row (CcSharingNetworks *self)
 {
-  GtkWidget *row, *box, *w;
+  GtkWidget *row, *w;
 
-  row = gtk_list_box_row_new ();
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_widget_show (box);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 3);
-  gtk_widget_set_margin_start (box, 6);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  row = adw_action_row_new ();
 
   /* Icon */
-  w = gtk_image_new_from_icon_name ("image-missing", GTK_ICON_SIZE_MENU);
-  gtk_widget_show (w);
-  gtk_widget_set_margin_end (w, 12);
-  gtk_container_add (GTK_CONTAINER (box), w);
+  w = gtk_image_new_from_icon_name ("image-missing");
+  adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
   self->current_icon = w;
 
-  /* Label */
-  w = gtk_label_new ("");
-  gtk_widget_show (w);
-  gtk_container_add (GTK_CONTAINER (box), w);
-  gtk_widget_set_margin_end (w, 12);
-  self->current_label = w;
-
   w = gtk_switch_new ();
-  gtk_widget_show (w);
-  gtk_widget_set_margin_top (w, 3);
-  gtk_widget_set_margin_bottom (w, 3);
-  gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_box_pack_end (GTK_BOX (box), w, FALSE, FALSE, 0);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
   g_signal_connect_object (G_OBJECT (w), "state-set",
                            G_CALLBACK (cc_sharing_networks_enable_network), self, G_CONNECT_SWAPPED);
   self->current_switch = w;
@@ -298,17 +259,14 @@ cc_sharing_networks_new_no_network_row (CcSharingNetworks *self)
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_widget_show (box);
-  gtk_container_set_border_width (GTK_CONTAINER (box), 12);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
   /* Label */
   w = gtk_label_new (_("No networks selected for sharing"));
-  gtk_widget_show (w);
   gtk_widget_set_hexpand (w, TRUE);
   gtk_widget_set_halign (w, GTK_ALIGN_CENTER);
   gtk_style_context_add_class (gtk_widget_get_style_context (w), "dim-label");
-  gtk_container_add (GTK_CONTAINER (box), w);
+  gtk_box_append (GTK_BOX (box), w);
 
   return row;
 }
@@ -316,18 +274,17 @@ cc_sharing_networks_new_no_network_row (CcSharingNetworks *self)
 static void
 cc_sharing_update_networks_box (CcSharingNetworks *self)
 {
+  GtkWidget *child;
   gboolean current_visible;
   const char *current_network;
-  g_autoptr(GList) children = NULL;
   GList *l;
 
-  children = gtk_container_get_children (GTK_CONTAINER (self->listbox));
-  for (l = children; l != NULL; l = l->next) {
-    GtkWidget *row = l->data;
-
-    if (row != self->current_row &&
-	row != self->no_network_row)
-      gtk_widget_destroy (row);
+  child = gtk_widget_get_first_child (self->listbox);
+  while (child) {
+    GtkWidget *next = gtk_widget_get_next_sibling (child);
+    if (child != self->current_row && child != self->no_network_row)
+      gtk_list_box_remove (GTK_LIST_BOX (self->listbox), child);
+    child = next;
   }
 
   current_network = gsd_sharing_get_current_network (self->proxy);
@@ -344,7 +301,8 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     g_object_set_data_full (G_OBJECT (self->current_row),
 			    "uuid", g_strdup (current_network), g_free);
     current_network_name = gsd_sharing_get_current_network_name (self->proxy);
-    gtk_label_set_label (GTK_LABEL (self->current_label), current_network_name);
+    if (ADW_IS_PREFERENCES_ROW (self->current_row))
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->current_row), current_network_name);
 
     /* Icon */
     carrier_type = gsd_sharing_get_carrier_type (self->proxy);
@@ -355,7 +313,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     } else {
       icon_name = "network-wired-symbolic";
     }
-    gtk_image_set_from_icon_name (GTK_IMAGE (self->current_icon), icon_name, GTK_ICON_SIZE_SMALL_TOOLBAR);
+    gtk_image_set_from_icon_name (GTK_IMAGE (self->current_icon), icon_name);
 
     /* State */
     available = gsd_sharing_get_sharing_status (self->proxy) == GSD_SHARING_STATUS_AVAILABLE;
@@ -395,8 +353,6 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
   }
 
   cc_sharing_networks_update_status (self);
-
-  cc_list_box_adjust_scrolling (GTK_LIST_BOX (self->listbox));
 }
 
 static void
@@ -414,12 +370,6 @@ cc_sharing_networks_constructed (GObject *object)
   G_OBJECT_CLASS (cc_sharing_networks_parent_class)->constructed (object);
 
   self = CC_SHARING_NETWORKS (object);
-
-  gtk_list_box_set_header_func (GTK_LIST_BOX (self->listbox),
-				cc_list_box_update_header_func, NULL,
-				NULL);
-
-  cc_list_box_setup_scrolling (GTK_LIST_BOX (self->listbox), 3);
 
   self->current_row = cc_sharing_networks_new_current_row (self);
   gtk_list_box_insert (GTK_LIST_BOX (self->listbox), self->current_row, -1);

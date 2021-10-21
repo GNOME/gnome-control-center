@@ -23,7 +23,7 @@ panels = [
 #  'region',
   'removable-media',
   'search',
-#  'sharing',
+  'sharing',
   'sound',
   'universal-access',
   'usage',
