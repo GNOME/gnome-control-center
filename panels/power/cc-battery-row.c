@@ -276,7 +276,7 @@ cc_battery_row_new (UpDevice *device,
   /* Icon */
   if (is_kind_battery && icon_name != NULL && icon_name[0] != '\0')
     {
-      gtk_image_set_from_icon_name (self->icon, icon_name, GTK_ICON_SIZE_BUTTON);
+      gtk_image_set_from_icon_name (self->icon, icon_name);
       gtk_widget_show (GTK_WIDGET (self->icon));
     }
   else
@@ -301,10 +301,12 @@ cc_battery_row_new (UpDevice *device,
   gtk_widget_set_visible (GTK_WIDGET (self->battery_box), !primary);
   gtk_widget_set_visible (GTK_WIDGET (self->percentage_label), !primary);
   gtk_widget_set_visible (GTK_WIDGET (self->primary_bottom_box), primary);
-  atk_object_add_relationship (gtk_widget_get_accessible (GTK_WIDGET (self->levelbar)),
-                               ATK_RELATION_LABELLED_BY,
-                               gtk_widget_get_accessible (GTK_WIDGET (primary ? self->primary_percentage_label
-                                                                              : self->percentage_label)));
+  /*
+  gtk_accessible_update_relation (GTK_ACCESSIBLE (self->levelbar),
+                                  GTK_ACCESSIBLE_RELATION_LABELLED_BY, primary ? self->primary_percentage_label
+                                                                               : self->percentage_label,
+                                  NULL);
+   */
 
   self->kind = kind;
   self->primary = primary;

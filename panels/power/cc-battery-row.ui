@@ -2,12 +2,10 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcBatteryRow" parent="GtkListBoxRow">
-    <property name="visible">True</property>
     <property name="selectable">False</property>
     <property name="activatable">False</property>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="valign">center</property>
         <property name="margin-start">12</property>
@@ -17,48 +15,39 @@
         <property name="spacing">10</property>
         <child>
           <object class="GtkBox">
-            <property name="visible">True</property>
             <property name="orientation">horizontal</property>
             <property name="spacing">12</property>
             <child>
               <object class="GtkBox" id="battery_box">
-                <property name="visible">True</property>
                 <property name="orientation">horizontal</property>
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkLabel" id="name_label">
-                    <property name="visible">True</property>
                     <property name="ellipsize">end</property>
                     <property name="xalign">0</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkImage" id="icon">
-                    <property name="visible">True</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
                     <style>
                       <class name="dim-label"/>
                     </style>
                   </object>
-                  <packing>
-                    <property name="pack-type">end</property>
-                  </packing>
                 </child>
               </object>
             </child>
             <child>
               <object class="GtkLabel" id="percentage_label">
-                <property name="visible">True</property>
-                    <property name="halign">end</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
+                <property name="halign">end</property>
+                <style>
+                  <class name="dim-label"/>
+                </style>
               </object>
             </child>
             <child>
               <object class="GtkLevelBar" id="levelbar">
-                <property name="visible">True</property>
                 <property name="hexpand">True</property>
                 <property name="halign">fill</property>
                 <property name="valign">center</property>
@@ -68,30 +57,21 @@
                   <offset name="high-battery-offset" value="1.0"/>
                 </offsets>
               </object>
-              <packing>
-                <property name="expand">True</property>
-              </packing>
             </child>
           </object>
         </child>
         <child>
           <object class="GtkBox" id="primary_bottom_box">
-            <property name="visible">True</property>
             <property name="orientation">horizontal</property>
             <child>
               <object class="GtkLabel" id="details_label">
-                <property name="visible">True</property>
+                <property name="hexpand">True</property>
                 <property name="ellipsize">end</property>
                 <property name="xalign">0</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="primary_percentage_label">
-                <property name="visible">True</property>
-              </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
+              <object class="GtkLabel" id="primary_percentage_label" />
             </child>
           </object>
         </child>

@@ -25,10 +25,8 @@
 #include <glib/gi18n.h>
 #include <gnome-settings-daemon/gsd-enums.h>
 #include <gio/gdesktopappinfo.h>
-#include <handy.h>
 
 #include "shell/cc-object-storage.h"
-#include "list-box-helper.h"
 #include "cc-battery-row.h"
 #include "cc-power-profile-row.h"
 #include "cc-power-profile-info-row.h"
@@ -64,22 +62,22 @@ struct _CcPowerPanel
   GtkLabel          *automatic_suspend_label;
   GtkListBoxRow     *automatic_suspend_row;
   GtkListBox        *battery_listbox;
-  HdyActionRow      *battery_percentage_row;
+  AdwActionRow      *battery_percentage_row;
   GtkSwitch         *battery_percentage_switch;
   GtkSizeGroup      *battery_row_sizegroup;
-  HdyPreferencesGroup *battery_section;
-  HdyComboRow       *blank_screen_row;
+  AdwPreferencesGroup *battery_section;
+  AdwComboRow       *blank_screen_row;
   GtkListBox        *device_listbox;
-  HdyPreferencesGroup *device_section;
+  AdwPreferencesGroup *device_section;
   GtkListBoxRow     *dim_screen_row;
   GtkSwitch         *dim_screen_switch;
-  HdyPreferencesGroup *general_section;
+  AdwPreferencesGroup *general_section;
   GtkSizeGroup      *level_sizegroup;
-  HdyComboRow       *power_button_row;
+  AdwComboRow       *power_button_row;
   GtkListBox        *power_profile_listbox;
   GtkListBox        *power_profile_info_listbox;
-  HdyPreferencesGroup *power_profile_section;
-  HdyActionRow      *power_saver_low_battery_row;
+  AdwPreferencesGroup *power_profile_section;
+  AdwActionRow      *power_saver_low_battery_row;
   GtkSwitch         *power_saver_low_battery_switch;
   GtkSizeGroup      *row_sizegroup;
   GtkComboBox       *suspend_on_battery_delay_combo;
@@ -116,27 +114,6 @@ enum
   ACTION_MODEL_TEXT,
   ACTION_MODEL_VALUE
 };
-
-static void
-cc_power_panel_dispose (GObject *object)
-{
-  CcPowerPanel *self = CC_POWER_PANEL (object);
-
-  g_clear_pointer (&self->chassis_type, g_free);
-  g_clear_object (&self->gsd_settings);
-  g_clear_object (&self->session_settings);
-  g_clear_object (&self->interface_settings);
-  g_clear_pointer ((GtkWidget **) &self->automatic_suspend_dialog, gtk_widget_destroy);
-  g_clear_pointer (&self->devices, g_ptr_array_unref);
-  g_clear_object (&self->up_client);
-  g_clear_object (&self->iio_proxy);
-  g_clear_object (&self->power_profiles_proxy);
-  if (self->iio_proxy_watch_id != 0)
-    g_bus_unwatch_name (self->iio_proxy_watch_id);
-  self->iio_proxy_watch_id = 0;
-
-  G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
-}
 
 static const char *
 cc_power_panel_get_help_uri (CcPanel *panel)
@@ -195,9 +172,9 @@ load_custom_css (CcPowerPanel *self,
   /* use custom CSS */
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, path);
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static void
@@ -207,7 +184,7 @@ add_battery (CcPowerPanel *panel, UpDevice *device, gboolean primary)
   cc_battery_row_set_level_sizegroup (row, panel->level_sizegroup);
   cc_battery_row_set_row_sizegroup (row, panel->battery_row_sizegroup);
 
-  gtk_container_add (GTK_CONTAINER (panel->battery_listbox), GTK_WIDGET (row));
+  gtk_list_box_append (panel->battery_listbox, GTK_WIDGET (row));
   gtk_widget_set_visible (GTK_WIDGET (panel->battery_section), TRUE);
 }
 
@@ -218,19 +195,17 @@ add_device (CcPowerPanel *self, UpDevice *device)
   cc_battery_row_set_level_sizegroup (row, self->level_sizegroup);
   cc_battery_row_set_row_sizegroup (row, self->row_sizegroup);
 
-  gtk_container_add (GTK_CONTAINER (self->device_listbox), GTK_WIDGET (row));
+  gtk_list_box_append (self->device_listbox, GTK_WIDGET (row));
   gtk_widget_set_visible (GTK_WIDGET (self->device_section), TRUE);
 }
 
 static void
 empty_listbox (GtkListBox *listbox)
 {
-  g_autoptr(GList) children = NULL;
-  GList *l;
+  GtkWidget *child;
 
-  children = gtk_container_get_children (GTK_CONTAINER (listbox));
-  for (l = children; l != NULL; l = l->next)
-    gtk_container_remove (GTK_CONTAINER (listbox), l->data);
+  while ((child = gtk_widget_get_first_child (GTK_WIDGET (listbox))) != NULL)
+    gtk_list_box_remove (listbox, child);
 }
 
 static void
@@ -379,9 +354,9 @@ up_client_changed (CcPowerPanel *self)
     }
 
   if (n_batteries > 1)
-    hdy_preferences_group_set_title (self->battery_section, _("Batteries"));
+    adw_preferences_group_set_title (self->battery_section, _("Batteries"));
   else
-    hdy_preferences_group_set_title (self->battery_section, _("Battery"));
+    adw_preferences_group_set_title (self->battery_section, _("Battery"));
 
   if (!on_ups && n_batteries > 1)
     add_battery (self, composite, TRUE);
@@ -556,25 +531,25 @@ set_value_for_combo (GtkComboBox *combo_box, gint value)
 }
 
 static void
-set_value_for_combo_row (HdyComboRow *combo_row, gint value)
+set_value_for_combo_row (AdwComboRow *combo_row, gint value)
 {
+  g_autoptr (GObject) new_item = NULL;
   gboolean insert = FALSE;
   guint insert_before = 0;
   guint i;
-  HdyValueObject *new;
   GListModel *model;
   gint value_last = 0;
   g_autofree gchar *text = NULL;
 
   /* try to make the UI match the setting */
-  model = hdy_combo_row_get_model (combo_row);
+  model = adw_combo_row_get_model (combo_row);
   for (i = 0; i < g_list_model_get_n_items (model); i++)
     {
-      HdyValueObject *value_object = g_list_model_get_item (model, i);
-      gint value_tmp = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (value_object), "value"));
+      g_autoptr (GObject) item = g_list_model_get_item (model, i);
+      gint value_tmp = GPOINTER_TO_UINT (g_object_get_data (item, "value"));
       if (value_tmp == value)
         {
-          hdy_combo_row_set_selected_index (combo_row, i);
+          adw_combo_row_set_selected (combo_row, i);
           return;
         }
 
@@ -591,11 +566,12 @@ set_value_for_combo_row (HdyComboRow *combo_row, gint value)
 
   /* The value is not listed, so add it at the best point (or the end). */
   text = cc_util_time_to_string_text (value * 1000);
-  new = hdy_value_object_new_string (text);
-  g_object_set_data (G_OBJECT (new), "value",
-                     GUINT_TO_POINTER (value));
-  g_list_store_insert (G_LIST_STORE (model), insert_before, new);
-  hdy_combo_row_set_selected_index (combo_row, insert_before);
+  gtk_string_list_append (GTK_STRING_LIST (model), text);
+
+  new_item = g_list_model_get_item (model, i);
+  g_object_set_data (G_OBJECT (new_item), "value", GUINT_TO_POINTER (value));
+
+  adw_combo_row_set_selected (combo_row, insert_before);
 }
 
 static void
@@ -659,15 +635,18 @@ keynav_failed_cb (CcPowerPanel *self, GtkDirectionType direction, GtkWidget *lis
 static void
 blank_screen_row_changed_cb (CcPowerPanel *self)
 {
+  g_autoptr (GObject) item = NULL;
   GListModel *model;
   gint selected_index;
-  HdyValueObject *value_object;
   gint value;
 
-  model = hdy_combo_row_get_model (self->blank_screen_row);
-  selected_index = hdy_combo_row_get_selected_index (self->blank_screen_row);
-  value_object = g_list_model_get_item (model, selected_index);
-  value = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (value_object), "value"));
+  model = adw_combo_row_get_model (self->blank_screen_row);
+  selected_index = adw_combo_row_get_selected (self->blank_screen_row);
+  if (selected_index == -1)
+    return;
+
+  item = g_list_model_get_item (model, selected_index);
+  value = GPOINTER_TO_UINT (g_object_get_data (item, "value"));
 
   g_settings_set_uint (self->session_settings, "idle-delay", value);
 }
@@ -675,15 +654,18 @@ blank_screen_row_changed_cb (CcPowerPanel *self)
 static void
 power_button_row_changed_cb (CcPowerPanel *self)
 {
+  g_autoptr (GObject) item = NULL;
   GListModel *model;
   gint selected_index;
-  HdyValueObject *value_object;
   gint value;
 
-  model = hdy_combo_row_get_model (self->power_button_row);
-  selected_index = hdy_combo_row_get_selected_index (self->power_button_row);
-  value_object = g_list_model_get_item (model, selected_index);
-  value = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (value_object), "value"));
+  model = adw_combo_row_get_model (self->power_button_row);
+  selected_index = adw_combo_row_get_selected (self->power_button_row);
+  if (selected_index == -1)
+    return;
+
+  item = g_list_model_get_item (model, selected_index);
+  value = GPOINTER_TO_UINT (g_object_get_data (G_OBJECT (item), "value"));
 
   g_settings_set_enum (self->gsd_settings, "power-button-action", value);
 }
@@ -737,8 +719,10 @@ static void
 automatic_suspend_row_activated_cb (CcPowerPanel *self)
 {
   GtkWidget *toplevel;
+  CcShell *shell;
 
-  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = cc_shell_get_toplevel (shell);
   gtk_window_set_transient_for (GTK_WINDOW (self->automatic_suspend_dialog), GTK_WINDOW (toplevel));
   gtk_window_set_modal (GTK_WINDOW (self->automatic_suspend_dialog), TRUE);
   gtk_window_present (GTK_WINDOW (self->automatic_suspend_dialog));
@@ -784,11 +768,11 @@ set_sleep_type (const GValue       *value,
 }
 
 static void
-populate_power_button_row (HdyComboRow *combo_row,
+populate_power_button_row (AdwComboRow *combo_row,
                            gboolean     can_suspend,
                            gboolean     can_hibernate)
 {
-  g_autoptr (GListStore) list_store = NULL;
+  g_autoptr (GtkStringList) string_list = NULL;
   struct {
     char *name;
     GsdPowerButtonActionType value;
@@ -798,12 +782,13 @@ populate_power_button_row (HdyComboRow *combo_row,
     { N_("Hibernate"), GSD_POWER_BUTTON_ACTION_HIBERNATE },
     { N_("Nothing"), GSD_POWER_BUTTON_ACTION_NOTHING }
   };
+  guint item_index = 0;
   guint i;
 
-  list_store = g_list_store_new (HDY_TYPE_VALUE_OBJECT);
+  string_list = gtk_string_list_new (NULL);
   for (i = 0; i < G_N_ELEMENTS (actions); i++)
     {
-      g_autoptr (HdyValueObject) value_object = NULL;
+      g_autoptr (GObject) item = NULL;
 
       if (!can_suspend && actions[i].value == GSD_POWER_BUTTON_ACTION_SUSPEND)
         continue;
@@ -811,17 +796,13 @@ populate_power_button_row (HdyComboRow *combo_row,
       if (!can_hibernate && actions[i].value == GSD_POWER_BUTTON_ACTION_HIBERNATE)
         continue;
 
-      value_object = hdy_value_object_new_string (_(actions[i].name));
-      g_object_set_data (G_OBJECT (value_object),
-                         "value",
-                         GUINT_TO_POINTER (actions[i].value));
-      g_list_store_append (list_store, value_object);
+      gtk_string_list_append (string_list, _(actions[i].name));
+
+      item = g_list_model_get_item (G_LIST_MODEL (string_list), item_index++);
+      g_object_set_data (item, "value", GUINT_TO_POINTER (actions[i].value));
     }
 
-  hdy_combo_row_bind_name_model (combo_row,
-                                 G_LIST_MODEL (list_store),
-                                 (HdyComboRowGetNameFunc) hdy_value_object_dup_string,
-                                 NULL, NULL);
+  adw_combo_row_set_model (combo_row, G_LIST_MODEL (string_list));
 }
 
 #define NEVER 0
@@ -957,34 +938,32 @@ got_brightness_cb (GObject      *source_object,
 }
 
 static void
-populate_blank_screen_row (HdyComboRow *combo_row)
+populate_blank_screen_row (AdwComboRow *combo_row)
 {
-  g_autoptr (GListStore) list_store = g_list_store_new (HDY_TYPE_VALUE_OBJECT);
+  g_autoptr (GtkStringList) string_list = NULL;
+  g_autoptr (GObject) never_object = NULL;
   gint minutes[] = { 1, 2, 3, 4, 5, 8, 10, 12, 15 };
   guint i;
-  g_autoptr (HdyValueObject) never_value_object = NULL;
 
+  string_list = gtk_string_list_new (NULL);
   for (i = 0; i < G_N_ELEMENTS (minutes); i++)
     {
+      g_autoptr (GObject) item = NULL;
       gchar *text = NULL;
-      g_autoptr (HdyValueObject) value_object = NULL;
 
       /* Translators: Option for "Blank Screen" in "Power" panel */
       text = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%d minute", "%d minutes", minutes[i]), minutes[i]);
-      value_object = hdy_value_object_new_take_string (text);
+      gtk_string_list_append (string_list, text);
 
-      g_object_set_data (G_OBJECT (value_object), "value", GUINT_TO_POINTER (minutes[i] * 60));
-      g_list_store_append (list_store, value_object);
+      item = g_list_model_get_item (G_LIST_MODEL (string_list), i);
+      g_object_set_data (item, "value", GUINT_TO_POINTER (minutes[i] * 60));
     }
 
-  never_value_object = hdy_value_object_new_string (C_("Idle time", "Never"));
-  g_object_set_data (G_OBJECT (never_value_object), "value", GUINT_TO_POINTER (0));
-  g_list_store_append (list_store, never_value_object);
+  gtk_string_list_append (string_list, C_("Idle time", "Never"));
+  never_object = g_list_model_get_item (G_LIST_MODEL (string_list), i);
+  g_object_set_data (never_object, "value", GUINT_TO_POINTER (0));
 
-  hdy_combo_row_bind_name_model (combo_row,
-                                 G_LIST_MODEL (list_store),
-                                 (HdyComboRowGetNameFunc) hdy_value_object_dup_string,
-                                 NULL, NULL);
+  adw_combo_row_set_model (combo_row, G_LIST_MODEL (string_list));
 }
 
 static void
@@ -1063,9 +1042,10 @@ setup_power_saving (CcPowerPanel *self)
   if (can_suspend_or_hibernate (self, "CanSuspend"))
     {
       gtk_widget_show (GTK_WIDGET (self->automatic_suspend_row));
-      atk_object_set_name (ATK_OBJECT (gtk_widget_get_accessible (GTK_WIDGET (self->automatic_suspend_row))), _("Automatic suspend"));
+      gtk_accessible_update_property (GTK_ACCESSIBLE (self->automatic_suspend_row),
+                                      GTK_ACCESSIBLE_PROPERTY_LABEL, _("Automatic suspend"),
+                                      -1);
 
-      g_signal_connect (self->automatic_suspend_dialog, "delete-event", G_CALLBACK (gtk_widget_hide_on_delete), NULL);
       g_signal_connect_object (self->gsd_settings, "changed", G_CALLBACK (on_suspend_settings_changed), self, G_CONNECT_SWAPPED);
 
       g_settings_bind_with_mapping (self->gsd_settings, "sleep-inactive-battery-type",
@@ -1116,11 +1096,11 @@ performance_profile_set_active (CcPowerPanel  *self,
                                 const char    *profile_str)
 {
   CcPowerProfile profile = cc_power_profile_from_str (profile_str);
-  GtkRadioButton *button;
+  GtkCheckButton *button;
 
   button = cc_power_profile_row_get_radio_button (CC_POWER_PROFILE_ROW (self->power_profiles_row[profile]));
   g_assert (button);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), TRUE);
+  gtk_check_button_set_active (GTK_CHECK_BUTTON (button), TRUE);
 }
 
 static void
@@ -1175,8 +1155,7 @@ power_profile_update_info_boxes (CcPowerPanel *self)
         text = _("Performance mode temporarily disabled.");
 
       row = cc_power_profile_info_row_new (text);
-      gtk_widget_show (GTK_WIDGET (row));
-      gtk_container_add (GTK_CONTAINER (self->power_profile_info_listbox), GTK_WIDGET (row));
+      gtk_list_box_append (self->power_profile_info_listbox, GTK_WIDGET (row));
       if (g_str_equal (profile, "performance"))
         next_insert = 1;
     }
@@ -1380,7 +1359,7 @@ setup_power_profiles (CcPowerPanel *self)
   const char *performance_degraded;
   const char *active_profile;
   g_autoptr(GVariant) profiles = NULL;
-  GtkRadioButton *last_button;
+  GtkCheckButton *last_button;
 
   self->power_profiles_proxy = cc_object_storage_create_dbus_proxy_sync (G_BUS_TYPE_SYSTEM,
                                                                          G_DBUS_PROXY_FLAGS_NONE,
@@ -1443,7 +1422,7 @@ setup_power_profiles (CcPowerPanel *self)
     {
       g_autoptr(GVariant) profile_variant;
       const char *name;
-      GtkRadioButton *button;
+      GtkCheckButton *button;
       CcPowerProfile profile;
       CcPowerProfileRow *row;
 
@@ -1466,12 +1445,12 @@ setup_power_profiles (CcPowerPanel *self)
                                0);
       self->power_profiles_row[profile] = row;
       gtk_widget_show (GTK_WIDGET (row));
-      gtk_container_add (GTK_CONTAINER (self->power_profile_listbox), GTK_WIDGET (row));
+      gtk_list_box_append (self->power_profile_listbox, GTK_WIDGET (row));
       gtk_size_group_add_widget (self->row_sizegroup, GTK_WIDGET (row));
 
       /* Connect radio button to group */
       button = cc_power_profile_row_get_radio_button (row);
-      gtk_radio_button_join_group (button, last_button);
+      gtk_check_button_set_group (button, last_button);
       last_button = button;
     }
 
@@ -1554,6 +1533,30 @@ battery_sort_func (GtkListBoxRow *a, GtkListBoxRow *b, gpointer data)
   b_kind = cc_battery_row_get_kind(row_b);
 
   return a_kind - b_kind;
+}
+
+static void
+cc_power_panel_dispose (GObject *object)
+{
+  CcPowerPanel *self = CC_POWER_PANEL (object);
+
+  g_signal_handlers_disconnect_by_func (self->blank_screen_row, blank_screen_row_changed_cb, self);
+  g_signal_handlers_disconnect_by_func (self->power_button_row, power_button_row_changed_cb, self);
+
+  g_clear_pointer (&self->chassis_type, g_free);
+  g_clear_object (&self->gsd_settings);
+  g_clear_object (&self->session_settings);
+  g_clear_object (&self->interface_settings);
+  g_clear_pointer ((GtkWindow **) &self->automatic_suspend_dialog, gtk_window_destroy);
+  g_clear_pointer (&self->devices, g_ptr_array_unref);
+  g_clear_object (&self->up_client);
+  g_clear_object (&self->iio_proxy);
+  g_clear_object (&self->power_profiles_proxy);
+  if (self->iio_proxy_watch_id != 0)
+    g_bus_unwatch_name (self->iio_proxy_watch_id);
+  self->iio_proxy_watch_id = 0;
+
+  G_OBJECT_CLASS (cc_power_panel_parent_class)->dispose (object);
 }
 
 static void

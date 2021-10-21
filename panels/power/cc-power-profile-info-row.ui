@@ -6,7 +6,6 @@
     <property name="selectable">False</property>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
         <property name="orientation">horizontal</property>
         <property name="margin-start">4</property>
         <property name="margin-end">8</property>
@@ -15,11 +14,10 @@
         <property name="spacing">4</property>
         <child>
           <object class="GtkImage" id="icon_image">
-            <property name="visible">True</property>
             <property name="margin-start">6</property>
             <property name="margin-end">6</property>
             <property name="icon-name">info-symbolic</property>
-            <property name="icon-size">5</property>
+            <property name="icon-size">large</property>
             <style>
               <class name="dim-label"/>
             </style>
@@ -27,9 +25,9 @@
         </child>
         <child>
           <object class="GtkLabel" id="title_label">
-            <property name="visible">True</property>
             <property name="halign">start</property>
-            <property name="expand">True</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
             <property name="use-markup">True</property>
             <property name="use-underline">True</property>
             <property name="xalign">0</property>

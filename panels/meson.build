@@ -18,7 +18,7 @@ panels = [
 #  'multitasking',
   'notifications',
 #  'online-accounts',
-#  'power',
+  'power',
 #  'printers',
 #  'region',
   'removable-media',

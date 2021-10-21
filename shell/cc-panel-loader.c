@@ -50,7 +50,7 @@ extern GType cc_info_overview_panel_get_type (void);
 #endif /* BUILD_NETWORK */
 extern GType cc_notifications_panel_get_type (void);
 //extern GType cc_goa_panel_get_type (void);
-//extern GType cc_power_panel_get_type (void);
+extern GType cc_power_panel_get_type (void);
 //extern GType cc_printers_panel_get_type (void);
 //extern GType cc_region_panel_get_type (void);
 extern GType cc_removable_media_panel_get_type (void);
@@ -121,7 +121,7 @@ static CcPanelLoaderVtable default_panels[] =
 #endif
   PANEL_TYPE("notifications",    cc_notifications_panel_get_type,        NULL),
   //PANEL_TYPE("online-accounts",  cc_goa_panel_get_type,                  NULL),
-  //PANEL_TYPE("power",            cc_power_panel_get_type,                NULL),
+  PANEL_TYPE("power",            cc_power_panel_get_type,                NULL),
   //PANEL_TYPE("printers",         cc_printers_panel_get_type,             NULL),
   //PANEL_TYPE("region",           cc_region_panel_get_type,               NULL),
   PANEL_TYPE("removable-media",  cc_removable_media_panel_get_type,      NULL),

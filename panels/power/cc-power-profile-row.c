@@ -34,7 +34,7 @@ struct _CcPowerProfileRow
 {
   GtkListBoxRow parent_instance;
 
-  GtkRadioButton *button;
+  GtkCheckButton *button;
   GtkLabel       *subtitle_label;
   GtkLabel       *title_label;
 
@@ -74,10 +74,8 @@ performance_profile_set_inhibited (CcPowerProfileRow *self,
   if (self->power_profile != CC_POWER_PROFILE_PERFORMANCE)
     return;
 
-  gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self->subtitle_label)),
-                                  GTK_STYLE_CLASS_DIM_LABEL);
-  gtk_style_context_remove_class (gtk_widget_get_style_context (GTK_WIDGET (self->subtitle_label)),
-                                  GTK_STYLE_CLASS_ERROR);
+  gtk_widget_remove_css_class (GTK_WIDGET (self->subtitle_label), "dim-label");
+  gtk_widget_remove_css_class (GTK_WIDGET (self->subtitle_label), "error");
 
   text = get_performance_inhibited_text (performance_inhibited);
   if (text)
@@ -86,8 +84,8 @@ performance_profile_set_inhibited (CcPowerProfileRow *self,
     text = _("High performance and power usage.");
   gtk_label_set_text (GTK_LABEL (self->subtitle_label), text);
 
-  gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self->subtitle_label)),
-                               inhibited ? GTK_STYLE_CLASS_ERROR : GTK_STYLE_CLASS_DIM_LABEL);
+  gtk_widget_add_css_class (GTK_WIDGET (self->subtitle_label),
+                            inhibited ? "error" : "dim-label");
   gtk_widget_set_sensitive (GTK_WIDGET (self), !inhibited);
 }
 
@@ -133,7 +131,7 @@ cc_power_profile_row_get_profile (CcPowerProfileRow *self)
   return self->power_profile;
 }
 
-GtkRadioButton *
+GtkCheckButton *
 cc_power_profile_row_get_radio_button (CcPowerProfileRow *self)
 {
   g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), NULL);
@@ -147,7 +145,7 @@ cc_power_profile_row_set_active (CcPowerProfileRow *self,
 {
   g_return_if_fail (CC_IS_POWER_PROFILE_ROW (self));
 
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->button), active);
+  gtk_check_button_set_active (GTK_CHECK_BUTTON (self->button), active);
 }
 
 void
@@ -166,7 +164,7 @@ cc_power_profile_row_get_active (CcPowerProfileRow *self)
 {
   g_return_val_if_fail (CC_IS_POWER_PROFILE_ROW (self), FALSE);
 
-  return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->button));
+  return gtk_check_button_get_active (GTK_CHECK_BUTTON (self->button));
 }
 
 CcPowerProfileRow *
