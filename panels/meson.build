@@ -38,7 +38,7 @@ endif
 if host_is_linux_not_s390
   panels += [
 #    'bluetooth',
-#    'thunderbolt',
+    'thunderbolt',
 #    'wacom'
   ]
 endif

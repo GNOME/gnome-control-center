@@ -20,7 +20,6 @@
 #include <config.h>
 
 #include <shell/cc-panel.h>
-#include <list-box-helper.h>
 
 #include <glib/gi18n.h>
 #include <polkit/polkit.h>
@@ -126,10 +125,6 @@ static gboolean on_authmode_state_set_cb (CcBoltPanel *panel,
 
 static void     on_device_entry_row_activated_cb (CcBoltPanel   *panel,
                                                   GtkListBoxRow *row);
-
-static gboolean  on_device_dialog_delete_event_cb (GtkWidget   *widget,
-                                                   GdkEvent    *event,
-                                                   CcBoltPanel *panel);
 
 static void     on_device_entry_status_changed_cb (CcBoltDeviceEntry *entry,
                                                    BoltStatus         new_status,
@@ -310,15 +305,15 @@ devices_table_synchronize (CcBoltPanel *panel)
 }
 
 static gboolean
-list_box_sync_visible (GtkListBox *lstbox)
+list_box_sync_visible (GtkListBox *listbox)
 {
-  g_autoptr(GList) children = NULL;
+  GtkWidget *child;
   gboolean show;
 
-  children = gtk_container_get_children (GTK_CONTAINER (lstbox));
-  show = g_list_length (children) > 0;
+  child = gtk_widget_get_first_child (GTK_WIDGET (listbox));
+  show = child != NULL;
 
-  gtk_widget_set_visible (GTK_WIDGET (lstbox), show);
+  gtk_widget_set_visible (GTK_WIDGET (listbox), show);
 
   return show;
 }
@@ -353,19 +348,17 @@ cc_bolt_panel_add_device (CcBoltPanel *panel,
   path = g_dbus_proxy_get_object_path (G_DBUS_PROXY (dev));
 
   /* add to the list box */
-  gtk_widget_show (GTK_WIDGET (entry));
-
   status = bolt_device_get_status (dev);
 
   if (bolt_status_is_pending (status))
     {
-      gtk_container_add (GTK_CONTAINER (panel->pending_list), GTK_WIDGET (entry));
+      gtk_list_box_append (panel->pending_list, GTK_WIDGET (entry));
       gtk_widget_show (GTK_WIDGET (panel->pending_list));
       gtk_widget_show (GTK_WIDGET (panel->pending_box));
     }
   else
     {
-      gtk_container_add (GTK_CONTAINER (panel->devices_list), GTK_WIDGET (entry));
+      gtk_list_box_append (panel->devices_list, GTK_WIDGET (entry));
       gtk_widget_show (GTK_WIDGET (panel->devices_list));
       gtk_widget_show (GTK_WIDGET (panel->devices_box));
     }
@@ -399,7 +392,7 @@ cc_bolt_panel_del_device_entry (CcBoltPanel       *panel,
     }
 
   p = gtk_widget_get_parent (GTK_WIDGET (entry));
-  gtk_widget_destroy (GTK_WIDGET (entry));
+  gtk_list_box_remove (GTK_LIST_BOX (p), GTK_WIDGET (entry));
 
   box = cc_bolt_panel_box_for_listbox (panel, GTK_LIST_BOX (p));
   show = list_box_sync_visible (GTK_LIST_BOX (p));
@@ -446,8 +439,8 @@ cc_panel_list_box_migrate (CcBoltPanel       *panel,
 
   target = GTK_WIDGET (entry);
 
-  gtk_container_remove (GTK_CONTAINER (from), target);
-  gtk_container_add (GTK_CONTAINER (to), target);
+  gtk_list_box_remove (from, target);
+  gtk_list_box_append (to, target);
   gtk_widget_show (GTK_WIDGET (to));
 
   from_box = cc_bolt_panel_box_for_listbox (panel, from);
@@ -698,23 +691,8 @@ on_device_entry_row_activated_cb (CcBoltPanel   *panel,
 
   cc_bolt_device_dialog_set_device (panel->device_dialog, device, parents);
 
-  gtk_window_resize (GTK_WINDOW (panel->device_dialog), 1, 1);
+  gtk_window_set_default_size (GTK_WINDOW (panel->device_dialog), 1, 1);
   gtk_widget_show (GTK_WIDGET (panel->device_dialog));
-}
-
-static gboolean
-on_device_dialog_delete_event_cb (GtkWidget   *widget,
-                                  GdkEvent    *event,
-                                  CcBoltPanel *panel)
-{
-  CcBoltDeviceDialog *dialog;
-
-  dialog = CC_BOLT_DEVICE_DIALOG (widget);
-
-  cc_bolt_device_dialog_set_device (dialog, NULL, NULL);
-  gtk_widget_hide (widget);
-
-  return TRUE;
 }
 
 static void
@@ -898,7 +876,8 @@ cc_bolt_panel_dispose (GObject *object)
   CcBoltPanel *panel = CC_BOLT_PANEL (object);
 
   /* Must be destroyed in dispose, not finalize. */
-  g_clear_pointer ((GtkWidget **) &panel->device_dialog, gtk_widget_destroy);
+  cc_bolt_device_dialog_set_device (panel->device_dialog, NULL, NULL);
+  g_clear_pointer ((GtkWindow **) &panel->device_dialog, gtk_window_destroy);
 
   G_OBJECT_CLASS (cc_bolt_panel_parent_class)->dispose (object);
 }
@@ -961,16 +940,6 @@ cc_bolt_panel_init (CcBoltPanel *panel)
 
   gtk_stack_set_visible_child_name (panel->container, "loading");
 
-  gtk_list_box_set_header_func (panel->devices_list,
-                                cc_list_box_update_header_func,
-                                NULL,
-                                NULL);
-
-  gtk_list_box_set_header_func (panel->pending_list,
-                                cc_list_box_update_header_func,
-                                NULL,
-                                NULL);
-
   gtk_list_box_set_sort_func (panel->devices_list,
                               device_entries_sort_by_recency_cb,
                               panel,
@@ -984,11 +953,6 @@ cc_bolt_panel_init (CcBoltPanel *panel)
   panel->devices = g_hash_table_new_full (g_str_hash, g_str_equal, NULL, NULL);
 
   panel->device_dialog = cc_bolt_device_dialog_new ();
-  g_signal_connect_object (panel->device_dialog,
-                           "delete-event",
-                           G_CALLBACK (on_device_dialog_delete_event_cb),
-                           panel, 0);
 
   bolt_client_new_async (cc_panel_get_cancellable (CC_PANEL (panel)), bolt_client_ready, g_object_ref (panel));
-
 }

@@ -19,8 +19,6 @@
 
 #include <config.h>
 
-#include <list-box-helper.h>
-
 #include <glib/gi18n.h>
 
 #include "bolt-device.h"
@@ -155,7 +153,7 @@ dialog_update_from_device (CcBoltDeviceDialog *dialog)
     }
 
   gtk_label_set_label (dialog->name_label, label);
-  gtk_header_bar_set_title (dialog->header_bar, label);
+  gtk_window_set_title (GTK_WINDOW (dialog), label);
 
   status_brief = status_to_string_for_ui (dev);
   gtk_label_set_label (dialog->status_label, status_brief);
@@ -270,27 +268,25 @@ static void
 on_connect_button_clicked_cb (CcBoltDeviceDialog *dialog)
 {
   g_autoptr(GPtrArray) devices = NULL;
-  g_autoptr(GList) entries = NULL;
   BoltDevice *device = dialog->device;
-  GList *iter;
+  GtkWidget *child;
 
   g_return_if_fail (device != NULL);
 
   dialog_operation_start (dialog);
 
-  entries = gtk_container_get_children (GTK_CONTAINER (dialog->parents_devices));
   devices = g_ptr_array_new ();
 
-  /* reverse the order, so to start with the devices closest to the host */
-  entries = g_list_reverse (entries);
-
-  for (iter = entries; iter; iter = iter->next)
+  /* Iter from the last child to the first one */
+  for (child = gtk_widget_get_last_child (GTK_WIDGET (dialog->parents_devices));
+       child;
+       child = gtk_widget_get_prev_sibling (child))
     {
       CcBoltDeviceEntry *entry;
       BoltDevice *dev;
       BoltStatus status;
 
-      entry = (CcBoltDeviceEntry *) iter->data;
+      entry = CC_BOLT_DEVICE_ENTRY (child);
       dev = cc_bolt_device_entry_get_device (entry);
       status = bolt_device_get_status (dev);
 
@@ -300,7 +296,7 @@ on_connect_button_clicked_cb (CcBoltDeviceDialog *dialog)
        * all following device (down the chain, towards the target) will
        * also be not authorized. */
       if (!bolt_status_is_pending (status))
-	continue;
+        continue;
 
       /* device is now either !stored || pending */
       g_ptr_array_add (devices, dev);
@@ -413,11 +409,6 @@ cc_bolt_device_dialog_init (CcBoltDeviceDialog *dialog)
 {
   g_resources_register (cc_thunderbolt_get_resource ());
   gtk_widget_init_template (GTK_WIDGET (dialog));
-
-  gtk_list_box_set_header_func (dialog->parents_devices,
-                                cc_list_box_update_header_func,
-                                NULL,
-                                NULL);
 }
 
 /* public functions */
@@ -453,6 +444,8 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
 
   if (dialog->device)
     {
+      GtkWidget *child;
+
       g_cancellable_cancel (dialog->cancel);
       g_clear_object (&dialog->cancel);
       dialog->cancel = g_cancellable_new ();
@@ -462,8 +455,9 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
                                             dialog);
       g_clear_object (&dialog->device);
 
-      gtk_container_foreach (GTK_CONTAINER (dialog->parents_devices),
-			     (GtkCallback) gtk_widget_destroy, NULL);
+      while ((child = gtk_widget_get_first_child (GTK_WIDGET (dialog->parents_devices))) != NULL)
+        gtk_list_box_remove (dialog->parents_devices, child);
+
       gtk_widget_hide (GTK_WIDGET (dialog->parents_expander));
     }
 
@@ -503,8 +497,7 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
       parent = g_ptr_array_index (parents, i);
 
       entry = cc_bolt_device_entry_new (parent, TRUE);
-      gtk_widget_show (GTK_WIDGET (entry));
-      gtk_container_add (GTK_CONTAINER (dialog->parents_devices), GTK_WIDGET (entry));
+      gtk_list_box_append (dialog->parents_devices, GTK_WIDGET (entry));
     }
 }
 
