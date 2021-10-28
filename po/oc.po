@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-09-09 16:10+0000\n"
+"POT-Creation-Date: 2021-10-19 15:44+0000\n"
 "PO-Revision-Date: 2021-09-17 19:25+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
@@ -75,8 +75,9 @@ msgid "File System"
 msgstr "Sistèma de fichièrs"
 
 #: panels/applications/cc-applications-panel.c:849
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:938 shell/cc-window.ui:121
+#: panels/keyboard/01-launchers.xml.in:6
+#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:313
+#: shell/cc-window.c:1043 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Paramètres"
@@ -203,7 +204,7 @@ msgstr "Camèra"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Desactivat"
@@ -357,7 +358,7 @@ msgstr "Seleccionar un imatge"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
-#: panels/display/cc-display-panel.c:1006
+#: panels/display/cc-display-panel.c:1023
 #: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
@@ -529,7 +530,7 @@ msgstr ""
 #: panels/color/cc-color-calibrate.c:347
 msgid "Place your calibration device over the square and press “Start”"
 msgstr ""
-"Pausatz vòstra sonda d’escandalhatge sul carrat e quichatz sus « Aviar »"
+"Pausatz vòstra sonda d’escandalhatge sul carrat e quichatz sus « Aviar »"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
@@ -539,7 +540,7 @@ msgid ""
 "Move your calibration device to the calibrate position and press “Continue”"
 msgstr ""
 "Desplaçatz vòstra sonda d’escandalhatge cap a l’emplaçament d'escandalhar e "
-"quichatz sus « Contunhar »"
+"quichatz sus « Contunhar »"
 
 #. TRANSLATORS: Some calibration devices need the user to move a
 #. * dial or switch manually. We also show a picture showing them
@@ -549,7 +550,7 @@ msgid ""
 "Move your calibration device to the surface position and press “Continue”"
 msgstr ""
 "Desplaçatz vòstra sonda d’escandalhatge a l’aplomb de l’emplaçament "
-"d'escandalhar e quichatz sus « Contunhar »"
+"d'escandalhar e quichatz sus « Contunhar »"
 
 #. TRANSLATORS: on some hardware e.g. Lenovo W700 the sensor
 #. * is built into the palmrest and we need to fullscreen the
@@ -1575,20 +1576,20 @@ msgstr ""
 "ecran;verrolhar;verrolhatge;diagnotic;confidencialitat;recent;temporari;nom;"
 "ret;malhum;identitat;tmp;privat;privada;vida;"
 
-#: panels/display/cc-display-panel.c:1017
+#: panels/display/cc-display-panel.c:1034
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: panels/display/cc-display-panel.c:1038
+#: panels/display/cc-display-panel.c:1055
 msgid "Apply Changes?"
 msgstr "Aplicar los cambiaments ?"
 
-#: panels/display/cc-display-panel.c:1043
+#: panels/display/cc-display-panel.c:1060
 msgid "Changes Cannot be Applied"
 msgstr "Los cambiaments pòdon pas èsser aplicats"
 
-#: panels/display/cc-display-panel.c:1044
+#: panels/display/cc-display-panel.c:1061
 msgid "This could be due to hardware limitations."
 msgstr "Aquò pòt venir de limitacions materialas."
 
@@ -1648,27 +1649,27 @@ msgstr "Ec­rans"
 msgid "Night Light"
 msgstr "Mòde nuèit"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Païsatge"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Retrait sus la dreita"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:115
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Retrait sus l'esquèrra"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:118
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Païsatge (revirat)"
 
-#: panels/display/cc-display-settings.c:190
+#: panels/display/cc-display-settings.c:192
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -2300,7 +2301,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "Anullar"
 
@@ -2488,28 +2489,28 @@ msgstr "Relambi de l’ecran negre"
 msgid "Period of inactivity after which the screen will go blank."
 msgstr "Periòde d’inactivitat aprèp la qual l’ecran s’atuda."
 
-#: panels/lock/cc-lock-panel.ui:65
+#: panels/lock/cc-lock-panel.ui:66
 msgid "Automatic Screen _Lock"
 msgstr "_Verrolhatge automatic de l'ecran"
 
-#: panels/lock/cc-lock-panel.ui:82
+#: panels/lock/cc-lock-panel.ui:83
 msgid "Automatic _Screen Lock Delay"
 msgstr "Relambi del _verrolhatge automatic de l’ecran"
 
-#: panels/lock/cc-lock-panel.ui:83
+#: panels/lock/cc-lock-panel.ui:84
 msgid "Period after the screen blanks when the screen is automatically locked."
 msgstr ""
 "Temps aprèp que l’ecran siá passat al negre quand se verrolha automaticament."
 
-#: panels/lock/cc-lock-panel.ui:103
+#: panels/lock/cc-lock-panel.ui:105
 msgid "Show _Notifications on Lock Screen"
 msgstr "Afichar las _notificacions sus l’ecran de verrolhatge"
 
-#: panels/lock/cc-lock-panel.ui:120
+#: panels/lock/cc-lock-panel.ui:122
 msgid "Forbid new _USB devices"
 msgstr "Interdire los periferics _USB novèls"
 
-#: panels/lock/cc-lock-panel.ui:121
+#: panels/lock/cc-lock-panel.ui:123
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
@@ -2518,109 +2519,109 @@ msgstr ""
 "l’ecran es verrolhat."
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:166
+#: panels/lock/cc-lock-panel.ui:169
 msgctxt "lock_screen"
 msgid "Screen Turns Off"
 msgstr "Atudament de l’ecran"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:170
+#: panels/lock/cc-lock-panel.ui:173
 msgctxt "lock_screen"
 msgid "30 seconds"
 msgstr "30 segondas"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:174
+#: panels/lock/cc-lock-panel.ui:177
 msgctxt "lock_screen"
 msgid "1 minute"
 msgstr "1 minuta"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:178
+#: panels/lock/cc-lock-panel.ui:181
 msgctxt "lock_screen"
 msgid "2 minutes"
 msgstr "2 minutas"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:182
+#: panels/lock/cc-lock-panel.ui:185
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 minutas"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:186
+#: panels/lock/cc-lock-panel.ui:189
 msgctxt "lock_screen"
 msgid "5 minutes"
 msgstr "5 minutas"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:190
+#: panels/lock/cc-lock-panel.ui:193
 msgctxt "lock_screen"
 msgid "30 minutes"
 msgstr "30 minutas"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:194
+#: panels/lock/cc-lock-panel.ui:197
 msgctxt "lock_screen"
 msgid "1 hour"
 msgstr "1 ora"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:209
+#: panels/lock/cc-lock-panel.ui:212
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 minuta"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:213
+#: panels/lock/cc-lock-panel.ui:216
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 minutas"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:217
+#: panels/lock/cc-lock-panel.ui:220
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 minutas"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:221
+#: panels/lock/cc-lock-panel.ui:224
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 minutas"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:225
+#: panels/lock/cc-lock-panel.ui:228
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 minutas"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:229
+#: panels/lock/cc-lock-panel.ui:232
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 minutas"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:233
+#: panels/lock/cc-lock-panel.ui:236
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 minutas"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:237
+#: panels/lock/cc-lock-panel.ui:240
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 minutas"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:241
+#: panels/lock/cc-lock-panel.ui:244
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 minutas"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:245
+#: panels/lock/cc-lock-panel.ui:248
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "Jamai"
@@ -3075,7 +3076,7 @@ msgid ""
 msgstr ""
 "L’adreça MAC picada aicí serà utilizada coma adreça materiala del periferic "
 "de ret activat per aquesta connexion. Aquesta foncionalitat es apelada « MAC "
-"cloning » o « spoofing ». Exemple : 00:11:22:33:44:55"
+"cloning » o « spoofing ». Exemple : 00:11:22:33:44:55"
 
 #: panels/network/connection-editor/ce-page.c:399
 #, c-format
@@ -3524,7 +3525,7 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"Lo fichièr « %s » es ilegible o conten pas cap d’informacions de connexion "
+"Lo fichièr « %s » es ilegible o conten pas cap d’informacions de connexion "
 "VPN reconegudas\n"
 "\n"
 "Error : %s."
@@ -3536,7 +3537,7 @@ msgstr "Seleccionar lo fichièr d'importar"
 #: panels/network/connection-editor/vpn-helpers.c:225
 #, c-format
 msgid "A file named “%s” already exists."
-msgstr "Un fichièr nomenat « %s » existís ja."
+msgstr "Un fichièr nomenat « %s » existís ja."
 
 #: panels/network/connection-editor/vpn-helpers.c:227
 msgid "_Replace"
@@ -3558,7 +3559,7 @@ msgid ""
 "\n"
 "Error: %s."
 msgstr ""
-"La connexion VPN « %s » a pas pogut èsser exportada cap a %s.\n"
+"La connexion VPN « %s » a pas pogut èsser exportada cap a %s.\n"
 "\n"
 "Error : %s."
 
@@ -3654,7 +3655,7 @@ msgstr "Las règlas del sistèma interdison son utilizacion coma punt d'accès"
 
 #: panels/network/net-device-wifi.c:1220
 msgid "Wireless device does not support Hotspot mode"
-msgstr "Lo periferic sens fial pren pas en carga lo mòde « punt d'accès »"
+msgstr "Lo periferic sens fial pren pas en carga lo mòde « punt d'accès »"
 
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:260
@@ -5017,7 +5018,7 @@ msgstr "Autentificacion requesida"
 #: panels/printers/cc-printers-panel.c:682
 #, c-format
 msgid "Printer “%s” has been deleted"
-msgstr "L’imprimenta « %s » es estada suprimida"
+msgstr "L’imprimenta « %s » es estada suprimida"
 
 #. Translators: Addition of the new printer failed.
 #: panels/printers/cc-printers-panel.c:926
@@ -5650,7 +5651,7 @@ msgstr "Apondre una imprimenta…"
 
 #: panels/printers/printers.ui:187
 msgid "No printers"
-msgstr "Pas d'mprimentas"
+msgstr "Cap d’imprimenta"
 
 #. Translators: This button adds new printer.
 #: panels/printers/printers.ui:201
@@ -5680,7 +5681,9 @@ msgstr ""
 "efèit a la connexion venenta."
 
 #: panels/region/cc-format-chooser.ui:117
-msgid "Search locales..."
+#, fuzzy
+#| msgid "Search locales..."
+msgid "Search locales…"
 msgstr "Cercar de lengas..."
 
 #: panels/region/cc-format-chooser.ui:158
@@ -7746,7 +7749,7 @@ msgstr "Connectat"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "Activat"
 
@@ -8456,65 +8459,67 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "Desverrolhar la carta SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "Desverrolhar"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Picatz lo còdi PIN per la carta SIM %d"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
 msgstr "Picatz lo còdi PIN per desverrolhar la carta SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Picatz lo còdi PUK per la carta SIM %d"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
 msgstr "Picatz lo còdi PUK per desverrolhar la carta SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
 msgstr[0] "Marrit senhal picat. Vos demòra %1$u ensag"
 msgstr[1] "Marrit senhal picat. Vos demòran %1$u ensages"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
 msgstr[0] "Vos demòra %u ensag"
 msgstr[1] "Vos demòran %u ensages"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "Marrit senhal picat."
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
 msgstr "Lo còdi PIM deu èsser un nombre de 8 chifras"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "Picatz lo novèl còdi PIN"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
 msgstr "Lo còdi PIM deu èsser un nombre de 4 a 8 chifras"
 
-#: panels/wwan/cc-wwan-device-page.c:270
-msgid "Unlocking..."
-msgstr "Desverrolhar..."
+#: panels/wwan/cc-wwan-device-page.c:317
+#, fuzzy
+#| msgid "Unlock…"
+msgid "Unlocking…"
+msgstr "Desverrolhar…"
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
@@ -8746,13 +8751,9 @@ msgstr "Configurar la telefonia e las connexion de donadas mobil"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:16
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "mobil;wwan;telefòn;sim;telefonet;portable;"
-
-#: shell/appdata/gnome-control-center.appdata.xml.in:7
-msgid "GNOME Settings"
-msgstr "Paramètres GNOME"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:8
 msgid "Utility to configure the GNOME desktop"
@@ -8790,7 +8791,7 @@ msgstr "Panèl d'afichar"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANÈL] [ARGUMENT…]"
 
-#: shell/cc-panel-list.ui:45 shell/cc-window.c:275
+#: shell/cc-panel-list.ui:45 shell/cc-window.c:309
 msgid "Privacy"
 msgstr "Confidencialitat"
 
@@ -8884,6 +8885,16 @@ msgstr ""
 "Indica se Paramètres deu afichar un avertiment al moment de l’utilizacion "
 "d’una version de desvolopament."
 
+#: shell/org.gnome.ControlCenter.gschema.xml:20
+msgid "Initial state of the window"
+msgstr ""
+
+#: shell/org.gnome.ControlCenter.gschema.xml:21
+msgid ""
+"A tuple containing the initial width, height and maximized state of the "
+"application window."
+msgstr ""
+
 #. translators:
 #. * The number of sound outputs on a particular device
 #: subprojects/gvc/gvc-mixer-control.c:1907
@@ -8905,6 +8916,12 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#~ msgid "Unlocking..."
+#~ msgstr "Desverrolhar..."
+
+#~ msgid "GNOME Settings"
+#~ msgstr "Paramètres GNOME"
 
 #~ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 #~ msgstr "Connexion;Nom;Emprenta;Avatar;Lògo;Visatge;Cap;Senhal;"
