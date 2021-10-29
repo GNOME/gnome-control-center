@@ -72,7 +72,7 @@ struct _PpPrinterEntry
   GtkWidget      *show_jobs_dialog_button;
   GtkWidget      *clean_heads_menuitem;
   GtkCheckButton *printer_default_checkbutton;
-  GtkModelButton *remove_printer_menuitem;
+  GtkWidget      *remove_printer_menuitem;
   GtkBox         *printer_error;
   GtkLabel       *error_status;
 
@@ -212,7 +212,7 @@ tone_down_color (GdkRGBA *color,
                  gdouble  saturation_ratio,
                  gdouble  value_ratio)
 {
-  gdouble h, s, v;
+  gfloat h, s, v;
 
   gtk_rgb_to_hsv (color->red, color->green, color->blue,
                   &h, &s, &v);
@@ -220,21 +220,20 @@ tone_down_color (GdkRGBA *color,
                   &color->red, &color->green, &color->blue);
 }
 
-static gboolean
-supply_levels_draw_cb (PpPrinterEntry *self,
-                       cairo_t        *cr)
+static void
+supply_levels_draw_cb (GtkDrawingArea *drawing_area,
+                       cairo_t        *cr,
+                       int             width,
+                       int             height,
+                       gpointer        user_data)
 {
+  PpPrinterEntry         *self = PP_PRINTER_ENTRY (user_data);
   GtkStyleContext        *context;
   gboolean                is_empty = TRUE;
   g_autofree gchar       *tooltip_text = NULL;
-  gint                    width;
-  gint                    height;
   int                     i;
 
   context = gtk_widget_get_style_context (GTK_WIDGET (self->supply_drawing_area));
-
-  width = gtk_widget_get_allocated_width (GTK_WIDGET (self->supply_drawing_area));
-  height = gtk_widget_get_allocated_height (GTK_WIDGET (self->supply_drawing_area));
 
   gtk_render_background (context, cr, 0, 0, width, height);
 
@@ -344,8 +343,6 @@ supply_levels_draw_cb (PpPrinterEntry *self,
 
   gtk_widget_set_visible (GTK_WIDGET (self->printer_inklevel_label), !is_empty);
   gtk_widget_set_visible (GTK_WIDGET (self->supply_frame), !is_empty);
-
-  return TRUE;
 }
 
 static void
@@ -362,22 +359,12 @@ on_printer_rename_cb (GObject      *source_object,
 }
 
 static void
-on_show_printer_details_dialog (GtkButton      *button,
-                                PpPrinterEntry *self)
+show_printer_details_response_cb (PpDetailsDialog *dialog,
+                                  gint             reponse,
+                                  PpPrinterEntry  *self)
 {
   const gchar *new_name;
   const gchar *new_location;
-
-  PpDetailsDialog *dialog = pp_details_dialog_new (self->printer_name,
-                                                   self->printer_location,
-                                                   self->printer_hostname,
-                                                   self->printer_make_and_model,
-                                                   self->is_authorized);
-
-  gtk_window_set_transient_for (GTK_WINDOW (dialog),
-                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
-
-  gtk_dialog_run (GTK_DIALOG (dialog));
 
   new_location = pp_details_dialog_get_printer_location (dialog);
   if (g_strcmp0 (self->printer_location, new_location) != 0)
@@ -397,7 +384,25 @@ on_show_printer_details_dialog (GtkButton      *button,
 
   g_signal_emit_by_name (self, "printer-changed");
 
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  gtk_window_destroy (GTK_WINDOW (dialog));
+}
+
+static void
+on_show_printer_details_dialog (GtkButton      *button,
+                                PpPrinterEntry *self)
+{
+  PpDetailsDialog *dialog = pp_details_dialog_new (self->printer_name,
+                                                   self->printer_location,
+                                                   self->printer_hostname,
+                                                   self->printer_make_and_model,
+                                                   self->is_authorized);
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog),
+                                GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
+
+  g_signal_connect (dialog, "response", G_CALLBACK (show_printer_details_response_cb), self);
+
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
@@ -409,16 +414,14 @@ on_show_printer_options_dialog (GtkButton      *button,
   dialog = pp_options_dialog_new (self->printer_name, self->is_authorized);
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog),
-                                GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+                                GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
 
-  gtk_dialog_run (GTK_DIALOG (dialog));
-
-  gtk_widget_destroy (GTK_WIDGET (dialog));
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
-set_as_default_printer (GtkToggleButton *button,
-                        PpPrinterEntry  *self)
+set_as_default_printer (GtkCheckButton *button,
+                        PpPrinterEntry *self)
 {
   printer_set_default (self->printer_name);
 
@@ -567,7 +570,7 @@ jobs_dialog_response_cb (GtkDialog  *dialog,
 
   if (self->pp_jobs_dialog != NULL)
     {
-      gtk_widget_destroy (GTK_WIDGET (self->pp_jobs_dialog));
+      gtk_window_destroy (GTK_WINDOW (self->pp_jobs_dialog));
       self->pp_jobs_dialog = NULL;
     }
 }
@@ -579,7 +582,7 @@ pp_printer_entry_show_jobs_dialog (PpPrinterEntry *self)
     {
       self->pp_jobs_dialog = pp_jobs_dialog_new (self->printer_name);
       g_signal_connect_object (self->pp_jobs_dialog, "response", G_CALLBACK (jobs_dialog_response_cb), self, 0);
-      gtk_window_set_transient_for (GTK_WINDOW (self->pp_jobs_dialog), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+      gtk_window_set_transient_for (GTK_WINDOW (self->pp_jobs_dialog), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
       gtk_window_present (GTK_WINDOW (self->pp_jobs_dialog));
     }
 }
@@ -648,7 +651,10 @@ pp_printer_entry_new (cups_dest_t  printer,
                                                     _("Clean print heads"));
   check_clean_heads_maintenance_command (self);
 
-  g_signal_connect_object (self->supply_drawing_area, "draw", G_CALLBACK (supply_levels_draw_cb), self, G_CONNECT_SWAPPED);
+  gtk_drawing_area_set_draw_func (self->supply_drawing_area,
+                                  supply_levels_draw_cb,
+                                  self,
+                                  NULL);
 
   pp_printer_entry_update (self, printer, is_authorized);
 
@@ -895,11 +901,11 @@ pp_printer_entry_update (PpPrinterEntry *self,
   g_free (self->printer_hostname);
   self->printer_hostname = printer_get_hostname (printer_type, device_uri, printer_uri);
 
-  gtk_image_set_from_icon_name (self->printer_icon, printer_icon_name, GTK_ICON_SIZE_DIALOG);
+  gtk_image_set_from_icon_name (self->printer_icon, printer_icon_name);
   gtk_label_set_text (self->printer_status, printer_status);
   gtk_label_set_text (self->printer_name_label, instance);
   g_signal_handlers_block_by_func (self->printer_default_checkbutton, set_as_default_printer, self);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->printer_default_checkbutton), printer.is_default);
+  gtk_check_button_set_active (self->printer_default_checkbutton, printer.is_default);
   g_signal_handlers_unblock_by_func (self->printer_default_checkbutton, set_as_default_printer, self);
 
   self->printer_make_and_model = sanitize_printer_model (printer_make_and_model);

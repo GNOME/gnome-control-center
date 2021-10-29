@@ -5,66 +5,29 @@
   <object class="GtkDialog" id="authentication-dialog">
     <property name="width_request">430</property>
     <property name="height_request">270</property>
-    <property name="can_focus">False</property>
     <property name="hexpand">True</property>
-    <property name="border_width">5</property>
     <property name="title" translatable="yes"> </property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
-    <property name="type_hint">dialog</property>
-    <child internal-child="vbox">
+    <child>
       <object class="GtkBox" id="main-vbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">10</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action-area1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="button1">
-                <property name="label" translatable="yes">Cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="authentication-button">
-                <property name="label" translatable="yes">Authenticate</property>
-                <property name="visible">True</property>
-                <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
-                <property name="can_default">True</property>
-                <property name="has_default">True</property>
-                <property name="receives_default">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
+        <child type="action">
+          <object class="GtkButton" id="button1">
+            <property name="label" translatable="yes">Cancel</property>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
+        </child>
+        <child type="action">
+          <object class="GtkButton" id="authentication-button">
+            <property name="label" translatable="yes">Authenticate</property>
+            <property name="sensitive">False</property>
+            <property name="receives_default">True</property>
+          </object>
         </child>
         <child>
           <object class="GtkGrid" id="grid1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="margin_start">5</property>
             <property name="margin_end">5</property>
             <property name="hexpand">True</property>
@@ -73,115 +36,96 @@
             <property name="column_spacing">15</property>
             <child>
               <object class="GtkLabel" id="username-label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Username</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">2</property>
+                </layout>
                 <style>
                   <class name="dim-label"/>
                 </style>
               </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="password-label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Password</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">3</property>
+                </layout>
                 <style>
                   <class name="dim-label"/>
                 </style>
               </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
-              </packing>
             </child>
             <child>
               <object class="GtkEntry" id="username-entry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="invisible_char">●</property>
                 <property name="activates_default">True</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">2</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">2</property>
-              </packing>
             </child>
             <child>
               <object class="GtkEntry" id="password-entry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="visibility">False</property>
                 <property name="invisible_char">●</property>
                 <property name="activates_default">True</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">3</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">3</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="authentication-title">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
                 <property name="xalign">0</property>
                 <property name="label" translatable="yes">Authentication Required</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">0</property>
+                </layout>
                 <attributes>
                   <attribute name="weight" value="bold"/>
                 </attributes>
               </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkImage" id="image1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="pixel_size">48</property>
                 <property name="icon_name">dialog-password-symbolic</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                  <property name="height">2</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-                <property name="height">2</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="authentication-text">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="margin_bottom">15</property>
                 <property name="hexpand">True</property>
                 <property name="xalign">0</property>
                 <property name="wrap">True</property>
                 <property name="max_width_chars">36</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>

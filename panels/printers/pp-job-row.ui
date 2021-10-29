@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="PpJobRow" parent="GtkListBoxRow">
-    <property name="visible">True</property>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="border-width">2</property>
-        <property name="margin">6</property>
+        <property name="margin-top">6</property>
+        <property name="margin-bottom">6</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
         <child>
           <object class="GtkLabel" id="title_label">
-            <property name="visible">True</property>
             <property name="ellipsize">end</property>
             <property name="max-width-chars">40</property>
             <property name="halign">start</property>
@@ -20,7 +19,6 @@
         </child>
         <child>
           <object class="GtkLabel" id="state_label">
-            <property name="visible">True</property>
             <property name="halign">end</property>
             <property name="margin-start">74</property>
             <property name="margin-end">74</property>
@@ -28,55 +26,34 @@
         </child>
         <child>
           <object class="GtkButton" id="priority_button">
-            <property name="visible">True</property>
-            <property name="margin-left">4</property>
-            <property name="margin-right">4</property>
+            <property name="margin-start">4</property>
+            <property name="margin-end">4</property>
+            <property name="icon-name">go-top-symbolic</property>
             <signal name="clicked" handler="priority_cb" object="PpJobRow" swapped="yes" />
             <style>
               <class name="image-button"/>
             </style>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="icon-size">2</property>
-                <property name="icon-name">go-top-symbolic</property>
-              </object>
-            </child>
           </object>
         </child>
         <child>
           <object class="GtkButton" id="pause_button">
-            <property name="visible">True</property>
-            <property name="margin-left">4</property>
-            <property name="margin-right">4</property>
+            <property name="margin-start">4</property>
+            <property name="margin-end">4</property>
             <signal name="clicked" handler="pause_cb" object="PpJobRow" swapped="yes" />
             <style>
               <class name="image-button"/>
             </style>
-            <child>
-              <object class="GtkImage" id="pause_image">
-                <property name="visible">True</property>
-                <property name="icon-size">2</property>
-              </object>
-            </child>
           </object>
         </child>
         <child>
           <object class="GtkButton">
-            <property name="visible">True</property>
-            <property name="margin-left">4</property>
-            <property name="margin-right">4</property>
+            <property name="margin-start">4</property>
+            <property name="margin-end">4</property>
+            <property name="icon-name">edit-delete-symbolic</property>
             <signal name="clicked" handler="stop_cb" object="PpJobRow" swapped="yes" />
             <style>
               <class name="image-button"/>
             </style>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="icon-name">edit-delete-symbolic</property>
-                <property name="icon-size">2</property>
-              </object>
-            </child>
           </object>
         </child>
       </object>

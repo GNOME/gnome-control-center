@@ -1,4 +1,4 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
+/*
  *
  * Copyright 2016  Red Hat, Inc,
  *
@@ -42,7 +42,7 @@ struct _PpDetailsDialog {
   GtkDialog     parent_instance;
 
   GtkLabel     *dialog_title;
-  GtkButtonBox *driver_buttons;
+  GtkBox       *driver_buttons;
   GtkBox       *loading_box;
   GtkLabel     *printer_address_label;
   GtkEntry     *printer_location_entry;
@@ -154,7 +154,7 @@ ppd_selection_dialog_response_cb (GtkDialog *dialog,
         }
     }
 
-  gtk_widget_destroy (GTK_WIDGET (self->pp_ppd_selection_dialog));
+  gtk_window_destroy (GTK_WINDOW (self->pp_ppd_selection_dialog));
   self->pp_ppd_selection_dialog = NULL;
 }
 
@@ -224,6 +224,34 @@ select_ppd_in_dialog (PpDetailsDialog *self)
 }
 
 static void
+ppd_file_select_response_cb (GtkDialog *dialog,
+                             gint       response_id,
+                             gpointer   user_data)
+{
+  PpDetailsDialog *self = PP_DETAILS_DIALOG (user_data);
+
+  if (response_id == GTK_RESPONSE_ACCEPT)
+    {
+      g_autoptr(GFile) file = NULL;
+      g_autofree gchar *ppd_filename = NULL;
+
+      file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
+      ppd_filename = g_file_get_path (file);
+
+      if (self->printer_name && ppd_filename)
+        {
+          printer_set_ppd_file_async (self->printer_name,
+                                      ppd_filename,
+                                      self->cancellable,
+                                      set_ppd_cb,
+                                      self);
+        }
+    }
+
+  gtk_window_destroy (GTK_WINDOW (dialog));
+}
+
+static void
 select_ppd_manually (PpDetailsDialog *self)
 {
   GtkFileFilter *filter;
@@ -247,23 +275,7 @@ select_ppd_manually (PpDetailsDialog *self)
 
   gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), filter);
 
-  if (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-    {
-      g_autofree gchar *ppd_filename = NULL;
-
-      ppd_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-
-      if (self->printer_name && ppd_filename)
-        {
-          printer_set_ppd_file_async (self->printer_name,
-                                      ppd_filename,
-                                      self->cancellable,
-                                      set_ppd_cb,
-                                      self);
-        }
-    }
-
-  gtk_widget_destroy (dialog);
+  g_signal_connect (dialog, "response", G_CALLBACK (ppd_file_select_response_cb), self);
 }
 
 static void
@@ -354,8 +366,8 @@ pp_details_dialog_new (gchar   *printer_name,
   printer_url = g_strdup_printf ("<a href=\"http://%s:%d\">%s</a>", printer_address, ippPort (), printer_address);
   gtk_label_set_markup (GTK_LABEL (self->printer_address_label), printer_url);
 
-  gtk_entry_set_text (GTK_ENTRY (self->printer_name_entry), printer_name);
-  gtk_entry_set_text (GTK_ENTRY (self->printer_location_entry), printer_location);
+  gtk_editable_set_text (GTK_EDITABLE (self->printer_name_entry), printer_name);
+  gtk_editable_set_text (GTK_EDITABLE (self->printer_location_entry), printer_location);
   gtk_label_set_text (GTK_LABEL (self->printer_model_label), printer_make_and_model);
 
   update_sensitivity (self, sensitive);
@@ -367,12 +379,12 @@ const gchar *
 pp_details_dialog_get_printer_name (PpDetailsDialog *self)
 {
   g_return_val_if_fail (PP_IS_DETAILS_DIALOG (self), NULL);
-  return gtk_entry_get_text (GTK_ENTRY (self->printer_name_entry));
+  return gtk_editable_get_text (GTK_EDITABLE (self->printer_name_entry));
 }
 
 const gchar *
 pp_details_dialog_get_printer_location (PpDetailsDialog *self)
 {
   g_return_val_if_fail (PP_IS_DETAILS_DIALOG (self), NULL);
-  return gtk_entry_get_text (GTK_ENTRY (self->printer_location_entry));
+  return gtk_editable_get_text (GTK_EDITABLE (self->printer_location_entry));
 }

@@ -22,10 +22,11 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 #include <gtk/gtk.h>
 
 #include "pp-new-printer-dialog.h"
@@ -92,7 +93,8 @@ struct _PpNewPrinterDialog
   GtkTreeModelFilter *devices_model_filter;
 
   /* headerbar */
-  GtkHeaderBar       *headerbar;
+  GtkHeaderBar         *headerbar;
+  AdwWindowTitle       *header_title;
 
   /* headerbar topleft buttons */
   GtkStack           *headerbar_topleft_buttons;
@@ -113,8 +115,6 @@ struct _PpNewPrinterDialog
   GtkScrolledWindow  *scrolledwindow1;
   GtkTreeView        *devices_treeview;
 
-  /* toolbar1 */
-  GtkToolbar         *toolbar1;
   GtkEntry           *search_entry;
 
   /* authentication page */
@@ -199,7 +199,8 @@ get_authenticated_samba_devices_cb (GObject      *source_object,
 
               if (devices->len > 0)
                 {
-                  gtk_entry_set_text (self->search_entry, pp_print_device_get_device_location (g_ptr_array_index (devices, 0)));
+                  gtk_editable_set_text (GTK_EDITABLE (self->search_entry),
+                                         pp_print_device_get_device_location (g_ptr_array_index (devices, 0)));
                   search_entry_activated_cb (self);
                 }
             }
@@ -238,8 +239,8 @@ on_authenticate (PpNewPrinterDialog *self)
   gchar                     *username = NULL;
   gchar                     *password = NULL;
 
-  username = g_strdup (gtk_entry_get_text (self->username_entry));
-  password = g_strdup (gtk_entry_get_text (self->password_entry));
+  username = g_strdup (gtk_editable_get_text (GTK_EDITABLE (self->username_entry)));
+  password = g_strdup (gtk_editable_get_text (GTK_EDITABLE (self->password_entry)));
 
   if ((username == NULL) || (username[0] == '\0') ||
       (password == NULL) || (password[0] == '\0'))
@@ -251,7 +252,7 @@ on_authenticate (PpNewPrinterDialog *self)
 
   pp_samba_set_auth_info (PP_SAMBA (self->samba_host), username, password);
 
-  gtk_header_bar_set_title (self->headerbar, _("Add Printer"));
+  adw_window_title_set_title (self->header_title, _("Add Printer"));
   go_to_page (self, ADDPRINTER_PAGE);
 
   g_object_get (PP_HOST (self->samba_host), "hostname", &hostname, NULL);
@@ -265,8 +266,8 @@ on_authentication_required (PpNewPrinterDialog *self)
   g_autofree gchar          *title = NULL;
   g_autofree gchar          *text = NULL;
 
-  gtk_header_bar_set_subtitle (self->headerbar, NULL);
-  gtk_header_bar_set_title (self->headerbar, _("Unlock Print Server"));
+  adw_window_title_set_subtitle (self->header_title, NULL);
+  adw_window_title_set_title (self->header_title, _("Unlock Print Server"));
 
   g_object_get (self->samba_host, "hostname", &hostname, NULL);
   /* Translators: Samba server needs authentication of the user to show list of its printers. */
@@ -289,8 +290,8 @@ auth_entries_changed (PpNewPrinterDialog *self)
   gchar                     *username = NULL;
   gchar                     *password = NULL;
 
-  username = g_strdup (gtk_entry_get_text (self->username_entry));
-  password = g_strdup (gtk_entry_get_text (self->password_entry));
+  username = g_strdup (gtk_editable_get_text (GTK_EDITABLE (self->username_entry)));
+  password = g_strdup (gtk_editable_get_text (GTK_EDITABLE (self->password_entry)));
 
   can_authenticate = (username != NULL && username[0] != '\0' &&
                       password != NULL && password[0] != '\0');
@@ -308,7 +309,7 @@ on_go_back_button_clicked (PpNewPrinterDialog *self)
   g_clear_object (&self->samba_host);
 
   go_to_page (self, ADDPRINTER_PAGE);
-  gtk_header_bar_set_title (self->headerbar, _("Add Printer"));
+  adw_window_title_set_title (self->header_title, _("Add Printer"));
   gtk_widget_set_sensitive (GTK_WIDGET (self->new_printer_add_button), FALSE);
 
   gtk_tree_selection_unselect_all (gtk_tree_view_get_selection (self->devices_treeview));
@@ -356,16 +357,6 @@ authenticate_samba_server (PpNewPrinterDialog *self)
                                       data);
         }
     }
-}
-
-static gboolean
-stack_key_press_cb (PpNewPrinterDialog *self,
-                    GdkEvent *event)
-{
-  gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
-  gtk_main_do_event (event);
-
-  return TRUE;
 }
 
 static void
@@ -584,11 +575,11 @@ update_dialog_state (PpNewPrinterDialog *self)
 
   if (searching)
     {
-      gtk_header_bar_set_subtitle (self->headerbar, _("Searching for Printers"));
+      adw_window_title_set_subtitle (self->header_title, _("Searching for Printers"));
     }
   else
     {
-      gtk_header_bar_set_subtitle (self->headerbar, NULL);
+      adw_window_title_set_subtitle (self->header_title, NULL);
     }
 
   if (gtk_tree_model_get_iter_first (GTK_TREE_MODEL (self->devices_liststore), &iter))
@@ -1347,7 +1338,7 @@ search_address (const gchar        *text,
 static void
 search_entry_activated_cb (PpNewPrinterDialog *self)
 {
-  search_address (gtk_entry_get_text (self->search_entry),
+  search_address (gtk_editable_get_text (GTK_EDITABLE (self->search_entry)),
                   self,
                   FALSE);
 }
@@ -1355,7 +1346,7 @@ search_entry_activated_cb (PpNewPrinterDialog *self)
 static void
 search_entry_changed_cb (PpNewPrinterDialog *self)
 {
-  search_address (gtk_entry_get_text (self->search_entry),
+  search_address (gtk_editable_get_text (GTK_EDITABLE (self->search_entry)),
                   self,
                   TRUE);
 }
@@ -1627,7 +1618,7 @@ populate_devices_list (PpNewPrinterDialog *self)
   self->authenticated_server_icon = g_emblemed_icon_new (icon, emblem);
 
   icon_renderer = gtk_cell_renderer_pixbuf_new ();
-  g_object_set (icon_renderer, "stock-size", GTK_ICON_SIZE_DIALOG, NULL);
+  g_object_set (icon_renderer, "icon-size", GTK_ICON_SIZE_LARGE, NULL);
   gtk_cell_renderer_set_alignment (icon_renderer, 1.0, 0.5);
   gtk_cell_renderer_set_padding (icon_renderer, 4, 4);
   column = gtk_tree_view_column_new_with_attributes ("Icon", icon_renderer,
@@ -1776,7 +1767,6 @@ pp_new_printer_dialog_new (PPDList              *ppd_list,
                            gpointer              user_data)
 {
   PpNewPrinterDialog *self;
-  GtkStyleContext    *context;
 
   self = g_object_new (pp_new_printer_dialog_get_type (), NULL);
 
@@ -1797,19 +1787,10 @@ pp_new_printer_dialog_new (PPDList              *ppd_list,
 
   g_signal_connect_object (self->unlock_button, "clicked", G_CALLBACK (authenticate_samba_server), self, G_CONNECT_SWAPPED);
 
-  g_signal_connect_object (self->stack, "key-press-event", G_CALLBACK (stack_key_press_cb), self, G_CONNECT_SWAPPED);
-
   /* Authentication form widgets */
   g_signal_connect_object (self->username_entry, "changed", G_CALLBACK (auth_entries_changed), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (self->password_entry, "changed", G_CALLBACK (auth_entries_changed), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (self->go_back_button, "clicked", G_CALLBACK (on_go_back_button_clicked), self, G_CONNECT_SWAPPED);
-
-  /* Set junctions */
-  context = gtk_widget_get_style_context (GTK_WIDGET (self->scrolledwindow1));
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_BOTTOM);
-
-  context = gtk_widget_get_style_context (GTK_WIDGET (self->toolbar1));
-  gtk_style_context_set_junction_sides (context, GTK_JUNCTION_TOP);
 
   /* Set titlebar */
   gtk_window_set_titlebar(GTK_WINDOW (self), GTK_WIDGET (self->headerbar));
@@ -1859,6 +1840,8 @@ pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass   *object_class = G_OBJECT_CLASS (klass);
 
+  g_type_ensure (PP_TYPE_PRINT_DEVICE);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/new-printer-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, devices_liststore);
@@ -1866,6 +1849,7 @@ pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
 
   /* headerbar */
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, headerbar);
+  gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, header_title);
 
   /* headerbar topleft buttons */
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, headerbar_topleft_buttons);
@@ -1885,8 +1869,6 @@ pp_new_printer_dialog_class_init (PpNewPrinterDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, scrolledwindow1);
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, devices_treeview);
 
-  /* toolbar1 */
-  gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, toolbar1);
   gtk_widget_class_bind_template_child (widget_class, PpNewPrinterDialog, search_entry);
 
   /* authentication page */
@@ -1919,9 +1901,6 @@ PpNewPrinter *
 pp_new_printer_dialog_get_new_printer (PpNewPrinterDialog *self)
 {
   PpNewPrinter *new_printer = NULL;
-  guint         window_id = 0;
-
-  window_id = (guint) GDK_WINDOW_XID (gtk_widget_get_window (GTK_WIDGET (gtk_window_get_transient_for (GTK_WINDOW (self)))));
 
   new_printer = pp_new_printer_new ();
   g_object_set (new_printer,
@@ -1937,7 +1916,7 @@ pp_new_printer_dialog_get_new_printer (PpNewPrinterDialog *self)
                 "host-name", pp_print_device_get_host_name (self->new_device),
                 "host-port", pp_print_device_get_host_port (self->new_device),
                 "is-network-device", pp_print_device_is_network_device (self->new_device),
-                "window-id", window_id,
+                "window-id", 0,
                 NULL);
 
   return new_printer;

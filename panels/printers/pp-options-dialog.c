@@ -295,25 +295,23 @@ ppd_option_name_translate (ppd_option_t *option)
 static gint
 grid_get_height (GtkWidget *grid)
 {
-  GList *children;
-  GList *child;
+  GtkWidget *child;
   gint   height = 0;
-  gint   top_attach = 0;
+  gint   row = 0;
   gint   max = 0;
 
-  children = gtk_container_get_children (GTK_CONTAINER (grid));
-  for (child = children; child; child = g_list_next (child))
+  for (child = gtk_widget_get_first_child (grid);
+       child;
+       child = gtk_widget_get_next_sibling (child))
     {
-      gtk_container_child_get (GTK_CONTAINER (grid), child->data,
-                               "top-attach", &top_attach,
-                               "height", &height,
-                               NULL);
+      gtk_grid_query_child (GTK_GRID (grid),
+                            child,
+                            NULL, &row,
+                            NULL, &height);
 
-      if (height + top_attach > max)
-        max = height + top_attach;
+      if (height + row > max)
+        max = height + row;
     }
-
-  g_list_free (children);
 
   return max;
 }
@@ -321,18 +319,7 @@ grid_get_height (GtkWidget *grid)
 static gboolean
 grid_is_empty (GtkWidget *grid)
 {
-  GList *children;
-
-  children = gtk_container_get_children (GTK_CONTAINER (grid));
-  if (children)
-    {
-      g_list_free (children);
-      return FALSE;
-    }
-  else
-    {
-      return TRUE;
-    }
+  return gtk_widget_get_first_child (grid) == NULL;
 }
 
 static GtkWidget *
@@ -395,7 +382,6 @@ ppd_option_add (ppd_option_t  option,
       position = grid_get_height (grid);
 
       label = gtk_label_new (ppd_option_name_translate (&option));
-      gtk_widget_show (GTK_WIDGET (label));
       gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
       context = gtk_widget_get_style_context (label);
       gtk_style_context_add_class (context, "dim-label");
@@ -417,8 +403,10 @@ tab_grid_new ()
   GtkWidget *grid;
 
   grid = gtk_grid_new ();
-  gtk_widget_show (GTK_WIDGET (grid));
-  gtk_container_set_border_width (GTK_CONTAINER (grid), 20);
+  gtk_widget_set_margin_start (grid, 20);
+  gtk_widget_set_margin_end (grid, 20);
+  gtk_widget_set_margin_top (grid, 20);
+  gtk_widget_set_margin_bottom (grid, 20);
   gtk_grid_set_row_spacing (GTK_GRID (grid), 15);
 
   return grid;
@@ -437,12 +425,11 @@ tab_add (PpOptionsDialog *self,
 
   if (!grid_is_empty (grid))
     {
-      scrolled_window = gtk_scrolled_window_new (NULL, NULL);
-      gtk_widget_show (GTK_WIDGET (scrolled_window));
+      scrolled_window = gtk_scrolled_window_new ();
       gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled_window),
                                       GTK_POLICY_NEVER,
                                       GTK_POLICY_AUTOMATIC);
-      gtk_container_add (GTK_CONTAINER (scrolled_window), grid);
+      gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (scrolled_window), grid);
 
       id = gtk_notebook_append_page (self->notebook,
                                      scrolled_window,

@@ -29,7 +29,6 @@ struct _PpJobRow
   GtkListBoxRow parent;
 
   GtkButton *pause_button;
-  GtkImage  *pause_image;
   GtkButton *priority_button;
   GtkLabel  *state_label;
   GtkLabel  *title_label;
@@ -50,10 +49,9 @@ static void
 pause_cb (PpJobRow *self)
 {
   pp_job_set_hold_until_async (self->job, pp_job_get_state (self->job) == IPP_JOB_HELD ? "no-hold" : "indefinite");
-  gtk_image_set_from_icon_name (self->pause_image,
-                                pp_job_get_state (self->job) == IPP_JOB_HELD ?
-                                                  "media-playback-pause-symbolic" : "media-playback-start-symbolic",
-                                GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_button_set_icon_name (self->pause_button,
+                            pp_job_get_state (self->job) == IPP_JOB_HELD ?
+                                              "media-playback-pause-symbolic" : "media-playback-start-symbolic");
 }
 
 static void
@@ -89,7 +87,6 @@ pp_job_row_class_init (PpJobRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/printers/pp-job-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, pause_button);
-  gtk_widget_class_bind_template_child (widget_class, PpJobRow, pause_image);
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, priority_button);
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, state_label);
   gtk_widget_class_bind_template_child (widget_class, PpJobRow, title_label);
@@ -177,10 +174,9 @@ pp_job_row_new (PpJob *job)
   if (status)
     /* Translators: Clicking this button prioritizes printing of this print job */
     gtk_widget_set_tooltip_text (GTK_WIDGET (self->priority_button), _("Move this job to the top of the queue"));
-  gtk_image_set_from_icon_name (self->pause_image,
-                                pp_job_get_state (self->job) == IPP_JOB_HELD ?
-                                                  "media-playback-start-symbolic" : "media-playback-pause-symbolic",
-                                GTK_ICON_SIZE_SMALL_TOOLBAR);
+  gtk_button_set_icon_name (self->pause_button,
+                            pp_job_get_state (self->job) == IPP_JOB_HELD ?
+                                              "media-playback-start-symbolic" : "media-playback-pause-symbolic");
 
   return self;
 }

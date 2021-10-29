@@ -31,7 +31,6 @@
 
 #include <cups/cups.h>
 
-#include "list-box-helper.h"
 #include "pp-jobs-dialog.h"
 #include "pp-utils.h"
 #include "pp-job.h"
@@ -144,7 +143,7 @@ static void
 auth_entries_activated (PpJobsDialog *self)
 {
   if (auth_popup_filled (self))
-    gtk_button_clicked (self->authenticate_button);
+    g_signal_emit_by_name (self->authenticate_button, "activate");
 }
 
 static void
@@ -161,17 +160,17 @@ authenticate_popover_update (PpJobsDialog *self)
   gtk_widget_set_visible (GTK_WIDGET (self->domain_label), domain_required);
   gtk_widget_set_visible (GTK_WIDGET (self->domain_entry), domain_required);
   if (domain_required)
-    gtk_entry_set_text (self->domain_entry, "");
+    gtk_editable_set_text (GTK_EDITABLE (self->domain_entry), "");
 
   gtk_widget_set_visible (GTK_WIDGET (self->username_label), username_required);
   gtk_widget_set_visible (GTK_WIDGET (self->username_entry), username_required);
   if (username_required)
-    gtk_entry_set_text (self->username_entry, cupsUser ());
+    gtk_editable_set_text (GTK_EDITABLE (self->username_entry), cupsUser ());
 
   gtk_widget_set_visible (GTK_WIDGET (self->password_label), password_required);
   gtk_widget_set_visible (GTK_WIDGET (self->password_entry), password_required);
   if (password_required)
-    gtk_entry_set_text (self->password_entry, "");
+    gtk_editable_set_text (GTK_EDITABLE (self->password_entry), "");
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->authenticate_button), FALSE);
 }
@@ -416,11 +415,11 @@ authenticate_button_clicked (PpJobsDialog *self)
   for (i = 0; self->actual_auth_info_required[i] != NULL; i++)
     {
       if (g_strcmp0 (self->actual_auth_info_required[i], "domain") == 0)
-        auth_info[i] = g_strdup (gtk_entry_get_text (GTK_ENTRY (self->domain_entry)));
+        auth_info[i] = g_strdup (gtk_editable_get_text (GTK_EDITABLE (self->domain_entry)));
       else if (g_strcmp0 (self->actual_auth_info_required[i], "username") == 0)
-        auth_info[i] = g_strdup (gtk_entry_get_text (GTK_ENTRY (self->username_entry)));
+        auth_info[i] = g_strdup (gtk_editable_get_text (GTK_EDITABLE (self->username_entry)));
       else if (g_strcmp0 (self->actual_auth_info_required[i], "password") == 0)
-        auth_info[i] = g_strdup (gtk_entry_get_text (GTK_ENTRY (self->password_entry)));
+        auth_info[i] = g_strdup (gtk_editable_get_text (GTK_EDITABLE (self->password_entry)));
     }
 
   num_items = g_list_model_get_n_items (G_LIST_MODEL (self->store));
@@ -435,17 +434,6 @@ authenticate_button_clicked (PpJobsDialog *self)
     }
 
   g_strfreev (auth_info);
-}
-
-static gboolean
-key_press_event_cb (GtkWidget   *widget,
-                    GdkEventKey *event,
-                    gpointer     user_data)
-{
-  if (event->keyval == GDK_KEY_Escape)
-    gtk_dialog_response (GTK_DIALOG (widget), GTK_RESPONSE_CLOSE);
-
-  return FALSE;
 }
 
 PpJobsDialog *
@@ -464,9 +452,6 @@ pp_jobs_dialog_new (const gchar *printer_name)
   self->jobs_filled = FALSE;
   self->pop_up_authentication_popup = FALSE;
 
-  /* connect signals */
-  g_signal_connect (self, "key-press-event", G_CALLBACK (key_press_event_cb), NULL);
-
   /* Translators: This is the printer name for which we are showing the active jobs */
   title = g_strdup_printf (C_("Printer jobs dialog title", "%s — Active Jobs"), printer_name);
   gtk_window_set_title (GTK_WINDOW (self), title);
@@ -475,8 +460,6 @@ pp_jobs_dialog_new (const gchar *printer_name)
   text = g_strdup_printf (_("Enter credentials to print from %s."), printer_name);
   gtk_label_set_text (self->authentication_label, text);
 
-  gtk_list_box_set_header_func (self->jobs_listbox,
-                                cc_list_box_update_header_func, NULL, NULL);
   self->store = g_list_store_new (pp_job_get_type ());
   gtk_list_box_bind_model (self->jobs_listbox, G_LIST_MODEL (self->store),
                            create_listbox_row, self, NULL);
@@ -551,4 +534,6 @@ pp_jobs_dialog_class_init (PpJobsDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, auth_entries_changed);
 
   object_class->dispose = pp_jobs_dialog_dispose;
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }

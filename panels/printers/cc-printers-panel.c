@@ -239,11 +239,8 @@ cc_printers_panel_constructed (GObject *object)
 
   widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "search-bar");
-  g_signal_connect_object (shell,
-                           "key-press-event",
-                           G_CALLBACK (gtk_search_bar_handle_event),
-                           widget,
-                           G_CONNECT_SWAPPED);
+  gtk_search_bar_set_key_capture_widget (GTK_SEARCH_BAR (widget),
+                                         GTK_WIDGET (shell));
 }
 
 static void
@@ -770,13 +767,12 @@ set_current_page (GObject      *source_object,
   update_sensitivity (user_data);
 }
 
-static void
-destroy_nonexisting_entries (PpPrinterEntry *entry,
-                             gpointer        user_data)
+static gboolean
+remove_nonexisting_entry (CcPrintersPanel *self,
+                          PpPrinterEntry  *entry)
 {
-  CcPrintersPanel  *self = (CcPrintersPanel *) user_data;
-  gboolean          exists = FALSE;
-  gint              i;
+  gboolean exists = FALSE;
+  gint     i;
 
   for (i = 0; i < self->num_dests; i++)
     {
@@ -788,10 +784,9 @@ destroy_nonexisting_entries (PpPrinterEntry *entry,
     }
 
   if (!exists)
-    {
-      g_hash_table_remove (self->printer_entries, pp_printer_entry_get_name (entry));
-      gtk_widget_destroy (GTK_WIDGET (entry));
-    }
+    g_hash_table_remove (self->printer_entries, pp_printer_entry_get_name (entry));
+
+  return !exists;
 }
 
 static void
@@ -802,6 +797,7 @@ actualize_printers_list_cb (GObject      *source_object,
   CcPrintersPanel        *self = (CcPrintersPanel*) user_data;
   GtkWidget              *widget;
   PpCupsDests            *cups_dests;
+  GtkWidget              *child;
   gboolean                new_printer_available = FALSE;
   g_autoptr(GError)       error = NULL;
   gpointer                item;
@@ -831,7 +827,16 @@ actualize_printers_list_cb (GObject      *source_object,
     gtk_stack_set_visible_child_name (GTK_STACK (widget), "printers-list");
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "content");
-  gtk_container_foreach (GTK_CONTAINER (widget), (GtkCallback) destroy_nonexisting_entries, self);
+  child = gtk_widget_get_first_child (widget);
+  while (child)
+    {
+      GtkWidget *next = gtk_widget_get_next_sibling (child);
+
+      if (remove_nonexisting_entry (self, PP_PRINTER_ENTRY (child)))
+        gtk_list_box_remove (GTK_LIST_BOX (widget), child);
+
+      child = next;
+    }
 
   for (i = 0; i < self->num_dests; i++)
     {
@@ -927,7 +932,7 @@ printer_add_async_cb (GObject      *source_object,
                                                    _("Failed to add new printer."));
           g_signal_connect (message_dialog,
                             "response",
-                            G_CALLBACK (gtk_widget_destroy),
+                            G_CALLBACK (gtk_window_destroy),
                             NULL);
           gtk_widget_show (message_dialog);
         }
@@ -958,22 +963,22 @@ new_printer_dialog_response_cb (GtkDialog *_dialog,
                                 self);
     }
 
-  gtk_widget_destroy (GTK_WIDGET (pp_new_printer_dialog));
+  gtk_window_destroy (GTK_WINDOW (pp_new_printer_dialog));
   self->pp_new_printer_dialog = NULL;
 }
 
 static void
 printer_add_cb (CcPrintersPanel *self)
 {
-  GtkWidget *toplevel;
+  GtkNative *native;
 
-  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+  native = gtk_widget_get_native (GTK_WIDGET (self));
   self->pp_new_printer_dialog = pp_new_printer_dialog_new (self->all_ppds_list,
                                                            new_printer_dialog_response_cb,
                                                            self);
 
   gtk_window_set_transient_for (GTK_WINDOW (self->pp_new_printer_dialog),
-                                            GTK_WINDOW (toplevel));
+                                            GTK_WINDOW (native));
 
   gtk_widget_show (GTK_WIDGET (self->pp_new_printer_dialog));
 }
@@ -1125,11 +1130,13 @@ filter_function (GtkListBoxRow *row,
   g_autofree gchar       *name = NULL;
   g_autofree gchar       *location = NULL;
   GList                  *iter;
+  const gchar            *search_text;
 
   search_entry = (GtkWidget*)
     gtk_builder_get_object (self->builder, "search-entry");
+  search_text = gtk_editable_get_text (GTK_EDITABLE (search_entry));
 
-  if (gtk_entry_get_text_length (GTK_ENTRY (search_entry)) == 0)
+  if (g_utf8_strlen (search_text, -1) == 0)
     {
       retval = TRUE;
     }
@@ -1138,7 +1145,7 @@ filter_function (GtkListBoxRow *row,
       name = cc_util_normalize_casefold_and_unaccent (pp_printer_entry_get_name (entry));
       location = cc_util_normalize_casefold_and_unaccent (pp_printer_entry_get_location (entry));
 
-      search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (search_entry)));
+      search = cc_util_normalize_casefold_and_unaccent (search_text);
 
       retval = strstr (name, search) != NULL;
       if (location != NULL)
@@ -1310,6 +1317,5 @@ Please check your installation");
                       self);
 
   pp_cups_connection_test_async (self->cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
-  gtk_container_add (GTK_CONTAINER (self), top_widget);
-  gtk_widget_show (GTK_WIDGET (self));
+  adw_bin_set_child (ADW_BIN (self), top_widget);
 }

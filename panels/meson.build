@@ -19,7 +19,7 @@ panels = [
   'notifications',
 #  'online-accounts',
   'power',
-#  'printers',
+  'printers',
 #  'region',
   'removable-media',
   'search',
