@@ -26,7 +26,6 @@
 
 #include <langinfo.h>
 #include <sys/time.h>
-#include "list-box-helper.h"
 #include "cc-timezone-map.h"
 #include "timedated.h"
 #include "date-endian.h"
@@ -85,7 +84,7 @@ struct _CcDateTimePanel
   GSettings *datetime_settings;
   GSettings *filechooser_settings;
   GDesktopClockFormat clock_format;
-  GtkWidget *aspectmap;
+  GtkFrame *aspectmap;
   GtkWidget *auto_datetime_row;
   GtkWidget *auto_timezone_row;
   GtkWidget *auto_timezone_switch;
@@ -145,7 +144,7 @@ cc_date_time_panel_dispose (GObject *object)
 
   if (panel->toplevels)
     {
-      g_list_free_full (panel->toplevels, (GDestroyNotify) gtk_widget_destroy);
+      g_list_free_full (panel->toplevels, (GDestroyNotify) gtk_window_destroy);
       panel->toplevels = NULL;
     }
 
@@ -421,7 +420,7 @@ city_changed_cb (CcDateTimePanel    *self,
   cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->map), zone);
 
   entry = gtk_entry_completion_get_entry (completion);
-  gtk_entry_set_text (GTK_ENTRY (entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (entry), "");
 
   return TRUE;
 }
@@ -784,7 +783,7 @@ run_dialog (CcDateTimePanel *self,
   parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
 
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
-  gtk_dialog_run (GTK_DIALOG (dialog));
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static gboolean
@@ -907,9 +906,7 @@ setup_timezone_dialog (CcDateTimePanel *self)
 
   /* set up timezone map */
   self->map = (GtkWidget *) cc_timezone_map_new ();
-  gtk_widget_show (self->map);
-  gtk_container_add (GTK_CONTAINER (self->aspectmap),
-                     self->map);
+  gtk_frame_set_child (self->aspectmap, self->map);
 
   /* Create the completion object */
   completion = gtk_entry_completion_new ();
@@ -924,7 +921,7 @@ static void
 setup_datetime_dialog (CcDateTimePanel *self)
 {
   GtkAdjustment *adjustment;
-  GdkScreen *screen;
+  GdkDisplay *display;
   g_autoptr(GtkCssProvider) provider = NULL;
   g_autofree char *month = NULL;
   guint num_days;
@@ -938,11 +935,11 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                    "}\n"
                                    ".gnome-control-center-datetime-setup-time>spinbutton>entry {\n"
                                    "    padding: 8px 13px;\n"
-                                   "}", -1, NULL);
-  screen = gdk_screen_get_default ();
-  gtk_style_context_add_provider_for_screen (screen,
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+                                   "}", -1);
+  display = gdk_display_get_default ();
+  gtk_style_context_add_provider_for_display (display,
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   /* Month */
   self->month = g_date_time_get_month (self->date);

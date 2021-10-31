@@ -44,16 +44,12 @@ struct _CcTimezoneMap
 {
   GtkWidget parent_instance;
 
-  GdkPixbuf *orig_background;
-  GdkPixbuf *orig_background_dim;
-  GdkPixbuf *orig_color_map;
+  GdkTexture *orig_background;
+  GdkTexture *orig_background_dim;
 
-  GdkPixbuf *background;
-  GdkPixbuf *color_map;
-  GdkPixbuf *pin;
-
-  guchar *visible_map_pixels;
-  gint visible_map_rowstride;
+  GdkTexture *background;
+  GdkTexture *color_map;
+  GdkTexture *pin;
 
   gdouble selected_offset;
 
@@ -73,70 +69,28 @@ enum
 
 static guint signals[LAST_SIGNAL];
 
-
-static CcTimezoneMapOffset color_codes[] =
+static GdkTexture *
+texture_from_resource (const gchar  *resource_path,
+                       GError      **error)
 {
-    {-11.0, 43, 0, 0, 255 },
-    {-10.0, 85, 0, 0, 255 },
-    {-9.5, 102, 255, 0, 255 },
-    {-9.0, 128, 0, 0, 255 },
-    {-8.0, 170, 0, 0, 255 },
-    {-7.0, 212, 0, 0, 255 },
-    {-6.0, 255, 0, 1, 255 }, // north
-    {-6.0, 255, 0, 0, 255 }, // south
-    {-5.0, 255, 42, 42, 255 },
-    {-4.5, 192, 255, 0, 255 },
-    {-4.0, 255, 85, 85, 255 },
-    {-3.5, 0, 255, 0, 255 },
-    {-3.0, 255, 128, 128, 255 },
-    {-2.0, 255, 170, 170, 255 },
-    {-1.0, 255, 213, 213, 255 },
-    {0.0, 43, 17, 0, 255 },
-    {1.0, 85, 34, 0, 255 },
-    {2.0, 128, 51, 0, 255 },
-    {3.0, 170, 68, 0, 255 },
-    {3.5, 0, 255, 102, 255 },
-    {4.0, 212, 85, 0, 255 },
-    {4.5, 0, 204, 255, 255 },
-    {5.0, 255, 102, 0, 255 },
-    {5.5, 0, 102, 255, 255 },
-    {5.75, 0, 238, 207, 247 },
-    {6.0, 255, 127, 42, 255 },
-    {6.5, 204, 0, 254, 254 },
-    {7.0, 255, 153, 85, 255 },
-    {8.0, 255, 179, 128, 255 },
-    {9.0, 255, 204, 170, 255 },
-    {9.5, 170, 0, 68, 250 },
-    {10.0, 255, 230, 213, 255 },
-    {10.5, 212, 124, 21, 250 },
-    {11.0, 212, 170, 0, 255 },
-    {11.5, 249, 25, 87, 253 },
-    {12.0, 255, 204, 0, 255 },
-    {12.75, 254, 74, 100, 248 },
-    {13.0, 255, 85, 153, 250 },
-    {-100, 0, 0, 0, 0 }
-};
+  g_autofree gchar *full_path = g_strdup_printf ("resource://%s", resource_path);
+  g_autoptr(GFile) file = g_file_new_for_uri (full_path);
+  g_autoptr(GdkTexture) texture = gdk_texture_new_from_file (file, error);
 
+  return g_steal_pointer (&texture);
+}
 
 static void
 cc_timezone_map_dispose (GObject *object)
 {
   CcTimezoneMap *self = CC_TIMEZONE_MAP (object);
 
+  g_clear_object (&self->color_map);
   g_clear_object (&self->orig_background);
   g_clear_object (&self->orig_background_dim);
-  g_clear_object (&self->orig_color_map);
   g_clear_object (&self->background);
   g_clear_object (&self->pin);
   g_clear_pointer (&self->bubble_text, g_free);
-
-  if (self->color_map)
-    {
-      g_clear_object (&self->color_map);
-
-      self->visible_map_pixels = NULL;
-      self->visible_map_rowstride = 0;
-    }
 
   G_OBJECT_CLASS (cc_timezone_map_parent_class)->dispose (object);
 }
@@ -153,14 +107,27 @@ cc_timezone_map_finalize (GObject *object)
 
 /* GtkWidget functions */
 static void
-cc_timezone_map_get_preferred_width (GtkWidget *widget,
-                                     gint      *minimum,
-                                     gint      *natural)
+cc_timezone_map_measure (GtkWidget      *widget,
+                         GtkOrientation  orientation,
+                         gint            for_size,
+                         gint           *minimum,
+                         gint           *natural,
+                         gint           *minimum_baseline,
+                         gint           *natural_baseline)
 {
   CcTimezoneMap *map = CC_TIMEZONE_MAP (widget);
   gint size;
 
-  size = gdk_pixbuf_get_width (map->orig_background);
+  switch (orientation)
+    {
+    case GTK_ORIENTATION_HORIZONTAL:
+      size = gdk_texture_get_width (map->orig_background);
+      break;
+
+    case GTK_ORIENTATION_VERTICAL:
+      size = gdk_texture_get_height (map->orig_background);
+      break;
+    }
 
   if (minimum != NULL)
     *minimum = size;
@@ -169,83 +136,27 @@ cc_timezone_map_get_preferred_width (GtkWidget *widget,
 }
 
 static void
-cc_timezone_map_get_preferred_height (GtkWidget *widget,
-                                      gint      *minimum,
-                                      gint      *natural)
+cc_timezone_map_size_allocate (GtkWidget *widget,
+                               gint       width,
+                               gint       height,
+                               gint       baseline)
 {
   CcTimezoneMap *map = CC_TIMEZONE_MAP (widget);
-  gint size;
-
-  size = gdk_pixbuf_get_height (map->orig_background);
-
-  if (minimum != NULL)
-    *minimum = size;
-  if (natural != NULL)
-    *natural = size;
-}
-
-static void
-cc_timezone_map_size_allocate (GtkWidget     *widget,
-                               GtkAllocation *allocation)
-{
-  CcTimezoneMap *map = CC_TIMEZONE_MAP (widget);
-  GdkPixbuf *pixbuf;
-
-  if (map->background)
-    g_object_unref (map->background);
+  GdkTexture *texture;
 
   if (!gtk_widget_is_sensitive (widget))
-    pixbuf = map->orig_background_dim;
+    texture = map->orig_background_dim;
   else
-    pixbuf = map->orig_background;
+    texture = map->orig_background;
 
-  map->background = gdk_pixbuf_scale_simple (pixbuf,
-                                             allocation->width,
-                                             allocation->height,
-                                             GDK_INTERP_BILINEAR);
-
-  if (map->color_map)
-    g_object_unref (map->color_map);
-
-  map->color_map = gdk_pixbuf_scale_simple (map->orig_color_map,
-                                            allocation->width,
-                                            allocation->height,
-                                            GDK_INTERP_BILINEAR);
-
-  map->visible_map_pixels = gdk_pixbuf_get_pixels (map->color_map);
-  map->visible_map_rowstride = gdk_pixbuf_get_rowstride (map->color_map);
+  g_clear_object (&map->background);
+  map->background = g_object_ref (texture);
 
   GTK_WIDGET_CLASS (cc_timezone_map_parent_class)->size_allocate (widget,
-                                                                  allocation);
+                                                                  width,
+                                                                  height,
+                                                                  baseline);
 }
-
-static void
-cc_timezone_map_realize (GtkWidget *widget)
-{
-  GdkWindowAttr attr = { 0, };
-  GtkAllocation allocation;
-  GdkWindow *window;
-
-  gtk_widget_get_allocation (widget, &allocation);
-
-  gtk_widget_set_realized (widget, TRUE);
-
-  attr.window_type = GDK_WINDOW_CHILD;
-  attr.wclass = GDK_INPUT_OUTPUT;
-  attr.width = allocation.width;
-  attr.height = allocation.height;
-  attr.x = allocation.x;
-  attr.y = allocation.y;
-  attr.event_mask = gtk_widget_get_events (widget)
-                                 | GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK;
-
-  window = gdk_window_new (gtk_widget_get_parent_window (widget), &attr,
-                           GDK_WA_X | GDK_WA_Y);
-
-  gdk_window_set_user_data (window, widget);
-  gtk_widget_set_window (widget, window);
-}
-
 
 static gdouble
 convert_longitude_to_x (gdouble longitude, gint map_width)
@@ -284,10 +195,12 @@ convert_latitude_to_y (gdouble latitude, gdouble map_height)
 }
 
 static void
-draw_text_bubble (cairo_t *cr,
-                  GtkWidget *widget,
-                  gdouble pointx,
-                  gdouble pointy)
+draw_text_bubble (CcTimezoneMap *map,
+                  GtkSnapshot   *snapshot,
+                  gint           width,
+                  gint           height,
+                  gdouble        pointx,
+                  gdouble        pointy)
 {
   static const double corner_radius = 9.0;
   static const double margin_top = 12.0;
@@ -295,20 +208,19 @@ draw_text_bubble (cairo_t *cr,
   static const double margin_left = 24.0;
   static const double margin_right = 24.0;
 
-  CcTimezoneMap *map = CC_TIMEZONE_MAP (widget);
-  GtkAllocation alloc;
-  PangoLayout *layout;
+  GskRoundedRect rounded_rect;
   PangoRectangle text_rect;
+  PangoLayout *layout;
+  GdkRGBA rgba;
   double x;
   double y;
-  double width;
-  double height;
+  double bubble_width;
+  double bubble_height;
 
   if (!map->bubble_text)
     return;
 
-  gtk_widget_get_allocation (widget, &alloc);
-  layout = gtk_widget_create_pango_layout (widget, NULL);
+  layout = gtk_widget_create_pango_layout (GTK_WIDGET (map), NULL);
 
   /* Layout the text */
   pango_layout_set_alignment (layout, PANGO_ALIGN_CENTER);
@@ -318,62 +230,78 @@ draw_text_bubble (cairo_t *cr,
   pango_layout_get_pixel_extents (layout, NULL, &text_rect);
 
   /* Calculate the bubble size based on the text layout size */
-  width = text_rect.width + margin_left + margin_right;
-  height = text_rect.height + margin_top + margin_bottom;
+  bubble_width = text_rect.width + margin_left + margin_right;
+  bubble_height = text_rect.height + margin_top + margin_bottom;
 
-  if (pointx < alloc.width / 2)
+  if (pointx < width / 2)
     x = pointx + 25;
   else
-    x = pointx - width - 25;
+    x = pointx - bubble_width - 25;
 
-  y = pointy - height / 2;
+  y = pointy - bubble_height / 2;
 
   /* Make sure it fits in the visible area */
-  x = CLAMP (x, 0, alloc.width - width);
-  y = CLAMP (y, 0, alloc.height - height);
+  x = CLAMP (x, 0, width - bubble_width);
+  y = CLAMP (y, 0, height - bubble_height);
 
-  cairo_save (cr);
-  cairo_translate (cr, x, y);
+  gtk_snapshot_save (snapshot);
 
-  /* Draw the bubble */
-  cairo_new_sub_path (cr);
-  cairo_arc (cr, width - corner_radius, corner_radius, corner_radius, radians (-90), radians (0));
-  cairo_arc (cr, width - corner_radius, height - corner_radius, corner_radius, radians (0), radians (90));
-  cairo_arc (cr, corner_radius, height - corner_radius, corner_radius, radians (90), radians (180));
-  cairo_arc (cr, corner_radius, corner_radius, corner_radius, radians (180), radians (270));
-  cairo_close_path (cr);
+  gsk_rounded_rect_init (&rounded_rect,
+                         &GRAPHENE_RECT_INIT (x, y, bubble_width, bubble_height),
+                         &GRAPHENE_SIZE_INIT (corner_radius, corner_radius),
+                         &GRAPHENE_SIZE_INIT (corner_radius, corner_radius),
+                         &GRAPHENE_SIZE_INIT (corner_radius, corner_radius),
+                         &GRAPHENE_SIZE_INIT (corner_radius, corner_radius));
 
-  cairo_set_source_rgba (cr, 0.2, 0.2, 0.2, 0.7);
-  cairo_fill (cr);
+  gtk_snapshot_push_rounded_clip (snapshot, &rounded_rect);
 
-  /* And finally draw the text */
-  cairo_set_source_rgb (cr, 1, 1, 1);
-  cairo_move_to (cr, margin_left, margin_top);
-  pango_cairo_show_layout (cr, layout);
+  rgba = (GdkRGBA) {
+    .red = 0.2,
+    .green = 0.2,
+    .blue = 0.2,
+    .alpha = 0.7,
+  };
+  gtk_snapshot_append_color (snapshot,
+                             &rgba,
+                             &GRAPHENE_RECT_INIT (x, y, bubble_width, bubble_height));
+
+
+  rgba = (GdkRGBA) {
+    .red = 1.0,
+    .green = 1.0,
+    .blue = 1.0,
+    .alpha = 1.0,
+  };
+  gtk_snapshot_translate (snapshot, &GRAPHENE_POINT_INIT (x + margin_left, y + margin_top));
+  gtk_snapshot_append_layout (snapshot, layout, &rgba);
+
+  gtk_snapshot_pop (snapshot);
+  gtk_snapshot_restore (snapshot);
 
   g_object_unref (layout);
-  cairo_restore (cr);
 }
 
-static gboolean
-cc_timezone_map_draw (GtkWidget *widget,
-                      cairo_t   *cr)
+static void
+cc_timezone_map_snapshot (GtkWidget   *widget,
+                          GtkSnapshot *snapshot)
 {
   CcTimezoneMap *map = CC_TIMEZONE_MAP (widget);
-  g_autoptr(GdkPixbuf) orig_hilight = NULL;
-  GtkAllocation alloc;
+  g_autoptr(GdkTexture) orig_highlight = NULL;
   g_autofree gchar *file = NULL;
   g_autoptr(GError) err = NULL;
   gdouble pointx, pointy;
+  gint width, height;
   char buf[16];
 
-  gtk_widget_get_allocation (widget, &alloc);
+  width = gtk_widget_get_width (widget);
+  height = gtk_widget_get_height (widget);
 
   /* paint background */
-  gdk_cairo_set_source_pixbuf (cr, map->background, 0, 0);
-  cairo_paint (cr);
+  gtk_snapshot_append_texture (snapshot,
+                               map->background,
+                               &GRAPHENE_RECT_INIT (0, 0, width, height));
 
-  /* paint hilight */
+  /* paint highlight */
   if (gtk_widget_is_sensitive (widget))
     {
       file = g_strdup_printf (DATETIME_RESOURCE_PATH "/timezone_%s.png",
@@ -388,64 +316,54 @@ cc_timezone_map_draw (GtkWidget *widget,
 
     }
 
-  orig_hilight = gdk_pixbuf_new_from_resource (file, &err);
+  orig_highlight = texture_from_resource (file, &err);
 
-  if (!orig_hilight)
+  if (!orig_highlight)
     {
-      g_warning ("Could not load hilight: %s",
+      g_warning ("Could not load highlight: %s",
                  (err) ? err->message : "Unknown Error");
     }
   else
     {
-      g_autoptr(GdkPixbuf) hilight = NULL;
-
-      hilight = gdk_pixbuf_scale_simple (orig_hilight, alloc.width,
-                                         alloc.height, GDK_INTERP_BILINEAR);
-      gdk_cairo_set_source_pixbuf (cr, hilight, 0, 0);
-
-      cairo_paint (cr);
+      gtk_snapshot_append_texture (snapshot,
+                                   orig_highlight,
+                                   &GRAPHENE_RECT_INIT (0, 0, width, height));
     }
 
   if (map->location)
     {
-      pointx = convert_longitude_to_x (map->location->longitude, alloc.width);
-      pointy = convert_latitude_to_y (map->location->latitude, alloc.height);
+      pointx = convert_longitude_to_x (map->location->longitude, width);
+      pointy = convert_latitude_to_y (map->location->latitude, height);
 
-      pointx = CLAMP (floor (pointx), 0, alloc.width);
-      pointy = CLAMP (floor (pointy), 0, alloc.height);
+      pointx = CLAMP (floor (pointx), 0, width);
+      pointy = CLAMP (floor (pointy), 0, height);
 
-      draw_text_bubble (cr, widget, pointx, pointy);
+      draw_text_bubble (map, snapshot, width, height, pointx, pointy);
 
       if (map->pin)
         {
-          gdk_cairo_set_source_pixbuf (cr, map->pin,
-                                       pointx - PIN_HOT_POINT_X,
-                                       pointy - PIN_HOT_POINT_Y);
-          cairo_paint (cr);
+          gtk_snapshot_append_texture (snapshot,
+                                       map->pin,
+                                       &GRAPHENE_RECT_INIT (pointx - PIN_HOT_POINT_X,
+                                                            pointy - PIN_HOT_POINT_Y,
+                                                            gdk_texture_get_width (map->pin),
+                                                            gdk_texture_get_height (map->pin)));
         }
     }
-
-  return TRUE;
 }
 
 static void
 update_cursor (GtkWidget *widget)
 {
-  GdkWindow *window;
-  g_autoptr(GdkCursor) cursor = NULL;
+  const gchar *cursor_name = NULL;
 
   if (!gtk_widget_get_realized (widget))
     return;
 
   if (gtk_widget_is_sensitive (widget))
-    {
-      GdkDisplay *display;
-      display = gtk_widget_get_display (widget);
-      cursor = gdk_cursor_new_for_display (display, GDK_HAND2);
-    }
+    cursor_name = "pointer";
 
-  window = gtk_widget_get_window (widget);
-  gdk_window_set_cursor (window, cursor);
+  gtk_widget_set_cursor_from_name (widget, cursor_name);
 }
 
 static void
@@ -468,11 +386,9 @@ cc_timezone_map_class_init (CcTimezoneMapClass *klass)
   object_class->dispose = cc_timezone_map_dispose;
   object_class->finalize = cc_timezone_map_finalize;
 
-  widget_class->get_preferred_width = cc_timezone_map_get_preferred_width;
-  widget_class->get_preferred_height = cc_timezone_map_get_preferred_height;
+  widget_class->measure = cc_timezone_map_measure;
   widget_class->size_allocate = cc_timezone_map_size_allocate;
-  widget_class->realize = cc_timezone_map_realize;
-  widget_class->draw = cc_timezone_map_draw;
+  widget_class->snapshot = cc_timezone_map_snapshot;
   widget_class->state_flags_changed = cc_timezone_map_state_flags_changed;
 
   signals[LOCATION_CHANGED] = g_signal_new ("location-changed",
@@ -512,56 +428,29 @@ set_location (CcTimezoneMap *map,
 
   map->selected_offset = tz_location_get_utc_offset (map->location)
     / (60.0*60.0) + ((info->daylight) ? -1.0 : 0.0);
+  gtk_widget_queue_draw (GTK_WIDGET (map));
 
   g_signal_emit (map, signals[LOCATION_CHANGED], 0, map->location);
 }
 
 static gboolean
-button_press_event (CcTimezoneMap  *map,
-                    GdkEventButton *event)
+map_clicked_cb (GtkGestureClick *self,
+                gint             n_press,
+                gdouble          x,
+                gdouble          y,
+                CcTimezoneMap   *map)
 {
-  gint x, y;
-  guchar r, g, b, a;
-  guchar *pixels;
-  gint rowstride;
-  gint i;
-
   const GPtrArray *array;
   gint width, height;
   GList *distances = NULL;
-  GtkAllocation alloc;
+  gint i;
 
-  x = event->x;
-  y = event->y;
-
-
-  rowstride = map->visible_map_rowstride;
-  pixels = map->visible_map_pixels;
-
-  r = pixels[(rowstride * y + x * 4)];
-  g = pixels[(rowstride * y + x * 4) + 1];
-  b = pixels[(rowstride * y + x * 4) + 2];
-  a = pixels[(rowstride * y + x * 4) + 3];
-
-
-  for (i = 0; color_codes[i].offset != -100; i++)
-    {
-       if (color_codes[i].red == r && color_codes[i].green == g
-           && color_codes[i].blue == b && color_codes[i].alpha == a)
-         {
-           map->selected_offset = color_codes[i].offset;
-         }
-    }
-
-  gtk_widget_queue_draw (GTK_WIDGET (map));
-
-  /* work out the co-ordinates */
+  /* work out the coordinates */
 
   array = tz_get_locations (map->tzdb);
 
-  gtk_widget_get_allocation (GTK_WIDGET (map), &alloc);
-  width = alloc.width;
-  height = alloc.height;
+  width = gtk_widget_get_width (GTK_WIDGET (map));
+  height = gtk_widget_get_height (GTK_WIDGET (map));
 
   for (i = 0; i < array->len; i++)
     {
@@ -591,11 +480,10 @@ button_press_event (CcTimezoneMap  *map,
 static void
 cc_timezone_map_init (CcTimezoneMap *map)
 {
+  GtkGesture *click_gesture;
   GError *err = NULL;
 
-  map->orig_background = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/bg.png",
-                                                       &err);
-
+  map->orig_background = texture_from_resource (DATETIME_RESOURCE_PATH "/bg.png", &err);
   if (!map->orig_background)
     {
       g_warning ("Could not load background image: %s",
@@ -603,9 +491,7 @@ cc_timezone_map_init (CcTimezoneMap *map)
       g_clear_error (&err);
     }
 
-  map->orig_background_dim = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/bg_dim.png",
-                                                           &err);
-
+  map->orig_background_dim = texture_from_resource (DATETIME_RESOURCE_PATH "/bg_dim.png", &err);
   if (!map->orig_background_dim)
     {
       g_warning ("Could not load background image: %s",
@@ -613,17 +499,15 @@ cc_timezone_map_init (CcTimezoneMap *map)
       g_clear_error (&err);
     }
 
-  map->orig_color_map = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/cc.png",
-                                                      &err);
-  if (!map->orig_color_map)
+  map->color_map = texture_from_resource (DATETIME_RESOURCE_PATH "/cc.png", &err);
+  if (!map->color_map)
     {
       g_warning ("Could not load background image: %s",
                  (err) ? err->message : "Unknown error");
       g_clear_error (&err);
     }
 
-  map->pin = gdk_pixbuf_new_from_resource (DATETIME_RESOURCE_PATH "/pin.png",
-                                           &err);
+  map->pin = texture_from_resource (DATETIME_RESOURCE_PATH "/pin.png", &err);
   if (!map->pin)
     {
       g_warning ("Could not load pin icon: %s",
@@ -633,7 +517,9 @@ cc_timezone_map_init (CcTimezoneMap *map)
 
   map->tzdb = tz_load_db ();
 
-  g_signal_connect_object (map, "button-press-event", G_CALLBACK (button_press_event), map, G_CONNECT_SWAPPED);
+  click_gesture = gtk_gesture_click_new ();
+  g_signal_connect (click_gesture, "pressed", G_CALLBACK (map_clicked_cb), map);
+  gtk_widget_add_controller (GTK_WIDGET (map), GTK_EVENT_CONTROLLER (click_gesture));
 }
 
 CcTimezoneMap *
