@@ -24,7 +24,7 @@
 
 struct _CcKeyboardShortcutRow
 {
-  HdyActionRow              parent_instance;
+  AdwActionRow              parent_instance;
 
   GtkLabel                 *accelerator_label;
   GtkButton                *reset_button;
@@ -35,7 +35,7 @@ struct _CcKeyboardShortcutRow
   CcKeyboardShortcutEditor *shortcut_editor;
 };
 
-G_DEFINE_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, HDY_TYPE_ACTION_ROW)
+G_DEFINE_TYPE (CcKeyboardShortcutRow, cc_keyboard_shortcut_row, ADW_TYPE_ACTION_ROW)
 
 static void
 reset_shortcut_cb (CcKeyboardShortcutRow *self)
@@ -103,10 +103,10 @@ transform_binding_to_accel (GBinding     *binding,
 }
 
 CcKeyboardShortcutRow *
-cc_keyboard_shortcut_row_new (CcKeyboardItem *item,
-                              CcKeyboardManager *manager,
+cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
+                              CcKeyboardManager        *manager,
                               CcKeyboardShortcutEditor *shortcut_editor,
-			      GtkSizeGroup *size_group)
+                              GtkSizeGroup             *size_group)
 {
   CcKeyboardShortcutRow *self;
 
@@ -115,25 +115,25 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem *item,
   self->manager = manager;
   self->shortcut_editor = shortcut_editor;
 
-  hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (self), cc_keyboard_item_get_description (item));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), cc_keyboard_item_get_description (item));
 
   g_object_bind_property_full (item,
                                "key-combos",
                                self->accelerator_label,
                                "label",
-			       G_BINDING_SYNC_CREATE,
+                               G_BINDING_SYNC_CREATE,
                                transform_binding_to_accel,
                                NULL, NULL, NULL);
 
   gtk_revealer_set_reveal_child (self->reset_revealer,
-		                !cc_keyboard_item_is_value_default (item));
+                                 !cc_keyboard_item_is_value_default (item));
   g_signal_connect_object (item,
                            "notify::key-combos",
                            G_CALLBACK (shortcut_modified_changed_cb),
                            self, G_CONNECT_SWAPPED);
 
   gtk_size_group_add_widget(size_group,
-		            GTK_WIDGET (self->accelerator_label));
+                            GTK_WIDGET (self->accelerator_label));
 
   return self;
 }

@@ -9,41 +9,32 @@
     <property name="page_increment">200</property>
   </object>
   <template class="CcKeyboardPanel" parent="CcPanel">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="expand">True</property>
+    <property name="hexpand">True</property>
+    <property name="vexpand">True</property>
     <child>
       <object class="GtkScrolledWindow">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hexpand">True</property>
         <property name="vexpand">True</property>
         <property name="hscrollbar_policy">never</property>
         <property name="propagate_natural_width">True</property>
         <property name="propagate_natural_height">True</property>
         <child>
-          <object class="HdyClamp">
-            <property name="visible">True</property>
+          <object class="AdwClamp">
             <property name="margin_top">32</property>
             <property name="margin_bottom">32</property>
             <property name="margin_start">12</property>
             <property name="margin_end">12</property>
             <child>
               <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <property name="hexpand">True</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Input Sources</property>
                         <attributes>
@@ -53,8 +44,6 @@
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Includes keyboard layouts and input methods.</property>
                         <property name="wrap">True</property>
@@ -68,19 +57,16 @@
                 </child>
                 <child>
                   <object class="CcInputListBox" id="input_list">
-                    <property name="visible">True</property>
+                    <property name="vexpand">False</property>
                     <property name="margin-bottom">20</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Input Source Switching</property>
                         <attributes>
@@ -90,8 +76,6 @@
                     </child>
                     <child>
                       <object class="GtkLabel" id="input_switch_description">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="wrap">True</property>
                         <property name="max-width-chars">50</property>
@@ -104,29 +88,21 @@
                 </child>
                 <child>
                   <object class="GtkListBox" id="input_source_list">
-                    <property name="visible">True</property>
                     <property name="margin-bottom">20</property>
                     <style>
                       <class name="content"/>
                     </style>
                     <child>
                       <object class="GtkListBoxRow">
-                        <property name="visible">True</property>
                         <child>
-                          <object class="GtkRadioButton" id="same_source">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="xalign">0</property>
+                          <object class="GtkCheckButton" id="same_source">
                             <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
                             <style>
                               <class name="keyboard-panel-radio-button" />
                             </style>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="margin_left">6</property>
+                                <property name="margin_start">6</property>
                                 <property name="use_underline">True</property>
                                 <property name="label" translatable="yes">Use the _same source for all windows</property>
                               </object>
@@ -137,23 +113,16 @@
                     </child>
                     <child>
                       <object class="GtkListBoxRow">
-                        <property name="visible">True</property>
                         <child>
-                          <object class="GtkRadioButton" id="per_window_source">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">False</property>
-                            <property name="xalign">0</property>
+                          <object class="GtkCheckButton" id="per_window_source">
                             <property name="active">True</property>
-                            <property name="draw_indicator">True</property>
                             <property name="group">same_source</property>
                             <style>
                               <class name="keyboard-panel-radio-button" />
                             </style>
                             <child>
                               <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="margin_left">6</property>
+                                <property name="margin_start">6</property>
                                 <property name="use_underline">True</property>
                                 <property name="label" translatable="yes">Switch input sources _individually for each window</property>
                               </object>
@@ -166,13 +135,10 @@
                 </child>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
                     <property name="orientation">vertical</property>
                     <property name="spacing">6</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Special Character Entry</property>
                         <attributes>
@@ -182,8 +148,6 @@
                     </child>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Methods for entering symbols and letter variants using the keyboard.</property>
                         <property name="wrap">True</property>
@@ -197,8 +161,6 @@
                 </child>
                 <child>
                   <object class="GtkListBox" id="special_chars_list">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
                     <property name="selection-mode">none</property>
                     <property name="width-request">250</property>
                     <property name="margin-bottom">20</property>
@@ -207,21 +169,16 @@
                       <class name="content"/>
                     </style>
                     <child>
-                      <object class="HdyActionRow" id="alt_chars_row">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                      <object class="AdwActionRow" id="alt_chars_row">
                         <property name="title" translatable="yes">Alternate Characters Key</property>
                         <property name="activatable">True</property>
                         <child>
                           <object class="GtkLabel" id="value_alternate_chars">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
                             <property name="label" translatable="no">Right Alt</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkImage">
-                            <property name="visible">True</property>
                             <property name="icon_name">go-next-symbolic</property>
                             <style>
                               <class name="dim-label"/>
@@ -229,22 +186,17 @@
                           </object>
                         </child>
                       </object>
-		    </child>
+                    </child>
                     <child>
-                      <object class="HdyActionRow" id="compose_row">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                      <object class="AdwActionRow" id="compose_row">
                         <property name="title" translatable="yes">Compose Key</property>
                         <property name="activatable">True</property>
                         <child>
                           <object class="GtkLabel" id="value_compose">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkImage">
-                            <property name="visible">True</property>
                             <property name="icon_name">go-next-symbolic</property>
                             <style>
                               <class name="dim-label"/>
@@ -257,8 +209,6 @@
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Keyboard Shortcuts</property>
                     <attributes>
@@ -268,8 +218,6 @@
                 </child>
                 <child>
                   <object class="GtkListBox" id="keyboard_shortcuts_listbox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
                     <property name="selection-mode">none</property>
                     <property name="width-request">250</property>
                     <signal name="row-activated" handler="keyboard_shortcuts_activated" object="CcKeyboardPanel" swapped="no" />
@@ -277,14 +225,11 @@
                       <class name="content"/>
                     </style>
                     <child>
-                      <object class="HdyActionRow" id="common_shortcuts_row">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
+                      <object class="AdwActionRow" id="common_shortcuts_row">
                         <property name="title" translatable="yes">View and Customize Shortcuts</property>
                         <property name="activatable">True</property>
                         <child>
                           <object class="GtkImage">
-                            <property name="visible">True</property>
                             <property name="icon_name">go-next-symbolic</property>
                             <style>
                              <class name="dim-label"/>

@@ -33,7 +33,6 @@
 #include "cc-xkb-modifier-dialog.h"
 
 #include "keyboard-shortcuts.h"
-#include "list-box-helper.h"
 
 struct _CcKeyboardPanel
 {
@@ -41,8 +40,8 @@ struct _CcKeyboardPanel
 
   GtkListBox          *input_source_list;
 
-  GtkRadioButton      *per_window_source;
-  GtkRadioButton      *same_source;
+  GtkCheckButton      *per_window_source;
+  GtkCheckButton      *same_source;
   GSettings           *keybindings_settings;
 
   GSettings           *input_source_settings;
@@ -250,11 +249,11 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, custom_css, -1, NULL);
+  gtk_css_provider_load_from_data (provider, custom_css, -1);
 
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
   g_object_unref (provider);
 
   self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");

@@ -9,8 +9,6 @@
     <child type="action">
       <object class="GtkButton" id="cancel_button">
         <property name="label" translatable="yes">_Cancel</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="use_underline">True</property>
         <property name="valign">center</property>
       </object>
@@ -18,26 +16,20 @@
     <child type="action">
       <object class="GtkButton" id="add_button">
         <property name="label" translatable="yes">_Add</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="can_default">True</property>
         <property name="sensitive">False</property>
         <property name="use_underline">True</property>
         <property name="valign">center</property>
       </object>
     </child>
-    <child internal-child="vbox">
+    <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">0</property>
         <child>
           <object class="GtkScrolledWindow">
-            <property name="visible">True</property>
             <property name="hscrollbar-policy">never</property>
             <property name="vscrollbar-policy">automatic</property>
             <property name="propagate-natural-height">True</property>
-            <property name="shadow-type">in</property>
             <property name="margin-start">6</property>
             <property name="margin-end">6</property>
             <property name="margin-top">6</property>
@@ -46,14 +38,14 @@
             <property name="vadjustment">scroll_adjustment</property>
             <child>
               <object class="GtkListBox" id="input_sources_listbox">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
                 <property name="vexpand">True</property>
                 <property name="halign">fill</property>
                 <property name="valign">fill</property>
                 <signal name="row-activated" handler="on_input_sources_listbox_row_activated_cb" object="CcInputChooser" swapped="yes" />
                 <signal name="selected-rows-changed" handler="on_input_sources_listbox_selected_rows_changed_cb" object="CcInputChooser" swapped="yes" />
-                <signal name="button-release-event" handler="on_input_sources_listbox_button_release_event_cb" object="CcInputChooser" swapped="yes" />
+                <style>
+                  <class name="content" />
+                </style>
               </object>
             </child>
           </object>
@@ -67,7 +59,6 @@
             <property name="margin-top">6</property>
             <property name="margin-bottom">6</property>
             <signal name="search-changed" handler="on_filter_entry_search_changed_cb" object="CcInputChooser" swapped="yes" />
-            <signal name="key-release-event" handler="on_filter_entry_key_release_event_cb" object="CcInputChooser" swapped="yes" />
           </object>
         </child>
         <child>

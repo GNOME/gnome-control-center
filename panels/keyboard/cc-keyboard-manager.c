@@ -24,10 +24,9 @@
 
 #include "cc-keyboard-manager.h"
 #include "keyboard-shortcuts.h"
-#include "wm-common.h"
 
 #ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 #endif
 
 #define BINDINGS_SCHEMA       "org.gnome.settings-daemon.plugins.media-keys"
@@ -44,8 +43,6 @@ struct _CcKeyboardManager
   GHashTable         *kb_user_sections;
 
   GSettings          *binding_settings;
-
-  gpointer            wm_changed_id;
 };
 
 G_DEFINE_TYPE (CcKeyboardManager, cc_keyboard_manager, G_TYPE_OBJECT)
@@ -61,7 +58,7 @@ enum
 static guint signals[LAST_SIGNAL] = { 0, };
 
 /*
- * Auxiliary methos
+ * Auxiliary methods
  */
 static void
 free_key_array (GPtrArray *keys)
@@ -529,12 +526,7 @@ reload_sections (CcKeyboardManager *self)
                                                   (GDestroyNotify) free_key_array);
 
   /* Load WM keybindings */
-#ifdef GDK_WINDOWING_X11
-  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
-    wm_keybindings = wm_common_get_current_keybindings ();
-  else
-#endif
-    wm_keybindings = g_strdupv (default_wm_keybindings);
+  wm_keybindings = g_strdupv (default_wm_keybindings);
 
   loaded_files = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
@@ -581,13 +573,6 @@ reload_sections (CcKeyboardManager *self)
  * Callbacks
  */
 static void
-on_window_manager_change (const char        *wm_name,
-                          CcKeyboardManager *self)
-{
-  reload_sections (self);
-}
-
-static void
 cc_keyboard_manager_finalize (GObject *object)
 {
   CcKeyboardManager *self = (CcKeyboardManager *)object;
@@ -596,8 +581,6 @@ cc_keyboard_manager_finalize (GObject *object)
   g_clear_pointer (&self->kb_apps_sections, g_hash_table_destroy);
   g_clear_pointer (&self->kb_user_sections, g_hash_table_destroy);
   g_clear_object (&self->binding_settings);
-
-  g_clear_pointer (&self->wm_changed_id, wm_common_unregister_window_manager_change);
 
   G_OBJECT_CLASS (cc_keyboard_manager_parent_class)->finalize (object);
 }
@@ -683,12 +666,6 @@ cc_keyboard_manager_init (CcKeyboardManager *self)
                                              G_TYPE_STRING,
                                              G_TYPE_STRING,
                                              G_TYPE_INT);
-
-#ifdef GDK_WINDOWING_X11
-  if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
-    self->wm_changed_id = wm_common_register_window_manager_change ((GFunc) on_window_manager_change,
-                                                                    self);
-#endif
 }
 
 

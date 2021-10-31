@@ -2,58 +2,42 @@
 <interface>
   <requires lib="gtk+" version="3.20"/>
   <template class="CcInputRow" parent="GtkListBoxRow">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
     <property name="selectable">False</property>
-    <signal name="drag_data_received" handler="drag_data_received_cb" object="CcInputRow" swapped="yes"/>
     <child>
-      <object class="GtkEventBox" id="drag_handle">
-        <property name="visible">True</property>
-        <signal name="drag_data_get" handler="drag_data_get_cb" object="CcInputRow" swapped="yes"/>
-        <signal name="drag_begin" handler="drag_begin_cb" object="CcInputRow" swapped="yes"/>
-        <signal name="drag_end" handler="drag_end_cb" object="CcInputRow" swapped="yes"/>
+      <object class="GtkBox">
+        <property name="height_request">50</property>
+        <property name="margin_start">12</property>
+        <property name="margin_end">6</property>
+        <property name="spacing">12</property>
         <child>
-          <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="height_request">50</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">6</property>
-            <property name="spacing">12</property>
+          <object class="GtkImage">
+            <property name="icon_name">list-drag-handle-symbolic</property>
+              <style>
+                <class name="drag-handle"/>
+              </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="name_label">
+            <property name="margin_bottom">8</property>
+            <property name="margin_top">8</property>
+            <property name="ellipsize">end</property>
+            <property name="xalign">0.0</property>
+            <property name="hexpand">True</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuButton">
+            <property name="margin_bottom">8</property>
+            <property name="margin_top">8</property>
+            <property name="valign">center</property>
+            <property name="popover">popover_menu</property>
+            <style>
+              <class name="flat"/>
+            </style>
             <child>
               <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="icon_name">list-drag-handle-symbolic</property>
-                  <style>
-                    <class name="drag-handle"/>
-                  </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="name_label">
-                <property name="visible">True</property>
-                <property name="margin_bottom">8</property>
-                <property name="margin_top">8</property>
-                <property name="ellipsize">end</property>
-                <property name="xalign">0.0</property>
-                <property name="hexpand">True</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuButton">
-                <property name="visible">True</property>
-                <property name="margin_bottom">8</property>
-                <property name="margin_top">8</property>
-                <property name="valign">center</property>
-                <property name="popover">popover_menu</property>
-                <style>
-                  <class name="flat"/>
-                </style>
-                <child>
-                  <object class="GtkImage">
-                    <property name="visible">True</property>
-                    <property name="icon_name">view-more-symbolic</property>
-                  </object>
-                </child>
+                <property name="icon_name">view-more-symbolic</property>
               </object>
             </child>
           </object>
@@ -61,47 +45,60 @@
       </object>
     </child>
   </template>
-  <object class="GtkPopoverMenu" id="popover_menu">
+  <object class="GtkPopover" id="popover_menu">
+    <style>
+      <class name="menu" />
+    </style>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="margin">6</property>
+        <property name="margin-top">6</property>
+        <property name="margin-bottom">6</property>
+        <property name="margin-start">6</property>
+        <property name="margin-end">6</property>
         <property name="orientation">vertical</property>
         <child>
           <object class="GtkButton">
-            <property name="visible">True</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">Move up</property>
             <signal name="clicked" handler="move_up_button_clicked_cb" object="CcInputRow" swapped="yes"/>
             <style>
               <class name="flat"/>
             </style>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Move up</property>
+                <property name="xalign">0.0</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
           <object class="GtkButton">
-            <property name="visible">True</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">Move down</property>
             <signal name="clicked" handler="move_down_button_clicked_cb" object="CcInputRow" swapped="yes"/>
             <style>
               <class name="flat"/>
             </style>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Move down</property>
+                <property name="xalign">0.0</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
           <object class="GtkSeparator">
-            <property name="visible">True</property>
             <property name="orientation">horizontal</property>
           </object>
         </child>
         <child>
           <object class="GtkButton" id="settings_button">
             <property name="visible">False</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">Preferences</property>
             <signal name="clicked" handler="settings_button_clicked_cb" object="CcInputRow" swapped="yes"/>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Preferences</property>
+                <property name="xalign">0.0</property>
+              </object>
+            </child>
             <style>
               <class name="flat"/>
             </style>
@@ -109,36 +106,40 @@
         </child>
         <child>
           <object class="GtkSeparator" id="settings_separator">
-            <property name="visible">True</property>
             <property name="orientation">horizontal</property>
           </object>
         </child>
         <child>
           <object class="GtkButton">
-            <property name="visible">True</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">View Keyboard Layout</property>
             <signal name="clicked" handler="layout_button_clicked_cb" object="CcInputRow" swapped="yes"/>
             <style>
               <class name="flat"/>
             </style>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">View Keyboard Layout</property>
+                <property name="xalign">0.0</property>
+              </object>
+            </child>
           </object>
         </child>
         <child>
           <object class="GtkSeparator">
-            <property name="visible">True</property>
             <property name="orientation">horizontal</property>
           </object>
         </child>
         <child>
           <object class="GtkButton" id="remove_button">
-            <property name="visible">True</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">Remove</property>
             <signal name="clicked" handler="remove_button_clicked_cb" object="CcInputRow" swapped="yes"/>
             <style>
               <class name="flat"/>
             </style>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Remove</property>
+                <property name="xalign">0.0</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

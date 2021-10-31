@@ -22,7 +22,6 @@
 #define GNOME_DESKTOP_USE_UNSTABLE_API
 #include <libgnome-desktop/gnome-languages.h>
 
-#include "list-box-helper.h"
 #include "cc-common-language.h"
 #include "cc-util.h"
 #include "cc-input-chooser.h"
@@ -139,26 +138,23 @@ padded_label_new (const gchar        *text,
 
   if (direction == ROW_TRAVEL_DIRECTION_BACKWARD)
     {
-      arrow = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
-      gtk_widget_show (arrow);
-      gtk_container_add (GTK_CONTAINER (widget), arrow);
+      arrow = gtk_image_new_from_icon_name ("go-previous-symbolic");
+      gtk_box_append (GTK_BOX (widget), arrow);
     }
 
   label = gtk_label_new (text);
-  gtk_widget_show (label);
   gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_MIDDLE);
   gtk_widget_set_hexpand (label, TRUE);
   gtk_widget_set_halign (label, alignment);
   set_row_widget_margins (label);
-  gtk_container_add (GTK_CONTAINER (widget), label);
+  gtk_box_append (GTK_BOX (widget), label);
   if (dim_label)
     gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
 
   if (direction == ROW_TRAVEL_DIRECTION_FORWARD)
     {
-      arrow = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
-      gtk_widget_show (arrow);
-      gtk_container_add (GTK_CONTAINER (widget), arrow);
+      arrow = gtk_image_new_from_icon_name ("go-next-symbolic");
+      gtk_box_append (GTK_BOX (widget), arrow);
     }
 
   return widget;
@@ -173,16 +169,14 @@ more_row_new (void)
 
   row = gtk_list_box_row_new ();
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_widget_show (box);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
   gtk_widget_set_tooltip_text (row, _("More…"));
 
-  arrow = gtk_image_new_from_icon_name ("view-more-symbolic", GTK_ICON_SIZE_MENU);
-  gtk_widget_show (arrow);
-  gtk_style_context_add_class (gtk_widget_get_style_context (arrow), "dim-label");
+  arrow = gtk_image_new_from_icon_name ("view-more-symbolic");
+  gtk_widget_add_css_class (arrow, "dim-label");
   gtk_widget_set_hexpand (arrow, TRUE);
   set_row_widget_margins (arrow);
-  gtk_container_add (GTK_CONTAINER (box), arrow);
+  gtk_box_append (GTK_BOX (box), arrow);
 
   return GTK_LIST_BOX_ROW (row);
 }
@@ -201,8 +195,7 @@ back_row_new (const gchar *text)
 
   row = gtk_list_box_row_new ();
   widget = padded_label_new (text, ROW_LABEL_POSITION_CENTER, ROW_TRAVEL_DIRECTION_BACKWARD, TRUE);
-  gtk_widget_show (widget);
-  gtk_container_add (GTK_CONTAINER (row), widget);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), widget);
 
   return GTK_LIST_BOX_ROW (row);
 }
@@ -215,8 +208,7 @@ locale_row_new (const gchar *text)
 
   row = gtk_list_box_row_new ();
   widget = padded_label_new (text, ROW_LABEL_POSITION_CENTER, ROW_TRAVEL_DIRECTION_NONE, FALSE);
-  gtk_widget_show (widget);
-  gtk_container_add (GTK_CONTAINER (row), widget);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), widget);
 
   return GTK_LIST_BOX_ROW (row);
 }
@@ -240,8 +232,7 @@ input_source_row_new (CcInputChooser *self,
                                  ROW_LABEL_POSITION_START,
                                  ROW_TRAVEL_DIRECTION_NONE,
                                  FALSE);
-      gtk_widget_show (widget);
-      gtk_container_add (GTK_CONTAINER (row), widget);
+      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), widget);
       g_object_set_data (G_OBJECT (row), "name", (gpointer) display_name);
       g_object_set_data_full (G_OBJECT (row), "unaccented-name",
                               cc_util_normalize_casefold_and_unaccent (display_name), g_free);
@@ -259,13 +250,12 @@ input_source_row_new (CcInputChooser *self,
                                  ROW_LABEL_POSITION_START,
                                  ROW_TRAVEL_DIRECTION_NONE,
                                  FALSE);
-      gtk_widget_show (widget);
-      gtk_container_add (GTK_CONTAINER (row), widget);
-      image = gtk_image_new_from_icon_name ("system-run-symbolic", GTK_ICON_SIZE_MENU);
-      gtk_widget_show (image);
+      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), widget);
+
+      image = gtk_image_new_from_icon_name ("system-run-symbolic");
       set_row_widget_margins (image);
       gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
-      gtk_container_add (GTK_CONTAINER (widget), image);
+      gtk_box_append (GTK_BOX (widget), image);
 
       g_object_set_data_full (G_OBJECT (row), "name", display_name, g_free);
       g_object_set_data_full (G_OBJECT (row), "unaccented-name",
@@ -287,14 +277,12 @@ input_source_row_new (CcInputChooser *self,
 }
 
 static void
-remove_all_children (GtkContainer *container)
+remove_all_rows (GtkListBox *listbox)
 {
-  g_autoptr(GList) list = NULL;
-  GList *l;
+  GtkWidget *child;
 
-  list = gtk_container_get_children (container);
-  for (l = list; l; l = l->next)
-    gtk_container_remove (container, (GtkWidget *) l->data);
+  while ((child = gtk_widget_get_first_child (GTK_WIDGET (listbox))) != NULL)
+    gtk_list_box_remove (listbox, child);
 }
 
 static void
@@ -306,22 +294,22 @@ add_input_source_rows_for_locale (CcInputChooser *self,
   const gchar *id;
 
   if (info->default_input_source_row)
-    gtk_container_add (GTK_CONTAINER (self->input_sources_listbox), GTK_WIDGET (info->default_input_source_row));
+    gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->default_input_source_row));
 
   g_hash_table_iter_init (&iter, info->layout_rows_by_id);
   while (g_hash_table_iter_next (&iter, (gpointer *) &id, (gpointer *) &row))
-    gtk_container_add (GTK_CONTAINER (self->input_sources_listbox), row);
+    gtk_list_box_append (self->input_sources_listbox, row);
 
   g_hash_table_iter_init (&iter, info->engine_rows_by_id);
   while (g_hash_table_iter_next (&iter, (gpointer *) &id, (gpointer *) &row))
-    gtk_container_add (GTK_CONTAINER (self->input_sources_listbox), row);
+    gtk_list_box_append (self->input_sources_listbox, row);
 }
 
 static void
 show_input_sources_for_locale (CcInputChooser *self,
                                LocaleInfo     *info)
 {
-  remove_all_children (GTK_CONTAINER (self->input_sources_listbox));
+  remove_all_rows (self->input_sources_listbox);
 
   if (!info->back_row)
     {
@@ -330,13 +318,12 @@ show_input_sources_for_locale (CcInputChooser *self,
       g_object_set_data (G_OBJECT (info->back_row), "back", GINT_TO_POINTER (TRUE));
       g_object_set_data (G_OBJECT (info->back_row), "locale-info", info);
     }
-  gtk_container_add (GTK_CONTAINER (self->input_sources_listbox), GTK_WIDGET (info->back_row));
+  gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->back_row));
 
   add_input_source_rows_for_locale (self, info);
 
   gtk_adjustment_set_value (self->scroll_adjustment,
                             gtk_adjustment_get_lower (self->scroll_adjustment));
-  gtk_list_box_set_header_func (self->input_sources_listbox, cc_list_box_update_header_func, NULL, NULL);
   gtk_list_box_invalidate_filter (self->input_sources_listbox);
   gtk_list_box_set_selection_mode (self->input_sources_listbox, GTK_SELECTION_SINGLE);
   gtk_list_box_set_activate_on_single_click (self->input_sources_listbox, FALSE);
@@ -360,7 +347,7 @@ show_locale_rows (CcInputChooser *self)
   LocaleInfo *info;
   GHashTableIter iter;
 
-  remove_all_children (GTK_CONTAINER (self->input_sources_listbox));
+  remove_all_rows (self->input_sources_listbox);
 
   if (!self->showing_extra)
     initial = cc_common_language_get_initial_languages ();
@@ -384,14 +371,13 @@ show_locale_rows (CcInputChooser *self)
               !is_current_locale (info->id))
             g_object_set_data (G_OBJECT (info->locale_row), "is-extra", GINT_TO_POINTER (TRUE));
         }
-      gtk_container_add (GTK_CONTAINER (self->input_sources_listbox), GTK_WIDGET (info->locale_row));
+      gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->locale_row));
     }
 
-  gtk_container_add (GTK_CONTAINER (self->input_sources_listbox), GTK_WIDGET (self->more_row));
+  gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (self->more_row));
 
   gtk_adjustment_set_value (self->scroll_adjustment,
                             gtk_adjustment_get_lower (self->scroll_adjustment));
-  gtk_list_box_set_header_func (self->input_sources_listbox, cc_list_box_update_header_func, NULL, NULL);
   gtk_list_box_invalidate_filter (self->input_sources_listbox);
   gtk_list_box_set_selection_mode (self->input_sources_listbox, GTK_SELECTION_NONE);
   gtk_list_box_set_activate_on_single_click (self->input_sources_listbox, TRUE);
@@ -573,7 +559,7 @@ do_filter (CcInputChooser *self)
   self->filter_timeout_id = 0;
 
   filter_contents =
-    cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (self->filter_entry)));
+    cc_util_normalize_casefold_and_unaccent (gtk_editable_get_text (GTK_EDITABLE (self->filter_entry)));
 
   previous_words = self->filter_words;
   self->filter_words = g_strsplit_set (g_strstrip (filter_contents), " ", 0);
@@ -660,23 +646,6 @@ on_input_sources_listbox_selected_rows_changed_cb (CcInputChooser *self)
     sensitive = FALSE;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), sensitive);
-}
-
-static gboolean
-on_input_sources_listbox_button_release_event_cb (CcInputChooser *self, GdkEvent *event)
-{
-  gdouble x, y;
-  GtkListBoxRow *row;
-
-  gdk_event_get_coords (event, &x, &y);
-  row = gtk_list_box_get_row_at_y (self->input_sources_listbox, y);
-  if (row && g_object_get_data (G_OBJECT (row), "back"))
-    {
-      g_signal_emit_by_name (row, "activate", NULL);
-      return TRUE;
-    }
-
-  return FALSE;
 }
 
 static void
@@ -977,6 +946,7 @@ get_locale_infos (CcInputChooser *self)
       add_row_other (self, INPUT_SOURCE_TYPE_XKB, l->data);
 }
 
+/*
 static gboolean
 on_filter_entry_key_release_event_cb (CcInputChooser *self, GdkEventKey *event)
 {
@@ -990,6 +960,7 @@ on_filter_entry_key_release_event_cb (CcInputChooser *self, GdkEventKey *event)
 
   return FALSE;
 }
+ */
 
 static void
 cc_input_chooser_dispose (GObject *object)
@@ -1026,15 +997,16 @@ cc_input_chooser_class_init (CcInputChooserClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_selected_rows_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_input_sources_listbox_button_release_event_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_filter_entry_search_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_filter_entry_key_release_event_cb);
+  //gtk_widget_class_bind_template_callback (widget_class, on_filter_entry_key_release_event_cb);
 }
 
 void
 cc_input_chooser_init (CcInputChooser *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_search_entry_set_key_capture_widget (self->filter_entry, GTK_WIDGET (self));
 }
 
 CcInputChooser *
@@ -1043,7 +1015,6 @@ cc_input_chooser_new (gboolean      is_login,
                       GHashTable   *ibus_engines)
 {
   CcInputChooser *self;
-  g_autoptr(GError) error = NULL;
 
   self = g_object_new (CC_TYPE_INPUT_CHOOSER,
                        "use-header-bar", 1,

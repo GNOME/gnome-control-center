@@ -131,7 +131,11 @@ binding_from_string (const char *str,
       return TRUE;
     }
 
-  gtk_accelerator_parse_with_keycode (str, &combo->keyval, &keycodes, &combo->mask);
+  gtk_accelerator_parse_with_keycode (str,
+                                      gdk_display_get_default (),
+                                      &combo->keyval,
+                                      &keycodes,
+                                      &combo->mask);
 
   combo->keycode = (keycodes ? keycodes[0] : 0);
 
@@ -358,7 +362,6 @@ cc_keyboard_item_new (CcKeyboardItemType type)
 static guint *
 get_above_tab_keysyms (void)
 {
-  GdkKeymap *keymap = gdk_keymap_get_for_display (gdk_display_get_default ());
   guint keycode = 0x29 /* KEY_GRAVE */ + 8;
   g_autofree guint *keyvals = NULL;
   GArray *keysyms;
@@ -366,7 +369,11 @@ get_above_tab_keysyms (void)
 
   keysyms = g_array_new (TRUE, FALSE, sizeof (guint));
 
-  if (!gdk_keymap_get_entries_for_keycode (keymap, keycode, NULL, &keyvals, &n_entries))
+  if (!gdk_display_map_keycode (gdk_display_get_default (),
+                                keycode,
+                                NULL,
+                                &keyvals,
+                                &n_entries))
     goto out;
 
   for (i = 0; i < n_entries; i++)

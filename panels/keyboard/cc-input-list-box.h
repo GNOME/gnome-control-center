@@ -26,10 +26,10 @@
 
 G_BEGIN_DECLS
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 #define CC_TYPE_INPUT_LIST_BOX (cc_input_list_box_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputListBox, cc_input_list_box, CC, INPUT_LIST_BOX, GtkListBox)
+G_DECLARE_FINAL_TYPE (CcInputListBox, cc_input_list_box, CC, INPUT_LIST_BOX, AdwBin)
 
 void cc_input_list_box_set_login            (CcInputListBox *box,
                                              gboolean        login);

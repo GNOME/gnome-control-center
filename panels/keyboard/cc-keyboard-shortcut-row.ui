@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcKeyboardShortcutRow" parent="HdyActionRow">
-    <property name="visible">True</property>
+  <template class="CcKeyboardShortcutRow" parent="AdwActionRow">
     <property name="selectable">False</property>
     <property name="activatable">True</property>
     <child>
       <object class="GtkLabel" id="accelerator_label">
-        <property name="visible">True</property>
         <property name="xalign">1.0</property>
         <property name="use-markup">True</property>
         <style>
@@ -17,27 +15,18 @@
     </child>
     <child>
       <object class="GtkRevealer" id = "reset_revealer">
-        <property name="visible">True</property>
         <property name="transition-type">slide-right</property>
         <child>
           <object class="GtkButton" id="reset_button">
-            <property name="visible">True</property>
             <property name="valign">center</property>
-            <property name="relief">none</property>
+            <property name="icon-name">edit-clear-symbolic</property>
             <property name="tooltip-text" translatable="yes">Reset the shortcut to its default value</property>
             <signal name="clicked" handler="reset_shortcut_cb" swapped="true"/>
-            <child>
-              <object class="GtkImage">
-                <property name="visible">True</property>
-                <property name="icon-name">edit-clear-symbolic</property>
-                <property name="icon-size">1</property>
-                <style>
-                  <class name="flat" />
-                  <class name="circular" />
-                  <class name="reset-shortcut-button" />
-                </style>
-              </object>
-            </child>
+            <style>
+              <class name="flat" />
+              <class name="circular" />
+              <class name="reset-shortcut-button" />
+            </style>
           </object>
         </child>
       </object>

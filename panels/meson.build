@@ -10,7 +10,7 @@ panels = [
   'diagnostics',
 #  'display',
   'info-overview',
-#  'keyboard',
+  'keyboard',
   'location',
   'lock',
   'microphone',

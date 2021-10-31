@@ -41,7 +41,7 @@ extern GType cc_bluetooth_panel_get_type (void);
 extern GType cc_default_apps_panel_get_type (void);
 //extern GType cc_display_panel_get_type (void);
 extern GType cc_info_overview_panel_get_type (void);
-//extern GType cc_keyboard_panel_get_type (void);
+extern GType cc_keyboard_panel_get_type (void);
 extern GType cc_mouse_panel_get_type (void);
 extern GType cc_multitasking_panel_get_type (void);
 #ifdef BUILD_NETWORK
@@ -109,7 +109,7 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("diagnostics",      cc_diagnostics_panel_get_type,          cc_diagnostics_panel_static_init_func),
   //PANEL_TYPE("display",          cc_display_panel_get_type,              NULL),
   PANEL_TYPE("info-overview",    cc_info_overview_panel_get_type,        NULL),
-  //PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
+  PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
   PANEL_TYPE("location",         cc_location_panel_get_type,             NULL),
   PANEL_TYPE("lock",             cc_lock_panel_get_type,                 NULL),
   PANEL_TYPE("microphone",       cc_microphone_panel_get_type,           NULL),

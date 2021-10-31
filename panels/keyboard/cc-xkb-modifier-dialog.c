@@ -19,11 +19,9 @@
  */
 
 #include <glib/gi18n.h>
-#define HANDY_USE_UNSTABLE_API
-#include <handy.h>
+#include <adwaita.h>
 
 #include "cc-xkb-modifier-dialog.h"
-#include "list-box-helper.h"
 
 struct _CcXkbModifierDialog
 {
@@ -33,7 +31,7 @@ struct _CcXkbModifierDialog
   GtkSwitch      *enabled_switch;
   GtkListBox     *listbox;
   GtkListBox     *switch_listbox;
-  HdyActionRow   *switch_row;
+  AdwActionRow   *switch_row;
 
   GSettings      *input_source_settings;
   const CcXkbModifier *modifier;
@@ -44,7 +42,7 @@ G_DEFINE_TYPE (CcXkbModifierDialog, cc_xkb_modifier_dialog, GTK_TYPE_DIALOG)
 
 static const gchar *custom_css =
 ".xkb-option-button {"
-"    padding: 12px"
+"    padding: 12px;"
 "}";
 
 static const CcXkbOption*
@@ -62,7 +60,7 @@ get_xkb_option_from_name (const CcXkbModifier *modifier, const gchar* name)
   return NULL;
 }
 
-static GtkRadioButton *
+static GtkCheckButton *
 get_radio_button_from_xkb_option_name (CcXkbModifierDialog *self,
                                        const gchar         *name)
 {
@@ -83,7 +81,7 @@ static void
 update_active_radio (CcXkbModifierDialog *self)
 {
   g_auto(GStrv) options = NULL;
-  GtkRadioButton *rightalt_radio;
+  GtkCheckButton *rightalt_radio;
   const CcXkbOption *default_option;
   guint i;
 
@@ -91,7 +89,7 @@ update_active_radio (CcXkbModifierDialog *self)
 
   for (i = 0; options != NULL && options[i] != NULL; i++)
     {
-      GtkRadioButton *radio;
+      GtkCheckButton *radio;
 
       if (!g_str_has_prefix (options[i], self->modifier->prefix))
         continue;
@@ -101,7 +99,7 @@ update_active_radio (CcXkbModifierDialog *self)
       if (!radio)
         continue;
 
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
+      gtk_check_button_set_active (GTK_CHECK_BUTTON (radio), TRUE);
       gtk_switch_set_active (self->enabled_switch, TRUE);
       return;
     }
@@ -110,7 +108,7 @@ update_active_radio (CcXkbModifierDialog *self)
     {
       default_option = get_xkb_option_from_name(self->modifier, self->modifier->default_option);
       rightalt_radio = get_radio_button_from_xkb_option_name (self, default_option->xkb_option);
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (rightalt_radio), TRUE);
+      gtk_check_button_set_active (GTK_CHECK_BUTTON (rightalt_radio), TRUE);
       gtk_switch_set_active (self->enabled_switch, TRUE);
     }
   else
@@ -161,11 +159,11 @@ set_xkb_option (CcXkbModifierDialog *self,
 
 static void
 on_active_radio_changed_cb (CcXkbModifierDialog *self,
-                            GtkRadioButton      *radio)
+                            GtkCheckButton      *radio)
 {
   gchar *xkb_option;
 
-  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio)))
+  if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (radio)))
     return;
 
   if (!gtk_switch_get_state (self->enabled_switch))
@@ -197,7 +195,7 @@ enable_switch_changed_cb (GtkSwitch *widget,
     {
       for (l = self->radio_group; l != NULL; l = l->next)
         {
-          if (gtk_toggle_button_get_active (l->data))
+          if (gtk_check_button_get_active (l->data))
             {
               xkb_option = (gchar *)g_object_get_data (l->data, "xkb-option");
               set_xkb_option (self, xkb_option);
@@ -245,7 +243,8 @@ cc_xkb_modifier_dialog_class_init (CcXkbModifierDialogClass *klass)
 static void
 add_radio_buttons (CcXkbModifierDialog *self)
 {
-  GtkWidget *row, *radio_button, *label, *last_button = NULL;
+  g_autoptr (GSList) group = NULL;
+  GtkWidget *row, *radio_button, *last_button = NULL;
   CcXkbOption *options = self->modifier->options;
   int i;
 
@@ -255,32 +254,24 @@ add_radio_buttons (CcXkbModifierDialog *self)
                           "visible", TRUE,
                           "selectable", FALSE,
                           NULL);
-      gtk_container_add (GTK_CONTAINER (self->listbox), row);
+      gtk_list_box_append (self->listbox, row);
 
-      radio_button = g_object_new (GTK_TYPE_RADIO_BUTTON,
-                                   "visible", TRUE,
-                                   "can_focus", TRUE,
-                                   "receives_default", FALSE,
-                                   "draw_indicator", TRUE,
+      radio_button = g_object_new (GTK_TYPE_CHECK_BUTTON,
+                                   "label", g_dpgettext2 (NULL, "keyboard key", options[i].label),
+                                   "group", last_button,
                                    NULL);
-      label = g_object_new (GTK_TYPE_LABEL,
-                            "visible", TRUE,
-                            "margin_left", 6,
-                            "label", g_dpgettext2 (NULL, "keyboard key", options[i].label),
-                            NULL);
-      gtk_container_add (GTK_CONTAINER (radio_button), label);
-      gtk_style_context_add_class (gtk_widget_get_style_context (radio_button), "xkb-option-button");
-      gtk_radio_button_join_group (GTK_RADIO_BUTTON (radio_button), GTK_RADIO_BUTTON (last_button));
+      gtk_widget_add_css_class (radio_button, "xkb-option-button");
       g_object_set_data (G_OBJECT (radio_button), "xkb-option", options[i].xkb_option);
       g_signal_connect_object (radio_button, "toggled", (GCallback)on_active_radio_changed_cb, self, G_CONNECT_SWAPPED);
-      gtk_container_add (GTK_CONTAINER (row), radio_button);
+      gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), radio_button);
 
       last_button = radio_button;
+      group = g_slist_prepend (group, radio_button);
     }
 
   self->radio_group = NULL;
   if (last_button != NULL)
-    self->radio_group = gtk_radio_button_get_group (GTK_RADIO_BUTTON (last_button));
+    self->radio_group = g_steal_pointer (&group);
 }
 
 static void
@@ -291,11 +282,11 @@ cc_xkb_modifier_dialog_init (CcXkbModifierDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, custom_css, -1, NULL);
+  gtk_css_provider_load_from_data (provider, custom_css, -1);
 
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
 
   self->modifier = NULL;
 
@@ -319,7 +310,7 @@ cc_xkb_modifier_dialog_new (GSettings *input_settings,
 
   self->modifier = modifier;
   gtk_window_set_title (GTK_WINDOW (self), gettext (modifier->title));
-  hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (self->switch_row), gettext (modifier->title));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->switch_row), gettext (modifier->title));
   gtk_label_set_markup (self->description_label, gettext (modifier->description));
   gtk_widget_set_visible (GTK_WIDGET (self->switch_listbox), modifier->default_option == NULL);
   add_radio_buttons (self);

@@ -26,7 +26,7 @@
 
 #include <config.h>
 #include <glib/gi18n.h>
-#include <handy.h>
+#include <adwaita.h>
 
 #include "cc-keyboard-shortcut-dialog.h"
 #include "cc-keyboard-item.h"
@@ -35,7 +35,6 @@
 #include "cc-keyboard-shortcut-row.h"
 #include "cc-list-row.h"
 #include "cc-util.h"
-#include "list-box-helper.h"
 #include "keyboard-shortcuts.h"
 
 #define SHORTCUT_DELIMITERS "+ "
@@ -59,19 +58,20 @@ struct _CcKeyboardShortcutDialog
   GtkDialog  parent_instance;
 
   GtkSizeGroup       *accelerator_sizegroup;
-  GtkRevealer        *back_revealer;
+  GtkWidget          *back_button;
   GtkListBoxRow      *custom_shortcut_add_row;
   guint               custom_shortcut_count;
   GtkWidget          *empty_custom_shortcuts_placeholder;
   GtkWidget          *empty_search_placeholder;
   GtkHeaderBar       *headerbar;
-  GtkRevealer        *reset_all_revealer;
+  GtkStack           *header_stack;
+  GtkWidget          *reset_all_button;
+  GtkWidget          *section_box;
   GtkSearchEntry     *search_entry;
   GtkListBox         *section_listbox;
   GtkListBoxRow      *section_row;
-  GtkScrolledWindow  *section_scrolled_window;
+  GtkWidget          *shortcut_box;
   GtkListBox         *shortcut_listbox;
-  GtkScrolledWindow  *shortcut_scrolled_window;
   GtkStack           *stack;
 
   CcKeyboardManager  *manager;
@@ -141,19 +141,17 @@ add_section (CcKeyboardShortcutDialog *self,
 {
   GtkWidget *icon, *modified_label, *row;
 
-  icon = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_BUTTON);
-  gtk_style_context_add_class (gtk_widget_get_style_context (icon), "dim-label");
+  icon = gtk_image_new_from_icon_name ("go-next-symbolic");
+  gtk_widget_add_css_class (icon, "dim-label");
 
   modified_label = gtk_label_new (NULL);
-  gtk_style_context_add_class (gtk_widget_get_style_context (modified_label), "dim-label");
+  gtk_widget_add_css_class (modified_label, "dim-label");
 
-  row = hdy_action_row_new ();
+  row = adw_action_row_new ();
   gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
-  hdy_preferences_row_set_title (HDY_PREFERENCES_ROW (row), _(section_title));
-  gtk_container_add (GTK_CONTAINER (row), modified_label);
-  gtk_container_add (GTK_CONTAINER (row), icon);
-
-  gtk_widget_show_all (GTK_WIDGET (row));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), _(section_title));
+  //TODO gtk_container_add (GTK_CONTAINER (row), modified_label);
+  //TODO gtk_container_add (GTK_CONTAINER (row), icon);
 
   g_object_set_data_full (G_OBJECT (row),
                           "data",
@@ -161,7 +159,7 @@ add_section (CcKeyboardShortcutDialog *self,
                           (GDestroyNotify)section_row_data_free);
 
   g_hash_table_insert (self->sections, g_strdup (section_id), row);
-  gtk_container_add (GTK_CONTAINER (self->section_listbox), GTK_WIDGET (row));
+  gtk_list_box_append (self->section_listbox, row);
 
   return GTK_LIST_BOX_ROW (row);
 }
@@ -181,7 +179,7 @@ set_custom_shortcut_placeholder_visibility (CcKeyboardShortcutDialog *self)
       if (is_custom_shortcuts && (self->custom_shortcut_count == 0))
         gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->empty_custom_shortcuts_placeholder));
       else
-        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->shortcut_scrolled_window));
+        gtk_stack_set_visible_child (self->stack, self->shortcut_box);
     }
 }
  
@@ -217,22 +215,25 @@ add_item (CcKeyboardShortcutDialog *self,
       set_custom_shortcut_placeholder_visibility (self);
     }
 
-  gtk_container_add (GTK_CONTAINER (self->shortcut_listbox), row);
+  gtk_list_box_append (self->shortcut_listbox, row);
 }
 
 static void
 remove_item (CcKeyboardShortcutDialog *self,
              CcKeyboardItem  *item)
 {
-  g_autoptr(GList) children;
+  GtkWidget *child;
 
-  children = gtk_container_get_children (GTK_CONTAINER (self->shortcut_listbox));
-
-  for (GList *l = children; l != NULL; l = l->next)
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->shortcut_listbox));
+       child;
+       child = gtk_widget_get_next_sibling (child))
     {
       ShortcutRowData *row_data;
 
-      row_data = g_object_get_data (l->data, "data");
+      if (!GTK_IS_LIST_BOX_ROW (child))
+        continue;
+
+      row_data = g_object_get_data (G_OBJECT (child), "data");
 
       if (row_data->item == item)
         {
@@ -242,7 +243,7 @@ remove_item (CcKeyboardShortcutDialog *self,
               set_custom_shortcut_placeholder_visibility (self);
             }
 
-          gtk_container_remove (GTK_CONTAINER (self->shortcut_listbox), l->data);
+          gtk_list_box_remove (self->shortcut_listbox, child);
           break;
         }
     }
@@ -251,32 +252,44 @@ remove_item (CcKeyboardShortcutDialog *self,
 static void
 update_modified_counts (CcKeyboardShortcutDialog *self)
 {
-  g_autoptr(GList) sections = NULL, shortcuts = NULL;
   SectionRowData *section_data;
   ShortcutRowData *shortcut_data;
   g_autofree gchar *modified_text = NULL;
- 
-  sections = gtk_container_get_children (GTK_CONTAINER (self->section_listbox));
-  shortcuts = gtk_container_get_children (GTK_CONTAINER (self->shortcut_listbox));
+  GtkWidget *child;
 
-  for (GList *l = sections; l != NULL; l = l->next)
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->section_listbox));
+       child;
+       child = gtk_widget_get_next_sibling (child))
     {
-      section_data = g_object_get_data (G_OBJECT (l->data), "data");
+      if (!GTK_IS_LIST_BOX_ROW (child))
+        continue;
+
+      section_data = g_object_get_data (G_OBJECT (child), "data");
       section_data->modified_count = 0;
     }
 
-  for (GList *l = shortcuts; l != NULL; l = l->next)
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->shortcut_listbox));
+       child;
+       child = gtk_widget_get_next_sibling (child))
     {
-      if (l->data == self->custom_shortcut_add_row)
+      if (!GTK_IS_LIST_BOX_ROW (child))
         continue;
-      shortcut_data = g_object_get_data (G_OBJECT (l->data), "data");
+
+      if (GTK_LIST_BOX_ROW (child) == self->custom_shortcut_add_row)
+        continue;
+      shortcut_data = g_object_get_data (G_OBJECT (child), "data");
       if (!cc_keyboard_item_is_value_default (shortcut_data->item))
         shortcut_data->section_data->modified_count++;
     }
 
-  for (GList *l = sections; l != NULL; l = l->next)
+  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->section_listbox));
+       child;
+       child = gtk_widget_get_next_sibling (child))
     {
-      section_data = g_object_get_data (G_OBJECT (l->data), "data");
+      if (!GTK_IS_LIST_BOX_ROW (child))
+        continue;
+
+      section_data = g_object_get_data (G_OBJECT (child), "data");
       if (section_data->modified_count > 0)
         {
           modified_text = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
@@ -302,11 +315,10 @@ show_section_list (CcKeyboardShortcutDialog *self)
     gtk_stack_set_transition_type (self->stack, GTK_STACK_TRANSITION_TYPE_NONE);
   self->section_row = NULL;
 
-  gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->section_scrolled_window));
-  gtk_header_bar_set_title (self->headerbar, _("Keyboard Shortcuts"));
-  gtk_entry_set_text(GTK_ENTRY (self->search_entry), "");
-  gtk_revealer_set_reveal_child (self->reset_all_revealer, TRUE);
-  gtk_revealer_set_reveal_child (self->back_revealer, FALSE);
+  gtk_stack_set_visible_child (self->stack, self->section_box);
+  gtk_window_set_title (GTK_WINDOW (self), _("Keyboard Shortcuts"));
+  gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
+  gtk_stack_set_visible_child (self->header_stack, self->reset_all_button);
   gtk_widget_set_visible (GTK_WIDGET (self->search_entry), TRUE);
 
   update_modified_counts (self);
@@ -333,12 +345,11 @@ show_shortcut_list (CcKeyboardShortcutDialog *self)
   if (is_custom_shortcuts && (self->custom_shortcut_count == 0))
     gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->empty_custom_shortcuts_placeholder));
   else
-    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->shortcut_scrolled_window));
+    gtk_stack_set_visible_child (self->stack, self->shortcut_box);
 
-  gtk_header_bar_set_title (self->headerbar, title);
+  gtk_window_set_title (GTK_WINDOW (self), title);
   set_custom_shortcut_placeholder_visibility (self);
-  gtk_revealer_set_reveal_child (self->reset_all_revealer, FALSE);
-  gtk_revealer_set_reveal_child (self->back_revealer, TRUE);
+  gtk_stack_set_visible_child (self->header_stack, self->back_button);
   gtk_widget_set_visible (GTK_WIDGET (self->search_entry), self->section_row == NULL);
 
 }
@@ -395,15 +406,12 @@ back_button_clicked_cb (CcKeyboardShortcutDialog *self)
 }
 
 static void
-reset_all_shortcuts_cb (GtkWidget *widget,
-                        gpointer   user_data)
+reset_shortcut (CcKeyboardShortcutDialog *self,
+                GtkWidget                *row)
 {
-  CcKeyboardShortcutDialog *self;
   ShortcutRowData *data;
 
-  self = user_data;
-
-  data = g_object_get_data (G_OBJECT (widget), "data");
+  data = g_object_get_data (G_OBJECT (row), "data");
 
   /* Don't reset custom shortcuts */
   if (cc_keyboard_item_get_item_type (data->item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
@@ -415,13 +423,37 @@ reset_all_shortcuts_cb (GtkWidget *widget,
 }
 
 static void
+on_reset_all_dialog_response_cb (GtkDialog                *dialog,
+                                 gint                      response,
+                                 CcKeyboardShortcutDialog *self)
+{
+
+  if (response == GTK_RESPONSE_ACCEPT)
+    {
+      GtkWidget *child;
+
+      for (child = gtk_widget_get_first_child (GTK_WIDGET (self->shortcut_listbox));
+           child;
+           child = gtk_widget_get_next_sibling (child))
+        {
+          if (!GTK_IS_LIST_BOX_ROW (child))
+            continue;
+          if (GTK_LIST_BOX_ROW (child) == self->custom_shortcut_add_row)
+            continue;
+          reset_shortcut (self, child);
+        }
+    }
+
+  gtk_window_destroy (GTK_WINDOW (dialog));
+  update_modified_counts (self);
+}
+
+static void
 reset_all_clicked_cb (CcKeyboardShortcutDialog *self)
 {
-  GtkWidget *dialog, *toplevel, *button;
-  guint response;
+  GtkWidget *dialog, *button;
 
-  toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-  dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel),
+  dialog = gtk_message_dialog_new (GTK_WINDOW (self),
                                    GTK_DIALOG_MODAL | GTK_DIALOG_USE_HEADER_BAR | GTK_DIALOG_DESTROY_WITH_PARENT,
                                    GTK_MESSAGE_WARNING,
                                    GTK_BUTTONS_NONE,
@@ -440,42 +472,27 @@ reset_all_clicked_cb (CcKeyboardShortcutDialog *self)
 
   /* Make the "Reset All" button destructive */
   button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), GTK_RESPONSE_ACCEPT);
-  gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
+  gtk_widget_add_css_class (button, "destructive-action");
 
-  /* Reset shortcuts if accepted */
-  response = gtk_dialog_run (GTK_DIALOG (dialog));
+  g_signal_connect (dialog, "response", G_CALLBACK (on_reset_all_dialog_response_cb), self);
 
-  if (response == GTK_RESPONSE_ACCEPT)
-    {
-      gtk_container_foreach (GTK_CONTAINER (self->shortcut_listbox),
-                             reset_all_shortcuts_cb,
-                             self);
-    }
-
-  gtk_widget_destroy (dialog);
-
-  update_modified_counts (self);
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
 search_entry_cb (CcKeyboardShortcutDialog *self)
 {
   gboolean is_shortcut = is_matched_shortcut_present (self->shortcut_listbox, self);
+  const gchar *search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
+
   if (!is_shortcut)
       gtk_stack_set_visible_child (self->stack, self->empty_search_placeholder);
-  else if (gtk_entry_get_text_length (GTK_ENTRY (self->search_entry)) == 0 && self->section_row == NULL)
+  else if (g_utf8_strlen (search_text, -1) == 0 && self->section_row == NULL)
     show_section_list (self);
-  else if (gtk_stack_get_visible_child (self->stack) != GTK_WIDGET (self->shortcut_scrolled_window))
+  else if (gtk_stack_get_visible_child (self->stack) != self->shortcut_box)
     show_shortcut_list (self);
   else
     gtk_list_box_invalidate_filter (self->shortcut_listbox);
-}
-
-static void
-key_press_cb (CcKeyboardShortcutDialog *self, GdkEvent *event)
-{
-  if (gtk_widget_get_visible (GTK_WIDGET (self->search_entry)))
-    gtk_search_entry_handle_event (self->search_entry, event);
 }
 
 static gboolean
@@ -636,6 +653,7 @@ shortcut_filter_function (GtkListBoxRow *row,
   g_autofree gchar *name = NULL;
   g_auto(GStrv) terms = NULL;
   gboolean is_custom_shortcuts = FALSE;
+  const gchar *search_text;
 
   if (self->section_row != NULL)
   {
@@ -650,13 +668,14 @@ shortcut_filter_function (GtkListBoxRow *row,
   if (row == self->custom_shortcut_add_row)
     return is_custom_shortcuts;
 
-  if (gtk_entry_get_text_length (GTK_ENTRY (self->search_entry)) == 0)
+  search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
+  if (g_utf8_strlen (search_text, -1) == 0)
     return TRUE;
 
   data = g_object_get_data (G_OBJECT (row), "data");
   item = data->item;
   name = cc_util_normalize_casefold_and_unaccent (cc_keyboard_item_get_description (item));
-  search = cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (self->search_entry)));
+  search = cc_util_normalize_casefold_and_unaccent (search_text);
   terms = g_strsplit (search, " ", -1);
 
   for (guint i = 0; terms && terms[i]; i++)
@@ -718,16 +737,8 @@ shortcut_header_function (GtkListBoxRow *row,
       g_autofree gchar *markup = NULL;
 
       box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
-      gtk_widget_show (box);
       if (!before)
         gtk_widget_set_margin_top (box, 6);
-
-      if (before)
-        {
-          separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-          gtk_widget_show (separator);
-          gtk_container_add (GTK_CONTAINER (box), separator);
-        }
 
       markup = g_strdup_printf ("<b>%s</b>", _(data->section_title));
       label = g_object_new (GTK_TYPE_LABEL,
@@ -736,21 +747,12 @@ shortcut_header_function (GtkListBoxRow *row,
                             "xalign", 0.0,
                             "margin-start", 6,
                             NULL);
-      gtk_widget_show (label);
-      gtk_container_add (GTK_CONTAINER (box), label);
+      gtk_box_append (GTK_BOX (box), label);
 
       separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (separator);
-      gtk_container_add (GTK_CONTAINER (box), separator);
+      gtk_box_append (GTK_BOX (box), separator);
 
       gtk_list_box_row_set_header (row, box);
-    }
-  else if (before)
-    {
-      GtkWidget *separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-      gtk_widget_show (separator);
-
-      gtk_list_box_row_set_header (row, separator);
     }
   else
     {
@@ -776,7 +778,7 @@ cc_keyboard_shortcut_dialog_finalize (GObject *object)
 
   g_clear_object (&self->manager);
   g_clear_pointer (&self->sections, g_hash_table_destroy);
-  g_clear_pointer (&self->shortcut_editor, gtk_widget_destroy);
+  g_clear_pointer ((GtkWindow**)&self->shortcut_editor, gtk_window_destroy);
 }
 
 static void
@@ -791,22 +793,22 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-shortcut-dialog.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, accelerator_sizegroup);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, back_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, back_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, custom_shortcut_add_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, empty_custom_shortcuts_placeholder);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, empty_search_placeholder);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, headerbar);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, reset_all_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, header_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, reset_all_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, search_entry);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, section_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, section_scrolled_window);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, section_box);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, shortcut_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, shortcut_scrolled_window);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, shortcut_box);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, stack);
 
   gtk_widget_class_bind_template_callback (widget_class, add_custom_shortcut_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, back_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, key_press_cb);
   gtk_widget_class_bind_template_callback (widget_class, reset_all_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_cb);
   gtk_widget_class_bind_template_callback (widget_class, section_row_activated);
@@ -817,6 +819,8 @@ static void
 cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  gtk_search_entry_set_key_capture_widget (self->search_entry, GTK_WIDGET (self));
 
   self->manager = cc_keyboard_manager_new ();
 
@@ -840,7 +844,6 @@ cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
   add_section(self, "custom", "Custom Shortcuts");
   cc_keyboard_manager_load_shortcuts (self->manager);
 
-  gtk_list_box_set_header_func (self->section_listbox, cc_list_box_update_header_func, NULL, NULL);
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->section_listbox),
                               section_sort_function,
                               self,

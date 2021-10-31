@@ -2,27 +2,23 @@
 <interface>
   <template class="CcXkbModifierDialog" parent="GtkDialog">
     <property name="modal">True</property>
-    <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="default_width">500</property>
-    <property name="type_hint">dialog</property>
-    <child internal-child="vbox">
+    <child>
       <object class="GtkBox">
-        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
 
         <child>
           <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin">18</property>
+            <property name="margin-top">18</property>
+            <property name="margin-bottom">18</property>
+            <property name="margin-start">18</property>
+            <property name="margin-end">18</property>
             <property name="spacing">18</property>
             <property name="orientation">vertical</property>
 
             <child>
               <object class="GtkLabel" id="description_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="margin_top">6</property>
                 <property name="wrap">True</property>
                 <property name="width_chars">40</property>
@@ -33,19 +29,15 @@
 
             <child>
               <object class="GtkListBox" id="switch_listbox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <style>
                   <class name="content"/>
                 </style>
                 <child>
-                  <object class="HdyActionRow" id="switch_row">
-                    <property name="visible">True</property>
+                  <object class="AdwActionRow" id="switch_row">
                     <property name="activatable">False</property>
                     <property name="selectable">False</property>
                     <child>
                       <object class="GtkSwitch" id="enabled_switch">
-                        <property name="visible">True</property>
                         <property name="valign">center</property>
                         <signal name="state-set" handler="enable_switch_changed_cb" object="CcXkbModifierDialog" swapped="no"/>
                       </object>
@@ -57,8 +49,6 @@
 
             <child>
               <object class="GtkListBox" id="listbox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <style>
                   <class name="content"/>
                 </style>
@@ -73,8 +63,7 @@
 
     <child internal-child="headerbar">
       <object class="GtkHeaderBar">
-        <property name="can_focus">False</property>
-        <property name="show_close_button">True</property>
+        <property name="show-title-buttons">True</property>
       </object>
     </child>
   </template>

@@ -25,13 +25,16 @@ struct _CcInputRow
 
   CcInputSource   *source;
 
-  GtkEventBox     *drag_handle;
   GtkLabel        *name_label;
   GtkButton       *remove_button;
   GtkButton       *settings_button;
   GtkSeparator    *settings_separator;
 
   GtkListBox      *drag_widget;
+
+  GtkDragSource   *drag_source;
+  gdouble          drag_x;
+  gdouble          drag_y;
 };
 
 G_DEFINE_TYPE (CcInputRow, cc_input_row, GTK_TYPE_LIST_BOX_ROW)
@@ -47,70 +50,61 @@ enum
 
 static guint signals[SIGNAL_LAST] = { 0, };
 
+static GdkContentProvider *
+drag_prepare_cb (GtkDragSource *source,
+                 double         x,
+                 double         y,
+                 CcInputRow    *self)
+{
+  self->drag_x = x;
+  self->drag_y = y;
+
+  return gdk_content_provider_new_typed (CC_TYPE_INPUT_ROW, self);
+}
+
 static void
-drag_begin_cb (CcInputRow     *self,
-               GdkDragContext *drag_context)
+drag_begin_cb (GtkDragSource *source,
+               GdkDrag       *drag,
+               CcInputRow    *self)
 {
   GtkAllocation alloc;
-  gint x = 0, y = 0;
+  CcInputRow *drag_row;
+  GtkWidget *drag_icon;
 
   gtk_widget_get_allocation (GTK_WIDGET (self), &alloc);
 
-  gdk_window_get_device_position (gtk_widget_get_window (GTK_WIDGET (self)),
-                                  gdk_drag_context_get_device (drag_context),
-                                  &x, &y, NULL);
-
   self->drag_widget = GTK_LIST_BOX (gtk_list_box_new ());
-  gtk_widget_show (GTK_WIDGET (self->drag_widget));
   gtk_widget_set_size_request (GTK_WIDGET (self->drag_widget), alloc.width, alloc.height);
-  CcInputRow *drag_row = cc_input_row_new (self->source);
-  gtk_widget_show (GTK_WIDGET (drag_row));
-  gtk_container_add (GTK_CONTAINER (self->drag_widget), GTK_WIDGET (drag_row));
+
+  drag_row = cc_input_row_new (self->source);
+  gtk_list_box_append (self->drag_widget, GTK_WIDGET (drag_row));
   gtk_list_box_drag_highlight_row (self->drag_widget, GTK_LIST_BOX_ROW (drag_row));
 
-  gtk_drag_set_icon_widget (drag_context, GTK_WIDGET (self->drag_widget), x - alloc.x, y - alloc.y);
+  drag_icon = gtk_drag_icon_get_for_drag (drag);
+  gtk_drag_icon_set_child (GTK_DRAG_ICON (drag_icon), GTK_WIDGET (self->drag_widget));
+  gdk_drag_set_hotspot (drag, self->drag_x, self->drag_y);
 }
 
-static void
-drag_end_cb (CcInputRow *self)
-{
-  g_clear_pointer ((GtkWidget **) &self->drag_widget, gtk_widget_destroy);
-}
-
-static void
-drag_data_get_cb (CcInputRow       *self,
-                  GdkDragContext   *context,
-                  GtkSelectionData *selection_data,
-                  guint             info,
-                  guint             time_)
-{
-  gtk_selection_data_set (selection_data,
-                          gdk_atom_intern_static_string ("GTK_LIST_BOX_ROW"),
-                          32,
-                          (const guchar *)&self,
-                          sizeof (gpointer));
-}
-
-static void
-drag_data_received_cb (CcInputRow       *self,
-                       GdkDragContext   *context,
-                       gint              x,
-                       gint              y,
-                       GtkSelectionData *selection_data,
-                       guint             info,
-                       guint             time_)
+static gboolean
+drop_cb (GtkDropTarget *drop_target,
+         const GValue  *value,
+         gdouble        x,
+         gdouble        y,
+         CcInputRow    *self)
 {
   CcInputRow *source;
 
-  source = *((CcInputRow **) gtk_selection_data_get_data (selection_data));
+  if (!G_VALUE_HOLDS (value, CC_TYPE_INPUT_ROW))
+    return FALSE;
 
-  if (source == self)
-    return;
+  source = g_value_get_object (value);
 
   g_signal_emit (source,
                  signals[SIGNAL_MOVE_ROW],
                  0,
                  self);
+
+  return TRUE;
 }
 
 static void
@@ -191,16 +185,11 @@ cc_input_row_class_init (CcInputRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-input-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcInputRow, drag_handle);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, remove_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_separator);
 
-  gtk_widget_class_bind_template_callback (widget_class, drag_begin_cb);
-  gtk_widget_class_bind_template_callback (widget_class, drag_data_get_cb);
-  gtk_widget_class_bind_template_callback (widget_class, drag_data_received_cb);
-  gtk_widget_class_bind_template_callback (widget_class, drag_end_cb);
   gtk_widget_class_bind_template_callback (widget_class, layout_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, move_down_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, move_up_button_clicked_cb);
@@ -248,18 +237,23 @@ cc_input_row_class_init (CcInputRowClass *klass)
                   0);
 }
 
-static GtkTargetEntry entries[] =
-{
-  { "GTK_LIST_BOX_ROW", GTK_TARGET_SAME_APP, 0 }
-};
-
 void
 cc_input_row_init (CcInputRow *self)
 {
+  GtkDropTarget *drop_target;
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_drag_source_set (GTK_WIDGET (self->drag_handle), GDK_BUTTON1_MASK, entries, 1, GDK_ACTION_MOVE);
-  gtk_drag_dest_set (GTK_WIDGET (self), GTK_DEST_DEFAULT_ALL, entries, 1, GDK_ACTION_MOVE);
+  self->drag_source = gtk_drag_source_new ();
+  gtk_drag_source_set_actions (self->drag_source, GDK_ACTION_MOVE);
+  g_signal_connect (self->drag_source, "prepare", G_CALLBACK (drag_prepare_cb), self);
+  g_signal_connect (self->drag_source, "drag-begin", G_CALLBACK (drag_begin_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (self->drag_source));
+
+  drop_target = gtk_drop_target_new (CC_TYPE_INPUT_ROW, GDK_ACTION_MOVE);
+  gtk_drop_target_set_preload (drop_target, TRUE);
+  g_signal_connect (drop_target, "drop", G_CALLBACK (drop_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (drop_target));
 }
 
 static void
@@ -305,8 +299,6 @@ void
 cc_input_row_set_draggable (CcInputRow *self,
                             gboolean    draggable)
 {
-  if (draggable)
-    gtk_drag_source_set (GTK_WIDGET (self->drag_handle), GDK_BUTTON1_MASK, entries, 1, GDK_ACTION_MOVE);
-  else
-    gtk_drag_source_unset (GTK_WIDGET (self->drag_handle));
+  gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->drag_source),
+                                              draggable ? GTK_PHASE_BUBBLE : GTK_PHASE_NONE);
 }

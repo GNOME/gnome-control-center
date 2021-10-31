@@ -59,7 +59,7 @@ struct _CcKeyboardShortcutEditor
   CcKeyboardItem     *collision_item;
 
   /* Custom shortcuts */
-  GdkDevice          *grab_pointer;
+  gboolean            system_shortcuts_inhibited;
   guint               grab_idle_id;
 
   CcKeyCombo         *custom_combo;
@@ -156,8 +156,12 @@ apply_custom_item_fields (CcKeyboardShortcutEditor *self,
   /* Set the keyboard shortcut name and command for custom entries */
   if (cc_keyboard_item_get_item_type (item) == CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
     {
-      g_settings_set_string (cc_keyboard_item_get_settings (item), "name", gtk_entry_get_text (self->name_entry));
-      g_settings_set_string (cc_keyboard_item_get_settings (item), "command", gtk_entry_get_text (self->command_entry));
+      g_settings_set_string (cc_keyboard_item_get_settings (item),
+                             "name",
+                             gtk_editable_get_text (GTK_EDITABLE (self->name_entry)));
+      g_settings_set_string (cc_keyboard_item_get_settings (item),
+                             "command",
+                             gtk_editable_get_text (GTK_EDITABLE (self->command_entry)));
     }
 }
 
@@ -167,8 +171,8 @@ clear_custom_entries (CcKeyboardShortcutEditor *self)
   g_signal_handlers_block_by_func (self->command_entry, command_entry_changed_cb, self);
   g_signal_handlers_block_by_func (self->name_entry, name_entry_changed_cb, self);
 
-  gtk_entry_set_text (self->name_entry, "");
-  gtk_entry_set_text (self->command_entry, "");
+  gtk_editable_set_text (GTK_EDITABLE (self->name_entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (self->command_entry), "");
 
   gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->custom_shortcut_accel_label), "");
   gtk_label_set_label (self->new_shortcut_conflict_label, "");
@@ -199,43 +203,40 @@ is_custom_shortcut (CcKeyboardShortcutEditor *self) {
 }
 
 static void
-grab_seat (CcKeyboardShortcutEditor *self)
+inhibit_system_shortcuts (CcKeyboardShortcutEditor *self)
 {
-  GdkGrabStatus status;
-  GdkWindow *window;
-  GdkSeat *seat;
+  GtkNative *native;
+  GdkSurface *surface;
 
-  window = gtk_widget_get_window (GTK_WIDGET (self));
-  g_assert (window);
-
-  seat = gdk_display_get_default_seat (gdk_window_get_display (window));
-
-  status = gdk_seat_grab (seat,
-                          window,
-                          GDK_SEAT_CAPABILITY_KEYBOARD,
-                          FALSE,
-                          NULL,
-                          NULL,
-                          NULL,
-                          NULL);
-
-  if (status != GDK_GRAB_SUCCESS) {
-    g_warning ("Grabbing keyboard failed");
+  if (self->system_shortcuts_inhibited)
     return;
-  }
 
-  self->grab_pointer = gdk_seat_get_keyboard (seat);
-  if (!self->grab_pointer)
-    self->grab_pointer = gdk_seat_get_pointer (seat);
+  native = gtk_widget_get_native (GTK_WIDGET (self));
+  surface = gtk_native_get_surface (native);
+
+  if (GDK_IS_TOPLEVEL (surface))
+    {
+      gdk_toplevel_inhibit_system_shortcuts (GDK_TOPLEVEL (surface), NULL);
+      self->system_shortcuts_inhibited = TRUE;
+    }
 }
 
 static void
-release_grab (CcKeyboardShortcutEditor *self)
+uninhibit_system_shortcuts (CcKeyboardShortcutEditor *self)
 {
-  if (self->grab_pointer)
+  GtkNative *native;
+  GdkSurface *surface;
+
+  if (!self->system_shortcuts_inhibited)
+    return;
+
+  native = gtk_widget_get_native (GTK_WIDGET (self));
+  surface = gtk_native_get_surface (native);
+
+  if (GDK_IS_TOPLEVEL (surface))
     {
-      gdk_seat_ungrab (gdk_device_get_seat (self->grab_pointer));
-      self->grab_pointer = NULL;
+      gdk_toplevel_restore_system_shortcuts (GDK_TOPLEVEL (surface));
+      self->system_shortcuts_inhibited = FALSE;
     }
 }
 
@@ -271,7 +272,7 @@ static void
 set_header_mode (CcKeyboardShortcutEditor *self,
                  HeaderMode                mode)
 {
-  gtk_header_bar_set_show_close_button (self->headerbar, mode == HEADER_MODE_CUSTOM_EDIT);
+  gtk_header_bar_set_show_title_buttons (self->headerbar, mode == HEADER_MODE_CUSTOM_EDIT);
 
   gtk_widget_set_visible (GTK_WIDGET (self->add_button), mode == HEADER_MODE_ADD);
   gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), mode != HEADER_MODE_NONE &&
@@ -369,7 +370,7 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
 
   self->edited = TRUE;
 
-  release_grab (self);
+  uninhibit_system_shortcuts (self);
 
   /*
    * Oops! Looks like the accelerator is already being used, so we
@@ -454,7 +455,7 @@ cancel_button_clicked_cb (GtkWidget                *button,
 static void
 change_custom_shortcut_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
-  grab_seat (self);
+  inhibit_system_shortcuts (self);
   set_shortcut_editor_page (self, PAGE_EDIT);
   set_header_mode (self, HEADER_MODE_NONE);
 }
@@ -546,8 +547,8 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   *self->custom_combo = combo;
 
   /* Headerbar */
-  gtk_header_bar_set_title (self->headerbar,
-                            is_custom ? _("Set Custom Shortcut") : _("Set Shortcut"));
+  gtk_window_set_title (GTK_WINDOW (self),
+                        is_custom ? _("Set Custom Shortcut") : _("Set Shortcut"));
 
   set_header_mode (self, is_custom ? HEADER_MODE_CUSTOM_EDIT : HEADER_MODE_NONE);
 
@@ -582,11 +583,11 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
       g_signal_handlers_block_by_func (self->name_entry, name_entry_changed_cb, self);
 
       /* Name entry */
-      gtk_entry_set_text (self->name_entry, cc_keyboard_item_get_description (item));
+      gtk_editable_set_text (GTK_EDITABLE (self->name_entry), cc_keyboard_item_get_description (item));
       gtk_widget_set_sensitive (GTK_WIDGET (self->name_entry), cc_keyboard_item_get_desc_editable (item));
 
       /* Command entry */
-      gtk_entry_set_text (self->command_entry, cc_keyboard_item_get_command (item));
+      gtk_editable_set_text (GTK_EDITABLE (self->command_entry), cc_keyboard_item_get_command (item));
       gtk_widget_set_sensitive (GTK_WIDGET (self->command_entry), cc_keyboard_item_get_cmd_editable (item));
 
       /* If there is no accelerator set for this custom shortcut, show the "Set Shortcut" button. */
@@ -600,7 +601,7 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
       g_signal_handlers_unblock_by_func (self->command_entry, command_entry_changed_cb, self);
       g_signal_handlers_unblock_by_func (self->name_entry, name_entry_changed_cb, self);
 
-      release_grab (self);
+      uninhibit_system_shortcuts (self);
     }
 
   /* Show the appropriate view */
@@ -667,56 +668,60 @@ cc_keyboard_shortcut_editor_set_property (GObject      *object,
 }
 
 static gboolean
-cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
-                                             GdkEventKey *event)
+on_key_pressed_cb (GtkEventControllerKey    *key_controller,
+                   guint                     keyval,
+                   guint                     keycode,
+                   GdkModifierType           state,
+                   CcKeyboardShortcutEditor *self)
 {
-  CcKeyboardShortcutEditor *self;
   GdkModifierType real_mask;
+  GdkEvent *event;
   gboolean editing;
+  gboolean is_modifier;
   guint keyval_lower;
-
-  self = CC_KEYBOARD_SHORTCUT_EDITOR (widget);
 
   /* Being in the "change-shortcut" page is the only check we must
    * perform to decide if we're editing a shortcut. */
   editing = get_shortcut_editor_page (self) == PAGE_EDIT;
 
   if (!editing)
-    return GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->key_press_event (widget, event);
+    return GDK_EVENT_PROPAGATE;
 
-  real_mask = event->state & gtk_accelerator_get_default_mod_mask ();
+  real_mask = state & gtk_accelerator_get_default_mod_mask ();
 
-  keyval_lower = gdk_keyval_to_lower (event->keyval);
+  keyval_lower = gdk_keyval_to_lower (keyval);
 
   /* Normalise <Tab> */
   if (keyval_lower == GDK_KEY_ISO_Left_Tab)
     keyval_lower = GDK_KEY_Tab;
 
   /* Put shift back if it changed the case of the key, not otherwise. */
-  if (keyval_lower != event->keyval)
+  if (keyval_lower != keyval)
     real_mask |= GDK_SHIFT_MASK;
 
-  if (keyval_lower == GDK_KEY_Sys_Req &&
-      (real_mask & GDK_MOD1_MASK) != 0)
+  if (keyval_lower == GDK_KEY_Sys_Req && (real_mask & GDK_ALT_MASK) != 0)
     {
       /* HACK: we don't want to use SysRq as a keybinding (but we do
        * want Alt+Print), so we avoid translation from Alt+Print to SysRq */
       keyval_lower = GDK_KEY_Print;
     }
 
+  event = gtk_event_controller_get_current_event (GTK_EVENT_CONTROLLER (key_controller));
+  is_modifier = gdk_key_event_is_modifier (event);
+
   /* A single Escape press cancels the editing */
-  if (!event->is_modifier && real_mask == 0 && keyval_lower == GDK_KEY_Escape)
+  if (!is_modifier && real_mask == 0 && keyval_lower == GDK_KEY_Escape)
     {
       self->edited = FALSE;
 
-      release_grab (self);
+      uninhibit_system_shortcuts (self);
       cancel_editing (self);
 
       return GDK_EVENT_STOP;
     }
 
   /* Backspace disables the current shortcut */
-  if (!event->is_modifier && real_mask == 0 && keyval_lower == GDK_KEY_BackSpace)
+  if (!is_modifier && real_mask == 0 && keyval_lower == GDK_KEY_BackSpace)
     {
       self->edited = TRUE;
       self->custom_is_modifier = FALSE;
@@ -725,7 +730,7 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
       gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->custom_shortcut_accel_label), "");
       gtk_shortcut_label_set_accelerator (GTK_SHORTCUT_LABEL (self->shortcut_accel_label), "");
 
-      release_grab (self);
+      uninhibit_system_shortcuts (self);
 
       self->edited = FALSE;
 
@@ -734,8 +739,8 @@ cc_keyboard_shortcut_editor_key_press_event (GtkWidget   *widget,
       return GDK_EVENT_STOP;
     }
 
-  self->custom_is_modifier = event->is_modifier;
-  self->custom_combo->keycode = event->hardware_keycode;
+  self->custom_is_modifier = is_modifier;
+  self->custom_combo->keycode = keycode;
   self->custom_combo->keyval = keyval_lower;
   self->custom_combo->mask = real_mask;
 
@@ -777,7 +782,7 @@ grab_idle (gpointer data)
   CcKeyboardShortcutEditor *self = data;
 
   if (self->item && cc_keyboard_item_get_item_type (self->item) != CC_KEYBOARD_ITEM_TYPE_GSETTINGS_PATH)
-    grab_seat (self);
+    inhibit_system_shortcuts (self);
 
   self->grab_idle_id = 0;
 
@@ -805,7 +810,7 @@ cc_keyboard_shortcut_editor_unrealize (GtkWidget *widget)
     self->grab_idle_id = 0;
   }
 
-  release_grab (self);
+  uninhibit_system_shortcuts (self);
 
   GTK_WIDGET_CLASS (cc_keyboard_shortcut_editor_parent_class)->unrealize (widget);
 }
@@ -823,7 +828,6 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
 
   widget_class->show = cc_keyboard_shortcut_editor_show;
   widget_class->unrealize = cc_keyboard_shortcut_editor_unrealize;
-  widget_class->key_press_event = cc_keyboard_shortcut_editor_key_press_event;
 
   dialog_class->close = cc_keyboard_shortcut_editor_close;
   dialog_class->response = cc_keyboard_shortcut_editor_response;
@@ -881,6 +885,7 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, change_custom_shortcut_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, command_entry_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, name_entry_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_key_pressed_cb);
   gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, replace_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, reset_custom_clicked_cb);
@@ -984,7 +989,7 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
 
       set_header_mode (self, HEADER_MODE_ADD);
       set_shortcut_editor_page (self, PAGE_CUSTOM);
-      gtk_header_bar_set_title (self->headerbar, _("Add Custom Shortcut"));
+      gtk_window_set_title (GTK_WINDOW (self), _("Add Custom Shortcut"));
 
       gtk_widget_set_sensitive (GTK_WIDGET (self->command_entry), TRUE);
       gtk_widget_set_sensitive (GTK_WIDGET (self->name_entry), TRUE);
