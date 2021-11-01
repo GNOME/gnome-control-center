@@ -27,9 +27,8 @@
 #include <langinfo.h>
 #include <string.h>
 #include <glib/gi18n.h>
-#include <handy.h>
+#include <adwaita.h>
 
-#include "list-box-helper.h"
 #include "cc-common-language.h"
 #include "cc-format-preview.h"
 #include "cc-util.h"
@@ -38,29 +37,31 @@
 #include <libgnome-desktop/gnome-languages.h>
 
 struct _CcFormatChooser {
-        GtkDialog parent_instance;
+  GtkDialog parent_instance;
 
-        GtkWidget *title_bar;
-        GtkWidget *title_buttons;
-        GtkWidget *cancel_button;
-        GtkWidget *back_button;
-        GtkWidget *done_button;
-        GtkWidget *empty_results_view;
-        GtkWidget *main_leaflet;
-        GtkWidget *region_filter_entry;
-        GtkWidget *region_list;
-        GtkWidget *region_list_stack;
-        GtkWidget *common_region_title;
-        GtkWidget *common_region_listbox;
-        GtkWidget *region_title;
-        GtkWidget *region_listbox;
-        CcFormatPreview *format_preview;
-        gboolean adding;
-        gboolean showing_extra;
-        gboolean no_results;
-        gchar *region;
-        gchar *preview_region;
-        gchar **filter_words;
+  GtkWidget *title_bar;
+  GtkWidget *title_buttons;
+  GtkWidget *cancel_button;
+  GtkWidget *back_button;
+  GtkWidget *done_button;
+  GtkWidget *empty_results_view;
+  GtkWidget *main_leaflet;
+  GtkWidget *region_filter_entry;
+  GtkWidget *region_list;
+  GtkWidget *region_list_stack;
+  GtkWidget *common_region_title;
+  GtkWidget *common_region_listbox;
+  GtkWidget *region_box;
+  GtkWidget *region_title;
+  GtkWidget *region_listbox;
+  GtkWidget *preview_box;
+  CcFormatPreview *format_preview;
+  gboolean adding;
+  gboolean showing_extra;
+  gboolean no_results;
+  gchar *region;
+  gchar *preview_region;
+  gchar **filter_words;
 };
 
 G_DEFINE_TYPE (CcFormatChooser, cc_format_chooser, GTK_TYPE_DIALOG)
@@ -69,17 +70,17 @@ static void
 update_check_button_for_list (GtkWidget   *list_box,
                               const gchar *locale_id)
 {
-  g_autoptr(GList) children = NULL;
-  GList *l;
+  GtkWidget *child;
 
-  g_assert (GTK_IS_CONTAINER (list_box));
-
-  children = gtk_container_get_children (GTK_CONTAINER (list_box));
-  for (l = children; l; l = l->next)
+  for (child = gtk_widget_get_first_child (list_box);
+       child;
+       child = gtk_widget_get_next_sibling (child))
     {
-      GtkWidget *row = l->data;
-      GtkWidget *check = g_object_get_data (G_OBJECT (row), "check");
-      const gchar *region = g_object_get_data (G_OBJECT (row), "locale-id");
+      if (!GTK_IS_LIST_BOX_ROW (child))
+        continue;
+
+      GtkWidget *check = g_object_get_data (G_OBJECT (child), "check");
+      const gchar *region = g_object_get_data (G_OBJECT (child), "locale-id");
       if (check == NULL || region == NULL)
         continue;
 
@@ -134,8 +135,7 @@ padded_label_new (const char *text)
 
         label = gtk_label_new (text);
         gtk_label_set_ellipsize (GTK_LABEL (label), PANGO_ELLIPSIZE_END);
-        gtk_widget_show (label);
-        gtk_container_add (GTK_CONTAINER (widget), label);
+        gtk_box_append (GTK_BOX (widget), label);
 
         return widget;
 }
@@ -145,22 +145,18 @@ format_chooser_back_button_clicked_cb (CcFormatChooser *self)
 {
   g_assert (CC_IS_FORMAT_CHOOSER (self));
 
-  gtk_header_bar_set_title (GTK_HEADER_BAR (self->title_bar), _("Formats"));
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "region-list");
+  gtk_window_set_title (GTK_WINDOW (self), _("Formats"));
+  adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->region_list);
   gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
   gtk_widget_show (self->done_button);
 }
 
 static void
-cc_format_chooser_preview_button_set_visible (GtkListBoxRow *row,
-                                              gpointer       user_data)
+set_preview_button_visible (GtkWidget *row,
+                            gboolean   visible)
 {
   GtkWidget *button;
-  gboolean visible;
 
-  g_assert (GTK_IS_LIST_BOX_ROW (row));
-
-  visible = GPOINTER_TO_INT (user_data);
   button = g_object_get_data (G_OBJECT (row), "preview-button");
   g_assert (button);
 
@@ -171,23 +167,34 @@ cc_format_chooser_preview_button_set_visible (GtkListBoxRow *row,
 static void
 format_chooser_leaflet_fold_changed_cb (CcFormatChooser *self)
 {
+  GtkWidget *child;
   gboolean folded;
 
   g_assert (CC_IS_FORMAT_CHOOSER (self));
 
-  folded = hdy_leaflet_get_folded (HDY_LEAFLET (self->main_leaflet));
-  gtk_container_foreach (GTK_CONTAINER (self->common_region_listbox),
-                         (GtkCallback)cc_format_chooser_preview_button_set_visible,
-                         GINT_TO_POINTER (folded));
-  gtk_container_foreach (GTK_CONTAINER (self->region_listbox),
-                         (GtkCallback)cc_format_chooser_preview_button_set_visible,
-                         GINT_TO_POINTER (folded));
+  folded = adw_leaflet_get_folded (ADW_LEAFLET (self->main_leaflet));
+
+  for (child = gtk_widget_get_first_child (self->common_region_listbox);
+       child;
+       child = gtk_widget_get_next_sibling (child))
+    {
+      if (GTK_IS_LIST_BOX_ROW (child))
+        set_preview_button_visible (child, folded);
+    }
+
+  for (child = gtk_widget_get_first_child (self->region_listbox);
+       child;
+       child = gtk_widget_get_next_sibling (child))
+    {
+      if (GTK_IS_LIST_BOX_ROW (child))
+        set_preview_button_visible (child, folded);
+    }
 
   if (!folded)
     {
       cc_format_preview_set_region (self->format_preview, self->region);
-      gtk_header_bar_set_title (GTK_HEADER_BAR (self->title_bar), _("Formats"));
-      hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "region-list");
+      gtk_window_set_title (GTK_WINDOW (self), _("Formats"));
+      adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->region_box);
       gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
       gtk_widget_show (self->done_button);
     }
@@ -210,12 +217,12 @@ preview_button_clicked_cb (CcFormatChooser *self,
   locale_name = g_object_get_data (G_OBJECT (row), "locale-name");
   cc_format_preview_set_region (self->format_preview, region);
 
-  hdy_leaflet_set_visible_child_name (HDY_LEAFLET (self->main_leaflet), "preview");
+  adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->preview_box);
   gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->back_button);
   gtk_widget_hide (self->done_button);
 
   if (locale_name)
-    gtk_header_bar_set_title (GTK_HEADER_BAR (self->title_bar), locale_name);
+    gtk_window_set_title (GTK_WINDOW (self), locale_name);
 }
 
 static GtkWidget *
@@ -236,23 +243,19 @@ region_widget_new (CcFormatChooser *self,
         locale_untranslated_name = gnome_get_country_from_locale (locale_id, "C");
 
         row = gtk_list_box_row_new ();
-        gtk_widget_show (row);
         box = padded_label_new (locale_name);
-        gtk_widget_show (box);
-        gtk_container_add (GTK_CONTAINER (row), box);
+        gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
-        button = gtk_button_new_from_icon_name ("view-layout-symbolic", GTK_ICON_SIZE_BUTTON);
+        check = gtk_image_new_from_icon_name ("object-select-symbolic");
+        gtk_widget_set_hexpand (check, TRUE);
+        gtk_widget_set_opacity (check, 0.0);
+        gtk_box_append (GTK_BOX (box), check);
+
+        button = gtk_button_new_from_icon_name ("view-layout-symbolic");
         g_signal_connect_object (button, "clicked", G_CALLBACK (preview_button_clicked_cb),
                                  self, G_CONNECT_SWAPPED);
         gtk_widget_show (button);
-        gtk_box_pack_end (GTK_BOX (box), button, FALSE, TRUE, 0);
-
-        check = gtk_image_new ();
-        gtk_widget_show (check);
-        gtk_image_set_from_icon_name (GTK_IMAGE (check), "object-select-symbolic", GTK_ICON_SIZE_MENU);
-        gtk_widget_set_opacity (check, 0.0);
-        g_object_set (check, "icon-size", GTK_ICON_SIZE_MENU, NULL);
-        gtk_container_add (GTK_CONTAINER (box), check);
+        gtk_box_append (GTK_BOX (box), button);
 
         g_object_set_data (G_OBJECT (row), "check", check);
         g_object_set_data (G_OBJECT (row), "preview-button", button);
@@ -285,8 +288,7 @@ add_regions (CcFormatChooser *chooser,
                 if (!widget)
                         continue;
 
-                gtk_widget_show (widget);
-                gtk_container_add (GTK_CONTAINER (chooser->common_region_listbox), widget);
+                gtk_list_box_append (GTK_LIST_BOX (chooser->common_region_listbox), widget);
           }
 
         /* Populate All locales */
@@ -303,8 +305,7 @@ add_regions (CcFormatChooser *chooser,
                 if (!widget)
                   continue;
 
-                gtk_widget_show (widget);
-                gtk_container_add (GTK_CONTAINER (chooser->region_listbox), widget);
+                gtk_list_box_append (GTK_LIST_BOX (chooser->region_listbox), widget);
         }
 
         chooser->adding = FALSE;
@@ -377,7 +378,7 @@ filter_changed (CcFormatChooser *chooser)
         g_clear_pointer (&chooser->filter_words, g_strfreev);
 
         filter_contents =
-                cc_util_normalize_casefold_and_unaccent (gtk_entry_get_text (GTK_ENTRY (chooser->region_filter_entry)));
+                cc_util_normalize_casefold_and_unaccent (gtk_editable_get_text (GTK_EDITABLE (chooser->region_filter_entry)));
 
         /* The popular listbox is shown only if search is empty */
         visible = filter_contents == NULL || *filter_contents == '\0';
@@ -473,10 +474,12 @@ cc_format_chooser_class_init (CcFormatChooserClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_filter_entry);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_title);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, common_region_listbox);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_box);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_title);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, region_list_stack);
+        gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, preview_box);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, empty_results_view);
         gtk_widget_class_bind_template_child (widget_class, CcFormatChooser, format_preview);
 
@@ -497,10 +500,6 @@ cc_format_chooser_init (CcFormatChooser *chooser)
                                     (GtkListBoxSortFunc)sort_regions, chooser, NULL);
         gtk_list_box_set_filter_func (GTK_LIST_BOX (chooser->region_listbox),
                                       region_visible, chooser, NULL);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (chooser->region_listbox),
-                                      cc_list_box_update_header_func, NULL, NULL);
-        gtk_list_box_set_header_func (GTK_LIST_BOX (chooser->common_region_listbox),
-                                      cc_list_box_update_header_func, NULL, NULL);
 
         add_all_regions (chooser);
         gtk_list_box_invalidate_filter (GTK_LIST_BOX (chooser->region_listbox));
@@ -522,7 +521,7 @@ void
 cc_format_chooser_clear_filter (CcFormatChooser *chooser)
 {
         g_return_if_fail (CC_IS_FORMAT_CHOOSER (chooser));
-        gtk_entry_set_text (GTK_ENTRY (chooser->region_filter_entry), "");
+        gtk_editable_set_text (GTK_EDITABLE (chooser->region_filter_entry), "");
 }
 
 const gchar *

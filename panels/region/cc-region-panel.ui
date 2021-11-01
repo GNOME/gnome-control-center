@@ -2,17 +2,12 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcRegionPanel" parent="CcPanel">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
 
     <child>
       <object class="GtkScrolledWindow">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
         <property name="hscrollbar-policy">never</property>
         <child>
-          <object class="HdyClamp">
-            <property name="visible">True</property>
+          <object class="AdwClamp">
             <property name="margin_top">32</property>
             <property name="margin_bottom">32</property>
             <property name="margin_start">12</property>
@@ -21,59 +16,38 @@
             <!-- Content -->
             <child>
               <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">12</property>
                 <property name="hexpand">True</property>
-		<child>
-		  <object class="GtkBox" id="session_or_login_box">
-		    <property name="visible">True</property>
-		    <property name="can_focus">False</property>
-		    <property name="orientation">horizontal</property>
-		    <property name="homogeneous">True</property>
-		    <property name="halign">center</property>
-		    <property name="hexpand">True</property>
-		    <style>
-		      <class name="linked"/>
-		    </style>
-		    <child>
-		      <object class="GtkRadioButton" id="session_language_button">
-		        <property name="label" translatable="yes">My Account</property>
-		        <property name="visible">True</property>
-		        <property name="can_focus">True</property>
-		        <property name="receives_default">False</property>
-		        <property name="xalign">0</property>
-		        <property name="active">True</property>
-		        <property name="draw_indicator">False</property>
-		      </object>
-		    </child>
-		    <child>
-		      <object class="GtkRadioButton" id="login_language_button">
-		        <property name="label" translatable="yes">Login Screen</property>
-		        <property name="visible">True</property>
-		        <property name="can_focus">True</property>
-		        <property name="receives_default">False</property>
-		        <property name="xalign">0</property>
-		        <property name="active">False</property>
-		        <property name="draw_indicator">False</property>
-		        <property name="group">session_language_button</property>
-		        <style>
-		          <class name="raised"/>
-		        </style>
-		      </object>
-		    </child>
-		  </object>
-		  <packing>
-		    <property name="expand">False</property>
-		    <property name="fill">True</property>
-		    <property name="position">0</property>
-		  </packing>
-		</child>
+                <child>
+                  <object class="GtkBox" id="session_or_login_box">
+                    <property name="orientation">horizontal</property>
+                    <property name="homogeneous">True</property>
+                    <property name="halign">center</property>
+                    <property name="hexpand">True</property>
+                    <style>
+                      <class name="linked"/>
+                    </style>
+                    <child>
+                      <object class="GtkToggleButton" id="session_language_button">
+                        <property name="label" translatable="yes">My Account</property>
+                        <property name="active">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkToggleButton" id="login_language_button">
+                        <property name="label" translatable="yes">Login Screen</property>
+                        <property name="active">False</property>
+                        <property name="group">session_language_button</property>
+                        <style>
+                          <class name="raised"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Language</property>
                     <attributes>
@@ -83,8 +57,6 @@
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">The language used for text in windows and web pages.</property>
                     <style>
@@ -93,96 +65,78 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkFrame" id="language_section_frame">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
+                  <object class="GtkListBox" id="language_list">
                     <property name="margin_bottom">18</property>
-                    <property name="shadow_type">in</property>
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="content" />
+                    </style>
                     <child>
-                      <object class="GtkListBox" id="language_list">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="selection-mode">none</property>
+                      <object class="GtkListBoxRow" id="language_row">
                         <child>
-                          <object class="GtkListBoxRow" id="language_row">
-                            <property name="visible">True</property>
+                          <object class="GtkBox" id="language_box">
+                            <property name="orientation">vertical</property>
                             <child>
-                              <object class="GtkBox" id="language_box">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="orientation">vertical</property>
+                              <object class="GtkBox">
+                                <property name="height_request">50</property>
+                                <property name="margin_start">12</property>
+                                <property name="margin_end">12</property>
+                                <property name="spacing">12</property>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="margin_bottom">8</property>
+                                    <property name="margin_top">8</property>
+                                    <property name="ellipsize">end</property>
+                                    <property name="xalign">0</property>
+                                    <property name="label" translatable="yes">_Language</property>
+                                    <property name="use_underline">True</property>
+                                    <property name="hexpand">True</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel" id="language_label">
+                                    <property name="xalign">1</property>
+                                    <property name="margin_bottom">8</property>
+                                    <property name="margin_top">8</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkRevealer" id="restart_revealer">
+                                <property name="transition_type">slide-up</property>
                                 <child>
                                   <object class="GtkBox">
-                                    <property name="visible">True</property>
-                                    <property name="height_request">50</property>
                                     <property name="margin_start">12</property>
                                     <property name="margin_end">12</property>
                                     <property name="spacing">12</property>
                                     <child>
                                       <object class="GtkLabel">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
                                         <property name="margin_bottom">8</property>
                                         <property name="margin_top">8</property>
-                                        <property name="ellipsize">end</property>
                                         <property name="xalign">0</property>
-                                        <property name="label" translatable="yes">_Language</property>
-                                        <property name="use_underline">True</property>
                                         <property name="hexpand">True</property>
+                                        <property name="wrap">True</property>
+                                        <property name="max-width-chars">35</property>
+                                        <property name="label" translatable="yes">Restart the session for changes to take effect</property>
+                                        <style>
+                                          <class name="dim-label"/>
+                                        </style>
+                                        <attributes>
+                                          <attribute name="scale" value="0.9"/>
+                                        </attributes>
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkLabel" id="language_label">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="xalign">1</property>
+                                      <object class="GtkButton" id="restart_button">
                                         <property name="margin_bottom">8</property>
                                         <property name="margin_top">8</property>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkRevealer" id="restart_revealer">
-                                    <property name="visible">True</property>
-                                    <property name="transition_type">slide-up</property>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="visible">True</property>
-                                        <property name="margin_start">12</property>
-                                        <property name="margin_end">12</property>
-                                        <property name="spacing">12</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="visible">True</property>
-                                            <property name="margin_bottom">8</property>
-                                            <property name="margin_top">8</property>
-                                            <property name="xalign">0</property>
-                                            <property name="hexpand">True</property>
-                                            <property name="wrap">True</property>
-                                            <property name="max-width-chars">35</property>
-                                            <property name="label" translatable="yes">Restart the session for changes to take effect</property>
-                                            <style>
-                                              <class name="dim-label"/>
-                                            </style>
-                                            <attributes>
-                                              <attribute name="scale" value="0.9"/>
-                                            </attributes>
-                                          </object>
-                                        </child>
-                                        <child>
-                                          <object class="GtkButton" id="restart_button">
-                                            <property name="visible">True</property>
-                                            <property name="margin_bottom">8</property>
-                                            <property name="margin_top">8</property>
-                                            <property name="valign">end</property>
-                                            <property name="label" translatable="yes">Restart…</property>
-                                            <style>
-                                              <class name="suggested-action"/>
-                                            </style>
-                                            <signal name="clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
-                                          </object>
-                                        </child>
+                                        <property name="valign">end</property>
+                                        <property name="label" translatable="yes">Restart…</property>
+                                        <style>
+                                          <class name="suggested-action"/>
+                                        </style>
+                                        <signal name="clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
                                       </object>
                                     </child>
                                   </object>
@@ -197,8 +151,6 @@
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Formats</property>
                     <attributes>
@@ -208,8 +160,6 @@
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">The format used for numbers, dates, and currencies.</property>
                     <style>
@@ -218,47 +168,34 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkFrame">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="shadow_type">in</property>
+                  <object class="GtkListBox" id="formats_list">
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="content" />
+                    </style>
                     <child>
-                      <object class="GtkListBox" id="formats_list">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="selection-mode">none</property>
+                      <object class="GtkListBoxRow" id="formats_row">
                         <child>
-                          <object class="GtkListBoxRow" id="formats_row">
-                            <property name="visible">True</property>
+                          <object class="GtkBox">
+                            <property name="height_request">50</property>
+                            <property name="margin_start">12</property>
+                            <property name="margin_end">12</property>
+                            <property name="spacing">12</property>
                             <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="height_request">50</property>
-                                <property name="margin_start">12</property>
-                                <property name="margin_end">12</property>
-                                <property name="spacing">12</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">_Formats</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="hexpand">True</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="formats_label">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="xalign">1</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="margin_top">8</property>
-                                  </object>
-                                </child>
+                              <object class="GtkLabel">
+                                <property name="margin_bottom">8</property>
+                                <property name="margin_top">8</property>
+                                <property name="xalign">0</property>
+                                <property name="label" translatable="yes">_Formats</property>
+                                <property name="use_underline">True</property>
+                                <property name="hexpand">True</property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="formats_label">
+                                <property name="xalign">1</property>
+                                <property name="margin_bottom">8</property>
+                                <property name="margin_top">8</property>
                               </object>
                             </child>
                           </object>

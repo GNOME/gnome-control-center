@@ -32,7 +32,7 @@
 #include <glib/gi18n.h>
 
 struct _CcFormatPreview {
-  GtkDialog  parent_instance;
+  GtkBox     parent_instance;
 
   GtkWidget *date_format_label;
   GtkWidget *date_time_format_label;

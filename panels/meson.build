@@ -20,7 +20,7 @@ panels = [
 #  'online-accounts',
   'power',
   'printers',
-#  'region',
+  'region',
   'removable-media',
   'search',
   'sharing',

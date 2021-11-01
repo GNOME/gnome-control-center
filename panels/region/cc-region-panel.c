@@ -27,7 +27,6 @@
 #include <gtk/gtk.h>
 #include <polkit/polkit.h>
 
-#include "list-box-helper.h"
 #include "cc-region-panel.h"
 #include "cc-region-resources.h"
 #include "cc-language-chooser.h"
@@ -57,7 +56,6 @@ struct _CcRegionPanel {
         GtkLabel        *language_label;
         GtkListBox      *language_list;
         GtkListBoxRow   *language_row;
-        GtkFrame        *language_section_frame;
         GtkToggleButton *login_language_button;
         GtkButton       *restart_button;
         GtkRevealer     *restart_revealer;
@@ -110,7 +108,7 @@ cc_region_panel_finalize (GObject *object)
 
         chooser = g_object_get_data (G_OBJECT (self), "input-chooser");
         if (chooser)
-                gtk_widget_destroy (chooser);
+                gtk_window_destroy (GTK_WINDOW (chooser));
 
         G_OBJECT_CLASS (cc_region_panel_parent_class)->finalize (object);
 }
@@ -319,7 +317,7 @@ language_response (CcRegionPanel     *self,
                 update_region (self, NULL);
         }
 
-        gtk_widget_destroy (GTK_WIDGET (chooser));
+        gtk_window_destroy (GTK_WINDOW (chooser));
 }
 
 static void
@@ -366,7 +364,7 @@ format_response (CcRegionPanel   *self,
                 update_region (self, region);
         }
 
-        gtk_widget_destroy (GTK_WIDGET (chooser));
+        gtk_window_destroy (GTK_WINDOW (chooser));
 }
 
 static const gchar *
@@ -382,9 +380,11 @@ static void
 show_language_chooser (CcRegionPanel *self)
 {
         CcLanguageChooser *chooser;
+        CcShell *shell;
 
+        shell = cc_panel_get_shell (CC_PANEL (self));
         chooser = cc_language_chooser_new ();
-        gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+        gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (cc_shell_get_toplevel (shell)));
         cc_language_chooser_set_language (chooser, get_effective_language (self));
         g_signal_connect_object (chooser, "response",
                                  G_CALLBACK (language_response), self, G_CONNECT_SWAPPED);
@@ -414,9 +414,11 @@ static void
 show_region_chooser (CcRegionPanel *self)
 {
         CcFormatChooser *chooser;
+        CcShell *shell;
 
+        shell = cc_panel_get_shell (CC_PANEL (self));
         chooser = cc_format_chooser_new ();
-        gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+        gtk_window_set_transient_for (GTK_WINDOW (chooser), GTK_WINDOW (cc_shell_get_toplevel (shell)));
         cc_format_chooser_set_region (chooser, get_effective_region (self));
         g_signal_connect_object (chooser, "response",
                                  G_CALLBACK (format_response), self, G_CONNECT_SWAPPED);
@@ -548,15 +550,9 @@ setup_language_section (CcRegionPanel *self)
         g_signal_connect_object (self->locale_settings, "changed::" KEY_REGION,
                                  G_CALLBACK (update_region_from_setting), self, G_CONNECT_SWAPPED);
 
-        gtk_list_box_set_header_func (self->language_list,
-                                      cc_list_box_update_header_func,
-                                      NULL, NULL);
         g_signal_connect_object (self->language_list, "row-activated",
                                  G_CALLBACK (activate_language_row), self, G_CONNECT_SWAPPED);
 
-        gtk_list_box_set_header_func (self->formats_list,
-                                      cc_list_box_update_header_func,
-                                      NULL, NULL);
         g_signal_connect_object (self->formats_list, "row-activated",
                                  G_CALLBACK (activate_language_row), self, G_CONNECT_SWAPPED);
 
@@ -675,7 +671,7 @@ login_changed (CcRegionPanel *self)
                 (g_permission_get_allowed (self->permission) ||
                  g_permission_get_can_acquire (self->permission));
         /* FIXME: insensitive doesn't look quite right for this */
-        gtk_widget_set_sensitive (GTK_WIDGET (self->language_section_frame), !self->login || can_acquire);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->language_list), !self->login || can_acquire);
 
         update_language_label (self);
 }
@@ -774,7 +770,6 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_section_frame);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_language_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
