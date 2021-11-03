@@ -102,6 +102,7 @@ struct _CcDateTimePanel
   GtkListBoxRow *month_row;
   GtkListBoxRow *year_row;
   GtkPopover *month_popover;
+  GtkFlowBox *month_flowbox;
   GtkWidget *network_time_switch;
   GtkWidget *time_editor;
   GtkWidget *timezone_button;
@@ -232,7 +233,7 @@ static void
 update_time (CcDateTimePanel *self)
 {
   g_autofree gchar *label = NULL;
-  g_autofree gchar *month_label = NULL;
+  GtkWidget *month_label;
   gboolean use_ampm;
 
   if (self->clock_format == G_DESKTOP_CLOCK_FORMAT_12H)
@@ -257,8 +258,8 @@ update_time (CcDateTimePanel *self)
     }
 
   self->month = g_date_time_get_month (self->date);
-  month_label = g_date_time_format (self->date, "%B");
-  gtk_label_set_text (self->month_label, month_label);
+  month_label = gtk_flow_box_get_child_at_index (self->month_flowbox, self->month - 1);
+  gtk_label_set_text (self->month_label, gtk_label_get_text (GTK_LABEL (month_label)));
   gtk_label_set_text (GTK_LABEL (self->datetime_label), label);
 }
 
@@ -861,7 +862,7 @@ setup_datetime_dialog (CcDateTimePanel *self)
   GtkAdjustment *adjustment;
   GdkDisplay *display;
   g_autoptr(GtkCssProvider) provider = NULL;
-  g_autofree char *month = NULL;
+  GtkWidget *month_label;
   guint num_days;
 
   /* Big time buttons */
@@ -881,8 +882,8 @@ setup_datetime_dialog (CcDateTimePanel *self)
 
   /* Month */
   self->month = g_date_time_get_month (self->date);
-  month = g_date_time_format (self->date, "%B");
-  gtk_label_set_text (self->month_label, month);
+  month_label = gtk_flow_box_get_child_at_index (self->month_flowbox, self->month - 1);
+  gtk_label_set_text (self->month_label, gtk_label_get_text (GTK_LABEL (month_label)));
 
   /* Day */
   num_days = g_date_get_days_in_month (g_date_time_get_month (self->date),
@@ -973,6 +974,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_label);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_popover);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_flowbox);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, network_time_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, time_editor);
