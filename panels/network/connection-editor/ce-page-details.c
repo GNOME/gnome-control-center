@@ -297,7 +297,9 @@ connect_details_page (CEPageDetails *self)
         gtk_widget_set_visible (GTK_WIDGET (self->speed_heading_label), speed_label != NULL);
         gtk_widget_set_visible (GTK_WIDGET (self->speed_label), speed_label != NULL);
 
-        hw_address = nm_device_get_hw_address (self->device);
+        if (self->device)
+            hw_address = nm_device_get_hw_address (self->device);
+
         gtk_label_set_label (self->mac_label, hw_address);
         gtk_widget_set_visible (GTK_WIDGET (self->mac_heading_label), hw_address != NULL);
         gtk_widget_set_visible (GTK_WIDGET (self->mac_label), hw_address != NULL);
