@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-10-19 15:44+0000\n"
-"PO-Revision-Date: 2021-09-17 19:25+0200\n"
+"POT-Creation-Date: 2021-11-04 10:00+0000\n"
+"PO-Revision-Date: 2021-11-07 20:27+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -2939,10 +2939,12 @@ msgstr "Deu conténer almens 8 caractèrs"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:272
 #, c-format
-msgid "Must have a maximum of %d characters"
-msgstr "Deu conténer almens %d caractèrs"
+msgid "Must have a maximum of %d character"
+msgid_plural "Must have a maximum of %d characters"
+msgstr[0] "Deu conténer al maximum %d caractèrs"
+msgstr[1] "Deu conténer al maximum %d caractèrs"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:488
+#: panels/network/cc-wifi-hotspot-dialog.c:489
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Alucar lo punt d’accès Wi-Fi ?"
 
@@ -5681,10 +5683,8 @@ msgstr ""
 "efèit a la connexion venenta."
 
 #: panels/region/cc-format-chooser.ui:117
-#, fuzzy
-#| msgid "Search locales..."
 msgid "Search locales…"
-msgstr "Cercar de lengas..."
+msgstr "Cercar de lengas…"
 
 #: panels/region/cc-format-chooser.ui:158
 msgid "Common Formats"
@@ -7847,20 +7847,20 @@ msgstr "Connexion per _reconeissença d'emprentas"
 msgid "A_utomatic Login"
 msgstr "Connexion a_utomatica"
 
-#: panels/user-accounts/cc-user-panel.ui:429
+#: panels/user-accounts/cc-user-panel.ui:430
 msgid "Account Activity"
 msgstr "Activitat del compte"
 
-#: panels/user-accounts/cc-user-panel.ui:460
+#: panels/user-accounts/cc-user-panel.ui:461
 msgid "Remove User…"
 msgstr "Suprimir l’utilizaire…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:501
+#: panels/user-accounts/cc-user-panel.ui:502
 msgid "No Users Found"
 msgstr "Cap d'utilizaire pas trobat"
 
-#: panels/user-accounts/cc-user-panel.ui:511
+#: panels/user-accounts/cc-user-panel.ui:512
 msgid "Unlock to add a user account."
 msgstr "Desverrolhatz per crear un compte d'utilizaire."
 
@@ -8516,10 +8516,8 @@ msgid "PIN code should be a 4-8 digit number"
 msgstr "Lo còdi PIM deu èsser un nombre de 4 a 8 chifras"
 
 #: panels/wwan/cc-wwan-device-page.c:317
-#, fuzzy
-#| msgid "Unlock…"
 msgid "Unlocking…"
-msgstr "Desverrolhar…"
+msgstr "Desverrolhatge…"
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
@@ -8763,7 +8761,23 @@ msgstr "Utilitari per configurar l’environament GNOME"
 msgid "Settings is the primary interface for configuring your system."
 msgstr "Paramètres es l’interfàcia principala de configuracion del sistèma."
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:20
+#: shell/appdata/gnome-control-center.appdata.xml.in:17
+msgid "GNOME Settings Sound Panel"
+msgstr "Paramètres GNOME del panèl de son"
+
+#: shell/appdata/gnome-control-center.appdata.xml.in:21
+msgid "GNOME Settings Mouse &amp; Touchpad Panel"
+msgstr "Paramètres GNOME panèl mirga &amp; e tactil"
+
+#: shell/appdata/gnome-control-center.appdata.xml.in:25
+msgid "GNOME Settings Background Panel"
+msgstr "Paramètres GNOME pel panèl rèireplan"
+
+#: shell/appdata/gnome-control-center.appdata.xml.in:29
+msgid "GNOME Settings Keyboard Panel"
+msgstr "Paramètres GNOME pel panèl clavièr"
+
+#: shell/appdata/gnome-control-center.appdata.xml.in:38
 msgid "The GNOME Project"
 msgstr "Lo projècte GNOME"
 
@@ -8887,13 +8901,15 @@ msgstr ""
 
 #: shell/org.gnome.ControlCenter.gschema.xml:20
 msgid "Initial state of the window"
-msgstr ""
+msgstr "Estat inicial de la fenèstra"
 
 #: shell/org.gnome.ControlCenter.gschema.xml:21
 msgid ""
 "A tuple containing the initial width, height and maximized state of the "
 "application window."
 msgstr ""
+"Un tuple que conten la largor e nautor inicialas e l'estat maximizat de la "
+"fenèstra de l’aplicacion."
 
 #. translators:
 #. * The number of sound outputs on a particular device
@@ -8919,9 +8935,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "Unlocking..."
 #~ msgstr "Desverrolhar..."
-
-#~ msgid "GNOME Settings"
-#~ msgstr "Paramètres GNOME"
 
 #~ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 #~ msgstr "Connexion;Nom;Emprenta;Avatar;Lògo;Visatge;Cap;Senhal;"
