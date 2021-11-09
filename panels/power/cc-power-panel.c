@@ -34,24 +34,6 @@
 #include "cc-power-resources.h"
 #include "cc-util.h"
 
-/* Uncomment this to test the behaviour of the panel in
- * battery-less situations:
- *
- * #define TEST_NO_BATTERIES
- */
-
-/* Uncomment this to test the behaviour of the panel with
- * multiple appearing devices
- *
- * #define TEST_FAKE_DEVICES
- */
-
-/* Uncomment this to test the behaviour of a desktop machine
- * with a UPS
- *
- * #define TEST_UPS
- */
-
 struct _CcPowerPanel
 {
   CcPanel            parent_instance;
@@ -234,90 +216,6 @@ up_client_changed (CcPowerPanel *self)
 
   empty_listbox (self->device_listbox);
   gtk_widget_hide (GTK_WIDGET (self->device_section));
-
-#ifdef TEST_FAKE_DEVICES
-  {
-    static gboolean fake_devices_added = FALSE;
-    UpDevice *device;
-
-    if (!fake_devices_added)
-      {
-        fake_devices_added = TRUE;
-        g_print ("adding fake devices\n");
-        device = up_device_new ();
-        g_object_set (device,
-                      "kind", UP_DEVICE_KIND_MOUSE,
-                      "native-path", "dummy:native-path1",
-                      "model", "My mouse",
-                      "percentage", 71.0,
-                      "state", UP_DEVICE_STATE_DISCHARGING,
-                      "time-to-empty", 287,
-                      "icon-name", "battery-full-symbolic",
-                      "power-supply", FALSE,
-                      "is-present", TRUE,
-                      "battery-level", UP_DEVICE_LEVEL_NORMAL,
-                      NULL);
-        g_ptr_array_add (self->devices, device);
-        device = up_device_new ();
-        g_object_set (device,
-                      "kind", UP_DEVICE_KIND_KEYBOARD,
-                      "native-path", "dummy:native-path2",
-                      "model", "My keyboard",
-                      "percentage", 59.0,
-                      "state", UP_DEVICE_STATE_DISCHARGING,
-                      "time-to-empty", 250,
-                      "icon-name", "battery-good-symbolic",
-                      "power-supply", FALSE,
-                      "is-present", TRUE,
-                      "battery-level", UP_DEVICE_LEVEL_NONE,
-                      NULL);
-        g_ptr_array_add (self->devices, device);
-        device = up_device_new ();
-        g_object_set (device,
-                      "kind", UP_DEVICE_KIND_BATTERY,
-                      "native-path", "dummy:native-path3",
-                      "model", "Battery from some factory",
-                      "percentage", 100.0,
-                      "state", UP_DEVICE_STATE_FULLY_CHARGED,
-                      "energy", 55.0,
-                      "energy-full", 55.0,
-                      "energy-rate", 15.0,
-                      "time-to-empty", 400,
-                      "time-to-full", 0,
-                      "icon-name", "battery-full-charged-symbolic",
-                      "power-supply", TRUE,
-                      "is-present", TRUE,
-                      "battery-level", UP_DEVICE_LEVEL_NONE,
-                      NULL);
-        g_ptr_array_add (self->devices, device);
-      }
-  }
-#endif
-
-#ifdef TEST_UPS
-  {
-    static gboolean fake_devices_added = FALSE;
-    UpDevice *device;
-
-    if (!fake_devices_added)
-      {
-        fake_devices_added = TRUE;
-        g_print ("adding fake UPS\n");
-        device = up_device_new ();
-        g_object_set (device,
-                      "kind", UP_DEVICE_KIND_UPS,
-                      "native-path", "dummy:usb-hiddev0",
-                      "model", "APC UPS",
-                      "percentage", 70.0,
-                      "state", UP_DEVICE_STATE_DISCHARGING,
-                      "is-present", TRUE,
-                      "power-supply", TRUE,
-                      "battery-level", UP_DEVICE_LEVEL_NONE,
-                      NULL);
-        g_ptr_array_add (self->devices, device);
-      }
-  }
-#endif
 
   on_ups = FALSE;
   n_batteries = 0;
@@ -577,10 +475,10 @@ set_value_for_combo_row (AdwComboRow *combo_row, gint value)
 static void
 set_ac_battery_ui_mode (CcPowerPanel *self)
 {
-  gboolean has_batteries = FALSE;
   GPtrArray *devices;
   guint i;
 
+  self->has_batteries = FALSE;
   devices = up_client_get_devices2 (self->up_client);
   g_debug ("got %d devices from upower\n", devices ? devices->len : 0);
 
@@ -598,20 +496,13 @@ set_ac_battery_ui_mode (CcPowerPanel *self)
       if (kind == UP_DEVICE_KIND_UPS ||
           (kind == UP_DEVICE_KIND_BATTERY && is_power_supply))
         {
-          has_batteries = TRUE;
+          self->has_batteries = TRUE;
           break;
         }
     }
   g_clear_pointer (&devices, g_ptr_array_unref);
 
-#ifdef TEST_NO_BATTERIES
-  g_print ("forcing no batteries\n");
-  has_batteries = FALSE;
-#endif
-
-  self->has_batteries = has_batteries;
-
-  if (!has_batteries)
+  if (!self->has_batteries)
     {
       gtk_widget_hide (GTK_WIDGET (self->suspend_on_battery_switch));
       gtk_widget_hide (GTK_WIDGET (self->suspend_on_battery_label));
