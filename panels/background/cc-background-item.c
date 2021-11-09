@@ -26,7 +26,7 @@
 #include <gio/gio.h>
 #include <glib/gi18n-lib.h>
 
-#include <libgnome-desktop/gnome-bg.h>
+#include <gnome-bg/gnome-bg.h>
 #include <gdesktop-enums.h>
 
 #include "cc-background-item.h"
@@ -156,11 +156,7 @@ render_at_size (GnomeBG *bg,
         GdkPixbuf *pixbuf;
 
         pixbuf = gdk_pixbuf_new (GDK_COLORSPACE_RGB, FALSE, 8, width, height);
-#ifdef GNOME_DESKTOP_BG_API_BREAK
         gnome_bg_draw (bg, pixbuf);
-#else
-        gnome_bg_draw (bg, pixbuf, gdk_screen_get_default (), FALSE);
-#endif
 
         return pixbuf;
 }
@@ -200,17 +196,28 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                  */
                 pixbuf = render_at_size (item->bg, width, height);
         } else {
+                g_autoptr(GdkMonitor) monitor = NULL;
+                GdkDisplay *display;
+                GListModel *monitors;
+                GdkRectangle monitor_layout;
+
+
+                display = gdk_display_get_default ();
+                monitors = gdk_display_get_monitors (display);
+                monitor = g_list_model_get_item (monitors, 0);
+                gdk_monitor_get_geometry (monitor, &monitor_layout);
+
                 if (frame >= 0) {
                         pixbuf = gnome_bg_create_frame_thumbnail (item->bg,
                                                                   thumbs,
-                                                                  gdk_screen_get_default (),
+                                                                  &monitor_layout,
                                                                   width,
                                                                   height,
                                                                   frame);
                 } else {
                         pixbuf = gnome_bg_create_thumbnail (item->bg,
                                                             thumbs,
-                                                            gdk_screen_get_default (),
+                                                            &monitor_layout,
                                                             width,
                                                             height);
                 }

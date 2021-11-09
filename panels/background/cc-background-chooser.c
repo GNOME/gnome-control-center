@@ -92,7 +92,7 @@ create_widget_func (gpointer model_item,
   CcBackgroundItem *item;
   GtkWidget *overlay;
   GtkWidget *child;
-  GtkWidget *image;
+  GtkWidget *picture;
   GtkWidget *icon;
   GtkWidget *button = NULL;
   BgSource *source;
@@ -104,10 +104,10 @@ create_widget_func (gpointer model_item,
                                              bg_source_get_thumbnail_width (source),
                                              bg_source_get_thumbnail_height (source),
                                              bg_source_get_scale_factor (source));
-  image = gtk_image_new_from_gicon (G_ICON (pixbuf), GTK_ICON_SIZE_DIALOG);
-  gtk_widget_show (image);
+  picture = gtk_picture_new_for_pixbuf (pixbuf);
+  gtk_picture_set_can_shrink (GTK_PICTURE (picture), FALSE);
 
-  icon = gtk_image_new_from_icon_name("slideshow-emblem", GTK_ICON_SIZE_BUTTON);
+  icon = gtk_image_new_from_icon_name ("slideshow-emblem");
   gtk_image_set_pixel_size (GTK_IMAGE (icon), 16);
   gtk_widget_set_margin_start (icon, 8);
   gtk_widget_set_margin_end (icon, 8);
@@ -116,22 +116,20 @@ create_widget_func (gpointer model_item,
   gtk_widget_set_halign (icon, GTK_ALIGN_END);
   gtk_widget_set_valign (icon, GTK_ALIGN_END);
   gtk_widget_set_visible (icon, cc_background_item_changes_with_time (item));
-  gtk_style_context_add_class (gtk_widget_get_style_context (icon), "slideshow-emblem");
-
+  gtk_widget_add_css_class (icon, "slideshow-emblem");
 
   if (BG_IS_RECENT_SOURCE (source))
     {
-      button = gtk_button_new_from_icon_name ("window-close-symbolic", GTK_ICON_SIZE_BUTTON);
+      button = gtk_button_new_from_icon_name ("window-close-symbolic");
       gtk_widget_set_halign (button, GTK_ALIGN_END);
       gtk_widget_set_valign (button, GTK_ALIGN_START);
       gtk_widget_set_margin_start (icon, 6);
       gtk_widget_set_margin_end (icon, 6);
       gtk_widget_set_margin_top (icon, 6);
       gtk_widget_set_margin_bottom (icon, 6);
-      gtk_widget_show (button);
 
-      gtk_style_context_add_class (gtk_widget_get_style_context (button), "osd");
-      gtk_style_context_add_class (gtk_widget_get_style_context (button), "remove-button");
+      gtk_widget_add_css_class (button, "osd");
+      gtk_widget_add_css_class (button, "remove-button");
 
       g_signal_connect (button,
                         "clicked",
@@ -140,17 +138,15 @@ create_widget_func (gpointer model_item,
     }
 
   overlay = gtk_overlay_new ();
-  gtk_container_add (GTK_CONTAINER (overlay), image);
+  gtk_overlay_set_child (GTK_OVERLAY (overlay), picture);
   gtk_overlay_add_overlay (GTK_OVERLAY (overlay), icon);
   if (button)
     gtk_overlay_add_overlay (GTK_OVERLAY (overlay), button);
-  gtk_widget_show (overlay);
 
-  child = gtk_flow_box_child_new();
+  child = gtk_flow_box_child_new ();
   gtk_widget_set_halign (child, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (child, GTK_ALIGN_CENTER);
-  gtk_container_add (GTK_CONTAINER (child), overlay);
-  gtk_widget_show (child);
+  gtk_flow_box_child_set_child (GTK_FLOW_BOX_CHILD (child), overlay);
 
   g_object_set_data_full (G_OBJECT (child), "item", g_object_ref (item), g_object_unref);
 
@@ -218,67 +214,20 @@ on_file_chooser_response_cb (GtkDialog           *filechooser,
 {
   if (response == GTK_RESPONSE_ACCEPT)
     {
-      g_autoptr(GSList) filenames = NULL;
-      GSList *l;
+      g_autoptr(GListModel) files = NULL;
+      guint i;
 
-      filenames = gtk_file_chooser_get_filenames (GTK_FILE_CHOOSER (filechooser));
-      for (l = filenames; l != NULL; l = l->next)
+      files = gtk_file_chooser_get_files (GTK_FILE_CHOOSER (filechooser));
+      for (i = 0; i < g_list_model_get_n_items (files); i++)
         {
-          g_autofree gchar *filename = l->data;
+          g_autoptr(GFile) file = g_list_model_get_item (files, i);
+          g_autofree gchar *filename = g_file_get_path (file);
 
           bg_recent_source_add_file (self->recent_source, filename);
         }
     }
 
-  gtk_widget_destroy (GTK_WIDGET (filechooser));
-}
-
-static void
-on_file_chooser_selection_changed_cb (GtkFileChooser               *chooser,
-                                      GnomeDesktopThumbnailFactory *thumbnail_factory)
-{
-  g_autofree gchar *uri = NULL;
-
-  uri = gtk_file_chooser_get_uri (chooser);
-
-  if (uri)
-    {
-      g_autoptr(GFileInfo) file_info = NULL;
-      g_autoptr(GdkPixbuf) pixbuf = NULL;
-      g_autofree gchar *mime_type = NULL;
-      g_autoptr(GFile) file = NULL;
-      GtkWidget *preview;
-
-      preview = gtk_file_chooser_get_preview_widget (chooser);
-
-      file = g_file_new_for_uri (uri);
-      file_info = g_file_query_info (file,
-                                     "standard::*",
-                                     G_FILE_QUERY_INFO_NONE,
-                                     NULL,
-                                     NULL);
-
-      if (file_info && g_file_info_get_file_type (file_info) != G_FILE_TYPE_DIRECTORY)
-        mime_type = g_strdup (g_file_info_get_content_type (file_info));
-
-      if (mime_type)
-        {
-          pixbuf = gnome_desktop_thumbnail_factory_generate_thumbnail (thumbnail_factory,
-                                                                       uri,
-                                                                       mime_type);
-        }
-
-      gtk_dialog_set_response_sensitive (GTK_DIALOG (chooser),
-                                         GTK_RESPONSE_ACCEPT,
-                                         pixbuf != NULL);
-
-      if (pixbuf)
-        gtk_image_set_from_pixbuf (GTK_IMAGE (preview), pixbuf);
-      else
-        gtk_image_set_from_icon_name (GTK_IMAGE (preview), "dialog-question", GTK_ICON_SIZE_DIALOG);
-    }
-
-  gtk_file_chooser_set_preview_widget_active (chooser, TRUE);
+  gtk_window_destroy (GTK_WINDOW (filechooser));
 }
 
 /* GObject overrides */
@@ -332,15 +281,14 @@ cc_background_chooser_init (CcBackgroundChooser *self)
 void
 cc_background_chooser_select_file (CcBackgroundChooser *self)
 {
-  g_autoptr(GnomeDesktopThumbnailFactory) factory = NULL;
+  g_autoptr(GFile) pictures_folder = NULL;
   GtkFileFilter *filter;
   GtkWidget *filechooser;
   GtkWindow *toplevel;
-  GtkWidget *preview;
 
   g_return_if_fail (CC_IS_BACKGROUND_CHOOSER (self));
 
-  toplevel = (GtkWindow*) gtk_widget_get_toplevel (GTK_WIDGET (self));
+  toplevel = (GtkWindow*) gtk_widget_get_native (GTK_WIDGET (self));
   filechooser = gtk_file_chooser_dialog_new (_("Select a picture"),
                                              toplevel,
                                              GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -349,30 +297,14 @@ cc_background_chooser_select_file (CcBackgroundChooser *self)
                                              NULL);
   gtk_window_set_modal (GTK_WINDOW (filechooser), TRUE);
 
-  preview = gtk_image_new ();
-  gtk_widget_set_size_request (preview, 154, -1);
-  gtk_file_chooser_set_preview_widget (GTK_FILE_CHOOSER (filechooser), preview);
-  gtk_file_chooser_set_use_preview_label (GTK_FILE_CHOOSER (filechooser), FALSE);
-  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (filechooser), TRUE);
-  gtk_widget_show (preview);
-
-  factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
-  g_signal_connect_after (filechooser,
-                          "selection-changed",
-                          G_CALLBACK (on_file_chooser_selection_changed_cb),
-                          factory);
-
-  g_object_set_data_full (G_OBJECT (filechooser),
-                          "factory",
-                          g_object_ref (factory),
-                          g_object_unref);
-
   filter = gtk_file_filter_new ();
   gtk_file_filter_add_pixbuf_formats (filter);
   gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (filechooser), filter);
 
+  pictures_folder = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
   gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (filechooser),
-                                       g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
+                                       pictures_folder,
+                                       NULL);
 
   g_signal_connect_object (filechooser,
                            "response",

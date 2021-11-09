@@ -88,7 +88,7 @@ sources = common_sources + files(
 
 deps = common_deps + [
   gdk_pixbuf_dep,
-  gnome_desktop_dep,
+  gnome_bg_dep,
   libxml_dep,
   dependency('cairo-gobject'),
 ]
@@ -97,10 +97,6 @@ cflags += [
   '-DDATADIR="@0@"'.format(control_center_datadir),
   '-DGNOME_DESKTOP_USE_UNSTABLE_API'
 ]
-
-if gnome_desktop_dep.version().version_compare('>=3.35.4')
-  cflags += '-DGNOME_DESKTOP_BG_API_BREAK'
-endif
 
 panels_libs += static_library(
   cappletname,

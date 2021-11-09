@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcBackgroundChooser" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
 
     <child>
       <object class="GtkSeparator">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
       </object>
     </child>
 
     <child>
       <object class="GtkScrolledWindow">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="expand">True</property>
-        <property name="shadow-type">none</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
         <property name="hscrollbar-policy">never</property>
         <property name="vscrollbar-policy">automatic</property>
         <child>
           <object class="GtkBox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="orientation">vertical</property>
-            <property name="expand">True</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
             <style>
               <class name="view" />
             </style>
@@ -33,15 +26,15 @@
             <!-- Recent -->
             <child>
               <object class="GtkBox" id="recent_box">
-                <property name="visible">True</property>
-                <property name="can-focus">True</property>
                 <property name="orientation">vertical</property>
                 <property name="halign">center</property>
 
                 <child>
                   <object class="GtkFlowBox" id="recent_flowbox">
-                    <property name="visible">True</property>
-                    <property name="margin">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
                     <property name="column-spacing">12</property>
                     <property name="row-spacing">12</property>
                     <property name="homogeneous">True</property>
@@ -56,8 +49,6 @@
 
                 <child>
                   <object class="GtkSeparator">
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
                     <property name="margin-top">12</property>
                     <property name="margin-bottom">12</property>
                   </object>
@@ -68,8 +59,10 @@
 
             <child>
               <object class="GtkFlowBox" id="flowbox">
-                <property name="visible">True</property>
-                <property name="margin">12</property>
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="margin-top">12</property>
+                <property name="margin-bottom">12</property>
                 <property name="column-spacing">12</property>
                 <property name="row-spacing">12</property>
                 <property name="homogeneous">True</property>

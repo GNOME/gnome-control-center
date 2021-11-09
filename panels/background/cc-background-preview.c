@@ -24,7 +24,7 @@
 
 struct _CcBackgroundPreview
 {
-  GtkBox            parent;
+  GtkWidget         parent;
 
   GtkImage         *animated_background_icon;
   GtkLabel         *desktop_clock_label;
@@ -32,6 +32,7 @@ struct _CcBackgroundPreview
   GtkDrawingArea   *drawing_area;
   GtkFrame         *lock_frame;
   GtkLabel         *lock_screen_label;
+  GtkWidget        *overlay;
   GtkStack         *stack;
 
   GnomeDesktopThumbnailFactory *thumbnail_factory;
@@ -45,7 +46,7 @@ struct _CcBackgroundPreview
   gboolean          is_24h_format;
 };
 
-G_DEFINE_TYPE (CcBackgroundPreview, cc_background_preview, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcBackgroundPreview, cc_background_preview, GTK_TYPE_WIDGET)
 
 enum
 {
@@ -112,9 +113,9 @@ load_custom_css (CcBackgroundPreview *self)
   /* use custom CSS */
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/background/preview.css");
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
 }
 
@@ -152,23 +153,25 @@ stop_monitor_time (CcBackgroundPreview *self)
 
 /* Callbacks */
 
-static gboolean
-on_preview_draw_cb (CcBackgroundPreview *self,
-                    cairo_t             *cr)
+static void
+draw_preview_func (GtkDrawingArea *drawing_area,
+                   cairo_t        *cr,
+                   gint            width,
+                   gint            height,
+                   gpointer        user_data)
 {
+  CcBackgroundPreview *self = CC_BACKGROUND_PREVIEW (user_data);
   g_autoptr(GdkPixbuf) pixbuf = NULL;
-  GtkAllocation allocation;
   gint scale_factor;
 
   if (!self->item)
-    return FALSE;
+    return;
 
-  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (self->drawing_area));
-  gtk_widget_get_allocation (GTK_WIDGET (self->drawing_area), &allocation);
+  scale_factor = gtk_widget_get_scale_factor (GTK_WIDGET (drawing_area));
   pixbuf = cc_background_item_get_frame_thumbnail (self->item,
                                                    self->thumbnail_factory,
-                                                   allocation.width,
-                                                   allocation.height,
+                                                   width,
+                                                   height,
                                                    scale_factor,
                                                    0,
                                                    TRUE);
@@ -176,11 +179,19 @@ on_preview_draw_cb (CcBackgroundPreview *self,
 
   gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);
   cairo_paint (cr);
-
-  return TRUE;
 }
 
 /* GObject overrides */
+
+static void
+cc_background_preview_dispose (GObject *object)
+{
+  CcBackgroundPreview *self = (CcBackgroundPreview *)object;
+
+  g_clear_pointer (&self->overlay, gtk_widget_unparent);
+
+  G_OBJECT_CLASS (cc_background_preview_parent_class)->dispose (object);
+}
 
 static void
 cc_background_preview_finalize (GObject *object)
@@ -256,16 +267,19 @@ static gfloat
 get_primary_monitor_aspect_ratio (void)
 {
   GdkDisplay *display;
-  GdkMonitor *primary_monitor;
+  GListModel *monitors;
   gfloat aspect_ratio;
 
   display = gdk_display_get_default ();
-  primary_monitor = gdk_display_get_primary_monitor (display);
   aspect_ratio = 16.0 / 9.0;
 
-  if (primary_monitor)
+  monitors = gdk_display_get_monitors (display);
+  if (monitors)
     {
+      g_autoptr(GdkMonitor) primary_monitor = NULL;
       GdkRectangle monitor_layout;
+
+      primary_monitor = g_list_model_get_item (monitors, 0);
       gdk_monitor_get_geometry (primary_monitor, &monitor_layout);
       aspect_ratio = monitor_layout.width / (gfloat) monitor_layout.height;
     }
@@ -274,25 +288,50 @@ get_primary_monitor_aspect_ratio (void)
 }
 
 static void
-cc_background_preview_get_preferred_height_for_width (GtkWidget *widget,
-                                                      gint       width,
-                                                      gint      *minimum,
-                                                      gint      *natural)
+cc_background_preview_measure (GtkWidget      *widget,
+                               GtkOrientation  orientation,
+                               gint            for_size,
+                               gint           *minimum,
+                               gint           *natural,
+                               gint           *minimum_baseline,
+                               gint           *natural_baseline)
 {
-  gfloat aspect_ratio = get_primary_monitor_aspect_ratio ();
+  CcBackgroundPreview *self = (CcBackgroundPreview *)widget;
+  gint child_min, child_nat;
+  gfloat aspect_ratio;
 
-  *minimum = *natural = MAX (2, width / aspect_ratio);
+  aspect_ratio = get_primary_monitor_aspect_ratio ();
+
+  gtk_widget_measure (self->overlay,
+                      orientation,
+                      for_size,
+                      &child_min,
+                      &child_nat,
+                      NULL, NULL);
+
+  switch (orientation)
+    {
+    case GTK_ORIENTATION_HORIZONTAL:
+      *minimum = MAX (2, child_min * aspect_ratio);
+      *natural = MAX (2, child_nat * aspect_ratio);
+      break;
+
+    case GTK_ORIENTATION_VERTICAL:
+      *minimum = MAX (2, for_size / aspect_ratio);
+      *natural = MAX (2, for_size / aspect_ratio);
+      break;
+    }
 }
 
 static void
-cc_background_preview_get_preferred_width_for_height (GtkWidget *widget,
-                                                      gint       height,
-                                                      gint      *minimum,
-                                                      gint      *natural)
+cc_background_preview_size_allocate (GtkWidget *widget,
+                                     gint       width,
+                                     gint       height,
+                                     gint       baseline)
 {
-  gfloat aspect_ratio = get_primary_monitor_aspect_ratio ();
+  CcBackgroundPreview *self = CC_BACKGROUND_PREVIEW (widget);
 
-  *minimum = *natural = MAX (2, height * aspect_ratio);
+  gtk_widget_allocate (self->overlay, width, height, baseline, NULL);
 }
 
 static void
@@ -301,13 +340,14 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  object_class->dispose = cc_background_preview_dispose;
   object_class->finalize = cc_background_preview_finalize;
   object_class->get_property = cc_background_preview_get_property;
   object_class->set_property = cc_background_preview_set_property;
 
   widget_class->get_request_mode = cc_background_preview_get_request_mode;
-  widget_class->get_preferred_height_for_width = cc_background_preview_get_preferred_height_for_width;
-  widget_class->get_preferred_width_for_height = cc_background_preview_get_preferred_width_for_height;
+  widget_class->measure = cc_background_preview_measure;
+  widget_class->size_allocate = cc_background_preview_size_allocate;
 
   properties[PROP_IS_LOCK_SCREEN] = g_param_spec_boolean ("is-lock-screen",
                                                           "Lock screen",
@@ -331,9 +371,8 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, drawing_area);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, lock_frame);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, lock_screen_label);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, overlay);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, stack);
-
-  gtk_widget_class_bind_template_callback (widget_class, on_preview_draw_cb);
 }
 
 static void
@@ -376,6 +415,7 @@ cc_background_preview_set_item (CcBackgroundPreview *self,
   gtk_widget_set_visible (GTK_WIDGET (self->animated_background_icon),
                           cc_background_item_changes_with_time (item));
 
+  gtk_drawing_area_set_draw_func (self->drawing_area, draw_preview_func, self, NULL);
   gtk_widget_queue_draw (GTK_WIDGET (self->drawing_area));
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ITEM]);

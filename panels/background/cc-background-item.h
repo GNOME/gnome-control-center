@@ -23,7 +23,7 @@
 #include <gdk-pixbuf/gdk-pixbuf.h>
 #include <libgnome-desktop/gnome-desktop-thumbnail.h>
 #include <gdesktop-enums.h>
-#include <libgnome-desktop/gnome-bg.h>
+#include <gnome-bg/gnome-bg.h>
 
 G_BEGIN_DECLS
 

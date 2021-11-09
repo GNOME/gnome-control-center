@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcBackgroundPreview" parent="GtkBox">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
+  <template class="CcBackgroundPreview" parent="GtkWidget">
     <property name="hexpand">True</property>
     <property name="vexpand">False</property>
     <style>
@@ -11,94 +9,69 @@
     </style>
 
     <child>
-      <object class="GtkOverlay">
-        <property name="visible">True</property>
-        <property name="can-focus">False</property>
-        <property name="hexpand">True</property>
+      <object class="GtkOverlay" id="overlay">
+       <property name="hexpand">True</property>
 
         <!-- Wallpaper -->
         <child>
           <object class="GtkDrawingArea" id="drawing_area">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="expand">True</property>
-            <signal name="draw" handler="on_preview_draw_cb" object="CcBackgroundPreview" swapped="yes" />
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
           </object>
         </child>
 
         <!-- Desktop / Lock Screen widgets -->
         <child type="overlay">
           <object class="GtkStack" id="stack">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="expand">True</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
 
             <child>
               <object class="GtkFrame" id="desktop_frame">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="shadow-type">none</property>
                 <property name="valign">start</property>
                 <style>
                   <class name="desktop-preview" />
                 </style>
 
                 <child>
-                  <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
+                  <object class="GtkCenterBox">
 
-                    <child>
+                    <child type="start">
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="label" translatable="yes">Activities</property>
+                       <property name="label" translatable="yes">Activities</property>
                       </object>
                     </child>
 
                     <child type="center">
                       <object class="GtkLabel" id="desktop_clock_label">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                      </object>
+                     </object>
                     </child>
 
-                    <child>
+                    <child type="end">
                       <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can-focus">False</property>
-                        <property name="spacing">4</property>
+                       <property name="spacing">4</property>
 
                         <child>
                           <object class="GtkImage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="icon-name">network-wireless-symbolic</property>
+                           <property name="icon-name">network-wireless-symbolic</property>
                             <property name="pixel-size">6</property>
                           </object>
                         </child>
 
                         <child>
                           <object class="GtkImage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="icon-name">audio-volume-high-symbolic</property>
+                           <property name="icon-name">audio-volume-high-symbolic</property>
                             <property name="pixel-size">6</property>
                           </object>
                         </child>
 
                         <child>
                           <object class="GtkImage">
-                            <property name="visible">True</property>
-                            <property name="can-focus">False</property>
-                            <property name="icon-name">battery-low-symbolic</property>
+                           <property name="icon-name">battery-low-symbolic</property>
                             <property name="pixel-size">6</property>
                           </object>
                         </child>
                       </object>
-                      <packing>
-                        <property name="pack-type">end</property>
-                      </packing>
                     </child>
                   </object>
                 </child>
@@ -109,14 +82,10 @@
 
             <child>
               <object class="GtkFrame" id="lock_frame">
-                <property name="visible">True</property>
-                <property name="can-focus">False</property>
-                <property name="shadow-type">none</property>
                 <child>
                   <object class="GtkLabel" id="lock_screen_label">
-                    <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <property name="expand">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
                     <property name="xalign">0.5</property>
                     <property name="yalign">0.5</property>
                   </object>
@@ -132,9 +101,7 @@
         <!-- Wallpaper -->
         <child type="overlay">
           <object class="GtkImage" id="animated_background_icon">
-            <property name="visible">True</property>
-            <property name="can-focus">False</property>
-            <property name="halign">end</property>
+           <property name="halign">end</property>
             <property name="valign">end</property>
             <property name="margin-end">8</property>
             <property name="margin-bottom">8</property>
