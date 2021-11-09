@@ -4,7 +4,7 @@ panels = [
   'applications',
   'background',
   'camera',
-#  'color',
+  'color',
   'datetime',
   'default-apps',
   'diagnostics',

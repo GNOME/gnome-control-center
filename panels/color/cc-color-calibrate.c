@@ -29,7 +29,7 @@
 #include <colord-session/cd-session.h>
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnome-desktop/gnome-rr.h>
+#include <gnome-rr/gnome-rr.h>
 
 #include "cc-color-calibrate.h"
 
@@ -170,7 +170,7 @@ cc_color_calibrate_calib_setup_screen (CcColorCalibrate *calibrate,
   gboolean ret = TRUE;
 
   /* get screen */
-  calibrate->x11_screen = gnome_rr_screen_new (gdk_screen_get_default (), error);
+  calibrate->x11_screen = gnome_rr_screen_new (gdk_display_get_default (), error);
   if (calibrate->x11_screen == NULL)
     {
       ret = FALSE;
@@ -608,25 +608,28 @@ cc_color_calibrate_move_and_resize_window (GtkWindow *window,
                                            CdDevice *device,
                                            GError **error)
 {
+  g_autoptr(GListModel) monitors = NULL;
+  g_autoptr(GdkMonitor) monitor = NULL;
   const gchar *xrandr_name;
   gboolean ret = TRUE;
   GdkRectangle rect;
   GdkDisplay *display;
-  GdkMonitor *monitor;
   gint i;
   gint monitor_num = -1;
   gint num_monitors;
 
   /* find the monitor num of the device output */
   display = gdk_display_get_default ();
-  num_monitors = gdk_display_get_n_monitors (display);
+  monitors = gdk_display_get_monitors (display);
+  num_monitors = g_list_model_get_n_items (monitors);
   xrandr_name = cd_device_get_metadata_item (device, CD_DEVICE_METADATA_XRANDR_NAME);
   for (i = 0; i < num_monitors; i++)
     {
+      g_autoptr(GdkMonitor) m = NULL;
       const gchar *plug_name;
 
-      monitor = gdk_display_get_monitor (display, i);
-      plug_name = gdk_monitor_get_model (monitor);
+      m = g_list_model_get_item (monitors, i);
+      plug_name = gdk_monitor_get_model (m);
 
       if (g_strcmp0 (plug_name, xrandr_name) == 0)
         monitor_num = i;
@@ -643,16 +646,14 @@ cc_color_calibrate_move_and_resize_window (GtkWindow *window,
     }
 
   /* move the window, and set it to the right size */
-  monitor = gdk_display_get_monitor (display, monitor_num);
+  monitor = g_list_model_get_item (monitors, monitor_num);
   gdk_monitor_get_geometry (monitor, &rect);
-  gtk_window_move (window, rect.x, rect.y);
-  gtk_window_resize (window, rect.width, rect.height);
   g_debug ("Setting window to %ix%i with size %ix%i",
            rect.x, rect.y, rect.width, rect.height);
 out:
   return ret;
 }
-
+#if 0
 static void
 cc_color_calibrate_window_realize_cb (CcColorCalibrate *self)
 {
@@ -690,6 +691,7 @@ cc_color_calibrate_window_state_cb (CcColorCalibrate *calibrate,
     g_warning ("Failed to resize window: %s", error->message);
   return TRUE;
 }
+#endif
 
 static void
 cc_color_calibrate_button_done_cb (CcColorCalibrate *calibrate)
@@ -730,6 +732,7 @@ cc_color_calibrate_button_cancel_cb (CcColorCalibrate *calibrate)
   cc_color_calibrate_cancel (calibrate);
 }
 
+#if 0
 static gboolean
 cc_color_calibrate_alpha_window_draw (CcColorCalibrate *calibrate, cairo_t *cr)
 {
@@ -769,6 +772,7 @@ cc_color_calibrate_alpha_screen_changed_cb (CcColorCalibrate *calibrate)
     visual = gdk_screen_get_system_visual (screen);
   gtk_widget_set_visual (GTK_WIDGET (window), visual);
 }
+#endif
 
 static void
 cc_color_calibrate_uninhibit (CcColorCalibrate *calibrate)
@@ -998,7 +1002,7 @@ cc_color_calibrate_finalize (GObject *object)
 {
   CcColorCalibrate *calibrate = CC_COLOR_CALIBRATE (object);
 
-  g_clear_pointer ((GtkWidget **)&calibrate->window, gtk_widget_destroy);
+  g_clear_pointer (&calibrate->window, gtk_window_destroy);
   g_clear_object (&calibrate->builder);
   g_clear_object (&calibrate->device);
   g_clear_object (&calibrate->proxy_helper);
@@ -1044,8 +1048,7 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
                  "vbox_status"));
   calibrate->sample_widget = cd_sample_widget_new ();
   gtk_widget_set_size_request (calibrate->sample_widget, 400, 400);
-  gtk_box_pack_start (box, calibrate->sample_widget, FALSE, FALSE, 0);
-  gtk_box_reorder_child (box, calibrate->sample_widget, 0);
+  gtk_box_prepend (box, calibrate->sample_widget);
   gtk_widget_set_vexpand (calibrate->sample_widget, FALSE);
   gtk_widget_set_hexpand (calibrate->sample_widget, FALSE);
 
@@ -1076,6 +1079,7 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   /* setup the specialist calibration window */
   window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
                                                "dialog_calibrate"));
+  /*
   g_signal_connect_object (window, "draw",
                            G_CALLBACK (cc_color_calibrate_alpha_window_draw), calibrate, G_CONNECT_SWAPPED);
   g_signal_connect_object (window, "realize",
@@ -1084,11 +1088,10 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
                            G_CALLBACK (cc_color_calibrate_window_state_cb), calibrate, G_CONNECT_SWAPPED);
   g_signal_connect_object (window, "delete-event",
                            G_CALLBACK (cc_color_calibrate_delete_event_cb), calibrate, G_CONNECT_SWAPPED);
-  gtk_widget_set_app_paintable (GTK_WIDGET (window), TRUE);
-  gtk_window_set_keep_above (window, TRUE);
   cc_color_calibrate_alpha_screen_changed_cb (calibrate);
   g_signal_connect_object (window, "screen-changed",
                            G_CALLBACK (cc_color_calibrate_alpha_screen_changed_cb), calibrate, G_CONNECT_SWAPPED);
+   */
   calibrate->window = window;
 }
 

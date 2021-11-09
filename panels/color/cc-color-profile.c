@@ -435,10 +435,10 @@ cc_color_profile_init (CcColorProfile *color_profile)
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 9);
 
   /* default tick */
-  color_profile->widget_image = gtk_image_new_from_icon_name ("object-select-symbolic", GTK_ICON_SIZE_MENU);
+  color_profile->widget_image = gtk_image_new_from_icon_name ("object-select-symbolic");
   gtk_widget_set_margin_start (color_profile->widget_image, IMAGE_WIDGET_PADDING);
   gtk_widget_set_margin_end (color_profile->widget_image, IMAGE_WIDGET_PADDING);
-  gtk_box_pack_start (GTK_BOX (box), color_profile->widget_image, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), color_profile->widget_image);
 
   /* description */
   color_profile->widget_description = gtk_label_new ("");
@@ -447,18 +447,18 @@ cc_color_profile_init (CcColorProfile *color_profile)
   gtk_widget_set_halign (color_profile->widget_description, GTK_ALIGN_START);
   gtk_label_set_ellipsize (GTK_LABEL (color_profile->widget_description), PANGO_ELLIPSIZE_END);
   gtk_label_set_xalign (GTK_LABEL (color_profile->widget_description), 0);
-  gtk_box_pack_start (GTK_BOX (box), color_profile->widget_description, TRUE, TRUE, 0);
-  gtk_widget_show (color_profile->widget_description);
+  gtk_widget_set_hexpand (color_profile->widget_description, TRUE);
+  gtk_widget_set_vexpand (color_profile->widget_description, TRUE);
+  gtk_box_append (GTK_BOX (box), color_profile->widget_description);
 
   /* profile warnings/info */
-  color_profile->widget_info = gtk_image_new_from_icon_name ("dialog-information-symbolic", GTK_ICON_SIZE_MENU);
+  color_profile->widget_info = gtk_image_new_from_icon_name ("dialog-information-symbolic");
   gtk_widget_set_margin_start (color_profile->widget_info, IMAGE_WIDGET_PADDING);
   gtk_widget_set_margin_end (color_profile->widget_info, IMAGE_WIDGET_PADDING);
-  gtk_box_pack_start (GTK_BOX (box), color_profile->widget_info, FALSE, FALSE, 0);
+  gtk_box_append (GTK_BOX (box), color_profile->widget_info);
 
   /* refresh */
-  gtk_container_add (GTK_CONTAINER (color_profile), box);
-  gtk_widget_set_visible (box, TRUE);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (color_profile), box);
 }
 
 GtkWidget *

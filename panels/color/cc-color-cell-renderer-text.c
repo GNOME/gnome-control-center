@@ -77,12 +77,12 @@ cc_color_cell_renderer_text_set_property (GObject *object, guint param_id,
 }
 
 static void
-cc_color_cell_renderer_render (GtkCellRenderer      *cell,
-                               cairo_t              *cr,
-                               GtkWidget            *widget,
-                               const GdkRectangle   *background_area,
-                               const GdkRectangle   *cell_area,
-                               GtkCellRendererState  flags)
+cc_color_cell_renderer_snapshot (GtkCellRenderer      *cell,
+                                 GtkSnapshot          *snapshot,
+                                 GtkWidget            *widget,
+                                 const GdkRectangle   *background_area,
+                                 const GdkRectangle   *cell_area,
+                                 GtkCellRendererState  flags)
 {
   CcColorCellRendererText *renderer;
   GtkStyleContext *context;
@@ -94,9 +94,9 @@ cc_color_cell_renderer_render (GtkCellRenderer      *cell,
     gtk_style_context_add_class (context, "dim-label");
   else
     gtk_style_context_remove_class (context, "dim-label");
-  GTK_CELL_RENDERER_CLASS (parent_class)->render (cell, cr, widget,
-                                                  background_area,
-                                                  cell_area, flags);
+  GTK_CELL_RENDERER_CLASS (parent_class)->snapshot (cell, snapshot, widget,
+                                                    background_area,
+                                                    cell_area, flags);
   gtk_style_context_restore (context);
 }
 
@@ -105,7 +105,7 @@ cc_color_cell_renderer_text_class_init (CcColorCellRendererTextClass *class)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (class);
   GtkCellRendererClass *object_class_gcr = GTK_CELL_RENDERER_CLASS (class);
-  object_class_gcr->render = cc_color_cell_renderer_render;
+  object_class_gcr->snapshot = cc_color_cell_renderer_snapshot;
 
   parent_class = g_type_class_peek_parent (class);
 
