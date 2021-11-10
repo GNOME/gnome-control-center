@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-11-04 10:00+0000\n"
-"PO-Revision-Date: 2021-11-05 20:48+0200\n"
+"POT-Creation-Date: 2021-11-10 15:36+0000\n"
+"PO-Revision-Date: 2021-11-10 17:47+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2942,7 +2942,6 @@ msgstr "Має містити не менше 8 символів"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:272
 #, c-format
-#| msgid "Must have a maximum of %d characters"
 msgid "Must have a maximum of %d character"
 msgid_plural "Must have a maximum of %d characters"
 msgstr[0] "Має складатися з не більше за %d символу"
@@ -5037,23 +5036,23 @@ msgid "Authentication Required"
 msgstr "Потрібно засвідчитись"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:682
+#: panels/printers/cc-printers-panel.c:683
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Принтер «%s» було успішно вилучено"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:926
+#: panels/printers/cc-printers-panel.c:927
 msgid "Failed to add new printer."
 msgstr "Не вдалось додати принтер."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1225
+#: panels/printers/cc-printers-panel.c:1226
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не вдалось завантажити інтерфейс: %s"
 
-#: panels/printers/cc-printers-panel.c:1293
+#: panels/printers/cc-printers-panel.c:1294
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Розблокуйте, щоб додати принтери і змінити налаштування"
 
@@ -5211,55 +5210,61 @@ msgid "Reverse portrait"
 msgstr "Зворотна книжкова"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-job-row.c:106
+#: panels/printers/pp-job-row.c:137
 msgctxt "print job"
 msgid "Pending"
 msgstr "Очікування"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-job-row.c:112
+#: panels/printers/pp-job-row.c:143
 msgctxt "print job"
 msgid "Paused"
 msgstr "Призупинено"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-job-row.c:117
+#: panels/printers/pp-job-row.c:148
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Слід пройти розпізнавання"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-job-row.c:122
+#: panels/printers/pp-job-row.c:153
 msgctxt "print job"
 msgid "Processing"
 msgstr "Оброблення"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-job-row.c:126
+#: panels/printers/pp-job-row.c:157
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Зупинено"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-job-row.c:130
+#: panels/printers/pp-job-row.c:161
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Скасовано"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-job-row.c:134
+#: panels/printers/pp-job-row.c:165
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Припинено"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-job-row.c:138
+#: panels/printers/pp-job-row.c:169
 msgctxt "print job"
 msgid "Completed"
 msgstr "Завершено"
 
+#. Translators: Clicking this button prioritizes printing of this print job
+#: panels/printers/pp-job-row.c:179
+msgid "Move this job to the top of the queue"
+msgstr ""
+"Пересунути це завдання на вершину черги"
+
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:249
+#: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5269,14 +5274,14 @@ msgstr[2] "Для %u завдань слід пройти розпізнаван
 msgstr[3] "Для %u завдання слід пройти розпізнавання"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:401
+#: panels/printers/pp-jobs-dialog.c:471
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — запущені завдання"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:405
+#: panels/printers/pp-jobs-dialog.c:475
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Для друку з %s введіть реєстраційні дані."
@@ -8784,22 +8789,18 @@ msgid "Settings is the primary interface for configuring your system."
 msgstr "«Параметри» є основним інтерфейсом для налаштовування вашої системи."
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:17
-#| msgid "GNOME Settings"
 msgid "GNOME Settings Sound Panel"
 msgstr "Панель «Звук» «Параметрів GNOME»"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:21
 msgid "GNOME Settings Mouse &amp; Touchpad Panel"
-msgstr ""
-"Панель «Параметрів GNOME» «Миша та сенсорний пристрій»"
+msgstr "Панель «Параметрів GNOME» «Миша та сенсорний пристрій»"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:25
-#| msgid "GNOME Settings"
 msgid "GNOME Settings Background Panel"
 msgstr "Панель «Тло» «Параметрів GNOME»"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:29
-#| msgid "GNOME Settings"
 msgid "GNOME Settings Keyboard Panel"
 msgstr "Панель «Клавіатура» «Параметрів GNOME»"
 
