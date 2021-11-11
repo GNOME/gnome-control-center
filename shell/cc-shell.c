@@ -173,3 +173,12 @@ cc_shell_embed_widget_in_header (CcShell         *shell,
       iface->embed_widget_in_header (shell, widget, position);
     }
 }
+
+void
+cc_shell_set_custom_titlebar (CcShell   *self,
+                              GtkWidget *titlebar)
+{
+  g_return_if_fail (CC_IS_SHELL (self));
+
+  CC_SHELL_GET_IFACE (self)->set_custom_titlebar (self, titlebar);
+}

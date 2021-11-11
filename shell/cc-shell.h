@@ -57,6 +57,8 @@ struct _CcShellInterface
   void        (*embed_widget_in_header)   (CcShell         *shell,
                                            GtkWidget       *widget,
                                            GtkPositionType  position);
+  void        (*set_custom_titlebar)      (CcShell      *self,
+                                           GtkWidget    *titlebar);
 };
 
 GType           cc_shell_get_type                 (void) G_GNUC_CONST;
@@ -73,5 +75,8 @@ GtkWidget *     cc_shell_get_toplevel             (CcShell      *shell);
 void            cc_shell_embed_widget_in_header   (CcShell         *shell,
                                                    GtkWidget       *widget,
                                                    GtkPositionType  position);
+
+void            cc_shell_set_custom_titlebar      (CcShell      *self,
+                                                   GtkWidget    *titlebar);
 
 G_END_DECLS

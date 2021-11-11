@@ -58,6 +58,7 @@ struct _CcWindow
   AdwHeaderBar      *panel_headerbar;
   CcPanelList       *panel_list;
   AdwWindowTitle    *panel_title_widget;
+  GtkStack          *panel_titlebar_stack;
   GtkButton         *previous_button;
   GtkSearchBar      *search_bar;
   GtkToggleButton   *search_button;
@@ -73,6 +74,7 @@ struct _CcWindow
   GQueue     *previous_panels;
 
   GPtrArray  *custom_widgets;
+  GtkWidget  *custom_titlebar;
 
   CcShellModel *store;
 
@@ -189,6 +191,7 @@ activate_panel (CcWindow          *self,
 
   /* clear any custom widgets */
   remove_all_custom_widgets (self);
+  cc_shell_set_custom_titlebar (CC_SHELL (self), NULL);
 
   timer = g_timer_new ();
 
@@ -682,11 +685,35 @@ cc_window_get_toplevel (CcShell *self)
 }
 
 static void
+cc_window_set_custom_titlebar (CcShell   *shell,
+                               GtkWidget *titlebar)
+{
+  CcWindow *self = CC_WINDOW (shell);
+
+  /* Remove the current custom titlebar */
+  if (self->custom_titlebar)
+    {
+      gtk_stack_set_visible_child (self->panel_titlebar_stack,
+                                   GTK_WIDGET (self->panel_headerbar));
+      gtk_stack_remove (self->panel_titlebar_stack, self->custom_titlebar);
+    }
+
+  g_set_object (&self->custom_titlebar, titlebar);
+
+  if (titlebar)
+    {
+      gtk_stack_add_named (self->panel_titlebar_stack, titlebar,  "custom");
+      gtk_stack_set_visible_child (self->panel_titlebar_stack, titlebar);
+    }
+}
+
+static void
 cc_shell_iface_init (CcShellInterface *iface)
 {
   iface->set_active_panel_from_id = cc_window_set_active_panel_from_id;
   iface->embed_widget_in_header = cc_window_embed_widget_in_header;
   iface->get_toplevel = cc_window_get_toplevel;
+  iface->set_custom_titlebar = cc_window_set_custom_titlebar;
 }
 
 /* GtkWidget overrides */
@@ -881,6 +908,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_title_widget);
+  gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_titlebar_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);

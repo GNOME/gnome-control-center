@@ -114,46 +114,54 @@
             <property name="orientation">vertical</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
+
+            <!-- Panel titlebar -->
             <child>
-              <object class="AdwHeaderBar" id="panel_headerbar">
-                <property name="visible">True</property>
+              <object class="GtkStack" id="panel_titlebar_stack">
                 <property name="hexpand">True</property>
-                <property name="show-start-title-buttons" bind-source="main_leaflet" bind-property="folded" bind-flags="sync-create"/>
-                <property name="show-end-title-buttons">True</property>
-                <property name="title-widget">
-                  <object class="AdwWindowTitle" id="panel_title_widget" />
-                </property>
                 <child>
-                  <object class="GtkRevealer" id="back_revealer">
-                    <property name="transition-type">crossfade</property>
-                    <property name="transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
-                    <property name="visible" bind-source="main_leaflet" bind-property="folded" bind-flags="sync-create"/>
-                    <property name="reveal-child" bind-source="main_leaflet" bind-property="folded" bind-flags="sync-create"/>
+                  <object class="AdwHeaderBar" id="panel_headerbar">
+                    <property name="visible">True</property>
+                    <property name="hexpand">True</property>
+                    <property name="show-start-title-buttons" bind-source="main_leaflet" bind-property="folded" bind-flags="sync-create"/>
+                    <property name="show-end-title-buttons">True</property>
+                    <property name="title-widget">
+                      <object class="AdwWindowTitle" id="panel_title_widget" />
+                    </property>
                     <child>
-                      <object class="GtkButton" id="back">
-                        <property name="visible">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="valign">center</property>
-                        <property name="icon-name">go-previous-symbolic</property>
-                        <signal name="clicked" handler="back_button_clicked_cb" object="CcWindow" swapped="yes" />
-                        <style>
-                          <class name="image-button"/>
-                        </style>
-                        <accessibility>
-                          <property name="label" translatable="yes">Back</property>
-                        </accessibility>
+                      <object class="GtkRevealer" id="back_revealer">
+                        <property name="transition-type">crossfade</property>
+                        <property name="transition-duration" bind-source="main_leaflet" bind-property="mode-transition-duration" bind-flags="bidirectional|sync-create"/>
+                        <property name="visible" bind-source="main_leaflet" bind-property="folded" bind-flags="sync-create"/>
+                        <property name="reveal-child" bind-source="main_leaflet" bind-property="folded" bind-flags="sync-create"/>
+                        <child>
+                          <object class="GtkButton" id="back">
+                            <property name="visible">True</property>
+                            <property name="receives_default">False</property>
+                            <property name="valign">center</property>
+                            <property name="icon-name">go-previous-symbolic</property>
+                            <signal name="clicked" handler="back_button_clicked_cb" object="CcWindow" swapped="yes" />
+                            <style>
+                              <class name="image-button"/>
+                            </style>
+                            <accessibility>
+                              <property name="label" translatable="yes">Back</property>
+                            </accessibility>
+                          </object>
+                        </child>
                       </object>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="top_left_box" />
+                    </child>
+                    <child type="end">
+                      <object class="GtkBox" id="top_right_box" />
                     </child>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkBox" id="top_left_box" />
-                </child>
-                <child type="end">
-                  <object class="GtkBox" id="top_right_box" />
-                </child>
               </object>
             </child>
+
             <child>
               <object class="GtkStack" id="stack">
                 <property name="hexpand">True</property>
