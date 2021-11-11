@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-11-04 10:00+0000\n"
-"PO-Revision-Date: 2021-11-06 23:51+0200\n"
+"POT-Creation-Date: 2021-11-10 15:36+0000\n"
+"PO-Revision-Date: 2021-11-11 22:50+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <yoseforb@gmail.com>\n"
 "Language: he\n"
@@ -4937,23 +4937,23 @@ msgid "Authentication Required"
 msgstr "נדרש אימות"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:682
+#: panels/printers/cc-printers-panel.c:683
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "המדפסת „%s” נמחקה"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:926
+#: panels/printers/cc-printers-panel.c:927
 msgid "Failed to add new printer."
 msgstr "הוספת המדפסת החדשה נכשלה."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1225
+#: panels/printers/cc-printers-panel.c:1226
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "לא ניתן לטעון את מנשק המשתמש: %s"
 
-#: panels/printers/cc-printers-panel.c:1293
+#: panels/printers/cc-printers-panel.c:1294
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "שחרור להוספת מדפסות ולשינוי הגדרות"
 
@@ -5108,55 +5108,60 @@ msgid "Reverse portrait"
 msgstr "לאורך הפוך"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-job-row.c:106
+#: panels/printers/pp-job-row.c:137
 msgctxt "print job"
 msgid "Pending"
 msgstr "ממתינה"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-job-row.c:112
+#: panels/printers/pp-job-row.c:143
 msgctxt "print job"
 msgid "Paused"
 msgstr "מושהית"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-job-row.c:117
+#: panels/printers/pp-job-row.c:148
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "נדרש אימות"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-job-row.c:122
+#: panels/printers/pp-job-row.c:153
 msgctxt "print job"
 msgid "Processing"
 msgstr "מעבדת"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-job-row.c:126
+#: panels/printers/pp-job-row.c:157
 msgctxt "print job"
 msgid "Stopped"
 msgstr "נעצרה"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-job-row.c:130
+#: panels/printers/pp-job-row.c:161
 msgctxt "print job"
 msgid "Canceled"
 msgstr "בוטלה"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-job-row.c:134
+#: panels/printers/pp-job-row.c:165
 msgctxt "print job"
 msgid "Aborted"
 msgstr "נפסקה"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-job-row.c:138
+#: panels/printers/pp-job-row.c:169
 msgctxt "print job"
 msgid "Completed"
 msgstr "הושלמה"
 
+#. Translators: Clicking this button prioritizes printing of this print job
+#: panels/printers/pp-job-row.c:179
+msgid "Move this job to the top of the queue"
+msgstr "העברת המשימה הזאת לראש התור"
+
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:249
+#: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5166,14 +5171,14 @@ msgstr[2] "‫%u משימות דורשות אימות"
 msgstr[3] "‏‫%u משימות דורשות אימות"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:401
+#: panels/printers/pp-jobs-dialog.c:471
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s - הדפסות פעילות"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:405
+#: panels/printers/pp-jobs-dialog.c:475
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "יש להזין אישור על מנת להדפיס מ־%s."
