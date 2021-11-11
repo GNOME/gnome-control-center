@@ -1,80 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.22.0 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
-  <requires lib="libhandy" version="0.0"/>
-  <template class="CcDisplaySettings" parent="GtkListBox">
-    <property name="visible">True</property>
-    <property name="can_focus">True</property>
-    <property name="selection_mode">none</property>
+  <template class="CcDisplaySettings" parent="AdwBin">
     <child>
-      <object class="HdyComboRow" id="orientation_row">
-        <property name="width_request">100</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="title" translatable="yes" context="display setting">Orientation</property>
-        <signal name="notify::selected-index" handler="on_orientation_selection_changed_cb" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="HdyComboRow" id="resolution_row">
-        <property name="width_request">100</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="title" translatable="yes" context="display setting">Resolution</property>
-        <signal name="notify::selected-index" handler="on_resolution_selection_changed_cb" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="HdyComboRow" id="refresh_rate_row">
-        <property name="width_request">100</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="title" translatable="yes">Refresh Rate</property>
-        <signal name="notify::selected-index" handler="on_refresh_rate_selection_changed_cb" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="HdyActionRow" id="underscanning_row">
-        <property name="width_request">100</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="title" translatable="yes">Adjust for TV</property>
+      <object class="GtkListBox" id="listbox">
+        <property name="selection_mode">none</property>
+        <style>
+          <class name="content" />
+        </style>
         <child>
-          <object class="GtkSwitch" id="underscanning_switch">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="valign">center</property>
-            <signal name="notify::active" handler="on_underscanning_switch_active_changed_cb" swapped="no"/>
+          <object class="AdwComboRow" id="orientation_row">
+            <property name="width_request">100</property>
+            <property name="title" translatable="yes" context="display setting">Orientation</property>
+            <signal name="notify::selected-item" handler="on_orientation_selection_changed_cb" swapped="no"/>
           </object>
         </child>
-      </object>
-    </child>
-    <child>
-      <object class="HdyActionRow" id="scale_buttons_row">
-        <property name="width_request">100</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="title" translatable="yes" context="display setting">Scale</property>
         <child>
-          <object class="GtkButtonBox" id="scale_bbox">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="halign">end</property>
-            <property name="valign">center</property>
-            <property name="layout_style">expand</property>
+          <object class="AdwComboRow" id="resolution_row">
+            <property name="width_request">100</property>
+            <property name="title" translatable="yes" context="display setting">Resolution</property>
+            <signal name="notify::selected-item" handler="on_resolution_selection_changed_cb" swapped="no"/>
           </object>
         </child>
-      </object>
-    </child>
-    <child>
-      <object class="HdyComboRow" id="scale_combo_row">
-        <property name="width_request">100</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="title" translatable="yes" context="display setting">Scale</property>
-        <signal name="notify::selected-index" handler="on_scale_selection_changed_cb" swapped="no"/>
+        <child>
+          <object class="AdwComboRow" id="refresh_rate_row">
+            <property name="width_request">100</property>
+            <property name="title" translatable="yes">Refresh Rate</property>
+            <signal name="notify::selected-item" handler="on_refresh_rate_selection_changed_cb" swapped="no"/>
+          </object>
+        </child>
+        <child>
+          <object class="AdwActionRow" id="underscanning_row">
+            <property name="width_request">100</property>
+            <property name="title" translatable="yes">Adjust for TV</property>
+            <child>
+              <object class="GtkSwitch" id="underscanning_switch">
+                <property name="can_focus">False</property>
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <signal name="notify::active" handler="on_underscanning_switch_active_changed_cb" swapped="no"/>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwActionRow" id="scale_buttons_row">
+            <property name="width_request">100</property>
+            <property name="title" translatable="yes" context="display setting">Scale</property>
+            <child>
+              <object class="GtkBox" id="scale_bbox">
+                <property name="halign">end</property>
+                <property name="valign">center</property>
+                <style>
+                  <class name="linked" />
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwComboRow" id="scale_combo_row">
+            <property name="width_request">100</property>
+            <property name="title" translatable="yes" context="display setting">Scale</property>
+            <signal name="notify::selected-item" handler="on_scale_selection_changed_cb" swapped="no"/>
+          </object>
+        </child>
       </object>
     </child>
   </template>

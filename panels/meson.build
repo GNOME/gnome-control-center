@@ -8,7 +8,7 @@ panels = [
   'datetime',
   'default-apps',
   'diagnostics',
-#  'display',
+  'display',
   'info-overview',
   'keyboard',
   'location',

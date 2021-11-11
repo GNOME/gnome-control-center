@@ -26,12 +26,11 @@
 #include <math.h>
 
 #include "cc-night-light-page.h"
-#include "list-box-helper.h"
 
 #include "shell/cc-object-storage.h"
 
 struct _CcNightLightPage {
-  GtkBin               parent;
+  AdwBin               parent;
 
   GtkWidget           *box_manual;
   GtkButton           *button_from_am;
@@ -66,7 +65,7 @@ struct _CcNightLightPage {
   GDesktopClockFormat  clock_format;
 };
 
-G_DEFINE_TYPE (CcNightLightPage, cc_night_light_page, GTK_TYPE_BIN);
+G_DEFINE_TYPE (CcNightLightPage, cc_night_light_page, ADW_TYPE_BIN);
 
 #define CLOCK_SCHEMA     "org.gnome.desktop.interface"
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
@@ -438,7 +437,7 @@ dialog_format_minutes_combobox (GtkSpinButton    *spin,
   g_autofree gchar *text = NULL;
   adjustment = gtk_spin_button_get_adjustment (spin);
   text = g_strdup_printf ("%02.0f", gtk_adjustment_get_value (adjustment));
-  gtk_entry_set_text (GTK_ENTRY (spin), text);
+  gtk_editable_set_text (GTK_EDITABLE (spin), text);
   return TRUE;
 }
 
@@ -453,7 +452,7 @@ dialog_format_hours_combobox (GtkSpinButton      *spin,
     text = g_strdup_printf ("%.0f", gtk_adjustment_get_value (adjustment));
   else
     text = g_strdup_printf ("%02.0f", gtk_adjustment_get_value (adjustment));
-  gtk_entry_set_text (GTK_ENTRY (spin), text);
+  gtk_editable_set_text (GTK_EDITABLE (spin), text);
   return TRUE;
 }
 
@@ -620,8 +619,6 @@ cc_night_light_page_init (CcNightLightPage *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_list_box_set_header_func (self->listbox, cc_list_box_update_header_func, NULL, NULL);
-
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       1700, GTK_POS_BOTTOM,
                       _("More Warm"));
@@ -669,9 +666,9 @@ cc_night_light_page_init (CcNightLightPage *self)
   /* use custom CSS */
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/display/night-light.css");
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
                                        G_DBUS_PROXY_FLAGS_NONE,

@@ -20,13 +20,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include "cc-display-config.h"
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_DISPLAY_SETTINGS cc_display_settings_get_type ()
-G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, GtkListBox);
+G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, AdwBin);
 
 CcDisplaySettings*  cc_display_settings_new                 (void);
 

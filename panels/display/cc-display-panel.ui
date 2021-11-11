@@ -1,284 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.22.0 -->
 <interface>
-  <requires lib="gtk+" version="3.20"/>
-  <requires lib="libhandy" version="0.0"/>
-  <object class="GtkImage" id="image-join-displays">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_start">12</property>
-    <property name="margin_end">12</property>
-    <property name="margin_top">12</property>
-    <property name="margin_bottom">12</property>
-    <property name="icon_name">video-joined-displays-symbolic</property>
-    <property name="icon_size">3</property>
-  </object>
-  <object class="GtkImage" id="image-mirror">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_start">12</property>
-    <property name="margin_end">12</property>
-    <property name="margin_top">12</property>
-    <property name="margin_bottom">12</property>
-    <property name="icon_name">view-mirror-symbolic</property>
-    <property name="icon_size">3</property>
-  </object>
-  <object class="GtkImage" id="image-single-display">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="margin_start">12</property>
-    <property name="margin_end">12</property>
-    <property name="margin_top">12</property>
-    <property name="margin_bottom">12</property>
-    <property name="icon_name">video-single-display-symbolic</property>
-    <property name="icon_size">3</property>
-  </object>
   <object class="GtkStackSwitcher" id="stack_switcher">
-    <property name="visible">True</property>
     <property name="stack">stack</property>
   </object>
   <template class="CcDisplayPanel" parent="CcPanel">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
+
+    <child>
+      <object class="GtkShortcutController" id="toplevel_shortcuts">
+        <property name="scope">global</property>
+        <property name="name">Display Panel Globals Shortcuts</property>
+        <child>
+          <object class="GtkShortcut" id="escape_shortcut">
+            <property name="trigger">Escape</property>
+            <property name="action">callback(on_toplevel_escape_pressed_cb)</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
     <child>
       <object class="GtkStack" id="stack">
-        <property name="visible">True</property>
         <property name="transition-type">crossfade</property>
 
         <!-- Displays page -->
         <child>
-          <object class="GtkScrolledWindow">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="hscrollbar_policy">never</property>
-            <child>
-              <object class="GtkViewport">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="shadow_type">none</property>
+          <object class="GtkStackPage">
+            <property name="name">displays</property>
+            <property name="title" translatable="yes">Displays</property>
+            <property name="child">
+              <object class="GtkScrolledWindow">
+                <property name="hscrollbar_policy">never</property>
                 <child>
-                  <object class="HdyClamp">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="valign">start</property>
-                    <property name="margin_top">32</property>
-                    <property name="margin_bottom">32</property>
-                    <property name="margin_start">12</property>
-                    <property name="margin_end">12</property>
+                  <object class="GtkViewport">
                     <child>
-                      <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="hexpand">True</property>
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">32</property>
+                      <object class="AdwClamp">
+                        <property name="valign">start</property>
+                        <property name="margin_top">32</property>
+                        <property name="margin_bottom">32</property>
+                        <property name="margin_start">12</property>
+                        <property name="margin_end">12</property>
                         <child>
-                          <object class="GtkFrame" id="config_type_switcher_frame">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label_xalign">0</property>
-                            <property name="shadow_type">none</property>
+                          <object class="GtkBox">
+                            <property name="hexpand">True</property>
+                            <property name="orientation">vertical</property>
+                            <property name="spacing">32</property>
                             <child>
-                              <object class="GtkButtonBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="homogeneous">True</property>
-                                <property name="layout_style">expand</property>
+                              <object class="AdwPreferencesGroup" id="config_type_switcher_group">
+                                <property name="title" translatable="yes">Display Mode</property>
                                 <child>
-                                  <object class="GtkRadioButton" id="config_type_single">
-                                    <property name="label" translatable="yes">Single Display</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="image">image-single-display</property>
-                                    <property name="always_show_image">True</property>
-                                    <property name="active">True</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">config_type_join</property>
-                                    <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
-                                 </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">2</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="config_type_join">
-                                    <property name="label" translatable="yes">Join Displays</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="image">image-join-displays</property>
-                                    <property name="always_show_image">True</property>
-                                    <property name="active">True</property>
-                                    <property name="draw_indicator">False</property>
-                                    <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkRadioButton" id="config_type_mirror">
-                                    <property name="label" translatable="yes">Mirror</property>
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">True</property>
-                                    <property name="receives_default">False</property>
-                                    <property name="image">image-mirror</property>
-                                    <property name="always_show_image">True</property>
-                                    <property name="active">True</property>
-                                    <property name="draw_indicator">False</property>
-                                    <property name="group">config_type_join</property>
-                                    <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">True</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
-                                </child>
-                              </object>
-                            </child>
-                            <child type="label">
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="halign">start</property>
-                                <property name="margin_bottom">12</property>
-                                <property name="label" translatable="yes">Display Mode</property>
-                                <attributes>
-                                  <attribute name="weight" value="bold"/>
-                                </attributes>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkFrame" id="arrangement_frame">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label_xalign">0</property>
-                            <property name="label_yalign">1</property>
-                            <property name="shadow_type">none</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">12</property>
-                                <child>
-                                  <object class="GtkFrame">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label_xalign">0</property>
-                                    <property name="shadow_type">in</property>
-                                    <child>
-                                      <object class="GtkAlignment" id="arrangement_bin">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <child>
-                                          <placeholder/>
-                                        </child>
-                                      </object>
-                                    </child>
-                                    <child type="label_item">
-                                      <placeholder/>
-                                    </child>
+                                  <object class="GtkBox">
+                                    <property name="homogeneous">True</property>
                                     <style>
-                                      <class name="view"/>
+                                      <class name="linked" />
                                     </style>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
-                                </child>
-                                <child>
-                                  <object class="GtkFrame">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label_xalign">0</property>
-                                    <property name="shadow_type">in</property>
                                     <child>
-                                      <object class="GtkListBox">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="selection_mode">none</property>
+                                      <object class="GtkToggleButton" id="config_type_join">
+                                        <property name="hexpand">True</property>
+                                        <property name="active">True</property>
+                                        <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
                                         <child>
-                                          <object class="HdyComboRow" id="primary_display_row">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="subtitle" translatable="yes">Contains top bar and Activities</property>
-                                            <property name="title" translatable="yes">Primary Display</property>
-                                            <signal name="notify::selected-index" handler="on_primary_display_selected_index_changed_cb" swapped="yes"/>
+                                          <object class="GtkBox">
+                                            <property name="halign">center</property>
+                                            <property name="spacing">6</property>
+                                            <child>
+                                              <object class="GtkImage">
+                                                <property name="margin_start">12</property>
+                                                <property name="margin_end">12</property>
+                                                <property name="margin_top">12</property>
+                                                <property name="margin_bottom">12</property>
+                                                <property name="icon_name">video-joined-displays-symbolic</property>
+                                                <property name="icon_size">large</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="label" translatable="yes">Join Displays</property>
+                                              </object>
+                                            </child>
                                           </object>
                                         </child>
                                       </object>
                                     </child>
-                                    <child type="label_item">
-                                      <placeholder/>
+                                    <child>
+                                      <object class="GtkToggleButton" id="config_type_mirror">
+                                        <property name="hexpand">True</property>
+                                        <property name="group">config_type_join</property>
+                                        <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
+                                        <child>
+                                          <object class="GtkBox">
+                                            <property name="halign">center</property>
+                                            <property name="spacing">6</property>
+                                            <child>
+                                              <object class="GtkImage">
+                                                <property name="margin_start">12</property>
+                                                <property name="margin_end">12</property>
+                                                <property name="margin_top">12</property>
+                                                <property name="margin_bottom">12</property>
+                                                <property name="icon_name">view-mirror-symbolic</property>
+                                                <property name="icon_size">large</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="label" translatable="yes">Mirror</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkToggleButton" id="config_type_single">
+                                        <property name="hexpand">True</property>
+                                        <property name="group">config_type_join</property>
+                                        <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
+                                        <child>
+                                          <object class="GtkBox">
+                                            <property name="halign">center</property>
+                                            <property name="spacing">6</property>
+                                            <child>
+                                              <object class="GtkImage">
+                                                <property name="margin_start">12</property>
+                                                <property name="margin_end">12</property>
+                                                <property name="margin_top">12</property>
+                                                <property name="margin_bottom">12</property>
+                                                <property name="icon_name">video-single-display-symbolic</property>
+                                                <property name="icon_size">large</property>
+                                              </object>
+                                            </child>
+                                            <child>
+                                              <object class="GtkLabel">
+                                                <property name="label" translatable="yes">Single Display</property>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                     </object>
                                     </child>
                                   </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
                                 </child>
                               </object>
                             </child>
-                            <child type="label">
-                              <object class="GtkLabel">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <property name="label" translatable="yes">Drag displays to match your physical display setup. Select a display to change its settings.</property>
-                                <property name="wrap">True</property>
-                                <property name="margin_bottom">12</property>
+                            <child>
+                              <object class="AdwPreferencesGroup" id="arrangement_group">
+                                <property name="description" translatable="yes">Drag displays to match your physical display setup. Select a display to change its settings.</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkFrame">
+                                        <child>
+                                          <object class="AdwBin" id="arrangement_bin" />
+                                        </child>
+                                        <style>
+                                          <class name="view"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkFrame">
+                                        <child>
+                                          <object class="GtkListBox">
+                                            <property name="selection_mode">none</property>
+                                            <child>
+                                              <object class="AdwComboRow" id="primary_display_row">
+                                                <property name="subtitle" translatable="yes">Contains top bar and Activities</property>
+                                                <property name="title" translatable="yes">Primary Display</property>
+                                                <signal name="notify::selected-index" handler="on_primary_display_selected_index_changed_cb" swapped="yes"/>
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Display Arrangement</property>
+                                </accessibility>
                               </object>
                             </child>
-                            <child internal-child="accessible">
-                              <object class="AtkObject" id="frame_arrangement-atkobject">
-                                <property name="AtkObject::accessible-name" translatable="yes">Display Arrangement</property>
-                              </object>
-                            </child>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkFrame">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
-                            <property name="label_xalign">0</property>
-                            <property name="shadow_type">none</property>
                             <child>
                               <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <property name="orientation">vertical</property>
                                 <property name="spacing">12</property>
                                 <child>
                                   <object class="GtkStack" id="output_selection_stack">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="hhomogeneous">False</property>
                                     <property name="vhomogeneous">False</property>
                                     <child>
                                       <object class="GtkLabel" id="current_output_label">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
                                         <property name="halign">start</property>
                                         <attributes>
                                           <attribute name="weight" value="bold"/>
@@ -286,170 +199,88 @@
                                       </object>
                                     </child>
                                     <child>
-                                      <object class="GtkButtonBox" id="output_selection_two_buttonbox">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="layout_style">expand</property>
+                                      <object class="GtkBox" id="output_selection_two_buttonbox">
+                                        <style>
+                                          <class name="linked" />
+                                        </style>
                                         <child>
-                                          <object class="GtkRadioButton" id="output_selection_two_first">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="draw_indicator">False</property>
+                                          <object class="GtkToggleButton" id="output_selection_two_first">
+                                            <property name="hexpand">True</property>
                                             <property name="group">output_selection_two_second</property>
                                             <signal name="toggled" handler="on_output_selection_two_toggled_cb" swapped="yes"/>
                                          </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkRadioButton" id="output_selection_two_second">
+                                          <object class="GtkToggleButton" id="output_selection_two_second">
+                                            <property name="hexpand">True</property>
                                             <property name="label" translatable="yes">Join Displays</property>
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="receives_default">False</property>
-                                            <property name="draw_indicator">False</property>
                                             <signal name="toggled" handler="on_output_selection_two_toggled_cb" swapped="yes"/>
                                           </object>
-                                          <packing>
-                                            <property name="expand">True</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
                                         </child>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkBox" id="multi_selection_box">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
                                         <child>
                                           <object class="GtkComboBox" id="output_selection_combo">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
                                             <property name="halign">start</property>
                                             <property name="hexpand">True</property>
                                             <signal name="changed" handler="on_output_selection_combo_changed_cb" swapped="yes"/>
                                           </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">0</property>
-                                          </packing>
                                         </child>
                                         <child>
                                           <object class="GtkSwitch" id="output_enabled_switch">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
                                             <property name="halign">end</property>
                                             <property name="valign">center</property>
                                             <signal name="notify::active" handler="on_output_enabled_active_changed_cb" swapped="yes"/>
-                                          </object>
-                                          <packing>
-                                            <property name="expand">False</property>
-                                            <property name="fill">True</property>
-                                            <property name="position">1</property>
-                                          </packing>
+                                          </object>>
                                         </child>
                                       </object>
                                     </child>
                                     <child>
                                       <object class="GtkFrame">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="label_xalign">0</property>
-                                        <property name="shadow_type">in</property>
                                         <child>
                                           <object class="GtkListBox">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">False</property>
                                             <property name="selection_mode">none</property>
                                             <child>
-                                              <object class="HdyComboRow">
-                                                <property name="visible">True</property>
-                                                <property name="can_focus">True</property>
+                                              <object class="AdwComboRow">
                                                 <property name="title" translatable="yes">Active Display</property>
                                               </object>
                                             </child>
                                           </object>
                                         </child>
-                                        <child type="label_item">
-                                          <placeholder/>
-                                        </child>
                                       </object>
-                                      <packing>
-                                        <property name="name">single-select</property>
-                                        <property name="position">3</property>
-                                      </packing>
                                     </child>
                                   </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">0</property>
-                                  </packing>
                                 </child>
                                 <child>
-                                  <object class="GtkFrame" id="display_settings_frame">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="label_xalign">0</property>
-                                    <property name="shadow_type">in</property>
-                                    <child>
-                                      <placeholder/>
-                                    </child>
-                                    <child type="label_item">
-                                      <placeholder/>
-                                    </child>
-                                  </object>
-                                  <packing>
-                                    <property name="expand">False</property>
-                                    <property name="fill">True</property>
-                                    <property name="position">1</property>
-                                  </packing>
+                                  <object class="AdwBin" id="display_settings_bin" />
                                 </child>
-                              </object>
-                            </child>
-                            <child type="label_item">
-                              <placeholder/>
-                            </child>
-                            <child internal-child="accessible">
-                              <object class="AtkObject">
-                                <property name="AtkObject::accessible-name" translatable="yes">Display Configuration</property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Display Configuration</property>
+                                </accessibility>
                               </object>
                             </child>
                           </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">2</property>
-                          </packing>
                         </child>
                       </object>
                     </child>
                   </object>
                 </child>
               </object>
-            </child>
+            </property>
           </object>
-          <packing>
-            <property name="name">displays</property>
-            <property name="title" translatable="yes">Displays</property>
-          </packing>
         </child>
 
         <!-- Night Light page -->
         <child>
-          <object class="CcNightLightPage" id="night_light_page">
-            <property name="visible">True</property>
-          </object>
-          <packing>
+          <object class="GtkStackPage">
             <property name="name">night-light</property>
             <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">Night Light</property>
-          </packing>
+            <property name="child">
+              <object class="CcNightLightPage" id="night_light_page" />
+            </property>
+          </object>
         </child>
 
       </object>

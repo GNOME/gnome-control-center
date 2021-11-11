@@ -495,24 +495,6 @@ cc_display_arrangement_find_monitor_at (CcDisplayArrangement *self,
 }
 
 static void
-cc_display_arrangement_update_cursor (CcDisplayArrangement *self,
-                                      gboolean              dragable)
-{
-  g_autoptr(GdkCursor) cursor = NULL;
-  GdkWindow *window;
-
-  if (dragable)
-    cursor = gdk_cursor_new_for_display (gtk_widget_get_display (GTK_WIDGET (self)), GDK_FLEUR);
-  else
-    cursor = NULL;
-
-  window = gtk_widget_get_window (GTK_WIDGET (self));
-
-  if (window)
-    gdk_window_set_cursor (window, cursor);
-}
-
-static void
 on_output_changed_cb (CcDisplayArrangement *self,
                       CcDisplayMonitor     *output)
 {
@@ -524,17 +506,20 @@ on_output_changed_cb (CcDisplayArrangement *self,
   gtk_widget_queue_draw (GTK_WIDGET (self));
 }
 
-static gboolean
-cc_display_arrangement_draw (GtkWidget *widget,
-                             cairo_t   *cr)
+static void
+cc_display_arrangement_draw (GtkDrawingArea *drawing_area,
+                             cairo_t        *cr,
+                             gint            width,
+                             gint            height,
+                             gpointer        user_data)
 {
-  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
-  GtkStyleContext *context = gtk_widget_get_style_context (widget);
+  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (drawing_area);
+  GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (self));
   g_autoptr(GList) outputs = NULL;
   GList *l;
 
   if (!self->config)
-    return FALSE;
+    return;
 
   cc_display_arrangement_update_matrices (self);
 
@@ -584,7 +569,7 @@ cc_display_arrangement_draw (GtkWidget *widget,
 
       cairo_translate (cr, x1, y1);
 
-      gtk_style_context_get_margin (context, state, &margin);
+      gtk_style_context_get_margin (context, &margin);
 
       cairo_translate (cr, margin.left, margin.top);
 
@@ -594,8 +579,8 @@ cc_display_arrangement_draw (GtkWidget *widget,
       gtk_render_background (context, cr, 0, 0, w, h);
       gtk_render_frame (context, cr, 0, 0, w, h);
 
-      gtk_style_context_get_border (context, state, &border);
-      gtk_style_context_get_padding (context, state, &padding);
+      gtk_style_context_get_border (context, &border);
+      gtk_style_context_get_padding (context, &padding);
 
       w -= border.left + border.right + padding.left + padding.right;
       h -= border.top + border.bottom + padding.top + padding.bottom;
@@ -605,7 +590,7 @@ cc_display_arrangement_draw (GtkWidget *widget,
       if (num > 0)
         {
           PangoLayout *layout;
-          PangoFontDescription *font = NULL;
+          //PangoFontDescription *font = NULL;
           g_autofree gchar *number_str = NULL;
           PangoRectangle extents;
           GdkRGBA color;
@@ -614,16 +599,16 @@ cc_display_arrangement_draw (GtkWidget *widget,
           gtk_style_context_add_class (context, "monitor-label");
           gtk_style_context_remove_class (context, "monitor");
 
-          gtk_style_context_get_border (context, state, &border);
-          gtk_style_context_get_padding (context, state, &padding);
-          gtk_style_context_get_margin (context, state, &margin);
+          gtk_style_context_get_border (context, &border);
+          gtk_style_context_get_padding (context, &padding);
+          gtk_style_context_get_margin (context, &margin);
 
           cairo_translate (cr, margin.left, margin.top);
 
           number_str = g_strdup_printf ("%d", num);
-          gtk_style_context_get (context, state, "font", &font, NULL);
+          //gtk_style_context_get (context, state, "font", &font, NULL);
           layout = gtk_widget_create_pango_layout (GTK_WIDGET (self), number_str);
-          pango_layout_set_font_description (layout, font);
+          //pango_layout_set_font_description (layout, font);
           pango_layout_get_extents (layout, NULL, &extents);
 
           h = (extents.height - extents.y) / PANGO_SCALE;
@@ -640,7 +625,7 @@ cc_display_arrangement_draw (GtkWidget *widget,
           cairo_translate (cr, border.left + padding.left, border.top + padding.top);
           cairo_translate (cr, extents.x + text_padding / 2, 0);
 
-          gtk_style_context_get_color (context, state, &color);
+          gtk_style_context_get_color (context, &color);
           gdk_cairo_set_source_rgba (cr, &color);
 
           gtk_render_layout (context, cr, 0, 0, layout);
@@ -652,15 +637,15 @@ cc_display_arrangement_draw (GtkWidget *widget,
     }
 
   gtk_style_context_restore (context);
-
-  return TRUE;
 }
 
 static gboolean
-cc_display_arrangement_button_press_event (GtkWidget      *widget,
-                                           GdkEventButton *event)
+on_click_gesture_pressed_cb (GtkGestureClick      *click_gesture,
+                             gint                  n_press,
+                             gdouble               x,
+                             gdouble               y,
+                             CcDisplayArrangement *self)
 {
-  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   CcDisplayMonitor *output;
   gdouble event_x, event_y;
   gint mon_x, mon_y;
@@ -668,18 +653,14 @@ cc_display_arrangement_button_press_event (GtkWidget      *widget,
   if (!self->config)
     return FALSE;
 
-  /* Only handle normal presses of the left mouse button. */
-  if (event->button != 1 || event->type != GDK_BUTTON_PRESS)
-    return FALSE;
-
   g_return_val_if_fail (self->drag_active == FALSE, FALSE);
 
-  output = cc_display_arrangement_find_monitor_at (self, event->x, event->y);
+  output = cc_display_arrangement_find_monitor_at (self, x, y);
   if (!output)
     return FALSE;
 
-  event_x = event->x;
-  event_y = event->y;
+  event_x = x;
+  event_y = y;
 
   cairo_matrix_transform_point (&self->to_actual, &event_x, &event_y);
   cc_display_monitor_get_geometry (output, &mon_x, &mon_y, NULL, NULL);
@@ -697,17 +678,15 @@ cc_display_arrangement_button_press_event (GtkWidget      *widget,
 }
 
 static gboolean
-cc_display_arrangement_button_release_event (GtkWidget      *widget,
-                                             GdkEventButton *event)
+on_click_gesture_released_cb (GtkGestureClick      *click_gesture,
+                              gint                  n_press,
+                              gdouble               x,
+                              gdouble               y,
+                              CcDisplayArrangement *self)
 {
-  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   CcDisplayMonitor *output;
 
   if (!self->config)
-    return FALSE;
-
-  /* Only handle left mouse button */
-  if (event->button != 1)
     return FALSE;
 
   if (!self->drag_active)
@@ -715,22 +694,24 @@ cc_display_arrangement_button_release_event (GtkWidget      *widget,
 
   self->drag_active = FALSE;
 
-  output = cc_display_arrangement_find_monitor_at (self, event->x, event->y);
-  cc_display_arrangement_update_cursor (self, output != NULL);
+  output = cc_display_arrangement_find_monitor_at (self, x, y);
+  gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
+                                   output != NULL ? "fleur" : NULL);
 
   /* And queue a redraw to recenter everything */
-  gtk_widget_queue_draw (widget);
+  gtk_widget_queue_draw (GTK_WIDGET (self));
 
-  g_signal_emit_by_name (G_OBJECT (widget), "updated");
+  g_signal_emit_by_name (G_OBJECT (self), "updated");
 
   return TRUE;
 }
 
 static gboolean
-cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
-                                            GdkEventMotion *event)
+on_motion_controller_motion_cb (GtkEventControllerMotion *motion_controller,
+                                gdouble                   x,
+                                gdouble                   y,
+                                CcDisplayArrangement     *self)
 {
-  CcDisplayArrangement *self = CC_DISPLAY_ARRANGEMENT (widget);
   gdouble event_x, event_y;
   gint mon_x, mon_y;
   SnapData snap_data;
@@ -744,11 +725,12 @@ cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
   if (!self->drag_active)
     {
       CcDisplayMonitor *output;
-      output = cc_display_arrangement_find_monitor_at (self, event->x, event->y);
+      output = cc_display_arrangement_find_monitor_at (self, x, y);
 
-      cc_display_arrangement_update_cursor (self, output != NULL);
+      gtk_widget_set_cursor_from_name (GTK_WIDGET (self),
+                                       output != NULL ? "fleur" : NULL);
       if (self->prelit_output != output)
-        gtk_widget_queue_draw (widget);
+        gtk_widget_queue_draw (GTK_WIDGET (self));
 
       self->prelit_output = output;
 
@@ -757,8 +739,8 @@ cc_display_arrangement_motion_notify_event (GtkWidget      *widget,
 
   g_assert (self->selected_output);
 
-  event_x = event->x;
-  event_y = event->y;
+  event_x = x;
+  event_y = y;
 
   cairo_matrix_transform_point (&self->to_actual, &event_x, &event_y);
 
@@ -843,16 +825,10 @@ static void
 cc_display_arrangement_class_init (CcDisplayArrangementClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   gobject_class->finalize = cc_display_arrangement_finalize;
   gobject_class->get_property = cc_display_arrangement_get_property;
   gobject_class->set_property = cc_display_arrangement_set_property;
-
-  widget_class->draw = cc_display_arrangement_draw;
-  widget_class->button_press_event = cc_display_arrangement_button_press_event;
-  widget_class->button_release_event = cc_display_arrangement_button_release_event;
-  widget_class->motion_notify_event = cc_display_arrangement_motion_notify_event;
 
   props[PROP_CONFIG] = g_param_spec_object ("config", "Display Config",
                                             "The display configuration to work with",
@@ -878,9 +854,22 @@ cc_display_arrangement_class_init (CcDisplayArrangementClass *klass)
 static void
 cc_display_arrangement_init (CcDisplayArrangement *self)
 {
-  /* XXX: Do we need to listen to touch events here? */
-  gtk_widget_add_events (GTK_WIDGET (self),
-                         GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK | GDK_POINTER_MOTION_MASK);
+  GtkEventController *motion_controller;
+  GtkGesture *click_gesture;
+
+  click_gesture = gtk_gesture_click_new ();
+  g_signal_connect (click_gesture, "pressed", G_CALLBACK (on_click_gesture_pressed_cb), self);
+  g_signal_connect (click_gesture, "released", G_CALLBACK (on_click_gesture_released_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (click_gesture));
+
+  motion_controller = gtk_event_controller_motion_new ();
+  g_signal_connect (motion_controller, "motion", G_CALLBACK (on_motion_controller_motion_cb), self);
+  gtk_widget_add_controller (GTK_WIDGET (self), motion_controller);
+
+  gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (self),
+                                  cc_display_arrangement_draw,
+                                  self,
+                                  NULL);
 
   self->major_snap_distance = MAJOR_SNAP_DISTANCE;
 }
