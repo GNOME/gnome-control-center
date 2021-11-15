@@ -136,16 +136,21 @@ cc_wacom_device_initable_init (GInitable     *initable,
 {
 	CcWacomDevice *device = CC_WACOM_DEVICE (initable);
 	WacomDeviceDatabase *wacom_db;
+	WacomError *wacom_error;
 	const gchar *node_path;
 
 	wacom_db = cc_wacom_device_database_get ();
 	node_path = gsd_device_get_device_file (device->device);
-	device->wdevice = libwacom_new_from_path (wacom_db, node_path, FALSE, NULL);
+	wacom_error = libwacom_error_new ();
+	device->wdevice = libwacom_new_from_path (wacom_db, node_path, FALSE, wacom_error);
 
 	if (!device->wdevice) {
+		g_debug ("libwacom_new_from_path() failed: %s", libwacom_error_get_message (wacom_error));
+		libwacom_error_free (&wacom_error);
 		g_set_error (error, 0, 0, "Tablet description not found");
 		return FALSE;
 	}
+	libwacom_error_free (&wacom_error);
 
 	return TRUE;
 }
@@ -170,14 +175,20 @@ cc_wacom_device_new_fake (const gchar *name)
 {
 	CcWacomDevice *device;
 	WacomDevice *wacom_device;
+	WacomError *wacom_error;
 
 	device = g_object_new (CC_TYPE_WACOM_DEVICE,
 			       NULL);
 
+	wacom_error = libwacom_error_new ();
 	wacom_device = libwacom_new_from_name (cc_wacom_device_database_get(),
-					       name, NULL);
-	if (wacom_device == NULL)
+					       name, wacom_error);
+	if (wacom_device == NULL) {
+		g_debug ("libwacom_new_fake() failed: %s", libwacom_error_get_message (wacom_error));
+		libwacom_error_free (&wacom_error);
 		return NULL;
+	}
+	libwacom_error_free (&wacom_error);
 
 	device->wdevice = wacom_device;
 
