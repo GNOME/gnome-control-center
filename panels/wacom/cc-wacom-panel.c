@@ -56,6 +56,7 @@ struct _CcWacomPanel
 	GHashTable       *devices; /* key=GsdDevice, value=CcWacomDevice */
 	GHashTable       *pages; /* key=CcWacomDevice, value=GtkWidget */
 	GHashTable       *stylus_pages; /* key=CcWacomTool, value=GtkWidget */
+	guint             mock_stylus_id;
 
 	CcTabletToolMap  *tablet_tool_map;
 
@@ -261,6 +262,7 @@ cc_wacom_panel_dispose (GObject *object)
 	g_clear_object (&self->proxy);
 	g_clear_pointer (&self->pages, g_hash_table_unref);
 	g_clear_pointer (&self->stylus_pages, g_hash_table_unref);
+	g_clear_handle_id (&self->mock_stylus_id, g_source_remove);
 
 	G_OBJECT_CLASS (cc_wacom_panel_parent_class)->dispose (object);
 }
@@ -432,6 +434,34 @@ on_shell_event_cb (CcWacomPanel *panel,
 	return GDK_EVENT_PROPAGATE;
 }
 
+static gboolean
+show_mock_stylus_cb (gpointer user_data)
+{
+	CcWacomPanel *panel = user_data;
+	GList *device_list;
+	CcWacomDevice *wacom_device;
+	CcWacomTool *stylus;
+
+	panel->mock_stylus_id = 0;
+
+	device_list = g_hash_table_get_values (panel->devices);
+	if (device_list == NULL) {
+		g_warning ("Could not create fake stylus event because could not find tablet device");
+		return G_SOURCE_REMOVE;
+	}
+
+	wacom_device = device_list->data;
+	g_list_free (device_list);
+
+	stylus = cc_wacom_tool_new (0, 0, wacom_device);
+	add_stylus (panel, stylus);
+	update_stylus_notebook (panel, stylus);
+	cc_tablet_tool_map_add_relation (panel->tablet_tool_map,
+					 wacom_device, stylus);
+
+	return G_SOURCE_REMOVE;
+}
+
 static void
 cc_wacom_panel_constructed (GObject *object)
 {
@@ -467,6 +497,9 @@ cc_wacom_panel_constructed (GObject *object)
 
 	g_signal_connect_object (shell, "event",
 				 G_CALLBACK (on_shell_event_cb), self, G_CONNECT_SWAPPED);
+
+	if (g_getenv ("UMOCKDEV_DIR") != NULL)
+		self->mock_stylus_id = g_idle_add (show_mock_stylus_cb, self);
 
 	self->test_button = button;
 	update_test_button (self);
