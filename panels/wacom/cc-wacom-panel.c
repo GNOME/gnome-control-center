@@ -331,6 +331,26 @@ update_test_button (CcWacomPanel *self)
 }
 
 static void
+update_stylus_notebook (CcWacomPanel *panel,
+			CcWacomTool  *stylus)
+{
+	if (panel->stylus_notebook ==
+	    gtk_stack_get_visible_child (GTK_STACK (panel->stack))) {
+		GtkWidget *widget;
+		gint page;
+
+		widget = g_hash_table_lookup (panel->stylus_pages, stylus);
+		page = gtk_notebook_page_num (GTK_NOTEBOOK (panel->stylus_notebook), widget);
+		gtk_notebook_set_current_page (GTK_NOTEBOOK (panel->stylus_notebook), page);
+	} else {
+		gtk_container_child_set (GTK_CONTAINER (panel->stack),
+					 panel->stylus_notebook,
+					 "needs-attention", TRUE,
+					 NULL);
+	}
+}
+
+static void
 update_current_tool (CcWacomPanel  *panel,
 		     GdkDevice     *device,
 		     GdkDeviceTool *tool)
@@ -392,22 +412,8 @@ update_current_tool (CcWacomPanel  *panel,
 
 	added = add_stylus (panel, stylus);
 
-	if (added) {
-		if (panel->stylus_notebook ==
-		    gtk_stack_get_visible_child (GTK_STACK (panel->stack))) {
-			GtkWidget *widget;
-			gint page;
-
-			widget = g_hash_table_lookup (panel->stylus_pages, stylus);
-			page = gtk_notebook_page_num (GTK_NOTEBOOK (panel->stylus_notebook), widget);
-			gtk_notebook_set_current_page (GTK_NOTEBOOK (panel->stylus_notebook), page);
-		} else {
-			gtk_container_child_set (GTK_CONTAINER (panel->stack),
-						 panel->stylus_notebook,
-						 "needs-attention", TRUE,
-						 NULL);
-		}
-	}
+	if (added)
+		update_stylus_notebook (panel, stylus);
 
 	cc_tablet_tool_map_add_relation (panel->tablet_tool_map,
 					 wacom_device, stylus);
