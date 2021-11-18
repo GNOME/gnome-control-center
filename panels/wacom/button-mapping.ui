@@ -17,7 +17,8 @@
           <object class="GtkBox" id="shortcuts_vbox">
             <property name="orientation">vertical</property>
             <property name="spacing">6</property>
-            <property name="expand">True</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
             <child>
               <object class="GtkLabel" id="label1">
                 <property name="xalign">0</property>
@@ -63,10 +64,6 @@
             <child>
               <object class="GtkButton" id="close_button">
                 <property name="label" translatable="yes">_Close</property>
-                <property name="use_action_appearance">False</property>
-                <property name="can_default">True</property>
-                <property name="receives_default">False</property>
-                <property name="use_action_appearance">False</property>
                 <property name="use_underline">True</property>
               </object>
             </child>

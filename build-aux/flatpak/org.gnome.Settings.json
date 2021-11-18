@@ -271,7 +271,8 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/gnome-desktop.git"
+                    "url" : "https://gitlab.gnome.org/GNOME/gnome-desktop.git",
+                    "branch" : "ebassi/update-for-gtk4"
                 }
             ]
         },
@@ -396,6 +397,7 @@
             "name" : "libnma",
             "buildsystem" : "meson",
             "config-opts" : [
+                "-Dlibnma_gtk4=true",
                 "-Dgtk_doc=false",
                 "-Dintrospection=false",
                 "-Dvapi=false"
@@ -430,19 +432,23 @@
         },
         {
             "name" : "ModemManager",
-            "buildsystem" : "autotools",
+            "buildsystem" : "meson",
             "config-opts" : [
-                "--disable-introspection",
-                "--disable-vala",
-                "--with-udev-base-dir=/app/lib",
-                "--with-systemdsystemunitdir=/app/lib/systemd/system",
-                "--without-mbim",
-                "--without-qmi"
+                "-Dintrospection=false",
+                "-Dbash_completion=false",
+                "-Dudevdir=/app/lib",
+                "-Dsystemdsystemunitdir=/app/lib/systemd/system",
+                "-Dmbim=false",
+                "-Dplugin_dell=disabled",
+                "-Dplugin_foxconn=disabled",
+                "-Dqmi=false",
+                "-Dqrtr=false"
             ],
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "git://anongit.freedesktop.org/ModemManager/ModemManager"
+                    "url" : "git://anongit.freedesktop.org/ModemManager/ModemManager",
+                    "branch" : "main"
                 }
             ]
         },
@@ -473,6 +479,16 @@
                         "--disable-null",
                         "--disable-oss"
                     ]
+                }
+            ]
+        },
+        {
+            "name" : "gsound",
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/gsound.git"
                 }
             ]
         },
@@ -594,80 +610,6 @@
                 {
                     "type" : "git",
                     "url" : "https://gitlab.gnome.org/GNOME/libgtop.git"
-                }
-            ]
-        },
-        {
-            "name": "cogl",
-            "config-opts": [
-                "--disable-cogl-gst",
-                "--enable-xlib-egl-platform",
-                "--enable-wayland-egl-platform"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/cogl.git",
-                    "branch": "cogl-1.22"
-                }
-            ]
-        },
-        {
-            "name": "clutter",
-            "config-opts": [
-                "--enable-egl-backend",
-                "--enable-wayland-backend"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/clutter/1.26/clutter-1.26.4.tar.xz",
-                    "sha256": "8b48fac159843f556d0a6be3dbfc6b083fc6d9c58a20a49a6b4919ab4263c4e6"
-                }
-            ]
-        },
-        {
-            "name": "clutter-gtk",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/clutter-gtk/1.8/clutter-gtk-1.8.4.tar.xz",
-                    "sha256": "521493ec038973c77edcb8bc5eac23eed41645117894aaee7300b2487cb42b06"
-                }
-            ]
-        },
-        {
-            "name": "clutter-gst",
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/clutter-gst.git",
-                    "branch": "clutter-gst-3.0"
-                }
-            ]
-        },
-        {
-            "name" : "cheese",
-            "buildsystem" : "meson",
-            "config-opts" : [
-                "-Dintrospection=false",
-                "-Dgtk_doc=false",
-                "-Dman=false"
-            ],
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/cheese.git"
-                }
-            ]
-        },
-        {
-            "name" : "gsound",
-            "buildsystem" : "meson",
-            "sources" : [
-                {
-                    "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/gsound.git"
                 }
             ]
         },
