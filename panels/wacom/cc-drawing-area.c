@@ -24,13 +24,13 @@
 typedef struct _CcDrawingArea CcDrawingArea;
 
 struct _CcDrawingArea {
-	GtkEventBox parent;
-	GdkDevice *current_device;
+	GtkDrawingArea parent;
+	GtkGesture *stylus_gesture;
 	cairo_surface_t *surface;
 	cairo_t *cr;
 };
 
-G_DEFINE_TYPE (CcDrawingArea, cc_drawing_area, GTK_TYPE_EVENT_BOX)
+G_DEFINE_TYPE (CcDrawingArea, cc_drawing_area, GTK_TYPE_DRAWING_AREA)
 
 static void
 ensure_drawing_surface (CcDrawingArea *area,
@@ -59,18 +59,6 @@ ensure_drawing_surface (CcDrawingArea *area,
 		area->surface = surface;
 		area->cr = cairo_create (surface);
 	}
-}
-
-static void
-cc_drawing_area_size_allocate (GtkWidget     *widget,
-			       GtkAllocation *allocation)
-{
-	CcDrawingArea *area = CC_DRAWING_AREA (widget);
-
-	ensure_drawing_surface (area, allocation->width, allocation->height);
-
-	GTK_WIDGET_CLASS (cc_drawing_area_parent_class)->size_allocate (widget,
-									allocation);
 }
 
 static void
@@ -103,16 +91,17 @@ cc_drawing_area_unmap (GtkWidget *widget)
 	GTK_WIDGET_CLASS (cc_drawing_area_parent_class)->unmap (widget);
 }
 
-static gboolean
-cc_drawing_area_draw (GtkWidget *widget,
-		      cairo_t   *cr)
+static void
+draw_cb (GtkDrawingArea *drawing_area,
+         cairo_t   *cr,
+         gint       width,
+         gint       height,
+         gpointer   user_data)
 {
-	CcDrawingArea *area = CC_DRAWING_AREA (widget);
-	GtkAllocation allocation;
+	CcDrawingArea *area = CC_DRAWING_AREA (drawing_area);
 
-	GTK_WIDGET_CLASS (cc_drawing_area_parent_class)->draw (widget, cr);
+	ensure_drawing_surface (area, width, height);
 
-	gtk_widget_get_allocation (widget, &allocation);
 	cairo_set_source_rgb (cr, 1, 1, 1);
 	cairo_paint (cr);
 
@@ -120,69 +109,48 @@ cc_drawing_area_draw (GtkWidget *widget,
 	cairo_paint (cr);
 
 	cairo_set_source_rgb (cr, 0.6, 0.6, 0.6);
-	cairo_rectangle (cr, 0, 0, allocation.width, allocation.height);
+	cairo_rectangle (cr, 0, 0, width, height);
 	cairo_stroke (cr);
-
-	return FALSE;
 }
 
-static gboolean
-cc_drawing_area_event (GtkWidget *widget,
-		       GdkEvent  *event)
+static void
+stylus_down_cb (GtkGestureStylus *gesture,
+		double            x,
+		double            y,
+		CcDrawingArea    *area)
 {
-	CcDrawingArea *area = CC_DRAWING_AREA (widget);
-	GdkInputSource source;
+	cairo_new_path (area->cr);
+}
+
+static void
+stylus_motion_cb (GtkGestureStylus *gesture,
+		  double            x,
+		  double            y,
+		  CcDrawingArea    *area)
+{
 	GdkDeviceTool *tool;
-	GdkDevice *device;
+	gdouble pressure;
 
-	device = gdk_event_get_source_device (event);
+	tool = gtk_gesture_stylus_get_device_tool (gesture);
+	gtk_gesture_stylus_get_axis (gesture,
+				     GDK_AXIS_PRESSURE,
+				     &pressure);
 
-	if (!device)
-		return GDK_EVENT_PROPAGATE;
-
-	source = gdk_device_get_source (device);
-	tool = gdk_event_get_device_tool (event);
-
-	if (source != GDK_SOURCE_PEN && source != GDK_SOURCE_ERASER)
-		return GDK_EVENT_PROPAGATE;
-
-	if (area->current_device && area->current_device != device)
-		return GDK_EVENT_PROPAGATE;
-
-	if (event->type == GDK_BUTTON_PRESS &&
-	    event->button.button == 1 && !area->current_device) {
-		area->current_device = device;
-	} else if (event->type == GDK_BUTTON_RELEASE &&
-		   event->button.button == 1 && area->current_device) {
-		cairo_new_path (area->cr);
-		area->current_device = NULL;
-	} else if (event->type == GDK_MOTION_NOTIFY &&
-		   event->motion.state & GDK_BUTTON1_MASK) {
-		gdouble x, y, pressure;
-
-		gdk_event_get_coords (event, &x, &y);
-		gdk_event_get_axis (event, GDK_AXIS_PRESSURE, &pressure);
-
-		if (gdk_device_tool_get_tool_type (tool) == GDK_DEVICE_TOOL_TYPE_ERASER) {
-			cairo_set_line_width (area->cr, 10 * pressure);
-			cairo_set_operator (area->cr, CAIRO_OPERATOR_DEST_OUT);
-		} else {
-			cairo_set_line_width (area->cr, 4 * pressure);
-			cairo_set_operator (area->cr, CAIRO_OPERATOR_SATURATE);
-		}
-
-		cairo_set_source_rgba (area->cr, 0, 0, 0, pressure);
-		cairo_line_to (area->cr, x, y);
-		cairo_stroke (area->cr);
-
-		cairo_move_to (area->cr, x, y);
-
-		gtk_widget_queue_draw (widget);
-
-		return GDK_EVENT_STOP;
+	if (gdk_device_tool_get_tool_type (tool) == GDK_DEVICE_TOOL_TYPE_ERASER) {
+		cairo_set_line_width (area->cr, 10 * pressure);
+		cairo_set_operator (area->cr, CAIRO_OPERATOR_DEST_OUT);
+	} else {
+		cairo_set_line_width (area->cr, 4 * pressure);
+		cairo_set_operator (area->cr, CAIRO_OPERATOR_SATURATE);
 	}
 
-	return GDK_EVENT_PROPAGATE;
+	cairo_set_source_rgba (area->cr, 0, 0, 0, pressure);
+	cairo_line_to (area->cr, x, y);
+	cairo_stroke (area->cr);
+
+	cairo_move_to (area->cr, x, y);
+
+	gtk_widget_queue_draw (GTK_WIDGET (area));
 }
 
 static void
@@ -190,9 +158,6 @@ cc_drawing_area_class_init (CcDrawingAreaClass *klass)
 {
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	widget_class->size_allocate = cc_drawing_area_size_allocate;
-	widget_class->draw = cc_drawing_area_draw;
-	widget_class->event = cc_drawing_area_event;
 	widget_class->map = cc_drawing_area_map;
 	widget_class->unmap = cc_drawing_area_unmap;
 }
@@ -200,11 +165,14 @@ cc_drawing_area_class_init (CcDrawingAreaClass *klass)
 static void
 cc_drawing_area_init (CcDrawingArea *area)
 {
-	gtk_event_box_set_above_child (GTK_EVENT_BOX (area), TRUE);
-	gtk_widget_add_events (GTK_WIDGET (area),
-			       GDK_BUTTON_PRESS_MASK |
-			       GDK_BUTTON_RELEASE_MASK |
-			       GDK_POINTER_MOTION_MASK);
+	gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (area), draw_cb, NULL, NULL);
+	area->stylus_gesture = gtk_gesture_stylus_new ();
+	g_signal_connect (area->stylus_gesture, "down",
+			  G_CALLBACK (stylus_down_cb), area);
+	g_signal_connect (area->stylus_gesture, "motion",
+			  G_CALLBACK (stylus_motion_cb), area);
+	gtk_widget_add_controller (GTK_WIDGET (area),
+				   GTK_EVENT_CONTROLLER (area->stylus_gesture));
 }
 
 GtkWidget *

@@ -30,7 +30,6 @@
 #include <string.h>
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (page->builder, x)
-#define CWID(x) (GtkContainer *) gtk_builder_get_object (page->builder, x)
 
 struct _CcWacomStylusPage
 {
@@ -290,7 +289,7 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 	}
 
 	box = WID ("stylus-grid");
-	gtk_container_add (GTK_CONTAINER (page), box);
+	gtk_box_append (GTK_BOX (page), box);
 	gtk_widget_set_vexpand (GTK_WIDGET (box), TRUE);
 
 	add_marks (GTK_SCALE (WID ("scale-tip-feel")));
@@ -319,8 +318,7 @@ cc_wacom_stylus_page_init (CcWacomStylusPage *page)
 	page->nav = cc_wacom_nav_button_new ();
         gtk_widget_set_halign (page->nav, GTK_ALIGN_END);
         gtk_widget_set_margin_start (page->nav, 10);
-	gtk_widget_show (page->nav);
-	gtk_container_add (CWID ("navigation-placeholder"), page->nav);
+	gtk_revealer_set_child (GTK_REVEALER (WID ("navigation-placeholder")), page->nav);
 }
 
 static void
@@ -331,7 +329,7 @@ set_icon_name (CcWacomStylusPage *page,
 	g_autofree gchar *resource = NULL;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
-	gtk_image_set_from_resource (GTK_IMAGE (WID (widget_name)), resource);
+	gtk_picture_set_resource (GTK_PICTURE (WID (widget_name)), resource);
 }
 
 /* Different types of layout for the stylus config */
@@ -348,25 +346,36 @@ static void
 remove_buttons (CcWacomStylusPage *page, int n)
 {
 	if (n < 3) {
-		gtk_widget_destroy (WID ("combo-thirdbutton"));
-		gtk_widget_destroy (WID ("label-third-button"));
+		gtk_grid_remove (GTK_GRID (WID ("stylus-controls-grid")), WID ("combo-thirdbutton"));
+		gtk_grid_remove (GTK_GRID (WID ("stylus-controls-grid")), WID ("label-third-button"));
 	}
 	if (n < 2) {
-		gtk_widget_destroy (WID ("combo-topbutton"));
-		gtk_widget_destroy (WID ("label-top-button"));
+		gtk_grid_remove (GTK_GRID (WID ("stylus-controls-grid")), WID ("combo-topbutton"));
+		gtk_grid_remove (GTK_GRID (WID ("stylus-controls-grid")), WID ("label-top-button"));
 		gtk_label_set_text (GTK_LABEL (WID ("label-lower-button")), _("Button"));
 	}
 	if (n < 1) {
-		gtk_widget_destroy (WID ("combo-bottombutton"));
-		gtk_widget_destroy (WID ("label-lower-button"));
+		gtk_grid_remove (GTK_GRID (WID ("stylus-controls-grid")), WID ("combo-bottombutton"));
+		gtk_grid_remove (GTK_GRID (WID ("stylus-controls-grid")), WID ("label-lower-button"));
 	}
 }
 
 static void
 remove_eraser (CcWacomStylusPage *page)
 {
-	gtk_widget_destroy (WID ("eraser-box"));
-	gtk_widget_destroy (WID ("label-eraser-feel"));
+	gtk_grid_remove (GTK_GRID (WID ("stylus-controls-grid")), WID ("eraser-box"));
+	gtk_grid_remove (GTK_GRID (WID ("stylus-controls-grid")), WID ("label-eraser-feel"));
+}
+
+static void
+set_grid_row (CcWacomStylusPage *page,
+	      const gchar       *grid_name,
+	      const gchar       *widget_name,
+	      gint               row)
+{
+  GtkLayoutManager *layout_manager = gtk_widget_get_layout_manager (WID (grid_name));
+  GtkLayoutChild *layout_child = gtk_layout_manager_get_layout_child (layout_manager, WID (widget_name));
+  gtk_grid_layout_child_set_row (GTK_GRID_LAYOUT_CHILD (layout_child), row);
 }
 
 static void
@@ -380,27 +389,15 @@ update_stylus_ui (CcWacomStylusPage *page,
 	case LAYOUT_INKING:
 		remove_buttons (page, 0);
 		remove_eraser (page);
-		gtk_container_child_set (CWID ("stylus-controls-grid"),
-					 WID ("label-tip-feel"),
-					 "top_attach", 0, NULL);
-		gtk_container_child_set (CWID ("stylus-controls-grid"),
-					 WID ("box-tip-feel"),
-					 "top_attach", 0, NULL);
+		set_grid_row (page, "stylus-controls-grid", "label-tip-feel", 0);
+		set_grid_row (page, "stylus-controls-grid", "box-tip-feel", 0);
 		break;
 	case LAYOUT_AIRBRUSH:
 		remove_buttons (page, 1);
-		gtk_container_child_set (CWID ("stylus-controls-grid"),
-					 WID ("label-lower-button"),
-					 "top_attach", 1, NULL);
-		gtk_container_child_set (CWID ("stylus-controls-grid"),
-					 WID ("combo-bottombutton"),
-					 "top_attach", 1, NULL);
-		gtk_container_child_set (CWID ("stylus-controls-grid"),
-					 WID ("label-tip-feel"),
-					 "top_attach", 2, NULL);
-		gtk_container_child_set (CWID ("stylus-controls-grid"),
-					 WID ("box-tip-feel"),
-					 "top_attach", 2, NULL);
+		set_grid_row (page, "stylus-controls-grid", "label-lower-button", 1);
+		set_grid_row (page, "stylus-controls-grid", "combo-bottombutton", 1);
+		set_grid_row (page, "stylus-controls-grid", "label-tip-feel", 2);
+		set_grid_row (page, "stylus-controls-grid", "box-tip-feel", 2);
 		break;
 	case LAYOUT_GENERIC_2_BUTTONS_NO_ERASER:
 		remove_buttons (page, 2);

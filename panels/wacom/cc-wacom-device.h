@@ -27,7 +27,7 @@
 #include "gsd-device-manager.h"
 
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnome-desktop/gnome-rr.h>
+#include <gnome-rr/gnome-rr.h>
 
 #define CC_TYPE_WACOM_DEVICE (cc_wacom_device_get_type ())
 G_DECLARE_FINAL_TYPE (CcWacomDevice, cc_wacom_device, CC, WACOM_DEVICE, GObject)

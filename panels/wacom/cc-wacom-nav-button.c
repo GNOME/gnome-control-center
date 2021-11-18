@@ -173,44 +173,33 @@ cc_wacom_nav_button_class_init (CcWacomNavButtonClass *klass)
 static void
 cc_wacom_nav_button_init (CcWacomNavButton *self)
 {
-	GtkStyleContext *context;
-	GtkWidget *image, *box;
+	GtkWidget *box;
+
+	gtk_box_set_spacing (GTK_BOX (self), 12);
 
 	/* Label */
 	self->label = gtk_label_new (NULL);
-	gtk_style_context_add_class (gtk_widget_get_style_context (self->label), "dim-label");
-	gtk_box_pack_start (GTK_BOX (self), self->label,
-			    FALSE, FALSE, 8);
+	gtk_widget_add_css_class (self->label, "dim-label");
+	gtk_box_append (GTK_BOX (self), self->label);
 
 	box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-	context = gtk_widget_get_style_context (GTK_WIDGET (box));
-	gtk_style_context_add_class (context, GTK_STYLE_CLASS_LINKED);
-	gtk_box_pack_start (GTK_BOX (self), box,
-			    FALSE, FALSE, 0);
+	gtk_widget_add_css_class (box, "linked");
+	gtk_box_append (GTK_BOX (self), box);
 
 	/* Prev button */
-	self->prev = gtk_button_new ();
-	image = gtk_image_new_from_icon_name ("go-previous-symbolic", GTK_ICON_SIZE_MENU);
-	gtk_container_add (GTK_CONTAINER (self->prev), image);
+	self->prev = gtk_button_new_from_icon_name ("go-previous-symbolic");
 	g_signal_connect_object (G_OBJECT (self->prev), "clicked",
                                  G_CALLBACK (prev_clicked), self, G_CONNECT_SWAPPED);
 	gtk_widget_set_valign (self->prev, GTK_ALIGN_CENTER);
 
 	/* Next button */
-	self->next = gtk_button_new ();
-	image = gtk_image_new_from_icon_name ("go-next-symbolic", GTK_ICON_SIZE_MENU);
-	gtk_container_add (GTK_CONTAINER (self->next), image);
+	self->next = gtk_button_new_from_icon_name ("go-next-symbolic");
 	g_signal_connect_object (G_OBJECT (self->next), "clicked",
                                  G_CALLBACK (next_clicked), self, G_CONNECT_SWAPPED);
 	gtk_widget_set_valign (self->next, GTK_ALIGN_CENTER);
 
-	gtk_box_pack_start (GTK_BOX (box), self->prev,
-			    FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX (box), self->next,
-			    FALSE, FALSE, 0);
-
-	gtk_widget_show (self->label);
-	gtk_widget_show_all (box);
+	gtk_box_append (GTK_BOX (box), self->prev);
+	gtk_box_append (GTK_BOX (box), self->next);
 }
 
 GtkWidget *

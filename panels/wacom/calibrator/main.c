@@ -34,6 +34,8 @@
 #include "calibrator-gui.h"
 #include "calibrator.h"
 
+static GMainLoop *mainloop = NULL;
+
 /**
  * find a calibratable touchscreen device (using XInput)
  *
@@ -383,7 +385,7 @@ calibration_finished_cb (CalibArea *area,
 	else
 		fprintf(stderr, "Error: unable to apply or save configuration values\n");
 
-	gtk_main_quit ();
+	g_main_loop_quit (mainloop);
 }
 
 int main(int argc, char** argv)
@@ -396,7 +398,7 @@ int main(int argc, char** argv)
     bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     textdomain (GETTEXT_PACKAGE);
 
-    gtk_init (&argc, &argv);
+    gtk_init ();
 
     g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
 
@@ -408,7 +410,8 @@ int main(int argc, char** argv)
 				 calibrator->threshold_doubleclick,
 				 calibrator->threshold_misclick);
 
-    gtk_main ();
+		mainloop = g_main_loop_new (NULL, FALSE);
+		g_main_loop_run (mainloop);
 
     calib_area_free (calib_area);
 

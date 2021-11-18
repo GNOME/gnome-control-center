@@ -39,7 +39,7 @@ typedef struct
 typedef struct CalibArea CalibArea;
 typedef void (*FinishCallback) (CalibArea *area, gpointer user_data);
 
-CalibArea * calib_area_new (GdkScreen      *screen,
+CalibArea * calib_area_new (GdkDisplay      *display,
 			    int             monitor,
 			    GdkDevice      *device,
 			    FinishCallback  callback,

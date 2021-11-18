@@ -29,10 +29,10 @@
 #include <gtk/gtk.h>
 #include <gdesktop-enums.h>
 #ifdef GDK_WINDOWING_X11
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 #endif
 #ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
+#include <gdk/wayland/gdkwayland.h>
 #endif
 
 #include "cc-wacom-device.h"
@@ -48,7 +48,6 @@
 #include <string.h>
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (page->builder, x)
-#define CWID(x) (GtkContainer *) gtk_builder_get_object (page->builder, x)
 #define MWID(x) (GtkWidget *) gtk_builder_get_object (page->mapping_builder, x)
 
 #define THRESHOLD_MISCLICK	15
@@ -79,12 +78,12 @@ struct _CcWacomPage
 
 	/* Button mapping */
 	GtkBuilder     *mapping_builder;
-	GtkWidget      *button_map;
+	GtkWindow      *button_map;
 	GtkListStore   *action_store;
 
 	/* Display mapping */
 	GtkWidget      *mapping;
-	GtkWidget      *dialog;
+	GtkWindow      *dialog;
 
 	GCancellable   *cancellable;
 
@@ -225,7 +224,7 @@ cc_wacom_page_get_gdk_device (CcWacomPage *page)
 
 	display = gtk_widget_get_display (GTK_WIDGET (page));
 	seat = gdk_display_get_default_seat (display);
-	slaves = gdk_seat_get_slaves (seat, GDK_SEAT_CAPABILITY_TABLET_STYLUS);
+	slaves = gdk_seat_get_devices (seat, GDK_SEAT_CAPABILITY_TABLET_STYLUS);
 
 	for (l = slaves; l && !gdk_device; l = l->next) {
 		g_autofree gchar *device_node = NULL;
@@ -256,12 +255,15 @@ run_calibration (CcWacomPage *page,
 		 GdkMonitor  *monitor)
 {
 	GdkDisplay *display = gdk_monitor_get_display (monitor);
-	gint i, n_monitor = 0;
+  GListModel *monitors;
+	guint i, n_monitor = 0;
 
 	g_assert (page->area == NULL);
 
-	for (i = 0; i < gdk_display_get_n_monitors (display); i++) {
-		if (monitor == gdk_display_get_monitor (display, i)) {
+  monitors = gdk_display_get_monitors (display);
+	for (i = 0; i < g_list_model_get_n_items (monitors); i++) {
+    g_autoptr(GdkMonitor) m = g_list_model_get_item (monitors, i);
+		if (monitor == m) {
 			n_monitor = i;
 			break;
 		}
@@ -291,15 +293,16 @@ calibrate (CcWacomPage *page)
 	g_autofree GVariant **tmp = NULL;
 	g_autofree gdouble *calibration = NULL;
 	gsize ncal;
-	GdkMonitor *monitor;
-	GdkScreen *screen;
+	g_autoptr(GdkMonitor) monitor = NULL;
+  GListModel *monitors;
+	GdkDisplay *display;
 	g_autoptr(GnomeRRScreen) rr_screen = NULL;
 	GnomeRROutput *output;
 	g_autoptr(GError) error = NULL;
 	gint x, y;
 
-	screen = gdk_screen_get_default ();
-	rr_screen = gnome_rr_screen_new (screen, &error);
+	display = gdk_display_get_default ();
+	rr_screen = gnome_rr_screen_new (display, &error);
 	if (error) {
 		g_warning ("Could not connect to display manager: %s", error->message);
 		return;
@@ -307,7 +310,19 @@ calibrate (CcWacomPage *page)
 
 	output = cc_wacom_device_get_output (page->stylus, rr_screen);
 	gnome_rr_output_get_position (output, &x, &y);
-	monitor = gdk_display_get_monitor_at_point (gdk_screen_get_display (screen), x, y);
+
+  monitors = gdk_display_get_monitors (display);
+  for (i = 0; i < g_list_model_get_n_items (monitors); i++) {
+    g_autoptr(GdkMonitor) m = g_list_model_get_item (monitors, i);
+    GdkRectangle geometry;
+
+    gdk_monitor_get_geometry (m, &geometry);
+    if (gdk_rectangle_contains_point (&geometry, x, y))
+      {
+        monitor = g_steal_pointer (&m);
+        break;
+      }
+  }
 
 	if (!monitor) {
 		/* The display the tablet should be mapped to could not be located.
@@ -364,11 +379,8 @@ create_row_from_button (GtkWidget *list_box,
 			guint      button,
 			GSettings *settings)
 {
-	GtkWidget *row;
-
-	row = cc_wacom_button_row_new (button, settings);
-	gtk_container_add (GTK_CONTAINER (list_box), row);
-	gtk_widget_show (row);
+	gtk_list_box_append (GTK_LIST_BOX (list_box),
+                       cc_wacom_button_row_new (button, settings));
 }
 
 static void
@@ -400,7 +412,7 @@ setup_button_mapping (CcWacomPage *page)
 static void
 button_mapping_dialog_closed (CcWacomPage *page)
 {
-	gtk_widget_destroy (MWID ("button-mapping-dialog"));
+	gtk_window_destroy (GTK_WINDOW (MWID ("button-mapping-dialog")));
 	g_clear_object (&page->mapping_builder);
 }
 
@@ -426,7 +438,7 @@ show_button_mapping_dialog (CcWacomPage *page)
 	setup_button_mapping (page);
 
 	dialog = MWID ("button-mapping-dialog");
-	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (page));
+	toplevel = GTK_WIDGET (gtk_widget_get_native (GTK_WIDGET (page)));
 	gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 	g_signal_connect_object (dialog, "response",
@@ -434,7 +446,7 @@ show_button_mapping_dialog (CcWacomPage *page)
 
 	gtk_widget_show (dialog);
 
-	page->button_map = dialog;
+	page->button_map = GTK_WINDOW (dialog);
 	g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &page->button_map);
 }
 
@@ -501,7 +513,7 @@ display_mapping_dialog_closed (CcWacomPage *page)
 {
 	int layout;
 
-	gtk_widget_destroy (page->dialog);
+	gtk_window_destroy (page->dialog);
 	page->dialog = NULL;
 	page->mapping = NULL;
 	layout = get_layout_type (page->stylus);
@@ -511,22 +523,24 @@ display_mapping_dialog_closed (CcWacomPage *page)
 static void
 display_mapping_button_clicked_cb (CcWacomPage *page)
 {
+  GtkWidget *dialog;
+
 	g_assert (page->mapping == NULL);
 
-	page->dialog = gtk_dialog_new_with_buttons (_("Display Mapping"),
-						    GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (page))),
+	dialog = gtk_dialog_new_with_buttons (_("Display Mapping"),
+						    GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (page))),
 						    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
 						    _("_Close"),
 						    GTK_RESPONSE_ACCEPT,
 						    NULL);
+  page->dialog = GTK_WINDOW (dialog);
 	page->mapping = cc_wacom_mapping_panel_new ();
 	cc_wacom_mapping_panel_set_device (CC_WACOM_MAPPING_PANEL (page->mapping),
 					   page->stylus);
-	gtk_container_add (GTK_CONTAINER (gtk_dialog_get_content_area (GTK_DIALOG (page->dialog))),
-			   page->mapping);
+  gtk_window_set_child (page->dialog, page->mapping);
 	g_signal_connect_object (page->dialog, "response",
 	                         G_CALLBACK (display_mapping_dialog_closed), page, G_CONNECT_SWAPPED);
-	gtk_widget_show_all (page->dialog);
+	gtk_window_present (page->dialog);
 
 	g_object_add_weak_pointer (G_OBJECT (page->mapping), (gpointer *) &page->dialog);
 }
@@ -639,14 +653,14 @@ decouple_display_toggled_cb (CcWacomPage *page)
 	if (!active) {
 		cc_wacom_device_set_output (page->stylus, NULL);
 	} else {
-		GdkScreen *screen;
+		GdkDisplay *display;
 		GnomeRRScreen *rr_screen;
 		GnomeRROutput **outputs, *picked = NULL;
 		g_autoptr(GError) error = NULL;
 		int i;
 
-		screen = gtk_widget_get_screen (GTK_WIDGET (WID ("switch-decouple-display")));
-		rr_screen = gnome_rr_screen_new (screen, &error);
+		display = gtk_widget_get_display (GTK_WIDGET (WID ("switch-decouple-display")));
+		rr_screen = gnome_rr_screen_new (display, &error);
 		if (rr_screen == NULL) {
 			g_warning ("Could not connect to display manager: %s", error->message);
 			return;
@@ -707,8 +721,8 @@ cc_wacom_page_dispose (GObject *object)
 	g_cancellable_cancel (self->cancellable);
 	g_clear_object (&self->cancellable);
 	g_clear_pointer (&self->area, calib_area_free);
-	g_clear_pointer (&self->button_map, gtk_widget_destroy);
-	g_clear_pointer (&self->dialog, gtk_widget_destroy);
+	g_clear_pointer (&self->button_map, gtk_window_destroy);
+	g_clear_pointer (&self->dialog, gtk_window_destroy);
 	g_clear_object (&self->builder);
 	g_clear_object (&self->header_group);
 	g_list_free_full (self->pads, g_object_unref);
@@ -736,7 +750,7 @@ remove_link_padding (GtkWidget *widget)
 
 	provider = gtk_css_provider_new ();
 	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
-					 ".link { padding: 0px; }", -1, NULL);
+					 ".link { padding: 0px; }", -1);
 	gtk_style_context_add_provider (gtk_widget_get_style_context (widget),
 					GTK_STYLE_PROVIDER (provider),
 					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -769,7 +783,7 @@ cc_wacom_page_init (CcWacomPage *page)
 	}
 
 	box = WID ("main-grid");
-	gtk_container_add (GTK_CONTAINER (page), box);
+	gtk_box_append (GTK_BOX (page), box);
 	gtk_widget_set_vexpand (GTK_WIDGET (box), TRUE);
 
 	g_signal_connect_object (WID ("button-calibrate"), "clicked",
@@ -804,7 +818,7 @@ cc_wacom_page_init (CcWacomPage *page)
         gtk_widget_set_halign (page->nav, GTK_ALIGN_END);
         gtk_widget_set_margin_start (page->nav, 10);
 	gtk_widget_show (page->nav);
-	gtk_container_add (CWID ("navigation-placeholder"), page->nav);
+	gtk_revealer_set_child (GTK_REVEALER (WID ("navigation-placeholder")), page->nav);
 
 	page->cancellable = g_cancellable_new ();
 }
@@ -817,34 +831,34 @@ set_icon_name (CcWacomPage *page,
 	g_autofree gchar *resource = NULL;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
-	gtk_image_set_from_resource (GTK_IMAGE (WID (widget_name)), resource);
+	gtk_picture_set_resource (GTK_PICTURE (WID (widget_name)), resource);
 }
 
 static void
 remove_left_handed (CcWacomPage *page)
 {
-	gtk_widget_destroy (WID ("label-left-handed"));
-	gtk_widget_destroy (WID ("switch-left-handed"));
+  gtk_grid_remove (GTK_GRID (WID ("main-controls-grid")), WID ("label-left-handed"));
+  gtk_grid_remove (GTK_GRID (WID ("main-controls-grid")), WID ("switch-left-handed"));
 }
 
 static void
 remove_display_link (CcWacomPage *page)
 {
-	gtk_widget_destroy (WID ("display-link"));
+  gtk_grid_remove (GTK_GRID (WID ("main-controls-grid")), WID ("display-link"));
 }
 
 static void
 remove_mouse_link (CcWacomPage *page)
 {
-        gtk_widget_destroy (WID ("mouse-link"));
+  gtk_grid_remove (GTK_GRID (WID ("main-controls-grid")), WID ("mouse-link"));
 }
 
 static void
 remove_decouple_options (CcWacomPage *page)
 {
-	gtk_widget_destroy (WID ("label-decouple-display"));
-	gtk_widget_destroy (WID ("switch-decouple-display"));
-	gtk_widget_destroy (WID ("display-mapping-button-2"));
+  gtk_grid_remove (GTK_GRID (WID ("main-controls-grid")), WID ("label-decouple-display"));
+  gtk_grid_remove (GTK_GRID (WID ("main-controls-grid")), WID ("switch-decouple-display"));
+  gtk_grid_remove (GTK_GRID (WID ("main-controls-grid")), WID ("display-mapping-button-2"));
 }
 
 static gboolean
@@ -856,6 +870,17 @@ has_monitor (CcWacomPage *page)
 
 	return ((integration_flags &
 		 (WACOM_DEVICE_INTEGRATED_DISPLAY | WACOM_DEVICE_INTEGRATED_SYSTEM)) != 0);
+}
+
+static void
+set_grid_row (CcWacomPage *page,
+              const gchar *grid_name,
+              const gchar *widget_name,
+              gint         row)
+{
+  GtkLayoutManager *layout_manager = gtk_widget_get_layout_manager (WID (grid_name));
+  GtkLayoutChild *layout_child = gtk_layout_manager_get_layout_child (layout_manager, WID (widget_name));
+  gtk_grid_layout_child_set_row (GTK_GRID_LAYOUT_CHILD (layout_child), row);
 }
 
 static void
@@ -885,18 +910,14 @@ set_page_layout (CcWacomPage *page,
 	case LAYOUT_SCREEN:
 		remove_left_handed (page);
 
-		gtk_widget_destroy (WID ("display-mapping-button"));
+    gtk_box_remove (GTK_BOX (WID ("tablet-buttons-box")), WID ("display-mapping-button"));
 
 		gtk_widget_show (WID ("button-calibrate"));
 		gtk_widget_set_sensitive (WID ("button-calibrate"),
 					  has_monitor (page));
 
-		gtk_container_child_set (CWID ("main-controls-grid"),
-					 WID ("label-trackingmode"),
-					 "top_attach", 5, NULL);
-		gtk_container_child_set (CWID ("main-controls-grid"),
-					 WID ("combo-tabletmode"),
-					 "top_attach", 5, NULL);
+		set_grid_row (page, "main-controls-grid", "label-trackingmode", 5);
+    set_grid_row (page, "main-controls-grid", "combo-tabletmode", 5);
 		break;
 	default:
 		g_assert_not_reached ();

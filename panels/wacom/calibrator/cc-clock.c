@@ -79,19 +79,19 @@ cc_clock_get_angle (CcClock *clock)
   return ((gdouble) time_diff / (clock->duration * 1000)) * 360;
 }
 
-static gboolean
-cc_clock_draw (GtkWidget *widget,
-               cairo_t   *cr)
+static void
+cc_clock_snapshot (GtkWidget   *widget,
+                   GtkSnapshot *snapshot)
 {
   GtkAllocation allocation;
+  cairo_t *cr;
   gdouble angle;
 
   gtk_widget_get_allocation (widget, &allocation);
   angle = cc_clock_get_angle (CC_CLOCK (widget));
 
-  cairo_set_operator (cr, CAIRO_OPERATOR_CLEAR);
-  cairo_paint (cr);
-  cairo_set_operator (cr, CAIRO_OPERATOR_OVER);
+  cr = gtk_snapshot_append_cairo (snapshot,
+                                  &GRAPHENE_RECT_INIT (0, 0, allocation.width, allocation.height));
 
   /* Draw the clock background */
   cairo_arc (cr, allocation.width / 2, allocation.height / 2, CLOCK_RADIUS / 2, 0.0, 2.0 * M_PI);
@@ -109,8 +109,6 @@ cc_clock_draw (GtkWidget *widget,
              3 * M_PI_2 + angle * M_PI / 180.0);
   cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
   cairo_stroke (cr);
-
-  return TRUE;
 }
 
 static void
@@ -199,20 +197,13 @@ cc_clock_get_property (GObject    *object,
 }
 
 static void
-cc_clock_get_preferred_width (GtkWidget *widget,
-                              gint      *minimum,
-                              gint      *natural)
-{
-  if (minimum)
-    *minimum = CLOCK_RADIUS + EXTRA_SPACE;
-  if (natural)
-    *natural = CLOCK_RADIUS + EXTRA_SPACE;
-}
-
-static void
-cc_clock_get_preferred_height (GtkWidget *widget,
-                               gint      *minimum,
-                               gint      *natural)
+cc_clock_measure (GtkWidget      *widget,
+                  GtkOrientation  orientation,
+                  gint            for_size,
+                  gint           *minimum,
+                  gint           *natural,
+                  gint           *minimum_baseline,
+                  gint           *natural_baseline)
 {
   if (minimum)
     *minimum = CLOCK_RADIUS + EXTRA_SPACE;
@@ -230,9 +221,8 @@ cc_clock_class_init (CcClockClass *klass)
   object_class->get_property = cc_clock_get_property;
 
   widget_class->map = cc_clock_map;
-  widget_class->draw = cc_clock_draw;
-  widget_class->get_preferred_width = cc_clock_get_preferred_width;
-  widget_class->get_preferred_height = cc_clock_get_preferred_height;
+  widget_class->snapshot = cc_clock_snapshot;
+  widget_class->measure = cc_clock_measure;
 
   signals[FINISHED] =
     g_signal_new ("finished",
@@ -256,7 +246,6 @@ cc_clock_class_init (CcClockClass *klass)
 static void
 cc_clock_init (CcClock *clock)
 {
-  gtk_widget_set_has_window (GTK_WIDGET (clock), FALSE);
 }
 
 GtkWidget *

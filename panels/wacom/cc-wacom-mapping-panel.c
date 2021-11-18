@@ -23,8 +23,8 @@
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #define GNOME_DESKTOP_USE_UNSTABLE_API
-#include <libgnome-desktop/gnome-rr.h>
-#include <libgnome-desktop/gnome-rr-config.h>
+#include <gnome-rr/gnome-rr.h>
+#include <gnome-rr/gnome-rr-config.h>
 
 #include <string.h>
 
@@ -96,7 +96,7 @@ update_monitor_chooser (CcWacomMappingPanel *self)
 						 self->rr_screen);
 
 	g_signal_handlers_block_by_func (G_OBJECT (self->checkbutton), checkbutton_toggled_cb, self);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON(self->checkbutton), cur_output != NULL);
+	gtk_check_button_set_active (GTK_CHECK_BUTTON(self->checkbutton), cur_output != NULL);
 	g_signal_handlers_unblock_by_func (G_OBJECT (self->checkbutton), checkbutton_toggled_cb, self);
 
 	g_signal_handlers_block_by_func (G_OBJECT (self->aspectswitch), aspectswitch_toggled_cb, self);
@@ -143,7 +143,7 @@ update_ui (CcWacomMappingPanel *self)
 {
 	if (self->device == NULL) {
 		gtk_widget_set_sensitive (GTK_WIDGET(self->checkbutton), FALSE);
-		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON(self->checkbutton), TRUE);
+		gtk_check_button_set_inconsistent (GTK_CHECK_BUTTON(self->checkbutton), TRUE);
 	} else {
 		gboolean is_screen_tablet;
 
@@ -152,7 +152,7 @@ update_ui (CcWacomMappingPanel *self)
 			WACOM_DEVICE_INTEGRATED_DISPLAY;
 
 		gtk_widget_set_sensitive (GTK_WIDGET(self->checkbutton), !is_screen_tablet);
-		gtk_toggle_button_set_inconsistent (GTK_TOGGLE_BUTTON(self->checkbutton), FALSE);
+		gtk_check_button_set_inconsistent (GTK_CHECK_BUTTON(self->checkbutton), FALSE);
 	}
 
 	update_monitor_chooser (self);
@@ -163,7 +163,7 @@ update_mapping (CcWacomMappingPanel *self)
 {
 	GnomeRROutput *output = NULL;
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->checkbutton))) {
+	if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->checkbutton))) {
 		GtkTreeIter iter;
 		GtkTreeModel *model;
 		char *name;
@@ -193,7 +193,7 @@ checkbutton_toggled_cb (CcWacomMappingPanel *self)
 {
 	gboolean active;
 
-	active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->checkbutton));
+	active = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->checkbutton));
 	set_combobox_sensitive (self, active);
 	if (!active)
 		gtk_switch_set_active (GTK_SWITCH(self->aspectswitch), FALSE);
@@ -224,7 +224,7 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 	GtkCellRenderer *renderer;
 	g_autoptr(GError) error = NULL;
 
-	self->rr_screen = gnome_rr_screen_new (gdk_screen_get_default (), &error);
+	self->rr_screen = gnome_rr_screen_new (gdk_display_get_default (), &error);
 
 	if (error)
 		g_warning ("Could not get RR screen: %s", error->message);
@@ -233,8 +233,11 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 				 G_CALLBACK (update_monitor_chooser), self, G_CONNECT_SWAPPED);
 
 	vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 8);
-	gtk_container_add (GTK_CONTAINER (self), vbox);
-	gtk_container_set_border_width (GTK_CONTAINER (self), 12);
+	gtk_box_append (GTK_BOX (self), vbox);
+	gtk_widget_set_margin_top (GTK_WIDGET (self), 12);
+	gtk_widget_set_margin_bottom (GTK_WIDGET (self), 12);
+	gtk_widget_set_margin_start (GTK_WIDGET (self), 12);
+	gtk_widget_set_margin_end (GTK_WIDGET (self), 12);
 	gtk_widget_set_vexpand (GTK_WIDGET (vbox), TRUE);
 	gtk_widget_set_hexpand (GTK_WIDGET (vbox), TRUE);
 
@@ -266,18 +269,15 @@ cc_wacom_mapping_panel_init (CcWacomMappingPanel *self)
 
 	/* Whole-desktop checkbox */
 	self->checkbutton = gtk_check_button_new_with_label (_("Map to single monitor"));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->checkbutton), FALSE);
+	gtk_check_button_set_active (GTK_CHECK_BUTTON (self->checkbutton), FALSE);
 	g_signal_connect_object (self->checkbutton, "toggled",
                                  G_CALLBACK (checkbutton_toggled_cb), self, G_CONNECT_SWAPPED);
 
-	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(self->checkbutton),
-				FALSE, FALSE, 0);
-	gtk_box_pack_start (GTK_BOX(vbox), GTK_WIDGET(grid),
-				FALSE, FALSE, 8);
+	gtk_box_append (GTK_BOX(vbox), GTK_WIDGET(self->checkbutton));
+	gtk_box_append (GTK_BOX(vbox), GTK_WIDGET(grid));
 
 	/* Update display */
 	cc_wacom_mapping_panel_set_device (self, NULL);
-	gtk_widget_show_all(GTK_WIDGET(self));
 }
 
 GtkWidget *

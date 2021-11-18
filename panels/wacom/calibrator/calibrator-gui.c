@@ -24,7 +24,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <glib/gi18n.h>
-#include <gdk/gdkx.h>
+#include <gdk/x11/gdkx.h>
 #include <gtk/gtk.h>
 
 #include "calibrator.h"
@@ -96,12 +96,11 @@ calib_area_notify_finish (CalibArea *area)
 }
 
 static gboolean
-on_delete_event (GtkWidget *widget,
-                 GdkEvent  *event,
-                 CalibArea *area)
+on_close_request (GtkWidget *widget,
+                  CalibArea *area)
 {
   calib_area_notify_finish (area);
-  return TRUE;
+  return GDK_EVENT_PROPAGATE;
 }
 
 static gboolean
@@ -167,23 +166,20 @@ set_active_target (CalibArea *area,
 }
 
 static void
-on_gesture_press (GtkGestureMultiPress *gesture,
-                  guint                 n_press,
-                  gdouble               x,
-                  gdouble               y,
-                  CalibArea            *area)
+on_gesture_press (GtkGestureClick *gesture,
+                  guint            n_press,
+                  gdouble          x,
+                  gdouble          y,
+                  CalibArea       *area)
 {
   gint num_clicks;
   gboolean success;
   GdkDevice *source;
-  GdkEvent *event;
 
   if (area->success)
     return;
 
-  event = gtk_get_current_event ();
-  source = gdk_event_get_source_device ((GdkEvent *) event);
-  gdk_event_free (event);
+  source = gtk_gesture_get_device (GTK_GESTURE (gesture));
 
   /* Check matching device if a device was provided */
   if (area->device && area->device != source)
@@ -217,12 +213,13 @@ on_gesture_press (GtkGestureMultiPress *gesture,
 }
 
 static gboolean
-on_key_release_event (GtkWidget   *widget,
-                      GdkEventKey *event,
-                      CalibArea   *area)
+on_key_release_event (GtkWidget       *widget,
+                      guint            keyval,
+                      guint            keycode,
+                      GdkModifierType  state,
+                      CalibArea       *area)
 {
-  if (area->success ||
-      event->keyval != GDK_KEY_Escape)
+  if (area->success || keyval != GDK_KEY_Escape)
     return GDK_EVENT_PROPAGATE;
 
   calib_area_notify_finish (area);
@@ -259,15 +256,15 @@ on_title_revealed (CalibArea *area)
   gtk_revealer_set_reveal_child (GTK_REVEALER (revealer), TRUE);
 }
 
-static gboolean
-on_fullscreen (GtkWindow           *window,
-               GdkEventWindowState *event,
-               CalibArea           *area)
+static void
+on_fullscreen (GtkWindow  *window,
+               GParamSpec *pspec,
+               CalibArea  *area)
 {
   GtkWidget *revealer;
 
-  if ((event->changed_mask & GDK_WINDOW_STATE_FULLSCREEN) == 0)
-    return FALSE;
+  if (!gtk_window_is_fullscreen (window))
+    return;
 
   revealer = GTK_WIDGET (gtk_builder_get_object (area->builder, "title_revealer"));
   g_signal_connect_swapped (revealer, "notify::child-revealed",
@@ -276,8 +273,6 @@ on_fullscreen (GtkWindow           *window,
   gtk_revealer_set_reveal_child (GTK_REVEALER (revealer), TRUE);
 
   set_active_target (area, 0);
-
-  return FALSE;
 }
 
 static void
@@ -295,7 +290,7 @@ on_size_allocate (GtkWidget     *widget,
  * calib_area_finish().
  */
 CalibArea *
-calib_area_new (GdkScreen      *screen,
+calib_area_new (GdkDisplay     *display,
                 int             n_monitor,
                 GdkDevice      *device,
                 FinishCallback  callback,
@@ -303,15 +298,10 @@ calib_area_new (GdkScreen      *screen,
                 int             threshold_doubleclick,
                 int             threshold_misclick)
 {
+  g_autoptr(GdkMonitor) monitor = NULL;
   CalibArea *calib_area;
   GdkRectangle rect;
-  GdkVisual *visual;
-  GdkMonitor *monitor;
-#ifndef FAKE_AREA
-  GdkWindow *window;
-  g_autoptr(GdkCursor) cursor = NULL;
-#endif /* FAKE_AREA */
-  GtkGesture *press;
+  GtkGesture *click;
 
   g_return_val_if_fail (callback, NULL);
 
@@ -330,9 +320,9 @@ calib_area_new (GdkScreen      *screen,
   calib_area->clock = GTK_WIDGET (gtk_builder_get_object (calib_area->builder, "clock"));
   calib_area->style_provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (calib_area->style_provider, "/org/gnome/control-center/wacom/calibrator/calibrator.css");
-  gtk_style_context_add_provider_for_screen (gtk_widget_get_screen (calib_area->window),
-                                             GTK_STYLE_PROVIDER (calib_area->style_provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_USER);
+  gtk_style_context_add_provider_for_display (gtk_widget_get_display (calib_area->window),
+                                              GTK_STYLE_PROVIDER (calib_area->style_provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
 
   cc_clock_set_duration (CC_CLOCK (calib_area->clock), MAX_TIME);
   g_signal_connect (calib_area->clock, "finished",
@@ -341,18 +331,15 @@ calib_area_new (GdkScreen      *screen,
 #ifndef FAKE_AREA
   /* No cursor */
   gtk_widget_realize (calib_area->window);
-  window = gtk_widget_get_window (calib_area->window);
-  cursor = gdk_cursor_new_for_display (gdk_display_get_default (), GDK_BLANK_CURSOR);
-  gdk_window_set_cursor (window, cursor);
+  gtk_widget_set_cursor_from_name (calib_area->window, "blank");
 
   gtk_widget_set_can_focus (calib_area->window, TRUE);
-  gtk_window_set_keep_above (GTK_WINDOW (calib_area->window), TRUE);
 #endif /* FAKE_AREA */
 
   /* Move to correct screen */
-  if (screen == NULL)
-    screen = gdk_screen_get_default ();
-  monitor = gdk_display_get_monitor (gdk_screen_get_display (screen), n_monitor);
+  if (display == NULL)
+    display = gdk_display_get_default ();
+  monitor = g_list_model_get_item (gdk_display_get_monitors (display), n_monitor);
   gdk_monitor_get_geometry (monitor, &rect);
 
   calib_area->calibrator.geometry = rect;
@@ -362,15 +349,15 @@ calib_area_new (GdkScreen      *screen,
                     G_CALLBACK (on_key_release_event),
                     calib_area);
   g_signal_connect (calib_area->window,
-                    "delete-event",
-                    G_CALLBACK (on_delete_event),
+                    "close-request",
+                    G_CALLBACK (on_close_request),
                     calib_area);
   g_signal_connect (calib_area->window,
                     "focus-out-event",
                     G_CALLBACK(on_focus_out_event),
                     calib_area);
   g_signal_connect (calib_area->window,
-                    "window-state-event",
+                    "notify::fullscreened",
                     G_CALLBACK (on_fullscreen),
                     calib_area);
   g_signal_connect (calib_area->window,
@@ -378,17 +365,13 @@ calib_area_new (GdkScreen      *screen,
                     G_CALLBACK (on_size_allocate),
                     calib_area);
 
-  press = gtk_gesture_multi_press_new (calib_area->window);
-  gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (press), GDK_BUTTON_PRIMARY);
-  g_signal_connect (press, "pressed",
+  click = gtk_gesture_click_new ();
+  gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (click), GDK_BUTTON_PRIMARY);
+  g_signal_connect (click, "pressed",
                     G_CALLBACK (on_gesture_press), calib_area);
+  gtk_widget_add_controller (calib_area->window, GTK_EVENT_CONTROLLER (click));
 
-  gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area->window), screen, n_monitor);
-
-  visual = gdk_screen_get_rgba_visual (screen);
-  if (visual != NULL)
-    gtk_widget_set_visual (GTK_WIDGET (calib_area->window), visual);
-
+  gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area->window), monitor);
   gtk_widget_show (calib_area->window);
 
   return calib_area;
@@ -418,9 +401,9 @@ calib_area_free (CalibArea *area)
 {
   g_return_if_fail (area != NULL);
 
-  gtk_style_context_remove_provider_for_screen (gtk_widget_get_screen (area->window),
-                                                GTK_STYLE_PROVIDER (area->style_provider));
-  gtk_widget_destroy (area->window);
+  gtk_style_context_remove_provider_for_display (gtk_widget_get_display (area->window),
+                                                 GTK_STYLE_PROVIDER (area->style_provider));
+  gtk_window_destroy (GTK_WINDOW (area->window));
   g_free (area);
 }
 

@@ -272,7 +272,7 @@ cc_wacom_button_row_new (guint      button,
                            row,
                            G_CONNECT_SWAPPED);
 
-  gtk_container_add (GTK_CONTAINER (row), grid);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), grid);
 
   cc_wacom_button_row_update (CC_WACOM_BUTTON_ROW (row));
 

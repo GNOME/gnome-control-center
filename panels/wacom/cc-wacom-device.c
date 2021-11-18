@@ -339,7 +339,7 @@ cc_wacom_device_get_output (CcWacomDevice *device,
 	GnomeRRCrtc *crtc;
 
         g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), NULL);
-        g_return_val_if_fail (GNOME_IS_RR_SCREEN (rr_screen), NULL);
+        g_return_val_if_fail (GNOME_RR_IS_SCREEN (rr_screen), NULL);
 
 	rr_output = find_output (rr_screen, device);
 	if (rr_output == NULL) {

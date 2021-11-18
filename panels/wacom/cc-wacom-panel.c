@@ -36,7 +36,7 @@
 #include "gsd-device-manager.h"
 
 #ifdef GDK_WINDOWING_WAYLAND
-#include <gdk/gdkwayland.h>
+#include <gdk/wayland/gdkwayland.h>
 #endif
 
 #define WID(x) (GtkWidget *) gtk_builder_get_object (self->builder, x)
@@ -59,6 +59,8 @@ struct _CcWacomPanel
 	guint             mock_stylus_id;
 
 	CcTabletToolMap  *tablet_tool_map;
+
+	GtkGesture       *stylus_gesture;
 
 	/* DBus */
 	GDBusProxy    *proxy;
@@ -255,6 +257,14 @@ static void
 cc_wacom_panel_dispose (GObject *object)
 {
 	CcWacomPanel *self = CC_WACOM_PANEL (object);
+	CcShell *shell;
+
+	shell = cc_panel_get_shell (CC_PANEL (self));
+	if (shell) {
+		gtk_widget_remove_controller (GTK_WIDGET (shell),
+					      GTK_EVENT_CONTROLLER (self->stylus_gesture));
+	}
+
 
 	g_clear_object (&self->builder);
 
@@ -289,9 +299,13 @@ check_remove_stylus_pages (CcWacomPanel *self)
 	 */
 	g_hash_table_iter_init (&iter, self->stylus_pages);
 	while (g_hash_table_iter_next (&iter, (gpointer*) &tool, (gpointer*) &page)) {
+		gint page_num;
+
 		if (g_list_find (total, tool))
 			continue;
-		gtk_widget_destroy (page);
+
+		page_num = gtk_notebook_page_num (GTK_NOTEBOOK (self->stylus_notebook), page);
+		gtk_notebook_remove_page (GTK_NOTEBOOK (self->stylus_notebook), page_num);
 		g_hash_table_iter_remove (&iter);
 	}
 }
@@ -308,7 +322,6 @@ add_stylus (CcWacomPanel *self,
 	page = cc_wacom_stylus_page_new (tool);
 	cc_wacom_stylus_page_set_navigation (CC_WACOM_STYLUS_PAGE (page),
 					     GTK_NOTEBOOK (self->stylus_notebook));
-	gtk_widget_show (page);
 	gtk_notebook_append_page (GTK_NOTEBOOK (self->stylus_notebook), page, NULL);
 	g_hash_table_insert (self->stylus_pages, tool, page);
 
@@ -325,7 +338,7 @@ update_test_button (CcWacomPanel *self)
 		return;
 
 	if (g_hash_table_size (self->devices) == 0) {
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->test_button), FALSE);
+		gtk_popover_popdown (GTK_POPOVER (self->test_popover));
 		gtk_widget_set_sensitive (self->test_button, FALSE);
 	} else {
 		gtk_widget_set_sensitive (self->test_button, TRUE);
@@ -345,10 +358,8 @@ update_stylus_notebook (CcWacomPanel *panel,
 		page = gtk_notebook_page_num (GTK_NOTEBOOK (panel->stylus_notebook), widget);
 		gtk_notebook_set_current_page (GTK_NOTEBOOK (panel->stylus_notebook), page);
 	} else {
-		gtk_container_child_set (GTK_CONTAINER (panel->stack),
-					 panel->stylus_notebook,
-					 "needs-attention", TRUE,
-					 NULL);
+		GtkStackPage *page = gtk_stack_get_page (GTK_STACK (panel->stack), panel->stylus_notebook);
+		gtk_stack_page_set_needs_attention (page, TRUE);
 	}
 }
 
@@ -421,17 +432,18 @@ update_current_tool (CcWacomPanel  *panel,
 					 wacom_device, stylus);
 }
 
-static gboolean
-on_shell_event_cb (CcWacomPanel *panel,
-		   GdkEvent     *event)
+static void
+on_stylus_proximity_cb (GtkGestureStylus *gesture,
+			double            x,
+			double            y,
+			CcWacomPanel     *panel)
 {
-	if (event->type == GDK_MOTION_NOTIFY) {
-		update_current_tool (panel,
-				     gdk_event_get_source_device (event),
-				     gdk_event_get_device_tool (event));
-	}
+	GdkDevice *device;
+	GdkDeviceTool *tool;
 
-	return GDK_EVENT_PROPAGATE;
+	device = gtk_event_controller_get_current_event_device (GTK_EVENT_CONTROLLER (gesture));
+	tool = gtk_gesture_stylus_get_device_tool (gesture);
+	update_current_tool (panel, device, tool);
 }
 
 static gboolean
@@ -474,29 +486,27 @@ cc_wacom_panel_constructed (GObject *object)
 	/* Add test area button to shell header. */
 	shell = cc_panel_get_shell (CC_PANEL (self));
 
-	button = gtk_toggle_button_new_with_mnemonic (_("Test Your _Settings"));
-	gtk_style_context_add_class (gtk_widget_get_style_context (button),
-				     "text-button");
+	button = gtk_menu_button_new ();
+	gtk_menu_button_set_use_underline (GTK_MENU_BUTTON (button), TRUE);
+	gtk_menu_button_set_label (GTK_MENU_BUTTON (button), _("Test Your _Settings"));
+	gtk_widget_add_css_class (button, "text-button");
 	gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-	gtk_widget_set_visible (button, TRUE);
 
 	cc_shell_embed_widget_in_header (shell, button, GTK_POS_RIGHT);
 
-	self->test_popover = gtk_popover_new (button);
-	gtk_container_set_border_width (GTK_CONTAINER (self->test_popover), 6);
+	self->test_popover = gtk_popover_new ();
+	gtk_menu_button_set_popover (GTK_MENU_BUTTON (button), self->test_popover);
 
 	self->test_draw_area = cc_drawing_area_new ();
 	gtk_widget_set_size_request (self->test_draw_area, 400, 300);
-	gtk_container_add (GTK_CONTAINER (self->test_popover),
-			   self->test_draw_area);
+	gtk_popover_set_child (GTK_POPOVER (self->test_popover), self->test_draw_area);
 	gtk_widget_show (self->test_draw_area);
 
-	g_object_bind_property (button, "active",
-				self->test_popover, "visible",
-				G_BINDING_BIDIRECTIONAL);
-
-	g_signal_connect_object (shell, "event",
-				 G_CALLBACK (on_shell_event_cb), self, G_CONNECT_SWAPPED);
+	self->stylus_gesture = gtk_gesture_stylus_new ();
+	g_signal_connect (self->stylus_gesture, "proximity",
+			  G_CALLBACK (on_stylus_proximity_cb), self);
+	gtk_widget_add_controller (GTK_WIDGET (shell),
+				   GTK_EVENT_CONTROLLER (self->stylus_gesture));
 
 	if (g_getenv ("UMOCKDEV_DIR") != NULL)
 		self->mock_stylus_id = g_idle_add (show_mock_stylus_cb, self);
@@ -602,8 +612,9 @@ device_removed_cb (CcWacomPanel     *self,
 
 	page = g_hash_table_lookup (self->pages, device);
 	if (page) {
+    gint page_num = gtk_notebook_page_num (GTK_NOTEBOOK (self->tablet_notebook), page);
+    gtk_notebook_remove_page (GTK_NOTEBOOK (self->tablet_notebook), page_num);
 		g_hash_table_remove (self->pages, device);
-		gtk_widget_destroy (page);
 	}
 
 	g_hash_table_remove (self->devices, gsd_device);
@@ -676,10 +687,8 @@ on_stack_visible_child_notify_cb (CcWacomPanel *panel)
 	child = gtk_stack_get_visible_child (GTK_STACK (panel->stack));
 
 	if (child == panel->stylus_notebook) {
-		gtk_container_child_set (GTK_CONTAINER (panel->stack),
-					 panel->stylus_notebook,
-					 "needs-attention", FALSE,
-					 NULL);
+		GtkStackPage *page = gtk_stack_get_page (GTK_STACK (panel->stack), panel->stylus_notebook);
+		gtk_stack_page_set_needs_attention (page, FALSE);
 	}
 }
 
@@ -741,22 +750,18 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	self->switcher = gtk_stack_switcher_new ();
 	gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (self->switcher),
 				      GTK_STACK (self->stack));
-	gtk_widget_show (self->switcher);
 
-	gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (self->stack));
+	adw_bin_set_child (ADW_BIN (self), GTK_WIDGET (self->stack));
 	gtk_widget_show (self->stack);
 
 	self->tablet_notebook = gtk_notebook_new ();
-	gtk_widget_show (self->tablet_notebook);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (self->tablet_notebook), FALSE);
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (self->tablet_notebook), FALSE);
 	gtk_widget_set_vexpand (self->tablet_notebook, TRUE);
 
 	self->stylus_notebook = gtk_notebook_new ();
-	gtk_widget_show (self->stylus_notebook);
 	gtk_notebook_set_show_tabs (GTK_NOTEBOOK (self->stylus_notebook), FALSE);
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (self->stylus_notebook), FALSE);
-	gtk_container_set_border_width (GTK_CONTAINER (self->stylus_notebook), 0);
 	gtk_widget_set_vexpand (self->stylus_notebook, TRUE);
 
 	gtk_stack_add_titled (GTK_STACK (self->stack),
