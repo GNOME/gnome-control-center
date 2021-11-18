@@ -44,7 +44,6 @@ deps = common_deps + [
   gnome_desktop_dep,
   m_dep,
   dependency('colord-gtk', version: '>= 0.1.24'),
-  dependency('libsoup-2.4')
 ]
 
 panels_libs += static_library(

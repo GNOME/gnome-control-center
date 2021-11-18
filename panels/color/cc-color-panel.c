@@ -24,7 +24,6 @@
 #include <colord.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
-#include <libsoup/soup.h>
 
 #include "list-box-helper.h"
 #include "cc-color-calibrate.h"
@@ -59,13 +58,11 @@ struct _CcColorPanel
   GtkWidget     *button_assign_import;
   GtkWidget     *button_assign_ok;
   GtkWidget     *button_calib_export;
-  GtkWidget     *button_calib_upload;
   GtkWidget     *dialog_assign;
   GtkWidget     *entry_calib_title;
   GtkWidget     *frame_devices;
   GtkWidget     *label_assign_warning;
   GtkWidget     *label_calib_summary_message;
-  GtkWidget     *label_calib_upload_location;
   GtkWidget     *label_no_devices;
   GtkTreeModel  *liststore_assign;
   GtkTreeModel  *liststore_calib_kind;
@@ -311,7 +308,6 @@ gcm_prefs_calib_apply_cb (CcColorPanel *prefs)
   GtkWindow *window = NULL;
 
   /* setup the calibration object with items that can fail */
-  gtk_widget_show (prefs->button_calib_upload);
   ret = cc_color_calibrate_setup (prefs->calibrate,
                                   &error);
   if (!ret)
@@ -773,91 +769,6 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
                                       profile_tmp,
                                       &iter);
     }
-}
-
-static void
-gcm_prefs_calib_upload_cb (CcColorPanel *prefs)
-{
-  CdProfile *profile;
-  const gchar *uri;
-  gboolean ret;
-  g_autofree gchar *upload_uri = NULL;
-  g_autofree gchar *msg_result = NULL;
-  g_autofree gchar *data = NULL;
-  g_autoptr(GError) error = NULL;
-  gsize length;
-  guint status_code;
-  g_autoptr(SoupBuffer) buffer = NULL;
-  g_autoptr(SoupMessage) msg = NULL;
-  g_autoptr(SoupMultipart) multipart = NULL;
-  g_autoptr(SoupSession) session = NULL;
-
-  profile = cc_color_calibrate_get_profile (prefs->calibrate);
-  ret = cd_profile_connect_sync (profile, NULL, &error);
-  if (!ret)
-    {
-      g_warning ("Failed to get imported profile: %s", error->message);
-      return;
-    }
-
-  /* read file */
-  ret = g_file_get_contents (cd_profile_get_filename (profile),
-                             &data,
-                             &length,
-                             &error);
-  if (!ret)
-    {
-      g_warning ("Failed to read file: %s", error->message);
-      return;
-    }
-
-  /* setup the session */
-  session = soup_session_new_with_options (SOUP_SESSION_USER_AGENT, "gnome-control-center",
-                                           SOUP_SESSION_TIMEOUT, 5000,
-                                           NULL);
-  if (session == NULL)
-  {
-    g_warning ("Failed to setup networking");
-    return;
-  }
-  soup_session_add_feature_by_type (session, SOUP_TYPE_PROXY_RESOLVER_DEFAULT);
-
-  /* create multipart form and upload file */
-  multipart = soup_multipart_new (SOUP_FORM_MIME_TYPE_MULTIPART);
-  buffer = soup_buffer_new (SOUP_MEMORY_STATIC, data, length);
-  soup_multipart_append_form_file (multipart,
-                                   "upload",
-                                   cd_profile_get_filename (profile),
-                                   NULL,
-                                   buffer);
-  upload_uri = g_settings_get_string (prefs->settings_colord, "profile-upload-uri");
-  msg = soup_form_request_new_from_multipart (upload_uri, multipart);
-  status_code = soup_session_send_message (session, msg);
-  if (status_code != 201)
-    {
-      /* TRANSLATORS: this is when the upload of the profile failed */
-      msg_result = g_strdup_printf (_("Failed to upload file: %s"), msg->reason_phrase),
-      gtk_label_set_label (GTK_LABEL (prefs->label_calib_upload_location), msg_result);
-      gtk_widget_show (prefs->label_calib_upload_location);
-      return;
-    }
-
-  /* show instructions to the user */
-  uri = soup_message_headers_get_one (msg->response_headers, "Location");
-  msg_result = g_strdup_printf ("%s %s\n\n• %s\n• %s\n• %s",
-                                /* TRANSLATORS: these are instructions on how to recover
-                                 * the ICC profile on the native operating system and are
-                                 * only shown when the user uses a LiveCD to calibrate */
-                                _("The profile has been uploaded to:"),
-                                uri,
-                                _("Write down this URL."),
-                                _("Restart this computer and boot your normal operating system."),
-                                _("Type the URL into your browser to download and install the profile.")),
-  gtk_label_set_label (GTK_LABEL (prefs->label_calib_upload_location), msg_result);
-  gtk_widget_show (prefs->label_calib_upload_location);
-
-  /* hide the upload button as duplicate uploads will fail */
-  gtk_widget_hide (prefs->button_calib_upload);
 }
 
 static void
@@ -1957,13 +1868,11 @@ cc_color_panel_class_init (CcColorPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_assign_import);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_assign_ok);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_calib_export);
-  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, button_calib_upload);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, dialog_assign);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, entry_calib_title);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, frame_devices);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, label_assign_warning);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, label_calib_summary_message);
-  gtk_widget_class_bind_template_child (widget_class, CcColorPanel, label_calib_upload_location);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, label_no_devices);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_assign);
   gtk_widget_class_bind_template_child (widget_class, CcColorPanel, liststore_calib_kind);
@@ -2272,8 +2181,6 @@ cc_color_panel_init (CcColorPanel *prefs)
   gtk_widget_set_visible (prefs->box_calib_summary, prefs->is_live_cd);
   g_signal_connect_object (prefs->button_calib_export, "clicked",
                            G_CALLBACK (gcm_prefs_calib_export_cb), prefs, G_CONNECT_SWAPPED);
-  g_signal_connect_object (prefs->button_calib_upload, "clicked",
-                           G_CALLBACK (gcm_prefs_calib_upload_cb), prefs, G_CONNECT_SWAPPED);
   g_signal_connect_object (prefs->label_calib_summary_message, "activate-link",
                            G_CALLBACK (gcm_prefs_calib_export_link_cb), prefs, G_CONNECT_SWAPPED);
 
