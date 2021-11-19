@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center 2.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-11-10 15:36+0000\n"
-"PO-Revision-Date: 2021-11-12 12:19+0100\n"
+"POT-Creation-Date: 2021-11-18 15:47+0000\n"
+"PO-Revision-Date: 2021-11-19 17:08+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <lokalizacija@linux.hr>\n"
 "Language: hr\n"
@@ -353,8 +353,8 @@ msgid "Select a picture"
 msgstr "Odaberi sliku"
 
 #: panels/background/cc-background-chooser.c:347
-#: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
-#: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
+#: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:235
+#: panels/color/cc-color-panel.c:797 panels/color/cc-color-panel.ui:563
 #: panels/common/cc-language-chooser.ui:25
 #: panels/display/cc-display-panel.c:1023
 #: panels/info-overview/cc-info-overview-panel.ui:243
@@ -681,90 +681,64 @@ msgstr "Nije kalibriran"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:167
+#: panels/color/cc-color-panel.c:164
 msgid "Default: "
 msgstr "Uobičajeno: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:175
+#: panels/color/cc-color-panel.c:172
 msgid "Colorspace: "
 msgstr "Raspon boja: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:182
+#: panels/color/cc-color-panel.c:179
 msgid "Test profile: "
 msgstr "Testni profil: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:236
+#: panels/color/cc-color-panel.c:233
 msgid "Select ICC Profile File"
 msgstr "Odaberi ICC datoteku profila"
 
-#: panels/color/cc-color-panel.c:239
+#: panels/color/cc-color-panel.c:236
 msgid "_Import"
 msgstr "_Uvezi"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:250
+#: panels/color/cc-color-panel.c:247
 msgid "Supported ICC profiles"
 msgstr "Podržani ICC profili"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:257
+#: panels/color/cc-color-panel.c:254
 #: panels/network/wireless-security/eap-method-fast.c:356
 msgid "All files"
 msgstr "Sve datoteke"
 
-#: panels/color/cc-color-panel.c:549
+#: panels/color/cc-color-panel.c:545
 msgid "Screen"
 msgstr "Zaslon"
 
-#. TRANSLATORS: this is when the upload of the profile failed
-#: panels/color/cc-color-panel.c:839
-#, c-format
-msgid "Failed to upload file: %s"
-msgstr "Neuspjelo slanje datoteke: %s"
-
-#. TRANSLATORS: these are instructions on how to recover
-#. * the ICC profile on the native operating system and are
-#. * only shown when the user uses a LiveCD to calibrate
-#: panels/color/cc-color-panel.c:851
-msgid "The profile has been uploaded to:"
-msgstr "Profil je poslan na:"
-
-#: panels/color/cc-color-panel.c:853
-msgid "Write down this URL."
-msgstr "Zapišite ovaj URL."
-
-#: panels/color/cc-color-panel.c:854
-msgid "Restart this computer and boot your normal operating system."
-msgstr ""
-"Ponovno pokrenite ovo računalo i pokrenite vaš uobičajeni operativni sustav."
-
-#: panels/color/cc-color-panel.c:855
-msgid "Type the URL into your browser to download and install the profile."
-msgstr "Upišite URL u vaš preglednik za preuzimanje i instalaciju profila."
-
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:883
+#: panels/color/cc-color-panel.c:794
 msgid "Save Profile"
 msgstr "Spremi profil"
 
-#: panels/color/cc-color-panel.c:887
+#: panels/color/cc-color-panel.c:798
 #: panels/network/connection-editor/vpn-helpers.c:300
 #: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Spremi"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1196
+#: panels/color/cc-color-panel.c:1107
 msgid "Create a color profile for the selected device"
 msgstr "Napravi profil boje za odabrani uređaj"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1211 panels/color/cc-color-panel.c:1235
+#: panels/color/cc-color-panel.c:1122 panels/color/cc-color-panel.c:1146
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -772,12 +746,12 @@ msgstr ""
 "Mjerni uređaj nije pronađen. Provjerite je li uključen i ispravno spojen."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1245
+#: panels/color/cc-color-panel.c:1156
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Mjerni uređaj ne podržava profiliranje pisača."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1256
+#: panels/color/cc-color-panel.c:1167
 msgid "The device type is not currently supported."
 msgstr "Vrsta uređaja trenutno nije podržana."
 
@@ -889,15 +863,7 @@ msgstr "Kopiraj profil"
 msgid "Requires writable media"
 msgstr "Zahtijeva zapisivi medij"
 
-#: panels/color/cc-color-panel.ui:519
-msgid "Upload profile"
-msgstr "Pošalji profil"
-
-#: panels/color/cc-color-panel.ui:532
-msgid "Requires Internet connection"
-msgstr "Zahtijeva pristup Internetu"
-
-#: panels/color/cc-color-panel.ui:591
+#: panels/color/cc-color-panel.ui:497
 msgid ""
 "You may find these instructions on how to use the profile on <a href=\"linux"
 "\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
@@ -907,26 +873,26 @@ msgstr ""
 "Linuxu</a>, <a href=\"osx\">Apple OS X</a> i <a href=\"windows\">Microsoft "
 "Windows</a> upotrebljivim sustavima."
 
-#: panels/color/cc-color-panel.ui:607
+#: panels/color/cc-color-panel.ui:513
 msgid "Summary"
 msgstr "Sažetak"
 
-#: panels/color/cc-color-panel.ui:621
+#: panels/color/cc-color-panel.ui:527
 msgid "Add Profile"
 msgstr "Dodaj profil"
 
-#: panels/color/cc-color-panel.ui:643
+#: panels/color/cc-color-panel.ui:549
 msgid "_Import File…"
 msgstr "_Uvezi datoteku…"
 
-#: panels/color/cc-color-panel.ui:672 panels/keyboard/cc-input-chooser.ui:20
+#: panels/color/cc-color-panel.ui:578 panels/keyboard/cc-input-chooser.ui:20
 #: panels/network/connection-editor/net-connection-editor.c:504
 #: panels/printers/new-printer-dialog.ui:80
 #: panels/user-accounts/cc-add-user-dialog.ui:47
 msgid "_Add"
 msgstr "_Dodaj"
 
-#: panels/color/cc-color-panel.ui:732
+#: panels/color/cc-color-panel.ui:638
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -934,144 +900,144 @@ msgstr ""
 "Otkriven je problem. Profil možda neće raditi ispravno. <a href=\"\">Prikaži "
 "pojedinosti.</a>"
 
-#: panels/color/cc-color-panel.ui:788
+#: panels/color/cc-color-panel.ui:694
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Svaki uređaj posebno mora imati nadopunjeni profil boja kako bi se "
 "upravljalo bojama na tim uređajima."
 
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.ui:810
+#: panels/color/cc-color-panel.ui:716
 #: panels/diagnostics/cc-diagnostics-panel.c:144
 msgid "Learn more"
 msgstr "Saznajte više"
 
-#: panels/color/cc-color-panel.ui:815
+#: panels/color/cc-color-panel.ui:721
 msgid "Learn more about color management"
 msgstr "Saznajte više o upravljanju bojama"
 
-#: panels/color/cc-color-panel.ui:863
+#: panels/color/cc-color-panel.ui:769
 msgid "_Set for all users"
 msgstr "_Postavi za sve korisnike"
 
-#: panels/color/cc-color-panel.ui:867 panels/color/cc-color-panel.ui:882
-#: panels/color/cc-color-panel.ui:883
+#: panels/color/cc-color-panel.ui:773 panels/color/cc-color-panel.ui:788
+#: panels/color/cc-color-panel.ui:789
 msgid "Set this profile for all users on this computer"
 msgstr "Postavi ovaj profil za sve korisnike na ovom računalu"
 
-#: panels/color/cc-color-panel.ui:878
+#: panels/color/cc-color-panel.ui:784
 msgid "_Enable"
 msgstr "_Omogući"
 
-#: panels/color/cc-color-panel.ui:909
+#: panels/color/cc-color-panel.ui:815
 msgid "_Add profile"
 msgstr "_Dodaj profil"
 
-#: panels/color/cc-color-panel.ui:922
+#: panels/color/cc-color-panel.ui:828
 msgid "_Calibrate…"
 msgstr "_Kalibriraj…"
 
-#: panels/color/cc-color-panel.ui:926
+#: panels/color/cc-color-panel.ui:832
 msgid "Calibrate the device"
 msgstr "Kalibriraj uređaj"
 
-#: panels/color/cc-color-panel.ui:937
+#: panels/color/cc-color-panel.ui:843
 msgid "_Remove profile"
 msgstr "_Ukloni profil"
 
-#: panels/color/cc-color-panel.ui:950
+#: panels/color/cc-color-panel.ui:856
 msgid "_View details"
 msgstr "_Pogledaj pojedinosti"
 
-#: panels/color/cc-color-panel.ui:986
+#: panels/color/cc-color-panel.ui:892
 msgid "Unable to detect any devices that can be color managed"
 msgstr ""
 "Nemoguće otkrivanje bilo kojeg uređaja kojima se može upravaljati bojom"
 
-#: panels/color/cc-color-panel.ui:1030
+#: panels/color/cc-color-panel.ui:936
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:1035
+#: panels/color/cc-color-panel.ui:941
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:1040
+#: panels/color/cc-color-panel.ui:946
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:1045
+#: panels/color/cc-color-panel.ui:951
 msgid "Projector"
 msgstr "Projektor"
 
-#: panels/color/cc-color-panel.ui:1050
+#: panels/color/cc-color-panel.ui:956
 msgid "Plasma"
 msgstr "Plazma"
 
-#: panels/color/cc-color-panel.ui:1055
+#: panels/color/cc-color-panel.ui:961
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (CCFL pozadinsko osvjetljenje)"
 
-#: panels/color/cc-color-panel.ui:1060
+#: panels/color/cc-color-panel.ui:966
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (RGB LED pozadinsko osvjetljenje)"
 
-#: panels/color/cc-color-panel.ui:1065
+#: panels/color/cc-color-panel.ui:971
 msgid "LCD (white LED backlight)"
 msgstr "LCD (bijelo LED pozadinsko osvjetljenje)"
 
-#: panels/color/cc-color-panel.ui:1070
+#: panels/color/cc-color-panel.ui:976
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Širok spektar LCD (CCFL pozadinsko osvjetljenje)"
 
-#: panels/color/cc-color-panel.ui:1075
+#: panels/color/cc-color-panel.ui:981
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Širok spektar LCD (RGB LED pozadinsko osvjetljenje)"
 
-#: panels/color/cc-color-panel.ui:1092
+#: panels/color/cc-color-panel.ui:998
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Visoka"
 
-#: panels/color/cc-color-panel.ui:1093
+#: panels/color/cc-color-panel.ui:999
 msgid "40 minutes"
 msgstr "40 minuta"
 
-#: panels/color/cc-color-panel.ui:1097
+#: panels/color/cc-color-panel.ui:1003
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Srednja"
 
-#: panels/color/cc-color-panel.ui:1098
+#: panels/color/cc-color-panel.ui:1004
 msgid "30 minutes"
 msgstr "30 minuta"
 
-#: panels/color/cc-color-panel.ui:1102
+#: panels/color/cc-color-panel.ui:1008
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Niska"
 
-#: panels/color/cc-color-panel.ui:1103
+#: panels/color/cc-color-panel.ui:1009
 msgid "15 minutes"
 msgstr "15 minuta"
 
-#: panels/color/cc-color-panel.ui:1125
+#: panels/color/cc-color-panel.ui:1031
 msgid "Native to display"
 msgstr "Izvorno zaslonu"
 
-#: panels/color/cc-color-panel.ui:1129
+#: panels/color/cc-color-panel.ui:1035
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (Ispisivanje i objava)"
 
-#: panels/color/cc-color-panel.ui:1133
+#: panels/color/cc-color-panel.ui:1039
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:1137
+#: panels/color/cc-color-panel.ui:1043
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Fotografija i grafika)"
 
-#: panels/color/cc-color-panel.ui:1141
+#: panels/color/cc-color-panel.ui:1047
 msgid "D75"
 msgstr "D75"
 
@@ -2718,7 +2684,7 @@ msgstr "Pomicanje s dva prsta"
 msgid "Edge Scrolling"
 msgstr "Rubno pomicanje"
 
-#: panels/mouse/cc-mouse-panel.ui:335 panels/wacom/cc-wacom-panel.c:441
+#: panels/mouse/cc-mouse-panel.ui:335 panels/wacom/cc-wacom-panel.c:477
 msgid "Test Your _Settings"
 msgstr "Testirajte svoje _postavke"
 
@@ -4680,7 +4646,7 @@ msgid "Media player"
 msgstr "Medijski reproduktor"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:728
+#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:767
 msgid "Tablet"
 msgstr "Tablet"
 
@@ -5236,7 +5202,7 @@ msgstr "Završen"
 #. Translators: Clicking this button prioritizes printing of this print job
 #: panels/printers/pp-job-row.c:179
 msgid "Move this job to the top of the queue"
-msgstr ""
+msgstr "Premjesti ovaj zadatak na vrh reda čekanja"
 
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
 #: panels/printers/pp-jobs-dialog.c:319
@@ -8161,7 +8127,7 @@ msgstr "%d od %d"
 msgid "Display Mapping"
 msgstr "Prikaži mapiranje"
 
-#: panels/wacom/cc-wacom-panel.c:725 panels/wacom/wacom-stylus-page.ui:119
+#: panels/wacom/cc-wacom-panel.c:764 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
 msgstr "Pisaljka"
 
@@ -8747,26 +8713,20 @@ msgid "Settings is the primary interface for configuring your system."
 msgstr "Postavke su glavno sučelje za podešavanje vašeg sustava."
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:17
-#, fuzzy
-#| msgid "GNOME Settings"
 msgid "GNOME Settings Sound Panel"
-msgstr "GNOME postavke"
+msgstr "GNOME postavke panel zvuka"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:21
 msgid "GNOME Settings Mouse &amp; Touchpad Panel"
-msgstr ""
+msgstr "GNOME postavke panel miša i touchpada"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:25
-#, fuzzy
-#| msgid "GNOME Settings"
 msgid "GNOME Settings Background Panel"
-msgstr "GNOME postavke"
+msgstr "GNOME postavke panel pozadine"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:29
-#, fuzzy
-#| msgid "GNOME Settings"
 msgid "GNOME Settings Keyboard Panel"
-msgstr "GNOME postavke"
+msgstr "GNOME postavke panel tipkovnice"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:38
 msgid "The GNOME Project"
@@ -8922,6 +8882,29 @@ msgstr[2] "%u ulaza"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Zvukovi sustava"
+
+#~ msgid "Failed to upload file: %s"
+#~ msgstr "Neuspjelo slanje datoteke: %s"
+
+#~ msgid "The profile has been uploaded to:"
+#~ msgstr "Profil je poslan na:"
+
+#~ msgid "Write down this URL."
+#~ msgstr "Zapišite ovaj URL."
+
+#~ msgid "Restart this computer and boot your normal operating system."
+#~ msgstr ""
+#~ "Ponovno pokrenite ovo računalo i pokrenite vaš uobičajeni operativni "
+#~ "sustav."
+
+#~ msgid "Type the URL into your browser to download and install the profile."
+#~ msgstr "Upišite URL u vaš preglednik za preuzimanje i instalaciju profila."
+
+#~ msgid "Upload profile"
+#~ msgstr "Pošalji profil"
+
+#~ msgid "Requires Internet connection"
+#~ msgstr "Zahtijeva pristup Internetu"
 
 #~ msgid "Unlocking..."
 #~ msgstr "Otključavanje..."
