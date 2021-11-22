@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-11-04 10:00+0000\n"
-"PO-Revision-Date: 2021-11-07 13:55+0100\n"
+"POT-Creation-Date: 2021-11-18 15:47+0000\n"
+"PO-Revision-Date: 2021-11-22 14:43+0100\n"
 "Last-Translator: Fabio Tomat <f.t.public@gmail.com>\n"
 "Language-Team: Friulian <f.t.public@gmail.com>\n"
 "Language: fur\n"
@@ -353,8 +353,8 @@ msgid "Select a picture"
 msgstr "Selezione un imagjin"
 
 #: panels/background/cc-background-chooser.c:347
-#: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
-#: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
+#: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:235
+#: panels/color/cc-color-panel.c:797 panels/color/cc-color-panel.ui:563
 #: panels/common/cc-language-chooser.ui:25
 #: panels/display/cc-display-panel.c:1023
 #: panels/info-overview/cc-info-overview-panel.ui:243
@@ -680,90 +680,64 @@ msgstr "No calibrât"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:167
+#: panels/color/cc-color-panel.c:164
 msgid "Default: "
 msgstr "Predefinît: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:175
+#: panels/color/cc-color-panel.c:172
 msgid "Colorspace: "
 msgstr "Spazi colôr: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:182
+#: panels/color/cc-color-panel.c:179
 msgid "Test profile: "
 msgstr "Profîl di prove: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:236
+#: panels/color/cc-color-panel.c:233
 msgid "Select ICC Profile File"
 msgstr "Selezionâ file profîl ICC"
 
-#: panels/color/cc-color-panel.c:239
+#: panels/color/cc-color-panel.c:236
 msgid "_Import"
 msgstr "_Impuarte"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:250
+#: panels/color/cc-color-panel.c:247
 msgid "Supported ICC profiles"
 msgstr "Profîi ICC supuartâts"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:257
+#: panels/color/cc-color-panel.c:254
 #: panels/network/wireless-security/eap-method-fast.c:356
 msgid "All files"
 msgstr "Ducj i files"
 
-#: panels/color/cc-color-panel.c:549
+#: panels/color/cc-color-panel.c:545
 msgid "Screen"
 msgstr "Schermi"
 
-#. TRANSLATORS: this is when the upload of the profile failed
-#: panels/color/cc-color-panel.c:839
-#, c-format
-msgid "Failed to upload file: %s"
-msgstr "Falît tal cjariâ il file: %s"
-
-#. TRANSLATORS: these are instructions on how to recover
-#. * the ICC profile on the native operating system and are
-#. * only shown when the user uses a LiveCD to calibrate
-#: panels/color/cc-color-panel.c:851
-msgid "The profile has been uploaded to:"
-msgstr "Il profîl al è stât cjariât su:"
-
-#: panels/color/cc-color-panel.c:853
-msgid "Write down this URL."
-msgstr "Cjape note di cheste URL."
-
-#: panels/color/cc-color-panel.c:854
-msgid "Restart this computer and boot your normal operating system."
-msgstr ""
-"Torne invie il computer e eseguìs il boot dal abituâl sisteme operatîf."
-
-#: panels/color/cc-color-panel.c:855
-msgid "Type the URL into your browser to download and install the profile."
-msgstr "Scrîf l'URL tal browser par scjariâ e instalâ il profîl."
-
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:883
+#: panels/color/cc-color-panel.c:794
 msgid "Save Profile"
 msgstr "Salve Profîl"
 
-#: panels/color/cc-color-panel.c:887
+#: panels/color/cc-color-panel.c:798
 #: panels/network/connection-editor/vpn-helpers.c:300
 #: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "_Salve"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1196
+#: panels/color/cc-color-panel.c:1107
 msgid "Create a color profile for the selected device"
 msgstr "Cree un profîl di colôr pal dispositîf selezionât"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1211 panels/color/cc-color-panel.c:1235
+#: panels/color/cc-color-panel.c:1122 panels/color/cc-color-panel.c:1146
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -772,12 +746,12 @@ msgstr ""
 "tacât te juste maniere."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1245
+#: panels/color/cc-color-panel.c:1156
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Il strument di misure nol supuarte il profiling de stampant."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1256
+#: panels/color/cc-color-panel.c:1167
 msgid "The device type is not currently supported."
 msgstr "Il gjenar di dispositîf nol è al moment supuartât."
 
@@ -891,15 +865,7 @@ msgstr "Copie profîl"
 msgid "Requires writable media"
 msgstr "Al covente un supuart scrivibil"
 
-#: panels/color/cc-color-panel.ui:519
-msgid "Upload profile"
-msgstr "Cjarie profîl"
-
-#: panels/color/cc-color-panel.ui:532
-msgid "Requires Internet connection"
-msgstr "Si scugne vê une conession internet"
-
-#: panels/color/cc-color-panel.ui:591
+#: panels/color/cc-color-panel.ui:497
 msgid ""
 "You may find these instructions on how to use the profile on <a href=\"linux"
 "\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
@@ -909,26 +875,26 @@ msgstr ""
 "href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> e <a href="
 "\"windows\">Microsoft Windows</a>."
 
-#: panels/color/cc-color-panel.ui:607
+#: panels/color/cc-color-panel.ui:513
 msgid "Summary"
 msgstr "Somari"
 
-#: panels/color/cc-color-panel.ui:621
+#: panels/color/cc-color-panel.ui:527
 msgid "Add Profile"
 msgstr "Zonte Profîl"
 
-#: panels/color/cc-color-panel.ui:643
+#: panels/color/cc-color-panel.ui:549
 msgid "_Import File…"
 msgstr "_Impuarte file…"
 
-#: panels/color/cc-color-panel.ui:672 panels/keyboard/cc-input-chooser.ui:20
+#: panels/color/cc-color-panel.ui:578 panels/keyboard/cc-input-chooser.ui:20
 #: panels/network/connection-editor/net-connection-editor.c:504
 #: panels/printers/new-printer-dialog.ui:80
 #: panels/user-accounts/cc-add-user-dialog.ui:47
 msgid "_Add"
 msgstr "_Zonte"
 
-#: panels/color/cc-color-panel.ui:732
+#: panels/color/cc-color-panel.ui:638
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -936,143 +902,143 @@ msgstr ""
 "Rilevât un probleme. Il profîl al podarès no lavorà ben. <a href=\"\">Mostre "
 "detais.</a>"
 
-#: panels/color/cc-color-panel.ui:788
+#: panels/color/cc-color-panel.ui:694
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Ogni dispositîf al scugne vê un profîl di colôr inzornât par podê gjestî il "
 "colôr."
 
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.ui:810
+#: panels/color/cc-color-panel.ui:716
 #: panels/diagnostics/cc-diagnostics-panel.c:144
 msgid "Learn more"
 msgstr "Plui informazions"
 
-#: panels/color/cc-color-panel.ui:815
+#: panels/color/cc-color-panel.ui:721
 msgid "Learn more about color management"
 msgstr "Plui informazions su la gjestion dai colôrs"
 
-#: panels/color/cc-color-panel.ui:863
+#: panels/color/cc-color-panel.ui:769
 msgid "_Set for all users"
 msgstr "_Stabilìs par ducj i utents"
 
-#: panels/color/cc-color-panel.ui:867 panels/color/cc-color-panel.ui:882
-#: panels/color/cc-color-panel.ui:883
+#: panels/color/cc-color-panel.ui:773 panels/color/cc-color-panel.ui:788
+#: panels/color/cc-color-panel.ui:789
 msgid "Set this profile for all users on this computer"
 msgstr "Stabilìs chest profîl par ducj i utents su chest computer"
 
-#: panels/color/cc-color-panel.ui:878
+#: panels/color/cc-color-panel.ui:784
 msgid "_Enable"
 msgstr "_Abilite"
 
-#: panels/color/cc-color-panel.ui:909
+#: panels/color/cc-color-panel.ui:815
 msgid "_Add profile"
 msgstr "_Zonte profîl"
 
-#: panels/color/cc-color-panel.ui:922
+#: panels/color/cc-color-panel.ui:828
 msgid "_Calibrate…"
 msgstr "_Calibre…"
 
-#: panels/color/cc-color-panel.ui:926
+#: panels/color/cc-color-panel.ui:832
 msgid "Calibrate the device"
 msgstr "Calibre il dispositîf"
 
-#: panels/color/cc-color-panel.ui:937
+#: panels/color/cc-color-panel.ui:843
 msgid "_Remove profile"
 msgstr "_Gjave profîl"
 
-#: panels/color/cc-color-panel.ui:950
+#: panels/color/cc-color-panel.ui:856
 msgid "_View details"
 msgstr "_Mostre detais"
 
-#: panels/color/cc-color-panel.ui:986
+#: panels/color/cc-color-panel.ui:892
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Impussibil rilevâ un dispositîf che al supuarti la gjestion dal colôr"
 
-#: panels/color/cc-color-panel.ui:1030
+#: panels/color/cc-color-panel.ui:936
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:1035
+#: panels/color/cc-color-panel.ui:941
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:1040
+#: panels/color/cc-color-panel.ui:946
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:1045
+#: panels/color/cc-color-panel.ui:951
 msgid "Projector"
 msgstr "Proietôr"
 
-#: panels/color/cc-color-panel.ui:1050
+#: panels/color/cc-color-panel.ui:956
 msgid "Plasma"
 msgstr "Plasme"
 
-#: panels/color/cc-color-panel.ui:1055
+#: panels/color/cc-color-panel.ui:961
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (iluminazion CCFL)"
 
-#: panels/color/cc-color-panel.ui:1060
+#: panels/color/cc-color-panel.ui:966
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (iluminazion a LED RGB)"
 
-#: panels/color/cc-color-panel.ui:1065
+#: panels/color/cc-color-panel.ui:971
 msgid "LCD (white LED backlight)"
 msgstr "LCD (iluminazion a LED blanc)"
 
-#: panels/color/cc-color-panel.ui:1070
+#: panels/color/cc-color-panel.ui:976
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "LCD Wide gamut (iluminazion CCFL)"
 
-#: panels/color/cc-color-panel.ui:1075
+#: panels/color/cc-color-panel.ui:981
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "LCD Wide gamut (iluminazion a LED RGB)"
 
-#: panels/color/cc-color-panel.ui:1092
+#: panels/color/cc-color-panel.ui:998
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Alte"
 
-#: panels/color/cc-color-panel.ui:1093
+#: panels/color/cc-color-panel.ui:999
 msgid "40 minutes"
 msgstr "40 minûts"
 
-#: panels/color/cc-color-panel.ui:1097
+#: panels/color/cc-color-panel.ui:1003
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Medie"
 
-#: panels/color/cc-color-panel.ui:1098
+#: panels/color/cc-color-panel.ui:1004
 msgid "30 minutes"
 msgstr "30 minûts"
 
-#: panels/color/cc-color-panel.ui:1102
+#: panels/color/cc-color-panel.ui:1008
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Basse"
 
-#: panels/color/cc-color-panel.ui:1103
+#: panels/color/cc-color-panel.ui:1009
 msgid "15 minutes"
 msgstr "15 minûts"
 
-#: panels/color/cc-color-panel.ui:1125
+#: panels/color/cc-color-panel.ui:1031
 msgid "Native to display"
 msgstr "Natîf al visôr"
 
-#: panels/color/cc-color-panel.ui:1129
+#: panels/color/cc-color-panel.ui:1035
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (stampe e publicazion)"
 
-#: panels/color/cc-color-panel.ui:1133
+#: panels/color/cc-color-panel.ui:1039
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:1137
+#: panels/color/cc-color-panel.ui:1043
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (Fotografie e grafiche)"
 
-#: panels/color/cc-color-panel.ui:1141
+#: panels/color/cc-color-panel.ui:1047
 msgid "D75"
 msgstr "D75"
 
@@ -2149,7 +2115,7 @@ msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
 msgstr ""
-"Il tast dai caratars alternatîfs al pues jessi doprât par inserî caratars "
+"Tu puedis doprâ il tast dai caratars alternatîfs par inserî caratars "
 "adizionâi. Chescj cualchi volte a son stampâts te tastiere come tierce "
 "opzion."
 
@@ -2285,8 +2251,8 @@ msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
 msgstr ""
-"Ristabilint lis scurtis al podarès influençâ lis tôs scurtis personalizadis. "
-"Cheste operazion no pues jessi anulade."
+"Ristabilint lis scurtis tu podaressis influençâ lis tôs scurtis "
+"personalizadis. Nol sarà pussibil anulâ cheste operazion."
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:435
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
@@ -2718,7 +2684,7 @@ msgstr "Scoriment a doi dêts"
 msgid "Edge Scrolling"
 msgstr "Scor tal ôr"
 
-#: panels/mouse/cc-mouse-panel.ui:335 panels/wacom/cc-wacom-panel.c:441
+#: panels/mouse/cc-mouse-panel.ui:335 panels/wacom/cc-wacom-panel.c:477
 msgid "Test Your _Settings"
 msgstr "Prove lis _impostazions"
 
@@ -2816,7 +2782,6 @@ msgid "_Number of Workspaces"
 msgstr "_Numar di spazis di lavôr"
 
 #: panels/multitasking/cc-multitasking-panel.ui:200
-#| msgid "%s Monitor"
 msgid "Multi-Monitor"
 msgstr "Multi-Visôr"
 
@@ -4681,7 +4646,7 @@ msgid "Media player"
 msgstr "Letôr multimediâl"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:728
+#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:767
 msgid "Tablet"
 msgstr "Tablet"
 
@@ -5015,23 +4980,23 @@ msgid "Authentication Required"
 msgstr "Autenticazion necessarie"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:682
+#: panels/printers/cc-printers-panel.c:683
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "La stampant “%s” e je stade eliminade"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:926
+#: panels/printers/cc-printers-panel.c:927
 msgid "Failed to add new printer."
 msgstr "Zonte de gnove stampant falide."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1225
+#: panels/printers/cc-printers-panel.c:1226
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Impussibil cjariâ la interface: %s"
 
-#: panels/printers/cc-printers-panel.c:1293
+#: panels/printers/cc-printers-panel.c:1294
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Sbloche par zontâ stampadoris e cambiâ impostazions"
 
@@ -5189,55 +5154,60 @@ msgid "Reverse portrait"
 msgstr "Verticâl invertît"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-job-row.c:106
+#: panels/printers/pp-job-row.c:137
 msgctxt "print job"
 msgid "Pending"
 msgstr "In atese"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-job-row.c:112
+#: panels/printers/pp-job-row.c:143
 msgctxt "print job"
 msgid "Paused"
 msgstr "In pause"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-job-row.c:117
+#: panels/printers/pp-job-row.c:148
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Autenticazion necessarie"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-job-row.c:122
+#: panels/printers/pp-job-row.c:153
 msgctxt "print job"
 msgid "Processing"
 msgstr "In elaborazion"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-job-row.c:126
+#: panels/printers/pp-job-row.c:157
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Fermât"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-job-row.c:130
+#: panels/printers/pp-job-row.c:161
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Anulât"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-job-row.c:134
+#: panels/printers/pp-job-row.c:165
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Interot"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-job-row.c:138
+#: panels/printers/pp-job-row.c:169
 msgctxt "print job"
 msgid "Completed"
 msgstr "Finît"
 
+#. Translators: Clicking this button prioritizes printing of this print job
+#: panels/printers/pp-job-row.c:179
+msgid "Move this job to the top of the queue"
+msgstr "Môf chest lavôr insom ae code"
+
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:249
+#: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5245,14 +5215,14 @@ msgstr[0] "%u lavôr al domande autenticazion"
 msgstr[1] "%u lavôrs a domandin autenticazion"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:401
+#: panels/printers/pp-jobs-dialog.c:471
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s — Lavôrs Atîfs"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:405
+#: panels/printers/pp-jobs-dialog.c:475
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Inserìs lis credenziâls par stampâ di %s."
@@ -5984,7 +5954,7 @@ msgid ""
 "of search results can also be changed by moving rows in the list."
 msgstr ""
 "Controle cuai risultâts di ricercje a son mostrâts te Panoramiche Ativitâts. "
-"L'ordin dai risultâts di ricercje al pues jessi cambiât spostant lis riis "
+"Al è pussibil cambiâ l'ordin dai risultâts di ricercje spostant lis riis "
 "inte liste."
 
 #: panels/search/gnome-search-panel.desktop.in.in:4
@@ -6484,7 +6454,7 @@ msgstr "Dimension cursôr"
 msgid ""
 "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgstr ""
-"La dimension dal cursôr e pues jessi cumbinade cul ingrandiment par fâ viodi "
+"Al è pussibil cumbinâ la dimension dal cursôr cul ingrandiment par fâ viodi "
 "miôr il cursôr."
 
 #: panels/universal-access/cc-pointing-dialog.ui:7
@@ -8161,7 +8131,7 @@ msgstr "%d di %d"
 msgid "Display Mapping"
 msgstr "Mapadure display"
 
-#: panels/wacom/cc-wacom-panel.c:725 panels/wacom/wacom-stylus-page.ui:119
+#: panels/wacom/cc-wacom-panel.c:764 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
 msgstr "Pene"
 
@@ -8307,7 +8277,6 @@ msgid "Access Points"
 msgstr "Ponts di acès"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:160
-#| msgid "VPN"
 msgid "APN"
 msgstr "APN"
 
@@ -8662,7 +8631,6 @@ msgid "Close"
 msgstr "Siere"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:84
-#| msgid "Automatic"
 msgid "_Automatic"
 msgstr "_Automatic"
 
@@ -8922,6 +8890,28 @@ msgstr[1] "%u jentradis"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Suns di sisteme"
+
+#~ msgid "Failed to upload file: %s"
+#~ msgstr "Falît tal cjariâ il file: %s"
+
+#~ msgid "The profile has been uploaded to:"
+#~ msgstr "Il profîl al è stât cjariât su:"
+
+#~ msgid "Write down this URL."
+#~ msgstr "Cjape note di cheste URL."
+
+#~ msgid "Restart this computer and boot your normal operating system."
+#~ msgstr ""
+#~ "Torne invie il computer e eseguìs il boot dal abituâl sisteme operatîf."
+
+#~ msgid "Type the URL into your browser to download and install the profile."
+#~ msgstr "Scrîf l'URL tal browser par scjariâ e instalâ il profîl."
+
+#~ msgid "Upload profile"
+#~ msgstr "Cjarie profîl"
+
+#~ msgid "Requires Internet connection"
+#~ msgstr "Si scugne vê une conession internet"
 
 #~ msgid "Balanced Power"
 #~ msgstr "Belançament energjetic"
