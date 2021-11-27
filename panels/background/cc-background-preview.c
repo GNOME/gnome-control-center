@@ -71,7 +71,9 @@ draw_preview_func (GtkDrawingArea *drawing_area,
                                                    height,
                                                    scale_factor,
                                                    0,
-                                                   TRUE);
+                                                   TRUE,
+                                                   self->is_dark &&
+                                                   cc_background_item_has_dark_version (self->item));
 
 
   gdk_cairo_set_source_pixbuf (cr, pixbuf, 0, 0);

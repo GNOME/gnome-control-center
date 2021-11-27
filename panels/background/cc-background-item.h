@@ -35,7 +35,8 @@ typedef enum {
 	CC_BACKGROUND_ITEM_HAS_PLACEMENT = 1 << 1,
 	CC_BACKGROUND_ITEM_HAS_PCOLOR    = 1 << 2,
 	CC_BACKGROUND_ITEM_HAS_SCOLOR    = 1 << 3,
-	CC_BACKGROUND_ITEM_HAS_URI       = 1 << 4
+	CC_BACKGROUND_ITEM_HAS_URI       = 1 << 4,
+	CC_BACKGROUND_ITEM_HAS_URI_DARK  = 1 << 5
 } CcBackgroundItemFlags;
 
 #define CC_BACKGROUND_ITEM_HAS_ALL (CC_BACKGROUND_ITEM_HAS_SHADING &	\
@@ -46,26 +47,30 @@ typedef enum {
 
 CcBackgroundItem * cc_background_item_new                 (const char                   *uri);
 CcBackgroundItem * cc_background_item_copy                (CcBackgroundItem             *item);
-gboolean           cc_background_item_load                (CcBackgroundItem             *item,
-							   GFileInfo                    *info);
+gboolean           cc_background_item_load                (CcBackgroundItem *item,
+                                                           GFileInfo        *info);
 gboolean           cc_background_item_changes_with_time   (CcBackgroundItem             *item);
+gboolean           cc_background_item_has_dark_version    (CcBackgroundItem             *item);
 
 GdkPixbuf *        cc_background_item_get_thumbnail       (CcBackgroundItem             *item,
                                                            GnomeDesktopThumbnailFactory *thumbs,
                                                            int                           width,
                                                            int                           height,
-                                                           int                           scale_factor);
+                                                           int                           scale_factor,
+                                                           gboolean                      dark);
 GdkPixbuf *        cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                                            GnomeDesktopThumbnailFactory *thumbs,
                                                            int                           width,
                                                            int                           height,
                                                            int                           scale_factor,
                                                            int                           frame,
-                                                           gboolean                      force_size);
+                                                           gboolean                      force_size,
+                                                           gboolean                      dark);
 
 GDesktopBackgroundStyle   cc_background_item_get_placement  (CcBackgroundItem *item);
 GDesktopBackgroundShading cc_background_item_get_shading    (CcBackgroundItem *item);
 const char *              cc_background_item_get_uri        (CcBackgroundItem *item);
+const char *              cc_background_item_get_uri_dark   (CcBackgroundItem *item);
 const char *              cc_background_item_get_source_url (CcBackgroundItem *item);
 const char *              cc_background_item_get_source_xml (CcBackgroundItem *item);
 CcBackgroundItemFlags     cc_background_item_get_flags      (CcBackgroundItem *item);

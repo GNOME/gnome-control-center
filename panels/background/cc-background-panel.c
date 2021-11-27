@@ -38,6 +38,7 @@
 #define WP_PATH_ID "org.gnome.desktop.background"
 #define WP_LOCK_PATH_ID "org.gnome.desktop.screensaver"
 #define WP_URI_KEY "picture-uri"
+#define WP_URI_DARK_KEY "picture-uri-dark"
 #define WP_OPTIONS_KEY "picture-options"
 #define WP_SHADING_KEY "color-shading-type"
 #define WP_PCOLOR_KEY "primary-color"
@@ -152,6 +153,7 @@ reload_current_bg (CcBackgroundPanel *panel)
   CcBackgroundItem *configured;
   GSettings *settings = NULL;
   g_autofree gchar *uri = NULL;
+  g_autofree gchar *dark_uri = NULL;
   g_autofree gchar *pcolor = NULL;
   g_autofree gchar *scolor = NULL;
 
@@ -165,12 +167,15 @@ reload_current_bg (CcBackgroundPanel *panel)
   if (uri && *uri == '\0')
     g_clear_pointer (&uri, g_free);
 
+
   configured = cc_background_item_new (uri);
 
+  dark_uri = g_settings_get_string (settings, WP_URI_DARK_KEY);
   pcolor = g_settings_get_string (settings, WP_PCOLOR_KEY);
   scolor = g_settings_get_string (settings, WP_SCOLOR_KEY);
   g_object_set (G_OBJECT (configured),
                 "name", _("Current background"),
+                "uri-dark", dark_uri,
                 "placement", g_settings_get_enum (settings, WP_OPTIONS_KEY),
                 "shading", g_settings_get_enum (settings, WP_SHADING_KEY),
                 "primary-color", pcolor,
@@ -217,7 +222,8 @@ create_save_dir (void)
 static void
 set_background (CcBackgroundPanel *panel,
                 GSettings         *settings,
-                CcBackgroundItem  *item)
+                CcBackgroundItem  *item,
+                gboolean           set_dark)
 {
   GDesktopBackgroundStyle style;
   CcBackgroundItemFlags flags;
@@ -231,6 +237,18 @@ set_background (CcBackgroundPanel *panel,
   flags = cc_background_item_get_flags (item);
 
   g_settings_set_string (settings, WP_URI_KEY, uri);
+
+  if (set_dark)
+    {
+      const char *uri_dark;
+
+      uri_dark = cc_background_item_get_uri_dark (item);
+
+      if (uri_dark && uri_dark[0])
+        g_settings_set_string (settings, WP_URI_DARK_KEY, uri_dark);
+      else
+        g_settings_set_string (settings, WP_URI_DARK_KEY, uri);
+    }
 
   /* Also set the placement if we have a URI and the previous value was none */
   if (flags & CC_BACKGROUND_ITEM_HAS_PLACEMENT)
@@ -263,8 +281,8 @@ static void
 on_chooser_background_chosen_cb (CcBackgroundPanel *self,
                                  CcBackgroundItem  *item)
 {
-  set_background (self, self->settings, item);
-  set_background (self, self->lock_settings, item);
+  set_background (self, self->settings, item, TRUE);
+  set_background (self, self->lock_settings, item, FALSE);
 }
 
 static void

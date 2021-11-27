@@ -32,6 +32,14 @@
 #include "cc-background-item.h"
 #include "gdesktop-enums-types.h"
 
+typedef struct {
+        int        width;
+        int        height;
+        int        frame;
+        int        scale_factor;
+        GdkPixbuf *thumbnail;
+} CachedThumbnail;
+
 struct _CcBackgroundItem
 {
         GObject          parent_instance;
@@ -39,6 +47,7 @@ struct _CcBackgroundItem
         /* properties */
         char            *name;
         char            *uri;
+        char            *uri_dark;
         char            *size;
         GDesktopBackgroundStyle placement;
         GDesktopBackgroundShading shading;
@@ -57,19 +66,17 @@ struct _CcBackgroundItem
         int              width;
         int              height;
 
-        struct {
-                int        width;
-                int        height;
-                int        frame;
-                int        scale_factor;
-                GdkPixbuf *thumbnail;
-        } cached_thumbnail;
+        GnomeBG         *bg_dark;
+
+        CachedThumbnail cached_thumbnail;
+        CachedThumbnail cached_thumbnail_dark;
 };
 
 enum {
         PROP_0,
         PROP_NAME,
         PROP_URI,
+        PROP_URI_DARK,
         PROP_PLACEMENT,
         PROP_SHADING,
         PROP_PRIMARY_COLOR,
@@ -102,6 +109,15 @@ set_bg_properties (CcBackgroundItem *item)
 		gnome_bg_set_filename (item->bg, filename);
 	}
 
+        if (item->uri_dark) {
+		g_autoptr(GFile) file = NULL;
+		g_autofree gchar *filename = NULL;
+
+		file = g_file_new_for_commandline_arg (item->uri_dark);
+		filename = g_file_get_path (file);
+		gnome_bg_set_filename (item->bg_dark, filename);
+	}
+
         if (item->primary_color != NULL) {
                 gdk_rgba_parse (&pcolor, item->primary_color);
         }
@@ -110,7 +126,9 @@ set_bg_properties (CcBackgroundItem *item)
         }
 
         gnome_bg_set_rgba (item->bg, item->shading, &pcolor, &scolor);
+        gnome_bg_set_rgba (item->bg_dark, item->shading, &pcolor, &scolor);
         gnome_bg_set_placement (item->bg, item->placement);
+        gnome_bg_set_placement (item->bg_dark, item->placement);
 }
 
 
@@ -125,7 +143,18 @@ cc_background_item_changes_with_time (CcBackgroundItem *item)
         if (item->bg != NULL) {
                 changes = gnome_bg_changes_with_time (item->bg);
         }
+        if (item->bg_dark != NULL) {
+                changes |= gnome_bg_changes_with_time (item->bg_dark);
+        }
         return changes;
+}
+
+gboolean
+cc_background_item_has_dark_version (CcBackgroundItem *item)
+{
+	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), FALSE);
+
+        return item->uri && item->uri_dark;
 }
 
 static void
@@ -168,21 +197,27 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                                         int                           height,
                                         int                           scale_factor,
                                         int                           frame,
-                                        gboolean                      force_size)
+                                        gboolean                      force_size,
+                                        gboolean                      dark)
 {
         g_autoptr(GdkPixbuf) pixbuf = NULL;
         g_autoptr(GdkPixbuf) retval = NULL;
+        CachedThumbnail *thumbnail;
+        GnomeBG *bg;
 
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 	g_return_val_if_fail (width > 0 && height > 0, NULL);
 
+        thumbnail = dark ? &item->cached_thumbnail_dark : &item->cached_thumbnail;
+        bg = dark ? item->bg_dark : item->bg;
+
         /* Use the cached thumbnail if the sizes match */
-        if (item->cached_thumbnail.thumbnail &&
-            item->cached_thumbnail.width == width &&
-            item->cached_thumbnail.height == height &&
-            item->cached_thumbnail.scale_factor == scale_factor &&
-            item->cached_thumbnail.frame == frame)
-                    return g_object_ref (item->cached_thumbnail.thumbnail);
+        if (thumbnail->thumbnail &&
+            thumbnail->width == width &&
+            thumbnail->height == height &&
+            thumbnail->scale_factor == scale_factor &&
+            thumbnail->frame == frame)
+                    return g_object_ref (thumbnail->thumbnail);
 
         set_bg_properties (item);
 
@@ -194,7 +229,7 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                  * the slideshow frame though, so we can't do much better than this
                  * for now.
                  */
-                pixbuf = render_at_size (item->bg, width, height);
+                pixbuf = render_at_size (bg, width, height);
         } else {
                 g_autoptr(GdkMonitor) monitor = NULL;
                 GdkDisplay *display;
@@ -208,14 +243,14 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
                 gdk_monitor_get_geometry (monitor, &monitor_layout);
 
                 if (frame >= 0) {
-                        pixbuf = gnome_bg_create_frame_thumbnail (item->bg,
+                        pixbuf = gnome_bg_create_frame_thumbnail (bg,
                                                                   thumbs,
                                                                   &monitor_layout,
                                                                   width,
                                                                   height,
                                                                   frame);
                 } else {
-                        pixbuf = gnome_bg_create_thumbnail (item->bg,
+                        pixbuf = gnome_bg_create_thumbnail (bg,
                                                             thumbs,
                                                             &monitor_layout,
                                                             width,
@@ -225,7 +260,7 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
 
         retval = g_steal_pointer (&pixbuf);
 
-        gnome_bg_get_image_size (item->bg,
+        gnome_bg_get_image_size (bg,
                                  thumbs,
                                  width,
                                  height,
@@ -235,11 +270,11 @@ cc_background_item_get_frame_thumbnail (CcBackgroundItem             *item,
         update_size (item);
 
         /* Cache the new thumbnail */
-        g_set_object (&item->cached_thumbnail.thumbnail, retval);
-        item->cached_thumbnail.width = width;
-        item->cached_thumbnail.height = height;
-        item->cached_thumbnail.scale_factor = scale_factor;
-        item->cached_thumbnail.frame = frame;
+        g_set_object (&thumbnail->thumbnail, retval);
+        thumbnail->width = width;
+        thumbnail->height = height;
+        thumbnail->scale_factor = scale_factor;
+        thumbnail->frame = frame;
 
         return g_steal_pointer (&retval);
 }
@@ -250,9 +285,10 @@ cc_background_item_get_thumbnail (CcBackgroundItem             *item,
                                   GnomeDesktopThumbnailFactory *thumbs,
                                   int                           width,
                                   int                           height,
-                                  int                           scale_factor)
+                                  int                           scale_factor,
+                                  gboolean                      dark)
 {
-        return cc_background_item_get_frame_thumbnail (item, thumbs, width, height, scale_factor, -1, FALSE);
+        return cc_background_item_get_frame_thumbnail (item, thumbs, width, height, scale_factor, -1, FALSE, dark);
 }
 
 static void
@@ -362,12 +398,35 @@ _set_uri (CcBackgroundItem *item,
 	}
 }
 
+
+static void
+_set_uri_dark (CcBackgroundItem *item,
+               const char       *value)
+{
+        g_free (item->uri_dark);
+        if (value && *value == '\0') {
+		item->uri_dark = NULL;
+	} else {
+		if (value && strstr (value, "://") == NULL)
+			g_warning ("URI '%s' is invalid", value);
+		item->uri_dark = g_strdup (value);
+	}
+}
+
 const char *
 cc_background_item_get_uri (CcBackgroundItem *item)
 {
 	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
 
 	return item->uri;
+}
+
+const char *
+cc_background_item_get_uri_dark (CcBackgroundItem *item)
+{
+	g_return_val_if_fail (CC_IS_BACKGROUND_ITEM (item), NULL);
+
+	return item->uri_dark;
 }
 
 static void
@@ -541,6 +600,9 @@ cc_background_item_set_property (GObject      *object,
         case PROP_URI:
                 _set_uri (self, g_value_get_string (value));
                 break;
+        case PROP_URI_DARK:
+                _set_uri_dark (self, g_value_get_string (value));
+                break;
         case PROP_PLACEMENT:
                 _set_placement (self, g_value_get_enum (value));
                 break;
@@ -591,8 +653,11 @@ cc_background_item_get_property (GObject    *object,
         case PROP_NAME:
                 g_value_set_string (value, self->name);
                 break;
-	case PROP_URI:
+        case PROP_URI:
                 g_value_set_string (value, self->uri);
+                break;
+        case PROP_URI_DARK:
+                g_value_set_string (value, self->uri_dark);
                 break;
         case PROP_PLACEMENT:
                 g_value_set_enum (value, self->placement);
@@ -669,6 +734,13 @@ cc_background_item_class_init (CcBackgroundItemClass *klass)
                                          g_param_spec_string ("uri",
                                                               "uri",
                                                               "uri",
+                                                              NULL,
+                                                              G_PARAM_READWRITE));
+        g_object_class_install_property (object_class,
+                                         PROP_URI_DARK,
+                                         g_param_spec_string ("uri-dark",
+                                                              "uri-dark",
+                                                              "uri-dark",
                                                               NULL,
                                                               G_PARAM_READWRITE));
         g_object_class_install_property (object_class,
@@ -767,6 +839,7 @@ static void
 cc_background_item_init (CcBackgroundItem *item)
 {
         item->bg = gnome_bg_new ();
+        item->bg_dark = gnome_bg_new ();
 
         item->shading = G_DESKTOP_BACKGROUND_SHADING_SOLID;
         item->placement = G_DESKTOP_BACKGROUND_STYLE_SCALED;
@@ -790,6 +863,7 @@ cc_background_item_finalize (GObject *object)
         g_return_if_fail (item != NULL);
 
         g_clear_object (&item->cached_thumbnail.thumbnail);
+        g_clear_object (&item->cached_thumbnail_dark.thumbnail);
         g_free (item->name);
         g_free (item->uri);
         g_free (item->primary_color);
@@ -799,8 +873,8 @@ cc_background_item_finalize (GObject *object)
         g_free (item->source_url);
         g_free (item->source_xml);
 
-        if (item->bg != NULL)
-                g_object_unref (item->bg);
+        g_clear_object (&item->bg);
+        g_clear_object (&item->bg_dark);
 
         G_OBJECT_CLASS (cc_background_item_parent_class)->finalize (object);
 }
@@ -957,6 +1031,10 @@ cc_background_item_compare (CcBackgroundItem *saved,
 
 	if (flags & CC_BACKGROUND_ITEM_HAS_URI) {
 		if (files_equal (saved->uri, configured->uri) == FALSE)
+			return FALSE;
+	}
+	if (flags & CC_BACKGROUND_ITEM_HAS_URI_DARK) {
+		if (files_equal (saved->uri_dark, configured->uri_dark) == FALSE)
 			return FALSE;
 	}
 	if (flags & CC_BACKGROUND_ITEM_HAS_SHADING) {

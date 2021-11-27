@@ -210,6 +210,27 @@ cc_background_xml_load_xml_internal (CcBackgroundXml *xml,
 	  } else {
 	    break;
 	  }
+	} else if (!strcmp ((gchar *)wpa->name, "filename-dark")) {
+	  if (wpa->last != NULL && wpa->last->content != NULL) {
+	    gchar *content = g_strstrip ((gchar *)wpa->last->content);
+	    g_autofree gchar *bg_uri = NULL;
+
+	    /* FIXME same rubbish as in other parts of the code */
+	    if (strcmp (content, NONE) == 0) {
+	      bg_uri = NULL;
+	    } else {
+	      g_autoptr(GFile) file = NULL;
+	      g_autofree gchar *dirname = NULL;
+
+	      dirname = g_path_get_dirname (filename);
+	      file = g_file_new_for_commandline_arg_and_cwd (content, dirname);
+	      bg_uri = g_file_get_uri (file);
+	    }
+	    SET_FLAG(CC_BACKGROUND_ITEM_HAS_URI_DARK);
+	    g_object_set (G_OBJECT (item), "uri-dark", bg_uri, NULL);
+	  } else {
+	    break;
+	  }
 	} else if (!strcmp ((gchar *)wpa->name, "name")) {
 	  if (wpa->last != NULL && wpa->last->content != NULL) {
 	    g_autofree gchar *name = NULL;
