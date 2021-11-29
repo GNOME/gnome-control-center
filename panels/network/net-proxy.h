@@ -21,11 +21,11 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetProxy, net_proxy, NET, PROXY, GtkFrame)
+G_DECLARE_FINAL_TYPE (NetProxy, net_proxy, NET, PROXY, AdwBin)
 
 NetProxy *net_proxy_new (void);
 

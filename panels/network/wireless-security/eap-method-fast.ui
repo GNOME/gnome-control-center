@@ -37,96 +37,82 @@
     </data>
   </object>
   <template class="EAPMethodFAST" parent="GtkGrid">
-    <property name="can_focus">False</property>
     <property name="valign">start</property>
     <property name="column_spacing">6</property>
     <property name="row_spacing">6</property>
     <child>
       <object class="GtkLabel" id="anon_identity_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Anony_mous identity</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">anon_identity_entry</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">0</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">0</property>
-      </packing>
     </child>
     <child>
       <object class="GtkEntry" id="anon_identity_entry">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hexpand">True</property>
-        <property name="activates_default">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">0</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">0</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="pac_file_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">PAC _file</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">pac_file_button</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">2</property>
-      </packing>
     </child>
     <child>
-      <object class="GtkFileChooserButton" id="pac_file_button">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+      <object class="WsFileChooserButton" id="pac_file_button">
         <property name="hexpand">True</property>
+        <property name="title" translatable="yes">Choose a PAC file</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">2</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">2</property>
-      </packing>
     </child>
     <child>
       <object class="GtkBox" id="inner_auth_box">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
-        <child>
-          <placeholder/>
-        </child>
+        <layout>
+          <property name="column">0</property>
+          <property name="column-span">2</property>
+          <property name="row">4</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="width">2</property>
-        <property name="top_attach">4</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="inner_auth_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_Inner authentication</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">inner_auth_combo</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">3</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">3</property>
-      </packing>
     </child>
     <child>
       <object class="GtkComboBox" id="inner_auth_combo">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="hexpand">True</property>
         <property name="model">inner_auth_model</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">3</property>
+        </layout>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -134,31 +120,25 @@
           </attributes>
         </child>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">3</property>
-      </packing>
     </child>
     <child>
       <object class="GtkCheckButton" id="pac_provision_check">
         <property name="label" translatable="yes">Allow automatic PAC pro_visioning</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="receives_default">False</property>
         <property name="use_underline">True</property>
-        <property name="draw_indicator">True</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkComboBox" id="pac_provision_combo">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="hexpand">True</property>
         <property name="model">pac_provision_model</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">1</property>
+        </layout>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -166,10 +146,6 @@
           </attributes>
         </child>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">1</property>
-      </packing>
     </child>
   </template>
 </interface>

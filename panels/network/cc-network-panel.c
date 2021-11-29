@@ -426,8 +426,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
         case NM_DEVICE_TYPE_ETHERNET:
         case NM_DEVICE_TYPE_INFINIBAND:
                 device_ethernet = net_device_ethernet_new (self->client, device);
-                gtk_widget_show (GTK_WIDGET (device_ethernet));
-                gtk_container_add (GTK_CONTAINER (self->box_wired), GTK_WIDGET (device_ethernet));
+                gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_ethernet));
                 g_ptr_array_add (self->ethernet_devices, device_ethernet);
                 g_hash_table_insert (self->nm_device_to_device, device, device_ethernet);
                 break;
@@ -453,15 +452,13 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                 }
 
                 device_mobile = net_device_mobile_new (self->client, device, modem_object);
-                gtk_widget_show (GTK_WIDGET (device_mobile));
-                gtk_container_add (GTK_CONTAINER (self->box_wired), GTK_WIDGET (device_mobile));
+                gtk_box_append (GTK_BOX (self->box_wired), GTK_WIDGET (device_mobile));
                 g_ptr_array_add (self->mobile_devices, device_mobile);
                 g_hash_table_insert (self->nm_device_to_device, device, device_mobile);
                 break;
         case NM_DEVICE_TYPE_BT:
                 device_bluetooth = net_device_bluetooth_new (self->client, device);
-                gtk_widget_show (GTK_WIDGET (device_bluetooth));
-                gtk_container_add (GTK_CONTAINER (self->box_bluetooth), GTK_WIDGET (device_bluetooth));
+                gtk_box_append (GTK_BOX (self->box_bluetooth), GTK_WIDGET (device_bluetooth));
                 g_ptr_array_add (self->bluetooth_devices, device_bluetooth);
                 g_hash_table_insert (self->nm_device_to_device, device, device_bluetooth);
 
@@ -496,7 +493,7 @@ panel_remove_device (CcNetworkPanel *self, NMDevice *device)
         g_ptr_array_remove (self->mobile_devices, net_device);
         g_hash_table_remove (self->nm_device_to_device, device);
 
-        gtk_widget_destroy (net_device);
+        gtk_box_remove (GTK_BOX (gtk_widget_get_parent (net_device)), net_device);
 
         /* update vpn widgets */
         update_vpn_section (self);
@@ -614,8 +611,7 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
         }
 
         net_vpn = net_vpn_new (self->client, connection);
-        gtk_widget_show (GTK_WIDGET (net_vpn));
-        gtk_container_add (GTK_CONTAINER (self->box_vpn), GTK_WIDGET (net_vpn));
+        gtk_box_append (GTK_BOX (self->box_vpn), GTK_WIDGET (net_vpn));
 
         /* store in the devices array */
         g_ptr_array_add (self->vpns, net_vpn);
@@ -657,7 +653,7 @@ client_connection_removed_cb (CcNetworkPanel *self, NMConnection *connection)
                 NetVpn *vpn = g_ptr_array_index (self->vpns, i);
                 if (net_vpn_get_connection (vpn) == connection) {
                         g_ptr_array_remove (self->vpns, vpn);
-                        gtk_widget_destroy (GTK_WIDGET (vpn));
+                        gtk_box_remove (GTK_BOX (self->box_vpn), GTK_WIDGET (vpn));
                         update_vpn_section (self);
                         return;
                 }
@@ -676,27 +672,25 @@ panel_check_network_manager_version (CcNetworkPanel *self)
                 GtkWidget *label;
                 g_autofree gchar *markup = NULL;
 
-                gtk_container_remove (GTK_CONTAINER (self), gtk_bin_get_child (GTK_BIN (self)));
-
                 box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 20);
                 gtk_box_set_homogeneous (GTK_BOX (box), TRUE);
                 gtk_widget_set_vexpand (box, TRUE);
-                gtk_container_add (GTK_CONTAINER (self), box);
+                adw_bin_set_child (ADW_BIN (self), box);
 
                 label = gtk_label_new (_("Oops, something has gone wrong. Please contact your software vendor."));
-                gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+                gtk_widget_set_vexpand (label, TRUE);
+                gtk_label_set_wrap (GTK_LABEL (label), TRUE);
                 gtk_widget_set_valign (label, GTK_ALIGN_END);
-                gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
+                gtk_box_append (GTK_BOX (box), label);
 
                 markup = g_strdup_printf ("<small><tt>%s</tt></small>",
                                           _("NetworkManager needs to be running."));
                 label = gtk_label_new (NULL);
+                gtk_widget_set_vexpand (label, TRUE);
                 gtk_label_set_markup (GTK_LABEL (label), markup);
-                gtk_label_set_line_wrap (GTK_LABEL (label), TRUE);
+                gtk_label_set_wrap (GTK_LABEL (label), TRUE);
                 gtk_widget_set_valign (label, GTK_ALIGN_START);
-                gtk_box_pack_start (GTK_BOX (box), label, TRUE, TRUE, 0);
-
-                gtk_widget_show_all (box);
+                gtk_box_append (GTK_BOX (box), label);
         } else {
                 manager_running (self);
         }
@@ -709,17 +703,19 @@ create_connection_cb (GtkWidget      *button,
         NetConnectionEditor *editor;
 
         editor = net_connection_editor_new (NULL, NULL, NULL, self->client);
-        gtk_window_set_transient_for (GTK_WINDOW (editor), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+        gtk_window_set_transient_for (GTK_WINDOW (editor),
+                                      GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
         gtk_window_present (GTK_WINDOW (editor));
 }
 
 static void
-on_toplevel_map (GtkWidget      *widget,
-                 CcNetworkPanel *self)
+cc_network_panel_map (GtkWidget *widget)
 {
+        GTK_WIDGET_CLASS (cc_network_panel_parent_class)->map (widget);
+
         /* is the user compiling against a new version, but not running
          * the daemon? */
-        panel_check_network_manager_version (self);
+        panel_check_network_manager_version (CC_NETWORK_PANEL (widget));
 }
 
 
@@ -731,6 +727,8 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
 	panel_class->get_help_uri = cc_network_panel_get_help_uri;
+
+        widget_class->map = cc_network_panel_map;
 
         object_class->get_property = cc_network_panel_get_property;
         object_class->set_property = cc_network_panel_set_property;
@@ -754,11 +752,10 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
 static void
 cc_network_panel_init (CcNetworkPanel *self)
 {
-        NetProxy *proxy;
-        g_autoptr(GError) error = NULL;
-        GtkWidget *toplevel;
         g_autoptr(GDBusConnection) system_bus = NULL;
+        g_autoptr(GError) error = NULL;
         const GPtrArray *connections;
+        NetProxy *proxy;
         guint i;
 
         g_resources_register (cc_network_get_resource ());
@@ -773,8 +770,7 @@ cc_network_panel_init (CcNetworkPanel *self)
 
         /* add the virtual proxy device */
         proxy = net_proxy_new ();
-        gtk_widget_show (GTK_WIDGET (proxy));
-        gtk_container_add (GTK_CONTAINER (self->box_proxy), GTK_WIDGET (proxy));
+        gtk_box_append (GTK_BOX (self->box_proxy), GTK_WIDGET (proxy));
 
         /* Create and store a NMClient instance if it doesn't exist yet */
         if (!cc_object_storage_has_object (CC_OBJECT_NMCLIENT)) {
@@ -814,9 +810,6 @@ cc_network_panel_init (CcNetworkPanel *self)
                                  G_CALLBACK (add_connection), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->client, NM_CLIENT_CONNECTION_REMOVED,
                                  G_CALLBACK (client_connection_removed_cb), self, G_CONNECT_SWAPPED);
-
-        toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-        g_signal_connect_after (toplevel, "map", G_CALLBACK (on_toplevel_map), self);
 
         /* Cold-plug existing connections */
         connections = nm_client_get_connections (self->client);

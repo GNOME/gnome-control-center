@@ -207,9 +207,9 @@ ce_page_setup_mac_combo (GtkComboBoxText  *combo,
                         gtk_combo_box_text_prepend_text (combo, current_mac);
                 }
 
-                entry = gtk_bin_get_child (GTK_BIN (combo));
+                entry = gtk_combo_box_get_child (GTK_COMBO_BOX (combo));
                 if (entry)
-                        gtk_entry_set_text (GTK_ENTRY (entry), active_mac ? active_mac : current_mac);
+                        gtk_editable_set_text (GTK_EDITABLE (entry), active_mac ? active_mac : current_mac);
         }
 }
 
@@ -253,9 +253,9 @@ ce_page_setup_cloned_mac_combo (GtkComboBoxText *combo, const char *current)
        if (active != -1) {
                gtk_combo_box_set_active (GTK_COMBO_BOX (combo), active);
        } else if (current && current[0]) {
-               entry = gtk_bin_get_child (GTK_BIN (combo));
+               entry = gtk_combo_box_get_child (GTK_COMBO_BOX (combo));
                g_assert (entry);
-               gtk_entry_set_text (GTK_ENTRY (entry), current);
+               gtk_editable_set_text (GTK_EDITABLE (entry), current);
        }
 }
 

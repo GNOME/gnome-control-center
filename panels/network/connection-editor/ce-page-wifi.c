@@ -65,7 +65,7 @@ connect_wifi_page (CEPageWifi *self)
                 utf8_ssid = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
         else
                 utf8_ssid = g_strdup ("");
-        gtk_entry_set_text (self->ssid_entry, utf8_ssid);
+        gtk_editable_set_text (GTK_EDITABLE (self->ssid_entry), utf8_ssid);
 
         g_signal_connect_object (self->ssid_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
@@ -101,18 +101,18 @@ ui_to_setting (CEPageWifi *self)
         g_autofree gchar *device_mac = NULL;
         g_autofree gchar *cloned_mac = NULL;
 
-        utf8_ssid = gtk_entry_get_text (self->ssid_entry);
+        utf8_ssid = gtk_editable_get_text (GTK_EDITABLE (self->ssid_entry));
         if (!utf8_ssid || !*utf8_ssid)
                 ssid = NULL;
         else {
                 ssid = g_bytes_new_static (utf8_ssid, strlen (utf8_ssid));
         }
-        entry = gtk_bin_get_child (GTK_BIN (self->bssid_combo));
-        bssid = gtk_entry_get_text (GTK_ENTRY (entry));
+        entry = gtk_combo_box_get_child (GTK_COMBO_BOX (self->bssid_combo));
+        bssid = gtk_editable_get_text (GTK_EDITABLE (entry));
         if (*bssid == '\0')
                 bssid = NULL;
-        entry = gtk_bin_get_child (GTK_BIN (self->mac_combo));
-        device_mac = ce_page_trim_address (gtk_entry_get_text (GTK_ENTRY (entry)));
+        entry = gtk_combo_box_get_child (GTK_COMBO_BOX (self->mac_combo));
+        device_mac = ce_page_trim_address (gtk_editable_get_text (GTK_EDITABLE (entry)));
         cloned_mac = ce_page_cloned_mac_get (self->cloned_mac_combo);
 
         g_object_set (self->setting,
@@ -138,16 +138,16 @@ ce_page_wifi_class_validate (CEPage        *parent,
         GtkWidget *entry;
         gboolean ret = TRUE;
 
-        entry = gtk_bin_get_child (GTK_BIN (self->bssid_combo));
-        if (!ce_page_address_is_valid (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+        entry = gtk_combo_box_get_child (GTK_COMBO_BOX (self->bssid_combo));
+        if (!ce_page_address_is_valid (gtk_editable_get_text (GTK_EDITABLE (entry)))) {
                 widget_set_error (entry);
                 ret = FALSE;
         } else {
                 widget_unset_error (entry);
         }
 
-        entry = gtk_bin_get_child (GTK_BIN (self->mac_combo));
-        if (!ce_page_address_is_valid (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+        entry = gtk_combo_box_get_child (GTK_COMBO_BOX (self->mac_combo));
+        if (!ce_page_address_is_valid (gtk_editable_get_text (GTK_EDITABLE (entry)))) {
                 widget_set_error (entry);
                 ret = FALSE;
         } else {
@@ -155,10 +155,10 @@ ce_page_wifi_class_validate (CEPage        *parent,
         }
 
         if (!ce_page_cloned_mac_combo_valid (self->cloned_mac_combo)) {
-                widget_set_error (gtk_bin_get_child (GTK_BIN (self->cloned_mac_combo)));
+                widget_set_error (gtk_combo_box_get_child (GTK_COMBO_BOX (self->cloned_mac_combo)));
                 ret = FALSE;
         } else {
-                widget_unset_error (gtk_bin_get_child (GTK_BIN (self->cloned_mac_combo)));
+                widget_unset_error (gtk_combo_box_get_child (GTK_COMBO_BOX (self->cloned_mac_combo)));
         }
 
         if (!ret)

@@ -2,170 +2,138 @@
 <interface>
   <requires lib="gtk+" version="3.4"/>
   <template class="EAPMethodTLS" parent="GtkGrid">
-    <property name="can_focus">False</property>
     <property name="valign">start</property>
     <property name="column_spacing">6</property>
     <property name="row_spacing">6</property>
     <child>
-      <placeholder/>
-    </child>
-    <child>
       <object class="GtkLabel" id="identity_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">I_dentity</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">identity_entry</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">0</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">0</property>
-      </packing>
     </child>
     <child>
       <object class="GtkEntry" id="identity_entry">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hexpand">True</property>
-        <property name="activates_default">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">0</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">0</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="user_cert_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_User certificate</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">user_cert_button</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">1</property>
-      </packing>
     </child>
     <child>
-      <object class="GtkFileChooserButton" id="user_cert_button">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+      <object class="WsFileChooserButton" id="user_cert_button">
         <property name="hexpand">True</property>
+        <property name="title" translatable="yes">Choose a Certificate Authority certificate</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">1</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="ca_cert_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">C_A certificate</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">ca_cert_button</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">2</property>
-      </packing>
     </child>
     <child>
-      <object class="GtkFileChooserButton" id="ca_cert_button">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+      <object class="WsFileChooserButton" id="ca_cert_button">
         <property name="hexpand">True</property>
+        <property name="title" translatable="yes">Choose a Certificate Authority certificate</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">2</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">2</property>
-      </packing>
     </child>
     <child>
       <object class="GtkCheckButton" id="ca_cert_not_required_check">
         <property name="label" translatable="yes">No CA certificate is _required</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hexpand">True</property>
-        <property name="receives_default">False</property>
         <property name="use_underline">True</property>
-        <property name="draw_indicator">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">3</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">3</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="private_key_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Private _key</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">private_key_button</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">4</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">4</property>
-      </packing>
     </child>
     <child>
-      <object class="GtkFileChooserButton" id="private_key_button">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
+      <object class="WsFileChooserButton" id="private_key_button">
         <property name="hexpand">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">4</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">4</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="private_key_password_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_Private key password</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">private_key_password_entry</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">5</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">5</property>
-      </packing>
     </child>
     <child>
       <object class="GtkEntry" id="private_key_password_entry">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hexpand">True</property>
         <property name="visibility">False</property>
-        <property name="activates_default">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">5</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">5</property>
-      </packing>
     </child>
     <child>
       <object class="GtkCheckButton" id="show_password_check">
         <property name="label" translatable="yes">Sho_w password</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hexpand">True</property>
-        <property name="receives_default">False</property>
         <property name="use_underline">True</property>
-        <property name="draw_indicator">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">6</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">6</property>
-      </packing>
     </child>
   </template>
 </interface>

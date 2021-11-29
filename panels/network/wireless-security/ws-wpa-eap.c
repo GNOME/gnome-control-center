@@ -160,22 +160,22 @@ static void
 auth_combo_changed_cb (WirelessSecurityWPAEAP *self)
 {
 	EAPMethod *eap;
-	GList *children;
 	GtkWidget *eap_default_field;
+	GtkWidget *child;
 
 	eap = get_eap (self);
 
 	/* Remove the previous method and migrate username/password across */
-	children = gtk_container_get_children (GTK_CONTAINER (self->method_box));
-	if (children != NULL) {
-		EAPMethod *old_eap = g_list_nth_data (children, 0);
+	child = gtk_widget_get_first_child (GTK_WIDGET (self->method_box));
+	if (child != NULL) {
+		EAPMethod *old_eap = EAP_METHOD (child);
 		eap_method_set_username (eap, eap_method_get_username (old_eap));
 		eap_method_set_password (eap, eap_method_get_password (old_eap));
 		eap_method_set_show_password (eap, eap_method_get_show_password (old_eap));
-		gtk_container_remove (GTK_CONTAINER (self->method_box), GTK_WIDGET (old_eap));
+		gtk_box_remove (self->method_box, child);
 	}
 
-	gtk_container_add (GTK_CONTAINER (self->method_box), g_object_ref (GTK_WIDGET (eap)));
+	gtk_box_append (self->method_box, g_object_ref (GTK_WIDGET (eap)));
 	eap_default_field = eap_method_get_default_field (eap);
 	if (eap_default_field)
 		gtk_widget_grab_focus (eap_default_field);

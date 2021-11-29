@@ -177,7 +177,7 @@ all_user_changed (CEPageDetails *self)
         NMSettingConnection *sc;
 
         sc = nm_connection_get_setting_connection (self->connection);
-        all_users = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->all_user_check));
+        all_users = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->all_user_check));
 
         g_object_set (sc, "permissions", NULL, NULL);
         if (!all_users)
@@ -192,7 +192,7 @@ restrict_data_changed (CEPageDetails *self)
 
         s_con = nm_connection_get_setting_connection (self->connection);
 
-        if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->restrict_data_check)))
+        if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->restrict_data_check)))
                 metered = NM_METERED_YES;
         else
                 metered = NM_METERED_NO;
@@ -220,8 +220,8 @@ update_restrict_data (CEPageDetails *self)
 
         metered = nm_setting_connection_get_metered (s_con);
 
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->restrict_data_check),
-                                      metered == NM_METERED_YES || metered == NM_METERED_GUESS_YES);
+        gtk_check_button_set_active (GTK_CHECK_BUTTON (self->restrict_data_check),
+                                     metered == NM_METERED_YES || metered == NM_METERED_GUESS_YES);
         gtk_widget_show (GTK_WIDGET (self->restrict_data_check));
 
         g_signal_connect_object (self->restrict_data_check, "notify::active", G_CALLBACK (restrict_data_changed), self, G_CONNECT_SWAPPED);
@@ -456,8 +456,8 @@ connect_details_page (CEPageDetails *self)
         }
 
         /* All users check */
-        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->all_user_check),
-                                      nm_setting_connection_get_num_permissions (sc) == 0);
+        gtk_check_button_set_active (GTK_CHECK_BUTTON (self->all_user_check),
+                                     nm_setting_connection_get_num_permissions (sc) == 0);
         g_signal_connect_object (self->all_user_check, "toggled", G_CALLBACK (all_user_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->all_user_check, "toggled", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 

@@ -63,14 +63,7 @@ G_DEFINE_TYPE_WITH_CODE (CEPageVpn, ce_page_vpn, GTK_TYPE_BOX,
 static void
 vpn_gnome3ify_editor (GtkWidget *widget)
 {
-        if (GTK_IS_CONTAINER (widget)) {
-                GList *children, *iter;
-
-                children = gtk_container_get_children (GTK_CONTAINER (widget));
-                for (iter = children; iter; iter = iter->next)
-                        vpn_gnome3ify_editor (iter->data);
-                g_list_free (children);
-        } else if (GTK_IS_LABEL (widget)) {
+        if (GTK_IS_LABEL (widget)) {
                 const char *text;
                 gfloat xalign;
                 g_autofree gchar *newtext = NULL;
@@ -87,6 +80,13 @@ vpn_gnome3ify_editor (GtkWidget *widget)
                 newtext = g_strndup (text, len - 1);
                 gtk_label_set_text (GTK_LABEL (widget), newtext);
                 gtk_label_set_xalign (GTK_LABEL (widget), 1.0);
+        } else if (GTK_IS_WIDGET (widget)) {
+                GtkWidget *child;
+
+                for (child = gtk_widget_get_first_child (widget);
+                     child;
+                     child = gtk_widget_get_next_sibling (child))
+                        vpn_gnome3ify_editor (child);
         }
 }
 
@@ -109,10 +109,8 @@ load_vpn_plugin (CEPageVpn *self)
 	}
         vpn_gnome3ify_editor (ui_widget);
 
-        gtk_widget_destroy (GTK_WIDGET (self->failure_label));
-
-        gtk_box_pack_start (GTK_BOX (self), ui_widget, TRUE, TRUE, 0);
-	gtk_widget_show_all (ui_widget);
+        gtk_box_remove (GTK_BOX (self), GTK_WIDGET (self->failure_label));
+        gtk_box_append (GTK_BOX (self), ui_widget);
 
         g_signal_connect_object (self->editor, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
@@ -123,7 +121,7 @@ connect_vpn_page (CEPageVpn *self)
         const gchar *name;
 
         name = nm_setting_connection_get_id (self->setting_connection);
-        gtk_entry_set_text (self->name_entry, name);
+        gtk_editable_set_text (GTK_EDITABLE (self->name_entry), name);
         g_signal_connect_object (self->name_entry, "changed", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 }
 
@@ -158,7 +156,7 @@ ce_page_vpn_validate (CEPage        *page,
         CEPageVpn *self = CE_PAGE_VPN (page);
 
         g_object_set (self->setting_connection,
-                      NM_SETTING_CONNECTION_ID, gtk_entry_get_text (self->name_entry),
+                      NM_SETTING_CONNECTION_ID, gtk_editable_get_text (GTK_EDITABLE (self->name_entry)),
                       NULL);
 
         if (!nm_setting_verify (NM_SETTING (self->setting_connection), NULL, error))

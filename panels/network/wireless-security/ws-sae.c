@@ -51,7 +51,7 @@ show_toggled_cb (WirelessSecuritySAE *self)
 {
   gboolean visible;
 
-  visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
+  visible = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->show_password_check));
   gtk_entry_set_visibility (self->password_entry, visible);
 }
 
@@ -69,7 +69,7 @@ validate (WirelessSecurity *security, GError **error)
       return TRUE;
   }
 
-  key = gtk_entry_get_text (self->password_entry);
+  key = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
   if (key == NULL || key[0] == '\0')
     {
@@ -113,7 +113,7 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
   s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
   nm_connection_add_setting (connection, (NMSetting *) s_wireless_sec);
 
-  key = gtk_entry_get_text (self->password_entry);
+  key = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
   g_object_set (s_wireless_sec, NM_SETTING_WIRELESS_SECURITY_PSK, key, NULL);
 
   /* Save PSK_FLAGS to the connection */
@@ -194,7 +194,7 @@ ws_sae_new (NMConnection *connection)
   self = g_object_new (ws_sae_get_type (), NULL);
 
   g_signal_connect_swapped (self->password_entry, "changed", G_CALLBACK (changed_cb), self);
-  gtk_entry_set_width_chars (self->password_entry, 28);
+  gtk_editable_set_width_chars (GTK_EDITABLE (self->password_entry), 28);
 
   /* Create password-storage popup menu for password entry under entry's secondary icon */
   if (connection)

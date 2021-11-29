@@ -167,7 +167,7 @@ wireless_dialog_response_cb (GtkDialog *foo,
 
 done:
 	gtk_widget_hide (GTK_WIDGET (dialog));
-	gtk_widget_destroy (GTK_WIDGET (dialog));
+	gtk_window_destroy (GTK_WINDOW (dialog));
 }
 
 static void
@@ -179,7 +179,7 @@ show_wireless_dialog (GtkWidget        *toplevel,
 
         g_debug ("About to parent and show a network dialog");
 
-        g_assert (gtk_widget_is_toplevel (toplevel));
+        g_assert (GTK_IS_NATIVE (toplevel));
         g_object_set (G_OBJECT (dialog),
                       "modal", TRUE,
                       "transient-for", toplevel,

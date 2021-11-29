@@ -20,7 +20,9 @@
 
 struct _CcWifiConnectionList
 {
-  GtkListBox parent_instance;
+  AdwBin         parent_instance;
+
+  GtkListBox    *listbox;
 
   guint          freeze_count;
   gboolean       updating;
@@ -59,7 +61,7 @@ static void on_device_ap_removed_cb (CcWifiConnectionList *self,
 static void on_row_configured_cb    (CcWifiConnectionList *self,
                                      CcWifiConnectionRow  *row);
 
-G_DEFINE_TYPE (CcWifiConnectionList, cc_wifi_connection_list, GTK_TYPE_LIST_BOX)
+G_DEFINE_TYPE (CcWifiConnectionList, cc_wifi_connection_list, ADW_TYPE_BIN)
 
 enum
 {
@@ -127,8 +129,7 @@ cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
                                     connection,
                                     aps,
                                     self->checkable);
-  gtk_container_add (GTK_CONTAINER (self), GTK_WIDGET (res));
-  gtk_widget_show (GTK_WIDGET (res));
+  gtk_list_box_append (self->listbox, GTK_WIDGET (res));
 
   g_signal_connect_object (res, "configure", G_CALLBACK (on_row_configured_cb), self, G_CONNECT_SWAPPED);
 
@@ -153,7 +154,7 @@ clear_widget (CcWifiConnectionList *self)
   while (g_hash_table_iter_next (&iter, NULL, (gpointer*) &row))
     {
       g_hash_table_iter_remove (&iter);
-      gtk_container_remove (GTK_CONTAINER (self), GTK_WIDGET (row));
+      gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
     }
 
   /* Remove all connection rows */
@@ -164,8 +165,7 @@ clear_widget (CcWifiConnectionList *self)
 
       row = g_ptr_array_index (self->connections_row, i);
       g_ptr_array_index (self->connections_row, i) = NULL;
-      gtk_container_remove (GTK_CONTAINER (self),
-                            GTK_WIDGET (row));
+      gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
      }
 
   /* Reset the internal state */
@@ -404,7 +404,7 @@ on_device_ap_removed_cb (CcWifiConnectionList *self,
           if (self->hide_unavailable)
             {
               g_ptr_array_index (self->connections_row, i) = NULL;
-              gtk_container_remove (GTK_CONTAINER (self), GTK_WIDGET (row));
+              gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
             }
         }
     }
@@ -425,7 +425,7 @@ on_device_ap_removed_cb (CcWifiConnectionList *self,
   if (cc_wifi_connection_row_remove_access_point (row, ap))
     {
       g_hash_table_remove (self->ssid_to_row, ssid);
-      gtk_container_remove (GTK_CONTAINER (self), GTK_WIDGET (row));
+      gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
     }
 }
 
@@ -704,6 +704,11 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
 static void
 cc_wifi_connection_list_init (CcWifiConnectionList *self)
 {
+  self->listbox = GTK_LIST_BOX (gtk_list_box_new ());
+  gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->listbox), GTK_SELECTION_NONE);
+  gtk_widget_add_css_class (GTK_WIDGET (self->listbox), "content");
+  adw_bin_set_child (ADW_BIN (self), GTK_WIDGET (self->listbox));
+
   self->hide_unavailable = TRUE;
   self->show_aps = TRUE;
 
@@ -756,4 +761,12 @@ cc_wifi_connection_list_thaw (CcWifiConnectionList *self)
       g_debug ("wifi connection list has been thawed");
       update_connections (self);
     }
+}
+
+GtkListBox *
+cc_wifi_connection_list_get_list_box (CcWifiConnectionList *self)
+{
+  g_return_val_if_fail (CC_IS_WIFI_CONNECTION_LIST (self), NULL);
+
+  return self->listbox;
 }

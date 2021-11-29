@@ -27,6 +27,7 @@
 #include "eap-method-simple.h"
 #include "helpers.h"
 #include "ui-helpers.h"
+#include "ws-file-chooser-button.h"
 
 #define I_NAME_COLUMN 0
 #define I_ID_COLUMN   1
@@ -40,7 +41,7 @@ struct _EAPMethodFAST {
 	GtkLabel             *inner_auth_label;
 	GtkListStore         *inner_auth_model;
 	GtkBox               *inner_auth_box;
-	GtkFileChooserButton *pac_file_button;
+	WsFileChooserButton  *pac_file_button;
 	GtkLabel             *pac_file_label;
 	GtkCheckButton       *pac_provision_check;
 	GtkComboBox          *pac_provision_combo;
@@ -76,12 +77,12 @@ static gboolean
 validate (EAPMethod *parent, GError **error)
 {
 	EAPMethodFAST *self = (EAPMethodFAST *) parent;
-	const char *file;
+	g_autoptr(GFile) file = NULL;
 	gboolean provisioning;
 	gboolean valid = TRUE;
 
-	provisioning = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->pac_provision_check));
-	file = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->pac_file_button));
+	provisioning = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->pac_provision_check));
+	file = ws_file_chooser_button_get_file (self->pac_file_button);
 	if (!provisioning && !file) {
 		widget_set_error (GTK_WIDGET (self->pac_file_button));
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing EAP-FAST PAC file"));
@@ -110,9 +111,10 @@ static void
 fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFlags flags)
 {
 	EAPMethodFAST *self = (EAPMethodFAST *) parent;
+	g_autofree gchar *filename = NULL;
+	g_autoptr(GFile) file = NULL;
 	NMSetting8021x *s_8021x;
 	const char *text;
-	char *filename;
 	gboolean enabled;
 	int pac_provisioning = 0;
 
@@ -121,14 +123,15 @@ fill_connection (EAPMethod *parent, NMConnection *connection, NMSettingSecretFla
 
 	nm_setting_802_1x_add_eap_method (s_8021x, "fast");
 
-	text = gtk_entry_get_text (self->anon_identity_entry);
+	text = gtk_editable_get_text (GTK_EDITABLE (self->anon_identity_entry));
 	if (text && strlen (text))
 		g_object_set (s_8021x, NM_SETTING_802_1X_ANONYMOUS_IDENTITY, text, NULL);
 
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->pac_file_button));
+	file = ws_file_chooser_button_get_file (self->pac_file_button);
+	filename = file ? g_file_get_path (file) : NULL;
 	g_object_set (s_8021x, NM_SETTING_802_1X_PAC_FILE, filename, NULL);
 
-	enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->pac_provision_check));
+	enabled = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->pac_provision_check));
 
 	if (!enabled)
 		g_object_set (G_OBJECT (s_8021x), NM_SETTING_802_1X_PHASE1_FAST_PROVISIONING, "0", NULL);
@@ -158,21 +161,21 @@ static void
 inner_auth_combo_changed_cb (EAPMethodFAST *self)
 {
 	EAPMethod *inner_method;
-	GList *children;
+	GtkWidget *child;
 
 	inner_method = get_inner_method (self);
 
 	/* Remove the previous method and migrate username/password across */
-	children = gtk_container_get_children (GTK_CONTAINER (self->inner_auth_box));
-	if (children != NULL) {
-		EAPMethod *old_eap = g_list_nth_data (children, 0);
+	child = gtk_widget_get_first_child (GTK_WIDGET (self->inner_auth_box));
+	if (child != NULL) {
+		EAPMethod *old_eap = EAP_METHOD (child);
 		eap_method_set_username (inner_method, eap_method_get_username (old_eap));
 		eap_method_set_password (inner_method, eap_method_get_password (old_eap));
 		eap_method_set_show_password (inner_method, eap_method_get_show_password (old_eap));
-		gtk_container_remove (GTK_CONTAINER (self->inner_auth_box), GTK_WIDGET (old_eap));
+		gtk_box_remove (self->inner_auth_box, child);
 	}
 
-	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), g_object_ref (GTK_WIDGET (inner_method)));
+	gtk_box_append (self->inner_auth_box, g_object_ref (GTK_WIDGET (inner_method)));
 
 	eap_method_emit_changed (EAP_METHOD (self));
 }
@@ -246,7 +249,7 @@ pac_toggled_cb (EAPMethodFAST *self)
 {
 	gboolean enabled = FALSE;
 
-	enabled = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->pac_provision_check));
+	enabled = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->pac_provision_check));
 	gtk_widget_set_sensitive (GTK_WIDGET (self->pac_provision_combo), enabled);
 
 	eap_method_emit_changed (EAP_METHOD (self));
@@ -268,6 +271,8 @@ static void
 eap_method_fast_class_init (EAPMethodFASTClass *klass)
 {
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+	g_type_ensure (WS_TYPE_FILE_CHOOSER_BUTTON);
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-fast.ui");
 
@@ -306,7 +311,6 @@ eap_method_fast_new (NMConnection *connection)
 	EAPMethodFAST *self;
 	GtkFileFilter *filter;
 	NMSetting8021x *s_8021x = NULL;
-	const char *filename;
 	gboolean provisioning_enabled = TRUE;
 	const gchar *phase2_auth = NULL;
 	GtkTreeIter iter;
@@ -335,31 +339,30 @@ eap_method_fast_new (NMConnection *connection)
 	gtk_widget_set_sensitive (GTK_WIDGET (self->pac_provision_combo), provisioning_enabled);
 	g_signal_connect_swapped (self->pac_provision_combo, "changed", G_CALLBACK (changed_cb), self);
 
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->pac_provision_check), provisioning_enabled);
+	gtk_check_button_set_active (self->pac_provision_check, provisioning_enabled);
 	g_signal_connect_swapped (self->pac_provision_check, "toggled", G_CALLBACK (pac_toggled_cb), self);
 
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
-		gtk_entry_set_text (self->anon_identity_entry, nm_setting_802_1x_get_anonymous_identity (s_8021x));
+		gtk_editable_set_text (GTK_EDITABLE (self->anon_identity_entry), nm_setting_802_1x_get_anonymous_identity (s_8021x));
 	g_signal_connect_swapped (self->anon_identity_entry, "changed", G_CALLBACK (changed_cb), self);
 
-	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (self->pac_file_button), TRUE);
-	gtk_file_chooser_button_set_title (self->pac_file_button,
-	                                   _("Choose a PAC file"));
-	g_signal_connect_swapped (self->pac_file_button, "selection-changed", G_CALLBACK (changed_cb), self);
+	g_signal_connect_swapped (self->pac_file_button, "notify::file", G_CALLBACK (changed_cb), self);
 
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (filter, "*.pac");
 	gtk_file_filter_set_name (filter, _("PAC files (*.pac)"));
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (self->pac_file_button), filter);
+	gtk_file_chooser_add_filter (ws_file_chooser_button_get_filechooser (self->pac_file_button), filter);
 	filter = gtk_file_filter_new ();
 	gtk_file_filter_add_pattern (filter, "*");
 	gtk_file_filter_set_name (filter, _("All files"));
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (self->pac_file_button), filter);
+	gtk_file_chooser_add_filter (ws_file_chooser_button_get_filechooser (self->pac_file_button), filter);
 
 	if (connection && s_8021x) {
-		filename = nm_setting_802_1x_get_pac_file (s_8021x);
-		if (filename)
-			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->pac_file_button), filename);
+		const char *filename = nm_setting_802_1x_get_pac_file (s_8021x);
+		if (filename) {
+			g_autoptr(GFile) file = g_file_new_for_path (filename);
+			ws_file_chooser_button_set_file (self->pac_file_button, file);
+		}
 	}
 
 	self->em_gtc = eap_method_simple_new (connection, "gtc", TRUE, FALSE);

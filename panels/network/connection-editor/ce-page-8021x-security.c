@@ -66,12 +66,10 @@ security_item_changed_cb (CEPage8021xSecurity *self)
 static void
 finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointer user_data)
 {
-	GtkWidget *parent;
-
 	if (error)
 		return;
 
-        self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+	self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
 	self->security = ws_wpa_eap_new (self->connection);
 	if (!self->security) {
@@ -79,19 +77,18 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 		return;
 	}
 
-        g_signal_connect_object (WIRELESS_SECURITY (self->security), "changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
-	parent = gtk_widget_get_parent (GTK_WIDGET (self->security));
-	if (parent)
-		gtk_container_remove (GTK_CONTAINER (parent), GTK_WIDGET (self->security));
+	g_signal_connect_object (WIRELESS_SECURITY (self->security), "changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
+	if (gtk_widget_get_parent (GTK_WIDGET (self->security)))
+		gtk_box_remove (self->box, GTK_WIDGET (self->security));
 
 	gtk_switch_set_active (self->enable_8021x_switch, self->initial_have_8021x);
 	g_signal_connect_object (self->enable_8021x_switch, "notify::active", G_CALLBACK (enable_toggled), self, G_CONNECT_SWAPPED);
 	gtk_widget_set_sensitive (GTK_WIDGET (self->security), self->initial_have_8021x);
 
-        gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
-        wireless_security_add_to_size_group (WIRELESS_SECURITY (self->security), self->group);
+	gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
+	wireless_security_add_to_size_group (WIRELESS_SECURITY (self->security), self->group);
 
-	gtk_container_add (GTK_CONTAINER (self->box), GTK_WIDGET (self->security));
+	gtk_box_append (self->box, GTK_WIDGET (self->security));
 
 }
 

@@ -36,12 +36,12 @@ typedef enum
 
 struct _NetProxy
 {
-        GtkFrame          parent;
+        AdwBin            parent;
 
-        GtkRadioButton   *automatic_radio;
+        GtkCheckButton   *automatic_radio;
         GtkDialog        *dialog;
-        GtkRadioButton   *manual_radio;
-        GtkRadioButton   *none_radio;
+        GtkCheckButton   *manual_radio;
+        GtkCheckButton   *none_radio;
         GtkEntry         *proxy_ftp_entry;
         GtkEntry         *proxy_http_entry;
         GtkEntry         *proxy_https_entry;
@@ -59,7 +59,7 @@ struct _NetProxy
         GSettings        *settings;
 };
 
-G_DEFINE_TYPE (NetProxy, net_proxy, GTK_TYPE_FRAME)
+G_DEFINE_TYPE (NetProxy, net_proxy, ADW_TYPE_BIN)
 
 static const gchar *
 panel_get_string_for_value (ProxyMode mode)
@@ -155,11 +155,11 @@ panel_proxy_mode_setup_widgets (NetProxy *self, ProxyMode value)
 }
 
 static void
-panel_proxy_mode_radio_changed_cb (NetProxy *self, GtkRadioButton *radio)
+panel_proxy_mode_radio_changed_cb (NetProxy *self, GtkCheckButton *radio)
 {
         ProxyMode value;
 
-        if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (radio)))
+        if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (radio)))
                 return;
 
         /* get selected radio */
@@ -185,7 +185,7 @@ panel_proxy_mode_radio_changed_cb (NetProxy *self, GtkRadioButton *radio)
 static void
 show_dialog_cb (NetProxy *self)
 {
-        gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+        gtk_window_set_transient_for (GTK_WINDOW (self->dialog), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
         gtk_window_present (GTK_WINDOW (self->dialog));
 }
 
@@ -350,26 +350,19 @@ net_proxy_init (NetProxy *self)
         /* setup the radio before connecting to the :toggled signal */
         switch (value) {
         case MODE_DISABLED:
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->none_radio), TRUE);
+                gtk_check_button_set_active (GTK_CHECK_BUTTON (self->none_radio), TRUE);
                 break;
         case MODE_MANUAL:
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->manual_radio), TRUE);
+                gtk_check_button_set_active (GTK_CHECK_BUTTON (self->manual_radio), TRUE);
                 break;
         case MODE_AUTOMATIC:
-                gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->automatic_radio), TRUE);
+                gtk_check_button_set_active (GTK_CHECK_BUTTON (self->automatic_radio), TRUE);
                 break;
         default:
                 g_assert_not_reached ();
         }
         panel_proxy_mode_setup_widgets (self, value);
         panel_update_status_label (self, value);
-
-        /* prevent the dialog from being destroyed */
-        g_signal_connect_object (self->dialog,
-                                 "delete-event",
-                                 G_CALLBACK (gtk_widget_hide_on_delete),
-                                 self->dialog,
-                                 G_CONNECT_SWAPPED);
 }
 
 NetProxy *

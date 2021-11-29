@@ -107,7 +107,7 @@ ce_netmask_entry_is_empty (CENetmaskEntry *self)
 
   g_return_val_if_fail (CE_IS_NETMASK_ENTRY (self), FALSE);
 
-  text = gtk_entry_get_text (GTK_ENTRY (self));
+  text = gtk_editable_get_text (GTK_EDITABLE (self));
   return text[0] == '\0';
 }
 
@@ -118,7 +118,7 @@ ce_netmask_entry_is_valid (CENetmaskEntry *self)
 
   g_return_val_if_fail (CE_IS_NETMASK_ENTRY (self), FALSE);
 
-  text = gtk_entry_get_text (GTK_ENTRY (self));
+  text = gtk_editable_get_text (GTK_EDITABLE (self));
   return text[0] == '\0' || parse_netmask (text, NULL);
 }
 
@@ -130,7 +130,7 @@ ce_netmask_entry_get_prefix (CENetmaskEntry *self)
 
   g_return_val_if_fail (CE_IS_NETMASK_ENTRY (self), 0);
 
-  text = gtk_entry_get_text (GTK_ENTRY (self));
+  text = gtk_editable_get_text (GTK_EDITABLE (self));
   parse_netmask (text, &prefix);
 
   return prefix;

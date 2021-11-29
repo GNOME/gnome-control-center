@@ -39,7 +39,7 @@ helper_fill_secret_entry (NMConnection *connection,
 	if (setting) {
 		tmp = (*func) (setting);
 		if (tmp) {
-			gtk_entry_set_text (entry, tmp);
+			gtk_editable_set_text (GTK_EDITABLE (entry), tmp);
 		}
 	}
 }

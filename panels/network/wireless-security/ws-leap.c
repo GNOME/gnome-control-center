@@ -48,7 +48,7 @@ show_toggled_cb (WirelessSecurityLEAP *self)
 {
 	gboolean visible;
 
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
+	visible = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->show_password_check));
 	gtk_entry_set_visibility (self->password_entry, visible);
 }
 
@@ -60,7 +60,7 @@ validate (WirelessSecurity *security, GError **error)
 	const char *text;
 	gboolean ret = TRUE;
 
-	text = gtk_entry_get_text (self->username_entry);
+	text = gtk_editable_get_text (GTK_EDITABLE (self->username_entry));
 	if (!text || !strlen (text)) {
 		widget_set_error (GTK_WIDGET (self->username_entry));
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing leap-username"));
@@ -74,7 +74,7 @@ validate (WirelessSecurity *security, GError **error)
 		return TRUE;
 	}
 
-	text = gtk_entry_get_text (self->password_entry);
+	text = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 	if (!text || !strlen (text)) {
 		widget_set_error (GTK_WIDGET (self->password_entry));
 		if (ret) {
@@ -107,8 +107,8 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 	s_wireless_sec = (NMSettingWirelessSecurity *) nm_setting_wireless_security_new ();
 	nm_connection_add_setting (connection, (NMSetting *) s_wireless_sec);
 
-	leap_username = gtk_entry_get_text (self->username_entry);
-	leap_password = gtk_entry_get_text (self->password_entry);
+	leap_username = gtk_editable_get_text (GTK_EDITABLE (self->username_entry));
+	leap_password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
 	g_object_set (s_wireless_sec,
 	              NM_SETTING_WIRELESS_SECURITY_KEY_MGMT, "ieee8021x",
@@ -202,7 +202,7 @@ ws_leap_new (NMConnection *connection)
 
 	g_signal_connect_swapped (self->username_entry, "changed", G_CALLBACK (changed_cb), self);
 	if (wsec)
-		gtk_entry_set_text (self->username_entry, nm_setting_wireless_security_get_leap_username (wsec));
+		gtk_editable_set_text (GTK_EDITABLE (self->username_entry), nm_setting_wireless_security_get_leap_username (wsec));
 
 	g_signal_connect_swapped (self->show_password_check, "toggled", G_CALLBACK (show_toggled_cb), self);
 

@@ -107,7 +107,6 @@ network_combo_changed_cb (NetDeviceMobile *self)
         GtkTreeIter iter;
         GtkTreeModel *model;
         NMConnection *connection;
-        GtkWidget *toplevel;
 
         if (self->updating_device)
                 return;
@@ -122,8 +121,8 @@ network_combo_changed_cb (NetDeviceMobile *self)
                             COLUMN_ID, &object_path,
                             -1);
         if (g_strcmp0 (object_path, NULL) == 0) {
-                toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-                cc_network_panel_connect_to_3g_network (toplevel, self->client, self->device);
+                GtkNative *native = gtk_widget_get_native (GTK_WIDGET (self));
+                cc_network_panel_connect_to_3g_network (GTK_WIDGET (native), self->client, self->device);
                 return;
         }
 

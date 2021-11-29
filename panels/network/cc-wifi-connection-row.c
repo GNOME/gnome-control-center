@@ -21,7 +21,7 @@
 
 struct _CcWifiConnectionRow
 {
-  GtkListBoxRow    parent_instance;
+  AdwActionRow     parent_instance;
 
   gboolean         constructed;
 
@@ -36,7 +36,6 @@ struct _CcWifiConnectionRow
   GtkCheckButton  *checkbutton;
   GtkSpinner      *connecting_spinner;
   GtkImage        *encrypted_icon;
-  GtkLabel        *name_label;
   GtkImage        *strength_icon;
 };
 
@@ -62,7 +61,7 @@ typedef enum
   NM_AP_SEC_OWE
 } NMAccessPointSecurity;
 
-G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, ADW_TYPE_ACTION_ROW)
 
 static GParamSpec *props[PROP_LAST];
 
@@ -208,13 +207,13 @@ update_ui (CcWifiConnectionRow *self)
                                            name, ssid_str);
         }
 
-      gtk_label_set_markup (self->name_label, title);
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
     }
   else
     {
       ssid = nm_access_point_get_ssid (best_ap);
       title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-      gtk_label_set_text (self->name_label, title);
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
     }
 
   if (active_connection)
@@ -321,20 +320,7 @@ cc_wifi_connection_row_constructed (GObject *object)
   G_OBJECT_CLASS (cc_wifi_connection_row_parent_class)->constructed (object);
 
   /* Reparent the label into the checkbox */
-  if (self->checkable)
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->checkbutton), TRUE);
-      g_object_ref (self->name_label);
-      gtk_container_remove (GTK_CONTAINER (gtk_widget_get_parent (GTK_WIDGET (self->name_label))),
-                            GTK_WIDGET (self->name_label));
-      gtk_container_add (GTK_CONTAINER (self->checkbutton), GTK_WIDGET (self->name_label));
-      gtk_widget_show (GTK_WIDGET (self->name_label));
-      g_object_unref (self->name_label);
-    }
-  else
-    {
-      gtk_widget_set_visible (GTK_WIDGET (self->checkbutton), FALSE);
-    }
+  gtk_widget_set_visible (GTK_WIDGET (self->checkbutton), self->checkable);
 
   update_ui (CC_WIFI_CONNECTION_ROW (object));
 }
@@ -456,7 +442,6 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, checkbutton);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, connecting_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, encrypted_icon);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, strength_icon);
 
   gtk_widget_class_bind_template_callback (widget_class, configure_clicked_cb);

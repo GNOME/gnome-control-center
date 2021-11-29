@@ -21,12 +21,12 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (CEPageIP6, ce_page_ip6, CE, PAGE_IP6, GtkScrolledWindow)
+G_DECLARE_FINAL_TYPE (CEPageIP6, ce_page_ip6, CE, PAGE_IP6, AdwBin)
 
 CEPageIP6 *ce_page_ip6_new (NMConnection     *connection,
                             NMClient         *client);

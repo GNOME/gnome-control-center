@@ -2,30 +2,20 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcNetworkPanel" parent="CcPanel">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
 
     <child>
       <object class="GtkScrolledWindow">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="hscrollbar_policy">never</property>
         <child>
           <object class="GtkViewport">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="shadow_type">none</property>
             <child>
-              <object class="HdyClamp">
-                <property name="visible">True</property>
+              <object class="AdwClamp">
                 <property name="margin_top">32</property>
                 <property name="margin_bottom">32</property>
                 <property name="margin_start">12</property>
                 <property name="margin_end">12</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="spacing">12</property>
                     <property name="orientation">vertical</property>
@@ -34,33 +24,25 @@
                     <!-- Each GtkBox below will contain GtkStacks from the NetDevices -->
                     <child>
                       <object class="GtkBox">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
                         <property name="spacing">24</property>
                         <property name="orientation">vertical</property>
                         <child>
                           <object class="GtkBox" id="box_wired">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">24</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkBox" id="container_bluetooth">
-                            <property name="can_focus">False</property>
+                            <property name="visible">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">12</property>
 
                             <!-- "Other Devices" header -->
                             <child>
                               <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <child>
                                   <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="hexpand">True</property>
                                     <property name="xalign">0.0</property>
                                     <property name="label" translatable="yes">Other Devices</property>
@@ -72,36 +54,22 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkFrame">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkBox" id="box_bluetooth">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="orientation">vertical</property>
-                                  </object>
-                                </child>
+                              <object class="GtkBox" id="box_bluetooth">
+                                <property name="orientation">vertical</property>
                               </object>
                             </child>
                           </object>
                         </child>
                         <child>
                           <object class="GtkBox">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">6</property>
 
                             <!-- VPN header -->
                             <child>
                               <object class="GtkBox">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
                                 <child>
                                   <object class="GtkLabel">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
                                     <property name="hexpand">True</property>
                                     <property name="xalign">0.0</property>
                                     <property name="label" translatable="yes">VPN</property>
@@ -112,57 +80,42 @@
                                 </child>
                                 <child>
                                   <object class="GtkButton">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="relief">none</property>
+                                    <property name="icon_name">list-add-symbolic</property>
+                                    <style>
+                                      <class name="flat" />
+                                    </style>
                                     <signal name="clicked" handler="create_connection_cb" object="CcNetworkPanel" swapped="no" />
-                                    <child>
-                                      <object class="GtkImage">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">False</property>
-                                        <property name="icon_name">list-add-symbolic</property>
-                                      </object>
-                                    </child>
                                   </object>
                                 </child>
                               </object>
                             </child>
-                            <child>
-                              <object class="GtkFrame">
-                                <property name="visible">True</property>
-                                <property name="can_focus">False</property>
-                                <child>
-                                  <object class="GtkBox" id="box_vpn">
-                                    <property name="visible">True</property>
-                                    <property name="can_focus">False</property>
-                                    <property name="orientation">vertical</property>
 
-                                    <!-- "Not set up" row -->
+                            <child>
+                              <object class="GtkBox" id="box_vpn">
+                                <property name="orientation">vertical</property>
+
+                                <!-- "Not set up" row -->
+                                <child>
+                                  <object class="GtkListBox" id="empty_listbox">
+                                    <property name="selection_mode">none</property>
+                                    <style>
+                                      <class name="content" />
+                                    </style>
                                     <child>
-                                      <object class="GtkListBox" id="empty_listbox">
-                                        <property name="visible">True</property>
-                                        <property name="can_focus">True</property>
-                                        <property name="selection_mode">none</property>
-                                        <child>
-                                          <object class="HdyActionRow">
-                                            <property name="visible">True</property>
-                                            <property name="can_focus">True</property>
-                                            <property name="activatable">False</property>
-                                            <property name="title" translatable="yes">Not set up</property>
-                                          </object>
-                                        </child>
+                                      <object class="AdwActionRow">
+                                        <property name="activatable">False</property>
+                                        <property name="title" translatable="yes">Not set up</property>
                                       </object>
                                     </child>
                                   </object>
                                 </child>
                               </object>
                             </child>
+
                           </object>
                         </child>
                         <child>
                           <object class="GtkBox" id="box_proxy">
-                            <property name="visible">True</property>
-                            <property name="can_focus">False</property>
                             <property name="orientation">vertical</property>
                           </object>
                         </child>

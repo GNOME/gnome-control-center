@@ -157,28 +157,23 @@ wsec_size_group_clear (GtkSizeGroup *group)
 static void
 security_combo_changed (CEPageSecurity *self)
 {
-        GList *l, *children;
         g_autoptr(WirelessSecurity) sec = NULL;
+        GtkWidget *child;
 
         wsec_size_group_clear (self->group);
 
-        children = gtk_container_get_children (GTK_CONTAINER (self->box));
-        for (l = children; l; l = l->next) {
-                gtk_container_remove (GTK_CONTAINER (self->box), GTK_WIDGET (l->data));
-        }
+        while ((child = gtk_widget_get_first_child (GTK_WIDGET (self->box))) != NULL)
+                gtk_box_remove (self->box, child);
 
         sec = security_combo_get_active (self);
         if (sec) {
-                GtkWidget *parent;
-
-                parent = gtk_widget_get_parent (GTK_WIDGET (sec));
-                if (parent)
-                        gtk_container_remove (GTK_CONTAINER (parent), GTK_WIDGET (sec));
+                if (gtk_widget_get_parent (GTK_WIDGET (sec)))
+                        gtk_box_remove (self->box, GTK_WIDGET (sec));
 
                 gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
                 wireless_security_add_to_size_group (sec, self->group);
 
-                gtk_container_add (GTK_CONTAINER (self->box), g_object_ref (GTK_WIDGET (sec)));
+                gtk_box_append (self->box, g_object_ref (GTK_WIDGET (sec)));
         }
 
         ce_page_changed (CE_PAGE (self));

@@ -27,6 +27,7 @@
 #include "eap-method-simple.h"
 #include "helpers.h"
 #include "ui-helpers.h"
+#include "ws-file-chooser-button.h"
 
 #define I_NAME_COLUMN 0
 #define I_ID_COLUMN   1
@@ -36,7 +37,7 @@ struct _EAPMethodPEAP {
 
 	GtkEntry             *anon_identity_entry;
 	GtkLabel             *anon_identity_label;
-	GtkFileChooserButton *ca_cert_button;
+	WsFileChooserButton  *ca_cert_button;
 	GtkLabel             *ca_cert_label;
 	GtkCheckButton       *ca_cert_not_required_check;
 	GtkBox               *inner_auth_box;
@@ -82,17 +83,17 @@ validate (EAPMethod *method, GError **error)
 	EAPMethodPEAP *self = EAP_METHOD_PEAP (method);
 	g_autoptr(GError) local_error = NULL;
 
-	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (self->ca_cert_button),
+	if (!eap_method_validate_filepicker (ws_file_chooser_button_get_filechooser (self->ca_cert_button),
 	                                     TYPE_CA_CERT, NULL, NULL, &local_error)) {
 		g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: %s"), local_error->message);
 		return FALSE;
 	}
 
-	if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check))) {
-		g_autofree gchar *filename = NULL;
+	if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (self->ca_cert_not_required_check))) {
+		g_autoptr(GFile) file = NULL;
 
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
-		if (filename == NULL) {
+		file = ws_file_chooser_button_get_file (self->ca_cert_button);
+		if (file == NULL) {
 			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-PEAP CA certificate: no certificate specified"));
 			return FALSE;
 		}
@@ -104,8 +105,8 @@ validate (EAPMethod *method, GError **error)
 static void
 ca_cert_not_required_toggled (EAPMethodPEAP *self)
 {
-	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
-	                                         GTK_FILE_CHOOSER (self->ca_cert_button));
+	eap_method_ca_cert_not_required_toggled (self->ca_cert_not_required_check,
+	                                         ws_file_chooser_button_get_filechooser (self->ca_cert_button));
 	eap_method_emit_changed (EAP_METHOD (self));
 }
 
@@ -133,6 +134,7 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	NMSetting8021xCKFormat format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	const char *text;
 	g_autofree gchar *filename = NULL;
+	g_autoptr(GFile) file = NULL;
 	int peapver_active = 0;
 	g_autoptr(GError) error = NULL;
 	gboolean ca_cert_error = FALSE;
@@ -142,11 +144,12 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 
 	nm_setting_802_1x_add_eap_method (s_8021x, "peap");
 
-	text = gtk_entry_get_text (self->anon_identity_entry);
+	text = gtk_editable_get_text (GTK_EDITABLE (self->anon_identity_entry));
 	if (text && strlen (text))
 		g_object_set (s_8021x, NM_SETTING_802_1X_ANONYMOUS_IDENTITY, text, NULL);
 
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
+	file = ws_file_chooser_button_get_file (self->ca_cert_button);
+	filename = file ? g_file_get_path (file) : NULL;
 	if (!nm_setting_802_1x_set_ca_cert (s_8021x, filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error)) {
 		g_warning ("Couldn't read CA certificate '%s': %s", filename, error ? error->message : "(unknown)");
 		ca_cert_error = TRUE;
@@ -173,21 +176,21 @@ static void
 inner_auth_combo_changed_cb (EAPMethodPEAP *self)
 {
 	EAPMethod *inner_method;
-	GList *children;
+	GtkWidget *child;
 
 	inner_method = get_inner_method (self);
 
 	/* Remove the previous method and migrate username/password across */
-	children = gtk_container_get_children (GTK_CONTAINER (self->inner_auth_box));
-	if (children != NULL) {
-		EAPMethod *old_eap = g_list_nth_data (children, 0);
+	child = gtk_widget_get_first_child (GTK_WIDGET (self->inner_auth_box));
+	if (child != NULL) {
+		EAPMethod *old_eap = EAP_METHOD (child);
 		eap_method_set_username (inner_method, eap_method_get_username (old_eap));
 		eap_method_set_password (inner_method, eap_method_get_password (old_eap));
 		eap_method_set_show_password (inner_method, eap_method_get_show_password (old_eap));
-		gtk_container_remove (GTK_CONTAINER (self->inner_auth_box), GTK_WIDGET (old_eap));
+		gtk_box_remove (self->inner_auth_box, GTK_WIDGET (old_eap));
 	}
 
-	gtk_container_add (GTK_CONTAINER (self->inner_auth_box), g_object_ref (GTK_WIDGET (inner_method)));
+	gtk_box_append (self->inner_auth_box, g_object_ref (GTK_WIDGET (inner_method)));
 
 	eap_method_emit_changed (EAP_METHOD (self));
 }
@@ -323,21 +326,21 @@ eap_method_peap_new (NMConnection *connection)
 
 	g_signal_connect_swapped (self->ca_cert_not_required_check, "toggled", G_CALLBACK (ca_cert_not_required_toggled), self);
 
-	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (self->ca_cert_button), TRUE);
-	gtk_file_chooser_button_set_title (self->ca_cert_button,
-	                                   _("Choose a Certificate Authority certificate"));
-	g_signal_connect_swapped (self->ca_cert_button, "selection-changed", G_CALLBACK (changed_cb), self);
+	g_signal_connect_swapped (self->ca_cert_button, "notify::file", G_CALLBACK (changed_cb), self);
 	filter = eap_method_default_file_chooser_filter_new (FALSE);
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (self->ca_cert_button), filter);
+	gtk_file_chooser_add_filter (ws_file_chooser_button_get_filechooser (self->ca_cert_button),
+								 filter);
 	if (connection && s_8021x) {
 		filename = NULL;
 		if (nm_setting_802_1x_get_ca_cert_scheme (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH) {
 			filename = nm_setting_802_1x_get_ca_cert_path (s_8021x);
-			if (filename)
-				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->ca_cert_button), filename);
+			if (filename) {
+				g_autoptr(GFile) file = g_file_new_for_path (filename);
+				ws_file_chooser_button_set_file (self->ca_cert_button, file);
+			}
 		}
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
-		                              !filename && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection));
+		gtk_check_button_set_active (self->ca_cert_not_required_check,
+		                             !filename && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection));
 	}
 
 	self->em_mschap_v2 = eap_method_simple_new (connection, "mschapv2", TRUE, FALSE);
@@ -389,7 +392,7 @@ eap_method_peap_new (NMConnection *connection)
 	g_signal_connect_swapped (self->version_combo, "changed", G_CALLBACK (changed_cb), self);
 
 	if (s_8021x && nm_setting_802_1x_get_anonymous_identity (s_8021x))
-		gtk_entry_set_text (self->anon_identity_entry, nm_setting_802_1x_get_anonymous_identity (s_8021x));
+		gtk_editable_set_text (GTK_EDITABLE (self->anon_identity_entry), nm_setting_802_1x_get_anonymous_identity (s_8021x));
 	g_signal_connect_swapped (self->anon_identity_entry, "changed", G_CALLBACK (changed_cb), self);
 
 	return self;

@@ -181,6 +181,7 @@ eap_method_validate_filepicker (GtkFileChooser *chooser,
 {
 	g_autofree gchar *filename = NULL;
 	g_autoptr(NMSetting8021x) setting = NULL;
+	g_autoptr(GFile) file = NULL;
 	gboolean success = TRUE;
 
 	if (item_type == TYPE_PRIVATE_KEY) {
@@ -188,8 +189,8 @@ eap_method_validate_filepicker (GtkFileChooser *chooser,
 			success = FALSE;
 	}
 
-	filename = gtk_file_chooser_get_filename (chooser);
-	if (!filename) {
+	file = gtk_file_chooser_get_file (chooser);
+	if (!file) {
 		if (item_type != TYPE_CA_CERT) {
 			success = FALSE;
 			g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("no file selected"));
@@ -197,6 +198,7 @@ eap_method_validate_filepicker (GtkFileChooser *chooser,
 		goto out;
 	}
 
+	filename = g_file_get_path (file);
 	if (!g_file_test (filename, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR)) {
 		success = FALSE;
 		goto out;
@@ -358,33 +360,23 @@ out:
 }
 #endif
 
-static gboolean
-default_filter_privkey (const GtkFileFilterInfo *filter_info, gpointer user_data)
+static const char *privkey_extensions[] = {
+	".der", ".pem", ".p12", ".key", NULL
+};
+static const char *cert_extensions[] = {
+	".der", ".pem", ".crt", ".cer", NULL
+};
+
+static void
+add_file_extensions_to_filter (GtkFileFilter  *filter,
+                               const char    **extensions)
 {
-	const char *extensions[] = { ".der", ".pem", ".p12", ".key", NULL };
+	int i;
 
-	if (!filter_info->filename)
-		return FALSE;
-
-	if (!file_has_extension (filter_info->filename, extensions))
-		return FALSE;
-
-	return TRUE;
+	for (i = 0; extensions[i] != NULL; i++)
+		gtk_file_filter_add_suffix (filter, extensions[i]);
 }
 
-static gboolean
-default_filter_cert (const GtkFileFilterInfo *filter_info, gpointer user_data)
-{
-	const char *extensions[] = { ".der", ".pem", ".crt", ".cer", NULL };
-
-	if (!filter_info->filename)
-		return FALSE;
-
-	if (!file_has_extension (filter_info->filename, extensions))
-		return FALSE;
-
-	return TRUE;
-}
 
 GtkFileFilter *
 eap_method_default_file_chooser_filter_new (gboolean privkey)
@@ -393,10 +385,10 @@ eap_method_default_file_chooser_filter_new (gboolean privkey)
 
 	filter = gtk_file_filter_new ();
 	if (privkey) {
-		gtk_file_filter_add_custom (filter, GTK_FILE_FILTER_FILENAME, default_filter_privkey, NULL, NULL);
+		add_file_extensions_to_filter (filter, privkey_extensions);
 		gtk_file_filter_set_name (filter, _("DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"));
 	} else {
-		gtk_file_filter_add_custom (filter, GTK_FILE_FILTER_FILENAME, default_filter_cert, NULL, NULL);
+		add_file_extensions_to_filter (filter, cert_extensions);
 		gtk_file_filter_set_name (filter, _("DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"));
 	}
 	return filter;
@@ -405,10 +397,9 @@ eap_method_default_file_chooser_filter_new (gboolean privkey)
 gboolean
 eap_method_is_encrypted_private_key (const char *path)
 {
-	GtkFileFilterInfo info = { .filename = path };
 	gboolean is_encrypted;
 
-	if (!default_filter_privkey (&info, NULL))
+	if (!file_has_extension (path, privkey_extensions))
 		return FALSE;
 
 #if LIBNM_BUILD
@@ -425,31 +416,29 @@ eap_method_is_encrypted_private_key (const char *path)
 }
 
 void
-eap_method_ca_cert_not_required_toggled (GtkToggleButton *id_ca_cert_not_required_checkbutton, GtkFileChooser *id_ca_cert_chooser)
+eap_method_ca_cert_not_required_toggled (GtkCheckButton *id_ca_cert_not_required_checkbutton, GtkFileChooser *id_ca_cert_chooser)
 {
-	g_autofree gchar *filename = NULL;
-	g_autofree gchar *filename_old = NULL;
+	g_autoptr(GFile) file = NULL;
+	g_autoptr(GFile) file_old = NULL;
 	gboolean is_not_required;
 
 	g_assert (id_ca_cert_not_required_checkbutton && id_ca_cert_chooser);
 
-	is_not_required = gtk_toggle_button_get_active (id_ca_cert_not_required_checkbutton);
+	is_not_required = gtk_check_button_get_active (id_ca_cert_not_required_checkbutton);
 
-	filename = gtk_file_chooser_get_filename (id_ca_cert_chooser);
-	filename_old = g_object_steal_data (G_OBJECT (id_ca_cert_chooser), "filename-old");
+	file = gtk_file_chooser_get_file (id_ca_cert_chooser);
+	file_old = g_object_steal_data (G_OBJECT (id_ca_cert_chooser), "filename-old");
 	if (is_not_required) {
-		g_free (filename_old);
-		filename_old = g_steal_pointer (&filename);
+		g_clear_object (&file_old);
+		file_old = g_steal_pointer (&file);
 	} else {
-		g_free (filename);
-		filename = g_steal_pointer (&filename_old);
+		g_clear_object (&file);
+		file = g_steal_pointer (&file_old);
 	}
 	gtk_widget_set_sensitive (GTK_WIDGET (id_ca_cert_chooser), !is_not_required);
-	if (filename)
-		gtk_file_chooser_set_filename (id_ca_cert_chooser, filename);
-	else
-		gtk_file_chooser_unselect_all (id_ca_cert_chooser);
-	g_object_set_data_full (G_OBJECT (id_ca_cert_chooser), "filename-old", g_steal_pointer (&filename_old), g_free);
+	if (file)
+		gtk_file_chooser_set_file (id_ca_cert_chooser, file, NULL);
+	g_object_set_data_full (G_OBJECT (id_ca_cert_chooser), "filename-old", g_steal_pointer (&file_old), g_free);
 }
 
 /* Used as both GSettings keys and GObject data tags */

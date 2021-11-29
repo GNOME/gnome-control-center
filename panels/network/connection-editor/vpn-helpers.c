@@ -97,6 +97,56 @@ vpn_get_plugins (void)
 	return plugins;
 }
 
+
+typedef struct {
+	GMainLoop *mainloop;
+	gint response;
+} RunData;
+
+static void
+on_dialog_close_request_cb (GtkDialog *dialog,
+                            gint       response,
+                            RunData   *data)
+{
+	data->response = GTK_RESPONSE_CLOSE;
+	g_main_loop_quit (data->mainloop);
+}
+
+static void
+on_dialog_response_cb (GtkDialog *dialog,
+                       gint       response,
+                       RunData   *data)
+{
+	data->response = response;
+	g_main_loop_quit (data->mainloop);
+}
+
+static int
+run_dialog (GtkDialog *dialog)
+{
+	g_autoptr(GMainLoop) mainloop = NULL;
+	RunData run_data;
+	gulong response_id;
+	gulong close_id;
+
+	mainloop = g_main_loop_new (NULL, FALSE);
+	run_data = (RunData) {
+		.response = GTK_RESPONSE_CLOSE,
+		.mainloop = mainloop,
+	};
+
+	close_id = g_signal_connect (dialog, "close-request", G_CALLBACK (on_dialog_close_request_cb), &run_data);
+	response_id = g_signal_connect_swapped (dialog, "response", G_CALLBACK (on_dialog_response_cb), &run_data);
+
+	gtk_window_present (GTK_WINDOW (dialog));
+	g_main_loop_run (mainloop);
+
+	g_clear_signal_handler (&close_id, dialog);
+	g_clear_signal_handler (&response_id, dialog);
+
+	return run_data.response;
+}
+
 typedef struct {
 	VpnImportCallback callback;
 	gpointer user_data;
@@ -106,6 +156,7 @@ static void
 import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 {
 	g_autofree gchar *filename = NULL;
+	g_autoptr(GFile) file = NULL;
 	ActionInfo *info = (ActionInfo *) user_data;
 	NMConnection *connection = NULL;
 	g_autoptr(GError) error = NULL;
@@ -114,12 +165,13 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 	if (response != GTK_RESPONSE_ACCEPT)
 		goto out;
 
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-	if (!filename) {
+	file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
+	if (!file) {
 		g_warning ("%s: didn't get a filename back from the chooser!", __func__);
 		goto out;
 	}
 
+	filename = g_file_get_path (file);
 	for (iter = vpn_get_plugins (); !connection && iter; iter = iter->next) {
 		NMVpnEditorPlugin *plugin;
 
@@ -140,35 +192,33 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
 		                                 _("The file “%s” could not be read or does not contain recognized VPN connection information\n\nError: %s."),
 		                                 bname, error ? error->message : "unknown error");
-		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
-		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
-		gtk_dialog_run (GTK_DIALOG (err_dialog));
+		run_dialog (GTK_DIALOG (err_dialog));
 	}
 
 out:
-	gtk_widget_hide (dialog);
-	gtk_widget_destroy (dialog);
+	gtk_window_destroy (GTK_WINDOW (dialog));
 
 	info->callback (connection, info->user_data);
 	g_free (info);
 }
 
-static void
+static gboolean
 destroy_import_chooser (GtkWidget *dialog, gpointer user_data)
 {
 	ActionInfo *info = (ActionInfo *) user_data;
 
-	gtk_widget_destroy (dialog);
 	info->callback (NULL, info->user_data);
 	g_free (info);
+
+	return FALSE;
 }
 
 void
 vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 {
+	g_autoptr(GFile) home_folder = NULL;
 	GtkWidget *dialog;
 	ActionInfo *info;
-	const char *home_folder;
 
 	dialog = gtk_file_chooser_dialog_new (_("Select file to import"),
 	                                      parent,
@@ -177,16 +227,15 @@ vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 	                                      _("_Open"), GTK_RESPONSE_ACCEPT,
 	                                      NULL);
 	gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-	home_folder = g_get_home_dir ();
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), home_folder);
+	home_folder = g_file_new_for_path (g_get_home_dir ());
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), home_folder, NULL);
 
 	info = g_malloc0 (sizeof (ActionInfo));
 	info->callback = callback;
 	info->user_data = user_data;
 
-	g_signal_connect (G_OBJECT (dialog), "close", G_CALLBACK (destroy_import_chooser), info);
+	g_signal_connect (G_OBJECT (dialog), "close-request", G_CALLBACK (destroy_import_chooser), info);
 	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (import_vpn_from_file_cb), info);
-	gtk_widget_show_all (dialog);
 	gtk_window_present (GTK_WINDOW (dialog));
 }
 
@@ -194,6 +243,7 @@ static void
 export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 {
 	g_autoptr(NMConnection) connection = NM_CONNECTION (user_data);
+	g_autoptr(GFile) file = NULL;
 	char *filename = NULL;
 	g_autoptr(GError) error = NULL;
 	NMVpnEditorPlugin *plugin;
@@ -206,12 +256,13 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 	if (response != GTK_RESPONSE_ACCEPT)
 		goto out;
 
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (dialog));
-	if (!filename) {
+	file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
+	if (!file) {
 		g_set_error (&error, G_IO_ERROR, G_IO_ERROR_FAILED, "no filename");
 		goto done;
 	}
 
+	filename = g_file_get_path (file);
 	if (g_file_test (filename, G_FILE_TEST_EXISTS)) {
 		int replace_response;
 		GtkWidget *replace_dialog;
@@ -227,8 +278,8 @@ export_vpn_to_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 		gtk_dialog_add_buttons (GTK_DIALOG (replace_dialog), _("_Replace"), GTK_RESPONSE_OK, NULL);
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (replace_dialog),
 							  _("Do you want to replace %s with the VPN connection you are saving?"), bname);
-		replace_response = gtk_dialog_run (GTK_DIALOG (replace_dialog));
-		gtk_widget_destroy (replace_dialog);
+		replace_response = run_dialog (GTK_DIALOG (replace_dialog));
+		gtk_window_destroy (GTK_WINDOW (replace_dialog));
 		if (replace_response != GTK_RESPONSE_OK)
 			goto out;
 	}
@@ -265,25 +316,21 @@ done:
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (err_dialog),
 		                                 _("The VPN connection “%s” could not be exported to %s.\n\nError: %s."),
 		                                 id ? id : "(unknown)", bname, error ? error->message : "unknown error");
-		g_signal_connect (err_dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
-		g_signal_connect (err_dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
-		gtk_widget_show_all (err_dialog);
-		gtk_window_present (GTK_WINDOW (err_dialog));
+		run_dialog (GTK_DIALOG (err_dialog));
 	}
 
 out:
-	gtk_widget_hide (dialog);
-	gtk_widget_destroy (dialog);
+	gtk_window_destroy (GTK_WINDOW (dialog));
 }
 
 void
 vpn_export (NMConnection *connection)
 {
+	g_autoptr(GFile) home_folder = NULL;
 	GtkWidget *dialog;
 	NMVpnEditorPlugin *plugin;
 	NMSettingVpn *s_vpn = NULL;
 	const char *service_type;
-	const char *home_folder;
 
 	s_vpn = nm_connection_get_setting_vpn (connection);
 	service_type = s_vpn ? nm_setting_vpn_get_service_type (s_vpn) : NULL;
@@ -299,8 +346,8 @@ vpn_export (NMConnection *connection)
 	                                      _("_Cancel"), GTK_RESPONSE_CANCEL,
 	                                      _("_Save"), GTK_RESPONSE_ACCEPT,
 	                                      NULL);
-	home_folder = g_get_home_dir ();
-	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), home_folder);
+	home_folder = g_file_new_for_path (g_get_home_dir ());
+	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (dialog), home_folder, NULL);
 
 	plugin = vpn_get_plugin_by_service (service_type);
 	if (plugin) {
@@ -311,8 +358,6 @@ vpn_export (NMConnection *connection)
 			gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), suggested);
 	}
 
-	g_signal_connect (G_OBJECT (dialog), "close", G_CALLBACK (gtk_widget_destroy), NULL);
 	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (export_vpn_to_file_cb), g_object_ref (connection));
-	gtk_widget_show_all (dialog);
 	gtk_window_present (GTK_WINDOW (dialog));
 }

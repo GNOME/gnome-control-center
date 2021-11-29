@@ -17,14 +17,14 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_WIFI_CONNECTION_LIST (cc_wifi_connection_list_get_type())
 
-G_DECLARE_FINAL_TYPE (CcWifiConnectionList, cc_wifi_connection_list, CC, WIFI_CONNECTION_LIST, GtkListBox)
+G_DECLARE_FINAL_TYPE (CcWifiConnectionList, cc_wifi_connection_list, CC, WIFI_CONNECTION_LIST, AdwBin)
 
 CcWifiConnectionList *cc_wifi_connection_list_new (NMClient     *client,
                                                    NMDeviceWifi *device,
@@ -35,5 +35,7 @@ CcWifiConnectionList *cc_wifi_connection_list_new (NMClient     *client,
 
 void                  cc_wifi_connection_list_freeze (CcWifiConnectionList  *list);
 void                  cc_wifi_connection_list_thaw   (CcWifiConnectionList  *list);
+
+GtkListBox           *cc_wifi_connection_list_get_list_box (CcWifiConnectionList *self);
 
 G_END_DECLS

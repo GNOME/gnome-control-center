@@ -26,7 +26,6 @@
 
 #include <NetworkManager.h>
 
-#include "list-box-helper.h"
 #include "net-connection-editor.h"
 #include "net-connection-editor-resources.h"
 #include "ce-page.h"
@@ -53,7 +52,7 @@ struct _NetConnectionEditor
         GtkDialog parent;
 
         GtkBox           *add_connection_box;
-        GtkFrame         *add_connection_frame;
+        AdwBin           *add_connection_frame;
         GtkButton        *apply_button;
         GtkButton        *cancel_button;
         GtkNotebook      *notebook;
@@ -87,7 +86,7 @@ cancel_editing (NetConnectionEditor *self)
 }
 
 static void
-delete_event_cb (NetConnectionEditor *self)
+close_request_cb (NetConnectionEditor *self)
 {
         cancel_editing (self);
 }
@@ -226,8 +225,8 @@ net_connection_editor_class_init (NetConnectionEditorClass *class)
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, notebook);
         gtk_widget_class_bind_template_child (widget_class, NetConnectionEditor, toplevel_stack);
 
-        gtk_widget_class_bind_template_callback (widget_class, delete_event_cb);
         gtk_widget_class_bind_template_callback (widget_class, cancel_clicked_cb);
+        gtk_widget_class_bind_template_callback (widget_class, close_request_cb);
         gtk_widget_class_bind_template_callback (widget_class, apply_clicked_cb);
 }
 
@@ -255,9 +254,7 @@ net_connection_editor_error_dialog (NetConnectionEditor *self,
                                                           "%s", secondary_text);
         }
 
-        g_signal_connect (dialog, "delete-event", G_CALLBACK (gtk_widget_destroy), NULL);
-        g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
-        gtk_dialog_run (GTK_DIALOG (dialog));
+        gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
@@ -323,7 +320,7 @@ update_sensitivity (NetConnectionEditor *self)
 {
         NMSettingConnection *sc;
         gboolean sensitive;
-        GList *pages;
+        gint i;
 
         if (!editor_is_initialized (self))
                 return;
@@ -336,10 +333,9 @@ update_sensitivity (NetConnectionEditor *self)
                 sensitive = self->can_modify;
         }
 
-        pages = gtk_container_get_children (GTK_CONTAINER (self->notebook));
-        for (GList *l = pages; l; l = l->next) {
-                CEPage *page = l->data;
-                gtk_widget_set_sensitive (GTK_WIDGET (page), sensitive);
+        for (i = 0; i < gtk_notebook_get_n_pages (self->notebook); i++) {
+                GtkWidget *page = gtk_notebook_get_nth_page (self->notebook, i);
+                gtk_widget_set_sensitive (page, sensitive);
         }
 }
 
@@ -347,15 +343,14 @@ static void
 validate (NetConnectionEditor *self)
 {
         gboolean valid = FALSE;
-        GList *pages;
+        gint i;
 
         if (!editor_is_initialized (self))
                 goto done;
 
         valid = TRUE;
-        pages = gtk_container_get_children (GTK_CONTAINER (self->notebook));
-        for (GList *l = pages; l; l = l->next) {
-                CEPage *page = l->data;
+        for (i = 0; i < gtk_notebook_get_n_pages (self->notebook); i++) {
+                CEPage *page = CE_PAGE (gtk_notebook_get_nth_page (self->notebook, i));
                 g_autoptr(GError) error = NULL;
 
                 if (!ce_page_validate (page, self->connection, &error)) {
@@ -406,18 +401,16 @@ page_initialized (NetConnectionEditor *self, GError *error, CEPage *page)
 {
         GtkWidget *label;
         gint position;
-        GList *children, *l;
         gint i;
 
         position = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (page), "position"));
         g_object_set_data (G_OBJECT (page), "position", GINT_TO_POINTER (position));
-        children = gtk_container_get_children (GTK_CONTAINER (self->notebook));
-        for (l = children, i = 0; l; l = l->next, i++) {
-                gint pos = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (l->data), "position"));
+        for (i = 0; i < gtk_notebook_get_n_pages (self->notebook); i++) {
+                GtkWidget *page = gtk_notebook_get_nth_page (self->notebook, i);
+                gint pos = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (page), "position"));
                 if (pos > position)
                         break;
         }
-        g_list_free (children);
 
         label = gtk_label_new (ce_page_get_title (page));
 
@@ -608,11 +601,7 @@ complete_vpn_connection (NetConnectionEditor *self, NMConnection *connection)
 static void
 finish_add_connection (NetConnectionEditor *self, NMConnection *connection)
 {
-        GtkBin *frame;
-
-        frame = GTK_BIN (self->add_connection_frame);
-        gtk_widget_destroy (gtk_bin_get_child (frame));
-
+        adw_bin_set_child (self->add_connection_frame, NULL);
         gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->notebook));
         gtk_widget_show (GTK_WIDGET (self->apply_button));
 
@@ -664,18 +653,16 @@ static void
 select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
 {
         GSList *vpn_plugins, *iter;
-        GList *l;
-        GList *children;
         GtkWidget *row, *row_box;
         GtkWidget *name_label, *desc_label;
+        GtkWidget *child;
 
         /* Get the available VPN types */
         vpn_plugins = vpn_get_plugins ();
 
         /* Remove the previous menu contents */
-        children = gtk_container_get_children (GTK_CONTAINER (list));
-        for (l = children; l != NULL; l = l->next)
-                gtk_widget_destroy (l->data);
+        while ((child = gtk_widget_get_first_child (GTK_WIDGET (list))) != NULL)
+                gtk_list_box_remove (list, child);
 
         /* Add the VPN types */
         for (iter = vpn_plugins; iter; iter = iter->next) {
@@ -684,7 +671,6 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
                 g_autofree gchar *desc = NULL;
                 g_autofree gchar *desc_markup = NULL;
                 g_autofree gchar *service_name = NULL;
-                GtkStyleContext *context;
 
                 g_object_get (plugin,
                               NM_VPN_EDITOR_PLUGIN_NAME, &name,
@@ -703,20 +689,18 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
 
                 name_label = gtk_label_new (name);
                 gtk_widget_set_halign (name_label, GTK_ALIGN_START);
-                gtk_box_pack_start (GTK_BOX (row_box), name_label, FALSE, TRUE, 0);
+                gtk_box_append (GTK_BOX (row_box), name_label);
 
                 desc_label = gtk_label_new (NULL);
                 gtk_label_set_markup (GTK_LABEL (desc_label), desc_markup);
-                gtk_label_set_line_wrap (GTK_LABEL (desc_label), TRUE);
+                gtk_label_set_wrap (GTK_LABEL (desc_label), TRUE);
                 gtk_widget_set_halign (desc_label, GTK_ALIGN_START);
-                context = gtk_widget_get_style_context (desc_label);
-                gtk_style_context_add_class (context, "dim-label");
-                gtk_box_pack_start (GTK_BOX (row_box), desc_label, FALSE, TRUE, 0);
+                gtk_widget_add_css_class (desc_label, "dim-label");
+                gtk_box_append (GTK_BOX (row_box), desc_label);
 
-                gtk_container_add (GTK_CONTAINER (row), row_box);
-                gtk_widget_show_all (row);
+                gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), row_box);
                 g_object_set_data_full (G_OBJECT (row), "service_name", g_steal_pointer (&service_name), g_free);
-                gtk_container_add (GTK_CONTAINER (list), row);
+                gtk_list_box_append (list, row);
         }
 
         /* Import */
@@ -730,12 +714,11 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
 
         name_label = gtk_label_new (_("Import from file…"));
         gtk_widget_set_halign (name_label, GTK_ALIGN_START);
-        gtk_box_pack_start (GTK_BOX (row_box), name_label, FALSE, TRUE, 0);
+        gtk_box_append (GTK_BOX (row_box), name_label);
 
-        gtk_container_add (GTK_CONTAINER (row), row_box);
-        gtk_widget_show_all (row);
+        gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), row_box);
         g_object_set_data (G_OBJECT (row), "service_name", "import");
-        gtk_container_add (GTK_CONTAINER (list), row);
+        gtk_list_box_append (list, row);
 
         g_signal_connect_object (list, "row-activated",
                                  G_CALLBACK (vpn_type_activated), self, G_CONNECT_SWAPPED);
@@ -744,19 +727,14 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
 static void
 net_connection_editor_add_connection (NetConnectionEditor *self)
 {
-        GtkContainer *frame;
         GtkListBox *list;
-
-        frame = GTK_CONTAINER (self->add_connection_frame);
 
         list = GTK_LIST_BOX (gtk_list_box_new ());
         gtk_list_box_set_selection_mode (list, GTK_SELECTION_NONE);
-        gtk_list_box_set_header_func (list, cc_list_box_update_header_func, NULL, NULL);
 
         select_vpn_type (self, list);
 
-        gtk_widget_show_all (GTK_WIDGET (list));
-        gtk_container_add (frame, GTK_WIDGET (list));
+        adw_bin_set_child (self->add_connection_frame, GTK_WIDGET (list));
 
         gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->add_connection_box));
         gtk_widget_hide (GTK_WIDGET (self->apply_button));

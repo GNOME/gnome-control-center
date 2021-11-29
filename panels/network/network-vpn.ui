@@ -2,14 +2,12 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="NetVpn" parent="GtkBox">
-    <property name="can_focus">False</property>
     <property name="hexpand">True</property>
     <property name="orientation">vertical</property>
 
     <!-- HACK: a separator above the row, since we don't have a real listbox widget in the panel -->
     <child>
       <object class="GtkSeparator" id="separator">
-        <property name="can_focus">False</property>
         <property name="orientation">horizontal</property>
       </object>
     </child>
@@ -17,18 +15,15 @@
     <!-- Main listbox -->
     <child>
       <object class="GtkListBox">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="selection_mode">none</property>
+        <style>
+          <class name="content" />
+        </style>
         <child>
           <object class="GtkListBoxRow">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
             <property name="activatable">False</property>
             <child>
               <object class="GtkBox">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="valign">start</property>
                 <property name="margin_top">8</property>
                 <property name="margin_bottom">8</property>
@@ -37,8 +32,6 @@
                 <property name="spacing">12</property>
                 <child>
                   <object class="GtkLabel" id="device_label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="xalign">0</property>
                     <property name="ellipsize">end</property>
                     <property name="hexpand">True</property>
@@ -46,37 +39,21 @@
                 </child>
                 <child>
                   <object class="GtkSwitch" id="device_off_switch">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
                     <property name="halign">end</property>
                     <property name="valign">center</property>
                     <signal name="notify::active" handler="device_off_toggled" object="NetVpn" swapped="yes"/>
-                    <child internal-child="accessible">
-                      <object class="AtkObject">
-                        <property name="accessible-name" translatable="yes">Turn VPN connection off</property>
-                      </object>
-                    </child>
+                    <accessibility>
+                      <property name="label" translatable="yes">Turn VPN connection off</property>
+                    </accessibility>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="options_button">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="use_underline">True</property>
+                    <property name="icon_name">emblem-system-symbolic</property>
                     <signal name="clicked" handler="edit_connection" object="NetVpn" swapped="yes"/>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="icon_name">emblem-system-symbolic</property>
-                      </object>
-                    </child>
-                    <child internal-child="accessible">
-                      <object class="AtkObject">
-                        <property name="accessible-name" translatable="yes">Options…</property>
-                      </object>
-                    </child>
+                    <accessibility>
+                      <property name="label" translatable="yes">Options…</property>
+                    </accessibility>
                   </object>
                 </child>
               </object>

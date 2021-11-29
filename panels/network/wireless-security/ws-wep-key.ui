@@ -36,84 +36,71 @@
     </data>
   </object>
   <template class="WirelessSecurityWEPKey" parent="GtkGrid">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
     <property name="column_spacing">6</property>
     <property name="row_spacing">6</property>
     <child>
       <object class="GtkLabel" id="key_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">_Key</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">key_entry</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">0</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">0</property>
-      </packing>
     </child>
     <child>
       <object class="GtkEntry" id="key_entry">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hexpand">True</property>
         <property name="max_length">64</property>
         <property name="visibility">False</property>
-        <property name="activates_default">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">0</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">0</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">0</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">1</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkCheckButton" id="show_key_check">
         <property name="label" translatable="yes">Sho_w key</property>
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="hexpand">True</property>
-        <property name="receives_default">False</property>
         <property name="use_underline">True</property>
-        <property name="draw_indicator">True</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">1</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">1</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="auth_method_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">Au_thentication</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">auth_method_combo</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">3</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">3</property>
-      </packing>
     </child>
     <child>
       <object class="GtkComboBox" id="auth_method_combo">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="hexpand">True</property>
         <property name="model">auth_method_model</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">3</property>
+        </layout>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -121,31 +108,27 @@
           </attributes>
         </child>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">3</property>
-      </packing>
     </child>
     <child>
       <object class="GtkLabel" id="key_index_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="xalign">1</property>
         <property name="label" translatable="yes">WEP inde_x</property>
         <property name="use_underline">True</property>
         <property name="mnemonic_widget">key_index_combo</property>
+        <layout>
+          <property name="column">0</property>
+          <property name="row">2</property>
+        </layout>
       </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">2</property>
-      </packing>
     </child>
     <child>
       <object class="GtkComboBox" id="key_index_combo">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="hexpand">True</property>
         <property name="model">key_index_model</property>
+        <layout>
+          <property name="column">1</property>
+          <property name="row">2</property>
+        </layout>
         <child>
           <object class="GtkCellRendererText"/>
           <attributes>
@@ -153,10 +136,6 @@
           </attributes>
         </child>
       </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">2</property>
-      </packing>
     </child>
   </template>
 </interface>

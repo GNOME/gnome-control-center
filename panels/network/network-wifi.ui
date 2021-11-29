@@ -1,39 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="NetDeviceWifi" parent="GtkStack">
-    <child>
-      <object class="GtkBox" id="listbox_box">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="height-request">140</property>
-      </object>
-    </child>
+  <template class="NetDeviceWifi" parent="AdwBin">
 
-    <!-- Wi-Fi Hotspot deails -->
     <child>
-      <object class="GtkListBox" id="hotspot_box">
-        <property name="visible">True</property>
-        <property name="selection-mode">none</property>
+      <object class="GtkStack" id="stack">
+        <property name="valign">start</property>
+        <property name="vhomogeneous">False</property>
+
         <child>
-          <object class="CcListRow" id="hotspot_name_row">
-            <property name="visible">True</property>
-            <property name="title" context="Wi-Fi Hotspot" translatable="yes">Network Name</property>
+          <object class="GtkStackPage">
+            <property name="child">
+              <object class="GtkBox" id="listbox_box">
+                <property name="orientation">vertical</property>
+                <property name="height-request">140</property>
+              </object>
+            </property>
           </object>
         </child>
+
+        <!-- Wi-Fi Hotspot deails -->
         <child>
-          <object class="CcListRow" id="hotspot_security_row">
-            <property name="visible">True</property>
-            <property name="title" context="Wi-Fi Hotspot" translatable="yes">Security type</property>
+          <object class="GtkStackPage">
+            <property name="child">
+              <object class="GtkListBox" id="hotspot_box">
+                <property name="selection-mode">none</property>
+                <style>
+                  <class name="content" />
+                </style>
+                <child>
+                  <object class="CcListRow" id="hotspot_name_row">
+                    <property name="activatable">False</property>
+                    <property name="title" context="Wi-Fi Hotspot" translatable="yes">Network Name</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcListRow" id="hotspot_security_row">
+                    <property name="activatable">False</property>
+                    <property name="title" context="Wi-Fi Hotspot" translatable="yes">Security type</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcListRow" id="hotspot_password_row">
+                    <property name="activatable">False</property>
+                    <property name="title" context="Wi-Fi Hotspot" translatable="yes">Password</property>
+                  </object>
+                </child>
+              </object>
+            </property>
           </object>
         </child>
-        <child>
-          <object class="CcListRow" id="hotspot_password_row">
-            <property name="visible">True</property>
-            <property name="title" context="Wi-Fi Hotspot" translatable="yes">Password</property>
-          </object>
-        </child>
+
       </object>
     </child>
 
@@ -41,15 +58,11 @@
 
   <!-- Center widget -->
   <object class="GtkBox" id="center_box">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
     <property name="orientation">vertical</property>
     <property name="halign">center</property>
     <property name="valign">center</property>
     <child>
       <object class="GtkLabel" id="title_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="label" translatable="yes">Wi-Fi</property>
         <style>
           <class name="title" />
@@ -58,8 +71,6 @@
     </child>
     <child>
       <object class="GtkLabel" id="status_label">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <style>
           <class name="subtitle" />
         </style>
@@ -69,32 +80,22 @@
 
   <!-- Box with the On/Off switch + menu button -->
   <object class="GtkBox" id="header_box">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
     <property name="spacing">6</property>
     <property name="halign">end</property>
     <child>
       <object class="GtkSwitch" id="device_off_switch">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
         <property name="valign">center</property>
         <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceWifi" swapped="yes"/>
-        <child internal-child="accessible">
-          <object class="AtkObject">
-            <property name="accessible-name" translatable="yes">Turn Wi-Fi off</property>
-          </object>
-        </child>
+        <accessibility>
+          <property name="label" translatable="yes">Turn Wi-Fi off</property>
+        </accessibility>
       </object>
     </child>
     <child>
       <object class="GtkMenuButton" id="header_button">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="popover">header_button_popover</property>
         <child>
           <object class="GtkImage">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="icon_name">view-more-symbolic</property>
           </object>
         </child>
@@ -103,44 +104,36 @@
   </object>
 
   <!-- Menu Popover -->
-  <object class="GtkPopoverMenu" id="header_button_popover">
+  <object class="GtkPopover" id="header_button_popover">
+    <style>
+      <class name="menu" />
+    </style>
     <child>
       <object class="GtkBox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="margin">12</property>
+        <property name="margin-top">12</property>
+        <property name="margin-bottom">12</property>
+        <property name="margin-start">12</property>
+        <property name="margin-end">12</property>
         <property name="spacing">6</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkModelButton" id="connect_hidden_button">
+          <object class="GtkButton" id="connect_hidden_button">
             <property name="label" translatable="yes">_Connect to Hidden Network…</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
             <property name="use_underline">True</property>
-            <property name="xalign">0.0</property>
             <signal name="clicked" handler="connect_hidden_button_clicked_cb" object="NetDeviceWifi" swapped="yes"/>
           </object>
         </child>
         <child>
-          <object class="GtkModelButton" id="start_hotspot_button">
+          <object class="GtkButton" id="start_hotspot_button">
             <property name="label" translatable="yes">_Turn On Wi-Fi Hotspot…</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
             <property name="use_underline">True</property>
-            <property name="xalign">0.0</property>
             <signal name="clicked" handler="start_hotspot_button_clicked_cb" object="NetDeviceWifi" swapped="yes"/>
           </object>
         </child>
         <child>
-          <object class="GtkModelButton">
+          <object class="GtkButton">
             <property name="label" translatable="yes">_Known Wi-Fi Networks</property>
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="receives_default">True</property>
             <property name="use_underline">True</property>
-            <property name="xalign">0.0</property>
             <signal name="clicked" handler="history_button_clicked_cb" object="NetDeviceWifi" swapped="yes"/>
           </object>
         </child>

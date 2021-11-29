@@ -54,7 +54,7 @@ show_toggled_cb (EAPMethodSimple *self)
 {
 	gboolean visible;
 
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
+	visible = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->show_password_check));
 	gtk_entry_set_visibility (self->password_entry, visible);
 }
 
@@ -72,7 +72,7 @@ validate (EAPMethod *method, GError **error)
 	const char *text;
 	gboolean ret = TRUE;
 
-	text = gtk_entry_get_text (self->username_entry);
+	text = gtk_editable_get_text (GTK_EDITABLE (self->username_entry));
 	if (!text || !strlen (text)) {
 		widget_set_error (GTK_WIDGET (self->username_entry));
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing EAP username"));
@@ -84,7 +84,7 @@ validate (EAPMethod *method, GError **error)
 	if (always_ask_selected (self->password_entry))
 		widget_unset_error (GTK_WIDGET (self->password_entry));
 	else {
-		text = gtk_entry_get_text (self->password_entry);
+		text = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 		if (!text || !strlen (text)) {
 			widget_set_error (GTK_WIDGET (self->password_entry));
 			if (ret) {
@@ -139,7 +139,7 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	} else
 		nm_setting_802_1x_add_eap_method (s_8021x, self->name);
 
-	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (self->username_entry), NULL);
+	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_editable_get_text (GTK_EDITABLE (self->username_entry)), NULL);
 
 	/* Save the password always ask setting */
 	not_saved = always_ask_selected (self->password_entry);
@@ -152,7 +152,7 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	 * user checked "Always Ask".
 	 */
 	if (not_saved == FALSE)
-		g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_entry_get_text (self->password_entry), NULL);
+		g_object_set (s_8021x, NM_SETTING_802_1X_PASSWORD, gtk_editable_get_text (GTK_EDITABLE (self->password_entry)), NULL);
 
 	/* Update secret flags and popup when editing the connection */
 	nma_utils_update_password_storage (GTK_WIDGET (self->password_entry), flags,
@@ -193,42 +193,42 @@ static const gchar *
 get_username (EAPMethod *method)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	return gtk_entry_get_text (self->username_entry);
+	return gtk_editable_get_text (GTK_EDITABLE (self->username_entry));
 }
 
 static void
 set_username (EAPMethod *method, const gchar *username)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	gtk_entry_set_text (self->username_entry, username);
+	gtk_editable_set_text (GTK_EDITABLE (self->username_entry), username);
 }
 
 static const gchar *
 get_password (EAPMethod *method)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	return gtk_entry_get_text (self->password_entry);
+	return gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 }
 
 static void
 set_password (EAPMethod *method, const gchar *password)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	gtk_entry_set_text (self->password_entry, password);
+	gtk_editable_set_text (GTK_EDITABLE (self->password_entry), password);
 }
 
 static gboolean
 get_show_password (EAPMethod *method)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	return gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
+	return gtk_check_button_get_active (GTK_CHECK_BUTTON (self->show_password_check));
 }
 
 static void
 set_show_password (EAPMethod *method, gboolean show_password)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->show_password_check), show_password);
+	gtk_check_button_set_active (GTK_CHECK_BUTTON (self->show_password_check), show_password);
 }
 
 static gboolean
@@ -249,7 +249,7 @@ password_storage_changed (EAPMethodSimple *self)
 	if (always_ask) {
 		/* we always clear this button and do not restore it
 		 * (because we want to hide the password). */
-		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->show_password_check), FALSE);
+		gtk_check_button_set_active (GTK_CHECK_BUTTON (self->show_password_check), FALSE);
 	}
 
 	gtk_widget_set_sensitive (GTK_WIDGET (self->show_password_check), !always_ask);

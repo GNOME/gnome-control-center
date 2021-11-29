@@ -27,21 +27,22 @@
 #include "helpers.h"
 #include "nma-ui-utils.h"
 #include "ui-helpers.h"
+#include "ws-file-chooser-button.h"
 
 struct _EAPMethodTLS {
 	GtkGrid parent;
 
-	GtkFileChooserButton *ca_cert_button;
+	WsFileChooserButton  *ca_cert_button;
 	GtkLabel             *ca_cert_label;
 	GtkCheckButton       *ca_cert_not_required_check;
 	GtkEntry             *identity_entry;
 	GtkLabel             *identity_label;
-	GtkFileChooserButton *private_key_button;
+	WsFileChooserButton  *private_key_button;
 	GtkLabel             *private_key_label;
 	GtkEntry             *private_key_password_entry;
 	GtkLabel             *private_key_password_label;
 	GtkCheckButton       *show_password_check;
-	GtkFileChooserButton *user_cert_button;
+	WsFileChooserButton  *user_cert_button;
 	GtkLabel             *user_cert_label;
 
 	gchar *username;
@@ -70,7 +71,7 @@ show_toggled_cb (EAPMethodTLS *self)
 {
 	gboolean visible;
 
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_password_check));
+	visible = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->show_password_check));
 	gtk_entry_set_visibility (self->private_key_password_entry, visible);
 }
 
@@ -86,7 +87,7 @@ validate (EAPMethod *method, GError **error)
 	g_autoptr(GError) user_cert_error = NULL;
 	gboolean ret = TRUE;
 
-	identity = gtk_entry_get_text (self->identity_entry);
+	identity = gtk_editable_get_text (GTK_EDITABLE (self->identity_entry));
 	if (!identity || !strlen (identity)) {
 		widget_set_error (GTK_WIDGET (self->identity_entry));
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing EAP-TLS identity"));
@@ -95,18 +96,18 @@ validate (EAPMethod *method, GError **error)
 		widget_unset_error (GTK_WIDGET (self->identity_entry));
 	}
 
-	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (self->ca_cert_button),
+	if (!eap_method_validate_filepicker (ws_file_chooser_button_get_filechooser (self->ca_cert_button),
 	                                     TYPE_CA_CERT, NULL, NULL, &ca_cert_error)) {
 		widget_set_error (GTK_WIDGET (self->ca_cert_button));
 		if (ret) {
 			g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: %s"), ca_cert_error->message);
 			ret = FALSE;
 		}
-	} else if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check))) {
-		g_autofree gchar *filename = NULL;
+	} else if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (self->ca_cert_not_required_check))) {
+		g_autoptr(GFile) file = NULL;
 
-		filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
-		if (filename == NULL) {
+		file = ws_file_chooser_button_get_file (self->ca_cert_button);
+		if (file == NULL) {
 			widget_set_error (GTK_WIDGET (self->ca_cert_button));
 			if (ret) {
 				g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS CA certificate: no certificate specified"));
@@ -115,12 +116,12 @@ validate (EAPMethod *method, GError **error)
 		}
 	}
 
-	password = gtk_entry_get_text (self->private_key_password_entry);
+	password = gtk_editable_get_text (GTK_EDITABLE (self->private_key_password_entry));
 	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->private_key_password_entry));
 	if (secret_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED)
 		password = NULL;
 
-	if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (self->private_key_button),
+	if (!eap_method_validate_filepicker (ws_file_chooser_button_get_filechooser (self->private_key_button),
 	                                     TYPE_PRIVATE_KEY,
 	                                     password,
 	                                     &format,
@@ -133,7 +134,7 @@ validate (EAPMethod *method, GError **error)
 	}
 
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
-		if (!eap_method_validate_filepicker (GTK_FILE_CHOOSER (self->user_cert_button),
+		if (!eap_method_validate_filepicker (ws_file_chooser_button_get_filechooser (self->user_cert_button),
 		                                     TYPE_CLIENT_CERT, NULL, NULL, &user_cert_error)) {
 			if (ret) {
 				g_set_error (error, NMA_ERROR, NMA_ERROR_GENERIC, _("invalid EAP-TLS user-certificate: %s"), user_cert_error->message);
@@ -149,8 +150,8 @@ validate (EAPMethod *method, GError **error)
 static void
 ca_cert_not_required_toggled (EAPMethodTLS *self)
 {
-	eap_method_ca_cert_not_required_toggled (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check),
-	                                         GTK_FILE_CHOOSER (self->ca_cert_button));
+	eap_method_ca_cert_not_required_toggled (self->ca_cert_not_required_check,
+	                                         ws_file_chooser_button_get_filechooser (self->ca_cert_button));
 	eap_method_emit_changed (EAP_METHOD (self));
 }
 
@@ -175,7 +176,9 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	NMSetting8021x *s_8021x;
 	NMSettingSecretFlags secret_flags;
 	g_autofree gchar *ca_filename = NULL;
+	g_autoptr(GFile) ca_file = NULL;
 	g_autofree gchar *pk_filename = NULL;
+	g_autoptr(GFile) pk_file = NULL;
 	const char *password = NULL;
 	gboolean ca_cert_error = FALSE;
 	g_autoptr(GError) error = NULL;
@@ -186,16 +189,17 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 
 	nm_setting_802_1x_add_eap_method (s_8021x, "tls");
 
-	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_entry_get_text (self->identity_entry), NULL);
+	g_object_set (s_8021x, NM_SETTING_802_1X_IDENTITY, gtk_editable_get_text (GTK_EDITABLE (self->identity_entry)), NULL);
 
 	/* TLS private key */
-	password = gtk_entry_get_text (self->private_key_password_entry);
+	password = gtk_editable_get_text (GTK_EDITABLE (self->private_key_password_entry));
 	secret_flags = nma_utils_menu_to_secret_flags (GTK_WIDGET (self->private_key_password_entry));
 	if (secret_flags & NM_SETTING_SECRET_FLAG_NOT_SAVED)
 		password = NULL;
 
-	pk_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->private_key_button));
-	g_assert (pk_filename);
+	pk_file = ws_file_chooser_button_get_file (self->private_key_button);
+	g_assert (pk_file);
+	pk_filename = g_file_get_path (pk_file);
 
 	if (!nm_setting_802_1x_set_private_key (s_8021x, pk_filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
 		g_warning ("Couldn't read private key '%s': %s", pk_filename, error ? error->message : "(unknown)");
@@ -211,13 +215,15 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	/* TLS client certificate */
 	if (format != NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
 		g_autofree gchar *cc_filename = NULL;
+		g_autoptr(GFile) cc_file = NULL;
 		g_autoptr(GError) error = NULL;
 
 		/* If the key is pkcs#12 nm_setting_802_1x_set_private_key() already
 		 * set the client certificate for us.
 		 */
-		cc_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->user_cert_button));
-		g_assert (cc_filename);
+		cc_file = ws_file_chooser_button_get_file (self->private_key_button);
+		g_assert (cc_file);
+		cc_filename = g_file_get_path (cc_file);
 
 		format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 		if (!nm_setting_802_1x_set_client_cert (s_8021x, cc_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error))
@@ -225,7 +231,8 @@ fill_connection (EAPMethod *method, NMConnection *connection, NMSettingSecretFla
 	}
 
 	/* TLS CA certificate */
-	ca_filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
+	ca_file = ws_file_chooser_button_get_file (self->private_key_button);
+	ca_filename = ca_file ? g_file_get_path (ca_file) : NULL;
 
 	format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	if (!nm_setting_802_1x_set_ca_cert (s_8021x, ca_filename, NM_SETTING_802_1X_CK_SCHEME_PATH, &format, &error2)) {
@@ -242,14 +249,14 @@ private_key_picker_helper (EAPMethodTLS *self, const char *filename, gboolean ch
 	NMSetting8021xCKFormat cert_format = NM_SETTING_802_1X_CK_FORMAT_UNKNOWN;
 	const char *password;
 
-	password = gtk_entry_get_text (self->private_key_password_entry);
+	password = gtk_editable_get_text (GTK_EDITABLE (self->private_key_password_entry));
 
 	setting = (NMSetting8021x *) nm_setting_802_1x_new ();
 	nm_setting_802_1x_set_private_key (setting, filename, password, NM_SETTING_802_1X_CK_SCHEME_PATH, &cert_format, NULL);
 
 	/* With PKCS#12, the client cert must be the same as the private key */
 	if (cert_format == NM_SETTING_802_1X_CK_FORMAT_PKCS12) {
-		gtk_file_chooser_unselect_all (GTK_FILE_CHOOSER (self->user_cert_button));
+		ws_file_chooser_button_set_file (self->user_cert_button, NULL);
 		gtk_widget_set_sensitive (GTK_WIDGET (self->user_cert_button), FALSE);
 	} else if (changed)
 		gtk_widget_set_sensitive (GTK_WIDGET (self->user_cert_button), TRUE);
@@ -257,12 +264,12 @@ private_key_picker_helper (EAPMethodTLS *self, const char *filename, gboolean ch
 	/* Warn the user if the private key is unencrypted */
 	if (!eap_method_is_encrypted_private_key (filename)) {
 		GtkWidget *dialog;
-		GtkWidget *toplevel;
+		GtkNative *native;
 		GtkWindow *parent_window = NULL;
 
-		toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-		if (gtk_widget_is_toplevel (toplevel))
-			parent_window = GTK_WINDOW (toplevel);
+		native = gtk_widget_get_native (GTK_WIDGET (self));
+		if (GTK_IS_WINDOW (native))
+			parent_window = GTK_WINDOW (native);
 
 		dialog = gtk_message_dialog_new (parent_window,
 		                                 GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -273,18 +280,19 @@ private_key_picker_helper (EAPMethodTLS *self, const char *filename, gboolean ch
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 		                                          "%s",
 		                                          _("The selected private key does not appear to be protected by a password. This could allow your security credentials to be compromised. Please select a password-protected private key.\n\n(You can password-protect your private key with openssl)"));
-		gtk_dialog_run (GTK_DIALOG (dialog));
-		gtk_widget_destroy (dialog);
+		gtk_window_present (GTK_WINDOW (dialog));
 	}
 }
 
 static void
-private_key_picker_file_set_cb (GtkWidget *chooser, gpointer user_data)
+private_key_picker_file_set_cb (WsFileChooserButton *chooser, gpointer user_data)
 {
 	EAPMethodTLS *self = user_data;
+	g_autoptr(GFile) file = NULL;
 	g_autofree gchar *filename = NULL;
 
-	filename = gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (chooser));
+	file = ws_file_chooser_button_get_file (chooser);
+	filename = file ? g_file_get_path (file) : NULL;
 	if (filename)
 		private_key_picker_helper (self, filename, TRUE);
 }
@@ -309,7 +317,7 @@ changed_cb (EAPMethodTLS *self)
 
 static void
 setup_filepicker (EAPMethodTLS *self,
-                  GtkFileChooserButton *button,
+                  WsFileChooserButton *button,
                   const char *title,
                   NMSetting8021x *s_8021x,
                   SchemeFunc scheme_func,
@@ -320,14 +328,13 @@ setup_filepicker (EAPMethodTLS *self,
 	GtkFileFilter *filter;
 	const char *filename = NULL;
 
-	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (button), TRUE);
-	gtk_file_chooser_button_set_title (button, title);
-
 	if (s_8021x && path_func && scheme_func) {
 		if (scheme_func (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH) {
 			filename = path_func (s_8021x);
-			if (filename)
-				gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (button), filename);
+			if (filename) {
+				g_autoptr(GFile) file = g_file_new_for_path (filename);
+				ws_file_chooser_button_set_file (button, file);
+			}
 		}
 	}
 
@@ -335,17 +342,17 @@ setup_filepicker (EAPMethodTLS *self,
 	 * and desensitize the user cert button.
 	 */
 	if (privkey) {
-		g_signal_connect (button, "selection-changed",
-		                  (GCallback) private_key_picker_file_set_cb,
+		g_signal_connect (button, "notify::file",
+		                  G_CALLBACK (private_key_picker_file_set_cb),
 		                  self);
 		if (filename)
 			private_key_picker_helper (self, filename, FALSE);
 	}
 
-	g_signal_connect_swapped (button, "selection-changed", G_CALLBACK (changed_cb), self);
+	g_signal_connect_swapped (button, "notify::file", G_CALLBACK (changed_cb), self);
 
 	filter = eap_method_default_file_chooser_filter_new (privkey);
-	gtk_file_chooser_add_filter (GTK_FILE_CHOOSER (button), filter);
+	gtk_file_chooser_add_filter (ws_file_chooser_button_get_filechooser (button), filter);
 
 	/* For some reason, GTK+ calls set_current_filter (..., NULL) from 
 	 * gtkfilechooserdefault.c::show_and_select_files_finished_loading() on our
@@ -372,8 +379,10 @@ update_secrets (EAPMethod *method, NMConnection *connection)
 	s_8021x = nm_connection_get_setting_802_1x (connection);
 	if (s_8021x && (nm_setting_802_1x_get_private_key_scheme (s_8021x) == NM_SETTING_802_1X_CK_SCHEME_PATH)) {
 		filename = nm_setting_802_1x_get_private_key_path (s_8021x);
-		if (filename)
-			gtk_file_chooser_set_filename (GTK_FILE_CHOOSER (self->private_key_button), filename);
+		if (filename) {
+			g_autoptr(GFile) file = g_file_new_for_path (filename);
+			ws_file_chooser_button_set_file (self->private_key_button, file);
+		}
 	}
 }
 
@@ -450,6 +459,8 @@ eap_method_tls_class_init (EAPMethodTLSClass *klass)
 
 	object_class->dispose = eap_method_tls_dispose;
 
+	g_type_ensure (WS_TYPE_FILE_CHOOSER_BUTTON);
+
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-tls.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodTLS, ca_cert_button);
@@ -499,7 +510,7 @@ eap_method_tls_new (NMConnection *connection)
 
 	g_signal_connect_swapped (self->identity_entry, "changed", G_CALLBACK (changed_cb), self);
 	if (s_8021x && nm_setting_802_1x_get_identity (s_8021x))
-		gtk_entry_set_text (self->identity_entry, nm_setting_802_1x_get_identity (s_8021x));
+		gtk_editable_set_text (GTK_EDITABLE (self->identity_entry), nm_setting_802_1x_get_identity (s_8021x));
 
 	setup_filepicker (self,
 	                  self->user_cert_button,
@@ -523,9 +534,11 @@ eap_method_tls_new (NMConnection *connection)
 	                  nm_setting_802_1x_get_private_key_path,
 	                  TRUE, FALSE);
 
-	if (connection && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection))
-		ca_not_required = !gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (self->ca_cert_button));
-	gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (self->ca_cert_not_required_check), ca_not_required);
+	if (connection && eap_method_ca_cert_ignore_get (EAP_METHOD (self), connection)) {
+		g_autoptr(GFile) file = ws_file_chooser_button_get_file (self->ca_cert_button);
+		ca_not_required = !file;
+	}
+	gtk_check_button_set_active (self->ca_cert_not_required_check, ca_not_required);
 
 	/* Fill secrets, if any */
 	if (connection)

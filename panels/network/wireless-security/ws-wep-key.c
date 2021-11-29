@@ -54,7 +54,7 @@ show_toggled_cb (WirelessSecurityWEPKey *self)
 {
 	gboolean visible;
 
-	visible = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->show_key_check));
+	visible = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->show_key_check));
 	gtk_entry_set_visibility (self->key_entry, visible);
 }
 
@@ -65,7 +65,7 @@ key_index_combo_changed_cb (WirelessSecurityWEPKey *self)
 	int key_index;
 
 	/* Save WEP key for old key index */
-	key = gtk_entry_get_text (self->key_entry);
+	key = gtk_editable_get_text (GTK_EDITABLE (self->key_entry));
 	if (key)
 		g_strlcpy (self->keys[self->cur_index], key, sizeof (self->keys[self->cur_index]));
 	else
@@ -76,7 +76,7 @@ key_index_combo_changed_cb (WirelessSecurityWEPKey *self)
 	g_return_if_fail (key_index >= 0);
 
 	/* Populate entry with key from new index */
-	gtk_entry_set_text (self->key_entry, self->keys[key_index]);
+	gtk_editable_set_text (GTK_EDITABLE (self->key_entry), self->keys[key_index]);
 	self->cur_index = key_index;
 
 	wireless_security_notify_changed ((WirelessSecurity *) self);
@@ -108,7 +108,7 @@ validate (WirelessSecurity *security, GError **error)
 		return TRUE;
 	}
 
-	key = gtk_entry_get_text (self->key_entry);
+	key = gtk_editable_get_text (GTK_EDITABLE (self->key_entry));
 	if (!key) {
 		widget_set_error (GTK_WIDGET (self->key_entry));
 		g_set_error_literal (error, NMA_ERROR, NMA_ERROR_GENERIC, _("missing wep-key"));
@@ -173,7 +173,7 @@ fill_connection (WirelessSecurity *security, NMConnection *connection)
 
 	auth_alg = gtk_combo_box_get_active (self->auth_method_combo);
 
-	key = gtk_entry_get_text (self->key_entry);
+	key = gtk_editable_get_text (GTK_EDITABLE (self->key_entry));
 	g_strlcpy (self->keys[self->cur_index], key, sizeof (self->keys[self->cur_index]));
 
 	/* Blow away the old security setting by adding a clear one */
@@ -241,7 +241,7 @@ update_secrets (WirelessSecurityWEPKey *self, NMConnection *connection)
 	}
 
 	if (strlen (self->keys[self->cur_index]))
-		gtk_entry_set_text (self->key_entry, self->keys[self->cur_index]);
+		gtk_editable_set_text (GTK_EDITABLE (self->key_entry), self->keys[self->cur_index]);
 }
 
 static void
@@ -298,7 +298,7 @@ ws_wep_key_new (NMConnection *connection,
 
 	self->type = type;
 
-	gtk_entry_set_width_chars (self->key_entry, 28);
+	gtk_editable_set_width_chars (GTK_EDITABLE (self->key_entry), 28);
 
 	/* Create password-storage popup menu for password entry under entry's secondary icon */
 	if (connection)

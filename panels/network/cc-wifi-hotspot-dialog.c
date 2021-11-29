@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 
-#include "list-box-helper.h"
 #include "cc-wifi-hotspot-dialog.h"
 #include "cc-network-resources.h"
 #include "ui-helpers.h"
@@ -40,7 +39,7 @@
 
 struct _CcWifiHotspotDialog
 {
-  GtkMessageDialog parent_instance;
+  GtkDialog        parent_instance;
 
   GtkLabel        *connection_label;
   GtkEntry        *name_entry;
@@ -56,7 +55,7 @@ struct _CcWifiHotspotDialog
   gboolean         wpa_supported; /* WPA/WPA2 supported */
 };
 
-G_DEFINE_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, GTK_TYPE_MESSAGE_DIALOG)
+G_DEFINE_TYPE (CcWifiHotspotDialog, cc_wifi_hotspot_dialog, GTK_TYPE_DIALOG)
 
 static gchar *
 get_random_wpa_key (void)
@@ -173,7 +172,7 @@ get_secrets_cb (GObject            *source_object,
     key = nm_setting_wireless_security_get_wep_key (security_setting, 0);
 
   if (key)
-    gtk_entry_set_text (self->password_entry, key);
+    gtk_editable_set_text (GTK_EDITABLE (self->password_entry), key);
 
   nm_connection_clear_secrets (self->connection);
 }
@@ -187,8 +186,8 @@ wifi_hotspot_dialog_update_entries (CcWifiHotspotDialog *self)
 
   g_assert (CC_IS_WIFI_HOTSPOT_DIALOG (self));
 
-  gtk_entry_set_text (self->name_entry, "");
-  gtk_entry_set_text (self->password_entry, "");
+  gtk_editable_set_text (GTK_EDITABLE (self->name_entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (self->password_entry), "");
 
   if (!self->connection)
     return;
@@ -202,7 +201,7 @@ wifi_hotspot_dialog_update_entries (CcWifiHotspotDialog *self)
     ssid_text = g_strdup (self->host_name);
 
   if (ssid_text)
-    gtk_entry_set_text (self->name_entry, ssid_text);
+    gtk_editable_set_text (GTK_EDITABLE (self->name_entry), ssid_text);
 
   if (!NM_IS_REMOTE_CONNECTION (self->connection))
     return;
@@ -242,8 +241,8 @@ hotspot_entry_changed_cb (CcWifiHotspotDialog *self)
   g_assert (CC_IS_WIFI_HOTSPOT_DIALOG (self));
 
   valid_ssid = valid_password = FALSE;
-  ssid = gtk_entry_get_text (self->name_entry);
-  password = gtk_entry_get_text (self->password_entry);
+  ssid = gtk_editable_get_text (GTK_EDITABLE (self->name_entry));
+  password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
   if (ssid && *ssid)
     {
@@ -293,7 +292,7 @@ generate_password_clicked_cb (CcWifiHotspotDialog *self)
   else
     key = get_random_wep_key ();
 
-  gtk_entry_set_text (self->password_entry, key);
+  gtk_editable_set_text (GTK_EDITABLE (self->password_entry), key);
 }
 
 static void
@@ -317,7 +316,7 @@ hotspot_update_wireless_settings (CcWifiHotspotDialog *self)
   else
     g_object_set (setting, "mode", "adhoc", NULL);
 
-  ssid_text = gtk_entry_get_text (self->name_entry);
+  ssid_text = gtk_editable_get_text (GTK_EDITABLE (self->name_entry));
   ssid = g_bytes_new (ssid_text, strlen (ssid_text));
   g_object_set (setting, "ssid", ssid, NULL);
 }
@@ -337,7 +336,7 @@ hotspot_update_wireless_security_settings (CcWifiHotspotDialog *self)
   nm_setting_wireless_security_clear_protos (setting);
   nm_setting_wireless_security_clear_pairwise (setting);
   nm_setting_wireless_security_clear_groups (setting);
-  value = gtk_entry_get_text (self->password_entry);
+  value = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
   if (self->wpa_supported)
     key_type = "psk";
@@ -412,7 +411,7 @@ cc_wifi_hotspot_dialog_show (GtkWidget *widget)
 
   if (!self->connection)
     if (self->host_name)
-      gtk_entry_set_text (self->name_entry, self->host_name);
+      gtk_editable_set_text (GTK_EDITABLE (self->name_entry), self->host_name);
 
   GTK_WIDGET_CLASS (cc_wifi_hotspot_dialog_parent_class)->show (widget);
 }
@@ -480,14 +479,9 @@ cc_wifi_hotspot_dialog_class_init (CcWifiHotspotDialogClass *klass)
 static void
 cc_wifi_hotspot_dialog_init (CcWifiHotspotDialog *self)
 {
-  g_autofree gchar *title = NULL;
-
   self->cancellable = g_cancellable_new ();
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  title = g_strdup_printf ("<big><b>%s</b></big>", _("Turn On Wi-Fi Hotspot?"));
-  gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (self), title);
 }
 
 CcWifiHotspotDialog *
@@ -496,8 +490,8 @@ cc_wifi_hotspot_dialog_new (GtkWindow *parent_window)
   g_return_val_if_fail (GTK_IS_WINDOW (parent_window), NULL);
 
   return g_object_new (CC_TYPE_WIFI_HOTSPOT_DIALOG,
+                       "use-header-bar", TRUE,
                        "transient-for", parent_window,
-                       "message-type", GTK_MESSAGE_OTHER,
                        NULL);
 }
 

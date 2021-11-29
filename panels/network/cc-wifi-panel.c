@@ -355,12 +355,17 @@ wifi_panel_update_qr_image_cb (CcWifiPanel *self)
       str = get_qr_string_for_hotspot (self->client, hotspot);
       if (cc_qr_code_set_text (self->qr_code, str))
         {
+          g_autoptr(GdkPixbuf) pixbuf = NULL;
           cairo_surface_t *surface;
           gint scale;
 
           scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->wifi_qr_image));
           surface = cc_qr_code_get_surface (self->qr_code, QR_IMAGE_SIZE, scale);
-          gtk_image_set_from_surface (self->wifi_qr_image, surface);
+          pixbuf = gdk_pixbuf_get_from_surface (surface,
+                                                0, 0,
+                                                QR_IMAGE_SIZE,
+                                                QR_IMAGE_SIZE);
+          gtk_image_set_from_pixbuf (self->wifi_qr_image, pixbuf);
         }
     }
 
@@ -426,10 +431,10 @@ remove_wifi_device (CcWifiPanel *self,
 
   /* Destroy all stack pages related to this device */
   child = gtk_stack_get_child_by_name (self->stack, id);
-  gtk_widget_destroy (child);
+  gtk_stack_remove (self->stack, child);
 
   child = gtk_stack_get_child_by_name (self->header_stack, id);
-  gtk_widget_destroy (child);
+  gtk_stack_remove (self->header_stack, child);
 
   /* Update the title widget */
   update_devices_names (self);
@@ -565,7 +570,7 @@ update_devices_names (CcWifiPanel *self)
       if (single_page_widget)
         {
           g_object_ref (single_page_widget);
-          gtk_container_remove (GTK_CONTAINER (self->center_stack), single_page_widget);
+          gtk_stack_remove (self->center_stack, single_page_widget);
           g_object_unref (single_page_widget);
         }
 
@@ -840,7 +845,7 @@ on_stack_visible_child_changed_cb (GtkStack    *stack,
           self->spinner_binding = g_object_bind_property (net_device,
                                                           "scanning",
                                                           self->spinner,
-                                                          "active",
+                                                          "spinning",
                                                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
           break;
         }
@@ -848,16 +853,31 @@ on_stack_visible_child_changed_cb (GtkStack    *stack,
 }
 
 static void
+on_stop_hotspot_dialog_response_cb (GtkDialog   *dialog,
+                                    gint         response,
+                                    CcWifiPanel *self)
+{
+  if (response == GTK_RESPONSE_OK)
+    {
+      NetDeviceWifi *child;
+
+      child = NET_DEVICE_WIFI (gtk_stack_get_visible_child (self->stack));
+      net_device_wifi_turn_off_hotspot (child);
+    }
+
+  gtk_window_destroy (GTK_WINDOW (dialog));
+}
+
+static void
 hotspot_stop_clicked_cb (CcWifiPanel *self)
 {
   GtkWidget *dialog;
-  GtkWidget *window;
-  int response;
+  GtkNative *native;
 
   g_assert (CC_IS_WIFI_PANEL (self));
 
-  window = gtk_widget_get_toplevel (GTK_WIDGET (self));
-  dialog = gtk_message_dialog_new (GTK_WINDOW (window),
+  native = gtk_widget_get_native (GTK_WIDGET (self));
+  dialog = gtk_message_dialog_new (GTK_WINDOW (native),
                                    GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
                                    GTK_MESSAGE_OTHER,
                                    GTK_BUTTONS_NONE,
@@ -867,17 +887,9 @@ hotspot_stop_clicked_cb (CcWifiPanel *self)
                           _("_Stop Hotspot"), GTK_RESPONSE_OK,
                           NULL);
 
-  response = gtk_dialog_run (GTK_DIALOG (dialog));
+  g_signal_connect (dialog, "response", G_CALLBACK (on_stop_hotspot_dialog_response_cb), self);
+  gtk_window_present (GTK_WINDOW (dialog));
 
-  if (response == GTK_RESPONSE_OK)
-    {
-      NetDeviceWifi *child;
-
-      child = NET_DEVICE_WIFI (gtk_stack_get_visible_child (self->stack));
-      net_device_wifi_turn_off_hotspot (child);
-    }
-
-  gtk_widget_destroy (dialog);
 }
 
 /* Overrides */

@@ -72,8 +72,8 @@ mtu_output_cb (CEPageEthernet *self)
         else
                 buf = g_strdup_printf ("%d", val);
 
-        if (strcmp (buf, gtk_entry_get_text (GTK_ENTRY (self->mtu_spin))))
-                gtk_entry_set_text (GTK_ENTRY (self->mtu_spin), buf);
+        if (strcmp (buf, gtk_editable_get_text (GTK_EDITABLE (self->mtu_spin))))
+                gtk_editable_set_text (GTK_EDITABLE (self->mtu_spin), buf);
 }
 
 static void
@@ -86,7 +86,7 @@ connect_ethernet_page (CEPageEthernet *self)
         const gchar *cloned_mac;
 
         name = nm_setting_connection_get_id (self->setting_connection);
-        gtk_entry_set_text (self->name_entry, name);
+        gtk_editable_set_text (GTK_EDITABLE (self->name_entry), name);
 
         /* Device MAC address */
         mac_list = ce_page_get_mac_list (self->client, NM_TYPE_DEVICE_ETHERNET,
@@ -119,9 +119,9 @@ ui_to_setting (CEPageEthernet *self)
         const gchar *text;
         GtkWidget *entry;
 
-        entry = gtk_bin_get_child (GTK_BIN (self->mac_combo));
+        entry = gtk_combo_box_get_child (GTK_COMBO_BOX (self->mac_combo));
         if (entry) {
-                text = gtk_entry_get_text (GTK_ENTRY (entry));
+                text = gtk_editable_get_text (GTK_EDITABLE (entry));
                 device_mac = ce_page_trim_address (text);
         }
 
@@ -134,7 +134,7 @@ ui_to_setting (CEPageEthernet *self)
                       NULL);
 
         g_object_set (self->setting_connection,
-                      NM_SETTING_CONNECTION_ID, gtk_entry_get_text (self->name_entry),
+                      NM_SETTING_CONNECTION_ID, gtk_editable_get_text (GTK_EDITABLE (self->name_entry)),
                       NULL);
 }
 
@@ -153,9 +153,9 @@ ce_page_ethernet_validate (CEPage        *page,
         GtkWidget *entry;
         gboolean ret = TRUE;
 
-        entry = gtk_bin_get_child (GTK_BIN (self->mac_combo));
+        entry = gtk_combo_box_get_child (GTK_COMBO_BOX (self->mac_combo));
         if (entry) {
-                if (!ce_page_address_is_valid (gtk_entry_get_text (GTK_ENTRY (entry)))) {
+                if (!ce_page_address_is_valid (gtk_editable_get_text (GTK_EDITABLE (entry)))) {
                         widget_set_error (entry);
                         ret = FALSE;
                 } else {
@@ -164,10 +164,10 @@ ce_page_ethernet_validate (CEPage        *page,
         }
 
         if (!ce_page_cloned_mac_combo_valid (self->cloned_mac_combo)) {
-                widget_set_error (gtk_bin_get_child (GTK_BIN (self->cloned_mac_combo)));
+                widget_set_error (gtk_combo_box_get_child (GTK_COMBO_BOX (self->cloned_mac_combo)));
                 ret = FALSE;
         } else {
-                widget_unset_error (gtk_bin_get_child (GTK_BIN (self->cloned_mac_combo)));
+                widget_unset_error (gtk_combo_box_get_child (GTK_COMBO_BOX (self->cloned_mac_combo)));
         }
 
         if (!ret)

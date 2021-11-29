@@ -83,7 +83,7 @@ ce_ip_address_entry_is_empty (CEIPAddressEntry *self)
 
   g_return_val_if_fail (CE_IS_IP_ADDRESS_ENTRY (self), FALSE);
 
-  text = gtk_entry_get_text (GTK_ENTRY (self));
+  text = gtk_editable_get_text (GTK_EDITABLE (self));
   return text[0] == '\0';
 }
 
@@ -94,6 +94,6 @@ ce_ip_address_entry_is_valid (CEIPAddressEntry *self)
 
   g_return_val_if_fail (CE_IS_IP_ADDRESS_ENTRY (self), FALSE);
 
-  text = gtk_entry_get_text (GTK_ENTRY (self));
+  text = gtk_editable_get_text (GTK_EDITABLE (self));
   return text[0] == '\0' || nm_utils_ipaddr_valid (self->family, text);
 }
