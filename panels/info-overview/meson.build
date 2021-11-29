@@ -27,6 +27,14 @@ sources = files(
   'info-cleanup.c'
 )
 
+sources += gnome.gdbus_codegen(
+  'cc-ua-daemon-generated',
+  'com.canonical.UbuntuAdvantage.xml',
+  interface_prefix: 'com.canonical.UbuntuAdvantage.',
+  namespace: 'CcUaDaemon',
+  object_manager: true
+)
+
 resource_data = files(
   'cc-info-overview-panel.ui'
 )

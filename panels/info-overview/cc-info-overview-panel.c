@@ -25,6 +25,7 @@
 #include "cc-hostname-entry.h"
 
 #include "cc-info-overview-resources.h"
+#include "cc-ua-daemon-generated.h"
 #include "info-cleanup.h"
 
 #include <glib.h>
@@ -59,6 +60,7 @@ struct _CcInfoOverviewPanel
   GtkEntry        *device_name_entry;
   GtkWidget       *rename_button;
   CcListRow       *disk_row;
+  GtkLabel        *esm_label;
   CcListRow       *gnome_version_row;
   CcListRow       *graphics_row;
   GtkListBox      *hardware_box;
@@ -75,6 +77,11 @@ struct _CcInfoOverviewPanel
   CcListRow       *software_updates_row;
   CcListRow       *virtualization_row;
   CcListRow       *windowing_system_row;
+
+  GCancellable       *cancellable;
+  GDBusObjectManager *ua_object_manager;
+  CcUaDaemonManager  *manager; // FIXME: Not required?
+  CcUaDaemonService  *esm_infra_service;
 };
 
 typedef struct
@@ -922,15 +929,111 @@ setup_os_logo (CcInfoOverviewPanel *panel)
   gtk_image_set_from_gicon (panel->os_logo, icon, GTK_ICON_SIZE_INVALID);
 }
 
+static void update_ubuntu_pro_status (CcInfoOverviewPanel *self)
+{
+  gboolean esm_infra_enabled = self->esm_infra_service != NULL && g_strcmp0 (cc_ua_daemon_service_get_status (self->esm_infra_service), "enabled") == 0;
+
+  gtk_widget_set_visible (GTK_WIDGET (self->esm_label), esm_infra_enabled);
+}
+
+static void ua_daemon_object_added_cb (CcInfoOverviewPanel *self, GDBusObject *object)
+{
+  g_autoptr(CcUaDaemonManager) manager = NULL;
+  g_autoptr(CcUaDaemonService) service = NULL;
+
+  manager = cc_ua_daemon_object_get_manager (CC_UA_DAEMON_OBJECT (object));
+  if (manager != NULL) {
+    g_clear_object (&self->manager);
+    self->manager = g_steal_pointer(&manager);
+    g_signal_connect_swapped(self->manager, "notify::attached", G_CALLBACK(update_ubuntu_pro_status), self);
+  }
+
+  service = cc_ua_daemon_object_get_service (CC_UA_DAEMON_OBJECT (object));
+  if (service != NULL) {
+    const char *name = cc_ua_daemon_service_get_name(service);
+    if (strcmp (name, "esm-infra") == 0) {
+      g_clear_object (&self->esm_infra_service);
+      self->esm_infra_service = g_steal_pointer(&service);
+    }
+  }
+
+  update_ubuntu_pro_status (self);
+}
+
+static void ua_daemon_object_removed_cb (CcInfoOverviewPanel *self, GDBusObject *object)
+{
+  const gchar *object_path = g_dbus_object_get_object_path (object);
+  if (self->manager != NULL && strcmp (g_dbus_proxy_get_object_path(G_DBUS_PROXY(self->manager)), object_path) == 0) {
+    g_clear_object (&self->manager);
+  }
+  if (self->esm_infra_service != NULL && strcmp (g_dbus_proxy_get_object_path(G_DBUS_PROXY(self->esm_infra_service)), object_path) == 0) {
+    g_clear_object (&self->esm_infra_service);
+  }
+
+  update_ubuntu_pro_status (self);
+}
+
+static void ua_daemon_cb (GObject *object, GAsyncResult *result, gpointer user_data)
+{
+  CcInfoOverviewPanel *self = user_data;
+  g_autoptr(GList) objects = NULL;
+  g_autoptr(GError) error = NULL;
+
+  self->ua_object_manager = cc_ua_daemon_object_manager_client_new_for_bus_finish (result, &error);
+  if (self->ua_object_manager == NULL) {
+    g_warning ("Failed to connect to UA daemon: %s", error->message);
+    return;
+  }
+
+  g_signal_connect_swapped (self->ua_object_manager, "object-added", G_CALLBACK (ua_daemon_object_added_cb), self);
+  g_signal_connect_swapped (self->ua_object_manager, "object-removed", G_CALLBACK (ua_daemon_object_removed_cb), self);
+  objects = g_dbus_object_manager_get_objects (self->ua_object_manager);
+  for (GList *link = objects; link != NULL; link = link->next) {
+    GDBusObject *object = link->data;
+    ua_daemon_object_added_cb (self, object);
+  }
+}
+
+static void setup_ua_daemon (CcInfoOverviewPanel *self)
+{
+  cc_ua_daemon_object_manager_client_new_for_bus(G_BUS_TYPE_SYSTEM,
+                                                 G_DBUS_OBJECT_MANAGER_CLIENT_FLAGS_NONE,
+                                                 "com.canonical.UbuntuAdvantage",
+                                                 "/",
+                                                 self->cancellable,
+                                                 ua_daemon_cb,
+                                                 self);
+  update_ubuntu_pro_status (self);
+}
+
+static void
+cc_info_overview_panel_dispose (GObject *object)
+{
+  CcInfoOverviewPanel *self = CC_INFO_OVERVIEW_PANEL (object);
+
+  g_cancellable_cancel (self->cancellable);
+
+  g_clear_object (&self->cancellable);
+  g_clear_object (&self->ua_object_manager);
+  g_clear_object (&self->manager);
+  g_clear_object (&self->esm_infra_service);
+
+  G_OBJECT_CLASS (cc_info_overview_panel_parent_class)->dispose (object);
+}
+
 static void
 cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->dispose = cc_info_overview_panel_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, device_name_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, esm_label);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_box);
@@ -963,6 +1066,8 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 
   g_resources_register (cc_info_overview_get_resource ());
 
+  self->cancellable = g_cancellable_new ();
+
   if ((!does_gnome_software_exist () || !does_gnome_software_allow_updates ()) && !does_gpk_update_viewer_exist ())
     gtk_widget_hide (GTK_WIDGET (self->software_updates_row));
 
@@ -970,6 +1075,8 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
   info_overview_panel_setup_virt (self);
 
   setup_os_logo (self);
+
+  setup_ua_daemon (self);
 }
 
 GtkWidget *
