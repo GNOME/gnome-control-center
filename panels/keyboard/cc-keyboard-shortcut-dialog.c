@@ -235,7 +235,7 @@ remove_item (CcKeyboardShortcutDialog *self,
 
       row_data = g_object_get_data (G_OBJECT (child), "data");
 
-      if (row_data->item == item)
+      if (row_data && row_data->item == item)
         {
           if (strcmp (row_data->section_id, "custom") == 0)
             {
@@ -410,6 +410,9 @@ reset_shortcut (CcKeyboardShortcutDialog *self,
                 GtkWidget                *row)
 {
   ShortcutRowData *data;
+
+  if (row == GTK_WIDGET (self->custom_shortcut_add_row))
+    return;
 
   data = g_object_get_data (G_OBJECT (row), "data");
 
