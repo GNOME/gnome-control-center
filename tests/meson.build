@@ -8,3 +8,4 @@ subdir('interactive-panels')
 
 subdir('printers')
 subdir('info')
+subdir('keyboard')

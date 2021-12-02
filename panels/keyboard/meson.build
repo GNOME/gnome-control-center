@@ -94,12 +94,13 @@ if enable_ibus
   deps += ibus_dep
 endif
 
-panels_libs += static_library(
+keyboard_panel_lib = static_library(
   cappletname,
   sources: sources,
   include_directories: [top_inc, common_inc],
   dependencies: deps,
   c_args: cflags
 )
+panels_libs += keyboard_panel_lib
 
 subdir('icons')

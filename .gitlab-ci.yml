@@ -222,6 +222,7 @@ test:
     - build
 
   script:
+    - dnf -y install setxkbmap
     - *environment_information
     - *run_tests
 
