@@ -746,7 +746,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   get_hardware_model (self);
 
   glibtop_get_mem (&mem);
-  memory_text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
+  memory_text = g_format_size (mem.total);
   cc_list_row_set_secondary_label (self->memory_row, memory_text);
 
   info = glibtop_get_sysinfo ();
