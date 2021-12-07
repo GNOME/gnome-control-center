@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcFirmwareSecurityBootDialog" parent="GtkDialog">
+    <property name="use-header-bar">True</property>
+    <property name="default-width">400</property>
+    <property name="modal">True</property>
+    <child internal-child="headerbar">
+      <object class="GtkHeaderBar">
+        <property name="show_title_buttons">True</property>
+        <child type="title">
+          <object class="AdwBin" />
+        </child>
+        <style>
+          <class name="flat" />
+        </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="margin-start">32</property>
+        <property name="margin-end">32</property>
+        <property name="margin-bottom">32</property>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">16</property>
+            <child>
+              <object class="GtkImage" id="secure_boot_icon">
+                <property name="pixel-size">32</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="icon-name">system-reboot-symbolic</property>
+                <style>
+                  <class name="security-level-icon"/>
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel" id="secure_boot_title">
+                <property name="wrap">True</property>
+                <style>
+                  <class name="title-2" />
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="wrap">True</property>
+                <property name="width-chars">40</property>
+                <property name="max-width-chars">40</property>
+                <property name="justify">left</property>
+                <property name="label" translatable="yes">Secure boot prevents malicious software from being loaded when the device starts.
+
+For more information, contact the hardware manufacturer or IT support.</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </template>
+</interface>

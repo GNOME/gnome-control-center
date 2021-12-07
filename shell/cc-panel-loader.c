@@ -69,6 +69,7 @@ extern GType cc_wacom_panel_get_type (void);
 extern GType cc_wwan_panel_get_type (void);
 #endif /* BUILD_WWAN */
 extern GType cc_location_panel_get_type (void);
+extern GType cc_firmware_security_panel_get_type (void);
 extern GType cc_camera_panel_get_type (void);
 extern GType cc_microphone_panel_get_type (void);
 extern GType cc_usage_panel_get_type (void);
@@ -111,6 +112,7 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("info-overview",    cc_info_overview_panel_get_type,        NULL),
   PANEL_TYPE("keyboard",         cc_keyboard_panel_get_type,             NULL),
   PANEL_TYPE("location",         cc_location_panel_get_type,             NULL),
+  PANEL_TYPE("firmware-security",cc_firmware_security_panel_get_type,    NULL),
   PANEL_TYPE("lock",             cc_lock_panel_get_type,                 NULL),
   PANEL_TYPE("microphone",       cc_microphone_panel_get_type,           NULL),
   PANEL_TYPE("mouse",            cc_mouse_panel_get_type,                NULL),

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcFirmwareSecurityDialog" parent="AdwWindow">
+    <property name="default-width">500</property>
+    <property name="default-height">550</property>
+    <property name="modal">True</property>
+    <child>
+      <object class="AdwLeaflet" id="leaflet">
+        <property name="can-unfold">False</property>
+        <child>
+          <object class="AdwLeafletPage">
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+
+                <child>
+                  <object class="GtkHeaderBar">
+                    <property name="valign">start</property>
+                    <property name="show-title-buttons">True</property>
+                    <property name="title-widget">
+                      <object class="AdwWindowTitle">
+                        <property name="title" translatable="yes">Security Level</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwPreferencesPage">
+                    <property name="vexpand">True</property>
+
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="GtkImage" id="firmware_security_dialog_icon">
+                            <property name="margin-start">16</property>
+                            <property name="margin-end">16</property>
+                            <property name="margin-top">16</property>
+                            <property name="pixel-size">32</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="icon-name">security-high-symbolic</property>
+                            <style>
+                              <class name="security-level-icon"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="GtkLabel" id="firmware_security_dialog_title_label">
+                            <style>
+                              <class name="title-2" />
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="GtkLabel" id="firmware_security_dialog_body_label">
+                            <property name="wrap">True</property>
+                            <property name="justify">center</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="AdwActionRow" id="firmware_security_dialog_min_row">
+                            <property name="use-underline">True</property>
+                            <property name="activatable">True</property>
+                            <property name="title" translatable="yes">Minimal Protection</property>
+                            <property name="icon-name">emblem-default-symbolic</property>
+                            <signal name="activated" handler="on_hsi_clicked_cb" swapped="no" />
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">go-next-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="firmware_security_dialog_basic_row">
+                            <property name="use-underline">True</property>
+                            <property name="activatable">True</property>
+                            <property name="title" translatable="yes">Basic Protection</property>
+                            <property name="icon-name">emblem-default-symbolic</property>
+                            <signal name="activated" handler="on_hsi_clicked_cb" swapped="no" />
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">go-next-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="AdwActionRow" id="firmware_security_dialog_extend_row">
+                            <property name="use-underline">True</property>
+                            <property name="activatable">True</property>
+                            <property name="title" translatable="yes">Extended Protection</property>
+                            <property name="icon-name">emblem-default-symbolic</property>
+                            <signal name="activated" handler="on_hsi_clicked_cb" swapped="no" />
+                            <child>
+                              <object class="GtkImage">
+                                <property name="icon-name">go-next-symbolic</property>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="GtkLabel" id="firmware_security_dialog_hsi_label">
+                            <property name="label">Device conform text</property>
+                            <style>
+                              <class name="dim-label" />
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwLeafletPage">
+            <property name="child">
+              <object class="GtkBox">
+                <property name="orientation">vertical</property>
+
+                <child>
+                  <object class="GtkHeaderBar">
+                    <property name="valign">start</property>
+                    <property name="show-title-buttons">True</property>
+                    <property name="title-widget">
+                      <object class="AdwWindowTitle" id="second_page_title" />
+                    </property>
+                    <child>
+                      <object class="GtkButton">
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="icon-name">go-previous-symbolic</property>
+                        <signal name="clicked" handler="on_fw_back_button_clicked_cb" swapped="no" />
+                        <style>
+                          <class name="image-button" />
+                        </style>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwPreferencesPage">
+                    <child>
+                      <object class="AdwPreferencesGroup" id="firmware_security_dialog_hsi1_pg">
+                        <property name="visible">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup" id="firmware_security_dialog_hsi2_pg">
+                        <property name="visible">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="AdwPreferencesGroup" id="firmware_security_dialog_hsi3_pg">
+                        <property name="visible">False</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+              </object>
+            </property>
+          </object>
+        </child>
+
+      </object>
+    </child>
+  </template>
+</interface>

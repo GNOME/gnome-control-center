@@ -9,6 +9,7 @@ panels = [
   'default-apps',
   'diagnostics',
   'display',
+  'firmware-security',
   'info-overview',
   'keyboard',
   'location',
