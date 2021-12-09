@@ -125,22 +125,18 @@ ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GErro
 		valid = wireless_security_validate (WIRELESS_SECURITY (self->security), error);
 		if (valid) {
 			g_autoptr(NMConnection) tmp_connection = NULL;
-			NMSetting *s_con;
 
 			/* Here's a nice hack to work around the fact that ws_802_1x_fill_connection needs wireless setting. */
-			tmp_connection = nm_simple_connection_new ();
+			tmp_connection = nm_simple_connection_new_clone (connection);
 			nm_connection_add_setting (tmp_connection, nm_setting_wireless_new ());
-
-			/* temp connection needs a 'connection' setting too, since most of
-			 * the EAP methods need the UUID for CA cert ignore stuff.
-			 */
-			s_con = nm_connection_get_setting (connection, NM_TYPE_SETTING_CONNECTION);
-			nm_connection_add_setting (tmp_connection, nm_setting_duplicate (s_con));
 
 			ws_wpa_eap_fill_connection (self->security, tmp_connection);
 
+			/* NOTE: It is important we create a copy of the settings, as the
+			 * secrets might be cleared otherwise.
+			 */
 			s_8021x = nm_connection_get_setting (tmp_connection, NM_TYPE_SETTING_802_1X);
-			nm_connection_add_setting (connection, NM_SETTING (g_object_ref (s_8021x)));
+			nm_connection_add_setting (connection, nm_setting_duplicate (NM_SETTING (s_8021x)));
 		}
 	} else {
 		nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
