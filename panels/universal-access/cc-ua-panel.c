@@ -71,7 +71,6 @@
 /* wm settings */
 #define WM_SETTINGS                  "org.gnome.desktop.wm.preferences"
 #define KEY_VISUAL_BELL_ENABLED      "visual-bell"
-#define KEY_WM_THEME                 "theme"
 
 /* keyboard settings */
 #define KEYBOARD_SETTINGS            "org.gnome.desktop.a11y.keyboard"
@@ -311,15 +310,11 @@ set_contrast_mapping (const GValue       *value,
     {
       g_settings_set_string (self->interface_settings, KEY_GTK_THEME, HIGH_CONTRAST_THEME);
       g_settings_set_string (self->interface_settings, KEY_ICON_THEME, HIGH_CONTRAST_THEME);
-
-      g_settings_set_string (self->wm_settings, KEY_WM_THEME, HIGH_CONTRAST_THEME);
     }
   else
     {
       g_settings_reset (self->interface_settings, KEY_GTK_THEME);
       g_settings_reset (self->interface_settings, KEY_ICON_THEME);
-
-      g_settings_reset (self->wm_settings, KEY_WM_THEME);
     }
 
   return g_variant_new_boolean (hc);
