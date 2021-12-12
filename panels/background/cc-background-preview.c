@@ -263,15 +263,13 @@ cc_background_preview_get_request_mode (GtkWidget *widget)
   return GTK_SIZE_REQUEST_HEIGHT_FOR_WIDTH;
 }
 
-static gfloat
-get_primary_monitor_aspect_ratio (void)
+static void
+get_primary_monitor_geometry (int *width, int *height)
 {
   GdkDisplay *display;
   GListModel *monitors;
-  gfloat aspect_ratio;
 
   display = gdk_display_get_default ();
-  aspect_ratio = 16.0 / 9.0;
 
   monitors = gdk_display_get_monitors (display);
   if (monitors)
@@ -281,10 +279,18 @@ get_primary_monitor_aspect_ratio (void)
 
       primary_monitor = g_list_model_get_item (monitors, 0);
       gdk_monitor_get_geometry (primary_monitor, &monitor_layout);
-      aspect_ratio = monitor_layout.width / (gfloat) monitor_layout.height;
+      if (width)
+        *width = monitor_layout.width;
+      if (height)
+        *height = monitor_layout.height;
+
+      return;
     }
 
-  return aspect_ratio;
+  if (width)
+    *width = 1920;
+  if (height)
+    *height = 1080;
 }
 
 static void
@@ -297,10 +303,10 @@ cc_background_preview_measure (GtkWidget      *widget,
                                gint           *natural_baseline)
 {
   CcBackgroundPreview *self = (CcBackgroundPreview *)widget;
-  gint child_min, child_nat;
-  gfloat aspect_ratio;
+  int child_min, child_nat;
+  int width, height;
 
-  aspect_ratio = get_primary_monitor_aspect_ratio ();
+  get_primary_monitor_geometry (&width, &height);
 
   gtk_widget_measure (self->overlay,
                       orientation,
@@ -309,18 +315,16 @@ cc_background_preview_measure (GtkWidget      *widget,
                       &child_nat,
                       NULL, NULL);
 
-  switch (orientation)
-    {
-    case GTK_ORIENTATION_HORIZONTAL:
-      *minimum = MAX (2, child_min * aspect_ratio);
-      *natural = MAX (2, child_nat * aspect_ratio);
-      break;
+  *minimum = child_min;
 
-    case GTK_ORIENTATION_VERTICAL:
-      *minimum = MAX (2, for_size / aspect_ratio);
-      *natural = MAX (2, for_size / aspect_ratio);
-      break;
-    }
+  if (orientation == GTK_ORIENTATION_HORIZONTAL)
+    *natural = width;
+  else if (for_size < 0)
+    *natural = height;
+  else
+    *natural = floor ((double) MIN (for_size, width) / width * height);
+
+  *natural = MAX (*natural, child_nat);
 }
 
 static void
