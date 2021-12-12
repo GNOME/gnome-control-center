@@ -57,7 +57,6 @@ struct _CcBackgroundPanel
   CcBackgroundItem *current_background;
 
   CcBackgroundChooser *background_chooser;
-  GtkButton *add_picture_button;
   CcBackgroundPreview *desktop_preview;
 };
 
@@ -218,20 +217,6 @@ cc_background_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-cc_background_panel_constructed (GObject *object)
-{
-  CcBackgroundPanel *self;
-  CcShell *shell;
-
-  self = CC_BACKGROUND_PANEL (object);
-  shell = cc_panel_get_shell (CC_PANEL (self));
-
-  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->add_picture_button), GTK_POS_RIGHT);
-
-  G_OBJECT_CLASS (cc_background_panel_parent_class)->constructed (object);
-}
-
-static void
 cc_background_panel_dispose (GObject *object)
 {
   CcBackgroundPanel *panel = CC_BACKGROUND_PANEL (object);
@@ -265,13 +250,11 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
 
   panel_class->get_help_uri = cc_background_panel_get_help_uri;
 
-  object_class->constructed = cc_background_panel_constructed;
   object_class->dispose = cc_background_panel_dispose;
   object_class->finalize = cc_background_panel_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, add_picture_button);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, background_chooser);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, desktop_preview);
 

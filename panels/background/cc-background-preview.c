@@ -315,8 +315,6 @@ cc_background_preview_measure (GtkWidget      *widget,
                       &child_nat,
                       NULL, NULL);
 
-  *minimum = child_min;
-
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     *natural = width;
   else if (for_size < 0)
@@ -325,6 +323,11 @@ cc_background_preview_measure (GtkWidget      *widget,
     *natural = floor ((double) MIN (for_size, width) / width * height);
 
   *natural = MAX (*natural, child_nat);
+
+  if (orientation == GTK_ORIENTATION_VERTICAL)
+    *minimum = *natural;
+  else
+    *minimum = 0;
 }
 
 static void
