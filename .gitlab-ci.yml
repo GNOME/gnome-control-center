@@ -1,5 +1,5 @@
 include:
- - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/5888c7388134cbe4661600222fe9befb10441f6e/templates/fedora.yml'
+ - remote: 'https://gitlab.freedesktop.org/freedesktop/ci-templates/-/raw/34f4ade99434043f88e164933f570301fd18b125/templates/fedora.yml'
 
 variables:
   FDO_UPSTREAM_REPO: gnome/gnome-control-center
@@ -47,7 +47,7 @@ stages:
     # stable branch.
     # Could probably also switch away from rawhide,
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2021-07-22.0-main'
+    FDO_DISTRIBUTION_TAG: '2021-12-14.0-main'
     FDO_DISTRIBUTION_VERSION: rawhide
 
 #############################################
@@ -92,11 +92,14 @@ build.container.fedora@x86_64:
       gsettings-desktop-schemas-devel
       gsound-devel
       gtk3-devel ibus-devel
+      gtk4-devel
       intltool
+      libadwaita-devel
       libcanberra-devel
       libgtop2-devel
       libgudev-devel
       libnma-devel
+      libnotify-devel
       libpwquality-devel
       libsmbclient-devel
       libsoup-devel
@@ -119,6 +122,30 @@ build.container.fedora@x86_64:
       git clone https://gitlab.gnome.org/GNOME/gsettings-desktop-schemas.git && \
         cd gsettings-desktop-schemas && \
         meson . _build --prefix=/usr && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd .. && \
+      git clone https://gitlab.gnome.org/GNOME/gnome-desktop.git && \
+        cd gnome-desktop && \
+        meson . _build --prefix=/usr -Ddesktop_docs=false && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd .. && \
+      git clone https://gitlab.gnome.org/GNOME/gnome-bluetooth.git && \
+        cd gnome-bluetooth && \
+        meson . _build --prefix=/usr -Dsendto=false && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd .. && \
+      git clone https://gitlab.gnome.org/GNOME/libnma.git && \
+        cd libnma && \
+        meson . _build --prefix=/usr -Dlibnma_gtk4=true -Dmobile_broadband_provider_info=false -Dgcr=false -Dgtk_doc=false && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd .. && \
+      git clone https://github.com/hughsie/colord-gtk.git && \
+        cd colord-gtk && \
+        meson . _build --prefix=/usr -Dgtk4=true -Ddocs=false -Dtests=false -Dman=false && \
         ninja -C _build && \
         ninja -C _build install && \
         cd ..
