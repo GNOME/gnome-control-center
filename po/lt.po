@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-09-08 08:29+0000\n"
-"PO-Revision-Date: 2021-09-12 20:54+0300\n"
+"POT-Creation-Date: 2021-12-03 11:01+0000\n"
+"PO-Revision-Date: 2021-12-14 13:47+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -83,8 +83,9 @@ msgid "File System"
 msgstr "Failų sistema"
 
 #: panels/applications/cc-applications-panel.c:849
-#: panels/keyboard/01-launchers.xml.in:6 shell/cc-window.c:279
-#: shell/cc-window.c:938 shell/cc-window.ui:121
+#: panels/keyboard/01-launchers.xml.in:6
+#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:313
+#: shell/cc-window.c:1043 shell/cc-window.ui:121
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Nustatymai"
@@ -210,7 +211,7 @@ msgstr "Kamera"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Išjungta"
@@ -361,10 +362,10 @@ msgid "Select a picture"
 msgstr "Pasirinkite paveikslėlį"
 
 #: panels/background/cc-background-chooser.c:347
-#: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
-#: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
+#: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:235
+#: panels/color/cc-color-panel.c:797 panels/color/cc-color-panel.ui:563
 #: panels/common/cc-language-chooser.ui:25
-#: panels/display/cc-display-panel.c:1006
+#: panels/display/cc-display-panel.c:1023
 #: panels/info-overview/cc-info-overview-panel.ui:243
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
@@ -685,89 +686,64 @@ msgstr "Nekalibruotas"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile has been auto-generated for this hardware
-#: panels/color/cc-color-panel.c:167
+#: panels/color/cc-color-panel.c:164
 msgid "Default: "
 msgstr "Numatytasis: "
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile his a standard space like AdobeRGB
-#: panels/color/cc-color-panel.c:175
+#: panels/color/cc-color-panel.c:172
 msgid "Colorspace: "
 msgstr "Spalvų erdvė:"
 
 #. TRANSLATORS: this is a profile prefix to signify the
 #. * profile is a test profile
-#: panels/color/cc-color-panel.c:182
+#: panels/color/cc-color-panel.c:179
 msgid "Test profile: "
 msgstr "Bandomasis profilis: "
 
 #. TRANSLATORS: an ICC profile is a file containing colorspace data
-#: panels/color/cc-color-panel.c:236
+#: panels/color/cc-color-panel.c:233
 msgid "Select ICC Profile File"
 msgstr "Pasirinkite ICC profilio failą"
 
-#: panels/color/cc-color-panel.c:239
+#: panels/color/cc-color-panel.c:236
 msgid "_Import"
 msgstr "_Importuoti"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:250
+#: panels/color/cc-color-panel.c:247
 msgid "Supported ICC profiles"
 msgstr "Palaikomi ICC profiliai"
 
 #. TRANSLATORS: filter name on the file->open dialog
-#: panels/color/cc-color-panel.c:257
+#: panels/color/cc-color-panel.c:254
 #: panels/network/wireless-security/eap-method-fast.c:356
 msgid "All files"
 msgstr "Visi failai"
 
-#: panels/color/cc-color-panel.c:549
+#: panels/color/cc-color-panel.c:545
 msgid "Screen"
 msgstr "Ekranas"
 
-#. TRANSLATORS: this is when the upload of the profile failed
-#: panels/color/cc-color-panel.c:839
-#, c-format
-msgid "Failed to upload file: %s"
-msgstr "Nepavyko nusiųsti failo: %s"
-
-#. TRANSLATORS: these are instructions on how to recover
-#. * the ICC profile on the native operating system and are
-#. * only shown when the user uses a LiveCD to calibrate
-#: panels/color/cc-color-panel.c:851
-msgid "The profile has been uploaded to:"
-msgstr "Profilis buvo nusiųstas į:"
-
-#: panels/color/cc-color-panel.c:853
-msgid "Write down this URL."
-msgstr "Užsirašyti šį URL."
-
-#: panels/color/cc-color-panel.c:854
-msgid "Restart this computer and boot your normal operating system."
-msgstr "Paleisti kompiuterį iš naujo ir įkelti normalią operacinę sistemą."
-
-#: panels/color/cc-color-panel.c:855
-msgid "Type the URL into your browser to download and install the profile."
-msgstr "Įveskite URL naršyklėje profilio parsiuntimui ir įdiegimui."
-
 #. TRANSLATORS: this is the dialog to save the ICC profile
-#: panels/color/cc-color-panel.c:883
+#: panels/color/cc-color-panel.c:794
 msgid "Save Profile"
 msgstr "Įrašyti profilį"
 
-#: panels/color/cc-color-panel.c:887
+#: panels/color/cc-color-panel.c:798
 #: panels/network/connection-editor/vpn-helpers.c:300
 #: panels/wwan/cc-wwan-apn-dialog.ui:64
 msgid "_Save"
 msgstr "Į_rašyti"
 
 #. TRANSLATORS: this is when the button is sensitive
-#: panels/color/cc-color-panel.c:1196
+#: panels/color/cc-color-panel.c:1107
 msgid "Create a color profile for the selected device"
 msgstr "Sukurti spalvų profilį pasirinktam įrenginiui"
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1211 panels/color/cc-color-panel.c:1235
+#: panels/color/cc-color-panel.c:1122 panels/color/cc-color-panel.c:1146
 msgid ""
 "The measuring instrument is not detected. Please check it is turned on and "
 "correctly connected."
@@ -776,12 +752,12 @@ msgstr ""
 "prijungtas."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1245
+#: panels/color/cc-color-panel.c:1156
 msgid "The measuring instrument does not support printer profiling."
 msgstr "Matavimo prietaisas nepalaiko spausdintuvo profiliavimo."
 
 #. TRANSLATORS: this is when the button is insensitive
-#: panels/color/cc-color-panel.c:1256
+#: panels/color/cc-color-panel.c:1167
 msgid "The device type is not currently supported."
 msgstr "Įrenginio tipas šiuo metu nepalaikomas."
 
@@ -893,15 +869,7 @@ msgstr "Kopijuoti profilį"
 msgid "Requires writable media"
 msgstr "Reikalauja įrašomos laikmenos"
 
-#: panels/color/cc-color-panel.ui:519
-msgid "Upload profile"
-msgstr "Nusiųsti profilį"
-
-#: panels/color/cc-color-panel.ui:532
-msgid "Requires Internet connection"
-msgstr "Reikalauja interneto ryšio"
-
-#: panels/color/cc-color-panel.ui:591
+#: panels/color/cc-color-panel.ui:497
 msgid ""
 "You may find these instructions on how to use the profile on <a href=\"linux"
 "\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
@@ -911,26 +879,26 @@ msgstr ""
 "Linux</a>, <a href=\"osx\">Apple OS X</a> ar <a href=\"windows\">Microsoft "
 "Windows</a>."
 
-#: panels/color/cc-color-panel.ui:607
+#: panels/color/cc-color-panel.ui:513
 msgid "Summary"
 msgstr "Santrauka"
 
-#: panels/color/cc-color-panel.ui:621
+#: panels/color/cc-color-panel.ui:527
 msgid "Add Profile"
 msgstr "Pridėti profilį"
 
-#: panels/color/cc-color-panel.ui:643
+#: panels/color/cc-color-panel.ui:549
 msgid "_Import File…"
 msgstr "_Importuoti failą..."
 
-#: panels/color/cc-color-panel.ui:672 panels/keyboard/cc-input-chooser.ui:20
+#: panels/color/cc-color-panel.ui:578 panels/keyboard/cc-input-chooser.ui:20
 #: panels/network/connection-editor/net-connection-editor.c:504
 #: panels/printers/new-printer-dialog.ui:80
 #: panels/user-accounts/cc-add-user-dialog.ui:47
 msgid "_Add"
 msgstr "_Pridėti"
 
-#: panels/color/cc-color-panel.ui:732
+#: panels/color/cc-color-panel.ui:638
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
@@ -938,143 +906,143 @@ msgstr ""
 "Aptikta problemų. Profilis gali gerai neveikti. <a href=\"\">Rodyti detales."
 "</a>"
 
-#: panels/color/cc-color-panel.ui:788
+#: panels/color/cc-color-panel.ui:694
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr ""
 "Spalvų derinimui reikia pakankamai naujo spalvų profilio kiekvienam "
 "įrenginiui."
 
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.ui:810
+#: panels/color/cc-color-panel.ui:716
 #: panels/diagnostics/cc-diagnostics-panel.c:144
 msgid "Learn more"
 msgstr "Sužinoti daugiau"
 
-#: panels/color/cc-color-panel.ui:815
+#: panels/color/cc-color-panel.ui:721
 msgid "Learn more about color management"
 msgstr "Sužinokite daugiau apie spalvų derinimą"
 
-#: panels/color/cc-color-panel.ui:863
+#: panels/color/cc-color-panel.ui:769
 msgid "_Set for all users"
 msgstr "Nu_statyti visiems naudotojams"
 
-#: panels/color/cc-color-panel.ui:867 panels/color/cc-color-panel.ui:882
-#: panels/color/cc-color-panel.ui:883
+#: panels/color/cc-color-panel.ui:773 panels/color/cc-color-panel.ui:788
+#: panels/color/cc-color-panel.ui:789
 msgid "Set this profile for all users on this computer"
 msgstr "Nustatyti šį profilį visiems šio kompiuterio naudotojams"
 
-#: panels/color/cc-color-panel.ui:878
+#: panels/color/cc-color-panel.ui:784
 msgid "_Enable"
 msgstr "Į_jungti"
 
-#: panels/color/cc-color-panel.ui:909
+#: panels/color/cc-color-panel.ui:815
 msgid "_Add profile"
 msgstr "_Pridėti profilį"
 
-#: panels/color/cc-color-panel.ui:922
+#: panels/color/cc-color-panel.ui:828
 msgid "_Calibrate…"
 msgstr "_Kalibruoti..."
 
-#: panels/color/cc-color-panel.ui:926
+#: panels/color/cc-color-panel.ui:832
 msgid "Calibrate the device"
 msgstr "Kalibruoti įrenginį"
 
-#: panels/color/cc-color-panel.ui:937
+#: panels/color/cc-color-panel.ui:843
 msgid "_Remove profile"
 msgstr "Paša_linti profilį"
 
-#: panels/color/cc-color-panel.ui:950
+#: panels/color/cc-color-panel.ui:856
 msgid "_View details"
 msgstr "_Išsamiau"
 
-#: panels/color/cc-color-panel.ui:986
+#: panels/color/cc-color-panel.ui:892
 msgid "Unable to detect any devices that can be color managed"
 msgstr "Nepavyko aptikti įrenginių spalvų tvarkymui"
 
-#: panels/color/cc-color-panel.ui:1030
+#: panels/color/cc-color-panel.ui:936
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:1035
+#: panels/color/cc-color-panel.ui:941
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:1040
+#: panels/color/cc-color-panel.ui:946
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:1045
+#: panels/color/cc-color-panel.ui:951
 msgid "Projector"
 msgstr "Projektorius"
 
-#: panels/color/cc-color-panel.ui:1050
+#: panels/color/cc-color-panel.ui:956
 msgid "Plasma"
 msgstr "Plazminis monitorius"
 
-#: panels/color/cc-color-panel.ui:1055
+#: panels/color/cc-color-panel.ui:961
 msgid "LCD (CCFL backlight)"
 msgstr "LCD (CCFL apšvietimas)"
 
-#: panels/color/cc-color-panel.ui:1060
+#: panels/color/cc-color-panel.ui:966
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD (RGB LED apšvietimas)"
 
-#: panels/color/cc-color-panel.ui:1065
+#: panels/color/cc-color-panel.ui:971
 msgid "LCD (white LED backlight)"
 msgstr "LCD (balta LED apšvietimas)"
 
-#: panels/color/cc-color-panel.ui:1070
+#: panels/color/cc-color-panel.ui:976
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "Didelės raškos LCD (CCFL apšvietimas)"
 
-#: panels/color/cc-color-panel.ui:1075
+#: panels/color/cc-color-panel.ui:981
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "Didelės raiškos LCD (RGB LED apšvietimas)"
 
-#: panels/color/cc-color-panel.ui:1092
+#: panels/color/cc-color-panel.ui:998
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "Aukšta"
 
-#: panels/color/cc-color-panel.ui:1093
+#: panels/color/cc-color-panel.ui:999
 msgid "40 minutes"
 msgstr "40 minučių"
 
-#: panels/color/cc-color-panel.ui:1097
+#: panels/color/cc-color-panel.ui:1003
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "Vidutinė"
 
-#: panels/color/cc-color-panel.ui:1098
+#: panels/color/cc-color-panel.ui:1004
 msgid "30 minutes"
 msgstr "30 minučių"
 
-#: panels/color/cc-color-panel.ui:1102
+#: panels/color/cc-color-panel.ui:1008
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "Žema"
 
-#: panels/color/cc-color-panel.ui:1103
+#: panels/color/cc-color-panel.ui:1009
 msgid "15 minutes"
 msgstr "15 minučių"
 
-#: panels/color/cc-color-panel.ui:1125
+#: panels/color/cc-color-panel.ui:1031
 msgid "Native to display"
 msgstr "Įprastas ekranui"
 
-#: panels/color/cc-color-panel.ui:1129
+#: panels/color/cc-color-panel.ui:1035
 msgid "D50 (Printing and publishing)"
 msgstr "D50 (spausdinimas ir pateikimas)"
 
-#: panels/color/cc-color-panel.ui:1133
+#: panels/color/cc-color-panel.ui:1039
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:1137
+#: panels/color/cc-color-panel.ui:1043
 msgid "D65 (Photography and graphics)"
 msgstr "D65 (fotografija ir grafika)"
 
-#: panels/color/cc-color-panel.ui:1141
+#: panels/color/cc-color-panel.ui:1047
 msgid "D75"
 msgstr "D75"
 
@@ -1574,20 +1542,20 @@ msgstr ""
 "ekranas;užrakinimas;diagnostika;lūžimas;privatus;neseniai;naudoti;laikinieji;"
 "indeksas;pavadinimas;tinklas;tapatybė;privatumas;"
 
-#: panels/display/cc-display-panel.c:1017
+#: panels/display/cc-display-panel.c:1034
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "_Pritaikyti"
 
-#: panels/display/cc-display-panel.c:1038
+#: panels/display/cc-display-panel.c:1055
 msgid "Apply Changes?"
 msgstr "Pritaikyti pakeitimus?"
 
-#: panels/display/cc-display-panel.c:1043
+#: panels/display/cc-display-panel.c:1060
 msgid "Changes Cannot be Applied"
 msgstr "Pakeitimų negalima pritaikyti"
 
-#: panels/display/cc-display-panel.c:1044
+#: panels/display/cc-display-panel.c:1061
 msgid "This could be due to hardware limitations."
 msgstr "Taip gali būti dėl aparatinės įrangos apribojimų."
 
@@ -1647,27 +1615,27 @@ msgstr "Ekranai"
 msgid "Night Light"
 msgstr "Naktinis apšvietimas"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:109
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Gulsčias"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:112
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Stačias į dešinę"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:115
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Stačias į kairę"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:118
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Gulsčias (apverstas)"
 
-#: panels/display/cc-display-settings.c:190
+#: panels/display/cc-display-settings.c:192
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -2294,7 +2262,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "Atsisakyti"
 
@@ -2412,7 +2380,6 @@ msgid "Keyboard"
 msgstr "Klaviatūra"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-#| msgid "View and change keyboard shortcuts and set your typing preferences"
 msgid ""
 "Change keyboard shortcuts and set your typing preferences, keyboard layouts "
 "and input sources"
@@ -2481,27 +2448,27 @@ msgstr "Tuščio ekrano delsa"
 msgid "Period of inactivity after which the screen will go blank."
 msgstr "Neaktyvumo trukmė, po kurios ekranas taps tuščias."
 
-#: panels/lock/cc-lock-panel.ui:65
+#: panels/lock/cc-lock-panel.ui:66
 msgid "Automatic Screen _Lock"
 msgstr "Automatinis ekrano už_rakinimas"
 
-#: panels/lock/cc-lock-panel.ui:82
+#: panels/lock/cc-lock-panel.ui:83
 msgid "Automatic _Screen Lock Delay"
 msgstr "Automatinio ekrano už_rakinimo delsa"
 
-#: panels/lock/cc-lock-panel.ui:83
+#: panels/lock/cc-lock-panel.ui:84
 msgid "Period after the screen blanks when the screen is automatically locked."
 msgstr "Po kiek laiko ekranas tampa tuščias, kai yra automatiškai užrakintas."
 
-#: panels/lock/cc-lock-panel.ui:103
+#: panels/lock/cc-lock-panel.ui:105
 msgid "Show _Notifications on Lock Screen"
 msgstr "Rodyti pra_nešimus užrakintame ekrane"
 
-#: panels/lock/cc-lock-panel.ui:120
+#: panels/lock/cc-lock-panel.ui:122
 msgid "Forbid new _USB devices"
 msgstr "Drausti naujus _USB įrenginius"
 
-#: panels/lock/cc-lock-panel.ui:121
+#: panels/lock/cc-lock-panel.ui:123
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
@@ -2510,109 +2477,109 @@ msgstr ""
 "užrakintas."
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:166
+#: panels/lock/cc-lock-panel.ui:169
 msgctxt "lock_screen"
 msgid "Screen Turns Off"
 msgstr "Ekranas išsijungia"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:170
+#: panels/lock/cc-lock-panel.ui:173
 msgctxt "lock_screen"
 msgid "30 seconds"
 msgstr "30 sekundžių"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:174
+#: panels/lock/cc-lock-panel.ui:177
 msgctxt "lock_screen"
 msgid "1 minute"
 msgstr "1 minutė"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:178
+#: panels/lock/cc-lock-panel.ui:181
 msgctxt "lock_screen"
 msgid "2 minutes"
 msgstr "2 minutės"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:182
+#: panels/lock/cc-lock-panel.ui:185
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 minutės"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:186
+#: panels/lock/cc-lock-panel.ui:189
 msgctxt "lock_screen"
 msgid "5 minutes"
 msgstr "5 minutės"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:190
+#: panels/lock/cc-lock-panel.ui:193
 msgctxt "lock_screen"
 msgid "30 minutes"
 msgstr "30 minučių"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:194
+#: panels/lock/cc-lock-panel.ui:197
 msgctxt "lock_screen"
 msgid "1 hour"
 msgstr "1 valanda"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:209
+#: panels/lock/cc-lock-panel.ui:212
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 minutė"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:213
+#: panels/lock/cc-lock-panel.ui:216
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 minutės"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:217
+#: panels/lock/cc-lock-panel.ui:220
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 minutės"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:221
+#: panels/lock/cc-lock-panel.ui:224
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 minutės"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:225
+#: panels/lock/cc-lock-panel.ui:228
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 minutės"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:229
+#: panels/lock/cc-lock-panel.ui:232
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 minutės"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:233
+#: panels/lock/cc-lock-panel.ui:236
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 minučių"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:237
+#: panels/lock/cc-lock-panel.ui:240
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 minučių"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:241
+#: panels/lock/cc-lock-panel.ui:244
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 minučių"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:245
+#: panels/lock/cc-lock-panel.ui:248
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "Niekada"
@@ -2719,7 +2686,7 @@ msgstr "Slinktis dviem pirštais"
 msgid "Edge Scrolling"
 msgstr "Slinkimas kraštuose"
 
-#: panels/mouse/cc-mouse-panel.ui:335 panels/wacom/cc-wacom-panel.c:441
+#: panels/mouse/cc-mouse-panel.ui:335 panels/wacom/cc-wacom-panel.c:477
 msgid "Test Your _Settings"
 msgstr "Tikrinkite savo _nustatymus"
 
@@ -2931,10 +2898,14 @@ msgstr "Turi turėti bent 8 simbolius"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:272
 #, c-format
-msgid "Must have a maximum of %d characters"
-msgstr "Turi turėti bent %d simbolius"
+#| msgid "Must have a maximum of %d characters"
+msgid "Must have a maximum of %d character"
+msgid_plural "Must have a maximum of %d characters"
+msgstr[0] "Turi turėti ne daugiau kaip %d simbolį"
+msgstr[1] "Turi turėti ne daugiau kaip %d simbolius"
+msgstr[2] "Turi turėti ne daugiau kaip %d simbolių"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:488
+#: panels/network/cc-wifi-hotspot-dialog.c:489
 msgid "Turn On Wi-Fi Hotspot?"
 msgstr "Įjungti belaidį prieigos tašką"
 
@@ -4676,7 +4647,7 @@ msgid "Media player"
 msgstr "Daugialypės terpės grotuvas"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:728
+#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:767
 msgid "Tablet"
 msgstr "Planšetė"
 
@@ -5003,23 +4974,23 @@ msgid "Authentication Required"
 msgstr "Reikia patvirtinti tapatybę"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:682
+#: panels/printers/cc-printers-panel.c:683
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Spausdintuvas „%s“ buvo ištrintas"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:926
+#: panels/printers/cc-printers-panel.c:927
 msgid "Failed to add new printer."
 msgstr "Nepavyko pridėti naujo spausdintuvo."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1225
+#: panels/printers/cc-printers-panel.c:1226
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepavyko įkelti sąsajos: %s"
 
-#: panels/printers/cc-printers-panel.c:1293
+#: panels/printers/cc-printers-panel.c:1294
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Atrakinkite spausdintuvų pridėjimui bei nustatymų keitimui"
 
@@ -5180,55 +5151,60 @@ msgid "Reverse portrait"
 msgstr "Apverstas stačias"
 
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-job-row.c:106
+#: panels/printers/pp-job-row.c:137
 msgctxt "print job"
 msgid "Pending"
 msgstr "Laukia"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-job-row.c:112
+#: panels/printers/pp-job-row.c:143
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pristabdytas"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-job-row.c:117
+#: panels/printers/pp-job-row.c:148
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Reikia patvirtinti tapatybę"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-job-row.c:122
+#: panels/printers/pp-job-row.c:153
 msgctxt "print job"
 msgid "Processing"
 msgstr "Apdorojamas"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-job-row.c:126
+#: panels/printers/pp-job-row.c:157
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Sustabdytas"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-job-row.c:130
+#: panels/printers/pp-job-row.c:161
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Atšauktas"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-job-row.c:134
+#: panels/printers/pp-job-row.c:165
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Atmestas"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-job-row.c:138
+#: panels/printers/pp-job-row.c:169
 msgctxt "print job"
 msgid "Completed"
 msgstr "Baigtas"
 
+#. Translators: Clicking this button prioritizes printing of this print job
+#: panels/printers/pp-job-row.c:179
+msgid "Move this job to the top of the queue"
+msgstr "Perkelti šį darbą į eilės pradžią"
+
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
-#: panels/printers/pp-jobs-dialog.c:249
+#: panels/printers/pp-jobs-dialog.c:319
 #, c-format
 msgid "%u Job Requires Authentication"
 msgid_plural "%u Jobs Require Authentication"
@@ -5237,14 +5213,14 @@ msgstr[1] "%u darbams reikia patvirtinti tapatybę"
 msgstr[2] "%u darbų reikia patvirtinti tapatybę"
 
 #. Translators: This is the printer name for which we are showing the active jobs
-#: panels/printers/pp-jobs-dialog.c:401
+#: panels/printers/pp-jobs-dialog.c:471
 #, c-format
 msgctxt "Printer jobs dialog title"
 msgid "%s — Active Jobs"
 msgstr "%s – aktyvūs darbai"
 
 #. Translators: The printer needs authentication info to print.
-#: panels/printers/pp-jobs-dialog.c:405
+#: panels/printers/pp-jobs-dialog.c:475
 #, c-format
 msgid "Enter credentials to print from %s."
 msgstr "Įveskite savo naudotojo vardą ir slaptažodį spausdinimui iš %s."
@@ -5671,8 +5647,9 @@ msgstr ""
 "kartą prisijungus."
 
 #: panels/region/cc-format-chooser.ui:117
-msgid "Search locales..."
-msgstr "Ieškoti lokalių..."
+#| msgid "Search locales..."
+msgid "Search locales…"
+msgstr "Ieškoti lokalių…"
 
 #: panels/region/cc-format-chooser.ui:158
 msgid "Common Formats"
@@ -5772,8 +5749,6 @@ msgid "Region & Language"
 msgstr "Regionas ir kalba"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-#| msgid ""
-#| "Select your display language, formats, keyboard layouts and input sources"
 msgid "Select your display language and formats"
 msgstr "Pasirinkite rodymo kalbą bei formatus"
 
@@ -7728,7 +7703,7 @@ msgstr "Prisijunges prie"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "Įjungta"
 
@@ -7826,20 +7801,20 @@ msgstr "Prisijungimas _piršto atspaudu"
 msgid "A_utomatic Login"
 msgstr "A_utomatinis prisijungimas"
 
-#: panels/user-accounts/cc-user-panel.ui:429
+#: panels/user-accounts/cc-user-panel.ui:430
 msgid "Account Activity"
 msgstr "Paskyros veikla"
 
-#: panels/user-accounts/cc-user-panel.ui:460
+#: panels/user-accounts/cc-user-panel.ui:461
 msgid "Remove User…"
 msgstr "Pašalinti naudotoją…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:501
+#: panels/user-accounts/cc-user-panel.ui:502
 msgid "No Users Found"
 msgstr "Nerasta naudotojų"
 
-#: panels/user-accounts/cc-user-panel.ui:511
+#: panels/user-accounts/cc-user-panel.ui:512
 msgid "Unlock to add a user account."
 msgstr "Atrakinti naujos paskyros sukūrimui."
 
@@ -8153,7 +8128,7 @@ msgstr "%d iš %d"
 msgid "Display Mapping"
 msgstr "Ekrano susiejimas"
 
-#: panels/wacom/cc-wacom-panel.c:725 panels/wacom/wacom-stylus-page.ui:119
+#: panels/wacom/cc-wacom-panel.c:764 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
 msgstr "Pieštukas"
 
@@ -8436,33 +8411,33 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Nežinoma"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "Atrakinti SIM kortelę"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "Atrakinti"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Pateikite PIN kodą SIM kortelei %d"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
 msgstr "Įveskite PIN SIM kortelei atrakinti"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Pateikite PUK kodą SIM kortelei %d"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
 msgstr "Įveskite PUK kodą SIM kortelei atrakinti"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
@@ -8470,7 +8445,7 @@ msgstr[0] "Įvestas blogas slaptažodis. Liko %1$u bandymas"
 msgstr[1] "Įvestas blogas slaptažodis. Liko %1$u bandymai"
 msgstr[2] "Įvestas blogas slaptažodis. Liko %1$u bandymų"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
@@ -8478,25 +8453,26 @@ msgstr[0] "Liko %1$u bandymas"
 msgstr[1] "Liko %1$u bandymai"
 msgstr[2] "Liko %1$u bandymų"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "Įvestas blogas slaptažodis."
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
 msgstr "PUK kodas turi būti 8 skaitmenų skaičius"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "Įveskite naują PIN"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
 msgstr "PIN kodas turi būti 4-8 skaitmenų skaičius"
 
-#: panels/wwan/cc-wwan-device-page.c:270
-msgid "Unlocking..."
-msgstr "Atrakinama..."
+#: panels/wwan/cc-wwan-device-page.c:317
+#| msgid "Unlock…"
+msgid "Unlocking…"
+msgstr "Atrakinama…"
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
@@ -8728,13 +8704,9 @@ msgstr "Konfigūruoti telefonijos ir mobiliųjų duomenų ryšius"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/wwan/gnome-wwan-panel.desktop.in.in:17
+#: panels/wwan/gnome-wwan-panel.desktop.in.in:16
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "mobilusis;wwan;telefonija;sim;mibilusis;"
-
-#: shell/appdata/gnome-control-center.appdata.xml.in:7
-msgid "GNOME Settings"
-msgstr "GNOME nustatymai"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:8
 msgid "Utility to configure the GNOME desktop"
@@ -8744,7 +8716,26 @@ msgstr "Įrankis GNOME grafinės aplinkos konfigūravimui"
 msgid "Settings is the primary interface for configuring your system."
 msgstr "Nustatymai yra pirminė sąsaja jūsų sistemos konfigūravimui."
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:20
+#: shell/appdata/gnome-control-center.appdata.xml.in:17
+#| msgid "GNOME Settings"
+msgid "GNOME Settings Sound Panel"
+msgstr "GNOME nustatymų garso skydelis"
+
+#: shell/appdata/gnome-control-center.appdata.xml.in:21
+msgid "GNOME Settings Mouse &amp; Touchpad Panel"
+msgstr "GNOME nustatymų pelės ir jutiklinio kilimėlio skydelis"
+
+#: shell/appdata/gnome-control-center.appdata.xml.in:25
+#| msgid "GNOME Settings"
+msgid "GNOME Settings Background Panel"
+msgstr "GNOME nustatymų fono skydelis"
+
+#: shell/appdata/gnome-control-center.appdata.xml.in:29
+#| msgid "GNOME Settings"
+msgid "GNOME Settings Keyboard Panel"
+msgstr "GNOME nustatymų klaviatūros skydelis"
+
+#: shell/appdata/gnome-control-center.appdata.xml.in:38
 msgid "The GNOME Project"
 msgstr "GNOME projektas"
 
@@ -8772,7 +8763,7 @@ msgstr "Rodomas skydelis"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[SKYDELIS] [ARGUMENTAS…]"
 
-#: shell/cc-panel-list.ui:45 shell/cc-window.c:275
+#: shell/cc-panel-list.ui:45 shell/cc-window.c:309
 msgid "Privacy"
 msgstr "Privatumas"
 
@@ -8861,6 +8852,17 @@ msgid ""
 "Whether Settings should show a warning when running a development build."
 msgstr "Ar Nustatymai turėtų rodyti įspėjimą vykdant kuriamą versiją."
 
+#: shell/org.gnome.ControlCenter.gschema.xml:20
+msgid "Initial state of the window"
+msgstr "Pradinė lango būsena"
+
+#: shell/org.gnome.ControlCenter.gschema.xml:21
+msgid ""
+"A tuple containing the initial width, height and maximized state of the "
+"application window."
+msgstr ""
+"Junginys su programos lango pradiniu pločiu, aukščiu ir išdidinimo būsena."
+
 #. translators:
 #. * The number of sound outputs on a particular device
 #: subprojects/gvc/gvc-mixer-control.c:1907
@@ -8884,6 +8886,30 @@ msgstr[2] "%u įvesčių"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistemos garsai"
+
+#~ msgid "Failed to upload file: %s"
+#~ msgstr "Nepavyko nusiųsti failo: %s"
+
+#~ msgid "The profile has been uploaded to:"
+#~ msgstr "Profilis buvo nusiųstas į:"
+
+#~ msgid "Write down this URL."
+#~ msgstr "Užsirašyti šį URL."
+
+#~ msgid "Restart this computer and boot your normal operating system."
+#~ msgstr "Paleisti kompiuterį iš naujo ir įkelti normalią operacinę sistemą."
+
+#~ msgid "Type the URL into your browser to download and install the profile."
+#~ msgstr "Įveskite URL naršyklėje profilio parsiuntimui ir įdiegimui."
+
+#~ msgid "Upload profile"
+#~ msgstr "Nusiųsti profilį"
+
+#~ msgid "Requires Internet connection"
+#~ msgstr "Reikalauja interneto ryšio"
+
+#~ msgid "Unlocking..."
+#~ msgstr "Atrakinama..."
 
 #~ msgid "Login;Name;Fingerprint;Avatar;Logo;Face;Password;"
 #~ msgstr ""
