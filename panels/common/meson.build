@@ -24,6 +24,10 @@ common_sources += gnome.mkenums(
   vtail: '      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static ("@EnumName@", values);\n  }\n  return etype;\n}\n'
 )
 
+generates_sources_dep = declare_dependency(
+  sources: common_sources,
+)
+
 sources = files(
   'cc-hostname-entry.c',
   'cc-time-entry.c',
@@ -34,7 +38,7 @@ libwidgets = static_library(
   'widgets',
   sources: sources,
   include_directories: top_inc,
-  dependencies: common_deps + [ polkit_gobject_dep ]
+  dependencies: common_deps + [ generates_sources_dep, polkit_gobject_dep ]
 )
 libwidgets_dep = declare_dependency(
   include_directories: common_inc,
@@ -68,6 +72,7 @@ sources += gnome.compile_resources(
 )
 
 deps = common_deps + [
+  generates_sources_dep,
   gnome_desktop_dep,
   dependency('fontconfig')
 ]
