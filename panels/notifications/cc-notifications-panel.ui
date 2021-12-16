@@ -25,7 +25,7 @@
                         <property name="margin_bottom">32</property>
                         <signal name="keynav-failed" handler="keynav_failed" object="CcNotificationsPanel" swapped="yes" />
                         <style>
-                          <class name="content"/>
+                          <class name="boxed-list"/>
                         </style>
                         <child>
                           <object class="CcListRow" id="dnd_row">
@@ -60,7 +60,7 @@
                         <signal name="keynav-failed" handler="keynav_failed" object="CcNotificationsPanel" swapped="yes" />
                         <signal name="row-activated" handler="select_app" object="CcNotificationsPanel" swapped="yes" />
                         <style>
-                          <class name="content"/>
+                          <class name="boxed-list"/>
                         </style>
                         <accessibility>
                           <relation name="labelled-by">app_list_heading_label</relation>

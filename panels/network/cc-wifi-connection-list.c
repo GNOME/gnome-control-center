@@ -706,7 +706,7 @@ cc_wifi_connection_list_init (CcWifiConnectionList *self)
 {
   self->listbox = GTK_LIST_BOX (gtk_list_box_new ());
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->listbox), GTK_SELECTION_NONE);
-  gtk_widget_add_css_class (GTK_WIDGET (self->listbox), "content");
+  gtk_widget_add_css_class (GTK_WIDGET (self->listbox), "boxed-list");
   adw_bin_set_child (ADW_BIN (self), GTK_WIDGET (self->listbox));
 
   self->hide_unavailable = TRUE;
