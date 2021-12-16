@@ -687,24 +687,9 @@ on_key_pressed_cb (GtkEventControllerKey    *key_controller,
   if (!editing)
     return GDK_EVENT_PROPAGATE;
 
-  real_mask = state & gtk_accelerator_get_default_mod_mask ();
-
-  keyval_lower = gdk_keyval_to_lower (keyval);
-
-  /* Normalise <Tab> */
-  if (keyval_lower == GDK_KEY_ISO_Left_Tab)
-    keyval_lower = GDK_KEY_Tab;
-
-  /* Put shift back if it changed the case of the key, not otherwise. */
-  if (keyval_lower != keyval)
-    real_mask |= GDK_SHIFT_MASK;
-
-  if (keyval_lower == GDK_KEY_Sys_Req && (real_mask & GDK_ALT_MASK) != 0)
-    {
-      /* HACK: we don't want to use SysRq as a keybinding (but we do
-       * want Alt+Print), so we avoid translation from Alt+Print to SysRq */
-      keyval_lower = GDK_KEY_Print;
-    }
+  normalize_keyval_and_mask (keyval, state,
+                             gtk_event_controller_key_get_group (key_controller),
+                             &keyval_lower, &real_mask);
 
   event = gtk_event_controller_get_current_event (GTK_EVENT_CONTROLLER (key_controller));
   is_modifier = gdk_key_event_is_modifier (event);

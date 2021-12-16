@@ -76,3 +76,9 @@ gboolean is_valid_accel                 (const CcKeyCombo *combo);
 KeyList* parse_keylist_from_file        (const gchar *path);
 
 gchar*   convert_keysym_state_to_string (const CcKeyCombo *combo);
+
+void     normalize_keyval_and_mask      (guint            keyval,
+                                         GdkModifierType  mask,
+                                         guint            group,
+                                         guint           *out_keyval,
+                                         GdkModifierType *out_mask);

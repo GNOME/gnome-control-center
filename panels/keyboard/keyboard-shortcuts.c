@@ -376,3 +376,36 @@ convert_keysym_state_to_string (const CcKeyCombo *combo)
 
   return name;
 }
+
+void
+normalize_keyval_and_mask (guint            keyval,
+                           GdkModifierType  mask,
+                           guint            group,
+                           guint           *out_keyval,
+                           GdkModifierType *out_mask)
+{
+  guint keyval_lower;
+  GdkModifierType real_mask;
+
+  real_mask = mask & gtk_accelerator_get_default_mod_mask ();
+
+  keyval_lower = gdk_keyval_to_lower (keyval);
+
+  /* Normalise <Tab> */
+  if (keyval_lower == GDK_KEY_ISO_Left_Tab)
+    keyval_lower = GDK_KEY_Tab;
+
+  /* Put shift back if it changed the case of the key, not otherwise. */
+  if (keyval_lower != keyval)
+    real_mask |= GDK_SHIFT_MASK;
+
+  if (keyval_lower == GDK_KEY_Sys_Req && (real_mask & GDK_ALT_MASK) != 0)
+    {
+      /* HACK: we don't want to use SysRq as a keybinding (but we do
+       * want Alt+Print), so we avoid translation from Alt+Print to SysRq */
+      keyval_lower = GDK_KEY_Print;
+    }
+
+  *out_keyval = keyval_lower;
+  *out_mask = real_mask;
+}
