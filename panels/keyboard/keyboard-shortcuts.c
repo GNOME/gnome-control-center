@@ -377,35 +377,74 @@ convert_keysym_state_to_string (const CcKeyCombo *combo)
   return name;
 }
 
+/* This adjusts the keyval and modifiers such that it matches how
+ * gnome-shell detects shortcuts, which works as follows:
+ * First for the non-modifier key, the keycode that generates this
+ * keyval at the lowest shift level is determined, which might be a
+ * level > 0, such as for numbers in the num-row in AZERTY.
+ * Next it checks if all the specified modifiers were pressed.
+ */
 void
-normalize_keyval_and_mask (guint            keyval,
+normalize_keyval_and_mask (guint            keycode,
                            GdkModifierType  mask,
                            guint            group,
                            guint           *out_keyval,
                            GdkModifierType *out_mask)
 {
-  guint keyval_lower;
-  GdkModifierType real_mask;
+  guint unmodified_keyval;
+  guint shifted_keyval;
+  GdkModifierType explicit_modifiers;
+  GdkModifierType used_modifiers;
 
-  real_mask = mask & gtk_accelerator_get_default_mod_mask ();
+  /* We want shift to always be included as explicit modifier for
+   * gnome-shell shortcuts. That's because users usually think of
+   * shortcuts as including the shift key rather than being defined
+   * for the shifted keyval.
+   * This helps with num-row keys which have different keyvals on
+   * different layouts for example, but also with keys that have
+   * explicit key codes at shift level 0, that gnome-shell would prefer
+   * over shifted ones, such the DOLLAR key.
+   */
+  explicit_modifiers = gtk_accelerator_get_default_mod_mask () | GDK_SHIFT_MASK;
+  used_modifiers = mask & explicit_modifiers;  
 
-  keyval_lower = gdk_keyval_to_lower (keyval);
+  /* Find the base keyval of the pressed key without the explicit
+   * modifiers. */
+  gdk_display_translate_key (gdk_display_get_default (),
+                             keycode,
+                             mask & ~explicit_modifiers,
+                             group,
+                             &unmodified_keyval,
+                             NULL,
+                             NULL,
+                             NULL);
+
+  /* Normalize num-row keys to the number value. This allows these
+   * shortcuts to work when switching between AZERTY and layouts where
+   * the numbers are at shift level 0. */
+  gdk_display_translate_key (gdk_display_get_default (),
+                             keycode,
+                             GDK_SHIFT_MASK | (mask & ~explicit_modifiers),
+                             group,
+                             &shifted_keyval,
+                             NULL,
+                             NULL,
+                             NULL);
+
+  if (shifted_keyval >= GDK_KEY_0 && shifted_keyval <= GDK_KEY_9)
+    unmodified_keyval = shifted_keyval;
 
   /* Normalise <Tab> */
-  if (keyval_lower == GDK_KEY_ISO_Left_Tab)
-    keyval_lower = GDK_KEY_Tab;
+  if (unmodified_keyval == GDK_KEY_ISO_Left_Tab)
+    unmodified_keyval = GDK_KEY_Tab;
 
-  /* Put shift back if it changed the case of the key, not otherwise. */
-  if (keyval_lower != keyval)
-    real_mask |= GDK_SHIFT_MASK;
-
-  if (keyval_lower == GDK_KEY_Sys_Req && (real_mask & GDK_ALT_MASK) != 0)
+  if (unmodified_keyval == GDK_KEY_Sys_Req && (used_modifiers & GDK_ALT_MASK) != 0)
     {
       /* HACK: we don't want to use SysRq as a keybinding (but we do
        * want Alt+Print), so we avoid translation from Alt+Print to SysRq */
-      keyval_lower = GDK_KEY_Print;
+      unmodified_keyval = GDK_KEY_Print;
     }
 
-  *out_keyval = keyval_lower;
-  *out_mask = real_mask;
+  *out_keyval = unmodified_keyval;
+  *out_mask = used_modifiers;
 }

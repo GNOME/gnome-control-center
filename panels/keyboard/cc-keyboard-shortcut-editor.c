@@ -687,7 +687,7 @@ on_key_pressed_cb (GtkEventControllerKey    *key_controller,
   if (!editing)
     return GDK_EVENT_PROPAGATE;
 
-  normalize_keyval_and_mask (keyval, state,
+  normalize_keyval_and_mask (keycode, state,
                              gtk_event_controller_key_get_group (key_controller),
                              &keyval_lower, &real_mask);
 
