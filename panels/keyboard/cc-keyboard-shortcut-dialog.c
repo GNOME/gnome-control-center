@@ -531,7 +531,7 @@ strv_contains_prefix_or_match (gchar       **strv,
           const gchar *translated_label;
 
           /* Steal GTK+'s translation */
-          translated_label = g_dpgettext2 ("gtk30", "keyboard label", key_aliases[i].untranslated);
+          translated_label = g_dpgettext2 ("gtk40", "keyboard label", key_aliases[i].untranslated);
           alias = g_utf8_strdown (translated_label, -1);
         }
 
