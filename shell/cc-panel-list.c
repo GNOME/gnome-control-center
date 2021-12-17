@@ -287,8 +287,8 @@ row_data_new (CcPanelCategory     category,
   gtk_widget_set_hexpand (grid, TRUE);
   gtk_widget_set_margin_top (grid, 12);
   gtk_widget_set_margin_bottom (grid, 12);
-  gtk_widget_set_margin_start (grid, 12);
-  gtk_widget_set_margin_end (grid, 12);
+  gtk_widget_set_margin_start (grid, 6);
+  gtk_widget_set_margin_end (grid, 6);
   gtk_grid_set_column_spacing (GTK_GRID (grid), 12);
 
   /* Icon */
