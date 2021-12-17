@@ -293,7 +293,6 @@ row_data_new (CcPanelCategory     category,
 
   /* Icon */
   image = gtk_image_new_from_icon_name (icon);
-  gtk_style_context_add_class (gtk_widget_get_style_context (image), "sidebar-icon");
 
   gtk_grid_attach (GTK_GRID (grid), image, 0, 0, 1, 1);
 
@@ -314,7 +313,6 @@ row_data_new (CcPanelCategory     category,
   if (has_sidebar)
     {
       image = gtk_image_new_from_icon_name ("go-next-symbolic");
-      gtk_style_context_add_class (gtk_widget_get_style_context (image), "sidebar-icon");
       gtk_grid_attach (GTK_GRID (grid), image, 2, 0, 1, 1);
     }
 
