@@ -58,6 +58,7 @@ struct _CcBackgroundPanel
   GSettings *interface_settings;
 
   GnomeDesktopThumbnailFactory *thumb_factory;
+  GDBusProxy *proxy;
 
   CcBackgroundItem *current_background;
 
@@ -105,9 +106,41 @@ reload_light_dark_toggles (CcBackgroundPanel *self)
 }
 
 static void
+transition_screen (CcBackgroundPanel *self)
+{
+  g_autoptr (GError) error = NULL;
+
+  if (!self->proxy)
+    return;
+
+  g_dbus_proxy_call_sync (self->proxy,
+                          "ScreenTransition",
+                          NULL,
+                          G_DBUS_CALL_FLAGS_NONE,
+                          -1,
+                          NULL,
+                          &error);
+
+  if (error)
+    g_warning ("Couldn't transition screen: %s", error->message);
+}
+
+static void
 set_color_scheme (CcBackgroundPanel   *self,
                   GDesktopColorScheme  color_scheme)
 {
+  GDesktopColorScheme scheme;
+
+  scheme = g_settings_get_enum (self->interface_settings,
+                                INTERFACE_COLOR_SCHEME_KEY);
+
+  /* We have to check the equality manually to avoid starting an unnecessary
+   * screen transition */
+  if (color_scheme == scheme)
+    return;
+
+  transition_screen (self);
+
   g_settings_set_enum (self->interface_settings,
                        INTERFACE_COLOR_SCHEME_KEY,
                        color_scheme);
@@ -122,6 +155,23 @@ on_light_dark_toggle_active_cb (CcBackgroundPanel *self)
     set_color_scheme (self, G_DESKTOP_COLOR_SCHEME_DEFAULT);
   else if (gtk_toggle_button_get_active (self->dark_toggle))
     set_color_scheme (self, G_DESKTOP_COLOR_SCHEME_PREFER_DARK);
+}
+
+static void
+got_transition_proxy_cb (GObject      *source_object,
+                         GAsyncResult *res,
+                         gpointer      data)
+{
+  g_autoptr(GError) error = NULL;
+  CcBackgroundPanel *self = data;
+
+  self->proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+
+  if (self->proxy == NULL)
+    {
+      g_warning ("Error creating proxy: %s", error->message);
+      return;
+    }
 }
 
 /* Background */
@@ -306,6 +356,7 @@ cc_background_panel_dispose (GObject *object)
   g_clear_object (&panel->lock_settings);
   g_clear_object (&panel->interface_settings);
   g_clear_object (&panel->thumb_factory);
+  g_clear_object (&panel->proxy);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
 }
@@ -389,6 +440,16 @@ cc_background_panel_init (CcBackgroundPanel *panel)
                            G_CALLBACK (reload_light_dark_toggles),
                            panel,
                            G_CONNECT_SWAPPED);
+
+  g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+                            G_DBUS_PROXY_FLAGS_NONE,
+                            NULL,
+                            "org.gnome.Shell",
+                            "/org/gnome/Shell",
+                            "org.gnome.Shell",
+                            NULL,
+                            got_transition_proxy_cb,
+                            panel);
 
   load_custom_css (panel);
 }
