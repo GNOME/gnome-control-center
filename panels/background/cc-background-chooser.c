@@ -94,6 +94,7 @@ create_widget_func (gpointer model_item,
   GtkWidget *child;
   GtkWidget *picture;
   GtkWidget *icon;
+  GtkWidget *check;
   GtkWidget *button = NULL;
   BgSource *source;
 
@@ -108,26 +109,24 @@ create_widget_func (gpointer model_item,
   gtk_picture_set_can_shrink (GTK_PICTURE (picture), FALSE);
 
   icon = gtk_image_new_from_icon_name ("slideshow-symbolic");
-  gtk_widget_set_margin_start (icon, 8);
-  gtk_widget_set_margin_end (icon, 8);
-  gtk_widget_set_margin_top (icon, 8);
-  gtk_widget_set_margin_bottom (icon, 8);
-  gtk_widget_set_halign (icon, GTK_ALIGN_END);
+  gtk_widget_set_halign (icon, GTK_ALIGN_START);
   gtk_widget_set_valign (icon, GTK_ALIGN_END);
   gtk_widget_set_visible (icon, cc_background_item_changes_with_time (item));
   gtk_widget_add_css_class (icon, "slideshow-icon");
+
+  check = gtk_image_new_from_icon_name ("background-selected-symbolic");
+  gtk_widget_set_halign (check, GTK_ALIGN_END);
+  gtk_widget_set_valign (check, GTK_ALIGN_END);
+  gtk_widget_add_css_class (check, "selected-check");
 
   if (BG_IS_RECENT_SOURCE (source))
     {
       button = gtk_button_new_from_icon_name ("window-close-symbolic");
       gtk_widget_set_halign (button, GTK_ALIGN_END);
       gtk_widget_set_valign (button, GTK_ALIGN_START);
-      gtk_widget_set_margin_start (button, 6);
-      gtk_widget_set_margin_end (button, 6);
-      gtk_widget_set_margin_top (button, 6);
-      gtk_widget_set_margin_bottom (button, 6);
 
       gtk_widget_add_css_class (button, "osd");
+      gtk_widget_add_css_class (button, "circular");
       gtk_widget_add_css_class (button, "remove-button");
 
       g_signal_connect (button,
@@ -137,8 +136,11 @@ create_widget_func (gpointer model_item,
     }
 
   overlay = gtk_overlay_new ();
+  gtk_widget_set_overflow (overlay, GTK_OVERFLOW_HIDDEN);
+  gtk_widget_add_css_class (overlay, "background-thumbnail");
   gtk_overlay_set_child (GTK_OVERLAY (overlay), picture);
   gtk_overlay_add_overlay (GTK_OVERLAY (overlay), icon);
+  gtk_overlay_add_overlay (GTK_OVERLAY (overlay), check);
   if (button)
     gtk_overlay_add_overlay (GTK_OVERLAY (overlay), button);
 
