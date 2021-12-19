@@ -18,16 +18,6 @@ i18n.merge_file(
 )
 
 install_data(
-  'slideshow-symbolic.svg',
-  install_dir: join_paths(control_center_icondir, 'hicolor', 'scalable', 'categories')
-)
-
-install_data(
-  'slideshow-emblem.svg',
-  install_dir: join_paths(control_center_icondir, 'hicolor', 'scalable', 'emblems')
-)
-
-install_data(
   'noise-texture-light.png',
   install_dir: join_paths(control_center_pkgdatadir, 'pixmaps')
 )

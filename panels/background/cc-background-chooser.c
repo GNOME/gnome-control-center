@@ -107,8 +107,7 @@ create_widget_func (gpointer model_item,
   picture = gtk_picture_new_for_pixbuf (pixbuf);
   gtk_picture_set_can_shrink (GTK_PICTURE (picture), FALSE);
 
-  icon = gtk_image_new_from_icon_name ("slideshow-emblem");
-  gtk_image_set_pixel_size (GTK_IMAGE (icon), 16);
+  icon = gtk_image_new_from_icon_name ("slideshow-symbolic");
   gtk_widget_set_margin_start (icon, 8);
   gtk_widget_set_margin_end (icon, 8);
   gtk_widget_set_margin_top (icon, 8);
@@ -116,17 +115,17 @@ create_widget_func (gpointer model_item,
   gtk_widget_set_halign (icon, GTK_ALIGN_END);
   gtk_widget_set_valign (icon, GTK_ALIGN_END);
   gtk_widget_set_visible (icon, cc_background_item_changes_with_time (item));
-  gtk_widget_add_css_class (icon, "slideshow-emblem");
+  gtk_widget_add_css_class (icon, "slideshow-icon");
 
   if (BG_IS_RECENT_SOURCE (source))
     {
       button = gtk_button_new_from_icon_name ("window-close-symbolic");
       gtk_widget_set_halign (button, GTK_ALIGN_END);
       gtk_widget_set_valign (button, GTK_ALIGN_START);
-      gtk_widget_set_margin_start (icon, 6);
-      gtk_widget_set_margin_end (icon, 6);
-      gtk_widget_set_margin_top (icon, 6);
-      gtk_widget_set_margin_bottom (icon, 6);
+      gtk_widget_set_margin_start (button, 6);
+      gtk_widget_set_margin_end (button, 6);
+      gtk_widget_set_margin_top (button, 6);
+      gtk_widget_set_margin_bottom (button, 6);
 
       gtk_widget_add_css_class (button, "osd");
       gtk_widget_add_css_class (button, "remove-button");
