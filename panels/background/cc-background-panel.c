@@ -43,6 +43,9 @@
 #define WP_PCOLOR_KEY "primary-color"
 #define WP_SCOLOR_KEY "secondary-color"
 
+#define INTERFACE_PATH_ID "org.gnome.desktop.interface"
+#define INTERFACE_COLOR_SCHEME_KEY "color-scheme"
+
 struct _CcBackgroundPanel
 {
   CcPanel parent_instance;
@@ -51,16 +54,76 @@ struct _CcBackgroundPanel
 
   GSettings *settings;
   GSettings *lock_settings;
+  GSettings *interface_settings;
 
   GnomeDesktopThumbnailFactory *thumb_factory;
 
   CcBackgroundItem *current_background;
 
   CcBackgroundChooser *background_chooser;
-  CcBackgroundPreview *desktop_preview;
+  CcBackgroundPreview *light_preview;
+  CcBackgroundPreview *dark_preview;
+  GtkToggleButton *light_toggle;
+  GtkToggleButton *dark_toggle;
 };
 
 CC_PANEL_REGISTER (CcBackgroundPanel, cc_background_panel)
+
+static void
+load_custom_css (CcBackgroundPanel *self)
+{
+  g_autoptr(GtkCssProvider) provider = NULL;
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/background/preview.css");
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+}
+
+static void
+reload_light_dark_toggles (CcBackgroundPanel *self)
+{
+  GDesktopColorScheme scheme;
+
+  scheme = g_settings_get_enum (self->interface_settings, INTERFACE_COLOR_SCHEME_KEY);
+
+  if (scheme == G_DESKTOP_COLOR_SCHEME_DEFAULT)
+    {
+      gtk_toggle_button_set_active (self->light_toggle, TRUE);
+    }
+  else if (scheme == G_DESKTOP_COLOR_SCHEME_PREFER_DARK)
+    {
+      gtk_toggle_button_set_active (self->dark_toggle, TRUE);
+    }
+  else
+    {
+      gtk_toggle_button_set_active (self->light_toggle, FALSE);
+      gtk_toggle_button_set_active (self->dark_toggle, FALSE);
+    }
+}
+
+static void
+set_color_scheme (CcBackgroundPanel   *self,
+                  GDesktopColorScheme  color_scheme)
+{
+  g_settings_set_enum (self->interface_settings,
+                       INTERFACE_COLOR_SCHEME_KEY,
+                       color_scheme);
+}
+
+/* Color schemes */
+
+static void
+on_light_dark_toggle_active_cb (CcBackgroundPanel *self)
+{
+  if (gtk_toggle_button_get_active (self->light_toggle))
+    set_color_scheme (self, G_DESKTOP_COLOR_SCHEME_DEFAULT);
+  else if (gtk_toggle_button_get_active (self->dark_toggle))
+    set_color_scheme (self, G_DESKTOP_COLOR_SCHEME_PREFER_DARK);
+}
+
+/* Background */
 
 static void
 update_preview (CcBackgroundPanel *panel)
@@ -68,7 +131,8 @@ update_preview (CcBackgroundPanel *panel)
   CcBackgroundItem *current_background;
 
   current_background = panel->current_background;
-  cc_background_preview_set_item (panel->desktop_preview, current_background);
+  cc_background_preview_set_item (panel->light_preview, current_background);
+  cc_background_preview_set_item (panel->dark_preview, current_background);
 }
 
 static gchar *
@@ -195,10 +259,9 @@ set_background (CcBackgroundPanel *panel,
     cc_background_xml_save (panel->current_background, filename);
 }
 
-
 static void
-on_chooser_background_chosen_cb (CcBackgroundPanel          *self,
-                                 CcBackgroundItem           *item)
+on_chooser_background_chosen_cb (CcBackgroundPanel *self,
+                                 CcBackgroundItem  *item)
 {
   set_background (self, self->settings, item);
   set_background (self, self->lock_settings, item);
@@ -223,6 +286,7 @@ cc_background_panel_dispose (GObject *object)
 
   g_clear_object (&panel->settings);
   g_clear_object (&panel->lock_settings);
+  g_clear_object (&panel->interface_settings);
   g_clear_object (&panel->thumb_factory);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
@@ -256,8 +320,12 @@ cc_background_panel_class_init (CcBackgroundPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, background_chooser);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, desktop_preview);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, light_preview);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, dark_preview);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, light_toggle);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPanel, dark_toggle);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_light_dark_toggle_active_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_chooser_background_chosen_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_add_picture_button_clicked_cb);
 }
@@ -286,10 +354,23 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   panel->lock_settings = g_settings_new (WP_LOCK_PATH_ID);
   g_settings_delay (panel->lock_settings);
 
+  panel->interface_settings = g_settings_new (INTERFACE_PATH_ID);
+
   /* Load the background */
   reload_current_bg (panel);
   update_preview (panel);
 
   /* Background settings */
   g_signal_connect_object (panel->settings, "changed", G_CALLBACK (on_settings_changed), panel, G_CONNECT_SWAPPED);
+
+  /* Interface settings */
+  reload_light_dark_toggles (panel);
+
+  g_signal_connect_object (panel->interface_settings,
+                           "changed::" INTERFACE_COLOR_SCHEME_KEY,
+                           G_CALLBACK (reload_light_dark_toggles),
+                           panel,
+                           G_CONNECT_SWAPPED);
+
+  load_custom_css (panel);
 }

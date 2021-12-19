@@ -26,26 +26,74 @@
 
                     <child>
                       <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Style</property>
 
                         <child>
                           <object class="AdwPreferencesRow">
                             <property name="activatable">False</property>
+                            <property name="focusable">False</property>
                             <child>
                               <object class="AdwClamp">
-                                <property name="visible">1</property>
-                                <property name="maximum_size">300</property>
-                                <property name="tightening_threshold">200</property>
+                                <property name="maximum_size">400</property>
+                                <property name="tightening_threshold">300</property>
                                 <child>
-                                  <object class="GtkBox">
-                                    <property name="spacing">24</property>
+                                  <object class="GtkGrid">
+                                    <property name="column-spacing">24</property>
+                                    <property name="row-spacing">12</property>
                                     <property name="margin-start">12</property>
                                     <property name="margin-end">12</property>
                                     <property name="margin-top">18</property>
-                                    <property name="margin-bottom">18</property>
+                                    <property name="margin-bottom">12</property>
                                     <property name="hexpand">True</property>
                                     <child>
-                                      <object class="CcBackgroundPreview" id="desktop_preview">
-                                        <property name="valign">center</property>
+                                      <object class="GtkToggleButton" id="light_toggle">
+                                        <signal name="notify::active" handler="on_light_dark_toggle_active_cb" swapped="true"/>
+                                        <child>
+                                          <object class="CcBackgroundPreview" id="light_preview"/>
+                                        </child>
+                                        <style>
+                                          <class name="background-preview-button"/>
+                                        </style>
+                                        <layout>
+                                          <property name="column">0</property>
+                                          <property name="row">0</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label" translatable="yes">Light</property>
+                                        <layout>
+                                          <property name="column">0</property>
+                                          <property name="row">1</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkToggleButton" id="dark_toggle">
+                                        <property name="group">light_toggle</property>
+                                        <signal name="notify::active" handler="on_light_dark_toggle_active_cb" swapped="true"/>
+                                        <child>
+                                          <object class="CcBackgroundPreview" id="dark_preview">
+                                            <property name="is-dark">True</property>
+                                          </object>
+                                        </child>
+                                        <style>
+                                          <class name="background-preview-button"/>
+                                        </style>
+                                        <layout>
+                                          <property name="column">1</property>
+                                          <property name="row">0</property>
+                                        </layout>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label" translatable="yes">Dark</property>
+                                        <layout>
+                                          <property name="column">1</property>
+                                          <property name="row">1</property>
+                                        </layout>
                                       </object>
                                     </child>
                                   </object>

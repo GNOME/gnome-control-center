@@ -26,24 +26,14 @@ struct _CcBackgroundPreview
 {
   GtkWidget         parent;
 
-  GtkImage         *animated_background_icon;
-  GtkLabel         *desktop_clock_label;
-  GtkFrame         *desktop_frame;
-  GtkDrawingArea   *drawing_area;
-  GtkFrame         *lock_frame;
-  GtkLabel         *lock_screen_label;
-  GtkWidget        *overlay;
-  GtkStack         *stack;
+  GtkWidget        *drawing_area;
+  GtkWidget        *light_dark_window;
+  GtkWidget        *dark_window;
 
   GnomeDesktopThumbnailFactory *thumbnail_factory;
 
+  gboolean          is_dark;
   CcBackgroundItem *item;
-  GSettings        *desktop_settings;
-
-  guint             lock_screen_time_timeout_id;
-  gboolean          is_lock_screen;
-  GDateTime        *previous_time;
-  gboolean          is_24h_format;
 };
 
 G_DEFINE_TYPE (CcBackgroundPreview, cc_background_preview, GTK_TYPE_WIDGET)
@@ -51,105 +41,12 @@ G_DEFINE_TYPE (CcBackgroundPreview, cc_background_preview, GTK_TYPE_WIDGET)
 enum
 {
   PROP_0,
-  PROP_IS_LOCK_SCREEN,
+  PROP_IS_DARK,
   PROP_ITEM,
   N_PROPS
 };
 
 static GParamSpec *properties [N_PROPS];
-
-/* Auxiliary methods */
-
-static void
-update_lock_screen_label (CcBackgroundPreview *self,
-                          gboolean             force)
-{
-  g_autoptr(GDateTime) now = NULL;
-  g_autofree gchar *label = NULL;
-
-  now = g_date_time_new_now_local ();
-
-  /* Don't update the label if the hour:minute pair did not change */
-  if (!force && self->previous_time &&
-      g_date_time_get_hour (now) == g_date_time_get_hour (self->previous_time) &&
-      g_date_time_get_minute (now) == g_date_time_get_minute (self->previous_time))
-    {
-      return;
-    }
-
-  if (self->is_24h_format)
-    label = g_date_time_format (now, "%R");
-  else
-    label = g_date_time_format (now, "%I:%M %p");
-
-  gtk_label_set_label (self->lock_screen_label, label);
-  gtk_label_set_label (self->desktop_clock_label, label);
-
-  g_clear_pointer (&self->previous_time, g_date_time_unref);
-  self->previous_time = g_steal_pointer (&now);
-}
-
-static void
-update_clock_format (CcBackgroundPreview *self)
-{
-  g_autofree gchar *clock_format = NULL;
-  gboolean is_24h_format;
-
-  clock_format = g_settings_get_string (self->desktop_settings, "clock-format");
-  is_24h_format = g_strcmp0 (clock_format, "24h") == 0;
-
-  if (is_24h_format != self->is_24h_format)
-    {
-      self->is_24h_format = is_24h_format;
-      update_lock_screen_label (self, TRUE);
-    }
-}
-
-static void
-load_custom_css (CcBackgroundPreview *self)
-{
-  g_autoptr(GtkCssProvider) provider = NULL;
-
-  /* use custom CSS */
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/background/preview.css");
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
-}
-
-static gboolean
-update_clock_cb (gpointer data)
-{
-  CcBackgroundPreview *self = data;
-
-  update_lock_screen_label (self, FALSE);
-
-  return G_SOURCE_CONTINUE;
-}
-
-static void
-start_monitor_time (CcBackgroundPreview *self)
-{
-  if (self->lock_screen_time_timeout_id > 0)
-    return;
-
-  self->lock_screen_time_timeout_id = g_timeout_add_seconds (1,
-                                                             update_clock_cb,
-                                                             self);
-}
-
-static void
-stop_monitor_time (CcBackgroundPreview *self)
-{
-  if (self->lock_screen_time_timeout_id > 0)
-    {
-      g_source_remove (self->lock_screen_time_timeout_id);
-      self->lock_screen_time_timeout_id = 0;
-    }
-}
-
 
 /* Callbacks */
 
@@ -188,7 +85,9 @@ cc_background_preview_dispose (GObject *object)
 {
   CcBackgroundPreview *self = (CcBackgroundPreview *)object;
 
-  g_clear_pointer (&self->overlay, gtk_widget_unparent);
+  g_clear_pointer (&self->drawing_area, gtk_widget_unparent);
+  g_clear_pointer (&self->light_dark_window, gtk_widget_unparent);
+  g_clear_pointer (&self->dark_window, gtk_widget_unparent);
 
   G_OBJECT_CLASS (cc_background_preview_parent_class)->dispose (object);
 }
@@ -198,15 +97,28 @@ cc_background_preview_finalize (GObject *object)
 {
   CcBackgroundPreview *self = (CcBackgroundPreview *)object;
 
-  g_clear_object (&self->desktop_settings);
   g_clear_object (&self->item);
   g_clear_object (&self->thumbnail_factory);
 
-  g_clear_pointer (&self->previous_time, g_date_time_unref);
-
-  stop_monitor_time (self);
-
   G_OBJECT_CLASS (cc_background_preview_parent_class)->finalize (object);
+}
+
+static void
+set_is_dark (CcBackgroundPreview *self,
+             gboolean             is_dark)
+{
+  self->is_dark = is_dark;
+
+  if (self->is_dark)
+    {
+      gtk_widget_add_css_class (self->light_dark_window, "dark");
+      gtk_widget_remove_css_class (self->light_dark_window, "light");
+    }
+  else
+    {
+      gtk_widget_add_css_class (self->light_dark_window, "light");
+      gtk_widget_remove_css_class (self->light_dark_window, "dark");
+    }
 }
 
 static void
@@ -219,9 +131,8 @@ cc_background_preview_get_property (GObject    *object,
 
   switch (prop_id)
     {
-    case PROP_IS_LOCK_SCREEN:
-      g_value_set_boolean (value, self->is_lock_screen);
-      break;
+    case PROP_IS_DARK:
+      g_value_set_boolean (value, self->is_dark);
 
     case PROP_ITEM:
       g_value_set_object (value, self->item);
@@ -242,10 +153,8 @@ cc_background_preview_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_IS_LOCK_SCREEN:
-      self->is_lock_screen = g_value_get_boolean (value);
-      gtk_stack_set_visible_child (self->stack,
-                                   self->is_lock_screen ? GTK_WIDGET (self->lock_frame) : GTK_WIDGET (self->desktop_frame));
+    case PROP_IS_DARK:
+      set_is_dark (self, g_value_get_boolean (value));
       break;
 
     case PROP_ITEM:
@@ -302,32 +211,35 @@ cc_background_preview_measure (GtkWidget      *widget,
                                gint           *minimum_baseline,
                                gint           *natural_baseline)
 {
-  CcBackgroundPreview *self = (CcBackgroundPreview *)widget;
-  int child_min, child_nat;
-  int width, height;
+  GtkWidget *child;
+  int width;
 
-  get_primary_monitor_geometry (&width, &height);
-
-  gtk_widget_measure (self->overlay,
-                      orientation,
-                      for_size,
-                      &child_min,
-                      &child_nat,
-                      NULL, NULL);
+  get_primary_monitor_geometry (&width, NULL);
 
   if (orientation == GTK_ORIENTATION_HORIZONTAL)
     *natural = width;
   else if (for_size < 0)
-    *natural = height;
+    *natural = 0;
   else
-    *natural = floor ((double) MIN (for_size, width) / width * height);
-
-  *natural = MAX (*natural, child_nat);
+    *natural = floor ((double) for_size * 0.75); /* 4:3 aspect ratio */
 
   if (orientation == GTK_ORIENTATION_VERTICAL)
     *minimum = *natural;
   else
     *minimum = 0;
+
+  for (child = gtk_widget_get_first_child (widget);
+       child;
+       child = gtk_widget_get_next_sibling (child))
+    {
+      int child_min, child_nat;
+
+      gtk_widget_measure (child, orientation, for_size,
+                          &child_min, &child_nat, NULL, NULL);
+
+      *minimum = MAX (*minimum, child_min);
+      *natural = MAX (*natural, child_nat);
+    }
 }
 
 static void
@@ -337,8 +249,31 @@ cc_background_preview_size_allocate (GtkWidget *widget,
                                      gint       baseline)
 {
   CcBackgroundPreview *self = CC_BACKGROUND_PREVIEW (widget);
+  int window_width, window_height, margin_x, margin_y;
+  int opposite_margin_x, opposite_margin_y;
+  GskTransform *front_transform, *back_transform;
+  gboolean is_rtl;
 
-  gtk_widget_allocate (self->overlay, width, height, baseline, NULL);
+  window_width = ceil (width * 0.5);
+  window_height = ceil (height * 0.5);
+  margin_x = floor (width * 0.15);
+  margin_y = floor (height * 0.15);
+  opposite_margin_x = width - window_width - margin_x;
+  opposite_margin_y = height - window_height - margin_y;
+  is_rtl = gtk_widget_get_direction (widget) == GTK_TEXT_DIR_RTL;
+
+  front_transform =
+    gsk_transform_translate (NULL, &GRAPHENE_POINT_INIT (is_rtl ? opposite_margin_x : margin_x,
+                                                         opposite_margin_y));
+  back_transform =
+    gsk_transform_translate (NULL, &GRAPHENE_POINT_INIT (is_rtl ? margin_x : opposite_margin_x,
+                                                         margin_y));
+
+  gtk_widget_allocate (self->drawing_area, width, height, baseline, NULL);
+  gtk_widget_allocate (self->dark_window, window_width, window_height,
+                       baseline, back_transform);
+  gtk_widget_allocate (self->light_dark_window, window_width, window_height,
+                       baseline, front_transform);
 }
 
 static void
@@ -356,11 +291,11 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
   widget_class->measure = cc_background_preview_measure;
   widget_class->size_allocate = cc_background_preview_size_allocate;
 
-  properties[PROP_IS_LOCK_SCREEN] = g_param_spec_boolean ("is-lock-screen",
-                                                          "Lock screen",
-                                                          "Whether the preview is of the lock screen",
-                                                          FALSE,
-                                                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
+  properties[PROP_IS_DARK] = g_param_spec_boolean ("is-dark",
+                                                   "Is dark",
+                                                   "Whether the preview is dark",
+                                                   FALSE,
+                                                   G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_ITEM] = g_param_spec_object ("item",
                                                "Item",
@@ -372,14 +307,11 @@ cc_background_preview_class_init (CcBackgroundPreviewClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/background/cc-background-preview.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, animated_background_icon);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, desktop_clock_label);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, desktop_frame);
   gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, drawing_area);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, lock_frame);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, lock_screen_label);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, overlay);
-  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, light_dark_window);
+  gtk_widget_class_bind_template_child (widget_class, CcBackgroundPreview, dark_window);
+
+  gtk_widget_class_set_css_name (widget_class, "background-preview");
 }
 
 static void
@@ -388,17 +320,6 @@ cc_background_preview_init (CcBackgroundPreview *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->thumbnail_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
-  self->desktop_settings = g_settings_new ("org.gnome.desktop.interface");
-
-  g_signal_connect_object (self->desktop_settings,
-                           "changed::clock-format",
-                           G_CALLBACK (update_clock_format),
-                           self,
-                           G_CONNECT_SWAPPED);
-
-  update_clock_format (self);
-  load_custom_css (self);
-  start_monitor_time (self);
 }
 
 CcBackgroundItem*
@@ -419,11 +340,9 @@ cc_background_preview_set_item (CcBackgroundPreview *self,
   if (!g_set_object (&self->item, item))
     return;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->animated_background_icon),
-                          cc_background_item_changes_with_time (item));
-
-  gtk_drawing_area_set_draw_func (self->drawing_area, draw_preview_func, self, NULL);
-  gtk_widget_queue_draw (GTK_WIDGET (self->drawing_area));
+  gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (self->drawing_area),
+                                  draw_preview_func, self, NULL);
+  gtk_widget_queue_draw (self->drawing_area);
 
   g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ITEM]);
 }

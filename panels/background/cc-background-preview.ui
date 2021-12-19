@@ -2,120 +2,54 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcBackgroundPreview" parent="GtkWidget">
-    <property name="hexpand">True</property>
-    <property name="vexpand">False</property>
-    <style>
-      <class name="frame" />
-    </style>
+    <property name="overflow">hidden</property>
+    <property name="width-request">2</property>
+    <property name="height-request">2</property>
 
+    <!-- Wallpaper -->
     <child>
-      <object class="GtkOverlay" id="overlay">
-       <property name="hexpand">True</property>
+      <object class="GtkDrawingArea" id="drawing_area"/>
+    </child>
 
-        <!-- Wallpaper -->
+    <!-- Always dark window -->
+    <child>
+      <object class="AdwBin" id="dark_window">
+        <property name="overflow">hidden</property>
+        <style>
+          <class name="window"/>
+          <class name="back"/>
+          <class name="dark"/>
+        </style>
         <child>
-          <object class="GtkDrawingArea" id="drawing_area">
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-            <property name="width-request">2</property>
-            <property name="height-request">2</property>
-          </object>
-        </child>
-
-        <!-- Desktop / Lock Screen widgets -->
-        <child type="overlay">
-          <object class="GtkStack" id="stack">
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
-
-            <child>
-              <object class="GtkFrame" id="desktop_frame">
-                <property name="valign">start</property>
-                <style>
-                  <class name="desktop-preview" />
-                </style>
-
-                <child>
-                  <object class="GtkCenterBox">
-
-                    <child type="start">
-                      <object class="GtkLabel">
-                       <property name="label" translatable="yes">Activities</property>
-                      </object>
-                    </child>
-
-                    <child type="center">
-                      <object class="GtkLabel" id="desktop_clock_label">
-                     </object>
-                    </child>
-
-                    <child type="end">
-                      <object class="GtkBox">
-                       <property name="spacing">4</property>
-
-                        <child>
-                          <object class="GtkImage">
-                           <property name="icon-name">network-wireless-symbolic</property>
-                            <property name="pixel-size">6</property>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="GtkImage">
-                           <property name="icon-name">audio-volume-high-symbolic</property>
-                            <property name="pixel-size">6</property>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="GtkImage">
-                           <property name="icon-name">battery-low-symbolic</property>
-                            <property name="pixel-size">6</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-
-            <child>
-              <object class="GtkFrame" id="lock_frame">
-                <child>
-                  <object class="GtkLabel" id="lock_screen_label">
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <property name="xalign">0.5</property>
-                    <property name="yalign">0.5</property>
-                  </object>
-                </child>
-                <style>
-                  <class name="lock-screen-preview" />
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-
-        <!-- Wallpaper -->
-        <child type="overlay">
-          <object class="GtkImage" id="animated_background_icon">
-           <property name="halign">end</property>
-            <property name="valign">end</property>
-            <property name="margin-end">8</property>
-            <property name="margin-bottom">8</property>
-            <property name="pixel-size">16</property>
-            <property name="icon-name">slideshow-emblem</property>
+          <object class="AdwBin">
             <style>
-              <class name="slideshow-icon" />
+              <class name="header-bar"/>
             </style>
+            <property name="valign">start</property>
           </object>
         </child>
-
       </object>
     </child>
+
+    <!-- Light/dark window -->
+    <child>
+      <object class="AdwBin" id="light_dark_window">
+        <property name="overflow">hidden</property>
+        <style>
+          <class name="window"/>
+          <class name="front"/>
+          <class name="light"/>
+        </style>
+        <child>
+          <object class="AdwBin">
+            <style>
+              <class name="header-bar"/>
+            </style>
+            <property name="valign">start</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
   </template>
 </interface>

@@ -1,30 +1,56 @@
-frame.desktop-preview {
-  min-height: 10px;
-  padding: 0 4px;
-  background-color: black;
-  border-radius: 0;
+background-preview {
+  border-radius: 6px;
 }
 
-frame.desktop-preview image {
+background-preview .window {
+  border-radius: 6px;
+  box-shadow: 0 1px 4px 1px alpha(black, 0.13),
+              0 1px 10px 5px alpha(black, 0.09),
+              0 3px 16px 8px alpha(black, 0.04),
+              0 0 0 1px alpha(black, .05);
+}
+
+background-preview .window .header-bar {
+  min-height: 15px;
+  box-shadow: inset 0 -1px @borders;
+}
+
+background-preview .window.light {
+  background-color: #fafafa;
+  color: alpha(black, .8);
+}
+
+background-preview .window.front.light .header-bar {
+  background-color: #ebebeb;
+}
+
+background-preview .window.dark {
+  background-color: #242424;
   color: white;
 }
 
-frame.desktop-preview label {
-  color: white;
-  font-weight: bold;
-  font-size: 6px;
+background-preview .window.front.dark .header-bar {
+  background-color: #303030;
 }
 
-frame.lock-screen-preview {
-  border: solid rgba(0, 0, 0, 0.33);
-  border-width: 10px 0 0 0;
+.background-preview-button {
+  background: none;
+  border-radius: 9px;
+  padding: 3px;
+  box-shadow: none;
+  outline: none;
 }
 
-frame.lock-screen-preview label {
-  color: white;
-  font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  font-size: 1.2em;
+.background-preview-button:checked {
+  box-shadow: 0 0 0 3px @accent_color;
+}
+
+.background-preview-button:focus:focus-visible {
+  box-shadow: 0 0 0 3px alpha(@accent_color, .3);
+}
+
+.background-preview-button:checked:focus:focus-visible {
+  box-shadow: 0 0 0 3px @accent_color, 0 0 0 6px alpha(@accent_color, .3);
 }
 
 image.slideshow-icon {
