@@ -1,4 +1,5 @@
-gcr_dep = [dependency('gcr-3')]
+
+gcr_dep = [dependency('gcr-base-3')]
 
 deps = common_deps + network_manager_deps + gcr_dep + [polkit_gobject_dep]
 panels_list += cappletname

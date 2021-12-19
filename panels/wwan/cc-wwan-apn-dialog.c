@@ -31,7 +31,6 @@
 
 #include "cc-wwan-device.h"
 #include "cc-wwan-data.h"
-#include "list-box-helper.h"
 #include "cc-wwan-apn-dialog.h"
 #include "cc-wwan-resources.h"
 
@@ -52,7 +51,7 @@ struct _CcWwanApnDialog
   GtkEntry          *username_entry;
   GtkGrid           *apn_edit_view;
   GtkListBox        *apn_list;
-  GtkRadioButton    *apn_radio_button;
+  GtkCheckButton    *apn_radio_button;
   GtkScrolledWindow *apn_list_view;
   GtkStack          *apn_settings_stack;
 
@@ -81,7 +80,7 @@ G_DECLARE_FINAL_TYPE (CcWwanApnRow, cc_wwan_apn_row, CC, WWAN_APN_ROW, GtkListBo
 struct _CcWwanApnRow
 {
   GtkListBoxRow   parent_instance;
-  GtkRadioButton *radio_button;
+  GtkCheckButton *radio_button;
   CcWwanDataApn  *apn;
 };
 
@@ -133,10 +132,10 @@ cc_wwan_apn_back_clicked_cb (CcWwanApnDialog *self)
 static void
 cc_wwan_apn_add_clicked_cb (CcWwanApnDialog *self)
 {
-  gtk_entry_set_text (self->name_entry, "");
-  gtk_entry_set_text (self->apn_entry, "");
-  gtk_entry_set_text (self->username_entry, "");
-  gtk_entry_set_text (self->password_entry, "");
+  gtk_editable_set_text (GTK_EDITABLE (self->name_entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (self->apn_entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (self->username_entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (self->password_entry), "");
 
   gtk_widget_hide (GTK_WIDGET (self->add_button));
   gtk_widget_show (GTK_WIDGET (self->save_button));
@@ -154,16 +153,16 @@ cc_wwan_apn_save_clicked_cb (CcWwanApnDialog *self)
   apn = self->apn_to_save;
   self->apn_to_save = NULL;
 
-  name = gtk_entry_get_text (self->name_entry);
-  apn_name = gtk_entry_get_text (self->apn_entry);
+  name = gtk_editable_get_text (GTK_EDITABLE (self->name_entry));
+  apn_name = gtk_editable_get_text (GTK_EDITABLE (self->apn_entry));
 
   if (!apn)
     apn = cc_wwan_data_apn_new ();
 
   cc_wwan_data_apn_set_name (apn, name);
   cc_wwan_data_apn_set_apn (apn, apn_name);
-  cc_wwan_data_apn_set_username (apn, gtk_entry_get_text (self->username_entry));
-  cc_wwan_data_apn_set_password (apn, gtk_entry_get_text (self->password_entry));
+  cc_wwan_data_apn_set_username (apn, gtk_editable_get_text (GTK_EDITABLE (self->username_entry)));
+  cc_wwan_data_apn_set_password (apn, gtk_editable_get_text (GTK_EDITABLE (self->password_entry)));
 
   cc_wwan_data_save_apn (self->wwan_data, apn, NULL, NULL, NULL);
 
@@ -180,7 +179,7 @@ cc_wwan_apn_entry_changed_cb (CcWwanApnDialog *self)
   gboolean valid_name, valid_apn;
 
   widget = GTK_WIDGET (self->name_entry);
-  str = gtk_entry_get_text (self->name_entry);
+  str = gtk_editable_get_text (GTK_EDITABLE (self->name_entry));
   valid_name = str && *str;
 
   if (valid_name)
@@ -189,7 +188,7 @@ cc_wwan_apn_entry_changed_cb (CcWwanApnDialog *self)
     gtk_style_context_add_class (gtk_widget_get_style_context (widget), "error");
 
   widget = GTK_WIDGET (self->apn_entry);
-  str = gtk_entry_get_text (self->apn_entry);
+  str = gtk_editable_get_text (GTK_EDITABLE (self->apn_entry));
   valid_apn = str && *str;
 
   if (valid_apn)
@@ -204,7 +203,7 @@ static void
 cc_wwan_apn_activated_cb (CcWwanApnDialog *self,
                           CcWwanApnRow    *row)
 {
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (row->radio_button), TRUE);
+  gtk_check_button_set_active (GTK_CHECK_BUTTON (row->radio_button), TRUE);
 }
 
 static void
@@ -213,7 +212,7 @@ cc_wwan_apn_changed_cb (CcWwanApnDialog *self,
 {
   CcWwanApnRow *row;
 
-  if (!gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)))
+  if (!gtk_check_button_get_active (GTK_CHECK_BUTTON (widget)))
     return;
 
   widget = gtk_widget_get_ancestor (widget, CC_TYPE_WWAN_APN_ROW);
@@ -239,10 +238,10 @@ cc_wwan_apn_edit_clicked_cb (CcWwanApnDialog *self,
   gtk_widget_show (GTK_WIDGET (self->save_button));
   gtk_widget_hide (GTK_WIDGET (self->add_button));
 
-  gtk_entry_set_text (self->name_entry, cc_wwan_data_apn_get_name (apn));
-  gtk_entry_set_text (self->apn_entry, cc_wwan_data_apn_get_apn (apn));
-  gtk_entry_set_text (self->username_entry, cc_wwan_data_apn_get_username (apn));
-  gtk_entry_set_text (self->password_entry, cc_wwan_data_apn_get_password (apn));
+  gtk_editable_set_text (GTK_EDITABLE (self->name_entry), cc_wwan_data_apn_get_name (apn));
+  gtk_editable_set_text (GTK_EDITABLE (self->apn_entry), cc_wwan_data_apn_get_apn (apn));
+  gtk_editable_set_text (GTK_EDITABLE (self->username_entry), cc_wwan_data_apn_get_username (apn));
+  gtk_editable_set_text (GTK_EDITABLE (self->password_entry), cc_wwan_data_apn_get_password (apn));
 
   gtk_stack_set_visible_child (self->apn_settings_stack,
                                GTK_WIDGET (self->apn_edit_view));
@@ -265,14 +264,15 @@ cc_wwan_apn_dialog_row_new (CcWwanDataApn   *apn,
                        "margin-end", 6,
                        NULL);
 
-  radio = gtk_radio_button_new_from_widget (self->apn_radio_button);
-  row->radio_button = GTK_RADIO_BUTTON (radio);
+  radio = gtk_check_button_new ();
+  row->radio_button = GTK_CHECK_BUTTON (radio);
+  gtk_check_button_set_group (row->radio_button, self->apn_radio_button);
   gtk_widget_set_margin_end (radio, 12);
   gtk_grid_attach (GTK_GRID (grid), radio, 0, 0, 1, 2);
   row->apn = g_object_ref (apn);
 
   if (cc_wwan_data_get_default_apn (self->wwan_data) == apn)
-    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (radio), TRUE);
+    gtk_check_button_set_active (GTK_CHECK_BUTTON (radio), TRUE);
   g_signal_connect_object (radio, "toggled",
                            G_CALLBACK (cc_wwan_apn_changed_cb),
                            self, G_CONNECT_SWAPPED);
@@ -288,15 +288,13 @@ cc_wwan_apn_dialog_row_new (CcWwanDataApn   *apn,
   gtk_style_context_add_class (context, "dim-label");
   gtk_grid_attach (GTK_GRID (grid), apn_label, 1, 1, 1, 1);
 
-  edit_button = gtk_button_new_from_icon_name ("emblem-system-symbolic",
-                                               GTK_ICON_SIZE_BUTTON);
+  edit_button = gtk_button_new_from_icon_name ("emblem-system-symbolic");
   g_signal_connect_object (edit_button, "clicked",
                            G_CALLBACK (cc_wwan_apn_edit_clicked_cb),
                            self, G_CONNECT_SWAPPED);
   gtk_grid_attach (GTK_GRID (grid), edit_button, 2, 0, 1, 2);
 
-  gtk_container_add (GTK_CONTAINER (row), grid);
-  gtk_widget_show_all (GTK_WIDGET (row));
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), grid);
 
   return GTK_WIDGET (row);
 }
@@ -351,6 +349,7 @@ cc_wwan_apn_dialog_show (GtkWidget *widget)
 {
   CcWwanApnDialog *self = (CcWwanApnDialog *)widget;
 
+  gtk_widget_set_sensitive (GTK_WIDGET (self->save_button), FALSE);
   gtk_widget_show (GTK_WIDGET (self->add_button));
   gtk_widget_hide (GTK_WIDGET (self->save_button));
   gtk_stack_set_visible_child (self->apn_settings_stack,

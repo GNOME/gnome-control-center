@@ -28,7 +28,7 @@ panels = [
   'universal-access',
   'usage',
 #  'user-accounts',
-#  'wwan',
+ 'wwan',
 ]
 
 if host_is_linux

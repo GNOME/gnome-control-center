@@ -24,7 +24,7 @@
 
 #pragma once
 
-#include <handy.h>
+#include <adwaita.h>
 #include <shell/cc-panel.h>
 
 #include "cc-wwan-device.h"

@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* cc-wwan-panel.c
  *
- * Copyright 2019 Purism SPC
+ * Copyright 2019,2022 Purism SPC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -48,9 +48,7 @@ struct _CcWwanPanel
 {
   CcPanel parent_instance;
 
-  GtkListBox       *data_select_listbox;
-  GtkPopover       *data_select_popover;
-  GtkLabel         *data_sim_label;
+  AdwComboRow      *data_list_row;
   GtkListBox       *data_sim_select_listbox;
   GtkStack         *devices_stack;
   GtkStackSwitcher *devices_switcher;
@@ -68,6 +66,7 @@ struct _CcWwanPanel
   CcWwanDevice *data_device;
   GListStore   *devices;
   GListStore   *data_devices;
+  GListStore   *data_devices_name_list;
   GCancellable *cancellable;
 
   CmdlineOperation  arg_operation;
@@ -147,19 +146,17 @@ handle_argv (CcWwanPanel *self)
   if (self->arg_operation == OPERATION_SHOW_DEVICE &&
       self->arg_operation)
     {
-      g_autoptr(GList) pages = NULL;
-
-      pages = gtk_container_get_children (GTK_CONTAINER (self->devices_stack));
-
-      for (GList *page = pages; page; page = page->next)
+      for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->devices_stack));
+           child;
+           child = gtk_widget_get_next_sibling (child))
         {
           CcWwanDevice *device;
 
-          device = cc_wwan_device_page_get_device (page->data);
+          device = cc_wwan_device_page_get_device (CC_WWAN_DEVICE_PAGE (child));
 
           if (g_strcmp0 (cc_wwan_device_get_path (device), self->arg_device) == 0)
             {
-              gtk_stack_set_visible_child (GTK_STACK (self->devices_stack), page->data);
+              gtk_stack_set_visible_child (GTK_STACK (self->devices_stack), child);
               g_debug ("Opening device %s", self->arg_device);
               reset_command_line_args (self);
               return;
@@ -238,36 +235,6 @@ wwan_model_get_item_from_mm_object (GListModel *model,
   return NULL;
 }
 
-static CcDataDeviceRow *
-cc_data_device_row_new (CcWwanDevice *device,
-                        CcWwanPanel  *self)
-{
-  CcDataDeviceRow *row;
-  GtkWidget *box, *label, *image;
-  g_autofree gchar *operator = NULL;
-  gint index;
-
-  row = g_object_new (CC_TYPE_DATA_DEVICE_ROW, NULL);
-  row->device = device;
-
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (box);
-  g_object_set (box, "margin", 12, NULL);
-  gtk_container_add (GTK_CONTAINER (row), box);
-
-  index = wwan_model_get_item_index (G_LIST_MODEL (self->devices), device);
-  operator = g_strdup_printf ("SIM %d", index + 1);
-  label = gtk_label_new (operator);
-  gtk_widget_show (label);
-  gtk_container_add (GTK_CONTAINER (box), label);
-
-  image = gtk_image_new_from_icon_name ("emblem-ok-symbolic", GTK_ICON_SIZE_BUTTON);
-  row->ok_emblem = GTK_IMAGE (image);
-  gtk_container_add (GTK_CONTAINER (box), image);
-
-  return row;
-}
-
 static void
 wwan_notification_close_clicked_cb (CcWwanPanel *self)
 {
@@ -280,47 +247,29 @@ wwan_notification_close_clicked_cb (CcWwanPanel *self)
 }
 
 static void
-wwan_data_selector_clicked_cb (CcWwanPanel *self)
+cc_wwan_panel_update_data_selection (CcWwanPanel *self)
 {
-  if (gtk_widget_is_visible (GTK_WIDGET (self->data_select_popover)))
-    gtk_popover_popdown (self->data_select_popover);
-  else
-    gtk_popover_popup (self->data_select_popover);
+  int i;
+
+  if (!self->data_device)
+    return;
+
+  i = wwan_model_get_item_index (G_LIST_MODEL (self->data_devices), self->data_device);
+
+  if (i != -1)
+    adw_combo_row_set_selected (self->data_list_row, i);
 }
 
 static void
-cc_wwan_panel_update_data_selection (CcDataDeviceRow *row,
-                                     CcWwanPanel     *self)
-{
-  if (self->data_device == row->device)
-    {
-      g_autofree gchar *str = NULL;
-      gint i;
-
-      i = wwan_model_get_item_index (G_LIST_MODEL (self->devices), row->device);
-      g_assert (i >= 0);
-
-      /* Human index starts from 1 */
-      str = g_strdup_printf ("SIM %d", i + 1);
-      gtk_label_set_label (self->data_sim_label, str);
-
-      gtk_widget_show (GTK_WIDGET (row->ok_emblem));
-    }
-  else
-    {
-      gtk_widget_hide (GTK_WIDGET (row->ok_emblem));
-    }
-}
-
-static void
-cc_wwan_data_item_activate_cb (CcWwanPanel     *self,
-                               CcDataDeviceRow *row)
+cc_wwan_data_item_activate_cb (CcWwanPanel  *self,
+                               CcWwanDevice *device)
 {
   CcWwanData *data;
 
-  gtk_popover_popdown (self->data_select_popover);
+  if (device == self->data_device)
+    return;
 
-  if (row->device == self->data_device)
+  if (!self->data_device)
     return;
 
   /* Set lower priority for previously selected APN */
@@ -329,13 +278,12 @@ cc_wwan_data_item_activate_cb (CcWwanPanel     *self,
   cc_wwan_data_save_settings (data, NULL, NULL, NULL);
 
   /* Set high priority for currently selected APN */
-  data = cc_wwan_device_get_data (row->device);
+  data = cc_wwan_device_get_data (device);
   cc_wwan_data_set_priority (data, CC_WWAN_APN_PRIORITY_HIGH);
   cc_wwan_data_save_settings (data, NULL, NULL, NULL);
 
-  self->data_device = row->device;
-  gtk_container_foreach (GTK_CONTAINER (self->data_select_listbox),
-                         (GtkCallback) cc_wwan_panel_update_data_selection, self);
+  self->data_device = device;
+  cc_wwan_panel_update_data_selection (self);
 }
 
 static void
@@ -352,6 +300,22 @@ wwan_on_airplane_off_clicked_cb (CcWwanPanel *self)
                      self->cancellable,
                      NULL,
                      NULL);
+}
+
+static void
+wwan_data_list_selected_sim_changed_cb (CcWwanPanel *self)
+{
+  CcWwanDevice *device;
+  GObject *selected;
+
+  g_assert (CC_IS_WWAN_PANEL (self));
+
+  selected = adw_combo_row_get_selected_item (self->data_list_row);
+  if (!selected)
+    return;
+
+  device = g_object_get_data (selected, "device");
+  cc_wwan_data_item_activate_cb (self, device);
 }
 
 static gboolean
@@ -466,12 +430,14 @@ cc_wwan_panel_update_page_title (CcWwanDevicePage *device_page,
   g_autofree gchar *title = NULL;
   g_autofree gchar *name = NULL;
   CcWwanDevice *device;
-  GtkWidget *parent;
+  GtkStackPage *page;
   gint index;
+
+  g_assert (CC_IS_WWAN_DEVICE_PAGE (device_page));
 
   device = cc_wwan_device_page_get_device (device_page);
 
-  parent = gtk_widget_get_parent (GTK_WIDGET (device_page));
+  page = gtk_stack_get_page (GTK_STACK (self->devices_stack), GTK_WIDGET (device_page));
   index  = wwan_model_get_item_index (G_LIST_MODEL (self->devices), device);
 
   if (index == -1)
@@ -481,11 +447,8 @@ cc_wwan_panel_update_page_title (CcWwanDevicePage *device_page,
   cc_wwan_device_page_set_sim_index (device_page, index + 1);
   title = g_strdup_printf (_("SIM %d"), index + 1);
   name = g_strdup_printf ("sim-%d", index + 1);
-  gtk_container_child_set (GTK_CONTAINER (parent),
-                           GTK_WIDGET (device_page),
-                           "title", title,
-                           "name", name,
-                           NULL);
+  gtk_stack_page_set_title (page, title);
+  gtk_stack_page_set_name (page, name);
 }
 
 static void
@@ -504,8 +467,10 @@ cc_wwan_panel_remove_mm_object (CcWwanPanel *self,
     return;
 
   index = wwan_model_get_item_index (G_LIST_MODEL (self->data_devices), device);
-  if (index != -1)
+  if (index != -1) {
     g_list_store_remove (self->data_devices, index);
+    g_list_store_remove (self->data_devices_name_list, index);
+  }
 
   index = wwan_model_get_item_index (G_LIST_MODEL (self->devices), device);
   if (index == -1)
@@ -514,13 +479,36 @@ cc_wwan_panel_remove_mm_object (CcWwanPanel *self,
   g_list_store_remove (self->devices, index);
   stack_name = g_strdup_printf ("sim-%d", index + 1);
   device_page = gtk_stack_get_child_by_name (self->devices_stack, stack_name);
-  gtk_container_remove (GTK_CONTAINER (self->devices_stack), device_page);
+  gtk_stack_remove (GTK_STACK (self->devices_stack), device_page);
 
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->data_devices));
   g_list_model_items_changed (G_LIST_MODEL (self->data_devices), 0, n_items, n_items);
-  gtk_container_foreach (GTK_CONTAINER (self->devices_stack),
-                         (GtkCallback)cc_wwan_panel_update_page_title,
-                         self);
+
+  for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->devices_stack));
+       child;
+       child = gtk_widget_get_next_sibling (child))
+    cc_wwan_panel_update_page_title (CC_WWAN_DEVICE_PAGE (child), self);
+}
+
+static void
+wwan_panel_add_data_device_to_list (CcWwanPanel  *self,
+                                    CcWwanDevice *device)
+{
+  g_autoptr(GtkStringObject) str = NULL;
+  g_autofree char *operator = NULL;
+  int index;
+
+  index = wwan_model_get_item_index (G_LIST_MODEL (self->data_devices), device);
+  if (index != -1)
+    return;
+
+  g_list_store_append (self->data_devices, device);
+
+  index = wwan_model_get_item_index (G_LIST_MODEL (self->devices), device);
+  operator = g_strdup_printf ("SIM %d", index + 1);
+  str = gtk_string_object_new (operator);
+  g_object_set_data_full (G_OBJECT (str), "device", g_object_ref (device), g_object_unref);
+  g_list_store_append (self->data_devices_name_list, str);
 }
 
 static void
@@ -536,6 +524,7 @@ cc_wwan_panel_update_data_connections (CcWwanPanel *self)
    * So let’s remove every data device and re-add.
    */
   g_list_store_remove_all (self->data_devices);
+  g_list_store_remove_all (self->data_devices_name_list);
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->devices));
 
   for (i = 0; i < n_items; i++)
@@ -557,16 +546,11 @@ cc_wwan_panel_update_data_connections (CcWwanPanel *self)
         }
 
       if (cc_wwan_data_get_enabled (device_data))
-        g_list_store_append (self->data_devices, device);
+        wwan_panel_add_data_device_to_list (self, device);
     }
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self->data_sim_select_listbox),
-                            g_list_model_get_n_items (G_LIST_MODEL (self->data_devices)) > 1);
   if (active_data)
-    gtk_container_foreach (GTK_CONTAINER (self->data_select_listbox),
-                           (GtkCallback)cc_wwan_panel_update_data_selection, self);
-  else
-    gtk_label_set_label (self->data_sim_label, "");
+    cc_wwan_panel_update_data_selection (self);
 }
 
 static void
@@ -591,7 +575,7 @@ cc_wwan_panel_update_devices (CcWwanPanel *self)
                                self, G_CONNECT_SWAPPED);
 
       if (cc_wwan_device_get_data (device))
-        g_list_store_append (self->data_devices, device);
+        wwan_panel_add_data_device_to_list (self, device);
     }
 
   cc_wwan_panel_update_data_connections (self);
@@ -729,6 +713,7 @@ cc_wwan_panel_dispose (GObject *object)
 
   g_clear_object (&self->devices);
   g_clear_object (&self->data_devices);
+  g_clear_object (&self->data_devices_name_list);
   g_clear_object (&self->mm_manager);
   g_clear_object (&self->nm_client);
   g_clear_object (&self->cancellable);
@@ -753,9 +738,7 @@ cc_wwan_panel_class_init (CcWwanPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/wwan/cc-wwan-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_select_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_select_popover);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_sim_label);
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_list_row);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_sim_select_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, devices_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, devices_switcher);
@@ -765,9 +748,9 @@ cc_wwan_panel_class_init (CcWwanPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, notification_label);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, notification_revealer);
 
+  gtk_widget_class_bind_template_callback (widget_class, wwan_data_list_selected_sim_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_on_airplane_off_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_notification_close_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, wwan_data_selector_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, cc_wwan_data_item_activate_cb);
 }
 
@@ -783,10 +766,9 @@ cc_wwan_panel_init (CcWwanPanel *self)
   self->cancellable = g_cancellable_new ();
   self->devices = g_list_store_new (CC_TYPE_WWAN_DEVICE);
   self->data_devices = g_list_store_new (CC_TYPE_WWAN_DEVICE);
-  gtk_list_box_bind_model (GTK_LIST_BOX (self->data_select_listbox),
-                           G_LIST_MODEL (self->data_devices),
-                           (GtkListBoxCreateWidgetFunc) cc_data_device_row_new,
-                           self, NULL);
+  self->data_devices_name_list = g_list_store_new (GTK_TYPE_STRING_OBJECT);
+  adw_combo_row_set_model (ADW_COMBO_ROW (self->data_list_row),
+                           G_LIST_MODEL (self->data_devices_name_list));
 
   g_signal_connect_object (self->notification_label, "notify::label",
                            G_CALLBACK (cc_wwan_panel_notification_changed_cb),

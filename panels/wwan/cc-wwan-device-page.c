@@ -29,9 +29,8 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 #define GCR_API_SUBJECT_TO_CHANGE
-#include <gcr/gcr.h>
+#include <gcr/gcr-base.h>
 
-#include "list-box-helper.h"
 #include "cc-list-row.h"
 #include "cc-wwan-data.h"
 #include "cc-wwan-mode-dialog.h"
@@ -153,7 +152,7 @@ wwan_data_show_apn_dialog (CcWwanDevicePage *self)
 {
   GtkWindow *top_level;
 
-  top_level = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+  top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
   if (!self->apn_dialog)
     {
@@ -364,7 +363,7 @@ wwan_network_settings_activated_cb (CcWwanDevicePage *self,
   GtkWidget *dialog;
   GtkWindow *top_level;
 
-  top_level = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+  top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
   if (row == self->network_mode_row)
     {
@@ -394,7 +393,7 @@ wwan_advanced_settings_activated_cb (CcWwanDevicePage *self,
 {
   GtkWindow *top_level;
 
-  top_level = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+  top_level = GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self)));
 
   if (row == self->sim_lock_row)
     {
@@ -535,11 +534,11 @@ cc_wwan_device_page_dispose (GObject *object)
 {
   CcWwanDevicePage *self = (CcWwanDevicePage *)object;
 
-  g_clear_pointer ((GtkWidget **)&self->apn_dialog, gtk_widget_destroy);
-  g_clear_pointer ((GtkWidget **)&self->details_dialog, gtk_widget_destroy);
-  g_clear_pointer ((GtkWidget **)&self->network_mode_dialog, gtk_widget_destroy);
-  g_clear_pointer ((GtkWidget **)&self->network_dialog, gtk_widget_destroy);
-  g_clear_pointer ((GtkWidget **)&self->sim_lock_dialog, gtk_widget_destroy);
+  g_clear_pointer ((GtkWindow **)&self->apn_dialog, gtk_window_destroy);
+  g_clear_pointer ((GtkWindow **)&self->details_dialog, gtk_window_destroy);
+  g_clear_pointer ((GtkWindow **)&self->network_mode_dialog, gtk_window_destroy);
+  g_clear_pointer ((GtkWindow **)&self->network_dialog, gtk_window_destroy);
+  g_clear_pointer ((GtkWindow **)&self->sim_lock_dialog, gtk_window_destroy);
 
   g_clear_object (&self->wwan_proxy);
   g_clear_object (&self->device);
@@ -594,18 +593,6 @@ static void
 cc_wwan_device_page_init (CcWwanDevicePage *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_list_box_set_header_func (self->data_settings_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->network_settings_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
-
-  gtk_list_box_set_header_func (self->advanced_settings_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 }
 
 static void

@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* cc-wwan-network-dialog.c
  *
- * Copyright 2019 Purism SPC
+ * Copyright 2019,2022 Purism SPC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 
-#include "list-box-helper.h"
 #include "cc-wwan-details-dialog.h"
 #include "cc-wwan-resources.h"
 

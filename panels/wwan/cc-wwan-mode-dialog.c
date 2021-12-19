@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* cc-wwan-mode-dialog.c
  *
- * Copyright 2019 Purism SPC
+ * Copyright 2019,2022 Purism SPC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 
-#include "list-box-helper.h"
 #include "cc-wwan-mode-dialog.h"
 #include "cc-wwan-resources.h"
 
@@ -140,20 +139,25 @@ cc_wwan_mode_dialog_row_new (CcWwanModeDialog *self,
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (box);
-  g_object_set (box, "margin", 18, NULL);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  g_object_set (box,
+                "margin-top", 18,
+                "margin-bottom", 18,
+                "margin-start", 18,
+                "margin-end", 18,
+                NULL);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
   mode = cc_wwan_device_get_string_from_mode (self->device, allowed, preferred);
   label = gtk_label_new (mode);
-  gtk_widget_show (label);
   gtk_widget_set_hexpand (label, TRUE);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_container_add (GTK_CONTAINER (box), label);
+  gtk_box_append (GTK_BOX (box), label);
 
   /* image should be hidden by default */
-  image = gtk_image_new_from_icon_name ("emblem-ok-symbolic", GTK_ICON_SIZE_BUTTON);
-  gtk_container_add (GTK_CONTAINER (box), image);
+  image = gtk_image_new_from_icon_name ("emblem-ok-symbolic");
+  gtk_widget_hide (image);
   row->ok_emblem = GTK_IMAGE (image);
+  gtk_box_append (GTK_BOX (box), image);
 
   return GTK_WIDGET (row);
 }
@@ -194,8 +198,7 @@ cc_wwan_mode_dialog_update (CcWwanModeDialog *self)
         continue;
 
       row = cc_wwan_mode_dialog_row_new (self, modes[i][0], modes[i][1]);
-      gtk_widget_show (row);
-      gtk_container_add (GTK_CONTAINER (self->network_mode_list), row);
+      gtk_list_box_append (GTK_LIST_BOX (self->network_mode_list), row);
     }
 }
 
@@ -265,9 +268,13 @@ cc_wwan_mode_dialog_show (GtkWidget *widget)
       goto end;
     }
 
-  gtk_container_foreach (GTK_CONTAINER (self->network_mode_list),
-                         (GtkCallback)cc_wwan_mode_dialog_update_mode,
-                         self);
+  self->selected_row = NULL;
+
+  for (GtkWidget *child = gtk_widget_get_first_child (GTK_WIDGET (self->network_mode_list));
+       child;
+       child = gtk_widget_get_next_sibling (child))
+    cc_wwan_mode_dialog_update_mode (CC_WWAN_MODE_ROW (child), self);
+
  end:
   GTK_WIDGET_CLASS (cc_wwan_mode_dialog_parent_class)->show (widget);
 }
@@ -306,10 +313,6 @@ static void
 cc_wwan_mode_dialog_init (CcWwanModeDialog *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  gtk_list_box_set_header_func (self->network_mode_list,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 }
 
 CcWwanModeDialog *

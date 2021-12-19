@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* cc-wwan-network-dialog.c
  *
- * Copyright 2019 Purism SPC
+ * Copyright 2019,2022 Purism SPC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 
-#include "list-box-helper.h"
 #include "cc-list-row.h"
 #include "cc-wwan-errors-private.h"
 #include "cc-wwan-network-dialog.h"
@@ -165,18 +164,23 @@ cc_wwan_network_dialog_row_new (CcWwanNetworkDialog *self,
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
   gtk_widget_show (box);
-  g_object_set (box, "margin", 18, NULL);
-  gtk_container_add (GTK_CONTAINER (row), box);
+  g_object_set (box,
+                "margin-top", 18,
+                "margin-bottom", 18,
+                "margin-start", 18,
+                "margin-end", 18,
+                NULL);
+  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
   label = gtk_label_new (operator_name);
-  gtk_widget_show (label);
   gtk_widget_set_hexpand (label, TRUE);
   gtk_widget_set_halign (label, GTK_ALIGN_START);
-  gtk_container_add (GTK_CONTAINER (box), label);
+  gtk_box_append (GTK_BOX (box), label);
 
-  image = gtk_image_new_from_icon_name ("emblem-ok-symbolic", GTK_ICON_SIZE_BUTTON);
+  image = gtk_image_new_from_icon_name ("emblem-ok-symbolic");
+  gtk_widget_hide (image);
   row->ok_emblem = GTK_IMAGE (image);
-  gtk_container_add (GTK_CONTAINER (box), GTK_WIDGET (row->ok_emblem));
+  gtk_box_append (GTK_BOX (box), image);
 
   row->operator_code = g_strdup (operator_code);
 
@@ -187,6 +191,7 @@ static void
 cc_wwan_network_dialog_update_current_network (CcWwanNetworkDialog *self)
 {
   CcWwanNetworkRow *row;
+  GtkWidget *child;
   const gchar *operator_name;
 
   operator_name = cc_wwan_device_get_operator_name (self->device);
@@ -194,24 +199,43 @@ cc_wwan_network_dialog_update_current_network (CcWwanNetworkDialog *self)
   if (!operator_name || operator_name[0] == '\0')
     return;
 
-  gtk_container_foreach (GTK_CONTAINER (self->operator_list_box),
-                         (GtkCallback)gtk_widget_destroy, NULL);
+  child = gtk_widget_get_first_child (GTK_WIDGET (self->operator_list_box));
+
+  while (child)
+    {
+      GtkWidget *next;
+
+      next = gtk_widget_get_next_sibling (child);
+      gtk_list_box_remove (GTK_LIST_BOX (self->operator_list_box), child);
+
+      child = next;
+    }
 
   row = cc_wwan_network_dialog_row_new (self, operator_name, "");
   self->selected_row = row;
-  gtk_container_add (GTK_CONTAINER (self->operator_list_box), GTK_WIDGET (row));
-  gtk_widget_show_all (GTK_WIDGET (self->operator_list_box));
+  gtk_widget_show (GTK_WIDGET (row->ok_emblem));
+  gtk_list_box_append (GTK_LIST_BOX (self->operator_list_box), GTK_WIDGET (row));
 }
 
 static void
 cc_wwan_network_dialog_update (CcWwanNetworkDialog *self)
 {
   CcWwanNetworkRow *row;
+  GtkWidget *child;
   GList *item;
   const gchar *operator_code, *operator_name;
 
-  gtk_container_foreach (GTK_CONTAINER (self->operator_list_box),
-                         (GtkCallback)gtk_widget_destroy, NULL);
+  child = gtk_widget_get_first_child (GTK_WIDGET (self->operator_list_box));
+
+  while (child)
+    {
+      GtkWidget *next;
+
+      next = gtk_widget_get_next_sibling (child);
+      gtk_list_box_remove (GTK_LIST_BOX (self->operator_list_box), child);
+
+      child = next;
+    }
 
   for (item = self->operator_list; item; item = item->next)
     {
@@ -219,8 +243,7 @@ cc_wwan_network_dialog_update (CcWwanNetworkDialog *self)
       operator_name = mm_modem_3gpp_network_get_operator_long (item->data);
 
       row = cc_wwan_network_dialog_row_new (self, operator_name, operator_code);
-      gtk_widget_show (GTK_WIDGET (row));
-      gtk_container_add (GTK_CONTAINER (self->operator_list_box), GTK_WIDGET (row));
+      gtk_list_box_append (GTK_LIST_BOX (self->operator_list_box), GTK_WIDGET (row));
     }
 }
 
@@ -333,6 +356,7 @@ cc_wwan_network_dialog_show (GtkWidget *widget)
 
   is_auto = cc_wwan_device_is_auto_network (self->device);
 
+  self->no_update_network = TRUE;
   g_object_set (self->automatic_row, "active", is_auto, NULL);
 
   cc_wwan_network_dialog_update_current_network (self);
@@ -422,10 +446,6 @@ cc_wwan_network_dialog_init (CcWwanNetworkDialog *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->search_cancellable = g_cancellable_new ();
-
-  gtk_list_box_set_header_func (self->operator_list_box,
-                                cc_list_box_update_header_func,
-                                NULL, NULL);
 }
 
 CcWwanNetworkDialog *

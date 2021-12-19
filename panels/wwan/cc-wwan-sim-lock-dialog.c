@@ -1,7 +1,7 @@
 /* -*- Mode: C; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 /* cc-wwan-network-dialog.c
  *
- * Copyright 2019 Purism SPC
+ * Copyright 2019,2022 Purism SPC
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 
-#include "list-box-helper.h"
 #include "cc-list-row.h"
 #include "cc-wwan-sim-lock-dialog.h"
 #include "cc-wwan-resources.h"
@@ -85,7 +84,7 @@ static void
 cc_wwan_pin_next_clicked_cb (CcWwanSimLockDialog *self)
 {
   gtk_stack_set_visible_child_name (self->pin_settings_stack, "pin-entry");
-  gtk_entry_set_text (self->pin_entry, "");
+  gtk_editable_set_text (GTK_EDITABLE (self->pin_entry), "");
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->apply_button), FALSE);
   gtk_stack_set_visible_child (self->button_stack,
@@ -102,8 +101,8 @@ cc_wwan_pin_apply_clicked_cb (CcWwanSimLockDialog *self)
 
   lock_enabled = cc_wwan_device_get_sim_lock (self->device);
   row_enabled = cc_list_row_get_active (self->lock_row);
-  pin = gtk_entry_get_text (self->pin_entry);
-  new_pin = gtk_entry_get_text (self->new_pin_entry);
+  pin = gtk_editable_get_text (GTK_EDITABLE (self->pin_entry));
+  new_pin = gtk_editable_get_text (GTK_EDITABLE (self->new_pin_entry));
 
   if (lock_enabled != row_enabled)
     {
@@ -157,8 +156,8 @@ cc_wwan_pin_entry_changed_cb (CcWwanSimLockDialog *self)
 {
   const gchar *new_pin, *confirm_pin;
 
-  new_pin = gtk_entry_get_text (self->new_pin_entry);
-  confirm_pin = gtk_entry_get_text (self->pin_confirm_entry);
+  new_pin = gtk_editable_get_text (GTK_EDITABLE (self->new_pin_entry));
+  confirm_pin = gtk_editable_get_text (GTK_EDITABLE (self->pin_confirm_entry));
   gtk_widget_set_sensitive (GTK_WIDGET (self->next_button), FALSE);
 
   /* A PIN should have a minimum length of 4 */
@@ -177,7 +176,7 @@ cc_wwan_pin_entered_cb (CcWwanSimLockDialog *self)
   gsize len;
   gboolean enable_apply;
 
-  pin = gtk_entry_get_text (self->pin_entry);
+  pin = gtk_editable_get_text (GTK_EDITABLE (self->pin_entry));
 
   if (!pin || !*pin)
     {
@@ -216,7 +215,7 @@ cc_wwan_sim_lock_dialog_show (GtkWidget *widget)
   CcWwanSimLockDialog *self = (CcWwanSimLockDialog *)widget;
   gboolean lock_enabled;
 
-  gtk_entry_set_text (self->pin_entry, "");
+  gtk_editable_set_text (GTK_EDITABLE (self->pin_entry), "");
   gtk_widget_set_sensitive (GTK_WIDGET (self->next_button), FALSE);
   gtk_widget_set_sensitive (GTK_WIDGET (self->apply_button), FALSE);
 
@@ -231,9 +230,9 @@ cc_wwan_sim_lock_dialog_show (GtkWidget *widget)
 
   gtk_stack_set_visible_child_name (self->pin_settings_stack, "pin-settings");
 
-  gtk_entry_set_text (self->pin_entry, "");
-  gtk_entry_set_text (self->new_pin_entry, "");
-  gtk_entry_set_text (self->pin_confirm_entry, "");
+  gtk_editable_set_text (GTK_EDITABLE (self->pin_entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (self->new_pin_entry), "");
+  gtk_editable_set_text (GTK_EDITABLE (self->pin_confirm_entry), "");
 
   GTK_WIDGET_CLASS (cc_wwan_sim_lock_dialog_parent_class)->show (widget);
 }
