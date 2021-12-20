@@ -24,6 +24,7 @@
 
 #include <glib-object.h>
 #include <glib/gi18n.h>
+#include <adwaita.h>
 
 #include <NetworkManager.h>
 
@@ -35,7 +36,7 @@ struct _NetDeviceBluetooth
 {
         GtkBox        parent;
 
-        GtkLabel     *device_label;
+        AdwActionRow *row;
         GtkSwitch    *device_off_switch;
         GtkButton    *options_button;
         GtkSeparator *separator;
@@ -168,7 +169,7 @@ net_device_bluetooth_class_init (NetDeviceBluetoothClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-bluetooth.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, device_label);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, device_off_switch);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, options_button);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceBluetooth, separator);
@@ -216,5 +217,5 @@ void
 net_device_bluetooth_set_title (NetDeviceBluetooth *self, const gchar *title)
 {
         g_return_if_fail (NET_IS_DEVICE_BLUETOOTH (self));
-        gtk_label_set_label (self->device_label, title);
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->row), title);
 }
