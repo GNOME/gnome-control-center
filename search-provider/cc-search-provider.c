@@ -210,7 +210,6 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
 
   for (i = 0; results[i]; i++)
     {
-      g_autofree gchar *escaped_description = NULL;
       g_autofree gchar *description = NULL;
       g_autofree gchar *name = NULL;
       g_autoptr(GAppInfo) app = NULL;
@@ -227,7 +226,6 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
                           COL_DESCRIPTION, &description,
                           -1);
       id = g_app_info_get_id (app);
-      escaped_description = g_markup_escape_text (description, -1);
 
       g_variant_builder_open (&builder, G_VARIANT_TYPE ("a{sv}"));
       g_variant_builder_add (&builder, "{sv}",
@@ -237,7 +235,7 @@ handle_get_result_metas (CcShellSearchProvider2  *skeleton,
       g_variant_builder_add (&builder, "{sv}",
                              "icon", g_icon_serialize (icon));
       g_variant_builder_add (&builder, "{sv}",
-                             "description", g_variant_new_string (escaped_description));
+                             "description", g_variant_new_string (description));
       g_variant_builder_close (&builder);
     }
 
