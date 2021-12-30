@@ -138,7 +138,6 @@ struct _CcUaPanel
   GtkListBoxRow     *screen_reader_row;
   GtkScrolledWindow *scrolled_window;
   GtkListBox        *seeing_listbox;
-  GtkBox            *show_status_box;
   GtkSwitch         *show_status_switch;
   GtkLabel          *sound_keys_label;
   GtkListBoxRow     *sound_keys_row;
@@ -147,8 +146,6 @@ struct _CcUaPanel
   GtkListBoxRow     *visual_alerts_row;
   GtkLabel          *zoom_label;
   GtkListBoxRow     *zoom_row;
-
-  GtkAdjustment *focus_adjustment;
 
   GSettings *wm_settings;
   GSettings *a11y_settings;
@@ -159,9 +156,6 @@ struct _CcUaPanel
   GSettings *kb_desktop_settings;
   GSettings *application_settings;
   GSettings *gds_mouse_settings;
-
-  GList *sections;
-  GList *sections_reverse;
 };
 
 CC_PANEL_REGISTER (CcUaPanel, cc_ua_panel)
@@ -180,9 +174,6 @@ cc_ua_panel_dispose (GObject *object)
   g_clear_object (&self->kb_desktop_settings);
   g_clear_object (&self->application_settings);
   g_clear_object (&self->gds_mouse_settings);
-
-  g_clear_pointer (&self->sections, g_list_free);
-  g_clear_pointer (&self->sections_reverse, g_list_free);
 
   G_OBJECT_CLASS (cc_ua_panel_parent_class)->dispose (object);
 }
@@ -234,7 +225,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, scrolled_window);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, seeing_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, show_status_box);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, show_status_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_row);
@@ -373,59 +363,9 @@ cursor_size_label_mapping_get (GValue   *value,
   return TRUE;
 }
 
-static gboolean
-keynav_failed (CcUaPanel *self, GtkDirectionType direction, GtkWidget *list)
-{
-  GList *item, *sections;
-  gdouble value, lower, upper, page;
-
-  /* Find the list in the list of GtkListBoxes */
-  if (direction == GTK_DIR_DOWN)
-    sections = self->sections;
-  else
-    sections = self->sections_reverse;
-
-  item = g_list_find (sections, list);
-  g_assert (item);
-  if (item->next)
-    {
-      gtk_widget_child_focus (GTK_WIDGET (item->next->data), direction);
-      return TRUE;
-    }
-
-  value = gtk_adjustment_get_value (self->focus_adjustment);
-  lower = gtk_adjustment_get_lower (self->focus_adjustment);
-  upper = gtk_adjustment_get_upper (self->focus_adjustment);
-  page  = gtk_adjustment_get_page_size (self->focus_adjustment);
-
-  if (direction == GTK_DIR_UP && value > lower)
-    {
-      gtk_adjustment_set_value (self->focus_adjustment, lower);
-      return TRUE;
-    }
-  else if (direction == GTK_DIR_DOWN && value < upper - page)
-    {
-      gtk_adjustment_set_value (self->focus_adjustment, upper - page);
-      return TRUE;
-    }
-
-  return FALSE;
-}
-
-static void
-add_section (GtkListBox *list, CcUaPanel *self)
-{
-  g_signal_connect_object (list, "keynav-failed", G_CALLBACK (keynav_failed), self, G_CONNECT_SWAPPED);
-
-  self->sections = g_list_append (self->sections, list);
-  self->sections_reverse = g_list_prepend (self->sections_reverse, list);
-}
-
 static void
 cc_ua_panel_init_status (CcUaPanel *self)
 {
-  self->sections_reverse = g_list_prepend (self->sections_reverse, self->show_status_box);
-
   g_settings_bind (self->a11y_settings, KEY_ALWAYS_SHOW_STATUS,
                    self->show_status_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
@@ -509,8 +449,6 @@ activate_row (CcUaPanel *self, GtkListBoxRow *row)
 static void
 cc_ua_panel_init_seeing (CcUaPanel *self)
 {
-  add_section (self->seeing_listbox, self);
-
   g_signal_connect_object (self->seeing_listbox, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
@@ -576,8 +514,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 static void
 cc_ua_panel_init_hearing (CcUaPanel *self)
 {
-  add_section (self->hearing_listbox, self);
-
   g_signal_connect_object (self->hearing_listbox, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
@@ -624,8 +560,6 @@ update_accessx_label (CcUaPanel *self)
 static void
 cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
-  add_section (self->typing_listbox, self);
-
   g_signal_connect_object (self->typing_listbox, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
@@ -666,8 +600,6 @@ update_click_assist_label (CcUaPanel *self)
 static void
 cc_ua_panel_init_mouse (CcUaPanel *self)
 {
-  add_section (self->pointing_listbox, self);
-
   g_signal_connect_object (self->pointing_listbox, "row-activated",
                            G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
 
@@ -714,6 +646,4 @@ cc_ua_panel_init (CcUaPanel *self)
   cc_ua_panel_init_mouse (self);
 
   gtk_scrolled_window_set_min_content_height (self->scrolled_window, SCROLL_HEIGHT);
-
-  self->focus_adjustment = gtk_scrolled_window_get_vadjustment (self->scrolled_window);
 }
