@@ -104,15 +104,12 @@
 #define MOUSE_PERIPHERAL_SETTINGS    "org.gnome.desktop.peripherals.mouse"
 #define KEY_DOUBLE_CLICK_DELAY       "double-click"
 
-#define SCROLL_HEIGHT 490
-
 struct _CcUaPanel
 {
   CcPanel    parent_instance;
 
   GtkLabel          *accessx_label;
   GtkListBoxRow     *accessx_row;
-  GtkBox            *box;
   GtkLabel          *click_assist_label;
   GtkListBoxRow     *click_assist_row;
   GtkLabel          *cursor_blinking_label;
@@ -136,7 +133,6 @@ struct _CcUaPanel
   GtkListBoxRow     *screen_keyboard_row;
   GtkLabel          *screen_reader_label;
   GtkListBoxRow     *screen_reader_row;
-  GtkScrolledWindow *scrolled_window;
   GtkListBox        *seeing_listbox;
   GtkSwitch         *show_status_switch;
   GtkLabel          *sound_keys_label;
@@ -199,7 +195,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, accessx_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, accessx_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, box);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, click_assist_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, click_assist_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, cursor_blinking_label);
@@ -223,7 +218,6 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_keyboard_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, scrolled_window);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, seeing_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, show_status_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_label);
@@ -644,6 +638,4 @@ cc_ua_panel_init (CcUaPanel *self)
   cc_ua_panel_init_hearing (self);
   cc_ua_panel_init_keyboard (self);
   cc_ua_panel_init_mouse (self);
-
-  gtk_scrolled_window_set_min_content_height (self->scrolled_window, SCROLL_HEIGHT);
 }
