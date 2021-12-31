@@ -299,112 +299,84 @@
   </object>
   <template class="CcDateTimePanel" parent="CcPanel">
     <child>
-      <object class="GtkScrolledWindow">
-        <property name="hscrollbar-policy">never</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="AdwClamp">
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
-
+          <object class="AdwPreferencesGroup">
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">32</property>
+              <object class="AdwActionRow" id="auto_datetime_row">
+                <property name="title" translatable="yes">Automatic _Date &amp;amp; Time</property>
+                <property name="subtitle" translatable="yes">Requires internet access</property>
+                <property name="use_underline">True</property>
+                <property name="activatable_widget">network_time_switch</property>
                 <child>
-                  <object class="GtkListBox" id="listbox2">
-                    <property name="selection_mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="AdwActionRow" id="auto_datetime_row">
-                        <property name="title" translatable="yes">Automatic _Date &amp;amp; Time</property>
-                        <property name="subtitle" translatable="yes">Requires internet access</property>
-                        <property name="use_underline">True</property>
-                        <property name="activatable_widget">network_time_switch</property>
-                        <child>
-                          <object class="GtkSwitch" id="network_time_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="datetime_button">
-                        <property name="title" translatable="yes">Date &amp;amp; _Time</property>
-                        <property name="use_underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
-                        <child>
-                          <object class="GtkLabel" id="datetime_label">
-                            <property name="xalign">0</property>
-                            <property name="label">20 June 2012, 6:45 AM</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                  <object class="GtkSwitch" id="network_time_switch">
+                    <property name="valign">center</property>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="datetime_button">
+                <property name="title" translatable="yes">Date &amp;amp; _Time</property>
+                <property name="use_underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
                 <child>
-                  <object class="GtkListBox" id="listbox1">
-                    <property name="selection_mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="AdwActionRow" id="auto_timezone_row">
-                        <property name="title" translatable="yes">Automatic Time _Zone</property>
-                        <property name="subtitle" translatable="yes">Requires location services enabled and internet access</property>
-                        <property name="use_underline">True</property>
-                        <property name="activatable_widget">auto_timezone_switch</property>
-                        <child>
-                          <object class="GtkSwitch" id="auto_timezone_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="timezone_button">
-                        <property name="title" translatable="yes">Time Z_one</property>
-                        <property name="use_underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
-                        <child>
-                          <object class="GtkLabel" id="timezone_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label">GMT+1 (London, United Kingdom)</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                  <object class="GtkLabel" id="datetime_label">
+                    <property name="xalign">0</property>
+                    <property name="label">20 June 2012, 6:45 AM</property>
                   </object>
                 </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwActionRow" id="auto_timezone_row">
+                <property name="title" translatable="yes">Automatic Time _Zone</property>
+                <property name="subtitle" translatable="yes">Requires location services enabled and internet access</property>
+                <property name="use_underline">True</property>
+                <property name="activatable_widget">auto_timezone_switch</property>
                 <child>
-                  <object class="GtkListBox" id="listbox3">
-                    <property name="selection_mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="AdwActionRow" id="timeformat_row">
-                        <property name="title" translatable="yes">Time _Format</property>
-                        <property name="use_underline">True</property>
-                        <child>
-                          <object class="GtkComboBoxText" id="format_combobox">
-                            <property name="valign">center</property>
-                            <signal name="notify::active-id" handler="change_clock_settings" object="CcDateTimePanel" swapped="no"/>
-                            <items>
-                              <item id="24h" translatable="yes">24-hour</item>
-                              <item id="12h" translatable="yes">AM / PM</item>
-                            </items>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                  <object class="GtkSwitch" id="auto_timezone_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="timezone_button">
+                <property name="title" translatable="yes">Time Z_one</property>
+                <property name="use_underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
+                <child>
+                  <object class="GtkLabel" id="timezone_label">
+                    <property name="ellipsize">end</property>
+                    <property name="xalign">0</property>
+                    <property name="label">GMT+1 (London, United Kingdom)</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwActionRow" id="timeformat_row">
+                <property name="title" translatable="yes">Time _Format</property>
+                <property name="use_underline">True</property>
+                <child>
+                  <object class="GtkComboBoxText" id="format_combobox">
+                    <property name="valign">center</property>
+                    <signal name="notify::active-id" handler="change_clock_settings" object="CcDateTimePanel" swapped="no"/>
+                    <items>
+                      <item id="24h" translatable="yes">24-hour</item>
+                      <item id="12h" translatable="yes">AM / PM</item>
+                    </items>
                   </object>
                 </child>
               </object>

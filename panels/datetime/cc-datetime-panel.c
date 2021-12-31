@@ -70,8 +70,6 @@ struct _CcDateTimePanel
 
   GtkWidget *map;
 
-  GList *listboxes;
-  GList *listboxes_reverse;
   GList *toplevels;
 
   TzLocation *current_location;
@@ -97,9 +95,6 @@ struct _CcDateTimePanel
   GtkWidget *day_spinbutton;
   GtkWidget *format_combobox;
   GtkWidget *h_spinbutton;
-  GtkWidget *listbox1;
-  GtkWidget *listbox2;
-  GtkWidget *listbox3;
   GtkLockButton *lock_button;
   GtkLabel  *month_label;
   GtkListBox *date_box;
@@ -158,9 +153,6 @@ cc_date_time_panel_dispose (GObject *object)
   g_clear_object (&panel->filechooser_settings);
 
   g_clear_pointer (&panel->date, g_date_time_unref);
-
-  g_clear_pointer (&panel->listboxes, g_list_free);
-  g_clear_pointer (&panel->listboxes_reverse, g_list_free);
 
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
@@ -827,14 +819,6 @@ list_box_row_activated (CcDateTimePanel *self,
 }
 
 static void
-setup_listbox (CcDateTimePanel *self,
-               GtkWidget       *listbox)
-{
-  self->listboxes = g_list_append (self->listboxes, listbox);
-  self->listboxes_reverse = g_list_prepend (self->listboxes_reverse, listbox);
-}
-
-static void
 time_changed_cb (CcDateTimePanel *self,
                  CcTimeEditor    *editor)
 {
@@ -989,9 +973,6 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_spinbutton);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, format_combobox);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox1);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox2);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, listbox3);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_label);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_popover);
@@ -1071,10 +1052,6 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   setup_timezone_dialog (self);
   setup_datetime_dialog (self);
-
-  setup_listbox (self, self->listbox1);
-  setup_listbox (self, self->listbox2);
-  setup_listbox (self, self->listbox3);
 
   /* set up network time switch */
   bind_switch_to_row (self,
