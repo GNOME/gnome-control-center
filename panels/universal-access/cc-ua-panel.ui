@@ -69,6 +69,19 @@
               </object>
             </child>
             <child>
+              <object class="AdwActionRow" id="screen_reader_row">
+                <property name="title" translatable="yes">Screen _Reader</property>
+                <property name="subtitle" translatable="yes">The screen reader reads displayed text as you move the focus.</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">screen_reader_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="screen_reader_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
               <object class="AdwActionRow" id="cursor_size_row">
                 <property name="title" translatable="yes">C_ursor Size</property>
                 <property name="use-underline">True</property>
@@ -90,20 +103,6 @@
                 <signal name="activated" handler="activate_row" swapped="yes"/>
                 <child type="suffix">
                   <object class="GtkLabel" id="zoom_label">
-                    <property name="valign">center</property>
-                    <property name="xalign">1</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow" id="screen_reader_row">
-                <property name="title" translatable="yes">Screen _Reader</property>
-                <property name="use-underline">True</property>
-                <property name="activatable">True</property>
-                <signal name="activated" handler="activate_row" swapped="yes"/>
-                <child type="suffix">
-                  <object class="GtkLabel" id="screen_reader_label">
                     <property name="valign">center</property>
                     <property name="xalign">1</property>
                   </object>

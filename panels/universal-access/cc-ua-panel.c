@@ -34,7 +34,6 @@
 #include "cc-pointing-dialog.h"
 #include "cc-repeat-keys-dialog.h"
 #include "cc-sound-keys-dialog.h"
-#include "cc-screen-reader-dialog.h"
 #include "cc-typing-dialog.h"
 #include "cc-visual-alerts-dialog.h"
 #include "cc-zoom-options-dialog.h"
@@ -125,7 +124,7 @@ struct _CcUaPanel
   GtkLabel          *repeat_keys_label;
   AdwActionRow      *repeat_keys_row;
   GtkSwitch         *screen_keyboard_enable_switch;
-  GtkLabel          *screen_reader_label;
+  GtkSwitch         *screen_reader_switch;
   AdwActionRow      *screen_reader_row;
   GtkSwitch         *show_status_switch;
   GtkLabel          *sound_keys_label;
@@ -167,10 +166,6 @@ activate_row (CcUaPanel *self, AdwActionRow *row)
   else if (row == self->cursor_size_row)
     {
       run_dialog (self, GTK_DIALOG (cc_cursor_size_dialog_new ()));
-    }
-  else if (row == self->screen_reader_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_screen_reader_dialog_new ()));
     }
   else if (row == self->sound_keys_row)
     {
@@ -252,7 +247,7 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_keyboard_enable_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_label);
+  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, show_status_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_label);
@@ -427,6 +422,13 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                                 self->interface_settings,
                                 NULL);
 
+  /* screen reader */
+
+  g_settings_bind (self->application_settings, "screen-reader-enabled",
+                   self->screen_reader_switch, "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+
   /* cursor size */
 
   g_settings_bind_with_mapping (self->interface_settings, KEY_MOUSE_CURSOR_SIZE, // FIXME
@@ -440,14 +442,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   g_settings_bind_with_mapping (self->application_settings, "screen-magnifier-enabled",
                                 self->zoom_label,
                                 "label", G_SETTINGS_BIND_GET,
-                                on_off_label_mapping_get,
-                                NULL, NULL, NULL);
-
-  /* screen reader */
-
-  g_settings_bind_with_mapping (self->application_settings, "screen-reader-enabled",
-                                self->screen_reader_label, "label",
-                                G_SETTINGS_BIND_GET,
                                 on_off_label_mapping_get,
                                 NULL, NULL, NULL);
 
