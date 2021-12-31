@@ -812,15 +812,6 @@ bind_switch_to_row (CcDateTimePanel *self,
 }
 
 static void
-toggle_switch (GtkWidget *sw)
-{
-  gboolean active;
-
-  active = gtk_switch_get_active (GTK_SWITCH (sw));
-  gtk_switch_set_active (GTK_SWITCH (sw), !active);
-}
-
-static void
 list_box_row_activated (GtkListBox      *listbox,
                         GtkListBoxRow   *row,
                         CcDateTimePanel *self)
@@ -828,15 +819,7 @@ list_box_row_activated (GtkListBox      *listbox,
 {
   gtk_list_box_select_row (listbox, NULL);
 
-  if (row == GTK_LIST_BOX_ROW (self->auto_datetime_row))
-    {
-      toggle_switch (self->network_time_switch);
-    }
-  else if (row == GTK_LIST_BOX_ROW (self->auto_timezone_row))
-    {
-      toggle_switch (self->auto_timezone_switch);
-    }
-  else if (row == GTK_LIST_BOX_ROW (self->datetime_button))
+  if (row == GTK_LIST_BOX_ROW (self->datetime_button))
     {
       run_dialog (self, self->datetime_dialog);
     }
