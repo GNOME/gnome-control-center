@@ -109,13 +109,13 @@ struct _CcUaPanel
   CcPanel    parent_instance;
 
   GtkLabel          *accessx_label;
-  GtkListBoxRow     *accessx_row;
+  AdwActionRow      *accessx_row;
   GtkLabel          *click_assist_label;
-  GtkListBoxRow     *click_assist_row;
+  AdwActionRow      *click_assist_row;
   GtkLabel          *cursor_blinking_label;
-  GtkListBoxRow     *cursor_blinking_row;
+  AdwActionRow      *cursor_blinking_row;
   GtkLabel          *cursor_size_label;
-  GtkListBoxRow     *cursor_size_row;
+  AdwActionRow      *cursor_size_row;
   GtkScale          *double_click_delay_scale;
   GtkSwitch         *enable_animations_switch;
   GtkListBox        *hearing_listbox;
@@ -125,19 +125,19 @@ struct _CcUaPanel
   GtkSwitch         *mouse_keys_enable_switch;
   GtkListBox        *pointing_listbox;
   GtkLabel          *repeat_keys_label;
-  GtkListBoxRow     *repeat_keys_row;
+  AdwActionRow      *repeat_keys_row;
   GtkSwitch         *screen_keyboard_enable_switch;
   GtkLabel          *screen_reader_label;
-  GtkListBoxRow     *screen_reader_row;
+  AdwActionRow      *screen_reader_row;
   GtkListBox        *seeing_listbox;
   GtkSwitch         *show_status_switch;
   GtkLabel          *sound_keys_label;
-  GtkListBoxRow     *sound_keys_row;
+  AdwActionRow      *sound_keys_row;
   GtkListBox        *typing_listbox;
   GtkLabel          *visual_alerts_label;
-  GtkListBoxRow     *visual_alerts_row;
+  AdwActionRow      *visual_alerts_row;
   GtkLabel          *zoom_label;
-  GtkListBoxRow     *zoom_row;
+  AdwActionRow     *zoom_row;
 
   GSettings *wm_settings;
   GSettings *a11y_settings;
@@ -151,6 +151,56 @@ struct _CcUaPanel
 };
 
 CC_PANEL_REGISTER (CcUaPanel, cc_ua_panel)
+
+static void
+run_dialog (CcUaPanel *self, GtkDialog *dialog)
+{
+  GtkNative *native = gtk_widget_get_native (GTK_WIDGET (self));
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (native));
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
+activate_row (CcUaPanel *self, AdwActionRow *row)
+{
+  if (row == self->zoom_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_zoom_options_dialog_new ()));
+    }
+  else if (row == self->cursor_size_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_cursor_size_dialog_new ()));
+    }
+  else if (row == self->screen_reader_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_screen_reader_dialog_new ()));
+    }
+  else if (row == self->sound_keys_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_sound_keys_dialog_new ()));
+    }
+  else if (row == self->visual_alerts_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_visual_alerts_dialog_new ()));
+    }
+  else if (row == self->repeat_keys_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_repeat_keys_dialog_new ()));
+    }
+  else if (row == self->cursor_blinking_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_cursor_blinking_dialog_new ()));
+    }
+  else if (row == self->accessx_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_typing_dialog_new ()));
+    }
+  else if (row == self->click_assist_row)
+    {
+      run_dialog (self, GTK_DIALOG (cc_pointing_dialog_new ()));
+    }
+}
 
 static void
 cc_ua_panel_dispose (GObject *object)
@@ -219,6 +269,7 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, zoom_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, zoom_row);
+  gtk_widget_class_bind_template_callback (widget_class, activate_row);
 }
 
 /* seeing section */
@@ -358,61 +409,8 @@ cc_ua_panel_init_status (CcUaPanel *self)
 }
 
 static void
-run_dialog (CcUaPanel *self, GtkDialog *dialog)
-{
-  GtkNative *native = gtk_widget_get_native (GTK_WIDGET (self));
-
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (native));
-  gtk_window_present (GTK_WINDOW (dialog));
-}
-
-static void
-activate_row (CcUaPanel *self, GtkListBoxRow *row)
-{
-  if (row == self->zoom_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_zoom_options_dialog_new ()));
-    }
-  else if (row == self->cursor_size_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_cursor_size_dialog_new ()));
-    }
-  else if (row == self->screen_reader_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_screen_reader_dialog_new ()));
-    }
-  else if (row == self->sound_keys_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_sound_keys_dialog_new ()));
-    }
-  else if (row == self->visual_alerts_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_visual_alerts_dialog_new ()));
-    }
-  else if (row == self->repeat_keys_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_repeat_keys_dialog_new ()));
-    }
-  else if (row == self->cursor_blinking_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_cursor_blinking_dialog_new ()));
-    }
-  else if (row == self->accessx_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_typing_dialog_new ()));
-    }
-  else if (row == self->click_assist_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_pointing_dialog_new ()));
-    }
-}
-
-static void
 cc_ua_panel_init_seeing (CcUaPanel *self)
 {
-  g_signal_connect_object (self->seeing_listbox, "row-activated",
-                           G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
-
   g_settings_bind_with_mapping (self->a11y_interface_settings, KEY_HIGH_CONTRAST,
                                 self->highcontrast_enable_switch,
                                 "active", G_SETTINGS_BIND_DEFAULT,
@@ -475,9 +473,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
 static void
 cc_ua_panel_init_hearing (CcUaPanel *self)
 {
-  g_signal_connect_object (self->hearing_listbox, "row-activated",
-                           G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
-
   g_settings_bind_with_mapping (self->wm_settings, KEY_VISUAL_BELL_ENABLED,
                                 self->visual_alerts_label,
                                 "label", G_SETTINGS_BIND_GET,
@@ -521,9 +516,6 @@ update_accessx_label (CcUaPanel *self)
 static void
 cc_ua_panel_init_keyboard (CcUaPanel *self)
 {
-  g_signal_connect_object (self->typing_listbox, "row-activated",
-                           G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
-
   /* on-screen keyboard */
   g_settings_bind (self->application_settings, KEY_SCREEN_KEYBOARD_ENABLED,
                    self->screen_keyboard_enable_switch, "active",
@@ -561,9 +553,6 @@ update_click_assist_label (CcUaPanel *self)
 static void
 cc_ua_panel_init_mouse (CcUaPanel *self)
 {
-  g_signal_connect_object (self->pointing_listbox, "row-activated",
-                           G_CALLBACK (activate_row), self, G_CONNECT_SWAPPED);
-
   g_settings_bind (self->kb_settings, KEY_MOUSEKEYS_ENABLED,
                    self->mouse_keys_enable_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);

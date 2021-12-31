@@ -95,6 +95,7 @@
                         <property name="title" translatable="yes">C_ursor Size</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="cursor_size_label">
                             <property name="valign">center</property>
@@ -108,6 +109,7 @@
                         <property name="title" translatable="yes">_Zoom</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="zoom_label">
                             <property name="valign">center</property>
@@ -121,6 +123,7 @@
                         <property name="title" translatable="yes">Screen _Reader</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="screen_reader_label">
                             <property name="valign">center</property>
@@ -134,6 +137,7 @@
                         <property name="title" translatable="yes">_Sound Keys</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="sound_keys_label">
                             <property name="valign">center</property>
@@ -178,6 +182,7 @@
                         <property name="title" translatable="yes">_Visual Alerts</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="visual_alerts_label">
                             <property name="valign">center</property>
@@ -234,6 +239,7 @@
                         <property name="title" translatable="yes">R_epeat Keys</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="repeat_keys_label">
                             <property name="valign">center</property>
@@ -247,6 +253,7 @@
                         <property name="title" translatable="yes">Cursor _Blinking</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="cursor_blinking_label">
                             <property name="valign">center</property>
@@ -260,6 +267,7 @@
                         <property name="title" translatable="yes">_Typing Assist (AccessX)</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="accessx_label">
                             <property name="valign">center</property>
@@ -328,6 +336,7 @@
                         <property name="title" translatable="yes">_Click Assist</property>
                         <property name="use-underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child type="suffix">
                           <object class="GtkLabel" id="click_assist_label">
                             <property name="valign">center</property>
@@ -340,6 +349,7 @@
                       <object class="AdwActionRow" id="double_click_delay_row">
                         <property name="title" translatable="yes">_Double-Click Delay</property>
                         <property name="use-underline">True</property>
+                        <signal name="activated" handler="activate_row" swapped="yes"/>
                         <child>
                           <object class="GtkScale" id="double_click_delay_scale">
                             <property name="hexpand">True</property>
