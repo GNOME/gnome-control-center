@@ -315,7 +315,6 @@
                 <child>
                   <object class="GtkListBox" id="listbox2">
                     <property name="selection_mode">none</property>
-                    <signal name="row-activated" handler="list_box_row_activated" object="CcDateTimePanel" swapped="no"/>
                     <style>
                       <class name="boxed-list"/>
                     </style>
@@ -337,6 +336,7 @@
                         <property name="title" translatable="yes">Date &amp;amp; _Time</property>
                         <property name="use_underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
                         <child>
                           <object class="GtkLabel" id="datetime_label">
                             <property name="xalign">0</property>
@@ -350,7 +350,6 @@
                 <child>
                   <object class="GtkListBox" id="listbox1">
                     <property name="selection_mode">none</property>
-                    <signal name="row-activated" handler="list_box_row_activated" object="CcDateTimePanel" swapped="no"/>
                     <style>
                       <class name="boxed-list"/>
                     </style>
@@ -372,6 +371,7 @@
                         <property name="title" translatable="yes">Time Z_one</property>
                         <property name="use_underline">True</property>
                         <property name="activatable">True</property>
+                        <signal name="activated" handler="list_box_row_activated" swapped="yes"/>
                         <child>
                           <object class="GtkLabel" id="timezone_label">
                             <property name="ellipsize">end</property>
@@ -386,7 +386,6 @@
                 <child>
                   <object class="GtkListBox" id="listbox3">
                     <property name="selection_mode">none</property>
-                    <signal name="row-activated" handler="list_box_row_activated" object="CcDateTimePanel" swapped="no"/>
                     <style>
                       <class name="boxed-list"/>
                     </style>

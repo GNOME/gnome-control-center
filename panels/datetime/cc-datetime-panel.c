@@ -812,13 +812,10 @@ bind_switch_to_row (CcDateTimePanel *self,
 }
 
 static void
-list_box_row_activated (GtkListBox      *listbox,
-                        GtkListBoxRow   *row,
-                        CcDateTimePanel *self)
+list_box_row_activated (CcDateTimePanel *self,
+                        GtkListBoxRow   *row)
 
 {
-  gtk_list_box_select_row (listbox, NULL);
-
   if (row == GTK_LIST_BOX_ROW (self->datetime_button))
     {
       run_dialog (self, self->datetime_dialog);
