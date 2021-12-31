@@ -33,7 +33,6 @@
 #include "cc-cursor-size-dialog.h"
 #include "cc-pointing-dialog.h"
 #include "cc-repeat-keys-dialog.h"
-#include "cc-sound-keys-dialog.h"
 #include "cc-typing-dialog.h"
 #include "cc-visual-alerts-dialog.h"
 #include "cc-zoom-options-dialog.h"
@@ -127,7 +126,7 @@ struct _CcUaPanel
   GtkSwitch         *screen_reader_switch;
   AdwActionRow      *screen_reader_row;
   GtkSwitch         *show_status_switch;
-  GtkLabel          *sound_keys_label;
+  GtkSwitch         *sound_keys_switch;
   AdwActionRow      *sound_keys_row;
   GtkLabel          *visual_alerts_label;
   AdwActionRow      *visual_alerts_row;
@@ -166,10 +165,6 @@ activate_row (CcUaPanel *self, AdwActionRow *row)
   else if (row == self->cursor_size_row)
     {
       run_dialog (self, GTK_DIALOG (cc_cursor_size_dialog_new ()));
-    }
-  else if (row == self->sound_keys_row)
-    {
-      run_dialog (self, GTK_DIALOG (cc_sound_keys_dialog_new ()));
     }
   else if (row == self->visual_alerts_row)
     {
@@ -250,7 +245,7 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, show_status_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_label);
+  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, sound_keys_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, visual_alerts_row);
@@ -428,6 +423,11 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
                    self->screen_reader_switch, "active",
                    G_SETTINGS_BIND_DEFAULT);
 
+  /* sound keys */
+
+  g_settings_bind (self->kb_settings, KEY_TOGGLEKEYS_ENABLED,
+                   self->sound_keys_switch, "active",
+                   G_SETTINGS_BIND_DEFAULT);
 
   /* cursor size */
 
@@ -442,14 +442,6 @@ cc_ua_panel_init_seeing (CcUaPanel *self)
   g_settings_bind_with_mapping (self->application_settings, "screen-magnifier-enabled",
                                 self->zoom_label,
                                 "label", G_SETTINGS_BIND_GET,
-                                on_off_label_mapping_get,
-                                NULL, NULL, NULL);
-
-  /* sound keys */
-
-  g_settings_bind_with_mapping (self->kb_settings, KEY_TOGGLEKEYS_ENABLED,
-                                self->sound_keys_label, "label",
-                                G_SETTINGS_BIND_GET,
                                 on_off_label_mapping_get,
                                 NULL, NULL, NULL);
 }

@@ -82,6 +82,19 @@
               </object>
             </child>
             <child>
+              <object class="AdwActionRow" id="sound_keys_row">
+                <property name="title" translatable="yes">_Sound Keys</property>
+                <property name="subtitle" translatable="yes">Beep when Num Lock or Caps Lock are turned on or off.</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">sound_keys_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="sound_keys_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
               <object class="AdwActionRow" id="cursor_size_row">
                 <property name="title" translatable="yes">C_ursor Size</property>
                 <property name="use-underline">True</property>
@@ -103,20 +116,6 @@
                 <signal name="activated" handler="activate_row" swapped="yes"/>
                 <child type="suffix">
                   <object class="GtkLabel" id="zoom_label">
-                    <property name="valign">center</property>
-                    <property name="xalign">1</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="AdwActionRow" id="sound_keys_row">
-                <property name="title" translatable="yes">_Sound Keys</property>
-                <property name="use-underline">True</property>
-                <property name="activatable">True</property>
-                <signal name="activated" handler="activate_row" swapped="yes"/>
-                <child type="suffix">
-                  <object class="GtkLabel" id="sound_keys_label">
                     <property name="valign">center</property>
                     <property name="xalign">1</property>
                   </object>
