@@ -750,30 +750,6 @@ on_timedated_properties_changed (CcDateTimePanel  *self,
     }
 }
 
-static gboolean
-keynav_failed (GtkWidget        *listbox,
-               GtkDirectionType  direction,
-               CcDateTimePanel  *self)
-{
-  GList *item, *listboxes;
-
-  /* Find the listbox in the list of GtkListBoxes */
-  if (direction == GTK_DIR_DOWN)
-    listboxes = self->listboxes;
-  else
-    listboxes = self->listboxes_reverse;
-
-  item = g_list_find (listboxes, listbox);
-  g_assert (item);
-  if (item->next)
-    {
-      gtk_widget_child_focus (GTK_WIDGET (item->next->data), direction);
-      return TRUE;
-    }
-
-  return FALSE;
-}
-
 static void
 run_dialog (CcDateTimePanel *self,
             GtkWidget       *dialog)
@@ -1050,7 +1026,6 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, year_spinbutton);
 
   gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
-  gtk_widget_class_bind_template_callback (widget_class, keynav_failed);
   gtk_widget_class_bind_template_callback (widget_class, time_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
   gtk_widget_class_bind_template_callback (widget_class, month_row_activated_cb);
