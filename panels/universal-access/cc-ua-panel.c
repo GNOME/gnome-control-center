@@ -120,17 +120,13 @@ struct _CcUaPanel
   GtkSwitch         *enable_animations_switch;
   GtkListBox        *hearing_listbox;
   GtkSwitch         *highcontrast_enable_switch;
-  GtkListBoxRow     *highcontrast_row;
   GtkSwitch         *large_text_enable_switch;
-  GtkListBoxRow     *large_text_row;
   GtkSwitch         *locate_pointer_enable_switch;
   GtkSwitch         *mouse_keys_enable_switch;
-  GtkListBoxRow     *mouse_keys_row;
   GtkListBox        *pointing_listbox;
   GtkLabel          *repeat_keys_label;
   GtkListBoxRow     *repeat_keys_row;
   GtkSwitch         *screen_keyboard_enable_switch;
-  GtkListBoxRow     *screen_keyboard_row;
   GtkLabel          *screen_reader_label;
   GtkListBoxRow     *screen_reader_row;
   GtkListBox        *seeing_listbox;
@@ -205,17 +201,13 @@ cc_ua_panel_class_init (CcUaPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, enable_animations_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, hearing_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, highcontrast_enable_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, highcontrast_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, large_text_enable_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, large_text_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, locate_pointer_enable_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, mouse_keys_enable_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, mouse_keys_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, pointing_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, repeat_keys_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_keyboard_enable_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_keyboard_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_label);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, screen_reader_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaPanel, seeing_listbox);
@@ -366,15 +358,6 @@ cc_ua_panel_init_status (CcUaPanel *self)
 }
 
 static void
-toggle_switch (GtkSwitch *sw)
-{
-  gboolean active;
-
-  active = gtk_switch_get_active (sw);
-  gtk_switch_set_active (sw, !active);
-}
-
-static void
 run_dialog (CcUaPanel *self, GtkDialog *dialog)
 {
   GtkNative *native = gtk_widget_get_native (GTK_WIDGET (self));
@@ -386,23 +369,7 @@ run_dialog (CcUaPanel *self, GtkDialog *dialog)
 static void
 activate_row (CcUaPanel *self, GtkListBoxRow *row)
 {
-  if (row == self->highcontrast_row)
-    {
-      toggle_switch (self->highcontrast_enable_switch);
-    }
-  else if (row == self->large_text_row)
-    {
-      toggle_switch (self->large_text_enable_switch);
-    }
-  else if (row == self->screen_keyboard_row)
-    {
-      toggle_switch (self->screen_keyboard_enable_switch);
-    }
-  else if (row == self->mouse_keys_row)
-    {
-      toggle_switch (self->mouse_keys_enable_switch);
-    }
-  else if (row == self->zoom_row)
+  if (row == self->zoom_row)
     {
       run_dialog (self, GTK_DIALOG (cc_zoom_options_dialog_new ()));
     }
