@@ -31,121 +31,95 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Seeing</property>
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="seeing_heading_label">
-                    <property name="margin_end">12</property>
-                    <property name="margin_bottom">12</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Seeing</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
+              <object class="AdwActionRow" id="highcontrast_row">
+                <property name="title" translatable="yes">_High Contrast</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">highcontrast_enable_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="highcontrast_enable_switch">
+                    <property name="valign">center</property>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkListBox" id="seeing_listbox">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
-                    <accessibility>
-                      <relation name="labelled-by">seeing_heading_label</relation>
-                    </accessibility>
-                    <child>
-                      <object class="AdwActionRow" id="highcontrast_row">
-                        <property name="title" translatable="yes">_High Contrast</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable-widget">highcontrast_enable_switch</property>
-                        <child type="suffix">
-                          <object class="GtkSwitch" id="highcontrast_enable_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">_Large Text</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable-widget">large_text_enable_switch</property>
-                        <child type="suffix">
-                          <object class="GtkSwitch" id="large_text_enable_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Enable A_nimations</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable-widget">enable_animations_switch</property>
-                        <child type="suffix">
-                          <object class="GtkSwitch" id="enable_animations_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="cursor_size_row">
-                        <property name="title" translatable="yes">C_ursor Size</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="cursor_size_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="zoom_row">
-                        <property name="title" translatable="yes">_Zoom</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="zoom_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="screen_reader_row">
-                        <property name="title" translatable="yes">Screen _Reader</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="screen_reader_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="sound_keys_row">
-                        <property name="title" translatable="yes">_Sound Keys</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="sound_keys_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">_Large Text</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">large_text_enable_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="large_text_enable_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Enable A_nimations</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">enable_animations_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="enable_animations_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="cursor_size_row">
+                <property name="title" translatable="yes">C_ursor Size</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="cursor_size_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="zoom_row">
+                <property name="title" translatable="yes">_Zoom</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="zoom_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="screen_reader_row">
+                <property name="title" translatable="yes">Screen _Reader</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="screen_reader_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="sound_keys_row">
+                <property name="title" translatable="yes">_Sound Keys</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="sound_keys_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
                   </object>
                 </child>
               </object>
@@ -154,43 +128,17 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Hearing</property>
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="hearing_heading_label">
-                    <property name="margin_end">12</property>
-                    <property name="margin_bottom">12</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Hearing</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="hearing_listbox">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
-                    <accessibility>
-                      <relation name="labelled-by">hearing_heading_label</relation>
-                    </accessibility>
-                    <child>
-                      <object class="AdwActionRow" id="visual_alerts_row">
-                        <property name="title" translatable="yes">_Visual Alerts</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="visual_alerts_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+              <object class="AdwActionRow" id="visual_alerts_row">
+                <property name="title" translatable="yes">_Visual Alerts</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="visual_alerts_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
                   </object>
                 </child>
               </object>
@@ -199,83 +147,57 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Typing</property>
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="typing_heading_label">
-                    <property name="margin_end">12</property>
-                    <property name="margin_bottom">12</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Typing</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Screen _Keyboard</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">screen_keyboard_enable_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="screen_keyboard_enable_switch">
+                    <property name="valign">center</property>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkListBox" id="typing_listbox">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
-                    <accessibility>
-                      <relation name="labelled-by">typing_heading_label</relation>
-                    </accessibility>
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Screen _Keyboard</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable-widget">screen_keyboard_enable_switch</property>
-                        <child type="suffix">
-                          <object class="GtkSwitch" id="screen_keyboard_enable_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="repeat_keys_row">
-                        <property name="title" translatable="yes">R_epeat Keys</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="repeat_keys_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="cursor_blinking_row">
-                        <property name="title" translatable="yes">Cursor _Blinking</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="cursor_blinking_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="accessx_row">
-                        <property name="title" translatable="yes">_Typing Assist (AccessX)</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="accessx_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="repeat_keys_row">
+                <property name="title" translatable="yes">R_epeat Keys</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="repeat_keys_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="cursor_blinking_row">
+                <property name="title" translatable="yes">Cursor _Blinking</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="cursor_blinking_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="accessx_row">
+                <property name="title" translatable="yes">_Typing Assist (AccessX)</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="accessx_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
                   </object>
                 </child>
               </object>
@@ -284,85 +206,59 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Pointing &amp;amp; Clicking</property>
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="pointing_heading_label">
-                    <property name="margin_end">12</property>
-                    <property name="margin_bottom">12</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Pointing &amp; Clicking</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">_Mouse Keys</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">mouse_keys_enable_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="mouse_keys_enable_switch">
+                    <property name="valign">center</property>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">_Locate Pointer</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">locate_pointer_enable_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="locate_pointer_enable_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="click_assist_row">
+                <property name="title" translatable="yes">_Click Assist</property>
+                <property name="use-underline">True</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkLabel" id="click_assist_label">
+                    <property name="valign">center</property>
+                    <property name="xalign">1</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="double_click_delay_row">
+                <property name="title" translatable="yes">_Double-Click Delay</property>
+                <property name="use-underline">True</property>
+                <signal name="activated" handler="activate_row" swapped="yes"/>
                 <child>
-                  <object class="GtkListBox" id="pointing_listbox">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
+                  <object class="GtkScale" id="double_click_delay_scale">
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="adjustment">double_click_delay_adjustment</property>
+                    <property name="draw_value">False</property>
                     <accessibility>
-                      <relation name="labelled-by">pointing_heading_label</relation>
+                      <property name="label" translatable="yes">Double-Click Delay</property>
                     </accessibility>
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">_Mouse Keys</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable-widget">mouse_keys_enable_switch</property>
-                        <child type="suffix">
-                          <object class="GtkSwitch" id="mouse_keys_enable_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">_Locate Pointer</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable-widget">locate_pointer_enable_switch</property>
-                        <child type="suffix">
-                          <object class="GtkSwitch" id="locate_pointer_enable_switch">
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="click_assist_row">
-                        <property name="title" translatable="yes">_Click Assist</property>
-                        <property name="use-underline">True</property>
-                        <property name="activatable">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child type="suffix">
-                          <object class="GtkLabel" id="click_assist_label">
-                            <property name="valign">center</property>
-                            <property name="xalign">1</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="double_click_delay_row">
-                        <property name="title" translatable="yes">_Double-Click Delay</property>
-                        <property name="use-underline">True</property>
-                        <signal name="activated" handler="activate_row" swapped="yes"/>
-                        <child>
-                          <object class="GtkScale" id="double_click_delay_scale">
-                            <property name="hexpand">True</property>
-                            <property name="vexpand">True</property>
-                            <property name="adjustment">double_click_delay_adjustment</property>
-                            <property name="draw_value">False</property>
-                            <accessibility>
-                              <property name="label" translatable="yes">Double-Click Delay</property>
-                            </accessibility>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>
