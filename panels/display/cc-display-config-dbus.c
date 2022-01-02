@@ -795,6 +795,8 @@ construct_modes (CcDisplayMonitorDBus *self,
       if (mode->flags & MODE_CURRENT)
         self->current_mode = CC_DISPLAY_MODE (mode);
     }
+
+  self->modes = g_list_reverse (self->modes);
 }
 
 static CcDisplayMonitorDBus *
