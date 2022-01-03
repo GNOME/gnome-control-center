@@ -366,19 +366,18 @@
         <child>
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="AdwActionRow" id="timeformat_row">
+              <object class="AdwComboRow" id="timeformat_row">
                 <property name="title" translatable="yes">Time _Format</property>
                 <property name="use_underline">True</property>
-                <child>
-                  <object class="GtkComboBoxText" id="format_combobox">
-                    <property name="valign">center</property>
-                    <signal name="notify::active-id" handler="change_clock_settings" object="CcDateTimePanel" swapped="no"/>
-                    <items>
-                      <item id="24h" translatable="yes">24-hour</item>
-                      <item id="12h" translatable="yes">AM / PM</item>
-                    </items>
+                <signal name="notify::selected-item" handler="change_clock_settings" object="CcDateTimePanel" swapped="no"/>
+                <property name="model">
+                  <object class="AdwEnumListModel">
+                    <property name="enum_type">GDesktopClockFormat</property>
                   </object>
-                </child>
+                </property>
+                <property name="expression">
+                  <closure type="gchararray" function="format_clock_name_cb"/>
+                </property>
               </object>
             </child>
           </object>

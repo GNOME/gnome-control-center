@@ -93,7 +93,7 @@ struct _CcDateTimePanel
   GtkWidget *datetime_dialog;
   GtkWidget *datetime_label;
   GtkWidget *day_spinbutton;
-  GtkWidget *format_combobox;
+  GtkWidget *timeformat_row;
   GtkWidget *h_spinbutton;
   GtkLockButton *lock_button;
   GtkLabel  *month_label;
@@ -178,22 +178,35 @@ cc_date_time_panel_get_help_uri (CcPanel *panel)
 static void clock_settings_changed_cb (CcDateTimePanel *panel,
                                        gchar           *key);
 
+static char *
+format_clock_name_cb (AdwEnumListItem *item,
+                      gpointer         user_data)
+{
+
+  switch (adw_enum_list_item_get_value (item))
+    {
+    case G_DESKTOP_CLOCK_FORMAT_24H:
+      return g_strdup (_("24-hour"));
+    case G_DESKTOP_CLOCK_FORMAT_12H:
+      return g_strdup (_("AM / PM"));
+    default:
+      return NULL;
+    }
+}
+
 static void
 change_clock_settings (GObject         *gobject,
                        GParamSpec      *pspec,
                        CcDateTimePanel *self)
 {
   GDesktopClockFormat value;
-  const char *active_id;
+  AdwEnumListItem *item;
 
   g_signal_handlers_block_by_func (self->clock_settings, clock_settings_changed_cb,
                                    self);
 
-  active_id = gtk_combo_box_get_active_id (GTK_COMBO_BOX (self->format_combobox));
-  if (!g_strcmp0 (active_id, "24h"))
-    value = G_DESKTOP_CLOCK_FORMAT_24H;
-  else
-    value = G_DESKTOP_CLOCK_FORMAT_12H;
+  item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (ADW_COMBO_ROW (self->timeformat_row)));
+  value = adw_enum_list_item_get_value (item);
 
   g_settings_set_enum (self->clock_settings, CLOCK_FORMAT_KEY, value);
   g_settings_set_enum (self->filechooser_settings, CLOCK_FORMAT_KEY, value);
@@ -214,18 +227,15 @@ clock_settings_changed_cb (CcDateTimePanel *self,
   value = g_settings_get_enum (self->clock_settings, CLOCK_FORMAT_KEY);
   self->clock_format = value;
 
-  g_signal_handlers_block_by_func (self->format_combobox, change_clock_settings, self);
+  g_signal_handlers_block_by_func (self->timeformat_row, change_clock_settings, self);
 
-  if (value == G_DESKTOP_CLOCK_FORMAT_24H)
-    gtk_combo_box_set_active_id (GTK_COMBO_BOX (self->format_combobox), "24h");
-  else
-    gtk_combo_box_set_active_id (GTK_COMBO_BOX (self->format_combobox), "12h");
+  adw_combo_row_set_selected (ADW_COMBO_ROW (self->timeformat_row), value);
 
   cc_time_editor_set_am_pm (CC_TIME_EDITOR (self->time_editor),
                             value == G_DESKTOP_CLOCK_FORMAT_12H);
   update_time (self);
 
-  g_signal_handlers_unblock_by_func (self->format_combobox, change_clock_settings, self);
+  g_signal_handlers_unblock_by_func (self->timeformat_row, change_clock_settings, self);
 }
 
 
@@ -972,7 +982,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_label);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_spinbutton);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, format_combobox);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timeformat_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_label);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_popover);
@@ -991,6 +1001,7 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
   gtk_widget_class_bind_template_callback (widget_class, month_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, date_box_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, format_clock_name_cb);
 
   bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 
