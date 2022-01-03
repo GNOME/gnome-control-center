@@ -35,15 +35,11 @@
                     </child>
                     <child>
                       <object class="GtkButton">
+                        <property name="icon-name">window-close-symbolic</property>
                         <signal name="clicked" handler="cc_wwan_on_notification_closed" swapped="yes"/>
                         <accessibility>
                           <property name="label" translatable="yes">Close</property>
                         </accessibility>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">window-close-symbolic</property>
-                          </object>
-                        </child>
                       </object>
                     </child>
                   </object>
@@ -97,15 +93,11 @@
                     </child>
                     <child>
                       <object class="GtkButton" id="refresh_button">
+                        <property name="icon-name">view-refresh-symbolic</property>
                         <signal name="clicked" handler="cc_wwan_network_dialog_refresh_networks" swapped="yes"/>
                         <accessibility>
                           <property name="label" translatable="yes">Refresh Network Providers</property>
                         </accessibility>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">view-refresh-symbolic</property>
-                          </object>
-                        </child>
                       </object>
                     </child>
                   </object>
