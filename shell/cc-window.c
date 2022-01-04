@@ -411,6 +411,7 @@ update_headerbar_buttons (CcWindow *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->previous_button), !is_main_view);
   gtk_widget_set_visible (GTK_WIDGET (self->search_button), is_main_view);
+  gtk_search_bar_set_key_capture_widget (self->search_bar, is_main_view ? GTK_WIDGET (self) : NULL);
 
   update_list_title (self);
 
