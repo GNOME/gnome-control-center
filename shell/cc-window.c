@@ -151,21 +151,9 @@ remove_all_custom_widgets (CcWindow *self)
 }
 
 static void
-show_panel (CcWindow *self)
-{
-  adw_leaflet_set_visible_child (self->main_leaflet, GTK_WIDGET (self->panel_box));
-}
-
-static void
-show_sidebar (CcWindow *self)
-{
-  adw_leaflet_set_visible_child (self->main_leaflet, GTK_WIDGET (self->sidebar_box));
-}
-
-static void
 on_sidebar_activated_cb (CcWindow *self)
 {
-  show_panel (self);
+  adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
 }
 
 static gboolean
@@ -444,7 +432,7 @@ set_active_panel_from_id (CcWindow     *self,
     {
       g_object_set (G_OBJECT (self->current_panel), "parameters", parameters, NULL);
       if (force_moving_to_the_panel || self->previous_list_view == view)
-        show_panel (self);
+        adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
       self->previous_list_view = view;
       CC_RETURN (TRUE);
     }
@@ -480,7 +468,7 @@ set_active_panel_from_id (CcWindow     *self,
     add_current_panel_to_history (self, start_id);
 
   if (force_moving_to_the_panel)
-    show_panel (self);
+    adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
 
   g_free (self->current_panel_id);
   self->current_panel_id = g_strdup (start_id);
@@ -575,7 +563,7 @@ search_entry_activate_cb (CcWindow *self)
 static void
 back_button_clicked_cb (CcWindow *self)
 {
-  show_sidebar (self);
+  adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_BACK);
 }
 
 static void
@@ -832,7 +820,8 @@ cc_window_constructed (GObject *object)
                             self);
 
   update_headerbar_buttons (self);
-  show_sidebar (self);
+  adw_leaflet_set_visible_child (self->main_leaflet,
+                                 GTK_WIDGET (self->sidebar_box));
 
   G_OBJECT_CLASS (cc_window_parent_class)->constructed (object);
 }
