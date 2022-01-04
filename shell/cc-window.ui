@@ -85,10 +85,15 @@
                 <property name="width-request">200</property>
                 <property name="hscrollbar_policy">never</property>
                 <child>
-                  <object class="CcPanelList" id="panel_list">
-                    <property name="search-mode" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="bidirectional" />
-                    <property name="search-query" bind-source="search_entry" bind-property="text" bind-flags="default" />
-                    <signal name="show-panel" handler="show_panel_cb" object="CcWindow" swapped="yes" />
+                  <object class="GtkViewport">
+                    <property name="scroll-to-focus">True</property>
+                    <child>
+                      <object class="CcPanelList" id="panel_list">
+                        <property name="search-mode" bind-source="search_bar" bind-property="search-mode-enabled" bind-flags="bidirectional" />
+                        <property name="search-query" bind-source="search_entry" bind-property="text" bind-flags="default" />
+                        <signal name="show-panel" handler="show_panel_cb" object="CcWindow" swapped="yes" />
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
