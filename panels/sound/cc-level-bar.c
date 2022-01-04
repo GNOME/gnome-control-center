@@ -232,6 +232,7 @@ cc_level_bar_set_stream (CcLevelBar     *self,
 
   if (stream == NULL)
    {
+     self->value = 0.0;
      gtk_widget_queue_draw (GTK_WIDGET (self));
      return;
    }
