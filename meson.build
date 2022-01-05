@@ -225,7 +225,7 @@ config_h.set('HAVE_WWAN', host_is_linux,
 
 if host_is_linux_not_s390
   # gnome-bluetooth
-  gnome_bluetooth_dep = dependency('gnome-bluetooth-2.0')
+  gnome_bluetooth_dep = dependency('gnome-bluetooth-3.0')
 
   libwacom_dep = dependency('libwacom', version: '>= 0.7')
 
