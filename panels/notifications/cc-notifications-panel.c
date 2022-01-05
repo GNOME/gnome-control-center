@@ -38,10 +38,7 @@ struct _CcNotificationsPanel {
   CcPanel            parent_instance;
 
   GtkListBox        *app_listbox;
-  GtkAdjustment     *focus_adjustment;
   CcListRow         *lock_screen_row;
-  GtkScrolledWindow *main_scrolled_window;
-  GtkBox            *main_box;
   GtkListBox        *options_listbox;
   CcListRow         *dnd_row;
   GtkSizeGroup      *sizegroup1;
@@ -51,9 +48,6 @@ struct _CcNotificationsPanel {
   GCancellable      *cancellable;
 
   GHashTable        *known_applications;
-
-  GList             *sections;
-  GList             *sections_reverse;
 
   GDBusProxy        *perm_store;
 };
@@ -85,8 +79,6 @@ cc_notifications_panel_dispose (GObject *object)
 
   g_clear_object (&panel->master_settings);
   g_clear_pointer (&panel->known_applications, g_hash_table_unref);
-  g_clear_pointer (&panel->sections, g_list_free);
-  g_clear_pointer (&panel->sections_reverse, g_list_free);
 
   G_OBJECT_CLASS (cc_notifications_panel_parent_class)->dispose (object);
 }
@@ -99,47 +91,6 @@ cc_notifications_panel_finalize (GObject *object)
   g_clear_object (&panel->perm_store);
 
   G_OBJECT_CLASS (cc_notifications_panel_parent_class)->finalize (object);
-}
-
-static gboolean
-keynav_failed (CcNotificationsPanel *panel,
-               GtkDirectionType      direction,
-               GtkWidget            *widget)
-{
-  gdouble  value, lower, upper, page;
-  GList   *item, *sections;
-
-  /* Find the widget in the list of GtkWidgets */
-  if (direction == GTK_DIR_DOWN)
-    sections = panel->sections;
-  else
-    sections = panel->sections_reverse;
-
-  item = g_list_find (sections, widget);
-  g_assert (item);
-  if (item->next)
-    {
-      gtk_widget_child_focus (GTK_WIDGET (item->next->data), direction);
-      return TRUE;
-    }
-
-  value = gtk_adjustment_get_value (panel->focus_adjustment);
-  lower = gtk_adjustment_get_lower (panel->focus_adjustment);
-  upper = gtk_adjustment_get_upper (panel->focus_adjustment);
-  page  = gtk_adjustment_get_page_size (panel->focus_adjustment);
-
-  if (direction == GTK_DIR_UP && value > lower)
-    {
-      gtk_adjustment_set_value (panel->focus_adjustment, lower);
-      return TRUE;
-    }
-  else if (direction == GTK_DIR_DOWN && value < upper - page)
-    {
-      gtk_adjustment_set_value (panel->focus_adjustment, upper - page);
-      return TRUE;
-    }
-
-  return FALSE;
 }
 
 static void
@@ -182,11 +133,6 @@ cc_notifications_panel_init (CcNotificationsPanel *panel)
                    panel->lock_screen_row,
                    "active", G_SETTINGS_BIND_DEFAULT);
 
-  panel->sections = g_list_append (panel->sections, panel->options_listbox);
-  panel->sections_reverse = g_list_prepend (panel->sections_reverse, panel->options_listbox);
-
-  panel->sections = g_list_append (panel->sections, panel->app_listbox);
-  panel->sections_reverse = g_list_prepend (panel->sections_reverse, panel->app_listbox);
   gtk_list_box_set_sort_func (panel->app_listbox, (GtkListBoxSortFunc)sort_apps, NULL, NULL);
 
   build_app_store (panel);
@@ -228,15 +174,11 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/notifications/cc-notifications-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, app_listbox);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, focus_adjustment);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, lock_screen_row);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_scrolled_window);
-  gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, main_box);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, options_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, dnd_row);
   gtk_widget_class_bind_template_child (widget_class, CcNotificationsPanel, sizegroup1);
 
-  gtk_widget_class_bind_template_callback (widget_class, keynav_failed);
   gtk_widget_class_bind_template_callback (widget_class, select_app);
 }
 
