@@ -22,6 +22,8 @@
 #include <config.h>
 #endif
 
+#include <adwaita.h>
+
 #include <shell/cc-shell.h>
 #include <shell/cc-object-storage.h>
 #include <bluetooth-settings-widget.h>
@@ -32,12 +34,12 @@
 struct _CcBluetoothPanel {
 	CcPanel                  parent_instance;
 
-	GtkBox                  *airplane_box;
-	GtkBox                  *disabled_box;
+	AdwStatusPage           *airplane_page;
+	AdwStatusPage           *disabled_page;
 	GtkSwitch               *enable_switch;
 	GtkBox                  *header_box;
-	GtkBox                  *hw_airplane_box;
-	GtkBox                  *no_devices_box;
+	AdwStatusPage           *hw_airplane_page;
+	AdwStatusPage           *no_devices_page;
 	BluetoothSettingsWidget *settings_widget;
 	GtkStack                *stack;
 
@@ -133,23 +135,23 @@ adapter_status_changed_cb (CcBluetoothPanel *self)
 		g_debug ("No Bluetooth available");
 		sensitive = FALSE;
 		powered = FALSE;
-		page = GTK_WIDGET (self->no_devices_box);
+		page = GTK_WIDGET (self->no_devices_page);
 	} else if (self->hardware_airplane_mode) {
 		g_debug ("Bluetooth is Hard blocked");
 		sensitive = FALSE;
 		powered = FALSE;
-		page = GTK_WIDGET (self->hw_airplane_box);
+		page = GTK_WIDGET (self->hw_airplane_page);
 	} else if (self->airplane_mode) {
 		g_debug ("Airplane mode is on, Wi-Fi and Bluetooth are disabled");
 		sensitive = FALSE;
 		powered = FALSE;
-		page = GTK_WIDGET (self->airplane_box);
+		page = GTK_WIDGET (self->airplane_page);
 	} else if (self->bt_airplane_mode ||
 		   !bluetooth_settings_widget_get_default_adapter_powered (self->settings_widget)) {
 		g_debug ("Default adapter is unpowered");
 		sensitive = TRUE;
 		powered = FALSE;
-		page = GTK_WIDGET (self->disabled_box);
+		page = GTK_WIDGET (self->disabled_page);
 	} else {
 		g_debug ("Bluetooth is available and powered");
 		sensitive = TRUE;
@@ -231,12 +233,12 @@ cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/bluetooth/cc-bluetooth-panel.ui");
 
-	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, airplane_box);
-	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, disabled_box);
+	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, airplane_page);
+	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, disabled_page);
 	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, enable_switch);
 	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, header_box);
-	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, no_devices_box);
-	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, hw_airplane_box);
+	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, no_devices_page);
+	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, hw_airplane_page);
 	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, settings_widget);
 	gtk_widget_class_bind_template_child (widget_class, CcBluetoothPanel, stack);
 
