@@ -19,6 +19,7 @@
 
 #include "config.h"
 
+#include <adwaita.h>
 #include <string.h>
 #include <glib/gi18n-lib.h>
 #include <glib.h>
@@ -219,7 +220,7 @@ static void
 add_application (CcNotificationsPanel *panel,
                  Application          *app)
 {
-  GtkWidget *box, *w, *row;
+  GtkWidget *w, *row;
   g_autoptr(GIcon) icon = NULL;
   const gchar *app_name;
 
@@ -233,30 +234,20 @@ add_application (CcNotificationsPanel *panel,
   else
     g_object_ref (icon);
 
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 10);
-  gtk_widget_set_margin_top (box, 10);
-  gtk_widget_set_margin_bottom (box, 10);
-  gtk_widget_set_margin_start (box, 10);
-  gtk_widget_set_margin_end (box, 10);
+  row = adw_action_row_new ();
+  gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
+                                 g_markup_escape_text (app_name, -1));
 
-  row = gtk_list_box_row_new ();
   g_object_set_qdata_full (G_OBJECT (row), application_quark (),
                            app, (GDestroyNotify) application_free);
 
   gtk_list_box_append (panel->app_listbox, row);
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
   w = gtk_image_new_from_gicon (icon);
   gtk_style_context_add_class (gtk_widget_get_style_context (w), "lowres-icon");
   gtk_image_set_icon_size (GTK_IMAGE (w), GTK_ICON_SIZE_LARGE);
-  gtk_size_group_add_widget (panel->sizegroup1, w);
-  gtk_box_append (GTK_BOX (box), w);
-
-  w = gtk_label_new (app_name);
-  gtk_widget_set_hexpand (w, TRUE);
-  gtk_label_set_ellipsize (GTK_LABEL (w), PANGO_ELLIPSIZE_END);
-  gtk_label_set_xalign (GTK_LABEL (w), 0.0f);
-  gtk_box_append (GTK_BOX (box), w);
+  adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
 
   w = gtk_label_new ("");
   g_settings_bind_with_mapping (app->settings, "enable",
@@ -267,9 +258,7 @@ add_application (CcNotificationsPanel *panel,
                                 NULL,
                                 NULL,
                                 NULL);
-  gtk_widget_set_margin_end (w, 12);
-  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_box_append (GTK_BOX (box), w);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
 
   g_hash_table_add (panel->known_applications, g_strdup (app->canonical_app_id));
 }
