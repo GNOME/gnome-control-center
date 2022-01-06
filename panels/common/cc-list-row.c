@@ -34,13 +34,12 @@
 
 struct _CcListRow
 {
-  GtkListBoxRow parent_instance;
+  AdwActionRow  parent_instance;
 
-  GtkBox       *box;
-  GtkLabel     *title;
-  GtkLabel     *subtitle;
   GtkLabel     *secondary_label;
-  GtkImage     *icon;
+
+  GtkImage     *arrow;
+  gboolean      show_arrow;
 
   GtkSwitch    *enable_switch;
   gboolean      show_switch;
@@ -48,19 +47,15 @@ struct _CcListRow
   gboolean      switch_active;
 };
 
-G_DEFINE_TYPE (CcListRow, cc_list_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcListRow, cc_list_row, ADW_TYPE_ACTION_ROW)
 
 
 enum {
   PROP_0,
-  PROP_TITLE,
-  PROP_SUBTITLE,
   PROP_SECONDARY_LABEL,
-  PROP_ICON_NAME,
+  PROP_SHOW_ARROW,
   PROP_SHOW_SWITCH,
   PROP_ACTIVE,
-  PROP_BOLD,
-  PROP_USE_UNDERLINE,
   N_PROPS
 };
 
@@ -127,6 +122,10 @@ cc_list_row_get_property (GObject    *object,
       g_value_set_string (value, gtk_label_get_label (self->secondary_label));
       break;
 
+    case PROP_SHOW_ARROW:
+      g_value_set_boolean (value, self->show_arrow);
+      break;
+
     case PROP_ACTIVE:
       g_value_set_boolean (value, self->switch_active);
       break;
@@ -143,47 +142,19 @@ cc_list_row_set_property (GObject      *object,
                           GParamSpec   *pspec)
 {
   CcListRow *self = (CcListRow *)object;
-  PangoAttrList *attributes;
-  PangoAttribute *attribute;
-  gint margin;
 
   switch (prop_id)
     {
-    case PROP_TITLE:
-      gtk_label_set_label (self->title, g_value_get_string (value));
-      break;
-
-    case PROP_SUBTITLE:
-      gtk_widget_set_visible (GTK_WIDGET (self->subtitle),
-                              g_value_get_string (value) != NULL);
-      gtk_label_set_label (self->subtitle, g_value_get_string (value));
-      if (g_value_get_string (value) != NULL)
-        margin = 6;
-      else
-        margin = 12;
-      g_object_set (self->box,
-                    "margin-top", margin,
-                    "margin-bottom", margin,
-                    NULL);
-      break;
-
     case PROP_SECONDARY_LABEL:
       gtk_label_set_label (self->secondary_label, g_value_get_string (value));
       break;
 
-    case PROP_ICON_NAME:
-      cc_list_row_set_icon_name (self, g_value_get_string (value));
+    case PROP_SHOW_ARROW:
+      cc_list_row_set_show_arrow (self, g_value_get_boolean (value));
       break;
 
     case PROP_SHOW_SWITCH:
       cc_list_row_set_show_switch (self, g_value_get_boolean (value));
-      break;
-
-    case PROP_USE_UNDERLINE:
-      gtk_label_set_use_underline (self->title, g_value_get_boolean (value));
-      gtk_label_set_use_underline (self->subtitle, g_value_get_boolean (value));
-      gtk_label_set_mnemonic_widget (self->title, GTK_WIDGET (self));
-      gtk_label_set_mnemonic_widget (self->subtitle, GTK_WIDGET (self));
       break;
 
     case PROP_ACTIVE:
@@ -194,24 +165,6 @@ cc_list_row_set_property (GObject      *object,
       self->switch_active = g_value_get_boolean (value);
       g_signal_handlers_unblock_by_func (self->enable_switch,
                                          cc_list_row_switch_active_cb, self);
-      break;
-
-    case PROP_BOLD:
-      if (g_value_get_boolean (value))
-        attribute = pango_attr_weight_new (PANGO_WEIGHT_BOLD);
-      else
-        attribute = pango_attr_weight_new (PANGO_WEIGHT_NORMAL);
-
-      attributes = gtk_label_get_attributes (self->title);
-
-      if (!attributes)
-        attributes = pango_attr_list_new ();
-      else
-        pango_attr_list_ref (attributes);
-
-      pango_attr_list_change (attributes, attribute);
-      gtk_label_set_attributes (self->title, attributes);
-      pango_attr_list_unref (attributes);
       break;
 
     default:
@@ -228,20 +181,6 @@ cc_list_row_class_init (CcListRowClass *klass)
   object_class->get_property = cc_list_row_get_property;
   object_class->set_property = cc_list_row_set_property;
 
-  properties[PROP_TITLE] =
-    g_param_spec_string ("title",
-                         "Title",
-                         "List row primary title",
-                         NULL,
-                         G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
-
-  properties[PROP_SUBTITLE] =
-    g_param_spec_string ("subtitle",
-                         "Subtitle",
-                         "List row primary subtitle",
-                         NULL,
-                         G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
-
   properties[PROP_SECONDARY_LABEL] =
     g_param_spec_string ("secondary-label",
                          "Secondary Label",
@@ -249,12 +188,12 @@ cc_list_row_class_init (CcListRowClass *klass)
                          NULL,
                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
-  properties[PROP_ICON_NAME] =
-    g_param_spec_string ("icon-name",
-                         "Icon Name",
-                         "Secondary Icon name",
-                         NULL,
-                         G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
+  properties[PROP_SHOW_ARROW] =
+    g_param_spec_boolean ("show-arrow",
+                          "Show Arrow",
+                          "Whether to show an arrow at the end of the row",
+                          FALSE,
+                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_SHOW_SWITCH] =
     g_param_spec_boolean ("show-switch",
@@ -270,31 +209,14 @@ cc_list_row_class_init (CcListRowClass *klass)
                           FALSE,
                           G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
 
-  properties[PROP_BOLD] =
-    g_param_spec_boolean ("bold",
-                          "Bold",
-                          "Whether title is bold or not",
-                          FALSE,
-                          G_PARAM_READWRITE | G_PARAM_STATIC_STRINGS);
-
-  properties[PROP_USE_UNDERLINE] =
-    g_param_spec_boolean ("use-underline",
-                          "Use underline",
-                          "If set, text prefixed with underline shall be used as mnemonic",
-                          FALSE,
-                          G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
-
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/"
                                                "common/cc-list-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcListRow, box);
-  gtk_widget_class_bind_template_child (widget_class, CcListRow, title);
-  gtk_widget_class_bind_template_child (widget_class, CcListRow, subtitle);
   gtk_widget_class_bind_template_child (widget_class, CcListRow, secondary_label);
-  gtk_widget_class_bind_template_child (widget_class, CcListRow, icon);
+  gtk_widget_class_bind_template_child (widget_class, CcListRow, arrow);
   gtk_widget_class_bind_template_child (widget_class, CcListRow, enable_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_list_row_switch_active_cb);
@@ -312,16 +234,17 @@ cc_list_row_init (CcListRow *self)
 }
 
 void
-cc_list_row_set_icon_name (CcListRow   *self,
-                           const gchar *icon_name)
+cc_list_row_set_show_arrow (CcListRow *self,
+                            gboolean   show_arrow)
 {
   g_return_if_fail (CC_IS_LIST_ROW (self));
   g_return_if_fail (!self->show_switch);
 
-  if (icon_name)
-    g_object_set (self->icon, "icon-name", icon_name, NULL);
+  if (self->show_arrow == show_arrow)
+    return;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->icon), icon_name != NULL);
+  self->show_arrow = show_arrow;
+  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_SHOW_ARROW]);
 }
 
 void
@@ -333,8 +256,11 @@ cc_list_row_set_show_switch (CcListRow *self,
   self->show_switch = !!show_switch;
 
   gtk_widget_set_visible (GTK_WIDGET (self->enable_switch), self->show_switch);
-  gtk_widget_set_visible (GTK_WIDGET (self->icon), !self->show_switch);
+  gtk_widget_set_visible (GTK_WIDGET (self->arrow), !self->show_switch);
   gtk_widget_set_visible (GTK_WIDGET (self->secondary_label), !self->show_switch);
+
+  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (self),
+                                         self->show_switch ? GTK_WIDGET (self->enable_switch) : NULL);
 }
 
 gboolean

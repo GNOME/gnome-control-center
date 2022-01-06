@@ -24,24 +24,25 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_LIST_ROW (cc_list_row_get_type())
-G_DECLARE_FINAL_TYPE (CcListRow, cc_list_row, CC, LIST_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcListRow, cc_list_row, CC, LIST_ROW, AdwActionRow)
 
-void       cc_list_row_set_icon_name        (CcListRow   *self,
-                                             const gchar *icon_name);
-void       cc_list_row_set_show_switch      (CcListRow   *self,
-                                             gboolean     show_switch);
-gboolean   cc_list_row_get_active           (CcListRow   *self);
-void       cc_list_row_activate             (CcListRow   *self);
-void       cc_list_row_set_secondary_label  (CcListRow   *self,
-                                             const gchar *label);
-void       cc_list_row_set_secondary_markup (CcListRow   *self,
-                                             const gchar *markup);
-void       cc_list_row_set_switch_sensitive (CcListRow   *self,
-                                             gboolean     sensitive);
+void     cc_list_row_set_show_arrow       (CcListRow   *self,
+                                           gboolean     show_arrow);
+void     cc_list_row_set_show_switch      (CcListRow   *self,
+                                           gboolean     show_switch);
+gboolean cc_list_row_get_active           (CcListRow   *self);
+void     cc_list_row_activate             (CcListRow   *self);
+void     cc_list_row_set_secondary_label  (CcListRow   *self,
+                                           const gchar *label);
+void     cc_list_row_set_secondary_markup (CcListRow   *self,
+                                           const gchar *markup);
+void     cc_list_row_set_switch_sensitive (CcListRow   *self,
+                                           gboolean     sensitive);
 
 G_END_DECLS
