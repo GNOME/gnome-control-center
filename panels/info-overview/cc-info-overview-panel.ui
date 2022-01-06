@@ -8,9 +8,16 @@
           <object class="AdwPreferencesGroup">
 
             <child>
-              <object class="GtkPicture" id="os_logo">
-                <property name="can-shrink">False</property>
-                <property name="alternative-text" translatable="yes">System Logo</property>
+              <object class="AdwClamp">
+                <property name="orientation">vertical</property>
+                <property name="maximum-size">192</property>
+                <property name="tightening-threshold">192</property>
+                <property name="child">
+                  <object class="GtkPicture" id="os_logo">
+                    <property name="can-shrink">False</property>
+                    <property name="alternative-text" translatable="yes">System Logo</property>
+                  </object>
+                </property>
               </object>
             </child>
 
