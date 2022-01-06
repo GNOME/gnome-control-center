@@ -47,6 +47,8 @@
 #define SECTION_PADDING 32
 #define HEADING_PADDING 12
 
+#define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
+
 typedef enum {
   CC_DISPLAY_CONFIG_SINGLE,
   CC_DISPLAY_CONFIG_JOIN,
@@ -74,6 +76,7 @@ struct _CcDisplayPanel
 
   CcNightLightPage *night_light_page;
   GtkDialog *night_light_dialog;
+  GtkLabel *night_light_state_label;
 
   UpClient *up_client;
   gboolean lid_is_closed;
@@ -91,6 +94,7 @@ struct _CcDisplayPanel
 
   GtkWidget      *arrangement_group;
   AdwBin         *arrangement_bin;
+  GtkWidget      *back_button;
   GtkToggleButton *config_type_join;
   GtkToggleButton *config_type_mirror;
   GtkToggleButton *config_type_single;
@@ -106,10 +110,12 @@ struct _CcDisplayPanel
   GtkToggleButton *output_selection_two_first;
   GtkToggleButton *output_selection_two_second;
   AdwComboRow    *primary_display_row;
-  GtkWidget      *stack_switcher;
+  GtkStack       *stack;
 
   GtkShortcutController *toplevel_shortcuts;
   GtkShortcut *escape_shortcut;
+
+  GSettings           *display_settings;
 };
 
 CC_PANEL_REGISTER (CcDisplayPanel, cc_display_panel)
@@ -495,6 +501,13 @@ on_monitor_settings_updated_cb (CcDisplayPanel    *panel,
 }
 
 static void
+on_back_button_clicked_cb (GtkButton      *button,
+                           CcDisplayPanel *self)
+{
+  gtk_stack_set_visible_child_name (self->stack, "displays");
+}
+
+static void
 on_config_type_toggled_cb (CcDisplayPanel *panel,
                            GtkCheckButton *btn)
 {
@@ -532,6 +545,24 @@ on_night_light_list_box_row_activated_cb (CcDisplayPanel *panel)
 
   gtk_window_set_transient_for (GTK_WINDOW (panel->night_light_dialog), toplevel);
   gtk_window_present (GTK_WINDOW (panel->night_light_dialog));
+}
+
+static void
+on_night_light_enabled_changed_cb (GSettings      *settings,
+                                   const gchar    *key,
+                                   CcDisplayPanel *self)
+{
+  if (g_settings_get_boolean (self->display_settings, "night-light-enabled"))
+    gtk_label_set_label (self->night_light_state_label, _("On"));
+  else
+    gtk_label_set_label (self->night_light_state_label, _("Off"));
+}
+
+static void
+on_night_light_row_activated_cb (GtkListBoxRow  *row,
+                                 CcDisplayPanel *self)
+{
+  gtk_stack_set_visible_child_name (self->stack, "night-light");
 }
 
 static void
@@ -646,6 +677,16 @@ on_primary_display_selected_index_changed_cb (CcDisplayPanel *panel)
 }
 
 static void
+on_stack_visible_child_name_changed_cb (GtkStack       *stack,
+                                        GParamSpec     *pspec,
+                                        CcDisplayPanel *self)
+{
+  const gchar *visible_child_name = gtk_stack_get_visible_child_name (self->stack);
+
+  gtk_widget_set_visible (self->back_button, g_strcmp0 (visible_child_name, "displays") != 0);
+}
+
+static void
 on_toplevel_folded (CcDisplayPanel *panel, GParamSpec *pspec, GtkWidget *toplevel)
 {
   gboolean folded;
@@ -671,7 +712,9 @@ on_toplevel_escape_pressed_cb (GtkWidget      *widget,
 static void
 cc_display_panel_constructed (GObject *object)
 {
-  GtkWidget *toplevel = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (object)));
+  CcDisplayPanel *self = CC_DISPLAY_PANEL (object);
+  CcShell *shell = cc_panel_get_shell (CC_PANEL (object));
+  GtkWidget *toplevel = cc_shell_get_toplevel (shell);
 
   g_signal_connect_object (cc_panel_get_shell (CC_PANEL (object)), "notify::active-panel",
                            G_CALLBACK (active_panel_changed), object, G_CONNECT_SWAPPED);
@@ -680,20 +723,14 @@ cc_display_panel_constructed (GObject *object)
   on_toplevel_folded (CC_DISPLAY_PANEL (object), NULL, toplevel);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->constructed (object);
+
+  cc_shell_embed_widget_in_header (shell, self->back_button, GTK_POS_LEFT);
 }
 
 static const char *
 cc_display_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/prefs-display";
-}
-
-static GtkWidget *
-cc_display_panel_get_title_widget (CcPanel *panel)
-{
-  CcDisplayPanel *self = CC_DISPLAY_PANEL (panel);
-
-  return self->stack_switcher;
 }
 
 static void
@@ -706,7 +743,6 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   g_type_ensure (CC_TYPE_NIGHT_LIGHT_PAGE);
 
   panel_class->get_help_uri = cc_display_panel_get_help_uri;
-  panel_class->get_title_widget = cc_display_panel_get_title_widget;
 
   object_class->constructed = cc_display_panel_constructed;
   object_class->dispose = cc_display_panel_dispose;
@@ -715,6 +751,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, back_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_switcher_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_join);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_mirror);
@@ -725,6 +762,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, multi_selection_box);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_state_label);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_enabled_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_combo);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_stack);
@@ -732,15 +770,18 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_two_first);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, output_selection_two_second);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, stack_switcher);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toplevel_shortcuts);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_config_type_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_night_light_list_box_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_night_light_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_output_enabled_active_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_output_selection_combo_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_output_selection_two_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_index_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_stack_visible_child_name_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_toplevel_escape_pressed_cb);
 }
 
@@ -1268,4 +1309,12 @@ cc_display_panel_init (CcDisplayPanel *self)
                            gtk_callback_action_new ((GtkShortcutFunc) on_toplevel_escape_pressed_cb,
                                                     self,
                                                     NULL));
+
+  self->display_settings = g_settings_new (DISPLAY_SCHEMA);
+  g_signal_connect_object (self->display_settings,
+                           "changed::night-light-enabled",
+                           G_CALLBACK (on_night_light_enabled_changed_cb),
+                           self,
+                           0);
+  on_night_light_enabled_changed_cb (NULL, NULL, self);
 }

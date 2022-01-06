@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.22.0 -->
 <interface>
-  <object class="GtkStackSwitcher" id="stack_switcher">
-    <property name="stack">stack</property>
-  </object>
   <template class="CcDisplayPanel" parent="CcPanel">
 
     <child>
@@ -22,6 +19,7 @@
     <child>
       <object class="GtkStack" id="stack">
         <property name="transition-type">crossfade</property>
+        <signal name="notify::visible-child-name" handler="on_stack_visible_child_name_changed_cb" object="CcDisplayPanel" swapped="no" />
 
         <!-- Displays page -->
         <child>
@@ -190,6 +188,33 @@
                                 </accessibility>
                               </object>
                             </child>
+
+                            <!-- Night Light -->
+                            <child>
+                              <object class="AdwPreferencesGroup">
+                                <child>
+                                  <object class="AdwActionRow">
+                                    <property name="activatable">True</property>
+                                    <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">Night Light</property>
+                                    <signal name="activated" handler="on_night_light_row_activated_cb" object="CcDisplayPanel" swapped="no" />
+
+                                    <child type="suffix">
+                                      <object class="GtkLabel" id="night_light_state_label">
+                                        <property name="label">On</property>
+                                      </object>
+                                    </child>
+
+                                    <child type="suffix">
+                                      <object class="GtkImage">
+                                        <property name="icon-name">go-next-symbolic</property>
+                                      </object>
+                                    </child>
+
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+
                           </object>
                         </child>
                       </object>
@@ -215,4 +240,13 @@
       </object>
     </child>
   </template>
+
+  <object class="GtkButton" id="back_button">
+    <property name="visible">False</property>
+    <property name="icon-name">go-previous-symbolic</property>
+    <signal name="clicked" handler="on_back_button_clicked_cb" object="CcDisplayPanel" swapped="no" />
+    <style>
+      <class name="flat" />
+    </style>
+  </object>
 </interface>
