@@ -60,13 +60,11 @@ struct _CcInfoOverviewPanel
   CcListRow       *disk_row;
   CcListRow       *gnome_version_row;
   CcListRow       *graphics_row;
-  GtkListBox      *hardware_box;
   CcListRow       *hardware_model_row;
   GtkDialog       *hostname_editor;
   CcHostnameEntry *hostname_entry;
   CcListRow       *hostname_row;
   CcListRow       *memory_row;
-  GtkListBox      *os_box;
   GtkPicture      *os_logo;
   CcListRow       *os_name_row;
   CcListRow       *os_type_row;
@@ -939,13 +937,11 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_box);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_model_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_editor);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, memory_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_box);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_logo);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_type_row);
