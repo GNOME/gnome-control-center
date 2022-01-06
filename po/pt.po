@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-12-20 20:29+0000\n"
-"PO-Revision-Date: 2021-12-21 15:54+0000\n"
+"POT-Creation-Date: 2022-01-05 22:38+0000\n"
+"PO-Revision-Date: 2022-01-06 22:50+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -84,7 +84,7 @@ msgstr "Sistema de ficheiros"
 #: panels/applications/cc-applications-panel.c:850
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:304
-#: shell/cc-window.c:973 shell/cc-window.ui:23
+#: shell/cc-window.c:974 shell/cc-window.ui:23
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Definições"
@@ -1958,7 +1958,7 @@ msgid "Eject"
 msgstr "Ejetar"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:371
+#: panels/universal-access/cc-ua-panel.ui:148
 msgid "Typing"
 msgstr "Escrita"
 
@@ -2250,7 +2250,7 @@ msgstr "Métodos para inserir símbolos e variantes de letras usando o teclado."
 
 #: panels/keyboard/cc-keyboard-panel.ui:213
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:202
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:207
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
@@ -2881,7 +2881,7 @@ msgstr "Ligado"
 
 #: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/net-device-ethernet.c:327
-#: panels/network/network-bluetooth.ui:56 panels/network/network-ethernet.ui:75
+#: panels/network/network-bluetooth.ui:34 panels/network/network-ethernet.ui:75
 #: panels/network/network-mobile.ui:321 panels/network/network-vpn.ui:55
 msgid "Options…"
 msgstr "Opções…"
@@ -3587,7 +3587,7 @@ msgstr "Última utilização"
 #. * device list.
 #.
 #: panels/network/net-device-ethernet.c:266
-#: panels/network/network-bluetooth.ui:28 panels/network/network-ethernet.ui:13
+#: panels/network/network-bluetooth.ui:17 panels/network/network-ethernet.ui:13
 msgid "Wired"
 msgstr "Com cabo"
 
@@ -3628,19 +3628,11 @@ msgstr "O dispositivo sem-fio não suporta o modo ponto de acesso"
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:259
 #: panels/power/cc-power-panel.c:837 panels/power/cc-power-panel.c:848
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:599
-#: panels/universal-access/cc-ua-panel.c:609
-#: panels/universal-access/cc-ua-panel.c:621
-#: panels/universal-access/cc-ua-panel.c:662
-#: panels/universal-access/cc-ua-panel.ui:230
-#: panels/universal-access/cc-ua-panel.ui:261
-#: panels/universal-access/cc-ua-panel.ui:292
-#: panels/universal-access/cc-ua-panel.ui:351
-#: panels/universal-access/cc-ua-panel.ui:442
-#: panels/universal-access/cc-ua-panel.ui:473
-#: panels/universal-access/cc-ua-panel.ui:504
-#: panels/universal-access/cc-ua-panel.ui:627
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
 msgid "Off"
 msgstr "Desligado"
 
@@ -3671,7 +3663,7 @@ msgstr ""
 msgid "%s VPN"
 msgstr "VPN %s"
 
-#: panels/network/network-bluetooth.ui:37
+#: panels/network/network-bluetooth.ui:23
 msgid "Turn device off"
 msgstr "Desligar o dispositivo"
 
@@ -4459,11 +4451,11 @@ msgstr "Ver o _conteúdo da mensagem no ecrã bloqueado"
 
 #: panels/notifications/cc-notifications-panel.c:259
 #: panels/power/cc-power-panel.c:843 panels/power/cc-power-panel.c:850
-#: panels/universal-access/cc-ua-panel.c:328
-#: panels/universal-access/cc-ua-panel.c:599
-#: panels/universal-access/cc-ua-panel.c:609
-#: panels/universal-access/cc-ua-panel.c:621
-#: panels/universal-access/cc-ua-panel.c:662
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
 msgid "On"
 msgstr "Ligado"
 
@@ -5652,7 +5644,7 @@ msgstr "Formatos"
 #: panels/region/cc-format-chooser.ui:37
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
 #: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
-#: shell/cc-window.ui:145
+#: shell/cc-window.ui:150
 msgid "Back"
 msgstr "Recuar"
 
@@ -6551,31 +6543,6 @@ msgstr "Atraso da repetição das teclas"
 msgid "Repeat keys speed"
 msgstr "Velocidade de repetição das teclas"
 
-#: panels/universal-access/cc-sound-keys-dialog.ui:5
-msgid "Sound Keys"
-msgstr "Teclas de som"
-
-#: panels/universal-access/cc-sound-keys-dialog.ui:23
-msgid "Beep when Num Lock or Caps Lock are turned on or off."
-msgstr "Apitar quando Num Lock ou Caps Lock são ligados ou desligados."
-
-#: panels/universal-access/cc-sound-keys-dialog.ui:38
-#: panels/universal-access/cc-ua-panel.ui:281
-msgid "_Sound Keys"
-msgstr "Teclas _sonorizadas"
-
-#: panels/universal-access/cc-screen-reader-dialog.ui:5
-msgid "Screen Reader"
-msgstr "Locutor de ecrã"
-
-#: panels/universal-access/cc-screen-reader-dialog.ui:23
-msgid "The screen reader reads displayed text as you move the focus."
-msgstr "O locutor de ecrã lê o texto mostrado à medida que o foco é movido."
-
-#: panels/universal-access/cc-screen-reader-dialog.ui:44
-msgid "_Screen Reader"
-msgstr "_Locutor de ecrã"
-
 #: panels/universal-access/cc-typing-dialog.ui:4
 msgid "Typing Assist"
 msgstr "Assistente de digitação"
@@ -6666,117 +6633,129 @@ msgstr ""
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:348
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Predefinição"
 
-#: panels/universal-access/cc-ua-panel.c:351
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Médio"
 
-#: panels/universal-access/cc-ua-panel.c:354
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Grande"
 
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:366
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Maior"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:369
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Maior ainda"
 
-#: panels/universal-access/cc-ua-panel.c:364
+#: panels/universal-access/cc-ua-panel.c:373
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d pixel"
 msgstr[1] "%d pixels"
 
-#: panels/universal-access/cc-ua-panel.ui:40
+#: panels/universal-access/cc-ua-panel.ui:20
 msgid "_Always Show Accessibility Menu"
 msgstr "V_er sempre o menu de acessibilidade"
 
-#: panels/universal-access/cc-ua-panel.ui:63
+#: panels/universal-access/cc-ua-panel.ui:34
 msgid "Seeing"
 msgstr "Visão"
 
-#: panels/universal-access/cc-ua-panel.ui:93
+#: panels/universal-access/cc-ua-panel.ui:37
 msgid "_High Contrast"
 msgstr "Alto _contraste"
 
-#: panels/universal-access/cc-ua-panel.ui:125
+#: panels/universal-access/cc-ua-panel.ui:49
 msgid "_Large Text"
 msgstr "Texto _grande"
 
-#: panels/universal-access/cc-ua-panel.ui:158
+#: panels/universal-access/cc-ua-panel.ui:61
 msgid "Enable A_nimations"
 msgstr "Ativar a_nimações"
 
-#: panels/universal-access/cc-ua-panel.ui:187
+#: panels/universal-access/cc-ua-panel.ui:73
+msgid "Screen _Reader"
+msgstr "Locuto_r de ecrã"
+
+#: panels/universal-access/cc-ua-panel.ui:74
+msgid "The screen reader reads displayed text as you move the focus."
+msgstr "O locutor de ecrã lê o texto mostrado à medida que o foco é movido."
+
+#: panels/universal-access/cc-ua-panel.ui:86
+msgid "_Sound Keys"
+msgstr "Teclas _sonorizadas"
+
+#: panels/universal-access/cc-ua-panel.ui:87
+msgid "Beep when Num Lock or Caps Lock are turned on or off."
+msgstr "Apitar quando Num Lock ou Caps Lock são ligados ou desligados."
+
+#: panels/universal-access/cc-ua-panel.ui:99
 msgid "C_ursor Size"
 msgstr "Tamanho do cur_sor"
 
-#: panels/universal-access/cc-ua-panel.ui:219
+#: panels/universal-access/cc-ua-panel.ui:113
 #: panels/universal-access/cc-zoom-options-dialog.ui:82
 msgid "_Zoom"
 msgstr "_Ampliação"
 
-#: panels/universal-access/cc-ua-panel.ui:250
-msgid "Screen _Reader"
-msgstr "Locuto_r de ecrã"
-
-#: panels/universal-access/cc-ua-panel.ui:312
+#: panels/universal-access/cc-ua-panel.ui:129
 msgid "Hearing"
 msgstr "Audição"
 
-#: panels/universal-access/cc-ua-panel.ui:340
+#: panels/universal-access/cc-ua-panel.ui:132
 #: panels/universal-access/cc-visual-alerts-dialog.ui:54
 msgid "_Visual Alerts"
 msgstr "Alertas _visuais"
 
-#: panels/universal-access/cc-ua-panel.ui:401
+#: panels/universal-access/cc-ua-panel.ui:151
 msgid "Screen _Keyboard"
 msgstr "_Teclado de ecrã"
 
-#: panels/universal-access/cc-ua-panel.ui:431
+#: panels/universal-access/cc-ua-panel.ui:163
 msgid "R_epeat Keys"
 msgstr "R_epetição de teclas"
 
-#: panels/universal-access/cc-ua-panel.ui:462
+#: panels/universal-access/cc-ua-panel.ui:177
 msgid "Cursor _Blinking"
 msgstr "Piscar do cursor"
 
-#: panels/universal-access/cc-ua-panel.ui:493
+#: panels/universal-access/cc-ua-panel.ui:191
 msgid "_Typing Assist (AccessX)"
 msgstr "Assistente de _digitação (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:523
-msgid "Pointing & Clicking"
+#: panels/universal-access/cc-ua-panel.ui:207
+msgid "Pointing &amp; Clicking"
 msgstr "Apontar e clicar"
 
-#: panels/universal-access/cc-ua-panel.ui:553
+#: panels/universal-access/cc-ua-panel.ui:210
 msgid "_Mouse Keys"
 msgstr "Teclas de _rato"
 
-#: panels/universal-access/cc-ua-panel.ui:586
+#: panels/universal-access/cc-ua-panel.ui:222
 msgid "_Locate Pointer"
 msgstr "_Localizar o cursor"
 
-#: panels/universal-access/cc-ua-panel.ui:616
+#: panels/universal-access/cc-ua-panel.ui:234
 msgid "_Click Assist"
 msgstr "Assistente de _clique"
 
-#: panels/universal-access/cc-ua-panel.ui:645
+#: panels/universal-access/cc-ua-panel.ui:248
 msgid "_Double-Click Delay"
 msgstr "Atraso do clique _duplo"
 
-#: panels/universal-access/cc-ua-panel.ui:660
+#: panels/universal-access/cc-ua-panel.ui:258
 msgid "Double-Click Delay"
 msgstr "Atraso do clique duplo"
 
@@ -8798,11 +8777,11 @@ msgstr "Todas as definições"
 msgid "Primary Menu"
 msgstr "Menu principal"
 
-#: shell/cc-window.ui:194
+#: shell/cc-window.ui:199
 msgid "Warning: Development Version"
 msgstr "Aviso: versão em desenvolvimento"
 
-#: shell/cc-window.ui:195
+#: shell/cc-window.ui:200
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -8812,7 +8791,7 @@ msgstr ""
 "incorrer em comportamento anormal do sistema, perda de dados, e outras "
 "falhas inesperadas. "
 
-#: shell/cc-window.ui:206
+#: shell/cc-window.ui:211
 msgid "Help"
 msgstr "Ajuda"
 
@@ -8909,6 +8888,15 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "Sound Keys"
+#~ msgstr "Teclas de som"
+
+#~ msgid "Screen Reader"
+#~ msgstr "Locutor de ecrã"
+
+#~ msgid "_Screen Reader"
+#~ msgstr "_Locutor de ecrã"
 
 #~ msgid "Activities"
 #~ msgstr "Atividades"
