@@ -4,13 +4,13 @@
 # Maxim Dzumanenko <dziumanenko@gmail.com>, 2002-2009.
 # Wanderlust <wanderlust@ukr.net>, 2009.
 # Daniel Korostil <ted.korostiled@gmail.com>, 2013, 2014, 2015, 2016, 2017.
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-12-18 14:00+0000\n"
-"PO-Revision-Date: 2021-12-18 18:38+0200\n"
+"POT-Creation-Date: 2022-01-05 22:38+0000\n"
+"PO-Revision-Date: 2022-01-06 10:49+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -76,7 +76,7 @@ msgstr "Файлова система"
 #: panels/applications/cc-applications-panel.c:850
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:304
-#: shell/cc-window.c:973 shell/cc-window.ui:23
+#: shell/cc-window.c:974 shell/cc-window.ui:23
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Параметри"
@@ -349,11 +349,11 @@ msgstr "Керування різними дозволами й налаштув
 msgid "application;flatpak;permission;setting;"
 msgstr "програма;flatpak;дозвіл;налаштування;application;permission;setting;"
 
-#: panels/background/cc-background-chooser.c:292
+#: panels/background/cc-background-chooser.c:293
 msgid "Select a picture"
 msgstr "Виберіть зображення"
 
-#: panels/background/cc-background-chooser.c:295
+#: panels/background/cc-background-chooser.c:296
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.c:1031
@@ -384,7 +384,7 @@ msgstr "Виберіть зображення"
 msgid "_Cancel"
 msgstr "_Скасувати"
 
-#: panels/background/cc-background-chooser.c:296
+#: panels/background/cc-background-chooser.c:297
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
 #: panels/sharing/cc-sharing-panel.c:446
@@ -407,30 +407,48 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Без тла стільниці"
 
-#: panels/background/cc-background-panel.c:110
+#: panels/background/cc-background-panel.c:173
 msgid "Current background"
 msgstr "Поточне тло"
 
-#: panels/background/cc-background-panel.ui:45
-msgid "Add Picture…"
-msgstr "Додати зображення…"
+#: panels/background/cc-background-panel.ui:29
+#| msgid "Stylus"
+msgid "Style"
+msgstr "Стиль"
 
-#: panels/background/cc-background-preview.ui:43
-msgid "Activities"
-msgstr "Дії"
+#: panels/background/cc-background-panel.ui:65
+#| msgid "Right"
+msgid "Light"
+msgstr "Світла"
 
-#: panels/background/gnome-background-panel.desktop.in.in:3
+#: panels/background/cc-background-panel.ui:92
+msgid "Dark"
+msgstr ""
+"Темна"
+
+#: panels/background/cc-background-panel.ui:118
 msgid "Background"
 msgstr "Тло"
 
-#: panels/background/gnome-background-panel.desktop.in.in:4
-msgid "Change your background image to a wallpaper or photo"
-msgstr "Змінити малюнок тла на шпалери або фотографію"
+#: panels/background/cc-background-panel.ui:132
+msgid "Add Picture…"
+msgstr "Додати зображення…"
 
-#. Translators: Search terms to find the Background panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/background/gnome-background-panel.desktop.in.in:3
+msgid "Appearance"
+msgstr ""
+"Вигляд"
+
+#: panels/background/gnome-background-panel.desktop.in.in:4
+#| msgid "Change your background image to a wallpaper or photo"
+msgid "Change your background image or the UI colors"
+msgstr "Змінити зображення тла або кольори інтерфейсу користувача"
+
+#. Translators: Search terms to find the Appearance panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
-msgid "Wallpaper;Screen;Desktop;"
-msgstr "Шпалери;Екран;Стільниця;"
+#| msgid "Wallpaper;Screen;Desktop;"
+msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;"
+msgstr "Тло;Фон;Шпалери;Екран;Стільниця;Стиль;Світлий;Світла;Темний;Темна;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:26
 msgid "No Bluetooth Found"
@@ -1935,7 +1953,7 @@ msgid "Eject"
 msgstr "Витягнути"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:371
+#: panels/universal-access/cc-ua-panel.ui:148
 msgid "Typing"
 msgstr "Набирання"
 
@@ -2227,7 +2245,7 @@ msgstr "Способи введення символів та варіантів
 
 #: panels/keyboard/cc-keyboard-panel.ui:213
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:202
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:207
 msgid "Keyboard Shortcuts"
 msgstr "Клавіатурні скорочення"
 
@@ -2869,7 +2887,7 @@ msgstr "З'єднано"
 
 #: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/net-device-ethernet.c:327
-#: panels/network/network-bluetooth.ui:56 panels/network/network-ethernet.ui:75
+#: panels/network/network-bluetooth.ui:34 panels/network/network-ethernet.ui:75
 #: panels/network/network-mobile.ui:321 panels/network/network-vpn.ui:55
 msgid "Options…"
 msgstr "Параметри…"
@@ -3576,7 +3594,7 @@ msgstr "Востаннє використано"
 #. * device list.
 #.
 #: panels/network/net-device-ethernet.c:266
-#: panels/network/network-bluetooth.ui:28 panels/network/network-ethernet.ui:13
+#: panels/network/network-bluetooth.ui:17 panels/network/network-ethernet.ui:13
 msgid "Wired"
 msgstr "Дротовий"
 
@@ -3617,19 +3635,11 @@ msgstr "Бездротовий пристрій не підтримує режи
 #: panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:259
 #: panels/power/cc-power-panel.c:837 panels/power/cc-power-panel.c:848
-#: panels/universal-access/cc-ua-panel.c:330
-#: panels/universal-access/cc-ua-panel.c:601
-#: panels/universal-access/cc-ua-panel.c:611
-#: panels/universal-access/cc-ua-panel.c:623
-#: panels/universal-access/cc-ua-panel.c:664
-#: panels/universal-access/cc-ua-panel.ui:230
-#: panels/universal-access/cc-ua-panel.ui:261
-#: panels/universal-access/cc-ua-panel.ui:292
-#: panels/universal-access/cc-ua-panel.ui:351
-#: panels/universal-access/cc-ua-panel.ui:442
-#: panels/universal-access/cc-ua-panel.ui:473
-#: panels/universal-access/cc-ua-panel.ui:504
-#: panels/universal-access/cc-ua-panel.ui:627
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
 msgid "Off"
 msgstr "Вимкнено"
 
@@ -3659,7 +3669,7 @@ msgstr "Це не рекомендовано для ненадійних при�
 msgid "%s VPN"
 msgstr "%s VPN"
 
-#: panels/network/network-bluetooth.ui:37
+#: panels/network/network-bluetooth.ui:23
 msgid "Turn device off"
 msgstr "Вимкнути пристрій"
 
@@ -4305,12 +4315,10 @@ msgid "Au_thentication"
 msgstr "За_свідчення"
 
 #: panels/network/wireless-security/ws-file-chooser-button.c:49
-#| msgid "Select a File…"
 msgid "Select a file"
 msgstr "Виберіть файл"
 
 #: panels/network/wireless-security/ws-file-chooser-button.c:96
-#| msgid "_Open"
 msgid "Open"
 msgstr "Відкрити"
 
@@ -4447,11 +4455,11 @@ msgstr "Показувати в_міст повідомлення в забло�
 
 #: panels/notifications/cc-notifications-panel.c:259
 #: panels/power/cc-power-panel.c:843 panels/power/cc-power-panel.c:850
-#: panels/universal-access/cc-ua-panel.c:330
-#: panels/universal-access/cc-ua-panel.c:601
-#: panels/universal-access/cc-ua-panel.c:611
-#: panels/universal-access/cc-ua-panel.c:623
-#: panels/universal-access/cc-ua-panel.c:664
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
 msgid "On"
 msgstr "Увімкнено"
 
@@ -5657,7 +5665,7 @@ msgstr "Формати"
 #: panels/region/cc-format-chooser.ui:37
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
 #: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
-#: shell/cc-window.ui:145
+#: shell/cc-window.ui:150
 msgid "Back"
 msgstr "Назад"
 
@@ -6554,31 +6562,6 @@ msgstr "Затримка повторення клавіш"
 msgid "Repeat keys speed"
 msgstr "Швидкість повтору клавіш"
 
-#: panels/universal-access/cc-sound-keys-dialog.ui:5
-msgid "Sound Keys"
-msgstr "Звукові клавіші"
-
-#: panels/universal-access/cc-sound-keys-dialog.ui:23
-msgid "Beep when Num Lock or Caps Lock are turned on or off."
-msgstr "Подавати гудок, коли перемикається Num Lock або Caps Lock."
-
-#: panels/universal-access/cc-sound-keys-dialog.ui:38
-#: panels/universal-access/cc-ua-panel.ui:281
-msgid "_Sound Keys"
-msgstr "Зв_укові клавіші"
-
-#: panels/universal-access/cc-screen-reader-dialog.ui:5
-msgid "Screen Reader"
-msgstr "Зчитувач екрана"
-
-#: panels/universal-access/cc-screen-reader-dialog.ui:23
-msgid "The screen reader reads displayed text as you move the focus."
-msgstr "Зчитувач екрана читає показаний текст у міру пересування фокусу."
-
-#: panels/universal-access/cc-screen-reader-dialog.ui:44
-msgid "_Screen Reader"
-msgstr "З_читувач екрана"
-
 #: panels/universal-access/cc-typing-dialog.ui:4
 msgid "Typing Assist"
 msgstr "Асистент з набирання"
@@ -6666,32 +6649,32 @@ msgstr "Вмикати і вимикати можливості доступно
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:350
+#: panels/universal-access/cc-ua-panel.c:357
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Типовий"
 
-#: panels/universal-access/cc-ua-panel.c:353
+#: panels/universal-access/cc-ua-panel.c:360
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Середній"
 
-#: panels/universal-access/cc-ua-panel.c:356
+#: panels/universal-access/cc-ua-panel.c:363
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Великий"
 
-#: panels/universal-access/cc-ua-panel.c:359
+#: panels/universal-access/cc-ua-panel.c:366
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Більший"
 
-#: panels/universal-access/cc-ua-panel.c:362
+#: panels/universal-access/cc-ua-panel.c:369
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Найбільший"
 
-#: panels/universal-access/cc-ua-panel.c:366
+#: panels/universal-access/cc-ua-panel.c:373
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -6700,85 +6683,98 @@ msgstr[1] "%d пікселі"
 msgstr[2] "%d пікселів"
 msgstr[3] "%d піксель"
 
-#: panels/universal-access/cc-ua-panel.ui:40
+#: panels/universal-access/cc-ua-panel.ui:20
 msgid "_Always Show Accessibility Menu"
 msgstr "_Завжди показувати меню доступності"
 
-#: panels/universal-access/cc-ua-panel.ui:63
+#: panels/universal-access/cc-ua-panel.ui:34
 msgid "Seeing"
 msgstr "Бачення"
 
-#: panels/universal-access/cc-ua-panel.ui:93
+#: panels/universal-access/cc-ua-panel.ui:37
 msgid "_High Contrast"
 msgstr "_Висока контрастність"
 
-#: panels/universal-access/cc-ua-panel.ui:125
+#: panels/universal-access/cc-ua-panel.ui:49
 msgid "_Large Text"
 msgstr "Ве_ликий текст"
 
-#: panels/universal-access/cc-ua-panel.ui:158
+#: panels/universal-access/cc-ua-panel.ui:61
 msgid "Enable A_nimations"
 msgstr "Увімкнути _анімацію"
 
-#: panels/universal-access/cc-ua-panel.ui:187
+#: panels/universal-access/cc-ua-panel.ui:73
+msgid "Screen _Reader"
+msgstr "З_читувач екрана"
+
+#: panels/universal-access/cc-ua-panel.ui:74
+msgid "The screen reader reads displayed text as you move the focus."
+msgstr "Зчитувач екрана читає показаний текст у міру пересування фокусу."
+
+#: panels/universal-access/cc-ua-panel.ui:86
+msgid "_Sound Keys"
+msgstr "Зв_укові клавіші"
+
+#: panels/universal-access/cc-ua-panel.ui:87
+msgid "Beep when Num Lock or Caps Lock are turned on or off."
+msgstr "Подавати гудок, коли перемикається Num Lock або Caps Lock."
+
+#: panels/universal-access/cc-ua-panel.ui:99
 msgid "C_ursor Size"
 msgstr "Розмір к_урсора"
 
-#: panels/universal-access/cc-ua-panel.ui:219
+#: panels/universal-access/cc-ua-panel.ui:113
 #: panels/universal-access/cc-zoom-options-dialog.ui:82
 msgid "_Zoom"
 msgstr "_Масштаб"
 
-#: panels/universal-access/cc-ua-panel.ui:250
-msgid "Screen _Reader"
-msgstr "З_читувач екрана"
-
-#: panels/universal-access/cc-ua-panel.ui:312
+#: panels/universal-access/cc-ua-panel.ui:129
 msgid "Hearing"
 msgstr "Слухання"
 
-#: panels/universal-access/cc-ua-panel.ui:340
+#: panels/universal-access/cc-ua-panel.ui:132
 #: panels/universal-access/cc-visual-alerts-dialog.ui:54
 msgid "_Visual Alerts"
 msgstr "В_ізуальні попередження"
 
-#: panels/universal-access/cc-ua-panel.ui:401
+#: panels/universal-access/cc-ua-panel.ui:151
 msgid "Screen _Keyboard"
 msgstr "Екранна _клавіатура"
 
-#: panels/universal-access/cc-ua-panel.ui:431
+#: panels/universal-access/cc-ua-panel.ui:163
 msgid "R_epeat Keys"
 msgstr "Пов_торення клавіш"
 
-#: panels/universal-access/cc-ua-panel.ui:462
+#: panels/universal-access/cc-ua-panel.ui:177
 msgid "Cursor _Blinking"
 msgstr "_Блимання курсора"
 
-#: panels/universal-access/cc-ua-panel.ui:493
+#: panels/universal-access/cc-ua-panel.ui:191
 msgid "_Typing Assist (AccessX)"
 msgstr "Асистент з _набирання (AccessX)"
 
-#: panels/universal-access/cc-ua-panel.ui:523
-msgid "Pointing & Clicking"
+#: panels/universal-access/cc-ua-panel.ui:207
+#| msgid "Pointing & Clicking"
+msgid "Pointing &amp; Clicking"
 msgstr "Вказування та натискання"
 
-#: panels/universal-access/cc-ua-panel.ui:553
+#: panels/universal-access/cc-ua-panel.ui:210
 msgid "_Mouse Keys"
 msgstr "Кнопки ми_ші"
 
-#: panels/universal-access/cc-ua-panel.ui:586
+#: panels/universal-access/cc-ua-panel.ui:222
 msgid "_Locate Pointer"
 msgstr "Ви_явити принтер"
 
-#: panels/universal-access/cc-ua-panel.ui:616
+#: panels/universal-access/cc-ua-panel.ui:234
 msgid "_Click Assist"
 msgstr "Асистент з на_тискання"
 
-#: panels/universal-access/cc-ua-panel.ui:645
+#: panels/universal-access/cc-ua-panel.ui:248
 msgid "_Double-Click Delay"
 msgstr "Затримка п_одвійного клацання"
 
-#: panels/universal-access/cc-ua-panel.ui:660
+#: panels/universal-access/cc-ua-panel.ui:258
 msgid "Double-Click Delay"
 msgstr "Затримка подвійного клацання"
 
@@ -8799,11 +8795,11 @@ msgstr "Усі параметри"
 msgid "Primary Menu"
 msgstr "Основне меню"
 
-#: shell/cc-window.ui:194
+#: shell/cc-window.ui:199
 msgid "Warning: Development Version"
 msgstr "Попередження: розробницька версія"
 
-#: shell/cc-window.ui:195
+#: shell/cc-window.ui:200
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -8813,7 +8809,7 @@ msgstr ""
 "спостерігати неправильну роботу системи, втрату даних та інші "
 "непередбачувані проблеми. "
 
-#: shell/cc-window.ui:206
+#: shell/cc-window.ui:211
 msgid "Help"
 msgstr "Довідка"
 
@@ -8911,6 +8907,18 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Activities"
+#~ msgstr "Дії"
+
+#~ msgid "Sound Keys"
+#~ msgstr "Звукові клавіші"
+
+#~ msgid "Screen Reader"
+#~ msgstr "Зчитувач екрана"
+
+#~ msgid "_Screen Reader"
+#~ msgstr "З_читувач екрана"
 
 #~ msgid "Failed to upload file: %s"
 #~ msgstr "Не вдалося вивантажити файл: %s"
