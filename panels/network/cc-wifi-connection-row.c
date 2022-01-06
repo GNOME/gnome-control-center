@@ -252,36 +252,32 @@ update_ui (CcWifiConnectionRow *self)
 
   if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE)
     {
-      const gchar *icon_path;
+      const gchar *icon_name = "lock-small-symbolic";
 
       gtk_widget_set_child_visible (GTK_WIDGET (self->encrypted_icon), TRUE);
       if (security == NM_AP_SEC_WEP)
 	{
-          icon_path = "/org/gnome/control-center/network/warning-small-symbolic.svg";
+          icon_name = "warning-small-symbolic";
 	  gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Insecure network (WEP)"));
 	}
       else if (security == NM_AP_SEC_WPA)
 	{
-          icon_path = "/org/gnome/control-center/network/lock-small-symbolic.svg";
           gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA)"));
 	}
       else if (security == NM_AP_SEC_WPA2)
 	{
-          icon_path = "/org/gnome/control-center/network/lock-small-symbolic.svg";
           gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA2)"));
 	}
 	  else if (security == NM_AP_SEC_SAE)
 	{
-          icon_path = "/org/gnome/control-center/network/lock-small-symbolic.svg";
           gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network (WPA3)"));
 	}
       else
 	{
-          icon_path = "/org/gnome/control-center/network/lock-small-symbolic.svg";
           gtk_widget_set_tooltip_text (GTK_WIDGET (self->encrypted_icon), _("Secure network"));
 	}
 
-      gtk_image_set_from_resource (self->encrypted_icon, icon_path);
+      gtk_image_set_from_icon_name (self->encrypted_icon, icon_name);
     }
   else
     {
