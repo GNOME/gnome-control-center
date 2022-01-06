@@ -94,10 +94,10 @@ struct _CcDisplayPanel
   GtkToggleButton *config_type_join;
   GtkToggleButton *config_type_mirror;
   GtkToggleButton *config_type_single;
-  GtkWidget      *config_type_switcher_group;
   GtkWidget      *config_type_switcher_row;
   GtkLabel       *current_output_label;
   AdwBin         *display_settings_bin;
+  GtkWidget      *display_settings_group;
   GtkBox         *multi_selection_box;
   GtkSwitch      *output_enabled_switch;
   GtkComboBox    *output_selection_combo;
@@ -715,13 +715,13 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_switcher_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_switcher_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_join);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_mirror);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_single);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, current_output_label);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_bin);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, multi_selection_box);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
@@ -894,7 +894,7 @@ rebuild_ui (CcDisplayPanel *panel)
       if (type > CC_DISPLAY_CONFIG_LAST_VALID)
         type = CC_DISPLAY_CONFIG_JOIN;
 
-      gtk_widget_set_visible (panel->config_type_switcher_group, TRUE);
+      gtk_widget_set_visible (panel->display_settings_group, TRUE);
       gtk_widget_set_visible (panel->config_type_switcher_row, TRUE);
       gtk_widget_set_visible (panel->arrangement_group, type == CC_DISPLAY_CONFIG_JOIN);
 
@@ -909,7 +909,7 @@ rebuild_ui (CcDisplayPanel *panel)
       /* We have more than one usable monitor. In this case there is no chooser,
        * and we always show the arrangement widget even if we are in SINGLE mode.
        */
-      gtk_widget_set_visible (panel->config_type_switcher_group, TRUE);
+      gtk_widget_set_visible (panel->display_settings_group, TRUE);
       gtk_widget_set_visible (panel->config_type_switcher_row, FALSE);
       gtk_widget_set_visible (panel->arrangement_group, TRUE);
 
@@ -926,7 +926,7 @@ rebuild_ui (CcDisplayPanel *panel)
        * mode (and not e.g. mirroring across one display) */
       type = CC_DISPLAY_CONFIG_SINGLE;
 
-      gtk_widget_set_visible (panel->config_type_switcher_group, FALSE);
+      gtk_widget_set_visible (panel->display_settings_group, FALSE);
       gtk_widget_set_visible (panel->config_type_switcher_row, FALSE);
       gtk_widget_set_visible (panel->arrangement_group, FALSE);
 
