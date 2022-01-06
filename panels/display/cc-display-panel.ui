@@ -45,6 +45,31 @@
                             <property name="hexpand">True</property>
                             <property name="orientation">vertical</property>
                             <property name="spacing">32</property>
+
+                            <child>
+                              <object class="AdwPreferencesGroup" id="arrangement_group">
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">12</property>
+                                    <child>
+                                      <object class="GtkFrame">
+                                        <child>
+                                          <object class="AdwBin" id="arrangement_bin" />
+                                        </child>
+                                        <style>
+                                          <class name="view"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Display Arrangement</property>
+                                </accessibility>
+                              </object>
+                            </child>
+
                             <child>
                               <object class="AdwPreferencesGroup" id="display_settings_group">
 
@@ -94,29 +119,6 @@
                                 </child>
                               </object>
 
-                            </child>
-                            <child>
-                              <object class="AdwPreferencesGroup" id="arrangement_group">
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="orientation">vertical</property>
-                                    <property name="spacing">12</property>
-                                    <child>
-                                      <object class="GtkFrame">
-                                        <child>
-                                          <object class="AdwBin" id="arrangement_bin" />
-                                        </child>
-                                        <style>
-                                          <class name="view"/>
-                                        </style>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                                <accessibility>
-                                  <property name="label" translatable="yes">Display Arrangement</property>
-                                </accessibility>
-                              </object>
                             </child>
                             <child>
                               <object class="GtkBox">
