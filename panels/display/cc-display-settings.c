@@ -354,9 +354,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
             adw_combo_row_set_selected (ADW_COMBO_ROW (self->refresh_rate_row), new);
         }
 
-      /* Show if we have more than one frequency to choose from. */
-      gtk_widget_set_visible (self->refresh_rate_row,
-                              g_list_model_get_n_items (G_LIST_MODEL (self->refresh_rate_list)) > 1);
+      gtk_widget_set_visible (self->refresh_rate_row, TRUE);
     }
   else
     {
