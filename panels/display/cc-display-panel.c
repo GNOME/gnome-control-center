@@ -95,6 +95,7 @@ struct _CcDisplayPanel
   GtkToggleButton *config_type_mirror;
   GtkToggleButton *config_type_single;
   GtkWidget      *config_type_switcher_group;
+  GtkWidget      *config_type_switcher_row;
   GtkLabel       *current_output_label;
   AdwBin         *display_settings_bin;
   GtkBox         *multi_selection_box;
@@ -715,6 +716,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_switcher_group);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_switcher_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_join);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_mirror);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_single);
@@ -893,6 +895,7 @@ rebuild_ui (CcDisplayPanel *panel)
         type = CC_DISPLAY_CONFIG_JOIN;
 
       gtk_widget_set_visible (panel->config_type_switcher_group, TRUE);
+      gtk_widget_set_visible (panel->config_type_switcher_row, TRUE);
       gtk_widget_set_visible (panel->arrangement_group, type == CC_DISPLAY_CONFIG_JOIN);
 
       /* We need a switcher except in CLONE mode */
@@ -906,7 +909,8 @@ rebuild_ui (CcDisplayPanel *panel)
       /* We have more than one usable monitor. In this case there is no chooser,
        * and we always show the arrangement widget even if we are in SINGLE mode.
        */
-      gtk_widget_set_visible (panel->config_type_switcher_group, FALSE);
+      gtk_widget_set_visible (panel->config_type_switcher_group, TRUE);
+      gtk_widget_set_visible (panel->config_type_switcher_row, FALSE);
       gtk_widget_set_visible (panel->arrangement_group, TRUE);
 
       /* Mirror is also invalid as it cannot be configured using this UI. */
@@ -923,6 +927,7 @@ rebuild_ui (CcDisplayPanel *panel)
       type = CC_DISPLAY_CONFIG_SINGLE;
 
       gtk_widget_set_visible (panel->config_type_switcher_group, FALSE);
+      gtk_widget_set_visible (panel->config_type_switcher_row, FALSE);
       gtk_widget_set_visible (panel->arrangement_group, FALSE);
 
       gtk_stack_set_visible_child (panel->output_selection_stack, GTK_WIDGET (panel->current_output_label));

@@ -83,7 +83,17 @@
                                     </child>
                                   </object>
                                 </child>
+
+                                <!-- Primary Display -->
+                                <child>
+                                  <object class="AdwComboRow" id="primary_display_row">
+                                    <property name="subtitle" translatable="yes">Contains top bar and Activities</property>
+                                    <property name="title" translatable="yes">Primary Display</property>
+                                    <signal name="notify::selected-index" handler="on_primary_display_selected_index_changed_cb" swapped="yes"/>
+                                  </object>
+                                </child>
                               </object>
+
                             </child>
                             <child>
                               <object class="AdwPreferencesGroup" id="arrangement_group">
@@ -99,22 +109,6 @@
                                         <style>
                                           <class name="view"/>
                                         </style>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkFrame">
-                                        <child>
-                                          <object class="GtkListBox">
-                                            <property name="selection_mode">none</property>
-                                            <child>
-                                              <object class="AdwComboRow" id="primary_display_row">
-                                                <property name="subtitle" translatable="yes">Contains top bar and Activities</property>
-                                                <property name="title" translatable="yes">Primary Display</property>
-                                                <signal name="notify::selected-index" handler="on_primary_display_selected_index_changed_cb" swapped="yes"/>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
                                       </object>
                                     </child>
                                   </object>
