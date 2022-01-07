@@ -8,7 +8,6 @@ desktop_in = configure_file(
 )
 
 i18n.merge_file(
-  desktop,
   type: 'desktop',
   input: desktop_in,
   output: desktop,
@@ -29,7 +28,6 @@ polkit_in = configure_file(
 )
 
 i18n.merge_file(
-  polkit,
   input: polkit_in,
   output: polkit,
   po_dir: po_dir,
