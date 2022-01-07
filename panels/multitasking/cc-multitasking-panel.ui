@@ -2,320 +2,237 @@
 <interface>
   <template class="CcMultitaskingPanel" parent="CcPanel">
     <child>
-      <object class="GtkScrolledWindow">
-        <property name="hscrollbar-policy">never</property>
+      <object class="AdwPreferencesPage">
+
         <child>
-          <object class="AdwClamp">
-            <property name="maximum-size">600</property>
-            <property name="tightening-threshold">400</property>
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">General</property>
 
+            <!-- Hot Corner -->
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">12</property>
-
-                <!-- General -->
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="activatable-widget">hot_corner_switch</property>
+                <property name="title" translatable="yes">_Hot Corner</property>
+                <property name="subtitle" translatable="yes">Touch the top-left corner to open the Activities Overview.</property>
+                <property name="use_underline">True</property>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">General</property>
-                    <property name="xalign">0.0</property>
-                    <attributes>
-                      <attribute name="weight" value="bold" />
-                    </attributes>
+                  <object class="GtkSwitch" id="hot_corner_switch">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
                   </object>
                 </child>
-
-                <child>
-                  <object class="GtkListBox">
-                    <property name="selection-mode">none</property>
-                    <property name="margin-bottom">24</property>
-
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-
-                    <!-- Hot Corner -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="activatable-widget">hot_corner_switch</property>
-                        <property name="title" translatable="yes">_Hot Corner</property>
-                        <property name="subtitle" translatable="yes">Touch the top-left corner to open the Activities Overview.</property>
-                        <property name="use_underline">True</property>
-                        <child>
-                          <object class="GtkSwitch" id="hot_corner_switch">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                        <child type="artwork">
-                          <object class="GtkPicture">
-                            <property name="hexpand">True</property>
-                            <property name="halign">center</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <property name="margin-start">18</property>
-                            <property name="margin-end">18</property>
-                            <property name="can-shrink">False</property>
-                            <property name="file">resource:///org/gnome/control-center/multitasking/assets/hot-corner.svg</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Active Screen Edges -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="activatable-widget">active_screen_edges_switch</property>
-                        <property name="title" translatable="yes">_Active Screen Edges</property>
-                        <property name="subtitle" translatable="yes">Drag windows against the top, left, and right screen edges to resize them.</property>
-                        <property name="use_underline">True</property>
-                        <child>
-                          <object class="GtkSwitch" id="active_screen_edges_switch">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                        <child type="artwork">
-                          <object class="GtkPicture">
-                            <property name="hexpand">True</property>
-                            <property name="halign">center</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <property name="margin-start">18</property>
-                            <property name="margin-end">18</property>
-                            <property name="can-shrink">False</property>
-                            <property name="file">resource:///org/gnome/control-center/multitasking/assets/active-screen-edges.svg</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                  </object>
-                </child>
-
-                <!-- Workspaces -->
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Workspaces</property>
-                    <property name="xalign">0.0</property>
-                    <attributes>
-                      <attribute name="weight" value="bold" />
-                    </attributes>
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkListBox">
-                    <property name="selection-mode">none</property>
+                <child type="artwork">
+                  <object class="GtkPicture">
+                    <property name="hexpand">True</property>
+                    <property name="halign">center</property>
+                    <property name="margin-top">18</property>
                     <property name="margin-bottom">18</property>
-
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-
-                    <!-- Dynamic Workspaces -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="activatable-widget">dynamic_workspaces_radio</property>
-                        <property name="title" translatable="yes">_Dynamic workspaces</property>
-                        <property name="subtitle" translatable="yes">Automatically removes empty workspaces.</property>
-                        <property name="use_underline">True</property>
-                        <child type="prefix">
-                          <object class="GtkCheckButton" id="dynamic_workspaces_radio">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Fixed Number of Workspaces -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="activatable-widget">fixed_workspaces_radio</property>
-                        <property name="title" translatable="yes">_Fixed number of workspaces</property>
-                        <property name="subtitle" translatable="yes">Specify a number of permanent workspaces.</property>
-                        <property name="use_underline">True</property>
-                        <child type="prefix">
-                          <object class="GtkCheckButton" id="fixed_workspaces_radio">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                            <property name="group">dynamic_workspaces_radio</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Number of Workspaces -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="sensitive" bind-source="fixed_workspaces_radio" bind-property="active" bind-flags="default|sync-create" />
-                        <property name="activatable-widget">number_of_workspaces_spin</property>
-                        <property name="title" translatable="yes">_Number of Workspaces</property>
-                        <property name="use_underline">True</property>
-                        <child>
-                          <object class="GtkSpinButton" id="number_of_workspaces_spin">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                            <property name="adjustment">workspaces_adjustment</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
+                    <property name="margin-start">18</property>
+                    <property name="margin-end">18</property>
+                    <property name="can-shrink">False</property>
+                    <property name="file">resource:///org/gnome/control-center/multitasking/assets/hot-corner.svg</property>
                   </object>
                 </child>
+              </object>
+            </child>
 
-                <!-- Multi-Monitor -->
+            <!-- Active Screen Edges -->
+            <child>
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="activatable-widget">active_screen_edges_switch</property>
+                <property name="title" translatable="yes">_Active Screen Edges</property>
+                <property name="subtitle" translatable="yes">Drag windows against the top, left, and right screen edges to resize them.</property>
+                <property name="use_underline">True</property>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Multi-Monitor</property>
-                    <property name="xalign">0.0</property>
-                    <attributes>
-                      <attribute name="weight" value="bold" />
-                    </attributes>
+                  <object class="GtkSwitch" id="active_screen_edges_switch">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
                   </object>
                 </child>
-
-                <child>
-                  <object class="GtkListBox">
-                    <property name="selection-mode">none</property>
+                <child type="artwork">
+                  <object class="GtkPicture">
+                    <property name="hexpand">True</property>
+                    <property name="halign">center</property>
+                    <property name="margin-top">18</property>
                     <property name="margin-bottom">18</property>
-
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-
-                    <!-- Primary Display -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="activatable-widget">workspaces_primary_display_radio</property>
-                        <property name="title" translatable="yes">Workspaces on _primary display only</property>
-                        <property name="use_underline">True</property>
-                        <child type="prefix">
-                          <object class="GtkCheckButton" id="workspaces_primary_display_radio">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                        <child type="artwork">
-                          <object class="GtkPicture">
-                            <property name="hexpand">True</property>
-                            <property name="halign">center</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <property name="margin-start">18</property>
-                            <property name="margin-end">18</property>
-                            <property name="can-shrink">False</property>
-                            <property name="file">resource:///org/gnome/control-center/multitasking/assets/workspaces-primary-display.svg</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Span Displays -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="activatable-widget">workspaces_span_displays_radio</property>
-                        <property name="title" translatable="yes">Workspaces on all d_isplays</property>
-                        <property name="use_underline">True</property>
-                        <child type="prefix">
-                          <object class="GtkCheckButton" id="workspaces_span_displays_radio">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                            <property name="group">workspaces_primary_display_radio</property>
-                          </object>
-                        </child>
-                        <child type="artwork">
-                          <object class="GtkPicture">
-                            <property name="hexpand">True</property>
-                            <property name="halign">center</property>
-                            <property name="margin-top">18</property>
-                            <property name="margin-bottom">18</property>
-                            <property name="margin-start">18</property>
-                            <property name="margin-end">18</property>
-                            <property name="can-shrink">False</property>
-                            <property name="file">resource:///org/gnome/control-center/multitasking/assets/workspaces-span-displays.svg</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
+                    <property name="margin-start">18</property>
+                    <property name="margin-end">18</property>
+                    <property name="can-shrink">False</property>
+                    <property name="file">resource:///org/gnome/control-center/multitasking/assets/active-screen-edges.svg</property>
                   </object>
                 </child>
-
-                <!-- Application Switching -->
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Application Switching</property>
-                    <property name="xalign">0.0</property>
-                    <attributes>
-                      <attribute name="weight" value="bold" />
-                    </attributes>
-                  </object>
-                </child>
-
-                <child>
-                  <object class="GtkListBox">
-                    <property name="selection-mode">none</property>
-                    <property name="margin-bottom">18</property>
-
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-
-                    <!-- All Workspaces -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="activatable-widget">all_workspaces_radio</property>
-                        <property name="title" translatable="yes">Include applications from all _workspaces</property>
-                        <property name="use_underline">True</property>
-                        <child type="prefix">
-                          <object class="GtkCheckButton" id="all_workspaces_radio">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Current Workspace -->
-                    <child>
-                      <object class="CcMultitaskingRow">
-                        <property name="can_focus">True</property>
-                        <property name="activatable-widget">current_workspace_radio</property>
-                        <property name="title" translatable="yes">Include applications from the _current workspace only</property>
-                        <property name="use_underline">True</property>
-                        <child type="prefix">
-                          <object class="GtkCheckButton" id="current_workspace_radio">
-                            <property name="can_focus">True</property>
-                            <property name="valign">center</property>
-                            <property name="group">all_workspaces_radio</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                  </object>
-                </child>
-
               </object>
             </child>
 
           </object>
         </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Workspaces</property>
+
+            <!-- Dynamic Workspaces -->
+            <child>
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="activatable-widget">dynamic_workspaces_radio</property>
+                <property name="title" translatable="yes">_Dynamic workspaces</property>
+                <property name="subtitle" translatable="yes">Automatically removes empty workspaces.</property>
+                <property name="use_underline">True</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="dynamic_workspaces_radio">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <!-- Fixed Number of Workspaces -->
+            <child>
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="activatable-widget">fixed_workspaces_radio</property>
+                <property name="title" translatable="yes">_Fixed number of workspaces</property>
+                <property name="subtitle" translatable="yes">Specify a number of permanent workspaces.</property>
+                <property name="use_underline">True</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="fixed_workspaces_radio">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                    <property name="group">dynamic_workspaces_radio</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <!-- Number of Workspaces -->
+            <child>
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="sensitive" bind-source="fixed_workspaces_radio" bind-property="active" bind-flags="default|sync-create" />
+                <property name="activatable-widget">number_of_workspaces_spin</property>
+                <property name="title" translatable="yes">_Number of Workspaces</property>
+                <property name="use_underline">True</property>
+                <child>
+                  <object class="GtkSpinButton" id="number_of_workspaces_spin">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                    <property name="adjustment">workspaces_adjustment</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Multi-Monitor</property>
+
+            <!-- Primary Display -->
+            <child>
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="activatable-widget">workspaces_primary_display_radio</property>
+                <property name="title" translatable="yes">Workspaces on _primary display only</property>
+                <property name="use_underline">True</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="workspaces_primary_display_radio">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+                <child type="artwork">
+                  <object class="GtkPicture">
+                    <property name="hexpand">True</property>
+                    <property name="halign">center</property>
+                    <property name="margin-top">18</property>
+                    <property name="margin-bottom">18</property>
+                    <property name="margin-start">18</property>
+                    <property name="margin-end">18</property>
+                    <property name="can-shrink">False</property>
+                    <property name="file">resource:///org/gnome/control-center/multitasking/assets/workspaces-primary-display.svg</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <!-- Span Displays -->
+            <child>
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="activatable-widget">workspaces_span_displays_radio</property>
+                <property name="title" translatable="yes">Workspaces on all d_isplays</property>
+                <property name="use_underline">True</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="workspaces_span_displays_radio">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                    <property name="group">workspaces_primary_display_radio</property>
+                  </object>
+                </child>
+                <child type="artwork">
+                  <object class="GtkPicture">
+                    <property name="hexpand">True</property>
+                    <property name="halign">center</property>
+                    <property name="margin-top">18</property>
+                    <property name="margin-bottom">18</property>
+                    <property name="margin-start">18</property>
+                    <property name="margin-end">18</property>
+                    <property name="can-shrink">False</property>
+                    <property name="file">resource:///org/gnome/control-center/multitasking/assets/workspaces-span-displays.svg</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Application Switching</property>
+
+            <!-- All Workspaces -->
+            <child>
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="activatable-widget">all_workspaces_radio</property>
+                <property name="title" translatable="yes">Include applications from all _workspaces</property>
+                <property name="use_underline">True</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="all_workspaces_radio">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <!-- Current Workspace -->
+            <child>
+              <object class="CcMultitaskingRow">
+                <property name="can_focus">True</property>
+                <property name="activatable-widget">current_workspace_radio</property>
+                <property name="title" translatable="yes">Include applications from the _current workspace only</property>
+                <property name="use_underline">True</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="current_workspace_radio">
+                    <property name="can_focus">True</property>
+                    <property name="valign">center</property>
+                    <property name="group">all_workspaces_radio</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+          </object>
+        </child>
+
       </object>
     </child>
   </template>
