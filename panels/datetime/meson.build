@@ -8,7 +8,6 @@ desktop_in = configure_file(
 )
 
 i18n.merge_file(
-  desktop,
   type: 'desktop',
   input: desktop_in,
   output: desktop,
@@ -20,7 +19,6 @@ i18n.merge_file(
 polkit = 'org.gnome.controlcenter.@0@.policy'.format(cappletname)
 
 i18n.merge_file(
-  polkit,
   input: polkit + '.in',
   output: polkit,
   po_dir: po_dir,

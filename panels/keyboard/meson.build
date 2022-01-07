@@ -8,7 +8,6 @@ desktop_in = configure_file(
 )
 
 i18n.merge_file(
-  desktop,
   type: 'desktop',
   input: desktop_in,
   output: desktop,
@@ -45,7 +44,6 @@ xml_files = [
 
 foreach file: xml_files
   i18n.merge_file(
-    file,
     input: file + '.in',
     output: file,
     po_dir: po_dir,
