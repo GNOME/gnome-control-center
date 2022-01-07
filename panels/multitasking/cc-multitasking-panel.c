@@ -34,6 +34,7 @@ struct _CcMultitaskingPanel
   GSettings       *wm_settings;
 
   GtkSwitch       *active_screen_edges_switch;
+  GtkCheckButton  *all_workspaces_radio;
   GtkCheckButton  *current_workspace_radio;
   GtkCheckButton  *dynamic_workspaces_radio;
   GtkCheckButton  *fixed_workspaces_radio;
@@ -73,6 +74,7 @@ cc_multitasking_panel_class_init (CcMultitaskingPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/multitasking/cc-multitasking-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, active_screen_edges_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, all_workspaces_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, current_workspace_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, dynamic_workspaces_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, fixed_workspaces_radio);
@@ -136,6 +138,8 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
 
   if (g_settings_get_boolean (self->shell_settings, "current-workspace-only"))
     gtk_check_button_set_active (self->current_workspace_radio, TRUE);
+  else
+    gtk_check_button_set_active (self->all_workspaces_radio, TRUE);
 
   g_settings_bind (self->shell_settings,
                    "current-workspace-only",
