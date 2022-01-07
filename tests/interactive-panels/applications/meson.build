@@ -12,7 +12,6 @@ desktop_files = [
 
 foreach desktop_file : desktop_files
   i18n.merge_file(
-              desktop,
                 type : 'desktop',
                input : 'gtp-@0@.desktop.in'.format(desktop_file),
               output : 'gnome-@0@-panel.desktop'.format(desktop_file),

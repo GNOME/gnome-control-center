@@ -8,7 +8,6 @@ desktop_in = configure_file(
 )
 
 i18n.merge_file(
-       desktop,
          type : 'desktop',
         input : desktop_in,
        output : desktop,
