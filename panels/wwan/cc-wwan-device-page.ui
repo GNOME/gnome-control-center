@@ -12,39 +12,11 @@
           <object class="GtkStackPage">
             <property name="name">no-sim-view</property>
             <property name="child">
-              <object class="GtkBox">
+              <object class="AdwStatusPage">
                 <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="orientation">vertical</property>
-                <property name="margin-bottom">64</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">auth-sim-missing</property>
-                    <property name="pixel-size">192</property>
-                    <property name="margin-bottom">18</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="wrap">True</property>
-                    <property name="label" translatable="yes">No SIM</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"></attribute>
-                      <attribute name="scale" value="1.2"></attribute>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="wrap">True</property>
-                    <property name="label" translatable="yes">Insert a SIM card to use this modem</property>
-                  </object>
-                </child>
+                <property name="icon-name">auth-sim-missing</property>
+                <property name="title" translatable="yes">No SIM</property>
+                <property name="description" translatable="yes">Insert a SIM card to use this modem</property>
               </object>
             </property>
           </object>
@@ -55,36 +27,13 @@
           <object class="GtkStackPage">
             <property name="name">sim-lock-view</property>
             <property name="child">
-              <object class="GtkBox">
+              <object class="AdwStatusPage">
                 <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="orientation">vertical</property>
-                <property name="margin-bottom">64</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">auth-sim-locked</property>
-                    <property name="pixel-size">192</property>
-                    <property name="margin-bottom">18</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="wrap">True</property>
-                    <property name="label" translatable="yes">SIM Locked</property>
-                    <property name="margin-bottom">32</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"></attribute>
-                      <attribute name="scale" value="1.2"></attribute>
-                    </attributes>
-                  </object>
-                </child>
+                <property name="icon-name">auth-sim-locked</property>
+                <property name="title" translatable="yes">SIM Locked</property>
                 <child>
                   <object class="GtkButton" id="unlock_button">
+                    <property name="halign">center</property>
                     <property name="use-underline">True</property>
                     <property name="label" translatable="yes">_Unlock</property>
                     <signal name="clicked" handler="wwan_device_unlock_clicked_cb" swapped="yes"/>
@@ -107,46 +56,41 @@
                 <property name="margin-top">18</property>
                 <property name="orientation">vertical</property>
 
-                <!-- Network Settings Title -->
                 <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Network</property>
-                    <property name="xalign">0.0</property>
-                    <property name="margin-bottom">12</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"></attribute>
-                    </attributes>
-                  </object>
-                </child>
-
-                <!-- Internet settings -->
-                <child>
-                  <object class="GtkListBox" id="data_settings_list">
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Network</property>
                     <property name="margin-bottom">32</property>
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
 
-                    <!-- Enable/Disable Data -->
+                    <!-- Internet settings -->
                     <child>
-                      <object class="CcListRow" id="data_enable_row">
-                        <property name="use-underline">True</property>
-                        <property name="show-switch">True</property>
-                        <property name="title" translatable="yes">_Mobile Data</property>
-                        <property name="subtitle" translatable="yes">Access data using mobile network</property>
-                        <signal name="notify::active" handler="wwan_data_settings_changed_cb" swapped="yes"/>
-                      </object>
-                    </child>
+                      <object class="GtkListBox" id="data_settings_list">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
 
-                    <!-- Data Roaming -->
-                    <child>
-                      <object class="CcListRow" id="data_roaming_row">
-                        <property name="use-underline">True</property>
-                        <property name="show-switch">True</property>
-                        <property name="title" translatable="yes">_Data Roaming</property>
-                        <property name="subtitle" translatable="yes">Use mobile data when roaming</property>
-                        <signal name="notify::active" handler="wwan_data_settings_changed_cb" swapped="yes"/>
+                        <!-- Enable/Disable Data -->
+                        <child>
+                          <object class="CcListRow" id="data_enable_row">
+                            <property name="use-underline">True</property>
+                            <property name="show-switch">True</property>
+                            <property name="title" translatable="yes">_Mobile Data</property>
+                            <property name="subtitle" translatable="yes">Access data using mobile network</property>
+                            <signal name="notify::active" handler="wwan_data_settings_changed_cb" swapped="yes"/>
+                          </object>
+                        </child>
+
+                        <!-- Data Roaming -->
+                        <child>
+                          <object class="CcListRow" id="data_roaming_row">
+                            <property name="use-underline">True</property>
+                            <property name="show-switch">True</property>
+                            <property name="title" translatable="yes">_Data Roaming</property>
+                            <property name="subtitle" translatable="yes">Use mobile data when roaming</property>
+                            <signal name="notify::active" handler="wwan_data_settings_changed_cb" swapped="yes"/>
+                          </object>
+                        </child>
+
                       </object>
                     </child>
 
@@ -155,80 +99,78 @@
 
                 <!-- Network Settings -->
                 <child>
-                  <object class="GtkListBox" id="network_settings_list">
+                  <object class="AdwPreferencesGroup">
                     <property name="margin-bottom">32</property>
-                    <property name="selection-mode">none</property>
-                    <signal name="row-activated" handler="wwan_network_settings_activated_cb" swapped="yes"/>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
                     <child>
-                      <object class="CcListRow" id="network_mode_row">
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                        <property name="title" translatable="yes">_Network Mode</property>
+                      <object class="GtkListBox" id="network_settings_list">
+                        <property name="selection-mode">none</property>
+                        <signal name="row-activated" handler="wwan_network_settings_activated_cb" swapped="yes"/>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                        <child>
+                          <object class="CcListRow" id="network_mode_row">
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="title" translatable="yes">_Network Mode</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="CcListRow" id="network_name_row">
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="title" translatable="yes">N_etwork</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
-                    <child>
-                      <object class="CcListRow" id="network_name_row">
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                        <property name="title" translatable="yes">N_etwork</property>
-                      </object>
-                    </child>
-
                   </object>
                 </child>
 
-                <!-- Advanced Settings Title -->
                 <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Advanced</property>
-                    <property name="xalign">0.0</property>
-                    <property name="margin-bottom">12</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"></attribute>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="advanced_settings_list">
-                    <property name="margin-bottom">32</property>
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <signal name="row-activated" handler="wwan_advanced_settings_activated_cb" swapped="yes"/>
-
-                    <!-- Accesss Point Settings -->
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">Advanced</property>
                     <child>
-                      <object class="CcListRow" id="apn_settings_row">
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">true</property>
-                        <property name="title" translatable="yes">_Access Point Names</property>
-                      </object>
-                    </child>
+                      <object class="GtkListBox" id="advanced_settings_list">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+                        <signal name="row-activated" handler="wwan_advanced_settings_activated_cb" swapped="yes"/>
 
-                    <!-- SIM Lock -->
-                    <child>
-                      <object class="CcListRow" id="sim_lock_row">
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                        <property name="title" translatable="yes">_SIM Lock</property>
-                        <property name="subtitle" translatable="yes">Lock SIM with PIN</property>
-                      </object>
-                    </child>
+                        <!-- Accesss Point Settings -->
+                        <child>
+                          <object class="CcListRow" id="apn_settings_row">
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">true</property>
+                            <property name="title" translatable="yes">_Access Point Names</property>
+                          </object>
+                        </child>
 
-                    <!-- Modem Details -->
-                    <child>
-                      <object class="CcListRow" id="details_row">
-                        <property name="use-underline">True</property>
-                        <property name="show-arrow">True</property>
-                        <property name="title" translatable="yes">M_odem Details</property>
+                        <!-- SIM Lock -->
+                        <child>
+                          <object class="CcListRow" id="sim_lock_row">
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="title" translatable="yes">_SIM Lock</property>
+                            <property name="subtitle" translatable="yes">Lock SIM with PIN</property>
+                          </object>
+                        </child>
+
+                        <!-- Modem Details -->
+                        <child>
+                          <object class="CcListRow" id="details_row">
+                            <property name="use-underline">True</property>
+                            <property name="show-arrow">True</property>
+                            <property name="title" translatable="yes">M_odem Details</property>
+                          </object>
+                        </child>
+
                       </object>
                     </child>
                   </object>
                 </child>
+
               </object>
             </property>
           </object>
