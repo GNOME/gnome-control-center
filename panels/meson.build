@@ -21,6 +21,7 @@ panels = [
   'power',
   'printers',
   'region',
+  'remote-desktop',
   'removable-media',
   'search',
   'sharing',

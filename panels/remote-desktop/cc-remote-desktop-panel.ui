@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.18.1 -->
+<interface>
+  <template class="CcRemoteDesktopPanel" parent="CcPanel">
+  <child>
+    <object class="GtkStack" id="stack">
+      <child>
+        <object class="AdwStatusPage">
+          <property name="icon-name">preferences-desktop-remote-desktop-symbolic</property>
+          <property name="title">Remote desktop server not available</property>
+        </object>
+      </child>
+      <child>
+        <object class="AdwPreferencesPage" id="remote_desktop_page">
+          <child>
+            <object class="AdwPreferencesGroup">
+              <property name="description" translatable="yes">Remote desktop makes it possible to view and control your desktop from other computers.</property>
+              <child>
+                <object class="AdwActionRow">
+                  <property name="title" translatable="yes">Remote Control</property>
+                  <property name="subtitle" translatable="yes">Allows control of the desktop as well as vieweing.</property>
+                  <child>
+                    <object class="GtkSwitch" id="view_only_switch">
+                      <property name="valign">center</property>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+          <child>
+            <object class="AdwPreferencesGroup">
+              <property name="title" translatable="yes">Access Control</property>
+              <child>
+                <object class="AdwActionRow">
+                  <property name="title" translatable="yes">Username</property>
+                  <child>
+                    <object class="GtkEntry" id="username_entry">
+                      <property name="valign">center</property>
+                      <signal name="changed" handler="on_credential_entries_changed" object="CcRemoteDesktopPanel" swapped="yes"/>/>
+                    </object>
+                  </child>
+                </object>
+              </child>
+              <child>
+                <object class="AdwActionRow">
+                  <property name="title" translatable="yes">Password</property>
+                  <child>
+                    <object class="GtkPasswordEntry" id="password_entry">
+                      <property name="valign">center</property>
+                      <signal name="changed" handler="on_credential_entries_changed" object="CcRemoteDesktopPanel" swapped="yes"/>/>
+                    </object>
+                  </child>
+                </object>
+              </child>
+              <child>
+                <object class="AdwActionRow">
+                  <property name="title" translatable="yes">TLS Cert</property>
+                  <child>
+                    <object class="GtkButton" id="tls_cert_button">
+                      <property name="label" translatable="yes">Select TLS Certificate file...</property>
+                      <property name="valign">center</property>
+                      <signal name="clicked" handler="on_tls_cert_button_clicked"/>
+                    </object>
+                  </child>
+                </object>
+              </child>
+              <child>
+                <object class="AdwActionRow">
+                  <property name="title" translatable="yes">TLS Key</property>
+                  <child>
+                    <object class="GtkButton" id="tls_key_button">
+                      <property name="label" translatable="yes">Select TLS Key file...</property>
+                      <property name="valign">center</property>
+                      <signal name="clicked" handler="on_tls_key_button_clicked"/>
+                    </object>
+                  </child>
+                </object>
+              </child>
+            </object>
+          </child>
+        </object>
+      </child>
+    </object>
+  </child>
+  </template>
+
+  <object class="GtkSizeGroup">
+    <widgets>
+      <widget name="username_entry"/>
+      <widget name="password_entry"/>
+      <widget name="tls_cert_button"/>
+      <widget name="tls_key_button"/>
+    </widgets>
+  </object>
+</interface>

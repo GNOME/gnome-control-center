@@ -398,6 +398,7 @@ static const gchar * const panel_order[] = {
   "usage",
   "lock",
   "diagnostics",
+  "remote-desktop",
 
   /* Devices page */
   "sound",
