@@ -180,9 +180,6 @@
                                     </child>
                                   </object>
                                 </child>
-                                <child>
-                                  <object class="AdwBin" id="display_settings_bin" />
-                                </child>
                                 <accessibility>
                                   <property name="label" translatable="yes">Display Configuration</property>
                                 </accessibility>
@@ -233,6 +230,16 @@
             <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">Night Light</property>
             <property name="child">
               <object class="CcNightLightPage" id="night_light_page" />
+            </property>
+          </object>
+        </child>
+
+        <!-- Display Settings page -->
+        <child>
+          <object class="GtkStackPage">
+            <property name="name">display-settings</property>
+            <property name="child">
+              <object class="AdwBin" id="display_settings_bin" />
             </property>
           </object>
         </child>
