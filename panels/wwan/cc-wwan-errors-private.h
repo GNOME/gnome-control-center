@@ -87,6 +87,9 @@ static ErrorTable me_errors[] = {
 static inline const gchar *
 cc_wwan_error_get_message (GError *error)
 {
+  if (!error)
+    return _("No Error");
+
  if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     return _("Action Cancelled");
 
