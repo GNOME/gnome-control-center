@@ -1324,6 +1324,8 @@ cc_wwan_device_get_simple_error (CcWwanDevice *self)
   if (!self->error)
     return NULL;
 
+  g_dbus_error_strip_remote_error (self->error);
+
   return cc_wwan_error_get_message (self->error);
 }
 
