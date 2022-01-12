@@ -13,40 +13,7 @@
     </child>
 
     <child type="content">
-      <object class="GtkOverlay">
-
-        <!-- Notification Revealer -->
-        <child type="overlay">
-          <object class="GtkRevealer" id="notification_revealer">
-            <property name="halign">center</property>
-            <property name="valign">start</property>
-            <property name="child">
-              <object class="GtkBox">
-                <property name="spacing">12</property>
-                <style>
-                  <class name="frame"/>
-                  <class name="app-notification"/>
-                </style>
-                <child>
-                  <object class="GtkLabel" id="notification_label">
-                    <property name="wrap">True</property>
-                    <property name="use-markup">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton">
-                    <signal name="clicked" handler="wwan_notification_close_clicked_cb" swapped="yes"/>
-                    <property name="icon-name">window-close-symbolic</property>
-                    <accessibility>
-                      <property name="label" translatable="yes">Close</property>
-                    </accessibility>
-                  </object>
-                </child>
-              </object>
-            </property>
-          </object>
-        </child>
-
+      <object class="AdwToastOverlay" id="toast_overlay">
         <property name="child">
           <object class="GtkScrolledWindow">
             <property name="hscrollbar-policy">never</property>
@@ -224,7 +191,6 @@
             </child>
           </object> <!-- ./GtkScrolledWindow -->
         </property>
-
       </object>
     </child>
 

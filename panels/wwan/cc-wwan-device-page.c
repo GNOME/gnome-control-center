@@ -73,7 +73,7 @@ struct _CcWwanDevicePage
   CcListRow     *sim_lock_row;
   GtkButton     *unlock_button;
 
-  GtkLabel      *notification_label;
+  AdwToastOverlay *toast_overlay;
 
   CcWwanDevice  *device;
   CcWwanData    *wwan_data;
@@ -598,6 +598,7 @@ cc_wwan_device_page_init (CcWwanDevicePage *self)
 static void
 cc_wwan_error_changed_cb (CcWwanDevicePage *self)
 {
+  AdwToast *toast;
   const gchar *message;
 
   message = cc_wwan_device_get_simple_error (self->device);
@@ -605,19 +606,13 @@ cc_wwan_error_changed_cb (CcWwanDevicePage *self)
   if (!message)
     return;
 
-  /*
-   * The label is first set to empty, which will result in
-   * the revealer to be closed.  Then the real label is
-   * set.  This will animate the revealer which can bring
-   * the user's attention.
-   */
-  gtk_label_set_label (self->notification_label, "");
-  gtk_label_set_label (self->notification_label, message);
+  toast = adw_toast_new (message);
+  adw_toast_overlay_add_toast (self->toast_overlay, toast);
 }
 
 CcWwanDevicePage *
 cc_wwan_device_page_new (CcWwanDevice *device,
-                         GtkWidget    *notification_label)
+                         GtkWidget    *toast_overlay)
 {
   CcWwanDevicePage *self;
 
@@ -627,7 +622,7 @@ cc_wwan_device_page_new (CcWwanDevice *device,
                        "device", device,
                        NULL);
 
-  self->notification_label = GTK_LABEL (notification_label);
+  self->toast_overlay = ADW_TOAST_OVERLAY (toast_overlay);
 
   g_signal_connect_object (self->device, "notify::error",
                            G_CALLBACK (cc_wwan_error_changed_cb),

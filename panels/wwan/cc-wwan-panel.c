@@ -48,6 +48,7 @@ struct _CcWwanPanel
 {
   CcPanel parent_instance;
 
+  AdwToastOverlay  *toast_overlay;
   AdwComboRow      *data_list_row;
   GtkListBox       *data_sim_select_listbox;
   GtkStack         *devices_stack;
@@ -55,8 +56,6 @@ struct _CcWwanPanel
   GtkSwitch        *enable_switch;
   GtkStack         *main_stack;
   GtkRevealer      *multi_device_revealer;
-  GtkLabel         *notification_label;
-  GtkRevealer      *notification_revealer;
 
   GDBusProxy   *rfkill_proxy;
   MMManager    *mm_manager;
@@ -71,8 +70,6 @@ struct _CcWwanPanel
 
   CmdlineOperation  arg_operation;
   char             *arg_device;
-
-  guint revealer_timeout_id;
 };
 
 enum {
@@ -236,17 +233,6 @@ wwan_model_get_item_from_mm_object (GListModel *model,
 }
 
 static void
-wwan_notification_close_clicked_cb (CcWwanPanel *self)
-{
-  gtk_revealer_set_reveal_child (self->notification_revealer, FALSE);
-
-  if (self->revealer_timeout_id != 0)
-    g_source_remove (self->revealer_timeout_id);
-
-  self->revealer_timeout_id = 0;
-}
-
-static void
 cc_wwan_panel_update_data_selection (CcWwanPanel *self)
 {
   int i;
@@ -365,44 +351,6 @@ cc_wwan_panel_update_view (CcWwanPanel *self)
 }
 
 static void
-cc_wwan_panel_on_notification_closed (CcWwanPanel *self,
-                                      GtkWidget   *button)
-{
-  gtk_revealer_set_reveal_child (self->notification_revealer, FALSE);
-
-  if (self->revealer_timeout_id != 0)
-    g_source_remove (self->revealer_timeout_id);
-
-  self->revealer_timeout_id = 0;
-}
-
-static gboolean
-cc_wwan_panel_on_notification_timeout (gpointer user_data)
-{
-  cc_wwan_panel_on_notification_closed (user_data, NULL);
-
-  return G_SOURCE_REMOVE;
-}
-
-static void
-cc_wwan_panel_notification_changed_cb (CcWwanPanel *self)
-{
-  const gchar *label;
-
-  label = gtk_label_get_label (self->notification_label);
-
-  if (label && *label)
-    {
-      gtk_revealer_set_reveal_child (self->notification_revealer, TRUE);
-      self->revealer_timeout_id = g_timeout_add_seconds (5, cc_wwan_panel_on_notification_timeout, self);
-    }
-  else
-    {
-      cc_wwan_panel_on_notification_closed (self, NULL);
-    }
-}
-
-static void
 cc_wwan_panel_add_device (CcWwanPanel  *self,
                           CcWwanDevice *device)
 {
@@ -417,7 +365,7 @@ cc_wwan_panel_add_device (CcWwanPanel  *self,
   operator_name = g_strdup_printf (_("SIM %d"), n_items);
   stack_name = g_strdup_printf ("sim-%d", n_items);
 
-  device_page = cc_wwan_device_page_new (device, GTK_WIDGET (self->notification_label));
+  device_page = cc_wwan_device_page_new (device, GTK_WIDGET (self->toast_overlay));
   cc_wwan_device_page_set_sim_index (device_page, n_items);
   gtk_stack_add_titled (self->devices_stack,
                         GTK_WIDGET (device_page), stack_name, operator_name);
@@ -686,11 +634,6 @@ cc_wwan_panel_dispose (GObject *object)
 {
   CcWwanPanel *self = (CcWwanPanel *)object;
 
-  if (self->revealer_timeout_id != 0)
-    g_source_remove (self->revealer_timeout_id);
-
-  self->revealer_timeout_id = 0;
-
   g_cancellable_cancel (self->cancellable);
 
   g_clear_object (&self->devices);
@@ -719,6 +662,7 @@ cc_wwan_panel_class_init (CcWwanPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/wwan/cc-wwan-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_list_row);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, data_sim_select_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, devices_stack);
@@ -726,12 +670,9 @@ cc_wwan_panel_class_init (CcWwanPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, enable_switch);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, main_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, multi_device_revealer);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, notification_label);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanPanel, notification_revealer);
 
   gtk_widget_class_bind_template_callback (widget_class, wwan_data_list_selected_sim_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, wwan_on_airplane_off_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, wwan_notification_close_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, cc_wwan_data_item_activate_cb);
 }
 
@@ -750,10 +691,6 @@ cc_wwan_panel_init (CcWwanPanel *self)
   self->data_devices_name_list = g_list_store_new (GTK_TYPE_STRING_OBJECT);
   adw_combo_row_set_model (ADW_COMBO_ROW (self->data_list_row),
                            G_LIST_MODEL (self->data_devices_name_list));
-
-  g_signal_connect_object (self->notification_label, "notify::label",
-                           G_CALLBACK (cc_wwan_panel_notification_changed_cb),
-                           self, G_CONNECT_SWAPPED);
 
   if (cc_object_storage_has_object (CC_OBJECT_NMCLIENT))
     {

@@ -34,7 +34,7 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcWwanDevicePage, cc_wwan_device_page, CC, WWAN_DEVICE_PAGE, GtkBox)
 
 CcWwanDevicePage *cc_wwan_device_page_new           (CcWwanDevice     *device,
-                                                     GtkWidget        *notification_label);
+                                                     GtkWidget        *toast_overlay);
 CcWwanDevice     *cc_wwan_device_page_get_device    (CcWwanDevicePage *self);
 void              cc_wwan_device_page_set_sim_index (CcWwanDevicePage *self,
                                                      gint              sim_index);

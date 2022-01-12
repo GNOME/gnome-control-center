@@ -13,39 +13,8 @@
         <property name="width-request">340</property>
         <property name="height-request">360</property>
         <child>
-          <object class="GtkOverlay">
+          <object class="AdwToastOverlay" id="toast_overlay">
             <property name="hexpand">True</property>
-            <child type="overlay">
-              <object class="GtkRevealer" id="notification_revealer">
-                <property name="halign">center</property>
-                <property name="valign">start</property>
-                <property name="child">
-                  <object class="GtkBox">
-                    <property name="spacing">12</property>
-                    <style>
-                      <class name="frame"/>
-                      <class name="app-notification"/>
-                    </style>
-                    <child>
-                      <object class="GtkLabel" id="notification_label">
-                        <property name="wrap">True</property>
-                        <property name="wrap-mode">word-char</property>
-                        <property name="use-markup">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton">
-                        <property name="icon-name">window-close-symbolic</property>
-                        <signal name="clicked" handler="cc_wwan_on_notification_closed" swapped="yes"/>
-                        <accessibility>
-                          <property name="label" translatable="yes">Close</property>
-                        </accessibility>
-                      </object>
-                    </child>
-                  </object>
-                </property>
-              </object>
-            </child>
             <property name="child">
               <object class="GtkBox">
                 <property name="margin-start">12</property>

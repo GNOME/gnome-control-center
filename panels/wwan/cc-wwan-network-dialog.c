@@ -45,12 +45,11 @@ struct _CcWwanNetworkDialog
 {
   GtkDialog     parent_instance;
 
+  AdwToastOverlay *toast_overlay;
   CcListRow    *automatic_row;
   GtkButton    *button_apply;
   GtkSpinner   *loading_spinner;
   GtkBox       *network_search_title;
-  GtkLabel     *notification_label;
-  GtkRevealer  *notification_revealer;
   GtkListBox   *operator_list_box;
   GtkButton    *refresh_button;
 
@@ -61,7 +60,6 @@ struct _CcWwanNetworkDialog
 
   GCancellable *search_cancellable;
 
-  guint         revealer_timeout_id;
   gboolean      no_update_network;
 };
 
@@ -106,28 +104,6 @@ cc_wwan_network_row_class_init (CcWwanNetworkRowClass *klass)
 static void
 cc_wwan_network_row_init (CcWwanNetworkRow *row)
 {
-}
-
-static void
-cc_wwan_on_notification_closed (CcWwanNetworkDialog *self,
-                                GtkWidget           *button)
-{
-  g_assert (CC_IS_WWAN_NETWORK_DIALOG (self));
-
-  gtk_revealer_set_reveal_child (GTK_REVEALER (self->notification_revealer), FALSE);
-
-  if (self->revealer_timeout_id != 0)
-    g_source_remove (self->revealer_timeout_id);
-
-  self->revealer_timeout_id = 0;
-}
-
-static gboolean
-cc_wwan_on_notification_timeout (gpointer user_data)
-{
-  cc_wwan_on_notification_closed (user_data, NULL);
-
-  return G_SOURCE_REMOVE;
 }
 
 static void
@@ -270,14 +246,14 @@ cc_wwan_network_scan_complete_cb (GObject      *object,
     }
   else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
+      AdwToast *toast;
+
       self->no_update_network = TRUE;
       gtk_widget_activate (GTK_WIDGET (self->automatic_row));
       gtk_widget_set_sensitive (GTK_WIDGET (self->operator_list_box), FALSE);
 
-      gtk_label_set_label (self->notification_label,
-                           cc_wwan_error_get_message (error));
-      gtk_revealer_set_reveal_child (self->notification_revealer, TRUE);
-      self->revealer_timeout_id = g_timeout_add_seconds (5, cc_wwan_on_notification_timeout, self);
+      toast = adw_toast_new (cc_wwan_error_get_message (error));
+      adw_toast_overlay_add_toast (self->toast_overlay, toast);
 
       gtk_widget_show (GTK_WIDGET (self->operator_list_box));
       g_warning ("Error: scanning networks failed: %s", error->message);
@@ -388,11 +364,6 @@ cc_wwan_network_dialog_dispose (GObject *object)
 {
   CcWwanNetworkDialog *self = (CcWwanNetworkDialog *)object;
 
-  if (self->revealer_timeout_id != 0)
-    g_source_remove (self->revealer_timeout_id);
-
-  self->revealer_timeout_id = 0;
-
   g_cancellable_cancel (self->search_cancellable);
 
   g_clear_object (&self->search_cancellable);
@@ -424,17 +395,15 @@ cc_wwan_network_dialog_class_init (CcWwanNetworkDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/wwan/cc-wwan-network-dialog.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, automatic_row);
   gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, button_apply);
   gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, loading_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, network_search_title);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, notification_label);
-  gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, notification_revealer);
   gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, operator_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcWwanNetworkDialog, refresh_button);
 
   gtk_widget_class_bind_template_callback (widget_class, cc_wwan_network_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, cc_wwan_on_notification_closed);
   gtk_widget_class_bind_template_callback (widget_class, cc_wwan_auto_network_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, cc_wwan_network_dialog_refresh_networks);
   gtk_widget_class_bind_template_callback (widget_class, cc_wwan_network_dialog_apply_clicked_cb);
