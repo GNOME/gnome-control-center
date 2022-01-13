@@ -46,6 +46,9 @@ struct _CcDisplaySettings
   GListStore       *resolution_list;
   GListModel       *scale_list;
 
+  GtkWidget        *enabled_listbox;
+  AdwActionRow     *enabled_row;
+  GtkSwitch        *enabled_switch;
   GtkWidget        *orientation_row;
   GtkWidget        *refresh_rate_row;
   GtkWidget        *resolution_row;
@@ -244,6 +247,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
 
   if (!self->config || !self->selected_output)
     {
+      gtk_widget_set_visible (self->enabled_listbox, FALSE);
       gtk_widget_set_visible (self->orientation_row, FALSE);
       gtk_widget_set_visible (self->refresh_rate_row, FALSE);
       gtk_widget_set_visible (self->resolution_row, FALSE);
@@ -254,6 +258,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
       return G_SOURCE_REMOVE;
     }
 
+  g_object_freeze_notify ((GObject*) self->enabled_switch);
   g_object_freeze_notify ((GObject*) self->orientation_row);
   g_object_freeze_notify ((GObject*) self->refresh_rate_row);
   g_object_freeze_notify ((GObject*) self->resolution_row);
@@ -272,6 +277,13 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
     g_assert (modes);
     current_mode = CC_DISPLAY_MODE (modes->data);
   }
+
+  /* Enabled Switch */
+  gtk_widget_set_visible (self->enabled_listbox, TRUE);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->enabled_row),
+                                 cc_display_monitor_get_ui_name (self->selected_output));
+  gtk_switch_set_active (GTK_SWITCH (self->enabled_switch),
+                         cc_display_monitor_is_active (self->selected_output));
 
   if (should_show_rotation (self))
     {
@@ -454,6 +466,7 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
                          cc_display_monitor_get_underscanning (self->selected_output));
 
   self->updating = TRUE;
+  g_object_thaw_notify ((GObject*) self->enabled_switch);
   g_object_thaw_notify ((GObject*) self->orientation_row);
   g_object_thaw_notify ((GObject*) self->refresh_rate_row);
   g_object_thaw_notify ((GObject*) self->resolution_row);
@@ -476,6 +489,20 @@ on_output_changed_cb (CcDisplaySettings *self,
     return;
 
   self->idle_udpate_id = g_idle_add ((GSourceFunc) cc_display_settings_rebuild_ui, self);
+}
+
+static void
+on_enabled_switch_active_changed_cb (GtkWidget         *widget,
+                                     GParamSpec        *pspec,
+                                     CcDisplaySettings *self)
+{
+  if (self->updating)
+    return;
+
+  cc_display_monitor_set_active (self->selected_output,
+                                 gtk_switch_get_active (self->enabled_switch));
+
+  g_signal_emit_by_name (G_OBJECT (self), "updated", self->selected_output);
 }
 
 static void
@@ -718,6 +745,9 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
                 0, NULL, NULL, NULL,
                 G_TYPE_NONE, 1, CC_TYPE_DISPLAY_MONITOR);
 
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, enabled_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, orientation_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, refresh_rate_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, resolution_row);
@@ -727,6 +757,7 @@ cc_display_settings_class_init (CcDisplaySettingsClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, underscanning_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplaySettings, underscanning_switch);
 
+  gtk_widget_class_bind_template_callback (widget_class, on_enabled_switch_active_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_orientation_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_refresh_rate_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_resolution_selection_changed_cb);
@@ -869,4 +900,14 @@ cc_display_settings_refresh_layout (CcDisplaySettings *self,
 
   gtk_widget_set_visible (self->scale_combo_row, use_combo);
   gtk_widget_set_visible (self->scale_buttons_row, self->num_scales > 1 && !use_combo);
+}
+
+void
+cc_display_settings_set_multimonitor (CcDisplaySettings *self,
+                                      gboolean           multimonitor)
+{
+  gtk_widget_set_visible (self->enabled_listbox, multimonitor);
+
+  if (!multimonitor)
+    gtk_switch_set_active (GTK_SWITCH (self->enabled_switch), TRUE);
 }

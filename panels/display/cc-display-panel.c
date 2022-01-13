@@ -886,6 +886,8 @@ rebuild_ui (CcDisplayPanel *panel)
       move_display_settings_to_main_page (panel);
     }
 
+  cc_display_settings_set_multimonitor (panel->settings, n_outputs > 1);
+
   cc_panel_set_selected_type (panel, type);
 
   panel->rebuilding_counter--;
