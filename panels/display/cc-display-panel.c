@@ -99,8 +99,8 @@ struct _CcDisplayPanel
   GtkWidget      *config_type_switcher_row;
   AdwBin         *display_settings_bin;
   GtkWidget      *display_settings_group;
+  AdwLeaflet     *leaflet;
   AdwComboRow    *primary_display_row;
-  GtkStack       *stack;
   AdwPreferencesGroup *single_display_settings_group;
 
   GtkShortcutController *toplevel_shortcuts;
@@ -465,7 +465,7 @@ static void
 on_back_button_clicked_cb (GtkButton      *button,
                            CcDisplayPanel *self)
 {
-  gtk_stack_set_visible_child_name (self->stack, "displays");
+  adw_leaflet_set_visible_child_name (self->leaflet, "displays");
 }
 
 static void
@@ -523,7 +523,7 @@ static void
 on_night_light_row_activated_cb (GtkListBoxRow  *row,
                                  CcDisplayPanel *self)
 {
-  gtk_stack_set_visible_child_name (self->stack, "night-light");
+  adw_leaflet_set_visible_child_name (self->leaflet, "night-light");
 }
 
 static void
@@ -549,7 +549,7 @@ on_stack_visible_child_name_changed_cb (GtkStack       *stack,
                                         GParamSpec     *pspec,
                                         CcDisplayPanel *self)
 {
-  const gchar *visible_child_name = gtk_stack_get_visible_child_name (self->stack);
+  const gchar *visible_child_name = adw_leaflet_get_visible_child_name (self->leaflet);
 
   gtk_widget_set_visible (self->back_button, g_strcmp0 (visible_child_name, "displays") != 0);
 }
@@ -626,10 +626,10 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, leaflet);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_state_label);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, single_display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toplevel_shortcuts);
 
@@ -677,7 +677,7 @@ on_monitor_row_activated_cb (GtkListBoxRow  *row,
   monitor = g_object_get_data (G_OBJECT (row), "monitor");
   set_current_output (self, monitor, FALSE);
 
-  gtk_stack_set_visible_child_name (self->stack, "display-settings");
+  adw_leaflet_set_visible_child_name (self->leaflet, "display-settings");
 }
 
 static void

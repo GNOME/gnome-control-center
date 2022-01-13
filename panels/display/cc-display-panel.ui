@@ -17,15 +17,14 @@
     </child>
 
     <child>
-      <object class="GtkStack" id="stack">
-        <property name="transition-type">crossfade</property>
+      <object class="AdwLeaflet" id="leaflet">
+        <property name="can-unfold">False</property>
         <signal name="notify::visible-child-name" handler="on_stack_visible_child_name_changed_cb" object="CcDisplayPanel" swapped="no" />
 
         <!-- Displays page -->
         <child>
-          <object class="GtkStackPage">
+          <object class="AdwLeafletPage">
             <property name="name">displays</property>
-            <property name="title" translatable="yes">Displays</property>
             <property name="child">
               <object class="GtkScrolledWindow">
                 <property name="hscrollbar_policy">never</property>
@@ -149,9 +148,8 @@
 
         <!-- Night Light page -->
         <child>
-          <object class="GtkStackPage">
+          <object class="AdwLeafletPage">
             <property name="name">night-light</property>
-            <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">Night Light</property>
             <property name="child">
               <object class="CcNightLightPage" id="night_light_page" />
             </property>
@@ -160,7 +158,7 @@
 
         <!-- Display Settings page -->
         <child>
-          <object class="GtkStackPage">
+          <object class="AdwLeafletPage">
             <property name="name">display-settings</property>
             <property name="child">
               <object class="AdwPreferencesPage">
