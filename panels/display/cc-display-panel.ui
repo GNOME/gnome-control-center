@@ -163,7 +163,15 @@
           <object class="GtkStackPage">
             <property name="name">display-settings</property>
             <property name="child">
-              <object class="AdwBin" id="display_settings_bin" />
+              <object class="AdwPreferencesPage">
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwBin" id="display_settings_bin" />
+                    </child>
+                  </object>
+                </child>
+              </object>
             </property>
           </object>
         </child>
