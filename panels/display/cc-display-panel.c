@@ -90,6 +90,7 @@ struct _CcDisplayPanel
   GtkWidget *apply_titlebar_warning;
 
   GListStore     *primary_display_list;
+  GList          *monitor_rows;
 
   GtkWidget      *arrangement_group;
   AdwBin         *arrangement_bin;
@@ -462,6 +463,7 @@ cc_display_panel_dispose (GObject *object)
       monitor_labeler_hide (CC_DISPLAY_PANEL (object));
     }
 
+  g_clear_pointer (&self->monitor_rows, g_list_free);
   g_clear_object (&self->manager);
   g_clear_object (&self->current_config);
   g_clear_object (&self->up_client);
@@ -699,6 +701,49 @@ set_current_output (CcDisplayPanel   *panel,
 }
 
 static void
+on_monitor_row_activated_cb (GtkListBoxRow  *row,
+                             CcDisplayPanel *self)
+{
+  CcDisplayMonitor *monitor;
+
+  monitor = g_object_get_data (G_OBJECT (row), "monitor");
+  set_current_output (self, monitor, FALSE);
+
+  gtk_stack_set_visible_child_name (self->stack, "display-settings");
+}
+
+static void
+add_display_row (CcDisplayPanel   *self,
+                 CcDisplayMonitor *monitor)
+{
+  g_autofree gchar *number_string = NULL;
+  GtkWidget *number_label;
+  GtkWidget *icon;
+  GtkWidget *row;
+
+  row = adw_action_row_new ();
+  g_object_set_data (G_OBJECT (row), "monitor", monitor);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
+                                 cc_display_monitor_get_ui_name (monitor));
+
+  number_string = g_strdup_printf ("%d", cc_display_monitor_get_ui_number (monitor));
+  number_label = gtk_label_new (number_string);
+  gtk_widget_set_valign (number_label, GTK_ALIGN_CENTER);
+  gtk_widget_add_css_class (number_label, "monitor-label");
+  adw_action_row_add_prefix (ADW_ACTION_ROW (row), number_label);
+
+  icon = gtk_image_new_from_icon_name ("go-next-symbolic");
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), icon);
+  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), icon);
+
+  adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->display_settings_group), row);
+
+  g_signal_connect (row, "activated", G_CALLBACK (on_monitor_row_activated_cb), self);
+
+  self->monitor_rows = g_list_prepend (self->monitor_rows, row);
+}
+
+static void
 rebuild_ui (CcDisplayPanel *panel)
 {
   guint n_outputs, n_active_outputs, n_usable_outputs;
@@ -708,6 +753,14 @@ rebuild_ui (CcDisplayPanel *panel)
   panel->rebuilding_counter++;
 
   g_list_store_remove_all (panel->primary_display_list);
+
+  /* Remove all monitor rows */
+  while (panel->monitor_rows)
+    {
+      adw_preferences_group_remove (ADW_PREFERENCES_GROUP (panel->display_settings_group),
+                                    panel->monitor_rows->data);
+      panel->monitor_rows = g_list_remove_link (panel->monitor_rows, panel->monitor_rows);
+    }
 
   if (!panel->current_config)
     {
@@ -742,6 +795,8 @@ rebuild_ui (CcDisplayPanel *panel)
           if (!panel->current_output)
             set_current_output (panel, output, FALSE);
         }
+
+      add_display_row (panel, l->data);
     }
 
   /* Sync the rebuild lists/buttons */
