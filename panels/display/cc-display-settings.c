@@ -30,7 +30,7 @@
 
 struct _CcDisplaySettings
 {
-  AdwBin            object;
+  GtkBox            object;
 
   gboolean          updating;
   gboolean          num_scales;
@@ -66,7 +66,7 @@ enum {
   PROP_LAST
 };
 
-G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, ADW_TYPE_BIN)
+G_DEFINE_TYPE (CcDisplaySettings, cc_display_settings, GTK_TYPE_BOX)
 
 static GParamSpec *props[PROP_LAST];
 

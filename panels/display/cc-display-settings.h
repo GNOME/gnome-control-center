@@ -26,7 +26,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_DISPLAY_SETTINGS cc_display_settings_get_type ()
-G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, AdwBin);
+G_DECLARE_FINAL_TYPE (CcDisplaySettings, cc_display_settings, CC, DISPLAY_SETTINGS, GtkBox);
 
 CcDisplaySettings*  cc_display_settings_new                 (void);
 
