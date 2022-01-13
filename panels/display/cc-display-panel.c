@@ -103,6 +103,7 @@ struct _CcDisplayPanel
   GtkWidget      *display_settings_group;
   AdwComboRow    *primary_display_row;
   GtkStack       *stack;
+  AdwPreferencesGroup *single_display_settings_group;
 
   GtkShortcutController *toplevel_shortcuts;
   GtkShortcut *escape_shortcut;
@@ -663,6 +664,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_state_label);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, single_display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toplevel_shortcuts);
 
   gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
@@ -744,6 +746,41 @@ add_display_row (CcDisplayPanel   *self,
 }
 
 static void
+move_display_settings_to_main_page (CcDisplayPanel *self)
+{
+  GtkWidget *parent = gtk_widget_get_parent (GTK_WIDGET (self->settings));
+
+  if (parent != GTK_WIDGET (self->display_settings_bin))
+    return;
+
+  g_object_ref (self->settings);
+  adw_bin_set_child (self->display_settings_bin, NULL);
+  adw_preferences_group_add (self->single_display_settings_group,
+                             GTK_WIDGET (self->settings));
+  g_object_unref (self->settings);
+
+  gtk_widget_show (GTK_WIDGET (self->single_display_settings_group));
+}
+
+static void
+move_display_settings_to_separate_page (CcDisplayPanel *self)
+{
+  GtkWidget *parent = gtk_widget_get_parent (GTK_WIDGET (self->settings));
+
+  if (parent == GTK_WIDGET (self->display_settings_bin))
+    return;
+
+  g_object_ref (self->settings);
+  adw_preferences_group_remove (self->single_display_settings_group,
+                                GTK_WIDGET (self->settings));
+  adw_bin_set_child (self->display_settings_bin,
+                     GTK_WIDGET (self->settings));
+  g_object_unref (self->settings);
+
+  gtk_widget_hide (GTK_WIDGET (self->single_display_settings_group));
+}
+
+static void
 rebuild_ui (CcDisplayPanel *panel)
 {
   guint n_outputs, n_active_outputs, n_usable_outputs;
@@ -817,6 +854,8 @@ rebuild_ui (CcDisplayPanel *panel)
       gtk_widget_set_visible (panel->display_settings_group, TRUE);
       gtk_widget_set_visible (panel->config_type_switcher_row, TRUE);
       gtk_widget_set_visible (panel->arrangement_group, type == CC_DISPLAY_CONFIG_JOIN);
+
+      move_display_settings_to_separate_page (panel);
     }
   else if (n_usable_outputs > 1)
     {
@@ -830,6 +869,8 @@ rebuild_ui (CcDisplayPanel *panel)
       /* Mirror is also invalid as it cannot be configured using this UI. */
       if (type == CC_DISPLAY_CONFIG_CLONE || type > CC_DISPLAY_CONFIG_LAST_VALID)
         type = CC_DISPLAY_CONFIG_JOIN;
+
+      move_display_settings_to_separate_page (panel);
     }
   else
     {
@@ -841,6 +882,8 @@ rebuild_ui (CcDisplayPanel *panel)
       gtk_widget_set_visible (panel->display_settings_group, FALSE);
       gtk_widget_set_visible (panel->config_type_switcher_row, FALSE);
       gtk_widget_set_visible (panel->arrangement_group, FALSE);
+
+      move_display_settings_to_main_page (panel);
     }
 
   cc_panel_set_selected_type (panel, type);
