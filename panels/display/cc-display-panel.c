@@ -50,7 +50,6 @@
 #define DISPLAY_SCHEMA   "org.gnome.settings-daemon.plugins.color"
 
 typedef enum {
-  CC_DISPLAY_CONFIG_SINGLE,
   CC_DISPLAY_CONFIG_JOIN,
   CC_DISPLAY_CONFIG_CLONE,
 
@@ -97,7 +96,6 @@ struct _CcDisplayPanel
   GtkWidget      *back_button;
   GtkToggleButton *config_type_join;
   GtkToggleButton *config_type_mirror;
-  GtkToggleButton *config_type_single;
   GtkWidget      *config_type_switcher_row;
   AdwBin         *display_settings_bin;
   GtkWidget      *display_settings_group;
@@ -146,9 +144,6 @@ config_get_current_type (CcDisplayPanel *panel)
   if (n_active_outputs == 0)
     return CC_DISPLAY_CONFIG_INVALID_NONE;
 
-  if (n_active_outputs == 1)
-    return CC_DISPLAY_CONFIG_SINGLE;
-
   if (cc_display_config_is_cloning (panel->current_config))
     return CC_DISPLAY_CONFIG_CLONE;
 
@@ -162,8 +157,6 @@ cc_panel_get_selected_type (CcDisplayPanel *panel)
     return CC_DISPLAY_CONFIG_JOIN;
   else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (panel->config_type_mirror)))
     return CC_DISPLAY_CONFIG_CLONE;
-  else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (panel->config_type_single)))
-    return CC_DISPLAY_CONFIG_SINGLE;
   else
     g_assert_not_reached ();
 }
@@ -198,29 +191,6 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 
   switch (type)
     {
-    case CC_DISPLAY_CONFIG_SINGLE:
-      g_debug ("Creating new single config");
-      /* Disable all but the current primary output */
-      cc_display_config_set_cloning (panel->current_config, FALSE);
-      for (l = outputs; l; l = l->next)
-        {
-          CcDisplayMonitor *output = l->data;
-
-          /* Select the current primary output as the active one */
-          if (cc_display_monitor_is_primary (output))
-            {
-              cc_display_monitor_set_active (output, TRUE);
-              cc_display_monitor_set_mode (output, cc_display_monitor_get_preferred_mode (output));
-              set_current_output (panel, output, FALSE);
-            }
-          else
-            {
-              cc_display_monitor_set_active (output, FALSE);
-              cc_display_monitor_set_mode (output, cc_display_monitor_get_preferred_mode (output));
-            }
-        }
-      break;
-
     case CC_DISPLAY_CONFIG_JOIN:
       g_debug ("Creating new join config");
       /* Enable all usable outputs
@@ -324,9 +294,6 @@ cc_panel_set_selected_type (CcDisplayPanel *panel, CcDisplayConfigType type)
       break;
     case CC_DISPLAY_CONFIG_CLONE:
       gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->config_type_mirror), TRUE);
-      break;
-    case CC_DISPLAY_CONFIG_SINGLE:
-      gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (panel->config_type_single), TRUE);
       break;
     default:
       g_assert_not_reached ();
@@ -656,7 +623,6 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_switcher_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_join);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_mirror);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_single);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
@@ -860,7 +826,7 @@ rebuild_ui (CcDisplayPanel *panel)
   else if (n_usable_outputs > 1)
     {
       /* We have more than one usable monitor. In this case there is no chooser,
-       * and we always show the arrangement widget even if we are in SINGLE mode.
+       * and we always show the arrangement widget.
        */
       gtk_widget_set_visible (panel->display_settings_group, TRUE);
       gtk_widget_set_visible (panel->config_type_switcher_row, FALSE);
@@ -874,10 +840,7 @@ rebuild_ui (CcDisplayPanel *panel)
     }
   else
     {
-      /* We only have a single usable monitor, show neither configuration type
-       * switcher nor arrangement widget and ensure we really are in SINGLE
-       * mode (and not e.g. mirroring across one display) */
-      type = CC_DISPLAY_CONFIG_SINGLE;
+      type = CC_DISPLAY_CONFIG_JOIN;
 
       gtk_widget_set_visible (panel->display_settings_group, FALSE);
       gtk_widget_set_visible (panel->config_type_switcher_row, FALSE);
