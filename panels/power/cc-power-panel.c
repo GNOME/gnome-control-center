@@ -1104,18 +1104,6 @@ performance_profile_set_active (CcPowerPanel  *self,
 }
 
 static void
-performance_profile_set_inhibited (CcPowerPanel  *self,
-                                   const char    *performance_inhibited)
-{
-  CcPowerProfileRow *row;
-
-  row = self->power_profiles_row[CC_POWER_PROFILE_PERFORMANCE];
-  if (!row)
-      return;
-  cc_power_profile_row_set_performance_inhibited (row, performance_inhibited);
-}
-
-static void
 power_profile_update_info_boxes (CcPowerPanel *self)
 {
   g_autoptr(GVariant) degraded_variant = NULL;
@@ -1263,13 +1251,7 @@ power_profiles_properties_changed_cb (CcPowerPanel *self,
   g_variant_get (changed_properties, "a{sv}", &iter);
   while (g_variant_iter_next (iter, "{&sv}", &key, &value))
     {
-      if (g_strcmp0 (key, "PerformanceInhibited") == 0)
-        {
-          if (!self->has_performance_degraded)
-            performance_profile_set_inhibited (self,
-                                               g_variant_get_string (value, NULL));
-        }
-      else if (g_strcmp0 (key, "PerformanceDegraded") == 0 ||
+      if (g_strcmp0 (key, "PerformanceDegraded") == 0 ||
                g_strcmp0 (key, "ActiveProfileHolds") == 0)
         {
           power_profile_update_info_boxes (self);
@@ -1355,7 +1337,6 @@ setup_power_profiles (CcPowerPanel *self)
   g_autoptr(GVariant) props = NULL;
   guint i, num_children;
   g_autoptr(GError) error = NULL;
-  const char *performance_inhibited = NULL;
   const char *performance_degraded;
   const char *active_profile;
   g_autoptr(GVariant) profiles = NULL;
@@ -1411,8 +1392,6 @@ setup_power_profiles (CcPowerPanel *self)
   props = g_variant_get_child_value (variant, 0);
   performance_degraded = variant_lookup_string (props, "PerformanceDegraded");
   self->has_performance_degraded = performance_degraded != NULL;
-  if (performance_degraded == NULL)
-    performance_inhibited = variant_lookup_string (props, "PerformanceInhibited");
   active_profile = variant_lookup_string (props, "ActiveProfile");
 
   last_button = NULL;
@@ -1439,7 +1418,6 @@ setup_power_profiles (CcPowerPanel *self)
 
       profile = cc_power_profile_from_str (name);
       row = cc_power_profile_row_new (cc_power_profile_from_str (name));
-      cc_power_profile_row_set_performance_inhibited (row, performance_inhibited);
       g_signal_connect_object (G_OBJECT (row), "button-toggled",
                                G_CALLBACK (power_profile_button_toggled_cb), self,
                                0);

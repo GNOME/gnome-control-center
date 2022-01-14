@@ -44,8 +44,6 @@ CcPowerProfile cc_power_profile_row_get_profile       (CcPowerProfileRow *row);
 GtkCheckButton *cc_power_profile_row_get_radio_button (CcPowerProfileRow *row);
 void cc_power_profile_row_set_active                  (CcPowerProfileRow *row, gboolean active);
 gboolean cc_power_profile_row_get_active              (CcPowerProfileRow *row);
-void cc_power_profile_row_set_performance_inhibited   (CcPowerProfileRow *row,
-                                                       const char        *performance_inhibited);
 
 CcPowerProfile cc_power_profile_from_str (const char *profile);
 const char *cc_power_profile_to_str      (CcPowerProfile profile);
