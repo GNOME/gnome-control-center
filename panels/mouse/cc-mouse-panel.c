@@ -37,9 +37,7 @@ struct _CcMousePanel
 
   GtkListBoxRow     *edge_scrolling_row;
   GtkSwitch         *edge_scrolling_switch;
-  GtkListBox        *general_listbox;
   AdwPreferencesGroup *mouse_group;
-  GtkListBox        *mouse_listbox;
   GtkSwitch         *mouse_natural_scrolling_switch;
   GtkScale          *mouse_speed_scale;
   CcMouseTest       *mouse_test;
@@ -52,7 +50,6 @@ struct _CcMousePanel
   GtkSwitch         *tap_to_click_switch;
   GtkButton         *test_button;
   AdwPreferencesGroup *touchpad_group;
-  GtkListBox        *touchpad_listbox;
   GtkListBoxRow     *touchpad_natural_scrolling_row;
   GtkSwitch         *touchpad_natural_scrolling_switch;
   GtkListBoxRow     *touchpad_speed_row;
@@ -404,9 +401,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, edge_scrolling_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, edge_scrolling_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, general_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_group);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_natural_scrolling_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_speed_scale);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_test);
@@ -419,7 +414,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, test_button);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_group);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_natural_scrolling_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_natural_scrolling_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_speed_row);
