@@ -17,7 +17,6 @@
                     </style>
                     <child>
                       <object class="AdwActionRow" id="primary_button_row">
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes">Primary Button</property>
                         <property name="subtitle" translatable="yes">Sets the order of physical buttons on mice and touchpads.</property>
                         <property name="subtitle-lines">0</property>
@@ -73,7 +72,6 @@
                     </style>
                     <child>
                       <object class="AdwActionRow" id="mouse_row">
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes">Mouse Speed</property>
                         <child>
                           <object class="GtkScale" id="mouse_speed_scale">
@@ -90,7 +88,6 @@
                     </child>
                     <child>
                       <object class="AdwActionRow" id="mouse_natural_scrolling_row">
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes" comments="Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.">Natural Scrolling</property>
                         <property name="subtitle" translatable="yes">Scrolling moves the content, not the view.</property>
                         <child>
@@ -117,7 +114,6 @@
                     </style>
                     <child>
                       <object class="AdwActionRow" id="touchpad_toggle_row">
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes">Touchpad</property>
                         <child>
                           <object class="GtkSwitch" id="touchpad_toggle_switch">
@@ -129,7 +125,6 @@
                     </child>
                     <child>
                       <object class="AdwActionRow" id="touchpad_natural_scrolling_row">
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes" comments="Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible. ">Natural Scrolling</property>
                         <property name="subtitle" translatable="yes">Scrolling moves the content, not the view.</property>
                         <child>
@@ -142,7 +137,6 @@
                     </child>
                     <child>
                       <object class="AdwActionRow" id="touchpad_speed_row">
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes">Touchpad Speed</property>
                         <child>
                           <object class="GtkScale" id="touchpad_speed_scale">
@@ -160,7 +154,6 @@
                     <child>
                       <object class="AdwActionRow" id="tap_to_click_row">
                         <property name="visible">False</property>
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes">Tap to Click</property>
                         <child>
                           <object class="GtkSwitch" id="tap_to_click_switch">
@@ -173,7 +166,6 @@
                     <child>
                       <object class="AdwActionRow" id="two_finger_scrolling_row">
                         <property name="visible">False</property>
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes">Two-finger Scrolling</property>
                         <child>
                           <object class="GtkSwitch" id="two_finger_scrolling_switch">
@@ -187,7 +179,6 @@
                     <child>
                       <object class="AdwActionRow" id="edge_scrolling_row">
                         <property name="visible">False</property>
-                        <property name="activatable">false</property>
                         <property name="title" translatable="yes">Edge Scrolling</property>
                         <child>
                           <object class="GtkSwitch" id="edge_scrolling_switch">
@@ -228,18 +219,6 @@
   <object class="GtkAdjustment" id="touchpad_speed_adjustment">
     <property name="lower">-1</property>
     <property name="upper">1</property>
-  </object>
-  <object class="GtkSizeGroup">
-    <property name="mode">vertical</property>
-    <widgets>
-      <widget name="mouse_row"/>
-      <widget name="mouse_natural_scrolling_row"/>
-      <widget name="touchpad_toggle_row"/>
-      <widget name="touchpad_natural_scrolling_row"/>
-      <widget name="touchpad_speed_row"/>
-      <widget name="tap_to_click_row"/>
-      <widget name="edge_scrolling_row"/>
-    </widgets>
   </object>
   <object class="GtkSizeGroup">
     <property name="mode">horizontal</property>
