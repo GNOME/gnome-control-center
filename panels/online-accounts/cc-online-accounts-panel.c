@@ -369,6 +369,24 @@ create_account (CcGoaPanel *self,
                         self);
 }
 
+static gboolean
+is_gicon_symbolic (GtkWidget *widget,
+                   GIcon     *icon)
+{
+  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
+  GtkIconTheme *icon_theme;
+
+  icon_theme = gtk_icon_theme_get_for_display (gdk_display_get_default ());
+  icon_paintable = gtk_icon_theme_lookup_by_gicon (icon_theme,
+                                                   icon,
+                                                   32,
+                                                   gtk_widget_get_scale_factor (widget),
+                                                   gtk_widget_get_direction (widget),
+                                                   0);
+
+  return icon_paintable && gtk_icon_paintable_is_symbolic (icon_paintable);
+}
+
 static void
 add_provider_row (CcGoaPanel *self,
                   GVariant   *provider)
@@ -407,8 +425,18 @@ add_provider_row (CcGoaPanel *self,
     }
 
   image = gtk_image_new_from_gicon (icon);
-  gtk_image_set_icon_size (GTK_IMAGE (image), GTK_ICON_SIZE_LARGE);
-  gtk_widget_add_css_class (image, "lowres-icon");
+  gtk_widget_set_halign (image, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (image, GTK_ALIGN_CENTER);
+  if (is_gicon_symbolic (image, icon))
+    {
+      gtk_image_set_icon_size (GTK_IMAGE (image), GTK_ICON_SIZE_NORMAL);
+      gtk_widget_add_css_class (image, "symbolic-circular");
+    }
+  else
+    {
+      gtk_image_set_icon_size (GTK_IMAGE (image), GTK_ICON_SIZE_LARGE);
+      gtk_widget_add_css_class (image, "lowres-icon");
+    }
   adw_action_row_add_prefix (ADW_ACTION_ROW (row), image);
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), name);
@@ -466,8 +494,8 @@ add_account (CcGoaPanel *self,
 
   /* The provider icon */
   icon = gtk_image_new ();
-  gtk_widget_add_css_class (icon, "lowres-icon");
-  gtk_image_set_icon_size (GTK_IMAGE (icon), GTK_ICON_SIZE_LARGE);
+  gtk_widget_set_halign (icon, GTK_ALIGN_CENTER);
+  gtk_widget_set_valign (icon, GTK_ALIGN_CENTER);
 
   gicon = g_icon_new_for_string (goa_account_get_provider_icon (account), &error);
   if (error != NULL)
@@ -480,6 +508,18 @@ add_account (CcGoaPanel *self,
   else
     {
       gtk_image_set_from_gicon (GTK_IMAGE (icon), gicon);
+
+      if (is_gicon_symbolic (icon, gicon))
+        {
+          gtk_image_set_icon_size (GTK_IMAGE (icon), GTK_ICON_SIZE_NORMAL);
+          gtk_widget_add_css_class (icon, "symbolic-circular");
+        }
+      else
+        {
+          gtk_image_set_icon_size (GTK_IMAGE (icon), GTK_ICON_SIZE_LARGE);
+          gtk_widget_add_css_class (icon, "lowres-icon");
+        }
+
     }
   adw_action_row_add_prefix (ADW_ACTION_ROW (row), icon);
 
@@ -643,6 +683,18 @@ command_add (CcGoaPanel *self,
 
       create_account (self, provider);
     }
+}
+
+static void
+load_custom_css (void)
+{
+  g_autoptr(GtkCssProvider) provider = NULL;
+
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/online-accounts/online-accounts.css");
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 /* Callbacks */
@@ -1001,4 +1053,5 @@ cc_goa_panel_init (CcGoaPanel *self)
                     self);
 
   fill_accounts_listbox (self);
+  load_custom_css ();
 }

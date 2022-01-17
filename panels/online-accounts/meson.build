@@ -22,7 +22,10 @@ cflags += [
 
 sources = files('cc-online-accounts-panel.c')
 
-resource_data = files('cc-online-accounts-panel.ui')
+resource_data = files(
+  'cc-online-accounts-panel.ui',
+  'online-accounts.css',
+)
 
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
