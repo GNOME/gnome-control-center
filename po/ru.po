@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-01-07 11:47+0000\n"
-"PO-Revision-Date: 2022-01-09 13:25+0300\n"
+"POT-Creation-Date: 2022-01-16 12:22+0000\n"
+"PO-Revision-Date: 2022-01-16 15:55+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -63,7 +63,7 @@ msgstr "Полный доступ к /dev"
 
 #: panels/applications/cc-applications-panel.c:834
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:230 panels/wwan/cc-wwan-device-page.ui:113
+#: panels/network/network-mobile.ui:230 panels/wwan/cc-wwan-device-page.ui:61
 #: panels/wwan/cc-wwan-network-dialog.ui:5
 msgid "Network"
 msgstr "Сеть"
@@ -90,8 +90,8 @@ msgstr "Файловая система"
 
 #: panels/applications/cc-applications-panel.c:850
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:304
-#: shell/cc-window.c:974 shell/cc-window.ui:23
+#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:292
+#: shell/cc-window.c:963 shell/cc-window.ui:23
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "Параметры"
@@ -359,7 +359,6 @@ msgstr "Очистить кэш…"
 msgid "Control various application permissions and settings"
 msgstr "Управление различными разрешениями и настройками приложения"
 
-#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in.in:16
 msgid "application;flatpak;permission;setting;"
@@ -394,7 +393,7 @@ msgstr "Выберите изображение"
 #: panels/user-accounts/cc-user-panel.c:638
 #: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
-#: panels/wwan/cc-wwan-mode-dialog.ui:29
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:268
 msgid "_Cancel"
@@ -511,27 +510,28 @@ msgstr "Включение и отключение Bluetooth. Подключен
 msgid "share;sharing;bluetooth;obex;"
 msgstr "общий;доступ;bluetooth;obex;"
 
-#: panels/camera/cc-camera-panel.ui:31
-msgid "Camera is turned off"
+#: panels/camera/cc-camera-panel.ui:16
+msgid "Camera is Turned Off"
 msgstr "Камера отключена"
 
-#: panels/camera/cc-camera-panel.ui:39
+#: panels/camera/cc-camera-panel.ui:17
 msgid "No applications can capture photos or video."
 msgstr "Нет приложений способных снимать фото и видео."
 
-#: panels/camera/cc-camera-panel.ui:71
+#: panels/camera/cc-camera-panel.ui:31
 msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
-"the camera may cause some applications to not function properly."
+"the camera may cause some applications to not function properly.\n"
+"\n"
+"Allow the applications below to use your camera."
 msgstr ""
 "Использование камеры позволяет приложениям захватывать фотографии и видео. "
-"Отключение камеры может привести к неправильной работе некоторых приложений."
+"Отключение камеры может привести к неправильной работе некоторых "
+"приложений.\n"
+"\n"
+"Разрешить перечисленным ниже приложениям использовать вашу камеру."
 
-#: panels/camera/cc-camera-panel.ui:80
-msgid "Allow the applications below to use your camera."
-msgstr "Разрешите приложениям ниже доступ к камере."
-
-#: panels/camera/cc-camera-panel.ui:99
+#: panels/camera/cc-camera-panel.ui:47
 msgid "No Applications Have Asked for Camera Access"
 msgstr "Нет приложений запросивших доступ к камере"
 
@@ -2253,7 +2253,7 @@ msgstr "Методы ввода символов и вариантов букв,
 
 #: panels/keyboard/cc-keyboard-panel.ui:213
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:207
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:211
 msgid "Keyboard Shortcuts"
 msgstr "Комбинации клавиш"
 
@@ -2411,36 +2411,34 @@ msgstr ""
 "Комбинация;Рабочая;область;Окно;Изменение;размера;масштабирование;Контраст;"
 "Ввод;Источник;Блокировка;Том;"
 
-#: panels/location/cc-location-panel.ui:30
-msgid "Location services turned off"
+#: panels/location/cc-location-panel.ui:15
+msgid "Location Services Turned Off"
 msgstr "Сервисы местоположения отключены"
 
-#: panels/location/cc-location-panel.ui:38
+#: panels/location/cc-location-panel.ui:16
 msgid "No applications can obtain location information."
 msgstr "Нет приложений способных получить информацию о местоположении."
 
-#: panels/location/cc-location-panel.ui:70
+#: panels/location/cc-location-panel.ui:30
 msgid ""
 "Location services allow applications to know your location. Using Wi-Fi and "
-"mobile broadband increases accuracy."
-msgstr ""
-"Сервисы местоположения позволяют приложениям видеть ваше географическое "
-"положение. Точность возрастает при использовании WiFi и мобильного "
-"широкополосного доступа."
-
-#: panels/location/cc-location-panel.ui:78
-msgid ""
+"mobile broadband increases accuracy.\n"
+"\n"
 "Uses Mozilla Location Service: <a href='https://location.services.mozilla."
-"com/privacy'>Privacy Policy</a>"
+"com/privacy'>Privacy Policy</a>\n"
+"\n"
+"Allow the applications below to determine your location."
 msgstr ""
-"Используются службы местоположения Mozilla: <a href='https://location."
-"services.mozilla.com/privacy'>Политика конфиденциальности</a>"
+"Службы определения местоположения позволяют приложениям узнавать ваше "
+"местоположение. Использование Wi-Fi и мобильной широкополосной связи "
+"повышает точность.\n"
+"\n"
+"Используется служба определения местоположения Mozilla: <a href='https://"
+"location .services.mozilla.com/privacy '>Политика конфиденциальности</a>\n"
+"\n"
+"Разрешить перечисленным ниже приложениям определять ваше местоположение."
 
-#: panels/location/cc-location-panel.ui:90
-msgid "Allow the applications below to determine your location."
-msgstr "Разрешите приложениям ниже доступ к вашему местоположению."
-
-#: panels/location/cc-location-panel.ui:106
+#: panels/location/cc-location-panel.ui:48
 msgid "No Applications Have Asked for Location Access"
 msgstr "Нет приложений запросивших доступ к местоположению"
 
@@ -2658,7 +2656,7 @@ msgstr "Защитите ваш обмен сообщениями"
 
 #. FIXME
 #: panels/mouse/cc-mouse-panel.ui:11
-#: panels/multitasking/cc-multitasking-panel.ui:24
+#: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "Общие"
 
@@ -2769,70 +2767,70 @@ msgstr ""
 msgid "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;"
 msgstr "Трэкпад;Указатель;Щелчок;Нажатие;Двойной;Кнопка;Трэкбол;Прокрутка;"
 
-#: panels/multitasking/cc-multitasking-panel.ui:46
+#: panels/multitasking/cc-multitasking-panel.ui:15
 msgid "_Hot Corner"
 msgstr "_Горячий угол"
 
-#: panels/multitasking/cc-multitasking-panel.ui:47
+#: panels/multitasking/cc-multitasking-panel.ui:16
 msgid "Touch the top-left corner to open the Activities Overview."
 msgstr "Прикоснитесь к верхнему левому углу экрана, чтобы открыть Обзор."
 
-#: panels/multitasking/cc-multitasking-panel.ui:75
+#: panels/multitasking/cc-multitasking-panel.ui:42
 msgid "_Active Screen Edges"
 msgstr "_Активные границы экрана"
 
-#: panels/multitasking/cc-multitasking-panel.ui:76
+#: panels/multitasking/cc-multitasking-panel.ui:43
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them."
 msgstr ""
 "Перетащите окна к верхней, левой или правой границе экрана, чтобы "
 "автоматически изменить размер."
 
-#: panels/multitasking/cc-multitasking-panel.ui:105
+#: panels/multitasking/cc-multitasking-panel.ui:70
 msgid "Workspaces"
 msgstr "Рабочие столы"
 
-#: panels/multitasking/cc-multitasking-panel.ui:127
+#: panels/multitasking/cc-multitasking-panel.ui:76
 msgid "_Dynamic workspaces"
 msgstr "_Автоматическое управление столами"
 
-#: panels/multitasking/cc-multitasking-panel.ui:128
+#: panels/multitasking/cc-multitasking-panel.ui:77
 msgid "Automatically removes empty workspaces."
 msgstr "Автоматически убирать пустые столы."
 
-#: panels/multitasking/cc-multitasking-panel.ui:144
+#: panels/multitasking/cc-multitasking-panel.ui:91
 msgid "_Fixed number of workspaces"
 msgstr "_Фиксированное количество столов"
 
-#: panels/multitasking/cc-multitasking-panel.ui:145
+#: panels/multitasking/cc-multitasking-panel.ui:92
 msgid "Specify a number of permanent workspaces."
 msgstr "Укажите количество столов, которое нужно вам постоянно."
 
-#: panels/multitasking/cc-multitasking-panel.ui:163
+#: panels/multitasking/cc-multitasking-panel.ui:108
 msgid "_Number of Workspaces"
 msgstr "_Количество столов"
 
-#: panels/multitasking/cc-multitasking-panel.ui:181
+#: panels/multitasking/cc-multitasking-panel.ui:124
 msgid "Multi-Monitor"
 msgstr "Для нескольких мониторов"
 
-#: panels/multitasking/cc-multitasking-panel.ui:203
+#: panels/multitasking/cc-multitasking-panel.ui:130
 msgid "Workspaces on _primary display only"
 msgstr "Рабочие столы только на _главном дисплее"
 
-#: panels/multitasking/cc-multitasking-panel.ui:231
+#: panels/multitasking/cc-multitasking-panel.ui:156
 msgid "Workspaces on all d_isplays"
 msgstr "Рабочие столы на _всех дисплеях"
 
-#: panels/multitasking/cc-multitasking-panel.ui:261
+#: panels/multitasking/cc-multitasking-panel.ui:184
 msgid "Application Switching"
 msgstr "Переключение между приложениями"
 
-#: panels/multitasking/cc-multitasking-panel.ui:283
+#: panels/multitasking/cc-multitasking-panel.ui:190
 msgid "Include applications from all _workspaces"
 msgstr "Включать приложения со всех _столов"
 
-#: panels/multitasking/cc-multitasking-panel.ui:299
+#: panels/multitasking/cc-multitasking-panel.ui:204
 msgid "Include applications from the _current workspace only"
 msgstr "Включать приложения _только с текущего стола"
 
@@ -3304,7 +3302,7 @@ msgid "WPA3 Personal"
 msgstr "Персональный WPA3"
 
 #: panels/network/connection-editor/details-page.ui:14
-#: panels/wwan/cc-wwan-details-dialog.ui:96
+#: panels/wwan/cc-wwan-details-dialog.ui:73
 msgid "Signal Strength"
 msgstr "Мощность сигнала"
 
@@ -3690,7 +3688,7 @@ msgid "Turn device off"
 msgstr "Выключить устройство"
 
 #: panels/network/network-mobile.ui:27
-#: panels/wwan/cc-wwan-details-dialog.ui:264
+#: panels/wwan/cc-wwan-details-dialog.ui:237
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -4753,14 +4751,14 @@ msgstr "Никогда"
 msgid "Automatic suspend"
 msgstr "Автоматический режим ожидания"
 
-#: panels/power/cc-power-panel.c:1151
+#: panels/power/cc-power-panel.c:1139
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Режим высокой производительности временно запрещён из-за высокой температуры "
 "устройства."
 
-#: panels/power/cc-power-panel.c:1153
+#: panels/power/cc-power-panel.c:1141
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4769,11 +4767,11 @@ msgstr ""
 "на коленях. Переместите устройство на ровную поверхность для возобновления "
 "режима."
 
-#: panels/power/cc-power-panel.c:1155
+#: panels/power/cc-power-panel.c:1143
 msgid "Performance mode temporarily disabled."
 msgstr "Режим высокой производительности запрещён."
 
-#: panels/power/cc-power-panel.c:1197
+#: panels/power/cc-power-panel.c:1185
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4782,13 +4780,13 @@ msgstr ""
 "будет автоматически включён когда батарея будет заряжена."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1205
+#: panels/power/cc-power-panel.c:1193
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Режим низкого потребления активирован «%s»."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1209
+#: panels/power/cc-power-panel.c:1197
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Режим высокой производительности активирован «%s»."
@@ -4940,45 +4938,30 @@ msgstr "При работе от _батареи"
 msgid "Delay"
 msgstr "Задержка"
 
-#: panels/power/cc-power-profile-row.c:61
-msgid "Lap detected: performance mode unavailable"
-msgstr "Использование на коленях: режим высокой производительности не доступен"
-
-#: panels/power/cc-power-profile-row.c:63
-msgid "High hardware temperature: performance mode unavailable"
-msgstr ""
-"Высокая температура оборудования: режим высокой производительности не "
-"доступен"
-
-#: panels/power/cc-power-profile-row.c:64
-msgid "Performance mode unavailable"
-msgstr "Режим высокой производительности не доступен"
-
-#: panels/power/cc-power-profile-row.c:84
-#: panels/power/cc-power-profile-row.c:183
-msgid "High performance and power usage."
-msgstr "Высокая производительность и энергопотребление."
-
-#: panels/power/cc-power-profile-row.c:182
+#: panels/power/cc-power-profile-row.c:132
 msgctxt "Power profile"
 msgid "Performance"
 msgstr "Производительный"
 
-#: panels/power/cc-power-profile-row.c:186
+#: panels/power/cc-power-profile-row.c:133
+msgid "High performance and power usage."
+msgstr "Высокая производительность и энергопотребление."
+
+#: panels/power/cc-power-profile-row.c:136
 msgctxt "Power profile"
 msgid "Balanced"
 msgstr "Сбалансированный"
 
-#: panels/power/cc-power-profile-row.c:187
+#: panels/power/cc-power-profile-row.c:137
 msgid "Standard performance and power usage."
 msgstr "Стандартная производительность и энергопотребление."
 
-#: panels/power/cc-power-profile-row.c:190
+#: panels/power/cc-power-profile-row.c:140
 msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "Энергосберегающий"
 
-#: panels/power/cc-power-profile-row.c:191
+#: panels/power/cc-power-profile-row.c:141
 msgid "Reduced performance and power usage."
 msgstr "Уменьшенная производительность и энергопотребление."
 
@@ -5065,7 +5048,7 @@ msgstr "Добавить принтер"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:100
 #: panels/printers/new-printer-dialog.ui:115
-#: panels/wwan/cc-wwan-device-page.ui:89
+#: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "_Разблокировать"
 
@@ -5484,7 +5467,7 @@ msgstr "Без предварительной фильтрации"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
-#: panels/wwan/cc-wwan-details-dialog.ui:187
+#: panels/wwan/cc-wwan-details-dialog.ui:160
 msgid "Manufacturer"
 msgstr "Производитель"
 
@@ -5634,7 +5617,7 @@ msgid "Remove Printer"
 msgstr "Удалить принтер"
 
 #: panels/printers/printer-entry.ui:184
-#: panels/wwan/cc-wwan-details-dialog.ui:211
+#: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Модель"
 
@@ -5683,7 +5666,7 @@ msgstr "Форматы"
 #: panels/region/cc-format-chooser.ui:37
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
 #: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
-#: shell/cc-window.ui:150
+#: shell/cc-window.ui:154
 msgid "Back"
 msgstr "Назад"
 
@@ -8353,31 +8336,31 @@ msgstr "Отклонено"
 msgid "Modem Details"
 msgstr "Подробности о модеме"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:30
+#: panels/wwan/cc-wwan-details-dialog.ui:16
 msgid "Modem Status"
 msgstr "Состояние модема"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:48
+#: panels/wwan/cc-wwan-details-dialog.ui:25
 msgid "Carrier"
 msgstr "Оператор"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:72
+#: panels/wwan/cc-wwan-details-dialog.ui:49
 msgid "Network Type"
 msgstr "Тип сети"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:120
+#: panels/wwan/cc-wwan-details-dialog.ui:97
 msgid "Network Status"
 msgstr "Статус сети"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:145
+#: panels/wwan/cc-wwan-details-dialog.ui:122
 msgid "Own Number"
 msgstr "Собственный номер"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:170
+#: panels/wwan/cc-wwan-details-dialog.ui:151
 msgid "Device Details"
 msgstr "Сведения об устройстве"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:237
+#: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Версия прошивки"
 
@@ -8512,59 +8495,59 @@ msgstr "Код PIN должен состоять из от 4 до 8 цифр"
 msgid "Unlocking…"
 msgstr "Разблокировка…"
 
-#: panels/wwan/cc-wwan-device-page.ui:35
+#: panels/wwan/cc-wwan-device-page.ui:18
 msgid "No SIM"
 msgstr "SIM отсутствует"
 
-#: panels/wwan/cc-wwan-device-page.ui:45
+#: panels/wwan/cc-wwan-device-page.ui:19
 msgid "Insert a SIM card to use this modem"
 msgstr "Вставьте SIM карту для использования этого модема"
 
-#: panels/wwan/cc-wwan-device-page.ui:78
+#: panels/wwan/cc-wwan-device-page.ui:33
 msgid "SIM Locked"
 msgstr "SIM заблокирована"
 
-#: panels/wwan/cc-wwan-device-page.ui:136
+#: panels/wwan/cc-wwan-device-page.ui:77
 msgid "_Mobile Data"
 msgstr "_Мобильные данные"
 
-#: panels/wwan/cc-wwan-device-page.ui:137
+#: panels/wwan/cc-wwan-device-page.ui:78
 msgid "Access data using mobile network"
 msgstr "Доступ к данным с использованием мобильной сети"
 
-#: panels/wwan/cc-wwan-device-page.ui:147
+#: panels/wwan/cc-wwan-device-page.ui:88
 msgid "_Data Roaming"
 msgstr "_Роуминг данных"
 
-#: panels/wwan/cc-wwan-device-page.ui:148
+#: panels/wwan/cc-wwan-device-page.ui:89
 msgid "Use mobile data when roaming"
 msgstr "Используйте мобильные данный в роуминге"
 
-#: panels/wwan/cc-wwan-device-page.ui:169
+#: panels/wwan/cc-wwan-device-page.ui:115
 msgid "_Network Mode"
 msgstr "_Режим сети"
 
-#: panels/wwan/cc-wwan-device-page.ui:176
+#: panels/wwan/cc-wwan-device-page.ui:122
 msgid "N_etwork"
 msgstr "_Сеть"
 
-#: panels/wwan/cc-wwan-device-page.ui:186
+#: panels/wwan/cc-wwan-device-page.ui:132
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: panels/wwan/cc-wwan-device-page.ui:208
+#: panels/wwan/cc-wwan-device-page.ui:146
 msgid "_Access Point Names"
 msgstr "_Имена точки доступа"
 
-#: panels/wwan/cc-wwan-device-page.ui:217
+#: panels/wwan/cc-wwan-device-page.ui:155
 msgid "_SIM Lock"
 msgstr "_Блокировка SIM"
 
-#: panels/wwan/cc-wwan-device-page.ui:218
+#: panels/wwan/cc-wwan-device-page.ui:156
 msgid "Lock SIM with PIN"
 msgstr "Заблокировать SIM карту PIN кодом"
 
-#: panels/wwan/cc-wwan-device-page.ui:227
+#: panels/wwan/cc-wwan-device-page.ui:165
 msgid "M_odem Details"
 msgstr "Подробности о _модеме"
 
@@ -8656,7 +8639,7 @@ msgstr "Неизвестная ошибка"
 msgid "Network Mode"
 msgstr "Режим сети"
 
-#: panels/wwan/cc-wwan-mode-dialog.ui:36
+#: panels/wwan/cc-wwan-mode-dialog.ui:39
 #: panels/wwan/cc-wwan-network-dialog.ui:146
 #: panels/wwan/cc-wwan-sim-lock-dialog.c:229
 msgid "_Set"
@@ -8798,7 +8781,7 @@ msgstr "Область для отображения"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[ПАНЕЛЬ] [АРГУМЕНТ…]"
 
-#: shell/cc-panel-list.ui:39 shell/cc-window.c:300
+#: shell/cc-panel-list.ui:39 shell/cc-window.c:288
 msgid "Privacy"
 msgstr "Конфиденциальность"
 
@@ -8814,11 +8797,11 @@ msgstr "Все параметры"
 msgid "Primary Menu"
 msgstr "Основное меню"
 
-#: shell/cc-window.ui:199
+#: shell/cc-window.ui:203
 msgid "Warning: Development Version"
 msgstr "Предупреждение: версия для разработки"
 
-#: shell/cc-window.ui:200
+#: shell/cc-window.ui:204
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -8828,7 +8811,7 @@ msgstr ""
 "разработки. Вы можете столкнуться с неправильным поведением системы, потерей "
 "данных и другими непредвиденными проблемами. "
 
-#: shell/cc-window.ui:211
+#: shell/cc-window.ui:215
 msgid "Help"
 msgstr "Справка"
 
@@ -8926,3 +8909,4 @@ msgstr[2] "%u входов"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системные звуки"
+
