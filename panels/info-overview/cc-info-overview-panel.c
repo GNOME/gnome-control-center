@@ -611,10 +611,12 @@ get_cpu_info (const glibtop_sysinfo *info)
 
       count = GPOINTER_TO_INT (value);
       cleanedup = info_cleanup ((const char *) key);
+      if (cpu->len != 0)
+        g_string_append_printf (cpu, " ");
       if (count > 1)
-        g_string_append_printf (cpu, "%s \303\227 %d ", cleanedup, count);
+        g_string_append_printf (cpu, "%s \303\227 %d", cleanedup, count);
       else
-        g_string_append_printf (cpu, "%s ", cleanedup);
+        g_string_append_printf (cpu, "%s", cleanedup);
     }
 
   return g_strdup (cpu->str);
