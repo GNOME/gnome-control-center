@@ -100,8 +100,13 @@ airplane_mode_changed_cb (GObject *source_object,
 			g_warning ("Failed to change Bluetooth killswitch state to %s: %s",
 				   state ? "on" : "off", error->message);
 	} else {
+		CcBluetoothPanel *self = user_data;
+
 		g_debug ("Changed Bluetooth killswitch state to %s",
 			 state ? "on" : "off");
+
+		if (!bluetooth_settings_widget_get_default_adapter_powered (self->settings_widget))
+			bluetooth_settings_widget_set_default_adapter_powered(self->settings_widget, TRUE);
 	}
 }
 
