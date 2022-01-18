@@ -54,7 +54,6 @@ struct _CcWindow
   GtkMessageDialog  *development_warning_dialog;
   AdwHeaderBar      *header;
   AdwLeaflet        *main_leaflet;
-  GtkBox            *panel_box;
   AdwHeaderBar      *panel_headerbar;
   CcPanelList       *panel_list;
   AdwWindowTitle    *panel_title_widget;
@@ -894,7 +893,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, main_leaflet);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_title_widget);
