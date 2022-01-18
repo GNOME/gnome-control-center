@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-01-16 12:22+0000\n"
-"PO-Revision-Date: 2022-01-16 16:23+0200\n"
+"POT-Creation-Date: 2022-01-18 17:08+0000\n"
+"PO-Revision-Date: 2022-01-18 23:24+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -343,6 +343,7 @@ msgstr "Очистити кеш…"
 msgid "Control various application permissions and settings"
 msgstr "Керування різними дозволами й налаштуваннями програм"
 
+#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in.in:16
 msgid "application;flatpak;permission;setting;"
@@ -355,7 +356,7 @@ msgstr "Виберіть зображення"
 #: panels/background/cc-background-chooser.c:296
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.c:1031
+#: panels/display/cc-display-panel.c:953
 #: panels/info-overview/cc-info-overview-panel.ui:198
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:123
@@ -443,41 +444,43 @@ msgstr "Змінити зображення тла або кольори інт�
 msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;"
 msgstr "Тло;Фон;Шпалери;Екран;Стільниця;Стиль;Світлий;Світла;Темний;Темна;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:26
+#: panels/bluetooth/cc-bluetooth-panel.ui:10
 msgid "No Bluetooth Found"
 msgstr "Немає знайдено жодного Bluetooth"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:36
+#: panels/bluetooth/cc-bluetooth-panel.ui:11
 msgid "Plug in a dongle to use Bluetooth."
 msgstr "Приєднайте пристрій для Bluetooth."
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:60
+#: panels/bluetooth/cc-bluetooth-panel.ui:17
 msgid "Bluetooth Turned Off"
 msgstr "Bluetooth вимкнено"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:70
+#: panels/bluetooth/cc-bluetooth-panel.ui:18
 msgid "Turn on to connect devices and receive file transfers."
 msgstr "Увімкніть, щоб під'єднати пристрої та одержати файли."
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:94
-msgid "Airplane Mode is on"
-msgstr "Режим «у літаку» ввімкнено"
+#: panels/bluetooth/cc-bluetooth-panel.ui:24
+#| msgid "Airplane Mode is on"
+msgid "Airplane Mode is On"
+msgstr "Режим польоту ввімкнено"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:104
+#: panels/bluetooth/cc-bluetooth-panel.ui:25
 msgid "Bluetooth is disabled when airplane mode is on."
-msgstr "Bluetooth вимкнено, коли режим «у літаку» ввімкнено."
+msgstr "Bluetooth вимкнено, коли режим польоту ввімкнено."
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:109
+#: panels/bluetooth/cc-bluetooth-panel.ui:28
 msgid "Turn Off Airplane Mode"
-msgstr "Вимкнути режим «у літаку»"
+msgstr "Вимкнути режим польоту"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:136
-msgid "Hardware Airplane Mode is on"
-msgstr "Апаратний режим «у літаку» ввімкнено"
+#: panels/bluetooth/cc-bluetooth-panel.ui:42
+#| msgid "Hardware Airplane Mode is on"
+msgid "Hardware Airplane Mode is On"
+msgstr "Апаратний режим польоту ввімкнено"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:146
+#: panels/bluetooth/cc-bluetooth-panel.ui:43
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
-msgstr "Вимкнути перемикання режиму «у літаку», щоб увімкнути Bluetooth."
+msgstr "Вимкніть режим польоту, щоб увімкнути Bluetooth."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
@@ -495,7 +498,6 @@ msgid "share;sharing;bluetooth;obex;"
 msgstr "оприлюднення;поділитись;блютуз;obex;"
 
 #: panels/camera/cc-camera-panel.ui:16
-#| msgid "Camera is turned off"
 msgid "Camera is Turned Off"
 msgstr "Камеру вимкнено"
 
@@ -504,9 +506,6 @@ msgid "No applications can capture photos or video."
 msgstr "Немає програм, які здатні знімати фотографії та відео."
 
 #: panels/camera/cc-camera-panel.ui:31
-#| msgid ""
-#| "Use of the camera allows applications to capture photos and video. "
-#| "Disabling the camera may cause some applications to not function properly."
 msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
 "the camera may cause some applications to not function properly.\n"
@@ -1229,7 +1228,7 @@ msgstr[2] "%d годин"
 msgstr[3] "%d година"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:955
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:846
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1546,123 +1545,123 @@ msgstr ""
 "екран;блокування;діагностика;крах;особисте;нещодавнє;тимчасове;tmp;індекс;"
 "назва;мережа;засвідчення;конфіденційність;"
 
-#: panels/display/cc-display-panel.c:1037
+#: panels/display/cc-display-panel.c:517
+#: panels/notifications/cc-notifications-panel.c:202
+#: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
+msgid "On"
+msgstr "Увімкнено"
+
+#: panels/display/cc-display-panel.c:519 panels/network/net-proxy.c:69
+#: panels/notifications/cc-notifications-panel.c:202
+#: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
+msgid "Off"
+msgstr "Вимкнено"
+
+#: panels/display/cc-display-panel.c:959
 #: panels/network/connection-editor/connection-editor.ui:21
 msgid "_Apply"
 msgstr "_Застосувати"
 
-#: panels/display/cc-display-panel.c:1052
+#: panels/display/cc-display-panel.c:974
 msgid "Apply Changes?"
 msgstr "Застосувати зміни?"
 
-#: panels/display/cc-display-panel.c:1056
+#: panels/display/cc-display-panel.c:978
 msgid "Changes Cannot be Applied"
 msgstr "Не вдалося застосувати зміни"
 
-#: panels/display/cc-display-panel.c:1057
+#: panels/display/cc-display-panel.c:979
 msgid "This could be due to hardware limitations."
 msgstr "Причиною можуть бути апаратні обмеження."
 
-#: panels/display/cc-display-panel.ui:30
-#: panels/display/gnome-display-panel.desktop.in.in:3
-msgid "Displays"
-msgstr "Дисплеї"
-
-#: panels/display/cc-display-panel.ui:50
-msgid "Display Mode"
-msgstr "Режим показу"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:216
-msgid "Join Displays"
-msgstr "З'єднання дисплеїв"
-
-#: panels/display/cc-display-panel.ui:106
-msgid "Mirror"
-msgstr "Відзеркалля"
-
-#: panels/display/cc-display-panel.ui:134
-msgid "Single Display"
-msgstr "Один дисплей"
-
-#: panels/display/cc-display-panel.ui:147
-msgid ""
-"Drag displays to match your physical display setup. Select a display to "
-"change its settings."
-msgstr ""
-"Перетягніть дисплеї, щоб зіставити налаштування вашого фізичного дисплея. "
-"Виберіть дисплей, щоб змінити його налаштування."
-
-#: panels/display/cc-display-panel.ui:169
-msgid "Contains top bar and Activities"
-msgstr "Містить верхню панель та меню «Діяльність»"
-
-#: panels/display/cc-display-panel.ui:170
-msgid "Primary Display"
-msgstr "Основний дисплей"
-
-#: panels/display/cc-display-panel.ui:181
+#: panels/display/cc-display-panel.ui:56
 msgid "Display Arrangement"
 msgstr "Розташування дисплеїв"
 
-#: panels/display/cc-display-panel.ui:247
-msgid "Active Display"
-msgstr "Активний дисплей"
+#: panels/display/cc-display-panel.ui:67
+#| msgid "Decouple Display"
+msgid "Multiple Displays"
+msgstr "Декілька дисплеїв"
 
-#: panels/display/cc-display-panel.ui:260
-msgid "Display Configuration"
-msgstr "Налаштування дисплея"
+#. 'Join' as in 'Join displays'
+#: panels/display/cc-display-panel.ui:76
+msgid "Join"
+msgstr ""
+"З'єднати"
+
+#: panels/display/cc-display-panel.ui:83
+msgid "Mirror"
+msgstr "Відзеркалля"
+
+#: panels/display/cc-display-panel.ui:96
+msgid "Contains top bar and Activities"
+msgstr "Містить верхню панель та меню «Діяльність»"
+
+#: panels/display/cc-display-panel.ui:97
+msgid "Primary Display"
+msgstr "Основний дисплей"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:279
+#: panels/display/cc-display-panel.ui:118
 #: panels/display/cc-night-light-page.ui:77
 msgid "Night Light"
 msgstr "Нічне світло"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Альбомна"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Портретна праворуч"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:116
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Портретна ліворуч"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:119
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Альбомна перевернута"
 
-#: panels/display/cc-display-settings.c:174
+#: panels/display/cc-display-settings.c:177
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Гц"
 
-#: panels/display/cc-display-settings.ui:14
+#: panels/display/cc-display-settings.ui:40
 msgctxt "display setting"
 msgid "Orientation"
 msgstr "Орієнтація"
 
-#: panels/display/cc-display-settings.ui:21
+#: panels/display/cc-display-settings.ui:47
 msgctxt "display setting"
 msgid "Resolution"
 msgstr "Роздільна здатність"
 
-#: panels/display/cc-display-settings.ui:28
+#: panels/display/cc-display-settings.ui:54
 msgid "Refresh Rate"
 msgstr "Частота оновлення"
 
-#: panels/display/cc-display-settings.ui:35
+#: panels/display/cc-display-settings.ui:61
 msgid "Adjust for TV"
 msgstr "Підкоригувати для телебачення"
 
-#: panels/display/cc-display-settings.ui:49
-#: panels/display/cc-display-settings.ui:64
+#: panels/display/cc-display-settings.ui:75
+#: panels/display/cc-display-settings.ui:90
 msgctxt "display setting"
 msgid "Scale"
 msgstr "Масштаб"
@@ -1748,6 +1747,10 @@ msgstr "По"
 #: panels/display/cc-night-light-page.ui:302
 msgid "Color Temperature"
 msgstr "Кольорова температура"
+
+#: panels/display/gnome-display-panel.desktop.in.in:3
+msgid "Displays"
+msgstr "Дисплеї"
 
 #: panels/display/gnome-display-panel.desktop.in.in:4
 msgid "Choose how to use connected monitors and projectors"
@@ -2405,7 +2408,6 @@ msgstr ""
 "Source;Lock;Volume;"
 
 #: panels/location/cc-location-panel.ui:15
-#| msgid "Location services turned off"
 msgid "Location Services Turned Off"
 msgstr "Служби даних місця перебування вимкнено"
 
@@ -2423,10 +2425,11 @@ msgid ""
 "\n"
 "Allow the applications below to determine your location."
 msgstr ""
-"Служба розташування дозволяє програмам дізнаватись ваше місце перебування. Точність даних буде вищою, якщо ввімкнути WiFi і мобільний зв'язок.\n"
+"Служба розташування дозволяє програмам дізнаватись ваше місце перебування. "
+"Точність даних буде вищою, якщо ввімкнути WiFi і мобільний зв'язок.\n"
 "\n"
-"Використано службу розташування Mozilla: <a href='https://location.services.mozilla."
-"com/privacy'>правила конфіденційності</a>\n"
+"Використано службу розташування Mozilla: <a href='https://location.services."
+"mozilla.com/privacy'>правила конфіденційності</a>\n"
 "\n"
 "Дозволити вказаним нижче програмам визначає ваше місце перебування."
 
@@ -2638,61 +2641,61 @@ msgstr "Захистіть ваш обмін повідомленнями"
 msgid "General"
 msgstr "Загальне"
 
-#: panels/mouse/cc-mouse-panel.ui:21
+#: panels/mouse/cc-mouse-panel.ui:14
 msgid "Primary Button"
 msgstr "Основна кнопка"
 
-#: panels/mouse/cc-mouse-panel.ui:22
+#: panels/mouse/cc-mouse-panel.ui:15
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Вказує порядок фізичних кнопок на мишці чи сенсорних пристроях."
 
-#: panels/mouse/cc-mouse-panel.ui:42 panels/sound/cc-balance-slider.ui:13
+#: panels/mouse/cc-mouse-panel.ui:29 panels/sound/cc-balance-slider.ui:13
 msgid "Left"
 msgstr "Ліва"
 
-#: panels/mouse/cc-mouse-panel.ui:49 panels/sound/cc-balance-slider.ui:15
+#: panels/mouse/cc-mouse-panel.ui:36 panels/sound/cc-balance-slider.ui:15
 msgid "Right"
 msgstr "Права"
 
-#: panels/mouse/cc-mouse-panel.ui:67
+#: panels/mouse/cc-mouse-panel.ui:50
 msgid "Mouse"
 msgstr "Миша"
 
-#: panels/mouse/cc-mouse-panel.ui:77
+#: panels/mouse/cc-mouse-panel.ui:53
 msgid "Mouse Speed"
 msgstr "Швидкість миші"
 
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:96 panels/mouse/cc-mouse-panel.ui:135
+#: panels/mouse/cc-mouse-panel.ui:69 panels/mouse/cc-mouse-panel.ui:96
 msgid "Natural Scrolling"
 msgstr "Природне гортання"
 
-#: panels/mouse/cc-mouse-panel.ui:97 panels/mouse/cc-mouse-panel.ui:136
+#: panels/mouse/cc-mouse-panel.ui:70 panels/mouse/cc-mouse-panel.ui:97
 msgid "Scrolling moves the content, not the view."
 msgstr "Гортання переміщує вміст, а не перегляд."
 
-#: panels/mouse/cc-mouse-panel.ui:113 panels/mouse/cc-mouse-panel.ui:123
+#: panels/mouse/cc-mouse-panel.ui:83 panels/mouse/cc-mouse-panel.ui:86
 msgid "Touchpad"
 msgstr "Сенсорний пристрій"
 
-#: panels/mouse/cc-mouse-panel.ui:148
+#: panels/mouse/cc-mouse-panel.ui:107
 msgid "Touchpad Speed"
 msgstr "Швидкість сенсору"
 
-#: panels/mouse/cc-mouse-panel.ui:167
+#: panels/mouse/cc-mouse-panel.ui:124
 msgid "Tap to Click"
 msgstr "Натиск для клацання"
 
-#: panels/mouse/cc-mouse-panel.ui:180
+#: panels/mouse/cc-mouse-panel.ui:135
 msgid "Two-finger Scrolling"
 msgstr "Гортання двома пальцями"
 
-#: panels/mouse/cc-mouse-panel.ui:194
+#: panels/mouse/cc-mouse-panel.ui:147
 msgid "Edge Scrolling"
 msgstr "Гортання на краях"
 
-#: panels/mouse/cc-mouse-panel.ui:221 panels/wacom/cc-wacom-panel.c:491
+#: panels/mouse/cc-mouse-panel.ui:171 panels/wacom/cc-wacom-panel.c:491
 msgid "Test Your _Settings"
 msgstr "Випробувати ваші _параметри"
 
@@ -3625,17 +3628,6 @@ msgstr "Системна політика забороняє використо�
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Бездротовий пристрій не підтримує режиму гарячої точки"
 
-#: panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:202
-#: panels/power/cc-power-panel.c:837 panels/power/cc-power-panel.c:848
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
-msgid "Off"
-msgstr "Вимкнено"
-
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: panels/network/net-proxy.c:112
 msgid ""
@@ -4446,16 +4438,6 @@ msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Показувати в_міст повідомлення в заблокованому екрані"
 
-#: panels/notifications/cc-notifications-panel.c:202
-#: panels/power/cc-power-panel.c:843 panels/power/cc-power-panel.c:850
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
-msgid "On"
-msgstr "Увімкнено"
-
 #: panels/notifications/cc-notifications-panel.ui:17
 msgid "_Do Not Disturb"
 msgstr "_Не турбувати"
@@ -4473,29 +4455,52 @@ msgstr "Вказує які сповіщення показуються і що 
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Сповіщення;Шапка;Повідомлення;Лоток;Контекстний;"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:148
+#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
+#. * or rishi).
+#.
+#: panels/online-accounts/cc-online-accounts-panel.c:277
+#, c-format
+msgid "%s removed"
+msgstr "%s вилучений"
+
+#: panels/online-accounts/cc-online-accounts-panel.c:406
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Інше"
 
+#: panels/online-accounts/cc-online-accounts-panel.c:803
+msgid "Error removing account"
+msgstr "Помилка вилучення облікового запису"
+
+#. Translators: This is the button which allows undoing the removal of the printer.
+#: panels/online-accounts/cc-online-accounts-panel.ui:23
+#: panels/printers/printers.ui:51
+msgid "Undo"
+msgstr "Повернути"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:55
+msgid "Connect to your data in the cloud"
+msgstr "З'єднати ваші дані з хмарою"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:66
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"Немає інтернету — з'єднайтеся з мережею, щоб створювати облікові записи"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:92
+msgid "Add an account"
+msgstr "Додати обліковий запис"
+
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:576
+#: panels/online-accounts/gnome-control-center-goa-helper.c:426
 #, c-format
 msgid "%s Account"
 msgstr "Обліковий запис %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:870
-msgid "Error removing account"
-msgstr "Помилка вилучення облікового запису"
-
-#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
-#. * or rishi).
-#.
-#: panels/online-accounts/cc-online-accounts-panel.c:936
-#, c-format
-msgid "%s removed"
-msgstr "%s вилучений"
+#: panels/online-accounts/gnome-control-center-goa-helper.c:429
+msgid "Remove Account"
+msgstr "Вилучити обліковий запис"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:3
 msgid "Online Accounts"
@@ -4518,28 +4523,6 @@ msgid ""
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Інтернет;Мережа;Балачка;Календар;Пошта;Контакт;"
 "ownCloud;IMAP;SMTP;Pocket;ReadItLater;"
-
-#. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/online-accounts/online-accounts.ui:38 panels/printers/printers.ui:51
-msgid "Undo"
-msgstr "Повернути"
-
-#: panels/online-accounts/online-accounts.ui:94
-msgid "Connect to your data in the cloud"
-msgstr "З'єднати ваші дані з хмарою"
-
-#: panels/online-accounts/online-accounts.ui:109
-msgid "No internet connection — connect to set up new online accounts"
-msgstr ""
-"Немає інтернету — з'єднайтеся з мережею, щоб створювати облікові записи"
-
-#: panels/online-accounts/online-accounts.ui:134
-msgid "Add an account"
-msgstr "Додати обліковий запис"
-
-#: panels/online-accounts/online-accounts.ui:223
-msgid "Remove Account"
-msgstr "Вилучити обліковий запис"
 
 #: panels/power/cc-battery-row.c:80
 msgid "Unknown time"
@@ -4675,7 +4658,7 @@ msgid "Gaming input device"
 msgstr "Ігровий пристрій введення"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:359
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
 #: panels/power/cc-power-panel.ui:59
 msgid "Battery"
 msgstr "Батарея"
@@ -4690,55 +4673,55 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Додаткова"
 
-#: panels/power/cc-power-panel.c:357
+#: panels/power/cc-power-panel.c:255
 msgid "Batteries"
 msgstr "Батареї"
 
-#: panels/power/cc-power-panel.c:620
+#: panels/power/cc-power-panel.c:511
 msgid "When _idle"
 msgstr "Коли _бездіяльний"
 
-#: panels/power/cc-power-panel.c:780
+#: panels/power/cc-power-panel.c:671
 msgid "Suspend"
 msgstr "Призупинити"
 
-#: panels/power/cc-power-panel.c:781
+#: panels/power/cc-power-panel.c:672
 msgid "Power Off"
 msgstr "Вимкнути"
 
-#: panels/power/cc-power-panel.c:782
+#: panels/power/cc-power-panel.c:673
 msgid "Hibernate"
 msgstr "Приспати"
 
-#: panels/power/cc-power-panel.c:783
+#: panels/power/cc-power-panel.c:674
 msgid "Nothing"
 msgstr "Нічого"
 
-#: panels/power/cc-power-panel.c:839
+#: panels/power/cc-power-panel.c:730
 msgid "When on battery power"
 msgstr "Коли живлення від батареї"
 
-#: panels/power/cc-power-panel.c:841
+#: panels/power/cc-power-panel.c:732
 msgid "When plugged in"
 msgstr "Коли під'єднано"
 
-#: panels/power/cc-power-panel.c:962
+#: panels/power/cc-power-panel.c:853
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Ніколи"
 
-#: panels/power/cc-power-panel.c:1046
+#: panels/power/cc-power-panel.c:937
 msgid "Automatic suspend"
 msgstr "Автоматично призупиняти роботу"
 
-#: panels/power/cc-power-panel.c:1139
+#: panels/power/cc-power-panel.c:1030
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Режим підвищеної швидкодії тимчасово вимкнено через високу операційну "
 "температуру."
 
-#: panels/power/cc-power-panel.c:1141
+#: panels/power/cc-power-panel.c:1032
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4747,11 +4730,11 @@ msgstr ""
 "тимчасово недоступний. Перенесіть пристрій на стабільну поверхню, щоб "
 "відновити доступ."
 
-#: panels/power/cc-power-panel.c:1143
+#: panels/power/cc-power-panel.c:1034
 msgid "Performance mode temporarily disabled."
 msgstr "Режим підвищеної швидкодії тимчасово вимкнено."
 
-#: panels/power/cc-power-panel.c:1185
+#: panels/power/cc-power-panel.c:1076
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4760,13 +4743,13 @@ msgstr ""
 "режим буде відновлено за достатнього рівня заряду акумулятора."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1193
+#: panels/power/cc-power-panel.c:1084
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Режим заощадження енергії активовано «%s»."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1197
+#: panels/power/cc-power-panel.c:1088
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Режим високої швидкодії активовано «%s»."
@@ -8884,6 +8867,28 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Display Mode"
+#~ msgstr "Режим показу"
+
+#~ msgid "Join Displays"
+#~ msgstr "З'єднання дисплеїв"
+
+#~ msgid "Single Display"
+#~ msgstr "Один дисплей"
+
+#~ msgid ""
+#~ "Drag displays to match your physical display setup. Select a display to "
+#~ "change its settings."
+#~ msgstr ""
+#~ "Перетягніть дисплеї, щоб зіставити налаштування вашого фізичного дисплея. "
+#~ "Виберіть дисплей, щоб змінити його налаштування."
+
+#~ msgid "Active Display"
+#~ msgstr "Активний дисплей"
+
+#~ msgid "Display Configuration"
+#~ msgstr "Налаштування дисплея"
 
 #~ msgid "Allow the applications below to use your camera."
 #~ msgstr "Дозволити вказаним нижче програмам доступ до камери."
