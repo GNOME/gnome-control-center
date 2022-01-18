@@ -24,44 +24,40 @@
 #include "cc-default-apps-panel.h"
 #include "cc-default-apps-resources.h"
 
+#include <glib/gi18n.h>
+
 typedef struct
 {
   const char *content_type;
-  gint label_offset;
   /* Patterns used to filter supported mime types
      when changing preferred applications. NULL
      means no other types should be changed */
   const char *extra_type_filter;
+  const char *label;
 } DefaultAppData;
 
 struct _CcDefaultAppsPanel
 {
   CcPanel    parent_instance;
 
-  GtkWidget *default_apps_grid;
-
-  GtkWidget *web_label;
-  GtkWidget *mail_label;
-  GtkWidget *calendar_label;
-  GtkWidget *music_label;
-  GtkWidget *video_label;
-  GtkWidget *photos_label;
+  AdwPreferencesGroup *group;
 };
 
 
 G_DEFINE_TYPE (CcDefaultAppsPanel, cc_default_apps_panel, CC_TYPE_PANEL)
 
 static void
-default_app_changed (CcDefaultAppsPanel  *self,
-                     GtkAppChooserButton *button)
+on_combo_row_selected_item_changedc_cb (AdwComboRow        *combo_row,
+                                        GParamSpec         *pspec,
+                                        CcDefaultAppsPanel *self)
 {
   g_autoptr(GAppInfo) info = NULL;
   g_autoptr(GError) error = NULL;
   DefaultAppData *app_data;
   int i;
 
-  info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (button));
-  app_data = g_object_get_data (G_OBJECT (button), "cc-default-app-data");
+  info = adw_combo_row_get_selected_item (combo_row);
+  app_data = g_object_get_data (G_OBJECT (combo_row), "cc-default-app-data");
 
   if (g_app_info_set_as_default_for_type (info, app_data->content_type, &error) == FALSE)
     {
@@ -119,38 +115,120 @@ default_app_changed (CcDefaultAppsPanel  *self,
     }
 }
 
+static GListModel*
+get_model_for_content_type (const char *content_type)
+{
+  g_autolist(GAppInfo) recommended_apps = NULL;
+  g_autoptr(GListStore) store = NULL;
+  g_autoptr(GAppInfo) default_app = NULL;
+  GList *l;
+
+  store = g_list_store_new (G_TYPE_APP_INFO);
+
+  default_app = g_app_info_get_default_for_type (content_type, FALSE);
+  if (default_app)
+    g_list_store_append (store, default_app);
+
+  recommended_apps = g_app_info_get_recommended_for_type (content_type);
+  for (l = recommended_apps; l; l = l->next)
+    {
+      if (default_app && g_app_info_equal (default_app, l->data))
+        continue;
+
+      g_list_store_append (store, l->data);
+    }
+
+  return G_LIST_MODEL (g_steal_pointer (&store));
+}
+
+static void
+on_signal_item_factory_setup_cb (GtkSignalListItemFactory *factory,
+                                 GtkListItem              *item,
+                                 gpointer                  user_data)
+{
+  GtkWidget *box, *icon, *label;
+
+  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
+
+  icon = gtk_image_new ();
+  g_object_set_data (G_OBJECT (box), "icon", icon);
+  gtk_box_append (GTK_BOX (box), icon);
+
+  label = gtk_label_new ("");
+  g_object_set_data (G_OBJECT (box), "label", label);
+  gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
+  gtk_label_set_xalign (GTK_LABEL (label), 0.0);
+  gtk_box_append (GTK_BOX (box), label);
+
+  gtk_list_item_set_child (item, box);
+}
+
+static void
+on_signal_item_factory_bind_cb (GtkSignalListItemFactory *factory,
+                                GtkListItem              *item,
+                                gpointer                  user_data)
+{
+  GtkWidget *box, *icon, *label;
+  GAppInfo *app_info;
+
+  box = gtk_list_item_get_child (item);
+  icon = g_object_get_data (G_OBJECT (box), "icon");
+  label = g_object_get_data (G_OBJECT (box), "label");
+
+  app_info = G_APP_INFO (gtk_list_item_get_item (item));
+  gtk_label_set_label (GTK_LABEL (label), g_app_info_get_name (app_info));
+  gtk_image_set_from_gicon (GTK_IMAGE (icon), g_app_info_get_icon (app_info));
+}
+
+static GtkListItemFactory*
+create_app_info_factory (void)
+{
+  g_autoptr(GtkListItemFactory) factory = NULL;
+
+  factory = gtk_signal_list_item_factory_new ();
+  g_signal_connect (factory, "setup", G_CALLBACK (on_signal_item_factory_setup_cb), NULL);
+  g_signal_connect (factory, "bind", G_CALLBACK (on_signal_item_factory_bind_cb), NULL);
+
+  return g_steal_pointer (&factory);
+}
+
 #define OFFSET(x)             (G_STRUCT_OFFSET (CcDefaultAppsPanel, x))
 #define WIDGET_FROM_OFFSET(x) (G_STRUCT_MEMBER (GtkWidget*, self, x))
 
 static void
 info_panel_setup_default_app (CcDefaultAppsPanel *self,
-                              DefaultAppData     *data,
-                              guint               left_attach,
-                              guint               top_attach)
+                              DefaultAppData     *data)
 {
-  GtkWidget *button;
-  GtkWidget *label;
+  g_autoptr(GtkListItemFactory) factory = NULL;
+  g_autoptr(GListModel) apps_list = NULL;
+  GtkWidget *row;
 
-  button = gtk_app_chooser_button_new (data->content_type);
-  g_object_set_data (G_OBJECT (button), "cc-default-app-data", data);
+  row = adw_combo_row_new ();
+  g_object_set_data (G_OBJECT (row), "cc-default-app-data", data);
+  adw_preferences_row_set_use_underline (ADW_PREFERENCES_ROW (row), TRUE);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
+                                 _(data->label));
+  adw_preferences_group_add (self->group, row);
 
-  gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
-  gtk_grid_attach (GTK_GRID (self->default_apps_grid), button, left_attach, top_attach,
-                   1, 1);
-  g_signal_connect_object (G_OBJECT (button), "changed",
-                           G_CALLBACK (default_app_changed), self, G_CONNECT_SWAPPED);
+  factory = create_app_info_factory ();
+  adw_combo_row_set_factory (ADW_COMBO_ROW (row), factory);
 
-  label = WIDGET_FROM_OFFSET (data->label_offset);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
+  apps_list = get_model_for_content_type (data->content_type);
+  adw_combo_row_set_model (ADW_COMBO_ROW (row), apps_list);
+
+  g_signal_connect (row,
+                    "notify::selected-item",
+                    G_CALLBACK (on_combo_row_selected_item_changedc_cb),
+                    self);
 }
 
 static DefaultAppData preferred_app_infos[] = {
-  { "x-scheme-handler/http", OFFSET (web_label), "text/html;application/xhtml+xml;x-scheme-handler/https" },
-  { "x-scheme-handler/mailto", OFFSET (mail_label), NULL },
-  { "text/calendar", OFFSET (calendar_label), NULL },
-  { "audio/x-vorbis+ogg", OFFSET (music_label), "audio/*" },
-  { "video/x-ogm+ogg", OFFSET (video_label), "video/*" },
-  { "image/jpeg", OFFSET (photos_label), "image/*" }
+  { "x-scheme-handler/http", "text/html;application/xhtml+xml;x-scheme-handler/https", N_("_Web") },
+  { "x-scheme-handler/mailto", NULL, N_("_Mail") },
+  { "text/calendar", NULL, N_("_Calendar") },
+  { "audio/x-vorbis+ogg", "audio/*", N_("M_usic") },
+  { "video/x-ogm+ogg", "video/*", N_("_Video") },
+  { "image/jpeg", "image/*", N_("_Photos") }
 };
 
 static void
@@ -159,10 +237,7 @@ info_panel_setup_default_apps (CcDefaultAppsPanel *self)
   int i;
 
   for (i = 0; i < G_N_ELEMENTS (preferred_app_infos); i++)
-    {
-      info_panel_setup_default_app (self, &preferred_app_infos[i],
-                                    1, i);
-    }
+    info_panel_setup_default_app (self, &preferred_app_infos[i]);
 }
 
 static void
@@ -171,13 +246,7 @@ cc_default_apps_panel_class_init (CcDefaultAppsPanelClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/default-apps/cc-default-apps-panel.ui");
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, default_apps_grid);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, web_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, mail_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calendar_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, music_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, video_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, photos_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, group);
 }
 
 static void
