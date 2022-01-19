@@ -150,12 +150,3 @@ cc_shell_get_toplevel (CcShell *shell)
 
   return NULL;
 }
-
-void
-cc_shell_set_custom_titlebar (CcShell   *self,
-                              GtkWidget *titlebar)
-{
-  g_return_if_fail (CC_IS_SHELL (self));
-
-  CC_SHELL_GET_IFACE (self)->set_custom_titlebar (self, titlebar);
-}

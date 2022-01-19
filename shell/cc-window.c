@@ -150,9 +150,6 @@ activate_panel (CcWindow          *self,
   if (visibility == CC_PANEL_HIDDEN)
     CC_RETURN (FALSE);
 
-  /* clear any custom widgets */
-  cc_shell_set_custom_titlebar (CC_SHELL (self), NULL);
-
   timer = g_timer_new ();
 
   g_settings_set_string (self->settings, "last-panel", id);
@@ -610,34 +607,10 @@ cc_window_get_toplevel (CcShell *self)
 }
 
 static void
-cc_window_set_custom_titlebar (CcShell   *shell,
-                               GtkWidget *titlebar)
-{
-  CcWindow *self = CC_WINDOW (shell);
-
-  /* Remove the current custom titlebar */
-  if (self->custom_titlebar)
-    {
-      gtk_stack_set_visible_child (self->panel_titlebar_stack,
-                                   GTK_WIDGET (self->panel_headerbar));
-      gtk_stack_remove (self->panel_titlebar_stack, self->custom_titlebar);
-    }
-
-  g_set_object (&self->custom_titlebar, titlebar);
-
-  if (titlebar)
-    {
-      gtk_stack_add_named (self->panel_titlebar_stack, titlebar,  "custom");
-      gtk_stack_set_visible_child (self->panel_titlebar_stack, titlebar);
-    }
-}
-
-static void
 cc_shell_iface_init (CcShellInterface *iface)
 {
   iface->set_active_panel_from_id = cc_window_set_active_panel_from_id;
   iface->get_toplevel = cc_window_get_toplevel;
-  iface->set_custom_titlebar = cc_window_set_custom_titlebar;
 }
 
 /* GtkWidget overrides */
