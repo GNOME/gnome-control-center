@@ -54,9 +54,6 @@ struct _CcShellInterface
                                            GVariant     *parameters,
                                            GError      **error);
   GtkWidget * (*get_toplevel)             (CcShell      *shell);
-  void        (*embed_widget_in_header)   (CcShell         *shell,
-                                           GtkWidget       *widget,
-                                           GtkPositionType  position);
   void        (*set_custom_titlebar)      (CcShell      *self,
                                            GtkWidget    *titlebar);
 };
@@ -71,10 +68,6 @@ gboolean        cc_shell_set_active_panel_from_id (CcShell      *shell,
                                                    GVariant     *parameters,
                                                    GError      **error);
 GtkWidget *     cc_shell_get_toplevel             (CcShell      *shell);
-
-void            cc_shell_embed_widget_in_header   (CcShell         *shell,
-                                                   GtkWidget       *widget,
-                                                   GtkPositionType  position);
 
 void            cc_shell_set_custom_titlebar      (CcShell      *self,
                                                    GtkWidget    *titlebar);

@@ -72,7 +72,6 @@ struct _CcWindow
   char       *current_panel_id;
   GQueue     *previous_panels;
 
-  GPtrArray  *custom_widgets;
   GtkWidget  *custom_titlebar;
 
   CcShellModel *store;
@@ -126,30 +125,6 @@ in_flatpak_sandbox (void)
 }
 
 static void
-remove_all_custom_widgets (CcWindow *self)
-{
-  guint i;
-
-  CC_ENTRY;
-
-  /* remove from the header */
-  for (i = 0; i < self->custom_widgets->len; i++)
-    {
-      GtkWidget *parent;
-      GtkWidget *widget;
-
-      widget = g_ptr_array_index (self->custom_widgets, i);
-      parent = gtk_widget_get_parent (widget);
-
-      g_assert (parent == GTK_WIDGET (self->top_right_box) || parent == GTK_WIDGET (self->top_left_box));
-      gtk_box_remove (GTK_BOX (parent), widget);
-    }
-  g_ptr_array_set_size (self->custom_widgets, 0);
-
-  CC_EXIT;
-}
-
-static void
 on_sidebar_activated_cb (CcWindow *self)
 {
   adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_FORWARD);
@@ -176,7 +151,6 @@ activate_panel (CcWindow          *self,
     CC_RETURN (FALSE);
 
   /* clear any custom widgets */
-  remove_all_custom_widgets (self);
   cc_shell_set_custom_titlebar (CC_SHELL (self), NULL);
 
   timer = g_timer_new ();
@@ -629,38 +603,6 @@ cc_window_set_active_panel_from_id (CcShell      *shell,
   return set_active_panel_from_id (CC_WINDOW (shell), start_id, parameters, TRUE, TRUE, error);
 }
 
-static void
-cc_window_embed_widget_in_header (CcShell         *shell,
-                                  GtkWidget       *widget,
-                                  GtkPositionType  position)
-{
-  CcWindow *self = CC_WINDOW (shell);
-
-  CC_ENTRY;
-
-  /* add to header */
-  switch (position)
-    {
-    case GTK_POS_RIGHT:
-      gtk_box_append (self->top_right_box, widget);
-      break;
-
-    case GTK_POS_LEFT:
-      gtk_box_append (self->top_left_box, widget);
-      break;
-
-    case GTK_POS_TOP:
-    case GTK_POS_BOTTOM:
-    default:
-      g_warning ("Invalid position passed");
-      return;
-    }
-
-  g_ptr_array_add (self->custom_widgets, g_object_ref (widget));
-
-  CC_EXIT;
-}
-
 static GtkWidget *
 cc_window_get_toplevel (CcShell *self)
 {
@@ -694,7 +636,6 @@ static void
 cc_shell_iface_init (CcShellInterface *iface)
 {
   iface->set_active_panel_from_id = cc_window_set_active_panel_from_id;
-  iface->embed_widget_in_header = cc_window_embed_widget_in_header;
   iface->get_toplevel = cc_window_get_toplevel;
   iface->set_custom_titlebar = cc_window_set_custom_titlebar;
 }
@@ -826,7 +767,6 @@ cc_window_dispose (GObject *object)
   CcWindow *self = CC_WINDOW (object);
 
   g_clear_pointer (&self->current_panel_id, g_free);
-  g_clear_pointer (&self->custom_widgets, g_ptr_array_unref);
   g_clear_object (&self->store);
   g_clear_object (&self->active_panel);
 
@@ -929,7 +869,6 @@ cc_window_init (CcWindow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->settings = g_settings_new ("org.gnome.ControlCenter");
-  self->custom_widgets = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
   self->previous_panels = g_queue_new ();
   self->previous_list_view = cc_panel_list_get_view (self->panel_list);
 
