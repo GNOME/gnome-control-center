@@ -82,23 +82,22 @@ struct _CcDisplayPanel
 
   GDBusProxy *shell_proxy;
 
-  gchar     *main_title;
-  GtkWidget *apply_titlebar;
-  GtkWidget *apply_titlebar_apply;
-  GtkWidget *apply_titlebar_cancel;
-  GtkWidget *apply_titlebar_warning;
+  GtkWidget      *apply_titlebar;
+  GtkWidget      *apply_button;
+  GtkWidget      *cancel_button;
+  AdwWindowTitle *apply_titlebar_title_widget;
 
   GListStore     *primary_display_list;
   GList          *monitor_rows;
 
   GtkWidget      *arrangement_group;
   AdwBin         *arrangement_bin;
-  GtkWidget      *back_button;
   GtkToggleButton *config_type_join;
   GtkToggleButton *config_type_mirror;
   GtkWidget      *config_type_switcher_row;
   AdwBin         *display_settings_bin;
   GtkWidget      *display_settings_group;
+  AdwWindowTitle *display_settings_title_widget;
   AdwLeaflet     *leaflet;
   AdwComboRow    *primary_display_row;
   AdwPreferencesGroup *single_display_settings_group;
@@ -123,6 +122,8 @@ static void
 set_current_output (CcDisplayPanel   *panel,
                     CcDisplayMonitor *output,
                     gboolean          force);
+static void
+on_screen_changed (CcDisplayPanel *panel);
 
 
 static CcDisplayConfigType
@@ -392,17 +393,9 @@ dialog_toplevel_focus_changed (CcDisplayPanel *self)
 static void
 reset_titlebar (CcDisplayPanel *self)
 {
-  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
-
   gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->toplevel_shortcuts),
                                               GTK_PHASE_NONE);
-
-  cc_shell_set_custom_titlebar (shell, NULL);
-
-  g_clear_object (&self->apply_titlebar);
-  g_clear_object (&self->apply_titlebar_apply);
-  g_clear_object (&self->apply_titlebar_cancel);
-  g_clear_object (&self->apply_titlebar_warning);
+  gtk_widget_hide (self->apply_titlebar);
 }
 
 static void
@@ -545,16 +538,6 @@ on_primary_display_selected_index_changed_cb (CcDisplayPanel *panel)
 }
 
 static void
-on_stack_visible_child_name_changed_cb (GtkStack       *stack,
-                                        GParamSpec     *pspec,
-                                        CcDisplayPanel *self)
-{
-  const gchar *visible_child_name = adw_leaflet_get_visible_child_name (self->leaflet);
-
-  gtk_widget_set_visible (self->back_button, g_strcmp0 (visible_child_name, "displays") != 0);
-}
-
-static void
 on_toplevel_folded (CcDisplayPanel *panel, GParamSpec *pspec, GtkWidget *toplevel)
 {
   gboolean folded;
@@ -568,9 +551,9 @@ on_toplevel_escape_pressed_cb (GtkWidget      *widget,
                                GVariant       *args,
                                CcDisplayPanel *self)
 {
-  if (self->apply_titlebar_cancel)
+  if (gtk_widget_get_visible (self->apply_titlebar))
     {
-      g_signal_emit_by_name (self->apply_titlebar_cancel, "activate");
+      gtk_widget_activate (self->cancel_button);
       return GDK_EVENT_STOP;
     }
 
@@ -614,14 +597,18 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/display/cc-display-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_titlebar);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_titlebar_title_widget);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, back_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, cancel_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_switcher_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_join);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, config_type_mirror);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_group);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_title_widget);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, leaflet);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
@@ -630,12 +617,13 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, single_display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toplevel_shortcuts);
 
+  gtk_widget_class_bind_template_callback (widget_class, apply_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_config_type_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_night_light_list_box_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_night_light_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_index_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_stack_visible_child_name_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_screen_changed);
   gtk_widget_class_bind_template_callback (widget_class, on_toplevel_escape_pressed_cb);
 }
 
@@ -673,6 +661,9 @@ on_monitor_row_activated_cb (GtkListBoxRow  *row,
 
   monitor = g_object_get_data (G_OBJECT (row), "monitor");
   set_current_output (self, monitor, FALSE);
+
+  adw_window_title_set_title (self->display_settings_title_widget,
+                              cc_display_monitor_get_ui_name (monitor));
 
   adw_leaflet_set_visible_child_name (self->leaflet, "display-settings");
 }
@@ -932,51 +923,21 @@ on_screen_changed (CcDisplayPanel *panel)
 static void
 show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
 {
-  GtkWidget *title;
-
-  if (!panel->apply_titlebar)
-    {
-      g_autoptr(GtkSizeGroup) size_group = NULL;
-      GtkWidget *header, *button;
-      CcShell *shell;
-
-      shell = cc_panel_get_shell (CC_PANEL (panel));
-
-      panel->apply_titlebar = header = gtk_header_bar_new ();
-      gtk_header_bar_set_show_title_buttons (GTK_HEADER_BAR (header), FALSE);
-
-      size_group = gtk_size_group_new (GTK_SIZE_GROUP_VERTICAL);
-
-      panel->apply_titlebar_cancel = button = gtk_button_new_with_mnemonic (_("_Cancel"));
-      gtk_header_bar_pack_start (GTK_HEADER_BAR (header), button);
-      gtk_size_group_add_widget (size_group, button);
-      g_signal_connect_object (button, "clicked", G_CALLBACK (on_screen_changed),
-                               panel, G_CONNECT_SWAPPED);
-
-      panel->apply_titlebar_apply = button = gtk_button_new_with_mnemonic (_("_Apply"));
-      gtk_header_bar_pack_end (GTK_HEADER_BAR (header), button);
-      gtk_size_group_add_widget (size_group, button);
-      g_signal_connect_object (button, "clicked", G_CALLBACK (apply_current_configuration),
-                               panel, G_CONNECT_SWAPPED);
-      gtk_widget_add_css_class (button, "suggested-action");
-
-      cc_shell_set_custom_titlebar (shell, panel->apply_titlebar);
-      g_object_ref (panel->apply_titlebar);
-      g_object_ref (panel->apply_titlebar_apply);
-      g_object_ref (panel->apply_titlebar_cancel);
-    }
+  gtk_widget_show (panel->apply_titlebar);
+  gtk_widget_set_sensitive (panel->apply_button, is_applicable);
 
   if (is_applicable)
     {
-      title = adw_window_title_new (_("Apply Changes?"), NULL);
+      adw_window_title_set_title (panel->apply_titlebar_title_widget,
+                                  _("Apply Changes?"));
     }
   else
     {
-      title = adw_window_title_new (_("Changes Cannot be Applied"),
-                                    _("This could be due to hardware limitations."));
+      adw_window_title_set_title (panel->apply_titlebar_title_widget,
+                                  _("Changes Cannot be Applied"));
+      adw_window_title_set_subtitle (panel->apply_titlebar_title_widget,
+                                  _("This could be due to hardware limitations."));
     }
-  gtk_header_bar_set_title_widget (GTK_HEADER_BAR (panel->apply_titlebar), title);
-  gtk_widget_set_sensitive (panel->apply_titlebar_apply, is_applicable);
 
   gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (panel->toplevel_shortcuts),
                                               GTK_PHASE_BUBBLE);
