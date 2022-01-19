@@ -43,6 +43,7 @@ void     cc_panel_loader_fill_model     (CcShellModel  *model);
 void     cc_panel_loader_list_panels    (void);
 CcPanel *cc_panel_loader_load_by_name   (CcShell       *shell,
                                          const char    *name,
+                                         const gchar   *title,
                                          GVariant      *parameters);
 
 void    cc_panel_loader_override_vtable (CcPanelLoaderVtable *override_vtable,

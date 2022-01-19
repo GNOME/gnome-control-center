@@ -45,6 +45,7 @@ typedef struct
   CcShell      *shell;
   GCancellable *cancellable;
   gboolean      folded;
+  gchar        *title;
 } CcPanelPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (CcPanel, cc_panel, ADW_TYPE_BIN)
@@ -61,6 +62,7 @@ enum
   PROP_SHELL,
   PROP_PARAMETERS,
   PROP_FOLDED,
+  PROP_TITLE,
   N_PROPS
 };
 
@@ -112,6 +114,10 @@ cc_panel_set_property (GObject      *object,
         break;
       }
 
+    case PROP_TITLE:
+      priv->title = g_value_dup_string (value);
+      break;
+
     case PROP_FOLDED:
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
@@ -137,6 +143,10 @@ cc_panel_get_property (GObject    *object,
       g_value_set_boolean (value, priv->folded);
       break;
 
+    case PROP_TITLE:
+      g_value_set_string (value, priv->title);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -150,6 +160,8 @@ cc_panel_finalize (GObject *object)
 
   g_cancellable_cancel (priv->cancellable);
   g_clear_object (&priv->cancellable);
+
+  g_clear_pointer (&priv->title, g_free);
 
   G_OBJECT_CLASS (cc_panel_parent_class)->finalize (object);
 }
@@ -186,6 +198,9 @@ cc_panel_class_init (CcPanelClass *klass)
                                                       G_VARIANT_TYPE ("av"),
                                                       NULL,
                                                       G_PARAM_WRITABLE | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_TITLE] = g_param_spec_string ("title", NULL, NULL, NULL,
+                                                G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
 }
