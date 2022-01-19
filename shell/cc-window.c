@@ -480,6 +480,17 @@ switch_to_previous_panel (CcWindow *self)
 }
 
 /* Callbacks */
+
+static void
+navigate_action_cb (GtkWidget   *widget,
+                    const gchar *action_name,
+                    GVariant    *parameter)
+{
+  CcWindow *self = CC_WINDOW (widget);
+
+  adw_leaflet_navigate (self->main_leaflet, g_variant_get_int32 (parameter));
+}
+
 static void
 on_main_leaflet_folded_changed_cb (CcWindow *self)
 {
@@ -810,6 +821,8 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Q, GDK_CONTROL_MASK, "window.close", NULL);
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_w, GDK_CONTROL_MASK, "window.close", NULL);
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_W, GDK_CONTROL_MASK, "window.close", NULL);
+
+  gtk_widget_class_install_action (widget_class, "window.navigate", "i", navigate_action_cb);
 
   g_type_ensure (CC_TYPE_PANEL_LIST);
 }
