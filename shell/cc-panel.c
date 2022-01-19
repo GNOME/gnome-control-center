@@ -315,17 +315,6 @@ cc_panel_get_help_uri (CcPanel *panel)
   return NULL;
 }
 
-GtkWidget *
-cc_panel_get_title_widget (CcPanel *panel)
-{
-  CcPanelClass *class = CC_PANEL_GET_CLASS (panel);
-
-  if (class->get_title_widget)
-    return class->get_title_widget (panel);
-
-  return NULL;
-}
-
 GtkWidget*
 cc_panel_get_sidebar_widget (CcPanel *panel)
 {

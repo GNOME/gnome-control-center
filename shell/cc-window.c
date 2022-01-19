@@ -165,7 +165,6 @@ activate_panel (CcWindow          *self,
 {
   g_autoptr(GTimer) timer = NULL;
   GtkWidget *sidebar_widget;
-  GtkWidget *title_widget;
   gdouble ellapsed_time;
 
   CC_ENTRY;
@@ -202,12 +201,6 @@ activate_panel (CcWindow          *self,
 
   /* set the title of the window */
   adw_window_title_set_title (self->panel_title_widget, name);
-
-  title_widget = cc_panel_get_title_widget (CC_PANEL (self->current_panel));
-  if (title_widget)
-    adw_header_bar_set_title_widget (self->panel_headerbar, title_widget);
-  else
-    adw_header_bar_set_title_widget (self->panel_headerbar, GTK_WIDGET (self->panel_title_widget));
 
   sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
   cc_panel_list_add_sidebar_widget (self->panel_list, sidebar_widget);

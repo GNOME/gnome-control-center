@@ -79,7 +79,6 @@ struct _CcPanelClass
 
   const gchar* (*get_help_uri)       (CcPanel *panel);
 
-  GtkWidget*   (*get_title_widget)   (CcPanel *panel);
   GtkWidget*   (*get_sidebar_widget) (CcPanel *panel);
 };
 
@@ -88,8 +87,6 @@ CcShell*      cc_panel_get_shell          (CcPanel     *panel);
 GPermission*  cc_panel_get_permission     (CcPanel     *panel);
 
 const gchar*  cc_panel_get_help_uri       (CcPanel     *panel);
-
-GtkWidget*    cc_panel_get_title_widget   (CcPanel     *panel);
 
 GtkWidget*    cc_panel_get_sidebar_widget (CcPanel     *panel);
 
