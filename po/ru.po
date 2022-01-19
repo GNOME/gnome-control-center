@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-01-16 12:22+0000\n"
-"PO-Revision-Date: 2022-01-16 15:55+0300\n"
+"POT-Creation-Date: 2022-01-18 17:08+0000\n"
+"PO-Revision-Date: 2022-01-18 22:05+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -359,6 +359,7 @@ msgstr "Очистить кэш…"
 msgid "Control various application permissions and settings"
 msgstr "Управление различными разрешениями и настройками приложения"
 
+#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in.in:16
 msgid "application;flatpak;permission;setting;"
@@ -371,7 +372,7 @@ msgstr "Выберите изображение"
 #: panels/background/cc-background-chooser.c:296
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.c:1031
+#: panels/display/cc-display-panel.c:953
 #: panels/info-overview/cc-info-overview-panel.ui:198
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:123
@@ -459,41 +460,41 @@ msgstr "Изменить фоновое изображение или цвета
 msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;"
 msgstr "Фон;Обои;Экран;Рабочий;Стиль;Светлый;Темный;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:26
+#: panels/bluetooth/cc-bluetooth-panel.ui:10
 msgid "No Bluetooth Found"
 msgstr "Адаптеры Bluetooth не найдены"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:36
+#: panels/bluetooth/cc-bluetooth-panel.ui:11
 msgid "Plug in a dongle to use Bluetooth."
 msgstr "Для использования Bluetooth подключите адаптер."
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:60
+#: panels/bluetooth/cc-bluetooth-panel.ui:17
 msgid "Bluetooth Turned Off"
 msgstr "Адаптер Bluetooth выключен"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:70
+#: panels/bluetooth/cc-bluetooth-panel.ui:18
 msgid "Turn on to connect devices and receive file transfers."
 msgstr "Включите для подключения устройств и передачи файлов."
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:94
-msgid "Airplane Mode is on"
-msgstr "Режим для авиаперелётов включён"
+#: panels/bluetooth/cc-bluetooth-panel.ui:24
+msgid "Airplane Mode is On"
+msgstr "Авиарежим включен"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:104
+#: panels/bluetooth/cc-bluetooth-panel.ui:25
 msgid "Bluetooth is disabled when airplane mode is on."
-msgstr "Bluetooth отключается при включённом режиме для авиаперелётов."
+msgstr "Bluetooth отключается, когда включен авиарежим."
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:109
+#: panels/bluetooth/cc-bluetooth-panel.ui:28
 msgid "Turn Off Airplane Mode"
-msgstr "Выключить режим для авиаперелётов"
+msgstr "Выключить авиарежим"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:136
-msgid "Hardware Airplane Mode is on"
-msgstr "Аппаратный режим для авиаперелётов включён"
+#: panels/bluetooth/cc-bluetooth-panel.ui:42
+msgid "Hardware Airplane Mode is On"
+msgstr "Аппаратный авиарежим включен"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:146
+#: panels/bluetooth/cc-bluetooth-panel.ui:43
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
-msgstr "Для включения Bluetooth выключите режим для авиаперелётов."
+msgstr "Для включения Bluetooth выключите авиарежим."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in.in:3
@@ -1243,7 +1244,7 @@ msgstr[1] "%d часа"
 msgstr[2] "%d часов"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:955
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:846
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1559,123 +1560,121 @@ msgstr ""
 "экран;блокировка;диагностика;сбой;личный;приватный;недавние;временные;tmp;"
 "индекс;имя;сеть;идентификация;личность;конфиденциальность;"
 
-#: panels/display/cc-display-panel.c:1037
+#: panels/display/cc-display-panel.c:517
+#: panels/notifications/cc-notifications-panel.c:202
+#: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
+msgid "On"
+msgstr "Включено"
+
+#: panels/display/cc-display-panel.c:519 panels/network/net-proxy.c:69
+#: panels/notifications/cc-notifications-panel.c:202
+#: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
+msgid "Off"
+msgstr "Выключено"
+
+#: panels/display/cc-display-panel.c:959
 #: panels/network/connection-editor/connection-editor.ui:21
 msgid "_Apply"
 msgstr "_Применить"
 
-#: panels/display/cc-display-panel.c:1052
+#: panels/display/cc-display-panel.c:974
 msgid "Apply Changes?"
 msgstr "Применить изменения?"
 
-#: panels/display/cc-display-panel.c:1056
+#: panels/display/cc-display-panel.c:978
 msgid "Changes Cannot be Applied"
 msgstr "Изменения не могут быть применены"
 
-#: panels/display/cc-display-panel.c:1057
+#: panels/display/cc-display-panel.c:979
 msgid "This could be due to hardware limitations."
 msgstr "Это может быть связано с аппаратными ограничениями."
 
-#: panels/display/cc-display-panel.ui:30
-#: panels/display/gnome-display-panel.desktop.in.in:3
-msgid "Displays"
-msgstr "Дисплеи"
-
-#: panels/display/cc-display-panel.ui:50
-msgid "Display Mode"
-msgstr "Режим дисплея"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:216
-msgid "Join Displays"
-msgstr "Объединить дисплеи"
-
-#: panels/display/cc-display-panel.ui:106
-msgid "Mirror"
-msgstr "Зеркальное отображение"
-
-#: panels/display/cc-display-panel.ui:134
-msgid "Single Display"
-msgstr "Один дисплей"
-
-#: panels/display/cc-display-panel.ui:147
-msgid ""
-"Drag displays to match your physical display setup. Select a display to "
-"change its settings."
-msgstr ""
-"Перетащите дисплеи в соответствии с физическими настройками дисплея. "
-"Выберите дисплей, чтобы изменить его настройки."
-
-#: panels/display/cc-display-panel.ui:169
-msgid "Contains top bar and Activities"
-msgstr "Содержит верхнюю панель и меню Обзор"
-
-#: panels/display/cc-display-panel.ui:170
-msgid "Primary Display"
-msgstr "Основной дисплей"
-
-#: panels/display/cc-display-panel.ui:181
+#: panels/display/cc-display-panel.ui:56
 msgid "Display Arrangement"
 msgstr "Расположение дисплея"
 
-#: panels/display/cc-display-panel.ui:247
-msgid "Active Display"
-msgstr "Активный дисплей"
+#: panels/display/cc-display-panel.ui:67
+msgid "Multiple Displays"
+msgstr "Несколько дисплеев"
 
-#: panels/display/cc-display-panel.ui:260
-msgid "Display Configuration"
-msgstr "Конфигурация дисплея"
+#. 'Join' as in 'Join displays'
+#: panels/display/cc-display-panel.ui:76
+msgid "Join"
+msgstr "Объединить"
+
+#: panels/display/cc-display-panel.ui:83
+msgid "Mirror"
+msgstr "Зеркальное отображение"
+
+#: panels/display/cc-display-panel.ui:96
+msgid "Contains top bar and Activities"
+msgstr "Содержит верхнюю панель и меню Обзор"
+
+#: panels/display/cc-display-panel.ui:97
+msgid "Primary Display"
+msgstr "Основной дисплей"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:279
+#: panels/display/cc-display-panel.ui:118
 #: panels/display/cc-night-light-page.ui:77
 msgid "Night Light"
 msgstr "Ночная подсветка"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "Ландшафтная"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "Портретная справа"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:116
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "Портретная слева"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:119
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Ландшафтная (перевернутая)"
 
-#: panels/display/cc-display-settings.c:174
+#: panels/display/cc-display-settings.c:177
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Гц"
 
-#: panels/display/cc-display-settings.ui:14
+#: panels/display/cc-display-settings.ui:40
 msgctxt "display setting"
 msgid "Orientation"
 msgstr "Ориентация"
 
-#: panels/display/cc-display-settings.ui:21
+#: panels/display/cc-display-settings.ui:47
 msgctxt "display setting"
 msgid "Resolution"
 msgstr "Разрешение"
 
-#: panels/display/cc-display-settings.ui:28
+#: panels/display/cc-display-settings.ui:54
 msgid "Refresh Rate"
 msgstr "Частота обновления"
 
-#: panels/display/cc-display-settings.ui:35
+#: panels/display/cc-display-settings.ui:61
 msgid "Adjust for TV"
 msgstr "Отрегулировать для ТВ"
 
-#: panels/display/cc-display-settings.ui:49
-#: panels/display/cc-display-settings.ui:64
+#: panels/display/cc-display-settings.ui:75
+#: panels/display/cc-display-settings.ui:90
 msgctxt "display setting"
 msgid "Scale"
 msgstr "Масштаб"
@@ -1761,6 +1760,10 @@ msgstr "До"
 #: panels/display/cc-night-light-page.ui:302
 msgid "Color Temperature"
 msgstr "Цветовая температура"
+
+#: panels/display/gnome-display-panel.desktop.in.in:3
+msgid "Displays"
+msgstr "Дисплеи"
 
 #: panels/display/gnome-display-panel.desktop.in.in:4
 msgid "Choose how to use connected monitors and projectors"
@@ -2660,62 +2663,62 @@ msgstr "Защитите ваш обмен сообщениями"
 msgid "General"
 msgstr "Общие"
 
-#: panels/mouse/cc-mouse-panel.ui:21
+#: panels/mouse/cc-mouse-panel.ui:14
 msgid "Primary Button"
 msgstr "Основная кнопка"
 
-#: panels/mouse/cc-mouse-panel.ui:22
+#: panels/mouse/cc-mouse-panel.ui:15
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Устанавливает порядок физических кнопок на мышке и сенсорной панели."
 
-#: panels/mouse/cc-mouse-panel.ui:42 panels/sound/cc-balance-slider.ui:13
+#: panels/mouse/cc-mouse-panel.ui:29 panels/sound/cc-balance-slider.ui:13
 msgid "Left"
 msgstr "Левая"
 
-#: panels/mouse/cc-mouse-panel.ui:49 panels/sound/cc-balance-slider.ui:15
+#: panels/mouse/cc-mouse-panel.ui:36 panels/sound/cc-balance-slider.ui:15
 msgid "Right"
 msgstr "Правая"
 
-#: panels/mouse/cc-mouse-panel.ui:67
+#: panels/mouse/cc-mouse-panel.ui:50
 msgid "Mouse"
 msgstr "Мышь"
 
-#: panels/mouse/cc-mouse-panel.ui:77
+#: panels/mouse/cc-mouse-panel.ui:53
 msgid "Mouse Speed"
 msgstr "Скорость указателя мыши"
 
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:96 panels/mouse/cc-mouse-panel.ui:135
+#: panels/mouse/cc-mouse-panel.ui:69 panels/mouse/cc-mouse-panel.ui:96
 msgid "Natural Scrolling"
 msgstr "Естественная прокрутка"
 
-#: panels/mouse/cc-mouse-panel.ui:97 panels/mouse/cc-mouse-panel.ui:136
+#: panels/mouse/cc-mouse-panel.ui:70 panels/mouse/cc-mouse-panel.ui:97
 msgid "Scrolling moves the content, not the view."
 msgstr ""
 "При прокрутке перемещается содержимое на экране, а не полоса прокрутки."
 
-#: panels/mouse/cc-mouse-panel.ui:113 panels/mouse/cc-mouse-panel.ui:123
+#: panels/mouse/cc-mouse-panel.ui:83 panels/mouse/cc-mouse-panel.ui:86
 msgid "Touchpad"
 msgstr "Сенсорная панель"
 
-#: panels/mouse/cc-mouse-panel.ui:148
+#: panels/mouse/cc-mouse-panel.ui:107
 msgid "Touchpad Speed"
 msgstr "Скорость указателя сенсорной панели"
 
-#: panels/mouse/cc-mouse-panel.ui:167
+#: panels/mouse/cc-mouse-panel.ui:124
 msgid "Tap to Click"
 msgstr "Нажатие касанием"
 
-#: panels/mouse/cc-mouse-panel.ui:180
+#: panels/mouse/cc-mouse-panel.ui:135
 msgid "Two-finger Scrolling"
 msgstr "Прокрутка двумя пальцами"
 
-#: panels/mouse/cc-mouse-panel.ui:194
+#: panels/mouse/cc-mouse-panel.ui:147
 msgid "Edge Scrolling"
 msgstr "Участки прокрутки по краям"
 
-#: panels/mouse/cc-mouse-panel.ui:221 panels/wacom/cc-wacom-panel.c:491
+#: panels/mouse/cc-mouse-panel.ui:171 panels/wacom/cc-wacom-panel.c:491
 msgid "Test Your _Settings"
 msgstr "_Проверить параметры"
 
@@ -2988,7 +2991,7 @@ msgstr "_Остановить точку доступа"
 
 #: panels/network/cc-wifi-panel.ui:32
 msgid "Airplane Mode"
-msgstr "Режим для авиаперелётов"
+msgstr "Авиарежим"
 
 #: panels/network/cc-wifi-panel.ui:33
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
@@ -3645,17 +3648,6 @@ msgstr "Использование в качестве точки доступа
 #: panels/network/net-device-wifi.c:1219
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Беспроводное устройство не поддерживает режим точки доступа"
-
-#: panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:202
-#: panels/power/cc-power-panel.c:837 panels/power/cc-power-panel.c:848
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
-msgid "Off"
-msgstr "Выключено"
 
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: panels/network/net-proxy.c:112
@@ -4470,16 +4462,6 @@ msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "По_казывать содержимое сообщения на заблокированном экране"
 
-#: panels/notifications/cc-notifications-panel.c:202
-#: panels/power/cc-power-panel.c:843 panels/power/cc-power-panel.c:850
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
-msgid "On"
-msgstr "Включено"
-
 #: panels/notifications/cc-notifications-panel.ui:17
 msgid "_Do Not Disturb"
 msgstr "_Не беспокоить"
@@ -4497,29 +4479,53 @@ msgstr "Управление отображением и содержанием 
 msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr "Уведомления;Всплывающее;Сообщение;Лоток;Всплывающее;"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:148
+#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
+#. * or rishi).
+#.
+#: panels/online-accounts/cc-online-accounts-panel.c:277
+#, c-format
+msgid "%s removed"
+msgstr "%s удалён"
+
+#: panels/online-accounts/cc-online-accounts-panel.c:406
 msgctxt "Online Account"
 msgid "Other"
 msgstr "Другое"
 
+#: panels/online-accounts/cc-online-accounts-panel.c:803
+msgid "Error removing account"
+msgstr "Ошибка при удалении учётной записи"
+
+#. Translators: This is the button which allows undoing the removal of the printer.
+#: panels/online-accounts/cc-online-accounts-panel.ui:23
+#: panels/printers/printers.ui:51
+msgid "Undo"
+msgstr "Отменить"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:55
+msgid "Connect to your data in the cloud"
+msgstr "Подключение к данным в облаке"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:66
+msgid "No internet connection — connect to set up new online accounts"
+msgstr ""
+"Нет подключения к Интернету — подключитесь для настройки новой сетевой "
+"учётной записи"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:92
+msgid "Add an account"
+msgstr "Добавить учётную запись"
+
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:576
+#: panels/online-accounts/gnome-control-center-goa-helper.c:426
 #, c-format
 msgid "%s Account"
 msgstr "Учётная запись %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:870
-msgid "Error removing account"
-msgstr "Ошибка при удалении учётной записи"
-
-#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
-#. * or rishi).
-#.
-#: panels/online-accounts/cc-online-accounts-panel.c:936
-#, c-format
-msgid "%s removed"
-msgstr "%s удалён"
+#: panels/online-accounts/gnome-control-center-goa-helper.c:429
+msgid "Remove Account"
+msgstr "Удалить учётную запись"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:3
 msgid "Online Accounts"
@@ -4541,29 +4547,6 @@ msgid ""
 msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Онлайн;Чат;Календарь;Почта;Контакт;"
 "ownCloud;Kerberos;IMAP;SMTP;Pocket;ReadItLater;"
-
-#. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/online-accounts/online-accounts.ui:38 panels/printers/printers.ui:51
-msgid "Undo"
-msgstr "Отменить"
-
-#: panels/online-accounts/online-accounts.ui:94
-msgid "Connect to your data in the cloud"
-msgstr "Подключение к данным в облаке"
-
-#: panels/online-accounts/online-accounts.ui:109
-msgid "No internet connection — connect to set up new online accounts"
-msgstr ""
-"Нет подключения к Интернету — подключитесь для настройки новой сетевой "
-"учётной записи"
-
-#: panels/online-accounts/online-accounts.ui:134
-msgid "Add an account"
-msgstr "Добавить учётную запись"
-
-#: panels/online-accounts/online-accounts.ui:223
-msgid "Remove Account"
-msgstr "Удалить учётную запись"
 
 #: panels/power/cc-battery-row.c:80
 msgid "Unknown time"
@@ -4695,7 +4678,7 @@ msgid "Gaming input device"
 msgstr "Игровое устройство ввода"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:359
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
 #: panels/power/cc-power-panel.ui:59
 msgid "Battery"
 msgstr "Батарея"
@@ -4710,55 +4693,55 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "Дополнительная"
 
-#: panels/power/cc-power-panel.c:357
+#: panels/power/cc-power-panel.c:255
 msgid "Batteries"
 msgstr "Батареи"
 
-#: panels/power/cc-power-panel.c:620
+#: panels/power/cc-power-panel.c:511
 msgid "When _idle"
 msgstr "При п_ростое"
 
-#: panels/power/cc-power-panel.c:780
+#: panels/power/cc-power-panel.c:671
 msgid "Suspend"
 msgstr "Режим ожидания"
 
-#: panels/power/cc-power-panel.c:781
+#: panels/power/cc-power-panel.c:672
 msgid "Power Off"
 msgstr "Выключить"
 
-#: panels/power/cc-power-panel.c:782
+#: panels/power/cc-power-panel.c:673
 msgid "Hibernate"
 msgstr "Режим гибернации"
 
-#: panels/power/cc-power-panel.c:783
+#: panels/power/cc-power-panel.c:674
 msgid "Nothing"
 msgstr "Ничего не делать"
 
-#: panels/power/cc-power-panel.c:839
+#: panels/power/cc-power-panel.c:730
 msgid "When on battery power"
 msgstr "При работе от батареи"
 
-#: panels/power/cc-power-panel.c:841
+#: panels/power/cc-power-panel.c:732
 msgid "When plugged in"
 msgstr "При подключении"
 
-#: panels/power/cc-power-panel.c:962
+#: panels/power/cc-power-panel.c:853
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Никогда"
 
-#: panels/power/cc-power-panel.c:1046
+#: panels/power/cc-power-panel.c:937
 msgid "Automatic suspend"
 msgstr "Автоматический режим ожидания"
 
-#: panels/power/cc-power-panel.c:1139
+#: panels/power/cc-power-panel.c:1030
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Режим высокой производительности временно запрещён из-за высокой температуры "
 "устройства."
 
-#: panels/power/cc-power-panel.c:1141
+#: panels/power/cc-power-panel.c:1032
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4767,11 +4750,11 @@ msgstr ""
 "на коленях. Переместите устройство на ровную поверхность для возобновления "
 "режима."
 
-#: panels/power/cc-power-panel.c:1143
+#: panels/power/cc-power-panel.c:1034
 msgid "Performance mode temporarily disabled."
 msgstr "Режим высокой производительности запрещён."
 
-#: panels/power/cc-power-panel.c:1185
+#: panels/power/cc-power-panel.c:1076
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4780,13 +4763,13 @@ msgstr ""
 "будет автоматически включён когда батарея будет заряжена."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1193
+#: panels/power/cc-power-panel.c:1084
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Режим низкого потребления активирован «%s»."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1197
+#: panels/power/cc-power-panel.c:1088
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Режим высокой производительности активирован «%s»."
@@ -8677,11 +8660,11 @@ msgstr "Убедитесь, что у вас есть устройство до�
 
 #: panels/wwan/cc-wwan-panel.ui:136
 msgid "Wireless Wan is disabled when airplane mode is on"
-msgstr "Беспроводные сети отключается при включённом режиме авиа-перелёта"
+msgstr "Беспроводные сети отключаются при включённом авиарежиме"
 
 #: panels/wwan/cc-wwan-panel.ui:144
 msgid "_Turn off Airplane Mode"
-msgstr "_Выключить режим авиа-перелёта"
+msgstr "_Выключить авиарежим"
 
 #: panels/wwan/cc-wwan-panel.ui:175
 msgid "Data Connection"
