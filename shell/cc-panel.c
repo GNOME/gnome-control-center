@@ -170,6 +170,7 @@ static void
 cc_panel_class_init (CcPanelClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->get_property = cc_panel_get_property;
   object_class->set_property = cc_panel_set_property;
@@ -203,11 +204,14 @@ cc_panel_class_init (CcPanelClass *klass)
                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class, N_PROPS, properties);
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/cc-panel.ui");
 }
 
 static void
 cc_panel_init (CcPanel *panel)
 {
+  gtk_widget_init_template (GTK_WIDGET (panel));
 }
 
 /**
