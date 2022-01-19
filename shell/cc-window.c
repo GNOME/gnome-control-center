@@ -50,14 +50,10 @@ struct _CcWindow
 {
   AdwApplicationWindow parent;
 
-  GtkRevealer       *back_revealer;
   GtkMessageDialog  *development_warning_dialog;
   AdwHeaderBar      *header;
   AdwLeaflet        *main_leaflet;
-  AdwHeaderBar      *panel_headerbar;
   CcPanelList       *panel_list;
-  AdwWindowTitle    *panel_title_widget;
-  GtkStack          *panel_titlebar_stack;
   GtkButton         *previous_button;
   GtkSearchBar      *search_bar;
   GtkToggleButton   *search_button;
@@ -65,8 +61,6 @@ struct _CcWindow
   GtkBox            *sidebar_box;
   AdwWindowTitle    *sidebar_title_widget;
   GtkStack          *stack;
-  GtkBox            *top_left_box;
-  GtkBox            *top_right_box;
 
   GtkWidget  *current_panel;
   char       *current_panel_id;
@@ -169,9 +163,6 @@ activate_panel (CcWindow          *self,
   /* switch to the new panel */
   gtk_widget_show (self->current_panel);
   gtk_stack_set_visible_child_name (self->stack, id);
-
-  /* set the title of the window */
-  adw_window_title_set_title (self->panel_title_widget, name);
 
   sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
   cc_panel_list_add_sidebar_widget (self->panel_list, sidebar_widget);
@@ -526,12 +517,6 @@ search_entry_activate_cb (CcWindow *self)
 }
 
 static void
-back_button_clicked_cb (CcWindow *self)
-{
-  adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_BACK);
-}
-
-static void
 previous_button_clicked_cb (CcWindow *self)
 {
   g_debug ("Num previous panels? %d", g_queue_get_length (self->previous_panels));
@@ -797,14 +782,10 @@ cc_window_class_init (CcWindowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/cc-window.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, back_revealer);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, development_warning_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, header);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, main_leaflet);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_list);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_title_widget);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, panel_titlebar_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, previous_button);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_bar);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, search_button);
@@ -812,10 +793,7 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, sidebar_title_widget);
   gtk_widget_class_bind_template_child (widget_class, CcWindow, stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, top_left_box);
-  gtk_widget_class_bind_template_child (widget_class, CcWindow, top_right_box);
 
-  gtk_widget_class_bind_template_callback (widget_class, back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_main_leaflet_folded_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
