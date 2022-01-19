@@ -28,6 +28,22 @@
  * CcPanel is an abstract class used to implement panels for the shell. A
  * panel contains a collection of related settings that are displayed within
  * the shell window.
+ *
+ * # Buildable
+ *
+ * CcPanel implements the GtkBuildable interface, and allows having different
+ * types of children for convenience.
+ *
+ * It is possible to add widgets to the start and end of the panel titlebar
+ * using, respectively, the `titlebar-start` and `titlebar-end` child types.
+ * It is also possible to override the titlebar entirely with a custom titlebar
+ * using the `titlebar` child type.
+ *
+ * Most panels will use the `content` child type, which sets the panel content
+ * beneath the titlebar.
+ *
+ * At last, it is possible to override all custom CcPanel widgets by not setting
+ * any child type.
  */
 
 #include "config.h"
@@ -42,13 +58,24 @@
 
 typedef struct
 {
+  AdwBin       *content_bin;
+  GtkBox       *main_box;
+  AdwBin       *titlebar_bin;
+  AdwHeaderBar *titlebar;
+
   CcShell      *shell;
   GCancellable *cancellable;
   gboolean      folded;
   gchar        *title;
 } CcPanelPrivate;
 
-G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (CcPanel, cc_panel, ADW_TYPE_BIN)
+static void cc_panel_buildable_init (GtkBuildableIface *iface);
+
+G_DEFINE_ABSTRACT_TYPE_WITH_CODE (CcPanel, cc_panel, ADW_TYPE_BIN,
+                                  G_ADD_PRIVATE (CcPanel)
+                                  G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, cc_panel_buildable_init))
+
+static GtkBuildableIface *parent_buildable_iface;
 
 enum
 {
@@ -69,6 +96,44 @@ enum
 static GParamSpec *properties [N_PROPS];
 
 static guint signals [LAST_SIGNAL] = { 0 };
+
+/* GtkBuildable interface */
+
+static void
+cc_panel_buildable_add_child (GtkBuildable *buildable,
+                              GtkBuilder   *builder,
+                              GObject      *child,
+                              const char   *type)
+{
+  CcPanelPrivate *priv = cc_panel_get_instance_private (CC_PANEL (buildable));
+
+  if (GTK_IS_WIDGET (child) && !priv->main_box)
+    {
+      adw_bin_set_child (ADW_BIN (buildable), GTK_WIDGET (child));
+      return;
+    }
+
+  if (g_strcmp0 (type, "content") == 0)
+    adw_bin_set_child (priv->content_bin, GTK_WIDGET (child));
+  else if (g_strcmp0 (type, "titlebar-start") == 0)
+    adw_header_bar_pack_start (priv->titlebar, GTK_WIDGET (child));
+  else if (g_strcmp0 (type, "titlebar-end") == 0)
+    adw_header_bar_pack_end (priv->titlebar, GTK_WIDGET (child));
+  else if (g_strcmp0 (type, "titlebar") == 0)
+    adw_bin_set_child (priv->titlebar_bin, GTK_WIDGET (child));
+  else
+    parent_buildable_iface->add_child (buildable, builder, child, type);
+}
+
+static void
+cc_panel_buildable_init (GtkBuildableIface *iface)
+{
+  parent_buildable_iface = g_type_interface_peek_parent (iface);
+
+  iface->add_child = cc_panel_buildable_add_child;
+}
+
+/* GObject overrides */
 
 static void
 cc_panel_set_property (GObject      *object,
@@ -206,6 +271,11 @@ cc_panel_class_init (CcPanelClass *klass)
   g_object_class_install_properties (object_class, N_PROPS, properties);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/gtk/cc-panel.ui");
+
+  gtk_widget_class_bind_template_child_private (widget_class, CcPanel, content_bin);
+  gtk_widget_class_bind_template_child_private (widget_class, CcPanel, main_box);
+  gtk_widget_class_bind_template_child_private (widget_class, CcPanel, titlebar_bin);
+  gtk_widget_class_bind_template_child_private (widget_class, CcPanel, titlebar);
 }
 
 static void
@@ -317,4 +387,50 @@ cc_panel_get_folded (CcPanel *panel)
 
   priv = cc_panel_get_instance_private (panel);
   return priv->folded;
+}
+
+GtkWidget*
+cc_panel_get_content (CcPanel *panel)
+{
+  CcPanelPrivate *priv;
+
+  g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
+
+  priv = cc_panel_get_instance_private (panel);
+  return adw_bin_get_child (priv->content_bin);
+}
+
+void
+cc_panel_set_content (CcPanel   *panel,
+                      GtkWidget *content)
+{
+  CcPanelPrivate *priv;
+
+  g_return_if_fail (CC_IS_PANEL (panel));
+
+  priv = cc_panel_get_instance_private (panel);
+  adw_bin_set_child (priv->content_bin, content);
+}
+
+GtkWidget*
+cc_panel_get_titlebar (CcPanel *panel)
+{
+  CcPanelPrivate *priv;
+
+  g_return_val_if_fail (CC_IS_PANEL (panel), NULL);
+
+  priv = cc_panel_get_instance_private (panel);
+  return adw_bin_get_child (priv->titlebar_bin);
+}
+
+void
+cc_panel_set_titlebar (CcPanel   *panel,
+                       GtkWidget *titlebar)
+{
+  CcPanelPrivate *priv;
+
+  g_return_if_fail (CC_IS_PANEL (panel));
+
+  priv = cc_panel_get_instance_private (panel);
+  adw_bin_set_child (priv->titlebar_bin, titlebar);
 }
