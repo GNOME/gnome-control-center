@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.10 -->
   <object class="GtkLockButton" id="lock_button">
   </object>
   <object class="GtkListStore" id="city_liststore">
@@ -298,7 +297,7 @@
     </child>
   </object>
   <template class="CcDateTimePanel" parent="CcPanel">
-    <child>
+    <child type="content">
       <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup">

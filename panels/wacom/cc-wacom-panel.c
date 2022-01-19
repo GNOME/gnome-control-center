@@ -751,7 +751,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 	gtk_stack_switcher_set_stack (GTK_STACK_SWITCHER (self->switcher),
 				      GTK_STACK (self->stack));
 
-	adw_bin_set_child (ADW_BIN (self), GTK_WIDGET (self->stack));
+	cc_panel_set_content (CC_PANEL (self), GTK_WIDGET (self->stack));
 	gtk_widget_show (self->stack);
 
 	self->tablet_notebook = gtk_notebook_new ();

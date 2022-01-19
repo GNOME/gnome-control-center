@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.20.0 -->
 <interface>
-  <requires lib="gtk+" version="3.0"/>
   <object class="GtkAdjustment" id="double_click_delay_adjustment">
     <property name="lower">100</property>
     <property name="upper">1000</property>
@@ -9,9 +7,8 @@
     <property name="step_increment">100</property>
     <property name="page_increment">100</property>
   </object>
-  <!-- interface-requires gtk+ 3.0 -->
   <template class="CcUaPanel" parent="CcPanel">
-    <child>
+    <child type="content">
       <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup">

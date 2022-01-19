@@ -2,16 +2,16 @@
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
   <template class="CcRemovableMediaPanel" parent="CcPanel">
-    <property name="hexpand">True</property>
-    <property name="vexpand">True</property>
-    <property name="margin_top">32</property>
-    <property name="margin_bottom">32</property>
-    <property name="margin_start">24</property>
-    <property name="margin_end">24</property>
-    <child>
+    <child type="content">
       <object class="AdwClamp">
         <child>
           <object class="GtkBox">
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
+            <property name="margin_top">32</property>
+            <property name="margin_bottom">32</property>
+            <property name="margin_start">24</property>
+            <property name="margin_end">24</property>
             <property name="spacing">18</property>
             <property name="orientation">vertical</property>
             <child>

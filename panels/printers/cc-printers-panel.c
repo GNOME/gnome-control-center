@@ -1317,5 +1317,5 @@ Please check your installation");
                       self);
 
   pp_cups_connection_test_async (self->cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
-  adw_bin_set_child (ADW_BIN (self), top_widget);
+  cc_panel_set_content (CC_PANEL (self), top_widget);
 }

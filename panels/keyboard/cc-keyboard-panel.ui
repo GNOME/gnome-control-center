@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkAdjustment" id="cursor_blink_time_adjustment">
     <property name="lower">100</property>
     <property name="upper">2500</property>
@@ -11,7 +10,7 @@
   <template class="CcKeyboardPanel" parent="CcPanel">
     <property name="hexpand">True</property>
     <property name="vexpand">True</property>
-    <child>
+    <child type="content">
       <object class="GtkScrolledWindow">
         <property name="hexpand">True</property>
         <property name="vexpand">True</property>
