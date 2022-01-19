@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcBluetoothPanel" parent="CcPanel">
+
+    <child type="titlebar-end">
+      <object class="GtkBox" id="header_box">
+        <child>
+          <object class="GtkSwitch" id="enable_switch">
+            <property name="valign">center</property>
+            <signal name="state-set" handler="enable_switch_state_set_cb" object="CcBluetoothPanel" swapped="yes"/>
+          </object>
+        </child>
+      </object>
+    </child>
+
     <child type="content">
       <object class="GtkStack" id="stack">
         <child>
@@ -51,12 +63,4 @@
       </object>
     </child>
   </template>
-  <object class="GtkBox" id="header_box">
-    <child>
-      <object class="GtkSwitch" id="enable_switch">
-        <property name="valign">center</property>
-        <signal name="state-set" handler="enable_switch_state_set_cb" object="CcBluetoothPanel" swapped="yes"/>
-      </object>
-    </child>
-  </object>
 </interface>

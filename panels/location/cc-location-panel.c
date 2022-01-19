@@ -36,6 +36,7 @@ struct _CcLocationPanel
 
   GtkStack     *stack;
   GtkListBox   *location_apps_list_box;
+  GtkSwitch    *main_switch;
 
   GSettings    *location_settings;
 
@@ -367,39 +368,6 @@ cc_location_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-cc_location_panel_constructed (GObject *object)
-{
-  CcLocationPanel *self = CC_LOCATION_PANEL (object);
-  GtkWidget *box, *widget;
-
-  G_OBJECT_CLASS (cc_location_panel_parent_class)->constructed (object);
-
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  widget = gtk_switch_new ();
-  gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-  gtk_box_append (GTK_BOX (box), widget);
-
-  g_settings_bind (self->location_settings,
-                   LOCATION_ENABLED,
-                   widget,
-                   "active",
-                   G_SETTINGS_BIND_DEFAULT);
-
-  g_object_bind_property_full  (widget,
-                                "active",
-                                self->stack,
-                                "visible-child-name",
-                                G_BINDING_SYNC_CREATE,
-                                to_child_name,
-                                NULL,
-                                NULL, NULL);
-
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-                                   box,
-                                   GTK_POS_RIGHT);
-}
-
-static void
 cc_location_panel_class_init (CcLocationPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -409,12 +377,12 @@ cc_location_panel_class_init (CcLocationPanelClass *klass)
   panel_class->get_help_uri = cc_location_panel_get_help_uri;
 
   object_class->finalize = cc_location_panel_finalize;
-  object_class->constructed = cc_location_panel_constructed;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/location/cc-location-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_apps_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, main_switch);
 }
 
 static void
@@ -426,6 +394,21 @@ cc_location_panel_init (CcLocationPanel *self)
 
   self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   self->location_settings = g_settings_new ("org.gnome.system.location");
+
+  g_settings_bind (self->location_settings,
+                   LOCATION_ENABLED,
+                   self->main_switch,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  g_object_bind_property_full  (self->main_switch,
+                                "active",
+                                self->stack,
+                                "visible-child-name",
+                                G_BINDING_SYNC_CREATE,
+                                to_child_name,
+                                NULL,
+                                NULL, NULL);
 
   self->location_app_switches = g_hash_table_new_full (g_str_hash,
                                                        g_str_equal,

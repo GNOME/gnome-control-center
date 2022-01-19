@@ -344,19 +344,6 @@ test_button_toggled_cb (CcMousePanel *self)
 }
 
 static void
-cc_mouse_panel_constructed (GObject *object)
-{
-  CcMousePanel *self = CC_MOUSE_PANEL (object);
-  CcShell *shell;
-
-  G_OBJECT_CLASS (cc_mouse_panel_parent_class)->constructed (object);
-
-  /* Add test area button to shell header. */
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->test_button), GTK_POS_RIGHT);
-}
-
-static void
 cc_mouse_panel_init (CcMousePanel *self)
 {
   GsdDeviceManager  *device_manager;
@@ -395,7 +382,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   panel_class->get_help_uri = cc_mouse_panel_get_help_uri;
 
   object_class->dispose = cc_mouse_panel_dispose;
-  object_class->constructed = cc_mouse_panel_constructed;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/cc-mouse-panel.ui");
 

@@ -32,6 +32,7 @@ struct _CcMicrophonePanel
 {
   CcPanel       parent_instance;
 
+  GtkSwitch    *main_switch;
   GtkListBox   *microphone_apps_list_box;
   GtkStack     *stack;
 
@@ -366,34 +367,6 @@ cc_microphone_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-cc_microphone_panel_constructed (GObject *object)
-{
-  CcMicrophonePanel *self = CC_MICROPHONE_PANEL (object);
-  GtkWidget *box, *widget;
-
-  G_OBJECT_CLASS (cc_microphone_panel_parent_class)->constructed (object);
-
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  widget = gtk_switch_new ();
-  gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-  gtk_box_append (GTK_BOX (box), widget);
-
-  g_settings_bind (self->privacy_settings, "disable-microphone",
-                   widget, "active",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_object_bind_property_full  (widget, "active",
-                                self->stack, "visible-child-name",
-                                G_BINDING_SYNC_CREATE,
-                                to_child_name,
-                                NULL,
-                                NULL, NULL);
-
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-                                   box,
-                                   GTK_POS_RIGHT);
-}
-
-static void
 cc_microphone_panel_class_init (CcMicrophonePanelClass *klass)
 {
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
@@ -403,10 +376,10 @@ cc_microphone_panel_class_init (CcMicrophonePanelClass *klass)
   panel_class->get_help_uri = cc_microphone_panel_get_help_uri;
 
   object_class->finalize = cc_microphone_panel_finalize;
-  object_class->constructed = cc_microphone_panel_constructed;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/microphone/cc-microphone-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, main_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, microphone_apps_list_box);
 }
@@ -422,6 +395,20 @@ cc_microphone_panel_init (CcMicrophonePanel *self)
 
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
+  g_settings_bind (self->privacy_settings,
+                   "disable-microphone",
+                   self->main_switch,
+                   "active",
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+  g_object_bind_property_full  (self->main_switch,
+                                "active",
+                                self->stack,
+                                "visible-child-name",
+                                G_BINDING_SYNC_CREATE,
+                                to_child_name,
+                                NULL,
+                                NULL, NULL);
 
   self->microphone_app_switches = g_hash_table_new_full (g_str_hash,
                                                        g_str_equal,

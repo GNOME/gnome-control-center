@@ -28,15 +28,16 @@
 
 struct _CcSearchPanel
 {
-  CcPanel     parent_instance;
+  CcPanel           parent_instance;
 
-  GtkWidget  *list_box;
-  GtkWidget  *search_vbox;
-  GtkWidget  *settings_button;
-  CcSearchPanelRow  *selected_row;
+  GtkWidget        *list_box;
+  GtkSwitch        *main_switch;
+  GtkWidget        *search_vbox;
+  GtkWidget        *settings_button;
+  CcSearchPanelRow *selected_row;
 
-  GSettings  *search_settings;
-  GHashTable *sort_order;
+  GSettings        *search_settings;
+  GHashTable       *sort_order;
 
   CcSearchLocationsDialog  *locations_dialog;
 };
@@ -620,35 +621,6 @@ cc_search_panel_finalize (GObject *object)
 }
 
 static void
-cc_search_panel_constructed (GObject *object)
-{
-  CcSearchPanel *self = CC_SEARCH_PANEL (object);
-  GtkWidget *box, *widget;
-
-  G_OBJECT_CLASS (cc_search_panel_parent_class)->constructed (object);
-
-  /* add the disable all switch */
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-
-  widget = gtk_switch_new ();
-  gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-  gtk_box_append (GTK_BOX (box), widget);
-
-  g_settings_bind (self->search_settings, "disable-external",
-                   widget, "active",
-                   G_SETTINGS_BIND_DEFAULT |
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-  g_object_bind_property (widget, "active",
-                          self->search_vbox, "sensitive",
-                          G_BINDING_DEFAULT |
-                          G_BINDING_SYNC_CREATE);
-
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), self->settings_button, GTK_POS_LEFT);
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)), box, GTK_POS_RIGHT);
-}
-
-static void
 cc_search_panel_init (CcSearchPanel *self)
 {
   g_resources_register (cc_search_get_resource ());
@@ -661,6 +633,20 @@ cc_search_panel_init (CcSearchPanel *self)
   gtk_widget_set_sensitive (self->settings_button, cc_search_locations_dialog_is_available ());
 
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
+  g_settings_bind (self->search_settings,
+                   "disable-external",
+                   self->main_switch,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT |
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+  g_object_bind_property (self->main_switch,
+                          "active",
+                          self->search_vbox,
+                          "sensitive",
+                          G_BINDING_DEFAULT |
+                          G_BINDING_SYNC_CREATE);
+
   self->sort_order = g_hash_table_new_full (g_str_hash, g_str_equal,
                                                   g_free, NULL);
   g_signal_connect_swapped (self->search_settings, "changed::sort-order",
@@ -676,13 +662,13 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
 
-  oclass->constructed = cc_search_panel_constructed;
   oclass->finalize = cc_search_panel_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/search/cc-search-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, main_switch);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_vbox);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_button);
 

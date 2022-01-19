@@ -3,6 +3,21 @@
   <template class="CcSearchPanel" parent="CcPanel">
     <property name="visible">True</property>
 
+    <!-- Header widget -->
+    <child type="titlebar-start">
+      <object class="GtkButton" id="settings_button">
+        <property name="label" translatable="yes">Search Locations</property>
+        <signal name="clicked" handler="settings_button_clicked" object="CcSearchPanel" swapped="no"/>
+      </object>
+    </child>
+
+    <!-- Header widget -->
+    <child type="titlebar-end">
+      <object class="GtkSwitch" id="main_switch">
+        <property name="valign">center</property>
+      </object>
+    </child>
+
     <child type="content">
       <object class="GtkScrolledWindow" id="search_vbox">
         <property name="visible">True</property>
@@ -47,10 +62,4 @@
     </child>
   </template>
 
-  <!-- Header widget -->
-  <object class="GtkButton" id="settings_button">
-    <property name="visible">True</property>
-    <property name="label" translatable="yes">Search Locations</property>
-    <signal name="clicked" handler="settings_button_clicked" object="CcSearchPanel" swapped="no"/>
-  </object>
 </interface>

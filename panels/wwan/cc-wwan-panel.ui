@@ -3,6 +3,15 @@
   <requires lib="gtk" version="4.0"/>
   <template class="CcWwanPanel" parent="CcPanel">
 
+    <!-- Cellular panel on/off switch -->
+    <child type="titlebar-end">
+      <object class="GtkSwitch" id="enable_switch">
+        <accessibility>
+          <property name="label" translatable="yes">Enable Mobile Network</property>
+        </accessibility>
+      </object>
+    </child>
+
     <child type="content">
       <object class="GtkOverlay">
 
@@ -220,11 +229,4 @@
     </child>
 
   </template>
-
-  <!-- Cellular panel on/off switch -->
-  <object class="GtkSwitch" id="enable_switch">
-    <accessibility>
-      <property name="label" translatable="yes">Enable Mobile Network</property>
-    </accessibility>
-  </object>
 </interface>

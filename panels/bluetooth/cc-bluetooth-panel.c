@@ -74,18 +74,6 @@ cc_bluetooth_panel_finalize (GObject *object)
 }
 
 static void
-cc_bluetooth_panel_constructed (GObject *object)
-{
-	CcBluetoothPanel *self = CC_BLUETOOTH_PANEL (object);
-
-	G_OBJECT_CLASS (cc_bluetooth_panel_parent_class)->constructed (object);
-
-	/* add kill switch widgets  */
-	cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-					 GTK_WIDGET (self->header_box), GTK_POS_RIGHT);
-}
-
-static void
 airplane_mode_changed_cb (GObject *source_object,
 			  GAsyncResult *res,
 			  gpointer user_data)
@@ -232,7 +220,6 @@ cc_bluetooth_panel_class_init (CcBluetoothPanelClass *klass)
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 	CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-	object_class->constructed = cc_bluetooth_panel_constructed;
 	object_class->finalize = cc_bluetooth_panel_finalize;
 
 	panel_class->get_help_uri = cc_bluetooth_panel_get_help_uri;

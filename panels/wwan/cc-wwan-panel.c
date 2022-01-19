@@ -682,24 +682,6 @@ cc_wwan_panel_set_property (GObject      *object,
 }
 
 static void
-cc_wwan_panel_constructed (GObject *object)
-{
-  CcWwanPanel *self = (CcWwanPanel *)object;
-
-  G_OBJECT_CLASS (cc_wwan_panel_parent_class)->constructed (object);
-
-	cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-                                   GTK_WIDGET (self->enable_switch), GTK_POS_RIGHT);
-
-  if (self->nm_client)
-    {
-      g_object_bind_property (self->nm_client, "wwan-enabled",
-                              self->enable_switch, "active",
-                              G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
-    }
-}
-
-static void
 cc_wwan_panel_dispose (GObject *object)
 {
   CcWwanPanel *self = (CcWwanPanel *)object;
@@ -730,7 +712,6 @@ cc_wwan_panel_class_init (CcWwanPanelClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
   object_class->set_property = cc_wwan_panel_set_property;
-  object_class->constructed = cc_wwan_panel_constructed;
   object_class->dispose = cc_wwan_panel_dispose;
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
@@ -786,6 +767,13 @@ cc_wwan_panel_init (CcWwanPanel *self)
   else
     {
       g_warn_if_reached ();
+    }
+
+  if (self->nm_client)
+    {
+      g_object_bind_property (self->nm_client, "wwan-enabled",
+                              self->enable_switch, "active",
+                              G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
     }
 
   if (cc_object_storage_has_object ("CcObjectStorage::mm-manager"))

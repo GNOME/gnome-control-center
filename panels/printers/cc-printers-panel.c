@@ -234,10 +234,6 @@ cc_printers_panel_constructed (GObject *object)
   shell = cc_panel_get_shell (CC_PANEL (self));
 
   widget = (GtkWidget*)
-    gtk_builder_get_object (self->builder, "top-right-buttons");
-  cc_shell_embed_widget_in_header (shell, widget, GTK_POS_RIGHT);
-
-  widget = (GtkWidget*)
     gtk_builder_get_object (self->builder, "search-bar");
   gtk_search_bar_set_key_capture_widget (GTK_SEARCH_BAR (widget),
                                          GTK_WIDGET (shell));
@@ -1318,4 +1314,9 @@ Please check your installation");
 
   pp_cups_connection_test_async (self->cups, cc_panel_get_cancellable (CC_PANEL (self)), connection_test_cb, self);
   cc_panel_set_content (CC_PANEL (self), top_widget);
+
+  widget = (GtkWidget*)
+    gtk_builder_get_object (self->builder, "top-right-buttons");
+  adw_header_bar_pack_end (ADW_HEADER_BAR (cc_panel_get_titlebar (CC_PANEL (self))),
+                           widget);
 }

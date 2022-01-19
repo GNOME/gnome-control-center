@@ -900,28 +900,6 @@ cc_wifi_panel_get_help_uri (CcPanel *panel)
   return "help:gnome-help/net-wireless";
 }
 
-static GtkWidget *
-cc_wifi_panel_get_title_widget (CcPanel *panel)
-{
-  CcWifiPanel *self = CC_WIFI_PANEL (panel);
-
-  return GTK_WIDGET (self->center_stack);
-}
-
-static void
-cc_wifi_panel_constructed (GObject *object)
-{
-  CcWifiPanel *self;
-  CcShell *shell;
-
-  self = CC_WIFI_PANEL (object);
-  shell = cc_panel_get_shell (CC_PANEL (object));
-
-  G_OBJECT_CLASS (cc_wifi_panel_parent_class)->constructed (object);
-
-  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->header_stack), GTK_POS_RIGHT);
-}
-
 static void
 cc_wifi_panel_finalize (GObject *object)
 {
@@ -1012,9 +990,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
   panel_class->get_help_uri = cc_wifi_panel_get_help_uri;
-  panel_class->get_title_widget = cc_wifi_panel_get_title_widget;
 
-  object_class->constructed = cc_wifi_panel_constructed;
   object_class->finalize = cc_wifi_panel_finalize;
   object_class->get_property = cc_wifi_panel_get_property;
   object_class->set_property = cc_wifi_panel_set_property;

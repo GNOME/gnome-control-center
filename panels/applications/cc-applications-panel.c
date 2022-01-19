@@ -1936,12 +1936,8 @@ cc_applications_panel_constructed (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
   GtkListBoxRow *row;
-  CcShell *shell;
 
   G_OBJECT_CLASS (cc_applications_panel_parent_class)->constructed (object);
-
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->header_button), GTK_POS_RIGHT);
 
   /* Select the first row */
   row = gtk_list_box_get_row_at_index (self->sidebar_listbox, 0);
@@ -1953,13 +1949,6 @@ cc_applications_panel_get_sidebar_widget (CcPanel *panel)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (panel);
   return GTK_WIDGET (self->sidebar_box);
-}
-
-static GtkWidget *
-cc_applications_panel_get_title_widget (CcPanel *panel)
-{
-  CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (panel);
-  return GTK_WIDGET (self->title_label);
 }
 
 static void
@@ -1975,7 +1964,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   object_class->set_property = cc_applications_panel_set_property;
 
   panel_class->get_sidebar_widget = cc_applications_panel_get_sidebar_widget;
-  panel_class->get_title_widget = cc_applications_panel_get_title_widget;
 
   g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 

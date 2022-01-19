@@ -580,7 +580,6 @@ on_toplevel_escape_pressed_cb (GtkWidget      *widget,
 static void
 cc_display_panel_constructed (GObject *object)
 {
-  CcDisplayPanel *self = CC_DISPLAY_PANEL (object);
   CcShell *shell = cc_panel_get_shell (CC_PANEL (object));
   GtkWidget *toplevel = cc_shell_get_toplevel (shell);
 
@@ -591,8 +590,6 @@ cc_display_panel_constructed (GObject *object)
   on_toplevel_folded (CC_DISPLAY_PANEL (object), NULL, toplevel);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->constructed (object);
-
-  cc_shell_embed_widget_in_header (shell, self->back_button, GTK_POS_LEFT);
 }
 
 static const char *

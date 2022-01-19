@@ -35,6 +35,7 @@ struct _CcCameraPanel
 
   GtkStack     *stack;
   GtkListBox   *camera_apps_list_box;
+  GtkSwitch    *main_switch;
 
   GSettings    *privacy_settings;
 
@@ -359,37 +360,6 @@ cc_camera_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-cc_camera_panel_constructed (GObject *object)
-{
-  CcCameraPanel *self = CC_CAMERA_PANEL (object);
-  GtkWidget *box, *widget;
-
-  G_OBJECT_CLASS (cc_camera_panel_parent_class)->constructed (object);
-
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-  gtk_widget_show (box);
-
-  widget = gtk_switch_new ();
-  gtk_widget_show (widget);
-  gtk_widget_set_valign (widget, GTK_ALIGN_CENTER);
-  gtk_box_append (GTK_BOX (box), widget);
-
-  g_settings_bind (self->privacy_settings, "disable-camera",
-                   widget, "active",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_object_bind_property_full  (widget, "active",
-                                self->stack, "visible-child-name",
-                                G_BINDING_SYNC_CREATE,
-                                to_child_name,
-                                NULL,
-                                NULL, NULL);
-
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-                                   box,
-                                   GTK_POS_RIGHT);
-}
-
-static void
 cc_camera_panel_class_init (CcCameraPanelClass *klass)
 {
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
@@ -399,12 +369,12 @@ cc_camera_panel_class_init (CcCameraPanelClass *klass)
   panel_class->get_help_uri = cc_camera_panel_get_help_uri;
 
   object_class->finalize = cc_camera_panel_finalize;
-  object_class->constructed = cc_camera_panel_constructed;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/camera/cc-camera-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, camera_apps_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, main_switch);
 }
 
 static void
@@ -418,6 +388,16 @@ cc_camera_panel_init (CcCameraPanel *self)
 
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
+  g_settings_bind (self->privacy_settings, "disable-camera",
+                   self->main_switch, "active",
+                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+  g_object_bind_property_full  (self->main_switch, "active",
+                                self->stack, "visible-child-name",
+                                G_BINDING_SYNC_CREATE,
+                                to_child_name,
+                                NULL,
+                                NULL, NULL);
 
   self->camera_app_switches = g_hash_table_new_full (g_str_hash,
                                                      g_str_equal,

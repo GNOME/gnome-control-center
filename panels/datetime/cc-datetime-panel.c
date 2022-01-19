@@ -157,18 +157,6 @@ cc_date_time_panel_dispose (GObject *object)
   G_OBJECT_CLASS (cc_date_time_panel_parent_class)->dispose (object);
 }
 
-static void
-cc_date_time_panel_constructed (GObject *object)
-{
-  CcDateTimePanel *self = CC_DATE_TIME_PANEL (object);
-
-  G_OBJECT_CLASS (cc_date_time_panel_parent_class)->constructed (object);
-
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (self)),
-                                   GTK_WIDGET (self->lock_button),
-                                   GTK_POS_RIGHT);
-}
-
 static const char *
 cc_date_time_panel_get_help_uri (CcPanel *panel)
 {
@@ -963,7 +951,6 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-  object_class->constructed = cc_date_time_panel_constructed;
   object_class->dispose = cc_date_time_panel_dispose;
 
   panel_class->get_help_uri = cc_date_time_panel_get_help_uri;

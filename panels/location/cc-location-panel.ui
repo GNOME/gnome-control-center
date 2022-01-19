@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcLocationPanel" parent="CcPanel">
+
+    <child type="titlebar-end">
+      <object class="GtkSwitch" id="main_switch">
+        <property name="valign">center</property>
+      </object>
+    </child>
+
     <child type="content">
       <object class="GtkStack" id="stack">
 

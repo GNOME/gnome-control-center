@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcSharingPanel" parent="CcPanel">
+
+    <child type="titlebar-end">
+      <object class="GtkSwitch" id="master_switch">
+        <property name="valign">center</property>
+        <accessibility>
+          <property name="label" translatable="yes">Sharing</property>
+        </accessibility>
+      </object>
+    </child>
+
     <child type="content">
       <object class="GtkScrolledWindow" id="sharing_panel">
         <property name="hscrollbar-policy">never</property>

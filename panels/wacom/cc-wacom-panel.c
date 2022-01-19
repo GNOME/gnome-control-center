@@ -478,29 +478,12 @@ static void
 cc_wacom_panel_constructed (GObject *object)
 {
 	CcWacomPanel *self = CC_WACOM_PANEL (object);
-	GtkWidget *button;
 	CcShell *shell;
 
 	G_OBJECT_CLASS (cc_wacom_panel_parent_class)->constructed (object);
 
 	/* Add test area button to shell header. */
 	shell = cc_panel_get_shell (CC_PANEL (self));
-
-	button = gtk_menu_button_new ();
-	gtk_menu_button_set_use_underline (GTK_MENU_BUTTON (button), TRUE);
-	gtk_menu_button_set_label (GTK_MENU_BUTTON (button), _("Test Your _Settings"));
-	gtk_widget_add_css_class (button, "text-button");
-	gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
-
-	cc_shell_embed_widget_in_header (shell, button, GTK_POS_RIGHT);
-
-	self->test_popover = gtk_popover_new ();
-	gtk_menu_button_set_popover (GTK_MENU_BUTTON (button), self->test_popover);
-
-	self->test_draw_area = cc_drawing_area_new ();
-	gtk_widget_set_size_request (self->test_draw_area, 400, 300);
-	gtk_popover_set_child (GTK_POPOVER (self->test_popover), self->test_draw_area);
-	gtk_widget_show (self->test_draw_area);
 
 	self->stylus_gesture = gtk_gesture_stylus_new ();
 	g_signal_connect (self->stylus_gesture, "proximity",
@@ -510,23 +493,12 @@ cc_wacom_panel_constructed (GObject *object)
 
 	if (g_getenv ("UMOCKDEV_DIR") != NULL)
 		self->mock_stylus_id = g_idle_add (show_mock_stylus_cb, self);
-
-	self->test_button = button;
-	update_test_button (self);
 }
 
 static const char *
 cc_wacom_panel_get_help_uri (CcPanel *panel)
 {
   return "help:gnome-help/wacom";
-}
-
-static GtkWidget *
-cc_wacom_panel_get_title_widget (CcPanel *panel)
-{
-	CcWacomPanel *self = CC_WACOM_PANEL (panel);
-
-	return self->switcher;
 }
 
 static void
@@ -541,7 +513,6 @@ cc_wacom_panel_class_init (CcWacomPanelClass *klass)
 	object_class->constructed = cc_wacom_panel_constructed;
 
 	panel_class->get_help_uri = cc_wacom_panel_get_help_uri;
-	panel_class->get_title_widget = cc_wacom_panel_get_title_widget;
 
 	g_object_class_override_property (object_class, PROP_PARAMETERS, "parameters");
 }
@@ -695,6 +666,8 @@ on_stack_visible_child_notify_cb (CcWacomPanel *panel)
 static void
 cc_wacom_panel_init (CcWacomPanel *self)
 {
+  GtkWidget *titlebar;
+  GtkWidget *button;
 	GtkWidget *widget;
 	GsdDeviceManager *device_manager;
 	g_autoptr(GList) devices = NULL;
@@ -800,6 +773,27 @@ cc_wacom_panel_init (CcWacomPanel *self)
 		add_known_device (self, l->data);
 
 	update_current_page (self);
+
+  /* Titlebar widgets */
+	button = gtk_menu_button_new ();
+	gtk_menu_button_set_use_underline (GTK_MENU_BUTTON (button), TRUE);
+	gtk_menu_button_set_label (GTK_MENU_BUTTON (button), _("Test Your _Settings"));
+	gtk_widget_add_css_class (button, "text-button");
+	gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+
+	self->test_popover = gtk_popover_new ();
+	gtk_menu_button_set_popover (GTK_MENU_BUTTON (button), self->test_popover);
+
+	self->test_draw_area = cc_drawing_area_new ();
+	gtk_widget_set_size_request (self->test_draw_area, 400, 300);
+	gtk_popover_set_child (GTK_POPOVER (self->test_popover), self->test_draw_area);
+
+	self->test_button = button;
+	update_test_button (self);
+
+  titlebar = cc_panel_get_titlebar (CC_PANEL (self));
+  adw_header_bar_set_title_widget (ADW_HEADER_BAR (titlebar), self->switcher);
+  adw_header_bar_pack_end (ADW_HEADER_BAR (titlebar), button);
 }
 
 GDBusProxy *

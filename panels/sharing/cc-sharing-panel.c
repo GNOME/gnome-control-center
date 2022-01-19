@@ -121,19 +121,6 @@ cc_sharing_panel_master_switch_notify (CcSharingPanel *self)
 }
 
 static void
-cc_sharing_panel_constructed (GObject *object)
-{
-  CcSharingPanel *self = CC_SHARING_PANEL (object);
-
-  G_OBJECT_CLASS (cc_sharing_panel_parent_class)->constructed (object);
-
-  /* add the master switch */
-  cc_shell_embed_widget_in_header (cc_panel_get_shell (CC_PANEL (object)),
-                                   gtk_widget_get_parent (self->master_switch),
-                                   GTK_POS_RIGHT);
-}
-
-static void
 cc_sharing_panel_dispose (GObject *object)
 {
   CcSharingPanel *self = CC_SHARING_PANEL (object);
@@ -184,7 +171,6 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
 
-  object_class->constructed = cc_sharing_panel_constructed;
   object_class->dispose = cc_sharing_panel_dispose;
 
   panel_class->get_help_uri = cc_sharing_panel_get_help_uri;
@@ -195,6 +181,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, hostname_entry);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, screen_sharing_grid);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_grid);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, master_switch);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, main_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_headerbar);
@@ -1122,8 +1109,6 @@ sharing_proxy_ready (GObject      *source,
 static void
 cc_sharing_panel_init (CcSharingPanel *self)
 {
-  GtkWidget *box;
-
   g_resources_register (cc_sharing_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -1142,16 +1127,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (self->main_list_box),
                                              TRUE);
-
-  /* create the master switch */
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 6);
-
-  self->master_switch = gtk_switch_new ();
-  gtk_widget_set_valign (self->master_switch, GTK_ALIGN_CENTER);
-  gtk_accessible_update_property (GTK_ACCESSIBLE (self->master_switch),
-                                  GTK_ACCESSIBLE_PROPERTY_LABEL, _("Sharing"),
-                                  -1);
-  gtk_box_append (GTK_BOX (box), self->master_switch);
 
   /* start the panel in the disabled state */
   gtk_switch_set_active (GTK_SWITCH (self->master_switch), FALSE);

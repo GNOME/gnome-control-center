@@ -2,6 +2,19 @@
 <interface>
   <template class="CcBoltPanel" parent="CcPanel">
 
+    <!-- Headerbar entries -->
+    <child type="titlebar-end">
+      <object class="GtkBox" id="headerbar_box">
+        <property name="visible">False</property>
+        <property name="spacing">6</property>
+        <property name="halign">end</property>
+        <child>
+          <object class="GtkLockButton" id="lock_button">
+          </object>
+        </child>
+      </object>
+    </child>
+
     <child type="content">
       <object class="GtkOverlay">
         <child type="overlay">
@@ -497,16 +510,5 @@
       </object>
     </child>
   </template>
-
-  <!-- Headerbar entries -->
-  <object class="GtkBox" id="headerbar_box">
-    <property name="visible">False</property>
-    <property name="spacing">6</property>
-    <property name="halign">end</property>
-    <child>
-      <object class="GtkLockButton" id="lock_button">
-      </object>
-    </child>
-  </object>
 
 </interface>
