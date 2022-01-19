@@ -35,7 +35,7 @@
 #include <time.h>
 
 #include "cc-application.h"
-#include "cc-panel.h"
+#include "cc-panel-private.h"
 #include "cc-shell.h"
 #include "cc-shell-model.h"
 #include "cc-panel-list.h"
@@ -190,6 +190,7 @@ activate_panel (CcWindow          *self,
   if (self->current_panel)
     g_signal_handlers_disconnect_by_data (self->current_panel, self);
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, parameters));
+  cc_panel_set_folded (CC_PANEL (self->current_panel), adw_leaflet_get_folded (self->main_leaflet));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
   gtk_widget_show (self->current_panel);
 
@@ -528,15 +529,16 @@ static void
 on_main_leaflet_folded_changed_cb (CcWindow *self)
 {
   GtkSelectionMode selection_mode;
+  gboolean folded;
 
   g_assert (CC_IS_WINDOW (self));
 
-  selection_mode = GTK_SELECTION_SINGLE;
+  folded = adw_leaflet_get_folded (self->main_leaflet);
 
-  if (adw_leaflet_get_folded (self->main_leaflet))
-    selection_mode = GTK_SELECTION_NONE;
-
+  selection_mode = folded ? GTK_SELECTION_NONE : GTK_SELECTION_SINGLE;
   cc_panel_list_set_selection_mode (self->panel_list, selection_mode);
+
+  cc_panel_set_folded (CC_PANEL (self->current_panel), folded);
 }
 
 static void

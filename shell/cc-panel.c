@@ -32,7 +32,7 @@
 
 #include "config.h"
 
-#include "cc-panel.h"
+#include "cc-panel-private.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -44,6 +44,7 @@ typedef struct
 {
   CcShell      *shell;
   GCancellable *cancellable;
+  gboolean      folded;
 } CcPanelPrivate;
 
 G_DEFINE_ABSTRACT_TYPE_WITH_PRIVATE (CcPanel, cc_panel, ADW_TYPE_BIN)
@@ -59,6 +60,7 @@ enum
   PROP_0,
   PROP_SHELL,
   PROP_PARAMETERS,
+  PROP_FOLDED,
   N_PROPS
 };
 
@@ -109,6 +111,8 @@ cc_panel_set_property (GObject      *object,
 
         break;
       }
+
+    case PROP_FOLDED:
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
       break;
@@ -127,6 +131,10 @@ cc_panel_get_property (GObject    *object,
     {
     case PROP_SHELL:
       g_value_set_object (value, priv->shell);
+      break;
+
+    case PROP_FOLDED:
+      g_value_set_boolean (value, priv->folded);
       break;
 
     default:
@@ -167,6 +175,10 @@ cc_panel_class_init (CcPanelClass *klass)
                                                 "Shell the Panel resides in",
                                                 CC_TYPE_SHELL,
                                                 G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
+  properties[PROP_FOLDED] = g_param_spec_boolean ("folded", NULL, NULL,
+                                                  FALSE,
+                                                  G_PARAM_READABLE | G_PARAM_STATIC_STRINGS);
 
   properties[PROP_PARAMETERS] = g_param_spec_variant ("parameters",
                                                       "Structured parameters",
@@ -254,4 +266,36 @@ cc_panel_get_cancellable (CcPanel *panel)
     priv->cancellable = g_cancellable_new ();
 
   return priv->cancellable;
+}
+
+void
+cc_panel_set_folded (CcPanel  *panel,
+                     gboolean  folded)
+{
+  CcPanelPrivate *priv;
+
+  g_return_if_fail (CC_IS_PANEL (panel));
+
+  priv = cc_panel_get_instance_private (panel);
+
+  if (priv->folded != folded)
+    {
+      g_debug ("Panel %s folded: %s",
+               G_OBJECT_TYPE_NAME (panel),
+               folded ? "yes" : "no");
+
+      priv->folded = folded;
+      g_object_notify_by_pspec (G_OBJECT (panel), properties[PROP_FOLDED]);
+    }
+}
+
+gboolean
+cc_panel_get_folded (CcPanel *panel)
+{
+  CcPanelPrivate *priv;
+
+  g_return_val_if_fail (CC_IS_PANEL (panel), FALSE);
+
+  priv = cc_panel_get_instance_private (panel);
+  return priv->folded;
 }
