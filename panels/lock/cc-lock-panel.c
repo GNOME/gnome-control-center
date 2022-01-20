@@ -40,7 +40,6 @@ struct _CcLockPanel
   GtkSwitch     *automatic_screen_lock_switch;
   GtkComboBox   *blank_screen_combo;
   GtkComboBox   *lock_after_combo;
-  GtkListBox    *lock_list_box;
   GtkSwitch     *show_notifications_switch;
   GtkSwitch     *usb_protection_switch;
   GDBusProxy    *usb_proxy;
@@ -265,7 +264,6 @@ cc_lock_panel_class_init (CcLockPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, automatic_screen_lock_switch);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, blank_screen_combo);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, lock_after_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcLockPanel, lock_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, show_notifications_switch);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, usb_protection_switch);
   gtk_widget_class_bind_template_child (widget_class, CcLockPanel, usb_protection_row);

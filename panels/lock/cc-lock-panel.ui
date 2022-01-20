@@ -2,125 +2,94 @@
 <interface>
   <template class="CcLockPanel" parent="CcPanel">
     <child type="content">
-      <object class="GtkScrolledWindow">
-        <property name="hscrollbar-policy">never</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="AdwClamp">
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
+          <object class="AdwPreferencesGroup">
+            <property name="description" translatable="yes">Automatically locking the screen prevents others from accessing the computer while you're away.</property>
 
+            <!-- Blank Screen Delay row -->
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="hexpand">1</property>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Blank Screen Delay</property>
+                <property name="subtitle" translatable="yes">Period of inactivity after which the screen will go blank.</property>
+                <property name="subtitle-lines">2</property>
+                <property name="activatable-widget">blank_screen_combo</property>
+                <property name="sensitive" bind-source="blank_screen_combo" bind-property="sensitive"/>
+                <property name="use-underline">true</property>
                 <child>
-                  <object class="GtkLabel" id="lock_description_label">
-                    <property name="margin-bottom">12</property>
-                    <property name="label" translatable="yes">Automatically locking the screen prevents others from accessing the computer while you're away.</property>
-                    <property name="wrap">1</property>
-                    <property name="max-width-chars">50</property>
-                    <property name="xalign">0</property>
+                  <object class="GtkComboBoxText" id="blank_screen_combo">
+                    <property name="valign">center</property>
+                    <property name="entry_text_column">0</property>
+                    <property name="model">blank_screen_model</property>
+                    <signal name="changed" handler="on_blank_screen_delay_changed_cb" object="CcLockPanel" swapped="no" />
                   </object>
                 </child>
+              </object>
+            </child>
 
+            <!-- Automatic Screen Lock row -->
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Automatic Screen _Lock</property>
+                <property name="activatable-widget">automatic_screen_lock_switch</property>
+                <property name="use-underline">true</property>
                 <child>
-                  <object class="GtkListBox" id="lock_list_box">
-                    <property name="selection-mode">none</property>
+                  <object class="GtkSwitch" id="automatic_screen_lock_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
 
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
+            <!-- Automatic Screen Lock Delay row -->
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Automatic _Screen Lock Delay</property>
+                <property name="subtitle" translatable="yes">Period after the screen blanks when the screen is automatically locked.</property>
+                <property name="subtitle-lines">2</property>
+                <property name="activatable-widget">lock_after_combo</property>
+                <property name="sensitive" bind-source="lock_after_combo" bind-property="sensitive"/>
+                <property name="use-underline">true</property>
+                <child>
+                  <object class="GtkComboBoxText" id="lock_after_combo">
+                    <property name="valign">center</property>
+                    <property name="entry_text_column">0</property>
+                    <property name="model">lock_after_model</property>
+                    <signal name="changed" handler="on_lock_combo_changed_cb" object="CcLockPanel" swapped="no" />
+                  </object>
+                </child>
+              </object>
+            </child>
 
-                    <!-- Blank Screen Delay row -->
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Blank Screen Delay</property>
-                        <property name="subtitle" translatable="yes">Period of inactivity after which the screen will go blank.</property>
-                        <property name="subtitle-lines">2</property>
-                        <property name="activatable-widget">blank_screen_combo</property>
-                        <property name="sensitive" bind-source="blank_screen_combo" bind-property="sensitive"/>
-                        <property name="use-underline">true</property>
-                        <child>
-                          <object class="GtkComboBoxText" id="blank_screen_combo">
-                            <property name="valign">center</property>
-                            <property name="entry_text_column">0</property>
-                            <property name="model">blank_screen_model</property>
-                            <signal name="changed" handler="on_blank_screen_delay_changed_cb" object="CcLockPanel" swapped="no" />
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+            <!-- Show Notifications row -->
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Show _Notifications on Lock Screen</property>
+                <property name="activatable-widget">show_notifications_switch</property>
+                <property name="use-underline">true</property>
+                <child>
+                  <object class="GtkSwitch" id="show_notifications_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
 
-                    <!-- Automatic Screen Lock row -->
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Automatic Screen _Lock</property>
-                        <property name="activatable-widget">automatic_screen_lock_switch</property>
-                        <property name="use-underline">true</property>
-                        <child>
-                          <object class="GtkSwitch" id="automatic_screen_lock_switch">
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Automatic Screen Lock Delay row -->
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Automatic _Screen Lock Delay</property>
-                        <property name="subtitle" translatable="yes">Period after the screen blanks when the screen is automatically locked.</property>
-                        <property name="subtitle-lines">2</property>
-                        <property name="activatable-widget">lock_after_combo</property>
-                        <property name="sensitive" bind-source="lock_after_combo" bind-property="sensitive"/>
-                        <property name="use-underline">true</property>
-                        <child>
-                          <object class="GtkComboBoxText" id="lock_after_combo">
-                            <property name="valign">center</property>
-                            <property name="entry_text_column">0</property>
-                            <property name="model">lock_after_model</property>
-                            <signal name="changed" handler="on_lock_combo_changed_cb" object="CcLockPanel" swapped="no" />
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Show Notifications row -->
-                    <child>
-                      <object class="AdwActionRow">
-                        <property name="title" translatable="yes">Show _Notifications on Lock Screen</property>
-                        <property name="activatable-widget">show_notifications_switch</property>
-                        <property name="use-underline">true</property>
-                        <child>
-                          <object class="GtkSwitch" id="show_notifications_switch">
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- USB protection row -->
-                    <child>
-                      <object class="AdwActionRow" id="usb_protection_row">
-                        <property name="visible">false</property>
-                        <property name="title" translatable="yes">Forbid new _USB devices</property>
-                        <property name="subtitle" translatable="yes">Prevent new USB devices from interacting with the system when the screen is locked.</property>
-                        <property name="subtitle-lines">2</property>
-                        <property name="activatable-widget">usb_protection_switch</property>
-                        <property name="use-underline">true</property>
-                        <child>
-                          <object class="GtkSwitch" id="usb_protection_switch">
-                            <property name="halign">end</property>
-                            <property name="valign">center</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
+            <!-- USB protection row -->
+            <child>
+              <object class="AdwActionRow" id="usb_protection_row">
+                <property name="visible">false</property>
+                <property name="title" translatable="yes">Forbid new _USB devices</property>
+                <property name="subtitle" translatable="yes">Prevent new USB devices from interacting with the system when the screen is locked.</property>
+                <property name="subtitle-lines">2</property>
+                <property name="activatable-widget">usb_protection_switch</property>
+                <property name="use-underline">true</property>
+                <child>
+                  <object class="GtkSwitch" id="usb_protection_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
                   </object>
                 </child>
               </object>
