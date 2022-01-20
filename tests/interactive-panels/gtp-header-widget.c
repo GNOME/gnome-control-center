@@ -23,35 +23,16 @@
 struct _GtpHeaderWidget
 {
   CcPanel    parent;
-
-  GtkWidget *header_widget;
 };
 
 G_DEFINE_TYPE (GtpHeaderWidget, gtp_header_widget, CC_TYPE_PANEL)
 
 static void
-gtp_header_widget_constructed (GObject *object)
-{
-  GtpHeaderWidget *self = (GtpHeaderWidget *)object;
-  CcShell *shell;
-
-  G_OBJECT_CLASS (gtp_header_widget_parent_class)->constructed (object);
-
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  cc_shell_embed_widget_in_header (shell, self->header_widget, GTK_POS_LEFT);
-}
-
-static void
 gtp_header_widget_class_init (GtpHeaderWidgetClass *klass)
 {
-  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->constructed = gtp_header_widget_constructed;
-
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/tests/panels/gtp-header-widget.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, GtpHeaderWidget, header_widget);
 }
 
 static void

@@ -29,7 +29,6 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
-#include <gdk/gdkx.h>
 #include <string.h>
 
 #include "shell/cc-panel.h"
@@ -73,12 +72,7 @@ set_active_panel (CcTestWindow *shell,
   if (panel)
     {
       shell->active_panel = g_object_ref (panel);
-      gtk_container_add_with_properties (GTK_CONTAINER (shell->main_box), GTK_WIDGET (panel),
-                                         "pack-type", GTK_PACK_END,
-                                         "expand", TRUE,
-                                         "fill", TRUE,
-                                         NULL);
-      gtk_widget_show (GTK_WIDGET (shell->active_panel));
+      gtk_box_append (GTK_BOX (shell->main_box), GTK_WIDGET (panel));
     }
 }
 
@@ -93,22 +87,6 @@ cc_test_window_set_active_panel_from_id (CcShell      *shell,
   g_assert_not_reached ();
 }
 
-static void
-cc_test_window_embed_widget_in_header (CcShell         *shell,
-                                       GtkWidget       *widget,
-                                       GtkPositionType  position)
-{
-  CcTestWindow *self = CC_TEST_WINDOW (shell);
-
-  /* add to main box */
-  gtk_container_add_with_properties (GTK_CONTAINER (self->main_box), GTK_WIDGET (widget),
-                                     "pack-type", GTK_PACK_START,
-                                     "expand", FALSE,
-                                     "fill", TRUE,
-                                     NULL);
-  gtk_widget_show (widget);
-}
-
 static GtkWidget *
 cc_test_window_get_toplevel (CcShell *shell)
 {
@@ -119,7 +97,6 @@ static void
 cc_shell_iface_init (CcShellInterface *iface)
 {
   iface->set_active_panel_from_id = cc_test_window_set_active_panel_from_id;
-  iface->embed_widget_in_header = cc_test_window_embed_widget_in_header;
   iface->get_toplevel = cc_test_window_get_toplevel;
 }
 
@@ -191,8 +168,7 @@ cc_test_window_init (CcTestWindow *self)
 
   self->main_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 5);
 
-  gtk_container_add (GTK_CONTAINER (self), self->main_box);
-  gtk_widget_show (self->main_box);
+  gtk_window_set_child (GTK_WINDOW (self), self->main_box);
 }
 
 CcTestWindow *
@@ -201,6 +177,5 @@ cc_test_window_new (void)
   return g_object_new (CC_TYPE_TEST_WINDOW,
                        "resizable", TRUE,
                        "title", "Test Settings",
-                       "window-position", GTK_WIN_POS_CENTER,
                        NULL);
 }
