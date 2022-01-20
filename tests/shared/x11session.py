@@ -34,7 +34,7 @@ class X11SessionTestCase(DBusTestCase):
     Xserver_args = ['-screen', '0', '1280x1024x24', '+extension', 'GLX']
     #: Where to redirect the X stdout and stderr to. Set to None for debugging
     #: purposes if the X server is failing for some reason.
-    Xserver_output = subprocess.DEVNULL
+    Xserver_output = None
 
     @classmethod
     def setUpClass(klass):
