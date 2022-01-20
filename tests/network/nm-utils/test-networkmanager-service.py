@@ -1408,7 +1408,7 @@ def stdin_cb(io, condition):
     mainloop.quit()
 
 def quit_cb(user_data):
-    print("quitting after 20s")
+    print("quitting after 60s")
     mainloop.quit()
 
 def main():
@@ -1427,7 +1427,9 @@ def main():
     agent_manager = AgentManager(bus, "/org/freedesktop/NetworkManager/AgentManager")
     dns_manager = DnsManager(bus, "/org/freedesktop/NetworkManager/DnsManager")
 
-    if not bus.request_name("org.freedesktop.NetworkManager"):
+    r = bus.request_name("org.freedesktop.NetworkManager")
+    print(r)
+    if not r:
         sys.exit(1)
 
     # Watch stdin; if it closes, assume our parent has crashed, and exit
