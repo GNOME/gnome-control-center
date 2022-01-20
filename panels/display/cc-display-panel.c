@@ -90,6 +90,8 @@ struct _CcDisplayPanel
   GListStore     *primary_display_list;
   GList          *monitor_rows;
 
+  GtkWidget      *display_settings_disabled_group;
+
   GtkWidget      *arrangement_group;
   AdwBin         *arrangement_bin;
   GtkToggleButton *config_type_join;
@@ -600,6 +602,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_titlebar);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_titlebar_title_widget);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_disabled_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, cancel_button);
@@ -741,6 +744,14 @@ rebuild_ui (CcDisplayPanel *panel)
   GList *outputs, *l;
   CcDisplayConfigType type;
 
+  if (!cc_display_config_manager_get_apply_allowed (panel->manager))
+    {
+      gtk_widget_set_visible (panel->display_settings_disabled_group, TRUE);
+      gtk_widget_set_visible (panel->display_settings_group, FALSE);
+      gtk_widget_set_visible (panel->arrangement_group, FALSE);
+      return;
+    }
+
   panel->rebuilding_counter++;
 
   g_list_store_remove_all (panel->primary_display_list);
@@ -758,6 +769,8 @@ rebuild_ui (CcDisplayPanel *panel)
       panel->rebuilding_counter--;
       return;
     }
+
+  gtk_widget_set_visible (panel->display_settings_disabled_group, FALSE);
 
   n_active_outputs = 0;
   n_usable_outputs = 0;

@@ -59,3 +59,9 @@ cc_display_config_manager_get_current (CcDisplayConfigManager *self)
 {
   return CC_DISPLAY_CONFIG_MANAGER_GET_CLASS (self)->get_current (self);
 }
+
+gboolean
+cc_display_config_manager_get_apply_allowed (CcDisplayConfigManager *self)
+{
+  return CC_DISPLAY_CONFIG_MANAGER_GET_CLASS (self)->get_apply_allowed (self);
+}

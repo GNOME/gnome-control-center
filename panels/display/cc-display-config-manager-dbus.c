@@ -31,6 +31,8 @@ struct _CcDisplayConfigManagerDBus
   guint monitors_changed_id;
 
   GVariant *current_state;
+
+  gboolean apply_allowed;
 };
 
 G_DEFINE_TYPE (CcDisplayConfigManagerDBus,
@@ -118,6 +120,8 @@ bus_gotten (GObject      *object,
   CcDisplayConfigManagerDBus *self;
   GDBusConnection *connection;
   g_autoptr(GError) error = NULL;
+  g_autoptr(GDBusProxy) proxy = NULL;
+  g_autoptr(GVariant) variant = NULL;
 
   connection = g_bus_get_finish (result, &error);
   if (!connection)
@@ -143,12 +147,35 @@ bus_gotten (GObject      *object,
                                         monitors_changed,
                                         self,
                                         NULL);
+
+  proxy = g_dbus_proxy_new_sync (self->connection,
+                                 G_DBUS_PROXY_FLAGS_NONE,
+                                 NULL,
+                                 "org.gnome.Mutter.DisplayConfig",
+                                 "/org/gnome/Mutter/DisplayConfig",
+                                 "org.gnome.Mutter.DisplayConfig",
+                                 NULL,
+                                 &error);
+  if (!proxy)
+    {
+      g_warning ("Failed to create D-Bus proxy to \"org.gnome.Mutter.DisplayConfig\": %s",
+                 error->message);
+      return;
+    }
+
+  variant = g_dbus_proxy_get_cached_property (proxy, "ApplyMonitorsConfigAllowed");
+  if (variant)
+    self->apply_allowed = g_variant_get_boolean (variant);
+  else
+    g_warning ("Missing property 'ApplyMonitorsConfigAllowed' on DisplayConfig API");
+
   get_current_state (self);
 }
 
 static void
 cc_display_config_manager_dbus_init (CcDisplayConfigManagerDBus *self)
 {
+  self->apply_allowed = TRUE;
   self->cancellable = g_cancellable_new ();
   g_bus_get (G_BUS_TYPE_SESSION, self->cancellable, bus_gotten, self);
 }
@@ -170,6 +197,14 @@ cc_display_config_manager_dbus_finalize (GObject *object)
   G_OBJECT_CLASS (cc_display_config_manager_dbus_parent_class)->finalize (object);
 }
 
+static gboolean
+cc_display_config_manager_dbus_get_apply_allowed (CcDisplayConfigManager *pself)
+{
+  CcDisplayConfigManagerDBus *self = CC_DISPLAY_CONFIG_MANAGER_DBUS (pself);
+
+  return self->apply_allowed;
+}
+
 static void
 cc_display_config_manager_dbus_class_init (CcDisplayConfigManagerDBusClass *klass)
 {
@@ -179,6 +214,7 @@ cc_display_config_manager_dbus_class_init (CcDisplayConfigManagerDBusClass *klas
   gobject_class->finalize = cc_display_config_manager_dbus_finalize;
 
   parent_class->get_current = cc_display_config_manager_dbus_get_current;
+  parent_class->get_apply_allowed = cc_display_config_manager_dbus_get_apply_allowed;
 }
 
 CcDisplayConfigManager *

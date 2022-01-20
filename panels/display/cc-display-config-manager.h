@@ -34,9 +34,12 @@ struct _CcDisplayConfigManagerClass
   GObjectClass parent_class;
 
   CcDisplayConfig * (*get_current) (CcDisplayConfigManager *self);
+  gboolean (* get_apply_allowed) (CcDisplayConfigManager *self);
 };
 
 CcDisplayConfig * cc_display_config_manager_get_current (CcDisplayConfigManager *self);
+
+gboolean cc_display_config_manager_get_apply_allowed (CcDisplayConfigManager *self);
 
 void _cc_display_config_manager_emit_changed (CcDisplayConfigManager *self);
 
