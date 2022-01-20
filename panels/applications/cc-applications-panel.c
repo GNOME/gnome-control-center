@@ -794,7 +794,7 @@ add_static_permissions (CcApplicationsPanel *self,
   gint added = 0;
   g_autofree gchar *text = NULL;
 
-  if (!g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
+  if (app_id && !g_str_has_prefix (app_id, PORTAL_SNAP_PREFIX))
     keyfile = get_flatpak_metadata (app_id);
   if (keyfile == NULL)
     return FALSE;
