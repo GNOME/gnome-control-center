@@ -156,12 +156,10 @@ activate_panel (CcWindow          *self,
   self->current_panel = GTK_WIDGET (cc_panel_loader_load_by_name (CC_SHELL (self), id, name, parameters));
   cc_panel_set_folded (CC_PANEL (self->current_panel), adw_leaflet_get_folded (self->main_leaflet));
   cc_shell_set_active_panel (CC_SHELL (self), CC_PANEL (self->current_panel));
-  gtk_widget_show (self->current_panel);
 
   gtk_stack_add_named (self->stack, self->current_panel, id);
 
   /* switch to the new panel */
-  gtk_widget_show (self->current_panel);
   gtk_stack_set_visible_child_name (self->stack, id);
 
   sidebar_widget = cc_panel_get_sidebar_widget (CC_PANEL (self->current_panel));
