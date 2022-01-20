@@ -35,6 +35,7 @@ name_exists (GDBusConnection *c, const char *name)
 	GVariant *reply;
 	gboolean exists = FALSE;
 
+	g_message("testing if %s exists, %ld", name, g_get_real_time ());
 	reply = g_dbus_connection_call_sync (c,
 	                                     DBUS_SERVICE_DBUS,
 	                                     DBUS_PATH_DBUS,
@@ -47,6 +48,7 @@ name_exists (GDBusConnection *c, const char *name)
 	                                     NULL,
 	                                     NULL);
 	if (reply != NULL) {
+		g_message("received non-null reply, %ld", g_get_real_time ());
 		exists = TRUE;
 		g_variant_unref (reply);
 	}
