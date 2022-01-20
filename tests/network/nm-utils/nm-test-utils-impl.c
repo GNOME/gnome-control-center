@@ -78,7 +78,7 @@ NMTstcServiceInfo *
 nmtstc_service_init (void)
 {
 	NMTstcServiceInfo *info;
-	const char *args[] = { TEST_NM_PYTHON, TEST_NM_SERVICE, NULL };
+	const char *args[] = { TEST_NM_PYTHON, "-u", TEST_NM_SERVICE, NULL };
 	GError *error = NULL;
 	int i;
 
