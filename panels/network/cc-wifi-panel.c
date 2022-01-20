@@ -60,7 +60,7 @@ struct _CcWifiPanel
   GtkStack           *main_stack;
   GtkWidget          *spinner;
   GtkStack           *stack;
-  GtkImage           *wifi_qr_image;
+  GtkPicture         *wifi_qr_image;
   CcQrCode           *qr_code;
 
   NMClient           *client;
@@ -355,17 +355,12 @@ wifi_panel_update_qr_image_cb (CcWifiPanel *self)
       str = get_qr_string_for_hotspot (self->client, hotspot);
       if (cc_qr_code_set_text (self->qr_code, str))
         {
-          g_autoptr(GdkPixbuf) pixbuf = NULL;
-          cairo_surface_t *surface;
+          GdkPaintable *paintable;
           gint scale;
 
           scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->wifi_qr_image));
-          surface = cc_qr_code_get_surface (self->qr_code, QR_IMAGE_SIZE, scale);
-          pixbuf = gdk_pixbuf_get_from_surface (surface,
-                                                0, 0,
-                                                QR_IMAGE_SIZE,
-                                                QR_IMAGE_SIZE);
-          gtk_image_set_from_pixbuf (self->wifi_qr_image, pixbuf);
+          paintable = cc_qr_code_get_paintable (self->qr_code, QR_IMAGE_SIZE * scale);
+          gtk_picture_set_paintable (self->wifi_qr_image, paintable);
         }
     }
 
@@ -1018,6 +1013,8 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
 static void
 cc_wifi_panel_init (CcWifiPanel *self)
 {
+  g_autoptr(GtkCssProvider) provider = NULL;
+
   g_resources_register (cc_network_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
@@ -1067,4 +1064,11 @@ cc_wifi_panel_init (CcWifiPanel *self)
 
   /* Handle comment-line arguments after loading devices */
   handle_argv (self);
+
+  /* use custom CSS */
+  provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/network/wifi-panel.css");
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }

@@ -41,14 +41,15 @@
  * Generate a QR image from a given text.
  */
 
+#define BYTES_PER_R8G8B8 3
+
 struct _CcQrCode
 {
   GObject          parent_instance;
 
   gchar           *text;
-  cairo_surface_t *surface;
+  GdkTexture      *texture;
   gint             size;
-  gint             scale;
 };
 
 G_DEFINE_TYPE (CcQrCode, cc_qr_code, G_TYPE_OBJECT)
@@ -59,7 +60,7 @@ cc_qr_code_finalize (GObject *object)
 {
   CcQrCode *self = (CcQrCode *)object;
 
-  g_clear_pointer (&self->surface, cairo_surface_destroy);
+  g_clear_object (&self->texture);
   g_clear_pointer (&self->text, g_free);
 
   G_OBJECT_CLASS (cc_qr_code_parent_class)->finalize (object);
@@ -94,8 +95,7 @@ cc_qr_code_set_text (CcQrCode    *self,
   if (g_strcmp0 (text, self->text) == 0)
     return FALSE;
 
-  /* Clear cairo surface that is cached */
-  g_clear_pointer (&self->surface, cairo_surface_destroy);
+  g_clear_object (&self->texture);
   g_free (self->text);
   self->text = g_strdup (text);
 
@@ -103,33 +103,33 @@ cc_qr_code_set_text (CcQrCode    *self,
 }
 
 static void
-cc_cairo_fill_pixel (cairo_t *cr,
-                     int      x,
-                     int      y,
-                     int      padding,
-                     int      scale)
+cc_fill_pixel (GByteArray *array,
+               guint8      value,
+               int         pixel_size)
 {
-  cairo_rectangle (cr,
-                   x * scale + padding,
-                   y * scale + padding,
-                   scale, scale);
-  cairo_fill (cr);
+  guint i;
+
+  for (i = 0; i < pixel_size; i++) {
+    g_byte_array_append (array, &value, 1); /* R */
+    g_byte_array_append (array, &value, 1); /* G */
+    g_byte_array_append (array, &value, 1); /* B */
+  }
 }
 
-cairo_surface_t *
-cc_qr_code_get_surface (CcQrCode *self,
-                        gint      size,
-                        gint      scale)
+GdkPaintable *
+cc_qr_code_get_paintable (CcQrCode *self,
+                          gint      size)
 {
   uint8_t qr_code[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
   uint8_t temp_buf[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
-  cairo_t *cr;
-  gint pixel_size, padding, qr_size;
+  g_autoptr(GBytes) bytes = NULL;
+  GByteArray *qr_matrix;
+  gint pixel_size, padding, qr_size, total_size;
+  gint column, row, i;
   gboolean success = FALSE;
 
   g_return_val_if_fail (CC_IS_QR_CODE (self), NULL);
   g_return_val_if_fail (size > 0, NULL);
-  g_return_val_if_fail (scale > 0, NULL);
 
   if (!self->text || !*self->text)
     {
@@ -137,14 +137,10 @@ cc_qr_code_get_surface (CcQrCode *self,
       cc_qr_code_set_text (self, "invalid text");
     }
 
-  if (self->surface &&
-      self->size == size &&
-      self->scale == scale)
-    return self->surface;
+  if (self->texture && self->size == size)
+    return GDK_PAINTABLE (self->texture);
 
   self->size  = size;
-  self->scale = scale;
-  g_clear_pointer (&self->surface, cairo_surface_destroy);
 
   success = qrcodegen_encodeText (self->text,
                                   temp_buf,
@@ -158,16 +154,6 @@ cc_qr_code_get_surface (CcQrCode *self,
   if (!success)
     return NULL;
 
-  self->surface = cairo_image_surface_create (CAIRO_FORMAT_RGB24, size * scale, size * scale);
-  cairo_surface_set_device_scale (self->surface, scale, scale);
-  cr = cairo_create (self->surface);
-  cairo_set_antialias (cr, CAIRO_ANTIALIAS_NONE);
-
-  /* Draw white background */
-  cairo_set_source_rgba (cr, 1, 1, 1, 1);
-  cairo_rectangle (cr, 0, 0, size * scale, size * scale);
-  cairo_fill (cr);
-
   qr_size = qrcodegen_getSize(qr_code);
   pixel_size = MAX (1, size / (qr_size));
   padding = (size - qr_size * pixel_size) / 2;
@@ -180,18 +166,30 @@ cc_qr_code_get_surface (CcQrCode *self,
       padding = (size - qr_size * pixel_size) / 2;
     }
 
-  /* Now draw the black QR code pixels */
-  cairo_set_source_rgba (cr, 0, 0, 0, 1);
-  for (int row = 0; row < qr_size; row++)
+  total_size = qr_size * pixel_size;
+  qr_matrix = g_byte_array_sized_new (total_size * total_size * pixel_size * BYTES_PER_R8G8B8);
+
+  for (column = 0; column < total_size; column++)
     {
-      for (int column = 0; column < qr_size; column++)
+      for (i = 0; i < pixel_size; i++)
         {
-          if (qrcodegen_getModule (qr_code, row, column))
-            cc_cairo_fill_pixel (cr, column, row, padding, pixel_size);
+          for (row = 0; row < total_size / pixel_size; row++)
+            {
+              if (qrcodegen_getModule (qr_code, column, row))
+                cc_fill_pixel (qr_matrix, 0x00, pixel_size);
+              else
+                cc_fill_pixel (qr_matrix, 0xff, pixel_size);
+            }
         }
     }
 
-  cairo_destroy (cr);
+  bytes = g_byte_array_free_to_bytes (qr_matrix);
 
-  return self->surface;
+  self->texture = gdk_memory_texture_new (total_size,
+                                          total_size,
+                                          GDK_MEMORY_R8G8B8,
+                                          bytes,
+                                          total_size * BYTES_PER_R8G8B8);
+
+  return GDK_PAINTABLE (self->texture);
 }

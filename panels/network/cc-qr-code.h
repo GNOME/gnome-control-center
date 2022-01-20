@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include <gtk/gtk.h>
 #include <glib-object.h>
 #include <cairo.h>
 
@@ -36,8 +37,7 @@ G_DECLARE_FINAL_TYPE (CcQrCode, cc_qr_code, CC, QR_CODE, GObject)
 CcQrCode        *cc_qr_code_new         (void);
 gboolean         cc_qr_code_set_text    (CcQrCode    *self,
                                          const gchar *text);
-cairo_surface_t *cc_qr_code_get_surface (CcQrCode    *self,
-                                         gint         size,
-                                         gint         scale);
+GdkPaintable    *cc_qr_code_get_paintable (CcQrCode    *self,
+                                           gint         size);
 
 G_END_DECLS
