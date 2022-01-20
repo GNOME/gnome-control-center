@@ -222,29 +222,6 @@
             </child>
 
             <child>
-              <object class="AdwPreferencesGroup" id="handler_section">
-                <child>
-                  <object class="GtkListBox" id="handler_list">
-                    <property name="selection-mode">none</property>
-                    <signal name="row-activated" handler="handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="handler_reset">
-                    <property name="halign">end</property>
-                    <property name="valign">center</property>
-                    <property name="margin-top">12</property>
-                    <property name="label" translatable="yes">Reset</property>
-                    <signal name="clicked" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
-                  </object>
-                </child>
-              </object>
-            </child>
-
-            <child>
               <object class="AdwPreferencesGroup" id="usage_section">
                 <child>
                   <object class="CcInfoRow" id="builtin">
@@ -253,6 +230,14 @@
                     <property name="has-expander">True</property>
                     <property name="is-link">True</property>
                     <signal name="activated" handler="on_builtin_row_activated_cb" object="CcApplicationsPanel" swapped="no" />
+                  </object>
+                </child>
+                <child>
+                  <object class="CcInfoRow" id="handler_row">
+                    <property name="title" translatable="yes">File &amp;amp; Link Associations</property>
+                    <property name="has-expander">True</property>
+                    <property name="is-link">True</property>
+                    <signal name="activated" handler="on_handler_row_activated_cb" object="CcApplicationsPanel" swapped="no" />
                   </object>
                 </child>
                 <child>
@@ -373,6 +358,63 @@
             </style>
           </object>
         </child>
+      </object>
+    </child>
+  </object>
+
+  <!-- File & Link handlers dialog -->
+  <object class="GtkDialog" id="handler_dialog">
+    <property name="title" translatable="yes">File &amp; Link Associations</property>
+    <property name="modal">1</property>
+    <property name="use-header-bar">1</property>
+    <property name="resizable">0</property>
+    <property name="hide-on-close">True</property>
+    <property name="default-width">500</property>
+    <property name="default-height">400</property>
+    <child>
+      <object class="AdwPreferencesPage">
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="GtkLabel" id="handler_title_label">
+                <property name="wrap">True</property>
+                <property name="xalign">0.0</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup" id="handler_section">
+            <child>
+              <object class="GtkListBox" id="handler_list">
+                <property name="selection-mode">none</property>
+                <signal name="row-activated" handler="handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="GtkButton" id="handler_reset">
+                <property name="valign">center</property>
+                <property name="margin-top">12</property>
+                <property name="label" translatable="yes">Reset</property>
+                <signal name="clicked" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
+                <style>
+                  <class name="destructive-action" />
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+
       </object>
     </child>
   </object>

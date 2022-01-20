@@ -116,9 +116,11 @@ struct _CcApplicationsPanel
   CcToggleRow     *search;
   CcInfoRow       *no_search;
 
-  GtkWidget       *handler_section;
   GtkButton       *handler_reset;
+  GtkDialog       *handler_dialog;
   GtkListBox      *handler_list;
+  CcInfoRow       *handler_row;
+  GtkLabel        *handler_title_label;
   CcInfoRow       *hypertext;
   CcInfoRow       *text;
   CcInfoRow       *images;
@@ -1326,7 +1328,7 @@ static void
 add_handler_row (CcApplicationsPanel *self,
                  const gchar         *type)
 {
-  gtk_widget_show (self->handler_section);
+  gtk_widget_show (GTK_WIDGET (self->handler_row));
 
   if (g_content_type_is_a (type, "x-scheme-handler/*"))
     add_link_type (self, type);
@@ -1425,11 +1427,13 @@ handler_reset_cb (CcApplicationsPanel *self)
 }
 
 static void
-update_handler_sections (CcApplicationsPanel *self,
-                         GAppInfo            *info)
+update_handler_dialog (CcApplicationsPanel *self,
+                       GAppInfo            *info)
 {
+  g_autofree gchar *header_title = NULL;
   g_autoptr(GHashTable) hash = NULL;
   const gchar **types;
+  guint n_associations = 0;
   gint i;
 
   listbox_remove_all (self->handler_list);
@@ -1445,8 +1449,7 @@ update_handler_sections (CcApplicationsPanel *self,
   self->other = NULL;
   self->link = NULL;
 
-  gtk_widget_hide (self->handler_section);
-
+  gtk_widget_hide (GTK_WIDGET (self->handler_row));
   types = g_app_info_get_supported_types (info);
   if (types == NULL || types[0] == NULL)
     return;
@@ -1469,7 +1472,25 @@ update_handler_sections (CcApplicationsPanel *self,
 
       add_handler_row (self, ctype);
       g_hash_table_add (hash, g_steal_pointer (&ctype));
+
+      n_associations++;
     }
+
+  if (n_associations > 0)
+    {
+      g_autofree gchar *subtitle = NULL;
+
+      subtitle = g_strdup_printf (g_dngettext (GETTEXT_PACKAGE,
+                                               "%u file and link type that is opened by the app",
+                                               "%u file and link types that are opened by the app",
+                                               n_associations),
+                                  n_associations);
+      adw_action_row_set_subtitle (ADW_ACTION_ROW (self->handler_row), subtitle);
+    }
+
+  header_title = g_strdup_printf (_("<b>%s</b> is used to open the following types of files and links."),
+                                  g_app_info_get_display_name (info));
+  gtk_label_set_markup (self->handler_title_label, header_title);
 }
 
 /* --- usage section --- */
@@ -1483,6 +1504,17 @@ on_builtin_row_activated_cb (GtkListBoxRow       *row,
   gtk_window_set_transient_for (GTK_WINDOW (self->builtin_dialog),
                                 GTK_WINDOW (cc_shell_get_toplevel (shell)));
   gtk_window_present (GTK_WINDOW (self->builtin_dialog));
+}
+
+static void
+on_handler_row_activated_cb (GtkListBoxRow       *row,
+                             CcApplicationsPanel *self)
+{
+  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
+
+  gtk_window_set_transient_for (GTK_WINDOW (self->handler_dialog),
+                                GTK_WINDOW (cc_shell_get_toplevel (shell)));
+  gtk_window_present (GTK_WINDOW (self->handler_dialog));
 }
 
 static void
@@ -1690,7 +1722,7 @@ update_panel (CcApplicationsPanel *self,
   update_header_section (self, info);
   update_permission_section (self, info);
   update_integration_section (self, info);
-  update_handler_sections (self, info);
+  update_handler_dialog (self, info);
   update_usage_section (self, info);
 
   g_set_object (&self->current_app_info, info);
@@ -2019,9 +2051,11 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, clear_cache_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_box);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_title_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_title);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, install_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_section);
@@ -2068,12 +2102,13 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, open_software_cb);
   gtk_widget_class_bind_template_callback (widget_class, handler_reset_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_builtin_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_handler_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_launch_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_stopped_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_storage_row_activated_cb);
-}
+
+  gtk_widget_class_bind_template_callback (widget_class, on_storage_row_activated_cb);}
 
 static void
 cc_applications_panel_init (CcApplicationsPanel *self)
