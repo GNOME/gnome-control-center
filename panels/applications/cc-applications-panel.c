@@ -93,8 +93,14 @@ struct _CcApplicationsPanel
   GtkWidget       *settings_box;
   GtkButton       *install_button;
 
-  GtkWidget       *permission_section;
-  GtkListBox      *permission_list;
+  GtkWidget       *integration_section;
+  CcToggleRow     *notification;
+  CcToggleRow     *background;
+  CcToggleRow     *wallpaper;
+  CcToggleRow     *sound;
+  CcInfoRow       *no_sound;
+  CcToggleRow     *search;
+  CcInfoRow       *no_search;
   CcToggleRow     *camera;
   CcInfoRow       *no_camera;
   CcToggleRow     *location;
@@ -106,15 +112,6 @@ struct _CcApplicationsPanel
   GtkDialog       *builtin_dialog;
   GtkLabel        *builtin_label;
   GtkListBox      *builtin_list;
-
-  GtkWidget       *integration_section;
-  CcToggleRow     *notification;
-  CcToggleRow     *background;
-  CcToggleRow     *wallpaper;
-  CcToggleRow     *sound;
-  CcInfoRow       *no_sound;
-  CcToggleRow     *search;
-  CcInfoRow       *no_search;
 
   GtkButton       *handler_reset;
   GtkDialog       *handler_dialog;
@@ -845,49 +842,6 @@ remove_static_permissions (CcApplicationsPanel *self)
   listbox_remove_all (self->builtin_list);
 }
 
-static void
-update_permission_section (CcApplicationsPanel *self,
-                           GAppInfo            *info)
-{
-  g_autofree gchar *portal_app_id = get_portal_app_id (info);
-  gboolean disabled, allowed, set;
-  gboolean has_any = FALSE;
-
-  if (portal_app_id == NULL)
-    {
-      gtk_widget_hide (self->permission_section);
-      return;
-    }
-
-  disabled = g_settings_get_boolean (self->privacy_settings, "disable-camera");
-  get_device_allowed (self, "camera", portal_app_id, &set, &allowed);
-  cc_toggle_row_set_allowed (self->camera, allowed);
-  gtk_widget_set_visible (GTK_WIDGET (self->camera), set && !disabled);
-  gtk_widget_set_visible (GTK_WIDGET (self->no_camera), set && disabled);
-  has_any |= set;
-
-  disabled = g_settings_get_boolean (self->privacy_settings, "disable-microphone");
-  get_device_allowed (self, "microphone", portal_app_id, &set, &allowed);
-  cc_toggle_row_set_allowed (self->microphone, allowed);
-  gtk_widget_set_visible (GTK_WIDGET (self->microphone), set && !disabled);
-  gtk_widget_set_visible (GTK_WIDGET (self->no_microphone), set && disabled);
-  has_any |= set;
-
-  disabled = !g_settings_get_boolean (self->location_settings, "enabled");
-  get_location_allowed (self, portal_app_id, &set, &allowed);
-  cc_toggle_row_set_allowed (self->location, allowed);
-  gtk_widget_set_visible (GTK_WIDGET (self->location), set && !disabled);
-  gtk_widget_set_visible (GTK_WIDGET (self->no_location), set && disabled);
-  has_any |= set;
-
-#ifdef HAVE_SNAP
-  remove_snap_permissions (self);
-  has_any |= add_snap_permissions (self, info, portal_app_id);
-#endif
-
-  gtk_widget_set_visible (self->permission_section, has_any);
-}
-
 /* --- header section --- */
 
 static void
@@ -956,6 +910,32 @@ update_integration_section (CcApplicationsPanel *self,
       cc_toggle_row_set_allowed (self->sound, allowed);
       gtk_widget_set_visible (GTK_WIDGET (self->sound), set && !disabled);
       gtk_widget_set_visible (GTK_WIDGET (self->no_sound), set && disabled);
+
+      disabled = g_settings_get_boolean (self->privacy_settings, "disable-camera");
+      get_device_allowed (self, "camera", portal_app_id, &set, &allowed);
+      cc_toggle_row_set_allowed (self->camera, allowed);
+      gtk_widget_set_visible (GTK_WIDGET (self->camera), set && !disabled);
+      gtk_widget_set_visible (GTK_WIDGET (self->no_camera), set && disabled);
+      has_any |= set;
+
+      disabled = g_settings_get_boolean (self->privacy_settings, "disable-microphone");
+      get_device_allowed (self, "microphone", portal_app_id, &set, &allowed);
+      cc_toggle_row_set_allowed (self->microphone, allowed);
+      gtk_widget_set_visible (GTK_WIDGET (self->microphone), set && !disabled);
+      gtk_widget_set_visible (GTK_WIDGET (self->no_microphone), set && disabled);
+      has_any |= set;
+
+      disabled = !g_settings_get_boolean (self->location_settings, "enabled");
+      get_location_allowed (self, portal_app_id, &set, &allowed);
+      cc_toggle_row_set_allowed (self->location, allowed);
+      gtk_widget_set_visible (GTK_WIDGET (self->location), set && !disabled);
+      gtk_widget_set_visible (GTK_WIDGET (self->no_location), set && disabled);
+      has_any |= set;
+
+    #ifdef HAVE_SNAP
+      remove_snap_permissions (self);
+      has_any |= add_snap_permissions (self, info, portal_app_id);
+    #endif
     }
   else
     {
@@ -969,6 +949,12 @@ update_integration_section (CcApplicationsPanel *self,
       gtk_widget_hide (GTK_WIDGET (self->wallpaper));
       gtk_widget_hide (GTK_WIDGET (self->sound));
       gtk_widget_hide (GTK_WIDGET (self->no_sound));
+      gtk_widget_hide (GTK_WIDGET (self->camera));
+      gtk_widget_hide (GTK_WIDGET (self->no_camera));
+      gtk_widget_hide (GTK_WIDGET (self->microphone));
+      gtk_widget_hide (GTK_WIDGET (self->no_microphone));
+      gtk_widget_hide (GTK_WIDGET (self->location));
+      gtk_widget_hide (GTK_WIDGET (self->no_location));
     }
 
   gtk_widget_set_visible (self->integration_section, has_any);
@@ -1416,7 +1402,6 @@ update_panel (CcApplicationsPanel *self,
   g_clear_pointer (&self->current_portal_app_id, g_free);
 
   update_header_section (self, info);
-  update_permission_section (self, info);
   update_integration_section (self, info);
   update_handler_dialog (self, info);
   update_usage_section (self, info);
@@ -1769,8 +1754,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, background);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, wallpaper);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, shortcuts);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_section);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, permission_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_search_entry);
