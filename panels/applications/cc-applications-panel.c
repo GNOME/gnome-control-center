@@ -2038,7 +2038,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
 static void
 cc_applications_panel_init (CcApplicationsPanel *self)
 {
-  g_autoptr(GtkStyleProvider) provider = NULL;
 #ifdef HAVE_MALCONTENT
   g_autoptr(GDBusConnection) system_bus = NULL;
   g_autoptr(GError) error = NULL;
@@ -2052,14 +2051,6 @@ cc_applications_panel_init (CcApplicationsPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   gtk_widget_set_visible (GTK_WIDGET (self->install_button), gnome_software_is_installed ());
-
-  provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
-  gtk_css_provider_load_from_resource (GTK_CSS_PROVIDER (provider),
-                                       "/org/gnome/control-center/applications/cc-applications-panel.css");
-
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              provider,
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   g_signal_connect_object (self->sidebar_listbox, "row-activated",
                            G_CALLBACK (row_activated_cb), self, G_CONNECT_SWAPPED);
