@@ -88,7 +88,7 @@ struct _CcApplicationsPanel
   GtkWidget       *settings_box;
   GtkButton       *install_button;
 
-  GtkBox          *permission_section;
+  GtkWidget       *permission_section;
   GtkListBox      *permission_list;
   CcToggleRow     *camera;
   CcInfoRow       *no_camera;
@@ -102,7 +102,7 @@ struct _CcApplicationsPanel
   GtkLabel        *builtin_label;
   GtkListBox      *builtin_list;
 
-  GtkBox          *integration_section;
+  GtkWidget       *integration_section;
   GtkListBox      *integration_list;
   CcToggleRow     *notification;
   CcToggleRow     *background;
@@ -112,7 +112,7 @@ struct _CcApplicationsPanel
   CcToggleRow     *search;
   CcInfoRow       *no_search;
 
-  GtkBox          *handler_section;
+  GtkWidget       *handler_section;
   GtkButton       *handler_reset;
   GtkListBox      *handler_list;
   CcInfoRow       *hypertext;
@@ -126,7 +126,7 @@ struct _CcApplicationsPanel
   CcInfoRow       *other;
   CcInfoRow       *link;
 
-  GtkBox          *usage_section;
+  GtkWidget       *usage_section;
   GtkListBox      *usage_list;
   CcInfoRow       *storage;
   GtkDialog       *storage_dialog;
@@ -871,7 +871,7 @@ update_permission_section (CcApplicationsPanel *self,
 
   if (portal_app_id == NULL)
     {
-      gtk_widget_hide (GTK_WIDGET (self->permission_section));
+      gtk_widget_hide (self->permission_section);
       return;
     }
 
@@ -906,7 +906,7 @@ update_permission_section (CcApplicationsPanel *self,
   gtk_widget_set_visible (GTK_WIDGET (self->builtin), has_builtin);
   has_any |= has_builtin;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->permission_section), has_any);
+  gtk_widget_set_visible (self->permission_section, has_any);
 }
 
 /* --- gintegration section --- */
@@ -976,7 +976,7 @@ update_integration_section (CcApplicationsPanel *self,
       gtk_widget_hide (GTK_WIDGET (self->no_sound));
     }
 
-  gtk_widget_set_visible (GTK_WIDGET (self->integration_section), has_any);
+  gtk_widget_set_visible (self->integration_section, has_any);
 }
 
 /* --- handler section --- */
@@ -1326,7 +1326,7 @@ static void
 add_handler_row (CcApplicationsPanel *self,
                  const gchar         *type)
 {
-  gtk_widget_show (GTK_WIDGET (self->handler_section));
+  gtk_widget_show (self->handler_section);
 
   if (g_content_type_is_a (type, "x-scheme-handler/*"))
     add_link_type (self, type);
@@ -1445,7 +1445,7 @@ update_handler_sections (CcApplicationsPanel *self,
   self->other = NULL;
   self->link = NULL;
 
-  gtk_widget_hide (GTK_WIDGET (self->handler_section));
+  gtk_widget_hide (self->handler_section);
 
   types = g_app_info_get_supported_types (info);
   if (types == NULL || types[0] == NULL)
@@ -1635,12 +1635,12 @@ update_usage_section (CcApplicationsPanel *self,
 
   if (portal_app_id != NULL)
     {
-      gtk_widget_show (GTK_WIDGET (self->usage_section));
+      gtk_widget_show (self->usage_section);
       update_app_sizes (self, portal_app_id);
     }
   else
     {
-      gtk_widget_hide (GTK_WIDGET (self->usage_section));
+      gtk_widget_hide (self->usage_section);
     }
 }
 
