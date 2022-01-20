@@ -62,6 +62,7 @@ struct _CcWindow
   AdwWindowTitle    *sidebar_title_widget;
   GtkStack          *stack;
 
+  GtkWidget  *old_panel;
   GtkWidget  *current_panel;
   char       *current_panel_id;
   GQueue     *previous_panels;
@@ -371,7 +372,6 @@ set_active_panel_from_id (CcWindow     *self,
   g_autofree gchar *name = NULL;
   CcPanelVisibility visibility;
   GtkTreeIter iter;
-  GtkWidget *old_panel;
   CcPanelListView view;
   gboolean activated;
   gboolean found;
@@ -397,7 +397,14 @@ set_active_panel_from_id (CcWindow     *self,
       CC_RETURN (TRUE);
     }
 
-  old_panel = self->current_panel;
+  if (self->old_panel)
+    gtk_stack_remove (self->stack, g_steal_pointer (&self->old_panel));
+
+  /* old_panel will be removed by the on_stack_transition_running_changed_cb
+   * callback - or, if panels changed before the transition ended, by the code
+   * just above.
+   */
+  self->old_panel = self->current_panel;
 
   gtk_tree_model_get (GTK_TREE_MODEL (self->store),
                       &iter,
@@ -427,9 +434,6 @@ set_active_panel_from_id (CcWindow     *self,
   self->current_panel_id = g_strdup (start_id);
 
   CC_TRACE_MSG ("Current panel id: %s", start_id);
-
-  if (old_panel)
-    gtk_stack_remove (self->stack, old_panel);
 
   cc_panel_list_set_active_panel (self->panel_list, start_id);
 
@@ -583,6 +587,22 @@ on_development_warning_dialog_responded_cb (CcWindow *self)
   gtk_widget_hide (GTK_WIDGET (self->development_warning_dialog));
 }
 
+static void
+on_stack_transition_running_changed_cb (GtkStack   *stack,
+                                        GParamSpec *pspec,
+                                        CcWindow   *self)
+{
+  gboolean transition_running;
+
+  CC_ENTRY;
+
+  transition_running = gtk_stack_get_transition_running (stack);
+
+  if (!transition_running && self->old_panel)
+    gtk_stack_remove (self->stack, g_steal_pointer (&self->old_panel));
+
+  CC_EXIT;
+}
 
 /* CcShell implementation */
 static gboolean
@@ -805,6 +825,7 @@ cc_window_class_init (CcWindowClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_main_leaflet_folded_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_development_warning_dialog_responded_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_stack_transition_running_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, previous_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, search_entry_activate_cb);
   gtk_widget_class_bind_template_callback (widget_class, show_panel_cb);
