@@ -107,9 +107,6 @@
 
             <child>
               <object class="AdwPreferencesGroup" id="permission_section">
-                <property name="title" translatable="yes">Permissions &amp;amp; Access</property>
-                <property name="description" translatable="yes">Data and services that this app has asked for access to and permissions that it requires.</property>
-
                 <child>
                   <object class="GtkListBox" id="permission_list">
                     <property name="selection-mode">none</property>
@@ -174,8 +171,6 @@
 
             <child>
               <object class="AdwPreferencesGroup" id="integration_section">
-                <property name="title" translatable="yes">Integration</property>
-                <property name="description" translatable="yes">System features used by this application.</property>
                 <child>
                   <object class="GtkListBox" id="integration_list">
                     <property name="selection-mode">none</property>
@@ -241,54 +236,21 @@
             <child>
               <object class="AdwPreferencesGroup" id="handler_section">
                 <child>
-                  <object class="GtkBox">
-                    <property name="margin-bottom">12</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Default Handlers</property>
-                            <style>
-                              <class name="heading"/>
-                              <class name="h4"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="hexpand">True</property>
-                            <property name="xalign">0</property>
-                            <property name="wrap">1</property>
-                            <property name="max-width-chars">50</property>
-                            <property name="label" translatable="yes">Types of files and links that this application opens.</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="handler_reset">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <property name="label" translatable="yes">Reset</property>
-                        <signal name="clicked" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
                   <object class="GtkListBox" id="handler_list">
                     <property name="selection-mode">none</property>
                     <signal name="row-activated" handler="handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
                     <style>
                       <class name="boxed-list"/>
                     </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="handler_reset">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                    <property name="margin-top">12</property>
+                    <property name="label" translatable="yes">Reset</property>
+                    <signal name="clicked" handler="handler_reset_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
               </object>
