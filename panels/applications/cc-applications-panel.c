@@ -60,7 +60,7 @@ struct _CcApplicationsPanel
   GtkListBox      *sidebar_listbox;
   GtkEntry        *sidebar_search_entry;
   GtkButton       *header_button;
-  GtkLabel        *title_label;
+  AdwWindowTitle  *header_title;
   GAppInfoMonitor *monitor;
   gulong           monitor_id;
 #ifdef HAVE_MALCONTENT
@@ -1660,7 +1660,7 @@ update_panel (CcApplicationsPanel *self,
 
   if (row == NULL)
     {
-      gtk_label_set_label (self->title_label, _("Applications"));
+      adw_window_title_set_title (self->header_title, _("Applications"));
       gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->empty_box));
       gtk_widget_hide (GTK_WIDGET (GTK_WIDGET (self->header_button)));
       return;
@@ -1668,7 +1668,7 @@ update_panel (CcApplicationsPanel *self,
 
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
 
-  gtk_label_set_label (self->title_label, g_app_info_get_display_name (info));
+  adw_window_title_set_title (self->header_title, g_app_info_get_display_name (info));
   gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->settings_box));
   gtk_widget_set_visible (GTK_WIDGET (self->header_button), gnome_software_is_installed ());
 
@@ -1983,6 +1983,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_title);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, install_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_section);
@@ -2009,7 +2010,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_list);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, title_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, total);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_section);
