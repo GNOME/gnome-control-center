@@ -1404,12 +1404,16 @@ class DnsManager(ExportedObj):
 
 ###################################################################
 def stdin_cb(io, condition):
+    print("quitting because stdin got condition: %d", condition)
     mainloop.quit()
 
 def quit_cb(user_data):
+    print("quitting after 20s")
     mainloop.quit()
 
 def main():
+    import time
+    print("test-networkmanager-service.py", time.time())
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
     random.seed()
@@ -1434,10 +1438,12 @@ def main():
     GLib.timeout_add_seconds(20, quit_cb, None)
 
     try:
+        print("test-networkmanager-service.py entered mainloop", time.time())
         mainloop.run()
     except Exception as e:
         pass
 
+    print("test-networkmanager-service.py exiting", time.time())
     sys.exit(0)
 
 if __name__ == '__main__':

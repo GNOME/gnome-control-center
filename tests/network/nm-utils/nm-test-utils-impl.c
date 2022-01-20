@@ -89,6 +89,7 @@ nmtstc_service_init (void)
 	 * stdin; if it closes, the service will exit immediately. We use this to
 	 * make sure the service exits if the test program crashes.
 	 */
+	g_message("Starting test service, %ld", g_get_real_time ());
 	g_spawn_async_with_pipes (NULL, (char **) args, NULL,
 	                          G_SPAWN_SEARCH_PATH,
 	                          NULL, NULL,
@@ -102,6 +103,8 @@ nmtstc_service_init (void)
 		g_usleep (G_USEC_PER_SEC / 50);
 	}
 	g_assert (i > 0);
+
+	g_message("Test service is now on bus (i: %d)", i);
 
 	/* Grab a proxy to our fake NM service to trigger tests */
 	info->proxy = g_dbus_proxy_new_sync (info->bus,
