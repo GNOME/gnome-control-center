@@ -97,11 +97,13 @@ nmtstc_service_init (void)
 	                          NULL, NULL,
 	                          &info->pid, &info->keepalive_fd, NULL, NULL, &error);
 	g_assert_no_error (error);
+	g_message("launched NM test service, %ld", g_get_real_time ());
 
 	/* Wait until the service is registered on the bus */
 	for (i = 1000; i > 0; i--) {
 		if (name_exists (info->bus, "org.freedesktop.NetworkManager"))
 			break;
+		g_message("sleeping before rechecking, %ld", g_get_real_time ());
 		g_usleep (G_USEC_PER_SEC / 50);
 	}
 	g_assert (i > 0);
