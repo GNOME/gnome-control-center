@@ -118,19 +118,12 @@ struct _CcApplicationsPanel
 
   GtkButton       *handler_reset;
   GtkDialog       *handler_dialog;
-  GtkListBox      *handler_list;
   CcInfoRow       *handler_row;
   GtkLabel        *handler_title_label;
-  CcInfoRow       *hypertext;
-  CcInfoRow       *text;
-  CcInfoRow       *images;
-  CcInfoRow       *fonts;
-  CcInfoRow       *archives;
-  CcInfoRow       *packages;
-  CcInfoRow       *audio;
-  CcInfoRow       *video;
-  CcInfoRow       *other;
-  CcInfoRow       *link;
+  AdwPreferencesGroup *handler_file_group;
+  AdwPreferencesGroup *handler_link_group;
+  GList           *file_handler_rows;
+  GList           *link_handler_rows;
 
   GtkWidget       *usage_section;
   CcInfoRow       *storage;
@@ -985,7 +978,7 @@ update_integration_section (CcApplicationsPanel *self,
 
 static void
 unset_cb (CcApplicationsPanel *self,
-          CcActionRow         *row)
+          GtkButton           *button)
 {
   const gchar *type;
   GtkListBoxRow *selected;
@@ -994,334 +987,72 @@ unset_cb (CcApplicationsPanel *self,
   selected = gtk_list_box_get_selected_row (self->sidebar_listbox);
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (selected));
 
-  type = (const gchar *)g_object_get_data (G_OBJECT (row), "type");
+  type = (const gchar *)g_object_get_data (G_OBJECT (button), "type");
 
   g_app_info_remove_supports_type (info, type, NULL);
 }
 
 static void
-update_group_row_count (CcInfoRow *row,
-                        gint       delta)
-{
-  gint count;
-  g_autofree gchar *text = NULL;
-
-  count = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "count"));
-  count += delta;
-  g_object_set_data (G_OBJECT (row), "count", GINT_TO_POINTER (count));
-  text = g_strdup_printf ("%d", count);
-  g_object_set (row, "info", text, NULL);
-}
-
-static void
 add_scheme (CcApplicationsPanel *self,
-            CcInfoRow           *after,
             const gchar         *type)
 {
-  CcActionRow *row = NULL;
-  gint pos;
+  g_autofree gchar *title = NULL;
+  GtkWidget *button;
+  GtkWidget *row;
+  gchar *scheme;
 
-  if (g_str_has_suffix (type, "http"))
-    {
-      row = cc_action_row_new ();
-      cc_action_row_set_title (row, _("Web Links"));
-      cc_action_row_set_subtitle (row, "http://, https://");
-    }
-  else if (g_str_has_suffix (type, "https"))
-    {
-      return; /* assume anything that handles https also handles http */
-    }
-  else if (g_str_has_suffix (type, "git"))
-    {
-      row = cc_action_row_new ();
-      cc_action_row_set_title (row, _("Git Links"));
-      cc_action_row_set_subtitle (row, "git://");
-    }
-  else
-    {
-      gchar *scheme = strrchr (type, '/') + 1;
-      g_autofree gchar *title = g_strdup_printf (_("%s Links"), scheme);
-      g_autofree gchar *subtitle = g_strdup_printf ("%s://", scheme);
+  scheme = strrchr (type, '/') + 1;
+  title = g_strdup_printf ("%s://", scheme);
 
-      row = cc_action_row_new ();
-      cc_action_row_set_title (row, title);
-      cc_action_row_set_subtitle (row, subtitle);
-    }
+  row = adw_action_row_new ();
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), title);
 
-  cc_action_row_set_action (row, _("Unset"), TRUE);
-  g_object_set_data_full (G_OBJECT (row), "type", g_strdup (type), g_free);
-  g_signal_connect_object (row,
-                           "activated",
-                           G_CALLBACK (unset_cb),
-                           self, G_CONNECT_SWAPPED);
+  button = gtk_button_new_from_icon_name ("edit-delete-symbolic");
+  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+  gtk_widget_set_halign (button, GTK_ALIGN_END);
+  gtk_widget_add_css_class (button, "flat");
+  gtk_widget_add_css_class (button, "circular");
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), button);
+  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), button);
+  g_object_set_data_full (G_OBJECT (button), "type", g_strdup (type), g_free);
+  g_signal_connect_object (button, "clicked", G_CALLBACK (unset_cb), self, G_CONNECT_SWAPPED);
 
-  if (after)
-    {
-      pos = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (after)) + 1;
-      g_object_bind_property (after, "expanded",
-                              row, "visible",
-                              G_BINDING_SYNC_CREATE);
-    }
-  else
-    pos = -1;
-  gtk_list_box_insert (self->handler_list, GTK_WIDGET (row), pos);
-  update_group_row_count (after, 1);
+  gtk_widget_show (GTK_WIDGET (self->handler_link_group));
+  adw_preferences_group_add (self->handler_link_group, GTK_WIDGET (row));
+
+  self->link_handler_rows = g_list_prepend (self->link_handler_rows, row);
 }
 
 static void
 add_file_type (CcApplicationsPanel *self,
-               CcInfoRow           *after,
                const gchar         *type)
 {
-  CcActionRow *row;
   g_autofree gchar *desc = NULL;
-  gint pos;
   const gchar *glob;
+  GtkWidget *button;
+  GtkWidget *row;
 
   glob = g_hash_table_lookup (self->globs, type);
 
   desc = g_content_type_get_description (type);
-  row = cc_action_row_new ();
-  cc_action_row_set_title (row, desc);
-  cc_action_row_set_subtitle (row, glob ? glob : "");
-  cc_action_row_set_action (row, _("Unset"), TRUE);
-  g_object_set_data_full (G_OBJECT (row), "type", g_strdup (type), g_free);
-  g_signal_connect_object (row, "activated", G_CALLBACK (unset_cb), self, G_CONNECT_SWAPPED);
+  row = adw_action_row_new ();
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), desc);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (row), glob ? glob : "");
 
-  if (after)
-    {
-      pos = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (after)) + 1;
-      g_object_bind_property (after, "expanded",
-                              row, "visible",
-                              G_BINDING_SYNC_CREATE);
-    }
-  else
-    {
-      pos = -1;
-    }
+  button = gtk_button_new_from_icon_name ("edit-delete-symbolic");
+  gtk_widget_set_valign (button, GTK_ALIGN_CENTER);
+  gtk_widget_set_halign (button, GTK_ALIGN_END);
+  gtk_widget_add_css_class (button, "flat");
+  gtk_widget_add_css_class (button, "circular");
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), button);
+  adw_action_row_set_activatable_widget (ADW_ACTION_ROW (row), button);
+  g_object_set_data_full (G_OBJECT (button), "type", g_strdup (type), g_free);
+  g_signal_connect_object (button, "clicked", G_CALLBACK (unset_cb), self, G_CONNECT_SWAPPED);
 
-  gtk_list_box_insert (self->handler_list, GTK_WIDGET (row), pos);
-  update_group_row_count (after, 1);
-}
+  gtk_widget_show (GTK_WIDGET (self->handler_file_group));
+  adw_preferences_group_add (self->handler_file_group, GTK_WIDGET (row));
 
-static gboolean
-is_hypertext_type (const gchar *type)
-{
-  const gchar *types[] = {
-    "text/html",
-    "text/htmlh",
-    "text/xml",
-    "application/xhtml+xml",
-    "application/vnd.mozilla.xul+xml",
-    "text/mml",
-    NULL
-  };
-  return g_strv_contains (types, type);
-}
-
-static void
-ensure_group_row (CcApplicationsPanel *self,
-                  CcInfoRow **row,
-                  const gchar *title)
-{
-  if (*row == NULL)
-    {
-      CcInfoRow *r = CC_INFO_ROW (g_object_new (CC_TYPE_INFO_ROW,
-                                                "title", title,
-                                                "has-expander", TRUE,
-                                                NULL));
-      gtk_list_box_insert (self->handler_list, GTK_WIDGET (r), -1);
-      *row = r;
-    }
-}
-
-static void
-add_link_type (CcApplicationsPanel *self,
-               const gchar         *type)
-{
-  ensure_group_row (self, &self->link, _("Links"));
-  add_scheme (self, self->link, type);
-}
-
-static void
-add_hypertext_type (CcApplicationsPanel *self,
-                    const gchar         *type)
-{
-  ensure_group_row (self, &self->hypertext, _("Hypertext Files"));
-  add_file_type (self, self->hypertext, type);
-}
-
-static gboolean
-is_text_type (const gchar *type)
-{
-  return g_content_type_is_a (type, "text/*");
-}
-
-static void
-add_text_type (CcApplicationsPanel *self,
-               const gchar         *type)
-{
-  ensure_group_row (self, &self->text, _("Text Files"));
-  add_file_type (self, self->text, type);
-}
-
-static gboolean
-is_image_type (const gchar *type)
-{
-  return g_content_type_is_a (type, "image/*");
-}
-
-static void
-add_image_type (CcApplicationsPanel *self,
-                const gchar         *type)
-{
-  ensure_group_row (self, &self->images, _("Image Files"));
-  add_file_type (self, self->images, type);
-}
-
-static gboolean
-is_font_type (const gchar *type)
-{
-  return g_content_type_is_a (type, "font/*") ||
-         g_str_equal (type, "application/x-font-pcf") ||
-         g_str_equal (type, "application/x-font-type1");
-}
-
-static void
-add_font_type (CcApplicationsPanel *self,
-               const gchar         *type)
-{
-  ensure_group_row (self, &self->fonts, _("Font Files"));
-  add_file_type (self, self->fonts, type);
-}
-
-static gboolean
-is_archive_type (const gchar *type)
-{
-  const gchar *types[] = {
-    "application/bzip2",
-    "application/zip",
-    "application/x-xz-compressed-tar",
-    "application/x-xz",
-    "application/x-xar",
-    "application/x-tarz",
-    "application/x-tar",
-    "application/x-lzma-compressed-tar",
-    "application/x-lzma",
-    "application/x-lzip-compressed-tar",
-    "application/x-lzip",
-    "application/x-lha",
-    "application/gzip",
-    "application/x-cpio",
-    "application/x-compressed-tar",
-    "application/x-compress",
-    "application/x-bzip-compressed-tar",
-    "application/x-bzip",
-    "application/x-7z-compressed-tar",
-    "application/x-7z-compressed",
-    "application/x-zoo",
-    "application/x-war",
-    "application/x-stuffit",
-    "application/x-rzip-compressed-tar",
-    "application/x-rzip",
-    "application/vnd.rar",
-    "application/x-lzop-compressed-tar",
-    "application/x-lzop",
-    "application/x-lz4-compressed-tar",
-    "application/x-lz4",
-    "application/x-lrzip-compressed-tar",
-    "application/x-lrzip",
-    "application/x-lhz",
-    "application/x-java-archive",
-    "application/x-ear",
-    "application/x-cabinet",
-    "application/x-bzip1-compressed-tar",
-    "application/x-bzip1",
-    "application/x-arj",
-    "application/x-archive",
-    "application/x-ar",
-    "application/x-alz",
-    "application/x-ace",
-    "application/vnd.ms-cab-compressed",
-    NULL
-  };
-  return g_strv_contains (types, type);
-}
-
-static void
-add_archive_type (CcApplicationsPanel *self,
-                  const gchar         *type)
-{
-  ensure_group_row (self, &self->archives, _("Archive Files"));
-  add_file_type (self, self->archives, type);
-}
-
-static gboolean
-is_package_type (const gchar *type)
-{
-  const gchar *types[] = {
-    "application/x-source-rpm",
-    "application/x-rpm",
-    "application/vnd.debian.binary-package",
-    NULL
-  };
-  return g_strv_contains (types, type);
-}
-
-static void
-add_package_type (CcApplicationsPanel *self,
-                  const gchar         *type)
-{
-  ensure_group_row (self, &self->packages, _("Package Files"));
-  add_file_type (self, self->packages, type);
-}
-
-static gboolean
-is_audio_type (const gchar *type)
-{
-  return g_content_type_is_a (type, "audio/*") ||
-         g_str_equal (type, "application/ogg") ||
-         g_str_equal (type, "application/x-shorten") ||
-         g_str_equal (type, "application/x-matroska") ||
-         g_str_equal (type, "application/x-flac") ||
-         g_str_equal (type, "application/x-extension-mp4") ||
-         g_str_equal (type, "application/x-extension-m4a") ||
-         g_str_equal (type, "application/vnd.rn-realmedia") ||
-         g_str_equal (type, "application/ram") ||
-         g_str_equal (type, "application/vnd.ms-wpl");
-}
-
-static void
-add_audio_type (CcApplicationsPanel *self,
-                const gchar         *type)
-{
-  ensure_group_row (self, &self->audio, _("Audio Files"));
-  add_file_type (self, self->audio, type);
-}
-
-static gboolean
-is_video_type (const gchar *type)
-{
-  return g_content_type_is_a (type, "video/*") ||
-         g_str_equal (type, "application/x-smil") ||
-         g_str_equal (type, "application/vnd.ms-asf") ||
-         g_str_equal (type, "application/mxf");
-}
-
-static void
-add_video_type (CcApplicationsPanel *self,
-                const gchar         *type)
-{
-  ensure_group_row (self, &self->video, _("Video Files"));
-  add_file_type (self, self->video, type);
-}
-
-static void
-add_other_type (CcApplicationsPanel *self,
-                const gchar         *type)
-{
-  ensure_group_row (self, &self->other, _("Other Files"));
-  add_file_type (self, self->other, type);
+  self->file_handler_rows = g_list_prepend (self->file_handler_rows, row);
 }
 
 static void
@@ -1331,50 +1062,9 @@ add_handler_row (CcApplicationsPanel *self,
   gtk_widget_show (GTK_WIDGET (self->handler_row));
 
   if (g_content_type_is_a (type, "x-scheme-handler/*"))
-    add_link_type (self, type);
-  else if (is_hypertext_type (type))
-    add_hypertext_type (self, type);
-  else if (is_font_type (type))
-    add_font_type (self, type);
-  else if (is_package_type (type))
-    add_package_type (self, type);
-  else if (is_audio_type (type))
-    add_audio_type (self, type);
-  else if (is_video_type (type))
-    add_video_type (self, type);
-  else if (is_archive_type (type))
-    add_archive_type (self, type);
-  else if (is_text_type (type))
-    add_text_type (self, type);
-  else if (is_image_type (type))
-    add_image_type (self, type);
+    add_scheme (self, type);
   else
-    add_other_type (self, type);
-}
-
-static void
-handler_row_activated_cb (CcApplicationsPanel *self,
-                          GtkListBoxRow       *list_row)
-{
-  CcInfoRow *row;
-
-  if (!CC_IS_INFO_ROW (list_row))
-    return;
-
-  row = CC_INFO_ROW (list_row);
-  if (row == self->hypertext ||
-      row == self->text ||
-      row == self->images ||
-      row == self->fonts ||
-      row == self->archives ||
-      row == self->packages ||
-      row == self->audio ||
-      row == self->video ||
-      row == self->other ||
-      row == self->link)
-    {
-      cc_info_row_set_expanded (row, !cc_info_row_get_expanded (row));
-    }
+    add_file_type (self, type);
 }
 
 static gboolean
@@ -1427,6 +1117,20 @@ handler_reset_cb (CcApplicationsPanel *self)
 }
 
 static void
+remove_all_handler_rows (CcApplicationsPanel *self)
+{
+  GList *l;
+
+  for (l = self->file_handler_rows; l; l = l->next)
+    adw_preferences_group_remove (self->handler_file_group, l->data);
+  g_clear_pointer (&self->file_handler_rows, g_list_free);
+
+  for (l = self->link_handler_rows; l; l = l->next)
+    adw_preferences_group_remove (self->handler_link_group, l->data);
+  g_clear_pointer (&self->link_handler_rows, g_list_free);
+}
+
+static void
 update_handler_dialog (CcApplicationsPanel *self,
                        GAppInfo            *info)
 {
@@ -1436,20 +1140,12 @@ update_handler_dialog (CcApplicationsPanel *self,
   guint n_associations = 0;
   gint i;
 
-  listbox_remove_all (self->handler_list);
-
-  self->hypertext = NULL;
-  self->text = NULL;
-  self->images = NULL;
-  self->fonts = NULL;
-  self->archives = NULL;
-  self->packages = NULL;
-  self->audio = NULL;
-  self->video = NULL;
-  self->other = NULL;
-  self->link = NULL;
+  remove_all_handler_rows (self);
 
   gtk_widget_hide (GTK_WIDGET (self->handler_row));
+  gtk_widget_hide (GTK_WIDGET (self->handler_file_group));
+  gtk_widget_hide (GTK_WIDGET (self->handler_link_group));
+
   types = g_app_info_get_supported_types (info);
   if (types == NULL || types[0] == NULL)
     return;
@@ -1930,6 +1626,7 @@ cc_applications_panel_dispose (GObject *object)
 {
   CcApplicationsPanel *self = CC_APPLICATIONS_PANEL (object);
 
+  remove_all_handler_rows (self);
   g_clear_object (&self->monitor);
   g_clear_object (&self->perm_store);
 
@@ -2052,9 +1749,10 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_file_group);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_link_group);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_title_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_title);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, install_button);
@@ -2097,7 +1795,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, shortcuts_cb);
   gtk_widget_class_bind_template_callback (widget_class, privacy_link_cb);
   gtk_widget_class_bind_template_callback (widget_class, sound_cb);
-  gtk_widget_class_bind_template_callback (widget_class, handler_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, clear_cache_cb);
   gtk_widget_class_bind_template_callback (widget_class, open_software_cb);
   gtk_widget_class_bind_template_callback (widget_class, handler_reset_cb);

@@ -386,16 +386,14 @@
         </child>
 
         <child>
-          <object class="AdwPreferencesGroup" id="handler_section">
-            <child>
-              <object class="GtkListBox" id="handler_list">
-                <property name="selection-mode">none</property>
-                <signal name="row-activated" handler="handler_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
-              </object>
-            </child>
+          <object class="AdwPreferencesGroup" id="handler_file_group">
+            <property name="title" translatable="yes">File Types</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup" id="handler_link_group">
+            <property name="title" translatable="yes">Link Types</property>
           </object>
         </child>
 
