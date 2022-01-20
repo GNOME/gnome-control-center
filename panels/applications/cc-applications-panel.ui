@@ -28,55 +28,37 @@
     </child>
 
     <child type="content">
-      <object class="GtkScrolledWindow" id="main_scroll">
-        <property name="hscrollbar-policy">never</property>
+      <object class="GtkStack" id="stack">
+
         <child>
-          <object class="AdwClamp">
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
+          <object class="AdwStatusPage" id="empty_box">
+            <property name="icon-name">org.gnome.Software-symbolic</property>
+            <property name="title" translatable="yes">No applications</property>
             <child>
-              <object class="GtkStack" id="stack">
+              <object class="GtkButton" id="install_button">
+                <property name="label" translatable="yes">Install some…</property>
+                <property name="halign">center</property>
+                <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
+                <style>
+                  <class name="pill" />
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkScrolledWindow" id="settings_box">
+            <property name="hscrollbar-policy">never</property>
+            <child>
+              <object class="AdwClamp">
+                <property name="margin_top">32</property>
+                <property name="margin_bottom">32</property>
+                <property name="margin_start">12</property>
+                <property name="margin_end">12</property>
 
                 <child>
-                  <object class="GtkBox" id="empty_box">
-                    <property name="orientation">vertical</property>
-                    <property name="valign">center</property>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="valign">start</property>
-                        <property name="pixel-size">80</property>
-                        <property name="icon-name">org.gnome.Software-symbolic</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="margin-bottom">15</property>
-                        <property name="label" translatable="yes">No applications</property>
-                        <style>
-                          <class name="dim-label"/>
-                        </style>
-                        <attributes>
-                          <attribute name="scale" value="1.2"/>
-                        </attributes>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="install_button">
-                        <property name="label" translatable="yes">Install some…</property>
-                        <property name="receives-default">1</property>
-                        <property name="halign">center</property>
-                        <signal name="clicked" handler="open_software_cb" object="CcApplicationsPanel" swapped="yes"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox" id="settings_box">
+                  <object class="GtkBox">
                     <property name="orientation">vertical</property>
                     <property name="spacing">24</property>
                     <property name="hexpand">1</property>

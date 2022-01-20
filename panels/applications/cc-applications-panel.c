@@ -84,8 +84,8 @@ struct _CcApplicationsPanel
   GSettings       *search_settings;
 
   GtkStack        *stack;
-  GtkBox          *empty_box;
-  GtkBox          *settings_box;
+  GtkWidget       *empty_box;
+  GtkWidget       *settings_box;
   GtkButton       *install_button;
 
   GtkBox          *permission_section;
@@ -1661,7 +1661,7 @@ update_panel (CcApplicationsPanel *self,
   if (row == NULL)
     {
       adw_window_title_set_title (self->header_title, _("Applications"));
-      gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->empty_box));
+      gtk_stack_set_visible_child (self->stack, self->empty_box);
       gtk_widget_hide (GTK_WIDGET (GTK_WIDGET (self->header_button)));
       return;
     }
@@ -1669,7 +1669,7 @@ update_panel (CcApplicationsPanel *self,
   info = cc_applications_row_get_info (CC_APPLICATIONS_ROW (row));
 
   adw_window_title_set_title (self->header_title, g_app_info_get_display_name (info));
-  gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->settings_box));
+  gtk_stack_set_visible_child (self->stack, self->settings_box);
   gtk_widget_set_visible (GTK_WIDGET (self->header_button), gnome_software_is_installed ());
 
   g_clear_pointer (&self->current_app_id, g_free);
