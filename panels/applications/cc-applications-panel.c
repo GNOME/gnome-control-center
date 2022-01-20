@@ -108,7 +108,6 @@ struct _CcApplicationsPanel
   GtkListBox      *builtin_list;
 
   GtkWidget       *integration_section;
-  GtkListBox      *integration_list;
   CcToggleRow     *notification;
   CcToggleRow     *background;
   CcToggleRow     *wallpaper;
@@ -132,7 +131,6 @@ struct _CcApplicationsPanel
   CcInfoRow       *link;
 
   GtkWidget       *usage_section;
-  GtkListBox      *usage_list;
   CcInfoRow       *storage;
   GtkDialog       *storage_dialog;
   GtkListBox      *storage_list;
@@ -789,20 +787,6 @@ add_static_permission_row (CcApplicationsPanel *self,
   gtk_list_box_append (self->builtin_list, row);
 
   return 1;
-}
-
-static void
-permission_row_activated_cb (CcApplicationsPanel *self,
-                             GtkListBoxRow       *list_row)
-{
-  if (list_row == GTK_LIST_BOX_ROW (self->builtin))
-    {
-      CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
-
-      gtk_window_set_transient_for (GTK_WINDOW (self->builtin_dialog),
-                                    GTK_WINDOW (cc_shell_get_toplevel (shell)));
-      gtk_window_present (GTK_WINDOW (self->builtin_dialog));
-    }
 }
 
 static gboolean
@@ -1491,17 +1475,25 @@ update_handler_sections (CcApplicationsPanel *self,
 /* --- usage section --- */
 
 static void
-storage_row_activated_cb (CcApplicationsPanel *self,
-                          GtkListBoxRow       *list_row)
+on_builtin_row_activated_cb (GtkListBoxRow       *row,
+                             CcApplicationsPanel *self)
 {
-  if (list_row == GTK_LIST_BOX_ROW (self->storage))
-    {
-      CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
+  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
 
-      gtk_window_set_transient_for (GTK_WINDOW (self->storage_dialog),
-                                    GTK_WINDOW (cc_shell_get_toplevel (shell)));
-      gtk_window_present (GTK_WINDOW (self->storage_dialog));
-    }
+  gtk_window_set_transient_for (GTK_WINDOW (self->builtin_dialog),
+                                GTK_WINDOW (cc_shell_get_toplevel (shell)));
+  gtk_window_present (GTK_WINDOW (self->builtin_dialog));
+}
+
+static void
+on_storage_row_activated_cb (GtkListBoxRow       *row,
+                             CcApplicationsPanel *self)
+{
+  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
+
+  gtk_window_set_transient_for (GTK_WINDOW (self->storage_dialog),
+                                GTK_WINDOW (cc_shell_get_toplevel (shell)));
+  gtk_window_present (GTK_WINDOW (self->storage_dialog));
 }
 
 static void
@@ -2032,7 +2024,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_title);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, install_button);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, launch_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, location);
@@ -2059,7 +2050,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, total);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, view_details_button);
 
@@ -2073,16 +2063,16 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, shortcuts_cb);
   gtk_widget_class_bind_template_callback (widget_class, privacy_link_cb);
   gtk_widget_class_bind_template_callback (widget_class, sound_cb);
-  gtk_widget_class_bind_template_callback (widget_class, permission_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, handler_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, clear_cache_cb);
-  gtk_widget_class_bind_template_callback (widget_class, storage_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, open_software_cb);
   gtk_widget_class_bind_template_callback (widget_class, handler_reset_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_builtin_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_launch_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_sidebar_search_entry_search_stopped_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_storage_row_activated_cb);
 }
 
 static void

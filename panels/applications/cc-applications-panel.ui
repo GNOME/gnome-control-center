@@ -110,7 +110,6 @@
                 <child>
                   <object class="GtkListBox" id="permission_list">
                     <property name="selection-mode">none</property>
-                    <signal name="row-activated" handler="permission_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
                     <style>
                       <class name="boxed-list"/>
                     </style>
@@ -172,62 +171,51 @@
             <child>
               <object class="AdwPreferencesGroup" id="integration_section">
                 <child>
-                  <object class="GtkListBox" id="integration_list">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="CcToggleRow" id="search">
-                        <property name="title" translatable="yes">Search</property>
-                        <signal name="notify::allowed" handler="search_cb" object="CcApplicationsPanel" swapped="yes"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcInfoRow" id="no_search">
-                        <property name="title" translatable="yes">Search</property>
-                        <property name="info" translatable="yes">Disabled</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcToggleRow" id="notification">
-                        <property name="title" translatable="yes">Notifications</property>
-                        <signal name="notify::allowed" handler="notification_cb" object="CcApplicationsPanel" swapped="yes"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcToggleRow" id="background">
-                        <property name="title" translatable="yes">Run in background</property>
-                        <signal name="notify::allowed" handler="background_cb" swapped="yes"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcToggleRow" id="wallpaper">
-                        <property name="title" translatable="yes">Set Desktop Background</property>
-                        <signal name="notify::allowed" handler="wallpaper_cb" swapped="yes"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcToggleRow" id="sound">
-                        <property name="title" translatable="yes">Sounds</property>
-                        <signal name="notify::allowed" handler="sound_cb" object="CcApplicationsPanel" swapped="yes"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcInfoRow" id="no_sound">
-                        <property name="title" translatable="yes">Sounds</property>
-                        <property name="info" translatable="yes">Disabled</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcToggleRow" id="shortcuts">
-                        <property name="title" translatable="yes">Inhibit system keyboard shortcuts</property>
-                        <signal name="notify::allowed" handler="shortcuts_cb" swapped="yes"/>
-                      </object>
-                    </child>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
+                  <object class="CcToggleRow" id="search">
+                    <property name="title" translatable="yes">Search</property>
+                    <signal name="notify::allowed" handler="search_cb" object="CcApplicationsPanel" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcInfoRow" id="no_search">
+                    <property name="title" translatable="yes">Search</property>
+                    <property name="info" translatable="yes">Disabled</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcToggleRow" id="notification">
+                    <property name="title" translatable="yes">Notifications</property>
+                    <signal name="notify::allowed" handler="notification_cb" object="CcApplicationsPanel" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcToggleRow" id="background">
+                    <property name="title" translatable="yes">Run in background</property>
+                    <signal name="notify::allowed" handler="background_cb" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcToggleRow" id="wallpaper">
+                    <property name="title" translatable="yes">Set Desktop Background</property>
+                    <signal name="notify::allowed" handler="wallpaper_cb" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcToggleRow" id="sound">
+                    <property name="title" translatable="yes">Sounds</property>
+                    <signal name="notify::allowed" handler="sound_cb" object="CcApplicationsPanel" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcInfoRow" id="no_sound">
+                    <property name="title" translatable="yes">Sounds</property>
+                    <property name="info" translatable="yes">Disabled</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="CcToggleRow" id="shortcuts">
+                    <property name="title" translatable="yes">Inhibit system keyboard shortcuts</property>
+                    <signal name="notify::allowed" handler="shortcuts_cb" swapped="yes"/>
                   </object>
                 </child>
               </object>
@@ -259,30 +247,20 @@
             <child>
               <object class="AdwPreferencesGroup" id="usage_section">
                 <child>
-                  <object class="GtkListBox" id="usage_list">
-                    <property name="selection-mode">none</property>
-                    <signal name="row-activated" handler="storage_row_activated_cb" object="CcApplicationsPanel" swapped="yes"/>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="CcInfoRow" id="builtin">
-                        <property name="title" translatable="yes">Built-in Permissions</property>
-                        <property name="subtitle" translatable="yes">System access that is required by the app</property>
-                        <property name="has-expander">True</property>
-                        <property name="is-link">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcInfoRow" id="storage">
-                        <property name="title" translatable="yes">Storage</property>
-                        <property name="has-expander">1</property>
-                        <property name="is-link">1</property>
-                      </object>
-                    </child>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
+                  <object class="CcInfoRow" id="builtin">
+                    <property name="title" translatable="yes">Built-in Permissions</property>
+                    <property name="subtitle" translatable="yes">System access that is required by the app</property>
+                    <property name="has-expander">True</property>
+                    <property name="is-link">True</property>
+                    <signal name="activated" handler="on_builtin_row_activated_cb" object="CcApplicationsPanel" swapped="no" />
+                  </object>
+                </child>
+                <child>
+                  <object class="CcInfoRow" id="storage">
+                    <property name="title" translatable="yes">Storage</property>
+                    <property name="has-expander">1</property>
+                    <property name="is-link">1</property>
+                    <signal name="activated" handler="on_storage_row_activated_cb" object="CcApplicationsPanel" swapped="no" />
                   </object>
                 </child>
               </object>
