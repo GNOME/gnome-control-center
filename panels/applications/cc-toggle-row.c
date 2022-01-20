@@ -26,18 +26,16 @@
 
 struct _CcToggleRow
 {
-  GtkListBoxRow parent;
+  AdwActionRow  parent;
 
-  GtkWidget    *title;
   GtkWidget    *toggle;
 };
 
-G_DEFINE_TYPE (CcToggleRow, cc_toggle_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcToggleRow, cc_toggle_row, ADW_TYPE_ACTION_ROW)
 
 enum
 {
   PROP_0,
-  PROP_TITLE,
   PROP_ALLOWED
 };
 
@@ -57,9 +55,6 @@ cc_toggle_row_get_property (GObject    *object,
 
   switch (prop_id)
     {
-    case PROP_TITLE:
-      g_value_set_string (value, gtk_label_get_label (GTK_LABEL (row->title)));
-      break;
     case PROP_ALLOWED:
       g_value_set_boolean (value, cc_toggle_row_get_allowed (row));
       break;
@@ -79,9 +74,6 @@ cc_toggle_row_set_property (GObject      *object,
 
   switch (prop_id)
     {
-    case PROP_TITLE:
-      gtk_label_set_label (GTK_LABEL (row->title), g_value_get_string (value));
-      break;
     case PROP_ALLOWED:
       cc_toggle_row_set_allowed (row, g_value_get_boolean (value));
       break;
@@ -103,16 +95,10 @@ cc_toggle_row_class_init (CcToggleRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-toggle-row.ui");
 
   g_object_class_install_property (object_class,
-                                   PROP_TITLE,
-                                   g_param_spec_string ("title", "title", "title",
-                                                        NULL, G_PARAM_READWRITE));
-
-  g_object_class_install_property (object_class,
                                    PROP_ALLOWED,
                                    g_param_spec_boolean ("allowed", "allowed", "allowed",
                                                          FALSE, G_PARAM_READWRITE));
 
-  gtk_widget_class_bind_template_child (widget_class, CcToggleRow, title);
   gtk_widget_class_bind_template_child (widget_class, CcToggleRow, toggle);
 
   gtk_widget_class_bind_template_callback (widget_class, changed_cb);

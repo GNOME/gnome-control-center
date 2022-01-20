@@ -20,12 +20,12 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_TOGGLE_ROW (cc_toggle_row_get_type())
-G_DECLARE_FINAL_TYPE (CcToggleRow, cc_toggle_row, CC, TOGGLE_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcToggleRow, cc_toggle_row, CC, TOGGLE_ROW, AdwActionRow)
 
 CcToggleRow* cc_toggle_row_new         (void);
 
