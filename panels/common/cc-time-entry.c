@@ -266,6 +266,19 @@ change_value_cb (GtkWidget *widget,
 }
 
 static void
+value_changed_cb (CcTimeEntry   *self,
+                  GtkScrollType  type)
+{
+  g_autoptr(GVariant) value;
+
+  g_assert (CC_IS_TIME_ENTRY (self));
+
+  value = g_variant_new_int32 (type);
+
+  change_value_cb (GTK_WIDGET (self), value, NULL);
+}
+
+static void
 on_text_cut_clipboard_cb (GtkText     *text,
                           CcTimeEntry *self)
 {
@@ -525,6 +538,8 @@ cc_time_entry_init (CcTimeEntry *self)
                     "signal::paste-clipboard", on_text_paste_clipboard_cb, self,
                     "signal::toggle-overwrite", on_text_toggle_overwrite_cb, self,
                     NULL);
+  g_signal_connect (self, "change-value",
+                    G_CALLBACK (value_changed_cb), self);
 }
 
 GtkWidget *
