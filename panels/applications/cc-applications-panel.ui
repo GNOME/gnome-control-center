@@ -19,11 +19,6 @@
             <property name="title" translatable="yes">Applications</property>
           </object>
         </property>
-        <child type="end">
-          <object class="GtkButton" id="header_button">
-            <property name="label" translatable="yes">Open in Software</property>
-          </object>
-        </child>
       </object>
     </child>
 
@@ -49,6 +44,66 @@
 
         <child>
           <object class="AdwPreferencesPage" id="settings_box">
+
+            <!-- App icon & buttons -->
+            <child>
+              <object class="AdwPreferencesGroup">
+
+                <child>
+                  <object class="GtkBox">
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">18</property>
+                    <child>
+                      <object class="GtkImage" id="app_icon_image">
+                        <property name="icon-name">org.gnome.Software</property>
+                        <property name="pixel-size">96</property>
+                        <style>
+                          <class name="icon-dropshadow" />
+                        </style>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkLabel" id="app_name_label">
+                        <property name="wrap">True</property>
+                        <style>
+                          <class name="title" />
+                          <class name="title-1" />
+                        </style>
+                      </object>
+                    </child>
+
+                    <child>
+                      <object class="GtkBox">
+                        <property name="halign">center</property>
+                        <property name="margin-top">12</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="spacing">18</property>
+                        <child>
+                          <object class="GtkButton" id="launch_button">
+                            <property name="label" translatable="yes">Open</property>
+                            <signal name="clicked" handler="on_launch_button_clicked_cb" object="CcApplicationsPanel" swapped="no" />
+                            <style>
+                              <class name="pill" />
+                              <class name="suggested-action" />
+                            </style>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="view_details_button">
+                            <property name="label" translatable="yes">View Details</property>
+                            <style>
+                              <class name="pill" />
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+              </object>
+            </child>
 
             <child>
               <object class="AdwPreferencesGroup" id="permission_section">
@@ -452,5 +507,13 @@
         </child>
       </object>
     </child>
+  </object>
+
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="launch_button" />
+      <widget name="view_details_button" />
+    </widgets>
   </object>
 </interface>
