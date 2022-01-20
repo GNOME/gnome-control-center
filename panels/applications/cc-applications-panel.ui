@@ -424,14 +424,22 @@
     <property name="use-header-bar">1</property>
     <property name="resizable">0</property>
     <property name="hide-on-close">True</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="show-title-buttons">True</property>
+        <style>
+          <class name="flat" />
+        </style>
+      </object>
+    </child>
     <child>
       <object class="GtkBox">
-        <property name="margin-top">24</property>
-        <property name="margin-bottom">24</property>
-        <property name="margin-start">24</property>
-        <property name="margin-end">24</property>
+        <property name="margin-top">18</property>
+        <property name="margin-bottom">48</property>
+        <property name="margin-start">48</property>
+        <property name="margin-end">48</property>
         <property name="orientation">vertical</property>
-        <property name="spacing">12</property>
+        <property name="spacing">24</property>
         <child>
           <object class="GtkLabel">
             <property name="xalign">0</property>
@@ -476,13 +484,9 @@
           </object>
         </child>
         <child>
-          <object class="GtkBox">
-            <child>
-              <object class="GtkButton" id="clear_cache_button">
-                <property name="label" translatable="yes">Clear Cache…</property>
-                <signal name="clicked" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
-              </object>
-            </child>
+          <object class="GtkButton" id="clear_cache_button">
+            <property name="label" translatable="yes">Clear Cache…</property>
+            <signal name="clicked" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
           </object>
         </child>
       </object>
