@@ -18,6 +18,7 @@
 import os
 import sys
 import subprocess
+import tempfile
 from dbusmock import DBusTestCase
 
 # Intended to be shared across projects, submitted for inclusion into
@@ -41,6 +42,60 @@ class X11SessionTestCase(DBusTestCase):
         klass.start_xorg()
         klass.start_system_bus()
         klass.start_session_bus()
+
+    @classmethod
+    def start_session_bus(cls) -> None:
+        '''Set up a private local session bus
+
+        This gets stopped automatically in tearDownClass().
+        '''
+        with tempfile.NamedTemporaryFile(prefix='dbusmock_session_cfg') as c:
+            c.write(b'''<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-Bus Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+  <type>session</type>
+  <keep_umask/>
+  <listen>unix:tmpdir=/tmp</listen>
+  <!-- We do not add standard_system_servicedirs (i.e. we have *no* service directory). -->
+
+  <policy context="default">
+    <allow send_destination="*" eavesdrop="true"/>
+    <allow eavesdrop="true"/>
+    <allow own="*"/>
+  </policy>
+</busconfig>
+''')
+            c.flush()
+            (DBusTestCase.system_bus_pid, addr) = cls.start_dbus(conf=c.name)
+        os.environ['DBUS_SESSION_BUS_ADDRESS'] = addr
+
+    @classmethod
+    def start_system_bus(cls) -> None:
+        '''Set up a private local system bus
+
+        This gets stopped automatically in tearDownClass().
+        '''
+        # create a temporary configuration which makes the fake bus actually
+        # appear a type "system"
+        with tempfile.NamedTemporaryFile(prefix='dbusmock_cfg') as c:
+            c.write(b'''<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-Bus Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+<busconfig>
+  <type>system</type>
+  <keep_umask/>
+  <listen>unix:tmpdir=/tmp</listen>
+  <!-- We do not add standard_system_servicedirs (i.e. we have *no* service directory). -->
+
+  <policy context="default">
+    <allow send_destination="*" eavesdrop="true"/>
+    <allow eavesdrop="true"/>
+    <allow own="*"/>
+  </policy>
+</busconfig>
+''')
+            c.flush()
+            (DBusTestCase.system_bus_pid, addr) = cls.start_dbus(conf=c.name)
+        os.environ['DBUS_SYSTEM_BUS_ADDRESS'] = addr
 
     @classmethod
     def start_xorg(klass):
