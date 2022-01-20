@@ -36,7 +36,6 @@
 #include "cc-applications-row.h"
 #include "cc-toggle-row.h"
 #include "cc-info-row.h"
-#include "cc-action-row.h"
 #include "cc-applications-resources.h"
 #include "cc-util.h"
 #ifdef HAVE_SNAP

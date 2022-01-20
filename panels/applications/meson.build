@@ -21,7 +21,6 @@ sources = files(
   'cc-applications-row.c',
   'cc-toggle-row.c',
   'cc-info-row.c',
-  'cc-action-row.c',
   'globs.c',
   'search.c',
   'utils.c',
