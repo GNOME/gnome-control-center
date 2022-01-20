@@ -275,7 +275,7 @@ subdir('shell')
 subdir('search-provider')
 
 if get_option('tests')
-#  subdir('tests')
+  subdir('tests')
 endif
 
 if get_option('documentation')
