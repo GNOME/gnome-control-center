@@ -1,4 +1,4 @@
-appdata = 'gnome-control-center.appdata.xml'
+appdata = 'org.gnome.Settings.appdata.xml'
 
 i18n.merge_file(
   input: appdata + '.in',

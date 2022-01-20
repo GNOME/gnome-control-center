@@ -297,7 +297,7 @@ eap_method_simple_class_init (EAPMethodSimpleClass *klass)
 
 	object_class->dispose = eap_method_simple_dispose;
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-simple.ui");
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/network/eap-method-simple.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodSimple, password_label);
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodSimple, username_label);

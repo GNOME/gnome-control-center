@@ -242,7 +242,7 @@ create_account (int    argc,
       return EXIT_FAILURE;
     }
 
-  application = gtk_application_new ("org.gnome.ControlCenter.GoaHelper",
+  application = gtk_application_new ("org.gnome.Settings.GoaHelper",
                                      G_APPLICATION_FLAGS_NONE);
   g_signal_connect (application, "activate", G_CALLBACK (on_application_activate_create_account_cb), argv);
 
@@ -451,7 +451,7 @@ show_account (int    argc,
       return EXIT_FAILURE;
     }
 
-  application = gtk_application_new ("org.gnome.ControlCenter.GoaHelper",
+  application = gtk_application_new ("org.gnome.Settings.GoaHelper",
                                      G_APPLICATION_FLAGS_NONE);
   g_signal_connect (application, "activate", G_CALLBACK (on_application_activate_show_account_cb), argv);
 

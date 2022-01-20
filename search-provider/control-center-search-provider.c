@@ -135,7 +135,7 @@ cc_search_provider_app_get ()
     return singleton;
 
   singleton = g_object_new (CC_TYPE_SEARCH_PROVIDER_APP,
-                            "application-id", "org.gnome.ControlCenter.SearchProvider",
+                            "application-id", "org.gnome.Settings.SearchProvider",
                             "flags", G_APPLICATION_IS_SERVICE,
                             NULL);
 

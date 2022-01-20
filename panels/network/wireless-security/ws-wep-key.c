@@ -264,7 +264,7 @@ ws_wep_key_class_init (WirelessSecurityWEPKeyClass *klass)
 
 	object_class->dispose = ws_wep_key_dispose;
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-wep-key.ui");
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/network/ws-wep-key.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, auth_method_combo);
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWEPKey, auth_method_label);

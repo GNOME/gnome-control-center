@@ -179,7 +179,7 @@ ws_dynamic_wep_class_init (WirelessSecurityDynamicWEPClass *klass)
 {
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-dynamic-wep.ui");
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/network/ws-dynamic-wep.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityDynamicWEP, auth_combo);
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityDynamicWEP, auth_label);

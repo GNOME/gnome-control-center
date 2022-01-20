@@ -150,7 +150,7 @@ ws_leap_class_init (WirelessSecurityLEAPClass *klass)
 {
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-leap.ui");
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/network/ws-leap.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityLEAP, password_entry);
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityLEAP, password_label);

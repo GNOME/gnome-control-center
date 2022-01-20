@@ -285,7 +285,7 @@ eap_method_ttls_class_init (EAPMethodTTLSClass *klass)
 {
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/eap-method-ttls.ui");
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/network/eap-method-ttls.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodTTLS, anon_identity_entry);
 	gtk_widget_class_bind_template_child (widget_class, EAPMethodTTLS, anon_identity_label);

@@ -180,7 +180,7 @@ ws_wpa_psk_class_init (WirelessSecurityWPAPSKClass *klass)
 {
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-wpa-psk.ui");
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/network/ws-wpa-psk.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAPSK, password_entry);
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAPSK, password_label);

@@ -194,7 +194,7 @@ ws_wpa_eap_class_init (WirelessSecurityWPAEAPClass *klass)
 {
 	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/ControlCenter/network/ws-wpa-eap.ui");
+	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/Settings/network/ws-wpa-eap.ui");
 
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAEAP, auth_combo);
 	gtk_widget_class_bind_template_child (widget_class, WirelessSecurityWPAEAP, auth_label);

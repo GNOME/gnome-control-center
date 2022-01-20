@@ -232,7 +232,7 @@ cc_application_startup (GApplication *application)
   self->window = cc_window_new (GTK_APPLICATION (application), self->model);
 
   provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (provider, "/org/gnome/ControlCenter/gtk/style.css");
+  gtk_css_provider_load_from_resource (provider, "/org/gnome/Settings/gtk/style.css");
   gtk_style_context_add_provider_for_display (gdk_display_get_default (),
                                               GTK_STYLE_PROVIDER (provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
@@ -292,7 +292,7 @@ GtkApplication *
 cc_application_new (void)
 {
   return g_object_new (CC_TYPE_APPLICATION,
-                       "application-id", "org.gnome.ControlCenter",
+                       "application-id", "org.gnome.Settings",
                        "flags", G_APPLICATION_HANDLES_COMMAND_LINE,
                        NULL);
 }
