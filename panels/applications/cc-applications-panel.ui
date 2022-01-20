@@ -98,14 +98,6 @@
                         <property name="info" translatable="yes">Disabled</property>
                       </object>
                     </child>
-                    <child>
-                      <object class="CcInfoRow" id="builtin">
-                        <property name="title" translatable="yes">Built-in Permissions</property>
-                        <property name="info" translatable="yes">Cannot be changed</property>
-                        <property name="has-expander">True</property>
-                        <property name="is-link">True</property>
-                      </object>
-                    </child>
                     <style>
                       <class name="boxed-list"/>
                     </style>
@@ -249,8 +241,6 @@
 
             <child>
               <object class="AdwPreferencesGroup" id="usage_section">
-                <property name="title" translatable="yes">Usage</property>
-                <property name="description" translatable="yes">How much resources this application is using.</property>
                 <child>
                   <object class="GtkListBox" id="usage_list">
                     <property name="selection-mode">none</property>
@@ -258,6 +248,14 @@
                     <style>
                       <class name="boxed-list"/>
                     </style>
+                    <child>
+                      <object class="CcInfoRow" id="builtin">
+                        <property name="title" translatable="yes">Built-in Permissions</property>
+                        <property name="info" translatable="yes">Cannot be changed</property>
+                        <property name="has-expander">True</property>
+                        <property name="is-link">True</property>
+                      </object>
+                    </child>
                     <child>
                       <object class="CcInfoRow" id="storage">
                         <property name="title" translatable="yes">Storage</property>

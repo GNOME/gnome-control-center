@@ -867,7 +867,7 @@ update_permission_section (CcApplicationsPanel *self,
 {
   g_autofree gchar *portal_app_id = get_portal_app_id (info);
   gboolean disabled, allowed, set;
-  gboolean has_any = FALSE, has_builtin = FALSE;
+  gboolean has_any = FALSE;
 
   if (portal_app_id == NULL)
     {
@@ -900,11 +900,6 @@ update_permission_section (CcApplicationsPanel *self,
   remove_snap_permissions (self);
   has_any |= add_snap_permissions (self, info, portal_app_id);
 #endif
-
-  remove_static_permissions (self);
-  has_builtin = add_static_permissions (self, info, portal_app_id);
-  gtk_widget_set_visible (GTK_WIDGET (self->builtin), has_builtin);
-  has_any |= has_builtin;
 
   gtk_widget_set_visible (self->permission_section, has_any);
 }
@@ -1632,16 +1627,16 @@ update_usage_section (CcApplicationsPanel *self,
                       GAppInfo            *info)
 {
   g_autofree gchar *portal_app_id = get_portal_app_id (info);
+  gboolean has_builtin = FALSE;
 
   if (portal_app_id != NULL)
-    {
-      gtk_widget_show (self->usage_section);
-      update_app_sizes (self, portal_app_id);
-    }
-  else
-    {
-      gtk_widget_hide (self->usage_section);
-    }
+    update_app_sizes (self, portal_app_id);
+
+  remove_static_permissions (self);
+  has_builtin = add_static_permissions (self, info, portal_app_id);
+  gtk_widget_set_visible (GTK_WIDGET (self->builtin), has_builtin);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->usage_section), portal_app_id || has_builtin);
 }
 
 /* --- panel setup --- */
