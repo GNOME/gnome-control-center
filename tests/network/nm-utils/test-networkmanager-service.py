@@ -1435,7 +1435,7 @@ def main():
     GLib.io_add_watch(io, GLib.PRIORITY_LOW, GLib.IOCondition.HUP, stdin_cb)
 
     # also quit after inactivity to ensure we don't stick around if the above fails somehow
-    GLib.timeout_add_seconds(20, quit_cb, None)
+    GLib.timeout_add_seconds(60, quit_cb, None)
 
     try:
         print("test-networkmanager-service.py entered mainloop", time.time())
