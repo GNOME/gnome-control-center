@@ -1487,12 +1487,16 @@ static void
 update_total_size (CcApplicationsPanel *self)
 {
   g_autofree gchar *formatted_size = NULL;
+  g_autofree gchar *subtitle = NULL;
   guint64 total;
 
   total = self->app_size + self->data_size + self->cache_size;
   formatted_size = g_format_size (total);
   g_object_set (self->total, "info", formatted_size, NULL);
-  g_object_set (self->storage, "info", formatted_size, NULL);
+
+  /* Translators: '%s' is the formatted size, e.g. "26.2 MB" */
+  subtitle = g_strdup_printf (_("%s of disk space used"), formatted_size);
+  g_object_set (self->storage, "subtitle", subtitle, NULL);
 }
 
 static void
