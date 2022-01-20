@@ -166,7 +166,7 @@ get_output_of (const gchar **argv)
                      &status, NULL))
     return NULL;
 
-  if (!g_spawn_check_exit_status (status, NULL))
+  if (!g_spawn_check_wait_status (status, NULL))
     return NULL;
 
   return g_steal_pointer (&output);
