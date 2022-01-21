@@ -20,6 +20,11 @@ sources = files('cc-lock-panel.c')
 
 resource_data = files('cc-lock-panel.ui')
 
+sources += gnome.mkenums_simple(
+  'cc-lock-panel-enums',
+  sources: ['cc-lock-panel.h'],
+)
+
 sources += gnome.compile_resources(
   'cc-' + cappletname + '-resources',
   cappletname + '.gresource.xml',
