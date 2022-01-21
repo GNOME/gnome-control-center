@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcAppNotificationsDialog" parent="GtkDialog">
-    <property name="width_request">350</property>
+    <property name="default-width">550</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <child type="titlebar">
@@ -13,237 +13,91 @@
       </object>
     </child>
     <child>
-      <object class="GtkBox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="margin-top">12</property>
-        <property name="margin-bottom">36</property>
-        <property name="margin-start">36</property>
-        <property name="margin-end">36</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="GtkListBox" id="main_listbox">
-            <property name="selection_mode">none</property>
-            <property name="show-separators">True</property>
-            <property name="activate_on_single_click">False</property>
-            <style>
-              <class name="boxed-list" />
-            </style>
+          <object class="AdwPreferencesGroup">
             <child>
-              <object class="GtkListBoxRow">
-                <property name="width_request">100</property>
-                <property name="activatable">False</property>
-                <property name="selectable">False</property>
+              <object class="AdwActionRow">
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes" context="notifications" comments="This is the per application switch for message tray usage.">_Notifications</property>
+                <property name="activatable-widget">notifications_switch</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="margin_start">15</property>
-                    <property name="margin_end">15</property>
-                    <property name="margin_top">12</property>
-                    <property name="margin_bottom">12</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes" context="notifications" comments="This is the per application switch for message tray usage.">_Notifications</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">notifications_switch</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSwitch" id="notifications_switch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <property name="active">True</property>
-                        <signal name="notify::active" handler="notifications_switch_state_set_cb" swapped="no"/>
-                      </object>
-                    </child>
+                  <object class="GtkSwitch" id="notifications_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                    <property name="active">True</property>
+                    <signal name="notify::active" handler="notifications_switch_state_set_cb" swapped="no"/>
                   </object>
                 </child>
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow">
-                <property name="width_request">100</property>
-                <property name="activatable">False</property>
-                <property name="selectable">False</property>
+              <object class="AdwActionRow">
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes" context="notifications" comments="This is the setting to configure sounds associated with notifications.">Sound _Alerts</property>
+                <property name="activatable-widget">sound_alerts_switch</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="margin_start">15</property>
-                    <property name="margin_end">15</property>
-                    <property name="margin_top">12</property>
-                    <property name="margin_bottom">12</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="xalign">0</property>
-                        <property name="margin_end">15</property>
-                        <property name="label" translatable="yes" context="notifications" comments="This is the setting to configure sounds associated with notifications.">Sound _Alerts</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">sound_alerts_switch</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSwitch" id="sound_alerts_switch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <signal name="notify::active" handler="sound_alerts_switch_state_set_cb" swapped="no"/>
-                      </object>
-                    </child>
+                  <object class="GtkSwitch" id="sound_alerts_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                    <signal name="notify::active" handler="sound_alerts_switch_state_set_cb" swapped="no"/>
                   </object>
                 </child>
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow">
-                <property name="width_request">100</property>
-                <property name="activatable">False</property>
-                <property name="selectable">False</property>
+              <object class="AdwActionRow">
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes" context="notifications">Notification _Popups</property>
+                <property name="subtitle" translatable="yes">Notifications will continue to appear in the notification list when popups are disabled.</property>
+                <property name="activatable-widget">notification_banners_switch</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="margin_start">15</property>
-                    <property name="margin_end">15</property>
-                    <property name="margin_top">12</property>
-                    <property name="margin_bottom">12</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="orientation">vertical</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="hexpand">True</property>
-                            <property name="vexpand">True</property>
-                            <property name="xalign">0</property>
-                            <property name="margin_end">15</property>
-                            <property name="label" translatable="yes" context="notifications">Notification _Popups</property>
-                            <property name="use_underline">True</property>
-                            <property name="mnemonic_widget">notification_banners_switch</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="max-width-chars">42</property>
-                            <property name="wrap-mode">word</property>
-                            <property name="label" translatable="yes">Notifications will continue to appear in the notification list when popups are disabled.</property>
-                            <property name="wrap">True</property>
-                            <property name="lines">-1</property>
-                            <property name="xalign">0</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                            <attributes>
-                              <attribute name="scale" value="0.83"/>
-                            </attributes>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSwitch" id="notification_banners_switch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <signal name="notify::active" handler="notification_banners_switch_state_set_cb" swapped="no"/>
-                      </object>
-                    </child>
+                  <object class="GtkSwitch" id="notification_banners_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                    <signal name="notify::active" handler="notification_banners_switch_state_set_cb" swapped="no"/>
                   </object>
                 </child>
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow">
-                <property name="width_request">100</property>
-                <property name="activatable">False</property>
-                <property name="selectable">False</property>
+              <object class="AdwActionRow">
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes" context="notifications" comments="Popups here refers to message tray notifications in the middle of the screen.">Show Message _Content in Popups</property>
+                <property name="activatable-widget">notification_banners_content_switch</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="margin_start">15</property>
-                    <property name="margin_end">15</property>
-                    <property name="margin_top">12</property>
-                    <property name="margin_bottom">12</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="visible">True</property>
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="xalign">0</property>
-                        <property name="margin_end">15</property>
-                        <property name="label" translatable="yes" context="notifications" comments="Popups here refers to message tray notifications in the middle of the screen.">Show Message _Content in Popups</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">notification_banners_content_switch</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSwitch" id="notification_banners_content_switch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <signal name="notify::active" handler="notification_banners_content_switch_state_set_cb" swapped="no"/>
-                      </object>
-                    </child>
+                  <object class="GtkSwitch" id="notification_banners_content_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                    <signal name="notify::active" handler="notification_banners_content_switch_state_set_cb" swapped="no"/>
                   </object>
                 </child>
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow">
-                <property name="width_request">100</property>
-                <property name="activatable">False</property>
-                <property name="selectable">False</property>
+              <object class="AdwActionRow">
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes" context="notifications">_Lock Screen Notifications</property>
+                <property name="activatable-widget">lock_screen_notifications_switch</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="margin_start">15</property>
-                    <property name="margin_end">15</property>
-                    <property name="margin_top">12</property>
-                    <property name="margin_bottom">12</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="xalign">0</property>
-                        <property name="margin_end">15</property>
-                        <property name="label" translatable="yes" context="notifications">_Lock Screen Notifications</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">lock_screen_notifications_switch</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSwitch" id="lock_screen_notifications_switch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <signal name="notify::active" handler="lock_screen_notifications_switch_state_set_cb" swapped="no"/>
-                      </object>
-                    </child>
+                  <object class="GtkSwitch" id="lock_screen_notifications_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                    <signal name="notify::active" handler="lock_screen_notifications_switch_state_set_cb" swapped="no"/>
                   </object>
                 </child>
               </object>
             </child>
             <child>
-              <object class="GtkListBoxRow">
-                <property name="width_request">100</property>
-                <property name="activatable">False</property>
-                <property name="selectable">False</property>
+              <object class="AdwActionRow">
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes" context="notifications">Show Message C_ontent on Lock Screen</property>
+                <property name="activatable-widget">lock_screen_content_switch</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="margin_start">15</property>
-                    <property name="margin_end">15</property>
-                    <property name="margin_top">12</property>
-                    <property name="margin_bottom">12</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                        <property name="xalign">0</property>
-                        <property name="margin_end">15</property>
-                        <property name="label" translatable="yes" context="notifications">Show Message C_ontent on Lock Screen</property>
-                        <property name="use_underline">True</property>
-                        <property name="mnemonic_widget">lock_screen_content_switch</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSwitch" id="lock_screen_content_switch">
-                        <property name="halign">end</property>
-                        <property name="valign">center</property>
-                        <signal name="notify::active" handler="lock_screen_content_switch_state_set_cb" swapped="no"/>
-                      </object>
-                    </child>
+                  <object class="GtkSwitch" id="lock_screen_content_switch">
+                    <property name="halign">end</property>
+                    <property name="valign">center</property>
+                    <signal name="notify::active" handler="lock_screen_content_switch_state_set_cb" swapped="no"/>
                   </object>
                 </child>
               </object>
