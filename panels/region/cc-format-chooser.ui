@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
   <template class="CcFormatChooser" parent="GtkDialog">
     <property name="title" translatable="yes">Formats</property>
     <property name="modal">True</property>
@@ -10,6 +9,7 @@
     <!-- Titlebar -->
     <child type="titlebar">
       <object class="GtkHeaderBar" id="title_bar">
+        <property name="show-title-buttons">False</property>
 
         <child>
           <object class="GtkStack" id="title_buttons">
