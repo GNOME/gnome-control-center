@@ -9,21 +9,20 @@
 
             <!-- Blank Screen Delay row -->
             <child>
-              <object class="AdwActionRow">
+              <object class="AdwComboRow" id="blank_screen_row">
                 <property name="title" translatable="yes">Blank Screen Delay</property>
                 <property name="subtitle" translatable="yes">Period of inactivity after which the screen will go blank.</property>
                 <property name="subtitle-lines">2</property>
-                <property name="activatable-widget">blank_screen_combo</property>
-                <property name="sensitive" bind-source="blank_screen_combo" bind-property="sensitive"/>
                 <property name="use-underline">true</property>
-                <child>
-                  <object class="GtkComboBoxText" id="blank_screen_combo">
-                    <property name="valign">center</property>
-                    <property name="entry_text_column">0</property>
-                    <property name="model">blank_screen_model</property>
-                    <signal name="changed" handler="on_blank_screen_delay_changed_cb" object="CcLockPanel" swapped="no" />
+                <signal name="notify::selected-item" handler="on_blank_screen_delay_changed_cb"/>
+                <property name="model">
+                  <object class="AdwEnumListModel">
+                    <property name="enum-type">CcLockPanelBlankScreenDelay</property>
                   </object>
-                </child>
+                </property>
+                <property name="expression">
+                  <closure type="gchararray" function="screen_delay_name_cb"/>
+                </property>
               </object>
             </child>
 
@@ -99,55 +98,4 @@
       </object>
     </child>
   </template>
-
-  <object class="GtkListStore" id="blank_screen_model">
-    <columns>
-      <!-- column-name name -->
-      <column type="gchararray"/>
-      <!-- column-name value -->
-      <column type="gint"/>
-    </columns>
-    <data>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">1 minute</col>
-        <col id="1">60</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">2 minutes</col>
-        <col id="1">120</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">3 minutes</col>
-        <col id="1">180</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">4 minutes</col>
-        <col id="1">240</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">5 minutes</col>
-        <col id="1">300</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">8 minutes</col>
-        <col id="1">480</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">10 minutes</col>
-        <col id="1">600</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">12 minutes</col>
-        <col id="1">720</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">15 minutes</col>
-        <col id="1">900</col>
-      </row>
-      <row>
-        <col id="0" translatable="yes" context="blank_screen" comments="Translators: Option for &quot;Blank screen&quot; in &quot;Power&quot; panel.">Never</col>
-        <col id="1">0</col>
-      </row>
-    </data>
-  </object>
 </interface>
