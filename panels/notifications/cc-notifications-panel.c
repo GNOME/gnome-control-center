@@ -260,6 +260,9 @@ add_application (CcNotificationsPanel *panel,
                                 NULL);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
 
+  w = gtk_image_new_from_icon_name ("go-next-symbolic");
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
+
   g_hash_table_add (panel->known_applications, g_strdup (app->canonical_app_id));
 }
 
