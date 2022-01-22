@@ -1,27 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcSearchPanel" parent="CcPanel">
-    <property name="visible">True</property>
-
-    <!-- Header widget -->
-    <child type="titlebar-start">
-      <object class="GtkButton" id="settings_button">
-        <property name="label" translatable="yes">Search Locations</property>
-        <signal name="clicked" handler="settings_button_clicked" object="CcSearchPanel" swapped="no"/>
-      </object>
-    </child>
-
-    <!-- Header widget -->
-    <child type="titlebar-end">
-      <object class="GtkSwitch" id="main_switch">
-        <property name="valign">center</property>
-      </object>
-    </child>
-
     <child type="content">
-      <object class="AdwPreferencesPage" id="search_vbox">
+      <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup">
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Search</property>
+                <property name="subtitle" translatable="yes">Search applications in the Activities Overview</property>
+                <property name="activatable-widget">main_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="main_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="settings_row">
+                <property name="title" translatable="yes">Search Locations</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="settings_row_activated" object="CcSearchPanel" swapped="no"/>
+                <child type="suffix">
+                  <object class="GtkImage">
+                    <property name="icon-name">go-next-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup" id="search_group">
             <property name="description" translatable="yes">Control which search results are shown in the Activities Overview. The order of search results can also be changed by moving rows in the list.</property>
             <child>
               <object class="GtkListBox" id="list_box">

@@ -32,8 +32,8 @@ struct _CcSearchPanel
 
   GtkWidget        *list_box;
   GtkSwitch        *main_switch;
-  GtkWidget        *search_vbox;
-  GtkWidget        *settings_button;
+  GtkWidget        *search_group;
+  GtkWidget        *settings_row;
   CcSearchPanelRow *selected_row;
 
   GSettings        *search_settings;
@@ -277,8 +277,8 @@ row_moved_cb (CcSearchPanel    *self,
 }
 
 static void
-settings_button_clicked (GtkWidget *widget,
-                         gpointer user_data)
+settings_row_activated (GtkWidget *widget,
+                        gpointer   user_data)
 {
   CcSearchPanel *self = user_data;
 
@@ -630,7 +630,7 @@ cc_search_panel_init (CcSearchPanel *self)
   gtk_list_box_set_sort_func (GTK_LIST_BOX (self->list_box),
                               (GtkListBoxSortFunc)list_sort_func, self, NULL);
 
-  gtk_widget_set_sensitive (self->settings_button, cc_search_locations_dialog_is_available ());
+  gtk_widget_set_sensitive (self->settings_row, cc_search_locations_dialog_is_available ());
 
   self->search_settings = g_settings_new ("org.gnome.desktop.search-providers");
   g_settings_bind (self->search_settings,
@@ -642,7 +642,7 @@ cc_search_panel_init (CcSearchPanel *self)
 
   g_object_bind_property (self->main_switch,
                           "active",
-                          self->search_vbox,
+                          self->search_group,
                           "sensitive",
                           G_BINDING_DEFAULT |
                           G_BINDING_SYNC_CREATE);
@@ -669,8 +669,8 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, main_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_vbox);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_button);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, search_group);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, settings_row_activated);
 }
