@@ -44,9 +44,11 @@ enum
 static guint signals[SIGNAL_LAST] = { 0, };
 
 static void
-move_up_button_clicked (GtkButton        *button,
-                        CcSearchPanelRow *self)
+move_up_cb (GSimpleAction *action,
+            GVariant      *parameter,
+            gpointer       user_data)
 {
+  CcSearchPanelRow *self = CC_SEARCH_PANEL_ROW (user_data);
   GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
   gint previous_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) - 1;
   GtkListBoxRow *previous_row = gtk_list_box_get_row_at_index (list_box, previous_idx);
@@ -61,9 +63,11 @@ move_up_button_clicked (GtkButton        *button,
 }
 
 static void
-move_down_button_clicked (GtkButton    *button,
-                          CcSearchPanelRow *self)
+move_down_cb (GSimpleAction *action,
+              GVariant      *parameter,
+              gpointer       user_data)
 {
+  CcSearchPanelRow *self = CC_SEARCH_PANEL_ROW (user_data);
   GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
   gint next_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) + 1;
   GtkListBoxRow *next_row = gtk_list_box_get_row_at_index (list_box, next_idx);
@@ -150,9 +154,6 @@ cc_search_panel_row_class_init (CcSearchPanelRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanelRow, icon);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanelRow, switcher);
 
-  gtk_widget_class_bind_template_callback (widget_class, move_up_button_clicked);
-  gtk_widget_class_bind_template_callback (widget_class, move_down_button_clicked);
-
   signals[SIGNAL_MOVE_ROW] =
     g_signal_new ("move-row",
                   G_TYPE_FROM_CLASS (object_class),
@@ -164,11 +165,17 @@ cc_search_panel_row_class_init (CcSearchPanelRowClass *klass)
                   1, CC_TYPE_SEARCH_PANEL_ROW);
 }
 
+const GActionEntry row_entries[] = {
+  { "move-up", move_up_cb, NULL, NULL, NULL, { 0 }  },
+  { "move-down", move_down_cb, NULL, NULL, NULL, { 0 } }
+};
+
 static void
 cc_search_panel_row_init (CcSearchPanelRow *self)
 {
   GtkDragSource *drag_source;
   GtkDropTarget *drop_target;
+  GSimpleActionGroup *group;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -182,6 +189,13 @@ cc_search_panel_row_init (CcSearchPanelRow *self)
   gtk_drop_target_set_preload (drop_target, TRUE);
   g_signal_connect (drop_target, "drop", G_CALLBACK (drop_cb), self);
   gtk_widget_add_controller (GTK_WIDGET (self), GTK_EVENT_CONTROLLER (drop_target));
+
+  group = g_simple_action_group_new ();
+  g_action_map_add_action_entries (G_ACTION_MAP (group),
+                                   row_entries,
+                                   G_N_ELEMENTS (row_entries),
+                                   self);
+  gtk_widget_insert_action_group (GTK_WIDGET (self), "row", G_ACTION_GROUP (group));
 }
 
 CcSearchPanelRow *
