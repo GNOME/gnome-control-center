@@ -124,7 +124,6 @@ struct _CcApplicationsPanel
   GtkWidget       *usage_section;
   CcInfoRow       *storage;
   GtkDialog       *storage_dialog;
-  GtkListBox      *storage_list;
   CcInfoRow       *app;
   CcInfoRow       *data;
   CcInfoRow       *cache;
@@ -1762,7 +1761,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, storage_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, total);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, usage_section);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, view_details_button);

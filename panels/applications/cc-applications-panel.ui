@@ -409,38 +409,15 @@
     <property name="title" translatable="yes">Storage</property>
     <property name="modal">1</property>
     <property name="use-header-bar">1</property>
-    <property name="resizable">0</property>
+    <property name="resizable">True</property>
     <property name="hide-on-close">True</property>
-    <child type="titlebar">
-      <object class="GtkHeaderBar">
-        <property name="show-title-buttons">True</property>
-        <style>
-          <class name="flat" />
-        </style>
-      </object>
-    </child>
+    <property name="default-width">420</property>
+    <property name="default-height">420</property>
     <child>
-      <object class="GtkBox">
-        <property name="margin-top">18</property>
-        <property name="margin-bottom">48</property>
-        <property name="margin-start">48</property>
-        <property name="margin-end">48</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">24</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="GtkLabel">
-            <property name="xalign">0</property>
-            <property name="wrap">1</property>
-            <property name="max-width-chars">50</property>
-            <property name="label" translatable="yes">How much disk space this application is occupying with app data and caches.</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkListBox" id="storage_list">
-            <property name="selection-mode">none</property>
-            <style>
-              <class name="boxed-list"/>
-            </style>
+          <object class="AdwPreferencesGroup">
+            <property name="description" translatable="yes">How much disk space this application is occupying with app data and caches.</property>
             <child>
               <object class="CcInfoRow" id="app">
                 <property name="title" translatable="yes">Application</property>
@@ -465,15 +442,16 @@
                 <property name="info">Unknown</property>
               </object>
             </child>
-            <style>
-              <class name="boxed-list"/>
-            </style>
           </object>
         </child>
         <child>
-          <object class="GtkButton" id="clear_cache_button">
-            <property name="label" translatable="yes">Clear Cache…</property>
-            <signal name="clicked" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="GtkButton" id="clear_cache_button">
+                <property name="label" translatable="yes">Clear Cache…</property>
+                <signal name="clicked" handler="clear_cache_cb" object="CcApplicationsPanel" swapped="yes"/>
+              </object>
+            </child>
           </object>
         </child>
       </object>
