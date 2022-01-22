@@ -52,16 +52,13 @@ list_sort_func (gconstpointer a,
                 gpointer user_data)
 {
   CcSearchPanel *self = user_data;
-  GtkWidget *panel_row_a, *panel_row_b;
   GAppInfo *app_a, *app_b;
   const gchar *id_a, *id_b;
   gint idx_a, idx_b;
   gpointer lookup;
 
-  panel_row_a = gtk_list_box_row_get_child (GTK_LIST_BOX_ROW ((gpointer*)a));
-  panel_row_b = gtk_list_box_row_get_child (GTK_LIST_BOX_ROW ((gpointer*)b));
-  app_a = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (panel_row_a));
-  app_b = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (panel_row_b));
+  app_a = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW ((gpointer*)a));
+  app_b = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW ((gpointer*)b));
 
   id_a = g_app_info_get_id (app_a);
   id_b = g_app_info_get_id (app_b);
@@ -161,7 +158,6 @@ search_panel_move_selected (CcSearchPanel *self,
   GAppInfo *app_info, *other_app_info;
   const gchar *app_id, *other_app_id;
   const gchar *last_good_app, *target_app;
-  GtkWidget *panel_row;
   GtkWidget *aux;
   gint idx, other_idx;
   gpointer idx_ptr;
@@ -173,12 +169,11 @@ search_panel_move_selected (CcSearchPanel *self,
   /* The assertions are valid only as long as we don't move the first
      or the last item. */
 
-  aux = gtk_widget_get_parent (GTK_WIDGET (self->selected_row));
+  aux = GTK_WIDGET (self->selected_row);
   other_row = down ? GTK_LIST_BOX_ROW (gtk_widget_get_next_sibling (aux)) :
                      GTK_LIST_BOX_ROW (gtk_widget_get_prev_sibling (aux));
 
-  panel_row = gtk_list_box_row_get_child (GTK_LIST_BOX_ROW (other_row));
-  other_app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (panel_row));
+  other_app_info = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (other_row));
   other_app_id = g_app_info_get_id (other_app_info);
 
   g_assert (other_app_id != NULL);
@@ -204,8 +199,7 @@ search_panel_move_selected (CcSearchPanel *self,
           break;
         }
 
-      panel_row = gtk_list_box_row_get_child (GTK_LIST_BOX_ROW (aux));
-      tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (panel_row));
+      tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (aux));
       tmp_id = g_app_info_get_id (tmp);
 
       last_good_app = tmp_id;
@@ -238,8 +232,7 @@ search_panel_move_selected (CcSearchPanel *self,
       GAppInfo *tmp;
       const char *tmp_id;
 
-      panel_row = gtk_list_box_row_get_child (GTK_LIST_BOX_ROW (aux));
-      tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (panel_row));
+      tmp = cc_search_panel_row_get_app_info (CC_SEARCH_PANEL_ROW (aux));
       tmp_id = g_app_info_get_id (tmp);
 
       g_hash_table_replace (self->sort_order, g_strdup (tmp_id), GINT_TO_POINTER (idx));
@@ -263,10 +256,8 @@ row_moved_cb (CcSearchPanel    *self,
               CcSearchPanelRow *dest_row,
               CcSearchPanelRow *row)
 {
-  GtkWidget *dest_listbox_row = gtk_widget_get_parent (GTK_WIDGET (dest_row));
-  GtkWidget *listbox_row = gtk_widget_get_parent (GTK_WIDGET (row));
-  gint source_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (listbox_row));
-  gint dest_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (dest_listbox_row));
+  gint source_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (row));
+  gint dest_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (dest_row));
   gboolean down;
 
   self->selected_row = row;

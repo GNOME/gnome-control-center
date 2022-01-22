@@ -21,12 +21,11 @@
 
 struct _CcSearchPanelRow
 {
-  AdwBin         parent_instance;
+  AdwActionRow   parent_instance;
 
   GAppInfo      *app_info;
 
   GtkImage      *icon;
-  GtkLabel      *app_name;
   GtkSwitch     *switcher;
 
   GtkListBox    *drag_widget;
@@ -34,7 +33,7 @@ struct _CcSearchPanelRow
   gdouble        drag_y;
 };
 
-G_DEFINE_TYPE (CcSearchPanelRow, cc_search_panel_row, ADW_TYPE_BIN)
+G_DEFINE_TYPE (CcSearchPanelRow, cc_search_panel_row, ADW_TYPE_ACTION_ROW)
 
 enum
 {
@@ -98,7 +97,6 @@ drag_begin_cb (GtkDragSource    *source,
   CcSearchPanelRow *panel_row;
   GtkAllocation alloc;
   GtkWidget *drag_icon;
-  GtkWidget *row;
 
   gtk_widget_get_allocation (GTK_WIDGET (self), &alloc);
 
@@ -108,10 +106,8 @@ drag_begin_cb (GtkDragSource    *source,
   panel_row = cc_search_panel_row_new (self->app_info);
   gtk_switch_set_active (panel_row->switcher, gtk_switch_get_active (self->switcher));
 
-  row = gtk_list_box_row_new ();
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), GTK_WIDGET (panel_row));
-  gtk_list_box_append (GTK_LIST_BOX (self->drag_widget), row);
-  gtk_list_box_drag_highlight_row (self->drag_widget, GTK_LIST_BOX_ROW (row));
+  gtk_list_box_append (GTK_LIST_BOX (self->drag_widget), GTK_WIDGET (panel_row));
+  gtk_list_box_drag_highlight_row (self->drag_widget, GTK_LIST_BOX_ROW (panel_row));
 
   drag_icon = gtk_drag_icon_get_for_drag (drag);
   gtk_drag_icon_set_child (GTK_DRAG_ICON (drag_icon), GTK_WIDGET (self->drag_widget));
@@ -152,7 +148,6 @@ cc_search_panel_row_class_init (CcSearchPanelRowClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/search/cc-search-panel-row.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanelRow, icon);
-  gtk_widget_class_bind_template_child (widget_class, CcSearchPanelRow, app_name);
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanelRow, switcher);
 
   gtk_widget_class_bind_template_callback (widget_class, move_up_button_clicked);
@@ -205,7 +200,8 @@ cc_search_panel_row_new (GAppInfo *app_info)
     g_object_ref (gicon);
   gtk_image_set_from_gicon (self->icon, gicon);
 
-  gtk_label_set_text (self->app_name, g_app_info_get_name (app_info));
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
+                                 g_app_info_get_name (app_info));
 
   return self;
 }

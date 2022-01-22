@@ -1,59 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcSearchPanelRow" parent="AdwBin">
-    <child>
-      <object class="GtkBox">
-        <property name="spacing">12</property>
+  <template class="CcSearchPanelRow" parent="AdwActionRow">
+    <child type="prefix">
+      <object class="GtkImage" id="icon">
+        <property name="icon-size">large</property>
+        <style>
+          <class name="lowres-icon"/>
+        </style>
+      </object>
+    </child>
+    <child type="prefix">
+      <object class="GtkImage">
+        <property name="icon-name">list-drag-handle-symbolic</property>
+        <style>
+          <class name="drag-handle"/>
+        </style>
+      </object>
+    </child>
+    <child type="suffix">
+      <object class="GtkSwitch" id="switcher">
+        <property name="valign">center</property>
+      </object>
+    </child>
+    <child type="suffix">
+      <object class="GtkSeparator">
+        <property name="orientation">vertical</property>
         <property name="margin-top">12</property>
         <property name="margin-bottom">12</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <child>
-          <object class="GtkImage">
-            <property name="icon-name">list-drag-handle-symbolic</property>
-            <style>
-              <class name="drag-handle"/>
-            </style>
-          </object>
-        </child>
-        <child>
-          <object class="GtkImage" id="icon">
-            <style>
-              <class name="lowres-icon"/>
-            </style>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="app_name">
-            <property name="hexpand">True</property>
-            <property name="ellipsize">end</property>
-            <property name="xalign">0.0</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSwitch" id="switcher">
-            <property name="valign">center</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="orientation">vertical</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkMenuButton">
-            <property name="popover">move_row_menu</property>
-            <style>
-              <class name="flat"/>
-            </style>
-            <child>
-              <object class="GtkImage">
-                <property name="icon-name">view-more-symbolic</property>
-              </object>
-            </child>
-          </object>
-        </child>
+      </object>
+    </child>
+    <child type="suffix">
+      <object class="GtkMenuButton">
+        <property name="valign">center</property>
+        <property name="icon-name">view-more-symbolic</property>
+        <property name="popover">move_row_menu</property>
+        <style>
+          <class name="flat"/>
+        </style>
       </object>
     </child>
   </template>
