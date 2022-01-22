@@ -319,30 +319,20 @@
     <property name="title" translatable="yes">Built-in Permissions</property>
     <property name="modal">1</property>
     <property name="use-header-bar">1</property>
-    <property name="resizable">0</property>
+    <property name="resizable">True</property>
     <property name="hide-on-close">True</property>
     <child>
-      <object class="GtkBox">
-        <property name="margin-top">24</property>
-        <property name="margin-bottom">24</property>
-        <property name="margin-start">24</property>
-        <property name="margin-end">24</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">12</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="GtkLabel" id="builtin_label">
-            <property name="xalign">0</property>
-            <property name="wrap">1</property>
-            <property name="max-width-chars">50</property>
-            <property name="label">Yadda Yadda</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkListBox" id="builtin_list">
-            <property name="selection-mode">none</property>
-            <style>
-              <class name="boxed-list"/>
-            </style>
+          <object class="AdwPreferencesGroup" id="builtin_group">
+            <child>
+              <object class="GtkListBox" id="builtin_list">
+                <property name="selection-mode">none</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+              </object>
+            </child>
           </object>
         </child>
       </object>

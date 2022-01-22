@@ -109,7 +109,7 @@ struct _CcApplicationsPanel
   CcInfoRow       *no_microphone;
   CcInfoRow       *builtin;
   GtkDialog       *builtin_dialog;
-  GtkLabel        *builtin_label;
+  AdwPreferencesGroup *builtin_group;
   GtkListBox      *builtin_list;
 
   GtkButton       *handler_reset;
@@ -829,7 +829,7 @@ add_static_permissions (CcApplicationsPanel *self,
     added += add_static_permission_row (self, _("Settings"), _("Can change settings"));
 
   text = g_strdup_printf (_("%s has the following permissions built-in. These cannot be altered. If you are concerned about these permissions, consider removing this application."), g_app_info_get_display_name (info));
-  gtk_label_set_label (self->builtin_label, text);
+  adw_preferences_group_set_description (self->builtin_group, text);
 
   return added > 0;
 }
@@ -1724,7 +1724,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_name_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_label);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_group);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, cache);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
