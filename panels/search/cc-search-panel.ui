@@ -7,8 +7,8 @@
           <object class="AdwPreferencesGroup">
             <child>
               <object class="AdwActionRow">
-                <property name="title" translatable="yes">Search</property>
-                <property name="subtitle" translatable="yes">Search applications in the Activities Overview</property>
+                <property name="title" translatable="yes">Application Search</property>
+                <property name="subtitle" translatable="yes">Include application-provided search results.</property>
                 <property name="activatable-widget">main_switch</property>
                 <child type="suffix">
                   <object class="GtkSwitch" id="main_switch">
@@ -20,6 +20,7 @@
             <child>
               <object class="AdwActionRow" id="settings_row">
                 <property name="title" translatable="yes">Search Locations</property>
+                <property name="subtitle" translatable="yes">Folders which are searched by system applications.</property>
                 <property name="activatable">True</property>
                 <signal name="activated" handler="settings_row_activated" object="CcSearchPanel" swapped="no"/>
                 <child type="suffix">
@@ -33,7 +34,8 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup" id="search_group">
-            <property name="description" translatable="yes">Control which search results are shown in the Activities Overview. The order of search results can also be changed by moving rows in the list.</property>
+            <property name="title" translatable="yes">Search Results</property>
+            <property name="description" translatable="yes">Results are displayed according to the list order.</property>
             <child>
               <object class="GtkListBox" id="list_box">
                 <style>
