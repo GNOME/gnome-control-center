@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-01-06 22:22+0000\n"
-"PO-Revision-Date: 2022-01-07 11:42+0800\n"
+"POT-Creation-Date: 2022-01-21 10:05+0000\n"
+"PO-Revision-Date: 2022-01-24 18:59+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -46,71 +46,71 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0\n"
 "X-Generator: Gtranslator 41.0\n"
 
-#: panels/applications/cc-applications-panel.c:824
+#: panels/applications/cc-applications-panel.c:804
 msgid "System Bus"
 msgstr "系统总线"
 
+#: panels/applications/cc-applications-panel.c:804
+#: panels/applications/cc-applications-panel.c:806
+#: panels/applications/cc-applications-panel.c:819
 #: panels/applications/cc-applications-panel.c:824
-#: panels/applications/cc-applications-panel.c:826
-#: panels/applications/cc-applications-panel.c:839
-#: panels/applications/cc-applications-panel.c:844
 msgid "Full access"
 msgstr "完全访问"
 
-#: panels/applications/cc-applications-panel.c:826
+#: panels/applications/cc-applications-panel.c:806
 msgid "Session Bus"
 msgstr "会话总线"
 
-#: panels/applications/cc-applications-panel.c:830
-#: panels/power/cc-power-panel.ui:76 panels/thunderbolt/cc-bolt-panel.ui:395
-#: panels/thunderbolt/cc-bolt-panel.ui:451
+#: panels/applications/cc-applications-panel.c:810
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:406
+#: panels/thunderbolt/cc-bolt-panel.ui:462
 msgid "Devices"
 msgstr "设备"
 
-#: panels/applications/cc-applications-panel.c:830
+#: panels/applications/cc-applications-panel.c:810
 msgid "Full access to /dev"
 msgstr "对 /dev 的完全访问"
 
-#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:814
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:230 panels/wwan/cc-wwan-device-page.ui:113
+#: panels/network/network-mobile.ui:230 panels/wwan/cc-wwan-device-page.ui:61
 #: panels/wwan/cc-wwan-network-dialog.ui:5
 msgid "Network"
 msgstr "网络"
 
-#: panels/applications/cc-applications-panel.c:834
+#: panels/applications/cc-applications-panel.c:814
 msgid "Has network access"
 msgstr "拥有网络访问"
 
-#: panels/applications/cc-applications-panel.c:839
-#: panels/applications/cc-applications-panel.c:841
+#: panels/applications/cc-applications-panel.c:819
+#: panels/applications/cc-applications-panel.c:821
 #: panels/search/cc-search-locations-dialog.c:361
 msgid "Home"
 msgstr "主目录"
 
-#: panels/applications/cc-applications-panel.c:841
-#: panels/applications/cc-applications-panel.c:846
+#: panels/applications/cc-applications-panel.c:821
+#: panels/applications/cc-applications-panel.c:826
 msgid "Read-only"
 msgstr "只读"
 
-#: panels/applications/cc-applications-panel.c:844
-#: panels/applications/cc-applications-panel.c:846
+#: panels/applications/cc-applications-panel.c:824
+#: panels/applications/cc-applications-panel.c:826
 msgid "File System"
 msgstr "文件系统"
 
-#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:830
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:304
-#: shell/cc-window.c:974 shell/cc-window.ui:23
+#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:246
+#: shell/cc-window.c:878 shell/cc-window.ui:22
 #: shell/gnome-control-center.desktop.in.in:3
 msgid "Settings"
 msgstr "设置"
 
-#: panels/applications/cc-applications-panel.c:850
+#: panels/applications/cc-applications-panel.c:830
 msgid "Can change settings"
 msgstr "可以更改设置"
 
-#: panels/applications/cc-applications-panel.c:852
+#: panels/applications/cc-applications-panel.c:832
 #, c-format
 msgid ""
 "%s has the following permissions built-in. These cannot be altered. If you "
@@ -119,95 +119,60 @@ msgstr ""
 "%s 拥有以下内置权限。这些无法被更改。如果您在意这些权限，请考虑移除该应用程"
 "序。"
 
-#: panels/applications/cc-applications-panel.c:1025
-msgid "Web Links"
-msgstr "网络链接"
-
-#: panels/applications/cc-applications-panel.c:1035
-msgid "Git Links"
-msgstr "Git 链接"
-
-#: panels/applications/cc-applications-panel.c:1041
+#: panels/applications/cc-applications-panel.c:1165
 #, c-format
-msgid "%s Links"
-msgstr "%s 链接"
+msgid "%u file and link type that is opened by the app"
+msgid_plural "%u file and link types that are opened by the app"
+msgstr[0] "%u 个文件和链接类型可以被该应用打开"
 
-#: panels/applications/cc-applications-panel.c:1049
-#: panels/applications/cc-applications-panel.c:1085
-msgid "Unset"
-msgstr "移除关联"
+#: panels/applications/cc-applications-panel.c:1172
+#, c-format
+msgid "<b>%s</b> is used to open the following types of files and links."
+msgstr "<b>%s</b> 用来打开下列文件和链接类型。"
 
-#: panels/applications/cc-applications-panel.c:1140
-msgid "Links"
-msgstr "链接"
-
-#: panels/applications/cc-applications-panel.c:1148
-msgid "Hypertext Files"
-msgstr "超文本文件"
-
-#: panels/applications/cc-applications-panel.c:1162
-msgid "Text Files"
-msgstr "文本文件"
-
-#: panels/applications/cc-applications-panel.c:1176
-msgid "Image Files"
-msgstr "图像文件"
-
-#: panels/applications/cc-applications-panel.c:1192
-msgid "Font Files"
-msgstr "字体文件"
-
-#: panels/applications/cc-applications-panel.c:1253
-msgid "Archive Files"
-msgstr "归档文件"
-
-#: panels/applications/cc-applications-panel.c:1273
-msgid "Package Files"
-msgstr "软件包文件"
-
-#: panels/applications/cc-applications-panel.c:1296
-msgid "Audio Files"
-msgstr "音频文件"
-
-#: panels/applications/cc-applications-panel.c:1313
-msgid "Video Files"
-msgstr "视频文件"
-
-#: panels/applications/cc-applications-panel.c:1321
-msgid "Other Files"
-msgstr "其它文件"
+#. Translators: '%s' is the formatted size, e.g. "26.2 MB"
+#: panels/applications/cc-applications-panel.c:1224
+#, c-format
+msgid "%s of disk space used"
+msgstr "已占用 %s 的磁盘空间"
 
 #. List of applications.
-#: panels/applications/cc-applications-panel.c:1663
-#: panels/applications/cc-applications-panel.ui:375
+#: panels/applications/cc-applications-panel.c:1388
+#: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:35
+#: panels/notifications/cc-notifications-panel.ui:34
 msgid "Applications"
 msgstr "应用程序"
 
-#: panels/applications/cc-applications-panel.ui:33
+#: panels/applications/cc-applications-panel.ui:31
 msgid "No applications"
 msgstr "没有应用程序"
 
-#: panels/applications/cc-applications-panel.ui:44
+#: panels/applications/cc-applications-panel.ui:34
 msgid "Install some…"
 msgstr "安装一些…"
 
-#: panels/applications/cc-applications-panel.ui:71
-msgid "Permissions & Access"
-msgstr "权限和访问"
+#: panels/applications/cc-applications-panel.ui:84
+#: panels/network/wireless-security/ws-file-chooser-button.c:96
+msgid "Open"
+msgstr "打开"
 
-#: panels/applications/cc-applications-panel.ui:82
-msgid ""
-"Data and services that this app has asked for access to and permissions that "
-"it requires."
-msgstr "应用要求访问的数据和服务以及它需要的权限。"
+#: panels/applications/cc-applications-panel.ui:94
+#| msgid "_View details"
+msgid "View Details"
+msgstr "查看详情"
 
-#: panels/applications/cc-applications-panel.ui:99
-#: panels/applications/cc-applications-panel.ui:105
-#: panels/camera/gnome-camera-panel.desktop.in.in:3
-msgid "Camera"
-msgstr "相机"
+#: panels/applications/cc-applications-panel.ui:112
+#: panels/applications/cc-applications-panel.ui:119
+#: panels/keyboard/01-launchers.xml.in:16
+#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:41
+msgid "Search"
+msgstr "搜索"
+
+#: panels/applications/cc-applications-panel.ui:113
+#: panels/applications/cc-applications-panel.ui:120
+msgid "Receive system searches and send results."
+msgstr "接收系统搜索并发送结果。"
 
 #. This label is displayed in a treeview cell displaying
 #. * a disabled accelerator key combination.
@@ -215,11 +180,11 @@ msgstr "相机"
 #. TRANSLATORS: Status of Parental Controls setup
 #. translators:
 #. * The device has been disabled
-#: panels/applications/cc-applications-panel.ui:106
-#: panels/applications/cc-applications-panel.ui:118
-#: panels/applications/cc-applications-panel.ui:130
-#: panels/applications/cc-applications-panel.ui:206
-#: panels/applications/cc-applications-panel.ui:236
+#: panels/applications/cc-applications-panel.ui:121
+#: panels/applications/cc-applications-panel.ui:156
+#: panels/applications/cc-applications-panel.ui:177
+#: panels/applications/cc-applications-panel.ui:191
+#: panels/applications/cc-applications-panel.ui:205
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
@@ -230,132 +195,158 @@ msgstr "相机"
 msgid "Disabled"
 msgstr "已禁用"
 
-#: panels/applications/cc-applications-panel.ui:111
-#: panels/applications/cc-applications-panel.ui:117
-#: panels/microphone/gnome-microphone-panel.desktop.in.in:3
-msgid "Microphone"
-msgstr "麦克风"
-
-#: panels/applications/cc-applications-panel.ui:123
-#: panels/applications/cc-applications-panel.ui:129
-#: panels/location/gnome-location-panel.desktop.in.in:3
-msgid "Location Services"
-msgstr "定位服务"
-
-#: panels/applications/cc-applications-panel.ui:135
-#: panels/applications/cc-applications-panel.ui:458
-msgid "Built-in Permissions"
-msgstr "内置权限"
-
-#: panels/applications/cc-applications-panel.ui:136
-msgid "Cannot be changed"
-msgstr "无法被更改"
-
-#: panels/applications/cc-applications-panel.ui:151
-msgid ""
-"Individual permissions for applications can be reviewed in the <a href="
-"\"privacy\">Privacy</a> Settings."
-msgstr "应用程序的各个权限可以在 <a href=\"privacy\">隐私</a> 设置中查看。"
-
-# 左撇子有歧视色彩。
-#: panels/applications/cc-applications-panel.ui:172
-msgid "Integration"
-msgstr "集成"
-
-#: panels/applications/cc-applications-panel.ui:183
-msgid "System features used by this application."
-msgstr "此应用程序使用的系统功能。"
-
-#: panels/applications/cc-applications-panel.ui:199
-#: panels/applications/cc-applications-panel.ui:205
-#: panels/keyboard/01-launchers.xml.in:16
-#: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:45
-msgid "Search"
-msgstr "搜索"
-
-#: panels/applications/cc-applications-panel.ui:211
+#: panels/applications/cc-applications-panel.ui:126
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:3
 msgid "Notifications"
 msgstr "通知"
 
-#: panels/applications/cc-applications-panel.ui:217
+#: panels/applications/cc-applications-panel.ui:127
+#| msgid "preferences-system-notifications"
+msgid "Show system notifications."
+msgstr "显示系统通知。"
+
+#: panels/applications/cc-applications-panel.ui:133
 msgid "Run in background"
 msgstr "后台运行"
 
-#: panels/applications/cc-applications-panel.ui:223
-msgid "Set Desktop Background"
-msgstr "设置桌面背景"
+#: panels/applications/cc-applications-panel.ui:134
+msgid "Allow activity when the app is closed."
+msgstr "允许应用关闭后活动。"
 
-#: panels/applications/cc-applications-panel.ui:229
-#: panels/applications/cc-applications-panel.ui:235
+#: panels/applications/cc-applications-panel.ui:140
+#| msgid "Wallpapers"
+msgid "Change Wallpaper"
+msgstr "更改壁纸"
+
+# 图标条目，保留无需翻译。
+#: panels/applications/cc-applications-panel.ui:141
+#| msgid "preferences-desktop-wallpaper"
+msgid "Change the desktop wallpaper."
+msgstr "更换桌面壁纸。"
+
+#: panels/applications/cc-applications-panel.ui:147
+#: panels/applications/cc-applications-panel.ui:154
 msgid "Sounds"
 msgstr "声音"
 
-#: panels/applications/cc-applications-panel.ui:241
-msgid "Inhibit system keyboard shortcuts"
-msgstr "禁用系统键盘快捷键"
+#: panels/applications/cc-applications-panel.ui:148
+#: panels/applications/cc-applications-panel.ui:155
+msgid "Reproduce sounds."
+msgstr "再现声音。"
 
-#: panels/applications/cc-applications-panel.ui:269
-msgid "Default Handlers"
-msgstr "默认处理程序"
+#: panels/applications/cc-applications-panel.ui:161
+#| msgid "Set Shortcut"
+msgid "Inhibit Shortcuts"
+msgstr "禁止快捷键"
 
-#: panels/applications/cc-applications-panel.ui:281
-msgid "Types of files and links that this application opens."
-msgstr "应用程序打开的文件和链接类型。"
+#: panels/applications/cc-applications-panel.ui:162
+#| msgid "Inhibit system keyboard shortcuts"
+msgid "Block standard keyboard shortcuts."
+msgstr "封锁标准的键盘快捷键。"
 
-#: panels/applications/cc-applications-panel.ui:293
-msgid "Reset"
-msgstr "重置"
+#: panels/applications/cc-applications-panel.ui:168
+#: panels/applications/cc-applications-panel.ui:175
+#: panels/camera/gnome-camera-panel.desktop.in.in:3
+msgid "Camera"
+msgstr "摄像头"
 
-#: panels/applications/cc-applications-panel.ui:324
-msgid "Usage"
-msgstr "占用"
+#: panels/applications/cc-applications-panel.ui:169
+#: panels/applications/cc-applications-panel.ui:176
+msgid "Take pictures with the camera."
+msgstr "使用摄像头拍照。"
 
-#: panels/applications/cc-applications-panel.ui:335
-msgid "How much resources this application is using."
-msgstr "应用程序使用了多少资源。"
+#: panels/applications/cc-applications-panel.ui:182
+#: panels/applications/cc-applications-panel.ui:189
+#: panels/microphone/gnome-microphone-panel.desktop.in.in:3
+msgid "Microphone"
+msgstr "麦克风"
 
-#: panels/applications/cc-applications-panel.ui:352
-#: panels/applications/cc-applications-panel.ui:493
+#: panels/applications/cc-applications-panel.ui:183
+#: panels/applications/cc-applications-panel.ui:190
+msgid "Record audio with the microphone."
+msgstr "使用麦克风录音。"
+
+#: panels/applications/cc-applications-panel.ui:196
+#: panels/applications/cc-applications-panel.ui:203
+#: panels/location/gnome-location-panel.desktop.in.in:3
+msgid "Location Services"
+msgstr "定位服务"
+
+#: panels/applications/cc-applications-panel.ui:197
+#: panels/applications/cc-applications-panel.ui:204
+#| msgid "Access your location"
+msgid "Access device location data."
+msgstr "访问设备的位置数据。"
+
+#: panels/applications/cc-applications-panel.ui:215
+#: panels/applications/cc-applications-panel.ui:319
+msgid "Built-in Permissions"
+msgstr "内置权限"
+
+#: panels/applications/cc-applications-panel.ui:216
+#| msgid "System features used by this application."
+msgid "System access that is required by the app"
+msgstr "该应用需要的系统访问权限"
+
+#: panels/applications/cc-applications-panel.ui:224
+msgid "File &amp; Link Associations"
+msgstr "文件与链接关联"
+
+#: panels/applications/cc-applications-panel.ui:232
+#: panels/applications/cc-applications-panel.ui:409
 msgid "Storage"
 msgstr "存储"
 
-#: panels/applications/cc-applications-panel.ui:382
-msgid "Open in Software"
-msgstr "在“软件”中打开"
-
-#: panels/applications/cc-applications-panel.ui:433 shell/cc-panel-list.ui:105
+#: panels/applications/cc-applications-panel.ui:294 shell/cc-panel-list.ui:105
 msgid "No results found"
 msgstr "未找到结果"
 
-#: panels/applications/cc-applications-panel.ui:443
+#: panels/applications/cc-applications-panel.ui:304
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:198
 #: shell/cc-panel-list.ui:114
 msgid "Try a different search"
 msgstr "尝试不同的搜索"
 
-#: panels/applications/cc-applications-panel.ui:511
+#: panels/applications/cc-applications-panel.ui:354
+msgid "File & Link Associations"
+msgstr "文件与链接关联"
+
+#: panels/applications/cc-applications-panel.ui:377
+#| msgid "File System"
+msgid "File Types"
+msgstr "文件类型"
+
+#: panels/applications/cc-applications-panel.ui:383
+#| msgid "Link speed"
+msgid "Link Types"
+msgstr "链接类型"
+
+#: panels/applications/cc-applications-panel.ui:393
+msgid "Reset"
+msgstr "重置"
+
+#: panels/applications/cc-applications-panel.ui:435
 msgid ""
 "How much disk space this application is occupying with app data and caches."
 msgstr "此应用程序包括应用数据和缓存占用了多少硬盘空间。"
 
-#: panels/applications/cc-applications-panel.ui:522
+#: panels/applications/cc-applications-panel.ui:446
 msgid "Application"
 msgstr "应用程序"
 
-#: panels/applications/cc-applications-panel.ui:528
+#: panels/applications/cc-applications-panel.ui:452
 msgid "Data"
 msgstr "数据"
 
-#: panels/applications/cc-applications-panel.ui:534
+#: panels/applications/cc-applications-panel.ui:458
 msgid "Cache"
 msgstr "缓存"
 
-#: panels/applications/cc-applications-panel.ui:540
+#: panels/applications/cc-applications-panel.ui:464
 msgid "<b>Total</b>"
 msgstr "<b>全部</b>"
 
-#: panels/applications/cc-applications-panel.ui:554
+#: panels/applications/cc-applications-panel.ui:475
 msgid "Clear Cache…"
 msgstr "清空缓存…"
 
@@ -376,11 +367,11 @@ msgstr "选择图片"
 #: panels/background/cc-background-chooser.c:296
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.c:1031
-#: panels/info-overview/cc-info-overview-panel.ui:198
+#: panels/display/cc-display-panel.ui:31
+#: panels/info-overview/cc-info-overview-panel.ui:197
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:123
-#: panels/network/cc-wifi-panel.c:886
+#: panels/network/cc-wifi-panel.c:881
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:226
 #: panels/network/connection-editor/vpn-helpers.c:346
@@ -389,7 +380,7 @@ msgstr "选择图片"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:639
-#: panels/sharing/cc-sharing-panel.c:445 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:28
 #: panels/user-accounts/cc-avatar-chooser.c:105
 #: panels/user-accounts/cc-avatar-chooser.c:228
@@ -398,7 +389,7 @@ msgstr "选择图片"
 #: panels/user-accounts/cc-user-panel.c:638
 #: panels/user-accounts/cc-user-panel.c:656
 #: panels/user-accounts/data/join-dialog.ui:20
-#: panels/wwan/cc-wwan-mode-dialog.ui:29
+#: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:268
 msgid "_Cancel"
@@ -407,7 +398,7 @@ msgstr "取消(_C)"
 #: panels/background/cc-background-chooser.c:297
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:446
+#: panels/sharing/cc-sharing-panel.c:433
 #: panels/user-accounts/cc-avatar-chooser.c:229
 msgid "_Open"
 msgstr "打开(_O)"
@@ -431,23 +422,23 @@ msgstr "无桌面背景"
 msgid "Current background"
 msgstr "当前背景"
 
-#: panels/background/cc-background-panel.ui:29
+#: panels/background/cc-background-panel.ui:28
 msgid "Style"
 msgstr "样式"
 
-#: panels/background/cc-background-panel.ui:65
+#: panels/background/cc-background-panel.ui:64
 msgid "Light"
 msgstr "亮色"
 
-#: panels/background/cc-background-panel.ui:92
+#: panels/background/cc-background-panel.ui:91
 msgid "Dark"
 msgstr "暗色"
 
-#: panels/background/cc-background-panel.ui:118
+#: panels/background/cc-background-panel.ui:117
 msgid "Background"
 msgstr "背景"
 
-#: panels/background/cc-background-panel.ui:132
+#: panels/background/cc-background-panel.ui:131
 msgid "Add Picture…"
 msgstr "添加图片…"
 
@@ -466,39 +457,41 @@ msgstr ""
 "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;背景;墙纸;屏幕;桌面;样"
 "式;亮色;暗色;夜间模式;外观;个性化;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:26
+#: panels/bluetooth/cc-bluetooth-panel.ui:21
 msgid "No Bluetooth Found"
 msgstr "未找到蓝牙"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:36
+#: panels/bluetooth/cc-bluetooth-panel.ui:22
 msgid "Plug in a dongle to use Bluetooth."
 msgstr "插入蓝牙适配器以使用蓝牙。"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:60
+#: panels/bluetooth/cc-bluetooth-panel.ui:28
 msgid "Bluetooth Turned Off"
 msgstr "蓝牙已关闭"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:70
+#: panels/bluetooth/cc-bluetooth-panel.ui:29
 msgid "Turn on to connect devices and receive file transfers."
 msgstr "打开以连接设备和接收文件传送。"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:94
-msgid "Airplane Mode is on"
+#: panels/bluetooth/cc-bluetooth-panel.ui:35
+#| msgid "Airplane Mode is on"
+msgid "Airplane Mode is On"
 msgstr "飞行模式已打开"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:104
+#: panels/bluetooth/cc-bluetooth-panel.ui:36
 msgid "Bluetooth is disabled when airplane mode is on."
 msgstr "蓝牙已禁用当开启飞行模式时。"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:109
+#: panels/bluetooth/cc-bluetooth-panel.ui:39
 msgid "Turn Off Airplane Mode"
 msgstr "关闭飞行模式"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:136
-msgid "Hardware Airplane Mode is on"
+#: panels/bluetooth/cc-bluetooth-panel.ui:53
+#| msgid "Hardware Airplane Mode is on"
+msgid "Hardware Airplane Mode is On"
 msgstr "硬件飞行模式已打开"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:146
+#: panels/bluetooth/cc-bluetooth-panel.ui:54
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr "关闭飞行模式开关以开启蓝牙。"
 
@@ -517,27 +510,31 @@ msgstr "开关蓝牙及连接您的设备"
 msgid "share;sharing;bluetooth;obex;"
 msgstr "share;sharing;bluetooth;obex;分享;共享;蓝牙;"
 
-#: panels/camera/cc-camera-panel.ui:31
-msgid "Camera is turned off"
-msgstr "相机已关闭"
+#: panels/camera/cc-camera-panel.ui:21
+#| msgid "Camera is turned off"
+msgid "Camera is Turned Off"
+msgstr "摄像头已关闭"
 
-#: panels/camera/cc-camera-panel.ui:39
+#: panels/camera/cc-camera-panel.ui:22
 msgid "No applications can capture photos or video."
 msgstr "没有应用程序可以捕获照片或视频。"
 
-#: panels/camera/cc-camera-panel.ui:71
+#: panels/camera/cc-camera-panel.ui:36
+#| msgid ""
+#| "Use of the camera allows applications to capture photos and video. "
+#| "Disabling the camera may cause some applications to not function properly."
 msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
-"the camera may cause some applications to not function properly."
+"the camera may cause some applications to not function properly.\n"
+"\n"
+"Allow the applications below to use your camera."
 msgstr ""
-"使用相机允许应用程序拍摄照片和视频。禁用相机可能会导致一些应用程序功能无法正"
-"常使用。"
+"使用摄像头允许应用程序拍摄照片和视频。禁用摄像头可能会导致一些应用程序功能无"
+"法正常使用。\n"
+"\n"
+"允许以下应用程序使用您的摄像头。"
 
-#: panels/camera/cc-camera-panel.ui:80
-msgid "Allow the applications below to use your camera."
-msgstr "允许以下应用程序使用您的相机。"
-
-#: panels/camera/cc-camera-panel.ui:99
+#: panels/camera/cc-camera-panel.ui:52
 msgid "No Applications Have Asked for Camera Access"
 msgstr "没有应用程序要求访问摄像头"
 
@@ -783,110 +780,110 @@ msgstr "测量仪器不支持打印机校正。"
 msgid "The device type is not currently supported."
 msgstr "目前不支持此设备类型。"
 
-#: panels/color/cc-color-panel.ui:5 panels/wacom/calibrator/calibrator.ui:41
+#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:41
 msgid "Screen Calibration"
 msgstr "屏幕校准"
 
-#: panels/color/cc-color-panel.ui:13
+#: panels/color/cc-color-panel.ui:12
 msgid "Calibration Quality"
 msgstr "校准质量"
 
-#: panels/color/cc-color-panel.ui:22
+#: panels/color/cc-color-panel.ui:21
 msgid ""
 "Calibration will produce a profile that you can use to color manage your "
 "screen. The longer you spend on calibration, the better the quality of the "
 "color profile."
 msgstr "校准将生成用于屏幕色彩管理的配置。校准时花费的时间越多效果越好。"
 
-#: panels/color/cc-color-panel.ui:29
+#: panels/color/cc-color-panel.ui:28
 msgid ""
 "You will not be able to use your computer while calibration takes place."
 msgstr "校准进行时您将不能使用您的计算机。"
 
 #. This is the approximate time it takes to calibrate the display.
-#: panels/color/cc-color-panel.ui:41
+#: panels/color/cc-color-panel.ui:40
 msgid "Quality"
 msgstr "质量"
 
 #. This is the approximate time it takes to calibrate the display.
-#: panels/color/cc-color-panel.ui:52
+#: panels/color/cc-color-panel.ui:51
 msgid "Approximate Time"
 msgstr "预计耗时"
 
-#: panels/color/cc-color-panel.ui:83
+#: panels/color/cc-color-panel.ui:82
 msgid "Calibration Device"
 msgstr "校准设备"
 
-#: panels/color/cc-color-panel.ui:91
+#: panels/color/cc-color-panel.ui:90
 msgid "Select the sensor device you want to use for calibration."
 msgstr "选择校准所使用的传感器设备。"
 
-#: panels/color/cc-color-panel.ui:118
+#: panels/color/cc-color-panel.ui:117
 msgid "Display Type"
 msgstr "显示类型"
 
-#: panels/color/cc-color-panel.ui:126
+#: panels/color/cc-color-panel.ui:125
 msgid "Select the type of display that is connected."
 msgstr "选择连接的显示类型。"
 
-#: panels/color/cc-color-panel.ui:153
+#: panels/color/cc-color-panel.ui:152
 msgid "Profile Whitepoint"
 msgstr "配置参考白点"
 
-#: panels/color/cc-color-panel.ui:161
+#: panels/color/cc-color-panel.ui:160
 msgid ""
 "Select a display target white point. Most displays should be calibrated to a "
 "D65 illuminant."
 msgstr "选择显示目标白点。多数显示器应该校准到 D65 光源。"
 
-#: panels/color/cc-color-panel.ui:188
+#: panels/color/cc-color-panel.ui:187
 msgid "Display Brightness"
 msgstr "显示亮度"
 
-#: panels/color/cc-color-panel.ui:196
+#: panels/color/cc-color-panel.ui:195
 msgid ""
 "Please set the display to a brightness that is typical for you. Color "
 "management will be most accurate at this brightness level."
 msgstr "请选择通常使用的显示亮度。色彩管理在此亮度下将最准确。"
 
-#: panels/color/cc-color-panel.ui:203
+#: panels/color/cc-color-panel.ui:202
 msgid ""
 "Alternatively, you can use the brightness level used with one of the other "
 "profiles for this device."
 msgstr "或者，也可以使用亮度配合此设备的其他配置使用。"
 
-#: panels/color/cc-color-panel.ui:215
+#: panels/color/cc-color-panel.ui:214
 msgid "Profile Name"
 msgstr "配置名称"
 
-#: panels/color/cc-color-panel.ui:223
+#: panels/color/cc-color-panel.ui:222
 msgid ""
 "You can use a color profile on different computers, or even create profiles "
 "for different lighting conditions."
 msgstr ""
 "您可以对不同的计算机使用同一个配置，或者甚至可以对不同的光照条件创建配置。"
 
-#: panels/color/cc-color-panel.ui:230
+#: panels/color/cc-color-panel.ui:229
 msgid "Profile Name:"
 msgstr "配置名称："
 
-#: panels/color/cc-color-panel.ui:252
+#: panels/color/cc-color-panel.ui:251
 msgid "Summary"
 msgstr "摘要"
 
-#: panels/color/cc-color-panel.ui:260
+#: panels/color/cc-color-panel.ui:259
 msgid "Profile successfully created!"
 msgstr "创建配置成功！"
 
-#: panels/color/cc-color-panel.ui:291
+#: panels/color/cc-color-panel.ui:290
 msgid "Copy profile"
 msgstr "复制配置"
 
-#: panels/color/cc-color-panel.ui:297
+#: panels/color/cc-color-panel.ui:296
 msgid "Requires writable media"
 msgstr "需要可写介质"
 
-#: panels/color/cc-color-panel.ui:314
+#: panels/color/cc-color-panel.ui:313
 msgid ""
 "You may find these instructions on how to use the profile on <a href=\"linux"
 "\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
@@ -896,162 +893,162 @@ msgstr ""
 "和 <a href=\"windows\">Microsoft Windows</a> 系统中使用配置的这些说明可能对您"
 "有所帮助。"
 
-#: panels/color/cc-color-panel.ui:336
+#: panels/color/cc-color-panel.ui:335
 msgid "Add Profile"
 msgstr "添加配置"
 
-#: panels/color/cc-color-panel.ui:374
+#: panels/color/cc-color-panel.ui:373
 msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr "检测到问题，此配置可能无法正常工作。<a href=\"\">显示详细信息。</a>"
 
-#: panels/color/cc-color-panel.ui:385
+#: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
 msgstr "导入文件(_I)…"
 
-#: panels/color/cc-color-panel.ui:391 panels/keyboard/cc-input-chooser.ui:18
+#: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/network/connection-editor/net-connection-editor.c:497
 #: panels/printers/new-printer-dialog.ui:84
 #: panels/user-accounts/cc-add-user-dialog.ui:47
 msgid "_Add"
 msgstr "添加(_A)"
 
-#: panels/color/cc-color-panel.ui:425
+#: panels/color/cc-color-panel.ui:424
 msgid "Each device needs an up to date color profile to be color managed."
 msgstr "每个设备都需要一份最新色彩配置以进行色彩管理。"
 
 #. translators: Text used in link to privacy policy
-#: panels/color/cc-color-panel.ui:435
+#: panels/color/cc-color-panel.ui:434
 #: panels/diagnostics/cc-diagnostics-panel.c:139
 msgid "Learn more"
 msgstr "了解更多"
 
-#: panels/color/cc-color-panel.ui:437
+#: panels/color/cc-color-panel.ui:436
 msgid "Learn more about color management"
 msgstr "了解更多有关色彩管理的信息"
 
-#: panels/color/cc-color-panel.ui:474
+#: panels/color/cc-color-panel.ui:473
 msgid "_Set for all users"
 msgstr "为所有用户设置(_S)"
 
-#: panels/color/cc-color-panel.ui:476 panels/color/cc-color-panel.ui:484
-#: panels/color/cc-color-panel.ui:485
+#: panels/color/cc-color-panel.ui:475 panels/color/cc-color-panel.ui:483
+#: panels/color/cc-color-panel.ui:484
 msgid "Set this profile for all users on this computer"
 msgstr "为此计算机上的所有用户设置此配置"
 
-#: panels/color/cc-color-panel.ui:482
+#: panels/color/cc-color-panel.ui:481
 msgid "_Enable"
 msgstr "启用(_E)"
 
-#: panels/color/cc-color-panel.ui:498
+#: panels/color/cc-color-panel.ui:497
 msgid "_Add profile"
 msgstr "添加配置(_A)"
 
-#: panels/color/cc-color-panel.ui:504
+#: panels/color/cc-color-panel.ui:503
 msgid "_Calibrate…"
 msgstr "校准(_C)…"
 
-#: panels/color/cc-color-panel.ui:506
+#: panels/color/cc-color-panel.ui:505
 msgid "Calibrate the device"
 msgstr "校准该设备"
 
-#: panels/color/cc-color-panel.ui:512
+#: panels/color/cc-color-panel.ui:511
 msgid "_Remove profile"
 msgstr "移除配置(_R)"
 
-#: panels/color/cc-color-panel.ui:518
+#: panels/color/cc-color-panel.ui:517
 msgid "_View details"
 msgstr "查看详情(_V)"
 
-#: panels/color/cc-color-panel.ui:530
+#: panels/color/cc-color-panel.ui:529
 msgid "Unable to detect any devices that can be color managed"
 msgstr "未检测到可以管理颜色的设备"
 
-#: panels/color/cc-color-panel.ui:569
+#: panels/color/cc-color-panel.ui:568
 msgid "LCD"
 msgstr "LCD"
 
-#: panels/color/cc-color-panel.ui:574
+#: panels/color/cc-color-panel.ui:573
 msgid "LED"
 msgstr "LED"
 
-#: panels/color/cc-color-panel.ui:579
+#: panels/color/cc-color-panel.ui:578
 msgid "CRT"
 msgstr "CRT"
 
-#: panels/color/cc-color-panel.ui:584
+#: panels/color/cc-color-panel.ui:583
 msgid "Projector"
 msgstr "投影仪"
 
-#: panels/color/cc-color-panel.ui:589
+#: panels/color/cc-color-panel.ui:588
 msgid "Plasma"
 msgstr "等离子"
 
-#: panels/color/cc-color-panel.ui:594
+#: panels/color/cc-color-panel.ui:593
 msgid "LCD (CCFL backlight)"
 msgstr "LCD（CCFL 背光）"
 
-#: panels/color/cc-color-panel.ui:599
+#: panels/color/cc-color-panel.ui:598
 msgid "LCD (RGB LED backlight)"
 msgstr "LCD（RGB LED 背光）"
 
-#: panels/color/cc-color-panel.ui:604
+#: panels/color/cc-color-panel.ui:603
 msgid "LCD (white LED backlight)"
 msgstr "LCD（白色 LED 背光）"
 
-#: panels/color/cc-color-panel.ui:609
+#: panels/color/cc-color-panel.ui:608
 msgid "Wide gamut LCD (CCFL backlight)"
 msgstr "广色域 LCD（CCFL 背光）"
 
-#: panels/color/cc-color-panel.ui:614
+#: panels/color/cc-color-panel.ui:613
 msgid "Wide gamut LCD (RGB LED backlight)"
 msgstr "广色域 LCD（RGB LED 背光）"
 
-#: panels/color/cc-color-panel.ui:631
+#: panels/color/cc-color-panel.ui:630
 msgctxt "Calibration quality"
 msgid "High"
 msgstr "高"
 
-#: panels/color/cc-color-panel.ui:632
+#: panels/color/cc-color-panel.ui:631
 msgid "40 minutes"
 msgstr "40 分钟"
 
-#: panels/color/cc-color-panel.ui:636
+#: panels/color/cc-color-panel.ui:635
 msgctxt "Calibration quality"
 msgid "Medium"
 msgstr "中"
 
-#: panels/color/cc-color-panel.ui:637
+#: panels/color/cc-color-panel.ui:636
 msgid "30 minutes"
 msgstr "30 分钟"
 
-#: panels/color/cc-color-panel.ui:641
+#: panels/color/cc-color-panel.ui:640
 msgctxt "Calibration quality"
 msgid "Low"
 msgstr "低"
 
-#: panels/color/cc-color-panel.ui:642
+#: panels/color/cc-color-panel.ui:641
 msgid "15 minutes"
 msgstr "15 分钟"
 
-#: panels/color/cc-color-panel.ui:664
+#: panels/color/cc-color-panel.ui:663
 msgid "Native to display"
 msgstr "显示设备原生"
 
-#: panels/color/cc-color-panel.ui:668
+#: panels/color/cc-color-panel.ui:667
 msgid "D50 (Printing and publishing)"
 msgstr "D50（打印和出版）"
 
-#: panels/color/cc-color-panel.ui:672
+#: panels/color/cc-color-panel.ui:671
 msgid "D55"
 msgstr "D55"
 
-#: panels/color/cc-color-panel.ui:676
+#: panels/color/cc-color-panel.ui:675
 msgid "D65 (Photography and graphics)"
 msgstr "D65（摄影及图形）"
 
-#: panels/color/cc-color-panel.ui:680
+#: panels/color/cc-color-panel.ui:679
 msgid "D75"
 msgstr "D75"
 
@@ -1226,7 +1223,7 @@ msgid_plural "%d hours"
 msgstr[0] "%d 小时"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:955
+#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:846
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1284,26 +1281,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "热点"
 
-#: panels/datetime/cc-datetime-panel.c:189
+#: panels/datetime/cc-datetime-panel.c:177
 msgid "24-hour"
 msgstr "24 小时"
 
-#: panels/datetime/cc-datetime-panel.c:191
+#: panels/datetime/cc-datetime-panel.c:179
 msgid "AM / PM"
 msgstr "上午/下午"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:263
+#: panels/datetime/cc-datetime-panel.c:251
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Y年%m月%d日，%p %-l:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:268
+#: panels/datetime/cc-datetime-panel.c:256
 msgid "%e %B %Y, %R"
 msgstr "%Y年%m月%d日，%R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:450
+#: panels/datetime/cc-datetime-panel.c:438
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1311,7 +1308,7 @@ msgstr "%s，%s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:477
+#: panels/datetime/cc-datetime-panel.c:465
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1319,126 +1316,126 @@ msgstr "%s（%s）"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:484
+#: panels/datetime/cc-datetime-panel.c:472
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:489
+#: panels/datetime/cc-datetime-panel.c:477
 msgid "%l:%M %p"
 msgstr "%p %-l:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:494
+#: panels/datetime/cc-datetime-panel.c:482
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:499
+#: panels/datetime/cc-datetime-panel.c:487
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: panels/datetime/cc-datetime-panel.ui:36
+#: panels/datetime/cc-datetime-panel.ui:33
 msgid "January"
 msgstr "一月"
 
-#: panels/datetime/cc-datetime-panel.ui:43
+#: panels/datetime/cc-datetime-panel.ui:40
 msgid "February"
 msgstr "二月"
 
-#: panels/datetime/cc-datetime-panel.ui:50
+#: panels/datetime/cc-datetime-panel.ui:47
 msgid "March"
 msgstr "三月"
 
-#: panels/datetime/cc-datetime-panel.ui:57
+#: panels/datetime/cc-datetime-panel.ui:54
 msgid "April"
 msgstr "四月"
 
-#: panels/datetime/cc-datetime-panel.ui:64
+#: panels/datetime/cc-datetime-panel.ui:61
 msgid "May"
 msgstr "五月"
 
-#: panels/datetime/cc-datetime-panel.ui:71
+#: panels/datetime/cc-datetime-panel.ui:68
 msgid "June"
 msgstr "六月"
 
-#: panels/datetime/cc-datetime-panel.ui:78
+#: panels/datetime/cc-datetime-panel.ui:75
 msgid "July"
 msgstr "七月"
 
-#: panels/datetime/cc-datetime-panel.ui:85
+#: panels/datetime/cc-datetime-panel.ui:82
 msgid "August"
 msgstr "八月"
 
-#: panels/datetime/cc-datetime-panel.ui:92
+#: panels/datetime/cc-datetime-panel.ui:89
 msgid "September"
 msgstr "九月"
 
-#: panels/datetime/cc-datetime-panel.ui:99
+#: panels/datetime/cc-datetime-panel.ui:96
 msgid "October"
 msgstr "十月"
 
-#: panels/datetime/cc-datetime-panel.ui:106
+#: panels/datetime/cc-datetime-panel.ui:103
 msgid "November"
 msgstr "十一月"
 
-#: panels/datetime/cc-datetime-panel.ui:113
+#: panels/datetime/cc-datetime-panel.ui:110
 msgid "December"
 msgstr "十二月"
 
-#: panels/datetime/cc-datetime-panel.ui:122
+#: panels/datetime/cc-datetime-panel.ui:119
 #: panels/datetime/gnome-datetime-panel.desktop.in.in:3
 msgid "Date & Time"
 msgstr "日期和时间"
 
-#: panels/datetime/cc-datetime-panel.ui:169
+#: panels/datetime/cc-datetime-panel.ui:166
 msgid "Year"
 msgstr "年"
 
-#: panels/datetime/cc-datetime-panel.ui:201
+#: panels/datetime/cc-datetime-panel.ui:198
 msgid "Month"
 msgstr "月"
 
-#: panels/datetime/cc-datetime-panel.ui:236
+#: panels/datetime/cc-datetime-panel.ui:233
 msgid "Day"
 msgstr "日"
 
-#: panels/datetime/cc-datetime-panel.ui:263
+#: panels/datetime/cc-datetime-panel.ui:260
 msgid "Time Zone"
 msgstr "时区"
 
-#: panels/datetime/cc-datetime-panel.ui:280
+#: panels/datetime/cc-datetime-panel.ui:277
 msgid "Search for a city"
 msgstr "搜索城市"
 
-#: panels/datetime/cc-datetime-panel.ui:307
+#: panels/datetime/cc-datetime-panel.ui:311
 msgid "Automatic _Date &amp; Time"
 msgstr "自动设置日期和时间(_D)"
 
-#: panels/datetime/cc-datetime-panel.ui:308
+#: panels/datetime/cc-datetime-panel.ui:312
 msgid "Requires internet access"
 msgstr "需要互联网连接"
 
-#: panels/datetime/cc-datetime-panel.ui:320
+#: panels/datetime/cc-datetime-panel.ui:324
 msgid "Date &amp; _Time"
 msgstr "日期和时间(_T)"
 
-#: panels/datetime/cc-datetime-panel.ui:338
+#: panels/datetime/cc-datetime-panel.ui:342
 msgid "Automatic Time _Zone"
 msgstr "自动设置时区(_Z)"
 
-#: panels/datetime/cc-datetime-panel.ui:339
+#: panels/datetime/cc-datetime-panel.ui:343
 msgid "Requires location services enabled and internet access"
 msgstr "需要启用定位服务和互联网连接"
 
-#: panels/datetime/cc-datetime-panel.ui:351
+#: panels/datetime/cc-datetime-panel.ui:355
 msgid "Time Z_one"
 msgstr "时区(_O)"
 
-#: panels/datetime/cc-datetime-panel.ui:370
+#: panels/datetime/cc-datetime-panel.ui:374
 msgid "Time _Format"
 msgstr "时间格式(_F)"
 
@@ -1459,27 +1456,27 @@ msgstr "更改系统时间和日期设置"
 msgid "To change time or date settings, you need to authenticate."
 msgstr "更改时间或日期设置需要认证。"
 
-#: panels/default-apps/cc-default-apps-panel.ui:24
+#: panels/default-apps/cc-default-apps-panel.ui:23
 msgid "_Web"
 msgstr "Web(_W)"
 
-#: panels/default-apps/cc-default-apps-panel.ui:34
+#: panels/default-apps/cc-default-apps-panel.ui:33
 msgid "_Mail"
 msgstr "邮件(_M)"
 
-#: panels/default-apps/cc-default-apps-panel.ui:48
+#: panels/default-apps/cc-default-apps-panel.ui:47
 msgid "_Calendar"
 msgstr "日历(_C)"
 
-#: panels/default-apps/cc-default-apps-panel.ui:62
+#: panels/default-apps/cc-default-apps-panel.ui:61
 msgid "M_usic"
 msgstr "音乐(_U)"
 
-#: panels/default-apps/cc-default-apps-panel.ui:76
+#: panels/default-apps/cc-default-apps-panel.ui:75
 msgid "_Video"
 msgstr "视频(_V)"
 
-#: panels/default-apps/cc-default-apps-panel.ui:135
+#: panels/default-apps/cc-default-apps-panel.ui:134
 #: panels/removable-media/cc-removable-media-panel.ui:127
 msgid "_Photos"
 msgstr "照片(_P)"
@@ -1505,11 +1502,11 @@ msgid ""
 "anonymously and are scrubbed of personal data. %s"
 msgstr "发送匿名的技术问题报告能帮助我们改进 %s，这些报告中不含个人数据。%s"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:23
+#: panels/diagnostics/cc-diagnostics-panel.ui:21
 msgid "Problem Reporting"
 msgstr "报告问题"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:57
+#: panels/diagnostics/cc-diagnostics-panel.ui:55
 msgid "_Automatic Problem Reporting"
 msgstr "自动报告问题(_A)"
 
@@ -1535,121 +1532,123 @@ msgstr ""
 "network;identity;privacy;屏幕;锁;诊断;崩溃;私有;最近;临时;索引;名称;网络;认"
 "证;标志;身份;隐私;"
 
-#: panels/display/cc-display-panel.c:1037
+#: panels/display/cc-display-panel.c:510
+#: panels/notifications/cc-notifications-panel.c:202
+#: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
+msgid "On"
+msgstr "开"
+
+#: panels/display/cc-display-panel.c:512 panels/network/net-proxy.c:69
+#: panels/notifications/cc-notifications-panel.c:202
+#: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
+#: panels/universal-access/cc-ua-panel.c:337
+#: panels/universal-access/cc-ua-panel.c:469
+#: panels/universal-access/cc-ua-panel.c:479
+#: panels/universal-access/cc-ua-panel.c:491
+#: panels/universal-access/cc-ua-panel.c:527
+msgid "Off"
+msgstr "关"
+
+#: panels/display/cc-display-panel.c:932
+msgid "Apply Changes?"
+msgstr "应用更改？"
+
+#: panels/display/cc-display-panel.c:937
+msgid "Changes Cannot be Applied"
+msgstr "无法应用更改"
+
+#: panels/display/cc-display-panel.c:939
+msgid "This could be due to hardware limitations."
+msgstr "这可能是硬件限制造成的。"
+
+#: panels/display/cc-display-panel.ui:43
 #: panels/network/connection-editor/connection-editor.ui:21
 msgid "_Apply"
 msgstr "应用(_A)"
 
-#: panels/display/cc-display-panel.c:1052
-msgid "Apply Changes?"
-msgstr "应用更改？"
-
-#: panels/display/cc-display-panel.c:1056
-msgid "Changes Cannot be Applied"
-msgstr "无法应用更改"
-
-#: panels/display/cc-display-panel.c:1057
-msgid "This could be due to hardware limitations."
-msgstr "这可能是硬件限制造成的。"
-
-#: panels/display/cc-display-panel.ui:30
-#: panels/display/gnome-display-panel.desktop.in.in:3
-msgid "Displays"
-msgstr "显示器"
-
-#: panels/display/cc-display-panel.ui:50
-msgid "Display Mode"
-msgstr "显示模式"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:216
-msgid "Join Displays"
-msgstr "加入显示器"
-
-#: panels/display/cc-display-panel.ui:106
-msgid "Mirror"
-msgstr "镜像"
-
-#: panels/display/cc-display-panel.ui:134
-msgid "Single Display"
-msgstr "单显示器"
-
-#: panels/display/cc-display-panel.ui:147
-msgid ""
-"Drag displays to match your physical display setup. Select a display to "
-"change its settings."
-msgstr "拖动显示器来匹配您的物理显示器布局。选择显示器可以改变其设置。"
-
-#: panels/display/cc-display-panel.ui:169
-msgid "Contains top bar and Activities"
-msgstr "包含顶栏和活动按钮"
-
-#: panels/display/cc-display-panel.ui:170
-msgid "Primary Display"
-msgstr "主显示器"
-
-#: panels/display/cc-display-panel.ui:181
+#: panels/display/cc-display-panel.ui:100
 msgid "Display Arrangement"
 msgstr "显示器布局"
 
-#: panels/display/cc-display-panel.ui:247
-msgid "Active Display"
-msgstr "使用中的显示器"
+#: panels/display/cc-display-panel.ui:111
+#| msgid "Decouple Display"
+msgid "Multiple Displays"
+msgstr "多显示器"
 
-#: panels/display/cc-display-panel.ui:260
-msgid "Display Configuration"
-msgstr "显示配置"
+#. 'Join' as in 'Join displays'
+#: panels/display/cc-display-panel.ui:120
+msgid "Join"
+msgstr "加入"
+
+#: panels/display/cc-display-panel.ui:127
+msgid "Mirror"
+msgstr "镜像"
+
+#: panels/display/cc-display-panel.ui:140
+msgid "Contains top bar and Activities"
+msgstr "包含顶栏和活动按钮"
+
+#: panels/display/cc-display-panel.ui:141
+msgid "Primary Display"
+msgstr "主显示器"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:279
+#: panels/display/cc-display-panel.ui:162
+#: panels/display/cc-display-panel.ui:210
 #: panels/display/cc-night-light-page.ui:77
 msgid "Night Light"
 msgstr "夜灯"
 
-#: panels/display/cc-display-settings.c:107
+#: panels/display/cc-display-settings.c:110
 msgctxt "Display rotation"
 msgid "Landscape"
 msgstr "横向"
 
-#: panels/display/cc-display-settings.c:110
+#: panels/display/cc-display-settings.c:113
 msgctxt "Display rotation"
 msgid "Portrait Right"
 msgstr "纵向，朝右"
 
-#: panels/display/cc-display-settings.c:113
+#: panels/display/cc-display-settings.c:116
 msgctxt "Display rotation"
 msgid "Portrait Left"
 msgstr "纵向，朝左"
 
-#: panels/display/cc-display-settings.c:116
+#: panels/display/cc-display-settings.c:119
 msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "横向翻转"
 
-#: panels/display/cc-display-settings.c:174
+#: panels/display/cc-display-settings.c:177
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf 赫兹"
 
-#: panels/display/cc-display-settings.ui:14
+#: panels/display/cc-display-settings.ui:40
 msgctxt "display setting"
 msgid "Orientation"
 msgstr "方向"
 
-#: panels/display/cc-display-settings.ui:21
+#: panels/display/cc-display-settings.ui:47
 msgctxt "display setting"
 msgid "Resolution"
 msgstr "分辨率"
 
-#: panels/display/cc-display-settings.ui:28
+#: panels/display/cc-display-settings.ui:54
 msgid "Refresh Rate"
 msgstr "刷新频率"
 
-#: panels/display/cc-display-settings.ui:35
+#: panels/display/cc-display-settings.ui:61
 msgid "Adjust for TV"
 msgstr "为电视调整"
 
-#: panels/display/cc-display-settings.ui:49
-#: panels/display/cc-display-settings.ui:64
+#: panels/display/cc-display-settings.ui:75
+#: panels/display/cc-display-settings.ui:90
 msgctxt "display setting"
 msgid "Scale"
 msgstr "缩放"
@@ -1734,6 +1733,10 @@ msgstr "到"
 msgid "Color Temperature"
 msgstr "色温"
 
+#: panels/display/gnome-display-panel.desktop.in.in:3
+msgid "Displays"
+msgstr "显示器"
+
 #: panels/display/gnome-display-panel.desktop.in.in:4
 msgid "Choose how to use connected monitors and projectors"
 msgstr "选择如何使用接入的显示器和投影仪"
@@ -1790,74 +1793,74 @@ msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "未知"
 
-#: panels/info-overview/cc-info-overview-panel.ui:18
+#: panels/info-overview/cc-info-overview-panel.ui:17
 msgid "System Logo"
 msgstr "系统标志"
 
-#: panels/info-overview/cc-info-overview-panel.ui:33
+#: panels/info-overview/cc-info-overview-panel.ui:32
 msgid "Device Name"
 msgstr "设备名称"
 
-#: panels/info-overview/cc-info-overview-panel.ui:51
+#: panels/info-overview/cc-info-overview-panel.ui:50
 msgid "Hardware Model"
 msgstr "硬件型号"
 
-#: panels/info-overview/cc-info-overview-panel.ui:59
+#: panels/info-overview/cc-info-overview-panel.ui:58
 msgid "Memory"
 msgstr "内存"
 
-#: panels/info-overview/cc-info-overview-panel.ui:67
+#: panels/info-overview/cc-info-overview-panel.ui:66
 msgid "Processor"
 msgstr "处理器"
 
-#: panels/info-overview/cc-info-overview-panel.ui:75
+#: panels/info-overview/cc-info-overview-panel.ui:74
 msgid "Graphics"
 msgstr "显卡"
 
-#: panels/info-overview/cc-info-overview-panel.ui:83
+#: panels/info-overview/cc-info-overview-panel.ui:82
 msgid "Disk Capacity"
 msgstr "磁盘容量"
 
-#: panels/info-overview/cc-info-overview-panel.ui:84
+#: panels/info-overview/cc-info-overview-panel.ui:83
 msgid "Calculating…"
 msgstr "正在计算……"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:99
+#: panels/info-overview/cc-info-overview-panel.ui:98
 msgid "OS Name"
 msgstr "操作系统名称"
 
-#: panels/info-overview/cc-info-overview-panel.ui:107
+#: panels/info-overview/cc-info-overview-panel.ui:106
 msgid "OS Type"
 msgstr "操作系统类型"
 
-#: panels/info-overview/cc-info-overview-panel.ui:115
+#: panels/info-overview/cc-info-overview-panel.ui:114
 msgid "GNOME Version"
 msgstr "GNOME 版本"
 
-#: panels/info-overview/cc-info-overview-panel.ui:124
+#: panels/info-overview/cc-info-overview-panel.ui:123
 msgid "Windowing System"
 msgstr "窗口系统"
 
-#: panels/info-overview/cc-info-overview-panel.ui:132
+#: panels/info-overview/cc-info-overview-panel.ui:131
 msgid "Virtualization"
 msgstr "虚拟化"
 
-#: panels/info-overview/cc-info-overview-panel.ui:140
+#: panels/info-overview/cc-info-overview-panel.ui:139
 msgid "Software Updates"
 msgstr "软件更新"
 
-#: panels/info-overview/cc-info-overview-panel.ui:159
+#: panels/info-overview/cc-info-overview-panel.ui:158
 msgid "Rename Device"
 msgstr "重命名设备"
 
-#: panels/info-overview/cc-info-overview-panel.ui:175
+#: panels/info-overview/cc-info-overview-panel.ui:174
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
 msgstr "通过网络查看该设备或配对蓝牙设备时，设备名称用于标识该设备。"
 
-#: panels/info-overview/cc-info-overview-panel.ui:190
+#: panels/info-overview/cc-info-overview-panel.ui:189
 msgid "_Rename"
 msgstr "重命名(_R)"
 
@@ -1933,7 +1936,7 @@ msgid "Eject"
 msgstr "弹出"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:148
+#: panels/universal-access/cc-ua-panel.ui:145
 msgid "Typing"
 msgstr "打字"
 
@@ -2105,7 +2108,7 @@ msgid "Custom Shortcuts"
 msgstr "自定义快捷键"
 
 #: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.ui:173
+#: panels/keyboard/cc-keyboard-panel.ui:172
 msgid "Alternate Characters Key"
 msgstr "备用字符键"
 
@@ -2152,7 +2155,7 @@ msgid "Right Ctrl"
 msgstr "右Ctrl键"
 
 #: panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/cc-keyboard-panel.ui:192
+#: panels/keyboard/cc-keyboard-panel.ui:191
 msgid "Compose Key"
 msgstr "Compose 键"
 
@@ -2191,41 +2194,41 @@ msgstr ""
 "使用键盘快捷键 %s 可以切换输入源。\n"
 "这可以在键盘快捷键设置中更改。"
 
-#: panels/keyboard/cc-keyboard-panel.ui:39
+#: panels/keyboard/cc-keyboard-panel.ui:38
 msgid "Input Sources"
 msgstr "输入源"
 
-#: panels/keyboard/cc-keyboard-panel.ui:48
+#: panels/keyboard/cc-keyboard-panel.ui:47
 msgid "Includes keyboard layouts and input methods."
 msgstr "包括键盘布局与输入法。"
 
-#: panels/keyboard/cc-keyboard-panel.ui:71
+#: panels/keyboard/cc-keyboard-panel.ui:70
 msgid "Input Source Switching"
 msgstr "输入源切换"
 
-#: panels/keyboard/cc-keyboard-panel.ui:107
+#: panels/keyboard/cc-keyboard-panel.ui:106
 msgid "Use the _same source for all windows"
 msgstr "所有窗口使用相同的输入源(_S)"
 
-#: panels/keyboard/cc-keyboard-panel.ui:127
+#: panels/keyboard/cc-keyboard-panel.ui:126
 msgid "Switch input sources _individually for each window"
 msgstr "每个窗口使用不同的输入源(_I)"
 
-#: panels/keyboard/cc-keyboard-panel.ui:143
+#: panels/keyboard/cc-keyboard-panel.ui:142
 msgid "Special Character Entry"
 msgstr "特殊字符输入"
 
-#: panels/keyboard/cc-keyboard-panel.ui:152
+#: panels/keyboard/cc-keyboard-panel.ui:151
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "使用键盘输入符号和字母变体的方法。"
 
-#: panels/keyboard/cc-keyboard-panel.ui:213
+#: panels/keyboard/cc-keyboard-panel.ui:212
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:207
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: panels/keyboard/cc-keyboard-panel.ui:229
+#: panels/keyboard/cc-keyboard-panel.ui:228
 msgid "View and Customize Shortcuts"
 msgstr "查看及自定义快捷键"
 
@@ -2370,34 +2373,33 @@ msgstr ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;快捷"
 "键;工作空间;窗口;更改大小;缩放;对比度;输入;源;锁定;音量;"
 
-#: panels/location/cc-location-panel.ui:30
-msgid "Location services turned off"
+#: panels/location/cc-location-panel.ui:20
+#| msgid "Location services turned off"
+msgid "Location Services Turned Off"
 msgstr "定位服务已关闭"
 
-#: panels/location/cc-location-panel.ui:38
+#: panels/location/cc-location-panel.ui:21
 msgid "No applications can obtain location information."
 msgstr "没有应用程序可以获取位置信息。"
 
-#: panels/location/cc-location-panel.ui:70
+#: panels/location/cc-location-panel.ui:35
 msgid ""
 "Location services allow applications to know your location. Using Wi-Fi and "
-"mobile broadband increases accuracy."
-msgstr ""
-"定位服务允许应用得知您的地理定位。使用 Wi-Fi 和移动宽带可以提高精确度。"
-
-#: panels/location/cc-location-panel.ui:78
-msgid ""
+"mobile broadband increases accuracy.\n"
+"\n"
 "Uses Mozilla Location Service: <a href='https://location.services.mozilla."
-"com/privacy'>Privacy Policy</a>"
+"com/privacy'>Privacy Policy</a>\n"
+"\n"
+"Allow the applications below to determine your location."
 msgstr ""
+"定位服务允许应用程序知晓您的位置。使用 Wi-Fi 和移动宽带增强精确度。\n"
+"\n"
 "使用 Mozilla 定位服务：<a href='https://location.services.mozilla.com/"
-"privacy'>隐私策略</a>"
+"privacy'>隐私政策</a>\n"
+"\n"
+"允许以下应用程序测定您的位置。"
 
-#: panels/location/cc-location-panel.ui:90
-msgid "Allow the applications below to determine your location."
-msgstr "允许以下应用程序确定您的位置。"
-
-#: panels/location/cc-location-panel.ui:106
+#: panels/location/cc-location-panel.ui:53
 msgid "No Applications Have Asked for Location Access"
 msgstr "没有应用程序要求访问位置"
 
@@ -2406,150 +2408,150 @@ msgid "Protect your location information"
 msgstr "保护您的位置信息"
 
 #. FIXME
-#: panels/lock/cc-lock-panel.ui:22
+#: panels/lock/cc-lock-panel.ui:21
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
 msgstr "自动锁定屏幕可防止其他人在您不在时访问计算机。"
 
-#: panels/lock/cc-lock-panel.ui:40
+#: panels/lock/cc-lock-panel.ui:39
 msgid "Blank Screen Delay"
 msgstr "息屏延时"
 
-#: panels/lock/cc-lock-panel.ui:41
+#: panels/lock/cc-lock-panel.ui:40
 msgid "Period of inactivity after which the screen will go blank."
 msgstr "闲置一段时间后，屏幕将变为黑屏。"
 
-#: panels/lock/cc-lock-panel.ui:60
+#: panels/lock/cc-lock-panel.ui:59
 msgid "Automatic Screen _Lock"
 msgstr "自动锁屏(_L)"
 
-#: panels/lock/cc-lock-panel.ui:75
+#: panels/lock/cc-lock-panel.ui:74
 msgid "Automatic _Screen Lock Delay"
 msgstr "自动锁屏延迟(_S)"
 
-#: panels/lock/cc-lock-panel.ui:76
+#: panels/lock/cc-lock-panel.ui:75
 msgid "Period after the screen blanks when the screen is automatically locked."
 msgstr "息屏后屏幕自动锁定的时间。"
 
-#: panels/lock/cc-lock-panel.ui:95
+#: panels/lock/cc-lock-panel.ui:94
 msgid "Show _Notifications on Lock Screen"
 msgstr "在锁定屏幕上显示通知(_N)"
 
-#: panels/lock/cc-lock-panel.ui:111
+#: panels/lock/cc-lock-panel.ui:110
 msgid "Forbid new _USB devices"
 msgstr "禁止新 USB 设备(_U)"
 
-#: panels/lock/cc-lock-panel.ui:112
+#: panels/lock/cc-lock-panel.ui:111
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
 msgstr "在屏幕锁定时阻止新 USB 设备与系统进行交互。"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:153
+#: panels/lock/cc-lock-panel.ui:152
 msgctxt "lock_screen"
 msgid "Screen Turns Off"
 msgstr "屏幕关闭"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:157
+#: panels/lock/cc-lock-panel.ui:156
 msgctxt "lock_screen"
 msgid "30 seconds"
 msgstr "30 秒"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:161
+#: panels/lock/cc-lock-panel.ui:160
 msgctxt "lock_screen"
 msgid "1 minute"
 msgstr "1 分钟"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:165
+#: panels/lock/cc-lock-panel.ui:164
 msgctxt "lock_screen"
 msgid "2 minutes"
 msgstr "2 分钟"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:169
+#: panels/lock/cc-lock-panel.ui:168
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 分钟"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:173
+#: panels/lock/cc-lock-panel.ui:172
 msgctxt "lock_screen"
 msgid "5 minutes"
 msgstr "5 分钟"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:177
+#: panels/lock/cc-lock-panel.ui:176
 msgctxt "lock_screen"
 msgid "30 minutes"
 msgstr "30 分钟"
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:181
+#: panels/lock/cc-lock-panel.ui:180
 msgctxt "lock_screen"
 msgid "1 hour"
 msgstr "1 小时"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:196
+#: panels/lock/cc-lock-panel.ui:195
 msgctxt "blank_screen"
 msgid "1 minute"
 msgstr "1 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:200
+#: panels/lock/cc-lock-panel.ui:199
 msgctxt "blank_screen"
 msgid "2 minutes"
 msgstr "2 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:204
+#: panels/lock/cc-lock-panel.ui:203
 msgctxt "blank_screen"
 msgid "3 minutes"
 msgstr "3 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:208
+#: panels/lock/cc-lock-panel.ui:207
 msgctxt "blank_screen"
 msgid "4 minutes"
 msgstr "4 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:212
+#: panels/lock/cc-lock-panel.ui:211
 msgctxt "blank_screen"
 msgid "5 minutes"
 msgstr "5 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:216
+#: panels/lock/cc-lock-panel.ui:215
 msgctxt "blank_screen"
 msgid "8 minutes"
 msgstr "8 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:220
+#: panels/lock/cc-lock-panel.ui:219
 msgctxt "blank_screen"
 msgid "10 minutes"
 msgstr "10 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:224
+#: panels/lock/cc-lock-panel.ui:223
 msgctxt "blank_screen"
 msgid "12 minutes"
 msgstr "12 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:228
+#: panels/lock/cc-lock-panel.ui:227
 msgctxt "blank_screen"
 msgid "15 minutes"
 msgstr "15 分钟"
 
 #. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:232
+#: panels/lock/cc-lock-panel.ui:231
 msgctxt "blank_screen"
 msgid "Never"
 msgstr "从不"
@@ -2563,15 +2565,15 @@ msgid "Lock your screen"
 msgstr "锁定屏幕"
 
 #. FIXME
-#: panels/microphone/cc-microphone-panel.ui:30
+#: panels/microphone/cc-microphone-panel.ui:35
 msgid "Microphone is turned off"
 msgstr "麦克风已关闭"
 
-#: panels/microphone/cc-microphone-panel.ui:38
+#: panels/microphone/cc-microphone-panel.ui:43
 msgid "No applications can record sound."
 msgstr "未找到音频录制应用。"
 
-#: panels/microphone/cc-microphone-panel.ui:69
+#: panels/microphone/cc-microphone-panel.ui:74
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
@@ -2580,11 +2582,11 @@ msgstr ""
 "使用麦克风允许应用程序录制声音。禁用麦克风可能会导致一些应用程序功能无法正常"
 "使用。"
 
-#: panels/microphone/cc-microphone-panel.ui:78
+#: panels/microphone/cc-microphone-panel.ui:83
 msgid "Allow the applications below to use your microphone."
 msgstr "允许以下应用程序使用您的麦克风。"
 
-#: panels/microphone/cc-microphone-panel.ui:98
+#: panels/microphone/cc-microphone-panel.ui:103
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "没有应用程序要求访问麦克风"
 
@@ -2593,68 +2595,68 @@ msgid "Protect your conversations"
 msgstr "保护对话"
 
 #. FIXME
-#: panels/mouse/cc-mouse-panel.ui:11
-#: panels/multitasking/cc-multitasking-panel.ui:24
+#: panels/mouse/cc-mouse-panel.ui:9 panels/wacom/cc-wacom-panel.c:780
+msgid "Test Your _Settings"
+msgstr "测试您的设置(_S)"
+
+#: panels/mouse/cc-mouse-panel.ui:23
+#: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "常规"
 
-#: panels/mouse/cc-mouse-panel.ui:21
+#: panels/mouse/cc-mouse-panel.ui:26
 msgid "Primary Button"
 msgstr "主按钮"
 
-#: panels/mouse/cc-mouse-panel.ui:22
+#: panels/mouse/cc-mouse-panel.ui:27
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "设置鼠标和触控板上的物理按钮的排列。"
 
-#: panels/mouse/cc-mouse-panel.ui:42 panels/sound/cc-balance-slider.ui:13
+#: panels/mouse/cc-mouse-panel.ui:41 panels/sound/cc-balance-slider.ui:13
 msgid "Left"
 msgstr "左"
 
-#: panels/mouse/cc-mouse-panel.ui:49 panels/sound/cc-balance-slider.ui:15
+#: panels/mouse/cc-mouse-panel.ui:48 panels/sound/cc-balance-slider.ui:15
 msgid "Right"
 msgstr "右"
 
-#: panels/mouse/cc-mouse-panel.ui:67
+#: panels/mouse/cc-mouse-panel.ui:62
 msgid "Mouse"
 msgstr "鼠标"
 
-#: panels/mouse/cc-mouse-panel.ui:77
+#: panels/mouse/cc-mouse-panel.ui:65
 msgid "Mouse Speed"
 msgstr "鼠标速度"
 
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:96 panels/mouse/cc-mouse-panel.ui:135
+#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:108
 msgid "Natural Scrolling"
 msgstr "自然滚动"
 
-#: panels/mouse/cc-mouse-panel.ui:97 panels/mouse/cc-mouse-panel.ui:136
+#: panels/mouse/cc-mouse-panel.ui:82 panels/mouse/cc-mouse-panel.ui:109
 msgid "Scrolling moves the content, not the view."
 msgstr "滚动移动内容而非视图。"
 
-#: panels/mouse/cc-mouse-panel.ui:113 panels/mouse/cc-mouse-panel.ui:123
+#: panels/mouse/cc-mouse-panel.ui:95 panels/mouse/cc-mouse-panel.ui:98
 msgid "Touchpad"
 msgstr "触摸板"
 
-#: panels/mouse/cc-mouse-panel.ui:148
+#: panels/mouse/cc-mouse-panel.ui:119
 msgid "Touchpad Speed"
 msgstr "触摸板速度"
 
-#: panels/mouse/cc-mouse-panel.ui:167
+#: panels/mouse/cc-mouse-panel.ui:136
 msgid "Tap to Click"
 msgstr "轻触以点击"
 
-#: panels/mouse/cc-mouse-panel.ui:180
+#: panels/mouse/cc-mouse-panel.ui:147
 msgid "Two-finger Scrolling"
 msgstr "双指滚动"
 
-#: panels/mouse/cc-mouse-panel.ui:194
+#: panels/mouse/cc-mouse-panel.ui:159
 msgid "Edge Scrolling"
 msgstr "边缘滚动"
-
-#: panels/mouse/cc-mouse-panel.ui:221 panels/wacom/cc-wacom-panel.c:491
-msgid "Test Your _Settings"
-msgstr "测试您的设置(_S)"
 
 #: panels/mouse/cc-mouse-test.c:131 panels/mouse/cc-mouse-test.ui:62
 msgid "Try clicking, double clicking, scrolling"
@@ -2704,68 +2706,68 @@ msgstr ""
 "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;触摸板;指针;触摸;单"
 "击;双击;按钮;轨迹球;滚动;"
 
-#: panels/multitasking/cc-multitasking-panel.ui:46
+#: panels/multitasking/cc-multitasking-panel.ui:15
 msgid "_Hot Corner"
 msgstr "热区(_H)"
 
-#: panels/multitasking/cc-multitasking-panel.ui:47
+#: panels/multitasking/cc-multitasking-panel.ui:16
 msgid "Touch the top-left corner to open the Activities Overview."
 msgstr "触碰屏幕左上角以打开活动概览界面。"
 
-#: panels/multitasking/cc-multitasking-panel.ui:75
+#: panels/multitasking/cc-multitasking-panel.ui:42
 msgid "_Active Screen Edges"
 msgstr "激活屏幕边缘(_A)"
 
-#: panels/multitasking/cc-multitasking-panel.ui:76
+#: panels/multitasking/cc-multitasking-panel.ui:43
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them."
 msgstr "将窗口拖曳至顶部、底部、左侧和右侧边缘以更改其大小。"
 
-#: panels/multitasking/cc-multitasking-panel.ui:105
+#: panels/multitasking/cc-multitasking-panel.ui:70
 msgid "Workspaces"
 msgstr "工作空间"
 
-#: panels/multitasking/cc-multitasking-panel.ui:127
+#: panels/multitasking/cc-multitasking-panel.ui:76
 msgid "_Dynamic workspaces"
 msgstr "动态工作空间(_D)"
 
-#: panels/multitasking/cc-multitasking-panel.ui:128
+#: panels/multitasking/cc-multitasking-panel.ui:77
 msgid "Automatically removes empty workspaces."
 msgstr "自动移除空的工作空间。"
 
-#: panels/multitasking/cc-multitasking-panel.ui:144
+#: panels/multitasking/cc-multitasking-panel.ui:91
 msgid "_Fixed number of workspaces"
 msgstr "固定数量的工作空间(_F)"
 
-#: panels/multitasking/cc-multitasking-panel.ui:145
+#: panels/multitasking/cc-multitasking-panel.ui:92
 msgid "Specify a number of permanent workspaces."
 msgstr "指定永久存在的工作空间的数量。"
 
-#: panels/multitasking/cc-multitasking-panel.ui:163
+#: panels/multitasking/cc-multitasking-panel.ui:108
 msgid "_Number of Workspaces"
 msgstr "工作空间数量(_N)"
 
-#: panels/multitasking/cc-multitasking-panel.ui:181
+#: panels/multitasking/cc-multitasking-panel.ui:124
 msgid "Multi-Monitor"
 msgstr "多显示器"
 
-#: panels/multitasking/cc-multitasking-panel.ui:203
+#: panels/multitasking/cc-multitasking-panel.ui:130
 msgid "Workspaces on _primary display only"
 msgstr "工作空间仅位于主显示器上(_P)"
 
-#: panels/multitasking/cc-multitasking-panel.ui:231
+#: panels/multitasking/cc-multitasking-panel.ui:156
 msgid "Workspaces on all d_isplays"
 msgstr "工作空间位于所有显示器上(_I)"
 
-#: panels/multitasking/cc-multitasking-panel.ui:261
+#: panels/multitasking/cc-multitasking-panel.ui:184
 msgid "Application Switching"
 msgstr "应用程序切换"
 
-#: panels/multitasking/cc-multitasking-panel.ui:283
+#: panels/multitasking/cc-multitasking-panel.ui:190
 msgid "Include applications from all _workspaces"
 msgstr "包括所有工作空间的应用程序(_W)"
 
-#: panels/multitasking/cc-multitasking-panel.ui:299
+#: panels/multitasking/cc-multitasking-panel.ui:204
 msgid "Include applications from the _current workspace only"
 msgstr "仅包括当前工作空间中的应用程序(_C)"
 
@@ -2784,7 +2786,7 @@ msgstr ""
 "Multitasking;Multitask;Productivity;Customize;Desktop;多任务;多进程;生产力;自"
 "定义;桌面;"
 
-#: panels/network/cc-network-panel.c:680 panels/network/cc-wifi-panel.ui:258
+#: panels/network/cc-network-panel.c:680 panels/network/cc-wifi-panel.ui:300
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "抱歉，发生错误。请联系软件提供商。"
 
@@ -2792,16 +2794,16 @@ msgstr "抱歉，发生错误。请联系软件提供商。"
 msgid "NetworkManager needs to be running."
 msgstr "需要运行 NetworkManager。"
 
-#: panels/network/cc-network-panel.ui:48
+#: panels/network/cc-network-panel.ui:47
 msgid "Other Devices"
 msgstr "其他设备"
 
-#: panels/network/cc-network-panel.ui:75
+#: panels/network/cc-network-panel.ui:74
 #: panels/network/connection-editor/net-connection-editor.c:580
 msgid "VPN"
 msgstr "VPN"
 
-#: panels/network/cc-network-panel.ui:107
+#: panels/network/cc-network-panel.ui:106
 msgid "Not set up"
 msgstr "未设置"
 
@@ -2901,61 +2903,61 @@ msgstr "自动生成密码"
 msgid "_Turn On"
 msgstr "打开(_T)"
 
-#: panels/network/cc-wifi-panel.c:549
+#: panels/network/cc-wifi-panel.c:544
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:66
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:884
+#: panels/network/cc-wifi-panel.c:879
 msgid "Stop hotspot and disconnect any users?"
 msgstr "停止热点并断开所有用户？"
 
-#: panels/network/cc-wifi-panel.c:887
+#: panels/network/cc-wifi-panel.c:882
 msgid "_Stop Hotspot"
 msgstr "停止热点(_S)"
 
-#: panels/network/cc-wifi-panel.ui:32
+#: panels/network/cc-wifi-panel.ui:72
 msgid "Airplane Mode"
 msgstr "飞行模式"
 
-#: panels/network/cc-wifi-panel.ui:33
+#: panels/network/cc-wifi-panel.ui:73
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr "禁用 Wi-Fi、蓝牙及移动宽带"
 
-#: panels/network/cc-wifi-panel.ui:70
+#: panels/network/cc-wifi-panel.ui:110
 msgid "No Wi-Fi Adapter Found"
 msgstr "未找到 Wi-Fi 适配器"
 
-#: panels/network/cc-wifi-panel.ui:80
+#: panels/network/cc-wifi-panel.ui:120
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr "请确保您已插入并打开了 Wi-Fi 适配器"
 
-#: panels/network/cc-wifi-panel.ui:112 panels/wwan/cc-wwan-panel.ui:126
+#: panels/network/cc-wifi-panel.ui:152 panels/wwan/cc-wwan-panel.ui:135
 msgid "Airplane Mode On"
 msgstr "飞行模式已开启"
 
-#: panels/network/cc-wifi-panel.ui:122
+#: panels/network/cc-wifi-panel.ui:162
 msgid "Turn off to use Wi-Fi"
 msgstr "关闭以使用 Wi-Fi"
 
-#: panels/network/cc-wifi-panel.ui:157
+#: panels/network/cc-wifi-panel.ui:199
 msgid "Wi-Fi Hotspot Active"
 msgstr "已启用 Wi-Fi 热点"
 
-#: panels/network/cc-wifi-panel.ui:167
+#: panels/network/cc-wifi-panel.ui:209
 msgid "Mobile devices can scan the QR code to connect."
 msgstr "移动设备可以扫描二维码进行连接。"
 
-#: panels/network/cc-wifi-panel.ui:175
+#: panels/network/cc-wifi-panel.ui:217
 msgid "Turn Off Hotspot…"
 msgstr "关闭热点…"
 
-#: panels/network/cc-wifi-panel.ui:195
+#: panels/network/cc-wifi-panel.ui:237
 msgid "Visible Networks"
 msgstr "可见网络"
 
-#: panels/network/cc-wifi-panel.ui:252
+#: panels/network/cc-wifi-panel.ui:294
 msgid "NetworkManager needs to be running"
 msgstr "需要运行 NetworkManager"
 
@@ -3227,7 +3229,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3个人"
 
 #: panels/network/connection-editor/details-page.ui:14
-#: panels/wwan/cc-wwan-details-dialog.ui:96
+#: panels/wwan/cc-wwan-details-dialog.ui:73
 msgid "Signal Strength"
 msgstr "信号强度"
 
@@ -3569,17 +3571,6 @@ msgstr "系统策略禁止作为热点使用"
 msgid "Wireless device does not support Hotspot mode"
 msgstr "无线设备不支持热点模式"
 
-#: panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:202
-#: panels/power/cc-power-panel.c:837 panels/power/cc-power-panel.c:848
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
-msgid "Off"
-msgstr "关"
-
 #. TRANSLATORS: this is when the use leaves the PAC textbox blank
 #: panels/network/net-proxy.c:112
 msgid ""
@@ -3609,7 +3600,7 @@ msgid "Turn device off"
 msgstr "关闭设备"
 
 #: panels/network/network-mobile.ui:27
-#: panels/wwan/cc-wwan-details-dialog.ui:264
+#: panels/wwan/cc-wwan-details-dialog.ui:237
 msgid "IMEI"
 msgstr "IMEI"
 
@@ -4048,7 +4039,7 @@ msgstr "用户名(_U)"
 #: panels/network/wireless-security/ws-leap.ui:23
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
-#: panels/sharing/cc-sharing-panel.ui:144
+#: panels/sharing/cc-sharing-panel.ui:152
 #: panels/user-accounts/cc-add-user-dialog.ui:310
 #: panels/user-accounts/cc-add-user-dialog.ui:547
 #: panels/user-accounts/cc-user-panel.ui:365
@@ -4252,10 +4243,6 @@ msgstr "认证(_T)"
 msgid "Select a file"
 msgstr "选择文件"
 
-#: panels/network/wireless-security/ws-file-chooser-button.c:96
-msgid "Open"
-msgstr "打开"
-
 #: panels/network/wireless-security/ws-leap.c:66
 msgid "missing leap-username"
 msgstr "缺失 leap-username"
@@ -4380,21 +4367,11 @@ msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "锁屏时显示显示消息内容(_O)"
 
-#: panels/notifications/cc-notifications-panel.c:202
-#: panels/power/cc-power-panel.c:843 panels/power/cc-power-panel.c:850
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
-msgid "On"
-msgstr "开"
-
-#: panels/notifications/cc-notifications-panel.ui:17
+#: panels/notifications/cc-notifications-panel.ui:16
 msgid "_Do Not Disturb"
 msgstr "勿扰(_D)"
 
-#: panels/notifications/cc-notifications-panel.ui:24
+#: panels/notifications/cc-notifications-panel.ui:23
 msgid "_Lock Screen Notifications"
 msgstr "锁屏通知(_L)"
 
@@ -4408,29 +4385,51 @@ msgid "Notifications;Banner;Message;Tray;Popup;"
 msgstr ""
 "Notifications;Banner;Message;Tray;Popup;通知;横幅;条幅;消息;托盘;弹出;弹窗;"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:148
+#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
+#. * or rishi).
+#.
+#: panels/online-accounts/cc-online-accounts-panel.c:277
+#, c-format
+msgid "%s removed"
+msgstr "%s 已移除"
+
+#: panels/online-accounts/cc-online-accounts-panel.c:406
 msgctxt "Online Account"
 msgid "Other"
 msgstr "其他"
 
+#: panels/online-accounts/cc-online-accounts-panel.c:803
+msgid "Error removing account"
+msgstr "移除帐号出错"
+
+#. Translators: This is the button which allows undoing the removal of the printer.
+#: panels/online-accounts/cc-online-accounts-panel.ui:23
+#: panels/printers/printers.ui:51
+msgid "Undo"
+msgstr "撤消"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:55
+msgid "Connect to your data in the cloud"
+msgstr "连接您的云端数据"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:66
+msgid "No internet connection — connect to set up new online accounts"
+msgstr "无互联网连接——连接以设置新的在线帐号"
+
+#: panels/online-accounts/cc-online-accounts-panel.ui:92
+msgid "Add an account"
+msgstr "添加帐号"
+
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/cc-online-accounts-panel.c:576
+#: panels/online-accounts/gnome-control-center-goa-helper.c:426
 #, c-format
 msgid "%s Account"
 msgstr "%s 帐号"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:870
-msgid "Error removing account"
-msgstr "移除帐号出错"
-
-#. Translators: The %s is the username (eg., debarshi.ray@gmail.com
-#. * or rishi).
-#.
-#: panels/online-accounts/cc-online-accounts-panel.c:936
-#, c-format
-msgid "%s removed"
-msgstr "%s 已移除"
+#: panels/online-accounts/gnome-control-center-goa-helper.c:429
+msgid "Remove Account"
+msgstr "移除帐号"
 
 #: panels/online-accounts/gnome-online-accounts-panel.desktop.in.in:3
 msgid "Online Accounts"
@@ -4452,27 +4451,6 @@ msgstr ""
 "Google;Facebook;Twitter;Yahoo;Web;Online;Chat;Calendar;Mail;Contact;ownCloud;"
 "Kerberos;IMAP;SMTP;Pocket;ReadItLater;谷歌;脸谱;脸书;推特;雅虎;互联网;网络;在"
 "线;聊天;日历;邮件;联系人;云存储;稍后阅读;"
-
-#. Translators: This is the button which allows undoing the removal of the printer.
-#: panels/online-accounts/online-accounts.ui:38 panels/printers/printers.ui:51
-msgid "Undo"
-msgstr "撤消"
-
-#: panels/online-accounts/online-accounts.ui:94
-msgid "Connect to your data in the cloud"
-msgstr "连接您的云端数据"
-
-#: panels/online-accounts/online-accounts.ui:109
-msgid "No internet connection — connect to set up new online accounts"
-msgstr "无互联网连接——连接以设置新的在线帐号"
-
-#: panels/online-accounts/online-accounts.ui:134
-msgid "Add an account"
-msgstr "添加帐号"
-
-#: panels/online-accounts/online-accounts.ui:223
-msgid "Remove Account"
-msgstr "移除帐号"
 
 #: panels/power/cc-battery-row.c:80
 msgid "Unknown time"
@@ -4581,7 +4559,7 @@ msgid "Media player"
 msgstr "媒体播放器"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:772
+#: panels/power/cc-battery-row.c:209 panels/wacom/cc-wacom-panel.c:745
 msgid "Tablet"
 msgstr "数位板"
 
@@ -4596,8 +4574,8 @@ msgid "Gaming input device"
 msgstr "游戏输入设备"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:359
-#: panels/power/cc-power-panel.ui:59
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "电池"
 
@@ -4611,254 +4589,241 @@ msgctxt "Battery name"
 msgid "Extra"
 msgstr "附加电池"
 
-#: panels/power/cc-power-panel.c:357
+#: panels/power/cc-power-panel.c:255
 msgid "Batteries"
 msgstr "电池"
 
-#: panels/power/cc-power-panel.c:620
+#: panels/power/cc-power-panel.c:511
 msgid "When _idle"
 msgstr "空闲时(_I)"
 
-#: panels/power/cc-power-panel.c:780
+#: panels/power/cc-power-panel.c:671
 msgid "Suspend"
 msgstr "挂起"
 
-#: panels/power/cc-power-panel.c:781
+#: panels/power/cc-power-panel.c:672
 msgid "Power Off"
 msgstr "电源关闭"
 
-#: panels/power/cc-power-panel.c:782
+#: panels/power/cc-power-panel.c:673
 msgid "Hibernate"
 msgstr "休眠"
 
-#: panels/power/cc-power-panel.c:783
+#: panels/power/cc-power-panel.c:674
 msgid "Nothing"
 msgstr "不处理"
 
-#: panels/power/cc-power-panel.c:839
+#: panels/power/cc-power-panel.c:730
 msgid "When on battery power"
 msgstr "电池供电时"
 
-#: panels/power/cc-power-panel.c:841
+#: panels/power/cc-power-panel.c:732
 msgid "When plugged in"
 msgstr "插入电源时"
 
-#: panels/power/cc-power-panel.c:962
+#: panels/power/cc-power-panel.c:853
 msgctxt "Idle time"
 msgid "Never"
 msgstr "从不"
 
-#: panels/power/cc-power-panel.c:1046
+#: panels/power/cc-power-panel.c:937
 msgid "Automatic suspend"
 msgstr "自动挂起"
 
-#: panels/power/cc-power-panel.c:1151
+#: panels/power/cc-power-panel.c:1030
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr "由于工作温度高，性能模式暂时禁用。"
 
-#: panels/power/cc-power-panel.c:1153
+#: panels/power/cc-power-panel.c:1032
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr "检测到膝上使用：性能模式暂时不可用。将设备移动到稳定的表面以恢复。"
 
-#: panels/power/cc-power-panel.c:1155
+#: panels/power/cc-power-panel.c:1034
 msgid "Performance mode temporarily disabled."
 msgstr "性能模式暂时禁用。"
 
-#: panels/power/cc-power-panel.c:1197
+#: panels/power/cc-power-panel.c:1076
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr "电池电量低：节电模式已启用。电池充满电时，将恢复之前的模式。"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1205
+#: panels/power/cc-power-panel.c:1084
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "节电模式由“%s”激活。"
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1209
+#: panels/power/cc-power-panel.c:1088
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "性能模式由“%s”激活。"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:13
+#: panels/power/cc-power-panel.ui:12
 msgctxt "automatic_suspend"
 msgid "15 minutes"
 msgstr "15 分钟"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:17
+#: panels/power/cc-power-panel.ui:16
 msgctxt "automatic_suspend"
 msgid "20 minutes"
 msgstr "20 分钟"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:21
+#: panels/power/cc-power-panel.ui:20
 msgctxt "automatic_suspend"
 msgid "25 minutes"
 msgstr "25 分钟"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:25
+#: panels/power/cc-power-panel.ui:24
 msgctxt "automatic_suspend"
 msgid "30 minutes"
 msgstr "30 分钟"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:29
+#: panels/power/cc-power-panel.ui:28
 msgctxt "automatic_suspend"
 msgid "45 minutes"
 msgstr "45 分钟"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:33
+#: panels/power/cc-power-panel.ui:32
 msgctxt "automatic_suspend"
 msgid "1 hour"
 msgstr "1 小时"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:37
+#: panels/power/cc-power-panel.ui:36
 msgctxt "automatic_suspend"
 msgid "80 minutes"
 msgstr "80 分钟"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:41
+#: panels/power/cc-power-panel.ui:40
 msgctxt "automatic_suspend"
 msgid "90 minutes"
 msgstr "90 分钟"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:45
+#: panels/power/cc-power-panel.ui:44
 msgctxt "automatic_suspend"
 msgid "100 minutes"
 msgstr "100 分钟"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
-#: panels/power/cc-power-panel.ui:49
+#: panels/power/cc-power-panel.ui:48
 msgctxt "automatic_suspend"
 msgid "2 hours"
 msgstr "2 小时"
 
-#: panels/power/cc-power-panel.ui:94
+#: panels/power/cc-power-panel.ui:93
 msgid "Power Mode"
 msgstr "电源模式"
 
-#: panels/power/cc-power-panel.ui:95
+#: panels/power/cc-power-panel.ui:94
 msgid "Affects system performance and power usage."
 msgstr "影响系统性能和功耗。"
 
-#: panels/power/cc-power-panel.ui:124
+#: panels/power/cc-power-panel.ui:123
 msgid "Power Saving Options"
 msgstr "节电选项"
 
-#: panels/power/cc-power-panel.ui:127
+#: panels/power/cc-power-panel.ui:126
 msgid "Automatic Screen Brightness"
 msgstr "自动屏幕亮度"
 
-#: panels/power/cc-power-panel.ui:128
+#: panels/power/cc-power-panel.ui:127
 msgid "Screen brightness adjusts to the surrounding light."
 msgstr "屏幕亮度根据周围光线进行调整。"
 
-#: panels/power/cc-power-panel.ui:139
+#: panels/power/cc-power-panel.ui:138
 msgid "Dim Screen"
 msgstr "屏幕变暗"
 
-#: panels/power/cc-power-panel.ui:140
+#: panels/power/cc-power-panel.ui:139
 msgid "Reduces the screen brightness when the computer is inactive."
 msgstr "当计算机处于非活动状态时降低屏幕亮度。"
 
-#: panels/power/cc-power-panel.ui:151
+#: panels/power/cc-power-panel.ui:150
 msgid "Screen _Blank"
 msgstr "息屏(_B)"
 
-#: panels/power/cc-power-panel.ui:152
+#: panels/power/cc-power-panel.ui:151
 msgid "Turns the screen off after a period of inactivity."
 msgstr "在一段时间的不活动后关闭屏幕。"
 
-#: panels/power/cc-power-panel.ui:160
+#: panels/power/cc-power-panel.ui:159
 msgid "Automatic Power Saver"
 msgstr "自动节电"
 
-#: panels/power/cc-power-panel.ui:161
+#: panels/power/cc-power-panel.ui:160
 msgid "Enables power saver mode when battery is low."
 msgstr "电池电量低时启用节电模式。"
 
-#: panels/power/cc-power-panel.ui:174
+#: panels/power/cc-power-panel.ui:173
 msgid "_Automatic Suspend"
 msgstr "自动挂起(_A)"
 
-#: panels/power/cc-power-panel.ui:175
+#: panels/power/cc-power-panel.ui:174
 msgid "Pauses the computer after a period of inactivity."
 msgstr "在一段时间的不活动后暂停计算机。"
 
-#: panels/power/cc-power-panel.ui:194
+#: panels/power/cc-power-panel.ui:193
 msgid "Po_wer Button Behavior"
 msgstr "电源按钮行为(_W)"
 
-#: panels/power/cc-power-panel.ui:202
+#: panels/power/cc-power-panel.ui:201
 msgid "Show Battery _Percentage"
 msgstr "显示电池百分比(_P)"
 
-#: panels/power/cc-power-panel.ui:238
+#: panels/power/cc-power-panel.ui:237
 msgid "Automatic Suspend"
 msgstr "自动挂起"
 
-#: panels/power/cc-power-panel.ui:261
+#: panels/power/cc-power-panel.ui:260
 msgid "_Plugged In"
 msgstr "已插入电源(_P)"
 
-#: panels/power/cc-power-panel.ui:273
+#: panels/power/cc-power-panel.ui:272
 msgid "On _Battery Power"
 msgstr "使用电池时(_B)"
 
-#: panels/power/cc-power-panel.ui:306 panels/power/cc-power-panel.ui:342
+#: panels/power/cc-power-panel.ui:305 panels/power/cc-power-panel.ui:341
 #: panels/universal-access/cc-repeat-keys-dialog.ui:62
 msgid "Delay"
 msgstr "延迟"
 
-#: panels/power/cc-power-profile-row.c:61
-msgid "Lap detected: performance mode unavailable"
-msgstr "检测到膝上使用：性能模式不可用"
-
-#: panels/power/cc-power-profile-row.c:63
-msgid "High hardware temperature: performance mode unavailable"
-msgstr "硬件温度过高：性能模式不可用"
-
-#: panels/power/cc-power-profile-row.c:64
-msgid "Performance mode unavailable"
-msgstr "性能模式不可用"
-
-#: panels/power/cc-power-profile-row.c:84
-#: panels/power/cc-power-profile-row.c:183
-msgid "High performance and power usage."
-msgstr "高性能和功耗。"
-
-#: panels/power/cc-power-profile-row.c:182
+#: panels/power/cc-power-profile-row.c:132
 msgctxt "Power profile"
 msgid "Performance"
 msgstr "性能"
 
-#: panels/power/cc-power-profile-row.c:186
+#: panels/power/cc-power-profile-row.c:133
+msgid "High performance and power usage."
+msgstr "高性能和功耗。"
+
+#: panels/power/cc-power-profile-row.c:136
 msgctxt "Power profile"
 msgid "Balanced"
 msgstr "均衡"
 
-#: panels/power/cc-power-profile-row.c:187
+#: panels/power/cc-power-profile-row.c:137
 msgid "Standard performance and power usage."
 msgstr "标准性能和功耗。"
 
-#: panels/power/cc-power-profile-row.c:190
+#: panels/power/cc-power-profile-row.c:140
 msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "节电"
 
-#: panels/power/cc-power-profile-row.c:191
+#: panels/power/cc-power-profile-row.c:141
 msgid "Reduced performance and power usage."
 msgstr "降低性能和功耗。"
 
@@ -4901,23 +4866,23 @@ msgid "Authentication Required"
 msgstr "需要认证"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:680
+#: panels/printers/cc-printers-panel.c:676
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "已删除打印机“%s”"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:932
+#: panels/printers/cc-printers-panel.c:928
 msgid "Failed to add new printer."
 msgstr "添加新打印机失败。"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1233
+#: panels/printers/cc-printers-panel.c:1229
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "无法载入界面：%s"
 
-#: panels/printers/cc-printers-panel.c:1301
+#: panels/printers/cc-printers-panel.c:1297
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "解锁以添加打印机及更改设置"
 
@@ -4948,7 +4913,7 @@ msgstr "添加打印机"
 #. Translators: This buttons submits the credentials for the selected server.
 #: panels/printers/new-printer-dialog.ui:100
 #: panels/printers/new-printer-dialog.ui:115
-#: panels/wwan/cc-wwan-device-page.ui:89
+#: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "解锁(_U)"
 
@@ -5362,7 +5327,7 @@ msgstr "无预过滤"
 
 #. Translators: Name of column showing printer manufacturers
 #: panels/printers/pp-ppd-selection-dialog.c:220
-#: panels/wwan/cc-wwan-details-dialog.ui:187
+#: panels/wwan/cc-wwan-details-dialog.ui:160
 msgid "Manufacturer"
 msgstr "厂商"
 
@@ -5510,7 +5475,7 @@ msgid "Remove Printer"
 msgstr "移除打印机"
 
 #: panels/printers/printer-entry.ui:184
-#: panels/wwan/cc-wwan-details-dialog.ui:211
+#: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "型号"
 
@@ -5552,14 +5517,13 @@ msgstr ""
 "似乎不可用。"
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
-#: panels/region/cc-format-chooser.ui:5 panels/region/cc-region-panel.ui:155
+#: panels/region/cc-format-chooser.ui:5 panels/region/cc-region-panel.ui:154
 msgid "Formats"
 msgstr "格式"
 
 #: panels/region/cc-format-chooser.ui:37
 #: panels/user-accounts/cc-fingerprint-dialog.ui:53
 #: panels/wacom/wacom-stylus-page.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
-#: shell/cc-window.ui:150
 msgid "Back"
 msgstr "后退"
 
@@ -5623,44 +5587,44 @@ msgstr "度量"
 msgid "Paper"
 msgstr "纸张"
 
-#: panels/region/cc-region-panel.ui:33
+#: panels/region/cc-region-panel.ui:32
 msgid "My Account"
 msgstr "我的帐号"
 
-#: panels/region/cc-region-panel.ui:39
+#: panels/region/cc-region-panel.ui:38
 msgid "Login Screen"
 msgstr "登录屏幕"
 
-#: panels/region/cc-region-panel.ui:52
+#: panels/region/cc-region-panel.ui:51
 msgid "Language"
 msgstr "语言"
 
-#: panels/region/cc-region-panel.ui:61
+#: panels/region/cc-region-panel.ui:60
 msgid "The language used for text in windows and web pages."
 msgstr "窗口和网页使用的语言。"
 
-#: panels/region/cc-region-panel.ui:91
+#: panels/region/cc-region-panel.ui:90
 #: panels/user-accounts/cc-user-panel.ui:311
 msgid "_Language"
 msgstr "语言(_L)"
 
-#: panels/region/cc-region-panel.ui:121
+#: panels/region/cc-region-panel.ui:120
 msgid "Restart the session for changes to take effect"
 msgstr "重启会话以让更改生效"
 
-#: panels/region/cc-region-panel.ui:135
+#: panels/region/cc-region-panel.ui:134
 msgid "Restart…"
 msgstr "重启…"
 
-#: panels/region/cc-region-panel.ui:164
+#: panels/region/cc-region-panel.ui:163
 msgid "The format used for numbers, dates, and currencies."
 msgstr "数字，日期和货币的格式。"
 
-#: panels/region/cc-region-panel.ui:189
+#: panels/region/cc-region-panel.ui:188
 msgid "_Formats"
 msgstr "格式(_F)"
 
-#: panels/region/cc-region-panel.ui:212
+#: panels/region/cc-region-panel.ui:211
 msgid "Login settings are used by all users when logging into the system"
 msgstr "登录设置将对所有于本机登录的用户共享"
 
@@ -5834,7 +5798,7 @@ msgid "_OK"
 msgstr "确定(_O)"
 
 #: panels/search/cc-search-locations-dialog.ui:8
-#: panels/search/cc-search-panel.ui:54
+#: panels/search/cc-search-panel.ui:9
 msgid "Search Locations"
 msgstr "搜索位置"
 
@@ -5858,7 +5822,7 @@ msgstr "书签"
 msgid "Other"
 msgstr "其他"
 
-#: panels/search/cc-search-panel.c:152
+#: panels/search/cc-search-panel.c:153
 msgid "No applications found"
 msgstr "未找到应用"
 
@@ -5870,7 +5834,7 @@ msgstr "上移"
 msgid "Move Down"
 msgstr "下移"
 
-#: panels/search/cc-search-panel.ui:29
+#: panels/search/cc-search-panel.ui:43
 msgid ""
 "Control which search results are shown in the Activities Overview. The order "
 "of search results can also be changed by moving rows in the list."
@@ -5898,32 +5862,32 @@ msgstr "未选择要共享的网络"
 msgid "Networks"
 msgstr "网络"
 
-#: panels/sharing/cc-sharing-panel.c:289
+#: panels/sharing/cc-sharing-panel.c:276
 msgctxt "service is enabled"
 msgid "On"
 msgstr "已开启"
 
-#: panels/sharing/cc-sharing-panel.c:291 panels/sharing/cc-sharing-panel.c:318
+#: panels/sharing/cc-sharing-panel.c:278 panels/sharing/cc-sharing-panel.c:305
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "已关闭"
 
-#: panels/sharing/cc-sharing-panel.c:321
+#: panels/sharing/cc-sharing-panel.c:308
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "已启用"
 
-#: panels/sharing/cc-sharing-panel.c:324
+#: panels/sharing/cc-sharing-panel.c:311
 msgctxt "service is active"
 msgid "Active"
 msgstr "活动"
 
-#: panels/sharing/cc-sharing-panel.c:442
+#: panels/sharing/cc-sharing-panel.c:429
 msgid "Choose a Folder"
 msgstr "选择文件夹"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:670
+#: panels/sharing/cc-sharing-panel.c:657
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5931,7 +5895,7 @@ msgid ""
 msgstr "文件共享可以共享“公共”文件夹，使用地址：%s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:676
+#: panels/sharing/cc-sharing-panel.c:663
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5942,88 +5906,88 @@ msgstr ""
 "%s"
 
 #. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:682
+#: panels/sharing/cc-sharing-panel.c:669
 #, c-format
 msgid ""
 "Screen sharing allows remote users to view or control your screen by "
 "connecting to %s"
 msgstr "屏幕共享允许远程用户查看或控制您的屏幕%s"
 
-#: panels/sharing/cc-sharing-panel.c:1152
+#: panels/sharing/cc-sharing-panel.ui:9
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
 msgid "Sharing"
 msgstr "共享"
 
-#: panels/sharing/cc-sharing-panel.ui:23
+#: panels/sharing/cc-sharing-panel.ui:31
 msgid "_Computer Name"
 msgstr "计算机名(_C)"
 
-#: panels/sharing/cc-sharing-panel.ui:50
+#: panels/sharing/cc-sharing-panel.ui:58
 msgid "_File Sharing"
 msgstr "文件共享(_F)"
 
-#: panels/sharing/cc-sharing-panel.ui:57
+#: panels/sharing/cc-sharing-panel.ui:65
 msgid "_Screen Sharing"
 msgstr "屏幕共享(_S)"
 
-#: panels/sharing/cc-sharing-panel.ui:64
+#: panels/sharing/cc-sharing-panel.ui:72
 msgid "_Media Sharing"
 msgstr "媒体共享(_M)"
 
-#: panels/sharing/cc-sharing-panel.ui:71
+#: panels/sharing/cc-sharing-panel.ui:79
 msgid "_Remote Login"
 msgstr "远程登录(_R)"
 
-#: panels/sharing/cc-sharing-panel.ui:84
+#: panels/sharing/cc-sharing-panel.ui:92
 msgid "File Sharing"
 msgstr "文件共享"
 
-#: panels/sharing/cc-sharing-panel.ui:130
+#: panels/sharing/cc-sharing-panel.ui:138
 msgid "_Require Password"
 msgstr "需要密码(_R)"
 
-#: panels/sharing/cc-sharing-panel.ui:187
-#: panels/sharing/cc-sharing-panel.ui:223
+#: panels/sharing/cc-sharing-panel.ui:195
+#: panels/sharing/cc-sharing-panel.ui:231
 msgid "Remote Login"
 msgstr "远程登录"
 
-#: panels/sharing/cc-sharing-panel.ui:242
+#: panels/sharing/cc-sharing-panel.ui:250
 msgid "Screen Sharing"
 msgstr "屏幕共享"
 
-#: panels/sharing/cc-sharing-panel.ui:290
+#: panels/sharing/cc-sharing-panel.ui:298
 msgid "_Allow connections to control the screen"
 msgstr "允许连接控制屏幕(_A)"
 
-#: panels/sharing/cc-sharing-panel.ui:308
+#: panels/sharing/cc-sharing-panel.ui:316
 msgid "_Password:"
 msgstr "密码(_P)："
 
-#: panels/sharing/cc-sharing-panel.ui:331
+#: panels/sharing/cc-sharing-panel.ui:339
 msgid "_Show Password"
 msgstr "显示密码(_S)"
 
-#: panels/sharing/cc-sharing-panel.ui:344
+#: panels/sharing/cc-sharing-panel.ui:352
 msgid "Access Options"
 msgstr "访问选项"
 
-#: panels/sharing/cc-sharing-panel.ui:356
+#: panels/sharing/cc-sharing-panel.ui:364
 msgid "_New connections must ask for access"
 msgstr "建立新连接前必须询问访问权限(_N)"
 
-#: panels/sharing/cc-sharing-panel.ui:367
+#: panels/sharing/cc-sharing-panel.ui:375
 msgid "_Require a password"
 msgstr "需要密码(_R)"
 
-#: panels/sharing/cc-sharing-panel.ui:392
+#: panels/sharing/cc-sharing-panel.ui:400
 msgid "Media Sharing"
 msgstr "媒体共享"
 
-#: panels/sharing/cc-sharing-panel.ui:414
+#: panels/sharing/cc-sharing-panel.ui:422
 msgid "Share music, photos and videos over the network."
 msgstr "通过网络共享音乐、照片和视频。"
 
-#: panels/sharing/cc-sharing-panel.ui:427
+#: panels/sharing/cc-sharing-panel.ui:435
 msgid "Folders"
 msgstr "文件夹"
 
@@ -6087,55 +6051,55 @@ msgstr "测试 %s"
 msgid "Click a speaker to test"
 msgstr "单击扬声器进行测试"
 
-#: panels/sound/cc-sound-panel.ui:9
+#: panels/sound/cc-sound-panel.ui:8
 msgid "System Volume"
 msgstr "系统音量"
 
-#: panels/sound/cc-sound-panel.ui:17
+#: panels/sound/cc-sound-panel.ui:16
 msgid "Volume Levels"
 msgstr "音量级别"
 
-#: panels/sound/cc-sound-panel.ui:27
+#: panels/sound/cc-sound-panel.ui:26
 msgid "Output"
 msgstr "输出"
 
-#: panels/sound/cc-sound-panel.ui:48
+#: panels/sound/cc-sound-panel.ui:47
 msgid "Output Device"
 msgstr "输出设备"
 
-#: panels/sound/cc-sound-panel.ui:67
+#: panels/sound/cc-sound-panel.ui:66
 msgid "Test"
 msgstr "测试"
 
-#: panels/sound/cc-sound-panel.ui:96 panels/sound/cc-sound-panel.ui:255
+#: panels/sound/cc-sound-panel.ui:95 panels/sound/cc-sound-panel.ui:254
 msgid "Configuration"
 msgstr "配置"
 
-#: panels/sound/cc-sound-panel.ui:127
+#: panels/sound/cc-sound-panel.ui:126
 msgid "Balance"
 msgstr "均衡"
 
-#: panels/sound/cc-sound-panel.ui:153
+#: panels/sound/cc-sound-panel.ui:152
 msgid "Fade"
 msgstr "淡出"
 
-#: panels/sound/cc-sound-panel.ui:179
+#: panels/sound/cc-sound-panel.ui:178
 msgid "Subwoofer"
 msgstr "重低音"
 
-#: panels/sound/cc-sound-panel.ui:197
+#: panels/sound/cc-sound-panel.ui:196
 msgid "Input"
 msgstr "输入"
 
-#: panels/sound/cc-sound-panel.ui:218
+#: panels/sound/cc-sound-panel.ui:217
 msgid "Input Device"
 msgstr "输入设备"
 
-#: panels/sound/cc-sound-panel.ui:286
+#: panels/sound/cc-sound-panel.ui:285
 msgid "Volume"
 msgstr "音量"
 
-#: panels/sound/cc-sound-panel.ui:304
+#: panels/sound/cc-sound-panel.ui:303
 msgid "Alert Sound"
 msgstr "警报声"
 
@@ -6294,27 +6258,27 @@ msgstr "无法确定 雷雳安全级别。"
 msgid "Error switching direct mode: %s"
 msgstr "无法切换为直接模式：%s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:129
+#: panels/thunderbolt/cc-bolt-panel.ui:140
 msgid "No Thunderbolt support"
 msgstr "无 雷雳支持"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:218
+#: panels/thunderbolt/cc-bolt-panel.ui:229
 msgid "Direct Access"
 msgstr "直接访问"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:241
+#: panels/thunderbolt/cc-bolt-panel.ui:252
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "允许直接访问底座和外置图形处理器一类的设备。"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:261
+#: panels/thunderbolt/cc-bolt-panel.ui:272
 msgid "Only USB and Display Port devices can attach."
 msgstr "只能挂接 USB 和 Display Port 设备。"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:342
+#: panels/thunderbolt/cc-bolt-panel.ui:353
 msgid "Pending Devices"
 msgstr "等待中的设备"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:460
+#: panels/thunderbolt/cc-bolt-panel.ui:471
 msgid "No devices attached"
 msgstr "未连接设备"
 
@@ -6559,98 +6523,97 @@ msgid "%d pixel"
 msgid_plural "%d pixels"
 msgstr[0] "%d 个像素"
 
-#: panels/universal-access/cc-ua-panel.ui:20
+#: panels/universal-access/cc-ua-panel.ui:17
 msgid "_Always Show Accessibility Menu"
 msgstr "始终显示辅助功能菜单(_A)"
 
-#: panels/universal-access/cc-ua-panel.ui:34
+#: panels/universal-access/cc-ua-panel.ui:31
 msgid "Seeing"
 msgstr "视觉"
 
-#: panels/universal-access/cc-ua-panel.ui:37
+#: panels/universal-access/cc-ua-panel.ui:34
 msgid "_High Contrast"
 msgstr "高对比度(_H)"
 
-#: panels/universal-access/cc-ua-panel.ui:49
+#: panels/universal-access/cc-ua-panel.ui:46
 msgid "_Large Text"
 msgstr "大号文本(_L)"
 
-#: panels/universal-access/cc-ua-panel.ui:61
+#: panels/universal-access/cc-ua-panel.ui:58
 msgid "Enable A_nimations"
 msgstr "启用动画(_N)"
 
-#: panels/universal-access/cc-ua-panel.ui:73
+#: panels/universal-access/cc-ua-panel.ui:70
 msgid "Screen _Reader"
 msgstr "屏幕朗读(_R)"
 
-#: panels/universal-access/cc-ua-panel.ui:74
+#: panels/universal-access/cc-ua-panel.ui:71
 msgid "The screen reader reads displayed text as you move the focus."
 msgstr "移动焦点时朗读显示的文本。"
 
-#: panels/universal-access/cc-ua-panel.ui:86
+#: panels/universal-access/cc-ua-panel.ui:83
 msgid "_Sound Keys"
 msgstr "发声键(_S)"
 
-#: panels/universal-access/cc-ua-panel.ui:87
+#: panels/universal-access/cc-ua-panel.ui:84
 msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgstr "数字键盘锁定或大小写锁定开启或关闭时发出蜂鸣声。"
 
-#: panels/universal-access/cc-ua-panel.ui:99
+#: panels/universal-access/cc-ua-panel.ui:96
 msgid "C_ursor Size"
 msgstr "光标大小(_U)"
 
-#: panels/universal-access/cc-ua-panel.ui:113
+#: panels/universal-access/cc-ua-panel.ui:110
 #: panels/universal-access/cc-zoom-options-dialog.ui:82
 msgid "_Zoom"
 msgstr "缩放(_Z)"
 
-#: panels/universal-access/cc-ua-panel.ui:129
+#: panels/universal-access/cc-ua-panel.ui:126
 msgid "Hearing"
 msgstr "听觉"
 
-#: panels/universal-access/cc-ua-panel.ui:132
+#: panels/universal-access/cc-ua-panel.ui:129
 #: panels/universal-access/cc-visual-alerts-dialog.ui:54
 msgid "_Visual Alerts"
 msgstr "视觉警报(_V)"
 
-#: panels/universal-access/cc-ua-panel.ui:151
+#: panels/universal-access/cc-ua-panel.ui:148
 msgid "Screen _Keyboard"
 msgstr "屏幕键盘(_K)"
 
-#: panels/universal-access/cc-ua-panel.ui:163
+#: panels/universal-access/cc-ua-panel.ui:160
 msgid "R_epeat Keys"
 msgstr "重复键(_E)"
 
-#: panels/universal-access/cc-ua-panel.ui:177
+#: panels/universal-access/cc-ua-panel.ui:174
 msgid "Cursor _Blinking"
 msgstr "光标闪烁(_B)"
 
-#: panels/universal-access/cc-ua-panel.ui:191
+#: panels/universal-access/cc-ua-panel.ui:188
 msgid "_Typing Assist (AccessX)"
 msgstr "AccessX 打字助手(_T)"
 
-#: panels/universal-access/cc-ua-panel.ui:207
-#| msgid "Pointing & Clicking"
+#: panels/universal-access/cc-ua-panel.ui:204
 msgid "Pointing &amp; Clicking"
 msgstr "指向和点击"
 
-#: panels/universal-access/cc-ua-panel.ui:210
+#: panels/universal-access/cc-ua-panel.ui:207
 msgid "_Mouse Keys"
 msgstr "鼠标键(_M)"
 
-#: panels/universal-access/cc-ua-panel.ui:222
+#: panels/universal-access/cc-ua-panel.ui:219
 msgid "_Locate Pointer"
 msgstr "定位指针(_L)"
 
-#: panels/universal-access/cc-ua-panel.ui:234
+#: panels/universal-access/cc-ua-panel.ui:231
 msgid "_Click Assist"
 msgstr "点击助手(_C)"
 
-#: panels/universal-access/cc-ua-panel.ui:248
+#: panels/universal-access/cc-ua-panel.ui:245
 msgid "_Double-Click Delay"
 msgstr "双击延时(_D)"
 
-#: panels/universal-access/cc-ua-panel.ui:258
+#: panels/universal-access/cc-ua-panel.ui:255
 msgid "Double-Click Delay"
 msgstr "双击延时"
 
@@ -6893,11 +6856,11 @@ msgstr "所有临时文件将会永久删除。"
 msgid "_Purge Temporary Files"
 msgstr "清理临时文件(_P)"
 
-#: panels/usage/cc-usage-panel.ui:24
+#: panels/usage/cc-usage-panel.ui:23
 msgid "File History"
 msgstr "文件历史"
 
-#: panels/usage/cc-usage-panel.ui:35
+#: panels/usage/cc-usage-panel.ui:34
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between applications, and makes it easier to find files that you "
@@ -6906,23 +6869,23 @@ msgstr ""
 "文件历史记录会记录您已使用的文件。此信息在应用程序之间共享，使查找您可能想要"
 "使用的文件更加容易。"
 
-#: panels/usage/cc-usage-panel.ui:51
+#: panels/usage/cc-usage-panel.ui:50
 msgid "File H_istory"
 msgstr "文件历史(_I)"
 
-#: panels/usage/cc-usage-panel.ui:72
+#: panels/usage/cc-usage-panel.ui:71
 msgid "File _History Duration"
 msgstr "文件历史持续时间(_H)"
 
-#: panels/usage/cc-usage-panel.ui:108
+#: panels/usage/cc-usage-panel.ui:107
 msgid "_Clear History…"
 msgstr "清理历史(_C)…"
 
-#: panels/usage/cc-usage-panel.ui:123
+#: panels/usage/cc-usage-panel.ui:122
 msgid "Trash & Temporary Files"
 msgstr "回收站及临时文件"
 
-#: panels/usage/cc-usage-panel.ui:132
+#: panels/usage/cc-usage-panel.ui:131
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -6930,106 +6893,106 @@ msgstr ""
 "回收站和临时文件有时可能包含个人信息或敏感信息。自动删除它们可以帮助保护隐"
 "私。"
 
-#: panels/usage/cc-usage-panel.ui:147
+#: panels/usage/cc-usage-panel.ui:146
 msgid "Automatically Delete _Trash Content"
 msgstr "自动清空回收站(_T)"
 
-#: panels/usage/cc-usage-panel.ui:160
+#: panels/usage/cc-usage-panel.ui:159
 msgid "Automatically Delete Temporary _Files"
 msgstr "自动清理临时文件(_F)"
 
-#: panels/usage/cc-usage-panel.ui:181
+#: panels/usage/cc-usage-panel.ui:180
 msgid "Automatically Delete _Period"
 msgstr "自动清空周期(_P)"
 
-#: panels/usage/cc-usage-panel.ui:218
+#: panels/usage/cc-usage-panel.ui:217
 msgid "_Empty Trash…"
 msgstr "清空回收站(_E)…"
 
-#: panels/usage/cc-usage-panel.ui:229
+#: panels/usage/cc-usage-panel.ui:228
 msgid "_Delete Temporary Files…"
 msgstr "清除临时文件(_D)…"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:257
+#: panels/usage/cc-usage-panel.ui:256
 msgctxt "purge_files"
 msgid "1 hour"
 msgstr "1 小时"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:261
+#: panels/usage/cc-usage-panel.ui:260
 msgctxt "purge_files"
 msgid "1 day"
 msgstr "1 天"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:265
+#: panels/usage/cc-usage-panel.ui:264
 msgctxt "purge_files"
 msgid "2 days"
 msgstr "2 天"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:269
+#: panels/usage/cc-usage-panel.ui:268
 msgctxt "purge_files"
 msgid "3 days"
 msgstr "3 天"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:273
+#: panels/usage/cc-usage-panel.ui:272
 msgctxt "purge_files"
 msgid "4 days"
 msgstr "4 天"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:277
+#: panels/usage/cc-usage-panel.ui:276
 msgctxt "purge_files"
 msgid "5 days"
 msgstr "5 天"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:281
+#: panels/usage/cc-usage-panel.ui:280
 msgctxt "purge_files"
 msgid "6 days"
 msgstr "6 天"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:285
+#: panels/usage/cc-usage-panel.ui:284
 msgctxt "purge_files"
 msgid "7 days"
 msgstr "7 天"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:289
+#: panels/usage/cc-usage-panel.ui:288
 msgctxt "purge_files"
 msgid "14 days"
 msgstr "14 天"
 
 #. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:293
+#: panels/usage/cc-usage-panel.ui:292
 msgctxt "purge_files"
 msgid "30 days"
 msgstr "30 天"
 
 #. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:308
+#: panels/usage/cc-usage-panel.ui:307
 msgctxt "retain_history"
 msgid "1 day"
 msgstr "1 天"
 
 #. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:312
+#: panels/usage/cc-usage-panel.ui:311
 msgctxt "retain_history"
 msgid "7 days"
 msgstr "7 天"
 
 #. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:316
+#: panels/usage/cc-usage-panel.ui:315
 msgctxt "retain_history"
 msgid "30 days"
 msgstr "30 天"
 
 #. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:320
+#: panels/usage/cc-usage-panel.ui:319
 msgctxt "retain_history"
 msgid "Forever"
 msgstr "永久"
@@ -7991,7 +7954,7 @@ msgstr "%d/%d"
 msgid "Display Mapping"
 msgstr "显示映射"
 
-#: panels/wacom/cc-wacom-panel.c:769 panels/wacom/wacom-stylus-page.ui:90
+#: panels/wacom/cc-wacom-panel.c:742 panels/wacom/wacom-stylus-page.ui:90
 msgid "Stylus"
 msgstr "触控笔"
 
@@ -8177,31 +8140,31 @@ msgstr "已拒绝"
 msgid "Modem Details"
 msgstr "调制解调器详细信息"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:30
+#: panels/wwan/cc-wwan-details-dialog.ui:16
 msgid "Modem Status"
 msgstr "调制解调器状态"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:48
+#: panels/wwan/cc-wwan-details-dialog.ui:25
 msgid "Carrier"
 msgstr "运营商"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:72
+#: panels/wwan/cc-wwan-details-dialog.ui:49
 msgid "Network Type"
 msgstr "网络类型"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:120
+#: panels/wwan/cc-wwan-details-dialog.ui:97
 msgid "Network Status"
 msgstr "网络状态"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:145
+#: panels/wwan/cc-wwan-details-dialog.ui:122
 msgid "Own Number"
 msgstr "所有号码"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:170
+#: panels/wwan/cc-wwan-details-dialog.ui:151
 msgid "Device Details"
 msgstr "设备详细信息"
 
-#: panels/wwan/cc-wwan-details-dialog.ui:237
+#: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "固件版本"
 
@@ -8332,59 +8295,59 @@ msgstr "PIN 码应为 4 到 8 位数字"
 msgid "Unlocking…"
 msgstr "正在解锁……"
 
-#: panels/wwan/cc-wwan-device-page.ui:35
+#: panels/wwan/cc-wwan-device-page.ui:18
 msgid "No SIM"
 msgstr "无 SIM 卡"
 
-#: panels/wwan/cc-wwan-device-page.ui:45
+#: panels/wwan/cc-wwan-device-page.ui:19
 msgid "Insert a SIM card to use this modem"
 msgstr "插入 SIM 卡以使用该调制解调器"
 
-#: panels/wwan/cc-wwan-device-page.ui:78
+#: panels/wwan/cc-wwan-device-page.ui:33
 msgid "SIM Locked"
 msgstr "SIM 卡已锁定"
 
-#: panels/wwan/cc-wwan-device-page.ui:136
+#: panels/wwan/cc-wwan-device-page.ui:77
 msgid "_Mobile Data"
 msgstr "移动数据(_M)"
 
-#: panels/wwan/cc-wwan-device-page.ui:137
+#: panels/wwan/cc-wwan-device-page.ui:78
 msgid "Access data using mobile network"
 msgstr "使用移动网络访问数据"
 
-#: panels/wwan/cc-wwan-device-page.ui:147
+#: panels/wwan/cc-wwan-device-page.ui:88
 msgid "_Data Roaming"
 msgstr "数据漫游(_D)"
 
-#: panels/wwan/cc-wwan-device-page.ui:148
+#: panels/wwan/cc-wwan-device-page.ui:89
 msgid "Use mobile data when roaming"
 msgstr "漫游时使用移动数据"
 
-#: panels/wwan/cc-wwan-device-page.ui:169
+#: panels/wwan/cc-wwan-device-page.ui:115
 msgid "_Network Mode"
 msgstr "网络模式(_N)"
 
-#: panels/wwan/cc-wwan-device-page.ui:176
+#: panels/wwan/cc-wwan-device-page.ui:122
 msgid "N_etwork"
 msgstr "网络(_E)"
 
-#: panels/wwan/cc-wwan-device-page.ui:186
+#: panels/wwan/cc-wwan-device-page.ui:132
 msgid "Advanced"
 msgstr "高级"
 
-#: panels/wwan/cc-wwan-device-page.ui:208
+#: panels/wwan/cc-wwan-device-page.ui:146
 msgid "_Access Point Names"
 msgstr "接入点名称"
 
-#: panels/wwan/cc-wwan-device-page.ui:217
+#: panels/wwan/cc-wwan-device-page.ui:155
 msgid "_SIM Lock"
 msgstr "SIM 锁(_S)"
 
-#: panels/wwan/cc-wwan-device-page.ui:218
+#: panels/wwan/cc-wwan-device-page.ui:156
 msgid "Lock SIM with PIN"
 msgstr "使用 PIN 锁定 SIM"
 
-#: panels/wwan/cc-wwan-device-page.ui:227
+#: panels/wwan/cc-wwan-device-page.ui:165
 msgid "M_odem Details"
 msgstr "调制解调器详细信息(_O)"
 
@@ -8476,13 +8439,13 @@ msgstr "未知错误"
 msgid "Network Mode"
 msgstr "网络模式"
 
-#: panels/wwan/cc-wwan-mode-dialog.ui:36
+#: panels/wwan/cc-wwan-mode-dialog.ui:39
 #: panels/wwan/cc-wwan-network-dialog.ui:146
 #: panels/wwan/cc-wwan-sim-lock-dialog.c:229
 msgid "_Set"
 msgstr "设置(_S)"
 
-#: panels/wwan/cc-wwan-network-dialog.ui:41 panels/wwan/cc-wwan-panel.ui:32
+#: panels/wwan/cc-wwan-network-dialog.ui:41 panels/wwan/cc-wwan-panel.ui:41
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:90
 msgid "Close"
 msgstr "关闭"
@@ -8504,33 +8467,33 @@ msgstr "刷新网络提供商"
 msgid "SIM %d"
 msgstr "SIM %d"
 
-#: panels/wwan/cc-wwan-panel.ui:85
+#: panels/wwan/cc-wwan-panel.ui:10
+msgid "Enable Mobile Network"
+msgstr "启用移动网络"
+
+#: panels/wwan/cc-wwan-panel.ui:94
 msgid "No WWAN Adapter Found"
 msgstr "未找到 WWAN 适配器"
 
-#: panels/wwan/cc-wwan-panel.ui:95
+#: panels/wwan/cc-wwan-panel.ui:104
 msgid "Make sure you have a Wireless Wan/Cellular device"
 msgstr "请确保您拥有无线 Wan/蜂窝设备"
 
-#: panels/wwan/cc-wwan-panel.ui:136
+#: panels/wwan/cc-wwan-panel.ui:145
 msgid "Wireless Wan is disabled when airplane mode is on"
 msgstr "无线 Wan 在飞行模式下已禁用"
 
-#: panels/wwan/cc-wwan-panel.ui:144
+#: panels/wwan/cc-wwan-panel.ui:153
 msgid "_Turn off Airplane Mode"
 msgstr "关闭飞行模式(_T)"
 
-#: panels/wwan/cc-wwan-panel.ui:175
+#: panels/wwan/cc-wwan-panel.ui:184
 msgid "Data Connection"
 msgstr "数据连接"
 
-#: panels/wwan/cc-wwan-panel.ui:176
+#: panels/wwan/cc-wwan-panel.ui:185
 msgid "SIM card used for internet"
 msgstr "用于互联网的 SIM 卡"
-
-#: panels/wwan/cc-wwan-panel.ui:227
-msgid "Enable Mobile Network"
-msgstr "启用移动网络"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:9
 msgid "SIM Lock"
@@ -8618,27 +8581,27 @@ msgstr "要显示的面板"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[面板] [参数…]"
 
-#: shell/cc-panel-list.ui:39 shell/cc-window.c:300
+#: shell/cc-panel-list.ui:39 shell/cc-window.c:242
 msgid "Privacy"
 msgstr "隐私"
 
-#: shell/cc-panel-loader.c:299
+#: shell/cc-panel-loader.c:301
 msgid "Available panels:"
 msgstr "可用面板："
 
-#: shell/cc-window.ui:32
+#: shell/cc-window.ui:30
 msgid "All Settings"
 msgstr "全部设置"
 
-#: shell/cc-window.ui:59
+#: shell/cc-window.ui:54
 msgid "Primary Menu"
 msgstr "主菜单"
 
-#: shell/cc-window.ui:199
+#: shell/cc-window.ui:152
 msgid "Warning: Development Version"
 msgstr "警告：开发版本"
 
-#: shell/cc-window.ui:200
+#: shell/cc-window.ui:153
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -8647,7 +8610,7 @@ msgstr ""
 "该版本的 GNOME 设置仅适用于开发工作。您可能会遇到不正常的系统行为、数据丢失及"
 "其他未预期的问题。 "
 
-#: shell/cc-window.ui:211
+#: shell/cc-window.ui:164
 msgid "Help"
 msgstr "帮助"
 
@@ -8686,30 +8649,30 @@ msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "取消搜索"
 
-#: shell/org.gnome.Settings.gschema.xml:5
+#: shell/org.gnome.ControlCenter.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
 msgstr "要打开最后面板的身份"
 
-#: shell/org.gnome.Settings.gschema.xml:6
+#: shell/org.gnome.ControlCenter.gschema.xml:6
 msgid ""
 "The identifier for the last Settings panel to be opened. Unrecognised values "
 "will be ignored and the first panel in the list selected."
 msgstr "要打开最近面板的身份。未识别的值将被忽略，然后选中第一个面板。"
 
-#: shell/org.gnome.Settings.gschema.xml:13
+#: shell/org.gnome.ControlCenter.gschema.xml:13
 msgid "Show warning when running a development build of Settings"
 msgstr "运行开发版本的 GNOME 设置时显示警告"
 
-#: shell/org.gnome.Settings.gschema.xml:14
+#: shell/org.gnome.ControlCenter.gschema.xml:14
 msgid ""
 "Whether Settings should show a warning when running a development build."
 msgstr "是否在运行开发版本的 GNOME 设置时显示警告。"
 
-#: shell/org.gnome.Settings.gschema.xml:20
+#: shell/org.gnome.ControlCenter.gschema.xml:20
 msgid "Initial state of the window"
 msgstr "窗口初始状态"
 
-#: shell/org.gnome.Settings.gschema.xml:21
+#: shell/org.gnome.ControlCenter.gschema.xml:21
 msgid ""
 "A tuple containing the initial width, height and maximized state of the "
 "application window."
@@ -8734,6 +8697,134 @@ msgstr[0] "%u 路输入"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "系统声音"
+
+#~ msgid "Web Links"
+#~ msgstr "网络链接"
+
+#~ msgid "Git Links"
+#~ msgstr "Git 链接"
+
+#~ msgid "%s Links"
+#~ msgstr "%s 链接"
+
+#~ msgid "Unset"
+#~ msgstr "移除关联"
+
+#~ msgid "Links"
+#~ msgstr "链接"
+
+#~ msgid "Hypertext Files"
+#~ msgstr "超文本文件"
+
+#~ msgid "Text Files"
+#~ msgstr "文本文件"
+
+#~ msgid "Image Files"
+#~ msgstr "图像文件"
+
+#~ msgid "Font Files"
+#~ msgstr "字体文件"
+
+#~ msgid "Archive Files"
+#~ msgstr "归档文件"
+
+#~ msgid "Package Files"
+#~ msgstr "软件包文件"
+
+#~ msgid "Audio Files"
+#~ msgstr "音频文件"
+
+#~ msgid "Video Files"
+#~ msgstr "视频文件"
+
+#~ msgid "Other Files"
+#~ msgstr "其它文件"
+
+#~ msgid "Permissions & Access"
+#~ msgstr "权限和访问"
+
+#~ msgid ""
+#~ "Data and services that this app has asked for access to and permissions "
+#~ "that it requires."
+#~ msgstr "应用要求访问的数据和服务以及它需要的权限。"
+
+#~ msgid "Cannot be changed"
+#~ msgstr "无法被更改"
+
+#~ msgid ""
+#~ "Individual permissions for applications can be reviewed in the <a href="
+#~ "\"privacy\">Privacy</a> Settings."
+#~ msgstr "应用程序的各个权限可以在 <a href=\"privacy\">隐私</a> 设置中查看。"
+
+# 左撇子有歧视色彩。
+#~ msgid "Integration"
+#~ msgstr "集成"
+
+#~ msgid "Set Desktop Background"
+#~ msgstr "设置桌面背景"
+
+#~ msgid "Default Handlers"
+#~ msgstr "默认处理程序"
+
+#~ msgid "Types of files and links that this application opens."
+#~ msgstr "应用程序打开的文件和链接类型。"
+
+#~ msgid "Usage"
+#~ msgstr "占用"
+
+#~ msgid "How much resources this application is using."
+#~ msgstr "应用程序使用了多少资源。"
+
+#~ msgid "Open in Software"
+#~ msgstr "在“软件”中打开"
+
+#~ msgid "Allow the applications below to use your camera."
+#~ msgstr "允许以下应用程序使用您的相机。"
+
+#~ msgid "Display Mode"
+#~ msgstr "显示模式"
+
+#~ msgid "Join Displays"
+#~ msgstr "加入显示器"
+
+#~ msgid "Single Display"
+#~ msgstr "单显示器"
+
+#~ msgid ""
+#~ "Drag displays to match your physical display setup. Select a display to "
+#~ "change its settings."
+#~ msgstr "拖动显示器来匹配您的物理显示器布局。选择显示器可以改变其设置。"
+
+#~ msgid "Active Display"
+#~ msgstr "使用中的显示器"
+
+#~ msgid "Display Configuration"
+#~ msgstr "显示配置"
+
+#~ msgid ""
+#~ "Location services allow applications to know your location. Using Wi-Fi "
+#~ "and mobile broadband increases accuracy."
+#~ msgstr ""
+#~ "定位服务允许应用得知您的地理定位。使用 Wi-Fi 和移动宽带可以提高精确度。"
+
+#~ msgid ""
+#~ "Uses Mozilla Location Service: <a href='https://location.services.mozilla."
+#~ "com/privacy'>Privacy Policy</a>"
+#~ msgstr ""
+#~ "使用 Mozilla 定位服务：<a href='https://location.services.mozilla.com/"
+#~ "privacy'>隐私策略</a>"
+
+#~ msgid "Allow the applications below to determine your location."
+#~ msgstr "允许以下应用程序确定您的位置。"
+
+#~ msgid "Lap detected: performance mode unavailable"
+#~ msgstr "检测到膝上使用：性能模式不可用"
+
+#~ msgid "High hardware temperature: performance mode unavailable"
+#~ msgstr "硬件温度过高：性能模式不可用"
+
+#~ msgid "Performance mode unavailable"
+#~ msgstr "性能模式不可用"
 
 #~ msgid "Sound Keys"
 #~ msgstr "发声键"
@@ -8967,9 +9058,6 @@ msgstr "系统声音"
 
 #~ msgid "Change location settings and providers"
 #~ msgstr "更改位置设置和提供者"
-
-#~ msgid "Access your location"
-#~ msgstr "读取位置"
 
 #~ msgid "Read system and application logs"
 #~ msgstr "读取系统和应用程序日志"
@@ -9419,9 +9507,6 @@ msgstr "系统声音"
 #~ msgid "Span"
 #~ msgstr "适合宽度"
 
-#~ msgid "Wallpapers"
-#~ msgstr "壁纸"
-
 #~ msgid "Colors"
 #~ msgstr "色彩"
 
@@ -9448,10 +9533,6 @@ msgstr "系统声音"
 
 #~ msgid "application-x-executable"
 #~ msgstr "application-x-executable"
-
-# 图标条目，保留无需翻译。
-#~ msgid "preferences-desktop-wallpaper"
-#~ msgstr "preferences-desktop-wallpaper"
 
 #~ msgid "bluetooth"
 #~ msgstr "bluetooth"
@@ -9488,9 +9569,6 @@ msgstr "系统声音"
 
 #~ msgid "network-wireless"
 #~ msgstr "network-wireless"
-
-#~ msgid "preferences-system-notifications"
-#~ msgstr "preferences-system-notifications"
 
 #~ msgid "goa-panel"
 #~ msgstr "goa-panel"
