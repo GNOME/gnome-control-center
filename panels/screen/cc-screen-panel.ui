@@ -102,6 +102,27 @@
 
           </object>
         </child>
+
+        <child>
+          <object class="AdwPreferencesGroup" id="screen_privacy_group">
+            <property name="title" translatable="yes">Screen Privacy</property>
+
+            <!-- Privacy Screen row -->
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Restrict Viewing Angle</property>
+                <property name="activatable-widget">privacy_screen_switch</property>
+                <property name="use-underline">true</property>
+                <child>
+                  <object class="GtkSwitch" id="privacy_screen_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+
       </object>
     </child>
   </template>

@@ -2,6 +2,7 @@
  *
  * Copyright (C) 2018 Red Hat, Inc
  * Copyright (C) 2020 Collabora Ltd.
+ * Copyright (C) 2021-2022 Canonical Ltd.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,13 +25,18 @@
 #include "cc-screen-resources.h"
 #include "cc-util.h"
 
+#include "panels/display/cc-display-config-manager-dbus.h"
+
 #include <adwaita.h>
+
 #include <gio/gdesktopappinfo.h>
 #include <glib/gi18n.h>
 
 struct _CcScreenPanel
 {
   CcPanel        parent_instance;
+
+  CcDisplayConfigManager *display_config_manager;
 
   GSettings     *lock_settings;
   GSettings     *notification_settings;
@@ -39,13 +45,15 @@ struct _CcScreenPanel
 
   GCancellable  *cancellable;
 
-  AdwComboRow   *blank_screen_row;
-  AdwComboRow   *lock_after_row;
-  GDBusProxy    *usb_proxy;
-  GtkListBoxRow *usb_protection_row;
-  GtkSwitch     *automatic_screen_lock_switch;
-  GtkSwitch     *show_notifications_switch;
-  GtkSwitch     *usb_protection_switch;
+  AdwComboRow         *blank_screen_row;
+  AdwComboRow         *lock_after_row;
+  AdwPreferencesGroup *screen_privacy_group;
+  GDBusProxy          *usb_proxy;
+  GtkListBoxRow       *usb_protection_row;
+  GtkSwitch           *automatic_screen_lock_switch;
+  GtkSwitch           *privacy_screen_switch;
+  GtkSwitch           *show_notifications_switch;
+  GtkSwitch           *usb_protection_switch;
 };
 
 CC_PANEL_REGISTER (CcScreenPanel, cc_screen_panel)
@@ -242,6 +250,7 @@ cc_screen_panel_finalize (GObject *object)
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
+  g_clear_object (&self->display_config_manager);
   g_clear_object (&self->lock_settings);
   g_clear_object (&self->notification_settings);
   g_clear_object (&self->session_settings);
@@ -265,6 +274,8 @@ cc_screen_panel_class_init (CcScreenPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, automatic_screen_lock_switch);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, blank_screen_row);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, lock_after_row);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, privacy_screen_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, screen_privacy_group);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, show_notifications_switch);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, usb_protection_row);
   gtk_widget_class_bind_template_child (widget_class, CcScreenPanel, usb_protection_switch);
@@ -273,6 +284,38 @@ cc_screen_panel_class_init (CcScreenPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_blank_screen_delay_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_lock_combo_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, screen_delay_name_cb);
+}
+
+static void
+update_display_config (CcScreenPanel *self)
+{
+  g_autoptr (CcDisplayConfig) config = NULL;
+  gboolean any_privacy_screen = FALSE;
+  gboolean any_configurable_privacy_screen = FALSE;
+  GList *monitors;
+  GList *l;
+
+  config = cc_display_config_manager_get_current (self->display_config_manager);
+  monitors = config ? cc_display_config_get_monitors (config) : NULL;
+
+  for (l = monitors; l; l = l->next)
+    {
+      CcDisplayMonitor *monitor = CC_DISPLAY_MONITOR (l->data);
+      CcDisplayMonitorPrivacy privacy = cc_display_monitor_get_privacy (monitor);
+
+      if (privacy != CC_DISPLAY_MONITOR_PRIVACY_UNSUPPORTED)
+        {
+          any_privacy_screen = TRUE;
+
+          if (!(privacy & CC_DISPLAY_MONITOR_PRIVACY_LOCKED))
+            any_configurable_privacy_screen = TRUE;
+        }
+    }
+
+  gtk_widget_set_visible (GTK_WIDGET (self->screen_privacy_group),
+                          any_privacy_screen);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->privacy_screen_switch),
+                            any_configurable_privacy_screen);
 }
 
 static void
@@ -317,6 +360,18 @@ cc_screen_panel_init (CcScreenPanel *self)
   g_settings_bind (self->privacy_settings,
                    "usb-protection",
                    self->usb_protection_switch,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+
+  self->display_config_manager = cc_display_config_manager_dbus_new ();
+  g_signal_connect_object (self->display_config_manager, "changed",
+                           G_CALLBACK (update_display_config), self,
+                           G_CONNECT_SWAPPED);
+
+  update_display_config (self);
+  g_settings_bind (self->privacy_settings,
+                   "privacy-screen",
+                   self->privacy_screen_switch,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
