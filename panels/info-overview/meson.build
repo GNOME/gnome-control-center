@@ -40,7 +40,8 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [
   dependency('udisks2', version: '>= 2.8.2'),
-  dependency('libgtop-2.0')
+  dependency('libgtop-2.0'),
+  gudev_dep,
 ]
 
 info_panel_lib = static_library(

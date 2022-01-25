@@ -38,6 +38,7 @@
 #include <glibtop/mem.h>
 #include <glibtop/sysinfo.h>
 #include <udisks/udisks.h>
+#include <gudev/gudev.h>
 
 #include <gdk/gdk.h>
 
@@ -724,12 +725,36 @@ get_windowing_system (void)
 }
 
 static guint64
-get_ram_size (void)
+get_ram_size_libgtop (void)
 {
   glibtop_mem mem;
 
   glibtop_get_mem (&mem);
   return mem.total;
+}
+
+static guint64
+get_ram_size_dmi (void)
+{
+  g_autoptr(GUdevClient) client = NULL;
+  g_autoptr(GUdevDevice) dmi = NULL;
+  const gchar * const subsystems[] = {"dmi", NULL };
+  guint64 ram_total = 0;
+  guint64 num_ram;
+  guint i;
+
+  client = g_udev_client_new (subsystems);
+  dmi = g_udev_client_query_by_sysfs_path (client, "/sys/devices/virtual/dmi/id");
+  if (!dmi)
+    return 0;
+  num_ram = g_udev_device_get_property_as_uint64 (dmi, "MEMORY_ARRAY_NUM_DEVICES");
+  for (i = 0; i < num_ram ; i++) {
+    g_autofree char *prop = NULL;
+
+    prop = g_strdup_printf ("MEMORY_DEVICE_%d_SIZE", i);
+    ram_total += g_udev_device_get_property_as_uint64 (dmi, prop);
+  }
+  return ram_total;
 }
 
 static void
@@ -751,7 +776,9 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   get_hardware_model (self);
 
-  ram_size = get_ram_size ();
+  ram_size = get_ram_size_dmi ();
+  if (ram_size == 0)
+    ram_size = get_ram_size_libgtop ();
   memory_text = g_format_size_full (ram_size, G_FORMAT_SIZE_IEC_UNITS);
   cc_list_row_set_secondary_label (self->memory_row, memory_text);
 
