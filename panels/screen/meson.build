@@ -16,13 +16,13 @@ i18n.merge_file(
   install_dir: control_center_desktopdir
 )
 
-sources = files('cc-lock-panel.c')
+sources = files('cc-screen-panel.c')
 
-resource_data = files('cc-lock-panel.ui')
+resource_data = files('cc-screen-panel.ui')
 
 sources += gnome.mkenums_simple(
-  'cc-lock-panel-enums',
-  sources: ['cc-lock-panel.h'],
+  'cc-screen-panel-enums',
+  sources: ['cc-screen-panel.h'],
 )
 
 sources += gnome.compile_resources(

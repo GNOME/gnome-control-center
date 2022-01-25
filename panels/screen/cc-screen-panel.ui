@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcLockPanel" parent="CcPanel">
+  <template class="CcScreenPanel" parent="CcPanel">
     <child type="content">
       <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Screen Lock</property>
             <property name="description" translatable="yes">Automatically locking the screen prevents others from accessing the computer while you're away.</property>
 
             <!-- Blank Screen Delay row -->
@@ -17,7 +18,7 @@
                 <signal name="notify::selected-item" handler="on_blank_screen_delay_changed_cb"/>
                 <property name="model">
                   <object class="AdwEnumListModel">
-                    <property name="enum-type">CcLockPanelBlankScreenDelay</property>
+                    <property name="enum-type">CcScreenPanelBlankScreenDelay</property>
                   </object>
                 </property>
                 <property name="expression">
@@ -53,7 +54,7 @@
                 <signal name="notify::selected-item" handler="on_lock_combo_changed_cb"/>
                 <property name="model">
                   <object class="AdwEnumListModel">
-                    <property name="enum-type">CcLockPanelLockAfter</property>
+                    <property name="enum-type">CcScreenPanelLockAfter</property>
                   </object>
                 </property>
                 <property name="expression">

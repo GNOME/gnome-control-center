@@ -1,4 +1,4 @@
 install_data(
-  'scalable/org.gnome.Settings-screen-lock-symbolic.svg',
+  'scalable/org.gnome.Settings-screen-symbolic.svg',
   install_dir: join_paths(control_center_icondir, 'hicolor', 'scalable', 'apps')
 )
