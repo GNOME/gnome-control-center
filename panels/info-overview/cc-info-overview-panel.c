@@ -723,11 +723,20 @@ get_windowing_system (void)
   return C_("Windowing system (Wayland, X11, or Unknown)", "Unknown");
 }
 
+static guint64
+get_ram_size (void)
+{
+  glibtop_mem mem;
+
+  glibtop_get_mem (&mem);
+  return mem.total;
+}
+
 static void
 info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 {
   g_autofree gchar *gnome_version = NULL;
-  glibtop_mem mem;
+  guint64 ram_size;
   const glibtop_sysinfo *info;
   g_autofree char *memory_text = NULL;
   g_autofree char *cpu_text = NULL;
@@ -742,8 +751,8 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   get_hardware_model (self);
 
-  glibtop_get_mem (&mem);
-  memory_text = g_format_size_full (mem.total, G_FORMAT_SIZE_IEC_UNITS);
+  ram_size = get_ram_size ();
+  memory_text = g_format_size_full (ram_size, G_FORMAT_SIZE_IEC_UNITS);
   cc_list_row_set_secondary_label (self->memory_row, memory_text);
 
   info = glibtop_get_sysinfo ();
