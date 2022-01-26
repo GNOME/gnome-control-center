@@ -45,13 +45,11 @@
 
 #include "cc-add-user-dialog.h"
 #include "cc-avatar-chooser.h"
-#include "cc-carousel.h"
 #include "cc-language-chooser.h"
 #include "cc-login-history-dialog.h"
 #include "cc-password-dialog.h"
 #include "cc-realm-manager.h"
 #include "cc-user-accounts-resources.h"
-#include "cc-user-image.h"
 #include "cc-fingerprint-manager.h"
 #include "cc-fingerprint-dialog.h"
 #include "user-utils.h"
@@ -59,7 +57,6 @@
 #include "cc-common-language.h"
 #include "cc-permission-infobar.h"
 #include "cc-util.h"
-#include "list-box-helper.h"
 
 #define USER_ACCOUNTS_PERMISSION "org.gnome.controlcenter.user-accounts.administration"
 
@@ -69,16 +66,13 @@ struct _CcUserPanel {
         ActUserManager *um;
         GSettings *login_screen_settings;
 
-        GtkBox          *accounts_box;
         GtkBox          *account_settings_box;
-        GtkListBox      *account_settings_listbox;
-        GtkListBox      *authentication_and_login_listbox;
         GtkListBoxRow   *account_type_row;
         GtkSwitch       *account_type_switch;
-        GtkButton       *add_user_button;
+        GtkWidget       *add_user_button;
         GtkListBoxRow   *autologin_row;
         GtkSwitch       *autologin_switch;
-        CcCarousel      *carousel;
+        GtkButton       *back_button;
         GtkLabel        *fingerprint_state_label;
         GtkListBoxRow   *fingerprint_row;
         GtkStack        *full_name_stack;
@@ -89,39 +83,37 @@ struct _CcUserPanel {
         GtkListBoxRow   *language_row;
         GtkLabel        *last_login_button_label;
         GtkListBoxRow   *last_login_row;
-        GtkBox          *no_users_box;
+        GtkWidget       *no_users_box;
         GtkRevealer     *notification_revealer;
+        AdwPreferencesGroup *other_users;
+        GtkListBox      *other_users_listbox;
+        AdwPreferencesRow *other_users_row;
         GtkLabel        *password_button_label;
 #ifdef HAVE_MALCONTENT
         GtkLabel        *parental_controls_button_label;
-        GtkImage        *parental_control_go_next;
         GtkListBoxRow   *parental_controls_row;
 #endif
         GtkListBoxRow   *password_row;
         CcPermissionInfobar *permission_infobar;
         GtkButton       *remove_user_button;
         GtkStack        *stack;
-        GtkToggleButton *user_icon_button;
-        CcUserImage     *user_icon_image;
-        CcUserImage     *user_icon_image2;
-        GtkStack        *user_icon_stack;
+        AdwAvatar       *user_avatar;
+        GtkMenuButton   *user_avatar_edit_button;
         GtkOverlay      *users_overlay;
 
         ActUser *selected_user;
         GPermission *permission;
         CcLanguageChooser *language_chooser;
+        GListStore *other_users_model;
 
         CcAvatarChooser *avatar_chooser;
 
         CcFingerprintManager *fingerprint_manager;
-
-        gint other_accounts;
 };
 
 CC_PANEL_REGISTER (CcUserPanel, cc_user_panel)
 
 static void show_restart_notification (CcUserPanel *self, const gchar *locale);
-static gint user_compare (gconstpointer i, gconstpointer u);
 
 typedef struct {
         CcUserPanel *self;
@@ -147,7 +139,7 @@ show_error_dialog (CcUserPanel *self,
 {
         GtkWidget *dialog;
 
-        dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+        dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
                                          GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT | GTK_DIALOG_USE_HEADER_BAR,
                                          GTK_MESSAGE_ERROR,
                                          GTK_BUTTONS_CLOSE,
@@ -159,14 +151,38 @@ show_error_dialog (CcUserPanel *self,
                                                           "%s", error->message);
         }
 
-        g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+        g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
         gtk_window_present (GTK_WINDOW (dialog));
 }
+
+static void show_user (ActUser *user, CcUserPanel *self);
 
 static ActUser *
 get_selected_user (CcUserPanel *self)
 {
         return self->selected_user;
+}
+
+static void
+set_selected_user (CcUserPanel  *self,
+                   AdwActionRow *row)
+{
+        uid_t uid;
+ 
+        uid = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "uid"));
+        g_set_object (&self->selected_user,
+                      act_user_manager_get_user_by_id (self->um, uid));
+        show_user (self->selected_user, self);
+}
+
+static void
+show_current_user (CcUserPanel *self)
+{
+        ActUser *user;
+
+        user = act_user_manager_get_user_by_id (self->um, getuid ()); 
+        if (user != NULL)
+            show_user (user, self);
 }
 
 static const gchar *
@@ -181,90 +197,26 @@ get_real_or_user_name (ActUser *user)
   return name;
 }
 
-static void show_user (ActUser *user, CcUserPanel *self);
-
-static void
-set_selected_user (CcUserPanel *self, CcCarouselItem *item)
-{
-        uid_t uid;
-
-        uid = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "uid"));
-        g_set_object (&self->selected_user,
-                      act_user_manager_get_user_by_id (self->um, uid));
-
-        if (self->selected_user != NULL) {
-                show_user (self->selected_user, self);
-        }
-}
-
 static GtkWidget *
-create_carousel_entry (CcUserPanel *self, ActUser *user)
+create_user_row (gpointer item,
+                 gpointer user_data)
 {
-        GtkWidget *box, *widget;
-        g_autofree gchar *label = NULL;
-        g_autofree gchar *subtitle_label = NULL;
+        ActUser *user = ACT_USER (item);
+        GtkWidget *row, *user_image;
 
-        box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
+        row = adw_action_row_new ();
+        g_object_set_data (G_OBJECT (row), "uid", GINT_TO_POINTER (act_user_get_uid (user)));
+        gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE); 
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
+                                       get_real_or_user_name (user));
+        user_image = adw_avatar_new (48, get_real_or_user_name (user), TRUE);
+        adw_action_row_add_prefix (ADW_ACTION_ROW (row), user_image);
 
-        widget = cc_user_image_new ();
-        cc_user_image_set_user (CC_USER_IMAGE (widget), user);
-        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, FALSE, 0);
-
-        label = g_markup_printf_escaped ("<b>%s</b>",
-                                         get_real_or_user_name (user));
-        widget = gtk_label_new (label);
-        gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-        gtk_label_set_ellipsize (GTK_LABEL (widget), PANGO_ELLIPSIZE_END);
-        gtk_widget_set_margin_top (widget, 5);
-        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
-
-        if (act_user_get_uid (user) == getuid ())
-                subtitle_label = g_strdup_printf ("<small>%s</small>", _("Your account"));
-        else
-                subtitle_label = g_strdup (" ");
-
-        widget = gtk_label_new (subtitle_label);
-        gtk_label_set_use_markup (GTK_LABEL (widget), TRUE);
-
-        gtk_box_pack_start (GTK_BOX (box), widget, FALSE, TRUE, 0);
-        gtk_style_context_add_class (gtk_widget_get_style_context (widget),
-                                     "dim-label");
-
-        return box;
-}
-
-static void
-user_added (CcUserPanel *self, ActUser *user)
-{
-        GtkWidget *item, *widget;
-        gboolean show_carousel;
-
-        if (act_user_is_system_account (user)) {
-                return;
-        }
-
-        g_debug ("user added: %d %s\n", act_user_get_uid (user), get_real_or_user_name (user));
-
-        widget = create_carousel_entry (self, user);
-        item = cc_carousel_item_new ();
-        gtk_container_add (GTK_CONTAINER (item), widget);
-
-        g_object_set_data (G_OBJECT (item), "uid", GINT_TO_POINTER (act_user_get_uid (user)));
-        gtk_container_add (GTK_CONTAINER (self->carousel), item);
-
-        if (act_user_get_uid (user) != getuid ()) {
-                self->other_accounts++;
-        }
-
-        /* Show heading for other accounts if new one have been added. */
-        show_carousel = (self->other_accounts > 0);
-        gtk_revealer_set_reveal_child (GTK_REVEALER (self->carousel), show_carousel);
-
-        gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->users_overlay));
+        return row;
 }
 
 static gint
-sort_users (gconstpointer a, gconstpointer b)
+sort_users (gconstpointer a, gconstpointer b, gpointer user_data)
 {
         ActUser *ua, *ub;
 
@@ -290,112 +242,62 @@ sort_users (gconstpointer a, gconstpointer b)
 }
 
 static void
-reload_users (CcUserPanel *self, ActUser *selected_user)
+user_changed (CcUserPanel *self, ActUser *user)
 {
-        ActUser *user;
-        GSList *list, *l;
-        CcCarouselItem *item = NULL;
-        GtkSettings *settings;
-        gboolean animations;
-        guint users_count;
-#ifdef HAVE_MALCONTENT
-        g_autofree gchar *malcontent_control_path = NULL;
-#endif
+        GSList *user_list, *l;
 
-        settings = gtk_widget_get_settings (GTK_WIDGET (self->carousel));
+        g_list_store_remove_all (self->other_users_model);
+        user_list = act_user_manager_list_users (self->um);
+        for (l = user_list; l; l = l->next) {
+                ActUser *other_user = ACT_USER (l->data);
 
-        g_object_get (settings, "gtk-enable-animations", &animations, NULL);
-        g_object_set (settings, "gtk-enable-animations", FALSE, NULL);
+                if (act_user_is_system_account (other_user)) {
+                        continue;
+                }
 
-        cc_carousel_purge_items (self->carousel);
-        self->other_accounts = 0;
+                if (act_user_get_uid (other_user) == getuid ()) {
+                        continue;
+                }
 
-        list = act_user_manager_list_users (self->um);
-        users_count = g_slist_length (list);
-        g_debug ("Got %d users\n", users_count);
-
-        list = g_slist_sort (list, (GCompareFunc) sort_users);
-        for (l = list; l; l = l->next) {
-                user = l->data;
-                g_debug ("adding user %s\n", get_real_or_user_name (user));
-                user_added (self, user);
+                g_list_store_insert_sorted (self->other_users_model,
+                                            other_user,
+                                            sort_users,
+                                            self);
         }
-        g_slist_free (list);
 
-        if (cc_carousel_get_item_count (self->carousel) == 0)
-                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->no_users_box));
-        if (self->other_accounts == 0)
-                gtk_revealer_set_reveal_child (GTK_REVEALER (self->carousel), FALSE);
-
-        if (selected_user)
-                item = cc_carousel_find_item (self->carousel, selected_user, user_compare);
-        cc_carousel_select_item (self->carousel, item);
-
-        g_object_set (settings, "gtk-enable-animations", animations, NULL);
-#ifdef HAVE_MALCONTENT
-        /* Parental Controls row not to be shown for single user setups, or if
-         * malcontent-control is not available (which can happen if
-         * libmalcontent is installed but malcontent-control is not). */
-        malcontent_control_path = g_find_program_in_path ("malcontent-control");
-
-        if (malcontent_control_path == NULL) {
-                gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row), FALSE);
-        } else if (selected_user != NULL) {
-                gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row),
-                                        act_user_get_account_type (selected_user) != ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
-        } else {
-                gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row), users_count > 1);
-        }
-#endif
-}
-
-static gint
-user_compare (gconstpointer i,
-              gconstpointer u)
-{
-        CcCarouselItem *item;
-        ActUser *user;
-        gint uid_a, uid_b;
-        gint result;
-
-        item = (CcCarouselItem *) i;
-        user = ACT_USER (u);
-
-        uid_a = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (item), "uid"));
-        uid_b = act_user_get_uid (user);
-
-        result = uid_a - uid_b;
-
-        return result;
+        if (self->selected_user == user)
+                show_user (user, self);
 }
 
 static void
-user_changed (CcUserPanel *self, ActUser *user)
+on_add_user_dialog_response (CcUserPanel     *self,
+                             gint             response,
+                             CcAddUserDialog *dialog)
 {
-        reload_users (self, self->selected_user);
+        ActUser *user;
+
+        user = cc_add_user_dialog_get_user (dialog);
+        if (user != NULL) {
+                set_default_avatar (user);
+                show_user (user, self);
+        }
+
+        gtk_window_destroy (GTK_WINDOW (dialog));
 }
 
 static void
 add_user (CcUserPanel *self)
 {
         CcAddUserDialog *dialog;
-        g_autoptr(GdkPixbuf) pixbuf = NULL;
         GtkWindow *toplevel;
-        ActUser *user;
 
         dialog = cc_add_user_dialog_new (self->permission);
-        toplevel = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+        toplevel = GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self)));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), toplevel);
 
-        gtk_dialog_run (GTK_DIALOG (dialog));
-
-        user = cc_add_user_dialog_get_user (dialog);
-        if (user != NULL) {
-                set_default_avatar (user);
-                reload_users (self, user);
-        }
-
-        gtk_widget_destroy (GTK_WIDGET (dialog));
+        gtk_window_present (GTK_WINDOW (dialog));
+        g_signal_connect_object (dialog, "response", G_CALLBACK (on_add_user_dialog_response),
+                                 self, G_CONNECT_SWAPPED);
 }
 
 static void
@@ -410,6 +312,8 @@ delete_user_done (ActUserManager *manager,
                                       ACT_USER_MANAGER_ERROR_PERMISSION_DENIED))
                         show_error_dialog (self, _("Failed to delete user"), error);
         }
+
+        show_current_user (self);
 }
 
 static void
@@ -420,7 +324,7 @@ delete_user_response (CcUserPanel *self,
         ActUser *user;
         gboolean remove_files;
 
-        gtk_widget_destroy (dialog);
+        gtk_window_destroy (GTK_WINDOW (dialog));
 
         if (response_id == GTK_RESPONSE_CANCEL) {
                 return;
@@ -576,7 +480,7 @@ delete_enterprise_user_response (CcUserPanel *self,
         AsyncDeleteData *data;
         ActUser *user;
 
-        gtk_widget_destroy (dialog);
+        gtk_window_destroy (GTK_WINDOW (dialog));
 
         if (response_id != GTK_RESPONSE_ACCEPT) {
                 return;
@@ -609,16 +513,16 @@ delete_user (CcUserPanel *self)
                 return;
         }
         else if (act_user_get_uid (user) == getuid ()) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
                                                  0,
                                                  GTK_MESSAGE_INFO,
                                                  GTK_BUTTONS_CLOSE,
                                                  _("You cannot delete your own account."));
                 g_signal_connect (dialog, "response",
-                                  G_CALLBACK (gtk_widget_destroy), NULL);
+                                  G_CALLBACK (gtk_window_destroy), NULL);
         }
         else if (act_user_is_logged_in_anywhere (user)) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
                                                  0,
                                                  GTK_MESSAGE_INFO,
                                                  GTK_BUTTONS_CLOSE,
@@ -628,10 +532,10 @@ delete_user (CcUserPanel *self)
                 gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                           _("Deleting a user while they are logged in can leave the system in an inconsistent state."));
                 g_signal_connect (dialog, "response",
-                                  G_CALLBACK (gtk_widget_destroy), NULL);
+                                  G_CALLBACK (gtk_window_destroy), NULL);
         }
         else if (act_user_is_local_account (user)) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
                                                  0,
                                                  GTK_MESSAGE_QUESTION,
                                                  GTK_BUTTONS_NONE,
@@ -653,7 +557,7 @@ delete_user (CcUserPanel *self)
                                          G_CALLBACK (delete_user_response), self, G_CONNECT_SWAPPED);
         }
         else {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
                                                  0,
                                                  GTK_MESSAGE_QUESTION,
                                                  GTK_BUTTONS_NONE,
@@ -672,7 +576,7 @@ delete_user (CcUserPanel *self)
         }
 
         g_signal_connect (dialog, "close",
-                          G_CALLBACK (gtk_widget_destroy), NULL);
+                          G_CALLBACK (gtk_window_destroy), NULL);
 
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
 
@@ -815,8 +719,8 @@ is_parental_controls_enabled_for_user (ActUser *user)
         /* FIXME: should become asynchronous */
         system_bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
         if (system_bus == NULL) {
-	        g_warning ("Error getting system bus while trying to show user details: %s", error->message);
-	        return FALSE;
+            g_warning ("Error getting system bus while trying to show user details: %s", error->message);
+            return FALSE;
         }
 
         manager = mct_manager_new (system_bus);
@@ -862,6 +766,7 @@ show_user (ActUser *user, CcUserPanel *self)
 {
         g_autofree gchar *lang = NULL;
         g_autofree gchar *name = NULL;
+        const gchar *avatar_file;
         gboolean show, enable;
         ActUser *current;
 #ifdef HAVE_MALCONTENT
@@ -870,14 +775,25 @@ show_user (ActUser *user, CcUserPanel *self)
 
         self->selected_user = user;
 
-        cc_user_image_set_user (self->user_icon_image, user);
-        cc_user_image_set_user (self->user_icon_image2, user);
-
+        adw_avatar_set_text (self->user_avatar, get_real_or_user_name (user));
         cc_avatar_chooser_set_user (self->avatar_chooser, user);
+        avatar_file = act_user_get_icon_file (user);
+        if (avatar_file) {
+                g_autoptr(GdkPixbuf) pixbuf = NULL;
 
-        gtk_label_set_label (self->full_name_label, act_user_get_real_name (user));
-        gtk_entry_set_text (self->full_name_entry, act_user_get_real_name (user));
-        gtk_widget_set_tooltip_text (GTK_WIDGET (self->full_name_label), act_user_get_user_name (user));
+                pixbuf = gdk_pixbuf_new_from_file_at_size (avatar_file,
+                                                           adw_avatar_get_size (self->user_avatar),
+                                                           adw_avatar_get_size (self->user_avatar),
+                                                           NULL);
+                if (pixbuf) {
+                        adw_avatar_set_custom_image (self->user_avatar,
+                                                     GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf)));
+                }
+        }
+
+        gtk_label_set_label (self->full_name_label, get_real_or_user_name (user));
+        gtk_editable_set_text (GTK_EDITABLE (self->full_name_entry), gtk_label_get_label (self->full_name_label));
+        gtk_widget_set_tooltip_text (GTK_WIDGET (self->full_name_label), get_real_or_user_name (user));
 
         g_signal_handlers_block_by_func (self->full_name_edit_button, full_name_edit_button_toggled, self);
         gtk_stack_set_visible_child (self->full_name_stack, GTK_WIDGET (self->full_name_label));
@@ -886,10 +802,6 @@ show_user (ActUser *user, CcUserPanel *self)
 
         enable = (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
         gtk_switch_set_active (self->account_type_switch, enable);
-
-        /* Do not show the "Account Type" option when there's a single user account. */
-        show = (self->other_accounts != 0);
-        gtk_widget_set_visible (GTK_WIDGET (self->account_settings_box), show);
 
         gtk_label_set_label (self->password_button_label, get_password_mode_text (user));
         enable = act_user_is_local_account (user);
@@ -901,13 +813,11 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_switch), get_autologin_possible (user));
 
         lang = g_strdup (act_user_get_language (user));
-
         if (lang && *lang != '\0') {
                 name = gnome_get_language_from_locale (lang, NULL);
         } else {
                 name = g_strdup ("—");
         }
-
         gtk_label_set_label (self->language_button_label, name);
 
         /* Fingerprint: show when self, local, enabled, and possible */
@@ -955,14 +865,18 @@ show_user (ActUser *user, CcUserPanel *self)
                         gtk_label_set_text (self->parental_controls_button_label, _("Disabled"));
 
                 gtk_style_context_remove_class (context, "dim-label");
-                gtk_widget_show (GTK_WIDGET (self->parental_control_go_next));
                 gtk_widget_show (GTK_WIDGET (self->parental_controls_row));
         }
 #endif
 
-        /* Language: do not show for current user */
-        show = act_user_get_uid (user) != getuid();
-        gtk_widget_set_visible (GTK_WIDGET (self->language_row), show);
+        /* Current user */
+        show = act_user_get_uid (user) == getuid();
+        gtk_widget_set_visible (GTK_WIDGET (self->account_settings_box), !show);
+        gtk_widget_set_visible (GTK_WIDGET (self->remove_user_button), !show);
+        gtk_widget_set_visible (GTK_WIDGET (self->back_button), !show);
+        gtk_widget_set_visible (GTK_WIDGET (self->other_users), show);
+        show = g_list_model_get_n_items (G_LIST_MODEL (self->other_users_model)) > 0;
+        gtk_widget_set_visible (GTK_WIDGET (self->other_users_row), show);
 
         /* Last login: show when administrator or current user */
         current = act_user_manager_get_user_by_id (self->um, getuid ());
@@ -990,7 +904,7 @@ full_name_entry_activate (CcUserPanel *self)
         ActUser *user;
 
         user = get_selected_user (self);
-        text = gtk_entry_get_text (self->full_name_entry);
+        text = gtk_editable_get_text (GTK_EDITABLE (self->full_name_entry));
         if (g_strcmp0 (text, act_user_get_real_name (user)) != 0 &&
             is_valid_name (text)) {
                 act_user_set_real_name (user, text);
@@ -1014,13 +928,14 @@ full_name_edit_button_toggled (CcUserPanel *self)
 }
 
 static gboolean
-full_name_entry_key_press_cb (CcUserPanel *self,
-                        GdkEvent    *event)
+full_name_entry_key_press_cb (GtkEventController *controller,
+                              guint               keyval,
+                              guint               keycode,
+                              GdkModifierType     state,
+                              CcUserPanel        *self)
 {
-        GdkEventKey *key = (GdkEventKey *)event;
-
-        if (key->keyval == GDK_KEY_Escape) {
-                gtk_entry_set_text (self->full_name_entry, act_user_get_real_name (self->selected_user));
+        if (keyval == GDK_KEY_Escape) {
+                gtk_editable_set_text (GTK_EDITABLE (self->full_name_entry), act_user_get_real_name (self->selected_user));
 
                 full_name_entry_activate (self);
 
@@ -1137,20 +1052,16 @@ change_language (CcUserPanel *self)
         current_language = act_user_get_language (user);
 
         if (self->language_chooser) {
-		cc_language_chooser_clear_filter (self->language_chooser);
+                cc_language_chooser_clear_filter (self->language_chooser);
                 cc_language_chooser_set_language (self->language_chooser, NULL);
         }
         else {
                 self->language_chooser = cc_language_chooser_new ();
                 gtk_window_set_transient_for (GTK_WINDOW (self->language_chooser),
-                                              GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))));
+                                              GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
 
                 g_signal_connect_object (self->language_chooser, "response",
                                          G_CALLBACK (language_response), self, G_CONNECT_SWAPPED);
-                g_signal_connect (self->language_chooser, "delete-event",
-                                  G_CALLBACK (gtk_widget_hide_on_delete), NULL);
-
-                gdk_window_set_cursor (gtk_widget_get_window (gtk_widget_get_toplevel (GTK_WIDGET (self))), NULL);
         }
 
         if (current_language && *current_language != '\0')
@@ -1168,28 +1079,27 @@ change_password (CcUserPanel *self)
         user = get_selected_user (self);
         dialog = cc_password_dialog_new (user);
 
-        parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+        parent = (GtkWindow *) gtk_widget_get_native (GTK_WIDGET (self));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
 
-        gtk_dialog_run (GTK_DIALOG (dialog));
-        gtk_widget_destroy (GTK_WIDGET (dialog));
+        gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
 change_fingerprint (CcUserPanel *self)
 {
         ActUser *user;
-        GtkWindow *top_level;
+        GtkWindow *parent;
         CcFingerprintDialog *dialog;
 
         user = get_selected_user (self);
-        top_level = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
+        parent = (GtkWindow *) gtk_widget_get_native (GTK_WIDGET (self));
 
         g_assert (g_strcmp0 (g_get_user_name (), act_user_get_user_name (user)) == 0);
 
         dialog = cc_fingerprint_dialog_new (self->fingerprint_manager);
-        gtk_window_set_transient_for (GTK_WINDOW (dialog), top_level);
-        gtk_widget_show (GTK_WIDGET (dialog));
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
+        gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void
@@ -1198,19 +1108,14 @@ show_history (CcUserPanel *self)
         CcLoginHistoryDialog *dialog;
         ActUser *user;
         GtkWindow *parent;
-        gint parent_width;
 
         user = get_selected_user (self);
         dialog = cc_login_history_dialog_new (user);
 
-        parent = GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self)));
-        gtk_window_get_size (parent, &parent_width, NULL);
-        gtk_window_set_default_size (GTK_WINDOW (dialog), parent_width * 0.6, -1);
+        parent = (GtkWindow *) gtk_widget_get_native (GTK_WIDGET (self));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
 
-        gtk_dialog_run (GTK_DIALOG (dialog));
-
-        gtk_widget_destroy (GTK_WIDGET (dialog));
+        gtk_window_present (GTK_WINDOW (dialog));
 }
 
 #ifdef HAVE_MALCONTENT
@@ -1240,7 +1145,7 @@ spawn_malcontent_control (CcUserPanel *self)
 }
 #endif
 
-static void
+/*static void
 activate_row (GtkListBox *box, GtkListBoxRow *row, CcUserPanel *self)
 {
         if (!gtk_widget_get_sensitive (GTK_WIDGET (row)))
@@ -1258,10 +1163,10 @@ activate_row (GtkListBox *box, GtkListBoxRow *row, CcUserPanel *self)
 
 #ifdef HAVE_MALCONTENT
         if (row == self->parental_controls_row) {
-		spawn_malcontent_control (self);
+        spawn_malcontent_control (self);
         }
 #endif
-}
+}*/
 
 static void
 users_loaded (CcUserPanel *self)
@@ -1269,7 +1174,10 @@ users_loaded (CcUserPanel *self)
         GtkWidget *dialog;
 
         if (act_user_manager_no_service (self->um)) {
-                dialog = gtk_message_dialog_new (GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (self))),
+                GtkWidget *toplevel;
+
+                toplevel = (GtkWidget *)gtk_widget_get_native (GTK_WIDGET (self));
+                dialog = gtk_message_dialog_new (GTK_WINDOW (toplevel ),
                                                  GTK_DIALOG_MODAL,
                                                  GTK_MESSAGE_OTHER,
                                                  GTK_BUTTONS_CLOSE,
@@ -1277,49 +1185,32 @@ users_loaded (CcUserPanel *self)
                 gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
                                                           _("Please make sure that the AccountService is installed and enabled."));
                 g_signal_connect (dialog, "response",
-                                  G_CALLBACK (gtk_widget_destroy),
+                                  G_CALLBACK (gtk_window_destroy),
                                   NULL);
                 gtk_widget_show (dialog);
 
-                gtk_widget_set_sensitive (GTK_WIDGET (self->accounts_box), FALSE);
+                gtk_stack_set_visible_child (self->stack, self->no_users_box);
+        } else {
+                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->users_overlay));
+                show_current_user (self);
         }
 
         g_signal_connect_object (self->um, "user-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->um, "user-is-logged-in-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
-        g_signal_connect_object (self->um, "user-added", G_CALLBACK (user_added), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->um, "user-removed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
-
-        reload_users (self, NULL);
 }
 
 static void
 add_unlock_tooltip (GtkWidget *widget)
 {
-        gchar *names[3];
-        g_autoptr(GIcon) icon;
-
-        names[0] = "changes-allow-symbolic";
-        names[1] = "changes-allow";
-        names[2] = NULL;
-        icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
-        setup_tooltip_with_embedded_icon (widget,
-                                          /* Translator comments:
-                                           * We split the line in 2 here to "make it look good", as there's
-                                           * no good way to do this in GTK+ for tooltips. See:
-                                           * https://bugzilla.gnome.org/show_bug.cgi?id=657168 */
-                                          _("To make changes,\nclick the * icon first"),
-                                          "*",
-                                          icon);
-        g_signal_connect (widget, "button-release-event",
-                           G_CALLBACK (show_tooltip_now), NULL);
+        gtk_widget_set_tooltip_text (widget,
+                                     _("This panel must be unlocked to change this setting"));
 }
 
 static void
 remove_unlock_tooltip (GtkWidget *widget)
 {
-        setup_tooltip_with_embedded_icon (widget, NULL, NULL, NULL);
-        g_signal_handlers_disconnect_by_func (widget,
-                                              G_CALLBACK (show_tooltip_now), NULL);
+        gtk_widget_set_tooltip_text (widget, NULL);
 }
 
 static guint
@@ -1369,7 +1260,7 @@ on_permission_changed (CcUserPanel *self)
 
         is_authorized = g_permission_get_allowed (G_PERMISSION (self->permission));
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self->add_user_button), is_authorized);
+        gtk_widget_set_sensitive (self->add_user_button, is_authorized);
 
         user = get_selected_user (self);
         if (!user) {
@@ -1380,48 +1271,33 @@ on_permission_changed (CcUserPanel *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->remove_user_button), is_authorized && !self_selected
                                   && !would_demote_only_admin (user));
         if (is_authorized) {
-                setup_tooltip_with_embedded_icon (GTK_WIDGET (self->remove_user_button), _("Delete the selected user account"), NULL, NULL);
+                gtk_widget_set_tooltip_text (GTK_WIDGET (self->remove_user_button), _("Delete the selected user account"));
         }
         else {
-                gchar *names[3];
-                g_autoptr(GIcon) icon = NULL;
-
-                names[0] = "changes-allow-symbolic";
-                names[1] = "changes-allow";
-                names[2] = NULL;
-                icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
-
-                setup_tooltip_with_embedded_icon (GTK_WIDGET (self->remove_user_button),
-                                                  _("To delete the selected user account,\nclick the * icon first"),
-                                                  "*",
-                                                  icon);
+                gtk_widget_set_tooltip_text (GTK_WIDGET (self->remove_user_button),
+                                             _("To delete the selected user account,\nclick the * icon first"));
         }
 
         if (!act_user_is_local_account (user)) {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->account_type_row), FALSE);
-                remove_unlock_tooltip (GTK_WIDGET (self->account_type_row));
-                gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_row), FALSE);
-                remove_unlock_tooltip (GTK_WIDGET (self->autologin_row));
-
+                gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), FALSE);
         } else if (is_authorized && act_user_is_local_account (user)) {
                 if (would_demote_only_admin (user)) {
-                        gtk_widget_set_sensitive (GTK_WIDGET (self->account_type_row), FALSE);
+                        gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
                 } else {
-                        gtk_widget_set_sensitive (GTK_WIDGET (self->account_type_row), TRUE);
+                        gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), TRUE);
                 }
-                remove_unlock_tooltip (GTK_WIDGET (self->account_type_row));
 
-                gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_row), get_autologin_possible (user));
-                remove_unlock_tooltip (GTK_WIDGET (self->autologin_row));
+                gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), get_autologin_possible (user));
         }
         else {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->account_type_row), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
                 if (would_demote_only_admin (user)) {
-                        remove_unlock_tooltip (GTK_WIDGET (self->account_type_row));
+                        gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
                 } else {
-                        add_unlock_tooltip (GTK_WIDGET (self->account_type_row));
+                        gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), TRUE);
                 }
-                gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_row), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), FALSE);
                 add_unlock_tooltip (GTK_WIDGET (self->autologin_row));
         }
 
@@ -1445,7 +1321,8 @@ on_permission_changed (CcUserPanel *self)
                 if (self->fingerprint_manager)
                         fingerprint_state = cc_fingerprint_manager_get_state (self->fingerprint_manager);
 
-                gtk_stack_set_visible_child (self->user_icon_stack, GTK_WIDGET (self->user_icon_button));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->user_avatar_edit_button), TRUE);
+                remove_unlock_tooltip (GTK_WIDGET (self->user_avatar_edit_button));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->language_row), TRUE);
                 remove_unlock_tooltip (GTK_WIDGET (self->language_row));
@@ -1461,7 +1338,8 @@ on_permission_changed (CcUserPanel *self)
                 remove_unlock_tooltip (GTK_WIDGET (self->last_login_row));
         }
         else {
-                gtk_stack_set_visible_child (self->user_icon_stack, GTK_WIDGET (self->user_icon_image));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->user_avatar_edit_button), FALSE);
+                add_unlock_tooltip (GTK_WIDGET (self->user_avatar_edit_button));
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->language_row), FALSE);
                 add_unlock_tooltip (GTK_WIDGET (self->language_row));
@@ -1480,14 +1358,17 @@ on_permission_changed (CcUserPanel *self)
 static void
 setup_main_window (CcUserPanel *self)
 {
-        g_autoptr(GIcon) icon = NULL;
         g_autoptr(GError) error = NULL;
-        gchar *names[3];
         gboolean loaded;
 
-        self->other_accounts = 0;
+        self->other_users_model = g_list_store_new (ACT_TYPE_USER);
+        gtk_list_box_bind_model (self->other_users_listbox,
+                                 G_LIST_MODEL (self->other_users_model),
+                                 (GtkListBoxCreateWidgetFunc)create_user_row,
+                                 self,
+                                 NULL);
 
-        add_unlock_tooltip (GTK_WIDGET (self->user_icon_image));
+        add_unlock_tooltip (GTK_WIDGET (self->user_avatar));
 
         self->permission = (GPermission *)polkit_permission_new_sync (USER_ACCOUNTS_PERMISSION, NULL, NULL, &error);
         if (self->permission != NULL) {
@@ -1498,14 +1379,12 @@ setup_main_window (CcUserPanel *self)
                 g_warning ("Cannot create '%s' permission: %s", USER_ACCOUNTS_PERMISSION, error->message);
         }
 
-        names[0] = "changes-allow-symbolic";
-        names[1] = "changes-allow";
-        names[2] = NULL;
-        icon = (GIcon *)g_themed_icon_new_from_names (names, -1);
-        setup_tooltip_with_embedded_icon (GTK_WIDGET (self->remove_user_button),
-                                          _("To delete the selected user account,\nclick the * icon first"),
-                                          "*",
-                                          icon);
+#ifdef HAVE_MALCONTENT
+        g_signal_connect_object (self->parental_controls_row, "activated", G_CALLBACK (spawn_malcontent_control), self, G_CONNECT_SWAPPED);
+#endif
+
+        gtk_widget_set_tooltip_text (GTK_WIDGET (self->remove_user_button),
+                                     _("To delete the selected user account,\nclick the * icon first"));
 
         g_object_get (self->um, "is-loaded", &loaded, NULL);
         if (loaded)
@@ -1541,12 +1420,8 @@ static void
 cc_user_panel_constructed (GObject *object)
 {
         CcUserPanel *self = CC_USER_PANEL (object);
-        CcShell *shell;
 
         G_OBJECT_CLASS (cc_user_panel_parent_class)->constructed (object);
-
-        shell = cc_panel_get_shell (CC_PANEL (self));
-        cc_shell_embed_widget_in_header (shell, GTK_WIDGET (self->add_user_button), GTK_POS_RIGHT);
 
         cc_permission_infobar_set_permission (self->permission_infobar, self->permission);
         cc_permission_infobar_set_title (self->permission_infobar, _("Unlock to Add Users and Change Settings"));
@@ -1561,8 +1436,6 @@ cc_user_panel_init (CcUserPanel *self)
         g_resources_register (cc_user_accounts_get_resource ());
 
         /* register types that the builder might need */
-        type = cc_user_image_get_type ();
-        type = cc_carousel_get_type ();
         type = cc_permission_infobar_get_type ();
 
         gtk_widget_init_template (GTK_WIDGET (self));
@@ -1571,13 +1444,12 @@ cc_user_panel_init (CcUserPanel *self)
 
         provider = gtk_css_provider_new ();
         gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/user-accounts/user-accounts-dialog.css");
-        gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                                   GTK_STYLE_PROVIDER (provider),
-                                                   GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+        gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                                    GTK_STYLE_PROVIDER (provider),
+                                                    GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
         self->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 
-        self->avatar_chooser = cc_avatar_chooser_new (GTK_WIDGET (self->user_icon_button));
         setup_main_window (self);
 }
 
@@ -1588,7 +1460,7 @@ cc_user_panel_dispose (GObject *object)
 
         g_clear_object (&self->selected_user);
         g_clear_object (&self->login_screen_settings);
-        g_clear_pointer ((GtkWidget **)&self->language_chooser, gtk_widget_destroy);
+        g_clear_pointer ((GtkWindow **)&self->language_chooser, gtk_window_destroy);
         g_clear_object (&self->permission);
 
         G_OBJECT_CLASS (cc_user_panel_parent_class)->dispose (object);
@@ -1614,16 +1486,14 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/cc-user-panel.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, accounts_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_settings_box);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_settings_listbox);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, authentication_and_login_listbox);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_type_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_type_switch);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, add_user_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_switch);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, carousel);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, avatar_chooser);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, back_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_state_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_stack);
@@ -1636,9 +1506,11 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users_row);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users_listbox);
 #ifdef HAVE_MALCONTENT
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_controls_button_label);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_control_go_next);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_controls_row);
 #endif
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, password_button_label);
@@ -1646,14 +1518,11 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, permission_infobar);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, remove_user_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, stack);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_icon_button);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_icon_image);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_icon_image2);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_icon_stack);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_avatar);
+        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, user_avatar_edit_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, users_overlay);
 
         gtk_widget_class_bind_template_callback (widget_class, account_type_changed);
-        gtk_widget_class_bind_template_callback (widget_class, activate_row);
         gtk_widget_class_bind_template_callback (widget_class, add_user);
         gtk_widget_class_bind_template_callback (widget_class, autologin_changed);
         gtk_widget_class_bind_template_callback (widget_class, change_fingerprint);
@@ -1666,4 +1535,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, dismiss_notification);
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, set_selected_user);
+        gtk_widget_class_bind_template_callback (widget_class, show_current_user);
+        gtk_widget_class_bind_template_callback (widget_class, show_history);
 }

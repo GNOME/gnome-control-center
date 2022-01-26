@@ -27,7 +27,7 @@ panels = [
   'sound',
   'universal-access',
   'usage',
-#  'user-accounts',
+  'user-accounts',
  'wwan',
 ]
 

@@ -3,46 +3,34 @@
   <!-- interface-requires gtk+ 3.8 -->
   <object class="GtkDialog" id="join-dialog">
     <property name="can_focus">False</property>
-    <property name="border_width">10</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
-    <property name="type_hint">dialog</property>
     <property name="title" translatable="yes">Add User</property>
     <property name="use_header_bar">1</property>
     <child internal-child="headerbar">
       <object class="GtkHeaderBar" id="join-dialog-header-bar">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="show_close_button">False</property>
-        <child>
+        <child type="start">
           <object class="GtkButton" id="button1">
             <property name="label" translatable="yes">_Cancel</property>
             <property name="visible">True</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="can_default">True</property>
-            <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
             <property name="use_underline">True</property>
             <property name="valign">center</property>
             <style>
               <class name="text-button"/>
             </style>
           </object>
-          <packing>
-            <property name="pack_type">start</property>
-          </packing>
         </child>
-        <child>
+        <child type="end">
           <object class="GtkButton" id="button2">
             <property name="label" translatable="yes" comments="Translators: This button enrolls the computer in the domain in order to use enterprise logins.">_Enroll</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="can_default">True</property>
-            <property name="has_default">True</property>
             <property name="receives_default">True</property>
-            <property name="use_action_appearance">False</property>
             <property name="use_underline">True</property>
             <property name="valign">center</property>
             <style>
@@ -50,13 +38,10 @@
               <class name="suggested-action"/>
             </style>
           </object>
-          <packing>
-            <property name="pack_type">end</property>
-          </packing>
         </child>
       </object>
     </child>
-    <child internal-child="vbox">
+    <child>
       <object class="GtkBox" id="dialog-vbox1">
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
@@ -65,7 +50,6 @@
           <object class="GtkBox" id="box2">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="border_width">5</property>
             <property name="orientation">vertical</property>
             <property name="spacing">10</property>
             <child>
@@ -78,11 +62,6 @@
                   <attribute name="scale" value="1.2"/>
                 </attributes>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label12">
@@ -94,11 +73,6 @@
 enrolled in the domain. Please have your network administrator
 type their domain password here.</property>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
             </child>
             <child>
               <object class="GtkGrid" id="grid1">
@@ -120,12 +94,6 @@ type their domain password here.</property>
                       <class name="dim-label"/>
                     </style>
                   </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="join-domain">
@@ -135,12 +103,6 @@ type their domain password here.</property>
                     <property name="margin_bottom">5</property>
                     <property name="xalign">0</property>
                   </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">0</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="label14">
@@ -154,12 +116,6 @@ type their domain password here.</property>
                       <class name="dim-label"/>
                     </style>
                   </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkEntry" id="join-name">
@@ -170,12 +126,6 @@ type their domain password here.</property>
                     <property name="invisible_char_set">True</property>
                     <property name="activates_default">True</property>
                   </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">1</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="label15">
@@ -189,12 +139,6 @@ type their domain password here.</property>
                       <class name="dim-label"/>
                     </style>
                   </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkEntry" id="join-password">
@@ -207,26 +151,10 @@ type their domain password here.</property>
                     <property name="invisible_char_set">True</property>
                     <property name="input_purpose">password</property>
                   </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">2</property>
-                    <property name="width">1</property>
-                    <property name="height">1</property>
-                  </packing>
                 </child>
               </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">2</property>
-              </packing>
             </child>
           </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
         </child>
       </object>
     </child>

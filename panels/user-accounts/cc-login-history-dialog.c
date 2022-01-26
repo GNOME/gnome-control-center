@@ -25,6 +25,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
@@ -40,6 +41,7 @@ struct _CcLoginHistoryDialog
         GtkDialog     parent_instance;
 
         GtkHeaderBar *header_bar;
+        GtkLabel     *title_label;
         GtkListBox   *history_box;
         GtkButton    *next_button;
         GtkButton    *previous_button;
@@ -96,18 +98,22 @@ show_week_label (CcLoginHistoryDialog *self)
                 label = g_strdup_printf(C_("login history week label", "%s — %s"), from, to);
         }
 
-        gtk_header_bar_set_subtitle (self->header_bar, label);
+        gtk_label_set_label (self->title_label, label);
 }
 
 static void
 clear_history (CcLoginHistoryDialog *self)
 {
-        g_autoptr(GList) list = NULL;
-        GList *it;
+        GtkWidget *child;
 
-        list = gtk_container_get_children (GTK_CONTAINER (self->history_box));
-        for (it = list; it != NULL; it = it->next) {
-                gtk_container_remove (GTK_CONTAINER (self->history_box), GTK_WIDGET (it->data));
+        child = gtk_widget_get_first_child (GTK_WIDGET (self->history_box));
+        while (child) {
+                GtkWidget *next = gtk_widget_get_next_sibling (child);
+
+                if (ADW_ACTION_ROW (child))
+                    gtk_list_box_remove (self->history_box, GTK_WIDGET (child));
+
+                child = next;
         }
 }
 
@@ -165,7 +171,7 @@ add_record (CcLoginHistoryDialog *self, GDateTime *datetime, gchar *record_strin
         g_autofree gchar *date = NULL;
         g_autofree gchar *time = NULL;
         g_autofree gchar *str = NULL;
-        GtkWidget *label, *row;
+        GtkWidget *row;
 
         date = cc_util_get_smart_date (datetime);
         /* Translators: This is a time format string in the style of "22:58".
@@ -175,20 +181,9 @@ add_record (CcLoginHistoryDialog *self, GDateTime *datetime, gchar *record_strin
            The first %s is a date, and the second %s a time. */
         str = g_strdup_printf(C_("login date-time", "%s, %s"), date, time);
 
-        row = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-        gtk_widget_show (row);
-        gtk_box_set_homogeneous (GTK_BOX (row), TRUE);
-        gtk_container_set_border_width (GTK_CONTAINER (row), 6);
-
-        label = gtk_label_new (record_string);
-        gtk_widget_show (label);
-        gtk_widget_set_halign (label, GTK_ALIGN_START);
-        gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
-
-        label = gtk_label_new (str);
-        gtk_widget_show (label);
-        gtk_widget_set_halign (label, GTK_ALIGN_START);
-        gtk_box_pack_start (GTK_BOX (row), label, TRUE, TRUE, 0);
+        row = adw_action_row_new ();
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), record_string);
+        adw_action_row_set_subtitle (ADW_ACTION_ROW (row), str);
 
         gtk_list_box_insert (self->history_box, row, line);
 }
@@ -297,6 +292,7 @@ cc_login_history_dialog_class_init (CcLoginHistoryDialogClass *klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/cc-login-history-dialog.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, header_bar);
+        gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, title_label);
         gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, history_box);
         gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, next_button);
         gtk_widget_class_bind_template_child (widget_class, CcLoginHistoryDialog, previous_button);
@@ -342,7 +338,7 @@ cc_login_history_dialog_new (ActUser *user)
            The %s is the user real name. */
         title = g_strdup_printf (_("%s — Account Activity"),
                                  act_user_get_real_name (self->user));
-        gtk_header_bar_set_title (self->header_bar, title);
+        gtk_label_set_label (self->title_label, title);
 
         show_week (self);
 

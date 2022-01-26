@@ -17,7 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
+#ifndef _CC_CROP_AREA_H_
+#define _CC_CROP_AREA_H_
 
 #include <glib-object.h>
 #include <gtk/gtk.h>
@@ -25,16 +26,17 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_CROP_AREA (cc_crop_area_get_type ())
-G_DECLARE_FINAL_TYPE (CcCropArea, cc_crop_area, CC, CROP_AREA, GtkDrawingArea)
+G_DECLARE_FINAL_TYPE (CcCropArea, cc_crop_area, CC, CROP_AREA, GtkWidget)
 
-GtkWidget *cc_crop_area_new                  (void);
-GdkPixbuf *cc_crop_area_get_picture          (CcCropArea *area);
-void       cc_crop_area_set_picture          (CcCropArea *area,
-                                              GdkPixbuf  *pixbuf);
-void       cc_crop_area_set_min_size         (CcCropArea *area,
-                                              gint        width,
-                                              gint        height);
-void       cc_crop_area_set_constrain_aspect (CcCropArea *area,
-                                              gboolean    constrain);
+GtkWidget *      cc_crop_area_new                  (void);
+GdkPaintable *   cc_crop_area_get_paintable        (CcCropArea   *area);
+void             cc_crop_area_set_paintable        (CcCropArea   *area,
+                                                    GdkPaintable *paintable);
+void             cc_crop_area_set_min_size         (CcCropArea   *area,
+                                                    int           width,
+                                                    int           height);
+GdkPixbuf *      cc_crop_area_create_pixbuf        (CcCropArea   *area);
 
 G_END_DECLS
+
+#endif /* _CC_CROP_AREA_H_ */

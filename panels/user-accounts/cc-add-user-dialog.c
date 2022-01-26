@@ -20,6 +20,7 @@
 
 #include "config.h"
 
+#include <adwaita.h>
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
@@ -55,32 +56,42 @@ static void   on_realm_joined      (GObject *source,
 static void   add_button_clicked_cb (CcAddUserDialog *self);
 
 struct _CcAddUserDialog {
-        GtkDialog           parent_instance;
+        GtkDialog parent_instance;
 
         GtkButton          *add_button;
-        GtkToggleButton    *enterprise_button;
+        AdwActionRow       *enterprise_button;
         GtkComboBox        *enterprise_domain_combo;
         GtkEntry           *enterprise_domain_entry;
-        GtkLabel           *enterprise_domain_hint_label;
-        GtkGrid            *enterprise_grid;
-        GtkLabel           *enterprise_hint_label;
+        GtkLabel           *enterprise_domain_hint;
+        AdwActionRow       *enterprise_domain_row;
+        GtkImage           *enterprise_domain_status_icon;
+        AdwPreferencesPage *enterprise_page;
+        AdwPreferencesGroup *enterprise_login_group;
         GtkEntry           *enterprise_login_entry;
-        GtkEntry           *enterprise_password_entry;
+        GtkImage           *enterprise_login_status_icon;
+        GtkPasswordEntry   *enterprise_password_entry;
+        GtkImage           *enterprise_password_status_icon;
         GtkListStore       *enterprise_realm_model;
-        GtkRadioButton     *local_account_type_standard;
-        GtkGrid            *local_grid;
-        GtkLabel           *local_hint_label;
+        GtkSwitch          *local_account_type_switch;
         GtkEntry           *local_name_entry;
+        GtkImage           *local_name_status_icon;
+        AdwPreferencesPage *local_page;
+        AdwActionRow       *local_password_row;
+        GtkImage           *local_password_status_icon;
+        GtkLevelBar        *local_strength_indicator;
         GtkComboBoxText    *local_username_combo;
         GtkListStore       *local_username_model;
-        GtkEntry           *local_password_entry;
-        GtkRadioButton     *local_password_radio;
+        GtkPasswordEntry   *local_password_entry;
+        GtkLabel           *local_password_hint;
+        GtkCheckButton     *local_password_radio;
         GtkEntry           *local_username_entry;
-        GtkLabel           *local_username_hint_label;
-        GtkLevelBar        *local_strength_indicator;
-        GtkEntry           *local_verify_entry;
-        GtkLabel           *local_verify_hint_label;
-        GtkGrid            *offline_grid;
+        AdwActionRow       *local_username_row;
+        GtkImage           *local_username_status_icon;
+        GtkPasswordEntry   *local_verify_entry;
+        AdwActionRow       *local_verify_password_row;
+        GtkImage           *local_verify_status_icon;
+        AdwPreferencesPage *offline_page;
+        AdwPreferencesGroup *password_group;
         GtkSpinner         *spinner;
         GtkStack           *stack;
 
@@ -132,7 +143,7 @@ show_error_dialog (CcAddUserDialog *self,
                                                           "%s", error->message);
         }
 
-        g_signal_connect (dialog, "response", G_CALLBACK (gtk_widget_destroy), NULL);
+        g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
         gtk_window_present (GTK_WINDOW (dialog));
 }
 
@@ -176,7 +187,7 @@ user_loaded_cb (CcAddUserDialog *self,
   finish_action (self);
 
   /* Set a password for the user */
-  password = gtk_entry_get_text (self->local_password_entry);
+  password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
   act_user_set_password_mode (user, self->local_password_mode);
   if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR)
         act_user_set_password (user, password, "");
@@ -224,9 +235,9 @@ local_create_user (CcAddUserDialog *self)
 
         begin_action (self);
 
-        name = gtk_entry_get_text (self->local_name_entry);
+        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_entry));
         username = gtk_combo_box_text_get_active_text (self->local_username_combo);
-        account_type = (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_account_type_standard)) ? ACT_USER_ACCOUNT_TYPE_STANDARD : ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
+        account_type = gtk_switch_get_active (self->local_account_type_switch) ? ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR : ACT_USER_ACCOUNT_TYPE_STANDARD;
 
         g_debug ("Creating local user: %s", username);
 
@@ -249,23 +260,23 @@ update_password_strength (CcAddUserDialog *self)
         const gchar *verify;
         gint strength_level;
 
-        password = gtk_entry_get_text (self->local_password_entry);
+        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
         username = gtk_combo_box_text_get_active_text (self->local_username_combo);
 
         pw_strength (password, NULL, username, &hint, &strength_level);
 
-        gtk_label_set_label (self->local_hint_label, hint);
         gtk_level_bar_set_value (self->local_strength_indicator, strength_level);
+        gtk_label_set_label (self->local_password_hint, hint);
 
         if (strength_level > 1) {
-                set_entry_validation_checkmark (self->local_password_entry);
+                gtk_image_set_from_icon_name (self->local_password_status_icon, "emblem-ok-symbolic");
         } else if (strlen (password) == 0) {
-                set_entry_generation_icon (self->local_password_entry);
+                gtk_image_set_from_icon_name (self->local_password_status_icon, "dialog-warning-symbolic");
         } else {
-                clear_entry_validation_error (self->local_password_entry);
+                gtk_image_set_from_icon_name (self->local_password_status_icon, "dialog-warning-symbolic");
         }
 
-        verify = gtk_entry_get_text (self->local_verify_entry);
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_entry));
         if (strlen (verify) == 0) {
                 gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_entry), strength_level > 1);
         }
@@ -284,17 +295,17 @@ local_validate (CcAddUserDialog *self)
         gint strength;
 
         if (self->local_valid_username) {
-                set_entry_validation_checkmark (self->local_username_entry);
+                gtk_image_set_from_icon_name (self->local_username_status_icon, "emblem-ok-symbolic");
         }
 
-        name = gtk_entry_get_text (self->local_name_entry);
+        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_entry));
         valid_name = is_valid_name (name);
         if (valid_name) {
-                set_entry_validation_checkmark (self->local_name_entry);
+                gtk_image_set_from_icon_name (self->local_name_status_icon, "emblem-ok-symbolic");
         }
 
-        password = gtk_entry_get_text (self->local_password_entry);
-        verify = gtk_entry_get_text (self->local_verify_entry);
+        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_entry));
         if (self->local_password_mode == ACT_USER_PASSWORD_MODE_REGULAR) {
                 strength = update_password_strength (self);
                 valid_password = strength > 1 && strcmp (password, verify) == 0;
@@ -325,7 +336,7 @@ static void local_username_is_valid_cb (GObject *source_object,
         name = gtk_combo_box_text_get_active_text (self->local_username_combo);
         if (g_strcmp0 (name, username) == 0) {
                 self->local_valid_username = valid;
-                gtk_label_set_label (self->local_username_hint_label, tip);
+                adw_action_row_set_subtitle (ADW_ACTION_ROW (self->local_username_row), tip);
                 dialog_validate (self);
         }
 }
@@ -361,7 +372,7 @@ local_username_combo_changed_cb (CcAddUserDialog *self)
 {
         const gchar *username;
 
-        username = gtk_entry_get_text (self->local_username_entry);
+        username = gtk_editable_get_text (GTK_EDITABLE (self->local_username_entry));
         if (*username == '\0')
                 self->has_custom_username = FALSE;
         else if (gtk_widget_has_focus (GTK_WIDGET (self->local_username_entry)) ||
@@ -373,7 +384,7 @@ local_username_combo_changed_cb (CcAddUserDialog *self)
                 self->local_username_timeout_id = 0;
         }
 
-        clear_entry_validation_error (self->local_username_entry);
+        gtk_image_set_from_icon_name (self->local_username_status_icon, "dialog-warning-symbolic");
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         self->local_valid_username = FALSE;
@@ -627,9 +638,9 @@ local_name_entry_changed_cb (CcAddUserDialog *self)
 
         gtk_list_store_clear (self->local_username_model);
 
-        name = gtk_entry_get_text (self->local_name_entry);
+        name = gtk_editable_get_text (GTK_EDITABLE (self->local_name_entry));
         if ((name == NULL || strlen (name) == 0) && !self->has_custom_username) {
-                gtk_entry_set_text (self->local_username_entry, "");
+                gtk_editable_set_text (GTK_EDITABLE (self->local_username_entry), "");
         } else if (name != NULL && strlen (name) != 0) {
                 generate_username_choices (name, self->local_username_model);
                 if (!self->has_custom_username)
@@ -641,7 +652,7 @@ local_name_entry_changed_cb (CcAddUserDialog *self)
                 self->local_name_timeout_id = 0;
         }
 
-        clear_entry_validation_error (self->local_name_entry);
+        gtk_image_set_from_icon_name (self->local_name_status_icon, "dialog-warning-symbolic");
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
         self->local_name_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_name_timeout, self);
@@ -654,20 +665,20 @@ update_password_match (CcAddUserDialog *self)
         const gchar *verify;
         const gchar *message = "";
 
-        password = gtk_entry_get_text (self->local_password_entry);
-        verify = gtk_entry_get_text (self->local_verify_entry);
+        password = gtk_editable_get_text (GTK_EDITABLE (self->local_password_entry));
+        verify = gtk_editable_get_text (GTK_EDITABLE (self->local_verify_entry));
         if (strlen (verify) != 0) {
                 if (strcmp (password, verify) != 0) {
                         message = _("The passwords do not match.");
                 } else {
-                        set_entry_validation_checkmark (self->local_verify_entry);
+                        gtk_image_set_from_icon_name (self->local_verify_status_icon, "emblem-ok-symbolic");
                 }
         }
-        gtk_label_set_label (self->local_verify_hint_label, message);
+        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->local_verify_password_row), message);
 }
 
 static void
-local_password_entry_icon_press_cb (CcAddUserDialog *self)
+generate_password (CcAddUserDialog *self)
 {
         g_autofree gchar *pwd = NULL;
 
@@ -675,9 +686,8 @@ local_password_entry_icon_press_cb (CcAddUserDialog *self)
         if (pwd == NULL)
                 return;
 
-        gtk_entry_set_text (self->local_password_entry, pwd);
-        gtk_entry_set_text (self->local_verify_entry, pwd);
-        gtk_entry_set_visibility (self->local_password_entry, TRUE);
+        gtk_editable_set_text (GTK_EDITABLE (self->local_password_entry), pwd);
+        gtk_editable_set_text (GTK_EDITABLE (self->local_verify_entry), pwd);
         gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_entry), TRUE);
 }
 
@@ -706,12 +716,13 @@ password_focus_out_event_cb (CcAddUserDialog *self)
 }
 
 static gboolean
-local_password_entry_key_press_event_cb (CcAddUserDialog *self,
-                                   GdkEvent        *event)
+local_password_entry_key_press_event_cb (GtkEventControllerKey *controller,
+                                         guint                  keyval,
+                                         guint                  keycode,
+                                         GdkModifierType        state,
+                                         CcAddUserDialog       *self)
 {
-        GdkEventKey *key = (GdkEventKey *)event;
-
-        if (key->keyval == GDK_KEY_Tab)
+        if (keyval == GDK_KEY_Tab)
                local_password_timeout (self);
 
         return FALSE;
@@ -720,8 +731,6 @@ local_password_entry_key_press_event_cb (CcAddUserDialog *self,
 static void
 recheck_password_match (CcAddUserDialog *self)
 {
-        const char *password;
-
         if (self->local_password_timeout_id != 0) {
                 g_source_remove (self->local_password_timeout_id);
                 self->local_password_timeout_id = 0;
@@ -729,26 +738,21 @@ recheck_password_match (CcAddUserDialog *self)
 
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
-        password = gtk_entry_get_text (self->local_password_entry);
-        if (strlen (password) == 0) {
-                gtk_entry_set_visibility (self->local_password_entry, FALSE);
-        }
-
         self->local_password_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) local_password_timeout, self);
 }
 
 static void
 local_password_entry_changed_cb (CcAddUserDialog *self)
 {
-        clear_entry_validation_error (self->local_password_entry);
-        clear_entry_validation_error (self->local_verify_entry);
+        gtk_image_set_from_icon_name (self->local_password_status_icon, "dialog-warning-symbolic");
+        gtk_image_set_from_icon_name (self->local_verify_status_icon, "dialog-warning-symbolic");
         recheck_password_match (self);
 }
 
 static void
 local_verify_entry_changed_cb (CcAddUserDialog *self)
 {
-        clear_entry_validation_error (self->local_verify_entry);
+        gtk_image_set_from_icon_name (self->local_verify_status_icon, "dialog-warning-symbolic");
         recheck_password_match (self);
 }
 
@@ -757,13 +761,10 @@ local_password_radio_changed_cb (CcAddUserDialog *self)
 {
         gboolean active;
 
-        active = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->local_password_radio));
+        active = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->local_password_radio));
         self->local_password_mode = active ? ACT_USER_PASSWORD_MODE_REGULAR : ACT_USER_PASSWORD_MODE_SET_AT_LOGIN;
 
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_password_entry), active);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_verify_entry), active);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_strength_indicator), active);
-        gtk_widget_set_sensitive (GTK_WIDGET (self->local_hint_label), active);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->password_group), active);
 
         dialog_validate (self);
 }
@@ -776,14 +777,14 @@ enterprise_validate (CcAddUserDialog *self)
         gboolean valid_domain;
         GtkTreeIter iter;
 
-        name = gtk_entry_get_text (self->enterprise_login_entry);
+        name = gtk_editable_get_text (GTK_EDITABLE (self->enterprise_login_entry));
         valid_name = is_valid_name (name);
 
         if (gtk_combo_box_get_active_iter (self->enterprise_domain_combo, &iter)) {
                 gtk_tree_model_get (GTK_TREE_MODEL (self->enterprise_realm_model),
                                     &iter, 0, &name, -1);
         } else {
-                name = gtk_entry_get_text (self->enterprise_domain_entry);
+                name = gtk_editable_get_text (GTK_EDITABLE (self->enterprise_domain_entry));
         }
 
         valid_domain = is_valid_name (name) && self->selected_realm != NULL;
@@ -835,7 +836,7 @@ enterprise_add_realm (CcAddUserDialog *self,
 
         /* Prefill domain entry by the existing one */
         if (!self->enterprise_domain_chosen && cc_realm_is_configured (realm)) {
-                gtk_entry_set_text (self->enterprise_domain_entry, realm_name);
+                gtk_editable_set_text (GTK_EDITABLE (self->enterprise_domain_entry), realm_name);
         }
 
         g_debug ("added realm to drop down: %s %s", realm_name,
@@ -902,7 +903,7 @@ on_permit_user_login (GObject *source,
                  * sure all that is functional.
                  */
                 manager = act_user_manager_get_default ();
-                login = cc_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login_entry));
+                login = cc_realm_calculate_login (common, gtk_editable_get_text (GTK_EDITABLE (self->enterprise_login_entry)));
                 g_return_if_fail (login != NULL);
 
                 g_debug ("Caching remote user: %s", login);
@@ -934,7 +935,7 @@ enterprise_permit_user_login (CcAddUserDialog *self)
                 return;
         }
 
-        login = cc_realm_calculate_login (common, gtk_entry_get_text (self->enterprise_login_entry));
+        login = cc_realm_calculate_login (common, gtk_editable_get_text (GTK_EDITABLE (self->enterprise_login_entry)));
         g_return_if_fail (login != NULL);
 
         add[0] = login;
@@ -962,12 +963,12 @@ on_join_response (CcAddUserDialog *self,
                 return;
         }
 
-        g_debug ("Logging in as admin user: %s", gtk_entry_get_text (self->join_name));
+        g_debug ("Logging in as admin user: %s", gtk_editable_get_text (GTK_EDITABLE (self->join_name)));
 
         /* Prompted for some admin credentials, try to use them to log in */
         cc_realm_login (self->selected_realm,
-                        gtk_entry_get_text (self->join_name),
-                        gtk_entry_get_text (self->join_password),
+                        gtk_editable_get_text (GTK_EDITABLE (self->join_name)),
+                        gtk_editable_get_text (GTK_EDITABLE (self->join_password)),
                         self->cancellable,
                         on_join_login,
                         g_object_ref (self));
@@ -981,7 +982,7 @@ join_show_prompt (CcAddUserDialog *self,
         g_autoptr(CcRealmKerberos) kerberos = NULL;
         const gchar *name;
 
-        gtk_entry_set_text (self->join_password, "");
+        gtk_editable_set_text (GTK_EDITABLE (self->join_password), "");
         gtk_widget_grab_focus (GTK_WIDGET (self->join_password));
 
         kerberos = cc_realm_object_get_kerberos (self->selected_realm);
@@ -990,26 +991,26 @@ join_show_prompt (CcAddUserDialog *self,
         gtk_label_set_text (self->join_domain,
                             cc_realm_kerberos_get_domain_name (kerberos));
 
-        clear_entry_validation_error (self->join_name);
-        clear_entry_validation_error (self->join_password);
+        //clear_entry_validation_error (self->join_name);
+        //clear_entry_validation_error (self->join_password);
 
         if (!self->join_prompted) {
                 name = cc_realm_kerberos_membership_get_suggested_administrator (membership);
                 if (name && !g_str_equal (name, "")) {
                         g_debug ("Suggesting admin user: %s", name);
-                        gtk_entry_set_text (self->join_name, name);
+                        gtk_editable_set_text (GTK_EDITABLE (self->join_name), name);
                 } else {
                         gtk_widget_grab_focus (GTK_WIDGET (self->join_name));
                 }
 
         } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Bad admin password: %s", error->message);
-                set_entry_validation_error (self->join_password, error->message);
+                //set_entry_validation_error (self->join_password, error->message);
 
         } else {
                 g_debug ("Admin login failure: %s", error->message);
                 g_dbus_error_strip_remote_error (error);
-                set_entry_validation_error (self->join_name, error->message);
+                //set_entry_validation_error (self->join_name, error->message);
         }
 
         g_debug ("Showing admin password dialog");
@@ -1040,8 +1041,8 @@ on_join_login (GObject *source,
         /* Logged in as admin successfully, use creds to join domain */
         if (creds != NULL) {
                 if (!cc_realm_join_as_admin (self->selected_realm,
-                                             gtk_entry_get_text (self->join_name),
-                                             gtk_entry_get_text (self->join_password),
+                                             gtk_editable_get_text (GTK_EDITABLE (self->join_name)),
+                                             gtk_editable_get_text (GTK_EDITABLE (self->join_password)),
                                              creds, self->cancellable, on_realm_joined,
                                              g_object_ref (self))) {
                         show_error_dialog (self, _("No supported way to authenticate with this domain"), NULL);
@@ -1149,8 +1150,8 @@ on_realm_login (GObject *source,
                 /* Join the domain, try using the user's creds */
                 } else if (creds == NULL ||
                            !cc_realm_join_as_user (self->selected_realm,
-                                                   gtk_entry_get_text (self->enterprise_login_entry),
-                                                   gtk_entry_get_text (self->enterprise_password_entry),
+                                                   gtk_editable_get_text (GTK_EDITABLE (self->enterprise_login_entry)),
+                                                   gtk_editable_get_text (GTK_EDITABLE (self->enterprise_password_entry)),
                                                    creds, self->cancellable,
                                                    on_realm_joined,
                                                    g_object_ref (self))) {
@@ -1164,14 +1165,14 @@ on_realm_login (GObject *source,
         } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_LOGIN)) {
                 g_debug ("Problem with the user's login: %s", error->message);
                 message = _("That login name didn’t work.\nPlease try again.");
-                gtk_label_set_text (self->enterprise_hint_label, message);
+                adw_preferences_group_set_description (self->enterprise_login_group, message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_login_entry));
 
         } else if (g_error_matches (error, CC_REALM_ERROR, CC_REALM_ERROR_BAD_PASSWORD)) {
                 g_debug ("Problem with the user's password: %s", error->message);
                 message = _("That login password didn’t work.\nPlease try again.");
-                gtk_label_set_text (self->enterprise_hint_label, message);
+                adw_preferences_group_set_description (self->enterprise_login_group, message);
                 finish_action (self);
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_password_entry));
 
@@ -1190,8 +1191,8 @@ enterprise_check_login (CcAddUserDialog *self)
         g_assert (self->selected_realm);
 
         cc_realm_login (self->selected_realm,
-                        gtk_entry_get_text (self->enterprise_login_entry),
-                        gtk_entry_get_text (self->enterprise_password_entry),
+                        gtk_editable_get_text (GTK_EDITABLE (self->enterprise_login_entry)),
+                        gtk_editable_get_text (GTK_EDITABLE (self->enterprise_password_entry)),
                         self->cancellable,
                         on_realm_login,
                         g_object_ref (self));
@@ -1221,8 +1222,8 @@ on_realm_discover_input (GObject *source,
                 if (self->enterprise_check_credentials) {
                         enterprise_check_login (self);
                 }
-                set_entry_validation_checkmark (self->enterprise_domain_entry);
-                gtk_label_set_text (self->enterprise_domain_hint_label, DOMAIN_DEFAULT_HINT);
+                gtk_image_set_from_icon_name (self->enterprise_domain_status_icon, "emblem-ok-symbolic");
+                gtk_label_set_text (self->enterprise_domain_hint, DOMAIN_DEFAULT_HINT);
                 g_list_free_full (realms, g_object_unref);
 
         /* The domain is likely invalid*/
@@ -1237,7 +1238,7 @@ on_realm_discover_input (GObject *source,
                 } else {
                         message = g_strdup_printf ("%s.", error->message);
                 }
-                gtk_label_set_text (self->enterprise_domain_hint_label, message);
+                gtk_label_set_text (self->enterprise_domain_hint, message);
 
                 if (self->enterprise_check_credentials) {
                         finish_action (self);
@@ -1256,9 +1257,9 @@ enterprise_check_domain (CcAddUserDialog *self)
 {
         const gchar *domain;
 
-        domain = gtk_entry_get_text (self->enterprise_domain_entry);
+        domain = gtk_editable_get_text (GTK_EDITABLE (self->enterprise_domain_entry));
         if (strlen (domain) == 0) {
-                gtk_label_set_text (self->enterprise_domain_hint_label, DOMAIN_DEFAULT_HINT);
+                gtk_label_set_text (self->enterprise_domain_hint, DOMAIN_DEFAULT_HINT);
                 return;
         }
 
@@ -1375,8 +1376,8 @@ enterprise_domain_timeout (CcAddUserDialog *self)
 
         if (gtk_combo_box_get_active_iter (self->enterprise_domain_combo, &iter)) {
                 gtk_tree_model_get (GTK_TREE_MODEL (self->enterprise_realm_model), &iter, 1, &self->selected_realm, -1);
-                set_entry_validation_checkmark (self->enterprise_domain_entry);
-                gtk_label_set_text (self->enterprise_domain_hint_label, DOMAIN_DEFAULT_HINT);
+                gtk_image_set_from_icon_name (self->enterprise_domain_status_icon, "emblem-ok-symbolic");
+                gtk_label_set_text (self->enterprise_domain_hint, DOMAIN_DEFAULT_HINT);
         }
         else {
                 enterprise_check_domain (self);
@@ -1394,7 +1395,7 @@ enterprise_domain_combo_changed_cb (CcAddUserDialog *self)
         }
 
         g_clear_object (&self->selected_realm);
-        clear_entry_validation_error (self->enterprise_domain_entry);
+        gtk_image_set_from_icon_name (self->enterprise_domain_status_icon, "dialog-warning-symbolic");
         self->enterprise_domain_timeout_id = g_timeout_add (PASSWORD_CHECK_TIMEOUT, (GSourceFunc) enterprise_domain_timeout, self);
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
@@ -1421,15 +1422,15 @@ static void
 enterprise_login_entry_changed_cb (CcAddUserDialog *self)
 {
         dialog_validate (self);
-        clear_entry_validation_error (self->enterprise_login_entry);
-        clear_entry_validation_error (self->enterprise_password_entry);
+        gtk_image_set_from_icon_name (self->enterprise_login_status_icon, "dialog-warning-symbolic");
+        gtk_image_set_from_icon_name (self->enterprise_password_status_icon, "dialog-warning-symbolic");
 }
 
 static void
 enterprise_password_entry_changed_cb (CcAddUserDialog *self)
 {
         dialog_validate (self);
-        clear_entry_validation_error (self->enterprise_password_entry);
+        gtk_image_set_from_icon_name (self->enterprise_password_status_icon, "dialog-warning-symbolic");
 }
 
 static void
@@ -1468,18 +1469,15 @@ mode_change (CcAddUserDialog *self,
         switch (mode) {
         default:
         case MODE_LOCAL:
-                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->local_grid));
+                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->local_page));
                 gtk_widget_grab_focus (GTK_WIDGET (self->local_name_entry));
-                gtk_toggle_button_set_active (self->enterprise_button, FALSE);
                 break;
         case MODE_ENTERPRISE:
-                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->enterprise_grid));
+                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->enterprise_page));
                 gtk_widget_grab_focus (GTK_WIDGET (self->enterprise_domain_entry));
-                gtk_toggle_button_set_active (self->enterprise_button, TRUE);
                 break;
         case MODE_OFFLINE:
-                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->offline_grid));
-                gtk_toggle_button_set_active (self->enterprise_button, TRUE);
+                gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->offline_page));
                 break;
         }
 
@@ -1490,10 +1488,7 @@ mode_change (CcAddUserDialog *self,
 static void
 enterprise_button_toggled_cb (CcAddUserDialog *self)
 {
-        AccountMode mode;
-
-        mode = gtk_toggle_button_get_active (self->enterprise_button) ? MODE_ENTERPRISE : MODE_LOCAL;
-        mode_change (self, mode);
+        mode_change (self, MODE_ENTERPRISE);
 }
 
 static void
@@ -1608,7 +1603,9 @@ cc_add_user_dialog_dispose (GObject *obj)
                 self->enterprise_domain_timeout_id = 0;
         }
 
-        g_clear_pointer ((GtkWidget **)&self->join_dialog, gtk_widget_destroy);
+        if (self->join_dialog != NULL) {
+                gtk_window_destroy (GTK_WINDOW (self->join_dialog));
+        }
 
         G_OBJECT_CLASS (cc_add_user_dialog_parent_class)->dispose (obj);
 }
@@ -1639,26 +1636,36 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_button);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_combo);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_hint_label);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_grid);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_hint_label);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_status_icon);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_page);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_login_group);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_login_entry);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_login_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_password_entry);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_password_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_realm_model);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_account_type_standard);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_grid);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_hint_label);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_account_type_switch);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_page);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_hint);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_entry);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_name_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_combo);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_model);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_entry);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_password_radio);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_hint_label);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_username_status_icon);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_strength_indicator);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_hint_label);
-        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, offline_grid);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_password_row);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, local_verify_status_icon);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, offline_page);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, password_group);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, spinner);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, stack);
 
@@ -1669,10 +1676,10 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, enterprise_domain_combo_focus_out_event_cb);
         gtk_widget_class_bind_template_callback (widget_class, enterprise_login_entry_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, enterprise_password_entry_changed_cb);
+        gtk_widget_class_bind_template_callback (widget_class, generate_password);
         gtk_widget_class_bind_template_callback (widget_class, local_name_entry_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, local_name_entry_focus_out_event_cb);
         gtk_widget_class_bind_template_callback (widget_class, local_password_entry_changed_cb);
-        gtk_widget_class_bind_template_callback (widget_class, local_password_entry_icon_press_cb);
         gtk_widget_class_bind_template_callback (widget_class, local_password_entry_key_press_event_cb);
         gtk_widget_class_bind_template_callback (widget_class, local_password_radio_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, local_username_combo_changed_cb);
@@ -1686,7 +1693,7 @@ cc_add_user_dialog_new (GPermission *permission)
 {
         CcAddUserDialog *self;
 
-        self = g_object_new (CC_TYPE_ADD_USER_DIALOG, "use-header-bar", TRUE, NULL);
+        self = g_object_new (CC_TYPE_ADD_USER_DIALOG, "use-header-bar", 1, NULL);
 
         if (permission != NULL)
                 self->permission = g_object_ref (permission);

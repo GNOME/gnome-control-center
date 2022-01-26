@@ -60,7 +60,7 @@ struct _CcFingerprintDialog
   GtkButton      *cancel_button;
   GtkButton      *delete_prints_button;
   GtkButton      *done_button;
-  GtkContainer   *add_print_popover_box;
+  GtkBox         *add_print_popover_box;
   GtkEntry       *enroll_print_entry;
   GtkFlowBox     *prints_gallery;
   GtkHeaderBar   *titlebar;
@@ -352,9 +352,11 @@ notify_error (CcFingerprintDialog *self,
 
 static gboolean
 fingerprint_icon_draw (GtkWidget *widget,
-                       cairo_t   *cr,
                        gdouble   *progress_data)
 {
+  GtkAllocation allocation;
+  g_autoptr (GtkSnapshot) snapshot = NULL;
+  cairo_t *cr;
   gdouble progress = 0.0f;
 
   if (progress_data)
@@ -363,15 +365,18 @@ fingerprint_icon_draw (GtkWidget *widget,
   if (G_APPROX_VALUE (progress, 0.f, FLT_EPSILON) || progress > 1)
     return FALSE;
 
-  GTK_WIDGET_GET_CLASS (widget)->draw (widget, cr);
+  snapshot = gtk_snapshot_new ();
+  gtk_widget_snapshot_child (gtk_widget_get_parent (widget), widget, snapshot);
+  GTK_WIDGET_GET_CLASS (widget)->snapshot (widget, snapshot);
+
+  gtk_widget_get_allocation (widget, &allocation);
+  cr = gtk_snapshot_append_cairo (snapshot, &GRAPHENE_RECT_INIT (0, 0, allocation.width, allocation.height));
 
   if (progress > 0)
     {
-      g_autoptr(GdkRGBA) outline_color = NULL;
+      GdkRGBA outline_color;
       GtkStyleContext *context;
-      GtkStateFlags state;
-      int outline_width;
-      int outline_offset;
+      GtkBorder outline_width, outline_offset;
       int width;
       int height;
       int radius;
@@ -380,25 +385,22 @@ fingerprint_icon_draw (GtkWidget *widget,
       context = gtk_widget_get_style_context (widget);
       gtk_style_context_save (context);
 
-      state = gtk_style_context_get_state (context);
-
       gtk_style_context_add_class (context, "progress");
-      gtk_style_context_get (context, state,
-                             "outline-width", &outline_width,
-                             "outline-offset", &outline_offset,
-                             "outline-color", &outline_color,
-                             NULL);
+
+      gtk_style_context_get_margin (context, &outline_width);
+      gtk_style_context_get_border (context, &outline_offset);
+      gtk_style_context_get_color (context, &outline_color);
 
       width = gtk_widget_get_allocated_width (widget);
       height = gtk_widget_get_allocated_height (widget);
-      radius = MIN (width / 2, height / 2) + outline_offset;
-      delta = radius - outline_width / 2;
+      radius = MIN (width / 2, height / 2) + outline_offset.left;
+      delta = radius - outline_width.left / 2;
 
       cairo_arc (cr, width / 2., height / 2., delta,
                  1.5 * G_PI, (1.5 + progress * 2) * G_PI);
-      gdk_cairo_set_source_rgba (cr, outline_color);
+      gdk_cairo_set_source_rgba (cr, &outline_color);
 
-      cairo_set_line_width (cr, MIN (outline_width, radius));
+      cairo_set_line_width (cr, MIN (outline_width.left, radius));
       cairo_set_line_cap (cr, CAIRO_LINE_CAP_BUTT);
       cairo_stroke (cr);
 
@@ -428,7 +430,7 @@ fingerprint_icon_new (const char *icon_name,
   gtk_widget_set_name (box, "fingerprint-box");
   gtk_widget_set_hexpand (box, TRUE);
 
-  image = gtk_image_new_from_icon_name (icon_name, GTK_ICON_SIZE_DND);
+  image = gtk_image_new_from_icon_name (icon_name);
 
   if (icon_widget_type == GTK_TYPE_IMAGE)
     icon_widget = image;
@@ -436,13 +438,14 @@ fingerprint_icon_new (const char *icon_name,
     icon_widget = g_object_new (icon_widget_type, NULL);
 
   if (progress_data)
-    g_signal_connect (image, "draw", G_CALLBACK (fingerprint_icon_draw),
-                      progress_data);
+    {
+        g_signal_connect (image, "realize", G_CALLBACK (fingerprint_icon_draw),
+                          progress_data);
+    }
 
   if (g_type_is_a (icon_widget_type, GTK_TYPE_BUTTON))
     {
-      gtk_button_set_image (GTK_BUTTON (icon_widget), image);
-      gtk_button_set_relief (GTK_BUTTON (icon_widget), GTK_RELIEF_NONE);
+      gtk_menu_button_set_child (GTK_MENU_BUTTON (icon_widget), image);
       gtk_widget_set_can_focus (icon_widget, FALSE);
     }
 
@@ -450,13 +453,13 @@ fingerprint_icon_new (const char *icon_name,
   gtk_widget_set_valign (icon_widget, GTK_ALIGN_CENTER);
   gtk_widget_set_name (icon_widget, "fingerprint-image");
 
-  gtk_container_add (GTK_CONTAINER (box), icon_widget);
+  gtk_box_append (GTK_BOX (box), icon_widget);
 
   context = gtk_widget_get_style_context (icon_widget);
   gtk_style_context_add_class (context, "fingerprint-image");
 
   label = gtk_label_new_with_mnemonic (label_text);
-  gtk_container_add (GTK_CONTAINER (box), label);
+  gtk_box_append (GTK_BOX (box), label);
 
   context = gtk_widget_get_style_context (box);
   gtk_style_context_add_class (context, "fingerprint-icon");
@@ -486,11 +489,11 @@ fingerprint_menu_button (const char *icon_name,
   gtk_widget_set_focus_on_click (flowbox_child, FALSE);
   gtk_widget_set_name (flowbox_child, "fingerprint-flowbox");
 
-  gtk_container_add (GTK_CONTAINER (flowbox_child), box);
+  gtk_widget_insert_after (flowbox_child, box, NULL);
 
   g_object_set_data (G_OBJECT (flowbox_child), "button", button);
   g_object_set_data (G_OBJECT (flowbox_child), "icon",
-                     gtk_button_get_image (GTK_BUTTON (button)));
+                     GTK_IMAGE (gtk_menu_button_get_child (GTK_MENU_BUTTON (button))));
   g_object_set_data (G_OBJECT (flowbox_child), "label", label);
   g_object_set_data (G_OBJECT (button), "flowbox-child", flowbox_child);
 
@@ -518,6 +521,24 @@ prints_visibility_filter (GtkFlowBoxChild *child,
   return g_strv_contains ((const gchar **) self->enrolled_fingers, finger_id);
 }
 
+static GList *
+get_container_children (GtkWidget *container)
+{
+  GtkWidget *child;
+  GList *list = NULL;
+    
+  child = gtk_widget_get_first_child (container);
+  while (child) {
+      GtkWidget *next = gtk_widget_get_next_sibling (child);
+
+      list = g_list_append (list, child);
+
+      child = next;
+  }
+
+  return list;
+}
+
 static void
 update_prints_to_add_visibility (CcFingerprintDialog *self)
 {
@@ -525,7 +546,7 @@ update_prints_to_add_visibility (CcFingerprintDialog *self)
   GList *l;
   guint i;
 
-  print_buttons = gtk_container_get_children (self->add_print_popover_box);
+  print_buttons = get_container_children (GTK_WIDGET (self->add_print_popover_box));
 
   for (i = 0, l = print_buttons; i < N_VALID_FINGERS && l; ++i, l = l->next)
     {
@@ -708,7 +729,7 @@ have_multiple_devices (CcFingerprintDialog *self)
 {
   g_autoptr(GList) devices_rows = NULL;
 
-  devices_rows = gtk_container_get_children (GTK_CONTAINER (self->devices_list));
+  devices_rows = get_container_children (GTK_WIDGET (self->devices_list));
 
   return devices_rows && devices_rows->next;
 }
@@ -744,7 +765,7 @@ set_enroll_result_message (CcFingerprintDialog *self,
 
   gtk_style_context_add_class (style_context, ENROLL_STATE_CLASSES[enroll_state]);
 
-  gtk_image_set_from_icon_name (self->enroll_result_image, icon_name, GTK_ICON_SIZE_DND);
+  gtk_image_set_from_icon_name (self->enroll_result_image, icon_name);
   gtk_label_set_label (self->enroll_result_message, message);
 }
 
@@ -1000,7 +1021,7 @@ enroll_finger (CcFingerprintDialog *self,
   set_enroll_result_message (self, ENROLL_STATE_NORMAL, NULL);
   gtk_stack_set_visible_child (self->stack, self->enrollment_view);
   gtk_label_set_label (self->enroll_message, enroll_message);
-  gtk_entry_set_text (self->enroll_print_entry, finger_name);
+  gtk_editable_set_text (GTK_EDITABLE (self->enroll_print_entry), finger_name);
 
   cc_fprintd_device_call_enroll_start (self->device, finger_id, self->cancellable,
                                        enroll_start_cb, self);
@@ -1019,12 +1040,10 @@ populate_enrollment_view (CcFingerprintDialog *self)
                           (GtkWidget **) &self->enroll_result_image,
                           (GtkWidget **) &self->enroll_result_message);
 
-  gtk_container_add (GTK_CONTAINER (self->enroll_print_bin), self->enroll_result_icon);
+  gtk_box_prepend (GTK_BOX (self->enroll_print_bin), self->enroll_result_icon);
 
   style_context = gtk_widget_get_style_context (self->enroll_result_icon);
   gtk_style_context_add_class (style_context,  "enroll-status");
-
-  gtk_widget_show_all (self->enroll_print_bin);
 }
 
 static void
@@ -1033,8 +1052,15 @@ reenroll_finger_cb (CcFingerprintDialog *self)
   GtkWidget *button;
   GtkWidget *flowbox_child;
   const char *finger_id;
+  GdkRectangle rect;
 
-  button = gtk_popover_get_relative_to (GTK_POPOVER (self->print_popover));
+  if (!gtk_popover_get_pointing_to (GTK_POPOVER (self->print_popover), &rect))
+    return;
+
+  button = GTK_WIDGET (gtk_flow_box_get_child_at_pos (self->prints_gallery, rect.x, rect. y));
+  if (button == NULL)
+    return;
+  
   flowbox_child = g_object_get_data (G_OBJECT (button), "flowbox-child");
   finger_id = g_object_get_data (G_OBJECT (flowbox_child), "finger-id");
 
@@ -1049,12 +1075,12 @@ on_print_activated_cb (GtkFlowBox          *flowbox,
   GtkWidget *selected_button;
 
   selected_button = g_object_get_data (G_OBJECT (child), "button");
-  gtk_button_clicked (GTK_BUTTON (selected_button));
+  g_signal_emit_by_name (GTK_MENU_BUTTON (selected_button), "activate");
 }
 
 static void
 on_enroll_cb (CcFingerprintDialog *self,
-              GtkModelButton      *button)
+              GtkMenuButton       *button)
 {
   const char *finger_id;
 
@@ -1070,15 +1096,18 @@ populate_add_print_popover (CcFingerprintDialog *self)
   for (i = 0; i < N_VALID_FINGERS; ++i)
     {
       GtkWidget *finger_item;
+      GtkGesture *gesture;
 
-      finger_item = gtk_model_button_new ();
-      gtk_button_set_label (GTK_BUTTON (finger_item), get_finger_name (FINGER_IDS[i]));
-      gtk_button_set_use_underline (GTK_BUTTON (finger_item), TRUE);
+      finger_item = gtk_menu_button_new ();
+      gtk_menu_button_set_label (GTK_MENU_BUTTON (finger_item), get_finger_name (FINGER_IDS[i]));
+      gtk_menu_button_set_use_underline (GTK_MENU_BUTTON (finger_item), TRUE);
       g_object_set_data (G_OBJECT (finger_item), "finger-id", (gpointer) FINGER_IDS[i]);
-      gtk_container_add (self->add_print_popover_box, finger_item);
+      gtk_box_prepend (GTK_BOX (self->add_print_popover_box), finger_item);
 
-      g_signal_connect_object (finger_item, "clicked", G_CALLBACK (on_enroll_cb),
+      gesture = gtk_gesture_click_new ();
+      g_signal_connect_object (gesture, "pressed", G_CALLBACK (on_enroll_cb),
                                self, G_CONNECT_SWAPPED);
+      gtk_widget_add_controller (finger_item, GTK_EVENT_CONTROLLER (gesture));
     }
 }
 
@@ -1104,8 +1133,8 @@ populate_prints_gallery (CcFingerprintDialog *self)
       gtk_menu_button_set_popover (GTK_MENU_BUTTON (button),
                                    GTK_WIDGET (self->print_popover));
       /* Move the popover on click, so we can just reuse the same instance */
-      g_signal_connect_object (button, "clicked",
-                               G_CALLBACK (gtk_popover_set_relative_to),
+      g_signal_connect_object (button, "activate",
+                               G_CALLBACK (gtk_popover_set_pointing_to),
                                self->print_popover, G_CONNECT_SWAPPED);
 
       g_object_set_data (G_OBJECT (flowbox_child), "finger-id",
@@ -1129,7 +1158,6 @@ populate_prints_gallery (CcFingerprintDialog *self)
   gtk_flow_box_insert (self->prints_gallery, self->add_print_icon, -1);
   gtk_flow_box_set_max_children_per_line (self->prints_gallery, 1);
 
-  gtk_widget_show_all (GTK_WIDGET (self->prints_gallery));
   gtk_flow_box_set_filter_func (self->prints_gallery, prints_visibility_filter,
                                 self, NULL);
 
@@ -1314,7 +1342,7 @@ on_stack_child_changed (CcFingerprintDialog *self)
   gtk_widget_hide (GTK_WIDGET (self->cancel_button));
   gtk_widget_hide (GTK_WIDGET (self->done_button));
 
-  gtk_header_bar_set_show_close_button (self->titlebar, TRUE);
+  //FIXME gtk_header_bar_set_show_close_button (self->titlebar, TRUE);
   gtk_flow_box_invalidate_filter (self->prints_gallery);
 
   if (visible_child == self->prints_manager)
@@ -1329,7 +1357,7 @@ on_stack_child_changed (CcFingerprintDialog *self)
     }
   else if (visible_child == self->enrollment_view)
     {
-      gtk_header_bar_set_show_close_button (self->titlebar, FALSE);
+      //FIXME gtk_header_bar_set_show_close_button (self->titlebar, FALSE);
 
       gtk_widget_show (GTK_WIDGET (self->cancel_button));
       gtk_widget_set_sensitive (GTK_WIDGET (self->cancel_button), TRUE);
@@ -1356,9 +1384,9 @@ cc_fingerprint_dialog_init (CcFingerprintDialog *self)
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider,
                                        "/org/gnome/control-center/user-accounts/cc-fingerprint-dialog.css");
-  gtk_style_context_add_provider_for_screen (gdk_screen_get_default (),
-                                             GTK_STYLE_PROVIDER (provider),
-                                             GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                              GTK_STYLE_PROVIDER (provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
   on_stack_child_changed (self);
   g_signal_connect_object (self->stack, "notify::visible-child",
@@ -1525,7 +1553,7 @@ static void
 fingerprint_dialog_delete_cb (CcFingerprintDialog *self)
 {
   cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
-  gtk_widget_destroy (GTK_WIDGET (self));
+  gtk_window_destroy (GTK_WINDOW (self));
 }
 
 static void

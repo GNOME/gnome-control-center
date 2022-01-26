@@ -20,13 +20,14 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <act/act.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_PASSWORD_DIALOG (cc_password_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcPasswordDialog, cc_password_dialog, CC, PASSWORD_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcPasswordDialog, cc_password_dialog, CC, PASSWORD_DIALOG, AdwPreferencesWindow)
 
 CcPasswordDialog *cc_password_dialog_new (ActUser *user);
 
