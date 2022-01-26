@@ -163,6 +163,20 @@ class GccDBusTestCase(DBusTestCase):
                      'cycle_count', '250'], [])
             return [ dev ]
 
+        elif device == '2nd-battery':
+            # Not charging or discharging
+            # No cycle count available
+            dev = self.testbed.add_device('power_supply', 'BAT1', None,
+                    ['type', 'Battery',
+                     'present', '1',
+                     'status', 'Not charging',
+                     'energy_full', '30000000',
+                     'energy_full_design', '40000000',
+                     'energy_now', '20000000',
+                     'voltage_now', '12000000',
+                     'cycle_count', '-1'], [])
+            return [ dev ]
+
         elif device == 'ac':
             dev = self.testbed.add_device('power_supply', 'AC', None,
                     ['type', 'Mains', 'online', '0'], [])
@@ -261,6 +275,9 @@ class GccDBusTestCase(DBusTestCase):
         menu.append_item(function_item)
 
         function_item = FunctionItem("Toggle laptop battery", self.toggle_devices, [['ac', 'battery']])
+        menu.append_item(function_item)
+
+        function_item = FunctionItem("Toggle 2nd battery", self.toggle_devices, [['2nd-battery']])
         menu.append_item(function_item)
 
         function_item = FunctionItem("Cycle degraded performance", self.cycle_degraded, [])
