@@ -50,18 +50,15 @@
             </style>
             <child>
               <object class="AdwActionRow" id="details_row">
-                <property name="selectable">False</property>
-                <property name="title">Cable unplugged</property>
+                <property name="activatable-widget">device_off_switch</property>
                 <child>
                   <object class="GtkSwitch" id="device_off_switch">
-                    <property name="halign">end</property>
                     <property name="valign">center</property>
                     <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceEthernet" swapped="yes"/>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="details_button">
-                    <property name="halign">end</property>
                     <property name="valign">center</property>
                     <property name="icon-name">emblem-system-symbolic</property>
                     <signal name="clicked" handler="details_button_clicked_cb" object="NetDeviceEthernet" swapped="yes"/>
