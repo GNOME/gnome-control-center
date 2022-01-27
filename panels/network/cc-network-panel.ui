@@ -53,8 +53,14 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkBox" id="box_bluetooth">
-                                <property name="orientation">vertical</property>
+                              <object class="GtkListBox" id="box_bluetooth">
+                                <property name="selection_mode">none</property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">Other Devices</property>
+                                </accessibility>
+                                <style>
+                                  <class name="boxed-list" />
+                                </style>
                               </object>
                             </child>
                           </object>

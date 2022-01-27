@@ -22,22 +22,17 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, GtkBox)
+G_DECLARE_FINAL_TYPE (NetDeviceBluetooth, net_device_bluetooth, NET, DEVICE_BLUETOOTH, AdwActionRow)
 
 NetDeviceBluetooth *net_device_bluetooth_new                (NMClient           *client,
                                                              NMDevice           *device);
 
 NMDevice           *net_device_bluetooth_get_device         (NetDeviceBluetooth *device);
-
-void                net_device_bluetooth_set_title          (NetDeviceBluetooth *device,
-                                                             const gchar        *title);
-
-void                net_device_bluetooth_set_show_separator (NetDeviceBluetooth *device,
-                                                             gboolean            show_separator);
 
 G_END_DECLS

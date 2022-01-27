@@ -269,7 +269,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
         titles = nm_device_disambiguate_names (nm_devices, num_devices);
         for (i = 0; i < num_devices; i++) {
                 if (NM_IS_DEVICE_BT (nm_devices[i]))
-                        net_device_bluetooth_set_title (NET_DEVICE_BLUETOOTH (devices[i]), nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i])));
+                        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i])));
                 else if (NET_IS_DEVICE_ETHERNET (devices[i]))
                         net_device_ethernet_set_title (NET_DEVICE_ETHERNET (devices[i]), titles[i]);
                 else if (NET_IS_DEVICE_MOBILE (devices[i]))
@@ -361,13 +361,6 @@ update_vpn_section (CcNetworkPanel *self)
 static void
 update_bluetooth_section (CcNetworkPanel *self)
 {
-        guint i;
-
-        for (i = 0; i < self->bluetooth_devices->len; i++) {
-                NetDeviceBluetooth *device = g_ptr_array_index (self->bluetooth_devices, i);
-                net_device_bluetooth_set_show_separator (device, i > 0);
-        }
-
         gtk_widget_set_visible (self->container_bluetooth, self->bluetooth_devices->len > 0);
 }
 
@@ -447,7 +440,7 @@ panel_add_device (CcNetworkPanel *self, NMDevice *device)
                 break;
         case NM_DEVICE_TYPE_BT:
                 device_bluetooth = net_device_bluetooth_new (self->client, device);
-                gtk_box_append (GTK_BOX (self->box_bluetooth), GTK_WIDGET (device_bluetooth));
+                gtk_list_box_append (GTK_LIST_BOX (self->box_bluetooth), GTK_WIDGET (device_bluetooth));
                 g_ptr_array_add (self->bluetooth_devices, device_bluetooth);
                 g_hash_table_insert (self->nm_device_to_device, device, device_bluetooth);
 
