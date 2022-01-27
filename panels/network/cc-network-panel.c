@@ -271,7 +271,7 @@ panel_refresh_device_titles (CcNetworkPanel *self)
                 if (NM_IS_DEVICE_BT (nm_devices[i]))
                         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (devices[i]), nm_device_bt_get_name (NM_DEVICE_BT (nm_devices[i])));
                 else if (NET_IS_DEVICE_ETHERNET (devices[i]))
-                        net_device_ethernet_set_title (NET_DEVICE_ETHERNET (devices[i]), titles[i]);
+                        adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (devices[i]), titles[i]);
                 else if (NET_IS_DEVICE_MOBILE (devices[i]))
                         net_device_mobile_set_title (NET_DEVICE_MOBILE (devices[i]), titles[i]);
         }

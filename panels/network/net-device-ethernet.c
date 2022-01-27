@@ -23,7 +23,6 @@
 
 #include <glib-object.h>
 #include <glib/gi18n.h>
-#include <adwaita.h>
 #include <NetworkManager.h>
 
 #include "panel-common.h"
@@ -35,23 +34,22 @@
 
 struct _NetDeviceEthernet
 {
-        GtkBox             parent;
+        AdwPreferencesGroup parent;
 
-        GtkListBox        *connection_list;
-        GtkStack          *connection_stack;
-        GtkButton         *details_button;
-        GtkListBox        *details_listbox;
-        AdwActionRow      *details_row;
-        GtkLabel          *device_label;
-        GtkSwitch         *device_off_switch;
+        GtkListBox         *connection_list;
+        GtkStack           *connection_stack;
+        GtkButton          *details_button;
+        GtkListBox         *details_listbox;
+        AdwActionRow       *details_row;
+        GtkSwitch          *device_off_switch;
 
-        NMClient          *client;
-        NMDevice          *device;
-        gboolean           updating_device;
-        GHashTable        *connections;
+        NMClient           *client;
+        NMDevice           *device;
+        gboolean            updating_device;
+        GHashTable         *connections;
 };
 
-G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, GTK_TYPE_BOX)
+G_DEFINE_TYPE (NetDeviceEthernet, net_device_ethernet, ADW_TYPE_PREFERENCES_GROUP)
 
 static void
 add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar *value)
@@ -491,7 +489,6 @@ net_device_ethernet_class_init (NetDeviceEthernetClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_button);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_listbox);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, details_row);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_label);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceEthernet, device_off_switch);
 
         gtk_widget_class_bind_template_callback (widget_class, connection_list_row_activated_cb);
@@ -534,11 +531,4 @@ net_device_ethernet_get_device (NetDeviceEthernet *self)
 {
         g_return_val_if_fail (NET_IS_DEVICE_ETHERNET (self), NULL);
         return self->device;
-}
-
-void
-net_device_ethernet_set_title (NetDeviceEthernet *self, const gchar *title)
-{
-        g_return_if_fail (NET_IS_DEVICE_ETHERNET (self));
-        gtk_label_set_label (self->device_label, title);
 }

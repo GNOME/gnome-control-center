@@ -1,33 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="NetDeviceEthernet" parent="GtkBox">
-    <property name="spacing">6</property>
-    <property name="orientation">vertical</property>
-    <child>
-      <object class="GtkBox">
-        <child>
-          <object class="GtkLabel" id="device_label">
-            <property name="hexpand">True</property>
-            <property name="xalign">0</property>
-            <property name="label" translatable="yes">Wired</property>
-            <property name="ellipsize">end</property>
-            <attributes>
-              <attribute name="weight" value="bold"/>
-            </attributes>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton">
-            <property name="icon_name">list-add-symbolic</property>
-            <signal name="clicked" handler="add_profile_button_clicked_cb" object="NetDeviceEthernet" swapped="yes"/>
-            <style>
-              <class name="flat" />
-            </style>
-          </object>
-        </child>
+  <template class="NetDeviceEthernet" parent="AdwPreferencesGroup">
+    <property name="title" translatable="yes">Wired</property>
+    <property name="header-suffix">
+      <object class="GtkButton">
+        <property name="icon_name">list-add-symbolic</property>
+        <signal name="clicked" handler="add_profile_button_clicked_cb" object="NetDeviceEthernet" swapped="yes"/>
+        <style>
+          <class name="flat" />
+        </style>
       </object>
-    </child>
+    </property>
 
     <child>
       <object class="GtkStack" id="connection_stack">

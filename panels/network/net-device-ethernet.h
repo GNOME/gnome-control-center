@@ -21,19 +21,17 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, GtkBox)
+G_DECLARE_FINAL_TYPE (NetDeviceEthernet, net_device_ethernet, NET, DEVICE_ETHERNET, AdwPreferencesGroup)
 
 NetDeviceEthernet *net_device_ethernet_new        (NMClient          *client,
                                                    NMDevice          *device);
 
 NMDevice          *net_device_ethernet_get_device (NetDeviceEthernet *device);
-
-void               net_device_ethernet_set_title  (NetDeviceEthernet *device,
-                                                   const gchar       *title);
 
 G_END_DECLS
