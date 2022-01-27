@@ -88,31 +88,14 @@
 
                 <!-- Day row -->
                 <child>
-                  <object class="GtkListBoxRow" id="day_row">
-                    <property name="activatable">False</property>
+                  <object class="AdwActionRow" id="day_row">
+                    <property name="title" translatable="yes">Day</property>
+                    <property name="activatable-widget">day_spinbutton</property>
                     <child>
-                      <object class="GtkBox">
-                        <property name="margin_top">12</property>
-                        <property name="margin_bottom">12</property>
-                        <property name="margin_start">12</property>
-                        <property name="margin_end">12</property>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="hexpand">True</property>
-                            <property name="halign">start</property>
-                            <property name="label" translatable="yes">Day</property>
-                            <property name="mnemonic-widget">day_spinbutton</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkSpinButton" id="day_spinbutton">
-                            <property name="width-chars">3</property>
-                            <property name="numeric">True</property>
-                          </object>
-                        </child>
+                      <object class="GtkSpinButton" id="day_spinbutton">
+                        <property name="valign">center</property>
+                        <property name="width-chars">3</property>
+                        <property name="numeric">True</property>
                       </object>
                     </child>
                   </object>
