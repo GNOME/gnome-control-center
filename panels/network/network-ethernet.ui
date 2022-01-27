@@ -30,20 +30,14 @@
     </child>
 
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
-        <property name="spacing">6</property>
+      <object class="GtkStack" id="connection_stack">
         <child>
-          <object class="GtkScrolledWindow" id="scrolled_window">
-            <property name="hexpand">True</property>
-            <property name="hscrollbar_policy">never</property>
-            <property name="vscrollbar_policy">never</property>
-            <child>
-              <object class="GtkListBox" id="connection_list">
-                <property name="selection-mode">none</property>
-                <signal name="row-activated" handler="connection_list_row_activated_cb" object="NetDeviceEthernet" swapped="yes"/>
-              </object>
-            </child>
+          <object class="GtkListBox" id="connection_list">
+            <property name="selection-mode">none</property>
+            <signal name="row-activated" handler="connection_list_row_activated_cb" object="NetDeviceEthernet" swapped="yes"/>
+            <style>
+              <class name="boxed-list" />
+            </style>
           </object>
         </child>
 
