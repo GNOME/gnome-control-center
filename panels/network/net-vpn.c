@@ -33,12 +33,10 @@
 
 struct _NetVpn
 {
-        GtkBox                   parent;
+        AdwActionRow             parent;
 
         GtkBox                  *box;
-        GtkLabel                *device_label;
         GtkSwitch               *device_off_switch;
-        GtkSeparator            *separator;
 
         NMClient                *client;
         NMConnection            *connection;
@@ -46,7 +44,7 @@ struct _NetVpn
         gboolean                 updating_device;
 };
 
-G_DEFINE_TYPE (NetVpn, net_vpn, GTK_TYPE_BOX)
+G_DEFINE_TYPE (NetVpn, net_vpn, ADW_TYPE_ACTION_ROW)
 
 static void
 nm_device_refresh_vpn_ui (NetVpn *self)
@@ -63,7 +61,7 @@ nm_device_refresh_vpn_ui (NetVpn *self)
          * vpn connections in the device list.
          */
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (self->connection));
-        gtk_label_set_label (self->device_label, title);
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
 
         if (self->active_connection) {
                 g_signal_handlers_disconnect_by_func (self->active_connection,
@@ -189,9 +187,7 @@ net_vpn_class_init (NetVpnClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-vpn.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, NetVpn, device_label);
         gtk_widget_class_bind_template_child (widget_class, NetVpn, device_off_switch);
-        gtk_widget_class_bind_template_child (widget_class, NetVpn, separator);
 
         gtk_widget_class_bind_template_callback (widget_class, device_off_toggled);
         gtk_widget_class_bind_template_callback (widget_class, edit_connection);
@@ -233,12 +229,4 @@ net_vpn_get_connection (NetVpn *self)
 {
         g_return_val_if_fail (NET_IS_VPN (self), NULL);
         return self->connection;
-}
-
-void
-net_vpn_set_show_separator (NetVpn   *self,
-                            gboolean  show_separator)
-{
-        g_return_if_fail (NET_IS_VPN (self));
-        gtk_widget_set_visible (GTK_WIDGET (self->separator), show_separator);
 }

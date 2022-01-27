@@ -71,6 +71,7 @@ struct _CcNetworkPanel
         GtkWidget        *box_wired;
         GtkWidget        *container_bluetooth;
         GtkWidget        *empty_listbox;
+        GtkWidget        *vpn_stack;
 
         /* wireless dialog stuff */
         CmdlineOperation  arg_operation;
@@ -350,23 +351,11 @@ handle_argv (CcNetworkPanel *self)
         g_debug ("Could not handle argv operation, no matching device yet?");
 }
 
-/* HACK: this function is basically a workaround. We don't have a single
- * listbox in the VPN section, thus we need to track the separators and the
- * stub row manually.
- */
 static void
 update_vpn_section (CcNetworkPanel *self)
 {
-        guint i, n_vpns;
-
-        for (i = 0, n_vpns = 0; i < self->vpns->len; i++) {
-                NetVpn *vpn = g_ptr_array_index (self->vpns, i);
-
-                net_vpn_set_show_separator (vpn, n_vpns > 0);
-                n_vpns++;
-        }
-
-        gtk_widget_set_visible (self->empty_listbox, n_vpns == 0);
+        gtk_stack_set_visible_child (GTK_STACK (self->vpn_stack),
+                                     self->vpns->len == 0 ? self->empty_listbox : self->box_vpn);
 }
 
 static void
@@ -611,7 +600,7 @@ panel_add_vpn_device (CcNetworkPanel *self, NMConnection *connection)
         }
 
         net_vpn = net_vpn_new (self->client, connection);
-        gtk_box_append (GTK_BOX (self->box_vpn), GTK_WIDGET (net_vpn));
+        gtk_list_box_append (GTK_LIST_BOX (self->box_vpn), GTK_WIDGET (net_vpn));
 
         /* store in the devices array */
         g_ptr_array_add (self->vpns, net_vpn);
@@ -653,7 +642,7 @@ client_connection_removed_cb (CcNetworkPanel *self, NMConnection *connection)
                 NetVpn *vpn = g_ptr_array_index (self->vpns, i);
                 if (net_vpn_get_connection (vpn) == connection) {
                         g_ptr_array_remove (self->vpns, vpn);
-                        gtk_box_remove (GTK_BOX (self->box_vpn), GTK_WIDGET (vpn));
+                        gtk_list_box_remove (GTK_LIST_BOX (self->box_vpn), GTK_WIDGET (vpn));
                         update_vpn_section (self);
                         return;
                 }
@@ -745,6 +734,7 @@ cc_network_panel_class_init (CcNetworkPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, box_wired);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, container_bluetooth);
         gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, empty_listbox);
+        gtk_widget_class_bind_template_child (widget_class, CcNetworkPanel, vpn_stack);
 
         gtk_widget_class_bind_template_callback (widget_class, create_connection_cb);
 }

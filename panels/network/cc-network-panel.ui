@@ -90,11 +90,20 @@
                             </child>
 
                             <child>
-                              <object class="GtkBox" id="box_vpn">
-                                <property name="orientation">vertical</property>
-
-                                <!-- "Not set up" row -->
+                              <object class="GtkStack" id="vpn_stack">
                                 <child>
+                                  <object class="GtkListBox" id="box_vpn">
+                                    <property name="selection_mode">none</property>
+                                    <accessibility>
+                                      <property name="label" translatable="yes">VPN</property>
+                                    </accessibility>
+                                    <style>
+                                      <class name="boxed-list" />
+                                    </style>
+                                  </object>
+                                </child>
+                                <child>
+                                  <!-- "Not set up" row -->
                                   <object class="GtkListBox" id="empty_listbox">
                                     <property name="selection_mode">none</property>
                                     <style>

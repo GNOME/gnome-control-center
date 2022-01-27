@@ -21,20 +21,17 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, GtkBox)
+G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, AdwActionRow)
 
 NetVpn       *net_vpn_new                (NMClient     *client,
                                           NMConnection *connection);
 
 NMConnection *net_vpn_get_connection     (NetVpn       *vpn);
-
-
-void          net_vpn_set_show_separator (NetVpn       *vpn,
-                                          gboolean      show_separator);
 
 G_END_DECLS

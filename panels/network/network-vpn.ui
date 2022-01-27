@@ -1,65 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="NetVpn" parent="GtkBox">
-    <property name="hexpand">True</property>
-    <property name="orientation">vertical</property>
-
-    <!-- HACK: a separator above the row, since we don't have a real listbox widget in the panel -->
-    <child>
-      <object class="GtkSeparator" id="separator">
-        <property name="orientation">horizontal</property>
+  <template class="NetVpn" parent="AdwActionRow">
+    <property name="activatable-widget">device_off_switch</property>
+    <child type="suffix">
+      <object class="GtkSwitch" id="device_off_switch">
+        <property name="valign">center</property>
+        <signal name="notify::active" handler="device_off_toggled" object="NetVpn" swapped="yes"/>
+        <accessibility>
+          <property name="label" translatable="yes">Turn VPN connection off</property>
+        </accessibility>
       </object>
     </child>
-
-    <!-- Main listbox -->
-    <child>
-      <object class="GtkListBox">
-        <property name="selection_mode">none</property>
-        <style>
-          <class name="boxed-list" />
-        </style>
-        <child>
-          <object class="GtkListBoxRow">
-            <property name="activatable">False</property>
-            <child>
-              <object class="GtkBox">
-                <property name="valign">start</property>
-                <property name="margin_top">8</property>
-                <property name="margin_bottom">8</property>
-                <property name="margin_start">12</property>
-                <property name="margin_end">12</property>
-                <property name="spacing">12</property>
-                <child>
-                  <object class="GtkLabel" id="device_label">
-                    <property name="xalign">0</property>
-                    <property name="ellipsize">end</property>
-                    <property name="hexpand">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSwitch" id="device_off_switch">
-                    <property name="halign">end</property>
-                    <property name="valign">center</property>
-                    <signal name="notify::active" handler="device_off_toggled" object="NetVpn" swapped="yes"/>
-                    <accessibility>
-                      <property name="label" translatable="yes">Turn VPN connection off</property>
-                    </accessibility>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkButton" id="options_button">
-                    <property name="icon_name">emblem-system-symbolic</property>
-                    <signal name="clicked" handler="edit_connection" object="NetVpn" swapped="yes"/>
-                    <accessibility>
-                      <property name="label" translatable="yes">Options…</property>
-                    </accessibility>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
+    <child type="suffix">
+      <object class="GtkButton" id="options_button">
+        <property name="valign">center</property>
+        <property name="icon_name">emblem-system-symbolic</property>
+        <signal name="clicked" handler="edit_connection" object="NetVpn" swapped="yes"/>
+        <accessibility>
+          <property name="label" translatable="yes">Options…</property>
+        </accessibility>
       </object>
     </child>
   </template>
