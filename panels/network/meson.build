@@ -7,6 +7,7 @@ network_inc = include_directories('.')
 
 subdir('wireless-security')
 subdir('connection-editor')
+subdir('icons')
 
 panel_names = [
   cappletname,
