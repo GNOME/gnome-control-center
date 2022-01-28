@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-01-27 03:31+0000\n"
-"PO-Revision-Date: 2022-01-27 11:33-0300\n"
+"POT-Creation-Date: 2022-01-27 23:06+0000\n"
+"PO-Revision-Date: 2022-01-28 12:40-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -1786,10 +1786,10 @@ msgstr ""
 "Noturna;Luz;Azul;Desvio para o vermelho;redshift;cor;pôr do sol;nascer do "
 "sol;"
 
-#: panels/info-overview/cc-info-overview-panel.c:410
-#: panels/info-overview/cc-info-overview-panel.c:434
-#: panels/info-overview/cc-info-overview-panel.c:480
-#: panels/info-overview/cc-info-overview-panel.c:510
+#: panels/info-overview/cc-info-overview-panel.c:411
+#: panels/info-overview/cc-info-overview-panel.c:435
+#: panels/info-overview/cc-info-overview-panel.c:481
+#: panels/info-overview/cc-info-overview-panel.c:511
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "Desconhecido"
@@ -1798,32 +1798,32 @@ msgstr "Desconhecido"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:442
+#: panels/info-overview/cc-info-overview-panel.c:443
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; ID de compilação: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:457
+#: panels/info-overview/cc-info-overview-panel.c:458
 #, c-format
 msgid "64-bit"
 msgstr "64 bits"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:460
+#: panels/info-overview/cc-info-overview-panel.c:461
 #, c-format
 msgid "32-bit"
 msgstr "32 bits"
 
-#: panels/info-overview/cc-info-overview-panel.c:717
+#: panels/info-overview/cc-info-overview-panel.c:718
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:721
+#: panels/info-overview/cc-info-overview-panel.c:722
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:723
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Desconhecido"
@@ -2021,33 +2021,24 @@ msgstr "Pesquisar"
 msgid "Screenshots"
 msgstr "Capturas de tela"
 
-#: panels/keyboard/01-screenshot.xml.in:6
-msgid "Save a screenshot to $PICTURES"
-msgstr "Salvar uma captura de tela para $PICTURES"
+#: panels/keyboard/01-screenshot.xml.in:5
+#| msgid "Screenshots"
+msgid "Show the screenshot UI"
+msgstr "Mostra a UI de captura de tela"
 
-#: panels/keyboard/01-screenshot.xml.in:10
-msgid "Save a screenshot of a window to $PICTURES"
-msgstr "Salvar uma captura de tela de uma janela para $PICTURES"
+#: panels/keyboard/01-screenshot.xml.in:8
+#| msgid "Screenshots"
+msgid "Take a screenshot"
+msgstr "Captura uma imagem da tela"
+
+#: panels/keyboard/01-screenshot.xml.in:11
+#| msgid "Save a screenshot of a window to $PICTURES"
+msgid "Take a screenshot of a window"
+msgstr "Captura a tela de uma janela"
 
 #: panels/keyboard/01-screenshot.xml.in:14
-msgid "Save a screenshot of an area to $PICTURES"
-msgstr "Salvar uma captura de tela de uma área para $PICTURES"
-
-#: panels/keyboard/01-screenshot.xml.in:17
-msgid "Copy a screenshot to clipboard"
-msgstr "Copiar uma captura de tela para a área de transferência"
-
-#: panels/keyboard/01-screenshot.xml.in:20
-msgid "Copy a screenshot of a window to clipboard"
-msgstr "Copiar uma captura de tela de uma janela para a área de transferência"
-
-#: panels/keyboard/01-screenshot.xml.in:23
-msgid "Copy a screenshot of an area to clipboard"
-msgstr "Copiar uma captura de tela de uma área para a área de transferência"
-
-#: panels/keyboard/01-screenshot.xml.in:26
-msgid "Record a short screencast"
-msgstr "Fazer uma pequena gravação de tela"
+msgid "Show the screen recording UI"
+msgstr "Mostra a UI de gravação de tela"
 
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
@@ -5850,24 +5841,18 @@ msgid "Move Down"
 msgstr "Mover para baixo"
 
 #: panels/search/cc-search-panel.ui:10
-#| msgid "Application Switching"
 msgid "Application Search"
 msgstr "Pesquisa do aplicativo"
 
 #: panels/search/cc-search-panel.ui:11
-#| msgid "Include applications from all _workspaces"
 msgid "Include application-provided search results."
 msgstr "Inclui resultados de pesquisa fornecidos pelo aplicativo."
 
 #: panels/search/cc-search-panel.ui:23
-#| msgid ""
-#| "Folders which are searched by system applications, such as Files, Photos "
-#| "and Videos."
 msgid "Folders which are searched by system applications."
 msgstr "Pastas que são pesquisadas por aplicativos de sistema."
 
 #: panels/search/cc-search-panel.ui:37
-#| msgid "No Search Results"
 msgid "Search Results"
 msgstr "Resultados de pesquisa"
 
@@ -8796,6 +8781,25 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "Save a screenshot to $PICTURES"
+#~ msgstr "Salvar uma captura de tela para $PICTURES"
+
+#~ msgid "Save a screenshot of an area to $PICTURES"
+#~ msgstr "Salvar uma captura de tela de uma área para $PICTURES"
+
+#~ msgid "Copy a screenshot to clipboard"
+#~ msgstr "Copiar uma captura de tela para a área de transferência"
+
+#~ msgid "Copy a screenshot of a window to clipboard"
+#~ msgstr ""
+#~ "Copiar uma captura de tela de uma janela para a área de transferência"
+
+#~ msgid "Copy a screenshot of an area to clipboard"
+#~ msgstr "Copiar uma captura de tela de uma área para a área de transferência"
+
+#~ msgid "Record a short screencast"
+#~ msgstr "Fazer uma pequena gravação de tela"
 
 #~ msgid ""
 #~ "Control which search results are shown in the Activities Overview. The "
