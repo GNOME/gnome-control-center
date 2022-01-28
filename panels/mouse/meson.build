@@ -66,3 +66,5 @@ executable(
   dependencies: deps,
   c_args: cflags
 )
+
+subdir('icons')
