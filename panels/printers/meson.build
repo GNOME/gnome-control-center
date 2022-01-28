@@ -74,3 +74,4 @@ printers_panel_lib = static_library(
 )
 panels_libs += [ printers_panel_lib ]
 
+subdir('icons')
