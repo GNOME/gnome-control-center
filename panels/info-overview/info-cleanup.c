@@ -37,9 +37,8 @@ prettify_info (const char *info)
   int   i;
   static const ReplaceStrings rs[] = {
     { "Mesa DRI ", ""},
-    { "Intel[(]R[)]", "Intel\302\256"},
-    { "Core[(]TM[)]", "Core\342\204\242"},
-    { "Atom[(]TM[)]", "Atom\342\204\242"},
+    { "[(]R[)]", "\302\256"},
+    { "[(](tm|TM)[)]", "\342\204\242"},
     { "Gallium \\d+\\.\\d+ on (.*)", "\\1"},
     { " [(][^)]*(DRM|MESA|LLVM)[^)]*[)]?", ""},
     { "Graphics Controller", "Graphics"},
