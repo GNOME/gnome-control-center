@@ -40,7 +40,7 @@ prettify_info (const char *info)
     { "[(]R[)]", "\302\256"},
     { "[(](tm|TM)[)]", "\342\204\242"},
     { "Gallium \\d+\\.\\d+ on (.*)", "\\1"},
-    { " CPU| Processor| \\S+-Core", ""},
+    { " CPU| Processor| \\S+-Core| @ \\d+\\.\\d+GHz", ""},
     { " x86|/MMX|/SSE2|/PCIe", ""},
     { " [(][^)]*(DRM|MESA|LLVM)[^)]*[)]?", ""},
     { "Graphics Controller", "Graphics"},
