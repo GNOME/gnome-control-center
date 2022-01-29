@@ -212,12 +212,10 @@ static void
 set_icon_name (CcWacomStylusPage *page,
 	       const char        *icon_name)
 {
-#if 0
 	g_autofree gchar *resource = NULL;
 
 	resource = g_strdup_printf ("/org/gnome/control-center/wacom/%s.svg", icon_name);
 	gtk_picture_set_resource (GTK_PICTURE (page->stylus_icon), resource);
-#endif
 }
 
 GtkWidget *
