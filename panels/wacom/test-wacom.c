@@ -38,7 +38,6 @@ add_page (GList *devices,
 	g_list_free (devices);
 
 	widget = cc_wacom_page_new (NULL, stylus);
-	cc_wacom_page_set_navigation (CC_WACOM_PAGE (widget), GTK_NOTEBOOK (notebook), FALSE);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), widget, NULL);
 	gtk_widget_show (widget);
 }
