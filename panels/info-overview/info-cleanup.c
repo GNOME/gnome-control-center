@@ -41,7 +41,7 @@ prettify_info (const char *info)
     { "Core[(]TM[)]", "Core\342\204\242"},
     { "Atom[(]TM[)]", "Atom\342\204\242"},
     { "Gallium \\d+\\.\\d+ on (.*)", "\\1"},
-    { "(AMD .*) [(].*", "\\1"},
+    { " [(][^)]*(DRM|MESA|LLVM)[^)]*[)]?", ""},
     { "Graphics Controller", "Graphics"},
   };
 
