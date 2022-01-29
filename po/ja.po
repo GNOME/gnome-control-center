@@ -1,5 +1,5 @@
 # gnome-control-center ja.po.
-# Copyright (C) 1998-2001, 2003-2020 Free Software Foundation, Inc.
+# Copyright (C) 1998-2001, 2003-2022 Free Software Foundation, Inc.
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998.
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999.
 # Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>, 2000, 2009, 2010-2013.
@@ -24,7 +24,8 @@
 # TakashiUshikoshi <adoredirectg59@gmail.com>, 2016.
 # Shinichirou Yamada <yamada_strong_yamada_nice_64bit@yahoo.co.jp>, 2017-2018.
 # Kenichi Ito <ken.i54k@gmail.com>, 2018.
-# sicklylife <translation@sicklylife.jp>, 2019-2020.
+# sicklylife <translation@sicklylife.jp>, 2019-2020, 2022.
+# sujiniku <sujinikusityuu@gmail.com>, 2021.
 #
 msgid ""
 msgstr ""
@@ -32,7 +33,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2022-01-24 13:03+0000\n"
-"PO-Revision-Date: 2020-08-15 20:15+0900\n"
+"PO-Revision-Date: 2022-01-29 20:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -1854,10 +1855,8 @@ msgid "Device Name"
 msgstr "デバイス名"
 
 #: panels/info-overview/cc-info-overview-panel.ui:74
-#, fuzzy
-#| msgid "Hardware Address"
 msgid "Hardware Model"
-msgstr "ハードウェアアドレス"
+msgstr "ハードウェアモデル"
 
 #: panels/info-overview/cc-info-overview-panel.ui:83
 msgid "Memory"
@@ -2137,28 +2136,20 @@ msgid "No input source selected"
 msgstr "入力ソースを選択していません"
 
 #: panels/keyboard/cc-input-row.ui:75
-#, fuzzy
-#| msgid "Move Up"
 msgid "Move up"
 msgstr "上へ"
 
 #: panels/keyboard/cc-input-row.ui:86
-#, fuzzy
-#| msgid "Move Down"
 msgid "Move down"
 msgstr "下へ"
 
 #: panels/keyboard/cc-input-row.ui:103
-#, fuzzy
-#| msgid "Tablet Preferences"
 msgid "Preferences"
-msgstr "タブレット設定"
+msgstr "設定"
 
 #: panels/keyboard/cc-input-row.ui:120
-#, fuzzy
-#| msgid "Keyboard Shortcuts"
 msgid "View Keyboard Layout"
-msgstr "キーボードショートカット"
+msgstr "キーボードレイアウトを表示"
 
 #: panels/keyboard/cc-input-row.ui:137
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:286
@@ -2210,8 +2201,6 @@ msgstr "右 Super"
 
 #: panels/keyboard/cc-keyboard-panel.c:75
 #: panels/keyboard/cc-keyboard-panel.c:93
-#, fuzzy
-#| msgid "Menu key"
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "メニューキー"
@@ -2238,21 +2227,17 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-panel.c:95
 msgctxt "keyboard key"
 msgid "Caps Lock"
-msgstr ""
+msgstr "Caps Lock"
 
 #: panels/keyboard/cc-keyboard-panel.c:96
-#, fuzzy
-#| msgid "Screen Lock"
 msgctxt "keyboard key"
 msgid "Scroll Lock"
-msgstr "画面ロック"
+msgstr "Scroll Lock"
 
 #: panels/keyboard/cc-keyboard-panel.c:97
-#, fuzzy
-#| msgid "Login _Screen"
 msgctxt "keyboard key"
 msgid "Print Screen"
-msgstr "ログイン画面(_S)"
+msgstr "Print Screen"
 
 #: panels/keyboard/cc-keyboard-panel.c:233
 #, fuzzy, c-format
@@ -2267,34 +2252,28 @@ msgid "Input Sources"
 msgstr "入力ソース"
 
 #: panels/keyboard/cc-keyboard-panel.ui:59
-#, fuzzy
-#| msgid "Choose keyboard layouts or input methods."
 msgid "Includes keyboard layouts and input methods."
-msgstr "キーボードレイアウトかインプットメソッドを選択してください。"
+msgstr "キーボードレイアウトとインプットメソッドを含みます。"
 
 #: panels/keyboard/cc-keyboard-panel.ui:85
-#, fuzzy
-#| msgid "Input Source Options"
 msgid "Input Source Switching"
-msgstr "入力ソースのオプション"
+msgstr "入力ソースの切り替え"
 
 #: panels/keyboard/cc-keyboard-panel.ui:131
 msgid "Use the _same source for all windows"
 msgstr "すべてのウィンドウで同じソースを使用する(_S)"
 
 #: panels/keyboard/cc-keyboard-panel.ui:158
-#, fuzzy
-#| msgid "Allow _different sources for each window"
 msgid "Switch input sources _individually for each window"
-msgstr "ウィンドウごとに別のソースを使用可能にする(_D)"
+msgstr "ウィンドウごとに個別に入力ソースを切り替える(_I)"
 
 #: panels/keyboard/cc-keyboard-panel.ui:177
 msgid "Special Character Entry"
-msgstr ""
+msgstr "特殊文字の入力"
 
 #: panels/keyboard/cc-keyboard-panel.ui:188
 msgid "Methods for entering symbols and letter variants using the keyboard."
-msgstr ""
+msgstr "キーボードで記号や文字の異体字を入力する方法です。"
 
 #: panels/keyboard/cc-keyboard-panel.ui:263
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:306
@@ -2303,18 +2282,14 @@ msgid "Keyboard Shortcuts"
 msgstr "キーボードショートカット"
 
 #: panels/keyboard/cc-keyboard-panel.ui:283
-#, fuzzy
-#| msgid "Custom Shortcuts"
 msgid "View and Customize Shortcuts"
-msgstr "独自のショートカット"
+msgstr "ショートカットの表示とカスタマイズ"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:283
-#, fuzzy, c-format
-#| msgid "%d minute"
-#| msgid_plural "%d minutes"
+#, c-format
 msgid "%d modified"
 msgid_plural "%d modified"
-msgstr[0] "%d 分"
+msgstr[0] "%d 個変更"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:428
 msgid "Reset All Shortcuts?"
@@ -2341,20 +2316,17 @@ msgid "Reset All"
 msgstr "すべてリセット"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:115
-#, fuzzy
-#| msgid "Add Custom Shortcut"
 msgid "Add Custom Shortcuts"
 msgstr "独自のショートカットを追加"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr ""
+"アプリを起動したりスクリプトを実行したりする独自のショートカットを設定します。"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:131
-#, fuzzy
-#| msgid "Shortcut"
 msgid "Add Shortcut"
-msgstr "ショートカット"
+msgstr "ショートカットを追加"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:166
 msgid "No keyboard shortcut found"
@@ -2450,18 +2422,15 @@ msgid "Reset the shortcut to its default value"
 msgstr "ショートカットをデフォルトの値にリセットします"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "Screen _Keyboard"
 msgid "Keyboard"
-msgstr "スクリーンキーボード(_K)"
+msgstr "キーボード"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-#, fuzzy
-#| msgid "View and change keyboard shortcuts and set your typing preferences"
 msgid ""
 "Change keyboard shortcuts and set your typing preferences, keyboard layouts "
 "and input sources"
-msgstr "キーボードショートカットの表示や変更、タイピングの設定を行います"
+msgstr ""
+"キーボードショートカットや入力設定 (キーボードレイアウトや入力ソース) の変更を行います"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:19
@@ -2834,74 +2803,66 @@ msgstr ""
 
 # ref. gnome-color-manager
 #: panels/multitasking/cc-multitasking-panel.ui:114
-#, fuzzy
-#| msgid "Colorspace: "
 msgid "Workspaces"
-msgstr "色空間: "
+msgstr "ワークスペース"
 
 #: panels/multitasking/cc-multitasking-panel.ui:139
 msgid "_Dynamic workspaces"
-msgstr ""
+msgstr "動的ワークスペース(_D)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:140
-#, fuzzy
-#| msgid "Automatically Delete Temporary _Files"
 msgid "Automatically removes empty workspaces."
-msgstr "一時ファイルを自動的に削除する(_F)"
+msgstr "空のワークスペースを自動的に削除します。"
 
 #: panels/multitasking/cc-multitasking-panel.ui:158
 msgid "_Fixed number of workspaces"
-msgstr ""
+msgstr "ワークスペースの数を指定する(_F)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:159
 msgid "Specify a number of permanent workspaces."
-msgstr ""
+msgstr "常に指定した数のワークスペースが用意されます。"
 
 #: panels/multitasking/cc-multitasking-panel.ui:179
 msgid "_Number of Workspaces"
-msgstr ""
+msgstr "ワークスペースの数(_N)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:200
-#, fuzzy
-#| msgid "%s Monitor"
 msgid "Multi-Monitor"
-msgstr "%s モニター"
+msgstr "マルチモニター"
 
 #: panels/multitasking/cc-multitasking-panel.ui:225
 msgid "Workspaces on _primary display only"
-msgstr ""
+msgstr "プライマリーディスプレイにのみワークスペースを表示する(_P)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:252
 msgid "Workspaces on all d_isplays"
-msgstr ""
+msgstr "すべてのディスプレイにワークスペースを表示する(_I)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:282
-#, fuzzy
-#| msgctxt "Wacom action-type"
-#| msgid "Application defined"
 msgid "Application Switching"
-msgstr "アプリケーション定義"
+msgstr "アプリケーションの切り替え"
 
 #: panels/multitasking/cc-multitasking-panel.ui:307
 msgid "Include applications from all _workspaces"
-msgstr ""
+msgstr "すべてのワークスペースのアプリケーションを含める(_W)"
 
 #: panels/multitasking/cc-multitasking-panel.ui:325
 msgid "Include applications from the _current workspace only"
-msgstr ""
+msgstr "現在のワークスペースのアプリケーションのみを含める(_C)"
 
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:3
 msgid "Multitasking"
-msgstr ""
+msgstr "マルチタスク"
 
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:4
 msgid "Manage preferences for productivity and multitasking"
-msgstr ""
+msgstr "プロダクティビティとマルチタスクに関する設定を管理します"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
 msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
-msgstr ""
+msgstr "Multitasking;Multitask;Productivity;Customize;Desktop;"
+"マルチタスク;プロダクティビティ;カスタマイズ;デスクトップ;"
 
 #: panels/network/cc-network-panel.c:686 panels/network/cc-wifi-panel.ui:307
 msgid "Oops, something has gone wrong. Please contact your software vendor."
@@ -2979,10 +2940,9 @@ msgid "Must have a minimum of 8 characters"
 msgstr "8 文字以上にしてください"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:272
-#, fuzzy, c-format
-#| msgid "Must have a minimum of 8 characters"
+#, c-format
 msgid "Must have a maximum of %d characters"
-msgstr "8 文字以上にしてください"
+msgstr "%d 文字以上にしてください"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:488
 msgid "Turn On Wi-Fi Hotspot?"
@@ -4781,8 +4741,6 @@ msgid "When plugged in"
 msgstr "電源接続時"
 
 #: panels/power/cc-power-panel.c:980
-#, fuzzy
-#| msgid "Never"
 msgctxt "Idle time"
 msgid "Never"
 msgstr "しない"
@@ -4795,6 +4753,7 @@ msgstr "自動サスペンド"
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
+"動作温度が高いためパフォーマンスモードが一時的に無効になりました。"
 
 #: panels/power/cc-power-panel.c:1173
 msgid ""
@@ -4804,25 +4763,27 @@ msgstr ""
 
 #: panels/power/cc-power-panel.c:1175
 msgid "Performance mode temporarily disabled."
-msgstr ""
+msgstr "パフォーマンスモードが一時的に無効になりました。"
 
 #: panels/power/cc-power-panel.c:1218
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr ""
+"バッテリー低下: 省電力が有効になりました。バッテリーが十分に充電されると"
+"以前のモードに戻ります。"
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1226
 #, c-format
 msgid "Power Saver mode activated by “%s”."
-msgstr ""
+msgstr "“%s”によって省電力モードがアクティブになります。"
 
 #. translators: "%s" is an application name
 #: panels/power/cc-power-panel.c:1230
 #, c-format
 msgid "Performance mode activated by “%s”."
-msgstr ""
+msgstr "“%s”によってパフォーマンスモードがアクティブになります。"
 
 #. Translators: Option for "Delay" in "Automatic suspend" dialog.
 #: panels/power/cc-power-panel.ui:13
@@ -4885,60 +4846,48 @@ msgid "2 hours"
 msgstr "2 時間"
 
 #: panels/power/cc-power-panel.ui:107
-#, fuzzy
-#| msgid "Power"
 msgid "Power Mode"
-msgstr "電源"
+msgstr "電源モード"
 
 #: panels/power/cc-power-panel.ui:108
 msgid "Affects system performance and power usage."
-msgstr ""
+msgstr "システムのパフォーマンスと消費電力に関係します。"
 
 #: panels/power/cc-power-panel.ui:142
-#, fuzzy
-#| msgid "Power Saving"
 msgid "Power Saving Options"
-msgstr "省電力"
+msgstr "省電力オプション"
 
 #: panels/power/cc-power-panel.ui:146
-#, fuzzy
-#| msgid "Automatic Brightness"
 msgid "Automatic Screen Brightness"
-msgstr "明るさ自動調整"
+msgstr "画面の明るさを自動調整する"
 
 #: panels/power/cc-power-panel.ui:147
 msgid "Screen brightness adjusts to the surrounding light."
-msgstr ""
+msgstr "周囲光で画面の明るさを調節します。"
 
 #: panels/power/cc-power-panel.ui:160
-#, fuzzy
-#| msgid "Screen"
 msgid "Dim Screen"
-msgstr "画面"
+msgstr "画面を暗くする"
 
 #: panels/power/cc-power-panel.ui:161
 msgid "Reduces the screen brightness when the computer is inactive."
-msgstr ""
+msgstr "コンピューターが非アクティブなときに画面の明るさを下げます。"
 
 #: panels/power/cc-power-panel.ui:174
-#, fuzzy
-#| msgid "Screen _Reader"
 msgid "Screen _Blank"
-msgstr "スクリーンリーダー(_R)"
+msgstr "画面のブランク(_B)"
 
 #: panels/power/cc-power-panel.ui:175
 msgid "Turns the screen off after a period of inactivity."
-msgstr ""
+msgstr "何もしない状態が一定時間続いたら画面をオフにします。"
 
 #: panels/power/cc-power-panel.ui:183
-#, fuzzy
-#| msgid "_Automatic Problem Reporting"
 msgid "Automatic Power Saver"
-msgstr "問題のレポートを自動で送信する(_A)"
+msgstr "自動的に消費電力を抑える"
 
 #: panels/power/cc-power-panel.ui:184
 msgid "Enables power saver mode when battery is low."
-msgstr ""
+msgstr "バッテリーが低下したときに省電力モードを有効にします。"
 
 #: panels/power/cc-power-panel.ui:198
 msgid "_Automatic Suspend"
@@ -4946,7 +4895,7 @@ msgstr "自動サスペンド(_A)"
 
 #: panels/power/cc-power-panel.ui:199
 msgid "Pauses the computer after a period of inactivity."
-msgstr ""
+msgstr "何もしない状態が一定時間続いたらコンピューターを休止します。"
 
 #: panels/power/cc-power-panel.ui:217
 msgid "Suspend & Power Button"
@@ -4992,34 +4941,30 @@ msgstr ""
 #: panels/power/cc-power-profile-row.c:86
 #: panels/power/cc-power-profile-row.c:185
 msgid "High performance and power usage."
-msgstr ""
+msgstr "高いパフォーマンスと消費電力です。"
 
 #: panels/power/cc-power-profile-row.c:184
 msgctxt "Power profile"
 msgid "Performance"
-msgstr ""
+msgstr "パフォーマンス"
 
 #: panels/power/cc-power-profile-row.c:188
-#, fuzzy
-#| msgid "Balance"
 msgctxt "Power profile"
 msgid "Balanced"
 msgstr "バランス"
 
 #: panels/power/cc-power-profile-row.c:189
 msgid "Standard performance and power usage."
-msgstr ""
+msgstr "標準的なパフォーマンスと消費電力です。"
 
 #: panels/power/cc-power-profile-row.c:192
-#, fuzzy
-#| msgid "Power Saving"
 msgctxt "Power profile"
 msgid "Power Saver"
 msgstr "省電力"
 
 #: panels/power/cc-power-profile-row.c:193
 msgid "Reduced performance and power usage."
-msgstr ""
+msgstr "パフォーマンスと消費電力を抑えます。"
 
 #: panels/power/gnome-power-panel.desktop.in.in:3
 msgid "Power"
@@ -5077,10 +5022,8 @@ msgid "Could not load ui: %s"
 msgstr "ui ファイルを読み込めませんでした: %s"
 
 #: panels/printers/cc-printers-panel.c:1293
-#, fuzzy
-#| msgid "Unlock to Change Settings"
 msgid "Unlock to Add Printers and Change Settings"
-msgstr "設定を変更する場合はロックを解除してください"
+msgstr "設定の変更やプリンターを追加する場合はロックを解除してください"
 
 #: panels/printers/gnome-printers-panel.desktop.in.in:3
 msgid "Printers"
@@ -5690,8 +5633,6 @@ msgstr "再起動"
 
 #. Translators: This button adds new printer.
 #: panels/printers/printers.ui:12
-#, fuzzy
-#| msgid "Add a Printer…"
 msgid "Add Printer…"
 msgstr "プリンターを追加…"
 
@@ -5781,26 +5722,20 @@ msgid "Paper"
 msgstr "用紙サイズ"
 
 #: panels/region/cc-region-panel.ui:42
-#, fuzzy
-#| msgid "%s Account"
 msgid "My Account"
-msgstr "%s アカウント"
+msgstr "自分のアカウント"
 
 #: panels/region/cc-region-panel.ui:53
-#, fuzzy
-#| msgid "Login _Screen"
 msgid "Login Screen"
-msgstr "ログイン画面(_S)"
+msgstr "ログイン画面"
 
 #: panels/region/cc-region-panel.ui:78
-#, fuzzy
-#| msgid "_Language"
 msgid "Language"
-msgstr "言語(_L)"
+msgstr "言語"
 
 #: panels/region/cc-region-panel.ui:89
 msgid "The language used for text in windows and web pages."
-msgstr ""
+msgstr "ウェブページやウィンドウのテキストで使われる言語です。"
 
 #: panels/region/cc-region-panel.ui:129
 #: panels/user-accounts/cc-user-panel.ui:311
@@ -5817,14 +5752,8 @@ msgid "Restart…"
 msgstr "ログアウト…"
 
 #: panels/region/cc-region-panel.ui:214
-#, fuzzy
-#| msgid ""
-#| "Choose the format for numbers, dates and currencies. Changes take effect "
-#| "on next login."
 msgid "The format used for numbers, dates, and currencies."
-msgstr ""
-"数値、日時、通貨の形式を選択してください。変更は次回ログイン時に反映されま"
-"す。"
+msgstr "数値、日時、通貨の形式です。"
 
 #: panels/region/cc-region-panel.ui:248
 msgid "_Formats"
@@ -5839,11 +5768,8 @@ msgid "Region & Language"
 msgstr "地域と言語"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-#, fuzzy
-#| msgid ""
-#| "Select your display language, formats, keyboard layouts and input sources"
 msgid "Select your display language and formats"
-msgstr "表示言語、フォーマット、キーボードレイアウト、入力ソースを設定します"
+msgstr "表示される言語や日付などの形式を選択します"
 
 #. Translators: Search terms to find the Region and Language panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/region/gnome-region-panel.desktop.in.in:19
@@ -7863,10 +7789,8 @@ msgstr ""
 "まず * アイコンをクリックしてください"
 
 #: panels/user-accounts/cc-user-panel.c:1535
-#, fuzzy
-#| msgid "Unlock to Change Settings"
 msgid "Unlock to Add Users and Change Settings"
-msgstr "設定を変更する場合はロックを解除してください"
+msgstr "設定の変更やユーザーを追加する場合はロックを解除してください"
 
 #: panels/user-accounts/cc-user-panel.ui:6
 msgid "_Add User…"
@@ -8398,16 +8322,12 @@ msgid "Tip Pressure Feel"
 msgstr "ペン先の感触"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:11
-#, fuzzy
-#| msgid "Access Options"
 msgid "Access Points"
-msgstr "アクセスオプション"
+msgstr "アクセスポイント"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:160
-#, fuzzy
-#| msgid "VPN"
 msgid "APN"
-msgstr "VPN"
+msgstr "APN"
 
 #: panels/wwan/cc-wwan-data.c:543
 msgid "Operation Cancelled"
@@ -8426,138 +8346,118 @@ msgid "Not Registered"
 msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.c:85
-#, fuzzy
-#| msgid "Yesterday"
 msgid "Registered"
-msgstr "昨日"
+msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.c:89
 msgid "Roaming"
 msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.c:93
-#, fuzzy
-#| msgid "Search"
 msgid "Searching"
-msgstr "検索"
+msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.c:97
 msgid "Denied"
 msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.ui:4
-#, fuzzy
-#| msgid "Details"
 msgid "Modem Details"
-msgstr "詳細"
+msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.ui:33
-#, fuzzy
-#| msgid "Status:"
 msgid "Modem Status"
-msgstr "ステータス:"
+msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.ui:53
 msgid "Carrier"
 msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.ui:79
-#, fuzzy
-#| msgid "Network Name"
 msgid "Network Type"
-msgstr "ネットワーク名"
+msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.ui:131
-#, fuzzy
-#| msgid "Networks"
 msgid "Network Status"
-msgstr "ネットワーク"
+msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.ui:158
-#, fuzzy
-#| msgid "Numbers"
 msgid "Own Number"
-msgstr "数字"
+msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.ui:185
-#, fuzzy
-#| msgid "Printer Details"
 msgid "Device Details"
-msgstr "プリンターの詳細"
+msgstr "デバイスの詳細"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:257
-#, fuzzy
-#| msgid "Firmware missing"
 msgid "Firmware Version"
-msgstr "ファームウェア未検出"
+msgstr "ファームウェアのバージョン"
 
 #: panels/wwan/cc-wwan-device.c:988
 msgid "2G Only"
-msgstr ""
+msgstr "2G のみ"
 
 #: panels/wwan/cc-wwan-device.c:991
 msgid "3G Only"
-msgstr ""
+msgstr "3G のみ"
 
 #: panels/wwan/cc-wwan-device.c:994
 msgid "4G Only"
-msgstr ""
+msgstr "4G のみ"
 
 #: panels/wwan/cc-wwan-device.c:1003
 msgid "2G, 3G, 4G (Preferred)"
-msgstr ""
+msgstr "2G, 3G, 4G (優先)"
 
 #: panels/wwan/cc-wwan-device.c:1005
 msgid "2G, 3G (Preferred), 4G"
-msgstr ""
+msgstr "2G, 3G (優先), 4G"
 
 #: panels/wwan/cc-wwan-device.c:1007
 msgid "2G (Preferred), 3G, 4G"
-msgstr ""
+msgstr "2G (優先), 3G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1009
 msgid "2G, 3G, 4G"
-msgstr ""
+msgstr "2G, 3G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1015
 msgid "3G, 4G (Preferred)"
-msgstr ""
+msgstr "3G, 4G (優先)"
 
 #: panels/wwan/cc-wwan-device.c:1017
 msgid "3G (Preferred), 4G"
-msgstr ""
+msgstr "3G (優先), 4G"
 
 #: panels/wwan/cc-wwan-device.c:1019
 msgid "3G, 4G"
-msgstr ""
+msgstr "3G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1025
 msgid "2G, 4G (Preferred)"
-msgstr ""
+msgstr "2G, 4G (優先)"
 
 #: panels/wwan/cc-wwan-device.c:1027
 msgid "2G (Preferred), 4G"
-msgstr ""
+msgstr "2G (優先), 4G"
 
 #: panels/wwan/cc-wwan-device.c:1029
 msgid "2G, 4G"
-msgstr ""
+msgstr "2G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1035
 msgid "2G, 3G (Preferred)"
-msgstr ""
+msgstr "2G, 3G (優先)"
 
 #: panels/wwan/cc-wwan-device.c:1037
 msgid "2G (Preferred), 3G"
-msgstr ""
+msgstr "2G (優先), 3G"
 
 #: panels/wwan/cc-wwan-device.c:1039
 msgid "2G, 3G"
-msgstr ""
+msgstr "2G, 3G"
 
 #: panels/wwan/cc-wwan-device.c:1043
-#, fuzzy
-#| msgid "Unknown"
 msgctxt "Network mode"
 msgid "Unknown"
 msgstr "不明"
