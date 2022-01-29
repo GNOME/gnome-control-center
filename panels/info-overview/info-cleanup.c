@@ -43,7 +43,6 @@ prettify_info (const char *info)
     { "Gallium .* on (AMD .*)", "\\1"},
     { "(AMD .*) [(].*", "\\1"},
     { "(AMD [A-Z])(.*)", "\\1\\L\\2\\E"},
-    { "AMD", "AMD\302\256"},
     { "Graphics Controller", "Graphics"},
   };
 
