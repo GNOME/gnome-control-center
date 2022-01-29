@@ -40,7 +40,7 @@ prettify_info (const char *info)
     { "Intel[(]R[)]", "Intel\302\256"},
     { "Core[(]TM[)]", "Core\342\204\242"},
     { "Atom[(]TM[)]", "Atom\342\204\242"},
-    { "Gallium .* on (AMD .*)", "\\1"},
+    { "Gallium \\d+\\.\\d+ on (.*)", "\\1"},
     { "(AMD .*) [(].*", "\\1"},
     { "Graphics Controller", "Graphics"},
   };
