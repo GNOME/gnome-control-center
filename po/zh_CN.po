@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-01-21 10:05+0000\n"
-"PO-Revision-Date: 2022-01-24 18:59+0800\n"
+"POT-Creation-Date: 2022-01-27 03:31+0000\n"
+"PO-Revision-Date: 2022-01-27 18:39+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -100,9 +100,9 @@ msgstr "文件系统"
 
 #: panels/applications/cc-applications-panel.c:830
 #: panels/keyboard/01-launchers.xml.in:6
-#: shell/appdata/gnome-control-center.appdata.xml.in:7 shell/cc-window.c:246
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
 #: shell/cc-window.c:878 shell/cc-window.ui:22
-#: shell/gnome-control-center.desktop.in.in:3
+#: shell/org.gnome.Settings.desktop.in.in:3
 msgid "Settings"
 msgstr "设置"
 
@@ -158,7 +158,6 @@ msgid "Open"
 msgstr "打开"
 
 #: panels/applications/cc-applications-panel.ui:94
-#| msgid "_View details"
 msgid "View Details"
 msgstr "查看详情"
 
@@ -201,7 +200,6 @@ msgid "Notifications"
 msgstr "通知"
 
 #: panels/applications/cc-applications-panel.ui:127
-#| msgid "preferences-system-notifications"
 msgid "Show system notifications."
 msgstr "显示系统通知。"
 
@@ -214,13 +212,11 @@ msgid "Allow activity when the app is closed."
 msgstr "允许应用关闭后活动。"
 
 #: panels/applications/cc-applications-panel.ui:140
-#| msgid "Wallpapers"
 msgid "Change Wallpaper"
 msgstr "更改壁纸"
 
 # 图标条目，保留无需翻译。
 #: panels/applications/cc-applications-panel.ui:141
-#| msgid "preferences-desktop-wallpaper"
 msgid "Change the desktop wallpaper."
 msgstr "更换桌面壁纸。"
 
@@ -235,12 +231,10 @@ msgid "Reproduce sounds."
 msgstr "再现声音。"
 
 #: panels/applications/cc-applications-panel.ui:161
-#| msgid "Set Shortcut"
 msgid "Inhibit Shortcuts"
 msgstr "禁止快捷键"
 
 #: panels/applications/cc-applications-panel.ui:162
-#| msgid "Inhibit system keyboard shortcuts"
 msgid "Block standard keyboard shortcuts."
 msgstr "封锁标准的键盘快捷键。"
 
@@ -274,7 +268,6 @@ msgstr "定位服务"
 
 #: panels/applications/cc-applications-panel.ui:197
 #: panels/applications/cc-applications-panel.ui:204
-#| msgid "Access your location"
 msgid "Access device location data."
 msgstr "访问设备的位置数据。"
 
@@ -284,7 +277,6 @@ msgid "Built-in Permissions"
 msgstr "内置权限"
 
 #: panels/applications/cc-applications-panel.ui:216
-#| msgid "System features used by this application."
 msgid "System access that is required by the app"
 msgstr "该应用需要的系统访问权限"
 
@@ -312,12 +304,10 @@ msgid "File & Link Associations"
 msgstr "文件与链接关联"
 
 #: panels/applications/cc-applications-panel.ui:377
-#| msgid "File System"
 msgid "File Types"
 msgstr "文件类型"
 
 #: panels/applications/cc-applications-panel.ui:383
-#| msgid "Link speed"
 msgid "Link Types"
 msgstr "链接类型"
 
@@ -474,7 +464,6 @@ msgid "Turn on to connect devices and receive file transfers."
 msgstr "打开以连接设备和接收文件传送。"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:35
-#| msgid "Airplane Mode is on"
 msgid "Airplane Mode is On"
 msgstr "飞行模式已打开"
 
@@ -487,7 +476,6 @@ msgid "Turn Off Airplane Mode"
 msgstr "关闭飞行模式"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:53
-#| msgid "Hardware Airplane Mode is on"
 msgid "Hardware Airplane Mode is On"
 msgstr "硬件飞行模式已打开"
 
@@ -511,7 +499,6 @@ msgid "share;sharing;bluetooth;obex;"
 msgstr "share;sharing;bluetooth;obex;分享;共享;蓝牙;"
 
 #: panels/camera/cc-camera-panel.ui:21
-#| msgid "Camera is turned off"
 msgid "Camera is Turned Off"
 msgstr "摄像头已关闭"
 
@@ -520,9 +507,6 @@ msgid "No applications can capture photos or video."
 msgstr "没有应用程序可以捕获照片或视频。"
 
 #: panels/camera/cc-camera-panel.ui:36
-#| msgid ""
-#| "Use of the camera allows applications to capture photos and video. "
-#| "Disabling the camera may cause some applications to not function properly."
 msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
 "the camera may cause some applications to not function properly.\n"
@@ -1281,26 +1265,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "热点"
 
-#: panels/datetime/cc-datetime-panel.c:177
+#: panels/datetime/cc-datetime-panel.c:175
 msgid "24-hour"
 msgstr "24 小时"
 
-#: panels/datetime/cc-datetime-panel.c:179
+#: panels/datetime/cc-datetime-panel.c:177
 msgid "AM / PM"
 msgstr "上午/下午"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:251
+#: panels/datetime/cc-datetime-panel.c:248
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Y年%m月%d日，%p %-l:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:256
+#: panels/datetime/cc-datetime-panel.c:253
 msgid "%e %B %Y, %R"
 msgstr "%Y年%m月%d日，%R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:438
+#: panels/datetime/cc-datetime-panel.c:423
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1308,7 +1292,7 @@ msgstr "%s，%s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:465
+#: panels/datetime/cc-datetime-panel.c:450
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1316,126 +1300,126 @@ msgstr "%s（%s）"
 
 #. Translators: UTC here means the Coordinated Universal Time.
 #. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:472
+#: panels/datetime/cc-datetime-panel.c:457
 msgid "UTC%:::z"
 msgstr "UTC%:::z"
 
 #. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:477
+#: panels/datetime/cc-datetime-panel.c:462
 msgid "%l:%M %p"
 msgstr "%p %-l:%M"
 
 #. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:482
+#: panels/datetime/cc-datetime-panel.c:467
 msgid "%R"
 msgstr "%R"
 
 #. Update the text bubble in the timezone map
 #. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:487
+#: panels/datetime/cc-datetime-panel.c:472
 #, c-format
 msgctxt "timezone map"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: panels/datetime/cc-datetime-panel.ui:33
-msgid "January"
-msgstr "一月"
-
-#: panels/datetime/cc-datetime-panel.ui:40
-msgid "February"
-msgstr "二月"
-
-#: panels/datetime/cc-datetime-panel.ui:47
-msgid "March"
-msgstr "三月"
-
-#: panels/datetime/cc-datetime-panel.ui:54
-msgid "April"
-msgstr "四月"
-
-#: panels/datetime/cc-datetime-panel.ui:61
-msgid "May"
-msgstr "五月"
-
-#: panels/datetime/cc-datetime-panel.ui:68
-msgid "June"
-msgstr "六月"
-
-#: panels/datetime/cc-datetime-panel.ui:75
-msgid "July"
-msgstr "七月"
-
-#: panels/datetime/cc-datetime-panel.ui:82
-msgid "August"
-msgstr "八月"
-
-#: panels/datetime/cc-datetime-panel.ui:89
-msgid "September"
-msgstr "九月"
-
-#: panels/datetime/cc-datetime-panel.ui:96
-msgid "October"
-msgstr "十月"
-
-#: panels/datetime/cc-datetime-panel.ui:103
-msgid "November"
-msgstr "十一月"
-
-#: panels/datetime/cc-datetime-panel.ui:110
-msgid "December"
-msgstr "十二月"
-
-#: panels/datetime/cc-datetime-panel.ui:119
+#: panels/datetime/cc-datetime-panel.ui:15
 #: panels/datetime/gnome-datetime-panel.desktop.in.in:3
 msgid "Date & Time"
 msgstr "日期和时间"
 
-#: panels/datetime/cc-datetime-panel.ui:166
+#: panels/datetime/cc-datetime-panel.ui:50
 msgid "Year"
 msgstr "年"
 
-#: panels/datetime/cc-datetime-panel.ui:198
+#: panels/datetime/cc-datetime-panel.ui:66
 msgid "Month"
 msgstr "月"
 
-#: panels/datetime/cc-datetime-panel.ui:233
+#: panels/datetime/cc-datetime-panel.ui:71
+msgid "January"
+msgstr "一月"
+
+#: panels/datetime/cc-datetime-panel.ui:72
+msgid "February"
+msgstr "二月"
+
+#: panels/datetime/cc-datetime-panel.ui:73
+msgid "March"
+msgstr "三月"
+
+#: panels/datetime/cc-datetime-panel.ui:74
+msgid "April"
+msgstr "四月"
+
+#: panels/datetime/cc-datetime-panel.ui:75
+msgid "May"
+msgstr "五月"
+
+#: panels/datetime/cc-datetime-panel.ui:76
+msgid "June"
+msgstr "六月"
+
+#: panels/datetime/cc-datetime-panel.ui:77
+msgid "July"
+msgstr "七月"
+
+#: panels/datetime/cc-datetime-panel.ui:78
+msgid "August"
+msgstr "八月"
+
+#: panels/datetime/cc-datetime-panel.ui:79
+msgid "September"
+msgstr "九月"
+
+#: panels/datetime/cc-datetime-panel.ui:80
+msgid "October"
+msgstr "十月"
+
+#: panels/datetime/cc-datetime-panel.ui:81
+msgid "November"
+msgstr "十一月"
+
+#: panels/datetime/cc-datetime-panel.ui:82
+msgid "December"
+msgstr "十二月"
+
+#: panels/datetime/cc-datetime-panel.ui:92
 msgid "Day"
 msgstr "日"
 
-#: panels/datetime/cc-datetime-panel.ui:260
+#: panels/datetime/cc-datetime-panel.ui:113
 msgid "Time Zone"
 msgstr "时区"
 
-#: panels/datetime/cc-datetime-panel.ui:277
+#: panels/datetime/cc-datetime-panel.ui:130
 msgid "Search for a city"
 msgstr "搜索城市"
 
-#: panels/datetime/cc-datetime-panel.ui:311
+#: panels/datetime/cc-datetime-panel.ui:164
 msgid "Automatic _Date &amp; Time"
 msgstr "自动设置日期和时间(_D)"
 
-#: panels/datetime/cc-datetime-panel.ui:312
+#: panels/datetime/cc-datetime-panel.ui:165
 msgid "Requires internet access"
 msgstr "需要互联网连接"
 
-#: panels/datetime/cc-datetime-panel.ui:324
+#: panels/datetime/cc-datetime-panel.ui:177
 msgid "Date &amp; _Time"
 msgstr "日期和时间(_T)"
 
-#: panels/datetime/cc-datetime-panel.ui:342
+#: panels/datetime/cc-datetime-panel.ui:201
 msgid "Automatic Time _Zone"
 msgstr "自动设置时区(_Z)"
 
-#: panels/datetime/cc-datetime-panel.ui:343
+#: panels/datetime/cc-datetime-panel.ui:202
 msgid "Requires location services enabled and internet access"
 msgstr "需要启用定位服务和互联网连接"
 
-#: panels/datetime/cc-datetime-panel.ui:355
+#: panels/datetime/cc-datetime-panel.ui:214
 msgid "Time Z_one"
 msgstr "时区(_O)"
 
-#: panels/datetime/cc-datetime-panel.ui:374
+#: panels/datetime/cc-datetime-panel.ui:239
 msgid "Time _Format"
 msgstr "时间格式(_F)"
 
@@ -1532,7 +1516,7 @@ msgstr ""
 "network;identity;privacy;屏幕;锁;诊断;崩溃;私有;最近;临时;索引;名称;网络;认"
 "证;标志;身份;隐私;"
 
-#: panels/display/cc-display-panel.c:510
+#: panels/display/cc-display-panel.c:512
 #: panels/notifications/cc-notifications-panel.c:202
 #: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
 #: panels/universal-access/cc-ua-panel.c:337
@@ -1543,7 +1527,7 @@ msgstr ""
 msgid "On"
 msgstr "开"
 
-#: panels/display/cc-display-panel.c:512 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:202
 #: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
 #: panels/universal-access/cc-ua-panel.c:337
@@ -1554,15 +1538,15 @@ msgstr "开"
 msgid "Off"
 msgstr "关"
 
-#: panels/display/cc-display-panel.c:932
+#: panels/display/cc-display-panel.c:945
 msgid "Apply Changes?"
 msgstr "应用更改？"
 
-#: panels/display/cc-display-panel.c:937
+#: panels/display/cc-display-panel.c:950
 msgid "Changes Cannot be Applied"
 msgstr "无法应用更改"
 
-#: panels/display/cc-display-panel.c:939
+#: panels/display/cc-display-panel.c:952
 msgid "This could be due to hardware limitations."
 msgstr "这可能是硬件限制造成的。"
 
@@ -1571,35 +1555,39 @@ msgstr "这可能是硬件限制造成的。"
 msgid "_Apply"
 msgstr "应用(_A)"
 
-#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:97
+#| msgid "Bluetooth is disabled"
+msgid "Display Settings Disabled"
+msgstr "显示器设置已禁用"
+
+#: panels/display/cc-display-panel.ui:113
 msgid "Display Arrangement"
 msgstr "显示器布局"
 
-#: panels/display/cc-display-panel.ui:111
-#| msgid "Decouple Display"
+#: panels/display/cc-display-panel.ui:124
 msgid "Multiple Displays"
 msgstr "多显示器"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:120
+#: panels/display/cc-display-panel.ui:133
 msgid "Join"
 msgstr "加入"
 
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:140
 msgid "Mirror"
 msgstr "镜像"
 
-#: panels/display/cc-display-panel.ui:140
+#: panels/display/cc-display-panel.ui:153
 msgid "Contains top bar and Activities"
 msgstr "包含顶栏和活动按钮"
 
-#: panels/display/cc-display-panel.ui:141
+#: panels/display/cc-display-panel.ui:154
 msgid "Primary Display"
 msgstr "主显示器"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:162
-#: panels/display/cc-display-panel.ui:210
+#: panels/display/cc-display-panel.ui:175
+#: panels/display/cc-display-panel.ui:223
 #: panels/display/cc-night-light-page.ui:77
 msgid "Night Light"
 msgstr "夜灯"
@@ -1936,7 +1924,7 @@ msgid "Eject"
 msgstr "弹出"
 
 #: panels/keyboard/01-input-sources.xml.in:4
-#: panels/universal-access/cc-ua-panel.ui:145
+#: panels/universal-access/cc-ua-panel.ui:163
 msgid "Typing"
 msgstr "打字"
 
@@ -2374,7 +2362,6 @@ msgstr ""
 "键;工作空间;窗口;更改大小;缩放;对比度;输入;源;锁定;音量;"
 
 #: panels/location/cc-location-panel.ui:20
-#| msgid "Location services turned off"
 msgid "Location Services Turned Off"
 msgstr "定位服务已关闭"
 
@@ -2408,153 +2395,45 @@ msgid "Protect your location information"
 msgstr "保护您的位置信息"
 
 #. FIXME
-#: panels/lock/cc-lock-panel.ui:21
+#: panels/lock/cc-lock-panel.ui:8
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
 "while you're away."
 msgstr "自动锁定屏幕可防止其他人在您不在时访问计算机。"
 
-#: panels/lock/cc-lock-panel.ui:39
+#: panels/lock/cc-lock-panel.ui:13
 msgid "Blank Screen Delay"
 msgstr "息屏延时"
 
-#: panels/lock/cc-lock-panel.ui:40
+#: panels/lock/cc-lock-panel.ui:14
 msgid "Period of inactivity after which the screen will go blank."
 msgstr "闲置一段时间后，屏幕将变为黑屏。"
 
-#: panels/lock/cc-lock-panel.ui:59
+#: panels/lock/cc-lock-panel.ui:32
 msgid "Automatic Screen _Lock"
 msgstr "自动锁屏(_L)"
 
-#: panels/lock/cc-lock-panel.ui:74
+#: panels/lock/cc-lock-panel.ui:46
 msgid "Automatic _Screen Lock Delay"
 msgstr "自动锁屏延迟(_S)"
 
-#: panels/lock/cc-lock-panel.ui:75
+#: panels/lock/cc-lock-panel.ui:47
 msgid "Period after the screen blanks when the screen is automatically locked."
 msgstr "息屏后屏幕自动锁定的时间。"
 
-#: panels/lock/cc-lock-panel.ui:94
+#: panels/lock/cc-lock-panel.ui:65
 msgid "Show _Notifications on Lock Screen"
 msgstr "在锁定屏幕上显示通知(_N)"
 
-#: panels/lock/cc-lock-panel.ui:110
+#: panels/lock/cc-lock-panel.ui:80
 msgid "Forbid new _USB devices"
 msgstr "禁止新 USB 设备(_U)"
 
-#: panels/lock/cc-lock-panel.ui:111
+#: panels/lock/cc-lock-panel.ui:81
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
 msgstr "在屏幕锁定时阻止新 USB 设备与系统进行交互。"
-
-#. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:152
-msgctxt "lock_screen"
-msgid "Screen Turns Off"
-msgstr "屏幕关闭"
-
-#. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:156
-msgctxt "lock_screen"
-msgid "30 seconds"
-msgstr "30 秒"
-
-#. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:160
-msgctxt "lock_screen"
-msgid "1 minute"
-msgstr "1 分钟"
-
-#. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:164
-msgctxt "lock_screen"
-msgid "2 minutes"
-msgstr "2 分钟"
-
-#. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:168
-msgctxt "lock_screen"
-msgid "3 minutes"
-msgstr "3 分钟"
-
-#. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:172
-msgctxt "lock_screen"
-msgid "5 minutes"
-msgstr "5 分钟"
-
-#. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:176
-msgctxt "lock_screen"
-msgid "30 minutes"
-msgstr "30 分钟"
-
-#. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
-#: panels/lock/cc-lock-panel.ui:180
-msgctxt "lock_screen"
-msgid "1 hour"
-msgstr "1 小时"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:195
-msgctxt "blank_screen"
-msgid "1 minute"
-msgstr "1 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:199
-msgctxt "blank_screen"
-msgid "2 minutes"
-msgstr "2 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:203
-msgctxt "blank_screen"
-msgid "3 minutes"
-msgstr "3 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:207
-msgctxt "blank_screen"
-msgid "4 minutes"
-msgstr "4 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:211
-msgctxt "blank_screen"
-msgid "5 minutes"
-msgstr "5 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:215
-msgctxt "blank_screen"
-msgid "8 minutes"
-msgstr "8 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:219
-msgctxt "blank_screen"
-msgid "10 minutes"
-msgstr "10 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:223
-msgctxt "blank_screen"
-msgid "12 minutes"
-msgstr "12 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:227
-msgctxt "blank_screen"
-msgid "15 minutes"
-msgstr "15 分钟"
-
-#. Translators: Option for "Blank screen" in "Power" panel.
-#: panels/lock/cc-lock-panel.ui:231
-msgctxt "blank_screen"
-msgid "Never"
-msgstr "从不"
 
 #: panels/lock/gnome-lock-panel.desktop.in.in:3
 msgid "Screen Lock"
@@ -4329,40 +4208,40 @@ msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
 msgstr "无效的 wep-psk：无法将 64 字节作为十六进制来解析密钥"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:31
+#: panels/notifications/cc-app-notifications-dialog.ui:22
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "通知(_N)"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:65
+#: panels/notifications/cc-app-notifications-dialog.ui:37
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "声音警报(_A)"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:101
+#: panels/notifications/cc-app-notifications-dialog.ui:51
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "通知弹窗(_P)"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:110
+#: panels/notifications/cc-app-notifications-dialog.ui:52
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
 msgstr "禁用弹窗时通知将继续在通知列表里显示。"
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:153
+#: panels/notifications/cc-app-notifications-dialog.ui:66
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "在弹窗中显示消息内容(_C)"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:186
+#: panels/notifications/cc-app-notifications-dialog.ui:80
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "锁屏通知(_L)"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:219
+#: panels/notifications/cc-app-notifications-dialog.ui:94
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "锁屏时显示显示消息内容(_O)"
@@ -4775,27 +4654,27 @@ msgstr "自动挂起(_A)"
 msgid "Pauses the computer after a period of inactivity."
 msgstr "在一段时间的不活动后暂停计算机。"
 
-#: panels/power/cc-power-panel.ui:193
+#: panels/power/cc-power-panel.ui:199
 msgid "Po_wer Button Behavior"
 msgstr "电源按钮行为(_W)"
 
-#: panels/power/cc-power-panel.ui:201
+#: panels/power/cc-power-panel.ui:207
 msgid "Show Battery _Percentage"
 msgstr "显示电池百分比(_P)"
 
-#: panels/power/cc-power-panel.ui:237
+#: panels/power/cc-power-panel.ui:243
 msgid "Automatic Suspend"
 msgstr "自动挂起"
 
-#: panels/power/cc-power-panel.ui:260
+#: panels/power/cc-power-panel.ui:266
 msgid "_Plugged In"
 msgstr "已插入电源(_P)"
 
-#: panels/power/cc-power-panel.ui:272
+#: panels/power/cc-power-panel.ui:278
 msgid "On _Battery Power"
 msgstr "使用电池时(_B)"
 
-#: panels/power/cc-power-panel.ui:305 panels/power/cc-power-panel.ui:341
+#: panels/power/cc-power-panel.ui:311 panels/power/cc-power-panel.ui:347
 #: panels/universal-access/cc-repeat-keys-dialog.ui:62
 msgid "Delay"
 msgstr "延迟"
@@ -5517,7 +5396,7 @@ msgstr ""
 "似乎不可用。"
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
-#: panels/region/cc-format-chooser.ui:5 panels/region/cc-region-panel.ui:154
+#: panels/region/cc-format-chooser.ui:4 panels/region/cc-region-panel.ui:160
 msgid "Formats"
 msgstr "格式"
 
@@ -5608,23 +5487,23 @@ msgstr "窗口和网页使用的语言。"
 msgid "_Language"
 msgstr "语言(_L)"
 
-#: panels/region/cc-region-panel.ui:120
+#: panels/region/cc-region-panel.ui:126
 msgid "Restart the session for changes to take effect"
 msgstr "重启会话以让更改生效"
 
-#: panels/region/cc-region-panel.ui:134
+#: panels/region/cc-region-panel.ui:140
 msgid "Restart…"
 msgstr "重启…"
 
-#: panels/region/cc-region-panel.ui:163
+#: panels/region/cc-region-panel.ui:169
 msgid "The format used for numbers, dates, and currencies."
 msgstr "数字，日期和货币的格式。"
 
-#: panels/region/cc-region-panel.ui:188
+#: panels/region/cc-region-panel.ui:194
 msgid "_Formats"
 msgstr "格式(_F)"
 
-#: panels/region/cc-region-panel.ui:211
+#: panels/region/cc-region-panel.ui:224
 msgid "Login settings are used by all users when logging into the system"
 msgstr "登录设置将对所有于本机登录的用户共享"
 
@@ -5798,7 +5677,7 @@ msgid "_OK"
 msgstr "确定(_O)"
 
 #: panels/search/cc-search-locations-dialog.ui:8
-#: panels/search/cc-search-panel.ui:9
+#: panels/search/cc-search-panel.ui:22
 msgid "Search Locations"
 msgstr "搜索位置"
 
@@ -5822,25 +5701,43 @@ msgstr "书签"
 msgid "Other"
 msgstr "其他"
 
-#: panels/search/cc-search-panel.c:153
+#: panels/search/cc-search-panel.c:150
 msgid "No applications found"
 msgstr "未找到应用"
 
-#: panels/search/cc-search-panel-row.ui:76
+#: panels/search/cc-search-panel-row.ui:48
 msgid "Move Up"
 msgstr "上移"
 
-#: panels/search/cc-search-panel-row.ui:82
+#: panels/search/cc-search-panel-row.ui:52
 msgid "Move Down"
 msgstr "下移"
 
-#: panels/search/cc-search-panel.ui:43
-msgid ""
-"Control which search results are shown in the Activities Overview. The order "
-"of search results can also be changed by moving rows in the list."
-msgstr ""
-"控制活动概览中显示哪些搜索结果。搜索结果顺序也可以通过移动列表中的行排序进行"
-"更改。"
+#: panels/search/cc-search-panel.ui:10
+#| msgid "Application Switching"
+msgid "Application Search"
+msgstr "应用程序搜索"
+
+#: panels/search/cc-search-panel.ui:11
+#| msgid "Include applications from all _workspaces"
+msgid "Include application-provided search results."
+msgstr "包括应用程序提供的搜索结果。"
+
+#: panels/search/cc-search-panel.ui:23
+#| msgid ""
+#| "Folders which are searched by system applications, such as Files, Photos "
+#| "and Videos."
+msgid "Folders which are searched by system applications."
+msgstr "系统应用程序所搜索的文件夹。"
+
+#: panels/search/cc-search-panel.ui:37
+#| msgid "No Search Results"
+msgid "Search Results"
+msgstr "搜索结果"
+
+#: panels/search/cc-search-panel.ui:38
+msgid "Results are displayed according to the list order."
+msgstr "结果会根据列表顺序显示。"
 
 #: panels/search/gnome-search-panel.desktop.in.in:4
 msgid ""
@@ -6055,51 +5952,51 @@ msgstr "单击扬声器进行测试"
 msgid "System Volume"
 msgstr "系统音量"
 
-#: panels/sound/cc-sound-panel.ui:16
+#: panels/sound/cc-sound-panel.ui:25
 msgid "Volume Levels"
 msgstr "音量级别"
 
-#: panels/sound/cc-sound-panel.ui:26
+#: panels/sound/cc-sound-panel.ui:35
 msgid "Output"
 msgstr "输出"
 
-#: panels/sound/cc-sound-panel.ui:47
+#: panels/sound/cc-sound-panel.ui:56
 msgid "Output Device"
 msgstr "输出设备"
 
-#: panels/sound/cc-sound-panel.ui:66
+#: panels/sound/cc-sound-panel.ui:75
 msgid "Test"
 msgstr "测试"
 
-#: panels/sound/cc-sound-panel.ui:95 panels/sound/cc-sound-panel.ui:254
+#: panels/sound/cc-sound-panel.ui:104 panels/sound/cc-sound-panel.ui:263
 msgid "Configuration"
 msgstr "配置"
 
-#: panels/sound/cc-sound-panel.ui:126
+#: panels/sound/cc-sound-panel.ui:135
 msgid "Balance"
 msgstr "均衡"
 
-#: panels/sound/cc-sound-panel.ui:152
+#: panels/sound/cc-sound-panel.ui:161
 msgid "Fade"
 msgstr "淡出"
 
-#: panels/sound/cc-sound-panel.ui:178
+#: panels/sound/cc-sound-panel.ui:187
 msgid "Subwoofer"
 msgstr "重低音"
 
-#: panels/sound/cc-sound-panel.ui:196
+#: panels/sound/cc-sound-panel.ui:205
 msgid "Input"
 msgstr "输入"
 
-#: panels/sound/cc-sound-panel.ui:217
+#: panels/sound/cc-sound-panel.ui:226
 msgid "Input Device"
 msgstr "输入设备"
 
-#: panels/sound/cc-sound-panel.ui:285
+#: panels/sound/cc-sound-panel.ui:294
 msgid "Volume"
 msgstr "音量"
 
-#: panels/sound/cc-sound-panel.ui:303
+#: panels/sound/cc-sound-panel.ui:312
 msgid "Alert Sound"
 msgstr "警报声"
 
@@ -6563,57 +6460,57 @@ msgstr "数字键盘锁定或大小写锁定开启或关闭时发出蜂鸣声。
 msgid "C_ursor Size"
 msgstr "光标大小(_U)"
 
-#: panels/universal-access/cc-ua-panel.ui:110
+#: panels/universal-access/cc-ua-panel.ui:116
 #: panels/universal-access/cc-zoom-options-dialog.ui:82
 msgid "_Zoom"
 msgstr "缩放(_Z)"
 
-#: panels/universal-access/cc-ua-panel.ui:126
+#: panels/universal-access/cc-ua-panel.ui:138
 msgid "Hearing"
 msgstr "听觉"
 
-#: panels/universal-access/cc-ua-panel.ui:129
+#: panels/universal-access/cc-ua-panel.ui:141
 #: panels/universal-access/cc-visual-alerts-dialog.ui:54
 msgid "_Visual Alerts"
 msgstr "视觉警报(_V)"
 
-#: panels/universal-access/cc-ua-panel.ui:148
+#: panels/universal-access/cc-ua-panel.ui:166
 msgid "Screen _Keyboard"
 msgstr "屏幕键盘(_K)"
 
-#: panels/universal-access/cc-ua-panel.ui:160
+#: panels/universal-access/cc-ua-panel.ui:178
 msgid "R_epeat Keys"
 msgstr "重复键(_E)"
 
-#: panels/universal-access/cc-ua-panel.ui:174
+#: panels/universal-access/cc-ua-panel.ui:198
 msgid "Cursor _Blinking"
 msgstr "光标闪烁(_B)"
 
-#: panels/universal-access/cc-ua-panel.ui:188
+#: panels/universal-access/cc-ua-panel.ui:218
 msgid "_Typing Assist (AccessX)"
 msgstr "AccessX 打字助手(_T)"
 
-#: panels/universal-access/cc-ua-panel.ui:204
+#: panels/universal-access/cc-ua-panel.ui:240
 msgid "Pointing &amp; Clicking"
 msgstr "指向和点击"
 
-#: panels/universal-access/cc-ua-panel.ui:207
+#: panels/universal-access/cc-ua-panel.ui:243
 msgid "_Mouse Keys"
 msgstr "鼠标键(_M)"
 
-#: panels/universal-access/cc-ua-panel.ui:219
+#: panels/universal-access/cc-ua-panel.ui:255
 msgid "_Locate Pointer"
 msgstr "定位指针(_L)"
 
-#: panels/universal-access/cc-ua-panel.ui:231
+#: panels/universal-access/cc-ua-panel.ui:267
 msgid "_Click Assist"
 msgstr "点击助手(_C)"
 
-#: panels/universal-access/cc-ua-panel.ui:245
+#: panels/universal-access/cc-ua-panel.ui:287
 msgid "_Double-Click Delay"
 msgstr "双击延时(_D)"
 
-#: panels/universal-access/cc-ua-panel.ui:255
+#: panels/universal-access/cc-ua-panel.ui:297
 msgid "Double-Click Delay"
 msgstr "双击延时"
 
@@ -8529,31 +8426,31 @@ msgstr "配置电话和移动数据连接"
 msgid "cellular;wwan;telephony;sim;mobile;"
 msgstr "cellular;wwan;telephony;sim;mobile;蜂窝;移动;无线;"
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:8
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:8
 msgid "Utility to configure the GNOME desktop"
 msgstr "用来配置 GNOME 桌面的工具"
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:10
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:10
 msgid "Settings is the primary interface for configuring your system."
 msgstr "“设置”是配置您的系统的主要界面。"
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:17
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:17
 msgid "GNOME Settings Sound Panel"
 msgstr "GNOME 设置声音面板"
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:21
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:21
 msgid "GNOME Settings Mouse &amp; Touchpad Panel"
 msgstr "GNOME 设置鼠标和触摸板面板"
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:25
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:25
 msgid "GNOME Settings Background Panel"
 msgstr "GNOME 设置背景面板"
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:29
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:29
 msgid "GNOME Settings Keyboard Panel"
 msgstr "GNOME 设置键盘面板"
 
-#: shell/appdata/gnome-control-center.appdata.xml.in:38
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:38
 msgid "The GNOME Project"
 msgstr "GNOME 项目"
 
@@ -8614,11 +8511,6 @@ msgstr ""
 msgid "Help"
 msgstr "帮助"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: shell/gnome-control-center.desktop.in.in:17
-msgid "Preferences;Settings;"
-msgstr "Preferences;Settings;首选项;设置;"
-
 #: shell/help-overlay.ui:15
 msgctxt "shortcut window"
 msgid "General"
@@ -8649,30 +8541,35 @@ msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "取消搜索"
 
-#: shell/org.gnome.ControlCenter.gschema.xml:5
+#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: shell/org.gnome.Settings.desktop.in.in:17
+msgid "Preferences;Settings;"
+msgstr "Preferences;Settings;首选项;设置;"
+
+#: shell/org.gnome.Settings.gschema.xml:5
 msgid "The identifier for the last Settings panel to be opened"
 msgstr "要打开最后面板的身份"
 
-#: shell/org.gnome.ControlCenter.gschema.xml:6
+#: shell/org.gnome.Settings.gschema.xml:6
 msgid ""
 "The identifier for the last Settings panel to be opened. Unrecognised values "
 "will be ignored and the first panel in the list selected."
 msgstr "要打开最近面板的身份。未识别的值将被忽略，然后选中第一个面板。"
 
-#: shell/org.gnome.ControlCenter.gschema.xml:13
+#: shell/org.gnome.Settings.gschema.xml:13
 msgid "Show warning when running a development build of Settings"
 msgstr "运行开发版本的 GNOME 设置时显示警告"
 
-#: shell/org.gnome.ControlCenter.gschema.xml:14
+#: shell/org.gnome.Settings.gschema.xml:14
 msgid ""
 "Whether Settings should show a warning when running a development build."
 msgstr "是否在运行开发版本的 GNOME 设置时显示警告。"
 
-#: shell/org.gnome.ControlCenter.gschema.xml:20
+#: shell/org.gnome.Settings.gschema.xml:20
 msgid "Initial state of the window"
 msgstr "窗口初始状态"
 
-#: shell/org.gnome.ControlCenter.gschema.xml:21
+#: shell/org.gnome.Settings.gschema.xml:21
 msgid ""
 "A tuple containing the initial width, height and maximized state of the "
 "application window."
@@ -8697,6 +8594,85 @@ msgstr[0] "%u 路输入"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "系统声音"
+
+#~ msgctxt "lock_screen"
+#~ msgid "Screen Turns Off"
+#~ msgstr "屏幕关闭"
+
+#~ msgctxt "lock_screen"
+#~ msgid "30 seconds"
+#~ msgstr "30 秒"
+
+#~ msgctxt "lock_screen"
+#~ msgid "1 minute"
+#~ msgstr "1 分钟"
+
+#~ msgctxt "lock_screen"
+#~ msgid "2 minutes"
+#~ msgstr "2 分钟"
+
+#~ msgctxt "lock_screen"
+#~ msgid "3 minutes"
+#~ msgstr "3 分钟"
+
+#~ msgctxt "lock_screen"
+#~ msgid "5 minutes"
+#~ msgstr "5 分钟"
+
+#~ msgctxt "lock_screen"
+#~ msgid "30 minutes"
+#~ msgstr "30 分钟"
+
+#~ msgctxt "lock_screen"
+#~ msgid "1 hour"
+#~ msgstr "1 小时"
+
+#~ msgctxt "blank_screen"
+#~ msgid "1 minute"
+#~ msgstr "1 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "2 minutes"
+#~ msgstr "2 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "3 minutes"
+#~ msgstr "3 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "4 minutes"
+#~ msgstr "4 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "5 minutes"
+#~ msgstr "5 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "8 minutes"
+#~ msgstr "8 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "10 minutes"
+#~ msgstr "10 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "12 minutes"
+#~ msgstr "12 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "15 minutes"
+#~ msgstr "15 分钟"
+
+#~ msgctxt "blank_screen"
+#~ msgid "Never"
+#~ msgstr "从不"
+
+#~ msgid ""
+#~ "Control which search results are shown in the Activities Overview. The "
+#~ "order of search results can also be changed by moving rows in the list."
+#~ msgstr ""
+#~ "控制活动概览中显示哪些搜索结果。搜索结果顺序也可以通过移动列表中的行排序进"
+#~ "行更改。"
 
 #~ msgid "Web Links"
 #~ msgstr "网络链接"
@@ -10413,9 +10389,6 @@ msgstr "系统声音"
 
 #~ msgid "Add New Printer"
 #~ msgstr "添加新打印机"
-
-#~ msgid "Bluetooth is disabled"
-#~ msgstr "蓝牙已禁用"
 
 #~ msgid "Wireless devices require extra power"
 #~ msgstr "无线设备需要消耗更多电"
