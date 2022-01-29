@@ -39,6 +39,7 @@ prettify_info (const char *info)
     { "Mesa DRI ", ""},
     { "[(]R[)]", "\302\256"},
     { "[(](tm|TM)[)]", "\342\204\242"},
+    { "(ATI|EPYC|AMD FX|Radeon|Ryzen|Threadripper|GeForce RTX) ", "\\1\342\204\242 "},
     { "Gallium \\d+\\.\\d+ on (.*)", "\\1"},
     { " CPU| Processor| \\S+-Core| @ \\d+\\.\\d+GHz", ""},
     { " x86|/MMX|/SSE2|/PCIe", ""},
