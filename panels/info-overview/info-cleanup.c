@@ -45,6 +45,7 @@ prettify_info (const char *info)
     { " x86|/MMX|/SSE2|/PCIe", ""},
     { " [(][^)]*(DRM|MESA|LLVM)[^)]*[)]?", ""},
     { "Graphics Controller", "Graphics"},
+    { ".*llvmpipe.*", "Software Rendering"},
   };
 
   if (*info == '\0')
