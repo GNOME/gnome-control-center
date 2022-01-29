@@ -32,10 +32,6 @@ G_DECLARE_FINAL_TYPE (CcWacomPage, cc_wacom_page, CC, WACOM_PAGE, GtkBox)
 GtkWidget * cc_wacom_page_new (CcWacomPanel  *panel,
 			       CcWacomDevice *stylus);
 
-void cc_wacom_page_set_navigation (CcWacomPage *page,
-				   GtkNotebook *notebook,
-				   gboolean     ignore_first_page);
-
 void        cc_wacom_page_calibrate        (CcWacomPage *page);
 
 gboolean    cc_wacom_page_can_calibrate    (CcWacomPage *page);
