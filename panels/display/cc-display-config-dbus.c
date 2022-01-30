@@ -1666,6 +1666,25 @@ cc_display_config_dbus_get_property (GObject    *object,
 }
 
 static void
+cc_display_config_dbus_dispose (GObject *object)
+{
+  CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (object);
+
+  if (self->logical_monitors)
+    {
+      GHashTableIter iter;
+      gpointer monitor;
+
+      g_hash_table_iter_init (&iter, self->logical_monitors);
+
+      while (g_hash_table_iter_next (&iter, &monitor, NULL))
+        g_object_weak_unref (G_OBJECT (monitor), remove_logical_monitor, self);
+    }
+
+  G_OBJECT_CLASS (cc_display_config_dbus_parent_class)->dispose (object);
+}
+
+static void
 cc_display_config_dbus_finalize (GObject *object)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (object);
@@ -1692,6 +1711,7 @@ cc_display_config_dbus_class_init (CcDisplayConfigDBusClass *klass)
   gobject_class->constructed = cc_display_config_dbus_constructed;
   gobject_class->set_property = cc_display_config_dbus_set_property;
   gobject_class->get_property = cc_display_config_dbus_get_property;
+  gobject_class->dispose = cc_display_config_dbus_dispose;
   gobject_class->finalize = cc_display_config_dbus_finalize;
 
   parent_class->get_monitors = cc_display_config_dbus_get_monitors;
