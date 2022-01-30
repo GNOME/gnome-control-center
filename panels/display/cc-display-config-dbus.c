@@ -1693,8 +1693,7 @@ cc_display_config_dbus_finalize (GObject *object)
   g_clear_object (&self->connection);
   g_clear_object (&self->proxy);
 
-  g_list_foreach (self->monitors, (GFunc) g_object_unref, NULL);
-  g_clear_pointer (&self->monitors, g_list_free);
+  g_clear_list (&self->monitors, g_object_unref);
   g_clear_pointer (&self->logical_monitors, g_hash_table_destroy);
   g_clear_pointer (&self->clone_modes, g_list_free);
 
