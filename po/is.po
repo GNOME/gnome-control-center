@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
 "POT-Creation-Date: 2022-01-24 13:03+0000\n"
-"PO-Revision-Date: 2022-01-29 12:09+0000\n"
+"PO-Revision-Date: 2022-01-30 13:48+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic <translation-team-is@lists.sourceforge.org>\n"
 "Language: is\n"
@@ -492,10 +492,12 @@ msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
 "the camera may cause some applications to not function properly."
 msgstr ""
+"Notkun myndavélar gerir forritum kleift að taka myndir og myndskeið. Sé"
+" myndavélin gerð óvirk, gætu sum forrit hætt að virka rétt."
 
 #: panels/camera/cc-camera-panel.ui:85
 msgid "Allow the applications below to use your camera."
-msgstr ""
+msgstr "Leyfa forritunum hér fyrir neðan að nota myndavélina þína."
 
 #: panels/camera/cc-camera-panel.ui:105
 msgid "No Applications Have Asked for Camera Access"
@@ -1187,7 +1189,7 @@ msgstr "Aflæsa…"
 
 #: panels/common/cc-permission-infobar.ui:56
 msgid "Some settings must be unlocked before they can be changed."
-msgstr ""
+msgstr "Einhverjum stillingum þarf að aflæsa áður en hægt er að breyta þeim."
 
 #: panels/common/cc-time-editor.ui:33
 msgid "Increment Hour"
@@ -2481,7 +2483,7 @@ msgstr ""
 
 #: panels/location/cc-location-panel.ui:94
 msgid "Allow the applications below to determine your location."
-msgstr ""
+msgstr "Leyfa forritunum hér fyrir neðan að nota staðsetningu þína."
 
 #: panels/location/cc-location-panel.ui:114
 msgid "No Applications Have Asked for Location Access"
@@ -2534,6 +2536,8 @@ msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
 msgstr ""
+"Koma í veg fyrir að USB-tæki eigi í samskiptum við kerfið þegar skjárinn er"
+" læstur."
 
 #. Translators: Option for "Lock screen after blank for" in "Screen Lock" dialog.
 #: panels/lock/cc-lock-panel.ui:166
@@ -2668,14 +2672,16 @@ msgid ""
 "Disabling the microphone may cause some applications to not function "
 "properly."
 msgstr ""
+"Notkun hljóðnema gerir forritum kleift að taka upp og hlusta á hljóð. Sé"
+" hljóðneminn gerður óvirkur, gætu sum forrit hætt að virka rétt."
 
 #: panels/microphone/cc-microphone-panel.ui:85
 msgid "Allow the applications below to use your microphone."
-msgstr ""
+msgstr "Leyfa forritunum hér fyrir neðan að nota hljóðnemann þinn."
 
 #: panels/microphone/cc-microphone-panel.ui:105
 msgid "No Applications Have Asked for Microphone Access"
-msgstr ""
+msgstr "Engin forrit hafa beðið um aðgang að hljóðnema"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in.in:4
 msgid "Protect your conversations"
@@ -2801,7 +2807,7 @@ msgstr "Virkni_horn"
 
 #: panels/multitasking/cc-multitasking-panel.ui:57
 msgid "Touch the top-left corner to open the Activities Overview."
-msgstr ""
+msgstr "Snertu hornið efst til vinstri til að opna virkniyfirlitið."
 
 #: panels/multitasking/cc-multitasking-panel.ui:84
 msgid "_Active Screen Edges"
@@ -2811,6 +2817,7 @@ msgstr "Virkir skjáj_aðrar"
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them."
 msgstr ""
+"Dragðu glugga að efri, vinstri og hægri skjájöðrum til að breyta stærð þeirra."
 
 #: panels/multitasking/cc-multitasking-panel.ui:114
 #| msgid "Colorspace: "
@@ -2949,15 +2956,17 @@ msgid ""
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
 "to access the internet through Wi-Fi."
 msgstr ""
+"Við það að kveikja á þráðlausa tengipunktinum muntu aftengjast frá %s og ekki"
+" verður lengur hægt að fara á internetið í gegnum Wi-Fi."
 
 #: panels/network/cc-wifi-hotspot-dialog.c:267
 msgid "Must have a minimum of 8 characters"
-msgstr ""
+msgstr "Verður að vera minnst 8 stafir"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:272
 #, c-format
 msgid "Must have a maximum of %d characters"
-msgstr ""
+msgstr "Verður að vera mest %d stafir"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:488
 msgid "Turn On Wi-Fi Hotspot?"
@@ -2969,6 +2978,10 @@ msgid ""
 "Wi-Fi network that they can connect to. To do this, you must have an "
 "internet connection through a source other than Wi-Fi."
 msgstr ""
+"Wi-Fi tengipunktur gerir öðrum kleift að nota internettenginguna þína, þannig"
+" að útbúið er Wi-Fi netkerfi sem þeir geta tengst. Til að þetta nýtist sem"
+" best, þyrftiðu að vera með tengingu við internetið í gegnum eitthvað annað"
+" en Wi-Fi."
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:44
 msgid "Network Name"
@@ -3043,7 +3056,7 @@ msgstr "Þráðlaus Wi-Fi-tengipunktur virkur"
 
 #: panels/network/cc-wifi-panel.ui:195
 msgid "Mobile devices can scan the QR code to connect."
-msgstr ""
+msgstr "Snjalltæki geta skannað QR-kóðann til að tengjast."
 
 #: panels/network/cc-wifi-panel.ui:205
 #| msgid "_Turn On Wi-Fi Hotspot…"
@@ -3373,11 +3386,14 @@ msgstr "Gera aðgengilegt öðrum n_otendum"
 #: panels/network/connection-editor/details-page.ui:467
 msgid "_Metered connection: has data limits or can incur charges"
 msgstr ""
+"_Mæld tenging: er með takmörk á gagnamagni eða gæti stofnað til nokkurs"
+" kostnaðar"
 
 #: panels/network/connection-editor/details-page.ui:478
 msgid ""
 "Software updates and other large downloads will not be started automatically."
 msgstr ""
+"Hugbúnaðaruppfærslur og önnur stór niðurhöl verða ekki sett í gang sjálfvirkt."
 
 #: panels/network/connection-editor/ethernet-page.ui:25
 #: panels/network/connection-editor/vpn-page.ui:23
@@ -7112,7 +7128,7 @@ msgstr "Fer_ill skráa"
 
 #: panels/usage/cc-usage-panel.ui:78
 msgid "File _History Duration"
-msgstr ""
+msgstr "Tímaleng_d skráaferils"
 
 #: panels/usage/cc-usage-panel.ui:119
 #| msgid "Cl_ear Recent History"
@@ -7411,7 +7427,7 @@ msgstr "Enginn fingrafaraskanni"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:280
 msgid "Choose the fingerprint device you want to configure"
-msgstr ""
+msgstr "Veldu fingrafaraskannann sem þú ætlar að stilla"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:309
 #| msgid "_Fingerprint Login"
@@ -7423,6 +7439,8 @@ msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
 msgstr ""
+"Innskráning með fingrafari gerir þér kleift að aflæsa og skrá þig inn á"
+" tölvuna með fingrinum"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:352
 msgid "_Delete Fingerprints"
@@ -7440,11 +7458,11 @@ msgstr "Skráning fingrafars"
 
 #: panels/user-accounts/cc-fingerprint-dialog.ui:436
 msgid "_Re-enroll this finger…"
-msgstr ""
+msgstr "Skráðu aftu_r þetta fingrafar…"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:236
 msgid "the device needs to be claimed to perform this action"
-msgstr ""
+msgstr "yfirtaka þarf tækið til að geta framkvæmt þessa aðgerð"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:238
 #| msgid "The device is already in use."
@@ -7453,11 +7471,11 @@ msgstr "tækið er nú þegar yfirtekið af öðru ferli"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:240
 msgid "you do not have permission to perform the action"
-msgstr ""
+msgstr "þú hefur ekki nægar heimildir til að framkvæma þessa aðgerð"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:242
 msgid "no prints have been enrolled"
-msgstr ""
+msgstr "engin fingraför hafa verið skráð"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:251
 #| msgid "Failed to register with the requested network"
@@ -7471,7 +7489,7 @@ msgstr "Gat ekki átt samskipti við fingrafaralesara"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:257
 msgid "Failed to communicate with the fingerprint daemon"
-msgstr ""
+msgstr "Mistókst að eiga samskipti við fingrafaralesarahugbúnaðinn"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:585
 #, c-format
@@ -7543,7 +7561,7 @@ msgstr "Fingrafaraskanni aftengdur"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:854
 msgid "Fingerprint device storage is full"
-msgstr ""
+msgstr "Geymslurými fingrafaraskanna er fullt"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:858
 #| msgid "Failed to add new printer."
@@ -7573,6 +7591,8 @@ msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr ""
+"Lyftu eog settu fingurinn þinn endurtekið á fingrafaraskannann til að skrá"
+" fingrafarið þitt"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
 #: panels/user-accounts/cc-fingerprint-dialog.c:1118
@@ -7856,7 +7876,7 @@ msgstr ""
 
 #: panels/user-accounts/cc-user-panel.c:1535
 msgid "Unlock to Add Users and Change Settings"
-msgstr ""
+msgstr "Aflæstu til að bæta við notendum og breyta stillingum"
 
 #: panels/user-accounts/cc-user-panel.ui:6
 msgid "_Add User…"
@@ -7894,6 +7914,8 @@ msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
 msgstr ""
+"Stjórnendur geta bætt við og fjarlægt aðra notendur og geta breytt stillingum"
+" fyrir alla notendur."
 
 #: panels/user-accounts/cc-user-panel.ui:284
 msgid "_Parental Controls"
@@ -7901,7 +7923,7 @@ msgstr "Að_gangsstýringar foreldra"
 
 #: panels/user-accounts/cc-user-panel.ui:285
 msgid "Open the Parental Controls application."
-msgstr ""
+msgstr "Opna forritið fyrir aðgangsstýringar foreldra."
 
 #: panels/user-accounts/cc-user-panel.ui:347
 #| msgid "Au_thentication"
@@ -7948,6 +7970,9 @@ msgid ""
 "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
 "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgstr ""
+"Innskráning;Notandi;Nafn;Fingrafar;Persónutákn;Merki;Andlit;Lykilorð;Aðgangsst"
+"ýringar foreldra;Skjátími;Takmörkun forrita;Vefnotkun;Notkun;Takmörk;Barn;Börn"
+";"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -8406,11 +8431,11 @@ msgstr "Hætt var við aðgerð"
 
 #: panels/wwan/cc-wwan-data.c:546
 msgid "<b>Error:</b> Access denied changing settings"
-msgstr ""
+msgstr "<b>Villa:</b> Aðgangi til að breyta stillingum hafnað"
 
 #: panels/wwan/cc-wwan-data.c:549
 msgid "<b>Error:</b> Mobile Equipment Error"
-msgstr ""
+msgstr "<b>Villa:</b> Villa í farsímatæki"
 
 #: panels/wwan/cc-wwan-details-dialog.c:81
 msgid "Not Registered"
@@ -8611,7 +8636,7 @@ msgstr "Ekkert SIM-kort"
 
 #: panels/wwan/cc-wwan-device-page.ui:45
 msgid "Insert a SIM card to use this modem"
-msgstr ""
+msgstr "Settu inn SIM-kort til að nota þetta mótald"
 
 #: panels/wwan/cc-wwan-device-page.ui:78
 msgid "SIM Locked"
@@ -8624,7 +8649,7 @@ msgstr "_Farsímagögn"
 
 #: panels/wwan/cc-wwan-device-page.ui:140
 msgid "Access data using mobile network"
-msgstr ""
+msgstr "Sækja gögn í gegnum farsímanet"
 
 #: panels/wwan/cc-wwan-device-page.ui:151
 msgid "_Data Roaming"
@@ -8632,7 +8657,7 @@ msgstr "_Gagnareiki"
 
 #: panels/wwan/cc-wwan-device-page.ui:152
 msgid "Use mobile data when roaming"
-msgstr ""
+msgstr "Nota farsímagögn við reiki"
 
 #: panels/wwan/cc-wwan-device-page.ui:177
 #| msgid "Network Name"
@@ -8747,7 +8772,7 @@ msgstr "GPRS-þjónustur ekki leyfðar"
 
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
-msgstr ""
+msgstr "Reiki er ekki leyfilegt á þessu svæði"
 
 #: panels/wwan/cc-wwan-errors-private.h:82
 msgid "Unspecified GPRS error"
@@ -8858,7 +8883,7 @@ msgstr "Breyta PIN-númeri"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
 msgid "Enter current PIN to change SIM lock settings"
-msgstr ""
+msgstr "Settu inn núverandi PIN-númer til að breyta læsistillingum SIM-korts"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:3
 #| msgid "My Home Network"
@@ -8874,7 +8899,7 @@ msgstr "Stilla nettæki og farsímatengingar"
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:17
 msgid "cellular;wwan;telephony;sim;mobile;"
-msgstr ""
+msgstr "farsími;wwan;símkerfi;sim;gsm;sími;"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
@@ -8886,7 +8911,7 @@ msgstr "Tól til að stilla GNOME skjáborðsumhverfið"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:10
 msgid "Settings is the primary interface for configuring your system."
-msgstr ""
+msgstr "Stillingar eru aðalviðmótið til að stilla kerfið þitt."
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:20
 msgid "The GNOME Project"
