@@ -133,6 +133,7 @@ cc_background_preview_get_property (GObject    *object,
     {
     case PROP_IS_DARK:
       g_value_set_boolean (value, self->is_dark);
+      break;
 
     case PROP_ITEM:
       g_value_set_object (value, self->item);
