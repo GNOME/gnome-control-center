@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-01-27 03:31+0000\n"
-"PO-Revision-Date: 2022-01-27 18:39+0800\n"
+"POT-Creation-Date: 2022-01-29 14:26+0000\n"
+"PO-Revision-Date: 2022-01-31 09:33+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -1556,7 +1556,6 @@ msgid "_Apply"
 msgstr "应用(_A)"
 
 #: panels/display/cc-display-panel.ui:97
-#| msgid "Bluetooth is disabled"
 msgid "Display Settings Disabled"
 msgstr "显示器设置已禁用"
 
@@ -1739,10 +1738,10 @@ msgstr ""
 "redshift;color;sunset;sunrise;面板;投影仪;屏幕;分辨率;刷新;夜晚;晚上;光;蓝;红"
 "移;颜色;日落;日出;"
 
-#: panels/info-overview/cc-info-overview-panel.c:410
-#: panels/info-overview/cc-info-overview-panel.c:434
-#: panels/info-overview/cc-info-overview-panel.c:480
-#: panels/info-overview/cc-info-overview-panel.c:510
+#: panels/info-overview/cc-info-overview-panel.c:411
+#: panels/info-overview/cc-info-overview-panel.c:435
+#: panels/info-overview/cc-info-overview-panel.c:481
+#: panels/info-overview/cc-info-overview-panel.c:511
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "未知"
@@ -1751,32 +1750,32 @@ msgstr "未知"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:442
+#: panels/info-overview/cc-info-overview-panel.c:443
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s；构建 ID：%s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:457
+#: panels/info-overview/cc-info-overview-panel.c:458
 #, c-format
 msgid "64-bit"
 msgstr "64 位"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:460
+#: panels/info-overview/cc-info-overview-panel.c:461
 #, c-format
 msgid "32-bit"
 msgstr "32 位"
 
-#: panels/info-overview/cc-info-overview-panel.c:717
+#: panels/info-overview/cc-info-overview-panel.c:720
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:721
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:723
+#: panels/info-overview/cc-info-overview-panel.c:726
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "未知"
@@ -1969,34 +1968,24 @@ msgstr "搜索"
 msgid "Screenshots"
 msgstr "截图"
 
-# 与下面的剪贴板“位置”相对。
-#: panels/keyboard/01-screenshot.xml.in:6
-msgid "Save a screenshot to $PICTURES"
-msgstr "将屏幕截图保存到 $PICTURES 目录"
+#: panels/keyboard/01-screenshot.xml.in:5
+#| msgid "Screenshots"
+msgid "Show the screenshot UI"
+msgstr "显示截图界面"
 
-#: panels/keyboard/01-screenshot.xml.in:10
-msgid "Save a screenshot of a window to $PICTURES"
-msgstr "将窗口截图保存到 $PICTURES 目录"
+#: panels/keyboard/01-screenshot.xml.in:8
+#| msgid "Screenshots"
+msgid "Take a screenshot"
+msgstr "截图"
+
+#: panels/keyboard/01-screenshot.xml.in:11
+#| msgid "Save a screenshot of a window to $PICTURES"
+msgid "Take a screenshot of a window"
+msgstr "对窗口进行截图"
 
 #: panels/keyboard/01-screenshot.xml.in:14
-msgid "Save a screenshot of an area to $PICTURES"
-msgstr "将选区截图保存到 $PICTURES 目录"
-
-#: panels/keyboard/01-screenshot.xml.in:17
-msgid "Copy a screenshot to clipboard"
-msgstr "复制截图到剪贴板"
-
-#: panels/keyboard/01-screenshot.xml.in:20
-msgid "Copy a screenshot of a window to clipboard"
-msgstr "复制窗口截图到剪贴板"
-
-#: panels/keyboard/01-screenshot.xml.in:23
-msgid "Copy a screenshot of an area to clipboard"
-msgstr "复制选区截图到剪贴板"
-
-#: panels/keyboard/01-screenshot.xml.in:26
-msgid "Record a short screencast"
-msgstr "记录一小段屏幕录像"
+msgid "Show the screen recording UI"
+msgstr "显示录屏界面"
 
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
@@ -2395,6 +2384,108 @@ msgid "Protect your location information"
 msgstr "保护您的位置信息"
 
 #. FIXME
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:62
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr "屏幕关闭"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:65
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "30 秒"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:68
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "1 分钟"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:71
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "2 分钟"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:74 panels/lock/cc-lock-panel.c:77
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 分钟"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:80
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "30 分钟"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:83
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "1 小时"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:126
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "1 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:129
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:132
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:135
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:138
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:141
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:144
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:147
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:150
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "15 分钟"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:153
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "从不"
+
 #: panels/lock/cc-lock-panel.ui:8
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
@@ -5714,24 +5805,18 @@ msgid "Move Down"
 msgstr "下移"
 
 #: panels/search/cc-search-panel.ui:10
-#| msgid "Application Switching"
 msgid "Application Search"
 msgstr "应用程序搜索"
 
 #: panels/search/cc-search-panel.ui:11
-#| msgid "Include applications from all _workspaces"
 msgid "Include application-provided search results."
 msgstr "包括应用程序提供的搜索结果。"
 
 #: panels/search/cc-search-panel.ui:23
-#| msgid ""
-#| "Folders which are searched by system applications, such as Files, Photos "
-#| "and Videos."
 msgid "Folders which are searched by system applications."
 msgstr "系统应用程序所搜索的文件夹。"
 
 #: panels/search/cc-search-panel.ui:37
-#| msgid "No Search Results"
 msgid "Search Results"
 msgstr "搜索结果"
 
@@ -8595,77 +8680,28 @@ msgstr[0] "%u 路输入"
 msgid "System Sounds"
 msgstr "系统声音"
 
-#~ msgctxt "lock_screen"
-#~ msgid "Screen Turns Off"
-#~ msgstr "屏幕关闭"
+# 与下面的剪贴板“位置”相对。
+#~ msgid "Save a screenshot to $PICTURES"
+#~ msgstr "将屏幕截图保存到 $PICTURES 目录"
 
-#~ msgctxt "lock_screen"
-#~ msgid "30 seconds"
-#~ msgstr "30 秒"
+#~ msgid "Save a screenshot of an area to $PICTURES"
+#~ msgstr "将选区截图保存到 $PICTURES 目录"
 
-#~ msgctxt "lock_screen"
-#~ msgid "1 minute"
-#~ msgstr "1 分钟"
+#~ msgid "Copy a screenshot to clipboard"
+#~ msgstr "复制截图到剪贴板"
 
-#~ msgctxt "lock_screen"
-#~ msgid "2 minutes"
-#~ msgstr "2 分钟"
+#~ msgid "Copy a screenshot of a window to clipboard"
+#~ msgstr "复制窗口截图到剪贴板"
 
-#~ msgctxt "lock_screen"
-#~ msgid "3 minutes"
-#~ msgstr "3 分钟"
+#~ msgid "Copy a screenshot of an area to clipboard"
+#~ msgstr "复制选区截图到剪贴板"
+
+#~ msgid "Record a short screencast"
+#~ msgstr "记录一小段屏幕录像"
 
 #~ msgctxt "lock_screen"
 #~ msgid "5 minutes"
 #~ msgstr "5 分钟"
-
-#~ msgctxt "lock_screen"
-#~ msgid "30 minutes"
-#~ msgstr "30 分钟"
-
-#~ msgctxt "lock_screen"
-#~ msgid "1 hour"
-#~ msgstr "1 小时"
-
-#~ msgctxt "blank_screen"
-#~ msgid "1 minute"
-#~ msgstr "1 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "2 minutes"
-#~ msgstr "2 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "3 minutes"
-#~ msgstr "3 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "4 minutes"
-#~ msgstr "4 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "5 minutes"
-#~ msgstr "5 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "8 minutes"
-#~ msgstr "8 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "10 minutes"
-#~ msgstr "10 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "12 minutes"
-#~ msgstr "12 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "15 minutes"
-#~ msgstr "15 分钟"
-
-#~ msgctxt "blank_screen"
-#~ msgid "Never"
-#~ msgstr "从不"
 
 #~ msgid ""
 #~ "Control which search results are shown in the Activities Overview. The "
