@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-01-27 03:31+0000\n"
-"PO-Revision-Date: 2022-01-27 12:59+0000\n"
+"POT-Creation-Date: 2022-01-31 03:12+0000\n"
+"PO-Revision-Date: 2022-01-31 23:39+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -1758,10 +1758,10 @@ msgstr ""
 "Painel;Projetor;xrandr;Ecrã;Resolução;Atualizar;Monitor;Noturno;Luz;Azul;cor;"
 "anoitecer;amanhecer;"
 
-#: panels/info-overview/cc-info-overview-panel.c:410
-#: panels/info-overview/cc-info-overview-panel.c:434
-#: panels/info-overview/cc-info-overview-panel.c:480
-#: panels/info-overview/cc-info-overview-panel.c:510
+#: panels/info-overview/cc-info-overview-panel.c:411
+#: panels/info-overview/cc-info-overview-panel.c:435
+#: panels/info-overview/cc-info-overview-panel.c:481
+#: panels/info-overview/cc-info-overview-panel.c:511
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "Desconhecido"
@@ -1770,32 +1770,32 @@ msgstr "Desconhecido"
 #. * example:
 #. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
 #. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:442
+#: panels/info-overview/cc-info-overview-panel.c:443
 #, c-format
 msgid "%s; Build ID: %s"
 msgstr "%s; ID da versão: %s"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:457
+#: panels/info-overview/cc-info-overview-panel.c:458
 #, c-format
 msgid "64-bit"
 msgstr "64-bit"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:460
+#: panels/info-overview/cc-info-overview-panel.c:461
 #, c-format
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:717
+#: panels/info-overview/cc-info-overview-panel.c:720
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:721
+#: panels/info-overview/cc-info-overview-panel.c:724
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:723
+#: panels/info-overview/cc-info-overview-panel.c:726
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Desconhecido"
@@ -1988,33 +1988,21 @@ msgstr "Procurar"
 msgid "Screenshots"
 msgstr "Capturas de ecrã"
 
-#: panels/keyboard/01-screenshot.xml.in:6
-msgid "Save a screenshot to $PICTURES"
-msgstr "Gravar uma captura do ecrã em $PICTURES"
+#: panels/keyboard/01-screenshot.xml.in:5
+msgid "Show the screenshot UI"
+msgstr "Mostra a interface da captura de ecrã"
 
-#: panels/keyboard/01-screenshot.xml.in:10
-msgid "Save a screenshot of a window to $PICTURES"
-msgstr "Gravar uma captura de uma janela em $PICTURES"
+#: panels/keyboard/01-screenshot.xml.in:8
+msgid "Take a screenshot"
+msgstr "Tirar um captura de ecrã"
+
+#: panels/keyboard/01-screenshot.xml.in:11
+msgid "Take a screenshot of a window"
+msgstr "Tirar uma captura de ecrã de uma janela"
 
 #: panels/keyboard/01-screenshot.xml.in:14
-msgid "Save a screenshot of an area to $PICTURES"
-msgstr "Gravar uma captura de uma área em $PICTURES"
-
-#: panels/keyboard/01-screenshot.xml.in:17
-msgid "Copy a screenshot to clipboard"
-msgstr "Copiar uma captura de ecrã para a área de transferência"
-
-#: panels/keyboard/01-screenshot.xml.in:20
-msgid "Copy a screenshot of a window to clipboard"
-msgstr "Copiar uma captura de uma janela para a área de transferência"
-
-#: panels/keyboard/01-screenshot.xml.in:23
-msgid "Copy a screenshot of an area to clipboard"
-msgstr "Copiar uma captura de uma área para a área de transferência"
-
-#: panels/keyboard/01-screenshot.xml.in:26
-msgid "Record a short screencast"
-msgstr "Gravar um pequeno filme do ecrã"
+msgid "Show the screen recording UI"
+msgstr "Mostra a interface de gravação do ecrã"
 
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
@@ -2426,6 +2414,108 @@ msgid "Protect your location information"
 msgstr "Proteger os seus dados de localização"
 
 #. FIXME
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:62
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr "O ecrã desliga-se em"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:65
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "30 segundos"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:68
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "1 minuto"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:71
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "2 minutos"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:74 panels/lock/cc-lock-panel.c:77
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 minutos"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:80
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "30 minutos"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:83
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "1 hora"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:126
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "1 minuto"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:129
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 minutos"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:132
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 minutos"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:135
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 minutos"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:138
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 minutos"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:141
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 minutos"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:144
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 minutos"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:147
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 minutos"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:150
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "15 minutos"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:153
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "Nunca"
+
 #: panels/lock/cc-lock-panel.ui:8
 msgid ""
 "Automatically locking the screen prevents others from accessing the computer "
@@ -8740,6 +8830,24 @@ msgstr[1] "%u entradas"
 msgid "System Sounds"
 msgstr "Sons do sistema"
 
+#~ msgid "Save a screenshot to $PICTURES"
+#~ msgstr "Gravar uma captura do ecrã em $PICTURES"
+
+#~ msgid "Save a screenshot of an area to $PICTURES"
+#~ msgstr "Gravar uma captura de uma área em $PICTURES"
+
+#~ msgid "Copy a screenshot to clipboard"
+#~ msgstr "Copiar uma captura de ecrã para a área de transferência"
+
+#~ msgid "Copy a screenshot of a window to clipboard"
+#~ msgstr "Copiar uma captura de uma janela para a área de transferência"
+
+#~ msgid "Copy a screenshot of an area to clipboard"
+#~ msgstr "Copiar uma captura de uma área para a área de transferência"
+
+#~ msgid "Record a short screencast"
+#~ msgstr "Gravar um pequeno filme do ecrã"
+
 #~ msgid ""
 #~ "Control which search results are shown in the Activities Overview. The "
 #~ "order of search results can also be changed by moving rows in the list."
@@ -8749,76 +8857,8 @@ msgstr "Sons do sistema"
 #~ "a posição das linhas na lista."
 
 #~ msgctxt "lock_screen"
-#~ msgid "Screen Turns Off"
-#~ msgstr "O ecrã desliga-se em"
-
-#~ msgctxt "lock_screen"
-#~ msgid "30 seconds"
-#~ msgstr "30 segundos"
-
-#~ msgctxt "lock_screen"
-#~ msgid "1 minute"
-#~ msgstr "1 minuto"
-
-#~ msgctxt "lock_screen"
-#~ msgid "2 minutes"
-#~ msgstr "2 minutos"
-
-#~ msgctxt "lock_screen"
-#~ msgid "3 minutes"
-#~ msgstr "3 minutos"
-
-#~ msgctxt "lock_screen"
 #~ msgid "5 minutes"
 #~ msgstr "5 minutos"
-
-#~ msgctxt "lock_screen"
-#~ msgid "30 minutes"
-#~ msgstr "30 minutos"
-
-#~ msgctxt "lock_screen"
-#~ msgid "1 hour"
-#~ msgstr "1 hora"
-
-#~ msgctxt "blank_screen"
-#~ msgid "1 minute"
-#~ msgstr "1 minuto"
-
-#~ msgctxt "blank_screen"
-#~ msgid "2 minutes"
-#~ msgstr "2 minutos"
-
-#~ msgctxt "blank_screen"
-#~ msgid "3 minutes"
-#~ msgstr "3 minutos"
-
-#~ msgctxt "blank_screen"
-#~ msgid "4 minutes"
-#~ msgstr "4 minutos"
-
-#~ msgctxt "blank_screen"
-#~ msgid "5 minutes"
-#~ msgstr "5 minutos"
-
-#~ msgctxt "blank_screen"
-#~ msgid "8 minutes"
-#~ msgstr "8 minutos"
-
-#~ msgctxt "blank_screen"
-#~ msgid "10 minutes"
-#~ msgstr "10 minutos"
-
-#~ msgctxt "blank_screen"
-#~ msgid "12 minutes"
-#~ msgstr "12 minutos"
-
-#~ msgctxt "blank_screen"
-#~ msgid "15 minutes"
-#~ msgstr "15 minutos"
-
-#~ msgctxt "blank_screen"
-#~ msgid "Never"
-#~ msgstr "Nunca"
 
 #~ msgid "Web Links"
 #~ msgstr "Ligações Web"
