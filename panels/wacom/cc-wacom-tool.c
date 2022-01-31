@@ -22,6 +22,8 @@
 
 #include "cc-wacom-tool.h"
 
+#include <glib/gi18n.h>
+
 enum {
 	PROP_0,
 	PROP_SERIAL,
@@ -306,4 +308,23 @@ cc_wacom_tool_get_has_eraser (CcWacomTool *tool)
 	g_return_val_if_fail (CC_IS_WACOM_TOOL (tool), FALSE);
 
 	return libwacom_stylus_is_eraser (tool->wstylus);
+}
+
+const gchar *
+cc_wacom_tool_get_description (CcWacomTool *tool)
+{
+	WacomAxisTypeFlags axes;
+
+	axes = libwacom_stylus_get_axes (tool->wstylus);
+
+	if ((~axes & (WACOM_AXIS_TYPE_TILT | WACOM_AXIS_TYPE_PRESSURE | WACOM_AXIS_TYPE_SLIDER)) == 0)
+		return _("Airbrush stylus with pressure, tilt, and integrated slider");
+	else if ((~axes & (WACOM_AXIS_TYPE_TILT | WACOM_AXIS_TYPE_PRESSURE | WACOM_AXIS_TYPE_ROTATION_Z)) == 0)
+		return _("Airbrush stylus with pressure, tilt, and rotation");
+	else if ((~axes & (WACOM_AXIS_TYPE_TILT | WACOM_AXIS_TYPE_PRESSURE)) == 0)
+		return _("Standard stylus with pressure and tilt");
+	else if ((~axes & WACOM_AXIS_TYPE_PRESSURE) == 0)
+		return _("Standard stylus with pressure");
+
+	return NULL;
 }
