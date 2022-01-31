@@ -42,3 +42,5 @@ GSettings     * cc_wacom_tool_get_settings    (CcWacomTool   *tool);
 
 guint           cc_wacom_tool_get_num_buttons (CcWacomTool   *tool);
 gboolean        cc_wacom_tool_get_has_eraser  (CcWacomTool   *tool);
+
+const gchar   * cc_wacom_tool_get_description (CcWacomTool   *tool);

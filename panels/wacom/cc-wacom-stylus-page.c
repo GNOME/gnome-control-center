@@ -234,6 +234,8 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 	/* Stylus name */
 	gtk_label_set_text (GTK_LABEL (page->stylus_name),
 			    cc_wacom_tool_get_name (stylus));
+	gtk_label_set_text (GTK_LABEL (page->stylus_subtitle),
+			    cc_wacom_tool_get_description (stylus));
 
 	/* Icon */
 	set_icon_name (page, cc_wacom_tool_get_icon_name (stylus));
