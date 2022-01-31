@@ -305,5 +305,5 @@ cc_wacom_tool_get_has_eraser (CcWacomTool *tool)
 {
 	g_return_val_if_fail (CC_IS_WACOM_TOOL (tool), FALSE);
 
-	return libwacom_stylus_has_eraser (tool->wstylus);
+	return libwacom_stylus_is_eraser (tool->wstylus);
 }
