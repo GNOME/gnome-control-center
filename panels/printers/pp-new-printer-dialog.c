@@ -1671,9 +1671,6 @@ ppd_selection_cb (GtkDialog *_dialog,
       ppd_name = pp_ppd_selection_dialog_get_ppd_name (self->ppd_selection_dialog);
       ppd_display_name = pp_ppd_selection_dialog_get_ppd_display_name (self->ppd_selection_dialog);
   }
-  else {
-      self->user_callback (GTK_DIALOG (self), GTK_RESPONSE_CANCEL, self->user_data);
-  }
 
   if (ppd_name)
     {
@@ -1712,7 +1709,7 @@ ppd_selection_cb (GtkDialog *_dialog,
         }
     }
 
-  self->user_callback (GTK_DIALOG (self), GTK_RESPONSE_OK, self->user_data);
+  self->user_callback (GTK_DIALOG (self), response_id, self->user_data);
 }
 
 static void
