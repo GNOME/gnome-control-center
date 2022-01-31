@@ -61,3 +61,6 @@ guint           cc_wacom_device_get_num_buttons (CcWacomDevice *wacom_device);
 
 GSettings     * cc_wacom_device_get_button_settings (CcWacomDevice *device,
 						     guint          button);
+
+const gchar   * cc_wacom_device_get_description (CcWacomDevice *device);
+
