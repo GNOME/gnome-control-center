@@ -791,6 +791,8 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 
 	/* Tablet name */
 	gtk_label_set_text (GTK_LABEL (page->tablet_name), cc_wacom_device_get_name (stylus));
+	gtk_label_set_text (GTK_LABEL (page->tablet_subtitle),
+			    cc_wacom_device_get_description (stylus));
 
 	g_settings_bind_with_mapping (page->wacom_settings, "mapping",
 				      page->tablet_mode_switch, "active",

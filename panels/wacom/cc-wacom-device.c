@@ -23,6 +23,8 @@
 #include <string.h>
 #include "cc-wacom-device.h"
 
+#include <glib/gi18n.h>
+
 enum {
 	PROP_0,
 	PROP_DEVICE,
@@ -414,4 +416,22 @@ cc_wacom_device_get_button_settings (CcWacomDevice *device,
 					     button_path);
 
 	return settings;
+}
+
+const gchar *
+cc_wacom_device_get_description (CcWacomDevice *device)
+{
+	WacomIntegrationFlags integration_flags;
+
+	g_return_val_if_fail (CC_IS_WACOM_DEVICE (device), NULL);
+
+	integration_flags = libwacom_get_integration_flags (device->wdevice);
+
+	if (integration_flags & WACOM_DEVICE_INTEGRATED_SYSTEM) {
+		return _("Tablet mounted on laptop panel");
+	} else if (integration_flags & WACOM_DEVICE_INTEGRATED_DISPLAY) {
+		return _("Tablet mounted on external display");
+	} else {
+		return _("External tablet device");
+	}
 }
