@@ -98,3 +98,5 @@ executable(
   install: true,
   install_dir: control_center_libexecdir
 )
+
+subdir('icons')

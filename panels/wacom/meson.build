@@ -105,3 +105,5 @@ executable(
                c_args : test_cflags,
             link_with : [ libwacom_calibrator_test ]
 )
+
+subdir('icons')
