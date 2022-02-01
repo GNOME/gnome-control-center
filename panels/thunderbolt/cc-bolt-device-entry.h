@@ -19,13 +19,14 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include "bolt-device.h"
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_BOLT_DEVICE_ENTRY cc_bolt_device_entry_get_type ()
-G_DECLARE_FINAL_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, CC, BOLT_DEVICE_ENTRY, GtkListBoxRow);
+G_DECLARE_FINAL_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, CC, BOLT_DEVICE_ENTRY, AdwActionRow);
 
 
 CcBoltDeviceEntry * cc_bolt_device_entry_new (BoltDevice *device,

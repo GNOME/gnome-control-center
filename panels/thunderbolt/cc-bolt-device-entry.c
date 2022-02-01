@@ -31,20 +31,18 @@
 
 struct _CcBoltDeviceEntry
 {
-  GtkListBoxRow parent;
+  AdwActionRow parent;
 
   BoltDevice   *device;
 
   /* main ui */
-  GtkLabel *name_label;
-  GtkLabel *status_label;
   GtkLabel *status_warning;
   gboolean  show_warnings;
 };
 
 static const char *   device_status_to_brief_for_ui (BoltDevice *dev);
 
-G_DEFINE_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, GTK_TYPE_LIST_BOX_ROW);
+G_DEFINE_TYPE (CcBoltDeviceEntry, cc_bolt_device_entry, ADW_TYPE_ACTION_ROW);
 
 enum
 {
@@ -64,7 +62,7 @@ entry_set_name (CcBoltDeviceEntry *entry)
 
   name = bolt_device_get_display_name (dev);
 
-  gtk_label_set_label (entry->name_label, name);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (entry), name);
 }
 
 static void
@@ -77,7 +75,7 @@ entry_update_status (CcBoltDeviceEntry *entry)
   status = bolt_device_get_status (entry->device);
   brief = device_status_to_brief_for_ui (entry->device);
 
-  gtk_label_set_label (entry->status_label, brief);
+  adw_action_row_set_subtitle (ADW_ACTION_ROW (entry), brief);
 
   g_signal_emit (entry,
                  signals[SIGNAL_STATUS_CHANGED],
@@ -171,8 +169,6 @@ cc_bolt_device_entry_class_init (CcBoltDeviceEntryClass *klass)
   object_class->finalize = cc_bolt_device_entry_finalize;
 
   gtk_widget_class_set_template_from_resource (widget_class, RESOURCE_UI);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceEntry, name_label);
-  gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceEntry, status_label);
   gtk_widget_class_bind_template_child (widget_class, CcBoltDeviceEntry, status_warning);
 
   signals[SIGNAL_STATUS_CHANGED] =
