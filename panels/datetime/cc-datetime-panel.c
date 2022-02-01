@@ -861,10 +861,6 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                               GTK_STYLE_PROVIDER (provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 
-  /* Month */
-  self->month = g_date_time_get_month (self->date);
-  adw_combo_row_set_selected (self->month_row, self->month - 1);
-
   /* Day */
   num_days = g_date_get_days_in_month (g_date_time_get_month (self->date),
                                        g_date_time_get_year (self->date));
@@ -883,6 +879,10 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                   adjustment);
   g_signal_connect_object (G_OBJECT (self->year_spinbutton), "value-changed",
                            G_CALLBACK (month_year_changed), self, G_CONNECT_SWAPPED);
+
+  /* Month */
+  self->month = g_date_time_get_month (self->date);
+  adw_combo_row_set_selected (self->month_row, self->month - 1);
 }
 
 static int
