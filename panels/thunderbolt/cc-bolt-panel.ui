@@ -216,101 +216,40 @@
                                     <property name="orientation">horizontal</property>
                                     <property name="spacing">12</property>
                                     <child>
-                                      <object class="GtkBox">
-                                        <property name="hexpand">True</property>
-                                        <property name="vexpand">True</property>
-                                        <property name="orientation">vertical</property>
-                                        <property name="spacing">6</property>
-                                        <child>
-                                          <object class="GtkLabel">
-                                            <property name="hexpand">False</property>
-                                            <property name="halign">start</property>
-                                            <property name="xalign">0.0</property>
-                                            <property name="label" translatable="yes">Direct Access</property>
-                                            <property name="mnemonic_widget">authmode_switch</property>
-                                            <attributes>
-                                              <attribute name="weight" value="bold" />
-                                            </attributes>
-                                          </object>
-                                        </child>
+                                      <object class="AdwPreferencesGroup">
+                                        <property name="title" translatable="yes">Direct Access</property>
 
                                         <child>
-                                          <object class="GtkStack" id="authmode_mode">
-                                            <property name="transition-type">crossfade</property>
-                                            <property name="hhomogeneous">False</property>
-                                            <property name="vhomogeneous">False</property>
+                                          <object class="AdwActionRow" id="direct_access_row">
+                                            <property name="title" translatable="yes" >Allow direct access to devices such as docks and external GPUs.</property>
+                                            <child type="suffix">
+                                              <object class="GtkBox">
+                                                <property name="orientation">horizontal</property>
+                                                <property name="spacing">6</property>
+                                                <property name="halign">end</property>
+                                                <property name="valign">center</property>
 
-                                            <child>
-                                              <object class="GtkStackPage">
-                                                <property name="name">enabled</property>
-                                                <property name="child">
-                                                  <object class="GtkLabel">
-                                                    <property name="halign">start</property>
-                                                    <property name="margin-start">0</property>
-                                                    <property name="hexpand">False</property>
-                                                    <property name="vexpand">False</property>
-                                                    <property name="label" translatable="yes" >Allow direct access to devices such as docks and external GPUs.</property>
-                                                    <property name="use_markup">True</property>
-                                                    <property name="wrap">True</property>
-                                                    <property name="xalign">0.0</property>
-                                                    <property name="yalign">0.0</property>
-                                                    <property name="max-width-chars">45</property>
+                                                <child>
+                                                  <object class="GtkSpinner" id="authmode_spinner">
+                                                    <property name="spinning">False</property>
                                                   </object>
-                                                </property>
+                                                </child>
+
+                                                <child>
+                                                  <object class="GtkSwitch" id="authmode_switch">
+                                                    <property name="halign">end</property>
+                                                    <property name="active">True</property>
+                                                    <signal name="state-set"
+                                                            handler="on_authmode_state_set_cb"
+                                                            object="CcBoltPanel"
+                                                            swapped="yes" />
+                                                  </object>
+                                                </child>
                                               </object>
                                             </child>
-
-                                            <child>
-                                              <object class="GtkStackPage">
-                                                <property name="name">disabled</property>
-                                                <property name="child">
-                                                  <object class="GtkLabel">
-                                                    <property name="halign">start</property>
-                                                    <property name="margin-start">0</property>
-                                                    <property name="hexpand">False</property>
-                                                    <property name="vexpand">False</property>
-                                                    <property name="label" translatable="yes" >Only USB and Display Port devices can attach.</property>
-                                                    <property name="use_markup">True</property>
-                                                    <property name="wrap">True</property>
-                                                    <property name="xalign">0.0</property>
-                                                    <property name="yalign">0.0</property>
-                                                    <property name="max-width-chars">45</property>
-                                                  </object>
-                                                </property>
-                                              </object>
-                                            </child>
-
-                                          </object>
-                                        </child>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkBox">
-                                        <property name="hexpand">True</property>
-                                        <property name="vexpand">True</property>
-                                        <property name="orientation">horizontal</property>
-                                        <property name="spacing">6</property>
-                                        <property name="halign">center</property>
-                                        <property name="valign">start</property>
-
-                                        <child>
-                                          <object class="GtkSpinner" id="authmode_spinner">
-                                            <property name="spinning">False</property>
                                           </object>
                                         </child>
 
-                                        <child>
-                                          <object class="GtkSwitch" id="authmode_switch">
-                                            <property name="can_focus">True</property>
-                                            <property name="halign">end</property>
-                                            <property name="valign">start</property>
-                                            <property name="active">True</property>
-                                            <signal name="state-set"
-                                                    handler="on_authmode_state_set_cb"
-                                                    object="CcBoltPanel"
-                                                    swapped="yes" />
-                                          </object>
-                                        </child>
                                       </object>
                                     </child>
                                   </object>

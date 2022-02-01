@@ -58,7 +58,7 @@ struct _CcBoltPanel
   /* authmode */
   GtkSwitch          *authmode_switch;
   GtkSpinner         *authmode_spinner;
-  GtkStack           *authmode_mode;
+  GtkStack           *direct_access_row;
 
   /* device list */
   GHashTable         *devices;
@@ -411,7 +411,6 @@ cc_bolt_panel_authmode_sync (CcBoltPanel *panel)
   BoltClient *client = panel->client;
   BoltAuthMode mode;
   gboolean enabled;
-  const char *name;
 
   mode = bolt_client_get_authmode (client);
   enabled = (mode & BOLT_AUTH_ENABLED) != 0;
@@ -422,8 +421,10 @@ cc_bolt_panel_authmode_sync (CcBoltPanel *panel)
 
   g_signal_handlers_unblock_by_func (panel->authmode_switch, on_authmode_state_set_cb, panel);
 
-  name = enabled ? "enabled" : "disabled";
-  gtk_stack_set_visible_child_name (panel->authmode_mode, name);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (panel->direct_access_row),
+                                 enabled ?
+                                 _("Allow direct access to devices such as docks and external GPUs.") :
+                                 _("Only USB and Display Port devices can attach."));
 }
 
 static void
@@ -908,13 +909,13 @@ cc_bolt_panel_class_init (CcBoltPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/thunderbolt/cc-bolt-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, authmode_mode);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, authmode_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, authmode_switch);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, container);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, devices_list);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, devices_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, devices_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, direct_access_row);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, headerbar_box);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, lock_button);
   gtk_widget_class_bind_template_child (widget_class, CcBoltPanel, notb_caption);
