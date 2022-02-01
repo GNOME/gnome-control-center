@@ -60,8 +60,7 @@ struct _CcWacomPage
 	CalibArea      *area;
 	GSettings      *wacom_settings;
 
-	GtkWidget      *tablet_name;
-	GtkWidget      *tablet_subtitle;
+	GtkWidget      *tablet_section;
 	GtkWidget      *tablet_icon;
 	GtkWidget      *tablet_display;
 	GtkWidget      *tablet_calibrate;
@@ -562,8 +561,7 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wacom/cc-wacom-page.ui");
 
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_name);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_subtitle);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_section);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_icon);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_display);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPage, tablet_calibrate);
@@ -790,9 +788,10 @@ cc_wacom_page_new (CcWacomPanel  *panel,
 	page->wacom_settings  = cc_wacom_device_get_settings (stylus);
 
 	/* Tablet name */
-	gtk_label_set_text (GTK_LABEL (page->tablet_name), cc_wacom_device_get_name (stylus));
-	gtk_label_set_text (GTK_LABEL (page->tablet_subtitle),
-			    cc_wacom_device_get_description (stylus));
+	adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (page->tablet_section),
+					 cc_wacom_device_get_name (stylus));
+	adw_preferences_group_set_description (ADW_PREFERENCES_GROUP (page->tablet_section),
+					       cc_wacom_device_get_description (stylus));
 
 	g_settings_bind_with_mapping (page->wacom_settings, "mapping",
 				      page->tablet_mode_switch, "active",

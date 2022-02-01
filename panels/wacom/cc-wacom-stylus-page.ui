@@ -4,43 +4,13 @@
     <property name="orientation">vertical</property>
     <property name="spacing">24</property>
     <child>
-      <object class="GtkBox">
-        <property name="homogeneous">True</property>
-        <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="hexpand">True</property>
-            <property name="spacing">6</property>
-            <child>
-              <object class="GtkLabel" id="stylus_name">
-                <property name="halign">start</property>
-                <style>
-                  <class name="heading"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="stylus_subtitle">
-                <property name="halign">start</property>
-                <property name="wrap">True</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
+      <object class="AdwPreferencesGroup" id="stylus_section">
+        <property name="header-suffix">
           <object class="GtkPicture" id="stylus_icon">
-            <property name="hexpand">True</property>
             <property name="halign">end</property>
             <property name="valign">start</property>
           </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="AdwPreferencesGroup">
+        </property>
         <child>
           <object class="AdwActionRow" id="stylus_tip_pressure">
             <property name="title" translatable="yes">Tip Pressure Feel</property>
