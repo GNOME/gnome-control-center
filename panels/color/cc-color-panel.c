@@ -1704,6 +1704,9 @@ static void
 gcm_prefs_list_box_row_selected_cb (CcColorPanel *panel,
                                     GtkListBoxRow *row)
 {
+  if (gtk_widget_in_destruction (panel->toolbar_devices))
+    return;
+
   gcm_prefs_refresh_toolbar_buttons (panel);
 }
 
