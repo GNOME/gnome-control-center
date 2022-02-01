@@ -298,6 +298,9 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
         GtkSettings *settings;
         gboolean animations;
         guint users_count;
+#ifdef HAVE_MALCONTENT
+        g_autofree gchar *malcontent_control_path = NULL;
+#endif
 
         settings = gtk_widget_get_settings (GTK_WIDGET (self->carousel));
 
@@ -330,8 +333,14 @@ reload_users (CcUserPanel *self, ActUser *selected_user)
 
         g_object_set (settings, "gtk-enable-animations", animations, NULL);
 #ifdef HAVE_MALCONTENT
-        /* Parental Controls row not to be shown for single user setups. */
-        if (selected_user != NULL) {
+        /* Parental Controls row not to be shown for single user setups, or if
+         * malcontent-control is not available (which can happen if
+         * libmalcontent is installed but malcontent-control is not). */
+        malcontent_control_path = g_find_program_in_path ("malcontent-control");
+
+        if (malcontent_control_path == NULL) {
+                gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row), FALSE);
+        } else if (selected_user != NULL) {
                 gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row),
                                         act_user_get_account_type (selected_user) != ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
         } else {
@@ -855,6 +864,9 @@ show_user (ActUser *user, CcUserPanel *self)
         g_autofree gchar *name = NULL;
         gboolean show, enable;
         ActUser *current;
+#ifdef HAVE_MALCONTENT
+        g_autofree gchar *malcontent_control_path = NULL;
+#endif
 
         self->selected_user = user;
 
@@ -924,8 +936,13 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), show);
 
 #ifdef HAVE_MALCONTENT
-        /* Parental Controls: Unavailable if user is admin */
-        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR) {
+        /* Parental Controls: Unavailable if user is admin or if
+         * malcontent-control is not available (which can happen if
+         * libmalcontent is installed but malcontent-control is not). */
+        malcontent_control_path = g_find_program_in_path ("malcontent-control");
+
+        if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR ||
+            malcontent_control_path == NULL) {
                 gtk_widget_hide (GTK_WIDGET (self->parental_controls_row));
         } else {
                 GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (self->parental_controls_button_label));
