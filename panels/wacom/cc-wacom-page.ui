@@ -4,41 +4,13 @@
     <property name="orientation">vertical</property>
     <property name="spacing">24</property>
     <child>
-      <object class="GtkBox">
-        <child>
-          <object class="GtkBox">
-            <property name="orientation">vertical</property>
-            <property name="hexpand">True</property>
-            <property name="spacing">6</property>
-            <child>
-              <object class="GtkLabel" id="tablet_name">
-                <property name="halign">start</property>
-                <style>
-                  <class name="heading"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="tablet_subtitle">
-                <property name="halign">start</property>
-                <property name="wrap">True</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
+      <object class="AdwPreferencesGroup" id="tablet_section">
+        <property name="header-suffix">
           <object class="GtkPicture" id="tablet_icon">
             <property name="halign">end</property>
             <property name="valign">start</property>
           </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="AdwPreferencesGroup">
+        </property>
         <child>
           <object class="AdwActionRow" id="tablet_mode">
             <property name="title" translatable="yes">Tablet Mode</property>

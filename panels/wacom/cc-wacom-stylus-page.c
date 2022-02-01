@@ -33,8 +33,7 @@ struct _CcWacomStylusPage
 {
 	GtkBox          parent_instance;
 
-	GtkWidget      *stylus_name;
-	GtkWidget      *stylus_subtitle;
+	GtkWidget      *stylus_section;
 	GtkWidget      *stylus_icon;
 	GtkWidget      *stylus_button1_action;
 	GtkWidget      *stylus_button2_action;
@@ -171,8 +170,7 @@ cc_wacom_stylus_page_class_init (CcWacomStylusPageClass *klass)
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wacom/cc-wacom-stylus-page.ui");
 
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_name);
-	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_subtitle);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_section);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_icon);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button1_action);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomStylusPage, stylus_button2_action);
@@ -232,10 +230,10 @@ cc_wacom_stylus_page_new (CcWacomTool *stylus)
 	page->stylus = stylus;
 
 	/* Stylus name */
-	gtk_label_set_text (GTK_LABEL (page->stylus_name),
-			    cc_wacom_tool_get_name (stylus));
-	gtk_label_set_text (GTK_LABEL (page->stylus_subtitle),
-			    cc_wacom_tool_get_description (stylus));
+	adw_preferences_group_set_title (ADW_PREFERENCES_GROUP (page->stylus_section),
+					 cc_wacom_tool_get_name (stylus));
+	adw_preferences_group_set_description (ADW_PREFERENCES_GROUP (page->stylus_section),
+					       cc_wacom_tool_get_description (stylus));
 
 	/* Icon */
 	set_icon_name (page, cc_wacom_tool_get_icon_name (stylus));
