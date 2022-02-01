@@ -124,7 +124,7 @@ cc_qr_code_get_paintable (CcQrCode *self,
   uint8_t temp_buf[qrcodegen_BUFFER_LEN_FOR_VERSION (qrcodegen_VERSION_MAX)];
   g_autoptr(GBytes) bytes = NULL;
   GByteArray *qr_matrix;
-  gint pixel_size, padding, qr_size, total_size;
+  gint pixel_size, qr_size, total_size;
   gint column, row, i;
   gboolean success = FALSE;
 
@@ -156,16 +156,6 @@ cc_qr_code_get_paintable (CcQrCode *self,
 
   qr_size = qrcodegen_getSize(qr_code);
   pixel_size = MAX (1, size / (qr_size));
-  padding = (size - qr_size * pixel_size) / 2;
-
-  /* If subpixel size is big and margin is pretty small,
-   * increase the margin */
-  if (pixel_size > 4 && padding < 12)
-    {
-      pixel_size--;
-      padding = (size - qr_size * pixel_size) / 2;
-    }
-
   total_size = qr_size * pixel_size;
   qr_matrix = g_byte_array_sized_new (total_size * total_size * pixel_size * BYTES_PER_R8G8B8);
 
