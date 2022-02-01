@@ -329,52 +329,28 @@
 
                                             <!-- Device List  -->
                                             <child>
-                                              <object class="GtkBox" id="devices_box">
+                                              <object class="AdwPreferencesGroup" id="devices_box">
+                                                <property name="title" translatable="yes">Devices</property>
                                                 <property name="visible">False</property>
-                                                <property name="orientation">vertical</property>
-                                                <property name="spacing">12</property>
 
-                                                <!-- Device List: Header  -->
-                                                <child>
-                                                  <object class="GtkBox" id="devices_header">
-                                                    <property name="hexpand">True</property>
-                                                    <property name="halign">start</property>
-                                                    <property name="spacing">6</property>
-                                                    <child>
-                                                      <object class="GtkLabel">
-                                                        <property name="label" translatable="yes">Devices</property>
-                                                        <property name="xalign">0.0</property>
-                                                        <attributes>
-                                                          <attribute name="weight" value="bold"/>
-                                                        </attributes>
-                                                      </object>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkSpinner" id="probing_spinner">
-                                                        <property name="hexpand">True</property>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
 
                                                 <!-- Device List: Devices  -->
                                                 <child>
-                                                  <object class="GtkFrame">
-                                                    <property name="valign">start</property>
-                                                    <property name="vexpand">False</property>
-                                                    <style>
-                                                      <class name="view" />
-                                                    </style>
-                                                    <child>
-                                                      <object class="GtkListBox" id="devices_list">
-                                                        <property name="selection-mode">none</property>
-                                                        <property name="can_focus">True</property>
-                                                        <signal name="row-activated"
-                                                                handler="on_device_entry_row_activated_cb"
-                                                                object="CcBoltPanel"
-                                                                swapped="yes" />
-                                                      </object>
-                                                    </child>
+                                                  <object class="GtkListBox" id="devices_list">
+                                                    <property name="selection-mode">none</property>
+                                                    <signal name="row-activated"
+                                                            handler="on_device_entry_row_activated_cb"
+                                                            object="CcBoltPanel"
+                                                            swapped="yes" />
+                                                        <style>
+                                                          <class name="boxed-list"/>
+                                                        </style>
+                                                  </object>
+                                                </child>
+
+                                                <child>
+                                                  <object class="GtkSpinner" id="probing_spinner">
+                                                    <property name="halign">start</property>
                                                   </object>
                                                 </child>
 
