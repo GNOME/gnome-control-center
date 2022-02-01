@@ -723,7 +723,7 @@ start_hotspot_button_clicked_cb (NetDeviceWifi *self)
         if (c)
                 cc_wifi_hotspot_dialog_set_connection (self->hotspot_dialog, c);
 
-        g_signal_connect (self->hotspot_dialog, "response", G_CALLBACK (on_wifi_hotspot_dialog_respnse_cb), self);
+        g_signal_connect_after (self->hotspot_dialog, "response", G_CALLBACK (on_wifi_hotspot_dialog_respnse_cb), self);
         gtk_window_present (GTK_WINDOW (self->hotspot_dialog));
         gtk_popover_popdown (self->header_button_popover);
 }
