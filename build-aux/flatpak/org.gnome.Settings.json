@@ -325,6 +325,10 @@
         {
             "name" : "libwacom",
             "buildsystem" : "meson",
+            "config-opts" : [
+                "-Ddocumentation=disabled",
+                "-Dtests=disabled"
+            ],
             "sources" : [
                 {
                     "type" : "git",
