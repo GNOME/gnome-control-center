@@ -218,6 +218,7 @@
             "sources" : [
                 {
                     "type" : "git",
+                    "branch" : "main",
                     "url" : "git://github.com/hughsie/colord.git"
                 }
             ]
@@ -270,8 +271,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "https://gitlab.gnome.org/GNOME/gnome-desktop.git",
-                    "branch" : "ebassi/update-for-gtk4"
+                    "url" : "https://gitlab.gnome.org/GNOME/gnome-desktop.git"
                 }
             ]
         },
@@ -324,7 +324,7 @@
         },
         {
             "name" : "libwacom",
-            "buildsystem" : "autotools",
+            "buildsystem" : "meson",
             "sources" : [
                 {
                     "type" : "git",
