@@ -112,7 +112,7 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
   if (icon_paintable)
     gicon = g_themed_icon_new_with_default_fallbacks (symbolic_icon_name);
   else if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
-    gicon = g_themed_icon_new_with_default_fallbacks ("preferences-desktop-accessibility-symbolic");
+    gicon = g_themed_icon_new_with_default_fallbacks ("org.gnome.Settings-accessibility-symbolic");
   else
     gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable-symbolic");
 
