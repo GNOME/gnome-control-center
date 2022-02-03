@@ -278,11 +278,13 @@ cc_wwan_apn_dialog_row_new (CcWwanDataApn   *apn,
                            self, G_CONNECT_SWAPPED);
 
   name_label = gtk_label_new (cc_wwan_data_apn_get_name (apn));
+  gtk_label_set_ellipsize (GTK_LABEL (name_label), PANGO_ELLIPSIZE_END);
   gtk_widget_set_halign (name_label, GTK_ALIGN_START);
   gtk_widget_set_hexpand (name_label, TRUE);
   gtk_grid_attach (GTK_GRID (grid), name_label, 1, 0, 1, 1);
 
   apn_label = gtk_label_new (cc_wwan_data_apn_get_apn (apn));
+  gtk_label_set_ellipsize (GTK_LABEL (apn_label), PANGO_ELLIPSIZE_END);
   gtk_widget_set_halign (apn_label, GTK_ALIGN_START);
   context = gtk_widget_get_style_context (apn_label);
   gtk_style_context_add_class (context, "dim-label");
