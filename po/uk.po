@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-03 17:23+0000\n"
-"PO-Revision-Date: 2022-02-03 20:32+0200\n"
+"POT-Creation-Date: 2022-02-04 17:29+0000\n"
+"PO-Revision-Date: 2022-02-04 22:49+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2248,7 +2248,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
 #: panels/printers/authentication-dialog.ui:19
-#: panels/printers/ppd-selection-dialog.ui:27
+#: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
 msgid "Cancel"
 msgstr "Скасувати"
@@ -2331,7 +2331,7 @@ msgstr ""
 "Натисніть Esc, щоб скасувати, або Backspace, щоб вимкнути комбінації клавіш."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
-#: panels/printers/pp-details-dialog.ui:35
+#: panels/printers/pp-details-dialog.ui:36
 #: panels/wwan/cc-wwan-apn-dialog.ui:101
 msgid "Name"
 msgstr "Назва"
@@ -3358,7 +3358,7 @@ msgstr "Адреси"
 #: panels/network/connection-editor/ip4-page.ui:246
 #: panels/network/connection-editor/ip6-page.ui:122
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/printers/pp-details-dialog.ui:86
+#: panels/printers/pp-details-dialog.ui:87
 msgid "Address"
 msgstr "Адреса"
 
@@ -4988,7 +4988,7 @@ msgstr ""
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
-#: panels/printers/pp-details-dialog.c:363
+#: panels/printers/pp-details-dialog.c:365
 #, c-format
 msgid "%s Details"
 msgstr "Подробиці про %s "
@@ -5008,44 +5008,44 @@ msgid ""
 msgstr ""
 "Файли опису принтера PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: panels/printers/pp-details-dialog.ui:61 panels/printers/printer-entry.ui:212
+#: panels/printers/pp-details-dialog.ui:62 panels/printers/printer-entry.ui:213
 msgid "Location"
 msgstr "Адреса"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:111
+#: panels/printers/pp-details-dialog.ui:112
 #: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Драйвер"
 
-#: panels/printers/pp-details-dialog.ui:150
+#: panels/printers/pp-details-dialog.ui:151
 msgid "Searching for preferred drivers…"
 msgstr "Пошук бажаних драйверів…"
 
-#: panels/printers/pp-details-dialog.ui:169
+#: panels/printers/pp-details-dialog.ui:170
 msgid "Search for Drivers"
 msgstr "Шукати драйвери"
 
-#: panels/printers/pp-details-dialog.ui:177
+#: panels/printers/pp-details-dialog.ui:178
 msgid "Select from Database…"
 msgstr "Вибрати з бази даних…"
 
-#: panels/printers/pp-details-dialog.ui:185
+#: panels/printers/pp-details-dialog.ui:186
 msgid "Install PPD File…"
 msgstr "Встановити файл PPD…"
 
-#: panels/printers/ppd-selection-dialog.ui:10
+#: panels/printers/ppd-selection-dialog.ui:8
 msgid "Select Printer Driver"
 msgstr "Вибрати драйвер принтера"
-
-#: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:107
-msgid "Select"
-msgstr "Вибрати"
 
 #: panels/printers/ppd-selection-dialog.ui:75
 msgid "Loading drivers database…"
 msgstr "Завантаження бази даних драйверів…"
+
+#: panels/printers/ppd-selection-dialog.ui:91
+#: panels/user-accounts/cc-avatar-chooser.c:107
+msgid "Select"
+msgstr "Вибрати"
 
 #. Translators: The found device is a JetDirect printer
 #: panels/printers/pp-host.c:478
@@ -5392,7 +5392,7 @@ msgid "Manufacturer"
 msgstr "Виробник"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:164
+#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:165
 msgid "No Active Jobs"
 msgstr "Немає запущених завдань"
 
@@ -5537,22 +5537,22 @@ msgstr "Очистити друкарські голівки"
 msgid "Remove Printer"
 msgstr "Вилучити принтер"
 
-#: panels/printers/printer-entry.ui:184
+#: panels/printers/printer-entry.ui:185
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Модель"
 
-#: panels/printers/printer-entry.ui:239
+#: panels/printers/printer-entry.ui:240
 msgid "Ink Level"
 msgstr "Рівень чорнила"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:301
+#: panels/printers/printer-entry.ui:302
 msgid "Please restart when the problem is resolved."
 msgstr "Перезапустіть, коли проблему буде виправлено."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:307
+#: panels/printers/printer-entry.ui:308
 msgid "Restart"
 msgstr "Перезапустити"
 
@@ -6913,19 +6913,24 @@ msgstr "Полегшує читання, слухання, набирання, �
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:19
+#| msgid ""
+#| "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
+#| "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
+#| "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
+#| "audio;typing;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
 "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-"audio;typing;"
+"audio;typing;animations;"
 msgstr ""
 "Клавіатура;Миша;Доступність;Універсальний доступ;Контраст;Курсор;Звук;"
 "Масштаб;Екран;Читач;розмір;висота;великий;текст;шрифт;Доступ;Липкі;Клавіші;"
 "Повільно;Клацання;Подвійний;клік;Затримка;Швидкість;Допомога;Повторити;Blink;"
-"візуальний;слух;аудіо;введення;Keyboard;Mouse;a11y;Accessibility;Universal "
+"візуальний;слух;аудіо;введення;анімації;Keyboard;Mouse;a11y;Accessibility;Universal "
 "Access;Contrast;Cursor;Sound;Zoom;Screen;Reader;big;high;large;text;font;"
 "size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;Speed;Assist;"
-"Repeat;Blink;visual;hearing;audio;typing;"
+"Repeat;Blink;visual;hearing;audio;typing;animations;"
 
 #: panels/usage/cc-usage-panel.c:174
 msgid "Empty all items from Trash?"
@@ -8055,63 +8060,53 @@ msgstr "Показати екранну довідку"
 
 #: panels/wacom/cc-wacom-device.c:431
 msgid "Tablet mounted on laptop panel"
-msgstr ""
-"Планшет, який змонтовано на панелі ноутбука"
+msgstr "Планшет, який змонтовано на панелі ноутбука"
 
 #: panels/wacom/cc-wacom-device.c:433
 msgid "Tablet mounted on external display"
-msgstr ""
-"Планшет, який змонтовано на зовнішньому дисплеї"
+msgstr "Планшет, який змонтовано на зовнішньому дисплеї"
 
 #: panels/wacom/cc-wacom-device.c:435
-#| msgid "No tablet detected"
 msgid "External tablet device"
 msgstr "Зовнішній пристрій планшета"
 
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:630
-#| msgid "Displays"
 msgid "All Displays"
 msgstr "Усі дисплеї"
 
 #: panels/wacom/cc-wacom-page.ui:16
-#| msgid "Tablet"
 msgid "Tablet Mode"
 msgstr "Режим планшета"
 
 #: panels/wacom/cc-wacom-page.ui:17
 msgid "Use absolute positioning for the pen"
-msgstr ""
-"Абсолютне позиціювання пера"
+msgstr "Абсолютне позиціювання пера"
 
 #: panels/wacom/cc-wacom-page.ui:27
-#| msgid "Left-Handed Orientation"
 msgid "Left Hand Orientation"
 msgstr "Орієнтація для шульги"
 
 #: panels/wacom/cc-wacom-page.ui:28
 msgid "Tablet and Express Keys™ are rotated for left hand use"
-msgstr ""
-"Планшет і Express Keys™ обернено для користування лівою рукою"
+msgstr "Планшет і Express Keys™ обернено для користування лівою рукою"
 
 #: panels/wacom/cc-wacom-page.ui:56
-#| msgid "Map to Monitor…"
 msgctxt "display setting"
 msgid "Map to Monitor"
 msgstr "Прив'язка до монітора"
 
 #: panels/wacom/cc-wacom-page.ui:62
-#| msgid "Keep aspect ratio (letterbox):"
 msgid "Keep Aspect Ratio"
 msgstr "Зберігати пропорції"
 
 #: panels/wacom/cc-wacom-page.ui:63
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr ""
-"Використовувати лише частину поверхні планшета для збереження пропорцій монітора"
+"Використовувати лише частину поверхні планшета для збереження пропорцій "
+"монітора"
 
 #: panels/wacom/cc-wacom-page.ui:73
-#| msgid "Calibrate…"
 msgid "Calibrate"
 msgstr "Калібрування"
 
@@ -8120,19 +8115,16 @@ msgid "Tip Pressure Feel"
 msgstr "Чутливість дотику"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:54
-#| msgid "Button"
 msgctxt "display setting"
 msgid "Button 1"
 msgstr "Кнопка 1"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:62
-#| msgid "Button"
 msgctxt "display setting"
 msgid "Button 2"
 msgstr "Кнопка 2"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:70
-#| msgid "Button"
 msgctxt "display setting"
 msgid "Button 3"
 msgstr "Кнопка 3"
@@ -8148,18 +8140,15 @@ msgstr ""
 
 #: panels/wacom/cc-wacom-tool.c:323
 msgid "Airbrush stylus with pressure, tilt, and rotation"
-msgstr ""
-"Стило-пульверизатор із вимірюванням тиску, нахилу і обертання"
+msgstr "Стило-пульверизатор із вимірюванням тиску, нахилу і обертання"
 
 #: panels/wacom/cc-wacom-tool.c:325
 msgid "Standard stylus with pressure and tilt"
-msgstr ""
-"Стандартне стило із вимірюванням тиску і нахилу"
+msgstr "Стандартне стило із вимірюванням тиску і нахилу"
 
 #: panels/wacom/cc-wacom-tool.c:327
 msgid "Standard stylus with pressure"
-msgstr ""
-"Стандартне стило із вимірюванням тиску"
+msgstr "Стандартне стило із вимірюванням тиску"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:3
 msgid "Wacom Tablet"
