@@ -21,7 +21,6 @@
 
 #include "config.h"
 #include "cc-alert-chooser.h"
-#include "cc-sound-button.h"
 #include "cc-sound-resources.h"
 
 #define KEY_SOUNDS_SCHEMA "org.gnome.desktop.sound"
@@ -30,17 +29,17 @@ struct _CcAlertChooser
 {
   GtkBox         parent_instance;
 
-  CcSoundButton *bark_button;
-  CcSoundButton *drip_button;
-  CcSoundButton *glass_button;
-  CcSoundButton *sonar_button;
+  GtkToggleButton *bark_button;
+  GtkToggleButton *drip_button;
+  GtkToggleButton *glass_button;
+  GtkToggleButton *sonar_button;
 
   GSoundContext *context;
   GSettings     *sound_settings;
 };
 
 static void clicked_cb (CcAlertChooser *self,
-                        CcSoundButton  *button);
+                        GtkToggleButton  *button);
 
 G_DEFINE_TYPE (CcAlertChooser, cc_alert_chooser, GTK_TYPE_BOX)
 
@@ -185,7 +184,7 @@ select_sound (CcAlertChooser *self,
 
 static void
 set_button (CcAlertChooser *self,
-            CcSoundButton  *button,
+            GtkToggleButton  *button,
             gboolean        active)
 {
   g_signal_handlers_block_by_func (button, clicked_cb, self);
@@ -195,7 +194,7 @@ set_button (CcAlertChooser *self,
 
 static void
 clicked_cb (CcAlertChooser *self,
-            CcSoundButton  *button)
+            GtkToggleButton  *button)
 {
   if (button == self->bark_button)
     select_sound (self, "bark");
@@ -244,8 +243,6 @@ cc_alert_chooser_class_init (CcAlertChooserClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, sonar_button);
 
   gtk_widget_class_bind_template_callback (widget_class, clicked_cb);
-
-  g_type_ensure (CC_TYPE_SOUND_BUTTON);
 }
 
 void

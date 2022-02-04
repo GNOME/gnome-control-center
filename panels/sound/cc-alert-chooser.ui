@@ -7,31 +7,34 @@
       <class name="linked"/>
     </style>
     <child>
-      <object class="CcSoundButton" id="bark_button">
+      <object class="GtkToggleButton" id="bark_button">
         <property name="visible">True</property>
         <property name="label" translatable="yes">Bark</property>
-        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+        <signal name="toggled" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
       </object>
     </child>
     <child>
-      <object class="CcSoundButton" id="drip_button">
+      <object class="GtkToggleButton" id="drip_button">
         <property name="visible">True</property>
+        <property name="group">bark_button</property>
         <property name="label" translatable="yes">Drip</property>
-        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+        <signal name="toggled" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
       </object>
     </child>
     <child>
-      <object class="CcSoundButton" id="glass_button">
+      <object class="GtkToggleButton" id="glass_button">
         <property name="visible">True</property>
+        <property name="group">bark_button</property>
         <property name="label" translatable="yes">Glass</property>
-        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+        <signal name="toggled" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
       </object>
     </child>
     <child>
-      <object class="CcSoundButton" id="sonar_button">
+      <object class="GtkToggleButton" id="sonar_button">
         <property name="visible">True</property>
+        <property name="group">bark_button</property>
         <property name="label" translatable="yes">Sonar</property>
-        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+        <signal name="toggled" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
       </object>
     </child>
   </template>
