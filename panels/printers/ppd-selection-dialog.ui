@@ -5,14 +5,11 @@
   <template class="PpPPDSelectionDialog" parent="GtkDialog">
     <property name="width_request">600</property>
     <property name="height_request">400</property>
-    <property name="can_focus">False</property>
     <property name="title" translatable="yes">Select Printer Driver</property>
     <property name="modal">True</property>
     <property name="destroy_with_parent">True</property>
     <child>
       <object class="GtkBox" id="main-vbox">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
         <property name="spacing">10</property>
         <property name="margin_top">10</property>
@@ -20,8 +17,6 @@
         <property name="margin_end">10</property>
         <child>
           <object class="GtkBox" id="box3">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
             <property name="spacing">10</property>
@@ -29,15 +24,11 @@
             <child>
               <object class="GtkScrolledWindow" id="scrolledwindow1">
                 <property name="width_request">140</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="hscrollbar_policy">never</property>
                 <property name="halign">fill</property>
                 <property name="has_frame">True</property>
                 <child>
                   <object class="GtkTreeView" id="ppd_selection_manufacturers_treeview">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="treeview-selection"/>
                     </child>
@@ -47,15 +38,11 @@
             </child>
             <child>
               <object class="GtkScrolledWindow" id="scrolledwindow2">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="halign">fill</property>
                 <property name="has_frame">True</property>
                 <child>
                   <object class="GtkTreeView" id="ppd_selection_models_treeview">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
                     <child internal-child="selection">
                       <object class="GtkTreeSelection" id="treeview-selection1"/>
                     </child>
@@ -67,32 +54,24 @@
         </child>
         <child>
           <object class="GtkBox" id="dialog-action-area1">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
             <property name="halign">fill</property>
             <property name="hexpand">True</property>
             <property name="spacing">10</property>
             <property name="margin_bottom">10</property>
             <child>
               <object class="GtkBox" id="box2">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
                 <property name="halign">fill</property>
                 <property name="hexpand">True</property>
                 <property name="spacing">10</property>
                 <child>
                   <object class="GtkSpinner" id="ppd_spinner">
-                    <property name="visible">True</property>
                     <property name="width_request">24</property>
                     <property name="height_request">24</property>
-                    <property name="can_focus">False</property>
                     <property name="halign">fill</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkLabel" id="progress_label">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
                     <property name="label" translatable="yes">Loading drivers database…</property>
                     <property name="halign">fill</property>
                   </object>
@@ -102,8 +81,6 @@
             <child>
               <object class="GtkButton" id="ppd_selection_cancel_button">
                 <property name="label" translatable="yes">Cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="receives_default">True</property>
                 <property name="halign">end</property>
@@ -112,9 +89,7 @@
             <child>
               <object class="GtkButton" id="ppd_selection_select_button">
                 <property name="label" translatable="yes">Select</property>
-                <property name="visible">True</property>
                 <property name="sensitive">False</property>
-                <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="halign">end</property>
               </object>
