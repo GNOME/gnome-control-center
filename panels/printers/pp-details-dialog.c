@@ -275,6 +275,8 @@ select_ppd_manually (PpDetailsDialog *self)
 
   gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), filter);
 
+  gtk_widget_show (dialog);
+
   g_signal_connect (dialog, "response", G_CALLBACK (ppd_file_select_response_cb), self);
 }
 
