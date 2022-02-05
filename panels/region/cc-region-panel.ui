@@ -76,8 +76,12 @@
 
             <child>
               <object class="AdwPreferencesGroup">
-                <property name="title" translatable="yes">Language</property>
-                <property name="description" translatable="yes">The language used for text in windows and web pages.</property>
+                <property name="description" translatable="yes">The language setting is used for interface text and web pages. Formats is used for numbers, dates, and currencies.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwPreferencesGroup">
 
                 <child>
                   <object class="AdwActionRow" id="language_row">
@@ -95,14 +99,6 @@
                   </object>
                 </child>
 
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwPreferencesGroup">
-                <property name="title" translatable="yes">Formats</property>
-                <property name="description" translatable="yes">The format used for numbers, dates, and currencies.</property>
-
                 <child>
                   <object class="AdwActionRow" id="formats_row">
                     <property name="use-underline">True</property>
@@ -119,6 +115,11 @@
                   </object>
                 </child>
 
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwPreferencesGroup">
                 <child>
                   <object class="GtkLabel" id="login_label">
                     <property name="visible">False</property>
