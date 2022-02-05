@@ -247,6 +247,7 @@ region_widget_new (CcFormatChooser *self,
         gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
 
         check = gtk_image_new_from_icon_name ("object-select-symbolic");
+        gtk_widget_set_halign (check, GTK_ALIGN_START);
         gtk_widget_set_hexpand (check, TRUE);
         gtk_widget_set_opacity (check, 0.0);
         gtk_box_append (GTK_BOX (box), check);

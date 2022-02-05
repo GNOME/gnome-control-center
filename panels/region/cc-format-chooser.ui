@@ -65,23 +65,9 @@
             <signal name="notify::fold" handler="format_chooser_leaflet_fold_changed_cb" object="CcFormatChooser" swapped="yes"/>
             <child>
               <object class="GtkBox" id="region_box">
-                <property name="margin-top">18</property>
                 <property name="vexpand">True</property>
+                <property name="hexpand">True</property>
                 <property name="orientation">vertical</property>
-
-                <child>
-                  <object class="GtkLabel">
-                    <property name="margin-start">18</property>
-                    <property name="margin-end">18</property>
-                    <property name="label" translatable="yes">Choose the format for numbers, dates and currencies. Changes take effect on next login.</property>
-                    <property name="wrap">True</property>
-                    <property name="max-width-chars">32</property>
-                    <property name="xalign">0.0</property>
-                    <style>
-                      <class name="dim-label" />
-                    </style>
-                  </object>
-                </child>
 
                 <!-- Language search -->
                 <child>
@@ -139,7 +125,6 @@
                             <!-- Common formats list -->
                             <child>
                               <object class="GtkListBox" id="common_region_listbox">
-                                <property name="vexpand">True</property>
                                 <property name="margin-bottom">24</property>
                                 <property name="selection-mode">none</property>
                                 <signal name="row-activated" handler="row_activated" object="CcFormatChooser" swapped="yes" />
@@ -239,10 +224,8 @@
             <!-- Format preview -->
             <child>
               <object class="GtkBox" id="preview_box">
+                <property name="hexpand">False</property>
                 <property name="orientation">vertical</property>
-                <style>
-                  <class name="view" />
-                </style>
                 <child>
                   <object class="GtkLabel">
                     <property name="margin_top">24</property>
@@ -251,10 +234,9 @@
                     <property name="hexpand">True</property>
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Preview</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                      <attribute name="scale" value="1.18" />
-                    </attributes>
+                    <style>
+                      <class name="title-3" />
+                    </style>
                   </object>
                 </child>
                 <child>
