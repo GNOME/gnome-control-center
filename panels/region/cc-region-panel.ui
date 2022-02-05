@@ -3,21 +3,15 @@
   <template class="CcRegionPanel" parent="CcPanel">
 
     <child type="content">
-      <object class="GtkScrolledWindow">
-        <property name="hscrollbar-policy">never</property>
-        <child>
-          <object class="AdwClamp">
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
 
-            <!-- Content -->
+        <child>
+          <object class="AdwPreferencesPage">
+
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">12</property>
-                <property name="hexpand">True</property>
+              <object class="AdwPreferencesGroup">
+
                 <child>
                   <object class="GtkBox" id="session_or_login_box">
                     <property name="orientation">horizontal</property>
@@ -45,24 +39,15 @@
                     </child>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Language</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">The language used for text in windows and web pages.</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                </child>
+
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Language</property>
+                <property name="description" translatable="yes">The language used for text in windows and web pages.</property>
+
                 <child>
                   <object class="GtkListBox" id="language_list">
                     <property name="margin_bottom">18</property>
@@ -154,24 +139,15 @@
                     </child>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Formats</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">The format used for numbers, dates, and currencies.</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
-                  </object>
-                </child>
+
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Formats</property>
+                <property name="description" translatable="yes">The format used for numbers, dates, and currencies.</property>
+
                 <child>
                   <object class="GtkListBox" id="formats_list">
                     <property name="selection-mode">none</property>
@@ -215,6 +191,7 @@
                     </child>
                   </object>
                 </child>
+
                 <child>
                   <object class="GtkLabel" id="login_label">
                     <property name="visible">False</property>
