@@ -54,8 +54,6 @@ struct _CcRegionPanel {
         GtkInfoBar      *infobar;
         GtkSizeGroup    *input_size_group;
         GtkLabel        *login_label;
-        GtkLabel        *language_label;
-        GtkListBox      *language_list;
         GtkListBoxRow   *language_row;
         GtkToggleButton *login_language_button;
         GtkButton       *restart_button;
@@ -459,16 +457,7 @@ static void
 activate_language_row (CcRegionPanel *self,
                        GtkListBoxRow *row)
 {
-        if (row == self->language_row) {
-                if (!self->login || g_permission_get_allowed (self->permission)) {
-                        show_language_chooser (self);
-                } else if (g_permission_get_can_acquire (self->permission)) {
-                        g_permission_acquire_async (self->permission,
-                                                    cc_panel_get_cancellable (CC_PANEL (self)),
-                                                    choose_language_permission_cb,
-                                                    self);
-                }
-        } else if (row == self->formats_row) {
+        if (row == self->formats_row) {
                 if (!self->login || g_permission_get_allowed (self->permission)) {
                         show_region_chooser (self);
                 } else if (g_permission_get_can_acquire (self->permission)) {
@@ -515,7 +504,7 @@ update_language_label (CcRegionPanel *self)
         if (!name)
                 name = gnome_get_language_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        gtk_label_set_label (self->language_label, name);
+        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->language_row), name);
 
         /* Formats will change too if not explicitly set. */
         update_region_label (self);
@@ -549,9 +538,6 @@ setup_language_section (CcRegionPanel *self)
         self->locale_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
         g_signal_connect_object (self->locale_settings, "changed::" KEY_REGION,
                                  G_CALLBACK (update_region_from_setting), self, G_CONNECT_SWAPPED);
-
-        g_signal_connect_object (self->language_list, "row-activated",
-                                 G_CALLBACK (activate_language_row), self, G_CONNECT_SWAPPED);
 
         g_signal_connect_object (self->formats_list, "row-activated",
                                  G_CALLBACK (activate_language_row), self, G_CONNECT_SWAPPED);
@@ -671,7 +657,7 @@ login_changed (CcRegionPanel *self)
                 (g_permission_get_allowed (self->permission) ||
                  g_permission_get_can_acquire (self->permission));
         /* FIXME: insensitive doesn't look quite right for this */
-        gtk_widget_set_sensitive (GTK_WIDGET (self->language_list), !self->login || can_acquire);
+        gtk_widget_set_sensitive (GTK_WIDGET (self->language_row), !self->login || can_acquire);
 
         update_language_label (self);
 }
@@ -751,6 +737,20 @@ session_proxy_ready (GObject      *source,
 }
 
 static void
+on_user_language_row_activated_cb (GtkListBoxRow *row,
+                                   CcRegionPanel *self)
+{
+        if (!self->login || g_permission_get_allowed (self->permission)) {
+                show_language_chooser (self);
+        } else if (g_permission_get_can_acquire (self->permission)) {
+                g_permission_acquire_async (self->permission,
+                                            cc_panel_get_cancellable (CC_PANEL (self)),
+                                            choose_language_permission_cb,
+                                            self);
+        }
+}
+
+static void
 cc_region_panel_class_init (CcRegionPanelClass * klass)
 {
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -768,13 +768,12 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, infobar);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_language_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, session_or_login_box);
 
+        gtk_widget_class_bind_template_callback (widget_class, on_user_language_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
 }
 

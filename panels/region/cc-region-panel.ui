@@ -80,51 +80,16 @@
                 <property name="description" translatable="yes">The language used for text in windows and web pages.</property>
 
                 <child>
-                  <object class="GtkListBox" id="language_list">
-                    <property name="margin_bottom">18</property>
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
+                  <object class="AdwActionRow" id="language_row">
+                    <property name="use-underline">True</property>
+                    <property name="title" translatable="yes">_Language</property>
+                    <property name="activatable">True</property>
+                    <signal name="activated" handler="on_user_language_row_activated_cb" object="CcRegionPanel" swapped="no" />
+
                     <child>
-                      <object class="GtkListBoxRow" id="language_row">
-                        <child>
-                          <object class="GtkBox" id="language_box">
-                            <property name="orientation">vertical</property>
-                            <child>
-                              <object class="GtkBox">
-                                <property name="height_request">50</property>
-                                <property name="margin_start">12</property>
-                                <property name="margin_end">12</property>
-                                <property name="spacing">12</property>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="margin_bottom">8</property>
-                                    <property name="margin_top">8</property>
-                                    <property name="ellipsize">end</property>
-                                    <property name="xalign">0</property>
-                                    <property name="label" translatable="yes">_Language</property>
-                                    <property name="use_underline">True</property>
-                                    <property name="hexpand">True</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="language_label">
-                                    <property name="xalign">1</property>
-                                    <property name="margin_bottom">8</property>
-                                    <property name="margin_top">8</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="valign">center</property>
-                                    <property name="icon-name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                      <object class="GtkImage">
+                        <property name="valign">center</property>
+                        <property name="icon-name">go-next-symbolic</property>
                       </object>
                     </child>
                   </object>
