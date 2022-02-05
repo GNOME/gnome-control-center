@@ -33,7 +33,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2022-01-24 13:03+0000\n"
-"PO-Revision-Date: 2022-01-29 20:00+0900\n"
+"PO-Revision-Date: 2022-02-05 22:00+0900\n"
 "Last-Translator: sicklylife <translation@sicklylife.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
@@ -2240,12 +2240,13 @@ msgid "Print Screen"
 msgstr "Print Screen"
 
 #: panels/keyboard/cc-keyboard-panel.c:233
-#, fuzzy, c-format
-#| msgid "These keyboard shortcuts can be changed in the keyboard settings"
+#, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
 "This can be changed in the keyboard shortcut settings."
-msgstr "キーボード設定でショートカットを変更できます"
+msgstr ""
+"入力ソースはキーボードショートカット (%s) で切り替えることができます。\n"
+"キーはキーボードショートカットの設定で変更可能です。"
 
 #: panels/keyboard/cc-keyboard-panel.ui:48
 msgid "Input Sources"
@@ -3014,7 +3015,7 @@ msgstr "Wi-Fi アダプターが見つかりませんでした"
 
 #: panels/network/cc-wifi-panel.ui:99
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
-msgstr "Wi-Fi アダプターが接続されオンになっていることを確認してください"
+msgstr "Wi-Fi アダプターが接続されオンになっているか確認してください"
 
 #: panels/network/cc-wifi-panel.ui:134 panels/wwan/cc-wwan-panel.ui:143
 msgid "Airplane Mode On"
@@ -3211,13 +3212,13 @@ msgstr "IP アドレス"
 #: panels/network/net-device-ethernet.c:169
 #: panels/network/net-device-mobile.c:451
 msgid "DNS4"
-msgstr ""
+msgstr "DNS4"
 
 #: panels/network/connection-editor/ce-page-details.c:416
 #: panels/network/net-device-ethernet.c:170
 #: panels/network/net-device-mobile.c:452
 msgid "DNS6"
-msgstr ""
+msgstr "DNS6"
 
 #: panels/network/connection-editor/ce-page-details.c:418
 #: panels/network/connection-editor/ce-page-details.c:419
@@ -4356,7 +4357,7 @@ msgstr "LEAP パスワードがありません"
 
 #: panels/network/wireless-security/ws-sae.c:77
 msgid "Wi-Fi password is missing."
-msgstr ""
+msgstr "Wi-Fi パスワードがありません。"
 
 #: panels/network/wireless-security/ws-sae.ui:42
 #: panels/network/wireless-security/ws-wpa-psk.ui:42
@@ -4934,11 +4935,11 @@ msgstr ""
 
 #: panels/power/cc-power-profile-row.c:63
 msgid "High hardware temperature: performance mode unavailable"
-msgstr ""
+msgstr "ハードウェアが高温です: パフォーマンスモードは利用できません"
 
 #: panels/power/cc-power-profile-row.c:64
 msgid "Performance mode unavailable"
-msgstr ""
+msgstr "パフォーマンスモードは利用できません"
 
 #: panels/power/cc-power-profile-row.c:86
 #: panels/power/cc-power-profile-row.c:185
@@ -6740,7 +6741,7 @@ msgstr "大きな文字(_L)"
 
 #: panels/universal-access/cc-ua-panel.ui:238
 msgid "Enable A_nimations"
-msgstr ""
+msgstr "アニメーションを有効にする(_N)"
 
 #: panels/universal-access/cc-ua-panel.ui:273
 msgid "C_ursor Size"
@@ -7394,10 +7395,8 @@ msgid "the device needs to be claimed to perform this action"
 msgstr ""
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:238
-#, fuzzy
-#| msgid "The device is already in use."
 msgid "the device is already claimed by another process"
-msgstr "そのデバイスは使用中です。"
+msgstr ""
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:240
 msgid "you do not have permission to perform the action"
@@ -7408,22 +7407,16 @@ msgid "no prints have been enrolled"
 msgstr ""
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:251
-#, fuzzy
-#| msgid "Failed to register with the requested network"
 msgid "Failed to communicate with the device during enrollment"
-msgstr "要求されたネットワークへの登録に失敗しました"
+msgstr ""
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:255
-#, fuzzy
-#| msgid "Failed to enroll new fingerprint"
 msgid "Failed to communicate with the fingerprint reader"
-msgstr "新しい指紋の登録に失敗しました"
+msgstr "指紋リーダーとの通信に失敗しました"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:257
-#, fuzzy
-#| msgid "Failed to enroll new fingerprint"
 msgid "Failed to communicate with the fingerprint daemon"
-msgstr "新しい指紋の登録に失敗しました"
+msgstr "指紋認証デーモンとの通信に失敗しました"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:585
 #, c-format
@@ -7836,7 +7829,7 @@ msgstr "ペアレンタルコントロール(_P)"
 
 #: panels/user-accounts/cc-user-panel.ui:285
 msgid "Open the Parental Controls application."
-msgstr ""
+msgstr "ペアレンタルコントロールアプリケーションを開きます。"
 
 #: panels/user-accounts/cc-user-panel.ui:347
 msgid "Authentication & Login"
@@ -7881,6 +7874,11 @@ msgid ""
 "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
 "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgstr ""
+"Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
+"ログイン;名前;指紋認証;アバター;ロゴ;顔;パスワード;ペアレンタルコントロール;"
+"スクリーンタイム;アプリの使用制限;ウェブの閲覧制限;使用量;使用制限;使用上限;"
+"子供;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -8365,23 +8363,23 @@ msgstr ""
 
 #: panels/wwan/cc-wwan-details-dialog.ui:4
 msgid "Modem Details"
-msgstr ""
+msgstr "モデムの詳細"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:33
 msgid "Modem Status"
-msgstr ""
+msgstr "モデムの状態"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:53
 msgid "Carrier"
-msgstr ""
+msgstr "キャリア"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:79
 msgid "Network Type"
-msgstr ""
+msgstr "ネットワークの種類"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:131
 msgid "Network Status"
-msgstr ""
+msgstr "ネットワークの状態"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:158
 msgid "Own Number"
@@ -8466,174 +8464,145 @@ msgstr "不明"
 
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
-msgstr ""
+msgstr "SIM カードのロック解除"
 
 #: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
-#, fuzzy
-#| msgid "_Unlock"
 msgid "Unlock"
-msgstr "ロック解除(_U)"
+msgstr "ロック解除"
 
 #: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
-msgstr ""
+msgstr "SIM %d の PIN コードが必要です"
 
 #: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
-msgstr ""
+msgstr "SIM カードのロックを解除する PIN を入力してください"
 
 #: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
-msgstr ""
+msgstr "SIM %d の PUK コードが必要です"
 
 #: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
-msgstr ""
+msgstr "SIM カードのロックを解除する PUK を入力してください"
 
 #: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
-msgstr[0] ""
+msgstr[0] "違うパスワードを入力しました (残り %1$u 回)"
 
 #: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
-msgstr[0] ""
+msgstr[0] "残り %u 回"
 
 #: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
-msgstr ""
+msgstr "違うパスワードを入力しました。"
 
 #: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
-msgstr ""
+msgstr "PUK コードは 8 桁です"
 
 #: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
-msgstr ""
+msgstr "新しい PIN を入力してください"
 
 #: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
-msgstr ""
+msgstr "PIN コードは 4-8 桁です"
 
 #: panels/wwan/cc-wwan-device-page.c:317
-#, fuzzy
-#| msgid "Unlock %s."
 msgid "Unlocking..."
-msgstr "%s のロック解除"
+msgstr "ロック解除中..."
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
-msgstr ""
+msgstr "SIM なし"
 
 #: panels/wwan/cc-wwan-device-page.ui:45
 msgid "Insert a SIM card to use this modem"
-msgstr ""
+msgstr "モデムに SIM カードを挿入してください"
 
 #: panels/wwan/cc-wwan-device-page.ui:78
 msgid "SIM Locked"
-msgstr ""
+msgstr "SIM はロックされています"
 
 #: panels/wwan/cc-wwan-device-page.ui:139
-#, fuzzy
-#| msgid "_Mobile Broadband"
 msgid "_Mobile Data"
-msgstr "モバイルブロードバンド(_M)"
+msgstr "モバイルデータ(_M)"
 
 #: panels/wwan/cc-wwan-device-page.ui:140
 msgid "Access data using mobile network"
-msgstr ""
+msgstr "モバイルネットワークでデータにアクセスします"
 
 #: panels/wwan/cc-wwan-device-page.ui:151
 msgid "_Data Roaming"
-msgstr ""
+msgstr "データローミング(_D)"
 
 #: panels/wwan/cc-wwan-device-page.ui:152
 msgid "Use mobile data when roaming"
-msgstr ""
+msgstr "ローミング時にモバイルデータを使用します"
 
 #: panels/wwan/cc-wwan-device-page.ui:177
-#, fuzzy
-#| msgid "Network Name"
 msgid "_Network Mode"
-msgstr "ネットワーク名"
+msgstr "ネットワークモード(_N)"
 
 #: panels/wwan/cc-wwan-device-page.ui:187
-#, fuzzy
-#| msgid "Network"
 msgid "N_etwork"
-msgstr "ネットワーク"
+msgstr "ネットワーク(_E)"
 
 #: panels/wwan/cc-wwan-device-page.ui:199
-#, fuzzy
-#| msgctxt "Printer Option Group"
-#| msgid "Advanced"
 msgid "Advanced"
 msgstr "高度"
 
 #: panels/wwan/cc-wwan-device-page.ui:225
-#, fuzzy
-#| msgid "Access Options"
 msgid "_Access Point Names"
-msgstr "アクセスオプション"
+msgstr "アクセスポイント名(_A)"
 
 #: panels/wwan/cc-wwan-device-page.ui:235
-#, fuzzy
-#| msgid "Screen Lock"
 msgid "_SIM Lock"
-msgstr "画面ロック"
+msgstr "SIM ロック(_S)"
 
 #: panels/wwan/cc-wwan-device-page.ui:236
 msgid "Lock SIM with PIN"
-msgstr ""
+msgstr "PIN で SIM をロックします"
 
 #: panels/wwan/cc-wwan-device-page.ui:246
-#, fuzzy
-#| msgid "%s Details"
 msgid "M_odem Details"
-msgstr "%s の詳細"
+msgstr "モデムの詳細(_O)"
 
 #: panels/wwan/cc-wwan-errors-private.h:40
-#, fuzzy
-#| msgid "PIN check failed"
 msgid "Phone failure"
-msgstr "PIN チェックに失敗しました"
+msgstr ""
 
 #: panels/wwan/cc-wwan-errors-private.h:41
-#, fuzzy
-#| msgid "Turn VPN connection off"
 msgid "No connection to phone"
-msgstr "VPN 接続をオフにする"
+msgstr "携帯端末に接続していません"
 
 #: panels/wwan/cc-wwan-errors-private.h:43
 msgid "Operation not allowed"
-msgstr ""
+msgstr "操作の許可がありません"
 
 #: panels/wwan/cc-wwan-errors-private.h:44
 msgid "Operation not supported"
-msgstr ""
+msgstr "操作をサポートしていません"
 
 #: panels/wwan/cc-wwan-errors-private.h:48
-#, fuzzy
-#| msgid "SIM Card not inserted"
 msgid "SIM not inserted"
-msgstr "SIM カードが挿入されていません"
+msgstr "SIM が挿入されていません"
 
 #: panels/wwan/cc-wwan-errors-private.h:49
-#, fuzzy
-#| msgid "SIM Pin required"
 msgid "SIM PIN required"
-msgstr "SIM の PIN 番号が必要です"
+msgstr "SIM の PIN が必要です"
 
 #: panels/wwan/cc-wwan-errors-private.h:50
-#, fuzzy
-#| msgid "SIM Pin required"
 msgid "SIM PUK required"
-msgstr "SIM の PIN 番号が必要です"
+msgstr "SIM の PUK が必要です"
 
 #: panels/wwan/cc-wwan-errors-private.h:51
 msgid "SIM failure"
@@ -8641,70 +8610,51 @@ msgstr ""
 
 #: panels/wwan/cc-wwan-errors-private.h:52
 msgid "SIM busy"
-msgstr ""
+msgstr "SIM がビジーです"
 
 #: panels/wwan/cc-wwan-errors-private.h:54
-#, fuzzy
-#| msgid "Current _Password"
 msgid "Incorrect password"
-msgstr "現在のパスワード(_P)"
+msgstr "パスワードが違います"
 
 #: panels/wwan/cc-wwan-errors-private.h:55
-#, fuzzy
-#| msgid "SIM Pin required"
 msgid "SIM PIN2 required"
-msgstr "SIM の PIN 番号が必要です"
+msgstr "SIM の PIN2 が必要です"
 
 #: panels/wwan/cc-wwan-errors-private.h:56
-#, fuzzy
-#| msgid "SIM Pin required"
 msgid "SIM PUK2 required"
-msgstr "SIM の PIN 番号が必要です"
+msgstr "SIM の PUK2 が必要です"
 
 #: panels/wwan/cc-wwan-errors-private.h:59
-#, fuzzy
-#| msgid "No stylus found"
 msgid "Not found"
-msgstr "スタイラスペンが見つかりません"
+msgstr "見つかりませんでした"
 
 #: panels/wwan/cc-wwan-errors-private.h:61
-#, fuzzy
-#| msgid "Read network settings"
 msgid "No network service"
-msgstr "ネットワーク設定の読み取り"
+msgstr "ネットワークサービスがありません"
 
 #: panels/wwan/cc-wwan-errors-private.h:62
-#, fuzzy
-#| msgid "Network Name"
 msgid "Network timeout"
-msgstr "ネットワーク名"
+msgstr "ネットワークがタイムアウトしました"
 
 #: panels/wwan/cc-wwan-errors-private.h:75
-#, fuzzy
-#| msgid "AutoIP service failed"
 msgid "GPRS services not allowed"
-msgstr "AutoIP サービスが失敗しました"
+msgstr "GPRS サービスの許可がありません"
 
 #: panels/wwan/cc-wwan-errors-private.h:78
 msgid "Roaming not allowed in this location area"
-msgstr ""
+msgstr "このエリアでのローミングの許可がありません"
 
 #: panels/wwan/cc-wwan-errors-private.h:82
 msgid "Unspecified GPRS error"
-msgstr ""
+msgstr "特定できない GPRS エラー"
 
 #: panels/wwan/cc-wwan-errors-private.h:91
-#, fuzzy
-#| msgctxt "print job"
-#| msgid "Canceled"
 msgid "Action Cancelled"
-msgstr "キャンセル"
+msgstr ""
 
 #: panels/wwan/cc-wwan-errors-private.h:94
-#, fuzzy
-#| msgid "Access LXD service"
 msgid "Access denied"
-msgstr "LXD サービスへのアクセス"
+msgstr ""
 
 #: panels/wwan/cc-wwan-errors-private.h:103
 msgid "Unknown Error"
@@ -8718,7 +8668,7 @@ msgstr "ネットワークモード"
 #: panels/wwan/cc-wwan-network-dialog.ui:175
 #: panels/wwan/cc-wwan-sim-lock-dialog.c:230
 msgid "_Set"
-msgstr ""
+msgstr "設定(_S)"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:46 panels/wwan/cc-wwan-panel.ui:39
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:101
@@ -8726,109 +8676,84 @@ msgid "Close"
 msgstr "閉じる"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:84
-#, fuzzy
-#| msgid "Automatic"
 msgid "_Automatic"
-msgstr "自動"
+msgstr "自動(_A)"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:100
-#, fuzzy
-#| msgid "Visible Networks"
 msgid "Choose Network"
-msgstr "ネットワーク一覧"
+msgstr "ネットワークを選択"
 
 #: panels/wwan/cc-wwan-network-dialog.ui:118
 msgid "Refresh Network Providers"
-msgstr ""
+msgstr "ネットワークプロバイダーを更新"
 
 #: panels/wwan/cc-wwan-panel.c:453 panels/wwan/cc-wwan-panel.c:482
 #, c-format
 msgid "SIM %d"
-msgstr ""
+msgstr "SIM %d"
 
 #: panels/wwan/cc-wwan-panel.ui:101
-#, fuzzy
-#| msgid "No Wi-Fi Adapter Found"
 msgid "No WWAN Adapter Found"
-msgstr "Wi-Fi アダプターが見つかりませんでした"
+msgstr "WWAN アダプターが見つかりませんでした"
 
 #: panels/wwan/cc-wwan-panel.ui:112
-#, fuzzy
-#| msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgid "Make sure you have a Wireless Wan/Cellular device"
-msgstr "Wi-Fi アダプターが接続されオンになっていることを確認してください"
+msgstr "ワイヤレス Wan/Cellular デバイスを確認してください"
 
 #: panels/wwan/cc-wwan-panel.ui:154
-#, fuzzy
-#| msgid "Bluetooth is disabled when airplane mode is on."
 msgid "Wireless Wan is disabled when airplane mode is on"
-msgstr "機内モードがオンの場合、Bluetooth は使用できません。"
+msgstr "機内モードがオンの場合ワイヤレス WAN は使用できません"
 
 #: panels/wwan/cc-wwan-panel.ui:163
-#, fuzzy
-#| msgid "Turn Off Airplane Mode"
 msgid "_Turn off Airplane Mode"
-msgstr "機内モードをオフにする"
+msgstr "機内モードをオフにする(_T)"
 
 #: panels/wwan/cc-wwan-panel.ui:210
-#, fuzzy
-#| msgid "Forget Connection"
 msgid "Data Connection"
-msgstr "接続情報を破棄"
+msgstr "データ接続"
 
 #: panels/wwan/cc-wwan-panel.ui:224
-#, fuzzy
-#| msgid "SIM Card not inserted"
 msgid "SIM card used for internet"
-msgstr "SIM カードが挿入されていません"
+msgstr "SIM カードをインターネットに使用します"
 
 #: panels/wwan/cc-wwan-panel.ui:332
-#, fuzzy
-#| msgid "_Enable by Keyboard"
 msgid "Enable Mobile Network"
-msgstr "キーボードから有効化できるようにする(_E)"
+msgstr "モバイルネットワークを有効にする"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:11
-#, fuzzy
-#| msgid "Screen Lock"
 msgid "SIM Lock"
-msgstr "画面ロック"
+msgstr "SIM ロック"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:22
 msgid "_Next"
-msgstr ""
+msgstr "次へ(_N)"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:141
 msgid "_Lock SIM with PIN"
-msgstr ""
+msgstr "PIN で SIM をロックする(_L)"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:158
-#, fuzzy
-#| msgid "Ch_ange"
 msgid "Change PIN"
-msgstr "変更(_A)"
+msgstr "PIN を変更"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:256
 msgid "Enter current PIN to change SIM lock settings"
-msgstr ""
+msgstr "SIM ロック設定の変更のために現在の PIN を入力してください"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:3
-#, fuzzy
-#| msgid "Visible Networks"
 msgid "Mobile Network"
-msgstr "ネットワーク一覧"
+msgstr "モバイルネットワーク"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:4
-#, fuzzy
-#| msgid "Configure Removable Media settings"
 msgid "Configure Telephony and mobile data connections"
-msgstr "リムーバブルメディアを設定します"
+msgstr "モバイルデータ接続やテレフォニー接続を設定します"
 
 #. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:17
 msgid "cellular;wwan;telephony;sim;mobile;"
-msgstr ""
+msgstr "cellular;wwan;telephony;sim;mobile;"
+"セルラー;ワイヤレスワイドエリアネットワーク;テレフォニー;モバイル;"
 
 #: shell/appdata/gnome-control-center.appdata.xml.in:7
 msgid "GNOME Settings"
