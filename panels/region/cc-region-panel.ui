@@ -42,46 +42,13 @@
 
             <child>
               <object class="AdwPreferencesGroup">
-
-                <child>
-                  <object class="GtkBox" id="session_or_login_box">
-                    <property name="orientation">horizontal</property>
-                    <property name="homogeneous">True</property>
-                    <property name="halign">center</property>
-                    <property name="hexpand">True</property>
-                    <style>
-                      <class name="linked"/>
-                    </style>
-                    <child>
-                      <object class="GtkToggleButton" id="session_language_button">
-                        <property name="label" translatable="yes">My Account</property>
-                        <property name="active">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkToggleButton" id="login_language_button">
-                        <property name="label" translatable="yes">Login Screen</property>
-                        <property name="active">False</property>
-                        <property name="group">session_language_button</property>
-                        <style>
-                          <class name="raised"/>
-                        </style>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwPreferencesGroup">
                 <property name="description" translatable="yes">The language setting is used for interface text and web pages. Formats is used for numbers, dates, and currencies.</property>
               </object>
             </child>
 
             <child>
               <object class="AdwPreferencesGroup">
+                <property name="title" translatable="yes">Your Account</property>
 
                 <child>
                   <object class="AdwActionRow" id="language_row">
@@ -119,22 +86,44 @@
             </child>
 
             <child>
-              <object class="AdwPreferencesGroup">
+              <object class="AdwPreferencesGroup" id="login_group">
+                <property name="title" translatable="yes">Login Screen</property>
+
                 <child>
-                  <object class="GtkLabel" id="login_label">
-                    <property name="visible">False</property>
-                    <property name="valign">end</property>
-                    <property name="vexpand">True</property>
-                    <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">Login settings are used by all users when logging into the system</property>
-                    <property name="margin_bottom">12</property>
-                    <style>
-                      <class name="dim-label"/>
-                    </style>
+                  <object class="AdwActionRow" id="login_language_row">
+                    <property name="use-underline">True</property>
+                    <property name="title" translatable="yes">_Language</property>
+                    <property name="activatable">True</property>
+                    <signal name="activated" handler="on_login_language_row_activated_cb" object="CcRegionPanel" swapped="no" />
+
+                    <child>
+                      <object class="GtkImage">
+                        <property name="valign">center</property>
+                        <property name="icon-name">go-next-symbolic</property>
+                      </object>
+                    </child>
                   </object>
                 </child>
+
+                <child>
+                  <object class="AdwActionRow" id="login_formats_row">
+                    <property name="use-underline">True</property>
+                    <property name="title" translatable="yes">_Formats</property>
+                    <property name="activatable">True</property>
+                    <signal name="activated" handler="on_login_formats_row_activated_cb" object="CcRegionPanel" swapped="no" />
+
+                    <child>
+                      <object class="GtkImage">
+                        <property name="valign">center</property>
+                        <property name="icon-name">go-next-symbolic</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
               </object>
             </child>
+
           </object>
         </child>
       </object>
