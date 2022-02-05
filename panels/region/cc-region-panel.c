@@ -51,6 +51,7 @@ struct _CcRegionPanel {
         GtkLabel        *formats_label;
         GtkListBox      *formats_list;
         GtkListBoxRow   *formats_row;
+        GtkInfoBar      *infobar;
         GtkSizeGroup    *input_size_group;
         GtkLabel        *login_label;
         GtkLabel        *language_label;
@@ -58,7 +59,6 @@ struct _CcRegionPanel {
         GtkListBoxRow   *language_row;
         GtkToggleButton *login_language_button;
         GtkButton       *restart_button;
-        GtkRevealer     *restart_revealer;
         GtkBox          *session_or_login_box;
 
         gboolean     login;
@@ -164,7 +164,7 @@ set_restart_notification_visible (CcRegionPanel *self,
                         current_locale = uselocale (new_locale);
         }
 
-        gtk_revealer_set_reveal_child (self->restart_revealer, visible);
+        gtk_info_bar_set_revealed (self->infobar, visible);
 
         if (locale && new_locale != (locale_t) 0) {
                 uselocale (current_locale);
@@ -766,13 +766,13 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, infobar);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_label);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_language_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, session_or_login_box);
 
         gtk_widget_class_bind_template_callback (widget_class, restart_now);

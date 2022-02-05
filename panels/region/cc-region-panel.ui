@@ -7,6 +7,37 @@
         <property name="orientation">vertical</property>
 
         <child>
+          <object class="GtkInfoBar" id="infobar">
+            <property name="revealed">False</property>
+            <property name="message-type">info</property>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="hexpand">True</property>
+                <property name="wrap">True</property>
+                <property name="xalign">0.0</property>
+                <property name="label" translatable="yes">Language and format will be changed after next login</property>
+                <style>
+                  <class name="heading" />
+                </style>
+              </object>
+            </child>
+
+            <child type="action">
+              <object class="GtkButton" id="restart_button">
+                <property name="valign">center</property>
+                <property name="label" translatable="yes">Logout…</property>
+                <style>
+                  <class name="suggested-action"/>
+                </style>
+                <signal name="clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
+              </object>
+            </child>
+
+          </object>
+        </child>
+
+        <child>
           <object class="AdwPreferencesPage">
 
             <child>
@@ -88,47 +119,6 @@
                                   <object class="GtkImage">
                                     <property name="valign">center</property>
                                     <property name="icon-name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkRevealer" id="restart_revealer">
-                                <property name="transition_type">slide-up</property>
-                                <child>
-                                  <object class="GtkBox">
-                                    <property name="margin_start">12</property>
-                                    <property name="margin_end">12</property>
-                                    <property name="spacing">12</property>
-                                    <child>
-                                      <object class="GtkLabel">
-                                        <property name="margin_bottom">8</property>
-                                        <property name="margin_top">8</property>
-                                        <property name="xalign">0</property>
-                                        <property name="hexpand">True</property>
-                                        <property name="wrap">True</property>
-                                        <property name="max-width-chars">35</property>
-                                        <property name="label" translatable="yes">Restart the session for changes to take effect</property>
-                                        <style>
-                                          <class name="dim-label"/>
-                                        </style>
-                                        <attributes>
-                                          <attribute name="scale" value="0.9"/>
-                                        </attributes>
-                                      </object>
-                                    </child>
-                                    <child>
-                                      <object class="GtkButton" id="restart_button">
-                                        <property name="margin_bottom">8</property>
-                                        <property name="margin_top">8</property>
-                                        <property name="valign">end</property>
-                                        <property name="label" translatable="yes">Restart…</property>
-                                        <style>
-                                          <class name="suggested-action"/>
-                                        </style>
-                                        <signal name="clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
-                                      </object>
-                                    </child>
                                   </object>
                                 </child>
                               </object>
