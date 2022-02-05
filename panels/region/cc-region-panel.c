@@ -48,8 +48,6 @@
 struct _CcRegionPanel {
         CcPanel          parent_instance;
 
-        GtkLabel        *formats_label;
-        GtkListBox      *formats_list;
         GtkListBoxRow   *formats_row;
         GtkInfoBar      *infobar;
         GtkSizeGroup    *input_size_group;
@@ -454,22 +452,6 @@ choose_region_permission_cb (GObject *source, GAsyncResult *res, gpointer user_d
 }
 
 static void
-activate_language_row (CcRegionPanel *self,
-                       GtkListBoxRow *row)
-{
-        if (row == self->formats_row) {
-                if (!self->login || g_permission_get_allowed (self->permission)) {
-                        show_region_chooser (self);
-                } else if (g_permission_get_can_acquire (self->permission)) {
-                        g_permission_acquire_async (self->permission,
-                                                    cc_panel_get_cancellable (CC_PANEL (self)),
-                                                    choose_region_permission_cb,
-                                                    self);
-                }
-        }
-}
-
-static void
 update_region_label (CcRegionPanel *self)
 {
         const gchar *region = get_effective_region (self);
@@ -481,7 +463,7 @@ update_region_label (CcRegionPanel *self)
         if (!name)
                 name = gnome_get_country_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        gtk_label_set_label (self->formats_label, name);
+        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->formats_row), name);
 }
 
 static void
@@ -538,9 +520,6 @@ setup_language_section (CcRegionPanel *self)
         self->locale_settings = g_settings_new (GNOME_SYSTEM_LOCALE_DIR);
         g_signal_connect_object (self->locale_settings, "changed::" KEY_REGION,
                                  G_CALLBACK (update_region_from_setting), self, G_CONNECT_SWAPPED);
-
-        g_signal_connect_object (self->formats_list, "row-activated",
-                                 G_CALLBACK (activate_language_row), self, G_CONNECT_SWAPPED);
 
         update_language_from_user (self);
         update_region_from_setting (self);
@@ -737,6 +716,20 @@ session_proxy_ready (GObject      *source,
 }
 
 static void
+on_user_formats_row_activated_cb (GtkListBoxRow *row,
+                                  CcRegionPanel *self)
+{
+        if (!self->login || g_permission_get_allowed (self->permission)) {
+                show_region_chooser (self);
+        } else if (g_permission_get_can_acquire (self->permission)) {
+                g_permission_acquire_async (self->permission,
+                                            cc_panel_get_cancellable (CC_PANEL (self)),
+                                            choose_region_permission_cb,
+                                            self);
+        }
+}
+
+static void
 on_user_language_row_activated_cb (GtkListBoxRow *row,
                                    CcRegionPanel *self)
 {
@@ -763,8 +756,6 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-region-panel.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_label);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_list);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, infobar);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_label);
@@ -773,6 +764,7 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, session_or_login_box);
 
+        gtk_widget_class_bind_template_callback (widget_class, on_user_formats_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, on_user_language_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
 }

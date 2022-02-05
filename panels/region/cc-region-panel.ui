@@ -104,44 +104,16 @@
                 <property name="description" translatable="yes">The format used for numbers, dates, and currencies.</property>
 
                 <child>
-                  <object class="GtkListBox" id="formats_list">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
+                  <object class="AdwActionRow" id="formats_row">
+                    <property name="use-underline">True</property>
+                    <property name="title" translatable="yes">_Formats</property>
+                    <property name="activatable">True</property>
+                    <signal name="activated" handler="on_user_formats_row_activated_cb" object="CcRegionPanel" swapped="no" />
+
                     <child>
-                      <object class="GtkListBoxRow" id="formats_row">
-                        <child>
-                          <object class="GtkBox">
-                            <property name="height_request">50</property>
-                            <property name="margin_start">12</property>
-                            <property name="margin_end">12</property>
-                            <property name="spacing">12</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="margin_bottom">8</property>
-                                <property name="margin_top">8</property>
-                                <property name="xalign">0</property>
-                                <property name="label" translatable="yes">_Formats</property>
-                                <property name="use_underline">True</property>
-                                <property name="hexpand">True</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel" id="formats_label">
-                                <property name="xalign">1</property>
-                                <property name="margin_bottom">8</property>
-                                <property name="margin_top">8</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="valign">center</property>
-                                <property name="icon-name">go-next-symbolic</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                      <object class="GtkImage">
+                        <property name="valign">center</property>
+                        <property name="icon-name">go-next-symbolic</property>
                       </object>
                     </child>
                   </object>
