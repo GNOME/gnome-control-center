@@ -146,7 +146,7 @@ format_chooser_back_button_clicked_cb (CcFormatChooser *self)
   g_assert (CC_IS_FORMAT_CHOOSER (self));
 
   gtk_window_set_title (GTK_WINDOW (self), _("Formats"));
-  adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->region_list);
+  adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->region_box);
   gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
   gtk_widget_show (self->done_button);
 }
