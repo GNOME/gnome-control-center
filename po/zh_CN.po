@@ -31,19 +31,19 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center master\n"
+"Project-Id-Version: gnome-control-center 41.0\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-09-08 08:29+0000\n"
-"PO-Revision-Date: 2021-09-14 18:51+0800\n"
-"Last-Translator: lumingzh <lumingzh@qq.com>\n"
+"POT-Creation-Date: 2022-02-05 13:12+0000\n"
+"PO-Revision-Date: 2022-02-07 15:41-0500\n"
+"Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: panels/applications/cc-applications-panel.c:823
 msgid "System Bus"
@@ -223,7 +223,7 @@ msgstr "相机"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "已禁用"
@@ -251,8 +251,8 @@ msgstr "无法被更改"
 
 #: panels/applications/cc-applications-panel.ui:175
 msgid ""
-"Individual permissions for applications can be reviewed in the <a href="
-"\"privacy\">Privacy</a> Settings."
+"Individual permissions for applications can be reviewed in the <a "
+"href=\"privacy\">Privacy</a> Settings."
 msgstr "应用程序的各个权限可以在 <a href=\"privacy\">隐私</a> 设置中查看。"
 
 # 左撇子有歧视色彩。
@@ -902,9 +902,9 @@ msgstr "需要互联网连接"
 
 #: panels/color/cc-color-panel.ui:591
 msgid ""
-"You may find these instructions on how to use the profile on <a href=\"linux"
-"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
-"\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a "
+"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
+"href=\"windows\">Microsoft Windows</a> systems useful."
 msgstr ""
 "有关如何在 <a href=\"linux\">GNU/Linux</a>、<a href=\"osx\">Apple OS X</a> "
 "和 <a href=\"windows\">Microsoft Windows</a> 系统中使用配置的这些说明可能对您"
@@ -2160,7 +2160,7 @@ msgstr "左Super徽标键"
 #: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Right Super"
-msgstr "左Super徽标键"
+msgstr "右Super徽标键"
 
 #: panels/keyboard/cc-keyboard-panel.c:75
 #: panels/keyboard/cc-keyboard-panel.c:93
@@ -2272,7 +2272,7 @@ msgstr "重新设置快捷键可能影响您的自定义快捷键。此操作无
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "取消"
 
@@ -2387,7 +2387,6 @@ msgid "Keyboard"
 msgstr "键盘"
 
 #: panels/keyboard/gnome-keyboard-panel.desktop.in.in:4
-#| msgid "View and change keyboard shortcuts and set your typing preferences"
 msgid ""
 "Change keyboard shortcuts and set your typing preferences, keyboard layouts "
 "and input sources"
@@ -5691,8 +5690,6 @@ msgid "Region & Language"
 msgstr "区域与语言"
 
 #: panels/region/gnome-region-panel.desktop.in.in:4
-#| msgid ""
-#| "Select your display language, formats, keyboard layouts and input sources"
 msgid "Select your display language and formats"
 msgstr "选择您的显示语言和格式"
 
@@ -7625,7 +7622,7 @@ msgstr "已登录"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "已启用"
 
@@ -8321,61 +8318,61 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "未知"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "解锁 SIM 卡"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "解锁"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "请提供 SIM 卡 %d 的 PIN 码"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
 msgstr "输入 PIN 以解锁您的 SIM 卡"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "请提供 SIM 卡 %d 的 PUK 码"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
 msgstr "输入 PUK 以解锁您的 SIM 卡"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
 msgstr[0] "密码输入错误。您还有 %1$u 次尝试机会"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
 msgstr[0] "您还有 %u 次尝试机会"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "密码输入错误。"
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
 msgstr "PUK 码应为 8 位数字"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "输入新 PIN"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
 msgstr "PIN 码应为 4 到 8 位数字"
 
-#: panels/wwan/cc-wwan-device-page.c:270
+#: panels/wwan/cc-wwan-device-page.c:317
 msgid "Unlocking..."
 msgstr "正在解锁…"
 
