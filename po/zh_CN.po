@@ -30,11 +30,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-control-center master\n"
+"Project-Id-Version: gnome-control-center 3.38\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2020-08-30 14:35+0000\n"
-"PO-Revision-Date: 2020-08-30 10:45-0400\n"
+"POT-Creation-Date: 2021-10-15 10:03+0000\n"
+"PO-Revision-Date: 2022-02-07 15:45-0500\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese (China) <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -42,7 +42,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: panels/applications/cc-applications-panel.c:815
 msgid "System Bus"
@@ -71,7 +71,7 @@ msgstr "对 /dev 的完全访问"
 
 #: panels/applications/cc-applications-panel.c:825
 #: panels/network/gnome-network-panel.desktop.in.in:3
-#: panels/network/network-mobile.ui:252
+#: panels/network/network-mobile.ui:288
 msgid "Network"
 msgstr "网络"
 
@@ -222,7 +222,7 @@ msgstr "相机"
 #: panels/keyboard/keyboard-shortcuts.c:368 panels/network/network-proxy.ui:126
 #: panels/user-accounts/cc-user-panel.c:865
 #: panels/user-accounts/cc-user-panel.c:957
-#: subprojects/gvc/gvc-mixer-control.c:1876
+#: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "已禁用"
 
@@ -249,8 +249,8 @@ msgstr "无法被修改"
 
 #: panels/applications/cc-applications-panel.ui:175
 msgid ""
-"Individual permissions for applications can be reviewed in the <a href="
-"\"privacy\">Privacy</a> Settings."
+"Individual permissions for applications can be reviewed in the <a "
+"href=\"privacy\">Privacy</a> Settings."
 msgstr "应用程序的各个权限可以在 <a href=\"privacy\">隐私</a> 设置中查看。"
 
 # 左撇子有歧视色彩。
@@ -372,7 +372,7 @@ msgstr "选择图片"
 #: panels/color/cc-color-calibrate.ui:25 panels/color/cc-color-panel.c:238
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:24
-#: panels/display/cc-display-panel.c:942
+#: panels/display/cc-display-panel.c:947
 #: panels/info-overview/cc-info-overview-panel.ui:234
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:865
@@ -894,9 +894,9 @@ msgstr "需要互联网连接"
 
 #: panels/color/cc-color-panel.ui:591
 msgid ""
-"You may find these instructions on how to use the profile on <a href=\"linux"
-"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
-"\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a "
+"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
+"href=\"windows\">Microsoft Windows</a> systems useful."
 msgstr ""
 "有关如何在 <a href=\"linux\">GNU/Linux</a>、<a href=\"osx\">Apple OS X</a> "
 "和 <a href=\"windows\">Microsoft Windows</a> 系统中使用配置的这些说明可能对您"
@@ -1218,12 +1218,12 @@ msgid "Select _All"
 msgstr "选择全部(_A)"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:158
+#: panels/network/connection-editor/ce-page-details.c:160
 msgid "Today"
 msgstr "今天"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:160
+#: panels/network/connection-editor/ce-page-details.c:162
 msgid "Yesterday"
 msgstr "昨天"
 
@@ -1555,20 +1555,20 @@ msgstr ""
 "network;identity;privacy;屏幕;锁;诊断;崩溃;私有;最近;临时;索引;名称;网络;认"
 "证;标志;身份;隐私;"
 
-#: panels/display/cc-display-panel.c:953
+#: panels/display/cc-display-panel.c:958
 #: panels/network/connection-editor/connection-editor.ui:27
 msgid "_Apply"
 msgstr "应用(_A)"
 
-#: panels/display/cc-display-panel.c:974
+#: panels/display/cc-display-panel.c:979
 msgid "Apply Changes?"
 msgstr "应用更改？"
 
-#: panels/display/cc-display-panel.c:979
+#: panels/display/cc-display-panel.c:984
 msgid "Changes Cannot be Applied"
 msgstr "无法应用更改"
 
-#: panels/display/cc-display-panel.c:980
+#: panels/display/cc-display-panel.c:985
 msgid "This could be due to hardware limitations."
 msgstr "这可能是硬件限制造成的。"
 
@@ -2147,7 +2147,7 @@ msgstr "左Super徽标键"
 #: panels/keyboard/cc-keyboard-panel.c:97
 msgctxt "keyboard key"
 msgid "Right Super"
-msgstr "左Super徽标键"
+msgstr "右Super徽标键"
 
 #: panels/keyboard/cc-keyboard-panel.c:98
 msgctxt "keyboard key"
@@ -2200,30 +2200,30 @@ msgstr "重置所有快捷键为它们的默认键绑定"
 msgid "No keyboard shortcut found"
 msgstr "未找到键盘快捷键"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:404
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:405
 #, c-format
 msgid "%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr "%s 已被用于 %s。如果您替换了它，%s 将被禁用"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:547
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:549
 msgid "Enter the new shortcut"
 msgstr "输入新的快捷键"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:566
 msgid "Set Custom Shortcut"
 msgstr "设置自定义快捷键"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:564
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:566
 msgid "Set Shortcut"
 msgstr "设置快捷键"
 
 #. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:575
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:577
 #, c-format
 msgid "Enter new shortcut to change %s."
 msgstr "输入新的快捷键以更改 %s。"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:1002
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:1004
 msgid "Add Custom Shortcut"
 msgstr "添加自定义快捷键"
 
@@ -2264,7 +2264,7 @@ msgstr "添加"
 msgid "Replace"
 msgstr "替换"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:324
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:325
 msgid "Set"
 msgstr "设置"
 
@@ -2570,7 +2570,7 @@ msgstr "双指滚动"
 msgid "Edge Scrolling"
 msgstr "边缘滚动"
 
-#: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:425
+#: panels/mouse/cc-mouse-panel.ui:719 panels/wacom/cc-wacom-panel.c:441
 msgid "Test Your _Settings"
 msgstr "测试您的设置(_S)"
 
@@ -2622,11 +2622,11 @@ msgstr ""
 "Trackpad;Pointer;Click;Tap;Double;Button;Trackball;Scroll;触摸板;指针;触摸;单"
 "击;双击;按钮;轨迹球;滚动;"
 
-#: panels/network/cc-network-panel.c:648 panels/network/cc-wifi-panel.ui:359
+#: panels/network/cc-network-panel.c:661 panels/network/cc-wifi-panel.ui:359
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "抱歉，发生错误。请联系软件提供商。"
 
-#: panels/network/cc-network-panel.c:654
+#: panels/network/cc-network-panel.c:667
 msgid "NetworkManager needs to be running."
 msgstr "需要运行 NetworkManager。"
 
@@ -2671,9 +2671,9 @@ msgid "Secure network"
 msgstr "安全网络"
 
 #: panels/network/cc-wifi-connection-row.ui:102
-#: panels/network/net-device-ethernet.c:316
+#: panels/network/net-device-ethernet.c:330
 #: panels/network/network-bluetooth.ui:76
-#: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:414
+#: panels/network/network-ethernet.ui:111 panels/network/network-mobile.ui:450
 #: panels/network/network-vpn.ui:75
 msgid "Options…"
 msgstr "选项…"
@@ -2827,140 +2827,166 @@ msgid "Profile %d"
 msgstr "配置 %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:93
+#: panels/network/connection-editor/ce-page-details.c:95
 #: panels/network/net-device-wifi.c:229
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:97
+#: panels/network/connection-editor/ce-page-details.c:99
 #: panels/network/net-device-wifi.c:234
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:103
+#: panels/network/connection-editor/ce-page-details.c:105
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:108
+#: panels/network/connection-editor/ce-page-details.c:110
 #: panels/network/connection-editor/ce-page-security.c:278
 msgid "Enhanced Open"
 msgstr "增强开放"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:115
+#: panels/network/connection-editor/ce-page-details.c:117
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:121
+#: panels/network/connection-editor/ce-page-details.c:123
 msgid "Enterprise"
 msgstr "企业"
 
-#: panels/network/connection-editor/ce-page-details.c:126
+#: panels/network/connection-editor/ce-page-details.c:128
 #: panels/network/net-device-wifi.c:219
 msgctxt "Wifi security"
 msgid "None"
 msgstr "无"
 
-#: panels/network/connection-editor/ce-page-details.c:147
+#: panels/network/connection-editor/ce-page-details.c:149
 msgid "Never"
 msgstr "从不"
 
-#: panels/network/connection-editor/ce-page-details.c:162
+#: panels/network/connection-editor/ce-page-details.c:164
 #: panels/network/net-device-ethernet.c:107
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
 msgstr[0] "%i 天前"
 
-#: panels/network/connection-editor/ce-page-details.c:287
+#: panels/network/connection-editor/ce-page-details.c:291
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:289
-#: panels/network/net-device-ethernet.c:201
+#: panels/network/connection-editor/ce-page-details.c:293
+#: panels/network/net-device-ethernet.c:215
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/秒"
 
-#: panels/network/connection-editor/ce-page-details.c:306
+#: panels/network/connection-editor/ce-page-details.c:310
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:308
+#: panels/network/connection-editor/ce-page-details.c:312
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:310
+#: panels/network/connection-editor/ce-page-details.c:314
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:330
+#: panels/network/connection-editor/ce-page-details.c:334
 msgctxt "Signal strength"
 msgid "None"
 msgstr "无"
 
-#: panels/network/connection-editor/ce-page-details.c:332
+#: panels/network/connection-editor/ce-page-details.c:336
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "较弱"
 
-#: panels/network/connection-editor/ce-page-details.c:334
+#: panels/network/connection-editor/ce-page-details.c:338
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "一般"
 
-#: panels/network/connection-editor/ce-page-details.c:336
+#: panels/network/connection-editor/ce-page-details.c:340
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "良好"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:342
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "非常好"
 
-#: panels/network/connection-editor/ce-page-details.c:396
+#: panels/network/connection-editor/ce-page-details.c:414
 #: panels/network/connection-editor/details-page.ui:108
-#: panels/network/net-device-ethernet.c:142
-#: panels/network/net-device-mobile.c:430
+#: panels/network/net-device-ethernet.c:149
+#: panels/network/net-device-mobile.c:447
 msgid "IPv4 Address"
 msgstr "IPv4 地址"
 
-#: panels/network/connection-editor/ce-page-details.c:397
+#: panels/network/connection-editor/ce-page-details.c:415
 #: panels/network/connection-editor/details-page.ui:126
-#: panels/network/net-device-ethernet.c:143
-#: panels/network/net-device-ethernet.c:147
-#: panels/network/net-device-mobile.c:431 panels/network/network-mobile.ui:200
+#: panels/network/net-device-ethernet.c:150
+#: panels/network/net-device-mobile.c:448 panels/network/network-mobile.ui:218
 msgid "IPv6 Address"
 msgstr "IPv6 地址"
 
-#: panels/network/connection-editor/ce-page-details.c:400
-#: panels/network/connection-editor/ce-page-details.c:401
-#: panels/network/net-device-ethernet.c:145
-#: panels/network/net-device-mobile.c:434
-#: panels/network/net-device-mobile.c:435 panels/network/network-mobile.ui:183
+#: panels/network/connection-editor/ce-page-details.c:418
+#: panels/network/connection-editor/ce-page-details.c:419
+#: panels/network/net-device-ethernet.c:152
+#: panels/network/net-device-ethernet.c:154
+#: panels/network/net-device-mobile.c:451
+#: panels/network/net-device-mobile.c:452 panels/network/network-mobile.ui:201
 msgid "IP Address"
 msgstr "IP 地址"
 
-#: panels/network/connection-editor/ce-page-details.c:434
+#: panels/network/connection-editor/ce-page-details.c:423
+#: panels/network/net-device-ethernet.c:164
+#: panels/network/net-device-mobile.c:456
+msgid "DNS4"
+msgstr "DNS4"
+
+#: panels/network/connection-editor/ce-page-details.c:424
+#: panels/network/net-device-ethernet.c:165
+#: panels/network/net-device-mobile.c:457
+msgid "DNS6"
+msgstr "DNS6"
+
+#: panels/network/connection-editor/ce-page-details.c:427
+#: panels/network/connection-editor/ce-page-details.c:428
+#: panels/network/connection-editor/details-page.ui:199
+#: panels/network/connection-editor/details-page.ui:218
+#: panels/network/connection-editor/ip4-page.ui:211
+#: panels/network/connection-editor/ip6-page.ui:225
+#: panels/network/net-device-ethernet.c:167
+#: panels/network/net-device-ethernet.c:169
+#: panels/network/net-device-mobile.c:459
+#: panels/network/net-device-mobile.c:460 panels/network/network-mobile.ui:253
+#: panels/network/network-mobile.ui:271
+msgid "DNS"
+msgstr "DNS"
+
+#: panels/network/connection-editor/ce-page-details.c:461
 msgid "Forget Connection"
 msgstr "忘记连接"
 
-#: panels/network/connection-editor/ce-page-details.c:436
+#: panels/network/connection-editor/ce-page-details.c:463
 msgid "Remove Connection Profile"
 msgstr "移除连接配置"
 
-#: panels/network/connection-editor/ce-page-details.c:438
+#: panels/network/connection-editor/ce-page-details.c:465
 msgid "Remove VPN"
 msgstr "移除 VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:456
+#: panels/network/connection-editor/ce-page-details.c:483
 msgid "Details"
 msgstr "详细信息"
 
@@ -3036,7 +3062,7 @@ msgid "Link speed"
 msgstr "链路速度"
 
 #: panels/network/connection-editor/details-page.ui:144
-#: panels/network/net-device-ethernet.c:150
+#: panels/network/net-device-ethernet.c:157
 msgid "Hardware Address"
 msgstr "硬件地址"
 
@@ -3045,36 +3071,28 @@ msgid "Supported Frequencies"
 msgstr "支持频率"
 
 #: panels/network/connection-editor/details-page.ui:180
-#: panels/network/net-device-ethernet.c:154
-#: panels/network/network-mobile.ui:217
+#: panels/network/net-device-ethernet.c:161
+#: panels/network/network-mobile.ui:235
 msgid "Default Route"
 msgstr "默认路由"
 
-#: panels/network/connection-editor/details-page.ui:199
-#: panels/network/connection-editor/ip4-page.ui:211
-#: panels/network/connection-editor/ip6-page.ui:225
-#: panels/network/net-device-ethernet.c:156
-#: panels/network/network-mobile.ui:235
-msgid "DNS"
-msgstr "DNS"
-
-#: panels/network/connection-editor/details-page.ui:217
+#: panels/network/connection-editor/details-page.ui:236
 msgid "Last Used"
 msgstr "上次使用"
 
-#: panels/network/connection-editor/details-page.ui:376
+#: panels/network/connection-editor/details-page.ui:415
 msgid "Connect _automatically"
 msgstr "自动连接(_A)"
 
-#: panels/network/connection-editor/details-page.ui:395
+#: panels/network/connection-editor/details-page.ui:434
 msgid "Make available to _other users"
 msgstr "对其他用户可用(_O)"
 
-#: panels/network/connection-editor/details-page.ui:428
+#: panels/network/connection-editor/details-page.ui:467
 msgid "_Metered connection: has data limits or can incur charges"
 msgstr "计费连接：有数据限制或可能产生费用"
 
-#: panels/network/connection-editor/details-page.ui:439
+#: panels/network/connection-editor/details-page.ui:478
 msgid ""
 "Software updates and other large downloads will not be started automatically."
 msgstr "软件更新和其他大型下载将不会自动启动。"
@@ -3329,7 +3347,7 @@ msgstr "今天"
 msgid "yesterday"
 msgstr "昨天"
 
-#: panels/network/net-device-ethernet.c:161
+#: panels/network/net-device-ethernet.c:175
 msgid "Last used"
 msgstr "上次使用"
 
@@ -3338,12 +3356,12 @@ msgstr "上次使用"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:250
+#: panels/network/net-device-ethernet.c:264
 #: panels/network/network-bluetooth.ui:38 panels/network/network-ethernet.ui:18
 msgid "Wired"
 msgstr "有线"
 
-#: panels/network/net-device-mobile.c:207
+#: panels/network/net-device-mobile.c:209
 msgid "Add new connection"
 msgstr "添加新连接"
 
@@ -4394,7 +4412,7 @@ msgid "Media player"
 msgstr "媒体播放器"
 
 #. TRANSLATORS: secondary battery
-#: panels/power/cc-power-panel.c:661 panels/wacom/cc-wacom-panel.c:794
+#: panels/power/cc-power-panel.c:661 panels/wacom/cc-wacom-panel.c:728
 msgid "Tablet"
 msgstr "手写板"
 
@@ -4464,7 +4482,7 @@ msgstr "挂起"
 
 #: panels/power/cc-power-panel.c:1677
 msgid "Power Off"
-msgstr "电源关闭"
+msgstr "关机"
 
 #: panels/power/cc-power-panel.c:1678
 msgid "Hibernate"
@@ -4752,7 +4770,7 @@ msgstr "位置"
 
 #. Translators: Name of column showing printer drivers
 #: panels/printers/pp-details-dialog.ui:122
-#: panels/printers/pp-ppd-selection-dialog.c:248
+#: panels/printers/pp-ppd-selection-dialog.c:250
 msgid "Driver"
 msgstr "驱动"
 
@@ -5115,7 +5133,7 @@ msgid "No pre-filtering"
 msgstr "无预过滤"
 
 #. Translators: Name of column showing printer manufacturers
-#: panels/printers/pp-ppd-selection-dialog.c:231
+#: panels/printers/pp-ppd-selection-dialog.c:233
 msgid "Manufacturer"
 msgstr "厂商"
 
@@ -5271,12 +5289,12 @@ msgid "Ink Level"
 msgstr "墨水量"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:312
+#: panels/printers/printer-entry.ui:313
 msgid "Please restart when the problem is resolved."
 msgstr "问题解决后请重启。"
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:319
+#: panels/printers/printer-entry.ui:320
 msgid "Restart"
 msgstr "重启"
 
@@ -7044,74 +7062,74 @@ msgstr "指纹登记"
 msgid "_Re-enroll this finger…"
 msgstr "重新登记该手指(_R)…"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:470
+#: panels/user-accounts/cc-fingerprint-dialog.c:471
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "列出指纹失败：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:536
+#: panels/user-accounts/cc-fingerprint-dialog.c:537
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "删除已保存的指纹失败：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:565
+#: panels/user-accounts/cc-fingerprint-dialog.c:566
 msgid "Left thumb"
 msgstr "左手拇指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:567
+#: panels/user-accounts/cc-fingerprint-dialog.c:568
 msgid "Left middle finger"
 msgstr "左手中指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:569
+#: panels/user-accounts/cc-fingerprint-dialog.c:570
 msgid "_Left index finger"
 msgstr "左手食指(_L)"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:571
+#: panels/user-accounts/cc-fingerprint-dialog.c:572
 msgid "Left ring finger"
 msgstr "左手无名指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:573
+#: panels/user-accounts/cc-fingerprint-dialog.c:574
 msgid "Left little finger"
 msgstr "左手小指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:575
+#: panels/user-accounts/cc-fingerprint-dialog.c:576
 msgid "Right thumb"
 msgstr "右手拇指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:577
+#: panels/user-accounts/cc-fingerprint-dialog.c:578
 msgid "Right middle finger"
 msgstr "右手中指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:579
+#: panels/user-accounts/cc-fingerprint-dialog.c:580
 msgid "_Right index finger"
 msgstr "右手食指(_R)"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:581
+#: panels/user-accounts/cc-fingerprint-dialog.c:582
 msgid "Right ring finger"
 msgstr "右手无名指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:583
+#: panels/user-accounts/cc-fingerprint-dialog.c:584
 msgid "Right little finger"
 msgstr "右手小指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:585
+#: panels/user-accounts/cc-fingerprint-dialog.c:586
 msgid "Unknown Finger"
 msgstr "未知手指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:719
+#: panels/user-accounts/cc-fingerprint-dialog.c:720
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "完成"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:729
+#: panels/user-accounts/cc-fingerprint-dialog.c:730
 msgid "Fingerprint device disconnected"
 msgstr "指纹设备已断开连接"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:731
+#: panels/user-accounts/cc-fingerprint-dialog.c:732
 msgid "Fingerprint device storage is full"
 msgstr "指纹设备存储已满"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:733
+#: panels/user-accounts/cc-fingerprint-dialog.c:734
 msgid "Failed to enroll new fingerprint"
 msgstr "登记新指纹失败"
 
@@ -7151,12 +7169,12 @@ msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "读取设备时出现问题"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1133
+#: panels/user-accounts/cc-fingerprint-dialog.c:1136
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "无法请求指纹设备 %s：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1270
+#: panels/user-accounts/cc-fingerprint-dialog.c:1279
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "获取指纹设备失败：%s"
@@ -7692,7 +7710,7 @@ msgstr "将作为您主文件夹的名称且不可再次更改。"
 msgid "Map Buttons"
 msgstr "映射按键"
 
-#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:512
+#: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:519
 #: panels/wacom/gnome-wacom-properties.ui:60
 msgid "_Close"
 msgstr "关闭(_C)"
@@ -7763,11 +7781,11 @@ msgstr "映射到单个显示器"
 msgid "%d of %d"
 msgstr "%d/%d"
 
-#: panels/wacom/cc-wacom-page.c:509
+#: panels/wacom/cc-wacom-page.c:516
 msgid "Display Mapping"
 msgstr "显示映射"
 
-#: panels/wacom/cc-wacom-panel.c:791 panels/wacom/wacom-stylus-page.ui:119
+#: panels/wacom/cc-wacom-panel.c:725 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
 msgstr "手写笔"
 
@@ -8036,7 +8054,7 @@ msgstr "是否在运行开发版本的 GNOME 设置时显示警告。"
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1883
+#: subprojects/gvc/gvc-mixer-control.c:1907
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -8044,13 +8062,13 @@ msgstr[0] "%u 路输出"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1893
+#: subprojects/gvc/gvc-mixer-control.c:1917
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u 路输入"
 
-#: subprojects/gvc/gvc-mixer-control.c:2750
+#: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "系统声音"
 
