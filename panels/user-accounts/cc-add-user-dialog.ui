@@ -64,6 +64,7 @@
               <object class="AdwPreferencesGroup">
                 <child>
                   <object class="AdwActionRow" id="local_name_row">
+                    <property name="activatable-widget">local_name_entry</property>
                     <property name="title" translatable="yes">Name</property>
                     <child>
                       <object class="GtkEntry" id="local_name_entry">
@@ -89,6 +90,7 @@
                 </child>
                 <child>
                   <object class="AdwActionRow" id="local_username_row">
+                    <property name="activatable-widget">local_username_combo</property>
                     <property name="title" translatable="yes">Username</property>
                     <property name="subtitle-lines">2</property>
                     <child>
@@ -125,6 +127,7 @@
               <object class="AdwPreferencesGroup">
                 <child>
                   <object class="AdwActionRow">
+                    <property name="activatable-widget">local_account_type_switch</property>
                     <property name="title" translatable="yes">Administrator</property>
                     <property name="subtitle" translatable="yes">Administrators can add and remove other users, and can change settings for all users. Parental controls cannot be applied to administrators.</property>
                     <property name="subtitle-lines">3</property>
@@ -142,6 +145,7 @@
                 <property name="title" translatable="yes">Password</property>
                 <child>
                   <object class="AdwActionRow">
+                    <property name="activatable-widget">local_password_login_radio</property>
                     <property name="title" translatable="yes">User sets password on first login</property>
                     <child type="prefix">
                       <object class="GtkCheckButton" id="local_password_login_radio">
@@ -153,6 +157,7 @@
                 </child>
                 <child>
                   <object class="AdwActionRow">
+                    <property name="activatable-widget">local_password_radio</property>
                     <property name="title" translatable="yes">Set password now</property>
                     <child type="prefix">
                       <object class="GtkCheckButton" id="local_password_radio">
@@ -172,6 +177,7 @@
                 <property name="sensitive">False</property>
                 <child>
                   <object class="AdwActionRow" id="local_password_row">
+                    <property name="activatable-widget">local_password_entry</property>
                     <property name="title" translatable="yes">Password</property>
                     <property name="subtitle-lines">2</property>
                     <child>
@@ -214,6 +220,7 @@
                 </child>
                 <child>
                   <object class="AdwActionRow" id="local_verify_password_row">
+                    <property name="activatable-widget">local_verify_entry</property>
                     <property name="title" translatable="yes">Confirm</property>
                     <child>
                       <object class="GtkPasswordEntry" id="local_verify_entry">
