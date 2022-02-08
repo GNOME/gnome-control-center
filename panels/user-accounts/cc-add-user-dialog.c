@@ -65,6 +65,7 @@ struct _CcAddUserDialog {
         GtkLabel           *enterprise_domain_hint;
         AdwActionRow       *enterprise_domain_row;
         GtkImage           *enterprise_domain_status_icon;
+        AdwPreferencesGroup *enterprise_group;
         AdwPreferencesPage *enterprise_page;
         AdwPreferencesGroup *enterprise_login_group;
         GtkEntry           *enterprise_login_entry;
@@ -1328,7 +1329,7 @@ on_realm_manager_created (GObject *source,
                                    NULL, NULL);
 
         /* Show the 'Enterprise Login' stuff, and update mode */
-        gtk_widget_show (GTK_WIDGET (self->enterprise_button));
+        gtk_widget_show (GTK_WIDGET (self->enterprise_group));
         mode_change (self, self->mode);
 }
 
@@ -1352,7 +1353,7 @@ on_realmd_disappeared (GDBusConnection *unused1,
 
         clear_realm_manager (self);
         gtk_list_store_clear (self->enterprise_realm_model);
-        gtk_widget_hide (GTK_WIDGET (self->enterprise_button));
+        gtk_widget_hide (GTK_WIDGET (self->enterprise_group));
         mode_change (self, MODE_LOCAL);
 }
 
@@ -1639,6 +1640,7 @@ cc_add_user_dialog_class_init (CcAddUserDialogClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_hint);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_row);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_domain_status_icon);
+        gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_group);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_page);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_login_group);
         gtk_widget_class_bind_template_child (widget_class, CcAddUserDialog, enterprise_login_entry);
