@@ -46,6 +46,7 @@ struct _CcDefaultAppsPanel
   GtkWidget *music_label;
   GtkWidget *video_label;
   GtkWidget *photos_label;
+  GtkWidget *calls_label;
 };
 
 
@@ -149,7 +150,8 @@ static DefaultAppData preferred_app_infos[] = {
   { "text/calendar", OFFSET (calendar_label), NULL },
   { "audio/x-vorbis+ogg", OFFSET (music_label), "audio/*" },
   { "video/x-ogm+ogg", OFFSET (video_label), "video/*" },
-  { "image/jpeg", OFFSET (photos_label), "image/*" }
+  { "image/jpeg", OFFSET (photos_label), "image/*" },
+  { "x-scheme-handler/tel", OFFSET(calls_label), NULL},
 };
 
 static void
