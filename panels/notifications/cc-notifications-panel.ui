@@ -28,6 +28,7 @@
               <object class="GtkListBox" id="app_listbox">
                 <property name="selection_mode">none</property>
                 <signal name="row-activated" handler="select_app" object="CcNotificationsPanel" swapped="yes" />
+                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcNotificationsPanel" swapped="yes"/>
                 <style>
                   <class name="boxed-list"/>
                 </style>
