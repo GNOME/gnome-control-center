@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-07 10:10+0000\n"
-"PO-Revision-Date: 2022-02-07 20:33+0200\n"
+"POT-Creation-Date: 2022-02-09 14:06+0000\n"
+"PO-Revision-Date: 2022-02-09 22:29+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <>\n"
 "Language: he\n"
@@ -62,7 +62,7 @@ msgstr "יש גישה לרשת"
 
 #: panels/applications/cc-applications-panel.c:818
 #: panels/applications/cc-applications-panel.c:820
-#: panels/search/cc-search-locations-dialog.c:361
+#: panels/search/cc-search-locations-dialog.c:384
 msgid "Home"
 msgstr "בית"
 
@@ -168,8 +168,8 @@ msgstr "קבלת חיפושי מערכת ושליחת התוצאות."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:857
-#: panels/user-accounts/cc-user-panel.c:955
+#: panels/user-accounts/cc-user-panel.c:761
+#: panels/user-accounts/cc-user-panel.c:865
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -331,11 +331,11 @@ msgstr "שליטה בהגדרות והרשאות של מספר יישומים"
 msgid "application;flatpak;permission;setting;"
 msgstr "יישומים;flatpak;הרשאות;השראה;יישום;אפליקציה;"
 
-#: panels/background/cc-background-chooser.c:293
+#: panels/background/cc-background-chooser.c:309
 msgid "Select a picture"
 msgstr "בחירת תמונה"
 
-#: panels/background/cc-background-chooser.c:296
+#: panels/background/cc-background-chooser.c:312
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:31
@@ -350,46 +350,46 @@ msgstr "בחירת תמונה"
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
-#: panels/search/cc-search-locations-dialog.c:639
+#: panels/search/cc-search-locations-dialog.c:677
 #: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
-#: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:105
-#: panels/user-accounts/cc-avatar-chooser.c:228
-#: panels/user-accounts/cc-fingerprint-dialog.ui:36
-#: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:647
-#: panels/user-accounts/cc-user-panel.c:665
-#: panels/user-accounts/data/join-dialog.ui:20
+#: panels/user-accounts/cc-add-user-dialog.ui:25
+#: panels/user-accounts/cc-avatar-chooser.c:94
+#: panels/user-accounts/cc-avatar-chooser.c:165
+#: panels/user-accounts/cc-fingerprint-dialog.ui:30
+#: panels/user-accounts/cc-password-dialog.ui:18
+#: panels/user-accounts/cc-user-panel.c:551
+#: panels/user-accounts/cc-user-panel.c:569
+#: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:268
 msgid "_Cancel"
 msgstr "_ביטול"
 
-#: panels/background/cc-background-chooser.c:297
+#: panels/background/cc-background-chooser.c:313
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
 #: panels/sharing/cc-sharing-panel.c:433
-#: panels/user-accounts/cc-avatar-chooser.c:229
+#: panels/user-accounts/cc-avatar-chooser.c:166
 msgid "_Open"
 msgstr "_פתיחה"
 
-#: panels/background/cc-background-item.c:140
+#: panels/background/cc-background-item.c:169
 msgid "multiple sizes"
 msgstr "מספר גדלים"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:144
+#: panels/background/cc-background-item.c:173
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:289
+#: panels/background/cc-background-item.c:325
 msgid "No Desktop Background"
 msgstr "אין רקע לשולחן העבודה"
 
-#: panels/background/cc-background-panel.c:173
+#: panels/background/cc-background-panel.c:177
 msgid "Current background"
 msgstr "הרקע הנוכחי"
 
@@ -607,7 +607,7 @@ msgstr "ה_משך"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:73
+#: panels/user-accounts/cc-fingerprint-dialog.ui:58
 msgid "_Done"
 msgstr "_סיום"
 
@@ -878,7 +878,7 @@ msgstr "_ייבוא קובץ…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/network/connection-editor/net-connection-editor.c:497
 #: panels/printers/new-printer-dialog.ui:84
-#: panels/user-accounts/cc-add-user-dialog.ui:47
+#: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
 msgstr "הו_ספה"
 
@@ -1549,7 +1549,6 @@ msgid "_Apply"
 msgstr "ה_חלה"
 
 #: panels/display/cc-display-panel.ui:97
-#| msgid "Bluetooth is disabled"
 msgid "Display Settings Disabled"
 msgstr "הגדרות הצג מושבתות"
 
@@ -1964,7 +1963,6 @@ msgid "Screenshots"
 msgstr "צילומי מסך"
 
 #: panels/keyboard/01-screenshot.xml.in:5
-#| msgid "Take a screenshot"
 msgid "Show the screenshot UI"
 msgstr "הצגת מנשק משתמש לצילום מסך"
 
@@ -1973,7 +1971,6 @@ msgid "Take a screenshot"
 msgstr "צילום המסך"
 
 #: panels/keyboard/01-screenshot.xml.in:11
-#| msgid "Save a screenshot of a window to $PICTURES"
 msgid "Take a screenshot of a window"
 msgstr "צילום החלון"
 
@@ -2309,7 +2306,10 @@ msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr "יש ללחוץ Esc לביטול או Backspace להשבתת צירופי המקשים."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
-#: panels/printers/pp-details-dialog.ui:36 panels/wwan/cc-wwan-apn-dialog.ui:96
+#: panels/printers/pp-details-dialog.ui:36
+#: panels/user-accounts/cc-add-user-dialog.ui:68
+#: panels/user-accounts/cc-user-panel.ui:125
+#: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "שם"
 
@@ -2864,7 +2864,9 @@ msgstr "שם הרשת"
 #: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:330
 #: panels/printers/pp-jobs-dialog.ui:52
-#: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/user-accounts/cc-add-user-dialog.ui:145
+#: panels/user-accounts/cc-add-user-dialog.ui:181
+#: panels/user-accounts/cc-add-user-dialog.ui:362
 #: panels/wwan/cc-wwan-apn-dialog.ui:172
 msgid "Password"
 msgstr "ססמה"
@@ -4014,8 +4016,6 @@ msgstr "חסרה ססמת EAP-LEAP"
 #: panels/network/wireless-security/eap-method-leap.ui:11
 #: panels/network/wireless-security/eap-method-simple.ui:11
 #: panels/network/wireless-security/ws-leap.ui:11
-#: panels/user-accounts/cc-add-user-dialog.ui:146
-#: panels/user-accounts/cc-add-user-dialog.ui:527
 msgid "_Username"
 msgstr "_שם משתמש"
 
@@ -4025,9 +4025,7 @@ msgstr "_שם משתמש"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-add-user-dialog.ui:310
-#: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:365
+#: panels/user-accounts/cc-user-panel.ui:168
 msgid "_Password"
 msgstr "_ססמה"
 
@@ -4184,8 +4182,7 @@ msgid "CHAP"
 msgstr "CHAP"
 
 #: panels/network/wireless-security/eap-method-ttls.ui:68
-#: panels/user-accounts/cc-add-user-dialog.ui:507
-#: panels/user-accounts/data/join-dialog.ui:116
+#: panels/user-accounts/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "מ_תחם"
 
@@ -4855,7 +4852,10 @@ msgstr "אימות"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:41
 #: panels/printers/new-printer-dialog.ui:310
-#: panels/printers/pp-jobs-dialog.ui:41 panels/wwan/cc-wwan-apn-dialog.ui:148
+#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
 msgid "Username"
 msgstr "שם משתמש"
 
@@ -4985,7 +4985,7 @@ msgid "Loading drivers database…"
 msgstr "מסד נתוני מנהלי ההתקנים נטען…"
 
 #: panels/printers/ppd-selection-dialog.ui:91
-#: panels/user-accounts/cc-avatar-chooser.c:107
+#: panels/user-accounts/cc-avatar-chooser.c:96
 msgid "Select"
 msgstr "בחירה"
 
@@ -5115,6 +5115,7 @@ msgstr "יש להזין אישור על מנת להדפיס מ־%s."
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
+#: panels/user-accounts/cc-add-user-dialog.ui:300
 msgid "Domain"
 msgstr "מתחם"
 
@@ -5526,9 +5527,7 @@ msgstr ""
 msgid "Formats"
 msgstr "תבניות"
 
-#: panels/region/cc-format-chooser.ui:37
-#: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/region/cc-format-chooser.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "חזרה"
 
@@ -5595,7 +5594,6 @@ msgid "Logout…"
 msgstr "יציאה…"
 
 #: panels/region/cc-region-panel.ui:45
-#| msgid "The format used for numbers, dates, and currencies."
 msgid ""
 "The language setting is used for interface text and web pages. Formats is "
 "used for numbers, dates, and currencies."
@@ -5604,12 +5602,11 @@ msgstr ""
 "תאריכים ומטבעות."
 
 #: panels/region/cc-region-panel.ui:51
-#| msgid "Your account"
 msgid "Your Account"
 msgstr "החשבון שלך"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:311
+#: panels/user-accounts/cc-user-panel.ui:292
 msgid "_Language"
 msgstr "_שפה"
 
@@ -5780,11 +5777,11 @@ msgstr ""
 "התקן;מערכת;מידע;זיכרון;זכרון;מעבד;גרסה;בררת מחדל;יישום;העדפה;מועדף;גיבוי;"
 "דיסק;תקליטור;DVD;USB;שמע;אודיו;חוזי;וידאו;נשלף;נתיק;מדיה;הפעלה אוטומטית;"
 
-#: panels/search/cc-search-locations-dialog.c:636
+#: panels/search/cc-search-locations-dialog.c:674
 msgid "Select Location"
 msgstr "בחירת מיקום"
 
-#: panels/search/cc-search-locations-dialog.c:640
+#: panels/search/cc-search-locations-dialog.c:678
 msgid "_OK"
 msgstr "_אישור"
 
@@ -5793,57 +5790,55 @@ msgstr "_אישור"
 msgid "Search Locations"
 msgstr "מקומות לחיפוש"
 
-#: panels/search/cc-search-locations-dialog.ui:28
-#: panels/search/cc-search-locations-dialog.ui:58
-#: panels/search/cc-search-locations-dialog.ui:89
+#: panels/search/cc-search-locations-dialog.ui:13
 msgid ""
 "Folders which are searched by system applications, such as Files, Photos and "
 "Videos."
 msgstr "תיקיות אשר מבוצע בהן חיפוש על ידי יישומים כמו קבצים, תמונות וסרטונים."
 
-#: panels/search/cc-search-locations-dialog.ui:41
+#: panels/search/cc-search-locations-dialog.ui:18
 msgid "Places"
 msgstr "מיקומים"
 
-#: panels/search/cc-search-locations-dialog.ui:73
+#: panels/search/cc-search-locations-dialog.ui:33
 msgid "Bookmarks"
 msgstr "סימניות"
 
-#: panels/search/cc-search-locations-dialog.ui:129
-msgid "Other"
-msgstr "אחר"
+#: panels/search/cc-search-locations-dialog.ui:48
+#| msgid "Other"
+msgid "Others"
+msgstr "אחרים"
 
-#: panels/search/cc-search-panel.c:150
+#: panels/search/cc-search-locations-dialog.ui:55
+#| msgid "Location"
+msgid "Add Location"
+msgstr "הוספת מיקום"
+
+#: panels/search/cc-search-panel.c:165
 msgid "No applications found"
 msgstr "לא נמצאו יישומים"
 
-#: panels/search/cc-search-panel-row.ui:48
+#: panels/search/cc-search-panel-row.ui:49
 msgid "Move Up"
 msgstr "הזזה למעלה"
 
-#: panels/search/cc-search-panel-row.ui:52
+#: panels/search/cc-search-panel-row.ui:53
 msgid "Move Down"
 msgstr "הזזה למטה"
 
 #: panels/search/cc-search-panel.ui:10
-#| msgid "Application Switching"
 msgid "Application Search"
 msgstr "חיפוש יישום"
 
 #: panels/search/cc-search-panel.ui:11
-#| msgid "Include applications from all _workspaces"
 msgid "Include application-provided search results."
 msgstr "לכלול תוצאות חיפוש מספקי יישומים."
 
 #: panels/search/cc-search-panel.ui:23
-#| msgid ""
-#| "Folders which are searched by system applications, such as Files, Photos "
-#| "and Videos."
 msgid "Folders which are searched by system applications."
 msgstr "תיקיות אשר מבוצע בהן חיפוש על ידי יישומי מערכת."
 
 #: panels/search/cc-search-panel.ui:37
-#| msgid "No Search Results"
 msgid "Search Results"
 msgstr "תוצאות חיפוש"
 
@@ -6836,11 +6831,6 @@ msgstr "להקל ראייה, שמיעה, הקלדה, הצבעה ולחיצה"
 
 #. Translators: Search terms to find the Accessibility panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/universal-access/gnome-universal-access-panel.desktop.in.in:19
-#| msgid ""
-#| "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
-#| "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
-#| "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-#| "audio;typing;"
 msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
@@ -7025,34 +7015,34 @@ msgid "Don't leave traces"
 msgstr "לא להשאיר עקבות"
 
 #. FIXME
-#: panels/user-accounts/cc-add-user-dialog.c:34
+#: panels/user-accounts/cc-add-user-dialog.c:35
 msgid "Should match the web address of your login provider."
 msgstr "צריך להתאים את כתובת האינטרנט של ספק החשבון שלך."
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:216
 msgid "Failed to add account"
 msgstr "הוספת החשבון נכשלה"
 
-#: panels/user-accounts/cc-add-user-dialog.c:661
-#: panels/user-accounts/cc-password-dialog.c:261
+#: panels/user-accounts/cc-add-user-dialog.c:673
+#: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "הססמאות אינן תואמות."
 
-#: panels/user-accounts/cc-add-user-dialog.c:875
-#: panels/user-accounts/cc-add-user-dialog.c:914
-#: panels/user-accounts/cc-add-user-dialog.c:932
+#: panels/user-accounts/cc-add-user-dialog.c:877
+#: panels/user-accounts/cc-add-user-dialog.c:916
+#: panels/user-accounts/cc-add-user-dialog.c:934
 msgid "Failed to register account"
 msgstr "הרשמת החשבון נכשלה"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1047
+#: panels/user-accounts/cc-add-user-dialog.c:1049
 msgid "No supported way to authenticate with this domain"
 msgstr "אין שיטה נתמכת לאימות עם מתחם זה (domain)"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1111
+#: panels/user-accounts/cc-add-user-dialog.c:1113
 msgid "Failed to join domain"
 msgstr "ההצטרפות למתחם נכשלה"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1166
+#: panels/user-accounts/cc-add-user-dialog.c:1168
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7060,7 +7050,7 @@ msgstr ""
 "שם התחברות זה לא עובד.\n"
 "נא לנסות שוב."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1173
+#: panels/user-accounts/cc-add-user-dialog.c:1175
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7068,49 +7058,63 @@ msgstr ""
 "ססמה זו לא עובדת.\n"
 "נא לנסות שוב."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1181
+#: panels/user-accounts/cc-add-user-dialog.c:1183
 msgid "Failed to log into domain"
 msgstr "ההתחברות למתחם נכשלה"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1236
+#: panels/user-accounts/cc-add-user-dialog.c:1238
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "לא ניתן למצוא את התחום. אולי שגית באיות?"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:18
-#: panels/user-accounts/data/join-dialog.ui:11
+#: panels/user-accounts/cc-add-user-dialog.ui:15
+#: panels/user-accounts/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "הוספת משתמש"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:180
-msgid "_Full Name"
-msgstr "שם מ_לא"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:206
-msgid "Standard"
-msgstr "רגיל"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:216
+#: panels/user-accounts/cc-add-user-dialog.ui:131
 msgid "Administrator"
 msgstr "מנהל"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:232
-msgid "Account _Type"
-msgstr "_סוג החשבון"
+#: panels/user-accounts/cc-add-user-dialog.ui:132
+#| msgid ""
+#| "Administrators can add and remove other users, and can change settings "
+#| "for all users."
+msgid ""
+"Administrators can add and remove other users, and can change settings for "
+"all users. Parental controls cannot be applied to administrators."
+msgstr ""
+"מנהל יכול להוסיף ולהסיר משתמשים, וכן לשנות הגדרות עבור כלל המשתמשים. בקרת "
+"הורים לא ניתנת להחלה על מנהל."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:269
-msgid "Allow user to set a password when they next _login"
-msgstr "בחירת ססמה ב_כניסה הבאה"
+#: panels/user-accounts/cc-add-user-dialog.ui:149
+#| msgid "Allow user to change their password on next login"
+msgid "User sets password on first login"
+msgstr "הגדרת ססמה בכניסה הראשונה של המשתמש"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:283
-msgid "Set a password _now"
-msgstr "הגדרת ססמה _כעת"
+#: panels/user-accounts/cc-add-user-dialog.ui:161
+#| msgid "Set a password now"
+msgid "Set password now"
+msgstr "הגדרת ססמה כעת"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:405
-msgid "_Confirm"
-msgstr "_אישור"
+#: panels/user-accounts/cc-add-user-dialog.ui:224
+#| msgid "_Confirm"
+msgid "Confirm"
+msgstr "אישור"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:485
-#: panels/user-accounts/cc-add-user-dialog.ui:692
+#: panels/user-accounts/cc-add-user-dialog.ui:278
+#| msgid "_Enterprise Login"
+msgid "Enterprise Login"
+msgstr "כניסה ארגונית"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:279
+msgid "User accounts which are managed by a company or organisation."
+msgstr "חשבונות משתמש המנוהלים על ידי חברה או ארגון."
+
+#: panels/user-accounts/cc-add-user-dialog.ui:385
+msgid "You are Offline"
+msgstr "התנתקת"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:386
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -7119,27 +7123,11 @@ msgstr ""
 "התחברות ארגונית מאפשרת ניהול חשבון משתמש מרוכז לשימוש בהתקן זה. נתן גם "
 "להשתמש בחשבון זה לגישה למשאבי חברות באינטרנט."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:732
-msgid "You are Offline"
-msgstr "התנתקת"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:751
-msgid "You must be online in order to add enterprise users."
-msgstr "עליך להתחבר לרשת כדי להוסיף משתמשים ארגוניים."
-
-#: panels/user-accounts/cc-add-user-dialog.ui:782
-msgid "_Enterprise Login"
-msgstr "_כניסה ארגונית"
-
-#: panels/user-accounts/cc-avatar-chooser.c:225
+#: panels/user-accounts/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
 msgstr "עיון אחר תמונות נוספות"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:39
-msgid "Take a Picture…"
-msgstr "צילום תמונה…"
-
-#: panels/user-accounts/cc-avatar-chooser.ui:46
+#: panels/user-accounts/cc-avatar-chooser.ui:32
 msgid "Select a File…"
 msgstr "בחירת קובץ…"
 
@@ -7147,46 +7135,50 @@ msgstr "בחירת קובץ…"
 msgid "Fingerprint Manager"
 msgstr "ניהול טביעות אצבע"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:23
+#: panels/user-accounts/cc-fingerprint-dialog.ui:18
 msgid "Fingerprint"
 msgstr "טביעת אצבע"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:118
+#: panels/user-accounts/cc-fingerprint-dialog.ui:86
 msgid "_No"
 msgstr "_לא"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:128
+#: panels/user-accounts/cc-fingerprint-dialog.ui:94
 msgid "_Yes"
 msgstr "_כן"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:155
+#: panels/user-accounts/cc-fingerprint-dialog.ui:114
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr "למחוק את טביעות האצבעות שלך שנרשמו כך שכניסה עם טביעת אצבע תושבת?"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:249
-msgid "No Fingerprint device"
-msgstr "אין התקן טביעת אצבע"
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:259
-msgid "Ensure the device is properly connected."
-msgstr "יש לוודא כי ההתקן מחובר כראוי."
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:264
+#: panels/user-accounts/cc-fingerprint-dialog.ui:170
 msgid "No fingerprint device"
 msgstr "אין התקן טביעת אצבע"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:280
-msgid "Choose the fingerprint device you want to configure"
-msgstr "נא לבחור את התקן טביעות האצבע להגדרה"
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/user-accounts/cc-fingerprint-dialog.ui:185
+msgid "No Fingerprint device"
+msgstr "אין התקן טביעת אצבע"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:309
+#: panels/user-accounts/cc-fingerprint-dialog.ui:194
+msgid "Ensure the device is properly connected."
+msgstr "יש לוודא כי ההתקן מחובר כראוי."
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:202
 msgid "Fingerprint Device"
 msgstr "התקן טביעת אצבע"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:322
+#: panels/user-accounts/cc-fingerprint-dialog.ui:211
+msgid "Choose the fingerprint device you want to configure"
+msgstr "נא לבחור את התקן טביעות האצבע להגדרה"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:242
+msgid "Fingerprint Login"
+msgstr "כניסה באמצעות טביעת אצבע"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:249
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
@@ -7194,19 +7186,15 @@ msgstr ""
 "התחברות באמצעות טביעת אצבע מאפשרת לך לבטל נעילה ולהתחבר למחשב שלך באמצעות "
 "האצבע שלך"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:352
+#: panels/user-accounts/cc-fingerprint-dialog.ui:276
 msgid "_Delete Fingerprints"
 msgstr "_מחיקת טביעות אצבע"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:363
-msgid "Fingerprint Login"
-msgstr "כניסה באמצעות טביעת אצבע"
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:412
+#: panels/user-accounts/cc-fingerprint-dialog.ui:290
 msgid "Fingerprint Enroll"
 msgstr "רישום טביעת אצבע"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:436
+#: panels/user-accounts/cc-fingerprint-dialog.ui:349
 msgid "_Re-enroll this finger…"
 msgstr "_רישום מחדש של אצבע זו…"
 
@@ -7238,128 +7226,128 @@ msgstr "ההתקשרות עם קורא טביעות האצבע נכשלה"
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "ההתקשרות עם שרת קורא טביעות האצבע נכשלה"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:585
+#: panels/user-accounts/cc-fingerprint-dialog.c:606
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "הצגת טביעות האצבעות נכשלה: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:652
+#: panels/user-accounts/cc-fingerprint-dialog.c:673
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "מחיקת טביעות אצבע שמורות נכשלה: ‏%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:683
+#: panels/user-accounts/cc-fingerprint-dialog.c:704
 msgid "Left thumb"
 msgstr "אגודל שמאלית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:685
+#: panels/user-accounts/cc-fingerprint-dialog.c:706
 msgid "Left middle finger"
 msgstr "אמה שמאלית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:687
+#: panels/user-accounts/cc-fingerprint-dialog.c:708
 msgid "_Left index finger"
 msgstr "אצבע _שמאלית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:689
+#: panels/user-accounts/cc-fingerprint-dialog.c:710
 msgid "Left ring finger"
 msgstr "קמיצה שמאלית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:691
+#: panels/user-accounts/cc-fingerprint-dialog.c:712
 msgid "Left little finger"
 msgstr "זרת שמאלית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:693
+#: panels/user-accounts/cc-fingerprint-dialog.c:714
 msgid "Right thumb"
 msgstr "אגודל ימנית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:695
+#: panels/user-accounts/cc-fingerprint-dialog.c:716
 msgid "Right middle finger"
 msgstr "אמה ימנית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:697
+#: panels/user-accounts/cc-fingerprint-dialog.c:718
 msgid "_Right index finger"
 msgstr "אצבע _ימנית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:699
+#: panels/user-accounts/cc-fingerprint-dialog.c:720
 msgid "Right ring finger"
 msgstr "קמיצה ימנית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:701
+#: panels/user-accounts/cc-fingerprint-dialog.c:722
 msgid "Right little finger"
 msgstr "זרת ימנית"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:703
+#: panels/user-accounts/cc-fingerprint-dialog.c:724
 msgid "Unknown Finger"
 msgstr "אצבע לא ידועה"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:837
+#: panels/user-accounts/cc-fingerprint-dialog.c:858
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "הושלם"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:848
+#: panels/user-accounts/cc-fingerprint-dialog.c:869
 msgid "Fingerprint device disconnected"
 msgstr "התקן טביעת האצבע התנתק"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:854
+#: panels/user-accounts/cc-fingerprint-dialog.c:875
 msgid "Fingerprint device storage is full"
 msgstr "אחסון התקן טביעת האצבע מלא"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:858
+#: panels/user-accounts/cc-fingerprint-dialog.c:879
 msgid "Failed to enroll new fingerprint"
 msgstr "רישום טביעת אצבע חדשה נכשל"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:889
+#: panels/user-accounts/cc-fingerprint-dialog.c:910
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "התחלת הרישום נכשלה: ‏%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:897
+#: panels/user-accounts/cc-fingerprint-dialog.c:918
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "רישום טביעת אצבע חדשה נכשל"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:928
+#: panels/user-accounts/cc-fingerprint-dialog.c:949
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "עצירת הרישום נכשלה: ‏%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:974
+#: panels/user-accounts/cc-fingerprint-dialog.c:995
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr "יש לחזור על הרמת והנחת האצבע על הקורא כדי לרשום את טביעת האצבע שלך"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1118
+#: panels/user-accounts/cc-fingerprint-dialog.c:1147
 msgid "Scan new fingerprint"
 msgstr "סריקת טביעת אצבע חדשה"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1157
+#: panels/user-accounts/cc-fingerprint-dialog.c:1185
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "שחרור התקן טביעת אצבע %s נכשל: ‏%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1229
+#: panels/user-accounts/cc-fingerprint-dialog.c:1257
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "בעיה בקריאת התקן"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1264
+#: panels/user-accounts/cc-fingerprint-dialog.c:1292
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "טעינת התקן טביעת אצבע %s נכשלה: ‏%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1413
+#: panels/user-accounts/cc-fingerprint-dialog.c:1441
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "קבלת התקני טביעת אצבע נכשלה: ‏%s"
 
-#: panels/user-accounts/cc-login-history-dialog.c:69
+#: panels/user-accounts/cc-login-history-dialog.c:71
 msgid "This Week"
 msgstr "השבוע"
 
-#: panels/user-accounts/cc-login-history-dialog.c:72
+#: panels/user-accounts/cc-login-history-dialog.c:74
 msgid "Last Week"
 msgstr "השבוע האחרון"
 
@@ -7367,22 +7355,22 @@ msgstr "השבוע האחרון"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:82
-#: panels/user-accounts/cc-login-history-dialog.c:86
+#: panels/user-accounts/cc-login-history-dialog.c:84
+#: panels/user-accounts/cc-login-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%e ב%b"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:91
+#: panels/user-accounts/cc-login-history-dialog.c:93
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%e ב%b, %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: panels/user-accounts/cc-login-history-dialog.c:96
+#: panels/user-accounts/cc-login-history-dialog.c:98
 #, c-format
 msgctxt "login history week label"
 msgid "%s — %s"
@@ -7390,73 +7378,75 @@ msgstr "‏%s – %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:780
+#: panels/user-accounts/cc-login-history-dialog.c:179
+#: panels/user-accounts/cc-user-panel.c:684
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:784
+#: panels/user-accounts/cc-login-history-dialog.c:182
+#: panels/user-accounts/cc-user-panel.c:688
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: panels/user-accounts/cc-login-history-dialog.c:243
+#: panels/user-accounts/cc-login-history-dialog.c:238
 msgid "Session Ended"
 msgstr "הפעלה הסתיימה"
 
-#: panels/user-accounts/cc-login-history-dialog.c:249
+#: panels/user-accounts/cc-login-history-dialog.c:244
 msgid "Session Started"
 msgstr "הפעלה התחילה"
 
 #. Translators: This is the title of the "Account Activity" dialog.
 #. The %s is the user real name.
-#: panels/user-accounts/cc-login-history-dialog.c:343
+#: panels/user-accounts/cc-login-history-dialog.c:339
 #, c-format
 msgid "%s — Account Activity"
 msgstr "‏‏%s – פעילות בחשבון"
 
-#: panels/user-accounts/cc-password-dialog.c:125
+#: panels/user-accounts/cc-password-dialog.c:133
 msgid "Please choose another password."
 msgstr "נא לבחור בססמה אחרת."
 
-#: panels/user-accounts/cc-password-dialog.c:134
+#: panels/user-accounts/cc-password-dialog.c:142
 msgid "Please type your current password again."
 msgstr "נא להזין את הססמה הנוכחית שלך שוב."
 
-#: panels/user-accounts/cc-password-dialog.c:140
+#: panels/user-accounts/cc-password-dialog.c:148
 msgid "Password could not be changed"
 msgstr "לא ניתן להחליף את הססמה"
 
-#: panels/user-accounts/cc-password-dialog.ui:7
+#: panels/user-accounts/cc-password-dialog.ui:4
 msgid "Change Password"
 msgstr "החלפת ססמה"
 
-#: panels/user-accounts/cc-password-dialog.ui:37
+#: panels/user-accounts/cc-password-dialog.ui:32
 msgid "Ch_ange"
 msgstr "ה_חלפה"
 
-#: panels/user-accounts/cc-password-dialog.ui:145
-msgid "_Confirm New Password"
-msgstr "_אימות הססמה החדשה"
+#: panels/user-accounts/cc-password-dialog.ui:51
+#| msgid "Current _Password"
+msgid "Current Password"
+msgstr "ססמה נוכחית"
 
-#: panels/user-accounts/cc-password-dialog.ui:162
-msgid "_New Password"
-msgstr "ססמה _חדשה"
+#: panels/user-accounts/cc-password-dialog.ui:76
+#| msgid "_New Password"
+msgid "New Password"
+msgstr "ססמה חדשה"
 
-#: panels/user-accounts/cc-password-dialog.ui:216
-msgid "Current _Password"
-msgstr "ססמה _נוכחית"
+#: panels/user-accounts/cc-password-dialog.ui:121
+msgid "Confirm Password"
+msgstr "אימות ססמה"
 
-#: panels/user-accounts/cc-password-dialog.ui:254
+#: panels/user-accounts/cc-password-dialog.ui:175
 msgid "Allow user to change their password on next login"
 msgstr "לאפשר למשתמש לשנות את הססמה בהתחברות הבאה"
 
-#: panels/user-accounts/cc-password-dialog.ui:267
+#: panels/user-accounts/cc-password-dialog.ui:186
 msgid "Set a password now"
 msgstr "הגדרת ססמה כעת"
 
@@ -7483,41 +7473,37 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל התחום %s:‏ %s"
 
-#: panels/user-accounts/cc-user-panel.c:222
-msgid "Your account"
-msgstr "החשבון שלך"
-
-#: panels/user-accounts/cc-user-panel.c:411
+#: panels/user-accounts/cc-user-panel.c:313
 msgid "Failed to delete user"
 msgstr "מחיקת משתמש נכשלה"
 
-#: panels/user-accounts/cc-user-panel.c:466
-#: panels/user-accounts/cc-user-panel.c:521
-#: panels/user-accounts/cc-user-panel.c:567
+#: panels/user-accounts/cc-user-panel.c:370
+#: panels/user-accounts/cc-user-panel.c:425
+#: panels/user-accounts/cc-user-panel.c:471
 msgid "Failed to revoke remotely managed user"
 msgstr "ביטול המשתמש המנוהל מרחוק נכשל"
 
-#: panels/user-accounts/cc-user-panel.c:616
+#: panels/user-accounts/cc-user-panel.c:520
 msgid "You cannot delete your own account."
 msgstr "מחיקת החשבון שלך על ידיך אינה אפשרית."
 
-#: panels/user-accounts/cc-user-panel.c:625
+#: panels/user-accounts/cc-user-panel.c:529
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: panels/user-accounts/cc-user-panel.c:629
+#: panels/user-accounts/cc-user-panel.c:533
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:542
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "לשמור על הקבצים של %s?"
 
-#: panels/user-accounts/cc-user-panel.c:642
+#: panels/user-accounts/cc-user-panel.c:546
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7525,75 +7511,67 @@ msgstr ""
 "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
 "משתמש."
 
-#: panels/user-accounts/cc-user-panel.c:645
+#: panels/user-accounts/cc-user-panel.c:549
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:550
 msgid "_Keep Files"
 msgstr "_שמירת הקבצים"
 
-#: panels/user-accounts/cc-user-panel.c:660
+#: panels/user-accounts/cc-user-panel.c:564
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "לשלול את החשבון של %s שמנוהל מרחוק?"
 
-#: panels/user-accounts/cc-user-panel.c:664
+#: panels/user-accounts/cc-user-panel.c:568
 msgid "_Delete"
 msgstr "מ_חיקה"
 
-#: panels/user-accounts/cc-user-panel.c:714
+#: panels/user-accounts/cc-user-panel.c:618
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מושבת"
 
-#: panels/user-accounts/cc-user-panel.c:722
+#: panels/user-accounts/cc-user-panel.c:626
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: panels/user-accounts/cc-user-panel.c:725
+#: panels/user-accounts/cc-user-panel.c:629
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: panels/user-accounts/cc-user-panel.c:768
+#: panels/user-accounts/cc-user-panel.c:672
 msgid "Logged in"
 msgstr "נכנסת"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:855
-#: panels/user-accounts/cc-user-panel.c:952
+#: panels/user-accounts/cc-user-panel.c:759
+#: panels/user-accounts/cc-user-panel.c:862
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "פעיל"
 
-#: panels/user-accounts/cc-user-panel.c:1276
+#: panels/user-accounts/cc-user-panel.c:1184
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: panels/user-accounts/cc-user-panel.c:1278
+#: panels/user-accounts/cc-user-panel.c:1186
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#. Translator comments:
-#. * We split the line in 2 here to "make it look good", as there's
-#. * no good way to do this in GTK+ for tooltips. See:
-#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1310
-msgid ""
-"To make changes,\n"
-"click the * icon first"
-msgstr ""
-"כדי לערוך שינויים,\n"
-"ראשית יש ללחוץ על הסמל *"
+#: panels/user-accounts/cc-user-panel.c:1207
+msgid "This panel must be unlocked to change this setting"
+msgstr "יש הכרח לשחרר לוח זה על מנת לשנות הגדרה זו"
 
-#: panels/user-accounts/cc-user-panel.c:1383
+#: panels/user-accounts/cc-user-panel.c:1274
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: panels/user-accounts/cc-user-panel.c:1395
-#: panels/user-accounts/cc-user-panel.c:1506
+#: panels/user-accounts/cc-user-panel.c:1278
+#: panels/user-accounts/cc-user-panel.c:1387
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7601,86 +7579,77 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1552
+#: panels/user-accounts/cc-user-panel.c:1427
 msgid "Unlock to Add Users and Change Settings"
 msgstr "שחרור להוספת משתמשים ולשינוי הגדרות"
 
-#: panels/user-accounts/cc-user-panel.ui:6
-msgid "_Add User…"
-msgstr "הו_ספת משתמש…"
+#: panels/user-accounts/cc-user-panel.ui:23
+#: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
+msgid "Users"
+msgstr "משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:9
-msgid "Create a user account"
-msgstr "יצירת חשבון משתמש"
-
-#: panels/user-accounts/cc-user-panel.ui:64
+#: panels/user-accounts/cc-user-panel.ui:60
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr ""
 "יש להפעיל מחדש את ההפעלה שלך כדי שהשינויים ייכנסו לתוקף (יש לצאת ולהיכנס)"
 
-#: panels/user-accounts/cc-user-panel.ui:72
+#: panels/user-accounts/cc-user-panel.ui:67
 msgid "Restart Now"
 msgstr "הפעלה מחדש כעת"
 
-#: panels/user-accounts/cc-user-panel.ui:157
-#: panels/user-accounts/cc-user-panel.ui:173
-msgid "User Icon"
-msgstr "סמל משתמש"
+#. FIXME
+#: panels/user-accounts/cc-user-panel.ui:188
+msgid "_Fingerprint Login"
+msgstr "כניסה באמצעות _טביעת אצבע"
 
-#: panels/user-accounts/cc-user-panel.ui:249
-msgid "Account Settings"
-msgstr "הגדרות משתמש"
+#: panels/user-accounts/cc-user-panel.ui:211
+msgid "A_utomatic Login"
+msgstr "כניסה _אוטומטית"
 
-#: panels/user-accounts/cc-user-panel.ui:267
+#: panels/user-accounts/cc-user-panel.ui:224
+msgid "Account Activity"
+msgstr "פעילות בחשבון"
+
+#: panels/user-accounts/cc-user-panel.ui:252
 msgid "_Administrator"
 msgstr "_מנהל"
 
-#: panels/user-accounts/cc-user-panel.ui:268
+#: panels/user-accounts/cc-user-panel.ui:253
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
 msgstr "מנהל יכול להוסיף ולהסיר משתמשים, וכן לשנות הגדרות עבור כלל המשתמשים."
 
-#: panels/user-accounts/cc-user-panel.ui:284
+#: panels/user-accounts/cc-user-panel.ui:269
 msgid "_Parental Controls"
 msgstr "_בקרת הורים"
 
-#: panels/user-accounts/cc-user-panel.ui:285
+#: panels/user-accounts/cc-user-panel.ui:270
 msgid "Open the Parental Controls application."
 msgstr "פתיחת יישום בקרת הורים."
 
-#: panels/user-accounts/cc-user-panel.ui:347
-msgid "Authentication & Login"
-msgstr "אימות והתחברות"
-
-#: panels/user-accounts/cc-user-panel.ui:390
-msgid "_Fingerprint Login"
-msgstr "כניסה באמצעות _טביעת אצבע"
-
-#: panels/user-accounts/cc-user-panel.ui:415
-msgid "A_utomatic Login"
-msgstr "כניסה _אוטומטית"
-
-#: panels/user-accounts/cc-user-panel.ui:430
-msgid "Account Activity"
-msgstr "פעילות בחשבון"
-
-#: panels/user-accounts/cc-user-panel.ui:461
+#: panels/user-accounts/cc-user-panel.ui:321
 msgid "Remove User…"
 msgstr "הסרת משתמש…"
 
+#: panels/user-accounts/cc-user-panel.ui:333
+#| msgid "Other Files"
+msgid "Other Users"
+msgstr "משתמשים אחרים"
+
+#: panels/user-accounts/cc-user-panel.ui:346
+#| msgid "_Add User…"
+msgid "Add User…"
+msgstr "הוספת משתמש…"
+
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:502
+#: panels/user-accounts/cc-user-panel.ui:374
 msgid "No Users Found"
 msgstr "לא נמצאו משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:512
+#: panels/user-accounts/cc-user-panel.ui:383
 msgid "Unlock to add a user account."
 msgstr "שחרור על מנת להוסיף משתמש."
-
-#: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
-msgid "Users"
-msgstr "משתמשים"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:4
 msgid "Add or remove users and change your password"
@@ -7698,15 +7667,15 @@ msgstr ""
 "בת;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/user-accounts/data/join-dialog.ui:39
+#: panels/user-accounts/data/join-dialog.ui:30
 msgid "_Enroll"
 msgstr "ה_רשמה"
 
-#: panels/user-accounts/data/join-dialog.ui:75
+#: panels/user-accounts/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
 msgstr "כניסת מנהל המתחם"
 
-#: panels/user-accounts/data/join-dialog.ui:93
+#: panels/user-accounts/data/join-dialog.ui:72
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -7716,11 +7685,11 @@ msgstr ""
 "במתחם. נא לבקש ממנהל הרשת להקליד את ססמת המתחם\n"
 "שלו להלן."
 
-#: panels/user-accounts/data/join-dialog.ui:150
+#: panels/user-accounts/data/join-dialog.ui:112
 msgid "Administrator _Name"
 msgstr "_שם המנהל"
 
-#: panels/user-accounts/data/join-dialog.ui:185
+#: panels/user-accounts/data/join-dialog.ui:135
 msgid "Administrator Password"
 msgstr "ססמת מנהל"
 
@@ -7885,7 +7854,7 @@ msgstr "הססמה החדשה לא מכילה מספיק תווים השונים
 msgid "Unknown error"
 msgstr "שגיאה בלתי ידועה"
 
-#: panels/user-accounts/user-utils.c:432
+#: panels/user-accounts/user-utils.c:144
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
@@ -7893,17 +7862,13 @@ msgstr ""
 "שם המשתמש יכול להכיל רק אותיות קטנות מהאלפבית האנגלי, ספרות ואחד  מהתווים: . "
 "- _"
 
-#: panels/user-accounts/user-utils.c:436
+#: panels/user-accounts/user-utils.c:148
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "למרבה הצער, שם משתמש זה אינו זמין. יש לנסות שם אחר."
 
-#: panels/user-accounts/user-utils.c:478
+#: panels/user-accounts/user-utils.c:190
 msgid "The username is too long."
 msgstr "שם המשתמש ארוך מדי."
-
-#: panels/user-accounts/user-utils.c:537
-msgid "This will be used to name your home folder and can’t be changed."
-msgstr "שם זה ישמש לשם תיקיית הבית שלך ולא יהיה ניתן לשנותו."
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:38
 msgid "Map Buttons"
@@ -7969,18 +7934,15 @@ msgid "Tablet mounted on external display"
 msgstr "מחשב לוח מעוגן על צג חיצוני"
 
 #: panels/wacom/cc-wacom-device.c:435
-#| msgid "Use bluetooth devices"
 msgid "External tablet device"
 msgstr "מחשב לוח חיצוני"
 
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:630
-#| msgid "Displays"
 msgid "All Displays"
 msgstr "כל הצגים"
 
 #: panels/wacom/cc-wacom-page.ui:16
-#| msgid "Tablet"
 msgid "Tablet Mode"
 msgstr "מצב מחשב לוח"
 
@@ -7989,7 +7951,6 @@ msgid "Use absolute positioning for the pen"
 msgstr "שימוש במיקום מוחלט עבור העט"
 
 #: panels/wacom/cc-wacom-page.ui:27
-#| msgid "Left-Handed Orientation"
 msgid "Left Hand Orientation"
 msgstr "התאמה הכיווניות לשמאליים"
 
@@ -7998,13 +7959,11 @@ msgid "Tablet and Express Keys™ are rotated for left hand use"
 msgstr "מחשב לוח וכפתורים מותאמים (Express Keys™) מסובבים לשימוש שמאליים"
 
 #: panels/wacom/cc-wacom-page.ui:56
-#| msgid "Map to Monitor…"
 msgctxt "display setting"
 msgid "Map to Monitor"
 msgstr "מיפוי לצג"
 
 #: panels/wacom/cc-wacom-page.ui:62
-#| msgid "Aspect Ratio"
 msgid "Keep Aspect Ratio"
 msgstr "שמירה על יחס התצוגה"
 
@@ -8013,7 +7972,6 @@ msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr "שימוש חלק במשטח מחשב הלוח על מנת לשמור על יחס תצוגה"
 
 #: panels/wacom/cc-wacom-page.ui:73
-#| msgid "Calibrate…"
 msgid "Calibrate"
 msgstr "כיול"
 
@@ -8022,19 +7980,16 @@ msgid "Tip Pressure Feel"
 msgstr "תחושת לחץ החוד"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:54
-#| msgid "Button"
 msgctxt "display setting"
 msgid "Button 1"
 msgstr "לחצן 1"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:62
-#| msgid "Button"
 msgctxt "display setting"
 msgid "Button 2"
 msgstr "לחצן 2"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:70
-#| msgid "Button"
 msgctxt "display setting"
 msgid "Button 3"
 msgstr "לחצן 3"
@@ -8695,6 +8650,55 @@ msgstr[3] "‏‫%u ערוצי קלט"
 msgid "System Sounds"
 msgstr "צלילי מערכת"
 
+#~ msgid "_Full Name"
+#~ msgstr "שם מ_לא"
+
+#~ msgid "Standard"
+#~ msgstr "רגיל"
+
+#~ msgid "Account _Type"
+#~ msgstr "_סוג החשבון"
+
+#~ msgid "Allow user to set a password when they next _login"
+#~ msgstr "בחירת ססמה ב_כניסה הבאה"
+
+#~ msgid "Set a password _now"
+#~ msgstr "הגדרת ססמה _כעת"
+
+#~ msgid "You must be online in order to add enterprise users."
+#~ msgstr "עליך להתחבר לרשת כדי להוסיף משתמשים ארגוניים."
+
+#~ msgid "Take a Picture…"
+#~ msgstr "צילום תמונה…"
+
+#~ msgid "_Confirm New Password"
+#~ msgstr "_אימות הססמה החדשה"
+
+#~ msgid "Your account"
+#~ msgstr "החשבון שלך"
+
+#~ msgid ""
+#~ "To make changes,\n"
+#~ "click the * icon first"
+#~ msgstr ""
+#~ "כדי לערוך שינויים,\n"
+#~ "ראשית יש ללחוץ על הסמל *"
+
+#~ msgid "Create a user account"
+#~ msgstr "יצירת חשבון משתמש"
+
+#~ msgid "User Icon"
+#~ msgstr "סמל משתמש"
+
+#~ msgid "Account Settings"
+#~ msgstr "הגדרות משתמש"
+
+#~ msgid "Authentication & Login"
+#~ msgstr "אימות והתחברות"
+
+#~ msgid "This will be used to name your home folder and can’t be changed."
+#~ msgstr "שם זה ישמש לשם תיקיית הבית שלך ולא יהיה ניתן לשנותו."
+
 #~ msgid "Save a screenshot to $PICTURES"
 #~ msgstr "שמירת צילום מסך לתיקייה $PICTURES"
 
@@ -8874,9 +8878,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Video Files"
 #~ msgstr "קובצי וידאו"
-
-#~ msgid "Other Files"
-#~ msgstr "קבצים אחרים"
 
 #~ msgid "Permissions & Access"
 #~ msgstr "הרשאות וגישה"
@@ -10716,10 +10717,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "_Stealth Mode"
 #~ msgstr "מ_צב חשאיות"
-
-#, fuzzy
-#~ msgid "_Confirm Password"
-#~ msgstr "_אימות הססמה"
 
 #~ msgid "_Login Name"
 #~ msgstr "שם ה_כניסה"
