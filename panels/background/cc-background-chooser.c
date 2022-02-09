@@ -119,8 +119,6 @@ create_widget_func (gpointer model_item,
 
   g_object_bind_property (picture, "scale-factor",
                           paintable, "scale-factor", G_BINDING_SYNC_CREATE);
-  g_object_bind_property (picture, "text-direction",
-                          paintable, "text-direction", G_BINDING_SYNC_CREATE);
   g_signal_connect_object (picture, "direction-changed",
                            G_CALLBACK (direction_changed_cb), paintable, 0);
 
