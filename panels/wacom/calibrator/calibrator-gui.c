@@ -39,9 +39,6 @@ struct CalibArea
   gboolean     success;
   GdkDevice   *device;
 
-  double X[4], Y[4];
-  int display_width, display_height;
-
   GtkWidget  *window;
   GtkBuilder *builder;
   GtkWidget  *error_revealer;
@@ -55,37 +52,6 @@ struct CalibArea
 /* Timeout parameters */
 #define MAX_TIME                15000 /* 15000 = 15 sec */
 #define END_TIME                750   /*  750 = 0.75 sec */
-
-static void
-set_display_size (CalibArea *calib_area,
-                  int        width,
-                  int        height)
-{
-  int delta_x;
-  int delta_y;
-
-  calib_area->display_width = width;
-  calib_area->display_height = height;
-
-  /* Compute absolute circle centers */
-  delta_x = calib_area->display_width/NUM_BLOCKS;
-  delta_y = calib_area->display_height/NUM_BLOCKS;
-
-  calib_area->X[UL] = delta_x;
-  calib_area->Y[UL] = delta_y;
-
-  calib_area->X[UR] = calib_area->display_width - delta_x - 1;
-  calib_area->Y[UR] = delta_y;
-
-  calib_area->X[LL] = delta_x;
-  calib_area->Y[LL] = calib_area->display_height - delta_y - 1;
-
-  calib_area->X[LR] = calib_area->display_width - delta_x - 1;
-  calib_area->Y[LR] = calib_area->display_height - delta_y - 1;
-
-  /* reset calibration if already started */
-  reset (&calib_area->calibrator);
-}
 
 static void
 calib_area_notify_finish (CalibArea *area)
@@ -275,14 +241,6 @@ on_fullscreen (GtkWindow  *window,
   set_active_target (area, 0);
 }
 
-static void
-on_size_allocate (GtkWidget     *widget,
-                  GtkAllocation *allocation,
-                  CalibArea     *area)
-{
-  set_display_size (area, allocation->width, allocation->height);
-}
-
 /**
  * Creates the windows and other objects required to do calibration
  * under GTK. When the window is closed (timed out, calibration finished
@@ -359,10 +317,6 @@ calib_area_new (GdkDisplay     *display,
   g_signal_connect (calib_area->window,
                     "notify::fullscreened",
                     G_CALLBACK (on_fullscreen),
-                    calib_area);
-  g_signal_connect (calib_area->window,
-                    "size-allocate",
-                    G_CALLBACK (on_size_allocate),
                     calib_area);
 
   click = gtk_gesture_click_new ();
