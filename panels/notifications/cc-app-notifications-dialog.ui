@@ -16,7 +16,6 @@
                 <property name="activatable-widget">notifications_switch</property>
                 <child>
                   <object class="GtkSwitch" id="notifications_switch">
-                    <property name="halign">end</property>
                     <property name="valign">center</property>
                     <property name="active">True</property>
                     <signal name="notify::active" handler="notifications_switch_state_set_cb" swapped="no"/>
@@ -31,7 +30,6 @@
                 <property name="activatable-widget">sound_alerts_switch</property>
                 <child>
                   <object class="GtkSwitch" id="sound_alerts_switch">
-                    <property name="halign">end</property>
                     <property name="valign">center</property>
                     <signal name="notify::active" handler="sound_alerts_switch_state_set_cb" swapped="no"/>
                   </object>
@@ -46,7 +44,6 @@
                 <property name="activatable-widget">notification_banners_switch</property>
                 <child>
                   <object class="GtkSwitch" id="notification_banners_switch">
-                    <property name="halign">end</property>
                     <property name="valign">center</property>
                     <signal name="notify::active" handler="notification_banners_switch_state_set_cb" swapped="no"/>
                   </object>
@@ -60,7 +57,6 @@
                 <property name="activatable-widget">notification_banners_content_switch</property>
                 <child>
                   <object class="GtkSwitch" id="notification_banners_content_switch">
-                    <property name="halign">end</property>
                     <property name="valign">center</property>
                     <signal name="notify::active" handler="notification_banners_content_switch_state_set_cb" swapped="no"/>
                   </object>
@@ -74,7 +70,6 @@
                 <property name="activatable-widget">lock_screen_notifications_switch</property>
                 <child>
                   <object class="GtkSwitch" id="lock_screen_notifications_switch">
-                    <property name="halign">end</property>
                     <property name="valign">center</property>
                     <signal name="notify::active" handler="lock_screen_notifications_switch_state_set_cb" swapped="no"/>
                   </object>
@@ -88,7 +83,6 @@
                 <property name="activatable-widget">lock_screen_content_switch</property>
                 <child>
                   <object class="GtkSwitch" id="lock_screen_content_switch">
-                    <property name="halign">end</property>
                     <property name="valign">center</property>
                     <signal name="notify::active" handler="lock_screen_content_switch_state_set_cb" swapped="no"/>
                   </object>
