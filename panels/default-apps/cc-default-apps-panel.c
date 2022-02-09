@@ -125,8 +125,8 @@ default_app_changed (CcDefaultAppsPanel  *self,
 static void
 info_panel_setup_default_app (CcDefaultAppsPanel *self,
                               DefaultAppData     *data,
-                              guint               left_attach,
-                              guint               top_attach)
+                              guint               column,
+                              guint               row)
 {
   GtkWidget *button;
   GtkWidget *label;
@@ -135,8 +135,7 @@ info_panel_setup_default_app (CcDefaultAppsPanel *self,
   g_object_set_data (G_OBJECT (button), "cc-default-app-data", data);
 
   gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
-  gtk_grid_attach (GTK_GRID (self->default_apps_grid), button, left_attach, top_attach,
-                   1, 1);
+  gtk_grid_attach (GTK_GRID (self->default_apps_grid), button, column, row, 1, 1);
   g_signal_connect_object (G_OBJECT (button), "changed",
                            G_CALLBACK (default_app_changed), self, G_CONNECT_SWAPPED);
 
