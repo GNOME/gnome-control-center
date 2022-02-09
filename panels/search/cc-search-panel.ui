@@ -38,6 +38,9 @@
             <property name="description" translatable="yes">Results are displayed according to the list order.</property>
             <child>
               <object class="GtkListBox" id="list_box">
+                <property name="selection-mode">none</property>
+                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchPanel" swapped="yes"/>
+                <accessibility name="labelled-by">search_group</accessibility>
                 <style>
                   <class name="boxed-list"/>
                 </style>

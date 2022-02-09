@@ -46,6 +46,21 @@ CC_PANEL_REGISTER (CcSearchPanel, cc_search_panel)
 
 #define SHELL_PROVIDER_GROUP "Shell Search Provider"
 
+static gboolean
+keynav_failed_cb (CcSearchPanel *self, GtkDirectionType direction, GtkWidget *list)
+{
+  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+
+  if (!toplevel)
+    return FALSE;
+
+  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
+    return FALSE;
+
+  return gtk_widget_child_focus (toplevel, direction == GTK_DIR_UP ?
+                                 GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD);
+}
+
 static gint
 list_sort_func (gconstpointer a,
                 gconstpointer b,
@@ -664,4 +679,5 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSearchPanel, settings_row);
 
   gtk_widget_class_bind_template_callback (widget_class, settings_row_activated);
+  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
 }
