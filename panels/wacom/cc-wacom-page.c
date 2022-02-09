@@ -217,23 +217,10 @@ run_calibration (CcWacomPage *page,
 		 gdouble     *cal,
 		 GdkMonitor  *monitor)
 {
-	GdkDisplay *display = gdk_monitor_get_display (monitor);
-  GListModel *monitors;
-	guint i, n_monitor = 0;
-
 	g_assert (page->area == NULL);
 
-  monitors = gdk_display_get_monitors (display);
-	for (i = 0; i < g_list_model_get_n_items (monitors); i++) {
-    g_autoptr(GdkMonitor) m = g_list_model_get_item (monitors, i);
-		if (monitor == m) {
-			n_monitor = i;
-			break;
-		}
-	}
-
 	page->area = cc_calib_area_new (NULL,
-                                        n_monitor,
+                                        monitor,
                                         cc_wacom_page_get_gdk_device (page),
                                         finish_calibration,
                                         page,

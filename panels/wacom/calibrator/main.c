@@ -403,7 +403,7 @@ int main(int argc, char** argv)
     g_setenv ("G_MESSAGES_DEBUG", "all", TRUE);
 
     calib_area = cc_calib_area_new (NULL,
-                                    0,  /* monitor */
+                                    NULL,  /* monitor */
                                     NULL, /* NULL to accept input from any device */
                                     calibration_finished_cb,
                                     NULL,

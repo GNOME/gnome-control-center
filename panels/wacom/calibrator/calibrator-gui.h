@@ -42,7 +42,7 @@ G_DECLARE_FINAL_TYPE (CcCalibArea, cc_calib_area, CC, CALIB_AREA, GtkWindow)
 typedef void (*FinishCallback) (CcCalibArea *area, gpointer user_data);
 
 CcCalibArea * cc_calib_area_new (GdkDisplay      *display,
-                                 int             monitor,
+                                 GdkMonitor     *monitor,
                                  GdkDevice      *device,
                                  FinishCallback  callback,
                                  gpointer        user_data,

@@ -340,7 +340,7 @@ cc_calib_area_init (CcCalibArea *calib_area)
  */
 CcCalibArea *
 cc_calib_area_new (GdkDisplay     *display,
-                   int             n_monitor,
+                   GdkMonitor     *monitor,
                    GdkDevice      *device,
                    FinishCallback  callback,
                    gpointer        user_data,
@@ -348,7 +348,6 @@ cc_calib_area_new (GdkDisplay     *display,
                    int             threshold_misclick)
 {
   CcCalibArea *calib_area;
-  g_autoptr(GdkMonitor) monitor = NULL;
 
   g_return_val_if_fail (callback, NULL);
 
@@ -360,11 +359,11 @@ cc_calib_area_new (GdkDisplay     *display,
   calib_area->calibrator.threshold_misclick = threshold_misclick;
 
   /* Move to correct screen */
-  if (display == NULL)
-    display = gdk_display_get_default ();
-  monitor = g_list_model_get_item (gdk_display_get_monitors (display), n_monitor);
+  if (monitor)
+    gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area), monitor);
+  else
+    gtk_window_fullscreen (GTK_WINDOW (calib_area));
 
-  gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area), monitor);
   gtk_widget_show (GTK_WIDGET (calib_area));
 
   return calib_area;
