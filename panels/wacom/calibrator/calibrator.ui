@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk+" version="3.20"/>
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkWindow" id="window">
     <property name="name">calibrator</property>
-    <child>
+    <property name="child">
       <object class="GtkStack" id="stack">
         <property name="transition_duration">0</property>
         <child>
           <object class="GtkGrid">
-            <property name="row_homogeneous">True</property>
-            <property name="column_homogeneous">True</property>
+            <property name="row_homogeneous">1</property>
+            <property name="column_homogeneous">1</property>
             <child>
               <object class="GtkBox">
                 <property name="orientation">vertical</property>
@@ -22,48 +22,48 @@
                 <child>
                   <object class="GtkBox" id="box1">
                     <property name="orientation">vertical</property>
-                    <property name="vexpand">True</property>
+                    <property name="vexpand">1</property>
                   </object>
                 </child>
                 <child>
-                  <object class="CcClock" id="clock" />
+                  <object class="CcClock" id="clock"/>
                 </child>
                 <child>
                   <object class="GtkBox" id="box2">
                     <property name="orientation">vertical</property>
-                    <property name="vexpand">True</property>
+                    <property name="vexpand">1</property>
                     <child>
                       <object class="GtkRevealer" id="title_revealer">
                         <property name="transition_duration">300</property>
-                        <child>
+                        <property name="child">
                           <object class="GtkLabel">
                             <property name="name">title</property>
-                            <property name="label" translatable="yes">Screen Calibration</property>
+                            <property name="label" translatable="1">Screen Calibration</property>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkRevealer" id="subtitle_revealer">
                         <property name="transition_duration">300</property>
-                        <child>
+                        <property name="child">
                           <object class="GtkLabel">
                             <property name="name">subtitle</property>
-                            <property name="label" translatable="yes">Please tap the target markers as they appear on screen to calibrate the tablet.</property>
+                            <property name="label" translatable="1">Please tap the target markers as they appear on screen to calibrate the tablet.</property>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
                     <child>
                       <object class="GtkRevealer" id="error_revealer">
                         <property name="transition_type">crossfade</property>
                         <property name="transition_duration">500</property>
-                        <child>
+                        <property name="child">
                           <object class="GtkLabel">
                             <property name="name">error</property>
-                            <property name="label" translatable="yes">Mis-click detected, restarting…</property>
+                            <property name="label" translatable="1">Mis-click detected, restarting…</property>
                           </object>
-                        </child>
+                        </property>
                       </object>
                     </child>
                   </object>
@@ -71,12 +71,11 @@
               </object>
             </child>
             <child>
-              <object class="GtkEventBox" id="target1">
+              <object class="GtkImage" id="target1">
                 <property name="name">target</property>
                 <property name="width_request">100</property>
                 <property name="height_request">100</property>
-                <property name="visible_window">True</property>
-                <property name="sensitive">False</property>
+                <property name="sensitive">0</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">0</property>
@@ -86,12 +85,11 @@
               </object>
             </child>
             <child>
-              <object class="GtkEventBox" id="target2">
+              <object class="GtkImage" id="target2">
                 <property name="name">target</property>
                 <property name="width_request">100</property>
                 <property name="height_request">100</property>
-                <property name="visible_window">True</property>
-                <property name="sensitive">False</property>
+                <property name="sensitive">0</property>
                 <layout>
                   <property name="column">6</property>
                   <property name="row">0</property>
@@ -101,12 +99,11 @@
               </object>
             </child>
             <child>
-              <object class="GtkEventBox" id="target3">
+              <object class="GtkImage" id="target3">
                 <property name="name">target</property>
                 <property name="width_request">100</property>
                 <property name="height_request">100</property>
-                <property name="visible_window">True</property>
-                <property name="sensitive">False</property>
+                <property name="sensitive">0</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">6</property>
@@ -116,49 +113,29 @@
               </object>
             </child>
             <child>
-              <object class="GtkEventBox" id="target4">
+              <object class="GtkImage" id="target4">
                 <property name="name">target</property>
                 <property name="width_request">100</property>
                 <property name="height_request">100</property>
-                <property name="visible_window">True</property>
-                <property name="sensitive">False</property>
+                <property name="sensitive">0</property>
                 <layout>
                   <property name="column">6</property>
                   <property name="row">6</property>
                   <property name="column-span">2</property>
                   <property name="row-span">2</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkRevealer">
-                <property name="transition_type">none</property>
-                <property name="transition_duration">0</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">0</property>
-                  <property name="column-span">8</property>
-                  <property name="row-span">8</property>
                 </layout>
               </object>
             </child>
           </object>
-          <layout>
-            <property name="name">page0</property>
-          </layout>
         </child>
         <child>
-          <object class="GtkImage">
+          <object class="GtkImage" id="success">
             <property name="pixel_size">300</property>
             <property name="icon_name">emblem-ok-symbolic</property>
           </object>
-          <layout>
-            <property name="name">page1</property>
-            <property name="position">1</property>
-          </layout>
         </child>
       </object>
-    </child>
+    </property>
   </object>
   <object class="GtkSizeGroup">
     <property name="mode">vertical</property>

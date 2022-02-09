@@ -79,10 +79,11 @@ calib_area_finish_idle_cb (CalibArea *area)
 static void
 set_success (CalibArea *area)
 {
-  GtkWidget *stack;
+  GtkWidget *stack, *image;
 
   stack = GTK_WIDGET (gtk_builder_get_object (area->builder, "stack"));
-  gtk_stack_set_visible_child_name (GTK_STACK (stack), "page1");
+  image = GTK_WIDGET (gtk_builder_get_object (area->builder, "success"));
+  gtk_stack_set_visible_child (GTK_STACK (stack), image);
 }
 
 static void
@@ -179,31 +180,17 @@ on_gesture_press (GtkGestureClick *gesture,
 }
 
 static gboolean
-on_key_release_event (GtkWidget       *widget,
-                      guint            keyval,
-                      guint            keycode,
-                      GdkModifierType  state,
-                      CalibArea       *area)
+on_key_release (GtkEventControllerKey *controller,
+		guint                  keyval,
+		guint                  keycode,
+		GdkModifierType        state,
+		CalibArea             *area)
 {
   if (area->success || keyval != GDK_KEY_Escape)
     return GDK_EVENT_PROPAGATE;
 
   calib_area_notify_finish (area);
   return GDK_EVENT_STOP;
-}
-
-static gboolean
-on_focus_out_event (GtkWidget *widget,
-                    GdkEvent  *event,
-                    CalibArea *area)
-{
-  if (area->success)
-    return FALSE;
-
-  /* If the calibrator window loses focus, simply bail out... */
-  calib_area_notify_finish (area);
-
-  return FALSE;
 }
 
 static void
@@ -260,6 +247,7 @@ calib_area_new (GdkDisplay     *display,
   CalibArea *calib_area;
   GdkRectangle rect;
   GtkGesture *click;
+  GtkEventController *key;
 
   g_return_val_if_fail (callback, NULL);
 
@@ -303,16 +291,8 @@ calib_area_new (GdkDisplay     *display,
   calib_area->calibrator.geometry = rect;
 
   g_signal_connect (calib_area->window,
-                    "key-release-event",
-                    G_CALLBACK (on_key_release_event),
-                    calib_area);
-  g_signal_connect (calib_area->window,
                     "close-request",
                     G_CALLBACK (on_close_request),
-                    calib_area);
-  g_signal_connect (calib_area->window,
-                    "focus-out-event",
-                    G_CALLBACK(on_focus_out_event),
                     calib_area);
   g_signal_connect (calib_area->window,
                     "notify::fullscreened",
@@ -324,6 +304,11 @@ calib_area_new (GdkDisplay     *display,
   g_signal_connect (click, "pressed",
                     G_CALLBACK (on_gesture_press), calib_area);
   gtk_widget_add_controller (calib_area->window, GTK_EVENT_CONTROLLER (click));
+
+  key = gtk_event_controller_key_new ();
+  g_signal_connect (key, "key-released",
+                    G_CALLBACK (on_key_release), calib_area);
+  gtk_widget_add_controller (calib_area->window, key);
 
   gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area->window), monitor);
   gtk_widget_show (calib_area->window);
