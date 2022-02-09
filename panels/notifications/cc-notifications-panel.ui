@@ -6,25 +6,17 @@
         <child>
           <object class="AdwPreferencesGroup">
             <child>
-              <object class="GtkListBox" id="options_listbox">
-                <property name="selection_mode">none</property>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
-                <child>
-                  <object class="CcListRow" id="dnd_row">
-                    <property name="title" translatable="yes">_Do Not Disturb</property>
-                    <property name="use-underline">True</property>
-                    <property name="show-switch">True</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcListRow" id="lock_screen_row">
-                    <property name="title" translatable="yes">_Lock Screen Notifications</property>
-                    <property name="use-underline">True</property>
-                    <property name="show-switch">True</property>
-                  </object>
-                </child>
+              <object class="CcListRow" id="dnd_row">
+                <property name="title" translatable="yes">_Do Not Disturb</property>
+                <property name="use-underline">True</property>
+                <property name="show-switch">True</property>
+              </object>
+            </child>
+            <child>
+              <object class="CcListRow" id="lock_screen_row">
+                <property name="title" translatable="yes">_Lock Screen Notifications</property>
+                <property name="use-underline">True</property>
+                <property name="show-switch">True</property>
               </object>
             </child>
           </object>
