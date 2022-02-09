@@ -43,21 +43,39 @@ typedef struct {
 } Place;
 
 struct _CcSearchLocationsDialog {
-  GtkDialog parent;
+  AdwPreferencesWindow parent;
 
-  GSettings *tracker_preferences;
+  GSettings           *tracker_preferences;
 
-  GtkWidget *places_list;
-  GtkWidget *bookmarks_list;
-  GtkWidget *others_list;
-  GtkWidget *locations_add;
+  GtkWidget           *places_group;
+  GtkWidget           *places_list;
+  GtkWidget           *bookmarks_group;
+  GtkWidget           *bookmarks_list;
+  GtkWidget           *others_list;
+  GtkWidget           *locations_add;
 };
 
 struct _CcSearchLocationsDialogClass {
-  GtkDialogClass parent_class;
+  AdwPreferencesWindowClass parent_class;
 };
 
-G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, GTK_TYPE_DIALOG)
+G_DEFINE_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, ADW_TYPE_PREFERENCES_WINDOW)
+
+static gboolean
+keynav_failed_cb (CcSearchLocationsDialog *self,
+                  GtkDirectionType         direction)
+{
+  GtkWidget *toplevel = GTK_WIDGET (gtk_widget_get_root (GTK_WIDGET (self)));
+
+  if (!toplevel)
+    return FALSE;
+
+  if (direction != GTK_DIR_UP && direction != GTK_DIR_DOWN)
+    return FALSE;
+
+  return gtk_widget_child_focus (toplevel, direction == GTK_DIR_UP ?
+                                 GTK_DIR_TAB_BACKWARD : GTK_DIR_TAB_FORWARD);
+}
 
 static void
 cc_search_locations_dialog_finalize (GObject *object)
@@ -571,6 +589,20 @@ create_row_for_place (CcSearchLocationsDialog *self, Place *place)
 }
 
 static void
+update_list_visibility (CcSearchLocationsDialog *self)
+{
+  gtk_widget_set_visible (self->places_group,
+                          gtk_list_box_get_row_at_index (GTK_LIST_BOX (self->places_list), 0)
+                          != NULL);
+  gtk_widget_set_visible (self->bookmarks_group,
+                          gtk_list_box_get_row_at_index (GTK_LIST_BOX (self->bookmarks_list), 0)
+                          != NULL);
+  gtk_widget_set_visible (self->others_list,
+                          gtk_list_box_get_row_at_index (GTK_LIST_BOX (self->others_list), 0)
+                          != NULL);
+}
+
+static void
 populate_list_boxes (CcSearchLocationsDialog *self)
 {
   g_autoptr(GList) places = NULL;
@@ -599,6 +631,8 @@ populate_list_boxes (CcSearchLocationsDialog *self)
             g_assert_not_reached ();
         }
     }
+
+  update_list_visibility (self);
 }
 
 static void
@@ -668,6 +702,8 @@ other_places_refresh (CcSearchLocationsDialog *self)
       row = create_row_for_place (self, place);
       gtk_list_box_append (GTK_LIST_BOX (self->others_list), row);
     }
+
+  update_list_visibility (self);
 }
 
 CcSearchLocationsDialog *
@@ -679,9 +715,7 @@ cc_search_locations_dialog_new (CcSearchPanel *panel)
   GtkWidget *toplevel;
   CcShell *shell;
 
-  self = g_object_new (CC_SEARCH_LOCATIONS_DIALOG_TYPE,
-                       "use-header-bar", TRUE,
-                       NULL);
+  self = g_object_new (CC_SEARCH_LOCATIONS_DIALOG_TYPE, NULL);
 
   source = g_settings_schema_source_get_default ();
   schema = g_settings_schema_source_lookup (source, TRACKER3_SCHEMA, TRUE);
@@ -737,10 +771,13 @@ cc_search_locations_dialog_class_init (CcSearchLocationsDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/search/cc-search-locations-dialog.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, places_group);
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, places_list);
+  gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, bookmarks_group);
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, bookmarks_list);
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, others_list);
   gtk_widget_class_bind_template_child (widget_class, CcSearchLocationsDialog, locations_add);
 
   gtk_widget_class_bind_template_callback (widget_class, add_button_clicked);
+  gtk_widget_class_bind_template_callback (widget_class, keynav_failed_cb);
 }

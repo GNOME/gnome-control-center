@@ -1,132 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <template class="CcSearchLocationsDialog" parent="GtkDialog">
-    <property name="default_height">400</property>
-    <property name="default_width">360</property>
+  <template class="CcSearchLocationsDialog" parent="AdwPreferencesWindow">
     <property name="modal">True</property>
+    <property name="hide-on-close">True</property>
+    <property name="search-enabled">False</property>
     <property name="title" translatable="yes">Search Locations</property>
-    <property name="use_header_bar">1</property>
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="GtkNotebook">
-            <property name="show-border">False</property>
+          <object class="AdwPreferencesGroup">
+            <property name="description" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup" id="places_group">
+            <property name="title" translatable="yes">Places</property>
             <child>
-              <object class="GtkBox">
-                <property name="vexpand">True</property>
-                <property name="margin-top">35</property>
-                <property name="margin-bottom">35</property>
-                <property name="margin-start">35</property>
-                <property name="margin-end">35</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="wrap">True</property>
-                    <property name="margin-bottom">35</property>
-                    <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="places_list">
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                  </object>
-                </child>
+              <object class="GtkListBox" id="places_list">
+                <property name="selection-mode">none</property>
+                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
+                <accessibility name="labelled-by">places_group</accessibility>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
               </object>
             </child>
-            <child type="tab">
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Places</property>
-              </object>
-            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup" id="bookmarks_group">
+            <property name="title" translatable="yes">Bookmarks</property>
             <child>
-              <object class="GtkScrolledWindow">
-                <child>
-                  <object class="GtkBox">
-                    <property name="vexpand">True</property>
-                    <property name="margin-top">35</property>
-                    <property name="margin-bottom">35</property>
-                    <property name="margin-start">35</property>
-                    <property name="margin-end">35</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="wrap">True</property>
-                        <property name="margin-bottom">35</property>
-                        <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkListBox" id="bookmarks_list">
-                        <property name="hexpand">True</property>
-                        <property name="vexpand">True</property>
-                      </object>
-                    </child>
+              <object class="GtkListBox" id="bookmarks_list">
+                <property name="selection-mode">none</property>
+                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
+                <accessibility name="labelled-by">bookmarks_group</accessibility>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup" id="others_group">
+            <property name="title" translatable="yes">Others</property>
+            <property name="header-suffix">
+              <object class="GtkButton" id="locations_add">
+                <property name="valign">center</property>
+                <property name="child">
+                  <object class="AdwButtonContent">
+                    <property name="icon-name">list-add-symbolic</property>
+                    <property name="label" translatable="yes">Add Location</property>
                   </object>
-                </child>
+                </property>
+                <signal name="clicked" handler="add_button_clicked" object="CcSearchLocationsDialog" swapped="yes"/>
+                <style>
+                  <class name="flat"/>
+                </style>
               </object>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Bookmarks</property>
-              </object>
-            </child>
+            </property>
             <child>
-              <object class="GtkScrolledWindow">
-                <child>
-                  <object class="GtkBox">
-                    <property name="vexpand">True</property>
-                    <property name="orientation">vertical</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="wrap">True</property>
-                        <property name="margin-top">35</property>
-                        <property name="margin-bottom">35</property>
-                        <property name="margin-start">35</property>
-                        <property name="margin-end">35</property>
-                        <property name="label" translatable="yes">Folders which are searched by system applications, such as Files, Photos and Videos.</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkListBox" id="others_list">
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSeparator">
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="locations_add">
-                        <property name="halign">center</property>
-                        <property name="margin-top">6</property>
-                        <property name="margin-bottom">6</property>
-                        <property name="margin-start">6</property>
-                        <property name="margin-end">6</property>
-                        <signal name="clicked" handler="add_button_clicked" object="CcSearchLocationsDialog" swapped="yes"/>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon-name">list-add-symbolic</property>
-                            <property name="icon-size">1</property>
-                          </object>
-                        </child>
-                        <style>
-                          <class name="flat"/>
-                        </style>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSeparator">
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child type="tab">
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Other</property>
+              <object class="GtkListBox" id="others_list">
+                <property name="selection-mode">none</property>
+                <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
+                <accessibility name="labelled-by">others_group</accessibility>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
               </object>
             </child>
           </object>

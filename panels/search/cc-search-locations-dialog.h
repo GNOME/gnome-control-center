@@ -23,7 +23,7 @@
 #include "cc-search-panel.h"
 
 #define CC_SEARCH_LOCATIONS_DIALOG_TYPE (cc_search_locations_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, CC, SEARCH_LOCATIONS_DIALOG, GtkDialog)
+G_DECLARE_FINAL_TYPE (CcSearchLocationsDialog, cc_search_locations_dialog, CC, SEARCH_LOCATIONS_DIALOG, AdwPreferencesWindow)
 
 CcSearchLocationsDialog *cc_search_locations_dialog_new (CcSearchPanel *panel);
 
