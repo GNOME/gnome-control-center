@@ -20,9 +20,14 @@
  */
 
 #include <config.h>
+#ifdef BUILD_WWAN
+#include <libmm-glib.h>
+#endif
 
 #include "cc-default-apps-panel.h"
 #include "cc-default-apps-resources.h"
+
+#include "shell/cc-object-storage.h"
 
 typedef struct
 {
@@ -48,6 +53,10 @@ struct _CcDefaultAppsPanel
   GtkWidget *photos_label;
   GtkWidget *calls_label;
   GtkWidget *sms_label;
+
+#ifdef BUILD_WWAN
+  MMManager *mm_manager;
+#endif
 };
 
 
@@ -143,6 +152,8 @@ info_panel_setup_default_app (CcDefaultAppsPanel *self,
 
   label = WIDGET_FROM_OFFSET (data->label_offset);
   gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
+
+  g_object_bind_property (G_OBJECT (label), "visible", G_OBJECT (button), "visible", G_BINDING_SYNC_CREATE);
 }
 
 static DefaultAppData preferred_app_infos[] = {
@@ -168,6 +179,43 @@ info_panel_setup_default_apps (CcDefaultAppsPanel *self)
     }
 }
 
+#ifdef BUILD_WWAN
+static void
+update_modem_apps_visibility (CcDefaultAppsPanel *self)
+{
+  GList *devices;
+  GtkWidget *calls_button;
+  GtkWidget *sms_button;
+  int count, row;
+
+  devices = g_dbus_object_manager_get_objects (G_DBUS_OBJECT_MANAGER (self->mm_manager));
+  count = g_list_length (devices);
+
+  gtk_grid_query_child (GTK_GRID (self->default_apps_grid), self->calls_label, NULL, &row, NULL, NULL);
+  calls_button = gtk_grid_get_child_at (GTK_GRID (self->default_apps_grid), 1, row);
+
+  gtk_grid_query_child (GTK_GRID (self->default_apps_grid), self->sms_label, NULL, &row, NULL, NULL);
+  sms_button = gtk_grid_get_child_at (GTK_GRID (self->default_apps_grid), 1, row);
+
+  if (count > 0)
+    {
+      gtk_widget_show (self->calls_label);
+      gtk_widget_show (self->sms_label);
+      gtk_widget_show (calls_button);
+      gtk_widget_show (sms_button);
+    }
+  else
+    {
+      gtk_widget_hide (self->calls_label);
+      gtk_widget_hide (self->sms_label);
+      gtk_widget_hide (calls_button);
+      gtk_widget_hide (sms_button);
+    }
+
+  g_list_free_full (devices, (GDestroyNotify)g_object_unref);
+}
+#endif
+
 static void
 cc_default_apps_panel_class_init (CcDefaultAppsPanelClass *klass)
 {
@@ -181,6 +229,8 @@ cc_default_apps_panel_class_init (CcDefaultAppsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, music_label);
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, video_label);
   gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, photos_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calls_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, sms_label);
 }
 
 static void
@@ -191,6 +241,20 @@ cc_default_apps_panel_init (CcDefaultAppsPanel *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 
   info_panel_setup_default_apps (self);
+
+#ifdef BUILD_WWAN
+  if (cc_object_storage_has_object ("CcObjectStorage::mm-manager"))
+    {
+      self->mm_manager = cc_object_storage_get_object ("CcObjectStorage::mm-manager");
+
+      g_signal_connect_swapped (self->mm_manager, "object-added",
+                                G_CALLBACK (update_modem_apps_visibility), self);
+      g_signal_connect_swapped (self->mm_manager, "object-removed",
+                                G_CALLBACK (update_modem_apps_visibility), self);
+
+      update_modem_apps_visibility (self);
+    }
+#endif
 }
 
 GtkWidget *

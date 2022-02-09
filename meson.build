@@ -222,10 +222,11 @@ config_h.set('HAVE_MALCONTENT', enable_malcontent,
 
 if host_is_linux
   # network manager
+  mm_dep =  dependency('mm-glib', version: '>= 0.7')
   network_manager_deps = [
     dependency('libnm', version: '>= 1.24.0'),
     dependency('libnma-gtk4', version: '>= 1.8.0'),
-    dependency('mm-glib', version: '>= 0.7')
+    mm_dep,
   ]
 endif
 config_h.set('BUILD_NETWORK', host_is_linux,
