@@ -245,6 +245,7 @@ static void
 user_changed (CcUserPanel *self, ActUser *user)
 {
         GSList *user_list, *l;
+        gboolean show;
 
         g_list_store_remove_all (self->other_users_model);
         user_list = act_user_manager_list_users (self->um);
@@ -267,6 +268,9 @@ user_changed (CcUserPanel *self, ActUser *user)
 
         if (self->selected_user == user)
                 show_user (user, self);
+
+        show = g_list_model_get_n_items (G_LIST_MODEL (self->other_users_model)) > 0;
+        gtk_widget_set_visible (GTK_WIDGET (self->other_users_row), show);
 }
 
 static void
@@ -875,8 +879,6 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_visible (GTK_WIDGET (self->remove_user_button), !show);
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), !show);
         gtk_widget_set_visible (GTK_WIDGET (self->other_users), show);
-        show = g_list_model_get_n_items (G_LIST_MODEL (self->other_users_model)) > 0;
-        gtk_widget_set_visible (GTK_WIDGET (self->other_users_row), show);
 
         /* Last login: show when administrator or current user */
         current = act_user_manager_get_user_by_id (self->um, getuid ());
@@ -1387,10 +1389,12 @@ setup_main_window (CcUserPanel *self)
                                      _("To delete the selected user account,\nclick the * icon first"));
 
         g_object_get (self->um, "is-loaded", &loaded, NULL);
-        if (loaded)
+        if (loaded) {
                 users_loaded (self);
-        else
+                user_changed (self, NULL);
+        } else {
                 g_signal_connect_object (self->um, "notify::is-loaded", G_CALLBACK (users_loaded), self, G_CONNECT_SWAPPED);
+        }
 }
 
 static GSettings *
