@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-08 13:35+0000\n"
-"PO-Revision-Date: 2022-02-08 22:43+0200\n"
+"POT-Creation-Date: 2022-02-09 14:06+0000\n"
+"PO-Revision-Date: 2022-02-09 16:53+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -59,7 +59,7 @@ msgstr "Має доступ до мережі"
 
 #: panels/applications/cc-applications-panel.c:818
 #: panels/applications/cc-applications-panel.c:820
-#: panels/search/cc-search-locations-dialog.c:361
+#: panels/search/cc-search-locations-dialog.c:384
 msgid "Home"
 msgstr "Домівка"
 
@@ -349,7 +349,7 @@ msgstr "Виберіть зображення"
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
-#: panels/search/cc-search-locations-dialog.c:639
+#: panels/search/cc-search-locations-dialog.c:677
 #: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
@@ -2332,7 +2332,7 @@ msgstr ""
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
 #: panels/printers/pp-details-dialog.ui:36
-#: panels/user-accounts/cc-add-user-dialog.ui:67
+#: panels/user-accounts/cc-add-user-dialog.ui:68
 #: panels/user-accounts/cc-user-panel.ui:125
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
@@ -2901,9 +2901,9 @@ msgstr "Назва мережі"
 #: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:330
 #: panels/printers/pp-jobs-dialog.ui:52
-#: panels/user-accounts/cc-add-user-dialog.ui:142
-#: panels/user-accounts/cc-add-user-dialog.ui:175
-#: panels/user-accounts/cc-add-user-dialog.ui:355
+#: panels/user-accounts/cc-add-user-dialog.ui:145
+#: panels/user-accounts/cc-add-user-dialog.ui:181
+#: panels/user-accounts/cc-add-user-dialog.ui:362
 #: panels/wwan/cc-wwan-apn-dialog.ui:172
 msgid "Password"
 msgstr "Пароль"
@@ -4911,8 +4911,8 @@ msgstr "Засвідчення"
 #: panels/printers/authentication-dialog.ui:41
 #: panels/printers/new-printer-dialog.ui:310
 #: panels/printers/pp-jobs-dialog.ui:41
-#: panels/user-accounts/cc-add-user-dialog.ui:92
-#: panels/user-accounts/cc-add-user-dialog.ui:335
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
 #: panels/wwan/cc-wwan-apn-dialog.ui:148
 msgid "Username"
 msgstr "Користувач"
@@ -5175,7 +5175,7 @@ msgstr "Для друку з %s введіть реєстраційні дані
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
-#: panels/user-accounts/cc-add-user-dialog.ui:293
+#: panels/user-accounts/cc-add-user-dialog.ui:300
 msgid "Domain"
 msgstr "Домен"
 
@@ -5837,11 +5837,11 @@ msgstr ""
 "пристрій;система;типове;програма;бажане;cd;dvd;usb;аудіо;відео;диск;знімний;"
 "носій;автозапуск;"
 
-#: panels/search/cc-search-locations-dialog.c:636
+#: panels/search/cc-search-locations-dialog.c:674
 msgid "Select Location"
 msgstr "Вибрати регіон"
 
-#: panels/search/cc-search-locations-dialog.c:640
+#: panels/search/cc-search-locations-dialog.c:678
 msgid "_OK"
 msgstr "_Гаразд"
 
@@ -5850,9 +5850,7 @@ msgstr "_Гаразд"
 msgid "Search Locations"
 msgstr "Місця пошуку"
 
-#: panels/search/cc-search-locations-dialog.ui:28
-#: panels/search/cc-search-locations-dialog.ui:58
-#: panels/search/cc-search-locations-dialog.ui:89
+#: panels/search/cc-search-locations-dialog.ui:13
 msgid ""
 "Folders which are searched by system applications, such as Files, Photos and "
 "Videos."
@@ -5860,27 +5858,33 @@ msgstr ""
 "Теки, у яких виконуватимуть пошук загальносистемні програмами, наприклад, "
 "«Файли», «Фото» і «Відео»."
 
-#: panels/search/cc-search-locations-dialog.ui:41
+#: panels/search/cc-search-locations-dialog.ui:18
 msgid "Places"
 msgstr "Місця"
 
-#: panels/search/cc-search-locations-dialog.ui:73
+#: panels/search/cc-search-locations-dialog.ui:33
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: panels/search/cc-search-locations-dialog.ui:129
-msgid "Other"
-msgstr "Інше"
+#: panels/search/cc-search-locations-dialog.ui:48
+#| msgid "Other"
+msgid "Others"
+msgstr "Інші"
 
-#: panels/search/cc-search-panel.c:150
+#: panels/search/cc-search-locations-dialog.ui:55
+#| msgid "Location"
+msgid "Add Location"
+msgstr "Додати місце"
+
+#: panels/search/cc-search-panel.c:165
 msgid "No applications found"
 msgstr "Не знайдено жодної програми"
 
-#: panels/search/cc-search-panel-row.ui:48
+#: panels/search/cc-search-panel-row.ui:49
 msgid "Move Up"
 msgstr "Перемістити вгору"
 
-#: panels/search/cc-search-panel-row.ui:52
+#: panels/search/cc-search-panel-row.ui:53
 msgid "Move Down"
 msgstr "Пересунути вниз"
 
@@ -7090,30 +7094,30 @@ msgstr "Не залишати слідів"
 msgid "Should match the web address of your login provider."
 msgstr "Мусить збігатись з адресою вашого постачальника."
 
-#: panels/user-accounts/cc-add-user-dialog.c:215
+#: panels/user-accounts/cc-add-user-dialog.c:216
 msgid "Failed to add account"
 msgstr "Не вдалось додати обліковий запис"
 
-#: panels/user-accounts/cc-add-user-dialog.c:672
+#: panels/user-accounts/cc-add-user-dialog.c:673
 #: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "Паролі не збігаються."
 
-#: panels/user-accounts/cc-add-user-dialog.c:876
-#: panels/user-accounts/cc-add-user-dialog.c:915
-#: panels/user-accounts/cc-add-user-dialog.c:933
+#: panels/user-accounts/cc-add-user-dialog.c:877
+#: panels/user-accounts/cc-add-user-dialog.c:916
+#: panels/user-accounts/cc-add-user-dialog.c:934
 msgid "Failed to register account"
 msgstr "Не вдалося зареєструвати обліковий запис"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1048
+#: panels/user-accounts/cc-add-user-dialog.c:1049
 msgid "No supported way to authenticate with this domain"
 msgstr "Непідтримуваний спосіб автентифікації з цим доменом"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1112
+#: panels/user-accounts/cc-add-user-dialog.c:1113
 msgid "Failed to join domain"
 msgstr "Не вдалось долучитись до домену"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1167
+#: panels/user-accounts/cc-add-user-dialog.c:1168
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7121,7 +7125,7 @@ msgstr ""
 "Цей користувач не спрацював.\n"
 "Спробуйте ще."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1174
+#: panels/user-accounts/cc-add-user-dialog.c:1175
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7129,11 +7133,11 @@ msgstr ""
 "Цей пароль не спрацював.\n"
 "Спробуйте ще."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1182
+#: panels/user-accounts/cc-add-user-dialog.c:1183
 msgid "Failed to log into domain"
 msgstr "Не вдалось увійти до домену"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1237
+#: panels/user-accounts/cc-add-user-dialog.c:1238
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Не вдалося знайти домен. Можливо, ви неправильно це написали?"
 
@@ -7142,51 +7146,45 @@ msgstr "Не вдалося знайти домен. Можливо, ви неп
 msgid "Add User"
 msgstr "Додати користувача"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:128
+#: panels/user-accounts/cc-add-user-dialog.ui:131
 msgid "Administrator"
 msgstr "Адміністратор"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:129
-#| msgid ""
-#| "Administrators can add and remove other users, and can change settings "
-#| "for all users."
+#: panels/user-accounts/cc-add-user-dialog.ui:132
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users. Parental controls cannot be applied to administrators."
 msgstr ""
 "Адміністратори можуть додавати або вилучати інших користувачів, а також "
-"змінювати параметри для усіх користувачів. Батьківський контроль не може бути застосовано до адміністраторів."
+"змінювати параметри для усіх користувачів. Батьківський контроль не може "
+"бути застосовано до адміністраторів."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:145
-#| msgid "Allow user to change their password on next login"
+#: panels/user-accounts/cc-add-user-dialog.ui:149
 msgid "User sets password on first login"
 msgstr "Користувач встановлює пароль при першому вході"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:156
-#| msgid "Set a password now"
+#: panels/user-accounts/cc-add-user-dialog.ui:161
 msgid "Set password now"
 msgstr "Вкажіть пароль зараз"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:217
-#| msgid "_Confirm"
+#: panels/user-accounts/cc-add-user-dialog.ui:224
 msgid "Confirm"
 msgstr "Підтвердити"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:271
-#| msgid "_Enterprise Login"
+#: panels/user-accounts/cc-add-user-dialog.ui:278
 msgid "Enterprise Login"
 msgstr "Комерційний вхід"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:272
+#: panels/user-accounts/cc-add-user-dialog.ui:279
 msgid "User accounts which are managed by a company or organisation."
 msgstr ""
 "Облікові записи користувачів, які керуються компанією або організацією."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:378
+#: panels/user-accounts/cc-add-user-dialog.ui:385
 msgid "You are Offline"
 msgstr "Ви поза мережею"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:379
+#: panels/user-accounts/cc-add-user-dialog.ui:386
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -7505,17 +7503,14 @@ msgid "Ch_ange"
 msgstr "З_мінити"
 
 #: panels/user-accounts/cc-password-dialog.ui:51
-#| msgid "Current _Password"
 msgid "Current Password"
 msgstr "Поточний пароль"
 
 #: panels/user-accounts/cc-password-dialog.ui:76
-#| msgid "_New Password"
 msgid "New Password"
 msgstr "Новий пароль"
 
 #: panels/user-accounts/cc-password-dialog.ui:121
-#| msgid "_Confirm New Password"
 msgid "Confirm Password"
 msgstr "Підтвердити пароль"
 
@@ -7643,8 +7638,7 @@ msgstr "Будь ласка, переконайтесь, що AccountService в�
 
 #: panels/user-accounts/cc-user-panel.c:1207
 msgid "This panel must be unlocked to change this setting"
-msgstr ""
-"Цю панель має бути розблоковано для зміни цього параметра"
+msgstr "Цю панель має бути розблоковано для зміни цього параметра"
 
 #: panels/user-accounts/cc-user-panel.c:1274
 msgid "Delete the selected user account"
@@ -7714,12 +7708,10 @@ msgid "Remove User…"
 msgstr "Вилучити користувача…"
 
 #: panels/user-accounts/cc-user-panel.ui:333
-#| msgid "Other Files"
 msgid "Other Users"
 msgstr "Інші користувачі"
 
 #: panels/user-accounts/cc-user-panel.ui:346
-#| msgid "_Add User…"
 msgid "Add User…"
 msgstr "Додати користувача…"
 
