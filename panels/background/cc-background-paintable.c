@@ -240,23 +240,31 @@ cc_background_paintable_snapshot (GdkPaintable *paintable,
                                   double        height)
 {
   CcBackgroundPaintable *self = CC_BACKGROUND_PAINTABLE (paintable);
+  gboolean is_rtl;
 
-  gdk_paintable_snapshot (self->texture, snapshot, width, height);
-
-  if (self->dark_texture)
+  if (!self->dark_texture)
     {
-      gboolean is_rtl = self->text_direction == GTK_TEXT_DIR_RTL;
-
-      gtk_snapshot_push_clip (GTK_SNAPSHOT (snapshot),
-                              &GRAPHENE_RECT_INIT (is_rtl ? 0.0f : width / 2.0f,
-                                                   0.0f,
-                                                   width / 2.0f,
-                                                   height));
-
-      gdk_paintable_snapshot (self->dark_texture, snapshot, width, height);
-
-      gtk_snapshot_pop (GTK_SNAPSHOT (snapshot));
+      gdk_paintable_snapshot (self->texture, snapshot, width, height);
+      return;
     }
+
+  is_rtl = self->text_direction == GTK_TEXT_DIR_RTL;
+
+  gtk_snapshot_push_clip (GTK_SNAPSHOT (snapshot),
+                          &GRAPHENE_RECT_INIT (is_rtl ? width / 2.0f : 0.0f,
+                                               0.0f,
+                                               width / 2.0f,
+                                               height));
+  gdk_paintable_snapshot (self->texture, snapshot, width, height);
+  gtk_snapshot_pop (GTK_SNAPSHOT (snapshot));
+
+  gtk_snapshot_push_clip (GTK_SNAPSHOT (snapshot),
+                          &GRAPHENE_RECT_INIT (is_rtl ? 0.0f : width / 2.0f,
+                                               0.0f,
+                                               width / 2.0f,
+                                               height));
+  gdk_paintable_snapshot (self->dark_texture, snapshot, width, height);
+  gtk_snapshot_pop (GTK_SNAPSHOT (snapshot));
 }
 
 static int
