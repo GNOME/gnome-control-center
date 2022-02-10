@@ -31,11 +31,9 @@ struct _CcUsagePanel
 
   GSettings  *privacy_settings;
 
-  GtkListBox  *usage_list_box;
   GtkSwitch   *recently_used_switch;
   GtkComboBox *retain_history_combo;
 
-  GtkListBox  *trash_list_box;
   GtkSwitch   *purge_trash_switch;
   GtkSwitch   *purge_temp_switch;
   GtkComboBox *purge_after_combo;
@@ -360,8 +358,6 @@ cc_usage_panel_class_init (CcUsagePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, purge_temp_button);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, recently_used_switch);
   gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, retain_history_combo);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, trash_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, usage_list_box);
 
   gtk_widget_class_bind_template_callback (widget_class, clear_recent);
 }
