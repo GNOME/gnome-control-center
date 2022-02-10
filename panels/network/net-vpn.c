@@ -144,15 +144,10 @@ static void
 edit_connection (NetVpn *self)
 {
         NetConnectionEditor *editor;
-        g_autofree gchar *title = NULL;
 
         editor = net_connection_editor_new (self->connection, NULL, NULL, self->client);
         gtk_window_set_transient_for (GTK_WINDOW (editor), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
-        /* Translators: this is the title of the connection details
-         * window for vpn connections.
-         */
-        title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (self->connection));
-        net_connection_editor_set_title (editor, title);
+        net_connection_editor_set_title (editor, nm_connection_get_id (self->connection));
 
         g_signal_connect_object (editor, "done", G_CALLBACK (editor_done), self, G_CONNECT_SWAPPED);
         gtk_window_present (GTK_WINDOW (editor));
