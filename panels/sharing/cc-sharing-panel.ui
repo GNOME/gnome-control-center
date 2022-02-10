@@ -59,10 +59,10 @@
                       </object>
                     </child>
                     <child>
-                      <object class="CcListRow" id="screen_sharing_row">
+                      <object class="CcListRow" id="remote_desktop_row">
                         <property name="show-arrow">True</property>
                         <property name="use-underline">True</property>
-                        <property name="title" translatable="yes">_Screen Sharing</property>
+                        <property name="title" translatable="yes">Remote _Desktop</property>
                       </object>
                     </child>
                     <child>
@@ -246,156 +246,145 @@
     </child>
 
   </object>
-  <object class="GtkDialog" id="screen_sharing_dialog">
-    <property name="title" translatable="yes">Screen Sharing</property>
-    <property name="resizable">False</property>
-    <property name="use_header_bar">1</property>
+  <object class="GtkDialog" id="remote_desktop_dialog">
+    <property name="title" translatable="yes">Remote Desktop</property>
     <property name="modal">True</property>
+    <property name="default-width">640</property>
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="show_title_buttons">True</property>
+      </object>
+    </child>
+
     <child>
-      <object class="GtkBox">
-        <property name="margin-top">12</property>
-        <property name="margin-bottom">12</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="orientation">vertical</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="GtkBox" id="box8">
-            <property name="orientation">vertical</property>
+          <object class="AdwPreferencesGroup">
+            <property name="description" translatable="yes">Remote desktop allows viewing and controlling your desktop from another computer.</property>
+
             <child>
-              <object class="GtkGrid" id="screen_sharing_grid">
-                <property name="margin_start">12</property>
-                <property name="margin_end">6</property>
-                <property name="margin_bottom">12</property>
-                <property name="row_spacing">12</property>
-                <property name="column_spacing">6</property>
-                <child>
-                  <object class="GtkLabel" id="screen_sharing_label">
-                    <property name="xalign">0</property>
-                    <property name="label">Screen sharing allows remote users to view or control your screen by connecting to: &lt;a href="vnc://%s"&gt;vnc://%s&lt;/a&gt;</property>
-                    <property name="use_markup">True</property>
-                    <property name="wrap">True</property>
-                    <property name="max-width-chars">36</property>
-                    <property name="margin_bottom">6</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">0</property>
-                      <property name="column-span">2</property>
-                    </layout>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Remote Desktop</property>
+                <property name="subtitle" translatable="yes">Enable or disable remote desktop connections to this computer.</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="remote_desktop_switch">
+                    <property name="state">False</property>
+                    <property name="valign">center</property>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkBox" id="remote_control_box">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">12</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">2</property>
-                      <property name="column-span">2</property>
-                    </layout>
-                    <child>
-                      <object class="GtkCheckButton" id="remote_control_checkbutton">
-                        <property name="use_underline">True</property>
-                        <property name="label" translatable="yes">_Allow connections to control the screen</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkGrid" id="remote_control_grid">
-                        <property name="row_spacing">6</property>
-                        <child>
-                          <object class="GtkGrid" id="password_grid">
-                            <property name="row_spacing">6</property>
-                            <property name="column_spacing">6</property>
-                            <layout>
-                              <property name="column">0</property>
-                              <property name="row">3</property>
-                            </layout>
-                            <child>
-                              <object class="GtkLabel" id="remote_control_password_label">
-                                <property name="halign">start</property>
-                                <property name="margin_start">12</property>
-                                <property name="label" translatable="yes">_Password:</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">remote_control_password_entry</property>
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">0</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkEntry" id="remote_control_password_entry">
-                                <property name="hexpand">True</property>
-                                <property name="visibility">False</property>
-                                <property name="invisible_char">●</property>
-                                <property name="input_purpose">password</property>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">0</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkCheckButton" id="show_password_checkbutton">
-                                <property name="label" translatable="yes">_Show Password</property>
-                                <property name="use_underline">True</property>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label2">
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Access Options</property>
-                            <layout>
-                              <property name="column">0</property>
-                              <property name="row">0</property>
-                            </layout>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="approve_connections_radiobutton">
-                            <property name="label" translatable="yes">_New connections must ask for access</property>
-                            <property name="group">require_password_radiobutton</property>
-                            <property name="use_underline">True</property>
-                            <layout>
-                              <property name="column">0</property>
-                              <property name="row">1</property>
-                            </layout>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="require_password_radiobutton">
-                            <property name="label" translatable="yes">_Require a password</property>
-                            <property name="use_underline">True</property>
-                            <layout>
-                              <property name="column">0</property>
-                              <property name="row">2</property>
-                            </layout>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Remote Control</property>
+                <property name="subtitle" translatable="yes">Allows remote connections to control the screen.</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="remote_control_checkbutton">
+                    <property name="valign">center</property>
                   </object>
                 </child>
               </object>
             </child>
           </object>
         </child>
-      </object>
-    </child>
-    <child type="titlebar">
-      <object class="GtkHeaderBar" id="screen_sharing_headerbar">
-        <property name="show_title_buttons">True</property>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">How to Connect</property>
+            <property name="description" translatable="yes">Connect to this computer using the device name or remote desktop address.</property>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Device Name</property>
+                <child type="suffix">
+                  <object class="GtkLabel" id="remote_desktop_device_name_label"/>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Remote Desktop Address</property>
+                <child type="suffix">
+                  <object class="GtkLabel" id="remote_desktop_address_label"/>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Authentication</property>
+            <property name="description" translatable="yes">The user name and password are required to connect to this computer.</property>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">User Name</property>
+                <child type="suffix">
+                  <object class="GtkEntry" id="remote_desktop_username_entry">
+                    <property name="hexpand">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Password</property>
+                <child type="suffix">
+                  <object class="GtkPasswordEntry" id="remote_desktop_password_entry">
+                    <property name="hexpand">True</property>
+                    <property name="show-peek-icon">True</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkButton" id="remote_desktop_verify_encryption">
+                <property name="sensitive">False</property>
+                <property name="halign">end</property>
+                <property name="margin-top">12</property>
+                <property name="label" translatable="yes">Verify Encryption</property>
+                <signal name="clicked" handler="remote_desktop_show_encryption_fingerprint" swapped="yes"/>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </object>
+
+  <object class="AdwWindow" id="remote_desktop_fingerprint_dialog">
+    <property name="default-width">360</property>
+    <property name="default-height">360</property>
+    <property name="modal">True</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkButton">
+            <property name="halign">end</property>
+            <property name="icon-name">window-close-symbolic</property>
+            <signal name="clicked" handler="remote_desktop_hide_encryption_fingerprint" swapped="yes"/>
+            <style>
+              <class name="flat"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="AdwStatusPage">
+            <property name="title" translatable="yes">Encryption Fingerprint</property>
+            <property name="description" translatable="yes">The encryption fingerprint can be seen in connecting clients and should be identical</property>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+
   <object class="GtkDialog" id="media_sharing_dialog">
     <property name="title" translatable="yes">Media Sharing</property>
     <property name="resizable">False</property>

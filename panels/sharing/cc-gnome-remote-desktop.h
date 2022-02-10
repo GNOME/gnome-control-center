@@ -23,28 +23,14 @@
 
 G_BEGIN_DECLS
 
-const SecretSchema * cc_grd_vnc_password_get_schema (void);
-#define CC_GRD_VNC_PASSWORD_SCHEMA cc_grd_vnc_password_get_schema ()
+const SecretSchema * cc_grd_rdp_credentials_get_schema (void);
+#define CC_GRD_RDP_CREDENTIALS_SCHEMA cc_grd_rdp_credentials_get_schema ()
 
-gboolean cc_grd_get_is_auth_method_prompt (GValue   *value,
-                                           GVariant *variant,
-                                           gpointer  user_data);
+void cc_grd_store_rdp_credentials (const gchar  *username,
+                                   const gchar  *password,
+                                   GCancellable *cancellable);
 
-GVariant * cc_grd_set_is_auth_method_prompt (const GValue       *value,
-                                             const GVariantType *type,
-                                             gpointer            user_data);
-
-gboolean cc_grd_get_is_auth_method_password (GValue   *value,
-                                             GVariant *variant,
-                                             gpointer  user_data);
-
-GVariant * cc_grd_set_is_auth_method_password (const GValue       *value,
-                                               const GVariantType *type,
-                                               gpointer            user_data);
-
-void cc_grd_store_vnc_password (const gchar  *password,
-                                GCancellable *cancellable);
-
-gchar * cc_grd_lookup_vnc_password (GCancellable *cancellable);
+gchar * cc_grd_lookup_rdp_username (GCancellable *cancellable);
+gchar * cc_grd_lookup_rdp_password (GCancellable *cancellable);
 
 G_END_DECLS
