@@ -22,6 +22,7 @@
 #include "config.h"
 
 #include <stdlib.h>
+#include <locale.h>
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
@@ -49,6 +50,8 @@ main (gint    argc,
   bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
   textdomain (GETTEXT_PACKAGE);
+
+  setlocale (LC_ALL, "");
 
   initialize_dependencies (&argc, &argv);
 
