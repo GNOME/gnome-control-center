@@ -53,15 +53,10 @@ nm_device_refresh_vpn_ui (NetVpn *self)
         NMActiveConnection *a;
         gint i;
         NMVpnConnectionState state;
-        g_autofree gchar *title = NULL;
 
         /* update title */
-        /* Translators: this is the title of the connection details
-         * window for vpn connections, it is also used to display
-         * vpn connections in the device list.
-         */
-        title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (self->connection));
-        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
+        adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
+                                       nm_connection_get_id (self->connection));
 
         if (self->active_connection) {
                 g_signal_handlers_disconnect_by_func (self->active_connection,
@@ -153,6 +148,9 @@ edit_connection (NetVpn *self)
 
         editor = net_connection_editor_new (self->connection, NULL, NULL, self->client);
         gtk_window_set_transient_for (GTK_WINDOW (editor), GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
+        /* Translators: this is the title of the connection details
+         * window for vpn connections.
+         */
         title = g_strdup_printf (_("%s VPN"), nm_connection_get_id (self->connection));
         net_connection_editor_set_title (editor, title);
 
