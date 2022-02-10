@@ -150,7 +150,7 @@ add_microphone_app (CcMicrophonePanel *self,
 {
   GDesktopAppInfo *app_info;
   char *desktop_id;
-  GtkWidget *box, *row, *w;
+  GtkWidget *row, *w;
   GIcon *icon;
   MicrophoneAppStateData *data;
 
@@ -168,36 +168,22 @@ add_microphone_app (CcMicrophonePanel *self,
   if (app_info == NULL)
       return;
 
-  row = gtk_list_box_row_new ();
-  box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 0);
-  gtk_widget_set_hexpand (box, TRUE);
-  gtk_widget_set_margin_start (box, 12);
-  gtk_widget_set_margin_end (box, 6);
-  gtk_widget_set_margin_top (box, 12);
-  gtk_widget_set_margin_bottom (box, 12);
-  gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), box);
+  row = adw_action_row_new ();
   gtk_list_box_append (self->microphone_apps_list_box, row);
 
   icon = g_app_info_get_icon (G_APP_INFO (app_info));
   w = gtk_image_new_from_gicon (icon);
-  gtk_widget_set_halign (w, GTK_ALIGN_CENTER);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   gtk_size_group_add_widget (self->microphone_icon_size_group, w);
-  gtk_box_append (GTK_BOX (box), w);
+  adw_action_row_add_prefix (ADW_ACTION_ROW (row), w);
 
-  w = gtk_label_new (g_app_info_get_name (G_APP_INFO (app_info)));
-  gtk_widget_set_margin_start (w, 12);
-  gtk_widget_set_margin_end (w, 12);
-  gtk_widget_set_halign (w, GTK_ALIGN_START);
-  gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_label_set_xalign (GTK_LABEL (w), 0);
-  gtk_box_append (GTK_BOX (box), w);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
+                                 g_app_info_get_name (G_APP_INFO (app_info)));
 
   w = gtk_switch_new ();
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
-  gtk_widget_set_halign (w, GTK_ALIGN_END);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
-  gtk_box_append (GTK_BOX (box), w);
+  adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
   g_settings_bind (self->privacy_settings,
                    "disable-microphone",
                    w,
