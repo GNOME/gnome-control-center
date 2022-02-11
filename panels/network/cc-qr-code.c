@@ -175,6 +175,7 @@ cc_qr_code_get_paintable (CcQrCode *self,
 
   bytes = g_byte_array_free_to_bytes (qr_matrix);
 
+  g_clear_object (&self->texture);
   self->texture = gdk_memory_texture_new (total_size,
                                           total_size,
                                           GDK_MEMORY_R8G8B8,
