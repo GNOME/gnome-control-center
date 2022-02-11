@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-09 14:06+0000\n"
-"PO-Revision-Date: 2022-02-10 09:48+0700\n"
+"POT-Creation-Date: 2022-02-10 22:35+0000\n"
+"PO-Revision-Date: 2022-02-11 14:18+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -40,8 +40,8 @@ msgid "Session Bus"
 msgstr "Bus Sesi"
 
 #: panels/applications/cc-applications-panel.c:809
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:333
-#: panels/thunderbolt/cc-bolt-panel.ui:377
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:266
+#: panels/thunderbolt/cc-bolt-panel.ui:310
 msgid "Devices"
 msgstr "Perangkat"
 
@@ -118,7 +118,7 @@ msgstr "%s ruang diska yang digunakan"
 #: panels/applications/cc-applications-panel.c:1387
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:34
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Applications"
 msgstr "Aplikasi"
 
@@ -165,8 +165,8 @@ msgstr "Menerima pencarian sistem dan mengirim hasil."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:761
-#: panels/user-accounts/cc-user-panel.c:865
+#: panels/user-accounts/cc-user-panel.c:765
+#: panels/user-accounts/cc-user-panel.c:869
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -329,11 +329,11 @@ msgstr "Kontrol berbagai izin dan pengaturan aplikasi"
 msgid "application;flatpak;permission;setting;"
 msgstr "aplikasi;flatpak;izin;pengaturan;"
 
-#: panels/background/cc-background-chooser.c:309
+#: panels/background/cc-background-chooser.c:307
 msgid "Select a picture"
 msgstr "Pilih gambar"
 
-#: panels/background/cc-background-chooser.c:312
+#: panels/background/cc-background-chooser.c:310
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:31
@@ -355,8 +355,8 @@ msgstr "Pilih gambar"
 #: panels/user-accounts/cc-avatar-chooser.c:165
 #: panels/user-accounts/cc-fingerprint-dialog.ui:30
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:551
-#: panels/user-accounts/cc-user-panel.c:569
+#: panels/user-accounts/cc-user-panel.c:555
+#: panels/user-accounts/cc-user-panel.c:573
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
@@ -364,7 +364,7 @@ msgstr "Pilih gambar"
 msgid "_Cancel"
 msgstr "Ba_tal"
 
-#: panels/background/cc-background-chooser.c:313
+#: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
 #: panels/sharing/cc-sharing-panel.c:433
@@ -1513,7 +1513,7 @@ msgstr ""
 "jaringan;identitas;privasi;"
 
 #: panels/display/cc-display-panel.c:512
-#: panels/notifications/cc-notifications-panel.c:202
+#: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
 #: panels/universal-access/cc-ua-panel.c:337
 #: panels/universal-access/cc-ua-panel.c:469
@@ -1524,7 +1524,7 @@ msgid "On"
 msgstr "Nyala"
 
 #: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:202
+#: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
 #: panels/universal-access/cc-ua-panel.c:337
 #: panels/universal-access/cc-ua-panel.c:469
@@ -2791,29 +2791,29 @@ msgid "Not set up"
 msgstr "Belum ditata"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:206
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:261
+#: panels/network/cc-wifi-connection-row.c:263
 msgid "Insecure network (WEP)"
 msgstr "Jaringan tidak aman (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:265
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Jaringan aman (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:269
+#: panels/network/cc-wifi-connection-row.c:271
 msgid "Secure network (WPA2)"
 msgstr "Jaringan aman (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Secure network (WPA3)"
 msgstr "Jaringan aman (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network"
 msgstr "Jaringan aman"
 
@@ -4324,23 +4324,23 @@ msgstr ""
 "heksa"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:22
+#: panels/notifications/cc-app-notifications-dialog.ui:15
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Notifikasi"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:37
+#: panels/notifications/cc-app-notifications-dialog.ui:29
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Pering_atan Suara"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:51
+#: panels/notifications/cc-app-notifications-dialog.ui:42
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "_Popup Notifikasi"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:52
+#: panels/notifications/cc-app-notifications-dialog.ui:43
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
@@ -4348,26 +4348,26 @@ msgstr ""
 "Notifikasi akan terus muncul didaftar notifikasi ketika popup dinonaktifkan."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:66
+#: panels/notifications/cc-app-notifications-dialog.ui:56
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Tam_pilkan Isi Pesan dalam Popup"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:80
+#: panels/notifications/cc-app-notifications-dialog.ui:69
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Notifikasi _Layar Kunci"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:94
+#: panels/notifications/cc-app-notifications-dialog.ui:82
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "_Tampilkan Isi Pesan dalam Layar Kunci"
 
-#: panels/notifications/cc-notifications-panel.ui:16
+#: panels/notifications/cc-notifications-panel.ui:10
 msgid "_Do Not Disturb"
 msgstr "Jangan _Ganggu"
 
-#: panels/notifications/cc-notifications-panel.ui:23
+#: panels/notifications/cc-notifications-panel.ui:17
 msgid "_Lock Screen Notifications"
 msgstr "Notifikasi _Layar Kunci"
 
@@ -6239,22 +6239,22 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Terotorisasi"
 
-#: panels/thunderbolt/cc-bolt-panel.c:170
+#: panels/thunderbolt/cc-bolt-panel.c:169
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Subsistem Thunderbolt (boltd) tidak dipasang atau tidak diatur dengan benar."
 
-#: panels/thunderbolt/cc-bolt-panel.c:426
-#: panels/thunderbolt/cc-bolt-panel.ui:224
+#: panels/thunderbolt/cc-bolt-panel.c:425
+#: panels/thunderbolt/cc-bolt-panel.ui:157
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Izinkan akses langsung ke perangkat seperti dok dan GPU eksternal."
 
-#: panels/thunderbolt/cc-bolt-panel.c:427
+#: panels/thunderbolt/cc-bolt-panel.c:426
 msgid "Only USB and Display Port devices can attach."
 msgstr "Hanya perangkat USB dan Display Port yang dapat dipasang."
 
-#: panels/thunderbolt/cc-bolt-panel.c:462
+#: panels/thunderbolt/cc-bolt-panel.c:461
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6265,32 +6265,36 @@ msgstr ""
 "dinonaktifkan di BIOS atau diatur ke tingkat keamanan yang tidak didukung di "
 "BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:506
+#: panels/thunderbolt/cc-bolt-panel.c:505
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Dukungan Thunderbolt telah dinonaktifkan di BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:510
+#: panels/thunderbolt/cc-bolt-panel.c:509
 msgid "Thunderbolt security level could not be determined."
 msgstr "Tingkat keamanan thunderbolt tidak dapat ditentukan."
 
-#: panels/thunderbolt/cc-bolt-panel.c:615
+#: panels/thunderbolt/cc-bolt-panel.c:614
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Galat saat mengalihkan mode langsung: %s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:140
-msgid "No Thunderbolt support"
-msgstr "Tidak ada dukungan Thunderbolt"
+#: panels/thunderbolt/cc-bolt-panel.ui:103
+msgid "No Thunderbolt Support"
+msgstr "Tidak Ada Dukungan Thunderbolt"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:220
+#: panels/thunderbolt/cc-bolt-panel.ui:104
+msgid "Could not connect to the thunderbolt subsystem."
+msgstr "Tak bisa menyambung ke subsistem thunderbolt."
+
+#: panels/thunderbolt/cc-bolt-panel.ui:153
 msgid "Direct Access"
 msgstr "Akses Langsung"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:292
+#: panels/thunderbolt/cc-bolt-panel.ui:225
 msgid "Pending Devices"
 msgstr "Perangkat Tertunda"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:386
+#: panels/thunderbolt/cc-bolt-panel.ui:319
 msgid "No devices attached"
 msgstr "Tidak ada perangkat yang terpasang"
 
@@ -7385,7 +7389,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:684
+#: panels/user-accounts/cc-user-panel.c:688
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7393,7 +7397,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:692
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7477,26 +7481,26 @@ msgstr "Kata sandi salah, harap coba lagi"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Tak bisa menyambung ke domain %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:313
+#: panels/user-accounts/cc-user-panel.c:317
 msgid "Failed to delete user"
 msgstr "Gagal menghapus pengguna"
 
-#: panels/user-accounts/cc-user-panel.c:370
-#: panels/user-accounts/cc-user-panel.c:425
-#: panels/user-accounts/cc-user-panel.c:471
+#: panels/user-accounts/cc-user-panel.c:374
+#: panels/user-accounts/cc-user-panel.c:429
+#: panels/user-accounts/cc-user-panel.c:475
 msgid "Failed to revoke remotely managed user"
 msgstr "Gagal mencabut pengguna yang dikelola jarak jauh"
 
-#: panels/user-accounts/cc-user-panel.c:520
+#: panels/user-accounts/cc-user-panel.c:524
 msgid "You cannot delete your own account."
 msgstr "Anda tak bisa menghapus akunmu sendiri."
 
-#: panels/user-accounts/cc-user-panel.c:529
+#: panels/user-accounts/cc-user-panel.c:533
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s masih log masuk"
 
-#: panels/user-accounts/cc-user-panel.c:533
+#: panels/user-accounts/cc-user-panel.c:537
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7504,12 +7508,12 @@ msgstr ""
 "Menghapus pengguna saat mereka log masuk dapat menjerumuskan sistem ke dalam "
 "keadaan tak konsisten."
 
-#: panels/user-accounts/cc-user-panel.c:542
+#: panels/user-accounts/cc-user-panel.c:546
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Apakah Anda ingin mempertahankan berkas milik %s?"
 
-#: panels/user-accounts/cc-user-panel.c:546
+#: panels/user-accounts/cc-user-panel.c:550
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7517,67 +7521,67 @@ msgstr ""
 "Dimungkinkan untuk mempertahankan direktori rumah, spool surel, dan berkas "
 "temporer ketika menghapus suatu akun pengguna."
 
-#: panels/user-accounts/cc-user-panel.c:549
+#: panels/user-accounts/cc-user-panel.c:553
 msgid "_Delete Files"
 msgstr "_Hapus Berkas"
 
-#: panels/user-accounts/cc-user-panel.c:550
+#: panels/user-accounts/cc-user-panel.c:554
 msgid "_Keep Files"
 msgstr "Biarkan Berkas"
 
-#: panels/user-accounts/cc-user-panel.c:564
+#: panels/user-accounts/cc-user-panel.c:568
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Anda yakin ingin mencabut akun %s yang dikelola jarak jauh?"
 
-#: panels/user-accounts/cc-user-panel.c:568
+#: panels/user-accounts/cc-user-panel.c:572
 msgid "_Delete"
 msgstr "_Hapus"
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:622
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Akun dimatikan"
 
-#: panels/user-accounts/cc-user-panel.c:626
+#: panels/user-accounts/cc-user-panel.c:630
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Untuk ditata saat log masuk berikutnya"
 
-#: panels/user-accounts/cc-user-panel.c:629
+#: panels/user-accounts/cc-user-panel.c:633
 msgctxt "Password mode"
 msgid "None"
 msgstr "Tak ada"
 
-#: panels/user-accounts/cc-user-panel.c:672
+#: panels/user-accounts/cc-user-panel.c:676
 msgid "Logged in"
 msgstr "Log masuk"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:759
-#: panels/user-accounts/cc-user-panel.c:862
+#: panels/user-accounts/cc-user-panel.c:763
+#: panels/user-accounts/cc-user-panel.c:866
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Diaktifkan"
 
-#: panels/user-accounts/cc-user-panel.c:1184
+#: panels/user-accounts/cc-user-panel.c:1186
 msgid "Failed to contact the accounts service"
 msgstr "Gagal menghubungi layanan akun"
 
-#: panels/user-accounts/cc-user-panel.c:1186
+#: panels/user-accounts/cc-user-panel.c:1188
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Pastikan bahwa AccountService ini telah terpasang dan diaktifkan."
 
-#: panels/user-accounts/cc-user-panel.c:1207
+#: panels/user-accounts/cc-user-panel.c:1209
 msgid "This panel must be unlocked to change this setting"
 msgstr "Panel ini harus dibuka untuk mengubah pengaturan ini"
 
-#: panels/user-accounts/cc-user-panel.c:1274
+#: panels/user-accounts/cc-user-panel.c:1276
 msgid "Delete the selected user account"
 msgstr "Hapus akun pengguna yang dipilih"
 
-#: panels/user-accounts/cc-user-panel.c:1278
-#: panels/user-accounts/cc-user-panel.c:1387
+#: panels/user-accounts/cc-user-panel.c:1280
+#: panels/user-accounts/cc-user-panel.c:1389
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7585,7 +7589,7 @@ msgstr ""
 "Untuk menghapus akun pengguna yang dipilih,\n"
 "pertama kali klik ikon *"
 
-#: panels/user-accounts/cc-user-panel.c:1427
+#: panels/user-accounts/cc-user-panel.c:1431
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Buka Kunci untuk Menambahkan Pengguna dan Mengubah Pengaturan"
 
