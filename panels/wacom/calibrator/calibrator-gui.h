@@ -51,10 +51,6 @@ gboolean calib_area_finish (CalibArea *area);
 
 void calib_area_free (CalibArea *area);
 
-void calib_area_get_display_size (CalibArea *area,
-				  gint      *width,
-				  gint      *height);
-
 void calib_area_get_axis (CalibArea *area,
                           XYinfo    *new_axis,
                           gboolean  *swap_xy);

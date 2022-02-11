@@ -113,8 +113,6 @@ get_layout_type (CcWacomDevice *device)
 
 static void
 set_calibration (CcWacomDevice  *device,
-                 const gint      display_width,
-                 const gint      display_height,
                  gdouble        *cal,
                  gsize           ncal,
                  GSettings      *settings)
@@ -139,9 +137,8 @@ set_calibration (CcWacomDevice  *device,
 	array = g_variant_new_array (G_VARIANT_TYPE_DOUBLE, tmp, nvalues);
 	g_settings_set_value (settings, "area", array);
 
-	g_debug ("Setting area to %f, %f, %f, %f (left/right/top/bottom) (last used resolution: %d x %d)",
-		 cal[0], cal[1], cal[2], cal[3],
-		 display_width, display_height);
+	g_debug ("Setting area to %f, %f, %f, %f (left/right/top/bottom)",
+		 cal[0], cal[1], cal[2], cal[3]);
 }
 
 static void
@@ -151,7 +148,6 @@ finish_calibration (CalibArea *area,
 	CcWacomPage *page = (CcWacomPage *) user_data;
 	XYinfo axis;
 	gdouble cal[4];
-	gint display_width, display_height;
 
 	if (calib_area_finish (area)) {
 		calib_area_get_padding (area, &axis);
@@ -160,11 +156,7 @@ finish_calibration (CalibArea *area,
 		cal[2] = axis.y_min;
 		cal[3] = axis.y_max;
 
-		calib_area_get_display_size (area, &display_width, &display_height);
-
 		set_calibration (page->stylus,
-				 display_width,
-				 display_height,
 				 cal, 4, page->wacom_settings);
 	} else {
 		/* Reset the old values */
