@@ -21,11 +21,10 @@
 
 struct _CcInputRow
 {
-  GtkListBoxRow    parent_instance;
+  AdwActionRow     parent_instance;
 
   CcInputSource   *source;
 
-  GtkLabel        *name_label;
   GtkButton       *remove_button;
   GtkButton       *settings_button;
   GtkSeparator    *settings_separator;
@@ -37,7 +36,7 @@ struct _CcInputRow
   gdouble          drag_y;
 };
 
-G_DEFINE_TYPE (CcInputRow, cc_input_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcInputRow, cc_input_row, ADW_TYPE_ACTION_ROW)
 
 enum
 {
@@ -185,7 +184,6 @@ cc_input_row_class_init (CcInputRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-input-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcInputRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, remove_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_button);
   gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_separator);
@@ -260,7 +258,7 @@ static void
 label_changed_cb (CcInputRow *self)
 {
   g_autofree gchar *label = cc_input_source_get_label (self->source);
-  gtk_label_set_text (self->name_label, label);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), label);
 }
 
 CcInputRow *

@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <gio/gdesktopappinfo.h>
 
@@ -25,7 +26,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_INPUT_ROW (cc_input_row_get_type ())
-G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcInputRow, cc_input_row, CC, INPUT_ROW, AdwActionRow)
 
 CcInputRow      *cc_input_row_new           (CcInputSource *source);
 
