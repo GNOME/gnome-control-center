@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-03 17:23+0000\n"
-"PO-Revision-Date: 2022-02-03 14:00+0100\n"
+"POT-Creation-Date: 2022-02-10 22:35+0000\n"
+"PO-Revision-Date: 2022-02-12 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -36,8 +36,8 @@ msgid "Session Bus"
 msgstr "Saioaren bus-a"
 
 #: panels/applications/cc-applications-panel.c:809
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:333
-#: panels/thunderbolt/cc-bolt-panel.ui:377
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:266
+#: panels/thunderbolt/cc-bolt-panel.ui:310
 msgid "Devices"
 msgstr "Gailuak"
 
@@ -58,7 +58,7 @@ msgstr "Sarea atzitu dezake"
 
 #: panels/applications/cc-applications-panel.c:818
 #: panels/applications/cc-applications-panel.c:820
-#: panels/search/cc-search-locations-dialog.c:361
+#: panels/search/cc-search-locations-dialog.c:384
 msgid "Home"
 msgstr "Karpeta nagusia"
 
@@ -113,7 +113,7 @@ msgstr "Erabilitako disko-espazioa: %s"
 #: panels/applications/cc-applications-panel.c:1387
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:34
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Applications"
 msgstr "Aplikazioak"
 
@@ -160,8 +160,8 @@ msgstr "Jaso sistemaren bilaketak eta bidali emaitzak."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:857
-#: panels/user-accounts/cc-user-panel.c:955
+#: panels/user-accounts/cc-user-panel.c:765
+#: panels/user-accounts/cc-user-panel.c:869
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -322,11 +322,11 @@ msgstr "Kontrolatu aplikazioen baimenak eta ezarpenak"
 msgid "application;flatpak;permission;setting;"
 msgstr "aplikazioa;flatpack;baimena;ezarpena;"
 
-#: panels/background/cc-background-chooser.c:293
+#: panels/background/cc-background-chooser.c:307
 msgid "Select a picture"
 msgstr "Hautatu argazki bat"
 
-#: panels/background/cc-background-chooser.c:296
+#: panels/background/cc-background-chooser.c:310
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:31
@@ -341,46 +341,46 @@ msgstr "Hautatu argazki bat"
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
-#: panels/search/cc-search-locations-dialog.c:639
+#: panels/search/cc-search-locations-dialog.c:677
 #: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
-#: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:105
-#: panels/user-accounts/cc-avatar-chooser.c:228
-#: panels/user-accounts/cc-fingerprint-dialog.ui:36
-#: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:647
-#: panels/user-accounts/cc-user-panel.c:665
-#: panels/user-accounts/data/join-dialog.ui:20
+#: panels/user-accounts/cc-add-user-dialog.ui:25
+#: panels/user-accounts/cc-avatar-chooser.c:94
+#: panels/user-accounts/cc-avatar-chooser.c:165
+#: panels/user-accounts/cc-fingerprint-dialog.ui:30
+#: panels/user-accounts/cc-password-dialog.ui:18
+#: panels/user-accounts/cc-user-panel.c:555
+#: panels/user-accounts/cc-user-panel.c:573
+#: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:268
 msgid "_Cancel"
 msgstr "_Utzi"
 
-#: panels/background/cc-background-chooser.c:297
+#: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
 #: panels/sharing/cc-sharing-panel.c:433
-#: panels/user-accounts/cc-avatar-chooser.c:229
+#: panels/user-accounts/cc-avatar-chooser.c:166
 msgid "_Open"
 msgstr "_Ireki"
 
-#: panels/background/cc-background-item.c:140
+#: panels/background/cc-background-item.c:169
 msgid "multiple sizes"
 msgstr "hainbat tamaina"
 
 #. translators: 100 × 100px
 #. * Note that this is not an "x", but U+00D7 MULTIPLICATION SIGN
-#: panels/background/cc-background-item.c:144
+#: panels/background/cc-background-item.c:173
 #, c-format
 msgid "%d × %d"
 msgstr "%d × %d"
 
-#: panels/background/cc-background-item.c:289
+#: panels/background/cc-background-item.c:325
 msgid "No Desktop Background"
 msgstr "Mahaigaineko atzeko planorik ez"
 
-#: panels/background/cc-background-panel.c:173
+#: panels/background/cc-background-panel.c:177
 msgid "Current background"
 msgstr "Uneko atzeko planoa"
 
@@ -594,7 +594,7 @@ msgstr "_Jarraitu"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:73
+#: panels/user-accounts/cc-fingerprint-dialog.ui:58
 msgid "_Done"
 msgstr "_Eginda"
 
@@ -855,7 +855,7 @@ msgstr "_Inportatu fitxategia…"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/network/connection-editor/net-connection-editor.c:497
 #: panels/printers/new-printer-dialog.ui:84
-#: panels/user-accounts/cc-add-user-dialog.ui:47
+#: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
 msgstr "_Gehitu"
 
@@ -1477,7 +1477,7 @@ msgid ""
 msgstr "pantaila;blokeoa;diagnostikoa;kraskadura;pribatua;azkena;aldi baterakoa;tmp;indizea;izena;sarea;identitatea;pribatutasuna;"
 
 #: panels/display/cc-display-panel.c:512
-#: panels/notifications/cc-notifications-panel.c:202
+#: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
 #: panels/universal-access/cc-ua-panel.c:337
 #: panels/universal-access/cc-ua-panel.c:469
@@ -1488,7 +1488,7 @@ msgid "On"
 msgstr "Aktibatuta"
 
 #: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:202
+#: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
 #: panels/universal-access/cc-ua-panel.c:337
 #: panels/universal-access/cc-ua-panel.c:469
@@ -2176,7 +2176,7 @@ msgstr "Lasterbideak berrezartzeak zure lasterbide pertsonalizatuei eragin dieza
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
 #: panels/printers/authentication-dialog.ui:19
-#: panels/printers/ppd-selection-dialog.ui:27
+#: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
 msgid "Cancel"
 msgstr "Utzi"
@@ -2254,8 +2254,10 @@ msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr "Sakatu Esc tekla laster-tekla bertan behera uzteko edo atzera-tekla desgaitzeko."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
-#: panels/printers/pp-details-dialog.ui:35
-#: panels/wwan/cc-wwan-apn-dialog.ui:101
+#: panels/printers/pp-details-dialog.ui:36
+#: panels/user-accounts/cc-add-user-dialog.ui:68
+#: panels/user-accounts/cc-user-panel.ui:125
+#: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Izena"
 
@@ -2693,51 +2695,51 @@ msgstr "Kudeatu hobespenak produktibitaterako eta aldi bereko zereginetarako"
 msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
 msgstr "Aldi bereko zereginak;Produktibitatea:Pertsonalizazioa;Mahaigaina;"
 
-#: panels/network/cc-network-panel.c:680 panels/network/cc-wifi-panel.ui:300
+#: panels/network/cc-network-panel.c:662 panels/network/cc-wifi-panel.ui:300
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr "Zerbait gaizki joan da. Jar zaitez harremanetan softwarearen sortzailearekin."
 
-#: panels/network/cc-network-panel.c:687
+#: panels/network/cc-network-panel.c:669
 msgid "NetworkManager needs to be running."
 msgstr "NetworkManager exekutatzen egon behar da."
 
-#: panels/network/cc-network-panel.ui:47
+#: panels/network/cc-network-panel.ui:21 panels/network/cc-network-panel.ui:26
 msgid "Other Devices"
 msgstr "Beste gailuak"
 
-#: panels/network/cc-network-panel.ui:74
+#: panels/network/cc-network-panel.ui:37 panels/network/cc-network-panel.ui:53
 #: panels/network/connection-editor/net-connection-editor.c:580
 msgid "VPN"
 msgstr "VPNa"
 
-#: panels/network/cc-network-panel.ui:106
+#: panels/network/cc-network-panel.ui:70
 msgid "Not set up"
 msgstr "Konfiguratu gabe"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:206
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:261
+#: panels/network/cc-wifi-connection-row.c:263
 msgid "Insecure network (WEP)"
 msgstr "Sare ez-segurua (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:265
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Sare segurua (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:269
+#: panels/network/cc-wifi-connection-row.c:271
 msgid "Secure network (WPA2)"
 msgstr "Sare segurua (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Secure network (WPA3)"
 msgstr "Sare segurua (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network"
 msgstr "Sare segurua"
 
@@ -2747,9 +2749,9 @@ msgid "Connected"
 msgstr "Konektatuta"
 
 #: panels/network/cc-wifi-connection-row.ui:62
-#: panels/network/net-device-ethernet.c:327
-#: panels/network/network-bluetooth.ui:34 panels/network/network-ethernet.ui:75
-#: panels/network/network-mobile.ui:321 panels/network/network-vpn.ui:55
+#: panels/network/net-device-ethernet.c:325
+#: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:50
+#: panels/network/network-mobile.ui:321 panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "Aukerak…"
 
@@ -2792,8 +2794,10 @@ msgstr "Sarearen izena"
 #: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:330
 #: panels/printers/pp-jobs-dialog.ui:52
-#: panels/user-accounts/cc-add-user-dialog.ui:249
-#: panels/wwan/cc-wwan-apn-dialog.ui:177
+#: panels/user-accounts/cc-add-user-dialog.ui:145
+#: panels/user-accounts/cc-add-user-dialog.ui:181
+#: panels/user-accounts/cc-add-user-dialog.ui:362
+#: panels/wwan/cc-wwan-apn-dialog.ui:172
 msgid "Password"
 msgstr "Pasahitza"
 
@@ -2949,7 +2953,7 @@ msgid "Never"
 msgstr "Inoiz ere ez"
 
 #: panels/network/connection-editor/ce-page-details.c:166
-#: panels/network/net-device-ethernet.c:107
+#: panels/network/net-device-ethernet.c:105
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
@@ -2963,7 +2967,7 @@ msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
 #: panels/network/connection-editor/ce-page-details.c:295
-#: panels/network/net-device-ethernet.c:219
+#: panels/network/net-device-ethernet.c:217
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
@@ -3007,35 +3011,35 @@ msgstr "Oso ona"
 
 #: panels/network/connection-editor/ce-page-details.c:409
 #: panels/network/connection-editor/details-page.ui:94
-#: panels/network/net-device-ethernet.c:146
+#: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "IPv4 helbidea"
 
 #: panels/network/connection-editor/ce-page-details.c:410
 #: panels/network/connection-editor/details-page.ui:110
-#: panels/network/net-device-ethernet.c:148
+#: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:176
 msgid "IPv6 Address"
 msgstr "IPv6 helbidea"
 
 #: panels/network/connection-editor/ce-page-details.c:412
 #: panels/network/connection-editor/ce-page-details.c:413
+#: panels/network/net-device-ethernet.c:149
 #: panels/network/net-device-ethernet.c:151
-#: panels/network/net-device-ethernet.c:153
 #: panels/network/net-device-mobile.c:445
 #: panels/network/net-device-mobile.c:446 panels/network/network-mobile.ui:163
 msgid "IP Address"
 msgstr "IP helbidea"
 
 #: panels/network/connection-editor/ce-page-details.c:417
-#: panels/network/net-device-ethernet.c:168
+#: panels/network/net-device-ethernet.c:166
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
 #: panels/network/connection-editor/ce-page-details.c:418
-#: panels/network/net-device-ethernet.c:169
+#: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
@@ -3046,8 +3050,8 @@ msgstr "DNS6"
 #: panels/network/connection-editor/details-page.ui:192
 #: panels/network/connection-editor/ip4-page.ui:165
 #: panels/network/connection-editor/ip6-page.ui:175
+#: panels/network/net-device-ethernet.c:169
 #: panels/network/net-device-ethernet.c:171
-#: panels/network/net-device-ethernet.c:173
 #: panels/network/net-device-mobile.c:453
 #: panels/network/net-device-mobile.c:454 panels/network/network-mobile.ui:203
 #: panels/network/network-mobile.ui:217
@@ -3143,7 +3147,7 @@ msgid "Link speed"
 msgstr "Esteka-abiadura"
 
 #: panels/network/connection-editor/details-page.ui:126
-#: panels/network/net-device-ethernet.c:156
+#: panels/network/net-device-ethernet.c:154
 msgid "Hardware Address"
 msgstr "Hardwarearen helbidea"
 
@@ -3152,9 +3156,9 @@ msgid "Supported Frequencies"
 msgstr "Onartutako maiztasunak"
 
 #: panels/network/connection-editor/details-page.ui:158
+#: panels/network/net-device-ethernet.c:158
 #: panels/network/net-device-ethernet.c:160
 #: panels/network/net-device-ethernet.c:162
-#: panels/network/net-device-ethernet.c:164
 #: panels/network/network-mobile.ui:189
 msgid "Default Route"
 msgstr "Ibilbide lehenetsia"
@@ -3241,7 +3245,7 @@ msgstr "Helbideak"
 #: panels/network/connection-editor/ip4-page.ui:246
 #: panels/network/connection-editor/ip6-page.ui:122
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/printers/pp-details-dialog.ui:86
+#: panels/printers/pp-details-dialog.ui:87
 msgid "Address"
 msgstr "Helbidea"
 
@@ -3413,19 +3417,19 @@ msgstr "Kontrolatu haririk gabeko sareetara nola konektatuko zaren"
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr "Sarea;Haririk gabea;Wi-Fia;Wifia;IPa;LANa;Bandazabala;DNSa;Wifigunea;"
 
-#: panels/network/net-device-ethernet.c:95
+#: panels/network/net-device-ethernet.c:93
 msgid "never"
 msgstr "inoiz ere ez"
 
-#: panels/network/net-device-ethernet.c:103
+#: panels/network/net-device-ethernet.c:101
 msgid "today"
 msgstr "gaur"
 
-#: panels/network/net-device-ethernet.c:105
+#: panels/network/net-device-ethernet.c:103
 msgid "yesterday"
 msgstr "atzo"
 
-#: panels/network/net-device-ethernet.c:179
+#: panels/network/net-device-ethernet.c:177
 msgid "Last used"
 msgstr "Erabilitako azkena"
 
@@ -3434,8 +3438,8 @@ msgstr "Erabilitako azkena"
 #. * profile. It is also used to display ethernet in the
 #. * device list.
 #.
-#: panels/network/net-device-ethernet.c:266
-#: panels/network/network-bluetooth.ui:17 panels/network/network-ethernet.ui:13
+#: panels/network/net-device-ethernet.c:264
+#: panels/network/network-bluetooth.ui:5 panels/network/network-ethernet.ui:5
 msgid "Wired"
 msgstr "Hariduna"
 
@@ -3490,12 +3494,12 @@ msgstr "Hau ez da gomendatzen sare publiko ez-fidagarrietan."
 #. * window for vpn connections, it is also used to display
 #. * vpn connections in the device list.
 #.
-#: panels/network/net-vpn.c:65 panels/network/net-vpn.c:158
+#: panels/network/net-vpn.c:63 panels/network/net-vpn.c:156
 #, c-format
 msgid "%s VPN"
 msgstr "%s VPNa"
 
-#: panels/network/network-bluetooth.ui:23
+#: panels/network/network-bluetooth.ui:11
 msgid "Turn device off"
 msgstr "Desaktibatu gailua"
 
@@ -3552,7 +3556,7 @@ msgstr "Socks proxy-aren ataka"
 msgid "_Configuration URL"
 msgstr "_Konfigurazioaren URLa"
 
-#: panels/network/network-vpn.ui:46
+#: panels/network/network-vpn.ui:11
 msgid "Turn VPN connection off"
 msgstr "Desaktibatu VPN konexioa"
 
@@ -3929,8 +3933,6 @@ msgstr "EAP-LEAPren pasahitza falta da"
 #: panels/network/wireless-security/eap-method-leap.ui:11
 #: panels/network/wireless-security/eap-method-simple.ui:11
 #: panels/network/wireless-security/ws-leap.ui:11
-#: panels/user-accounts/cc-add-user-dialog.ui:146
-#: panels/user-accounts/cc-add-user-dialog.ui:527
 msgid "_Username"
 msgstr "_Erabiltzaile-izena:"
 
@@ -3940,9 +3942,7 @@ msgstr "_Erabiltzaile-izena:"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-add-user-dialog.ui:310
-#: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:365
+#: panels/user-accounts/cc-user-panel.ui:168
 msgid "_Password"
 msgstr "_Pasahitza"
 
@@ -4097,8 +4097,7 @@ msgid "CHAP"
 msgstr "CHAP"
 
 #: panels/network/wireless-security/eap-method-ttls.ui:68
-#: panels/user-accounts/cc-add-user-dialog.ui:507
-#: panels/user-accounts/data/join-dialog.ui:116
+#: panels/user-accounts/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_Domeinua"
 
@@ -4224,49 +4223,49 @@ msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
 msgstr "baliogabeko wepwpa-psk: ezin da hamaseitar gisa 64 byte dituen gakoa interpretatu"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:22
+#: panels/notifications/cc-app-notifications-dialog.ui:15
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Jakinarazpenak"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:37
+#: panels/notifications/cc-app-notifications-dialog.ui:29
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "Soinu-a_bisuak"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:51
+#: panels/notifications/cc-app-notifications-dialog.ui:42
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "_Jakinarazpenen laster-leihoak"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:52
+#: panels/notifications/cc-app-notifications-dialog.ui:43
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
 msgstr "Jakinarazpenak jakinarazpenen zerrendan agertzen jarraituko dute laster-leihoak desgaituta daudenean."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:66
+#: panels/notifications/cc-app-notifications-dialog.ui:56
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Erakutsi mezuen ed_ukia laster-leihoetan"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:80
+#: panels/notifications/cc-app-notifications-dialog.ui:69
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Pantaila b_lokeatzearen jakinarazpenak"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:94
+#: panels/notifications/cc-app-notifications-dialog.ui:82
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Erakutsi mezuen e_dukia pantaila blokeatzean"
 
-#: panels/notifications/cc-notifications-panel.ui:16
+#: panels/notifications/cc-notifications-panel.ui:10
 msgid "_Do Not Disturb"
 msgstr "Ez _gogaitu"
 
-#: panels/notifications/cc-notifications-panel.ui:23
+#: panels/notifications/cc-notifications-panel.ui:17
 msgid "_Lock Screen Notifications"
 msgstr "Pantaila b_lokeatzearen jakinarazpenak"
 
@@ -4748,7 +4747,10 @@ msgstr "Autentifikatu"
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:41
 #: panels/printers/new-printer-dialog.ui:310
-#: panels/printers/pp-jobs-dialog.ui:41 panels/wwan/cc-wwan-apn-dialog.ui:153
+#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
 msgid "Username"
 msgstr "Erabiltzaile-izena"
 
@@ -4823,7 +4825,7 @@ msgstr "Sartu zure erabiltzaile-izena eta pasahitza inprimatze-zerbitzarian."
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
-#: panels/printers/pp-details-dialog.c:363
+#: panels/printers/pp-details-dialog.c:365
 #, c-format
 msgid "%s Details"
 msgstr "%s - Xehetasunak"
@@ -4842,44 +4844,44 @@ msgid ""
 "PPD.GZ)"
 msgstr "PostScript Printer Description fitxategiak (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: panels/printers/pp-details-dialog.ui:61 panels/printers/printer-entry.ui:212
+#: panels/printers/pp-details-dialog.ui:62 panels/printers/printer-entry.ui:213
 msgid "Location"
 msgstr "Kokalekua"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:111
+#: panels/printers/pp-details-dialog.ui:112
 #: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Kontrolatzailea"
 
-#: panels/printers/pp-details-dialog.ui:150
+#: panels/printers/pp-details-dialog.ui:151
 msgid "Searching for preferred drivers…"
 msgstr "Kontrolatzaile hobetsiak bilatzen…"
 
-#: panels/printers/pp-details-dialog.ui:169
+#: panels/printers/pp-details-dialog.ui:170
 msgid "Search for Drivers"
 msgstr "Bilatu kontrolatzaileak"
 
-#: panels/printers/pp-details-dialog.ui:177
+#: panels/printers/pp-details-dialog.ui:178
 msgid "Select from Database…"
 msgstr "Hautatu datu-basetik…"
 
-#: panels/printers/pp-details-dialog.ui:185
+#: panels/printers/pp-details-dialog.ui:186
 msgid "Install PPD File…"
 msgstr "Instalatu PPD fitxategia…"
 
-#: panels/printers/ppd-selection-dialog.ui:10
+#: panels/printers/ppd-selection-dialog.ui:8
 msgid "Select Printer Driver"
 msgstr "Hautatu inprimagailuaren kontrolatzailea"
-
-#: panels/printers/ppd-selection-dialog.ui:40
-#: panels/user-accounts/cc-avatar-chooser.c:107
-msgid "Select"
-msgstr "Hautatu"
 
 #: panels/printers/ppd-selection-dialog.ui:75
 msgid "Loading drivers database…"
 msgstr "Kontrolatzaileen datu-basea kargatzen…"
+
+#: panels/printers/ppd-selection-dialog.ui:91
+#: panels/user-accounts/cc-avatar-chooser.c:96
+msgid "Select"
+msgstr "Hautatu"
 
 #. Translators: The found device is a JetDirect printer
 #: panels/printers/pp-host.c:478
@@ -5005,6 +5007,7 @@ msgstr "Sartu kredentzialak %s(e)tik inprimatzeko."
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
+#: panels/user-accounts/cc-add-user-dialog.ui:300
 msgid "Domain"
 msgstr "Domeinua"
 
@@ -5223,7 +5226,7 @@ msgid "Manufacturer"
 msgstr "Fabrikatzailea"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:164
+#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:165
 msgid "No Active Jobs"
 msgstr "Ez dago lan aktiborik"
 
@@ -5366,22 +5369,22 @@ msgstr "Garbitu inprimagailuaren buruak"
 msgid "Remove Printer"
 msgstr "Kendu inprimagailua"
 
-#: panels/printers/printer-entry.ui:184
+#: panels/printers/printer-entry.ui:185
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Modeloa"
 
-#: panels/printers/printer-entry.ui:239
+#: panels/printers/printer-entry.ui:240
 msgid "Ink Level"
 msgstr "Tintaren maila"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:301
+#: panels/printers/printer-entry.ui:302
 msgid "Please restart when the problem is resolved."
 msgstr "Berrabiarazi arazoa konpondutakoan."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:307
+#: panels/printers/printer-entry.ui:308
 msgid "Restart"
 msgstr "Berrabiarazi"
 
@@ -5408,43 +5411,35 @@ msgstr "Badirudi sistemako inprimatzeko\n"
 "    zerbitzua ez dagoela erabilgarri."
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
-#: panels/region/cc-format-chooser.ui:4 panels/region/cc-region-panel.ui:160
+#: panels/region/cc-format-chooser.ui:4
 msgid "Formats"
 msgstr "Formatuak"
 
-#: panels/region/cc-format-chooser.ui:37
-#: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/region/cc-format-chooser.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Atzera"
 
 #: panels/region/cc-format-chooser.ui:76
-msgid ""
-"Choose the format for numbers, dates and currencies. Changes take effect on "
-"next login."
-msgstr "Aukeratu zenbakietarako, datetarako eta monetetarako formatuak. Aldaketak hurrengo saioa hastean sartuko dira indarrean."
-
-#: panels/region/cc-format-chooser.ui:90
 msgid "Search locales…"
 msgstr "Bilatu hizkuntzak…"
 
-#: panels/region/cc-format-chooser.ui:127
+#: panels/region/cc-format-chooser.ui:113
 msgid "Common Formats"
 msgstr "Formatu arruntak"
 
-#: panels/region/cc-format-chooser.ui:155
+#: panels/region/cc-format-chooser.ui:140
 msgid "All Formats"
 msgstr "Formatu guztiak"
 
-#: panels/region/cc-format-chooser.ui:203
+#: panels/region/cc-format-chooser.ui:188
 msgid "No Search Results"
 msgstr "Bilaketak ez du emaitzarik"
 
-#: panels/region/cc-format-chooser.ui:215
+#: panels/region/cc-format-chooser.ui:200
 msgid "Searches can be for countries or languages."
 msgstr "Bilaketan herrialdeak edo hizkuntzak bilatu daitezke."
 
-#: panels/region/cc-format-chooser.ui:253
+#: panels/region/cc-format-chooser.ui:236
 msgid "Preview"
 msgstr "Aurrebista"
 
@@ -5478,46 +5473,36 @@ msgstr "Neurria"
 msgid "Paper"
 msgstr "Papera"
 
-#: panels/region/cc-region-panel.ui:32
-msgid "My Account"
-msgstr "Nire kontua"
+#: panels/region/cc-region-panel.ui:19
+msgid "Language and format will be changed after next login"
+msgstr "Hizkuntza eta formatua hurrengo saio-hasieran aldatuko da"
 
-#: panels/region/cc-region-panel.ui:38
-msgid "Login Screen"
-msgstr "Saio-hasierako pantaila"
+#: panels/region/cc-region-panel.ui:29
+msgid "Logout…"
+msgstr "Amaitu saioa…"
+
+#: panels/region/cc-region-panel.ui:45
+msgid ""
+"The language setting is used for interface text and web pages. Formats is "
+"used for numbers, dates, and currencies."
+msgstr "Hizkuntza-ezarpena interfazearen testuan eta web-orrietan erabiliko da. Formatuak zenbakietarako, datetarako eta monetetarako erabiliko da."
 
 #: panels/region/cc-region-panel.ui:51
-msgid "Language"
-msgstr "Hizkuntza"
+msgid "Your Account"
+msgstr "Zure kontua"
 
-#: panels/region/cc-region-panel.ui:60
-msgid "The language used for text in windows and web pages."
-msgstr "Leihoetako eta web orrietako testuan erabiliko den hizkuntza."
-
-#: panels/region/cc-region-panel.ui:90
-#: panels/user-accounts/cc-user-panel.ui:311
+#: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
+#: panels/user-accounts/cc-user-panel.ui:292
 msgid "_Language"
 msgstr "_Hizkuntza"
 
-#: panels/region/cc-region-panel.ui:126
-msgid "Restart the session for changes to take effect"
-msgstr "Amaitu saioa aldaketek eragina izan dezaten"
-
-#: panels/region/cc-region-panel.ui:140
-msgid "Restart…"
-msgstr "Berrabiarazi…"
-
-#: panels/region/cc-region-panel.ui:169
-msgid "The format used for numbers, dates, and currencies."
-msgstr "Zenbakietarako, datetarako eta monetetarako erabiliko den formatua."
-
-#: panels/region/cc-region-panel.ui:194
+#: panels/region/cc-region-panel.ui:72 panels/region/cc-region-panel.ui:111
 msgid "_Formats"
 msgstr "_Formatuak"
 
-#: panels/region/cc-region-panel.ui:224
-msgid "Login settings are used by all users when logging into the system"
-msgstr "Erabiltzaile guztiek saio-hasierako ezarpenak darabilte sisteman saioa hastean"
+#: panels/region/cc-region-panel.ui:90
+msgid "Login Screen"
+msgstr "Saio-hasierako pantaila"
 
 #: panels/region/gnome-region-panel.desktop.in.in:3
 msgid "Region & Language"
@@ -5676,11 +5661,11 @@ msgid ""
 "removable;media;autorun;"
 msgstr "gailua;sistema;lehenetsia;aplikazioa;hobetsia;cd;dvd;usb;audioa;bideoa;diskoa;aldagarria;euskarria;exekuzioa;"
 
-#: panels/search/cc-search-locations-dialog.c:636
+#: panels/search/cc-search-locations-dialog.c:674
 msgid "Select Location"
 msgstr "Hautatu kokalekua"
 
-#: panels/search/cc-search-locations-dialog.c:640
+#: panels/search/cc-search-locations-dialog.c:678
 msgid "_OK"
 msgstr "_Ados"
 
@@ -5689,35 +5674,37 @@ msgstr "_Ados"
 msgid "Search Locations"
 msgstr "Bilatu kokalekuak"
 
-#: panels/search/cc-search-locations-dialog.ui:28
-#: panels/search/cc-search-locations-dialog.ui:58
-#: panels/search/cc-search-locations-dialog.ui:89
+#: panels/search/cc-search-locations-dialog.ui:13
 msgid ""
 "Folders which are searched by system applications, such as Files, Photos and "
 "Videos."
 msgstr "Sistema-aplikazioek zein karpetetan egingo dituzten bilaketak, adibidez 'Fitxategiak', 'Argazkiak' eta 'Bideoak' karpetetan"
 
-#: panels/search/cc-search-locations-dialog.ui:41
+#: panels/search/cc-search-locations-dialog.ui:18
 msgid "Places"
 msgstr "Lekuak"
 
-#: panels/search/cc-search-locations-dialog.ui:73
+#: panels/search/cc-search-locations-dialog.ui:33
 msgid "Bookmarks"
 msgstr "Laster-markak"
 
-#: panels/search/cc-search-locations-dialog.ui:129
-msgid "Other"
-msgstr "Bestelakoa"
+#: panels/search/cc-search-locations-dialog.ui:48
+msgid "Others"
+msgstr "Bestelakoak"
 
-#: panels/search/cc-search-panel.c:150
+#: panels/search/cc-search-locations-dialog.ui:55
+msgid "Add Location"
+msgstr "Gehitu kokalekua"
+
+#: panels/search/cc-search-panel.c:165
 msgid "No applications found"
 msgstr "Ez da aplikaziorik aurkitu"
 
-#: panels/search/cc-search-panel-row.ui:48
+#: panels/search/cc-search-panel-row.ui:49
 msgid "Move Up"
 msgstr "Eraman gora"
 
-#: panels/search/cc-search-panel-row.ui:52
+#: panels/search/cc-search-panel-row.ui:53
 msgid "Move Down"
 msgstr "Eraman behera"
 
@@ -5907,7 +5894,7 @@ msgstr "Gaitu edo desgaitu urruneko saio-hasiera"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "Autentifikazioa behar da urruneko saioa gaitu edo desgaitzeko"
 
-#: panels/sound/cc-alert-chooser.c:151
+#: panels/sound/cc-alert-chooser.c:150
 msgid "Custom"
 msgstr "Pertsonalizatua"
 
@@ -5915,15 +5902,15 @@ msgstr "Pertsonalizatua"
 msgid "Bark"
 msgstr "Zaunka"
 
-#: panels/sound/cc-alert-chooser.ui:19
+#: panels/sound/cc-alert-chooser.ui:20
 msgid "Drip"
 msgstr "Ura"
 
-#: panels/sound/cc-alert-chooser.ui:26
+#: panels/sound/cc-alert-chooser.ui:28
 msgid "Glass"
 msgstr "Basoa"
 
-#: panels/sound/cc-alert-chooser.ui:33
+#: panels/sound/cc-alert-chooser.ui:36
 msgid "Sonar"
 msgstr "Sonarra"
 
@@ -6122,21 +6109,21 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Baimendua"
 
-#: panels/thunderbolt/cc-bolt-panel.c:170
+#: panels/thunderbolt/cc-bolt-panel.c:169
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr "Thunderbolt azpisistema (boltd) ez dago instalatuta edo gaizki konfiguratuta dago."
 
-#: panels/thunderbolt/cc-bolt-panel.c:426
-#: panels/thunderbolt/cc-bolt-panel.ui:224
+#: panels/thunderbolt/cc-bolt-panel.c:425
+#: panels/thunderbolt/cc-bolt-panel.ui:157
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Sarbide zuzena baimentzen du atrakeak eta kanpoko GPUak bezalako gailuetara."
 
-#: panels/thunderbolt/cc-bolt-panel.c:427
+#: panels/thunderbolt/cc-bolt-panel.c:426
 msgid "Only USB and Display Port devices can attach."
 msgstr "USB eta Display Port gailuak soilik erantsi daitezke."
 
-#: panels/thunderbolt/cc-bolt-panel.c:462
+#: panels/thunderbolt/cc-bolt-panel.c:461
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6144,32 +6131,36 @@ msgid ""
 msgstr "Thunderbolt ezin izan da detektatu.\n"
 "Sistemak ez dauka Thunderbolt euskarririk, BIOSean desgaitu egin da edo onartzen ez den segurtasun-maila batean ezarri da BIOSean."
 
-#: panels/thunderbolt/cc-bolt-panel.c:506
+#: panels/thunderbolt/cc-bolt-panel.c:505
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Thunderbolt euskarria desgaitu egin da BIOSean."
 
-#: panels/thunderbolt/cc-bolt-panel.c:510
+#: panels/thunderbolt/cc-bolt-panel.c:509
 msgid "Thunderbolt security level could not be determined."
 msgstr "Thunderbolten segurtasun-maila ezin izan da zehaztu."
 
-#: panels/thunderbolt/cc-bolt-panel.c:615
+#: panels/thunderbolt/cc-bolt-panel.c:614
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Errorea modu zuzena aldatzean: %s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:140
-msgid "No Thunderbolt support"
+#: panels/thunderbolt/cc-bolt-panel.ui:103
+msgid "No Thunderbolt Support"
 msgstr "Ez dago Thunderbolt euskarririk"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:220
+#: panels/thunderbolt/cc-bolt-panel.ui:104
+msgid "Could not connect to the thunderbolt subsystem."
+msgstr "Ezin izan da Thunderbolt azpisistemarekin konektatu"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:153
 msgid "Direct Access"
 msgstr "Sarbide zuzena"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:292
+#: panels/thunderbolt/cc-bolt-panel.ui:225
 msgid "Pending Devices"
 msgstr "Zain dauden gailuak"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:386
+#: panels/thunderbolt/cc-bolt-panel.ui:319
 msgid "No devices attached"
 msgstr "Ez dago gailurik erantsita"
 
@@ -6715,8 +6706,8 @@ msgid ""
 "Keyboard;Mouse;a11y;Accessibility;Universal Access;Contrast;Cursor;Sound;"
 "Zoom;Screen;Reader;big;high;large;text;font;size;AccessX;Sticky;Keys;Slow;"
 "Bounce;Mouse;Double;click;Delay;Speed;Assist;Repeat;Blink;visual;hearing;"
-"audio;typing;"
-msgstr "Teklatua;Sagua;a11y;Irisgarritasuna;Irisgarritasun Unibertsala;Kontrastea;Kurtsorea;Soinua;Zooma;Pantaila;Irakurgailua;handia;altua;handia;testua;letra-tipoa;tamaina;AccessX;Itsaskorra;Teklak;Geldoa;Errebotea;Sagua;Bikoitza;klik;Atzerapena;Abiadura;Lagundu;Errepikatu;Keinua;bisuala;entzumena;audioa;idazketa;"
+"audio;typing;animations;"
+msgstr "Teklatua;Sagua;a11y;Irisgarritasuna;Irisgarritasun Unibertsala;Kontrastea;Kurtsorea;Soinua;Zooma;Pantaila;Irakurgailua;handia;altua;handia;testua;letra-tipoa;tamaina;AccessX;Itsaskorra;Teklak;Geldoa;Errebotea;Sagua;Bikoitza;klik;Atzerapena;Abiadura;Lagundu;Errepikatu;Keinua;bisuala;entzumena;audioa;idazketa;animazioak;"
 
 #: panels/usage/cc-usage-panel.c:174
 msgid "Empty all items from Trash?"
@@ -6888,117 +6879,106 @@ msgid "Don't leave traces"
 msgstr "Ez utzi aztarnarik"
 
 #. FIXME
-#: panels/user-accounts/cc-add-user-dialog.c:34
+#: panels/user-accounts/cc-add-user-dialog.c:35
 msgid "Should match the web address of your login provider."
 msgstr "Zure kontuaren hornitzailearen web helbidearekin bat etorri behar du."
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:216
 msgid "Failed to add account"
 msgstr "Huts egin du kontua gehitzean"
 
-#: panels/user-accounts/cc-add-user-dialog.c:661
-#: panels/user-accounts/cc-password-dialog.c:261
+#: panels/user-accounts/cc-add-user-dialog.c:673
+#: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "Pasahitzak ez datoz bat."
 
-#: panels/user-accounts/cc-add-user-dialog.c:875
-#: panels/user-accounts/cc-add-user-dialog.c:914
-#: panels/user-accounts/cc-add-user-dialog.c:932
+#: panels/user-accounts/cc-add-user-dialog.c:877
+#: panels/user-accounts/cc-add-user-dialog.c:916
+#: panels/user-accounts/cc-add-user-dialog.c:934
 msgid "Failed to register account"
 msgstr "Huts egin du kontua erregistratzean"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1047
+#: panels/user-accounts/cc-add-user-dialog.c:1049
 msgid "No supported way to authenticate with this domain"
 msgstr "Ez dago modurik onartuta domeinu honekin autentifikatzeko"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1111
+#: panels/user-accounts/cc-add-user-dialog.c:1113
 msgid "Failed to join domain"
 msgstr "Huts egin du domeinuarekin elkartzean"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1166
+#: panels/user-accounts/cc-add-user-dialog.c:1168
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
 msgstr "Saioaren hasierako izenak ez du funtzionatzen.\n"
 "Saiatu berriro."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1173
+#: panels/user-accounts/cc-add-user-dialog.c:1175
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
 msgstr "Saioaren hasierako pasahitzak ez du funtzionatzen.\n"
 "Saiatu berriro."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1181
+#: panels/user-accounts/cc-add-user-dialog.c:1183
 msgid "Failed to log into domain"
 msgstr "Huts egin du domeinuan saioa hastean"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1236
+#: panels/user-accounts/cc-add-user-dialog.c:1238
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Ezin da domeinua aurkitu. Ongi idatzi duzu?"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:18
-#: panels/user-accounts/data/join-dialog.ui:11
+#: panels/user-accounts/cc-add-user-dialog.ui:15
+#: panels/user-accounts/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Gehitu erabiltzailea"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:180
-msgid "_Full Name"
-msgstr "_Izen osoa"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:206
-msgid "Standard"
-msgstr "Arrunta"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:216
+#: panels/user-accounts/cc-add-user-dialog.ui:131
 msgid "Administrator"
 msgstr "Administratzailea"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:232
-msgid "Account _Type"
-msgstr "Kontu _mota"
+#: panels/user-accounts/cc-add-user-dialog.ui:132
+msgid ""
+"Administrators can add and remove other users, and can change settings for "
+"all users. Parental controls cannot be applied to administrators."
+msgstr "Administratzaileek beste erabiltzaile batzuk gehitu edo kendu ditzakete, eta erabiltzaile guztien ezarpenak aldatu ditzakete. Administratzaileei ezin zaizkie guraso-kontrolak aplikatu."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:269
-msgid "Allow user to set a password when they next _login"
-msgstr "Baimendu erabiltzaileei _hurrengo saio-hasieran pasahitza ezartzea"
+#: panels/user-accounts/cc-add-user-dialog.ui:149
+msgid "User sets password on first login"
+msgstr "Erabiltzaileak pasahitza ezarriko du lehen saioa hastean"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:283
-msgid "Set a password _now"
-msgstr "Ezarri pasahitza _orain"
+#: panels/user-accounts/cc-add-user-dialog.ui:161
+msgid "Set password now"
+msgstr "Ezarri pasahitza orain"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:405
-msgid "_Confirm"
-msgstr "_Berretsi"
+#: panels/user-accounts/cc-add-user-dialog.ui:224
+msgid "Confirm"
+msgstr "Berretsi"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:485
-#: panels/user-accounts/cc-add-user-dialog.ui:692
+#: panels/user-accounts/cc-add-user-dialog.ui:278
+msgid "Enterprise Login"
+msgstr "Enpresako saio-hasiera"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:279
+msgid "User accounts which are managed by a company or organisation."
+msgstr "Enpresa edo erakunde batek kudeatzen dituen erabiltzaile-kontuak."
+
+#: panels/user-accounts/cc-add-user-dialog.ui:385
+msgid "You are Offline"
+msgstr "Deskonektatuta zaude"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:386
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
 "resources on the internet."
 msgstr "Enpresako saio-hasieran baimenduta dago erabiltzaileen kontu zentralizatua erabiltzea gailu honetan. Kontu hau enpresaren interneteko baliabideak atzitzeko ere erabil dezakezu."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:732
-msgid "You are Offline"
-msgstr "Deskonektatuta zaude"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:751
-msgid "You must be online in order to add enterprise users."
-msgstr "Konektatu zaitez enpresako erabiltzaileak gehitzeko."
-
-#: panels/user-accounts/cc-add-user-dialog.ui:782
-msgid "_Enterprise Login"
-msgstr "_Enpresako saio-hasiera"
-
-#: panels/user-accounts/cc-avatar-chooser.c:225
+#: panels/user-accounts/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
 msgstr "Arakatu irudi gehiago"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:39
-msgid "Take a Picture…"
-msgstr "Atera argazki bat…"
-
-#: panels/user-accounts/cc-avatar-chooser.ui:46
+#: panels/user-accounts/cc-avatar-chooser.ui:32
 msgid "Select a File…"
 msgstr "Hautatu fitxategia…"
 
@@ -7006,64 +6986,64 @@ msgstr "Hautatu fitxategia…"
 msgid "Fingerprint Manager"
 msgstr "Hatz-marken kudeatzailea"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:23
+#: panels/user-accounts/cc-fingerprint-dialog.ui:18
 msgid "Fingerprint"
 msgstr "Hatz-marka"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:118
+#: panels/user-accounts/cc-fingerprint-dialog.ui:86
 msgid "_No"
 msgstr "_Ez"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:128
+#: panels/user-accounts/cc-fingerprint-dialog.ui:94
 msgid "_Yes"
 msgstr "_Bai"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:155
+#: panels/user-accounts/cc-fingerprint-dialog.ui:114
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr "Erregistratutako zure hatz-markak ezabatze nahi duzu, hatz-marken bidezko saio-hasiera desgaituz?"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:249
-msgid "No Fingerprint device"
-msgstr "Ez dago hatz-marken gailurik"
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:259
-msgid "Ensure the device is properly connected."
-msgstr "Ziurtatu gailua ongi konektatuta dagoela."
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:264
+#: panels/user-accounts/cc-fingerprint-dialog.ui:170
 msgid "No fingerprint device"
 msgstr "Ez dago hatz-marken gailurik"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:280
-msgid "Choose the fingerprint device you want to configure"
-msgstr "Aukeratu konfiguratu nahi duzun hatz-marken gailua"
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/user-accounts/cc-fingerprint-dialog.ui:185
+msgid "No Fingerprint device"
+msgstr "Ez dago hatz-marken gailurik"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:309
+#: panels/user-accounts/cc-fingerprint-dialog.ui:194
+msgid "Ensure the device is properly connected."
+msgstr "Ziurtatu gailua ongi konektatuta dagoela."
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:202
 msgid "Fingerprint Device"
 msgstr "Hatz-marken gailua"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:322
+#: panels/user-accounts/cc-fingerprint-dialog.ui:211
+msgid "Choose the fingerprint device you want to configure"
+msgstr "Aukeratu konfiguratu nahi duzun hatz-marken gailua"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:242
+msgid "Fingerprint Login"
+msgstr "Hatz-marken bidezko saio-hasiera"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:249
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
 msgstr "Hatz-marken bidezko saio-hasierak hatza erabilita ordenagailua desblokeatzea eta saioa hastea ahalbidetzen du."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:352
+#: panels/user-accounts/cc-fingerprint-dialog.ui:276
 msgid "_Delete Fingerprints"
 msgstr "_Ezabatu hatz-markak"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:363
-msgid "Fingerprint Login"
-msgstr "Hatz-marken bidezko saio-hasiera"
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:412
+#: panels/user-accounts/cc-fingerprint-dialog.ui:290
 msgid "Fingerprint Enroll"
 msgstr "Hatz-marken erregistroa"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:436
+#: panels/user-accounts/cc-fingerprint-dialog.ui:349
 msgid "_Re-enroll this finger…"
 msgstr "Erregistratu berriro hatz hau…"
 
@@ -7095,128 +7075,128 @@ msgstr "Huts egin du hatz-marken irakurgailuarekin komunikatzeak"
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "Huts egin du hatz-marken daemonarekin komunikatzeak"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:585
+#: panels/user-accounts/cc-fingerprint-dialog.c:606
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "Huts egin du hatz-markak zerrendatzeak: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:652
+#: panels/user-accounts/cc-fingerprint-dialog.c:673
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "Huts egin du gordetako hatz-markak ezabatzeak: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:683
+#: panels/user-accounts/cc-fingerprint-dialog.c:704
 msgid "Left thumb"
 msgstr "Ezkerreko hatz potoloa"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:685
+#: panels/user-accounts/cc-fingerprint-dialog.c:706
 msgid "Left middle finger"
 msgstr "Ezkerreko erdiko hatza"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:687
+#: panels/user-accounts/cc-fingerprint-dialog.c:708
 msgid "_Left index finger"
 msgstr "E_zkerreko hatz erakuslea"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:689
+#: panels/user-accounts/cc-fingerprint-dialog.c:710
 msgid "Left ring finger"
 msgstr "Ezkerreko hatz nagia"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:691
+#: panels/user-accounts/cc-fingerprint-dialog.c:712
 msgid "Left little finger"
 msgstr "Ezkerreko hatz txikia"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:693
+#: panels/user-accounts/cc-fingerprint-dialog.c:714
 msgid "Right thumb"
 msgstr "Eskuineko hatz potoloa"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:695
+#: panels/user-accounts/cc-fingerprint-dialog.c:716
 msgid "Right middle finger"
 msgstr "Eskuineko erdiko hatza"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:697
+#: panels/user-accounts/cc-fingerprint-dialog.c:718
 msgid "_Right index finger"
 msgstr "E_skuineko hatz erakuslea"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:699
+#: panels/user-accounts/cc-fingerprint-dialog.c:720
 msgid "Right ring finger"
 msgstr "Eskuineko hatz nagia"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:701
+#: panels/user-accounts/cc-fingerprint-dialog.c:722
 msgid "Right little finger"
 msgstr "Eskuineko hatz txikia"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:703
+#: panels/user-accounts/cc-fingerprint-dialog.c:724
 msgid "Unknown Finger"
 msgstr "Hatz-marka ezezaguna"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:837
+#: panels/user-accounts/cc-fingerprint-dialog.c:858
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "Eginda"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:848
+#: panels/user-accounts/cc-fingerprint-dialog.c:869
 msgid "Fingerprint device disconnected"
 msgstr "Hatz-marken gailua deskonektatu da"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:854
+#: panels/user-accounts/cc-fingerprint-dialog.c:875
 msgid "Fingerprint device storage is full"
 msgstr "Hatz-marken gailuen biltegiratzea beteta dago"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:858
+#: panels/user-accounts/cc-fingerprint-dialog.c:879
 msgid "Failed to enroll new fingerprint"
 msgstr "Huts egin du hatz-marka berria erregistratzeak"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:889
+#: panels/user-accounts/cc-fingerprint-dialog.c:910
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Huts egin du erregistroa abiarazteak: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:897
+#: panels/user-accounts/cc-fingerprint-dialog.c:918
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Huts egin du hatz-marka berria erregistratzeak"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:928
+#: panels/user-accounts/cc-fingerprint-dialog.c:949
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Huts egin du erregistroa gelditzeak: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:974
+#: panels/user-accounts/cc-fingerprint-dialog.c:995
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr "Altxatu eta kokatu hatza irakurgailuan behin eta berriro, zure hatz-marka erregistratzeko"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1118
+#: panels/user-accounts/cc-fingerprint-dialog.c:1147
 msgid "Scan new fingerprint"
 msgstr "Eskaneatu hatz-marka berria"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1157
+#: panels/user-accounts/cc-fingerprint-dialog.c:1185
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Huts egin du hatz-marken %s gailua askatzeak: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1229
+#: panels/user-accounts/cc-fingerprint-dialog.c:1257
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Arazoa gailua irakurtzean"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1264
+#: panels/user-accounts/cc-fingerprint-dialog.c:1292
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Huts egin du hatz-marken %s gailuaren jabetza galdegiteak: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1413
+#: panels/user-accounts/cc-fingerprint-dialog.c:1441
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Huts egin du hatz-marken gailuak eskuratzeak: %s"
 
-#: panels/user-accounts/cc-login-history-dialog.c:69
+#: panels/user-accounts/cc-login-history-dialog.c:71
 msgid "This Week"
 msgstr "Aste honetan"
 
-#: panels/user-accounts/cc-login-history-dialog.c:72
+#: panels/user-accounts/cc-login-history-dialog.c:74
 msgid "Last Week"
 msgstr "Pasa den astean"
 
@@ -7224,22 +7204,22 @@ msgstr "Pasa den astean"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:82
-#: panels/user-accounts/cc-login-history-dialog.c:86
+#: panels/user-accounts/cc-login-history-dialog.c:84
+#: panels/user-accounts/cc-login-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%b %e"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:91
+#: panels/user-accounts/cc-login-history-dialog.c:93
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%b %e, %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: panels/user-accounts/cc-login-history-dialog.c:96
+#: panels/user-accounts/cc-login-history-dialog.c:98
 #, c-format
 msgctxt "login history week label"
 msgid "%s — %s"
@@ -7247,73 +7227,73 @@ msgstr "%s — %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:780
+#: panels/user-accounts/cc-login-history-dialog.c:179
+#: panels/user-accounts/cc-user-panel.c:688
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:784
+#: panels/user-accounts/cc-login-history-dialog.c:182
+#: panels/user-accounts/cc-user-panel.c:692
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: panels/user-accounts/cc-login-history-dialog.c:243
+#: panels/user-accounts/cc-login-history-dialog.c:238
 msgid "Session Ended"
 msgstr "Saioa amaituta"
 
-#: panels/user-accounts/cc-login-history-dialog.c:249
+#: panels/user-accounts/cc-login-history-dialog.c:244
 msgid "Session Started"
 msgstr "Saioa hasita"
 
 #. Translators: This is the title of the "Account Activity" dialog.
 #. The %s is the user real name.
-#: panels/user-accounts/cc-login-history-dialog.c:343
+#: panels/user-accounts/cc-login-history-dialog.c:339
 #, c-format
 msgid "%s — Account Activity"
 msgstr "%s — Kontuaren jarduera"
 
-#: panels/user-accounts/cc-password-dialog.c:125
+#: panels/user-accounts/cc-password-dialog.c:133
 msgid "Please choose another password."
 msgstr "Aukeratu beste pasahitz bat."
 
-#: panels/user-accounts/cc-password-dialog.c:134
+#: panels/user-accounts/cc-password-dialog.c:142
 msgid "Please type your current password again."
 msgstr "Idatzi zure uneko pasahitza berriro."
 
-#: panels/user-accounts/cc-password-dialog.c:140
+#: panels/user-accounts/cc-password-dialog.c:148
 msgid "Password could not be changed"
 msgstr "Pasahitza ezin izan da aldatu"
 
-#: panels/user-accounts/cc-password-dialog.ui:7
+#: panels/user-accounts/cc-password-dialog.ui:4
 msgid "Change Password"
 msgstr "Aldatu pasahitza"
 
-#: panels/user-accounts/cc-password-dialog.ui:37
+#: panels/user-accounts/cc-password-dialog.ui:32
 msgid "Ch_ange"
 msgstr "_Aldatu"
 
-#: panels/user-accounts/cc-password-dialog.ui:145
-msgid "_Confirm New Password"
-msgstr "_Baieztatu pasahitz berria"
+#: panels/user-accounts/cc-password-dialog.ui:51
+msgid "Current Password"
+msgstr "Uneko pasahitza"
 
-#: panels/user-accounts/cc-password-dialog.ui:162
-msgid "_New Password"
-msgstr "Pasahitz _berria"
+#: panels/user-accounts/cc-password-dialog.ui:76
+msgid "New Password"
+msgstr "Pasahitz berria"
 
-#: panels/user-accounts/cc-password-dialog.ui:216
-msgid "Current _Password"
-msgstr "Uneko _pasahitza"
+#: panels/user-accounts/cc-password-dialog.ui:121
+msgid "Confirm Password"
+msgstr "Berretsi pasahitza"
 
-#: panels/user-accounts/cc-password-dialog.ui:254
+#: panels/user-accounts/cc-password-dialog.ui:175
 msgid "Allow user to change their password on next login"
 msgstr "Baimendu erabiltzaileei hurrengo saio-hasieran haien pasahitzak ezartzea"
 
-#: panels/user-accounts/cc-password-dialog.ui:267
+#: panels/user-accounts/cc-password-dialog.ui:186
 msgid "Set a password now"
 msgstr "Ezarri pasahitza orain"
 
@@ -7340,199 +7320,177 @@ msgstr "Baliogabeko pasahitza, saiatu berriro"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Ezin izan da %s domeinuarekin konektatu: %s"
 
-#: panels/user-accounts/cc-user-panel.c:222
-msgid "Your account"
-msgstr "Zure kontua"
-
-#: panels/user-accounts/cc-user-panel.c:411
+#: panels/user-accounts/cc-user-panel.c:317
 msgid "Failed to delete user"
 msgstr "Huts egin du erabiltzailea ezabatzean"
 
-#: panels/user-accounts/cc-user-panel.c:466
-#: panels/user-accounts/cc-user-panel.c:521
-#: panels/user-accounts/cc-user-panel.c:567
+#: panels/user-accounts/cc-user-panel.c:374
+#: panels/user-accounts/cc-user-panel.c:429
+#: panels/user-accounts/cc-user-panel.c:475
 msgid "Failed to revoke remotely managed user"
 msgstr "Huts egin du urrunetik kudeatzeko erabiltzailea errebokatzean"
 
-#: panels/user-accounts/cc-user-panel.c:616
+#: panels/user-accounts/cc-user-panel.c:524
 msgid "You cannot delete your own account."
 msgstr "Ezin duzu zeure kontua ezabatu."
 
-#: panels/user-accounts/cc-user-panel.c:625
+#: panels/user-accounts/cc-user-panel.c:533
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s oraindik saioan sartuta dago"
 
-#: panels/user-accounts/cc-user-panel.c:629
+#: panels/user-accounts/cc-user-panel.c:537
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "Erabiltzailea ezabatzen bada saioan sartuta dagoen bitartean, sistema egoera inkoherentean utz daiteke."
 
-#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:546
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "%s(r)en fitxategiak mantentzea nahi dituzu?"
 
-#: panels/user-accounts/cc-user-panel.c:642
+#: panels/user-accounts/cc-user-panel.c:550
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr "Karpeta nagusia, postaren ilara eta aldi baterako fitxategiak gordetzeko aukera dago erabiltzaile baten kontua ezabatzean."
 
-#: panels/user-accounts/cc-user-panel.c:645
+#: panels/user-accounts/cc-user-panel.c:553
 msgid "_Delete Files"
 msgstr "_Ezabatu fitxategiak"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:554
 msgid "_Keep Files"
 msgstr "_Mantendu fitxategiak"
 
-#: panels/user-accounts/cc-user-panel.c:660
+#: panels/user-accounts/cc-user-panel.c:568
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Ziur zaude urrunetik kudeatutako “%s”(r)en kontua errebokatzea nahi duzula?"
 
-#: panels/user-accounts/cc-user-panel.c:664
+#: panels/user-accounts/cc-user-panel.c:572
 msgid "_Delete"
 msgstr "Ez_abatu"
 
-#: panels/user-accounts/cc-user-panel.c:714
+#: panels/user-accounts/cc-user-panel.c:622
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Kontua desgaituta"
 
-#: panels/user-accounts/cc-user-panel.c:722
+#: panels/user-accounts/cc-user-panel.c:630
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Hurrengo saioan ezartzeko"
 
-#: panels/user-accounts/cc-user-panel.c:725
+#: panels/user-accounts/cc-user-panel.c:633
 msgctxt "Password mode"
 msgid "None"
 msgstr "Bat ere ez"
 
-#: panels/user-accounts/cc-user-panel.c:768
+#: panels/user-accounts/cc-user-panel.c:676
 msgid "Logged in"
 msgstr "Saioan sartuta"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:855
-#: panels/user-accounts/cc-user-panel.c:952
+#: panels/user-accounts/cc-user-panel.c:763
+#: panels/user-accounts/cc-user-panel.c:866
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Gaituta"
 
-#: panels/user-accounts/cc-user-panel.c:1276
+#: panels/user-accounts/cc-user-panel.c:1186
 msgid "Failed to contact the accounts service"
 msgstr "Huts egin du kontuaren zerbitzuarekin kontaktatzean"
 
-#: panels/user-accounts/cc-user-panel.c:1278
+#: panels/user-accounts/cc-user-panel.c:1188
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Ziurtatu zaitez kontuen zerbitzua instalatuta eta gaituta dagoela."
 
-#. Translator comments:
-#. * We split the line in 2 here to "make it look good", as there's
-#. * no good way to do this in GTK+ for tooltips. See:
-#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1310
-msgid ""
-"To make changes,\n"
-"click the * icon first"
-msgstr "Aldaketak egiteko\n"
-"aurrenik egin klik * ikonoan"
+#: panels/user-accounts/cc-user-panel.c:1209
+msgid "This panel must be unlocked to change this setting"
+msgstr "Panel hau desblokeatu behar da ezarpen hori aldatzeko"
 
-#: panels/user-accounts/cc-user-panel.c:1383
+#: panels/user-accounts/cc-user-panel.c:1276
 msgid "Delete the selected user account"
 msgstr "Ezabatu hautatutako erabiltzailearen kontua"
 
-#: panels/user-accounts/cc-user-panel.c:1395
-#: panels/user-accounts/cc-user-panel.c:1506
+#: panels/user-accounts/cc-user-panel.c:1280
+#: panels/user-accounts/cc-user-panel.c:1389
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
 msgstr "Hautatutako erabiltzailearen kontua ezabatzeko\n"
 "aurrenik egin klik * ikonoan"
 
-#: panels/user-accounts/cc-user-panel.c:1552
+#: panels/user-accounts/cc-user-panel.c:1431
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Desblokeatu erabiltzaileak gehitzeko eta ezarpenak aldatzeko"
 
-#: panels/user-accounts/cc-user-panel.ui:6
-msgid "_Add User…"
-msgstr "_Gehitu erabiltzailea…"
+#: panels/user-accounts/cc-user-panel.ui:23
+#: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
+msgid "Users"
+msgstr "Erabiltzaileak"
 
-#: panels/user-accounts/cc-user-panel.ui:9
-msgid "Create a user account"
-msgstr "Sortu erabiltzailearen kontua"
-
-#: panels/user-accounts/cc-user-panel.ui:64
+#: panels/user-accounts/cc-user-panel.ui:60
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Amaitu saioa aldaketek eragina izan dezaten"
 
-#: panels/user-accounts/cc-user-panel.ui:72
+#: panels/user-accounts/cc-user-panel.ui:67
 msgid "Restart Now"
 msgstr "Berrabiarazi orain"
 
-#: panels/user-accounts/cc-user-panel.ui:157
-#: panels/user-accounts/cc-user-panel.ui:173
-msgid "User Icon"
-msgstr "Erabiltzailearen ikonoa"
+#. FIXME
+#: panels/user-accounts/cc-user-panel.ui:188
+msgid "_Fingerprint Login"
+msgstr "_Hatz-markarekin saioa-hastea"
 
-#: panels/user-accounts/cc-user-panel.ui:249
-msgid "Account Settings"
-msgstr "Kontuaren ezarpenak"
+#: panels/user-accounts/cc-user-panel.ui:211
+msgid "A_utomatic Login"
+msgstr "Saio-hasiera _automatikoa"
 
-#: panels/user-accounts/cc-user-panel.ui:267
+#: panels/user-accounts/cc-user-panel.ui:224
+msgid "Account Activity"
+msgstr "Kontuaren jarduera"
+
+#: panels/user-accounts/cc-user-panel.ui:252
 msgid "_Administrator"
 msgstr "_Administratzailea"
 
-#: panels/user-accounts/cc-user-panel.ui:268
+#: panels/user-accounts/cc-user-panel.ui:253
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
 msgstr "Administratzaileek beste erabiltzaile batzuk gehitu edo kendu ditzakete, eta erabiltzaile guztien ezarpenak aldatu ditzakete."
 
-#: panels/user-accounts/cc-user-panel.ui:284
+#: panels/user-accounts/cc-user-panel.ui:269
 msgid "_Parental Controls"
 msgstr "_Gurasoen kontrola"
 
-#: panels/user-accounts/cc-user-panel.ui:285
+#: panels/user-accounts/cc-user-panel.ui:270
 msgid "Open the Parental Controls application."
 msgstr "Ireki gurasoen kontrolerako aplikazioa."
 
-#: panels/user-accounts/cc-user-panel.ui:347
-msgid "Authentication & Login"
-msgstr "Autentifikazioa eta saioa hastea"
-
-#: panels/user-accounts/cc-user-panel.ui:390
-msgid "_Fingerprint Login"
-msgstr "_Hatz-markarekin saioa-hastea"
-
-#: panels/user-accounts/cc-user-panel.ui:415
-msgid "A_utomatic Login"
-msgstr "Saio-hasiera _automatikoa"
-
-#: panels/user-accounts/cc-user-panel.ui:430
-msgid "Account Activity"
-msgstr "Kontuaren jarduera"
-
-#: panels/user-accounts/cc-user-panel.ui:461
+#: panels/user-accounts/cc-user-panel.ui:321
 msgid "Remove User…"
 msgstr "Kendu erabiltzailea…"
 
+#: panels/user-accounts/cc-user-panel.ui:333
+msgid "Other Users"
+msgstr "Beste erabiltzaileak"
+
+#: panels/user-accounts/cc-user-panel.ui:346
+msgid "Add User…"
+msgstr "Gehitu erabiltzailea…"
+
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:502
+#: panels/user-accounts/cc-user-panel.ui:374
 msgid "No Users Found"
 msgstr "Ez da erabiltzailerik aurkitu"
 
-#: panels/user-accounts/cc-user-panel.ui:512
+#: panels/user-accounts/cc-user-panel.ui:383
 msgid "Unlock to add a user account."
 msgstr "Desblokeatu erabiltzaile-kontu bat gehitzeko."
-
-#: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
-msgid "Users"
-msgstr "Erabiltzaileak"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:4
 msgid "Add or remove users and change your password"
@@ -7546,15 +7504,15 @@ msgid ""
 msgstr "Saio-hasiera;Izena;Hatz-marka;Avatarra;Logotipoa;Aurpegia;Pasahitza;Guraso-kontrolak;Pantaila-denbora;Aplikazio-mugak;Web mugak;Erabilera;Erabilera-muga;Gaztea;Haurra;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/user-accounts/data/join-dialog.ui:39
+#: panels/user-accounts/data/join-dialog.ui:30
 msgid "_Enroll"
 msgstr "_Elkartu"
 
-#: panels/user-accounts/data/join-dialog.ui:75
+#: panels/user-accounts/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
 msgstr "Domeinuaren administratzailearen saio-hasiera"
 
-#: panels/user-accounts/data/join-dialog.ui:93
+#: panels/user-accounts/data/join-dialog.ui:72
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -7563,11 +7521,11 @@ msgstr "Enpresako saioa erabil ahal izateko, ordenagailu honek\n"
 "domeinun erregistratuta egon behar du. Eskatu iezaiozu sareko\n"
 "administratzaileari domeinuaren bere pasahitza idazteko hemen."
 
-#: panels/user-accounts/data/join-dialog.ui:150
+#: panels/user-accounts/data/join-dialog.ui:112
 msgid "Administrator _Name"
 msgstr "Administratzailearen _izena"
 
-#: panels/user-accounts/data/join-dialog.ui:185
+#: panels/user-accounts/data/join-dialog.ui:135
 msgid "Administrator Password"
 msgstr "Administratzailearen pasahitza"
 
@@ -7729,23 +7687,19 @@ msgstr "Pasahitz berriak ez dauzka nahikoa karaktere desberdin"
 msgid "Unknown error"
 msgstr "Errore ezezaguna"
 
-#: panels/user-accounts/user-utils.c:432
+#: panels/user-accounts/user-utils.c:144
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
 msgstr "Erabiltzaile-izenak honako karaktereak soilik eduki ditzake:  alfabetoko a-z arteko hizki minuskulak, digituak eta '.', '-' eta '_' karaktereak."
 
-#: panels/user-accounts/user-utils.c:436
+#: panels/user-accounts/user-utils.c:148
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Erabiltzaile-izen hori ez dago erabilgarri. Saiatu beste batekin."
 
-#: panels/user-accounts/user-utils.c:478
+#: panels/user-accounts/user-utils.c:190
 msgid "The username is too long."
 msgstr "Erabiltzaile-izena luzeegia da."
-
-#: panels/user-accounts/user-utils.c:537
-msgid "This will be used to name your home folder and can’t be changed."
-msgstr "Zure karpeta nagusia izendatzeko erabiliko da, eta ezin da aldatu."
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:38
 msgid "Map Buttons"
@@ -7910,7 +7864,7 @@ msgstr "Laster-tekla berria…"
 msgid "Access Points"
 msgstr "Sarbide-puntuak"
 
-#: panels/wwan/cc-wwan-apn-dialog.ui:127
+#: panels/wwan/cc-wwan-apn-dialog.ui:122
 msgid "APN"
 msgstr "APN"
 
@@ -8510,6 +8464,76 @@ msgstr[1] "%u sarrera"
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
 
+#~ msgid ""
+#~ "Choose the format for numbers, dates and currencies. Changes take effect "
+#~ "on next login."
+#~ msgstr ""
+#~ "Aukeratu zenbakietarako, datetarako eta monetetarako formatuak. Aldaketak "
+#~ "hurrengo saioa hastean sartuko dira indarrean."
+
+#~ msgid "My Account"
+#~ msgstr "Nire kontua"
+
+#~ msgid "Language"
+#~ msgstr "Hizkuntza"
+
+#~ msgid "The language used for text in windows and web pages."
+#~ msgstr "Leihoetako eta web orrietako testuan erabiliko den hizkuntza."
+
+#~ msgid "Restart the session for changes to take effect"
+#~ msgstr "Amaitu saioa aldaketek eragina izan dezaten"
+
+#~ msgid "Restart…"
+#~ msgstr "Berrabiarazi…"
+
+#~ msgid "Login settings are used by all users when logging into the system"
+#~ msgstr ""
+#~ "Erabiltzaile guztiek saio-hasierako ezarpenak darabilte sisteman saioa "
+#~ "hastean"
+
+#~ msgid "_Full Name"
+#~ msgstr "_Izen osoa"
+
+#~ msgid "Standard"
+#~ msgstr "Arrunta"
+
+#~ msgid "Account _Type"
+#~ msgstr "Kontu _mota"
+
+#~ msgid "Allow user to set a password when they next _login"
+#~ msgstr "Baimendu erabiltzaileei _hurrengo saio-hasieran pasahitza ezartzea"
+
+#~ msgid "Set a password _now"
+#~ msgstr "Ezarri pasahitza _orain"
+
+#~ msgid "You must be online in order to add enterprise users."
+#~ msgstr "Konektatu zaitez enpresako erabiltzaileak gehitzeko."
+
+#~ msgid "Take a Picture…"
+#~ msgstr "Atera argazki bat…"
+
+#~ msgid ""
+#~ "To make changes,\n"
+#~ "click the * icon first"
+#~ msgstr ""
+#~ "Aldaketak egiteko\n"
+#~ "aurrenik egin klik * ikonoan"
+
+#~ msgid "Create a user account"
+#~ msgstr "Sortu erabiltzailearen kontua"
+
+#~ msgid "User Icon"
+#~ msgstr "Erabiltzailearen ikonoa"
+
+#~ msgid "Account Settings"
+#~ msgstr "Kontuaren ezarpenak"
+
+#~ msgid "Authentication & Login"
+#~ msgstr "Autentifikazioa eta saioa hastea"
+
+#~ msgid "This will be used to name your home folder and can’t be changed."
+#~ msgstr "Zure karpeta nagusia izendatzeko erabiliko da, eta ezin da aldatu."
+
 #~ msgid "Web Links"
 #~ msgstr "Web estekak"
 
@@ -8548,9 +8572,6 @@ msgstr "Sistemaren soinuak"
 
 #~ msgid "Video Files"
 #~ msgstr "Bideo-fitxategiak"
-
-#~ msgid "Other Files"
-#~ msgstr "Beste fitxategi batzuk"
 
 #~ msgid "Permissions & Access"
 #~ msgstr "Baimenak eta sarbidea"
