@@ -33,7 +33,7 @@ struct _CcUsagePanel
   GSettings  *privacy_settings;
 
   GtkSwitch   *recently_used_switch;
-  GtkComboBox *retain_history_combo;
+  AdwComboRow *retain_history_combo;
 
   GtkSwitch   *purge_trash_switch;
   GtkSwitch   *purge_temp_switch;
@@ -236,61 +236,55 @@ cc_usage_panel_finalize (GObject *object)
   G_OBJECT_CLASS (cc_usage_panel_parent_class)->finalize (object);
 }
 
-static void
-retain_history_combo_changed_cb (CcUsagePanel *self)
+static char *
+retain_history_name_cb (AdwEnumListItem *item,
+                        gpointer         user_data)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  gint value;
-  gboolean ret;
+  switch (adw_enum_list_item_get_value (item))
+    {
+    case CC_USAGE_PANEL_RETAIN_HISTORY_1_DAY:
+      /* Translators: Option for "File History Duration" in "File History" group */
+      return g_strdup (C_("retain_history", "1 day"));
+    case CC_USAGE_PANEL_RETAIN_HISTORY_7_DAYS:
+      /* Translators: Option for "File History Duration" in "File History" group */
+      return g_strdup (C_("retain_history", "7 day"));
+    case CC_USAGE_PANEL_RETAIN_HISTORY_30_DAYS:
+      /* Translators: Option for "File History Duration" in "File History" group */
+      return g_strdup (C_("retain_history", "30 days"));
+    case CC_USAGE_PANEL_RETAIN_HISTORY_FOREVER:
+      /* Translators: Option for "File History Duration" in "File History" group */
+      return g_strdup (C_("retain_history", "Forever"));
+    default:
+      return NULL;
+    }
+}
 
-  ret = gtk_combo_box_get_active_iter (self->retain_history_combo, &iter);
-  if (!ret)
-    return;
+static void
+retain_history_combo_changed_cb (AdwComboRow  *combo_row,
+                                 GParamSpec   *pspec,
+                                 CcUsagePanel *self)
+{
+  AdwEnumListItem *item;
+  CcUsagePanelRetainHistory value;
 
-  model = gtk_combo_box_get_model (self->retain_history_combo);
-  gtk_tree_model_get (model, &iter,
-                      1, &value,
-                      -1);
+  item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
+  value = adw_enum_list_item_get_value (item);
+
   g_settings_set (self->privacy_settings, "recent-files-max-age", "i", value);
 }
 
 static void
-set_retain_history_value_for_combo (GtkComboBox  *combo_box,
+set_retain_history_value_for_combo (AdwComboRow  *combo_row,
                                     CcUsagePanel *self)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
+  AdwEnumListModel *model;
   gint value;
-  gint value_tmp, value_prev;
-  gboolean ret;
-  guint i;
 
-  model = gtk_combo_box_get_model (combo_box);
-  ret = gtk_tree_model_get_iter_first (model, &iter);
-  if (!ret)
-    return;
-
-  value_prev = 0;
-  i = 0;
+  model = ADW_ENUM_LIST_MODEL (adw_combo_row_get_model (combo_row));
 
   g_settings_get (self->privacy_settings, "recent-files-max-age", "i", &value);
-  do
-    {
-      gtk_tree_model_get (model, &iter,
-                          1, &value_tmp,
-                          -1);
-      if (value == value_tmp ||
-          (value > 0 && value_tmp > value_prev && value < value_tmp))
-        {
-          gtk_combo_box_set_active_iter (combo_box, &iter);
-          return;
-        }
-      value_prev = value_tmp;
-      i++;
-    } while (gtk_tree_model_iter_next (model, &iter));
-
-  gtk_combo_box_set_active (combo_box, i - 1);
+  adw_combo_row_set_selected (combo_row,
+                              adw_enum_list_model_find_position (model, value));
 }
 
 static void
@@ -299,6 +293,7 @@ cc_usage_panel_init (CcUsagePanel *self)
   g_resources_register (cc_usage_get_resource ());
 
   g_type_ensure (CC_TYPE_USAGE_PANEL_PURGE_AFTER);
+  g_type_ensure (CC_TYPE_USAGE_PANEL_RETAIN_HISTORY);
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -311,11 +306,6 @@ cc_usage_panel_init (CcUsagePanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   set_retain_history_value_for_combo (self->retain_history_combo, self);
-  g_signal_connect_object (self->retain_history_combo,
-                           "changed",
-                           G_CALLBACK (retain_history_combo_changed_cb),
-                           self,
-                           G_CONNECT_SWAPPED);
 
   g_settings_bind (self->privacy_settings,
                    "remember-recent-files",
@@ -365,6 +355,8 @@ cc_usage_panel_class_init (CcUsagePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, retain_history_combo);
 
   gtk_widget_class_bind_template_callback (widget_class, clear_recent);
+  gtk_widget_class_bind_template_callback (widget_class, retain_history_name_cb);
+  gtk_widget_class_bind_template_callback (widget_class, retain_history_combo_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, purge_after_name_cb);
   gtk_widget_class_bind_template_callback (widget_class, purge_after_combo_changed_cb);
 }
