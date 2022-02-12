@@ -8,18 +8,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
-"es\n"
-"POT-Creation-Date: 2022-02-10 22:35+0000\n"
-"PO-Revision-Date: 2022-02-11 09:45+0200\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
+"POT-Creation-Date: 2022-02-12 12:26+0000\n"
+"PO-Revision-Date: 2022-02-12 18:23+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 "X-Project-Style: gnome\n"
 
@@ -390,7 +388,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Без тла стільниці"
 
-#: panels/background/cc-background-panel.c:177
+#: panels/background/cc-background-panel.c:227
 msgid "Current background"
 msgstr "Поточне тло"
 
@@ -1978,26 +1976,6 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "Пошук"
 
-#: panels/keyboard/01-screenshot.xml.in:2
-msgid "Screenshots"
-msgstr "Знімки екрана"
-
-#: panels/keyboard/01-screenshot.xml.in:5
-msgid "Show the screenshot UI"
-msgstr "Показати інтерфейс знімків екрана"
-
-#: panels/keyboard/01-screenshot.xml.in:8
-msgid "Take a screenshot"
-msgstr "Зробити знімок екрана"
-
-#: panels/keyboard/01-screenshot.xml.in:11
-msgid "Take a screenshot of a window"
-msgstr "Зробити знімок вікна"
-
-#: panels/keyboard/01-screenshot.xml.in:14
-msgid "Show the screen recording UI"
-msgstr "Показати інтерфейс запису з екрана"
-
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
 msgstr "Система"
@@ -2333,7 +2311,7 @@ msgstr ""
 "Натисніть Esc, щоб скасувати, або Backspace, щоб вимкнути комбінації клавіш."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
-#: panels/printers/pp-details-dialog.ui:36
+#: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
 #: panels/user-accounts/cc-user-panel.ui:125
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
@@ -2573,29 +2551,36 @@ msgid "Lock your screen"
 msgstr "Заблокувати екран"
 
 #. FIXME
-#: panels/microphone/cc-microphone-panel.ui:35
-msgid "Microphone is turned off"
+#: panels/microphone/cc-microphone-panel.ui:20
+#| msgid "Microphone is turned off"
+msgid "Microphone Turned Off"
 msgstr "Мікрофон вимкнено"
 
-#: panels/microphone/cc-microphone-panel.ui:43
+#: panels/microphone/cc-microphone-panel.ui:21
 msgid "No applications can record sound."
 msgstr "Немає програм, які можуть записувати звук."
 
-#: panels/microphone/cc-microphone-panel.ui:74
+#: panels/microphone/cc-microphone-panel.ui:34
+#| msgid ""
+#| "Use of the microphone allows applications to record and listen to audio. "
+#| "Disabling the microphone may cause some applications to not function "
+#| "properly."
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
-"properly."
+"properly.\n"
+"\n"
+"Allow the applications below to use your microphone.\n"
+"                    "
 msgstr ""
 "Використання мікрофона надає програмам змогу записувати та отримувати "
 "звукові дані. Вимикання мікрофона може призвести до неправильної роботи "
-"деяких програм."
+"деяких програм.\n"
+"\n"
+"Програмам із наведеного нижче списку буде дозволено використовувати мікрофон.\n"
+"                    "
 
-#: panels/microphone/cc-microphone-panel.ui:83
-msgid "Allow the applications below to use your microphone."
-msgstr "Дозволити вказаним нижче програмам доступ до мікрофона."
-
-#: panels/microphone/cc-microphone-panel.ui:103
+#: panels/microphone/cc-microphone-panel.ui:52
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "Немає програм, які б надсилали запит щодо доступу до мікрофона"
 
@@ -2901,7 +2886,7 @@ msgstr "Назва мережі"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
 #: panels/printers/authentication-dialog.ui:55
-#: panels/printers/new-printer-dialog.ui:330
+#: panels/printers/new-printer-dialog.ui:331
 #: panels/printers/pp-jobs-dialog.ui:52
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
@@ -3364,7 +3349,7 @@ msgstr "Адреси"
 #: panels/network/connection-editor/ip4-page.ui:246
 #: panels/network/connection-editor/ip6-page.ui:122
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/printers/pp-details-dialog.ui:87
+#: panels/printers/pp-details-dialog.ui:90
 msgid "Address"
 msgstr "Адреса"
 
@@ -4911,7 +4896,7 @@ msgstr "Засвідчення"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:310
+#: panels/printers/new-printer-dialog.ui:311
 #: panels/printers/pp-jobs-dialog.ui:41
 #: panels/user-accounts/cc-add-user-dialog.ui:94
 #: panels/user-accounts/cc-add-user-dialog.ui:342
@@ -4920,7 +4905,7 @@ msgid "Username"
 msgstr "Користувач"
 
 #: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:285
+#: panels/printers/new-printer-dialog.ui:286
 msgid "Authentication Required"
 msgstr "Потрібно засвідчитись"
 
@@ -4985,7 +4970,7 @@ msgstr "Не знайдено жодного принтера"
 msgid "Enter a network address or search for a printer"
 msgstr "Уведіть адресу мережі або знайдіть принтер"
 
-#: panels/printers/new-printer-dialog.ui:301
+#: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Введіть користувача та пароль, щоб переглянути доступні принтери на сервері."
@@ -5012,29 +4997,29 @@ msgid ""
 msgstr ""
 "Файли опису принтера PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: panels/printers/pp-details-dialog.ui:62 panels/printers/printer-entry.ui:213
+#: panels/printers/pp-details-dialog.ui:65 panels/printers/printer-entry.ui:215
 msgid "Location"
 msgstr "Адреса"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:112
+#: panels/printers/pp-details-dialog.ui:115
 #: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Драйвер"
 
-#: panels/printers/pp-details-dialog.ui:151
+#: panels/printers/pp-details-dialog.ui:154
 msgid "Searching for preferred drivers…"
 msgstr "Пошук бажаних драйверів…"
 
-#: panels/printers/pp-details-dialog.ui:170
+#: panels/printers/pp-details-dialog.ui:173
 msgid "Search for Drivers"
 msgstr "Шукати драйвери"
 
-#: panels/printers/pp-details-dialog.ui:178
+#: panels/printers/pp-details-dialog.ui:181
 msgid "Select from Database…"
 msgstr "Вибрати з бази даних…"
 
-#: panels/printers/pp-details-dialog.ui:186
+#: panels/printers/pp-details-dialog.ui:189
 msgid "Install PPD File…"
 msgstr "Встановити файл PPD…"
 
@@ -5397,7 +5382,7 @@ msgid "Manufacturer"
 msgstr "Виробник"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:165
+#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:167
 msgid "No Active Jobs"
 msgstr "Немає запущених завдань"
 
@@ -5542,22 +5527,22 @@ msgstr "Очистити друкарські голівки"
 msgid "Remove Printer"
 msgstr "Вилучити принтер"
 
-#: panels/printers/printer-entry.ui:185
+#: panels/printers/printer-entry.ui:187
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Модель"
 
-#: panels/printers/printer-entry.ui:240
+#: panels/printers/printer-entry.ui:242
 msgid "Ink Level"
 msgstr "Рівень чорнила"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:302
+#: panels/printers/printer-entry.ui:304
 msgid "Please restart when the problem is resolved."
 msgstr "Перезапустіть, коли проблему буде виправлено."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:308
+#: panels/printers/printer-entry.ui:310
 msgid "Restart"
 msgstr "Перезапустити"
 
@@ -6344,12 +6329,10 @@ msgid "Error switching direct mode: %s"
 msgstr "Помилка перемикання безпосереднього режиму: %s"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:103
-#| msgid "No Thunderbolt support"
 msgid "No Thunderbolt Support"
 msgstr "Немає підтримки Thunderbolt"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:104
-#| msgid "Couldn’t connect to the %s domain: %s"
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "Не вдалося встановити з'єднання із підсистемою thunderbolt."
 
@@ -8742,6 +8725,24 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Screenshots"
+#~ msgstr "Знімки екрана"
+
+#~ msgid "Show the screenshot UI"
+#~ msgstr "Показати інтерфейс знімків екрана"
+
+#~ msgid "Take a screenshot"
+#~ msgstr "Зробити знімок екрана"
+
+#~ msgid "Take a screenshot of a window"
+#~ msgstr "Зробити знімок вікна"
+
+#~ msgid "Show the screen recording UI"
+#~ msgstr "Показати інтерфейс запису з екрана"
+
+#~ msgid "Allow the applications below to use your microphone."
+#~ msgstr "Дозволити вказаним нижче програмам доступ до мікрофона."
 
 #~ msgid "_Full Name"
 #~ msgstr "_Повне ім'я"
