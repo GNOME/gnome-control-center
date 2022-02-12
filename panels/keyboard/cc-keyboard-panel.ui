@@ -11,232 +11,120 @@
     <property name="hexpand">True</property>
     <property name="vexpand">True</property>
     <child type="content">
-      <object class="GtkScrolledWindow">
-        <property name="hexpand">True</property>
-        <property name="vexpand">True</property>
-        <property name="hscrollbar_policy">never</property>
-        <property name="propagate_natural_width">True</property>
-        <property name="propagate_natural_height">True</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="AdwClamp">
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Input Sources</property>
+            <property name="description" translatable="yes">Includes keyboard layouts and input methods.</property>
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="spacing">12</property>
-                <property name="hexpand">True</property>
+              <object class="CcInputListBox" id="input_list">
+                <property name="vexpand">False</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup" id="input_switch_group">
+            <property name="title" translatable="yes">Input Source Switching</property>
+            <child>
+              <object class="GtkListBox" id="input_source_list">
+                <property name="margin-bottom">20</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
                 <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
+                  <object class="GtkListBoxRow">
                     <child>
-                      <object class="GtkLabel">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Input Sources</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Includes keyboard layouts and input methods.</property>
-                        <property name="wrap">True</property>
-                        <property name="max-width-chars">50</property>
+                      <object class="GtkCheckButton" id="same_source">
+                        <property name="active">True</property>
                         <style>
-                          <class name="dim-label" />
+                          <class name="keyboard-panel-radio-button" />
                         </style>
+                        <child>
+                          <object class="GtkLabel">
+                            <property name="margin_start">6</property>
+                            <property name="use_underline">True</property>
+                            <property name="label" translatable="yes">Use the _same source for all windows</property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
                 </child>
                 <child>
-                  <object class="CcInputListBox" id="input_list">
-                    <property name="vexpand">False</property>
-                    <property name="margin-bottom">20</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
+                  <object class="GtkListBoxRow">
                     <child>
-                      <object class="GtkLabel">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Input Source Switching</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="input_switch_description">
-                        <property name="xalign">0</property>
-                        <property name="wrap">True</property>
-                        <property name="max-width-chars">50</property>
+                      <object class="GtkCheckButton" id="per_window_source">
+                        <property name="active">True</property>
+                        <property name="group">same_source</property>
                         <style>
-                          <class name="dim-label" />
+                          <class name="keyboard-panel-radio-button" />
                         </style>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="input_source_list">
-                    <property name="margin-bottom">20</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="GtkListBoxRow">
                         <child>
-                          <object class="GtkCheckButton" id="same_source">
-                            <property name="active">True</property>
-                            <style>
-                              <class name="keyboard-panel-radio-button" />
-                            </style>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="margin_start">6</property>
-                                <property name="use_underline">True</property>
-                                <property name="label" translatable="yes">Use the _same source for all windows</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkListBoxRow">
-                        <child>
-                          <object class="GtkCheckButton" id="per_window_source">
-                            <property name="active">True</property>
-                            <property name="group">same_source</property>
-                            <style>
-                              <class name="keyboard-panel-radio-button" />
-                            </style>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="margin_start">6</property>
-                                <property name="use_underline">True</property>
-                                <property name="label" translatable="yes">Switch input sources _individually for each window</property>
-                              </object>
-                            </child>
+                          <object class="GtkLabel">
+                            <property name="margin_start">6</property>
+                            <property name="use_underline">True</property>
+                            <property name="label" translatable="yes">Switch input sources _individually for each window</property>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Special Character Entry</property>
+            <property name="description" translatable="yes">Methods for entering symbols and letter variants using the keyboard.</property>
+            <child>
+              <object class="AdwActionRow" id="alt_chars_row">
+                <property name="title" translatable="yes">Alternate Characters Key</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="special_chars_activated" object="CcKeyboardPanel" swapped="no" />
                 <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Special Character Entry</property>
-                        <attributes>
-                          <attribute name="weight" value="bold"/>
-                        </attributes>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Methods for entering symbols and letter variants using the keyboard.</property>
-                        <property name="wrap">True</property>
-                        <property name="max-width-chars">50</property>
-                        <style>
-                          <class name="dim-label" />
-                        </style>
-                      </object>
-                    </child>
+                  <object class="GtkLabel" id="value_alternate_chars">
+                    <property name="label" translatable="no">Right Alt</property>
                   </object>
                 </child>
                 <child>
-                  <object class="GtkListBox" id="special_chars_list">
-                    <property name="selection-mode">none</property>
-                    <property name="width-request">250</property>
-                    <property name="margin-bottom">20</property>
-                    <signal name="row-activated" handler="special_chars_activated" object="CcKeyboardPanel" swapped="no" />
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="AdwActionRow" id="alt_chars_row">
-                        <property name="title" translatable="yes">Alternate Characters Key</property>
-                        <property name="activatable">True</property>
-                        <child>
-                          <object class="GtkLabel" id="value_alternate_chars">
-                            <property name="label" translatable="no">Right Alt</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon_name">go-next-symbolic</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="AdwActionRow" id="compose_row">
-                        <property name="title" translatable="yes">Compose Key</property>
-                        <property name="activatable">True</property>
-                        <child>
-                          <object class="GtkLabel" id="value_compose">
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon_name">go-next-symbolic</property>
-                            <style>
-                              <class name="dim-label"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                  <object class="GtkImage">
+                    <property name="icon_name">go-next-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow" id="compose_row">
+                <property name="title" translatable="yes">Compose Key</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="special_chars_activated" object="CcKeyboardPanel" swapped="no" />
+                <child>
+                  <object class="GtkLabel" id="value_compose">
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel">
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">Keyboard Shortcuts</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
+                  <object class="GtkImage">
+                    <property name="icon_name">go-next-symbolic</property>
                   </object>
                 </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Keyboard Shortcuts</property>
+            <child>
+              <object class="AdwActionRow" id="common_shortcuts_row">
+                <property name="title" translatable="yes">View and Customize Shortcuts</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="keyboard_shortcuts_activated" object="CcKeyboardPanel" swapped="no" />
                 <child>
-                  <object class="GtkListBox" id="keyboard_shortcuts_listbox">
-                    <property name="selection-mode">none</property>
-                    <property name="width-request">250</property>
-                    <signal name="row-activated" handler="keyboard_shortcuts_activated" object="CcKeyboardPanel" swapped="no" />
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="AdwActionRow" id="common_shortcuts_row">
-                        <property name="title" translatable="yes">View and Customize Shortcuts</property>
-                        <property name="activatable">True</property>
-                        <child>
-                          <object class="GtkImage">
-                            <property name="icon_name">go-next-symbolic</property>
-                            <style>
-                             <class name="dim-label"/>
-                            </style>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+                  <object class="GtkImage">
+                    <property name="icon_name">go-next-symbolic</property>
                   </object>
                 </child>
               </object>
