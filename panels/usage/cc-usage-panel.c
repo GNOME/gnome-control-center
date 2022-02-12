@@ -19,6 +19,7 @@
  */
 
 #include "cc-usage-panel.h"
+#include "cc-usage-panel-enums.h"
 #include "cc-usage-resources.h"
 #include "cc-util.h"
 
@@ -36,73 +37,80 @@ struct _CcUsagePanel
 
   GtkSwitch   *purge_trash_switch;
   GtkSwitch   *purge_temp_switch;
-  GtkComboBox *purge_after_combo;
+  AdwComboRow *purge_after_combo;
   GtkButton   *purge_temp_button;
   GtkButton   *purge_trash_button;
 };
 
 CC_PANEL_REGISTER (CcUsagePanel, cc_usage_panel)
 
-static void
-purge_after_combo_changed_cb (CcUsagePanel *self)
+static char *
+purge_after_name_cb (AdwEnumListItem *item,
+                     gpointer         user_data)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
-  guint value;
-  gboolean ret;
+  switch (adw_enum_list_item_get_value (item))
+    {
+    case CC_USAGE_PANEL_PURGE_AFTER_1_HOUR:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "1 hour"));
+    case CC_USAGE_PANEL_PURGE_AFTER_1_DAY:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "1 day"));
+    case CC_USAGE_PANEL_PURGE_AFTER_2_DAYS:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "2 days"));
+    case CC_USAGE_PANEL_PURGE_AFTER_3_DAYS:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "3 days"));
+    case CC_USAGE_PANEL_PURGE_AFTER_4_DAYS:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "4 days"));
+    case CC_USAGE_PANEL_PURGE_AFTER_5_DAYS:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "5 days"));
+    case CC_USAGE_PANEL_PURGE_AFTER_6_DAYS:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "6 days"));
+    case CC_USAGE_PANEL_PURGE_AFTER_7_DAYS:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "7 days"));
+    case CC_USAGE_PANEL_PURGE_AFTER_14_DAYS:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "14 days"));
+    case CC_USAGE_PANEL_PURGE_AFTER_30_DAYS:
+      /* Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group */
+      return g_strdup (C_("purge_files", "30 days"));
+    default:
+      return NULL;
+    }
+}
 
-  /* no selection */
-  ret = gtk_combo_box_get_active_iter (self->purge_after_combo, &iter);
-  if (!ret)
-    return;
+static void
+purge_after_combo_changed_cb (AdwComboRow  *combo_row,
+                              GParamSpec   *pspec,
+                              CcUsagePanel *self)
+{
+  AdwEnumListItem *item;
+  CcUsagePanelPurgeAfter value;
 
-  /* get entry */
-  model = gtk_combo_box_get_model (self->purge_after_combo);
-  gtk_tree_model_get (model, &iter,
-                      1, &value,
-                      -1);
+  item = ADW_ENUM_LIST_ITEM (adw_combo_row_get_selected_item (combo_row));
+  value = adw_enum_list_item_get_value (item);
+
   g_settings_set (self->privacy_settings, "old-files-age", "u", value);
 }
 
 static void
-set_purge_after_value_for_combo (GtkComboBox  *combo_box,
+set_purge_after_value_for_combo (AdwComboRow  *combo_row,
                                  CcUsagePanel *self)
 {
-  GtkTreeIter iter;
-  GtkTreeModel *model;
+  AdwEnumListModel *model;
   guint value;
-  gint value_tmp, value_prev;
-  gboolean ret;
-  guint i;
 
-  /* get entry */
-  model = gtk_combo_box_get_model (combo_box);
-  ret = gtk_tree_model_get_iter_first (model, &iter);
-  if (!ret)
-    return;
+  model = ADW_ENUM_LIST_MODEL (adw_combo_row_get_model (combo_row));
 
-  value_prev = 0;
-  i = 0;
-
-  /* try to make the UI match the purge setting */
   g_settings_get (self->privacy_settings, "old-files-age", "u", &value);
-  do
-    {
-      gtk_tree_model_get (model, &iter,
-                          1, &value_tmp,
-                          -1);
-      if (value == value_tmp ||
-          (value_tmp > value_prev && value < value_tmp))
-        {
-          gtk_combo_box_set_active_iter (combo_box, &iter);
-          return;
-        }
-      value_prev = value_tmp;
-      i++;
-    } while (gtk_tree_model_iter_next (model, &iter));
-
-  /* If we didn't find the setting in the list */
-  gtk_combo_box_set_active (combo_box, i - 1);
+  adw_combo_row_set_selected (combo_row,
+                              adw_enum_list_model_find_position (model, value));
 }
 
 static GtkDialog *
@@ -290,6 +298,8 @@ cc_usage_panel_init (CcUsagePanel *self)
 {
   g_resources_register (cc_usage_get_resource ());
 
+  g_type_ensure (CC_TYPE_USAGE_PANEL_PURGE_AFTER);
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
@@ -322,11 +332,6 @@ cc_usage_panel_init (CcUsagePanel *self)
                    G_SETTINGS_BIND_DEFAULT);
 
   set_purge_after_value_for_combo (self->purge_after_combo, self);
-  g_signal_connect_object (self->purge_after_combo,
-                           "changed",
-                           G_CALLBACK (purge_after_combo_changed_cb),
-                           self,
-                           G_CONNECT_SWAPPED);
 
   g_signal_connect_object (self->purge_trash_button, "clicked", G_CALLBACK (empty_trash), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (self->purge_temp_button, "clicked", G_CALLBACK (purge_temp), self, G_CONNECT_SWAPPED);
@@ -360,4 +365,6 @@ cc_usage_panel_class_init (CcUsagePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcUsagePanel, retain_history_combo);
 
   gtk_widget_class_bind_template_callback (widget_class, clear_recent);
+  gtk_widget_class_bind_template_callback (widget_class, purge_after_name_cb);
+  gtk_widget_class_bind_template_callback (widget_class, purge_after_combo_changed_cb);
 }
