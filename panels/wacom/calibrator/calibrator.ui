@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
-  <object class="GtkWindow" id="window">
+  <template class="CcCalibArea" parent="GtkWindow">
     <property name="name">calibrator</property>
     <property name="child">
       <object class="GtkStack" id="stack">
@@ -129,14 +128,14 @@
           </object>
         </child>
         <child>
-          <object class="GtkImage" id="success">
+          <object class="GtkImage" id="success_page">
             <property name="pixel_size">300</property>
             <property name="icon_name">emblem-ok-symbolic</property>
           </object>
         </child>
       </object>
     </property>
-  </object>
+  </template>
   <object class="GtkSizeGroup">
     <property name="mode">vertical</property>
     <widgets>

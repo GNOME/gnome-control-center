@@ -31,23 +31,30 @@
 #include "calibrator-gui.h"
 #include "cc-clock.h"
 
-struct CcCalibArea
+struct _CcCalibArea
 {
+  GtkWindow parent_instance;
+
   struct Calib calibrator;
   XYinfo       axis;
   gboolean     swap;
   gboolean     success;
   GdkDevice   *device;
 
-  GtkWidget  *window;
-  GtkBuilder *builder;
   GtkWidget  *error_revealer;
+  GtkWidget  *title_revealer;
+  GtkWidget  *subtitle_revealer;
   GtkWidget  *clock;
+  GtkWidget  *target1, *target2, *target3, *target4;
+  GtkWidget  *stack;
+  GtkWidget  *success_page;
   GtkCssProvider *style_provider;
 
   FinishCallback callback;
   gpointer       user_data;
 };
+
+G_DEFINE_TYPE (CcCalibArea, cc_calib_area, GTK_TYPE_WINDOW)
 
 /* Timeout parameters */
 #define MAX_TIME                15000 /* 15000 = 15 sec */
@@ -56,7 +63,7 @@ struct CcCalibArea
 static void
 cc_calib_area_notify_finish (CcCalibArea *area)
 {
-  gtk_widget_hide (area->window);
+  gtk_widget_hide (GTK_WIDGET (area));
 
   (*area->callback) (area, area->user_data);
 }
@@ -79,11 +86,7 @@ cc_calib_area_finish_idle_cb (CcCalibArea *area)
 static void
 set_success (CcCalibArea *area)
 {
-  GtkWidget *stack, *image;
-
-  stack = GTK_WIDGET (gtk_builder_get_object (area->builder, "stack"));
-  image = GTK_WIDGET (gtk_builder_get_object (area->builder, "success"));
-  gtk_stack_set_visible_child (GTK_STACK (stack), image);
+  gtk_stack_set_visible_child (GTK_STACK (area->stack), area->success_page);
 }
 
 static void
@@ -121,10 +124,10 @@ set_active_target (CcCalibArea *area,
                    int          n_target)
 {
   GtkWidget *targets[] = {
-    GTK_WIDGET (gtk_builder_get_object (area->builder, "target1")),
-    GTK_WIDGET (gtk_builder_get_object (area->builder, "target2")),
-    GTK_WIDGET (gtk_builder_get_object (area->builder, "target3")),
-    GTK_WIDGET (gtk_builder_get_object (area->builder, "target4")),
+    area->target1,
+    area->target2,
+    area->target3,
+    area->target4,
   };
   int i;
 
@@ -203,10 +206,7 @@ on_clock_finished (CcClock     *clock,
 static void
 on_title_revealed (CcCalibArea *area)
 {
-  GtkWidget *revealer;
-
-  revealer = GTK_WIDGET (gtk_builder_get_object (area->builder, "subtitle_revealer"));
-  gtk_revealer_set_reveal_child (GTK_REVEALER (revealer), TRUE);
+  gtk_revealer_set_reveal_child (GTK_REVEALER (area->subtitle_revealer), TRUE);
 }
 
 static void
@@ -214,18 +214,99 @@ on_fullscreen (GtkWindow    *window,
                GParamSpec   *pspec,
                CcCalibArea  *area)
 {
-  GtkWidget *revealer;
-
   if (!gtk_window_is_fullscreen (window))
     return;
 
-  revealer = GTK_WIDGET (gtk_builder_get_object (area->builder, "title_revealer"));
-  g_signal_connect_swapped (revealer, "notify::child-revealed",
+  g_signal_connect_swapped (area->title_revealer,
+                            "notify::child-revealed",
                             G_CALLBACK (on_title_revealed),
                             area);
-  gtk_revealer_set_reveal_child (GTK_REVEALER (revealer), TRUE);
+  gtk_revealer_set_reveal_child (GTK_REVEALER (area->title_revealer), TRUE);
 
   set_active_target (area, 0);
+}
+
+static void
+cc_calib_area_finalize (GObject *object)
+{
+  CcCalibArea *area = CC_CALIB_AREA (object);
+
+  gtk_style_context_remove_provider_for_display (gtk_widget_get_display (GTK_WIDGET (area)),
+                                                 GTK_STYLE_PROVIDER (area->style_provider));
+
+  G_OBJECT_CLASS (cc_calib_area_parent_class)->finalize (object);
+}
+
+static void
+cc_calib_area_class_init (CcCalibAreaClass *klass)
+{
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
+  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->finalize = cc_calib_area_finalize;
+
+  g_type_ensure (CC_TYPE_CLOCK);
+
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wacom/calibrator/calibrator.ui");
+
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, error_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, title_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, subtitle_revealer);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, clock);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, target1);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, target2);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, target3);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, target4);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, stack);
+  gtk_widget_class_bind_template_child (widget_class, CcCalibArea, success_page);
+}
+
+static void
+cc_calib_area_init (CcCalibArea *calib_area)
+{
+  GtkGesture *click;
+  GtkEventController *key;
+
+  gtk_widget_init_template (GTK_WIDGET (calib_area));
+
+  calib_area->style_provider = gtk_css_provider_new ();
+  gtk_css_provider_load_from_resource (calib_area->style_provider, "/org/gnome/control-center/wacom/calibrator/calibrator.css");
+  gtk_style_context_add_provider_for_display (gtk_widget_get_display (GTK_WIDGET (calib_area)),
+                                              GTK_STYLE_PROVIDER (calib_area->style_provider),
+                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
+
+  cc_clock_set_duration (CC_CLOCK (calib_area->clock), MAX_TIME);
+  g_signal_connect (calib_area->clock, "finished",
+                    G_CALLBACK (on_clock_finished), calib_area);
+
+#ifndef FAKE_AREA
+  /* No cursor */
+  gtk_widget_realize (GTK_WIDGET (calib_area));
+  gtk_widget_set_cursor_from_name (GTK_WIDGET (calib_area), "blank");
+
+  gtk_widget_set_can_focus (GTK_WIDGET (calib_area), TRUE);
+#endif /* FAKE_AREA */
+
+  g_signal_connect (calib_area,
+                    "close-request",
+                    G_CALLBACK (on_close_request),
+                    calib_area);
+  g_signal_connect (calib_area,
+                    "notify::fullscreened",
+                    G_CALLBACK (on_fullscreen),
+                    calib_area);
+
+  click = gtk_gesture_click_new ();
+  gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (click), GDK_BUTTON_PRIMARY);
+  g_signal_connect (click, "pressed",
+                    G_CALLBACK (on_gesture_press), calib_area);
+  gtk_widget_add_controller (GTK_WIDGET (calib_area),
+                             GTK_EVENT_CONTROLLER (click));
+
+  key = gtk_event_controller_key_new ();
+  g_signal_connect (key, "key-released",
+                    G_CALLBACK (on_key_release), calib_area);
+  gtk_widget_add_controller (GTK_WIDGET (calib_area), key);
 }
 
 /**
@@ -243,44 +324,18 @@ cc_calib_area_new (GdkDisplay     *display,
                    int             threshold_doubleclick,
                    int             threshold_misclick)
 {
-  g_autoptr(GdkMonitor) monitor = NULL;
   CcCalibArea *calib_area;
+  g_autoptr(GdkMonitor) monitor = NULL;
   GdkRectangle rect;
-  GtkGesture *click;
-  GtkEventController *key;
 
   g_return_val_if_fail (callback, NULL);
 
-  g_type_ensure (CC_TYPE_CLOCK);
-
-  calib_area = g_new0 (CcCalibArea, 1);
+  calib_area = g_object_new (CC_TYPE_CALIB_AREA, NULL);
   calib_area->callback = callback;
   calib_area->user_data = user_data;
   calib_area->device = device;
   calib_area->calibrator.threshold_doubleclick = threshold_doubleclick;
   calib_area->calibrator.threshold_misclick = threshold_misclick;
-
-  calib_area->builder = gtk_builder_new_from_resource ("/org/gnome/control-center/wacom/calibrator/calibrator.ui");
-  calib_area->window = GTK_WIDGET (gtk_builder_get_object (calib_area->builder, "window"));
-  calib_area->error_revealer = GTK_WIDGET (gtk_builder_get_object (calib_area->builder, "error_revealer"));
-  calib_area->clock = GTK_WIDGET (gtk_builder_get_object (calib_area->builder, "clock"));
-  calib_area->style_provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_resource (calib_area->style_provider, "/org/gnome/control-center/wacom/calibrator/calibrator.css");
-  gtk_style_context_add_provider_for_display (gtk_widget_get_display (calib_area->window),
-                                              GTK_STYLE_PROVIDER (calib_area->style_provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_USER);
-
-  cc_clock_set_duration (CC_CLOCK (calib_area->clock), MAX_TIME);
-  g_signal_connect (calib_area->clock, "finished",
-                    G_CALLBACK (on_clock_finished), calib_area);
-
-#ifndef FAKE_AREA
-  /* No cursor */
-  gtk_widget_realize (calib_area->window);
-  gtk_widget_set_cursor_from_name (calib_area->window, "blank");
-
-  gtk_widget_set_can_focus (calib_area->window, TRUE);
-#endif /* FAKE_AREA */
 
   /* Move to correct screen */
   if (display == NULL)
@@ -290,28 +345,8 @@ cc_calib_area_new (GdkDisplay     *display,
 
   calib_area->calibrator.geometry = rect;
 
-  g_signal_connect (calib_area->window,
-                    "close-request",
-                    G_CALLBACK (on_close_request),
-                    calib_area);
-  g_signal_connect (calib_area->window,
-                    "notify::fullscreened",
-                    G_CALLBACK (on_fullscreen),
-                    calib_area);
-
-  click = gtk_gesture_click_new ();
-  gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (click), GDK_BUTTON_PRIMARY);
-  g_signal_connect (click, "pressed",
-                    G_CALLBACK (on_gesture_press), calib_area);
-  gtk_widget_add_controller (calib_area->window, GTK_EVENT_CONTROLLER (click));
-
-  key = gtk_event_controller_key_new ();
-  g_signal_connect (key, "key-released",
-                    G_CALLBACK (on_key_release), calib_area);
-  gtk_widget_add_controller (calib_area->window, key);
-
-  gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area->window), monitor);
-  gtk_widget_show (calib_area->window);
+  gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area), monitor);
+  gtk_widget_show (GTK_WIDGET (calib_area));
 
   return calib_area;
 }
@@ -338,12 +373,7 @@ cc_calib_area_finish (CcCalibArea *area)
 void
 cc_calib_area_free (CcCalibArea *area)
 {
-  g_return_if_fail (area != NULL);
-
-  gtk_style_context_remove_provider_for_display (gtk_widget_get_display (area->window),
-                                                 GTK_STYLE_PROVIDER (area->style_provider));
-  gtk_window_destroy (GTK_WINDOW (area->window));
-  g_free (area);
+  gtk_window_destroy (GTK_WINDOW (area));
 }
 
 void
