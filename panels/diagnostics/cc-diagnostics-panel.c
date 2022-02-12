@@ -28,13 +28,12 @@
 
 struct _CcDiagnosticsPanel
 {
-  CcPanel     parent_instance;
+  CcPanel              parent_instance;
 
-  GtkLabel   *diagnostics_explanation_label;
-  GtkListBox *diagnostics_list_box;
-  GtkSwitch   *abrt_switch;
+  AdwPreferencesGroup *diagnostics_group;
+  GtkSwitch           *abrt_switch;
 
-  GSettings  *privacy_settings;
+  GSettings           *privacy_settings;
 };
 
 CC_PANEL_REGISTER (CcDiagnosticsPanel, cc_diagnostics_panel)
@@ -106,8 +105,7 @@ cc_diagnostics_panel_class_init (CcDiagnosticsPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/diagnostics/cc-diagnostics-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, diagnostics_explanation_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, diagnostics_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, diagnostics_group);
   gtk_widget_class_bind_template_child (widget_class, CcDiagnosticsPanel, abrt_switch);
 }
 
@@ -141,5 +139,5 @@ cc_diagnostics_panel_init (CcDiagnosticsPanel *self)
   msg = g_strdup_printf (_("Sending reports of technical problems helps us improve %s. Reports "
                            "are sent anonymously and are scrubbed of personal data. %s"),
                          os_name, link);
-  gtk_label_set_markup (self->diagnostics_explanation_label, msg);
+  adw_preferences_group_set_description (self->diagnostics_group, msg);
 }

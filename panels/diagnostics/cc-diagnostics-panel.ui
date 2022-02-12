@@ -2,80 +2,22 @@
 <interface>
   <template class="CcDiagnosticsPanel" parent="CcPanel">
     <child type="content">
-      <object class="GtkScrolledWindow">
-        <property name="hscrollbar-policy">never</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="AdwClamp">
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
-
+          <object class="AdwPreferencesGroup" id="diagnostics_group">
+            <property name="title" translatable="yes">Problem Reporting</property>
             <child>
-              <object class="GtkBox">
-                <property name="orientation">vertical</property>
-                <property name="hexpand">1</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="margin-bottom">12</property>
-                    <property name="label" translatable="yes">Problem Reporting</property>
-                    <property name="wrap">1</property>
-                    <property name="max-width-chars">50</property>
-                    <property name="xalign">0</property>
-                    <attributes>
-                      <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="diagnostics_explanation_label">
-                    <property name="margin-bottom">12</property>
-                    <property name="use-markup">1</property>
-                    <property name="wrap">1</property>
-                    <property name="max-width-chars">50</property>
-                    <property name="xalign">0</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="diagnostics_list_box">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list"/>
-                    </style>
-                    <child>
-                      <object class="GtkListBoxRow">
-                        <child>
-                          <object class="GtkBox">
-                        <property name="margin_start">12</property>
-                        <property name="margin_end">12</property>
-                        <property name="margin_top">12</property>
-                        <property name="margin_bottom">12</property>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">_Automatic Problem Reporting</property>
-                                <property name="hexpand">True</property>
-                                <property name="vexpand">True</property>
-                                <property name="use_underline">1</property>
-                                <property name="mnemonic_widget">abrt_switch</property>
-                                <property name="xalign">0</property>
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkSwitch" id="abrt_switch">
-                                <property name="halign">end</property>
-                                <property name="valign">center</property>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">_Automatic Problem Reporting</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">abrt_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="abrt_switch">
+                    <property name="valign">center</property>
                   </object>
                 </child>
               </object>
             </child>
-
           </object>
         </child>
       </object>
