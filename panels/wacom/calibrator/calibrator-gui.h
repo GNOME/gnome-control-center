@@ -36,26 +36,26 @@ typedef struct
 	gdouble y_max;
 } XYinfo;
 
-typedef struct CalibArea CalibArea;
-typedef void (*FinishCallback) (CalibArea *area, gpointer user_data);
+typedef struct CcCalibArea CcCalibArea;
+typedef void (*FinishCallback) (CcCalibArea *area, gpointer user_data);
 
-CalibArea * calib_area_new (GdkDisplay      *display,
-			    int             monitor,
-			    GdkDevice      *device,
-			    FinishCallback  callback,
-			    gpointer        user_data,
-			    int             threshold_doubleclick,
-			    int             threshold_misclick);
+CcCalibArea * cc_calib_area_new (GdkDisplay      *display,
+                                 int             monitor,
+                                 GdkDevice      *device,
+                                 FinishCallback  callback,
+                                 gpointer        user_data,
+                                 int             threshold_doubleclick,
+                                 int             threshold_misclick);
 
-gboolean calib_area_finish (CalibArea *area);
+gboolean cc_calib_area_finish (CcCalibArea *area);
 
-void calib_area_free (CalibArea *area);
+void cc_calib_area_free (CcCalibArea *area);
 
-void calib_area_get_axis (CalibArea *area,
-                          XYinfo    *new_axis,
-                          gboolean  *swap_xy);
+void cc_calib_area_get_axis (CcCalibArea *area,
+                             XYinfo      *new_axis,
+                             gboolean    *swap_xy);
 
-void calib_area_get_padding (CalibArea *area,
-                             XYinfo    *padding);
+void cc_calib_area_get_padding (CcCalibArea *area,
+                                XYinfo      *padding);
 
 G_END_DECLS

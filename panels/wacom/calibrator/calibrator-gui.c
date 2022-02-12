@@ -31,7 +31,7 @@
 #include "calibrator-gui.h"
 #include "cc-clock.h"
 
-struct CalibArea
+struct CcCalibArea
 {
   struct Calib calibrator;
   XYinfo       axis;
@@ -54,7 +54,7 @@ struct CalibArea
 #define END_TIME                750   /*  750 = 0.75 sec */
 
 static void
-calib_area_notify_finish (CalibArea *area)
+cc_calib_area_notify_finish (CcCalibArea *area)
 {
   gtk_widget_hide (area->window);
 
@@ -62,22 +62,22 @@ calib_area_notify_finish (CalibArea *area)
 }
 
 static gboolean
-on_close_request (GtkWidget *widget,
-                  CalibArea *area)
+on_close_request (GtkWidget   *widget,
+                  CcCalibArea *area)
 {
-  calib_area_notify_finish (area);
+  cc_calib_area_notify_finish (area);
   return GDK_EVENT_PROPAGATE;
 }
 
 static gboolean
-calib_area_finish_idle_cb (CalibArea *area)
+cc_calib_area_finish_idle_cb (CcCalibArea *area)
 {
-  calib_area_notify_finish (area);
+  cc_calib_area_notify_finish (area);
   return FALSE;
 }
 
 static void
-set_success (CalibArea *area)
+set_success (CcCalibArea *area)
 {
   GtkWidget *stack, *image;
 
@@ -87,7 +87,7 @@ set_success (CalibArea *area)
 }
 
 static void
-set_calibration_status (CalibArea *area)
+set_calibration_status (CcCalibArea *area)
 {
   area->success = finish (&area->calibrator, &area->axis, &area->swap);
 
@@ -95,30 +95,30 @@ set_calibration_status (CalibArea *area)
     {
       set_success (area);
       g_timeout_add (END_TIME,
-                     (GSourceFunc) calib_area_finish_idle_cb,
+                     (GSourceFunc) cc_calib_area_finish_idle_cb,
                      area);
     }
   else
     {
-      g_idle_add ((GSourceFunc) calib_area_finish_idle_cb, area);
+      g_idle_add ((GSourceFunc) cc_calib_area_finish_idle_cb, area);
     }
 }
 
 static void
-show_error_message (CalibArea *area)
+show_error_message (CcCalibArea *area)
 {
   gtk_revealer_set_reveal_child (GTK_REVEALER (area->error_revealer), TRUE);
 }
 
 static void
-hide_error_message (CalibArea *area)
+hide_error_message (CcCalibArea *area)
 {
   gtk_revealer_set_reveal_child (GTK_REVEALER (area->error_revealer), FALSE);
 }
 
 static void
-set_active_target (CalibArea *area,
-                   int        n_target)
+set_active_target (CcCalibArea *area,
+                   int          n_target)
 {
   GtkWidget *targets[] = {
     GTK_WIDGET (gtk_builder_get_object (area->builder, "target1")),
@@ -137,7 +137,7 @@ on_gesture_press (GtkGestureClick *gesture,
                   guint            n_press,
                   gdouble          x,
                   gdouble          y,
-                  CalibArea       *area)
+                  CcCalibArea     *area)
 {
   gint num_clicks;
   gboolean success;
@@ -184,24 +184,24 @@ on_key_release (GtkEventControllerKey *controller,
 		guint                  keyval,
 		guint                  keycode,
 		GdkModifierType        state,
-		CalibArea             *area)
+		CcCalibArea           *area)
 {
   if (area->success || keyval != GDK_KEY_Escape)
     return GDK_EVENT_PROPAGATE;
 
-  calib_area_notify_finish (area);
+  cc_calib_area_notify_finish (area);
   return GDK_EVENT_STOP;
 }
 
 static void
-on_clock_finished (CcClock   *clock,
-                   CalibArea *area)
+on_clock_finished (CcClock     *clock,
+                   CcCalibArea *area)
 {
   set_calibration_status (area);
 }
 
 static void
-on_title_revealed (CalibArea *area)
+on_title_revealed (CcCalibArea *area)
 {
   GtkWidget *revealer;
 
@@ -210,9 +210,9 @@ on_title_revealed (CalibArea *area)
 }
 
 static void
-on_fullscreen (GtkWindow  *window,
-               GParamSpec *pspec,
-               CalibArea  *area)
+on_fullscreen (GtkWindow    *window,
+               GParamSpec   *pspec,
+               CcCalibArea  *area)
 {
   GtkWidget *revealer;
 
@@ -232,19 +232,19 @@ on_fullscreen (GtkWindow  *window,
  * Creates the windows and other objects required to do calibration
  * under GTK. When the window is closed (timed out, calibration finished
  * or user cancellation), callback will be called, where you should call
- * calib_area_finish().
+ * cc_calib_area_finish().
  */
-CalibArea *
-calib_area_new (GdkDisplay     *display,
-                int             n_monitor,
-                GdkDevice      *device,
-                FinishCallback  callback,
-                gpointer        user_data,
-                int             threshold_doubleclick,
-                int             threshold_misclick)
+CcCalibArea *
+cc_calib_area_new (GdkDisplay     *display,
+                   int             n_monitor,
+                   GdkDevice      *device,
+                   FinishCallback  callback,
+                   gpointer        user_data,
+                   int             threshold_doubleclick,
+                   int             threshold_misclick)
 {
   g_autoptr(GdkMonitor) monitor = NULL;
-  CalibArea *calib_area;
+  CcCalibArea *calib_area;
   GdkRectangle rect;
   GtkGesture *click;
   GtkEventController *key;
@@ -253,7 +253,7 @@ calib_area_new (GdkDisplay     *display,
 
   g_type_ensure (CC_TYPE_CLOCK);
 
-  calib_area = g_new0 (CalibArea, 1);
+  calib_area = g_new0 (CcCalibArea, 1);
   calib_area->callback = callback;
   calib_area->user_data = user_data;
   calib_area->device = device;
@@ -317,9 +317,9 @@ calib_area_new (GdkDisplay     *display,
 }
 
 /* Finishes the calibration. Note that CalibArea
- * needs to be destroyed with calib_area_free() afterwards */
+ * needs to be destroyed with Cccalib_area_free() afterwards */
 gboolean
-calib_area_finish (CalibArea *area)
+cc_calib_area_finish (CcCalibArea *area)
 {
   g_return_val_if_fail (area != NULL, FALSE);
 
@@ -336,7 +336,7 @@ calib_area_finish (CalibArea *area)
 }
 
 void
-calib_area_free (CalibArea *area)
+cc_calib_area_free (CcCalibArea *area)
 {
   g_return_if_fail (area != NULL);
 
@@ -347,9 +347,9 @@ calib_area_free (CalibArea *area)
 }
 
 void
-calib_area_get_axis (CalibArea *area,
-                     XYinfo    *new_axis,
-                     gboolean  *swap_xy)
+cc_calib_area_get_axis (CcCalibArea *area,
+                        XYinfo      *new_axis,
+                        gboolean    *swap_xy)
 {
   g_return_if_fail (area != NULL);
 
@@ -358,8 +358,8 @@ calib_area_get_axis (CalibArea *area,
 }
 
 void
-calib_area_get_padding (CalibArea *area,
-                        XYinfo    *padding)
+cc_calib_area_get_padding (CcCalibArea *area,
+                           XYinfo      *padding)
 {
   g_return_if_fail (area != NULL);
 

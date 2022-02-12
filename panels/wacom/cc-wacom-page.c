@@ -57,7 +57,7 @@ struct _CcWacomPage
 	CcWacomPanel   *panel;
 	CcWacomDevice  *stylus;
 	GList          *pads;
-	CalibArea      *area;
+	CcCalibArea    *area;
 	GSettings      *wacom_settings;
 
 	GtkWidget      *tablet_section;
@@ -142,15 +142,15 @@ set_calibration (CcWacomDevice  *device,
 }
 
 static void
-finish_calibration (CalibArea *area,
-		    gpointer   user_data)
+finish_calibration (CcCalibArea *area,
+		    gpointer     user_data)
 {
 	CcWacomPage *page = (CcWacomPage *) user_data;
 	XYinfo axis;
 	gdouble cal[4];
 
-	if (calib_area_finish (area)) {
-		calib_area_get_padding (area, &axis);
+	if (cc_calib_area_finish (area)) {
+		cc_calib_area_get_padding (area, &axis);
 		cal[0] = axis.x_min;
 		cal[1] = axis.x_max;
 		cal[2] = axis.y_min;
@@ -167,7 +167,7 @@ finish_calibration (CalibArea *area,
 		g_object_set_data (G_OBJECT (page), "old-calibration", NULL);
 	}
 
-	calib_area_free (area);
+	cc_calib_area_free (area);
 	page->area = NULL;
 	gtk_widget_set_sensitive (page->tablet_calibrate, TRUE);
 }
@@ -232,13 +232,13 @@ run_calibration (CcWacomPage *page,
 		}
 	}
 
-	page->area = calib_area_new (NULL,
-				     n_monitor,
-				     cc_wacom_page_get_gdk_device (page),
-				     finish_calibration,
-				     page,
-				     THRESHOLD_MISCLICK,
-				     THRESHOLD_DOUBLECLICK);
+	page->area = cc_calib_area_new (NULL,
+                                        n_monitor,
+                                        cc_wacom_page_get_gdk_device (page),
+                                        finish_calibration,
+                                        page,
+                                        THRESHOLD_MISCLICK,
+                                        THRESHOLD_DOUBLECLICK);
 
 	g_object_set_data_full (G_OBJECT (page),
 				"old-calibration",
@@ -530,7 +530,7 @@ cc_wacom_page_dispose (GObject *object)
 
 	g_cancellable_cancel (self->cancellable);
 	g_clear_object (&self->cancellable);
-	g_clear_pointer (&self->area, calib_area_free);
+	g_clear_pointer (&self->area, cc_calib_area_free);
 	g_clear_pointer (&self->button_map, gtk_window_destroy);
 	g_list_free_full (self->pads, g_object_unref);
 	g_clear_object (&self->rr_screen);
