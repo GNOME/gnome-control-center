@@ -151,6 +151,9 @@ on_gesture_press (GtkGestureClick *gesture,
 
   source = gtk_gesture_get_device (GTK_GESTURE (gesture));
 
+  if (gdk_device_get_source (source) == GDK_SOURCE_TOUCHSCREEN)
+    return;
+
   /* Check matching device if a device was provided */
   if (area->device && area->device != source)
     {
