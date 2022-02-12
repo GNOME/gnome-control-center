@@ -38,8 +38,6 @@ struct _CcKeyboardPanel
 {
   CcPanel             parent_instance;
 
-  GtkListBox          *input_source_list;
-
   GtkCheckButton      *per_window_source;
   GtkCheckButton      *same_source;
   GSettings           *keybindings_settings;
@@ -51,7 +49,7 @@ struct _CcKeyboardPanel
   GtkWidget           *value_alternate_chars;
   GtkWidget           *value_compose;
 
-  GtkListBoxRow       *common_shortcuts_row;
+  AdwActionRow        *common_shortcuts_row;
 };
 
 CC_PANEL_REGISTER (CcKeyboardPanel, cc_keyboard_panel)
@@ -97,14 +95,6 @@ static const CcXkbModifier COMPOSE_MODIFIER = {
   },
   NULL,
 };
-
-static const gchar *custom_css =
-".keyboard-panel-radio-button {"
-"    padding-left: 6px;"
-"    padding-right: 12px;"
-"    padding-top: 12px;"
-"    padding-bottom: 12px;"
-"}";
 
 static void
 special_chars_activated (AdwActionRow    *row,
@@ -196,7 +186,6 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-keyboard-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, input_source_list);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, input_switch_group);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, per_window_source);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, same_source);
@@ -238,19 +227,9 @@ translate_switch_input_source (GValue *value,
 static void
 cc_keyboard_panel_init (CcKeyboardPanel *self)
 {
-  GtkCssProvider *provider;
-
   g_resources_register (cc_keyboard_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (provider, custom_css, -1);
-
-  gtk_style_context_add_provider_for_display (gdk_display_get_default (),
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION + 1);
-  g_object_unref (provider);
 
   self->input_source_settings = g_settings_new ("org.gnome.desktop.input-sources");
 

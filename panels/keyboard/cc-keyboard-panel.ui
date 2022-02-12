@@ -27,48 +27,26 @@
           <object class="AdwPreferencesGroup" id="input_switch_group">
             <property name="title" translatable="yes">Input Source Switching</property>
             <child>
-              <object class="GtkListBox" id="input_source_list">
-                <property name="margin-bottom">20</property>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
-                <child>
-                  <object class="GtkListBoxRow">
-                    <child>
-                      <object class="GtkCheckButton" id="same_source">
-                        <property name="active">True</property>
-                        <style>
-                          <class name="keyboard-panel-radio-button" />
-                        </style>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="margin_start">6</property>
-                            <property name="use_underline">True</property>
-                            <property name="label" translatable="yes">Use the _same source for all windows</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Use the _same source for all windows</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">same_source</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="same_source">
+                    <property name="valign">center</property>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkListBoxRow">
-                    <child>
-                      <object class="GtkCheckButton" id="per_window_source">
-                        <property name="active">True</property>
-                        <property name="group">same_source</property>
-                        <style>
-                          <class name="keyboard-panel-radio-button" />
-                        </style>
-                        <child>
-                          <object class="GtkLabel">
-                            <property name="margin_start">6</property>
-                            <property name="use_underline">True</property>
-                            <property name="label" translatable="yes">Switch input sources _individually for each window</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Switch input sources _individually for each window</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">per_window_source</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="per_window_source">
+                    <property name="valign">center</property>
+                    <property name="group">same_source</property>
                   </object>
                 </child>
               </object>
