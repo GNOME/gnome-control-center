@@ -278,8 +278,7 @@ calibrate (CcWacomPage *page)
 		/* The display the tablet should be mapped to could not be located.
 		 * This shouldn't happen if the EDID data is good...
 		 */
-		g_critical("Output associated with the tablet is not connected. Unable to calibrate.");
-		return;
+		g_critical("Output associated with the tablet is not connected. Calibration may appear in wrong monitor.");
 	}
 
 	old_calibration = g_settings_get_value (page->wacom_settings, "area");
