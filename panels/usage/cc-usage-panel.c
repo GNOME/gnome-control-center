@@ -247,7 +247,7 @@ retain_history_name_cb (AdwEnumListItem *item,
       return g_strdup (C_("retain_history", "1 day"));
     case CC_USAGE_PANEL_RETAIN_HISTORY_7_DAYS:
       /* Translators: Option for "File History Duration" in "File History" group */
-      return g_strdup (C_("retain_history", "7 day"));
+      return g_strdup (C_("retain_history", "7 days"));
     case CC_USAGE_PANEL_RETAIN_HISTORY_30_DAYS:
       /* Translators: Option for "File History Duration" in "File History" group */
       return g_strdup (C_("retain_history", "30 days"));
