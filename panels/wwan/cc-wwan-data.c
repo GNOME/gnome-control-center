@@ -202,16 +202,16 @@ wwan_data_get_nm_connection (CcWwanDataApn *apn)
 }
 
 static gboolean
-wwan_data_apn_are_same (NMRemoteConnection    *remote_connection,
+wwan_data_apn_are_same (CcWwanDataApn         *apn,
                         NMAMobileAccessMethod *access_method)
 {
   NMConnection *connection;
   NMSetting *setting;
 
-  if (!remote_connection)
+  if (!apn->remote_connection)
     return FALSE;
 
-  connection = NM_CONNECTION (remote_connection);
+  connection = NM_CONNECTION (apn->remote_connection);
   setting = NM_SETTING (nm_connection_get_setting_gsm (connection));
 
   if (g_strcmp0 (nma_mobile_access_method_get_3gpp_apn (access_method),
@@ -223,7 +223,7 @@ wwan_data_apn_are_same (NMRemoteConnection    *remote_connection,
     return FALSE;
 
   if (g_strcmp0 (nma_mobile_access_method_get_password (access_method),
-                 nm_setting_gsm_get_password (NM_SETTING_GSM (setting))) != 0)
+                 cc_wwan_data_apn_get_password (apn)) != 0)
     return FALSE;
 
   return TRUE;
@@ -245,8 +245,7 @@ wwan_data_find_matching_apn (CcWwanData            *self,
       if (apn->access_method == access_method)
         return apn;
 
-      if (wwan_data_apn_are_same (apn->remote_connection,
-                                  access_method))
+      if (wwan_data_apn_are_same (apn, access_method))
         return apn;
 
       g_object_unref (apn);
