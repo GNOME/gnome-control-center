@@ -238,12 +238,35 @@ cc_calib_area_finalize (GObject *object)
 }
 
 static void
+cc_calib_area_size_allocate (GtkWidget *widget,
+                             int        width,
+                             int        height,
+                             int        baseline)
+{
+  CcCalibArea *calib_area = CC_CALIB_AREA (widget);
+
+  calib_area->calibrator.geometry.width = width;
+  calib_area->calibrator.geometry.height = height;
+
+  /* reset calibration if already started */
+  reset (&calib_area->calibrator);
+  set_active_target (calib_area, 0);
+
+  GTK_WIDGET_CLASS (cc_calib_area_parent_class)->size_allocate (widget,
+                                                                width,
+                                                                height,
+                                                                baseline);
+}
+
+static void
 cc_calib_area_class_init (CcCalibAreaClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->finalize = cc_calib_area_finalize;
+
+  widget_class->size_allocate = cc_calib_area_size_allocate;
 
   g_type_ensure (CC_TYPE_CLOCK);
 
@@ -326,7 +349,6 @@ cc_calib_area_new (GdkDisplay     *display,
 {
   CcCalibArea *calib_area;
   g_autoptr(GdkMonitor) monitor = NULL;
-  GdkRectangle rect;
 
   g_return_val_if_fail (callback, NULL);
 
@@ -341,9 +363,6 @@ cc_calib_area_new (GdkDisplay     *display,
   if (display == NULL)
     display = gdk_display_get_default ();
   monitor = g_list_model_get_item (gdk_display_get_monitors (display), n_monitor);
-  gdk_monitor_get_geometry (monitor, &rect);
-
-  calib_area->calibrator.geometry = rect;
 
   gtk_window_fullscreen_on_monitor (GTK_WINDOW (calib_area), monitor);
   gtk_widget_show (GTK_WIDGET (calib_area));
