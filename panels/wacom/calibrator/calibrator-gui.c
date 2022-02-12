@@ -245,12 +245,16 @@ cc_calib_area_size_allocate (GtkWidget *widget,
 {
   CcCalibArea *calib_area = CC_CALIB_AREA (widget);
 
-  calib_area->calibrator.geometry.width = width;
-  calib_area->calibrator.geometry.height = height;
+  if (calib_area->calibrator.geometry.width != width ||
+      calib_area->calibrator.geometry.height != height)
+    {
+      calib_area->calibrator.geometry.width = width;
+      calib_area->calibrator.geometry.height = height;
 
-  /* reset calibration if already started */
-  reset (&calib_area->calibrator);
-  set_active_target (calib_area, 0);
+      /* reset calibration if already started */
+      reset (&calib_area->calibrator);
+      set_active_target (calib_area, 0);
+    }
 
   GTK_WIDGET_CLASS (cc_calib_area_parent_class)->size_allocate (widget,
                                                                 width,
