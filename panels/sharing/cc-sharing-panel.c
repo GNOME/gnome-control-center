@@ -57,7 +57,7 @@ struct _CcSharingPanel
 
   GtkWidget *approve_connections_radiobutton;
   GtkWidget *hostname_entry;
-  GtkWidget *main_list_box;
+  GtkWidget *main_group;
   GtkWidget *master_switch;
   GtkWidget *media_sharing_dialog;
   GtkWidget *media_sharing_headerbar;
@@ -117,7 +117,7 @@ cc_sharing_panel_master_switch_notify (CcSharingPanel *self)
       gtk_switch_set_active (GTK_SWITCH (self->remote_login_switch), FALSE);
     }
 
-  gtk_widget_set_sensitive (self->main_list_box, active);
+  gtk_widget_set_sensitive (self->main_group, active);
 }
 
 static void
@@ -165,6 +165,46 @@ cc_sharing_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
+cc_sharing_panel_run_dialog (CcSharingPanel *self,
+                             GtkWidget      *dialog)
+{
+  GtkWidget *parent;
+
+  /* ensure labels with the hostname are updated if the hostname has changed */
+  cc_sharing_panel_setup_label_with_hostname (self,
+                                              self->screen_sharing_label);
+  cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_label);
+  cc_sharing_panel_setup_label_with_hostname (self,
+                                              self->personal_file_sharing_label);
+
+
+  parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+
+  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
+  gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
+cc_sharing_panel_main_list_box_row_activated (CcSharingPanel *self,
+                                              AdwActionRow   *row)
+{
+  GtkWidget *dialog;
+
+  if (row == ADW_ACTION_ROW (self->media_sharing_row))
+    dialog = self->media_sharing_dialog;
+  else if (row == ADW_ACTION_ROW (self->personal_file_sharing_row))
+    dialog = self->personal_file_sharing_dialog;
+  else if (row == ADW_ACTION_ROW (self->remote_login_row))
+    dialog = self->remote_login_dialog;
+  else if (row == ADW_ACTION_ROW (self->screen_sharing_row))
+    dialog = self->screen_sharing_dialog;
+  else
+    return;
+
+  cc_sharing_panel_run_dialog (self, dialog);
+}
+
+static void
 cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -182,7 +222,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, screen_sharing_grid);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_grid);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, master_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, main_list_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, main_group);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_row);
@@ -210,50 +250,10 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_listbox);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, show_password_checkbutton);
 
+  gtk_widget_class_bind_template_callback (widget_class, cc_sharing_panel_main_list_box_row_activated);
+
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
-}
-
-static void
-cc_sharing_panel_run_dialog (CcSharingPanel *self,
-                             GtkWidget      *dialog)
-{
-  GtkWidget *parent;
-
-  /* ensure labels with the hostname are updated if the hostname has changed */
-  cc_sharing_panel_setup_label_with_hostname (self,
-                                              self->screen_sharing_label);
-  cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_label);
-  cc_sharing_panel_setup_label_with_hostname (self,
-                                              self->personal_file_sharing_label);
-
-
-  parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
-
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
-  gtk_window_present (GTK_WINDOW (dialog));
-}
-
-static void
-cc_sharing_panel_main_list_box_row_activated (CcSharingPanel *self,
-                                              GtkListBoxRow  *row)
-{
-  GtkWidget *dialog;
-
-  if (row == GTK_LIST_BOX_ROW (self->media_sharing_row))
-    dialog = self->media_sharing_dialog;
-  else if (row == GTK_LIST_BOX_ROW (self->personal_file_sharing_row))
-    dialog = self->personal_file_sharing_dialog;
-  else if (row == GTK_LIST_BOX_ROW (self->remote_login_row))
-    dialog = self->remote_login_dialog;
-  else if (row == GTK_LIST_BOX_ROW (self->screen_sharing_row))
-    dialog = self->screen_sharing_dialog;
-  else
-    return;
-
-  gtk_list_box_select_row (GTK_LIST_BOX (self->main_list_box), NULL);
-
-  cc_sharing_panel_run_dialog (self, dialog);
 }
 
 static gboolean
@@ -1113,9 +1113,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_signal_connect_object (self->main_list_box, "row-activated",
-                           G_CALLBACK (cc_sharing_panel_main_list_box_row_activated), self, G_CONNECT_SWAPPED);
-
   g_signal_connect (self->media_sharing_dialog, "response",
                     G_CALLBACK (gtk_widget_hide), NULL);
   g_signal_connect (self->personal_file_sharing_dialog, "response",
@@ -1125,12 +1122,9 @@ cc_sharing_panel_init (CcSharingPanel *self)
   g_signal_connect (self->screen_sharing_dialog, "response",
                     G_CALLBACK (gtk_widget_hide), NULL);
 
-  gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (self->main_list_box),
-                                             TRUE);
-
   /* start the panel in the disabled state */
   gtk_switch_set_active (GTK_SWITCH (self->master_switch), FALSE);
-  gtk_widget_set_sensitive (self->main_list_box, FALSE);
+  gtk_widget_set_sensitive (self->main_group, FALSE);
   g_signal_connect_object (self->master_switch, "notify::active",
                            G_CALLBACK (cc_sharing_panel_master_switch_notify), self, G_CONNECT_SWAPPED);
 
@@ -1144,7 +1138,7 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   /* make sure the hostname entry isn't focused by default */
   g_signal_connect_swapped (self, "map", G_CALLBACK (gtk_widget_grab_focus),
-                            self->main_list_box);
+                            self->main_group);
 }
 
 CcSharingPanel *
