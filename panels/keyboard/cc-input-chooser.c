@@ -173,7 +173,6 @@ more_row_new (void)
   gtk_widget_set_tooltip_text (row, _("More…"));
 
   arrow = gtk_image_new_from_icon_name ("view-more-symbolic");
-  gtk_widget_add_css_class (arrow, "dim-label");
   gtk_widget_set_hexpand (arrow, TRUE);
   set_row_widget_margins (arrow);
   gtk_box_append (GTK_BOX (box), arrow);
@@ -254,7 +253,6 @@ input_source_row_new (CcInputChooser *self,
 
       image = gtk_image_new_from_icon_name ("system-run-symbolic");
       set_row_widget_margins (image);
-      gtk_style_context_add_class (gtk_widget_get_style_context (image), "dim-label");
       gtk_box_append (GTK_BOX (widget), image);
 
       g_object_set_data_full (G_OBJECT (row), "name", display_name, g_free);
