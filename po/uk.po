@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-12 12:26+0000\n"
-"PO-Revision-Date: 2022-02-12 18:23+0200\n"
+"POT-Creation-Date: 2022-02-13 00:26+0000\n"
+"PO-Revision-Date: 2022-02-13 09:31+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -350,7 +350,7 @@ msgstr "Виберіть зображення"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
@@ -749,7 +749,7 @@ msgstr "Інструмент міри не підтримує профілюва
 msgid "The device type is not currently supported."
 msgstr "Цей тип пристрою не підтримується. "
 
-#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:41
+#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
 msgstr "Калібрування екрана"
 
@@ -2552,7 +2552,6 @@ msgstr "Заблокувати екран"
 
 #. FIXME
 #: panels/microphone/cc-microphone-panel.ui:20
-#| msgid "Microphone is turned off"
 msgid "Microphone Turned Off"
 msgstr "Мікрофон вимкнено"
 
@@ -2564,23 +2563,25 @@ msgstr "Немає програм, які можуть записувати зв
 #| msgid ""
 #| "Use of the microphone allows applications to record and listen to audio. "
 #| "Disabling the microphone may cause some applications to not function "
-#| "properly."
+#| "properly.\n"
+#| "\n"
+#| "Allow the applications below to use your microphone.\n"
+#| "                    "
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
 "properly.\n"
 "\n"
-"Allow the applications below to use your microphone.\n"
-"                    "
+"Allow the applications below to use your microphone."
 msgstr ""
 "Використання мікрофона надає програмам змогу записувати та отримувати "
 "звукові дані. Вимикання мікрофона може призвести до неправильної роботи "
 "деяких програм.\n"
 "\n"
-"Програмам із наведеного нижче списку буде дозволено використовувати мікрофон.\n"
-"                    "
+"Програмам із наведеного нижче списку буде дозволено використовувати "
+"мікрофон."
 
-#: panels/microphone/cc-microphone-panel.ui:52
+#: panels/microphone/cc-microphone-panel.ui:51
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "Немає програм, які б надсилали запит щодо доступу до мікрофона"
 
@@ -3372,7 +3373,7 @@ msgstr "Шлюз"
 #: panels/network/connection-editor/ip6-page.ui:232
 #: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:91
 #: panels/network/wireless-security/eap-method-peap.ui:33
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
 msgstr "Автоматично"
 
@@ -6903,35 +6904,119 @@ msgstr ""
 "text;font;size;AccessX;Sticky;Keys;Slow;Bounce;Mouse;Double;click;Delay;"
 "Speed;Assist;Repeat;Blink;visual;hearing;audio;typing;animations;"
 
-#: panels/usage/cc-usage-panel.c:174
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:55
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "1 година"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:58
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "1 день"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:61
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 дні"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:64
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 дні"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:67
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 дні"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:70
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 днів"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:73
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 днів"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:76
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 днів"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:79
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 днів"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:82
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 днів"
+
+#: panels/usage/cc-usage-panel.c:180
 msgid "Empty all items from Trash?"
 msgstr "Очистити всі елементи зі смітника?"
 
-#: panels/usage/cc-usage-panel.c:175
+#: panels/usage/cc-usage-panel.c:181
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Якщо вилучити елементи в смітнику, їх буде вилучено безповоротно."
 
-#: panels/usage/cc-usage-panel.c:176
+#: panels/usage/cc-usage-panel.c:182
 msgid "_Empty Trash"
 msgstr "С_порожнити смітник"
 
-#: panels/usage/cc-usage-panel.c:212
+#: panels/usage/cc-usage-panel.c:218
 msgid "Delete all the temporary files?"
 msgstr "Вилучити усі тимчасові файли?"
 
-#: panels/usage/cc-usage-panel.c:213
+#: panels/usage/cc-usage-panel.c:219
 msgid "All the temporary files will be permanently deleted."
 msgstr "Усі тимчасові файли буде безповоротно вилучено."
 
-#: panels/usage/cc-usage-panel.c:214
+#: panels/usage/cc-usage-panel.c:220
 msgid "_Purge Temporary Files"
 msgstr "П_очистити тимчасові файли"
 
-#: panels/usage/cc-usage-panel.ui:23
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:247
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "1 день"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:250
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 днів"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:253
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 днів"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:256
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "Завжди"
+
+#: panels/usage/cc-usage-panel.ui:9
 msgid "File History"
 msgstr "Журнал файлів"
 
-#: panels/usage/cc-usage-panel.ui:34
+#: panels/usage/cc-usage-panel.ui:10
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between applications, and makes it easier to find files that you "
@@ -6941,23 +7026,24 @@ msgstr ""
 "відомості є спільними для усіх програм. Вони полегшують пошук файлів, які "
 "можуть вам знадобитися."
 
-#: panels/usage/cc-usage-panel.ui:50
+#: panels/usage/cc-usage-panel.ui:13
 msgid "File H_istory"
 msgstr "Журнал _файлів"
 
-#: panels/usage/cc-usage-panel.ui:71
+#: panels/usage/cc-usage-panel.ui:25
 msgid "File _History Duration"
 msgstr "Тривалість _журналу файлів"
 
-#: panels/usage/cc-usage-panel.ui:107
+#: panels/usage/cc-usage-panel.ui:48
 msgid "_Clear History…"
 msgstr "О_чистити журнал…"
 
-#: panels/usage/cc-usage-panel.ui:122
-msgid "Trash & Temporary Files"
+#: panels/usage/cc-usage-panel.ui:63
+#| msgid "Trash & Temporary Files"
+msgid "Trash &amp; Temporary Files"
 msgstr "Смітник та тимчасові файли"
 
-#: panels/usage/cc-usage-panel.ui:131
+#: panels/usage/cc-usage-panel.ui:64
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -6966,109 +7052,25 @@ msgstr ""
 "інформацію. Автоматичне вилучення цих файлів може допомогти захистити "
 "конфіденційність."
 
-#: panels/usage/cc-usage-panel.ui:146
+#: panels/usage/cc-usage-panel.ui:67
 msgid "Automatically Delete _Trash Content"
 msgstr "Автоматично очищувати _смітник"
 
-#: panels/usage/cc-usage-panel.ui:159
+#: panels/usage/cc-usage-panel.ui:79
 msgid "Automatically Delete Temporary _Files"
 msgstr "Автоматично вилучати тимчасові _файли"
 
-#: panels/usage/cc-usage-panel.ui:180
+#: panels/usage/cc-usage-panel.ui:91
 msgid "Automatically Delete _Period"
 msgstr "Інтервал _автоматичного вилучення"
 
-#: panels/usage/cc-usage-panel.ui:217
+#: panels/usage/cc-usage-panel.ui:115
 msgid "_Empty Trash…"
 msgstr "С_порожнити смітник…"
 
-#: panels/usage/cc-usage-panel.ui:228
+#: panels/usage/cc-usage-panel.ui:126
 msgid "_Delete Temporary Files…"
 msgstr "_Вилучити тимчасові файли…"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:256
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 година"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:260
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 день"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:264
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 дні"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:268
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 дні"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:272
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 дні"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:276
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 днів"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:280
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 днів"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:284
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 днів"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:288
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 днів"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:292
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 днів"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:307
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 день"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:311
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 днів"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:315
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 днів"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:319
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Завжди"
 
 #: panels/usage/gnome-usage-panel.desktop.in.in:3
 msgid "File History & Trash"
@@ -7956,7 +7958,7 @@ msgstr ""
 msgid "_Close"
 msgstr "_Закрити"
 
-#: panels/wacom/calibrator/calibrator.ui:52
+#: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -7964,7 +7966,7 @@ msgstr ""
 "Торкніться цільового маркера, коли той з'явиться на екрані, щоб калібрувати "
 "планшет."
 
-#: panels/wacom/calibrator/calibrator.ui:64
+#: panels/wacom/calibrator/calibrator.ui:63
 msgid "Mis-click detected, restarting…"
 msgstr "Промах виявлено, перезавантаження…"
 
@@ -8006,7 +8008,7 @@ msgid "External tablet device"
 msgstr "Зовнішній пристрій планшета"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:630
+#: panels/wacom/cc-wacom-page.c:608
 msgid "All Displays"
 msgstr "Усі дисплеї"
 
