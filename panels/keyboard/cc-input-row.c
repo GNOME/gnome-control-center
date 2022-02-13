@@ -25,10 +25,6 @@ struct _CcInputRow
 
   CcInputSource   *source;
 
-  GtkButton       *remove_button;
-  GtkButton       *settings_button;
-  GtkSeparator    *settings_separator;
-
   GtkListBox      *drag_widget;
 
   GtkDragSource   *drag_source;
@@ -107,9 +103,11 @@ drop_cb (GtkDropTarget *drop_target,
 }
 
 static void
-move_up_button_clicked_cb (CcInputRow *self,
-                           GtkButton  *button)
+move_up_cb (GtkWidget  *widget,
+            const char *action_name,
+            GVariant   *parameter)
 {
+  CcInputRow *self = CC_INPUT_ROW (widget);
   GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
   gint previous_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) - 1;
   GtkListBoxRow *previous_row = gtk_list_box_get_row_at_index (list_box, previous_idx);
@@ -124,9 +122,11 @@ move_up_button_clicked_cb (CcInputRow *self,
 }
 
 static void
-move_down_button_clicked_cb (CcInputRow *self,
-                             GtkButton  *button)
+move_down_cb (GtkWidget  *widget,
+              const char *action_name,
+              GVariant   *parameter)
 {
+  CcInputRow *self = CC_INPUT_ROW (widget);
   GtkListBox *list_box = GTK_LIST_BOX (gtk_widget_get_parent (GTK_WIDGET (self)));
   gint next_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) + 1;
   GtkListBoxRow *next_row = gtk_list_box_get_row_at_index (list_box, next_idx);
@@ -141,24 +141,33 @@ move_down_button_clicked_cb (CcInputRow *self,
 }
 
 static void
-settings_button_clicked_cb (CcInputRow *self)
+show_settings_cb (GtkWidget  *widget,
+                  const char *action_name,
+                  GVariant   *parameter)
 {
+  CcInputRow *self = CC_INPUT_ROW (widget);
   g_signal_emit (self,
                  signals[SIGNAL_SHOW_SETTINGS],
                  0);
 }
 
 static void
-layout_button_clicked_cb (CcInputRow *self)
+show_layout_cb (GtkWidget  *widget,
+                const char *action_name,
+                GVariant   *parameter)
 {
+  CcInputRow *self = CC_INPUT_ROW (widget);
   g_signal_emit (self,
                  signals[SIGNAL_SHOW_LAYOUT],
                  0);
 }
 
 static void
-remove_button_clicked_cb (CcInputRow *self)
+remove_cb (GtkWidget  *widget,
+           const char *action_name,
+           GVariant   *parameter)
 {
+  CcInputRow *self = CC_INPUT_ROW (widget);
   g_signal_emit (self,
                  signals[SIGNAL_REMOVE_ROW],
                  0);
@@ -183,16 +192,6 @@ cc_input_row_class_init (CcInputRowClass *klass)
   object_class->dispose = cc_input_row_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/keyboard/cc-input-row.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcInputRow, remove_button);
-  gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_button);
-  gtk_widget_class_bind_template_child (widget_class, CcInputRow, settings_separator);
-
-  gtk_widget_class_bind_template_callback (widget_class, layout_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, move_down_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, move_up_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, remove_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, settings_button_clicked_cb);
 
   signals[SIGNAL_SHOW_SETTINGS] =
     g_signal_new ("show-settings",
@@ -233,6 +232,12 @@ cc_input_row_class_init (CcInputRowClass *klass)
                   NULL,
                   G_TYPE_NONE,
                   0);
+
+  gtk_widget_class_install_action (widget_class, "row.move-up", NULL, move_up_cb);
+  gtk_widget_class_install_action (widget_class, "row.move-down", NULL, move_down_cb);
+  gtk_widget_class_install_action (widget_class, "row.show-layout", NULL, show_layout_cb);
+  gtk_widget_class_install_action (widget_class, "row.show-settings", NULL, show_settings_cb);
+  gtk_widget_class_install_action (widget_class, "row.remove", NULL, remove_cb);
 }
 
 void
@@ -272,8 +277,7 @@ cc_input_row_new (CcInputSource *source)
   g_signal_connect_object (source, "label-changed", G_CALLBACK (label_changed_cb), self, G_CONNECT_SWAPPED);
   label_changed_cb (self);
 
-  gtk_widget_set_visible (GTK_WIDGET (self->settings_button), CC_IS_INPUT_SOURCE_IBUS (source));
-  gtk_widget_set_visible (GTK_WIDGET (self->settings_separator), CC_IS_INPUT_SOURCE_IBUS (source));
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.show-settings", CC_IS_INPUT_SOURCE_IBUS (source));
 
   return self;
 }
@@ -290,7 +294,7 @@ cc_input_row_set_removable (CcInputRow *self,
                             gboolean    removable)
 {
   g_return_if_fail (CC_IS_INPUT_ROW (self));
-  gtk_widget_set_sensitive (GTK_WIDGET (self->remove_button), removable);
+  gtk_widget_action_set_enabled (GTK_WIDGET (self), "row.remove", removable);
 }
 
 void

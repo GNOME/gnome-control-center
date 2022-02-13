@@ -15,111 +15,43 @@
       <object class="GtkMenuButton">
         <property name="valign">center</property>
         <property name="icon_name">view-more-symbolic</property>
-        <property name="popover">popover_menu</property>
+        <property name="menu_model">popover_menu</property>
         <style>
           <class name="flat"/>
         </style>
       </object>
     </child>
   </template>
-  <object class="GtkPopover" id="popover_menu">
-    <style>
-      <class name="menu" />
-    </style>
-    <child>
-      <object class="GtkBox">
-        <property name="margin-top">6</property>
-        <property name="margin-bottom">6</property>
-        <property name="margin-start">6</property>
-        <property name="margin-end">6</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkButton">
-            <signal name="clicked" handler="move_up_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-            <style>
-              <class name="flat"/>
-            </style>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Move up</property>
-                <property name="xalign">0.0</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton">
-            <signal name="clicked" handler="move_down_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-            <style>
-              <class name="flat"/>
-            </style>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Move down</property>
-                <property name="xalign">0.0</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="orientation">horizontal</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="settings_button">
-            <property name="visible">False</property>
-            <signal name="clicked" handler="settings_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Preferences</property>
-                <property name="xalign">0.0</property>
-              </object>
-            </child>
-            <style>
-              <class name="flat"/>
-            </style>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSeparator" id="settings_separator">
-            <property name="orientation">horizontal</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton">
-            <signal name="clicked" handler="layout_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-            <style>
-              <class name="flat"/>
-            </style>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">View Keyboard Layout</property>
-                <property name="xalign">0.0</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSeparator">
-            <property name="orientation">horizontal</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="remove_button">
-            <signal name="clicked" handler="remove_button_clicked_cb" object="CcInputRow" swapped="yes"/>
-            <style>
-              <class name="flat"/>
-            </style>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Remove</property>
-                <property name="xalign">0.0</property>
-              </object>
-            </child>
-          </object>
-        </child>
-      </object>
-    </child>
-  </object>
+  <menu id="popover_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Move Up</attribute>
+        <attribute name="action">row.move-up</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Move Down</attribute>
+        <attribute name="action">row.move-down</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Preferences</attribute>
+        <attribute name="action">row.show-settings</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">View Keyboard Layout</attribute>
+        <attribute name="action">row.show-layout</attribute>
+      </item>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Remove</attribute>
+        <attribute name="action">row.remove</attribute>
+        <attribute name="hidden-when">action-disabled</attribute>
+      </item>
+    </section>
+  </menu>
 </interface>
