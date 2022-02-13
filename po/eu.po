@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-10 22:35+0000\n"
-"PO-Revision-Date: 2022-02-12 14:00+0100\n"
+"POT-Creation-Date: 2022-02-13 00:26+0000\n"
+"PO-Revision-Date: 2022-02-13 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -342,7 +342,7 @@ msgstr "Hautatu argazki bat"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
@@ -380,7 +380,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Mahaigaineko atzeko planorik ez"
 
-#: panels/background/cc-background-panel.c:177
+#: panels/background/cc-background-panel.c:227
 msgid "Current background"
 msgstr "Uneko atzeko planoa"
 
@@ -729,7 +729,7 @@ msgstr "Neurgailuak ez du inprimagailuaren profilarik onartzen"
 msgid "The device type is not currently supported."
 msgstr "Gailu mota ez dago oraingoz onartuta."
 
-#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:41
+#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
 msgstr "Pantailaren kalibrazioa"
 
@@ -1917,26 +1917,6 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "Bilatu"
 
-#: panels/keyboard/01-screenshot.xml.in:2
-msgid "Screenshots"
-msgstr "Pantaila-argazkiak"
-
-#: panels/keyboard/01-screenshot.xml.in:5
-msgid "Show the screenshot UI"
-msgstr "Erakutsi pantaila-argazkiaren interfazea"
-
-#: panels/keyboard/01-screenshot.xml.in:8
-msgid "Take a screenshot"
-msgstr "Atera pantaila-argazki bat"
-
-#: panels/keyboard/01-screenshot.xml.in:11
-msgid "Take a screenshot of a window"
-msgstr "Atera leiho baten pantaila-argazkia"
-
-#: panels/keyboard/01-screenshot.xml.in:14
-msgid "Show the screen recording UI"
-msgstr "Erakutsi pantaila grabatzeko interfazea"
-
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
 msgstr "Sistema"
@@ -2254,7 +2234,7 @@ msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr "Sakatu Esc tekla laster-tekla bertan behera uzteko edo atzera-tekla desgaitzeko."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
-#: panels/printers/pp-details-dialog.ui:36
+#: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
 #: panels/user-accounts/cc-user-panel.ui:125
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
@@ -2480,26 +2460,26 @@ msgid "Lock your screen"
 msgstr "Blokeatu zure pantaila"
 
 #. FIXME
-#: panels/microphone/cc-microphone-panel.ui:35
-msgid "Microphone is turned off"
-msgstr "Mikrofonoa itzalita dago"
+#: panels/microphone/cc-microphone-panel.ui:20
+msgid "Microphone Turned Off"
+msgstr "Mikrofonoa itzalita"
 
-#: panels/microphone/cc-microphone-panel.ui:43
+#: panels/microphone/cc-microphone-panel.ui:21
 msgid "No applications can record sound."
 msgstr "Aplikazioek ezin dute soinua grabatu."
 
-#: panels/microphone/cc-microphone-panel.ui:74
+#: panels/microphone/cc-microphone-panel.ui:34
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
-"properly."
-msgstr "Mikrofonoa erabilita, aplikazioek audioa grabatu eta entzun dezakete. Mikrofonoa desgaitzen bada, beharbada zenbait aplikaziok ez dute behar den moduan funtzionatuko."
+"properly.\n"
+"\n"
+"Allow the applications below to use your microphone."
+msgstr "Mikrofonoa erabilita, aplikazioek audioa grabatu dezakete. Mikrofonoa desgaitzen bada, beharbada zenbait aplikaziok ez dute behar den moduan funtzionatuko.\n"
+"\n"
+"Baimendu beheko aplikazioei zure kamera erabiltzea."
 
-#: panels/microphone/cc-microphone-panel.ui:83
-msgid "Allow the applications below to use your microphone."
-msgstr "Onartu beheko aplikazioek zure mikrofonoa erabili dezaten."
-
-#: panels/microphone/cc-microphone-panel.ui:103
+#: panels/microphone/cc-microphone-panel.ui:51
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "Ez dago aplikaziorik mikrofonoa erabiltzea eskatu duenik"
 
@@ -2792,7 +2772,7 @@ msgstr "Sarearen izena"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
 #: panels/printers/authentication-dialog.ui:55
-#: panels/printers/new-printer-dialog.ui:330
+#: panels/printers/new-printer-dialog.ui:331
 #: panels/printers/pp-jobs-dialog.ui:52
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
@@ -3245,7 +3225,7 @@ msgstr "Helbideak"
 #: panels/network/connection-editor/ip4-page.ui:246
 #: panels/network/connection-editor/ip6-page.ui:122
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/printers/pp-details-dialog.ui:87
+#: panels/printers/pp-details-dialog.ui:90
 msgid "Address"
 msgstr "Helbidea"
 
@@ -3268,7 +3248,7 @@ msgstr "Atebidea"
 #: panels/network/connection-editor/ip6-page.ui:232
 #: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:91
 #: panels/network/wireless-security/eap-method-peap.ui:33
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
 msgstr "Automatikoa"
 
@@ -4746,7 +4726,7 @@ msgstr "Autentifikatu"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:310
+#: panels/printers/new-printer-dialog.ui:311
 #: panels/printers/pp-jobs-dialog.ui:41
 #: panels/user-accounts/cc-add-user-dialog.ui:94
 #: panels/user-accounts/cc-add-user-dialog.ui:342
@@ -4755,7 +4735,7 @@ msgid "Username"
 msgstr "Erabiltzaile-izena"
 
 #: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:285
+#: panels/printers/new-printer-dialog.ui:286
 msgid "Authentication Required"
 msgstr "Autentifikazioa behar da"
 
@@ -4819,7 +4799,7 @@ msgstr "Ez da inprimakirik aurkitu"
 msgid "Enter a network address or search for a printer"
 msgstr "Sartu sareko helbidea edo bilatu inprimagailu bat"
 
-#: panels/printers/new-printer-dialog.ui:301
+#: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr "Sartu zure erabiltzaile-izena eta pasahitza inprimatze-zerbitzarian."
 
@@ -4844,29 +4824,29 @@ msgid ""
 "PPD.GZ)"
 msgstr "PostScript Printer Description fitxategiak (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *.PPD.GZ)"
 
-#: panels/printers/pp-details-dialog.ui:62 panels/printers/printer-entry.ui:213
+#: panels/printers/pp-details-dialog.ui:65 panels/printers/printer-entry.ui:215
 msgid "Location"
 msgstr "Kokalekua"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:112
+#: panels/printers/pp-details-dialog.ui:115
 #: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Kontrolatzailea"
 
-#: panels/printers/pp-details-dialog.ui:151
+#: panels/printers/pp-details-dialog.ui:154
 msgid "Searching for preferred drivers…"
 msgstr "Kontrolatzaile hobetsiak bilatzen…"
 
-#: panels/printers/pp-details-dialog.ui:170
+#: panels/printers/pp-details-dialog.ui:173
 msgid "Search for Drivers"
 msgstr "Bilatu kontrolatzaileak"
 
-#: panels/printers/pp-details-dialog.ui:178
+#: panels/printers/pp-details-dialog.ui:181
 msgid "Select from Database…"
 msgstr "Hautatu datu-basetik…"
 
-#: panels/printers/pp-details-dialog.ui:186
+#: panels/printers/pp-details-dialog.ui:189
 msgid "Install PPD File…"
 msgstr "Instalatu PPD fitxategia…"
 
@@ -5226,7 +5206,7 @@ msgid "Manufacturer"
 msgstr "Fabrikatzailea"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:165
+#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:167
 msgid "No Active Jobs"
 msgstr "Ez dago lan aktiborik"
 
@@ -5369,22 +5349,22 @@ msgstr "Garbitu inprimagailuaren buruak"
 msgid "Remove Printer"
 msgstr "Kendu inprimagailua"
 
-#: panels/printers/printer-entry.ui:185
+#: panels/printers/printer-entry.ui:187
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Modeloa"
 
-#: panels/printers/printer-entry.ui:240
+#: panels/printers/printer-entry.ui:242
 msgid "Ink Level"
 msgstr "Tintaren maila"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:302
+#: panels/printers/printer-entry.ui:304
 msgid "Please restart when the problem is resolved."
 msgstr "Berrabiarazi arazoa konpondutakoan."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:308
+#: panels/printers/printer-entry.ui:310
 msgid "Restart"
 msgstr "Berrabiarazi"
 
@@ -6709,166 +6689,166 @@ msgid ""
 "audio;typing;animations;"
 msgstr "Teklatua;Sagua;a11y;Irisgarritasuna;Irisgarritasun Unibertsala;Kontrastea;Kurtsorea;Soinua;Zooma;Pantaila;Irakurgailua;handia;altua;handia;testua;letra-tipoa;tamaina;AccessX;Itsaskorra;Teklak;Geldoa;Errebotea;Sagua;Bikoitza;klik;Atzerapena;Abiadura;Lagundu;Errepikatu;Keinua;bisuala;entzumena;audioa;idazketa;animazioak;"
 
-#: panels/usage/cc-usage-panel.c:174
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:55
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "Ordu 1"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:58
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "Egun 1"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:61
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 egun"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:64
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 egun"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:67
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 egun"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:70
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 egun"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:73
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 egun"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:76
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 egun"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:79
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 egun"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:82
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 egun"
+
+#: panels/usage/cc-usage-panel.c:180
 msgid "Empty all items from Trash?"
 msgstr "Hustu zakarrontziko elementu guztiak?"
 
-#: panels/usage/cc-usage-panel.c:175
+#: panels/usage/cc-usage-panel.c:181
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Zakarrontziko elementu guztiak betirako ezabatuko dira."
 
-#: panels/usage/cc-usage-panel.c:176
+#: panels/usage/cc-usage-panel.c:182
 msgid "_Empty Trash"
 msgstr "Hustu _zakarrontzia"
 
-#: panels/usage/cc-usage-panel.c:212
+#: panels/usage/cc-usage-panel.c:218
 msgid "Delete all the temporary files?"
 msgstr "Ezabatu aldi baterako fitxategi guztiak?"
 
-#: panels/usage/cc-usage-panel.c:213
+#: panels/usage/cc-usage-panel.c:219
 msgid "All the temporary files will be permanently deleted."
 msgstr "Aldi baterako fitxategi guztiak betirako ezabatuko dira."
 
-#: panels/usage/cc-usage-panel.c:214
+#: panels/usage/cc-usage-panel.c:220
 msgid "_Purge Temporary Files"
 msgstr "_Ezabatu aldi baterako fitxategiak"
 
-#: panels/usage/cc-usage-panel.ui:23
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:247
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "Egun 1"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:250
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 egun"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:253
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 egun"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:256
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "Beti"
+
+#: panels/usage/cc-usage-panel.ui:9
 msgid "File History"
 msgstr "Fitxategien historia"
 
-#: panels/usage/cc-usage-panel.ui:34
+#: panels/usage/cc-usage-panel.ui:10
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between applications, and makes it easier to find files that you "
 "might want to use."
 msgstr "Fitxategien historiak zuk erabilitako fitxategien erregistro bat gordetzen du. Informazio hori aplikazioen artean partekatzen da, eta errazago bihurtzen du erabili nahi dituzun fitxategiak aurkitzeko lana."
 
-#: panels/usage/cc-usage-panel.ui:50
+#: panels/usage/cc-usage-panel.ui:13
 msgid "File H_istory"
 msgstr "Fitxategien h_istoria"
 
-#: panels/usage/cc-usage-panel.ui:71
+#: panels/usage/cc-usage-panel.ui:25
 msgid "File _History Duration"
 msgstr "Fitxategien _historiaren iraupena"
 
-#: panels/usage/cc-usage-panel.ui:107
+#: panels/usage/cc-usage-panel.ui:48
 msgid "_Clear History…"
 msgstr "_Garbitu historia…"
 
-#: panels/usage/cc-usage-panel.ui:122
-msgid "Trash & Temporary Files"
+#: panels/usage/cc-usage-panel.ui:63
+msgid "Trash &amp; Temporary Files"
 msgstr "Zakarrontziko eta aldi baterako fitxategiak"
 
-#: panels/usage/cc-usage-panel.ui:131
+#: panels/usage/cc-usage-panel.ui:64
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
 msgstr "Zakarrontziko eta aldi baterako fitxategiek zenbaitetan informazio pertsonala edo sentikorra izan dezakete. Automatikoki ezabatzen badira, pribatutasuna babesten lagundu dezakete."
 
-#: panels/usage/cc-usage-panel.ui:146
+#: panels/usage/cc-usage-panel.ui:67
 msgid "Automatically Delete _Trash Content"
 msgstr "Ezabatu za_karrontziko edukia automatikoki"
 
-#: panels/usage/cc-usage-panel.ui:159
+#: panels/usage/cc-usage-panel.ui:79
 msgid "Automatically Delete Temporary _Files"
 msgstr "Ezabatu aldi _baterako fitxategiak automatikoki"
 
-#: panels/usage/cc-usage-panel.ui:180
+#: panels/usage/cc-usage-panel.ui:91
 msgid "Automatically Delete _Period"
 msgstr "Ezabatze automatikoaren _tartea"
 
-#: panels/usage/cc-usage-panel.ui:217
+#: panels/usage/cc-usage-panel.ui:115
 msgid "_Empty Trash…"
 msgstr "Hustu _zakarrontzia…"
 
-#: panels/usage/cc-usage-panel.ui:228
+#: panels/usage/cc-usage-panel.ui:126
 msgid "_Delete Temporary Files…"
 msgstr "_Ezabatu aldi baterako fitxategiak…"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:256
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "Ordu 1"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:260
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "Egun 1"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:264
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 egun"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:268
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 egun"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:272
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 egun"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:276
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 egun"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:280
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 egun"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:284
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 egun"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:288
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 egun"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:292
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 egun"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:307
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "Egun 1"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:311
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 egun"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:315
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 egun"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:319
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Beti"
 
 #: panels/usage/gnome-usage-panel.desktop.in.in:3
 msgid "File History & Trash"
@@ -7719,13 +7699,13 @@ msgstr "Laster-tekla bat editatzeko: aukeratu \"Bidali tekla sakatzea\" ekintza,
 msgid "_Close"
 msgstr "It_xi"
 
-#: panels/wacom/calibrator/calibrator.ui:52
+#: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
 msgstr "Ukitu helburuko markatzaileak pantailan agertzen diren ordenan taula kalibratzeko."
 
-#: panels/wacom/calibrator/calibrator.ui:64
+#: panels/wacom/calibrator/calibrator.ui:63
 msgid "Mis-click detected, restarting…"
 msgstr "Okerreko klik detektatuta, berrabiarazten…"
 
@@ -7767,7 +7747,7 @@ msgid "External tablet device"
 msgstr "Kanpoko tableta-gailua"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:630
+#: panels/wacom/cc-wacom-page.c:608
 msgid "All Displays"
 msgstr "Pantaila guztiak"
 
@@ -8463,6 +8443,24 @@ msgstr[1] "%u sarrera"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
+
+#~ msgid "Screenshots"
+#~ msgstr "Pantaila-argazkiak"
+
+#~ msgid "Show the screenshot UI"
+#~ msgstr "Erakutsi pantaila-argazkiaren interfazea"
+
+#~ msgid "Take a screenshot"
+#~ msgstr "Atera pantaila-argazki bat"
+
+#~ msgid "Take a screenshot of a window"
+#~ msgstr "Atera leiho baten pantaila-argazkia"
+
+#~ msgid "Show the screen recording UI"
+#~ msgstr "Erakutsi pantaila grabatzeko interfazea"
+
+#~ msgid "Allow the applications below to use your microphone."
+#~ msgstr "Onartu beheko aplikazioek zure mikrofonoa erabili dezaten."
 
 #~ msgid ""
 #~ "Choose the format for numbers, dates and currencies. Changes take effect "
