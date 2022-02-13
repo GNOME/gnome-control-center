@@ -35,16 +35,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-11 22:35+0000\n"
-"PO-Revision-Date: 2022-02-11 21:18-0300\n"
-"Last-Translator: Leônidas Araújo <leorusvellt@hotmail.com>\n"
+"POT-Creation-Date: 2022-02-12 23:35+0000\n"
+"PO-Revision-Date: 2022-02-12 21:52-0300\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
-"X-Generator: Gtranslator 40.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-DamnedLies-Scope: partial\n"
 "X-Project-Style: gnome\n"
 "X-DL-Team: pt_BR\n"
@@ -381,7 +381,7 @@ msgstr "Selecionar uma imagem"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
@@ -785,7 +785,7 @@ msgstr ""
 msgid "The device type is not currently supported."
 msgstr "Atualmente, não há suporte ao tipo de dispositivo."
 
-#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:41
+#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
 msgstr "Calibração de tela"
 
@@ -2022,26 +2022,6 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "Pesquisar"
 
-#: panels/keyboard/01-screenshot.xml.in:2
-msgid "Screenshots"
-msgstr "Capturas de tela"
-
-#: panels/keyboard/01-screenshot.xml.in:5
-msgid "Show the screenshot UI"
-msgstr "Mostra a UI de captura de tela"
-
-#: panels/keyboard/01-screenshot.xml.in:8
-msgid "Take a screenshot"
-msgstr "Captura uma imagem da tela"
-
-#: panels/keyboard/01-screenshot.xml.in:11
-msgid "Take a screenshot of a window"
-msgstr "Captura a tela de uma janela"
-
-#: panels/keyboard/01-screenshot.xml.in:14
-msgid "Show the screen recording UI"
-msgstr "Mostra a UI de gravação de tela"
-
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
 msgstr "Sistema"
@@ -2613,29 +2593,29 @@ msgid "Lock your screen"
 msgstr "Bloqueie sua tela"
 
 #. FIXME
-#: panels/microphone/cc-microphone-panel.ui:35
-msgid "Microphone is turned off"
-msgstr "Microfone está desligado"
+#: panels/microphone/cc-microphone-panel.ui:20
+msgid "Microphone Turned Off"
+msgstr "Microfone desligado"
 
-#: panels/microphone/cc-microphone-panel.ui:43
+#: panels/microphone/cc-microphone-panel.ui:21
 msgid "No applications can record sound."
 msgstr "Nenhum aplicativo pode gravar som."
 
-#: panels/microphone/cc-microphone-panel.ui:74
+#: panels/microphone/cc-microphone-panel.ui:34
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
-"properly."
+"properly.\n"
+"\n"
+"Allow the applications below to use your microphone."
 msgstr ""
 "O uso do microfone permite que os aplicativos gravem ou escutem ao áudio. "
 "Desabilitar o microfone pode fazer com que alguns aplicativos não funcionem "
-"corretamente."
+"corretamente.\n"
+"\n"
+"Permita que os aplicativos abaixo usem seu microfone."
 
-#: panels/microphone/cc-microphone-panel.ui:83
-msgid "Allow the applications below to use your microphone."
-msgstr "Permite que os aplicativos abaixo usem seu microfone."
-
-#: panels/microphone/cc-microphone-panel.ui:103
+#: panels/microphone/cc-microphone-panel.ui:51
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "Nenhum aplicativo pediu por acesso ao microfone"
 
@@ -3431,7 +3411,7 @@ msgstr "Gateway"
 #: panels/network/connection-editor/ip6-page.ui:232
 #: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:91
 #: panels/network/wireless-security/eap-method-peap.ui:33
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
 msgstr "Automático"
 
@@ -6962,35 +6942,119 @@ msgstr ""
 "Lento;Repercursão;Mouse;Duplo;clique ;Atraso;Velocidade;Assistência;Repetir;"
 "Piscar;visual;audição;áudio;digitação;animações;"
 
-#: panels/usage/cc-usage-panel.c:174
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:55
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "1 hora"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:58
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "1 dia"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:61
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 dias"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:64
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 dias"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:67
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 dias"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:70
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 dias"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:73
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 dias"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:76
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 dias"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:79
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 dias"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:82
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 dias"
+
+#: panels/usage/cc-usage-panel.c:180
 msgid "Empty all items from Trash?"
 msgstr "Esvaziar todos os itens da lixeira?"
 
-#: panels/usage/cc-usage-panel.c:175
+#: panels/usage/cc-usage-panel.c:181
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Todos os itens na lixeira serão permanentemente excluídos."
 
-#: panels/usage/cc-usage-panel.c:176
+#: panels/usage/cc-usage-panel.c:182
 msgid "_Empty Trash"
 msgstr "Es_vaziar lixeira"
 
-#: panels/usage/cc-usage-panel.c:212
+#: panels/usage/cc-usage-panel.c:218
 msgid "Delete all the temporary files?"
 msgstr "Excluir todos os arquivos temporários?"
 
-#: panels/usage/cc-usage-panel.c:213
+#: panels/usage/cc-usage-panel.c:219
 msgid "All the temporary files will be permanently deleted."
 msgstr "Todos os arquivos temporários serão permanentemente excluídos."
 
-#: panels/usage/cc-usage-panel.c:214
+#: panels/usage/cc-usage-panel.c:220
 msgid "_Purge Temporary Files"
 msgstr "Excluir _permanentemente arquivos temporários"
 
-#: panels/usage/cc-usage-panel.ui:23
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:247
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "1 dia"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:250
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 dias"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:253
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 dias"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:256
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "Para sempre"
+
+#: panels/usage/cc-usage-panel.ui:9
 msgid "File History"
 msgstr "Histórico de arquivos"
 
-#: panels/usage/cc-usage-panel.ui:34
+#: panels/usage/cc-usage-panel.ui:10
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between applications, and makes it easier to find files that you "
@@ -7000,23 +7064,23 @@ msgstr ""
 "informações são compartilhadas entre aplicativos e facilitam a localização "
 "de arquivos que você deseja usar."
 
-#: panels/usage/cc-usage-panel.ui:50
+#: panels/usage/cc-usage-panel.ui:13
 msgid "File H_istory"
 msgstr "H_istórico de arquivos"
 
-#: panels/usage/cc-usage-panel.ui:71
+#: panels/usage/cc-usage-panel.ui:25
 msgid "File _History Duration"
 msgstr "Duração do _histórico de arquivos"
 
-#: panels/usage/cc-usage-panel.ui:107
+#: panels/usage/cc-usage-panel.ui:48
 msgid "_Clear History…"
 msgstr "_Limpar histórico…"
 
-#: panels/usage/cc-usage-panel.ui:122
-msgid "Trash & Temporary Files"
-msgstr "Arquivos da lixeira & temporários"
+#: panels/usage/cc-usage-panel.ui:63
+msgid "Trash &amp; Temporary Files"
+msgstr "Arquivos da lixeira &amp; temporários"
 
-#: panels/usage/cc-usage-panel.ui:131
+#: panels/usage/cc-usage-panel.ui:64
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -7025,109 +7089,25 @@ msgstr ""
 "pessoais ou confidenciais. A exclusão automática deles pode ajudar a "
 "proteger a privacidade."
 
-#: panels/usage/cc-usage-panel.ui:146
+#: panels/usage/cc-usage-panel.ui:67
 msgid "Automatically Delete _Trash Content"
 msgstr "Esvaziar conteúdo da _lixeira automaticamente"
 
-#: panels/usage/cc-usage-panel.ui:159
+#: panels/usage/cc-usage-panel.ui:79
 msgid "Automatically Delete Temporary _Files"
 msgstr "Excluir arquivos _temporários automaticamente"
 
-#: panels/usage/cc-usage-panel.ui:180
+#: panels/usage/cc-usage-panel.ui:91
 msgid "Automatically Delete _Period"
 msgstr "_Período de exclusão automática"
 
-#: panels/usage/cc-usage-panel.ui:217
+#: panels/usage/cc-usage-panel.ui:115
 msgid "_Empty Trash…"
 msgstr "_Esvaziar lixeira…"
 
-#: panels/usage/cc-usage-panel.ui:228
+#: panels/usage/cc-usage-panel.ui:126
 msgid "_Delete Temporary Files…"
 msgstr "E_xcluir arquivos temporários…"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:256
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 hora"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:260
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 dia"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:264
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 dias"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:268
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 dias"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:272
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 dias"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:276
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 dias"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:280
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 dias"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:284
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 dias"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:288
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 dias"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:292
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 dias"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:307
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 dia"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:311
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 dias"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:315
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 dias"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:319
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Para sempre"
 
 #: panels/usage/gnome-usage-panel.desktop.in.in:3
 msgid "File History & Trash"
@@ -8019,7 +7999,7 @@ msgstr ""
 msgid "_Close"
 msgstr "Fe_char"
 
-#: panels/wacom/calibrator/calibrator.ui:52
+#: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -8027,7 +8007,7 @@ msgstr ""
 "Por gentileza, “bata” nos marcadores-alvo a medida que eles aparecem na tela "
 "para calibrar o tablet."
 
-#: panels/wacom/calibrator/calibrator.ui:64
+#: panels/wacom/calibrator/calibrator.ui:63
 msgid "Mis-click detected, restarting…"
 msgstr "Foi detectado clique errado, reiniciando…"
 
@@ -8069,7 +8049,7 @@ msgid "External tablet device"
 msgstr "Dispositivo tablet externo"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:630
+#: panels/wacom/cc-wacom-page.c:608
 msgid "All Displays"
 msgstr "Todas as telas"
 
@@ -8787,6 +8767,28 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgctxt "retain_history"
+#~ msgid "7 day"
+#~ msgstr "7 dias"
+
+#~ msgid "Screenshots"
+#~ msgstr "Capturas de tela"
+
+#~ msgid "Show the screenshot UI"
+#~ msgstr "Mostra a UI de captura de tela"
+
+#~ msgid "Take a screenshot"
+#~ msgstr "Captura uma imagem da tela"
+
+#~ msgid "Take a screenshot of a window"
+#~ msgstr "Captura a tela de uma janela"
+
+#~ msgid "Show the screen recording UI"
+#~ msgstr "Mostra a UI de gravação de tela"
+
+#~ msgid "Allow the applications below to use your microphone."
+#~ msgstr "Permite que os aplicativos abaixo usem seu microfone."
 
 #~ msgid "_Full Name"
 #~ msgstr "Nome _completo"
