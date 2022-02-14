@@ -27,6 +27,7 @@
                     <child>
                       <object class="GtkLabel" id="title">
                         <property name="halign">start</property>
+                        <property name="wrap">True</property>
                         <!-- Actual string set in code -->
                         <property name="label"></property>
                         <attributes>
@@ -37,6 +38,7 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="halign">start</property>
+                        <property name="wrap">True</property>
                         <property name="label" translatable="yes">Some settings must be unlocked before they can be changed.</property>
                       </object>
                     </child>
@@ -55,6 +57,7 @@
                   <object class="GtkLockButton" id="lock_button">
                     <property name="receives-default">True</property>
                     <property name="label" translatable="yes">Unlock…</property>
+                    <property name="valign">GTK_ALIGN_CENTER</property>
                   </object>
                 </child>
               </object>
