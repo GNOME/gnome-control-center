@@ -444,6 +444,12 @@ generate_username_choices (const gchar  *name,
 
         ascii_name = g_convert_with_fallback (name, -1, "ASCII//TRANSLIT", "UTF-8",
                                               unicode_fallback, NULL, NULL, NULL);
+        /* Re-try without TRANSLIT. musl does not implement it */
+        if (ascii_name == NULL)
+                ascii_name = g_convert_with_fallback (name, -1, "ASCII", "UTF-8",
+                                                      unicode_fallback, NULL, NULL, NULL);
+        if (ascii_name == NULL)
+                return;
 
         lc_name = g_ascii_strdown (ascii_name, -1);
 
