@@ -18,6 +18,7 @@
                     <property name="halign">start</property>
                     <property name="margin-start">12</property>
                     <property name="hexpand">False</property>
+                    <property name="wrap">True</property>
                     <property name="label" translatable="yes" comments="Inhibit the redshift functionality until the next day starts">Temporarily Disabled Until Tomorrow</property>
                     <attributes>
                       <attribute name="weight" value="bold"/>
@@ -36,6 +37,7 @@
                 <property name="name">button_undisable</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="valign">GTK_ALIGN_CENTER</property>
                 <signal name="clicked" handler="dialog_undisable_clicked_cb" object="CcNightLightPage" swapped="no" />
               </object>
             </child>
