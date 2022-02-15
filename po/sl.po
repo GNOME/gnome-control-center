@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-07 12:52+0000\n"
-"PO-Revision-Date: 2022-02-07 19:16+0100\n"
+"POT-Creation-Date: 2022-02-13 13:41+0000\n"
+"PO-Revision-Date: 2022-02-13 17:36+0100\n"
 "Last-Translator: Matej Urbančič <mateju@src.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -41,8 +41,8 @@ msgid "Session Bus"
 msgstr "Vodilo seje"
 
 #: panels/applications/cc-applications-panel.c:809
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:333
-#: panels/thunderbolt/cc-bolt-panel.ui:377
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:266
+#: panels/thunderbolt/cc-bolt-panel.ui:310
 msgid "Devices"
 msgstr "Naprave"
 
@@ -63,7 +63,7 @@ msgstr "Ima dostop do omrežja"
 
 #: panels/applications/cc-applications-panel.c:818
 #: panels/applications/cc-applications-panel.c:820
-#: panels/search/cc-search-locations-dialog.c:361
+#: panels/search/cc-search-locations-dialog.c:384
 msgid "Home"
 msgstr "Domača mapa"
 
@@ -123,7 +123,7 @@ msgstr "Uporabljenega je %s prostora na disku"
 #: panels/applications/cc-applications-panel.c:1387
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:34
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Applications"
 msgstr "Programi"
 
@@ -170,8 +170,8 @@ msgstr "Prejmi sistemska iskanja in pošlji zadetke."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:857
-#: panels/user-accounts/cc-user-panel.c:955
+#: panels/user-accounts/cc-user-panel.c:765
+#: panels/user-accounts/cc-user-panel.c:869
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -334,11 +334,11 @@ msgstr "Nadzor nad dovoljenji in nastavitvami številnih programov"
 msgid "application;flatpak;permission;setting;"
 msgstr "program;flatpak;dovoljenja;nastavitve;"
 
-#: panels/background/cc-background-chooser.c:309
+#: panels/background/cc-background-chooser.c:307
 msgid "Select a picture"
 msgstr "Izbor slike"
 
-#: panels/background/cc-background-chooser.c:312
+#: panels/background/cc-background-chooser.c:310
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:31
@@ -353,27 +353,27 @@ msgstr "Izbor slike"
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
-#: panels/search/cc-search-locations-dialog.c:639
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
-#: panels/user-accounts/cc-add-user-dialog.ui:28
-#: panels/user-accounts/cc-avatar-chooser.c:105
-#: panels/user-accounts/cc-avatar-chooser.c:228
-#: panels/user-accounts/cc-fingerprint-dialog.ui:36
-#: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:647
-#: panels/user-accounts/cc-user-panel.c:665
-#: panels/user-accounts/data/join-dialog.ui:20
+#: panels/search/cc-search-locations-dialog.c:677
+#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
+#: panels/user-accounts/cc-add-user-dialog.ui:25
+#: panels/user-accounts/cc-avatar-chooser.c:94
+#: panels/user-accounts/cc-avatar-chooser.c:165
+#: panels/user-accounts/cc-fingerprint-dialog.ui:30
+#: panels/user-accounts/cc-password-dialog.ui:18
+#: panels/user-accounts/cc-user-panel.c:555
+#: panels/user-accounts/cc-user-panel.c:573
+#: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:268
 msgid "_Cancel"
 msgstr "_Prekliči"
 
-#: panels/background/cc-background-chooser.c:313
+#: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
 #: panels/sharing/cc-sharing-panel.c:433
-#: panels/user-accounts/cc-avatar-chooser.c:229
+#: panels/user-accounts/cc-avatar-chooser.c:166
 msgid "_Open"
 msgstr "_Odpri"
 
@@ -392,7 +392,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Ni ozadja namizja"
 
-#: panels/background/cc-background-panel.c:177
+#: panels/background/cc-background-panel.c:227
 msgid "Current background"
 msgstr "Trenutno ozadje"
 
@@ -616,7 +616,7 @@ msgstr "Na_daljuj"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:73
+#: panels/user-accounts/cc-fingerprint-dialog.ui:58
 msgid "_Done"
 msgstr "_Končano"
 
@@ -753,7 +753,7 @@ msgstr "Merilna naprava ne podpira profiliranja tiskalnika."
 msgid "The device type is not currently supported."
 msgstr "Vrsta naprave trenutno ni podprta."
 
-#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:41
+#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
 msgstr "Umerjanje zaslona"
 
@@ -895,7 +895,7 @@ msgstr "_Uvozi datoteko …"
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/network/connection-editor/net-connection-editor.c:497
 #: panels/printers/new-printer-dialog.ui:84
-#: panels/user-accounts/cc-add-user-dialog.ui:47
+#: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
 msgstr "_Dodaj"
 
@@ -907,7 +907,7 @@ msgstr ""
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:434
-#: panels/diagnostics/cc-diagnostics-panel.c:139
+#: panels/diagnostics/cc-diagnostics-panel.c:137
 msgid "Learn more"
 msgstr "Več podrobnosti"
 
@@ -1495,7 +1495,7 @@ msgstr ""
 "podrobnosti;info;informacije;različica;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#: panels/diagnostics/cc-diagnostics-panel.c:139
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -1504,11 +1504,11 @@ msgstr ""
 "Pošiljanje poročil o tehničnih napakah omogoča izboljšave distribucije %s. "
 "Poročila so poslana brezimno in brez kakršnihkoli osebnih podatkov. %s"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:21
+#: panels/diagnostics/cc-diagnostics-panel.ui:8
 msgid "Problem Reporting"
 msgstr "Prijavljanje napak"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:55
+#: panels/diagnostics/cc-diagnostics-panel.ui:11
 msgid "_Automatic Problem Reporting"
 msgstr "_Samodejno prijavljanje napak"
 
@@ -1534,7 +1534,7 @@ msgstr ""
 "index;ime;network;omrežje;istovetnost;identiteta;podatki;"
 
 #: panels/display/cc-display-panel.c:512
-#: panels/notifications/cc-notifications-panel.c:202
+#: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
 #: panels/universal-access/cc-ua-panel.c:337
 #: panels/universal-access/cc-ua-panel.c:469
@@ -1545,7 +1545,7 @@ msgid "On"
 msgstr "Omogočeno"
 
 #: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:202
+#: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
 #: panels/universal-access/cc-ua-panel.c:337
 #: panels/universal-access/cc-ua-panel.c:469
@@ -1983,26 +1983,6 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "Iskanje"
 
-#: panels/keyboard/01-screenshot.xml.in:2
-msgid "Screenshots"
-msgstr "Zajemanje zaslona"
-
-#: panels/keyboard/01-screenshot.xml.in:5
-msgid "Show the screenshot UI"
-msgstr "Pokaži vmesnik zajemalnika zaslona"
-
-#: panels/keyboard/01-screenshot.xml.in:8
-msgid "Take a screenshot"
-msgstr "Zajemi zaslonsko sliko"
-
-#: panels/keyboard/01-screenshot.xml.in:11
-msgid "Take a screenshot of a window"
-msgstr "Zajemi zaslonsko sliko okna"
-
-#: panels/keyboard/01-screenshot.xml.in:14
-msgid "Show the screen recording UI"
-msgstr "Pokaži vmesnik zajemalnika zaslona"
-
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
 msgstr "Sistem"
@@ -2052,11 +2032,11 @@ msgstr "Zmanjšaj velikost pisave"
 msgid "High contrast on or off"
 msgstr "Omogoči ali onemogoči visok kontrast slike"
 
-#: panels/keyboard/cc-input-chooser.c:187
+#: panels/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "Ni najdenih vhodnih virov"
 
-#: panels/keyboard/cc-input-chooser.c:933
+#: panels/keyboard/cc-input-chooser.c:931
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Drugo"
@@ -2065,31 +2045,31 @@ msgstr "Drugo"
 msgid "Add an Input Source"
 msgstr "Dodaj vhodni vir"
 
-#: panels/keyboard/cc-input-chooser.ui:68
+#: panels/keyboard/cc-input-chooser.ui:81
 msgid "Input methods can’t be used on the login screen"
 msgstr "Vhodni načini na prijavnem oknu ne delujejo"
 
-#: panels/keyboard/cc-input-list-box.ui:23
+#: panels/keyboard/cc-input-list-box.ui:24
 msgid "No input source selected"
 msgstr "Vhodni vir ni izbran"
 
-#: panels/keyboard/cc-input-row.ui:67
-msgid "Move up"
+#: panels/keyboard/cc-input-row.ui:28 panels/search/cc-search-panel-row.ui:49
+msgid "Move Up"
 msgstr "Premakni navzgor"
 
-#: panels/keyboard/cc-input-row.ui:81
-msgid "Move down"
+#: panels/keyboard/cc-input-row.ui:32 panels/search/cc-search-panel-row.ui:53
+msgid "Move Down"
 msgstr "Premakni navzdol"
 
-#: panels/keyboard/cc-input-row.ui:98
+#: panels/keyboard/cc-input-row.ui:38
 msgid "Preferences"
 msgstr "Možnosti"
 
-#: panels/keyboard/cc-input-row.ui:120
+#: panels/keyboard/cc-input-row.ui:45
 msgid "View Keyboard Layout"
 msgstr "Pokaži razporeditev tipkovnice"
 
-#: panels/keyboard/cc-input-row.ui:139
+#: panels/keyboard/cc-input-row.ui:51
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:29
 msgid "Remove"
 msgstr "Odstrani"
@@ -2100,12 +2080,12 @@ msgstr "Odstrani"
 msgid "Custom Shortcuts"
 msgstr "Bližnjica po meri"
 
-#: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.ui:172
+#: panels/keyboard/cc-keyboard-panel.c:64
+#: panels/keyboard/cc-keyboard-panel.ui:62
 msgid "Alternate Characters Key"
 msgstr "Drugotna tipka"
 
-#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:65
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
@@ -2113,48 +2093,48 @@ msgstr ""
 "Tipka za izmenjavo omogoča uporabo dodatnih znakov. Ti so pogosto natisnjeni "
 "na tipkovnici kot tretja možnost."
 
-#: panels/keyboard/cc-keyboard-panel.c:70
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:67
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Leva izmenjalka (Alt)"
 
-#: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:86
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Desna izmenjalka (Alt)"
 
-#: panels/keyboard/cc-keyboard-panel.c:72
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:69
+#: panels/keyboard/cc-keyboard-panel.c:87
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Leva tipka Super"
 
-#: panels/keyboard/cc-keyboard-panel.c:73
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:70
+#: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Desna tipka Super"
 
-#: panels/keyboard/cc-keyboard-panel.c:74
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:71
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Tipka Meni"
 
-#: panels/keyboard/cc-keyboard-panel.c:75
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Desna krmilka (Ctrl)"
 
-#: panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/cc-keyboard-panel.ui:191
+#: panels/keyboard/cc-keyboard-panel.c:80
+#: panels/keyboard/cc-keyboard-panel.ui:79
 msgid "Compose Key"
 msgstr "Sestavljalna tipka"
 
-#: panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.c:81
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2167,22 +2147,22 @@ msgstr ""
 "Izpisal se bo znak <b>©</b>. Z zaporedjem sestavljalka, <b>a</b> in nato "
 "<b>'</b> pa ustvari znak <b>á</b>."
 
-#: panels/keyboard/cc-keyboard-panel.c:94
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Zaklep črk"
 
-#: panels/keyboard/cc-keyboard-panel.c:95
+#: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Zaklep drsnika"
 
-#: panels/keyboard/cc-keyboard-panel.c:96
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Posnemi zaslon"
 
-#: panels/keyboard/cc-keyboard-panel.c:232
+#: panels/keyboard/cc-keyboard-panel.c:217
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2191,41 +2171,41 @@ msgstr ""
 "Vhodni vir je mogoče preklopiti z uporabo tipkovne bližnjice %s.\n"
 "Nastavitve je mogoče spremeniti med nastavitvami bližnjic tipkovnice."
 
-#: panels/keyboard/cc-keyboard-panel.ui:38
+#: panels/keyboard/cc-keyboard-panel.ui:17
 msgid "Input Sources"
 msgstr "Vhodni viri – tipkovnica"
 
-#: panels/keyboard/cc-keyboard-panel.ui:47
+#: panels/keyboard/cc-keyboard-panel.ui:18
 msgid "Includes keyboard layouts and input methods."
 msgstr "Izbor razporeditve tipkovnice oziroma drugega vhodnega vira."
 
-#: panels/keyboard/cc-keyboard-panel.ui:70
+#: panels/keyboard/cc-keyboard-panel.ui:28
 msgid "Input Source Switching"
 msgstr "Preklapljanje vhodnega vira"
 
-#: panels/keyboard/cc-keyboard-panel.ui:106
+#: panels/keyboard/cc-keyboard-panel.ui:31
 msgid "Use the _same source for all windows"
 msgstr "Uporabi _enak vir v vseh oknih"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:43
 msgid "Switch input sources _individually for each window"
 msgstr "Preklopi vhodni vir za vsako okno _posebej"
 
-#: panels/keyboard/cc-keyboard-panel.ui:142
+#: panels/keyboard/cc-keyboard-panel.ui:58
 msgid "Special Character Entry"
 msgstr "Vnos posebnih znakov"
 
-#: panels/keyboard/cc-keyboard-panel.ui:151
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Načini vpisovanja simbolov in različic črk z uporabo tipkovnice."
 
-#: panels/keyboard/cc-keyboard-panel.ui:212
+#: panels/keyboard/cc-keyboard-panel.ui:97
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Tipkovne bližnjice"
 
-#: panels/keyboard/cc-keyboard-panel.ui:228
+#: panels/keyboard/cc-keyboard-panel.ui:100
 msgid "View and Customize Shortcuts"
 msgstr "Pregled in prilagoditev bližnjic"
 
@@ -2336,7 +2316,10 @@ msgstr ""
 "tipkovne bližnjice."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
-#: panels/printers/pp-details-dialog.ui:36 panels/wwan/cc-wwan-apn-dialog.ui:96
+#: panels/printers/pp-details-dialog.ui:39
+#: panels/user-accounts/cc-add-user-dialog.ui:68
+#: panels/user-accounts/cc-user-panel.ui:125
+#: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Ime"
 
@@ -2569,28 +2552,28 @@ msgid "Lock your screen"
 msgstr "Zakleni zaslon"
 
 #. FIXME
-#: panels/microphone/cc-microphone-panel.ui:35
-msgid "Microphone is turned off"
+#: panels/microphone/cc-microphone-panel.ui:20
+msgid "Microphone Turned Off"
 msgstr "Mikrofon je izklopljen"
 
-#: panels/microphone/cc-microphone-panel.ui:43
+#: panels/microphone/cc-microphone-panel.ui:21
 msgid "No applications can record sound."
 msgstr "Ni najdenih programov za zajem zvoka."
 
-#: panels/microphone/cc-microphone-panel.ui:74
+#: panels/microphone/cc-microphone-panel.ui:34
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
-"properly."
+"properly.\n"
+"\n"
+"Allow the applications below to use your microphone."
 msgstr ""
 "Uporaba mikrofona omogoča programom zajem zvoka. Onemogočena naprava lahko "
-"povzroči napačno delovanje nekaterih programov."
+"povzroči napačno delovanje nekaterih programov.\n"
+"\n"
+"Navedenim programom dovoli dostop do mikrofona."
 
-#: panels/microphone/cc-microphone-panel.ui:83
-msgid "Allow the applications below to use your microphone."
-msgstr "Dovoli navedenim programom uporabo mikrofona."
-
-#: panels/microphone/cc-microphone-panel.ui:103
+#: panels/microphone/cc-microphone-panel.ui:51
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "Ni programov, ki bi zahtevali dostop do mikrofona"
 
@@ -2817,29 +2800,29 @@ msgid "Not set up"
 msgstr "Ni nastavljeno"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:206
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:261
+#: panels/network/cc-wifi-connection-row.c:263
 msgid "Insecure network (WEP)"
 msgstr "Ne-varno omrežje (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:265
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Varno omrežje (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:269
+#: panels/network/cc-wifi-connection-row.c:271
 msgid "Secure network (WPA2)"
 msgstr "Varno omrežje (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Secure network (WPA3)"
 msgstr "Varno omrežje (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network"
 msgstr "Varno omrežje"
 
@@ -2899,9 +2882,11 @@ msgstr "Ime omrežja"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
 #: panels/printers/authentication-dialog.ui:55
-#: panels/printers/new-printer-dialog.ui:330
+#: panels/printers/new-printer-dialog.ui:331
 #: panels/printers/pp-jobs-dialog.ui:52
-#: panels/user-accounts/cc-add-user-dialog.ui:249
+#: panels/user-accounts/cc-add-user-dialog.ui:145
+#: panels/user-accounts/cc-add-user-dialog.ui:181
+#: panels/user-accounts/cc-add-user-dialog.ui:362
 #: panels/wwan/cc-wwan-apn-dialog.ui:172
 msgid "Password"
 msgstr "Geslo"
@@ -3360,7 +3345,7 @@ msgstr "Naslovi"
 #: panels/network/connection-editor/ip4-page.ui:246
 #: panels/network/connection-editor/ip6-page.ui:122
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/printers/pp-details-dialog.ui:87
+#: panels/printers/pp-details-dialog.ui:90
 msgid "Address"
 msgstr "Naslov"
 
@@ -3383,7 +3368,7 @@ msgstr "Prehod"
 #: panels/network/connection-editor/ip6-page.ui:232
 #: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:91
 #: panels/network/wireless-security/eap-method-peap.ui:33
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
 msgstr "Samodejno"
 
@@ -4061,8 +4046,6 @@ msgstr "manjka geslo EAP-LEAP"
 #: panels/network/wireless-security/eap-method-leap.ui:11
 #: panels/network/wireless-security/eap-method-simple.ui:11
 #: panels/network/wireless-security/ws-leap.ui:11
-#: panels/user-accounts/cc-add-user-dialog.ui:146
-#: panels/user-accounts/cc-add-user-dialog.ui:527
 msgid "_Username"
 msgstr "_Uporabniško ime"
 
@@ -4072,9 +4055,7 @@ msgstr "_Uporabniško ime"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-add-user-dialog.ui:310
-#: panels/user-accounts/cc-add-user-dialog.ui:547
-#: panels/user-accounts/cc-user-panel.ui:365
+#: panels/user-accounts/cc-user-panel.ui:168
 msgid "_Password"
 msgstr "_Geslo"
 
@@ -4231,8 +4212,7 @@ msgid "CHAP"
 msgstr "CHAP"
 
 #: panels/network/wireless-security/eap-method-ttls.ui:68
-#: panels/user-accounts/cc-add-user-dialog.ui:507
-#: panels/user-accounts/data/join-dialog.ui:116
+#: panels/user-accounts/data/join-dialog.ui:90
 msgid "_Domain"
 msgstr "_Domena"
 
@@ -4368,23 +4348,23 @@ msgstr ""
 "šestnajstiškem sistemu"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:22
+#: panels/notifications/cc-app-notifications-dialog.ui:15
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Obvestila"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:37
+#: panels/notifications/cc-app-notifications-dialog.ui:29
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "_Zvočna opozorila"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:51
+#: panels/notifications/cc-app-notifications-dialog.ui:42
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "Pojavna _obvestila"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:52
+#: panels/notifications/cc-app-notifications-dialog.ui:43
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
@@ -4393,26 +4373,26 @@ msgstr ""
 "onemogočena."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:66
+#: panels/notifications/cc-app-notifications-dialog.ui:56
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Pokaži vsebino _sporočila v pojavnih oknih"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:80
+#: panels/notifications/cc-app-notifications-dialog.ui:69
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "_Pokaži obvestila na zaklenjenem zaslonu"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:94
+#: panels/notifications/cc-app-notifications-dialog.ui:82
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Pokaži _sporočila tudi na zaklenjenem zaslonu"
 
-#: panels/notifications/cc-notifications-panel.ui:16
+#: panels/notifications/cc-notifications-panel.ui:10
 msgid "_Do Not Disturb"
 msgstr "_Ne moti s prikazovanjem obvestil"
 
-#: panels/notifications/cc-notifications-panel.ui:23
+#: panels/notifications/cc-notifications-panel.ui:17
 msgid "_Lock Screen Notifications"
 msgstr "Pokaži _obvestila na zaklenjenem zaslonu"
 
@@ -4915,13 +4895,16 @@ msgstr "Overi"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:310
-#: panels/printers/pp-jobs-dialog.ui:41 panels/wwan/cc-wwan-apn-dialog.ui:148
+#: panels/printers/new-printer-dialog.ui:311
+#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
 msgid "Username"
 msgstr "Uporabniško ime"
 
 #: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:285
+#: panels/printers/new-printer-dialog.ui:286
 msgid "Authentication Required"
 msgstr "Zahtevana je overitev"
 
@@ -4987,7 +4970,7 @@ msgstr "Ni najdenih tiskalnikov"
 msgid "Enter a network address or search for a printer"
 msgstr "Vpis omrežnega naslova oziroma niz za iskanje tiskalnika"
 
-#: panels/printers/new-printer-dialog.ui:301
+#: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Vnesite uporabniško ime in geslo za ogled tiskalnikov na strežniku tiskanja."
@@ -5015,29 +4998,29 @@ msgstr ""
 "Datoteke opisa tiskalnika PostScript (*.ppd, *.PPD, *.ppd.gz, *.PPD.gz, *."
 "PPD.GZ)"
 
-#: panels/printers/pp-details-dialog.ui:62 panels/printers/printer-entry.ui:213
+#: panels/printers/pp-details-dialog.ui:65 panels/printers/printer-entry.ui:215
 msgid "Location"
 msgstr "Mesto"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:112
+#: panels/printers/pp-details-dialog.ui:115
 #: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Gonilnik"
 
-#: panels/printers/pp-details-dialog.ui:151
+#: panels/printers/pp-details-dialog.ui:154
 msgid "Searching for preferred drivers…"
 msgstr "Iskanje prednostnih gonilnikov …"
 
-#: panels/printers/pp-details-dialog.ui:170
+#: panels/printers/pp-details-dialog.ui:173
 msgid "Search for Drivers"
 msgstr "Poišči gonilnike"
 
-#: panels/printers/pp-details-dialog.ui:178
+#: panels/printers/pp-details-dialog.ui:181
 msgid "Select from Database…"
 msgstr "Izbor iz podatkovne zbirke …"
 
-#: panels/printers/pp-details-dialog.ui:186
+#: panels/printers/pp-details-dialog.ui:189
 msgid "Install PPD File…"
 msgstr "Namesti datoteko PPD …"
 
@@ -5050,7 +5033,7 @@ msgid "Loading drivers database…"
 msgstr "Poteka nalaganje zbirke gonilnikov …"
 
 #: panels/printers/ppd-selection-dialog.ui:91
-#: panels/user-accounts/cc-avatar-chooser.c:107
+#: panels/user-accounts/cc-avatar-chooser.c:96
 msgid "Select"
 msgstr "Izberi"
 
@@ -5180,6 +5163,7 @@ msgstr "Vpišite poverila za tiskanje na %s."
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
+#: panels/user-accounts/cc-add-user-dialog.ui:300
 msgid "Domain"
 msgstr "Domena"
 
@@ -5398,7 +5382,7 @@ msgid "Manufacturer"
 msgstr "Proizvajalec"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:165
+#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:167
 msgid "No Active Jobs"
 msgstr "Ni dejavnih poslov"
 
@@ -5543,22 +5527,22 @@ msgstr "Počisti glave tiskalnika"
 msgid "Remove Printer"
 msgstr "Odstrani tiskalnik"
 
-#: panels/printers/printer-entry.ui:185
+#: panels/printers/printer-entry.ui:187
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Model"
 
-#: panels/printers/printer-entry.ui:240
+#: panels/printers/printer-entry.ui:242
 msgid "Ink Level"
 msgstr "Raven črnila"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:302
+#: panels/printers/printer-entry.ui:304
 msgid "Please restart when the problem is resolved."
 msgstr "Program ponovno zaženite, ko bo težava odpravljena."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:308
+#: panels/printers/printer-entry.ui:310
 msgid "Restart"
 msgstr "Ponoven zagon"
 
@@ -5590,9 +5574,7 @@ msgstr ""
 msgid "Formats"
 msgstr "Jezikovna določila"
 
-#: panels/region/cc-format-chooser.ui:37
-#: panels/user-accounts/cc-fingerprint-dialog.ui:53
-#: panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/region/cc-format-chooser.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Nazaj"
 
@@ -5671,7 +5653,7 @@ msgid "Your Account"
 msgstr "Račun"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:311
+#: panels/user-accounts/cc-user-panel.ui:292
 msgid "_Language"
 msgstr "_Jezik"
 
@@ -5844,11 +5826,11 @@ msgstr ""
 "povrnjeno:prednostno;cd;dvd;usb;zvok;slika;video;disk;odstrani;predstavnost;"
 "samodejni zagon;"
 
-#: panels/search/cc-search-locations-dialog.c:636
+#: panels/search/cc-search-locations-dialog.c:674
 msgid "Select Location"
 msgstr "Izbor mesta"
 
-#: panels/search/cc-search-locations-dialog.c:640
+#: panels/search/cc-search-locations-dialog.c:678
 msgid "_OK"
 msgstr "_V redu"
 
@@ -5857,9 +5839,7 @@ msgstr "_V redu"
 msgid "Search Locations"
 msgstr "Preišči mesta"
 
-#: panels/search/cc-search-locations-dialog.ui:28
-#: panels/search/cc-search-locations-dialog.ui:58
-#: panels/search/cc-search-locations-dialog.ui:89
+#: panels/search/cc-search-locations-dialog.ui:13
 msgid ""
 "Folders which are searched by system applications, such as Files, Photos and "
 "Videos."
@@ -5867,29 +5847,25 @@ msgstr ""
 "Mape, ki so vključene kot mesta iskanja sistemskih programov, kot so "
 "Datoteke, Slike in Video"
 
-#: panels/search/cc-search-locations-dialog.ui:41
+#: panels/search/cc-search-locations-dialog.ui:18
 msgid "Places"
 msgstr "Mesta"
 
-#: panels/search/cc-search-locations-dialog.ui:73
+#: panels/search/cc-search-locations-dialog.ui:33
 msgid "Bookmarks"
 msgstr "Zaznamki"
 
-#: panels/search/cc-search-locations-dialog.ui:129
-msgid "Other"
+#: panels/search/cc-search-locations-dialog.ui:48
+msgid "Others"
 msgstr "Drugi"
 
-#: panels/search/cc-search-panel.c:150
+#: panels/search/cc-search-locations-dialog.ui:55
+msgid "Add Location"
+msgstr "Dodaj mesto"
+
+#: panels/search/cc-search-panel.c:165
 msgid "No applications found"
 msgstr "Ni najdenih programov"
-
-#: panels/search/cc-search-panel-row.ui:48
-msgid "Move Up"
-msgstr "Premakni navzgor"
-
-#: panels/search/cc-search-panel-row.ui:52
-msgid "Move Down"
-msgstr "Premakni navzdol"
 
 #: panels/search/cc-search-panel.ui:10
 msgid "Application Search"
@@ -6307,24 +6283,24 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Overjeno"
 
-#: panels/thunderbolt/cc-bolt-panel.c:170
+#: panels/thunderbolt/cc-bolt-panel.c:169
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Podsistem Thunderbolt (boltd) ni nameščen oziroma je neustrezno nastavljen."
 
-#: panels/thunderbolt/cc-bolt-panel.c:426
-#: panels/thunderbolt/cc-bolt-panel.ui:224
+#: panels/thunderbolt/cc-bolt-panel.c:425
+#: panels/thunderbolt/cc-bolt-panel.ui:157
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Dovoli neposreden dostop do naprav, kot so sidrišča in zunanje GPE."
 
-#: panels/thunderbolt/cc-bolt-panel.c:427
+#: panels/thunderbolt/cc-bolt-panel.c:426
 msgid "Only USB and Display Port devices can attach."
 msgstr ""
 "Naprave je mogoče pripeti le z uporabo priklopa USB oziroma zaslonskega "
 "priklopa."
 
-#: panels/thunderbolt/cc-bolt-panel.c:462
+#: panels/thunderbolt/cc-bolt-panel.c:461
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6334,32 +6310,36 @@ msgstr ""
 "Podpora sistemu morda ni na voljo, sistem je v zaganjalniku BIOS onemogočen, "
 "ali pa je nastavljen na nepodprto varnostno raven."
 
-#: panels/thunderbolt/cc-bolt-panel.c:506
+#: panels/thunderbolt/cc-bolt-panel.c:505
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Podpora Thunderbolt je onemogočena med nastavitvami BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:510
+#: panels/thunderbolt/cc-bolt-panel.c:509
 msgid "Thunderbolt security level could not be determined."
 msgstr "Varnostne ravni Thunderbolt ni mogoče določiti."
 
-#: panels/thunderbolt/cc-bolt-panel.c:615
+#: panels/thunderbolt/cc-bolt-panel.c:614
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Napaka preklapljanja neposrednega načina: %s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:140
-msgid "No Thunderbolt support"
+#: panels/thunderbolt/cc-bolt-panel.ui:103
+msgid "No Thunderbolt Support"
 msgstr "Ni podpore za naprave Thunderbolt"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:220
+#: panels/thunderbolt/cc-bolt-panel.ui:104
+msgid "Could not connect to the thunderbolt subsystem."
+msgstr "Povezava s podsistemom Thunderbolt ni mogoča."
+
+#: panels/thunderbolt/cc-bolt-panel.ui:153
 msgid "Direct Access"
 msgstr "Neposredni dostop"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:292
+#: panels/thunderbolt/cc-bolt-panel.ui:225
 msgid "Pending Devices"
 msgstr "Naprave na čakanju"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:386
+#: panels/thunderbolt/cc-bolt-panel.ui:319
 msgid "No devices attached"
 msgstr "Ni priklopljenih naprav"
 
@@ -6916,35 +6896,119 @@ msgstr ""
 "odskočne;dvojne;klik;ponovitev;zvok;tipkanje;tipkovnica,nastavitve;sluh;"
 "kontrast;zvok;približanje;zoom;zaslon;velikost;prilagoditve;prikrojitve;"
 
-#: panels/usage/cc-usage-panel.c:174
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:55
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "1 ura"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:58
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "1 dan"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:61
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 dni"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:64
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 dni"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:67
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 dni"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:70
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 dni"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:73
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 dni"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:76
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 dni"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:79
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 dni"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:82
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 dni"
+
+#: panels/usage/cc-usage-panel.c:180
 msgid "Empty all items from Trash?"
 msgstr "Ali naj se izbrišejo vsi predmeti iz smeti?"
 
-#: panels/usage/cc-usage-panel.c:175
+#: panels/usage/cc-usage-panel.c:181
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Vsi predmeti v smeteh bodo trajno izbrisani."
 
-#: panels/usage/cc-usage-panel.c:176
+#: panels/usage/cc-usage-panel.c:182
 msgid "_Empty Trash"
 msgstr "Izprazni _smeti"
 
-#: panels/usage/cc-usage-panel.c:212
+#: panels/usage/cc-usage-panel.c:218
 msgid "Delete all the temporary files?"
 msgstr "Ali naj se izbrišejo vse začasne datoteke?"
 
-#: panels/usage/cc-usage-panel.c:213
+#: panels/usage/cc-usage-panel.c:219
 msgid "All the temporary files will be permanently deleted."
 msgstr "Vse začasne datoteke bodo trajno izbrisane."
 
-#: panels/usage/cc-usage-panel.c:214
+#: panels/usage/cc-usage-panel.c:220
 msgid "_Purge Temporary Files"
 msgstr "_Počisti začasne datoteke"
 
-#: panels/usage/cc-usage-panel.ui:23
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:247
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "1 dan"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:250
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 dni"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:253
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 dni"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:256
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "Trajno"
+
+#: panels/usage/cc-usage-panel.ui:9
 msgid "File History"
 msgstr "Zgodovina datoteke"
 
-#: panels/usage/cc-usage-panel.ui:34
+#: panels/usage/cc-usage-panel.ui:10
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between applications, and makes it easier to find files that you "
@@ -6953,23 +7017,23 @@ msgstr ""
 "Zgodovina datotek vključuje tudi zapise uporabe datotek. Te podrobnosti so "
 "lahko na voljo različnim programom, kar omogoča enostavnejše iskanje."
 
-#: panels/usage/cc-usage-panel.ui:50
+#: panels/usage/cc-usage-panel.ui:13
 msgid "File H_istory"
 msgstr "Zgodovina _datoteke"
 
-#: panels/usage/cc-usage-panel.ui:71
+#: panels/usage/cc-usage-panel.ui:25
 msgid "File _History Duration"
 msgstr "Trajanje zgodovine datoteke"
 
-#: panels/usage/cc-usage-panel.ui:107
+#: panels/usage/cc-usage-panel.ui:48
 msgid "_Clear History…"
 msgstr "Počisti _zgodovino …"
 
-#: panels/usage/cc-usage-panel.ui:122
-msgid "Trash & Temporary Files"
+#: panels/usage/cc-usage-panel.ui:63
+msgid "Trash &amp; Temporary Files"
 msgstr "Smeti in začasne datoteke"
 
-#: panels/usage/cc-usage-panel.ui:131
+#: panels/usage/cc-usage-panel.ui:64
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -6977,109 +7041,25 @@ msgstr ""
 "V smeteh in v začasnih datoteka so včasih lahko osebni oziroma občutljivi "
 "podatki. Samodejno brisanje lahko zagotavlja večjo zasebnost."
 
-#: panels/usage/cc-usage-panel.ui:146
+#: panels/usage/cc-usage-panel.ui:67
 msgid "Automatically Delete _Trash Content"
 msgstr "Samodejno sprazni vsebino _smeti"
 
-#: panels/usage/cc-usage-panel.ui:159
+#: panels/usage/cc-usage-panel.ui:79
 msgid "Automatically Delete Temporary _Files"
 msgstr "Samodejno počisti _začasne datoteke"
 
-#: panels/usage/cc-usage-panel.ui:180
+#: panels/usage/cc-usage-panel.ui:91
 msgid "Automatically Delete _Period"
 msgstr "Samodejno izbriši _obdobje"
 
-#: panels/usage/cc-usage-panel.ui:217
+#: panels/usage/cc-usage-panel.ui:115
 msgid "_Empty Trash…"
 msgstr "Izprazni _smeti …"
 
-#: panels/usage/cc-usage-panel.ui:228
+#: panels/usage/cc-usage-panel.ui:126
 msgid "_Delete Temporary Files…"
 msgstr "_Počisti začasne datoteke …"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:256
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 ura"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:260
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 dan"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:264
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 dni"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:268
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 dni"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:272
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 dni"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:276
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 dni"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:280
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 dni"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:284
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 dni"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:288
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 dni"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:292
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 dni"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:307
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 dan"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:311
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 dni"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:315
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 dni"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:319
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Trajno"
 
 #: panels/usage/gnome-usage-panel.desktop.in.in:3
 msgid "File History & Trash"
@@ -7090,34 +7070,34 @@ msgid "Don't leave traces"
 msgstr "Ne puščaj sledi"
 
 #. FIXME
-#: panels/user-accounts/cc-add-user-dialog.c:34
+#: panels/user-accounts/cc-add-user-dialog.c:35
 msgid "Should match the web address of your login provider."
 msgstr "Vpis mora biti skladen s spletnim naslovom ponudnika prijave."
 
-#: panels/user-accounts/cc-add-user-dialog.c:204
+#: panels/user-accounts/cc-add-user-dialog.c:216
 msgid "Failed to add account"
 msgstr "Dodajanje računa je spodletelo"
 
-#: panels/user-accounts/cc-add-user-dialog.c:661
-#: panels/user-accounts/cc-password-dialog.c:261
+#: panels/user-accounts/cc-add-user-dialog.c:673
+#: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "Gesli se ne skladata."
 
-#: panels/user-accounts/cc-add-user-dialog.c:875
-#: panels/user-accounts/cc-add-user-dialog.c:914
-#: panels/user-accounts/cc-add-user-dialog.c:932
+#: panels/user-accounts/cc-add-user-dialog.c:877
+#: panels/user-accounts/cc-add-user-dialog.c:916
+#: panels/user-accounts/cc-add-user-dialog.c:934
 msgid "Failed to register account"
 msgstr "Vpis računa je spodletel"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1047
+#: panels/user-accounts/cc-add-user-dialog.c:1049
 msgid "No supported way to authenticate with this domain"
 msgstr "Ni podprtega načina za overitev s to domeno"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1111
+#: panels/user-accounts/cc-add-user-dialog.c:1113
 msgid "Failed to join domain"
 msgstr "Pridružitev v domeno je spodletela"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1166
+#: panels/user-accounts/cc-add-user-dialog.c:1168
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7125,7 +7105,7 @@ msgstr ""
 "Prijavno ime ne deluje.\n"
 "Poskusite vpisati drugo ime."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1173
+#: panels/user-accounts/cc-add-user-dialog.c:1175
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7133,49 +7113,56 @@ msgstr ""
 "Prijavno geslo je napačno.\n"
 "Poskusite vpisati drugo geslo."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1181
+#: panels/user-accounts/cc-add-user-dialog.c:1183
 msgid "Failed to log into domain"
 msgstr "Prijava v domeno je spodletela"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1236
+#: panels/user-accounts/cc-add-user-dialog.c:1238
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Domene ni mogoče najti. Morda je vpisana napačno."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:18
-#: panels/user-accounts/data/join-dialog.ui:11
+#: panels/user-accounts/cc-add-user-dialog.ui:15
+#: panels/user-accounts/data/join-dialog.ui:9
 msgid "Add User"
 msgstr "Dodaj uporabnika"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:180
-msgid "_Full Name"
-msgstr "Polno _ime"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:206
-msgid "Standard"
-msgstr "Običajno"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:216
+#: panels/user-accounts/cc-add-user-dialog.ui:131
 msgid "Administrator"
 msgstr "Skrbnik"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:232
-msgid "Account _Type"
-msgstr "Vrsta _računa"
+#: panels/user-accounts/cc-add-user-dialog.ui:132
+msgid ""
+"Administrators can add and remove other users, and can change settings for "
+"all users. Parental controls cannot be applied to administrators."
+msgstr ""
+"Skrbniki lahko dodajo in odstranijo druge uporabnike in vsem spreminjajo "
+"nastavitve. Starševski nadzor skrbnikom ni na voljo."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:269
-msgid "Allow user to set a password when they next _login"
-msgstr "Dovoli uporabniku nastaviti geslo ob naslednji _prijavi"
+#: panels/user-accounts/cc-add-user-dialog.ui:149
+msgid "User sets password on first login"
+msgstr "Uporabnik si nastavi geslo ob prvi prijavi"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:283
-msgid "Set a password _now"
-msgstr "_Nastavi geslo"
+#: panels/user-accounts/cc-add-user-dialog.ui:161
+msgid "Set password now"
+msgstr "Nastavi geslo"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:405
-msgid "_Confirm"
-msgstr "_Potrdi"
+#: panels/user-accounts/cc-add-user-dialog.ui:224
+msgid "Confirm"
+msgstr "Potrdi"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:485
-#: panels/user-accounts/cc-add-user-dialog.ui:692
+#: panels/user-accounts/cc-add-user-dialog.ui:278
+msgid "Enterprise Login"
+msgstr "Prijava v poslovno domeno"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:279
+msgid "User accounts which are managed by a company or organisation."
+msgstr "Uporabniški računi, ki jih upravlja podjetje ali ustanova."
+
+#: panels/user-accounts/cc-add-user-dialog.ui:385
+msgid "You are Offline"
+msgstr "Povezava ni vzpostavljena"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:386
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -7185,27 +7172,11 @@ msgstr ""
 "uporabniškim računom. Ta račun je mogoče uporabiti tudi za dostop do "
 "poslovnih virov na internetu."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:732
-msgid "You are Offline"
-msgstr "Povezava ni vzpostavljena"
-
-#: panels/user-accounts/cc-add-user-dialog.ui:751
-msgid "You must be online in order to add enterprise users."
-msgstr "Vzpostavite povezavo za dodajanje poslovnih prijavnih računov."
-
-#: panels/user-accounts/cc-add-user-dialog.ui:782
-msgid "_Enterprise Login"
-msgstr "Prijava v _poslovno domeno"
-
-#: panels/user-accounts/cc-avatar-chooser.c:225
+#: panels/user-accounts/cc-avatar-chooser.c:162
 msgid "Browse for more pictures"
 msgstr "Brskanje med več slikami"
 
-#: panels/user-accounts/cc-avatar-chooser.ui:39
-msgid "Take a Picture…"
-msgstr "Zajem slike …"
-
-#: panels/user-accounts/cc-avatar-chooser.ui:46
+#: panels/user-accounts/cc-avatar-chooser.ui:32
 msgid "Select a File…"
 msgstr "Izbor datoteke …"
 
@@ -7213,19 +7184,19 @@ msgstr "Izbor datoteke …"
 msgid "Fingerprint Manager"
 msgstr "Upravljalnik prstnega odtisa"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:23
+#: panels/user-accounts/cc-fingerprint-dialog.ui:18
 msgid "Fingerprint"
 msgstr "Prstni odtis"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:118
+#: panels/user-accounts/cc-fingerprint-dialog.ui:86
 msgid "_No"
 msgstr "_Ne"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:128
+#: panels/user-accounts/cc-fingerprint-dialog.ui:94
 msgid "_Yes"
 msgstr "_Da"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:155
+#: panels/user-accounts/cc-fingerprint-dialog.ui:114
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7233,47 +7204,47 @@ msgstr ""
 "Ali želite izbrisati obstoječe prstne odtise in onemogočiti tak način "
 "prijave?"
 
-#. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:249
-msgid "No Fingerprint device"
-msgstr "Ni naprave za branje prstnega odtisa"
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:259
-msgid "Ensure the device is properly connected."
-msgstr "Zagotovite, da je naprava pravilno povezana."
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:264
+#: panels/user-accounts/cc-fingerprint-dialog.ui:170
 msgid "No fingerprint device"
 msgstr "Ni naprave za branje prstnega odtisa"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:280
-msgid "Choose the fingerprint device you want to configure"
-msgstr "Izberite napravo za branje prstnega odtisa, ki jo želite nastaviti"
+#. Translators: This is the empty state page label which states that there are no devices ready.
+#: panels/user-accounts/cc-fingerprint-dialog.ui:185
+msgid "No Fingerprint device"
+msgstr "Ni naprave za branje prstnega odtisa"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:309
+#: panels/user-accounts/cc-fingerprint-dialog.ui:194
+msgid "Ensure the device is properly connected."
+msgstr "Zagotovite, da je naprava pravilno povezana."
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:202
 msgid "Fingerprint Device"
 msgstr "Naprava za branje prstnega odtisa"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:322
+#: panels/user-accounts/cc-fingerprint-dialog.ui:211
+msgid "Choose the fingerprint device you want to configure"
+msgstr "Izberite napravo za branje prstnega odtisa, ki jo želite nastaviti"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:242
+msgid "Fingerprint Login"
+msgstr "Prijava s prstnim odtisom"
+
+#: panels/user-accounts/cc-fingerprint-dialog.ui:249
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
 msgstr ""
 "Prijava s prstnim odtisom omogoča prijavo oziroma odklepanje sistema s prstom"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:352
+#: panels/user-accounts/cc-fingerprint-dialog.ui:276
 msgid "_Delete Fingerprints"
 msgstr "_Izbriši prstne odtise"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:363
-msgid "Fingerprint Login"
-msgstr "Prijava s prstnim odtisom"
-
-#: panels/user-accounts/cc-fingerprint-dialog.ui:412
+#: panels/user-accounts/cc-fingerprint-dialog.ui:290
 msgid "Fingerprint Enroll"
 msgstr "Prijava s prstnim odtisom"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:436
+#: panels/user-accounts/cc-fingerprint-dialog.ui:349
 msgid "_Re-enroll this finger…"
 msgstr "_Ponovno odčitaj ta prst …"
 
@@ -7307,93 +7278,93 @@ msgid "Failed to communicate with the fingerprint daemon"
 msgstr ""
 "Povezovanje z ozadnjim programom čitalca prstnih odtisov je spodletelo."
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:585
+#: panels/user-accounts/cc-fingerprint-dialog.c:606
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "Prikaz prstnih odtisov je spodletel: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:652
+#: panels/user-accounts/cc-fingerprint-dialog.c:673
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "Brisanje prstnih odtisov je spodletelo: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:683
+#: panels/user-accounts/cc-fingerprint-dialog.c:704
 msgid "Left thumb"
 msgstr "Levi palec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:685
+#: panels/user-accounts/cc-fingerprint-dialog.c:706
 msgid "Left middle finger"
 msgstr "Levi sredinec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:687
+#: panels/user-accounts/cc-fingerprint-dialog.c:708
 msgid "_Left index finger"
 msgstr "_Levi kazalec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:689
+#: panels/user-accounts/cc-fingerprint-dialog.c:710
 msgid "Left ring finger"
 msgstr "Levi prstanec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:691
+#: panels/user-accounts/cc-fingerprint-dialog.c:712
 msgid "Left little finger"
 msgstr "Levi mezinec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:693
+#: panels/user-accounts/cc-fingerprint-dialog.c:714
 msgid "Right thumb"
 msgstr "Desni palec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:695
+#: panels/user-accounts/cc-fingerprint-dialog.c:716
 msgid "Right middle finger"
 msgstr "Desni sredinec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:697
+#: panels/user-accounts/cc-fingerprint-dialog.c:718
 msgid "_Right index finger"
 msgstr "_Desni kazalec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:699
+#: panels/user-accounts/cc-fingerprint-dialog.c:720
 msgid "Right ring finger"
 msgstr "Desni prstanec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:701
+#: panels/user-accounts/cc-fingerprint-dialog.c:722
 msgid "Right little finger"
 msgstr "Desni mezinec"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:703
+#: panels/user-accounts/cc-fingerprint-dialog.c:724
 msgid "Unknown Finger"
 msgstr "Neznan prst"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:837
+#: panels/user-accounts/cc-fingerprint-dialog.c:858
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "Končano"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:848
+#: panels/user-accounts/cc-fingerprint-dialog.c:869
 msgid "Fingerprint device disconnected"
 msgstr "Naprava za prijavo s prstnim odtisom ni priklopljena"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:854
+#: panels/user-accounts/cc-fingerprint-dialog.c:875
 msgid "Fingerprint device storage is full"
 msgstr "Shramba naprave za branje prstnega odtisa je polna"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:858
+#: panels/user-accounts/cc-fingerprint-dialog.c:879
 msgid "Failed to enroll new fingerprint"
 msgstr "Odčitavanje novega prstnega odtisa je spodletelo."
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:889
+#: panels/user-accounts/cc-fingerprint-dialog.c:910
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "Začenjanje odčitavanja je spodletelo: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:897
+#: panels/user-accounts/cc-fingerprint-dialog.c:918
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Odčitavanje novega prstnega odtisa je spodletelo."
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:928
+#: panels/user-accounts/cc-fingerprint-dialog.c:949
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "Zaustavljanje odčitavanja je spodletelo: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:974
+#: panels/user-accounts/cc-fingerprint-dialog.c:995
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
@@ -7402,35 +7373,35 @@ msgstr ""
 "odtisa"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1118
+#: panels/user-accounts/cc-fingerprint-dialog.c:1147
 msgid "Scan new fingerprint"
 msgstr "Odčitaj nov prstni odtis"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1157
+#: panels/user-accounts/cc-fingerprint-dialog.c:1185
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "Sproščanje naprave za branje prstnega odtisa %s je spodletelo: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1229
+#: panels/user-accounts/cc-fingerprint-dialog.c:1257
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Napaka branja naprave"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1264
+#: panels/user-accounts/cc-fingerprint-dialog.c:1292
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "Povezovanje naprave za branje prstnega odtisa %s je spodletelo: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1413
+#: panels/user-accounts/cc-fingerprint-dialog.c:1441
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Pridobivanje naprav za prstni odtis je spodletelo: %s"
 
-#: panels/user-accounts/cc-login-history-dialog.c:69
+#: panels/user-accounts/cc-login-history-dialog.c:71
 msgid "This Week"
 msgstr "Ta teden"
 
-#: panels/user-accounts/cc-login-history-dialog.c:72
+#: panels/user-accounts/cc-login-history-dialog.c:74
 msgid "Last Week"
 msgstr "Predhodni teden"
 
@@ -7438,22 +7409,22 @@ msgstr "Predhodni teden"
 #. shown as the first day of a week on login history dialog.
 #. Translators: This is a date format string in the style of "Feb 24",
 #. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:82
-#: panels/user-accounts/cc-login-history-dialog.c:86
+#: panels/user-accounts/cc-login-history-dialog.c:84
+#: panels/user-accounts/cc-login-history-dialog.c:88
 msgctxt "login history week label"
 msgid "%b %e"
 msgstr "%b %e"
 
 #. Translators: This is a date format string in the style of "Feb 24, 2013",
 #. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:91
+#: panels/user-accounts/cc-login-history-dialog.c:93
 msgctxt "login history week label"
 msgid "%b %e, %Y"
 msgstr "%b %e, %Y"
 
 #. Translators: This indicates a week label on a login history.
 #. The first %s is the first day of a week, and the second %s the last day.
-#: panels/user-accounts/cc-login-history-dialog.c:96
+#: panels/user-accounts/cc-login-history-dialog.c:98
 #, c-format
 msgctxt "login history week label"
 msgid "%s — %s"
@@ -7461,73 +7432,73 @@ msgstr "%s – %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
-#: panels/user-accounts/cc-login-history-dialog.c:173
-#: panels/user-accounts/cc-user-panel.c:780
+#: panels/user-accounts/cc-login-history-dialog.c:179
+#: panels/user-accounts/cc-user-panel.c:688
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
 
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
-#: panels/user-accounts/cc-login-history-dialog.c:176
-#: panels/user-accounts/cc-user-panel.c:784
+#: panels/user-accounts/cc-login-history-dialog.c:182
+#: panels/user-accounts/cc-user-panel.c:692
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
 msgstr "%s, %s"
 
-#: panels/user-accounts/cc-login-history-dialog.c:243
+#: panels/user-accounts/cc-login-history-dialog.c:238
 msgid "Session Ended"
 msgstr "Seja je končana"
 
-#: panels/user-accounts/cc-login-history-dialog.c:249
+#: panels/user-accounts/cc-login-history-dialog.c:244
 msgid "Session Started"
 msgstr "Seja je začeta"
 
 #. Translators: This is the title of the "Account Activity" dialog.
 #. The %s is the user real name.
-#: panels/user-accounts/cc-login-history-dialog.c:343
+#: panels/user-accounts/cc-login-history-dialog.c:339
 #, c-format
 msgid "%s — Account Activity"
 msgstr "%s – dejavnost računa"
 
-#: panels/user-accounts/cc-password-dialog.c:125
+#: panels/user-accounts/cc-password-dialog.c:133
 msgid "Please choose another password."
 msgstr "Izberite drugo geslo."
 
-#: panels/user-accounts/cc-password-dialog.c:134
+#: panels/user-accounts/cc-password-dialog.c:142
 msgid "Please type your current password again."
 msgstr "Znova vnesite trenutno geslo."
 
-#: panels/user-accounts/cc-password-dialog.c:140
+#: panels/user-accounts/cc-password-dialog.c:148
 msgid "Password could not be changed"
 msgstr "Gesla ni mogoče spremeniti."
 
-#: panels/user-accounts/cc-password-dialog.ui:7
+#: panels/user-accounts/cc-password-dialog.ui:4
 msgid "Change Password"
 msgstr "Spremeni geslo"
 
-#: panels/user-accounts/cc-password-dialog.ui:37
+#: panels/user-accounts/cc-password-dialog.ui:32
 msgid "Ch_ange"
 msgstr "_Spremeni"
 
-#: panels/user-accounts/cc-password-dialog.ui:145
-msgid "_Confirm New Password"
-msgstr "P_otrdi novo geslo"
+#: panels/user-accounts/cc-password-dialog.ui:51
+msgid "Current Password"
+msgstr "Trenutno geslo"
 
-#: panels/user-accounts/cc-password-dialog.ui:162
-msgid "_New Password"
-msgstr "_Novo geslo"
+#: panels/user-accounts/cc-password-dialog.ui:76
+msgid "New Password"
+msgstr "Novo geslo"
 
-#: panels/user-accounts/cc-password-dialog.ui:216
-msgid "Current _Password"
-msgstr "Trenutno _geslo"
+#: panels/user-accounts/cc-password-dialog.ui:121
+msgid "Confirm Password"
+msgstr "Potrdi geslo"
 
-#: panels/user-accounts/cc-password-dialog.ui:254
+#: panels/user-accounts/cc-password-dialog.ui:175
 msgid "Allow user to change their password on next login"
 msgstr "Dovoli uporabniku nastavljanje gesla ob naslednji prijavi."
 
-#: panels/user-accounts/cc-password-dialog.ui:267
+#: panels/user-accounts/cc-password-dialog.ui:186
 msgid "Set a password now"
 msgstr "Nastavi geslo"
 
@@ -7554,30 +7525,26 @@ msgstr "Napačno geslo, poskusite znova."
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Z domeno %s povezava ni mogoča: %s"
 
-#: panels/user-accounts/cc-user-panel.c:222
-msgid "Your account"
-msgstr "Račun"
-
-#: panels/user-accounts/cc-user-panel.c:411
+#: panels/user-accounts/cc-user-panel.c:317
 msgid "Failed to delete user"
 msgstr "Napaka med brisanjem uporabnika"
 
-#: panels/user-accounts/cc-user-panel.c:466
-#: panels/user-accounts/cc-user-panel.c:521
-#: panels/user-accounts/cc-user-panel.c:567
+#: panels/user-accounts/cc-user-panel.c:374
+#: panels/user-accounts/cc-user-panel.c:429
+#: panels/user-accounts/cc-user-panel.c:475
 msgid "Failed to revoke remotely managed user"
 msgstr "Preklic oddaljeno vodenega uporabnika je spodletel"
 
-#: panels/user-accounts/cc-user-panel.c:616
+#: panels/user-accounts/cc-user-panel.c:524
 msgid "You cannot delete your own account."
 msgstr "Ni mogoče izbrisati lastnega računa."
 
-#: panels/user-accounts/cc-user-panel.c:625
+#: panels/user-accounts/cc-user-panel.c:533
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s je še vedno prijavljen"
 
-#: panels/user-accounts/cc-user-panel.c:629
+#: panels/user-accounts/cc-user-panel.c:537
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7585,12 +7552,12 @@ msgstr ""
 "Izbris uporabnika, ki je trenutno prijavljen, lahko vpliva na delovanje "
 "sistema."
 
-#: panels/user-accounts/cc-user-panel.c:638
+#: panels/user-accounts/cc-user-panel.c:546
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Ali želite obdržati datoteke uporabnika %s?"
 
-#: panels/user-accounts/cc-user-panel.c:642
+#: panels/user-accounts/cc-user-panel.c:550
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7598,76 +7565,68 @@ msgstr ""
 "Mogoče je ohraniti domačo mapo, vrstilno mapo pošte in začasne datoteke tudi "
 "med brisanjem uporabniškega računa."
 
-#: panels/user-accounts/cc-user-panel.c:645
+#: panels/user-accounts/cc-user-panel.c:553
 msgid "_Delete Files"
 msgstr "_Izbriši datoteke"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:554
 msgid "_Keep Files"
 msgstr "_Ohrani datoteke"
 
-#: panels/user-accounts/cc-user-panel.c:660
+#: panels/user-accounts/cc-user-panel.c:568
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "Ali ste prepričani, da želite preklicati oddaljeno voden račun uporabnika %s?"
 
-#: panels/user-accounts/cc-user-panel.c:664
+#: panels/user-accounts/cc-user-panel.c:572
 msgid "_Delete"
 msgstr "_Izbriši"
 
-#: panels/user-accounts/cc-user-panel.c:714
+#: panels/user-accounts/cc-user-panel.c:622
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Račun je onemogočen"
 
-#: panels/user-accounts/cc-user-panel.c:722
+#: panels/user-accounts/cc-user-panel.c:630
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Nastavljeno bo ob naslednji prijavi"
 
-#: panels/user-accounts/cc-user-panel.c:725
+#: panels/user-accounts/cc-user-panel.c:633
 msgctxt "Password mode"
 msgid "None"
 msgstr "Brez"
 
-#: panels/user-accounts/cc-user-panel.c:768
+#: panels/user-accounts/cc-user-panel.c:676
 msgid "Logged in"
 msgstr "Trenutno dejavna prijava"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:855
-#: panels/user-accounts/cc-user-panel.c:952
+#: panels/user-accounts/cc-user-panel.c:763
+#: panels/user-accounts/cc-user-panel.c:866
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Omogočeno"
 
-#: panels/user-accounts/cc-user-panel.c:1276
+#: panels/user-accounts/cc-user-panel.c:1186
 msgid "Failed to contact the accounts service"
 msgstr "Napaka med povezovanjem s storitvijo računov"
 
-#: panels/user-accounts/cc-user-panel.c:1278
+#: panels/user-accounts/cc-user-panel.c:1188
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Prepričajte se, da je paket AccoutnService nameščen in omogočen."
 
-#. Translator comments:
-#. * We split the line in 2 here to "make it look good", as there's
-#. * no good way to do this in GTK+ for tooltips. See:
-#. * https://bugzilla.gnome.org/show_bug.cgi?id=657168
-#: panels/user-accounts/cc-user-panel.c:1310
-msgid ""
-"To make changes,\n"
-"click the * icon first"
-msgstr ""
-"Za spreminjanje,\n"
-"kliknite na ikono *"
+#: panels/user-accounts/cc-user-panel.c:1209
+msgid "This panel must be unlocked to change this setting"
+msgstr "Okno je treba za spreminjanje nastavitev najprej odkleniti"
 
-#: panels/user-accounts/cc-user-panel.c:1383
+#: panels/user-accounts/cc-user-panel.c:1276
 msgid "Delete the selected user account"
 msgstr "Izbriši izbran uporabniški račun"
 
-#: panels/user-accounts/cc-user-panel.c:1395
-#: panels/user-accounts/cc-user-panel.c:1506
+#: panels/user-accounts/cc-user-panel.c:1280
+#: panels/user-accounts/cc-user-panel.c:1389
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7675,40 +7634,41 @@ msgstr ""
 "Za izbris izbranega uporabniškega\n"
 "računa, kliknite na ikono *"
 
-#: panels/user-accounts/cc-user-panel.c:1552
+#: panels/user-accounts/cc-user-panel.c:1431
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Odklenite za spreminjanje nastavitev in uporabnikov"
 
-#: panels/user-accounts/cc-user-panel.ui:6
-msgid "_Add User…"
-msgstr "_Dodaj uporabnika …"
+#: panels/user-accounts/cc-user-panel.ui:23
+#: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
+msgid "Users"
+msgstr "Uporabniki"
 
-#: panels/user-accounts/cc-user-panel.ui:9
-msgid "Create a user account"
-msgstr "Ustvari uporabniški račun"
-
-#: panels/user-accounts/cc-user-panel.ui:64
+#: panels/user-accounts/cc-user-panel.ui:60
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "Za uveljavitev sprememb se je treba v sejo ponovno prijaviti"
 
-#: panels/user-accounts/cc-user-panel.ui:72
+#: panels/user-accounts/cc-user-panel.ui:67
 msgid "Restart Now"
 msgstr "Ponoven zagon"
 
-#: panels/user-accounts/cc-user-panel.ui:157
-#: panels/user-accounts/cc-user-panel.ui:173
-msgid "User Icon"
-msgstr "Uporabniška ikona"
+#. FIXME
+#: panels/user-accounts/cc-user-panel.ui:188
+msgid "_Fingerprint Login"
+msgstr "Prijava s _prstnimi odtisi"
 
-#: panels/user-accounts/cc-user-panel.ui:249
-msgid "Account Settings"
-msgstr "Nastavitve računa"
+#: panels/user-accounts/cc-user-panel.ui:211
+msgid "A_utomatic Login"
+msgstr "_Samodejna prijava"
 
-#: panels/user-accounts/cc-user-panel.ui:267
+#: panels/user-accounts/cc-user-panel.ui:224
+msgid "Account Activity"
+msgstr "Dejavnost računa"
+
+#: panels/user-accounts/cc-user-panel.ui:252
 msgid "_Administrator"
 msgstr "_Skrbnik"
 
-#: panels/user-accounts/cc-user-panel.ui:268
+#: panels/user-accounts/cc-user-panel.ui:253
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7716,46 +7676,34 @@ msgstr ""
 "Skrbniki lahko dodajo in odstranijo druge uporabnike in vsem spreminjajo "
 "nastavitve."
 
-#: panels/user-accounts/cc-user-panel.ui:284
+#: panels/user-accounts/cc-user-panel.ui:269
 msgid "_Parental Controls"
 msgstr "_Starševski nadzor"
 
-#: panels/user-accounts/cc-user-panel.ui:285
+#: panels/user-accounts/cc-user-panel.ui:270
 msgid "Open the Parental Controls application."
 msgstr "Odpri nadrejen nastavitveni program"
 
-#: panels/user-accounts/cc-user-panel.ui:347
-msgid "Authentication & Login"
-msgstr "Overitev in prijava"
-
-#: panels/user-accounts/cc-user-panel.ui:390
-msgid "_Fingerprint Login"
-msgstr "Prijava s _prstnimi odtisi"
-
-#: panels/user-accounts/cc-user-panel.ui:415
-msgid "A_utomatic Login"
-msgstr "_Samodejna prijava"
-
-#: panels/user-accounts/cc-user-panel.ui:430
-msgid "Account Activity"
-msgstr "Dejavnost računa"
-
-#: panels/user-accounts/cc-user-panel.ui:461
+#: panels/user-accounts/cc-user-panel.ui:321
 msgid "Remove User…"
 msgstr "Odstrani uporabnika …"
 
+#: panels/user-accounts/cc-user-panel.ui:333
+msgid "Other Users"
+msgstr "Drugi uporabniki"
+
+#: panels/user-accounts/cc-user-panel.ui:346
+msgid "Add User…"
+msgstr "Dodaj uporabnika …"
+
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:502
+#: panels/user-accounts/cc-user-panel.ui:374
 msgid "No Users Found"
 msgstr "Ni najdenih uporabnikov"
 
-#: panels/user-accounts/cc-user-panel.ui:512
+#: panels/user-accounts/cc-user-panel.ui:383
 msgid "Unlock to add a user account."
 msgstr "Odklenite za dodajanje uporabniškega računa."
-
-#: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
-msgid "Users"
-msgstr "Uporabniki"
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:4
 msgid "Add or remove users and change your password"
@@ -7772,15 +7720,15 @@ msgstr ""
 "Otroci;Otrok;Mladostniki;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
-#: panels/user-accounts/data/join-dialog.ui:39
+#: panels/user-accounts/data/join-dialog.ui:30
 msgid "_Enroll"
 msgstr "_Prijava v domeno"
 
-#: panels/user-accounts/data/join-dialog.ui:75
+#: panels/user-accounts/data/join-dialog.ui:59
 msgid "Domain Administrator Login"
 msgstr "Skrbniška prijava v domeno"
 
-#: panels/user-accounts/data/join-dialog.ui:93
+#: panels/user-accounts/data/join-dialog.ui:72
 msgid ""
 "In order to use enterprise logins, this computer needs to be\n"
 "enrolled in the domain. Please have your network administrator\n"
@@ -7790,11 +7738,11 @@ msgstr ""
 "prijavljen v domeno. Za dostop do domene so zahtevana\n"
 "skrbniška strežniška dovoljenja."
 
-#: panels/user-accounts/data/join-dialog.ui:150
+#: panels/user-accounts/data/join-dialog.ui:112
 msgid "Administrator _Name"
 msgstr "Ime _skrbnika"
 
-#: panels/user-accounts/data/join-dialog.ui:185
+#: panels/user-accounts/data/join-dialog.ui:135
 msgid "Administrator Password"
 msgstr "Skrbniško geslo"
 
@@ -7961,7 +7909,7 @@ msgstr "Novo geslo ne vsebuje dovolj različnih znakov"
 msgid "Unknown error"
 msgstr "Neznana napaka"
 
-#: panels/user-accounts/user-utils.c:432
+#: panels/user-accounts/user-utils.c:144
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
@@ -7969,19 +7917,13 @@ msgstr ""
 "Uporabniško ime je lahko sestavljeno iz malih črk angleške abecede, številk "
 "in posebnih znakov » - _ «."
 
-#: panels/user-accounts/user-utils.c:436
+#: panels/user-accounts/user-utils.c:148
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Uporabniško ime ni na voljo! Izberite drugo ime."
 
-#: panels/user-accounts/user-utils.c:478
+#: panels/user-accounts/user-utils.c:190
 msgid "The username is too long."
 msgstr "Uporabniško ime je predolgo."
-
-#: panels/user-accounts/user-utils.c:537
-msgid "This will be used to name your home folder and can’t be changed."
-msgstr ""
-"S tem imenom bo poimenovana osebna mapa. Izbire kasneje ni mogoče "
-"spreminjati."
 
 #: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:38
 msgid "Map Buttons"
@@ -8004,13 +7946,13 @@ msgstr ""
 msgid "_Close"
 msgstr "_Zapri"
 
-#: panels/wacom/calibrator/calibrator.ui:52
+#: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
 msgstr "Z udarjanjem na ciljna mest se umeri zaslon zaslona na dotik."
 
-#: panels/wacom/calibrator/calibrator.ui:64
+#: panels/wacom/calibrator/calibrator.ui:63
 msgid "Mis-click detected, restarting…"
 msgstr "Zaznan je napačen klik, opravilo bo znova začeto …"
 
@@ -8052,7 +7994,7 @@ msgid "External tablet device"
 msgstr "Zunanja tablična naprava"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:630
+#: panels/wacom/cc-wacom-page.c:608
 msgid "All Displays"
 msgstr "Vsi zasloni"
 
@@ -8768,6 +8710,78 @@ msgstr[3] "%u vhodi"
 msgid "System Sounds"
 msgstr "Sistemski zvoki"
 
+#~ msgid "Screenshots"
+#~ msgstr "Zajemanje zaslona"
+
+#~ msgid "Show the screenshot UI"
+#~ msgstr "Pokaži vmesnik zajemalnika zaslona"
+
+#~ msgid "Take a screenshot"
+#~ msgstr "Zajemi zaslonsko sliko"
+
+#~ msgid "Take a screenshot of a window"
+#~ msgstr "Zajemi zaslonsko sliko okna"
+
+#~ msgid "Show the screen recording UI"
+#~ msgstr "Pokaži vmesnik zajemalnika zaslona"
+
+#~ msgid "Move up"
+#~ msgstr "Premakni navzgor"
+
+#~ msgid "Move down"
+#~ msgstr "Premakni navzdol"
+
+#~ msgid "Allow the applications below to use your microphone."
+#~ msgstr "Dovoli navedenim programom uporabo mikrofona."
+
+#~ msgid "_Full Name"
+#~ msgstr "Polno _ime"
+
+#~ msgid "Standard"
+#~ msgstr "Običajno"
+
+#~ msgid "Account _Type"
+#~ msgstr "Vrsta _računa"
+
+#~ msgid "Allow user to set a password when they next _login"
+#~ msgstr "Dovoli uporabniku nastaviti geslo ob naslednji _prijavi"
+
+#~ msgid "Set a password _now"
+#~ msgstr "_Nastavi geslo"
+
+#~ msgid "You must be online in order to add enterprise users."
+#~ msgstr "Vzpostavite povezavo za dodajanje poslovnih prijavnih računov."
+
+#~ msgid "Take a Picture…"
+#~ msgstr "Zajem slike …"
+
+#~ msgid "Your account"
+#~ msgstr "Račun"
+
+#~ msgid ""
+#~ "To make changes,\n"
+#~ "click the * icon first"
+#~ msgstr ""
+#~ "Za spreminjanje,\n"
+#~ "kliknite na ikono *"
+
+#~ msgid "Create a user account"
+#~ msgstr "Ustvari uporabniški račun"
+
+#~ msgid "User Icon"
+#~ msgstr "Uporabniška ikona"
+
+#~ msgid "Account Settings"
+#~ msgstr "Nastavitve računa"
+
+#~ msgid "Authentication & Login"
+#~ msgstr "Overitev in prijava"
+
+#~ msgid "This will be used to name your home folder and can’t be changed."
+#~ msgstr ""
+#~ "S tem imenom bo poimenovana osebna mapa. Izbire kasneje ni mogoče "
+#~ "spreminjati."
+
 #~ msgid ""
 #~ "Choose the format for numbers, dates and currencies. Changes take effect "
 #~ "on next login."
@@ -8948,9 +8962,6 @@ msgstr "Sistemski zvoki"
 
 #~ msgid "Video Files"
 #~ msgstr "Video datoteke"
-
-#~ msgid "Other Files"
-#~ msgstr "Druge datoteke"
 
 #~ msgid "Permissions & Access"
 #~ msgstr "Dovoljenja in dostop"
