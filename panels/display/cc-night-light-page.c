@@ -621,7 +621,7 @@ cc_night_light_page_init (CcNightLightPage *self)
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       1700, GTK_POS_BOTTOM,
-                      _("More Warm"));
+                      NULL);
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       2700, GTK_POS_BOTTOM,
@@ -633,7 +633,7 @@ cc_night_light_page_init (CcNightLightPage *self)
 
   gtk_scale_add_mark (GTK_SCALE (self->scale_color_temperature),
                       4700, GTK_POS_BOTTOM,
-                      _("Less Warm"));
+                      NULL);
 
   self->cancellable = g_cancellable_new ();
   self->settings_display = g_settings_new (DISPLAY_SCHEMA);
