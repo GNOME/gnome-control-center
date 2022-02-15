@@ -183,7 +183,6 @@ airplane_mode_changed (CcBluetoothPanel *self)
 	self->bt_airplane_mode = g_variant_get_boolean (bluetooth_airplane_mode);
 
 	bluetooth_hardware_airplane_mode = g_dbus_proxy_get_cached_property (self->rfkill, "BluetoothHardwareAirplaneMode");
-	g_message ("BluetoothHardwareAirplaneMode: %d", self->hardware_airplane_mode);
 	self->hardware_airplane_mode = g_variant_get_boolean (bluetooth_hardware_airplane_mode);
 
 	bluetooth_has_airplane_mode = g_dbus_proxy_get_cached_property (self->rfkill, "BluetoothHasAirplaneMode");
