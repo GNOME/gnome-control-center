@@ -779,6 +779,7 @@ show_user (ActUser *user, CcUserPanel *self)
 
         self->selected_user = user;
 
+        adw_avatar_set_custom_image (self->user_avatar, NULL);
         adw_avatar_set_text (self->user_avatar, get_real_or_user_name (user));
         cc_avatar_chooser_set_user (self->avatar_chooser, user);
         avatar_file = act_user_get_icon_file (user);
