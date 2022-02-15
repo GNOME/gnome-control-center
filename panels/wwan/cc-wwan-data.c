@@ -1377,9 +1377,6 @@ cc_wwan_data_apn_get_password (CcWwanDataApn *apn)
     }
 
   return password ? password : "";
-
-  if (apn->remote_connection)
-    nm_connection_clear_secrets (NM_CONNECTION (apn->remote_connection));
 }
 
 /**
