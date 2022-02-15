@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-12 12:26+0000\n"
-"PO-Revision-Date: 2022-02-12 21:44+0100\n"
+"POT-Creation-Date: 2022-02-13 00:26+0000\n"
+"PO-Revision-Date: 2022-02-13 22:10+0100\n"
 "Last-Translator: Fran Diéguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -363,7 +363,7 @@ msgstr "Seleccione unha imaxe"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
@@ -760,7 +760,7 @@ msgstr "O instrumento de medida non admite perfilado de impresoras."
 msgid "The device type is not currently supported."
 msgstr "O tipo de dispositivo non é compatíbel actualmente."
 
-#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:41
+#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
 msgstr "Calibración de pantalla"
 
@@ -2553,7 +2553,6 @@ msgstr "Bloquear a súa pantalla"
 
 #. FIXME
 #: panels/microphone/cc-microphone-panel.ui:20
-#| msgid "Microphone is turned off"
 msgid "Microphone Turned Off"
 msgstr "O micrófono está apagado"
 
@@ -2565,21 +2564,24 @@ msgstr "Non hai aplicacións que poidan gravar son."
 #| msgid ""
 #| "Use of the microphone allows applications to record and listen to audio. "
 #| "Disabling the microphone may cause some applications to not function "
-#| "properly."
+#| "properly.\n"
+#| "\n"
+#| "Allow the applications below to use your microphone.\n"
+#| "                    "
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
 "properly.\n"
 "\n"
-"Allow the applications below to use your microphone.\n"
-"                    "
+"Allow the applications below to use your microphone."
 msgstr ""
-"Usar o micrófono permítelle ás aplicación capturar sons. Desactivar o "
-"micrófono pode causar que varias aplicación non funcionen correctamente.\n"
+"Usar o micrófono permítelle ás aplicación gravar e escoitar audio. "
+"Desactivar o micrófono pode causar que varias aplicación non funcionen "
+"correctamente.\n"
 "\n"
 "Permitirlle ás aplicacións de embaixo usar o seu micrófono."
 
-#: panels/microphone/cc-microphone-panel.ui:52
+#: panels/microphone/cc-microphone-panel.ui:51
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "Ningunha aplicación solicitou acceso ao micrófono"
 
@@ -3363,7 +3365,7 @@ msgstr "Pasarela"
 #: panels/network/connection-editor/ip6-page.ui:232
 #: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:91
 #: panels/network/wireless-security/eap-method-peap.ui:33
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
 msgstr "Automático"
 
@@ -5835,12 +5837,10 @@ msgid "Bookmarks"
 msgstr "Marcadores"
 
 #: panels/search/cc-search-locations-dialog.ui:48
-#| msgid "Other"
 msgid "Others"
 msgstr "Outros"
 
 #: panels/search/cc-search-locations-dialog.ui:55
-#| msgid "Location"
 msgid "Add Location"
 msgstr "Engadir localización"
 
@@ -6316,12 +6316,10 @@ msgid "Error switching direct mode: %s"
 msgstr "Produciuse un erro ao cambiar ao modo directo: %s"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:103
-#| msgid "No Thunderbolt support"
 msgid "No Thunderbolt Support"
 msgstr "Non hai compatibilidade con Thunderbolt"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:104
-#| msgid "Couldn’t connect to the %s domain: %s"
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "Non foi posíbel conectarse ao subsistema de Thunderbolt"
 
@@ -6889,35 +6887,119 @@ msgstr ""
 "Dobre;clic;atraso;velocidade;asistencia;Repetición;Pestanexo;visión;audición;"
 "son;escrita;escoita;son;audio;animacións;"
 
-#: panels/usage/cc-usage-panel.c:174
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:55
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "1 hora"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:58
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "1 día"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:61
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:64
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:67
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:70
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:73
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:76
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:79
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:82
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 días"
+
+#: panels/usage/cc-usage-panel.c:180
 msgid "Empty all items from Trash?"
 msgstr "Desexa baleirar todos os elementos do lixo?"
 
-#: panels/usage/cc-usage-panel.c:175
+#: panels/usage/cc-usage-panel.c:181
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Pérdese permanentemente todos os elementos do lixo."
 
-#: panels/usage/cc-usage-panel.c:176
+#: panels/usage/cc-usage-panel.c:182
 msgid "_Empty Trash"
 msgstr "_Baleirar o lixo"
 
-#: panels/usage/cc-usage-panel.c:212
+#: panels/usage/cc-usage-panel.c:218
 msgid "Delete all the temporary files?"
 msgstr "Desexa eliminar todos os ficheiros temporais?"
 
-#: panels/usage/cc-usage-panel.c:213
+#: panels/usage/cc-usage-panel.c:219
 msgid "All the temporary files will be permanently deleted."
 msgstr "Todos os ficheiros temporais eliminaranse de forma permanente."
 
-#: panels/usage/cc-usage-panel.c:214
+#: panels/usage/cc-usage-panel.c:220
 msgid "_Purge Temporary Files"
 msgstr "_Eliminar os ficheiros temporais"
 
-#: panels/usage/cc-usage-panel.ui:23
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:247
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "1 día"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:250
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 días"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:253
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 días"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:256
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "Para sempre"
+
+#: panels/usage/cc-usage-panel.ui:9
 msgid "File History"
 msgstr "Historial de ficheiros"
 
-#: panels/usage/cc-usage-panel.ui:34
+#: panels/usage/cc-usage-panel.ui:10
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between applications, and makes it easier to find files that you "
@@ -6927,23 +7009,24 @@ msgstr ""
 "información está compartida entre as aplicacións, e fai máis doado atopar "
 "ficheiros que pode querer usar."
 
-#: panels/usage/cc-usage-panel.ui:50
+#: panels/usage/cc-usage-panel.ui:13
 msgid "File H_istory"
 msgstr "Historial de f_icheiros"
 
-#: panels/usage/cc-usage-panel.ui:71
+#: panels/usage/cc-usage-panel.ui:25
 msgid "File _History Duration"
 msgstr "Duración do _historial de ficheiros"
 
-#: panels/usage/cc-usage-panel.ui:107
+#: panels/usage/cc-usage-panel.ui:48
 msgid "_Clear History…"
 msgstr "_Limpar o historial…"
 
-#: panels/usage/cc-usage-panel.ui:122
-msgid "Trash & Temporary Files"
+#: panels/usage/cc-usage-panel.ui:63
+#| msgid "Trash & Temporary Files"
+msgid "Trash &amp; Temporary Files"
 msgstr "Lixo e ficheiros temporais"
 
-#: panels/usage/cc-usage-panel.ui:131
+#: panels/usage/cc-usage-panel.ui:64
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -6952,109 +7035,25 @@ msgstr ""
 "ou sensíbel. Se os elimina automaticamente pode axudarlle a protexer a súa "
 "privacidade."
 
-#: panels/usage/cc-usage-panel.ui:146
+#: panels/usage/cc-usage-panel.ui:67
 msgid "Automatically Delete _Trash Content"
 msgstr "Limpar o contido do _lixo automaticamente"
 
-#: panels/usage/cc-usage-panel.ui:159
+#: panels/usage/cc-usage-panel.ui:79
 msgid "Automatically Delete Temporary _Files"
 msgstr "Limpar os _ficheiros temporais automaticamente"
 
-#: panels/usage/cc-usage-panel.ui:180
+#: panels/usage/cc-usage-panel.ui:91
 msgid "Automatically Delete _Period"
 msgstr "Período de limpeza do _lixo automática"
 
-#: panels/usage/cc-usage-panel.ui:217
+#: panels/usage/cc-usage-panel.ui:115
 msgid "_Empty Trash…"
 msgstr "_Baleirar o lixo…"
 
-#: panels/usage/cc-usage-panel.ui:228
+#: panels/usage/cc-usage-panel.ui:126
 msgid "_Delete Temporary Files…"
 msgstr "_Eliminar os ficheiros temporais…"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:256
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 hora"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:260
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 día"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:264
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:268
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:272
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:276
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:280
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:284
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:288
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:292
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 días"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:307
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 día"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:311
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 días"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:315
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 días"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:319
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Para sempre"
 
 #: panels/usage/gnome-usage-panel.desktop.in.in:3
 msgid "File History & Trash"
@@ -7943,7 +7942,7 @@ msgstr ""
 msgid "_Close"
 msgstr "_Pechar"
 
-#: panels/wacom/calibrator/calibrator.ui:52
+#: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -7951,7 +7950,7 @@ msgstr ""
 "Prema nos marcadores obxectivo a medida que aparezan na pantalla para "
 "calibrar a tableta."
 
-#: panels/wacom/calibrator/calibrator.ui:64
+#: panels/wacom/calibrator/calibrator.ui:63
 msgid "Mis-click detected, restarting…"
 msgstr "Pulsación errónea detectada, reiniciando…"
 
@@ -7993,7 +7992,7 @@ msgid "External tablet device"
 msgstr "Dispositivo de tableta externa"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:630
+#: panels/wacom/cc-wacom-page.c:608
 msgid "All Displays"
 msgstr "Todas as pantallas"
 
