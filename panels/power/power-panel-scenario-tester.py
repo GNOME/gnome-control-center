@@ -60,7 +60,7 @@ class GccDBusTestCase(DBusTestCase):
             if not GLib.file_test(klass.upowerd_path, GLib.FileTest.IS_EXECUTABLE):
                 klass.upowerd_path = None
 
-        if os.environ.get('UNDER_JHBUILD', False) or klass.upowerd_path == None:
+        if not os.environ.get('UNDER_JHBUILD', False) or klass.upowerd_path == None:
             klass.upowerd_path = None
             with open('/usr/share/dbus-1/system-services/org.freedesktop.UPower.service') as f:
                 for line in f:
