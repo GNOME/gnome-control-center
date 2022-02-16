@@ -10,18 +10,20 @@
     <property name="default-width">600</property>
     <property name="default-height">400</property>
     <property name="modal">True</property>
+    <property name="hide-on-close">True</property>
     <child type="titlebar">
-      <object class="GtkHeaderBar" id="titlebar">
+      <object class="AdwHeaderBar" id="titlebar">
+        <property name="show-end-title-buttons">True</property>
+        <property name="show-start-title-buttons">True</property>
         <child type="title">
           <object class="GtkLabel" id="title">
-            <property name="visible">True</property>
             <property name="label" translatable="yes">Fingerprint</property>
             <attributes>
               <attribute name="weight" value="bold"/>
             </attributes>
           </object>
         </child>
-        <child>
+        <child type="start">
           <object class="GtkButton" id="cancel_button">
             <property name="can_focus">False</property>
             <property name="receives_default">False</property>
@@ -31,7 +33,7 @@
             <signal name="clicked" handler="cancel_button_clicked_cb" object="CcFingerprintDialog" swapped="yes" />
           </object>
         </child>
-        <child>
+        <child type="start">
           <object class="GtkButton" id="back_button">
             <property name="can_focus">False</property>
             <property name="receives_default">False</property>
@@ -51,7 +53,7 @@
           </object>
         </child>
 
-        <child>
+        <child type="end">
           <object class="GtkButton" id="done_button">
             <property name="use-underline">True</property>
             <property name="sensitive">False</property>
@@ -123,7 +125,7 @@
         </child>
 
         <child>
-          <object class="gtkInfoBar" id="error_infobar">
+          <object class="GtkInfoBar" id="error_infobar">
             <property name="name">error_infobar</property>
             <property name="visible">False</property>
             <property name="can_focus">False</property>
@@ -223,7 +225,6 @@
                         <property name="propagate-natural-height">True</property>
                         <child>
                           <object class="GtkListBox" id="devices_list">
-                            <property name="visible">True</property>
                             <property name="selection-mode">none</property>
                             <property name="valign">center</property>
                             <signal name="row-activated" handler="select_device_row" object="CcFingerprintDialog" swapped="yes"/>
@@ -245,7 +246,6 @@
                     <property name="spacing">12</property>
                     <child>
                       <object class="GtkLabel">
-                        <property name="visible">True</property>
                         <property name="label" translatable="yes">Fingerprint login allows you to unlock and log into your computer with your finger</property>
                       </object>
                     </child>
@@ -310,13 +310,11 @@
                         <child>
                           <object class="GtkBox" id="enroll_print_bin">
                             <property name="hexpand">True</property>
-                            <property name="visible">True</property>
                           </object>
                         </child>
                         <child>
                           <object class="GtkEntry" id="enroll_print_entry">
                             <property name="valign">end</property>
-                            <property name="visible">True</property>
                             <property name="halign">center</property>
                             <property name="editable">False</property>
                             <property name="sensitive">False</property>
@@ -337,26 +335,7 @@
     </child>
   </template>
 
-  <object class="GtkPopoverMenu" id="print_popover">
-    <property name="position">bottom</property>
-    <child>
-      <object class="GtkBox">
-        <property name="can_focus">False</property>
-        <property name="spacing">6</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkMenuButton">
-            <property name="label" translatable="yes">_Re-enroll this finger…</property>
-            <property name="receives_default">True</property>
-            <property name="use_underline">True</property>
-            <signal name="activate" handler="reenroll_finger_cb" object="CcFingerprintDialog" swapped="yes"/>
-          </object>
-        </child>
-      </object>
-    </child>
-  </object>
-
-  <object class="GtkPopoverMenu" id="add_print_popover">
+  <object class="GtkPopover" id="add_print_popover">
     <property name="position">bottom</property>
     <child>
       <object class="GtkBox" id="add_print_popover_box">

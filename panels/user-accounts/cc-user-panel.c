@@ -1148,29 +1148,6 @@ spawn_malcontent_control (CcUserPanel *self)
 }
 #endif
 
-/*static void
-activate_row (GtkListBox *box, GtkListBoxRow *row, CcUserPanel *self)
-{
-        if (!gtk_widget_get_sensitive (GTK_WIDGET (row)))
-                return;
-
-        if (row == self->language_row) {
-                change_language (self);
-        } else if (row == self->password_row) {
-                change_password (self);
-        } else if (row == self->fingerprint_row) {
-                change_fingerprint (self);
-        } else if (row == self->last_login_row) {
-                show_history (self);
-        }
-
-#ifdef HAVE_MALCONTENT
-        if (row == self->parental_controls_row) {
-        spawn_malcontent_control (self);
-        }
-#endif
-}*/
-
 static void
 users_loaded (CcUserPanel *self)
 {
@@ -1200,6 +1177,7 @@ users_loaded (CcUserPanel *self)
 
         g_signal_connect_object (self->um, "user-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->um, "user-is-logged-in-changed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (self->um, "user-added", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->um, "user-removed", G_CALLBACK (user_changed), self, G_CONNECT_SWAPPED);
 }
 
