@@ -63,9 +63,10 @@ resource_data = files(
   'cc-permission-infobar.ui',
 )
 
-sources += gnome.compile_resources(
+common_sources += gnome.compile_resources(
   'cc-common-resources',
   'common.gresource.xml',
+  source_dir: '.',
   c_name: 'cc_common',
   dependencies: resource_data,
   export: true
