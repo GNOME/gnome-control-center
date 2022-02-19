@@ -24,6 +24,22 @@ common_sources += gnome.mkenums(
   vtail: '      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static ("@EnumName@", values);\n  }\n  return etype;\n}\n'
 )
 
+resource_data = files(
+  'cc-language-chooser.ui',
+  'cc-language-row.ui',
+  'cc-list-row.ui',
+  'cc-time-editor.ui',
+  'cc-permission-infobar.ui',
+)
+
+common_sources += gnome.compile_resources(
+  'cc-common-resources',
+  'common.gresource.xml',
+  c_name: 'cc_common',
+  dependencies: resource_data,
+  export: true
+)
+
 generates_sources_dep = declare_dependency(
   sources: common_sources,
 )
@@ -53,22 +69,6 @@ sources = common_sources + files(
   'cc-time-editor.c',
   'cc-permission-infobar.c',
   'cc-util.c'
-)
-
-resource_data = files(
-  'cc-language-chooser.ui',
-  'cc-language-row.ui',
-  'cc-list-row.ui',
-  'cc-time-editor.ui',
-  'cc-permission-infobar.ui',
-)
-
-sources += gnome.compile_resources(
-  'cc-common-resources',
-  'common.gresource.xml',
-  c_name: 'cc_common',
-  dependencies: resource_data,
-  export: true
 )
 
 deps = common_deps + [
