@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2021-09-09 16:10+0000\n"
-"PO-Revision-Date: 2021-09-17 19:25+0200\n"
+"POT-Creation-Date: 2022-02-15 22:16+0000\n"
+"PO-Revision-Date: 2022-02-20 19:35+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -203,7 +203,7 @@ msgstr "Camèra"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Desactivat"
@@ -456,7 +456,7 @@ msgstr "Mòde avion activat"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:118
 msgid "Bluetooth is disabled when airplane mode is on."
-msgstr "Lo comutator material del Bluetooth es desactivat."
+msgstr "Lo Bluetooth es desactivat en mòde avion."
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:124
 msgid "Turn Off Airplane Mode"
@@ -2300,7 +2300,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "Anullar"
 
@@ -2883,29 +2883,29 @@ msgid "Not set up"
 msgstr "Pas configurat"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:207
+#: panels/network/cc-wifi-connection-row.c:208
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID : %s)"
 
-#: panels/network/cc-wifi-connection-row.c:262
+#: panels/network/cc-wifi-connection-row.c:264
 msgid "Insecure network (WEP)"
 msgstr "Ret pas segur (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:267
+#: panels/network/cc-wifi-connection-row.c:269
 msgid "Secure network (WPA)"
 msgstr "Ret segur (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:272
+#: panels/network/cc-wifi-connection-row.c:274
 msgid "Secure network (WPA2)"
 msgstr "Ret segur (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network (WPA3)"
 msgstr "Ret segur (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:284
 msgid "Secure network"
 msgstr "Ret segur"
 
@@ -7746,7 +7746,7 @@ msgstr "Connectat"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "Activat"
 
@@ -8456,63 +8456,63 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "Desverrolhar la carta SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "Desverrolhar"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Picatz lo còdi PIN per la carta SIM %d"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
 msgstr "Picatz lo còdi PIN per desverrolhar la carta SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Picatz lo còdi PUK per la carta SIM %d"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
 msgstr "Picatz lo còdi PUK per desverrolhar la carta SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
 msgstr[0] "Marrit senhal picat. Vos demòra %1$u ensag"
 msgstr[1] "Marrit senhal picat. Vos demòran %1$u ensages"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
 msgstr[0] "Vos demòra %u ensag"
 msgstr[1] "Vos demòran %u ensages"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "Marrit senhal picat."
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
 msgstr "Lo còdi PIM deu èsser un nombre de 8 chifras"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "Picatz lo novèl còdi PIN"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
 msgstr "Lo còdi PIM deu èsser un nombre de 4 a 8 chifras"
 
-#: panels/wwan/cc-wwan-device-page.c:270
+#: panels/wwan/cc-wwan-device-page.c:317
 msgid "Unlocking..."
 msgstr "Desverrolhar..."
 
