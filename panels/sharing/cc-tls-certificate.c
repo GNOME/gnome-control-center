@@ -28,7 +28,7 @@
 #include "cc-tls-certificate.h"
 
 #define DEFAULT_KEY_SIZE   4096
-#define DEFAULT_EXPIRATION (60L*60L*24L*5L*365L)
+#define DEFAULT_EXPIRATION (60L*60L*24L*2L*365L)
 
 static void
 _gnutls_datum_clear (gnutls_datum_t *datum)
