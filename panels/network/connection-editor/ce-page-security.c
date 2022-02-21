@@ -460,10 +460,25 @@ ce_page_security_validate (CEPage        *page,
                         }
                 }
         } else {
-                /* No security, unencrypted */
-                nm_connection_remove_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY);
-                nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
-                valid = TRUE;
+
+    		if (gtk_combo_box_get_active ((CE_PAGE_SECURITY (self))->security_combo) == 0) {
+    			/* No security, unencrypted */
+    			nm_connection_remove_setting (connection, NM_TYPE_SETTING_WIRELESS_SECURITY);
+    			nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
+    			valid = TRUE;
+    		} else {
+    			/* owe case:
+    			 * fill the connection manually until libnma implements OWE wireless security
+    			 */
+    			NMSetting *sws;
+
+    			sws = nm_setting_wireless_security_new ();
+    			g_object_set (sws, NM_SETTING_WIRELESS_SECURITY_KEY_MGMT, "owe", NULL);
+    			nm_connection_add_setting (connection, sws);
+    			nm_connection_remove_setting (connection, NM_TYPE_SETTING_802_1X);
+    			valid = TRUE;
+    		}
+
         }
 
         return valid;
