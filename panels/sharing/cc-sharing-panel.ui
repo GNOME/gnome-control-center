@@ -379,6 +379,29 @@
           <object class="AdwStatusPage">
             <property name="title" translatable="yes">Encryption Fingerprint</property>
             <property name="description" translatable="yes">The encryption fingerprint can be seen in connecting clients and should be identical</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="halign">center</property>
+                <style>
+                  <class name="tls-cert-verification" />
+                </style>
+                <child>
+                  <object class="GtkLabel" id="remote_desktop_fingerprint_left">
+                    <style>
+                      <class name="tls-cert-fingerprint" />
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="remote_desktop_fingerprint_right">
+                    <style>
+                      <class name="tls-cert-fingerprint" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </child>
       </object>

@@ -84,6 +84,7 @@ panels_libs += static_library(
     common_deps,
     libsecret_dep,
     gnutls_dep,
+    gcr_dep,
   ],
   c_args: cflags
 )
