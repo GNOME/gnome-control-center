@@ -39,7 +39,6 @@ sources = files(
 )
 
 resource_data = files(
-  'authentication-dialog.ui',
   'new-printer-dialog.ui',
   'ppd-selection-dialog.ui',
   'pp-details-dialog.ui',
