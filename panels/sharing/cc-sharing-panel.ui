@@ -298,7 +298,21 @@
               <object class="AdwActionRow">
                 <property name="title" translatable="yes">Device Name</property>
                 <child type="suffix">
-                  <object class="GtkLabel" id="remote_desktop_device_name_label"/>
+                  <object class="GtkBox">
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkLabel" id="remote_desktop_device_name_label"/>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="remote_desktop_device_name_copy">
+                        <property name="valign">center</property>
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
                 </child>
               </object>
             </child>
@@ -306,7 +320,21 @@
               <object class="AdwActionRow">
                 <property name="title" translatable="yes">Remote Desktop Address</property>
                 <child type="suffix">
-                  <object class="GtkLabel" id="remote_desktop_address_label"/>
+                  <object class="GtkBox">
+                    <property name="spacing">10</property>
+                    <child>
+                      <object class="GtkLabel" id="remote_desktop_address_label"/>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="remote_desktop_address_copy">
+                        <property name="valign">center</property>
+                        <property name="icon-name">edit-copy-symbolic</property>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                      </object>
+                    </child>
+                  </object>
                 </child>
               </object>
             </child>
@@ -327,6 +355,15 @@
                     <property name="valign">center</property>
                   </object>
                 </child>
+                <child>
+                  <object class="GtkButton" id="remote_desktop_username_copy">
+                    <property name="valign">center</property>
+                    <property name="icon-name">edit-copy-symbolic</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
+                  </object>
+                </child>
               </object>
             </child>
 
@@ -338,6 +375,15 @@
                     <property name="hexpand">True</property>
                     <property name="show-peek-icon">True</property>
                     <property name="valign">center</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="remote_desktop_password_copy">
+                    <property name="valign">center</property>
+                    <property name="icon-name">edit-copy-symbolic</property>
+                    <style>
+                      <class name="flat"/>
+                    </style>
                   </object>
                 </child>
               </object>
