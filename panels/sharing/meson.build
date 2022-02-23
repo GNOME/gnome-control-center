@@ -42,6 +42,7 @@ sources = files(
   'cc-sharing-networks.c',
   'cc-gnome-remote-desktop.c',
   'cc-tls-certificate.c',
+  'cc-systemd-service.c',
   'file-share-properties.c',
 )
 

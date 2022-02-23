@@ -30,6 +30,7 @@
 #include "cc-sharing-networks.h"
 #include "cc-gnome-remote-desktop.h"
 #include "cc-tls-certificate.h"
+#include "cc-systemd-service.h"
 #include "org.gnome.SettingsDaemon.Sharing.h"
 
 #ifdef GDK_WINDOWING_WAYLAND
@@ -52,7 +53,7 @@ static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or
 
 #define REMOTE_DESKTOP_STORE_CREDENTIALS_TIMEOUT_S 1
 
-#define REMOTE_DESKTOP_SERVICE_NAME "gnome-remote-desktop"
+#define REMOTE_DESKTOP_SERVICE "gnome-remote-desktop.service"
 
 struct _CcSharingPanel
 {
@@ -1034,39 +1035,7 @@ remote_desktop_credentials_changed (CcSharingPanel *self)
 static gboolean
 is_remote_desktop_enabled (CcSharingPanel *self)
 {
-  g_autoptr(GVariant) networks = NULL;
-  g_autoptr(GError) error = NULL;
-  GVariantIter iter;
-  const char *current_network;
-  char *uuid = NULL;
-
-  if (!gsd_sharing_call_list_networks_sync (GSD_SHARING (self->sharing_proxy),
-                                            REMOTE_DESKTOP_SERVICE_NAME,
-                                            &networks, NULL, &error))
-    {
-      g_warning ("Failed to retrieve network list: %s", error->message);
-      return FALSE;
-    }
-
-  if (g_variant_n_children (networks) == 0)
-    return FALSE;
-
-  current_network =
-    gsd_sharing_get_current_network (GSD_SHARING (self->sharing_proxy));
-  if (!current_network)
-    return FALSE;
-
-  g_variant_iter_init (&iter, networks);
-  while (g_variant_iter_next (&iter, "(sss)", &uuid, NULL, NULL))
-    {
-      if (g_strcmp0 (uuid, current_network) == 0)
-        {
-          g_free (uuid);
-          return TRUE;
-        }
-      g_free (uuid);
-    }
-  return FALSE;
+  return cc_is_service_active (REMOTE_DESKTOP_SERVICE, G_BUS_TYPE_SESSION);
 }
 
 static void
@@ -1077,10 +1046,9 @@ enable_gnome_remote_desktop_service (CcSharingPanel *self)
   if (is_remote_desktop_enabled (self))
     return;
 
-  if (!gsd_sharing_call_enable_service_sync (GSD_SHARING (self->sharing_proxy),
-                                             REMOTE_DESKTOP_SERVICE_NAME,
-                                             NULL,
-                                             &error))
+  if (!cc_enable_service (REMOTE_DESKTOP_SERVICE,
+                          G_BUS_TYPE_SESSION,
+                          &error))
     g_warning ("Failed to enable remote desktop service: %s", error->message);
 }
 
@@ -1088,24 +1056,11 @@ static void
 disable_gnome_remote_desktop_service (CcSharingPanel *self)
 {
   g_autoptr(GError) error = NULL;
-  const char *current_network;
-  GCancellable *cancellable;
 
-  if (!is_remote_desktop_enabled (self))
-    return;
-
-  cancellable = cc_panel_get_cancellable (CC_PANEL (self));
-  g_cancellable_cancel (cancellable);
-  g_cancellable_reset (cancellable);
-
-  current_network =
-    gsd_sharing_get_current_network (GSD_SHARING (self->sharing_proxy));
-  if (!gsd_sharing_call_disable_service_sync (GSD_SHARING (self->sharing_proxy),
-                                              REMOTE_DESKTOP_SERVICE_NAME,
-                                              current_network,
-                                              NULL,
-                                              &error))
-    g_warning ("Failed to disable remote desktop service: %s", error->message);
+  if (!cc_disable_service (REMOTE_DESKTOP_SERVICE,
+                           G_BUS_TYPE_SESSION,
+                           &error))
+    g_warning ("Failed to enable remote desktop service: %s", error->message);
 }
 
 static void
