@@ -21,6 +21,9 @@
 
 #include <gio/gio.h>
 
+gboolean cc_is_service_active (const char  *service,
+                               GBusType     bus_type);
+
 gboolean cc_enable_service (const char  *service,
                             GBusType     bus_type,
                             GError     **error);

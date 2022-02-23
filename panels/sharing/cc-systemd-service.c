@@ -23,6 +23,102 @@
 #include "cc-systemd-service.h"
 
 gboolean
+cc_is_service_active (const char  *service,
+                      GBusType     bus_type)
+{
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GVariant) unit_path_variant = NULL;
+  g_autofree char *unit_path = NULL;
+  g_autoptr(GVariant) active_state_prop = NULL;
+  g_autoptr(GVariant) active_state_variant = NULL;
+  const char *active_state = NULL;
+  g_autoptr(GVariant) unit_state_prop = NULL;
+  g_autoptr(GVariant) unit_state_variant = NULL;
+  const char *unit_state = NULL;
+
+  connection = g_bus_get_sync (bus_type, NULL, &error);
+  if (!connection)
+    {
+      g_warning ("Failed connecting to D-Bus system bus: %s", error->message);
+      return FALSE;
+    }
+
+  unit_path_variant =
+    g_dbus_connection_call_sync (connection,
+                                 "org.freedesktop.systemd1",
+                                 "/org/freedesktop/systemd1",
+                                 "org.freedesktop.systemd1.Manager",
+                                 "GetUnit",
+                                 g_variant_new ("(s)",
+                                                service),
+                                 (GVariantType *) "(o)",
+                                 G_DBUS_CALL_FLAGS_NONE,
+                                 -1,
+                                 NULL,
+                                 NULL);
+
+  if (!unit_path_variant)
+    return FALSE;
+  g_variant_get_child (unit_path_variant, 0, "o", &unit_path);
+
+  active_state_prop =
+    g_dbus_connection_call_sync (connection,
+                                 "org.freedesktop.systemd1",
+                                 unit_path,
+                                 "org.freedesktop.DBus.Properties",
+                                 "Get",
+                                 g_variant_new ("(ss)",
+                                                "org.freedesktop.systemd1.Unit",
+                                                "ActiveState"),
+                                 (GVariantType *) "(v)",
+                                 G_DBUS_CALL_FLAGS_NONE,
+                                 -1,
+                                 NULL,
+                                 &error);
+
+  if (!active_state_prop)
+    {
+      g_warning ("Failed to get service active state: %s", error->message);
+      return FALSE;
+    }
+  g_variant_get_child (active_state_prop, 0, "v", &active_state_variant);
+  active_state = g_variant_get_string (active_state_variant, NULL);
+
+  if (g_strcmp0 (active_state, "active") != 0 &&
+      g_strcmp0 (active_state, "activating") != 0)
+    return FALSE;
+
+  unit_state_prop =
+    g_dbus_connection_call_sync (connection,
+                                 "org.freedesktop.systemd1",
+                                 unit_path,
+                                 "org.freedesktop.DBus.Properties",
+                                 "Get",
+                                 g_variant_new ("(ss)",
+                                                "org.freedesktop.systemd1.Unit",
+                                                "UnitFileState"),
+                                 (GVariantType *) "(v)",
+                                 G_DBUS_CALL_FLAGS_NONE,
+                                 -1,
+                                 NULL,
+                                 &error);
+
+  if (!unit_state_prop)
+    {
+      g_warning ("Failed to get service active state: %s", error->message);
+      return FALSE;
+    }
+  g_variant_get_child (unit_state_prop, 0, "v", &unit_state_variant);
+  unit_state = g_variant_get_string (unit_state_variant, NULL);
+
+  if (g_strcmp0 (unit_state, "enabled") != 0)
+    return FALSE;
+
+  return TRUE;
+}
+
+gboolean
 cc_enable_service (const char  *service,
                    GBusType     bus_type,
                    GError     **error)
