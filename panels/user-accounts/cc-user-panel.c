@@ -197,6 +197,29 @@ get_real_or_user_name (ActUser *user)
   return name;
 }
 
+static void
+setup_avatar_for_user (AdwAvatar *avatar, ActUser *user)
+{
+        const gchar *avatar_file;
+
+        adw_avatar_set_custom_image (avatar, NULL);
+        adw_avatar_set_text (avatar, get_real_or_user_name (user));
+
+        avatar_file = act_user_get_icon_file (user);
+        if (avatar_file) {
+                g_autoptr(GdkPixbuf) pixbuf = NULL;
+
+                pixbuf = gdk_pixbuf_new_from_file_at_size (avatar_file,
+                                                           adw_avatar_get_size (avatar),
+                                                           adw_avatar_get_size (avatar),
+                                                           NULL);
+                if (pixbuf) {
+                        adw_avatar_set_custom_image (avatar,
+                                                     GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf)));
+                }
+        }
+}
+
 static GtkWidget *
 create_user_row (gpointer item,
                  gpointer user_data)
@@ -209,7 +232,8 @@ create_user_row (gpointer item,
         gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE); 
         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
                                        get_real_or_user_name (user));
-        user_image = adw_avatar_new (48, get_real_or_user_name (user), TRUE);
+        user_image = adw_avatar_new (48, NULL, TRUE);
+        setup_avatar_for_user (ADW_AVATAR (user_image), user);
         adw_action_row_add_prefix (ADW_ACTION_ROW (row), user_image);
 
         return row;
@@ -770,7 +794,6 @@ show_user (ActUser *user, CcUserPanel *self)
 {
         g_autofree gchar *lang = NULL;
         g_autofree gchar *name = NULL;
-        const gchar *avatar_file;
         gboolean show, enable;
         ActUser *current;
 #ifdef HAVE_MALCONTENT
@@ -779,22 +802,8 @@ show_user (ActUser *user, CcUserPanel *self)
 
         self->selected_user = user;
 
-        adw_avatar_set_custom_image (self->user_avatar, NULL);
-        adw_avatar_set_text (self->user_avatar, get_real_or_user_name (user));
+        setup_avatar_for_user (self->user_avatar, user);
         cc_avatar_chooser_set_user (self->avatar_chooser, user);
-        avatar_file = act_user_get_icon_file (user);
-        if (avatar_file) {
-                g_autoptr(GdkPixbuf) pixbuf = NULL;
-
-                pixbuf = gdk_pixbuf_new_from_file_at_size (avatar_file,
-                                                           adw_avatar_get_size (self->user_avatar),
-                                                           adw_avatar_get_size (self->user_avatar),
-                                                           NULL);
-                if (pixbuf) {
-                        adw_avatar_set_custom_image (self->user_avatar,
-                                                     GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf)));
-                }
-        }
 
         gtk_label_set_label (self->full_name_label, get_real_or_user_name (user));
         gtk_editable_set_text (GTK_EDITABLE (self->full_name_entry), gtk_label_get_label (self->full_name_label));
