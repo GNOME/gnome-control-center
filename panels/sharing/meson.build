@@ -93,12 +93,15 @@ name = 'cc-remote-login-helper'
 
 deps = [
   gio_dep,
-  glib_dep
+  glib_dep,
 ]
 
 executable(
   name,
-  name + '.c',
+  sources: [
+    name + '.c',
+    'cc-systemd-service.c',
+  ],
   include_directories: top_inc,
   dependencies: deps,
   c_args: cflags,
