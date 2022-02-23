@@ -19,12 +19,13 @@
 
 #pragma once
 
+#include <adwaita.h>
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_SHARING_NETWORKS (cc_sharing_networks_get_type ())
-G_DECLARE_FINAL_TYPE (CcSharingNetworks, cc_sharing_networks, CC, SHARING_NETWORKS, GtkBox)
+G_DECLARE_FINAL_TYPE (CcSharingNetworks, cc_sharing_networks, CC, SHARING_NETWORKS, AdwPreferencesGroup)
 
 typedef enum {
   CC_SHARING_STATUS_UNSET,
