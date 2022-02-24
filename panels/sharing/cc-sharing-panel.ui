@@ -67,93 +67,33 @@
   </template>
   <object class="GtkDialog" id="personal_file_sharing_dialog">
     <property name="title" translatable="yes">File Sharing</property>
-    <property name="resizable">False</property>
-    <property name="use_header_bar">1</property>
+    <property name="resizable">True</property>
     <property name="modal">True</property>
+    <property name="default-width">558</property>
+    <property name="default-height">378</property>
     <child>
-      <object class="GtkBox">
-        <property name="margin-top">12</property>
-        <property name="margin-bottom">12</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="spacing">12</property>
-        <property name="orientation">vertical</property>
+      <object class="AdwPreferencesPage" id="personal_file_sharing_page">
         <child>
-          <object class="GtkGrid" id="personal_file_sharing_grid">
-            <property name="margin_start">12</property>
-            <property name="margin_end">6</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
-            <property name="row_spacing">12</property>
-            <property name="column_spacing">6</property>
+          <object class="AdwPreferencesGroup" id="personal_file_sharing_group">
             <child>
-              <object class="GtkLabel" id="personal_file_sharing_label">
-                <property name="xalign">0</property>
-                <property name="label">File Sharing allows you to share your Public folder with others on your current network using: &lt;a href="dav://%s"&gt;dav://%s&lt;/a&gt;</property>
-                <property name="use_markup">True</property>
-                <property name="wrap">True</property>
-                <property name="max-width-chars">36</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">0</property>
-                  <property name="column-span">2</property>
-                </layout>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">_Require Password</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">personal_file_sharing_require_password_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="personal_file_sharing_require_password_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
               </object>
             </child>
             <child>
-              <object class="GtkGrid" id="require_password_grid">
-                <property name="row_spacing">12</property>
-                <property name="column_spacing">6</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">2</property>
-                  <property name="column-span">2</property>
-                </layout>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Password</property>
+                <property name="sensitive" bind-source="personal_file_sharing_require_password_switch" bind-flags="sync-create" bind-property="active"/>
                 <child>
-                  <object class="GtkLabel" id="label17">
-                    <property name="halign">start</property>
-                    <property name="label" translatable="yes">_Require Password</property>
-                    <property name="use_markup">True</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">personal_file_sharing_require_password_switch</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">0</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel" id="personal_file_sharing_password_label">
-                    <property name="halign">start</property>
-                    <property name="hexpand">True</property>
-                    <property name="label" translatable="yes">_Password</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">personal_file_sharing_password_entry</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">1</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSwitch" id="personal_file_sharing_require_password_switch">
-                    <property name="halign">end</property>
-                    <layout>
-                      <property name="column">1</property>
-                      <property name="row">0</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkEntry" id="personal_file_sharing_password_entry">
-                    <property name="visibility">False</property>
-                    <property name="invisible_char">●</property>
-                    <property name="invisible_char_set">True</property>
-                    <property name="input_purpose">password</property>
-                    <layout>
-                      <property name="column">1</property>
-                      <property name="row">1</property>
-                    </layout>
+                  <object class="GtkPasswordEntry" id="personal_file_sharing_password_entry">
+                    <property name="valign">center</property>
                   </object>
                 </child>
               </object>
@@ -170,49 +110,22 @@
   </object>
   <object class="GtkDialog" id="remote_login_dialog">
     <property name="title" translatable="yes">Remote Login</property>
-    <property name="resizable">False</property>
+    <property name="resizable">True</property>
     <property name="use_header_bar">1</property>
     <property name="modal">True</property>
+    <property name="default-width">558</property>
+    <property name="default-height">222</property>
     <child>
-      <object class="GtkBox">
-        <property name="margin-top">12</property>
-        <property name="margin-bottom">12</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="spacing">12</property>
-        <property name="orientation">vertical</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="GtkLabel" id="remote_login_label">
-            <property name="xalign">0</property>
-            <property name="label">When remote login is enabled, remote users can connect using the Secure Shell command:
-&lt;a href="ssh %s"&gt;ssh %s&lt;/a&gt;</property>
-            <property name="use_markup">True</property>
-            <property name="wrap">True</property>
-            <property name="max-width-chars">36</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <style>
-              <class name="frame"/>
-              <class name="view"/>
-            </style>
+          <object class="AdwPreferencesGroup" id="remote_login_group">
             <child>
-              <object class="GtkBox">
-                <property name="margin-top">12</property>
-                <property name="margin-bottom">12</property>
-                <property name="margin-start">12</property>
-                <property name="margin-end">12</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="label" translatable="yes">Remote Login</property>
-                    <property name="hexpand">True</property>
-                    <property name="xalign">0</property>
-                  </object>
-                </child>
-                <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Remote Login</property>
+                <property name="activatable-widget">remote_login_switch</property>
+                <child type="suffix">
                   <object class="GtkSwitch" id="remote_login_switch">
-                    <property name="halign">end</property>
+                    <property name="valign">center</property>
                   </object>
                 </child>
               </object>
@@ -221,144 +134,59 @@
         </child>
       </object>
     </child>
-
   </object>
   <object class="GtkDialog" id="screen_sharing_dialog">
     <property name="title" translatable="yes">Screen Sharing</property>
-    <property name="resizable">False</property>
-    <property name="use_header_bar">1</property>
+    <property name="resizable">True</property>
     <property name="modal">True</property>
+    <property name="default-width">558</property>
+    <property name="default-height">498</property>
     <child>
-      <object class="GtkBox">
-        <property name="margin-top">12</property>
-        <property name="margin-bottom">12</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="orientation">vertical</property>
+      <object class="AdwPreferencesPage" id="screen_sharing_page">
         <child>
-          <object class="GtkBox" id="box8">
-            <property name="orientation">vertical</property>
+          <object class="AdwPreferencesGroup" id="screen_sharing_group">
             <child>
-              <object class="GtkGrid" id="screen_sharing_grid">
-                <property name="margin_start">12</property>
-                <property name="margin_end">6</property>
-                <property name="margin_bottom">12</property>
-                <property name="row_spacing">12</property>
-                <property name="column_spacing">6</property>
-                <child>
-                  <object class="GtkLabel" id="screen_sharing_label">
-                    <property name="xalign">0</property>
-                    <property name="label">Screen sharing allows remote users to view or control your screen by connecting to: &lt;a href="vnc://%s"&gt;vnc://%s&lt;/a&gt;</property>
-                    <property name="use_markup">True</property>
-                    <property name="wrap">True</property>
-                    <property name="max-width-chars">36</property>
-                    <property name="margin_bottom">6</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">0</property>
-                      <property name="column-span">2</property>
-                    </layout>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">_Allow connections to control the screen</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">remote_control_switch</property>
+                <child type="suffix">
+                  <object class="GtkSwitch" id="remote_control_switch">
+                    <property name="valign">center</property>
                   </object>
                 </child>
-                <child>
-                  <object class="GtkBox" id="remote_control_box">
-                    <property name="orientation">vertical</property>
-                    <property name="spacing">12</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">2</property>
-                      <property name="column-span">2</property>
-                    </layout>
-                    <child>
-                      <object class="GtkCheckButton" id="remote_control_checkbutton">
-                        <property name="use_underline">True</property>
-                        <property name="label" translatable="yes">_Allow connections to control the screen</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkGrid" id="remote_control_grid">
-                        <property name="row_spacing">6</property>
-                        <child>
-                          <object class="GtkGrid" id="password_grid">
-                            <property name="row_spacing">6</property>
-                            <property name="column_spacing">6</property>
-                            <layout>
-                              <property name="column">0</property>
-                              <property name="row">3</property>
-                            </layout>
-                            <child>
-                              <object class="GtkLabel" id="remote_control_password_label">
-                                <property name="halign">start</property>
-                                <property name="margin_start">12</property>
-                                <property name="label" translatable="yes">_Password:</property>
-                                <property name="use_underline">True</property>
-                                <property name="mnemonic_widget">remote_control_password_entry</property>
-                                <layout>
-                                  <property name="column">0</property>
-                                  <property name="row">0</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkEntry" id="remote_control_password_entry">
-                                <property name="hexpand">True</property>
-                                <property name="visibility">False</property>
-                                <property name="invisible_char">●</property>
-                                <property name="input_purpose">password</property>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">0</property>
-                                </layout>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkCheckButton" id="show_password_checkbutton">
-                                <property name="label" translatable="yes">_Show Password</property>
-                                <property name="use_underline">True</property>
-                                <layout>
-                                  <property name="column">1</property>
-                                  <property name="row">1</property>
-                                </layout>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="label2">
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Access Options</property>
-                            <layout>
-                              <property name="column">0</property>
-                              <property name="row">0</property>
-                            </layout>
-                            <attributes>
-                              <attribute name="weight" value="bold"/>
-                            </attributes>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="approve_connections_radiobutton">
-                            <property name="label" translatable="yes">_New connections must ask for access</property>
-                            <property name="group">require_password_radiobutton</property>
-                            <property name="use_underline">True</property>
-                            <layout>
-                              <property name="column">0</property>
-                              <property name="row">1</property>
-                            </layout>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkCheckButton" id="require_password_radiobutton">
-                            <property name="label" translatable="yes">_Require a password</property>
-                            <property name="use_underline">True</property>
-                            <layout>
-                              <property name="column">0</property>
-                              <property name="row">2</property>
-                            </layout>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Access Options</property>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">_New connections must ask for access</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">approve_connections_radiobutton</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="approve_connections_radiobutton">
+                    <property name="group">require_password_radiobutton</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">_Require a password</property>
+                <property name="use-underline">True</property>
+                <property name="activatable-widget">require_password_radiobutton</property>
+                <child type="prefix">
+                  <object class="GtkCheckButton" id="require_password_radiobutton"/>
+                </child>
+                <child type="suffix">
+                  <object class="GtkPasswordEntry" id="remote_control_password_entry">
+                    <property name="valign">center</property>
+                    <property name="show-peek-icon">True</property>
+                    <property name="sensitive" bind-source="require_password_radiobutton" bind-flags="sync-create" bind-property="active"/>
                   </object>
                 </child>
               </object>
@@ -375,63 +203,29 @@
   </object>
   <object class="GtkDialog" id="media_sharing_dialog">
     <property name="title" translatable="yes">Media Sharing</property>
-    <property name="resizable">False</property>
+    <property name="resizable">True</property>
     <property name="modal">True</property>
+    <property name="default-width">558</property>
+    <property name="default-height">528</property>
     <child>
-      <object class="GtkBox">
-        <property name="margin-top">12</property>
-        <property name="margin-bottom">12</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="spacing">12</property>
-        <property name="orientation">vertical</property>
+      <object class="AdwPreferencesPage" id="shared_folders_page">
         <child>
-          <object class="GtkGrid" id="shared_folders_grid">
-            <property name="margin_start">12</property>
-            <property name="margin_end">6</property>
-            <property name="margin_top">12</property>
-            <property name="margin_bottom">12</property>
-            <property name="row_spacing">12</property>
-            <property name="column_spacing">6</property>
-            <child>
-              <object class="GtkLabel" id="label13">
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Share music, photos and videos over the network.</property>
-                <property name="max-width-chars">36</property>
-                <property name="wrap">True</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">0</property>
-                  <property name="column-span">2</property>
-                </layout>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label15">
-                <property name="xalign">0</property>
-                <property name="label" translatable="yes">Folders</property>
-                <property name="mnemonic_widget">shared_folders_listbox</property>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">1</property>
-                  <property name="column-span">2</property>
-                </layout>
-                <attributes>
-                  <attribute name="weight" value="bold"/>
-                </attributes>
-              </object>
-            </child>
+          <object class="AdwPreferencesGroup">
+            <property name="description" translatable="yes">Share music, photos and videos over the network.</property>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup" id="shared_folders_group">
+            <property name="title" translatable="yes">Folders</property>
             <child>
               <object class="GtkListBox" id="shared_folders_listbox">
                 <property name="selection-mode">none</property>
+                <accessibility>
+                  <relation name="labelled-by">shared_folders_group</relation>
+                </accessibility>
                 <style>
-                  <class name="boxed-list" />
+                  <class name="boxed-list"/>
                 </style>
-                <layout>
-                  <property name="column">0</property>
-                  <property name="row">3</property>
-                  <property name="column-span">2</property>
-                </layout>
               </object>
             </child>
           </object>
