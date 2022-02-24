@@ -146,7 +146,7 @@ polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
 # https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/491
 polkit_files = [ 'gettext/its/polkit.its', 'gettext/its/polkit.loc' ]
 foreach polkit_file: polkit_files
-  r = run_command('build-aux/meson/find_xdg_file.py', polkit_file)
+  r = run_command('build-aux/meson/find_xdg_file.py', polkit_file, check: true)
   assert(r.returncode() == 0, 'ITS support missing from polkit, please upgrade or contact your distribution')
 endforeach
 
