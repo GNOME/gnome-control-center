@@ -33,6 +33,7 @@ struct _CcDisplayConfigManagerDBus
   GVariant *current_state;
 
   gboolean apply_allowed;
+  gboolean night_light_supported;
 };
 
 G_DEFINE_TYPE (CcDisplayConfigManagerDBus,
@@ -169,6 +170,12 @@ bus_gotten (GObject      *object,
   else
     g_warning ("Missing property 'ApplyMonitorsConfigAllowed' on DisplayConfig API");
 
+  variant = g_dbus_proxy_get_cached_property (proxy, "NightLightSupported");
+  if (variant)
+    self->night_light_supported = g_variant_get_boolean (variant);
+  else
+    g_warning ("Missing property 'NightLightSupported' on DisplayConfig API");
+
   get_current_state (self);
 }
 
@@ -176,6 +183,7 @@ static void
 cc_display_config_manager_dbus_init (CcDisplayConfigManagerDBus *self)
 {
   self->apply_allowed = TRUE;
+  self->night_light_supported = TRUE;
   self->cancellable = g_cancellable_new ();
   g_bus_get (G_BUS_TYPE_SESSION, self->cancellable, bus_gotten, self);
 }
@@ -205,6 +213,14 @@ cc_display_config_manager_dbus_get_apply_allowed (CcDisplayConfigManager *pself)
   return self->apply_allowed;
 }
 
+static gboolean
+cc_display_config_manager_dbus_get_night_light_supported (CcDisplayConfigManager *pself)
+{
+  CcDisplayConfigManagerDBus *self = CC_DISPLAY_CONFIG_MANAGER_DBUS (pself);
+
+  return self->night_light_supported;
+}
+
 static void
 cc_display_config_manager_dbus_class_init (CcDisplayConfigManagerDBusClass *klass)
 {
@@ -215,6 +231,7 @@ cc_display_config_manager_dbus_class_init (CcDisplayConfigManagerDBusClass *klas
 
   parent_class->get_current = cc_display_config_manager_dbus_get_current;
   parent_class->get_apply_allowed = cc_display_config_manager_dbus_get_apply_allowed;
+  parent_class->get_night_light_supported = cc_display_config_manager_dbus_get_night_light_supported;
 }
 
 CcDisplayConfigManager *

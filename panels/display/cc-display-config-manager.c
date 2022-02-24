@@ -65,3 +65,9 @@ cc_display_config_manager_get_apply_allowed (CcDisplayConfigManager *self)
 {
   return CC_DISPLAY_CONFIG_MANAGER_GET_CLASS (self)->get_apply_allowed (self);
 }
+
+gboolean
+cc_display_config_manager_get_night_light_supported (CcDisplayConfigManager *self)
+{
+  return CC_DISPLAY_CONFIG_MANAGER_GET_CLASS (self)->get_night_light_supported (self);
+}
