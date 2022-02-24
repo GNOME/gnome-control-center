@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-09 14:06+0000\n"
-"PO-Revision-Date: 2022-02-10 13:47+0100\n"
+"POT-Creation-Date: 2022-02-20 19:26+0000\n"
+"PO-Revision-Date: 2022-02-24 12:38+0100\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -48,8 +48,8 @@ msgid "Session Bus"
 msgstr "Bus de sesión"
 
 #: panels/applications/cc-applications-panel.c:809
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:333
-#: panels/thunderbolt/cc-bolt-panel.ui:377
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:266
+#: panels/thunderbolt/cc-bolt-panel.ui:310
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -128,7 +128,7 @@ msgstr "%s de espacio de disco usado"
 #: panels/applications/cc-applications-panel.c:1387
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
-#: panels/notifications/cc-notifications-panel.ui:34
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Applications"
 msgstr "Aplicaciones"
 
@@ -175,8 +175,8 @@ msgstr "Recibir búsquedas del sistema y enviar os resultados."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:761
-#: panels/user-accounts/cc-user-panel.c:865
+#: panels/user-accounts/cc-user-panel.c:765
+#: panels/user-accounts/cc-user-panel.c:870
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -339,11 +339,11 @@ msgstr "Controlar la configuración y los permisos de varias aplicaciones"
 msgid "application;flatpak;permission;setting;"
 msgstr "aplicación;flatpak;permisos;configuración;"
 
-#: panels/background/cc-background-chooser.c:309
+#: panels/background/cc-background-chooser.c:307
 msgid "Select a picture"
 msgstr "Seleccionar una imagen"
 
-#: panels/background/cc-background-chooser.c:312
+#: panels/background/cc-background-chooser.c:310
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:31
@@ -359,14 +359,14 @@ msgstr "Seleccionar una imagen"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:133
+#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
 #: panels/user-accounts/cc-fingerprint-dialog.ui:30
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:551
-#: panels/user-accounts/cc-user-panel.c:569
+#: panels/user-accounts/cc-user-panel.c:555
+#: panels/user-accounts/cc-user-panel.c:573
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
@@ -374,7 +374,7 @@ msgstr "Seleccionar una imagen"
 msgid "_Cancel"
 msgstr "_Cancelar"
 
-#: panels/background/cc-background-chooser.c:313
+#: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
 #: panels/sharing/cc-sharing-panel.c:433
@@ -397,7 +397,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "Sin fondo de escritorio"
 
-#: panels/background/cc-background-panel.c:177
+#: panels/background/cc-background-panel.c:227
 msgid "Current background"
 msgstr "Fondo actual"
 
@@ -758,7 +758,7 @@ msgstr "El instrumento de medida no soporta perfilado de impresoras."
 msgid "The device type is not currently supported."
 msgstr "El tipo de dispositivo actualmente no está soportado."
 
-#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:41
+#: panels/color/cc-color-panel.ui:4 panels/wacom/calibrator/calibrator.ui:40
 msgid "Screen Calibration"
 msgstr "Calibración de la pantalla"
 
@@ -912,7 +912,7 @@ msgstr ""
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:434
-#: panels/diagnostics/cc-diagnostics-panel.c:139
+#: panels/diagnostics/cc-diagnostics-panel.c:137
 msgid "Learn more"
 msgstr "Aprender más"
 
@@ -1493,7 +1493,7 @@ msgid "default;application;preferred;media;"
 msgstr "predeterminado;aplicación;preferida;medios;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#: panels/diagnostics/cc-diagnostics-panel.c:139
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -1502,11 +1502,11 @@ msgstr ""
 "Enviar informes de problemas técnicos ayuda a mejorar %s. Los informes se "
 "envían anónimamente y no contienen datos personales. %s"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:21
+#: panels/diagnostics/cc-diagnostics-panel.ui:8
 msgid "Problem Reporting"
 msgstr "Informar de un error"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:55
+#: panels/diagnostics/cc-diagnostics-panel.ui:11
 msgid "_Automatic Problem Reporting"
 msgstr "Informar de un problema _automáticamente"
 
@@ -1532,7 +1532,7 @@ msgstr ""
 "nombre;red;identidad;privacidad;"
 
 #: panels/display/cc-display-panel.c:512
-#: panels/notifications/cc-notifications-panel.c:202
+#: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
 #: panels/universal-access/cc-ua-panel.c:337
 #: panels/universal-access/cc-ua-panel.c:469
@@ -1543,7 +1543,7 @@ msgid "On"
 msgstr "Encendido"
 
 #: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
-#: panels/notifications/cc-notifications-panel.c:202
+#: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
 #: panels/universal-access/cc-ua-panel.c:337
 #: panels/universal-access/cc-ua-panel.c:469
@@ -1655,14 +1655,6 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "Escala"
 
-#: panels/display/cc-night-light-page.c:624
-msgid "More Warm"
-msgstr "Más cálido"
-
-#: panels/display/cc-night-light-page.c:636
-msgid "Less Warm"
-msgstr "Menos cálido"
-
 #. Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.ui:21
 msgid "Temporarily Disabled Until Tomorrow"
@@ -1733,7 +1725,7 @@ msgstr "PM"
 msgid "To"
 msgstr "Hasta"
 
-#: panels/display/cc-night-light-page.ui:302
+#: panels/display/cc-night-light-page.ui:316
 msgid "Color Temperature"
 msgstr "Temperatura del color"
 
@@ -1981,26 +1973,6 @@ msgctxt "keybinding"
 msgid "Search"
 msgstr "Buscar"
 
-#: panels/keyboard/01-screenshot.xml.in:2
-msgid "Screenshots"
-msgstr "Capturas de pantalla"
-
-#: panels/keyboard/01-screenshot.xml.in:5
-msgid "Show the screenshot UI"
-msgstr "Mostrar la IU de captura de pantalla"
-
-#: panels/keyboard/01-screenshot.xml.in:8
-msgid "Take a screenshot"
-msgstr "Capturar la pantalla"
-
-#: panels/keyboard/01-screenshot.xml.in:11
-msgid "Take a screenshot of a window"
-msgstr "Capturar una ventana"
-
-#: panels/keyboard/01-screenshot.xml.in:14
-msgid "Show the screen recording UI"
-msgstr "Mostrar la IU de grabación de pantalla"
-
 #: panels/keyboard/01-system.xml.in:2
 msgid "System"
 msgstr "Sistema"
@@ -2050,11 +2022,11 @@ msgstr "Reducir el tamaño del texto:"
 msgid "High contrast on or off"
 msgstr "Contraste alto activado o desactivado"
 
-#: panels/keyboard/cc-input-chooser.c:187
+#: panels/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "No se han encontrado fuentes de entrada"
 
-#: panels/keyboard/cc-input-chooser.c:933
+#: panels/keyboard/cc-input-chooser.c:931
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Otra"
@@ -2063,32 +2035,32 @@ msgstr "Otra"
 msgid "Add an Input Source"
 msgstr "Añadir una fuente de entrada"
 
-#: panels/keyboard/cc-input-chooser.ui:68
+#: panels/keyboard/cc-input-chooser.ui:81
 msgid "Input methods can’t be used on the login screen"
 msgstr ""
 "Los métodos de entrada no se pueden usar en la pantalla de inicio de sesión"
 
-#: panels/keyboard/cc-input-list-box.ui:23
+#: panels/keyboard/cc-input-list-box.ui:24
 msgid "No input source selected"
 msgstr "No se ha seleccionado ninguna fuente de entrada"
 
-#: panels/keyboard/cc-input-row.ui:67
-msgid "Move up"
+#: panels/keyboard/cc-input-row.ui:28 panels/search/cc-search-panel-row.ui:49
+msgid "Move Up"
 msgstr "Subir"
 
-#: panels/keyboard/cc-input-row.ui:81
-msgid "Move down"
+#: panels/keyboard/cc-input-row.ui:32 panels/search/cc-search-panel-row.ui:53
+msgid "Move Down"
 msgstr "Bajar"
 
-#: panels/keyboard/cc-input-row.ui:98
+#: panels/keyboard/cc-input-row.ui:38
 msgid "Preferences"
 msgstr "Preferencias"
 
-#: panels/keyboard/cc-input-row.ui:120
+#: panels/keyboard/cc-input-row.ui:45
 msgid "View Keyboard Layout"
 msgstr "Ver la distribución de teclado"
 
-#: panels/keyboard/cc-input-row.ui:139
+#: panels/keyboard/cc-input-row.ui:51
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:29
 msgid "Remove"
 msgstr "Quitar"
@@ -2099,12 +2071,12 @@ msgstr "Quitar"
 msgid "Custom Shortcuts"
 msgstr "Atajo personalizado"
 
-#: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.ui:172
+#: panels/keyboard/cc-keyboard-panel.c:64
+#: panels/keyboard/cc-keyboard-panel.ui:62
 msgid "Alternate Characters Key"
 msgstr "Tecla de caracteres alternativos"
 
-#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:65
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
@@ -2112,48 +2084,48 @@ msgstr ""
 "La tecla de caracteres alternativos se puede usar para introducir caracteres "
 "adicionales. A veces se muestran como una tercera opción en el teclado."
 
-#: panels/keyboard/cc-keyboard-panel.c:70
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:67
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Alt izquierdo"
 
-#: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:86
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Alt derecha"
 
-#: panels/keyboard/cc-keyboard-panel.c:72
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:69
+#: panels/keyboard/cc-keyboard-panel.c:87
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Súper izquierdo"
 
-#: panels/keyboard/cc-keyboard-panel.c:73
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:70
+#: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Súper derecho"
 
-#: panels/keyboard/cc-keyboard-panel.c:74
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:71
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Tecla de menú"
 
-#: panels/keyboard/cc-keyboard-panel.c:75
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Ctrl derecho"
 
-#: panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/cc-keyboard-panel.ui:191
+#: panels/keyboard/cc-keyboard-panel.c:80
+#: panels/keyboard/cc-keyboard-panel.ui:79
 msgid "Compose Key"
 msgstr "Tecla de composición"
 
-#: panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.c:81
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2165,22 +2137,22 @@ msgstr ""
 "ejemplo, la tecla de composición seguida de <b>C</b> y <b>o</b> escribirá "
 "<b>©</b>, <b>a</b> seguida <b>'</b> escribirá <b>á</b>."
 
-#: panels/keyboard/cc-keyboard-panel.c:94
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Bloq. Mayús."
 
-#: panels/keyboard/cc-keyboard-panel.c:95
+#: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Bloq. Despl."
 
-#: panels/keyboard/cc-keyboard-panel.c:96
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Impr. Pant."
 
-#: panels/keyboard/cc-keyboard-panel.c:232
+#: panels/keyboard/cc-keyboard-panel.c:217
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2189,42 +2161,42 @@ msgstr ""
 "Las fuentes de entrada se puede cambiar usando el atajo del teclado %s.\n"
 "Puede cambiar este atajo en la configuración del teclado"
 
-#: panels/keyboard/cc-keyboard-panel.ui:38
+#: panels/keyboard/cc-keyboard-panel.ui:17
 msgid "Input Sources"
 msgstr "Fuente de entrada"
 
-#: panels/keyboard/cc-keyboard-panel.ui:47
+#: panels/keyboard/cc-keyboard-panel.ui:18
 msgid "Includes keyboard layouts and input methods."
 msgstr "Incluye distribuciones del teclado y métodos de entrada."
 
-#: panels/keyboard/cc-keyboard-panel.ui:70
+#: panels/keyboard/cc-keyboard-panel.ui:28
 msgid "Input Source Switching"
 msgstr "Cambiar fuentes de entrada"
 
-#: panels/keyboard/cc-keyboard-panel.ui:106
+#: panels/keyboard/cc-keyboard-panel.ui:31
 msgid "Use the _same source for all windows"
 msgstr "Usar la _misma fuente para todas las ventanas"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:43
 msgid "Switch input sources _individually for each window"
 msgstr "Cambiar entre fuentes de entrada _individualmente para cada ventana"
 
-#: panels/keyboard/cc-keyboard-panel.ui:142
+#: panels/keyboard/cc-keyboard-panel.ui:58
 msgid "Special Character Entry"
 msgstr "Entrada de caracteres especiales"
 
-#: panels/keyboard/cc-keyboard-panel.ui:151
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr ""
 "Métodos para introducir símbolos y variantes de letras usando el teclado."
 
-#: panels/keyboard/cc-keyboard-panel.ui:212
+#: panels/keyboard/cc-keyboard-panel.ui:97
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Atajos del teclado"
 
-#: panels/keyboard/cc-keyboard-panel.ui:228
+#: panels/keyboard/cc-keyboard-panel.ui:100
 msgid "View and Customize Shortcuts"
 msgstr "Ver y personalizar atajos"
 
@@ -2332,7 +2304,7 @@ msgstr ""
 "Pulse Esc para cancelar o Retroceso para desactivar el atajo del teclado."
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
-#: panels/printers/pp-details-dialog.ui:36
+#: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
 #: panels/user-accounts/cc-user-panel.ui:125
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
@@ -2569,28 +2541,34 @@ msgid "Lock your screen"
 msgstr "Bloquear la pantalla"
 
 #. FIXME
-#: panels/microphone/cc-microphone-panel.ui:35
-msgid "Microphone is turned off"
-msgstr "El micrófono está apagado"
+#: panels/microphone/cc-microphone-panel.ui:20
+#| msgid "Microphone is turned off"
+msgid "Microphone Turned Off"
+msgstr "Micrófono está apagado"
 
-#: panels/microphone/cc-microphone-panel.ui:43
+#: panels/microphone/cc-microphone-panel.ui:21
 msgid "No applications can record sound."
 msgstr "Ninguna aplicación puede grabar sonidos."
 
-#: panels/microphone/cc-microphone-panel.ui:74
+#: panels/microphone/cc-microphone-panel.ui:34
+#| msgid ""
+#| "Use of the microphone allows applications to record and listen to audio. "
+#| "Disabling the microphone may cause some applications to not function "
+#| "properly."
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
-"properly."
+"properly.\n"
+"\n"
+"Allow the applications below to use your microphone."
 msgstr ""
 "El uso del micrófono permite a las aplicaciones capturar y escuchar sonidos. "
-"Desactivarlo puede hacer que algunas aplicaciones no funcionen correctamente."
+"Desactivarlo puede hacer que algunas aplicaciones no funcionen "
+"correctamente.\n"
+"\n"
+"Permita a las siguientes aplicaciones usar su micrófono."
 
-#: panels/microphone/cc-microphone-panel.ui:83
-msgid "Allow the applications below to use your microphone."
-msgstr "Permitir a las siguientes aplicaciones usar el micrófono."
-
-#: panels/microphone/cc-microphone-panel.ui:103
+#: panels/microphone/cc-microphone-panel.ui:51
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "Ninguna aplicación ha solicitado acceso al micrófono"
 
@@ -2815,29 +2793,29 @@ msgid "Not set up"
 msgstr "No configurada"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:206
+#: panels/network/cc-wifi-connection-row.c:207
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:261
+#: panels/network/cc-wifi-connection-row.c:263
 msgid "Insecure network (WEP)"
 msgstr "Red insegura (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:265
+#: panels/network/cc-wifi-connection-row.c:267
 msgid "Secure network (WPA)"
 msgstr "Red segura (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:269
+#: panels/network/cc-wifi-connection-row.c:271
 msgid "Secure network (WPA2)"
 msgstr "Red segura (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Secure network (WPA3)"
 msgstr "Red segura (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network"
 msgstr "Red segura"
 
@@ -2896,7 +2874,7 @@ msgstr "Nombre de red"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
 #: panels/printers/authentication-dialog.ui:55
-#: panels/printers/new-printer-dialog.ui:330
+#: panels/printers/new-printer-dialog.ui:331
 #: panels/printers/pp-jobs-dialog.ui:52
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
@@ -3354,7 +3332,7 @@ msgstr "Direcciones"
 #: panels/network/connection-editor/ip4-page.ui:246
 #: panels/network/connection-editor/ip6-page.ui:122
 #: panels/network/connection-editor/ip6-page.ui:255
-#: panels/printers/pp-details-dialog.ui:87
+#: panels/printers/pp-details-dialog.ui:90
 msgid "Address"
 msgstr "Dirección"
 
@@ -3377,7 +3355,7 @@ msgstr "Puerta de enlace"
 #: panels/network/connection-editor/ip6-page.ui:232
 #: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:91
 #: panels/network/wireless-security/eap-method-peap.ui:33
-#: panels/wacom/cc-wacom-page.c:643
+#: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
 msgstr "Automático"
 
@@ -3605,16 +3583,6 @@ msgstr ""
 #: panels/network/net-proxy.c:120
 msgid "This is not recommended for untrusted public networks."
 msgstr "No se recomienda para redes públicas en las que no se confía."
-
-#. update title
-#. Translators: this is the title of the connection details
-#. * window for vpn connections, it is also used to display
-#. * vpn connections in the device list.
-#.
-#: panels/network/net-vpn.c:63 panels/network/net-vpn.c:156
-#, c-format
-msgid "%s VPN"
-msgstr "VPN «%s»"
 
 #: panels/network/network-bluetooth.ui:11
 msgid "Turn device off"
@@ -4357,23 +4325,23 @@ msgstr ""
 "hexadecimal"
 
 #. This is the per application switch for message tray usage.
-#: panels/notifications/cc-app-notifications-dialog.ui:22
+#: panels/notifications/cc-app-notifications-dialog.ui:15
 msgctxt "notifications"
 msgid "_Notifications"
 msgstr "_Notificaciones"
 
 #. This is the setting to configure sounds associated with notifications.
-#: panels/notifications/cc-app-notifications-dialog.ui:37
+#: panels/notifications/cc-app-notifications-dialog.ui:29
 msgctxt "notifications"
 msgid "Sound _Alerts"
 msgstr "_Alertas sonoras"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:51
+#: panels/notifications/cc-app-notifications-dialog.ui:42
 msgctxt "notifications"
 msgid "Notification _Popups"
 msgstr "_Notificaciones emergentes"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:52
+#: panels/notifications/cc-app-notifications-dialog.ui:43
 msgid ""
 "Notifications will continue to appear in the notification list when popups "
 "are disabled."
@@ -4382,26 +4350,26 @@ msgstr ""
 "las ventanas emergentes estén desactivadas."
 
 #. Popups here refers to message tray notifications in the middle of the screen.
-#: panels/notifications/cc-app-notifications-dialog.ui:66
+#: panels/notifications/cc-app-notifications-dialog.ui:56
 msgctxt "notifications"
 msgid "Show Message _Content in Popups"
 msgstr "Mostrar el _contenido del mensaje en las ventanas emergentes"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:80
+#: panels/notifications/cc-app-notifications-dialog.ui:69
 msgctxt "notifications"
 msgid "_Lock Screen Notifications"
 msgstr "Notificaciones de la pantalla de _bloqueo"
 
-#: panels/notifications/cc-app-notifications-dialog.ui:94
+#: panels/notifications/cc-app-notifications-dialog.ui:82
 msgctxt "notifications"
 msgid "Show Message C_ontent on Lock Screen"
 msgstr "Mostrar el c_ontenido del mensaje en la pantalla de bloqueo"
 
-#: panels/notifications/cc-notifications-panel.ui:16
+#: panels/notifications/cc-notifications-panel.ui:10
 msgid "_Do Not Disturb"
 msgstr "_No molestar"
 
-#: panels/notifications/cc-notifications-panel.ui:23
+#: panels/notifications/cc-notifications-panel.ui:17
 msgid "_Lock Screen Notifications"
 msgstr "_Notificaciones de la pantalla de bloqueo"
 
@@ -4894,7 +4862,7 @@ msgstr "Autenticar"
 
 #. Translators: This is a username on a print server.
 #: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:310
+#: panels/printers/new-printer-dialog.ui:311
 #: panels/printers/pp-jobs-dialog.ui:41
 #: panels/user-accounts/cc-add-user-dialog.ui:94
 #: panels/user-accounts/cc-add-user-dialog.ui:342
@@ -4903,7 +4871,7 @@ msgid "Username"
 msgstr "Nombre de usuario"
 
 #: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:285
+#: panels/printers/new-printer-dialog.ui:286
 msgid "Authentication Required"
 msgstr "Se requiere autenticación"
 
@@ -4969,7 +4937,7 @@ msgstr "No se han encontrado impresoras"
 msgid "Enter a network address or search for a printer"
 msgstr "Introduzca una dirección de red o busque una impresora"
 
-#: panels/printers/new-printer-dialog.ui:301
+#: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Introduzca su nombre de usuario y su contraseña para ver las impresoras "
@@ -4998,29 +4966,29 @@ msgstr ""
 "Archivos de descripción de impresora PostScript (*.ppd, *.PPD, *.ppd.gz, *."
 "PPD.gz, *.PPD.GZ)"
 
-#: panels/printers/pp-details-dialog.ui:62 panels/printers/printer-entry.ui:213
+#: panels/printers/pp-details-dialog.ui:65 panels/printers/printer-entry.ui:215
 msgid "Location"
 msgstr "Ubicación"
 
 #. Translators: Name of column showing printer drivers
-#: panels/printers/pp-details-dialog.ui:112
+#: panels/printers/pp-details-dialog.ui:115
 #: panels/printers/pp-ppd-selection-dialog.c:236
 msgid "Driver"
 msgstr "Controlador"
 
-#: panels/printers/pp-details-dialog.ui:151
+#: panels/printers/pp-details-dialog.ui:154
 msgid "Searching for preferred drivers…"
 msgstr "Buscando controladores preferidos…"
 
-#: panels/printers/pp-details-dialog.ui:170
+#: panels/printers/pp-details-dialog.ui:173
 msgid "Search for Drivers"
 msgstr "Buscar controladores"
 
-#: panels/printers/pp-details-dialog.ui:178
+#: panels/printers/pp-details-dialog.ui:181
 msgid "Select from Database…"
 msgstr "Seleccionar de la base de datos…"
 
-#: panels/printers/pp-details-dialog.ui:186
+#: panels/printers/pp-details-dialog.ui:189
 msgid "Install PPD File…"
 msgstr "Instalar archivo PPD…"
 
@@ -5382,7 +5350,7 @@ msgid "Manufacturer"
 msgstr "Fabricante"
 
 #. Translators: This is the label of the button that opens the Jobs Dialog.
-#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:165
+#: panels/printers/pp-printer-entry.c:526 panels/printers/printer-entry.ui:167
 msgid "No Active Jobs"
 msgstr "No hay trabajos activos"
 
@@ -5525,22 +5493,22 @@ msgstr "Limpiar cabezales de impresión"
 msgid "Remove Printer"
 msgstr "Quitar impresora"
 
-#: panels/printers/printer-entry.ui:185
+#: panels/printers/printer-entry.ui:187
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Modelo"
 
-#: panels/printers/printer-entry.ui:240
+#: panels/printers/printer-entry.ui:242
 msgid "Ink Level"
 msgstr "Nivel de tinta"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:302
+#: panels/printers/printer-entry.ui:304
 msgid "Please restart when the problem is resolved."
 msgstr "Reinicie cuando se haya resuelto el problema."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:308
+#: panels/printers/printer-entry.ui:310
 msgid "Restart"
 msgstr "Reiniciar"
 
@@ -5854,26 +5822,16 @@ msgid "Bookmarks"
 msgstr "Marcadores"
 
 #: panels/search/cc-search-locations-dialog.ui:48
-#| msgid "Other"
 msgid "Others"
 msgstr "Otras"
 
 #: panels/search/cc-search-locations-dialog.ui:55
-#| msgid "Location"
 msgid "Add Location"
 msgstr "Añadir ubicación"
 
 #: panels/search/cc-search-panel.c:165
 msgid "No applications found"
 msgstr "No se han encontrado aplicaciones"
-
-#: panels/search/cc-search-panel-row.ui:49
-msgid "Move Up"
-msgstr "Subir"
-
-#: panels/search/cc-search-panel-row.ui:53
-msgid "Move Down"
-msgstr "Bajar"
 
 #: panels/search/cc-search-panel.ui:10
 msgid "Application Search"
@@ -6290,23 +6248,23 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Autorizado"
 
-#: panels/thunderbolt/cc-bolt-panel.c:170
+#: panels/thunderbolt/cc-bolt-panel.c:169
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "El subsistema de Thunderbolt (boltd) no está instalado o no se ha "
 "configurado correctamente."
 
-#: panels/thunderbolt/cc-bolt-panel.c:426
-#: panels/thunderbolt/cc-bolt-panel.ui:224
+#: panels/thunderbolt/cc-bolt-panel.c:425
+#: panels/thunderbolt/cc-bolt-panel.ui:157
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Permitir el acceso a dispositivos como soportes y GPU externas."
 
-#: panels/thunderbolt/cc-bolt-panel.c:427
+#: panels/thunderbolt/cc-bolt-panel.c:426
 msgid "Only USB and Display Port devices can attach."
 msgstr "Sólo se pueden conectar dispositivos USB y Display Port"
 
-#: panels/thunderbolt/cc-bolt-panel.c:462
+#: panels/thunderbolt/cc-bolt-panel.c:461
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6316,32 +6274,40 @@ msgstr ""
 "El sistema carece de soporte para Thunderbolt, se ha desactivado en la BIOS "
 "o se ha configurado con un nivel de seguridad no soportado en la BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:506
+#: panels/thunderbolt/cc-bolt-panel.c:505
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "El soporte de Thunderbolt se ha desactivado en la BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:510
+#: panels/thunderbolt/cc-bolt-panel.c:509
 msgid "Thunderbolt security level could not be determined."
 msgstr "No se puede determinar el nivel de seguridad de Thunderbolt."
 
-#: panels/thunderbolt/cc-bolt-panel.c:615
+#: panels/thunderbolt/cc-bolt-panel.c:614
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Error al cambiar al modo directo: %s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:140
-msgid "No Thunderbolt support"
+#: panels/thunderbolt/cc-bolt-panel.ui:103
+#, fuzzy
+#| msgid "No Thunderbolt support"
+msgid "No Thunderbolt Support"
 msgstr "Sin soporte para Thunderbolt"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:220
+#: panels/thunderbolt/cc-bolt-panel.ui:104
+#, fuzzy
+#| msgid "Couldn’t connect to the %s domain: %s"
+msgid "Could not connect to the thunderbolt subsystem."
+msgstr "No se pudo conectar al dominio %s: %s"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:153
 msgid "Direct Access"
 msgstr "Acceso directo"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:292
+#: panels/thunderbolt/cc-bolt-panel.ui:225
 msgid "Pending Devices"
 msgstr "Dispositivos pendientes"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:386
+#: panels/thunderbolt/cc-bolt-panel.ui:319
 msgid "No devices attached"
 msgstr "No hay dispositivos conectados"
 
@@ -6899,35 +6865,119 @@ msgstr ""
 "teclas;rechazo;ratón;doble;pulsación;retardo;velocidad;asistente;repetir;"
 "parpadeo;visual;audición;escritura;animaciones;"
 
-#: panels/usage/cc-usage-panel.c:174
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:55
+msgctxt "purge_files"
+msgid "1 hour"
+msgstr "1 hora"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:58
+msgctxt "purge_files"
+msgid "1 day"
+msgstr "1 día"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:61
+msgctxt "purge_files"
+msgid "2 days"
+msgstr "2 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:64
+msgctxt "purge_files"
+msgid "3 days"
+msgstr "3 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:67
+msgctxt "purge_files"
+msgid "4 days"
+msgstr "4 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:70
+msgctxt "purge_files"
+msgid "5 days"
+msgstr "5 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:73
+msgctxt "purge_files"
+msgid "6 days"
+msgstr "6 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:76
+msgctxt "purge_files"
+msgid "7 days"
+msgstr "7 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:79
+msgctxt "purge_files"
+msgid "14 days"
+msgstr "14 días"
+
+#. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
+#: panels/usage/cc-usage-panel.c:82
+msgctxt "purge_files"
+msgid "30 days"
+msgstr "30 días"
+
+#: panels/usage/cc-usage-panel.c:180
 msgid "Empty all items from Trash?"
 msgstr "¿Quiere vaciar todos los elementos de la papelera?"
 
-#: panels/usage/cc-usage-panel.c:175
+#: panels/usage/cc-usage-panel.c:181
 msgid "All items in the Trash will be permanently deleted."
 msgstr "Todos los elementos de la papelera se eliminarán de manera permanente."
 
-#: panels/usage/cc-usage-panel.c:176
+#: panels/usage/cc-usage-panel.c:182
 msgid "_Empty Trash"
 msgstr "_Vaciar papelera"
 
-#: panels/usage/cc-usage-panel.c:212
+#: panels/usage/cc-usage-panel.c:218
 msgid "Delete all the temporary files?"
 msgstr "¿Quiere eliminar todos los archivos temporales?"
 
-#: panels/usage/cc-usage-panel.c:213
+#: panels/usage/cc-usage-panel.c:219
 msgid "All the temporary files will be permanently deleted."
 msgstr "Todos los archivos temporales se eliminarán de manera permanente."
 
-#: panels/usage/cc-usage-panel.c:214
+#: panels/usage/cc-usage-panel.c:220
 msgid "_Purge Temporary Files"
 msgstr "_Limpiar archivos temporales"
 
-#: panels/usage/cc-usage-panel.ui:23
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:247
+msgctxt "retain_history"
+msgid "1 day"
+msgstr "1 día"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:250
+msgctxt "retain_history"
+msgid "7 days"
+msgstr "7 días"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:253
+msgctxt "retain_history"
+msgid "30 days"
+msgstr "30 días"
+
+#. Translators: Option for "File History Duration" in "File History" group
+#: panels/usage/cc-usage-panel.c:256
+msgctxt "retain_history"
+msgid "Forever"
+msgstr "Para siempre"
+
+#: panels/usage/cc-usage-panel.ui:9
 msgid "File History"
 msgstr "Histórico de archivos"
 
-#: panels/usage/cc-usage-panel.ui:34
+#: panels/usage/cc-usage-panel.ui:10
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between applications, and makes it easier to find files that you "
@@ -6937,23 +6987,25 @@ msgstr ""
 "utilizado. Esta información se comparte entre aplicaciones y hace que sea "
 "más fácil encontrar los archivos que quiere usar."
 
-#: panels/usage/cc-usage-panel.ui:50
+#: panels/usage/cc-usage-panel.ui:13
 msgid "File H_istory"
 msgstr "H_istórico de archivos"
 
-#: panels/usage/cc-usage-panel.ui:71
+#: panels/usage/cc-usage-panel.ui:25
 msgid "File _History Duration"
 msgstr "Duración del _histórico de archivos"
 
-#: panels/usage/cc-usage-panel.ui:107
+#: panels/usage/cc-usage-panel.ui:48
 msgid "_Clear History…"
 msgstr "Limpiar el históri_co…"
 
-#: panels/usage/cc-usage-panel.ui:122
-msgid "Trash & Temporary Files"
+#: panels/usage/cc-usage-panel.ui:63
+#, fuzzy
+#| msgid "Trash & Temporary Files"
+msgid "Trash &amp; Temporary Files"
 msgstr "Papelera y archivos temporales"
 
-#: panels/usage/cc-usage-panel.ui:131
+#: panels/usage/cc-usage-panel.ui:64
 msgid ""
 "Trash and temporary files can sometimes include personal or sensitive "
 "information. Automatically deleting them can help to protect privacy."
@@ -6962,109 +7014,25 @@ msgstr ""
 "información personal o sensible. Eliminarlos automáticamente puede ayudar a "
 "proteger su privacidad."
 
-#: panels/usage/cc-usage-panel.ui:146
+#: panels/usage/cc-usage-panel.ui:67
 msgid "Automatically Delete _Trash Content"
 msgstr "Eliminar el contenido la papelera automá_ticamente"
 
-#: panels/usage/cc-usage-panel.ui:159
+#: panels/usage/cc-usage-panel.ui:79
 msgid "Automatically Delete Temporary _Files"
 msgstr "Eliminar los a_rchivos temporales automáticamente"
 
-#: panels/usage/cc-usage-panel.ui:180
+#: panels/usage/cc-usage-panel.ui:91
 msgid "Automatically Delete _Period"
 msgstr "Período para eliminar automáticamente"
 
-#: panels/usage/cc-usage-panel.ui:217
+#: panels/usage/cc-usage-panel.ui:115
 msgid "_Empty Trash…"
 msgstr "_Vaciar papelera…"
 
-#: panels/usage/cc-usage-panel.ui:228
+#: panels/usage/cc-usage-panel.ui:126
 msgid "_Delete Temporary Files…"
 msgstr "_Eliminar archivos temporales…"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:256
-msgctxt "purge_files"
-msgid "1 hour"
-msgstr "1 hora"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:260
-msgctxt "purge_files"
-msgid "1 day"
-msgstr "1 día"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:264
-msgctxt "purge_files"
-msgid "2 days"
-msgstr "2 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:268
-msgctxt "purge_files"
-msgid "3 days"
-msgstr "3 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:272
-msgctxt "purge_files"
-msgid "4 days"
-msgstr "4 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:276
-msgctxt "purge_files"
-msgid "5 days"
-msgstr "5 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:280
-msgctxt "purge_files"
-msgid "6 days"
-msgstr "6 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:284
-msgctxt "purge_files"
-msgid "7 days"
-msgstr "7 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:288
-msgctxt "purge_files"
-msgid "14 days"
-msgstr "14 días"
-
-#. Translators: Option for "Purge After" in "Purge Trash & Temporary Files" dialog.
-#: panels/usage/cc-usage-panel.ui:292
-msgctxt "purge_files"
-msgid "30 days"
-msgstr "30 días"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:307
-msgctxt "retain_history"
-msgid "1 day"
-msgstr "1 día"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:311
-msgctxt "retain_history"
-msgid "7 days"
-msgstr "7 días"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:315
-msgctxt "retain_history"
-msgid "30 days"
-msgstr "30 días"
-
-#. Translators: Option for "Retain History" in "Usage & History" dialog.
-#: panels/usage/cc-usage-panel.ui:319
-msgctxt "retain_history"
-msgid "Forever"
-msgstr "Para siempre"
 
 #: panels/usage/gnome-usage-panel.desktop.in.in:3
 msgid "File History & Trash"
@@ -7083,26 +7051,26 @@ msgstr "Debe coincidir con la dirección web del proveedor de la cuenta."
 msgid "Failed to add account"
 msgstr "Falló al añadir la cuenta"
 
-#: panels/user-accounts/cc-add-user-dialog.c:673
+#: panels/user-accounts/cc-add-user-dialog.c:679
 #: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "Las contraseñas no coinciden."
 
-#: panels/user-accounts/cc-add-user-dialog.c:877
-#: panels/user-accounts/cc-add-user-dialog.c:916
-#: panels/user-accounts/cc-add-user-dialog.c:934
+#: panels/user-accounts/cc-add-user-dialog.c:883
+#: panels/user-accounts/cc-add-user-dialog.c:922
+#: panels/user-accounts/cc-add-user-dialog.c:940
 msgid "Failed to register account"
 msgstr "Falló al registrar la cuenta"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1049
+#: panels/user-accounts/cc-add-user-dialog.c:1055
 msgid "No supported way to authenticate with this domain"
 msgstr "No hay una manera soportada de autenticar con este dominio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1113
+#: panels/user-accounts/cc-add-user-dialog.c:1119
 msgid "Failed to join domain"
 msgstr "Falló al unirse al dominio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1168
+#: panels/user-accounts/cc-add-user-dialog.c:1174
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7110,7 +7078,7 @@ msgstr ""
 "El nombre de inicio de sesión no ha funcionado.\n"
 "Inténtelo de nuevo."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1175
+#: panels/user-accounts/cc-add-user-dialog.c:1181
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7118,11 +7086,11 @@ msgstr ""
 "La contraseña de inicio de sesión no ha funcionado.\n"
 "Inténtelo de nuevo."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1183
+#: panels/user-accounts/cc-add-user-dialog.c:1189
 msgid "Failed to log into domain"
 msgstr "Falló al iniciar sesión en el dominio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1238
+#: panels/user-accounts/cc-add-user-dialog.c:1244
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "No se pudo encontrar el dominio. ¿Está bien escrito?"
 
@@ -7136,9 +7104,6 @@ msgid "Administrator"
 msgstr "Administrador"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:132
-#| msgid ""
-#| "Administrators can add and remove other users, and can change settings "
-#| "for all users."
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users. Parental controls cannot be applied to administrators."
@@ -7148,22 +7113,18 @@ msgstr ""
 "los administradores."
 
 #: panels/user-accounts/cc-add-user-dialog.ui:149
-#| msgid "Choose password at next login"
 msgid "User sets password on first login"
 msgstr "El usuario establece su contraseña en el primer inicio de sesión"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:161
-#| msgid "Set a password now"
 msgid "Set password now"
 msgstr "Establecer una contraseña ahora"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:224
-#| msgid "_Confirm"
 msgid "Confirm"
 msgstr "Confirmar"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:278
-#| msgid "_Enterprise Login"
 msgid "Enterprise Login"
 msgstr "Inicio de sesión corporativo"
 
@@ -7445,7 +7406,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:684
+#: panels/user-accounts/cc-user-panel.c:688
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7453,7 +7414,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:692
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7495,17 +7456,14 @@ msgid "Ch_ange"
 msgstr "Cam_biar"
 
 #: panels/user-accounts/cc-password-dialog.ui:51
-#| msgid "Current _Password"
 msgid "Current Password"
 msgstr "Contraseña actual"
 
 #: panels/user-accounts/cc-password-dialog.ui:76
-#| msgid "_New Password"
 msgid "New Password"
 msgstr "Contraseña nueva"
 
 #: panels/user-accounts/cc-password-dialog.ui:121
-#| msgid "_Confirm Password"
 msgid "Confirm Password"
 msgstr "Confirmar contraseña"
 
@@ -7541,26 +7499,26 @@ msgstr "Contraseña no válida, inténtelo de nuevo"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "No se pudo conectar al dominio %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:313
+#: panels/user-accounts/cc-user-panel.c:317
 msgid "Failed to delete user"
 msgstr "Falló al eliminar el usuario"
 
-#: panels/user-accounts/cc-user-panel.c:370
-#: panels/user-accounts/cc-user-panel.c:425
-#: panels/user-accounts/cc-user-panel.c:471
+#: panels/user-accounts/cc-user-panel.c:374
+#: panels/user-accounts/cc-user-panel.c:429
+#: panels/user-accounts/cc-user-panel.c:475
 msgid "Failed to revoke remotely managed user"
 msgstr "Falló al revocar remotamente el usuario gestionado"
 
-#: panels/user-accounts/cc-user-panel.c:520
+#: panels/user-accounts/cc-user-panel.c:524
 msgid "You cannot delete your own account."
 msgstr "No puede eliminar su propia cuenta."
 
-#: panels/user-accounts/cc-user-panel.c:529
+#: panels/user-accounts/cc-user-panel.c:533
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s aún está registrado en el sistema"
 
-#: panels/user-accounts/cc-user-panel.c:533
+#: panels/user-accounts/cc-user-panel.c:537
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7568,12 +7526,12 @@ msgstr ""
 "Eliminar un usuario mientras está registrado en el sistema puede dejar el "
 "sistema en un estado inconsistente."
 
-#: panels/user-accounts/cc-user-panel.c:542
+#: panels/user-accounts/cc-user-panel.c:546
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "¿Quiere mantener los archivos de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:546
+#: panels/user-accounts/cc-user-panel.c:550
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7581,68 +7539,68 @@ msgstr ""
 "Es posible mantener la carpeta personal, el «spool» del correo y los "
 "archivos temporales al eliminar una cuenta de usuario."
 
-#: panels/user-accounts/cc-user-panel.c:549
+#: panels/user-accounts/cc-user-panel.c:553
 msgid "_Delete Files"
 msgstr "_Eliminar archivos"
 
-#: panels/user-accounts/cc-user-panel.c:550
+#: panels/user-accounts/cc-user-panel.c:554
 msgid "_Keep Files"
 msgstr "_Mantener archivos"
 
-#: panels/user-accounts/cc-user-panel.c:564
+#: panels/user-accounts/cc-user-panel.c:568
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "¿Está seguro de que quiere revocar remotamente la cuenta gestionada de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:568
+#: panels/user-accounts/cc-user-panel.c:572
 msgid "_Delete"
 msgstr "_Eliminar"
 
-#: panels/user-accounts/cc-user-panel.c:618
+#: panels/user-accounts/cc-user-panel.c:622
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Cuenta desactivada"
 
-#: panels/user-accounts/cc-user-panel.c:626
+#: panels/user-accounts/cc-user-panel.c:630
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Para configurar en el siguiente inicio de sesión"
 
-#: panels/user-accounts/cc-user-panel.c:629
+#: panels/user-accounts/cc-user-panel.c:633
 msgctxt "Password mode"
 msgid "None"
 msgstr "Ninguno"
 
-#: panels/user-accounts/cc-user-panel.c:672
+#: panels/user-accounts/cc-user-panel.c:676
 msgid "Logged in"
 msgstr "Sesión iniciada"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:759
-#: panels/user-accounts/cc-user-panel.c:862
+#: panels/user-accounts/cc-user-panel.c:763
+#: panels/user-accounts/cc-user-panel.c:867
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Activada"
 
-#: panels/user-accounts/cc-user-panel.c:1184
+#: panels/user-accounts/cc-user-panel.c:1187
 msgid "Failed to contact the accounts service"
 msgstr "Falló al contactar con el servicio de cuentas"
 
-#: panels/user-accounts/cc-user-panel.c:1186
+#: panels/user-accounts/cc-user-panel.c:1189
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Asegúrese de que el servicio de cuentas está instalado y activado."
 
-#: panels/user-accounts/cc-user-panel.c:1207
+#: panels/user-accounts/cc-user-panel.c:1210
 msgid "This panel must be unlocked to change this setting"
 msgstr "Se debe desbloquear este panel para cambiar esta opción"
 
-#: panels/user-accounts/cc-user-panel.c:1274
+#: panels/user-accounts/cc-user-panel.c:1277
 msgid "Delete the selected user account"
 msgstr "Quitar la cuenta de usuario seleccionada"
 
-#: panels/user-accounts/cc-user-panel.c:1278
-#: panels/user-accounts/cc-user-panel.c:1387
+#: panels/user-accounts/cc-user-panel.c:1281
+#: panels/user-accounts/cc-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7650,7 +7608,7 @@ msgstr ""
 "Para eliminar la cuenta de usuario seleccionada\n"
 "pulse primero el icono *"
 
-#: panels/user-accounts/cc-user-panel.c:1427
+#: panels/user-accounts/cc-user-panel.c:1432
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Desbloquear para añadir usuarios y cambiar la configuración"
 
@@ -7705,12 +7663,10 @@ msgid "Remove User…"
 msgstr "Quitar usuario…"
 
 #: panels/user-accounts/cc-user-panel.ui:333
-#| msgid "Other Files"
 msgid "Other Users"
 msgstr "Otros usuarios"
 
 #: panels/user-accounts/cc-user-panel.ui:346
-#| msgid "_Add User…"
 msgid "Add User…"
 msgstr "Añadir usuario…"
 
@@ -7965,7 +7921,7 @@ msgstr ""
 msgid "_Close"
 msgstr "_Cerrar"
 
-#: panels/wacom/calibrator/calibrator.ui:52
+#: panels/wacom/calibrator/calibrator.ui:51
 msgid ""
 "Please tap the target markers as they appear on screen to calibrate the "
 "tablet."
@@ -7973,7 +7929,7 @@ msgstr ""
 "Pulse los marcadores objetivo a medida que aparecen en la pantalla para "
 "calibrar la tableta."
 
-#: panels/wacom/calibrator/calibrator.ui:64
+#: panels/wacom/calibrator/calibrator.ui:63
 msgid "Mis-click detected, restarting…"
 msgstr "Pulsación errónea detectada, reiniciando…"
 
@@ -8015,7 +7971,7 @@ msgid "External tablet device"
 msgstr "Tableta externa"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:630
+#: panels/wacom/cc-wacom-page.c:608
 msgid "All Displays"
 msgstr "Todas las pantallas"
 
@@ -8120,15 +8076,15 @@ msgstr "Puntos de acceso"
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-data.c:543
+#: panels/wwan/cc-wwan-data.c:542
 msgid "Operation Cancelled"
 msgstr "Operación cancelada"
 
-#: panels/wwan/cc-wwan-data.c:546
+#: panels/wwan/cc-wwan-data.c:545
 msgid "<b>Error:</b> Access denied changing settings"
 msgstr "<b>Error:</b> acceso denegado para modificar la configuración"
 
-#: panels/wwan/cc-wwan-data.c:549
+#: panels/wwan/cc-wwan-data.c:548
 msgid "<b>Error:</b> Mobile Equipment Error"
 msgstr "<b>Error:</b> error del equipo móvil"
 
@@ -8726,6 +8682,39 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "More Warm"
+#~ msgstr "Más cálido"
+
+#~ msgid "Less Warm"
+#~ msgstr "Menos cálido"
+
+#~ msgid "Screenshots"
+#~ msgstr "Capturas de pantalla"
+
+#~ msgid "Show the screenshot UI"
+#~ msgstr "Mostrar la IU de captura de pantalla"
+
+#~ msgid "Take a screenshot"
+#~ msgstr "Capturar la pantalla"
+
+#~ msgid "Take a screenshot of a window"
+#~ msgstr "Capturar una ventana"
+
+#~ msgid "Show the screen recording UI"
+#~ msgstr "Mostrar la IU de grabación de pantalla"
+
+#~ msgid "Move up"
+#~ msgstr "Subir"
+
+#~ msgid "Move down"
+#~ msgstr "Bajar"
+
+#~ msgid "Allow the applications below to use your microphone."
+#~ msgstr "Permitir a las siguientes aplicaciones usar el micrófono."
+
+#~ msgid "%s VPN"
+#~ msgstr "VPN «%s»"
 
 #~ msgid "_Full Name"
 #~ msgstr "Nombre _completo"
