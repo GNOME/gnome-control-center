@@ -129,6 +129,7 @@ x11_dep = dependency('x11')
 xi_dep = dependency('xi', version: '>= 1.2')
 epoxy_dep = dependency('epoxy')
 gcr_dep = dependency('gcr-base-3')
+pwquality_dep = dependency('pwquality', version: '>= 1.2.2')
 
 m_dep = cc.find_library('m')
 

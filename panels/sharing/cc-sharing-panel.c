@@ -41,6 +41,8 @@
 #define GCR_API_SUBJECT_TO_CHANGE
 #include <gcr/gcr-base.h>
 
+#include <pwquality.h>
+
 #include <config.h>
 
 static void cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self, GtkWidget *label);
@@ -1310,6 +1312,52 @@ on_copy_clicked_entry (GtkButton *button,
                           gtk_entry_buffer_get_text (buffer));
 }
 
+static pwquality_settings_t *
+get_pwq (void)
+{
+  static pwquality_settings_t *settings;
+
+  if (settings == NULL)
+    {
+      gchar *err = NULL;
+      gint rv = 0;
+
+      settings = pwquality_default_settings ();
+      pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
+
+      rv = pwquality_read_config (settings, NULL, (gpointer)&err);
+      if (rv < 0)
+        {
+          g_warning ("Failed to read pwquality configuration: %s\n",
+                     pwquality_strerror (NULL, 0, rv, err));
+          pwquality_free_settings (settings);
+
+          /* Load just default settings in case of failure. */
+          settings = pwquality_default_settings ();
+          pwquality_set_int_value (settings, PWQ_SETTING_MAX_SEQUENCE, 4);
+        }
+    }
+
+  return settings;
+}
+
+static char *
+pw_generate (void)
+{
+  char *res;
+  int rv;
+
+  rv = pwquality_generate (get_pwq (), 0, &res);
+
+  if (rv < 0) {
+      g_warning ("Password generation failed: %s\n",
+                 pwquality_strerror (NULL, 0, rv, NULL));
+      return NULL;
+  }
+
+  return res;
+}
+
 static void
 cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
 {
@@ -1344,10 +1392,9 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
                        hostname);
 
   username = cc_grd_lookup_rdp_username (cc_panel_get_cancellable (CC_PANEL (self)));
+  password = cc_grd_lookup_rdp_password (cc_panel_get_cancellable (CC_PANEL (self)));
   if (username != NULL)
     gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_username_entry), username);
-
-  password = cc_grd_lookup_rdp_password (cc_panel_get_cancellable (CC_PANEL (self)));
   if (password != NULL)
     gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_password_entry), password);
 
@@ -1359,6 +1406,13 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
                             "notify::text",
                             G_CALLBACK (remote_desktop_credentials_changed),
                             self);
+
+  if (username == NULL)
+    gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_username_entry),
+                           getlogin ());
+  if (password == NULL)
+    gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_password_entry),
+                           pw_generate ());
 
   g_signal_connect (self->remote_desktop_device_name_copy,
                     "clicked", G_CALLBACK (on_copy_clicked_label),
