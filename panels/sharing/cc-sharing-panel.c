@@ -1326,6 +1326,11 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
   rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
 
   g_settings_bind (rdp_settings,
+                   "enable",
+                   self->remote_desktop_switch,
+                   "active",
+                   G_SETTINGS_BIND_DEFAULT);
+  g_settings_bind (rdp_settings,
                    "view-only",
                    self->remote_control_checkbutton,
                    "active",
