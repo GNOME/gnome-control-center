@@ -1700,6 +1700,9 @@ ppd_selection_cb (GtkDialog *_dialog,
         }
     }
 
+  /* This is needed here since parent dialog is destroyed first. */
+  gtk_window_set_transient_for (GTK_WINDOW (self->ppd_selection_dialog), NULL);
+
   self->user_callback (GTK_DIALOG (self), response_id, self->user_data);
 }
 
