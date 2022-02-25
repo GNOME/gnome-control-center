@@ -1824,6 +1824,12 @@ pp_new_printer_dialog_dispose (GObject *object)
   g_clear_object (&self->remote_cups_host);
   g_clear_object (&self->samba_host);
 
+  if (self->ppd_selection_dialog != NULL)
+    {
+      gtk_window_destroy (GTK_WINDOW (self->ppd_selection_dialog));
+      self->ppd_selection_dialog = NULL;
+    }
+
   if (self->num_of_dests > 0)
     {
       cupsFreeDests (self->num_of_dests, self->dests);
