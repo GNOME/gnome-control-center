@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-13 00:26+0000\n"
-"PO-Revision-Date: 2022-02-13 09:31+0200\n"
+"POT-Creation-Date: 2022-02-26 18:29+0000\n"
+"PO-Revision-Date: 2022-02-26 21:10+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -167,7 +167,7 @@ msgstr "Отримання сигналів системи про пошук і 
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
 #: panels/user-accounts/cc-user-panel.c:765
-#: panels/user-accounts/cc-user-panel.c:869
+#: panels/user-accounts/cc-user-panel.c:870
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -350,7 +350,7 @@ msgstr "Виберіть зображення"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
@@ -368,7 +368,7 @@ msgstr "_Скасувати"
 #: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:433
+#: panels/sharing/cc-sharing-panel.c:524
 #: panels/user-accounts/cc-avatar-chooser.c:166
 msgid "_Open"
 msgstr "_Відкрити"
@@ -902,7 +902,7 @@ msgstr ""
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:434
-#: panels/diagnostics/cc-diagnostics-panel.c:139
+#: panels/diagnostics/cc-diagnostics-panel.c:137
 msgid "Learn more"
 msgstr "Дізнатись більше"
 
@@ -1486,7 +1486,7 @@ msgid "default;application;preferred;media;"
 msgstr "типове;програма;бажане;носій;default;application;preferred;media;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#: panels/diagnostics/cc-diagnostics-panel.c:139
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -1495,11 +1495,11 @@ msgstr ""
 "Надсилання звітів про технічні проблеми допомагає нам покращити %s. Звіти "
 "надсилаються анонімно і не містять особистих даних. %s"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:21
+#: panels/diagnostics/cc-diagnostics-panel.ui:8
 msgid "Problem Reporting"
 msgstr "Звітування про проблему"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:55
+#: panels/diagnostics/cc-diagnostics-panel.ui:11
 msgid "_Automatic Problem Reporting"
 msgstr "_Автоматичне звітування про проблеми"
 
@@ -1648,14 +1648,6 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "Масштаб"
 
-#: panels/display/cc-night-light-page.c:624
-msgid "More Warm"
-msgstr "Тепліше"
-
-#: panels/display/cc-night-light-page.c:636
-msgid "Less Warm"
-msgstr "Холодніше"
-
 #. Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.ui:21
 msgid "Temporarily Disabled Until Tomorrow"
@@ -1726,7 +1718,7 @@ msgstr "PM"
 msgid "To"
 msgstr "По"
 
-#: panels/display/cc-night-light-page.ui:302
+#: panels/display/cc-night-light-page.ui:316
 msgid "Color Temperature"
 msgstr "Кольорова температура"
 
@@ -1794,6 +1786,7 @@ msgid "System Logo"
 msgstr "Логотип системи"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "Device Name"
 msgstr "Назва пристрою"
 
@@ -2025,11 +2018,11 @@ msgstr "Зменшити розмір тексту"
 msgid "High contrast on or off"
 msgstr "Увімкнути або вимкнути високий контраст"
 
-#: panels/keyboard/cc-input-chooser.c:187
+#: panels/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "Не знайдено жодного джерела введення"
 
-#: panels/keyboard/cc-input-chooser.c:933
+#: panels/keyboard/cc-input-chooser.c:931
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Інше"
@@ -2038,31 +2031,31 @@ msgstr "Інше"
 msgid "Add an Input Source"
 msgstr "Додати джерело введення"
 
-#: panels/keyboard/cc-input-chooser.ui:68
+#: panels/keyboard/cc-input-chooser.ui:81
 msgid "Input methods can’t be used on the login screen"
 msgstr "Способи введення неможливо використовувати у вікні входу"
 
-#: panels/keyboard/cc-input-list-box.ui:23
+#: panels/keyboard/cc-input-list-box.ui:24
 msgid "No input source selected"
 msgstr "Не вибрано жодного джерела введення"
 
-#: panels/keyboard/cc-input-row.ui:67
-msgid "Move up"
-msgstr "Пересунути вище"
+#: panels/keyboard/cc-input-row.ui:28 panels/search/cc-search-panel-row.ui:49
+msgid "Move Up"
+msgstr "Перемістити вгору"
 
-#: panels/keyboard/cc-input-row.ui:81
-msgid "Move down"
-msgstr "Пересунути нижче"
+#: panels/keyboard/cc-input-row.ui:32 panels/search/cc-search-panel-row.ui:53
+msgid "Move Down"
+msgstr "Пересунути вниз"
 
-#: panels/keyboard/cc-input-row.ui:98
+#: panels/keyboard/cc-input-row.ui:38
 msgid "Preferences"
 msgstr "Параметри"
 
-#: panels/keyboard/cc-input-row.ui:120
+#: panels/keyboard/cc-input-row.ui:45
 msgid "View Keyboard Layout"
 msgstr "Переглянути розкладку клавіатури"
 
-#: panels/keyboard/cc-input-row.ui:139
+#: panels/keyboard/cc-input-row.ui:51
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:29
 msgid "Remove"
 msgstr "Вилучити"
@@ -2073,12 +2066,12 @@ msgstr "Вилучити"
 msgid "Custom Shortcuts"
 msgstr "Власне скорочення"
 
-#: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.ui:172
+#: panels/keyboard/cc-keyboard-panel.c:64
+#: panels/keyboard/cc-keyboard-panel.ui:62
 msgid "Alternate Characters Key"
 msgstr "Клавіша альтернативних символів"
 
-#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:65
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
@@ -2087,48 +2080,48 @@ msgstr ""
 "додаткових символів. Вони інколи зображені на кнопках клавіатури як третій "
 "варіант."
 
-#: panels/keyboard/cc-keyboard-panel.c:70
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:67
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Ліва Alt"
 
-#: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:86
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Права Alt"
 
-#: panels/keyboard/cc-keyboard-panel.c:72
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:69
+#: panels/keyboard/cc-keyboard-panel.c:87
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Ліва Super"
 
-#: panels/keyboard/cc-keyboard-panel.c:73
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:70
+#: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Права Super"
 
-#: panels/keyboard/cc-keyboard-panel.c:74
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:71
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Клавіша меню"
 
-#: panels/keyboard/cc-keyboard-panel.c:75
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Права Ctrl"
 
-#: panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/cc-keyboard-panel.ui:191
+#: panels/keyboard/cc-keyboard-panel.c:80
+#: panels/keyboard/cc-keyboard-panel.ui:79
 msgid "Compose Key"
 msgstr "Скомпонувати клавіші"
 
-#: panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.c:81
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2141,22 +2134,22 @@ msgstr ""
 "буде виведено <b>©</b>, натиснувши <b>a</b>, за яким слідує <b>'</b>, "
 "отримаємо <b>á</b>."
 
-#: panels/keyboard/cc-keyboard-panel.c:94
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:95
+#: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:96
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Print Screen"
 
-#: panels/keyboard/cc-keyboard-panel.c:232
+#: panels/keyboard/cc-keyboard-panel.c:217
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2165,41 +2158,41 @@ msgstr ""
 "Джерела введення можна перемикати за допомогою клавіатурного скорочення %s.\n"
 "Змінити скорочення можна у параметрах клавіатурних скорочень."
 
-#: panels/keyboard/cc-keyboard-panel.ui:38
+#: panels/keyboard/cc-keyboard-panel.ui:17
 msgid "Input Sources"
 msgstr "Джерела введення"
 
-#: panels/keyboard/cc-keyboard-panel.ui:47
+#: panels/keyboard/cc-keyboard-panel.ui:18
 msgid "Includes keyboard layouts and input methods."
 msgstr "Включно із розкладками клавіатури та способами введення."
 
-#: panels/keyboard/cc-keyboard-panel.ui:70
+#: panels/keyboard/cc-keyboard-panel.ui:28
 msgid "Input Source Switching"
 msgstr "Перемикання джерел введення"
 
-#: panels/keyboard/cc-keyboard-panel.ui:106
+#: panels/keyboard/cc-keyboard-panel.ui:31
 msgid "Use the _same source for all windows"
 msgstr "Використовувати _однакові джерела для всіх вікон"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:43
 msgid "Switch input sources _individually for each window"
 msgstr "Перемикати джерела введення _окремо для кожного з вікон"
 
-#: panels/keyboard/cc-keyboard-panel.ui:142
+#: panels/keyboard/cc-keyboard-panel.ui:58
 msgid "Special Character Entry"
 msgstr "Введення спеціальних символів"
 
-#: panels/keyboard/cc-keyboard-panel.ui:151
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Способи введення символів та варіантів літер за допомогою клавіатури."
 
-#: panels/keyboard/cc-keyboard-panel.ui:212
+#: panels/keyboard/cc-keyboard-panel.ui:97
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Клавіатурні скорочення"
 
-#: panels/keyboard/cc-keyboard-panel.ui:228
+#: panels/keyboard/cc-keyboard-panel.ui:100
 msgid "View and Customize Shortcuts"
 msgstr "Перегляд і налаштовування скорочень"
 
@@ -2227,7 +2220,6 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:467
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
-#: panels/printers/authentication-dialog.ui:19
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
 msgid "Cancel"
@@ -2560,13 +2552,6 @@ msgid "No applications can record sound."
 msgstr "Немає програм, які можуть записувати звук."
 
 #: panels/microphone/cc-microphone-panel.ui:34
-#| msgid ""
-#| "Use of the microphone allows applications to record and listen to audio. "
-#| "Disabling the microphone may cause some applications to not function "
-#| "properly.\n"
-#| "\n"
-#| "Allow the applications below to use your microphone.\n"
-#| "                    "
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
@@ -2578,8 +2563,7 @@ msgstr ""
 "звукові дані. Вимикання мікрофона може призвести до неправильної роботи "
 "деяких програм.\n"
 "\n"
-"Програмам із наведеного нижче списку буде дозволено використовувати "
-"мікрофон."
+"Програмам із наведеного нижче списку буде дозволено використовувати мікрофон."
 
 #: panels/microphone/cc-microphone-panel.ui:51
 msgid "No Applications Have Asked for Microphone Access"
@@ -2886,9 +2870,8 @@ msgstr "Назва мережі"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
-#: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52
+#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:372
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -3600,16 +3583,6 @@ msgstr ""
 #: panels/network/net-proxy.c:120
 msgid "This is not recommended for untrusted public networks."
 msgstr "Це не рекомендовано для ненадійних прилюдних мереж."
-
-#. update title
-#. Translators: this is the title of the connection details
-#. * window for vpn connections, it is also used to display
-#. * vpn connections in the device list.
-#.
-#: panels/network/net-vpn.c:63 panels/network/net-vpn.c:156
-#, c-format
-msgid "%s VPN"
-msgstr "%s VPN"
 
 #: panels/network/network-bluetooth.ui:11
 msgid "Turn device off"
@@ -4887,29 +4860,6 @@ msgstr ""
 "Живлення;Сон;Призупинити;Приспати;Батарея;Яскравість;Затемнення;Порожній;"
 "DPMS;Бездіяльність;живлення;енергія;"
 
-#: panels/printers/authentication-dialog.ui:9
-msgid " "
-msgstr " "
-
-#: panels/printers/authentication-dialog.ui:24
-msgid "Authenticate"
-msgstr "Засвідчення"
-
-#. Translators: This is a username on a print server.
-#: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:311
-#: panels/printers/pp-jobs-dialog.ui:41
-#: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:342
-#: panels/wwan/cc-wwan-apn-dialog.ui:148
-msgid "Username"
-msgstr "Користувач"
-
-#: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:286
-msgid "Authentication Required"
-msgstr "Потрібно засвідчитись"
-
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:676
 #, c-format
@@ -4971,10 +4921,23 @@ msgstr "Не знайдено жодного принтера"
 msgid "Enter a network address or search for a printer"
 msgstr "Уведіть адресу мережі або знайдіть принтер"
 
+#: panels/printers/new-printer-dialog.ui:286
+msgid "Authentication Required"
+msgstr "Потрібно засвідчитись"
+
 #: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Введіть користувача та пароль, щоб переглянути доступні принтери на сервері."
+
+#. Translators: This is a username on a print server.
+#: panels/printers/new-printer-dialog.ui:311
+#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
+msgid "Username"
+msgstr "Користувач"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
@@ -5866,14 +5829,6 @@ msgstr "Додати місце"
 msgid "No applications found"
 msgstr "Не знайдено жодної програми"
 
-#: panels/search/cc-search-panel-row.ui:49
-msgid "Move Up"
-msgstr "Перемістити вгору"
-
-#: panels/search/cc-search-panel-row.ui:53
-msgid "Move Down"
-msgstr "Пересунути вниз"
-
 #: panels/search/cc-search-panel.ui:10
 msgid "Application Search"
 msgstr "Пошук за допомогою програм"
@@ -5914,32 +5869,32 @@ msgstr "Немає жодної вибраної мережі для оприл�
 msgid "Networks"
 msgstr "Мережі"
 
-#: panels/sharing/cc-sharing-panel.c:276
+#: panels/sharing/cc-sharing-panel.c:367
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Увімкнено"
 
-#: panels/sharing/cc-sharing-panel.c:278 panels/sharing/cc-sharing-panel.c:305
+#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Вимкнено"
 
-#: panels/sharing/cc-sharing-panel.c:308
+#: panels/sharing/cc-sharing-panel.c:399
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Увімкнено"
 
-#: panels/sharing/cc-sharing-panel.c:311
+#: panels/sharing/cc-sharing-panel.c:402
 msgctxt "service is active"
 msgid "Active"
 msgstr "Активний"
 
-#: panels/sharing/cc-sharing-panel.c:429
+#: panels/sharing/cc-sharing-panel.c:520
 msgid "Choose a Folder"
 msgstr "Вибрати теку"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:657
+#: panels/sharing/cc-sharing-panel.c:748
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5949,7 +5904,7 @@ msgstr ""
 "теку із іншими користувачами вашої поточної мережі за допомогою: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:663
+#: panels/sharing/cc-sharing-panel.c:754
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5959,16 +5914,6 @@ msgstr ""
 "Якщо дистанційний доступ увімкнено, віддалені користувачі можуть "
 "під'єднуватися за допомогою команди SSH:\n"
 "%s"
-
-#. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:669
-#, c-format
-msgid ""
-"Screen sharing allows remote users to view or control your screen by "
-"connecting to %s"
-msgstr ""
-"Спільний доступ до екрана надає змогу віддаленим користувачам переглядати "
-"або керувати вашим екраном, під'єднавшись до %s"
 
 #: panels/sharing/cc-sharing-panel.ui:9
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
@@ -5984,8 +5929,9 @@ msgid "_File Sharing"
 msgstr "_Оприлюднення файлів"
 
 #: panels/sharing/cc-sharing-panel.ui:65
-msgid "_Screen Sharing"
-msgstr "Оприлюднення _екрана"
+msgid "Remote _Desktop"
+msgstr ""
+"Віддалена с_тільниця"
 
 #: panels/sharing/cc-sharing-panel.ui:72
 msgid "_Media Sharing"
@@ -6009,42 +5955,90 @@ msgid "Remote Login"
 msgstr "Віддалений вхід"
 
 #: panels/sharing/cc-sharing-panel.ui:250
-msgid "Screen Sharing"
-msgstr "Оприлюднення екрана"
+#: panels/sharing/cc-sharing-panel.ui:267
+#| msgid "Remote Login"
+msgid "Remote Desktop"
+msgstr "Віддалена стільниця"
 
-#: panels/sharing/cc-sharing-panel.ui:298
-msgid "_Allow connections to control the screen"
-msgstr "_Дозволити під'єднуватись і керувати екраном"
+#: panels/sharing/cc-sharing-panel.ui:263
+msgid ""
+"Remote desktop allows viewing and controlling your desktop from another "
+"computer."
+msgstr ""
+"За допомогою інструментів віддаленої стільниці можна переглядати і керувати вашою стільницею з іншого комп'ютера."
 
-#: panels/sharing/cc-sharing-panel.ui:316
-msgid "_Password:"
-msgstr "_Пароль:"
+#: panels/sharing/cc-sharing-panel.ui:268
+#| msgid "Enable or disable remote login"
+msgid "Enable or disable remote desktop connections to this computer."
+msgstr "Увімкнути або вимкнути віддалені з'єднання зі стільницею на цьому комп'ютері."
 
-#: panels/sharing/cc-sharing-panel.ui:339
-msgid "_Show Password"
-msgstr "_Показати пароль"
+#: panels/sharing/cc-sharing-panel.ui:280
+#| msgid "Remote Login"
+msgid "Remote Control"
+msgstr "Дистанційне керування"
 
-#: panels/sharing/cc-sharing-panel.ui:352
-msgid "Access Options"
-msgstr "Параметри доступу"
+#: panels/sharing/cc-sharing-panel.ui:281
+#| msgid "_Allow connections to control the screen"
+msgid "Allows remote connections to control the screen."
+msgstr "Уможливлює керування екраном за допомогою віддалених з'єднань."
 
-#: panels/sharing/cc-sharing-panel.ui:364
-msgid "_New connections must ask for access"
-msgstr "_Нові з'єднання мають вимагати доступ"
+#: panels/sharing/cc-sharing-panel.ui:294
+#| msgid "Forget Connection"
+msgid "How to Connect"
+msgstr "Як з'єднатися"
 
-#: panels/sharing/cc-sharing-panel.ui:375
-msgid "_Require a password"
-msgstr "Вимагати _пароль"
+#: panels/sharing/cc-sharing-panel.ui:295
+msgid ""
+"Connect to this computer using the device name or remote desktop address."
+msgstr ""
+"З'єднатися з цим комп'ютером на основі назви пристрою та адреси віддаленої стільниці."
 
-#: panels/sharing/cc-sharing-panel.ui:400
+#: panels/sharing/cc-sharing-panel.ui:321
+#| msgid "Delete Address"
+msgid "Remote Desktop Address"
+msgstr "Адреса віддаленої стільниці"
+
+#: panels/sharing/cc-sharing-panel.ui:346
+#| msgid "Au_thentication"
+msgid "Authentication"
+msgstr "Розпізнавання"
+
+#: panels/sharing/cc-sharing-panel.ui:347
+msgid "The user name and password are required to connect to this computer."
+msgstr ""
+"Для встановлення з'єднання із цим комп'ютером потрібне ім'я користувача і пароль."
+
+#: panels/sharing/cc-sharing-panel.ui:351
+#| msgid "Username"
+msgid "User Name"
+msgstr "Користувач"
+
+#: panels/sharing/cc-sharing-panel.ui:397
+msgid "Verify Encryption"
+msgstr ""
+"Перевірити шифрування"
+
+#: panels/sharing/cc-sharing-panel.ui:426
+#| msgid "Fingerprint"
+msgid "Encryption Fingerprint"
+msgstr "Відбиток шифрування"
+
+#: panels/sharing/cc-sharing-panel.ui:427
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"Відбиток шифрування можна переглянути у клієнтах з'єднання — він має бути таким самим"
+
+#: panels/sharing/cc-sharing-panel.ui:458
 msgid "Media Sharing"
 msgstr "Оприлюднення матеріалів"
 
-#: panels/sharing/cc-sharing-panel.ui:422
+#: panels/sharing/cc-sharing-panel.ui:480
 msgid "Share music, photos and videos over the network."
 msgstr "Ділитись музикою, світлинами та відеозаписами через мережу."
 
-#: panels/sharing/cc-sharing-panel.ui:435
+#: panels/sharing/cc-sharing-panel.ui:493
 msgid "Folders"
 msgstr "Теки"
 
@@ -7039,7 +7033,6 @@ msgid "_Clear History…"
 msgstr "О_чистити журнал…"
 
 #: panels/usage/cc-usage-panel.ui:63
-#| msgid "Trash & Temporary Files"
 msgid "Trash &amp; Temporary Files"
 msgstr "Смітник та тимчасові файли"
 
@@ -7089,26 +7082,26 @@ msgstr "Мусить збігатись з адресою вашого пост�
 msgid "Failed to add account"
 msgstr "Не вдалось додати обліковий запис"
 
-#: panels/user-accounts/cc-add-user-dialog.c:673
+#: panels/user-accounts/cc-add-user-dialog.c:679
 #: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "Паролі не збігаються."
 
-#: panels/user-accounts/cc-add-user-dialog.c:877
-#: panels/user-accounts/cc-add-user-dialog.c:916
-#: panels/user-accounts/cc-add-user-dialog.c:934
+#: panels/user-accounts/cc-add-user-dialog.c:883
+#: panels/user-accounts/cc-add-user-dialog.c:922
+#: panels/user-accounts/cc-add-user-dialog.c:940
 msgid "Failed to register account"
 msgstr "Не вдалося зареєструвати обліковий запис"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1049
+#: panels/user-accounts/cc-add-user-dialog.c:1055
 msgid "No supported way to authenticate with this domain"
 msgstr "Непідтримуваний спосіб автентифікації з цим доменом"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1113
+#: panels/user-accounts/cc-add-user-dialog.c:1119
 msgid "Failed to join domain"
 msgstr "Не вдалось долучитись до домену"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1168
+#: panels/user-accounts/cc-add-user-dialog.c:1174
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7116,7 +7109,7 @@ msgstr ""
 "Цей користувач не спрацював.\n"
 "Спробуйте ще."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1175
+#: panels/user-accounts/cc-add-user-dialog.c:1181
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7124,11 +7117,11 @@ msgstr ""
 "Цей пароль не спрацював.\n"
 "Спробуйте ще."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1183
+#: panels/user-accounts/cc-add-user-dialog.c:1189
 msgid "Failed to log into domain"
 msgstr "Не вдалось увійти до домену"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1238
+#: panels/user-accounts/cc-add-user-dialog.c:1244
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Не вдалося знайти домен. Можливо, ви неправильно це написали?"
 
@@ -7614,29 +7607,29 @@ msgstr "Увійшов"
 
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:763
-#: panels/user-accounts/cc-user-panel.c:866
+#: panels/user-accounts/cc-user-panel.c:867
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Увімкнено"
 
-#: panels/user-accounts/cc-user-panel.c:1186
+#: panels/user-accounts/cc-user-panel.c:1187
 msgid "Failed to contact the accounts service"
 msgstr "Не вдалось зв'язатись зі службою облікових записів"
 
-#: panels/user-accounts/cc-user-panel.c:1188
+#: panels/user-accounts/cc-user-panel.c:1189
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
-#: panels/user-accounts/cc-user-panel.c:1209
+#: panels/user-accounts/cc-user-panel.c:1210
 msgid "This panel must be unlocked to change this setting"
 msgstr "Цю панель має бути розблоковано для зміни цього параметра"
 
-#: panels/user-accounts/cc-user-panel.c:1276
+#: panels/user-accounts/cc-user-panel.c:1277
 msgid "Delete the selected user account"
 msgstr "Вилучити вибраний обліковий запис користувача"
 
-#: panels/user-accounts/cc-user-panel.c:1280
-#: panels/user-accounts/cc-user-panel.c:1389
+#: panels/user-accounts/cc-user-panel.c:1281
+#: panels/user-accounts/cc-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7644,7 +7637,7 @@ msgstr ""
 "Щоб вилучити вибраний обліковий запис користувача,\n"
 "натисніть спочатку на піктограму *"
 
-#: panels/user-accounts/cc-user-panel.c:1431
+#: panels/user-accounts/cc-user-panel.c:1432
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Розблокуйте, щоб додати користувачів і змінити налаштування"
 
@@ -8113,15 +8106,15 @@ msgstr "Точки доступу"
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-data.c:543
+#: panels/wwan/cc-wwan-data.c:542
 msgid "Operation Cancelled"
 msgstr "Дію скасовано"
 
-#: panels/wwan/cc-wwan-data.c:546
+#: panels/wwan/cc-wwan-data.c:545
 msgid "<b>Error:</b> Access denied changing settings"
 msgstr "<b>Помилка:</b> відмовлено у доступі до зміни параметрів"
 
-#: panels/wwan/cc-wwan-data.c:549
+#: panels/wwan/cc-wwan-data.c:548
 msgid "<b>Error:</b> Mobile Equipment Error"
 msgstr "<b>Помилка:</b> помилка мобільного обладнання"
 
@@ -8727,6 +8720,55 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "More Warm"
+#~ msgstr "Тепліше"
+
+#~ msgid "Less Warm"
+#~ msgstr "Холодніше"
+
+#~ msgid "Move up"
+#~ msgstr "Пересунути вище"
+
+#~ msgid "Move down"
+#~ msgstr "Пересунути нижче"
+
+#~ msgid "%s VPN"
+#~ msgstr "%s VPN"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Authenticate"
+#~ msgstr "Засвідчення"
+
+#~ msgid ""
+#~ "Screen sharing allows remote users to view or control your screen by "
+#~ "connecting to %s"
+#~ msgstr ""
+#~ "Спільний доступ до екрана надає змогу віддаленим користувачам переглядати "
+#~ "або керувати вашим екраном, під'єднавшись до %s"
+
+#~ msgid "_Screen Sharing"
+#~ msgstr "Оприлюднення _екрана"
+
+#~ msgid "Screen Sharing"
+#~ msgstr "Оприлюднення екрана"
+
+#~ msgid "_Password:"
+#~ msgstr "_Пароль:"
+
+#~ msgid "_Show Password"
+#~ msgstr "_Показати пароль"
+
+#~ msgid "Access Options"
+#~ msgstr "Параметри доступу"
+
+#~ msgid "_New connections must ask for access"
+#~ msgstr "_Нові з'єднання мають вимагати доступ"
+
+#~ msgid "_Require a password"
+#~ msgstr "Вимагати _пароль"
 
 #~ msgid "Screenshots"
 #~ msgstr "Знімки екрана"
