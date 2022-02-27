@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-15 22:18+0000\n"
-"PO-Revision-Date: 2022-02-20 19:31+0100\n"
+"POT-Creation-Date: 2022-02-26 18:29+0000\n"
+"PO-Revision-Date: 2022-02-27 13:48+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-DamnedLies-Scope: partial\n"
 "X-Project-Style: gnome\n"
 
@@ -178,10 +178,8 @@ msgid "Notifications"
 msgstr "Notificacions"
 
 #: panels/applications/cc-applications-panel.ui:127
-#, fuzzy
-#| msgid "Show _Notifications"
 msgid "Show system notifications."
-msgstr "Afichar las _notificacions"
+msgstr "Afichar las notificacions sistèma"
 
 #: panels/applications/cc-applications-panel.ui:133
 msgid "Run in background"
@@ -295,10 +293,8 @@ msgid "File Types"
 msgstr "Tipes de fichièr"
 
 #: panels/applications/cc-applications-panel.ui:373
-#, fuzzy
-#| msgid "Link speed"
 msgid "Link Types"
-msgstr "Velocitat de la connexion"
+msgstr "Tipes de ligam"
 
 #: panels/applications/cc-applications-panel.ui:383
 msgid "Reset"
@@ -360,7 +356,7 @@ msgstr "Seleccionar un imatge"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
@@ -378,7 +374,7 @@ msgstr "_Anullar"
 #: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:433
+#: panels/sharing/cc-sharing-panel.c:524
 #: panels/user-accounts/cc-avatar-chooser.c:166
 msgid "_Open"
 msgstr "_Dobrir"
@@ -453,8 +449,6 @@ msgstr ""
 "Activatz per connectar de periferics e recebre de transferiments de fichièrs."
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:35
-#, fuzzy
-#| msgid "Airplane Mode is on"
 msgid "Airplane Mode is On"
 msgstr "Mòde avion activat"
 
@@ -492,8 +486,6 @@ msgid "share;sharing;bluetooth;obex;"
 msgstr "partiment;partejar;bluetooth;obex;"
 
 #: panels/camera/cc-camera-panel.ui:21
-#, fuzzy
-#| msgid "Camera is turned off"
 msgid "Camera is Turned Off"
 msgstr "La camèra es inactiva"
 
@@ -1715,7 +1707,7 @@ msgstr "ora"
 #: panels/display/cc-night-light-page.ui:154
 #: panels/display/cc-night-light-page.ui:241
 msgid ":"
-msgstr ":"
+msgstr " :"
 
 #: panels/display/cc-night-light-page.ui:171
 #: panels/display/cc-night-light-page.ui:258
@@ -1807,6 +1799,7 @@ msgid "System Logo"
 msgstr "Logotipe sistèma"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "Device Name"
 msgstr "Nom del periferic"
 
@@ -2238,7 +2231,6 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:467
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
-#: panels/printers/authentication-dialog.ui:19
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
 msgid "Cancel"
@@ -2555,8 +2547,6 @@ msgstr "Verrolhar l'ecran"
 
 #. FIXME
 #: panels/microphone/cc-microphone-panel.ui:20
-#, fuzzy
-#| msgid "Microphone is turned off"
 msgid "Microphone Turned Off"
 msgstr "Lo microfòn es inactiu"
 
@@ -2884,9 +2874,8 @@ msgstr "Nom de la ret"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
-#: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52
+#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:372
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -4782,7 +4771,7 @@ msgstr "Estalviador d'energia automatic"
 
 #: panels/power/cc-power-panel.ui:160
 msgid "Enables power saver mode when battery is low."
-msgstr "Activar l’estalviador d’energia quand la batariá es febla."
+msgstr "Activa l’estalviador d’energia quand la batariá es febla."
 
 #: panels/power/cc-power-panel.ui:173
 msgid "_Automatic Suspend"
@@ -4863,29 +4852,6 @@ msgstr ""
 "energia;alimentacion;velha;suspension;susprendre;ivernacion;batariá;"
 "luminositat;negre;ecran;DPMS;inactiu;som;dormir;"
 
-#: panels/printers/authentication-dialog.ui:9
-msgid " "
-msgstr " "
-
-#: panels/printers/authentication-dialog.ui:24
-msgid "Authenticate"
-msgstr "Autentificacion"
-
-#. Translators: This is a username on a print server.
-#: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:311
-#: panels/printers/pp-jobs-dialog.ui:41
-#: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:342
-#: panels/wwan/cc-wwan-apn-dialog.ui:148
-msgid "Username"
-msgstr "Nom d'utilizaire"
-
-#: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:286
-msgid "Authentication Required"
-msgstr "Autentificacion requesida"
-
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:676
 #, c-format
@@ -4947,11 +4913,24 @@ msgstr "Cap d'imprimenta pas trobada"
 msgid "Enter a network address or search for a printer"
 msgstr "Picatz l'adreça d'una ret o recercatz una imprimenta"
 
+#: panels/printers/new-printer-dialog.ui:286
+msgid "Authentication Required"
+msgstr "Autentificacion requesida"
+
 #: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Picatz vòstre nom d’utilizaire e vòstre senhal per afichar las imprimentas "
 "sul servidor."
+
+#. Translators: This is a username on a print server.
+#: panels/printers/new-printer-dialog.ui:311
+#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
+msgid "Username"
+msgstr "Nom d'utilizaire"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
@@ -5837,20 +5816,16 @@ msgid "Others"
 msgstr "Autres"
 
 #: panels/search/cc-search-locations-dialog.ui:55
-#, fuzzy
-#| msgid "Location"
 msgid "Add Location"
-msgstr "Emplaçament"
+msgstr "Apondre un emplaçament"
 
 #: panels/search/cc-search-panel.c:165
 msgid "No applications found"
 msgstr "Cap d'aplicacion pas trobada"
 
 #: panels/search/cc-search-panel.ui:10
-#, fuzzy
-#| msgid "Application Switching"
 msgid "Application Search"
-msgstr "Alternància entre aplicacions"
+msgstr "Recèrca d'aplicacions"
 
 #: panels/search/cc-search-panel.ui:11
 #, fuzzy
@@ -5897,32 +5872,32 @@ msgstr "Cap de ret de partiment es pas seleccionada"
 msgid "Networks"
 msgstr "Rets"
 
-#: panels/sharing/cc-sharing-panel.c:276
+#: panels/sharing/cc-sharing-panel.c:367
 msgctxt "service is enabled"
 msgid "On"
 msgstr "I"
 
-#: panels/sharing/cc-sharing-panel.c:278 panels/sharing/cc-sharing-panel.c:305
+#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "O"
 
-#: panels/sharing/cc-sharing-panel.c:308
+#: panels/sharing/cc-sharing-panel.c:399
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Activat"
 
-#: panels/sharing/cc-sharing-panel.c:311
+#: panels/sharing/cc-sharing-panel.c:402
 msgctxt "service is active"
 msgid "Active"
 msgstr "Actiu"
 
-#: panels/sharing/cc-sharing-panel.c:429
+#: panels/sharing/cc-sharing-panel.c:520
 msgid "Choose a Folder"
 msgstr "Causir un dorsièr"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:657
+#: panels/sharing/cc-sharing-panel.c:748
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5932,7 +5907,7 @@ msgstr ""
 "los autres sus la ret actuala en utilizant  : %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:663
+#: panels/sharing/cc-sharing-panel.c:754
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5942,16 +5917,6 @@ msgstr ""
 "Quand la connexion distanta es activada, los utilizaires distants se pòdon "
 "connectar en utilizant la comanda Shell securizada :\n"
 "%s"
-
-#. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:669
-#, c-format
-msgid ""
-"Screen sharing allows remote users to view or control your screen by "
-"connecting to %s"
-msgstr ""
-"Lo partiment d’ecran permet als utilizaires distants de veire o contrarotlar "
-"vòstre ecran en se connectant a %s"
 
 #: panels/sharing/cc-sharing-panel.ui:9
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
@@ -5967,8 +5932,8 @@ msgid "_File Sharing"
 msgstr "Partiment de _fichièrs"
 
 #: panels/sharing/cc-sharing-panel.ui:65
-msgid "_Screen Sharing"
-msgstr "Partiment _de l'ecran"
+msgid "Remote _Desktop"
+msgstr "Burèu _distant"
 
 #: panels/sharing/cc-sharing-panel.ui:72
 msgid "_Media Sharing"
@@ -5992,42 +5957,84 @@ msgid "Remote Login"
 msgstr "Connexion distanta"
 
 #: panels/sharing/cc-sharing-panel.ui:250
-msgid "Screen Sharing"
-msgstr "Partiment de l'ecran"
+#: panels/sharing/cc-sharing-panel.ui:267
+msgid "Remote Desktop"
+msgstr "Burèu distant"
 
-#: panels/sharing/cc-sharing-panel.ui:298
-msgid "_Allow connections to control the screen"
+#: panels/sharing/cc-sharing-panel.ui:263
+msgid ""
+"Remote desktop allows viewing and controlling your desktop from another "
+"computer."
+msgstr ""
+
+#: panels/sharing/cc-sharing-panel.ui:268
+#, fuzzy
+#| msgid "Enable or disable remote login"
+msgid "Enable or disable remote desktop connections to this computer."
+msgstr "Activar o desactivar una connexion distanta"
+
+#: panels/sharing/cc-sharing-panel.ui:280
+msgid "Remote Control"
+msgstr "Contraròtle a distància"
+
+#: panels/sharing/cc-sharing-panel.ui:281
+#, fuzzy
+#| msgid "_Allow connections to control the screen"
+msgid "Allows remote connections to control the screen."
 msgstr "_Autorizar los connectats a controlar l’ecran"
 
-#: panels/sharing/cc-sharing-panel.ui:316
-msgid "_Password:"
-msgstr "Se_nhal :"
+#: panels/sharing/cc-sharing-panel.ui:294
+#, fuzzy
+#| msgid "Forget Connection"
+msgid "How to Connect"
+msgstr "Doblidar la connexion"
 
-#: panels/sharing/cc-sharing-panel.ui:339
-msgid "_Show Password"
-msgstr "_Afichar lo senhal"
+#: panels/sharing/cc-sharing-panel.ui:295
+msgid ""
+"Connect to this computer using the device name or remote desktop address."
+msgstr ""
 
-#: panels/sharing/cc-sharing-panel.ui:352
-msgid "Access Options"
-msgstr "Opcions d'accès"
+#: panels/sharing/cc-sharing-panel.ui:321
+msgid "Remote Desktop Address"
+msgstr "Adreça burèu distant"
 
-#: panels/sharing/cc-sharing-panel.ui:364
-msgid "_New connections must ask for access"
-msgstr "Las _novèlas connexions devon èsser explicitament validadas"
+#: panels/sharing/cc-sharing-panel.ui:346
+msgid "Authentication"
+msgstr "Autentificacion"
 
-#: panels/sharing/cc-sharing-panel.ui:375
-msgid "_Require a password"
-msgstr "_Demandar lo senhal"
+#: panels/sharing/cc-sharing-panel.ui:347
+msgid "The user name and password are required to connect to this computer."
+msgstr ""
 
-#: panels/sharing/cc-sharing-panel.ui:400
+#: panels/sharing/cc-sharing-panel.ui:351
+msgid "User Name"
+msgstr "Nom d’utilizaire"
+
+#: panels/sharing/cc-sharing-panel.ui:397
+msgid "Verify Encryption"
+msgstr ""
+
+#: panels/sharing/cc-sharing-panel.ui:426
+#, fuzzy
+#| msgid "Fingerprint"
+msgid "Encryption Fingerprint"
+msgstr "Emprentas"
+
+#: panels/sharing/cc-sharing-panel.ui:427
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+
+#: panels/sharing/cc-sharing-panel.ui:458
 msgid "Media Sharing"
 msgstr "Partejar los mèdias"
 
-#: panels/sharing/cc-sharing-panel.ui:422
+#: panels/sharing/cc-sharing-panel.ui:480
 msgid "Share music, photos and videos over the network."
 msgstr "Partejar de la musica, de fòtos e de vidèos sus la ret."
 
-#: panels/sharing/cc-sharing-panel.ui:435
+#: panels/sharing/cc-sharing-panel.ui:493
 msgid "Folders"
 msgstr "Dorsièrs"
 
@@ -7701,10 +7708,8 @@ msgid "Remove User…"
 msgstr "Suprimir l’utilizaire…"
 
 #: panels/user-accounts/cc-user-panel.ui:333
-#, fuzzy
-#| msgid "Other Files"
 msgid "Other Users"
-msgstr "Autres fichièrs"
+msgstr "Autres utilizaires"
 
 #: panels/user-accounts/cc-user-panel.ui:346
 msgid "Add User…"
@@ -8013,16 +8018,12 @@ msgstr "Crear un periferic virtual"
 
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:608
-#, fuzzy
-#| msgid "Displays"
 msgid "All Displays"
-msgstr "Ec­rans"
+msgstr "Totes los ecrans"
 
 #: panels/wacom/cc-wacom-page.ui:16
-#, fuzzy
-#| msgid "Tablet"
 msgid "Tablet Mode"
-msgstr "Tauleta"
+msgstr "Mòde tauleta"
 
 #: panels/wacom/cc-wacom-page.ui:17
 msgid "Use absolute positioning for the pen"
@@ -8046,10 +8047,8 @@ msgid "Map to Monitor"
 msgstr "Associar a l'ecran…"
 
 #: panels/wacom/cc-wacom-page.ui:62
-#, fuzzy
-#| msgid "Aspect Ratio"
 msgid "Keep Aspect Ratio"
-msgstr "Proporcion"
+msgstr "Conservar las proporcions"
 
 #: panels/wacom/cc-wacom-page.ui:63
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
@@ -8733,6 +8732,40 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Authenticate"
+#~ msgstr "Autentificacion"
+
+#~ msgid ""
+#~ "Screen sharing allows remote users to view or control your screen by "
+#~ "connecting to %s"
+#~ msgstr ""
+#~ "Lo partiment d’ecran permet als utilizaires distants de veire o "
+#~ "contrarotlar vòstre ecran en se connectant a %s"
+
+#~ msgid "_Screen Sharing"
+#~ msgstr "Partiment _de l'ecran"
+
+#~ msgid "Screen Sharing"
+#~ msgstr "Partiment de l'ecran"
+
+#~ msgid "_Password:"
+#~ msgstr "Se_nhal :"
+
+#~ msgid "_Show Password"
+#~ msgstr "_Afichar lo senhal"
+
+#~ msgid "Access Options"
+#~ msgstr "Opcions d'accès"
+
+#~ msgid "_New connections must ask for access"
+#~ msgstr "Las _novèlas connexions devon èsser explicitament validadas"
+
+#~ msgid "_Require a password"
+#~ msgstr "_Demandar lo senhal"
 
 #~ msgid "Web Links"
 #~ msgstr "Ligams Web"
@@ -10300,9 +10333,6 @@ msgstr "Sons sistèma"
 #~ msgid "Personal File Sharing"
 #~ msgstr "Partiment de fichièrs personals"
 
-#~ msgid "_Allow Remote Control"
-#~ msgstr "_Autorizar lo contròle a distància"
-
 #~ msgid ""
 #~ "Media sharing allows you to share music, photos and videos over the "
 #~ "network."
@@ -10729,9 +10759,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "Share Public Folder On This Network"
 #~ msgstr "Partejar lo Dorsièr public sus aquesta ret"
-
-#~ msgid "Remote View"
-#~ msgstr "Afichatge distant"
 
 #~ msgid "Approve All Connections"
 #~ msgstr "Autorizar totas las connexions"
