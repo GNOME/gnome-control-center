@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-13 00:26+0000\n"
-"PO-Revision-Date: 2022-02-13 14:00+0100\n"
+"POT-Creation-Date: 2022-02-26 18:29+0000\n"
+"PO-Revision-Date: 2022-02-27 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -161,7 +161,7 @@ msgstr "Jaso sistemaren bilaketak eta bidali emaitzak."
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
 #: panels/user-accounts/cc-user-panel.c:765
-#: panels/user-accounts/cc-user-panel.c:869
+#: panels/user-accounts/cc-user-panel.c:870
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -342,7 +342,7 @@ msgstr "Hautatu argazki bat"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
@@ -360,7 +360,7 @@ msgstr "_Utzi"
 #: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:433
+#: panels/sharing/cc-sharing-panel.c:524
 #: panels/user-accounts/cc-avatar-chooser.c:166
 msgid "_Open"
 msgstr "_Ireki"
@@ -865,7 +865,7 @@ msgstr "Gailu bakoitzak koloreen profilaren eguneratzea behar du koloreak kudeat
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:434
-#: panels/diagnostics/cc-diagnostics-panel.c:139
+#: panels/diagnostics/cc-diagnostics-panel.c:137
 msgid "Learn more"
 msgstr "Ikasi gehiago"
 
@@ -1442,18 +1442,18 @@ msgid "default;application;preferred;media;"
 msgstr "lehenetsia;aplikazioa;hobetsia;euskarria;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#: panels/diagnostics/cc-diagnostics-panel.c:139
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
 "anonymously and are scrubbed of personal data. %s"
 msgstr "Arazo teknikoei buruzko txostenak bidaltzean %s hobetzen laguntzen diguzu. Txostenak modu anonimoan bidaltzen dira eta ez dute datu pertsonalik. %s"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:21
+#: panels/diagnostics/cc-diagnostics-panel.ui:8
 msgid "Problem Reporting"
 msgstr "Arazoaren berri ematea"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:55
+#: panels/diagnostics/cc-diagnostics-panel.ui:11
 msgid "_Automatic Problem Reporting"
 msgstr "_Arazoei buruz txostena automatikoki bidali"
 
@@ -1600,14 +1600,6 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "Eskalatu"
 
-#: panels/display/cc-night-light-page.c:624
-msgid "More Warm"
-msgstr "Beroago"
-
-#: panels/display/cc-night-light-page.c:636
-msgid "Less Warm"
-msgstr "Hotzago"
-
 #. Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.ui:21
 msgid "Temporarily Disabled Until Tomorrow"
@@ -1676,7 +1668,7 @@ msgstr "PM"
 msgid "To"
 msgstr "Nora"
 
-#: panels/display/cc-night-light-page.ui:302
+#: panels/display/cc-night-light-page.ui:316
 msgid "Color Temperature"
 msgstr "Kolore-tenperatura"
 
@@ -1742,6 +1734,7 @@ msgid "System Logo"
 msgstr "Sistemaren logoa"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "Device Name"
 msgstr "Gailuaren izena"
 
@@ -1966,11 +1959,11 @@ msgstr "Txikiagotu testuaren tamaina"
 msgid "High contrast on or off"
 msgstr "Gaitu edo desgaitu kontraste altua"
 
-#: panels/keyboard/cc-input-chooser.c:187
+#: panels/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "Ez da sarrerako iturbururik aurkitu"
 
-#: panels/keyboard/cc-input-chooser.c:933
+#: panels/keyboard/cc-input-chooser.c:931
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Bestelakoa"
@@ -1979,31 +1972,31 @@ msgstr "Bestelakoa"
 msgid "Add an Input Source"
 msgstr "Gehitu sarrerako iturburua"
 
-#: panels/keyboard/cc-input-chooser.ui:68
+#: panels/keyboard/cc-input-chooser.ui:81
 msgid "Input methods can’t be used on the login screen"
 msgstr "Ezin dira sarrerako metodoak erabili saio-hasierako pantailan"
 
-#: panels/keyboard/cc-input-list-box.ui:23
+#: panels/keyboard/cc-input-list-box.ui:24
 msgid "No input source selected"
 msgstr "Ez da sarrerako iturbururik hautatu"
 
-#: panels/keyboard/cc-input-row.ui:67
-msgid "Move up"
+#: panels/keyboard/cc-input-row.ui:28 panels/search/cc-search-panel-row.ui:49
+msgid "Move Up"
 msgstr "Eraman gora"
 
-#: panels/keyboard/cc-input-row.ui:81
-msgid "Move down"
+#: panels/keyboard/cc-input-row.ui:32 panels/search/cc-search-panel-row.ui:53
+msgid "Move Down"
 msgstr "Eraman behera"
 
-#: panels/keyboard/cc-input-row.ui:98
+#: panels/keyboard/cc-input-row.ui:38
 msgid "Preferences"
 msgstr "Hobespenak"
 
-#: panels/keyboard/cc-input-row.ui:120
+#: panels/keyboard/cc-input-row.ui:45
 msgid "View Keyboard Layout"
 msgstr "Bistaratu teklatuaren diseinua"
 
-#: panels/keyboard/cc-input-row.ui:139
+#: panels/keyboard/cc-input-row.ui:51
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:29
 msgid "Remove"
 msgstr "Kendu"
@@ -2014,59 +2007,59 @@ msgstr "Kendu"
 msgid "Custom Shortcuts"
 msgstr "Laster-tekla pertsonalizatuak"
 
-#: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.ui:172
+#: panels/keyboard/cc-keyboard-panel.c:64
+#: panels/keyboard/cc-keyboard-panel.ui:62
 msgid "Alternate Characters Key"
 msgstr "Ordezko karaktereen tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:65
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
 msgstr "Ordezko karaktereen tekla karaktere gehigarriak sartzeko erabil daiteke. Batzuetan hirugarren aukera gisa inprimatuta ageri dira zure teklatuan."
 
-#: panels/keyboard/cc-keyboard-panel.c:70
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:67
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Ezkerreko Alt tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:86
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Eskuineko Alt tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:72
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:69
+#: panels/keyboard/cc-keyboard-panel.c:87
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Ezkerreko Super tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:73
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:70
+#: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Eskuineko Super tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:74
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:71
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Menu tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:75
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Eskuineko Ctrl tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/cc-keyboard-panel.ui:191
+#: panels/keyboard/cc-keyboard-panel.c:80
+#: panels/keyboard/cc-keyboard-panel.ui:79
 msgid "Compose Key"
 msgstr "Compose tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.c:81
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2074,22 +2067,22 @@ msgid ""
 "<b>'</b> will enter <b>á</b>."
 msgstr "Compose teklak mota askotako karaktereak sartzea ahalbidetzen du. Hura erabiltzeko, sakatu Compose tekla eta, ondoren, karaktereen sekuentzia bat. Adibidez, Compose tekla sakatuta, eta ondoren <b>C</b> eta <b>o</b> erabilita, <b>©</b> sartuko du; <b>a</b> eta ondoren <b>'</b> erabilita, <b>á</b> sartuko du."
 
-#: panels/keyboard/cc-keyboard-panel.c:94
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Maiuskulak blokeatzeko tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:95
+#: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Korritzea blokeatzeko tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:96
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Pantaila inprimatzeko tekla"
 
-#: panels/keyboard/cc-keyboard-panel.c:232
+#: panels/keyboard/cc-keyboard-panel.c:217
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2097,41 +2090,41 @@ msgid ""
 msgstr "Sarrerako iturburuak %s lasterbidea erabilita txandakatu daitezke.\n"
 "Lasterbide hori ezarpenetan aldatu daiteke."
 
-#: panels/keyboard/cc-keyboard-panel.ui:38
+#: panels/keyboard/cc-keyboard-panel.ui:17
 msgid "Input Sources"
 msgstr "Sarrerako iturburuak"
 
-#: panels/keyboard/cc-keyboard-panel.ui:47
+#: panels/keyboard/cc-keyboard-panel.ui:18
 msgid "Includes keyboard layouts and input methods."
 msgstr "Teklatuaren diseinuak eta sarrerako metodoak ere hartzen ditu."
 
-#: panels/keyboard/cc-keyboard-panel.ui:70
+#: panels/keyboard/cc-keyboard-panel.ui:28
 msgid "Input Source Switching"
 msgstr "Sarrerako iturburua aldatzea"
 
-#: panels/keyboard/cc-keyboard-panel.ui:106
+#: panels/keyboard/cc-keyboard-panel.ui:31
 msgid "Use the _same source for all windows"
 msgstr "Erabili iturburu _bera leiho guztietan"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:43
 msgid "Switch input sources _individually for each window"
 msgstr "Aldatu sarrerako iturburua ba_naka leiho bakoitzean"
 
-#: panels/keyboard/cc-keyboard-panel.ui:142
+#: panels/keyboard/cc-keyboard-panel.ui:58
 msgid "Special Character Entry"
 msgstr "Karaktere bereziaren sarrera"
 
-#: panels/keyboard/cc-keyboard-panel.ui:151
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Teklatuaren bidez ikurrak eta letren aldaerak sartzeko metodoak."
 
-#: panels/keyboard/cc-keyboard-panel.ui:212
+#: panels/keyboard/cc-keyboard-panel.ui:97
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Laster-teklak"
 
-#: panels/keyboard/cc-keyboard-panel.ui:228
+#: panels/keyboard/cc-keyboard-panel.ui:100
 msgid "View and Customize Shortcuts"
 msgstr "Ikusi eta pertsonalizatu laster-teklak"
 
@@ -2155,7 +2148,6 @@ msgstr "Lasterbideak berrezartzeak zure lasterbide pertsonalizatuei eragin dieza
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:467
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
-#: panels/printers/authentication-dialog.ui:19
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
 msgid "Cancel"
@@ -2771,9 +2763,8 @@ msgstr "Sarearen izena"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
-#: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52
+#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:372
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -3468,16 +3459,6 @@ msgstr "Webeko proxy-autoaurkitzailea erabiltzen da konfigurazioaren URLa ez den
 #: panels/network/net-proxy.c:120
 msgid "This is not recommended for untrusted public networks."
 msgstr "Hau ez da gomendatzen sare publiko ez-fidagarrietan."
-
-#. update title
-#. Translators: this is the title of the connection details
-#. * window for vpn connections, it is also used to display
-#. * vpn connections in the device list.
-#.
-#: panels/network/net-vpn.c:63 panels/network/net-vpn.c:156
-#, c-format
-msgid "%s VPN"
-msgstr "%s VPNa"
 
 #: panels/network/network-bluetooth.ui:11
 msgid "Turn device off"
@@ -4716,29 +4697,6 @@ msgid ""
 "Energy;"
 msgstr "Argindarra;Lo egin;Eseki;Hibernatu;Bateria;Distira;Itzali;Belztu;Monitorea;DPMS;Inaktibo;Energia;"
 
-#: panels/printers/authentication-dialog.ui:9
-msgid " "
-msgstr " "
-
-#: panels/printers/authentication-dialog.ui:24
-msgid "Authenticate"
-msgstr "Autentifikatu"
-
-#. Translators: This is a username on a print server.
-#: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:311
-#: panels/printers/pp-jobs-dialog.ui:41
-#: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:342
-#: panels/wwan/cc-wwan-apn-dialog.ui:148
-msgid "Username"
-msgstr "Erabiltzaile-izena"
-
-#: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:286
-msgid "Authentication Required"
-msgstr "Autentifikazioa behar da"
-
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:676
 #, c-format
@@ -4799,9 +4757,22 @@ msgstr "Ez da inprimakirik aurkitu"
 msgid "Enter a network address or search for a printer"
 msgstr "Sartu sareko helbidea edo bilatu inprimagailu bat"
 
+#: panels/printers/new-printer-dialog.ui:286
+msgid "Authentication Required"
+msgstr "Autentifikazioa behar da"
+
 #: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr "Sartu zure erabiltzaile-izena eta pasahitza inprimatze-zerbitzarian."
+
+#. Translators: This is a username on a print server.
+#: panels/printers/new-printer-dialog.ui:311
+#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
+msgid "Username"
+msgstr "Erabiltzaile-izena"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
@@ -5680,14 +5651,6 @@ msgstr "Gehitu kokalekua"
 msgid "No applications found"
 msgstr "Ez da aplikaziorik aurkitu"
 
-#: panels/search/cc-search-panel-row.ui:49
-msgid "Move Up"
-msgstr "Eraman gora"
-
-#: panels/search/cc-search-panel-row.ui:53
-msgid "Move Down"
-msgstr "Eraman behera"
-
 #: panels/search/cc-search-panel.ui:10
 msgid "Application Search"
 msgstr "Aplikazioen bilaketa"
@@ -5727,32 +5690,32 @@ msgstr "Ez da sarerik hautatu partekatzeko"
 msgid "Networks"
 msgstr "Sareak"
 
-#: panels/sharing/cc-sharing-panel.c:276
+#: panels/sharing/cc-sharing-panel.c:367
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Aktibatuta"
 
-#: panels/sharing/cc-sharing-panel.c:278 panels/sharing/cc-sharing-panel.c:305
+#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Desaktibatuta"
 
-#: panels/sharing/cc-sharing-panel.c:308
+#: panels/sharing/cc-sharing-panel.c:399
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Gaituta"
 
-#: panels/sharing/cc-sharing-panel.c:311
+#: panels/sharing/cc-sharing-panel.c:402
 msgctxt "service is active"
 msgid "Active"
 msgstr "Aktibo"
 
-#: panels/sharing/cc-sharing-panel.c:429
+#: panels/sharing/cc-sharing-panel.c:520
 msgid "Choose a Folder"
 msgstr "Aukeratu karpeta"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:657
+#: panels/sharing/cc-sharing-panel.c:748
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5760,7 +5723,7 @@ msgid ""
 msgstr "Fitxategiak partekatzeak zure uneko sareko beste erabiltzaileek zure 'Publikoa' karpeta ikustea ahalbidetzen du honakoa erabilita: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:663
+#: panels/sharing/cc-sharing-panel.c:754
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5768,14 +5731,6 @@ msgid ""
 "%s"
 msgstr "Urruneko saio-hasiera gaituta dagoenean, urruneko erabiltzaileek konekta daitezke Shell Seguruko komandoa erabiliz: \n"
 "%s"
-
-#. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:669
-#, c-format
-msgid ""
-"Screen sharing allows remote users to view or control your screen by "
-"connecting to %s"
-msgstr "Urruneko pantaila partekatzeak urruneko erabiltzaileek zure pantaila ikustea edo kontrolatzea baimentzen du hona konektatuz: %s"
 
 #: panels/sharing/cc-sharing-panel.ui:9
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
@@ -5791,8 +5746,8 @@ msgid "_File Sharing"
 msgstr "_Fitxategiak partekatzea"
 
 #: panels/sharing/cc-sharing-panel.ui:65
-msgid "_Screen Sharing"
-msgstr "P_antaila partekatzea"
+msgid "Remote _Desktop"
+msgstr "U_rruneko mahaigaina"
 
 #: panels/sharing/cc-sharing-panel.ui:72
 msgid "_Media Sharing"
@@ -5816,42 +5771,76 @@ msgid "Remote Login"
 msgstr "Urruneko saioa"
 
 #: panels/sharing/cc-sharing-panel.ui:250
-msgid "Screen Sharing"
-msgstr "Pantaila partekatzea"
+#: panels/sharing/cc-sharing-panel.ui:267
+msgid "Remote Desktop"
+msgstr "Urruneko mahaigaina"
 
-#: panels/sharing/cc-sharing-panel.ui:298
-msgid "_Allow connections to control the screen"
-msgstr "_Baimendu konexioek pantaila kontrolatzea"
+#: panels/sharing/cc-sharing-panel.ui:263
+msgid ""
+"Remote desktop allows viewing and controlling your desktop from another "
+"computer."
+msgstr "Urruneko mahaigainari esker, zure mahaigaina beste ordenagailu batetik kontrolatu dezakezu."
 
-#: panels/sharing/cc-sharing-panel.ui:316
-msgid "_Password:"
-msgstr "_Pasahitza:"
+#: panels/sharing/cc-sharing-panel.ui:268
+msgid "Enable or disable remote desktop connections to this computer."
+msgstr "Gaitu edo urruneko mahaigaineko konexioa ordenagailu honekin."
 
-#: panels/sharing/cc-sharing-panel.ui:339
-msgid "_Show Password"
-msgstr "E_rakutsi pasahitza"
+#: panels/sharing/cc-sharing-panel.ui:280
+msgid "Remote Control"
+msgstr "Urruneko kontrola"
 
-#: panels/sharing/cc-sharing-panel.ui:352
-msgid "Access Options"
-msgstr "Sarbide-aukerak"
+#: panels/sharing/cc-sharing-panel.ui:281
+msgid "Allows remote connections to control the screen."
+msgstr "Baimendu urruneko konexioek pantaila kontrolatzea"
 
-#: panels/sharing/cc-sharing-panel.ui:364
-msgid "_New connections must ask for access"
-msgstr "Konexio _berriek sarbidea eskatu behar dute"
+#: panels/sharing/cc-sharing-panel.ui:294
+msgid "How to Connect"
+msgstr "Nola konektatu"
 
-#: panels/sharing/cc-sharing-panel.ui:375
-msgid "_Require a password"
-msgstr "_Eskatu pasahitza"
+#: panels/sharing/cc-sharing-panel.ui:295
+msgid ""
+"Connect to this computer using the device name or remote desktop address."
+msgstr "Konektatu ordenagailu honekin gailuaren izena edo urruneko mahaigainaren helbidea erabilita."
 
-#: panels/sharing/cc-sharing-panel.ui:400
+#: panels/sharing/cc-sharing-panel.ui:321
+msgid "Remote Desktop Address"
+msgstr "Urruneko mahaigainaren helbidea"
+
+#: panels/sharing/cc-sharing-panel.ui:346
+msgid "Authentication"
+msgstr "Autentifikazioa"
+
+#: panels/sharing/cc-sharing-panel.ui:347
+msgid "The user name and password are required to connect to this computer."
+msgstr "Erabiltzaile-izena eta pasahitza behar dira ordenagailu honekin konektatzeko."
+
+#: panels/sharing/cc-sharing-panel.ui:351
+msgid "User Name"
+msgstr "Erabiltzaile-izena"
+
+#: panels/sharing/cc-sharing-panel.ui:397
+msgid "Verify Encryption"
+msgstr "Egiaztatu zifratzea"
+
+#: panels/sharing/cc-sharing-panel.ui:426
+msgid "Encryption Fingerprint"
+msgstr "Zifratzearen hatz-marka"
+
+#: panels/sharing/cc-sharing-panel.ui:427
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr "Zifratzearen hatz-marka bezeroak konektatzean ikusten da eta berdina izan behar du"
+
+#: panels/sharing/cc-sharing-panel.ui:458
 msgid "Media Sharing"
 msgstr "Multimedia partekatzea"
 
-#: panels/sharing/cc-sharing-panel.ui:422
+#: panels/sharing/cc-sharing-panel.ui:480
 msgid "Share music, photos and videos over the network."
 msgstr "Partekatu musika, argazkiak eta bideoak sarean zehar."
 
-#: panels/sharing/cc-sharing-panel.ui:435
+#: panels/sharing/cc-sharing-panel.ui:493
 msgid "Folders"
 msgstr "Karpetak"
 
@@ -6867,44 +6856,44 @@ msgstr "Zure kontuaren hornitzailearen web helbidearekin bat etorri behar du."
 msgid "Failed to add account"
 msgstr "Huts egin du kontua gehitzean"
 
-#: panels/user-accounts/cc-add-user-dialog.c:673
+#: panels/user-accounts/cc-add-user-dialog.c:679
 #: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "Pasahitzak ez datoz bat."
 
-#: panels/user-accounts/cc-add-user-dialog.c:877
-#: panels/user-accounts/cc-add-user-dialog.c:916
-#: panels/user-accounts/cc-add-user-dialog.c:934
+#: panels/user-accounts/cc-add-user-dialog.c:883
+#: panels/user-accounts/cc-add-user-dialog.c:922
+#: panels/user-accounts/cc-add-user-dialog.c:940
 msgid "Failed to register account"
 msgstr "Huts egin du kontua erregistratzean"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1049
+#: panels/user-accounts/cc-add-user-dialog.c:1055
 msgid "No supported way to authenticate with this domain"
 msgstr "Ez dago modurik onartuta domeinu honekin autentifikatzeko"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1113
+#: panels/user-accounts/cc-add-user-dialog.c:1119
 msgid "Failed to join domain"
 msgstr "Huts egin du domeinuarekin elkartzean"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1168
+#: panels/user-accounts/cc-add-user-dialog.c:1174
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
 msgstr "Saioaren hasierako izenak ez du funtzionatzen.\n"
 "Saiatu berriro."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1175
+#: panels/user-accounts/cc-add-user-dialog.c:1181
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
 msgstr "Saioaren hasierako pasahitzak ez du funtzionatzen.\n"
 "Saiatu berriro."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1183
+#: panels/user-accounts/cc-add-user-dialog.c:1189
 msgid "Failed to log into domain"
 msgstr "Huts egin du domeinuan saioa hastean"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1238
+#: panels/user-accounts/cc-add-user-dialog.c:1244
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Ezin da domeinua aurkitu. Ongi idatzi duzu?"
 
@@ -7374,36 +7363,36 @@ msgstr "Saioan sartuta"
 
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:763
-#: panels/user-accounts/cc-user-panel.c:866
+#: panels/user-accounts/cc-user-panel.c:867
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Gaituta"
 
-#: panels/user-accounts/cc-user-panel.c:1186
+#: panels/user-accounts/cc-user-panel.c:1187
 msgid "Failed to contact the accounts service"
 msgstr "Huts egin du kontuaren zerbitzuarekin kontaktatzean"
 
-#: panels/user-accounts/cc-user-panel.c:1188
+#: panels/user-accounts/cc-user-panel.c:1189
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Ziurtatu zaitez kontuen zerbitzua instalatuta eta gaituta dagoela."
 
-#: panels/user-accounts/cc-user-panel.c:1209
+#: panels/user-accounts/cc-user-panel.c:1210
 msgid "This panel must be unlocked to change this setting"
 msgstr "Panel hau desblokeatu behar da ezarpen hori aldatzeko"
 
-#: panels/user-accounts/cc-user-panel.c:1276
+#: panels/user-accounts/cc-user-panel.c:1277
 msgid "Delete the selected user account"
 msgstr "Ezabatu hautatutako erabiltzailearen kontua"
 
-#: panels/user-accounts/cc-user-panel.c:1280
-#: panels/user-accounts/cc-user-panel.c:1389
+#: panels/user-accounts/cc-user-panel.c:1281
+#: panels/user-accounts/cc-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
 msgstr "Hautatutako erabiltzailearen kontua ezabatzeko\n"
 "aurrenik egin klik * ikonoan"
 
-#: panels/user-accounts/cc-user-panel.c:1431
+#: panels/user-accounts/cc-user-panel.c:1432
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Desblokeatu erabiltzaileak gehitzeko eta ezarpenak aldatzeko"
 
@@ -7848,15 +7837,15 @@ msgstr "Sarbide-puntuak"
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-data.c:543
+#: panels/wwan/cc-wwan-data.c:542
 msgid "Operation Cancelled"
 msgstr "Eragiketa bertan behera utzi da"
 
-#: panels/wwan/cc-wwan-data.c:546
+#: panels/wwan/cc-wwan-data.c:545
 msgid "<b>Error:</b> Access denied changing settings"
 msgstr "<b>Errorea:</b> Sarbidea ukatu da ezarpenak aldatzean"
 
-#: panels/wwan/cc-wwan-data.c:549
+#: panels/wwan/cc-wwan-data.c:548
 msgid "<b>Error:</b> Mobile Equipment Error"
 msgstr "<b>Error:</b> Ekipamendu mugikorraren errorea"
 
@@ -8443,6 +8432,55 @@ msgstr[1] "%u sarrera"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
+
+#~ msgid "More Warm"
+#~ msgstr "Beroago"
+
+#~ msgid "Less Warm"
+#~ msgstr "Hotzago"
+
+#~ msgid "Move up"
+#~ msgstr "Eraman gora"
+
+#~ msgid "Move down"
+#~ msgstr "Eraman behera"
+
+#~ msgid "%s VPN"
+#~ msgstr "%s VPNa"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Authenticate"
+#~ msgstr "Autentifikatu"
+
+#~ msgid ""
+#~ "Screen sharing allows remote users to view or control your screen by "
+#~ "connecting to %s"
+#~ msgstr ""
+#~ "Urruneko pantaila partekatzeak urruneko erabiltzaileek zure pantaila "
+#~ "ikustea edo kontrolatzea baimentzen du hona konektatuz: %s"
+
+#~ msgid "_Screen Sharing"
+#~ msgstr "P_antaila partekatzea"
+
+#~ msgid "Screen Sharing"
+#~ msgstr "Pantaila partekatzea"
+
+#~ msgid "_Password:"
+#~ msgstr "_Pasahitza:"
+
+#~ msgid "_Show Password"
+#~ msgstr "E_rakutsi pasahitza"
+
+#~ msgid "Access Options"
+#~ msgstr "Sarbide-aukerak"
+
+#~ msgid "_New connections must ask for access"
+#~ msgstr "Konexio _berriek sarbidea eskatu behar dute"
+
+#~ msgid "_Require a password"
+#~ msgstr "_Eskatu pasahitza"
 
 #~ msgid "Screenshots"
 #~ msgstr "Pantaila-argazkiak"
