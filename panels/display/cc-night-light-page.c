@@ -42,8 +42,10 @@ struct _CcNightLightPage {
   GtkWidget           *scale_color_temperature;
   GtkWidget           *night_light_toggle_switch;
   GtkComboBox         *schedule_type_combo;
+  GtkWidget           *from_spinbuttons_box;
   GtkWidget           *spinbutton_from_hours;
   GtkWidget           *spinbutton_from_minutes;
+  GtkWidget           *to_spinbuttons_box;
   GtkWidget           *spinbutton_to_hours;
   GtkWidget           *spinbutton_to_minutes;
   GtkStack            *stack_from;
@@ -592,8 +594,10 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_switch);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, schedule_type_combo);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, scale_color_temperature);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, from_spinbuttons_box);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, spinbutton_from_hours);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, spinbutton_from_minutes);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, to_spinbuttons_box);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, spinbutton_to_hours);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, spinbutton_to_minutes);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, stack_from);
@@ -696,6 +700,12 @@ cc_night_light_page_init (CcNightLightPage *self)
                            "changed::" CLOCK_FORMAT_KEY,
                            G_CALLBACK (dialog_clock_settings_changed_cb),
                            self, G_CONNECT_SWAPPED);
+
+  if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
+    {
+      gtk_widget_set_direction (self->to_spinbuttons_box, GTK_TEXT_DIR_LTR);
+      gtk_widget_set_direction (self->from_spinbuttons_box, GTK_TEXT_DIR_LTR);
+    }
 
   dialog_update_state (self);
 }
