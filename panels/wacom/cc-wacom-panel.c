@@ -49,6 +49,9 @@ struct _CcWacomPanel
 	GtkWidget        *scrollable;
 	GtkWidget        *tablets;
 	GtkWidget        *styli;
+	GtkWidget        *initial_state_stack;
+	GtkWidget        *panel_view;
+	GtkWidget        *panel_empty_state;
 	GHashTable       *devices; /* key=GsdDevice, value=CcWacomDevice */
 	GHashTable       *pages; /* key=CcWacomDevice, value=GtkWidget */
 	GHashTable       *stylus_pages; /* key=CcWacomTool, value=GtkWidget */
@@ -349,6 +352,15 @@ update_test_button (CcWacomPanel *self)
 }
 
 static void
+update_initial_state (CcWacomPanel *self)
+{
+	gtk_stack_set_visible_child (GTK_STACK (self->initial_state_stack),
+				     g_hash_table_size (self->devices) == 0 ?
+				     self->panel_empty_state :
+				     self->panel_view);
+}
+
+static void
 update_highlighted_stylus (CcWacomPanel *panel,
 			   CcWacomTool  *stylus)
 {
@@ -520,6 +532,9 @@ cc_wacom_panel_class_init (CcWacomPanelClass *klass)
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPanel, test_draw_area);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPanel, tablets);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPanel, styli);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPanel, initial_state_stack);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPanel, panel_empty_state);
+	gtk_widget_class_bind_template_child (widget_class, CcWacomPanel, panel_view);
 	gtk_widget_class_bind_template_child (widget_class, CcWacomPanel, vadjustment);
 }
 
@@ -582,6 +597,7 @@ device_removed_cb (CcWacomPanel     *self,
 	g_hash_table_remove (self->devices, gsd_device);
 	check_remove_stylus_pages (self);
 	update_test_button (self);
+	update_initial_state (self);
 }
 
 static void
@@ -590,6 +606,7 @@ device_added_cb (CcWacomPanel *self,
 {
 	add_known_device (self, device);
 	update_test_button (self);
+	update_initial_state (self);
 }
 
 void
@@ -663,6 +680,7 @@ cc_wacom_panel_init (CcWacomPanel *self)
 		add_known_device (self, l->data);
 
 	update_test_button (self);
+	update_initial_state (self);
 }
 
 GDBusProxy *
