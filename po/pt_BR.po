@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-12 23:35+0000\n"
-"PO-Revision-Date: 2022-02-12 21:52-0300\n"
+"POT-Creation-Date: 2022-02-26 18:29+0000\n"
+"PO-Revision-Date: 2022-02-28 11:51-0300\n"
 "Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
 "Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
 "Language: pt_BR\n"
@@ -197,7 +197,7 @@ msgstr "Recebe pesquisa do sistema e envia resultados."
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
 #: panels/user-accounts/cc-user-panel.c:765
-#: panels/user-accounts/cc-user-panel.c:869
+#: panels/user-accounts/cc-user-panel.c:870
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -381,7 +381,7 @@ msgstr "Selecionar uma imagem"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:94
 #: panels/user-accounts/cc-avatar-chooser.c:165
@@ -399,7 +399,7 @@ msgstr "_Cancelar"
 #: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:433
+#: panels/sharing/cc-sharing-panel.c:524
 #: panels/user-accounts/cc-avatar-chooser.c:166
 msgid "_Open"
 msgstr "_Abrir"
@@ -940,7 +940,7 @@ msgstr ""
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:434
-#: panels/diagnostics/cc-diagnostics-panel.c:139
+#: panels/diagnostics/cc-diagnostics-panel.c:137
 msgid "Learn more"
 msgstr "Saiba mais"
 
@@ -1527,7 +1527,7 @@ msgid "default;application;preferred;media;"
 msgstr "padrão;aplicativo;preferido;mídia;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#: panels/diagnostics/cc-diagnostics-panel.c:139
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
@@ -1536,11 +1536,11 @@ msgstr ""
 "Enviar relatórios de problemas técnicos nos ajuda a melhorar o %s. Os "
 "relatórios são enviados anonimamente e não contêm dados pessoais. %s"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:21
+#: panels/diagnostics/cc-diagnostics-panel.ui:8
 msgid "Problem Reporting"
 msgstr "Informe de erros"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:55
+#: panels/diagnostics/cc-diagnostics-panel.ui:11
 msgid "_Automatic Problem Reporting"
 msgstr "Relatório _automático de problemas"
 
@@ -1689,14 +1689,6 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "Dimensão"
 
-#: panels/display/cc-night-light-page.c:624
-msgid "More Warm"
-msgstr "Mais quente"
-
-#: panels/display/cc-night-light-page.c:636
-msgid "Less Warm"
-msgstr "Menos quente"
-
 #. Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.ui:21
 msgid "Temporarily Disabled Until Tomorrow"
@@ -1769,7 +1761,7 @@ msgstr "PM"
 msgid "To"
 msgstr "Até"
 
-#: panels/display/cc-night-light-page.ui:302
+#: panels/display/cc-night-light-page.ui:316
 msgid "Color Temperature"
 msgstr "Temperatura de cor"
 
@@ -1838,6 +1830,7 @@ msgid "System Logo"
 msgstr "Logotipo do sistema"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "Device Name"
 msgstr "Nome do dispositivo"
 
@@ -2071,11 +2064,11 @@ msgstr "Diminuir o tamanho do texto"
 msgid "High contrast on or off"
 msgstr "Ativar ou desativar o alto contraste"
 
-#: panels/keyboard/cc-input-chooser.c:187
+#: panels/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "Nenhuma fonte de entrada encontrada"
 
-#: panels/keyboard/cc-input-chooser.c:933
+#: panels/keyboard/cc-input-chooser.c:931
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Outro"
@@ -2084,31 +2077,31 @@ msgstr "Outro"
 msgid "Add an Input Source"
 msgstr "Adicionar uma fonte de entrada"
 
-#: panels/keyboard/cc-input-chooser.ui:68
+#: panels/keyboard/cc-input-chooser.ui:81
 msgid "Input methods can’t be used on the login screen"
 msgstr "Métodos de entrada não podem ser usados na tela de início de sessão"
 
-#: panels/keyboard/cc-input-list-box.ui:23
+#: panels/keyboard/cc-input-list-box.ui:24
 msgid "No input source selected"
 msgstr "Nenhuma fonte de entrada selecionada"
 
-#: panels/keyboard/cc-input-row.ui:67
-msgid "Move up"
+#: panels/keyboard/cc-input-row.ui:28 panels/search/cc-search-panel-row.ui:49
+msgid "Move Up"
 msgstr "Mover para cima"
 
-#: panels/keyboard/cc-input-row.ui:81
-msgid "Move down"
+#: panels/keyboard/cc-input-row.ui:32 panels/search/cc-search-panel-row.ui:53
+msgid "Move Down"
 msgstr "Mover para baixo"
 
-#: panels/keyboard/cc-input-row.ui:98
+#: panels/keyboard/cc-input-row.ui:38
 msgid "Preferences"
 msgstr "Preferências"
 
-#: panels/keyboard/cc-input-row.ui:120
+#: panels/keyboard/cc-input-row.ui:45
 msgid "View Keyboard Layout"
 msgstr "Ver disposição de teclado"
 
-#: panels/keyboard/cc-input-row.ui:139
+#: panels/keyboard/cc-input-row.ui:51
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:29
 msgid "Remove"
 msgstr "Remover"
@@ -2119,12 +2112,12 @@ msgstr "Remover"
 msgid "Custom Shortcuts"
 msgstr "Atalhos personalizados"
 
-#: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.ui:172
+#: panels/keyboard/cc-keyboard-panel.c:64
+#: panels/keyboard/cc-keyboard-panel.ui:62
 msgid "Alternate Characters Key"
 msgstr "Tecla de caracteres alternativos"
 
-#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:65
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
@@ -2132,48 +2125,48 @@ msgstr ""
 "A tecla de caracteres alternativos pode ser usada para inserir caracteres "
 "adicionais. Às vezes, eles são impressos como uma terceira opção no teclado."
 
-#: panels/keyboard/cc-keyboard-panel.c:70
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:67
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "Alt da esquerda"
 
-#: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:86
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "Alt da direita"
 
-#: panels/keyboard/cc-keyboard-panel.c:72
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:69
+#: panels/keyboard/cc-keyboard-panel.c:87
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "Super da esquerda"
 
-#: panels/keyboard/cc-keyboard-panel.c:73
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:70
+#: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "Super da direita"
 
-#: panels/keyboard/cc-keyboard-panel.c:74
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:71
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "Tecla de menu"
 
-#: panels/keyboard/cc-keyboard-panel.c:75
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "Ctrl da direita"
 
-#: panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/cc-keyboard-panel.ui:191
+#: panels/keyboard/cc-keyboard-panel.c:80
+#: panels/keyboard/cc-keyboard-panel.ui:79
 msgid "Compose Key"
 msgstr "Tecla de composição"
 
-#: panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.c:81
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2185,22 +2178,22 @@ msgstr ""
 "caracteres. Por exemplo, tecla de composição seguida por <b>C</b> e <b>o</b> "
 "vai inserir <b>©</b>, <b>a</b> seguido por <b>'</b> vai inserir <b>á</b>."
 
-#: panels/keyboard/cc-keyboard-panel.c:94
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:95
+#: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "Scroll Lock"
 
-#: panels/keyboard/cc-keyboard-panel.c:96
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "Print Screen"
 
-#: panels/keyboard/cc-keyboard-panel.c:232
+#: panels/keyboard/cc-keyboard-panel.c:217
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2209,41 +2202,41 @@ msgstr ""
 "As fontes de entrada podem ser alternadas usando o atalho de teclado %s.\n"
 "Isso pode ser alterado nas configurações de atalhos de teclado."
 
-#: panels/keyboard/cc-keyboard-panel.ui:38
+#: panels/keyboard/cc-keyboard-panel.ui:17
 msgid "Input Sources"
 msgstr "Fontes de entrada"
 
-#: panels/keyboard/cc-keyboard-panel.ui:47
+#: panels/keyboard/cc-keyboard-panel.ui:18
 msgid "Includes keyboard layouts and input methods."
 msgstr "Inclui layouts de teclado e métodos de entrada."
 
-#: panels/keyboard/cc-keyboard-panel.ui:70
+#: panels/keyboard/cc-keyboard-panel.ui:28
 msgid "Input Source Switching"
 msgstr "Alternar fonte de entrada"
 
-#: panels/keyboard/cc-keyboard-panel.ui:106
+#: panels/keyboard/cc-keyboard-panel.ui:31
 msgid "Use the _same source for all windows"
 msgstr "Usar a me_sma fonte para todas as janelas"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:43
 msgid "Switch input sources _individually for each window"
 msgstr "Alternar fontes _individualmente para cada janela"
 
-#: panels/keyboard/cc-keyboard-panel.ui:142
+#: panels/keyboard/cc-keyboard-panel.ui:58
 msgid "Special Character Entry"
 msgstr "Entrada de caracteres especiais"
 
-#: panels/keyboard/cc-keyboard-panel.ui:151
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Métodos para inserir símbolos e variantes de letras usando o teclado."
 
-#: panels/keyboard/cc-keyboard-panel.ui:212
+#: panels/keyboard/cc-keyboard-panel.ui:97
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
-#: panels/keyboard/cc-keyboard-panel.ui:228
+#: panels/keyboard/cc-keyboard-panel.ui:100
 msgid "View and Customize Shortcuts"
 msgstr "Veja e personalize atalhos"
 
@@ -2269,7 +2262,6 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:467
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
-#: panels/printers/authentication-dialog.ui:19
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
 msgid "Cancel"
@@ -2926,9 +2918,8 @@ msgstr "Nome da rede"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
-#: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52
+#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:372
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -3642,16 +3633,6 @@ msgstr ""
 #: panels/network/net-proxy.c:120
 msgid "This is not recommended for untrusted public networks."
 msgstr "Isto não é recomendado para as redes públicas não confiáveis."
-
-#. update title
-#. Translators: this is the title of the connection details
-#. * window for vpn connections, it is also used to display
-#. * vpn connections in the device list.
-#.
-#: panels/network/net-vpn.c:63 panels/network/net-vpn.c:156
-#, c-format
-msgid "%s VPN"
-msgstr "VPN %s"
 
 #: panels/network/network-bluetooth.ui:11
 msgid "Turn device off"
@@ -4924,29 +4905,6 @@ msgstr ""
 "Energia;Dormir;Suspender;Hibernar;Bateria;Brilho;Escurecer;Vazio;Branca;"
 "Monitor;DPMS;Inativo;Bateria;"
 
-#: panels/printers/authentication-dialog.ui:9
-msgid " "
-msgstr " "
-
-#: panels/printers/authentication-dialog.ui:24
-msgid "Authenticate"
-msgstr "Autenticar"
-
-#. Translators: This is a username on a print server.
-#: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:311
-#: panels/printers/pp-jobs-dialog.ui:41
-#: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:342
-#: panels/wwan/cc-wwan-apn-dialog.ui:148
-msgid "Username"
-msgstr "Nome de usuário"
-
-#: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:286
-msgid "Authentication Required"
-msgstr "Autenticação necessária"
-
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:676
 #, c-format
@@ -5009,11 +4967,24 @@ msgstr "Nenhuma impressora encontrada"
 msgid "Enter a network address or search for a printer"
 msgstr "Digite um endereço de rede ou pesquise por uma impressora"
 
+#: panels/printers/new-printer-dialog.ui:286
+msgid "Authentication Required"
+msgstr "Autenticação necessária"
+
 #: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Digite nome de usuário e senha para ver as impressoras no servidor de "
 "impressão."
+
+#. Translators: This is a username on a print server.
+#: panels/printers/new-printer-dialog.ui:311
+#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
+msgid "Username"
+msgstr "Nome de usuário"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
@@ -5903,14 +5874,6 @@ msgstr "Adicionar localização"
 msgid "No applications found"
 msgstr "Nenhum aplicativo encontrado"
 
-#: panels/search/cc-search-panel-row.ui:49
-msgid "Move Up"
-msgstr "Mover para cima"
-
-#: panels/search/cc-search-panel-row.ui:53
-msgid "Move Down"
-msgstr "Mover para baixo"
-
 #: panels/search/cc-search-panel.ui:10
 msgid "Application Search"
 msgstr "Pesquisa do aplicativo"
@@ -5952,32 +5915,32 @@ msgstr "Sem redes selecionadas para compartilhamento"
 msgid "Networks"
 msgstr "Redes"
 
-#: panels/sharing/cc-sharing-panel.c:276
+#: panels/sharing/cc-sharing-panel.c:367
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Ligado"
 
-#: panels/sharing/cc-sharing-panel.c:278 panels/sharing/cc-sharing-panel.c:305
+#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Desligado"
 
-#: panels/sharing/cc-sharing-panel.c:308
+#: panels/sharing/cc-sharing-panel.c:399
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: panels/sharing/cc-sharing-panel.c:311
+#: panels/sharing/cc-sharing-panel.c:402
 msgctxt "service is active"
 msgid "Active"
 msgstr "Ativo"
 
-#: panels/sharing/cc-sharing-panel.c:429
+#: panels/sharing/cc-sharing-panel.c:520
 msgid "Choose a Folder"
 msgstr "Escolha uma pasta"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:657
+#: panels/sharing/cc-sharing-panel.c:748
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5987,7 +5950,7 @@ msgstr ""
 "Pública com outros na sua rede atual usando: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:663
+#: panels/sharing/cc-sharing-panel.c:754
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5997,16 +5960,6 @@ msgstr ""
 "Quando a sessão remota está habilitada, usuários remotos podem se conectar "
 "usando o comando de Shell Seguro:\n"
 "%s"
-
-#. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:669
-#, c-format
-msgid ""
-"Screen sharing allows remote users to view or control your screen by "
-"connecting to %s"
-msgstr ""
-"Compartilhamento de tela permite que usuários remotos vejam e controlem sua "
-"tela conectando a %s"
 
 #: panels/sharing/cc-sharing-panel.ui:9
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
@@ -6022,8 +5975,8 @@ msgid "_File Sharing"
 msgstr "Compartilhamento de _arquivos"
 
 #: panels/sharing/cc-sharing-panel.ui:65
-msgid "_Screen Sharing"
-msgstr "Compartilhamento de _tela"
+msgid "Remote _Desktop"
+msgstr "Área _de trabalho remota"
 
 #: panels/sharing/cc-sharing-panel.ui:72
 msgid "_Media Sharing"
@@ -6047,42 +6000,85 @@ msgid "Remote Login"
 msgstr "Sessão remota"
 
 #: panels/sharing/cc-sharing-panel.ui:250
-msgid "Screen Sharing"
-msgstr "Compartilhamento de tela"
+#: panels/sharing/cc-sharing-panel.ui:267
+msgid "Remote Desktop"
+msgstr "Área de trabalho remota"
 
-#: panels/sharing/cc-sharing-panel.ui:298
-msgid "_Allow connections to control the screen"
-msgstr "_Permitir que as conexões controlem a tela"
+#: panels/sharing/cc-sharing-panel.ui:263
+msgid ""
+"Remote desktop allows viewing and controlling your desktop from another "
+"computer."
+msgstr ""
+"Área de trabalho remota permite visualizar e controlar seu ambiente de outro "
+"computador."
 
-#: panels/sharing/cc-sharing-panel.ui:316
-msgid "_Password:"
-msgstr "_Senha:"
+#: panels/sharing/cc-sharing-panel.ui:268
+msgid "Enable or disable remote desktop connections to this computer."
+msgstr ""
+"Habilita ou desabilita conexões de área de trabalho remota para este "
+"computador."
 
-#: panels/sharing/cc-sharing-panel.ui:339
-msgid "_Show Password"
-msgstr "_Mostrar senha"
+#: panels/sharing/cc-sharing-panel.ui:280
+msgid "Remote Control"
+msgstr "Controle remoto"
 
-#: panels/sharing/cc-sharing-panel.ui:352
-msgid "Access Options"
-msgstr "Opções de acesso"
+#: panels/sharing/cc-sharing-panel.ui:281
+msgid "Allows remote connections to control the screen."
+msgstr "Permite que conexões remotas controlem a tela."
 
-#: panels/sharing/cc-sharing-panel.ui:364
-msgid "_New connections must ask for access"
-msgstr "_Novas conexões devem solicitar acesso"
+#: panels/sharing/cc-sharing-panel.ui:294
+msgid "How to Connect"
+msgstr "Como ser conectar"
 
-#: panels/sharing/cc-sharing-panel.ui:375
-msgid "_Require a password"
-msgstr "Exigi_r uma senha"
+#: panels/sharing/cc-sharing-panel.ui:295
+msgid ""
+"Connect to this computer using the device name or remote desktop address."
+msgstr ""
+"Conecte a este computador usando o nome do dispositivo ou o endereço da área "
+"de trabalho remota."
 
-#: panels/sharing/cc-sharing-panel.ui:400
+#: panels/sharing/cc-sharing-panel.ui:321
+msgid "Remote Desktop Address"
+msgstr "Endereço da área de trabalho remota"
+
+#: panels/sharing/cc-sharing-panel.ui:346
+msgid "Authentication"
+msgstr "Autenticação"
+
+#: panels/sharing/cc-sharing-panel.ui:347
+msgid "The user name and password are required to connect to this computer."
+msgstr ""
+"O nome de usuário e senha são necessários para se conectar a este computador."
+
+#: panels/sharing/cc-sharing-panel.ui:351
+msgid "User Name"
+msgstr "Nome de usuário"
+
+#: panels/sharing/cc-sharing-panel.ui:397
+msgid "Verify Encryption"
+msgstr "Verificar criptografia"
+
+#: panels/sharing/cc-sharing-panel.ui:426
+msgid "Encryption Fingerprint"
+msgstr "Impressão digital de criptografia"
+
+#: panels/sharing/cc-sharing-panel.ui:427
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr ""
+"A impressão digital de criptografia pode ser vista na conexão de clientes e "
+"deve ser idêntica"
+
+#: panels/sharing/cc-sharing-panel.ui:458
 msgid "Media Sharing"
 msgstr "Compartilhamento de multimídia"
 
-#: panels/sharing/cc-sharing-panel.ui:422
+#: panels/sharing/cc-sharing-panel.ui:480
 msgid "Share music, photos and videos over the network."
 msgstr "Compartilhe músicas, fotos e vídeos através da rede."
 
-#: panels/sharing/cc-sharing-panel.ui:435
+#: panels/sharing/cc-sharing-panel.ui:493
 msgid "Folders"
 msgstr "Pastas"
 
@@ -7126,26 +7122,26 @@ msgstr "Deveria corresponder ao endereço web do seu provedor de sessão."
 msgid "Failed to add account"
 msgstr "Falha ao adicionar conta"
 
-#: panels/user-accounts/cc-add-user-dialog.c:673
+#: panels/user-accounts/cc-add-user-dialog.c:679
 #: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "As senhas não conferem."
 
-#: panels/user-accounts/cc-add-user-dialog.c:877
-#: panels/user-accounts/cc-add-user-dialog.c:916
-#: panels/user-accounts/cc-add-user-dialog.c:934
+#: panels/user-accounts/cc-add-user-dialog.c:883
+#: panels/user-accounts/cc-add-user-dialog.c:922
+#: panels/user-accounts/cc-add-user-dialog.c:940
 msgid "Failed to register account"
 msgstr "Falha ao registrar conta"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1049
+#: panels/user-accounts/cc-add-user-dialog.c:1055
 msgid "No supported way to authenticate with this domain"
 msgstr "Nenhuma forma suportada para autenticar neste domínio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1113
+#: panels/user-accounts/cc-add-user-dialog.c:1119
 msgid "Failed to join domain"
 msgstr "Falha em entrar no domínio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1168
+#: panels/user-accounts/cc-add-user-dialog.c:1174
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7153,7 +7149,7 @@ msgstr ""
 "Aquele nome de sessão não funcionou.\n"
 "Por favor, tente novamente."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1175
+#: panels/user-accounts/cc-add-user-dialog.c:1181
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7161,11 +7157,11 @@ msgstr ""
 "Aquela senha de sessão não funcionou.\n"
 "Por favor, tente novamente."
 
-#: panels/user-accounts/cc-add-user-dialog.c:1183
+#: panels/user-accounts/cc-add-user-dialog.c:1189
 msgid "Failed to log into domain"
 msgstr "Falha em fazer login no domínio"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1238
+#: panels/user-accounts/cc-add-user-dialog.c:1244
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "Não foi possível localizar o domínio. Será que você escreveu errado?"
 
@@ -7653,31 +7649,31 @@ msgstr "Acesso autorizado"
 
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:763
-#: panels/user-accounts/cc-user-panel.c:866
+#: panels/user-accounts/cc-user-panel.c:867
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: panels/user-accounts/cc-user-panel.c:1186
+#: panels/user-accounts/cc-user-panel.c:1187
 msgid "Failed to contact the accounts service"
 msgstr "Falhou ao contactar o serviço de contas"
 
-#: panels/user-accounts/cc-user-panel.c:1188
+#: panels/user-accounts/cc-user-panel.c:1189
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr ""
 "Por favor, certifique-se de que o Serviço de Contas esteja instalado "
 "corretamente."
 
-#: panels/user-accounts/cc-user-panel.c:1209
+#: panels/user-accounts/cc-user-panel.c:1210
 msgid "This panel must be unlocked to change this setting"
 msgstr "Este painel deve ser desbloqueado para alterar esta configuração"
 
-#: panels/user-accounts/cc-user-panel.c:1276
+#: panels/user-accounts/cc-user-panel.c:1277
 msgid "Delete the selected user account"
 msgstr "Exclui a conta de usuário selecionada"
 
-#: panels/user-accounts/cc-user-panel.c:1280
-#: panels/user-accounts/cc-user-panel.c:1389
+#: panels/user-accounts/cc-user-panel.c:1281
+#: panels/user-accounts/cc-user-panel.c:1390
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7685,7 +7681,7 @@ msgstr ""
 "Para excluir a conta de usuário selecionada,\n"
 "clique primeiro no ícone *"
 
-#: panels/user-accounts/cc-user-panel.c:1431
+#: panels/user-accounts/cc-user-panel.c:1432
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Desbloqueie para adicionar usuários e alterar as configurações"
 
@@ -8155,15 +8151,15 @@ msgstr "Pontos de acesso"
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-data.c:543
+#: panels/wwan/cc-wwan-data.c:542
 msgid "Operation Cancelled"
 msgstr "Operação cancelada"
 
-#: panels/wwan/cc-wwan-data.c:546
+#: panels/wwan/cc-wwan-data.c:545
 msgid "<b>Error:</b> Access denied changing settings"
 msgstr "<b>Erro:</b> Acesso negado ao alterar configurações"
 
-#: panels/wwan/cc-wwan-data.c:549
+#: panels/wwan/cc-wwan-data.c:548
 msgid "<b>Error:</b> Mobile Equipment Error"
 msgstr "<b>Erro:</b> Erro de Equipamento Móvel"
 
@@ -8767,6 +8763,55 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "More Warm"
+#~ msgstr "Mais quente"
+
+#~ msgid "Less Warm"
+#~ msgstr "Menos quente"
+
+#~ msgid "Move up"
+#~ msgstr "Mover para cima"
+
+#~ msgid "Move down"
+#~ msgstr "Mover para baixo"
+
+#~ msgid "%s VPN"
+#~ msgstr "VPN %s"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Authenticate"
+#~ msgstr "Autenticar"
+
+#~ msgid ""
+#~ "Screen sharing allows remote users to view or control your screen by "
+#~ "connecting to %s"
+#~ msgstr ""
+#~ "Compartilhamento de tela permite que usuários remotos vejam e controlem "
+#~ "sua tela conectando a %s"
+
+#~ msgid "_Screen Sharing"
+#~ msgstr "Compartilhamento de _tela"
+
+#~ msgid "Screen Sharing"
+#~ msgstr "Compartilhamento de tela"
+
+#~ msgid "_Password:"
+#~ msgstr "_Senha:"
+
+#~ msgid "_Show Password"
+#~ msgstr "_Mostrar senha"
+
+#~ msgid "Access Options"
+#~ msgstr "Opções de acesso"
+
+#~ msgid "_New connections must ask for access"
+#~ msgstr "_Novas conexões devem solicitar acesso"
+
+#~ msgid "_Require a password"
+#~ msgstr "Exigi_r uma senha"
 
 #~ msgctxt "retain_history"
 #~ msgid "7 day"
