@@ -33,11 +33,13 @@ struct _CcMultitaskingPanel
   GSettings       *shell_settings;
   GSettings       *wm_settings;
 
+  GtkPicture      *active_screen_edges_picture;
   GtkSwitch       *active_screen_edges_switch;
   GtkCheckButton  *all_workspaces_radio;
   GtkCheckButton  *current_workspace_radio;
   GtkCheckButton  *dynamic_workspaces_radio;
   GtkCheckButton  *fixed_workspaces_radio;
+  GtkPicture      *hot_corner_picture;
   GtkSwitch       *hot_corner_switch;
   GtkSpinButton   *number_of_workspaces_spin;
   GtkCheckButton  *workspaces_primary_display_radio;
@@ -73,11 +75,13 @@ cc_multitasking_panel_class_init (CcMultitaskingPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/multitasking/cc-multitasking-panel.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, active_screen_edges_picture);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, active_screen_edges_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, all_workspaces_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, current_workspace_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, dynamic_workspaces_radio);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, fixed_workspaces_radio);
+  gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_picture);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, hot_corner_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, number_of_workspaces_spin);
   gtk_widget_class_bind_template_child (widget_class, CcMultitaskingPanel, workspaces_primary_display_radio);
@@ -146,4 +150,12 @@ cc_multitasking_panel_init (CcMultitaskingPanel *self)
                    self->current_workspace_radio,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
+
+  if (gtk_widget_get_default_direction () == GTK_TEXT_DIR_RTL)
+    {
+      gtk_picture_set_resource (self->hot_corner_picture,
+                                "/org/gnome/control-center/multitasking/assets/hot-corner-rtl.svg");
+      gtk_picture_set_resource (self->active_screen_edges_picture,
+                                "/org/gnome/control-center/multitasking/assets/active-screen-edges-rtl.svg");
+    }
 }
