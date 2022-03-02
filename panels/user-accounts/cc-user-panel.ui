@@ -101,14 +101,24 @@
                               </object>
                             </child>
                             <child type="overlay">
-                              <object class="GtkMenuButton" id="user_avatar_edit_button">
-                                <property name="sensitive">False</property>
+                              <object class="AdwBin">
+                                <style>
+                                  <class name="cutout-button"/>
+                                </style>
                                 <property name="halign">end</property>
                                 <property name="valign">end</property>
-                                <property name="icon-name">document-edit-symbolic</property>
-                                <style>
-                                  <class name="circular"/>
-                                </style>
+                                <child>
+                                  <object class="GtkMenuButton" id="user_avatar_edit_button">
+                                    <property name="sensitive">False</property>
+                                    <property name="icon-name">document-edit-symbolic</property>
+                                    <property name="popover">
+                                      <object class="CcAvatarChooser" id="avatar_chooser"/>
+                                    </property>
+                                    <style>
+                                      <class name="circular"/>
+                                    </style>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
