@@ -1150,6 +1150,9 @@ enable_gnome_remote_desktop (CcSharingPanel *self)
   g_autoptr(GSettings) rdp_settings = NULL;
 
   rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
+
+  g_settings_set_boolean (rdp_settings, "enable", TRUE);
+
   cert_path = g_settings_get_string (rdp_settings, "tls-cert");
   key_path = g_settings_get_string (rdp_settings, "tls-key");
   if (strlen (cert_path) > 0 &&
@@ -1373,11 +1376,6 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
 
   rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
 
-  g_settings_bind (rdp_settings,
-                   "enable",
-                   self->remote_desktop_switch,
-                   "active",
-                   G_SETTINGS_BIND_DEFAULT);
   g_settings_bind (rdp_settings,
                    "view-only",
                    self->remote_control_checkbutton,
