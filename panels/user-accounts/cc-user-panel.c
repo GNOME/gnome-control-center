@@ -1384,7 +1384,7 @@ setup_main_window (CcUserPanel *self)
                 g_signal_connect_object (self->um, "notify::is-loaded", G_CALLBACK (users_loaded), self, G_CONNECT_SWAPPED);
         }
 
-        self->avatar_chooser = cc_avatar_chooser_new ();
+        self->avatar_chooser = cc_avatar_chooser_new (GTK_WIDGET (self));
         gtk_menu_button_set_popover (self->user_avatar_edit_button,
                                      GTK_WIDGET (self->avatar_chooser));
 }

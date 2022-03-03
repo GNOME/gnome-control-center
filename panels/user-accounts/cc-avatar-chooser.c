@@ -43,6 +43,8 @@
 struct _CcAvatarChooser {
         GtkPopover parent;
 
+        GtkWidget *transient_for;
+
         GtkWidget *crop_area;
         GtkWidget *user_flowbox;
         GtkWidget *flowbox;
@@ -158,7 +160,7 @@ cc_avatar_chooser_select_file (CcAvatarChooser *self)
         GtkFileFilter *filter;
         GtkWindow *toplevel;
 
-        toplevel = (GtkWindow*) gtk_widget_get_native (GTK_WIDGET (self));
+        toplevel = (GtkWindow*) gtk_widget_get_native (GTK_WIDGET (self->transient_for));
         chooser = gtk_file_chooser_dialog_new (_("Browse for more pictures"),
                                                toplevel,
                                                GTK_FILE_CHOOSER_ACTION_OPEN,
@@ -348,13 +350,13 @@ setup_photo_popup (CcAvatarChooser *self)
 }
 
 CcAvatarChooser *
-cc_avatar_chooser_new ()
+cc_avatar_chooser_new (GtkWidget *transient_for)
 {
         CcAvatarChooser *self;
 
         self = g_object_new (CC_TYPE_AVATAR_CHOOSER,
                              NULL);
-
+        self->transient_for = transient_for;
         self->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_NORMAL);
 
         setup_photo_popup (self);
