@@ -1306,13 +1306,11 @@ on_copy_clicked_label (GtkButton *button,
 }
 
 static void
-on_copy_clicked_entry (GtkButton *button,
-                       GtkEntry  *entry)
+on_copy_clicked_editable (GtkButton   *button,
+                          GtkEditable *editable)
 {
-  GtkEntryBuffer *buffer = gtk_entry_get_buffer (entry);
-
   gdk_clipboard_set_text (gtk_widget_get_clipboard (GTK_WIDGET (button)),
-                          gtk_entry_buffer_get_text (buffer));
+                          gtk_editable_get_text (editable));
 }
 
 static pwquality_settings_t *
@@ -1419,10 +1417,10 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
                     "clicked", G_CALLBACK (on_copy_clicked_label),
                     self->remote_desktop_address_label);
   g_signal_connect (self->remote_desktop_username_copy,
-                    "clicked", G_CALLBACK (on_copy_clicked_entry),
+                    "clicked", G_CALLBACK (on_copy_clicked_editable),
                     self->remote_desktop_username_entry);
   g_signal_connect (self->remote_desktop_password_copy,
-                    "clicked", G_CALLBACK (on_copy_clicked_entry),
+                    "clicked", G_CALLBACK (on_copy_clicked_editable),
                     self->remote_desktop_password_entry);
 
   g_signal_connect (self->remote_desktop_switch, "notify::state",
