@@ -112,10 +112,11 @@ cc_is_service_active (const char  *service,
   g_variant_get_child (unit_state_prop, 0, "v", &unit_state_variant);
   unit_state = g_variant_get_string (unit_state_variant, NULL);
 
-  if (g_strcmp0 (unit_state, "enabled") != 0)
+  if (g_strcmp0 (unit_state, "enabled") == 0 ||
+      g_strcmp0 (unit_state, "static") == 0)
+    return TRUE;
+  else
     return FALSE;
-
-  return TRUE;
 }
 
 gboolean
