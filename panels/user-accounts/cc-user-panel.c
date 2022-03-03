@@ -1383,6 +1383,10 @@ setup_main_window (CcUserPanel *self)
         } else {
                 g_signal_connect_object (self->um, "notify::is-loaded", G_CALLBACK (users_loaded), self, G_CONNECT_SWAPPED);
         }
+
+        self->avatar_chooser = cc_avatar_chooser_new ();
+        gtk_menu_button_set_popover (self->user_avatar_edit_button,
+                                     GTK_WIDGET (self->avatar_chooser));
 }
 
 static GSettings *
@@ -1484,7 +1488,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, add_user_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_switch);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, avatar_chooser);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, back_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_state_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_row);
