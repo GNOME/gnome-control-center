@@ -25,8 +25,10 @@
 #include "cc-keyboard-manager.h"
 #include "keyboard-shortcuts.h"
 
+#include <gdk/gdk.h>
 #ifdef GDK_WINDOWING_X11
 #include <gdk/x11/gdkx.h>
+#include <X11/Xatom.h>
 #endif
 
 #define BINDINGS_SCHEMA       "org.gnome.settings-daemon.plugins.media-keys"
@@ -494,6 +496,166 @@ append_sections_from_gsettings (CcKeyboardManager *self)
   g_array_free (entries, TRUE);
 }
 
+#ifdef GDK_WINDOWING_X11
+static char *
+get_window_manager_property (GdkDisplay *display,
+                             Atom        atom,
+                             Window      window)
+{
+  Display *xdisplay;
+  Atom utf8_string;
+  int result;
+  Atom actual_type;
+  int actual_format;
+  unsigned long n_items;
+  unsigned long bytes_after;
+  unsigned char *prop;
+  char *value;
+
+  if (window == None)
+    return NULL;
+
+  xdisplay = gdk_x11_display_get_xdisplay (display);
+  utf8_string = XInternAtom (xdisplay, "UTF8_STRING", False);
+
+  gdk_x11_display_error_trap_push (display);
+
+  result = XGetWindowProperty (xdisplay,
+                               window,
+                               atom,
+                               0,
+                               G_MAXLONG,
+                               False,
+                               utf8_string,
+                               &actual_type,
+                               &actual_format,
+                               &n_items,
+                               &bytes_after,
+                               &prop);
+
+  gdk_x11_display_error_trap_pop_ignored (display);
+
+  if (result != Success ||
+      actual_type != utf8_string ||
+      actual_format != 8 ||
+      n_items == 0)
+    {
+      XFree (prop);
+      return NULL;
+    }
+
+  value = g_strndup ((const char *) prop, n_items);
+  XFree (prop);
+
+  if (!g_utf8_validate (value, -1, NULL))
+    {
+      g_free (value);
+      return NULL;
+    }
+
+  return value;
+}
+
+static Window
+get_wm_window (GdkDisplay *display)
+{
+  Display *xdisplay;
+  Atom wm_check;
+  int result;
+  Atom actual_type;
+  int actual_format;
+  unsigned long n_items;
+  unsigned long bytes_after;
+  unsigned char *prop;
+  Window wm_window;
+
+  xdisplay = gdk_x11_display_get_xdisplay (display);
+  wm_check = XInternAtom (xdisplay, "_NET_SUPPORTING_WM_CHECK", False);
+
+  gdk_x11_display_error_trap_push (display);
+
+  result = XGetWindowProperty (xdisplay,
+                               XDefaultRootWindow (xdisplay),
+                               wm_check,
+                               0,
+                               G_MAXLONG,
+                               False,
+                               XA_WINDOW,
+                               &actual_type,
+                               &actual_format,
+                               &n_items,
+                               &bytes_after,
+                               &prop);
+
+  gdk_x11_display_error_trap_pop_ignored (display);
+
+  if (result != Success ||
+      actual_type != XA_WINDOW ||
+      n_items == 0)
+    {
+      XFree (prop);
+      return None;
+    }
+
+  wm_window = *(Window *) prop;
+  XFree (prop);
+
+  return wm_window;
+}
+#endif
+
+static GStrv
+get_current_keybindings (void)
+{
+#ifdef GDK_WINDOWING_X11
+  GdkDisplay *display;
+  Display *xdisplay;
+  Atom keybindings_atom;
+  Window wm_window;
+  char *keybindings;
+  GStrv results;
+
+  display = gdk_display_get_default ();
+  if (!GDK_IS_X11_DISPLAY (display))
+    return NULL;
+
+  xdisplay = gdk_x11_display_get_xdisplay (display);
+  keybindings_atom = XInternAtom (xdisplay, "_GNOME_WM_KEYBINDINGS", False);
+
+  wm_window = get_wm_window (display);
+  keybindings = get_window_manager_property (display,
+                                             keybindings_atom,
+                                             wm_window);
+
+  if (keybindings != NULL)
+    {
+      GStrv p;
+
+      results = g_strsplit (keybindings, ",", -1);
+
+      for (p = results; p && *p; p++)
+        g_strstrip (*p);
+
+      g_free (keybindings);
+    }
+  else
+    {
+      Atom wm_atom;
+      char *wm_name;
+
+      wm_atom = XInternAtom (xdisplay, "_NET_WM_NAME", False);
+      wm_name = get_window_manager_property (display, wm_atom, wm_window);
+
+      results = g_new0 (char *, 2);
+      results[0] = wm_name ? wm_name : g_strdup ("Unknown");
+    }
+
+  return results;
+#else
+  return NULL;
+#endif
+}
+
 static void
 reload_sections (CcKeyboardManager *self)
 {
@@ -526,7 +688,10 @@ reload_sections (CcKeyboardManager *self)
                                                   (GDestroyNotify) free_key_array);
 
   /* Load WM keybindings */
-  wm_keybindings = g_strdupv (default_wm_keybindings);
+  wm_keybindings = get_current_keybindings ();
+
+  if (wm_keybindings == NULL)
+    wm_keybindings = g_strdupv (default_wm_keybindings);
 
   loaded_files = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
 
