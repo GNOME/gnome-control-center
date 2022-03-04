@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-26 18:29+0000\n"
+"POT-Creation-Date: 2022-03-04 15:37+0000\n"
 "PO-Revision-Date: 2022-02-13 09:28+0100\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -176,8 +176,8 @@ msgstr "Rebre cerques del sistema i enviar resultats."
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:765
-#: panels/user-accounts/cc-user-panel.c:870
+#: panels/user-accounts/cc-user-panel.c:789
+#: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -361,12 +361,12 @@ msgstr "Selecciona una imatge"
 #: panels/search/cc-search-locations-dialog.c:677
 #: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
-#: panels/user-accounts/cc-avatar-chooser.c:94
-#: panels/user-accounts/cc-avatar-chooser.c:165
-#: panels/user-accounts/cc-fingerprint-dialog.ui:30
+#: panels/user-accounts/cc-avatar-chooser.c:96
+#: panels/user-accounts/cc-avatar-chooser.c:167
+#: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:555
-#: panels/user-accounts/cc-user-panel.c:573
+#: panels/user-accounts/cc-user-panel.c:579
+#: panels/user-accounts/cc-user-panel.c:597
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
@@ -378,7 +378,7 @@ msgstr "_Cancel·la"
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
 #: panels/sharing/cc-sharing-panel.c:524
-#: panels/user-accounts/cc-avatar-chooser.c:166
+#: panels/user-accounts/cc-avatar-chooser.c:168
 msgid "_Open"
 msgstr "_Obre"
 
@@ -620,7 +620,7 @@ msgstr "_Continua"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:58
+#: panels/user-accounts/cc-fingerprint-dialog.ui:60
 msgid "_Done"
 msgstr "_Fet"
 
@@ -2310,7 +2310,7 @@ msgstr "Premeu Esc o Retrocés per a inhabilitar la drecera de teclat."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:125
+#: panels/user-accounts/cc-user-panel.ui:122
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Nom"
@@ -2880,7 +2880,7 @@ msgstr "Nom de la xarxa"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
 #: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:372
+#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:376
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -4036,7 +4036,7 @@ msgstr "Nom d'_usuari"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:168
+#: panels/user-accounts/cc-user-panel.ui:165
 msgid "_Password"
 msgstr "_Contrasenya"
 
@@ -5002,7 +5002,7 @@ msgid "Loading drivers database…"
 msgstr "S'està carregant la base de dades de controladors..."
 
 #: panels/printers/ppd-selection-dialog.ui:91
-#: panels/user-accounts/cc-avatar-chooser.c:96
+#: panels/user-accounts/cc-avatar-chooser.c:98
 msgid "Select"
 msgstr "Selecciona"
 
@@ -5634,7 +5634,7 @@ msgid "Your Account"
 msgstr "El teu compte"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:289
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -5999,8 +5999,8 @@ msgid "Remote Control"
 msgstr "Control remot"
 
 #: panels/sharing/cc-sharing-panel.ui:281
-msgid "_Allows remote connections to control the screen."
-msgstr "_Permet a les connexions remotes controlar la pantalla."
+msgid "Allows remote connections to control the screen."
+msgstr "Permet a les connexions remotes controlar la pantalla."
 
 #: panels/sharing/cc-sharing-panel.ui:294
 msgid "How to Connect"
@@ -6013,49 +6013,49 @@ msgstr ""
 "Connecta a aquest ordinador amb el nom del dispositiu o l'adreça "
 "d'escriptori remota."
 
-#: panels/sharing/cc-sharing-panel.ui:321
+#: panels/sharing/cc-sharing-panel.ui:323
 msgid "Remote Desktop Address"
 msgstr "Adreça remota de l'escriptori"
 
-#: panels/sharing/cc-sharing-panel.ui:346
+#: panels/sharing/cc-sharing-panel.ui:350
 msgid "Authentication"
 msgstr "Autenticació"
 
-#: panels/sharing/cc-sharing-panel.ui:347
+#: panels/sharing/cc-sharing-panel.ui:351
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "Es requereix el nom d'usuari i la contrasenya per connectar-se a aquest "
 "ordinador."
 
-#: panels/sharing/cc-sharing-panel.ui:351
+#: panels/sharing/cc-sharing-panel.ui:355
 msgid "User Name"
 msgstr "Nom d'usuari"
 
-#: panels/sharing/cc-sharing-panel.ui:397
+#: panels/sharing/cc-sharing-panel.ui:401
 msgid "Verify Encryption"
 msgstr "Verifica el xifrat"
 
-#: panels/sharing/cc-sharing-panel.ui:426
+#: panels/sharing/cc-sharing-panel.ui:430
 msgid "Encryption Fingerprint"
 msgstr "Empremta digital de xifratge"
 
-#: panels/sharing/cc-sharing-panel.ui:427
+#: panels/sharing/cc-sharing-panel.ui:431
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
 msgstr ""
-"L'empremta digital de xifratge es pot veure en connectar clients i hauria "
-"de ser idèntica"
+"L'empremta digital de xifratge es pot veure en connectar clients i hauria de"
+" ser idèntica"
 
-#: panels/sharing/cc-sharing-panel.ui:458
+#: panels/sharing/cc-sharing-panel.ui:463
 msgid "Media Sharing"
 msgstr "Compartició multimèdia"
 
-#: panels/sharing/cc-sharing-panel.ui:480
+#: panels/sharing/cc-sharing-panel.ui:485
 msgid "Share music, photos and videos over the network."
 msgstr "Compartiu música, fotografies i vídeos a través de la xarxa."
 
-#: panels/sharing/cc-sharing-panel.ui:493
+#: panels/sharing/cc-sharing-panel.ui:498
 msgid "Folders"
 msgstr "Carpetes"
 
@@ -7199,7 +7199,7 @@ msgstr ""
 "centralitzats en aquest dispositiu. També podeu usar aquest compte per a "
 "accedir als recursos de l'empresa a Internet."
 
-#: panels/user-accounts/cc-avatar-chooser.c:162
+#: panels/user-accounts/cc-avatar-chooser.c:164
 msgid "Browse for more pictures"
 msgstr "Navega per més imatges"
 
@@ -7211,19 +7211,19 @@ msgstr "Selecciona un fitxer..."
 msgid "Fingerprint Manager"
 msgstr "Gestor de l'empremta dactilar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:18
+#: panels/user-accounts/cc-fingerprint-dialog.ui:20
 msgid "Fingerprint"
 msgstr "Empremta dactilar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:86
+#: panels/user-accounts/cc-fingerprint-dialog.ui:88
 msgid "_No"
 msgstr "_No"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:94
+#: panels/user-accounts/cc-fingerprint-dialog.ui:96
 msgid "_Yes"
 msgstr "_Sí"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:114
+#: panels/user-accounts/cc-fingerprint-dialog.ui:116
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7231,29 +7231,29 @@ msgstr ""
 "Voleu suprimir les empremtes dactilars registrades de manera que "
 "s'inhabiliti l'entrada amb empremta dactilar?"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:170
+#: panels/user-accounts/cc-fingerprint-dialog.ui:172
 msgid "No fingerprint device"
 msgstr "No hi ha cap dispositiu d'empremtes"
 
 #. Translators: This is the empty state page label which states that there are
 #. no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:185
+#: panels/user-accounts/cc-fingerprint-dialog.ui:187
 msgid "No Fingerprint device"
 msgstr "No hi ha cap dispositiu d'empremtes"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:194
+#: panels/user-accounts/cc-fingerprint-dialog.ui:196
 msgid "Ensure the device is properly connected."
 msgstr "Assegureu-vos que el dispositiu està correctament connectat."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:202
+#: panels/user-accounts/cc-fingerprint-dialog.ui:204
 msgid "Fingerprint Device"
 msgstr "Dispositiu d'empremtes"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:211
+#: panels/user-accounts/cc-fingerprint-dialog.ui:213
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Trieu el dispositiu d'empremtes que voleu configurar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:242
+#: panels/user-accounts/cc-fingerprint-dialog.ui:243
 msgid "Fingerprint Login"
 msgstr "Entrada amb empremta dactilar"
 
@@ -7273,125 +7273,121 @@ msgstr "_Suprimeix les empremtes dactilars"
 msgid "Fingerprint Enroll"
 msgstr "Afegeix empremta dactilar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:349
-msgid "_Re-enroll this finger…"
-msgstr "_Torna a afegir aquest dit..."
-
-#: panels/user-accounts/cc-fingerprint-dialog.c:236
+#: panels/user-accounts/cc-fingerprint-dialog.c:235
 msgid "the device needs to be claimed to perform this action"
 msgstr "s'ha de reclamar al dispositiu que realitzi aquesta acció"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:238
+#: panels/user-accounts/cc-fingerprint-dialog.c:237
 msgid "the device is already claimed by another process"
 msgstr "el dispositiu ja l'ha reclamat un altre procés"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:240
+#: panels/user-accounts/cc-fingerprint-dialog.c:239
 msgid "you do not have permission to perform the action"
 msgstr "no teniu permís per a executar l'acció"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:242
+#: panels/user-accounts/cc-fingerprint-dialog.c:241
 msgid "no prints have been enrolled"
 msgstr "no s'ha registrat cap empremta"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:251
+#: panels/user-accounts/cc-fingerprint-dialog.c:250
 msgid "Failed to communicate with the device during enrollment"
 msgstr "No s'ha pogut comunicar amb el dispositiu durant el registre"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:255
+#: panels/user-accounts/cc-fingerprint-dialog.c:254
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "No s'ha pogut comunicar amb el lector d'empremtes digitals"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:257
+#: panels/user-accounts/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "No s'ha pogut comunicar amb el dimoni d'empremtes digitals"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:606
+#: panels/user-accounts/cc-fingerprint-dialog.c:539
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "No s'ha pogut llistar les empremtes: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:673
+#: panels/user-accounts/cc-fingerprint-dialog.c:606
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "No s'ha pogut suprimir les empremtes desades: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:704
+#: panels/user-accounts/cc-fingerprint-dialog.c:637
 msgid "Left thumb"
 msgstr "Polze esquerre"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:706
+#: panels/user-accounts/cc-fingerprint-dialog.c:639
 msgid "Left middle finger"
 msgstr "Dit del mig esquerre"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:708
+#: panels/user-accounts/cc-fingerprint-dialog.c:641
 msgid "_Left index finger"
 msgstr "Dit índex _esquerre"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:710
+#: panels/user-accounts/cc-fingerprint-dialog.c:643
 msgid "Left ring finger"
 msgstr "Dit anular esquerre"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:712
+#: panels/user-accounts/cc-fingerprint-dialog.c:645
 msgid "Left little finger"
 msgstr "Dit petit esquerre"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:714
+#: panels/user-accounts/cc-fingerprint-dialog.c:647
 msgid "Right thumb"
 msgstr "Polze dret"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:716
+#: panels/user-accounts/cc-fingerprint-dialog.c:649
 msgid "Right middle finger"
 msgstr "Dit del mig dret"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:718
+#: panels/user-accounts/cc-fingerprint-dialog.c:651
 msgid "_Right index finger"
 msgstr "Dit índex d_ret"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:720
+#: panels/user-accounts/cc-fingerprint-dialog.c:653
 msgid "Right ring finger"
 msgstr "Dit anular dret"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:722
+#: panels/user-accounts/cc-fingerprint-dialog.c:655
 msgid "Right little finger"
 msgstr "Dit petit dret"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:724
+#: panels/user-accounts/cc-fingerprint-dialog.c:657
 msgid "Unknown Finger"
 msgstr "Dit desconegut"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:858
+#: panels/user-accounts/cc-fingerprint-dialog.c:791
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "Completat"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:869
+#: panels/user-accounts/cc-fingerprint-dialog.c:802
 msgid "Fingerprint device disconnected"
 msgstr "S'ha desconnectat el dispositiu d'empremtes"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:875
+#: panels/user-accounts/cc-fingerprint-dialog.c:808
 msgid "Fingerprint device storage is full"
 msgstr "L'emmagatzematge del dispositiu d'empremtes està ple"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:879
+#: panels/user-accounts/cc-fingerprint-dialog.c:812
 msgid "Failed to enroll new fingerprint"
 msgstr "No s'ha pogut afegir l'empremta nova"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:910
+#: panels/user-accounts/cc-fingerprint-dialog.c:843
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "No s'ha pogut iniciar la detecció: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:918
+#: panels/user-accounts/cc-fingerprint-dialog.c:851
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "No s'ha pogut afegir l'empremta nova"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:949
+#: panels/user-accounts/cc-fingerprint-dialog.c:882
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "No s'ha pogut aturar la detecció: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:995
+#: panels/user-accounts/cc-fingerprint-dialog.c:928
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
@@ -7399,27 +7395,31 @@ msgstr ""
 "Aixequeu i poseu el dit al lector per a inscriure la vostra empremta "
 "dactilar"
 
+#: panels/user-accounts/cc-fingerprint-dialog.c:1047
+msgid "_Re-enroll this finger…"
+msgstr "_Torna a afegir aquest dit..."
+
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1147
+#: panels/user-accounts/cc-fingerprint-dialog.c:1062
 msgid "Scan new fingerprint"
 msgstr "S'estan escanejant les empremtes dactilars noves"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1185
+#: panels/user-accounts/cc-fingerprint-dialog.c:1100
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "S'ha produït un error en alliberar el dispositiu d'empremtes %s: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1257
+#: panels/user-accounts/cc-fingerprint-dialog.c:1172
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Hi ha un problema llegint el dispositiu"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1292
+#: panels/user-accounts/cc-fingerprint-dialog.c:1207
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "S'ha produït un error en reclamar el dispositiu d'empremtes %s: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1441
+#: panels/user-accounts/cc-fingerprint-dialog.c:1358
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "S'ha produït un error en obtenir el dispositiu d'empremtes: %s"
@@ -7460,7 +7460,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:712
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7468,7 +7468,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:692
+#: panels/user-accounts/cc-user-panel.c:716
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7552,26 +7552,26 @@ msgstr "La contrasenya no vàlida, torneu-ho a provar"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "No s'ha pogut connectar al domini %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:317
+#: panels/user-accounts/cc-user-panel.c:341
 msgid "Failed to delete user"
 msgstr "No s'ha pogut suprimir l'usuari"
 
-#: panels/user-accounts/cc-user-panel.c:374
-#: panels/user-accounts/cc-user-panel.c:429
-#: panels/user-accounts/cc-user-panel.c:475
+#: panels/user-accounts/cc-user-panel.c:398
+#: panels/user-accounts/cc-user-panel.c:453
+#: panels/user-accounts/cc-user-panel.c:499
 msgid "Failed to revoke remotely managed user"
 msgstr "No s'ha pogut revocar l'usuari gestionat remotament"
 
-#: panels/user-accounts/cc-user-panel.c:524
+#: panels/user-accounts/cc-user-panel.c:548
 msgid "You cannot delete your own account."
 msgstr "No podeu suprimir el vostre compte."
 
-#: panels/user-accounts/cc-user-panel.c:533
+#: panels/user-accounts/cc-user-panel.c:557
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s encara està connectat"
 
-#: panels/user-accounts/cc-user-panel.c:537
+#: panels/user-accounts/cc-user-panel.c:561
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7579,12 +7579,12 @@ msgstr ""
 "Si suprimiu un usuari mentre està connectat pot deixar el sistema "
 "inconsistent."
 
-#: panels/user-accounts/cc-user-panel.c:546
+#: panels/user-accounts/cc-user-panel.c:570
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Voleu conservar els fitxers de %s?"
 
-#: panels/user-accounts/cc-user-panel.c:550
+#: panels/user-accounts/cc-user-panel.c:574
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7592,68 +7592,68 @@ msgstr ""
 "Es pot conservar el directori de l'usuari, la cua de correu i els fitxers "
 "temporals quan suprimiu un compte d'usuari."
 
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:577
 msgid "_Delete Files"
 msgstr "_Suprimeix els fitxers"
 
-#: panels/user-accounts/cc-user-panel.c:554
+#: panels/user-accounts/cc-user-panel.c:578
 msgid "_Keep Files"
 msgstr "C_onserva els fitxers"
 
-#: panels/user-accounts/cc-user-panel.c:568
+#: panels/user-accounts/cc-user-panel.c:592
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "Segur que voleu revocar el compte %s de l'usuari gestionat remotament?"
 
-#: panels/user-accounts/cc-user-panel.c:572
+#: panels/user-accounts/cc-user-panel.c:596
 msgid "_Delete"
 msgstr "_Suprimeix"
 
-#: panels/user-accounts/cc-user-panel.c:622
+#: panels/user-accounts/cc-user-panel.c:646
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Compte inhabilitat"
 
-#: panels/user-accounts/cc-user-panel.c:630
+#: panels/user-accounts/cc-user-panel.c:654
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "S'ha de configurar la pròxima vegada que entri"
 
-#: panels/user-accounts/cc-user-panel.c:633
+#: panels/user-accounts/cc-user-panel.c:657
 msgctxt "Password mode"
 msgid "None"
 msgstr "Cap"
 
-#: panels/user-accounts/cc-user-panel.c:676
+#: panels/user-accounts/cc-user-panel.c:700
 msgid "Logged in"
 msgstr "Connectat"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:763
-#: panels/user-accounts/cc-user-panel.c:867
+#: panels/user-accounts/cc-user-panel.c:787
+#: panels/user-accounts/cc-user-panel.c:876
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Habilitat"
 
-#: panels/user-accounts/cc-user-panel.c:1187
+#: panels/user-accounts/cc-user-panel.c:1173
 msgid "Failed to contact the accounts service"
 msgstr "No s'ha pogut contactar amb el servei de comptes"
 
-#: panels/user-accounts/cc-user-panel.c:1189
+#: panels/user-accounts/cc-user-panel.c:1175
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Assegureu-vos que el servei de comptes està instal·lat i habilitat."
 
-#: panels/user-accounts/cc-user-panel.c:1210
+#: panels/user-accounts/cc-user-panel.c:1197
 msgid "This panel must be unlocked to change this setting"
 msgstr "Aquest quadre s'ha de desbloquejar per a canviar aquesta configuració"
 
-#: panels/user-accounts/cc-user-panel.c:1277
+#: panels/user-accounts/cc-user-panel.c:1264
 msgid "Delete the selected user account"
 msgstr "Suprimeix el compte d'usuari seleccionat"
 
-#: panels/user-accounts/cc-user-panel.c:1281
-#: panels/user-accounts/cc-user-panel.c:1390
+#: panels/user-accounts/cc-user-panel.c:1268
+#: panels/user-accounts/cc-user-panel.c:1377
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7661,7 +7661,7 @@ msgstr ""
 "Per a suprimir el compte d'usuari seleccionat,\n"
 "primer feu clic a la icona *"
 
-#: panels/user-accounts/cc-user-panel.c:1432
+#: panels/user-accounts/cc-user-panel.c:1423
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Desbloqueja per a afegir usuaris i modificar els paràmetres"
 
@@ -7679,23 +7679,23 @@ msgid "Restart Now"
 msgstr "Reinicia ara"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:188
+#: panels/user-accounts/cc-user-panel.ui:185
 msgid "_Fingerprint Login"
 msgstr "Entrada amb _empremta dactilar"
 
-#: panels/user-accounts/cc-user-panel.ui:211
+#: panels/user-accounts/cc-user-panel.ui:208
 msgid "A_utomatic Login"
 msgstr "Entrada a_utomàtica"
 
-#: panels/user-accounts/cc-user-panel.ui:224
+#: panels/user-accounts/cc-user-panel.ui:221
 msgid "Account Activity"
 msgstr "Activitat del compte"
 
-#: panels/user-accounts/cc-user-panel.ui:252
+#: panels/user-accounts/cc-user-panel.ui:249
 msgid "_Administrator"
 msgstr "_Administrador"
 
-#: panels/user-accounts/cc-user-panel.ui:253
+#: panels/user-accounts/cc-user-panel.ui:250
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7703,33 +7703,33 @@ msgstr ""
 "Els administradors poden afegir i suprimir altres usuaris, i poden canviar "
 "els paràmetres de tots els usuaris."
 
-#: panels/user-accounts/cc-user-panel.ui:269
+#: panels/user-accounts/cc-user-panel.ui:266
 msgid "_Parental Controls"
 msgstr "_Controls parentals"
 
-#: panels/user-accounts/cc-user-panel.ui:270
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid "Open the Parental Controls application."
 msgstr "Obre l'aplicació de controls parentals."
 
-#: panels/user-accounts/cc-user-panel.ui:321
+#: panels/user-accounts/cc-user-panel.ui:318
 msgid "Remove User…"
 msgstr "Suprimeix l'usuari..."
 
-#: panels/user-accounts/cc-user-panel.ui:333
+#: panels/user-accounts/cc-user-panel.ui:330
 msgid "Other Users"
 msgstr "Altres usuaris"
 
-#: panels/user-accounts/cc-user-panel.ui:346
+#: panels/user-accounts/cc-user-panel.ui:343
 msgid "Add User…"
 msgstr "Afegeix usuari…"
 
 #. Translators: This is the empty state page label which states that there are
 #. no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:374
+#: panels/user-accounts/cc-user-panel.ui:371
 msgid "No Users Found"
 msgstr "No s'ha trobat cap usuari"
 
-#: panels/user-accounts/cc-user-panel.ui:383
+#: panels/user-accounts/cc-user-panel.ui:380
 msgid "Unlock to add a user account."
 msgstr "Desbloqueja per a afegir un compte d'usuari."
 
@@ -8068,6 +8068,14 @@ msgstr ""
 #: panels/wacom/cc-wacom-page.ui:73
 msgid "Calibrate"
 msgstr "Calibrar"
+
+#: panels/wacom/cc-wacom-panel.ui:56
+msgid "No tablet detected"
+msgstr "No s'ha detectat cap tauleta"
+
+#: panels/wacom/cc-wacom-panel.ui:57
+msgid "Please plug in or turn on your Wacom tablet."
+msgstr "Connecteu o activeu la tauleta Wacom."
 
 #: panels/wacom/cc-wacom-stylus-page.ui:16
 msgid "Tip Pressure Feel"
