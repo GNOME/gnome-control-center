@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-02-12 23:35+0000\n"
-"PO-Revision-Date: 2022-02-13 08:49+0800\n"
+"POT-Creation-Date: 2022-03-04 15:37+0000\n"
+"PO-Revision-Date: 2022-03-05 20:32+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -187,8 +187,8 @@ msgstr "接收系统搜索并发送结果。"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:765
-#: panels/user-accounts/cc-user-panel.c:869
+#: panels/user-accounts/cc-user-panel.c:789
+#: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -370,14 +370,14 @@ msgstr "选择图片"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
-#: panels/user-accounts/cc-avatar-chooser.c:94
-#: panels/user-accounts/cc-avatar-chooser.c:165
-#: panels/user-accounts/cc-fingerprint-dialog.ui:30
+#: panels/user-accounts/cc-avatar-chooser.c:96
+#: panels/user-accounts/cc-avatar-chooser.c:167
+#: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:555
-#: panels/user-accounts/cc-user-panel.c:573
+#: panels/user-accounts/cc-user-panel.c:579
+#: panels/user-accounts/cc-user-panel.c:597
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
@@ -388,8 +388,8 @@ msgstr "取消(_C)"
 #: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:433
-#: panels/user-accounts/cc-avatar-chooser.c:166
+#: panels/sharing/cc-sharing-panel.c:524
+#: panels/user-accounts/cc-avatar-chooser.c:168
 msgid "_Open"
 msgstr "打开(_O)"
 
@@ -629,7 +629,7 @@ msgstr "恢复(_R)"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:58
+#: panels/user-accounts/cc-fingerprint-dialog.ui:60
 msgid "_Done"
 msgstr "完成(_D)"
 
@@ -904,7 +904,7 @@ msgstr "每个设备都需要一份最新色彩配置以进行色彩管理。"
 
 #. translators: Text used in link to privacy policy
 #: panels/color/cc-color-panel.ui:434
-#: panels/diagnostics/cc-diagnostics-panel.c:139
+#: panels/diagnostics/cc-diagnostics-panel.c:137
 msgid "Learn more"
 msgstr "了解更多"
 
@@ -1479,18 +1479,18 @@ msgid "default;application;preferred;media;"
 msgstr "default;application;preferred;media;默认;应用程序;首选;偏好;媒体;介质;"
 
 #. translators: The first '%s' is the distributor's name, such as 'Fedora', the second '%s' is a link to the privacy policy
-#: panels/diagnostics/cc-diagnostics-panel.c:141
+#: panels/diagnostics/cc-diagnostics-panel.c:139
 #, c-format
 msgid ""
 "Sending reports of technical problems helps us improve %s. Reports are sent "
 "anonymously and are scrubbed of personal data. %s"
 msgstr "发送匿名的技术问题报告能帮助我们改进 %s，这些报告中不含个人数据。%s"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:21
+#: panels/diagnostics/cc-diagnostics-panel.ui:8
 msgid "Problem Reporting"
 msgstr "报告问题"
 
-#: panels/diagnostics/cc-diagnostics-panel.ui:55
+#: panels/diagnostics/cc-diagnostics-panel.ui:11
 msgid "_Automatic Problem Reporting"
 msgstr "自动报告问题(_A)"
 
@@ -1640,14 +1640,6 @@ msgctxt "display setting"
 msgid "Scale"
 msgstr "缩放"
 
-#: panels/display/cc-night-light-page.c:624
-msgid "More Warm"
-msgstr "增加暖色"
-
-#: panels/display/cc-night-light-page.c:636
-msgid "Less Warm"
-msgstr "减少暖色"
-
 #. Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.ui:21
 msgid "Temporarily Disabled Until Tomorrow"
@@ -1716,7 +1708,7 @@ msgstr "下午"
 msgid "To"
 msgstr "到"
 
-#: panels/display/cc-night-light-page.ui:302
+#: panels/display/cc-night-light-page.ui:316
 msgid "Color Temperature"
 msgstr "色温"
 
@@ -1785,6 +1777,7 @@ msgid "System Logo"
 msgstr "系统标志"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "Device Name"
 msgstr "设备名称"
 
@@ -2013,11 +2006,11 @@ msgstr "减小文本字号"
 msgid "High contrast on or off"
 msgstr "高对比度开关"
 
-#: panels/keyboard/cc-input-chooser.c:187
+#: panels/keyboard/cc-input-chooser.c:186
 msgid "No input sources found"
 msgstr "无输入源"
 
-#: panels/keyboard/cc-input-chooser.c:933
+#: panels/keyboard/cc-input-chooser.c:931
 msgctxt "Input Source"
 msgid "Other"
 msgstr "其他"
@@ -2026,31 +2019,31 @@ msgstr "其他"
 msgid "Add an Input Source"
 msgstr "添加输入源"
 
-#: panels/keyboard/cc-input-chooser.ui:68
+#: panels/keyboard/cc-input-chooser.ui:81
 msgid "Input methods can’t be used on the login screen"
 msgstr "无法在登录屏幕上使用输入法"
 
-#: panels/keyboard/cc-input-list-box.ui:23
+#: panels/keyboard/cc-input-list-box.ui:24
 msgid "No input source selected"
 msgstr "未选择输入源"
 
-#: panels/keyboard/cc-input-row.ui:67
-msgid "Move up"
+#: panels/keyboard/cc-input-row.ui:28 panels/search/cc-search-panel-row.ui:49
+msgid "Move Up"
 msgstr "上移"
 
-#: panels/keyboard/cc-input-row.ui:81
-msgid "Move down"
+#: panels/keyboard/cc-input-row.ui:32 panels/search/cc-search-panel-row.ui:53
+msgid "Move Down"
 msgstr "下移"
 
-#: panels/keyboard/cc-input-row.ui:98
+#: panels/keyboard/cc-input-row.ui:38
 msgid "Preferences"
 msgstr "首选项"
 
-#: panels/keyboard/cc-input-row.ui:120
+#: panels/keyboard/cc-input-row.ui:45
 msgid "View Keyboard Layout"
 msgstr "查看键盘布局"
 
-#: panels/keyboard/cc-input-row.ui:139
+#: panels/keyboard/cc-input-row.ui:51
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:29
 msgid "Remove"
 msgstr "移除"
@@ -2061,59 +2054,59 @@ msgstr "移除"
 msgid "Custom Shortcuts"
 msgstr "自定义快捷键"
 
-#: panels/keyboard/cc-keyboard-panel.c:67
-#: panels/keyboard/cc-keyboard-panel.ui:172
+#: panels/keyboard/cc-keyboard-panel.c:64
+#: panels/keyboard/cc-keyboard-panel.ui:62
 msgid "Alternate Characters Key"
 msgstr "备用字符键"
 
-#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:65
 msgid ""
 "The alternate characters key can be used to enter additional characters. "
 "These are sometimes printed as a third-option on your keyboard."
 msgstr "备用字符键可用于输入其他字符。这些有时会作为第三选项打印在键盘上。"
 
-#: panels/keyboard/cc-keyboard-panel.c:70
-#: panels/keyboard/cc-keyboard-panel.c:88
+#: panels/keyboard/cc-keyboard-panel.c:67
+#: panels/keyboard/cc-keyboard-panel.c:85
 msgctxt "keyboard key"
 msgid "Left Alt"
 msgstr "左Alt键"
 
-#: panels/keyboard/cc-keyboard-panel.c:71
-#: panels/keyboard/cc-keyboard-panel.c:89
+#: panels/keyboard/cc-keyboard-panel.c:68
+#: panels/keyboard/cc-keyboard-panel.c:86
 msgctxt "keyboard key"
 msgid "Right Alt"
 msgstr "右Alt键"
 
-#: panels/keyboard/cc-keyboard-panel.c:72
-#: panels/keyboard/cc-keyboard-panel.c:90
+#: panels/keyboard/cc-keyboard-panel.c:69
+#: panels/keyboard/cc-keyboard-panel.c:87
 msgctxt "keyboard key"
 msgid "Left Super"
 msgstr "左Super徽标键"
 
-#: panels/keyboard/cc-keyboard-panel.c:73
-#: panels/keyboard/cc-keyboard-panel.c:91
+#: panels/keyboard/cc-keyboard-panel.c:70
+#: panels/keyboard/cc-keyboard-panel.c:88
 msgctxt "keyboard key"
 msgid "Right Super"
 msgstr "右Super徽标键"
 
-#: panels/keyboard/cc-keyboard-panel.c:74
-#: panels/keyboard/cc-keyboard-panel.c:92
+#: panels/keyboard/cc-keyboard-panel.c:71
+#: panels/keyboard/cc-keyboard-panel.c:89
 msgctxt "keyboard key"
 msgid "Menu key"
 msgstr "菜单键"
 
-#: panels/keyboard/cc-keyboard-panel.c:75
-#: panels/keyboard/cc-keyboard-panel.c:93
+#: panels/keyboard/cc-keyboard-panel.c:72
+#: panels/keyboard/cc-keyboard-panel.c:90
 msgctxt "keyboard key"
 msgid "Right Ctrl"
 msgstr "右Ctrl键"
 
-#: panels/keyboard/cc-keyboard-panel.c:83
-#: panels/keyboard/cc-keyboard-panel.ui:191
+#: panels/keyboard/cc-keyboard-panel.c:80
+#: panels/keyboard/cc-keyboard-panel.ui:79
 msgid "Compose Key"
 msgstr "Compose 键"
 
-#: panels/keyboard/cc-keyboard-panel.c:84
+#: panels/keyboard/cc-keyboard-panel.c:81
 msgid ""
 "The compose key allows a wide variety of characters to be entered. To use "
 "it, press compose then a sequence of characters.  For example, compose key "
@@ -2124,22 +2117,22 @@ msgstr ""
 "列。例如，compose 键之后跟着 <b>C</b> 和 <b>o</b> 可以输入 <b>©</b>，<b>a</"
 "b> 后接 <b>'</b> 可以输入 <b>á</b>。"
 
-#: panels/keyboard/cc-keyboard-panel.c:94
+#: panels/keyboard/cc-keyboard-panel.c:91
 msgctxt "keyboard key"
 msgid "Caps Lock"
 msgstr "大小写锁定"
 
-#: panels/keyboard/cc-keyboard-panel.c:95
+#: panels/keyboard/cc-keyboard-panel.c:92
 msgctxt "keyboard key"
 msgid "Scroll Lock"
 msgstr "滚动锁定"
 
-#: panels/keyboard/cc-keyboard-panel.c:96
+#: panels/keyboard/cc-keyboard-panel.c:93
 msgctxt "keyboard key"
 msgid "Print Screen"
 msgstr "打印屏幕"
 
-#: panels/keyboard/cc-keyboard-panel.c:232
+#: panels/keyboard/cc-keyboard-panel.c:217
 #, c-format
 msgid ""
 "Input sources can be switched using the %s keyboard shortcut.\n"
@@ -2148,41 +2141,41 @@ msgstr ""
 "使用键盘快捷键 %s 可以切换输入源。\n"
 "这可以在键盘快捷键设置中更改。"
 
-#: panels/keyboard/cc-keyboard-panel.ui:38
+#: panels/keyboard/cc-keyboard-panel.ui:17
 msgid "Input Sources"
 msgstr "输入源"
 
-#: panels/keyboard/cc-keyboard-panel.ui:47
+#: panels/keyboard/cc-keyboard-panel.ui:18
 msgid "Includes keyboard layouts and input methods."
 msgstr "包括键盘布局与输入法。"
 
-#: panels/keyboard/cc-keyboard-panel.ui:70
+#: panels/keyboard/cc-keyboard-panel.ui:28
 msgid "Input Source Switching"
 msgstr "输入源切换"
 
-#: panels/keyboard/cc-keyboard-panel.ui:106
+#: panels/keyboard/cc-keyboard-panel.ui:31
 msgid "Use the _same source for all windows"
 msgstr "所有窗口使用相同的输入源(_S)"
 
-#: panels/keyboard/cc-keyboard-panel.ui:126
+#: panels/keyboard/cc-keyboard-panel.ui:43
 msgid "Switch input sources _individually for each window"
 msgstr "每个窗口使用不同的输入源(_I)"
 
-#: panels/keyboard/cc-keyboard-panel.ui:142
+#: panels/keyboard/cc-keyboard-panel.ui:58
 msgid "Special Character Entry"
 msgstr "特殊字符输入"
 
-#: panels/keyboard/cc-keyboard-panel.ui:151
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "使用键盘输入符号和字母变体的方法。"
 
-#: panels/keyboard/cc-keyboard-panel.ui:212
+#: panels/keyboard/cc-keyboard-panel.ui:97
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: panels/keyboard/cc-keyboard-panel.ui:228
+#: panels/keyboard/cc-keyboard-panel.ui:100
 msgid "View and Customize Shortcuts"
 msgstr "查看及自定义快捷键"
 
@@ -2205,7 +2198,6 @@ msgstr "重新设置快捷键可能影响您的自定义快捷键。此操作无
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:467
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
-#: panels/printers/authentication-dialog.ui:19
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
 msgid "Cancel"
@@ -2286,7 +2278,7 @@ msgstr "按 Esc 以取消或 Backspace 以停用此键盘快捷键。"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:125
+#: panels/user-accounts/cc-user-panel.ui:122
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "名称"
@@ -2523,13 +2515,6 @@ msgid "No applications can record sound."
 msgstr "未找到音频录制应用。"
 
 #: panels/microphone/cc-microphone-panel.ui:34
-#| msgid ""
-#| "Use of the microphone allows applications to record and listen to audio. "
-#| "Disabling the microphone may cause some applications to not function "
-#| "properly.\n"
-#| "\n"
-#| "Allow the applications below to use your microphone.\n"
-#| "                    "
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
@@ -2839,9 +2824,8 @@ msgstr "网络名称"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
-#: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52
+#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:376
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -3544,16 +3528,6 @@ msgstr "若未提供配置 URL，将使用网络代理自动发现。"
 msgid "This is not recommended for untrusted public networks."
 msgstr "对于不可信的公共网络，不建议这样做。"
 
-#. update title
-#. Translators: this is the title of the connection details
-#. * window for vpn connections, it is also used to display
-#. * vpn connections in the device list.
-#.
-#: panels/network/net-vpn.c:63 panels/network/net-vpn.c:156
-#, c-format
-msgid "%s VPN"
-msgstr "%s VPN"
-
 #: panels/network/network-bluetooth.ui:11
 msgid "Turn device off"
 msgstr "关闭设备"
@@ -3997,7 +3971,7 @@ msgstr "用户名(_U)"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:168
+#: panels/user-accounts/cc-user-panel.ui:165
 msgid "_Password"
 msgstr "密码(_P)"
 
@@ -4799,29 +4773,6 @@ msgstr ""
 "Energy;电源;睡眠;挂起;休眠;电池;亮度;暗;空白;息屏;监视器;显示器;空闲;能源;能"
 "耗;"
 
-#: panels/printers/authentication-dialog.ui:9
-msgid " "
-msgstr " "
-
-#: panels/printers/authentication-dialog.ui:24
-msgid "Authenticate"
-msgstr "认证"
-
-#. Translators: This is a username on a print server.
-#: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:311
-#: panels/printers/pp-jobs-dialog.ui:41
-#: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:342
-#: panels/wwan/cc-wwan-apn-dialog.ui:148
-msgid "Username"
-msgstr "用户名"
-
-#: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:286
-msgid "Authentication Required"
-msgstr "需要认证"
-
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:676
 #, c-format
@@ -4884,9 +4835,22 @@ msgstr "未找到打印机"
 msgid "Enter a network address or search for a printer"
 msgstr "输入网络地址或搜索打印机"
 
+#: panels/printers/new-printer-dialog.ui:286
+msgid "Authentication Required"
+msgstr "需要认证"
+
 #: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr "输入用户名和密码以查看打印服务器上的打印机。"
+
+#. Translators: This is a username on a print server.
+#: panels/printers/new-printer-dialog.ui:311
+#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
+msgid "Username"
+msgstr "用户名"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74
@@ -4944,7 +4908,7 @@ msgid "Loading drivers database…"
 msgstr "正在载入驱动数据库……"
 
 #: panels/printers/ppd-selection-dialog.ui:91
-#: panels/user-accounts/cc-avatar-chooser.c:96
+#: panels/user-accounts/cc-avatar-chooser.c:98
 msgid "Select"
 msgstr "选择"
 
@@ -5556,7 +5520,7 @@ msgid "Your Account"
 msgstr "您的帐号"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:289
 msgid "_Language"
 msgstr "语言(_L)"
 
@@ -5768,14 +5732,6 @@ msgstr "添加位置"
 msgid "No applications found"
 msgstr "未找到应用"
 
-#: panels/search/cc-search-panel-row.ui:49
-msgid "Move Up"
-msgstr "上移"
-
-#: panels/search/cc-search-panel-row.ui:53
-msgid "Move Down"
-msgstr "下移"
-
 #: panels/search/cc-search-panel.ui:10
 msgid "Application Search"
 msgstr "应用程序搜索"
@@ -5816,32 +5772,32 @@ msgstr "未选择要共享的网络"
 msgid "Networks"
 msgstr "网络"
 
-#: panels/sharing/cc-sharing-panel.c:276
+#: panels/sharing/cc-sharing-panel.c:367
 msgctxt "service is enabled"
 msgid "On"
 msgstr "已开启"
 
-#: panels/sharing/cc-sharing-panel.c:278 panels/sharing/cc-sharing-panel.c:305
+#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "已关闭"
 
-#: panels/sharing/cc-sharing-panel.c:308
+#: panels/sharing/cc-sharing-panel.c:399
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "已启用"
 
-#: panels/sharing/cc-sharing-panel.c:311
+#: panels/sharing/cc-sharing-panel.c:402
 msgctxt "service is active"
 msgid "Active"
 msgstr "活动"
 
-#: panels/sharing/cc-sharing-panel.c:429
+#: panels/sharing/cc-sharing-panel.c:520
 msgid "Choose a Folder"
 msgstr "选择文件夹"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:657
+#: panels/sharing/cc-sharing-panel.c:748
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5849,7 +5805,7 @@ msgid ""
 msgstr "文件共享可以共享“公共”文件夹，使用地址：%s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:663
+#: panels/sharing/cc-sharing-panel.c:754
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5858,14 +5814,6 @@ msgid ""
 msgstr ""
 "当启用远程登录时，远程用户可以使用 SSH 命令来连接：\n"
 "%s"
-
-#. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:669
-#, c-format
-msgid ""
-"Screen sharing allows remote users to view or control your screen by "
-"connecting to %s"
-msgstr "屏幕共享允许远程用户查看或控制您的屏幕%s"
 
 #: panels/sharing/cc-sharing-panel.ui:9
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
@@ -5881,8 +5829,8 @@ msgid "_File Sharing"
 msgstr "文件共享(_F)"
 
 #: panels/sharing/cc-sharing-panel.ui:65
-msgid "_Screen Sharing"
-msgstr "屏幕共享(_S)"
+msgid "Remote _Desktop"
+msgstr "远程桌面(_D)"
 
 #: panels/sharing/cc-sharing-panel.ui:72
 msgid "_Media Sharing"
@@ -5906,42 +5854,76 @@ msgid "Remote Login"
 msgstr "远程登录"
 
 #: panels/sharing/cc-sharing-panel.ui:250
-msgid "Screen Sharing"
-msgstr "屏幕共享"
+#: panels/sharing/cc-sharing-panel.ui:267
+msgid "Remote Desktop"
+msgstr "远程桌面"
 
-#: panels/sharing/cc-sharing-panel.ui:298
-msgid "_Allow connections to control the screen"
-msgstr "允许连接控制屏幕(_A)"
+#: panels/sharing/cc-sharing-panel.ui:263
+msgid ""
+"Remote desktop allows viewing and controlling your desktop from another "
+"computer."
+msgstr "远程桌面允许从另一个计算机查看和操控您的桌面。"
 
-#: panels/sharing/cc-sharing-panel.ui:316
-msgid "_Password:"
-msgstr "密码(_P)："
+#: panels/sharing/cc-sharing-panel.ui:268
+msgid "Enable or disable remote desktop connections to this computer."
+msgstr "启用或禁用远程桌面连接至该计算机。"
 
-#: panels/sharing/cc-sharing-panel.ui:339
-msgid "_Show Password"
-msgstr "显示密码(_S)"
+#: panels/sharing/cc-sharing-panel.ui:280
+msgid "Remote Control"
+msgstr "远程控制"
 
-#: panels/sharing/cc-sharing-panel.ui:352
-msgid "Access Options"
-msgstr "访问选项"
+#: panels/sharing/cc-sharing-panel.ui:281
+msgid "Allows remote connections to control the screen."
+msgstr "允许远程连接操控该屏幕。"
 
-#: panels/sharing/cc-sharing-panel.ui:364
-msgid "_New connections must ask for access"
-msgstr "建立新连接前必须询问访问权限(_N)"
+#: panels/sharing/cc-sharing-panel.ui:294
+msgid "How to Connect"
+msgstr "如何连接"
 
-#: panels/sharing/cc-sharing-panel.ui:375
-msgid "_Require a password"
-msgstr "需要密码(_R)"
+#: panels/sharing/cc-sharing-panel.ui:295
+msgid ""
+"Connect to this computer using the device name or remote desktop address."
+msgstr "使用设备名称或远程桌面地址连接至该计算机。"
 
-#: panels/sharing/cc-sharing-panel.ui:400
+#: panels/sharing/cc-sharing-panel.ui:323
+msgid "Remote Desktop Address"
+msgstr "远程桌面地址"
+
+#: panels/sharing/cc-sharing-panel.ui:350
+msgid "Authentication"
+msgstr "认证"
+
+#: panels/sharing/cc-sharing-panel.ui:351
+msgid "The user name and password are required to connect to this computer."
+msgstr "连接至该计算机需要用户名和密码。"
+
+#: panels/sharing/cc-sharing-panel.ui:355
+msgid "User Name"
+msgstr "用户名"
+
+#: panels/sharing/cc-sharing-panel.ui:401
+msgid "Verify Encryption"
+msgstr "验证加密"
+
+#: panels/sharing/cc-sharing-panel.ui:430
+msgid "Encryption Fingerprint"
+msgstr "加密指纹"
+
+#: panels/sharing/cc-sharing-panel.ui:431
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr "加密指纹可以在连接的客户端中看到且应一致"
+
+#: panels/sharing/cc-sharing-panel.ui:463
 msgid "Media Sharing"
 msgstr "媒体共享"
 
-#: panels/sharing/cc-sharing-panel.ui:422
+#: panels/sharing/cc-sharing-panel.ui:485
 msgid "Share music, photos and videos over the network."
 msgstr "通过网络共享音乐、照片和视频。"
 
-#: panels/sharing/cc-sharing-panel.ui:435
+#: panels/sharing/cc-sharing-panel.ui:498
 msgid "Folders"
 msgstr "文件夹"
 
@@ -6926,7 +6908,6 @@ msgid "_Clear History…"
 msgstr "清理历史(_C)…"
 
 #: panels/usage/cc-usage-panel.ui:63
-#| msgid "Trash & Temporary Files"
 msgid "Trash &amp; Temporary Files"
 msgstr "回收站与临时文件"
 
@@ -6975,26 +6956,26 @@ msgstr "应与您登录提供商的网络地址相同。"
 msgid "Failed to add account"
 msgstr "添加帐号失败"
 
-#: panels/user-accounts/cc-add-user-dialog.c:673
+#: panels/user-accounts/cc-add-user-dialog.c:679
 #: panels/user-accounts/cc-password-dialog.c:258
 msgid "The passwords do not match."
 msgstr "密码不匹配。"
 
-#: panels/user-accounts/cc-add-user-dialog.c:877
-#: panels/user-accounts/cc-add-user-dialog.c:916
-#: panels/user-accounts/cc-add-user-dialog.c:934
+#: panels/user-accounts/cc-add-user-dialog.c:883
+#: panels/user-accounts/cc-add-user-dialog.c:922
+#: panels/user-accounts/cc-add-user-dialog.c:940
 msgid "Failed to register account"
 msgstr "注册用户失败"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1049
+#: panels/user-accounts/cc-add-user-dialog.c:1055
 msgid "No supported way to authenticate with this domain"
 msgstr "没有支持该域的验证方法"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1113
+#: panels/user-accounts/cc-add-user-dialog.c:1119
 msgid "Failed to join domain"
 msgstr "加入域失败"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1168
+#: panels/user-accounts/cc-add-user-dialog.c:1174
 msgid ""
 "That login name didn’t work.\n"
 "Please try again."
@@ -7002,7 +6983,7 @@ msgstr ""
 "登录名不正确。\n"
 "请重试。"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1175
+#: panels/user-accounts/cc-add-user-dialog.c:1181
 msgid ""
 "That login password didn’t work.\n"
 "Please try again."
@@ -7010,11 +6991,11 @@ msgstr ""
 "登录密码不正确。\n"
 "请重试。"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1183
+#: panels/user-accounts/cc-add-user-dialog.c:1189
 msgid "Failed to log into domain"
 msgstr "登录到域失败"
 
-#: panels/user-accounts/cc-add-user-dialog.c:1238
+#: panels/user-accounts/cc-add-user-dialog.c:1244
 msgid "Unable to find the domain. Maybe you misspelled it?"
 msgstr "找不到该域名，也许拼写有误？"
 
@@ -7068,7 +7049,7 @@ msgstr ""
 "企业登录允许在本设备上使用已有的、集中管理的用户帐号。您也可以使用此帐号访问"
 "公司在互联网上的资源。"
 
-#: panels/user-accounts/cc-avatar-chooser.c:162
+#: panels/user-accounts/cc-avatar-chooser.c:164
 msgid "Browse for more pictures"
 msgstr "浏览更多图片"
 
@@ -7080,46 +7061,46 @@ msgstr "选择文件…"
 msgid "Fingerprint Manager"
 msgstr "指纹管理器"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:18
+#: panels/user-accounts/cc-fingerprint-dialog.ui:20
 msgid "Fingerprint"
 msgstr "指纹"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:86
+#: panels/user-accounts/cc-fingerprint-dialog.ui:88
 msgid "_No"
 msgstr "否(_N)"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:94
+#: panels/user-accounts/cc-fingerprint-dialog.ui:96
 msgid "_Yes"
 msgstr "是(_Y)"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:114
+#: panels/user-accounts/cc-fingerprint-dialog.ui:116
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr "您想要删除登记的指纹使指纹登录被禁用吗？"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:170
+#: panels/user-accounts/cc-fingerprint-dialog.ui:172
 msgid "No fingerprint device"
 msgstr "无指纹设备"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:185
+#: panels/user-accounts/cc-fingerprint-dialog.ui:187
 msgid "No Fingerprint device"
 msgstr "无指纹设备"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:194
+#: panels/user-accounts/cc-fingerprint-dialog.ui:196
 msgid "Ensure the device is properly connected."
 msgstr "请确保设备已正常连接。"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:202
+#: panels/user-accounts/cc-fingerprint-dialog.ui:204
 msgid "Fingerprint Device"
 msgstr "指纹设备"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:211
+#: panels/user-accounts/cc-fingerprint-dialog.ui:213
 msgid "Choose the fingerprint device you want to configure"
 msgstr "选择您想要配置的指纹设备"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:242
+#: panels/user-accounts/cc-fingerprint-dialog.ui:243
 msgid "Fingerprint Login"
 msgstr "指纹登录"
 
@@ -7137,151 +7118,151 @@ msgstr "删除指纹(_D)"
 msgid "Fingerprint Enroll"
 msgstr "指纹登记"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:349
-msgid "_Re-enroll this finger…"
-msgstr "重新登记该手指(_R)…"
-
-#: panels/user-accounts/cc-fingerprint-dialog.c:236
+#: panels/user-accounts/cc-fingerprint-dialog.c:235
 msgid "the device needs to be claimed to perform this action"
 msgstr "设备需要被请求执行该动作"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:238
+#: panels/user-accounts/cc-fingerprint-dialog.c:237
 msgid "the device is already claimed by another process"
 msgstr "设备正被另一个进程请求"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:240
+#: panels/user-accounts/cc-fingerprint-dialog.c:239
 msgid "you do not have permission to perform the action"
 msgstr "您没有权限执行该动作"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:242
+#: panels/user-accounts/cc-fingerprint-dialog.c:241
 msgid "no prints have been enrolled"
 msgstr "没有登记到指纹"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:251
+#: panels/user-accounts/cc-fingerprint-dialog.c:250
 msgid "Failed to communicate with the device during enrollment"
 msgstr "注册时连接设备失败"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:255
+#: panels/user-accounts/cc-fingerprint-dialog.c:254
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "连接指纹读取器失败"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:257
+#: panels/user-accounts/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "连接指纹守护程序失败"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:606
+#: panels/user-accounts/cc-fingerprint-dialog.c:539
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "列出指纹失败：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:673
+#: panels/user-accounts/cc-fingerprint-dialog.c:606
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "删除已保存的指纹失败：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:704
+#: panels/user-accounts/cc-fingerprint-dialog.c:637
 msgid "Left thumb"
 msgstr "左手拇指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:706
+#: panels/user-accounts/cc-fingerprint-dialog.c:639
 msgid "Left middle finger"
 msgstr "左手中指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:708
+#: panels/user-accounts/cc-fingerprint-dialog.c:641
 msgid "_Left index finger"
 msgstr "左手食指(_L)"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:710
+#: panels/user-accounts/cc-fingerprint-dialog.c:643
 msgid "Left ring finger"
 msgstr "左手无名指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:712
+#: panels/user-accounts/cc-fingerprint-dialog.c:645
 msgid "Left little finger"
 msgstr "左手小指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:714
+#: panels/user-accounts/cc-fingerprint-dialog.c:647
 msgid "Right thumb"
 msgstr "右手拇指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:716
+#: panels/user-accounts/cc-fingerprint-dialog.c:649
 msgid "Right middle finger"
 msgstr "右手中指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:718
+#: panels/user-accounts/cc-fingerprint-dialog.c:651
 msgid "_Right index finger"
 msgstr "右手食指(_R)"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:720
+#: panels/user-accounts/cc-fingerprint-dialog.c:653
 msgid "Right ring finger"
 msgstr "右手无名指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:722
+#: panels/user-accounts/cc-fingerprint-dialog.c:655
 msgid "Right little finger"
 msgstr "右手小指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:724
+#: panels/user-accounts/cc-fingerprint-dialog.c:657
 msgid "Unknown Finger"
 msgstr "未知手指"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:858
+#: panels/user-accounts/cc-fingerprint-dialog.c:791
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "完成"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:869
+#: panels/user-accounts/cc-fingerprint-dialog.c:802
 msgid "Fingerprint device disconnected"
 msgstr "指纹设备已断开连接"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:875
+#: panels/user-accounts/cc-fingerprint-dialog.c:808
 msgid "Fingerprint device storage is full"
 msgstr "指纹设备存储已满"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:879
+#: panels/user-accounts/cc-fingerprint-dialog.c:812
 msgid "Failed to enroll new fingerprint"
 msgstr "登记新指纹失败"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:910
+#: panels/user-accounts/cc-fingerprint-dialog.c:843
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "登记过程初始化失败：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:918
+#: panels/user-accounts/cc-fingerprint-dialog.c:851
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "登记新指纹失败"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:949
+#: panels/user-accounts/cc-fingerprint-dialog.c:882
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "停止登记过程失败：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:995
+#: panels/user-accounts/cc-fingerprint-dialog.c:928
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr "要登记指纹，请重复将手指举起然后放置在读取设备上的动作"
 
+#: panels/user-accounts/cc-fingerprint-dialog.c:1047
+msgid "_Re-enroll this finger…"
+msgstr "重新登记该手指(_R)…"
+
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1147
+#: panels/user-accounts/cc-fingerprint-dialog.c:1062
 msgid "Scan new fingerprint"
 msgstr "扫描新指纹"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1185
+#: panels/user-accounts/cc-fingerprint-dialog.c:1100
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "释放指纹设备 %s 失败：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1257
+#: panels/user-accounts/cc-fingerprint-dialog.c:1172
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "读取设备时出现问题"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1292
+#: panels/user-accounts/cc-fingerprint-dialog.c:1207
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "无法请求指纹设备 %s：%s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1441
+#: panels/user-accounts/cc-fingerprint-dialog.c:1358
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "获取指纹设备失败：%s"
@@ -7322,7 +7303,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:712
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7330,7 +7311,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:692
+#: panels/user-accounts/cc-user-panel.c:716
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7414,103 +7395,103 @@ msgstr "无效密码，请重试"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "无法连接到 %s 域：%s"
 
-#: panels/user-accounts/cc-user-panel.c:317
+#: panels/user-accounts/cc-user-panel.c:341
 msgid "Failed to delete user"
 msgstr "删除用户失败"
 
-#: panels/user-accounts/cc-user-panel.c:374
-#: panels/user-accounts/cc-user-panel.c:429
-#: panels/user-accounts/cc-user-panel.c:475
+#: panels/user-accounts/cc-user-panel.c:398
+#: panels/user-accounts/cc-user-panel.c:453
+#: panels/user-accounts/cc-user-panel.c:499
 msgid "Failed to revoke remotely managed user"
 msgstr "吊销远程管理的用户失败"
 
-#: panels/user-accounts/cc-user-panel.c:524
+#: panels/user-accounts/cc-user-panel.c:548
 msgid "You cannot delete your own account."
 msgstr "不能删除自己的帐号。"
 
-#: panels/user-accounts/cc-user-panel.c:533
+#: panels/user-accounts/cc-user-panel.c:557
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s 已经登录"
 
-#: panels/user-accounts/cc-user-panel.c:537
+#: panels/user-accounts/cc-user-panel.c:561
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "删除已登录帐号可能导致系统不一致。"
 
-#: panels/user-accounts/cc-user-panel.c:546
+#: panels/user-accounts/cc-user-panel.c:570
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "要保留 %s 的文件吗？"
 
-#: panels/user-accounts/cc-user-panel.c:550
+#: panels/user-accounts/cc-user-panel.c:574
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr "删除用户时可以保留其主目录、电子邮件目录和临时文件。"
 
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:577
 msgid "_Delete Files"
 msgstr "删除文件(_D)"
 
-#: panels/user-accounts/cc-user-panel.c:554
+#: panels/user-accounts/cc-user-panel.c:578
 msgid "_Keep Files"
 msgstr "保留文件(_K)"
 
-#: panels/user-accounts/cc-user-panel.c:568
+#: panels/user-accounts/cc-user-panel.c:592
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "您确定要吊销远程管理的帐号 %s 吗？"
 
-#: panels/user-accounts/cc-user-panel.c:572
+#: panels/user-accounts/cc-user-panel.c:596
 msgid "_Delete"
 msgstr "删除(_D)"
 
-#: panels/user-accounts/cc-user-panel.c:622
+#: panels/user-accounts/cc-user-panel.c:646
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "帐号已禁用"
 
-#: panels/user-accounts/cc-user-panel.c:630
+#: panels/user-accounts/cc-user-panel.c:654
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "下次登录时设置"
 
-#: panels/user-accounts/cc-user-panel.c:633
+#: panels/user-accounts/cc-user-panel.c:657
 msgctxt "Password mode"
 msgid "None"
 msgstr "无"
 
-#: panels/user-accounts/cc-user-panel.c:676
+#: panels/user-accounts/cc-user-panel.c:700
 msgid "Logged in"
 msgstr "已登录"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:763
-#: panels/user-accounts/cc-user-panel.c:866
+#: panels/user-accounts/cc-user-panel.c:787
+#: panels/user-accounts/cc-user-panel.c:876
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "已启用"
 
-#: panels/user-accounts/cc-user-panel.c:1186
+#: panels/user-accounts/cc-user-panel.c:1173
 msgid "Failed to contact the accounts service"
 msgstr "联系帐号服务失败"
 
-#: panels/user-accounts/cc-user-panel.c:1188
+#: panels/user-accounts/cc-user-panel.c:1175
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "请确定帐号服务已正确安装并启用。"
 
-#: panels/user-accounts/cc-user-panel.c:1209
+#: panels/user-accounts/cc-user-panel.c:1197
 msgid "This panel must be unlocked to change this setting"
 msgstr "该面板必须解锁才能更改设置"
 
-#: panels/user-accounts/cc-user-panel.c:1276
+#: panels/user-accounts/cc-user-panel.c:1264
 msgid "Delete the selected user account"
 msgstr "删除选中的用户帐号"
 
-#: panels/user-accounts/cc-user-panel.c:1280
-#: panels/user-accounts/cc-user-panel.c:1389
+#: panels/user-accounts/cc-user-panel.c:1268
+#: panels/user-accounts/cc-user-panel.c:1377
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7518,7 +7499,7 @@ msgstr ""
 "要删除选中的用户帐号，\n"
 "请先点击 * 图标"
 
-#: panels/user-accounts/cc-user-panel.c:1431
+#: panels/user-accounts/cc-user-panel.c:1423
 msgid "Unlock to Add Users and Change Settings"
 msgstr "解锁以允许用户更改设置"
 
@@ -7536,54 +7517,54 @@ msgid "Restart Now"
 msgstr "现在重启"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:188
+#: panels/user-accounts/cc-user-panel.ui:185
 msgid "_Fingerprint Login"
 msgstr "指纹登录(_F)"
 
-#: panels/user-accounts/cc-user-panel.ui:211
+#: panels/user-accounts/cc-user-panel.ui:208
 msgid "A_utomatic Login"
 msgstr "自动登录(_U)"
 
-#: panels/user-accounts/cc-user-panel.ui:224
+#: panels/user-accounts/cc-user-panel.ui:221
 msgid "Account Activity"
 msgstr "帐号活动"
 
-#: panels/user-accounts/cc-user-panel.ui:252
+#: panels/user-accounts/cc-user-panel.ui:249
 msgid "_Administrator"
 msgstr "管理员(_A)"
 
-#: panels/user-accounts/cc-user-panel.ui:253
+#: panels/user-accounts/cc-user-panel.ui:250
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
 msgstr "管理员可以增删用户，也能为所有用户更改设置。"
 
-#: panels/user-accounts/cc-user-panel.ui:269
+#: panels/user-accounts/cc-user-panel.ui:266
 msgid "_Parental Controls"
 msgstr "家长控制(_P)"
 
-#: panels/user-accounts/cc-user-panel.ui:270
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid "Open the Parental Controls application."
 msgstr "打开家长控制应用程序。"
 
-#: panels/user-accounts/cc-user-panel.ui:321
+#: panels/user-accounts/cc-user-panel.ui:318
 msgid "Remove User…"
 msgstr "移除用户…"
 
-#: panels/user-accounts/cc-user-panel.ui:333
+#: panels/user-accounts/cc-user-panel.ui:330
 msgid "Other Users"
 msgstr "其它用户"
 
-#: panels/user-accounts/cc-user-panel.ui:346
+#: panels/user-accounts/cc-user-panel.ui:343
 msgid "Add User…"
 msgstr "添加用户…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:374
+#: panels/user-accounts/cc-user-panel.ui:371
 msgid "No Users Found"
 msgstr "未找到用户"
 
-#: panels/user-accounts/cc-user-panel.ui:383
+#: panels/user-accounts/cc-user-panel.ui:380
 msgid "Unlock to add a user account."
 msgstr "解锁以添加用户帐号。"
 
@@ -7906,6 +7887,15 @@ msgstr "仅使用数位板表面的一部分来保持显示器宽高比"
 msgid "Calibrate"
 msgstr "校准"
 
+#: panels/wacom/cc-wacom-panel.ui:56
+msgid "No tablet detected"
+msgstr "未检测到数位板"
+
+#: panels/wacom/cc-wacom-panel.ui:57
+#| msgid "Please plug in or turn on your Wacom tablet"
+msgid "Please plug in or turn on your Wacom tablet."
+msgstr "请插入或打开您的 Wacom 数位板"
+
 #: panels/wacom/cc-wacom-stylus-page.ui:16
 msgid "Tip Pressure Feel"
 msgstr "笔尖压感"
@@ -7972,15 +7962,15 @@ msgstr "接入点"
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-data.c:543
+#: panels/wwan/cc-wwan-data.c:542
 msgid "Operation Cancelled"
 msgstr "操作已取消"
 
-#: panels/wwan/cc-wwan-data.c:546
+#: panels/wwan/cc-wwan-data.c:545
 msgid "<b>Error:</b> Access denied changing settings"
 msgstr "<b>错误：</b>更改设置被拒绝"
 
-#: panels/wwan/cc-wwan-data.c:549
+#: panels/wwan/cc-wwan-data.c:548
 msgid "<b>Error:</b> Mobile Equipment Error"
 msgstr "<b>错误：</b>移动设备错误"
 
@@ -8566,6 +8556,53 @@ msgstr[0] "%u 路输入"
 msgid "System Sounds"
 msgstr "系统声音"
 
+#~ msgid "More Warm"
+#~ msgstr "增加暖色"
+
+#~ msgid "Less Warm"
+#~ msgstr "减少暖色"
+
+#~ msgid "Move up"
+#~ msgstr "上移"
+
+#~ msgid "Move down"
+#~ msgstr "下移"
+
+#~ msgid "%s VPN"
+#~ msgstr "%s VPN"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Authenticate"
+#~ msgstr "认证"
+
+#~ msgid ""
+#~ "Screen sharing allows remote users to view or control your screen by "
+#~ "connecting to %s"
+#~ msgstr "屏幕共享允许远程用户查看或控制您的屏幕%s"
+
+#~ msgid "_Screen Sharing"
+#~ msgstr "屏幕共享(_S)"
+
+#~ msgid "Screen Sharing"
+#~ msgstr "屏幕共享"
+
+#~ msgid "_Password:"
+#~ msgstr "密码(_P)："
+
+#~ msgid "_Show Password"
+#~ msgstr "显示密码(_S)"
+
+#~ msgid "Access Options"
+#~ msgstr "访问选项"
+
+#~ msgid "_New connections must ask for access"
+#~ msgstr "建立新连接前必须询问访问权限(_N)"
+
+#~ msgid "_Require a password"
+#~ msgstr "需要密码(_R)"
+
 #~ msgid "Screenshots"
 #~ msgstr "截图"
 
@@ -8682,12 +8719,6 @@ msgstr "系统声音"
 
 #~ msgid "_Help"
 #~ msgstr "帮助(_H)"
-
-#~ msgid "No tablet detected"
-#~ msgstr "未检测到数位板"
-
-#~ msgid "Please plug in or turn on your Wacom tablet"
-#~ msgstr "请插入并打开您的 Wacom 数位板"
 
 #~ msgid "Bluetooth Settings"
 #~ msgstr "蓝牙设置"
@@ -10350,9 +10381,6 @@ msgstr "系统声音"
 
 #~ msgid "Personal File Sharing"
 #~ msgstr "个人文件共享"
-
-#~ msgid "_Allow Remote Control"
-#~ msgstr "允许远程控制(_A)"
 
 #~ msgid "_Verify"
 #~ msgstr "验证(_V)"
