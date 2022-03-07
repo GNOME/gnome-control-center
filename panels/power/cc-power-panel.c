@@ -347,6 +347,9 @@ als_enabled_state_changed (CcPowerPanel *self)
         visible = g_variant_get_boolean (v);
     }
 
+  if (gtk_widget_get_visible (GTK_WIDGET (self->als_row)) == visible)
+    return;
+
   enabled = g_settings_get_boolean (self->gsd_settings, "ambient-enabled");
   g_debug ("ALS enabled: %s", enabled ? "on" : "off");
   g_signal_handlers_block_by_func (self->als_switch, als_switch_changed_cb, self);
