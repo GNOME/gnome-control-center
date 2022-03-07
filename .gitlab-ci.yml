@@ -40,6 +40,11 @@ stages:
   meson test -C _build --verbose --no-stdsplit
 
 .fedora.container.common:
+  # As of 2022-03-07 runners not tagged with "crun" have broken seccomp rules
+  # affecting the close_range syscall and breaking g_spawn
+  # Note that "asan" tests are disabled for the same reason, see below.
+  # https://gitlab.gnome.org/Infrastructure/GitLab/-/issues/545
+  tags: [ crun ]
   variables:
     # When branching a stable release, change 'main'
     # to the release number/branch to ensure that
@@ -367,18 +372,19 @@ flatpak:
       - $CI_PIPELINE_SOURCE == "schedule"
       - $CI_COMMIT_TITLE =~ /^Update.*translation$/
 
-asan:
-  extends:
-    - '.fdo.distribution-image@fedora'
-    - '.fedora.container.common'
-  <<: *sanitizer
-  # ASAN requires debugging capabilities
-  tags: [ asan ]
-  stage: manual
-  when: manual
-  variables:
-    BUILD_OPTS: "-Db_sanitize=address"
-    LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
+# Disabled because we currently need "crun" tagged runners, see above
+#asan:
+#  extends:
+#    - '.fdo.distribution-image@fedora'
+#    - '.fedora.container.common'
+#  <<: *sanitizer
+#  # ASAN requires debugging capabilities
+#  tags: [ asan ]
+#  stage: manual
+#  when: manual
+#  variables:
+#    BUILD_OPTS: "-Db_sanitize=address"
+#    LSAN_OPTIONS: "suppressions=${CI_PROJECT_DIR}/build-aux/ci/lsan.supp"
 
 tsan:
   extends:
