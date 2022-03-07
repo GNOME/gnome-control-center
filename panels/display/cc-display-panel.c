@@ -375,7 +375,7 @@ ensure_monitor_labels (CcDisplayPanel *self)
 
   for (w = windows; w; w = w->next)
     {
-      if (gtk_widget_has_focus (GTK_WIDGET (w->data)))
+      if (gtk_window_is_active (GTK_WINDOW (w->data)))
         {
           monitor_labeler_show (self);
           break;
@@ -387,7 +387,7 @@ ensure_monitor_labels (CcDisplayPanel *self)
 }
 
 static void
-dialog_toplevel_focus_changed (CcDisplayPanel *self)
+dialog_toplevel_is_active_changed (CcDisplayPanel *self)
 {
   ensure_monitor_labels (self);
 }
@@ -1002,8 +1002,8 @@ mapped_cb (CcDisplayPanel *panel)
   shell = cc_panel_get_shell (CC_PANEL (panel));
   toplevel = cc_shell_get_toplevel (shell);
   if (toplevel && !panel->focus_id)
-    panel->focus_id = g_signal_connect_object (toplevel, "notify::has-toplevel-focus",
-                                               G_CALLBACK (dialog_toplevel_focus_changed), panel, G_CONNECT_SWAPPED);
+    panel->focus_id = g_signal_connect_object (toplevel, "notify::is-active",
+                                               G_CALLBACK (dialog_toplevel_is_active_changed), panel, G_CONNECT_SWAPPED);
 }
 
 static void
