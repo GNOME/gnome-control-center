@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: procman\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-02-15 22:18+0000\n"
-"PO-Revision-Date: 2022-02-20 15:05+0330\n"
+"POT-Creation-Date: 2022-03-04 15:37+0000\n"
+"PO-Revision-Date: 2022-03-07 14:05+0330\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.0\n"
 "X-DamnedLies-Scope: partial\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -166,7 +166,7 @@ msgstr "گرفتن جست‌وجوهای سامانه و فرستادن نتیج
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:765 panels/user-accounts/cc-user-panel.c:870
+#: panels/user-accounts/cc-user-panel.c:789 panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478 subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "از کار افتاده"
@@ -342,13 +342,13 @@ msgstr "گزینش یک عکس"
 #: panels/network/net-device-wifi.c:860 panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:263 panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:432 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
-#: panels/user-accounts/cc-avatar-chooser.c:94
-#: panels/user-accounts/cc-avatar-chooser.c:165
-#: panels/user-accounts/cc-fingerprint-dialog.ui:30
+#: panels/user-accounts/cc-avatar-chooser.c:96
+#: panels/user-accounts/cc-avatar-chooser.c:167
+#: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:555 panels/user-accounts/cc-user-panel.c:573
+#: panels/user-accounts/cc-user-panel.c:579 panels/user-accounts/cc-user-panel.c:597
 #: panels/user-accounts/data/join-dialog.ui:17 panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:268
@@ -357,8 +357,8 @@ msgstr "_لغو"
 
 #: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:227
-#: panels/printers/pp-details-dialog.c:264 panels/sharing/cc-sharing-panel.c:433
-#: panels/user-accounts/cc-avatar-chooser.c:166
+#: panels/printers/pp-details-dialog.c:264 panels/sharing/cc-sharing-panel.c:524
+#: panels/user-accounts/cc-avatar-chooser.c:168
 msgid "_Open"
 msgstr "_گشودن"
 
@@ -595,7 +595,7 @@ msgstr "از _سر گیری"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:58
+#: panels/user-accounts/cc-fingerprint-dialog.ui:60
 msgid "_Done"
 msgstr "_انجام شد"
 
@@ -1753,6 +1753,7 @@ msgid "System Logo"
 msgstr "نشان سامانه"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "Device Name"
 msgstr "نام افزاره"
 
@@ -2172,7 +2173,6 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:467
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
-#: panels/printers/authentication-dialog.ui:19
 #: panels/printers/ppd-selection-dialog.ui:83 panels/wwan/cc-wwan-device-page.c:189
 msgid "Cancel"
 msgstr "لغو"
@@ -2253,7 +2253,7 @@ msgstr "فشردن گریز برای لغو یا پس‌بر برای از کا�
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:125 panels/wwan/cc-wwan-apn-dialog.ui:96
+#: panels/user-accounts/cc-user-panel.ui:122 panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "نام"
 
@@ -2798,8 +2798,8 @@ msgstr "نام شبکه"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:74
-#: panels/printers/authentication-dialog.ui:55
 #: panels/printers/new-printer-dialog.ui:331 panels/printers/pp-jobs-dialog.ui:52
+#: panels/sharing/cc-sharing-panel.ui:376
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -3938,7 +3938,7 @@ msgstr "نام _کاربری"
 #: panels/network/wireless-security/ws-leap.ui:23
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
-#: panels/sharing/cc-sharing-panel.ui:152 panels/user-accounts/cc-user-panel.ui:168
+#: panels/sharing/cc-sharing-panel.ui:152 panels/user-accounts/cc-user-panel.ui:165
 msgid "_Password"
 msgstr "_گذرواژه"
 
@@ -4744,28 +4744,6 @@ msgstr ""
 "Power;Sleep;Suspend;Hibernate;Battery;Brightness;Dim;Blank;Monitor;DPMS;Idle;"
 "Energy;نیرو;انرژی;خواب;تعلیق;باتری;روشنایی;تاریکی;نمایشگر;مانیتور;مونیتور;صفحه;"
 
-#: panels/printers/authentication-dialog.ui:9
-msgid " "
-msgstr " "
-
-#: panels/printers/authentication-dialog.ui:24
-msgid "Authenticate"
-msgstr "تصدیق هویت"
-
-#. Translators: This is a username on a print server.
-#: panels/printers/authentication-dialog.ui:41
-#: panels/printers/new-printer-dialog.ui:311 panels/printers/pp-jobs-dialog.ui:41
-#: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:342
-#: panels/wwan/cc-wwan-apn-dialog.ui:148
-msgid "Username"
-msgstr "نام کاربری"
-
-#: panels/printers/authentication-dialog.ui:92
-#: panels/printers/new-printer-dialog.ui:286
-msgid "Authentication Required"
-msgstr "تصدیق هویت لازم است"
-
 #. Translators: %s is the printer name
 #: panels/printers/cc-printers-panel.c:676
 #, c-format
@@ -4824,9 +4802,21 @@ msgstr "هیچ چاپگری پیدا نشد"
 msgid "Enter a network address or search for a printer"
 msgstr "یک نشانی شبکه وارد کرده یا برای چاپگر جست‌وجو کنید"
 
+#: panels/printers/new-printer-dialog.ui:286
+msgid "Authentication Required"
+msgstr "تصدیق هویت لازم است"
+
 #: panels/printers/new-printer-dialog.ui:302
 msgid "Enter username and password to view printers on Print Server."
 msgstr "برای دیدن چاپگرهای روی کارساز چاپ، نام‌کاربری و گذرواژه را وارد کنید."
+
+#. Translators: This is a username on a print server.
+#: panels/printers/new-printer-dialog.ui:311 panels/printers/pp-jobs-dialog.ui:41
+#: panels/user-accounts/cc-add-user-dialog.ui:94
+#: panels/user-accounts/cc-add-user-dialog.ui:342
+#: panels/wwan/cc-wwan-apn-dialog.ui:148
+msgid "Username"
+msgstr "نام کاربری"
 
 #. Translators: This is the title of the dialog. %s is the printer name.
 #: panels/printers/pp-details-dialog.c:74 panels/printers/pp-details-dialog.c:365
@@ -4882,7 +4872,7 @@ msgid "Loading drivers database…"
 msgstr "بار کردن پایگاه دادهٔ راه‌اندازها…"
 
 #: panels/printers/ppd-selection-dialog.ui:91
-#: panels/user-accounts/cc-avatar-chooser.c:96
+#: panels/user-accounts/cc-avatar-chooser.c:98
 msgid "Select"
 msgstr "انتخاب"
 
@@ -5495,7 +5485,7 @@ msgid "Your Account"
 msgstr "حسابتان"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:289
 msgid "_Language"
 msgstr "_زبان"
 
@@ -5746,32 +5736,32 @@ msgstr "هیچ شبکه‌ای برای هم‌رسانی انتخاب نشده"
 msgid "Networks"
 msgstr "شبکه‌ها"
 
-#: panels/sharing/cc-sharing-panel.c:276
+#: panels/sharing/cc-sharing-panel.c:367
 msgctxt "service is enabled"
 msgid "On"
 msgstr "روشن"
 
-#: panels/sharing/cc-sharing-panel.c:278 panels/sharing/cc-sharing-panel.c:305
+#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "خاموش"
 
-#: panels/sharing/cc-sharing-panel.c:308
+#: panels/sharing/cc-sharing-panel.c:399
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "فعَال"
 
-#: panels/sharing/cc-sharing-panel.c:311
+#: panels/sharing/cc-sharing-panel.c:402
 msgctxt "service is active"
 msgid "Active"
 msgstr "فعّال"
 
-#: panels/sharing/cc-sharing-panel.c:429
+#: panels/sharing/cc-sharing-panel.c:520
 msgid "Choose a Folder"
 msgstr "گزینش یک شاخه"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:657
+#: panels/sharing/cc-sharing-panel.c:748
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your current "
@@ -5781,7 +5771,7 @@ msgstr ""
 "با دیگران هم‌رسانی کنید: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:663
+#: panels/sharing/cc-sharing-panel.c:754
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure Shell "
@@ -5791,16 +5781,6 @@ msgstr ""
 "هنگام به کار افتادن ورود دوردست، کاربران دوردست می‌توانند با استفاده از این فرمان "
 "پوستهٔ امن متّصل شوند:\n"
 "%s"
-
-#. TRANSLATORS: %s is replaced with a link to a vnc://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:669
-#, c-format
-msgid ""
-"Screen sharing allows remote users to view or control your screen by connecting to "
-"%s"
-msgstr ""
-"هم‌رسانی صفحه به کاربران دوردست اجازه می‌دهد تا صفحه‌نمایشتان را با وصل شدن به این "
-"پیوند واپایش کنند: %s"
 
 #: panels/sharing/cc-sharing-panel.ui:9
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:3
@@ -5816,8 +5796,8 @@ msgid "_File Sharing"
 msgstr "هم‌رسانی _پرونده"
 
 #: panels/sharing/cc-sharing-panel.ui:65
-msgid "_Screen Sharing"
-msgstr "هم‌رسانی _صفحه"
+msgid "Remote _Desktop"
+msgstr "_میزکار دوردست"
 
 #: panels/sharing/cc-sharing-panel.ui:72
 msgid "_Media Sharing"
@@ -5839,43 +5819,74 @@ msgstr "گذرواژه _لازم است"
 msgid "Remote Login"
 msgstr "ورود دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:250
-msgid "Screen Sharing"
-msgstr "هم‌رسانی صفحه‌نمایش"
+#: panels/sharing/cc-sharing-panel.ui:250 panels/sharing/cc-sharing-panel.ui:267
+msgid "Remote Desktop"
+msgstr "میزکار دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:298
-msgid "_Allow connections to control the screen"
-msgstr "_اجازه به اتّصال‌ها برای واپایش صفحه"
+#: panels/sharing/cc-sharing-panel.ui:263
+msgid ""
+"Remote desktop allows viewing and controlling your desktop from another computer."
+msgstr "میزکار دوردست می‌گذارد میزکارتان را از رایانه‌ای دیگر دیده و واپایش کنید."
 
-#: panels/sharing/cc-sharing-panel.ui:316
-msgid "_Password:"
-msgstr "_گذرواژه:"
+#: panels/sharing/cc-sharing-panel.ui:268
+msgid "Enable or disable remote desktop connections to this computer."
+msgstr "به یا از کار انداختن اتّصال‌های میزکار دوردست به این رایانه."
 
-#: panels/sharing/cc-sharing-panel.ui:339
-msgid "_Show Password"
-msgstr "نمایش _گذرواژه"
+#: panels/sharing/cc-sharing-panel.ui:280
+msgid "Remote Control"
+msgstr "واپایش دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:352
-msgid "Access Options"
-msgstr "گزینه‌های دسترسی"
+#: panels/sharing/cc-sharing-panel.ui:281
+msgid "Allows remote connections to control the screen."
+msgstr "اجازه به اتّصال‌ها برای واپایش صفحه."
 
-#: panels/sharing/cc-sharing-panel.ui:364
-msgid "_New connections must ask for access"
-msgstr "اتّصال‌های _جدید باید برای دسترسی اجازه بگیرند"
+#: panels/sharing/cc-sharing-panel.ui:294
+msgid "How to Connect"
+msgstr "چگونگی وصل شدن"
 
-#: panels/sharing/cc-sharing-panel.ui:375
-msgid "_Require a password"
-msgstr "گذرواژه _لازم است"
+#: panels/sharing/cc-sharing-panel.ui:295
+msgid "Connect to this computer using the device name or remote desktop address."
+msgstr "وصل شدن به این رایانه با استفاده از نام افزاره یا نشانی میزکار دوردست."
 
-#: panels/sharing/cc-sharing-panel.ui:400
+#: panels/sharing/cc-sharing-panel.ui:323
+msgid "Remote Desktop Address"
+msgstr "نشانی میزکار دوردست"
+
+#: panels/sharing/cc-sharing-panel.ui:350
+msgid "Authentication"
+msgstr "تأیید هویت"
+
+#: panels/sharing/cc-sharing-panel.ui:351
+msgid "The user name and password are required to connect to this computer."
+msgstr "برای وصل شدن به این رایانه نیاز به نام کاربری و گذرواژه است."
+
+#: panels/sharing/cc-sharing-panel.ui:355
+msgid "User Name"
+msgstr "نام کاربری"
+
+#: panels/sharing/cc-sharing-panel.ui:401
+msgid "Verify Encryption"
+msgstr "تأیید رمزنگاری"
+
+#: panels/sharing/cc-sharing-panel.ui:430
+msgid "Encryption Fingerprint"
+msgstr "اثر انگشت رمزنگاری"
+
+#: panels/sharing/cc-sharing-panel.ui:431
+msgid ""
+"The encryption fingerprint can be seen in connecting clients and should be "
+"identical"
+msgstr "اثرانگشت رمزنگاری می‌تواند در کارخواه‌های وصل شده دیده شود و باید یکتا باشد"
+
+#: panels/sharing/cc-sharing-panel.ui:463
 msgid "Media Sharing"
 msgstr "هم‌رسانی رسانه"
 
-#: panels/sharing/cc-sharing-panel.ui:422
+#: panels/sharing/cc-sharing-panel.ui:485
 msgid "Share music, photos and videos over the network."
 msgstr "هم‌رسانی آهنگ‌ها، عکس‌ها و ویدیوها روی شبکه."
 
-#: panels/sharing/cc-sharing-panel.ui:435
+#: panels/sharing/cc-sharing-panel.ui:498
 msgid "Folders"
 msgstr "پوشه‌ها"
 
@@ -6999,7 +7010,7 @@ msgstr ""
 "ورود تجاری می‌گذارد حساب کاربری مدیریت شدهٔ متمرکزی در این افزاره استفاده شود. "
 "همچنین از این حساب می‌توان برای دسترسی به منابع شرکت در اینترنت استفاده کرد."
 
-#: panels/user-accounts/cc-avatar-chooser.c:162
+#: panels/user-accounts/cc-avatar-chooser.c:164
 msgid "Browse for more pictures"
 msgstr "مرور برای عکس‌های بیشتر"
 
@@ -7011,47 +7022,47 @@ msgstr "گزینش پرونده…"
 msgid "Fingerprint Manager"
 msgstr "ورود با اثر انگشت"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:18
+#: panels/user-accounts/cc-fingerprint-dialog.ui:20
 msgid "Fingerprint"
 msgstr "اثر انگشت"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:86
+#: panels/user-accounts/cc-fingerprint-dialog.ui:88
 msgid "_No"
 msgstr "_نه"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:94
+#: panels/user-accounts/cc-fingerprint-dialog.ui:96
 msgid "_Yes"
 msgstr "_بله"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:114
+#: panels/user-accounts/cc-fingerprint-dialog.ui:116
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr ""
 "مایلید تمام اثرانگشت‌های ثبت شده را حذف کنید تا ورود با اثرانگشت از کار بیفتد؟"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:170
+#: panels/user-accounts/cc-fingerprint-dialog.ui:172
 msgid "No fingerprint device"
 msgstr "افزارهٔ اثر انگشتی نیست"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:185
+#: panels/user-accounts/cc-fingerprint-dialog.ui:187
 msgid "No Fingerprint device"
 msgstr "افزارهٔ اثر انگشتی نیست"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:194
+#: panels/user-accounts/cc-fingerprint-dialog.ui:196
 msgid "Ensure the device is properly connected."
 msgstr "مطمين شوید افزاره به درستی وصل شده."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:202
+#: panels/user-accounts/cc-fingerprint-dialog.ui:204
 msgid "Fingerprint Device"
 msgstr "افزارهٔ اثر انگشت"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:211
+#: panels/user-accounts/cc-fingerprint-dialog.ui:213
 msgid "Choose the fingerprint device you want to configure"
 msgstr "افزارهٔ اثر انگشتی را که می‌خواهید پیکربندی کنید برگزینید"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:242
+#: panels/user-accounts/cc-fingerprint-dialog.ui:243
 msgid "Fingerprint Login"
 msgstr "ورود با اثر انگشت"
 
@@ -7070,150 +7081,150 @@ msgstr "_حذف اثرانگشت‌ها"
 msgid "Fingerprint Enroll"
 msgstr "ثبت اثر انگشت"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:349
-msgid "_Re-enroll this finger…"
-msgstr "ثبت _دوبارهٔ این انگشت…"
-
-#: panels/user-accounts/cc-fingerprint-dialog.c:236
+#: panels/user-accounts/cc-fingerprint-dialog.c:235
 msgid "the device needs to be claimed to perform this action"
 msgstr "پیش از انجام این کنش،‌ افزاره باید درخواست شود"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:238
+#: panels/user-accounts/cc-fingerprint-dialog.c:237
 msgid "the device is already claimed by another process"
 msgstr "افزاره به دست فرایندی دیگر درخواست شده است"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:240
+#: panels/user-accounts/cc-fingerprint-dialog.c:239
 msgid "you do not have permission to perform the action"
 msgstr "اجازهٔ انجام این کنش را ندارید"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:242
+#: panels/user-accounts/cc-fingerprint-dialog.c:241
 msgid "no prints have been enrolled"
 msgstr "هیچ اثر انگشتی ثبت نشده"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:251
+#: panels/user-accounts/cc-fingerprint-dialog.c:250
 msgid "Failed to communicate with the device during enrollment"
 msgstr "شکست در ارتباط با افزاره هنگام ثبت"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:255
+#: panels/user-accounts/cc-fingerprint-dialog.c:254
 msgid "Failed to communicate with the fingerprint reader"
 msgstr "شکست در ارتباط با خوانندهٔ اثر انگشت"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:257
+#: panels/user-accounts/cc-fingerprint-dialog.c:256
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "شکست در ارتباط با خدمت اثر انگشت"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:606
+#: panels/user-accounts/cc-fingerprint-dialog.c:539
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "شکست در فهرست اثر انگشت‌ها: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:673
+#: panels/user-accounts/cc-fingerprint-dialog.c:606
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "شکست در حذف اثر انگشت‌های ذخیره‌شده: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:704
+#: panels/user-accounts/cc-fingerprint-dialog.c:637
 msgid "Left thumb"
 msgstr "شصت چپ"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:706
+#: panels/user-accounts/cc-fingerprint-dialog.c:639
 msgid "Left middle finger"
 msgstr "انگشت وسط چپ"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:708
+#: panels/user-accounts/cc-fingerprint-dialog.c:641
 msgid "_Left index finger"
 msgstr "انگشت اشاره _چپ"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:710
+#: panels/user-accounts/cc-fingerprint-dialog.c:643
 msgid "Left ring finger"
 msgstr "انگشت حلقه چپ"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:712
+#: panels/user-accounts/cc-fingerprint-dialog.c:645
 msgid "Left little finger"
 msgstr "انگشت کوچک چپ"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:714
+#: panels/user-accounts/cc-fingerprint-dialog.c:647
 msgid "Right thumb"
 msgstr "شصت راست"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:716
+#: panels/user-accounts/cc-fingerprint-dialog.c:649
 msgid "Right middle finger"
 msgstr "انگشت وسط راست"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:718
+#: panels/user-accounts/cc-fingerprint-dialog.c:651
 msgid "_Right index finger"
 msgstr "انگشت اشاره _راست"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:720
+#: panels/user-accounts/cc-fingerprint-dialog.c:653
 msgid "Right ring finger"
 msgstr "انگشت حلقه راست"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:722
+#: panels/user-accounts/cc-fingerprint-dialog.c:655
 msgid "Right little finger"
 msgstr "انگشت کوچک راست"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:724
+#: panels/user-accounts/cc-fingerprint-dialog.c:657
 msgid "Unknown Finger"
 msgstr "اثر انگشت نامشخّص"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:858
+#: panels/user-accounts/cc-fingerprint-dialog.c:791
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "تمام"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:869
+#: panels/user-accounts/cc-fingerprint-dialog.c:802
 msgid "Fingerprint device disconnected"
 msgstr "افزارهٔ اثر انگشت قطع شد"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:875
+#: panels/user-accounts/cc-fingerprint-dialog.c:808
 msgid "Fingerprint device storage is full"
 msgstr "فضای ذخیرهٔ افزارهٔ اثر انگشتتان پر است"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:879
+#: panels/user-accounts/cc-fingerprint-dialog.c:812
 msgid "Failed to enroll new fingerprint"
 msgstr "شکست در ثبت اثر انگشت جدید"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:910
+#: panels/user-accounts/cc-fingerprint-dialog.c:843
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "شکست در آغاز ثبت: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:918
+#: panels/user-accounts/cc-fingerprint-dialog.c:851
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "شکست در ثبت اثر انگشت جدید"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:949
+#: panels/user-accounts/cc-fingerprint-dialog.c:882
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "شکست در توقّف ثبت: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:995
+#: panels/user-accounts/cc-fingerprint-dialog.c:928
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your fingerprint"
 msgstr "برایثبت انگشتتان، چند بار بلندش کرده و روی حسگر بگذارید"
 
+#: panels/user-accounts/cc-fingerprint-dialog.c:1047
+msgid "_Re-enroll this finger…"
+msgstr "ثبت _دوبارهٔ این انگشت…"
+
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1147
+#: panels/user-accounts/cc-fingerprint-dialog.c:1062
 msgid "Scan new fingerprint"
 msgstr "پویش اثر انگشت جدید"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1185
+#: panels/user-accounts/cc-fingerprint-dialog.c:1100
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "شکست در آزاد کردن افزارهٔ اثر انگشت %s: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1257
+#: panels/user-accounts/cc-fingerprint-dialog.c:1172
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "مشکل در خواندن از افزاره"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1292
+#: panels/user-accounts/cc-fingerprint-dialog.c:1207
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "شکست در درخواست افزارهٔ اثر انگشت %s: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1441
+#: panels/user-accounts/cc-fingerprint-dialog.c:1358
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "شکست در گرفتن افزارهٔ اثر انگشت: %s"
@@ -7254,7 +7265,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:712
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%OH:%OM"
@@ -7262,7 +7273,7 @@ msgstr "%OH:%OM"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:692
+#: panels/user-accounts/cc-user-panel.c:716
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7346,37 +7357,37 @@ msgstr "گذرواژهٔ نادرست، لطفاً دوباره تلاش کنی�
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "نمی‌توان به دامنهٔ %s وصل شد: %s"
 
-#: panels/user-accounts/cc-user-panel.c:317
+#: panels/user-accounts/cc-user-panel.c:341
 msgid "Failed to delete user"
 msgstr "شکست در حذف کاربر"
 
-#: panels/user-accounts/cc-user-panel.c:374 panels/user-accounts/cc-user-panel.c:429
-#: panels/user-accounts/cc-user-panel.c:475
+#: panels/user-accounts/cc-user-panel.c:398 panels/user-accounts/cc-user-panel.c:453
+#: panels/user-accounts/cc-user-panel.c:499
 msgid "Failed to revoke remotely managed user"
 msgstr "شکست در لغو دسترسی کاربرِ مدیریت شده از راه دور"
 
-#: panels/user-accounts/cc-user-panel.c:524
+#: panels/user-accounts/cc-user-panel.c:548
 msgid "You cannot delete your own account."
 msgstr "شما نمی‌توانید حساب خودتان را حذف کنید."
 
-#: panels/user-accounts/cc-user-panel.c:533
+#: panels/user-accounts/cc-user-panel.c:557
 #, c-format
 msgid "%s is still logged in"
 msgstr "کاربر %s هم‌چنان وارد است"
 
-#: panels/user-accounts/cc-user-panel.c:537
+#: panels/user-accounts/cc-user-panel.c:561
 msgid ""
 "Deleting a user while they are logged in can leave the system in an inconsistent "
 "state."
 msgstr ""
 "حذف یک کاربر در حالی که وارد بودن ممکن است سامانه را در حالتی متناقض قرار دهد."
 
-#: panels/user-accounts/cc-user-panel.c:546
+#: panels/user-accounts/cc-user-panel.c:570
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "می‌خواهید پرونده‌های «%s» را نگه دارید؟"
 
-#: panels/user-accounts/cc-user-panel.c:550
+#: panels/user-accounts/cc-user-panel.c:574
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files around "
 "when deleting a user account."
@@ -7384,66 +7395,66 @@ msgstr ""
 "هنگام حذف یک حساب کاربری، نگهداری از شاخه خانه، رایانامه و پرونده‌های موقتش "
 "امکان‌پذیر است."
 
-#: panels/user-accounts/cc-user-panel.c:553
+#: panels/user-accounts/cc-user-panel.c:577
 msgid "_Delete Files"
 msgstr "_حذف پرونده‌ها"
 
-#: panels/user-accounts/cc-user-panel.c:554
+#: panels/user-accounts/cc-user-panel.c:578
 msgid "_Keep Files"
 msgstr "_نگه‌داری پرونده‌ها"
 
-#: panels/user-accounts/cc-user-panel.c:568
+#: panels/user-accounts/cc-user-panel.c:592
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "مطمئنید که می‌خواهید دسترسی حساب مدیریت از راه دور %s را لغو کنید؟"
 
-#: panels/user-accounts/cc-user-panel.c:572
+#: panels/user-accounts/cc-user-panel.c:596
 msgid "_Delete"
 msgstr "_حذف"
 
-#: panels/user-accounts/cc-user-panel.c:622
+#: panels/user-accounts/cc-user-panel.c:646
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "حساب از کار افتاد"
 
-#: panels/user-accounts/cc-user-panel.c:630
+#: panels/user-accounts/cc-user-panel.c:654
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "در ورود بعدی تنظیم می‌شود"
 
-#: panels/user-accounts/cc-user-panel.c:633
+#: panels/user-accounts/cc-user-panel.c:657
 msgctxt "Password mode"
 msgid "None"
 msgstr "هیچ"
 
-#: panels/user-accounts/cc-user-panel.c:676
+#: panels/user-accounts/cc-user-panel.c:700
 msgid "Logged in"
 msgstr "وارد شده"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:763 panels/user-accounts/cc-user-panel.c:867
+#: panels/user-accounts/cc-user-panel.c:787 panels/user-accounts/cc-user-panel.c:876
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "فعَال"
 
-#: panels/user-accounts/cc-user-panel.c:1187
+#: panels/user-accounts/cc-user-panel.c:1173
 msgid "Failed to contact the accounts service"
 msgstr "ارتباط با سرویس حساب شکست خورد"
 
-#: panels/user-accounts/cc-user-panel.c:1189
+#: panels/user-accounts/cc-user-panel.c:1175
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "لطفاً مطمئن شوید که AccountService نصب و به کار افتاده است."
 
-#: panels/user-accounts/cc-user-panel.c:1210
+#: panels/user-accounts/cc-user-panel.c:1197
 msgid "This panel must be unlocked to change this setting"
 msgstr "برای تغییر این تنظیمات باید قفل این تابلو گشوده باشد"
 
-#: panels/user-accounts/cc-user-panel.c:1277
+#: panels/user-accounts/cc-user-panel.c:1264
 msgid "Delete the selected user account"
 msgstr "حذف حساب کاربر انتخاب شده"
 
-#: panels/user-accounts/cc-user-panel.c:1281
-#: panels/user-accounts/cc-user-panel.c:1390
+#: panels/user-accounts/cc-user-panel.c:1268
+#: panels/user-accounts/cc-user-panel.c:1377
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7451,7 +7462,7 @@ msgstr ""
 "برای حذف حساب کاربر انتخاب شده،\n"
 "ابتدا بر روی شمایل * کلیک کنید"
 
-#: panels/user-accounts/cc-user-panel.c:1432
+#: panels/user-accounts/cc-user-panel.c:1423
 msgid "Unlock to Add Users and Change Settings"
 msgstr "قفل‌گشایی برای افزودن کاربران و تغییر تنظیمات"
 
@@ -7469,23 +7480,23 @@ msgid "Restart Now"
 msgstr "اکنون راه‌اندازی مجدد کن"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:188
+#: panels/user-accounts/cc-user-panel.ui:185
 msgid "_Fingerprint Login"
 msgstr "ورود با اثر _انگشت"
 
-#: panels/user-accounts/cc-user-panel.ui:211
+#: panels/user-accounts/cc-user-panel.ui:208
 msgid "A_utomatic Login"
 msgstr "ورود _خودکار"
 
-#: panels/user-accounts/cc-user-panel.ui:224
+#: panels/user-accounts/cc-user-panel.ui:221
 msgid "Account Activity"
 msgstr "فعّالیت حساب"
 
-#: panels/user-accounts/cc-user-panel.ui:252
+#: panels/user-accounts/cc-user-panel.ui:249
 msgid "_Administrator"
 msgstr "_مدیر"
 
-#: panels/user-accounts/cc-user-panel.ui:253
+#: panels/user-accounts/cc-user-panel.ui:250
 msgid ""
 "Administrators can add and remove other users, and can change settings for all "
 "users."
@@ -7493,32 +7504,32 @@ msgstr ""
 "مدیران می‌توانند دیگر کاربران را افزوده، برداشته و تنظیمات همهٔ کاربران را تغییر "
 "دهند."
 
-#: panels/user-accounts/cc-user-panel.ui:269
+#: panels/user-accounts/cc-user-panel.ui:266
 msgid "_Parental Controls"
 msgstr "واپایش‌های _والدین"
 
-#: panels/user-accounts/cc-user-panel.ui:270
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid "Open the Parental Controls application."
 msgstr "گشودن برنامهٔ واپایش‌های والدین."
 
-#: panels/user-accounts/cc-user-panel.ui:321
+#: panels/user-accounts/cc-user-panel.ui:318
 msgid "Remove User…"
 msgstr "حذف کاربر…"
 
-#: panels/user-accounts/cc-user-panel.ui:333
+#: panels/user-accounts/cc-user-panel.ui:330
 msgid "Other Users"
 msgstr "دیگر کاربران"
 
-#: panels/user-accounts/cc-user-panel.ui:346
+#: panels/user-accounts/cc-user-panel.ui:343
 msgid "Add User…"
 msgstr "افزودن کاربر…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:374
+#: panels/user-accounts/cc-user-panel.ui:371
 msgid "No Users Found"
 msgstr "هیچ کاربری پیدا نشد"
 
-#: panels/user-accounts/cc-user-panel.ui:383
+#: panels/user-accounts/cc-user-panel.ui:380
 msgid "Unlock to add a user account."
 msgstr "برای افزودن حساب کاربری، قفل‌گشایی کنید."
 
@@ -7839,6 +7850,14 @@ msgstr "استفاده از فقط بخشی از سطح رایانک برای ن
 msgid "Calibrate"
 msgstr "واسنجی"
 
+#: panels/wacom/cc-wacom-panel.ui:56
+msgid "No tablet detected"
+msgstr "هیچ رایانگی پیدا نشد"
+
+#: panels/wacom/cc-wacom-panel.ui:57
+msgid "Please plug in or turn on your Wacom tablet."
+msgstr "لطفاً رایانک وکومتان را روشن یا وصل کنید."
+
 #: panels/wacom/cc-wacom-stylus-page.ui:16
 msgid "Tip Pressure Feel"
 msgstr "حساسیت فشار ضربه"
@@ -7880,16 +7899,16 @@ msgstr "قلم استاندارد با فشار"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:3
 msgid "Wacom Tablet"
-msgstr "تبلت Wa­com"
+msgstr "رایانک وکوم"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:4
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
-msgstr "تنظیم هدایت کلیدها و تنظیم حساسیت قلم برای تبلت‌های گرافیکی"
+msgstr "تنظیم هدایت کلیدها و تنظیم حساسیت قلم برای رایانک‌های گرافیکی"
 
 #. Translators: Search terms to find the Wacom Tablet panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:19
 msgid "Tablet;Wacom;Stylus;Eraser;Mouse;"
-msgstr "Tablet;Wacom;Stylus;Eraser;Mouse;تبلت;Wa­com;استایلوس;پاک‌کن;موشی;"
+msgstr "Tablet;Wacom;Stylus;Eraser;Mouse;رایانک;تبلت;Wa­com;استایلوس;پاک‌کن;موشی;"
 
 #: panels/wacom/gsd-wacom-key-shortcut-button.c:190
 msgid "New shortcut…"
@@ -8500,6 +8519,40 @@ msgstr[1] "%Iu ورودی"
 msgid "System Sounds"
 msgstr "صداهای سامانه"
 
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "Authenticate"
+#~ msgstr "تصدیق هویت"
+
+#~ msgid ""
+#~ "Screen sharing allows remote users to view or control your screen by connecting "
+#~ "to %s"
+#~ msgstr ""
+#~ "هم‌رسانی صفحه به کاربران دوردست اجازه می‌دهد تا صفحه‌نمایشتان را با وصل شدن به این "
+#~ "پیوند واپایش کنند: %s"
+
+#~ msgid "_Screen Sharing"
+#~ msgstr "هم‌رسانی _صفحه"
+
+#~ msgid "Screen Sharing"
+#~ msgstr "هم‌رسانی صفحه‌نمایش"
+
+#~ msgid "_Password:"
+#~ msgstr "_گذرواژه:"
+
+#~ msgid "_Show Password"
+#~ msgstr "نمایش _گذرواژه"
+
+#~ msgid "Access Options"
+#~ msgstr "گزینه‌های دسترسی"
+
+#~ msgid "_New connections must ask for access"
+#~ msgstr "اتّصال‌های _جدید باید برای دسترسی اجازه بگیرند"
+
+#~ msgid "_Require a password"
+#~ msgstr "گذرواژه _لازم است"
+
 #~ msgid "More Warm"
 #~ msgstr "گرم‌تر"
 
@@ -8647,9 +8700,6 @@ msgstr "صداهای سامانه"
 #~ msgid "_Help"
 #~ msgstr "_راهنما"
 
-#~ msgid "Please plug in or turn on your Wacom tablet"
-#~ msgstr "لطفاً تبلت Wa­com را روشن یا به رایانه متّصل کنید"
-
 #~ msgid "Bluetooth Settings"
 #~ msgstr "تنظیمات بلوتوث"
 
@@ -8754,8 +8804,8 @@ msgstr "صداهای سامانه"
 #~ msgstr "قابل تغییر نیست"
 
 #~ msgid ""
-#~ "Individual permissions for applications can be reviewed in the <a "
-#~ "href=\"privacy\">Privacy</a> Settings."
+#~ "Individual permissions for applications can be reviewed in the <a href=\"privacy"
+#~ "\">Privacy</a> Settings."
 #~ msgstr ""
 #~ "اجازه‌های تکّی برای برنامه‌ها می‌توانند در تنظیمات <a href=\"privacy\">محرمانگی</a> "
 #~ "بازبینی شوند."
