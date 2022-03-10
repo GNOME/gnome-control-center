@@ -26,6 +26,7 @@
 # Kenichi Ito <ken.i54k@gmail.com>, 2018.
 # sicklylife <translation@sicklylife.jp>, 2019-2020, 2022.
 # sujiniku <sujinikusityuu@gmail.com>, 2021.
+# 小山田 純 <oyamadajun@outlook.jp>, 2022.
 #
 msgid ""
 msgstr ""
@@ -33,8 +34,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2022-01-24 13:03+0000\n"
-"PO-Revision-Date: 2022-02-05 22:00+0900\n"
-"Last-Translator: sicklylife <translation@sicklylife.jp>\n"
+"PO-Revision-Date: 2022-03-10 00:21+0900\n"
+"Last-Translator: 小山田 純 <oyamadajun@outlook.jp>\n"
 "Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -172,6 +173,12 @@ msgstr "ビデオファイル"
 msgid "Other Files"
 msgstr "その他のファイル"
 
+#. Translators: '%s' is the formatted size, e.g. "26.2 MB"
+#: panels/applications/cc-applications-panel.c:1223
+#, c-format
+msgid "%s of disk space used"
+msgstr "%s 使用中"
+
 #. List of applications.
 #: panels/applications/cc-applications-panel.c:1660
 #: panels/applications/cc-applications-panel.ui:416
@@ -187,6 +194,15 @@ msgstr "アプリケーションがありません"
 #: panels/applications/cc-applications-panel.ui:57
 msgid "Install some…"
 msgstr "インストール…"
+
+#: panels/applications/cc-applications-panel.ui:84
+#: panels/network/wireless-security/ws-file-chooser-button.c:96
+msgid "Open"
+msgstr "開く"
+
+#: panels/applications/cc-applications-panel.ui:94
+msgid "View Details"
+msgstr "詳細を表示"
 
 #: panels/applications/cc-applications-panel.ui:94
 msgid "Permissions & Access"
@@ -274,9 +290,26 @@ msgstr "検索"
 msgid "Notifications"
 msgstr "通知"
 
+#: panels/applications/cc-applications-panel.ui:127
+msgid "Show system notifications."
+msgstr "システムの通知"
+
 #: panels/applications/cc-applications-panel.ui:243
 msgid "Run in background"
 msgstr "バックグラウンドで実行"
+
+#: panels/applications/cc-applications-panel.ui:134
+msgid "Allow activity when the app is closed."
+msgstr ""
+"アプリケーションを閉じても、バックグラウンドで実行することを許可します。"
+
+#: panels/applications/cc-applications-panel.ui:140
+msgid "Change Wallpaper"
+msgstr "壁紙を変更"
+
+#: panels/applications/cc-applications-panel.ui:141
+msgid "Change the desktop wallpaper."
+msgstr "デスクトップの壁紙を変更"
 
 #: panels/applications/cc-applications-panel.ui:249
 msgid "Set Desktop Background"
@@ -329,6 +362,14 @@ msgstr "結果がありません"
 #: shell/cc-panel-list.ui:132
 msgid "Try a different search"
 msgstr "他のキーワードを試してください"
+
+#: panels/applications/cc-applications-panel.ui:367
+msgid "File Types"
+msgstr "ファイルの種類"
+
+#: panels/applications/cc-applications-panel.ui:373
+msgid "Link Types"
+msgstr "リンクの種類"
 
 #: panels/applications/cc-applications-panel.ui:555
 msgid ""
@@ -431,9 +472,29 @@ msgstr "デスクトップの背景が見つかりません"
 msgid "Current background"
 msgstr "現在の背景"
 
+#: panels/background/cc-background-panel.ui:9
+msgid "Style"
+msgstr "スタイル"
+
+#: panels/background/cc-background-panel.ui:45
+msgid "Light"
+msgstr "明るい"
+
+#: panels/background/cc-background-panel.ui:72
+msgid "Dark"
+msgstr "暗い"
+
 #: panels/background/cc-background-panel.ui:55
 msgid "Add Picture…"
 msgstr "画像を追加…"
+
+#: panels/background/gnome-background-panel.desktop.in.in:3
+msgid "Appearance"
+msgstr "外観"
+
+#: panels/background/gnome-background-panel.desktop.in.in:4
+msgid "Change your background image or the UI colors"
+msgstr "壁紙やUIの色を変更"
 
 #: panels/background/cc-background-preview.ui:55
 msgid "Activities"
@@ -470,7 +531,7 @@ msgstr ""
 "デバイスの接続やファイルの受信を行うには Bluetooth をオンにしてください。"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:107
-msgid "Airplane Mode is on"
+msgid "Airplane Mode is On"
 msgstr "機内モードがオンになっています"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:118
@@ -482,8 +543,8 @@ msgid "Turn Off Airplane Mode"
 msgstr "機内モードをオフにする"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:154
-msgid "Hardware Airplane Mode is on"
-msgstr "ハードウェア機内モードがオンになっています"
+msgid "Hardware Airplane Mode is On"
+msgstr "ハードウェアレベルで機内モードがオンになっています"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:165
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
@@ -505,7 +566,7 @@ msgid "share;sharing;bluetooth;obex;"
 msgstr "share;sharing;bluetooth;obex;共有;シェアリング;ブルートゥース;"
 
 #: panels/camera/cc-camera-panel.ui:34
-msgid "Camera is turned off"
+msgid "Camera is Turned Off"
 msgstr "カメラがオフになっています"
 
 #: panels/camera/cc-camera-panel.ui:43
@@ -515,10 +576,14 @@ msgstr "アプリケーションが写真や動画を撮影できません。"
 #: panels/camera/cc-camera-panel.ui:75
 msgid ""
 "Use of the camera allows applications to capture photos and video. Disabling "
-"the camera may cause some applications to not function properly."
+"the camera may cause some applications to not function properly.\n"
+"\n"
+"Allow the applications below to use your camera."
 msgstr ""
-"アプリケーションがカメラで写真や動画を撮影できます。カメラを無効にすると一部"
-"のアプリケーションが正常に機能しなくなるかもしれません。"
+"アプリケーションがカメラで写真や動画を撮影できます。\n"
+"\n"
+"カメラを無効にすると一部のアプリケーションが正常に機能しなくなるかもしれませ"
+"ん。"
 
 #: panels/camera/cc-camera-panel.ui:85
 msgid "Allow the applications below to use your camera."
@@ -1454,16 +1519,16 @@ msgstr "タイムゾーン"
 msgid "Search for a city"
 msgstr "都市を検索する"
 
-#: panels/datetime/cc-datetime-panel.ui:375
-msgid "Automatic _Date & Time"
+#: panels/datetime/cc-datetime-panel.ui:164
+msgid "Automatic _Date &amp; Time"
 msgstr "自動日時設定(_D)"
 
 #: panels/datetime/cc-datetime-panel.ui:376
 msgid "Requires internet access"
 msgstr "インターネットアクセスが必要です"
 
-#: panels/datetime/cc-datetime-panel.ui:396
-msgid "Date & _Time"
+#: panels/datetime/cc-datetime-panel.ui:177
+msgid "Date &amp; _Time"
 msgstr "日付と時刻(_T)"
 
 #: panels/datetime/cc-datetime-panel.ui:430
@@ -1642,6 +1707,10 @@ msgstr ""
 #: panels/display/cc-display-panel.ui:250
 msgid "Display Arrangement"
 msgstr "ディスプレイの配置"
+
+#: panels/display/cc-display-panel.ui:124
+msgid "Multiple Displays"
+msgstr "マルチディスプレイ"
 
 #: panels/display/cc-display-panel.ui:374
 msgid "Active Display"
@@ -1849,6 +1918,10 @@ msgstr "Wayland"
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "不明"
+
+#: panels/info-overview/cc-info-overview-panel.ui:17
+msgid "System Logo"
+msgstr "システムロゴ"
 
 #: panels/info-overview/cc-info-overview-panel.ui:52
 msgid "Device Name"
@@ -2443,32 +2516,30 @@ msgstr ""
 "スト;入力;インプット;ソース;ロック;ボリューム;音量;"
 
 #: panels/location/cc-location-panel.ui:31
-msgid "Location services turned off"
+msgid "Location Services Turned Off"
 msgstr "位置情報サービスがオフになっています"
 
 #: panels/location/cc-location-panel.ui:40
 msgid "No applications can obtain location information."
 msgstr "アプリケーションが位置情報を取得できません。"
 
-#: panels/location/cc-location-panel.ui:72
+#: panels/location/cc-location-panel.ui:35
 msgid ""
 "Location services allow applications to know your location. Using Wi-Fi and "
-"mobile broadband increases accuracy."
-msgstr ""
-"アプリケーションが位置情報サービスから現在の位置情報を取得できます。Wi-Fi や"
-"モバイルブロードバンドを使用している場合、より正確な位置を取得できます。"
-
-#: panels/location/cc-location-panel.ui:81
-msgid ""
+"mobile broadband increases accuracy.\n"
+"\n"
 "Uses Mozilla Location Service: <a href='https://location.services.mozilla."
-"com/privacy'>Privacy Policy</a>"
+"com/privacy'>Privacy Policy</a>\n"
+"\n"
+"Allow the applications below to determine your location."
 msgstr ""
-"Mozilla Location Service を使用します: <a href='https://location.services."
-"mozilla.com/privacy'>プライバシーポリシー</a>"
-
-#: panels/location/cc-location-panel.ui:94
-msgid "Allow the applications below to determine your location."
-msgstr "以下のアプリケーションが現在地を特定することを許可できます。"
+"アプリケーションが位置情報サー ビスから現在の位置情報を取得できます。Wi-Fiや"
+"モバイルブロードバンドを使用している場合、より正確な位置を取得できます。\n"
+"\n"
+"Mozilla Location Service を使用します : <a href='https://location.services."
+"mozilla.com/privacy'>プライバシーポリシー</a>\n"
+"\n"
+"以下のアプ リケーションが現在地を特定することを許可できます。"
 
 #: panels/location/cc-location-panel.ui:114
 msgid "No Applications Have Asked for Location Access"
@@ -2639,25 +2710,25 @@ msgstr "画面をロックします"
 
 #. FIXME
 #: panels/microphone/cc-microphone-panel.ui:34
-msgid "Microphone is turned off"
+msgid "Microphone Turned Off"
 msgstr "マイクがオフになっています"
 
 #: panels/microphone/cc-microphone-panel.ui:43
 msgid "No applications can record sound."
 msgstr "アプリケーションが録音できません。"
 
-#: panels/microphone/cc-microphone-panel.ui:75
+#: panels/microphone/cc-microphone-panel.ui:34
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
-"properly."
+"properly.\n"
+"\n"
+"Allow the applications below to use your microphone."
 msgstr ""
-"アプリケーションがマイクで録音したりできます。マイクを無効にすると一部のアプ"
-"リケーションが正常に機能しなくなるかもしれません。"
-
-#: panels/microphone/cc-microphone-panel.ui:85
-msgid "Allow the applications below to use your microphone."
-msgstr "以下のアプリケーションがマイクを使用することを許可できます。"
+"アプリケーションがマイクで録音したりできます。\n"
+"\n"
+"マイクを無効にすると一部のアプリケーションが正常に機能しなくなるかもしれませ"
+"ん。"
 
 #: panels/microphone/cc-microphone-panel.ui:105
 msgid "No Applications Have Asked for Microphone Access"
@@ -2942,10 +3013,11 @@ msgstr ""
 msgid "Must have a minimum of 8 characters"
 msgstr "8 文字以上にしてください"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:272
+#: panels/network/cc-wifi-hotspot-dialog.c:271
 #, c-format
-msgid "Must have a maximum of %d characters"
-msgstr "%d 文字以下にしてください"
+msgid "Must have a maximum of %d character"
+msgid_plural "Must have a maximum of %d characters"
+msgstr[0] "%d 文字以下にしてください"
 
 #: panels/network/cc-wifi-hotspot-dialog.c:488
 msgid "Turn On Wi-Fi Hotspot?"
@@ -4347,6 +4419,10 @@ msgstr "保護つき EAP (PEAP)"
 msgid "Au_thentication"
 msgstr "認証(_T)"
 
+#: panels/network/wireless-security/ws-file-chooser-button.c:49
+msgid "Select a file"
+msgstr "ファイルを選択"
+
 #: panels/network/wireless-security/ws-leap.c:66
 msgid "missing leap-username"
 msgstr "LEAP ユーザー名がありません"
@@ -5231,6 +5307,11 @@ msgctxt "print job"
 msgid "Completed"
 msgstr "完了"
 
+#. Translators: Clicking this button prioritizes printing of this print job
+#: panels/printers/pp-job-row.c:176
+msgid "Move this job to the top of the queue"
+msgstr "このジョブをキューの先頭にする"
+
 #. Translators: This label shows how many jobs of this printer needs to be authenticated to be printed.
 #: panels/printers/pp-jobs-dialog.c:249
 #, c-format
@@ -5652,10 +5733,10 @@ msgstr "プリンターを追加…"
 #: panels/printers/printers.ui:233
 msgid ""
 "Sorry! The system printing service\n"
-"doesn’t seem to be available."
+"    doesn’t seem to be available."
 msgstr ""
 "申し訳ありません! システムの印刷サービスは\n"
-"現在、利用できないようです。"
+"    現在利用できないようです。"
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:189
 #: panels/region/cc-format-chooser.ui:6 panels/region/cc-region-panel.ui:203
@@ -5671,8 +5752,8 @@ msgstr ""
 "す。"
 
 #: panels/region/cc-format-chooser.ui:117
-msgid "Search locales..."
-msgstr "地域を検索..."
+msgid "Search locales…"
+msgstr "地域を検索…"
 
 #: panels/region/cc-format-chooser.ui:158
 msgid "Common Formats"
@@ -5723,6 +5804,25 @@ msgstr "計量単位"
 #: panels/region/cc-format-preview.ui:128
 msgid "Paper"
 msgstr "用紙サイズ"
+
+#: panels/region/cc-region-panel.ui:19
+msgid "Language and format will be changed after next login"
+msgstr "言語とフォーマットの設定は、次回ログイン時に適用されます"
+
+#: panels/region/cc-region-panel.ui:29
+msgid "Logout…"
+msgstr "ログアウト…"
+
+#: panels/region/cc-region-panel.ui:45
+msgid ""
+"The language setting is used for interface text and web pages. Formats is "
+"used for numbers, dates, and currencies."
+msgstr ""
+"設定した言語でが表示されます。フォーマットは数値、日時、通貨の形式です。"
+
+#: panels/region/cc-region-panel.ui:51
+msgid "Your Account"
+msgstr "あなたのアカウント"
 
 #: panels/region/cc-region-panel.ui:42
 msgid "My Account"
@@ -5962,12 +6062,24 @@ msgid "Bookmarks"
 msgstr "ブックマーク"
 
 #: panels/search/cc-search-locations-dialog.ui:156
-msgid "Other"
+msgid "Others"
 msgstr "その他"
+
+#: panels/search/cc-search-locations-dialog.ui:55
+msgid "Add Location"
+msgstr "場所を追加"
 
 #: panels/search/cc-search-panel.c:151
 msgid "No applications found"
 msgstr "アプリケーションが見つかりませんでした"
+
+#: panels/search/cc-search-panel.ui:10
+msgid "Application Search"
+msgstr "アプリケーションの検索"
+
+#: panels/search/cc-search-panel.ui:37
+msgid "Search Results"
+msgstr "検索結果"
 
 #: panels/search/cc-search-panel-row.ui:92
 msgid "Move Up"
@@ -6108,6 +6220,36 @@ msgstr "パスワードを要求する(_R)"
 #: panels/sharing/cc-sharing-panel.ui:345
 msgid "Remote Login"
 msgstr "リモートログイン"
+
+#: panels/sharing/cc-sharing-panel.ui:250
+#: panels/sharing/cc-sharing-panel.ui:267
+msgid "Remote Desktop"
+msgstr "リモートデスクトップ"
+
+#: panels/sharing/cc-sharing-panel.ui:268
+msgid "Enable or disable remote desktop connections to this computer."
+msgstr ""
+"このコンピュータへのリモートログインの有効化/無効化"
+
+#: panels/sharing/cc-sharing-panel.ui:280
+msgid "Remote Control"
+msgstr "リモートコントロール"
+
+#: panels/sharing/cc-sharing-panel.ui:281
+msgid "Allows remote connections to control the screen."
+msgstr "このスクリーンを操作する接続を許可する"
+
+#: panels/sharing/cc-sharing-panel.ui:323
+msgid "Remote Desktop Address"
+msgstr "リモートデスクトップアドレス"
+
+#: panels/sharing/cc-sharing-panel.ui:350
+msgid "Authentication"
+msgstr "認証"
+
+#: panels/sharing/cc-sharing-panel.ui:355
+msgid "User Name"
+msgstr "ユーザー名"
 
 #: panels/sharing/cc-sharing-panel.ui:368
 #: panels/sharing/cc-sharing-panel.ui:590
@@ -6423,8 +6565,12 @@ msgid "Error switching direct mode: %s"
 msgstr "ダイレクトモードの切り替え中にエラーが発生しました: %s"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:143
-msgid "No Thunderbolt support"
-msgstr "Thunderbolt サポートがありません"
+msgid "No Thunderbolt Support"
+msgstr "Thunderbolt に対応していません"
+
+#: panels/thunderbolt/cc-bolt-panel.ui:104
+msgid "Could not connect to the thunderbolt subsystem."
+msgstr "Thunderbolt サブシステム"
 
 #: panels/thunderbolt/cc-bolt-panel.ui:246
 msgid "Direct Access"
@@ -6782,7 +6928,7 @@ msgid "_Typing Assist (AccessX)"
 msgstr "タイピング支援 [AccessX](_T)"
 
 #: panels/universal-access/cc-ua-panel.ui:824
-msgid "Pointing & Clicking"
+msgid "Pointing &amp; Clicking"
 msgstr "ポインター操作とクリック"
 
 #: panels/universal-access/cc-ua-panel.ui:870
@@ -7077,7 +7223,7 @@ msgid "_Clear History…"
 msgstr "履歴を消去(_C)…"
 
 #: panels/usage/cc-usage-panel.ui:135
-msgid "Trash & Temporary Files"
+msgid "Trash &amp; Temporary Files"	
 msgstr "ゴミ箱と一時ファイル"
 
 #: panels/usage/cc-usage-panel.ui:145
@@ -7269,6 +7415,33 @@ msgstr "標準"
 #: panels/user-accounts/cc-add-user-dialog.ui:216
 msgid "Administrator"
 msgstr "管理者"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:132
+msgid ""
+"Administrators can add and remove other users, and can change settings for "
+"all users. Parental controls cannot be applied to administrators."
+msgstr "管理者は他のユーザーの追加、削除、設定の変更ができます。管理者をペア"
+"レンタルコントロールで管理することはできません。"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:149
+msgid "User sets password on first login"
+msgstr "初めてのログイン時にパスワードを設定させる"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:161
+msgid "Set password now"
+msgstr "今すぐパスワードを設定する"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:224
+msgid "Confirm"
+msgstr "確認"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:278
+msgid "Enterprise Login"
+msgstr "エンタープライズのログイン"
+
+#: panels/user-accounts/cc-add-user-dialog.ui:279
+msgid "User accounts which are managed by a company or organisation."
+msgstr "会社や組織に管理されているユーザーアカウントです。"
 
 #: panels/user-accounts/cc-add-user-dialog.ui:232
 msgid "Account _Type"
@@ -7622,16 +7795,16 @@ msgid "Ch_ange"
 msgstr "変更(_A)"
 
 #: panels/user-accounts/cc-password-dialog.ui:145
-msgid "_Confirm New Password"
-msgstr "新しいパスワードを確認(_C)"
+msgid "Confirm Password"
+msgstr "パスワードを確認"
 
 #: panels/user-accounts/cc-password-dialog.ui:162
-msgid "_New Password"
-msgstr "新しいパスワード(_N)"
+msgid "New Password"
+msgstr "新しいパスワード"
 
 #: panels/user-accounts/cc-password-dialog.ui:216
-msgid "Current _Password"
-msgstr "現在のパスワード(_P)"
+msgid "Current Password"
+msgstr "現在のパスワード"
 
 #: panels/user-accounts/cc-password-dialog.ui:254
 msgid "Allow user to change their password on next login"
@@ -7788,8 +7961,8 @@ msgid "Unlock to Add Users and Change Settings"
 msgstr "設定の変更やユーザーを追加する場合はロックを解除してください"
 
 #: panels/user-accounts/cc-user-panel.ui:6
-msgid "_Add User…"
-msgstr "ユーザーを追加(_A)…"
+msgid "Add User…"
+msgstr "ユーザーを追加…"
 
 #: panels/user-accounts/cc-user-panel.ui:9
 msgid "Create a user account"
@@ -7850,6 +8023,10 @@ msgstr "アカウントのアクティビティ"
 #: panels/user-accounts/cc-user-panel.ui:460
 msgid "Remove User…"
 msgstr "ユーザーを削除…"
+
+#: panels/user-accounts/cc-user-panel.ui:330
+msgid "Other Users"
+msgstr "他のユーザー"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
 #: panels/user-accounts/cc-user-panel.ui:501
@@ -8154,6 +8331,33 @@ msgctxt "Wacom action-type"
 msgid "Show On-Screen Help"
 msgstr "オンスクリーンヘルプの表示"
 
+#. All displays item
+#: panels/wacom/cc-wacom-page.c:608
+msgid "All Displays"
+msgstr "すべてのディスプレイ"
+
+#: panels/wacom/cc-wacom-page.ui:16
+msgid "Tablet Mode"
+msgstr "タブレットモード"
+
+#: panels/wacom/cc-wacom-page.ui:27
+msgid "Left Hand Orientation"
+msgstr "左手用"
+
+# 参考: intuos 5 のマニュアル p.57
+#: panels/wacom/cc-wacom-page.ui:56
+msgctxt "display setting"
+msgid "Map to Monitor"
+msgstr "画面にマッピング"
+
+#: panels/wacom/cc-wacom-page.ui:62
+msgid "Keep Aspect Ratio"
+msgstr "縦横比を保持"
+
+#: panels/wacom/cc-wacom-page.ui:73
+msgid "Calibrate"
+msgstr "キャリブレート"
+
 #: panels/wacom/cc-wacom-mapping-panel.c:245
 msgid "Output:"
 msgstr "出力:"
@@ -8224,8 +8428,23 @@ msgid "No tablet detected"
 msgstr "タブレットを検出できません"
 
 #: panels/wacom/gnome-wacom-properties.ui:141
-msgid "Please plug in or turn on your Wacom tablet"
-msgstr "ワコムタブレットを接続するか、電源を入れてください"
+msgid "Please plug in or turn on your Wacom tablet."
+msgstr "ワコムタブレットを接続するか、電源を入れてください。"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:54
+msgctxt "display setting"
+msgid "Button 1"
+msgstr "ボタン 1"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:62
+msgctxt "display setting"
+msgid "Button 2"
+msgstr "ボタン 2"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:70
+msgctxt "display setting"
+msgid "Button 3"
+msgstr "ボタン 3"
 
 #: panels/wacom/gnome-wacom-properties.ui:161
 msgid "Bluetooth Settings"
@@ -8516,9 +8735,9 @@ msgstr "新しい PIN を入力してください"
 msgid "PIN code should be a 4-8 digit number"
 msgstr "PIN コードは 4-8 桁です"
 
-#: panels/wwan/cc-wwan-device-page.c:317
-msgid "Unlocking..."
-msgstr "ロック解除中..."
+#: panels/wwan/cc-wwan-device-page.c:316
+msgid "Unlocking…"
+msgstr "ロック解除…"
 
 #: panels/wwan/cc-wwan-device-page.ui:34
 msgid "No SIM"
