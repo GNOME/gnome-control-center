@@ -979,37 +979,6 @@ cc_sharing_panel_check_schema_available (CcSharingPanel *self,
   return TRUE;
 }
 
-#define MAX_PASSWORD_SIZE 8
-static void
-remote_desktop_password_insert_text_cb (CcSharingPanel *self,
-                                        gchar          *new_text,
-                                        gint            new_text_length,
-                                        gpointer        position)
-{
-  int l, available_size;
-
-  l = gtk_entry_buffer_get_bytes (gtk_entry_get_buffer (GTK_ENTRY (self->remote_desktop_password_entry)));
-
-  if (l + new_text_length <= MAX_PASSWORD_SIZE)
-    return;
-
-  g_signal_stop_emission_by_name (self->remote_desktop_password_entry, "insert-text");
-  gtk_widget_error_bell (GTK_WIDGET (self->remote_desktop_password_entry));
-
-  available_size = g_utf8_strlen (new_text, MAX_PASSWORD_SIZE - l);
-  if (available_size == 0)
-    return;
-
-  g_signal_handlers_block_by_func (self->remote_desktop_password_entry,
-                                   (gpointer) remote_desktop_password_insert_text_cb,
-                                   self);
-  gtk_editable_insert_text (GTK_EDITABLE (self->remote_desktop_password_entry), new_text, available_size, position);
-  g_signal_handlers_unblock_by_func (self->remote_desktop_password_entry,
-                                     (gpointer) remote_desktop_password_insert_text_cb,
-                                     self);
-}
-#undef MAX_PASSWORD_SIZE
-
 static gboolean
 store_remote_desktop_credentials_timeout (gpointer user_data)
 {
