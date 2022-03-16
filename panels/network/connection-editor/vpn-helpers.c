@@ -53,13 +53,8 @@ _sort_vpn_plugins (NMVpnPluginInfo *aa, NMVpnPluginInfo *bb)
 GSList *
 vpn_get_plugins (void)
 {
-	static gboolean plugins_loaded = FALSE;
 	static GSList *plugins = NULL;
 	GSList *p;
-
-	if (G_LIKELY (plugins_loaded))
-		return plugins;
-	plugins_loaded = TRUE;
 
 	p = nm_vpn_plugin_info_list_load ();
 	plugins = NULL;
