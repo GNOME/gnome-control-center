@@ -81,7 +81,7 @@ static void page_changed (NetConnectionEditor *self);
 static void
 cancel_editing (NetConnectionEditor *self)
 {
-        gtk_widget_hide (GTK_WIDGET (self));
+        gtk_window_destroy (GTK_WINDOW (self));
         g_signal_emit (self, signals[DONE], 0, FALSE);
 }
 
