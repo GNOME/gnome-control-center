@@ -32,7 +32,7 @@
                     <property name="vexpand">True</property>
                     <signal name="value-changed" handler="on_tip_pressure_value_changed" swapped="yes"/>
                     <accessibility>
-                      <property name="label">Stylus tip pressure</property>
+                      <property name="label" translatable="yes">Stylus tip pressure</property>
                     </accessibility>
                   </object>
                 </child>
@@ -79,7 +79,7 @@
               <object class="GtkBox" id="stylus_eraser_pressure_box">
                 <child>
                   <object class="GtkLabel">
-                    <property name="label">Soft</property>
+                    <property name="label" translatable="yes">Soft</property>
                     <style>
                       <class name="caption"/>
                     </style>
@@ -93,13 +93,13 @@
                     <property name="vexpand">True</property>
                     <signal name="value-changed" handler="on_eraser_pressure_value_changed" swapped="yes"/>
                     <accessibility>
-                      <property name="label">Eraser pressure</property>
+                      <property name="label" translatable="yes">Eraser pressure</property>
                     </accessibility>
                   </object>
                 </child>
                 <child>
                   <object class="GtkLabel">
-                    <property name="label">Firm</property>
+                    <property name="label" translatable="yes">Firm</property>
                     <style>
                       <class name="caption"/>
                     </style>
@@ -130,11 +130,11 @@
   </object>
   <object class="GtkStringList" id="button_model">
     <items>
-      <item>Default</item>
-      <item>Middle Mouse Button Click</item>
-      <item>Right Mouse Button Click</item>
-      <item>Back</item>
-      <item>Forward</item>
+      <item translatable="yes">Default</item>
+      <item translatable="yes">Middle Mouse Button Click</item>
+      <item translatable="yes">Right Mouse Button Click</item>
+      <item translatable="yes">Back</item>
+      <item translatable="yes">Forward</item>
     </items>
   </object>
 </interface>
