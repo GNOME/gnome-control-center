@@ -318,7 +318,6 @@ set_contrast_mapping (const GValue       *value,
   if (hc)
     {
       g_settings_set_string (self->interface_settings, KEY_GTK_THEME, HIGH_CONTRAST_THEME);
-      g_settings_set_string (self->interface_settings, KEY_ICON_THEME, HIGH_CONTRAST_THEME);
     }
   else
     {
