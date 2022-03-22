@@ -35,6 +35,27 @@ struct _BgWallpapersSource
 
 G_DEFINE_TYPE (BgWallpapersSource, bg_wallpapers_source, BG_TYPE_SOURCE)
 
+static int
+sort_func (gconstpointer a,
+           gconstpointer b,
+           gpointer      user_data)
+{
+  CcBackgroundItem *item_a;
+  CcBackgroundItem *item_b;
+
+  item_a = (CcBackgroundItem *) a;
+  item_b = (CcBackgroundItem *) b;
+
+  if (strcmp (cc_background_item_get_name (item_a), "Default Background") == 0)
+    return -1;
+  if (strcmp (cc_background_item_get_name (item_b), "Default Background") == 0)
+    return 1;
+
+
+  return strcmp (cc_background_item_get_name (item_a),
+                 cc_background_item_get_name (item_b));
+}
+
 static void
 load_wallpapers (gchar              *key,
                  CcBackgroundItem   *item,
@@ -48,7 +69,7 @@ load_wallpapers (gchar              *key,
   if (deleted)
     return;
 
-  g_list_store_append (store, item);
+  g_list_store_insert_sorted (store, item, sort_func, NULL);
 }
 
 static void
