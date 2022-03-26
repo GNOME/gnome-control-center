@@ -40,7 +40,7 @@ struct _PpPPDOptionWidget
   GtkBox parent_instance;
 
   GtkWidget *switch_button;
-  GtkWidget *combo;
+  GtkWidget *dropdown;
   GtkWidget *image;
   GtkWidget *box;
 
@@ -180,8 +180,10 @@ ppd_choice_translate (ppd_choice_t *choice)
   for (i = 0; i < G_N_ELEMENTS (ppd_choice_translations); i++)
     {
       if (g_strcmp0 (ppd_choice_translations[i].keyword, keyword) == 0 &&
-	  g_strcmp0 (ppd_choice_translations[i].choice, choice->choice) == 0)
-	return _(ppd_choice_translations[i].translation);
+          g_strcmp0 (ppd_choice_translations[i].choice, choice->choice) == 0)
+        {
+          return _(ppd_choice_translations[i].translation);
+        }
     }
 
   return choice->text;
@@ -216,102 +218,58 @@ pp_ppd_option_widget_new (ppd_option_t *option,
   return (GtkWidget *) self;
 }
 
-enum {
-  NAME_COLUMN,
-  VALUE_COLUMN,
-  N_COLUMNS
-};
-
 static GtkWidget *
-combo_box_new (void)
+dropdown_new (void)
 {
-  GtkCellRenderer *cell;
-  g_autoptr(GtkListStore) store = NULL;
-  GtkWidget       *combo_box;
+  GtkStringList *store = NULL;
+  GtkWidget     *dropdown;
 
-  combo_box = gtk_combo_box_new ();
+  store = gtk_string_list_new (NULL);
 
-  store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combo_box), GTK_TREE_MODEL (store));
+  dropdown = gtk_drop_down_new (G_LIST_MODEL (store), NULL);
 
-  cell = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), cell, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), cell,
-                                  "text", NAME_COLUMN,
-                                  NULL);
-
-  return combo_box;
+  return dropdown;
 }
 
 static void
-combo_box_append (GtkWidget   *combo,
-                  const gchar *display_text,
-                  const gchar *value)
+dropdown_append (GtkWidget   *dropdown,
+                 const gchar *display_text)
 {
-  GtkTreeModel *model;
-  GtkListStore *store;
-  GtkTreeIter   iter;
+  GtkStringList *store;
 
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-  store = GTK_LIST_STORE (model);
+  store = GTK_STRING_LIST (gtk_drop_down_get_model (GTK_DROP_DOWN (dropdown)));
 
-  gtk_list_store_append (store, &iter);
-  gtk_list_store_set (store, &iter,
-                      NAME_COLUMN, display_text,
-                      VALUE_COLUMN, value,
-                      -1);
+  gtk_string_list_append (store, display_text);
 }
 
-struct ComboSet {
-  GtkComboBox *combo;
-  const gchar *value;
-};
-
-static gboolean
-set_cb (GtkTreeModel *model,
-        GtkTreePath  *path,
-        GtkTreeIter  *iter,
-        gpointer      data)
+static void
+dropdown_set (GtkWidget    *dropdown,
+              ppd_option_t *option,
+              const gchar  *value)
 {
-  struct ComboSet  *set_data = data;
-  g_autofree gchar *value = NULL;
-
-  gtk_tree_model_get (model, iter, VALUE_COLUMN, &value, -1);
-
-  if (strcmp (value, set_data->value) == 0)
+  for (guint i = 0; i < option->num_choices; i++)
     {
-      gtk_combo_box_set_active_iter (set_data->combo, iter);
-      return TRUE;
+      if (g_strcmp0 (option->choices[i].choice, value) == 0)
+        {
+          gtk_drop_down_set_selected (GTK_DROP_DOWN (dropdown), i);
+          break;
+        }
     }
-
-  return FALSE;
-}
-
-static void
-combo_box_set (GtkWidget   *combo,
-               const gchar *value)
-{
-  struct ComboSet  set_data;
-  GtkTreeModel    *model;
-
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-
-  set_data.combo = GTK_COMBO_BOX (combo);
-  set_data.value = value;
-  gtk_tree_model_foreach (model, set_cb, &set_data);
 }
 
 static char *
-combo_box_get (GtkWidget *combo)
+dropdown_get (GtkWidget    *dropdown,
+              ppd_option_t *option)
 {
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  gchar        *value = NULL;
+  guint          selected_item;
+  gchar         *value = NULL;
 
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+  selected_item = gtk_drop_down_get_selected (GTK_DROP_DOWN (dropdown));
 
-  if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
-     gtk_tree_model_get (model, &iter, VALUE_COLUMN, &value, -1);
+  if (selected_item != GTK_INVALID_LIST_POSITION)
+    {
+      value = option->choices[selected_item].choice;
+    }
 
   return value;
 }
@@ -354,12 +312,12 @@ switch_changed_cb (PpPPDOptionWidget *self)
 }
 
 static void
-combo_changed_cb (PpPPDOptionWidget *self)
+dropdown_changed_cb (PpPPDOptionWidget *self)
 {
   gchar                    **values;
 
   values = g_new0 (gchar *, 2);
-  values[0] = combo_box_get (self->combo);
+  values[0] = g_strdup (dropdown_get (self->dropdown, self->option));
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
@@ -394,31 +352,29 @@ construct_widget (PpPPDOptionWidget *self)
               break;
 
           case PPD_UI_PICKONE:
-              self->combo = combo_box_new ();
+              self->dropdown = dropdown_new ();
 
               for (i = 0; i < self->option->num_choices; i++)
                 {
-                  combo_box_append (self->combo,
-                                    ppd_choice_translate (&self->option->choices[i]),
-                                    self->option->choices[i].choice);
+                  dropdown_append (self->dropdown,
+                                   ppd_choice_translate (&self->option->choices[i]));
                 }
 
-              gtk_box_append (GTK_BOX (self), self->combo);
-              g_signal_connect_object (self->combo, "changed", G_CALLBACK (combo_changed_cb), self, G_CONNECT_SWAPPED);
+              gtk_box_append (GTK_BOX (self), self->dropdown);
+              g_signal_connect_object (self->dropdown, "notify::selected", G_CALLBACK (dropdown_changed_cb), self, G_CONNECT_SWAPPED);
               break;
 
           case PPD_UI_PICKMANY:
-              self->combo = combo_box_new ();
+              self->dropdown = dropdown_new ();
 
               for (i = 0; i < self->option->num_choices; i++)
                 {
-                  combo_box_append (self->combo,
-                                    ppd_choice_translate (&self->option->choices[i]),
-                                    self->option->choices[i].choice);
+                  dropdown_append (self->dropdown,
+                                   ppd_choice_translate (&self->option->choices[i]));
                 }
 
-              gtk_box_append (GTK_BOX (self), self->combo);
-              g_signal_connect_object (self->combo, "changed", G_CALLBACK (combo_changed_cb), self, G_CONNECT_SWAPPED);
+              gtk_box_append (GTK_BOX (self), self->dropdown);
+              g_signal_connect_object (self->dropdown, "notify::selected", G_CALLBACK (dropdown_changed_cb), self, G_CONNECT_SWAPPED);
               break;
 
           default:
@@ -445,13 +401,7 @@ update_widget_real (PpPPDOptionWidget *self)
   ppd_file_t               *ppd_file;
   gint                      i;
 
-  if (self->option)
-    {
-      option = cups_option_copy (self->option);
-      cups_option_free (self->option);
-      self->option = NULL;
-    }
-  else if (self->ppd_filename)
+  if (self->ppd_filename_set && self->ppd_filename)
     {
       ppd_file = ppdOpenFile (self->ppd_filename);
       ppdLocalize (ppd_file);
@@ -464,7 +414,8 @@ update_widget_real (PpPPDOptionWidget *self)
             {
               if (g_str_equal (iter->keyword, self->option_name))
                 {
-                  option = cups_option_copy (iter);
+                  g_clear_pointer (&self->option, cups_option_free);
+                  self->option = cups_option_copy (iter);
                   break;
                 }
             }
@@ -476,6 +427,8 @@ update_widget_real (PpPPDOptionWidget *self)
       g_free (self->ppd_filename);
       self->ppd_filename = NULL;
     }
+
+  option = self->option;
 
   if (option)
     {
@@ -502,15 +455,15 @@ update_widget_real (PpPPDOptionWidget *self)
                 break;
 
               case PPD_UI_PICKONE:
-                g_signal_handlers_block_by_func (self->combo, combo_changed_cb, self);
-                combo_box_set (self->combo, value);
-                g_signal_handlers_unblock_by_func (self->combo, combo_changed_cb, self);
+                g_signal_handlers_block_by_func (self->dropdown, dropdown_changed_cb, self);
+                dropdown_set (self->dropdown, option, value);
+                g_signal_handlers_unblock_by_func (self->dropdown, dropdown_changed_cb, self);
                 break;
 
               case PPD_UI_PICKMANY:
-                g_signal_handlers_block_by_func (self->combo, combo_changed_cb, self);
-                combo_box_set (self->combo, value);
-                g_signal_handlers_unblock_by_func (self->combo, combo_changed_cb, self);
+                g_signal_handlers_block_by_func (self->dropdown, dropdown_changed_cb, self);
+                dropdown_set (self->dropdown, option, value);
+                g_signal_handlers_unblock_by_func (self->dropdown, dropdown_changed_cb, self);
                 break;
 
               default:
@@ -523,8 +476,6 @@ update_widget_real (PpPPDOptionWidget *self)
       else
         gtk_widget_hide (self->image);
     }
-
-  cups_option_free (option);
 }
 
 static void

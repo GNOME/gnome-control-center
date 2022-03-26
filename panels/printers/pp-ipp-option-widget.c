@@ -40,7 +40,7 @@ struct _PpIPPOptionWidget
 
   GtkWidget *switch_button;
   GtkWidget *spin_button;
-  GtkWidget *combo;
+  GtkWidget *dropdown;
 
   IPPAttribute *option_supported;
   IPPAttribute *option_default;
@@ -85,8 +85,10 @@ ipp_choice_translate (const gchar *option,
   for (i = 0; i < G_N_ELEMENTS (ipp_choice_translations); i++)
     {
       if (g_strcmp0 (ipp_choice_translations[i].keyword, option) == 0 &&
-	  g_strcmp0 (ipp_choice_translations[i].choice, choice) == 0)
-	return _(ipp_choice_translations[i].translation);
+          g_strcmp0 (ipp_choice_translations[i].choice, choice) == 0)
+        {
+          return _(ipp_choice_translations[i].translation);
+        }
     }
 
   return choice;
@@ -158,101 +160,68 @@ pp_ipp_option_widget_new (IPPAttribute *attr_supported,
   return (GtkWidget *) self;
 }
 
-enum {
-  NAME_COLUMN,
-  VALUE_COLUMN,
-  N_COLUMNS
-};
-
 static GtkWidget *
-combo_box_new (void)
+dropdown_new (void)
 {
-  GtkCellRenderer *cell;
-  g_autoptr(GtkListStore) store = NULL;
-  GtkWidget       *combo_box;
+  GtkStringList *store = NULL;
+  GtkWidget     *dropdown;
 
-  combo_box = gtk_combo_box_new ();
+  store = gtk_string_list_new (NULL);
 
-  store = gtk_list_store_new (N_COLUMNS, G_TYPE_STRING, G_TYPE_STRING);
-  gtk_combo_box_set_model (GTK_COMBO_BOX (combo_box), GTK_TREE_MODEL (store));
+  dropdown = gtk_drop_down_new (G_LIST_MODEL (store), NULL);
 
-  cell = gtk_cell_renderer_text_new ();
-  gtk_cell_layout_pack_start (GTK_CELL_LAYOUT (combo_box), cell, TRUE);
-  gtk_cell_layout_set_attributes (GTK_CELL_LAYOUT (combo_box), cell,
-                                  "text", NAME_COLUMN,
-                                  NULL);
-
-  return combo_box;
+  return dropdown;
 }
 
 static void
-combo_box_append (GtkWidget   *combo,
-                  const gchar *display_text,
-                  const gchar *value)
+dropdown_append (GtkWidget   *dropdown,
+                 const gchar *display_text)
 {
-  GtkTreeModel *model;
-  GtkListStore *store;
-  GtkTreeIter   iter;
+  GtkStringList *store;
 
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-  store = GTK_LIST_STORE (model);
+  store = GTK_STRING_LIST (gtk_drop_down_get_model (GTK_DROP_DOWN (dropdown)));
 
-  gtk_list_store_append (store, &iter);
-  gtk_list_store_set (store, &iter,
-                      NAME_COLUMN, display_text,
-                      VALUE_COLUMN, value,
-                      -1);
+  gtk_string_list_append (store, display_text);
 }
 
-struct ComboSet {
-  GtkComboBox *combo;
-  const gchar *value;
-};
-
-static gboolean
-set_cb (GtkTreeModel *model,
-        GtkTreePath  *path,
-        GtkTreeIter  *iter,
-        gpointer      data)
+static void
+dropdown_set (GtkWidget    *dropdown,
+              IPPAttribute *option,
+              const gchar  *value)
 {
-  struct ComboSet  *set_data = data;
-  g_autofree gchar *value = NULL;
+  g_autofree gchar *attribute_value = NULL;
 
-  gtk_tree_model_get (model, iter, VALUE_COLUMN, &value, -1);
-  if (strcmp (value, set_data->value) == 0)
+  for (guint i = 0; i < option->num_of_values; i++)
     {
-      gtk_combo_box_set_active_iter (set_data->combo, iter);
-      return TRUE;
+      if (option->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
+        attribute_value = g_strdup_printf ("%d", option->attribute_values[i].integer_value);
+      else
+        attribute_value = g_strdup (option->attribute_values[i].string_value);
+
+      if (g_strcmp0 (attribute_value, value) == 0)
+        {
+          gtk_drop_down_set_selected (GTK_DROP_DOWN (dropdown), i);
+          break;
+        }
     }
-
-  return FALSE;
-}
-
-static void
-combo_box_set (GtkWidget   *combo,
-               const gchar *value)
-{
-  struct ComboSet  set_data;
-  GtkTreeModel    *model;
-
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
-
-  set_data.combo = GTK_COMBO_BOX (combo);
-  set_data.value = value;
-  gtk_tree_model_foreach (model, set_cb, &set_data);
 }
 
 static char *
-combo_box_get (GtkWidget *combo)
+dropdown_get (GtkWidget    *dropdown,
+              IPPAttribute *option)
 {
-  GtkTreeModel *model;
-  GtkTreeIter   iter;
-  gchar        *value = NULL;
+  guint          selected_item;
+  gchar         *value = NULL;
 
-  model = gtk_combo_box_get_model (GTK_COMBO_BOX (combo));
+  selected_item = gtk_drop_down_get_selected (GTK_DROP_DOWN (dropdown));
 
-  if (gtk_combo_box_get_active_iter (GTK_COMBO_BOX (combo), &iter))
-     gtk_tree_model_get (model, &iter, VALUE_COLUMN, &value, -1);
+  if (selected_item != GTK_INVALID_LIST_POSITION)
+    {
+      if (option->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
+        value = g_strdup_printf ("%d", option->attribute_values[selected_item].integer_value);
+      else
+        value = option->attribute_values[selected_item].string_value;
+    }
 
   return value;
 }
@@ -295,12 +264,12 @@ switch_changed_cb (PpIPPOptionWidget *self)
 }
 
 static void
-combo_changed_cb (PpIPPOptionWidget *self)
+dropdown_changed_cb (PpIPPOptionWidget *self)
 {
   gchar                    **values;
 
   values = g_new0 (gchar *, 2);
-  values[0] = combo_box_get (self->combo);
+  values[0] = g_strdup (dropdown_get (self->dropdown, self->option_supported));
 
   g_cancellable_cancel (self->cancellable);
   g_clear_object (&self->cancellable);
@@ -380,34 +349,32 @@ construct_widget (PpIPPOptionWidget *self)
                   break;
 
               case IPP_ATTRIBUTE_TYPE_INTEGER:
-                  self->combo = combo_box_new ();
+                  self->dropdown = dropdown_new ();
 
                   for (i = 0; i < self->option_supported->num_of_values; i++)
                     {
                       g_autofree gchar *value = NULL;
 
                       value = g_strdup_printf ("%d", self->option_supported->attribute_values[i].integer_value);
-                      combo_box_append (self->combo,
-                                        ipp_choice_translate (self->option_name,
-                                                              value),
-                                        value);
+                      dropdown_append (self->dropdown,
+                                       ipp_choice_translate (self->option_name,
+                                                             value));
                     }
 
-                  gtk_box_append (GTK_BOX (self), self->combo);
-                  g_signal_connect_object (self->combo, "changed", G_CALLBACK (combo_changed_cb), self, G_CONNECT_SWAPPED);
+                  gtk_box_append (GTK_BOX (self), self->dropdown);
+                  g_signal_connect_object (self->dropdown, "notify::selected", G_CALLBACK (dropdown_changed_cb), self, G_CONNECT_SWAPPED);
                   break;
 
               case IPP_ATTRIBUTE_TYPE_STRING:
-                  self->combo = combo_box_new ();
+                  self->dropdown = dropdown_new ();
 
                   for (i = 0; i < self->option_supported->num_of_values; i++)
-                    combo_box_append (self->combo,
-                                      ipp_choice_translate (self->option_name,
-                                                            self->option_supported->attribute_values[i].string_value),
-                                      self->option_supported->attribute_values[i].string_value);
+                    dropdown_append (self->dropdown,
+                                     ipp_choice_translate (self->option_name,
+                                                           self->option_supported->attribute_values[i].string_value));
 
-                  gtk_box_append (GTK_BOX (self), self->combo);
-                  g_signal_connect_object (self->combo, "changed", G_CALLBACK (combo_changed_cb), self, G_CONNECT_SWAPPED);
+                  gtk_box_append (GTK_BOX (self), self->dropdown);
+                  g_signal_connect_object (self->dropdown, "notify::selected", G_CALLBACK (dropdown_changed_cb), self, G_CONNECT_SWAPPED);
                   break;
 
               case IPP_ATTRIBUTE_TYPE_RANGE:
@@ -468,37 +435,37 @@ update_widget_real (PpIPPOptionWidget *self)
         break;
 
       case IPP_ATTRIBUTE_TYPE_INTEGER:
-        g_signal_handlers_block_by_func (self->combo, combo_changed_cb, self);
+        g_signal_handlers_block_by_func (self->dropdown, dropdown_changed_cb, self);
 
         if (attr && attr->num_of_values > 0 &&
             attr->attribute_type == IPP_ATTRIBUTE_TYPE_INTEGER)
           {
             g_autofree gchar *value = g_strdup_printf ("%d", attr->attribute_values[0].integer_value);
-            combo_box_set (self->combo, value);
+            dropdown_set (self->dropdown, self->option_supported, value);
           }
         else
           {
             g_autofree gchar *value = g_strdup_printf ("%d", self->option_supported->attribute_values[0].integer_value);
-            combo_box_set (self->combo, value);
+            dropdown_set (self->dropdown, self->option_supported, value);
           }
 
-        g_signal_handlers_unblock_by_func (self->combo, combo_changed_cb, self);
+        g_signal_handlers_unblock_by_func (self->dropdown, dropdown_changed_cb, self);
         break;
 
       case IPP_ATTRIBUTE_TYPE_STRING:
-        g_signal_handlers_block_by_func (self->combo, combo_changed_cb, self);
+        g_signal_handlers_block_by_func (self->dropdown, dropdown_changed_cb, self);
 
         if (attr && attr->num_of_values > 0 &&
             attr->attribute_type == IPP_ATTRIBUTE_TYPE_STRING)
           {
-            combo_box_set (self->combo, attr->attribute_values[0].string_value);
+            dropdown_set (self->dropdown, self->option_supported, attr->attribute_values[0].string_value);
           }
         else
           {
-            combo_box_set (self->combo, self->option_supported->attribute_values[0].string_value);
+            dropdown_set (self->dropdown, self->option_supported, self->option_supported->attribute_values[0].string_value);
           }
 
-        g_signal_handlers_unblock_by_func (self->combo, combo_changed_cb, self);
+        g_signal_handlers_unblock_by_func (self->dropdown, dropdown_changed_cb, self);
         break;
 
       case IPP_ATTRIBUTE_TYPE_RANGE:
