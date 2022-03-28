@@ -74,7 +74,7 @@ lock_after_name_cb (AdwEnumListItem *item,
       return g_strdup (C_("lock_screen", "3 minutes"));
     case CC_LOCK_PANEL_LOCK_AFTER_5_MIN:
       /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
-      return g_strdup (C_("lock_screen", "3 minutes"));
+      return g_strdup (C_("lock_screen", "5 minutes"));
     case CC_LOCK_PANEL_LOCK_AFTER_30_MIN:
       /* Translators: Option for "Lock screen after blank" in "Screen Lock" panel */
       return g_strdup (C_("lock_screen", "30 minutes"));
