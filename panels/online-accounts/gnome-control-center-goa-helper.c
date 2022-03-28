@@ -129,7 +129,7 @@ set_external_parent_from_handle (GtkApplication *application,
           int xid;
 
           errno = 0;
-          xid = strtol (handle_str, NULL, 16);
+          xid = strtol (handle_str + strlen (x11_prefix), NULL, 16);
           if (errno != 0)
             {
               g_warning ("Failed to reference external X11 window, invalid XID %s", handle_str);
