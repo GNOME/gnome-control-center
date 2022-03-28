@@ -161,6 +161,12 @@ build.container.fedora@x86_64:
         ninja -C _build && \
         ninja -C _build install && \
         cd .. && \
+      git clone https://gitlab.gnome.org/GNOME/libgweather.git && \
+        cd libgweather && \
+        meson . _build --prefix=/usr -Denable_vala=false -Dgtk_doc=false -Dintrospection=false -Dsoup2=false && \
+        ninja -C _build && \
+        ninja -C _build install && \
+        cd .. \
       git clone https://gitlab.gnome.org/GNOME/gnome-settings-daemon.git && \
         cd gnome-settings-daemon && \
         meson . _build --prefix=/usr && \
