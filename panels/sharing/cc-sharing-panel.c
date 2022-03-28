@@ -45,6 +45,9 @@
 
 #include <config.h>
 
+#include <unistd.h>
+#include <pwd.h>
+
 static void cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self, GtkWidget *label);
 static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
                                                           CcSharingPanel *self);
@@ -1378,10 +1381,20 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
                             "notify::text",
                             G_CALLBACK (remote_desktop_credentials_changed),
                             self);
-
   if (username == NULL)
-    gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_username_entry),
-                           getlogin ());
+    {
+      struct passwd *pw = getpwuid (getuid ());
+      if (pw != NULL)
+        {
+          gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_username_entry),
+                                 pw->pw_name);
+        }
+      else
+        {
+          g_warning ("Failed to get username: %s", g_strerror (errno));
+        }
+    }
+
   if (password == NULL)
     gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_password_entry),
                            pw_generate ());
