@@ -52,7 +52,7 @@ stages:
     # stable branch.
     # Could probably also switch away from rawhide,
     # to stable fedora branch as well.
-    FDO_DISTRIBUTION_TAG: '2022-01-19.0-main'
+    FDO_DISTRIBUTION_TAG: '2022-03-29.0-main'
     FDO_DISTRIBUTION_VERSION: rawhide
 
 #############################################
@@ -190,7 +190,6 @@ build:
   stage: build
 
   script:
-    - dnf -y install gcr-devel
     - *environment_information
     - *build_procedure
 
@@ -223,7 +222,6 @@ test:
     - build
 
   script:
-    - dnf -y install gcr-devel
     - *environment_information
     - *run_tests
 
@@ -252,7 +250,6 @@ coverage:
     - master@GNOME/gnome-control-center
 
   script:
-    - dnf -y install gcr-devel
     - *environment_information
     - *build_procedure
     - *run_tests
@@ -368,7 +365,6 @@ flatpak:
   stage: manual
   when: manual
   script:
-    - dnf -y install gcr-devel
     - *environment_information
     - *build_procedure
     - *run_tests
