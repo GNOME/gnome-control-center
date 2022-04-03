@@ -4,20 +4,22 @@
 # Maxim Dzumanenko <dziumanenko@gmail.com>, 2002-2009.
 # Wanderlust <wanderlust@ukr.net>, 2009.
 # Daniel Korostil <ted.korostiled@gmail.com>, 2013, 2014, 2015, 2016, 2017.
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2021-09-08 08:29+0000\n"
-"PO-Revision-Date: 2021-09-08 12:56+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
+"es\n"
+"POT-Creation-Date: 2022-03-16 12:03+0000\n"
+"PO-Revision-Date: 2022-04-03 12:16+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 "X-Project-Style: gnome\n"
 
@@ -201,7 +203,7 @@ msgstr "Камера"
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:129
 #: panels/user-accounts/cc-user-panel.c:848
 #: panels/user-accounts/cc-user-panel.c:938
-#: panels/wwan/cc-wwan-device-page.c:445
+#: panels/wwan/cc-wwan-device-page.c:479
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "Вимкнено"
@@ -357,7 +359,7 @@ msgstr "Виберіть зображення"
 #: panels/color/cc-color-panel.c:886 panels/color/cc-color-panel.ui:657
 #: panels/common/cc-language-chooser.ui:25
 #: panels/display/cc-display-panel.c:1006
-#: panels/info-overview/cc-info-overview-panel.ui:243
+#: panels/info-overview/cc-info-overview-panel.ui:244
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/network/cc-wifi-hotspot-dialog.ui:122
 #: panels/network/cc-wifi-panel.c:866
@@ -1897,7 +1899,7 @@ msgstr ""
 "Назва пристрою використовується для ідентифікації цього пристрою при "
 "перегляді у мережі або при прив'язуванні пристроїв Bluetooth."
 
-#: panels/info-overview/cc-info-overview-panel.ui:234
+#: panels/info-overview/cc-info-overview-panel.ui:235
 msgid "_Rename"
 msgstr "Перей_менувати"
 
@@ -2299,7 +2301,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:275
 #: panels/printers/authentication-dialog.ui:29
 #: panels/printers/ppd-selection-dialog.ui:27
-#: panels/wwan/cc-wwan-device-page.c:143
+#: panels/wwan/cc-wwan-device-page.c:190
 msgid "Cancel"
 msgstr "Скасувати"
 
@@ -2886,29 +2888,29 @@ msgid "Not set up"
 msgstr "Не налаштовано"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:207
+#: panels/network/cc-wifi-connection-row.c:208
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:262
+#: panels/network/cc-wifi-connection-row.c:264
 msgid "Insecure network (WEP)"
 msgstr "Незахищена мережа (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:267
+#: panels/network/cc-wifi-connection-row.c:269
 msgid "Secure network (WPA)"
 msgstr "Захищена мережа (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:272
+#: panels/network/cc-wifi-connection-row.c:274
 msgid "Secure network (WPA2)"
 msgstr "Захищена мережа (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network (WPA3)"
 msgstr "Захищена мережа (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:284
 msgid "Secure network"
 msgstr "Захищена мережа"
 
@@ -7758,7 +7760,7 @@ msgstr "Увійшов"
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/user-accounts/cc-user-panel.c:846
 #: panels/user-accounts/cc-user-panel.c:935
-#: panels/wwan/cc-wwan-device-page.c:443
+#: panels/wwan/cc-wwan-device-page.c:477
 msgid "Enabled"
 msgstr "Увімкнено"
 
@@ -7888,7 +7890,10 @@ msgid ""
 "Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;"
 msgstr ""
 "Login;Name;Fingerprint;Avatar;Logo;Face;Password;Parental Controls;Screen "
-"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;вхід;логін;лоґін;назва;ім'я;відбиток;аватар;логотип;обличчя;пароль;батьківський контроль;час за екраном;обмеження програм;обмеження інтернету;використання;користування;обмеження користування;діти;дитина;дитячий;"
+"Time;App Restrictions;Web Restrictions;Usage;Usage Limit;Kid;Child;вхід;"
+"логін;лоґін;назва;ім'я;відбиток;аватар;логотип;обличчя;пароль;батьківський "
+"контроль;час за екраном;обмеження програм;обмеження інтернету;використання;"
+"користування;обмеження користування;діти;дитина;дитячий;"
 
 #. Translators: This button enrolls the computer in the domain in order to use enterprise logins.
 #: panels/user-accounts/data/join-dialog.ui:39
@@ -8103,7 +8108,7 @@ msgstr ""
 
 #: panels/wacom/button-mapping.ui:9
 msgid "Map Buttons"
-msgstr "Кнопка відбиття"
+msgstr "Прив'язування кнопок"
 
 #: panels/wacom/button-mapping.ui:37 panels/wacom/cc-wacom-page.c:519
 #: panels/wacom/gnome-wacom-properties.ui:60
@@ -8112,7 +8117,7 @@ msgstr "_Закрити"
 
 #: panels/wacom/button-mapping.ui:71
 msgid "Map buttons to functions"
-msgstr "Кнопка відбиття для функцій"
+msgstr "Прив'язування кнопок до функцій"
 
 #: panels/wacom/button-mapping.ui:119
 msgid ""
@@ -8181,7 +8186,7 @@ msgstr "%d з %d"
 
 #: panels/wacom/cc-wacom-page.c:516
 msgid "Display Mapping"
-msgstr "Відбиття екрана"
+msgstr "Прив'язування екрана"
 
 #: panels/wacom/cc-wacom-panel.c:725 panels/wacom/wacom-stylus-page.ui:119
 msgid "Stylus"
@@ -8199,7 +8204,8 @@ msgstr "Планшет Wacom"
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:4
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
 msgstr ""
-"Вкажіть відбиття кнопок і скоригуйте чутливість стила для графічних планшетів"
+"Вкажіть прив'язування кнопок і скоригуйте чутливість стила для графічних"
+" планшетів"
 
 #. Translators: Search terms to find the Wacom Tablet panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:19
@@ -8249,7 +8255,7 @@ msgstr "Відбити на моніторі…"
 
 #: panels/wacom/gnome-wacom-properties.ui:309
 msgid "Map Buttons…"
-msgstr "Кнопки відбиття…"
+msgstr "Прив'язування кнопок…"
 
 #: panels/wacom/gnome-wacom-properties.ui:322
 msgid "Calibrate…"
@@ -8465,33 +8471,33 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Невідомий"
 
-#: panels/wwan/cc-wwan-device-page.c:141
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Unlock SIM card"
 msgstr "Розблокувати SIM-картку"
 
-#: panels/wwan/cc-wwan-device-page.c:142 panels/wwan/cc-wwan-device-page.c:190
+#: panels/wwan/cc-wwan-device-page.c:189 panels/wwan/cc-wwan-device-page.c:237
 msgid "Unlock"
 msgstr "Розблокувати"
 
-#: panels/wwan/cc-wwan-device-page.c:147
+#: panels/wwan/cc-wwan-device-page.c:194
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Будь ласка, вкажіть пінкод для SIM-картки %d"
 
-#: panels/wwan/cc-wwan-device-page.c:148
+#: panels/wwan/cc-wwan-device-page.c:195
 msgid "Enter PIN to unlock your SIM card"
 msgstr "Введіть пінкод для розблокування вашої SIM-картки"
 
-#: panels/wwan/cc-wwan-device-page.c:152
+#: panels/wwan/cc-wwan-device-page.c:199
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Будь ласка, вкажіть PUK-код для SIM-картки %d"
 
-#: panels/wwan/cc-wwan-device-page.c:153
+#: panels/wwan/cc-wwan-device-page.c:200
 msgid "Enter PUK to unlock your SIM card"
 msgstr "Введіть PUK-код для розблокування вашої SIM-картки"
 
-#: panels/wwan/cc-wwan-device-page.c:171
+#: panels/wwan/cc-wwan-device-page.c:218
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
@@ -8500,7 +8506,7 @@ msgstr[1] "Введено помилковий пароль. У вас лиши�
 msgstr[2] "Введено помилковий пароль. У вас лишилося %1$u спроб"
 msgstr[3] "Введено помилковий пароль. У вас лишилася %1$u спроба"
 
-#: panels/wwan/cc-wwan-device-page.c:174
+#: panels/wwan/cc-wwan-device-page.c:221
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
@@ -8509,23 +8515,23 @@ msgstr[1] "У вас лишилося %u спроби"
 msgstr[2] "У вас лишилося %u спроб"
 msgstr[3] "У вас лишилася одна спроба"
 
-#: panels/wwan/cc-wwan-device-page.c:179
+#: panels/wwan/cc-wwan-device-page.c:226
 msgid "Wrong password entered."
 msgstr "Введено помилковий пароль."
 
-#: panels/wwan/cc-wwan-device-page.c:224
+#: panels/wwan/cc-wwan-device-page.c:271
 msgid "PUK code should be an 8 digit number"
 msgstr "PUK-код має бути 8-цифровим числом"
 
-#: panels/wwan/cc-wwan-device-page.c:248
+#: panels/wwan/cc-wwan-device-page.c:295
 msgid "Enter New PIN"
 msgstr "Введіть новий пінкод"
 
-#: panels/wwan/cc-wwan-device-page.c:252
+#: panels/wwan/cc-wwan-device-page.c:299
 msgid "PIN code should be a 4-8 digit number"
 msgstr "Пінкод має бути числом, у якому має бути від 4 до 8 цифр"
 
-#: panels/wwan/cc-wwan-device-page.c:270
+#: panels/wwan/cc-wwan-device-page.c:317
 msgid "Unlocking..."
 msgstr "Розблоковування…"
 
