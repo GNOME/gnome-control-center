@@ -192,6 +192,7 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Clock</property>
             <child>
               <object class="AdwComboRow" id="timeformat_row">
                 <property name="title" translatable="yes">Time _Format</property>
@@ -205,6 +206,59 @@
                 <property name="expression">
                   <closure type="gchararray" function="format_clock_name_cb"/>
                 </property>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Week Day</property>
+                <property name="use_underline">True</property>
+                <property name="activatable_widget">weekday_switch</property>
+                <child>
+                  <object class="GtkSwitch" id="weekday_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Date</property>
+                <property name="use_underline">True</property>
+                <property name="activatable_widget">date_switch</property>
+                <child>
+                  <object class="GtkSwitch" id="date_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Seconds</property>
+                <property name="use_underline">True</property>
+                <property name="activatable_widget">seconds_switch</property>
+                <child>
+                  <object class="GtkSwitch" id="seconds_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Calendar</property>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Week Numbers</property>
+                <property name="use_underline">True</property>
+                <property name="activatable_widget">week_numbers_switch</property>
+                <child>
+                  <object class="GtkSwitch" id="week_numbers_switch">
+                    <property name="valign">center</property>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
