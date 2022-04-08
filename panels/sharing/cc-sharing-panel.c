@@ -85,7 +85,7 @@ struct _CcSharingPanel
   GtkWidget *remote_login_row;
   GtkWidget *remote_login_switch;
 
-  GtkWidget *remote_control_checkbutton;
+  GtkWidget *remote_control_switch;
   GtkWidget *remote_desktop_password_entry;
   GtkWidget *remote_desktop_password_copy;
   GtkWidget *remote_desktop_username_entry;
@@ -285,7 +285,7 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_login_switch);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_control_checkbutton);
+  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_control_switch);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_username_entry);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_username_copy);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, remote_desktop_password_entry);
@@ -1355,11 +1355,11 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
 
   g_settings_bind (rdp_settings,
                    "view-only",
-                   self->remote_control_checkbutton,
+                   self->remote_control_switch,
                    "active",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
   g_object_bind_property (self->remote_desktop_switch, "state",
-                          self->remote_control_checkbutton, "sensitive",
+                          self->remote_control_switch, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
   hostname = get_hostname ();
