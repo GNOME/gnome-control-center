@@ -651,6 +651,9 @@ set_current_output (CcDisplayPanel   *panel,
     {
       cc_display_settings_set_selected_output (panel->settings, panel->current_output);
       cc_display_arrangement_set_selected_output (panel->arrangement, panel->current_output);
+
+      adw_window_title_set_title (panel->display_settings_title_widget,
+                                  output ? cc_display_monitor_get_ui_name (output) : "");
     }
 
   panel->rebuilding_counter--;
@@ -664,9 +667,6 @@ on_monitor_row_activated_cb (GtkListBoxRow  *row,
 
   monitor = g_object_get_data (G_OBJECT (row), "monitor");
   set_current_output (self, monitor, FALSE);
-
-  adw_window_title_set_title (self->display_settings_title_widget,
-                              cc_display_monitor_get_ui_name (monitor));
 
   adw_leaflet_set_visible_child_name (self->leaflet, "display-settings");
 }
