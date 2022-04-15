@@ -991,6 +991,8 @@ apply_current_configuration (CcDisplayPanel *self)
 
   if (error)
     g_warning ("Error applying configuration: %s", error->message);
+
+  adw_leaflet_set_visible_child_name (self->leaflet, "displays");
 }
 
 static void
