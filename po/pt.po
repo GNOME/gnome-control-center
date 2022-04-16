@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-03-18 10:40+0000\n"
-"PO-Revision-Date: 2022-03-24 23:04+0000\n"
+"POT-Creation-Date: 2022-04-07 11:50+0000\n"
+"PO-Revision-Date: 2022-04-16 17:45+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -175,7 +175,7 @@ msgstr "Receber as pesquisas do sistema e enviar os resultados."
 #: panels/user-accounts/cc-user-panel.c:789
 #: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Inativo"
 
@@ -349,8 +349,8 @@ msgstr "Selecionar uma foto"
 #: panels/network/cc-wifi-hotspot-dialog.ui:123
 #: panels/network/cc-wifi-panel.c:881
 #: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/connection-editor/vpn-helpers.c:226
-#: panels/network/connection-editor/vpn-helpers.c:346
+#: panels/network/connection-editor/vpn-helpers.c:221
+#: panels/network/connection-editor/vpn-helpers.c:341
 #: panels/network/net-device-wifi.c:860
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:263
@@ -372,7 +372,7 @@ msgid "_Cancel"
 msgstr "_Cancelar"
 
 #: panels/background/cc-background-chooser.c:311
-#: panels/network/connection-editor/vpn-helpers.c:227
+#: panels/network/connection-editor/vpn-helpers.c:222
 #: panels/printers/pp-details-dialog.c:264
 #: panels/sharing/cc-sharing-panel.c:524
 #: panels/user-accounts/cc-avatar-chooser.c:168
@@ -733,7 +733,7 @@ msgid "Save Profile"
 msgstr "Gravar o perfil"
 
 #: panels/color/cc-color-panel.c:845
-#: panels/network/connection-editor/vpn-helpers.c:347
+#: panels/network/connection-editor/vpn-helpers.c:342
 #: panels/wwan/cc-wwan-apn-dialog.ui:43
 msgid "_Save"
 msgstr "_Gravar"
@@ -879,9 +879,9 @@ msgstr "Requer suporte em que se possa escrever"
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a href=\"linux"
-"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
-"\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a "
+"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
+"href=\"windows\">Microsoft Windows</a> systems useful."
 msgstr ""
 "Poderá considerar úteis estas instruções em como utilizar o perfil em "
 "sistemas <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> e "
@@ -896,8 +896,8 @@ msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr ""
-"Problemas detetados. O perfil poderá não funcionar corretamente. <a href="
-"\"\">Ver detalhes.</a>"
+"Problemas detetados. O perfil poderá não funcionar corretamente. <a "
+"href=\"\">Ver detalhes.</a>"
 
 #: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
@@ -1539,22 +1539,22 @@ msgstr ""
 #: panels/display/cc-display-panel.c:512
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
+#: panels/universal-access/cc-ua-panel.c:336
+#: panels/universal-access/cc-ua-panel.c:468
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:490
+#: panels/universal-access/cc-ua-panel.c:526
 msgid "On"
 msgstr "Ligado"
 
 #: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
+#: panels/universal-access/cc-ua-panel.c:336
+#: panels/universal-access/cc-ua-panel.c:468
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:490
+#: panels/universal-access/cc-ua-panel.c:526
 msgid "Off"
 msgstr "Desligado"
 
@@ -1849,7 +1849,7 @@ msgstr "Virtualização"
 
 #: panels/info-overview/cc-info-overview-panel.ui:139
 msgid "Software Updates"
-msgstr "Atualização de aplicações"
+msgstr "Atualização de Software"
 
 #: panels/info-overview/cc-info-overview-panel.ui:158
 msgid "Rename Device"
@@ -2414,10 +2414,16 @@ msgid "2 minutes"
 msgstr "2 minutos"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:74 panels/lock/cc-lock-panel.c:77
+#: panels/lock/cc-lock-panel.c:74
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 minutos"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:77
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 minutos"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
 #: panels/lock/cc-lock-panel.c:80
@@ -3421,11 +3427,11 @@ msgstr "Adicionar VPN"
 msgid "S_ecurity"
 msgstr "S_egurança"
 
-#: panels/network/connection-editor/vpn-helpers.c:191
+#: panels/network/connection-editor/vpn-helpers.c:186
 msgid "Cannot import VPN connection"
 msgstr "Impossível importar a ligação VPN"
 
-#: panels/network/connection-editor/vpn-helpers.c:193
+#: panels/network/connection-editor/vpn-helpers.c:188
 #, c-format
 msgid ""
 "The file “%s” could not be read or does not contain recognized VPN "
@@ -3438,29 +3444,29 @@ msgstr ""
 "\n"
 "Erro: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:223
+#: panels/network/connection-editor/vpn-helpers.c:218
 msgid "Select file to import"
 msgstr "Selecionar o ficheiro a importar"
 
-#: panels/network/connection-editor/vpn-helpers.c:276
+#: panels/network/connection-editor/vpn-helpers.c:271
 #, c-format
 msgid "A file named “%s” already exists."
 msgstr "Já existe um ficheiro com o nome “%s”."
 
-#: panels/network/connection-editor/vpn-helpers.c:278
+#: panels/network/connection-editor/vpn-helpers.c:273
 msgid "_Replace"
 msgstr "Substitui_r"
 
-#: panels/network/connection-editor/vpn-helpers.c:280
+#: panels/network/connection-editor/vpn-helpers.c:275
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
 msgstr "Deseja substituir %s com a ligação VPN que está a gravar?"
 
-#: panels/network/connection-editor/vpn-helpers.c:315
+#: panels/network/connection-editor/vpn-helpers.c:310
 msgid "Cannot export VPN connection"
 msgstr "Impossível exportar a ligação VPN"
 
-#: panels/network/connection-editor/vpn-helpers.c:317
+#: panels/network/connection-editor/vpn-helpers.c:312
 #, c-format
 msgid ""
 "The VPN connection “%s” could not be exported to %s.\n"
@@ -3471,7 +3477,7 @@ msgstr ""
 "\n"
 "Erro: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:343
+#: panels/network/connection-editor/vpn-helpers.c:338
 msgid "Export VPN connection"
 msgstr "Exportar a ligação VPN"
 
@@ -6540,32 +6546,32 @@ msgstr ""
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:356
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Predefinição"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:359
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Médio"
 
-#: panels/universal-access/cc-ua-panel.c:363
+#: panels/universal-access/cc-ua-panel.c:362
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Grande"
 
-#: panels/universal-access/cc-ua-panel.c:366
+#: panels/universal-access/cc-ua-panel.c:365
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Maior"
 
-#: panels/universal-access/cc-ua-panel.c:369
+#: panels/universal-access/cc-ua-panel.c:368
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Maior ainda"
 
-#: panels/universal-access/cc-ua-panel.c:373
+#: panels/universal-access/cc-ua-panel.c:372
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -8672,7 +8678,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -8681,14 +8687,14 @@ msgstr[1] "%u saídas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sons do sistema"
 
@@ -8958,10 +8964,6 @@ msgstr "Sons do sistema"
 #~ "Atividades. A ordem dos resultados da procura pode ser alterada ao mover "
 #~ "a posição das linhas na lista."
 
-#~ msgctxt "lock_screen"
-#~ msgid "5 minutes"
-#~ msgstr "5 minutos"
-
 #~ msgid "Web Links"
 #~ msgstr "Ligações Web"
 
@@ -9015,8 +9017,8 @@ msgstr "Sons do sistema"
 #~ msgstr "Impossível alterar"
 
 #~ msgid ""
-#~ "Individual permissions for applications can be reviewed in the <a href="
-#~ "\"privacy\">Privacy</a> Settings."
+#~ "Individual permissions for applications can be reviewed in the <a "
+#~ "href=\"privacy\">Privacy</a> Settings."
 #~ msgstr ""
 #~ "Permissões individuais para aplicações podem ser revistas nas Definições "
 #~ "de <a href=\"privacy\">Privacidade</a>."
