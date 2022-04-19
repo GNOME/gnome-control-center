@@ -124,7 +124,7 @@ password_changed_cb (PasswdHandler    *handler,
         gtk_widget_set_sensitive (GTK_WIDGET (self), TRUE);
 
         if (!error) {
-                gtk_dialog_response (GTK_DIALOG (self), GTK_RESPONSE_ACCEPT);
+                gtk_window_close (GTK_WINDOW (self));
                 return;
         }
 
@@ -191,6 +191,8 @@ ok_button_clicked_cb (CcPasswordDialog *self)
                 default:
                         g_assert_not_reached ();
         }
+
+        gtk_window_close (GTK_WINDOW (self));
 }
 
 static void
