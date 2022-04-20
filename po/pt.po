@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-04-07 11:50+0000\n"
-"PO-Revision-Date: 2022-04-16 17:45+0100\n"
+"POT-Creation-Date: 2022-04-19 17:02+0000\n"
+"PO-Revision-Date: 2022-04-20 23:04+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -879,9 +879,9 @@ msgstr "Requer suporte em que se possa escrever"
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a "
-"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
-"href=\"windows\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
 msgstr ""
 "Poderá considerar úteis estas instruções em como utilizar o perfil em "
 "sistemas <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> e "
@@ -896,8 +896,8 @@ msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr ""
-"Problemas detetados. O perfil poderá não funcionar corretamente. <a "
-"href=\"\">Ver detalhes.</a>"
+"Problemas detetados. O perfil poderá não funcionar corretamente. <a href="
+"\"\">Ver detalhes.</a>"
 
 #: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
@@ -5532,7 +5532,9 @@ msgstr ""
 msgid "Formats"
 msgstr "Formatos"
 
-#: panels/region/cc-format-chooser.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/region/cc-format-chooser.ui:37
+#: panels/wacom/cc-wacom-stylus-page.ui:136
+#: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Recuar"
 
@@ -7070,7 +7072,7 @@ msgid "Failed to add account"
 msgstr "Falha ao adicionar conta"
 
 #: panels/user-accounts/cc-add-user-dialog.c:679
-#: panels/user-accounts/cc-password-dialog.c:258
+#: panels/user-accounts/cc-password-dialog.c:260
 msgid "The passwords do not match."
 msgstr "As palavras-passe não coincidem."
 
@@ -8041,6 +8043,10 @@ msgstr "Primeiro conecte ou ligue o seu tablet Wacom."
 msgid "Tip Pressure Feel"
 msgstr "Sensibilidade da pressão da caneta"
 
+#: panels/wacom/cc-wacom-stylus-page.ui:35
+msgid "Stylus tip pressure"
+msgstr "Pressão da ponta da caneta stylus"
+
 #: panels/wacom/cc-wacom-stylus-page.ui:54
 msgctxt "display setting"
 msgid "Button 1"
@@ -8060,21 +8066,49 @@ msgstr "Botão 3"
 msgid "Eraser Pressure Feel"
 msgstr "Sensibilidade da pressão da borracha"
 
+#: panels/wacom/cc-wacom-stylus-page.ui:82
+msgid "Soft"
+msgstr "Suave"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:96
+msgid "Eraser pressure"
+msgstr "Pressão da borracha"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:102
+msgid "Firm"
+msgstr "Firme"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:133
+msgid "Default"
+msgstr "Predefinição"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:134
+msgid "Middle Mouse Button Click"
+msgstr "Clique no botão do meio do rato"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:135
+msgid "Right Mouse Button Click"
+msgstr "Clique no botão direito do rato"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:137
+msgid "Forward"
+msgstr "Avançar"
+
 #: panels/wacom/cc-wacom-tool.c:321
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
-msgstr "Caneta Stylus airbrush com pressão, inclinação e deslizador integrado"
+msgstr "Caneta stylus airbrush com pressão, inclinação e deslizador integrado"
 
 #: panels/wacom/cc-wacom-tool.c:323
 msgid "Airbrush stylus with pressure, tilt, and rotation"
-msgstr "Caneta Stylus airbrush com pressão, inclinação e rotação"
+msgstr "Caneta stylus airbrush com pressão, inclinação e rotação"
 
 #: panels/wacom/cc-wacom-tool.c:325
 msgid "Standard stylus with pressure and tilt"
-msgstr "Caneta Stylus padrão com pressão e inclinação"
+msgstr "Caneta stylus padrão com pressão e inclinação"
 
 #: panels/wacom/cc-wacom-tool.c:327
 msgid "Standard stylus with pressure"
-msgstr "Caneta Stylus padrão com pressão"
+msgstr "Caneta stylus padrão com pressão"
 
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:3
 msgid "Wacom Tablet"
@@ -8904,30 +8938,12 @@ msgstr "Sons do sistema"
 #~ msgid "Decouple Display"
 #~ msgstr "Descolar ecrãs"
 
-#~ msgid "Default"
-#~ msgstr "Predefinição"
-
-#~ msgid "Middle Mouse Button Click"
-#~ msgstr "Clique no botão do meio do rato"
-
-#~ msgid "Right Mouse Button Click"
-#~ msgstr "Clique no botão direito do rato"
-
-#~ msgid "Forward"
-#~ msgstr "Avançar"
-
 #~ msgid "No stylus found"
 #~ msgstr "Nenhuma caneta encontrada"
 
 #~ msgid ""
 #~ "Please move your stylus to the proximity of the tablet to configure it"
 #~ msgstr "Por favor, mova a sua caneta para perto do tablet para configurá-lo"
-
-#~ msgid "Soft"
-#~ msgstr "Suave"
-
-#~ msgid "Firm"
-#~ msgstr "Firme"
 
 #~ msgid "Top Button"
 #~ msgstr "Botão de topo"
@@ -9017,8 +9033,8 @@ msgstr "Sons do sistema"
 #~ msgstr "Impossível alterar"
 
 #~ msgid ""
-#~ "Individual permissions for applications can be reviewed in the <a "
-#~ "href=\"privacy\">Privacy</a> Settings."
+#~ "Individual permissions for applications can be reviewed in the <a href="
+#~ "\"privacy\">Privacy</a> Settings."
 #~ msgstr ""
 #~ "Permissões individuais para aplicações podem ser revistas nas Definições "
 #~ "de <a href=\"privacy\">Privacidade</a>."
