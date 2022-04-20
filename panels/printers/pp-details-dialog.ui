@@ -59,6 +59,30 @@
                 </layout>
               </object>
             </child>
+            <child>
+              <object class="GtkRevealer" id="print_name_hint_revealer">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkLabel" id="print_name_hint_label">
+                    <property name="visible">True</property>
+                    <property name="label" translatable="yes">Printer names cannot contain SPACE, TAB, #, or /</property>
+                    <property name="yalign">0</property>
+                    <property name="xalign">0</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                    <attributes>
+                      <attribute name="scale" value="0.83"/>
+                    </attributes>
+                  </object>
+                </child>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
 
             <child>
               <object class="GtkLabel">
@@ -67,7 +91,7 @@
                 <property name="mnemonic_widget">printer_location_entry</property>
                 <layout>
                   <property name="column">0</property>
-                  <property name="row">1</property>
+                  <property name="row">2</property>
                 </layout>
                 <style>
                   <class name="dim-label"/>
@@ -80,7 +104,7 @@
                 <property name="halign">fill</property>
                 <layout>
                   <property name="column">1</property>
-                  <property name="row">1</property>
+                  <property name="row">2</property>
                 </layout>
               </object>
             </child>
@@ -92,7 +116,7 @@
                 <property name="mnemonic_widget">printer_address_label</property>
                 <layout>
                   <property name="column">0</property>
-                  <property name="row">2</property>
+                  <property name="row">3</property>
                 </layout>
                 <style>
                   <class name="dim-label"/>
@@ -105,7 +129,7 @@
                 <property name="halign">start</property>
                 <layout>
                   <property name="column">1</property>
-                  <property name="row">2</property>
+                  <property name="row">3</property>
                 </layout>
               </object>
             </child>
@@ -117,7 +141,7 @@
                 <property name="mnemonic_widget">printer_model_label</property>
                 <layout>
                   <property name="column">0</property>
-                  <property name="row">3</property>
+                  <property name="row">4</property>
                 </layout>
                 <style>
                   <class name="dim-label"/>
@@ -129,7 +153,7 @@
                 <property name="halign">start</property>
                 <layout>
                   <property name="column">1</property>
-                  <property name="row">3</property>
+                  <property name="row">4</property>
                 </layout>
                 <child>
                   <object class="GtkLabel" id="printer_model_label">
@@ -166,7 +190,7 @@
                 <property name="halign">start</property>
                 <layout>
                   <property name="column">1</property>
-                  <property name="row">4</property>
+                  <property name="row">5</property>
                 </layout>
                 <child>
                   <object class="GtkButton" id="search_for_drivers_button">
