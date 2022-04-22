@@ -412,17 +412,21 @@
     <property name="default-width">360</property>
     <property name="default-height">360</property>
     <property name="modal">True</property>
+
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkButton">
+          <object class="GtkWindowControls">
             <property name="halign">end</property>
-            <property name="icon-name">window-close-symbolic</property>
-            <signal name="clicked" handler="remote_desktop_hide_encryption_fingerprint" swapped="yes"/>
-            <style>
-              <class name="flat"/>
-            </style>
+            <property name="side">end</property>
+            <child>
+              <object class="GtkButton">
+                <property name="halign">end</property>
+                <property name="icon-name">window-close-symbolic</property>
+                <signal name="clicked" handler="remote_desktop_hide_encryption_fingerprint" swapped="yes"/>
+              </object>
+            </child>
           </object>
         </child>
         <child>
