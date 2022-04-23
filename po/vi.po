@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-03-31 14:30+0000\n"
-"PO-Revision-Date: 2022-04-04 07:29+0700\n"
+"POT-Creation-Date: 2022-04-23 00:38+0000\n"
+"PO-Revision-Date: 2022-04-23 08:12+0700\n"
 "Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
 "Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
 "Language: vi\n"
@@ -2406,10 +2406,16 @@ msgid "2 minutes"
 msgstr "2 phút"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:74 panels/lock/cc-lock-panel.c:77
+#: panels/lock/cc-lock-panel.c:74
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 phút"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:77
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 phút"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
 #: panels/lock/cc-lock-panel.c:80
@@ -4407,12 +4413,12 @@ msgstr "Thêm tài khoản"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:426
+#: panels/online-accounts/gnome-control-center-goa-helper.c:428
 #, c-format
 msgid "%s Account"
 msgstr "Tài khoản %s"
 
-#: panels/online-accounts/gnome-control-center-goa-helper.c:429
+#: panels/online-accounts/gnome-control-center-goa-helper.c:431
 msgid "Remove Account"
 msgstr "Xóa tài khoản"
 
@@ -4614,7 +4620,7 @@ msgstr "Không bao giờ"
 
 #: panels/power/cc-power-panel.c:937
 msgid "Automatic suspend"
-msgstr "Tự động tạm dừng"
+msgstr "Tự động ngưng"
 
 #: panels/power/cc-power-panel.c:1030
 msgid ""
@@ -5507,7 +5513,9 @@ msgstr ""
 msgid "Formats"
 msgstr "Định dạng"
 
-#: panels/region/cc-format-chooser.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/region/cc-format-chooser.ui:37
+#: panels/wacom/cc-wacom-stylus-page.ui:136
+#: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Kế trước"
 
@@ -5987,11 +5995,11 @@ msgstr "Tên người dùng"
 msgid "Verify Encryption"
 msgstr "Xác thực mã hóa"
 
-#: panels/sharing/cc-sharing-panel.ui:430
+#: panels/sharing/cc-sharing-panel.ui:434
 msgid "Encryption Fingerprint"
 msgstr "Vân tay mã hóa"
 
-#: panels/sharing/cc-sharing-panel.ui:431
+#: panels/sharing/cc-sharing-panel.ui:435
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
@@ -5999,15 +6007,15 @@ msgstr ""
 "Dấu vân tay mã hóa có thể được thấy trong kết nối máy khách và nên là định "
 "danh duy nhất"
 
-#: panels/sharing/cc-sharing-panel.ui:463
+#: panels/sharing/cc-sharing-panel.ui:467
 msgid "Media Sharing"
 msgstr "Chia sẻ phương tiện"
 
-#: panels/sharing/cc-sharing-panel.ui:485
+#: panels/sharing/cc-sharing-panel.ui:489
 msgid "Share music, photos and videos over the network."
 msgstr "Chia sẻ nhạc, ảnh, phim với những người khác qua mạng."
 
-#: panels/sharing/cc-sharing-panel.ui:498
+#: panels/sharing/cc-sharing-panel.ui:502
 msgid "Folders"
 msgstr "Thư mục"
 
@@ -6069,7 +6077,7 @@ msgstr "Đang kiểm tra “%s”"
 
 #: panels/sound/cc-output-test-dialog.ui:131
 msgid "Click a speaker to test"
-msgstr "Nhấn vào “hình chiếc loa” để bắt đầu kiểm tra"
+msgstr "Nhấn vào “hình chiếc loa” để nghe thử"
 
 #: panels/sound/cc-sound-panel.ui:8
 msgid "System Volume"
@@ -7048,7 +7056,7 @@ msgid "Failed to add account"
 msgstr "Gặp lỗi khi thêm tài khoản"
 
 #: panels/user-accounts/cc-add-user-dialog.c:679
-#: panels/user-accounts/cc-password-dialog.c:258
+#: panels/user-accounts/cc-password-dialog.c:260
 msgid "The passwords do not match."
 msgstr "Mật khẩu không khớp nhau."
 
@@ -7601,7 +7609,7 @@ msgstr ""
 
 #: panels/user-accounts/cc-user-panel.c:1423
 msgid "Unlock to Add Users and Change Settings"
-msgstr "Mở khóa để Thêm người dùng và thay đổi cài đặt"
+msgstr "Mở khóa để Thêm người dùng và Thay đổi cài đặt"
 
 #: panels/user-accounts/cc-user-panel.ui:23
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
@@ -7984,7 +7992,7 @@ msgstr "Ánh xạ sang màn hình"
 
 #: panels/wacom/cc-wacom-page.ui:62
 msgid "Keep Aspect Ratio"
-msgstr "Giữ tỷ lệ hình dáng"
+msgstr "Giữ nguyên tỷ lệ"
 
 #: panels/wacom/cc-wacom-page.ui:63
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
@@ -8006,6 +8014,15 @@ msgstr "Vui lòng cắm vào và bật bảng vẽ Wacom của bạn."
 msgid "Tip Pressure Feel"
 msgstr "Cảm giác ấn ngón"
 
+#: panels/wacom/cc-wacom-stylus-page.ui:21
+#: panels/wacom/cc-wacom-stylus-page.ui:82
+msgid "Soft"
+msgstr "Mềm"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:35
+msgid "Stylus tip pressure"
+msgstr "Áp lực đầu bút vẽ"
+
 #: panels/wacom/cc-wacom-stylus-page.ui:54
 msgctxt "display setting"
 msgid "Button 1"
@@ -8024,6 +8041,30 @@ msgstr "Nút 3"
 #: panels/wacom/cc-wacom-stylus-page.ui:77
 msgid "Eraser Pressure Feel"
 msgstr "Cảm giác ấn tẩy"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:96
+msgid "Eraser pressure"
+msgstr "Cảm biến ấn tẩy"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:102
+msgid "Firm"
+msgstr "Cứng"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:133
+msgid "Default"
+msgstr "Mặc định"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:134
+msgid "Middle Mouse Button Click"
+msgstr "Nhấn nút chuột giữa"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:135
+msgid "Right Mouse Button Click"
+msgstr "Nhấn nút chuột phải"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:137
+msgid "Forward"
+msgstr "Kế tiếp"
 
 #: panels/wacom/cc-wacom-tool.c:321
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
@@ -8846,10 +8887,6 @@ msgstr "Âm thanh hệ thống"
 #~ msgid "Allow the applications below to determine your location."
 #~ msgstr "Cho phép các ứng dụng phía dưới sử dụng vị trí của bạn."
 
-#~ msgctxt "lock_screen"
-#~ msgid "5 minutes"
-#~ msgstr "5 phút"
-
 #~ msgid "Allow the applications below to use your microphone."
 #~ msgstr "Cho phép các ứng dụng bên dưới sử dụng micrô của bạn."
 
@@ -9047,18 +9084,6 @@ msgstr "Âm thanh hệ thống"
 #~ msgid "Adjust display resolution"
 #~ msgstr "Điều chỉnh độ phân giải"
 
-#~ msgid "Default"
-#~ msgstr "Mặc định"
-
-#~ msgid "Middle Mouse Button Click"
-#~ msgstr "Nhấn nút chuột giữa"
-
-#~ msgid "Right Mouse Button Click"
-#~ msgstr "Nhấn nút chuột phải"
-
-#~ msgid "Forward"
-#~ msgstr "Kế tiếp"
-
 #~ msgid "No stylus found"
 #~ msgstr "Không tìm thấy bút trỏ nào"
 
@@ -9066,12 +9091,6 @@ msgstr "Âm thanh hệ thống"
 #~ "Please move your stylus to the proximity of the tablet to configure it"
 #~ msgstr ""
 #~ "Vui lòng di chuyển bút trỏ của bạn đến lân cận của bảng để cấu hình nó"
-
-#~ msgid "Soft"
-#~ msgstr "Mềm"
-
-#~ msgid "Firm"
-#~ msgstr "Cứng"
 
 #~ msgid "Top Button"
 #~ msgstr "Nút cao"
