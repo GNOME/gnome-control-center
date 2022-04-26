@@ -50,7 +50,7 @@ by being explicit. Suggested acceptance phrase:
 Urgency commits should never happen, but in case they're needed, they are defined by the following
 criteria:
 
- * On stable branches (or master right after a stable release)
+ * On stable branches (or `main` right after a stable release)
  * Symptoms:
    * Always OR often reproducible; AND
    * Crash; OR
@@ -59,4 +59,4 @@ criteria:
  * Quickly followed by an emergency release (at most 2 days after the commit)
 
 
-[doap]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/gnome-control-center.doap
+[doap]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/main/gnome-control-center.doap

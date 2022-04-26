@@ -1,6 +1,6 @@
-[![Build Status](https://gitlab.gnome.org/GNOME/gnome-control-center/badges/master/pipeline.svg)](https://gitlab.gnome.org/GNOME/gnome-control-center/pipelines)
-[![Coverage report](https://gitlab.gnome.org/GNOME/gnome-control-center/badges/master/coverage.svg)](https://gnome.pages.gitlab.gnome.org/gnome-control-center/)
-[![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/COPYING)
+[![Build Status](https://gitlab.gnome.org/GNOME/gnome-control-center/badges/main/pipeline.svg)](https://gitlab.gnome.org/GNOME/gnome-control-center/pipelines)
+[![Coverage report](https://gitlab.gnome.org/GNOME/gnome-control-center/badges/main/coverage.svg)](https://gnome.pages.gitlab.gnome.org/gnome-control-center/)
+[![License](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://gitlab.gnome.org/GNOME/gnome-control-center/blob/main/COPYING)
 
 GNOME Settings
 ====================
@@ -60,4 +60,4 @@ Note that GNOME Settings Flatpak will only work if you are running
 the latest GNOME version in your host system.
 
 
-[communication-guidelines]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/docs/CONTRIBUTING.md#communication-guidelines
+[communication-guidelines]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/main/docs/CONTRIBUTING.md#communication-guidelines

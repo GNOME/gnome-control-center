@@ -247,7 +247,7 @@ coverage:
     BUILD_OPTS: "-Db_coverage=true"
     coverage: '/^Lines:.\d+.\d+.(\d+\.\d+\%)/'
   only:
-    - master@GNOME/gnome-control-center
+    - main@GNOME/gnome-control-center
 
   script:
     - *environment_information
@@ -287,7 +287,7 @@ pages:
     paths:
       - public
   only:
-    - master@GNOME/gnome-control-center
+    - main@GNOME/gnome-control-center
 
   except:
     variables:
@@ -301,7 +301,7 @@ pages:
 ##
 flatpak:
   stage: manual
-  image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:master
+  image: registry.gitlab.gnome.org/gnome/gnome-runtime-images/gnome:main
   artifacts:
     name: package
     paths:
@@ -353,7 +353,7 @@ flatpak:
   except:
     - tags
     - gnome-3-.*
-    - master@GNOME/gnome-control-center
+    - main@GNOME/gnome-control-center
 
 
 # Runs the sanitizers [address, thread, undefined, and memory].

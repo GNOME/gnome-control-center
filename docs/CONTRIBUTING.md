@@ -209,4 +209,4 @@ available at [http://contributor-covenant.org/version/1/4][version]
 
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
-[maintainers]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/master/docs/MAINTAINERS.md
+[maintainers]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/main/docs/MAINTAINERS.md
