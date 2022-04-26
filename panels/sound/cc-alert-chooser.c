@@ -29,7 +29,6 @@ struct _CcAlertChooser
 {
   GtkBox         parent_instance;
 
-  GtkToggleButton *bark_button;
   GtkToggleButton *drip_button;
   GtkToggleButton *glass_button;
   GtkToggleButton *sonar_button;
@@ -196,9 +195,7 @@ static void
 clicked_cb (CcAlertChooser *self,
             GtkToggleButton  *button)
 {
-  if (button == self->bark_button)
-    select_sound (self, "bark");
-  else if (button == self->drip_button)
+  if (button == self->drip_button)
     select_sound (self, "drip");
   else if (button == self->glass_button)
     select_sound (self, "glass");
@@ -206,8 +203,6 @@ clicked_cb (CcAlertChooser *self,
     select_sound (self, "sonar");
 
   set_button (self, button, TRUE);
-  if (button != self->bark_button)
-    set_button (self, self->bark_button, FALSE);
   if (button != self->drip_button)
     set_button (self, self->drip_button, FALSE);
   if (button != self->glass_button)
@@ -237,7 +232,6 @@ cc_alert_chooser_class_init (CcAlertChooserClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, bark_button);
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, drip_button);
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, glass_button);
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, sonar_button);
@@ -262,9 +256,16 @@ cc_alert_chooser_init (CcAlertChooser *self)
   self->sound_settings = g_settings_new (KEY_SOUNDS_SCHEMA);
 
   alert_name = get_alert_name ();
+
+  /* If user has selected the old dog bark theme, migrate them to drip. */
   if (g_strcmp0 (alert_name, "bark") == 0)
-    set_button (self, self->bark_button, TRUE);
-  else if (g_strcmp0 (alert_name, "drip") == 0)
+    {
+      set_custom_theme (self, "drip");
+      g_free (alert_name);
+      alert_name = g_strdup ("drip");
+    }
+
+  if (g_strcmp0 (alert_name, "drip") == 0)
     set_button (self, self->drip_button, TRUE);
   else if (g_strcmp0 (alert_name, "glass") == 0)
     set_button (self, self->glass_button, TRUE);
