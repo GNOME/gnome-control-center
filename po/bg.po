@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-04-07 11:50+0000\n"
-"PO-Revision-Date: 2022-04-09 09:59+0200\n"
+"POT-Creation-Date: 2022-04-27 09:19+0000\n"
+"PO-Revision-Date: 2022-04-28 14:18+0200\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -357,7 +357,7 @@ msgstr "Избор на изображение"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:526 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-avatar-chooser.c:167
@@ -375,7 +375,7 @@ msgstr "_Отказ"
 #: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:222
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:524
+#: panels/sharing/cc-sharing-panel.c:527
 #: panels/user-accounts/cc-avatar-chooser.c:168
 msgid "_Open"
 msgstr "_Отваряне"
@@ -4456,12 +4456,12 @@ msgstr "Добавяне на регистрация в сайт"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:426
+#: panels/online-accounts/gnome-control-center-goa-helper.c:428
 #, c-format
 msgid "%s Account"
 msgstr "Регистрация в „%s“"
 
-#: panels/online-accounts/gnome-control-center-goa-helper.c:429
+#: panels/online-accounts/gnome-control-center-goa-helper.c:431
 msgid "Remove Account"
 msgstr "Премахване на регистрация"
 
@@ -5571,7 +5571,9 @@ msgstr ""
 msgid "Formats"
 msgstr "Формати"
 
-#: panels/region/cc-format-chooser.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/region/cc-format-chooser.ui:37
+#: panels/wacom/cc-wacom-stylus-page.ui:136
+#: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Назад"
 
@@ -5912,32 +5914,32 @@ msgstr "Не са избрани мрежи за споделяне"
 msgid "Networks"
 msgstr "Мрежи"
 
-#: panels/sharing/cc-sharing-panel.c:367
+#: panels/sharing/cc-sharing-panel.c:370
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Включена"
 
-#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
+#: panels/sharing/cc-sharing-panel.c:372 panels/sharing/cc-sharing-panel.c:399
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Изключена"
 
-#: panels/sharing/cc-sharing-panel.c:399
+#: panels/sharing/cc-sharing-panel.c:402
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Включена"
 
-#: panels/sharing/cc-sharing-panel.c:402
+#: panels/sharing/cc-sharing-panel.c:405
 msgctxt "service is active"
 msgid "Active"
 msgstr "Активна"
 
-#: panels/sharing/cc-sharing-panel.c:520
+#: panels/sharing/cc-sharing-panel.c:523
 msgid "Choose a Folder"
 msgstr "Избор на папка"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:748
+#: panels/sharing/cc-sharing-panel.c:751
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5947,7 +5949,7 @@ msgstr ""
 "други потребители през текущата мрежа чрез следния адрес: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:754
+#: panels/sharing/cc-sharing-panel.c:757
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -6053,11 +6055,11 @@ msgstr "Потребителско име"
 msgid "Verify Encryption"
 msgstr "Криптографска проверка"
 
-#: panels/sharing/cc-sharing-panel.ui:430
+#: panels/sharing/cc-sharing-panel.ui:434
 msgid "Encryption Fingerprint"
 msgstr "Криптографски отпечатък"
 
-#: panels/sharing/cc-sharing-panel.ui:431
+#: panels/sharing/cc-sharing-panel.ui:435
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
@@ -6065,15 +6067,15 @@ msgstr ""
 "Криптографският отпечатък се вижда в клиентите при свързване. Той трябва да "
 "съвпада"
 
-#: panels/sharing/cc-sharing-panel.ui:463
+#: panels/sharing/cc-sharing-panel.ui:467
 msgid "Media Sharing"
 msgstr "Споделяне на музика"
 
-#: panels/sharing/cc-sharing-panel.ui:485
+#: panels/sharing/cc-sharing-panel.ui:489
 msgid "Share music, photos and videos over the network."
 msgstr "Споделяне на музика, снимки и видео по мрежата."
 
-#: panels/sharing/cc-sharing-panel.ui:498
+#: panels/sharing/cc-sharing-panel.ui:502
 msgid "Folders"
 msgstr "Папки"
 
@@ -7121,7 +7123,7 @@ msgid "Failed to add account"
 msgstr "Неуспешно добавяне на регистрация"
 
 #: panels/user-accounts/cc-add-user-dialog.c:679
-#: panels/user-accounts/cc-password-dialog.c:258
+#: panels/user-accounts/cc-password-dialog.c:260
 msgid "The passwords do not match."
 msgstr "Паролите не съвпадат."
 
@@ -8086,6 +8088,20 @@ msgstr "Свържете или включете таблета си Wacom."
 msgid "Tip Pressure Feel"
 msgstr "Усещане на натиска на писеца"
 
+#: panels/wacom/cc-wacom-stylus-page.ui:21
+#: panels/wacom/cc-wacom-stylus-page.ui:82
+msgid "Soft"
+msgstr "Мек"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:35
+msgid "Stylus tip pressure"
+msgstr "Стандартен натиск на писеца"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:41
+#: panels/wacom/cc-wacom-stylus-page.ui:102
+msgid "Firm"
+msgstr "Твърд"
+
 #: panels/wacom/cc-wacom-stylus-page.ui:54
 msgctxt "display setting"
 msgid "Button 1"
@@ -8104,6 +8120,26 @@ msgstr "Бутон 3"
 #: panels/wacom/cc-wacom-stylus-page.ui:77
 msgid "Eraser Pressure Feel"
 msgstr "Усещане на натиска на гумата"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:96
+msgid "Eraser pressure"
+msgstr "Натиск на гумата"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:133
+msgid "Default"
+msgstr "Стандартен"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:134
+msgid "Middle Mouse Button Click"
+msgstr "Натискане на средния бутон на мишката"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:135
+msgid "Right Mouse Button Click"
+msgstr "Натискане на втория бутон на мишката"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:137
+msgid "Forward"
+msgstr "Напред"
 
 #: panels/wacom/cc-wacom-tool.c:321
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
