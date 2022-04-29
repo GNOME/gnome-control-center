@@ -161,6 +161,7 @@
               <object class="GtkLabel" id="ipv4_heading_label">
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">IP Address</property>
+                <property name="mnemonic_widget">ipv4_label</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">4</property>
@@ -174,6 +175,7 @@
               <object class="GtkLabel" id="ipv6_heading_label">
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">IPv6 Address</property>
+                <property name="mnemonic_label">ipv6_label</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">5</property>
@@ -187,6 +189,7 @@
               <object class="GtkLabel" id="route_heading_label">
                 <property name="xalign">1</property>
                 <property name="label" translatable="yes">Default Route</property>
+                <property name="mnemonic_label">route_label</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">6</property>
@@ -201,6 +204,7 @@
                 <property name="xalign">1</property>
                 <property name="yalign">0</property>
                 <property name="label" translatable="yes">DNS</property>
+                <property name="mnemonic_widget">dns4_label</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">7</property>
@@ -215,6 +219,7 @@
                 <property name="xalign">1</property>
                 <property name="yalign">0</property>
                 <property name="label" translatable="yes">DNS</property>
+                <property name="mnemonic_widget">dns6_label</property>
                 <layout>
                   <property name="column">0</property>
                   <property name="row">8</property>
@@ -301,6 +306,9 @@
                   <object class="GtkSwitch" id="device_off_switch">
                     <property name="halign">end</property>
                     <property name="valign">center</property>
+                    <accessibility>
+                      <property name="label" translatable="yes">Active</property>
+                    </accessibility>
                     <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceMobile" swapped="yes"/>
                   </object>
                 </child>

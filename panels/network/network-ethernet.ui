@@ -6,6 +6,9 @@
     <property name="header-suffix">
       <object class="GtkButton">
         <property name="icon_name">list-add-symbolic</property>
+        <accessibility>
+          <property name="label" translatable="Yes">Add Ethernet connection</property>
+        </accessibility>
         <signal name="clicked" handler="add_profile_button_clicked_cb" object="NetDeviceEthernet" swapped="yes"/>
         <style>
           <class name="flat" />
@@ -38,6 +41,9 @@
                 <child>
                   <object class="GtkSwitch" id="device_off_switch">
                     <property name="valign">center</property>
+                    <accessibility>
+                      <property name="label" translatable="yes">Active</property>
+                    </accessibility>
                     <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceEthernet" swapped="yes"/>
                   </object>
                 </child>

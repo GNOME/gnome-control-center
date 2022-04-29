@@ -129,7 +129,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="address_prefix_label">
                                 <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Prefix</property>
                                 <style>
@@ -141,7 +141,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="address_gateway_label">
                                 <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Gateway</property>
                                 <style>
@@ -197,10 +197,15 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkEntry" id="dns_entry" />
+                      <object class="GtkEntry" id="dns_entry">
+                                              <accessibility>
+                          <property name="label" translatable="yes">DNS server address(es)</property>
+                          <relation name="described-by">dns_multiple_help</relation>
+                        </accessibility>
+                      </object>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="dns_multiple_help">
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Separate IP addresses with commas</property>
                         <style>
@@ -274,7 +279,7 @@
                               </object>
                             </child>
                             <child>
-                              <object class="GtkLabel">
+                              <object class="GtkLabel" id="routes_gateway_label">
                                 <property name="hexpand">True</property>
                                 <property name="label" translatable="yes">Gateway</property>
                                 <style>
