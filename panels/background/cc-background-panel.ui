@@ -28,6 +28,9 @@
                         <property name="hexpand">True</property>
                         <child>
                           <object class="GtkToggleButton" id="light_toggle">
+                            <accessibility>
+                              <relation name="labelled-by">light_label</relation>
+                            </accessibility>
                             <signal name="notify::active" handler="on_light_dark_toggle_active_cb" swapped="true"/>
                             <child>
                               <object class="CcBackgroundPreview" id="light_preview"/>
@@ -42,7 +45,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="light_label">
                             <property name="label" translatable="yes">Light</property>
                             <layout>
                               <property name="column">0</property>
@@ -53,6 +56,9 @@
                         <child>
                           <object class="GtkToggleButton" id="dark_toggle">
                             <property name="group">light_toggle</property>
+                            <accessibility>
+                              <relation name="labelled-by">dark_label</relation>
+                            </accessibility>
                             <signal name="notify::active" handler="on_light_dark_toggle_active_cb" swapped="true"/>
                             <child>
                               <object class="CcBackgroundPreview" id="dark_preview">
@@ -69,7 +75,7 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkLabel">
+                          <object class="GtkLabel" id="dark_label">
                             <property name="label" translatable="yes">Dark</property>
                             <layout>
                               <property name="column">1</property>
