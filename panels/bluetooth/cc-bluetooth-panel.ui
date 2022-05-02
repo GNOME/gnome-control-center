@@ -7,6 +7,9 @@
         <child>
           <object class="GtkSwitch" id="enable_switch">
             <property name="valign">center</property>
+            <accessibility>
+              <property name="label" translatable="yes">Enable</property>
+            </accessibility>
             <signal name="state-set" handler="enable_switch_state_set_cb" object="CcBluetoothPanel" swapped="yes"/>
           </object>
         </child>
