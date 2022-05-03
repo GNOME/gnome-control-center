@@ -155,7 +155,7 @@ ce_page_8021x_security_dispose (GObject *object)
 	CEPage8021xSecurity *self = CE_PAGE_8021X_SECURITY (object);
 
         g_clear_object (&self->connection);
-        g_clear_object (&self->security);
+        g_clear_pointer ((GtkWidget **) &self->security, gtk_widget_unparent);
         g_clear_object (&self->group);
 
 	G_OBJECT_CLASS (ce_page_8021x_security_parent_class)->dispose (object);
