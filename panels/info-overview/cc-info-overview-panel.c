@@ -79,8 +79,6 @@ typedef struct
 {
   char *major;
   char *minor;
-  char *distributor;
-  char *date;
   char **current;
 } VersionData;
 
@@ -89,8 +87,6 @@ version_data_free (VersionData *data)
 {
   g_free (data->major);
   g_free (data->minor);
-  g_free (data->distributor);
-  g_free (data->date);
   g_free (data);
 }
 
@@ -111,10 +107,6 @@ version_start_element_handler (GMarkupParseContext      *ctx,
     data->current = &data->major;
   else if (g_str_equal (element_name, "minor"))
     data->current = &data->minor;
-  else if (g_str_equal (element_name, "distributor"))
-    data->current = &data->distributor;
-  else if (g_str_equal (element_name, "date"))
-    data->current = &data->date;
   else
     data->current = NULL;
 }
@@ -148,9 +140,7 @@ version_text_handler (GMarkupParseContext *ctx,
 }
 
 static gboolean
-load_gnome_version (char **version,
-                    char **distributor,
-                    char **date)
+load_gnome_version (char **version)
 {
   GMarkupParser version_parser = {
     version_start_element_handler,
@@ -182,10 +172,6 @@ load_gnome_version (char **version,
     {
       if (version != NULL)
         *version = g_strdup_printf ("%s.%s", data->major, data->minor);
-      if (distributor != NULL)
-        *distributor = g_strdup (data->distributor);
-      if (date != NULL)
-        *date = g_strdup (data->date);
 
       return TRUE;
     }
@@ -771,7 +757,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   g_autofree char *os_name_text = NULL;
   g_autofree gchar *graphics_hardware_string = NULL;
 
-  if (load_gnome_version (&gnome_version, NULL, NULL))
+  if (load_gnome_version (&gnome_version))
     cc_list_row_set_secondary_label (self->gnome_version_row, gnome_version);
 
   cc_list_row_set_secondary_label (self->windowing_system_row, get_windowing_system ());
