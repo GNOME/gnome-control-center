@@ -74,6 +74,9 @@
                             <property name="icon-name">go-previous-symbolic</property>
                             <property name="action-name">window.navigate</property>
                             <property name="action-target">0</property> <!-- 0: ADW_NAVIGATION_DIRECTION_BACK -->
+                            <accessibility>
+                              <property name="label" translatable="yes">Back</property>
+                            </accessibility>
                           </object>
                         </child>
                         <property name="title-widget">
@@ -215,6 +218,9 @@
                         <child type="start">
                           <object class="GtkButton">
                             <property name="icon-name">go-previous-symbolic</property>
+                            <accessibility>
+                              <property name="label" translatable="yes">Back</property>
+                            </accessibility>
                             <signal name="clicked" handler="on_back_button_clicked_cb" object="CcDisplayPanel" swapped="no" />
                           </object>
                         </child>
@@ -251,6 +257,9 @@
                         <child type="start">
                           <object class="GtkButton">
                             <property name="icon-name">go-previous-symbolic</property>
+                            <accessibility>
+                              <property name="label" translatable="yes">Back</property>
+                            </accessibility>
                             <signal name="clicked" handler="on_back_button_clicked_cb" object="CcDisplayPanel" swapped="no" />
                           </object>
                         </child>

@@ -80,6 +80,9 @@
                     <child>
                       <object class="GtkSwitch" id="night_light_toggle_switch">
                         <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Enable</property>
+                        </accessibility>
                       </object>
                     </child>
                   </object>
@@ -87,7 +90,7 @@
 
                 <!-- Schedule -->
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwActionRow" id="schedule_row">
                     <property name="title" translatable="yes">Schedule</property>
                     <property name="sensitive" bind-source="night_light_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
 
@@ -99,6 +102,9 @@
                           <item translatable="yes" id="automatic">Sunset to Sunrise</item>
                           <item translatable="yes" id="manual">Manual Schedule</item>
                         </items>
+                        <accessibility>
+                          <relation name="labeled-by">schedule_row</relation>
+                        </accessibility>
                       </object>
                     </child>
                   </object>
@@ -317,6 +323,7 @@
                             <property name="ellipsize">none</property>
                             <property name="lines">0</property>
                             <property name="xalign">0.0</property>
+                            <property name="mnemonic_widget">scale_color_temperature</property>
                             <style>
                               <class name="title"/>
                             </style>
