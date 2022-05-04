@@ -19,6 +19,9 @@
               <object class="GtkSwitch" id="enabled_switch">
                 <property name="halign">end</property>
                 <property name="valign">center</property>
+                <accessibility>
+                  <property name="label" translatable="yes">Enabled</property>
+                </accessibility>
                 <signal name="notify::active" handler="on_enabled_switch_active_changed_cb" swapped="no"/>
               </object>
             </child>
