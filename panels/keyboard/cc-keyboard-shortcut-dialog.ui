@@ -59,6 +59,9 @@
                 <property name="margin-top">12</property>
                 <property name="width_chars">30</property>
                 <property name="halign">center</property>
+                <accessibility>
+                  <property name="label" translatable="yes">Search</property>
+                </accessibility>
                 <signal name="notify::text" handler="search_entry_cb" object="CcKeyboardShortcutDialog" swapped="yes" />
               </object>
             </child>
@@ -82,6 +85,9 @@
                         <property name="margin-bottom">12</property>
                         <property name="margin-start">12</property>
                         <property name="margin-end">12</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Section</property>
+                        </accessibility>
                         <signal name="row-activated" handler="section_row_activated" object="CcKeyboardShortcutDialog" swapped="no" />
                         <style>
                           <class name="boxed-list" />
@@ -101,12 +107,18 @@
                     <child>
                       <object class="GtkListBox" id="shortcut_listbox">
                         <property name="selection-mode">none</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Shortcuts</property>
+                        </accessibility>
                         <style>
                           <class name="boxed-list" />
                         </style>
                         <signal name="row-activated" handler="shortcut_row_activated" object="CcKeyboardShortcutDialog" swapped="no" />
                         <child>
                           <object class="GtkListBoxRow" id="custom_shortcut_add_row">
+                             <accessibility>
+                              <property name="label" translatable="yes">Add a shortcut</property>
+                            </accessibility>
                              <child>
                               <object class="GtkImage">
                                 <property name="hexpand">True</property>
