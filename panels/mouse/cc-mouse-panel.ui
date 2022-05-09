@@ -83,6 +83,9 @@
                     <child>
                       <object class="GtkSwitch" id="mouse_natural_scrolling_switch">
                         <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Natural Scrolling</property>
+                        </accessibility>
                       </object>
                     </child>
                   </object>
@@ -99,6 +102,9 @@
                     <child>
                       <object class="GtkSwitch" id="touchpad_toggle_switch">
                         <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Touchpad</property>
+                        </accessibility>
                       </object>
                     </child>
                   </object>
@@ -110,6 +116,9 @@
                     <child>
                       <object class="GtkSwitch" id="touchpad_natural_scrolling_switch">
                         <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Natural Scrolling</property>
+                        </accessibility>
                       </object>
                     </child>
                   </object>
@@ -137,6 +146,9 @@
                     <child>
                       <object class="GtkSwitch" id="tap_to_click_switch">
                         <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Tap to click</property>
+                        </accessibility>
                       </object>
                     </child>
                   </object>
@@ -148,6 +160,9 @@
                     <child>
                       <object class="GtkSwitch" id="two_finger_scrolling_switch">
                         <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Two-finger Scrolling</property>
+                        </accessibility>
                         <signal name="state-set" handler="two_finger_scrolling_changed_event" object="CcMousePanel" swapped="yes"/>
                       </object>
                     </child>
@@ -160,6 +175,9 @@
                     <child>
                       <object class="GtkSwitch" id="edge_scrolling_switch">
                         <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Edge Scrolling</property>
+                        </accessibility>
                         <signal name="state-set" handler="edge_scrolling_changed_event" object="CcMousePanel" swapped="yes"/>
                       </object>
                     </child>
