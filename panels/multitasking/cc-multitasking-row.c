@@ -420,6 +420,11 @@ cc_multitasking_row_set_activatable_widget (CcMultitaskingRow *self,
                        activatable_widget_weak_notify,
                        self);
     gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (self), TRUE);
+    gtk_accessible_update_relation (GTK_ACCESSIBLE (self->activatable_widget),
+                                GTK_ACCESSIBLE_RELATION_LABELLED_BY, self->title, NULL,
+                                GTK_ACCESSIBLE_RELATION_DESCRIBED_BY, self->subtitle, NULL,
+                                -1);
+
   }
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_ACTIVATABLE_WIDGET]);
