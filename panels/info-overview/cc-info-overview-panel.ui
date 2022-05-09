@@ -166,7 +166,7 @@
         <property name="margin-bottom">18</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkLabel">
+          <object class="GtkLabel" id="device_name_description">
             <property name="margin-bottom">18</property>
             <property name="wrap">True</property>
             <property name="max-width-chars">35</property>
@@ -176,6 +176,10 @@
         </child>
         <child>
           <object class="GtkEntry" id="device_name_entry">
+            <accessibility>
+            <property name="label" translatable="yes">Device name</property>
+            <relation name="described-by">device_name_description</relation>
+            </accessibility>
             <signal name="changed" handler="on_device_name_entry_changed" swapped="yes"/>
             <signal name="activate" handler="on_device_name_entry_activated_cb" swapped="yes" />
           </object>
