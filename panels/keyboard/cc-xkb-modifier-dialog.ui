@@ -39,6 +39,9 @@
                     <child>
                       <object class="GtkSwitch" id="enabled_switch">
                         <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Rnabled</property>
+                        </accessibility>
                         <signal name="state-set" handler="enable_switch_changed_cb" object="CcXkbModifierDialog" swapped="no"/>
                       </object>
                     </child>

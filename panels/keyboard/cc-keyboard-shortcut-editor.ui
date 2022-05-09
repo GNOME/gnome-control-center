@@ -122,6 +122,9 @@
                       <object class="GtkButton" id="reset_button">
                         <property name="icon-name">edit-clear-symbolic</property>
                         <property name="halign">end</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Reset</property>
+                        </accessibility>
                         <signal name="clicked" handler="reset_item_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
                         <style>
                           <class name="flat" />
@@ -152,6 +155,7 @@
                   <object class="GtkLabel">
                     <property name="label" translatable="yes">Name</property>
                     <property name="xalign">1</property>
+                    <property name="mnemonic_widget">name_entry</property>
                     <layout>
                       <property name="column">0</property>
                       <property name="row">0</property>
@@ -162,6 +166,7 @@
                   <object class="GtkLabel">
                     <property name="label" translatable="yes">Command</property>
                     <property name="xalign">1</property>
+                    <property name="mnemonic_widget">command_entry</property>
                     <layout>
                       <property name="column">0</property>
                       <property name="row">1</property>
@@ -220,6 +225,9 @@
                     <property name="halign">end</property>
                     <property name="icon-name">edit-clear-symbolic</property>
                     <signal name="clicked" handler="reset_custom_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+                    <accessibility>
+                      <property name="label" translatable="yes">Reset</property>
+                    </accessibility>
                     <layout>
                       <property name="column">2</property>
                       <property name="row">2</property>
