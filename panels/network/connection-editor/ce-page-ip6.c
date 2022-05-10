@@ -41,9 +41,9 @@ struct _CEPageIP6
         AdwBin            parent;
 
         GtkBox            *address_box;
-        GtkLabel         *address_address_label;
-        GtkLabel         *address_prefix_label;
-        GtkLabel         *address_gateway_label;
+        GtkLabel          *address_address_label;
+        GtkLabel          *address_prefix_label;
+        GtkLabel          *address_gateway_label;
         GtkSizeGroup      *address_sizegroup;
         GtkSwitch         *auto_dns_switch;
         GtkSwitch         *auto_routes_switch;
