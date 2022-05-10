@@ -38,7 +38,8 @@ sources += gnome.compile_resources(
 
 deps = common_deps + [
   gnome_settings_dep,
-  upower_glib_dep
+  upower_glib_dep,
+  gudev_dep,
 ]
 
 panels_libs += static_library(

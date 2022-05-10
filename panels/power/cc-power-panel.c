@@ -25,6 +25,7 @@
 #include <glib/gi18n.h>
 #include <gnome-settings-daemon/gsd-enums.h>
 #include <gio/gdesktopappinfo.h>
+#include <gudev/gudev.h>
 
 #include "shell/cc-object-storage.h"
 #include "cc-battery-row.h"
@@ -77,6 +78,7 @@ struct _CcPowerPanel
   GPtrArray     *devices;
   gboolean       has_batteries;
   char          *chassis_type;
+  char          *logind_seat;
 
   GDBusProxy    *iio_proxy;
   guint          iio_proxy_watch_id;
@@ -145,6 +147,51 @@ get_chassis_type (GCancellable *cancellable)
   return g_variant_dup_string (inner, NULL);
 }
 
+static char *
+get_logind_seat (GCancellable *cancellable)
+{
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GVariant) inner = NULL;
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM,
+                               cancellable,
+                               &error);
+  if (connection == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_warning ("system bus not available: %s", error->message);
+
+      return NULL;
+    }
+
+  variant = g_dbus_connection_call_sync (connection,
+                                         "org.freedesktop.login1",
+                                         "/org/freedesktop/login1/seat/auto",
+                                         "org.freedesktop.DBus.Properties",
+                                         "Get",
+                                         g_variant_new ("(ss)",
+                                                        "org.freedesktop.login1.Seat",
+                                                        "Id"),
+                                         NULL,
+                                         G_DBUS_CALL_FLAGS_NONE,
+                                         -1,
+                                         cancellable,
+                                         &error);
+
+  if (variant == NULL)
+    {
+      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        g_debug ("Failed to get seat name: %s", error->message);
+
+      return NULL;
+    }
+
+  g_variant_get (variant, "(v)", &inner);
+  return g_variant_dup_string (inner, NULL);
+}
+
 static void
 load_custom_css (CcPowerPanel *self,
                  const char   *path)
@@ -170,10 +217,95 @@ add_battery (CcPowerPanel *panel, UpDevice *device, gboolean primary)
   gtk_widget_set_visible (GTK_WIDGET (panel->battery_section), TRUE);
 }
 
+static char *
+get_seat_from_device (GUdevDevice *device)
+{
+  const char *const *tags;
+  GUdevDevice *parent;
+
+  tags = g_udev_device_get_tags (device);
+
+  if (g_strv_contains (tags, "seat"))
+    {
+      int i;
+
+      for (i = 0; tags[i] != NULL; i++)
+        {
+          if (g_str_has_prefix (tags[i], "seat") && strlen (tags[i]) > 4)
+            return g_strdup (tags[i]);
+        }
+
+      return g_strdup ("seat0");
+    }
+
+  parent = g_udev_device_get_parent (device);
+
+  if (parent != NULL)
+    {
+      char *seat;
+
+      seat = get_seat_from_device (parent);
+      g_object_unref (parent);
+
+      return seat;
+    }
+
+  return NULL;
+}
+
+static gboolean
+is_device_available_to_seat (CcPowerPanel *self, UpDevice *device)
+{
+  gboolean available;
+  char *native_path;
+  GUdevClient *client;
+  GUdevDevice *udev_device;
+
+  available = TRUE;
+  native_path = NULL;
+
+  if (self->logind_seat == NULL || *self->logind_seat == '\0')
+    return TRUE;
+
+  g_object_get (device, "native-path", &native_path, NULL);
+
+  client = g_udev_client_new (NULL);
+  udev_device = g_udev_client_query_by_sysfs_path (client, native_path);
+
+  /* Native path for power_supply devices is name not sysfs path. */
+  if (udev_device == NULL)
+    udev_device = g_udev_client_query_by_subsystem_and_name (client, "power_supply", native_path);
+
+  g_free (native_path);
+
+  if (udev_device != NULL)
+    {
+      char *seat;
+
+      seat = get_seat_from_device (udev_device);
+      g_object_unref (udev_device);
+
+      /* NULL/empty seat means that device is available to all seats */
+      if (seat != NULL && *seat != '\0' && g_strcmp0 (seat, self->logind_seat) != 0)
+        available = FALSE;
+
+      g_free (seat);
+    }
+
+  g_object_unref (client);
+
+  return available;
+}
+
 static void
 add_device (CcPowerPanel *self, UpDevice *device)
 {
-  CcBatteryRow *row = cc_battery_row_new (device, FALSE);
+  CcBatteryRow *row;
+
+  if (!is_device_available_to_seat (self, device))
+    return;
+
+  row = cc_battery_row_new (device, FALSE);
   cc_battery_row_set_level_sizegroup (row, self->level_sizegroup);
   cc_battery_row_set_row_sizegroup (row, self->row_sizegroup);
 
@@ -1416,6 +1548,7 @@ cc_power_panel_dispose (GObject *object)
   g_signal_handlers_disconnect_by_func (self->power_button_row, power_button_row_changed_cb, self);
 
   g_clear_pointer (&self->chassis_type, g_free);
+  g_clear_pointer (&self->logind_seat, g_free);
   g_clear_object (&self->gsd_settings);
   g_clear_object (&self->session_settings);
   g_clear_object (&self->interface_settings);
@@ -1497,6 +1630,7 @@ cc_power_panel_init (CcPowerPanel *self)
   load_custom_css (self, "/org/gnome/control-center/power/power-profiles.css");
 
   self->chassis_type = get_chassis_type (cc_panel_get_cancellable (CC_PANEL (self)));
+  self->logind_seat = get_logind_seat (cc_panel_get_cancellable (CC_PANEL (self)));
 
   self->up_client = up_client_new ();
 
