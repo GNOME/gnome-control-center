@@ -49,7 +49,7 @@ extern GType cc_network_panel_get_type (void);
 extern GType cc_wifi_panel_get_type (void);
 #endif /* BUILD_NETWORK */
 extern GType cc_notifications_panel_get_type (void);
-extern GType cc_goa_panel_get_type (void);
+extern GType cc_online_accounts_panel_get_type (void);
 extern GType cc_power_panel_get_type (void);
 extern GType cc_printers_panel_get_type (void);
 extern GType cc_region_panel_get_type (void);
@@ -120,7 +120,7 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("wifi",             cc_wifi_panel_get_type,                 cc_wifi_panel_static_init_func),
 #endif
   PANEL_TYPE("notifications",    cc_notifications_panel_get_type,        NULL),
-  PANEL_TYPE("online-accounts",  cc_goa_panel_get_type,                  NULL),
+  PANEL_TYPE("online-accounts",  cc_online_accounts_panel_get_type,      NULL),
   PANEL_TYPE("power",            cc_power_panel_get_type,                NULL),
   PANEL_TYPE("printers",         cc_printers_panel_get_type,             NULL),
   PANEL_TYPE("region",           cc_region_panel_get_type,               NULL),

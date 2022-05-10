@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcGoaPanel" parent="CcPanel">
+  <template class="CcOnlineAccountsPanel" parent="CcPanel">
     <child type="content">
       <object class="GtkOverlay">
         <child type="overlay">
@@ -21,7 +21,7 @@
                     <child>
                       <object class="GtkButton" id="undo_button">
                         <property name="label" translatable="yes">Undo</property>
-                        <signal name="clicked" handler="on_undo_button_clicked_cb" object="CcGoaPanel" swapped="no" />
+                        <signal name="clicked" handler="on_undo_button_clicked_cb" object="CcOnlineAccountsPanel" swapped="no" />
                       </object>
                     </child>
                     <child>
@@ -30,7 +30,7 @@
                         <accessibility>
                           <property name="label" translatable="yes">Close the notification</property>
                         </accessibility>
-                        <signal name="clicked" handler="on_notification_closed_cb" object="CcGoaPanel" swapped="no" />
+                        <signal name="clicked" handler="on_notification_closed_cb" object="CcOnlineAccountsPanel" swapped="no" />
                         <style>
                           <class name="flat" />
                         </style>
@@ -79,7 +79,7 @@
                   <object class="GtkListBox" id="accounts_listbox">
                     <property name="hexpand">True</property>
                     <property name="selection_mode">none</property>
-                    <signal name="row-activated" handler="on_accounts_listbox_row_activated" object="CcGoaPanel" swapped="yes" />
+                    <signal name="row-activated" handler="on_accounts_listbox_row_activated" object="CcOnlineAccountsPanel" swapped="yes" />
                     <style>
                       <class name="boxed-list" />
                     </style>
@@ -97,7 +97,7 @@
                 <child>
                   <object class="GtkListBox" id="providers_listbox">
                     <property name="selection_mode">none</property>
-                    <signal name="row-activated" handler="on_provider_row_activated_cb" object="CcGoaPanel" swapped="yes" />
+                    <signal name="row-activated" handler="on_provider_row_activated_cb" object="CcOnlineAccountsPanel" swapped="yes" />
                     <style>
                       <class name="boxed-list" />
                     </style>
