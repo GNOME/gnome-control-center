@@ -635,7 +635,7 @@ command_add (CcOnlineAccountsPanel *self,
              GVariant              *parameters)
 {
   const gchar *provider_name = NULL;
-  GVariant *v = NULL;
+  g_autoptr(GVariant) v = NULL;
 
   g_assert (self != NULL);
   g_assert (parameters != NULL);
@@ -649,7 +649,6 @@ command_add (CcOnlineAccountsPanel *self,
         else
           g_warning ("Wrong type for the second argument (provider name) GVariant, expected 's' but got '%s'",
                      (gchar *)g_variant_get_type (v));
-        g_variant_unref (v);
         break;
 
       default:
@@ -785,10 +784,11 @@ on_accounts_listbox_row_activated (CcOnlineAccountsPanel *self,
 }
 
 static void
-on_client_remove_account_finish_cb (GoaAccount            *account,
-                                    GAsyncResult          *res,
-                                    CcOnlineAccountsPanel *self)
+on_client_remove_account_finish_cb (GoaAccount   *account,
+                                    GAsyncResult *res,
+                                    gpointer      user_data)
 {
+  g_autoptr(CcOnlineAccountsPanel) self = CC_ONLINE_ACCOUNTS_PANEL (user_data);
   g_autoptr(GError) error = NULL;
 
   goa_account_call_remove_finish (account, res, &error);
@@ -806,8 +806,6 @@ on_client_remove_account_finish_cb (GoaAccount            *account,
                                                 error->message);
       gtk_window_present (GTK_WINDOW (dialog));
     }
-
-  g_object_unref (self);
 }
 
 static void
@@ -894,7 +892,8 @@ cc_online_accounts_panel_set_property (GObject      *object,
     {
       case PROP_PARAMETERS:
         {
-          GVariant *parameters, *v;
+          GVariant *parameters;
+          g_autoptr(GVariant) v = NULL;
           const gchar *first_arg = NULL;
 
           parameters = g_value_get_variant (value);
@@ -909,7 +908,6 @@ cc_online_accounts_panel_set_property (GObject      *object,
                 else
                   g_warning ("Wrong type for the second argument GVariant, expected 's' but got '%s'",
                              (gchar *)g_variant_get_type (v));
-                g_variant_unref (v);
             }
 
           if (g_strcmp0 (first_arg, "add") == 0)
