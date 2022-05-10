@@ -27,6 +27,9 @@
                     <child>
                       <object class="GtkButton" id="close_notification_button">
                         <property name="icon-name">window-close-symbolic</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Close the notification</property>
+                        </accessibility>
                         <signal name="clicked" handler="on_notification_closed_cb" object="CcGoaPanel" swapped="no" />
                         <style>
                           <class name="flat" />
