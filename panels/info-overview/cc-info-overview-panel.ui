@@ -136,10 +136,16 @@
 
             <!-- Software Updates -->
             <child>
-              <object class="CcListRow" id="software_updates_row">
+              <object class="AdwActionRow" id="software_updates_row">
+                <property name="activatable">True</property>
                 <property name="title" translatable="yes">Software Updates</property>
-                <property name="show-arrow">True</property>
                 <signal name="activated" handler="cc_info_panel_row_activated_cb" swapped="yes"/>
+                <child type="suffix">
+                  <object class="GtkImage">
+                    <property name="valign">center</property>
+                    <property name="icon-name">external-link-symbolic</property>
+                  </object>
+                </child>
               </object>
             </child>
 

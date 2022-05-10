@@ -71,7 +71,7 @@ struct _CcInfoOverviewPanel
   CcListRow       *os_name_row;
   CcListRow       *os_type_row;
   CcListRow       *processor_row;
-  CcListRow       *software_updates_row;
+  AdwActionRow    *software_updates_row;
   CcListRow       *virtualization_row;
   CcListRow       *windowing_system_row;
 };
@@ -868,12 +868,12 @@ open_hostname_edit_dialog (CcInfoOverviewPanel *self)
 
 static void
 cc_info_panel_row_activated_cb (CcInfoOverviewPanel *self,
-                                CcListRow           *row)
+                                AdwActionRow        *row)
 {
   g_assert (CC_IS_INFO_OVERVIEW_PANEL (self));
-  g_assert (CC_IS_LIST_ROW (row));
+  g_assert (ADW_IS_ACTION_ROW (row));
 
-  if (row == self->hostname_row)
+  if (row == ADW_ACTION_ROW (self->hostname_row))
     open_hostname_edit_dialog (self);
   else if (row == self->software_updates_row)
     open_software_update (self);
