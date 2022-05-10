@@ -117,8 +117,8 @@ class GccDBusTestCase(DBusTestCase):
         adapter.UpdateProperties('org.bluez.Adapter1',
                 {'Powered': dbus.Boolean(self.hci0_powered, variant_level=1)})
         self.devices = []
-        self.add_device('hci0', '22:33:44:55:66:77', "Bastien's mouse", True, 0x580, 'input-mouse')
-        self.add_device('hci0', '22:33:44:55:66:78', 'Bloutouf keyboard', True, 0x540, 'input-keyboard')
+        self.add_device('hci0', '22:33:44:55:66:77', "Bastienʼs mouse", True, 0x580, 'input-mouse')
+        self.add_device('hci0', '22:33:44:55:66:78', 'Bloutouf keyboard & keys', True, 0x540, 'input-keyboard')
         self.add_device('hci0', '60:8B:0E:55:66:79', 'iPhoone 19S', True, 0x20C, 'phone')
         # Uncategorised audio device
         self.add_device('hci0', '22:33:44:55:66:79', 'MEGA Speakers', True, 0x200400, 'audio-card')
