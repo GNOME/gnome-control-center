@@ -1038,6 +1038,11 @@ static void
 disable_gnome_remote_desktop_service (CcSharingPanel *self)
 {
   g_autoptr(GError) error = NULL;
+  g_autoptr(GSettings) rdp_settings = NULL;
+
+  rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
+
+  g_settings_set_boolean (rdp_settings, "enable", FALSE);
 
   if (!cc_disable_service (REMOTE_DESKTOP_SERVICE,
                            G_BUS_TYPE_SESSION,
