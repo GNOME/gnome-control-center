@@ -258,6 +258,6 @@ gchar      *canonicalize_device_name (GList         *device_names,
 
 void        shift_string_left (gchar *str);
 
-gboolean    printer_name_is_valid (gchar *str);
+gboolean    printer_name_is_valid (const gchar *str);
 
 G_END_DECLS
