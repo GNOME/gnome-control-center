@@ -833,7 +833,7 @@ static void
 update_header_section (CcApplicationsPanel *self,
                        GAppInfo            *info)
 {
-  g_autoptr(GIcon) icon = NULL;
+  GIcon *icon;
 
   icon = g_app_info_get_icon (info);
   gtk_image_set_from_gicon (self->app_icon_image, icon);
