@@ -405,6 +405,8 @@ set_active_panel_from_id (CcWindow     *self,
    * just above.
    */
   self->old_panel = self->current_panel;
+  if (self->old_panel)
+    cc_panel_deactivate (CC_PANEL (self->old_panel));
 
   gtk_tree_model_get (GTK_TREE_MODEL (self->store),
                       &iter,

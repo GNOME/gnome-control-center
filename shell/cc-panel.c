@@ -423,3 +423,11 @@ cc_panel_set_titlebar (CcPanel   *panel,
   priv = cc_panel_get_instance_private (panel);
   adw_bin_set_child (priv->titlebar_bin, titlebar);
 }
+
+void
+cc_panel_deactivate (CcPanel *panel)
+{
+  CcPanelPrivate *priv = cc_panel_get_instance_private (panel);
+
+  g_cancellable_cancel (priv->cancellable);
+}

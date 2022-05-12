@@ -104,4 +104,6 @@ GtkWidget*    cc_panel_get_titlebar       (CcPanel     *panel);
 void          cc_panel_set_titlebar       (CcPanel     *panel,
                                            GtkWidget   *titlebar);
 
+void          cc_panel_deactivate         (CcPanel     *panel);
+
 G_END_DECLS
