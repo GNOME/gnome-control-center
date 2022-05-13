@@ -248,12 +248,6 @@ remote_desktop_show_encryption_fingerprint (CcSharingPanel *self)
 }
 
 static void
-remote_desktop_hide_encryption_fingerprint (CcSharingPanel *self)
-{
-  gtk_widget_hide (self->remote_desktop_fingerprint_dialog);
-}
-
-static void
 cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
@@ -305,7 +299,6 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_listbox);
 
   gtk_widget_class_bind_template_callback (widget_class, remote_desktop_show_encryption_fingerprint);
-  gtk_widget_class_bind_template_callback (widget_class, remote_desktop_hide_encryption_fingerprint);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
