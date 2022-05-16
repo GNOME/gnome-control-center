@@ -32,8 +32,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-04-07 11:50+0000\n"
-"PO-Revision-Date: 2022-04-16 04:27+0900\n"
+"POT-Creation-Date: 2022-05-12 07:10+0000\n"
+"PO-Revision-Date: 2022-05-16 21:07+0900\n"
 "Last-Translator: Changwoo Ryu <cwryu@debian.org>\n"
 "Language-Team: GNOME Korea <gnome-kr@googlegroups.com>\n"
 "Language: ko\n"
@@ -344,7 +344,6 @@ msgstr "캐시 지우기…"
 msgid "Control various application permissions and settings"
 msgstr "여러가지 프로그램 권한과 설정 조정"
 
-#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in.in:16
 msgid "application;flatpak;permission;setting;"
@@ -371,7 +370,7 @@ msgstr "사진을 고르십시오"
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:526 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-avatar-chooser.c:167
@@ -389,7 +388,7 @@ msgstr "취소(_C)"
 #: panels/background/cc-background-chooser.c:311
 #: panels/network/connection-editor/vpn-helpers.c:222
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:524
+#: panels/sharing/cc-sharing-panel.c:527
 #: panels/user-accounts/cc-avatar-chooser.c:168
 msgid "_Open"
 msgstr "열기(_O)"
@@ -417,19 +416,19 @@ msgstr "현재 배경"
 msgid "Style"
 msgstr "모양새"
 
-#: panels/background/cc-background-panel.ui:45
+#: panels/background/cc-background-panel.ui:46
 msgid "Light"
 msgstr "밝게"
 
-#: panels/background/cc-background-panel.ui:72
+#: panels/background/cc-background-panel.ui:73
 msgid "Dark"
 msgstr "어둡게"
 
-#: panels/background/cc-background-panel.ui:91
+#: panels/background/cc-background-panel.ui:92
 msgid "Background"
 msgstr "배경"
 
-#: panels/background/cc-background-panel.ui:97
+#: panels/background/cc-background-panel.ui:98
 msgid "Add Picture…"
 msgstr "사진 추가…"
 
@@ -527,7 +526,6 @@ msgstr "카메라 접근을 요청한 프로그램이 없습니다"
 msgid "Protect your pictures"
 msgstr "내 사진을 보호합니다"
 
-#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/camera/gnome-camera-panel.desktop.in.in:20
 #: panels/microphone/gnome-microphone-panel.desktop.in.in:20
@@ -1522,7 +1520,6 @@ msgstr "진단"
 msgid "Report your problems"
 msgstr "문제점 보고하기"
 
-#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in.in:20
 #: panels/location/gnome-location-panel.desktop.in.in:20
@@ -2390,7 +2387,6 @@ msgstr "위치 정보를 요청한 프로그램이 없습니다"
 msgid "Protect your location information"
 msgstr "위치 정보를 보호합니다"
 
-#. FIXME
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
 #: panels/lock/cc-lock-panel.c:62
 msgctxt "lock_screen"
@@ -2548,7 +2544,6 @@ msgstr "화면 잠금"
 msgid "Lock your screen"
 msgstr "화면 잠그기"
 
-#. FIXME
 #: panels/microphone/cc-microphone-panel.ui:20
 msgid "Microphone Turned Off"
 msgstr "마이크가 꺼져 있습니다"
@@ -2578,7 +2573,6 @@ msgstr "마이크 접근을 요청한 프로그램이 없습니다"
 msgid "Protect your conversations"
 msgstr "대화를 보호합니다"
 
-#. FIXME
 #: panels/mouse/cc-mouse-panel.ui:9 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test Your _Settings"
 msgstr "설정 검사(_S)"
@@ -4407,12 +4401,12 @@ msgstr "계정 추가"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:426
+#: panels/online-accounts/gnome-control-center-goa-helper.c:428
 #, c-format
 msgid "%s Account"
 msgstr "%s 계정"
 
-#: panels/online-accounts/gnome-control-center-goa-helper.c:429
+#: panels/online-accounts/gnome-control-center-goa-helper.c:431
 msgid "Remove Account"
 msgstr "계정 제거"
 
@@ -5505,7 +5499,9 @@ msgstr ""
 msgid "Formats"
 msgstr "형식"
 
-#: panels/region/cc-format-chooser.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/region/cc-format-chooser.ui:37
+#: panels/wacom/cc-wacom-stylus-page.ui:136
+#: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "뒤로"
 
@@ -5838,32 +5834,32 @@ msgstr "공유에 사용할 네트워크를 선택하지 않았습니다"
 msgid "Networks"
 msgstr "네트워크"
 
-#: panels/sharing/cc-sharing-panel.c:367
+#: panels/sharing/cc-sharing-panel.c:370
 msgctxt "service is enabled"
 msgid "On"
 msgstr "켬"
 
-#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
+#: panels/sharing/cc-sharing-panel.c:372 panels/sharing/cc-sharing-panel.c:399
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "끔"
 
-#: panels/sharing/cc-sharing-panel.c:399
+#: panels/sharing/cc-sharing-panel.c:402
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "사용"
 
-#: panels/sharing/cc-sharing-panel.c:402
+#: panels/sharing/cc-sharing-panel.c:405
 msgctxt "service is active"
 msgid "Active"
 msgstr "동작"
 
-#: panels/sharing/cc-sharing-panel.c:520
+#: panels/sharing/cc-sharing-panel.c:523
 msgid "Choose a Folder"
 msgstr "폴더 선택"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:748
+#: panels/sharing/cc-sharing-panel.c:751
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5873,7 +5869,7 @@ msgstr ""
 "유 폴더를 공유할 수 있습니다: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:754
+#: panels/sharing/cc-sharing-panel.c:757
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5977,25 +5973,25 @@ msgid "Verify Encryption"
 msgstr "암호화 확인"
 
 # 손가락 지문 아님
-#: panels/sharing/cc-sharing-panel.ui:430
+#: panels/sharing/cc-sharing-panel.ui:434
 msgid "Encryption Fingerprint"
 msgstr "암호화 핑거프린트"
 
-#: panels/sharing/cc-sharing-panel.ui:431
+#: panels/sharing/cc-sharing-panel.ui:435
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
 msgstr "암호화 핑거프린트는 클라이언트가 연결할 때 볼 수 있고 동일해야 합니다."
 
-#: panels/sharing/cc-sharing-panel.ui:463
+#: panels/sharing/cc-sharing-panel.ui:467
 msgid "Media Sharing"
 msgstr "미디어 공유"
 
-#: panels/sharing/cc-sharing-panel.ui:485
+#: panels/sharing/cc-sharing-panel.ui:489
 msgid "Share music, photos and videos over the network."
 msgstr "네트워크를 통해 음악, 사진, 영상을 공유합니다."
 
-#: panels/sharing/cc-sharing-panel.ui:498
+#: panels/sharing/cc-sharing-panel.ui:502
 msgid "Folders"
 msgstr "폴더"
 
@@ -7020,7 +7016,6 @@ msgstr "파일 사용 내역 및 휴지통"
 msgid "Don't leave traces"
 msgstr "흔적 남기지 않기"
 
-#. FIXME
 #: panels/user-accounts/cc-add-user-dialog.c:35
 msgid "Should match the web address of your login provider."
 msgstr "로그인을 제공하는 곳의 웹 주소."
@@ -7030,7 +7025,7 @@ msgid "Failed to add account"
 msgstr "계정 추가에 실패했습니다"
 
 #: panels/user-accounts/cc-add-user-dialog.c:679
-#: panels/user-accounts/cc-password-dialog.c:258
+#: panels/user-accounts/cc-password-dialog.c:260
 msgid "The passwords do not match."
 msgstr "암호가 다릅니다."
 
@@ -7988,6 +7983,20 @@ msgstr "와콤 디지타이저를 연결하고 전원을 켜십시오."
 msgid "Tip Pressure Feel"
 msgstr "팁 압력 감도"
 
+#: panels/wacom/cc-wacom-stylus-page.ui:21
+#: panels/wacom/cc-wacom-stylus-page.ui:82
+msgid "Soft"
+msgstr "부드러움"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:35
+msgid "Stylus tip pressure"
+msgstr "스타일러스 팁 압력"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:41
+#: panels/wacom/cc-wacom-stylus-page.ui:102
+msgid "Firm"
+msgstr "단단함"
+
 #: panels/wacom/cc-wacom-stylus-page.ui:54
 msgctxt "display setting"
 msgid "Button 1"
@@ -8006,6 +8015,29 @@ msgstr "단추 3"
 #: panels/wacom/cc-wacom-stylus-page.ui:77
 msgid "Eraser Pressure Feel"
 msgstr "지우개 압력 감도"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:96
+msgid "Eraser pressure"
+msgstr "지우개 압력"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:133
+msgid "Default"
+msgstr "기본값"
+
+# stylus button 눌렀을 때 동작
+#: panels/wacom/cc-wacom-stylus-page.ui:134
+msgid "Middle Mouse Button Click"
+msgstr "가운데 마우스 단추 누르기"
+
+# stylus button 눌렀을 때 동작
+#: panels/wacom/cc-wacom-stylus-page.ui:135
+msgid "Right Mouse Button Click"
+msgstr "오른쪽 마우스 단추 누르기"
+
+# stylus button 눌렀을 때 동작
+#: panels/wacom/cc-wacom-stylus-page.ui:137
+msgid "Forward"
+msgstr "앞으로"
 
 #: panels/wacom/cc-wacom-tool.c:321
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
@@ -8471,7 +8503,6 @@ msgstr "휴대전화 네트워크"
 msgid "Configure Telephony and mobile data connections"
 msgstr "텔레포니 및 휴대전화 데이터 연결 설정"
 
-#. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:16
 msgid "cellular;wwan;telephony;sim;mobile;"
