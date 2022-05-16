@@ -24,6 +24,9 @@
 #include "pp-job-row.h"
 #include "cc-printers-resources.h"
 
+static void
+update_pause_button (PpJobRow *self, gboolean paused);
+
 struct _PpJobRow
 {
   GtkListBoxRow parent;
@@ -46,13 +49,22 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
+update_pause_button (PpJobRow *self, gboolean paused) {
+  gtk_button_set_icon_name (self->pause_button,
+                            paused ? "media-playback-start-symbolic" : "media-playback-pause-symbolic");
+  gtk_accessible_update_property (GTK_ACCESSIBLE (self->pause_button),
+                                  GTK_ACCESSIBLE_PROPERTY_LABEL,
+                                  paused ? _("Resume") : _("Pause"),
+                                  -1);
+}
+
+static void
 pause_cb (PpJobRow *self)
 {
   pp_job_set_hold_until_async (self->job, pp_job_get_state (self->job) == IPP_JOB_HELD ? "no-hold" : "indefinite");
-  gtk_button_set_icon_name (self->pause_button,
-                            pp_job_get_state (self->job) == IPP_JOB_HELD ?
-                                              "media-playback-pause-symbolic" : "media-playback-start-symbolic");
-}
+  update_pause_button (self,
+                       pp_job_get_state (self->job) == IPP_JOB_HELD);
+                                              }
 
 static void
 stop_cb (PpJobRow *self)
@@ -174,9 +186,7 @@ pp_job_row_new (PpJob *job)
   if (status)
     /* Translators: Clicking this button prioritizes printing of this print job */
     gtk_widget_set_tooltip_text (GTK_WIDGET (self->priority_button), _("Move this job to the top of the queue"));
-  gtk_button_set_icon_name (self->pause_button,
-                            pp_job_get_state (self->job) == IPP_JOB_HELD ?
-                                              "media-playback-start-symbolic" : "media-playback-pause-symbolic");
-
+  update_pause_button (self,
+                       pp_job_get_state (self->job) == IPP_JOB_HELD);
   return self;
 }

@@ -60,6 +60,9 @@
                 <property name="child">
                   <object class="GtkButton" id="go_back_button">
                     <property name="halign">start</property>
+                    <accessibility>
+                      <property name="label" translatable="yes">Back</property>
+                    </accessibility>
                     <child>
                       <object class="GtkImage">
                         <property name="icon-name">go-previous-symbolic</property>
@@ -245,6 +248,9 @@
                             <property name="margin_start">40</property>
                             <property name="margin_end">40</property>
                             <property name="hexpand">True</property>
+                            <accessibility>
+                              <property name="label" translatable="yes">Search</property>
+                            </accessibility>
                           </object>
                         </child>
                       </object>
@@ -309,6 +315,7 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="label" translatable="yes">Username</property>
+                        <property name="mnemonic_widget">username_entry</property>
                         <layout>
                           <property name="column">0</property>
                           <property name="row">2</property>
@@ -329,6 +336,7 @@
                     <child>
                       <object class="GtkLabel">
                         <property name="label" translatable="yes">Password</property>
+                        <property name="mnemonic_widget">password_entry</property>
                         <layout>
                           <property name="column">0</property>
                           <property name="row">3</property>
