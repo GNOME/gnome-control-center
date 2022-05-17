@@ -32,6 +32,7 @@
 
 #include <unistd.h>
 #include <errno.h>
+#include <stdio.h>
 #include <string.h>
 #include <sys/wait.h>
 
@@ -136,9 +137,10 @@ child_watch_cb (GPid pid, gint status, PasswdHandler *passwd_handler)
 }
 
 static void
-ignore_sigpipe (gpointer data)
+child_setup_cb (gpointer data)
 {
-        signal (SIGPIPE, SIG_IGN);
+	signal (SIGPIPE, SIG_IGN);
+	dup2 (fileno (stdout), fileno (stderr));
 }
 
 /* Spawn passwd backend
@@ -148,7 +150,7 @@ spawn_passwd (PasswdHandler *passwd_handler, GError **error)
 {
         gchar   *argv[2];
         gchar  **envp;
-        gint    my_stdin, my_stdout, my_stderr;
+        gint    my_stdin, my_stdout;
 
         argv[0] = "/usr/bin/passwd";    /* Is it safe to rely on a hard-coded path? */
         argv[1] = NULL;
@@ -160,12 +162,12 @@ spawn_passwd (PasswdHandler *passwd_handler, GError **error)
                                        argv,                            /* Argument vector */
                                        envp,                            /* Environment */
                                        G_SPAWN_DO_NOT_REAP_CHILD,       /* Flags */
-                                       ignore_sigpipe,                  /* Child setup */
+                                       child_setup_cb,                  /* Child setup */
                                        NULL,                            /* Data to child setup */
                                        &passwd_handler->backend_pid,    /* PID */
                                        &my_stdin,                       /* Stdin */
                                        &my_stdout,                      /* Stdout */
-                                       &my_stderr,                      /* Stderr */
+                                       NULL,                            /* Stderr */
                                        error)) {                        /* GError */
 
                 /* An error occurred */
@@ -177,20 +179,6 @@ spawn_passwd (PasswdHandler *passwd_handler, GError **error)
         }
 
         g_strfreev (envp);
-
-        /* 2>&1 */
-        if (dup2 (my_stderr, my_stdout) == -1) {
-                /* Failed! */
-                g_set_error_literal (error,
-                                     PASSWD_ERROR,
-                                     PASSWD_ERROR_BACKEND,
-                                     strerror (errno));
-
-                /* Clean up */
-                stop_passwd (passwd_handler);
-
-                return FALSE;
-        }
 
         /* Open IO Channels */
         passwd_handler->backend_stdin = g_io_channel_unix_new (my_stdin);
