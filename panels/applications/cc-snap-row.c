@@ -26,9 +26,8 @@
 
 struct _CcSnapRow
 {
-  GtkListBoxRow parent;
+  AdwActionRow parent;
 
-  GtkLabel     *title_label;
   GtkSwitch    *slot_toggle;
   GtkComboBox  *slots_combo;
   GtkListStore *slots_combo_model;
@@ -40,7 +39,7 @@ struct _CcSnapRow
   GPtrArray    *slots;
 };
 
-G_DEFINE_TYPE (CcSnapRow, cc_snap_row, GTK_TYPE_LIST_BOX_ROW)
+G_DEFINE_TYPE (CcSnapRow, cc_snap_row, ADW_TYPE_ACTION_ROW)
 
 typedef struct
 {
@@ -245,7 +244,6 @@ cc_snap_row_class_init (CcSnapRowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/applications/cc-snap-row.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcSnapRow, title_label);
   gtk_widget_class_bind_template_child (widget_class, CcSnapRow, slot_toggle);
   gtk_widget_class_bind_template_child (widget_class, CcSnapRow, slots_combo);
   gtk_widget_class_bind_template_child (widget_class, CcSnapRow, slots_combo_model);
@@ -295,7 +293,7 @@ cc_snap_row_new (GCancellable *cancellable, SnapdInterface *interface, SnapdPlug
     label = snapd_interface_make_label (interface);
   else
     label = g_strdup (snapd_plug_get_interface (plug));
-  gtk_label_set_label (self->title_label, label);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), label);
 
   /* Add option into combo box */
   gtk_list_store_append (self->slots_combo_model, &iter);

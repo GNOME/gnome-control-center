@@ -20,13 +20,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 #include <snapd-glib/snapd-glib.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_SNAP_ROW (cc_snap_row_get_type())
-G_DECLARE_FINAL_TYPE (CcSnapRow, cc_snap_row, CC, SNAP_ROW, GtkListBoxRow)
+G_DECLARE_FINAL_TYPE (CcSnapRow, cc_snap_row, CC, SNAP_ROW, AdwActionRow)
 
 CcSnapRow* cc_snap_row_new      (GCancellable   *cancellable,
                                  SnapdInterface *interface,
