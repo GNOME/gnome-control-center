@@ -26,7 +26,7 @@
 
 struct _CcInfoRow
 {
-  GtkListBoxRow parent;
+  AdwActionRow parent;
 
   GtkWidget    *info;
   GtkWidget    *expander;
