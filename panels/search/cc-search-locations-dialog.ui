@@ -20,7 +20,9 @@
               <object class="GtkListBox" id="places_list">
                 <property name="selection-mode">none</property>
                 <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
-                <accessibility name="labelled-by">places_group</accessibility>
+                <accessibility>
+                  <relation name="labelled-by">places_group</relation>
+                </accessibility>
                 <style>
                   <class name="boxed-list"/>
                 </style>
@@ -35,7 +37,9 @@
               <object class="GtkListBox" id="bookmarks_list">
                 <property name="selection-mode">none</property>
                 <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
-                <accessibility name="labelled-by">bookmarks_group</accessibility>
+                <accessibility>
+                  <relation name="labelled-by">bookmarks_group</relation>
+                </accessibility>
                 <style>
                   <class name="boxed-list"/>
                 </style>
@@ -65,7 +69,9 @@
               <object class="GtkListBox" id="others_list">
                 <property name="selection-mode">none</property>
                 <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchLocationsDialog" swapped="yes"/>
-                <accessibility name="labelled-by">others_group</accessibility>
+                <accessibility>
+                  <relation name="labelled-by">others_group</relation>
+                </accessibility>
                 <style>
                   <class name="boxed-list"/>
                 </style>

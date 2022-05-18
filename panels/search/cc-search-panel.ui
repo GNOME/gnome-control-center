@@ -40,7 +40,9 @@
               <object class="GtkListBox" id="list_box">
                 <property name="selection-mode">none</property>
                 <signal name="keynav-failed" handler="keynav_failed_cb" object="CcSearchPanel" swapped="yes"/>
-                <accessibility name="labelled-by">search_group</accessibility>
+                <accessibility>
+                  <relation name="labelled-by">search_group</relation>
+                </accessibility>
                 <style>
                   <class name="boxed-list"/>
                 </style>
