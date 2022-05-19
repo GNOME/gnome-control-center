@@ -112,9 +112,17 @@ cc_language_row_new (const gchar *locale_id)
   self->language_local = get_language_label (language_code, modifier, NULL);
   gtk_label_set_label (self->language_label, self->language);
 
-  self->country = gnome_get_country_from_code (country_code, locale_id);
-  self->country_local = gnome_get_country_from_code (country_code, NULL);
-  gtk_label_set_label (self->country_label, self->country);
+  if (country_code == NULL)
+    {
+      self->country = NULL;
+      self->country_local = NULL;
+    }
+  else
+    {
+      self->country = gnome_get_country_from_code (country_code, locale_id);
+      self->country_local = gnome_get_country_from_code (country_code, NULL);
+      gtk_label_set_label (self->country_label, self->country);
+    }
 
   return self;
 }
