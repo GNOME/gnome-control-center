@@ -329,6 +329,13 @@ update_region (CcRegionPanel  *self,
                         g_settings_set_string (self->locale_settings, KEY_REGION, region);
                 if (self->login_auto_apply)
                         set_system_region (self, region);
+
+                if (region == NULL || region[0] == '\0') {
+                        // Formats (region) are being reset as part of changing the language,
+                        // and that already triggers the notification check.
+                        return;
+                }
+
                 maybe_notify (self, LC_TIME, region);
                 break;
 
