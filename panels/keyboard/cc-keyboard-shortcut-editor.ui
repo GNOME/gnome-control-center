@@ -20,13 +20,15 @@
         <property name="show_title_buttons">True</property>
         <child>
           <object class="GtkButton" id="cancel_button">
-            <property name="label" translatable="yes">Cancel</property>
+            <property name="label" translatable="yes">_Cancel</property>
+            <property name="use-underline">True</property>
             <signal name="clicked" handler="cancel_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="no" />
           </object>
         </child>
         <child>
           <object class="GtkButton" id="remove_button">
-            <property name="label" translatable="yes">Remove</property>
+            <property name="label" translatable="yes">_Remove</property>
+            <property name="use-underline">True</property>
             <property name="valign">end</property>
             <signal name="clicked" handler="remove_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
             <style>
@@ -36,20 +38,23 @@
         </child>
         <child type="end">
           <object class="GtkButton" id="add_button">
-            <property name="label" translatable="yes">Add</property>
+            <property name="label" translatable="yes">_Add</property>
+            <property name="use-underline">True</property>
             <property name="sensitive">False</property>
             <signal name="clicked" handler="add_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
           </object>
         </child>
         <child type="end">
           <object class="GtkButton" id="replace_button">
-            <property name="label" translatable="yes">Replace</property>
+            <property name="label" translatable="yes">Re_place</property>
+            <property name="use-underline">True</property>
             <signal name="clicked" handler="replace_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
           </object>
         </child>
         <child type="end">
           <object class="GtkButton" id="set_button">
-            <property name="label" translatable="yes">Set</property>
+            <property name="label" translatable="yes">_Set</property>
+            <property name="use-underline">True</property>
             <signal name="clicked" handler="set_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
           </object>
         </child>
