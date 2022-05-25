@@ -470,6 +470,16 @@ struct {
   { "show-account", show_account, },
 };
 
+
+static void
+log_handler (const gchar    *domain,
+             GLogLevelFlags  log_level,
+             const gchar    *message,
+             gpointer        user_data)
+{
+  g_printerr ("%s: %s", domain, message);
+}
+
 int
 main (int    argc,
       char **argv)
@@ -482,6 +492,8 @@ main (int    argc,
 
   if (argc < 2)
     return EXIT_FAILURE;
+
+  g_log_set_default_handler (log_handler, NULL);
 
   for (i = 0; i < G_N_ELEMENTS (commands); i++)
     {
