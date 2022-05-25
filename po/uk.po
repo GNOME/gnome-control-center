@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2022-05-17 22:00+0000\n"
-"PO-Revision-Date: 2022-05-18 09:24+0300\n"
+"POT-Creation-Date: 2022-05-25 16:44+0000\n"
+"PO-Revision-Date: 2022-05-25 21:26+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -167,7 +167,7 @@ msgstr "Отримання сигналів системи про пошук і 
 #: panels/applications/cc-applications-panel.ui:177
 #: panels/applications/cc-applications-panel.ui:191
 #: panels/applications/cc-applications-panel.ui:205
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:108
 #: panels/user-accounts/cc-user-panel.c:789
@@ -294,8 +294,8 @@ msgid "Link Types"
 msgstr "Типи посилань"
 
 #: panels/applications/cc-applications-panel.ui:383
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:126
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:229
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:234
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "Скинути"
@@ -346,6 +346,7 @@ msgstr "Виберіть зображення"
 #: panels/display/cc-display-panel.ui:31
 #: panels/info-overview/cc-info-overview-panel.ui:209
 #: panels/keyboard/cc-input-chooser.ui:11
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:881
 #: panels/network/connection-editor/connection-editor.ui:14
@@ -428,8 +429,11 @@ msgstr "Змінити зображення тла або кольори інт�
 
 #. Translators: Search terms to find the Appearance panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
-msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;"
-msgstr "Тло;Фон;Шпалери;Екран;Стільниця;Стиль;Світлий;Світла;Темний;Темна;"
+#| msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;"
+msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
+msgstr ""
+"Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;Тло;Фон;Шпалер"
+"и;Екран;Стільниця;Стиль;Світлий;Світла;Темний;Темна;Вигляд;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
 #: panels/display/cc-night-light-page.ui:122
@@ -896,6 +900,7 @@ msgid "_Import File…"
 msgstr "_Імпортувати файл…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
 #: panels/network/connection-editor/net-connection-editor.c:497
 #: panels/printers/new-printer-dialog.ui:84
 #: panels/user-accounts/cc-add-user-dialog.ui:39
@@ -1666,7 +1671,6 @@ msgid "Scale"
 msgstr "Масштаб"
 
 #: panels/display/cc-night-light-page.ui:22
-#| msgid "Night Light"
 msgid "Night Light unavailable"
 msgstr "«Нічне світло» недоступне"
 
@@ -1675,8 +1679,8 @@ msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely"
 msgstr ""
-"Це може бути результатом використаного драйвера до графічної картки або"
-" використання стільниці у віддаленому режимі"
+"Це може бути результатом використаного драйвера до графічної картки або "
+"використання стільниці у віддаленому режимі"
 
 #. Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.ui:58
@@ -2088,11 +2092,11 @@ msgstr "Не вибрано жодного джерела введення"
 msgid "Options"
 msgstr "Параметри"
 
-#: panels/keyboard/cc-input-row.ui:31 panels/search/cc-search-panel-row.ui:49
+#: panels/keyboard/cc-input-row.ui:31 panels/search/cc-search-panel-row.ui:52
 msgid "Move Up"
 msgstr "Перемістити вгору"
 
-#: panels/keyboard/cc-input-row.ui:35 panels/search/cc-search-panel-row.ui:53
+#: panels/keyboard/cc-input-row.ui:35 panels/search/cc-search-panel-row.ui:56
 msgid "Move Down"
 msgstr "Пересунути вниз"
 
@@ -2105,7 +2109,6 @@ msgid "View Keyboard Layout"
 msgstr "Переглянути розкладку клавіатури"
 
 #: panels/keyboard/cc-input-row.ui:54
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:29
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -2267,7 +2270,6 @@ msgstr ""
 "вернути."
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:470
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
@@ -2345,25 +2347,29 @@ msgstr "Уведіть нове сполучення для зміни %s."
 msgid "Add Custom Shortcut"
 msgstr "Додати своє скорочення"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:39
-#: panels/wwan/cc-wwan-apn-dialog.ui:33
-msgid "Add"
-msgstr "Додати"
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+#| msgid "Remove"
+msgid "_Remove"
+msgstr "Ви_лучити"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:46
-msgid "Replace"
-msgstr "Замінити"
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:49
+#| msgid "Replace"
+msgid "Re_place"
+msgstr "За_мінити"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:52
-msgid "Set"
-msgstr "Встановити"
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:56
+#: panels/wwan/cc-wwan-mode-dialog.ui:39
+#: panels/wwan/cc-wwan-network-dialog.ui:115
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:229
+msgid "_Set"
+msgstr "_Встановити"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:98
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:103
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr ""
 "Натисніть Esc, щоб скасувати, або Backspace, щоб вимкнути комбінації клавіш."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:156
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
 #: panels/user-accounts/cc-user-panel.ui:132
@@ -2371,19 +2377,19 @@ msgstr ""
 msgid "Name"
 msgstr "Назва"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:167
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:172
 msgid "Command"
 msgstr "Команда"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:178
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:183
 msgid "Shortcut"
 msgstr "Скорочення"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:248
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:253
 msgid "Set Shortcut…"
 msgstr "Вказати скорочення…"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:256
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:261
 msgid "None"
 msgstr "Немає"
 
@@ -3772,7 +3778,7 @@ msgstr "Пароль"
 msgid "Turn Wi-Fi off"
 msgstr "Вимкнути Wi-Fi"
 
-#: panels/network/network-wifi.ui:98
+#: panels/network/network-wifi.ui:98 panels/search/cc-search-panel-row.ui:39
 msgid "More options…"
 msgstr "Додаткові параметри…"
 
@@ -5929,15 +5935,15 @@ msgstr ""
 msgid "Places"
 msgstr "Місця"
 
-#: panels/search/cc-search-locations-dialog.ui:33
+#: panels/search/cc-search-locations-dialog.ui:35
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: panels/search/cc-search-locations-dialog.ui:48
+#: panels/search/cc-search-locations-dialog.ui:52
 msgid "Others"
 msgstr "Інші"
 
-#: panels/search/cc-search-locations-dialog.ui:55
+#: panels/search/cc-search-locations-dialog.ui:59
 msgid "Add Location"
 msgstr "Додати місце"
 
@@ -8268,6 +8274,10 @@ msgstr "Створити скорочення…"
 msgid "Access Points"
 msgstr "Точки доступу"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:33
+msgid "Add"
+msgstr "Додати"
+
 #: panels/wwan/cc-wwan-apn-dialog.ui:122
 msgid "APN"
 msgstr "APN"
@@ -8617,12 +8627,6 @@ msgstr "Невідома помилка"
 msgid "Network Mode"
 msgstr "Режим мережі"
 
-#: panels/wwan/cc-wwan-mode-dialog.ui:39
-#: panels/wwan/cc-wwan-network-dialog.ui:115
-#: panels/wwan/cc-wwan-sim-lock-dialog.c:229
-msgid "_Set"
-msgstr "_Встановити"
-
 #: panels/wwan/cc-wwan-network-dialog.ui:38
 msgid "_Automatic"
 msgstr "_Автоматично"
@@ -8868,6 +8872,9 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Set"
+#~ msgstr "Встановити"
 
 #~ msgid ""
 #~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
