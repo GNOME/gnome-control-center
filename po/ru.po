@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-05-17 22:00+0000\n"
-"PO-Revision-Date: 2022-05-18 15:45+0300\n"
+"POT-Creation-Date: 2022-05-25 16:44+0000\n"
+"PO-Revision-Date: 2022-05-25 20:16+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -179,7 +179,7 @@ msgstr "Получение результатов поиска в системе
 #: panels/applications/cc-applications-panel.ui:177
 #: panels/applications/cc-applications-panel.ui:191
 #: panels/applications/cc-applications-panel.ui:205
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:108
 #: panels/user-accounts/cc-user-panel.c:789
@@ -306,8 +306,8 @@ msgid "Link Types"
 msgstr "Типы ссылок"
 
 #: panels/applications/cc-applications-panel.ui:383
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:126
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:229
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:234
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "Сбросить"
@@ -358,6 +358,7 @@ msgstr "Выберите изображение"
 #: panels/display/cc-display-panel.ui:31
 #: panels/info-overview/cc-info-overview-panel.ui:209
 #: panels/keyboard/cc-input-chooser.ui:11
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:881
 #: panels/network/connection-editor/connection-editor.ui:14
@@ -440,8 +441,8 @@ msgstr "Изменить фоновое изображение или цвета
 
 #. Translators: Search terms to find the Appearance panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
-msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;"
-msgstr "Фон;Обои;Экран;Рабочий;Стиль;Светлый;Темный;"
+msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
+msgstr "Фон;Обои;Экран;Рабочий;Стиль;Светлый;Темный;Внешний вид;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
 #: panels/display/cc-night-light-page.ui:122
@@ -904,6 +905,7 @@ msgid "_Import File…"
 msgstr "_Импортировать файл…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
 #: panels/network/connection-editor/net-connection-editor.c:497
 #: panels/printers/new-printer-dialog.ui:84
 #: panels/user-accounts/cc-add-user-dialog.ui:39
@@ -2097,11 +2099,11 @@ msgstr "Не выбран источник ввода"
 msgid "Options"
 msgstr "Параметры"
 
-#: panels/keyboard/cc-input-row.ui:31 panels/search/cc-search-panel-row.ui:49
+#: panels/keyboard/cc-input-row.ui:31 panels/search/cc-search-panel-row.ui:52
 msgid "Move Up"
 msgstr "Поднять"
 
-#: panels/keyboard/cc-input-row.ui:35 panels/search/cc-search-panel-row.ui:53
+#: panels/keyboard/cc-input-row.ui:35 panels/search/cc-search-panel-row.ui:56
 msgid "Move Down"
 msgstr "Опустить"
 
@@ -2114,7 +2116,6 @@ msgid "View Keyboard Layout"
 msgstr "Показать раскладку"
 
 #: panels/keyboard/cc-input-row.ui:54
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:29
 msgid "Remove"
 msgstr "Удалить"
 
@@ -2275,7 +2276,6 @@ msgstr ""
 "клавиш. Это действие нельзя отменить."
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:470
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:189
@@ -2351,24 +2351,26 @@ msgstr "Введите новую комбинацию для изменения
 msgid "Add Custom Shortcut"
 msgstr "Добавить пользовательскую комбинацию клавиш"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:39
-#: panels/wwan/cc-wwan-apn-dialog.ui:33
-msgid "Add"
-msgstr "Добавить"
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:30
+msgid "_Remove"
+msgstr "_Удалить"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:46
-msgid "Replace"
-msgstr "Заменить"
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:49
+msgid "Re_place"
+msgstr "За_менить"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:52
-msgid "Set"
-msgstr "Установить"
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:56
+#: panels/wwan/cc-wwan-mode-dialog.ui:39
+#: panels/wwan/cc-wwan-network-dialog.ui:115
+#: panels/wwan/cc-wwan-sim-lock-dialog.c:229
+msgid "_Set"
+msgstr "_Установить"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:98
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:103
 msgid "Press Esc to cancel or Backspace to disable the keyboard shortcut."
 msgstr "Нажмите Esc для отмены или Backspace для отключения комбинации клавиш."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:156
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
 #: panels/user-accounts/cc-user-panel.ui:132
@@ -2376,19 +2378,19 @@ msgstr "Нажмите Esc для отмены или Backspace для откл�
 msgid "Name"
 msgstr "Имя"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:167
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:172
 msgid "Command"
 msgstr "Команда"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:178
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:183
 msgid "Shortcut"
 msgstr "Комбинация клавиш"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:248
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:253
 msgid "Set Shortcut…"
 msgstr "Установить комбинацию клавиш…"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.ui:256
+#: panels/keyboard/cc-keyboard-shortcut-editor.ui:261
 msgid "None"
 msgstr "Нет"
 
@@ -3786,7 +3788,7 @@ msgstr "Пароль"
 msgid "Turn Wi-Fi off"
 msgstr "Выключить Wi-Fi"
 
-#: panels/network/network-wifi.ui:98
+#: panels/network/network-wifi.ui:98 panels/search/cc-search-panel-row.ui:39
 msgid "More options…"
 msgstr "Больше параметров…"
 
@@ -5946,15 +5948,15 @@ msgstr ""
 msgid "Places"
 msgstr "Места"
 
-#: panels/search/cc-search-locations-dialog.ui:33
+#: panels/search/cc-search-locations-dialog.ui:35
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: panels/search/cc-search-locations-dialog.ui:48
+#: panels/search/cc-search-locations-dialog.ui:52
 msgid "Others"
 msgstr "Прочие"
 
-#: panels/search/cc-search-locations-dialog.ui:55
+#: panels/search/cc-search-locations-dialog.ui:59
 msgid "Add Location"
 msgstr "Добавить расположение"
 
@@ -8289,6 +8291,10 @@ msgstr "Новая комбинация…"
 msgid "Access Points"
 msgstr "Точки доступа"
 
+#: panels/wwan/cc-wwan-apn-dialog.ui:33
+msgid "Add"
+msgstr "Добавить"
+
 #: panels/wwan/cc-wwan-apn-dialog.ui:122
 msgid "APN"
 msgstr "APN"
@@ -8636,12 +8642,6 @@ msgstr "Неизвестная ошибка"
 msgid "Network Mode"
 msgstr "Режим сети"
 
-#: panels/wwan/cc-wwan-mode-dialog.ui:39
-#: panels/wwan/cc-wwan-network-dialog.ui:115
-#: panels/wwan/cc-wwan-sim-lock-dialog.c:229
-msgid "_Set"
-msgstr "_Установить"
-
 #: panels/wwan/cc-wwan-network-dialog.ui:38
 msgid "_Automatic"
 msgstr "_Автоматический"
@@ -8884,6 +8884,9 @@ msgstr[2] "%u входов"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системные звуки"
+
+#~ msgid "Set"
+#~ msgstr "Установить"
 
 #~ msgid ""
 #~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
