@@ -743,7 +743,7 @@ stop_shared_connection (NetDeviceWifi *self)
 
                 devices = nm_active_connection_get_devices (c);
                 if (devices && devices->pdata[0] == self->device) {
-                        nm_client_deactivate_connection (self->client, c, NULL, NULL);
+                        nm_client_deactivate_connection_async (self->client, c, NULL, NULL, NULL);
                         found = TRUE;
                         break;
                 }

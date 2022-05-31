@@ -127,7 +127,7 @@ device_off_toggled (NetVpn *self)
                 for (i = 0; acs && i < acs->len; i++) {
                         a = (NMActiveConnection*)acs->pdata[i];
                         if (strcmp (nm_active_connection_get_uuid (a), uuid) == 0) {
-                                nm_client_deactivate_connection (self->client, a, NULL, NULL);
+                                nm_client_deactivate_connection_async (self->client, a, NULL, NULL, NULL);
                                 break;
                         }
                 }
