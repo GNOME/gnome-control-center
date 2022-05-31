@@ -148,7 +148,7 @@ get_renderer_from_helper (const char **env)
       return NULL;
     }
 
-  if (!g_spawn_check_exit_status (status, NULL))
+  if (!g_spawn_check_wait_status (status, NULL))
     return NULL;
 
   if (renderer == NULL || *renderer == '\0')
