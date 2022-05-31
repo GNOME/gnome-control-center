@@ -130,7 +130,7 @@ network_combo_changed_cb (NetDeviceMobile *self)
         g_debug ("try to switch to connection %s", object_path);
         connection = (NMConnection*) nm_client_get_connection_by_path (self->client, object_path);
         if (connection != NULL) {
-                nm_device_disconnect (self->device, NULL, NULL);
+                nm_device_disconnect_async (self->device, NULL, NULL, NULL);
                 nm_client_activate_connection_async (self->client,
                                                      connection,
                                                      self->device, NULL, NULL,

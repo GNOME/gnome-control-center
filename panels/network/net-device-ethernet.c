@@ -439,7 +439,7 @@ device_off_switch_changed_cb (NetDeviceEthernet *self)
                                                              NULL, NULL, NULL, NULL);
                 }
         } else {
-                nm_device_disconnect (self->device, NULL, NULL);
+                nm_device_disconnect_async (self->device, NULL, NULL, NULL);
         }
 }
 
