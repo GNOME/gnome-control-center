@@ -156,7 +156,7 @@ is_valid_username_child_watch_cb (GPid pid,
                 g_task_return_boolean (task, valid);
         }
         else {
-                g_spawn_check_exit_status (status, &error);
+                g_spawn_check_wait_status (status, &error);
                 g_task_return_error (task, error);
         }
 
