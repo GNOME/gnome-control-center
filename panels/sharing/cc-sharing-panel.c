@@ -642,6 +642,9 @@ cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
   w = gtk_button_new_from_icon_name ("window-close-symbolic");
   gtk_widget_add_css_class (w, "flat");
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
+  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
+                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Remove"),
+                                -1);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
   g_signal_connect_object (G_OBJECT (w), "clicked",
                            G_CALLBACK (cc_sharing_panel_remove_folder), self, G_CONNECT_SWAPPED);
@@ -665,6 +668,9 @@ cc_sharing_panel_new_add_media_sharing_row (CcSharingPanel *self)
   gtk_widget_set_hexpand (w, TRUE);
   gtk_widget_set_margin_top (w, 12);
   gtk_widget_set_margin_bottom (w, 12);
+  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
+                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Add"),
+                                -1);
   gtk_box_append (GTK_BOX (box), w);
 
   g_object_set_data (G_OBJECT (w), "row", row);
@@ -726,6 +732,9 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   gtk_grid_attach (GTK_GRID (self->shared_folders_grid), networks, 0, 4, 2, 1);
 
   w = create_switch_with_bindings (GTK_SWITCH (g_object_get_data (G_OBJECT (networks), "switch")));
+  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
+                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Enable media sharing"),
+                                -1);
   gtk_header_bar_pack_start (GTK_HEADER_BAR (self->media_sharing_headerbar), w);
   self->media_sharing_switch = w;
 
@@ -929,6 +938,9 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
   gtk_grid_attach (GTK_GRID (self->personal_file_sharing_grid), networks, 0, 3, 2, 1);
 
   w = create_switch_with_bindings (GTK_SWITCH (g_object_get_data (G_OBJECT (networks), "switch")));
+  gtk_accessible_update_property (GTK_ACCESSIBLE (w),
+                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Enable personal media sharing"),
+                                -1);
   gtk_header_bar_pack_start (GTK_HEADER_BAR (self->personal_file_sharing_headerbar), w);
   self->personal_file_sharing_switch = w;
 

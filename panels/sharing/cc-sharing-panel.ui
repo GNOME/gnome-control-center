@@ -231,6 +231,7 @@
                     <property name="label" translatable="yes">Remote Login</property>
                     <property name="hexpand">True</property>
                     <property name="xalign">0</property>
+                    <property name="mnemonic_widget">remote_login_switch</property>
                   </object>
                 </child>
                 <child>
@@ -268,6 +269,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">Remote Desktop</property>
                     <property name="subtitle" translatable="yes">Enable or disable remote desktop connections to this computer.</property>
+                    <property name="activatable_widget">remote_desktop_switch</property>
                     <child type="suffix">
                       <object class="GtkSwitch" id="remote_desktop_switch">
                         <property name="state">False</property>
@@ -281,6 +283,7 @@
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">Remote Control</property>
                     <property name="subtitle" translatable="yes">Allows remote connections to control the screen.</property>
+                    <property name="activatable_widget">remote_control_switch</property>
                     <child type="suffix">
                       <object class="GtkSwitch" id="remote_control_switch">
                         <property name="valign">center</property>
@@ -311,6 +314,9 @@
                           <object class="GtkButton" id="remote_desktop_device_name_copy">
                             <property name="valign">center</property>
                             <property name="icon-name">edit-copy-symbolic</property>
+                            <accessibility>
+                              <property name="label" translatable="yes">Copy</property>
+                            </accessibility>
                             <style>
                               <class name="flat"/>
                             </style>
@@ -335,6 +341,9 @@
                           <object class="GtkButton" id="remote_desktop_address_copy">
                             <property name="valign">center</property>
                             <property name="icon-name">edit-copy-symbolic</property>
+                            <accessibility>
+                              <property name="label" translatable="yes">Copy</property>
+                            </accessibility>
                             <style>
                               <class name="flat"/>
                             </style>
@@ -355,6 +364,7 @@
                 <child>
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">User Name</property>
+                    <property name="activatable_widget">remote_desktop_username_entry</property>
                     <child type="suffix">
                       <object class="GtkEntry" id="remote_desktop_username_entry">
                         <property name="hexpand">True</property>
@@ -365,6 +375,9 @@
                       <object class="GtkButton" id="remote_desktop_username_copy">
                         <property name="valign">center</property>
                         <property name="icon-name">edit-copy-symbolic</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Copy</property>
+                        </accessibility>
                         <style>
                           <class name="flat"/>
                         </style>
@@ -376,6 +389,7 @@
                 <child>
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">Password</property>
+                    <property name="activatable_widget">remote_desktop_password_entry</property>
                     <child type="suffix">
                       <object class="GtkPasswordEntry" id="remote_desktop_password_entry">
                         <property name="hexpand">True</property>
@@ -387,6 +401,9 @@
                       <object class="GtkButton" id="remote_desktop_password_copy">
                         <property name="valign">center</property>
                         <property name="icon-name">edit-copy-symbolic</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Copy</property>
+                        </accessibility>
                         <style>
                           <class name="flat"/>
                         </style>
