@@ -603,96 +603,6 @@ cc_color_calibrate_cancel (CcColorCalibrate *calibrate)
   g_main_loop_quit (calibrate->loop);
 }
 
-static gboolean
-cc_color_calibrate_move_and_resize_window (GtkWindow *window,
-                                           CdDevice *device,
-                                           GError **error)
-{
-  g_autoptr(GListModel) monitors = NULL;
-  g_autoptr(GdkMonitor) monitor = NULL;
-  const gchar *xrandr_name;
-  gboolean ret = TRUE;
-  GdkRectangle rect;
-  GdkDisplay *display;
-  gint i;
-  gint monitor_num = -1;
-  gint num_monitors;
-
-  /* find the monitor num of the device output */
-  display = gdk_display_get_default ();
-  monitors = gdk_display_get_monitors (display);
-  num_monitors = g_list_model_get_n_items (monitors);
-  xrandr_name = cd_device_get_metadata_item (device, CD_DEVICE_METADATA_XRANDR_NAME);
-  for (i = 0; i < num_monitors; i++)
-    {
-      g_autoptr(GdkMonitor) m = NULL;
-      const gchar *plug_name;
-
-      m = g_list_model_get_item (monitors, i);
-      plug_name = gdk_monitor_get_model (m);
-
-      if (g_strcmp0 (plug_name, xrandr_name) == 0)
-        monitor_num = i;
-    }
-  if (monitor_num == -1)
-    {
-      ret = FALSE;
-      g_set_error (error,
-                   CD_SESSION_ERROR,
-                   CD_SESSION_ERROR_INTERNAL,
-                   "failed to find output %s",
-                   xrandr_name);
-      goto out;
-    }
-
-  /* move the window, and set it to the right size */
-  monitor = g_list_model_get_item (monitors, monitor_num);
-  gdk_monitor_get_geometry (monitor, &rect);
-  g_debug ("Setting window to %ix%i with size %ix%i",
-           rect.x, rect.y, rect.width, rect.height);
-out:
-  return ret;
-}
-#if 0
-static void
-cc_color_calibrate_window_realize_cb (CcColorCalibrate *self)
-{
-  GtkWidget *widget;
-
-  widget = GTK_WIDGET (gtk_builder_get_object (self->builder,
-                                               "dialog_calibrate"));
-  gtk_window_fullscreen (GTK_WINDOW (widget));
-  gtk_window_maximize (GTK_WINDOW (widget));
-}
-
-static gboolean
-cc_color_calibrate_window_state_cb (CcColorCalibrate *calibrate,
-                                    GdkEvent *event)
-{
-  gboolean ret;
-  g_autoptr(GError) error = NULL;
-  GdkEventWindowState *event_state = (GdkEventWindowState *) event;
-  GtkWindow *window;
-
-  window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
-                                               "dialog_calibrate"));
-
-  /* check event */
-  if (event->type != GDK_WINDOW_STATE)
-    return TRUE;
-  if (event_state->changed_mask != GDK_WINDOW_STATE_FULLSCREEN)
-    return TRUE;
-
-  /* resize to the correct screen */
-  ret = cc_color_calibrate_move_and_resize_window (window,
-                                                   calibrate->device,
-                                                   &error);
-  if (!ret)
-    g_warning ("Failed to resize window: %s", error->message);
-  return TRUE;
-}
-#endif
-
 static void
 cc_color_calibrate_button_done_cb (CcColorCalibrate *calibrate)
 {
@@ -989,14 +899,6 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   return TRUE;
 }
 
-static gboolean
-cc_color_calibrate_delete_event_cb (CcColorCalibrate *calibrate)
-{
-  /* do not destroy the window */
-  cc_color_calibrate_cancel (calibrate);
-  return TRUE;
-}
-
 static void
 cc_color_calibrate_finalize (GObject *object)
 {
@@ -1079,19 +981,6 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
   /* setup the specialist calibration window */
   window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
                                                "dialog_calibrate"));
-  /*
-  g_signal_connect_object (window, "draw",
-                           G_CALLBACK (cc_color_calibrate_alpha_window_draw), calibrate, G_CONNECT_SWAPPED);
-  g_signal_connect_object (window, "realize",
-                           G_CALLBACK (cc_color_calibrate_window_realize_cb), calibrate, G_CONNECT_SWAPPED);
-  g_signal_connect_object (window, "window-state-event",
-                           G_CALLBACK (cc_color_calibrate_window_state_cb), calibrate, G_CONNECT_SWAPPED);
-  g_signal_connect_object (window, "delete-event",
-                           G_CALLBACK (cc_color_calibrate_delete_event_cb), calibrate, G_CONNECT_SWAPPED);
-  cc_color_calibrate_alpha_screen_changed_cb (calibrate);
-  g_signal_connect_object (window, "screen-changed",
-                           G_CALLBACK (cc_color_calibrate_alpha_screen_changed_cb), calibrate, G_CONNECT_SWAPPED);
-   */
   calibrate->window = window;
 }
 
