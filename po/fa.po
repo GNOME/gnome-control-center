@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: procman\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-05-27 22:48+0000\n"
-"PO-Revision-Date: 2022-05-29 12:22+0430\n"
+"POT-Creation-Date: 2022-05-31 21:13+0000\n"
+"PO-Revision-Date: 2022-06-01 14:31+0430\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -422,7 +422,10 @@ msgstr ""
 "رومیزی;کاغذدیواری;میزکار;سبک;روشن;تاریک;تیره;ظاهر;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/datetime/cc-datetime-panel.ui:172
+#: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:122
+#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "به کار انداختن"
 
@@ -1385,23 +1388,33 @@ msgstr "_تاریخ و زمان خودکار"
 msgid "Requires internet access"
 msgstr "احتیاج به دسترسی به اینترنت دارد"
 
-#: panels/datetime/cc-datetime-panel.ui:177
+#: panels/datetime/cc-datetime-panel.ui:180
 msgid "Date &amp; _Time"
 msgstr "تاریخ و _زمان"
 
-#: panels/datetime/cc-datetime-panel.ui:201
+#: panels/datetime/cc-datetime-panel.ui:204
 msgid "Automatic Time _Zone"
 msgstr "_منطقه زمانی خودکار"
 
-#: panels/datetime/cc-datetime-panel.ui:202
+#: panels/datetime/cc-datetime-panel.ui:205
 msgid "Requires location services enabled and internet access"
 msgstr "نیاز به خدمت مکان‌یابی به کار افتاده و دسترسی به اینترنت"
 
-#: panels/datetime/cc-datetime-panel.ui:214
+#. TRANSLATORS: Status of Parental Controls setup
+#: panels/datetime/cc-datetime-panel.ui:212 panels/display/cc-display-settings.ui:23
+#: panels/keyboard/cc-xkb-modifier-dialog.ui:43
+#: panels/location/cc-location-panel.ui:9 panels/lock/cc-lock-panel.ui:39
+#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
+#: panels/user-accounts/cc-user-panel.c:787 panels/user-accounts/cc-user-panel.c:876
+#: panels/wwan/cc-wwan-device-page.c:476
+msgid "Enabled"
+msgstr "فعَال"
+
+#: panels/datetime/cc-datetime-panel.ui:220
 msgid "Time Z_one"
 msgstr "منطقه ز_مانی"
 
-#: panels/datetime/cc-datetime-panel.ui:239
+#: panels/datetime/cc-datetime-panel.ui:245
 msgid "Time _Format"
 msgstr "_قالب زمان"
 
@@ -1597,15 +1610,6 @@ msgstr "افقی (معکوس)"
 msgid "%.2lf Hz"
 msgstr "%.2lf هرتز"
 
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/display/cc-display-settings.ui:23
-#: panels/keyboard/cc-xkb-modifier-dialog.ui:43 panels/lock/cc-lock-panel.ui:39
-#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
-#: panels/user-accounts/cc-user-panel.c:787 panels/user-accounts/cc-user-panel.c:876
-#: panels/wwan/cc-wwan-device-page.c:476
-msgid "Enabled"
-msgstr "فعَال"
-
 #: panels/display/cc-display-settings.ui:43
 msgctxt "display setting"
 msgid "Orientation"
@@ -1783,7 +1787,7 @@ msgid "System Logo"
 msgstr "نشان سامانه"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
-#: panels/sharing/cc-sharing-panel.ui:301
+#: panels/sharing/cc-sharing-panel.ui:304
 msgid "Device Name"
 msgstr "نام افزاره"
 
@@ -2064,7 +2068,8 @@ msgstr "ترجیحات"
 msgid "View Keyboard Layout"
 msgstr "نمایش چیدمان صفحه‌کلید"
 
-#: panels/keyboard/cc-input-row.ui:54
+#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
+#: panels/sharing/cc-sharing-panel.c:646
 msgid "Remove"
 msgstr "برداشتن"
 
@@ -2349,15 +2354,15 @@ msgstr ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;میانبر;"
 "میان‌بر;فضای کاری;پنجره;اندازه;بزرگ‌نمایی;تضاد;ورودی;منبع;قفل;صدا;"
 
-#: panels/location/cc-location-panel.ui:20
+#: panels/location/cc-location-panel.ui:23
 msgid "Location Services Turned Off"
 msgstr "خدمات مکان‌یابی خاموش شده"
 
-#: panels/location/cc-location-panel.ui:21
+#: panels/location/cc-location-panel.ui:24
 msgid "No applications can obtain location information."
 msgstr "هیچ برنامه‌ای نمی‌تواند اطّلاعات موقعیت را به دست آورد."
 
-#: panels/location/cc-location-panel.ui:35
+#: panels/location/cc-location-panel.ui:38
 msgid ""
 "Location services allow applications to know your location. Using Wi-Fi and mobile "
 "broadband increases accuracy.\n"
@@ -2375,7 +2380,7 @@ msgstr ""
 "\n"
 "اجازه به برنامه‌های زیر برای تشخیص مکانتان."
 
-#: panels/location/cc-location-panel.ui:53
+#: panels/location/cc-location-panel.ui:56
 msgid "No Applications Have Asked for Location Access"
 msgstr "هیچ برنامه‌ای برای دسترسی به مکان درخواست نکرده است"
 
@@ -2548,15 +2553,15 @@ msgstr "قفل صفحه‌تان"
 msgid "screen;lock;private;privacy;"
 msgstr "screen;lock;private;privacy;صفحه;نمایش;خصوصی;محرمانگی;حریم شخصی;"
 
-#: panels/microphone/cc-microphone-panel.ui:20
+#: panels/microphone/cc-microphone-panel.ui:23
 msgid "Microphone Turned Off"
 msgstr "میکروفون خاموش شده"
 
-#: panels/microphone/cc-microphone-panel.ui:21
+#: panels/microphone/cc-microphone-panel.ui:24
 msgid "No applications can record sound."
 msgstr "هیچ برنامه‌ای نمی‌تواند صدا ضبط کند."
 
-#: panels/microphone/cc-microphone-panel.ui:34
+#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. Disabling "
 "the microphone may cause some applications to not function properly.\n"
@@ -2568,7 +2573,7 @@ msgstr ""
 "\n"
 "اجازه به برنامه‌های زیر برای استفاده از میکروفونتان."
 
-#: panels/microphone/cc-microphone-panel.ui:51
+#: panels/microphone/cc-microphone-panel.ui:54
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "هیچ برنامه‌ای برای دسترسی به میکروفون درخواست نکرده است"
 
@@ -2883,7 +2888,7 @@ msgstr "نام شبکه"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
 #: panels/printers/new-printer-dialog.ui:331 panels/printers/pp-jobs-dialog.ui:52
-#: panels/sharing/cc-sharing-panel.ui:378
+#: panels/sharing/cc-sharing-panel.ui:391
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -5830,7 +5835,7 @@ msgstr ""
 "نتایج;"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:265
+#: panels/sharing/cc-sharing-networks.c:268
 msgid "No networks selected for sharing"
 msgstr "هیچ شبکه‌ای برای هم‌رسانی انتخاب نشده"
 
@@ -5862,8 +5867,16 @@ msgstr "فعّال"
 msgid "Choose a Folder"
 msgstr "گزینش یک شاخه"
 
+#: panels/sharing/cc-sharing-panel.c:672 panels/wwan/cc-wwan-apn-dialog.ui:33
+msgid "Add"
+msgstr "افزودن"
+
+#: panels/sharing/cc-sharing-panel.c:736
+msgid "Enable media sharing"
+msgstr "به کار انداختن هم‌رسانی رسانه"
+
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:747
+#: panels/sharing/cc-sharing-panel.c:756
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your current "
@@ -5873,7 +5886,7 @@ msgstr ""
 "با دیگران هم‌رسانی کنید: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:753
+#: panels/sharing/cc-sharing-panel.c:762
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure Shell "
@@ -5884,19 +5897,23 @@ msgstr ""
 "پوستهٔ امن متّصل شوند:\n"
 "%s"
 
-#: panels/sharing/cc-sharing-panel.c:1296
+#: panels/sharing/cc-sharing-panel.c:942
+msgid "Enable personal media sharing"
+msgstr "به کار انداختن هم‌رسانی رسانهٔ شخصی"
+
+#: panels/sharing/cc-sharing-panel.c:1308
 msgid "Device name copied"
 msgstr "نام افزاره رونوشت شد"
 
-#: panels/sharing/cc-sharing-panel.c:1307
+#: panels/sharing/cc-sharing-panel.c:1319
 msgid "Device address copied"
 msgstr "نشانی افزاره رونوشت شد"
 
-#: panels/sharing/cc-sharing-panel.c:1318
+#: panels/sharing/cc-sharing-panel.c:1330
 msgid "Username copied"
 msgstr "نام کاربری رونوشت شد"
 
-#: panels/sharing/cc-sharing-panel.c:1329
+#: panels/sharing/cc-sharing-panel.c:1341
 msgid "Password copied"
 msgstr "گذرواژه رونوشت شد"
 
@@ -5937,74 +5954,79 @@ msgstr "گذرواژه _لازم است"
 msgid "Remote Login"
 msgstr "ورود دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:250 panels/sharing/cc-sharing-panel.ui:269
+#: panels/sharing/cc-sharing-panel.ui:251 panels/sharing/cc-sharing-panel.ui:270
 msgid "Remote Desktop"
 msgstr "میزکار دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:265
+#: panels/sharing/cc-sharing-panel.ui:266
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another computer."
 msgstr "میزکار دوردست می‌گذارد میزکارتان را از رایانه‌ای دیگر دیده و واپایش کنید."
 
-#: panels/sharing/cc-sharing-panel.ui:270
+#: panels/sharing/cc-sharing-panel.ui:271
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "به یا از کار انداختن اتّصال‌های میزکار دوردست به این رایانه."
 
-#: panels/sharing/cc-sharing-panel.ui:282
+#: panels/sharing/cc-sharing-panel.ui:284
 msgid "Remote Control"
 msgstr "واپایش دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:283
+#: panels/sharing/cc-sharing-panel.ui:285
 msgid "Allows remote connections to control the screen."
 msgstr "اجازه به اتّصال‌ها برای واپایش صفحه."
 
-#: panels/sharing/cc-sharing-panel.ui:296
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "How to Connect"
 msgstr "چگونگی وصل شدن"
 
-#: panels/sharing/cc-sharing-panel.ui:297
+#: panels/sharing/cc-sharing-panel.ui:300
 msgid "Connect to this computer using the device name or remote desktop address."
 msgstr "وصل شدن به این رایانه با استفاده از نام افزاره یا نشانی میزکار دوردست."
 
-#: panels/sharing/cc-sharing-panel.ui:325
+#: panels/sharing/cc-sharing-panel.ui:318 panels/sharing/cc-sharing-panel.ui:345
+#: panels/sharing/cc-sharing-panel.ui:379 panels/sharing/cc-sharing-panel.ui:405
+msgid "Copy"
+msgstr "رونوشت"
+
+#: panels/sharing/cc-sharing-panel.ui:331
 msgid "Remote Desktop Address"
 msgstr "نشانی میزکار دوردست"
 
-#: panels/sharing/cc-sharing-panel.ui:352
+#: panels/sharing/cc-sharing-panel.ui:361
 msgid "Authentication"
 msgstr "تأیید هویت"
 
-#: panels/sharing/cc-sharing-panel.ui:353
+#: panels/sharing/cc-sharing-panel.ui:362
 msgid "The user name and password are required to connect to this computer."
 msgstr "برای وصل شدن به این رایانه نیاز به نام کاربری و گذرواژه است."
 
-#: panels/sharing/cc-sharing-panel.ui:357
+#: panels/sharing/cc-sharing-panel.ui:366
 msgid "User Name"
 msgstr "نام کاربری"
 
-#: panels/sharing/cc-sharing-panel.ui:403
+#: panels/sharing/cc-sharing-panel.ui:420
 msgid "Verify Encryption"
 msgstr "تأیید رمزنگاری"
 
-#: panels/sharing/cc-sharing-panel.ui:432
+#: panels/sharing/cc-sharing-panel.ui:449
 msgid "Encryption Fingerprint"
 msgstr "اثر انگشت رمزنگاری"
 
-#: panels/sharing/cc-sharing-panel.ui:433
+#: panels/sharing/cc-sharing-panel.ui:450
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr "اثرانگشت رمزنگاری می‌تواند در کارخواه‌های وصل شده دیده شود و باید یکتا باشد."
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:482
 msgid "Media Sharing"
 msgstr "هم‌رسانی رسانه"
 
-#: panels/sharing/cc-sharing-panel.ui:487
+#: panels/sharing/cc-sharing-panel.ui:504
 msgid "Share music, photos and videos over the network."
 msgstr "هم‌رسانی آهنگ‌ها، عکس‌ها و ویدیوها روی شبکه."
 
-#: panels/sharing/cc-sharing-panel.ui:500
+#: panels/sharing/cc-sharing-panel.ui:517
 msgid "Folders"
 msgstr "پوشه‌ها"
 
@@ -8064,10 +8086,6 @@ msgstr "میان‌بر جدید…"
 msgid "Access Points"
 msgstr "نقطه‌های دسترسی"
 
-#: panels/wwan/cc-wwan-apn-dialog.ui:33
-msgid "Add"
-msgstr "افزودن"
-
 #: panels/wwan/cc-wwan-apn-dialog.ui:122
 msgid "APN"
 msgstr "ای‌پی‌ان"
@@ -9037,9 +9055,6 @@ msgstr "صداهای سامانه"
 
 #~ msgid "Suspend & Power Button"
 #~ msgstr "دکمهٔ تعلیق و روشن"
-
-#~ msgid "Copy"
-#~ msgstr "رونوشت"
 
 #~ msgid "Some services are disabled because of no network access."
 #~ msgstr "تعدادی از خدمت‌ها به‌دلیل در دسترس نبودن شبکه، از کار افتاده‌اند."
