@@ -716,7 +716,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
                                        (GAsyncReadyCallback) shell_proxy_ready,
                                        self);
 
-  cc_list_row_set_secondary_label (self->windowing_system_row, get_windowing_system ());
+
 
   get_hardware_model (self);
 
@@ -731,16 +731,18 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   cpu_text = get_cpu_info (info);
   cc_list_row_set_secondary_markup (self->processor_row, cpu_text);
 
-  os_type_text = get_os_type ();
-  cc_list_row_set_secondary_label (self->os_type_row, os_type_text);
+  graphics_hardware_string = get_graphics_hardware_string ();
+  cc_list_row_set_secondary_markup (self->graphics_row, graphics_hardware_string);
+
+  get_primary_disc_info (self);
 
   os_name_text = get_os_name ();
   cc_list_row_set_secondary_label (self->os_name_row, os_name_text);
 
-  get_primary_disc_info (self);
+  os_type_text = get_os_type ();
+  cc_list_row_set_secondary_label (self->os_type_row, os_type_text);
 
-  graphics_hardware_string = get_graphics_hardware_string ();
-  cc_list_row_set_secondary_markup (self->graphics_row, graphics_hardware_string);
+  cc_list_row_set_secondary_label (self->windowing_system_row, get_windowing_system ());
 }
 
 static gboolean
