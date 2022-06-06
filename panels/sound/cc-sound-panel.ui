@@ -8,6 +8,9 @@
             <property name="title" translatable="yes">System Volume</property>
             <child>
               <object class="AdwPreferencesRow">
+                <accessibility>
+                  <property name="label" translatable="yes">Master volume</property>
+                </accessibility>
                 <child>
                   <object class="CcVolumeSlider" id="output_volume_slider">
                     <property name="margin-top">12</property>
@@ -67,6 +70,9 @@
                                 <child>
                                   <object class="CcDeviceComboBox" id="output_device_combo_box">
                                     <property name="hexpand">True</property>
+                                    <accessibility>
+                                      <relation name="labelled-by">output_device_label</relation>
+                                    </accessibility>
                                     <signal name="changed" handler="output_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
                                   </object>
                                 </child>
@@ -110,6 +116,9 @@
                             <child>
                               <object class="CcProfileComboBox" id="output_profile_combo_box">
                                 <property name="hexpand">True</property>
+                                <accessibility>
+                                  <relation name="labelled-by">output_configuration_label</relation>
+                                </accessibility>
                               </object>
                             </child>
                           </object>
@@ -234,6 +243,9 @@
                             <child>
                               <object class="CcDeviceComboBox" id="input_device_combo_box">
                                 <property name="hexpand">True</property>
+                                <accessibility>
+                                  <relation name="labelled-by">input_device_label</relation>
+                                </accessibility>
                                 <signal name="changed" handler="input_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
                               </object>
                             </child>
@@ -269,6 +281,9 @@
                             <child>
                               <object class="CcProfileComboBox" id="input_profile_combo_box">
                                 <property name="hexpand">True</property>
+                                <accessibility>
+                                  <relation name="labelled-by">input_configuration_label</relation>"
+                                </accessibility>
                               </object>
                             </child>
                           </object>
