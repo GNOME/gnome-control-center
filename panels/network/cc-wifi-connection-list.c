@@ -715,10 +715,6 @@ cc_wifi_connection_list_init (CcWifiConnectionList *self)
   self->listbox = GTK_LIST_BOX (gtk_list_box_new ());
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->listbox), GTK_SELECTION_NONE);
   gtk_widget_set_valign (GTK_WIDGET (self->listbox), GTK_ALIGN_START);
-  gtk_widget_set_margin_start (GTK_WIDGET (self->listbox), 18);
-  gtk_widget_set_margin_end (GTK_WIDGET (self->listbox), 18);
-  gtk_widget_set_margin_top (GTK_WIDGET (self->listbox), 18);
-  gtk_widget_set_margin_bottom (GTK_WIDGET (self->listbox), 18);
   gtk_widget_add_css_class (GTK_WIDGET (self->listbox), "boxed-list");
   adw_bin_set_child (ADW_BIN (self), GTK_WIDGET (self->listbox));
 
