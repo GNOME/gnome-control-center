@@ -1024,7 +1024,6 @@ cc_wwan_data_set_default_apn (CcWwanData    *self,
 
   g_return_val_if_fail (CC_IS_WWAN_DATA (self), FALSE);
   g_return_val_if_fail (CC_IS_WWAN_DATA_APN (apn), FALSE);
-  g_return_val_if_fail (self->sim_id != NULL, FALSE);
 
   if (self->default_apn == apn)
     return FALSE;
@@ -1040,8 +1039,10 @@ cc_wwan_data_set_default_apn (CcWwanData    *self,
   self->default_apn = apn;
   connection = wwan_data_get_nm_connection (apn);
   setting = NM_SETTING (nm_connection_get_setting_gsm (connection));
-  g_object_set (G_OBJECT (setting),
-                NM_SETTING_GSM_SIM_ID, self->sim_id, NULL);
+
+  if (self->sim_id)
+    g_object_set (G_OBJECT (setting),
+                  NM_SETTING_GSM_SIM_ID, self->sim_id, NULL);
 
   return TRUE;
 }
