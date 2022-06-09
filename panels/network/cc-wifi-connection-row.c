@@ -212,9 +212,12 @@ update_ui (CcWifiConnectionRow *self)
     }
   else
     {
+      g_autofree char *title_escaped = NULL;
+
       ssid = nm_access_point_get_ssid (best_ap);
       title = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL), g_bytes_get_size (ssid));
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title);
+      title_escaped = g_markup_escape_text (title, -1);
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), title_escaped);
     }
 
   if (active_connection)
