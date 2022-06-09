@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-05-27 22:48+0000\n"
-"PO-Revision-Date: 2022-05-30 18:49+0200\n"
+"POT-Creation-Date: 2022-05-31 21:13+0000\n"
+"PO-Revision-Date: 2022-06-09 22:02+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
 "X-DamnedLies-Scope: partial\n"
 "X-Project-Style: gnome\n"
 
@@ -431,7 +431,10 @@ msgstr ""
 "Papièr pintrat;rèireplan;Fons;Ecran;Burèu;Estil;Clar;Escur;Fosc;Aparéncia;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/datetime/cc-datetime-panel.ui:172
+#: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:122
+#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "Activar"
 
@@ -1414,24 +1417,36 @@ msgstr "_Data &amp ora automaticas"
 msgid "Requires internet access"
 msgstr "Necessita una connexion Internet"
 
-#: panels/datetime/cc-datetime-panel.ui:177
+#: panels/datetime/cc-datetime-panel.ui:180
 msgid "Date &amp; _Time"
 msgstr "Data &amp _ora"
 
-#: panels/datetime/cc-datetime-panel.ui:201
+#: panels/datetime/cc-datetime-panel.ui:204
 msgid "Automatic Time _Zone"
 msgstr "_Fus orari automatic"
 
-#: panels/datetime/cc-datetime-panel.ui:202
+#: panels/datetime/cc-datetime-panel.ui:205
 msgid "Requires location services enabled and internet access"
 msgstr ""
 "Necessita l’activacion dels servicis de localizacion e una connexion Internet"
 
-#: panels/datetime/cc-datetime-panel.ui:214
+#. TRANSLATORS: Status of Parental Controls setup
+#: panels/datetime/cc-datetime-panel.ui:212
+#: panels/display/cc-display-settings.ui:23
+#: panels/keyboard/cc-xkb-modifier-dialog.ui:43
+#: panels/location/cc-location-panel.ui:9 panels/lock/cc-lock-panel.ui:39
+#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
+#: panels/user-accounts/cc-user-panel.c:787
+#: panels/user-accounts/cc-user-panel.c:876
+#: panels/wwan/cc-wwan-device-page.c:476
+msgid "Enabled"
+msgstr "Activat"
+
+#: panels/datetime/cc-datetime-panel.ui:220
 msgid "Time Z_one"
 msgstr "Fus _orari"
 
-#: panels/datetime/cc-datetime-panel.ui:239
+#: panels/datetime/cc-datetime-panel.ui:245
 msgid "Time _Format"
 msgstr "_Format de l'ora"
 
@@ -1630,16 +1645,6 @@ msgstr "Païsatge (revirat)"
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
 
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/display/cc-display-settings.ui:23
-#: panels/keyboard/cc-xkb-modifier-dialog.ui:43 panels/lock/cc-lock-panel.ui:39
-#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
-#: panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:876
-#: panels/wwan/cc-wwan-device-page.c:476
-msgid "Enabled"
-msgstr "Activat"
-
 #: panels/display/cc-display-settings.ui:43
 msgctxt "display setting"
 msgid "Orientation"
@@ -1820,7 +1825,7 @@ msgid "System Logo"
 msgstr "Logotipe sistèma"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
-#: panels/sharing/cc-sharing-panel.ui:301
+#: panels/sharing/cc-sharing-panel.ui:304
 msgid "Device Name"
 msgstr "Nom del periferic"
 
@@ -2101,7 +2106,8 @@ msgstr "Preferéncias"
 msgid "View Keyboard Layout"
 msgstr "Veire l’agençament del clavièr"
 
-#: panels/keyboard/cc-input-row.ui:54
+#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
+#: panels/sharing/cc-sharing-panel.c:646
 msgid "Remove"
 msgstr "Suprimir"
 
@@ -2406,15 +2412,15 @@ msgstr ""
 "Acorchi;Espaci de trabalh;Fenèstra;Redimensionar;Zoom;Contraste;Picada;Font;"
 "Verrolhar;Volum;"
 
-#: panels/location/cc-location-panel.ui:20
+#: panels/location/cc-location-panel.ui:23
 msgid "Location Services Turned Off"
 msgstr "Servici de lozalicion desactivat"
 
-#: panels/location/cc-location-panel.ui:21
+#: panels/location/cc-location-panel.ui:24
 msgid "No applications can obtain location information."
 msgstr "Cap d’aplicacion obten pas d’informacions de localizacion."
 
-#: panels/location/cc-location-panel.ui:35
+#: panels/location/cc-location-panel.ui:38
 msgid ""
 "Location services allow applications to know your location. Using Wi-Fi and "
 "mobile broadband increases accuracy.\n"
@@ -2432,7 +2438,7 @@ msgstr ""
 "\n"
 "Permet a las aplicacions seguentas de determinar vòstra posicion."
 
-#: panels/location/cc-location-panel.ui:53
+#: panels/location/cc-location-panel.ui:56
 msgid "No Applications Have Asked for Location Access"
 msgstr "Cap d’aplicacion a pas demandat l’accès a vòstre emplaçament"
 
@@ -2611,15 +2617,15 @@ msgstr "Verrolhar l'ecran"
 msgid "screen;lock;private;privacy;"
 msgstr "ecran;verrolh;privat;confidencialitat;"
 
-#: panels/microphone/cc-microphone-panel.ui:20
+#: panels/microphone/cc-microphone-panel.ui:23
 msgid "Microphone Turned Off"
 msgstr "Lo microfòn es inactiu"
 
-#: panels/microphone/cc-microphone-panel.ui:21
+#: panels/microphone/cc-microphone-panel.ui:24
 msgid "No applications can record sound."
 msgstr "Cap d’aplicacion pòt pas enregistrar de son."
 
-#: panels/microphone/cc-microphone-panel.ui:34
+#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
@@ -2633,7 +2639,7 @@ msgstr ""
 "\n"
 "Autoriatz las aplicacions çai-jos a utilizar lo microfòn."
 
-#: panels/microphone/cc-microphone-panel.ui:51
+#: panels/microphone/cc-microphone-panel.ui:54
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "Cap d’aplicacion a pas demandat l’accès al microfòn"
 
@@ -2955,7 +2961,7 @@ msgstr "Nom de la ret"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
 #: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:378
+#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:391
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -5955,7 +5961,7 @@ msgid "Search;Find;Index;Hide;Privacy;Results;"
 msgstr "Recercar;Recèrca;Indèx;Amagar;Confidencialitat;Privat;Resultats;"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:265
+#: panels/sharing/cc-sharing-networks.c:268
 msgid "No networks selected for sharing"
 msgstr "Cap de ret de partiment es pas seleccionada"
 
@@ -5987,8 +5993,16 @@ msgstr "Actiu"
 msgid "Choose a Folder"
 msgstr "Causir un dorsièr"
 
+#: panels/sharing/cc-sharing-panel.c:672 panels/wwan/cc-wwan-apn-dialog.ui:33
+msgid "Add"
+msgstr "Apondre"
+
+#: panels/sharing/cc-sharing-panel.c:736
+msgid "Enable media sharing"
+msgstr "Activar lo partiment de mèdias"
+
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:747
+#: panels/sharing/cc-sharing-panel.c:756
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5998,7 +6012,7 @@ msgstr ""
 "los autres sus la ret actuala en utilizant  : %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:753
+#: panels/sharing/cc-sharing-panel.c:762
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -6009,19 +6023,23 @@ msgstr ""
 "connectar en utilizant la comanda Shell securizada :\n"
 "%s"
 
-#: panels/sharing/cc-sharing-panel.c:1296
+#: panels/sharing/cc-sharing-panel.c:942
+msgid "Enable personal media sharing"
+msgstr "Activar lo partiment de fichièrs personals"
+
+#: panels/sharing/cc-sharing-panel.c:1308
 msgid "Device name copied"
 msgstr "Nom del periferic copiat"
 
-#: panels/sharing/cc-sharing-panel.c:1307
+#: panels/sharing/cc-sharing-panel.c:1319
 msgid "Device address copied"
 msgstr "Adreça del periferic copiada"
 
-#: panels/sharing/cc-sharing-panel.c:1318
+#: panels/sharing/cc-sharing-panel.c:1330
 msgid "Username copied"
 msgstr "Nom d’utilizaire copiat"
 
-#: panels/sharing/cc-sharing-panel.c:1329
+#: panels/sharing/cc-sharing-panel.c:1341
 msgid "Password copied"
 msgstr "Senhal copiat"
 
@@ -6063,12 +6081,12 @@ msgstr "Demandar lo sen_hal"
 msgid "Remote Login"
 msgstr "Connexion distanta"
 
-#: panels/sharing/cc-sharing-panel.ui:250
-#: panels/sharing/cc-sharing-panel.ui:269
+#: panels/sharing/cc-sharing-panel.ui:251
+#: panels/sharing/cc-sharing-panel.ui:270
 msgid "Remote Desktop"
 msgstr "Burèu distant"
 
-#: panels/sharing/cc-sharing-panel.ui:265
+#: panels/sharing/cc-sharing-panel.ui:266
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
@@ -6076,55 +6094,62 @@ msgstr ""
 "Lo burèu a distància permet de visualizar e controlar lo burèu a partir d’un "
 "autre ordenador."
 
-#: panels/sharing/cc-sharing-panel.ui:270
+#: panels/sharing/cc-sharing-panel.ui:271
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "Activar o desactivar una connexion distanta a aqueste ordenador."
 
-#: panels/sharing/cc-sharing-panel.ui:282
+#: panels/sharing/cc-sharing-panel.ui:284
 msgid "Remote Control"
 msgstr "Contraròtle a distància"
 
-#: panels/sharing/cc-sharing-panel.ui:283
+#: panels/sharing/cc-sharing-panel.ui:285
 msgid "Allows remote connections to control the screen."
 msgstr "Autorizar los connectats a distància a contrarotlar l’ecran"
 
-#: panels/sharing/cc-sharing-panel.ui:296
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "How to Connect"
 msgstr "Cossí se connectar"
 
-#: panels/sharing/cc-sharing-panel.ui:297
+#: panels/sharing/cc-sharing-panel.ui:300
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr ""
 "Connectatz-vos a aqueste ordenador en utilizant lo nom d’aparelh  o l’adreça "
 "de burèu a distància."
 
-#: panels/sharing/cc-sharing-panel.ui:325
+#: panels/sharing/cc-sharing-panel.ui:318
+#: panels/sharing/cc-sharing-panel.ui:345
+#: panels/sharing/cc-sharing-panel.ui:379
+#: panels/sharing/cc-sharing-panel.ui:405
+msgid "Copy"
+msgstr "Copiar"
+
+#: panels/sharing/cc-sharing-panel.ui:331
 msgid "Remote Desktop Address"
 msgstr "Adreça burèu distant"
 
-#: panels/sharing/cc-sharing-panel.ui:352
+#: panels/sharing/cc-sharing-panel.ui:361
 msgid "Authentication"
 msgstr "Autentificacion"
 
-#: panels/sharing/cc-sharing-panel.ui:353
+#: panels/sharing/cc-sharing-panel.ui:362
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "Per se connectar a aqueste ordenador cal un nom d’utilizaire e un senhal."
 
-#: panels/sharing/cc-sharing-panel.ui:357
+#: panels/sharing/cc-sharing-panel.ui:366
 msgid "User Name"
 msgstr "Nom d’utilizaire"
 
-#: panels/sharing/cc-sharing-panel.ui:403
+#: panels/sharing/cc-sharing-panel.ui:420
 msgid "Verify Encryption"
 msgstr "Verificar lo chiframent"
 
-#: panels/sharing/cc-sharing-panel.ui:432
+#: panels/sharing/cc-sharing-panel.ui:449
 msgid "Encryption Fingerprint"
 msgstr "Chiframent per emprentas"
 
-#: panels/sharing/cc-sharing-panel.ui:433
+#: panels/sharing/cc-sharing-panel.ui:450
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6132,15 +6157,15 @@ msgstr ""
 "L'emprunta de chiframent se vei pendent la connexion als clients e deu èsser "
 "identica."
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:482
 msgid "Media Sharing"
 msgstr "Partejar los mèdias"
 
-#: panels/sharing/cc-sharing-panel.ui:487
+#: panels/sharing/cc-sharing-panel.ui:504
 msgid "Share music, photos and videos over the network."
 msgstr "Partejar de la musica, de fòtos e de vidèos sus la ret."
 
-#: panels/sharing/cc-sharing-panel.ui:500
+#: panels/sharing/cc-sharing-panel.ui:517
 msgid "Folders"
 msgstr "Dorsièrs"
 
@@ -8245,10 +8270,6 @@ msgstr "Acorchi novèl…"
 msgid "Access Points"
 msgstr "Punts d’accès"
 
-#: panels/wwan/cc-wwan-apn-dialog.ui:33
-msgid "Add"
-msgstr "Apondre"
-
 #: panels/wwan/cc-wwan-apn-dialog.ui:122
 msgid "APN"
 msgstr "APN"
@@ -9270,9 +9291,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "Suspend & Power Button"
 #~ msgstr "Metre en velha & atudar"
-
-#~ msgid "Copy"
-#~ msgstr "Copiar"
 
 #~ msgid "Some services are disabled because of no network access."
 #~ msgstr "D'unes servicis son desactivats fauta d'accès a la ret."
@@ -10433,9 +10451,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "Sha­ring"
 #~ msgstr "Partiment"
-
-#~ msgid "Personal File Sharing"
-#~ msgstr "Partiment de fichièrs personals"
 
 #~ msgid ""
 #~ "Media sharing allows you to share music, photos and videos over the "
