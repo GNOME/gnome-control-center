@@ -716,8 +716,6 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
                                        (GAsyncReadyCallback) shell_proxy_ready,
                                        self);
 
-
-
   get_hardware_model (self);
 
   ram_size = get_ram_size_dmi ();
