@@ -98,7 +98,7 @@ default_app_changed (CcDefaultAppsPanel  *self,
           for (j = 0; j < patterns->len; j++)
             {
               GPatternSpec *pattern = g_ptr_array_index (patterns, j);
-              if (g_pattern_match_string (pattern, mime_types[i]))
+              if (g_pattern_spec_match_string (pattern, mime_types[i]))
                 matched = TRUE;
             }
           if (!matched)
