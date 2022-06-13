@@ -46,7 +46,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="sticky_keys_description">
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Treats a sequence of modifier keys as a key combination</property>
                       </object>
@@ -101,7 +101,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="slow_keys_description">
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Puts a delay between when a key is pressed and when it is accepted</property>
                       </object>
@@ -208,7 +208,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="bounce_keys_description">
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Ignores fast duplicate keypresses</property>
                       </object>
@@ -284,6 +284,9 @@
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
+                <accessibility>
+                  <relation name="described-by">sticky_keys_description</relation>
+                </accessibility>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">1</property>
@@ -295,6 +298,9 @@
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
+                <accessibility>
+
+                </accessibility>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">2</property>
@@ -306,6 +312,9 @@
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
+                <accessibility>
+                  <relation name="described-by">bounce_keys_description</relation>
+                </accessibility>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">3</property>
@@ -331,7 +340,7 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkLabel">
+                  <object class="GtkLabel" id="keyboard_toggle_description">
                     <property name="xalign">0</property>
                     <property name="label" translatable="yes">Turn accessibility features on and off using the keyboard</property>
                   </object>
@@ -343,6 +352,9 @@
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
+                <accessibility>
+                  <relation name="described-by">keyboard_toggle_description</relation>
+                </accessibility>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">0</property>
