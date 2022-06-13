@@ -44,7 +44,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="secondary_click_description">
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Trigger a secondary click by holding down the primary button</property>
                       </object>
@@ -132,7 +132,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkLabel">
+                      <object class="GtkLabel" id="hover_click_description">
                         <property name="xalign">0</property>
                         <property name="label" translatable="yes">Trigger a click when the pointer hovers</property>
                       </object>
@@ -248,6 +248,9 @@
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
+                <accessibility>
+                  <relation name="described-by">secondary_click_description</relation>
+                </accessibility>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">0</property>
@@ -259,6 +262,9 @@
                 <property name="halign">end</property>
                 <property name="valign">start</property>
                 <property name="hexpand">True</property>
+                <accessibility>
+                  <relation name="described-by">hover_click_description</relation>
+                </accessibility>
                 <layout>
                   <property name="column">1</property>
                   <property name="row">1</property>
