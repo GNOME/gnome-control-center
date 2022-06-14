@@ -291,6 +291,9 @@ cc_wwan_apn_dialog_row_new (CcWwanDataApn   *apn,
   gtk_grid_attach (GTK_GRID (grid), apn_label, 1, 1, 1, 1);
 
   edit_button = gtk_button_new_from_icon_name ("emblem-system-symbolic");
+  gtk_accessible_update_property (GTK_ACCESSIBLE (edit_button),
+                                GTK_ACCESSIBLE_PROPERTY_LABEL, _("Edit"),
+                                -1);
   g_signal_connect_object (edit_button, "clicked",
                            G_CALLBACK (cc_wwan_apn_edit_clicked_cb),
                            self, G_CONNECT_SWAPPED);
