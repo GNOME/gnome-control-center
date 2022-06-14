@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-03-11 12:34+0000\n"
-"PO-Revision-Date: 2022-03-15 17:40+0100\n"
+"POT-Creation-Date: 2022-05-27 03:58+0000\n"
+"PO-Revision-Date: 2022-06-14 17:28+0200\n"
 "Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italiano <tp@lists.linux.it>\n"
 "Language: it\n"
@@ -24,59 +24,59 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: panels/applications/cc-applications-panel.c:803
+#: panels/applications/cc-applications-panel.c:790
 msgid "System Bus"
 msgstr "Bus di sistema"
 
-#: panels/applications/cc-applications-panel.c:803
+#: panels/applications/cc-applications-panel.c:790
+#: panels/applications/cc-applications-panel.c:792
 #: panels/applications/cc-applications-panel.c:805
-#: panels/applications/cc-applications-panel.c:818
-#: panels/applications/cc-applications-panel.c:823
+#: panels/applications/cc-applications-panel.c:810
 msgid "Full access"
 msgstr "Accesso completo"
 
-#: panels/applications/cc-applications-panel.c:805
+#: panels/applications/cc-applications-panel.c:792
 msgid "Session Bus"
 msgstr "Bus di sessione"
 
-#: panels/applications/cc-applications-panel.c:809
+#: panels/applications/cc-applications-panel.c:796
 #: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:266
 #: panels/thunderbolt/cc-bolt-panel.ui:310
 msgid "Devices"
 msgstr "Dispositivi"
 
-#: panels/applications/cc-applications-panel.c:809
+#: panels/applications/cc-applications-panel.c:796
 msgid "Full access to /dev"
 msgstr "Accesso completo a /dev"
 
-#: panels/applications/cc-applications-panel.c:813
+#: panels/applications/cc-applications-panel.c:800
 #: panels/network/gnome-network-panel.desktop.in.in:3
 #: panels/network/network-mobile.ui:230 panels/wwan/cc-wwan-device-page.ui:61
 #: panels/wwan/cc-wwan-network-dialog.ui:5
 msgid "Network"
 msgstr "Rete"
 
-#: panels/applications/cc-applications-panel.c:813
+#: panels/applications/cc-applications-panel.c:800
 msgid "Has network access"
 msgstr "Ha accesso alla rete"
 
-#: panels/applications/cc-applications-panel.c:818
-#: panels/applications/cc-applications-panel.c:820
+#: panels/applications/cc-applications-panel.c:805
+#: panels/applications/cc-applications-panel.c:807
 #: panels/search/cc-search-locations-dialog.c:384
 msgid "Home"
 msgstr "Home"
 
-#: panels/applications/cc-applications-panel.c:820
-#: panels/applications/cc-applications-panel.c:825
+#: panels/applications/cc-applications-panel.c:807
+#: panels/applications/cc-applications-panel.c:812
 msgid "Read-only"
 msgstr "Sola lettura"
 
-#: panels/applications/cc-applications-panel.c:823
-#: panels/applications/cc-applications-panel.c:825
+#: panels/applications/cc-applications-panel.c:810
+#: panels/applications/cc-applications-panel.c:812
 msgid "File System"
 msgstr "File system"
 
-#: panels/applications/cc-applications-panel.c:829
+#: panels/applications/cc-applications-panel.c:816
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
 #: shell/cc-window.c:878 shell/cc-window.ui:22
@@ -84,11 +84,11 @@ msgstr "File system"
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: panels/applications/cc-applications-panel.c:829
+#: panels/applications/cc-applications-panel.c:816
 msgid "Can change settings"
 msgstr "Può modificare impostazioni"
 
-#: panels/applications/cc-applications-panel.c:831
+#: panels/applications/cc-applications-panel.c:818
 #, c-format
 msgid ""
 "%s has the following permissions built-in. These cannot be altered. If you "
@@ -97,27 +97,27 @@ msgstr ""
 "%s dispone dei seguenti permessi integrati non modificabili. In caso di "
 "dubbi riguardo a questi permessi, è consigliabile rimuovere l'applicazione."
 
-#: panels/applications/cc-applications-panel.c:1164
+#: panels/applications/cc-applications-panel.c:1154
 #, c-format
 msgid "%u file and link type that is opened by the app"
 msgid_plural "%u file and link types that are opened by the app"
 msgstr[0] "%u file e collegamento aperto dall'app"
 msgstr[1] "%u file e collegamenti aperti dall'app"
 
-#: panels/applications/cc-applications-panel.c:1171
+#: panels/applications/cc-applications-panel.c:1161
 #, c-format
 msgid "<b>%s</b> is used to open the following types of files and links."
 msgstr ""
 "<b>%s</b> viene utilizzato per aprire i seguenti tipi di file e collegamenti."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
-#: panels/applications/cc-applications-panel.c:1223
+#: panels/applications/cc-applications-panel.c:1213
 #, c-format
 msgid "%s of disk space used"
 msgstr "%s di spazio su disco utilizzato"
 
 #. List of applications.
-#: panels/applications/cc-applications-panel.c:1387
+#: panels/applications/cc-applications-panel.c:1377
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in.in:3
 #: panels/notifications/cc-notifications-panel.ui:26
@@ -323,7 +323,6 @@ msgstr "Pulisci cache…"
 msgid "Control various application permissions and settings"
 msgstr "Controlla permessi e impostazioni delle applicazioni"
 
-#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in.in:16
 msgid "application;flatpak;permission;setting;"
@@ -342,14 +341,14 @@ msgstr "Seleziona un'immagine"
 #: panels/network/cc-wifi-hotspot-dialog.ui:123
 #: panels/network/cc-wifi-panel.c:881
 #: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/connection-editor/vpn-helpers.c:226
-#: panels/network/connection-editor/vpn-helpers.c:346
+#: panels/network/connection-editor/vpn-helpers.c:221
+#: panels/network/connection-editor/vpn-helpers.c:341
 #: panels/network/net-device-wifi.c:860
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:263
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:523 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:519 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-avatar-chooser.c:167
@@ -365,9 +364,9 @@ msgid "_Cancel"
 msgstr "A_nnulla"
 
 #: panels/background/cc-background-chooser.c:311
-#: panels/network/connection-editor/vpn-helpers.c:227
+#: panels/network/connection-editor/vpn-helpers.c:222
 #: panels/printers/pp-details-dialog.c:264
-#: panels/sharing/cc-sharing-panel.c:524
+#: panels/sharing/cc-sharing-panel.c:520
 #: panels/user-accounts/cc-avatar-chooser.c:168
 msgid "_Open"
 msgstr "_Apri"
@@ -395,19 +394,19 @@ msgstr "Sfondo attuale"
 msgid "Style"
 msgstr "Stile"
 
-#: panels/background/cc-background-panel.ui:45
+#: panels/background/cc-background-panel.ui:46
 msgid "Light"
 msgstr "Chiaro"
 
-#: panels/background/cc-background-panel.ui:72
+#: panels/background/cc-background-panel.ui:73
 msgid "Dark"
 msgstr "Scuro"
 
-#: panels/background/cc-background-panel.ui:91
+#: panels/background/cc-background-panel.ui:92
 msgid "Background"
 msgstr "Sfondo"
 
-#: panels/background/cc-background-panel.ui:97
+#: panels/background/cc-background-panel.ui:98
 msgid "Add Picture…"
 msgstr "Aggiungi immagine…"
 
@@ -505,7 +504,6 @@ msgstr "Nessuna applicazione ha richiesto accesso alla videocamera"
 msgid "Protect your pictures"
 msgstr "Proteggere le proprie immagini"
 
-#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/camera/gnome-camera-panel.desktop.in.in:20
 #: panels/microphone/gnome-microphone-panel.desktop.in.in:20
@@ -721,7 +719,7 @@ msgid "Save Profile"
 msgstr "Salva profilo"
 
 #: panels/color/cc-color-panel.c:845
-#: panels/network/connection-editor/vpn-helpers.c:347
+#: panels/network/connection-editor/vpn-helpers.c:342
 #: panels/wwan/cc-wwan-apn-dialog.ui:43
 msgid "_Save"
 msgstr "_Salva"
@@ -1519,7 +1517,6 @@ msgstr "Diagnostica"
 msgid "Report your problems"
 msgstr "Segnala il problema"
 
-#. FIXME
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in.in:20
 #: panels/location/gnome-location-panel.desktop.in.in:20
@@ -1535,22 +1532,22 @@ msgstr ""
 #: panels/display/cc-display-panel.c:512
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:734 panels/power/cc-power-panel.c:741
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
+#: panels/universal-access/cc-ua-panel.c:336
+#: panels/universal-access/cc-ua-panel.c:468
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:490
+#: panels/universal-access/cc-ua-panel.c:526
 msgid "On"
 msgstr "On"
 
 #: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:728 panels/power/cc-power-panel.c:739
-#: panels/universal-access/cc-ua-panel.c:337
-#: panels/universal-access/cc-ua-panel.c:469
-#: panels/universal-access/cc-ua-panel.c:479
-#: panels/universal-access/cc-ua-panel.c:491
-#: panels/universal-access/cc-ua-panel.c:527
+#: panels/universal-access/cc-ua-panel.c:336
+#: panels/universal-access/cc-ua-panel.c:468
+#: panels/universal-access/cc-ua-panel.c:478
+#: panels/universal-access/cc-ua-panel.c:490
+#: panels/universal-access/cc-ua-panel.c:526
 msgid "Off"
 msgstr "Off"
 
@@ -2210,11 +2207,11 @@ msgid_plural "%d modified"
 msgstr[0] "%d modificata"
 msgstr[1] "%d modificate"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:460
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:463
 msgid "Reset All Shortcuts?"
 msgstr "Ripristinare tutte le scorciatoie?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:463
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:466
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2222,7 +2219,7 @@ msgstr ""
 "Ripristinare le scorciatoie potrebbe causare problemi con quelle "
 "personalizzate. Questa azione non può essere annullata."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:467
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:470
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/wireless-security/ws-file-chooser-button.c:94
 #: panels/printers/ppd-selection-dialog.ui:83
@@ -2230,7 +2227,7 @@ msgstr ""
 msgid "Cancel"
 msgstr "Annulla"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:468
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:471
 msgid "Reset All"
 msgstr "Ripristina tutte"
 
@@ -2388,7 +2385,6 @@ msgstr "Nessuna applicazione ha richiesto accesso alla posizione"
 msgid "Protect your location information"
 msgstr "Proteggere le informazioni sulla posizione"
 
-#. FIXME
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
 #: panels/lock/cc-lock-panel.c:62
 msgctxt "lock_screen"
@@ -2414,10 +2410,16 @@ msgid "2 minutes"
 msgstr "2 minuti"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:74 panels/lock/cc-lock-panel.c:77
+#: panels/lock/cc-lock-panel.c:74
 msgctxt "lock_screen"
 msgid "3 minutes"
 msgstr "3 minuti"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/lock/cc-lock-panel.c:77
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 minuti"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
 #: panels/lock/cc-lock-panel.c:80
@@ -2543,7 +2545,6 @@ msgstr "Blocco schermo"
 msgid "Lock your screen"
 msgstr "Blocca lo schermo"
 
-#. FIXME
 #: panels/microphone/cc-microphone-panel.ui:20
 msgid "Microphone Turned Off"
 msgstr "Il microfono è spento"
@@ -2574,7 +2575,6 @@ msgstr "Nessuna applicazione ha richiesto accesso al microfono"
 msgid "Protect your conversations"
 msgstr "Proteggere le proprie conversazioni"
 
-#. FIXME
 #: panels/mouse/cc-mouse-panel.ui:9 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test Your _Settings"
 msgstr "Test _impostazioni"
@@ -3425,11 +3425,11 @@ msgstr "Aggiungi VPN"
 msgid "S_ecurity"
 msgstr "Sicur_ezza"
 
-#: panels/network/connection-editor/vpn-helpers.c:191
+#: panels/network/connection-editor/vpn-helpers.c:186
 msgid "Cannot import VPN connection"
 msgstr "Impossibile importare la connessione VPN"
 
-#: panels/network/connection-editor/vpn-helpers.c:193
+#: panels/network/connection-editor/vpn-helpers.c:188
 #, c-format
 msgid ""
 "The file “%s” could not be read or does not contain recognized VPN "
@@ -3442,29 +3442,29 @@ msgstr ""
 "\n"
 "Errore: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:223
+#: panels/network/connection-editor/vpn-helpers.c:218
 msgid "Select file to import"
 msgstr "Selezione file da importare"
 
-#: panels/network/connection-editor/vpn-helpers.c:276
+#: panels/network/connection-editor/vpn-helpers.c:271
 #, c-format
 msgid "A file named “%s” already exists."
 msgstr "Esiste già un file con nome «%s»."
 
-#: panels/network/connection-editor/vpn-helpers.c:278
+#: panels/network/connection-editor/vpn-helpers.c:273
 msgid "_Replace"
 msgstr "_Sostituisci"
 
-#: panels/network/connection-editor/vpn-helpers.c:280
+#: panels/network/connection-editor/vpn-helpers.c:275
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
 msgstr "Sostituire %s con la connessione VPN che si sta salvando?"
 
-#: panels/network/connection-editor/vpn-helpers.c:315
+#: panels/network/connection-editor/vpn-helpers.c:310
 msgid "Cannot export VPN connection"
 msgstr "Impossibile esportare la connessione VPN"
 
-#: panels/network/connection-editor/vpn-helpers.c:317
+#: panels/network/connection-editor/vpn-helpers.c:312
 #, c-format
 msgid ""
 "The VPN connection “%s” could not be exported to %s.\n"
@@ -3475,7 +3475,7 @@ msgstr ""
 "\n"
 "Errore: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:343
+#: panels/network/connection-editor/vpn-helpers.c:338
 msgid "Export VPN connection"
 msgstr "Esporta connessione VPN"
 
@@ -4421,12 +4421,12 @@ msgstr "Aggiungi account"
 
 #. translators: This is the title of the "Show Account" dialog. The
 #. * %s is the name of the provider. e.g., 'Google'.
-#: panels/online-accounts/gnome-control-center-goa-helper.c:426
+#: panels/online-accounts/gnome-control-center-goa-helper.c:428
 #, c-format
 msgid "%s Account"
 msgstr "Account %s"
 
-#: panels/online-accounts/gnome-control-center-goa-helper.c:429
+#: panels/online-accounts/gnome-control-center-goa-helper.c:431
 msgid "Remove Account"
 msgstr "Rimuovi account"
 
@@ -5533,7 +5533,9 @@ msgstr ""
 msgid "Formats"
 msgstr "Formati"
 
-#: panels/region/cc-format-chooser.ui:37 panels/wwan/cc-wwan-apn-dialog.ui:21
+#: panels/region/cc-format-chooser.ui:37
+#: panels/wacom/cc-wacom-stylus-page.ui:136
+#: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
 msgstr "Indietro"
 
@@ -5870,32 +5872,32 @@ msgstr "Nessuna rete selezionata per la condivisione"
 msgid "Networks"
 msgstr "Reti"
 
-#: panels/sharing/cc-sharing-panel.c:367
+#: panels/sharing/cc-sharing-panel.c:363
 msgctxt "service is enabled"
 msgid "On"
 msgstr "On"
 
-#: panels/sharing/cc-sharing-panel.c:369 panels/sharing/cc-sharing-panel.c:396
+#: panels/sharing/cc-sharing-panel.c:365 panels/sharing/cc-sharing-panel.c:392
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Off"
 
-#: panels/sharing/cc-sharing-panel.c:399
+#: panels/sharing/cc-sharing-panel.c:395
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: panels/sharing/cc-sharing-panel.c:402
+#: panels/sharing/cc-sharing-panel.c:398
 msgctxt "service is active"
 msgid "Active"
 msgstr "Attivo"
 
-#: panels/sharing/cc-sharing-panel.c:520
+#: panels/sharing/cc-sharing-panel.c:516
 msgid "Choose a Folder"
 msgstr "Scegliere una cartella"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:748
+#: panels/sharing/cc-sharing-panel.c:744
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5905,7 +5907,7 @@ msgstr ""
 "cartella Pubblici sulla rete attuale usando: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:754
+#: panels/sharing/cc-sharing-panel.c:750
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -6011,11 +6013,11 @@ msgstr "Nome utente"
 msgid "Verify Encryption"
 msgstr "Verifica crittografia"
 
-#: panels/sharing/cc-sharing-panel.ui:430
+#: panels/sharing/cc-sharing-panel.ui:428
 msgid "Encryption Fingerprint"
 msgstr "Impronta digitale crittografica"
 
-#: panels/sharing/cc-sharing-panel.ui:431
+#: panels/sharing/cc-sharing-panel.ui:429
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical"
@@ -6023,15 +6025,15 @@ msgstr ""
 "L'impronta digitale di crittografia può essere visualizzata nella "
 "connessione dei client e dovrebbe essere identica"
 
-#: panels/sharing/cc-sharing-panel.ui:463
+#: panels/sharing/cc-sharing-panel.ui:461
 msgid "Media Sharing"
 msgstr "Condivisione multimediale"
 
-#: panels/sharing/cc-sharing-panel.ui:485
+#: panels/sharing/cc-sharing-panel.ui:483
 msgid "Share music, photos and videos over the network."
 msgstr "Condivide musica, fotografie e video sulla rete"
 
-#: panels/sharing/cc-sharing-panel.ui:498
+#: panels/sharing/cc-sharing-panel.ui:496
 msgid "Folders"
 msgstr "Cartelle"
 
@@ -6057,7 +6059,7 @@ msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 "È necessario autenticarsi per abilitare o disabilitare l'accesso remoto"
 
-#: panels/sound/cc-alert-chooser.c:150
+#: panels/sound/cc-alert-chooser.c:153
 msgid "Custom"
 msgstr "Personalizzato"
 
@@ -6550,32 +6552,32 @@ msgstr "Attiva e disattiva le funzioni di accessibilità usando la tastiera"
 
 #. translators: the labels will read:
 #. * Cursor Size: Default
-#: panels/universal-access/cc-ua-panel.c:357
+#: panels/universal-access/cc-ua-panel.c:356
 msgctxt "cursor size"
 msgid "Default"
 msgstr "Predefinito"
 
-#: panels/universal-access/cc-ua-panel.c:360
+#: panels/universal-access/cc-ua-panel.c:359
 msgctxt "cursor size"
 msgid "Medium"
 msgstr "Medio"
 
-#: panels/universal-access/cc-ua-panel.c:363
+#: panels/universal-access/cc-ua-panel.c:362
 msgctxt "cursor size"
 msgid "Large"
 msgstr "Grande"
 
-#: panels/universal-access/cc-ua-panel.c:366
+#: panels/universal-access/cc-ua-panel.c:365
 msgctxt "cursor size"
 msgid "Larger"
 msgstr "Più grande"
 
-#: panels/universal-access/cc-ua-panel.c:369
+#: panels/universal-access/cc-ua-panel.c:368
 msgctxt "cursor size"
 msgid "Largest"
 msgstr "Il più grande"
 
-#: panels/universal-access/cc-ua-panel.c:373
+#: panels/universal-access/cc-ua-panel.c:372
 #, c-format
 msgid "%d pixel"
 msgid_plural "%d pixels"
@@ -7068,7 +7070,6 @@ msgstr "Cronologia file e cestino"
 msgid "Don't leave traces"
 msgstr "Non lasciare tracce"
 
-#. FIXME
 #: panels/user-accounts/cc-add-user-dialog.c:35
 msgid "Should match the web address of your login provider."
 msgstr ""
@@ -7079,7 +7080,7 @@ msgid "Failed to add account"
 msgstr "Aggiunta dell'account non riuscita"
 
 #: panels/user-accounts/cc-add-user-dialog.c:679
-#: panels/user-accounts/cc-password-dialog.c:258
+#: panels/user-accounts/cc-password-dialog.c:260
 msgid "The passwords do not match."
 msgstr "Le password non corrispondono."
 
@@ -8052,6 +8053,20 @@ msgstr "Collegare o accendere la tavoletta Wacom."
 msgid "Tip Pressure Feel"
 msgstr "Sensibilità della punta"
 
+#: panels/wacom/cc-wacom-stylus-page.ui:21
+#: panels/wacom/cc-wacom-stylus-page.ui:82
+msgid "Soft"
+msgstr "Leggera"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:35
+msgid "Stylus tip pressure"
+msgstr "Pressione della punta dello stilo"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:41
+#: panels/wacom/cc-wacom-stylus-page.ui:102
+msgid "Firm"
+msgstr "Pesante"
+
 #: panels/wacom/cc-wacom-stylus-page.ui:54
 msgctxt "display setting"
 msgid "Button 1"
@@ -8071,6 +8086,27 @@ msgstr "Pulsante 3"
 #: panels/wacom/cc-wacom-stylus-page.ui:77
 msgid "Eraser Pressure Feel"
 msgstr "Sensibilità della gomma"
+
+# è ciò che appare nel tool per windows, come mostrato nel PDF di documentazione delle tavolette Bamboo
+#: panels/wacom/cc-wacom-stylus-page.ui:96
+msgid "Eraser pressure"
+msgstr "Pressione della gomma"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:133
+msgid "Default"
+msgstr "Predefinita"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:134
+msgid "Middle Mouse Button Click"
+msgstr "Clic pulsante centrale del mouse"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:135
+msgid "Right Mouse Button Click"
+msgstr "Clic pulsante destro del mouse"
+
+#: panels/wacom/cc-wacom-stylus-page.ui:137
+msgid "Forward"
+msgstr "Avanti"
 
 #: panels/wacom/cc-wacom-tool.c:321
 msgid "Airbrush stylus with pressure, tilt, and integrated slider"
@@ -8112,7 +8148,6 @@ msgid "Access Points"
 msgstr "Punti d'accesso"
 
 #: panels/wwan/cc-wwan-apn-dialog.ui:122
-#| msgid "VPN"
 msgid "APN"
 msgstr "APN"
 
@@ -8538,7 +8573,6 @@ msgstr "Rete mobile"
 msgid "Configure Telephony and mobile data connections"
 msgstr "Configura telefonia e connessioni dati mobili"
 
-#. FIXME
 #. Translators: Search terms to find the WWAN panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:16
 msgid "cellular;wwan;telephony;sim;mobile;"
@@ -8553,23 +8587,7 @@ msgid "Settings is the primary interface for configuring your system."
 msgstr ""
 "«Impostazioni» è il programma principale per la configurazione del sistema."
 
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:17
-msgid "GNOME Settings Sound Panel"
-msgstr "Pannello Audio di Impostazioni GNOME"
-
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:21
-msgid "GNOME Settings Mouse &amp; Touchpad Panel"
-msgstr "Pannello Mouse e touchpad di Impostazioni GNOME"
-
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:25
-msgid "GNOME Settings Background Panel"
-msgstr "Pannello Sfondo di Impostazioni GNOME"
-
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:29
-msgid "GNOME Settings Keyboard Panel"
-msgstr "Pannello Tastiera di Impostazioni GNOME"
-
-#: shell/appdata/org.gnome.Settings.appdata.xml.in:38
+#: shell/appdata/org.gnome.Settings.appdata.xml.in:34
 msgid "The GNOME Project"
 msgstr "Il progetto GNOME"
 
