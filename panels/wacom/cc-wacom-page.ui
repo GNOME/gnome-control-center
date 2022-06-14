@@ -15,6 +15,7 @@
           <object class="AdwActionRow" id="tablet_mode">
             <property name="title" translatable="yes">Tablet Mode</property>
             <property name="subtitle" translatable="yes">Use absolute positioning for the pen</property>
+            <property name="activatable_widget">tablet_mode_switch</property>
             <child>
               <object class="GtkSwitch" id="tablet_mode_switch">
                 <property name="valign">center</property>
@@ -26,6 +27,7 @@
           <object class="AdwActionRow" id="tablet_left_handed">
             <property name="title" translatable="yes">Left Hand Orientation</property>
             <property name="subtitle" translatable="yes">Tablet and Express Keys™ are rotated for left hand use</property>
+            <property name="activatable_widget">tablet_left_handed</property>
             <child>
               <object class="GtkSwitch" id="tablet_left_handed_switch">
                 <property name="valign">center</property>
@@ -61,6 +63,7 @@
           <object class="AdwActionRow" id="tablet_aspect_ratio">
             <property name="title" translatable="yes">Keep Aspect Ratio</property>
             <property name="subtitle" translatable="yes">Only use a portion of the tablet surface to keep monitor aspect ratio</property>
+            <property name="activatable_widget">tablet_aspect_ratio_switch</property>
             <child>
               <object class="GtkSwitch" id="tablet_aspect_ratio_switch">
                 <property name="valign">center</property>
