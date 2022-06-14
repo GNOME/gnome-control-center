@@ -298,6 +298,7 @@
                 <child>
                   <object class="AdwActionRow" id="enterprise_domain_row">
                     <property name="title" translatable="yes">Domain</property>
+                    <property name="activatable_widget">enterprise_domain_combo</property>
                     <child>
                       <object class="GtkComboBox" id="enterprise_domain_combo">
                         <property name="valign">center</property>
@@ -340,6 +341,7 @@
                 <child>
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">Username</property>
+                    <property name="activatable_widget">enterprise_login_entry</property>
                     <child>
                       <object class="GtkEntry" id="enterprise_login_entry">
                         <property name="valign">center</property>
@@ -360,6 +362,7 @@
                 <child>
                   <object class="AdwActionRow">
                     <property name="title" translatable="yes">Password</property>
+                    <property name="activatable_widget">enterprise_password_entry</property>
                     <child>
                       <object class="GtkPasswordEntry" id="enterprise_password_entry">
                         <property name="valign">center</property>
