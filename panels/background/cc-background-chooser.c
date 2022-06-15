@@ -158,9 +158,9 @@ create_widget_func (gpointer model_item,
   if (button)
     gtk_overlay_add_overlay (GTK_OVERLAY (overlay), button);
   gtk_accessible_update_property (GTK_ACCESSIBLE (overlay),
-                                              GTK_ACCESSIBLE_PROPERTY_LABEL,
-                                              cc_background_item_get_name (item),
-                                              -1);
+                                  GTK_ACCESSIBLE_PROPERTY_LABEL,
+                                  cc_background_item_get_name (item),
+                                  -1);
 
 
   child = gtk_flow_box_child_new ();
