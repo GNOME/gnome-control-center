@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-05-27 22:48+0000\n"
-"PO-Revision-Date: 2022-05-28 08:34+0800\n"
+"POT-Creation-Date: 2022-06-14 15:30+0000\n"
+"PO-Revision-Date: 2022-06-15 19:10+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -189,7 +189,7 @@ msgstr "接收系统搜索并发送结果。"
 #: panels/applications/cc-applications-panel.ui:205
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
-#: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:108
+#: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:107
 #: panels/user-accounts/cc-user-panel.c:789
 #: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
@@ -454,7 +454,10 @@ msgstr ""
 "幕;桌面;样式;亮色;暗色;夜间模式;外观;个性化;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/datetime/cc-datetime-panel.ui:172
+#: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:122
+#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "启用"
 
@@ -1410,23 +1413,35 @@ msgstr "自动设置日期和时间(_D)"
 msgid "Requires internet access"
 msgstr "需要互联网连接"
 
-#: panels/datetime/cc-datetime-panel.ui:177
+#: panels/datetime/cc-datetime-panel.ui:180
 msgid "Date &amp; _Time"
 msgstr "日期和时间(_T)"
 
-#: panels/datetime/cc-datetime-panel.ui:201
+#: panels/datetime/cc-datetime-panel.ui:204
 msgid "Automatic Time _Zone"
 msgstr "自动设置时区(_Z)"
 
-#: panels/datetime/cc-datetime-panel.ui:202
+#: panels/datetime/cc-datetime-panel.ui:205
 msgid "Requires location services enabled and internet access"
 msgstr "需要启用定位服务和互联网连接"
 
-#: panels/datetime/cc-datetime-panel.ui:214
+#. TRANSLATORS: Status of Parental Controls setup
+#: panels/datetime/cc-datetime-panel.ui:212
+#: panels/display/cc-display-settings.ui:23
+#: panels/keyboard/cc-xkb-modifier-dialog.ui:43
+#: panels/location/cc-location-panel.ui:9 panels/lock/cc-lock-panel.ui:39
+#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
+#: panels/user-accounts/cc-user-panel.c:787
+#: panels/user-accounts/cc-user-panel.c:876
+#: panels/wwan/cc-wwan-device-page.c:476
+msgid "Enabled"
+msgstr "已启用"
+
+#: panels/datetime/cc-datetime-panel.ui:220
 msgid "Time Z_one"
 msgstr "时区(_O)"
 
-#: panels/datetime/cc-datetime-panel.ui:239
+#: panels/datetime/cc-datetime-panel.ui:245
 msgid "Time _Format"
 msgstr "时间格式(_F)"
 
@@ -1622,16 +1637,6 @@ msgstr "横向翻转"
 msgid "%.2lf Hz"
 msgstr "%.2lf 赫兹"
 
-#. TRANSLATORS: Status of Parental Controls setup
-#: panels/display/cc-display-settings.ui:23
-#: panels/keyboard/cc-xkb-modifier-dialog.ui:43 panels/lock/cc-lock-panel.ui:39
-#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
-#: panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:876
-#: panels/wwan/cc-wwan-device-page.c:476
-msgid "Enabled"
-msgstr "已启用"
-
 #: panels/display/cc-display-settings.ui:43
 msgctxt "display setting"
 msgid "Orientation"
@@ -1809,7 +1814,7 @@ msgid "System Logo"
 msgstr "系统标志"
 
 #: panels/info-overview/cc-info-overview-panel.ui:32
-#: panels/sharing/cc-sharing-panel.ui:301
+#: panels/sharing/cc-sharing-panel.ui:304
 msgid "Device Name"
 msgstr "设备名称"
 
@@ -2088,7 +2093,8 @@ msgstr "首选项"
 msgid "View Keyboard Layout"
 msgstr "查看键盘布局"
 
-#: panels/keyboard/cc-input-row.ui:54
+#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
+#: panels/sharing/cc-sharing-panel.c:646
 msgid "Remove"
 msgstr "移除"
 
@@ -2378,15 +2384,15 @@ msgstr ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;快捷"
 "键;工作空间;窗口;更改大小;缩放;对比度;输入;源;锁定;音量;"
 
-#: panels/location/cc-location-panel.ui:20
+#: panels/location/cc-location-panel.ui:23
 msgid "Location Services Turned Off"
 msgstr "定位服务已关闭"
 
-#: panels/location/cc-location-panel.ui:21
+#: panels/location/cc-location-panel.ui:24
 msgid "No applications can obtain location information."
 msgstr "没有应用程序可以获取位置信息。"
 
-#: panels/location/cc-location-panel.ui:35
+#: panels/location/cc-location-panel.ui:38
 msgid ""
 "Location services allow applications to know your location. Using Wi-Fi and "
 "mobile broadband increases accuracy.\n"
@@ -2403,7 +2409,7 @@ msgstr ""
 "\n"
 "允许以下应用程序测定您的位置。"
 
-#: panels/location/cc-location-panel.ui:53
+#: panels/location/cc-location-panel.ui:56
 msgid "No Applications Have Asked for Location Access"
 msgstr "没有应用程序要求访问位置"
 
@@ -2577,15 +2583,15 @@ msgstr "锁定屏幕"
 msgid "screen;lock;private;privacy;"
 msgstr "screen;lock;private;privacy;屏幕;显示器;锁定;私人;隐私;"
 
-#: panels/microphone/cc-microphone-panel.ui:20
+#: panels/microphone/cc-microphone-panel.ui:23
 msgid "Microphone Turned Off"
 msgstr "麦克风已关闭"
 
-#: panels/microphone/cc-microphone-panel.ui:21
+#: panels/microphone/cc-microphone-panel.ui:24
 msgid "No applications can record sound."
 msgstr "未找到音频录制应用。"
 
-#: panels/microphone/cc-microphone-panel.ui:34
+#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "Use of the microphone allows applications to record and listen to audio. "
 "Disabling the microphone may cause some applications to not function "
@@ -2598,7 +2604,7 @@ msgstr ""
 "\n"
 "允许下列应用程序使用您的麦克风。"
 
-#: panels/microphone/cc-microphone-panel.ui:51
+#: panels/microphone/cc-microphone-panel.ui:54
 msgid "No Applications Have Asked for Microphone Access"
 msgstr "没有应用程序要求访问麦克风"
 
@@ -2842,23 +2848,23 @@ msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:263
+#: panels/network/cc-wifi-connection-row.c:266
 msgid "Insecure network (WEP)"
 msgstr "不安全网络（WEP）"
 
-#: panels/network/cc-wifi-connection-row.c:267
+#: panels/network/cc-wifi-connection-row.c:270
 msgid "Secure network (WPA)"
 msgstr "安全网络（WPA）"
 
-#: panels/network/cc-wifi-connection-row.c:271
+#: panels/network/cc-wifi-connection-row.c:274
 msgid "Secure network (WPA2)"
 msgstr "安全网络（WPA2）"
 
-#: panels/network/cc-wifi-connection-row.c:275
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Secure network (WPA3)"
 msgstr "安全网络（WPA3）"
 
-#: panels/network/cc-wifi-connection-row.c:279
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "安全网络"
 
@@ -2870,7 +2876,7 @@ msgstr "已连接"
 #: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/net-device-ethernet.c:325
 #: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
-#: panels/network/network-mobile.ui:329 panels/network/network-proxy.ui:61
+#: panels/network/network-mobile.ui:329 panels/network/network-proxy.ui:62
 #: panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "选项…"
@@ -2913,7 +2919,7 @@ msgstr "网络名称"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
 #: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:378
+#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:391
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:362
@@ -3343,7 +3349,7 @@ msgstr "仅本地链路"
 
 #: panels/network/connection-editor/ip4-page.ui:55
 #: panels/network/connection-editor/ip6-page.ui:65
-#: panels/network/net-proxy.c:71 panels/network/network-proxy.ui:101
+#: panels/network/net-proxy.c:71 panels/network/network-proxy.ui:100
 msgid "Manual"
 msgstr "手动"
 
@@ -3387,7 +3393,7 @@ msgstr "网关"
 #: panels/network/connection-editor/ip6-page.ui:36
 #: panels/network/connection-editor/ip6-page.ui:185
 #: panels/network/connection-editor/ip6-page.ui:237
-#: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:94
+#: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:93
 #: panels/network/wireless-security/eap-method-peap.ui:33
 #: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
@@ -3599,11 +3605,11 @@ msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "忘记(_F)"
 
-#: panels/network/net-device-wifi.c:1216
+#: panels/network/net-device-wifi.c:1229
 msgid "System policy prohibits use as a Hotspot"
 msgstr "系统策略禁止作为热点使用"
 
-#: panels/network/net-device-wifi.c:1219
+#: panels/network/net-device-wifi.c:1232
 msgid "Wireless device does not support Hotspot mode"
 msgstr "无线设备不支持热点模式"
 
@@ -3639,47 +3645,47 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "提供者"
 
-#: panels/network/network-proxy.ui:40 panels/network/network-proxy.ui:83
+#: panels/network/network-proxy.ui:40 panels/network/network-proxy.ui:82
 msgid "Network Proxy"
 msgstr "网络代理"
 
-#: panels/network/network-proxy.ui:142
+#: panels/network/network-proxy.ui:141
 msgid "_HTTP Proxy"
 msgstr "HTTP 代理(_H)"
 
-#: panels/network/network-proxy.ui:159
+#: panels/network/network-proxy.ui:158
 msgid "H_TTPS Proxy"
 msgstr "HTTPS 代理(_T)"
 
-#: panels/network/network-proxy.ui:176
+#: panels/network/network-proxy.ui:175
 msgid "_FTP Proxy"
 msgstr "FTP 代理(_F)"
 
-#: panels/network/network-proxy.ui:193
+#: panels/network/network-proxy.ui:192
 msgid "_Socks Host"
 msgstr "Socks 主机(_S)"
 
-#: panels/network/network-proxy.ui:210
+#: panels/network/network-proxy.ui:209
 msgid "_Ignore Hosts"
 msgstr "忽略主机(_I)"
 
-#: panels/network/network-proxy.ui:247
+#: panels/network/network-proxy.ui:246
 msgid "HTTP proxy port"
 msgstr "HTTP 代理端口"
 
-#: panels/network/network-proxy.ui:310
+#: panels/network/network-proxy.ui:309
 msgid "HTTPS proxy port"
 msgstr "HTTPS 代理端口"
 
-#: panels/network/network-proxy.ui:325
+#: panels/network/network-proxy.ui:324
 msgid "FTP proxy port"
 msgstr "FTP 代理端口"
 
-#: panels/network/network-proxy.ui:340
+#: panels/network/network-proxy.ui:339
 msgid "Socks proxy port"
 msgstr "SOCKS 代理端口"
 
-#: panels/network/network-proxy.ui:360
+#: panels/network/network-proxy.ui:359
 msgid "_Configuration URL"
 msgstr "配置 URL(_C)"
 
@@ -3706,11 +3712,11 @@ msgstr "热点密码"
 msgid "Turn Wi-Fi off"
 msgstr "关闭 Wi-Fi"
 
-#: panels/network/network-wifi.ui:98 panels/search/cc-search-panel-row.ui:39
+#: panels/network/network-wifi.ui:99 panels/search/cc-search-panel-row.ui:39
 msgid "More options…"
 msgstr "更多选项…"
 
-#: panels/network/network-wifi.ui:124
+#: panels/network/network-wifi.ui:119
 msgid "_Connect to Hidden Network…"
 msgstr "连接到隐藏网络(_C)…"
 
@@ -3718,7 +3724,7 @@ msgstr "连接到隐藏网络(_C)…"
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "打开 Wi-Fi 热点(_T)…"
 
-#: panels/network/network-wifi.ui:138
+#: panels/network/network-wifi.ui:143
 msgid "_Known Wi-Fi Networks"
 msgstr "已知的 Wi-Fi 网络(_K)"
 
@@ -5870,7 +5876,7 @@ msgstr ""
 "Search;Find;Index;Hide;Privacy;Results;搜索;查找;寻找;索引;隐藏;隐私;结果;"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:265
+#: panels/sharing/cc-sharing-networks.c:268
 msgid "No networks selected for sharing"
 msgstr "未选择要共享的网络"
 
@@ -5902,8 +5908,16 @@ msgstr "活动"
 msgid "Choose a Folder"
 msgstr "选择文件夹"
 
+#: panels/sharing/cc-sharing-panel.c:672 panels/wwan/cc-wwan-apn-dialog.ui:33
+msgid "Add"
+msgstr "添加"
+
+#: panels/sharing/cc-sharing-panel.c:736
+msgid "Enable media sharing"
+msgstr "启用媒体共享"
+
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:747
+#: panels/sharing/cc-sharing-panel.c:756
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -5911,7 +5925,7 @@ msgid ""
 msgstr "文件共享可以共享“公共”文件夹，使用地址：%s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:753
+#: panels/sharing/cc-sharing-panel.c:762
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -5921,19 +5935,23 @@ msgstr ""
 "当启用远程登录时，远程用户可以使用 SSH 命令来连接：\n"
 "%s"
 
-#: panels/sharing/cc-sharing-panel.c:1296
+#: panels/sharing/cc-sharing-panel.c:942
+msgid "Enable personal media sharing"
+msgstr "启用个人媒体共享"
+
+#: panels/sharing/cc-sharing-panel.c:1308
 msgid "Device name copied"
 msgstr "设备名称已复制"
 
-#: panels/sharing/cc-sharing-panel.c:1307
+#: panels/sharing/cc-sharing-panel.c:1319
 msgid "Device address copied"
 msgstr "设备地址已复制"
 
-#: panels/sharing/cc-sharing-panel.c:1318
+#: panels/sharing/cc-sharing-panel.c:1330
 msgid "Username copied"
 msgstr "用户名已复制"
 
-#: panels/sharing/cc-sharing-panel.c:1329
+#: panels/sharing/cc-sharing-panel.c:1341
 msgid "Password copied"
 msgstr "密码已复制"
 
@@ -5975,77 +5993,84 @@ msgstr "需要密码(_R)"
 msgid "Remote Login"
 msgstr "远程登录"
 
-#: panels/sharing/cc-sharing-panel.ui:250
-#: panels/sharing/cc-sharing-panel.ui:269
+#: panels/sharing/cc-sharing-panel.ui:251
+#: panels/sharing/cc-sharing-panel.ui:270
 msgid "Remote Desktop"
 msgstr "远程桌面"
 
-#: panels/sharing/cc-sharing-panel.ui:265
+#: panels/sharing/cc-sharing-panel.ui:266
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
 msgstr "远程桌面允许从另一个计算机查看和操控您的桌面。"
 
-#: panels/sharing/cc-sharing-panel.ui:270
+#: panels/sharing/cc-sharing-panel.ui:271
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "启用或禁用远程桌面连接至该计算机。"
 
-#: panels/sharing/cc-sharing-panel.ui:282
+#: panels/sharing/cc-sharing-panel.ui:284
 msgid "Remote Control"
 msgstr "远程控制"
 
-#: panels/sharing/cc-sharing-panel.ui:283
+#: panels/sharing/cc-sharing-panel.ui:285
 msgid "Allows remote connections to control the screen."
 msgstr "允许远程连接操控该屏幕。"
 
-#: panels/sharing/cc-sharing-panel.ui:296
+#: panels/sharing/cc-sharing-panel.ui:299
 msgid "How to Connect"
 msgstr "如何连接"
 
-#: panels/sharing/cc-sharing-panel.ui:297
+#: panels/sharing/cc-sharing-panel.ui:300
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr "使用设备名称或远程桌面地址连接至该计算机。"
 
-#: panels/sharing/cc-sharing-panel.ui:325
+#: panels/sharing/cc-sharing-panel.ui:318
+#: panels/sharing/cc-sharing-panel.ui:345
+#: panels/sharing/cc-sharing-panel.ui:379
+#: panels/sharing/cc-sharing-panel.ui:405
+msgid "Copy"
+msgstr "复制"
+
+#: panels/sharing/cc-sharing-panel.ui:331
 msgid "Remote Desktop Address"
 msgstr "远程桌面地址"
 
-#: panels/sharing/cc-sharing-panel.ui:352
+#: panels/sharing/cc-sharing-panel.ui:361
 msgid "Authentication"
 msgstr "认证"
 
-#: panels/sharing/cc-sharing-panel.ui:353
+#: panels/sharing/cc-sharing-panel.ui:362
 msgid "The user name and password are required to connect to this computer."
 msgstr "连接至该计算机需要用户名和密码。"
 
-#: panels/sharing/cc-sharing-panel.ui:357
+#: panels/sharing/cc-sharing-panel.ui:366
 msgid "User Name"
 msgstr "用户名"
 
-#: panels/sharing/cc-sharing-panel.ui:403
+#: panels/sharing/cc-sharing-panel.ui:420
 msgid "Verify Encryption"
 msgstr "验证加密"
 
-#: panels/sharing/cc-sharing-panel.ui:432
+#: panels/sharing/cc-sharing-panel.ui:449
 msgid "Encryption Fingerprint"
 msgstr "加密指纹"
 
-#: panels/sharing/cc-sharing-panel.ui:433
+#: panels/sharing/cc-sharing-panel.ui:450
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr "加密指纹可以在连接的客户端中看到且应一致。"
 
-#: panels/sharing/cc-sharing-panel.ui:465
+#: panels/sharing/cc-sharing-panel.ui:482
 msgid "Media Sharing"
 msgstr "媒体共享"
 
-#: panels/sharing/cc-sharing-panel.ui:487
+#: panels/sharing/cc-sharing-panel.ui:504
 msgid "Share music, photos and videos over the network."
 msgstr "通过网络共享音乐、照片和视频。"
 
-#: panels/sharing/cc-sharing-panel.ui:500
+#: panels/sharing/cc-sharing-panel.ui:517
 msgid "Folders"
 msgstr "文件夹"
 
@@ -8109,10 +8134,6 @@ msgstr "新建快捷键…"
 msgid "Access Points"
 msgstr "接入点"
 
-#: panels/wwan/cc-wwan-apn-dialog.ui:33
-msgid "Add"
-msgstr "添加"
-
 #: panels/wwan/cc-wwan-apn-dialog.ui:122
 msgid "APN"
 msgstr "APN"
@@ -9117,9 +9138,6 @@ msgstr "系统声音"
 
 #~ msgid "Suspend & Power Button"
 #~ msgstr "挂起和关机按钮"
-
-#~ msgid "Copy"
-#~ msgstr "复制"
 
 #~ msgid "Some services are disabled because of no network access."
 #~ msgstr "因为没有网络，一些服务已经禁用。"
@@ -10515,9 +10533,6 @@ msgstr "系统声音"
 #~ msgctxt "Search Location"
 #~ msgid "Other"
 #~ msgstr "其他"
-
-#~ msgid "Personal File Sharing"
-#~ msgstr "个人文件共享"
 
 #~ msgid "_Verify"
 #~ msgstr "验证(_V)"
