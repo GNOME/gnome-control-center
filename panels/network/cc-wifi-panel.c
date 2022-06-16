@@ -424,6 +424,11 @@ remove_wifi_device (CcWifiPanel *self,
         }
     }
 
+  /* Disconnect the signal to prevent assertion crash */
+  g_signal_handlers_disconnect_by_func (device, 
+                                        G_CALLBACK (wifi_panel_update_qr_image_cb), 
+                                        self);
+
   /* Destroy all stack pages related to this device */
   child = gtk_stack_get_child_by_name (self->stack, id);
   gtk_stack_remove (self->stack, child);
