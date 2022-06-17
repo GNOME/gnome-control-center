@@ -50,8 +50,6 @@ struct _CcTimezoneMap
   GdkTexture *background;
   GdkTexture *pin;
 
-  gdouble selected_offset;
-
   TzDB *tzdb;
   TzLocation *location;
 
@@ -284,12 +282,8 @@ cc_timezone_map_snapshot (GtkWidget   *widget,
                           GtkSnapshot *snapshot)
 {
   CcTimezoneMap *map = CC_TIMEZONE_MAP (widget);
-  g_autoptr(GdkTexture) orig_highlight = NULL;
-  g_autofree gchar *file = NULL;
-  g_autoptr(GError) err = NULL;
   gdouble pointx, pointy;
   gint width, height;
-  char buf[16];
 
   width = gtk_widget_get_width (widget);
   height = gtk_widget_get_height (widget);
@@ -298,35 +292,6 @@ cc_timezone_map_snapshot (GtkWidget   *widget,
   gtk_snapshot_append_texture (snapshot,
                                map->background,
                                &GRAPHENE_RECT_INIT (0, 0, width, height));
-
-  /* paint highlight */
-  if (gtk_widget_is_sensitive (widget))
-    {
-      file = g_strdup_printf (DATETIME_RESOURCE_PATH "/timezone_%s.png",
-                              g_ascii_formatd (buf, sizeof (buf),
-                                               "%g", map->selected_offset));
-    }
-  else
-    {
-      file = g_strdup_printf (DATETIME_RESOURCE_PATH "/timezone_%s_dim.png",
-                              g_ascii_formatd (buf, sizeof (buf),
-                                               "%g", map->selected_offset));
-
-    }
-
-  orig_highlight = texture_from_resource (file, &err);
-
-  if (!orig_highlight)
-    {
-      g_warning ("Could not load highlight: %s",
-                 (err) ? err->message : "Unknown Error");
-    }
-  else
-    {
-      gtk_snapshot_append_texture (snapshot,
-                                   orig_highlight,
-                                   &GRAPHENE_RECT_INIT (0, 0, width, height));
-    }
 
   if (map->location)
     {
@@ -424,8 +389,6 @@ set_location (CcTimezoneMap *map,
 
   info = tz_info_from_location (map->location);
 
-  map->selected_offset = tz_location_get_base_utc_offset (map->location)
-    / (60.0*60.0);
   gtk_widget_queue_draw (GTK_WIDGET (map));
 
   g_signal_emit (map, signals[LOCATION_CHANGED], 0, map->location);
