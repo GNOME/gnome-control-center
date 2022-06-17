@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2022-05-31 21:13+0000\n"
-"PO-Revision-Date: 2022-06-01 16:11+0300\n"
+"POT-Creation-Date: 2022-06-17 02:07+0000\n"
+"PO-Revision-Date: 2022-06-17 08:24+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -170,7 +170,7 @@ msgstr "Отримання сигналів системи про пошук і 
 #: panels/applications/cc-applications-panel.ui:205
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
-#: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:108
+#: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:107
 #: panels/user-accounts/cc-user-panel.c:789
 #: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
@@ -405,8 +405,9 @@ msgid "Style"
 msgstr "Стиль"
 
 #: panels/background/cc-background-panel.ui:49
-msgid "Light"
-msgstr "Світла"
+#: panels/wacom/cc-wacom-stylus-page.ui:133
+msgid "Default"
+msgstr "Типовий"
 
 #: panels/background/cc-background-panel.ui:79
 msgid "Dark"
@@ -2686,11 +2687,11 @@ msgstr "Основна кнопка"
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr "Вказує порядок фізичних кнопок на мишці чи сенсорних пристроях."
 
-#: panels/mouse/cc-mouse-panel.ui:41 panels/sound/cc-balance-slider.ui:13
+#: panels/mouse/cc-mouse-panel.ui:41 panels/sound/cc-balance-slider.ui:16
 msgid "Left"
 msgstr "Ліва"
 
-#: panels/mouse/cc-mouse-panel.ui:48 panels/sound/cc-balance-slider.ui:15
+#: panels/mouse/cc-mouse-panel.ui:48 panels/sound/cc-balance-slider.ui:18
 msgid "Right"
 msgstr "Права"
 
@@ -2901,23 +2902,23 @@ msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:263
+#: panels/network/cc-wifi-connection-row.c:266
 msgid "Insecure network (WEP)"
 msgstr "Незахищена мережа (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:267
+#: panels/network/cc-wifi-connection-row.c:270
 msgid "Secure network (WPA)"
 msgstr "Захищена мережа (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:271
+#: panels/network/cc-wifi-connection-row.c:274
 msgid "Secure network (WPA2)"
 msgstr "Захищена мережа (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:275
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Secure network (WPA3)"
 msgstr "Захищена мережа (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:279
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "Захищена мережа"
 
@@ -2929,7 +2930,7 @@ msgstr "З'єднано"
 #: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/net-device-ethernet.c:325
 #: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
-#: panels/network/network-mobile.ui:329 panels/network/network-proxy.ui:61
+#: panels/network/network-mobile.ui:329 panels/network/network-proxy.ui:62
 #: panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "Параметри…"
@@ -3418,7 +3419,7 @@ msgstr "Лише місцевий"
 
 #: panels/network/connection-editor/ip4-page.ui:55
 #: panels/network/connection-editor/ip6-page.ui:65
-#: panels/network/net-proxy.c:71 panels/network/network-proxy.ui:101
+#: panels/network/net-proxy.c:71 panels/network/network-proxy.ui:100
 msgid "Manual"
 msgstr "Вручну"
 
@@ -3462,7 +3463,7 @@ msgstr "Шлюз"
 #: panels/network/connection-editor/ip6-page.ui:36
 #: panels/network/connection-editor/ip6-page.ui:185
 #: panels/network/connection-editor/ip6-page.ui:237
-#: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:94
+#: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:93
 #: panels/network/wireless-security/eap-method-peap.ui:33
 #: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
@@ -3673,11 +3674,11 @@ msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Забути"
 
-#: panels/network/net-device-wifi.c:1216
+#: panels/network/net-device-wifi.c:1229
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Системна політика забороняє використовувати комп'ютер як гарячу точку"
 
-#: panels/network/net-device-wifi.c:1219
+#: panels/network/net-device-wifi.c:1232
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Бездротовий пристрій не підтримує режиму гарячої точки"
 
@@ -3715,47 +3716,47 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "Провайдер"
 
-#: panels/network/network-proxy.ui:40 panels/network/network-proxy.ui:83
+#: panels/network/network-proxy.ui:40 panels/network/network-proxy.ui:82
 msgid "Network Proxy"
 msgstr "Проксі-сервер мережі"
 
-#: panels/network/network-proxy.ui:142
+#: panels/network/network-proxy.ui:141
 msgid "_HTTP Proxy"
 msgstr "П_роксі HTTP"
 
-#: panels/network/network-proxy.ui:159
+#: panels/network/network-proxy.ui:158
 msgid "H_TTPS Proxy"
 msgstr "П_роксі HTTP"
 
-#: panels/network/network-proxy.ui:176
+#: panels/network/network-proxy.ui:175
 msgid "_FTP Proxy"
 msgstr "Пр_оксі FTP"
 
-#: panels/network/network-proxy.ui:193
+#: panels/network/network-proxy.ui:192
 msgid "_Socks Host"
 msgstr "_Вузол Socks:"
 
-#: panels/network/network-proxy.ui:210
+#: panels/network/network-proxy.ui:209
 msgid "_Ignore Hosts"
 msgstr "_Знехтувати вузлом"
 
-#: panels/network/network-proxy.ui:247
+#: panels/network/network-proxy.ui:246
 msgid "HTTP proxy port"
 msgstr "Порт проксі HTTP"
 
-#: panels/network/network-proxy.ui:310
+#: panels/network/network-proxy.ui:309
 msgid "HTTPS proxy port"
 msgstr "Порт проксі HTTPS"
 
-#: panels/network/network-proxy.ui:325
+#: panels/network/network-proxy.ui:324
 msgid "FTP proxy port"
 msgstr "Порт проксі FTP"
 
-#: panels/network/network-proxy.ui:340
+#: panels/network/network-proxy.ui:339
 msgid "Socks proxy port"
 msgstr "Порт проксі SOCKS"
 
-#: panels/network/network-proxy.ui:360
+#: panels/network/network-proxy.ui:359
 msgid "_Configuration URL"
 msgstr "_Налаштування URL"
 
@@ -3782,11 +3783,11 @@ msgstr "Пароль"
 msgid "Turn Wi-Fi off"
 msgstr "Вимкнути Wi-Fi"
 
-#: panels/network/network-wifi.ui:98 panels/search/cc-search-panel-row.ui:39
+#: panels/network/network-wifi.ui:99 panels/search/cc-search-panel-row.ui:39
 msgid "More options…"
 msgstr "Додаткові параметри…"
 
-#: panels/network/network-wifi.ui:124
+#: panels/network/network-wifi.ui:119
 msgid "_Connect to Hidden Network…"
 msgstr "_З'єднатись з прихованою мережею…"
 
@@ -3794,7 +3795,7 @@ msgstr "_З'єднатись з прихованою мережею…"
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_Увімкнути точку доступу Wi-Fi…"
 
-#: panels/network/network-wifi.ui:138
+#: panels/network/network-wifi.ui:143
 msgid "_Known Wi-Fi Networks"
 msgstr "_Відомі мережі Wi-Fi"
 
@@ -6024,7 +6025,6 @@ msgid "Add"
 msgstr "Додати"
 
 #: panels/sharing/cc-sharing-panel.c:736
-#| msgid "Media Sharing"
 msgid "Enable media sharing"
 msgstr "Увімкнути оприлюднення матеріалів"
 
@@ -6235,11 +6235,19 @@ msgstr "Скло"
 msgid "Sonar"
 msgstr "Сонар"
 
-#: panels/sound/cc-fade-slider.ui:13
+#: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:144
+msgid "Balance"
+msgstr "Баланс"
+
+#: panels/sound/cc-fade-slider.ui:13 panels/sound/cc-sound-panel.ui:170
+msgid "Fade"
+msgstr "Згасання"
+
+#: panels/sound/cc-fade-slider.ui:16
 msgid "Rear"
 msgstr "Задній"
 
-#: panels/sound/cc-fade-slider.ui:15
+#: panels/sound/cc-fade-slider.ui:18
 msgid "Front"
 msgstr "Передній"
 
@@ -6256,51 +6264,48 @@ msgstr "Натисніть на гучномовці для перевірки"
 msgid "System Volume"
 msgstr "Гучність системи"
 
-#: panels/sound/cc-sound-panel.ui:25
+#: panels/sound/cc-sound-panel.ui:12
+#| msgid "System Volume"
+msgid "Master volume"
+msgstr "Головна гучність"
+
+#: panels/sound/cc-sound-panel.ui:28
 msgid "Volume Levels"
 msgstr "Рівні гучності"
 
-#: panels/sound/cc-sound-panel.ui:35
+#: panels/sound/cc-sound-panel.ui:38
 msgid "Output"
 msgstr "Вивід"
 
-#: panels/sound/cc-sound-panel.ui:56
+#: panels/sound/cc-sound-panel.ui:59
 msgid "Output Device"
 msgstr "Пристрій відтворення"
 
-#: panels/sound/cc-sound-panel.ui:75
+#: panels/sound/cc-sound-panel.ui:81
 msgid "Test"
 msgstr "Випробувати"
 
-#: panels/sound/cc-sound-panel.ui:104 panels/sound/cc-sound-panel.ui:263
+#: panels/sound/cc-sound-panel.ui:110 panels/sound/cc-sound-panel.ui:275
 msgid "Configuration"
 msgstr "Конфігурація"
 
-#: panels/sound/cc-sound-panel.ui:135
-msgid "Balance"
-msgstr "Баланс"
-
-#: panels/sound/cc-sound-panel.ui:161
-msgid "Fade"
-msgstr "Згасання"
-
-#: panels/sound/cc-sound-panel.ui:187
+#: panels/sound/cc-sound-panel.ui:196
 msgid "Subwoofer"
 msgstr "Низькочастотний динамік"
 
-#: panels/sound/cc-sound-panel.ui:205
+#: panels/sound/cc-sound-panel.ui:214
 msgid "Input"
 msgstr "Вхід"
 
-#: panels/sound/cc-sound-panel.ui:226
+#: panels/sound/cc-sound-panel.ui:235
 msgid "Input Device"
 msgstr "Пристрій введення"
 
-#: panels/sound/cc-sound-panel.ui:294
+#: panels/sound/cc-sound-panel.ui:309
 msgid "Volume"
 msgstr "Гучність"
 
-#: panels/sound/cc-sound-panel.ui:312
+#: panels/sound/cc-sound-panel.ui:327
 msgid "Alert Sound"
 msgstr "Звук попередження"
 
@@ -8242,10 +8247,6 @@ msgstr "Чутливість гумки"
 msgid "Eraser pressure"
 msgstr "Натиск гумки"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:133
-msgid "Default"
-msgstr "Типовий"
-
 #: panels/wacom/cc-wacom-stylus-page.ui:134
 msgid "Middle Mouse Button Click"
 msgstr "Натиск середньою кнопкою миші"
@@ -8892,6 +8893,9 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Light"
+#~ msgstr "Світла"
 
 #~ msgid "Set"
 #~ msgstr "Встановити"
