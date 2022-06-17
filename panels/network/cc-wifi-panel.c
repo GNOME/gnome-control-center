@@ -438,8 +438,6 @@ remove_wifi_device (CcWifiPanel *self,
 
   /* Update the title widget */
   update_devices_names (self);
-
-
 }
 
 static void
