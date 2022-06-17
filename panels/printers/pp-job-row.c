@@ -24,9 +24,6 @@
 #include "pp-job-row.h"
 #include "cc-printers-resources.h"
 
-static void
-update_pause_button (PpJobRow *self, gboolean paused);
-
 struct _PpJobRow
 {
   GtkListBoxRow parent;
