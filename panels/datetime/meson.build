@@ -29,7 +29,6 @@ i18n.merge_file(
 resource_data = files(
   'data/bg_dim.png',
   'data/bg.png',
-  'data/cc.png',
   'data/pin.png',
   'data/timezone_0_dim.png',
   'data/timezone_0.png',

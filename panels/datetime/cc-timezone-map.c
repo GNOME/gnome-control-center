@@ -48,7 +48,6 @@ struct _CcTimezoneMap
   GdkTexture *orig_background_dim;
 
   GdkTexture *background;
-  GdkTexture *color_map;
   GdkTexture *pin;
 
   gdouble selected_offset;
@@ -85,7 +84,6 @@ cc_timezone_map_dispose (GObject *object)
 {
   CcTimezoneMap *self = CC_TIMEZONE_MAP (object);
 
-  g_clear_object (&self->color_map);
   g_clear_object (&self->orig_background);
   g_clear_object (&self->orig_background_dim);
   g_clear_object (&self->background);
@@ -493,14 +491,6 @@ cc_timezone_map_init (CcTimezoneMap *map)
 
   map->orig_background_dim = texture_from_resource (DATETIME_RESOURCE_PATH "/bg_dim.png", &err);
   if (!map->orig_background_dim)
-    {
-      g_warning ("Could not load background image: %s",
-                 (err) ? err->message : "Unknown error");
-      g_clear_error (&err);
-    }
-
-  map->color_map = texture_from_resource (DATETIME_RESOURCE_PATH "/cc.png", &err);
-  if (!map->color_map)
     {
       g_warning ("Could not load background image: %s",
                  (err) ? err->message : "Unknown error");
