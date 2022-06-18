@@ -113,6 +113,11 @@ get_ap_security_string (NMAccessPoint *ap)
                         g_string_append_printf (str, "%s, ", _("Enhanced Open"));
 		}
 #endif
+#if NM_CHECK_VERSION(1,26,0)
+		else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE_TM) {
+                        /* Connected to open OWE-TM network. */
+		}
+#endif
 		else
 #endif
 		{

@@ -59,7 +59,8 @@ typedef enum
   NM_AP_SEC_WPA,
   NM_AP_SEC_WPA2,
   NM_AP_SEC_SAE,
-  NM_AP_SEC_OWE
+  NM_AP_SEC_OWE,
+  NM_AP_SEC_OWE_TM
 } NMAccessPointSecurity;
 
 G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, ADW_TYPE_ACTION_ROW)
@@ -108,6 +109,12 @@ get_access_point_security (NMAccessPoint *ap)
   else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE)
     {
       type = NM_AP_SEC_OWE;
+    }
+#endif
+#if NM_CHECK_VERSION(1,26,0)
+  else if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE_TM)
+    {
+      type = NM_AP_SEC_OWE_TM;
     }
 #endif
   else
@@ -255,7 +262,7 @@ update_ui (CcWifiConnectionRow *self)
   gtk_widget_set_visible (GTK_WIDGET (self->active_label), active);
   gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting);
 
-  if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE)
+  if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE && security != NM_AP_SEC_OWE_TM)
     {
       const gchar *icon_name = "lock-small-symbolic";
 

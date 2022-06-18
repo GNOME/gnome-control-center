@@ -298,6 +298,7 @@ on_device_ap_added_cb (CcWifiConnectionList *self,
                        NMDeviceWifi         *device)
 {
   g_autoptr(GPtrArray) connections = NULL;
+  NM80211ApSecurityFlags rsn_flags;
   CcWifiConnectionRow *row;
   GBytes *ap_ssid;
   g_autoptr(GBytes) ssid = NULL;
@@ -358,11 +359,18 @@ on_device_ap_added_cb (CcWifiConnectionList *self,
     return;
 
   /* The AP is not compatible to any known connection, generate an entry for the
-   * SSID or add to existing one. However, not for hidden APs that don't have an SSID.
+   * SSID or add to existing one. However, not for hidden APs that don't have an SSID
+   * or a hidden OWE transition network.
    */
   ap_ssid = nm_access_point_get_ssid (ap);
   if (ap_ssid == NULL)
     return;
+
+  /* Skip OWE-TM network with OWE RSN */
+  rsn_flags = nm_access_point_get_rsn_flags (ap);
+  if (rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE && rsn_flags & NM_802_11_AP_SEC_KEY_MGMT_OWE_TM)
+    return;
+
   ssid = new_hashable_ssid (ap_ssid);
 
   g_hash_table_insert (self->ap_ssid_cache, ap, g_bytes_ref (ssid));
