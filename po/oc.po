@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-05-31 21:13+0000\n"
-"PO-Revision-Date: 2022-06-09 22:02+0200\n"
+"POT-Creation-Date: 2022-06-17 10:55+0000\n"
+"PO-Revision-Date: 2022-06-19 20:03+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -167,7 +167,7 @@ msgstr "Recebre las recèrcas sistèma e enviar los resultats."
 #: panels/applications/cc-applications-panel.ui:205
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
-#: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:108
+#: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:107
 #: panels/user-accounts/cc-user-panel.c:789
 #: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
@@ -401,8 +401,9 @@ msgid "Style"
 msgstr "Estil"
 
 #: panels/background/cc-background-panel.ui:49
-msgid "Light"
-msgstr "Clar"
+#: panels/wacom/cc-wacom-stylus-page.ui:133
+msgid "Default"
+msgstr "Per defaut"
 
 #: panels/background/cc-background-panel.ui:79
 msgid "Dark"
@@ -2670,11 +2671,11 @@ msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr ""
 "Definís l’òrdre dels botons fisics sus las mirgas e los pavats tactils."
 
-#: panels/mouse/cc-mouse-panel.ui:41 panels/sound/cc-balance-slider.ui:13
+#: panels/mouse/cc-mouse-panel.ui:41 panels/sound/cc-balance-slider.ui:16
 msgid "Left"
 msgstr "Esquèrra"
 
-#: panels/mouse/cc-mouse-panel.ui:48 panels/sound/cc-balance-slider.ui:15
+#: panels/mouse/cc-mouse-panel.ui:48 panels/sound/cc-balance-slider.ui:18
 msgid "Right"
 msgstr "Dreita"
 
@@ -2885,23 +2886,23 @@ msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID : %s)"
 
-#: panels/network/cc-wifi-connection-row.c:263
+#: panels/network/cc-wifi-connection-row.c:266
 msgid "Insecure network (WEP)"
 msgstr "Ret pas segur (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:267
+#: panels/network/cc-wifi-connection-row.c:270
 msgid "Secure network (WPA)"
 msgstr "Ret segur (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:271
+#: panels/network/cc-wifi-connection-row.c:274
 msgid "Secure network (WPA2)"
 msgstr "Ret segur (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:275
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Secure network (WPA3)"
 msgstr "Ret segur (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:279
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network"
 msgstr "Ret segur"
 
@@ -2913,7 +2914,7 @@ msgstr "Connectat"
 #: panels/network/cc-wifi-connection-row.ui:62
 #: panels/network/net-device-ethernet.c:325
 #: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
-#: panels/network/network-mobile.ui:329 panels/network/network-proxy.ui:61
+#: panels/network/network-mobile.ui:329 panels/network/network-proxy.ui:62
 #: panels/network/network-vpn.ui:21
 msgid "Options…"
 msgstr "Opcions…"
@@ -3398,7 +3399,7 @@ msgstr "Ret locala solament"
 
 #: panels/network/connection-editor/ip4-page.ui:55
 #: panels/network/connection-editor/ip6-page.ui:65
-#: panels/network/net-proxy.c:71 panels/network/network-proxy.ui:101
+#: panels/network/net-proxy.c:71 panels/network/network-proxy.ui:100
 msgid "Manual"
 msgstr "Manual"
 
@@ -3442,7 +3443,7 @@ msgstr "Palanca"
 #: panels/network/connection-editor/ip6-page.ui:36
 #: panels/network/connection-editor/ip6-page.ui:185
 #: panels/network/connection-editor/ip6-page.ui:237
-#: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:94
+#: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:93
 #: panels/network/wireless-security/eap-method-peap.ui:33
 #: panels/wacom/cc-wacom-page.c:621
 msgid "Automatic"
@@ -3653,11 +3654,11 @@ msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Doblidar"
 
-#: panels/network/net-device-wifi.c:1216
+#: panels/network/net-device-wifi.c:1229
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Las règlas del sistèma interdison son utilizacion coma punt d'accès"
 
-#: panels/network/net-device-wifi.c:1219
+#: panels/network/net-device-wifi.c:1232
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Lo periferic sens fial pren pas en carga lo mòde « punt d'accès »"
 
@@ -3695,47 +3696,47 @@ msgstr "IMEI"
 msgid "Provider"
 msgstr "Provesidor"
 
-#: panels/network/network-proxy.ui:40 panels/network/network-proxy.ui:83
+#: panels/network/network-proxy.ui:40 panels/network/network-proxy.ui:82
 msgid "Network Proxy"
 msgstr "Servidor mandatari"
 
-#: panels/network/network-proxy.ui:142
+#: panels/network/network-proxy.ui:141
 msgid "_HTTP Proxy"
 msgstr "Servidor mandatari _HTTP"
 
-#: panels/network/network-proxy.ui:159
+#: panels/network/network-proxy.ui:158
 msgid "H_TTPS Proxy"
 msgstr "Servidor mandatari H_TTPS"
 
-#: panels/network/network-proxy.ui:176
+#: panels/network/network-proxy.ui:175
 msgid "_FTP Proxy"
 msgstr "Servidor mandatari _FTP"
 
-#: panels/network/network-proxy.ui:193
+#: panels/network/network-proxy.ui:192
 msgid "_Socks Host"
 msgstr "Òste _Socks"
 
-#: panels/network/network-proxy.ui:210
+#: panels/network/network-proxy.ui:209
 msgid "_Ignore Hosts"
 msgstr "_Ignorar los òstes"
 
-#: panels/network/network-proxy.ui:247
+#: panels/network/network-proxy.ui:246
 msgid "HTTP proxy port"
 msgstr "Pòrt del servidor mandatari HTTP"
 
-#: panels/network/network-proxy.ui:310
+#: panels/network/network-proxy.ui:309
 msgid "HTTPS proxy port"
 msgstr "Pòrt del servidor mandatari HTTPS"
 
-#: panels/network/network-proxy.ui:325
+#: panels/network/network-proxy.ui:324
 msgid "FTP proxy port"
 msgstr "Pòrt del servidor mandatari FTP"
 
-#: panels/network/network-proxy.ui:340
+#: panels/network/network-proxy.ui:339
 msgid "Socks proxy port"
 msgstr "Pòrt del servidor mandatari Socks"
 
-#: panels/network/network-proxy.ui:360
+#: panels/network/network-proxy.ui:359
 msgid "_Configuration URL"
 msgstr "URL de _configuracion"
 
@@ -3762,11 +3763,11 @@ msgstr "Senhal"
 msgid "Turn Wi-Fi off"
 msgstr "Atudar lo Wi-Fi"
 
-#: panels/network/network-wifi.ui:98 panels/search/cc-search-panel-row.ui:39
+#: panels/network/network-wifi.ui:99 panels/search/cc-search-panel-row.ui:39
 msgid "More options…"
 msgstr "Mai d'opcions…"
 
-#: panels/network/network-wifi.ui:124
+#: panels/network/network-wifi.ui:119
 msgid "_Connect to Hidden Network…"
 msgstr "_Connexion a una ret amagada…"
 
@@ -3774,7 +3775,7 @@ msgstr "_Connexion a una ret amagada…"
 msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "_Alucar lo punt d’accès Wi-Fi…"
 
-#: panels/network/network-wifi.ui:138
+#: panels/network/network-wifi.ui:143
 msgid "_Known Wi-Fi Networks"
 msgstr "Rets Wi-Fi _conegudas"
 
@@ -6207,11 +6208,19 @@ msgstr "Veire"
 msgid "Sonar"
 msgstr "Sonar"
 
-#: panels/sound/cc-fade-slider.ui:13
+#: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:144
+msgid "Balance"
+msgstr "Balança"
+
+#: panels/sound/cc-fade-slider.ui:13 panels/sound/cc-sound-panel.ui:170
+msgid "Fade"
+msgstr "Fondut"
+
+#: panels/sound/cc-fade-slider.ui:16
 msgid "Rear"
 msgstr "Arrièr"
 
-#: panels/sound/cc-fade-slider.ui:15
+#: panels/sound/cc-fade-slider.ui:18
 msgid "Front"
 msgstr "Avant"
 
@@ -6228,51 +6237,47 @@ msgstr "Clicatz sus un nautparlaire de testar"
 msgid "System Volume"
 msgstr "Volum sistèma"
 
-#: panels/sound/cc-sound-panel.ui:25
+#: panels/sound/cc-sound-panel.ui:12
+msgid "Master volume"
+msgstr "Volum general"
+
+#: panels/sound/cc-sound-panel.ui:28
 msgid "Volume Levels"
 msgstr "Nivèls de volum"
 
-#: panels/sound/cc-sound-panel.ui:35
+#: panels/sound/cc-sound-panel.ui:38
 msgid "Output"
 msgstr "Sortida"
 
-#: panels/sound/cc-sound-panel.ui:56
+#: panels/sound/cc-sound-panel.ui:59
 msgid "Output Device"
 msgstr "Periferic de sortida"
 
-#: panels/sound/cc-sound-panel.ui:75
+#: panels/sound/cc-sound-panel.ui:81
 msgid "Test"
 msgstr "Provar"
 
-#: panels/sound/cc-sound-panel.ui:104 panels/sound/cc-sound-panel.ui:263
+#: panels/sound/cc-sound-panel.ui:110 panels/sound/cc-sound-panel.ui:275
 msgid "Configuration"
 msgstr "Configuracion"
 
-#: panels/sound/cc-sound-panel.ui:135
-msgid "Balance"
-msgstr "Balança"
-
-#: panels/sound/cc-sound-panel.ui:161
-msgid "Fade"
-msgstr "Fondut"
-
-#: panels/sound/cc-sound-panel.ui:187
+#: panels/sound/cc-sound-panel.ui:196 panels/sound/cc-subwoofer-slider.ui:13
 msgid "Subwoofer"
 msgstr "Caisson de bassa"
 
-#: panels/sound/cc-sound-panel.ui:205
+#: panels/sound/cc-sound-panel.ui:214
 msgid "Input"
 msgstr "Entrada"
 
-#: panels/sound/cc-sound-panel.ui:226
+#: panels/sound/cc-sound-panel.ui:235
 msgid "Input Device"
 msgstr "Periferic d’entrada"
 
-#: panels/sound/cc-sound-panel.ui:294
+#: panels/sound/cc-sound-panel.ui:309 panels/sound/cc-volume-slider.ui:13
 msgid "Volume"
 msgstr "Volum"
 
-#: panels/sound/cc-sound-panel.ui:312
+#: panels/sound/cc-sound-panel.ui:327
 msgid "Alert Sound"
 msgstr "Son d’alèrta"
 
@@ -6280,6 +6285,10 @@ msgstr "Son d’alèrta"
 msgctxt "volume"
 msgid "100%"
 msgstr "100 %"
+
+#: panels/sound/cc-volume-slider.ui:21
+msgid "Mute"
+msgstr "Mut"
 
 #: panels/sound/gnome-sound-panel.desktop.in.in:3
 msgid "Sound"
@@ -8215,10 +8224,6 @@ msgstr "Pression ressentida sus la goma"
 msgid "Eraser pressure"
 msgstr "Pression de la goma"
 
-#: panels/wacom/cc-wacom-stylus-page.ui:133
-msgid "Default"
-msgstr "Per defaut"
-
 #: panels/wacom/cc-wacom-stylus-page.ui:134
 msgid "Middle Mouse Button Click"
 msgstr "Clic del boton central de la mirga"
@@ -8856,6 +8861,9 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#~ msgid "Light"
+#~ msgstr "Clar"
 
 #~ msgid "Set"
 #~ msgstr "Definir"
@@ -11688,9 +11696,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "Sound Output Volume"
 #~ msgstr "Volum sonore en sortida"
-
-#~ msgid "_Mute"
-#~ msgstr "_Mut"
 
 #~ msgid "_Sound Preferences"
 #~ msgstr "Preferéncias del _son"
