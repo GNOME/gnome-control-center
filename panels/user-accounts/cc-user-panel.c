@@ -185,6 +185,21 @@ show_current_user (CcUserPanel *self)
             show_user (user, self);
 }
 
+
+static void
+on_back_button_clicked_cb (CcUserPanel *self)
+{
+
+        if (act_user_get_uid (self->selected_user) == getuid ()) {
+                gtk_widget_activate_action (GTK_WIDGET (self),
+                                            "window.navigate",
+                                            "i",
+                                            ADW_NAVIGATION_DIRECTION_BACK);
+        } else {
+                show_current_user (self);
+        }
+}
+
 static const gchar *
 get_real_or_user_name (ActUser *user)
 {
@@ -1549,6 +1564,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, dismiss_notification);
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, set_selected_user);
-        gtk_widget_class_bind_template_callback (widget_class, show_current_user);
+        gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
         gtk_widget_class_bind_template_callback (widget_class, show_history);
 }
