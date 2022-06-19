@@ -790,6 +790,19 @@ update_fingerprint_row_state (CcUserPanel *self, GParamSpec *spec, CcFingerprint
 }
 
 static void
+show_or_hide_back_button (CcUserPanel *self)
+{
+        gboolean show;
+        gboolean folded;
+
+        g_object_get(self, "folded", &folded, NULL);
+
+        show = folded || act_user_get_uid (self->selected_user) != getuid();
+
+        gtk_widget_set_visible (GTK_WIDGET (self->back_button), show);
+}
+
+static void
 show_user (ActUser *user, CcUserPanel *self)
 {
         g_autofree gchar *lang = NULL;
@@ -888,6 +901,7 @@ show_user (ActUser *user, CcUserPanel *self)
         gtk_widget_set_visible (GTK_WIDGET (self->account_settings_box), !show);
         gtk_widget_set_visible (GTK_WIDGET (self->remove_user_button), !show);
         gtk_widget_set_visible (GTK_WIDGET (self->back_button), !show);
+        show_or_hide_back_button(self);
         gtk_widget_set_visible (GTK_WIDGET (self->other_users), show);
 
         /* Last login: show when administrator or current user */
@@ -1447,6 +1461,11 @@ cc_user_panel_init (CcUserPanel *self)
         self->login_screen_settings = settings_or_null ("org.gnome.login-screen");
 
         setup_main_window (self);
+
+        g_signal_connect_swapped (self,
+                          "notify::folded",
+                          G_CALLBACK (show_or_hide_back_button),
+                          self);
 }
 
 static void
