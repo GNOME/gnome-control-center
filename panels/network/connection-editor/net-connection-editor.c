@@ -343,6 +343,7 @@ static void
 validate (NetConnectionEditor *self)
 {
         gboolean valid = FALSE;
+        g_autofree gchar *apply_tooltip = NULL;
         gint i;
 
         if (!editor_is_initialized (self))
@@ -356,15 +357,20 @@ validate (NetConnectionEditor *self)
                 if (!ce_page_validate (page, self->connection, &error)) {
                         valid = FALSE;
                         if (error) {
-                                g_debug ("Invalid setting %s: %s", ce_page_get_title (page), error->message);
+                                apply_tooltip = g_strdup_printf (_("Invalid setting %s: %s"), ce_page_get_title (page), error->message);
+                                g_debug ("%s", apply_tooltip);
                         } else {
-                                g_debug ("Invalid setting %s", ce_page_get_title (page));
+                                apply_tooltip = g_strdup_printf (_("Invalid setting %s"), ce_page_get_title (page));
+                                g_debug ("%s", apply_tooltip);
                         }
                 }
         }
 
         update_sensitivity (self);
 done:
+        if (apply_tooltip != NULL)
+                gtk_widget_set_tooltip_text(GTK_WIDGET (self->apply_button), apply_tooltip);
+
         gtk_widget_set_sensitive (GTK_WIDGET (self->apply_button), valid && self->is_changed);
 }
 
