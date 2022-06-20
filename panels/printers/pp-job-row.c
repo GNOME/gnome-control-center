@@ -46,7 +46,8 @@ enum {
 static guint signals[LAST_SIGNAL] = { 0 };
 
 static void
-update_pause_button (PpJobRow *self, gboolean paused) {
+update_pause_button (PpJobRow *self, gboolean paused)
+{
   gtk_button_set_icon_name (self->pause_button,
                             paused ? "media-playback-start-symbolic" : "media-playback-pause-symbolic");
   gtk_accessible_update_property (GTK_ACCESSIBLE (self->pause_button),
