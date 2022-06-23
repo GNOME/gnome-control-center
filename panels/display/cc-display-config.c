@@ -90,6 +90,12 @@ cc_display_mode_class_init (CcDisplayModeClass *klass)
 {
 }
 
+gboolean
+cc_display_mode_is_clone_mode (CcDisplayMode *self)
+{
+  return CC_DISPLAY_MODE_GET_CLASS (self)->is_clone_mode (self);
+}
+
 void
 cc_display_mode_get_resolution (CcDisplayMode *self, int *w, int *h)
 {
@@ -335,6 +341,12 @@ cc_display_monitor_set_mode (CcDisplayMonitor *self, CcDisplayMode *m)
 }
 
 void
+cc_display_monitor_set_compatible_clone_mode (CcDisplayMonitor *self, CcDisplayMode *m)
+{
+  return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_mode (self, m);
+}
+
+void
 cc_display_monitor_set_position (CcDisplayMonitor *self, int x, int y)
 {
   return CC_DISPLAY_MONITOR_GET_CLASS (self)->set_position (self, x, y);
@@ -549,17 +561,18 @@ cc_display_config_is_applicable (CcDisplayConfig *self)
 
 void
 cc_display_config_set_mode_on_all_outputs (CcDisplayConfig *config,
-                                           CcDisplayMode   *mode)
+                                           CcDisplayMode   *clone_mode)
 {
   GList *outputs, *l;
 
   g_return_if_fail (CC_IS_DISPLAY_CONFIG (config));
+  g_return_if_fail (cc_display_mode_is_clone_mode (clone_mode));
 
   outputs = cc_display_config_get_monitors (config);
   for (l = outputs; l; l = l->next)
     {
       CcDisplayMonitor *output = l->data;
-      cc_display_monitor_set_mode (output, mode);
+      cc_display_monitor_set_compatible_clone_mode (output, clone_mode);
       cc_display_monitor_set_position (output, 0, 0);
     }
 }
@@ -607,10 +620,10 @@ cc_display_config_set_cloning (CcDisplayConfig *self,
 }
 
 GList *
-cc_display_config_get_cloning_modes (CcDisplayConfig *self)
+cc_display_config_generate_cloning_modes (CcDisplayConfig *self)
 {
   g_return_val_if_fail (CC_IS_DISPLAY_CONFIG (self), NULL);
-  return CC_DISPLAY_CONFIG_GET_CLASS (self)->get_cloning_modes (self);
+  return CC_DISPLAY_CONFIG_GET_CLASS (self)->generate_cloning_modes (self);
 }
 
 gboolean

@@ -76,6 +76,14 @@ cc_display_mode_dbus_equal (const CcDisplayModeDBus *m1,
     (m1->flags & MODE_INTERLACED) == (m2->flags & MODE_INTERLACED);
 }
 
+static gboolean
+cc_display_mode_dbus_is_clone_mode (CcDisplayMode *pself)
+{
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
+
+  return !self->id;
+}
+
 static void
 cc_display_mode_dbus_get_resolution (CcDisplayMode *pself,
                                      int *w, int *h)
@@ -173,6 +181,7 @@ cc_display_mode_dbus_class_init (CcDisplayModeDBusClass *klass)
 
   gobject_class->finalize = cc_display_mode_dbus_finalize;
 
+  parent_class->is_clone_mode = cc_display_mode_dbus_is_clone_mode;
   parent_class->get_resolution = cc_display_mode_dbus_get_resolution;
   parent_class->get_supported_scales = cc_display_mode_dbus_get_supported_scales;
   parent_class->get_preferred_scale = cc_display_mode_dbus_get_preferred_scale;
@@ -180,6 +189,25 @@ cc_display_mode_dbus_class_init (CcDisplayModeDBusClass *klass)
   parent_class->is_preferred = cc_display_mode_dbus_is_preferred;
   parent_class->get_freq = cc_display_mode_dbus_get_freq;
   parent_class->get_freq_f = cc_display_mode_dbus_get_freq_f;
+}
+
+static CcDisplayModeDBus *
+cc_display_mode_dbus_new_virtual (int     width,
+                                  int     height,
+                                  double  preferred_scale,
+                                  GArray *supported_scales)
+{
+  g_autoptr(GVariant) properties_variant = NULL;
+  CcDisplayModeDBus *self;
+
+  self = g_object_new (CC_TYPE_DISPLAY_MODE_DBUS, NULL);
+
+  self->width = width;
+  self->height = height;
+  self->preferred_scale = preferred_scale;
+  self->supported_scales = g_array_ref (supported_scales);
+
+  return self;
 }
 
 static CcDisplayModeDBus *
@@ -665,6 +693,44 @@ cc_display_monitor_dbus_set_mode (CcDisplayMonitor *pself,
 }
 
 static void
+cc_display_monitor_dbus_set_compatible_clone_mode (CcDisplayMonitor *pself,
+                                                   CcDisplayMode    *clone_mode)
+{
+  CcDisplayMonitorDBus *self = CC_DISPLAY_MONITOR_DBUS (pself);
+  GList *l;
+  CcDisplayMode *best_mode = NULL;
+  int clone_width, clone_height;
+
+  g_return_if_fail (cc_display_mode_is_clone_mode (clone_mode));
+
+  cc_display_mode_get_resolution (clone_mode, &clone_width, &clone_height);
+
+  for (l = self->modes; l; l = l->next)
+    {
+      CcDisplayMode *mode = l->data;
+      int width, height;
+
+      cc_display_mode_get_resolution (mode, &width, &height);
+      if (width != clone_width || height != clone_height)
+        continue;
+
+      if (!best_mode)
+        {
+          best_mode = mode;
+          continue;
+        }
+
+      if (cc_display_mode_get_freq_f (mode) >
+          cc_display_mode_get_freq_f (best_mode))
+        best_mode = mode;
+    }
+
+  g_return_if_fail (best_mode);
+
+  cc_display_monitor_set_mode (CC_DISPLAY_MONITOR (self), best_mode);
+}
+
+static void
 cc_display_monitor_dbus_set_position (CcDisplayMonitor *pself,
                                       int x, int y)
 {
@@ -778,6 +844,7 @@ cc_display_monitor_dbus_class_init (CcDisplayMonitorDBusClass *klass)
   parent_class->get_underscanning = cc_display_monitor_dbus_get_underscanning;
   parent_class->set_underscanning = cc_display_monitor_dbus_set_underscanning;
   parent_class->set_mode = cc_display_monitor_dbus_set_mode;
+  parent_class->set_compatible_clone_mode = cc_display_monitor_dbus_set_compatible_clone_mode;
   parent_class->set_position = cc_display_monitor_dbus_set_position;
   parent_class->get_scale = cc_display_monitor_dbus_get_scale;
   parent_class->set_scale = cc_display_monitor_dbus_set_scale;
@@ -907,8 +974,6 @@ struct _CcDisplayConfigDBus
   CcDisplayMonitorDBus *primary;
 
   GHashTable *logical_monitors;
-
-  GList *clone_modes;
 };
 
 G_DEFINE_TYPE (CcDisplayConfigDBus,
@@ -1193,12 +1258,161 @@ cc_display_config_dbus_set_cloning (CcDisplayConfig *pself,
     }
 }
 
+static gboolean
+mode_supports_scale (CcDisplayMode *mode,
+                     double         scale)
+{
+  g_autoptr(GArray) scales = NULL;
+  int i;
+
+  scales = cc_display_mode_get_supported_scales (mode);
+  for (i = 0; i < scales->len; i++)
+    {
+      if (G_APPROX_VALUE (scale, g_array_index (scales, double, i),
+                          DBL_EPSILON))
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
+static void
+remove_unsupported_scales (CcDisplayMode *mode,
+                           GArray        *supported_scales)
+{
+  g_autoptr(GArray) mode_scales = NULL;
+  int i;
+
+  mode_scales = cc_display_mode_get_supported_scales (mode);
+  i = 0;
+  while (i < supported_scales->len)
+    {
+      double scale;
+
+      if (i == supported_scales->len)
+        break;
+
+      scale = g_array_index (supported_scales, double, i);
+
+      if (mode_supports_scale (mode, scale))
+        {
+          i++;
+          continue;
+        }
+
+      g_array_remove_range (supported_scales, i, 1);
+    }
+}
+
+static gboolean
+monitor_has_compatible_clone_mode (CcDisplayMonitorDBus *monitor,
+                                   CcDisplayModeDBus    *mode,
+                                   GArray               *supported_scales)
+{
+  GList *l;
+
+  for (l = monitor->modes; l; l = l->next)
+    {
+      CcDisplayModeDBus *other_mode = l->data;
+
+      if (other_mode->width != mode->width ||
+          other_mode->height != mode->height)
+        continue;
+
+      if ((other_mode->flags & MODE_INTERLACED) !=
+          (mode->flags & MODE_INTERLACED))
+        continue;
+
+      remove_unsupported_scales (CC_DISPLAY_MODE (other_mode), supported_scales);
+
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+static gboolean
+monitors_has_compatible_clone_mode (CcDisplayConfigDBus *self,
+                                    CcDisplayModeDBus   *mode,
+                                    GArray              *supported_scales)
+{
+  GList *l;
+
+  for (l = self->monitors; l; l = l->next)
+    {
+      CcDisplayMonitorDBus *monitor = l->data;
+
+      if (!monitor_has_compatible_clone_mode (monitor, mode, supported_scales))
+        return FALSE;
+    }
+
+  return TRUE;
+}
+
+static gboolean
+is_mode_better (CcDisplayModeDBus *mode,
+                CcDisplayModeDBus *other_mode)
+{
+  if (mode->width * mode->height > other_mode->width * other_mode->height)
+    return TRUE;
+  else if (mode->width * mode->height < other_mode->width * other_mode->height)
+    return FALSE;
+
+  if (!(mode->flags & MODE_INTERLACED) &&
+      (other_mode->flags & MODE_INTERLACED))
+    return TRUE;
+
+  return FALSE;
+}
+
 static GList *
-cc_display_config_dbus_get_cloning_modes (CcDisplayConfig *pself)
+cc_display_config_dbus_generate_cloning_modes (CcDisplayConfig *pself)
 {
   CcDisplayConfigDBus *self = CC_DISPLAY_CONFIG_DBUS (pself);
+  CcDisplayMonitorDBus *base_monitor = NULL;
+  GList *l;
+  GList *clone_modes = NULL;
+  CcDisplayModeDBus *best_mode = NULL;
 
-  return self->clone_modes;
+  for (l = self->monitors; l; l = l->next)
+    {
+      CcDisplayMonitor *monitor = l->data;
+
+      if (cc_display_monitor_is_active (monitor))
+        {
+          base_monitor = CC_DISPLAY_MONITOR_DBUS (monitor);
+          break;
+        }
+    }
+
+  if (!base_monitor)
+    return NULL;
+
+  for (l = base_monitor->modes; l; l = l->next)
+    {
+      CcDisplayModeDBus *mode = l->data;
+      CcDisplayModeDBus *virtual_mode;
+      g_autoptr (GArray) supported_scales = NULL;
+
+      supported_scales =
+        cc_display_mode_get_supported_scales (CC_DISPLAY_MODE (mode));
+
+      if (!monitors_has_compatible_clone_mode (self, mode, supported_scales))
+        continue;
+
+      virtual_mode = cc_display_mode_dbus_new_virtual (mode->width,
+                                                       mode->height,
+                                                       mode->preferred_scale,
+                                                       supported_scales);
+      clone_modes = g_list_append (clone_modes, virtual_mode);
+
+      if (!best_mode || is_mode_better (virtual_mode, best_mode))
+        best_mode = virtual_mode;
+    }
+
+  best_mode->flags |= MODE_PREFERRED;
+
+  return clone_modes;
 }
 
 static gboolean
@@ -1388,36 +1602,6 @@ cc_display_config_dbus_init (CcDisplayConfigDBus *self)
 }
 
 static void
-gather_clone_modes (CcDisplayConfigDBus *self)
-{
-  guint n_monitors = g_list_length (self->monitors);
-  CcDisplayMonitorDBus *monitor;
-  GList *l;
-
-  if (n_monitors < 2)
-    return;
-
-  monitor = self->monitors->data;
-  for (l = monitor->modes; l != NULL; l = l->next)
-    {
-      CcDisplayModeDBus *mode = l->data;
-      gboolean valid = TRUE;
-      GList *ll;
-      for (ll = self->monitors->next; ll != NULL; ll = ll->next)
-        {
-          CcDisplayMonitorDBus *other_monitor = ll->data;
-          if (!cc_display_monitor_dbus_get_closest_mode (other_monitor, mode))
-            {
-              valid = FALSE;
-              break;
-            }
-        }
-      if (valid)
-        self->clone_modes = g_list_prepend (self->clone_modes, mode);
-    }
-}
-
-static void
 remove_logical_monitor (gpointer data,
                         GObject *object)
 {
@@ -1525,8 +1709,6 @@ construct_monitors (CcDisplayConfigDBus *self,
 
       register_logical_monitor (self, logical_monitor);
     }
-
-  gather_clone_modes (self);
 }
 
 static void
@@ -1704,7 +1886,6 @@ cc_display_config_dbus_finalize (GObject *object)
 
   g_clear_list (&self->monitors, g_object_unref);
   g_clear_pointer (&self->logical_monitors, g_hash_table_destroy);
-  g_clear_pointer (&self->clone_modes, g_list_free);
 
   G_OBJECT_CLASS (cc_display_config_dbus_parent_class)->finalize (object);
 }
@@ -1728,7 +1909,7 @@ cc_display_config_dbus_class_init (CcDisplayConfigDBusClass *klass)
   parent_class->apply = cc_display_config_dbus_apply;
   parent_class->is_cloning = cc_display_config_dbus_is_cloning;
   parent_class->set_cloning = cc_display_config_dbus_set_cloning;
-  parent_class->get_cloning_modes = cc_display_config_dbus_get_cloning_modes;
+  parent_class->generate_cloning_modes = cc_display_config_dbus_generate_cloning_modes;
   parent_class->is_layout_logical = cc_display_config_dbus_is_layout_logical;
   parent_class->is_scaled_mode_valid = cc_display_config_dbus_is_scaled_mode_valid;
   parent_class->set_minimum_size = cc_display_config_dbus_set_minimum_size;
