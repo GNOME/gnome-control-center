@@ -124,6 +124,14 @@ cc_display_mode_dbus_is_interlaced (CcDisplayMode *pself)
   return !!(self->flags & MODE_INTERLACED);
 }
 
+static gboolean
+cc_display_mode_dbus_is_preferred (CcDisplayMode *pself)
+{
+  CcDisplayModeDBus *self = CC_DISPLAY_MODE_DBUS (pself);
+
+  return !!(self->flags & MODE_PREFERRED);
+}
+
 static int
 cc_display_mode_dbus_get_freq (CcDisplayMode *pself)
 {
@@ -169,6 +177,7 @@ cc_display_mode_dbus_class_init (CcDisplayModeDBusClass *klass)
   parent_class->get_supported_scales = cc_display_mode_dbus_get_supported_scales;
   parent_class->get_preferred_scale = cc_display_mode_dbus_get_preferred_scale;
   parent_class->is_interlaced = cc_display_mode_dbus_is_interlaced;
+  parent_class->is_preferred = cc_display_mode_dbus_is_preferred;
   parent_class->get_freq = cc_display_mode_dbus_get_freq;
   parent_class->get_freq_f = cc_display_mode_dbus_get_freq_f;
 }
