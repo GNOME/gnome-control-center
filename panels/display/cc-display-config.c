@@ -114,6 +114,12 @@ cc_display_mode_is_interlaced (CcDisplayMode *self)
   return CC_DISPLAY_MODE_GET_CLASS (self)->is_interlaced (self);
 }
 
+gboolean
+cc_display_mode_is_preferred (CcDisplayMode *self)
+{
+  return CC_DISPLAY_MODE_GET_CLASS (self)->is_preferred (self);
+}
+
 int
 cc_display_mode_get_freq (CcDisplayMode *self)
 {
