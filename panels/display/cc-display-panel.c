@@ -164,6 +164,22 @@ cc_panel_get_selected_type (CcDisplayPanel *panel)
     g_assert_not_reached ();
 }
 
+static CcDisplayMode *
+find_preferred_mode (GList *modes)
+{
+  GList *l;
+
+  for (l = modes; l; l = l->next)
+    {
+      CcDisplayMode *mode = l->data;
+
+      if (cc_display_mode_is_preferred (mode))
+        return mode;
+    }
+
+  return NULL;
+}
+
 static void
 config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
 {
@@ -238,34 +254,22 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
       {
         g_debug ("Creating new clone config");
         gdouble scale;
-        GList *modes = cc_display_config_get_cloning_modes (panel->current_config);
-        gint bw, bh;
-        CcDisplayMode *best = NULL;
+        g_autolist(CcDisplayMode) modes = NULL;
+        CcDisplayMode *clone_mode;
 
         /* Turn on cloning and select the best mode we can find by default */
         cc_display_config_set_cloning (panel->current_config, TRUE);
 
-        while (modes)
-          {
-            CcDisplayMode *mode = modes->data;
-            gint w, h;
-
-            cc_display_mode_get_resolution (mode, &w, &h);
-            if (best == NULL || (bw*bh < w*h))
-              {
-                best = mode;
-                cc_display_mode_get_resolution (best, &bw, &bh);
-              }
-
-            modes = modes->next;
-          }
+        modes = cc_display_config_generate_cloning_modes (panel->current_config);
+        clone_mode = find_preferred_mode (modes);
+        g_return_if_fail (clone_mode);
 
         /* Take the preferred scale by default, */
-        scale = cc_display_mode_get_preferred_scale (best);
+        scale = cc_display_mode_get_preferred_scale (clone_mode);
         /* but prefer the old primary scale if that is valid. */
         if (current_primary &&
             cc_display_config_is_scaled_mode_valid (panel->current_config,
-                                                    best,
+                                                    clone_mode,
                                                     old_primary_scale))
           scale = old_primary_scale;
 
@@ -273,7 +277,7 @@ config_ensure_of_type (CcDisplayPanel *panel, CcDisplayConfigType type)
           {
             CcDisplayMonitor *output = l->data;
 
-            cc_display_monitor_set_mode (output, best);
+            cc_display_monitor_set_compatible_clone_mode (output, clone_mode);
             cc_display_monitor_set_scale (output, scale);
           }
       }

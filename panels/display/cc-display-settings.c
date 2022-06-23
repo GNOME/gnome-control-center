@@ -235,6 +235,7 @@ static gboolean
 cc_display_settings_rebuild_ui (CcDisplaySettings *self)
 {
   GtkWidget *child;
+  g_autolist(CcDisplayMode) clone_modes = NULL;
   GList *modes;
   GList *item;
   gint width, height;
@@ -365,9 +366,14 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   /* Resolutions are always shown. */
   gtk_widget_set_visible (self->resolution_row, TRUE);
   if (cc_display_config_is_cloning (self->config))
-    modes = cc_display_config_get_cloning_modes (self->config);
+    {
+      clone_modes = cc_display_config_generate_cloning_modes (self->config);
+      modes = clone_modes;
+    }
   else
-    modes = cc_display_monitor_get_modes (self->selected_output);
+    {
+      modes = cc_display_monitor_get_modes (self->selected_output);
+    }
 
   g_list_store_remove_all (self->resolution_list);
   g_list_store_append (self->resolution_list, current_mode);
