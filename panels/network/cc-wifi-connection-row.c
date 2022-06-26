@@ -31,6 +31,7 @@ struct _CcWifiConnectionRow
   NMDeviceWifi    *device;
   GPtrArray       *aps;
   NMConnection    *connection;
+  gboolean         known_connection;
 
   GtkLabel        *active_label;
   GtkCheckButton  *checkbutton;
@@ -48,6 +49,7 @@ enum
   PROP_DEVICE,
   PROP_APS,
   PROP_CONNECTION,
+  PROP_KNOWN_CONNECTION,
   PROP_LAST
 };
 
@@ -260,7 +262,7 @@ update_ui (CcWifiConnectionRow *self)
     }
 
   gtk_widget_set_visible (GTK_WIDGET (self->active_label), active);
-  gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting);
+  gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting || self->known_connection);
 
   if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE && security != NM_AP_SEC_OWE_TM)
     {
@@ -369,6 +371,10 @@ cc_wifi_connection_row_get_property (GObject    *object,
       g_value_set_object (value, self->connection);
       break;
 
+    case PROP_KNOWN_CONNECTION:
+      g_value_set_boolean (value, self->known_connection);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -413,6 +419,10 @@ cc_wifi_connection_row_set_property (GObject      *object,
 
     case PROP_CONNECTION:
       self->connection = g_value_dup_object (value);
+      break;
+
+    case PROP_KNOWN_CONNECTION:
+      self->known_connection = g_value_get_boolean (value);
       break;
 
     default:
@@ -480,6 +490,11 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
                                                  NM_TYPE_CONNECTION,
                                                  G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
+  props[PROP_KNOWN_CONNECTION] = g_param_spec_boolean ("known-connection", "Known Connection",
+                                                "Whether this row is a known connection or not",
+                                                FALSE,
+                                                G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+
   g_object_class_install_properties (object_class,
                                      PROP_LAST,
                                      props);
@@ -514,13 +529,15 @@ CcWifiConnectionRow *
 cc_wifi_connection_row_new (NMDeviceWifi  *device,
                             NMConnection  *connection,
                             GPtrArray     *aps,
-                            gboolean       checkable)
+                            gboolean       checkable,
+                            gboolean       known_connection)
 {
   return g_object_new (CC_TYPE_WIFI_CONNECTION_ROW,
                        "device", device,
                        "connection", connection,
                        "aps", aps,
                        "checkable", checkable,
+                       "known-connection", known_connection,
                        NULL);
 }
 

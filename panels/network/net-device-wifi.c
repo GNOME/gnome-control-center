@@ -1314,3 +1314,4 @@ net_device_wifi_turn_off_hotspot (NetDeviceWifi *self)
 
         stop_shared_connection (self);
 }
+
