@@ -30,7 +30,8 @@ G_DECLARE_FINAL_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, CC, WIFI_CONN
 CcWifiConnectionRow *cc_wifi_connection_row_new                 (NMDeviceWifi  *device,
                                                                  NMConnection  *connection,
                                                                  GPtrArray     *aps,
-                                                                 gboolean       checkable);
+                                                                 gboolean       checkable,
+                                                                 gboolean       known_connection);
 
 gboolean             cc_wifi_connection_row_get_checkable       (CcWifiConnectionRow   *row);
 gboolean             cc_wifi_connection_row_get_checked         (CcWifiConnectionRow   *row);

@@ -114,7 +114,8 @@ connection_ignored (NMConnection *connection)
 static CcWifiConnectionRow*
 cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
                                  NMConnection         *connection,
-                                 NMAccessPoint        *ap)
+                                 NMAccessPoint        *ap,
+                                 gboolean              known_connection)
 {
   CcWifiConnectionRow *res;
   g_autoptr(GPtrArray) aps = NULL;
@@ -128,7 +129,8 @@ cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
   res = cc_wifi_connection_row_new (self->device,
                                     connection,
                                     aps,
-                                    self->checkable);
+                                    self->checkable,
+                                    known_connection);
   gtk_list_box_append (self->listbox, GTK_WIDGET (res));
 
   g_signal_connect_object (res, "configure", G_CALLBACK (on_row_configured_cb), self, G_CONNECT_SWAPPED);
@@ -232,7 +234,7 @@ update_connections (CcWifiConnectionList *self)
       else
         g_ptr_array_add (self->connections_row,
                          cc_wifi_connection_list_row_add (self, con,
-                         NULL));
+                         NULL, TRUE));
     }
 
   /* Coldplug all known APs again */
@@ -350,7 +352,7 @@ on_device_ap_added_cb (CcWifiConnectionList *self,
 
       row = g_ptr_array_index (self->connections_row, j);
       if (!row)
-        row = cc_wifi_connection_list_row_add (self, g_ptr_array_index (connections, i), NULL);
+        row = cc_wifi_connection_list_row_add (self, g_ptr_array_index (connections, i), NULL, TRUE);
       cc_wifi_connection_row_add_access_point (row, ap);
       g_ptr_array_index (self->connections_row, j) = row;
     }
@@ -374,7 +376,7 @@ on_device_ap_added_cb (CcWifiConnectionList *self,
   row = g_hash_table_lookup (self->ssid_to_row, ssid);
   if (!row)
     {
-      row = cc_wifi_connection_list_row_add (self, NULL, ap);
+      row = cc_wifi_connection_list_row_add (self, NULL, ap, FALSE);
 
       g_hash_table_insert (self->ssid_to_row, g_bytes_ref (ssid), row);
     }
