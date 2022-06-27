@@ -8,10 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
-"es\n"
-"POT-Creation-Date: 2022-06-20 23:45+0000\n"
-"PO-Revision-Date: 2022-06-21 09:39+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
+"ues\n"
+"POT-Creation-Date: 2022-06-27 17:01+0000\n"
+"PO-Revision-Date: 2022-06-27 23:03+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1547,7 +1547,7 @@ msgstr "Повідомити про помилки"
 msgid "diagnostics;crash;"
 msgstr "diagnostics;crash;діагностика;аварія;"
 
-#: panels/display/cc-display-panel.c:512
+#: panels/display/cc-display-panel.c:516
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1558,7 +1558,7 @@ msgstr "diagnostics;crash;діагностика;аварія;"
 msgid "On"
 msgstr "Увімкнено"
 
-#: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1569,15 +1569,15 @@ msgstr "Увімкнено"
 msgid "Off"
 msgstr "Вимкнено"
 
-#: panels/display/cc-display-panel.c:945
+#: panels/display/cc-display-panel.c:949
 msgid "Apply Changes?"
 msgstr "Застосувати зміни?"
 
-#: panels/display/cc-display-panel.c:950
+#: panels/display/cc-display-panel.c:954
 msgid "Changes Cannot be Applied"
 msgstr "Не вдалося застосувати зміни"
 
-#: panels/display/cc-display-panel.c:952
+#: panels/display/cc-display-panel.c:956
 msgid "This could be due to hardware limitations."
 msgstr "Причиною можуть бути апаратні обмеження."
 
@@ -1784,6 +1784,436 @@ msgid ""
 msgstr ""
 "Панель;Проектори;xrandr;Екран;Роздільність;Оновлення;Монітор;Нічне;Світло;"
 "Синій;redshift;колір;захід;світанок;"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
+#: panels/firmware-security/cc-firmware-security-panel.c:105
+msgid "Secure Boot is Active"
+msgstr "Secure Boot є активним"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
+#: panels/firmware-security/cc-firmware-security-panel.c:111
+msgid "Secure Boot has Problems"
+msgstr "Маємо проблеми із Secure Boot"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
+#: panels/firmware-security/cc-firmware-security-panel.c:117
+msgid "Secure Boot is Inactive"
+msgstr "Secure Boot є неактивним"
+
+#: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts.\n"
+"\n"
+"For more information, contact the hardware manufacturer or IT support."
+msgstr ""
+"Secure boot запобігає завантаженню програмного забезпечення зловмисників під"
+" час запуску пристрою.\n"
+"\n"
+"Докладніший його опис можна отримати від виробника обладнання або служби"
+" комп'ютерної підтримки."
+
+#. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
+#: panels/firmware-security/cc-firmware-security-dialog.c:70
+#, c-format
+msgid "Device conforms to HSI level %d"
+msgstr "Пристрій є сумісним із рівнем HSI %d"
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:423
+#| msgid "Notifications"
+msgid "No Protection"
+msgstr "Без захисту"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:99
+msgid ""
+"This device has no protection against hardware security issues. This could "
+"be because of a hardware or firmware configuration issue. It is recommended "
+"to contact your IT support provider."
+msgstr ""
+"Цей пристрій не захищено від апаратних проблем із безпекою. Причиною можуть"
+" бути проблеми із налаштуваннями апаратної частини або мікропрограми."
+" Рекомендуємо повідомити про цю проблему службі надання гарантійної"
+" комп'ютерної підтримки."
+
+#. TRANSLATORS: in reference to firmware protection: 1/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:111
+#: panels/firmware-security/cc-firmware-security-dialog.ui:80
+#: panels/firmware-security/cc-firmware-security-panel.c:430
+msgid "Minimal Protection"
+msgstr "Мінімальний захист"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:112
+msgid ""
+"This device has minimal protection against hardware security issues. This is "
+"the lowest device security level and only provides protection against simple "
+"security threats."
+msgstr ""
+"Цей пристрій має мінімальний захист від апаратних проблем із безпекою. Це"
+" найнижчий рівень захисту пристрою, який усуває лише прості загрози безпеці."
+
+#. TRANSLATORS: in reference to firmware protection: 2/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.ui:94
+#: panels/firmware-security/cc-firmware-security-panel.c:437
+msgid "Basic Protection"
+msgstr "Базовий захист"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:125
+msgid ""
+"This device has basic protection against hardware security issues. This "
+"provides protection against some common security threats."
+msgstr ""
+"Цей пристрій має базовий захист від апаратних проблем із безпекою. Цей"
+" рівень захисту надає захист від деяких типових загроз безпеці."
+
+#. TRANSLATORS: in reference to firmware protection: 3/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.ui:108
+#: panels/firmware-security/cc-firmware-security-panel.c:444
+#| msgid "Add connection"
+msgid "Extended Protection"
+msgstr "Розширений захист"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:138
+msgid ""
+"This device has extended protection against hardware security issues. This "
+"is the highest device security level and provides protection against "
+"advanced security threats."
+msgstr ""
+"Цей пристрій має розширений захист від апаратних проблем із безпекою. Це"
+" рівень захисту пристрою, який усуває деякі додаткові загрози безпеці."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
+msgid "Error: unable to determine HSI level."
+msgstr "Помилка: не вдалося визначити рівень HSI."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:148
+msgid "Error: unable to determine Incorrect HSI level."
+msgstr "Помилка: не вдалося визначити помилковий рівень HSI."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:232
+msgid "Minimal Security Protections"
+msgstr "Мінімальний захист"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:237
+msgid "Basic Security Protections"
+msgstr "Базовий захист"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:242
+msgid "Extended Security Protections"
+msgstr "Розширений захист"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+#| msgctxt "Wi-Fi Hotspot"
+#| msgid "Security type"
+msgid "Security Level"
+msgstr "Рівень безпеки"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:106
+msgid "Protected against malicious software when the device starts."
+msgstr ""
+"Захист від програмного забезпечення зловмисників під час запуску пристрою."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:112
+msgid "Some protection when the device is started."
+msgstr "Деякий захист, коли пристрій розпочав роботу."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+msgid "No protection when the device is started."
+msgstr "Без захисту, коли пристрій розпочав роботу."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:424
+msgid "Highly exposed to security threats."
+msgstr "Надзвичайно відкритий до загроз захисту."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:431
+msgid "Limited protection against simple security threats."
+msgstr "Обмежений захист від простих загроз."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:438
+msgid "Protected against common security threats."
+msgstr "Захищено від поширених загроз."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:445
+#: panels/firmware-security/cc-firmware-security-panel.c:452
+msgid "Protected against a wide range of security threats."
+msgstr "Захищено від широкого діапазону загроз."
+
+#. TRANSLATORS: in reference to firmware protection: 4/4 stars
+#: panels/firmware-security/cc-firmware-security-panel.c:451
+msgid "Comprehensive Protection"
+msgstr "Всебічний захист"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:138
+msgid "No Events"
+msgstr "Немає подій"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:38
+msgid "SPI write"
+msgstr "Запис SPI"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:40
+msgid "SPI lock"
+msgstr "Блокування SPI"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:42
+msgid "SPI BIOS region"
+msgstr "Регіон BIOS SPI"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:44
+msgid "SPI BIOS Descriptor"
+msgstr "Дескриптор BIOS SPI"
+
+#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
+#: panels/firmware-security/cc-firmware-security-utils.c:46
+msgid "Pre-boot DMA protection is"
+msgstr "Захист DMA до завантаження"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel
+#: panels/firmware-security/cc-firmware-security-utils.c:48
+msgid "Intel BootGuard"
+msgstr "Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * verified boot refers to the way the boot process is verified
+#: panels/firmware-security/cc-firmware-security-utils.c:51
+msgid "Intel BootGuard verified boot"
+msgstr "Перевірене завантаження Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * ACM means to verify the integrity of Initial Boot Block
+#: panels/firmware-security/cc-firmware-security-utils.c:54
+msgid "Intel BootGuard ACM protected"
+msgstr "Захист ACM Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * error policy is what to do on failure
+#: panels/firmware-security/cc-firmware-security-utils.c:57
+msgid "Intel BootGuard error policy"
+msgstr "Правила щодо помилок Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * OTP = one time programmable
+#: panels/firmware-security/cc-firmware-security-utils.c:60
+msgid "Intel BootGuard OTP fuse"
+msgstr "Синтез OTP Intel BootGuard"
+
+#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
+#. * enabled means supported by the processor
+#: panels/firmware-security/cc-firmware-security-utils.c:63
+msgid "Intel CET"
+msgstr "Intel CET"
+
+#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
+#. * active means being used by the OS
+#: panels/firmware-security/cc-firmware-security-utils.c:66
+msgid "Intel CET Active"
+msgstr "Intel CET є активним"
+
+#. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
+#: panels/firmware-security/cc-firmware-security-utils.c:68
+msgid "Intel SMAP"
+msgstr "Intel SMAP"
+
+#. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
+#: panels/firmware-security/cc-firmware-security-utils.c:70
+msgid "Encrypted RAM"
+msgstr "Шифрування RAM"
+
+#. TRANSLATORS: Title:
+#. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
+#: panels/firmware-security/cc-firmware-security-utils.c:73
+msgid "IOMMU device protection"
+msgstr "Захист пристрою IOMMU"
+
+#. TRANSLATORS: Title: lockdown is a security mode of the kernel
+#: panels/firmware-security/cc-firmware-security-utils.c:75
+msgid "Kernel lockdown"
+msgstr "Блокування ядра"
+
+#. TRANSLATORS: Title: if it's tainted or not
+#: panels/firmware-security/cc-firmware-security-utils.c:77
+msgid "Kernel tainted"
+msgstr "Ядро забруднено"
+
+#. TRANSLATORS: Title: swap space or swap partition
+#: panels/firmware-security/cc-firmware-security-utils.c:79
+msgid "Linux swap"
+msgstr "Linux swap"
+
+#. TRANSLATORS: Title: sleep state
+#: panels/firmware-security/cc-firmware-security-utils.c:81
+#| msgid "Suspend"
+msgid "Suspend-to-ram"
+msgstr "Сон зі збереженням до RAM"
+
+#. TRANSLATORS: Title: a better sleep state
+#: panels/firmware-security/cc-firmware-security-utils.c:83
+#| msgid "Suspend"
+msgid "Suspend-to-idle"
+msgstr "Сон із переведенням до бездіяльності"
+
+#. TRANSLATORS: Title: PK is the 'platform key' for the machine
+#: panels/firmware-security/cc-firmware-security-utils.c:85
+msgid "UEFI platform key"
+msgstr "Ключ платформи UEFI"
+
+#. TRANSLATORS: Title: SB is a way of locking down UEFI
+#: panels/firmware-security/cc-firmware-security-utils.c:87
+#| msgid "Secure network"
+msgid "Secure boot"
+msgstr "Secure boot"
+
+#. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be empty
+#: panels/firmware-security/cc-firmware-security-utils.c:89
+msgid "All TPM PCRs are"
+msgstr "Усі PCR TPM"
+
+#. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
+#: panels/firmware-security/cc-firmware-security-utils.c:91
+msgid "TPM PCR0 reconstruction"
+msgstr "Реконструкція PCR0 TPM"
+
+#. TRANSLATORS: Title: TPM = Trusted Platform Module
+#: panels/firmware-security/cc-firmware-security-utils.c:93
+msgid "TPM v2.0"
+msgstr "TPM v2.0"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine
+#: panels/firmware-security/cc-firmware-security-utils.c:95
+#| msgid "Manufacturer"
+msgid "MEI manufacturing mode"
+msgstr "Режим виробника MEI"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine, and the
+#. * "override" is the physical PIN that can be driven to
+#. * logic high -- luckily it is probably not accessible to
+#. * end users on consumer boards
+#: panels/firmware-security/cc-firmware-security-utils.c:100
+msgid "MEI override"
+msgstr "Перевизначення MEI"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine
+#: panels/firmware-security/cc-firmware-security-utils.c:102
+#| msgid "PEAP _version"
+msgid "MEI version"
+msgstr "Версія MEI"
+
+#. TRANSLATORS: Title: if firmware updates are available
+#: panels/firmware-security/cc-firmware-security-utils.c:104
+#| msgid "Firmware Version"
+msgid "Firmware updates"
+msgstr "Оновлення мікропрограми"
+
+#. TRANSLATORS: Title: if we can verify the firmware checksums
+#: panels/firmware-security/cc-firmware-security-utils.c:106
+#| msgid "Firmware Version"
+msgid "Firmware attestation"
+msgstr "Засвідчення мікропрограми"
+
+#. TRANSLATORS: Title: if the fwupd plugins are all present and correct
+#: panels/firmware-security/cc-firmware-security-utils.c:108
+msgid "fwupd plugins"
+msgstr "Додатки fwupd"
+
+#. TRANSLATORS: Title: Direct Connect Interface (DCI) allows
+#. * debugging of Intel processors using the USB3 port
+#: panels/firmware-security/cc-firmware-security-utils.c:111
+#: panels/firmware-security/cc-firmware-security-utils.c:112
+msgid "Intel DCI debugger"
+msgstr "Діагностика DCI Intel"
+
+#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
+#: panels/firmware-security/cc-firmware-security-utils.c:114
+msgid "Pre-boot DMA protection"
+msgstr "Захист DMA до завантаження"
+
+#. TRANSLATORS: Title: if fwupd supports HSI on this chip
+#: panels/firmware-security/cc-firmware-security-utils.c:116
+#| msgid "Supported ICC profiles"
+msgid "Supported CPU"
+msgstr "Підтримуваний процесор"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:150
+msgid "IOMMU device protection enabled"
+msgstr "Захист пристрою IOMMU увімкнено"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:156
+msgid "IOMMU device protection disabled"
+msgstr "Захист пристрою IOMMU вимкнено"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:176
+msgid "Kernel is no longer tainted"
+msgstr "Ядро більше не забруднено сторонніми модулями"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:182
+msgid "Kernel is tainted"
+msgstr "Ядро забруднено сторонніми модулями"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:188
+msgid "Kernel lockdown disabled"
+msgstr "Блокування ядра вимкнено"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:194
+msgid "Kernel lockdown enabled"
+msgstr "Блокування ядра увімкнено"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:200
+msgid "Pre-boot DMA protection is disabled"
+msgstr "Захист DMA до завантаження вимкнено"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:206
+msgid "Pre-boot DMA protection is enabled"
+msgstr "Захист DMA до завантаження увімкнено"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:212
+#| msgctxt "Password mode"
+#| msgid "Account disabled"
+msgid "Secure Boot disabled"
+msgstr "Secure Boot вимкнено"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:218
+msgid "Secure Boot enabled"
+msgstr "Secure Boot увімкнено"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:224
+msgid "All TPM PCRs are valid"
+msgstr "Усі PCR TPM є коректними"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:230
+msgid "All TPM PCRs are now valid"
+msgstr "Усі PCR TPM тепер є коректними"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:236
+msgid "A TPM PCR is now an invalid value"
+msgstr "PCR TPM тепер є некоректним значенням"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:242
+msgid "TPM PCR0 reconstruction is invalid"
+msgstr "Реконструкція PCR0 TPM є некоректною"
 
 #: panels/info-overview/cc-info-overview-panel.c:296
 #: panels/info-overview/cc-info-overview-panel.c:320
@@ -2333,7 +2763,8 @@ msgstr "Не знайдено клавіатурного скорочення"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:392
 #, c-format
-msgid "%s is already being used for %s. If you replace it, %s will be disabled"
+msgid ""
+"%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr ""
 "%s вже використовується для %s. Якщо застосувати, сполучення для %s буде "
 "вимкнено"
@@ -2605,7 +3036,8 @@ msgid "Automatic _Screen Lock Delay"
 msgstr "Затримка _автоматичного блокування екрана"
 
 #: panels/lock/cc-lock-panel.ui:50
-msgid "Period after the screen blanks when the screen is automatically locked."
+msgid ""
+"Period after the screen blanks when the screen is automatically locked."
 msgstr "Затримка автоматичного блокування після вимикання екрана."
 
 #: panels/lock/cc-lock-panel.ui:68
@@ -3539,7 +3971,6 @@ msgstr "Некоректний параметр %s: %s"
 
 #: panels/network/connection-editor/net-connection-editor.c:363
 #, c-format
-#| msgid "Invalid index"
 msgid "Invalid setting %s"
 msgstr "Некоректний параметр %s"
 
@@ -4993,7 +5424,8 @@ msgstr "Живлення"
 
 #: panels/power/gnome-power-panel.desktop.in.in:4
 msgid "View your battery status and change power saving settings"
-msgstr "Переглянути стан вашої батареї і змінити параметри заощадження енергії"
+msgstr ""
+"Переглянути стан вашої батареї і змінити параметри заощадження енергії"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
@@ -5197,13 +5629,10 @@ msgid "Reverse portrait"
 msgstr "Зворотна книжкова"
 
 #: panels/printers/pp-job-row.c:55
-#| msgid "_Resume"
 msgid "Resume"
 msgstr "Відновити"
 
 #: panels/printers/pp-job-row.c:55
-#| msgctxt "print job"
-#| msgid "Paused"
 msgid "Pause"
 msgstr "Призупинити"
 
@@ -7820,7 +8249,8 @@ msgstr "Не вдалось зв'язатись зі службою обліко
 
 #: panels/user-accounts/cc-user-panel.c:1175
 msgid "Please make sure that the AccountService is installed and enabled."
-msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
+msgstr ""
+"Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
 #: panels/user-accounts/cc-user-panel.c:1197
 msgid "This panel must be unlocked to change this setting"
@@ -7869,6 +8299,7 @@ msgid "Full name"
 msgstr "Повне ім'я"
 
 #: panels/user-accounts/cc-user-panel.ui:174
+#: panels/wwan/cc-wwan-apn-dialog.c:295
 msgid "Edit"
 msgstr "Редагувати"
 
@@ -8833,7 +9264,7 @@ msgstr "Категорії параметрів"
 msgid "Privacy"
 msgstr "Конфіденційність"
 
-#: shell/cc-panel-loader.c:301
+#: shell/cc-panel-loader.c:303
 msgid "Available panels:"
 msgstr "Доступні панелі:"
 
