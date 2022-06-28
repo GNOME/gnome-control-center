@@ -12,12 +12,15 @@ background-preview .window {
 
 background-preview .window .header-bar {
   min-height: 15px;
-  box-shadow: inset 0 -1px @borders;
 }
 
 background-preview .window.light {
   background-color: #fafafa;
   color: alpha(black, .8);
+}
+
+background-preview .window.light .header-bar {
+  box-shadow: inset 0 -1px alpha(black, .07);
 }
 
 background-preview .window.front.light .header-bar {
@@ -27,6 +30,10 @@ background-preview .window.front.light .header-bar {
 background-preview .window.dark {
   background-color: #242424;
   color: white;
+}
+
+background-preview .window.dark .header-bar {
+  box-shadow: inset 0 -1px alpha(black, .36);
 }
 
 background-preview .window.front.dark .header-bar {
