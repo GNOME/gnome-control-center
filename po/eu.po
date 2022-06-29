@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-06-20 23:45+0000\n"
-"PO-Revision-Date: 2022-06-22 14:00+0100\n"
+"POT-Creation-Date: 2022-06-28 11:15+0000\n"
+"PO-Revision-Date: 2022-06-29 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -1497,7 +1497,7 @@ msgstr "Eman zure arazoen berri"
 msgid "diagnostics;crash;"
 msgstr "diagnostikoak;kraskadura;"
 
-#: panels/display/cc-display-panel.c:512
+#: panels/display/cc-display-panel.c:516
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1508,7 +1508,7 @@ msgstr "diagnostikoak;kraskadura;"
 msgid "On"
 msgstr "Aktibatuta"
 
-#: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1519,15 +1519,15 @@ msgstr "Aktibatuta"
 msgid "Off"
 msgstr "Desaktibatuta"
 
-#: panels/display/cc-display-panel.c:945
+#: panels/display/cc-display-panel.c:949
 msgid "Apply Changes?"
 msgstr "Aplikatu aldaketak?"
 
-#: panels/display/cc-display-panel.c:950
+#: panels/display/cc-display-panel.c:954
 msgid "Changes Cannot be Applied"
 msgstr "Aldaketak ezin dira aplikatu"
 
-#: panels/display/cc-display-panel.c:952
+#: panels/display/cc-display-panel.c:956
 msgid "This could be due to hardware limitations."
 msgstr "Hardwarearen mugen erruz izan daiteke."
 
@@ -1728,6 +1728,408 @@ msgid ""
 "Panel;Projector;xrandr;Screen;Resolution;Refresh;Monitor;Night;Light;Blue;"
 "redshift;color;sunset;sunrise;"
 msgstr "Panela;Proiektagailua;xrandr;Pantaila;Bereizmena;Freskatu;Monitorea;Gaua;Argia;Urdina;kolorea;egunsentia;ilunabarra;"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
+#: panels/firmware-security/cc-firmware-security-panel.c:105
+msgid "Secure Boot is Active"
+msgstr "Abio segurua aktibatuta dago"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
+#: panels/firmware-security/cc-firmware-security-panel.c:111
+msgid "Secure Boot has Problems"
+msgstr "Abio seguruak arazoak ditu"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
+#: panels/firmware-security/cc-firmware-security-panel.c:117
+msgid "Secure Boot is Inactive"
+msgstr "Abio segurua desaktibatuta dago"
+
+#: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts.\n"
+"\n"
+"For more information, contact the hardware manufacturer or IT support."
+msgstr "Abio seguruak eragozten du software kaltegarria kargatu dadin gailua abiarazten denean.\n"
+"\n"
+"Informazio gehiagorako, jarri harremanetan hardwarearen fabrikatzailearekin edo informatikako teknikariekin."
+
+#. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
+#: panels/firmware-security/cc-firmware-security-dialog.c:70
+#, c-format
+msgid "Device conforms to HSI level %d"
+msgstr "Gailuak HSI %d maila betetzen du"
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:423
+msgid "No Protection"
+msgstr "Babesik ez"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:99
+msgid ""
+"This device has no protection against hardware security issues. This could "
+"be because of a hardware or firmware configuration issue. It is recommended "
+"to contact your IT support provider."
+msgstr "Gailu honek ez du babesik hardwareko segurtasun-arazoen aurrean. Hardareko edo firmwareko konfigurazio-arazo baten ondorioa izan daiteke hori. Zure informatikako teknikariekin hitz egin dezazun gomendatzen dizugu."
+
+#. TRANSLATORS: in reference to firmware protection: 1/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:111
+#: panels/firmware-security/cc-firmware-security-dialog.ui:80
+#: panels/firmware-security/cc-firmware-security-panel.c:430
+msgid "Minimal Protection"
+msgstr "Gutxieneko babesa"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:112
+msgid ""
+"This device has minimal protection against hardware security issues. This is "
+"the lowest device security level and only provides protection against simple "
+"security threats."
+msgstr "Gailu honek guxieneko babesa du hardwareko segurtasun-arazoen aurrean. Gailuaren segurtasun-mailarik txikiena da eta segurtasun-arrisku sinpleen aurkako babesa soilik eskaintzen du."
+
+#. TRANSLATORS: in reference to firmware protection: 2/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.ui:94
+#: panels/firmware-security/cc-firmware-security-panel.c:437
+msgid "Basic Protection"
+msgstr "Oinarrizko babesa"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:125
+msgid ""
+"This device has basic protection against hardware security issues. This "
+"provides protection against some common security threats."
+msgstr "Gailu honek oinarrizko babesa du hardwareko segurtasun-arazoen aurrean. Horrek segurtasun-arrisku arruntenen aurkako babesa eskaintzen du."
+
+#. TRANSLATORS: in reference to firmware protection: 3/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.ui:108
+#: panels/firmware-security/cc-firmware-security-panel.c:444
+msgid "Extended Protection"
+msgstr "Bebes hedatua"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:138
+msgid ""
+"This device has extended protection against hardware security issues. This "
+"is the highest device security level and provides protection against "
+"advanced security threats."
+msgstr "Gailu honek babes hedatua du hardwareko segurtasun-arazoen aurrean. Gailuaren segurtasun-mailarik altuena da eta segurtasun-arrisku aurreratuen aurkako babesa eskaintzen du."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
+msgid "Error: unable to determine HSI level."
+msgstr "Errorea: ezin izan da HSI maila zehaztu."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:148
+msgid "Error: unable to determine Incorrect HSI level."
+msgstr "Errorea: ezin izan da HSI miala okerra zehaztu."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:232
+msgid "Minimal Security Protections"
+msgstr "Gutxieneko segurtasun-babesa"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:237
+msgid "Basic Security Protections"
+msgstr "Oinarrizko segurtasun-babesa"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:242
+msgid "Extended Security Protections"
+msgstr "Segurtasun-babes hedatua"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+msgid "Security Level"
+msgstr "Segurtasun-maila"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:106
+msgid "Protected against malicious software when the device starts."
+msgstr "Software kaltegarriaren aurka babestua gailua abiarazten denean,"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:112
+msgid "Some protection when the device is started."
+msgstr "Nolabaiteko babesa gailua abiarazten denean."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+msgid "No protection when the device is started."
+msgstr "Babesik ez gailua abiarazten denean."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:424
+msgid "Highly exposed to security threats."
+msgstr "Segurtasun-arriskuean aurrean oso kaltebera."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:431
+msgid "Limited protection against simple security threats."
+msgstr "Babes mugatua segurtasun-arrisku sinpleen aurrean."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:438
+msgid "Protected against common security threats."
+msgstr "Babestua segurtasun-arrisku arrunten aurrean."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:445
+#: panels/firmware-security/cc-firmware-security-panel.c:452
+msgid "Protected against a wide range of security threats."
+msgstr "Babestua segurtasun-arrikus asktoren aurrean."
+
+#. TRANSLATORS: in reference to firmware protection: 4/4 stars
+#: panels/firmware-security/cc-firmware-security-panel.c:451
+msgid "Comprehensive Protection"
+msgstr "Babes osoa"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:138
+msgid "No Events"
+msgstr "Gertaerarik ez"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:38
+msgid "SPI write"
+msgstr "SPI idatzi"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:40
+msgid "SPI lock"
+msgstr "SPI blokeoa"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:42
+msgid "SPI BIOS region"
+msgstr "SPI BIOS eskualdea"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:44
+msgid "SPI BIOS Descriptor"
+msgstr "SPI BIOS deskribatzailea"
+
+#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
+#: panels/firmware-security/cc-firmware-security-utils.c:46
+msgid "Pre-boot DMA protection is"
+msgstr "Abio aurreko DMA babesa honakoa da:"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel
+#: panels/firmware-security/cc-firmware-security-utils.c:48
+msgid "Intel BootGuard"
+msgstr "Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * verified boot refers to the way the boot process is verified
+#: panels/firmware-security/cc-firmware-security-utils.c:51
+msgid "Intel BootGuard verified boot"
+msgstr "Intel BootGuard abio egiaztatua"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * ACM means to verify the integrity of Initial Boot Block
+#: panels/firmware-security/cc-firmware-security-utils.c:54
+msgid "Intel BootGuard ACM protected"
+msgstr "Intel BootGuard ACM babestua"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * error policy is what to do on failure
+#: panels/firmware-security/cc-firmware-security-utils.c:57
+msgid "Intel BootGuard error policy"
+msgstr "Intel BootGuard errore-politika"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * OTP = one time programmable
+#: panels/firmware-security/cc-firmware-security-utils.c:60
+msgid "Intel BootGuard OTP fuse"
+msgstr "Intel BootGuard OTP fusiblea"
+
+#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
+#. * enabled means supported by the processor
+#: panels/firmware-security/cc-firmware-security-utils.c:63
+msgid "Intel CET"
+msgstr "Intel CET"
+
+#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
+#. * active means being used by the OS
+#: panels/firmware-security/cc-firmware-security-utils.c:66
+msgid "Intel CET Active"
+msgstr "Intel CET aktiboa"
+
+#. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
+#: panels/firmware-security/cc-firmware-security-utils.c:68
+msgid "Intel SMAP"
+msgstr "Intel SMAP"
+
+#. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
+#: panels/firmware-security/cc-firmware-security-utils.c:70
+msgid "Encrypted RAM"
+msgstr "Zifratutako RAMa"
+
+#. TRANSLATORS: Title:
+#. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
+#: panels/firmware-security/cc-firmware-security-utils.c:73
+msgid "IOMMU device protection"
+msgstr "IOMMU gailu-babesa"
+
+#. TRANSLATORS: Title: lockdown is a security mode of the kernel
+#: panels/firmware-security/cc-firmware-security-utils.c:75
+msgid "Kernel lockdown"
+msgstr "Kernelaren blokeoa"
+
+#. TRANSLATORS: Title: if it's tainted or not
+#: panels/firmware-security/cc-firmware-security-utils.c:77
+msgid "Kernel tainted"
+msgstr "Kutsatutako kernela"
+
+#. TRANSLATORS: Title: swap space or swap partition
+#: panels/firmware-security/cc-firmware-security-utils.c:79
+msgid "Linux swap"
+msgstr "Linux trukatze-espazioa"
+
+#. TRANSLATORS: Title: sleep state
+#: panels/firmware-security/cc-firmware-security-utils.c:81
+msgid "Suspend-to-ram"
+msgstr "Eseki RAMera"
+
+#. TRANSLATORS: Title: a better sleep state
+#: panels/firmware-security/cc-firmware-security-utils.c:83
+msgid "Suspend-to-idle"
+msgstr "Eseki inaktibora"
+
+#. TRANSLATORS: Title: PK is the 'platform key' for the machine
+#: panels/firmware-security/cc-firmware-security-utils.c:85
+msgid "UEFI platform key"
+msgstr "UEFI plataforma-gakoa"
+
+#. TRANSLATORS: Title: SB is a way of locking down UEFI
+#: panels/firmware-security/cc-firmware-security-utils.c:87
+msgid "Secure boot"
+msgstr "Abio segurua"
+
+#. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be empty
+#: panels/firmware-security/cc-firmware-security-utils.c:89
+msgid "All TPM PCRs are"
+msgstr "TPM PCR guztiak honakoak dira"
+
+#. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
+#: panels/firmware-security/cc-firmware-security-utils.c:91
+msgid "TPM PCR0 reconstruction"
+msgstr "TPM PCR0 berreraikuntza"
+
+#. TRANSLATORS: Title: TPM = Trusted Platform Module
+#: panels/firmware-security/cc-firmware-security-utils.c:93
+msgid "TPM v2.0"
+msgstr "TPM v2.0"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine
+#: panels/firmware-security/cc-firmware-security-utils.c:95
+msgid "MEI manufacturing mode"
+msgstr "MEI manufaktura modua"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine, and the
+#. * "override" is the physical PIN that can be driven to
+#. * logic high -- luckily it is probably not accessible to
+#. * end users on consumer boards
+#: panels/firmware-security/cc-firmware-security-utils.c:100
+msgid "MEI override"
+msgstr "MEI indargabetzea"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine
+#: panels/firmware-security/cc-firmware-security-utils.c:102
+msgid "MEI version"
+msgstr "MEI bertsioa"
+
+#. TRANSLATORS: Title: if firmware updates are available
+#: panels/firmware-security/cc-firmware-security-utils.c:104
+msgid "Firmware updates"
+msgstr "Firmwarearen eguneratzeak"
+
+#. TRANSLATORS: Title: if we can verify the firmware checksums
+#: panels/firmware-security/cc-firmware-security-utils.c:106
+msgid "Firmware attestation"
+msgstr "Firmwarearen egiaztatzea"
+
+#. TRANSLATORS: Title: if the fwupd plugins are all present and correct
+#: panels/firmware-security/cc-firmware-security-utils.c:108
+msgid "fwupd plugins"
+msgstr "fwupd pluginak"
+
+#. TRANSLATORS: Title: Direct Connect Interface (DCI) allows
+#. * debugging of Intel processors using the USB3 port
+#: panels/firmware-security/cc-firmware-security-utils.c:111
+#: panels/firmware-security/cc-firmware-security-utils.c:112
+msgid "Intel DCI debugger"
+msgstr "Intel DCI araztailea"
+
+#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
+#: panels/firmware-security/cc-firmware-security-utils.c:114
+msgid "Pre-boot DMA protection"
+msgstr "Abio aurreko DMA babesa"
+
+#. TRANSLATORS: Title: if fwupd supports HSI on this chip
+#: panels/firmware-security/cc-firmware-security-utils.c:116
+msgid "Supported CPU"
+msgstr "Onartutako PUZa"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:150
+msgid "IOMMU device protection enabled"
+msgstr "IOMMU gailu-babesa gaituta"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:156
+msgid "IOMMU device protection disabled"
+msgstr "IOMMU gailu-babesa desgaituta"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:176
+msgid "Kernel is no longer tainted"
+msgstr "Kernela ez dago jadanik kutsatuta"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:182
+msgid "Kernel is tainted"
+msgstr "Kernela kutsatuta dago"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:188
+msgid "Kernel lockdown disabled"
+msgstr "Kernelaren blokeoa desgaitu da"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:194
+msgid "Kernel lockdown enabled"
+msgstr "Kernelaren blokeoa gaitu da"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:200
+msgid "Pre-boot DMA protection is disabled"
+msgstr "Abio aurreko DMA babesa desgaituta dago"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:206
+msgid "Pre-boot DMA protection is enabled"
+msgstr "Abio aurreko DMA babesa gaituta dago"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:212
+msgid "Secure Boot disabled"
+msgstr "Abio segurua desgaituta"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:218
+msgid "Secure Boot enabled"
+msgstr "Abio segurua gaituta"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:224
+msgid "All TPM PCRs are valid"
+msgstr "TPM PCR guztiak baliozkoak dira"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:230
+msgid "All TPM PCRs are now valid"
+msgstr "TPM PCR guztiak baliozkoak dira orain"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:236
+msgid "A TPM PCR is now an invalid value"
+msgstr "TPM PCR bat orain baliogabea da"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:242
+msgid "TPM PCR0 reconstruction is invalid"
+msgstr "TPM PCR0 berreraikuntza baliogabea da"
 
 #: panels/info-overview/cc-info-overview-panel.c:296
 #: panels/info-overview/cc-info-overview-panel.c:320
@@ -7612,6 +8014,7 @@ msgid "Full name"
 msgstr "Izen osoa"
 
 #: panels/user-accounts/cc-user-panel.ui:174
+#: panels/wwan/cc-wwan-apn-dialog.c:295
 msgid "Edit"
 msgstr "Editatu"
 
@@ -8544,7 +8947,7 @@ msgstr "Ezarpenen kategoriak"
 msgid "Privacy"
 msgstr "Pribatutasuna"
 
-#: shell/cc-panel-loader.c:301
+#: shell/cc-panel-loader.c:303
 msgid "Available panels:"
 msgstr "Panel erabilgarriak:"
 
