@@ -344,7 +344,7 @@ app_info_get_id (GAppInfo *app_info)
   if (G_UNLIKELY (g_str_has_suffix (ret, ".desktop") == FALSE))
     return NULL;
 
-  l = strlen (desktop_id);
+  l = strlen (ret);
   *(ret + l - strlen(".desktop")) = '\0';
   return g_steal_pointer (&ret);
 }
