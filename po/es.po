@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-06-20 23:45+0000\n"
-"PO-Revision-Date: 2022-06-22 11:51+0200\n"
+"POT-Creation-Date: 2022-06-28 11:15+0000\n"
+"PO-Revision-Date: 2022-06-30 12:19+0200\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -1549,7 +1549,7 @@ msgstr "Informar de problemas"
 msgid "diagnostics;crash;"
 msgstr "diagnósticos;fallo;error;crash;"
 
-#: panels/display/cc-display-panel.c:512
+#: panels/display/cc-display-panel.c:516
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1560,7 +1560,7 @@ msgstr "diagnósticos;fallo;error;crash;"
 msgid "On"
 msgstr "Encendido"
 
-#: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1571,15 +1571,15 @@ msgstr "Encendido"
 msgid "Off"
 msgstr "Apagado"
 
-#: panels/display/cc-display-panel.c:945
+#: panels/display/cc-display-panel.c:949
 msgid "Apply Changes?"
 msgstr "¿Aplicar los cambios?"
 
-#: panels/display/cc-display-panel.c:950
+#: panels/display/cc-display-panel.c:954
 msgid "Changes Cannot be Applied"
 msgstr "No se pueden aplicar los cambios"
 
-#: panels/display/cc-display-panel.c:952
+#: panels/display/cc-display-panel.c:956
 msgid "This could be due to hardware limitations."
 msgstr "Esto puede deber a limitaciones hardware."
 
@@ -1786,6 +1786,414 @@ msgid ""
 msgstr ""
 "Panel;Proyector;xranrd;Pantalla;Resolución;Actualizar;Monitor;Noche;Luz;Azul;"
 "color;amanecer;atardecer;ocaso;"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
+#: panels/firmware-security/cc-firmware-security-panel.c:105
+msgid "Secure Boot is Active"
+msgstr "Secure Boot está activado"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
+#: panels/firmware-security/cc-firmware-security-panel.c:111
+msgid "Secure Boot has Problems"
+msgstr "Secure Boot tiene problemas"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
+#: panels/firmware-security/cc-firmware-security-panel.c:117
+msgid "Secure Boot is Inactive"
+msgstr "Secure Boot está desactivado"
+
+#: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts.\n"
+"\n"
+"For more information, contact the hardware manufacturer or IT support."
+msgstr ""
+
+#. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
+#: panels/firmware-security/cc-firmware-security-dialog.c:70
+#, c-format
+msgid "Device conforms to HSI level %d"
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:423
+msgid "No Protection"
+msgstr "Sin protección"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:99
+msgid ""
+"This device has no protection against hardware security issues. This could "
+"be because of a hardware or firmware configuration issue. It is recommended "
+"to contact your IT support provider."
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: 1/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:111
+#: panels/firmware-security/cc-firmware-security-dialog.ui:80
+#: panels/firmware-security/cc-firmware-security-panel.c:430
+msgid "Minimal Protection"
+msgstr "Protección mínima"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:112
+msgid ""
+"This device has minimal protection against hardware security issues. This is "
+"the lowest device security level and only provides protection against simple "
+"security threats."
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: 2/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.ui:94
+#: panels/firmware-security/cc-firmware-security-panel.c:437
+msgid "Basic Protection"
+msgstr "Protección básica"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:125
+msgid ""
+"This device has basic protection against hardware security issues. This "
+"provides protection against some common security threats."
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: 3/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.ui:108
+#: panels/firmware-security/cc-firmware-security-panel.c:444
+msgid "Extended Protection"
+msgstr "Protección extendida"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:138
+msgid ""
+"This device has extended protection against hardware security issues. This "
+"is the highest device security level and provides protection against "
+"advanced security threats."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
+msgid "Error: unable to determine HSI level."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:148
+msgid "Error: unable to determine Incorrect HSI level."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:232
+msgid "Minimal Security Protections"
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:237
+msgid "Basic Security Protections"
+msgstr "Protección de seguridad básica"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:242
+msgid "Extended Security Protections"
+msgstr "Protección de seguridad extendida"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+msgid "Security Level"
+msgstr "Nivel de seguridad"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:106
+msgid "Protected against malicious software when the device starts."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-panel.c:112
+msgid "Some protection when the device is started."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+msgid "No protection when the device is started."
+msgstr "Sin protección cuando se inicia el dispositivo."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:424
+msgid "Highly exposed to security threats."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-panel.c:431
+msgid "Limited protection against simple security threats."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-panel.c:438
+msgid "Protected against common security threats."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-panel.c:445
+#: panels/firmware-security/cc-firmware-security-panel.c:452
+msgid "Protected against a wide range of security threats."
+msgstr ""
+
+#. TRANSLATORS: in reference to firmware protection: 4/4 stars
+#: panels/firmware-security/cc-firmware-security-panel.c:451
+msgid "Comprehensive Protection"
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:138
+msgid "No Events"
+msgstr "No hay eventos"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:38
+msgid "SPI write"
+msgstr ""
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:40
+msgid "SPI lock"
+msgstr ""
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:42
+msgid "SPI BIOS region"
+msgstr "Región de la BIOS SPI"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:44
+msgid "SPI BIOS Descriptor"
+msgstr "Descriptor BIOS SPI"
+
+#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
+#: panels/firmware-security/cc-firmware-security-utils.c:46
+msgid "Pre-boot DMA protection is"
+msgstr ""
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel
+#: panels/firmware-security/cc-firmware-security-utils.c:48
+msgid "Intel BootGuard"
+msgstr "Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * verified boot refers to the way the boot process is verified
+#: panels/firmware-security/cc-firmware-security-utils.c:51
+msgid "Intel BootGuard verified boot"
+msgstr "Arranque verificado por Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * ACM means to verify the integrity of Initial Boot Block
+#: panels/firmware-security/cc-firmware-security-utils.c:54
+msgid "Intel BootGuard ACM protected"
+msgstr "ACM protegido por Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * error policy is what to do on failure
+#: panels/firmware-security/cc-firmware-security-utils.c:57
+msgid "Intel BootGuard error policy"
+msgstr "Error de política de Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * OTP = one time programmable
+#: panels/firmware-security/cc-firmware-security-utils.c:60
+msgid "Intel BootGuard OTP fuse"
+msgstr ""
+
+#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
+#. * enabled means supported by the processor
+#: panels/firmware-security/cc-firmware-security-utils.c:63
+msgid "Intel CET"
+msgstr "Intel CET"
+
+#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
+#. * active means being used by the OS
+#: panels/firmware-security/cc-firmware-security-utils.c:66
+msgid "Intel CET Active"
+msgstr "Intel CET activado"
+
+#. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
+#: panels/firmware-security/cc-firmware-security-utils.c:68
+msgid "Intel SMAP"
+msgstr "Intel SMAP"
+
+#. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
+#: panels/firmware-security/cc-firmware-security-utils.c:70
+msgid "Encrypted RAM"
+msgstr "RAM cifrada"
+
+#. TRANSLATORS: Title:
+#. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
+#: panels/firmware-security/cc-firmware-security-utils.c:73
+msgid "IOMMU device protection"
+msgstr "Protección de dispositivo IOMMU"
+
+#. TRANSLATORS: Title: lockdown is a security mode of the kernel
+#: panels/firmware-security/cc-firmware-security-utils.c:75
+msgid "Kernel lockdown"
+msgstr ""
+
+#. TRANSLATORS: Title: if it's tainted or not
+#: panels/firmware-security/cc-firmware-security-utils.c:77
+msgid "Kernel tainted"
+msgstr ""
+
+#. TRANSLATORS: Title: swap space or swap partition
+#: panels/firmware-security/cc-firmware-security-utils.c:79
+msgid "Linux swap"
+msgstr "Swap de Linux"
+
+#. TRANSLATORS: Title: sleep state
+#: panels/firmware-security/cc-firmware-security-utils.c:81
+#, fuzzy
+#| msgid "Suspend"
+msgid "Suspend-to-ram"
+msgstr "Suspender"
+
+#. TRANSLATORS: Title: a better sleep state
+#: panels/firmware-security/cc-firmware-security-utils.c:83
+#, fuzzy
+#| msgid "Suspend"
+msgid "Suspend-to-idle"
+msgstr "Suspender"
+
+#. TRANSLATORS: Title: PK is the 'platform key' for the machine
+#: panels/firmware-security/cc-firmware-security-utils.c:85
+msgid "UEFI platform key"
+msgstr ""
+
+#. TRANSLATORS: Title: SB is a way of locking down UEFI
+#: panels/firmware-security/cc-firmware-security-utils.c:87
+msgid "Secure boot"
+msgstr "Secure boot"
+
+#. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be empty
+#: panels/firmware-security/cc-firmware-security-utils.c:89
+msgid "All TPM PCRs are"
+msgstr ""
+
+#. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
+#: panels/firmware-security/cc-firmware-security-utils.c:91
+msgid "TPM PCR0 reconstruction"
+msgstr ""
+
+#. TRANSLATORS: Title: TPM = Trusted Platform Module
+#: panels/firmware-security/cc-firmware-security-utils.c:93
+msgid "TPM v2.0"
+msgstr "TPM v2.0"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine
+#: panels/firmware-security/cc-firmware-security-utils.c:95
+#, fuzzy
+#| msgid "Manufacturer"
+msgid "MEI manufacturing mode"
+msgstr "Fabricante"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine, and the
+#. * "override" is the physical PIN that can be driven to
+#. * logic high -- luckily it is probably not accessible to
+#. * end users on consumer boards
+#: panels/firmware-security/cc-firmware-security-utils.c:100
+msgid "MEI override"
+msgstr ""
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine
+#: panels/firmware-security/cc-firmware-security-utils.c:102
+msgid "MEI version"
+msgstr "Versión MEI"
+
+#. TRANSLATORS: Title: if firmware updates are available
+#: panels/firmware-security/cc-firmware-security-utils.c:104
+msgid "Firmware updates"
+msgstr "Actualizaciones de firmware"
+
+#. TRANSLATORS: Title: if we can verify the firmware checksums
+#: panels/firmware-security/cc-firmware-security-utils.c:106
+#, fuzzy
+#| msgid "Firmware Version"
+msgid "Firmware attestation"
+msgstr "Versión de firmware"
+
+#. TRANSLATORS: Title: if the fwupd plugins are all present and correct
+#: panels/firmware-security/cc-firmware-security-utils.c:108
+msgid "fwupd plugins"
+msgstr "Complementos de fwupd"
+
+#. TRANSLATORS: Title: Direct Connect Interface (DCI) allows
+#. * debugging of Intel processors using the USB3 port
+#: panels/firmware-security/cc-firmware-security-utils.c:111
+#: panels/firmware-security/cc-firmware-security-utils.c:112
+msgid "Intel DCI debugger"
+msgstr "Depurador Intel DCI"
+
+#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
+#: panels/firmware-security/cc-firmware-security-utils.c:114
+msgid "Pre-boot DMA protection"
+msgstr ""
+
+#. TRANSLATORS: Title: if fwupd supports HSI on this chip
+#: panels/firmware-security/cc-firmware-security-utils.c:116
+msgid "Supported CPU"
+msgstr "CPU soportadas"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:150
+msgid "IOMMU device protection enabled"
+msgstr "Protección IOMMU del dispositivo activada"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:156
+msgid "IOMMU device protection disabled"
+msgstr "Protección IOMMU del dispositivo desactivada"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:176
+msgid "Kernel is no longer tainted"
+msgstr "El núcleo ya no está envenenado"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:182
+msgid "Kernel is tainted"
+msgstr "El núcleo se ha envenenado"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:188
+msgid "Kernel lockdown disabled"
+msgstr ""
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:194
+msgid "Kernel lockdown enabled"
+msgstr ""
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:200
+msgid "Pre-boot DMA protection is disabled"
+msgstr ""
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:206
+msgid "Pre-boot DMA protection is enabled"
+msgstr ""
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:212
+msgid "Secure Boot disabled"
+msgstr "Secure Boot desactivado"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:218
+msgid "Secure Boot enabled"
+msgstr "Secure Boot activado"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:224
+msgid "All TPM PCRs are valid"
+msgstr ""
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:230
+msgid "All TPM PCRs are now valid"
+msgstr ""
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:236
+msgid "A TPM PCR is now an invalid value"
+msgstr ""
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:242
+msgid "TPM PCR0 reconstruction is invalid"
+msgstr ""
 
 #: panels/info-overview/cc-info-overview-panel.c:296
 #: panels/info-overview/cc-info-overview-panel.c:320
@@ -7842,6 +8250,7 @@ msgid "Full name"
 msgstr "Nombre completo"
 
 #: panels/user-accounts/cc-user-panel.ui:174
+#: panels/wwan/cc-wwan-apn-dialog.c:295
 msgid "Edit"
 msgstr "Editar"
 
@@ -8798,7 +9207,7 @@ msgstr "Categorías de configuración"
 msgid "Privacy"
 msgstr "Privacidad"
 
-#: shell/cc-panel-loader.c:301
+#: shell/cc-panel-loader.c:303
 msgid "Available panels:"
 msgstr "Paneles disponibles:"
 
@@ -10966,9 +11375,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "Bottom Button #%d"
 #~ msgstr "Botón inferior nº %d"
 
-#~ msgid "No Action"
-#~ msgstr "Sin acción"
-
 #~ msgid "Left Mouse Button Click"
 #~ msgstr "Pulsación del botón izquierdo del ratón"
 
@@ -11264,9 +11670,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Add New Printer"
 #~ msgstr "Añadir impresora nueva"
-
-#~ msgid "Security key"
-#~ msgstr "Clave de seguridad"
 
 #~ msgid "Wireless devices require extra power"
 #~ msgstr "Los dispositivos inalámbricos requieren electricidad adicional"
@@ -11882,9 +12285,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Chinese (simplified)"
 #~ msgstr "Chino (simplificado)"
-
-#~ msgid "Select a region"
-#~ msgstr "Seleccionar una región"
 
 #~ msgid "Date and Time preferences panel"
 #~ msgstr "Panel de preferencias de la fecha y hora"
