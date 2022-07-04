@@ -1307,7 +1307,10 @@ on_permission_changed (CcUserPanel *self)
                         gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), TRUE);
                 }
 
-                gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), get_autologin_possible (user));
+                if (get_autologin_possible (user)) {
+                        gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), TRUE);
+                        gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_row), TRUE);
+                }
         }
         else {
                 gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), FALSE);
@@ -1316,7 +1319,7 @@ on_permission_changed (CcUserPanel *self)
                 } else {
                         gtk_widget_set_visible (GTK_WIDGET (self->account_type_row), TRUE);
                 }
-                gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), FALSE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_row), FALSE);
                 add_unlock_tooltip (GTK_WIDGET (self->autologin_row));
         }
 
