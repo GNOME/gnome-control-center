@@ -104,23 +104,7 @@
                         </child>
 
                         <child>
-                          <object class="AdwPreferencesGroup" id="arrangement_group">
-                            <child>
-                              <object class="AdwBin" id="arrangement_bin">
-                                <style>
-                                  <class name="card"/>
-                                </style>
-                              </object>
-                            </child>
-                            <accessibility>
-                              <property name="label" translatable="yes">Display Arrangement</property>
-                            </accessibility>
-                          </object>
-                        </child>
-
-                        <child>
-                          <object class="AdwPreferencesGroup" id="display_settings_group">
-
+                          <object class="AdwPreferencesGroup" id="display_multiple_displays">
                             <!-- Config Type -->
                             <child>
                               <object class="AdwActionRow" id="config_type_switcher_row">
@@ -145,6 +129,21 @@
                                         <signal name="toggled" handler="on_config_type_toggled_cb" swapped="yes"/>
                                       </object>
                                     </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                        <child>
+                          <object class="AdwPreferencesGroup" id="display_settings_group">
+                            <!-- Display Arrangement -->
+                            <child>
+                              <object class="AdwPreferencesRow" id="arrangement_row">
+                                <property name="activatable">False</property>
+                                <child>
+                                  <object class="AdwBin" id="arrangement_bin">
                                   </object>
                                 </child>
                               </object>
