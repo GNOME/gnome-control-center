@@ -1,9 +1,14 @@
+display-arrangement {
+  font-weight: bold;
+  font-size: larger;
+}
 
 display-arrangement.monitor {
   border: solid 1px @borders;
   margin: 0px 0px 1px 1px;
   background: @theme_bg_color;
   padding: 0.4em;
+  border-radius: 5px;
 }
 
 display-arrangement.monitor.primary {
@@ -11,13 +16,11 @@ display-arrangement.monitor.primary {
 }
 
 display-arrangement.monitor-label {
-  font-size: larger;
-  font-weight: bold;
-  border-radius: 0.3em;
-  padding-right: 0.2em;
-  padding-left: 0.2em;
-  color: #fff;
-  background: #000;
+  border-radius: 50%;
+  min-width: 1.5em;
+  min-height: 1.5em;
+  color: #000;
+  background: #ddd;
 }
 
 label.monitor-label {
@@ -25,6 +28,6 @@ label.monitor-label {
   font-weight: bold;
   min-width: 1.5em;
   min-height: 1.5em;
-  color: #fff;
-  background: #000;
+  color: #000;
+  background: #ddd;
 }
