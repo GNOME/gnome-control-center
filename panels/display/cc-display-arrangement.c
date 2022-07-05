@@ -523,9 +523,6 @@ cc_display_arrangement_draw (GtkDrawingArea *drawing_area,
 
   cc_display_arrangement_update_matrices (self);
 
-  gtk_style_context_save (context);
-  gtk_style_context_add_class (context, "display-arrangement");
-
   /* Draw in reverse order so that hit detection matches visual. Also pull
    * the selected output to the back. */
   outputs = g_list_copy (cc_display_config_get_monitors (self->config));
@@ -635,8 +632,6 @@ cc_display_arrangement_draw (GtkDrawingArea *drawing_area,
       gtk_style_context_restore (context);
       cairo_restore (cr);
     }
-
-  gtk_style_context_restore (context);
 }
 
 static gboolean
@@ -849,6 +844,8 @@ cc_display_arrangement_class_init (CcDisplayArrangementClass *klass)
                 G_SIGNAL_RUN_LAST,
                 0, NULL, NULL, NULL,
                 G_TYPE_NONE, 0);
+
+  gtk_widget_class_set_css_name (GTK_WIDGET_CLASS (klass), "display-arrangement");
 }
 
 static void
