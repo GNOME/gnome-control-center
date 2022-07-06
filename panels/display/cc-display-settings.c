@@ -280,7 +280,6 @@ cc_display_settings_rebuild_ui (CcDisplaySettings *self)
   }
 
   /* Enabled Switch */
-  gtk_widget_set_visible (self->enabled_listbox, TRUE);
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->enabled_row),
                                  cc_display_monitor_get_ui_name (self->selected_output));
   gtk_switch_set_active (GTK_SWITCH (self->enabled_switch),

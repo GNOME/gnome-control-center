@@ -823,11 +823,14 @@ rebuild_ui (CcDisplayPanel *panel)
       if (type > CC_DISPLAY_CONFIG_LAST_VALID)
         type = CC_DISPLAY_CONFIG_JOIN;
 
-      gtk_widget_set_visible (panel->display_settings_group, TRUE);
+      gtk_widget_set_visible (panel->display_settings_group, type == CC_DISPLAY_CONFIG_JOIN);
       gtk_widget_set_visible (panel->display_multiple_displays, TRUE);
       gtk_widget_set_visible (panel->arrangement_row, type == CC_DISPLAY_CONFIG_JOIN);
 
-      move_display_settings_to_separate_page (panel);
+      if (type == CC_DISPLAY_CONFIG_CLONE)
+        move_display_settings_to_main_page (panel);
+      else
+        move_display_settings_to_separate_page (panel);
     }
   else if (n_usable_outputs > 1)
     {
@@ -855,7 +858,9 @@ rebuild_ui (CcDisplayPanel *panel)
       move_display_settings_to_main_page (panel);
     }
 
-  cc_display_settings_set_multimonitor (panel->settings, n_outputs > 1);
+  cc_display_settings_set_multimonitor (panel->settings,
+                                        n_outputs > 1 &&
+                                        type != CC_DISPLAY_CONFIG_CLONE);
 
   cc_panel_set_selected_type (panel, type);
 
