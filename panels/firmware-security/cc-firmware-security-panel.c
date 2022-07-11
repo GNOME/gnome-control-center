@@ -115,7 +115,7 @@ set_secure_boot_button_view (CcfirmwareSecurityPanel *self)
     }
   else
     {
-      gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Inactive"));
+      gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Turned Off"));
       gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("No protection when the device is started."));
       gtk_widget_add_css_class (self->secure_boot_icon, "error");
     }
