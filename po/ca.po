@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-06-17 10:55+0000\n"
+"POT-Creation-Date: 2022-07-11 02:21+0000\n"
 "PO-Revision-Date: 2022-04-20 09:28+0100\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -54,8 +54,8 @@ msgid "Session Bus"
 msgstr "Sessió del bus"
 
 #: panels/applications/cc-applications-panel.c:796
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:266
-#: panels/thunderbolt/cc-bolt-panel.ui:310
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:269
+#: panels/thunderbolt/cc-bolt-panel.ui:313
 msgid "Devices"
 msgstr "Dispositius"
 
@@ -93,7 +93,7 @@ msgstr "Sistema de fitxers"
 #: panels/applications/cc-applications-panel.c:816
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:878 shell/cc-window.ui:22
+#: shell/cc-window.c:880 shell/cc-window.ui:22
 #: shell/org.gnome.Settings.desktop.in.in:3
 msgid "Settings"
 msgstr "Paràmetres"
@@ -161,6 +161,7 @@ msgstr "Veure detalls"
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:75
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:63
+#: panels/printers/new-printer-dialog.ui:252
 #: panels/region/cc-format-chooser.ui:82
 #: panels/search/gnome-search-panel.desktop.in.in:3 shell/cc-window.ui:41
 msgid "Search"
@@ -188,7 +189,7 @@ msgstr "Rebre cerques del sistema i enviar resultats."
 #: panels/user-accounts/cc-user-panel.c:789
 #: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Inhabilitat"
 
@@ -286,13 +287,13 @@ msgstr "Fitxer &amp; Associacions d'enllaç"
 msgid "Storage"
 msgstr "Emmagatzematge"
 
-#: panels/applications/cc-applications-panel.ui:294 shell/cc-panel-list.ui:105
+#: panels/applications/cc-applications-panel.ui:294 shell/cc-panel-list.ui:108
 msgid "No results found"
 msgstr "No s'ha trobat cap resultat"
 
 #: panels/applications/cc-applications-panel.ui:304
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:210
-#: shell/cc-panel-list.ui:114
+#: shell/cc-panel-list.ui:117
 msgid "Try a different search"
 msgstr "Proveu amb una cerca diferent"
 
@@ -362,11 +363,11 @@ msgstr "Selecciona una imatge"
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:881
+#: panels/network/cc-wifi-panel.c:886
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:221
 #: panels/network/connection-editor/vpn-helpers.c:341
-#: panels/network/net-device-wifi.c:860
+#: panels/network/net-device-wifi.c:866
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
@@ -382,7 +383,7 @@ msgstr "Selecciona una imatge"
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:237
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:240
 msgid "_Cancel"
 msgstr "_Cancel·la"
 
@@ -453,6 +454,8 @@ msgstr "Fons;Fons de pantalla;Pantalla;Escriptori;Estil;Clar;Fosc;Aparença;"
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:122
 #: panels/microphone/cc-microphone-panel.ui:9
+#: panels/universal-access/cc-cursor-blinking-dialog.ui:15
+#: panels/universal-access/cc-repeat-keys-dialog.ui:15
 msgid "Enable"
 msgstr "Habilita"
 
@@ -637,7 +640,7 @@ msgstr "_Continua"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:60
+#: panels/user-accounts/cc-fingerprint-dialog.ui:63
 msgid "_Done"
 msgstr "_Fet"
 
@@ -915,8 +918,8 @@ msgstr "_Importa un fitxer…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:497
-#: panels/printers/new-printer-dialog.ui:84
+#: panels/network/connection-editor/net-connection-editor.c:503
+#: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
 msgstr "_Afegeix"
@@ -1210,12 +1213,12 @@ msgid "Decrement Minute"
 msgstr "Redueix un minut"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:162
+#: panels/network/connection-editor/ce-page-details.c:168
 msgid "Today"
 msgstr "Avui"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:164
+#: panels/network/connection-editor/ce-page-details.c:170
 msgid "Yesterday"
 msgstr "Ahir"
 
@@ -1559,7 +1562,7 @@ msgstr "Informeu de problemes"
 msgid "diagnostics;crash;"
 msgstr "diagnòstics;fallada;"
 
-#: panels/display/cc-display-panel.c:512
+#: panels/display/cc-display-panel.c:516
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1570,7 +1573,7 @@ msgstr "diagnòstics;fallada;"
 msgid "On"
 msgstr "Activat"
 
-#: panels/display/cc-display-panel.c:514 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1581,15 +1584,15 @@ msgstr "Activat"
 msgid "Off"
 msgstr "Desactivat"
 
-#: panels/display/cc-display-panel.c:945
+#: panels/display/cc-display-panel.c:955
 msgid "Apply Changes?"
 msgstr "Voleu aplicar els canvis?"
 
-#: panels/display/cc-display-panel.c:950
+#: panels/display/cc-display-panel.c:960
 msgid "Changes Cannot be Applied"
 msgstr "No s'han aplicat els canvis"
 
-#: panels/display/cc-display-panel.c:952
+#: panels/display/cc-display-panel.c:962
 msgid "This could be due to hardware limitations."
 msgstr "Això pot ser degut a limitacions del maquinari."
 
@@ -1599,9 +1602,12 @@ msgid "_Apply"
 msgstr "_Aplica"
 
 #: panels/display/cc-display-panel.ui:78
-#: panels/display/cc-display-panel.ui:222
-#: panels/display/cc-display-panel.ui:261 panels/network/cc-wifi-panel.ui:16
+#: panels/display/cc-display-panel.ui:221
+#: panels/display/cc-display-panel.ui:260 panels/network/cc-wifi-panel.ui:16
+#: panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
+#: panels/user-accounts/cc-fingerprint-dialog.ui:43
+#: panels/user-accounts/cc-user-panel.ui:31
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
@@ -1611,35 +1617,31 @@ msgstr "Enrere"
 msgid "Display Settings Disabled"
 msgstr "S'ha inhabilitat la configuració de la pantalla"
 
-#: panels/display/cc-display-panel.ui:116
-msgid "Display Arrangement"
-msgstr "Disposició de les pantalles"
-
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:111
 msgid "Multiple Displays"
 msgstr "Múltiples pantalles"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:136
+#: panels/display/cc-display-panel.ui:120
 msgid "Join"
 msgstr "Unir-se"
 
-#: panels/display/cc-display-panel.ui:143
+#: panels/display/cc-display-panel.ui:127
 msgid "Mirror"
 msgstr "Mirall"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:155
 msgid "Contains top bar and Activities"
 msgstr "Conté la barra superior i les Activitats"
 
-#: panels/display/cc-display-panel.ui:157
+#: panels/display/cc-display-panel.ui:156
 msgid "Primary Display"
 msgstr "Pantalla primària"
 
 #. This is the redshift functionality where we suppress blue light when the
 #. sun has gone down
-#: panels/display/cc-display-panel.ui:178
-#: panels/display/cc-display-panel.ui:229
+#: panels/display/cc-display-panel.ui:177
+#: panels/display/cc-display-panel.ui:228
 #: panels/display/cc-night-light-page.ui:115
 msgid "Night Light"
 msgstr "Llum nocturna"
@@ -1702,8 +1704,8 @@ msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely"
 msgstr ""
-"Això podria ser degut al fet que un controlador gràfic s'està usant, o que l'escriptori"
-"s'utilitza remotament"
+"Això podria ser degut al fet que un controlador gràfic s'està usant, o que "
+"l'escriptoris'utilitza remotament"
 
 #. Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.ui:58
@@ -1795,6 +1797,452 @@ msgid ""
 msgstr ""
 "Quadre;Projector;xrandr;Pantalla;Resolució;Refresca;Monitor;Nit;Llum;Blau;color;posta"
 " de sol;"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
+#: panels/firmware-security/cc-firmware-security-panel.c:105
+msgid "Secure Boot is Active"
+msgstr "L'arrencada segura està activa"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
+#: panels/firmware-security/cc-firmware-security-panel.c:111
+msgid "Secure Boot has Problems"
+msgstr "L'arrencada segura té problemes"
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
+#: panels/firmware-security/cc-firmware-security-panel.c:117
+msgid "Secure Boot is Inactive"
+msgstr "L'arrencada segura és inactiva"
+
+#: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device starts.\n"
+"\n"
+"For more information, contact the hardware manufacturer or IT support."
+msgstr ""
+"L'arrencada segura evita que el programari maliciós es carregui quan s'iniciï el dispositiu.\n"
+"\n"
+"Per a més informació, contacteu amb el fabricant de maquinari o el suport tècnic."
+
+#. TRANSLATORS: HSI stands for Host Security ID and device refers to the
+#. computer as a whole
+#: panels/firmware-security/cc-firmware-security-dialog.c:70
+#, c-format, fuzzy
+msgid "Device conforms to HSI level %d"
+msgstr "El dispositiu s'ajusta al nivell HSI %d"
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:423
+msgid "No Protection"
+msgstr "Sense protecció"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:99
+msgid ""
+"This device has no protection against hardware security issues. This could "
+"be because of a hardware or firmware configuration issue. It is recommended "
+"to contact your IT support provider."
+msgstr ""
+"Aquest dispositiu no té protecció contra problemes de seguretat del "
+"maquinari. Això pot ser degut a un problema de configuració de maquinari o "
+"microprogramari. Es recomana contactar amb el vostre suport tècnic. "
+
+#. TRANSLATORS: in reference to firmware protection: 1/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:111
+#: panels/firmware-security/cc-firmware-security-dialog.ui:80
+#: panels/firmware-security/cc-firmware-security-panel.c:430
+msgid "Minimal Protection"
+msgstr "Protecció mínima"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:112
+msgid ""
+"This device has minimal protection against hardware security issues. This is"
+" the lowest device security level and only provides protection against "
+"simple security threats."
+msgstr ""
+"Aquest dispositiu té una protecció mínima contra problemes de seguretat del "
+"maquinari. Aquest és el nivell de seguretat més baix del dispositiu i només "
+"proporciona protecció contra amenaces de seguretat simples."
+
+#. TRANSLATORS: in reference to firmware protection: 2/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.ui:94
+#: panels/firmware-security/cc-firmware-security-panel.c:437
+msgid "Basic Protection"
+msgstr "Protecció bàsica"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:125
+msgid ""
+"This device has basic protection against hardware security issues. This "
+"provides protection against some common security threats."
+msgstr ""
+"Aquest dispositiu té protecció bàsica contra problemes de seguretat del "
+"maquinari. Això proporciona protecció contra algunes amenaces de seguretat "
+"comunes."
+
+#. TRANSLATORS: in reference to firmware protection: 3/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.ui:108
+#: panels/firmware-security/cc-firmware-security-panel.c:444
+msgid "Extended Protection"
+msgstr "Protecció ampliada"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:138
+#, fuzzy
+msgid ""
+"This device has extended protection against hardware security issues. This "
+"is the highest device security level and provides protection against "
+"advanced security threats."
+msgstr ""
+"Aquest dispositiu ha ampliat la protecció contra problemes de seguretat del "
+"maquinari. Aquest és el nivell de seguretat de dispositiu més alt i "
+"proporciona protecció contra amenaces de seguretat avançades."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
+msgid "Error: unable to determine HSI level."
+msgstr "Error: no s'ha pogut determinar el nivell HSI."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:148
+msgid "Error: unable to determine Incorrect HSI level."
+msgstr "Error: no s'ha pogut determinar el nivell HSI incorrecte."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:232
+msgid "Minimal Security Protections"
+msgstr "Protecció mínima de seguretat"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:237
+msgid "Basic Security Protections"
+msgstr "Protecció bàsica de seguretat"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:242
+msgid "Extended Security Protections"
+msgstr "Protecció de seguretat ampliada"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+msgid "Security Level"
+msgstr "Nivell de seguretat"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:106
+msgid "Protected against malicious software when the device starts."
+msgstr "Protegit contra programari maliciós quan s'inicia el dispositiu."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:112
+#, fuzzy
+msgid "Some protection when the device is started."
+msgstr "Una protecció quan s'inicia el dispositiu."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+msgid "No protection when the device is started."
+msgstr "No hi ha cap protecció quan s'inicia el dispositiu."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:424
+msgid "Highly exposed to security threats."
+msgstr "Molt exposat a amenaces de seguretat."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:431
+msgid "Limited protection against simple security threats."
+msgstr "Protecció limitada contra amenaces de seguretat simples."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:438
+msgid "Protected against common security threats."
+msgstr "Protegit contra amenaces de seguretat comunes."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:445
+#: panels/firmware-security/cc-firmware-security-panel.c:452
+msgid "Protected against a wide range of security threats."
+msgstr "Protegit contra una àmplia gamma d'amenaces de seguretat."
+
+#. TRANSLATORS: in reference to firmware protection: 4/4 stars
+#: panels/firmware-security/cc-firmware-security-panel.c:451
+msgid "Comprehensive Protection"
+msgstr "Protecció completa"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:138
+msgid "No Events"
+msgstr "Sense esdeveniments"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:38
+msgid "SPI write"
+msgstr "Escriptura de l'SPI"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:40
+msgid "SPI lock"
+msgstr "Bloqueig de l'SPI"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:42
+msgid "SPI BIOS region"
+msgstr "Regió BIOS de l'SPI"
+
+#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:44
+msgid "SPI BIOS Descriptor"
+msgstr "Descriptor de BIOS SPI"
+
+#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
+#: panels/firmware-security/cc-firmware-security-utils.c:46
+#, fuzzy
+msgid "Pre-boot DMA protection is"
+msgstr "La protecció DMA de prearrencada és"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel
+#: panels/firmware-security/cc-firmware-security-utils.c:48
+msgid "Intel BootGuard"
+msgstr "BootGuard d'Intel"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * verified boot refers to the way the boot process is verified
+#: panels/firmware-security/cc-firmware-security-utils.c:51
+#, fuzzy
+msgid "Intel BootGuard verified boot"
+msgstr "Arrencada verificada d'Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * ACM means to verify the integrity of Initial Boot Block
+#: panels/firmware-security/cc-firmware-security-utils.c:54
+#, fuzzy
+msgid "Intel BootGuard ACM protected"
+msgstr "ACM d'Intel BootGuard protegit"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * error policy is what to do on failure
+#: panels/firmware-security/cc-firmware-security-utils.c:57
+#, fuzzy
+msgid "Intel BootGuard error policy"
+msgstr "Política d'error d'Intel BootGuard"
+
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
+#. * OTP = one time programmable
+#: panels/firmware-security/cc-firmware-security-utils.c:60
+#, fuzzy
+msgid "Intel BootGuard OTP fuse"
+msgstr "Fusible OTP d'Intel BootGuard"
+
+#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
+#. * enabled means supported by the processor
+#: panels/firmware-security/cc-firmware-security-utils.c:63
+#, fuzzy
+msgid "Intel CET"
+msgstr "CET d'Intel"
+
+#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
+#. * active means being used by the OS
+#: panels/firmware-security/cc-firmware-security-utils.c:66
+#, fuzzy
+msgid "Intel CET Active"
+msgstr "CET d'Intel actiu"
+
+#. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
+#: panels/firmware-security/cc-firmware-security-utils.c:68
+msgid "Intel SMAP"
+msgstr "Intel SMAP"
+
+#. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
+#: panels/firmware-security/cc-firmware-security-utils.c:70
+msgid "Encrypted RAM"
+msgstr "RAM encriptada"
+
+#. TRANSLATORS: Title:
+#. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
+#: panels/firmware-security/cc-firmware-security-utils.c:73
+msgid "IOMMU device protection"
+msgstr "Protecció del dispositiu IOMMU"
+
+#. TRANSLATORS: Title: lockdown is a security mode of the kernel
+#: panels/firmware-security/cc-firmware-security-utils.c:75
+msgid "Kernel lockdown"
+msgstr "Bloqueig del nucli"
+
+#. TRANSLATORS: Title: if it's tainted or not
+#: panels/firmware-security/cc-firmware-security-utils.c:77
+#, fuzzy
+msgid "Kernel tainted"
+msgstr "Nucli contaminat"
+
+#. TRANSLATORS: Title: swap space or swap partition
+#: panels/firmware-security/cc-firmware-security-utils.c:79
+msgid "Linux swap"
+msgstr "Intercanvi del Linux"
+
+#. TRANSLATORS: Title: sleep state
+#: panels/firmware-security/cc-firmware-security-utils.c:81
+msgid "Suspend-to-ram"
+msgstr "Atura temporalment a RAM"
+
+#. TRANSLATORS: Title: a better sleep state
+#: panels/firmware-security/cc-firmware-security-utils.c:83
+msgid "Suspend-to-idle"
+msgstr "Atura temporalment a espera"
+
+#. TRANSLATORS: Title: PK is the 'platform key' for the machine
+#: panels/firmware-security/cc-firmware-security-utils.c:85
+msgid "UEFI platform key"
+msgstr "Clau de la plataforma UEFI"
+
+#. TRANSLATORS: Title: SB is a way of locking down UEFI
+#: panels/firmware-security/cc-firmware-security-utils.c:87
+msgid "Secure boot"
+msgstr "Arrencada segura"
+
+#. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be
+#. empty
+#: panels/firmware-security/cc-firmware-security-utils.c:89
+#, fuzzy
+msgid "All TPM PCRs are"
+msgstr "Tots els PCR TPM són"
+
+#. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
+#: panels/firmware-security/cc-firmware-security-utils.c:91
+#, fuzzy
+msgid "TPM PCR0 reconstruction"
+msgstr "Reconstrucció PCR0 TPM"
+
+#. TRANSLATORS: Title: TPM = Trusted Platform Module
+#: panels/firmware-security/cc-firmware-security-utils.c:93
+msgid "TPM v2.0"
+msgstr "TPM v2.0"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine
+#: panels/firmware-security/cc-firmware-security-utils.c:95
+#, fuzzy
+#| msgid "Manufacturer"
+msgid "MEI manufacturing mode"
+msgstr "Fabricant"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine, and the
+#. * "override" is the physical PIN that can be driven to
+#. * logic high -- luckily it is probably not accessible to
+#. * end users on consumer boards
+#: panels/firmware-security/cc-firmware-security-utils.c:100
+#, fuzzy
+msgid "MEI override"
+msgstr "Sobreescriptura MEI"
+
+#. TRANSLATORS: Title: MEI = Intel Management Engine
+#: panels/firmware-security/cc-firmware-security-utils.c:102
+msgid "MEI version"
+msgstr "Versió MEI"
+
+#. TRANSLATORS: Title: if firmware updates are available
+#: panels/firmware-security/cc-firmware-security-utils.c:104
+msgid "Firmware updates"
+msgstr "Actualitzacions del microprogramari"
+
+#. TRANSLATORS: Title: if we can verify the firmware checksums
+#: panels/firmware-security/cc-firmware-security-utils.c:106
+#, fuzzy
+#| msgid "Firmware Version"
+msgid "Firmware attestation"
+msgstr "Versió del microprogramari"
+
+#. TRANSLATORS: Title: if the fwupd plugins are all present and correct
+#: panels/firmware-security/cc-firmware-security-utils.c:108
+msgid "fwupd plugins"
+msgstr "Connectors fwupd"
+
+#. TRANSLATORS: Title: Direct Connect Interface (DCI) allows
+#. * debugging of Intel processors using the USB3 port
+#: panels/firmware-security/cc-firmware-security-utils.c:111
+#: panels/firmware-security/cc-firmware-security-utils.c:112
+msgid "Intel DCI debugger"
+msgstr "Depurador d'Intel DCI"
+
+#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
+#: panels/firmware-security/cc-firmware-security-utils.c:114
+#, fuzzy
+msgid "Pre-boot DMA protection"
+msgstr "Protecció DMA de prearrencada"
+
+#. TRANSLATORS: Title: if fwupd supports HSI on this chip
+#: panels/firmware-security/cc-firmware-security-utils.c:116
+msgid "Supported CPU"
+msgstr "CPU compatible"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:150
+#, fuzzy
+msgid "IOMMU device protection enabled"
+msgstr "S'ha activat la protecció del dispositiu IOMMU"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:156
+#, fuzzy
+msgid "IOMMU device protection disabled"
+msgstr "S'ha desactivat la protecció del dispositiu IOMMU"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:176
+#, fuzzy
+msgid "Kernel is no longer tainted"
+msgstr "El nucli ja no està contaminat"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:182
+#, fuzzy
+msgid "Kernel is tainted"
+msgstr "El nucli està contaminat"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:188
+#, fuzzy
+msgid "Kernel lockdown disabled"
+msgstr "El bloqueig del nucli està desactivat"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:194
+#, fuzzy
+msgid "Kernel lockdown enabled"
+msgstr "S'ha habilitat el bloqueig del nucli"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:200
+#, fuzzy
+msgid "Pre-boot DMA protection is disabled"
+msgstr "La protecció DMA de prearrencada està desactivada"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:206
+#, fuzzy
+msgid "Pre-boot DMA protection is enabled"
+msgstr "La protecció DMA de prearrencada està habilitada"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:212
+#, fuzzy
+msgid "Secure Boot disabled"
+msgstr "Arrencada segura desactivada"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:218
+msgid "Secure Boot enabled"
+msgstr "Arrencada segura activada"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:224
+msgid "All TPM PCRs are valid"
+msgstr "Tots els PCR TPM són vàlids"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:230
+#, fuzzy
+msgid "All TPM PCRs are now valid"
+msgstr "Tots els PCR TPM ara són vàlids"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:236
+#, fuzzy
+msgid "A TPM PCR is now an invalid value"
+msgstr "Un PCR TPM ara no és un valor vàlid"
+
+#. TRANSLATORS: HSI event title
+#: panels/firmware-security/cc-firmware-security-utils.c:242
+#, fuzzy
+msgid "TPM PCR0 reconstruction is invalid"
+msgstr "La reconstrucció PCR0 del TPM no és vàlida"
 
 #: panels/info-overview/cc-info-overview-panel.c:296
 #: panels/info-overview/cc-info-overview-panel.c:320
@@ -2388,7 +2836,7 @@ msgstr "Premeu Esc o Retrocés per a inhabilitar la drecera de teclat."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:132
+#: panels/user-accounts/cc-user-panel.ui:141
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Nom"
@@ -2896,7 +3344,7 @@ msgid "Other Devices"
 msgstr "Altres dispositius"
 
 #: panels/network/cc-network-panel.ui:37 panels/network/cc-network-panel.ui:56
-#: panels/network/connection-editor/net-connection-editor.c:580
+#: panels/network/connection-editor/net-connection-editor.c:586
 msgid "VPN"
 msgstr "VPN"
 
@@ -2910,29 +3358,29 @@ msgstr "No s'ha configurat"
 
 #. TRANSLATORS: This happens when the connection name does not contain the
 #. SSID.
-#: panels/network/cc-wifi-connection-row.c:207
+#: panels/network/cc-wifi-connection-row.c:216
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:266
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Insecure network (WEP)"
 msgstr "Xarxa insegura (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:270
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network (WPA)"
 msgstr "Xarxa segura (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:274
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Secure network (WPA2)"
 msgstr "Xarxa segura (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA3)"
 msgstr "Xarxa segura (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network"
 msgstr "Xarxa segura"
 
@@ -2991,12 +3439,12 @@ msgstr "Nom de la xarxa"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
-#: panels/printers/new-printer-dialog.ui:331
-#: panels/printers/pp-jobs-dialog.ui:52 panels/sharing/cc-sharing-panel.ui:391
+#: panels/printers/new-printer-dialog.ui:338
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:391
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
-#: panels/user-accounts/cc-add-user-dialog.ui:362
-#: panels/wwan/cc-wwan-apn-dialog.ui:172
+#: panels/user-accounts/cc-add-user-dialog.ui:364
+#: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Contrasenya"
 
@@ -3012,17 +3460,17 @@ msgstr "Genera una contrasenya automàticament"
 msgid "_Turn On"
 msgstr "_Activa"
 
-#: panels/network/cc-wifi-panel.c:544
+#: panels/network/cc-wifi-panel.c:549
 #: panels/network/gnome-wifi-panel.desktop.in.in:3
 #: panels/network/network-wifi.ui:66
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:879
+#: panels/network/cc-wifi-panel.c:884
 msgid "Stop hotspot and disconnect any users?"
 msgstr "Voleu aturar el punt d'accés Wi-Fi i desconnectar els usuaris?"
 
-#: panels/network/cc-wifi-panel.c:882
+#: panels/network/cc-wifi-panel.c:887
 msgid "_Stop Hotspot"
 msgstr "_Atura el punt d'accés Wi-Fi"
 
@@ -3112,49 +3560,49 @@ msgid "Profile %d"
 msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:97
+#: panels/network/connection-editor/ce-page-details.c:98
 #: panels/network/net-device-wifi.c:229
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:101
+#: panels/network/connection-editor/ce-page-details.c:102
 #: panels/network/net-device-wifi.c:234
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:107
+#: panels/network/connection-editor/ce-page-details.c:108
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:112
+#: panels/network/connection-editor/ce-page-details.c:113
 #: panels/network/connection-editor/ce-page-security.c:274
 msgid "Enhanced Open"
 msgstr "Obertura millorada"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:119
+#: panels/network/connection-editor/ce-page-details.c:125
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:125
+#: panels/network/connection-editor/ce-page-details.c:131
 msgid "Enterprise"
 msgstr "Corporativa"
 
-#: panels/network/connection-editor/ce-page-details.c:130
+#: panels/network/connection-editor/ce-page-details.c:136
 #: panels/network/net-device-wifi.c:219
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Cap"
 
-#: panels/network/connection-editor/ce-page-details.c:151
+#: panels/network/connection-editor/ce-page-details.c:157
 msgid "Never"
 msgstr "Mai"
 
-#: panels/network/connection-editor/ce-page-details.c:166
+#: panels/network/connection-editor/ce-page-details.c:172
 #: panels/network/net-device-ethernet.c:105
 #, c-format
 msgid "%i day ago"
@@ -3162,71 +3610,71 @@ msgid_plural "%i days ago"
 msgstr[0] "fa %i dia"
 msgstr[1] "fa %i dies"
 
-#: panels/network/connection-editor/ce-page-details.c:293
+#: panels/network/connection-editor/ce-page-details.c:299
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:295
+#: panels/network/connection-editor/ce-page-details.c:301
 #: panels/network/net-device-ethernet.c:217
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:310
+#: panels/network/connection-editor/ce-page-details.c:316
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:312
+#: panels/network/connection-editor/ce-page-details.c:318
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:314
+#: panels/network/connection-editor/ce-page-details.c:320
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:334
+#: panels/network/connection-editor/ce-page-details.c:340
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Cap"
 
-#: panels/network/connection-editor/ce-page-details.c:336
+#: panels/network/connection-editor/ce-page-details.c:342
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Dèbil"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:344
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Acceptable"
 
-#: panels/network/connection-editor/ce-page-details.c:340
+#: panels/network/connection-editor/ce-page-details.c:346
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Bona"
 
-#: panels/network/connection-editor/ce-page-details.c:342
+#: panels/network/connection-editor/ce-page-details.c:348
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excel·lent"
 
-#: panels/network/connection-editor/ce-page-details.c:409
+#: panels/network/connection-editor/ce-page-details.c:415
 #: panels/network/connection-editor/details-page.ui:94
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "Adreça IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:410
+#: panels/network/connection-editor/ce-page-details.c:416
 #: panels/network/connection-editor/details-page.ui:110
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "Adreça IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:412
-#: panels/network/connection-editor/ce-page-details.c:413
+#: panels/network/connection-editor/ce-page-details.c:418
+#: panels/network/connection-editor/ce-page-details.c:419
 #: panels/network/net-device-ethernet.c:149
 #: panels/network/net-device-ethernet.c:151
 #: panels/network/net-device-mobile.c:445
@@ -3234,20 +3682,20 @@ msgstr "Adreça IPv6"
 msgid "IP Address"
 msgstr "Adreça IP"
 
-#: panels/network/connection-editor/ce-page-details.c:417
+#: panels/network/connection-editor/ce-page-details.c:423
 #: panels/network/net-device-ethernet.c:166
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:418
+#: panels/network/connection-editor/ce-page-details.c:424
 #: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:420
-#: panels/network/connection-editor/ce-page-details.c:421
+#: panels/network/connection-editor/ce-page-details.c:426
+#: panels/network/connection-editor/ce-page-details.c:427
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
 #: panels/network/connection-editor/ip4-page.ui:165
@@ -3260,19 +3708,19 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:473
+#: panels/network/connection-editor/ce-page-details.c:479
 msgid "Forget Connection"
 msgstr "Oblida la connexió"
 
-#: panels/network/connection-editor/ce-page-details.c:475
+#: panels/network/connection-editor/ce-page-details.c:481
 msgid "Remove Connection Profile"
 msgstr "Suprimeix el perfil de connexió"
 
-#: panels/network/connection-editor/ce-page-details.c:477
+#: panels/network/connection-editor/ce-page-details.c:483
 msgid "Remove VPN"
 msgstr "Suprimeix VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:495
+#: panels/network/connection-editor/ce-page-details.c:501
 msgid "Details"
 msgstr "Detalls"
 
@@ -3377,11 +3825,11 @@ msgstr "Connecta _automàticament"
 msgid "Make available to _other users"
 msgstr "Fes-la disponible a _altres usuaris"
 
-#: panels/network/connection-editor/details-page.ui:412
+#: panels/network/connection-editor/details-page.ui:414
 msgid "_Metered connection: has data limits or can incur charges"
 msgstr "Connexió li_mitada: té dades limitades o pot incórrer en càrrecs"
 
-#: panels/network/connection-editor/details-page.ui:422
+#: panels/network/connection-editor/details-page.ui:423
 msgid ""
 "Software updates and other large downloads will not be started "
 "automatically."
@@ -3534,11 +3982,21 @@ msgstr "No s'ha pogut obrir l'editor de connexions"
 msgid "New Profile"
 msgstr "Perfil nou"
 
-#: panels/network/connection-editor/net-connection-editor.c:715
+#: panels/network/connection-editor/net-connection-editor.c:360
+#, c-format, fuzzy
+msgid "Invalid setting %s: %s"
+msgstr "Configuració no vàlida %s: %s"
+
+#: panels/network/connection-editor/net-connection-editor.c:363
+#, c-format, fuzzy
+msgid "Invalid setting %s"
+msgstr "Configuració no vàlida %s"
+
+#: panels/network/connection-editor/net-connection-editor.c:721
 msgid "Import from file…"
 msgstr "Importa des d'un fitxer…"
 
-#: panels/network/connection-editor/net-connection-editor.c:741
+#: panels/network/connection-editor/net-connection-editor.c:747
 msgid "Add VPN"
 msgstr "Afegeix VPN"
 
@@ -3662,7 +4120,7 @@ msgstr "Amb fil"
 msgid "Add new connection"
 msgstr "Afegeix una connexió nova"
 
-#: panels/network/net-device-wifi.c:857
+#: panels/network/net-device-wifi.c:863
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -3670,27 +4128,27 @@ msgstr ""
 "Es perdran les dades de xarxa de les xarxes seleccionades, incloent-hi les "
 "contrasenyes i la configuració personalitzada."
 
-#: panels/network/net-device-wifi.c:861
+#: panels/network/net-device-wifi.c:867
 msgid "_Forget"
 msgstr "_Oblida"
 
-#: panels/network/net-device-wifi.c:1041
+#: panels/network/net-device-wifi.c:1047
 msgid "Known Wi-Fi Networks"
 msgstr "Xarxes sense fil conegudes"
 
 #. translators: This is the label for the "Forget wireless network"
 #. functionality
-#: panels/network/net-device-wifi.c:1073
+#: panels/network/net-device-wifi.c:1079
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Oblida"
 
-#: panels/network/net-device-wifi.c:1229
+#: panels/network/net-device-wifi.c:1235
 msgid "System policy prohibits use as a Hotspot"
 msgstr ""
 "La política del sistema prohibeix utilitzar-lo com a punt d'accés Wi-Fi"
 
-#: panels/network/net-device-wifi.c:1232
+#: panels/network/net-device-wifi.c:1238
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositiu sense fil no admet el mode punt d'accés Wi-Fi"
 
@@ -4162,7 +4620,7 @@ msgstr "Nom d'_usuari"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:175
+#: panels/user-accounts/cc-user-panel.ui:190
 msgid "_Password"
 msgstr "_Contrasenya"
 
@@ -4939,7 +5397,7 @@ msgid "On _Battery Power"
 msgstr "Quan s'utilitza la _bateria"
 
 #: panels/power/cc-power-panel.ui:312 panels/power/cc-power-panel.ui:348
-#: panels/universal-access/cc-repeat-keys-dialog.ui:62
+#: panels/universal-access/cc-repeat-keys-dialog.ui:65
 msgid "Delay"
 msgstr "Retard"
 
@@ -5037,39 +5495,39 @@ msgstr "Afegeix una impressora"
 
 #. Translators: This button opens authentication dialog for selected server.
 #. Translators: This buttons submits the credentials for the selected server.
-#: panels/printers/new-printer-dialog.ui:100
-#: panels/printers/new-printer-dialog.ui:115
+#: panels/printers/new-printer-dialog.ui:103
+#: panels/printers/new-printer-dialog.ui:118
 #: panels/wwan/cc-wwan-device-page.ui:38
 msgid "_Unlock"
 msgstr "Desbloq_ueja"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:194
+#: panels/printers/new-printer-dialog.ui:197
 msgid "No Printers Found"
 msgstr "No s'ha trobat cap impressora"
 
 #. Translators: The entered text should contain network address of a printer
 #. or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:244
+#: panels/printers/new-printer-dialog.ui:247
 msgid "Enter a network address or search for a printer"
 msgstr "Introduïu una adreça de xarxa o cerqueu una impressora"
 
-#: panels/printers/new-printer-dialog.ui:286
+#: panels/printers/new-printer-dialog.ui:292
 msgid "Authentication Required"
 msgstr "Cal autenticació"
 
-#: panels/printers/new-printer-dialog.ui:302
+#: panels/printers/new-printer-dialog.ui:308
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Introduïu el nom d'usuari i la contrasenya per a visualitzar les impressores"
 " al servidor d'impressió."
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:311
-#: panels/printers/pp-jobs-dialog.ui:41
+#: panels/printers/new-printer-dialog.ui:317
+#: panels/printers/pp-jobs-dialog.ui:42
 #: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:342
-#: panels/wwan/cc-wwan-apn-dialog.ui:148
+#: panels/user-accounts/cc-add-user-dialog.ui:343
+#: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Nom d'usuari"
 
@@ -5098,7 +5556,8 @@ msgstr ""
 
 #: panels/printers/pp-details-dialog.ui:69
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
-msgstr "Els noms de les impressores no poden contenir espai, tabulador, #, o /"
+msgstr ""
+"Els noms de les impressores no poden contenir espai, tabulador, #, o /"
 
 #: panels/printers/pp-details-dialog.ui:89
 #: panels/printers/printer-entry.ui:215
@@ -5188,56 +5647,64 @@ msgstr "Apaïsat del revés"
 msgid "Reverse portrait"
 msgstr "Vertical del revés"
 
+#: panels/printers/pp-job-row.c:55
+msgid "Resume"
+msgstr "Reprèn"
+
+#: panels/printers/pp-job-row.c:55
+msgid "Pause"
+msgstr "Pausat"
+
 #. Translators: Job's state (job is waiting to be printed)
-#: panels/printers/pp-job-row.c:134
+#: panels/printers/pp-job-row.c:144
 msgctxt "print job"
 msgid "Pending"
 msgstr "Pendent"
 
 #. Translators: Job's state (job is held for printing)
-#: panels/printers/pp-job-row.c:140
+#: panels/printers/pp-job-row.c:150
 msgctxt "print job"
 msgid "Paused"
 msgstr "Pausat"
 
 #. Translators: Job's state (job needs authentication to proceed further)
-#: panels/printers/pp-job-row.c:145
+#: panels/printers/pp-job-row.c:155
 msgctxt "print job"
 msgid "Authentication required"
 msgstr "Cal autenticació"
 
 #. Translators: Job's state (job is currently printing)
-#: panels/printers/pp-job-row.c:150
+#: panels/printers/pp-job-row.c:160
 msgctxt "print job"
 msgid "Processing"
 msgstr "S'està processant"
 
 #. Translators: Job's state (job has been stopped)
-#: panels/printers/pp-job-row.c:154
+#: panels/printers/pp-job-row.c:164
 msgctxt "print job"
 msgid "Stopped"
 msgstr "Aturada"
 
 #. Translators: Job's state (job has been canceled)
-#: panels/printers/pp-job-row.c:158
+#: panels/printers/pp-job-row.c:168
 msgctxt "print job"
 msgid "Canceled"
 msgstr "Cancel·lada"
 
 #. Translators: Job's state (job has aborted due to error)
-#: panels/printers/pp-job-row.c:162
+#: panels/printers/pp-job-row.c:172
 msgctxt "print job"
 msgid "Aborted"
 msgstr "Interrompuda"
 
 #. Translators: Job's state (job has completed successfully)
-#: panels/printers/pp-job-row.c:166
+#: panels/printers/pp-job-row.c:176
 msgctxt "print job"
 msgid "Completed"
 msgstr "Completada"
 
 #. Translators: Clicking this button prioritizes printing of this print job
-#: panels/printers/pp-job-row.c:176
+#: panels/printers/pp-job-row.c:186
 msgid "Move this job to the top of the queue"
 msgstr "Mou aquest treball a la part superior de la cua"
 
@@ -5272,25 +5739,25 @@ msgstr "Domini"
 
 #. Translators: This button authenticates all print jobs and send them for
 #. printing.
-#: panels/printers/pp-jobs-dialog.ui:100
+#: panels/printers/pp-jobs-dialog.ui:103
 msgid "A_uthenticate"
 msgstr "A_utentica"
 
 #. Translators: this action removes (purges) all the listed jobs from the
 #. list.
-#: panels/printers/pp-jobs-dialog.ui:128
+#: panels/printers/pp-jobs-dialog.ui:131
 msgid "Clear All"
 msgstr "Neteja-ho tot"
 
 #. Translators: This button pop up authentication dialog for print jobs which
 #. need credentials.
-#: panels/printers/pp-jobs-dialog.ui:174
+#: panels/printers/pp-jobs-dialog.ui:177
 msgid "_Authenticate"
 msgstr "_Autentica"
 
 #. Translators: this label describes the dialog empty state, with no jobs
 #. listed.
-#: panels/printers/pp-jobs-dialog.ui:216
+#: panels/printers/pp-jobs-dialog.ui:219
 msgid "No Active Printer Jobs"
 msgstr "No hi ha tasques d'impressió actives"
 
@@ -5764,7 +6231,7 @@ msgid "Your Account"
 msgstr "El teu compte"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:299
+#: panels/user-accounts/cc-user-panel.ui:314
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -6209,8 +6676,8 @@ msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr ""
-"L'empremta digital de xifratge es pot veure quan es connecten els clients i hauria de"
-" ser idèntica"
+"L'empremta digital de xifratge es pot veure quan es connecten els clients i "
+"hauria de ser idèntica"
 
 #: panels/sharing/cc-sharing-panel.ui:482
 msgid "Media Sharing"
@@ -6437,23 +6904,28 @@ msgid_plural "Depends on %u other devices"
 msgstr[0] "Depèn d'un altre dispositiu"
 msgstr[1] "Depèn de %u altres dispositius"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:84
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:43
+#: panels/thunderbolt/cc-bolt-panel.ui:40
+msgid "Close notification"
+msgstr "Tanca la notificació"
+
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:87
 msgid "Name:"
 msgstr "Nom:"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:112
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:115
 msgid "Status:"
 msgstr "Estat:"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:141
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:144
 msgid "UUID:"
 msgstr "UUID:"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:247
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:250
 msgid "Authorize and Connect"
 msgstr "Autoritza i connecta"
 
-#: panels/thunderbolt/cc-bolt-device-dialog.ui:263
+#: panels/thunderbolt/cc-bolt-device-dialog.ui:266
 msgid "Forget Device"
 msgstr "Oblida el dispositiu"
 
@@ -6475,7 +6947,7 @@ msgstr ""
 "correctament."
 
 #: panels/thunderbolt/cc-bolt-panel.c:425
-#: panels/thunderbolt/cc-bolt-panel.ui:157
+#: panels/thunderbolt/cc-bolt-panel.ui:160
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Permet l'accés als dispositius com ara acobladors o CPU externs."
 
@@ -6504,23 +6976,23 @@ msgstr "No s'ha pogut determinar el nivell de seguretat de Thunderbolt."
 msgid "Error switching direct mode: %s"
 msgstr "S'ha produït un error en canviar al mode directe: «%s»"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:103
+#: panels/thunderbolt/cc-bolt-panel.ui:106
 msgid "No Thunderbolt Support"
 msgstr "Sense compatibilitat Thunderbolt"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:104
+#: panels/thunderbolt/cc-bolt-panel.ui:107
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "No s'ha pogut connectar al subsistema Thunderbolt."
 
-#: panels/thunderbolt/cc-bolt-panel.ui:153
+#: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Direct Access"
 msgstr "Accés directe"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:225
+#: panels/thunderbolt/cc-bolt-panel.ui:228
 msgid "Pending Devices"
 msgstr "Dispositius pendents"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:319
+#: panels/thunderbolt/cc-bolt-panel.ui:322
 msgid "No devices attached"
 msgstr "No hi ha cap dispositiu adjuntat"
 
@@ -6543,16 +7015,16 @@ msgstr "Thunderbolt;privadesa;"
 msgid "Cursor Blinking"
 msgstr "Parpelleig del cursor"
 
-#: panels/universal-access/cc-cursor-blinking-dialog.ui:29
+#: panels/universal-access/cc-cursor-blinking-dialog.ui:32
 msgid "Cursor blinks in text fields."
 msgstr "El cursor parpelleja en els camps de text."
 
-#: panels/universal-access/cc-cursor-blinking-dialog.ui:62
-#: panels/universal-access/cc-repeat-keys-dialog.ui:117
+#: panels/universal-access/cc-cursor-blinking-dialog.ui:65
+#: panels/universal-access/cc-repeat-keys-dialog.ui:120
 msgid "Speed"
 msgstr "Velocitat"
 
-#: panels/universal-access/cc-cursor-blinking-dialog.ui:84
+#: panels/universal-access/cc-cursor-blinking-dialog.ui:87
 msgid "Cursor blinking speed"
 msgstr "Velocitat del parpelleig del cursor"
 
@@ -6639,15 +7111,15 @@ msgstr "Gran"
 msgid "Repeat Keys"
 msgstr "Repetició de tecles"
 
-#: panels/universal-access/cc-repeat-keys-dialog.ui:29
+#: panels/universal-access/cc-repeat-keys-dialog.ui:32
 msgid "Key presses repeat when key is held down."
 msgstr "Es repeteix la tecla quan es manté premuda."
 
-#: panels/universal-access/cc-repeat-keys-dialog.ui:85
+#: panels/universal-access/cc-repeat-keys-dialog.ui:88
 msgid "Repeat keys delay"
 msgstr "Retard en la repetició de tecles"
 
-#: panels/universal-access/cc-repeat-keys-dialog.ui:141
+#: panels/universal-access/cc-repeat-keys-dialog.ui:144
 msgid "Repeat keys speed"
 msgstr "Velocitat de la repetició de tecles"
 
@@ -6729,11 +7201,11 @@ msgctxt "bounce keys delay"
 msgid "Long"
 msgstr "Llarg"
 
-#: panels/universal-access/cc-typing-dialog.ui:326
+#: panels/universal-access/cc-typing-dialog.ui:335
 msgid "_Enable by Keyboard"
 msgstr "_Habilita per teclat"
 
-#: panels/universal-access/cc-typing-dialog.ui:336
+#: panels/universal-access/cc-typing-dialog.ui:345
 msgid "Turn accessibility features on and off using the keyboard"
 msgstr "Activa i desactiva les funcions d'accessibilitat utilitzant el teclat"
 
@@ -7362,11 +7834,11 @@ msgstr "Inici de sessió corporatiu"
 msgid "User accounts which are managed by a company or organization."
 msgstr "Comptes d'usuari gestionats per una empresa o organització."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:385
+#: panels/user-accounts/cc-add-user-dialog.ui:388
 msgid "You are Offline"
 msgstr "Esteu fora de línia"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:386
+#: panels/user-accounts/cc-add-user-dialog.ui:389
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -7392,15 +7864,15 @@ msgstr "Gestor de l'empremta dactilar"
 msgid "Fingerprint"
 msgstr "Empremta dactilar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:88
+#: panels/user-accounts/cc-fingerprint-dialog.ui:91
 msgid "_No"
 msgstr "_No"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:96
+#: panels/user-accounts/cc-fingerprint-dialog.ui:99
 msgid "_Yes"
 msgstr "_Sí"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:116
+#: panels/user-accounts/cc-fingerprint-dialog.ui:119
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7408,33 +7880,33 @@ msgstr ""
 "Voleu suprimir les empremtes dactilars registrades de manera que "
 "s'inhabiliti l'inici de sessió amb empremta dactilar?"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:172
+#: panels/user-accounts/cc-fingerprint-dialog.ui:175
 msgid "No fingerprint device"
 msgstr "No hi ha cap dispositiu d'empremtes"
 
 #. Translators: This is the empty state page label which states that there are
 #. no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:187
+#: panels/user-accounts/cc-fingerprint-dialog.ui:190
 msgid "No Fingerprint device"
 msgstr "No hi ha cap dispositiu d'empremtes"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:196
+#: panels/user-accounts/cc-fingerprint-dialog.ui:199
 msgid "Ensure the device is properly connected."
 msgstr "Assegureu-vos que el dispositiu està correctament connectat."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:204
+#: panels/user-accounts/cc-fingerprint-dialog.ui:207
 msgid "Fingerprint Device"
 msgstr "Dispositiu d'empremtes"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:213
+#: panels/user-accounts/cc-fingerprint-dialog.ui:216
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Trieu el dispositiu d'empremtes que voleu configurar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:243
+#: panels/user-accounts/cc-fingerprint-dialog.ui:246
 msgid "Fingerprint Login"
 msgstr "Inici de sessió amb empremta dactilar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:249
+#: panels/user-accounts/cc-fingerprint-dialog.ui:252
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
@@ -7442,11 +7914,11 @@ msgstr ""
 "L'inici de sessió amb empremta dactilar permet desbloquejar i iniciar sessió"
 " a l'ordinador amb el dit"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:276
+#: panels/user-accounts/cc-fingerprint-dialog.ui:279
 msgid "_Delete Fingerprints"
 msgstr "_Suprimeix les empremtes dactilars"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:290
+#: panels/user-accounts/cc-fingerprint-dialog.ui:293
 msgid "Fingerprint Enroll"
 msgstr "Afegeix empremta dactilar"
 
@@ -7666,6 +8138,14 @@ msgstr "S'ha iniciat la sessió"
 msgid "%s — Account Activity"
 msgstr "%s - Activitat del compte"
 
+#: panels/user-accounts/cc-login-history-dialog.ui:24
+msgid "Previous"
+msgstr "Anterior"
+
+#: panels/user-accounts/cc-login-history-dialog.ui:34
+msgid "Next"
+msgstr "Següent"
+
 #: panels/user-accounts/cc-password-dialog.c:133
 msgid "Please choose another password."
 msgstr "Trieu una altra contrasenya."
@@ -7702,7 +8182,7 @@ msgstr "Confirma la contrasenya"
 msgid "Allow user to change their password on next login"
 msgstr "Permet a l'usuari establir la contrasenya a l'entrada següent"
 
-#: panels/user-accounts/cc-password-dialog.ui:186
+#: panels/user-accounts/cc-password-dialog.ui:187
 msgid "Set a password now"
 msgstr "Estableix una contrasenya ara"
 
@@ -7840,32 +8320,52 @@ msgstr "Desbloqueja per a afegir usuaris i modificar els paràmetres"
 msgid "Users"
 msgstr "Usuaris"
 
-#: panels/user-accounts/cc-user-panel.ui:60
+#: panels/user-accounts/cc-user-panel.ui:63
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "S'ha de tornar a iniciar la sessió perquè els canvis tinguin efecte"
 
-#: panels/user-accounts/cc-user-panel.ui:67
+#: panels/user-accounts/cc-user-panel.ui:70
 msgid "Restart Now"
 msgstr "Reinicia ara"
 
+#: panels/user-accounts/cc-user-panel.ui:78
+msgid "Close"
+msgstr "Tanca"
+
+#: panels/user-accounts/cc-user-panel.ui:124
+#, fuzzy
+msgid "Edit avatar"
+msgstr "Edita l'avatar"
+
+#: panels/user-accounts/cc-user-panel.ui:156
+#, fuzzy
+msgid "Full name"
+msgstr "Nom complet"
+
+#: panels/user-accounts/cc-user-panel.ui:174
+#: panels/wwan/cc-wwan-apn-dialog.c:295
+#, fuzzy
+msgid "Edit"
+msgstr "Edita"
+
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:195
+#: panels/user-accounts/cc-user-panel.ui:210
 msgid "_Fingerprint Login"
 msgstr "Inici de sessió amb _empremta dactilar"
 
-#: panels/user-accounts/cc-user-panel.ui:218
+#: panels/user-accounts/cc-user-panel.ui:233
 msgid "A_utomatic Login"
 msgstr "Inici de sessió a_utomàtic"
 
-#: panels/user-accounts/cc-user-panel.ui:231
+#: panels/user-accounts/cc-user-panel.ui:246
 msgid "Account Activity"
 msgstr "Activitat del compte"
 
-#: panels/user-accounts/cc-user-panel.ui:259
+#: panels/user-accounts/cc-user-panel.ui:274
 msgid "_Administrator"
 msgstr "_Administrador"
 
-#: panels/user-accounts/cc-user-panel.ui:260
+#: panels/user-accounts/cc-user-panel.ui:275
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7873,33 +8373,33 @@ msgstr ""
 "Els administradors poden afegir i suprimir altres usuaris, i poden canviar "
 "els paràmetres de tots els usuaris."
 
-#: panels/user-accounts/cc-user-panel.ui:276
+#: panels/user-accounts/cc-user-panel.ui:291
 msgid "_Parental Controls"
 msgstr "_Controls parentals"
 
-#: panels/user-accounts/cc-user-panel.ui:277
+#: panels/user-accounts/cc-user-panel.ui:292
 msgid "Open the Parental Controls application."
 msgstr "Obre l'aplicació de controls parentals."
 
-#: panels/user-accounts/cc-user-panel.ui:328
+#: panels/user-accounts/cc-user-panel.ui:343
 msgid "Remove User…"
 msgstr "Suprimeix l'usuari..."
 
-#: panels/user-accounts/cc-user-panel.ui:340
+#: panels/user-accounts/cc-user-panel.ui:355
 msgid "Other Users"
 msgstr "Altres usuaris"
 
-#: panels/user-accounts/cc-user-panel.ui:353
+#: panels/user-accounts/cc-user-panel.ui:368
 msgid "Add User…"
 msgstr "Afegeix usuari…"
 
 #. Translators: This is the empty state page label which states that there are
 #. no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:381
+#: panels/user-accounts/cc-user-panel.ui:396
 msgid "No Users Found"
 msgstr "No s'ha trobat cap usuari"
 
-#: panels/user-accounts/cc-user-panel.ui:390
+#: panels/user-accounts/cc-user-panel.ui:405
 msgid "Unlock to add a user account."
 msgstr "Desbloqueja per a afegir un compte d'usuari."
 
@@ -8063,51 +8563,51 @@ msgstr ""
 "Si hi afegiu més lletres, nombres i signes de puntuació la contrasenya serà "
 "més segura."
 
-#: panels/user-accounts/run-passwd.c:413
+#: panels/user-accounts/run-passwd.c:401
 msgid "Authentication failed"
 msgstr "Ha fallat l'autenticació"
 
-#: panels/user-accounts/run-passwd.c:492
+#: panels/user-accounts/run-passwd.c:480
 #, c-format
 msgid "The new password is too short"
 msgstr "La contrasenya nova és massa curta"
 
-#: panels/user-accounts/run-passwd.c:498
+#: panels/user-accounts/run-passwd.c:486
 #, c-format
 msgid "The new password is too simple"
 msgstr "La contrasenya nova és massa senzilla"
 
-#: panels/user-accounts/run-passwd.c:504
+#: panels/user-accounts/run-passwd.c:492
 #, c-format
 msgid "The old and new passwords are too similar"
 msgstr "La contrasenya nova i l'anterior són massa semblants"
 
-#: panels/user-accounts/run-passwd.c:507
+#: panels/user-accounts/run-passwd.c:495
 #, c-format
 msgid "The new password has already been used recently."
 msgstr "La contrasenya nova ja s'ha utilitzat recentment."
 
-#: panels/user-accounts/run-passwd.c:510
+#: panels/user-accounts/run-passwd.c:498
 #, c-format
 msgid "The new password must contain numeric or special characters"
 msgstr "La contrasenya nova ha de contenir caràcters numèrics o especials"
 
-#: panels/user-accounts/run-passwd.c:514
+#: panels/user-accounts/run-passwd.c:502
 #, c-format
 msgid "The old and new passwords are the same"
 msgstr "La contrasenya nova i l'anterior són iguals"
 
-#: panels/user-accounts/run-passwd.c:518
+#: panels/user-accounts/run-passwd.c:506
 #, c-format
 msgid "Your password has been changed since you initially authenticated!"
 msgstr "La vostra contrasenya ha canviat des que us heu autenticat."
 
-#: panels/user-accounts/run-passwd.c:522
+#: panels/user-accounts/run-passwd.c:510
 #, c-format
 msgid "The new password does not contain enough different characters"
 msgstr "La contrasenya nova no conté suficients caràcters diferents"
 
-#: panels/user-accounts/run-passwd.c:526
+#: panels/user-accounts/run-passwd.c:514
 #: panels/wwan/cc-wwan-errors-private.h:72
 #, c-format
 msgid "Unknown error"
@@ -8129,7 +8629,7 @@ msgstr "El nom d'usuari no està disponible. Trieu-ne un altre."
 msgid "The username is too long."
 msgstr "El nom d'usuari és massa llarg."
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:38
+#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:40
 msgid "Map Buttons"
 msgstr "Mapa els botons"
 
@@ -8212,30 +8712,30 @@ msgstr "Mode tauleta"
 msgid "Use absolute positioning for the pen"
 msgstr "Utilitza el posicionament absolut per al llapis"
 
-#: panels/wacom/cc-wacom-page.ui:27
+#: panels/wacom/cc-wacom-page.ui:28
 msgid "Left Hand Orientation"
 msgstr "Orientació d'esquerrans"
 
-#: panels/wacom/cc-wacom-page.ui:28
+#: panels/wacom/cc-wacom-page.ui:29
 msgid "Tablet and Express Keys™ are rotated for left hand use"
 msgstr "La tauleta i les Express Keys™ es giren per a l'ús de la mà esquerra"
 
-#: panels/wacom/cc-wacom-page.ui:56
+#: panels/wacom/cc-wacom-page.ui:58
 msgctxt "display setting"
 msgid "Map to Monitor"
 msgstr "Assigna al monitor"
 
-#: panels/wacom/cc-wacom-page.ui:62
+#: panels/wacom/cc-wacom-page.ui:64
 msgid "Keep Aspect Ratio"
 msgstr "Mantén la ràtio d'aspecte"
 
-#: panels/wacom/cc-wacom-page.ui:63
+#: panels/wacom/cc-wacom-page.ui:65
 msgid "Only use a portion of the tablet surface to keep monitor aspect ratio"
 msgstr ""
 "Utilitzeu només una part de la superfície de la tauleta per a mantenir la "
 "relació d'aspecte del monitor"
 
-#: panels/wacom/cc-wacom-page.ui:73
+#: panels/wacom/cc-wacom-page.ui:76
 msgid "Calibrate"
 msgstr "Calibrar"
 
@@ -8340,7 +8840,7 @@ msgstr "Drecera nova…"
 msgid "Access Points"
 msgstr "Punts d'accés"
 
-#: panels/wwan/cc-wwan-apn-dialog.ui:122
+#: panels/wwan/cc-wwan-apn-dialog.ui:123
 msgid "APN"
 msgstr "APN"
 
@@ -8746,7 +9246,7 @@ msgstr "_Bloqueja la SIM amb el PIN"
 msgid "Change PIN"
 msgstr "Canvia el PIN"
 
-#: panels/wwan/cc-wwan-sim-lock-dialog.ui:200
+#: panels/wwan/cc-wwan-sim-lock-dialog.ui:202
 msgid "Enter current PIN to change SIM lock settings"
 msgstr ""
 "Introduïu el PIN actual per a canviar la configuració de bloqueig de la SIM"
@@ -8801,11 +9301,16 @@ msgstr "Quadre a mostrar"
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[QUADRE] [ARGUMENT…]"
 
-#: shell/cc-panel-list.ui:39 shell/cc-window.c:242
+#: shell/cc-panel-list.ui:18
+#, fuzzy
+msgid "Settings categories"
+msgstr "Categories de configuració"
+
+#: shell/cc-panel-list.ui:42 shell/cc-window.c:242
 msgid "Privacy"
 msgstr "Privacitat"
 
-#: shell/cc-panel-loader.c:301
+#: shell/cc-panel-loader.c:303
 msgid "Available panels:"
 msgstr "Quadres disponibles:"
 
@@ -8910,7 +9415,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -8919,16 +9424,19 @@ msgstr[1] "%u sortides"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entrades"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sons del sistema"
+
+#~ msgid "Display Arrangement"
+#~ msgstr "Disposició de les pantalles"
 
 #~ msgid "Light"
 #~ msgstr "Clar"
@@ -8948,9 +9456,6 @@ msgstr "Sons del sistema"
 
 #~ msgid "Bark"
 #~ msgstr "Lladruc"
-
-#~ msgid "Close"
-#~ msgstr "Tanca"
 
 #~ msgid "GNOME Settings Sound Panel"
 #~ msgstr "Quadre de so del Paràmetres del GNOME"
