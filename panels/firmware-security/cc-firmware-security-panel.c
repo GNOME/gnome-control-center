@@ -73,17 +73,17 @@ CC_PANEL_REGISTER (CcfirmwareSecurityPanel, cc_firmware_security_panel)
 static void
 set_secure_boot_button_view (CcfirmwareSecurityPanel *self)
 {
+  FwupdSecurityAttr *attr;
   guint64 sb_flags = 0;
   guint64 pk_flags = 0;
-  guint64 *result;
 
   /* get HSI-1 flags if set */
-  result = g_hash_table_lookup (self->hsi1_dict, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT);
-  if (result != NULL)
-    sb_flags = GPOINTER_TO_INT (result);
-  result = g_hash_table_lookup (self->hsi1_dict, FWUPD_SECURITY_ATTR_ID_UEFI_PK);
-  if (result != NULL)
-    pk_flags = GPOINTER_TO_INT (result);
+  attr = g_hash_table_lookup (self->hsi1_dict, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT);
+  if (attr != NULL)
+    sb_flags = attr->flags;
+  attr = g_hash_table_lookup (self->hsi1_dict, FWUPD_SECURITY_ATTR_ID_UEFI_PK);
+  if (attr != NULL)
+    pk_flags = attr->flags;
 
   /* enabled and valid */
   if ((sb_flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS) > 0 &&
@@ -121,59 +121,86 @@ set_secure_boot_button_view (CcfirmwareSecurityPanel *self)
     }
 }
 
+static gchar *
+fu_security_attr_get_description_for_eventlog (FwupdSecurityAttr *attr)
+{
+  GString *str = g_string_new (attr->description);
+
+  /* nothing to do */
+  if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
+    return g_string_free (str, FALSE);
+
+  if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM &&
+      attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW)
+    {
+      g_string_append_printf (str, "\n\n%s",
+                              /* TRANSLATORS: this is to explain an event that has already happened */
+                              _("This issue could have been caused by a change in UEFI firmware "
+                                "settings, an operating system configuration change, or because of "
+                                "malicious software on this system."));
+    }
+  else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW)
+    {
+      g_string_append_printf (str, "\n\n%s",
+                              /* TRANSLATORS: this is to explain an event that has already happened */
+                              _("This issue could have been caused by a change in the UEFI firmware "
+                                "settings, or because of malicious software on this system."));
+    }
+  else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_OS)
+    {
+      g_string_append_printf (str, "\n\n%s",
+                              /* TRANSLATORS: this is to explain an event that has already happened */
+                              _("This issue could have been caused by an operating system configuration "
+                                "change, or because of malicious software on this system."));
+    }
+
+  return g_string_free (str, FALSE);
+}
+
 static void
 parse_event_variant_iter (CcfirmwareSecurityPanel *self,
                           GVariantIter            *iter)
 {
-  FwupdSecurityAttrResult result = 0;
-  FwupdSecurityAttrFlags flags = 0;
   g_autofree gchar *date_string = NULL;
   g_autoptr (GDateTime) date = NULL;
-  const gchar *appstream_id = NULL;
-  const gchar *key;
-  const gchar *event_msg;
-  guint64 timestamp = 0;
-  GVariant *value;
+  g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
   GtkWidget *row;
 
-  while (g_variant_iter_next (iter, "{&sv}", &key, &value))
-    {
-      if (g_strcmp0 (key, "AppstreamId") == 0)
-        appstream_id = g_variant_get_string (value, NULL);
-      else if (g_strcmp0 (key, "Flags") == 0)
-        flags = g_variant_get_uint64(value);
-      else if (g_strcmp0 (key, "HsiResult") == 0)
-        result = g_variant_get_uint32 (value);
-      else if (g_strcmp0 (key, "Created") == 0)
-        timestamp = g_variant_get_uint64 (value);
-      g_variant_unref (value);
-    }
-
   /* unknown to us */
-  if (appstream_id == NULL)
-    return;
-
-  event_msg = fwupd_event_to_log (appstream_id, result);
-  if (event_msg == NULL)
+  if (attr->appstream_id == NULL || attr->title == NULL)
     return;
 
   /* build new row */
-  date = g_date_time_new_from_unix_local (timestamp);
+  date = g_date_time_new_from_unix_local (attr->timestamp);
   date_string = g_date_time_format (date, "\%F \%H:\%m:\%S");
-  row = adw_action_row_new ();
-  if (flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
+
+  row = adw_expander_row_new ();
+  if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
     {
-      adw_action_row_set_icon_name (ADW_ACTION_ROW (row), "emblem-default-symbolic");
+      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "emblem-default-symbolic");
       gtk_widget_add_css_class (row, "success-icon");
     }
   else
     {
-      adw_action_row_set_icon_name (ADW_ACTION_ROW (row), "dialog-warning-symbolic");
+      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "dialog-warning-symbolic");
       gtk_widget_add_css_class (row, "warning-icon");
     }
 
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), event_msg);
-  adw_action_row_set_subtitle (ADW_ACTION_ROW (row), date_string);
+  if (attr->description != NULL)
+    {
+      GtkWidget *subrow = adw_action_row_new ();
+      g_autofree gchar *str = fu_security_attr_get_description_for_eventlog (attr);
+      gtk_widget_add_css_class (subrow, "view");
+      adw_action_row_set_subtitle (ADW_ACTION_ROW (subrow), str);
+      adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
+    }
+  else
+    {
+      adw_expander_row_set_enable_expansion (ADW_EXPANDER_ROW (row), FALSE);
+    }
+
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), attr->title);
+  adw_expander_row_set_subtitle (ADW_EXPANDER_ROW (row), date_string);
   adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->firmware_security_log_pgroup), GTK_WIDGET (row));
 
   adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->firmware_security_log_stack), "page2");
@@ -183,59 +210,45 @@ static void
 parse_variant_iter (CcfirmwareSecurityPanel *self,
                     GVariantIter            *iter)
 {
-  GVariant *value;
-  const gchar *key;
-  const gchar *appstream_id = NULL;
-  guint64 flags = 0;
-  guint32 hsi_level = 0;
-
-  while (g_variant_iter_next (iter, "{&sv}", &key, &value))
-    {
-      if (g_strcmp0 (key, "AppstreamId") == 0)
-        appstream_id = g_variant_get_string (value, NULL);
-      else if (g_strcmp0 (key, "Flags") == 0)
-        flags = g_variant_get_uint64 (value);
-      else if (g_strcmp0 (key, "HsiLevel") == 0)
-        hsi_level = g_variant_get_uint32 (value);
-      g_variant_unref (value);
-    }
+  g_autoptr (FwupdSecurityAttr) attr = fu_security_attr_new_from_variant(iter);
+  const gchar *appstream_id = attr->appstream_id;
 
   /* invalid */
   if (appstream_id == NULL)
     return;
 
   /* insert into correct hash table */
-  switch (hsi_level)
+  switch (attr->hsi_level)
     {
       case 0:
         /* in fwupd <= 1.8.3 org.fwupd.hsi.Uefi.SecureBoot was incorrectly marked as HSI-0,
          * so accept either level here to avoid raising the runtime version requirement */
-        if (g_strcmp0 (appstream_id, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT) == 0)
+        if (g_strcmp0 (attr->appstream_id, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT) == 0)
           {
             g_hash_table_insert (self->hsi1_dict,
                                  g_strdup (appstream_id),
-                                 GINT_TO_POINTER (flags));
+                                 g_steal_pointer (&attr));
           }
         break;
       case 1:
         g_hash_table_insert (self->hsi1_dict,
                              g_strdup (appstream_id),
-                             GINT_TO_POINTER (flags));
+                             g_steal_pointer (&attr));
         break;
       case 2:
         g_hash_table_insert (self->hsi2_dict,
                              g_strdup (appstream_id),
-                             GINT_TO_POINTER (flags));
+                             g_steal_pointer (&attr));
         break;
       case 3:
         g_hash_table_insert (self->hsi3_dict,
                              g_strdup (appstream_id),
-                             GINT_TO_POINTER (flags));
+                             g_steal_pointer (&attr));
         break;
       case 4:
         g_hash_table_insert (self->hsi4_dict,
                              g_strdup (appstream_id),
-                             GINT_TO_POINTER (flags));
+                             g_steal_pointer (&attr));
         break;
     }
 }
@@ -622,10 +635,10 @@ cc_firmware_security_panel_init (CcfirmwareSecurityPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->hsi1_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  self->hsi2_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  self->hsi3_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-  self->hsi4_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
+  self->hsi1_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
+  self->hsi2_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
+  self->hsi3_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
+  self->hsi4_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
 
   load_custom_css ("/org/gnome/control-center/firmware-security/security-level.css");
 
