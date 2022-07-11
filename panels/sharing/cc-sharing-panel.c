@@ -1394,9 +1394,12 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
     }
 
   if (password == NULL)
-    gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_password_entry),
-                           pw_generate ());
-
+    {
+      char *pw = pw_generate ();
+      if (pw != NULL)
+        gtk_editable_set_text (GTK_EDITABLE (self->remote_desktop_password_entry),
+                               pw);
+    }
   g_signal_connect (self->remote_desktop_device_name_copy,
                     "clicked", G_CALLBACK (on_copy_clicked_label),
                     self->remote_desktop_device_name_label);
