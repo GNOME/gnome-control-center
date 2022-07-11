@@ -1680,6 +1680,8 @@ construct_monitors (CcDisplayConfigDBus *self,
                                  self, G_CONNECT_SWAPPED);
     }
 
+  self->monitors = g_list_reverse (self->monitors);
+
   while (TRUE)
     {
       g_autoptr(GVariant) variant = NULL;
