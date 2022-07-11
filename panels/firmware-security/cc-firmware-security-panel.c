@@ -131,9 +131,11 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
   const gchar *appstream_id = NULL;
   const gchar *key;
   const gchar *event_msg;
+  const gchar *description = NULL;
   guint64 timestamp = 0;
   GVariant *value;
   GtkWidget *row;
+  GtkWidget *subrow;
 
   while (g_variant_iter_next (iter, "{&sv}", &key, &value))
     {
@@ -145,6 +147,8 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
         result = g_variant_get_uint32 (value);
       else if (g_strcmp0 (key, "Created") == 0)
         timestamp = g_variant_get_uint64 (value);
+      else if (g_strcmp0 (key, "Description") == 0)
+        description = g_variant_get_string (value, NULL);
       g_variant_unref (value);
     }
 
@@ -159,20 +163,32 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
   /* build new row */
   date = g_date_time_new_from_unix_local (timestamp);
   date_string = g_date_time_format (date, "\%F \%H:\%m:\%S");
-  row = adw_action_row_new ();
+
+  row = adw_expander_row_new ();
   if (flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
     {
-      adw_action_row_set_icon_name (ADW_ACTION_ROW (row), "emblem-default-symbolic");
+      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "emblem-default-symbolic");
       gtk_widget_add_css_class (row, "success-icon");
     }
   else
     {
-      adw_action_row_set_icon_name (ADW_ACTION_ROW (row), "dialog-warning-symbolic");
+      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "dialog-warning-symbolic");
       gtk_widget_add_css_class (row, "warning-icon");
     }
 
+  if (description)
+    {
+       subrow = adw_action_row_new ();
+       adw_preferences_row_set_title (ADW_PREFERENCES_ROW (subrow), dgettext ("fwupd", description));
+       adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
+    }
+  else
+    {
+      adw_expander_row_set_enable_expansion (ADW_EXPANDER_ROW (row), false);
+    }
+
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), event_msg);
-  adw_action_row_set_subtitle (ADW_ACTION_ROW (row), date_string);
+  adw_expander_row_set_subtitle (ADW_EXPANDER_ROW (row), date_string);
   adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->firmware_security_log_pgroup), GTK_WIDGET (row));
 
   adw_view_stack_set_visible_child_name (ADW_VIEW_STACK (self->firmware_security_log_stack), "page2");
