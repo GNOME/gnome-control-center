@@ -158,16 +158,74 @@ update_dialog (CcFirmwareSecurityDialog *self)
     }
 }
 
+static gchar *
+fu_security_attr_get_description_for_dialog (FwupdSecurityAttr *attr)
+{
+  GString *str = g_string_new (attr->description);
+
+  if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM &&
+      attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW &&
+      attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW)
+    {
+      g_string_append_printf (str, "\n\n%s %s",
+                              /* TRANSLATORS: hardware manufacturer as in OEM */
+                              _("Contact your hardware manufacturer for help with security updates."),
+                              /* TRANSLATORS: support technician as in someone with root */
+                              _("It might be possible to resolve this issue in the device’s UEFI "
+                                "firmware settings, or by a support technician."));
+    }
+  else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM &&
+           attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW)
+    {
+      g_string_append_printf (str, "\n\n%s %s",
+                              /* TRANSLATORS: hardware manufacturer as in OEM */
+                              _("Contact your hardware manufacturer for help with security updates."),
+                              _("It might be possible to resolve this issue in the device’s UEFI firmware settings."));
+    }
+  else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM)
+    {
+      g_string_append_printf (str, "\n\n%s",
+                              /* TRANSLATORS: hardware manufacturer as in OEM */
+                              _("Contact your hardware manufacturer for help with security updates."));
+    }
+  else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW)
+    {
+      g_string_append_printf (str, "\n\n%s",
+                              _("It might be possible to resolve this issue in the device’s UEFI firmware settings."));
+    }
+  else if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_OS)
+    {
+      g_string_append_printf (str, "\n\n%s",
+                              /* TRANSLATORS: support technician as in someone with root */
+                              _("It might be possible for a support technician to resolve this issue."));
+    }
+
+  return g_string_free (str, FALSE);
+}
+
 static GtkWidget *
 hsi_create_pg_row (const gchar *icon_name,
                    const gchar *style,
-                   const gchar *item_name)
+                   FwupdSecurityAttr *attr)
 {
   GtkWidget *row;
 
-  row = adw_action_row_new ();
-  adw_action_row_set_icon_name (ADW_ACTION_ROW (row), icon_name);
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), fu_security_attr_get_name (item_name));
+  row = adw_expander_row_new ();
+  adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), icon_name);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), attr->title);
+
+  if (attr->description != NULL)
+    {
+      GtkWidget *subrow = adw_action_row_new ();
+      g_autofree gchar *str = fu_security_attr_get_description_for_dialog (attr);
+      gtk_widget_add_css_class (subrow, "view");
+      adw_action_row_set_subtitle (ADW_ACTION_ROW (subrow), str);
+      adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
+    }
+  else
+    {
+      adw_expander_row_set_enable_expansion (ADW_EXPANDER_ROW (row), FALSE);
+    }
 
   return row;
 }
@@ -180,7 +238,6 @@ update_hsi_listbox (CcFirmwareSecurityDialog *self,
   GHashTable *hsi_dict = NULL;
   GtkWidget *pg_row;
   GtkWidget *hsi_pg;
-  guint64 flags = 0;
 
   switch (hsi_level)
     {
@@ -205,15 +262,17 @@ update_hsi_listbox (CcFirmwareSecurityDialog *self,
   hash_keys = g_hash_table_get_keys (hsi_dict);
   for (GList *item = g_list_first (hash_keys); item != NULL; item = g_list_next (item))
     {
-      flags = GPOINTER_TO_INT (g_hash_table_lookup (hsi_dict, item->data));
-      if (firmware_security_attr_has_flag (flags, FWUPD_SECURITY_ATTR_FLAG_SUCCESS))
+      FwupdSecurityAttr *attr = g_hash_table_lookup (hsi_dict, item->data);
+      if (attr->title == NULL)
+        continue;
+      if (firmware_security_attr_has_flag (attr, FWUPD_SECURITY_ATTR_FLAG_SUCCESS))
         {
-          pg_row = hsi_create_pg_row ("emblem-default-symbolic", "color_green", item->data);
+          pg_row = hsi_create_pg_row ("emblem-default-symbolic", "color_green", attr);
           gtk_widget_add_css_class (pg_row, "success-icon");
         }
       else
         {
-          pg_row = hsi_create_pg_row ("dialog-error-symbolic", "color_dim", item->data);
+          pg_row = hsi_create_pg_row ("dialog-error-symbolic", "color_dim", attr);
           gtk_widget_add_css_class (pg_row, "error-icon");
         }
       adw_preferences_group_add (ADW_PREFERENCES_GROUP (hsi_pg), GTK_WIDGET (pg_row));

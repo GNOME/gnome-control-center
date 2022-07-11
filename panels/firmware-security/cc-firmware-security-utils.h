@@ -26,6 +26,8 @@
 
 G_BEGIN_DECLS
 
+/* we don't need to keep this up to date and from fwupd >= 1.8.3 we only need the defines
+ * for the things we actually query, e.g. FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT */
 #define FWUPD_SECURITY_ATTR_ID_ACPI_DMAR "org.fwupd.hsi.AcpiDmar"
 #define FWUPD_SECURITY_ATTR_ID_ENCRYPTED_RAM "org.fwupd.hsi.EncryptedRam"
 #define FWUPD_SECURITY_ATTR_ID_FWUPD_ATTESTATION "org.fwupd.hsi.Fwupd.Attestation"
@@ -61,7 +63,12 @@ G_BEGIN_DECLS
 #define FWUPD_SECURITY_ATTR_ID_UEFI_PK "org.fwupd.hsi.Uefi.Pk"
 #define FWUPD_SECURITY_ATTR_ID_PREBOOT_DMA_PROTECTION "org.fwupd.hsi.PrebootDma"
 #define FWUPD_SECURITY_ATTR_ID_SUPPORTED_CPU "org.fwupd.hsi.SupportedCpu"
-
+#define FWUPD_SECURITY_ATTR_ID_PLATFORM_DEBUG_LOCKED "org.fwupd.hsi.PlatformDebugLocked"
+#define FWUPD_SECURITY_ATTR_ID_AMD_ROLLBACK_PROTECTION "org.fwupd.hsi.Amd.RollbackProtection"
+#define FWUPD_SECURITY_ATTR_ID_AMD_SPI_WRITE_PROTECTION "org.fwupd.hsi.Amd.SpiWriteProtection"
+#define FWUPD_SECURITY_ATTR_ID_AMD_SPI_REPLAY_PROTECTION "org.fwupd.hsi.Amd.SpiReplayProtection"
+#define FWUPD_SECURITY_ATTR_ID_PLATFORM_DEBUG_ENABLED "org.fwupd.hsi.PlatformDebugEnabled"
+#define FWUPD_SECURITY_ATTR_ID_PLATFORM_FUSED "org.fwupd.hsi.PlatformFused"
 
 typedef enum {
   SECURE_BOOT_STATE_UNKNOWN,
@@ -77,6 +84,9 @@ typedef enum {
   FWUPD_SECURITY_ATTR_FLAG_RUNTIME_UPDATES = 1 << 8,
   FWUPD_SECURITY_ATTR_FLAG_RUNTIME_ATTESTATION = 1 << 9,
   FWUPD_SECURITY_ATTR_FLAG_RUNTIME_ISSUE = 1 << 10,
+  FWUPD_SECURITY_ATTR_FLAG_ACTION_CONTACT_OEM = 1 << 11,
+  FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_FW = 1 << 12,
+  FWUPD_SECURITY_ATTR_FLAG_ACTION_CONFIG_OS = 1 << 13,
 } FwupdSecurityAttrFlags;
 
 typedef enum {
@@ -98,12 +108,24 @@ typedef enum {
   FWUPD_SECURITY_ATTR_RESULT_LAST
 } FwupdSecurityAttrResult;
 
-const gchar *fu_security_attr_get_name       (const gchar             *appstream_id);
-gboolean     firmware_security_attr_has_flag (guint64                  flags,
+typedef struct {
+  FwupdSecurityAttrResult  result;
+  FwupdSecurityAttrFlags   flags;
+  guint32                  hsi_level;
+  guint64                  timestamp;
+  gchar                   *appstream_id;
+  gchar                   *title;
+  gchar                   *description;
+} FwupdSecurityAttr;
+
+FwupdSecurityAttr *fu_security_attr_new_from_variant  (GVariantIter *iter);
+void               fu_security_attr_free              (FwupdSecurityAttr *attr);
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (FwupdSecurityAttr, fu_security_attr_free)
+
+gboolean     firmware_security_attr_has_flag (FwupdSecurityAttr       *attr,
                                               FwupdSecurityAttrFlags   flag);
 void         load_custom_css                 (const char              *path);
-const char  *fwupd_event_to_log              (const char              *appstream_id,
-                                              FwupdSecurityAttrResult  result);
 
 
 G_END_DECLS
