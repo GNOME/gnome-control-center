@@ -10,10 +10,13 @@
     </accessibility>
     <child internal-child="headerbar">
       <object class="GtkHeaderBar" id="header_bar">
-        <child type="title">
+        <property name="title-widget">
           <object class="GtkLabel" id="title_label">
+            <style>
+              <class name="title"/>
+            </style>
           </object>
-        </child>
+        </property>
         <child>
           <object class="GtkBox">
             <style>
