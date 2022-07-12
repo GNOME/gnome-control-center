@@ -315,6 +315,7 @@ cc_background_chooser_select_file (CcBackgroundChooser *self)
   filter = gtk_file_filter_new ();
   gtk_file_filter_add_pixbuf_formats (filter);
   gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (filechooser), filter);
+  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (filechooser), TRUE);
 
   pictures_folder = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
   gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (filechooser),
