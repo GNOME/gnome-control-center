@@ -1030,38 +1030,30 @@ on_connection_list_row_activated_cb (NetDeviceWifi        *self,
 static void
 show_history (NetDeviceWifi *self)
 {
-        GtkListBox *listbox;
-        GtkWidget *dialog;
         GtkNative *native;
-        GtkWidget *forget;
-        GtkWidget *header;
-        GtkWidget *swin;
-        GtkWidget *content_area;
-        GtkWidget *separator;
+        GtkWidget *dialog;
+        GtkWidget *page;
+        GtkWidget *list_group;
+        GtkWidget *forget_group;
+        GtkListBox *listbox;
         GtkWidget *list;
+        GtkWidget *forget;
         GtkWidget *child;
 
-        dialog = g_object_new (GTK_TYPE_DIALOG, "use-header-bar", 1, NULL);
+        dialog = adw_preferences_window_new ();
+        adw_preferences_window_set_search_enabled (ADW_PREFERENCES_WINDOW (dialog), FALSE);
+        adw_preferences_window_set_can_navigate_back (ADW_PREFERENCES_WINDOW (dialog), FALSE);
         native = gtk_widget_get_native (GTK_WIDGET (self));
         gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (native));
         gtk_window_set_title (GTK_WINDOW (dialog), _("Known Wi-Fi Networks"));
         gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
         gtk_window_set_default_size (GTK_WINDOW (dialog), 500, 400);
 
-        /* Dialog's header */
-        header = gtk_header_bar_new ();
-        gtk_header_bar_set_show_title_buttons (GTK_HEADER_BAR (header), TRUE);
-        gtk_window_set_titlebar (GTK_WINDOW (dialog), header);
+        page = adw_preferences_page_new ();
+        adw_preferences_window_add (ADW_PREFERENCES_WINDOW (dialog), ADW_PREFERENCES_PAGE (page));
 
-        g_signal_connect (dialog, "response", G_CALLBACK (gtk_window_destroy), NULL);
-
-        content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
-        gtk_orientable_set_orientation (GTK_ORIENTABLE (content_area), GTK_ORIENTATION_VERTICAL);
-
-        swin = gtk_scrolled_window_new ();
-        gtk_widget_set_vexpand (swin, TRUE);
-        gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (swin), GTK_POLICY_NEVER, GTK_POLICY_AUTOMATIC);
-        gtk_box_append (GTK_BOX (content_area), swin);
+        list_group = adw_preferences_group_new ();
+        adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (list_group));
 
         list = GTK_WIDGET (cc_wifi_connection_list_new (self->client,
                                                         NM_DEVICE_WIFI (self->device),
@@ -1069,24 +1061,18 @@ show_history (NetDeviceWifi *self)
         listbox = cc_wifi_connection_list_get_list_box (CC_WIFI_CONNECTION_LIST (list));
         gtk_list_box_set_selection_mode (listbox, GTK_SELECTION_NONE);
         gtk_list_box_set_sort_func (listbox, (GtkListBoxSortFunc)history_sort, NULL, NULL);
-        gtk_scrolled_window_set_child (GTK_SCROLLED_WINDOW (swin), list);
-
-        /* Horizontal separator */
-        separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
-        gtk_box_append (GTK_BOX (content_area), separator);
+        adw_preferences_group_add (ADW_PREFERENCES_GROUP (list_group), list);
 
         /* translators: This is the label for the "Forget wireless network" functionality */
         forget = gtk_button_new_with_mnemonic (C_("Wi-Fi Network", "_Forget"));
-        gtk_widget_set_halign (forget, GTK_ALIGN_START);
-        gtk_widget_set_margin_top (forget, 6);
-        gtk_widget_set_margin_bottom (forget, 6);
-        gtk_widget_set_margin_start (forget, 6);
         gtk_widget_set_sensitive (forget, FALSE);
         gtk_style_context_add_class (gtk_widget_get_style_context (forget), "destructive-action");
 
         g_signal_connect (forget, "clicked",
                           G_CALLBACK (forget_selected), list);
-        gtk_box_append (GTK_BOX (content_area), forget);
+        forget_group = adw_preferences_group_new ();
+        adw_preferences_group_add (ADW_PREFERENCES_GROUP (forget_group), forget);
+        adw_preferences_page_add (ADW_PREFERENCES_PAGE (page), ADW_PREFERENCES_GROUP (forget_group));
 
         g_object_set_data (G_OBJECT (list), "forget", forget);
         g_object_set_data (G_OBJECT (list), "net", self);
