@@ -49,14 +49,17 @@ G_DEFINE_TYPE (NetVpn, net_vpn, ADW_TYPE_ACTION_ROW)
 static void
 nm_device_refresh_vpn_ui (NetVpn *self)
 {
+        g_autofree char *title_escaped = NULL;
         const GPtrArray *acs;
         NMActiveConnection *a;
         gint i;
         NMVpnConnectionState state;
 
         /* update title */
+        title_escaped = g_markup_escape_text (nm_connection_get_id (self->connection),
+                                              -1);
         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self),
-                                       nm_connection_get_id (self->connection));
+                                       title_escaped);
 
         if (self->active_connection) {
                 g_signal_handlers_disconnect_by_func (self->active_connection,
