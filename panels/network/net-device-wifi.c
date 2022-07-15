@@ -1085,11 +1085,11 @@ history_button_clicked_cb (NetDeviceWifi *self)
         g_object_set_data (G_OBJECT (list), "forget", forget);
         g_object_set_data (G_OBJECT (list), "net", self);
 
-        g_signal_connect_object (list, "add",
+        g_signal_connect_object (list, "add-row",
                                  G_CALLBACK (on_connection_list_row_added_cb),
                                  self,
                                  G_CONNECT_SWAPPED);
-        g_signal_connect_object (list, "remove",
+        g_signal_connect_object (list, "remove-row",
                                  G_CALLBACK (on_connection_list_row_removed_cb),
                                  self,
                                  G_CONNECT_SWAPPED);
