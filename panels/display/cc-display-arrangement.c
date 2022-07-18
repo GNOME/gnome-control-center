@@ -597,7 +597,6 @@ cc_display_arrangement_draw (GtkDrawingArea *drawing_area,
 
           gtk_style_context_get_border (context, &border);
           gtk_style_context_get_padding (context, &padding);
-          gtk_style_context_get_margin (context, &margin);
 
           cairo_translate (cr, w / 2, h / 2);
 
