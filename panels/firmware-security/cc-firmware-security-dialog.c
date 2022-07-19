@@ -117,6 +117,7 @@ update_dialog (CcFirmwareSecurityDialog *self)
     case 2:
       adw_action_row_set_icon_name (ADW_ACTION_ROW (self->firmware_security_dialog_basic_row),
                                     "emblem-default-symbolic");
+      gtk_widget_add_css_class (self->firmware_security_dialog_min_row, "success-icon");
       gtk_widget_add_css_class (self->firmware_security_dialog_basic_row, "success-icon");
       set_dialog_item_layer1 (self,
                               "security-medium-symbolic",
@@ -130,6 +131,8 @@ update_dialog (CcFirmwareSecurityDialog *self)
     case 4:
       adw_action_row_set_icon_name (ADW_ACTION_ROW (self->firmware_security_dialog_extend_row),
                                     "emblem-default-symbolic");
+      gtk_widget_add_css_class (self->firmware_security_dialog_min_row, "success-icon");
+      gtk_widget_add_css_class (self->firmware_security_dialog_basic_row, "success-icon");
       gtk_widget_add_css_class (self->firmware_security_dialog_extend_row, "success-icon");
       set_dialog_item_layer1 (self,
                               "security-high-symbolic",
