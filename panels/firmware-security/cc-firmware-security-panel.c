@@ -20,6 +20,8 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include "shell/cc-application.h"
+
 #include "cc-firmware-security-panel.h"
 #include "cc-firmware-security-resources.h"
 #include "cc-firmware-security-dialog.h"
@@ -321,7 +323,11 @@ on_bus_done (GObject      *source,
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (val == NULL)
     {
+      CcApplication *application = CC_APPLICATION (g_application_get_default ());
       g_warning ("failed to get Security Attribute: %s", error->message);
+      cc_shell_model_set_panel_visibility (cc_application_get_model (application),
+                                           "firmware-security",
+                                           CC_PANEL_HIDDEN);
       set_secure_boot_button_view (self);
       return;
     }
@@ -511,6 +517,60 @@ on_properties_bus_ready_cb (GObject      *source_object,
                      cc_panel_get_cancellable (CC_PANEL (self)),
                      on_properties_bus_done_cb,
                      self);
+}
+
+static void
+update_panel_visibility (const gchar *chassis_type)
+{
+  CcApplication *application;
+  gboolean visible = TRUE;
+
+  /* there's no point showing this */
+  if (g_strcmp0 (chassis_type, "vm") == 0)
+    visible = FALSE;
+  application = CC_APPLICATION (g_application_get_default ());
+  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
+                                       "firmware-security",
+                                       visible ? CC_PANEL_VISIBLE : CC_PANEL_HIDDEN);
+  g_debug ("Firmware Security panel visible: %s as chassis was %s",
+           visible ? "yes" : "no",
+           chassis_type);
+}
+
+void
+cc_firmware_security_panel_static_init_func (void)
+{
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) inner = NULL;
+  g_autoptr(GVariant) variant = NULL;
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!connection)
+    {
+      g_warning ("system bus not available: %s", error->message);
+      return;
+    }
+  variant = g_dbus_connection_call_sync (connection,
+                                         "org.freedesktop.hostname1",
+                                         "/org/freedesktop/hostname1",
+                                         "org.freedesktop.DBus.Properties",
+                                         "Get",
+                                         g_variant_new ("(ss)",
+                                                        "org.freedesktop.hostname1",
+                                                        "Chassis"),
+                                         NULL,
+                                         G_DBUS_CALL_FLAGS_NONE,
+                                         -1,
+                                         NULL,
+                                         &error);
+  if (!variant)
+    {
+      g_warning ("Cannot get org.freedesktop.hostname1.Chassis: %s", error->message);
+      return;
+    }
+  g_variant_get (variant, "(v)", &inner);
+  update_panel_visibility (g_variant_get_string (inner, NULL));
 }
 
 static void
