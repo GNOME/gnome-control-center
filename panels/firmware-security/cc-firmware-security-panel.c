@@ -57,7 +57,6 @@ struct _CcfirmwareSecurityPanel
   GDBusProxy       *bus_proxy;
   GDBusProxy       *properties_bus_proxy;
 
-  GHashTable       *hsi0_dict;
   GHashTable       *hsi1_dict;
   GHashTable       *hsi2_dict;
   GHashTable       *hsi3_dict;
@@ -76,11 +75,11 @@ set_secure_boot_button_view (CcfirmwareSecurityPanel *self)
   guint64 pk_flags = 0;
   guint64 *result;
 
-  /* get HSI-0 flags if set */
-  result = g_hash_table_lookup (self->hsi0_dict, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT);
+  /* get HSI-1 flags if set */
+  result = g_hash_table_lookup (self->hsi1_dict, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT);
   if (result != NULL)
     sb_flags = GPOINTER_TO_INT (result);
-  result = g_hash_table_lookup (self->hsi0_dict, FWUPD_SECURITY_ATTR_ID_UEFI_PK);
+  result = g_hash_table_lookup (self->hsi1_dict, FWUPD_SECURITY_ATTR_ID_UEFI_PK);
   if (result != NULL)
     pk_flags = GPOINTER_TO_INT (result);
 
@@ -207,9 +206,14 @@ parse_variant_iter (CcfirmwareSecurityPanel *self,
   switch (hsi_level)
     {
       case 0:
-        g_hash_table_insert (self->hsi0_dict,
-                             g_strdup (appstream_id),
-                             GINT_TO_POINTER (flags));
+        /* in fwupd <= 1.8.3 org.fwupd.hsi.Uefi.SecureBoot was incorrectly marked as HSI-0,
+         * so accept either level here to avoid raising the runtime version requirement */
+        if (g_strcmp0 (appstream_id, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT) == 0)
+          {
+            g_hash_table_insert (self->hsi1_dict,
+                                 g_strdup (appstream_id),
+                                 GINT_TO_POINTER (flags));
+          }
         break;
       case 1:
         g_hash_table_insert (self->hsi1_dict,
@@ -558,7 +562,6 @@ cc_firmware_security_panel_init (CcfirmwareSecurityPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  self->hsi0_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   self->hsi1_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   self->hsi2_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
   self->hsi3_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
