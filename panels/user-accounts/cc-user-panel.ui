@@ -74,6 +74,7 @@
                         <child>
                           <object class="GtkButton" id="dismiss_button">
                             <property name="valign">GTK_ALIGN_CENTER</property>
+                            <property name="icon_name">window-close-symbolic</property>
                             <accessibility>
                               <property name="label" translatable="yes">Close</property>
                             </accessibility>
@@ -81,11 +82,6 @@
                             <style>
                               <class name="flat"/>
                             </style>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon_name">window-close-symbolic</property>
-                              </object>
-                            </child>
                           </object>
                         </child>
                       </object>
@@ -169,6 +165,7 @@
                             <child>
                               <object class="GtkToggleButton" id="full_name_edit_button">
                                 <signal name="toggled" handler="full_name_edit_button_toggled" object="CcUserPanel" swapped="yes"/>
+                                <property name="icon-name">document-edit-symbolic</property>
                                 <property name="valign">GTK_ALIGN_CENTER</property>
                                 <accessibility>
                                   <property name="label" translatable="yes">Edit</property>
@@ -176,11 +173,6 @@
                                 <style>
                                   <class name="flat"/>
                                 </style>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon-name">document-edit-symbolic</property>
-                                  </object>
-                                </child>
                               </object>
                             </child>
                           </object>

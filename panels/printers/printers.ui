@@ -16,14 +16,10 @@
     <child>
       <object class="GtkToggleButton" id="search-button">
         <property name="margin-end">6</property> <!-- since we don't have access to the shell header bar -->
+        <property name="icon_name">edit-find-symbolic</property>
         <style>
           <class name="image-button"/>
         </style>
-        <child>
-          <object class="GtkImage">
-            <property name="icon_name">edit-find-symbolic</property>
-          </object>
-        </child>
       </object>
     </child>
   </object>
@@ -54,14 +50,10 @@
           <child>
             <object class="GtkButton" id="notification-dismiss-button">
               <property name="valign">GTK_ALIGN_CENTER</property>
+              <property name="icon_name">window-close-symbolic</property>
               <style>
                 <class name="flat"/>
               </style>
-              <child>
-                <object class="GtkImage">
-                  <property name="icon_name">window-close-symbolic</property>
-                </object>
-              </child>
             </object>
           </child>
         </object>
