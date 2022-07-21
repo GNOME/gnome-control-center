@@ -143,6 +143,7 @@ modify_row_for_account (CcOnlineAccountsPanel *self,
 
 /* Auxiliary methods */
 
+G_GNUC_NULL_TERMINATED
 static char *
 run_goa_helper_sync (const char *command,
                      ...)
