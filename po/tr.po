@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-07-04 08:40+0000\n"
-"PO-Revision-Date: 2022-07-06 19:08+0300\n"
+"POT-Creation-Date: 2022-07-21 15:04+0000\n"
+"PO-Revision-Date: 2022-07-22 17:47+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnometurk@gnome.org>\n"
 "Language: tr\n"
@@ -48,8 +48,8 @@ msgid "Session Bus"
 msgstr "Oturum Veriyolu"
 
 #: panels/applications/cc-applications-panel.c:796
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:269
-#: panels/thunderbolt/cc-bolt-panel.ui:313
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:265
+#: panels/thunderbolt/cc-bolt-panel.ui:309
 msgid "Devices"
 msgstr "Aygıtlar"
 
@@ -180,7 +180,7 @@ msgstr "Sistem aramaları al ve sonuçları gönder."
 #: panels/user-accounts/cc-user-panel.c:789
 #: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Devre dışı"
 
@@ -630,7 +630,7 @@ msgstr "_Sürdür"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:63
+#: panels/user-accounts/cc-fingerprint-dialog.ui:57
 msgid "_Done"
 msgstr "_Bitti"
 
@@ -1560,15 +1560,15 @@ msgstr "Açık"
 msgid "Off"
 msgstr "Kapalı"
 
-#: panels/display/cc-display-panel.c:949
+#: panels/display/cc-display-panel.c:955
 msgid "Apply Changes?"
 msgstr "Değişiklikler Uygulansın Mı?"
 
-#: panels/display/cc-display-panel.c:954
+#: panels/display/cc-display-panel.c:960
 msgid "Changes Cannot be Applied"
 msgstr "Değişiklikler Uygulanamadı"
 
-#: panels/display/cc-display-panel.c:956
+#: panels/display/cc-display-panel.c:962
 msgid "This could be due to hardware limitations."
 msgstr "Bu donanım kısıtlamalarından kaynaklanabilir."
 
@@ -1577,11 +1577,11 @@ msgstr "Bu donanım kısıtlamalarından kaynaklanabilir."
 msgid "_Apply"
 msgstr "_Uygula"
 
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:222
-#: panels/display/cc-display-panel.ui:261 panels/network/cc-wifi-panel.ui:16
+#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:221
+#: panels/display/cc-display-panel.ui:260 panels/network/cc-wifi-panel.ui:16
 #: panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
-#: panels/user-accounts/cc-fingerprint-dialog.ui:43
+#: panels/user-accounts/cc-fingerprint-dialog.ui:44
 #: panels/user-accounts/cc-user-panel.ui:31
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -1592,34 +1592,30 @@ msgstr "Geri"
 msgid "Display Settings Disabled"
 msgstr "Ekran Ayarları Devre Dışı"
 
-#: panels/display/cc-display-panel.ui:116
-msgid "Display Arrangement"
-msgstr "Ekran Düzeni"
-
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:111
 msgid "Multiple Displays"
 msgstr "Çoklu Ekranlar"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:136
+#: panels/display/cc-display-panel.ui:120
 msgid "Join"
 msgstr "Birleşik"
 
-#: panels/display/cc-display-panel.ui:143
+#: panels/display/cc-display-panel.ui:127
 msgid "Mirror"
 msgstr "Aynala"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:155
 msgid "Contains top bar and Activities"
 msgstr "Üst çubuk ve Etkinlikleri içerir"
 
-#: panels/display/cc-display-panel.ui:157
+#: panels/display/cc-display-panel.ui:156
 msgid "Primary Display"
 msgstr "Birincil Ekran"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:178
-#: panels/display/cc-display-panel.ui:229
+#: panels/display/cc-display-panel.ui:177
+#: panels/display/cc-display-panel.ui:228
 #: panels/display/cc-night-light-page.ui:115
 msgid "Night Light"
 msgstr "Gece Işığı"
@@ -1776,22 +1772,76 @@ msgstr ""
 "Işık;Mavi;redshift;renk;gün doğumu;gün batımı;"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
-#: panels/firmware-security/cc-firmware-security-panel.c:105
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/firmware-security/cc-firmware-security-panel.c:106
 msgid "Secure Boot is Active"
 msgstr "Güvenli Önyükleme Etkin"
 
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
-#: panels/firmware-security/cc-firmware-security-panel.c:111
-msgid "Secure Boot has Problems"
-msgstr "Güvenli Önyükleme Sorunlu"
+#. TRANSLATORS: this is the first section of the decription
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:76
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
+msgstr ""
+"Güvenli önyükleme, aygıt çalıştığında kötücül yazılımların yüklenmesini "
+"önler. Şu anda açıktır ve düzgün çalışmaktadır."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
-#: panels/firmware-security/cc-firmware-security-panel.c:117
-msgid "Secure Boot is Inactive"
-msgstr "Güvenli Önyükleme Devre Dışı"
+msgid "Secure Boot Has Problems"
+msgstr "Güvenli Önyükleme Sorunlu"
+
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:86
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
+msgstr ""
+"Güvenli önyükleme, aygıt çalıştığında kötücül yazılımların yüklenmesini "
+"önler. Şu anda açıktır ancak geçersiz anahtar olduğundan çalışmayacaktır."
+
+#. TRANSLATORS: this is the second section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
+msgid ""
+"Secure boot problems can often be resolved from your computer's UEFI "
+"firmware settings (BIOS) and your hardware manufacturer may provide "
+"information on how to do this."
+msgstr ""
+"Güvenli önyükleme sorunları genellikle bilgisayarınızın UEFI donanım "
+"yazılımı ayarlarından (BIOS) çözülebilir. Donanım üreticiniz, bunu nasıl "
+"yapacağınızla ilgili bilgiyi sağlayabilir."
+
+#. TRANSLATORS: this is the third section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr "Yardım için donanım üreticinize veya BT desteğine başvurun."
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+msgid "Secure Boot is Turned Off"
+msgstr "Güvenli Önyükleme Kapatıldı"
+
+#. TRANSLATORS: this is the first section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:102
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+"Güvenli önyükleme, aygıt çalıştığında kötücül yazılımların yüklenmesini "
+"önler. Şu anda kapalıdır."
+
+#. TRANSLATORS: this is the second section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
+msgid ""
+"Secure boot can often be turned on from your computer's UEFI firmware "
+"settings (BIOS). For help, contact your hardware manufacturer or IT support "
+"provider."
+msgstr ""
+"Güvenli önyükleme, genellikle bilgisayarınızın UEFI donanım yazılımı "
+"ayarlarından (BIOS) açılabilir. Yardım için donanım üreticinize veya "
+"BT desteğine başvurun."
 
 #: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
 msgid ""
@@ -1813,7 +1863,7 @@ msgstr "Aygıt, HSI %d düzeyine uymaktadır"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:423
+#: panels/firmware-security/cc-firmware-security-panel.c:433
 msgid "No Protection"
 msgstr "Koruma Yok"
 
@@ -1830,7 +1880,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:111
 #: panels/firmware-security/cc-firmware-security-dialog.ui:80
-#: panels/firmware-security/cc-firmware-security-panel.c:430
+#: panels/firmware-security/cc-firmware-security-panel.c:440
 msgid "Minimal Protection"
 msgstr "En Düşük Koruma"
 
@@ -1845,13 +1895,13 @@ msgstr ""
 "karşı koruma sağlar."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.c:127
 #: panels/firmware-security/cc-firmware-security-dialog.ui:94
-#: panels/firmware-security/cc-firmware-security-panel.c:437
+#: panels/firmware-security/cc-firmware-security-panel.c:447
 msgid "Basic Protection"
 msgstr "Temel Koruma"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:125
+#: panels/firmware-security/cc-firmware-security-dialog.c:128
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
@@ -1860,13 +1910,13 @@ msgstr ""
 "yaygın güvenlik gözdağlarına karşı koruma sağlar."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:146
 #: panels/firmware-security/cc-firmware-security-dialog.ui:108
-#: panels/firmware-security/cc-firmware-security-panel.c:444
+#: panels/firmware-security/cc-firmware-security-panel.c:454
 msgid "Extended Protection"
 msgstr "Geniş Koruma"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:138
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
@@ -1876,23 +1926,23 @@ msgstr ""
 "yüksek aygıt güvenliği düzeyidir ve gelişmiş güvenlik gözdağlarına karşı "
 "koruma sağlar."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:147
+#: panels/firmware-security/cc-firmware-security-dialog.c:156
 msgid "Error: unable to determine HSI level."
 msgstr "Hata: HSI düzeyi saptanamadı."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:148
+#: panels/firmware-security/cc-firmware-security-dialog.c:157
 msgid "Error: unable to determine Incorrect HSI level."
 msgstr "Hata: Geçersiz HSI düzeyi saptanamadı."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:232
+#: panels/firmware-security/cc-firmware-security-dialog.c:241
 msgid "Minimal Security Protections"
 msgstr "En Düşük Güvenlik Korumaları"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:237
+#: panels/firmware-security/cc-firmware-security-dialog.c:246
 msgid "Basic Security Protections"
 msgstr "Temel Güvenlik Korumaları"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:242
+#: panels/firmware-security/cc-firmware-security-dialog.c:251
 msgid "Extended Security Protections"
 msgstr "Geniş Güvenlik Korumaları"
 
@@ -1900,37 +1950,41 @@ msgstr "Geniş Güvenlik Korumaları"
 msgid "Security Level"
 msgstr "Güvenlik Düzeyi"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:106
+#: panels/firmware-security/cc-firmware-security-panel.c:107
 msgid "Protected against malicious software when the device starts."
 msgstr "Aygıt başladığında kötücül yazılımlara karşı korunmaktadır."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:112
+msgid "Secure Boot has Problems"
+msgstr "Güvenli Önyükleme Sorunlu"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Some protection when the device is started."
 msgstr "Aygıt başladığında bazı korumalar vardır."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:118
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "No protection when the device is started."
 msgstr "Aygıt başladığında koruma yoktur."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:424
+#: panels/firmware-security/cc-firmware-security-panel.c:434
 msgid "Highly exposed to security threats."
 msgstr "Güvenlik gözdağlarına son derece açık."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:431
+#: panels/firmware-security/cc-firmware-security-panel.c:441
 msgid "Limited protection against simple security threats."
 msgstr "Kolay güvenlik gözdağlarına karşı kısıtlı koruma."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:438
+#: panels/firmware-security/cc-firmware-security-panel.c:448
 msgid "Protected against common security threats."
 msgstr "Yaygın güvenlik gözdağlarına karşı korunmaktadır."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:445
-#: panels/firmware-security/cc-firmware-security-panel.c:452
+#: panels/firmware-security/cc-firmware-security-panel.c:455
+#: panels/firmware-security/cc-firmware-security-panel.c:462
 msgid "Protected against a wide range of security threats."
 msgstr "Geniş kapsamlı güvenlik gözdağlarına karşı koruma."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:451
+#: panels/firmware-security/cc-firmware-security-panel.c:461
 msgid "Comprehensive Protection"
 msgstr "Kapsamlı Koruma"
 
@@ -2781,7 +2835,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:141
+#: panels/user-accounts/cc-user-panel.ui:137
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Ad"
@@ -3288,29 +3342,29 @@ msgid "Not set up"
 msgstr "Ayarlanmamış"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:214
+#: panels/network/cc-wifi-connection-row.c:216
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Insecure network (WEP)"
 msgstr "Güvensiz ağ (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network (WPA)"
 msgstr "Güvenli ağ (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:281
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Secure network (WPA2)"
 msgstr "Güvenli ağ (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:285
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA3)"
 msgstr "Güvenli ağ (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:289
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network"
 msgstr "Güvenli ağ"
 
@@ -4545,7 +4599,7 @@ msgstr "K_ullanıcı adı"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:190
+#: panels/user-accounts/cc-user-panel.ui:182
 msgid "_Password"
 msgstr "_Parola"
 
@@ -4908,11 +4962,11 @@ msgstr "%s kaldırıldı"
 
 #: panels/online-accounts/cc-online-accounts-panel.c:690
 msgid "Error removing account"
-msgstr "Hesap silinirken hata oluştu"
+msgstr "Hesap kaldırılırken hata oluştu"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
 #: panels/online-accounts/cc-online-accounts-panel.ui:23
-#: panels/printers/printers.ui:51
+#: panels/printers/printers.ui:47
 msgid "Undo"
 msgstr "Geri Al"
 
@@ -5471,7 +5525,7 @@ msgstr ""
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "Yazıcı adları BOŞLUK, SEKME, # veya / içeremez"
 
-#: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:215
+#: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:211
 msgid "Location"
 msgstr "Konum"
 
@@ -6002,22 +6056,22 @@ msgstr "Yazdırma Başlıklarını Temizle"
 msgid "Remove Printer"
 msgstr "Yazıcıyı Kaldır"
 
-#: panels/printers/printer-entry.ui:187
+#: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Model"
 
-#: panels/printers/printer-entry.ui:242
+#: panels/printers/printer-entry.ui:238
 msgid "Ink Level"
 msgstr "Mürekkep Düzeyi"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:304
+#: panels/printers/printer-entry.ui:300
 msgid "Please restart when the problem is resolved."
 msgstr "Sorun çözüldüğünde lütfen yeniden başlatınız."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:310
+#: panels/printers/printer-entry.ui:306
 msgid "Restart"
 msgstr "Yeniden Başlat"
 
@@ -6026,17 +6080,17 @@ msgstr "Yeniden Başlat"
 msgid "Add Printer…"
 msgstr "Yazıcı Ekle…"
 
-#: panels/printers/printers.ui:168
+#: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Yazıcı yok"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:179
+#: panels/printers/printers.ui:171
 msgid "Add a Printer…"
 msgstr "Yazıcı Ekle…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:204
+#: panels/printers/printers.ui:196
 msgid ""
 "Sorry! The system printing service\n"
 "    doesn’t seem to be available."
@@ -6124,7 +6178,7 @@ msgid "Your Account"
 msgstr "Hesabınız"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:314
+#: panels/user-accounts/cc-user-panel.ui:306
 msgid "_Language"
 msgstr "Di_l"
 
@@ -6688,12 +6742,12 @@ msgstr "Ses"
 msgid "Alert Sound"
 msgstr "Uyarı Sesi"
 
-#: panels/sound/cc-volume-slider.c:117
+#: panels/sound/cc-volume-slider.c:116
 msgctxt "volume"
 msgid "100%"
 msgstr "%100"
 
-#: panels/sound/cc-volume-slider.ui:21
+#: panels/sound/cc-volume-slider.ui:22
 msgid "Mute"
 msgstr "Kıs"
 
@@ -6789,7 +6843,7 @@ msgid_plural "Depends on %u other devices"
 msgstr[0] "%u diğer aygıta bağımlıdır"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-#: panels/thunderbolt/cc-bolt-panel.ui:40
+#: panels/thunderbolt/cc-bolt-panel.ui:41
 msgid "Close notification"
 msgstr "Bildirimi kapat"
 
@@ -6830,7 +6884,7 @@ msgstr ""
 "Thunderbolt altsistemi (boltd) yüklenmemiş veya doğru şekilde ayarlanmamış."
 
 #: panels/thunderbolt/cc-bolt-panel.c:425
-#: panels/thunderbolt/cc-bolt-panel.ui:160
+#: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Bağlantı istasyonları ve dış grafik işlemciler gibi aygıtlara doğrudan "
@@ -6863,23 +6917,23 @@ msgstr "Thunderbolt güvenlik düzeyi saptanamadı."
 msgid "Error switching direct mode: %s"
 msgstr "Doğrudan kipe geçilirken hata: %s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:106
+#: panels/thunderbolt/cc-bolt-panel.ui:102
 msgid "No Thunderbolt Support"
 msgstr "Thunderbolt Desteği Yok"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:107
+#: panels/thunderbolt/cc-bolt-panel.ui:103
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "Thunderbolt alt sistemine bağlanılamadı."
 
-#: panels/thunderbolt/cc-bolt-panel.ui:156
+#: panels/thunderbolt/cc-bolt-panel.ui:152
 msgid "Direct Access"
 msgstr "Doğrudan Erişim"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:228
+#: panels/thunderbolt/cc-bolt-panel.ui:224
 msgid "Pending Devices"
 msgstr "Bekleyen Aygıtlar"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:322
+#: panels/thunderbolt/cc-bolt-panel.ui:318
 msgid "No devices attached"
 msgstr "Aygıt bağlanmamış"
 
@@ -7736,47 +7790,47 @@ msgstr "Parmak İzi Yönetici"
 msgid "Fingerprint"
 msgstr "Parmak İzi"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:91
+#: panels/user-accounts/cc-fingerprint-dialog.ui:85
 msgid "_No"
 msgstr "_Hayır"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:99
+#: panels/user-accounts/cc-fingerprint-dialog.ui:93
 msgid "_Yes"
 msgstr "_Evet"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:119
+#: panels/user-accounts/cc-fingerprint-dialog.ui:113
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr ""
 "Kayıtlı parmak izlerini silerek parmak izi girişini kapatmak ister misiniz?"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:175
+#: panels/user-accounts/cc-fingerprint-dialog.ui:169
 msgid "No fingerprint device"
 msgstr "Parmak izi aygıtı yok"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:190
+#: panels/user-accounts/cc-fingerprint-dialog.ui:184
 msgid "No Fingerprint device"
 msgstr "Parmak İzi Aygıtı Yok"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:199
+#: panels/user-accounts/cc-fingerprint-dialog.ui:193
 msgid "Ensure the device is properly connected."
 msgstr "Aygıtın düzgünce bağlandığına emin olun."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:207
+#: panels/user-accounts/cc-fingerprint-dialog.ui:201
 msgid "Fingerprint Device"
 msgstr "Parmak İzi Aygıtı"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:216
+#: panels/user-accounts/cc-fingerprint-dialog.ui:210
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Yapılandırmak istediğiniz parmak izi aygıtını seçin"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:246
+#: panels/user-accounts/cc-fingerprint-dialog.ui:240
 msgid "Fingerprint Login"
 msgstr "Parmak İzi Girişi"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:252
+#: panels/user-accounts/cc-fingerprint-dialog.ui:246
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
@@ -7784,11 +7838,11 @@ msgstr ""
 "Parmak izi girişi, bilgisayarınızın kilidini parmağınızla açmayı ve giriş "
 "yapmanızı sağlar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:279
+#: panels/user-accounts/cc-fingerprint-dialog.ui:273
 msgid "_Delete Fingerprints"
 msgstr "Parmak İzlerini _Sil"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:293
+#: panels/user-accounts/cc-fingerprint-dialog.ui:287
 msgid "Fingerprint Enroll"
 msgstr "Parmak İzi Kaydı"
 
@@ -8197,41 +8251,41 @@ msgstr "Değişikliklerin etkin olması için oturumunuzu yeniden başlatmalıs�
 msgid "Restart Now"
 msgstr "Yeniden Başlat"
 
-#: panels/user-accounts/cc-user-panel.ui:78
+#: panels/user-accounts/cc-user-panel.ui:79
 msgid "Close"
 msgstr "Kapat"
 
-#: panels/user-accounts/cc-user-panel.ui:124
+#: panels/user-accounts/cc-user-panel.ui:120
 msgid "Edit avatar"
 msgstr "Avatarı düzenle"
 
-#: panels/user-accounts/cc-user-panel.ui:156
+#: panels/user-accounts/cc-user-panel.ui:152
 msgid "Full name"
 msgstr "Tam ad"
 
-#: panels/user-accounts/cc-user-panel.ui:174
+#: panels/user-accounts/cc-user-panel.ui:171
 #: panels/wwan/cc-wwan-apn-dialog.c:295
 msgid "Edit"
 msgstr "Düzenle"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:210
+#: panels/user-accounts/cc-user-panel.ui:202
 msgid "_Fingerprint Login"
 msgstr "_Parmak İziyle Giriş"
 
-#: panels/user-accounts/cc-user-panel.ui:233
+#: panels/user-accounts/cc-user-panel.ui:225
 msgid "A_utomatic Login"
 msgstr "_Kendiliğinden Giriş"
 
-#: panels/user-accounts/cc-user-panel.ui:246
+#: panels/user-accounts/cc-user-panel.ui:238
 msgid "Account Activity"
 msgstr "Hesap Etkinliği"
 
-#: panels/user-accounts/cc-user-panel.ui:274
+#: panels/user-accounts/cc-user-panel.ui:266
 msgid "_Administrator"
 msgstr "_Yönetici"
 
-#: panels/user-accounts/cc-user-panel.ui:275
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -8239,32 +8293,32 @@ msgstr ""
 "Yöneticiler diğer kullanıcıları ekleyebilir veya kaldırabilir ve diğer tüm "
 "kullanıcılar için ayarları değiştirebilir."
 
-#: panels/user-accounts/cc-user-panel.ui:291
+#: panels/user-accounts/cc-user-panel.ui:283
 msgid "_Parental Controls"
 msgstr "_Ebeveyn Denetimleri"
 
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "Open the Parental Controls application."
 msgstr "Ebeveyn Denetimleri uygulamasını aç."
 
-#: panels/user-accounts/cc-user-panel.ui:343
+#: panels/user-accounts/cc-user-panel.ui:335
 msgid "Remove User…"
 msgstr "Kullanıcı Hesabını Kaldır…"
 
-#: panels/user-accounts/cc-user-panel.ui:355
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Other Users"
 msgstr "Diğer Kullanıcılar"
 
-#: panels/user-accounts/cc-user-panel.ui:368
+#: panels/user-accounts/cc-user-panel.ui:360
 msgid "Add User…"
 msgstr "Kullanıcı Ekle…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:396
+#: panels/user-accounts/cc-user-panel.ui:388
 msgid "No Users Found"
 msgstr "Kullanıcı Bulunamadı"
 
-#: panels/user-accounts/cc-user-panel.ui:405
+#: panels/user-accounts/cc-user-panel.ui:397
 msgid "Unlock to add a user account."
 msgstr "Kullanıcı hesabı eklemek için kilidi kaldır."
 
@@ -9164,7 +9218,7 @@ msgstr "Ayar kategorileri"
 msgid "Privacy"
 msgstr "Gizlilik"
 
-#: shell/cc-panel-loader.c:303
+#: shell/cc-panel-loader.c:304
 msgid "Available panels:"
 msgstr "Kullanılabilir Paneller:"
 
@@ -9264,7 +9318,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9272,15 +9326,21 @@ msgstr[0] "%u Çıktı"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u Girdi"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sistem Sesleri"
+
+#~ msgid "Display Arrangement"
+#~ msgstr "Ekran Düzeni"
+
+#~ msgid "Secure Boot is Inactive"
+#~ msgstr "Güvenli Önyükleme Devre Dışı"
 
 #~ msgid "Light"
 #~ msgstr "Aydınlık"
