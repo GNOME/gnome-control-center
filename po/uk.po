@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2022-06-27 17:01+0000\n"
-"PO-Revision-Date: 2022-06-27 23:03+0300\n"
+"POT-Creation-Date: 2022-07-21 15:04+0000\n"
+"PO-Revision-Date: 2022-07-22 09:44+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -39,8 +39,8 @@ msgid "Session Bus"
 msgstr "Шина сеансів"
 
 #: panels/applications/cc-applications-panel.c:796
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:269
-#: panels/thunderbolt/cc-bolt-panel.ui:313
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:265
+#: panels/thunderbolt/cc-bolt-panel.ui:309
 msgid "Devices"
 msgstr "Пристрої"
 
@@ -175,7 +175,7 @@ msgstr "Отримання сигналів системи про пошук і 
 #: panels/user-accounts/cc-user-panel.c:789
 #: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Вимкнено"
 
@@ -630,7 +630,7 @@ msgstr "_Відновити"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:63
+#: panels/user-accounts/cc-fingerprint-dialog.ui:57
 msgid "_Done"
 msgstr "_Завершити"
 
@@ -1569,15 +1569,15 @@ msgstr "Увімкнено"
 msgid "Off"
 msgstr "Вимкнено"
 
-#: panels/display/cc-display-panel.c:949
+#: panels/display/cc-display-panel.c:955
 msgid "Apply Changes?"
 msgstr "Застосувати зміни?"
 
-#: panels/display/cc-display-panel.c:954
+#: panels/display/cc-display-panel.c:960
 msgid "Changes Cannot be Applied"
 msgstr "Не вдалося застосувати зміни"
 
-#: panels/display/cc-display-panel.c:956
+#: panels/display/cc-display-panel.c:962
 msgid "This could be due to hardware limitations."
 msgstr "Причиною можуть бути апаратні обмеження."
 
@@ -1586,11 +1586,11 @@ msgstr "Причиною можуть бути апаратні обмеженн
 msgid "_Apply"
 msgstr "_Застосувати"
 
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:222
-#: panels/display/cc-display-panel.ui:261 panels/network/cc-wifi-panel.ui:16
+#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:221
+#: panels/display/cc-display-panel.ui:260 panels/network/cc-wifi-panel.ui:16
 #: panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
-#: panels/user-accounts/cc-fingerprint-dialog.ui:43
+#: panels/user-accounts/cc-fingerprint-dialog.ui:44
 #: panels/user-accounts/cc-user-panel.ui:31
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -1601,34 +1601,30 @@ msgstr "Назад"
 msgid "Display Settings Disabled"
 msgstr "Параметри дисплея вимкнено"
 
-#: panels/display/cc-display-panel.ui:116
-msgid "Display Arrangement"
-msgstr "Розташування дисплеїв"
-
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:111
 msgid "Multiple Displays"
 msgstr "Декілька дисплеїв"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:136
+#: panels/display/cc-display-panel.ui:120
 msgid "Join"
 msgstr "З'єднати"
 
-#: panels/display/cc-display-panel.ui:143
+#: panels/display/cc-display-panel.ui:127
 msgid "Mirror"
 msgstr "Відзеркалля"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:155
 msgid "Contains top bar and Activities"
 msgstr "Містить верхню панель та меню «Діяльність»"
 
-#: panels/display/cc-display-panel.ui:157
+#: panels/display/cc-display-panel.ui:156
 msgid "Primary Display"
 msgstr "Основний дисплей"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:178
-#: panels/display/cc-display-panel.ui:229
+#: panels/display/cc-display-panel.ui:177
+#: panels/display/cc-display-panel.ui:228
 #: panels/display/cc-night-light-page.ui:115
 msgid "Night Light"
 msgstr "Нічне світло"
@@ -1786,22 +1782,97 @@ msgstr ""
 "Синій;redshift;колір;захід;світанок;"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
-#: panels/firmware-security/cc-firmware-security-panel.c:105
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/firmware-security/cc-firmware-security-panel.c:106
 msgid "Secure Boot is Active"
 msgstr "Secure Boot є активним"
 
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
-#: panels/firmware-security/cc-firmware-security-panel.c:111
-msgid "Secure Boot has Problems"
-msgstr "Маємо проблеми із Secure Boot"
+#. TRANSLATORS: this is the first section of the decription
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:76
+#| msgid ""
+#| "Secure boot prevents malicious software from being loaded when the device "
+#| "starts.\n"
+#| "\n"
+#| "For more information, contact the hardware manufacturer or IT support."
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
+msgstr ""
+"Secure boot запобігає завантаженню програмного забезпечення зловмисників під "
+"час запуску пристрою. Зараз цей захист увімкнено, і він працює належним"
+" чином."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
-#: panels/firmware-security/cc-firmware-security-panel.c:117
-msgid "Secure Boot is Inactive"
-msgstr "Secure Boot є неактивним"
+#| msgid "Secure Boot has Problems"
+msgid "Secure Boot Has Problems"
+msgstr "Маємо проблеми із Secure Boot"
+
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:86
+#| msgid ""
+#| "Secure boot prevents malicious software from being loaded when the device "
+#| "starts.\n"
+#| "\n"
+#| "For more information, contact the hardware manufacturer or IT support."
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
+msgstr ""
+"Secure boot запобігає завантаженню програмного забезпечення зловмисників під "
+"час запуску пристрою. Зараз цей захист увімкнено, але він не працює через"
+" некоректний ключ."
+
+#. TRANSLATORS: this is the second section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
+msgid ""
+"Secure boot problems can often be resolved from your computer's UEFI "
+"firmware settings (BIOS) and your hardware manufacturer may provide "
+"information on how to do this."
+msgstr ""
+"Проблеми із Secure boot часто можна розв'язати за допомогою параметрів"
+" мікропрограми UEFI вашого комп'ютера (BIOS). Довідкові дані щодо цього може"
+" бути надано виробником обладнання."
+
+#. TRANSLATORS: this is the third section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr ""
+"Довідкові дані можна отримати у виробника обладнання або надавача послуг з"
+" комп'ютерної підтримки."
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+#| msgid "Camera is Turned Off"
+msgid "Secure Boot is Turned Off"
+msgstr "Secure Boot вимкнено"
+
+#. TRANSLATORS: this is the first section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:102
+#| msgid ""
+#| "Secure boot prevents malicious software from being loaded when the device "
+#| "starts.\n"
+#| "\n"
+#| "For more information, contact the hardware manufacturer or IT support."
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+"Secure boot запобігає завантаженню програмного забезпечення зловмисників під "
+"час запуску пристрою. Зараз цей захист вимкнено."
+
+#. TRANSLATORS: this is the second section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
+msgid ""
+"Secure boot can often be turned on from your computer's UEFI firmware "
+"settings (BIOS). For help, contact your hardware manufacturer or IT support "
+"provider."
+msgstr ""
+"Secure boot часто можна увімкнути за допомогою параметрів мікропрограми UEFI"
+" вашого комп'ютера (BIOS). Довідкові дані можна отримати у виробника"
+" обладнання або надавача послуг з комп'ютерної підтримки."
 
 #: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
 msgid ""
@@ -1810,11 +1881,11 @@ msgid ""
 "\n"
 "For more information, contact the hardware manufacturer or IT support."
 msgstr ""
-"Secure boot запобігає завантаженню програмного забезпечення зловмисників під"
-" час запуску пристрою.\n"
+"Secure boot запобігає завантаженню програмного забезпечення зловмисників під "
+"час запуску пристрою.\n"
 "\n"
-"Докладніший його опис можна отримати від виробника обладнання або служби"
-" комп'ютерної підтримки."
+"Докладніший його опис можна отримати від виробника обладнання або служби "
+"комп'ютерної підтримки."
 
 #. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
 #: panels/firmware-security/cc-firmware-security-dialog.c:70
@@ -1824,8 +1895,7 @@ msgstr "Пристрій є сумісним із рівнем HSI %d"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:423
-#| msgid "Notifications"
+#: panels/firmware-security/cc-firmware-security-panel.c:433
 msgid "No Protection"
 msgstr "Без захисту"
 
@@ -1835,15 +1905,15 @@ msgid ""
 "be because of a hardware or firmware configuration issue. It is recommended "
 "to contact your IT support provider."
 msgstr ""
-"Цей пристрій не захищено від апаратних проблем із безпекою. Причиною можуть"
-" бути проблеми із налаштуваннями апаратної частини або мікропрограми."
-" Рекомендуємо повідомити про цю проблему службі надання гарантійної"
-" комп'ютерної підтримки."
+"Цей пристрій не захищено від апаратних проблем із безпекою. Причиною можуть "
+"бути проблеми із налаштуваннями апаратної частини або мікропрограми. "
+"Рекомендуємо повідомити про цю проблему службі надання гарантійної "
+"комп'ютерної підтримки."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:111
 #: panels/firmware-security/cc-firmware-security-dialog.ui:80
-#: panels/firmware-security/cc-firmware-security-panel.c:430
+#: panels/firmware-security/cc-firmware-security-panel.c:440
 msgid "Minimal Protection"
 msgstr "Мінімальний захист"
 
@@ -1853,99 +1923,100 @@ msgid ""
 "the lowest device security level and only provides protection against simple "
 "security threats."
 msgstr ""
-"Цей пристрій має мінімальний захист від апаратних проблем із безпекою. Це"
-" найнижчий рівень захисту пристрою, який усуває лише прості загрози безпеці."
+"Цей пристрій має мінімальний захист від апаратних проблем із безпекою. Це "
+"найнижчий рівень захисту пристрою, який усуває лише прості загрози безпеці."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.c:127
 #: panels/firmware-security/cc-firmware-security-dialog.ui:94
-#: panels/firmware-security/cc-firmware-security-panel.c:437
+#: panels/firmware-security/cc-firmware-security-panel.c:447
 msgid "Basic Protection"
 msgstr "Базовий захист"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:125
+#: panels/firmware-security/cc-firmware-security-dialog.c:128
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
 msgstr ""
-"Цей пристрій має базовий захист від апаратних проблем із безпекою. Цей"
-" рівень захисту надає захист від деяких типових загроз безпеці."
+"Цей пристрій має базовий захист від апаратних проблем із безпекою. Цей "
+"рівень захисту надає захист від деяких типових загроз безпеці."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:146
 #: panels/firmware-security/cc-firmware-security-dialog.ui:108
-#: panels/firmware-security/cc-firmware-security-panel.c:444
-#| msgid "Add connection"
+#: panels/firmware-security/cc-firmware-security-panel.c:454
 msgid "Extended Protection"
 msgstr "Розширений захист"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:138
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
 "advanced security threats."
 msgstr ""
-"Цей пристрій має розширений захист від апаратних проблем із безпекою. Це"
-" рівень захисту пристрою, який усуває деякі додаткові загрози безпеці."
+"Цей пристрій має розширений захист від апаратних проблем із безпекою. Це "
+"рівень захисту пристрою, який усуває деякі додаткові загрози безпеці."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:147
+#: panels/firmware-security/cc-firmware-security-dialog.c:156
 msgid "Error: unable to determine HSI level."
 msgstr "Помилка: не вдалося визначити рівень HSI."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:148
+#: panels/firmware-security/cc-firmware-security-dialog.c:157
 msgid "Error: unable to determine Incorrect HSI level."
 msgstr "Помилка: не вдалося визначити помилковий рівень HSI."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:232
+#: panels/firmware-security/cc-firmware-security-dialog.c:241
 msgid "Minimal Security Protections"
 msgstr "Мінімальний захист"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:237
+#: panels/firmware-security/cc-firmware-security-dialog.c:246
 msgid "Basic Security Protections"
 msgstr "Базовий захист"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:242
+#: panels/firmware-security/cc-firmware-security-dialog.c:251
 msgid "Extended Security Protections"
 msgstr "Розширений захист"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:22
-#| msgctxt "Wi-Fi Hotspot"
-#| msgid "Security type"
 msgid "Security Level"
 msgstr "Рівень безпеки"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:106
+#: panels/firmware-security/cc-firmware-security-panel.c:107
 msgid "Protected against malicious software when the device starts."
 msgstr ""
 "Захист від програмного забезпечення зловмисників під час запуску пристрою."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:112
+msgid "Secure Boot has Problems"
+msgstr "Маємо проблеми із Secure Boot"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Some protection when the device is started."
 msgstr "Деякий захист, коли пристрій розпочав роботу."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:118
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "No protection when the device is started."
 msgstr "Без захисту, коли пристрій розпочав роботу."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:424
+#: panels/firmware-security/cc-firmware-security-panel.c:434
 msgid "Highly exposed to security threats."
 msgstr "Надзвичайно відкритий до загроз захисту."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:431
+#: panels/firmware-security/cc-firmware-security-panel.c:441
 msgid "Limited protection against simple security threats."
 msgstr "Обмежений захист від простих загроз."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:438
+#: panels/firmware-security/cc-firmware-security-panel.c:448
 msgid "Protected against common security threats."
 msgstr "Захищено від поширених загроз."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:445
-#: panels/firmware-security/cc-firmware-security-panel.c:452
+#: panels/firmware-security/cc-firmware-security-panel.c:455
+#: panels/firmware-security/cc-firmware-security-panel.c:462
 msgid "Protected against a wide range of security threats."
 msgstr "Захищено від широкого діапазону загроз."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:451
+#: panels/firmware-security/cc-firmware-security-panel.c:461
 msgid "Comprehensive Protection"
 msgstr "Всебічний захист"
 
@@ -2052,13 +2123,11 @@ msgstr "Linux swap"
 
 #. TRANSLATORS: Title: sleep state
 #: panels/firmware-security/cc-firmware-security-utils.c:81
-#| msgid "Suspend"
 msgid "Suspend-to-ram"
 msgstr "Сон зі збереженням до RAM"
 
 #. TRANSLATORS: Title: a better sleep state
 #: panels/firmware-security/cc-firmware-security-utils.c:83
-#| msgid "Suspend"
 msgid "Suspend-to-idle"
 msgstr "Сон із переведенням до бездіяльності"
 
@@ -2069,7 +2138,6 @@ msgstr "Ключ платформи UEFI"
 
 #. TRANSLATORS: Title: SB is a way of locking down UEFI
 #: panels/firmware-security/cc-firmware-security-utils.c:87
-#| msgid "Secure network"
 msgid "Secure boot"
 msgstr "Secure boot"
 
@@ -2090,7 +2158,6 @@ msgstr "TPM v2.0"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
 #: panels/firmware-security/cc-firmware-security-utils.c:95
-#| msgid "Manufacturer"
 msgid "MEI manufacturing mode"
 msgstr "Режим виробника MEI"
 
@@ -2104,19 +2171,16 @@ msgstr "Перевизначення MEI"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
 #: panels/firmware-security/cc-firmware-security-utils.c:102
-#| msgid "PEAP _version"
 msgid "MEI version"
 msgstr "Версія MEI"
 
 #. TRANSLATORS: Title: if firmware updates are available
 #: panels/firmware-security/cc-firmware-security-utils.c:104
-#| msgid "Firmware Version"
 msgid "Firmware updates"
 msgstr "Оновлення мікропрограми"
 
 #. TRANSLATORS: Title: if we can verify the firmware checksums
 #: panels/firmware-security/cc-firmware-security-utils.c:106
-#| msgid "Firmware Version"
 msgid "Firmware attestation"
 msgstr "Засвідчення мікропрограми"
 
@@ -2139,7 +2203,6 @@ msgstr "Захист DMA до завантаження"
 
 #. TRANSLATORS: Title: if fwupd supports HSI on this chip
 #: panels/firmware-security/cc-firmware-security-utils.c:116
-#| msgid "Supported ICC profiles"
 msgid "Supported CPU"
 msgstr "Підтримуваний процесор"
 
@@ -2185,8 +2248,6 @@ msgstr "Захист DMA до завантаження увімкнено"
 
 #. TRANSLATORS: HSI event title
 #: panels/firmware-security/cc-firmware-security-utils.c:212
-#| msgctxt "Password mode"
-#| msgid "Account disabled"
 msgid "Secure Boot disabled"
 msgstr "Secure Boot вимкнено"
 
@@ -2814,7 +2875,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:141
+#: panels/user-accounts/cc-user-panel.ui:137
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Назва"
@@ -3334,29 +3395,29 @@ msgid "Not set up"
 msgstr "Не налаштовано"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:214
+#: panels/network/cc-wifi-connection-row.c:216
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Insecure network (WEP)"
 msgstr "Незахищена мережа (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network (WPA)"
 msgstr "Захищена мережа (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:281
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Secure network (WPA2)"
 msgstr "Захищена мережа (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:285
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA3)"
 msgstr "Захищена мережа (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:289
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network"
 msgstr "Захищена мережа"
 
@@ -4598,7 +4659,7 @@ msgstr "_Користувач"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:190
+#: panels/user-accounts/cc-user-panel.ui:182
 msgid "_Password"
 msgstr "_Пароль"
 
@@ -4966,7 +5027,7 @@ msgstr "Помилка вилучення облікового запису"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
 #: panels/online-accounts/cc-online-accounts-panel.ui:23
-#: panels/printers/printers.ui:51
+#: panels/printers/printers.ui:47
 msgid "Undo"
 msgstr "Повернути"
 
@@ -5541,7 +5602,7 @@ msgstr ""
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "Назви принтерів не можуть містити пробілів, табуляцій, # або /"
 
-#: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:215
+#: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:211
 msgid "Location"
 msgstr "Адреса"
 
@@ -6079,22 +6140,22 @@ msgstr "Очистити друкарські голівки"
 msgid "Remove Printer"
 msgstr "Вилучити принтер"
 
-#: panels/printers/printer-entry.ui:187
+#: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Модель"
 
-#: panels/printers/printer-entry.ui:242
+#: panels/printers/printer-entry.ui:238
 msgid "Ink Level"
 msgstr "Рівень чорнила"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:304
+#: panels/printers/printer-entry.ui:300
 msgid "Please restart when the problem is resolved."
 msgstr "Перезапустіть, коли проблему буде виправлено."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:310
+#: panels/printers/printer-entry.ui:306
 msgid "Restart"
 msgstr "Перезапустити"
 
@@ -6103,17 +6164,17 @@ msgstr "Перезапустити"
 msgid "Add Printer…"
 msgstr "Додати принтер…"
 
-#: panels/printers/printers.ui:168
+#: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Немає принтерів"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:179
+#: panels/printers/printers.ui:171
 msgid "Add a Printer…"
 msgstr "Додати принтер…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:204
+#: panels/printers/printers.ui:196
 msgid ""
 "Sorry! The system printing service\n"
 "    doesn’t seem to be available."
@@ -6201,7 +6262,7 @@ msgid "Your Account"
 msgstr "Ваш обліковий запис"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:314
+#: panels/user-accounts/cc-user-panel.ui:306
 msgid "_Language"
 msgstr "_Мова"
 
@@ -6765,12 +6826,12 @@ msgstr "Гучність"
 msgid "Alert Sound"
 msgstr "Звук попередження"
 
-#: panels/sound/cc-volume-slider.c:117
+#: panels/sound/cc-volume-slider.c:116
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: panels/sound/cc-volume-slider.ui:21
+#: panels/sound/cc-volume-slider.ui:22
 msgid "Mute"
 msgstr "Вимкнути звук"
 
@@ -6870,7 +6931,7 @@ msgstr[2] "Залежить від %u інших пристроїв"
 msgstr[3] "Залежить від %u іншого пристрою"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-#: panels/thunderbolt/cc-bolt-panel.ui:40
+#: panels/thunderbolt/cc-bolt-panel.ui:41
 msgid "Close notification"
 msgstr "Закрити сповіщення"
 
@@ -6912,7 +6973,7 @@ msgstr ""
 "чином."
 
 #: panels/thunderbolt/cc-bolt-panel.c:425
-#: panels/thunderbolt/cc-bolt-panel.ui:160
+#: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Дозволити безпосередній доступ до таких пристроїв, як зарядні станції та "
@@ -6945,23 +7006,23 @@ msgstr "Не вдається визначити рівень безпеки Thu
 msgid "Error switching direct mode: %s"
 msgstr "Помилка перемикання безпосереднього режиму: %s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:106
+#: panels/thunderbolt/cc-bolt-panel.ui:102
 msgid "No Thunderbolt Support"
 msgstr "Немає підтримки Thunderbolt"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:107
+#: panels/thunderbolt/cc-bolt-panel.ui:103
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "Не вдалося встановити з'єднання із підсистемою thunderbolt."
 
-#: panels/thunderbolt/cc-bolt-panel.ui:156
+#: panels/thunderbolt/cc-bolt-panel.ui:152
 msgid "Direct Access"
 msgstr "Безпосередній доступ"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:228
+#: panels/thunderbolt/cc-bolt-panel.ui:224
 msgid "Pending Devices"
 msgstr "Пристрої в очікуванні"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:322
+#: panels/thunderbolt/cc-bolt-panel.ui:318
 msgid "No devices attached"
 msgstr "Немає приєднаних пристроїв"
 
@@ -7824,47 +7885,47 @@ msgstr "Керування відбитками"
 msgid "Fingerprint"
 msgstr "Відбиток"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:91
+#: panels/user-accounts/cc-fingerprint-dialog.ui:85
 msgid "_No"
 msgstr "_Ні"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:99
+#: panels/user-accounts/cc-fingerprint-dialog.ui:93
 msgid "_Yes"
 msgstr "_Так"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:119
+#: panels/user-accounts/cc-fingerprint-dialog.ui:113
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
 msgstr ""
 "Вилучити зареєстровані відбитки пальців та заборонити вхід через відбитки?"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:175
+#: panels/user-accounts/cc-fingerprint-dialog.ui:169
 msgid "No fingerprint device"
 msgstr "Немає пристроїв для зчитування відбитків"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:190
+#: panels/user-accounts/cc-fingerprint-dialog.ui:184
 msgid "No Fingerprint device"
 msgstr "Немає пристроїв для зчитування відбитків"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:199
+#: panels/user-accounts/cc-fingerprint-dialog.ui:193
 msgid "Ensure the device is properly connected."
 msgstr "Переконайтеся, що пристрій з'єднано належним чином."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:207
+#: panels/user-accounts/cc-fingerprint-dialog.ui:201
 msgid "Fingerprint Device"
 msgstr "Пристрій для зчитування відбитків"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:216
+#: panels/user-accounts/cc-fingerprint-dialog.ui:210
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Виберіть пристрій для читання відбитків, який ви хочете налаштувати"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:246
+#: panels/user-accounts/cc-fingerprint-dialog.ui:240
 msgid "Fingerprint Login"
 msgstr "Вхід за відбитком пальця"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:252
+#: panels/user-accounts/cc-fingerprint-dialog.ui:246
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
@@ -7872,11 +7933,11 @@ msgstr ""
 "Вхід за допомогою відбитка пальця надасть вам змогу розблоковувати систему і "
 "входити до вашого облікового запису за допомогою вашого пальця"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:279
+#: panels/user-accounts/cc-fingerprint-dialog.ui:273
 msgid "_Delete Fingerprints"
 msgstr "В_илучити відбитки"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:293
+#: panels/user-accounts/cc-fingerprint-dialog.ui:287
 msgid "Fingerprint Enroll"
 msgstr "Реєстрація відбитка"
 
@@ -8286,41 +8347,41 @@ msgstr "Щоб зміни набрали чинності, потрібно пе
 msgid "Restart Now"
 msgstr "Перезапустити зараз"
 
-#: panels/user-accounts/cc-user-panel.ui:78
+#: panels/user-accounts/cc-user-panel.ui:79
 msgid "Close"
 msgstr "Закрити"
 
-#: panels/user-accounts/cc-user-panel.ui:124
+#: panels/user-accounts/cc-user-panel.ui:120
 msgid "Edit avatar"
 msgstr "Редагувати аватар"
 
-#: panels/user-accounts/cc-user-panel.ui:156
+#: panels/user-accounts/cc-user-panel.ui:152
 msgid "Full name"
 msgstr "Повне ім'я"
 
-#: panels/user-accounts/cc-user-panel.ui:174
+#: panels/user-accounts/cc-user-panel.ui:171
 #: panels/wwan/cc-wwan-apn-dialog.c:295
 msgid "Edit"
 msgstr "Редагувати"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:210
+#: panels/user-accounts/cc-user-panel.ui:202
 msgid "_Fingerprint Login"
 msgstr "Вхід через відбитки _пальців"
 
-#: panels/user-accounts/cc-user-panel.ui:233
+#: panels/user-accounts/cc-user-panel.ui:225
 msgid "A_utomatic Login"
 msgstr "_Автоматичний вхід"
 
-#: panels/user-accounts/cc-user-panel.ui:246
+#: panels/user-accounts/cc-user-panel.ui:238
 msgid "Account Activity"
 msgstr "Активність облікового запису"
 
-#: panels/user-accounts/cc-user-panel.ui:274
+#: panels/user-accounts/cc-user-panel.ui:266
 msgid "_Administrator"
 msgstr "_Адміністратор"
 
-#: panels/user-accounts/cc-user-panel.ui:275
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -8328,32 +8389,32 @@ msgstr ""
 "Адміністратори можуть додавати або вилучати інших користувачів, а також "
 "змінювати параметри для усіх користувачів."
 
-#: panels/user-accounts/cc-user-panel.ui:291
+#: panels/user-accounts/cc-user-panel.ui:283
 msgid "_Parental Controls"
 msgstr "_Батьківський контроль"
 
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "Open the Parental Controls application."
 msgstr "Відкрийте вікно програми «Батьківський контроль»."
 
-#: panels/user-accounts/cc-user-panel.ui:343
+#: panels/user-accounts/cc-user-panel.ui:335
 msgid "Remove User…"
 msgstr "Вилучити користувача…"
 
-#: panels/user-accounts/cc-user-panel.ui:355
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Other Users"
 msgstr "Інші користувачі"
 
-#: panels/user-accounts/cc-user-panel.ui:368
+#: panels/user-accounts/cc-user-panel.ui:360
 msgid "Add User…"
 msgstr "Додати користувача…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:396
+#: panels/user-accounts/cc-user-panel.ui:388
 msgid "No Users Found"
 msgstr "Не знайдено жодного користувача"
 
-#: panels/user-accounts/cc-user-panel.ui:405
+#: panels/user-accounts/cc-user-panel.ui:397
 msgid "Unlock to add a user account."
 msgstr "Розблокуйте, щоб додати обліковий запис користувача."
 
@@ -9264,7 +9325,7 @@ msgstr "Категорії параметрів"
 msgid "Privacy"
 msgstr "Конфіденційність"
 
-#: shell/cc-panel-loader.c:303
+#: shell/cc-panel-loader.c:304
 msgid "Available panels:"
 msgstr "Доступні панелі:"
 
@@ -9365,7 +9426,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9376,7 +9437,7 @@ msgstr[3] "%u вивід"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
@@ -9385,9 +9446,15 @@ msgstr[1] "%u входи"
 msgstr[2] "%u входів"
 msgstr[3] "%u вхід"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Display Arrangement"
+#~ msgstr "Розташування дисплеїв"
+
+#~ msgid "Secure Boot is Inactive"
+#~ msgstr "Secure Boot є неактивним"
 
 #~ msgid "Light"
 #~ msgstr "Світла"
