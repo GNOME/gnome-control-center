@@ -362,16 +362,9 @@
                 <property name="description" translatable="yes">The user name and password are required to connect to this computer.</property>
 
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwEntryRow" id="remote_desktop_username_entry">
                     <property name="title" translatable="yes">User Name</property>
-                    <property name="activatable_widget">remote_desktop_username_entry</property>
                     <child type="suffix">
-                      <object class="GtkEntry" id="remote_desktop_username_entry">
-                        <property name="hexpand">True</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkButton" id="remote_desktop_username_copy">
                         <property name="valign">center</property>
                         <property name="icon-name">edit-copy-symbolic</property>
@@ -387,17 +380,9 @@
                 </child>
 
                 <child>
-                  <object class="AdwActionRow">
+                  <object class="AdwPasswordEntryRow" id="remote_desktop_password_entry">
                     <property name="title" translatable="yes">Password</property>
-                    <property name="activatable_widget">remote_desktop_password_entry</property>
                     <child type="suffix">
-                      <object class="GtkPasswordEntry" id="remote_desktop_password_entry">
-                        <property name="hexpand">True</property>
-                        <property name="show-peek-icon">True</property>
-                        <property name="valign">center</property>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkButton" id="remote_desktop_password_copy">
                         <property name="valign">center</property>
                         <property name="icon-name">edit-copy-symbolic</property>
