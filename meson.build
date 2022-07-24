@@ -115,7 +115,7 @@ pulse_req_version = '>= 2.0'
 
 libadwaita_dep = dependency(
   'libadwaita-1',
-  version: '>= 1.1',
+  version: '>= 1.2.alpha',
   fallback: ['libadwaita', 'libadwaita_dep'],
   default_options: ['examples=false', 'introspection=disabled', 'tests=false', 'vapi=false'],
 )
