@@ -124,13 +124,11 @@ static void
 parse_event_variant_iter (CcfirmwareSecurityPanel *self,
                           GVariantIter            *iter)
 {
-  FwupdSecurityAttrResult result = 0;
   FwupdSecurityAttrFlags flags = 0;
   g_autofree gchar *date_string = NULL;
   g_autoptr (GDateTime) date = NULL;
   const gchar *appstream_id = NULL;
   const gchar *key;
-  const gchar *event_msg;
   const gchar *description = NULL;
   const gchar *summary = NULL;
   guint64 timestamp = 0;
@@ -144,8 +142,6 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
         appstream_id = g_variant_get_string (value, NULL);
       else if (g_strcmp0 (key, "Flags") == 0)
         flags = g_variant_get_uint64(value);
-      else if (g_strcmp0 (key, "HsiResult") == 0)
-        result = g_variant_get_uint32 (value);
       else if (g_strcmp0 (key, "Created") == 0)
         timestamp = g_variant_get_uint64 (value);
       else if (g_strcmp0 (key, "Description") == 0)
@@ -159,8 +155,7 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
   if (appstream_id == NULL)
     return;
 
-  event_msg = fwupd_event_to_log (appstream_id, result);
-  if (event_msg == NULL)
+  if (summary == NULL)
     return;
 
   /* build new row */
@@ -182,7 +177,7 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
   if (description)
     {
       subrow = adw_action_row_new ();
-      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (subrow), dgettext ("fwupd", description));
+      adw_action_row_set_subtitle (ADW_ACTION_ROW (subrow), dgettext ("fwupd", description));
       adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
     }
   else
@@ -190,7 +185,7 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
       adw_expander_row_set_enable_expansion (ADW_EXPANDER_ROW (row), false);
     }
 
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), event_msg);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), dgettext ("fwupd", summary));
   adw_expander_row_set_subtitle (ADW_EXPANDER_ROW (row), date_string);
   adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->firmware_security_log_pgroup), GTK_WIDGET (row));
 

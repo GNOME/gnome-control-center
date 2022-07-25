@@ -102,8 +102,6 @@ const gchar *fu_security_attr_get_name       (const gchar             *appstream
 gboolean     firmware_security_attr_has_flag (guint64                  flags,
                                               FwupdSecurityAttrFlags   flag);
 void         load_custom_css                 (const char              *path);
-const char  *fwupd_event_to_log              (const char              *appstream_id,
-                                              FwupdSecurityAttrResult  result);
 
 
 G_END_DECLS
