@@ -132,6 +132,7 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
   const gchar *key;
   const gchar *event_msg;
   const gchar *description = NULL;
+  const gchar *summary = NULL;
   guint64 timestamp = 0;
   GVariant *value;
   GtkWidget *row;
@@ -149,6 +150,8 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
         timestamp = g_variant_get_uint64 (value);
       else if (g_strcmp0 (key, "Description") == 0)
         description = g_variant_get_string (value, NULL);
+      else if (g_strcmp0 (key, "Summary") == 0)
+        summary = g_variant_get_string (value, NULL);
       g_variant_unref (value);
     }
 
@@ -178,9 +181,9 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
 
   if (description)
     {
-       subrow = adw_action_row_new ();
-       adw_preferences_row_set_title (ADW_PREFERENCES_ROW (subrow), dgettext ("fwupd", description));
-       adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
+      subrow = adw_action_row_new ();
+      adw_preferences_row_set_title (ADW_PREFERENCES_ROW (subrow), dgettext ("fwupd", description));
+      adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
     }
   else
     {
