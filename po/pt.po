@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-07-04 08:40+0000\n"
-"PO-Revision-Date: 2022-07-07 11:49+0100\n"
+"POT-Creation-Date: 2022-07-22 15:02+0000\n"
+"PO-Revision-Date: 2022-07-26 18:25+0100\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Language: pt_PT\n"
 "X-Source-Language: C\n"
 "X-Project-Style: gnome\n"
@@ -45,8 +45,8 @@ msgid "Session Bus"
 msgstr "Barramento da sessão"
 
 #: panels/applications/cc-applications-panel.c:796
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:269
-#: panels/thunderbolt/cc-bolt-panel.ui:313
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:265
+#: panels/thunderbolt/cc-bolt-panel.ui:309
 msgid "Devices"
 msgstr "Dispositivos"
 
@@ -179,7 +179,7 @@ msgstr "Receber as pesquisas do sistema e enviar os resultados."
 #: panels/user-accounts/cc-user-panel.c:789
 #: panels/user-accounts/cc-user-panel.c:879
 #: panels/wwan/cc-wwan-device-page.c:478
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Inativo"
 
@@ -638,7 +638,7 @@ msgstr "_Retomar"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:63
+#: panels/user-accounts/cc-fingerprint-dialog.ui:57
 msgid "_Done"
 msgstr "_Concluído"
 
@@ -1576,15 +1576,15 @@ msgstr "Ligado"
 msgid "Off"
 msgstr "Desligado"
 
-#: panels/display/cc-display-panel.c:949
+#: panels/display/cc-display-panel.c:955
 msgid "Apply Changes?"
 msgstr "Aplicar as alterações?"
 
-#: panels/display/cc-display-panel.c:954
+#: panels/display/cc-display-panel.c:960
 msgid "Changes Cannot be Applied"
 msgstr "As alterações não foram aplicadas"
 
-#: panels/display/cc-display-panel.c:956
+#: panels/display/cc-display-panel.c:962
 msgid "This could be due to hardware limitations."
 msgstr "Isto pode ser devido a limitações do equipamento informático."
 
@@ -1593,11 +1593,11 @@ msgstr "Isto pode ser devido a limitações do equipamento informático."
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:222
-#: panels/display/cc-display-panel.ui:261 panels/network/cc-wifi-panel.ui:16
+#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:221
+#: panels/display/cc-display-panel.ui:260 panels/network/cc-wifi-panel.ui:16
 #: panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
-#: panels/user-accounts/cc-fingerprint-dialog.ui:43
+#: panels/user-accounts/cc-fingerprint-dialog.ui:44
 #: panels/user-accounts/cc-user-panel.ui:31
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -1608,34 +1608,30 @@ msgstr "Recuar"
 msgid "Display Settings Disabled"
 msgstr "Definições de ecrã desativadas"
 
-#: panels/display/cc-display-panel.ui:116
-msgid "Display Arrangement"
-msgstr "Disposição de ecrãs"
-
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:111
 msgid "Multiple Displays"
 msgstr "Múltiplos ecrãs"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:136
+#: panels/display/cc-display-panel.ui:120
 msgid "Join"
 msgstr "Juntar"
 
-#: panels/display/cc-display-panel.ui:143
+#: panels/display/cc-display-panel.ui:127
 msgid "Mirror"
 msgstr "Espelhar"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:155
 msgid "Contains top bar and Activities"
 msgstr "Contém a barra superior e as Atividades"
 
-#: panels/display/cc-display-panel.ui:157
+#: panels/display/cc-display-panel.ui:156
 msgid "Primary Display"
 msgstr "Ecrã principal"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:178
-#: panels/display/cc-display-panel.ui:229
+#: panels/display/cc-display-panel.ui:177
+#: panels/display/cc-display-panel.ui:228
 #: panels/display/cc-night-light-page.ui:115
 msgid "Night Light"
 msgstr "Luz noturna"
@@ -1793,22 +1789,79 @@ msgstr ""
 "Azul;cor;redshift;anoitecer;amanhecer;nascer do sol;pôr do sol;"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
-#: panels/firmware-security/cc-firmware-security-panel.c:105
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/firmware-security/cc-firmware-security-panel.c:106
 msgid "Secure Boot is Active"
 msgstr "O Arranque Seguro está ativo"
 
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
-#: panels/firmware-security/cc-firmware-security-panel.c:111
-msgid "Secure Boot has Problems"
-msgstr "O Arranque Seguro tem problemas"
+#. TRANSLATORS: this is the first section of the decription
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:76
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
+msgstr ""
+"O arranque seguro evita que software malicioso seja carregado quando o "
+"dispositivo inicia. Está atualmente ligado e a funcionar corretamente."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
-#: panels/firmware-security/cc-firmware-security-panel.c:117
-msgid "Secure Boot is Inactive"
-msgstr "O Arranque Seguro está inativo"
+msgid "Secure Boot Has Problems"
+msgstr "O Arranque Seguro tem problemas"
+
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:86
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
+msgstr ""
+"O arranque seguro evita que software malicioso seja carregado quando o "
+"dispositivo inicia. Está atualmente ligado, mas não funcionará devido a ter "
+"uma chave inválida."
+
+#. TRANSLATORS: this is the second section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
+msgid ""
+"Secure boot problems can often be resolved from your computer's UEFI "
+"firmware settings (BIOS) and your hardware manufacturer may provide "
+"information on how to do this."
+msgstr ""
+"Os problemas de arranque seguro podem muitas vezes ser resolvidos a partir "
+"das definições de firmware UEFI (BIOS) do seu computador e o fabricante do "
+"seu equipamento pode fornecer informações sobre como o fazer."
+
+#. TRANSLATORS: this is the third section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr ""
+"Para obter ajuda, entre em contacto com o seu fabricante de equipamento ou "
+"fornecedor de suporte de TI."
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+msgid "Secure Boot is Turned Off"
+msgstr "O Arranque Seguro está desligado"
+
+#. TRANSLATORS: this is the first section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:102
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+"O arranque seguro evita que software malicioso seja carregado quando o "
+"dispositivo arranca. Está atualmente desligado."
+
+#. TRANSLATORS: this is the second section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
+msgid ""
+"Secure boot can often be turned on from your computer's UEFI firmware "
+"settings (BIOS). For help, contact your hardware manufacturer or IT support "
+"provider."
+msgstr ""
+"O arranque seguro pode muitas vezes ser ligado a partir das definições de "
+"firmware UEFI (BIOS) do seu computador. Para obter ajuda, contacte o "
+"fabricante do seu equipamento ou o fornecedor de suporte informático."
 
 #: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
 msgid ""
@@ -1831,7 +1884,7 @@ msgstr "Dispositivo está em conformidade com o nível HSI %d"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:423
+#: panels/firmware-security/cc-firmware-security-panel.c:433
 msgid "No Protection"
 msgstr "Sem proteção"
 
@@ -1848,7 +1901,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:111
 #: panels/firmware-security/cc-firmware-security-dialog.ui:80
-#: panels/firmware-security/cc-firmware-security-panel.c:430
+#: panels/firmware-security/cc-firmware-security-panel.c:440
 msgid "Minimal Protection"
 msgstr "Proteção mínima"
 
@@ -1863,13 +1916,13 @@ msgstr ""
 "fornece proteção contra simples ameaças à segurança."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.c:127
 #: panels/firmware-security/cc-firmware-security-dialog.ui:94
-#: panels/firmware-security/cc-firmware-security-panel.c:437
+#: panels/firmware-security/cc-firmware-security-panel.c:447
 msgid "Basic Protection"
 msgstr "Proteção básica"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:125
+#: panels/firmware-security/cc-firmware-security-dialog.c:128
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
@@ -1878,13 +1931,13 @@ msgstr ""
 "hardware. Isto fornece proteção contra algumas ameaças comuns à segurança."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:146
 #: panels/firmware-security/cc-firmware-security-dialog.ui:108
-#: panels/firmware-security/cc-firmware-security-panel.c:444
+#: panels/firmware-security/cc-firmware-security-panel.c:454
 msgid "Extended Protection"
 msgstr "Proteção estendida"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:138
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
@@ -1894,23 +1947,23 @@ msgstr ""
 "hardware. Este é o mais alto nível de segurança do dispositivo e fornece "
 "proteção contra ameaças avançadas à segurança."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:147
+#: panels/firmware-security/cc-firmware-security-dialog.c:156
 msgid "Error: unable to determine HSI level."
 msgstr "Erro: incapaz de determinar o nível HSI."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:148
+#: panels/firmware-security/cc-firmware-security-dialog.c:157
 msgid "Error: unable to determine Incorrect HSI level."
 msgstr "Erro: incapaz de determinar o nível de HSI incorreto."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:232
+#: panels/firmware-security/cc-firmware-security-dialog.c:241
 msgid "Minimal Security Protections"
 msgstr "Proteções mínimas de segurança"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:237
+#: panels/firmware-security/cc-firmware-security-dialog.c:246
 msgid "Basic Security Protections"
 msgstr "Proteções básicas de segurança"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:242
+#: panels/firmware-security/cc-firmware-security-dialog.c:251
 msgid "Extended Security Protections"
 msgstr "Proteções de segurança estendidas"
 
@@ -1918,37 +1971,41 @@ msgstr "Proteções de segurança estendidas"
 msgid "Security Level"
 msgstr "Nível de segurança"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:106
+#: panels/firmware-security/cc-firmware-security-panel.c:107
 msgid "Protected against malicious software when the device starts."
 msgstr "Protegido contra software malicioso quando o dispositivo é iniciado."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:112
+msgid "Secure Boot has Problems"
+msgstr "O Arranque Seguro tem problemas"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Some protection when the device is started."
 msgstr "Alguma proteção quando o dispositivo é iniciado."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:118
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "No protection when the device is started."
 msgstr "Sem proteção quando o dispositivo é iniciado."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:424
+#: panels/firmware-security/cc-firmware-security-panel.c:434
 msgid "Highly exposed to security threats."
 msgstr "Altamente exposto a ameaças à segurança."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:431
+#: panels/firmware-security/cc-firmware-security-panel.c:441
 msgid "Limited protection against simple security threats."
 msgstr "Proteção limitada contra simples ameaças à segurança."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:438
+#: panels/firmware-security/cc-firmware-security-panel.c:448
 msgid "Protected against common security threats."
 msgstr "Protegido contra ameaças comuns à segurança."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:445
-#: panels/firmware-security/cc-firmware-security-panel.c:452
+#: panels/firmware-security/cc-firmware-security-panel.c:455
+#: panels/firmware-security/cc-firmware-security-panel.c:462
 msgid "Protected against a wide range of security threats."
 msgstr "Protegido contra uma ampla gama de ameaças à segurança."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:451
+#: panels/firmware-security/cc-firmware-security-panel.c:461
 msgid "Comprehensive Protection"
 msgstr "Proteção abrangente"
 
@@ -2798,7 +2855,7 @@ msgstr "Prima Esc para cancelar ou Backspace para desativar a tecla de atalho."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:141
+#: panels/user-accounts/cc-user-panel.ui:137
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Nome"
@@ -3309,29 +3366,29 @@ msgid "Not set up"
 msgstr "Indefinido"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:214
+#: panels/network/cc-wifi-connection-row.c:216
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Insecure network (WEP)"
 msgstr "Rede insegura (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network (WPA)"
 msgstr "Rede segura (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:281
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Secure network (WPA2)"
 msgstr "Rede segura (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:285
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA3)"
 msgstr "Rede segura (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:289
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network"
 msgstr "Rede segura"
 
@@ -4573,7 +4630,7 @@ msgstr "_Utilizador"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:190
+#: panels/user-accounts/cc-user-panel.ui:182
 msgid "_Password"
 msgstr "P_alavra-passe"
 
@@ -4932,18 +4989,18 @@ msgstr "Outro"
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:279
+#: panels/online-accounts/cc-online-accounts-panel.c:280
 #, c-format
 msgid "%s removed"
 msgstr "%s removido"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:690
+#: panels/online-accounts/cc-online-accounts-panel.c:691
 msgid "Error removing account"
 msgstr "Erro ao remover conta"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
 #: panels/online-accounts/cc-online-accounts-panel.ui:23
-#: panels/printers/printers.ui:51
+#: panels/printers/printers.ui:47
 msgid "Undo"
 msgstr "Desfazer"
 
@@ -5505,7 +5562,7 @@ msgstr ""
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr "Os nomes das impressoras não podem conter ESPAÇO, TAB, #, ou /"
 
-#: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:215
+#: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:211
 msgid "Location"
 msgstr "Localização"
 
@@ -6040,22 +6097,22 @@ msgstr "Limpar as cabeças de impressão"
 msgid "Remove Printer"
 msgstr "Remover a impressora"
 
-#: panels/printers/printer-entry.ui:187
+#: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Modelo"
 
-#: panels/printers/printer-entry.ui:242
+#: panels/printers/printer-entry.ui:238
 msgid "Ink Level"
 msgstr "Nível da tinta"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:304
+#: panels/printers/printer-entry.ui:300
 msgid "Please restart when the problem is resolved."
 msgstr "Reinicie quando o problema for solucionado."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:310
+#: panels/printers/printer-entry.ui:306
 msgid "Restart"
 msgstr "Reiniciar"
 
@@ -6064,17 +6121,17 @@ msgstr "Reiniciar"
 msgid "Add Printer…"
 msgstr "Adicionar impressora…"
 
-#: panels/printers/printers.ui:168
+#: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Sem impressoras"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:179
+#: panels/printers/printers.ui:171
 msgid "Add a Printer…"
 msgstr "Adicionar uma impressora…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:204
+#: panels/printers/printers.ui:196
 msgid ""
 "Sorry! The system printing service\n"
 "    doesn’t seem to be available."
@@ -6162,7 +6219,7 @@ msgid "Your Account"
 msgstr "A sua Conta"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:314
+#: panels/user-accounts/cc-user-panel.ui:306
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -6730,12 +6787,12 @@ msgstr "Volume"
 msgid "Alert Sound"
 msgstr "Alerta sonoro"
 
-#: panels/sound/cc-volume-slider.c:117
+#: panels/sound/cc-volume-slider.c:116
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: panels/sound/cc-volume-slider.ui:21
+#: panels/sound/cc-volume-slider.ui:22
 msgid "Mute"
 msgstr "Silenciar"
 
@@ -6832,7 +6889,7 @@ msgstr[0] "Depende de %u outro dispositivo"
 msgstr[1] "Depende de %u outros dispositivos"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-#: panels/thunderbolt/cc-bolt-panel.ui:40
+#: panels/thunderbolt/cc-bolt-panel.ui:41
 msgid "Close notification"
 msgstr "Fechar notificação"
 
@@ -6874,7 +6931,7 @@ msgstr ""
 "corretamente."
 
 #: panels/thunderbolt/cc-bolt-panel.c:425
-#: panels/thunderbolt/cc-bolt-panel.ui:160
+#: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Permitir acesso direto a dispositivos como as acoplagens e GPUs externas."
@@ -6906,23 +6963,23 @@ msgstr "O nível de segurança do Thunderbolt não pôde ser determinado."
 msgid "Error switching direct mode: %s"
 msgstr "Erro as alterar o modo direto: %s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:106
+#: panels/thunderbolt/cc-bolt-panel.ui:102
 msgid "No Thunderbolt Support"
 msgstr "Sem suporte ao Thunderbolt"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:107
+#: panels/thunderbolt/cc-bolt-panel.ui:103
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "Não foi possível a ligação ao subsistema do thunderbolt."
 
-#: panels/thunderbolt/cc-bolt-panel.ui:156
+#: panels/thunderbolt/cc-bolt-panel.ui:152
 msgid "Direct Access"
 msgstr "Acesso direto"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:228
+#: panels/thunderbolt/cc-bolt-panel.ui:224
 msgid "Pending Devices"
 msgstr "Dispositivos pendentes"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:322
+#: panels/thunderbolt/cc-bolt-panel.ui:318
 msgid "No devices attached"
 msgstr "Sem dispositivos acoplados"
 
@@ -7782,15 +7839,15 @@ msgstr "Gestor de impressão digital"
 msgid "Fingerprint"
 msgstr "Impressão digital"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:91
+#: panels/user-accounts/cc-fingerprint-dialog.ui:85
 msgid "_No"
 msgstr "_Não"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:99
+#: panels/user-accounts/cc-fingerprint-dialog.ui:93
 msgid "_Yes"
 msgstr "_Sim"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:119
+#: panels/user-accounts/cc-fingerprint-dialog.ui:113
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7798,32 +7855,32 @@ msgstr ""
 "Deseja eliminar as suas impressões digitais registadas de forma a que o "
 "acesso por impressões digitais seja desativado?"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:175
+#: panels/user-accounts/cc-fingerprint-dialog.ui:169
 msgid "No fingerprint device"
 msgstr "Nenhum dispositivo de impressão digital"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:190
+#: panels/user-accounts/cc-fingerprint-dialog.ui:184
 msgid "No Fingerprint device"
 msgstr "Nenhum dispositivo de impressão digital"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:199
+#: panels/user-accounts/cc-fingerprint-dialog.ui:193
 msgid "Ensure the device is properly connected."
 msgstr "Tenha a certeza de que o dispositivo está ligado corretamente."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:207
+#: panels/user-accounts/cc-fingerprint-dialog.ui:201
 msgid "Fingerprint Device"
 msgstr "Dispositivo de impressão digital"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:216
+#: panels/user-accounts/cc-fingerprint-dialog.ui:210
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Escolha o dispositivo de impressão digital que quer configurar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:246
+#: panels/user-accounts/cc-fingerprint-dialog.ui:240
 msgid "Fingerprint Login"
 msgstr "Início de sessão com impressão digital"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:252
+#: panels/user-accounts/cc-fingerprint-dialog.ui:246
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
@@ -7831,11 +7888,11 @@ msgstr ""
 "O acesso por impressão digital permite-lhe desbloquear e autenticar-se no "
 "computador com o seu dedo"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:279
+#: panels/user-accounts/cc-fingerprint-dialog.ui:273
 msgid "_Delete Fingerprints"
 msgstr "_Eliminar as impressões digitais"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:293
+#: panels/user-accounts/cc-fingerprint-dialog.ui:287
 msgid "Fingerprint Enroll"
 msgstr "Registo de impressão digital"
 
@@ -8246,41 +8303,41 @@ msgstr ""
 msgid "Restart Now"
 msgstr "Reiniciar agora"
 
-#: panels/user-accounts/cc-user-panel.ui:78
+#: panels/user-accounts/cc-user-panel.ui:79
 msgid "Close"
 msgstr "Fechar"
 
-#: panels/user-accounts/cc-user-panel.ui:124
+#: panels/user-accounts/cc-user-panel.ui:120
 msgid "Edit avatar"
 msgstr "Editar avatar"
 
-#: panels/user-accounts/cc-user-panel.ui:156
+#: panels/user-accounts/cc-user-panel.ui:152
 msgid "Full name"
 msgstr "Nome completo"
 
-#: panels/user-accounts/cc-user-panel.ui:174
+#: panels/user-accounts/cc-user-panel.ui:171
 #: panels/wwan/cc-wwan-apn-dialog.c:295
 msgid "Edit"
 msgstr "Editar"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:210
+#: panels/user-accounts/cc-user-panel.ui:202
 msgid "_Fingerprint Login"
 msgstr "Início de sessão com _impressão digital"
 
-#: panels/user-accounts/cc-user-panel.ui:233
+#: panels/user-accounts/cc-user-panel.ui:225
 msgid "A_utomatic Login"
 msgstr "Início de sessão a_utomático"
 
-#: panels/user-accounts/cc-user-panel.ui:246
+#: panels/user-accounts/cc-user-panel.ui:238
 msgid "Account Activity"
 msgstr "_Atividade da conta"
 
-#: panels/user-accounts/cc-user-panel.ui:274
+#: panels/user-accounts/cc-user-panel.ui:266
 msgid "_Administrator"
 msgstr "_Administrador"
 
-#: panels/user-accounts/cc-user-panel.ui:275
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -8288,32 +8345,32 @@ msgstr ""
 "Administradores podem adicionar ou remover outros utilizadores e podem mudar "
 "as definições de todos eles."
 
-#: panels/user-accounts/cc-user-panel.ui:291
+#: panels/user-accounts/cc-user-panel.ui:283
 msgid "_Parental Controls"
 msgstr "_Controlo Parental"
 
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "Open the Parental Controls application."
 msgstr "Abrir a aplicação de Controlo Parental."
 
-#: panels/user-accounts/cc-user-panel.ui:343
+#: panels/user-accounts/cc-user-panel.ui:335
 msgid "Remove User…"
 msgstr "Remover utilizador…"
 
-#: panels/user-accounts/cc-user-panel.ui:355
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Other Users"
 msgstr "Outros Utilizadores"
 
-#: panels/user-accounts/cc-user-panel.ui:368
+#: panels/user-accounts/cc-user-panel.ui:360
 msgid "Add User…"
 msgstr "Adicionar Utilizador…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:396
+#: panels/user-accounts/cc-user-panel.ui:388
 msgid "No Users Found"
 msgstr "Sem utilizadores"
 
-#: panels/user-accounts/cc-user-panel.ui:405
+#: panels/user-accounts/cc-user-panel.ui:397
 msgid "Unlock to add a user account."
 msgstr "Desbloquear para criar uma conta de utilizador."
 
@@ -9220,7 +9277,7 @@ msgstr "Categorias de definições"
 msgid "Privacy"
 msgstr "Privacidade"
 
-#: shell/cc-panel-loader.c:303
+#: shell/cc-panel-loader.c:304
 msgid "Available panels:"
 msgstr "Painéis disponíveis:"
 
@@ -9324,7 +9381,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9333,16 +9390,22 @@ msgstr[1] "%u saídas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "Display Arrangement"
+#~ msgstr "Disposição de ecrãs"
+
+#~ msgid "Secure Boot is Inactive"
+#~ msgstr "O Arranque Seguro está inativo"
 
 #~ msgid "Light"
 #~ msgstr "Claro"
