@@ -32,16 +32,24 @@
                     <child>
                       <object class="AdwPreferencesGroup">
                         <child>
-                          <object class="GtkImage" id="firmware_security_dialog_icon">
-                            <property name="margin-start">16</property>
-                            <property name="margin-end">16</property>
-                            <property name="margin-top">16</property>
-                            <property name="pixel-size">32</property>
+                          <object class="GtkBox" id="dialog_hsi_circle_box">
+                            <property name="orientation">vertical</property>
                             <property name="halign">center</property>
                             <property name="valign">center</property>
-                            <property name="icon-name">security-high-symbolic</property>
+                            <child>
+                              <object class="GtkLabel" id="dialog_hsi_circle_number">
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="vexpand">True</property>
+                                <property name="justify">center</property>
+                                <property name="label">9</property>
+                                <style>
+                                  <class name="hsi-level-font" />
+                                </style>
+                              </object>
+                            </child>
                             <style>
-                              <class name="security-level-icon"/>
+                              <class name="hsi-level-box" />
                             </style>
                           </object>
                         </child>
@@ -77,9 +85,30 @@
                           <object class="AdwActionRow" id="firmware_security_dialog_min_row">
                             <property name="use-underline">True</property>
                             <property name="activatable">True</property>
-                            <property name="title" translatable="yes">Minimal Protection</property>
-                            <property name="icon-name">emblem-default-symbolic</property>
+                            <property name="title" translatable="yes">Level 1</property>
                             <signal name="activated" handler="on_hsi_clicked_cb" swapped="no" />
+                            <child>
+                              <object class="GtkImage" id="hsi1_icon">
+                                <property name="icon-name">process-stop</property>
+                                <style>
+                                  <class name="hsi_icon" />
+                                  <class name="error-hsi-icon" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="hsi1_title">
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="vexpand">True</property>
+                                <property name="justify">left</property>
+                                <property name="label">Failed</property>
+                                <style>
+                                  <class name="hsi_label" />
+                                  <class name="error-title" />
+                                </style>
+                              </object>
+                            </child>
                             <child>
                               <object class="GtkImage">
                                 <property name="icon-name">go-next-symbolic</property>
@@ -91,9 +120,30 @@
                           <object class="AdwActionRow" id="firmware_security_dialog_basic_row">
                             <property name="use-underline">True</property>
                             <property name="activatable">True</property>
-                            <property name="title" translatable="yes">Basic Protection</property>
-                            <property name="icon-name">emblem-default-symbolic</property>
+                            <property name="title" translatable="yes">Level 2</property>
                             <signal name="activated" handler="on_hsi_clicked_cb" swapped="no" />
+                            <child>
+                              <object class="GtkImage" id="hsi2_icon">
+                                <property name="icon-name">process-stop</property>
+                                <style>
+                                  <class name="hsi_icon" />
+                                  <class name="error-hsi-icon" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="hsi2_title">
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="vexpand">True</property>
+                                <property name="justify">left</property>
+                                <property name="label">Failed</property>
+                                <style>
+                                  <class name="hsi_label" />
+                                  <class name="error-title" />
+                                </style>
+                              </object>
+                            </child>
                             <child>
                               <object class="GtkImage">
                                 <property name="icon-name">go-next-symbolic</property>
@@ -105,9 +155,30 @@
                           <object class="AdwActionRow" id="firmware_security_dialog_extend_row">
                             <property name="use-underline">True</property>
                             <property name="activatable">True</property>
-                            <property name="title" translatable="yes">Extended Protection</property>
-                            <property name="icon-name">emblem-default-symbolic</property>
+                            <property name="title" translatable="yes">Level 3</property>
                             <signal name="activated" handler="on_hsi_clicked_cb" swapped="no" />
+                            <child>
+                              <object class="GtkImage" id="hsi3_icon">
+                                <property name="icon-name">process-stop</property>
+                                <style>
+                                  <class name="hsi_icon" />
+                                  <class name="error-hsi-icon" />
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="hsi3_title">
+                                <property name="halign">start</property>
+                                <property name="valign">center</property>
+                                <property name="vexpand">True</property>
+                                <property name="justify">left</property>
+                                <property name="label">Failed</property>
+                                <style>
+                                  <class name="hsi_label" />
+                                  <class name="error-title" />
+                                </style>
+                              </object>
+                            </child>
                             <child>
                               <object class="GtkImage">
                                 <property name="icon-name">go-next-symbolic</property>

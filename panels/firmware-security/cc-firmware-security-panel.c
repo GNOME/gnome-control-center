@@ -41,7 +41,10 @@ struct _CcfirmwareSecurityPanel
 
   /* HSI button */
   GtkWidget        *hsi_grid;
-  GtkWidget        *hsi_icon;
+
+  GtkWidget        *hsi_circle_box;
+  GtkWidget        *hsi_circle_number;
+
   GtkWidget        *hsi_label;
   GtkWidget        *hsi_description;
 
@@ -115,7 +118,7 @@ set_secure_boot_button_view (CcfirmwareSecurityPanel *self)
     }
   else
     {
-      gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Turned Off"));
+      gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Off"));
       gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("No protection when the device is started."));
       gtk_widget_add_css_class (self->secure_boot_icon, "error");
     }
@@ -177,13 +180,13 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
   row = adw_expander_row_new ();
   if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
     {
-      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "emblem-default-symbolic");
+      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "emblem-ok");
       gtk_widget_add_css_class (row, "success-icon");
     }
   else
     {
-      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "dialog-warning-symbolic");
-      gtk_widget_add_css_class (row, "warning-icon");
+      adw_expander_row_set_icon_name (ADW_EXPANDER_ROW (row), "process-stop");
+      gtk_widget_add_css_class (row, "error-icon");
     }
 
   if (attr->description != NULL)
@@ -423,13 +426,36 @@ on_secure_boot_button_clicked_cb (GtkWidget *widget,
 
 static void
 set_hsi_button_view_contain (CcfirmwareSecurityPanel *self,
-                             const gchar             *icon_name,
-                             const gchar             *style,
+                             const int                hsi_number,
+
                              gchar                   *title,
                              const gchar             *description)
 {
-  gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), icon_name);
-  gtk_widget_add_css_class (self->hsi_icon, style);
+  switch (hsi_number)
+    {
+      case 0:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "0");
+        gtk_widget_add_css_class (self->hsi_circle_box, "level0");
+        gtk_widget_add_css_class (self->hsi_circle_number, "hsi0");
+        break;
+      case 1:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "1");
+        gtk_widget_add_css_class (self->hsi_circle_box, "level1");
+        gtk_widget_add_css_class (self->hsi_circle_number, "hsi1");
+        break;
+      case 2:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "2");
+        gtk_widget_add_css_class (self->hsi_circle_box, "level2");
+        gtk_widget_add_css_class (self->hsi_circle_number, "hsi2");
+        break;
+      case 3:
+      case 4:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "3");
+        gtk_widget_add_css_class (self->hsi_circle_box, "level3");
+        gtk_widget_add_css_class (self->hsi_circle_number, "hsi3");
+        break;
+    }
+
   gtk_label_set_text (GTK_LABEL (self->hsi_label), title);
   gtk_label_set_text (GTK_LABEL (self->hsi_description), description);
 }
@@ -440,36 +466,37 @@ set_hsi_button_view (CcfirmwareSecurityPanel *self)
   switch (self->hsi_number)
     {
       case 0:
-        set_hsi_button_view_contain (self, "dialog-warning-symbolic",
-                                     "error",
+        set_hsi_button_view_contain (self,
+                                     self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 0/4 stars */
-                                     _("No Protection"),
-                                     _("Highly exposed to security threats."));
+                                     _("Security Level 0"),
+                                     _("Exposed to serious security threats."));
         break;
       case 1:
-        set_hsi_button_view_contain (self, "security-low-symbolic",
-                                     "neutral",
+        set_hsi_button_view_contain (self,
+                                     self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 1/4 stars */
-                                     _("Minimal Protection"),
+                                     _("Security Level 1"),
                                      _("Limited protection against simple security threats."));
         break;
       case 2:
-        set_hsi_button_view_contain (self, "security-medium-symbolic",
-                                     "warning",
+        set_hsi_button_view_contain (self,
+                                     self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 2/4 stars */
-                                     _("Basic Protection"),
+                                     _("Security Level 2"),
                                      _("Protected against common security threats."));
         break;
       case 3:
-        set_hsi_button_view_contain (self, "security-high-symbolic",
-                                     "good",
+        set_hsi_button_view_contain (self,
+                                     self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 3/4 stars */
-                                     _("Extended Protection"),
+                                     _("Security Level 3"),
                                      _("Protected against a wide range of security threats."));
         break;
       case 4:
-        set_hsi_button_view_contain (self, "security-high-symbolic",
-                                     "good",
+        set_hsi_button_view_contain (self,
+                                     /* Based on current HSI definition, the max HSI value would be 3. */
+                                     3,
                                      /* TRANSLATORS: in reference to firmware protection: 4/4 stars */
                                      _("Comprehensive Protection"),
                                      _("Protected against a wide range of security threats."));
@@ -617,7 +644,8 @@ cc_firmware_security_panel_class_init (CcfirmwareSecurityPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, firmware_security_log_stack);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_button);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_description);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_icon);
+  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_circle_box);
+  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_circle_number);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_label);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_button);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_description);

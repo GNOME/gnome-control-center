@@ -123,9 +123,10 @@ void               fu_security_attr_free              (FwupdSecurityAttr *attr);
 
 G_DEFINE_AUTOPTR_CLEANUP_FUNC (FwupdSecurityAttr, fu_security_attr_free)
 
-gboolean     firmware_security_attr_has_flag (FwupdSecurityAttr       *attr,
-                                              FwupdSecurityAttrFlags   flag);
-void         load_custom_css                 (const char              *path);
-
+gboolean     firmware_security_attr_has_flag                    (FwupdSecurityAttr       *attr,
+                                                                 FwupdSecurityAttrFlags   flag);
+void         load_custom_css                                    (const char              *path);
+const gchar *fwupd_security_attr_result_to_string               (FwupdSecurityAttrResult  result);
+gboolean     fwupd_get_result_status                            (FwupdSecurityAttrResult  result);
 
 G_END_DECLS

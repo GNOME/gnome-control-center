@@ -70,6 +70,7 @@ cc_firmware_security_boot_dialog_new (SecureBootState secure_boot_state)
     case SECURE_BOOT_STATE_ACTIVE:
       /* TRANSLATORS: secure boot refers to the system firmware security mode */
       gtk_label_set_text (GTK_LABEL(dialog->secure_boot_title), _("Secure Boot is Active"));
+      gtk_image_set_from_icon_name (GTK_IMAGE (dialog->secure_boot_icon), "channel-secure-symbolic");
       gtk_widget_add_css_class (dialog->secure_boot_icon, "good");
       status_description = g_strdup_printf ("%s",
                                              /* TRANSLATORS: this is the first section of the decription */
