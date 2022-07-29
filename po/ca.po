@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-07-11 02:21+0000\n"
+"POT-Creation-Date: 2022-07-22 15:02+0000\n"
 "PO-Revision-Date: 2022-07-14 09:28+0100\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -54,8 +54,8 @@ msgid "Session Bus"
 msgstr "Sessió del bus"
 
 #: panels/applications/cc-applications-panel.c:796
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:269
-#: panels/thunderbolt/cc-bolt-panel.ui:313
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:265
+#: panels/thunderbolt/cc-bolt-panel.ui:309
 msgid "Devices"
 msgstr "Dispositius"
 
@@ -640,7 +640,7 @@ msgstr "_Continua"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:63
+#: panels/user-accounts/cc-fingerprint-dialog.ui:57
 msgid "_Done"
 msgstr "_Fet"
 
@@ -1606,7 +1606,7 @@ msgstr "_Aplica"
 #: panels/display/cc-display-panel.ui:260 panels/network/cc-wifi-panel.ui:16
 #: panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
-#: panels/user-accounts/cc-fingerprint-dialog.ui:43
+#: panels/user-accounts/cc-fingerprint-dialog.ui:44
 #: panels/user-accounts/cc-user-panel.ui:31
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -1799,22 +1799,79 @@ msgstr ""
 " de sol;"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
-#: panels/firmware-security/cc-firmware-security-panel.c:105
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/firmware-security/cc-firmware-security-panel.c:106
 msgid "Secure Boot is Active"
 msgstr "L'arrencada segura està activa"
 
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
-#: panels/firmware-security/cc-firmware-security-panel.c:111
-msgid "Secure Boot has Problems"
-msgstr "L'arrencada segura té problemes"
+#. TRANSLATORS: this is the first section of the decription
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:76
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
+msgstr ""
+"L'arrencada segura evita que el programari maliciós es carregui quan "
+"s'iniciï el dispositiu. Actualment està activat i funciona correctament."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
-#: panels/firmware-security/cc-firmware-security-panel.c:117
-msgid "Secure Boot is Inactive"
-msgstr "L'arrencada segura és inactiva"
+msgid "Secure Boot Has Problems"
+msgstr "L'arrencada segura té problemes"
+
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:86
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
+msgstr ""
+"L'arrencada segura evita que el programari maliciós es carregui quan "
+"s'iniciï el dispositiu. Actualment està activada, però no funcionarà ja que "
+"té una clau no vàlida."
+
+#. TRANSLATORS: this is the second section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
+msgid ""
+"Secure boot problems can often be resolved from your computer's UEFI "
+"firmware settings (BIOS) and your hardware manufacturer may provide "
+"information on how to do this."
+msgstr ""
+"Els problemes amb l'arrencada segura sovint es poden resoldre des de la "
+"configuració del microprogramari UEFI (BIOS) de l'ordinador i el fabricant "
+"del maquinari pot proporcionar informació sobre com fer-ho."
+
+#. TRANSLATORS: this is the third section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr ""
+"Per a obtenir ajuda, contacteu amb el fabricant del maquinari o amb el "
+" suport tècnic."
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+msgid "Secure Boot is Turned Off"
+msgstr "L'arrencada segura està desactivada"
+
+#. TRANSLATORS: this is the first section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:102
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+"L'arrencada segura evita que el programari maliciós es carregui quan "
+"s'iniciï el dispositiu. Actualment està desactivada."
+
+#. TRANSLATORS: this is the second section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
+msgid ""
+"Secure boot can often be turned on from your computer's UEFI firmware "
+"settings (BIOS). For help, contact your hardware manufacturer or IT support "
+"provider."
+msgstr ""
+"L'arrencada segura sovint es pot activar des de la configuració del "
+"microprogramari UEFI del vostre ordinador (BIOS). Per a obtenir ajuda, "
+"contacteu amb el fabricant del maquinari o amb el suport tècnic."
 
 #: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
 msgid ""
@@ -1835,7 +1892,7 @@ msgstr "El dispositiu s'ajusta al nivell %d HSI"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:423
+#: panels/firmware-security/cc-firmware-security-panel.c:433
 msgid "No Protection"
 msgstr "Sense protecció"
 
@@ -1852,7 +1909,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:111
 #: panels/firmware-security/cc-firmware-security-dialog.ui:80
-#: panels/firmware-security/cc-firmware-security-panel.c:430
+#: panels/firmware-security/cc-firmware-security-panel.c:440
 msgid "Minimal Protection"
 msgstr "Protecció mínima"
 
@@ -1867,13 +1924,13 @@ msgstr ""
 "proporciona protecció contra amenaces de seguretat simples."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.c:127
 #: panels/firmware-security/cc-firmware-security-dialog.ui:94
-#: panels/firmware-security/cc-firmware-security-panel.c:437
+#: panels/firmware-security/cc-firmware-security-panel.c:447
 msgid "Basic Protection"
 msgstr "Protecció bàsica"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:125
+#: panels/firmware-security/cc-firmware-security-dialog.c:128
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
@@ -1883,13 +1940,13 @@ msgstr ""
 "comunes."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:146
 #: panels/firmware-security/cc-firmware-security-dialog.ui:108
-#: panels/firmware-security/cc-firmware-security-panel.c:444
+#: panels/firmware-security/cc-firmware-security-panel.c:454
 msgid "Extended Protection"
 msgstr "Protecció ampliada"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:138
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
@@ -1899,23 +1956,23 @@ msgstr ""
 "maquinari. Aquest és el nivell de seguretat de dispositiu més alt i "
 "proporciona protecció contra amenaces de seguretat avançades."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:147
+#: panels/firmware-security/cc-firmware-security-dialog.c:156
 msgid "Error: unable to determine HSI level."
 msgstr "Error: no s'ha pogut determinar el nivell HSI."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:148
+#: panels/firmware-security/cc-firmware-security-dialog.c:157
 msgid "Error: unable to determine Incorrect HSI level."
 msgstr "Error: no s'ha pogut determinar el nivell HSI incorrecte."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:232
+#: panels/firmware-security/cc-firmware-security-dialog.c:241
 msgid "Minimal Security Protections"
 msgstr "Protecció mínima de seguretat"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:237
+#: panels/firmware-security/cc-firmware-security-dialog.c:246
 msgid "Basic Security Protections"
 msgstr "Protecció bàsica de seguretat"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:242
+#: panels/firmware-security/cc-firmware-security-dialog.c:251
 msgid "Extended Security Protections"
 msgstr "Protecció de seguretat ampliada"
 
@@ -1923,37 +1980,41 @@ msgstr "Protecció de seguretat ampliada"
 msgid "Security Level"
 msgstr "Nivell de seguretat"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:106
+#: panels/firmware-security/cc-firmware-security-panel.c:107
 msgid "Protected against malicious software when the device starts."
 msgstr "Protegit contra programari maliciós quan s'inicia el dispositiu."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:112
+msgid "Secure Boot has Problems"
+msgstr "L'arrencada segura té problemes"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Some protection when the device is started."
 msgstr "Algunes proteccions quan s'inicia el dispositiu."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:118
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "No protection when the device is started."
 msgstr "No hi ha cap protecció quan s'inicia el dispositiu."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:424
+#: panels/firmware-security/cc-firmware-security-panel.c:434
 msgid "Highly exposed to security threats."
 msgstr "Molt exposat a amenaces de seguretat."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:431
+#: panels/firmware-security/cc-firmware-security-panel.c:441
 msgid "Limited protection against simple security threats."
 msgstr "Protecció limitada contra amenaces de seguretat simples."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:438
+#: panels/firmware-security/cc-firmware-security-panel.c:448
 msgid "Protected against common security threats."
 msgstr "Protegit contra amenaces de seguretat comunes."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:445
-#: panels/firmware-security/cc-firmware-security-panel.c:452
+#: panels/firmware-security/cc-firmware-security-panel.c:455
+#: panels/firmware-security/cc-firmware-security-panel.c:462
 msgid "Protected against a wide range of security threats."
 msgstr "Protegit contra una àmplia gamma d'amenaces de seguretat."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:451
+#: panels/firmware-security/cc-firmware-security-panel.c:461
 msgid "Comprehensive Protection"
 msgstr "Protecció completa"
 
@@ -2806,7 +2867,7 @@ msgstr "Premeu Esc o Retrocés per a inhabilitar la drecera de teclat."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:141
+#: panels/user-accounts/cc-user-panel.ui:137
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Nom"
@@ -3295,7 +3356,9 @@ msgstr "Gestiona les preferències de productivitat i multitasca"
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
 msgid ""
 "Multitasking;Multitask;Productivity;Customize;Desktop;Hot Corner;Workspaces;"
-msgstr "Multitasca;Productivitat;Personalitza;Escriptori;Cantonada activa;Espais de treball"
+msgstr ""
+"Multitasca;Productivitat;Personalitza;Escriptori;Cantonada activa;Espais de "
+"treball"
 
 #: panels/network/cc-network-panel.c:662 panels/network/cc-wifi-panel.ui:303
 msgid "Oops, something has gone wrong. Please contact your software vendor."
@@ -4588,7 +4651,7 @@ msgstr "Nom d'_usuari"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:190
+#: panels/user-accounts/cc-user-panel.ui:182
 msgid "_Password"
 msgstr "_Contrasenya"
 
@@ -4944,19 +5007,19 @@ msgstr "Altres"
 
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
-#: panels/online-accounts/cc-online-accounts-panel.c:279
+#: panels/online-accounts/cc-online-accounts-panel.c:280
 #, c-format
 msgid "%s removed"
 msgstr "s'ha suprimit %s"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:690
+#: panels/online-accounts/cc-online-accounts-panel.c:691
 msgid "Error removing account"
 msgstr "S'ha produït un error en suprimir el compte"
 
 #. Translators: This is the button which allows undoing the removal of the
 #. printer.
 #: panels/online-accounts/cc-online-accounts-panel.ui:23
-#: panels/printers/printers.ui:51
+#: panels/printers/printers.ui:47
 msgid "Undo"
 msgstr "Desfés"
 
@@ -5528,7 +5591,7 @@ msgstr ""
 "Els noms de les impressores no poden contenir espai, tabulador, #, o /"
 
 #: panels/printers/pp-details-dialog.ui:89
-#: panels/printers/printer-entry.ui:215
+#: panels/printers/printer-entry.ui:211
 msgid "Location"
 msgstr "Ubicació"
 
@@ -6077,22 +6140,22 @@ msgstr "Neteja els capçals d'impressió"
 msgid "Remove Printer"
 msgstr "Suprimeix la impressora"
 
-#: panels/printers/printer-entry.ui:187
+#: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Model"
 
-#: panels/printers/printer-entry.ui:242
+#: panels/printers/printer-entry.ui:238
 msgid "Ink Level"
 msgstr "Nivell de tinta"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:304
+#: panels/printers/printer-entry.ui:300
 msgid "Please restart when the problem is resolved."
 msgstr "Reinicieu quan el problema estigui resolt."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:310
+#: panels/printers/printer-entry.ui:306
 msgid "Restart"
 msgstr "Torna a iniciar"
 
@@ -6101,17 +6164,17 @@ msgstr "Torna a iniciar"
 msgid "Add Printer…"
 msgstr "Afegeix una impressora…"
 
-#: panels/printers/printers.ui:168
+#: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Sense impressores"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:179
+#: panels/printers/printers.ui:171
 msgid "Add a Printer…"
 msgstr "Afegeix una impressora…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:204
+#: panels/printers/printers.ui:196
 msgid ""
 "Sorry! The system printing service\n"
 "    doesn’t seem to be available."
@@ -6199,7 +6262,7 @@ msgid "Your Account"
 msgstr "El teu compte"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:314
+#: panels/user-accounts/cc-user-panel.ui:306
 msgid "_Language"
 msgstr "_Idioma"
 
@@ -6769,12 +6832,12 @@ msgstr "Volum"
 msgid "Alert Sound"
 msgstr "So d'alerta"
 
-#: panels/sound/cc-volume-slider.c:117
+#: panels/sound/cc-volume-slider.c:116
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: panels/sound/cc-volume-slider.ui:21
+#: panels/sound/cc-volume-slider.ui:22
 msgid "Mute"
 msgstr "Silencia"
 
@@ -6873,7 +6936,7 @@ msgstr[0] "Depèn d'un altre dispositiu"
 msgstr[1] "Depèn de %u altres dispositius"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-#: panels/thunderbolt/cc-bolt-panel.ui:40
+#: panels/thunderbolt/cc-bolt-panel.ui:41
 msgid "Close notification"
 msgstr "Tanca la notificació"
 
@@ -6915,7 +6978,7 @@ msgstr ""
 "correctament."
 
 #: panels/thunderbolt/cc-bolt-panel.c:425
-#: panels/thunderbolt/cc-bolt-panel.ui:160
+#: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Permet l'accés als dispositius com ara acobladors o CPU externs."
 
@@ -6944,23 +7007,23 @@ msgstr "No s'ha pogut determinar el nivell de seguretat de Thunderbolt."
 msgid "Error switching direct mode: %s"
 msgstr "S'ha produït un error en canviar al mode directe: «%s»"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:106
+#: panels/thunderbolt/cc-bolt-panel.ui:102
 msgid "No Thunderbolt Support"
 msgstr "Sense compatibilitat Thunderbolt"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:107
+#: panels/thunderbolt/cc-bolt-panel.ui:103
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "No s'ha pogut connectar al subsistema Thunderbolt."
 
-#: panels/thunderbolt/cc-bolt-panel.ui:156
+#: panels/thunderbolt/cc-bolt-panel.ui:152
 msgid "Direct Access"
 msgstr "Accés directe"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:228
+#: panels/thunderbolt/cc-bolt-panel.ui:224
 msgid "Pending Devices"
 msgstr "Dispositius pendents"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:322
+#: panels/thunderbolt/cc-bolt-panel.ui:318
 msgid "No devices attached"
 msgstr "No hi ha cap dispositiu adjuntat"
 
@@ -7832,15 +7895,15 @@ msgstr "Gestor de l'empremta dactilar"
 msgid "Fingerprint"
 msgstr "Empremta dactilar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:91
+#: panels/user-accounts/cc-fingerprint-dialog.ui:85
 msgid "_No"
 msgstr "_No"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:99
+#: panels/user-accounts/cc-fingerprint-dialog.ui:93
 msgid "_Yes"
 msgstr "_Sí"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:119
+#: panels/user-accounts/cc-fingerprint-dialog.ui:113
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7848,33 +7911,33 @@ msgstr ""
 "Voleu suprimir les empremtes dactilars registrades de manera que "
 "s'inhabiliti l'inici de sessió amb empremta dactilar?"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:175
+#: panels/user-accounts/cc-fingerprint-dialog.ui:169
 msgid "No fingerprint device"
 msgstr "No hi ha cap dispositiu d'empremtes"
 
 #. Translators: This is the empty state page label which states that there are
 #. no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:190
+#: panels/user-accounts/cc-fingerprint-dialog.ui:184
 msgid "No Fingerprint device"
 msgstr "No hi ha cap dispositiu d'empremtes"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:199
+#: panels/user-accounts/cc-fingerprint-dialog.ui:193
 msgid "Ensure the device is properly connected."
 msgstr "Assegureu-vos que el dispositiu està correctament connectat."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:207
+#: panels/user-accounts/cc-fingerprint-dialog.ui:201
 msgid "Fingerprint Device"
 msgstr "Dispositiu d'empremtes"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:216
+#: panels/user-accounts/cc-fingerprint-dialog.ui:210
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Trieu el dispositiu d'empremtes que voleu configurar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:246
+#: panels/user-accounts/cc-fingerprint-dialog.ui:240
 msgid "Fingerprint Login"
 msgstr "Inici de sessió amb empremta dactilar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:252
+#: panels/user-accounts/cc-fingerprint-dialog.ui:246
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
@@ -7882,11 +7945,11 @@ msgstr ""
 "L'inici de sessió amb empremta dactilar permet desbloquejar i iniciar sessió"
 " a l'ordinador amb el dit"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:279
+#: panels/user-accounts/cc-fingerprint-dialog.ui:273
 msgid "_Delete Fingerprints"
 msgstr "_Suprimeix les empremtes dactilars"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:293
+#: panels/user-accounts/cc-fingerprint-dialog.ui:287
 msgid "Fingerprint Enroll"
 msgstr "Afegeix empremta dactilar"
 
@@ -8296,41 +8359,41 @@ msgstr "S'ha de tornar a iniciar la sessió perquè els canvis tinguin efecte"
 msgid "Restart Now"
 msgstr "Reinicia ara"
 
-#: panels/user-accounts/cc-user-panel.ui:78
+#: panels/user-accounts/cc-user-panel.ui:79
 msgid "Close"
 msgstr "Tanca"
 
-#: panels/user-accounts/cc-user-panel.ui:124
+#: panels/user-accounts/cc-user-panel.ui:120
 msgid "Edit avatar"
 msgstr "Edita l'avatar"
 
-#: panels/user-accounts/cc-user-panel.ui:156
+#: panels/user-accounts/cc-user-panel.ui:152
 msgid "Full name"
 msgstr "Nom complet"
 
-#: panels/user-accounts/cc-user-panel.ui:174
+#: panels/user-accounts/cc-user-panel.ui:171
 #: panels/wwan/cc-wwan-apn-dialog.c:295
 msgid "Edit"
 msgstr "Edita"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:210
+#: panels/user-accounts/cc-user-panel.ui:202
 msgid "_Fingerprint Login"
 msgstr "Inici de sessió amb _empremta dactilar"
 
-#: panels/user-accounts/cc-user-panel.ui:233
+#: panels/user-accounts/cc-user-panel.ui:225
 msgid "A_utomatic Login"
 msgstr "Inici de sessió a_utomàtic"
 
-#: panels/user-accounts/cc-user-panel.ui:246
+#: panels/user-accounts/cc-user-panel.ui:238
 msgid "Account Activity"
 msgstr "Activitat del compte"
 
-#: panels/user-accounts/cc-user-panel.ui:274
+#: panels/user-accounts/cc-user-panel.ui:266
 msgid "_Administrator"
 msgstr "_Administrador"
 
-#: panels/user-accounts/cc-user-panel.ui:275
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -8338,33 +8401,33 @@ msgstr ""
 "Els administradors poden afegir i suprimir altres usuaris, i poden canviar "
 "els paràmetres de tots els usuaris."
 
-#: panels/user-accounts/cc-user-panel.ui:291
+#: panels/user-accounts/cc-user-panel.ui:283
 msgid "_Parental Controls"
 msgstr "_Controls parentals"
 
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "Open the Parental Controls application."
 msgstr "Obre l'aplicació de controls parentals."
 
-#: panels/user-accounts/cc-user-panel.ui:343
+#: panels/user-accounts/cc-user-panel.ui:335
 msgid "Remove User…"
 msgstr "Suprimeix l'usuari..."
 
-#: panels/user-accounts/cc-user-panel.ui:355
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Other Users"
 msgstr "Altres usuaris"
 
-#: panels/user-accounts/cc-user-panel.ui:368
+#: panels/user-accounts/cc-user-panel.ui:360
 msgid "Add User…"
 msgstr "Afegeix usuari…"
 
 #. Translators: This is the empty state page label which states that there are
 #. no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:396
+#: panels/user-accounts/cc-user-panel.ui:388
 msgid "No Users Found"
 msgstr "No s'ha trobat cap usuari"
 
-#: panels/user-accounts/cc-user-panel.ui:405
+#: panels/user-accounts/cc-user-panel.ui:397
 msgid "Unlock to add a user account."
 msgstr "Desbloqueja per a afegir un compte d'usuari."
 
@@ -9274,7 +9337,7 @@ msgstr "Categories de configuració"
 msgid "Privacy"
 msgstr "Privacitat"
 
-#: shell/cc-panel-loader.c:303
+#: shell/cc-panel-loader.c:304
 msgid "Available panels:"
 msgstr "Quadres disponibles:"
 
@@ -9398,6 +9461,9 @@ msgstr[1] "%u entrades"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sons del sistema"
+
+#~ msgid "Secure Boot is Inactive"
+#~ msgstr "L'arrencada segura és inactiva"
 
 #~ msgid "Display Arrangement"
 #~ msgstr "Disposició de les pantalles"
