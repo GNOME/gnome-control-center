@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-07-02 17:48+0000\n"
-"PO-Revision-Date: 2022-07-02 20:25+0200\n"
+"POT-Creation-Date: 2022-07-29 14:25+0000\n"
+"PO-Revision-Date: 2022-07-30 20:32+0200\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-DamnedLies-Scope: partial\n"
 "X-Project-Style: gnome\n"
 
@@ -38,8 +38,8 @@ msgid "Session Bus"
 msgstr "Bus de session"
 
 #: panels/applications/cc-applications-panel.c:796
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:269
-#: panels/thunderbolt/cc-bolt-panel.ui:313
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:265
+#: panels/thunderbolt/cc-bolt-panel.ui:309
 msgid "Devices"
 msgstr "Periferics"
 
@@ -169,10 +169,10 @@ msgstr "Recebre las recèrcas sistèma e enviar los resultats."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:107
-#: panels/user-accounts/cc-user-panel.c:789
-#: panels/user-accounts/cc-user-panel.c:879
+#: panels/user-accounts/cc-user-panel.c:804
+#: panels/user-accounts/cc-user-panel.c:907
 #: panels/wwan/cc-wwan-device-page.c:478
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Desactivat"
 
@@ -361,8 +361,8 @@ msgstr "Seleccionar un imatge"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:579
-#: panels/user-accounts/cc-user-panel.c:597
+#: panels/user-accounts/cc-user-panel.c:594
+#: panels/user-accounts/cc-user-panel.c:612
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -625,7 +625,7 @@ msgstr "_Reprene"
 
 #. This button returns the user back to the color control panel
 #: panels/color/cc-color-calibrate.ui:40 panels/region/cc-format-chooser.ui:49
-#: panels/user-accounts/cc-fingerprint-dialog.ui:63
+#: panels/user-accounts/cc-fingerprint-dialog.ui:57
 msgid "_Done"
 msgstr "_Acabat"
 
@@ -724,6 +724,7 @@ msgid "All files"
 msgstr "Totes los fichièrs"
 
 #: panels/color/cc-color-panel.c:586
+#: panels/screen/gnome-screen-panel.desktop.in.in:3
 msgid "Screen"
 msgstr "Ecran"
 
@@ -1438,10 +1439,10 @@ msgstr ""
 #: panels/datetime/cc-datetime-panel.ui:212
 #: panels/display/cc-display-settings.ui:23
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/lock/cc-lock-panel.ui:39
-#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
-#: panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:876
+#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
+#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
+#: panels/user-accounts/cc-user-panel.c:802
+#: panels/user-accounts/cc-user-panel.c:904
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Activat"
@@ -1563,15 +1564,15 @@ msgstr "I"
 msgid "Off"
 msgstr "O"
 
-#: panels/display/cc-display-panel.c:949
+#: panels/display/cc-display-panel.c:955
 msgid "Apply Changes?"
 msgstr "Aplicar los cambiaments ?"
 
-#: panels/display/cc-display-panel.c:954
+#: panels/display/cc-display-panel.c:960
 msgid "Changes Cannot be Applied"
 msgstr "Los cambiaments pòdon pas èsser aplicats"
 
-#: panels/display/cc-display-panel.c:956
+#: panels/display/cc-display-panel.c:962
 msgid "This could be due to hardware limitations."
 msgstr "Aquò pòt venir de limitacions materialas."
 
@@ -1580,11 +1581,11 @@ msgstr "Aquò pòt venir de limitacions materialas."
 msgid "_Apply"
 msgstr "_Aplicar"
 
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:222
-#: panels/display/cc-display-panel.ui:261 panels/network/cc-wifi-panel.ui:16
+#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:221
+#: panels/display/cc-display-panel.ui:260 panels/network/cc-wifi-panel.ui:16
 #: panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
-#: panels/user-accounts/cc-fingerprint-dialog.ui:43
+#: panels/user-accounts/cc-fingerprint-dialog.ui:44
 #: panels/user-accounts/cc-user-panel.ui:31
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
@@ -1595,34 +1596,30 @@ msgstr "Precedent"
 msgid "Display Settings Disabled"
 msgstr "Paramètres d'afichatge desactivats"
 
-#: panels/display/cc-display-panel.ui:116
-msgid "Display Arrangement"
-msgstr "Disposicion dels ecrans"
-
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:111
 msgid "Multiple Displays"
 msgstr "Ecrans multiples"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:136
+#: panels/display/cc-display-panel.ui:120
 msgid "Join"
 msgstr "Fusionar"
 
-#: panels/display/cc-display-panel.ui:143
+#: panels/display/cc-display-panel.ui:127
 msgid "Mirror"
 msgstr "Clonar"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:155
 msgid "Contains top bar and Activities"
 msgstr "Content la barra superiora e las activitats"
 
-#: panels/display/cc-display-panel.ui:157
+#: panels/display/cc-display-panel.ui:156
 msgid "Primary Display"
 msgstr "Ecran principal"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:178
-#: panels/display/cc-display-panel.ui:229
+#: panels/display/cc-display-panel.ui:177
+#: panels/display/cc-display-panel.ui:228
 #: panels/display/cc-night-light-page.ui:115
 msgid "Night Light"
 msgstr "Mòde nuèit"
@@ -1780,22 +1777,101 @@ msgstr ""
 "levar;colcar;"
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:69
-#: panels/firmware-security/cc-firmware-security-panel.c:105
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
+#: panels/firmware-security/cc-firmware-security-panel.c:106
 msgid "Secure Boot is Active"
 msgstr "Aviada segura activa"
 
-#. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:75
-#: panels/firmware-security/cc-firmware-security-panel.c:111
-msgid "Secure Boot has Problems"
-msgstr "L’aviada segura a de problèmas"
+#. TRANSLATORS: this is the first section of the decription
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:76
+#, fuzzy
+#| msgid ""
+#| "Secure boot prevents malicious software from being loaded when the device "
+#| "starts.\n"
+#| "\n"
+#| "For more information, contact the hardware manufacturer or IT support."
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on and is functioning correctly."
+msgstr ""
+"L’aviada segura empacha los logicials malvolents de se cargar quand "
+"l’aparelh avia.\n"
+"\n"
+"Per mai d’informacions, contactatz lo fabricants del material o "
+"l’assisténcia tecnica."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
-#: panels/firmware-security/cc-firmware-security-panel.c:117
-msgid "Secure Boot is Inactive"
-msgstr "Aviada segura inactiva"
+#, fuzzy
+#| msgid "Secure Boot has Problems"
+msgid "Secure Boot Has Problems"
+msgstr "L’aviada segura a de problèmas"
+
+#. TRANSLATORS: this is the first section of the decription.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:86
+#, fuzzy
+#| msgid ""
+#| "Secure boot prevents malicious software from being loaded when the device "
+#| "starts.\n"
+#| "\n"
+#| "For more information, contact the hardware manufacturer or IT support."
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned on, but will not work due to having an "
+"invalid key."
+msgstr ""
+"L’aviada segura empacha los logicials malvolents de se cargar quand "
+"l’aparelh avia.\n"
+"\n"
+"Per mai d’informacions, contactatz lo fabricants del material o "
+"l’assisténcia tecnica."
+
+#. TRANSLATORS: this is the second section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
+msgid ""
+"Secure boot problems can often be resolved from your computer's UEFI "
+"firmware settings (BIOS) and your hardware manufacturer may provide "
+"information on how to do this."
+msgstr ""
+
+#. TRANSLATORS: this is the third section of description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
+msgid "For help, contact your hardware manufacturer or IT support provider."
+msgstr ""
+
+#. TRANSLATORS: secure boot refers to the system firmware security mode
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-panel.c:118
+#, fuzzy
+#| msgid "Camera is Turned Off"
+msgid "Secure Boot is Turned Off"
+msgstr "La camèra es inactiva"
+
+#. TRANSLATORS: this is the first section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:102
+#, fuzzy
+#| msgid ""
+#| "Secure boot prevents malicious software from being loaded when the device "
+#| "starts.\n"
+#| "\n"
+#| "For more information, contact the hardware manufacturer or IT support."
+msgid ""
+"Secure boot prevents malicious software from being loaded when the device "
+"starts. It is currently turned off."
+msgstr ""
+"L’aviada segura empacha los logicials malvolents de se cargar quand "
+"l’aparelh avia.\n"
+"\n"
+"Per mai d’informacions, contactatz lo fabricants del material o "
+"l’assisténcia tecnica."
+
+#. TRANSLATORS: this is the second section of the description.
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
+msgid ""
+"Secure boot can often be turned on from your computer's UEFI firmware "
+"settings (BIOS). For help, contact your hardware manufacturer or IT support "
+"provider."
+msgstr ""
 
 #: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
 msgid ""
@@ -1818,7 +1894,7 @@ msgstr "L’aparelh es confòrme al nivèl HSI %d"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:423
+#: panels/firmware-security/cc-firmware-security-panel.c:446
 msgid "No Protection"
 msgstr "Pas cap de proteccion"
 
@@ -1832,7 +1908,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:111
 #: panels/firmware-security/cc-firmware-security-dialog.ui:80
-#: panels/firmware-security/cc-firmware-security-panel.c:430
+#: panels/firmware-security/cc-firmware-security-panel.c:453
 msgid "Minimal Protection"
 msgstr "Proteccion minimala"
 
@@ -1844,49 +1920,75 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:124
+#: panels/firmware-security/cc-firmware-security-dialog.c:127
 #: panels/firmware-security/cc-firmware-security-dialog.ui:94
-#: panels/firmware-security/cc-firmware-security-panel.c:437
+#: panels/firmware-security/cc-firmware-security-panel.c:460
 msgid "Basic Protection"
 msgstr "Proteccion de basa"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:125
+#: panels/firmware-security/cc-firmware-security-dialog.c:128
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
 msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:146
 #: panels/firmware-security/cc-firmware-security-dialog.ui:108
-#: panels/firmware-security/cc-firmware-security-panel.c:444
+#: panels/firmware-security/cc-firmware-security-panel.c:467
 msgid "Extended Protection"
 msgstr "Proteccion espandida"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:138
+#: panels/firmware-security/cc-firmware-security-dialog.c:147
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
 "advanced security threats."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:147
+#: panels/firmware-security/cc-firmware-security-dialog.c:156
 msgid "Error: unable to determine HSI level."
 msgstr "Error : determinacion del nivèl HSI impossibla"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:148
+#: panels/firmware-security/cc-firmware-security-dialog.c:157
 msgid "Error: unable to determine Incorrect HSI level."
 msgstr "Error : determinacion de nivèl HSI incorrècte impossibla"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:232
+#. TRANSLATORS: hardware manufacturer as in OEM
+#: panels/firmware-security/cc-firmware-security-dialog.c:172
+#: panels/firmware-security/cc-firmware-security-dialog.c:182
+#: panels/firmware-security/cc-firmware-security-dialog.c:189
+msgid "Contact your hardware manufacturer for help with security updates."
+msgstr ""
+
+#. TRANSLATORS: support technician as in someone with root
+#: panels/firmware-security/cc-firmware-security-dialog.c:174
+msgid ""
+"It might be possible to resolve this issue in the device’s UEFI firmware "
+"settings, or by a support technician."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:183
+#: panels/firmware-security/cc-firmware-security-dialog.c:194
+msgid ""
+"It might be possible to resolve this issue in the device’s UEFI firmware "
+"settings."
+msgstr ""
+
+#. TRANSLATORS: support technician as in someone with root
+#: panels/firmware-security/cc-firmware-security-dialog.c:200
+msgid "It might be possible for a support technician to resolve this issue."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:300
 msgid "Minimal Security Protections"
 msgstr "Proteccions de seguretat minimalas"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:237
+#: panels/firmware-security/cc-firmware-security-dialog.c:305
 msgid "Basic Security Protections"
 msgstr "Proteccions de seguretat de basicas"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:242
+#: panels/firmware-security/cc-firmware-security-dialog.c:310
 msgid "Extended Security Protections"
 msgstr "Proteccions de seguretat espandidas"
 
@@ -1894,37 +1996,63 @@ msgstr "Proteccions de seguretat espandidas"
 msgid "Security Level"
 msgstr "Nivèl de seguretat"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:106
+#: panels/firmware-security/cc-firmware-security-panel.c:107
 msgid "Protected against malicious software when the device starts."
 msgstr ""
 
 #: panels/firmware-security/cc-firmware-security-panel.c:112
+msgid "Secure Boot has Problems"
+msgstr "L’aviada segura a de problèmas"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Some protection when the device is started."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:118
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "No protection when the device is started."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:424
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:138
+msgid ""
+"This issue could have been caused by a change in UEFI firmware settings, an "
+"operating system configuration change, or because of malicious software on "
+"this system."
+msgstr ""
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:146
+msgid ""
+"This issue could have been caused by a change in the UEFI firmware settings, "
+"or because of malicious software on this system."
+msgstr ""
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:153
+msgid ""
+"This issue could have been caused by an operating system configuration "
+"change, or because of malicious software on this system."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-panel.c:447
 msgid "Highly exposed to security threats."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:431
+#: panels/firmware-security/cc-firmware-security-panel.c:454
 msgid "Limited protection against simple security threats."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:438
+#: panels/firmware-security/cc-firmware-security-panel.c:461
 msgid "Protected against common security threats."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:445
-#: panels/firmware-security/cc-firmware-security-panel.c:452
+#: panels/firmware-security/cc-firmware-security-panel.c:468
+#: panels/firmware-security/cc-firmware-security-panel.c:475
 msgid "Protected against a wide range of security threats."
 msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:451
+#: panels/firmware-security/cc-firmware-security-panel.c:474
 msgid "Comprehensive Protection"
 msgstr "Proteccion complèta"
 
@@ -1932,257 +2060,263 @@ msgstr "Proteccion complèta"
 msgid "No Events"
 msgstr "Cap d’eveniment"
 
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:38
-msgid "SPI write"
-msgstr "escritura SPI"
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:37
+#, fuzzy
+#| msgid "Firmware attestation"
+msgid "Firmware Write Protection"
+msgstr "Atestacion d’integritat del micrologicial"
 
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:40
-msgid "SPI lock"
-msgstr "barrolh SPI"
-
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
 #: panels/firmware-security/cc-firmware-security-utils.c:42
-msgid "SPI BIOS region"
-msgstr "region SPI BIOS"
+#, fuzzy
+#| msgid "Firmware attestation"
+msgid "Firmware Write Protection Lock"
+msgstr "Atestacion d’integritat del micrologicial"
 
 #. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:44
-msgid "SPI BIOS Descriptor"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:47
+#, fuzzy
+#| msgid "Firmware Version"
+msgid "Firmware BIOS Region"
+msgstr "Version del micrologicial"
+
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:52
+#, fuzzy
+#| msgid "Firmware Version"
+msgid "Firmware BIOS Descriptor"
+msgstr "Version del micrologicial"
 
 #. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
-#: panels/firmware-security/cc-firmware-security-utils.c:46
-msgid "Pre-boot DMA protection is"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:57
+#, fuzzy
+#| msgid "No Protection"
+msgid "Pre-boot DMA Protection"
+msgstr "Pas cap de proteccion"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel
-#: panels/firmware-security/cc-firmware-security-utils.c:48
+#: panels/firmware-security/cc-firmware-security-utils.c:62
 msgid "Intel BootGuard"
 msgstr "Intel BootGuard"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * verified boot refers to the way the boot process is verified
-#: panels/firmware-security/cc-firmware-security-utils.c:51
-msgid "Intel BootGuard verified boot"
+#: panels/firmware-security/cc-firmware-security-utils.c:68
+#, fuzzy
+#| msgid "Intel BootGuard verified boot"
+msgid "Intel BootGuard Verified Boot"
 msgstr "Intel BootGuard aviada verificada"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * ACM means to verify the integrity of Initial Boot Block
-#: panels/firmware-security/cc-firmware-security-utils.c:54
-msgid "Intel BootGuard ACM protected"
+#: panels/firmware-security/cc-firmware-security-utils.c:74
+#, fuzzy
+#| msgid "Intel BootGuard ACM protected"
+msgid "Intel BootGuard ACM Protected"
 msgstr "Intel BootGuard ACM protegit"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * error policy is what to do on failure
-#: panels/firmware-security/cc-firmware-security-utils.c:57
-msgid "Intel BootGuard error policy"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:80
+#, fuzzy
+#| msgid "Intel BootGuard"
+msgid "Intel BootGuard Error Policy"
+msgstr "Intel BootGuard"
 
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * OTP = one time programmable
-#: panels/firmware-security/cc-firmware-security-utils.c:60
-msgid "Intel BootGuard OTP fuse"
-msgstr ""
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel
+#: panels/firmware-security/cc-firmware-security-utils.c:85
+#, fuzzy
+#| msgid "Intel BootGuard"
+msgid "Intel BootGuard Fuse"
+msgstr "Intel BootGuard"
 
 #. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
 #. * enabled means supported by the processor
-#: panels/firmware-security/cc-firmware-security-utils.c:63
-msgid "Intel CET"
+#: panels/firmware-security/cc-firmware-security-utils.c:91
+#, fuzzy
+#| msgid "Intel CET"
+msgid "Intel CET Enabled"
 msgstr "Intel CET"
 
 #. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
 #. * active means being used by the OS
-#: panels/firmware-security/cc-firmware-security-utils.c:66
+#: panels/firmware-security/cc-firmware-security-utils.c:97
 msgid "Intel CET Active"
 msgstr ""
 
 #. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
-#: panels/firmware-security/cc-firmware-security-utils.c:68
+#: panels/firmware-security/cc-firmware-security-utils.c:102
 msgid "Intel SMAP"
 msgstr "Intel SMAP"
 
 #. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
-#: panels/firmware-security/cc-firmware-security-utils.c:70
+#: panels/firmware-security/cc-firmware-security-utils.c:107
 msgid "Encrypted RAM"
 msgstr "RAM chifrada"
 
 #. TRANSLATORS: Title:
 #. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
-#: panels/firmware-security/cc-firmware-security-utils.c:73
-msgid "IOMMU device protection"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:113
+#, fuzzy
+#| msgid "No Protection"
+msgid "IOMMU Protection"
+msgstr "Pas cap de proteccion"
 
 #. TRANSLATORS: Title: lockdown is a security mode of the kernel
-#: panels/firmware-security/cc-firmware-security-utils.c:75
-msgid "Kernel lockdown"
+#: panels/firmware-security/cc-firmware-security-utils.c:118
+msgid "Linux Kernel Lockdown"
 msgstr ""
 
 #. TRANSLATORS: Title: if it's tainted or not
-#: panels/firmware-security/cc-firmware-security-utils.c:77
-msgid "Kernel tainted"
+#: panels/firmware-security/cc-firmware-security-utils.c:123
+msgid "Linux Kernel Verification"
 msgstr ""
 
 #. TRANSLATORS: Title: swap space or swap partition
-#: panels/firmware-security/cc-firmware-security-utils.c:79
-msgid "Linux swap"
+#: panels/firmware-security/cc-firmware-security-utils.c:128
+#, fuzzy
+#| msgid "Linux swap"
+msgid "Linux Swap"
 msgstr "Memòria d'escambi Linux"
 
 #. TRANSLATORS: Title: sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:81
-msgid "Suspend-to-ram"
-msgstr "Ivernada-amb-ram"
+#: panels/firmware-security/cc-firmware-security-utils.c:133
+#, fuzzy
+#| msgid "Suspend"
+msgid "Suspend To RAM"
+msgstr "Metre en velha"
 
 #. TRANSLATORS: Title: a better sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:83
-msgid "Suspend-to-idle"
+#: panels/firmware-security/cc-firmware-security-utils.c:138
+#, fuzzy
+#| msgid "Suspend-to-idle"
+msgid "Suspend To Idle"
 msgstr "Ivernada-quand-inactiu"
 
 #. TRANSLATORS: Title: PK is the 'platform key' for the machine
-#: panels/firmware-security/cc-firmware-security-utils.c:85
-msgid "UEFI platform key"
+#: panels/firmware-security/cc-firmware-security-utils.c:143
+#, fuzzy
+#| msgid "UEFI platform key"
+msgid "UEFI Platform Key"
 msgstr "clau de platafòrma UEFI"
 
 #. TRANSLATORS: Title: SB is a way of locking down UEFI
-#: panels/firmware-security/cc-firmware-security-utils.c:87
-msgid "Secure boot"
+#: panels/firmware-security/cc-firmware-security-utils.c:148
+#, fuzzy
+#| msgid "Secure boot"
+msgid "UEFI Secure Boot"
 msgstr "Aviada segura"
 
 #. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be empty
-#: panels/firmware-security/cc-firmware-security-utils.c:89
-msgid "All TPM PCRs are"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:153
+#, fuzzy
+#| msgid "Display Configuration"
+msgid "TPM Platform Configuration"
+msgstr "Configuracion dels ecrans"
 
 #. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
-#: panels/firmware-security/cc-firmware-security-utils.c:91
-msgid "TPM PCR0 reconstruction"
+#: panels/firmware-security/cc-firmware-security-utils.c:158
+msgid "TPM Reconstruction"
 msgstr ""
 
 #. TRANSLATORS: Title: TPM = Trusted Platform Module
-#: panels/firmware-security/cc-firmware-security-utils.c:93
+#: panels/firmware-security/cc-firmware-security-utils.c:163
 msgid "TPM v2.0"
 msgstr "TPM v2.0"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:95
-msgid "MEI manufacturing mode"
-msgstr "M̀òde MEI d’usina"
+#: panels/firmware-security/cc-firmware-security-utils.c:168
+msgid "Intel Management Engine Manufacturing Mode"
+msgstr ""
 
-#. TRANSLATORS: Title: MEI = Intel Management Engine, and the
-#. * "override" is the physical PIN that can be driven to
-#. * logic high -- luckily it is probably not accessible to
-#. * end users on consumer boards
-#: panels/firmware-security/cc-firmware-security-utils.c:100
-msgid "MEI override"
+#. TRANSLATORS: Title: MEI = Intel Management Engine, and the "override" is enabled
+#. * with a jumper -- luckily it is probably not accessible to end users on consumer
+#. * boards
+#: panels/firmware-security/cc-firmware-security-utils.c:175
+msgid "Intel Management Engine Override"
 msgstr ""
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:102
-msgid "MEI version"
-msgstr "Version del MEI"
+#: panels/firmware-security/cc-firmware-security-utils.c:180
+msgid "Intel Management Engine Version"
+msgstr ""
 
 #. TRANSLATORS: Title: if firmware updates are available
-#: panels/firmware-security/cc-firmware-security-utils.c:104
-msgid "Firmware updates"
+#: panels/firmware-security/cc-firmware-security-utils.c:185
+#, fuzzy
+#| msgid "Firmware updates"
+msgid "Firmware Updates"
 msgstr "Mesas a jorn del micrologicial"
 
 #. TRANSLATORS: Title: if we can verify the firmware checksums
-#: panels/firmware-security/cc-firmware-security-utils.c:106
-msgid "Firmware attestation"
+#: panels/firmware-security/cc-firmware-security-utils.c:190
+#, fuzzy
+#| msgid "Firmware attestation"
+msgid "Firmware Attestation"
 msgstr "Atestacion d’integritat del micrologicial"
 
 #. TRANSLATORS: Title: if the fwupd plugins are all present and correct
-#: panels/firmware-security/cc-firmware-security-utils.c:108
-msgid "fwupd plugins"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:195
+#, fuzzy
+#| msgid "Firmware attestation"
+msgid "Firmware Updater Verification"
+msgstr "Atestacion d’integritat del micrologicial"
 
-#. TRANSLATORS: Title: Direct Connect Interface (DCI) allows
-#. * debugging of Intel processors using the USB3 port
-#: panels/firmware-security/cc-firmware-security-utils.c:111
-#: panels/firmware-security/cc-firmware-security-utils.c:112
-msgid "Intel DCI debugger"
-msgstr ""
-
-#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
-#: panels/firmware-security/cc-firmware-security-utils.c:114
-msgid "Pre-boot DMA protection"
+#. TRANSLATORS: Title: Allows debugging of parts using proprietary hardware
+#: panels/firmware-security/cc-firmware-security-utils.c:201
+msgid "Platform Debugging"
 msgstr ""
 
 #. TRANSLATORS: Title: if fwupd supports HSI on this chip
-#: panels/firmware-security/cc-firmware-security-utils.c:116
-msgid "Supported CPU"
-msgstr "CPU pres en carga"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:150
-msgid "IOMMU device protection enabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:156
-msgid "IOMMU device protection disabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:176
-msgid "Kernel is no longer tainted"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:182
-msgid "Kernel is tainted"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:188
-msgid "Kernel lockdown disabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:194
-msgid "Kernel lockdown enabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:200
-msgid "Pre-boot DMA protection is disabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
 #: panels/firmware-security/cc-firmware-security-utils.c:206
-msgid "Pre-boot DMA protection is enabled"
+msgid "Processor Security Checks"
 msgstr ""
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:212
-msgid "Secure Boot disabled"
-msgstr "Aviada segura desactivada"
+#. TRANSLATORS: Title: if firmware enforces rollback protection
+#: panels/firmware-security/cc-firmware-security-utils.c:211
+#, fuzzy
+#| msgid "No Protection"
+msgid "AMD Rollback Protection"
+msgstr "Pas cap de proteccion"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:218
-msgid "Secure Boot enabled"
-msgstr "Aviada segura activada"
+#. TRANSLATORS: Title: if hardware enforces control of SPI replays
+#: panels/firmware-security/cc-firmware-security-utils.c:216
+#, fuzzy
+#| msgid "Minimal Protection"
+msgid "AMD Firmware Replay Protection"
+msgstr "Proteccion minimala"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:224
-msgid "All TPM PCRs are valid"
+#. TRANSLATORS: Title: if hardware enforces control of SPI writes
+#: panels/firmware-security/cc-firmware-security-utils.c:221
+#, fuzzy
+#| msgid "Minimal Security Protections"
+msgid "AMD Firmware Write Protection"
+msgstr "Proteccions de seguretat minimalas"
+
+#. TRANSLATORS: Title: if the part has been fused
+#: panels/firmware-security/cc-firmware-security-utils.c:226
+msgid "Fused Platform"
 msgstr ""
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:230
-msgid "All TPM PCRs are now valid"
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:3
+#, fuzzy
+#| msgid "Security"
+msgid "Device Security"
+msgstr "Seguretat"
+
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:4
+msgid "Host firmware security status"
 msgstr ""
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:236
-msgid "A TPM PCR is now an invalid value"
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:20
+msgid ""
+"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+"network;identity;privacy;"
 msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:242
-msgid "TPM PCR0 reconstruction is invalid"
-msgstr ""
+"ecran;verrolhar;verrolhatge;diagnotic;confidencialitat;recent;temporari;nom;"
+"ret;malhum;identitat;tmp;privat;privada;vida;"
 
 #: panels/info-overview/cc-info-overview-panel.c:296
 #: panels/info-overview/cc-info-overview-panel.c:320
@@ -2779,7 +2913,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:161
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:141
+#: panels/user-accounts/cc-user-panel.ui:137
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Nom"
@@ -2862,172 +2996,6 @@ msgstr "Protegir vòstras informacions de localizacion"
 #: panels/location/gnome-location-panel.desktop.in.in:20
 msgid "location;gps;private;privacy;"
 msgstr "localizacion;gps;privat;confidencialitat;"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:62
-msgctxt "lock_screen"
-msgid "Screen Turns Off"
-msgstr "Atudament de l’ecran"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:65
-msgctxt "lock_screen"
-msgid "30 seconds"
-msgstr "30 segondas"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:68
-msgctxt "lock_screen"
-msgid "1 minute"
-msgstr "1 minuta"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:71
-msgctxt "lock_screen"
-msgid "2 minutes"
-msgstr "2 minutas"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:74
-msgctxt "lock_screen"
-msgid "3 minutes"
-msgstr "3 minutas"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:77
-msgctxt "lock_screen"
-msgid "5 minutes"
-msgstr "5 minutas"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:80
-msgctxt "lock_screen"
-msgid "30 minutes"
-msgstr "30 minutas"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:83
-msgctxt "lock_screen"
-msgid "1 hour"
-msgstr "1 ora"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:126
-msgctxt "blank_screen"
-msgid "1 minute"
-msgstr "1 minuta"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:129
-msgctxt "blank_screen"
-msgid "2 minutes"
-msgstr "2 minutas"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:132
-msgctxt "blank_screen"
-msgid "3 minutes"
-msgstr "3 minutas"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:135
-msgctxt "blank_screen"
-msgid "4 minutes"
-msgstr "4 minutas"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:138
-msgctxt "blank_screen"
-msgid "5 minutes"
-msgstr "5 minutas"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:141
-msgctxt "blank_screen"
-msgid "8 minutes"
-msgstr "8 minutas"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:144
-msgctxt "blank_screen"
-msgid "10 minutes"
-msgstr "10 minutas"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:147
-msgctxt "blank_screen"
-msgid "12 minutes"
-msgstr "12 minutas"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:150
-msgctxt "blank_screen"
-msgid "15 minutes"
-msgstr "15 minutas"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:153
-msgctxt "blank_screen"
-msgid "Never"
-msgstr "Jamai"
-
-#: panels/lock/cc-lock-panel.ui:8
-msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
-"while you're away."
-msgstr ""
-"Verrolhar automaticament l’ecran empacha qual que siá d’accedir a vòstre "
-"ordenador quand vos absentatz."
-
-#: panels/lock/cc-lock-panel.ui:13
-msgid "Blank Screen Delay"
-msgstr "Relambi de l’ecran negre"
-
-#: panels/lock/cc-lock-panel.ui:14
-msgid "Period of inactivity after which the screen will go blank."
-msgstr "Periòde d’inactivitat aprèp la qual l’ecran s’atuda."
-
-#: panels/lock/cc-lock-panel.ui:32
-msgid "Automatic Screen _Lock"
-msgstr "_Verrolhatge automatic de l'ecran"
-
-#: panels/lock/cc-lock-panel.ui:49
-msgid "Automatic _Screen Lock Delay"
-msgstr "Relambi del _verrolhatge automatic de l’ecran"
-
-#: panels/lock/cc-lock-panel.ui:50
-msgid "Period after the screen blanks when the screen is automatically locked."
-msgstr ""
-"Temps aprèp que l’ecran siá passat al negre quand se verrolha automaticament."
-
-#: panels/lock/cc-lock-panel.ui:68
-msgid "Show _Notifications on Lock Screen"
-msgstr "Afichar las _notificacions sus l’ecran de verrolhatge"
-
-#: panels/lock/cc-lock-panel.ui:86
-msgid "Forbid new _USB devices"
-msgstr "Interdire los periferics _USB novèls"
-
-#: panels/lock/cc-lock-panel.ui:87
-msgid ""
-"Prevent new USB devices from interacting with the system when the screen is "
-"locked."
-msgstr ""
-"Empacha los periferics USB novèls d’interagir amb lo sistèma del temps que "
-"l’ecran es verrolhat."
-
-#: panels/lock/gnome-lock-panel.desktop.in.in:3
-msgid "Screen Lock"
-msgstr "Verrolhatge de l'ecran"
-
-#: panels/lock/gnome-lock-panel.desktop.in.in:4
-msgid "Lock your screen"
-msgstr "Verrolhar l'ecran"
-
-#. Translators: Search terms to find the Lock panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/lock/gnome-lock-panel.desktop.in.in:20
-msgid "screen;lock;private;privacy;"
-msgstr "ecran;verrolh;privat;confidencialitat;"
 
 #: panels/microphone/cc-microphone-panel.ui:23
 msgid "Microphone Turned Off"
@@ -3291,29 +3259,29 @@ msgid "Not set up"
 msgstr "Pas configurat"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:214
+#: panels/network/cc-wifi-connection-row.c:216
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID : %s)"
 
-#: panels/network/cc-wifi-connection-row.c:273
+#: panels/network/cc-wifi-connection-row.c:275
 msgid "Insecure network (WEP)"
 msgstr "Ret pas segur (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:277
+#: panels/network/cc-wifi-connection-row.c:279
 msgid "Secure network (WPA)"
 msgstr "Ret segur (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:281
+#: panels/network/cc-wifi-connection-row.c:283
 msgid "Secure network (WPA2)"
 msgstr "Ret segur (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:285
+#: panels/network/cc-wifi-connection-row.c:287
 msgid "Secure network (WPA3)"
 msgstr "Ret segur (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:289
+#: panels/network/cc-wifi-connection-row.c:291
 msgid "Secure network"
 msgstr "Ret segur"
 
@@ -3373,7 +3341,7 @@ msgstr "Nom de la ret"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
 #: panels/printers/new-printer-dialog.ui:338
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:391
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:384
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:364
@@ -4551,7 +4519,7 @@ msgstr "Nom d'_utilizaire"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:190
+#: panels/user-accounts/cc-user-panel.ui:182
 msgid "_Password"
 msgstr "Se_nhal"
 
@@ -4910,18 +4878,18 @@ msgstr "Autre"
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:279
+#: panels/online-accounts/cc-online-accounts-panel.c:280
 #, c-format
 msgid "%s removed"
 msgstr "%s suprimit"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:690
+#: panels/online-accounts/cc-online-accounts-panel.c:691
 msgid "Error removing account"
 msgstr "Error al moment de la supression del compte"
 
 #. Translators: This is the button which allows undoing the removal of the printer.
 #: panels/online-accounts/cc-online-accounts-panel.ui:23
-#: panels/printers/printers.ui:51
+#: panels/printers/printers.ui:47
 msgid "Undo"
 msgstr "Anullar"
 
@@ -5486,7 +5454,7 @@ msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr ""
 "Los noms d’imprimentas pòdon pas conténer d’espaci, de tabulacion, # o /"
 
-#: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:215
+#: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:211
 msgid "Location"
 msgstr "Emplaçament"
 
@@ -5855,7 +5823,7 @@ msgstr "Opcion per defaut de l'imprimenta"
 #. Translators: this is an option of "GhostScript"
 #: panels/printers/pp-ppd-option-widget.c:89
 msgid "Embed GhostScript fonts only"
-msgstr "Incorporar solament las poliças GhostScript"
+msgstr "Incorporar solament las polissas GhostScript"
 
 #. Translators: this is an option of "GhostScript"
 #: panels/printers/pp-ppd-option-widget.c:91
@@ -6022,22 +5990,22 @@ msgstr "Netejar las tèstas d’impression"
 msgid "Remove Printer"
 msgstr "Suprimir l'imprimenta"
 
-#: panels/printers/printer-entry.ui:187
+#: panels/printers/printer-entry.ui:183
 #: panels/wwan/cc-wwan-details-dialog.ui:184
 msgid "Model"
 msgstr "Modèl"
 
-#: panels/printers/printer-entry.ui:242
+#: panels/printers/printer-entry.ui:238
 msgid "Ink Level"
 msgstr "Nivèl de tinta"
 
 #. Translators: This is the message which follows the printer error.
-#: panels/printers/printer-entry.ui:304
+#: panels/printers/printer-entry.ui:300
 msgid "Please restart when the problem is resolved."
 msgstr "Reaviar aprèp resolucion del problèma."
 
 #. Translators: This is the button which restarts the printer.
-#: panels/printers/printer-entry.ui:310
+#: panels/printers/printer-entry.ui:306
 msgid "Restart"
 msgstr "Reaviar"
 
@@ -6046,17 +6014,17 @@ msgstr "Reaviar"
 msgid "Add Printer…"
 msgstr "Apondre una imprimenta…"
 
-#: panels/printers/printers.ui:168
+#: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Cap d’imprimenta"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:179
+#: panels/printers/printers.ui:171
 msgid "Add a Printer…"
 msgstr "Apondre una imprimenta…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:204
+#: panels/printers/printers.ui:196
 msgid ""
 "Sorry! The system printing service\n"
 "    doesn’t seem to be available."
@@ -6144,7 +6112,7 @@ msgid "Your Account"
 msgstr "Vòstre compte"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:314
+#: panels/user-accounts/cc-user-panel.ui:306
 msgid "_Language"
 msgstr "_Lenga"
 
@@ -6316,6 +6284,184 @@ msgid ""
 msgstr ""
 "periferic;sistèma;per defaut;aplicacion;preferida;cd;dvd;usb;àudio;vidèo;"
 "disc;amovible;mèdia;execucion automatica;"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:70
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr "Atudament de l’ecran"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:73
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "30 segondas"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:76
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "1 minuta"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:79
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "2 minutas"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:82
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 minutas"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:85
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 minutas"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:88
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "30 minutas"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:91
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "1 ora"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:134
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "1 minuta"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:137
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 minutas"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:140
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 minutas"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:143
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 minutas"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:146
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 minutas"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:149
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 minutas"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:152
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 minutas"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:155
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 minutas"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:158
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "15 minutas"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:161
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "Jamai"
+
+#: panels/screen/cc-screen-panel.ui:8
+msgid "Screen Lock"
+msgstr "Verrolhatge de l'ecran"
+
+#: panels/screen/cc-screen-panel.ui:9
+msgid ""
+"Automatically locking the screen prevents others from accessing the computer "
+"while you're away."
+msgstr ""
+"Verrolhar automaticament l’ecran empacha qual que siá d’accedir a vòstre "
+"ordenador quand vos absentatz."
+
+#: panels/screen/cc-screen-panel.ui:14
+msgid "Blank Screen Delay"
+msgstr "Relambi de l’ecran negre"
+
+#: panels/screen/cc-screen-panel.ui:15
+msgid "Period of inactivity after which the screen will go blank."
+msgstr "Periòde d’inactivitat aprèp la qual l’ecran s’atuda."
+
+#: panels/screen/cc-screen-panel.ui:33
+msgid "Automatic Screen _Lock"
+msgstr "_Verrolhatge automatic de l'ecran"
+
+#: panels/screen/cc-screen-panel.ui:50
+msgid "Automatic _Screen Lock Delay"
+msgstr "Relambi del _verrolhatge automatic de l’ecran"
+
+#: panels/screen/cc-screen-panel.ui:51
+msgid "Period after the screen blanks when the screen is automatically locked."
+msgstr ""
+"Temps aprèp que l’ecran siá passat al negre quand se verrolha automaticament."
+
+#: panels/screen/cc-screen-panel.ui:69
+msgid "Show _Notifications on Lock Screen"
+msgstr "Afichar las _notificacions sus l’ecran de verrolhatge"
+
+#: panels/screen/cc-screen-panel.ui:87
+msgid "Forbid new _USB devices"
+msgstr "Interdire los periferics _USB novèls"
+
+#: panels/screen/cc-screen-panel.ui:88
+msgid ""
+"Prevent new USB devices from interacting with the system when the screen is "
+"locked."
+msgstr ""
+"Empacha los periferics USB novèls d’interagir amb lo sistèma del temps que "
+"l’ecran es verrolhat."
+
+#: panels/screen/cc-screen-panel.ui:108
+#, fuzzy
+#| msgid "Privacy"
+msgid "Screen Privacy"
+msgstr "Confidencialitat"
+
+#: panels/screen/cc-screen-panel.ui:113
+msgid "Restrict Viewing Angle"
+msgstr ""
+
+#: panels/screen/gnome-screen-panel.desktop.in.in:4
+#, fuzzy
+#| msgid "Screen Sharing"
+msgid "Screen Settings"
+msgstr "Partiment de l'ecran"
+
+#. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/screen/gnome-screen-panel.desktop.in.in:20
+msgid "screen;lock;private;privacy;"
+msgstr "ecran;verrolh;privat;confidencialitat;"
 
 #: panels/search/cc-search-locations-dialog.c:674
 msgid "Select Location"
@@ -6549,8 +6695,8 @@ msgstr ""
 
 #: panels/sharing/cc-sharing-panel.ui:318
 #: panels/sharing/cc-sharing-panel.ui:345
-#: panels/sharing/cc-sharing-panel.ui:379
-#: panels/sharing/cc-sharing-panel.ui:405
+#: panels/sharing/cc-sharing-panel.ui:372
+#: panels/sharing/cc-sharing-panel.ui:390
 msgid "Copy"
 msgstr "Copiar"
 
@@ -6571,15 +6717,15 @@ msgstr ""
 msgid "User Name"
 msgstr "Nom d’utilizaire"
 
-#: panels/sharing/cc-sharing-panel.ui:420
+#: panels/sharing/cc-sharing-panel.ui:405
 msgid "Verify Encryption"
 msgstr "Verificar lo chiframent"
 
-#: panels/sharing/cc-sharing-panel.ui:449
+#: panels/sharing/cc-sharing-panel.ui:434
 msgid "Encryption Fingerprint"
 msgstr "Chiframent per emprentas"
 
-#: panels/sharing/cc-sharing-panel.ui:450
+#: panels/sharing/cc-sharing-panel.ui:435
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6587,15 +6733,15 @@ msgstr ""
 "L'emprunta de chiframent se vei pendent la connexion als clients e deu èsser "
 "identica."
 
-#: panels/sharing/cc-sharing-panel.ui:482
+#: panels/sharing/cc-sharing-panel.ui:467
 msgid "Media Sharing"
 msgstr "Partejar los mèdias"
 
-#: panels/sharing/cc-sharing-panel.ui:504
+#: panels/sharing/cc-sharing-panel.ui:489
 msgid "Share music, photos and videos over the network."
 msgstr "Partejar de la musica, de fòtos e de vidèos sus la ret."
 
-#: panels/sharing/cc-sharing-panel.ui:517
+#: panels/sharing/cc-sharing-panel.ui:502
 msgid "Folders"
 msgstr "Dorsièrs"
 
@@ -6710,12 +6856,12 @@ msgstr "Volum"
 msgid "Alert Sound"
 msgstr "Son d’alèrta"
 
-#: panels/sound/cc-volume-slider.c:117
+#: panels/sound/cc-volume-slider.c:116
 msgctxt "volume"
 msgid "100%"
 msgstr "100 %"
 
-#: panels/sound/cc-volume-slider.ui:21
+#: panels/sound/cc-volume-slider.ui:22
 msgid "Mute"
 msgstr "Mut"
 
@@ -6813,7 +6959,7 @@ msgstr[0] "Depend de %u autre periferic"
 msgstr[1] "Depend de %u autres periferics"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.ui:43
-#: panels/thunderbolt/cc-bolt-panel.ui:40
+#: panels/thunderbolt/cc-bolt-panel.ui:41
 msgid "Close notification"
 msgstr "Tampar la notificacion"
 
@@ -6854,7 +7000,7 @@ msgstr ""
 "Lo sossistèma Thunderbolt (boltd) es pas installat o es mal configurat."
 
 #: panels/thunderbolt/cc-bolt-panel.c:425
-#: panels/thunderbolt/cc-bolt-panel.ui:160
+#: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
 "Autorizar l’accès dirècte als periferics tals coma las estacions d’acuèlh e "
@@ -6888,23 +7034,23 @@ msgstr "Lo nivèl de seguretat Thunderbolt a pas pogut èsser determinat."
 msgid "Error switching direct mode: %s"
 msgstr "Error de bascula en mòde dirècte : %s"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:106
+#: panels/thunderbolt/cc-bolt-panel.ui:102
 msgid "No Thunderbolt Support"
 msgstr "Pas cap de presa en carga de Thunderbolt"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:107
+#: panels/thunderbolt/cc-bolt-panel.ui:103
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "Connexion impossibla al subsistèma Thunderbold."
 
-#: panels/thunderbolt/cc-bolt-panel.ui:156
+#: panels/thunderbolt/cc-bolt-panel.ui:152
 msgid "Direct Access"
 msgstr "Accès dirècte"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:228
+#: panels/thunderbolt/cc-bolt-panel.ui:224
 msgid "Pending Devices"
 msgstr "Periferics en espèra"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:322
+#: panels/thunderbolt/cc-bolt-panel.ui:318
 msgid "No devices attached"
 msgstr "Cap de periferic pas estacat"
 
@@ -7460,8 +7606,8 @@ msgid ""
 msgstr ""
 "Clavièr;mirga;ligam;accessibilitat;universal;contrast;contraste;cursor;son;"
 "zoom;ecran;lector;grand;larg;tèxt;talha;clic;velocitat;àudio;picada;poliça;"
-"policia;escritura;tòca;acorchi;lent;mirga;doble;clic;relambi;delai;repetir;"
-"visual;animacions;"
+"policia;polissa;polissas;escritura;tòca;acorchi;lent;mirga;doble;clic;"
+"relambi;delai;repetir;visual;animacions;"
 
 #. Translators: Option for "Automatically Delete Period" in "Trash & Temporary Files" group
 #: panels/usage/cc-usage-panel.c:55
@@ -7767,15 +7913,15 @@ msgstr "Gestionari de detadas"
 msgid "Fingerprint"
 msgstr "Emprentas"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:91
+#: panels/user-accounts/cc-fingerprint-dialog.ui:85
 msgid "_No"
 msgstr "_Non"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:99
+#: panels/user-accounts/cc-fingerprint-dialog.ui:93
 msgid "_Yes"
 msgstr "_Òc"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:119
+#: panels/user-accounts/cc-fingerprint-dialog.ui:113
 msgid ""
 "Do you want to delete your registered fingerprints so fingerprint login is "
 "disabled?"
@@ -7783,32 +7929,32 @@ msgstr ""
 "Volètz suprimir las emprentas digitalas enregistradas e desactivar atal "
 "aqueste tipe de connexion ?"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:175
+#: panels/user-accounts/cc-fingerprint-dialog.ui:169
 msgid "No fingerprint device"
 msgstr "Cap de periferic d’emprenta"
 
 #. Translators: This is the empty state page label which states that there are no devices ready.
-#: panels/user-accounts/cc-fingerprint-dialog.ui:190
+#: panels/user-accounts/cc-fingerprint-dialog.ui:184
 msgid "No Fingerprint device"
 msgstr "Cap de periferics d’emprenta"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:199
+#: panels/user-accounts/cc-fingerprint-dialog.ui:193
 msgid "Ensure the device is properly connected."
 msgstr "Asseguratz-vos que lo periferic es connectat coma cal."
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:207
+#: panels/user-accounts/cc-fingerprint-dialog.ui:201
 msgid "Fingerprint Device"
 msgstr "Lector d’emprentas"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:216
+#: panels/user-accounts/cc-fingerprint-dialog.ui:210
 msgid "Choose the fingerprint device you want to configure"
 msgstr "Seleccionar lo lector d'emprentas digitalas que volètz configurar"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:246
+#: panels/user-accounts/cc-fingerprint-dialog.ui:240
 msgid "Fingerprint Login"
 msgstr "Connexion per reconeissença d'emprentas"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:252
+#: panels/user-accounts/cc-fingerprint-dialog.ui:246
 msgid ""
 "Fingerprint login allows you to unlock and log into your computer with your "
 "finger"
@@ -7816,11 +7962,11 @@ msgstr ""
 "La connexion per reconeissença d'emprentas vos permet de desverrolhar e vos "
 "connectar a vòstre ordenador amb vòstre det"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:279
+#: panels/user-accounts/cc-fingerprint-dialog.ui:273
 msgid "_Delete Fingerprints"
 msgstr "_Suprimir las emprentas"
 
-#: panels/user-accounts/cc-fingerprint-dialog.ui:293
+#: panels/user-accounts/cc-fingerprint-dialog.ui:287
 msgid "Fingerprint Enroll"
 msgstr "Aprentissatge d’una emprenta"
 
@@ -8014,7 +8160,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:712
+#: panels/user-accounts/cc-user-panel.c:727
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -8022,7 +8168,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:716
+#: panels/user-accounts/cc-user-panel.c:731
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -8043,11 +8189,11 @@ msgstr "Començament de session"
 msgid "%s — Account Activity"
 msgstr "Activitat del compte de %s"
 
-#: panels/user-accounts/cc-login-history-dialog.ui:24
+#: panels/user-accounts/cc-login-history-dialog.ui:27
 msgid "Previous"
 msgstr "Precedenta"
 
-#: panels/user-accounts/cc-login-history-dialog.ui:34
+#: panels/user-accounts/cc-login-history-dialog.ui:37
 msgid "Next"
 msgstr "Seguenta"
 
@@ -8114,26 +8260,26 @@ msgstr "Senhal invalid, ensajatz tornamai"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Connexion al domeni %s impossible : %s"
 
-#: panels/user-accounts/cc-user-panel.c:341
+#: panels/user-accounts/cc-user-panel.c:356
 msgid "Failed to delete user"
 msgstr "La supression de l'utilizaire a fracassat"
 
-#: panels/user-accounts/cc-user-panel.c:398
-#: panels/user-accounts/cc-user-panel.c:453
-#: panels/user-accounts/cc-user-panel.c:499
+#: panels/user-accounts/cc-user-panel.c:413
+#: panels/user-accounts/cc-user-panel.c:468
+#: panels/user-accounts/cc-user-panel.c:514
 msgid "Failed to revoke remotely managed user"
 msgstr "La revocacion de l'utilizaire gerit a distància a fracassat"
 
-#: panels/user-accounts/cc-user-panel.c:548
+#: panels/user-accounts/cc-user-panel.c:563
 msgid "You cannot delete your own account."
 msgstr "Podètz pas suprimir vòstre pròpri compte."
 
-#: panels/user-accounts/cc-user-panel.c:557
+#: panels/user-accounts/cc-user-panel.c:572
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s es encara connectat"
 
-#: panels/user-accounts/cc-user-panel.c:561
+#: panels/user-accounts/cc-user-panel.c:576
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -8141,12 +8287,12 @@ msgstr ""
 "Suprimir un utilizaire mentre qu'es connectat pòt daissar lo sistèma dins un "
 "estat instable."
 
-#: panels/user-accounts/cc-user-panel.c:570
+#: panels/user-accounts/cc-user-panel.c:585
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Volètz conservar los fichièrs de %s ?"
 
-#: panels/user-accounts/cc-user-panel.c:574
+#: panels/user-accounts/cc-user-panel.c:589
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8155,60 +8301,60 @@ msgstr ""
 "espèra (lo « spool ») e los fichièrs temporaris d'un compte d'utilizaire al "
 "moment de sa supression."
 
-#: panels/user-accounts/cc-user-panel.c:577
+#: panels/user-accounts/cc-user-panel.c:592
 msgid "_Delete Files"
 msgstr "_Suprimir los fichièrs"
 
-#: panels/user-accounts/cc-user-panel.c:578
+#: panels/user-accounts/cc-user-panel.c:593
 msgid "_Keep Files"
 msgstr "_Conservar los fichièrs"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:607
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Sètz segur que volètz revocar lo compte distant de %s ?"
 
-#: panels/user-accounts/cc-user-panel.c:596
+#: panels/user-accounts/cc-user-panel.c:611
 msgid "_Delete"
 msgstr "_Suprimir"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:661
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Compte desactivat"
 
-#: panels/user-accounts/cc-user-panel.c:654
+#: panels/user-accounts/cc-user-panel.c:669
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "De definir al moment de la connexion que ven"
 
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:672
 msgctxt "Password mode"
 msgid "None"
 msgstr "Pas cap"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:715
 msgid "Logged in"
 msgstr "Connectat"
 
-#: panels/user-accounts/cc-user-panel.c:1173
+#: panels/user-accounts/cc-user-panel.c:1202
 msgid "Failed to contact the accounts service"
 msgstr "La connexion al servici dels comptes a fracassat"
 
-#: panels/user-accounts/cc-user-panel.c:1175
+#: panels/user-accounts/cc-user-panel.c:1204
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Verificatz qu'AccountService es installat e activat."
 
-#: panels/user-accounts/cc-user-panel.c:1197
+#: panels/user-accounts/cc-user-panel.c:1226
 msgid "This panel must be unlocked to change this setting"
 msgstr "Devètz desverrolhar aqueste panèl per modificar aqueste paramètre"
 
-#: panels/user-accounts/cc-user-panel.c:1264
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid "Delete the selected user account"
 msgstr "Suprimir lo compte d'utilizaire seleccionat"
 
-#: panels/user-accounts/cc-user-panel.c:1268
-#: panels/user-accounts/cc-user-panel.c:1377
+#: panels/user-accounts/cc-user-panel.c:1297
+#: panels/user-accounts/cc-user-panel.c:1406
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8216,7 +8362,7 @@ msgstr ""
 "Per suprimir lo compte d'utilizaire seleccionat,\n"
 "clicatz primièr sus l'icòna *"
 
-#: panels/user-accounts/cc-user-panel.c:1423
+#: panels/user-accounts/cc-user-panel.c:1452
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Desverrolhar per apondre d'utilizaires e modificar los paramètres"
 
@@ -8233,41 +8379,41 @@ msgstr "Vos cal reaviar la session per que los cambiaments sián efectius"
 msgid "Restart Now"
 msgstr "Reaviar ara"
 
-#: panels/user-accounts/cc-user-panel.ui:78
+#: panels/user-accounts/cc-user-panel.ui:79
 msgid "Close"
 msgstr "Tampar"
 
-#: panels/user-accounts/cc-user-panel.ui:124
+#: panels/user-accounts/cc-user-panel.ui:120
 msgid "Edit avatar"
 msgstr "Modificar avatar"
 
-#: panels/user-accounts/cc-user-panel.ui:156
+#: panels/user-accounts/cc-user-panel.ui:152
 msgid "Full name"
 msgstr "Nom complèt"
 
-#: panels/user-accounts/cc-user-panel.ui:174
+#: panels/user-accounts/cc-user-panel.ui:171
 #: panels/wwan/cc-wwan-apn-dialog.c:295
 msgid "Edit"
 msgstr "Modificar"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:210
+#: panels/user-accounts/cc-user-panel.ui:202
 msgid "_Fingerprint Login"
 msgstr "Connexion per _reconeissença d'emprentas"
 
-#: panels/user-accounts/cc-user-panel.ui:233
+#: panels/user-accounts/cc-user-panel.ui:225
 msgid "A_utomatic Login"
 msgstr "Connexion a_utomatica"
 
-#: panels/user-accounts/cc-user-panel.ui:246
+#: panels/user-accounts/cc-user-panel.ui:238
 msgid "Account Activity"
 msgstr "Activitat del compte"
 
-#: panels/user-accounts/cc-user-panel.ui:274
+#: panels/user-accounts/cc-user-panel.ui:266
 msgid "_Administrator"
 msgstr "_Administrator"
 
-#: panels/user-accounts/cc-user-panel.ui:275
+#: panels/user-accounts/cc-user-panel.ui:267
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -8275,32 +8421,32 @@ msgstr ""
 "Los administrator pòdon apondre o suprimir d’autres utilizaires e pòdon "
 "modificar los paramètres de totes los utilizaires."
 
-#: panels/user-accounts/cc-user-panel.ui:291
+#: panels/user-accounts/cc-user-panel.ui:283
 msgid "_Parental Controls"
 msgstr "Contròle _parental"
 
-#: panels/user-accounts/cc-user-panel.ui:292
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "Open the Parental Controls application."
 msgstr "Dobrir l'aplicacion de Contraròtle parental."
 
-#: panels/user-accounts/cc-user-panel.ui:343
+#: panels/user-accounts/cc-user-panel.ui:335
 msgid "Remove User…"
 msgstr "Suprimir l’utilizaire…"
 
-#: panels/user-accounts/cc-user-panel.ui:355
+#: panels/user-accounts/cc-user-panel.ui:347
 msgid "Other Users"
 msgstr "Autres utilizaires"
 
-#: panels/user-accounts/cc-user-panel.ui:368
+#: panels/user-accounts/cc-user-panel.ui:360
 msgid "Add User…"
 msgstr "Apondre un utilizaire…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:396
+#: panels/user-accounts/cc-user-panel.ui:388
 msgid "No Users Found"
 msgstr "Cap d'utilizaire pas trobat"
 
-#: panels/user-accounts/cc-user-panel.ui:405
+#: panels/user-accounts/cc-user-panel.ui:397
 msgid "Unlock to add a user account."
 msgstr "Desverrolhatz per crear un compte d'utilizaire."
 
@@ -9201,7 +9347,7 @@ msgstr "Categorias de paramètres"
 msgid "Privacy"
 msgstr "Confidencialitat"
 
-#: shell/cc-panel-loader.c:303
+#: shell/cc-panel-loader.c:304
 msgid "Available panels:"
 msgstr "Panèls disponibles :"
 
@@ -9305,7 +9451,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9314,16 +9460,52 @@ msgstr[1] "%u sortidas"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u entrada"
 msgstr[1] "%u entradas"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#~ msgid "Display Arrangement"
+#~ msgstr "Disposicion dels ecrans"
+
+#~ msgid "Secure Boot is Inactive"
+#~ msgstr "Aviada segura inactiva"
+
+#~ msgid "SPI write"
+#~ msgstr "escritura SPI"
+
+#~ msgid "SPI lock"
+#~ msgstr "barrolh SPI"
+
+#~ msgid "SPI BIOS region"
+#~ msgstr "region SPI BIOS"
+
+#~ msgid "Suspend-to-ram"
+#~ msgstr "Ivernada-amb-ram"
+
+#~ msgid "MEI manufacturing mode"
+#~ msgstr "M̀òde MEI d’usina"
+
+#~ msgid "MEI version"
+#~ msgstr "Version del MEI"
+
+#~ msgid "Supported CPU"
+#~ msgstr "CPU pres en carga"
+
+#~ msgid "Secure Boot disabled"
+#~ msgstr "Aviada segura desactivada"
+
+#~ msgid "Secure Boot enabled"
+#~ msgstr "Aviada segura activada"
+
+#~ msgid "Lock your screen"
+#~ msgstr "Verrolhar l'ecran"
 
 #~ msgid "Light"
 #~ msgstr "Clar"
@@ -9337,13 +9519,6 @@ msgstr "Sons sistèma"
 #~ msgstr ""
 #~ "ecran;verrolhar;verrolhatge;diagnostic;plantatge;privat;confidencial;"
 #~ "recent;temporari;tmp;indèx;nom;rets;identitat;"
-
-#~ msgid ""
-#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-#~ "network;identity;privacy;"
-#~ msgstr ""
-#~ "ecran;verrolhar;verrolhatge;diagnotic;confidencialitat;recent;temporari;"
-#~ "nom;ret;malhum;identitat;tmp;privat;privada;vida;"
 
 #~ msgid "Bark"
 #~ msgstr "Jaupadís"
@@ -9375,9 +9550,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "_Screen Sharing"
 #~ msgstr "Partiment _de l'ecran"
-
-#~ msgid "Screen Sharing"
-#~ msgstr "Partiment de l'ecran"
 
 #~ msgid "_Password:"
 #~ msgstr "Se_nhal :"
@@ -9495,9 +9667,6 @@ msgstr "Sons sistèma"
 
 #~ msgid "Active Display"
 #~ msgstr "Ecran actiu"
-
-#~ msgid "Display Configuration"
-#~ msgstr "Configuracion dels ecrans"
 
 #~ msgid "More Warm"
 #~ msgstr "Mai cauda"
