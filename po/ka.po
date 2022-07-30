@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-07-23 18:02+0000\n"
-"PO-Revision-Date: 2022-07-24 07:20+0200\n"
+"POT-Creation-Date: 2022-07-30 14:17+0000\n"
+"PO-Revision-Date: 2022-07-30 16:28+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <(nothing)>\n"
 "Language: ka\n"
@@ -164,8 +164,8 @@ msgstr "სისტემის ძებნის მიღება და �
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:107
-#: panels/user-accounts/cc-user-panel.c:789
-#: panels/user-accounts/cc-user-panel.c:879
+#: panels/user-accounts/cc-user-panel.c:804
+#: panels/user-accounts/cc-user-panel.c:907
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -355,8 +355,8 @@ msgstr "აირჩიეთ სურათი"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:579
-#: panels/user-accounts/cc-user-panel.c:597
+#: panels/user-accounts/cc-user-panel.c:594
+#: panels/user-accounts/cc-user-panel.c:612
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -705,6 +705,7 @@ msgid "All files"
 msgstr "ყველა ფაილი"
 
 #: panels/color/cc-color-panel.c:586
+#: panels/screen/gnome-screen-panel.desktop.in.in:3
 msgid "Screen"
 msgstr "ეკრანი"
 
@@ -773,7 +774,7 @@ msgstr "დაახლოებითი დრო"
 
 #: panels/color/cc-color-panel.ui:82
 msgid "Calibration Device"
-msgstr ""
+msgstr "მოწყობილობის კალიბრაცია"
 
 #: panels/color/cc-color-panel.ui:90
 msgid "Select the sensor device you want to use for calibration."
@@ -905,11 +906,11 @@ msgstr "_პროფილის დამატება"
 
 #: panels/color/cc-color-panel.ui:503
 msgid "_Calibrate…"
-msgstr ""
+msgstr "_კალიბრაცია…"
 
 #: panels/color/cc-color-panel.ui:505
 msgid "Calibrate the device"
-msgstr ""
+msgstr "ამ მოწყობილობის კალიბრაცია"
 
 #: panels/color/cc-color-panel.ui:511
 msgid "_Remove profile"
@@ -1392,10 +1393,10 @@ msgstr ""
 #: panels/datetime/cc-datetime-panel.ui:212
 #: panels/display/cc-display-settings.ui:23
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/lock/cc-lock-panel.ui:39
-#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
-#: panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:876
+#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
+#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
+#: panels/user-accounts/cc-user-panel.c:802
+#: panels/user-accounts/cc-user-panel.c:904
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "ჩაირთო"
@@ -1501,7 +1502,7 @@ msgstr "დიაგნოსტიკა;ავარია;"
 #: panels/universal-access/cc-ua-panel.c:490
 #: panels/universal-access/cc-ua-panel.c:526
 msgid "On"
-msgstr ""
+msgstr "ჩართული"
 
 #: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
@@ -1796,7 +1797,7 @@ msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:433
+#: panels/firmware-security/cc-firmware-security-panel.c:446
 msgid "No Protection"
 msgstr "დაცვის გარეშე"
 
@@ -1810,7 +1811,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:111
 #: panels/firmware-security/cc-firmware-security-dialog.ui:80
-#: panels/firmware-security/cc-firmware-security-panel.c:440
+#: panels/firmware-security/cc-firmware-security-panel.c:453
 msgid "Minimal Protection"
 msgstr "მინიმალური უსაფრთხოება"
 
@@ -1824,7 +1825,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:127
 #: panels/firmware-security/cc-firmware-security-dialog.ui:94
-#: panels/firmware-security/cc-firmware-security-panel.c:447
+#: panels/firmware-security/cc-firmware-security-panel.c:460
 msgid "Basic Protection"
 msgstr "ბაზისური უსაფრთხოება"
 
@@ -1837,7 +1838,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:146
 #: panels/firmware-security/cc-firmware-security-dialog.ui:108
-#: panels/firmware-security/cc-firmware-security-panel.c:454
+#: panels/firmware-security/cc-firmware-security-panel.c:467
 msgid "Extended Protection"
 msgstr "გაფართებული დაცვა"
 
@@ -1856,15 +1857,41 @@ msgstr ""
 msgid "Error: unable to determine Incorrect HSI level."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:241
+#. TRANSLATORS: hardware manufacturer as in OEM
+#: panels/firmware-security/cc-firmware-security-dialog.c:172
+#: panels/firmware-security/cc-firmware-security-dialog.c:182
+#: panels/firmware-security/cc-firmware-security-dialog.c:189
+msgid "Contact your hardware manufacturer for help with security updates."
+msgstr ""
+
+#. TRANSLATORS: support technician as in someone with root
+#: panels/firmware-security/cc-firmware-security-dialog.c:174
+msgid ""
+"It might be possible to resolve this issue in the device’s UEFI firmware "
+"settings, or by a support technician."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:183
+#: panels/firmware-security/cc-firmware-security-dialog.c:194
+msgid ""
+"It might be possible to resolve this issue in the device’s UEFI firmware "
+"settings."
+msgstr ""
+
+#. TRANSLATORS: support technician as in someone with root
+#: panels/firmware-security/cc-firmware-security-dialog.c:200
+msgid "It might be possible for a support technician to resolve this issue."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:300
 msgid "Minimal Security Protections"
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:246
+#: panels/firmware-security/cc-firmware-security-dialog.c:305
 msgid "Basic Security Protections"
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:251
+#: panels/firmware-security/cc-firmware-security-dialog.c:310
 msgid "Extended Security Protections"
 msgstr ""
 
@@ -1888,25 +1915,47 @@ msgstr ""
 msgid "No protection when the device is started."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:434
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:138
+msgid ""
+"This issue could have been caused by a change in UEFI firmware settings, an "
+"operating system configuration change, or because of malicious software on "
+"this system."
+msgstr ""
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:146
+msgid ""
+"This issue could have been caused by a change in the UEFI firmware settings, "
+"or because of malicious software on this system."
+msgstr ""
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:153
+msgid ""
+"This issue could have been caused by an operating system configuration "
+"change, or because of malicious software on this system."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-panel.c:447
 msgid "Highly exposed to security threats."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:441
+#: panels/firmware-security/cc-firmware-security-panel.c:454
 msgid "Limited protection against simple security threats."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:448
+#: panels/firmware-security/cc-firmware-security-panel.c:461
 msgid "Protected against common security threats."
 msgstr ""
 
-#: panels/firmware-security/cc-firmware-security-panel.c:455
-#: panels/firmware-security/cc-firmware-security-panel.c:462
+#: panels/firmware-security/cc-firmware-security-panel.c:468
+#: panels/firmware-security/cc-firmware-security-panel.c:475
 msgid "Protected against a wide range of security threats."
 msgstr ""
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:461
+#: panels/firmware-security/cc-firmware-security-panel.c:474
 msgid "Comprehensive Protection"
 msgstr ""
 
@@ -1914,256 +1963,212 @@ msgstr ""
 msgid "No Events"
 msgstr "ღონისძიებების გარეშე"
 
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:38
-msgid "SPI write"
-msgstr "SPI ჩაწერა"
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:37
+msgid "Firmware Write Protection"
+msgstr "მიკროკოდის ჩაწერისგან დაცვა"
 
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:40
-msgid "SPI lock"
-msgstr "SPI ბლოკი"
-
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
 #: panels/firmware-security/cc-firmware-security-utils.c:42
-msgid "SPI BIOS region"
-msgstr "SPI BIOS-ის რეგიონი"
+msgid "Firmware Write Protection Lock"
+msgstr "მიკროკოდის ჩაწერისგან დაცვის დაბლოკვა"
 
 #. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:44
-msgid "SPI BIOS Descriptor"
-msgstr "SPI BIOS-ის დესკრიპტორი"
+#: panels/firmware-security/cc-firmware-security-utils.c:47
+msgid "Firmware BIOS Region"
+msgstr "მიკროკოდის BIOS-ის რეგიონი"
+
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:52
+msgid "Firmware BIOS Descriptor"
+msgstr "მიკროკოდის BIOS-ის დესკრიპტორი"
 
 #. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
-#: panels/firmware-security/cc-firmware-security-utils.c:46
-msgid "Pre-boot DMA protection is"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:57
+msgid "Pre-boot DMA Protection"
+msgstr "ჩატვირთვამდელი DMA-ის დაცვა"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel
-#: panels/firmware-security/cc-firmware-security-utils.c:48
+#: panels/firmware-security/cc-firmware-security-utils.c:62
 msgid "Intel BootGuard"
-msgstr ""
+msgstr "Intel BootGuard"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * verified boot refers to the way the boot process is verified
-#: panels/firmware-security/cc-firmware-security-utils.c:51
-msgid "Intel BootGuard verified boot"
+#: panels/firmware-security/cc-firmware-security-utils.c:68
+msgid "Intel BootGuard Verified Boot"
 msgstr ""
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * ACM means to verify the integrity of Initial Boot Block
-#: panels/firmware-security/cc-firmware-security-utils.c:54
-msgid "Intel BootGuard ACM protected"
+#: panels/firmware-security/cc-firmware-security-utils.c:74
+msgid "Intel BootGuard ACM Protected"
 msgstr ""
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * error policy is what to do on failure
-#: panels/firmware-security/cc-firmware-security-utils.c:57
-msgid "Intel BootGuard error policy"
+#: panels/firmware-security/cc-firmware-security-utils.c:80
+msgid "Intel BootGuard Error Policy"
 msgstr ""
 
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * OTP = one time programmable
-#: panels/firmware-security/cc-firmware-security-utils.c:60
-msgid "Intel BootGuard OTP fuse"
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel
+#: panels/firmware-security/cc-firmware-security-utils.c:85
+msgid "Intel BootGuard Fuse"
 msgstr ""
 
 #. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
 #. * enabled means supported by the processor
-#: panels/firmware-security/cc-firmware-security-utils.c:63
-msgid "Intel CET"
-msgstr "Intel CET"
+#: panels/firmware-security/cc-firmware-security-utils.c:91
+msgid "Intel CET Enabled"
+msgstr "Intel CET ჩართულია"
 
 #. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
 #. * active means being used by the OS
-#: panels/firmware-security/cc-firmware-security-utils.c:66
+#: panels/firmware-security/cc-firmware-security-utils.c:97
 msgid "Intel CET Active"
 msgstr "Intel CET ჩართულია"
 
 #. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
-#: panels/firmware-security/cc-firmware-security-utils.c:68
+#: panels/firmware-security/cc-firmware-security-utils.c:102
 msgid "Intel SMAP"
 msgstr "Intel SMAP"
 
 #. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
-#: panels/firmware-security/cc-firmware-security-utils.c:70
+#: panels/firmware-security/cc-firmware-security-utils.c:107
 msgid "Encrypted RAM"
 msgstr "დაშიფრული RAM"
 
 #. TRANSLATORS: Title:
 #. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
-#: panels/firmware-security/cc-firmware-security-utils.c:73
-msgid "IOMMU device protection"
-msgstr "მოწყობილობის IOMMU უსაფრთხოება"
+#: panels/firmware-security/cc-firmware-security-utils.c:113
+msgid "IOMMU Protection"
+msgstr "IOMMU უსაფრთხოება"
 
 #. TRANSLATORS: Title: lockdown is a security mode of the kernel
-#: panels/firmware-security/cc-firmware-security-utils.c:75
-msgid "Kernel lockdown"
-msgstr "ბირთვის დაბლოკვა"
+#: panels/firmware-security/cc-firmware-security-utils.c:118
+msgid "Linux Kernel Lockdown"
+msgstr "Linux-ის ბირთვი დაბლოკილია"
 
 #. TRANSLATORS: Title: if it's tainted or not
-#: panels/firmware-security/cc-firmware-security-utils.c:77
-msgid "Kernel tainted"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:123
+msgid "Linux Kernel Verification"
+msgstr "Linux-ის ბირთვის შემოწმება"
 
 #. TRANSLATORS: Title: swap space or swap partition
-#: panels/firmware-security/cc-firmware-security-utils.c:79
-msgid "Linux swap"
+#: panels/firmware-security/cc-firmware-security-utils.c:128
+msgid "Linux Swap"
 msgstr "Linux Swap"
 
 #. TRANSLATORS: Title: sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:81
-msgid "Suspend-to-ram"
+#: panels/firmware-security/cc-firmware-security-utils.c:133
+msgid "Suspend To RAM"
 msgstr "RAM-ში შეჩერება"
 
 #. TRANSLATORS: Title: a better sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:83
-msgid "Suspend-to-idle"
-msgstr "შეჩერება"
+#: panels/firmware-security/cc-firmware-security-utils.c:138
+msgid "Suspend To Idle"
+msgstr "უქმობამდე შეჩერება"
 
 #. TRANSLATORS: Title: PK is the 'platform key' for the machine
-#: panels/firmware-security/cc-firmware-security-utils.c:85
-msgid "UEFI platform key"
+#: panels/firmware-security/cc-firmware-security-utils.c:143
+msgid "UEFI Platform Key"
 msgstr "UEFI პლატფორმის გასაღები"
 
 #. TRANSLATORS: Title: SB is a way of locking down UEFI
-#: panels/firmware-security/cc-firmware-security-utils.c:87
-msgid "Secure boot"
-msgstr "უსაფრთხო ჩატვირთვა"
+#: panels/firmware-security/cc-firmware-security-utils.c:148
+msgid "UEFI Secure Boot"
+msgstr "UEFI უსაფრთხო ჩატვირთვა"
 
 #. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be empty
-#: panels/firmware-security/cc-firmware-security-utils.c:89
-msgid "All TPM PCRs are"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:153
+msgid "TPM Platform Configuration"
+msgstr "TPM პლატფორმის მორგება"
 
 #. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
-#: panels/firmware-security/cc-firmware-security-utils.c:91
-msgid "TPM PCR0 reconstruction"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:158
+msgid "TPM Reconstruction"
+msgstr "TPM -ის რემონტი"
 
 #. TRANSLATORS: Title: TPM = Trusted Platform Module
-#: panels/firmware-security/cc-firmware-security-utils.c:93
+#: panels/firmware-security/cc-firmware-security-utils.c:163
 msgid "TPM v2.0"
 msgstr "TPM v2.0"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:95
-msgid "MEI manufacturing mode"
-msgstr "MEI მწარმოებლის რეჟიმი"
+#: panels/firmware-security/cc-firmware-security-utils.c:168
+msgid "Intel Management Engine Manufacturing Mode"
+msgstr "Intel Management Engine -ისმწარმოებლის რეჟიმი"
 
-#. TRANSLATORS: Title: MEI = Intel Management Engine, and the
-#. * "override" is the physical PIN that can be driven to
-#. * logic high -- luckily it is probably not accessible to
-#. * end users on consumer boards
-#: panels/firmware-security/cc-firmware-security-utils.c:100
-msgid "MEI override"
-msgstr ""
+#. TRANSLATORS: Title: MEI = Intel Management Engine, and the "override" is enabled
+#. * with a jumper -- luckily it is probably not accessible to end users on consumer
+#. * boards
+#: panels/firmware-security/cc-firmware-security-utils.c:175
+msgid "Intel Management Engine Override"
+msgstr "Intel Management Engine -ის გადაფარვა"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:102
-msgid "MEI version"
-msgstr "MEI-ის ვერსია"
+#: panels/firmware-security/cc-firmware-security-utils.c:180
+msgid "Intel Management Engine Version"
+msgstr "Intel Management Engine -ის ვერსია"
 
 #. TRANSLATORS: Title: if firmware updates are available
-#: panels/firmware-security/cc-firmware-security-utils.c:104
-msgid "Firmware updates"
+#: panels/firmware-security/cc-firmware-security-utils.c:185
+msgid "Firmware Updates"
 msgstr "მიკროკოდის განახლებები"
 
 #. TRANSLATORS: Title: if we can verify the firmware checksums
-#: panels/firmware-security/cc-firmware-security-utils.c:106
-msgid "Firmware attestation"
+#: panels/firmware-security/cc-firmware-security-utils.c:190
+msgid "Firmware Attestation"
 msgstr "მიკროკოდის ატესტაცია"
 
 #. TRANSLATORS: Title: if the fwupd plugins are all present and correct
-#: panels/firmware-security/cc-firmware-security-utils.c:108
-msgid "fwupd plugins"
-msgstr ""
+#: panels/firmware-security/cc-firmware-security-utils.c:195
+msgid "Firmware Updater Verification"
+msgstr "მიკროკოდის გამნახლებლის შემოწმება"
 
-#. TRANSLATORS: Title: Direct Connect Interface (DCI) allows
-#. * debugging of Intel processors using the USB3 port
-#: panels/firmware-security/cc-firmware-security-utils.c:111
-#: panels/firmware-security/cc-firmware-security-utils.c:112
-msgid "Intel DCI debugger"
-msgstr ""
-
-#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
-#: panels/firmware-security/cc-firmware-security-utils.c:114
-msgid "Pre-boot DMA protection"
+#. TRANSLATORS: Title: Allows debugging of parts using proprietary hardware
+#: panels/firmware-security/cc-firmware-security-utils.c:201
+msgid "Platform Debugging"
 msgstr ""
 
 #. TRANSLATORS: Title: if fwupd supports HSI on this chip
-#: panels/firmware-security/cc-firmware-security-utils.c:116
-msgid "Supported CPU"
-msgstr "მხარდაჭერილი CPU"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:150
-msgid "IOMMU device protection enabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:156
-msgid "IOMMU device protection disabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:176
-msgid "Kernel is no longer tainted"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:182
-msgid "Kernel is tainted"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:188
-msgid "Kernel lockdown disabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:194
-msgid "Kernel lockdown enabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:200
-msgid "Pre-boot DMA protection is disabled"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
 #: panels/firmware-security/cc-firmware-security-utils.c:206
-msgid "Pre-boot DMA protection is enabled"
+msgid "Processor Security Checks"
+msgstr "პროცესორის უსაფრთხოების შემოწმება"
+
+#. TRANSLATORS: Title: if firmware enforces rollback protection
+#: panels/firmware-security/cc-firmware-security-utils.c:211
+msgid "AMD Rollback Protection"
+msgstr "AMD-ის მიკროკოდის ვერსიის ჩამოწევისგან დაცვა"
+
+#. TRANSLATORS: Title: if hardware enforces control of SPI replays
+#: panels/firmware-security/cc-firmware-security-utils.c:216
+msgid "AMD Firmware Replay Protection"
+msgstr "AMD-ის მიკროკოდის თავიდან ჩაწერისგან დაცვა"
+
+#. TRANSLATORS: Title: if hardware enforces control of SPI writes
+#: panels/firmware-security/cc-firmware-security-utils.c:221
+msgid "AMD Firmware Write Protection"
+msgstr "AMD-ის მიკროკოდში ჩაწერისგან დაცვა"
+
+#. TRANSLATORS: Title: if the part has been fused
+#: panels/firmware-security/cc-firmware-security-utils.c:226
+msgid "Fused Platform"
 msgstr ""
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:212
-msgid "Secure Boot disabled"
-msgstr "დაცული ჩატვირთვა გამორთულია"
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:3
+msgid "Device Security"
+msgstr "მოწყობილობის უსაფრთხოება"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:218
-msgid "Secure Boot enabled"
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:4
+msgid "Host firmware security status"
 msgstr ""
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:224
-msgid "All TPM PCRs are valid"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:230
-msgid "All TPM PCRs are now valid"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:236
-msgid "A TPM PCR is now an invalid value"
-msgstr ""
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:242
-msgid "TPM PCR0 reconstruction is invalid"
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:20
+msgid ""
+"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+"network;identity;privacy;"
 msgstr ""
 
 #: panels/info-overview/cc-info-overview-panel.c:296
@@ -2810,167 +2815,6 @@ msgstr "თქვენი მდებარეობის ინფორმ�
 msgid "location;gps;private;privacy;"
 msgstr ""
 
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:62
-msgctxt "lock_screen"
-msgid "Screen Turns Off"
-msgstr ""
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:65
-msgctxt "lock_screen"
-msgid "30 seconds"
-msgstr "30 წამი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:68
-msgctxt "lock_screen"
-msgid "1 minute"
-msgstr "%1 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:71
-msgctxt "lock_screen"
-msgid "2 minutes"
-msgstr "2 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:74
-msgctxt "lock_screen"
-msgid "3 minutes"
-msgstr "3 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:77
-msgctxt "lock_screen"
-msgid "5 minutes"
-msgstr "5 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:80
-msgctxt "lock_screen"
-msgid "30 minutes"
-msgstr "30 წუთი"
-
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:83
-msgctxt "lock_screen"
-msgid "1 hour"
-msgstr "%1 საათი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:126
-msgctxt "blank_screen"
-msgid "1 minute"
-msgstr "%1 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:129
-msgctxt "blank_screen"
-msgid "2 minutes"
-msgstr "2 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:132
-msgctxt "blank_screen"
-msgid "3 minutes"
-msgstr "3 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:135
-msgctxt "blank_screen"
-msgid "4 minutes"
-msgstr "4 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:138
-msgctxt "blank_screen"
-msgid "5 minutes"
-msgstr "5 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:141
-msgctxt "blank_screen"
-msgid "8 minutes"
-msgstr "8 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:144
-msgctxt "blank_screen"
-msgid "10 minutes"
-msgstr "10 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:147
-msgctxt "blank_screen"
-msgid "12 minutes"
-msgstr "12 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:150
-msgctxt "blank_screen"
-msgid "15 minutes"
-msgstr "15 წუთი"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:153
-msgctxt "blank_screen"
-msgid "Never"
-msgstr "არასდროს"
-
-#: panels/lock/cc-lock-panel.ui:8
-msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
-"while you're away."
-msgstr ""
-
-#: panels/lock/cc-lock-panel.ui:13
-msgid "Blank Screen Delay"
-msgstr ""
-
-#: panels/lock/cc-lock-panel.ui:14
-msgid "Period of inactivity after which the screen will go blank."
-msgstr ""
-
-#: panels/lock/cc-lock-panel.ui:32
-msgid "Automatic Screen _Lock"
-msgstr ""
-
-#: panels/lock/cc-lock-panel.ui:49
-msgid "Automatic _Screen Lock Delay"
-msgstr ""
-
-#: panels/lock/cc-lock-panel.ui:50
-msgid "Period after the screen blanks when the screen is automatically locked."
-msgstr ""
-
-#: panels/lock/cc-lock-panel.ui:68
-msgid "Show _Notifications on Lock Screen"
-msgstr "_გაფრთხილებების დაბლოკილ ეკრანზე ჩვენება"
-
-#: panels/lock/cc-lock-panel.ui:86
-msgid "Forbid new _USB devices"
-msgstr ""
-
-#: panels/lock/cc-lock-panel.ui:87
-msgid ""
-"Prevent new USB devices from interacting with the system when the screen is "
-"locked."
-msgstr ""
-
-#: panels/lock/gnome-lock-panel.desktop.in.in:3
-msgid "Screen Lock"
-msgstr "ეკრანის დაბლოკვა"
-
-#: panels/lock/gnome-lock-panel.desktop.in.in:4
-msgid "Lock your screen"
-msgstr "ეკრანის დაბლოკვა"
-
-#. Translators: Search terms to find the Lock panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/lock/gnome-lock-panel.desktop.in.in:20
-msgid "screen;lock;private;privacy;"
-msgstr ""
-
 #: panels/microphone/cc-microphone-panel.ui:23
 msgid "Microphone Turned Off"
 msgstr "მიკროფონი გამორთულია"
@@ -3135,7 +2979,7 @@ msgstr ""
 
 #: panels/multitasking/cc-multitasking-panel.ui:70
 msgid "Workspaces"
-msgstr ""
+msgstr "სამუშაო სივრცეები"
 
 #: panels/multitasking/cc-multitasking-panel.ui:76
 msgid "_Dynamic workspaces"
@@ -3296,7 +3140,7 @@ msgstr "ქსელის სახელი"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
 #: panels/printers/new-printer-dialog.ui:338
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:391
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:384
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:364
@@ -6168,6 +6012,175 @@ msgid ""
 "removable;media;autorun;"
 msgstr ""
 
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:70
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr ""
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:73
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "30 წამი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:76
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "%1 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:79
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "2 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:82
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:85
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:88
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "30 წუთი"
+
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:91
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "%1 საათი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:134
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "%1 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:137
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:140
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:143
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:146
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:149
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:152
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:155
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:158
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "15 წუთი"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:161
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "არასდროს"
+
+#: panels/screen/cc-screen-panel.ui:8
+msgid "Screen Lock"
+msgstr "ეკრანის დაბლოკვა"
+
+#: panels/screen/cc-screen-panel.ui:9
+msgid ""
+"Automatically locking the screen prevents others from accessing the computer "
+"while you're away."
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:14
+msgid "Blank Screen Delay"
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:15
+msgid "Period of inactivity after which the screen will go blank."
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:33
+msgid "Automatic Screen _Lock"
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:50
+msgid "Automatic _Screen Lock Delay"
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:51
+msgid "Period after the screen blanks when the screen is automatically locked."
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:69
+msgid "Show _Notifications on Lock Screen"
+msgstr "_გაფრთხილებების დაბლოკილ ეკრანზე ჩვენება"
+
+#: panels/screen/cc-screen-panel.ui:87
+msgid "Forbid new _USB devices"
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:88
+msgid ""
+"Prevent new USB devices from interacting with the system when the screen is "
+"locked."
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:108
+msgid "Screen Privacy"
+msgstr "ეკრანის კონფიდენციალობა"
+
+#: panels/screen/cc-screen-panel.ui:113
+msgid "Restrict Viewing Angle"
+msgstr ""
+
+#: panels/screen/gnome-screen-panel.desktop.in.in:4
+msgid "Screen Settings"
+msgstr "ეკრანის მორგება"
+
+#. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/screen/gnome-screen-panel.desktop.in.in:20
+msgid "screen;lock;private;privacy;"
+msgstr ""
+
 #: panels/search/cc-search-locations-dialog.c:674
 msgid "Select Location"
 msgstr "მდებარეობის არჩევა"
@@ -6387,8 +6400,8 @@ msgstr ""
 
 #: panels/sharing/cc-sharing-panel.ui:318
 #: panels/sharing/cc-sharing-panel.ui:345
-#: panels/sharing/cc-sharing-panel.ui:379
-#: panels/sharing/cc-sharing-panel.ui:405
+#: panels/sharing/cc-sharing-panel.ui:372
+#: panels/sharing/cc-sharing-panel.ui:390
 msgid "Copy"
 msgstr "დააკოპირე"
 
@@ -6408,29 +6421,29 @@ msgstr ""
 msgid "User Name"
 msgstr "მომხმარებლის სახელი"
 
-#: panels/sharing/cc-sharing-panel.ui:420
+#: panels/sharing/cc-sharing-panel.ui:405
 msgid "Verify Encryption"
 msgstr "შიფრაციის შემოწმება"
 
-#: panels/sharing/cc-sharing-panel.ui:449
+#: panels/sharing/cc-sharing-panel.ui:434
 msgid "Encryption Fingerprint"
 msgstr "შიფრაციის ანაბეჭდი"
 
-#: panels/sharing/cc-sharing-panel.ui:450
+#: panels/sharing/cc-sharing-panel.ui:435
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr ""
 
-#: panels/sharing/cc-sharing-panel.ui:482
+#: panels/sharing/cc-sharing-panel.ui:467
 msgid "Media Sharing"
 msgstr "მედიის გაზიარება"
 
-#: panels/sharing/cc-sharing-panel.ui:504
+#: panels/sharing/cc-sharing-panel.ui:489
 msgid "Share music, photos and videos over the network."
 msgstr ""
 
-#: panels/sharing/cc-sharing-panel.ui:517
+#: panels/sharing/cc-sharing-panel.ui:502
 msgid "Folders"
 msgstr "საქაღალდეები"
 
@@ -6619,7 +6632,7 @@ msgstr ""
 #. Translators: The time point the device was connected.
 #: panels/thunderbolt/cc-bolt-device-dialog.c:181
 msgid "Connected at:"
-msgstr ""
+msgstr "დაკავშირებულია:"
 
 #. Translators: The time point the device was enrolled,
 #. * i.e. authorized and stored in the device database.
@@ -7551,7 +7564,7 @@ msgstr ""
 
 #: panels/user-accounts/cc-avatar-chooser.c:164
 msgid "Browse for more pictures"
-msgstr ""
+msgstr "მეტი სურათის მოძებნა"
 
 #: panels/user-accounts/cc-avatar-chooser.ui:32
 msgid "Select a File…"
@@ -7803,7 +7816,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:712
+#: panels/user-accounts/cc-user-panel.c:727
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7811,7 +7824,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:716
+#: panels/user-accounts/cc-user-panel.c:731
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7832,11 +7845,11 @@ msgstr ""
 msgid "%s — Account Activity"
 msgstr ""
 
-#: panels/user-accounts/cc-login-history-dialog.ui:24
+#: panels/user-accounts/cc-login-history-dialog.ui:27
 msgid "Previous"
 msgstr "წინა"
 
-#: panels/user-accounts/cc-login-history-dialog.ui:34
+#: panels/user-accounts/cc-login-history-dialog.ui:37
 msgid "Next"
 msgstr "შემდეგი"
 
@@ -7903,102 +7916,102 @@ msgstr "არასწორი პაროლი. თავიდან ს�
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "დომენთან დაკავშირების პრობლემა (%s): %s"
 
-#: panels/user-accounts/cc-user-panel.c:341
+#: panels/user-accounts/cc-user-panel.c:356
 msgid "Failed to delete user"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:398
-#: panels/user-accounts/cc-user-panel.c:453
-#: panels/user-accounts/cc-user-panel.c:499
+#: panels/user-accounts/cc-user-panel.c:413
+#: panels/user-accounts/cc-user-panel.c:468
+#: panels/user-accounts/cc-user-panel.c:514
 msgid "Failed to revoke remotely managed user"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:548
+#: panels/user-accounts/cc-user-panel.c:563
 msgid "You cannot delete your own account."
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:557
+#: panels/user-accounts/cc-user-panel.c:572
 #, c-format
 msgid "%s is still logged in"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:561
+#: panels/user-accounts/cc-user-panel.c:576
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:570
+#: panels/user-accounts/cc-user-panel.c:585
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "გნებავთ %s-ის ფაილების შენარჩუნება?"
 
-#: panels/user-accounts/cc-user-panel.c:574
+#: panels/user-accounts/cc-user-panel.c:589
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:577
+#: panels/user-accounts/cc-user-panel.c:592
 msgid "_Delete Files"
 msgstr "_ფაილების წაშლა"
 
-#: panels/user-accounts/cc-user-panel.c:578
+#: panels/user-accounts/cc-user-panel.c:593
 msgid "_Keep Files"
 msgstr "_ფაილების შენარჩუნება"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:607
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "დარწმუნებული ხართ, რომ გსურთ %s-ის სამუდამოდ წაშლა?"
 
-#: panels/user-accounts/cc-user-panel.c:596
+#: panels/user-accounts/cc-user-panel.c:611
 msgid "_Delete"
 msgstr "_წაშლა"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:661
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:654
+#: panels/user-accounts/cc-user-panel.c:669
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:672
 msgctxt "Password mode"
 msgid "None"
 msgstr "არაფერი"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:715
 msgid "Logged in"
 msgstr "შესული"
 
-#: panels/user-accounts/cc-user-panel.c:1173
+#: panels/user-accounts/cc-user-panel.c:1202
 msgid "Failed to contact the accounts service"
 msgstr "ანგარიშების სერვისთან კავშირის შეცდომა"
 
-#: panels/user-accounts/cc-user-panel.c:1175
+#: panels/user-accounts/cc-user-panel.c:1204
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "გთხოვთ დარწმუნდეთ, რომ AccountService სწორადაა დაყენებული და ჩართულია."
 
-#: panels/user-accounts/cc-user-panel.c:1197
+#: panels/user-accounts/cc-user-panel.c:1226
 msgid "This panel must be unlocked to change this setting"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:1264
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid "Delete the selected user account"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:1268
-#: panels/user-accounts/cc-user-panel.c:1377
+#: panels/user-accounts/cc-user-panel.c:1297
+#: panels/user-accounts/cc-user-panel.c:1406
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:1423
+#: panels/user-accounts/cc-user-panel.c:1452
 msgid "Unlock to Add Users and Change Settings"
 msgstr ""
 
@@ -8121,11 +8134,11 @@ msgstr "ადმინისტრატორის -პაროლი"
 
 #: panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in:11
 msgid "Manage user accounts"
-msgstr ""
+msgstr "მომხმარებლის ანაგარიშების მართვა"
 
 #: panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr ""
+msgstr "მომხმარებლის ანგარიშების სამართავად საჭიროა ავთენტიკაცია"
 
 #: panels/user-accounts/pw-utils.c:94
 msgctxt "Password hint"
@@ -9069,3 +9082,30 @@ msgstr[0] "%u შეტანა"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "სისტემური ხმები"
+
+#~ msgid "SPI write"
+#~ msgstr "SPI ჩაწერა"
+
+#~ msgid "SPI lock"
+#~ msgstr "SPI ბლოკი"
+
+#~ msgid "SPI BIOS region"
+#~ msgstr "SPI BIOS-ის რეგიონი"
+
+#~ msgid "Suspend-to-ram"
+#~ msgstr "RAM-ში შეჩერება"
+
+#~ msgid "MEI manufacturing mode"
+#~ msgstr "MEI მწარმოებლის რეჟიმი"
+
+#~ msgid "MEI version"
+#~ msgstr "MEI-ის ვერსია"
+
+#~ msgid "Supported CPU"
+#~ msgstr "მხარდაჭერილი CPU"
+
+#~ msgid "Secure Boot disabled"
+#~ msgstr "დაცული ჩატვირთვა გამორთულია"
+
+#~ msgid "Lock your screen"
+#~ msgstr "ეკრანის დაბლოკვა"
