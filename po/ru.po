@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-07-21 15:04+0000\n"
-"PO-Revision-Date: 2022-07-21 22:33+0300\n"
+"POT-Creation-Date: 2022-07-30 18:33+0000\n"
+"PO-Revision-Date: 2022-08-01 11:30+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -184,8 +184,8 @@ msgstr "Получение результатов поиска в системе
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:107
-#: panels/user-accounts/cc-user-panel.c:789
-#: panels/user-accounts/cc-user-panel.c:879
+#: panels/user-accounts/cc-user-panel.c:804
+#: panels/user-accounts/cc-user-panel.c:907
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -377,8 +377,8 @@ msgstr "Выберите изображение"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:579
-#: panels/user-accounts/cc-user-panel.c:597
+#: panels/user-accounts/cc-user-panel.c:594
+#: panels/user-accounts/cc-user-panel.c:612
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -734,6 +734,7 @@ msgid "All files"
 msgstr "Все файлы"
 
 #: panels/color/cc-color-panel.c:586
+#: panels/screen/gnome-screen-panel.desktop.in.in:3
 msgid "Screen"
 msgstr "Экран"
 
@@ -1454,10 +1455,10 @@ msgstr "Требуются сервисы определения местопо�
 #: panels/datetime/cc-datetime-panel.ui:212
 #: panels/display/cc-display-settings.ui:23
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/lock/cc-lock-panel.ui:39
-#: panels/lock/cc-lock-panel.ui:75 panels/lock/cc-lock-panel.ui:95
-#: panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:876
+#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
+#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
+#: panels/user-accounts/cc-user-panel.c:802
+#: panels/user-accounts/cc-user-panel.c:904
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Включено"
@@ -1887,7 +1888,7 @@ msgstr "Устройство соответствует %d уровню HSI"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:433
+#: panels/firmware-security/cc-firmware-security-panel.c:446
 msgid "No Protection"
 msgstr "Без защиты"
 
@@ -1904,7 +1905,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:111
 #: panels/firmware-security/cc-firmware-security-dialog.ui:80
-#: panels/firmware-security/cc-firmware-security-panel.c:440
+#: panels/firmware-security/cc-firmware-security-panel.c:453
 msgid "Minimal Protection"
 msgstr "Минимальная защита"
 
@@ -1921,7 +1922,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:127
 #: panels/firmware-security/cc-firmware-security-dialog.ui:94
-#: panels/firmware-security/cc-firmware-security-panel.c:447
+#: panels/firmware-security/cc-firmware-security-panel.c:460
 msgid "Basic Protection"
 msgstr "Базовая защита"
 
@@ -1936,7 +1937,7 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:146
 #: panels/firmware-security/cc-firmware-security-dialog.ui:108
-#: panels/firmware-security/cc-firmware-security-panel.c:454
+#: panels/firmware-security/cc-firmware-security-panel.c:467
 msgid "Extended Protection"
 msgstr "Расширенная защита"
 
@@ -1958,15 +1959,46 @@ msgstr "Ошибка: невозможно определить уровень H
 msgid "Error: unable to determine Incorrect HSI level."
 msgstr "Ошибка: невозможно определить Неправильный уровень HSI."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:241
+#. TRANSLATORS: hardware manufacturer as in OEM
+#: panels/firmware-security/cc-firmware-security-dialog.c:172
+#: panels/firmware-security/cc-firmware-security-dialog.c:182
+#: panels/firmware-security/cc-firmware-security-dialog.c:189
+msgid "Contact your hardware manufacturer for help with security updates."
+msgstr ""
+"Обратитесь к производителю оборудования за помощью в обновлении системы "
+"безопасности."
+
+#. TRANSLATORS: support technician as in someone with root
+#: panels/firmware-security/cc-firmware-security-dialog.c:174
+msgid ""
+"It might be possible to resolve this issue in the device’s UEFI firmware "
+"settings, or by a support technician."
+msgstr ""
+"Возможно, эту проблему можно решить в настройках прошивки UEFI устройства "
+"или с помощью специалиста службы поддержки."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:183
+#: panels/firmware-security/cc-firmware-security-dialog.c:194
+msgid ""
+"It might be possible to resolve this issue in the device’s UEFI firmware "
+"settings."
+msgstr ""
+"Возможно, эту проблему можно решить в настройках прошивки UEFI устройства."
+
+#. TRANSLATORS: support technician as in someone with root
+#: panels/firmware-security/cc-firmware-security-dialog.c:200
+msgid "It might be possible for a support technician to resolve this issue."
+msgstr "Возможно, специалист службы поддержки сможет решить эту проблему."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:300
 msgid "Minimal Security Protections"
 msgstr "Минимальные меры безопасности"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:246
+#: panels/firmware-security/cc-firmware-security-dialog.c:305
 msgid "Basic Security Protections"
 msgstr "Базовые меры безопасности"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:251
+#: panels/firmware-security/cc-firmware-security-dialog.c:310
 msgid "Extended Security Protections"
 msgstr "Расширенные меры безопасности"
 
@@ -1990,283 +2022,274 @@ msgstr "Некоторая защита при запуске устройств
 msgid "No protection when the device is started."
 msgstr "Без защиты при запуске устройства."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:434
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:138
+msgid ""
+"This issue could have been caused by a change in UEFI firmware settings, an "
+"operating system configuration change, or because of malicious software on "
+"this system."
+msgstr ""
+"Эта проблема могла быть вызвана изменением настроек прошивки UEFI, "
+"изменением конфигурации операционной системы или наличием вредоносного "
+"программного обеспечения в этой системе."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:146
+msgid ""
+"This issue could have been caused by a change in the UEFI firmware settings, "
+"or because of malicious software on this system."
+msgstr ""
+"Эта проблема могла быть вызвана изменением настроек прошивки UEFI или "
+"наличием вредоносного программного обеспечения в данной системе."
+
+#. TRANSLATORS: this is to explain an event that has already happened
+#: panels/firmware-security/cc-firmware-security-panel.c:153
+msgid ""
+"This issue could have been caused by an operating system configuration "
+"change, or because of malicious software on this system."
+msgstr ""
+"Эта проблема могла быть вызвана изменением конфигурации операционной системы "
+"или наличием вредоносного программного обеспечения в этой системе."
+
+#: panels/firmware-security/cc-firmware-security-panel.c:447
 msgid "Highly exposed to security threats."
 msgstr "Высокая степень подверженности угрозам безопасности."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:441
+#: panels/firmware-security/cc-firmware-security-panel.c:454
 msgid "Limited protection against simple security threats."
 msgstr "Ограниченная защита от простых угроз безопасности."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:448
+#: panels/firmware-security/cc-firmware-security-panel.c:461
 msgid "Protected against common security threats."
 msgstr "Обеспечена защита от распространенных угроз безопасности."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:455
-#: panels/firmware-security/cc-firmware-security-panel.c:462
+#: panels/firmware-security/cc-firmware-security-panel.c:468
+#: panels/firmware-security/cc-firmware-security-panel.c:475
 msgid "Protected against a wide range of security threats."
 msgstr "Обеспечена защита от широкого спектра угроз безопасности."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:461
+#: panels/firmware-security/cc-firmware-security-panel.c:474
 msgid "Comprehensive Protection"
 msgstr "Комплексная защита"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:128
+msgid "Security Events"
+msgstr "События безопасности"
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:138
 msgid "No Events"
 msgstr "Событий нет"
 
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:38
-msgid "SPI write"
-msgstr "SPI запись"
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:37
+msgid "Firmware Write Protection"
+msgstr "Защита от записи прошивки"
 
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:40
-msgid "SPI lock"
-msgstr "SPI блокировка"
-
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
 #: panels/firmware-security/cc-firmware-security-utils.c:42
-msgid "SPI BIOS region"
-msgstr "Регион SPI BIOS"
+msgid "Firmware Write Protection Lock"
+msgstr "Блокировка защиты от записи прошивки"
 
 #. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:44
-msgid "SPI BIOS Descriptor"
-msgstr "Дескриптор SPI BIOS"
+#: panels/firmware-security/cc-firmware-security-utils.c:47
+msgid "Firmware BIOS Region"
+msgstr "Регион прошивки BIOS"
+
+#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
+#: panels/firmware-security/cc-firmware-security-utils.c:52
+msgid "Firmware BIOS Descriptor"
+msgstr "Дескриптор прошивки BIOS"
 
 #. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
-#: panels/firmware-security/cc-firmware-security-utils.c:46
-msgid "Pre-boot DMA protection is"
-msgstr "Предзагрузочная защита DMA представлена"
+#: panels/firmware-security/cc-firmware-security-utils.c:57
+msgid "Pre-boot DMA Protection"
+msgstr "Предзагрузочная защита DMA"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel
-#: panels/firmware-security/cc-firmware-security-utils.c:48
+#: panels/firmware-security/cc-firmware-security-utils.c:62
 msgid "Intel BootGuard"
 msgstr "Intel BootGuard"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * verified boot refers to the way the boot process is verified
-#: panels/firmware-security/cc-firmware-security-utils.c:51
-msgid "Intel BootGuard verified boot"
+#: panels/firmware-security/cc-firmware-security-utils.c:68
+msgid "Intel BootGuard Verified Boot"
 msgstr "Проверенная загрузка Intel BootGuard"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * ACM means to verify the integrity of Initial Boot Block
-#: panels/firmware-security/cc-firmware-security-utils.c:54
-msgid "Intel BootGuard ACM protected"
+#: panels/firmware-security/cc-firmware-security-utils.c:74
+msgid "Intel BootGuard ACM Protected"
 msgstr "Защищенный ACM Intel BootGuard"
 
 #. TRANSLATORS: Title: BootGuard is a trademark from Intel,
 #. * error policy is what to do on failure
-#: panels/firmware-security/cc-firmware-security-utils.c:57
-msgid "Intel BootGuard error policy"
+#: panels/firmware-security/cc-firmware-security-utils.c:80
+msgid "Intel BootGuard Error Policy"
 msgstr "Политика ошибок Intel BootGuard"
 
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * OTP = one time programmable
-#: panels/firmware-security/cc-firmware-security-utils.c:60
-msgid "Intel BootGuard OTP fuse"
-msgstr "Предохранитель OTP Intel BootGuard"
+#. TRANSLATORS: Title: BootGuard is a trademark from Intel
+#: panels/firmware-security/cc-firmware-security-utils.c:85
+msgid "Intel BootGuard Fuse"
+msgstr "Предохранитель Intel BootGuard"
 
 #. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
 #. * enabled means supported by the processor
-#: panels/firmware-security/cc-firmware-security-utils.c:63
-msgid "Intel CET"
-msgstr "Intel CET"
+#: panels/firmware-security/cc-firmware-security-utils.c:91
+msgid "Intel CET Enabled"
+msgstr "Intel CET включена"
 
 #. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
 #. * active means being used by the OS
-#: panels/firmware-security/cc-firmware-security-utils.c:66
+#: panels/firmware-security/cc-firmware-security-utils.c:97
 msgid "Intel CET Active"
 msgstr "Intel CET активна"
 
 #. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
-#: panels/firmware-security/cc-firmware-security-utils.c:68
+#: panels/firmware-security/cc-firmware-security-utils.c:102
 msgid "Intel SMAP"
 msgstr "Intel SMAP"
 
 #. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
-#: panels/firmware-security/cc-firmware-security-utils.c:70
+#: panels/firmware-security/cc-firmware-security-utils.c:107
 msgid "Encrypted RAM"
 msgstr "Зашифрованное ОЗУ"
 
 #. TRANSLATORS: Title:
 #. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
-#: panels/firmware-security/cc-firmware-security-utils.c:73
-msgid "IOMMU device protection"
-msgstr "Защита устройства IOMMU"
+#: panels/firmware-security/cc-firmware-security-utils.c:113
+msgid "IOMMU Protection"
+msgstr "Защита IOMMU"
 
 #. TRANSLATORS: Title: lockdown is a security mode of the kernel
-#: panels/firmware-security/cc-firmware-security-utils.c:75
-msgid "Kernel lockdown"
-msgstr "Блокировка ядра"
+#: panels/firmware-security/cc-firmware-security-utils.c:118
+msgid "Linux Kernel Lockdown"
+msgstr "Блокировка ядра Linux"
 
 #. TRANSLATORS: Title: if it's tainted or not
-#: panels/firmware-security/cc-firmware-security-utils.c:77
-msgid "Kernel tainted"
-msgstr "Испорченное ядро"
+#: panels/firmware-security/cc-firmware-security-utils.c:123
+msgid "Linux Kernel Verification"
+msgstr "Проверка ядра Linux"
 
 #. TRANSLATORS: Title: swap space or swap partition
-#: panels/firmware-security/cc-firmware-security-utils.c:79
-msgid "Linux swap"
+#: panels/firmware-security/cc-firmware-security-utils.c:128
+msgid "Linux Swap"
 msgstr "Подкачка Linux"
 
 #. TRANSLATORS: Title: sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:81
-msgid "Suspend-to-ram"
+#: panels/firmware-security/cc-firmware-security-utils.c:133
+msgid "Suspend To RAM"
 msgstr "Режим сна"
 
 #. TRANSLATORS: Title: a better sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:83
-msgid "Suspend-to-idle"
+#: panels/firmware-security/cc-firmware-security-utils.c:138
+msgid "Suspend To Idle"
 msgstr "Режим ожидания"
 
 #. TRANSLATORS: Title: PK is the 'platform key' for the machine
-#: panels/firmware-security/cc-firmware-security-utils.c:85
-msgid "UEFI platform key"
+#: panels/firmware-security/cc-firmware-security-utils.c:143
+msgid "UEFI Platform Key"
 msgstr "Ключ платформы UEFI"
 
 #. TRANSLATORS: Title: SB is a way of locking down UEFI
-#: panels/firmware-security/cc-firmware-security-utils.c:87
-msgid "Secure boot"
-msgstr "Безопасная загрузка"
+#: panels/firmware-security/cc-firmware-security-utils.c:148
+msgid "UEFI Secure Boot"
+msgstr "Безопасная загрузка UEFI"
 
 #. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be empty
-#: panels/firmware-security/cc-firmware-security-utils.c:89
-msgid "All TPM PCRs are"
-msgstr "Все TPM PCRs представлены"
+#: panels/firmware-security/cc-firmware-security-utils.c:153
+msgid "TPM Platform Configuration"
+msgstr "Конфигурация платформы TPM"
 
 #. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
-#: panels/firmware-security/cc-firmware-security-utils.c:91
-msgid "TPM PCR0 reconstruction"
-msgstr "Реконструкция TPM PCR0"
+#: panels/firmware-security/cc-firmware-security-utils.c:158
+msgid "TPM Reconstruction"
+msgstr "Реконструкция TPM"
 
 #. TRANSLATORS: Title: TPM = Trusted Platform Module
-#: panels/firmware-security/cc-firmware-security-utils.c:93
+#: panels/firmware-security/cc-firmware-security-utils.c:163
 msgid "TPM v2.0"
 msgstr "TPM v2.0"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:95
-msgid "MEI manufacturing mode"
-msgstr "Производственный режим MEI"
+#: panels/firmware-security/cc-firmware-security-utils.c:168
+msgid "Intel Management Engine Manufacturing Mode"
+msgstr "Производственный режим Intel Management Engine"
 
-#. TRANSLATORS: Title: MEI = Intel Management Engine, and the
-#. * "override" is the physical PIN that can be driven to
-#. * logic high -- luckily it is probably not accessible to
-#. * end users on consumer boards
-#: panels/firmware-security/cc-firmware-security-utils.c:100
-msgid "MEI override"
-msgstr "Переопределение MEI"
+#. TRANSLATORS: Title: MEI = Intel Management Engine, and the "override" is enabled
+#. * with a jumper -- luckily it is probably not accessible to end users on consumer
+#. * boards
+#: panels/firmware-security/cc-firmware-security-utils.c:175
+msgid "Intel Management Engine Override"
+msgstr "Переопределение Intel Management Engine"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:102
-msgid "MEI version"
-msgstr "Версия MEI"
+#: panels/firmware-security/cc-firmware-security-utils.c:180
+msgid "Intel Management Engine Version"
+msgstr "Версия Intel Management Engine"
 
 #. TRANSLATORS: Title: if firmware updates are available
-#: panels/firmware-security/cc-firmware-security-utils.c:104
-msgid "Firmware updates"
+#: panels/firmware-security/cc-firmware-security-utils.c:185
+msgid "Firmware Updates"
 msgstr "Обновления прошивки"
 
 #. TRANSLATORS: Title: if we can verify the firmware checksums
-#: panels/firmware-security/cc-firmware-security-utils.c:106
-msgid "Firmware attestation"
+#: panels/firmware-security/cc-firmware-security-utils.c:190
+msgid "Firmware Attestation"
 msgstr "Аттестация прошивки"
 
 #. TRANSLATORS: Title: if the fwupd plugins are all present and correct
-#: panels/firmware-security/cc-firmware-security-utils.c:108
-msgid "fwupd plugins"
-msgstr "плагины fwupd"
+#: panels/firmware-security/cc-firmware-security-utils.c:195
+msgid "Firmware Updater Verification"
+msgstr "Подтверждение программы обновления прошивки"
 
-#. TRANSLATORS: Title: Direct Connect Interface (DCI) allows
-#. * debugging of Intel processors using the USB3 port
-#: panels/firmware-security/cc-firmware-security-utils.c:111
-#: panels/firmware-security/cc-firmware-security-utils.c:112
-msgid "Intel DCI debugger"
-msgstr "Отладчик Intel DCI"
-
-#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
-#: panels/firmware-security/cc-firmware-security-utils.c:114
-msgid "Pre-boot DMA protection"
-msgstr "Предзагрузочная защита DMA"
+#. TRANSLATORS: Title: Allows debugging of parts using proprietary hardware
+#: panels/firmware-security/cc-firmware-security-utils.c:201
+msgid "Platform Debugging"
+msgstr "Отладка платформы"
 
 #. TRANSLATORS: Title: if fwupd supports HSI on this chip
-#: panels/firmware-security/cc-firmware-security-utils.c:116
-msgid "Supported CPU"
-msgstr "Поддерживаемый ЦП"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:150
-msgid "IOMMU device protection enabled"
-msgstr "Защита устройства IOMMU включена"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:156
-msgid "IOMMU device protection disabled"
-msgstr "Защита устройства IOMMU отключена"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:176
-msgid "Kernel is no longer tainted"
-msgstr "Ядро больше не испорчено"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:182
-msgid "Kernel is tainted"
-msgstr "Ядро испорчено"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:188
-msgid "Kernel lockdown disabled"
-msgstr "Блокировка ядра отключена"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:194
-msgid "Kernel lockdown enabled"
-msgstr "Блокировка ядра включена"
-
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:200
-msgid "Pre-boot DMA protection is disabled"
-msgstr "Предзагрузочная защита DMA отключена"
-
-#. TRANSLATORS: HSI event title
 #: panels/firmware-security/cc-firmware-security-utils.c:206
-msgid "Pre-boot DMA protection is enabled"
-msgstr "Предзагрузочная защита DMA включена"
+msgid "Processor Security Checks"
+msgstr "Проверка безопасности процессора"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:212
-msgid "Secure Boot disabled"
-msgstr "Безопасная загрузка отключена"
+#. TRANSLATORS: Title: if firmware enforces rollback protection
+#: panels/firmware-security/cc-firmware-security-utils.c:211
+msgid "AMD Rollback Protection"
+msgstr "Защита от отката прошивки AMD"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:218
-msgid "Secure Boot enabled"
-msgstr "Безопасная загрузка включена"
+#. TRANSLATORS: Title: if hardware enforces control of SPI replays
+#: panels/firmware-security/cc-firmware-security-utils.c:216
+msgid "AMD Firmware Replay Protection"
+msgstr "Защита от повтора прошивки AMD"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:224
-msgid "All TPM PCRs are valid"
-msgstr "Все TPM PCRs действительны"
+#. TRANSLATORS: Title: if hardware enforces control of SPI writes
+#: panels/firmware-security/cc-firmware-security-utils.c:221
+msgid "AMD Firmware Write Protection"
+msgstr "Защита от записи прошивки AMD"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:230
-msgid "All TPM PCRs are now valid"
-msgstr "Все TPM PCRs сейчас действительны"
+#. TRANSLATORS: Title: if the part has been fused
+#: panels/firmware-security/cc-firmware-security-utils.c:226
+msgid "Fused Platform"
+msgstr "Объединенная платформа"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:236
-msgid "A TPM PCR is now an invalid value"
-msgstr "TPM PCR сейчас имеет недействительное значение"
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:3
+msgid "Device Security"
+msgstr "Безопасность устройства"
 
-#. TRANSLATORS: HSI event title
-#: panels/firmware-security/cc-firmware-security-utils.c:242
-msgid "TPM PCR0 reconstruction is invalid"
-msgstr "Реконструкция TPM PCR0 недействительна"
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:4
+msgid "Host firmware security status"
+msgstr "Статус безопасности прошивки хоста"
+
+#. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:20
+msgid ""
+"screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
+"network;identity;privacy;"
+msgstr ""
+"экран;блокировка;диагностика;сбой;личный;приватный;недавние;временные;tmp;"
+"индекс;имя;сеть;идентификация;личность;конфиденциальность;"
 
 #: panels/info-overview/cc-info-overview-panel.c:296
 #: panels/info-overview/cc-info-overview-panel.c:320
@@ -2947,187 +2970,6 @@ msgstr "Защитите вашу информацию о местоположе
 msgid "location;gps;private;privacy;"
 msgstr "местоположение;gps;частное;конфиденциальность;"
 
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:62
-msgctxt "lock_screen"
-msgid "Screen Turns Off"
-msgstr "Выключение экрана"
-
-# Блокировать экран после:
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:65
-msgctxt "lock_screen"
-msgid "30 seconds"
-msgstr "30 секунд"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:68
-msgctxt "lock_screen"
-msgid "1 minute"
-msgstr "1 минута"
-
-# Блокировать экран после:
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:71
-msgctxt "lock_screen"
-msgid "2 minutes"
-msgstr "2 минуты"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:74
-msgctxt "lock_screen"
-msgid "3 minutes"
-msgstr "3 минуты"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:77
-msgctxt "lock_screen"
-msgid "5 minutes"
-msgstr "5 минут"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:80
-msgctxt "lock_screen"
-msgid "30 minutes"
-msgstr "30 минут"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:83
-msgctxt "lock_screen"
-msgid "1 hour"
-msgstr "1 час"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:126
-msgctxt "blank_screen"
-msgid "1 minute"
-msgstr "1 минута"
-
-# Блокировать экран после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:129
-msgctxt "blank_screen"
-msgid "2 minutes"
-msgstr "2 минуты"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:132
-msgctxt "blank_screen"
-msgid "3 minutes"
-msgstr "3 минуты"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:135
-msgctxt "blank_screen"
-msgid "4 minutes"
-msgstr "4 минуты"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:138
-msgctxt "blank_screen"
-msgid "5 minutes"
-msgstr "5 минут"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:141
-msgctxt "blank_screen"
-msgid "8 minutes"
-msgstr "8 минут"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:144
-msgctxt "blank_screen"
-msgid "10 minutes"
-msgstr "10 минут"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:147
-msgctxt "blank_screen"
-msgid "12 minutes"
-msgstr "12 минут"
-
-# Выключать экран при простое после:
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:150
-msgctxt "blank_screen"
-msgid "15 minutes"
-msgstr "15 минут"
-
-#. Translators: Option for "Blank screen" in "Screen Lock" panel
-#: panels/lock/cc-lock-panel.c:153
-msgctxt "blank_screen"
-msgid "Never"
-msgstr "Никогда"
-
-#: panels/lock/cc-lock-panel.ui:8
-msgid ""
-"Automatically locking the screen prevents others from accessing the computer "
-"while you're away."
-msgstr ""
-"Автоматическая блокировка экрана предотвращает доступ к компьютеру, пока вас "
-"нет."
-
-#: panels/lock/cc-lock-panel.ui:13
-msgid "Blank Screen Delay"
-msgstr "Задержка выключения экрана"
-
-#: panels/lock/cc-lock-panel.ui:14
-msgid "Period of inactivity after which the screen will go blank."
-msgstr "Период бездействия, после которого экран выключится."
-
-#: panels/lock/cc-lock-panel.ui:32
-msgid "Automatic Screen _Lock"
-msgstr "Автоматическая _блокировка экрана"
-
-#: panels/lock/cc-lock-panel.ui:49
-msgid "Automatic _Screen Lock Delay"
-msgstr "Задержка _автоматической блокировки экрана"
-
-#: panels/lock/cc-lock-panel.ui:50
-msgid "Period after the screen blanks when the screen is automatically locked."
-msgstr "Задержка автоматической блокировки после отключения экрана."
-
-#: panels/lock/cc-lock-panel.ui:68
-msgid "Show _Notifications on Lock Screen"
-msgstr "Показывать _уведомления на экране блокировки"
-
-#: panels/lock/cc-lock-panel.ui:86
-msgid "Forbid new _USB devices"
-msgstr "Запрещать новые USB _устройств"
-
-#: panels/lock/cc-lock-panel.ui:87
-msgid ""
-"Prevent new USB devices from interacting with the system when the screen is "
-"locked."
-msgstr ""
-"Предотвращать взаимодействие новых USB устройств с системой когда экран "
-"заблокирован."
-
-#: panels/lock/gnome-lock-panel.desktop.in.in:3
-msgid "Screen Lock"
-msgstr "Блокировка экрана"
-
-#: panels/lock/gnome-lock-panel.desktop.in.in:4
-msgid "Lock your screen"
-msgstr "Заблокировать экран"
-
-#. Translators: Search terms to find the Lock panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: panels/lock/gnome-lock-panel.desktop.in.in:20
-msgid "screen;lock;private;privacy;"
-msgstr "экран;блокировка;частное;конфиденциальность;"
-
 #: panels/microphone/cc-microphone-panel.ui:23
 msgid "Microphone Turned Off"
 msgstr "Микрофон выключен"
@@ -3475,7 +3317,7 @@ msgstr "Название сети"
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
 #: panels/printers/new-printer-dialog.ui:338
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:391
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:384
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:364
@@ -5013,12 +4855,12 @@ msgstr "Другое"
 #. Translators: The %s is the username (eg., debarshi.ray@gmail.com
 #. * or rishi).
 #.
-#: panels/online-accounts/cc-online-accounts-panel.c:279
+#: panels/online-accounts/cc-online-accounts-panel.c:280
 #, c-format
 msgid "%s removed"
 msgstr "%s удалён"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:690
+#: panels/online-accounts/cc-online-accounts-panel.c:691
 msgid "Error removing account"
 msgstr "Ошибка при удалении учётной записи"
 
@@ -5253,7 +5095,7 @@ msgstr "При работе от батареи"
 
 #: panels/power/cc-power-panel.c:735
 msgid "When plugged in"
-msgstr "При подключении"
+msgstr "При подключении к сети"
 
 #: panels/power/cc-power-panel.c:856
 msgctxt "Idle time"
@@ -6429,6 +6271,195 @@ msgstr ""
 "устройство;система;по умолчанию;приложение;предпочтительный;cd;dvd;usb;аудио;"
 "видео;диск;съёмный;съемный;носитель;автозапуск;"
 
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:70
+msgctxt "lock_screen"
+msgid "Screen Turns Off"
+msgstr "Выключение экрана"
+
+# Блокировать экран после:
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:73
+msgctxt "lock_screen"
+msgid "30 seconds"
+msgstr "30 секунд"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:76
+msgctxt "lock_screen"
+msgid "1 minute"
+msgstr "1 минута"
+
+# Блокировать экран после:
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:79
+msgctxt "lock_screen"
+msgid "2 minutes"
+msgstr "2 минуты"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:82
+msgctxt "lock_screen"
+msgid "3 minutes"
+msgstr "3 минуты"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:85
+msgctxt "lock_screen"
+msgid "5 minutes"
+msgstr "5 минут"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:88
+msgctxt "lock_screen"
+msgid "30 minutes"
+msgstr "30 минут"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:91
+msgctxt "lock_screen"
+msgid "1 hour"
+msgstr "1 час"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:134
+msgctxt "blank_screen"
+msgid "1 minute"
+msgstr "1 минута"
+
+# Блокировать экран после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:137
+msgctxt "blank_screen"
+msgid "2 minutes"
+msgstr "2 минуты"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:140
+msgctxt "blank_screen"
+msgid "3 minutes"
+msgstr "3 минуты"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:143
+msgctxt "blank_screen"
+msgid "4 minutes"
+msgstr "4 минуты"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:146
+msgctxt "blank_screen"
+msgid "5 minutes"
+msgstr "5 минут"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:149
+msgctxt "blank_screen"
+msgid "8 minutes"
+msgstr "8 минут"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:152
+msgctxt "blank_screen"
+msgid "10 minutes"
+msgstr "10 минут"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:155
+msgctxt "blank_screen"
+msgid "12 minutes"
+msgstr "12 минут"
+
+# Выключать экран при простое после:
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:158
+msgctxt "blank_screen"
+msgid "15 minutes"
+msgstr "15 минут"
+
+#. Translators: Option for "Blank screen" in "Screen Lock" panel
+#: panels/screen/cc-screen-panel.c:161
+msgctxt "blank_screen"
+msgid "Never"
+msgstr "Никогда"
+
+#: panels/screen/cc-screen-panel.ui:8
+msgid "Screen Lock"
+msgstr "Блокировка экрана"
+
+#: panels/screen/cc-screen-panel.ui:9
+msgid ""
+"Automatically locking the screen prevents others from accessing the computer "
+"while you're away."
+msgstr ""
+"Автоматическая блокировка экрана предотвращает доступ к компьютеру, пока вас "
+"нет."
+
+#: panels/screen/cc-screen-panel.ui:14
+msgid "Blank Screen Delay"
+msgstr "Задержка выключения экрана"
+
+#: panels/screen/cc-screen-panel.ui:15
+msgid "Period of inactivity after which the screen will go blank."
+msgstr "Период бездействия, после которого экран выключится."
+
+#: panels/screen/cc-screen-panel.ui:33
+msgid "Automatic Screen _Lock"
+msgstr "Автоматическая _блокировка экрана"
+
+#: panels/screen/cc-screen-panel.ui:50
+msgid "Automatic _Screen Lock Delay"
+msgstr "Задержка _автоматической блокировки экрана"
+
+#: panels/screen/cc-screen-panel.ui:51
+msgid "Period after the screen blanks when the screen is automatically locked."
+msgstr "Задержка автоматической блокировки после отключения экрана."
+
+#: panels/screen/cc-screen-panel.ui:69
+msgid "Show _Notifications on Lock Screen"
+msgstr "Показывать _уведомления на экране блокировки"
+
+#: panels/screen/cc-screen-panel.ui:87
+msgid "Forbid new _USB devices"
+msgstr "Запрещать новые USB _устройств"
+
+#: panels/screen/cc-screen-panel.ui:88
+msgid ""
+"Prevent new USB devices from interacting with the system when the screen is "
+"locked."
+msgstr ""
+"Предотвращать взаимодействие новых USB устройств с системой когда экран "
+"заблокирован."
+
+#: panels/screen/cc-screen-panel.ui:108
+msgid "Screen Privacy"
+msgstr "Конфиденциальность экрана"
+
+#: panels/screen/cc-screen-panel.ui:113
+msgid "Restrict Viewing Angle"
+msgstr "Ограничение угла обзора"
+
+#: panels/screen/gnome-screen-panel.desktop.in.in:4
+msgid "Screen Settings"
+msgstr "Настройки экрана"
+
+#. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/screen/gnome-screen-panel.desktop.in.in:20
+msgid "screen;lock;private;privacy;"
+msgstr "экран;блокировка;частное;конфиденциальность;"
+
 #: panels/search/cc-search-locations-dialog.c:674
 msgid "Select Location"
 msgstr "Выберите расположение"
@@ -6661,8 +6692,8 @@ msgstr ""
 
 #: panels/sharing/cc-sharing-panel.ui:318
 #: panels/sharing/cc-sharing-panel.ui:345
-#: panels/sharing/cc-sharing-panel.ui:379
-#: panels/sharing/cc-sharing-panel.ui:405
+#: panels/sharing/cc-sharing-panel.ui:372
+#: panels/sharing/cc-sharing-panel.ui:390
 msgid "Copy"
 msgstr "Копировать"
 
@@ -6683,15 +6714,15 @@ msgstr ""
 msgid "User Name"
 msgstr "Имя пользователя"
 
-#: panels/sharing/cc-sharing-panel.ui:420
+#: panels/sharing/cc-sharing-panel.ui:405
 msgid "Verify Encryption"
 msgstr "Проверить шифрование"
 
-#: panels/sharing/cc-sharing-panel.ui:449
+#: panels/sharing/cc-sharing-panel.ui:434
 msgid "Encryption Fingerprint"
 msgstr "Отпечаток пальца для шифрования"
 
-#: panels/sharing/cc-sharing-panel.ui:450
+#: panels/sharing/cc-sharing-panel.ui:435
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6699,15 +6730,15 @@ msgstr ""
 "Отпечаток пальца для шифрования виден подключающимся клиентам и должен быть "
 "идентичным."
 
-#: panels/sharing/cc-sharing-panel.ui:482
+#: panels/sharing/cc-sharing-panel.ui:467
 msgid "Media Sharing"
 msgstr "Общий доступ к медиа"
 
-#: panels/sharing/cc-sharing-panel.ui:504
+#: panels/sharing/cc-sharing-panel.ui:489
 msgid "Share music, photos and videos over the network."
 msgstr "Общий доступ к музыке, фото и видео по сети."
 
-#: panels/sharing/cc-sharing-panel.ui:517
+#: panels/sharing/cc-sharing-panel.ui:502
 msgid "Folders"
 msgstr "Папки"
 
@@ -8127,7 +8158,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:712
+#: panels/user-accounts/cc-user-panel.c:727
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -8135,7 +8166,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:716
+#: panels/user-accounts/cc-user-panel.c:731
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -8156,11 +8187,11 @@ msgstr "Сеанс начат"
 msgid "%s — Account Activity"
 msgstr "%s — активность учётной записи"
 
-#: panels/user-accounts/cc-login-history-dialog.ui:24
+#: panels/user-accounts/cc-login-history-dialog.ui:27
 msgid "Previous"
 msgstr "Предыдущее"
 
-#: panels/user-accounts/cc-login-history-dialog.ui:34
+#: panels/user-accounts/cc-login-history-dialog.ui:37
 msgid "Next"
 msgstr "Следующее"
 
@@ -8227,26 +8258,26 @@ msgstr "Неправильный пароль, попробуйте ещё ра�
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Не удалось подключиться к домену %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:341
+#: panels/user-accounts/cc-user-panel.c:356
 msgid "Failed to delete user"
 msgstr "Не удалось удалить пользователя"
 
-#: panels/user-accounts/cc-user-panel.c:398
-#: panels/user-accounts/cc-user-panel.c:453
-#: panels/user-accounts/cc-user-panel.c:499
+#: panels/user-accounts/cc-user-panel.c:413
+#: panels/user-accounts/cc-user-panel.c:468
+#: panels/user-accounts/cc-user-panel.c:514
 msgid "Failed to revoke remotely managed user"
 msgstr "Не удалось аннулировать удалённого пользователя"
 
-#: panels/user-accounts/cc-user-panel.c:548
+#: panels/user-accounts/cc-user-panel.c:563
 msgid "You cannot delete your own account."
 msgstr "Нельзя удалить собственную учётную запись."
 
-#: panels/user-accounts/cc-user-panel.c:557
+#: panels/user-accounts/cc-user-panel.c:572
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s всё ещё находится в системе"
 
-#: panels/user-accounts/cc-user-panel.c:561
+#: panels/user-accounts/cc-user-panel.c:576
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -8254,12 +8285,12 @@ msgstr ""
 "Удаление пользователя, с незавершённым сеансом, может привести систему в "
 "противоречивое состояние."
 
-#: panels/user-accounts/cc-user-panel.c:570
+#: panels/user-accounts/cc-user-panel.c:585
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Хотите сохранить файлы пользователя %s?"
 
-#: panels/user-accounts/cc-user-panel.c:574
+#: panels/user-accounts/cc-user-panel.c:589
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8267,60 +8298,60 @@ msgstr ""
 "Можно сохранить домашнюю папку, почтовый ящик и временные файлы при удалении "
 "учётной записи пользователя."
 
-#: panels/user-accounts/cc-user-panel.c:577
+#: panels/user-accounts/cc-user-panel.c:592
 msgid "_Delete Files"
 msgstr "_Удалить файлы"
 
-#: panels/user-accounts/cc-user-panel.c:578
+#: panels/user-accounts/cc-user-panel.c:593
 msgid "_Keep Files"
 msgstr "_Сохранить файлы"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:607
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Действительно аннулировать удалённую учётную запись %s?"
 
-#: panels/user-accounts/cc-user-panel.c:596
+#: panels/user-accounts/cc-user-panel.c:611
 msgid "_Delete"
 msgstr "_Удалить"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:661
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Учётная запись отключена"
 
-#: panels/user-accounts/cc-user-panel.c:654
+#: panels/user-accounts/cc-user-panel.c:669
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Установить при следующем входе в систему"
 
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:672
 msgctxt "Password mode"
 msgid "None"
 msgstr "Нет"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:715
 msgid "Logged in"
 msgstr "Авторизованная"
 
-#: panels/user-accounts/cc-user-panel.c:1173
+#: panels/user-accounts/cc-user-panel.c:1202
 msgid "Failed to contact the accounts service"
 msgstr "Не удалось связаться со службой учётных записей"
 
-#: panels/user-accounts/cc-user-panel.c:1175
+#: panels/user-accounts/cc-user-panel.c:1204
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Убедитесь, что AccountService установлен и включён."
 
-#: panels/user-accounts/cc-user-panel.c:1197
+#: panels/user-accounts/cc-user-panel.c:1226
 msgid "This panel must be unlocked to change this setting"
 msgstr "Для изменения этой настройки панель должна быть разблокирована"
 
-#: panels/user-accounts/cc-user-panel.c:1264
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid "Delete the selected user account"
 msgstr "Удалить выбранную учётную запись пользователя"
 
-#: panels/user-accounts/cc-user-panel.c:1268
-#: panels/user-accounts/cc-user-panel.c:1377
+#: panels/user-accounts/cc-user-panel.c:1297
+#: panels/user-accounts/cc-user-panel.c:1406
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8328,7 +8359,7 @@ msgstr ""
 "Чтобы удалить выбранную учётную запись пользователя,\n"
 "сначала нажмите на значок *"
 
-#: panels/user-accounts/cc-user-panel.c:1423
+#: panels/user-accounts/cc-user-panel.c:1452
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Разблокировать для добавления пользователей и изменения настроек"
 
@@ -9444,6 +9475,90 @@ msgstr[2] "%u входов"
 msgid "System Sounds"
 msgstr "Системные звуки"
 
+#~ msgid "SPI write"
+#~ msgstr "SPI запись"
+
+#~ msgid "SPI lock"
+#~ msgstr "SPI блокировка"
+
+#~ msgid "SPI BIOS region"
+#~ msgstr "Регион SPI BIOS"
+
+#~ msgid "Pre-boot DMA protection is"
+#~ msgstr "Предзагрузочная защита DMA представлена"
+
+#~ msgid "Kernel tainted"
+#~ msgstr "Испорченное ядро"
+
+#~ msgid "Suspend-to-ram"
+#~ msgstr "Режим сна"
+
+#~ msgid "All TPM PCRs are"
+#~ msgstr "Все TPM PCRs представлены"
+
+#~ msgid "MEI manufacturing mode"
+#~ msgstr "Производственный режим MEI"
+
+#~ msgid "MEI override"
+#~ msgstr "Переопределение MEI"
+
+#~ msgid "MEI version"
+#~ msgstr "Версия MEI"
+
+#~ msgid "fwupd plugins"
+#~ msgstr "плагины fwupd"
+
+#~ msgid "Intel DCI debugger"
+#~ msgstr "Отладчик Intel DCI"
+
+#~ msgid "Supported CPU"
+#~ msgstr "Поддерживаемый ЦП"
+
+#~ msgid "IOMMU device protection enabled"
+#~ msgstr "Защита устройства IOMMU включена"
+
+#~ msgid "IOMMU device protection disabled"
+#~ msgstr "Защита устройства IOMMU отключена"
+
+#~ msgid "Kernel is no longer tainted"
+#~ msgstr "Ядро больше не испорчено"
+
+#~ msgid "Kernel is tainted"
+#~ msgstr "Ядро испорчено"
+
+#~ msgid "Kernel lockdown disabled"
+#~ msgstr "Блокировка ядра отключена"
+
+#~ msgid "Kernel lockdown enabled"
+#~ msgstr "Блокировка ядра включена"
+
+#~ msgid "Pre-boot DMA protection is disabled"
+#~ msgstr "Предзагрузочная защита DMA отключена"
+
+#~ msgid "Pre-boot DMA protection is enabled"
+#~ msgstr "Предзагрузочная защита DMA включена"
+
+#~ msgid "Secure Boot disabled"
+#~ msgstr "Безопасная загрузка отключена"
+
+#~ msgid "Secure Boot enabled"
+#~ msgstr "Безопасная загрузка включена"
+
+#~ msgid "All TPM PCRs are valid"
+#~ msgstr "Все TPM PCRs действительны"
+
+#~ msgid "All TPM PCRs are now valid"
+#~ msgstr "Все TPM PCRs сейчас действительны"
+
+#~ msgid "A TPM PCR is now an invalid value"
+#~ msgstr "TPM PCR сейчас имеет недействительное значение"
+
+#~ msgid "TPM PCR0 reconstruction is invalid"
+#~ msgstr "Реконструкция TPM PCR0 недействительна"
+
+#~ msgid "Lock your screen"
+#~ msgstr "Заблокировать экран"
+
 #~ msgid "Display Arrangement"
 #~ msgstr "Расположение дисплея"
 
@@ -9462,13 +9577,6 @@ msgstr "Системные звуки"
 #~ msgstr ""
 #~ "экран;блокировка;диагностика;сбой;личный;приватный;недавние;временные;tmp;"
 #~ "индекс;имя;сеть;идентификация;"
-
-#~ msgid ""
-#~ "screen;lock;diagnostics;crash;private;recent;temporary;tmp;index;name;"
-#~ "network;identity;privacy;"
-#~ msgstr ""
-#~ "экран;блокировка;диагностика;сбой;личный;приватный;недавние;временные;tmp;"
-#~ "индекс;имя;сеть;идентификация;личность;конфиденциальность;"
 
 #~ msgid "Bark"
 #~ msgstr "Лай"
