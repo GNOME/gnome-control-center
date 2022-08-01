@@ -263,6 +263,8 @@ update_hsi_listbox (CcFirmwareSecurityDialog *self,
   for (GList *item = g_list_first (hash_keys); item != NULL; item = g_list_next (item))
     {
       FwupdSecurityAttr *attr = g_hash_table_lookup (hsi_dict, item->data);
+      if (g_strcmp0 (attr->appstream_id, FWUPD_SECURITY_ATTR_ID_SUPPORTED_CPU) == 0)
+        continue;
       if (attr->title == NULL)
         continue;
       if (firmware_security_attr_has_flag (attr, FWUPD_SECURITY_ATTR_FLAG_SUCCESS))
