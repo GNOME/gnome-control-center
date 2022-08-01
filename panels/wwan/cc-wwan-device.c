@@ -993,9 +993,28 @@ cc_wwan_device_get_string_from_mode (CcWwanDevice *self,
   if (allowed == MM_MODEM_MODE_4G)
     return g_strdup (_("4G Only"));
 
+  if (allowed == MM_MODEM_MODE_5G)
+    return g_strdup (_("5G Only"));
+
   str = g_string_sized_new (10);
 
   if (allowed & MM_MODEM_MODE_2G &&
+      allowed & MM_MODEM_MODE_3G &&
+      allowed & MM_MODEM_MODE_4G &&
+      allowed & MM_MODEM_MODE_5G)
+    {
+      if (preferred & MM_MODEM_MODE_5G)
+        g_string_append (str, _("2G, 3G, 4G, 5G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_4G)
+        g_string_append (str, _("2G, 3G, 4G (Preferred), 5G"));
+      else if (preferred & MM_MODEM_MODE_3G)
+        g_string_append (str, _("2G, 3G (Preferred), 4G, 5G"));
+      else if (preferred & MM_MODEM_MODE_2G)
+        g_string_append (str, _("2G (Preferred), 3G, 4G, 5G"));
+      else
+        g_string_append (str, _("2G, 3G, 4G, 5G"));
+    }
+  else if (allowed & MM_MODEM_MODE_2G &&
       allowed & MM_MODEM_MODE_3G &&
       allowed & MM_MODEM_MODE_4G)
     {
@@ -1007,6 +1026,45 @@ cc_wwan_device_get_string_from_mode (CcWwanDevice *self,
         g_string_append (str, _("2G (Preferred), 3G, 4G"));
       else
         g_string_append (str, _("2G, 3G, 4G"));
+    }
+  else if (allowed & MM_MODEM_MODE_3G &&
+      allowed & MM_MODEM_MODE_4G &&
+      allowed & MM_MODEM_MODE_5G)
+    {
+      if (preferred & MM_MODEM_MODE_5G)
+        g_string_append (str, _("3G, 4G, 5G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_4G)
+        g_string_append (str, _("3G, 4G (Preferred), 5G"));
+      else if (preferred & MM_MODEM_MODE_2G)
+        g_string_append (str, _("3G (Preferred), 4G, 5G"));
+      else
+        g_string_append (str, _("3G, 4G, 5G"));
+    }
+  else if (allowed & MM_MODEM_MODE_2G &&
+      allowed & MM_MODEM_MODE_4G &&
+      allowed & MM_MODEM_MODE_5G)
+    {
+      if (preferred & MM_MODEM_MODE_5G)
+        g_string_append (str, _("2G, 4G, 5G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_4G)
+        g_string_append (str, _("2G, 4G (Preferred), 5G"));
+      else if (preferred & MM_MODEM_MODE_2G)
+        g_string_append (str, _("2G (Preferred), 4G, 5G"));
+      else
+        g_string_append (str, _("2G, 4G, 5G"));
+    }
+  else if (allowed & MM_MODEM_MODE_2G &&
+      allowed & MM_MODEM_MODE_3G &&
+      allowed & MM_MODEM_MODE_5G)
+    {
+      if (preferred & MM_MODEM_MODE_5G)
+        g_string_append (str, _("2G, 3G, 5G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_3G)
+        g_string_append (str, _("2G, 3G (Preferred), 5G"));
+      else if (preferred & MM_MODEM_MODE_2G)
+        g_string_append (str, _("2G (Preferred), 3G, 5G"));
+      else
+        g_string_append (str, _("2G, 3G, 5G"));
     }
   else if (allowed & MM_MODEM_MODE_3G &&
            allowed & MM_MODEM_MODE_4G)
@@ -1037,6 +1095,36 @@ cc_wwan_device_get_string_from_mode (CcWwanDevice *self,
         g_string_append (str, _("2G (Preferred), 3G"));
       else
         g_string_append (str, _("2G, 3G"));
+    }
+  else if (allowed & MM_MODEM_MODE_2G &&
+           allowed & MM_MODEM_MODE_5G)
+    {
+      if (preferred & MM_MODEM_MODE_5G)
+        g_string_append (str, _("2G, 5G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_2G)
+        g_string_append (str, _("2G (Preferred), 5G"));
+      else
+        g_string_append (str, _("2G, 5G"));
+    }
+  else if (allowed & MM_MODEM_MODE_3G &&
+           allowed & MM_MODEM_MODE_5G)
+    {
+      if (preferred & MM_MODEM_MODE_5G)
+        g_string_append (str, _("3G, 5G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_3G)
+        g_string_append (str, _("3G (Preferred), 5G"));
+      else
+        g_string_append (str, _("3G, 5G"));
+    }
+  else if (allowed & MM_MODEM_MODE_4G &&
+           allowed & MM_MODEM_MODE_5G)
+    {
+      if (preferred & MM_MODEM_MODE_5G)
+        g_string_append (str, _("4G, 5G (Preferred)"));
+      else if (preferred & MM_MODEM_MODE_4G)
+        g_string_append (str, _("4G (Preferred), 5G"));
+      else
+        g_string_append (str, _("4G, 5G"));
     }
 
   if (!str->len)
