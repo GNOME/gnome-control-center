@@ -41,8 +41,7 @@ sources += gnome.compile_resources(
 libconnection_editor = static_library(
   name,
   sources: sources,
-  include_directories: [top_inc, common_inc, network_inc, wireless_security_inc],
+  include_directories: [top_inc, common_inc, network_inc],
   dependencies: deps,
   c_args: cflags,
-  link_with: libwireless_security
 )

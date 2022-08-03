@@ -26,11 +26,10 @@
 #include <NetworkManager.h>
 #include <string.h>
 
-#include "ws-wpa-eap.h"
-#include "wireless-security.h"
 #include "ce-page.h"
 #include "ce-page-ethernet.h"
 #include "ce-page-8021x-security.h"
+#include "nma-ws.h"
 
 struct _CEPage8021xSecurity {
 	GtkGrid parent;
@@ -40,7 +39,7 @@ struct _CEPage8021xSecurity {
         GtkLabel    *security_label;
 
         NMConnection *connection;
-        WirelessSecurityWPAEAP *security;
+        NMAWs8021x *security;
         GtkSizeGroup *group;
         gboolean initial_have_8021x;
 };
@@ -71,13 +70,13 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 
 	self->group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
 
-	self->security = ws_wpa_eap_new (self->connection);
+	self->security = nma_ws_802_1x_new (self->connection, FALSE, FALSE);
 	if (!self->security) {
 		g_warning ("Could not load 802.1x user interface.");
 		return;
 	}
 
-	g_signal_connect_object (WIRELESS_SECURITY (self->security), "changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
+	g_signal_connect_object (NMA_WS (self->security), "ws-changed", G_CALLBACK (security_item_changed_cb), self, G_CONNECT_SWAPPED);
 	if (gtk_widget_get_parent (GTK_WIDGET (self->security)))
 		gtk_box_remove (self->box, GTK_WIDGET (self->security));
 
@@ -86,7 +85,7 @@ finish_setup (CEPage8021xSecurity *self, gpointer unused, GError *error, gpointe
 	gtk_widget_set_sensitive (GTK_WIDGET (self->security), self->initial_have_8021x);
 
 	gtk_size_group_add_widget (self->group, GTK_WIDGET (self->security_label));
-	wireless_security_add_to_size_group (WIRELESS_SECURITY (self->security), self->group);
+	nma_ws_add_to_size_group (NMA_WS (self->security), self->group);
 
 	gtk_box_append (self->box, GTK_WIDGET (self->security));
 
@@ -119,7 +118,7 @@ ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GErro
 		NMSetting *s_8021x;
 
 		/* FIXME: get failed property and error out of wireless security objects */
-		valid = wireless_security_validate (WIRELESS_SECURITY (self->security), error);
+		valid = nma_ws_validate (NMA_WS (self->security), error);
 		if (valid) {
 			g_autoptr(NMConnection) tmp_connection = NULL;
 
@@ -127,7 +126,7 @@ ce_page_8021x_security_validate (CEPage *cepage, NMConnection *connection, GErro
 			tmp_connection = nm_simple_connection_new_clone (connection);
 			nm_connection_add_setting (tmp_connection, nm_setting_wireless_new ());
 
-			ws_wpa_eap_fill_connection (self->security, tmp_connection);
+			nma_ws_fill_connection (NMA_WS (self->security), tmp_connection);
 
 			/* NOTE: It is important we create a copy of the settings, as the
 			 * secrets might be cleared otherwise.

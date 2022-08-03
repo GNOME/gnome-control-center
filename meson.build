@@ -232,7 +232,7 @@ if host_is_linux
   mm_dep =  dependency('mm-glib', version: '>= 0.7')
   network_manager_deps = [
     dependency('libnm', version: '>= 1.24.0'),
-    dependency('libnma-gtk4', version: '>= 1.8.0'),
+    dependency('libnma-gtk4', version: '>= 1.10.2'),
     mm_dep,
   ]
 endif

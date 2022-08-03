@@ -5,7 +5,6 @@ deps = common_deps + network_manager_deps + [
 
 network_inc = include_directories('.')
 
-subdir('wireless-security')
 subdir('connection-editor')
 subdir('icons')
 
