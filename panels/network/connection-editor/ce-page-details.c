@@ -259,13 +259,11 @@ connect_details_page (CEPageDetails *self)
         sc = nm_connection_get_setting_connection (self->connection);
         type = nm_setting_connection_get_connection_type (sc);
 
-        if (NM_IS_DEVICE_WIFI (self->device)) {
+        if (NM_IS_DEVICE_WIFI (self->device))
                 active_ap = nm_device_wifi_get_active_access_point (NM_DEVICE_WIFI (self->device));
-                frequency = nm_access_point_get_frequency (active_ap);
-        } else {
+        else
                 active_ap = NULL;
-                frequency = 0;
-        }
+        frequency = active_ap ? nm_access_point_get_frequency (active_ap) : 0;
 
         state = self->device ? nm_device_get_state (self->device) : NM_DEVICE_STATE_DISCONNECTED;
 
