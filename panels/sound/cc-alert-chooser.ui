@@ -7,25 +7,33 @@
       <class name="linked"/>
     </style>
     <child>
-      <object class="GtkToggleButton" id="drip_button">
+      <object class="GtkToggleButton" id="click_button">
         <property name="visible">True</property>
-        <property name="label" translatable="yes">Drip</property>
+        <property name="label" translatable="yes">Click</property>
         <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
       </object>
     </child>
     <child>
-      <object class="GtkToggleButton" id="glass_button">
+      <object class="GtkToggleButton" id="string_button">
         <property name="visible">True</property>
-        <property name="group">drip_button</property>
-        <property name="label" translatable="yes">Glass</property>
+        <property name="group">click_button</property>
+        <property name="label" translatable="yes">String</property>
         <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
       </object>
     </child>
     <child>
-      <object class="GtkToggleButton" id="sonar_button">
+      <object class="GtkToggleButton" id="swing_button">
         <property name="visible">True</property>
-        <property name="group">drip_button</property>
-        <property name="label" translatable="yes">Sonar</property>
+        <property name="group">click_button</property>
+        <property name="label" translatable="yes">Swing</property>
+        <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
+      </object>
+    </child>
+    <child>
+      <object class="GtkToggleButton" id="hum_button">
+        <property name="visible">True</property>
+        <property name="group">click_button</property>
+        <property name="label" translatable="yes">Hum</property>
         <signal name="clicked" handler="clicked_cb" object="CcAlertChooser" swapped="yes"/>
       </object>
     </child>

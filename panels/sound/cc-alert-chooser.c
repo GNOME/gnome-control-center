@@ -29,9 +29,10 @@ struct _CcAlertChooser
 {
   GtkBox         parent_instance;
 
-  GtkToggleButton *drip_button;
-  GtkToggleButton *glass_button;
-  GtkToggleButton *sonar_button;
+  GtkToggleButton *click_button;
+  GtkToggleButton *hum_button;
+  GtkToggleButton *string_button;
+  GtkToggleButton *swing_button;
 
   GSoundContext *context;
   GSettings     *sound_settings;
@@ -214,20 +215,24 @@ static void
 clicked_cb (CcAlertChooser *self,
             GtkToggleButton  *button)
 {
-  if (button == self->drip_button)
-    select_sound (self, "drip");
-  else if (button == self->glass_button)
-    select_sound (self, "glass");
-  else if (button == self->sonar_button)
-    select_sound (self, "sonar");
+  if (button == self->click_button)
+    select_sound (self, "click");
+  else if (button == self->hum_button)
+    select_sound (self, "hum");
+  else if (button == self->string_button)
+    select_sound (self, "string");
+  else if (button == self->swing_button)
+    select_sound (self, "swing");
 
   set_button (self, button, TRUE);
-  if (button != self->drip_button)
-    set_button (self, self->drip_button, FALSE);
-  if (button != self->glass_button)
-    set_button (self, self->glass_button, FALSE);
-  if (button != self->sonar_button)
-    set_button (self, self->sonar_button, FALSE);
+  if (button != self->click_button)
+    set_button (self, self->click_button, FALSE);
+  if (button != self->hum_button)
+    set_button (self, self->hum_button, FALSE);
+  if (button != self->string_button)
+    set_button (self, self->string_button, FALSE);
+  if (button != self->swing_button)
+    set_button (self, self->swing_button, FALSE);
 }
 
 static void
@@ -251,9 +256,10 @@ cc_alert_chooser_class_init (CcAlertChooserClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, drip_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, glass_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, sonar_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, click_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, hum_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, string_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, swing_button);
 
   gtk_widget_class_bind_template_callback (widget_class, clicked_cb);
 }
@@ -276,20 +282,25 @@ cc_alert_chooser_init (CcAlertChooser *self)
 
   alert_name = get_alert_name ();
 
-  /* If user has selected the old dog bark theme, migrate them to drip. */
-  if (g_strcmp0 (alert_name, "bark") == 0)
+  /* If user has selected an old sound alert, migrate them to click. */
+  if (g_strcmp0 (alert_name, "click") != 0 ||
+      g_strcmp0 (alert_name, "hum") != 0 ||
+      g_strcmp0 (alert_name, "string") != 0 ||
+      g_strcmp0 (alert_name, "swing") != 0)
     {
-      set_custom_theme (self, "drip");
+      set_custom_theme (self, "click");
       g_free (alert_name);
-      alert_name = g_strdup ("drip");
+      alert_name = g_strdup ("click");
     }
 
-  if (g_strcmp0 (alert_name, "drip") == 0)
-    set_button (self, self->drip_button, TRUE);
-  else if (g_strcmp0 (alert_name, "glass") == 0)
-    set_button (self, self->glass_button, TRUE);
-  else if (g_strcmp0 (alert_name, "sonar") == 0)
-    set_button (self, self->sonar_button, TRUE);
+  if (g_strcmp0 (alert_name, "click") == 0)
+    set_button (self, self->click_button, TRUE);
+  else if (g_strcmp0 (alert_name, "hum") == 0)
+    set_button (self, self->string_button, TRUE);
+  else if (g_strcmp0 (alert_name, "string") == 0)
+    set_button (self, self->swing_button, TRUE);
+  else if (g_strcmp0 (alert_name, "swing") == 0)
+    set_button (self, self->swing_button, TRUE);
   else if (alert_name != NULL)
     g_warning ("Current alert sound has unknown name %s", alert_name);
 }

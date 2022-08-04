@@ -95,10 +95,10 @@ panels_libs += static_library(
 )
 
 sound_data = files(
-  'sounds/bark.ogg',
-  'sounds/drip.ogg',
-  'sounds/glass.ogg',
-  'sounds/sonar.ogg'
+  'sounds/click.ogg',
+  'sounds/hum.ogg',
+  'sounds/string.ogg',
+  'sounds/swing.ogg'
 )
 
 install_data(
