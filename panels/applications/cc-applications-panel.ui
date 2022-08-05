@@ -136,6 +136,13 @@
                   </object>
                 </child>
                 <child>
+                  <object class="CcToggleRow" id="screenshot">
+                    <property name="title" translatable="yes">Screenshots</property>
+                    <property name="subtitle" translatable="yes">Take screenshots of the desktop.</property>
+                    <signal name="notify::allowed" handler="screenshot_cb" object="CcApplicationsPanel" swapped="yes"/>
+                  </object>
+                </child>
+                <child>
                   <object class="CcToggleRow" id="wallpaper">
                     <property name="title" translatable="yes">Change Wallpaper</property>
                     <property name="subtitle" translatable="yes">Change the desktop wallpaper.</property>
