@@ -59,7 +59,9 @@ static void on_device_ap_removed_cb (CcWifiConnectionList *self,
                                      NMAccessPoint        *ap,
                                      NMDeviceWifi         *device);
 static void on_row_configured_cb    (CcWifiConnectionList *self,
-                                     CcWifiConnectionRow  *row);
+                                    CcWifiConnectionRow  *row);
+static void on_row_show_qr_code_cb (CcWifiConnectionList *self,
+                                    CcWifiConnectionRow  *row);
 
 G_DEFINE_TYPE (CcWifiConnectionList, cc_wifi_connection_list, ADW_TYPE_BIN)
 
@@ -134,6 +136,7 @@ cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
   gtk_list_box_append (self->listbox, GTK_WIDGET (res));
 
   g_signal_connect_object (res, "configure", G_CALLBACK (on_row_configured_cb), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (res, "show-qr-code", G_CALLBACK (on_row_show_qr_code_cb), self, G_CONNECT_SWAPPED);
 
   g_signal_emit_by_name (self, "add-row", res);
 
@@ -172,7 +175,7 @@ clear_widget (CcWifiConnectionList *self)
       g_ptr_array_index (self->connections_row, i) = NULL;
       g_signal_emit_by_name (self, "remove-row", row);
       gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-     }
+    }
 
   /* Reset the internal state */
   g_ptr_array_set_size (self->connections, 0);
@@ -249,6 +252,12 @@ static void
 on_row_configured_cb (CcWifiConnectionList *self, CcWifiConnectionRow *row)
 {
   g_signal_emit_by_name (self, "configure", row);
+}
+
+static void
+on_row_show_qr_code_cb (CcWifiConnectionList *self, CcWifiConnectionRow *row)
+{
+  g_signal_emit_by_name (self, "show_qr_code", row);
 }
 
 static void
@@ -711,6 +720,11 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
                                      props);
 
   g_signal_new ("configure",
+                CC_TYPE_WIFI_CONNECTION_LIST,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 1, CC_TYPE_WIFI_CONNECTION_ROW);
+  g_signal_new ("show_qr_code",
                 CC_TYPE_WIFI_CONNECTION_LIST,
                 G_SIGNAL_RUN_LAST,
                 0, NULL, NULL, NULL,

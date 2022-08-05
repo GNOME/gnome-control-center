@@ -38,6 +38,7 @@ struct _CcWifiConnectionRow
   GtkSpinner      *connecting_spinner;
   GtkImage        *encrypted_icon;
   GtkButton       *options_button;
+  GtkButton       *qr_code_button;
   GtkImage        *strength_icon;
 };
 
@@ -70,6 +71,7 @@ G_DEFINE_TYPE (CcWifiConnectionRow, cc_wifi_connection_row, ADW_TYPE_ACTION_ROW)
 static GParamSpec *props[PROP_LAST];
 
 static void configure_clicked_cb (CcWifiConnectionRow *self);
+static void qr_code_clicked_cb (CcWifiConnectionRow *self);
 
 static NMAccessPointSecurity
 get_access_point_security (NMAccessPoint *ap)
@@ -263,6 +265,7 @@ update_ui (CcWifiConnectionRow *self)
 
   gtk_widget_set_visible (GTK_WIDGET (self->active_label), active);
   gtk_widget_set_visible (GTK_WIDGET (self->options_button), active || connecting || self->known_connection);
+  gtk_widget_set_visible (GTK_WIDGET (self->qr_code_button), active || connecting || self->known_connection);
 
   if (security != NM_AP_SEC_UNKNOWN && security != NM_AP_SEC_NONE && security != NM_AP_SEC_OWE && security != NM_AP_SEC_OWE_TM)
     {
@@ -461,9 +464,11 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, connecting_spinner);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, encrypted_icon);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, options_button);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, qr_code_button);
   gtk_widget_class_bind_template_child (widget_class, CcWifiConnectionRow, strength_icon);
 
   gtk_widget_class_bind_template_callback (widget_class, configure_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, qr_code_clicked_cb);
 
   props[PROP_CHECKABLE] = g_param_spec_boolean ("checkable", "checkable",
                                                 "Whether to show a checkbox to select the row",
@@ -504,13 +509,23 @@ cc_wifi_connection_row_class_init (CcWifiConnectionRowClass *klass)
                 G_SIGNAL_RUN_LAST,
                 0, NULL, NULL, NULL,
                 G_TYPE_NONE, 0);
-
+  g_signal_new ("show-qr-code",
+                CC_TYPE_WIFI_CONNECTION_ROW,
+                G_SIGNAL_RUN_LAST,
+                0, NULL, NULL, NULL,
+                G_TYPE_NONE, 0);
 }
 
 static void
 configure_clicked_cb (CcWifiConnectionRow *self)
 {
   g_signal_emit_by_name (self, "configure");
+}
+
+static void
+qr_code_clicked_cb (CcWifiConnectionRow *self)
+{
+  g_signal_emit_by_name (self, "show-qr-code");
 }
 
 void

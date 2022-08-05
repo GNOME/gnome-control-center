@@ -34,6 +34,7 @@
 #include "network-dialogs.h"
 #include "panel-common.h"
 #include "cc-list-row.h"
+#include "cc-qr-code-dialog.h"
 
 #include "connection-editor/net-connection-editor.h"
 #include "net-device-wifi.h"
@@ -990,6 +991,24 @@ show_details_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConne
 }
 
 static void
+show_qr_code_for_row (NetDeviceWifi *self, CcWifiConnectionRow *row, CcWifiConnectionList *list)
+{
+        NMConnection *connection;
+        GtkNative *native;
+        GtkWidget *dialog;
+
+        connection = cc_wifi_connection_row_get_connection (row);
+
+        // getting a new "local" connection, since we don't want to populate the secrets of the original connection
+        connection = NM_CONNECTION (nm_client_get_connection_by_id (self->client, nm_connection_get_id (connection)));
+
+        dialog = cc_qr_code_dialog_new (connection);
+        native = gtk_widget_get_native (GTK_WIDGET (self));
+        gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (native));
+        gtk_window_present (GTK_WINDOW (dialog));
+}
+
+static void
 on_connection_list_row_added_cb (NetDeviceWifi        *self,
                                  CcWifiConnectionRow  *row,
                                  CcWifiConnectionList *list)
@@ -1091,6 +1110,10 @@ show_history (NetDeviceWifi *self)
                                  G_CONNECT_SWAPPED);
         g_signal_connect_object (list, "configure",
                                  G_CALLBACK (show_details_for_row),
+                                 self,
+                                 G_CONNECT_SWAPPED);
+        g_signal_connect_object (list, "show_qr_code",
+                                 G_CALLBACK (show_qr_code_for_row),
                                  self,
                                  G_CONNECT_SWAPPED);
 
@@ -1255,6 +1278,8 @@ net_device_wifi_new (CcPanel *panel, NMClient *client, NMDevice *device)
                                  G_CALLBACK (ap_activated), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (list, "configure",
                                  G_CALLBACK (show_details_for_row), self, G_CONNECT_SWAPPED);
+        g_signal_connect_object (list, "show-qr-code",
+                                 G_CALLBACK (show_qr_code_for_row), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (client, "notify",
                                  G_CALLBACK(nm_client_on_permission_change), self, G_CONNECT_SWAPPED);
 

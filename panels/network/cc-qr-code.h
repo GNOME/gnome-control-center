@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include <NetworkManager.h>
 #include <gtk/gtk.h>
 #include <glib-object.h>
 #include <cairo.h>
@@ -34,10 +35,11 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CcQrCode, cc_qr_code, CC, QR_CODE, GObject)
 
-CcQrCode        *cc_qr_code_new         (void);
-gboolean         cc_qr_code_set_text    (CcQrCode    *self,
-                                         const gchar *text);
-GdkPaintable    *cc_qr_code_get_paintable (CcQrCode    *self,
-                                           gint         size);
+CcQrCode     *cc_qr_code_new         (void);
+gboolean      cc_qr_code_set_text    (CcQrCode    *self,
+                                      const gchar *text);
+GdkPaintable *cc_qr_code_get_paintable (CcQrCode    *self,
+                                        gint         size);
+gchar        *get_qr_string_for_connection (NMConnection *c);
 
 G_END_DECLS

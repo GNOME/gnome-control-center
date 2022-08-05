@@ -150,163 +150,6 @@ cc_wifi_panel_static_init_func (void)
 
 /* Auxiliary methods */
 
-static gchar *
-escape_string (const gchar *str,
-               gboolean     quote)
-{
-  GString *string;
-  const char *next;
-
-  if (!str)
-    return NULL;
-
-  string = g_string_new ("");
-  if (quote)
-    g_string_append_c (string, '"');
-
-  while ((next = strpbrk (str, "\\;,:\"")))
-    {
-      g_string_append_len (string, str, next - str);
-      g_string_append_c (string, '\\');
-      g_string_append_c (string, *next);
-      str = next + 1;
-    }
-
-  g_string_append (string, str);
-  if (quote)
-    g_string_append_c (string, '"');
-
-  return g_string_free (string, FALSE);
-}
-
-static const gchar *
-get_connection_security_type (NMConnection *c)
-{
-  NMSettingWirelessSecurity *setting;
-  const char *key_mgmt;
-
-  g_return_val_if_fail (c, "nopass");
-
-  setting = nm_connection_get_setting_wireless_security (c);
-
-  if (!setting)
-    return "nopass";
-
-  key_mgmt = nm_setting_wireless_security_get_key_mgmt (setting);
-
-  /* No IEEE 802.1x */
-  if (g_strcmp0 (key_mgmt, "none") == 0)
-    return "WEP";
-
-  if (g_strcmp0 (key_mgmt, "wpa-none") == 0 ||
-      g_strcmp0 (key_mgmt, "wpa-psk") == 0)
-    return "WPA";
-
-  return "nopass";
-}
-
-static gchar *
-get_wifi_password (NMConnection *c)
-{
-  NMSettingWirelessSecurity *setting;
-  g_autoptr(GVariant) secrets = NULL;
-  g_autoptr(GError) error = NULL;
-  const gchar *sec_type, *password;
-  gint wep_index;
-
-  g_assert (NM_IS_REMOTE_CONNECTION (c));
-
-  sec_type = get_connection_security_type (c);
-  setting  = nm_connection_get_setting_wireless_security (c);
-
-  if (g_str_equal (sec_type, "nopass"))
-    return NULL;
-
-  secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (c),
-                                              NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                              NULL, &error);
-  if (!error)
-    nm_connection_update_secrets (c,
-                                  NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                  secrets, &error);
-  if (error)
-    {
-      g_warning ("Error: %s", error->message);
-      return NULL;
-    }
-
-  if (g_str_equal (sec_type, "WEP"))
-    {
-      wep_index = nm_setting_wireless_security_get_wep_tx_keyidx (setting);
-      password = nm_setting_wireless_security_get_wep_key (setting, wep_index);
-    }
-  else
-    {
-      password = nm_setting_wireless_security_get_psk (setting);
-    }
-
-  return escape_string (password, FALSE);
-}
-
-/* Generate a string representing the hotspot @connection
- * An example generated text:
- *     WIFI:S:hotspot;T:WPA;P:my-valid-pass;H:true;
- * Where,
- *   S = ssid, T = security, P = password, H = hidden (Optional)
- *
- * See https://github.com/zxing/zxing/wiki/Barcode-Contents#wi-fi-network-config-android-ios-11
- */
-static gchar *
-get_qr_string_for_hotspot (NMClient     *nm_client,
-                           NMConnection *c)
-{
-  NMSettingWireless *setting;
-  g_autofree char *ssid_text = NULL;
-  g_autofree char *escaped_ssid = NULL;
-  g_autofree char *password_str = NULL;
-  GString *string;
-  GBytes *ssid;
-  gboolean hidden;
-
-  g_assert (NM_IS_CLIENT (nm_client));
-  g_assert (NM_IS_REMOTE_CONNECTION (c));
-
-  setting = nm_connection_get_setting_wireless (c);
-  ssid = nm_setting_wireless_get_ssid (setting);
-
-  if (!ssid)
-    return NULL;
-
-  string = g_string_new ("WIFI:S:");
-
-  /* SSID */
-  ssid_text = nm_utils_ssid_to_utf8 (g_bytes_get_data (ssid, NULL),
-                                     g_bytes_get_size (ssid));
-  escaped_ssid = escape_string (ssid_text, FALSE);
-  g_string_append (string, escaped_ssid);
-  g_string_append_c (string, ';');
-
-  /* Security type */
-  g_string_append (string, "T:");
-  g_string_append (string, get_connection_security_type (c));
-  g_string_append_c (string, ';');
-
-  /* Password */
-  g_string_append (string, "P:");
-  password_str = get_wifi_password (c);
-  if (password_str)
-    g_string_append (string, password_str);
-  g_string_append_c (string, ';');
-
-  /* WiFi Hidden */
-  hidden = nm_setting_wireless_get_hidden (setting);
-  if (hidden)
-    g_string_append (string, "H:true");
-  g_string_append_c (string, ';');
-
-  return g_string_free (string, FALSE);
-}
-
 static NMConnection *
 wifi_device_get_hotspot (CcWifiPanel *self,
                          NMDevice    *device)
@@ -348,19 +191,34 @@ wifi_panel_update_qr_image_cb (CcWifiPanel *self)
   if (hotspot)
     {
       g_autofree gchar *str = NULL;
+      g_autoptr (GVariant) secrets = NULL;
+      g_autoptr (GError) error = NULL;
 
       if (!self->qr_code)
         self->qr_code = cc_qr_code_new ();
 
-      str = get_qr_string_for_hotspot (self->client, hotspot);
-      if (cc_qr_code_set_text (self->qr_code, str))
-        {
-          GdkPaintable *paintable;
-          gint scale;
+      secrets = nm_remote_connection_get_secrets (NM_REMOTE_CONNECTION (hotspot),
+                                                  NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
+                                                  NULL, &error);
+      if (!error) {
+        nm_connection_update_secrets (hotspot,
+                                      NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
+                                      secrets, &error);
 
-          scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->wifi_qr_image));
-          paintable = cc_qr_code_get_paintable (self->qr_code, QR_IMAGE_SIZE * scale);
-          gtk_picture_set_paintable (self->wifi_qr_image, paintable);
+        str = get_qr_string_for_connection (hotspot);
+        if (cc_qr_code_set_text (self->qr_code, str))
+          {
+            GdkPaintable *paintable;
+            gint scale;
+
+            scale = gtk_widget_get_scale_factor (GTK_WIDGET (self->wifi_qr_image));
+            paintable = cc_qr_code_get_paintable (self->qr_code, QR_IMAGE_SIZE * scale);
+            gtk_picture_set_paintable (self->wifi_qr_image, paintable);
+          }
+        }
+      else
+        {
+          g_warning ("Error: %s", error->message);
         }
     }
 

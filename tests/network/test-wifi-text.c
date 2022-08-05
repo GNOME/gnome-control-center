@@ -32,6 +32,7 @@
 
 /* Including ‘.c’ file to test static functions */
 #include "cc-wifi-panel.c"
+#include "cc-qr-code.c"
 
 static void
 test_escape_qr_string (void)
