@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: procman\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-07-29 14:25+0000\n"
-"PO-Revision-Date: 2022-07-30 18:46+0430\n"
+"POT-Creation-Date: 2022-08-04 19:55+0000\n"
+"PO-Revision-Date: 2022-08-07 03:20+0430\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -1403,8 +1403,10 @@ msgstr "_منطقه زمانی خودکار"
 msgid "Requires location services enabled and internet access"
 msgstr "نیاز به خدمت مکان‌یابی به کار افتاده و دسترسی به اینترنت"
 
+#. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
 #: panels/datetime/cc-datetime-panel.ui:212 panels/display/cc-display-settings.ui:23
+#: panels/firmware-security/cc-firmware-security-utils.c:247
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
 #: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
@@ -1737,12 +1739,12 @@ msgstr ""
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
-#: panels/firmware-security/cc-firmware-security-panel.c:106
+#: panels/firmware-security/cc-firmware-security-panel.c:109
 msgid "Secure Boot is Active"
 msgstr "راه‌اندازی امن فعّال است"
 
 #. TRANSLATORS: this is the first section of the decription
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:76
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:77
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device starts. "
 "It is currently turned on and is functioning correctly."
@@ -1751,12 +1753,12 @@ msgstr ""
 "می‌گیرد. در حال حاضر روشن است و به درستی کار می‌کند."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:82
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:83
 msgid "Secure Boot Has Problems"
 msgstr "راه‌اندازی امن مشکلاتی دارد"
 
 #. TRANSLATORS: this is the first section of the decription.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:86
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:87
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device starts. "
 "It is currently turned on, but will not work due to having an invalid key."
@@ -1765,7 +1767,7 @@ msgstr ""
 "می‌گیرد. در حال حاضر روشن است؛ ولی به خاطر داشتن کلیدی نامعتبر، کار نخواهد کرد."
 
 #. TRANSLATORS: this is the second section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:89
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:90
 msgid ""
 "Secure boot problems can often be resolved from your computer's UEFI firmware "
 "settings (BIOS) and your hardware manufacturer may provide information on how to "
@@ -1775,18 +1777,17 @@ msgstr ""
 "ممکن است سازندهٔ سخت‌افزارتان اطّلاعاتی در مورد چکونگی انجامشان فراهم کرده باشد."
 
 #. TRANSLATORS: this is the third section of description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:92
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:93
 msgid "For help, contact your hardware manufacturer or IT support provider."
 msgstr "برای راهنمایی، با سازندهٔ سخت‌افزار یا فراهم کنندهٔ پشتیبانی ITتان تماس بگیرید."
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:118
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:99
 msgid "Secure Boot is Turned Off"
 msgstr "راه‌اندازی امن خاموش شده است"
 
 #. TRANSLATORS: this is the first section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:102
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:103
 msgid ""
 "Secure boot prevents malicious software from being loaded when the device starts. "
 "It is currently turned off."
@@ -1795,7 +1796,7 @@ msgstr ""
 "می‌گیرد. در حال حاضر خاموش است."
 
 #. TRANSLATORS: this is the second section of the description.
-#: panels/firmware-security/cc-firmware-security-boot-dialog.c:105
+#: panels/firmware-security/cc-firmware-security-boot-dialog.c:106
 msgid ""
 "Secure boot can often be turned on from your computer's UEFI firmware settings "
 "(BIOS). For help, contact your hardware manufacturer or IT support provider."
@@ -1815,18 +1816,30 @@ msgstr ""
 "برای اطّلاعات بیش تر با سازندهٔ سخت‌افزار یا پشیبانی IT تماس بگیرید."
 
 #. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:70
+#: panels/firmware-security/cc-firmware-security-dialog.c:79
 #, c-format
 msgid "Device conforms to HSI level %d"
 msgstr "افزاره مطابق سطح %Id از HSI"
 
-#. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-panel.c:446
-msgid "No Protection"
-msgstr "بدون محافظت"
+#: panels/firmware-security/cc-firmware-security-dialog.c:85
+#: panels/firmware-security/cc-firmware-security-dialog.c:87
+#: panels/firmware-security/cc-firmware-security-dialog.c:89
+msgid "Passed"
+msgstr "قبول شده"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:99
+#: panels/firmware-security/cc-firmware-security-dialog.c:85
+#: panels/firmware-security/cc-firmware-security-dialog.c:87
+#: panels/firmware-security/cc-firmware-security-dialog.c:89
+msgid "Failed"
+msgstr "شکست خورده"
+
+#. TRANSLATORS: in reference to firmware protection: 0/4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:136
+#: panels/firmware-security/cc-firmware-security-panel.c:472
+msgid "Security Level 0"
+msgstr "سطح امنیتی ۰"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
 msgid ""
 "This device has no protection against hardware security issues. This could be "
 "because of a hardware or firmware configuration issue. It is recommended to "
@@ -1837,13 +1850,13 @@ msgstr ""
 "پشتیبانی IT تماس بگیرید."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:111
-#: panels/firmware-security/cc-firmware-security-dialog.ui:80
-#: panels/firmware-security/cc-firmware-security-panel.c:453
-msgid "Minimal Protection"
-msgstr "محافظت کمینه"
+#: panels/firmware-security/cc-firmware-security-dialog.c:145
+#: panels/firmware-security/cc-firmware-security-dialog.c:338
+#: panels/firmware-security/cc-firmware-security-panel.c:479
+msgid "Security Level 1"
+msgstr "سطح امنیتی ۱"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:112
+#: panels/firmware-security/cc-firmware-security-dialog.c:146
 msgid ""
 "This device has minimal protection against hardware security issues. This is the "
 "lowest device security level and only provides protection against simple security "
@@ -1853,13 +1866,13 @@ msgstr ""
 "پایین‌ترین سطح امنیت افزاره بوده و در برابر تهدیدهای امنیتی ساده مقاوم است."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:127
-#: panels/firmware-security/cc-firmware-security-dialog.ui:94
-#: panels/firmware-security/cc-firmware-security-panel.c:460
-msgid "Basic Protection"
-msgstr "محافظت پایه‌ای"
+#: panels/firmware-security/cc-firmware-security-dialog.c:154
+#: panels/firmware-security/cc-firmware-security-dialog.c:343
+#: panels/firmware-security/cc-firmware-security-panel.c:486
+msgid "Security Level 2"
+msgstr "سطح امنیتی ۲"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:128
+#: panels/firmware-security/cc-firmware-security-dialog.c:155
 msgid ""
 "This device has basic protection against hardware security issues. This provides "
 "protection against some common security threats."
@@ -1868,13 +1881,13 @@ msgstr ""
 "برابر برخی تهدیدهای امنیتی معمول مقاوم است."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:146
-#: panels/firmware-security/cc-firmware-security-dialog.ui:108
-#: panels/firmware-security/cc-firmware-security-panel.c:467
-msgid "Extended Protection"
-msgstr "محافظت گسترده"
+#: panels/firmware-security/cc-firmware-security-dialog.c:163
+#: panels/firmware-security/cc-firmware-security-dialog.c:348
+#: panels/firmware-security/cc-firmware-security-panel.c:493
+msgid "Security Level 3"
+msgstr "سطح امنیتی ۳"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:147
+#: panels/firmware-security/cc-firmware-security-dialog.c:164
 msgid ""
 "This device has extended protection against hardware security issues. This is the "
 "highest device security level and provides protection against advanced security "
@@ -1883,75 +1896,79 @@ msgstr ""
 "این افزاره در برابر مشکلات امنیتی سخت‌افزاری، محافظت گسترده دارد. این محافظت، "
 "بالاترین سطح امنیتی افزاره بوده و در برابر تهدیدهای امنیتی پیشرفته مقاوم است."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:156
+#: panels/firmware-security/cc-firmware-security-dialog.c:172
 msgid "Error: unable to determine HSI level."
 msgstr "خطا: ناتوان در تشخیص سطح HSI."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:157
+#: panels/firmware-security/cc-firmware-security-dialog.c:173
 msgid "Error: unable to determine Incorrect HSI level."
 msgstr "خطا: ناتوان در تشخیص سطح HSI نادرست."
 
 #. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:172
-#: panels/firmware-security/cc-firmware-security-dialog.c:182
-#: panels/firmware-security/cc-firmware-security-dialog.c:189
+#: panels/firmware-security/cc-firmware-security-dialog.c:188
+#: panels/firmware-security/cc-firmware-security-dialog.c:198
+#: panels/firmware-security/cc-firmware-security-dialog.c:205
 msgid "Contact your hardware manufacturer for help with security updates."
 msgstr ""
 "برای راهنمایی در بارهٔ به‌روز رسانی‌های امنیتی با سازندهٔ سخت‌افزارتان تماس بگیرید."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:174
+#: panels/firmware-security/cc-firmware-security-dialog.c:190
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware settings, "
 "or by a support technician."
 msgstr ""
 "ممکن است رفع این مشکل در تنظیمات ثابت‌افزار UEFI یا به دست یک پشتیبان فنی ممکن باشد."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:183
-#: panels/firmware-security/cc-firmware-security-dialog.c:194
+#: panels/firmware-security/cc-firmware-security-dialog.c:199
+#: panels/firmware-security/cc-firmware-security-dialog.c:210
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware settings."
 msgstr "ممکن است رفع این مشکل در تنظیمات ثابت‌افزار UEFI ممکن باشد."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:200
+#: panels/firmware-security/cc-firmware-security-dialog.c:216
 msgid "It might be possible for a support technician to resolve this issue."
 msgstr "ممکن است یک پشتیبان فنی بتواند این مشکل را رفع کند."
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:300
-msgid "Minimal Security Protections"
-msgstr "محافظت‌های امنیتی کمینه"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:305
-msgid "Basic Security Protections"
-msgstr "محافظت‌های امنیتی پایه"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:310
-msgid "Extended Security Protections"
-msgstr "محافظت‌های امنیتی گسترده"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:22
 msgid "Security Level"
 msgstr "سطح امنیت"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:107
+#: panels/firmware-security/cc-firmware-security-dialog.ui:88
+msgid "Level 1"
+msgstr "سطح ۱"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:123
+msgid "Level 2"
+msgstr "سطح ۲"
+
+#: panels/firmware-security/cc-firmware-security-dialog.ui:158
+msgid "Level 3"
+msgstr "سطح ۳"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:110
 msgid "Protected against malicious software when the device starts."
 msgstr "محافظت در برابر نرم‌افزارهای مخرّب هنگام آغاز به کار افزاره."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:112
+#: panels/firmware-security/cc-firmware-security-panel.c:115
 msgid "Secure Boot has Problems"
 msgstr "راه‌اندازی امن مشکلاتی دارد"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:113
+#: panels/firmware-security/cc-firmware-security-panel.c:116
 msgid "Some protection when the device is started."
 msgstr "برخی محافظت‌ها هنگام آغاز به کار افزاره."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:119
+#: panels/firmware-security/cc-firmware-security-panel.c:121
+msgid "Secure Boot is Off"
+msgstr "راه‌اندازی امن خاموش است"
+
+#: panels/firmware-security/cc-firmware-security-panel.c:122
 msgid "No protection when the device is started."
 msgstr "بدون محافظت هنگام آغاز به کار افزاره."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:138
+#: panels/firmware-security/cc-firmware-security-panel.c:141
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on this "
@@ -1961,7 +1978,7 @@ msgstr ""
 "سیستم‌عامل یا نرم‌افزاری مخرّب روی این سامانه باشد."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:146
+#: panels/firmware-security/cc-firmware-security-panel.c:149
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, or "
 "because of malicious software on this system."
@@ -1970,7 +1987,7 @@ msgstr ""
 "سامانه باشد."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:153
+#: panels/firmware-security/cc-firmware-security-panel.c:156
 msgid ""
 "This issue could have been caused by an operating system configuration change, or "
 "because of malicious software on this system."
@@ -1978,29 +1995,29 @@ msgstr ""
 "ممکن است مشکل ناشی از تغییری در پیکربندی سیستم‌عامل یا نرم‌افزاری مخرّب روی این "
 "سامانه باشد."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:447
-msgid "Highly exposed to security threats."
-msgstr "به شدت در معرض تهدیدهای امنیتی."
+#: panels/firmware-security/cc-firmware-security-panel.c:473
+msgid "Exposed to serious security threats."
+msgstr "در معرض تهدیدهای جدّی امنیتی."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:454
+#: panels/firmware-security/cc-firmware-security-panel.c:480
 msgid "Limited protection against simple security threats."
 msgstr "محافظت محدود در برابر تهدیدهای امنیتی ساده."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:461
+#: panels/firmware-security/cc-firmware-security-panel.c:487
 msgid "Protected against common security threats."
 msgstr "محافظت شده در برابر تهدیدهای امنیتی معمول."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:468
-#: panels/firmware-security/cc-firmware-security-panel.c:475
+#: panels/firmware-security/cc-firmware-security-panel.c:494
+#: panels/firmware-security/cc-firmware-security-panel.c:502
 msgid "Protected against a wide range of security threats."
 msgstr "محافظت شده در برابر بازهٔ وسیعی از تهدیدهای امنیتی."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:474
+#: panels/firmware-security/cc-firmware-security-panel.c:501
 msgid "Comprehensive Protection"
 msgstr "محافظت همه‌جانبه"
 
-#: panels/firmware-security/cc-firmware-security-panel.ui:138
+#: panels/firmware-security/cc-firmware-security-panel.ui:150
 msgid "No Events"
 msgstr "بدون رویداد"
 
@@ -2196,6 +2213,71 @@ msgstr "محافظت از نوشتن ثابت‌افزار AMD"
 #: panels/firmware-security/cc-firmware-security-utils.c:226
 msgid "Fused Platform"
 msgstr "بن‌سازهٔ فیوز شده"
+
+#. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
+#: panels/firmware-security/cc-firmware-security-utils.c:237
+msgid "Valid"
+msgstr "معتبر"
+
+#. TRANSLATORS: if the status or key is not valid.
+#: panels/firmware-security/cc-firmware-security-utils.c:242
+msgid "Not Valid"
+msgstr "نامعتبر"
+
+#. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
+#: panels/firmware-security/cc-firmware-security-utils.c:252
+msgid "Not Enabled"
+msgstr "به کار نیفتاده"
+
+#. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
+#: panels/firmware-security/cc-firmware-security-utils.c:257
+msgid "Locked"
+msgstr "قفل شده"
+
+#. TRANSLATORS: the memory space or system mode is not locked.
+#: panels/firmware-security/cc-firmware-security-utils.c:262
+msgid "Not Locked"
+msgstr "قفل نشده"
+
+#. TRANSLATORS: The data is encrypted to prevent from malicious reading.
+#: panels/firmware-security/cc-firmware-security-utils.c:267
+msgid "Encrypted"
+msgstr "رمز شده"
+
+#. TRANSLATORS: the data in memory is plane text.
+#: panels/firmware-security/cc-firmware-security-utils.c:272
+msgid "Not Encrypted"
+msgstr "رمز نشده"
+
+#. TRANSLATORS: Linux kernel is tainted by third party kernel module.
+#: panels/firmware-security/cc-firmware-security-utils.c:277
+msgid "Tainted"
+msgstr "آلوده شده"
+
+#. TRANSLATORS: All the loaded kernel module are licensed.
+#: panels/firmware-security/cc-firmware-security-utils.c:282
+msgid "Not Tainted"
+msgstr "آلوده نشده"
+
+#. TRANSLATORS: the feature can be detected.
+#: panels/firmware-security/cc-firmware-security-utils.c:287
+msgid "Found"
+msgstr "پیدا شده"
+
+#. TRANSLATORS: the feature can't be detected.
+#: panels/firmware-security/cc-firmware-security-utils.c:292
+msgid "Not Found"
+msgstr "پیدا نشده"
+
+#. TRANSLATORS: the function is supported by hardware.
+#: panels/firmware-security/cc-firmware-security-utils.c:297
+msgid "Supported"
+msgstr "پشتیبانی شده"
+
+#. TRANSLATORS: the function isn't supported by hardware.
+#: panels/firmware-security/cc-firmware-security-utils.c:302
+msgid "Not Supported"
+msgstr "پشتیبانی نشده"
 
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in.in:3
 msgid "Device Security"
@@ -3891,21 +3973,21 @@ msgstr ""
 msgid "_Forget"
 msgstr "_فراموشی"
 
-#: panels/network/net-device-wifi.c:1047
+#: panels/network/net-device-wifi.c:1048
 msgid "Known Wi-Fi Networks"
 msgstr "شبکه‌های وای‌فای آشنا"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1079
+#: panels/network/net-device-wifi.c:1067
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_فراموشی"
 
-#: panels/network/net-device-wifi.c:1235
+#: panels/network/net-device-wifi.c:1221
 msgid "System policy prohibits use as a Hotspot"
 msgstr "سیاست سامانه استفاده از نقطهٔ داغ را منع کرده است"
 
-#: panels/network/net-device-wifi.c:1238
+#: panels/network/net-device-wifi.c:1224
 msgid "Wireless device does not support Hotspot mode"
 msgstr "افزارهٔ بی‌سیم از حالت نقطهٔ داغ پشتیبانی نمی‌کند"
 
@@ -7580,7 +7662,7 @@ msgid "Failed to add account"
 msgstr "افزودن حساب شکست خورد"
 
 #: panels/user-accounts/cc-add-user-dialog.c:679
-#: panels/user-accounts/cc-password-dialog.c:260
+#: panels/user-accounts/cc-password-dialog.ui:112
 msgid "The passwords do not match."
 msgstr "گذرواژه‌ها برابر نیستند."
 
@@ -7956,23 +8038,23 @@ msgstr "نشست آغاز شد"
 msgid "%s — Account Activity"
 msgstr "%s — فعّالیت حساب"
 
-#: panels/user-accounts/cc-login-history-dialog.ui:27
+#: panels/user-accounts/cc-login-history-dialog.ui:30
 msgid "Previous"
 msgstr "پیشین"
 
-#: panels/user-accounts/cc-login-history-dialog.ui:37
+#: panels/user-accounts/cc-login-history-dialog.ui:40
 msgid "Next"
 msgstr "بعدی"
 
-#: panels/user-accounts/cc-password-dialog.c:133
+#: panels/user-accounts/cc-password-dialog.c:127
 msgid "Please choose another password."
 msgstr "لطفاً گذرواژهٔ دیگری انتخاب کنید."
 
-#: panels/user-accounts/cc-password-dialog.c:142
+#: panels/user-accounts/cc-password-dialog.c:136
 msgid "Please type your current password again."
 msgstr "لطفاً گذرواژهٔ فعلی خود را دوباره وارد کنید."
 
-#: panels/user-accounts/cc-password-dialog.c:148
+#: panels/user-accounts/cc-password-dialog.c:142
 msgid "Password could not be changed"
 msgstr "گذرواژه قابل تغییر نبود"
 
@@ -7988,19 +8070,19 @@ msgstr "تع_ویض"
 msgid "Current Password"
 msgstr "گذرواژهٔ کنونی"
 
-#: panels/user-accounts/cc-password-dialog.ui:76
+#: panels/user-accounts/cc-password-dialog.ui:66
 msgid "New Password"
 msgstr "گذرواژهٔ جدید"
 
-#: panels/user-accounts/cc-password-dialog.ui:121
+#: panels/user-accounts/cc-password-dialog.ui:97
 msgid "Confirm Password"
 msgstr "تأیید گذرواژه"
 
-#: panels/user-accounts/cc-password-dialog.ui:175
+#: panels/user-accounts/cc-password-dialog.ui:151
 msgid "Allow user to change their password on next login"
 msgstr "اجازه می‌دهد تا کاربران در زمان ورود بعدی گذرواژه خود را تغییر دهند"
 
-#: panels/user-accounts/cc-password-dialog.ui:187
+#: panels/user-accounts/cc-password-dialog.ui:163
 msgid "Set a password now"
 msgstr "هم‌اکنون یک گذرواژه تنظیم کنید"
 
@@ -8118,7 +8200,7 @@ msgid "Delete the selected user account"
 msgstr "حذف حساب کاربر انتخاب شده"
 
 #: panels/user-accounts/cc-user-panel.c:1297
-#: panels/user-accounts/cc-user-panel.c:1406
+#: panels/user-accounts/cc-user-panel.c:1409
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8126,7 +8208,7 @@ msgstr ""
 "برای حذف حساب کاربر انتخاب شده،\n"
 "ابتدا بر روی شمایل * کلیک کنید"
 
-#: panels/user-accounts/cc-user-panel.c:1452
+#: panels/user-accounts/cc-user-panel.c:1455
 msgid "Unlock to Add Users and Change Settings"
 msgstr "قفل‌گشایی برای افزودن کاربران و تغییر تنظیمات"
 
@@ -8706,59 +8788,167 @@ msgstr "فقط نسل ۳"
 msgid "4G Only"
 msgstr "فقط نسل ۴"
 
-#: panels/wwan/cc-wwan-device.c:1003
+#: panels/wwan/cc-wwan-device.c:997
+msgid "5G Only"
+msgstr "فقط نسل ۵"
+
+#: panels/wwan/cc-wwan-device.c:1007
+msgid "2G, 3G, 4G, 5G (Preferred)"
+msgstr "نسل ۲، ۳، ۴ و ۵ (ترجیحی)"
+
+#: panels/wwan/cc-wwan-device.c:1009
+msgid "2G, 3G, 4G (Preferred), 5G"
+msgstr "نسل ۲، ۳، ۴ (ترجیحی) و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1011
+msgid "2G, 3G (Preferred), 4G, 5G"
+msgstr "نسل ۲، ۳ (ترجیحی)، ۴ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1013
+msgid "2G (Preferred), 3G, 4G, 5G"
+msgstr "نسل ۲ (ترجیحی)، ۳، ۴ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1015
+msgid "2G, 3G, 4G, 5G"
+msgstr "نسل ۲، ۳، ۴ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1022
 msgid "2G, 3G, 4G (Preferred)"
 msgstr "نسل ۲، ۳ و ۴ (ترجیحی)"
 
-#: panels/wwan/cc-wwan-device.c:1005
+#: panels/wwan/cc-wwan-device.c:1024
 msgid "2G, 3G (Preferred), 4G"
 msgstr "نسل ۲، ۳ (ترجیحی) و ۴"
 
-#: panels/wwan/cc-wwan-device.c:1007
+#: panels/wwan/cc-wwan-device.c:1026
 msgid "2G (Preferred), 3G, 4G"
 msgstr "نسل ۲ (ترجیحی)، ۳ و ۴"
 
-#: panels/wwan/cc-wwan-device.c:1009
+#: panels/wwan/cc-wwan-device.c:1028
 msgid "2G, 3G, 4G"
 msgstr "نسل ۲، ۳ و ۴"
 
-#: panels/wwan/cc-wwan-device.c:1015
+#: panels/wwan/cc-wwan-device.c:1035
+msgid "3G, 4G, 5G (Preferred)"
+msgstr "نسل ۳، ۴ و ۵ (ترجیحی)"
+
+#: panels/wwan/cc-wwan-device.c:1037
+msgid "3G, 4G (Preferred), 5G"
+msgstr "نسل ۳، ۴ (ترجیحی) و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1039
+msgid "3G (Preferred), 4G, 5G"
+msgstr "نسل ۳ (ترجیحی)، ۴ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1041
+msgid "3G, 4G, 5G"
+msgstr "نسل ۳، ۴ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1048
+msgid "2G, 4G, 5G (Preferred)"
+msgstr "نسل ۲، ۴ و ۵ (ترجیحی)"
+
+#: panels/wwan/cc-wwan-device.c:1050
+msgid "2G, 4G (Preferred), 5G"
+msgstr "نسل ۲، ۴ (ترجیحی) و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1052
+msgid "2G (Preferred), 4G, 5G"
+msgstr "نسل ۲ (ترجیحی)، ۴ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1054
+msgid "2G, 4G, 5G"
+msgstr "نسل ۲، ۴ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1061
+msgid "2G, 3G, 5G (Preferred)"
+msgstr "نسل ۲، ۳ و ۵ (ترجیحی)"
+
+#: panels/wwan/cc-wwan-device.c:1063
+msgid "2G, 3G (Preferred), 5G"
+msgstr "نسل ۲، ۳ (ترجیحی) و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1065
+msgid "2G (Preferred), 3G, 5G"
+msgstr "نسل ۲ (ترجیحی)، ۳ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1067
+msgid "2G, 3G, 5G"
+msgstr "نسل ۲، ۳ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1073
 msgid "3G, 4G (Preferred)"
 msgstr "نسل ۳ و ۴ (ترجیحی)"
 
-#: panels/wwan/cc-wwan-device.c:1017
+#: panels/wwan/cc-wwan-device.c:1075
 msgid "3G (Preferred), 4G"
 msgstr "نسل ۳ (ترجیحی) و ۴"
 
-#: panels/wwan/cc-wwan-device.c:1019
+#: panels/wwan/cc-wwan-device.c:1077
 msgid "3G, 4G"
 msgstr "نسل ۳ و ۴"
 
-#: panels/wwan/cc-wwan-device.c:1025
+#: panels/wwan/cc-wwan-device.c:1083
 msgid "2G, 4G (Preferred)"
 msgstr "نسل ۲ و ۴ (ترجیحی)"
 
-#: panels/wwan/cc-wwan-device.c:1027
+#: panels/wwan/cc-wwan-device.c:1085
 msgid "2G (Preferred), 4G"
 msgstr "نسل ۲ (ترجیحی) و ۴"
 
-#: panels/wwan/cc-wwan-device.c:1029
+#: panels/wwan/cc-wwan-device.c:1087
 msgid "2G, 4G"
 msgstr "نسل ۲ و ۴"
 
-#: panels/wwan/cc-wwan-device.c:1035
+#: panels/wwan/cc-wwan-device.c:1093
 msgid "2G, 3G (Preferred)"
 msgstr "نسل ۲ و ۳ (ترجیحی)"
 
-#: panels/wwan/cc-wwan-device.c:1037
+#: panels/wwan/cc-wwan-device.c:1095
 msgid "2G (Preferred), 3G"
 msgstr "نسل ۲ (ترجیحی) و ۳"
 
-#: panels/wwan/cc-wwan-device.c:1039
+#: panels/wwan/cc-wwan-device.c:1097
 msgid "2G, 3G"
 msgstr "نسل ۲ و ۳"
 
-#: panels/wwan/cc-wwan-device.c:1043
+#: panels/wwan/cc-wwan-device.c:1103
+msgid "2G, 5G (Preferred)"
+msgstr "نسل ۲ و ۵ (ترجیحی)"
+
+#: panels/wwan/cc-wwan-device.c:1105
+msgid "2G (Preferred), 5G"
+msgstr "نسل ۲ (ترجیحی) و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1107
+msgid "2G, 5G"
+msgstr "نسل ۲ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1113
+msgid "3G, 5G (Preferred)"
+msgstr "نسل ۳ و ۵ (ترجیحی)"
+
+#: panels/wwan/cc-wwan-device.c:1115
+msgid "3G (Preferred), 5G"
+msgstr "نسل ۳ (ترجیحی) و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1117
+msgid "3G, 5G"
+msgstr "نسل ۳ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1123
+msgid "4G, 5G (Preferred)"
+msgstr "نسل ۴ و ۵ (ترجیحی)"
+
+#: panels/wwan/cc-wwan-device.c:1125
+msgid "4G (Preferred), 5G"
+msgstr "نسل ۴ (ترجیحی) و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1127
+msgid "4G, 5G"
+msgstr "نسل ۴ و ۵"
+
+#: panels/wwan/cc-wwan-device.c:1131
 msgctxt "Network mode"
 msgid "Unknown"
 msgstr "نامعلوم"
@@ -9208,6 +9398,27 @@ msgstr[1] "%Iu ورودی"
 msgid "System Sounds"
 msgstr "صداهای سامانه"
 
+#~ msgid "No Protection"
+#~ msgstr "بدون محافظت"
+
+#~ msgid "Minimal Protection"
+#~ msgstr "محافظت کمینه"
+
+#~ msgid "Basic Protection"
+#~ msgstr "محافظت پایه‌ای"
+
+#~ msgid "Extended Protection"
+#~ msgstr "محافظت گسترده"
+
+#~ msgid "Minimal Security Protections"
+#~ msgstr "محافظت‌های امنیتی کمینه"
+
+#~ msgid "Basic Security Protections"
+#~ msgstr "محافظت‌های امنیتی پایه"
+
+#~ msgid "Extended Security Protections"
+#~ msgstr "محافظت‌های امنیتی گسترده"
+
 #~ msgid "SPI write"
 #~ msgstr "نوشتن SPI"
 
@@ -9243,9 +9454,6 @@ msgstr "صداهای سامانه"
 
 #~ msgid "Intel DCI debugger"
 #~ msgstr "اشکال‌زدای واسط اتّصال مستقیم (DCI) اینتل"
-
-#~ msgid "Supported CPU"
-#~ msgstr "پردازندهٔ پشتیبانی شده"
 
 #~ msgid "IOMMU device protection enabled"
 #~ msgstr "محافظت افزارهٔ IOMMU به کار افتاده"
