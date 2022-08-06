@@ -1248,7 +1248,7 @@ update_total_size (CcApplicationsPanel *self)
   g_object_set (self->total, "info", formatted_size, NULL);
 
   /* Translators: '%s' is the formatted size, e.g. "26.2 MB" */
-  subtitle = g_strdup_printf (_("%s of disk space used"), formatted_size);
+  subtitle = g_strdup_printf (_("%s of disk space used."), formatted_size);
   g_object_set (self->storage, "subtitle", subtitle, NULL);
 }
 
