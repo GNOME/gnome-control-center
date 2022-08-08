@@ -96,7 +96,6 @@ struct _CcApplicationsPanel
   CcToggleRow     *notification;
   CcToggleRow     *background;
   CcToggleRow     *wallpaper;
-  CcToggleRow     *screenshot;
   CcToggleRow     *sound;
   CcInfoRow       *no_sound;
   CcToggleRow     *search;
@@ -516,37 +515,6 @@ wallpaper_cb (CcApplicationsPanel *self)
     set_wallpaper_allowed (self, cc_toggle_row_get_allowed (self->wallpaper));
 }
 
-/* --- screenshot --- */
-
-static void
-get_screenshot_allowed (CcApplicationsPanel *self,
-                        const gchar         *app_id,
-                        gboolean            *set,
-                        gboolean            *allowed)
-{
-  g_auto(GStrv) perms = get_portal_permissions (self, "screenshot", "screenshot", app_id);
-
-  *set = perms != NULL;
-  *allowed = perms == NULL || strcmp (perms[0], "no") != 0;
-}
-
-static void
-set_screenshot_allowed (CcApplicationsPanel *self,
-                        gboolean             allowed)
-{
-  const gchar *perms[2] = { NULL, NULL };
-
-  perms[0] = allowed ? "yes" : "no";
-  set_portal_permissions (self, "screenshot", "screenshot", self->current_app_id, perms);
-}
-
-static void
-screenshot_cb (CcApplicationsPanel *self)
-{
-  if (self->current_app_id)
-    set_screenshot_allowed (self, cc_toggle_row_get_allowed (self->screenshot));
-}
-
 /* --- shortcuts permissions (flatpak) --- */
 
 static void
@@ -926,11 +894,6 @@ update_integration_section (CcApplicationsPanel *self,
       gtk_widget_set_visible (GTK_WIDGET (self->wallpaper), set);
       has_any |= set;
 
-      get_screenshot_allowed (self, portal_app_id, &set, &allowed);
-      cc_toggle_row_set_allowed (self->screenshot, allowed);
-      gtk_widget_set_visible (GTK_WIDGET (self->screenshot), set);
-      has_any |= set;
-
       disabled = g_settings_get_boolean (self->privacy_settings, "disable-sound-output");
       get_device_allowed (self, "speakers", portal_app_id, &set, &allowed);
       cc_toggle_row_set_allowed (self->sound, allowed);
@@ -972,7 +935,6 @@ update_integration_section (CcApplicationsPanel *self,
 
       gtk_widget_hide (GTK_WIDGET (self->background));
       gtk_widget_hide (GTK_WIDGET (self->wallpaper));
-      gtk_widget_hide (GTK_WIDGET (self->screenshot));
       gtk_widget_hide (GTK_WIDGET (self->sound));
       gtk_widget_hide (GTK_WIDGET (self->no_sound));
       gtk_widget_hide (GTK_WIDGET (self->camera));
@@ -1782,7 +1744,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, notification);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, background);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, wallpaper);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, screenshot);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, shortcuts);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, sidebar_listbox);
@@ -1804,7 +1765,6 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, notification_cb);
   gtk_widget_class_bind_template_callback (widget_class, background_cb);
   gtk_widget_class_bind_template_callback (widget_class, wallpaper_cb);
-  gtk_widget_class_bind_template_callback (widget_class, screenshot_cb);
   gtk_widget_class_bind_template_callback (widget_class, shortcuts_cb);
   gtk_widget_class_bind_template_callback (widget_class, privacy_link_cb);
   gtk_widget_class_bind_template_callback (widget_class, sound_cb);
