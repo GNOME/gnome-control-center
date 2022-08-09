@@ -8,10 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
-"ues\n"
-"POT-Creation-Date: 2022-08-04 19:55+0000\n"
-"PO-Revision-Date: 2022-08-05 09:55+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
+"es\n"
+"POT-Creation-Date: 2022-08-08 20:24+0000\n"
+"PO-Revision-Date: 2022-08-09 20:07+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -114,8 +114,9 @@ msgstr ""
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
 #: panels/applications/cc-applications-panel.c:1213
 #, c-format
-msgid "%s of disk space used"
-msgstr "Використано %s місця на диску"
+#| msgid "%s of disk space used"
+msgid "%s of disk space used."
+msgstr "Використано %s місця на диску."
 
 #. List of applications.
 #: panels/applications/cc-applications-panel.c:1377
@@ -189,7 +190,8 @@ msgid "Show system notifications."
 msgstr "Показ сповіщень системи."
 
 #: panels/applications/cc-applications-panel.ui:133
-msgid "Run in background"
+#| msgid "Run in background"
+msgid "Run in Background"
 msgstr "Запустити у фоновому режимі"
 
 #: panels/applications/cc-applications-panel.ui:134
@@ -1881,21 +1883,18 @@ msgstr "Пристрій є сумісним із рівнем HSI %d"
 #: panels/firmware-security/cc-firmware-security-dialog.c:85
 #: panels/firmware-security/cc-firmware-security-dialog.c:87
 #: panels/firmware-security/cc-firmware-security-dialog.c:89
-#| msgid "Password"
 msgid "Passed"
 msgstr "Пройдено"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:85
 #: panels/firmware-security/cc-firmware-security-dialog.c:87
 #: panels/firmware-security/cc-firmware-security-dialog.c:89
-#| msgid "PPP failed"
 msgid "Failed"
 msgstr "Не пройдено"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:136
 #: panels/firmware-security/cc-firmware-security-panel.c:472
-#| msgid "Security Level"
 msgid "Security Level 0"
 msgstr "Рівень безпеки 0"
 
@@ -1914,7 +1913,6 @@ msgstr ""
 #: panels/firmware-security/cc-firmware-security-dialog.c:145
 #: panels/firmware-security/cc-firmware-security-dialog.c:338
 #: panels/firmware-security/cc-firmware-security-panel.c:479
-#| msgid "Security Level"
 msgid "Security Level 1"
 msgstr "Рівень безпеки 1"
 
@@ -1931,7 +1929,6 @@ msgstr ""
 #: panels/firmware-security/cc-firmware-security-dialog.c:154
 #: panels/firmware-security/cc-firmware-security-dialog.c:343
 #: panels/firmware-security/cc-firmware-security-panel.c:486
-#| msgid "Security Level"
 msgid "Security Level 2"
 msgstr "Рівень безпеки 2"
 
@@ -1947,7 +1944,6 @@ msgstr ""
 #: panels/firmware-security/cc-firmware-security-dialog.c:163
 #: panels/firmware-security/cc-firmware-security-dialog.c:348
 #: panels/firmware-security/cc-firmware-security-panel.c:493
-#| msgid "Security Level"
 msgid "Security Level 3"
 msgstr "Рівень безпеки 3"
 
@@ -2006,17 +2002,14 @@ msgid "Security Level"
 msgstr "Рівень безпеки"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:88
-#| msgid "Ink Level"
 msgid "Level 1"
 msgstr "Рівень 1"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:123
-#| msgid "Ink Level"
 msgid "Level 2"
 msgstr "Рівень 2"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:158
-#| msgid "Ink Level"
 msgid "Level 3"
 msgstr "Рівень 3"
 
@@ -2034,7 +2027,6 @@ msgid "Some protection when the device is started."
 msgstr "Деякий захист, коли пристрій розпочав роботу."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:121
-#| msgid "Secure Boot is Turned Off"
 msgid "Secure Boot is Off"
 msgstr "Secure Boot вимкнено"
 
@@ -2072,7 +2064,6 @@ msgstr ""
 "системи або помилками у роботі програмного забезпечення у цій системі."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:473
-#| msgid "Highly exposed to security threats."
 msgid "Exposed to serious security threats."
 msgstr "Відкритий щодо суттєвих загроз захисту."
 
@@ -2298,37 +2289,31 @@ msgstr "Чинний"
 
 #. TRANSLATORS: if the status or key is not valid.
 #: panels/firmware-security/cc-firmware-security-utils.c:242
-#| msgid "Not calibrated"
 msgid "Not Valid"
 msgstr "Нечинний"
 
 #. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
 #: panels/firmware-security/cc-firmware-security-utils.c:252
-#| msgid "Enabled"
 msgid "Not Enabled"
 msgstr "Не увімкнено"
 
 #. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
 #: panels/firmware-security/cc-firmware-security-utils.c:257
-#| msgid "SIM Locked"
 msgid "Locked"
 msgstr "Заблоковано"
 
 #. TRANSLATORS: the memory space or system mode is not locked.
 #: panels/firmware-security/cc-firmware-security-utils.c:262
-#| msgid "SIM Locked"
 msgid "Not Locked"
 msgstr "Не заблоковано"
 
 #. TRANSLATORS: The data is encrypted to prevent from malicious reading.
 #: panels/firmware-security/cc-firmware-security-utils.c:267
-#| msgid "Encrypted RAM"
 msgid "Encrypted"
 msgstr "Зашифровано"
 
 #. TRANSLATORS: the data in memory is plane text.
 #: panels/firmware-security/cc-firmware-security-utils.c:272
-#| msgid "Encrypted RAM"
 msgid "Not Encrypted"
 msgstr "Не зашифровано"
 
@@ -2339,31 +2324,26 @@ msgstr "Зіпсовано"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
 #: panels/firmware-security/cc-firmware-security-utils.c:282
-#| msgid "Not calibrated"
 msgid "Not Tainted"
 msgstr "Не зіпсовано"
 
 #. TRANSLATORS: the feature can be detected.
 #: panels/firmware-security/cc-firmware-security-utils.c:287
-#| msgid "Sound"
 msgid "Found"
 msgstr "Знайдено"
 
 #. TRANSLATORS: the feature can't be detected.
 #: panels/firmware-security/cc-firmware-security-utils.c:292
-#| msgid "Not found"
 msgid "Not Found"
 msgstr "Не знайдено"
 
 #. TRANSLATORS: the function is supported by hardware.
 #: panels/firmware-security/cc-firmware-security-utils.c:297
-#| msgid "Supported CPU"
 msgid "Supported"
 msgstr "Є підтримка"
 
 #. TRANSLATORS: the function isn't supported by hardware.
 #: panels/firmware-security/cc-firmware-security-utils.c:302
-#| msgid "Supported CPU"
 msgid "Not Supported"
 msgstr "Немає підтримки"
 
@@ -2932,8 +2912,7 @@ msgstr "Не знайдено клавіатурного скорочення"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:392
 #, c-format
-msgid ""
-"%s is already being used for %s. If you replace it, %s will be disabled"
+msgid "%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr ""
 "%s вже використовується для %s. Якщо застосувати, сполучення для %s буде "
 "вимкнено"
@@ -5425,8 +5404,7 @@ msgstr "Живлення"
 
 #: panels/power/gnome-power-panel.desktop.in.in:4
 msgid "View your battery status and change power saving settings"
-msgstr ""
-"Переглянути стан вашої батареї і змінити параметри заощадження енергії"
+msgstr "Переглянути стан вашої батареї і змінити параметри заощадження енергії"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
@@ -6510,8 +6488,7 @@ msgid "Automatic _Screen Lock Delay"
 msgstr "Затримка _автоматичного блокування екрана"
 
 #: panels/screen/cc-screen-panel.ui:51
-msgid ""
-"Period after the screen blanks when the screen is automatically locked."
+msgid "Period after the screen blanks when the screen is automatically locked."
 msgstr "Затримка автоматичного блокування після вимикання екрана."
 
 #: panels/screen/cc-screen-panel.ui:69
@@ -8426,8 +8403,7 @@ msgstr "Не вдалось зв'язатись зі службою обліко
 
 #: panels/user-accounts/cc-user-panel.c:1204
 msgid "Please make sure that the AccountService is installed and enabled."
-msgstr ""
-"Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
+msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
 #: panels/user-accounts/cc-user-panel.c:1226
 msgid "This panel must be unlocked to change this setting"
