@@ -108,6 +108,7 @@ set_secure_boot_button_view (CcfirmwareSecurityPanel *self)
    {
       gtk_label_set_text (GTK_LABEL (self->secure_boot_label), _("Secure Boot is Active"));
       gtk_label_set_text (GTK_LABEL (self->secure_boot_description), _("Protected against malicious software when the device starts."));
+      gtk_image_set_from_icon_name (GTK_IMAGE (self->secure_boot_icon), "channel-secure-symbolic");
       gtk_widget_add_css_class (self->secure_boot_icon, "good");
     }
   else if (self->secure_boot_state == SECURE_BOOT_STATE_PROBLEMS)
