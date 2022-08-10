@@ -987,6 +987,7 @@ update_sensitivity (gpointer user_data)
   GtkWidget               *widget;
   gboolean                 local_server = TRUE;
   gboolean                 no_cups = FALSE;
+  gboolean                 empty_state = FALSE;
 
   self->is_authorized =
     self->permission &&
@@ -997,6 +998,8 @@ update_sensitivity (gpointer user_data)
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "main-vbox");
   if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (widget)), "no-cups-page") == 0)
     no_cups = TRUE;
+  else if (g_strcmp0 (gtk_stack_get_visible_child_name (GTK_STACK (widget)), "empty-state") == 0)
+    empty_state = TRUE;
 
   cups_server = cupsServer ();
   if (cups_server &&
@@ -1013,6 +1016,7 @@ update_sensitivity (gpointer user_data)
   gtk_widget_set_visible (widget, !no_cups);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button");
+  gtk_widget_set_visible (widget, !empty_state);
   gtk_widget_set_sensitive (widget, local_server && self->is_authorized && !no_cups && !self->new_printer_name);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button2");
