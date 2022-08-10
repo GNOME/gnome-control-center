@@ -227,6 +227,7 @@ hsi_create_pg_row (const gchar *icon_name,
   GtkWidget *row;
   GtkWidget *status_icon;
   GtkWidget *status_label;
+  GtkWidget *actions_parent;
   const gchar *result_str = NULL;
 
   row = adw_expander_row_new ();
@@ -246,6 +247,10 @@ hsi_create_pg_row (const gchar *icon_name,
 
       gtk_widget_add_css_class (status_icon, "icon");
       gtk_widget_add_css_class (status_label, "hsi_label");
+
+      actions_parent = gtk_widget_get_parent (status_icon);
+      gtk_box_set_spacing (GTK_BOX (actions_parent), 6);
+      gtk_widget_set_margin_end (actions_parent, 12);
     }
 
   if (attr->description != NULL)
@@ -255,6 +260,7 @@ hsi_create_pg_row (const gchar *icon_name,
       gtk_widget_add_css_class (subrow, "view");
       adw_action_row_set_subtitle (ADW_ACTION_ROW (subrow), str);
       adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
+      gtk_widget_add_css_class (subrow, "security-description-row");
     }
   else
     {
