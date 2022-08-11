@@ -69,6 +69,7 @@ struct _CcInfoOverviewPanel
   CcListRow       *memory_row;
   GtkPicture      *os_logo;
   CcListRow       *os_name_row;
+  CcListRow       *os_build_row;
   CcListRow       *os_type_row;
   CcListRow       *processor_row;
   AdwActionRow    *software_updates_row;
@@ -303,36 +304,27 @@ get_os_name (void)
   g_autofree gchar *name = NULL;
   g_autofree gchar *version_id = NULL;
   g_autofree gchar *pretty_name = NULL;
-  g_autofree gchar *build_id = NULL;
-  g_autofree gchar *name_version = NULL;
-  gchar *result = NULL;
 
   name = g_get_os_info (G_OS_INFO_KEY_NAME);
   version_id = g_get_os_info (G_OS_INFO_KEY_VERSION_ID);
   pretty_name = g_get_os_info (G_OS_INFO_KEY_PRETTY_NAME);
-  build_id = g_get_os_info ("BUILD_ID");
 
   if (pretty_name)
-    name_version = g_strdup (pretty_name);
+    return g_steal_pointer (&pretty_name);
   else if (name && version_id)
-    name_version = g_strdup_printf ("%s %s", name, version_id);
+    return g_strdup_printf ("%s %s", name, version_id);
   else
-    name_version = g_strdup (_("Unknown"));
+    return g_strdup (_("Unknown"));
+}
 
-  if (build_id)
-    {
-      /* translators: This is the name of the OS, followed by the build ID, for
-       * example:
-       * "Fedora 25 (Workstation Edition); Build ID: xyz" or
-       * "Ubuntu 16.04 LTS; Build ID: jki" */
-      result = g_strdup_printf (_("%s; Build ID: %s"), name_version, build_id);
-    }
-  else
-    {
-      result = g_strdup (name_version);
-    }
+static char *
+get_os_build_id (void)
+{
+  char *build_id = NULL;
 
-  return result;
+  build_id = g_get_os_info ("BUILD_ID");
+
+  return build_id;
 }
 
 static char *
@@ -704,6 +696,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   g_autofree char *cpu_text = NULL;
   g_autofree char *os_type_text = NULL;
   g_autofree char *os_name_text = NULL;
+  g_autofree char *os_build_text = NULL;
   g_autofree gchar *graphics_hardware_string = NULL;
 
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
@@ -736,6 +729,10 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
 
   os_name_text = get_os_name ();
   cc_list_row_set_secondary_label (self->os_name_row, os_name_text);
+
+  os_build_text = get_os_build_id ();
+  cc_list_row_set_secondary_label (self->os_build_row, os_build_text);
+  gtk_widget_set_visible (GTK_WIDGET (self->os_build_row), os_build_text != NULL);
 
   os_type_text = get_os_type ();
   cc_list_row_set_secondary_label (self->os_type_row, os_type_text);
@@ -951,6 +948,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, memory_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_logo);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_name_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_build_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_type_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, rename_button);
