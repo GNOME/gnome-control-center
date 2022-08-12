@@ -41,7 +41,7 @@
 
 struct _CcPasswordDialog
 {
-        AdwPreferencesWindow parent_instance;
+        AdwWindow parent_instance;
 
         GtkCheckButton    *action_login_radio;
         GtkCheckButton    *action_now_radio;
@@ -67,7 +67,7 @@ struct _CcPasswordDialog
         PasswdHandler      *passwd_handler;
 };
 
-G_DEFINE_TYPE (CcPasswordDialog, cc_password_dialog, ADW_TYPE_PREFERENCES_WINDOW)
+G_DEFINE_TYPE (CcPasswordDialog, cc_password_dialog, ADW_TYPE_WINDOW)
 
 static gint
 update_password_strength (CcPasswordDialog *self)
@@ -448,6 +448,8 @@ cc_password_dialog_class_init (CcPasswordDialogClass *klass)
         GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
         object_class->dispose = cc_password_dialog_dispose;
+
+        gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/user-accounts/cc-password-dialog.ui");
 
