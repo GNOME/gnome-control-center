@@ -70,7 +70,8 @@ common_sources += wacom_gresource
 
 sources = common_sources + files(
   'cc-' + cappletname + '-panel.c',
-  'cc-drawing-area.c'
+  'cc-drawing-area.c',
+  'cc-wacom-ekr-page.c',
 )
 
 deps += libdevice_dep

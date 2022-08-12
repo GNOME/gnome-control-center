@@ -29,6 +29,7 @@
 #include "shell/cc-debug.h"
 #include "cc-wacom-panel.h"
 #include "cc-wacom-page.h"
+#include "cc-wacom-ekr-page.h"
 #include "cc-wacom-stylus-page.h"
 #include "cc-wacom-resources.h"
 #include "cc-drawing-area.h"
@@ -38,6 +39,9 @@
 #ifdef GDK_WINDOWING_WAYLAND
 #include <gdk/wayland/gdkwayland.h>
 #endif
+
+#define EKR_VENDOR "056a"
+#define EKR_PRODUCT "0331"
 
 struct _CcWacomPanel
 {
@@ -546,6 +550,7 @@ add_known_device (CcWacomPanel *self,
 	GsdDeviceType device_type;
 	g_autoptr(GList) tools = NULL;
 	GtkWidget *page;
+	gboolean is_ekr = FALSE;
 	GList *l;
 
 	device_type = gsd_device_get_device_type (gsd_device);
@@ -554,10 +559,25 @@ add_known_device (CcWacomPanel *self,
 		return;
 
 	if ((device_type &
-	     (GSD_DEVICE_TYPE_PAD |
-	      GSD_DEVICE_TYPE_TOUCHSCREEN |
+	     (GSD_DEVICE_TYPE_TOUCHSCREEN |
 	      GSD_DEVICE_TYPE_TOUCHPAD)) != 0) {
 		return;
+	}
+
+	if ((device_type & GSD_DEVICE_TYPE_PAD) != 0) {
+		const char *vendor, *product;
+
+		gsd_device_get_device_ids (gsd_device, &vendor, &product);
+		is_ekr = (g_strcmp0 (vendor, EKR_VENDOR) == 0 &&
+			  g_strcmp0 (product, EKR_PRODUCT) == 0);
+
+		/* Express key remote is an special case, as it is an
+		 * external pad device, we want to distinctly show it
+		 * in the list. Other pads are mounted on a tablet, which
+		 * get their own entries.
+		 */
+		if (!is_ekr)
+			return;
 	}
 
 	device = cc_wacom_device_new (gsd_device);
@@ -572,7 +592,11 @@ add_known_device (CcWacomPanel *self,
 		add_stylus (self, l->data);
 	}
 
-	page = cc_wacom_page_new (self, device);
+	if (is_ekr)
+		page = cc_wacom_ekr_page_new (self, device);
+	else
+		page = cc_wacom_page_new (self, device);
+
 	gtk_box_append (GTK_BOX (self->tablets), page);
 	g_hash_table_insert (self->pages, device, page);
 }
