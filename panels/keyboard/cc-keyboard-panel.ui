@@ -45,6 +45,7 @@
                 <property name="activatable-widget">per_window_source</property>
                 <child type="prefix">
                   <object class="GtkCheckButton" id="per_window_source">
+                    <property name="active" bind-source="same_source" bind-flags="sync-create|invert-boolean"/>
                     <property name="valign">center</property>
                     <property name="group">same_source</property>
                   </object>

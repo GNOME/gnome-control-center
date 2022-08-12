@@ -235,9 +235,6 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
 
   /* "Input Source Switching" section */
   g_settings_bind (self->input_source_settings, "per-window",
-                   self->per_window_source, "active",
-                   G_SETTINGS_BIND_DEFAULT);
-  g_settings_bind (self->input_source_settings, "per-window",
                    self->same_source, "active",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
   self->keybindings_settings = g_settings_new ("org.gnome.desktop.wm.keybindings");
