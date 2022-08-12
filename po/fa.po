@@ -11,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: procman\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-08-10 19:53+0000\n"
-"PO-Revision-Date: 2022-08-11 01:24+0430\n"
+"POT-Creation-Date: 2022-08-12 01:31+0000\n"
+"PO-Revision-Date: 2022-08-12 22:32+0430\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian\n"
 "Language: fa\n"
@@ -345,7 +345,7 @@ msgstr "گزینش یک عکس"
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:31
-#: panels/info-overview/cc-info-overview-panel.ui:209
+#: panels/info-overview/cc-info-overview-panel.ui:218
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125 panels/network/cc-wifi-panel.c:886
@@ -360,7 +360,7 @@ msgstr "گزینش یک عکس"
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
-#: panels/user-accounts/cc-password-dialog.ui:18
+#: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:594 panels/user-accounts/cc-user-panel.c:612
 #: panels/user-accounts/data/join-dialog.ui:17 panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -2305,51 +2305,42 @@ msgstr ""
 "identity;privacy;صفحه;قفل;کرش;خصوصی;اخیر;موقت;نمایه;نام;شبکه;هویت;محرمانگی\"حریم "
 "شخصی;حریم خصوصی;"
 
-#: panels/info-overview/cc-info-overview-panel.c:296
-#: panels/info-overview/cc-info-overview-panel.c:320
-#: panels/info-overview/cc-info-overview-panel.c:366
-#: panels/info-overview/cc-info-overview-panel.c:396
+#: panels/info-overview/cc-info-overview-panel.c:297
+#: panels/info-overview/cc-info-overview-panel.c:317
+#: panels/info-overview/cc-info-overview-panel.c:358
+#: panels/info-overview/cc-info-overview-panel.c:388
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "ناشناخته"
 
-#. translators: This is the name of the OS, followed by the build ID, for
-#. * example:
-#. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
-#. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:328
-#, c-format
-msgid "%s; Build ID: %s"
-msgstr "%s; شناسهٔ ساخت: %s"
-
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:343
+#: panels/info-overview/cc-info-overview-panel.c:335
 #, c-format
 msgid "64-bit"
 msgstr "۶۴ بیتی"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:346
+#: panels/info-overview/cc-info-overview-panel.c:338
 #, c-format
 msgid "32-bit"
 msgstr "۳۲ بیتی"
 
-#: panels/info-overview/cc-info-overview-panel.c:605
+#: panels/info-overview/cc-info-overview-panel.c:597
 msgid "X11"
 msgstr "زورگ"
 
-#: panels/info-overview/cc-info-overview-panel.c:609
+#: panels/info-overview/cc-info-overview-panel.c:601
 msgid "Wayland"
 msgstr "وی‌لند"
 
-#: panels/info-overview/cc-info-overview-panel.c:611
+#: panels/info-overview/cc-info-overview-panel.c:603
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "ناشناخته"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:689
+#: panels/info-overview/cc-info-overview-panel.c:681
 msgid "Not Available"
 msgstr "ناموجود"
 
@@ -2391,36 +2382,41 @@ msgstr "محاسبه کردن…"
 msgid "OS Name"
 msgstr "نام سیستم‌عامل"
 
-#: panels/info-overview/cc-info-overview-panel.ui:106
+#. translators: this field contains the distro build ID
+#: panels/info-overview/cc-info-overview-panel.ui:107
+msgid "OS Build ID"
+msgstr "شناسهٔ ساخت سیستم‌عامل"
+
+#: panels/info-overview/cc-info-overview-panel.ui:115
 msgid "OS Type"
 msgstr "گونهٔ سیستم‌عامل"
 
-#: panels/info-overview/cc-info-overview-panel.ui:114
+#: panels/info-overview/cc-info-overview-panel.ui:123
 msgid "GNOME Version"
 msgstr "نگارش گنوم"
 
 #. translators: this is a placeholder while the GNOME version is being fetched
-#: panels/info-overview/cc-info-overview-panel.ui:116
+#: panels/info-overview/cc-info-overview-panel.ui:125
 msgid "Loading…"
 msgstr "بار کردن…"
 
-#: panels/info-overview/cc-info-overview-panel.ui:124
+#: panels/info-overview/cc-info-overview-panel.ui:133
 msgid "Windowing System"
 msgstr "سامانهٔ پنجره"
 
-#: panels/info-overview/cc-info-overview-panel.ui:132
+#: panels/info-overview/cc-info-overview-panel.ui:141
 msgid "Virtualization"
 msgstr "مجازی‌سازی"
 
-#: panels/info-overview/cc-info-overview-panel.ui:141
+#: panels/info-overview/cc-info-overview-panel.ui:150
 msgid "Software Updates"
 msgstr "به‌روز رسانی‌های نرم‌افزاری"
 
-#: panels/info-overview/cc-info-overview-panel.ui:165
+#: panels/info-overview/cc-info-overview-panel.ui:174
 msgid "Rename Device"
 msgstr "تغییر نام افزاره"
 
-#: panels/info-overview/cc-info-overview-panel.ui:181
+#: panels/info-overview/cc-info-overview-panel.ui:190
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -2428,11 +2424,11 @@ msgstr ""
 "نام افزاره برای تشخیص این افزاره هنگام دیده شدن روی شبکه یا جفت شدن افزاره‌های "
 "بلوتوثی استفاده می‌شود."
 
-#: panels/info-overview/cc-info-overview-panel.ui:187
+#: panels/info-overview/cc-info-overview-panel.ui:196
 msgid "Device name"
 msgstr "نام افزاره"
 
-#: panels/info-overview/cc-info-overview-panel.ui:201
+#: panels/info-overview/cc-info-overview-panel.ui:210
 msgid "_Rename"
 msgstr "_تغییر نام"
 
@@ -5284,12 +5280,12 @@ msgid "Failed to add new printer."
 msgstr "شکست در افزودن چاپگر جدید."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1229
+#: panels/printers/cc-printers-panel.c:1233
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "ناتوان در گشودن واسط کاربری: %s"
 
-#: panels/printers/cc-printers-panel.c:1297
+#: panels/printers/cc-printers-panel.c:1301
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "قفل‌گشایی برای افزودن چاپگرها و تغییر تنظیمات"
 
@@ -6649,21 +6645,25 @@ msgstr "به یا از کار انداختن ورود دوردست"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "برای به یا از کار انداختن ورود دوردست، تأیید هویت لازم است"
 
-#: panels/sound/cc-alert-chooser.c:152
+#: panels/sound/cc-alert-chooser.c:153
 msgid "Custom"
 msgstr "سفارشی"
 
 #: panels/sound/cc-alert-chooser.ui:12
-msgid "Drip"
-msgstr "چکّه"
+msgid "Click"
+msgstr "کلیک"
 
 #: panels/sound/cc-alert-chooser.ui:20
-msgid "Glass"
-msgstr "شیشه"
+msgid "String"
+msgstr "فنر"
 
 #: panels/sound/cc-alert-chooser.ui:28
-msgid "Sonar"
-msgstr "سونار"
+msgid "Swing"
+msgstr "تاب"
+
+#: panels/sound/cc-alert-chooser.ui:36
+msgid "Hum"
+msgstr "هوم"
 
 #: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:144
 msgid "Balance"
@@ -7670,7 +7670,7 @@ msgid "Failed to add account"
 msgstr "افزودن حساب شکست خورد"
 
 #: panels/user-accounts/cc-add-user-dialog.c:679
-#: panels/user-accounts/cc-password-dialog.ui:112
+#: panels/user-accounts/cc-password-dialog.ui:114
 msgid "The passwords do not match."
 msgstr "گذرواژه‌ها برابر نیستند."
 
@@ -8070,27 +8070,27 @@ msgstr "گذرواژه قابل تغییر نبود"
 msgid "Change Password"
 msgstr "تغییر گذرواژه"
 
-#: panels/user-accounts/cc-password-dialog.ui:32
+#: panels/user-accounts/cc-password-dialog.ui:34
 msgid "Ch_ange"
 msgstr "تع_ویض"
 
-#: panels/user-accounts/cc-password-dialog.ui:51
+#: panels/user-accounts/cc-password-dialog.ui:53
 msgid "Current Password"
 msgstr "گذرواژهٔ کنونی"
 
-#: panels/user-accounts/cc-password-dialog.ui:66
+#: panels/user-accounts/cc-password-dialog.ui:68
 msgid "New Password"
 msgstr "گذرواژهٔ جدید"
 
-#: panels/user-accounts/cc-password-dialog.ui:97
+#: panels/user-accounts/cc-password-dialog.ui:99
 msgid "Confirm Password"
 msgstr "تأیید گذرواژه"
 
-#: panels/user-accounts/cc-password-dialog.ui:151
+#: panels/user-accounts/cc-password-dialog.ui:153
 msgid "Allow user to change their password on next login"
 msgstr "اجازه می‌دهد تا کاربران در زمان ورود بعدی گذرواژه خود را تغییر دهند"
 
-#: panels/user-accounts/cc-password-dialog.ui:163
+#: panels/user-accounts/cc-password-dialog.ui:165
 msgid "Set a password now"
 msgstr "هم‌اکنون یک گذرواژه تنظیم کنید"
 
@@ -9405,6 +9405,15 @@ msgstr[1] "%Iu ورودی"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "صداهای سامانه"
+
+#~ msgid "Drip"
+#~ msgstr "چکّه"
+
+#~ msgid "Glass"
+#~ msgstr "شیشه"
+
+#~ msgid "Sonar"
+#~ msgstr "سونار"
 
 #~ msgid "Take screenshots of application windows and the desktop."
 #~ msgstr "ضبط نماگرفت از میزکار و پنجره‌های برنامه."
