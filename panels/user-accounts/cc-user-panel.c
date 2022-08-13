@@ -828,7 +828,7 @@ show_user (ActUser *user, CcUserPanel *self)
         g_autofree gchar *malcontent_control_path = NULL;
 #endif
 
-        self->selected_user = user;
+        g_set_object (&self->selected_user, user);
 
         setup_avatar_for_user (self->user_avatar, user);
         cc_avatar_chooser_set_user (self->avatar_chooser, user);
