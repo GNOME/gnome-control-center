@@ -74,7 +74,6 @@ struct _CcDisplayPanel
   guint           focus_id;
 
   CcNightLightPage *night_light_page;
-  GtkDialog *night_light_dialog;
   GtkLabel *night_light_state_label;
 
   UpClient *up_client;
@@ -437,8 +436,6 @@ cc_display_panel_dispose (GObject *object)
 
   g_clear_object (&self->shell_proxy);
 
-  g_clear_pointer ((GtkWindow **) &self->night_light_dialog, gtk_window_destroy);
-
   g_signal_handlers_disconnect_by_data (toplevel, self);
 
   G_OBJECT_CLASS (cc_display_panel_parent_class)->dispose (object);
@@ -484,27 +481,6 @@ on_config_type_toggled_cb (CcDisplayPanel *panel,
 
   type = cc_panel_get_selected_type (panel);
   config_ensure_of_type (panel, type);
-}
-
-static void
-on_night_light_list_box_row_activated_cb (CcDisplayPanel *panel)
-{
-  GtkWindow *toplevel;
-  toplevel = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (panel))));
-
-  if (!panel->night_light_dialog)
-    {
-      GtkWidget *content_area;
-
-      panel->night_light_dialog = (GtkDialog *)gtk_dialog_new ();
-
-      content_area = gtk_dialog_get_content_area (panel->night_light_dialog);
-      gtk_box_append (GTK_BOX (content_area), GTK_WIDGET (panel->night_light_page));
-      gtk_widget_show (GTK_WIDGET (panel->night_light_page));
-    }
-
-  gtk_window_set_transient_for (GTK_WINDOW (panel->night_light_dialog), toplevel);
-  gtk_window_present (GTK_WINDOW (panel->night_light_dialog));
 }
 
 static void
@@ -627,7 +603,6 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, apply_current_configuration);
   gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_config_type_toggled_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_night_light_list_box_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_night_light_row_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_index_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_screen_changed);
