@@ -455,6 +455,10 @@ list_providers (CcGoaPanel *self)
   GVariant *provider;
 
   providers = run_goa_helper_sync ("list-providers", NULL);
+
+  if (!providers)
+    return;
+
   providers_variant = g_variant_parse (G_VARIANT_TYPE ("a(ssviu)"),
                                        providers,
                                        NULL,
