@@ -108,6 +108,7 @@ time_editor_time_changed_cb (CcTimeEditor *self)
 {
   g_assert (CC_IS_TIME_EDITOR (self));
 
+  time_editor_clock_changed_cb (self);
   g_signal_emit (self, signals[TIME_CHANGED], 0);
 }
 
