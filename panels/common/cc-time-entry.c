@@ -568,6 +568,8 @@ cc_time_entry_set_time (CcTimeEntry *self,
   self->minute = CLAMP (minute, 0, 59);
 
   cc_time_entry_set_am_pm (self, is_am_pm);
+
+  g_signal_emit (self, signals[TIME_CHANGED], 0);
   time_entry_fill_time (self);
 }
 
