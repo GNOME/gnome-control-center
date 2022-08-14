@@ -133,46 +133,14 @@
                     <child>
                       <object class="AdwPreferencesGroup" id="authentication_and_login_box">
                         <child>
-                          <object class="AdwActionRow">
+                          <object class="AdwEntryRow" id="full_name_entry">
                             <property name="title" translatable="yes">Name</property>
-                            <child> 
-                              <object class="GtkStack" id="full_name_stack">
-                                <property name="hhomogeneous">False</property>
-                                <child>
-                                  <object class="GtkLabel" id="full_name_label">
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkEntry" id="full_name_entry">
-                                    <property name="max-length">255</property>
-                                    <property name="width-chars">18</property>
-                                    <property name="max-width-chars">30</property>
-                                    <property name="valign">GTK_ALIGN_CENTER</property>
-                                    <accessibility>
-                                      <property name="label" translatable="yes">Full name</property>
-                                    </accessibility>
-                                    <signal name="activate" handler="full_name_entry_activate" object="CcUserPanel" swapped="yes"/>
-                                    <child>
-                                      <object class="GtkEventControllerKey">
-                                        <property name="propagation-phase">capture</property>
-                                        <signal name="key-pressed" handler="full_name_entry_key_press_cb" object="CcUserPanel" swapped="no"/>
-                                      </object>
-                                    </child>
-                                  </object>
-                                </child>
-                              </object>
-                            </child>
+                            <property name="show-apply-button">True</property>
+                            <signal name="apply" handler="full_name_entry_apply_cb" object="CcUserPanel" swapped="yes"/>
                             <child>
-                              <object class="GtkToggleButton" id="full_name_edit_button">
-                                <signal name="toggled" handler="full_name_edit_button_toggled" object="CcUserPanel" swapped="yes"/>
-                                <property name="icon-name">document-edit-symbolic</property>
-                                <property name="valign">GTK_ALIGN_CENTER</property>
-                                <accessibility>
-                                  <property name="label" translatable="yes">Edit</property>
-                                </accessibility>
-                                <style>
-                                  <class name="flat"/>
-                                </style>
+                              <object class="GtkEventControllerKey">
+                                <property name="propagation-phase">capture</property>
+                                <signal name="key-pressed" handler="full_name_entry_key_press_cb" object="CcUserPanel" swapped="no"/>
                               </object>
                             </child>
                           </object>

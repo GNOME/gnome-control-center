@@ -734,7 +734,6 @@ get_autologin_possible (ActUser *user)
 }
 
 static void on_permission_changed (CcUserPanel *self);
-static void full_name_edit_button_toggled (CcUserPanel *self);
 
 #ifdef HAVE_MALCONTENT
 static gboolean
@@ -847,14 +846,9 @@ show_user (ActUser *user, CcUserPanel *self)
         setup_avatar_for_user (self->user_avatar, user);
         cc_avatar_chooser_set_user (self->avatar_chooser, user);
 
-        gtk_label_set_label (self->full_name_label, get_real_or_user_name (user));
-        gtk_editable_set_text (GTK_EDITABLE (self->full_name_entry), gtk_label_get_label (self->full_name_label));
-        gtk_widget_set_tooltip_text (GTK_WIDGET (self->full_name_label), get_real_or_user_name (user));
-
-        g_signal_handlers_block_by_func (self->full_name_edit_button, full_name_edit_button_toggled, self);
-        gtk_stack_set_visible_child (self->full_name_stack, GTK_WIDGET (self->full_name_label));
-        gtk_toggle_button_set_active (self->full_name_edit_button, FALSE);
-        g_signal_handlers_unblock_by_func (self->full_name_edit_button, full_name_edit_button_toggled, self);
+        gtk_editable_set_text (GTK_EDITABLE (self->full_name_entry), get_real_or_user_name (user));
+        gtk_widget_set_tooltip_text (GTK_WIDGET (self->full_name_entry),
+                                     gtk_editable_get_text (GTK_EDITABLE (self->full_name_entry)));
 
         enable = (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR);
         gtk_switch_set_active (self->account_type_switch, enable);
@@ -936,7 +930,7 @@ show_user (ActUser *user, CcUserPanel *self)
 }
 
 static void
-full_name_entry_activate (CcUserPanel *self)
+full_name_entry_apply_cb (CcUserPanel *self)
 {
         const gchar *text;
         ActUser *user;
@@ -948,21 +942,6 @@ full_name_entry_activate (CcUserPanel *self)
                 act_user_set_real_name (user, text);
         }
 
-        gtk_toggle_button_set_active (self->full_name_edit_button, FALSE);
-}
-
-static void
-full_name_edit_button_toggled (CcUserPanel *self)
-{
-        if (gtk_stack_get_visible_child (self->full_name_stack) == GTK_WIDGET (self->full_name_label)) {
-                gtk_stack_set_visible_child (self->full_name_stack, GTK_WIDGET (self->full_name_entry));
-
-                gtk_widget_grab_focus (GTK_WIDGET (self->full_name_entry));
-        } else {
-                gtk_stack_set_visible_child (self->full_name_stack, GTK_WIDGET (self->full_name_label));
-
-                full_name_entry_activate (self);
-        }
 }
 
 static gboolean
@@ -974,8 +953,6 @@ full_name_entry_key_press_cb (GtkEventController *controller,
 {
         if (keyval == GDK_KEY_Escape) {
                 gtk_editable_set_text (GTK_EDITABLE (self->full_name_entry), act_user_get_real_name (self->selected_user));
-
-                full_name_entry_activate (self);
 
                 return TRUE;
         }
@@ -1309,16 +1286,16 @@ on_permission_changed (CcUserPanel *self)
 
         /* The full name entry: insensitive if remote or not authorized and not self */
         if (!act_user_is_local_account (user)) {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->full_name_edit_button), FALSE);
-                remove_unlock_tooltip (GTK_WIDGET (self->full_name_stack));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->full_name_entry), FALSE);
+                remove_unlock_tooltip (GTK_WIDGET (self->full_name_entry));
 
         } else if (is_authorized || self_selected) {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->full_name_edit_button), TRUE);
-                remove_unlock_tooltip (GTK_WIDGET (self->full_name_stack));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->full_name_entry), TRUE);
+                remove_unlock_tooltip (GTK_WIDGET (self->full_name_entry));
 
         } else {
-                gtk_widget_set_sensitive (GTK_WIDGET (self->full_name_edit_button), FALSE);
-                add_unlock_tooltip (GTK_WIDGET (self->full_name_stack));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->full_name_entry), FALSE);
+                add_unlock_tooltip (GTK_WIDGET (self->full_name_entry));
         }
 
         if (is_authorized || self_selected) {
@@ -1537,9 +1514,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_switch);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, back_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_row);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_stack);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_label);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_edit_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_entry);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
@@ -1564,8 +1538,7 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, autologin_changed);
         gtk_widget_class_bind_template_callback (widget_class, change_fingerprint);
         gtk_widget_class_bind_template_callback (widget_class, change_language);
-        gtk_widget_class_bind_template_callback (widget_class, full_name_edit_button_toggled);
-        gtk_widget_class_bind_template_callback (widget_class, full_name_entry_activate);
+        gtk_widget_class_bind_template_callback (widget_class, full_name_entry_apply_cb);
         gtk_widget_class_bind_template_callback (widget_class, full_name_entry_key_press_cb);
         gtk_widget_class_bind_template_callback (widget_class, change_password);
         gtk_widget_class_bind_template_callback (widget_class, delete_user);
