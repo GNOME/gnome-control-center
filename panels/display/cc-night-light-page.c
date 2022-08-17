@@ -40,6 +40,7 @@ struct _CcNightLightPage {
   GtkButton           *button_to_am;
   GtkButton           *button_to_pm;
   GtkWidget           *infobar_unsupported;
+  GtkWidget           *infobar_unsupported_description;
   GtkWidget           *infobar_disabled;
   GtkListBox          *listbox;
   GtkWidget           *scale_color_temperature;
@@ -123,6 +124,49 @@ dialog_adjustments_set_frac_hours (CcNightLightPage *self,
 
   gtk_widget_set_visible (GTK_WIDGET (stack), !is_24h);
   gtk_stack_set_visible_child (stack, is_pm ? GTK_WIDGET (button_pm) : GTK_WIDGET (button_am));
+}
+
+static gboolean
+is_virtualized ()
+{
+  g_autoptr(GDBusConnection) connection = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GVariant) chassis_variant = NULL;
+  const gchar *chassis_type;
+
+  connection = g_bus_get_sync (G_BUS_TYPE_SYSTEM, NULL, &error);
+  if (!connection)
+    {
+      g_warning ("System bus not available: %s", error->message);
+
+      return FALSE;
+    }
+
+  variant = g_dbus_connection_call_sync (connection,
+                                         "org.freedesktop.hostname1",
+                                         "/org/freedesktop/hostname1",
+                                         "org.freedesktop.DBus.Properties",
+                                         "Get",
+                                         g_variant_new ("(ss)",
+                                                        "org.freedesktop.hostname1",
+                                                        "Chassis"),
+                                         NULL,
+                                         G_DBUS_CALL_FLAGS_NONE,
+                                         -1,
+                                         NULL,
+                                         &error);
+  if (!variant)
+   {
+     g_warning ("Cannot get org.freedesktop.hostname1.Chassis: %s", error->message);
+
+     return FALSE;
+   }
+
+   g_variant_get (variant, "(v)", &chassis_variant);
+   chassis_type = g_variant_get_string (chassis_variant, NULL);
+
+   return (g_strcmp0 (chassis_type, "vm") == 0);
 }
 
 static void
@@ -218,6 +262,12 @@ dialog_update_state (CcNightLightPage *self)
       gtk_widget_set_visible (self->infobar_unsupported, TRUE);
       gtk_widget_set_visible (self->infobar_disabled, FALSE);
       gtk_widget_set_sensitive (self->night_light_settings, FALSE);
+
+      if (is_virtualized ())
+        {
+          gtk_label_set_text (GTK_LABEL (self->infobar_unsupported_description),
+                              _("Night Light cannot be used from a virtual machine."));
+        }
     }
 }
 
@@ -612,6 +662,7 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, button_to_am);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, button_to_pm);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported);
+  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported_description);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_disabled);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, listbox);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_switch);
