@@ -1199,7 +1199,7 @@ cc_printers_panel_init (CcPrintersPanel *self)
   GtkWidget              *top_widget;
   GtkWidget              *widget;
   g_autoptr(GError)       error = NULL;
-  gchar                  *objects[] = { "overlay", "permission-infobar", "top-right-buttons", "printer-add-button", "search-button", NULL };
+  const gchar            *objects[] = { "overlay", "permission-infobar", "top-right-buttons", "printer-add-button", "search-button", NULL };
   guint                   builder_result;
 
   g_resources_register (cc_printers_get_resource ());
