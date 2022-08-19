@@ -469,7 +469,7 @@ permission_acquired (GPermission *permission, GAsyncResult *res, const gchar *ac
                 return FALSE;
         }
 
-        return FALSE;
+        return TRUE;
 }
 
 static void
