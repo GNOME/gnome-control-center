@@ -120,18 +120,16 @@ set_restart_notification_visible (CcRegionPanel *self,
 
         if (locale) {
                 new_locale = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
-                if (new_locale == (locale_t) 0)
-                        g_warning ("Failed to create locale %s: %s", locale, g_strerror (errno));
-                else
+                if (new_locale != (locale_t) 0) {
                         current_locale = uselocale (new_locale);
+                        uselocale (current_locale);
+                        freelocale (new_locale);
+                } else {
+                        g_warning ("Failed to create locale %s: %s", locale, g_strerror (errno));
+                }
         }
 
         gtk_info_bar_set_revealed (self->infobar, visible);
-
-        if (locale && new_locale != (locale_t) 0) {
-                uselocale (current_locale);
-                freelocale (new_locale);
-        }
 
         file = get_needs_restart_file ();
 
