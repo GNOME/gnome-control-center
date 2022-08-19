@@ -67,7 +67,9 @@ update_format_examples (CcFormatPreview *self)
   locale_t old_locale;
   g_autoptr(GDateTime) dt = NULL;
   g_autofree gchar *s = NULL;
+#ifdef LC_MEASUREMENT
   const gchar *fmt;
+#endif
   g_autoptr(GtkPaperSize) paper = NULL;
 
   if (region == NULL || region[0] == '\0')
