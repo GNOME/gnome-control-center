@@ -8,10 +8,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
-"es\n"
-"POT-Creation-Date: 2022-08-12 01:31+0000\n"
-"PO-Revision-Date: 2022-08-12 23:39+0300\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
+"ues\n"
+"POT-Creation-Date: 2022-08-20 12:20+0000\n"
+"PO-Revision-Date: 2022-08-20 21:33+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1558,7 +1558,7 @@ msgstr "Повідомити про помилки"
 msgid "diagnostics;crash;"
 msgstr "diagnostics;crash;діагностика;аварія;"
 
-#: panels/display/cc-display-panel.c:516
+#: panels/display/cc-display-panel.c:492
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1569,7 +1569,7 @@ msgstr "diagnostics;crash;діагностика;аварія;"
 msgid "On"
 msgstr "Увімкнено"
 
-#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:494 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1580,15 +1580,15 @@ msgstr "Увімкнено"
 msgid "Off"
 msgstr "Вимкнено"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:930
 msgid "Apply Changes?"
 msgstr "Застосувати зміни?"
 
-#: panels/display/cc-display-panel.c:960
+#: panels/display/cc-display-panel.c:935
 msgid "Changes Cannot be Applied"
 msgstr "Не вдалося застосувати зміни"
 
-#: panels/display/cc-display-panel.c:962
+#: panels/display/cc-display-panel.c:937
 msgid "This could be due to hardware limitations."
 msgstr "Причиною можуть бути апаратні обмеження."
 
@@ -2449,7 +2449,6 @@ msgstr "Назва ОС"
 
 #. translators: this field contains the distro build ID
 #: panels/info-overview/cc-info-overview-panel.ui:107
-#| msgid "%s; Build ID: %s"
 msgid "OS Build ID"
 msgstr "Ідентифікатор збірки ОС"
 
@@ -2714,7 +2713,7 @@ msgid "Custom Shortcuts"
 msgstr "Власне скорочення"
 
 #: panels/keyboard/cc-keyboard-panel.c:64
-#: panels/keyboard/cc-keyboard-panel.ui:62
+#: panels/keyboard/cc-keyboard-panel.ui:63
 msgid "Alternate Characters Key"
 msgstr "Клавіша альтернативних символів"
 
@@ -2764,7 +2763,7 @@ msgid "Right Ctrl"
 msgstr "Права Ctrl"
 
 #: panels/keyboard/cc-keyboard-panel.c:80
-#: panels/keyboard/cc-keyboard-panel.ui:79
+#: panels/keyboard/cc-keyboard-panel.ui:80
 msgid "Compose Key"
 msgstr "Скомпонувати клавіші"
 
@@ -2825,21 +2824,21 @@ msgstr "Використовувати _однакові джерела для �
 msgid "Switch input sources _individually for each window"
 msgstr "Перемикати джерела введення _окремо для кожного з вікон"
 
-#: panels/keyboard/cc-keyboard-panel.ui:58
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Special Character Entry"
 msgstr "Введення спеціальних символів"
 
-#: panels/keyboard/cc-keyboard-panel.ui:59
+#: panels/keyboard/cc-keyboard-panel.ui:60
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Способи введення символів та варіантів літер за допомогою клавіатури."
 
-#: panels/keyboard/cc-keyboard-panel.ui:97
+#: panels/keyboard/cc-keyboard-panel.ui:98
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Клавіатурні скорочення"
 
-#: panels/keyboard/cc-keyboard-panel.ui:100
+#: panels/keyboard/cc-keyboard-panel.ui:101
 msgid "View and Customize Shortcuts"
 msgstr "Перегляд і налаштовування скорочень"
 
@@ -2915,7 +2914,8 @@ msgstr "Не знайдено клавіатурного скорочення"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:392
 #, c-format
-msgid "%s is already being used for %s. If you replace it, %s will be disabled"
+msgid ""
+"%s is already being used for %s. If you replace it, %s will be disabled"
 msgstr ""
 "%s вже використовується для %s. Якщо застосувати, сполучення для %s буде "
 "вимкнено"
@@ -3303,7 +3303,7 @@ msgstr "Потрібно запустити NetworkManager."
 msgid "Other Devices"
 msgstr "Інші пристрої"
 
-#: panels/network/cc-network-panel.ui:37 panels/network/cc-network-panel.ui:56
+#: panels/network/cc-network-panel.ui:37 panels/network/cc-network-panel.ui:71
 #: panels/network/connection-editor/net-connection-editor.c:586
 msgid "VPN"
 msgstr "VPN"
@@ -3312,7 +3312,7 @@ msgstr "VPN"
 msgid "Add connection"
 msgstr "Додати з'єднання"
 
-#: panels/network/cc-network-panel.ui:73
+#: panels/network/cc-network-panel.ui:62
 msgid "Not set up"
 msgstr "Не налаштовано"
 
@@ -4943,7 +4943,7 @@ msgstr "Інше"
 msgid "%s removed"
 msgstr "%s вилучений"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:691
+#: panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Error removing account"
 msgstr "Помилка вилучення облікового запису"
 
@@ -5407,7 +5407,8 @@ msgstr "Живлення"
 
 #: panels/power/gnome-power-panel.desktop.in.in:4
 msgid "View your battery status and change power saving settings"
-msgstr "Переглянути стан вашої батареї і змінити параметри заощадження енергії"
+msgstr ""
+"Переглянути стан вашої батареї і змінити параметри заощадження енергії"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
@@ -5419,23 +5420,23 @@ msgstr ""
 "DPMS;Бездіяльність;живлення;енергія;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:676
+#: panels/printers/cc-printers-panel.c:685
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Принтер «%s» було успішно вилучено"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:928
+#: panels/printers/cc-printers-panel.c:942
 msgid "Failed to add new printer."
 msgstr "Не вдалось додати принтер."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1233
+#: panels/printers/cc-printers-panel.c:1247
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не вдалось завантажити інтерфейс: %s"
 
-#: panels/printers/cc-printers-panel.c:1301
+#: panels/printers/cc-printers-panel.c:1315
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Розблокуйте, щоб додати принтери і змінити налаштування"
 
@@ -6491,7 +6492,8 @@ msgid "Automatic _Screen Lock Delay"
 msgstr "Затримка _автоматичного блокування екрана"
 
 #: panels/screen/cc-screen-panel.ui:51
-msgid "Period after the screen blanks when the screen is automatically locked."
+msgid ""
+"Period after the screen blanks when the screen is automatically locked."
 msgstr "Затримка автоматичного блокування після вимикання екрана."
 
 #: panels/screen/cc-screen-panel.ui:69
@@ -8410,7 +8412,8 @@ msgstr "Не вдалось зв'язатись зі службою обліко
 
 #: panels/user-accounts/cc-user-panel.c:1204
 msgid "Please make sure that the AccountService is installed and enabled."
-msgstr "Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
+msgstr ""
+"Будь ласка, переконайтесь, що AccountService встановлено та ввімкнено."
 
 #: panels/user-accounts/cc-user-panel.c:1226
 msgid "This panel must be unlocked to change this setting"
@@ -8739,7 +8742,8 @@ msgstr "Вибачте, цей користувач недоступний. Сп
 msgid "The username is too long."
 msgstr "Перейменуйте користувача на меншу кількістю літер."
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:40
+#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/cc-wacom-page.ui:40
 msgid "Map Buttons"
 msgstr "Прив'язування кнопок"
 
@@ -8808,6 +8812,12 @@ msgstr "Планшет, який змонтовано на зовнішньом�
 #: panels/wacom/cc-wacom-device.c:435
 msgid "External tablet device"
 msgstr "Зовнішній пристрій планшета"
+
+#. translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs
+#: panels/wacom/cc-wacom-ekr-page.ui:9
+#| msgid "External tablet device"
+msgid "External pad device"
+msgstr "Зовнішній пристрій панелі"
 
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:608
