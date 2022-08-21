@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-08-13 12:01+0000\n"
-"PO-Revision-Date: 2022-08-14 14:00+0800\n"
+"POT-Creation-Date: 2022-08-20 12:20+0000\n"
+"PO-Revision-Date: 2022-08-21 14:36+0800\n"
 "Last-Translator: lumingzh <lumingzh@qq.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -1544,7 +1544,7 @@ msgstr "报告问题"
 msgid "diagnostics;crash;"
 msgstr "diagnostics;crash;诊断;崩溃;"
 
-#: panels/display/cc-display-panel.c:516
+#: panels/display/cc-display-panel.c:492
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1555,7 +1555,7 @@ msgstr "diagnostics;crash;诊断;崩溃;"
 msgid "On"
 msgstr "开"
 
-#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:494 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1566,15 +1566,15 @@ msgstr "开"
 msgid "Off"
 msgstr "关"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:930
 msgid "Apply Changes?"
 msgstr "应用更改？"
 
-#: panels/display/cc-display-panel.c:960
+#: panels/display/cc-display-panel.c:935
 msgid "Changes Cannot be Applied"
 msgstr "无法应用更改"
 
-#: panels/display/cc-display-panel.c:962
+#: panels/display/cc-display-panel.c:937
 msgid "This could be due to hardware limitations."
 msgstr "这可能是硬件限制造成的。"
 
@@ -2666,7 +2666,7 @@ msgid "Custom Shortcuts"
 msgstr "自定义快捷键"
 
 #: panels/keyboard/cc-keyboard-panel.c:64
-#: panels/keyboard/cc-keyboard-panel.ui:62
+#: panels/keyboard/cc-keyboard-panel.ui:63
 msgid "Alternate Characters Key"
 msgstr "备用字符键"
 
@@ -2713,7 +2713,7 @@ msgid "Right Ctrl"
 msgstr "右 Ctrl 键"
 
 #: panels/keyboard/cc-keyboard-panel.c:80
-#: panels/keyboard/cc-keyboard-panel.ui:79
+#: panels/keyboard/cc-keyboard-panel.ui:80
 msgid "Compose Key"
 msgstr "Compose 键"
 
@@ -2772,21 +2772,21 @@ msgstr "所有窗口使用相同的输入源(_S)"
 msgid "Switch input sources _individually for each window"
 msgstr "每个窗口使用不同的输入源(_I)"
 
-#: panels/keyboard/cc-keyboard-panel.ui:58
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Special Character Entry"
 msgstr "特殊字符输入"
 
-#: panels/keyboard/cc-keyboard-panel.ui:59
+#: panels/keyboard/cc-keyboard-panel.ui:60
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "使用键盘输入符号和字母变体的方法。"
 
-#: panels/keyboard/cc-keyboard-panel.ui:97
+#: panels/keyboard/cc-keyboard-panel.ui:98
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
-#: panels/keyboard/cc-keyboard-panel.ui:100
+#: panels/keyboard/cc-keyboard-panel.ui:101
 msgid "View and Customize Shortcuts"
 msgstr "查看及自定义快捷键"
 
@@ -4844,7 +4844,7 @@ msgstr "其他"
 msgid "%s removed"
 msgstr "%s 已移除"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:691
+#: panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Error removing account"
 msgstr "移除帐号出错"
 
@@ -5296,23 +5296,23 @@ msgstr ""
 "耗;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:676
+#: panels/printers/cc-printers-panel.c:685
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "已删除打印机“%s”"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:928
+#: panels/printers/cc-printers-panel.c:942
 msgid "Failed to add new printer."
 msgstr "添加新打印机失败。"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1233
+#: panels/printers/cc-printers-panel.c:1247
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "无法载入界面：%s"
 
-#: panels/printers/cc-printers-panel.c:1301
+#: panels/printers/cc-printers-panel.c:1315
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "解锁以添加打印机及更改设置"
 
@@ -8553,7 +8553,8 @@ msgstr "抱歉，该用户名不可用。请试下别的。"
 msgid "The username is too long."
 msgstr "用户名太长。"
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:40
+#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/cc-wacom-page.ui:40
 msgid "Map Buttons"
 msgstr "映射按键"
 
@@ -8619,6 +8620,11 @@ msgstr "数位板已挂载在外部显示器上"
 #: panels/wacom/cc-wacom-device.c:435
 msgid "External tablet device"
 msgstr "外部数位板设备"
+
+#. translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs
+#: panels/wacom/cc-wacom-ekr-page.ui:9
+msgid "External pad device"
+msgstr "外部平板设备"
 
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:608
