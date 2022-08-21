@@ -231,23 +231,28 @@ out:
 }
 
 static gboolean
-file_has_extension (const char *filename, const char *extensions[])
+file_is_mime_type (const char *path, const char *mime_types[])
 {
-	char *p;
-	g_autofree gchar *ext = NULL;
+	g_autoptr(GFile) file = NULL;
+	g_autoptr(GFileInfo) info = NULL;
+	const char *content_type;
 	int i = 0;
 	gboolean found = FALSE;
 
-	p = strrchr (filename, '.');
-	if (!p)
-		return FALSE;
-
-	ext = g_ascii_strdown (p, -1);
-	if (ext) {
-		while (extensions[i]) {
-			if (!strcmp (ext, extensions[i++])) {
-				found = TRUE;
-				break;
+	file = g_file_new_for_path (path);
+	info = g_file_query_info (file, 
+	                          G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE,
+	                          G_FILE_QUERY_INFO_NONE,
+	                          NULL,
+	                          NULL);
+	if (info) {
+		content_type = g_file_info_get_content_type (info);
+		if (content_type) {
+			while (mime_types[i]) {
+				if (strcmp (content_type, mime_types[i++]) == 0) {
+					found = TRUE;
+					break;
+				}
 			}
 		}
 	}
@@ -360,21 +365,21 @@ out:
 }
 #endif
 
-static const char *privkey_extensions[] = {
-	".der", ".pem", ".p12", ".key", NULL
+static const char *privkey_mime_types[] = {
+	"application/x-x509-ca-cert", "application/pkcs12", "application/x-pkcs12", "application/pgp-keys", NULL
 };
-static const char *cert_extensions[] = {
-	".der", ".pem", ".crt", ".cer", NULL
+static const char *cert_mime_types[] = {
+	"application/x-x509-ca-cert", NULL
 };
 
 static void
-add_file_extensions_to_filter (GtkFileFilter  *filter,
-                               const char    **extensions)
+add_mime_types_to_filter (GtkFileFilter  *filter,
+                          const char    **mime_types)
 {
 	int i;
 
-	for (i = 0; extensions[i] != NULL; i++)
-		gtk_file_filter_add_suffix (filter, extensions[i]);
+	for (i = 0; mime_types[i] != NULL; i++)
+		gtk_file_filter_add_mime_type (filter, mime_types[i]);
 }
 
 
@@ -385,11 +390,11 @@ eap_method_default_file_chooser_filter_new (gboolean privkey)
 
 	filter = gtk_file_filter_new ();
 	if (privkey) {
-		add_file_extensions_to_filter (filter, privkey_extensions);
-		gtk_file_filter_set_name (filter, _("DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"));
+		add_mime_types_to_filter (filter, privkey_mime_types);
+		gtk_file_filter_set_name (filter, _("DER, PEM, PKCS#12, or PGP private keys"));
 	} else {
-		add_file_extensions_to_filter (filter, cert_extensions);
-		gtk_file_filter_set_name (filter, _("DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"));
+		add_mime_types_to_filter (filter, cert_mime_types);
+		gtk_file_filter_set_name (filter, _("DER or PEM certificates"));
 	}
 	return filter;
 }
@@ -399,7 +404,7 @@ eap_method_is_encrypted_private_key (const char *path)
 {
 	gboolean is_encrypted;
 
-	if (!file_has_extension (path, privkey_extensions))
+	if (!file_is_mime_type (path, privkey_mime_types))
 		return FALSE;
 
 #if LIBNM_BUILD
