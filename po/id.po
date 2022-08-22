@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-08-13 12:01+0000\n"
-"PO-Revision-Date: 2022-08-16 15:57+0700\n"
+"POT-Creation-Date: 2022-08-20 12:20+0000\n"
+"PO-Revision-Date: 2022-08-22 17:09+0700\n"
 "Last-Translator: Kukuh Syafaat <kukuhsyafaat@gnome.org>\n"
 "Language-Team: Indonesian <gnome-l10n-id@googlegroups.com>\n"
 "Language: id\n"
@@ -1540,7 +1540,7 @@ msgstr "Laporkan masalah Anda"
 msgid "diagnostics;crash;"
 msgstr "diagnostik;kres;"
 
-#: panels/display/cc-display-panel.c:516
+#: panels/display/cc-display-panel.c:492
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1551,7 +1551,7 @@ msgstr "diagnostik;kres;"
 msgid "On"
 msgstr "Nyala"
 
-#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:494 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1562,15 +1562,15 @@ msgstr "Nyala"
 msgid "Off"
 msgstr "Mati"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:930
 msgid "Apply Changes?"
 msgstr "Terapkan Perubahan?"
 
-#: panels/display/cc-display-panel.c:960
+#: panels/display/cc-display-panel.c:935
 msgid "Changes Cannot be Applied"
 msgstr "Perubahan Tidak Dapat Diterapkan"
 
-#: panels/display/cc-display-panel.c:962
+#: panels/display/cc-display-panel.c:937
 msgid "This could be due to hardware limitations."
 msgstr "Ini mungkin karena keterbatasan perangkat keras."
 
@@ -2690,7 +2690,7 @@ msgid "Custom Shortcuts"
 msgstr "Tombol Pintas Gubahan"
 
 #: panels/keyboard/cc-keyboard-panel.c:64
-#: panels/keyboard/cc-keyboard-panel.ui:62
+#: panels/keyboard/cc-keyboard-panel.ui:63
 msgid "Alternate Characters Key"
 msgstr "Tombol Karakter Alternatif"
 
@@ -2739,7 +2739,7 @@ msgid "Right Ctrl"
 msgstr "Ctrl Kanan"
 
 #: panels/keyboard/cc-keyboard-panel.c:80
-#: panels/keyboard/cc-keyboard-panel.ui:79
+#: panels/keyboard/cc-keyboard-panel.ui:80
 msgid "Compose Key"
 msgstr "Tombol Compose"
 
@@ -2799,21 +2799,21 @@ msgstr "Gunakan sumber yang _sama untuk semua jendela"
 msgid "Switch input sources _individually for each window"
 msgstr "Ganti sumber masukan satu per satu untuk set_iap jendela"
 
-#: panels/keyboard/cc-keyboard-panel.ui:58
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Special Character Entry"
 msgstr "Entri Karakter Khusus"
 
-#: panels/keyboard/cc-keyboard-panel.ui:59
+#: panels/keyboard/cc-keyboard-panel.ui:60
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Metode untuk memasukkan simbol dan varian huruf menggunakan papan tik."
 
-#: panels/keyboard/cc-keyboard-panel.ui:97
+#: panels/keyboard/cc-keyboard-panel.ui:98
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Tombol Pintas"
 
-#: panels/keyboard/cc-keyboard-panel.ui:100
+#: panels/keyboard/cc-keyboard-panel.ui:101
 msgid "View and Customize Shortcuts"
 msgstr "Tampilkan dan Ubah Pintasan"
 
@@ -4897,7 +4897,7 @@ msgstr "Lainnya"
 msgid "%s removed"
 msgstr "%s dihapus"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:691
+#: panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Error removing account"
 msgstr "Galat saat menghapus akun"
 
@@ -5353,23 +5353,23 @@ msgstr ""
 "Menganggur;Energi;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:676
+#: panels/printers/cc-printers-panel.c:685
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Pencetak “%s” telah dihapus"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:928
+#: panels/printers/cc-printers-panel.c:942
 msgid "Failed to add new printer."
 msgstr "Gagal menambah pencetak baru."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1233
+#: panels/printers/cc-printers-panel.c:1247
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Tak dapat memuat ui: %s"
 
-#: panels/printers/cc-printers-panel.c:1301
+#: panels/printers/cc-printers-panel.c:1315
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Buka Kunci untuk Menambahkan Pencetak dan Mengubah Pengaturan"
 
@@ -8656,7 +8656,8 @@ msgstr "Maaf, nama pengguna tersebut tidak tersedia. Harap coba yang lain."
 msgid "The username is too long."
 msgstr "Nama pengguna terlalu panjang."
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:40
+#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/cc-wacom-page.ui:40
 msgid "Map Buttons"
 msgstr "Petakan Tombol"
 
@@ -8725,6 +8726,11 @@ msgstr "Tablet yang dipasang pada layar eksternal"
 #: panels/wacom/cc-wacom-device.c:435
 msgid "External tablet device"
 msgstr "Perangkat tablet eksternal"
+
+#. translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs
+#: panels/wacom/cc-wacom-ekr-page.ui:9
+msgid "External pad device"
+msgstr "Perangkat pad eksternal"
 
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:608
