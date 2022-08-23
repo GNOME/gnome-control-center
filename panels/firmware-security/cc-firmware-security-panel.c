@@ -432,8 +432,7 @@ on_secure_boot_button_clicked_cb (GtkWidget *widget,
 
 static void
 set_hsi_button_view_contain (CcfirmwareSecurityPanel *self,
-                             const int                hsi_number,
-
+                             guint                    hsi_number,
                              gchar                   *title,
                              const gchar             *description)
 {
@@ -459,6 +458,11 @@ set_hsi_button_view_contain (CcfirmwareSecurityPanel *self,
         gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "3");
         gtk_widget_add_css_class (self->hsi_circle_box, "level3");
         gtk_widget_add_css_class (self->hsi_circle_number, "hsi3");
+        break;
+      default:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "?");
+        gtk_widget_add_css_class (self->hsi_circle_box, "level1");
+        gtk_widget_add_css_class (self->hsi_circle_number, "hsi1");
         break;
     }
 
@@ -507,6 +511,13 @@ set_hsi_button_view (CcfirmwareSecurityPanel *self)
                                      _("Comprehensive Protection"),
                                      _("Protected against a wide range of security threats."));
         break;
+      case G_MAXUINT:
+        set_hsi_button_view_contain (self,
+                                     self->hsi_number,
+                                     /* TRANSLATORS: in reference to firmware protection: ??? stars */
+                                     _("Security Level"),
+                                     _("Security levels are not available for this device."));
+        break;
       default:
         g_warning ("incorrect HSI number %u", self->hsi_number);
     }
@@ -531,8 +542,14 @@ on_properties_bus_done_cb (GObject      *source,
 
   /* parse value */
   hsi_str = g_variant_get_data (val);
-  if (hsi_str != NULL && g_str_has_prefix (hsi_str, "HSI:"))
-    self->hsi_number = g_ascii_strtoll (hsi_str + 4, NULL, 10);
+  if (hsi_str != NULL && g_str_has_prefix (hsi_str, "HSI:INVALID"))
+    {
+      self->hsi_number = G_MAXUINT;
+    }
+  else if (hsi_str != NULL && g_str_has_prefix (hsi_str, "HSI:"))
+    {
+      self->hsi_number = g_ascii_strtoll (hsi_str + 4, NULL, 10);
+    }
   set_hsi_button_view (self);
 }
 
