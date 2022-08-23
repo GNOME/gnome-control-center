@@ -502,7 +502,7 @@ on_night_light_row_activated_cb (GtkListBoxRow  *row,
 }
 
 static void
-on_primary_display_selected_index_changed_cb (CcDisplayPanel *panel)
+on_primary_display_selected_item_changed_cb (CcDisplayPanel *panel)
 {
   gint idx = adw_combo_row_get_selected (panel->primary_display_row);
   g_autoptr(CcDisplayMonitor) output = NULL;
@@ -604,7 +604,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_config_type_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_night_light_row_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_index_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_item_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_screen_changed);
   gtk_widget_class_bind_template_callback (widget_class, on_toplevel_escape_pressed_cb);
 }
