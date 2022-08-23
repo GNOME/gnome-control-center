@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2022-08-20 12:20+0000\n"
-"PO-Revision-Date: 2022-08-20 21:33+0300\n"
+"POT-Creation-Date: 2022-08-23 10:32+0000\n"
+"PO-Revision-Date: 2022-08-23 17:39+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2938,7 +2938,7 @@ msgstr "Встановити скорочення"
 msgid "Enter new shortcut to change %s."
 msgstr "Уведіть нове сполучення для зміни %s."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:992
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:977
 msgid "Add Custom Shortcut"
 msgstr "Додати своє скорочення"
 
@@ -4497,13 +4497,15 @@ msgstr "не вибрано жодного файла"
 msgid "unspecified error validating eap-method file"
 msgstr "Невизначена помилка завірення файла з методом eap"
 
-#: panels/network/wireless-security/eap-method.c:389
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
-msgstr "Закриті ключі DER, PEM або PKCS#12 (*.der, *.pem, *.p12, *.key)"
+#: panels/network/wireless-security/eap-method.c:394
+#| msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
+msgid "DER, PEM, PKCS#12, or PGP private keys"
+msgstr "Закриті ключі DER, PEM, PKCS#12 або PGP"
 
-#: panels/network/wireless-security/eap-method.c:392
-msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "Сертифікати DER або PEM (*.der, *.pem, *.crt, *.cer)"
+#: panels/network/wireless-security/eap-method.c:397
+#| msgid "_User certificate"
+msgid "DER or PEM certificates"
+msgstr "Сертифікати DER або PEM"
 
 #: panels/network/wireless-security/eap-method-fast.c:88
 msgid "missing EAP-FAST PAC file"
@@ -6133,12 +6135,12 @@ msgstr "Пошук може бути виконано за країнами аб
 msgid "Preview"
 msgstr "Перегляд"
 
-#: panels/region/cc-format-preview.c:135
+#: panels/region/cc-format-preview.c:137
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Імперська"
 
-#: panels/region/cc-format-preview.c:137
+#: panels/region/cc-format-preview.c:139
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Метрична"
@@ -8815,7 +8817,6 @@ msgstr "Зовнішній пристрій планшета"
 
 #. translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs
 #: panels/wacom/cc-wacom-ekr-page.ui:9
-#| msgid "External tablet device"
 msgid "External pad device"
 msgstr "Зовнішній пристрій панелі"
 
@@ -9666,6 +9667,9 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+#~ msgstr "Сертифікати DER або PEM (*.der, *.pem, *.crt, *.cer)"
 
 #~ msgid "Drip"
 #~ msgstr "Капля"
