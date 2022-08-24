@@ -567,7 +567,7 @@ update_panel_visibility (const gchar *chassis_type)
   gboolean visible = TRUE;
 
   /* there's no point showing this */
-  if (g_strcmp0 (chassis_type, "vm") == 0)
+  if (g_strcmp0 (chassis_type, "vm") == 0 || g_strcmp0 (chassis_type, "") == 0)
     visible = FALSE;
   application = CC_APPLICATION (g_application_get_default ());
   cc_shell_model_set_panel_visibility (cc_application_get_model (application),
