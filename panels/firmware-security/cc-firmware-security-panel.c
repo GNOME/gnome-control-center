@@ -74,6 +74,9 @@ struct _CcfirmwareSecurityPanel
 CC_PANEL_REGISTER (CcfirmwareSecurityPanel, cc_firmware_security_panel)
 
 static void
+set_hsi_button_view (CcfirmwareSecurityPanel *self);
+
+static void
 set_secure_boot_button_view (CcfirmwareSecurityPanel *self)
 {
   FwupdSecurityAttr *attr;
@@ -226,19 +229,19 @@ parse_variant_iter (CcfirmwareSecurityPanel *self,
   if (appstream_id == NULL)
     return;
 
+  /* in fwupd <= 1.8.3 org.fwupd.hsi.Uefi.SecureBoot was incorrectly marked as HSI-0,
+   * so lower the HSI number forcefully if this attribute failed -- the correct thing
+   * to do of course is to update fwupd to a newer build */
+  if (g_strcmp0 (attr->appstream_id, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT) == 0 &&
+      (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS) == 0)
+    {
+      self->hsi_number = 0;
+      set_hsi_button_view (self);
+    }
+
   /* insert into correct hash table */
   switch (attr->hsi_level)
     {
-      case 0:
-        /* in fwupd <= 1.8.3 org.fwupd.hsi.Uefi.SecureBoot was incorrectly marked as HSI-0,
-         * so accept either level here to avoid raising the runtime version requirement */
-        if (g_strcmp0 (attr->appstream_id, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT) == 0)
-          {
-            g_hash_table_insert (self->hsi1_dict,
-                                 g_strdup (appstream_id),
-                                 g_steal_pointer (&attr));
-          }
-        break;
       case 1:
         g_hash_table_insert (self->hsi1_dict,
                              g_strdup (appstream_id),

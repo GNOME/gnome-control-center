@@ -334,6 +334,10 @@ fu_security_attr_new_from_variant (GVariantIter *iter)
       g_variant_unref (value);
     }
 
+  /* in fwupd <= 1.8.3 org.fwupd.hsi.Uefi.SecureBoot was incorrectly marked as HSI-0 */
+  if (g_strcmp0 (attr->appstream_id, FWUPD_SECURITY_ATTR_ID_UEFI_SECUREBOOT) == 0)
+    attr->hsi_level = 1;
+
   /* fallback for older fwupd versions */
   if (attr->appstream_id != NULL && attr->title == NULL)
     attr->title = g_strdup (fu_security_attr_get_title_fallback (attr->appstream_id));
