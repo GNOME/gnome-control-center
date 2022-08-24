@@ -323,6 +323,8 @@ fu_security_attr_new_from_variant (GVariantIter *iter)
         attr->hsi_level = g_variant_get_uint32 (value);
       else if (g_strcmp0 (key, "HsiResult") == 0)
         attr->result = g_variant_get_uint32 (value);
+      else if (g_strcmp0 (key, "HsiResultFallback") == 0)
+        attr->result_fallback = g_variant_get_uint32 (value);
       else if (g_strcmp0 (key, "Created") == 0)
         attr->timestamp = g_variant_get_uint64 (value);
       else if (g_strcmp0 (key, "Description") == 0)

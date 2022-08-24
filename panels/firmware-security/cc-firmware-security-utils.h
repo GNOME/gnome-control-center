@@ -110,6 +110,7 @@ typedef enum {
 
 typedef struct {
   FwupdSecurityAttrResult  result;
+  FwupdSecurityAttrResult  result_fallback;
   FwupdSecurityAttrFlags   flags;
   guint32                  hsi_level;
   guint64                  timestamp;
