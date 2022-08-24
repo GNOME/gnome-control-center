@@ -174,6 +174,11 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
   if (attr->appstream_id == NULL || attr->title == NULL)
     return;
 
+  /* skip events that have either been added or removed with no prior value */
+  if (attr->result == FWUPD_SECURITY_ATTR_RESULT_UNKNOWN ||
+      attr->result_fallback == FWUPD_SECURITY_ATTR_RESULT_UNKNOWN)
+    return;
+
   /* build new row */
   date = g_date_time_new_from_unix_local (attr->timestamp);
   date_string = g_date_time_format (date, "\%F \%H:\%m:\%S");
