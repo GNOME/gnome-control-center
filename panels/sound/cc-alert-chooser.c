@@ -283,9 +283,9 @@ cc_alert_chooser_init (CcAlertChooser *self)
   alert_name = get_alert_name ();
 
   /* If user has selected an old sound alert, migrate them to click. */
-  if (g_strcmp0 (alert_name, "click") != 0 ||
-      g_strcmp0 (alert_name, "hum") != 0 ||
-      g_strcmp0 (alert_name, "string") != 0 ||
+  if (g_strcmp0 (alert_name, "click") != 0 &&
+      g_strcmp0 (alert_name, "hum") != 0 &&
+      g_strcmp0 (alert_name, "string") != 0 &&
       g_strcmp0 (alert_name, "swing") != 0)
     {
       set_custom_theme (self, "click");
@@ -296,9 +296,9 @@ cc_alert_chooser_init (CcAlertChooser *self)
   if (g_strcmp0 (alert_name, "click") == 0)
     set_button (self, self->click_button, TRUE);
   else if (g_strcmp0 (alert_name, "hum") == 0)
-    set_button (self, self->string_button, TRUE);
+    set_button (self, self->hum_button, TRUE);
   else if (g_strcmp0 (alert_name, "string") == 0)
-    set_button (self, self->swing_button, TRUE);
+    set_button (self, self->string_button, TRUE);
   else if (g_strcmp0 (alert_name, "swing") == 0)
     set_button (self, self->swing_button, TRUE);
   else if (alert_name != NULL)
