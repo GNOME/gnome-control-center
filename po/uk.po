@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2022-08-23 10:32+0000\n"
-"PO-Revision-Date: 2022-08-23 17:39+0300\n"
+"POT-Creation-Date: 2022-08-24 14:00+0000\n"
+"PO-Revision-Date: 2022-08-25 23:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -1880,31 +1880,31 @@ msgstr ""
 "Докладніший його опис можна отримати від виробника обладнання або служби "
 "комп'ютерної підтримки."
 
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Passed"
+msgstr "Пройдено"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Failed"
+msgstr "Не пройдено"
+
 #. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:79
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
 #, c-format
 msgid "Device conforms to HSI level %d"
 msgstr "Пристрій є сумісним із рівнем HSI %d"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Passed"
-msgstr "Пройдено"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Failed"
-msgstr "Не пройдено"
-
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:136
-#: panels/firmware-security/cc-firmware-security-panel.c:473
+#: panels/firmware-security/cc-firmware-security-dialog.c:149
+#: panels/firmware-security/cc-firmware-security-panel.c:482
 msgid "Security Level 0"
 msgstr "Рівень безпеки 0"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:150
 msgid ""
 "This device has no protection against hardware security issues. This could "
 "be because of a hardware or firmware configuration issue. It is recommended "
@@ -1916,13 +1916,13 @@ msgstr ""
 "комп'ютерної підтримки."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:145
-#: panels/firmware-security/cc-firmware-security-dialog.c:344
-#: panels/firmware-security/cc-firmware-security-panel.c:480
+#: panels/firmware-security/cc-firmware-security-dialog.c:158
+#: panels/firmware-security/cc-firmware-security-dialog.c:357
+#: panels/firmware-security/cc-firmware-security-panel.c:489
 msgid "Security Level 1"
 msgstr "Рівень безпеки 1"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:146
+#: panels/firmware-security/cc-firmware-security-dialog.c:159
 msgid ""
 "This device has minimal protection against hardware security issues. This is "
 "the lowest device security level and only provides protection against simple "
@@ -1932,13 +1932,13 @@ msgstr ""
 "найнижчий рівень захисту пристрою, який усуває лише прості загрози безпеці."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-#: panels/firmware-security/cc-firmware-security-dialog.c:349
-#: panels/firmware-security/cc-firmware-security-panel.c:487
+#: panels/firmware-security/cc-firmware-security-dialog.c:167
+#: panels/firmware-security/cc-firmware-security-dialog.c:362
+#: panels/firmware-security/cc-firmware-security-panel.c:496
 msgid "Security Level 2"
 msgstr "Рівень безпеки 2"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:155
+#: panels/firmware-security/cc-firmware-security-dialog.c:168
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
@@ -1947,13 +1947,13 @@ msgstr ""
 "рівень захисту надає захист від деяких типових загроз безпеці."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:163
-#: panels/firmware-security/cc-firmware-security-dialog.c:354
-#: panels/firmware-security/cc-firmware-security-panel.c:494
+#: panels/firmware-security/cc-firmware-security-dialog.c:176
+#: panels/firmware-security/cc-firmware-security-dialog.c:367
+#: panels/firmware-security/cc-firmware-security-panel.c:503
 msgid "Security Level 3"
 msgstr "Рівень безпеки 3"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:164
+#: panels/firmware-security/cc-firmware-security-dialog.c:177
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
@@ -1962,25 +1962,29 @@ msgstr ""
 "Цей пристрій має розширений захист від апаратних проблем із безпекою. Це "
 "рівень захисту пристрою, який усуває деякі додаткові загрози безпеці."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:172
-msgid "Error: unable to determine HSI level."
-msgstr "Помилка: не вдалося визначити рівень HSI."
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:185
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+#: panels/firmware-security/cc-firmware-security-panel.c:518
+msgid "Security Level"
+msgstr "Рівень безпеки"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:173
-msgid "Error: unable to determine Incorrect HSI level."
-msgstr "Помилка: не вдалося визначити помилковий рівень HSI."
+#: panels/firmware-security/cc-firmware-security-dialog.c:186
+#: panels/firmware-security/cc-firmware-security-panel.c:519
+msgid "Security levels are not available for this device."
+msgstr "Для цього пристрою рівні безпеки є недоступними."
 
 #. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:188
-#: panels/firmware-security/cc-firmware-security-dialog.c:198
-#: panels/firmware-security/cc-firmware-security-dialog.c:205
+#: panels/firmware-security/cc-firmware-security-dialog.c:201
+#: panels/firmware-security/cc-firmware-security-dialog.c:211
+#: panels/firmware-security/cc-firmware-security-dialog.c:218
 msgid "Contact your hardware manufacturer for help with security updates."
 msgstr ""
 "Зверніться до виробника вашого обладнання за допомогою у розв'язанні проблем "
 "захисту."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:190
+#: panels/firmware-security/cc-firmware-security-dialog.c:203
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings, or by a support technician."
@@ -1988,8 +1992,8 @@ msgstr ""
 "Можливо, проблему можна розв'язати за допомогою параметрів мікропрограми "
 "UEFI або працівника служби підтримки."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:199
-#: panels/firmware-security/cc-firmware-security-dialog.c:210
+#: panels/firmware-security/cc-firmware-security-dialog.c:212
+#: panels/firmware-security/cc-firmware-security-dialog.c:223
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings."
@@ -1998,14 +2002,10 @@ msgstr ""
 "UEFI."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:216
+#: panels/firmware-security/cc-firmware-security-dialog.c:229
 msgid "It might be possible for a support technician to resolve this issue."
 msgstr ""
 "Можливо, проблему можна розв'язати за допомогою працівника служби підтримки."
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Security Level"
-msgstr "Рівень безпеки"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:88
 msgid "Level 1"
@@ -2069,25 +2069,25 @@ msgstr ""
 "Цю проблему могло бути спричинено змінами у налаштуваннях операційної "
 "системи або помилками у роботі програмного забезпечення у цій системі."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:474
+#: panels/firmware-security/cc-firmware-security-panel.c:483
 msgid "Exposed to serious security threats."
 msgstr "Відкритий щодо суттєвих загроз захисту."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:481
+#: panels/firmware-security/cc-firmware-security-panel.c:490
 msgid "Limited protection against simple security threats."
 msgstr "Обмежений захист від простих загроз."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:488
+#: panels/firmware-security/cc-firmware-security-panel.c:497
 msgid "Protected against common security threats."
 msgstr "Захищено від поширених загроз."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:495
-#: panels/firmware-security/cc-firmware-security-panel.c:503
+#: panels/firmware-security/cc-firmware-security-panel.c:504
+#: panels/firmware-security/cc-firmware-security-panel.c:512
 msgid "Protected against a wide range of security threats."
 msgstr "Захищено від широкого діапазону загроз."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:502
+#: panels/firmware-security/cc-firmware-security-panel.c:511
 msgid "Comprehensive Protection"
 msgstr "Всебічний захист"
 
@@ -4498,12 +4498,10 @@ msgid "unspecified error validating eap-method file"
 msgstr "Невизначена помилка завірення файла з методом eap"
 
 #: panels/network/wireless-security/eap-method.c:394
-#| msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgid "DER, PEM, PKCS#12, or PGP private keys"
 msgstr "Закриті ключі DER, PEM, PKCS#12 або PGP"
 
 #: panels/network/wireless-security/eap-method.c:397
-#| msgid "_User certificate"
 msgid "DER or PEM certificates"
 msgstr "Сертифікати DER або PEM"
 
@@ -6084,18 +6082,13 @@ msgid "Restart"
 msgstr "Перезапустити"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:10
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:171
 msgid "Add Printer…"
 msgstr "Додати принтер…"
 
 #: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Немає принтерів"
-
-#. Translators: This button adds new printer.
-#: panels/printers/printers.ui:171
-msgid "Add a Printer…"
-msgstr "Додати принтер…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:196
@@ -9667,6 +9660,15 @@ msgstr[3] "%u вхід"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Системні звуки"
+
+#~ msgid "Error: unable to determine HSI level."
+#~ msgstr "Помилка: не вдалося визначити рівень HSI."
+
+#~ msgid "Error: unable to determine Incorrect HSI level."
+#~ msgstr "Помилка: не вдалося визначити помилковий рівень HSI."
+
+#~ msgid "Add a Printer…"
+#~ msgstr "Додати принтер…"
 
 #~ msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 #~ msgstr "Сертифікати DER або PEM (*.der, *.pem, *.crt, *.cer)"
