@@ -41,17 +41,6 @@ struct _BgRecentSource
 
 G_DEFINE_TYPE (BgRecentSource, bg_recent_source, BG_TYPE_SOURCE)
 
-
-static const gchar * const content_types[] = {
-	"image/png",
-	"image/jp2",
-	"image/jpeg",
-	"image/bmp",
-	"image/svg+xml",
-	"image/x-portable-anymap",
-	NULL
-};
-
 static int
 sort_func (gconstpointer a,
            gconstpointer b,
@@ -89,7 +78,7 @@ add_file_from_info (BgRecentSource *self,
   content_type = g_file_info_get_content_type (info);
   mtime = g_file_info_get_attribute_uint64 (info, G_FILE_ATTRIBUTE_TIME_MODIFIED);
 
-  if (!content_type || !g_strv_contains (content_types, content_type))
+  if (!content_type || !g_content_type_is_a (content_type, "image/*"))
     return;
 
   uri = g_file_get_uri (file);
