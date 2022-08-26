@@ -209,6 +209,7 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
   else
     {
       adw_expander_row_set_enable_expansion (ADW_EXPANDER_ROW (row), FALSE);
+      gtk_widget_add_css_class (row, "hide-arrow");
     }
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), attr->title);
