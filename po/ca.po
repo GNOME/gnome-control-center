@@ -27,8 +27,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-08-18 15:37+0000\n"
-"PO-Revision-Date: 2022-08-13 09:28+0100\n"
+"POT-Creation-Date: 2022-08-24 14:00+0000\n"
+"PO-Revision-Date: 2022-08-26 09:28+0100\n"
 "Last-Translator: Jordi Mas i Hernàndez <jmas@softcatala.org>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
 "Language: ca\n"
@@ -1893,32 +1893,32 @@ msgstr ""
 "\n"
 "Per a més informació, contacteu amb el fabricant de maquinari o el suport tècnic."
 
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Passed"
+msgstr "Correcte"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Failed"
+msgstr "Ha fallat"
+
 #. TRANSLATORS: HSI stands for Host Security ID and device refers to the
 #. computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:79
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
 #, c-format
 msgid "Device conforms to HSI level %d"
 msgstr "El dispositiu s'ajusta al nivell %d HSI"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Passed"
-msgstr "Correcte"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Failed"
-msgstr "Ha fallat"
-
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:136
-#: panels/firmware-security/cc-firmware-security-panel.c:473
+#: panels/firmware-security/cc-firmware-security-dialog.c:149
+#: panels/firmware-security/cc-firmware-security-panel.c:482
 msgid "Security Level 0"
 msgstr "Nivell de seguretat 0"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:150
 msgid ""
 "This device has no protection against hardware security issues. This could "
 "be because of a hardware or firmware configuration issue. It is recommended "
@@ -1929,13 +1929,13 @@ msgstr ""
 "microprogramari. Es recomana contactar amb el vostre suport tècnic."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:145
-#: panels/firmware-security/cc-firmware-security-dialog.c:344
-#: panels/firmware-security/cc-firmware-security-panel.c:480
+#: panels/firmware-security/cc-firmware-security-dialog.c:158
+#: panels/firmware-security/cc-firmware-security-dialog.c:357
+#: panels/firmware-security/cc-firmware-security-panel.c:489
 msgid "Security Level 1"
 msgstr "Nivell de seguretat 1"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:146
+#: panels/firmware-security/cc-firmware-security-dialog.c:159
 msgid ""
 "This device has minimal protection against hardware security issues. This is"
 " the lowest device security level and only provides protection against "
@@ -1946,13 +1946,13 @@ msgstr ""
 "proporciona protecció contra amenaces de seguretat simples."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-#: panels/firmware-security/cc-firmware-security-dialog.c:349
-#: panels/firmware-security/cc-firmware-security-panel.c:487
+#: panels/firmware-security/cc-firmware-security-dialog.c:167
+#: panels/firmware-security/cc-firmware-security-dialog.c:362
+#: panels/firmware-security/cc-firmware-security-panel.c:496
 msgid "Security Level 2"
 msgstr "Nivell de seguretat 2"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:155
+#: panels/firmware-security/cc-firmware-security-dialog.c:168
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
@@ -1962,13 +1962,13 @@ msgstr ""
 "comunes."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:163
-#: panels/firmware-security/cc-firmware-security-dialog.c:354
-#: panels/firmware-security/cc-firmware-security-panel.c:494
+#: panels/firmware-security/cc-firmware-security-dialog.c:176
+#: panels/firmware-security/cc-firmware-security-dialog.c:367
+#: panels/firmware-security/cc-firmware-security-panel.c:503
 msgid "Security Level 3"
 msgstr "Nivell de seguretat 3"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:164
+#: panels/firmware-security/cc-firmware-security-dialog.c:177
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
@@ -1978,25 +1978,30 @@ msgstr ""
 "maquinari. Aquest és el nivell de seguretat de dispositiu més alt i "
 "proporciona protecció contra amenaces de seguretat avançades."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:172
-msgid "Error: unable to determine HSI level."
-msgstr "Error: no s'ha pogut determinar el nivell HSI."
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:185
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+#: panels/firmware-security/cc-firmware-security-panel.c:518
+msgid "Security Level"
+msgstr "Nivell de seguretat"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:173
-msgid "Error: unable to determine Incorrect HSI level."
-msgstr "Error: no s'ha pogut determinar el nivell HSI incorrecte."
+#: panels/firmware-security/cc-firmware-security-dialog.c:186
+#: panels/firmware-security/cc-firmware-security-panel.c:519
+msgid "Security levels are not available for this device."
+msgstr ""
+"Els nivells de seguretat no estan disponibles per a aquest dispositiu."
 
 #. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:188
-#: panels/firmware-security/cc-firmware-security-dialog.c:198
-#: panels/firmware-security/cc-firmware-security-dialog.c:205
+#: panels/firmware-security/cc-firmware-security-dialog.c:201
+#: panels/firmware-security/cc-firmware-security-dialog.c:211
+#: panels/firmware-security/cc-firmware-security-dialog.c:218
 msgid "Contact your hardware manufacturer for help with security updates."
 msgstr ""
 "Contacteu amb el fabricant del maquinari per a obtenir ajuda amb les "
 "actualitzacions de seguretat."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:190
+#: panels/firmware-security/cc-firmware-security-dialog.c:203
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings, or by a support technician."
@@ -2004,8 +2009,8 @@ msgstr ""
 "És possible aquest problema a la configuració del microprogramari UEFI del "
 "dispositiu, o per un tècnic de suport."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:199
-#: panels/firmware-security/cc-firmware-security-dialog.c:210
+#: panels/firmware-security/cc-firmware-security-dialog.c:212
+#: panels/firmware-security/cc-firmware-security-dialog.c:223
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings."
@@ -2014,13 +2019,9 @@ msgstr ""
 "UEFI del dispositiu."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:216
+#: panels/firmware-security/cc-firmware-security-dialog.c:229
 msgid "It might be possible for a support technician to resolve this issue."
 msgstr "Seria possible que un tècnic de suport resolgués aquest problema."
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Security Level"
-msgstr "Nivell de seguretat"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:88
 msgid "Level 1"
@@ -2084,25 +2085,25 @@ msgstr ""
 "Aquest problema podria haver estat causat per un canvi de configuració del "
 "sistema operatiu, o a causa d'un programari maliciós en aquest sistema."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:474
+#: panels/firmware-security/cc-firmware-security-panel.c:483
 msgid "Exposed to serious security threats."
 msgstr "Exposat a amenaces de seguretat perilloses."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:481
+#: panels/firmware-security/cc-firmware-security-panel.c:490
 msgid "Limited protection against simple security threats."
 msgstr "Protecció limitada contra amenaces de seguretat simples."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:488
+#: panels/firmware-security/cc-firmware-security-panel.c:497
 msgid "Protected against common security threats."
 msgstr "Protegit contra amenaces de seguretat comunes."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:495
-#: panels/firmware-security/cc-firmware-security-panel.c:503
+#: panels/firmware-security/cc-firmware-security-panel.c:504
+#: panels/firmware-security/cc-firmware-security-panel.c:512
 msgid "Protected against a wide range of security threats."
 msgstr "Protegit contra una àmplia gamma d'amenaces de seguretat."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:502
+#: panels/firmware-security/cc-firmware-security-panel.c:511
 msgid "Comprehensive Protection"
 msgstr "Protecció completa"
 
@@ -2951,7 +2952,7 @@ msgstr "Estableix la drecera"
 msgid "Enter new shortcut to change %s."
 msgstr "Introduïu una drecera nova per a canviar %s."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:992
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:977
 msgid "Add Custom Shortcut"
 msgstr "Afegeix drecera personalitzada"
 
@@ -4507,13 +4508,13 @@ msgstr "no s'ha seleccionat cap fitxer"
 msgid "unspecified error validating eap-method file"
 msgstr "s'ha produït un error no especificat en validar el fitxer eap-method"
 
-#: panels/network/wireless-security/eap-method.c:389
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
-msgstr "Claus privades DER, PEM o PKCS#12 (*.der, *.pem, *.p12, *.key)"
+#: panels/network/wireless-security/eap-method.c:394
+msgid "DER, PEM, PKCS#12, or PGP private keys"
+msgstr "Claus privades DER, PEM, PKCS#12 o PGP"
 
-#: panels/network/wireless-security/eap-method.c:392
-msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "Certificats DER o PEM (*.der, *.pem, *.crt, *.cer)"
+#: panels/network/wireless-security/eap-method.c:397
+msgid "DER or PEM certificates"
+msgstr "Certificats DER o PEM"
 
 #: panels/network/wireless-security/eap-method-fast.c:88
 msgid "missing EAP-FAST PAC file"
@@ -6100,18 +6101,13 @@ msgid "Restart"
 msgstr "Torna a iniciar"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:10
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:171
 msgid "Add Printer…"
 msgstr "Afegeix una impressora…"
 
 #: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Sense impressores"
-
-#. Translators: This button adds new printer.
-#: panels/printers/printers.ui:171
-msgid "Add a Printer…"
-msgstr "Afegeix una impressora…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:196
@@ -6151,12 +6147,12 @@ msgstr "Es pot cerca per països o idiomes."
 msgid "Preview"
 msgstr "Visualització prèvia"
 
-#: panels/region/cc-format-preview.c:135
+#: panels/region/cc-format-preview.c:137
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperial"
 
-#: panels/region/cc-format-preview.c:137
+#: panels/region/cc-format-preview.c:139
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Mètric"
@@ -8779,7 +8775,8 @@ msgstr "El nom d'usuari no està disponible. Trieu-ne un altre."
 msgid "The username is too long."
 msgstr "El nom d'usuari és massa llarg."
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:40
+#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/cc-wacom-page.ui:40
 msgid "Map Buttons"
 msgstr "Mapa els botons"
 
@@ -8847,6 +8844,12 @@ msgstr "Tauleta muntada en pantalla externa"
 
 #: panels/wacom/cc-wacom-device.c:435
 msgid "External tablet device"
+msgstr "Tauleta externa"
+
+#. translators: this is a drawing tablet pad, i.e. a collection of buttons and
+#. knobs
+#: panels/wacom/cc-wacom-ekr-page.ui:9
+msgid "External pad device"
 msgstr "Tauleta externa"
 
 #. All displays item
@@ -9691,6 +9694,18 @@ msgstr[1] "%u entrades"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sons del sistema"
+
+#~ msgid "Error: unable to determine HSI level."
+#~ msgstr "Error: no s'ha pogut determinar el nivell HSI."
+
+#~ msgid "Error: unable to determine Incorrect HSI level."
+#~ msgstr "Error: no s'ha pogut determinar el nivell HSI incorrecte."
+
+#~ msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+#~ msgstr "Certificats DER o PEM (*.der, *.pem, *.crt, *.cer)"
+
+#~ msgid "Add a Printer…"
+#~ msgstr "Afegeix una impressora…"
 
 #~ msgid "Drip"
 #~ msgstr "Degoteig"
