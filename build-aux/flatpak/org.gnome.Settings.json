@@ -26,7 +26,10 @@
         "cxxflags" : "-O2 -g",
         "env" : {
             "V" : "1"
-        }
+        },
+        "build-args": [
+            "--share=network"
+        ]
     },
     "x-run-args" : [
         "--verbose"
@@ -111,17 +114,15 @@
             "name" : "accountservice",
             "buildsystem" : "meson",
             "config-opts" : [
-                "-Ddocbook=false",
-                "-Delogind=false",
-                "-Dgtk_doc=false",
+                "-Dsystemdsystemunitdir=no",
                 "-Dintrospection=false",
-                "-Dsystemd=false",
-                "-Dsystemdsystemunitdir=no"
+                "-Dvapi=false"
             ],
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "git://anongit.freedesktop.org/accountsservice"
+                    "url" : "https://gitlab.freedesktop.org/accountsservice/accountsservice",
+                    "branch" : "main"
                 }
             ]
         },
