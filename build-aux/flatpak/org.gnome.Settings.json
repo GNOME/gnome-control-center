@@ -266,9 +266,10 @@
             "name" : "geocode-glib",
             "buildsystem" : "meson",
             "config-opts" : [
-            	"-Denable-gtk-doc=false",
+            	"-Denable-installed-tests=false",
             	"-Denable-introspection=false",
-            	"-Denable-installed-tests=false"
+            	"-Denable-gtk-doc=false",
+            	"-Dsoup2=false"
             ],
             "sources" : [
                 {
@@ -281,9 +282,10 @@
             "name" : "libgweather",
             "buildsystem" : "meson",
             "config-opts" : [
-            	"-Dglade_catalog=false",
             	"-Denable_vala=false",
-            	"-Dgtk_doc=false"
+            	"-Dgtk_doc=false",
+            	"-Dintrospection=false",
+            	"-Dtests=false"
             ],
             "sources" : [
                 {
