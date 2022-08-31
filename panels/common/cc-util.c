@@ -145,6 +145,18 @@ cc_util_get_smart_date (GDateTime *date)
           }
 }
 
+char *
+cc_util_get_smart_date_time (GDateTime *date)
+{
+  g_autofree gchar *date_str = NULL;
+
+  if (date == NULL)
+    return NULL;
+
+  date_str = g_date_time_format (date, "\%X");
+  return g_strdup_printf ("%s, %s", cc_util_get_smart_date (date), date_str);
+}
+
 /* Copied from src/plugins/properties/bacon-video-widget-properties.c
  * in totem */
 char *
