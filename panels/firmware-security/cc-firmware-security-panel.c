@@ -184,7 +184,7 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
 
   /* build new row */
   date = g_date_time_new_from_unix_local (attr->timestamp);
-  date_string = g_date_time_format (date, "\%F \%H:\%m:\%S");
+  date_string = cc_util_get_smart_date_time (date);
 
   row = adw_expander_row_new ();
   if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)

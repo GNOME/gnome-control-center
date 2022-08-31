@@ -149,12 +149,17 @@ char *
 cc_util_get_smart_date_time (GDateTime *date)
 {
   g_autofree gchar *date_str = NULL;
+  g_autofree gchar *smart_date = NULL;
 
   if (date == NULL)
     return NULL;
 
+  smart_date = cc_util_get_smart_date (date);
   date_str = g_date_time_format (date, "\%X");
-  return g_strdup_printf ("%s, %s", cc_util_get_smart_date (date), date_str);
+  /* TRANSLATORS: This is the datetime format in the style of
+     "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
+     and "Yesterday, 10:10:10 AM" */
+  return g_strdup_printf (_("%1$s, %2$s"), smart_date, date_str);
 }
 
 /* Copied from src/plugins/properties/bacon-video-widget-properties.c
