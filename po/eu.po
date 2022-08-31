@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2022-08-13 12:01+0000\n"
-"PO-Revision-Date: 2022-08-16 14:00+0100\n"
+"POT-Creation-Date: 2022-08-28 14:52+0000\n"
+"PO-Revision-Date: 2022-08-31 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -1508,7 +1508,7 @@ msgstr "Eman zure arazoen berri"
 msgid "diagnostics;crash;"
 msgstr "diagnostikoak;kraskadura;"
 
-#: panels/display/cc-display-panel.c:516
+#: panels/display/cc-display-panel.c:492
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1519,7 +1519,7 @@ msgstr "diagnostikoak;kraskadura;"
 msgid "On"
 msgstr "Aktibatuta"
 
-#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:494 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1530,15 +1530,15 @@ msgstr "Aktibatuta"
 msgid "Off"
 msgstr "Desaktibatuta"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:930
 msgid "Apply Changes?"
 msgstr "Aplikatu aldaketak?"
 
-#: panels/display/cc-display-panel.c:960
+#: panels/display/cc-display-panel.c:935
 msgid "Changes Cannot be Applied"
 msgstr "Aldaketak ezin dira aplikatu"
 
-#: panels/display/cc-display-panel.c:962
+#: panels/display/cc-display-panel.c:937
 msgid "This could be due to hardware limitations."
 msgstr "Hardwarearen mugen erruz izan daiteke."
 
@@ -1738,7 +1738,7 @@ msgstr "Panela;Proiektagailua;xrandr;Pantaila;Bereizmena;Freskatu;Monitorea;Gaua
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
-#: panels/firmware-security/cc-firmware-security-panel.c:109
+#: panels/firmware-security/cc-firmware-security-panel.c:112
 msgid "Secure Boot is Active"
 msgstr "Abio segurua aktibatuta dago"
 
@@ -1805,31 +1805,31 @@ msgstr "Abio seguruak eragozten du gailua abiarazten denean software kaltegarria
 "\n"
 "Informazio gehiagorako, jarri harremanetan hardwarearen fabrikatzailearekin edo informatikako teknikariekin."
 
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Passed"
+msgstr "Pasatu da"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Failed"
+msgstr "Huts egin du"
+
 #. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:79
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
 #, c-format
 msgid "Device conforms to HSI level %d"
 msgstr "Gailuak HSI %d maila betetzen du"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Passed"
-msgstr "Pasatu da"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Failed"
-msgstr "Huts egin du"
-
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:136
-#: panels/firmware-security/cc-firmware-security-panel.c:473
+#: panels/firmware-security/cc-firmware-security-dialog.c:149
+#: panels/firmware-security/cc-firmware-security-panel.c:485
 msgid "Security Level 0"
 msgstr "Segurtasun-maila: 0"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:150
 msgid ""
 "This device has no protection against hardware security issues. This could "
 "be because of a hardware or firmware configuration issue. It is recommended "
@@ -1837,13 +1837,13 @@ msgid ""
 msgstr "Gailu honek ez du babesik hardwareko segurtasun-arazoen aurrean. Hardareko edo firmwareko konfigurazio-arazo baten ondorioa izan daiteke hori. Zure informatikako teknikariekin hitz egin dezazun gomendatzen dizugu."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:145
-#: panels/firmware-security/cc-firmware-security-dialog.c:344
-#: panels/firmware-security/cc-firmware-security-panel.c:480
+#: panels/firmware-security/cc-firmware-security-dialog.c:158
+#: panels/firmware-security/cc-firmware-security-dialog.c:357
+#: panels/firmware-security/cc-firmware-security-panel.c:492
 msgid "Security Level 1"
 msgstr "Segurtasun-maila: 1"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:146
+#: panels/firmware-security/cc-firmware-security-dialog.c:159
 msgid ""
 "This device has minimal protection against hardware security issues. This is "
 "the lowest device security level and only provides protection against simple "
@@ -1851,69 +1851,69 @@ msgid ""
 msgstr "Gailu honek guxieneko babesa du hardwareko segurtasun-arazoen aurrean. Gailuaren segurtasun-mailarik txikiena da eta segurtasun-arrisku sinpleen aurkako babesa soilik eskaintzen du."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-#: panels/firmware-security/cc-firmware-security-dialog.c:349
-#: panels/firmware-security/cc-firmware-security-panel.c:487
+#: panels/firmware-security/cc-firmware-security-dialog.c:167
+#: panels/firmware-security/cc-firmware-security-dialog.c:362
+#: panels/firmware-security/cc-firmware-security-panel.c:499
 msgid "Security Level 2"
 msgstr "Segurtasun-maila: 2"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:155
+#: panels/firmware-security/cc-firmware-security-dialog.c:168
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
 msgstr "Gailu honek oinarrizko babesa du hardwareko segurtasun-arazoen aurrean. Horrek segurtasun-arrisku arruntenen aurkako babesa eskaintzen du."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:163
-#: panels/firmware-security/cc-firmware-security-dialog.c:354
-#: panels/firmware-security/cc-firmware-security-panel.c:494
+#: panels/firmware-security/cc-firmware-security-dialog.c:176
+#: panels/firmware-security/cc-firmware-security-dialog.c:367
+#: panels/firmware-security/cc-firmware-security-panel.c:506
 msgid "Security Level 3"
 msgstr "Segurtasun-maila: 3"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:164
+#: panels/firmware-security/cc-firmware-security-dialog.c:177
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
 "advanced security threats."
 msgstr "Gailu honek babes hedatua du hardwareko segurtasun-arazoen aurrean. Gailuaren segurtasun-mailarik altuena da eta segurtasun-arrisku aurreratuen aurkako babesa eskaintzen du."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:172
-msgid "Error: unable to determine HSI level."
-msgstr "Errorea: ezin izan da HSI maila zehaztu."
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:185
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+#: panels/firmware-security/cc-firmware-security-panel.c:521
+msgid "Security Level"
+msgstr "Segurtasun-maila"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:173
-msgid "Error: unable to determine Incorrect HSI level."
-msgstr "Errorea: ezin izan da HSI miala okerra zehaztu."
+#: panels/firmware-security/cc-firmware-security-dialog.c:186
+#: panels/firmware-security/cc-firmware-security-panel.c:522
+msgid "Security levels are not available for this device."
+msgstr "Segurtasun-mailak ez daude erabilgarri gailu honetarako."
 
 #. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:188
-#: panels/firmware-security/cc-firmware-security-dialog.c:198
-#: panels/firmware-security/cc-firmware-security-dialog.c:205
+#: panels/firmware-security/cc-firmware-security-dialog.c:201
+#: panels/firmware-security/cc-firmware-security-dialog.c:211
+#: panels/firmware-security/cc-firmware-security-dialog.c:218
 msgid "Contact your hardware manufacturer for help with security updates."
 msgstr "Jarri harremanetan zure hardwarearen fabrikatzailearekin segurtasun-eguneratzeei buruzko laguntza jasotzeko."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:190
+#: panels/firmware-security/cc-firmware-security-dialog.c:203
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings, or by a support technician."
 msgstr "Agian arazo hori gailuaren UEFI firmware-ezarpenetan konpondu daiteke, edo informatikako teknikariaren laguntzarekin."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:199
-#: panels/firmware-security/cc-firmware-security-dialog.c:210
+#: panels/firmware-security/cc-firmware-security-dialog.c:212
+#: panels/firmware-security/cc-firmware-security-dialog.c:223
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings."
 msgstr "Agia arazo hori gailuaren UEFI firmware-ezarpenetan konpondu daiteke."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:216
+#: panels/firmware-security/cc-firmware-security-dialog.c:229
 msgid "It might be possible for a support technician to resolve this issue."
 msgstr "Agian zure informatikako teknikariak lagundu ahal dizu arazoa konpontzen."
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Security Level"
-msgstr "Segurtasun-maila"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:88
 msgid "Level 1"
@@ -1927,28 +1927,28 @@ msgstr "2. maila"
 msgid "Level 3"
 msgstr "3. maila"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:110
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Protected against malicious software when the device starts."
 msgstr "Software kaltegarriaren aurka babestua gailua abiarazten denean,"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:116
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "Secure Boot has Problems"
 msgstr "Abio seguruak arazoak ditu"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:117
+#: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Some protection when the device is started."
 msgstr "Nolabaiteko babesa gailua abiarazten denean."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:122
+#: panels/firmware-security/cc-firmware-security-panel.c:125
 msgid "Secure Boot is Off"
 msgstr "Abio segurua desaktibatuta dago"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:123
+#: panels/firmware-security/cc-firmware-security-panel.c:126
 msgid "No protection when the device is started."
 msgstr "Babesik ez gailua abiarazten denean."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:142
+#: panels/firmware-security/cc-firmware-security-panel.c:145
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -1956,38 +1956,38 @@ msgid ""
 msgstr "Arazoa UEFI firmware-ezarpenetan aldaketa bat egon delako sortu da agian, edo sistema eragilearen konfigurazio-aldaketa bat egon delako edo software kaltegarria sartu delako sisteman."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:150
+#: panels/firmware-security/cc-firmware-security-panel.c:153
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
 msgstr "Arazoa UEFI firmware-ezarpenetan aldaketa bat egon delako sortu da agian, edo software kaltegarria sartu delako sisteman."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:157
+#: panels/firmware-security/cc-firmware-security-panel.c:160
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
 msgstr "Arazoa sistema eragilearen konfigurazio-aldaketa bat egon delako sortu da agian, edo software kaltegarria sartu delako sisteman."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:474
+#: panels/firmware-security/cc-firmware-security-panel.c:486
 msgid "Exposed to serious security threats."
 msgstr "Segurtasun-arriskuen aurrean kaltebera."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:481
+#: panels/firmware-security/cc-firmware-security-panel.c:493
 msgid "Limited protection against simple security threats."
 msgstr "Babes mugatua segurtasun-arrisku sinpleen aurrean."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:488
+#: panels/firmware-security/cc-firmware-security-panel.c:500
 msgid "Protected against common security threats."
 msgstr "Babestua segurtasun-arrisku arrunten aurrean."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:495
-#: panels/firmware-security/cc-firmware-security-panel.c:503
+#: panels/firmware-security/cc-firmware-security-panel.c:507
+#: panels/firmware-security/cc-firmware-security-panel.c:515
 msgid "Protected against a wide range of security threats."
 msgstr "Babestua segurtasun-arrikus asktoren aurrean."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:502
+#: panels/firmware-security/cc-firmware-security-panel.c:514
 msgid "Comprehensive Protection"
 msgstr "Babes osoa"
 
@@ -2604,7 +2604,7 @@ msgid "Custom Shortcuts"
 msgstr "Laster-tekla pertsonalizatuak"
 
 #: panels/keyboard/cc-keyboard-panel.c:64
-#: panels/keyboard/cc-keyboard-panel.ui:62
+#: panels/keyboard/cc-keyboard-panel.ui:63
 msgid "Alternate Characters Key"
 msgstr "Ordezko karaktereen tekla"
 
@@ -2651,7 +2651,7 @@ msgid "Right Ctrl"
 msgstr "Eskuineko Ctrl tekla"
 
 #: panels/keyboard/cc-keyboard-panel.c:80
-#: panels/keyboard/cc-keyboard-panel.ui:79
+#: panels/keyboard/cc-keyboard-panel.ui:80
 msgid "Compose Key"
 msgstr "Compose tekla"
 
@@ -2706,21 +2706,21 @@ msgstr "Erabili iturburu _bera leiho guztietan"
 msgid "Switch input sources _individually for each window"
 msgstr "Aldatu sarrerako iturburua ba_naka leiho bakoitzean"
 
-#: panels/keyboard/cc-keyboard-panel.ui:58
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Special Character Entry"
 msgstr "Karaktere bereziaren sarrera"
 
-#: panels/keyboard/cc-keyboard-panel.ui:59
+#: panels/keyboard/cc-keyboard-panel.ui:60
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Teklatuaren bidez ikurrak eta letren aldaerak sartzeko metodoak."
 
-#: panels/keyboard/cc-keyboard-panel.ui:97
+#: panels/keyboard/cc-keyboard-panel.ui:98
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Laster-teklak"
 
-#: panels/keyboard/cc-keyboard-panel.ui:100
+#: panels/keyboard/cc-keyboard-panel.ui:101
 msgid "View and Customize Shortcuts"
 msgstr "Ikusi eta pertsonalizatu laster-teklak"
 
@@ -2811,7 +2811,7 @@ msgstr "Ezarri laster-tekla"
 msgid "Enter new shortcut to change %s."
 msgstr "Sartu laster-tekla berria %s aldatzeko."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:992
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:977
 msgid "Add Custom Shortcut"
 msgstr "Gehitu laster-tekla pertsonalizatua"
 
@@ -4321,13 +4321,13 @@ msgstr "ez da fitxategirik hautatu"
 msgid "unspecified error validating eap-method file"
 msgstr "zehaztugabeko errorea eap metodoaren fitxategia egiaztatzean"
 
-#: panels/network/wireless-security/eap-method.c:389
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
-msgstr "DER, PEM, edo PKCS#12 gako pribatuak (*.der, *.pem, *.p12, *.key)"
+#: panels/network/wireless-security/eap-method.c:394
+msgid "DER, PEM, PKCS#12, or PGP private keys"
+msgstr "DER, PEM, PKCS#12 edo PGP gako pribatuak"
 
-#: panels/network/wireless-security/eap-method.c:392
-msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "DER edo PEM ziurtagiriak (*.der, *.pem, *.crt, *.cer)"
+#: panels/network/wireless-security/eap-method.c:397
+msgid "DER or PEM certificates"
+msgstr "DER edo PEM ziurtagiriak"
 
 #: panels/network/wireless-security/eap-method-fast.c:88
 msgid "missing EAP-FAST PAC file"
@@ -4754,7 +4754,7 @@ msgstr "Bestelakoa"
 msgid "%s removed"
 msgstr "%s kendu da"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:691
+#: panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Error removing account"
 msgstr "Errorea kontua kentzean"
 
@@ -5204,23 +5204,23 @@ msgid ""
 msgstr "Argindarra;Lo egin;Eseki;Hibernatu;Bateria;Distira;Itzali;Belztu;Monitorea;DPMS;Inaktibo;Energia;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:676
+#: panels/printers/cc-printers-panel.c:685
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "\"%s” inprimagailua ezabatu da"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:928
+#: panels/printers/cc-printers-panel.c:942
 msgid "Failed to add new printer."
 msgstr "Huts egin du inprimagailu berria gehitzean."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1233
+#: panels/printers/cc-printers-panel.c:1247
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Ezin izan da interfazea kargatu: %s"
 
-#: panels/printers/cc-printers-panel.c:1301
+#: panels/printers/cc-printers-panel.c:1315
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Desblokeatu inprimagailuak gehitzeko eta ezarpenak aldatzeko"
 
@@ -5858,18 +5858,13 @@ msgid "Restart"
 msgstr "Berrabiarazi"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:10
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:171
 msgid "Add Printer…"
 msgstr "Gehitu inprimagailua…"
 
 #: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Inprimagailurik ez"
-
-#. Translators: This button adds new printer.
-#: panels/printers/printers.ui:171
-msgid "Add a Printer…"
-msgstr "Gehitu inprimagailua…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:196
@@ -5908,12 +5903,12 @@ msgstr "Bilaketan herrialdeak edo hizkuntzak bilatu daitezke."
 msgid "Preview"
 msgstr "Aurrebista"
 
-#: panels/region/cc-format-preview.c:135
+#: panels/region/cc-format-preview.c:137
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Inperiala"
 
-#: panels/region/cc-format-preview.c:137
+#: panels/region/cc-format-preview.c:139
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrika"
@@ -8424,7 +8419,8 @@ msgstr "Erabiltzaile-izen hori ez dago erabilgarri. Saiatu beste batekin."
 msgid "The username is too long."
 msgstr "Erabiltzaile-izena luzeegia da."
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:40
+#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/cc-wacom-page.ui:40
 msgid "Map Buttons"
 msgstr "Mapatu botoiak"
 
@@ -8488,6 +8484,11 @@ msgstr "Kanpoko pantailan muntatutako tableta"
 #: panels/wacom/cc-wacom-device.c:435
 msgid "External tablet device"
 msgstr "Kanpoko tableta-gailua"
+
+#. translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs
+#: panels/wacom/cc-wacom-ekr-page.ui:9
+msgid "External pad device"
+msgstr "Kanpoko teklatu-gailua"
 
 #. All displays item
 #: panels/wacom/cc-wacom-page.c:608
@@ -9312,6 +9313,18 @@ msgstr[1] "%u sarrera"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
+
+#~ msgid "Error: unable to determine HSI level."
+#~ msgstr "Errorea: ezin izan da HSI maila zehaztu."
+
+#~ msgid "Error: unable to determine Incorrect HSI level."
+#~ msgstr "Errorea: ezin izan da HSI miala okerra zehaztu."
+
+#~ msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+#~ msgstr "DER edo PEM ziurtagiriak (*.der, *.pem, *.crt, *.cer)"
+
+#~ msgid "Add a Printer…"
+#~ msgstr "Gehitu inprimagailua…"
 
 #~ msgid "Drip"
 #~ msgstr "Ura"
