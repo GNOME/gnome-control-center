@@ -235,6 +235,28 @@ run_calibration (CcWacomPage *page,
 	return FALSE;
 }
 
+static GdkMonitor *
+find_monitor_at_point (GdkDisplay *display,
+		       gint        x,
+		       gint        y)
+{
+	GListModel *monitors;
+	int i;
+
+	monitors = gdk_display_get_monitors (display);
+
+	for (i = 0; i < g_list_model_get_n_items (monitors); i++) {
+		g_autoptr(GdkMonitor) m = g_list_model_get_item (monitors, i);
+		GdkRectangle geometry;
+
+		gdk_monitor_get_geometry (m, &geometry);
+		if (gdk_rectangle_contains_point (&geometry, x, y))
+			return g_steal_pointer (&m);
+	}
+
+	return NULL;
+}
+
 static void
 calibrate (CcWacomPage *page)
 {
@@ -243,12 +265,12 @@ calibrate (CcWacomPage *page)
 	g_autofree GVariant **tmp = NULL;
 	g_autofree gdouble *calibration = NULL;
 	gsize ncal;
-	g_autoptr(GdkMonitor) monitor = NULL;
-  GListModel *monitors;
 	GdkDisplay *display;
+	g_autoptr(GdkMonitor) monitor = NULL;
 	g_autoptr(GnomeRRScreen) rr_screen = NULL;
 	GnomeRROutput *output;
 	g_autoptr(GError) error = NULL;
+	GDBusProxy *input_mapping_proxy;
 	gint x, y;
 
 	display = gdk_display_get_default ();
@@ -259,20 +281,33 @@ calibrate (CcWacomPage *page)
 	}
 
 	output = cc_wacom_device_get_output (page->stylus, rr_screen);
-	gnome_rr_output_get_position (output, &x, &y);
+	input_mapping_proxy = cc_wacom_panel_get_input_mapping_bus_proxy (page->panel);
 
-  monitors = gdk_display_get_monitors (display);
-  for (i = 0; i < g_list_model_get_n_items (monitors); i++) {
-    g_autoptr(GdkMonitor) m = g_list_model_get_item (monitors, i);
-    GdkRectangle geometry;
+	if (output) {
+		gnome_rr_output_get_position (output, &x, &y);
+		monitor = find_monitor_at_point (display, x, y);
+	} else if (input_mapping_proxy) {
+		GsdDevice *gsd_device;
+		GVariant *mapping;
 
-    gdk_monitor_get_geometry (m, &geometry);
-    if (gdk_rectangle_contains_point (&geometry, x, y))
-      {
-        monitor = g_steal_pointer (&m);
-        break;
-      }
-  }
+		gsd_device = cc_wacom_device_get_device (page->stylus);
+
+		if (gsd_device)	{
+			mapping = g_dbus_proxy_call_sync (input_mapping_proxy,
+							  "GetDeviceMapping",
+							  g_variant_new ("(o)", gsd_device_get_device_file (gsd_device)),
+							  G_DBUS_CALL_FLAGS_NONE,
+							  -1,
+							  NULL,
+							  NULL);
+			if (mapping) {
+				gint x, y, width, height;
+
+				g_variant_get (mapping, "((iiii))", &x, &y, &width, &height);
+				monitor = find_monitor_at_point (display, x, y);
+			}
+		}
+	}
 
 	if (!monitor) {
 		/* The display the tablet should be mapped to could not be located.

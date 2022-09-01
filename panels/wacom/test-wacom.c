@@ -21,6 +21,14 @@ cc_wacom_panel_get_gsd_wacom_bus_proxy (CcWacomPanel *self)
 	return NULL;
 }
 
+GDBusProxy *
+cc_wacom_panel_get_input_mapping_bus_proxy (CcWacomPanel *self)
+{
+	g_message ("Should get the mutter input mapping dbus proxy here");
+
+	return NULL;
+}
+
 static void
 add_page (GList *devices,
 	  GtkWidget *notebook)

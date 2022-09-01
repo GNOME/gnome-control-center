@@ -37,4 +37,6 @@ void  cc_wacom_panel_set_osd_visibility (CcWacomPanel *self,
 
 GDBusProxy * cc_wacom_panel_get_gsd_wacom_bus_proxy (CcWacomPanel *self);
 
+GDBusProxy * cc_wacom_panel_get_input_mapping_bus_proxy (CcWacomPanel *self);
+
 G_END_DECLS

@@ -70,6 +70,7 @@ struct _CcWacomPanel
 
 	/* DBus */
 	GDBusProxy    *proxy;
+	GDBusProxy    *input_mapping_proxy;
 };
 
 CC_PANEL_REGISTER (CcWacomPanel, cc_wacom_panel)
@@ -288,6 +289,7 @@ cc_wacom_panel_dispose (GObject *object)
 
 	g_clear_pointer (&self->devices, g_hash_table_unref);
 	g_clear_object (&self->proxy);
+	g_clear_object (&self->input_mapping_proxy);
 	g_clear_pointer (&self->pages, g_hash_table_unref);
 	g_clear_pointer (&self->stylus_pages, g_hash_table_unref);
 	g_clear_handle_id (&self->mock_stylus_id, g_source_remove);
@@ -665,6 +667,23 @@ got_osd_proxy_cb (GObject      *source_object,
 }
 
 static void
+got_input_mapping_proxy_cb (GObject      *source_object,
+			    GAsyncResult *res,
+			    gpointer      data)
+{
+	g_autoptr(GError) error = NULL;
+	CcWacomPanel *self;
+
+	self = CC_WACOM_PANEL (data);
+	self->input_mapping_proxy = g_dbus_proxy_new_for_bus_finish (res, &error);
+
+	if (self->input_mapping_proxy == NULL) {
+		g_printerr ("Error creating input mapping proxy: %s\n", error->message);
+		return;
+	}
+}
+
+static void
 cc_wacom_panel_init (CcWacomPanel *self)
 {
 	GsdDeviceManager *device_manager;
@@ -686,6 +705,16 @@ cc_wacom_panel_init (CcWacomPanel *self)
 				  "org.gnome.Shell.Wacom.PadOsd",
 				  cc_panel_get_cancellable (CC_PANEL (self)),
 				  got_osd_proxy_cb,
+				  self);
+
+	g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
+				  G_DBUS_PROXY_FLAGS_NONE,
+				  NULL,
+				  "org.gnome.Shell",
+				  "/org/gnome/Mutter/InputMapping",
+				  "org.gnome.Mutter.InputMapping",
+				  cc_panel_get_cancellable (CC_PANEL (self)),
+				  got_input_mapping_proxy_cb,
 				  self);
 
 	self->devices = g_hash_table_new_full (g_direct_hash, g_direct_equal, NULL, g_object_unref);
@@ -713,4 +742,12 @@ cc_wacom_panel_get_gsd_wacom_bus_proxy (CcWacomPanel *self)
 	g_return_val_if_fail (CC_IS_WACOM_PANEL (self), NULL);
 
 	return self->proxy;
+}
+
+GDBusProxy *
+cc_wacom_panel_get_input_mapping_bus_proxy (CcWacomPanel *self)
+{
+	g_return_val_if_fail (CC_IS_WACOM_PANEL (self), NULL);
+
+	return self->input_mapping_proxy;
 }
