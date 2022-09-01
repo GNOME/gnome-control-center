@@ -12,8 +12,8 @@
 # Furkan Tokaç <developmentft@gmail.com>, 2017.
 # Furkan Ahmet Kara <furkanahmetkara.fk@gmail.com>, 2018.
 # Çağatay Yiğit Şahin <cyigitsahin@outlook.com>, 2018.
-# Sabri Ünal <libreajans@gmail.com>, 2014, 2019, 2022.
 # Muhammet Kara <muhammetk@gmail.com>, 2011-2021.
+# Sabri Ünal <libreajans@gmail.com>, 2014, 2019, 2022.
 # Emin Tufan Çetin <etcetin@gmail.com>, 2013-2022.
 #
 msgid ""
@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-08-20 21:48+0000\n"
-"PO-Revision-Date: 2022-08-22 04:47+0300\n"
+"POT-Creation-Date: 2022-08-31 06:59+0000\n"
+"PO-Revision-Date: 2022-09-01 18:47+0300\n"
 "Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnometurk@gnome.org>\n"
 "Language: tr\n"
@@ -1784,7 +1784,7 @@ msgstr ""
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
-#: panels/firmware-security/cc-firmware-security-panel.c:109
+#: panels/firmware-security/cc-firmware-security-panel.c:112
 msgid "Secure Boot is Active"
 msgstr "Güvenli Önyükleme Etkin"
 
@@ -1865,31 +1865,31 @@ msgstr ""
 "\n"
 "Daha ayrıntılı bilgi için donanım üreticisine veya BT desteğine başvurun."
 
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Passed"
+msgstr "Geçti"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Failed"
+msgstr "Başarısız"
+
 #. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:79
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
 #, c-format
 msgid "Device conforms to HSI level %d"
 msgstr "Aygıt, HSI %d düzeyine uymaktadır"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Passed"
-msgstr "Geçti"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Failed"
-msgstr "Başarısız"
-
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:136
-#: panels/firmware-security/cc-firmware-security-panel.c:473
+#: panels/firmware-security/cc-firmware-security-dialog.c:149
+#: panels/firmware-security/cc-firmware-security-panel.c:486
 msgid "Security Level 0"
 msgstr "Güvenlik Düzeyi 0"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:150
 msgid ""
 "This device has no protection against hardware security issues. This could "
 "be because of a hardware or firmware configuration issue. It is recommended "
@@ -1900,13 +1900,13 @@ msgstr ""
 "sağlayıcınıza danışmanız önerilmektedir."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:145
-#: panels/firmware-security/cc-firmware-security-dialog.c:344
-#: panels/firmware-security/cc-firmware-security-panel.c:480
+#: panels/firmware-security/cc-firmware-security-dialog.c:158
+#: panels/firmware-security/cc-firmware-security-dialog.c:358
+#: panels/firmware-security/cc-firmware-security-panel.c:493
 msgid "Security Level 1"
 msgstr "Güvenlik Düzeyi 1"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:146
+#: panels/firmware-security/cc-firmware-security-dialog.c:159
 msgid ""
 "This device has minimal protection against hardware security issues. This is "
 "the lowest device security level and only provides protection against simple "
@@ -1917,13 +1917,13 @@ msgstr ""
 "karşı koruma sağlar."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-#: panels/firmware-security/cc-firmware-security-dialog.c:349
-#: panels/firmware-security/cc-firmware-security-panel.c:487
+#: panels/firmware-security/cc-firmware-security-dialog.c:167
+#: panels/firmware-security/cc-firmware-security-dialog.c:363
+#: panels/firmware-security/cc-firmware-security-panel.c:500
 msgid "Security Level 2"
 msgstr "Güvenlik Düzeyi 2"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:155
+#: panels/firmware-security/cc-firmware-security-dialog.c:168
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
@@ -1932,13 +1932,13 @@ msgstr ""
 "yaygın güvenlik gözdağlarına karşı koruma sağlar."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:163
-#: panels/firmware-security/cc-firmware-security-dialog.c:354
-#: panels/firmware-security/cc-firmware-security-panel.c:494
+#: panels/firmware-security/cc-firmware-security-dialog.c:176
+#: panels/firmware-security/cc-firmware-security-dialog.c:368
+#: panels/firmware-security/cc-firmware-security-panel.c:507
 msgid "Security Level 3"
 msgstr "Güvenlik Düzeyi 3"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:164
+#: panels/firmware-security/cc-firmware-security-dialog.c:177
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
@@ -1948,25 +1948,29 @@ msgstr ""
 "yüksek aygıt güvenliği düzeyidir ve gelişmiş güvenlik gözdağlarına karşı "
 "koruma sağlar."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:172
-msgid "Error: unable to determine HSI level."
-msgstr "Hata: HSI düzeyi saptanamadı."
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:185
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+#: panels/firmware-security/cc-firmware-security-panel.c:522
+msgid "Security Level"
+msgstr "Güvenlik Düzeyi"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:173
-msgid "Error: unable to determine Incorrect HSI level."
-msgstr "Hata: Geçersiz HSI düzeyi saptanamadı."
+#: panels/firmware-security/cc-firmware-security-dialog.c:186
+#: panels/firmware-security/cc-firmware-security-panel.c:523
+msgid "Security levels are not available for this device."
+msgstr "Güvenlik düzeyleri bu aygıt için kullanılabilir değil."
 
 #. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:188
-#: panels/firmware-security/cc-firmware-security-dialog.c:198
-#: panels/firmware-security/cc-firmware-security-dialog.c:205
+#: panels/firmware-security/cc-firmware-security-dialog.c:201
+#: panels/firmware-security/cc-firmware-security-dialog.c:211
+#: panels/firmware-security/cc-firmware-security-dialog.c:218
 msgid "Contact your hardware manufacturer for help with security updates."
 msgstr ""
 "Güvenlik güncelleştirmeleriyle ilgili yardım için donanım üreticinize "
 "başvurun."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:190
+#: panels/firmware-security/cc-firmware-security-dialog.c:203
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings, or by a support technician."
@@ -1974,21 +1978,17 @@ msgstr ""
 "Bu sorun, aygıtın UEFI donanım yazılımı ayarlarından veya destek "
 "teknisyenince çözülebilir."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:199
-#: panels/firmware-security/cc-firmware-security-dialog.c:210
+#: panels/firmware-security/cc-firmware-security-dialog.c:212
+#: panels/firmware-security/cc-firmware-security-dialog.c:223
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings."
 msgstr "Bu sorun, aygıtın UEFI donanım yazılımı ayarlarından çözülebilir."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:216
+#: panels/firmware-security/cc-firmware-security-dialog.c:229
 msgid "It might be possible for a support technician to resolve this issue."
 msgstr "Bu sorunun destek teknisyenince çözülmesi olasıdır."
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Security Level"
-msgstr "Güvenlik Düzeyi"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:88
 msgid "Level 1"
@@ -2002,28 +2002,28 @@ msgstr "Düzey 2"
 msgid "Level 3"
 msgstr "Düzey 3"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:110
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Protected against malicious software when the device starts."
 msgstr "Aygıt başladığında kötücül yazılımlara karşı korunmaktadır."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:116
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "Secure Boot has Problems"
 msgstr "Güvenli Önyükleme Sorunlu"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:117
+#: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Some protection when the device is started."
 msgstr "Aygıt başladığında bazı korumalar vardır."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:122
+#: panels/firmware-security/cc-firmware-security-panel.c:125
 msgid "Secure Boot is Off"
 msgstr "Güvenli Önyükleme Kapalı"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:123
+#: panels/firmware-security/cc-firmware-security-panel.c:126
 msgid "No protection when the device is started."
 msgstr "Aygıt başladığında koruma yoktur."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:142
+#: panels/firmware-security/cc-firmware-security-panel.c:145
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -2034,7 +2034,7 @@ msgstr ""
 "kaynaklanabilir."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:150
+#: panels/firmware-security/cc-firmware-security-panel.c:153
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
@@ -2043,7 +2043,7 @@ msgstr ""
 "kötücül yazılımdan kaynaklanabilir."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:157
+#: panels/firmware-security/cc-firmware-security-panel.c:160
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
@@ -2051,25 +2051,25 @@ msgstr ""
 "Bu sorun, işletim sistemi yapılandırma değişiminden veya bu sistemdeki "
 "kötücül yazılımdan kaynaklanabilir."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:474
+#: panels/firmware-security/cc-firmware-security-panel.c:487
 msgid "Exposed to serious security threats."
 msgstr "Ciddi güvenlik gözdağlarına açık."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:481
+#: panels/firmware-security/cc-firmware-security-panel.c:494
 msgid "Limited protection against simple security threats."
 msgstr "Kolay güvenlik gözdağlarına karşı kısıtlı koruma."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:488
+#: panels/firmware-security/cc-firmware-security-panel.c:501
 msgid "Protected against common security threats."
 msgstr "Yaygın güvenlik gözdağlarına karşı korunmaktadır."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:495
-#: panels/firmware-security/cc-firmware-security-panel.c:503
+#: panels/firmware-security/cc-firmware-security-panel.c:508
+#: panels/firmware-security/cc-firmware-security-panel.c:516
 msgid "Protected against a wide range of security threats."
 msgstr "Geniş kapsamlı güvenlik gözdağlarına karşı koruma."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:502
+#: panels/firmware-security/cc-firmware-security-panel.c:515
 msgid "Comprehensive Protection"
 msgstr "Kapsamlı Koruma"
 
@@ -2911,7 +2911,7 @@ msgstr "Kısayol Belirle"
 msgid "Enter new shortcut to change %s."
 msgstr "Değiştirmek için yeni kısayol girin: %s."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:992
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:977
 msgid "Add Custom Shortcut"
 msgstr "Özel Kısayol Ekle"
 
@@ -3002,8 +3002,8 @@ msgid ""
 "\n"
 "Allow the applications below to determine your location."
 msgstr ""
-"Konum servisleri uygulamaların konumunuzu bilmesini sağlar. Wi-Fi ve mobil "
-"geniş bant doğruluğu artırır.\n"
+"Konum servisleri uygulamaların konumunuzu bilmesini sağlar. Kablosuz ve "
+"mobil geniş bant doğruluğu artırır.\n"
 "\n"
 "Mozilla Konum Servisini kullanır: <a href='https://location.services.mozilla."
 "com/privacy'>Gizlilik İlkesi</a>\n"
@@ -3328,8 +3328,8 @@ msgid ""
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
 "to access the internet through Wi-Fi."
 msgstr ""
-"Erişim noktasını açmak %s bağlantısını kesecek ve internete Wi-Fi üzerinden "
-"erişilemeyecek."
+"Erişim noktasını açmak %s bağlantısını kesecek ve internete kablosuz "
+"üzerinden erişilemeyecek."
 
 #: panels/network/cc-wifi-hotspot-dialog.c:266
 msgid "Must have a minimum of 8 characters"
@@ -3351,8 +3351,8 @@ msgid ""
 "Wi-Fi network that they can connect to. To do this, you must have an "
 "internet connection through a source other than Wi-Fi."
 msgstr ""
-"Wi-Fi erişim noktası, başkasının bağlanabileceği Wi-Fi ağı oluşturarak "
-"internet bağlantınızı paylaşmanızı sağlar. Bunun için Wi-Fi dışındaki "
+"Kablosuz erişim noktası, başkasının bağlanabileceği kablosuz ağı oluşturarak "
+"internet bağlantınızı paylaşmanızı sağlar. Bunun için kablosuz dışındaki "
 "kaynaktan internet bağlantınız olmalıdır."
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:51
@@ -3402,15 +3402,15 @@ msgstr "Uçak Kipi"
 
 #: panels/network/cc-wifi-panel.ui:76
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
-msgstr "Wi-Fi, Bluetooth ve mobil genişbantı devre dışı bırakır"
+msgstr "Kablosuz, Bluetooth ve mobil genişbantı devre dışı bırakır"
 
 #: panels/network/cc-wifi-panel.ui:113
 msgid "No Wi-Fi Adapter Found"
-msgstr "Wi-Fi Bağdaştırıcısı Bulunamadı"
+msgstr "Kablosuz Bağdaştırıcısı Bulunamadı"
 
 #: panels/network/cc-wifi-panel.ui:123
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
-msgstr "Wi-Fi bağdaştırıcınızın takılı ve açık olduğundan emin olun"
+msgstr "Kablosuz bağdaştırıcınızın takılı ve açık olduğundan emin olun"
 
 #: panels/network/cc-wifi-panel.ui:155 panels/wwan/cc-wwan-panel.ui:102
 msgid "Airplane Mode On"
@@ -4002,14 +4002,14 @@ msgstr "Ağ;IP;LAN;Proxy;WAN;Broadband;Genişbant;Modem;Bluetooth;vpn;DNS;"
 
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
-msgstr "Wi-Fi ağlarına nasıl bağlandığınızı denetleyin"
+msgstr "Kablosuz ağlarına nasıl bağlandığınızı denetleyin"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
 msgid "Network;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;DNS;Hotspot;"
 msgstr ""
-"Ağ;Wireless;Wi-Fi;Wifi;IP;LAN;Broadband;Genişbant;DNS;Hotspot;Bağlantı "
-"Noktası;"
+"Ağ;Wireless;Wi-Fi;Wifi;Kablosuz;Kablosuz Ağ;IP;LAN;Broadband;Genişbant;DNS;"
+"Hotspot;Bağlantı Noktası;"
 
 #: panels/network/net-device-ethernet.c:93
 msgid "never"
@@ -4055,7 +4055,7 @@ msgstr "_Unut"
 
 #: panels/network/net-device-wifi.c:1048
 msgid "Known Wi-Fi Networks"
-msgstr "Bilinen Wi-Fi Ağları"
+msgstr "Bilinen Kablosuz Ağlar"
 
 #. translators: This is the label for the "Forget wireless network" functionality
 #: panels/network/net-device-wifi.c:1067
@@ -4186,7 +4186,7 @@ msgstr "Kablosuz Erişim Nok_tasını Aç…"
 
 #: panels/network/network-wifi.ui:143
 msgid "_Known Wi-Fi Networks"
-msgstr "_Bilinen Wi-Fi Ağları"
+msgstr "_Bilinen Kablosuz Ağlar"
 
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:37
@@ -4455,13 +4455,13 @@ msgstr "hiçbir dosya seçilmedi"
 msgid "unspecified error validating eap-method file"
 msgstr "eap-method dosyası doğrulamada belirtilmemiş hata"
 
-#: panels/network/wireless-security/eap-method.c:389
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
-msgstr "DER, PEM, veya PKCS#12 özel anahtarları (*.der, *.pem, *.p12, *.key)"
+#: panels/network/wireless-security/eap-method.c:394
+msgid "DER, PEM, PKCS#12, or PGP private keys"
+msgstr "DER, PEM, PKCS#12 veya PGP özel anahtarı"
 
-#: panels/network/wireless-security/eap-method.c:392
-msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "DER veya PEM sertifikaları (*.der, *.pem, *.crt, *.cer)"
+#: panels/network/wireless-security/eap-method.c:397
+msgid "DER or PEM certificates"
+msgstr "DER veya PEM sertifikaları"
 
 #: panels/network/wireless-security/eap-method-fast.c:88
 msgid "missing EAP-FAST PAC file"
@@ -4749,7 +4749,7 @@ msgstr "leap-parolası eksik"
 
 #: panels/network/wireless-security/ws-sae.c:77
 msgid "Wi-Fi password is missing."
-msgstr "Wi-Fi parolası eksik."
+msgstr "Kablosuz parolası eksik."
 
 #: panels/network/wireless-security/ws-sae.ui:33
 #: panels/network/wireless-security/ws-wpa-psk.ui:33
@@ -6016,18 +6016,13 @@ msgid "Restart"
 msgstr "Yeniden Başlat"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:10
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:171
 msgid "Add Printer…"
 msgstr "Yazıcı Ekle…"
 
 #: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Yazıcı yok"
-
-#. Translators: This button adds new printer.
-#: panels/printers/printers.ui:171
-msgid "Add a Printer…"
-msgstr "Yazıcı Ekle…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:196
@@ -9566,6 +9561,18 @@ msgstr[0] "%u Girdi"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sistem Sesleri"
+
+#~ msgid "Error: unable to determine HSI level."
+#~ msgstr "Hata: HSI düzeyi saptanamadı."
+
+#~ msgid "Error: unable to determine Incorrect HSI level."
+#~ msgstr "Hata: Geçersiz HSI düzeyi saptanamadı."
+
+#~ msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+#~ msgstr "DER veya PEM sertifikaları (*.der, *.pem, *.crt, *.cer)"
+
+#~ msgid "Add a Printer…"
+#~ msgstr "Yazıcı Ekle…"
 
 #~ msgid "Drip"
 #~ msgstr "Damlama"
