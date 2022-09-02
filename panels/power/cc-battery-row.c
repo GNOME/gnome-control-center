@@ -229,6 +229,7 @@ cc_battery_row_new (UpDevice *device,
   gdouble percentage;
   UpDeviceKind kind;
   UpDeviceState state;
+  gboolean is_present = TRUE;
   g_autofree gchar *s = NULL;
   g_autofree gchar *icon_name = NULL;
   const gchar *name;
@@ -243,6 +244,7 @@ cc_battery_row_new (UpDevice *device,
   g_object_get (device,
                 "kind", &kind,
                 "state", &state,
+                "is-present", &is_present,
                 "model", &name,
                 "percentage", &percentage,
                 "icon-name", &icon_name,
@@ -310,6 +312,9 @@ cc_battery_row_new (UpDevice *device,
 
   self->kind = kind;
   self->primary = primary;
+
+  if (!is_kind_battery)
+    gtk_widget_set_visible (GTK_WIDGET (self), is_present);
 
   return self;
 }
