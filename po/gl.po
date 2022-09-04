@@ -20,10 +20,10 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-08-24 08:47+0000\n"
-"PO-Revision-Date: 2022-08-24 13:39+0200\n"
+"POT-Creation-Date: 2022-09-03 12:25+0000\n"
+"PO-Revision-Date: 2022-09-05 00:17+0200\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
-"Language-Team: Galician <Proxecto Trasno <proxecto@trasno.gal>>\n"
+"Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1795,7 +1795,7 @@ msgstr ""
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
-#: panels/firmware-security/cc-firmware-security-panel.c:109
+#: panels/firmware-security/cc-firmware-security-panel.c:112
 msgid "Secure Boot is Active"
 msgstr "Secure Boot está activo"
 
@@ -1880,31 +1880,31 @@ msgstr ""
 "Para máis información, contacte co fabricante do soporte ou o soporte "
 "técnico."
 
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Passed"
+msgstr "Pasado"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Failed"
+msgstr "Falla"
+
 #. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:79
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
 #, c-format
 msgid "Device conforms to HSI level %d"
 msgstr "O dispositivo cumple co nivel HSI %d"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Passed"
-msgstr "Pasado"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-msgid "Failed"
-msgstr "Falla"
-
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:136
-#: panels/firmware-security/cc-firmware-security-panel.c:473
+#: panels/firmware-security/cc-firmware-security-dialog.c:149
+#: panels/firmware-security/cc-firmware-security-panel.c:486
 msgid "Security Level 0"
 msgstr "Nivel de seguranza 0"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:150
 msgid ""
 "This device has no protection against hardware security issues. This could "
 "be because of a hardware or firmware configuration issue. It is recommended "
@@ -1915,13 +1915,13 @@ msgstr ""
 "Recoméndamoslle contactar co seu fornecedor de soporte técnico"
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:145
-#: panels/firmware-security/cc-firmware-security-dialog.c:344
-#: panels/firmware-security/cc-firmware-security-panel.c:480
+#: panels/firmware-security/cc-firmware-security-dialog.c:158
+#: panels/firmware-security/cc-firmware-security-dialog.c:358
+#: panels/firmware-security/cc-firmware-security-panel.c:493
 msgid "Security Level 1"
 msgstr "Nivel de seguranza 1"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:146
+#: panels/firmware-security/cc-firmware-security-dialog.c:159
 msgid ""
 "This device has minimal protection against hardware security issues. This is "
 "the lowest device security level and only provides protection against simple "
@@ -1932,13 +1932,13 @@ msgstr ""
 "protección fronte a ameazas de seguranza simples."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-#: panels/firmware-security/cc-firmware-security-dialog.c:349
-#: panels/firmware-security/cc-firmware-security-panel.c:487
+#: panels/firmware-security/cc-firmware-security-dialog.c:167
+#: panels/firmware-security/cc-firmware-security-dialog.c:363
+#: panels/firmware-security/cc-firmware-security-panel.c:500
 msgid "Security Level 2"
 msgstr "Nivel de seguranza 2"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:155
+#: panels/firmware-security/cc-firmware-security-dialog.c:168
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
@@ -1947,13 +1947,13 @@ msgstr ""
 "hardware. Isto fornece protección fronte a amezas de seguranza comúns."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:163
-#: panels/firmware-security/cc-firmware-security-dialog.c:354
-#: panels/firmware-security/cc-firmware-security-panel.c:494
+#: panels/firmware-security/cc-firmware-security-dialog.c:176
+#: panels/firmware-security/cc-firmware-security-dialog.c:368
+#: panels/firmware-security/cc-firmware-security-panel.c:507
 msgid "Security Level 3"
 msgstr "Nivel de seguranza 3"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:164
+#: panels/firmware-security/cc-firmware-security-dialog.c:177
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
@@ -1963,25 +1963,29 @@ msgstr ""
 "hardware. Este é o nivel de seguranza de dispositivo máis alto e fornece "
 "protección fronte a ameazas de seguranza avanzados."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:172
-msgid "Error: unable to determine HSI level."
-msgstr "Erro: non foi posíbel determinar o nivel HSI."
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:185
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+#: panels/firmware-security/cc-firmware-security-panel.c:522
+msgid "Security Level"
+msgstr "Nivel de seguranza"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:173
-msgid "Error: unable to determine Incorrect HSI level."
-msgstr "Erro: non foi posíbel determinar o nivel HSI incorrecto."
+#: panels/firmware-security/cc-firmware-security-dialog.c:186
+#: panels/firmware-security/cc-firmware-security-panel.c:523
+msgid "Security levels are not available for this device."
+msgstr "Os niveis de seguranza non están dispoñíbeis para este dispositivo."
 
 #. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:188
-#: panels/firmware-security/cc-firmware-security-dialog.c:198
-#: panels/firmware-security/cc-firmware-security-dialog.c:205
+#: panels/firmware-security/cc-firmware-security-dialog.c:201
+#: panels/firmware-security/cc-firmware-security-dialog.c:211
+#: panels/firmware-security/cc-firmware-security-dialog.c:218
 msgid "Contact your hardware manufacturer for help with security updates."
 msgstr ""
 "Contacte co seu fabricante de hardware para obter axuda coas actualizacións "
 "de seguranza."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:190
+#: panels/firmware-security/cc-firmware-security-dialog.c:203
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings, or by a support technician."
@@ -1989,8 +1993,8 @@ msgstr ""
 "Podería ser posíbel resolver este problema nas preferencias do firmware UEFI "
 "do dispositivo, ou por un técnico de asistencia técnica."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:199
-#: panels/firmware-security/cc-firmware-security-dialog.c:210
+#: panels/firmware-security/cc-firmware-security-dialog.c:212
+#: panels/firmware-security/cc-firmware-security-dialog.c:223
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings."
@@ -1999,13 +2003,9 @@ msgstr ""
 "do dispositivo."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:216
+#: panels/firmware-security/cc-firmware-security-dialog.c:229
 msgid "It might be possible for a support technician to resolve this issue."
 msgstr "Podería ser posíbel que un técnico de soporte resolva este problema."
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Security Level"
-msgstr "Nivel de seguranza"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:88
 msgid "Level 1"
@@ -2019,28 +2019,28 @@ msgstr "Nivel 2"
 msgid "Level 3"
 msgstr "Nivel 3"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:110
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Protected against malicious software when the device starts."
 msgstr "Protección fronte a software malicioso cando o dispositivo arrinca."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:116
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "Secure Boot has Problems"
 msgstr "Secure Boot ten problemas"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:117
+#: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Some protection when the device is started."
 msgstr "Algunha protección cando se inicia o dispositivo."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:122
+#: panels/firmware-security/cc-firmware-security-panel.c:125
 msgid "Secure Boot is Off"
 msgstr "Secure Boot está desactivado"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:123
+#: panels/firmware-security/cc-firmware-security-panel.c:126
 msgid "No protection when the device is started."
 msgstr "Sen protección cando se inicia o dispositivo."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:142
+#: panels/firmware-security/cc-firmware-security-panel.c:145
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -2051,7 +2051,7 @@ msgstr ""
 "malicioso neste sistema."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:150
+#: panels/firmware-security/cc-firmware-security-panel.c:153
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
@@ -2060,7 +2060,7 @@ msgstr ""
 "UEFI ou por un software malicioso neste sistema."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:157
+#: panels/firmware-security/cc-firmware-security-panel.c:160
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
@@ -2068,25 +2068,25 @@ msgstr ""
 "Este problema puido ser causado por un cambio na configuración do sistema "
 "operativo ou por un software malicioso neste sistema."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:474
+#: panels/firmware-security/cc-firmware-security-panel.c:487
 msgid "Exposed to serious security threats."
 msgstr "Altamente exposto ás ameazas de seguranza."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:481
+#: panels/firmware-security/cc-firmware-security-panel.c:494
 msgid "Limited protection against simple security threats."
 msgstr "Protección limitada contra ameazas simples de seguranza."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:488
+#: panels/firmware-security/cc-firmware-security-panel.c:501
 msgid "Protected against common security threats."
 msgstr "Protexido contra ameazas de seguranza comúns."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:495
-#: panels/firmware-security/cc-firmware-security-panel.c:503
+#: panels/firmware-security/cc-firmware-security-panel.c:508
+#: panels/firmware-security/cc-firmware-security-panel.c:516
 msgid "Protected against a wide range of security threats."
 msgstr "Protexido contra unha ampla gama de ameazas de seguranza."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:502
+#: panels/firmware-security/cc-firmware-security-panel.c:515
 msgid "Comprehensive Protection"
 msgstr "Protección integral"
 
@@ -3865,7 +3865,7 @@ msgstr "Pasarela"
 #: panels/network/connection-editor/ip6-page.ui:237
 #: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:93
 #: panels/network/wireless-security/eap-method-peap.ui:33
-#: panels/wacom/cc-wacom-page.c:621
+#: panels/wacom/cc-wacom-page.c:656
 msgid "Automatic"
 msgstr "Automático"
 
@@ -4477,12 +4477,10 @@ msgid "unspecified error validating eap-method file"
 msgstr "erro non especificado ao validar o ficheiro eap-method"
 
 #: panels/network/wireless-security/eap-method.c:394
-#| msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
 msgid "DER, PEM, PKCS#12, or PGP private keys"
 msgstr "DER, DEM, PKCS#12 ou chaves privadas PGP"
 
 #: panels/network/wireless-security/eap-method.c:397
-#| msgid "_User certificate"
 msgid "DER or PEM certificates"
 msgstr "Certificados DER ou PEM"
 
@@ -8782,7 +8780,7 @@ msgid "External pad device"
 msgstr "Dispositivo de tableta externa"
 
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:608
+#: panels/wacom/cc-wacom-page.c:643
 msgid "All Displays"
 msgstr "Todas as pantallas"
 
@@ -9620,6 +9618,12 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "Error: unable to determine HSI level."
+#~ msgstr "Erro: non foi posíbel determinar o nivel HSI."
+
+#~ msgid "Error: unable to determine Incorrect HSI level."
+#~ msgstr "Erro: non foi posíbel determinar o nivel HSI incorrecto."
 
 #~ msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
 #~ msgstr "Certificados DER ou PEM (*.der, *.pem, *.crt, *.cer)"
