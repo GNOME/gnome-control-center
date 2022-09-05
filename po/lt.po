@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-08-08 19:36+0000\n"
-"PO-Revision-Date: 2022-08-08 23:20+0300\n"
+"POT-Creation-Date: 2022-09-05 18:05+0000\n"
+"PO-Revision-Date: 2022-09-05 22:41+0300\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -119,7 +119,6 @@ msgstr "<b>%s</b> yra naudojama atverti šio tipo failus bei saitus."
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
 #: panels/applications/cc-applications-panel.c:1251
 #, c-format
-#| msgid "%s of disk space used"
 msgid "%s of disk space used."
 msgstr "Naudojama %s disko vietos."
 
@@ -195,7 +194,6 @@ msgid "Show system notifications."
 msgstr "Rodyti sistemos pranešimus."
 
 #: panels/applications/cc-applications-panel.ui:133
-#| msgid "Run in background"
 msgid "Run in Background"
 msgstr "Vykdyti fone"
 
@@ -208,9 +206,9 @@ msgid "Screenshots"
 msgstr "Ekrano nuotraukos"
 
 #: panels/applications/cc-applications-panel.ui:141
-#| msgid "Take a screenshot of a window"
-msgid "Take screenshots of the desktop."
-msgstr "Padaryti darbalaukio nuotrauką."
+#| msgid "Take pictures with the camera."
+msgid "Take pictures of the screen at any time."
+msgstr "Fotografuokite ekraną bet kuriuo metu."
 
 #: panels/applications/cc-applications-panel.ui:147
 msgid "Change Wallpaper"
@@ -361,7 +359,7 @@ msgstr "Pasirinkite paveikslėlį"
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:31
-#: panels/info-overview/cc-info-overview-panel.ui:209
+#: panels/info-overview/cc-info-overview-panel.ui:218
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
@@ -379,7 +377,7 @@ msgstr "Pasirinkite paveikslėlį"
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
-#: panels/user-accounts/cc-password-dialog.ui:18
+#: panels/user-accounts/cc-password-dialog.ui:20
 #: panels/user-accounts/cc-user-panel.c:594
 #: panels/user-accounts/cc-user-panel.c:612
 #: panels/user-accounts/data/join-dialog.ui:17
@@ -1555,7 +1553,7 @@ msgstr "Pranešti apie jūsų problemas"
 msgid "diagnostics;crash;"
 msgstr "diagnostika;lūžimas;"
 
-#: panels/display/cc-display-panel.c:516
+#: panels/display/cc-display-panel.c:492
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1566,7 +1564,7 @@ msgstr "diagnostika;lūžimas;"
 msgid "On"
 msgstr "Įjungta"
 
-#: panels/display/cc-display-panel.c:518 panels/network/net-proxy.c:69
+#: panels/display/cc-display-panel.c:494 panels/network/net-proxy.c:69
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
 #: panels/universal-access/cc-ua-panel.c:336
@@ -1577,15 +1575,15 @@ msgstr "Įjungta"
 msgid "Off"
 msgstr "Išjungta"
 
-#: panels/display/cc-display-panel.c:955
+#: panels/display/cc-display-panel.c:930
 msgid "Apply Changes?"
 msgstr "Pritaikyti pakeitimus?"
 
-#: panels/display/cc-display-panel.c:960
+#: panels/display/cc-display-panel.c:935
 msgid "Changes Cannot be Applied"
 msgstr "Pakeitimų negalima pritaikyti"
 
-#: panels/display/cc-display-panel.c:962
+#: panels/display/cc-display-panel.c:937
 msgid "This could be due to hardware limitations."
 msgstr "Taip gali būti dėl aparatinės įrangos apribojimų."
 
@@ -1791,7 +1789,7 @@ msgstr ""
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
-#: panels/firmware-security/cc-firmware-security-panel.c:109
+#: panels/firmware-security/cc-firmware-security-panel.c:112
 msgid "Secure Boot is Active"
 msgstr "Saugus paleidimas yra aktyvus"
 
@@ -1875,34 +1873,31 @@ msgstr ""
 "Daugiau informacijos gausite susisiekę su aparatinės įrangos gamintoju ar "
 "pagalba."
 
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Passed"
+msgstr "Pavyko"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:96
+#: panels/firmware-security/cc-firmware-security-dialog.c:98
+#: panels/firmware-security/cc-firmware-security-dialog.c:100
+msgid "Failed"
+msgstr "Nepavyko"
+
 #. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:79
+#: panels/firmware-security/cc-firmware-security-dialog.c:137
 #, c-format
 msgid "Device conforms to HSI level %d"
 msgstr "Įrenginys patvirtina HSI lygį %d"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-#| msgid "Password"
-msgid "Passed"
-msgstr "Pavyko"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:85
-#: panels/firmware-security/cc-firmware-security-dialog.c:87
-#: panels/firmware-security/cc-firmware-security-dialog.c:89
-#| msgid "PPP failed"
-msgid "Failed"
-msgstr "Nepavyko"
-
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:136
-#: panels/firmware-security/cc-firmware-security-panel.c:472
-#| msgid "Security Level"
+#: panels/firmware-security/cc-firmware-security-dialog.c:149
+#: panels/firmware-security/cc-firmware-security-panel.c:486
 msgid "Security Level 0"
 msgstr "Saugumo lygis 0"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
+#: panels/firmware-security/cc-firmware-security-dialog.c:150
 msgid ""
 "This device has no protection against hardware security issues. This could "
 "be because of a hardware or firmware configuration issue. It is recommended "
@@ -1913,14 +1908,13 @@ msgstr ""
 "problemos. Rekomenduojama susisiekti su pagalbos tarnyba."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:145
-#: panels/firmware-security/cc-firmware-security-dialog.c:338
-#: panels/firmware-security/cc-firmware-security-panel.c:479
-#| msgid "Security Level"
+#: panels/firmware-security/cc-firmware-security-dialog.c:158
+#: panels/firmware-security/cc-firmware-security-dialog.c:358
+#: panels/firmware-security/cc-firmware-security-panel.c:493
 msgid "Security Level 1"
 msgstr "Saugumo lygis 1"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:146
+#: panels/firmware-security/cc-firmware-security-dialog.c:159
 msgid ""
 "This device has minimal protection against hardware security issues. This is "
 "the lowest device security level and only provides protection against simple "
@@ -1930,14 +1924,13 @@ msgstr ""
 "yra žemiausias saugumo lygis ir apsaugo tik nuo paprasčiausių pavojų."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:154
-#: panels/firmware-security/cc-firmware-security-dialog.c:343
-#: panels/firmware-security/cc-firmware-security-panel.c:486
-#| msgid "Security Level"
+#: panels/firmware-security/cc-firmware-security-dialog.c:167
+#: panels/firmware-security/cc-firmware-security-dialog.c:363
+#: panels/firmware-security/cc-firmware-security-panel.c:500
 msgid "Security Level 2"
 msgstr "Saugumo lygis 2"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:155
+#: panels/firmware-security/cc-firmware-security-dialog.c:168
 msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
@@ -1946,14 +1939,13 @@ msgstr ""
 "apsaugo nuo kai kurių dažnų saugumo pavojų."
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:163
-#: panels/firmware-security/cc-firmware-security-dialog.c:348
-#: panels/firmware-security/cc-firmware-security-panel.c:493
-#| msgid "Security Level"
+#: panels/firmware-security/cc-firmware-security-dialog.c:176
+#: panels/firmware-security/cc-firmware-security-dialog.c:368
+#: panels/firmware-security/cc-firmware-security-panel.c:507
 msgid "Security Level 3"
 msgstr "Saugumo lygis 3"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:164
+#: panels/firmware-security/cc-firmware-security-dialog.c:177
 msgid ""
 "This device has extended protection against hardware security issues. This "
 "is the highest device security level and provides protection against "
@@ -1962,24 +1954,28 @@ msgstr ""
 "Šis įrenginys turi išplėstinę apsaugą nuo aparatinių saugumo problemų. Tai "
 "yra aukščiausias saugumo lygis ir apsaugo nuo sudėtingų saugumo pavojų."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:172
-msgid "Error: unable to determine HSI level."
-msgstr "Klaida: nepavyko nustatyti HSI lygio."
+#. TRANSLATORS: in reference to firmware protection: ??? stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:185
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+#: panels/firmware-security/cc-firmware-security-panel.c:522
+msgid "Security Level"
+msgstr "Saugumo lygis"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:173
-msgid "Error: unable to determine Incorrect HSI level."
-msgstr "Klaida: nepavyksta nustatyti neteisingo HSI lygio."
+#: panels/firmware-security/cc-firmware-security-dialog.c:186
+#: panels/firmware-security/cc-firmware-security-panel.c:523
+msgid "Security levels are not available for this device."
+msgstr "Šiam įrenginiui nėra saugumo lygių."
 
 #. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:188
-#: panels/firmware-security/cc-firmware-security-dialog.c:198
-#: panels/firmware-security/cc-firmware-security-dialog.c:205
+#: panels/firmware-security/cc-firmware-security-dialog.c:201
+#: panels/firmware-security/cc-firmware-security-dialog.c:211
+#: panels/firmware-security/cc-firmware-security-dialog.c:218
 msgid "Contact your hardware manufacturer for help with security updates."
 msgstr ""
 "Susisiekite su gamintoju, jei reikia pagalbos su saugumo atnaujinimais."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:190
+#: panels/firmware-security/cc-firmware-security-dialog.c:203
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings, or by a support technician."
@@ -1987,61 +1983,53 @@ msgstr ""
 "Gali būti galima išspręsti šią problemą įrenginio UEFI nuostatose arba "
 "susisiekus su technine pagalba."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:199
-#: panels/firmware-security/cc-firmware-security-dialog.c:210
+#: panels/firmware-security/cc-firmware-security-dialog.c:212
+#: panels/firmware-security/cc-firmware-security-dialog.c:223
 msgid ""
 "It might be possible to resolve this issue in the device’s UEFI firmware "
 "settings."
 msgstr "Gali būti galima išspręsti šią problemą įrenginio UEFI nuostatose."
 
 #. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:216
+#: panels/firmware-security/cc-firmware-security-dialog.c:229
 msgid "It might be possible for a support technician to resolve this issue."
 msgstr ""
 "Gali būti galima išspręsti šią problemą susisiekus su technine pagalba."
 
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-msgid "Security Level"
-msgstr "Saugumo lygis"
-
 #: panels/firmware-security/cc-firmware-security-dialog.ui:88
-#| msgid "Ink Level"
 msgid "Level 1"
 msgstr "Lygis 1"
 
-#: panels/firmware-security/cc-firmware-security-dialog.ui:123
-#| msgid "Ink Level"
+#: panels/firmware-security/cc-firmware-security-dialog.ui:124
 msgid "Level 2"
 msgstr "Lygis 2"
 
-#: panels/firmware-security/cc-firmware-security-dialog.ui:158
-#| msgid "Ink Level"
+#: panels/firmware-security/cc-firmware-security-dialog.ui:160
 msgid "Level 3"
 msgstr "Lygis 3"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:110
+#: panels/firmware-security/cc-firmware-security-panel.c:113
 msgid "Protected against malicious software when the device starts."
 msgstr "Apsaugota nuo kenksmingos programinės įrangos paleidžiant įrenginį."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:115
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "Secure Boot has Problems"
 msgstr "Yra problemų su saugiu paleidimu"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:116
+#: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Some protection when the device is started."
 msgstr "Dalinė apsauga kai įrenginys paleidžiamas."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:121
-#| msgid "Secure Boot is Turned Off"
+#: panels/firmware-security/cc-firmware-security-panel.c:125
 msgid "Secure Boot is Off"
 msgstr "Saugus paleidimas yra išjungtas"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:122
+#: panels/firmware-security/cc-firmware-security-panel.c:126
 msgid "No protection when the device is started."
 msgstr "Nėra apsaugos kai įrenginys paleidžiamas."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:141
+#: panels/firmware-security/cc-firmware-security-panel.c:145
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -2051,7 +2039,7 @@ msgstr ""
 "pakeitimas arba kenksminga programinė įranga šioje sistemoje."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:149
+#: panels/firmware-security/cc-firmware-security-panel.c:153
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
@@ -2060,7 +2048,7 @@ msgstr ""
 "programinė įranga šioje sistemoje."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:156
+#: panels/firmware-security/cc-firmware-security-panel.c:160
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
@@ -2068,26 +2056,25 @@ msgstr ""
 "Šią problemą galėjo sukelti operacinės sistemos pakeitimas arba kenksminga "
 "programinė įranga šioje sistemoje."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:473
-#| msgid "Highly exposed to security threats."
+#: panels/firmware-security/cc-firmware-security-panel.c:487
 msgid "Exposed to serious security threats."
 msgstr "Dideli saugumo pavojai.."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:480
+#: panels/firmware-security/cc-firmware-security-panel.c:494
 msgid "Limited protection against simple security threats."
 msgstr "Ribota apsauga nuo paprastų saugumo pavojų."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:487
+#: panels/firmware-security/cc-firmware-security-panel.c:501
 msgid "Protected against common security threats."
 msgstr "Apsaugota nuo dažnų saugumo pavojų."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:494
-#: panels/firmware-security/cc-firmware-security-panel.c:502
+#: panels/firmware-security/cc-firmware-security-panel.c:508
+#: panels/firmware-security/cc-firmware-security-panel.c:516
 msgid "Protected against a wide range of security threats."
 msgstr "Apsaugota nuo daugelio saugumo pavojų."
 
 #. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:501
+#: panels/firmware-security/cc-firmware-security-panel.c:515
 msgid "Comprehensive Protection"
 msgstr "Sudėtinga apsauga"
 
@@ -2295,37 +2282,31 @@ msgstr "Tinkamas"
 
 #. TRANSLATORS: if the status or key is not valid.
 #: panels/firmware-security/cc-firmware-security-utils.c:242
-#| msgid "Not calibrated"
 msgid "Not Valid"
 msgstr "Netinkamas"
 
 #. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
 #: panels/firmware-security/cc-firmware-security-utils.c:252
-#| msgid "Enabled"
 msgid "Not Enabled"
 msgstr "Išjungta"
 
 #. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
 #: panels/firmware-security/cc-firmware-security-utils.c:257
-#| msgid "SIM Locked"
 msgid "Locked"
 msgstr "Užrakinta"
 
 #. TRANSLATORS: the memory space or system mode is not locked.
 #: panels/firmware-security/cc-firmware-security-utils.c:262
-#| msgid "SIM Locked"
 msgid "Not Locked"
 msgstr "Neužrakinta"
 
 #. TRANSLATORS: The data is encrypted to prevent from malicious reading.
 #: panels/firmware-security/cc-firmware-security-utils.c:267
-#| msgid "Encrypted RAM"
 msgid "Encrypted"
 msgstr "Šifruota"
 
 #. TRANSLATORS: the data in memory is plane text.
 #: panels/firmware-security/cc-firmware-security-utils.c:272
-#| msgid "Encrypted RAM"
 msgid "Not Encrypted"
 msgstr "Nešifruota"
 
@@ -2336,31 +2317,26 @@ msgstr "Suteptas"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
 #: panels/firmware-security/cc-firmware-security-utils.c:282
-#| msgid "Not calibrated"
 msgid "Not Tainted"
 msgstr "Nesuteptas"
 
 #. TRANSLATORS: the feature can be detected.
 #: panels/firmware-security/cc-firmware-security-utils.c:287
-#| msgid "Sound"
 msgid "Found"
 msgstr "Rasta"
 
 #. TRANSLATORS: the feature can't be detected.
 #: panels/firmware-security/cc-firmware-security-utils.c:292
-#| msgid "Not found"
 msgid "Not Found"
 msgstr "Nerasta"
 
 #. TRANSLATORS: the function is supported by hardware.
 #: panels/firmware-security/cc-firmware-security-utils.c:297
-#| msgid "Supported CPU"
 msgid "Supported"
 msgstr "Palaikoma"
 
 #. TRANSLATORS: the function isn't supported by hardware.
 #: panels/firmware-security/cc-firmware-security-utils.c:302
-#| msgid "Supported CPU"
 msgid "Not Supported"
 msgstr "Palaikoma"
 
@@ -2381,51 +2357,42 @@ msgstr ""
 "ekranas;užrakinimas;diagnostika;lūžimas;privatus;neseniai;naudoti;laikinieji;"
 "indeksas;pavadinimas;tinklas;tapatybė;privatumas;"
 
-#: panels/info-overview/cc-info-overview-panel.c:296
-#: panels/info-overview/cc-info-overview-panel.c:320
-#: panels/info-overview/cc-info-overview-panel.c:366
-#: panels/info-overview/cc-info-overview-panel.c:396
+#: panels/info-overview/cc-info-overview-panel.c:297
+#: panels/info-overview/cc-info-overview-panel.c:317
+#: panels/info-overview/cc-info-overview-panel.c:358
+#: panels/info-overview/cc-info-overview-panel.c:388
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "Nežinomas"
 
-#. translators: This is the name of the OS, followed by the build ID, for
-#. * example:
-#. * "Fedora 25 (Workstation Edition); Build ID: xyz" or
-#. * "Ubuntu 16.04 LTS; Build ID: jki"
-#: panels/info-overview/cc-info-overview-panel.c:328
-#, c-format
-msgid "%s; Build ID: %s"
-msgstr "%s; Sukūrimo ID: %s"
-
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:343
+#: panels/info-overview/cc-info-overview-panel.c:335
 #, c-format
 msgid "64-bit"
 msgstr "64-bitų"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:346
+#: panels/info-overview/cc-info-overview-panel.c:338
 #, c-format
 msgid "32-bit"
 msgstr "32-bitų"
 
-#: panels/info-overview/cc-info-overview-panel.c:605
+#: panels/info-overview/cc-info-overview-panel.c:597
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:609
+#: panels/info-overview/cc-info-overview-panel.c:601
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:611
+#: panels/info-overview/cc-info-overview-panel.c:603
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Nežinoma"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:689
+#: panels/info-overview/cc-info-overview-panel.c:681
 msgid "Not Available"
 msgstr "Neprieinama"
 
@@ -2467,36 +2434,42 @@ msgstr "Skaičiuojama..."
 msgid "OS Name"
 msgstr "OS pavadinimas"
 
-#: panels/info-overview/cc-info-overview-panel.ui:106
+#. translators: this field contains the distro build ID
+#: panels/info-overview/cc-info-overview-panel.ui:107
+#| msgid "%s; Build ID: %s"
+msgid "OS Build ID"
+msgstr "OS kūrimo ID"
+
+#: panels/info-overview/cc-info-overview-panel.ui:115
 msgid "OS Type"
 msgstr "OS tipas"
 
-#: panels/info-overview/cc-info-overview-panel.ui:114
+#: panels/info-overview/cc-info-overview-panel.ui:123
 msgid "GNOME Version"
 msgstr "GNOME versija"
 
 #. translators: this is a placeholder while the GNOME version is being fetched
-#: panels/info-overview/cc-info-overview-panel.ui:116
+#: panels/info-overview/cc-info-overview-panel.ui:125
 msgid "Loading…"
 msgstr "Įkeliama…"
 
-#: panels/info-overview/cc-info-overview-panel.ui:124
+#: panels/info-overview/cc-info-overview-panel.ui:133
 msgid "Windowing System"
 msgstr "Langų sistema"
 
-#: panels/info-overview/cc-info-overview-panel.ui:132
+#: panels/info-overview/cc-info-overview-panel.ui:141
 msgid "Virtualization"
 msgstr "Virtualizacija"
 
-#: panels/info-overview/cc-info-overview-panel.ui:141
+#: panels/info-overview/cc-info-overview-panel.ui:150
 msgid "Software Updates"
 msgstr "Programinės įrangos atnaujinimai"
 
-#: panels/info-overview/cc-info-overview-panel.ui:165
+#: panels/info-overview/cc-info-overview-panel.ui:174
 msgid "Rename Device"
 msgstr "Pervadinti įrenginį"
 
-#: panels/info-overview/cc-info-overview-panel.ui:181
+#: panels/info-overview/cc-info-overview-panel.ui:190
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -2504,11 +2477,11 @@ msgstr ""
 "Įrenginio pavadinimas yra naudojamas šiam įrenginiui identifikuoti, kai jis "
 "matomas per tinklą arba poruojant su Bluetooth įrenginiais."
 
-#: panels/info-overview/cc-info-overview-panel.ui:187
+#: panels/info-overview/cc-info-overview-panel.ui:196
 msgid "Device name"
 msgstr "Įrenginio pavadinimas"
 
-#: panels/info-overview/cc-info-overview-panel.ui:201
+#: panels/info-overview/cc-info-overview-panel.ui:210
 msgid "_Rename"
 msgstr "_Pervadinti"
 
@@ -2726,7 +2699,7 @@ msgid "Custom Shortcuts"
 msgstr "Pasirinktiniai susiejimai"
 
 #: panels/keyboard/cc-keyboard-panel.c:64
-#: panels/keyboard/cc-keyboard-panel.ui:62
+#: panels/keyboard/cc-keyboard-panel.ui:63
 msgid "Alternate Characters Key"
 msgstr "Alternatyvių simbolių klavišas"
 
@@ -2775,7 +2748,7 @@ msgid "Right Ctrl"
 msgstr "Dešinysis Vald"
 
 #: panels/keyboard/cc-keyboard-panel.c:80
-#: panels/keyboard/cc-keyboard-panel.ui:79
+#: panels/keyboard/cc-keyboard-panel.ui:80
 msgid "Compose Key"
 msgstr "Rašymo klavišas"
 
@@ -2834,21 +2807,21 @@ msgstr "Naudoti tą patį _šaltinį visiems langams"
 msgid "Switch input sources _individually for each window"
 msgstr "Keisti įvesties šaltinius _individualiai kiekvienam langui"
 
-#: panels/keyboard/cc-keyboard-panel.ui:58
+#: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Special Character Entry"
 msgstr "Specialiųjų simbolių įvestis"
 
-#: panels/keyboard/cc-keyboard-panel.ui:59
+#: panels/keyboard/cc-keyboard-panel.ui:60
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Metodai simbolių bei raidžių variantų įvedimui naudojant klaviatūrą."
 
-#: panels/keyboard/cc-keyboard-panel.ui:97
+#: panels/keyboard/cc-keyboard-panel.ui:98
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Klaviatūros trumpiniai"
 
-#: panels/keyboard/cc-keyboard-panel.ui:100
+#: panels/keyboard/cc-keyboard-panel.ui:101
 msgid "View and Customize Shortcuts"
 msgstr "Rodyti ir tinkinti trumpinius"
 
@@ -2944,7 +2917,7 @@ msgstr "Nustatyti trumpinį"
 msgid "Enter new shortcut to change %s."
 msgstr "Įveskite naują trumpinį %s pakeisti."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:992
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:977
 msgid "Add Custom Shortcut"
 msgstr "Pridėti pasirinktinis trumpinį"
 
@@ -3303,7 +3276,7 @@ msgstr "NetworkManager turėtų veikti."
 msgid "Other Devices"
 msgstr "Kiti įrenginiai"
 
-#: panels/network/cc-network-panel.ui:37 panels/network/cc-network-panel.ui:56
+#: panels/network/cc-network-panel.ui:37 panels/network/cc-network-panel.ui:71
 #: panels/network/connection-editor/net-connection-editor.c:586
 msgid "VPN"
 msgstr "VPN"
@@ -3312,7 +3285,7 @@ msgstr "VPN"
 msgid "Add connection"
 msgstr "Pridėti ryšį"
 
-#: panels/network/cc-network-panel.ui:73
+#: panels/network/cc-network-panel.ui:62
 msgid "Not set up"
 msgstr "Nenustatyta"
 
@@ -3880,7 +3853,7 @@ msgstr "Tinklų sietuvas"
 #: panels/network/connection-editor/ip6-page.ui:237
 #: panels/network/net-proxy.c:73 panels/network/network-proxy.ui:93
 #: panels/network/wireless-security/eap-method-peap.ui:33
-#: panels/wacom/cc-wacom-page.c:621
+#: panels/wacom/cc-wacom-page.c:656
 msgid "Automatic"
 msgstr "Automatinis"
 
@@ -4491,13 +4464,15 @@ msgstr "nepasirinktas failas"
 msgid "unspecified error validating eap-method file"
 msgstr "nežinoma klaida tikrinant eap-metodo failą"
 
-#: panels/network/wireless-security/eap-method.c:389
-msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
-msgstr "DER, PEM, arba PKCS#12 privatūs raktai (*.der, *.pem, *.p12, *.key)"
+#: panels/network/wireless-security/eap-method.c:394
+#| msgid "DER, PEM, or PKCS#12 private keys (*.der, *.pem, *.p12, *.key)"
+msgid "DER, PEM, PKCS#12, or PGP private keys"
+msgstr "DER, PEM, PKCS#12 arba PGP privatūs raktai"
 
-#: panels/network/wireless-security/eap-method.c:392
-msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
-msgstr "DER arba PEM liudijimai (*.der, *.pem, *.crt, *.cer)"
+#: panels/network/wireless-security/eap-method.c:397
+#| msgid "_User certificate"
+msgid "DER or PEM certificates"
+msgstr "DER arba PEM liudijimai"
 
 #: panels/network/wireless-security/eap-method-fast.c:88
 msgid "missing EAP-FAST PAC file"
@@ -4937,7 +4912,7 @@ msgstr "Kita"
 msgid "%s removed"
 msgstr "%s pašalinta"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:691
+#: panels/online-accounts/cc-online-accounts-panel.c:695
 msgid "Error removing account"
 msgstr "Klaida šalinant paskyrą"
 
@@ -5402,23 +5377,23 @@ msgstr ""
 "Tuščias;Monitorius;DPMS;Laisva;"
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:676
+#: panels/printers/cc-printers-panel.c:685
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr "Spausdintuvas „%s“ buvo ištrintas"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:928
+#: panels/printers/cc-printers-panel.c:942
 msgid "Failed to add new printer."
 msgstr "Nepavyko pridėti naujo spausdintuvo."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1229
+#: panels/printers/cc-printers-panel.c:1247
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Nepavyko įkelti sąsajos: %s"
 
-#: panels/printers/cc-printers-panel.c:1297
+#: panels/printers/cc-printers-panel.c:1315
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Atrakinkite spausdintuvų pridėjimui bei nustatymų keitimui"
 
@@ -6066,18 +6041,13 @@ msgid "Restart"
 msgstr "Perleisti"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:10
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:171
 msgid "Add Printer…"
 msgstr "Pridėti spausdintuvą…"
 
 #: panels/printers/printers.ui:160
 msgid "No printers"
 msgstr "Spausdintuvų nėra"
-
-#. Translators: This button adds new printer.
-#: panels/printers/printers.ui:171
-msgid "Add a Printer…"
-msgstr "Pridėti spausdintuvą…"
 
 #. Translators: The CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:196
@@ -6117,12 +6087,12 @@ msgstr "Galima ieškoti šalių arba kalbų."
 msgid "Preview"
 msgstr "Peržiūra"
 
-#: panels/region/cc-format-preview.c:135
+#: panels/region/cc-format-preview.c:137
 msgctxt "measurement format"
 msgid "Imperial"
 msgstr "Imperinė"
 
-#: panels/region/cc-format-preview.c:137
+#: panels/region/cc-format-preview.c:139
 msgctxt "measurement format"
 msgid "Metric"
 msgstr "Metrinė"
@@ -6816,21 +6786,26 @@ msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 "Reikia patvirtinti tapatybę nuotoliniams prisijungimui įjungti ar išjungti"
 
-#: panels/sound/cc-alert-chooser.c:152
+#: panels/sound/cc-alert-chooser.c:153
 msgid "Custom"
 msgstr "Pasirinktinė"
 
 #: panels/sound/cc-alert-chooser.ui:12
-msgid "Drip"
-msgstr "Lašėjimas"
+msgid "Click"
+msgstr "Spauskite"
 
 #: panels/sound/cc-alert-chooser.ui:20
-msgid "Glass"
-msgstr "Stiklas"
+#| msgid "Sharing"
+msgid "String"
+msgstr "Eilutė"
 
 #: panels/sound/cc-alert-chooser.ui:28
-msgid "Sonar"
-msgstr "Sonaras"
+msgid "Swing"
+msgstr "Virtimas"
+
+#: panels/sound/cc-alert-chooser.ui:36
+msgid "Hum"
+msgstr "Ūžimas"
 
 #: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:144
 msgid "Balance"
@@ -7846,7 +7821,7 @@ msgid "Failed to add account"
 msgstr "Nepavyko pridėti Pasirinkite paskyros"
 
 #: panels/user-accounts/cc-add-user-dialog.c:679
-#: panels/user-accounts/cc-password-dialog.ui:112
+#: panels/user-accounts/cc-password-dialog.ui:114
 msgid "The passwords do not match."
 msgstr "Slaptažodžiai nesutampa."
 
@@ -8252,27 +8227,27 @@ msgstr "Nepavyko pakeisti slaptažodžio"
 msgid "Change Password"
 msgstr "Keisti slaptažodį"
 
-#: panels/user-accounts/cc-password-dialog.ui:32
+#: panels/user-accounts/cc-password-dialog.ui:34
 msgid "Ch_ange"
 msgstr "Pa_keisti"
 
-#: panels/user-accounts/cc-password-dialog.ui:51
+#: panels/user-accounts/cc-password-dialog.ui:53
 msgid "Current Password"
 msgstr "Dabartinis slaptažodis"
 
-#: panels/user-accounts/cc-password-dialog.ui:66
+#: panels/user-accounts/cc-password-dialog.ui:68
 msgid "New Password"
 msgstr "Naujas slaptažodis"
 
-#: panels/user-accounts/cc-password-dialog.ui:97
+#: panels/user-accounts/cc-password-dialog.ui:99
 msgid "Confirm Password"
 msgstr "Patvirtinkite slaptažodį"
 
-#: panels/user-accounts/cc-password-dialog.ui:151
+#: panels/user-accounts/cc-password-dialog.ui:153
 msgid "Allow user to change their password on next login"
 msgstr "Leisti naudotojui pakeisti slaptažodį kito prisijungimo metu"
 
-#: panels/user-accounts/cc-password-dialog.ui:163
+#: panels/user-accounts/cc-password-dialog.ui:165
 msgid "Set a password now"
 msgstr "Nustatyti slaptažodį dabar"
 
@@ -8708,7 +8683,8 @@ msgstr "Atleiskite, šis naudotojo vardas yra neprieinamas. Bandykite kitą."
 msgid "The username is too long."
 msgstr "Naudotojo vardas per ilgas."
 
-#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-page.ui:40
+#: panels/wacom/button-mapping.ui:7 panels/wacom/cc-wacom-ekr-page.ui:19
+#: panels/wacom/cc-wacom-page.ui:40
 msgid "Map Buttons"
 msgstr "Susieti mygtukus"
 
@@ -8778,8 +8754,14 @@ msgstr "Planšetė, prijungta prie išorinio vaizduoklio"
 msgid "External tablet device"
 msgstr "Išorinis planšetinis įrenginys"
 
+#. translators: this is a drawing tablet pad, i.e. a collection of buttons and knobs
+#: panels/wacom/cc-wacom-ekr-page.ui:9
+#| msgid "External tablet device"
+msgid "External pad device"
+msgstr "Išorinis planšetinis įrenginys"
+
 #. All displays item
-#: panels/wacom/cc-wacom-page.c:608
+#: panels/wacom/cc-wacom-page.c:643
 msgid "All Displays"
 msgstr "Visi vaizduokliai"
 
@@ -8998,32 +8980,26 @@ msgid "4G Only"
 msgstr "tik 4G"
 
 #: panels/wwan/cc-wwan-device.c:997
-#| msgid "2G Only"
 msgid "5G Only"
 msgstr "tik 5G"
 
 #: panels/wwan/cc-wwan-device.c:1007
-#| msgid "2G, 3G, 4G (Preferred)"
 msgid "2G, 3G, 4G, 5G (Preferred)"
 msgstr "2G, 3G, 4G, 5G (pageidautina)"
 
 #: panels/wwan/cc-wwan-device.c:1009
-#| msgid "2G, 3G, 4G (Preferred)"
 msgid "2G, 3G, 4G (Preferred), 5G"
 msgstr "2G, 3G, 4G (pageidautina), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1011
-#| msgid "2G, 3G (Preferred), 4G"
 msgid "2G, 3G (Preferred), 4G, 5G"
 msgstr "2G, 3G (pageidautina), 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1013
-#| msgid "2G (Preferred), 3G, 4G"
 msgid "2G (Preferred), 3G, 4G, 5G"
 msgstr "2G (pageidautina), 3G, 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1015
-#| msgid "2G, 3G, 4G"
 msgid "2G, 3G, 4G, 5G"
 msgstr "2G, 3G, 4G, 5G"
 
@@ -9044,62 +9020,50 @@ msgid "2G, 3G, 4G"
 msgstr "2G, 3G, 4G"
 
 #: panels/wwan/cc-wwan-device.c:1035
-#| msgid "3G, 4G (Preferred)"
 msgid "3G, 4G, 5G (Preferred)"
 msgstr "3G, 4G, 5G (pageidautina)"
 
 #: panels/wwan/cc-wwan-device.c:1037
-#| msgid "3G, 4G (Preferred)"
 msgid "3G, 4G (Preferred), 5G"
 msgstr "3G, 4G (pageidautina), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1039
-#| msgid "3G (Preferred), 4G"
 msgid "3G (Preferred), 4G, 5G"
 msgstr "3G (pageidautina), 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1041
-#| msgid "3G, 4G"
 msgid "3G, 4G, 5G"
 msgstr "3G, 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1048
-#| msgid "2G, 3G, 4G (Preferred)"
 msgid "2G, 4G, 5G (Preferred)"
 msgstr "2G, 4G, 5G (pageidautina)"
 
 #: panels/wwan/cc-wwan-device.c:1050
-#| msgid "2G, 3G (Preferred), 4G"
 msgid "2G, 4G (Preferred), 5G"
 msgstr "2G, 4G (pageidautina), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1052
-#| msgid "2G (Preferred), 3G, 4G"
 msgid "2G (Preferred), 4G, 5G"
 msgstr "2G (pageidautina), 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1054
-#| msgid "2G, 3G, 4G"
 msgid "2G, 4G, 5G"
 msgstr "2G, 4G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1061
-#| msgid "2G, 3G, 4G (Preferred)"
 msgid "2G, 3G, 5G (Preferred)"
 msgstr "2G, 3G, 5G (pageidautina)"
 
 #: panels/wwan/cc-wwan-device.c:1063
-#| msgid "2G, 3G (Preferred), 4G"
 msgid "2G, 3G (Preferred), 5G"
 msgstr "2G, 3G (pageidautina), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1065
-#| msgid "2G (Preferred), 3G, 4G"
 msgid "2G (Preferred), 3G, 5G"
 msgstr "2G (pageidautina), 3G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1067
-#| msgid "2G, 3G, 4G"
 msgid "2G, 3G, 5G"
 msgstr "2G, 3G, 5G"
 
@@ -9140,42 +9104,34 @@ msgid "2G, 3G"
 msgstr "2G, 3G"
 
 #: panels/wwan/cc-wwan-device.c:1103
-#| msgid "2G, 4G (Preferred)"
 msgid "2G, 5G (Preferred)"
 msgstr "2G, 5G (pageidautina)"
 
 #: panels/wwan/cc-wwan-device.c:1105
-#| msgid "2G (Preferred), 4G"
 msgid "2G (Preferred), 5G"
 msgstr "2G (pageidautina), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1107
-#| msgid "2G, 4G"
 msgid "2G, 5G"
 msgstr "2G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1113
-#| msgid "3G, 4G (Preferred)"
 msgid "3G, 5G (Preferred)"
 msgstr "3G, 5G (pageidautina)"
 
 #: panels/wwan/cc-wwan-device.c:1115
-#| msgid "3G (Preferred), 4G"
 msgid "3G (Preferred), 5G"
 msgstr "3G (pageidautina), 5G"
 
 #: panels/wwan/cc-wwan-device.c:1117
-#| msgid "3G, 4G"
 msgid "3G, 5G"
 msgstr "3G, 5G"
 
 #: panels/wwan/cc-wwan-device.c:1123
-#| msgid "3G, 4G (Preferred)"
 msgid "4G, 5G (Preferred)"
 msgstr "4G, 5G (pageidautina)"
 
 #: panels/wwan/cc-wwan-device.c:1125
-#| msgid "3G (Preferred), 4G"
 msgid "4G (Preferred), 5G"
 msgstr "4G (pageidautina), 5G"
 
@@ -9639,6 +9595,31 @@ msgstr[2] "%u įvesčių"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Sistemos garsai"
+
+#~| msgid "Take a screenshot of a window"
+#~ msgid "Take screenshots of the desktop."
+#~ msgstr "Padaryti darbalaukio nuotrauką."
+
+#~ msgid "Error: unable to determine HSI level."
+#~ msgstr "Klaida: nepavyko nustatyti HSI lygio."
+
+#~ msgid "Error: unable to determine Incorrect HSI level."
+#~ msgstr "Klaida: nepavyksta nustatyti neteisingo HSI lygio."
+
+#~ msgid "DER or PEM certificates (*.der, *.pem, *.crt, *.cer)"
+#~ msgstr "DER arba PEM liudijimai (*.der, *.pem, *.crt, *.cer)"
+
+#~ msgid "Add a Printer…"
+#~ msgstr "Pridėti spausdintuvą…"
+
+#~ msgid "Drip"
+#~ msgstr "Lašėjimas"
+
+#~ msgid "Glass"
+#~ msgstr "Stiklas"
+
+#~ msgid "Sonar"
+#~ msgstr "Sonaras"
 
 #~ msgid "No Protection"
 #~ msgstr "Nėra apsaugos"
