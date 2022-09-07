@@ -339,7 +339,7 @@ flatpak:
     - mv data/icons/hicolor/scalable/apps/$OLD_APPID.svg data/icons/hicolor/scalable/apps/$APPID.svg
     - mv data/icons/hicolor/symbolic/apps/$OLD_APPID-symbolic.svg data/icons/hicolor/symbolic/apps/$APPID-symbolic.svg
 
-    - flatpak-builder --bundle-sources --repo=devel build ${MANIFEST_PATH}
+    - flatpak-builder --bundle-sources --disable-rofiles-fuse --repo=devel build ${MANIFEST_PATH}
     - flatpak build-bundle devel ${BUNDLE} --runtime-repo=${RUNTIME_REPO} ${APPID}
 
   cache:
