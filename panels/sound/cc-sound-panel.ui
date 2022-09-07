@@ -36,6 +36,17 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Output</property>
+            <property name="header-suffix">
+              <object class="GtkBox">
+                <property name="spacing">24</property>
+                <child>
+                  <object class="CcLevelBar" id="output_level_bar">
+                    <property name="valign">center</property>
+                    <property name="width-request">40</property>
+                  </object>
+                </child>
+              </object>
+            </property>
             <child>
               <object class="GtkListBox" id="output_list_box">
                 <property name="selection_mode">none</property>
@@ -61,31 +72,21 @@
                         </child>
                         <child>
                           <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="hexpand">True</property>
-                            <property name="spacing">9</property>
+                            <property name="spacing">6</property>
                             <child>
-                              <object class="GtkBox">
-                                <property name="spacing">6</property>
-                                <child>
-                                  <object class="CcDeviceComboBox" id="output_device_combo_box">
-                                    <property name="hexpand">True</property>
-                                    <accessibility>
-                                      <relation name="labelled-by">output_device_label</relation>
-                                    </accessibility>
-                                    <signal name="changed" handler="output_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkButton">
-                                    <property name="label" translatable="yes">Test</property>
-                                    <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundPanel" swapped="yes"/>
-                                  </object>
-                                </child>
+                              <object class="CcDeviceComboBox" id="output_device_combo_box">
+                                <property name="hexpand">True</property>
+                                <accessibility>
+                                  <relation name="labelled-by">output_device_label</relation>
+                                </accessibility>
+                                <signal name="changed" handler="output_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
                               </object>
                             </child>
                             <child>
-                              <object class="CcLevelBar" id="output_level_bar" />
+                              <object class="GtkButton">
+                                <property name="label" translatable="yes">Test</property>
+                                <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundPanel" swapped="yes"/>
+                              </object>
                             </child>
                           </object>
                         </child>
@@ -212,6 +213,12 @@
         <child>
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Input</property>
+            <property name="header-suffix">
+              <object class="CcLevelBar" id="input_level_bar">
+                <property name="valign">center</property>
+                <property name="width-request">40</property>
+              </object>
+            </property>
             <child>
               <object class="GtkListBox" id="input_list_box">
                 <property name="selection_mode">none</property>
@@ -248,9 +255,6 @@
                                 </accessibility>
                                 <signal name="changed" handler="input_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
                               </object>
-                            </child>
-                            <child>
-                              <object class="CcLevelBar" id="input_level_bar" />
                             </child>
                           </object>
                         </child>
