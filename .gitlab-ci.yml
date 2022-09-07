@@ -315,19 +315,13 @@ flatpak:
     OLD_APPID: "org.gnome.Settings"
     APPID: "org.gnome.SettingsDevel"
     BUNDLE: "org.gnome.SettingsDevel.flatpak"
-    MANIFEST_PATH: "org.gnome.Settings.json"
-    PATCHES: "build-aux/flatpak/*.patch"
-    PROJECT_FILE: "build-aux/flatpak/org.gnome.Settings.json"
+    MANIFEST_PATH: "build-aux/flatpak/org.gnome.Settings.json"
     PROJECT_ID: "org.gnome.Settings"
     PROJECT_NAME: "gnome-control-center.git"
     RUNTIME_REPO: "https://sdk.gnome.org/gnome-nightly.flatpakrepo"
 
   script:
     - echo "== Flatpak packaging =="
-
-    # Move needed files to the root folder
-    - cp ${PATCHES} . || true
-    - cp ${PROJECT_FILE} ${MANIFEST_PATH}
 
     # Make it a develoment manifest
     - sed -i -n "p; s/$PROJECT_NAME//p" ${MANIFEST_PATH}
