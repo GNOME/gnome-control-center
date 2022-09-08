@@ -97,7 +97,7 @@ set_output_stream (CcSoundPanel   *self,
   gboolean can_fade = FALSE, has_lfe = FALSE;
 
   cc_volume_slider_set_stream (self->output_volume_slider, stream, CC_STREAM_TYPE_OUTPUT);
-  cc_level_bar_set_stream (self->output_level_bar, stream, CC_STREAM_TYPE_OUTPUT);
+  cc_level_bar_set_stream (self->output_level_bar, stream);
 
   if (stream != NULL)
     {
@@ -135,7 +135,7 @@ set_input_stream (CcSoundPanel   *self,
                   GvcMixerStream *stream)
 {
   cc_volume_slider_set_stream (self->input_volume_slider, stream, CC_STREAM_TYPE_INPUT);
-  cc_level_bar_set_stream (self->input_level_bar, stream, CC_STREAM_TYPE_INPUT);
+  cc_level_bar_set_stream (self->input_level_bar, stream);
 }
 
 static void

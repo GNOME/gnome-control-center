@@ -30,7 +30,6 @@ G_BEGIN_DECLS
 G_DECLARE_FINAL_TYPE (CcLevelBar, cc_level_bar, CC, LEVEL_BAR, GtkWidget)
 
 void cc_level_bar_set_stream (CcLevelBar     *bar,
-                              GvcMixerStream *stream,
-                              CcStreamType    type);
+                              GvcMixerStream *stream);
 
 G_END_DECLS
