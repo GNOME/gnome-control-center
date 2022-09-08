@@ -993,7 +993,10 @@ performance_profile_set_active (CcPowerPanel  *self,
   GtkCheckButton *button;
 
   button = cc_power_profile_row_get_radio_button (CC_POWER_PROFILE_ROW (self->power_profiles_row[profile]));
-  g_assert (button);
+  if (!button) {
+    g_warning ("Not setting profile '%s' as it doesn't have a widget", profile_str);
+    return;
+  }
   gtk_check_button_set_active (GTK_CHECK_BUTTON (button), TRUE);
 }
 
