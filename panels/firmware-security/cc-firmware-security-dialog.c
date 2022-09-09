@@ -270,7 +270,6 @@ hsi_create_pg_row (const gchar *icon_name,
     {
       GtkWidget *subrow = adw_action_row_new ();
       g_autofree gchar *str = fu_security_attr_get_description_for_dialog (attr);
-      gtk_widget_add_css_class (subrow, "view");
       adw_action_row_set_subtitle (ADW_ACTION_ROW (subrow), str);
       adw_expander_row_add_row (ADW_EXPANDER_ROW (row), subrow);
       gtk_widget_add_css_class (subrow, "security-description-row");
