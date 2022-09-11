@@ -26,10 +26,6 @@
 
 #include <gio/gdesktopappinfo.h>
 
-#define GNOME_SETTINGS_PANEL_ID_KEY "X-GNOME-Settings-Panel"
-#define GNOME_SETTINGS_PANEL_CATEGORY GNOME_SETTINGS_PANEL_ID_KEY
-#define GNOME_SETTINGS_PANEL_ID_KEYWORDS "Keywords"
-
 struct _CcShellModel
 {
   GtkListStore parent;

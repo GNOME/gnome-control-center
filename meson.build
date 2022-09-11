@@ -267,9 +267,6 @@ gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')
 
-desktop_conf = configuration_data()
-desktop_conf.set('VERSION', meson.project_version())
-
 po_dir = join_paths(meson.source_root(), 'po')
 its_dir = join_paths(meson.source_root(), 'gettext')
 

@@ -19,15 +19,9 @@ panels_list += panel_names
 foreach name: panel_names
   desktop = 'gnome-' + name + '-panel.desktop'
 
-  desktop_in = configure_file(
-    input: desktop + '.in.in',
-    output: desktop + '.in',
-    configuration: desktop_conf
-  )
-
   i18n.merge_file(
     type: 'desktop',
-    input: desktop_in,
+    input: desktop + '.in',
     output: desktop,
     po_dir: po_dir,
     install: true,

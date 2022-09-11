@@ -16,15 +16,9 @@ configure_file(
 
 desktop = 'org.gnome.Settings.desktop'
 
-desktop_in = configure_file(
-          input : desktop + '.in.in',
-         output : desktop + '.in',
-  configuration : desktop_conf
-)
-
 i18n.merge_file(
          type : 'desktop',
-        input : desktop_in,
+        input : desktop + '.in',
        output : desktop,
        po_dir : po_dir,
       install : true,

@@ -3,15 +3,9 @@ deps = common_deps + network_manager_deps + [gcr_dep, polkit_gobject_dep]
 panels_list += cappletname
 desktop = 'gnome-@0@-panel.desktop'.format(cappletname)
 
-desktop_in = configure_file(
-          input : desktop + '.in.in',
-         output : desktop + '.in',
-  configuration : desktop_conf
-)
-
 i18n.merge_file(
          type : 'desktop',
-        input : desktop_in,
+        input : desktop + '.in',
        output : desktop,
        po_dir : po_dir,
       install : true,
