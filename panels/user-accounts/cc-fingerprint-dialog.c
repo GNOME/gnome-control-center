@@ -276,32 +276,6 @@ disconnect_device_signals (CcFingerprintDialog *self)
 }
 
 static void
-cc_fingerprint_dialog_dispose (GObject *object)
-{
-  CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (object);
-
-  g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
-
-  if (self->device && (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
-    {
-      disconnect_device_signals (self);
-
-      if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
-        cc_fprintd_device_call_enroll_stop_sync (self->device, NULL, NULL);
-      cc_fprintd_device_call_release (self->device, NULL, NULL, NULL);
-    }
-
-  g_clear_object (&self->manager);
-  g_clear_object (&self->device);
-  g_clear_pointer (&self->enrolled_fingers, g_strfreev);
-
-  g_cancellable_cancel (self->cancellable);
-  g_clear_object (&self->cancellable);
-
-  G_OBJECT_CLASS (cc_fingerprint_dialog_parent_class)->dispose (object);
-}
-
-static void
 cc_fingerprint_dialog_get_property (GObject    *object,
                                     guint       prop_id,
                                     GValue     *value,
@@ -1466,11 +1440,32 @@ done_button_clicked_cb (CcFingerprintDialog *self)
   enroll_stop (self);
 }
 
-static void
-fingerprint_dialog_delete_cb (CcFingerprintDialog *self)
+static gboolean
+cc_fingerprint_dialog_close_request (GtkWindow *window)
 {
+  CcFingerprintDialog *self = CC_FINGERPRINT_DIALOG (window);
+
   cc_fingerprint_manager_update_state (self->manager, NULL, NULL);
-  gtk_window_destroy (GTK_WINDOW (self));
+
+  g_clear_handle_id (&self->enroll_stage_passed_id, g_source_remove);
+
+  if (self->device && (self->dialog_state & DIALOG_STATE_DEVICE_CLAIMED))
+    {
+      disconnect_device_signals (self);
+
+      if (self->dialog_state & DIALOG_STATE_DEVICE_ENROLLING)
+        cc_fprintd_device_call_enroll_stop_sync (self->device, NULL, NULL);
+      cc_fprintd_device_call_release (self->device, NULL, NULL, NULL);
+    }
+
+  g_clear_object (&self->manager);
+  g_clear_object (&self->device);
+  g_clear_pointer (&self->enrolled_fingers, g_strfreev);
+
+  g_cancellable_cancel (self->cancellable);
+  g_clear_object (&self->cancellable);
+
+  return GTK_WINDOW_CLASS (cc_fingerprint_dialog_parent_class)->close_request (window);
 }
 
 static void
@@ -1478,14 +1473,16 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+  GtkWindowClass *window_class = GTK_WINDOW_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class,
     "/org/gnome/control-center/user-accounts/cc-fingerprint-dialog.ui");
 
   object_class->constructed = cc_fingerprint_dialog_constructed;
-  object_class->dispose = cc_fingerprint_dialog_dispose;
   object_class->get_property = cc_fingerprint_dialog_get_property;
   object_class->set_property = cc_fingerprint_dialog_set_property;
+
+  window_class->close_request = cc_fingerprint_dialog_close_request;
 
   properties[PROP_MANAGER] =
     g_param_spec_object ("fingerprint-manager",
@@ -1525,7 +1522,6 @@ cc_fingerprint_dialog_class_init (CcFingerprintDialogClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, confirm_deletion_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, delete_prints_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, done_button_clicked_cb);
-  gtk_widget_class_bind_template_callback (widget_class, fingerprint_dialog_delete_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_print_activated_cb);
   gtk_widget_class_bind_template_callback (widget_class, select_device_row);
 }
