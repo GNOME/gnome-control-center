@@ -13,7 +13,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
 "POT-Creation-Date: 2022-09-09 16:38+0000\n"
-"PO-Revision-Date: 2022-09-17 23:39+0200\n"
+"PO-Revision-Date: 2022-09-19 22:15+0200\n"
 "Last-Translator: Matej Urbančič <mateju@src.gnome.org>\n"
 "Language-Team: Slovenian GNOME Translation Team <gnome-si@googlegroups.com>\n"
 "Language: sl_SI\n"
@@ -115,10 +115,9 @@ msgstr "Program <b>%s</b> omogoča odpiranje navedenih datotek in povezav."
 
 #. Translators: '%s' is the formatted size, e.g. "26.2 MB"
 #: panels/applications/cc-applications-panel.c:1251
-#, fuzzy, c-format
-#| msgid "%s of disk space used"
+#, c-format
 msgid "%s of disk space used."
-msgstr "Uporabljenega je %s prostora na disku"
+msgstr "Uporabljenega je %s prostora na disku."
 
 #. List of applications.
 #: panels/applications/cc-applications-panel.c:1415
@@ -192,8 +191,6 @@ msgid "Show system notifications."
 msgstr "Prikaz sistemskih obvestil."
 
 #: panels/applications/cc-applications-panel.ui:133
-#, fuzzy
-#| msgid "Run in background"
 msgid "Run in Background"
 msgstr "Zaženi v ozadju"
 
@@ -206,10 +203,8 @@ msgid "Screenshots"
 msgstr "Zajemanje zaslona"
 
 #: panels/applications/cc-applications-panel.ui:141
-#, fuzzy
-#| msgid "Take pictures with the camera."
 msgid "Take pictures of the screen at any time."
-msgstr "Zajemanje slik s kamero."
+msgstr "Zajemanje zaslonskih slik v vsakem trenutku."
 
 #: panels/applications/cc-applications-panel.ui:147
 msgid "Change Wallpaper"
@@ -447,10 +442,9 @@ msgstr "Spremeni sliko ozadja aku barve vmesnika"
 
 #. Translators: Search terms to find the Appearance panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/background/gnome-background-panel.desktop.in.in:15
-#, fuzzy
-#| msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;"
 msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
-msgstr "Ozadje;slika ozadja;zaslon;Namizje;Stil;Slog;Temna;Svetla;tema;"
+msgstr ""
+"ozadje;slika ozadja;zaslon;Namizje;Stil;Slog;Temna;Svetla;tema;videz;oblika;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
 #: panels/datetime/cc-datetime-panel.ui:172
@@ -1567,10 +1561,8 @@ msgstr "Pošiljajte poročila o težavah"
 
 #. Translators: Search terms to find the Diagnostics panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in.in:20
-#, fuzzy
-#| msgid "Diagnostics"
 msgid "diagnostics;crash;"
-msgstr "Diagnostika napak"
+msgstr "diagnostika;spori;napake;sesutje;"
 
 #: panels/display/cc-display-panel.c:492
 #: panels/notifications/cc-notifications-panel.c:217
@@ -1704,16 +1696,16 @@ msgid "Scale"
 msgstr "Prilagodi velikost"
 
 #: panels/display/cc-night-light-page.ui:22
-#, fuzzy
-#| msgid "Night Light"
 msgid "Night Light unavailable"
-msgstr "Nočna osvetlitev"
+msgstr "Nočna osvetlitev ni na voljo"
 
 #: panels/display/cc-night-light-page.ui:33
 msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely"
 msgstr ""
+"To je lahko posledica uporabljenega grafičnega gonilnika ali namizja, ki se "
+"uporablja na daljavo."
 
 #. Inhibit the redshift functionality until the next day starts
 #: panels/display/cc-night-light-page.ui:58
@@ -1856,10 +1848,8 @@ msgstr ""
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:99
-#, fuzzy
-#| msgid "Camera is Turned Off"
 msgid "Secure Boot is Turned Off"
-msgstr "Kamera je izklopljena"
+msgstr "Varni zagon je izklopljen"
 
 #. TRANSLATORS: this is the first section of the description.
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:103
@@ -1877,6 +1867,9 @@ msgid ""
 "settings (BIOS). For help, contact your hardware manufacturer or IT support "
 "provider."
 msgstr ""
+"Varen zagon lahko omogočite v nastavitvah vdelane programske opreme UEFI "
+"(BIOS) računalnika. Za pomoč se obrnite na proizvajalca strojne opreme ali "
+"ponudnika skrbniške podpore."
 
 #: panels/firmware-security/cc-firmware-security-boot-dialog.ui:53
 msgid ""
@@ -1885,6 +1878,10 @@ msgid ""
 "\n"
 "For more information, contact the hardware manufacturer or IT support."
 msgstr ""
+"Varen zagon preprečuje nalaganje zlonamerne programske opreme ob zagonu "
+"naprave.\n"
+"\n"
+"Za več podrobnosti se obrnite na proizvajalca strojne opreme ali podporo."
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:96
 #: panels/firmware-security/cc-firmware-security-dialog.c:98
@@ -1902,7 +1899,7 @@ msgstr "Spodletelo"
 #: panels/firmware-security/cc-firmware-security-dialog.c:137
 #, c-format
 msgid "Device conforms to HSI level %d"
-msgstr ""
+msgstr "Naprava podpira raven varnosti HSI %d"
 
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:149
@@ -1916,6 +1913,9 @@ msgid ""
 "be because of a hardware or firmware configuration issue. It is recommended "
 "to contact your IT support provider."
 msgstr ""
+"Naprava nima ustrezne zaščite pred strojnimi varnostnimi težavami. Vzrok so "
+"lahko nastavitve strojne ali programske opreme. Priporočljivo se je obrniti "
+"na podporo."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:158
@@ -1930,6 +1930,8 @@ msgid ""
 "the lowest device security level and only provides protection against simple "
 "security threats."
 msgstr ""
+"Naprava ima le najmanjšo zaščito pred strojnimi varnostnimi težavamiNajnižja "
+"raven zagotavlja le zaščito pred preprostimi varnostnimi grožnjami."
 
 #. TRANSLATORS: in reference to firmware protection: 2/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:167
@@ -1943,6 +1945,8 @@ msgid ""
 "This device has basic protection against hardware security issues. This "
 "provides protection against some common security threats."
 msgstr ""
+"Naprava ima osnovno zaščito pred strojnimi varnostnimi težavami. Zagotavlja "
+"zaščito pred običajnimi varnostnimi grožnjami.\\"
 
 #. TRANSLATORS: in reference to firmware protection: 3/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:176
@@ -1968,7 +1972,7 @@ msgstr "Varnostna raven"
 #: panels/firmware-security/cc-firmware-security-dialog.c:186
 #: panels/firmware-security/cc-firmware-security-panel.c:523
 msgid "Security levels are not available for this device."
-msgstr ""
+msgstr "Za to napravo ravni varnosti niso na voljo"
 
 #. TRANSLATORS: hardware manufacturer as in OEM
 #: panels/firmware-security/cc-firmware-security-dialog.c:201
@@ -1976,6 +1980,7 @@ msgstr ""
 #: panels/firmware-security/cc-firmware-security-dialog.c:218
 msgid "Contact your hardware manufacturer for help with security updates."
 msgstr ""
+"Za pomoč pri varnostnih posodobitvah stopite v stik s ponudnikom strojne."
 
 #. TRANSLATORS: support technician as in someone with root
 #: panels/firmware-security/cc-firmware-security-dialog.c:203
@@ -2018,7 +2023,7 @@ msgstr "Zaznane so težave v delovanju varnega zagons"
 
 #: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Some protection when the device is started."
-msgstr ""
+msgstr "Osnovna zaščita, ko je naprava zagnana."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:125
 msgid "Secure Boot is Off"
@@ -2026,7 +2031,7 @@ msgstr "Varni zagon je izklopljen"
 
 #: panels/firmware-security/cc-firmware-security-panel.c:126
 msgid "No protection when the device is started."
-msgstr ""
+msgstr "Ni zaščite, ko je naprava zagnana."
 
 #. TRANSLATORS: this is to explain an event that has already happened
 #: panels/firmware-security/cc-firmware-security-panel.c:145
@@ -2052,7 +2057,7 @@ msgstr ""
 
 #: panels/firmware-security/cc-firmware-security-panel.c:487
 msgid "Exposed to serious security threats."
-msgstr ""
+msgstr "Izpostavljeno resnim varnostnim tveganjem."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:494
 msgid "Limited protection against simple security threats."
@@ -2078,31 +2083,23 @@ msgstr "Ni dogodkov"
 
 #. TRANSLATORS: Title: firmware refers to the flash chip in the computer
 #: panels/firmware-security/cc-firmware-security-utils.c:37
-#, fuzzy
-#| msgid "Firmware Version"
 msgid "Firmware Write Protection"
-msgstr "Različica strojne programske opreme"
+msgstr "Strojna programska zaščita pisanja"
 
 #. TRANSLATORS: Title: firmware refers to the flash chip in the computer
 #: panels/firmware-security/cc-firmware-security-utils.c:42
-#, fuzzy
-#| msgid "Firmware Version"
 msgid "Firmware Write Protection Lock"
-msgstr "Različica strojne programske opreme"
+msgstr "Zaklep strojne programske zaščite pisanja"
 
 #. TRANSLATORS: Title: SPI refers to the flash chip in the computer
 #: panels/firmware-security/cc-firmware-security-utils.c:47
-#, fuzzy
-#| msgid "Firmware Version"
 msgid "Firmware BIOS Region"
-msgstr "Različica strojne programske opreme"
+msgstr "Območje strojne programske opreme BIOS"
 
 #. TRANSLATORS: Title: firmware refers to the flash chip in the computer
 #: panels/firmware-security/cc-firmware-security-utils.c:52
-#, fuzzy
-#| msgid "Firmware Version"
 msgid "Firmware BIOS Descriptor"
-msgstr "Različica strojne programske opreme"
+msgstr "Opisnik strojne programske opreme BIOS"
 
 #. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
 #: panels/firmware-security/cc-firmware-security-utils.c:57
@@ -2141,13 +2138,13 @@ msgstr ""
 #. * enabled means supported by the processor
 #: panels/firmware-security/cc-firmware-security-utils.c:91
 msgid "Intel CET Enabled"
-msgstr ""
+msgstr "Omogočena podpora Intel CET"
 
 #. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
 #. * active means being used by the OS
 #: panels/firmware-security/cc-firmware-security-utils.c:97
 msgid "Intel CET Active"
-msgstr ""
+msgstr "Podpora Intel CET je dejavna"
 
 #. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
 #: panels/firmware-security/cc-firmware-security-utils.c:102
@@ -2182,17 +2179,13 @@ msgstr "Izmenjevalni razdelek Linux"
 
 #. TRANSLATORS: Title: sleep state
 #: panels/firmware-security/cc-firmware-security-utils.c:133
-#, fuzzy
-#| msgid "Suspend"
 msgid "Suspend To RAM"
-msgstr "Zaustavi"
+msgstr "Premakni v pripravljenost s pomnilnikom RAM"
 
 #. TRANSLATORS: Title: a better sleep state
 #: panels/firmware-security/cc-firmware-security-utils.c:138
-#, fuzzy
-#| msgid "Suspend"
 msgid "Suspend To Idle"
-msgstr "Zaustavi"
+msgstr "Premakni v stanje nedejavnosti seje"
 
 #. TRANSLATORS: Title: PK is the 'platform key' for the machine
 #: panels/firmware-security/cc-firmware-security-utils.c:143
@@ -2224,19 +2217,19 @@ msgstr "TPM v2.0"
 #. TRANSLATORS: Title: MEI = Intel Management Engine
 #: panels/firmware-security/cc-firmware-security-utils.c:168
 msgid "Intel Management Engine Manufacturing Mode"
-msgstr ""
+msgstr "Proizvajalski način upravljalskega okolja Intel"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine, and the "override" is enabled
 #. * with a jumper -- luckily it is probably not accessible to end users on consumer
 #. * boards
 #: panels/firmware-security/cc-firmware-security-utils.c:175
 msgid "Intel Management Engine Override"
-msgstr ""
+msgstr "Prepis upravljalskega okolja Intel"
 
 #. TRANSLATORS: Title: MEI = Intel Management Engine
 #: panels/firmware-security/cc-firmware-security-utils.c:180
 msgid "Intel Management Engine Version"
-msgstr ""
+msgstr "Različica upravljalskega okolja Intel"
 
 #. TRANSLATORS: Title: if firmware updates are available
 #: panels/firmware-security/cc-firmware-security-utils.c:185
@@ -2245,22 +2238,18 @@ msgstr "Posodobitve strojne programske opreme"
 
 #. TRANSLATORS: Title: if we can verify the firmware checksums
 #: panels/firmware-security/cc-firmware-security-utils.c:190
-#, fuzzy
-#| msgid "Firmware Version"
 msgid "Firmware Attestation"
-msgstr "Različica strojne programske opreme"
+msgstr ""
 
 #. TRANSLATORS: Title: if the fwupd plugins are all present and correct
 #: panels/firmware-security/cc-firmware-security-utils.c:195
-#, fuzzy
-#| msgid "Firmware Version"
 msgid "Firmware Updater Verification"
-msgstr "Različica strojne programske opreme"
+msgstr ""
 
 #. TRANSLATORS: Title: Allows debugging of parts using proprietary hardware
 #: panels/firmware-security/cc-firmware-security-utils.c:201
 msgid "Platform Debugging"
-msgstr ""
+msgstr "Razhroščevanje okolja"
 
 #. TRANSLATORS: Title: if fwupd supports HSI on this chip
 #: panels/firmware-security/cc-firmware-security-utils.c:206
@@ -2274,22 +2263,18 @@ msgstr ""
 
 #. TRANSLATORS: Title: if hardware enforces control of SPI replays
 #: panels/firmware-security/cc-firmware-security-utils.c:216
-#, fuzzy
-#| msgid "Firmware Version"
 msgid "AMD Firmware Replay Protection"
-msgstr "Različica strojne programske opreme"
+msgstr ""
 
 #. TRANSLATORS: Title: if hardware enforces control of SPI writes
 #: panels/firmware-security/cc-firmware-security-utils.c:221
-#, fuzzy
-#| msgid "Firmware Version"
 msgid "AMD Firmware Write Protection"
-msgstr "Različica strojne programske opreme"
+msgstr "Strojna programska zaščita pisanja AMD"
 
 #. TRANSLATORS: Title: if the part has been fused
 #: panels/firmware-security/cc-firmware-security-utils.c:226
 msgid "Fused Platform"
-msgstr ""
+msgstr "Okolje Fused"
 
 #. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
 #: panels/firmware-security/cc-firmware-security-utils.c:237
@@ -2333,10 +2318,8 @@ msgstr ""
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
 #: panels/firmware-security/cc-firmware-security-utils.c:282
-#, fuzzy
-#| msgid "Not calibrated"
 msgid "Not Tainted"
-msgstr "Ni umerjeno"
+msgstr ""
 
 #. TRANSLATORS: the feature can be detected.
 #: panels/firmware-security/cc-firmware-security-utils.c:287
@@ -3141,10 +3124,8 @@ msgid "Tap to Click"
 msgstr "Udarjanje za klik"
 
 #: panels/mouse/cc-mouse-panel.ui:150
-#, fuzzy
-#| msgid "Tap to _click"
 msgid "Tap to click"
-msgstr "Udarjanje za _klik"
+msgstr "Udarjanje za klik"
 
 #: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:164
 msgid "Two-finger Scrolling"
@@ -3281,13 +3262,11 @@ msgstr "Upravljanje nastavitev za učinkovito delo in večopravilnost"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/multitasking/gnome-multitasking-panel.desktop.in.in:15
-#, fuzzy
-#| msgid "Multitasking;Multitask;Productivity;Customize;Desktop;"
 msgid ""
 "Multitasking;Multitask;Productivity;Customize;Desktop;Hot Corner;Workspaces;"
 msgstr ""
 "Multitasking;Multitask;Productivity;Customize;Desktop;Namizje;Večopravilnost;"
-"Učinkovitost;Prilagajanje;Delo;"
+"Učinkovitost;Prilagajanje;Delo;delovne površine;vroči kot;kot;namizja;"
 
 #: panels/network/cc-network-panel.c:662 panels/network/cc-wifi-panel.ui:303
 msgid "Oops, something has gone wrong. Please contact your software vendor."
@@ -3896,7 +3875,7 @@ msgstr "Samodejni DNS"
 #: panels/network/connection-editor/ip4-page.ui:192
 #: panels/network/connection-editor/ip6-page.ui:202
 msgid "DNS server address(es)"
-msgstr ""
+msgstr "Naslovi strežnika DNS"
 
 #: panels/network/connection-editor/ip4-page.ui:200
 #: panels/network/connection-editor/ip6-page.ui:210
@@ -5525,6 +5504,8 @@ msgstr ""
 #: panels/printers/pp-details-dialog.ui:69
 msgid "Printer names cannot contain SPACE, TAB, #, or /"
 msgstr ""
+"Imena tiskalnika ne smejo vsebovati presledka, tabulatorja, lojtre (#) ali "
+"poševnice (/)."
 
 #: panels/printers/pp-details-dialog.ui:89 panels/printers/printer-entry.ui:211
 msgid "Location"
@@ -6168,10 +6149,6 @@ msgid "Logout…"
 msgstr "Odjava …"
 
 #: panels/region/cc-region-panel.ui:45
-#, fuzzy
-#| msgid ""
-#| "The language setting is used for interface text and web pages. Formats is "
-#| "used for numbers, dates, and currencies."
 msgid ""
 "The language setting is used for interface text and web pages. Formats are "
 "used for numbers, dates, and currencies."
@@ -6666,10 +6643,8 @@ msgstr ""
 "%s"
 
 #: panels/sharing/cc-sharing-panel.c:942
-#, fuzzy
-#| msgid "Personal File Sharing"
 msgid "Enable personal media sharing"
-msgstr "Osebna souporaba datotek"
+msgstr "Omogoči osebno souporabo datotek"
 
 #: panels/sharing/cc-sharing-panel.c:1308
 msgid "Device name copied"
@@ -6793,16 +6768,12 @@ msgid "Encryption Fingerprint"
 msgstr "Prstni odtis šifriranja"
 
 #: panels/sharing/cc-sharing-panel.ui:435
-#, fuzzy
-#| msgid ""
-#| "The encryption fingerprint can be seen in connecting clients and should "
-#| "be identical"
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr ""
-"Šifrirni prstni odtis je viden v programih, ki omogočajo povezovanje in mora "
-"biti enak vpisanemu"
+"Šifrirni prstni odtis je viden v programih, ki omogočajo povezovanje, in "
+"mora biti povsod enak."
 
 #: panels/sharing/cc-sharing-panel.ui:467
 msgid "Media Sharing"
@@ -6887,10 +6858,8 @@ msgid "System Volume"
 msgstr "Sistemska glasnost"
 
 #: panels/sound/cc-sound-panel.ui:12
-#, fuzzy
-#| msgid "System Volume"
 msgid "Master volume"
-msgstr "Sistemska glasnost"
+msgstr ""
 
 #: panels/sound/cc-sound-panel.ui:28
 msgid "Volume Levels"
