@@ -727,6 +727,11 @@ vpn_import_complete (NMConnection *connection, gpointer user_data)
         else
                 complete_vpn_connection (self, connection, NM_TYPE_SETTING_VPN);
         
+        /* Mark the connection as private to this user, and non-autoconnect */
+        s_con = nm_connection_get_setting_connection (connection);
+        g_object_set (s_con, NM_SETTING_CONNECTION_AUTOCONNECT, FALSE, NULL);
+        nm_setting_connection_add_permission (s_con, "user", g_get_user_name (), NULL);
+
         finish_add_connection (self, connection);
 }
 
