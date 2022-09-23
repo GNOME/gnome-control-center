@@ -82,12 +82,19 @@ nm_device_refresh_vpn_ui (NetVpn *self)
                         a = (NMActiveConnection*)acs->pdata[i];
 
                         auuid = nm_active_connection_get_uuid (a);
-                        if (NM_IS_VPN_CONNECTION (a) && strcmp (auuid, uuid) == 0) {
+                        if (strcmp (auuid, uuid) == 0) {
+                                if (NM_IS_VPN_CONNECTION (a))
+                                        state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
+                                else if (nm_is_wireguard_connection (a))
+                                        state = nm_active_connection_get_state (a);
+                                else {
+                                        /* Unknown/Unhandled type */
+                                        break;
+                                }
                                 self->active_connection = g_object_ref (a);
                                 g_signal_connect_object (a, "notify::vpn-state",
                                                          G_CALLBACK (nm_device_refresh_vpn_ui),
                                                          self, G_CONNECT_SWAPPED);
-                                state = nm_vpn_connection_get_vpn_state (NM_VPN_CONNECTION (a));
                                 break;
                         }
                 }
@@ -225,4 +232,15 @@ net_vpn_get_connection (NetVpn *self)
 {
         g_return_val_if_fail (NET_IS_VPN (self), NULL);
         return self->connection;
+}
+
+gboolean
+nm_is_wireguard_connection (NMActiveConnection *c) {
+        const GPtrArray *devices;
+        devices = nm_active_connection_get_devices (c);
+        for (int j = 0; devices && j < devices->len; j++) {
+                if (NM_IS_DEVICE_WIREGUARD (g_ptr_array_index (devices, j)))
+                        return TRUE;
+        }
+        return FALSE;
 }

@@ -37,6 +37,7 @@
 #include "ce-page-ethernet.h"
 #include "ce-page-8021x-security.h"
 #include "ce-page-vpn.h"
+#include "ce-page-wireguard.h"
 #include "vpn-helpers.h"
 
 enum {
@@ -581,6 +582,7 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         gboolean is_wired;
         gboolean is_wifi;
         gboolean is_vpn;
+        gboolean is_wireguard;
 
         self->is_new_connection = !nm_client_get_connection_by_uuid (self->client,
                                                                        nm_connection_get_uuid (connection));
@@ -603,6 +605,7 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
         is_wired = g_str_equal (type, NM_SETTING_WIRED_SETTING_NAME);
         is_wifi = g_str_equal (type, NM_SETTING_WIRELESS_SETTING_NAME);
         is_vpn = g_str_equal (type, NM_SETTING_VPN_SETTING_NAME);
+        is_wireguard = g_str_equal (type, NM_SETTING_WIREGUARD_SETTING_NAME);
 
         if (!self->is_new_connection)
                 add_page (self, CE_PAGE (ce_page_details_new (self->connection, self->device, self->ap, self)));
@@ -613,6 +616,8 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
                 add_page (self, CE_PAGE (ce_page_ethernet_new (self->connection, self->client)));
         else if (is_vpn)
                 add_page (self, CE_PAGE (ce_page_vpn_new (self->connection)));
+        else if (is_wireguard)
+                add_page (self, CE_PAGE (ce_page_wireguard_new (self->connection)));
         else {
                 /* Unsupported type */
                 net_connection_editor_do_fallback (self, type);
@@ -643,7 +648,9 @@ net_connection_editor_set_connection (NetConnectionEditor *self,
 }
 
 static NMConnection *
-complete_vpn_connection (NetConnectionEditor *self, NMConnection *connection)
+complete_vpn_connection (NetConnectionEditor *self,
+                         NMConnection *connection,
+                         GType setting_type)
 {
         NMSettingConnection *s_con;
         NMSetting *s_type;
@@ -675,9 +682,9 @@ complete_vpn_connection (NetConnectionEditor *self, NMConnection *connection)
                               NULL);
         }
 
-        s_type = nm_connection_get_setting (connection, NM_TYPE_SETTING_VPN);
+        s_type = nm_connection_get_setting (connection, setting_type);
         if (!s_type) {
-                s_type = g_object_new (NM_TYPE_SETTING_VPN, NULL);
+                s_type = g_object_new (setting_type, NULL);
                 nm_connection_add_setting (connection, s_type);
         }
 
@@ -705,6 +712,8 @@ static void
 vpn_import_complete (NMConnection *connection, gpointer user_data)
 {
         NetConnectionEditor *self = user_data;
+        NMSetting *s_type = NULL;
+        NMSettingConnection *s_con;
 
         if (!connection) {
                 /* The import code shows its own error dialogs. */
@@ -712,7 +721,12 @@ vpn_import_complete (NMConnection *connection, gpointer user_data)
                 return;
         }
 
-        complete_vpn_connection (self, connection);
+        s_type = nm_connection_get_setting (connection, NM_TYPE_SETTING_WIREGUARD);
+        if (s_type)
+                complete_vpn_connection (self, connection, NM_TYPE_SETTING_WIREGUARD);
+        else
+                complete_vpn_connection (self, connection, NM_TYPE_SETTING_VPN);
+        
         finish_add_connection (self, connection);
 }
 
@@ -721,17 +735,22 @@ vpn_type_activated (NetConnectionEditor *self, GtkWidget *row)
 {
         const char *service_name = g_object_get_data (G_OBJECT (row), "service_name");
         NMConnection *connection;
-        NMSettingVpn *s_vpn;
+        NMSettingVpn *s_vpn = NULL;
         NMSettingConnection *s_con;
+        GType s_type = NM_TYPE_SETTING_VPN;
 
         if (!strcmp (service_name, "import")) {
                 vpn_import (GTK_WINDOW (self), vpn_import_complete, self);
                 return;
+        } else if (!strcmp (service_name, "wireguard")) {
+                s_type = NM_TYPE_SETTING_WIREGUARD;
         }
 
-        connection = complete_vpn_connection (self, NULL);
-        s_vpn = nm_connection_get_setting_vpn (connection);
-        g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_name, NULL);
+        connection = complete_vpn_connection (self, NULL, s_type);
+        if (s_type == NM_TYPE_SETTING_VPN) {
+                s_vpn = nm_connection_get_setting_vpn (connection);
+                g_object_set (s_vpn, NM_SETTING_VPN_SERVICE_TYPE, service_name, NULL);
+        }
 
         /* Mark the connection as private to this user, and non-autoconnect */
         s_con = nm_connection_get_setting_connection (connection);
@@ -794,6 +813,34 @@ select_vpn_type (NetConnectionEditor *self, GtkListBox *list)
                 g_object_set_data_full (G_OBJECT (row), "service_name", g_steal_pointer (&service_name), g_free);
                 gtk_list_box_append (list, row);
         }
+
+        /*  Translators: VPN add dialog Wireguard description */
+        gchar *desc = _("Free and open-source VPN solution designed for ease "
+                        "of use, high speed performance and low attack surface.");
+        gchar *desc_markup = g_markup_printf_escaped ("<span size='smaller'>%s</span>", desc);
+
+        row = gtk_list_box_row_new ();
+
+        row_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 6);
+        gtk_widget_set_margin_start (row_box, 12);
+        gtk_widget_set_margin_end (row_box, 12);
+        gtk_widget_set_margin_top (row_box, 12);
+        gtk_widget_set_margin_bottom (row_box, 12);
+
+        name_label = gtk_label_new (_("WireGuard"));
+        gtk_widget_set_halign (name_label, GTK_ALIGN_START);
+        gtk_box_append (GTK_BOX (row_box), name_label);
+
+        desc_label = gtk_label_new (NULL);
+        gtk_label_set_markup (GTK_LABEL (desc_label), desc_markup);
+        gtk_label_set_wrap (GTK_LABEL (desc_label), TRUE);
+        gtk_widget_set_halign (desc_label, GTK_ALIGN_START);
+        gtk_widget_add_css_class (desc_label, "dim-label");
+        gtk_box_append (GTK_BOX (row_box), desc_label);
+
+        gtk_list_box_row_set_child (GTK_LIST_BOX_ROW (row), row_box);
+        g_object_set_data (G_OBJECT (row), "service_name", "wireguard");
+        gtk_list_box_append (list, row);
 
         /* Import */
         row = gtk_list_box_row_new ();

@@ -10,6 +10,7 @@ sources = files(
   'ce-page-ip6.c',
   'ce-page-security.c',
   'ce-page-vpn.c',
+  'ce-page-wireguard.c',
   'ce-page-wifi.c',
   'ce-page.c',
   'net-connection-editor.c',
@@ -25,6 +26,8 @@ resource_data = files(
   'ip6-page.ui',
   'security-page.ui',
   'vpn-page.ui',
+  'wireguard-page.ui',
+  'wireguard-peer.ui',
   'wifi-page.ui'
 )
 

@@ -1,6 +1,6 @@
 /* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
  *
- * Copyright (C) 2011 Richard Hughes <richard@hughsie.com>
+ * Copyright (C) 2022 Nathan-J. Hirschauer <nathanhi@deepserve.info>
  *
  * Licensed under the GNU General Public License Version 2
  *
@@ -21,19 +21,18 @@
 
 #pragma once
 
-#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <NetworkManager.h>
 
 G_BEGIN_DECLS
 
-G_DECLARE_FINAL_TYPE (NetVpn, net_vpn, NET, VPN, AdwActionRow)
+G_DECLARE_FINAL_TYPE (CEPageWireguard, ce_page_wireguard, CE, PAGE_WIREGUARD, GtkBox)
+G_DECLARE_FINAL_TYPE (WireguardPeer, wireguard_peer, WIREGUARD, PEER, GtkBox)
 
-NetVpn       *net_vpn_new                (NMClient     *client,
-                                          NMConnection *connection);
+gchar *peer_allowed_ips_to_str (NMWireGuardPeer *peer);
+WireguardPeer *add_nm_wg_peer_to_list (CEPageWireguard *self, NMWireGuardPeer *peer);
 
-NMConnection *net_vpn_get_connection     (NetVpn       *vpn);
-
-gboolean nm_is_wireguard_connection (NMActiveConnection *c);
+CEPageWireguard *ce_page_wireguard_new (NMConnection *connection);
+WireguardPeer *wireguard_peer_new (CEPageWireguard *parent);
 
 G_END_DECLS

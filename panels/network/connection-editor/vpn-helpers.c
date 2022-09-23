@@ -167,6 +167,11 @@ import_vpn_from_file_cb (GtkWidget *dialog, gint response, gpointer user_data)
 	}
 
 	filename = g_file_get_path (file);
+
+#if NM_CHECK_VERSION (1,40,0)
+	connection = nm_conn_wireguard_import (filename, &error);
+#endif
+
 	for (iter = vpn_get_plugins (); !connection && iter; iter = iter->next) {
 		NMVpnEditorPlugin *plugin;
 

@@ -94,6 +94,7 @@ enum {
 };
 
 static void handle_argv (CcNetworkPanel *self);
+static void device_managed_cb (CcNetworkPanel *self, GParamSpec *pspec, NMDevice *device);
 
 CC_PANEL_REGISTER (CcNetworkPanel, cc_network_panel)
 
@@ -514,6 +515,10 @@ active_connections_changed (CcNetworkPanel *self)
                 devices = nm_active_connection_get_devices (connection);
                 for (j = 0; devices && j < devices->len; j++)
                         g_debug ("           %s", nm_device_get_udi (g_ptr_array_index (devices, j)));
+
+                if (nm_is_wireguard_connection (connection))
+                        g_debug ("           WireGuard connection: %s", nm_active_connection_get_id(connection));
+
                 if (NM_IS_VPN_CONNECTION (connection))
                         g_debug ("           VPN base connection: %s", nm_active_connection_get_specific_object_path (connection));
 
@@ -630,7 +635,7 @@ add_connection (CcNetworkPanel *self, NMConnection *connection)
         g_debug ("add %s/%s remote connection: %s",
                  type, g_type_name_from_instance ((GTypeInstance*)connection),
                  nm_connection_get_path (connection));
-        if (!iface)
+        if (!iface || g_strcmp0 (type, "wireguard") == 0)
                 panel_add_vpn_device (self, connection);
 }
 
