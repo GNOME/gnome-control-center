@@ -33,6 +33,8 @@ GtkWidget * cc_firmware_security_dialog_new (guint       hsi_number,
                                              GHashTable *hsi1_dict,
                                              GHashTable *hsi2_dict,
                                              GHashTable *hsi3_dict,
-                                             GHashTable *hsi4_dict);
+                                             GHashTable *hsi4_dict,
+                                             GHashTable *runtime_dict,
+                                             GString    *event_log_str);
 
 G_END_DECLS

@@ -29,10 +29,14 @@ sources += gnome.compile_resources(
 
 cflags += '-DGNOMELOCALEDIR="@0@"'.format(control_center_localedir)
 
+deps = common_deps + [
+  dependency('libgtop-2.0'),
+]
+
 panels_libs += static_library(
   cappletname,
   sources: sources,
   include_directories: [top_inc, common_inc],
-  dependencies: common_deps,
+  dependencies: deps,
   c_args: cflags
 )

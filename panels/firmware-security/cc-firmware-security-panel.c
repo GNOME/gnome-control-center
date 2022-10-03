@@ -39,11 +39,15 @@ struct _CcfirmwareSecurityPanel
   GtkButton        *hsi_button;
   GtkButton        *secure_boot_button;
 
+  /* Leaflet */
+  GtkWidget        *panel_leaflet;
+
   /* HSI button */
   GtkWidget        *hsi_grid;
 
   GtkWidget        *hsi_circle_box;
   GtkWidget        *hsi_circle_number;
+  GtkWidget        *hsi_icon;
 
   GtkWidget        *hsi_label;
   GtkWidget        *hsi_description;
@@ -66,6 +70,8 @@ struct _CcfirmwareSecurityPanel
   GHashTable       *hsi2_dict;
   GHashTable       *hsi3_dict;
   GHashTable       *hsi4_dict;
+  GHashTable       *runtime_dict;
+  GString          *event_log_output;
 
   guint             hsi_number;
   SecureBootState   secure_boot_state;
@@ -183,9 +189,6 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
     return;
 
   /* build new row */
-  date = g_date_time_new_from_unix_local (attr->timestamp);
-  date_string = cc_util_get_smart_date_time (date);
-
   row = adw_expander_row_new ();
   if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
     {
@@ -212,6 +215,29 @@ parse_event_variant_iter (CcfirmwareSecurityPanel *self,
     }
 
   adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), attr->title);
+
+  g_string_append (self->event_log_output, "  ");
+  date = g_date_time_new_from_unix_local (attr->timestamp);
+  date_string = g_date_time_format (date, "%Y-%m-%d %H:%M:%S");
+  /* TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
+     for example: 2022-08-01 22:48:00 */
+  g_string_append_printf (self->event_log_output, _("%1$s"), date_string);
+  g_string_append (self->event_log_output, "   ");
+  hsi_report_title_print_padding (attr->title, self->event_log_output, 30);
+
+  if (attr->flags & FWUPD_SECURITY_ATTR_FLAG_SUCCESS)
+    /* TRANSLATOR: This is the text event status output when the event status is "success" */
+    g_string_append (self->event_log_output, _("Pass"));
+  else
+    /* TRANSLATOR: This is the text event status output when the event status is not "success" */
+    g_string_overwrite (self->event_log_output, self->event_log_output->len-2, _("! Fail"));
+
+  g_string_append (self->event_log_output, " ");
+  g_string_append_printf (self->event_log_output, _("(%1$s → %2$s)"),
+                          fwupd_security_attr_result_to_string (attr->result_fallback),
+                          fwupd_security_attr_result_to_string (attr->result));
+  g_string_append (self->event_log_output, "\n");
+
   adw_expander_row_set_subtitle (ADW_EXPANDER_ROW (row), date_string);
   adw_preferences_group_add (ADW_PREFERENCES_GROUP (self->firmware_security_log_pgroup), GTK_WIDGET (row));
 
@@ -262,6 +288,10 @@ parse_variant_iter (CcfirmwareSecurityPanel *self,
                              g_strdup (appstream_id),
                              g_steal_pointer (&attr));
         break;
+      default:
+        g_hash_table_insert (self->runtime_dict,
+                             g_strdup (appstream_id),
+                             g_steal_pointer (&attr));
     }
 }
 
@@ -337,6 +367,28 @@ on_bus_event_done_cb (GObject      *source,
 }
 
 static void
+show_loading_page (CcfirmwareSecurityPanel *self, const gchar *page_name)
+{
+  adw_leaflet_set_visible_child_name (ADW_LEAFLET(self->panel_leaflet), page_name);
+}
+
+static int
+on_timeout_cb (gpointer user_data)
+{
+  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  show_loading_page (self, "panel_show");
+  return 0;
+}
+
+static int
+on_timeout_unavaliable (gpointer user_data)
+{
+  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (user_data);
+  show_loading_page (self, "panel_unavaliable");
+  return 0;
+}
+
+static void
 on_bus_done (GObject      *source,
              GAsyncResult *res,
              gpointer      user_data)
@@ -348,17 +400,13 @@ on_bus_done (GObject      *source,
   val = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), res, &error);
   if (val == NULL)
     {
-      CcApplication *application = CC_APPLICATION (g_application_get_default ());
-      g_warning ("failed to get Security Attribute: %s", error->message);
-      cc_shell_model_set_panel_visibility (cc_application_get_model (application),
-                                           "firmware-security",
-                                           CC_PANEL_HIDDEN);
-      set_secure_boot_button_view (self);
+      g_timeout_add (1500, on_timeout_unavaliable, self);
       return;
     }
 
   parse_array_from_variant (self, val, FALSE);
   set_secure_boot_button_view (self);
+  g_timeout_add (1500, on_timeout_cb, self);
 }
 
 static void
@@ -410,7 +458,9 @@ on_hsi_button_clicked_cb (GtkWidget *widget,
                                             self->hsi1_dict,
                                             self->hsi2_dict,
                                             self->hsi3_dict,
-                                            self->hsi4_dict);
+                                            self->hsi4_dict,
+                                            self->runtime_dict,
+                                            self->event_log_output);
   shell = cc_panel_get_shell (CC_PANEL (self));
   toplevel = cc_shell_get_toplevel (shell);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
@@ -442,30 +492,22 @@ set_hsi_button_view_contain (CcfirmwareSecurityPanel *self,
   switch (hsi_number)
     {
       case 0:
-        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "0");
-        gtk_widget_add_css_class (self->hsi_circle_box, "level0");
-        gtk_widget_add_css_class (self->hsi_circle_number, "hsi0");
+        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "dialog-warning-symbolic");
+        gtk_widget_add_css_class (self->hsi_icon, "error");
         break;
       case 1:
-        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "1");
-        gtk_widget_add_css_class (self->hsi_circle_box, "level1");
-        gtk_widget_add_css_class (self->hsi_circle_number, "hsi1");
+        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "emblem-default-symbolic");
+        gtk_widget_add_css_class (self->hsi_icon, "good");
         break;
       case 2:
-        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "2");
-        gtk_widget_add_css_class (self->hsi_circle_box, "level2");
-        gtk_widget_add_css_class (self->hsi_circle_number, "hsi2");
-        break;
       case 3:
       case 4:
-        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "3");
-        gtk_widget_add_css_class (self->hsi_circle_box, "level3");
-        gtk_widget_add_css_class (self->hsi_circle_number, "hsi3");
+        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "security-high-symbolic");
+        gtk_widget_add_css_class (self->hsi_icon, "good");
         break;
       default:
-        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "?");
-        gtk_widget_add_css_class (self->hsi_circle_box, "level1");
-        gtk_widget_add_css_class (self->hsi_circle_number, "hsi1");
+        gtk_image_set_from_icon_name (GTK_IMAGE (self->hsi_icon), "dialog-question-symbolic");
+        gtk_widget_add_css_class (self->hsi_icon, "neutral");
         break;
     }
 
@@ -482,43 +524,30 @@ set_hsi_button_view (CcfirmwareSecurityPanel *self)
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 0/4 stars */
-                                     _("Security Level 0"),
-                                     _("Exposed to serious security threats."));
+                                     _("Checks Failed"),
+                                     _("Hardware does not pass checks."));
         break;
       case 1:
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 1/4 stars */
-                                     _("Security Level 1"),
-                                     _("Limited protection against simple security threats."));
+                                     _("Checks Passed"),
+                                     _("Hardware meets security requirements."));
         break;
       case 2:
-        set_hsi_button_view_contain (self,
-                                     self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 2/4 stars */
-                                     _("Security Level 2"),
-                                     _("Protected against common security threats."));
-        break;
       case 3:
-        set_hsi_button_view_contain (self,
-                                     self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 3/4 stars */
-                                     _("Security Level 3"),
-                                     _("Protected against a wide range of security threats."));
-        break;
       case 4:
         set_hsi_button_view_contain (self,
-                                     /* Based on current HSI definition, the max HSI value would be 3. */
-                                     3,
-                                     /* TRANSLATORS: in reference to firmware protection: 4/4 stars */
-                                     _("Comprehensive Protection"),
-                                     _("Protected against a wide range of security threats."));
+                                     self->hsi_number,
+                                     /* TRANSLATORS: in reference to firmware protection: 2~4 stars */
+                                     _("Protected"),
+                                     _("Hardware has a good level of protection."));
         break;
       case G_MAXUINT:
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: ??? stars */
-                                     _("Security Level"),
+                                     _("Checks Unavailable"),
                                      _("Security levels are not available for this device."));
         break;
       default:
@@ -648,6 +677,8 @@ cc_firmware_security_panel_finalize (GObject *object)
   g_clear_pointer (&self->hsi2_dict, g_hash_table_unref);
   g_clear_pointer (&self->hsi3_dict, g_hash_table_unref);
   g_clear_pointer (&self->hsi4_dict, g_hash_table_unref);
+  g_clear_pointer (&self->runtime_dict, g_hash_table_unref);
+  g_string_free (self->event_log_output, TRUE);
 
   g_clear_object (&self->bus_proxy);
   g_clear_object (&self->properties_bus_proxy);
@@ -670,13 +701,13 @@ cc_firmware_security_panel_class_init (CcfirmwareSecurityPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, firmware_security_log_stack);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_button);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_description);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_circle_box);
-  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_circle_number);
+  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_icon);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, hsi_label);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_button);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_description);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_icon);
   gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, secure_boot_label);
+  gtk_widget_class_bind_template_child (widget_class, CcfirmwareSecurityPanel, panel_leaflet);
 
   gtk_widget_class_bind_template_callback (widget_class, on_hsi_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_secure_boot_button_clicked_cb);
@@ -693,6 +724,8 @@ cc_firmware_security_panel_init (CcfirmwareSecurityPanel *self)
   self->hsi2_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
   self->hsi3_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
   self->hsi4_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
+  self->runtime_dict = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, (GDestroyNotify) fu_security_attr_free);
+  self->event_log_output = g_string_new (NULL);
 
   load_custom_css ("/org/gnome/control-center/firmware-security/security-level.css");
 

@@ -172,3 +172,21 @@ load_custom_css (const char *path)
                                               GTK_STYLE_PROVIDER (provider),
                                               GTK_STYLE_PROVIDER_PRIORITY_USER);
 }
+
+void
+hsi_report_title_print_padding(const gchar *title, GString *dst_string, gsize maxlen)
+{
+  gsize title_len;
+  gsize maxpad = maxlen;
+
+  if (maxlen == 0)
+    maxpad = 50;
+
+  if (title == NULL || dst_string == NULL)
+    return;
+  g_string_append_printf (dst_string, "%s", title);
+
+  title_len = g_utf8_strlen (title, -1) + 1;
+  for (gsize i = title_len; i < maxpad; i++)
+    g_string_append (dst_string, " ");
+}

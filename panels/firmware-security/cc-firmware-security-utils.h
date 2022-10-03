@@ -129,5 +129,6 @@ gboolean     firmware_security_attr_has_flag                    (FwupdSecurityAt
 void         load_custom_css                                    (const char              *path);
 const gchar *fwupd_security_attr_result_to_string               (FwupdSecurityAttrResult  result);
 gboolean     fwupd_get_result_status                            (FwupdSecurityAttrResult  result);
+void         hsi_report_title_print_padding                     (const gchar *title, GString *dst_string, gsize maxlen);
 
 G_END_DECLS
