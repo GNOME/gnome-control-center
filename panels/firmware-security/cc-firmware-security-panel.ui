@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcfirmwareSecurityPanel" parent="CcPanel">
+    <child type="titlebar-end">
+      <object class="GtkButton" id="fw_help_button">
+        <property name="halign">center</property>
+        <property name="valign">center</property>
+        <property name="icon-name">help-about-symbolic</property>
+           <signal name="clicked" handler="on_fw_help_button_clicked_cb" swapped="no" />
+        <style>
+          <class name="image-button" />
+        </style>
+      </object>
+    </child>
 
     <child type="content">
       <object class="AdwLeaflet" id="panel_leaflet">

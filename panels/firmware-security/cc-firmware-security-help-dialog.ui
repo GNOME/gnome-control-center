@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcFirmwareSecurityHelpDialog" parent="GtkWindow">
+    <property name="default-width">500</property>
+    <property name="modal">True</property>
+    <property name="title" translatable="yes">About Device Security</property>
+
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
+        <property name="show-title-buttons">True</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="margin-top">32</property>
+        <property name="margin-start">32</property>
+        <property name="margin-end">32</property>
+        <property name="margin-bottom">32</property>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+
+            <child>
+              <object class="GtkLabel" id="help_description_section1">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+                <property name="hexpand">true</property>
+                <property name="label" translatable="yes">Device security provides information about how protected your device is against security issues which target the hardware itself.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="hexpand">true</property>
+                <property name="halign">start</property>
+                <property name="label"> </property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="help_description_section2">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+                <property name="hexpand">true</property>
+                <property name="label" translatable="yes">Aspects of hardware that affect security include:</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="help_description_section3">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+                <property name="hexpand">true</property>
+                <property name="label" translatable="yes">• security features that are built into a hardware itself;</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="help_description_section4">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+                <property name="hexpand">true</property>
+                <property name="label" translatable="yes">• how the hardware is configured to protect against security issues;</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="help_description_section5">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+                <property name="hexpand">true</property>
+                <property name="label" translatable="yes">• the security of the software runs directly on the hardware.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="help_description_section6">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+                <property name="hexpand">true</property>
+                <property name="label" translatable="yes">Security threats which affect hardware include malware and viruses that target the software that runs directly on the hardware. It also includes physical tampering, such as physical connection to the hardware to read data and implant malware.</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel" id="help_description_section7">
+                <property name="wrap">True</property>
+                <property name="justify">left</property>
+                <property name="halign">start</property>
+                <property name="hexpand">true</property>
+                <property name="label" translatable="yes">Device security is just one aspect of security, and does not reflect the overall security status of the system and applications.</property>
+              </object>
+            </child>
+
+          </object>
+        </child>
+      </object>
+    </child>
+
+  </template>
+</interface>

@@ -26,6 +26,7 @@
 #include "cc-firmware-security-resources.h"
 #include "cc-firmware-security-dialog.h"
 #include "cc-firmware-security-boot-dialog.h"
+#include "cc-firmware-security-help-dialog.h"
 #include "cc-firmware-security-utils.h"
 #include "cc-util.h"
 
@@ -484,6 +485,22 @@ on_secure_boot_button_clicked_cb (GtkWidget *widget,
 }
 
 static void
+on_fw_help_button_clicked_cb (GtkWidget *widget,
+                              gpointer   data)
+{
+  CcfirmwareSecurityPanel *self = CC_FIRMWARE_SECURITY_PANEL (data);
+  GtkWidget *help_dialog;
+  GtkWidget *toplevel;
+  CcShell *shell;
+
+  help_dialog = cc_firmware_security_help_dialog_new ();
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = cc_shell_get_toplevel (shell);
+  gtk_window_set_transient_for (GTK_WINDOW (help_dialog), GTK_WINDOW (toplevel));
+  gtk_window_present (GTK_WINDOW (help_dialog));
+}
+
+static void
 set_hsi_button_view_contain (CcfirmwareSecurityPanel *self,
                              guint                    hsi_number,
                              gchar                   *title,
@@ -711,6 +728,7 @@ cc_firmware_security_panel_class_init (CcfirmwareSecurityPanelClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, on_hsi_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_secure_boot_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_fw_help_button_clicked_cb);
 }
 
 static void
