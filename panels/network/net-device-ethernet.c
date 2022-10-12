@@ -423,7 +423,6 @@ add_profile_button_clicked_cb (NetDeviceEthernet *self)
                           NULL);
         } else {
             g_warning ("Invalid interface Name '%s': %s", iface, error->message);
-            g_error_free (error);
         }
 
         nm_connection_add_setting (connection, nm_setting_wired_new ());
