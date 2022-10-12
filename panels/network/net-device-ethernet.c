@@ -395,7 +395,6 @@ add_profile_button_clicked_cb (NetDeviceEthernet *self)
         NMSettingConnection *sc;
         g_autofree gchar *uuid = NULL;
         g_autofree gchar *id = NULL;
-        g_autoptr(GError) error = NULL;
         NetConnectionEditor *editor;
         const GPtrArray *connections;
         const char *iface;
@@ -417,13 +416,9 @@ add_profile_button_clicked_cb (NetDeviceEthernet *self)
                       NULL);
 
         iface = nm_device_get_iface (self->device);
-        if (nm_utils_is_valid_iface_name (iface, &error)) {
-            g_object_set (sc,
-                          NM_SETTING_CONNECTION_INTERFACE_NAME, iface,
-                          NULL);
-        } else {
-            g_warning ("Invalid interface Name '%s': %s", iface, error->message);
-        }
+        g_object_set (sc,
+                      NM_SETTING_CONNECTION_INTERFACE_NAME, iface,
+                      NULL);
 
         nm_connection_add_setting (connection, nm_setting_wired_new ());
 
