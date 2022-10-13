@@ -389,13 +389,11 @@ get_primary_disc_info (CcInfoOverviewPanel *self)
     }
 }
 
-static void
-get_hardware_model (CcInfoOverviewPanel *self)
+static char *
+get_hostnamed_property (const char *property_name)
 {
   g_autoptr(GDBusProxy) hostnamed_proxy = NULL;
-  g_autoptr(GVariant) vendor_variant = NULL;
-  g_autoptr(GVariant) model_variant = NULL;
-  const char *vendor_string, *model_string;
+  g_autoptr(GVariant) property_variant = NULL;
   g_autoptr(GError) error = NULL;
 
   hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
@@ -409,35 +407,34 @@ get_hardware_model (CcInfoOverviewPanel *self)
   if (hostnamed_proxy == NULL)
     {
       g_debug ("Couldn't get hostnamed to start, bailing: %s", error->message);
-      return;
+      return NULL;
     }
 
-  vendor_variant = g_dbus_proxy_get_cached_property (hostnamed_proxy, "HardwareVendor");
-  if (!vendor_variant)
+  property_variant = g_dbus_proxy_get_cached_property (hostnamed_proxy, property_name);
+  if (!property_variant)
     {
-      g_debug ("Unable to retrieve org.freedesktop.hostname1.HardwareVendor property");
-      return;
+      g_debug ("Unable to retrieve org.freedesktop.hostname1.%s property", property_name);
+      return NULL;
     }
 
-  model_variant = g_dbus_proxy_get_cached_property (hostnamed_proxy, "HardwareModel");
-  if (!model_variant)
-    {
-      g_debug ("Unable to retrieve org.freedesktop.hostname1.HardwareModel property");
-      return;
-    }
+  return g_variant_dup_string (property_variant, NULL);
+}
 
-  vendor_string = g_variant_get_string (vendor_variant, NULL),
-  model_string = g_variant_get_string (model_variant, NULL);
+static char *
+get_hardware_model_string ()
+{
+  g_autofree char *vendor_string = NULL;
+  g_autofree char *model_string = NULL;
 
-  if (vendor_string && g_strcmp0 (vendor_string, "") != 0)
-    {
-      g_autofree gchar *vendor_model = NULL;
+  vendor_string = get_hostnamed_property ("HardwareVendor");
+  if (!vendor_string || g_strcmp0 (vendor_string, "") == 0)
+    return NULL;
 
-      vendor_model = g_strdup_printf ("%s %s", vendor_string, model_string);
+  model_string = get_hostnamed_property ("HardwareModel");
+  if (!model_string || g_strcmp0 (model_string, "") == 0)
+    return NULL;
 
-      cc_list_row_set_secondary_label (self->hardware_model_row, vendor_model);
-      gtk_widget_set_visible (GTK_WIDGET (self->hardware_model_row), TRUE);
-    }
+  return g_strdup_printf ("%s %s", vendor_string, model_string);
 }
 
 static char *
@@ -697,6 +694,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   g_autofree char *os_type_text = NULL;
   g_autofree char *os_name_text = NULL;
   g_autofree char *os_build_text = NULL;
+  g_autofree char *hardware_model_text = NULL;
   g_autofree gchar *graphics_hardware_string = NULL;
 
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
@@ -709,7 +707,9 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
                                        (GAsyncReadyCallback) shell_proxy_ready,
                                        self);
 
-  get_hardware_model (self);
+  hardware_model_text = get_hardware_model_string ();
+  cc_list_row_set_secondary_label (self->hardware_model_row, hardware_model_text);
+  gtk_widget_set_visible (GTK_WIDGET (self->hardware_model_row), hardware_model_text != NULL);
 
   ram_size = get_ram_size_dmi ();
   if (ram_size == 0)
