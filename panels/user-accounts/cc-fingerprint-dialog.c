@@ -781,6 +781,10 @@ handle_enroll_signal (CcFingerprintDialog *self,
             {
               message = _("Fingerprint device storage is full");
             }
+          else if (g_str_equal (result, "enroll-duplicate"))
+            {
+              message = _("Fingerprint is duplicate");
+            }
           else
             {
               message = _("Failed to enroll new fingerprint");
