@@ -42,13 +42,18 @@ sort_func (gconstpointer a,
 {
   CcBackgroundItem *item_a;
   CcBackgroundItem *item_b;
+  const char *name_a;
+  const char *name_b;
 
   item_a = (CcBackgroundItem *) a;
   item_b = (CcBackgroundItem *) b;
 
-  if (strcmp (cc_background_item_get_name (item_a), "Default Background") == 0)
+  name_a = cc_background_item_get_name (item_a);
+  name_b = cc_background_item_get_name (item_b);
+
+  if (name_a && strcmp (name_a, "Default Background") == 0)
     return -1;
-  if (strcmp (cc_background_item_get_name (item_b), "Default Background") == 0)
+  if (name_b && strcmp (name_b, "Default Background") == 0)
     return 1;
 
 
