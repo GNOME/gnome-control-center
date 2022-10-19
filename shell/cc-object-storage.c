@@ -91,7 +91,7 @@ create_dbus_proxy_in_thread_cb (GTask        *task,
 
   if (local_error)
     {
-      g_task_return_error (task, local_error);
+      g_task_return_error (task, g_steal_pointer (&local_error));
       return;
     }
 
