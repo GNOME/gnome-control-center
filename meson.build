@@ -151,7 +151,7 @@ common_deps = [
   libadwaita_dep,
   dependency('gio-unix-2.0'),
   dependency('gthread-2.0'),
-  dependency('gtk4', version: '>= 4.4'),
+  dependency('gtk4', version: '>= 4.8'),
 ]
 
 polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
