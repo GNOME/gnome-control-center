@@ -281,7 +281,7 @@ wwan_data_update_apn_list_db (CcWwanData *self)
     return;
 
   if (!self->apn_list)
-    self->apn_list = g_list_store_new (CC_TYPE_WWAN_DATA_APN);
+    return;
 
   if (!self->apn_db)
     self->apn_db = nma_mobile_providers_database_new_sync (NULL, NULL, NULL, &error);
