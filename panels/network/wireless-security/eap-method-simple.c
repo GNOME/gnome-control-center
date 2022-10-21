@@ -200,7 +200,8 @@ static void
 set_username (EAPMethod *method, const gchar *username)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	gtk_editable_set_text (GTK_EDITABLE (self->username_entry), username);
+	if (username)
+		gtk_editable_set_text (GTK_EDITABLE (self->username_entry), username);
 }
 
 static const gchar *
@@ -214,7 +215,8 @@ static void
 set_password (EAPMethod *method, const gchar *password)
 {
 	EAPMethodSimple *self = EAP_METHOD_SIMPLE (method);
-	gtk_editable_set_text (GTK_EDITABLE (self->password_entry), password);
+	if (password)
+		gtk_editable_set_text (GTK_EDITABLE (self->password_entry), password);
 }
 
 static gboolean
