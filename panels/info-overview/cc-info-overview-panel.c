@@ -63,6 +63,7 @@ struct _CcInfoOverviewPanel
   CcListRow       *gnome_version_row;
   CcListRow       *graphics_row;
   CcListRow       *hardware_model_row;
+  CcListRow       *firmware_version_row;
   GtkDialog       *hostname_editor;
   CcHostnameEntry *hostname_entry;
   CcListRow       *hostname_row;
@@ -439,6 +440,18 @@ get_hardware_model_string ()
 }
 
 static char *
+get_firmware_version_string ()
+{
+  g_autofree char *firmware_version_string = NULL;
+
+  firmware_version_string = get_hostnamed_property ("FirmwareVersion");
+  if (!firmware_version_string || g_strcmp0 (firmware_version_string, "") == 0)
+    return NULL;
+
+  return g_steal_pointer (&firmware_version_string);
+}
+
+static char *
 get_kernel_version_string ()
 {
   g_autofree char *kernel_name = NULL;
@@ -713,6 +726,7 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   g_autofree char *os_name_text = NULL;
   g_autofree char *os_build_text = NULL;
   g_autofree char *hardware_model_text = NULL;
+  g_autofree char *firmware_version_text = NULL;
   g_autofree char *kernel_version_text = NULL;
   g_autofree gchar *graphics_hardware_string = NULL;
 
@@ -729,6 +743,10 @@ info_overview_panel_setup_overview (CcInfoOverviewPanel *self)
   hardware_model_text = get_hardware_model_string ();
   cc_list_row_set_secondary_label (self->hardware_model_row, hardware_model_text);
   gtk_widget_set_visible (GTK_WIDGET (self->hardware_model_row), hardware_model_text != NULL);
+
+  firmware_version_text = get_firmware_version_string ();
+  cc_list_row_set_secondary_label (self->firmware_version_row, firmware_version_text);
+  gtk_widget_set_visible (GTK_WIDGET (self->firmware_version_row), firmware_version_text != NULL);
 
   ram_size = get_ram_size_dmi ();
   if (ram_size == 0)
@@ -965,6 +983,7 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_model_row);
+  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, firmware_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_editor);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_row);
