@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-10-21 12:46+0000\n"
-"PO-Revision-Date: 2022-10-21 17:08+0300\n"
+"POT-Creation-Date: 2022-10-25 23:56+0000\n"
+"PO-Revision-Date: 2022-10-28 17:17+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -366,7 +366,7 @@ msgstr "Выберите изображение"
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:31
-#: panels/info-overview/cc-info-overview-panel.ui:227
+#: panels/info-overview/cc-info-overview-panel.ui:228
 #: panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
@@ -1236,7 +1236,15 @@ msgstr "%-d %b"
 msgid "%b %e, %Y"
 msgstr "%-d %b %Y"
 
-#: panels/common/cc-util.c:165
+#. TRANSLATORS: This is the datetime format in the style of
+#. "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
+#. and "Yesterday, 10:10:10 AM"
+#: panels/common/cc-util.c:162
+#, c-format
+msgid "%1$s, %2$s"
+msgstr "%1$s, %2$s"
+
+#: panels/common/cc-util.c:182
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
@@ -1245,7 +1253,7 @@ msgstr[1] "%d часа"
 msgstr[2] "%d часов"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:166 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1254,7 +1262,7 @@ msgstr[1] "%d минуты"
 msgstr[2] "%d минут"
 
 # Блокировать экран после:
-#: panels/common/cc-util.c:167
+#: panels/common/cc-util.c:184
 #, c-format
 msgid "%d second"
 msgid_plural "%d seconds"
@@ -1263,35 +1271,35 @@ msgstr[1] "%d секунды"
 msgstr[2] "%d секунд"
 
 #. 5 hours 2 minutes 12 seconds
-#: panels/common/cc-util.c:174
+#: panels/common/cc-util.c:191
 #, c-format
 msgctxt "hours minutes seconds"
 msgid "%s %s %s"
 msgstr "%s %s %s"
 
 #. 5 hours 2 minutes
-#: panels/common/cc-util.c:179
+#: panels/common/cc-util.c:196
 #, c-format
 msgctxt "hours minutes"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 5 hours
-#: panels/common/cc-util.c:184
+#: panels/common/cc-util.c:201
 #, c-format
 msgctxt "hours"
 msgid "%s"
 msgstr "%s"
 
 #. 2 minutes 12 seconds
-#: panels/common/cc-util.c:192
+#: panels/common/cc-util.c:209
 #, c-format
 msgctxt "minutes seconds"
 msgid "%s %s"
 msgstr "%s %s"
 
 #. 2 minutes
-#: panels/common/cc-util.c:197
+#: panels/common/cc-util.c:214
 #, c-format
 msgctxt "minutes"
 msgid "%s"
@@ -1299,7 +1307,7 @@ msgstr "%s"
 
 # Блокировать экран после:
 #. 0 seconds
-#: panels/common/cc-util.c:208
+#: panels/common/cc-util.c:225
 msgid "0 seconds"
 msgstr "0 секунд"
 
@@ -2424,83 +2432,83 @@ msgstr "Неизвестно"
 msgid "Not Available"
 msgstr "Недоступно"
 
-#: panels/info-overview/cc-info-overview-panel.ui:17
+#: panels/info-overview/cc-info-overview-panel.ui:18
 msgid "System Logo"
 msgstr "Логотип системы"
 
-#: panels/info-overview/cc-info-overview-panel.ui:32
+#: panels/info-overview/cc-info-overview-panel.ui:33
 #: panels/sharing/cc-sharing-panel.ui:304
 msgid "Device Name"
 msgstr "Имя устройства"
 
-#: panels/info-overview/cc-info-overview-panel.ui:50
+#: panels/info-overview/cc-info-overview-panel.ui:51
 msgid "Hardware Model"
 msgstr "Модель оборудования"
 
-#: panels/info-overview/cc-info-overview-panel.ui:58
+#: panels/info-overview/cc-info-overview-panel.ui:59
 msgid "Memory"
 msgstr "Память"
 
-#: panels/info-overview/cc-info-overview-panel.ui:66
+#: panels/info-overview/cc-info-overview-panel.ui:67
 msgid "Processor"
 msgstr "Процессор"
 
-#: panels/info-overview/cc-info-overview-panel.ui:74
+#: panels/info-overview/cc-info-overview-panel.ui:75
 msgid "Graphics"
 msgstr "Графика"
 
-#: panels/info-overview/cc-info-overview-panel.ui:82
+#: panels/info-overview/cc-info-overview-panel.ui:83
 msgid "Disk Capacity"
 msgstr "Ёмкость диска"
 
-#: panels/info-overview/cc-info-overview-panel.ui:83
+#: panels/info-overview/cc-info-overview-panel.ui:84
 msgid "Calculating…"
 msgstr "Вычисление…"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:98
+#: panels/info-overview/cc-info-overview-panel.ui:99
 msgid "OS Name"
 msgstr "Название ОС"
 
 #. translators: this field contains the distro build ID
-#: panels/info-overview/cc-info-overview-panel.ui:107
+#: panels/info-overview/cc-info-overview-panel.ui:108
 msgid "OS Build ID"
 msgstr "ID сборки ОС"
 
-#: panels/info-overview/cc-info-overview-panel.ui:115
+#: panels/info-overview/cc-info-overview-panel.ui:116
 msgid "OS Type"
 msgstr "Тип ОС"
 
-#: panels/info-overview/cc-info-overview-panel.ui:123
+#: panels/info-overview/cc-info-overview-panel.ui:124
 msgid "GNOME Version"
 msgstr "Версия GNOME"
 
 #. translators: this is a placeholder while the GNOME version is being fetched
-#: panels/info-overview/cc-info-overview-panel.ui:125
+#: panels/info-overview/cc-info-overview-panel.ui:126
 msgid "Loading…"
 msgstr "Загрузка…"
 
-#: panels/info-overview/cc-info-overview-panel.ui:133
+#: panels/info-overview/cc-info-overview-panel.ui:134
 msgid "Windowing System"
 msgstr "Оконный интерфейс"
 
-#: panels/info-overview/cc-info-overview-panel.ui:141
+#: panels/info-overview/cc-info-overview-panel.ui:142
 msgid "Virtualization"
 msgstr "Виртуализация"
 
-#: panels/info-overview/cc-info-overview-panel.ui:150
+#: panels/info-overview/cc-info-overview-panel.ui:151
 msgid "Kernel Version"
 msgstr "Версия ядра"
 
-#: panels/info-overview/cc-info-overview-panel.ui:159
+#: panels/info-overview/cc-info-overview-panel.ui:160
 msgid "Software Updates"
 msgstr "Обновление ПО"
 
-#: panels/info-overview/cc-info-overview-panel.ui:183
+#: panels/info-overview/cc-info-overview-panel.ui:184
 msgid "Rename Device"
 msgstr "Переименовать устройство"
 
-#: panels/info-overview/cc-info-overview-panel.ui:199
+#: panels/info-overview/cc-info-overview-panel.ui:200
 msgid ""
 "The device name is used to identify this device when it is viewed over the "
 "network, or when pairing Bluetooth devices."
@@ -2508,11 +2516,11 @@ msgstr ""
 "Имя устройства используется для идентификации этого устройства при просмотре "
 "в сети или при сопряжении устройств Bluetooth."
 
-#: panels/info-overview/cc-info-overview-panel.ui:205
+#: panels/info-overview/cc-info-overview-panel.ui:206
 msgid "Device name"
 msgstr "Имя устройства"
 
-#: panels/info-overview/cc-info-overview-panel.ui:219
+#: panels/info-overview/cc-info-overview-panel.ui:220
 msgid "_Rename"
 msgstr "_Переименовать"
 
