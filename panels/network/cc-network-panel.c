@@ -658,29 +658,17 @@ panel_check_network_manager_version (CcNetworkPanel *self)
         /* parse running version */
         version = nm_client_get_version (self->client);
         if (version == NULL) {
-                GtkWidget *box;
-                GtkWidget *label;
-                g_autofree gchar *markup = NULL;
+                GtkWidget *status_page;
 
-                box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 20);
-                gtk_box_set_homogeneous (GTK_BOX (box), TRUE);
-                gtk_widget_set_vexpand (box, TRUE);
-                adw_bin_set_child (ADW_BIN (self), box);
+                status_page = adw_status_page_new ();
+                cc_panel_set_content (CC_PANEL (self), status_page);
 
-                label = gtk_label_new (_("Oops, something has gone wrong. Please contact your software vendor."));
-                gtk_widget_set_vexpand (label, TRUE);
-                gtk_label_set_wrap (GTK_LABEL (label), TRUE);
-                gtk_widget_set_valign (label, GTK_ALIGN_END);
-                gtk_box_append (GTK_BOX (box), label);
-
-                markup = g_strdup_printf ("<small><tt>%s</tt></small>",
-                                          _("NetworkManager needs to be running."));
-                label = gtk_label_new (NULL);
-                gtk_widget_set_vexpand (label, TRUE);
-                gtk_label_set_markup (GTK_LABEL (label), markup);
-                gtk_label_set_wrap (GTK_LABEL (label), TRUE);
-                gtk_widget_set_valign (label, GTK_ALIGN_START);
-                gtk_box_append (GTK_BOX (box), label);
+                adw_status_page_set_icon_name (ADW_STATUS_PAGE (status_page), "network-error-symbolic");
+                adw_status_page_set_title (ADW_STATUS_PAGE (status_page), _("Can’t Connect to Network"));
+                adw_status_page_set_description (ADW_STATUS_PAGE (status_page),
+                                                 _("NetworkManager needs to be running to view or make "
+                                                   "connections. Contact a system administrator or the "
+                                                   "software vendor."));
         } else {
                 manager_running (self);
         }
