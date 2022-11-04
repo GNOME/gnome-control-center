@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcNetworkPanel" parent="CcPanel">
+    <signal name="notify::folded" handler="network_panel_update_back_button_cb" swapped="yes"/>
+
+    <!-- Header Bar -->
+    <child type="titlebar">
+      <object class="AdwHeaderBar" id="titlebar">
+        <property name="show-end-title-buttons">True</property>
+        <property name="show-start-title-buttons">False</property>
+        <property name="title-widget">
+          <object class="AdwWindowTitle" id="page_title"/>
+        </property>
+
+        <child type="start">
+          <object class="GtkButton" id="back_button">
+            <property name="visible">False</property>
+            <property name="icon-name">go-previous-symbolic</property>
+            <signal name="clicked" handler="network_panel_back_clicked_cb" swapped="yes"/>
+          </object>
+        </child>
+
+        <child type="start">
+          <object class="GtkButton" id="cancel_button">
+            <property name="visible">False</property>
+            <property name="label" translatable="yes">Cancel</property>
+            <signal name="clicked" handler="network_panel_cancel_clicked_cb" swapped="yes"/>
+          </object>
+        </child>
+
+        <child type="end">
+          <object class="GtkButton" id="save_button">
+            <property name="visible">False</property>
+            <property name="label" translatable="yes">Save</property>
+            <style>
+              <class name="suggested-action"/>
+            </style>
+            <signal name="clicked" handler="network_panel_save_clicked_cb" swapped="yes"/>
+          </object>
+        </child>
+
+        <child type="end">
+          <object class="GtkSwitch" id="enable_switch">
+            <property name="visible">False</property>
+            <signal name="notify::active" handler="network_panel_enable_changed_cb" swapped="yes"/>
+          </object>
+        </child>
+
+      </object>
+    </child>
 
     <child type="content">
+      <object class="AdwLeaflet" id="main_leaflet">
+        <property name="can-unfold">False</property>
+        <property name="can-navigate-back">True</property>
+        <signal name="notify::visible-child" handler="network_panel_update_back_button_cb" swapped="yes"/>
+        <signal name="notify::visible-child" handler="visible_child_changed_cb" swapped="yes"/>
+
+        <child>
       <object class="AdwPreferencesPage">
         <!-- Each group below will contain GtkStacks from the NetDevices -->
         <child>
@@ -79,15 +133,40 @@
             </child>
           </object>
         </child>
+
         <child>
           <object class="AdwPreferencesGroup">
+            <!-- xxx: Added to avoid confusion with the preceding VPN row -->
+            <property name="title" translatable="yes">Proxy</property>
             <child>
-              <object class="GtkBox" id="box_proxy">
-                <property name="orientation">vertical</property>
+              <object class="GtkListBox">
+                <signal name="row-activated" handler="settings_row_activated_cb" swapped="yes"/>
+                <style>
+                  <class name="boxed-list" />
+                </style>
+                <child>
+                  <object class="CcListRow" id="proxy_row">
+                    <property name="title" translatable="yes">Proxy</property>
+                    <property name="show-arrow">True</property>
+                    <property name="selectable">False</property>
+                    <property name="icon-name">preferences-system-network-proxy-symbolic</property>
+                    <property name="secondary-label" bind-source="proxy_page" bind-property="state-text" bind-flags="sync-create"/>
+                  </object>
+                </child>
               </object>
             </child>
           </object>
         </child>
+
+            </object>
+        </child>
+
+        <child>
+          <object class="CcNetProxyPage" id="proxy_page">
+            <signal name="notify::modified" handler="network_proxy_modified_cb" swapped="yes"/>
+          </object>
+        </child>
+
       </object>
     </child>
   </template>
