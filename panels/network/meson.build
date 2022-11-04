@@ -41,7 +41,6 @@ sources = files(
   'net-device-ethernet.c',
   'net-device-mobile.c',
   'net-device-wifi.c',
-  'net-proxy.c',
   'net-vpn.c',
   'network-dialogs.c',
   'panel-common.c',
@@ -57,7 +56,6 @@ resource_data = files(
   'network-bluetooth.ui',
   'network-ethernet.ui',
   'network-mobile.ui',
-  'network-proxy.ui',
   'network-vpn.ui',
   'network-wifi.ui',
 )
