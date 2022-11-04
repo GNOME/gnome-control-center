@@ -32,6 +32,7 @@ endforeach
 sources = files(
   'cc-qr-code.c',
   'cc-network-panel.c',
+  'cc-net-proxy-page.c',
   'cc-wifi-connection-row.c',
   'cc-wifi-connection-list.c',
   'cc-wifi-panel.c',
@@ -49,6 +50,7 @@ sources = files(
 
 resource_data = files(
   'cc-network-panel.ui',
+  'cc-net-proxy-page.c',
   'cc-wifi-connection-row.ui',
   'cc-wifi-panel.ui',
   'cc-wifi-hotspot-dialog.ui',

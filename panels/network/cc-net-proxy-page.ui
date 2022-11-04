@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcNetProxyPage" parent="AdwPreferencesPage">
+
+    <!-- Proxy Automatic/Manual -->
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="margin-top">18</property>
+        <child>
+          <object class="GtkListBox">
+            <property name="selection-mode">none</property>
+            <style>
+              <class name="boxed-list"/>
+            </style>
+            <child>
+              <object class="AdwComboRow" id="proxy_type_row">
+                <property name="title" translatable="yes">Configuration</property>
+                <signal name="notify::selected-item" handler="proxy_configuration_changed_cb" swapped="yes"/>
+
+                <property name="model">
+                  <object class="GtkStringList">
+                    <!-- Update cc-net-proxy-page.c if the order is changed -->
+                    <items>
+                      <item translatable="yes">Automatic</item>
+                      <item translatable="yes">Manual</item>
+                    </items>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwPreferencesGroup">
+        <child>
+          <object class="GtkStack" id="main_stack">
+
+            <child>
+              <object class="AdwPreferencesGroup" id="automatic_view">
+                <child>
+                  <object class="GtkListBox">
+                    <property name="selection-mode">none</property>
+                    <style>
+                      <class name="boxed-list"/>
+                    </style>
+
+                    <!-- Configuration URL -->
+                    <child>
+                      <object class="AdwEntryRow" id="proxy_url_entry">
+                        <property name="title" translatable="yes">Configuration URL</property>
+                      </object>
+                    </child>
+
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkLabel" id="proxy_warning_label">
+                    <property name="margin-top">12</property>
+                    <property name="wrap">1</property>
+                    <property name="label" translatable="yes">Web Proxy Autodiscovery is used when a Configuration URL is not provided. This is not recommended for untrusted public networks.</property>
+                    <style>
+                      <class name="dim-label"/>
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkBox" id="manual_view">
+                <property name="orientation">vertical</property>
+                <property name="spacing">24</property>
+
+                <!-- HTTP Proxy -->
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">HTTP Proxy</property>
+                    <child>
+                      <object class="GtkListBox">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+
+                        <!-- HTTP URL -->
+                        <child>
+                          <object class="AdwEntryRow" id="http_host_entry">
+                            <property name="title" translatable="yes">URL</property>
+                          </object>
+                        </child>
+
+                        <!-- HTTP Port -->
+                        <child>
+                          <object class="AdwActionRow">
+                            <property name="title" translatable="yes">Port</property>
+                            <child type="suffix">
+                              <object class="GtkSpinButton" id="http_port_spin_button">
+                                <property name="valign">center</property>
+                                <property name="xalign">1</property>
+                                <property name="adjustment">
+                                  <object class="GtkAdjustment" id="http_port_adjustment">
+                                    <property name="upper">65535</property>
+                                    <property name="step-increment">1</property>
+                                  </object>
+                                </property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">HTTP proxy port</property>
+                                </accessibility>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- HTTPS Proxy -->
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">HTTPS Proxy</property>
+                    <child>
+                      <object class="GtkListBox">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+
+                        <!-- HTTPS URL -->
+                        <child>
+                          <object class="AdwEntryRow" id="https_host_entry">
+                            <property name="title" translatable="yes">URL</property>
+                          </object>
+                        </child>
+
+                        <!-- HTTPS Port -->
+                        <child>
+                          <object class="AdwActionRow">
+                            <property name="title" translatable="yes">Port</property>
+                            <child type="suffix">
+                              <object class="GtkSpinButton" id="https_port_spin_button">
+                                <property name="valign">center</property>
+                                <property name="xalign">1</property>
+                                <property name="adjustment">
+                                  <object class="GtkAdjustment" id="https_port_adjustment">
+                                    <property name="upper">65535</property>
+                                    <property name="step-increment">1</property>
+                                  </object>
+                                </property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">HTTPS proxy port</property>
+                                </accessibility>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- FTP Proxy -->
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">FTP Proxy</property>
+                    <child>
+                      <object class="GtkListBox">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+
+                        <!-- FTP URL -->
+                        <child>
+                          <object class="AdwEntryRow" id="ftp_host_entry">
+                            <property name="title" translatable="yes">URL</property>
+                          </object>
+                        </child>
+
+                        <!-- FTP Port -->
+                        <child>
+                          <object class="AdwActionRow">
+                            <property name="title" translatable="yes">Port</property>
+                            <child type="suffix">
+                              <object class="GtkSpinButton" id="ftp_port_spin_button">
+                                <property name="valign">center</property>
+                                <property name="xalign">1</property>
+                                <property name="adjustment">
+                                  <object class="GtkAdjustment" id="ftp_port_adjustment">
+                                    <property name="upper">65535</property>
+                                    <property name="step-increment">1</property>
+                                  </object>
+                                </property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">FTP proxy port</property>
+                                </accessibility>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <!-- SOCKS Host -->
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <property name="title" translatable="yes">SOCKS Host</property>
+                    <child>
+                      <object class="GtkListBox">
+                        <property name="selection-mode">none</property>
+                        <style>
+                          <class name="boxed-list"/>
+                        </style>
+
+                        <!-- SOCKS URL -->
+                        <child>
+                          <object class="AdwEntryRow" id="socks_host_entry">
+                            <property name="title" translatable="yes">URL</property>
+                          </object>
+                        </child>
+
+                        <!-- SOCKS Port -->
+                        <child>
+                          <object class="AdwActionRow">
+                            <property name="title" translatable="yes">Port</property>
+                            <child type="suffix">
+                              <object class="GtkSpinButton" id="socks_port_spin_button">
+                                <property name="valign">center</property>
+                                <property name="xalign">1</property>
+                                <property name="adjustment">
+                                  <object class="GtkAdjustment" id="socks_port_adjustment">
+                                    <property name="upper">65535</property>
+                                    <property name="step-increment">1</property>
+                                  </object>
+                                </property>
+                                <accessibility>
+                                  <property name="label" translatable="yes">SOCKS host port</property>
+                                </accessibility>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwPreferencesGroup">
+                    <child>
+                      <object class="AdwEntryRow" id="proxy_ignore_entry">
+                        <property name="title" translatable="yes">Ignored Hosts</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+              </object> <!-- ./GtkBox manual_box -->
+            </child>
+
+          </object> <!-- ./GtkStack main_stack -->
+        </child>
+
+      </object> <!-- ./AdwPreferencesGroup -->
+    </child>
+
+  </template>
+
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="http_host_entry"/>
+      <widget name="http_port_spin_button"/>
+
+      <widget name="https_host_entry"/>
+      <widget name="https_port_spin_button"/>
+
+      <widget name="ftp_host_entry"/>
+      <widget name="ftp_port_spin_button"/>
+
+      <widget name="socks_host_entry"/>
+      <widget name="socks_port_spin_button"/>
+    </widgets>
+  </object>
+
+</interface>
