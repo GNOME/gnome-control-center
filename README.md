@@ -9,7 +9,7 @@ GNOME Settings is GNOME's main interface for configuration of various aspects of
 
 ## Contributing
 
-See `docs/CONTRIBUTING.md` for details on the contribution process, and `docs/HACKING.md`
+See `docs/CONTRIBUTING.md` for details on the contribution process, and `docs/CODING_STYLE.md`
 for the coding style guidelines.
 
 ## Reporting Bugs
