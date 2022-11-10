@@ -66,7 +66,7 @@ size, disability, ethnicity, gender identity and expression, level of experience
 nationality, personal appearance, race, religion, or sexual identity and
 orientation.
 
-### Communication Guideline
+### Communication Guidelines
 
 It is of ultimate importance to maintain a community in which everyone feels free to express
 themselves, review, and comment on each others ideas, both technical and otherwise. Correspondingly,
