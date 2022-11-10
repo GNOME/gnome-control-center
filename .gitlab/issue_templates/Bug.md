@@ -4,7 +4,7 @@ Not following the communication guidelines [1] will mean your issue or comment
 will be removed. Read it carefully before submitting this issue.
 
 
-[1] https://gitlab.gnome.org/GNOME/gnome-control-center/blob/main/docs/CONTRIBUTING.md#communication-guidelines
+[1] https://gitlab.gnome.org/GNOME/gnome-control-center/blob/main/docs/CODE_OF_CONDUCT.md#communication-guidelines
 
  -->
 

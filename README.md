@@ -60,4 +60,4 @@ Note that GNOME Settings Flatpak will only work if you are running
 the latest GNOME version in your host system.
 
 
-[communication-guidelines]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/main/docs/CONTRIBUTING.md#communication-guidelines
+[communication-guidelines]: https://gitlab.gnome.org/GNOME/gnome-control-center/blob/main/docs/CODE_OF_CONDUCT.md#communication-guidelines
