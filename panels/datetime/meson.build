@@ -39,6 +39,7 @@ resources = gnome.compile_resources(
 sources = files(
   'cc-datetime-panel.c',
   'cc-timezone-map.c',
+  'cc-tz-item.c',
   'date-endian.c',
   'tz.c'
 )
