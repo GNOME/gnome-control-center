@@ -21,9 +21,6 @@ i18n.merge_file(
 )
 
 resource_data = files(
-  'data/bg_dim.png',
-  'data/bg.png',
-  'data/pin.png',
   'backward',
   'cc-datetime-panel.ui',
   'cc-tz-dialog.ui',
@@ -40,7 +37,6 @@ resources = gnome.compile_resources(
 
 sources = files(
   'cc-datetime-panel.c',
-  'cc-timezone-map.c',
   'cc-tz-item.c',
   'cc-tz-dialog.c',
   'date-endian.c',
