@@ -26,7 +26,7 @@
 
 #include <langinfo.h>
 #include <sys/time.h>
-#include "cc-timezone-map.h"
+#include "cc-tz-dialog.h"
 #include "timedated.h"
 #include "date-endian.h"
 #define GNOME_DESKTOP_USE_UNSTABLE_API
@@ -45,12 +45,6 @@
 #define DEFAULT_TZ "Europe/London"
 #define GETTEXT_PACKAGE_TIMEZONES GETTEXT_PACKAGE "-timezones"
 
-enum {
-  CITY_COL_CITY_HUMAN_READABLE,
-  CITY_COL_ZONE,
-  CITY_NUM_COLS
-};
-
 #define DATETIME_PERMISSION "org.gnome.controlcenter.datetime.configure"
 #define DATETIME_TZ_PERMISSION "org.freedesktop.timedate1.set-timezone"
 #define LOCATION_SETTINGS "org.gnome.system.location"
@@ -68,8 +62,6 @@ struct _CcDateTimePanel
 {
   CcPanel parent_instance;
 
-  GtkWidget *map;
-
   GList *toplevels;
 
   TzLocation *current_location;
@@ -82,12 +74,9 @@ struct _CcDateTimePanel
   GSettings *datetime_settings;
   GSettings *filechooser_settings;
   GDesktopClockFormat clock_format;
-  GtkFrame *aspectmap;
   GtkWidget *auto_datetime_row;
   GtkWidget *auto_timezone_row;
   GtkWidget *auto_timezone_switch;
-  GtkListStore *city_liststore;
-  GtkTreeModelSort *city_modelsort;
   GtkWidget *date_grid;
   GtkWidget *datetime_button;
   GtkWidget *datetime_dialog;
@@ -107,7 +96,6 @@ struct _CcDateTimePanel
   GtkWidget *timezone_button;
   GtkWidget *timezone_dialog;
   GtkWidget *timezone_label;
-  GtkWidget *timezone_searchentry;
   GtkWidget *year_spinbutton;
 
   GnomeWallClock *clock_tracker;
@@ -383,25 +371,6 @@ change_date (CcDateTimePanel *self)
   queue_set_datetime (self);
 }
 
-static gboolean
-city_changed_cb (CcDateTimePanel    *self,
-                 GtkTreeModel       *model,
-                 GtkTreeIter        *iter,
-                 GtkEntryCompletion *completion)
-{
-  GtkWidget *entry;
-  g_autofree gchar *zone = NULL;
-
-  gtk_tree_model_get (model, iter,
-                      CITY_COL_ZONE, &zone, -1);
-  cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->map), zone);
-
-  entry = gtk_entry_completion_get_entry (completion);
-  gtk_editable_set_text (GTK_EDITABLE (entry), "");
-
-  return TRUE;
-}
-
 static char *
 translated_city_name (TzLocation *loc)
 {
@@ -432,18 +401,8 @@ translated_city_name (TzLocation *loc)
 static void
 update_timezone (CcDateTimePanel *self)
 {
-  g_autofree gchar *bubble_text = NULL;
   g_autofree gchar *city_country = NULL;
   g_autofree gchar *label = NULL;
-  g_autofree gchar *time_label = NULL;
-  g_autofree gchar *utc_label = NULL;
-  g_autofree gchar *tz_desc = NULL;
-  gboolean use_ampm;
-
-  if (self->clock_format == G_DESKTOP_CLOCK_FORMAT_12H)
-    use_ampm = TRUE;
-  else
-    use_ampm = FALSE;
 
   city_country = translated_city_name (self->current_location);
 
@@ -453,62 +412,6 @@ update_timezone (CcDateTimePanel *self)
                            g_date_time_get_timezone_abbreviation (self->date),
                            city_country);
   gtk_label_set_text (GTK_LABEL (self->timezone_label), label);
-
-  /* Translators: UTC here means the Coordinated Universal Time.
-   * %:::z will be replaced by the offset from UTC e.g. UTC+02 */
-  utc_label = g_date_time_format (self->date, _("UTC%:::z"));
-
-  if (use_ampm)
-    {
-      /* Translators: This is the time format used in 12-hour mode. */
-      time_label = g_date_time_format (self->date, _("%l:%M %p"));
-    }
-  else
-    {
-      /* Translators: This is the time format used in 24-hour mode. */
-      time_label = g_date_time_format (self->date, _("%R"));
-    }
-
-  /* Update the text bubble in the timezone map */
-  /* Translators: "timezone (utc shift)" */
-  tz_desc = g_strdup_printf (C_("timezone map", "%s (%s)"),
-                             g_date_time_get_timezone_abbreviation (self->date),
-                             utc_label);
-  bubble_text = g_strdup_printf ("<b>%s</b>\n"
-                                 "<small>%s</small>\n"
-                                 "<b>%s</b>",
-                                 tz_desc,
-                                 city_country,
-                                 time_label);
-  cc_timezone_map_set_bubble_text (CC_TIMEZONE_MAP (self->map), bubble_text);
-}
-
-static void
-location_changed_cb (CcDateTimePanel *self,
-                     TzLocation      *location)
-{
-  g_autoptr(GDateTime) old_date = NULL;
-  g_autoptr(GTimeZone) timezone = NULL;
-
-  g_debug ("location changed to %s/%s", location->country, location->zone);
-
-  self->current_location = location;
-
-  timezone = g_time_zone_new_identifier (location->zone);
-  if (!timezone)
-    {
-      g_warning ("Could not find timezone \"%s\", using UTC instead", location->zone);
-      timezone = g_time_zone_new_utc ();
-    }
-
-  old_date = self->date;
-  self->date = g_date_time_to_timezone (old_date, timezone);
-  cc_time_editor_set_time (CC_TIME_EDITOR (self->time_editor),
-                           g_date_time_get_hour (self->date),
-                           g_date_time_get_minute (self->date));
-
-  update_timezone (self);
-  queue_set_timezone (self);
 }
 
 static void
@@ -519,35 +422,14 @@ get_initial_timezone (CcDateTimePanel *self)
   timezone = timedate1_get_timezone (self->dtm);
 
   if (timezone == NULL ||
-      !cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->map), timezone))
+      !cc_tz_dialog_set_tz (CC_TZ_DIALOG (self->timezone_dialog), timezone))
     {
       g_warning ("Timezone '%s' is unhandled, setting %s as default", timezone ? timezone : "(null)", DEFAULT_TZ);
-      cc_timezone_map_set_timezone (CC_TIMEZONE_MAP (self->map), DEFAULT_TZ);
+      cc_tz_dialog_set_tz (CC_TZ_DIALOG (self->timezone_dialog), DEFAULT_TZ);
     }
-  self->current_location = cc_timezone_map_get_location (CC_TIMEZONE_MAP (self->map));
+
+  self->current_location = cc_tz_dialog_get_selected_location (CC_TZ_DIALOG (self->timezone_dialog));
   update_timezone (self);
-}
-
-static void
-load_cities (TzLocation   *loc,
-             GtkListStore *city_store)
-{
-  g_autofree gchar *human_readable = NULL;
-
-  human_readable = translated_city_name (loc);
-  gtk_list_store_insert_with_values (city_store, NULL, 0,
-                                     CITY_COL_CITY_HUMAN_READABLE, human_readable,
-                                     CITY_COL_ZONE, loc->zone,
-                                     -1);
-}
-
-static void
-load_regions_model (GtkListStore *cities)
-{
-  g_autoptr(TzDB) db = NULL;
-
-  db = tz_load_db ();
-  g_ptr_array_foreach (db->locations, (GFunc) load_cities, cities);
 }
 
 static void
@@ -698,9 +580,7 @@ on_can_ntp_changed (CcDateTimePanel *self)
 static void
 on_timezone_changed (CcDateTimePanel *self)
 {
-  g_signal_handlers_block_by_func (self->map, location_changed_cb, self);
   get_initial_timezone (self);
-  g_signal_handlers_unblock_by_func (self->map, location_changed_cb, self);
 }
 
 static void
@@ -796,6 +676,15 @@ bind_switch_to_row (CcDateTimePanel *self,
 }
 
 static void
+panel_tz_selection_changed_cb (CcDateTimePanel *self)
+{
+  g_assert (CC_IS_DATE_TIME_PANEL (self));
+
+  self->current_location = cc_tz_dialog_get_selected_location (CC_TZ_DIALOG (self->timezone_dialog));
+  queue_set_timezone (self);
+}
+
+static void
 list_box_row_activated (CcDateTimePanel *self,
                         GtkListBoxRow   *row)
 
@@ -829,24 +718,6 @@ time_changed_cb (CcDateTimePanel *self,
 
   update_time (self);
   queue_set_datetime (self);
-}
-
-static void
-setup_timezone_dialog (CcDateTimePanel *self)
-{
-  g_autoptr(GtkEntryCompletion) completion = NULL;
-
-  /* set up timezone map */
-  self->map = (GtkWidget *) cc_timezone_map_new ();
-  gtk_frame_set_child (self->aspectmap, self->map);
-
-  /* Create the completion object */
-  completion = gtk_entry_completion_new ();
-  gtk_entry_set_completion (GTK_ENTRY (self->timezone_searchentry), completion);
-
-  gtk_entry_completion_set_model (completion, GTK_TREE_MODEL (self->city_modelsort));
-
-  gtk_entry_completion_set_text_column (completion, CITY_COL_CITY_HUMAN_READABLE);
 }
 
 static void
@@ -956,12 +827,9 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/datetime/cc-datetime-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, aspectmap);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_datetime_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, auto_timezone_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, city_liststore);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, city_modelsort);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, date_box);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, datetime_dialog);
@@ -978,10 +846,10 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_button);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timezone_searchentry);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, year_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, year_spinbutton);
 
+  gtk_widget_class_bind_template_callback (widget_class, panel_tz_selection_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, list_box_row_activated);
   gtk_widget_class_bind_template_callback (widget_class, time_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
@@ -1047,7 +915,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   self->toplevels = g_list_append (self->toplevels, self->datetime_dialog);
   self->toplevels = g_list_append (self->toplevels, self->timezone_dialog);
 
-  setup_timezone_dialog (self);
+  /* setup_timezone_dialog (self); */
   setup_datetime_dialog (self);
 
   /* set up network time switch */
@@ -1087,20 +955,9 @@ cc_date_time_panel_init (CcDateTimePanel *self)
 
   update_time (self);
 
-  load_regions_model (GTK_LIST_STORE (self->city_liststore));
-
-  gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (self->city_modelsort), CITY_COL_CITY_HUMAN_READABLE,
-                                        GTK_SORT_ASCENDING);
-
   /* After the initial setup, so we can be sure that
    * the model is filled up */
   get_initial_timezone (self);
-
-  g_signal_connect_object (gtk_entry_get_completion (GTK_ENTRY (self->timezone_searchentry)),
-                           "match-selected", G_CALLBACK (city_changed_cb), self, G_CONNECT_SWAPPED);
-
-  g_signal_connect_object (self->map, "location-changed",
-                           G_CALLBACK (location_changed_cb), self, G_CONNECT_SWAPPED);
 
   /* Watch changes of timedated remote service properties */
   g_signal_connect_object (self->dtm, "g-properties-changed",

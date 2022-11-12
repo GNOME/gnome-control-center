@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <object class="GtkListStore" id="city_liststore">
-    <columns>
-      <!-- column-name city-human-readable -->
-      <column type="gchararray"/>
-      <!-- column-name zone -->
-      <column type="gchararray"/>
-    </columns>
+
+  <object class="CcTzDialog" id="timezone_dialog">
+    <signal name="tz-selected" handler="panel_tz_selection_changed_cb" swapped="yes"/>
   </object>
-  <object class="GtkTreeModelSort" id="city_modelsort">
-    <property name="model">city_liststore</property>
-  </object>
+
   <object class="GtkDialog" id="datetime_dialog">
     <property name="title" translatable="yes">Date &amp; Time</property>
     <property name="modal">True</property>
@@ -106,44 +100,6 @@
               </object>
             </child>
 
-          </object>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkDialog" id="timezone_dialog">
-    <property name="title" translatable="yes">Time Zone</property>
-    <property name="resizable">False</property>
-    <property name="modal">True</property>
-    <property name="use_header_bar">1</property>
-    <property name="hide-on-close">True</property>
-    <child internal-child="headerbar">
-      <object class="GtkHeaderBar" id="dialog_header_bar">
-        <property name="show-title-buttons">True</property>
-        <child type="title">
-            <object class="GtkEntry" id="timezone_searchentry">
-                <property name="halign">center</property>
-                <property name="margin_start">5</property>
-                <property name="margin_end">5</property>
-                <property name="width_chars">40</property>
-                <property name="primary_icon_name">edit-find-symbolic</property>
-                <property name="primary_icon_activatable">False</property>
-                <property name="primary_icon_sensitive">False</property>
-                <property name="placeholder_text" translatable="yes">Search for a city</property>
-            </object>
-        </child>
-      </object>
-    </child>
-    <child>
-      <object class="GtkBox" id="dialog_vbox7">
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child>
-          <object class="GtkFrame" id="aspectmap">
-            <property name="margin_start">5</property>
-            <property name="margin_end">5</property>
-            <property name="margin_top">5</property>
-            <property name="margin_bottom">5</property>
           </object>
         </child>
       </object>
