@@ -26,6 +26,7 @@ resource_data = files(
   'data/pin.png',
   'backward',
   'cc-datetime-panel.ui',
+  'cc-tz-dialog.ui',
   'cc-tz-row.ui',
 )
 
@@ -41,6 +42,7 @@ sources = files(
   'cc-datetime-panel.c',
   'cc-timezone-map.c',
   'cc-tz-item.c',
+  'cc-tz-dialog.c',
   'date-endian.c',
   'tz.c'
 )
