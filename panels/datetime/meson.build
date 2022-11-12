@@ -26,6 +26,7 @@ resource_data = files(
   'data/pin.png',
   'backward',
   'cc-datetime-panel.ui',
+  'cc-tz-row.ui',
 )
 
 resources = gnome.compile_resources(
