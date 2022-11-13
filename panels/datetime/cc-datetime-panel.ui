@@ -40,6 +40,7 @@
               <object class="GtkListBox" id="date_box">
                 <property name="width-request">320</property>
                 <property name="selection-mode">none</property>
+                <signal name="row-activated" handler="on_date_box_row_activated_cb" swapped="yes"/>
                 <style>
                   <class name="boxed-list"/>
                 </style>
@@ -62,27 +63,28 @@
 
                 <!-- Month row -->
                 <child>
-                  <object class="AdwComboRow" id="month_row">
+                  <object class="CcListRow" id="month_row">
                     <property name="title" translatable="yes">Month</property>
-                    <signal name="notify::selected" handler="on_month_row_selected_changed_cb" object="CcDateTimePanel" swapped="no" />
-                    <property name="model">
-                      <object class="GtkStringList">
-                        <items>
-                          <item translatable="yes">January</item>
-                          <item translatable="yes">February</item>
-                          <item translatable="yes">March</item>
-                          <item translatable="yes">April</item>
-                          <item translatable="yes">May</item>
-                          <item translatable="yes">June</item>
-                          <item translatable="yes">July</item>
-                          <item translatable="yes">August</item>
-                          <item translatable="yes">September</item>
-                          <item translatable="yes">October</item>
-                          <item translatable="yes">November</item>
-                          <item translatable="yes">December</item>
-                        </items>
+                    <binding name="secondary-label">
+                      <lookup name="string" type="GtkStringObject">
+                        <lookup name="selected-item">month_model</lookup>
+                      </lookup>
+                    </binding>
+                    <child type="suffix">
+                      <object class="GtkBox">
+                        <property name="valign">center</property>
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">pan-down-symbolic</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkPopover" id="month_popover">
+                            <property name="child">month_grid</property>
+                          </object>
+                        </child>
                       </object>
-                    </property>
+                    </child>
                   </object>
                 </child>
 
@@ -260,4 +262,49 @@
       </object>
     </child>
   </template>
+
+  <object class="GtkGridView" id="month_grid">
+    <property name="halign">start</property>
+    <property name="margin-start">3</property>
+    <property name="margin-end">3</property>
+    <property name="margin-top">3</property>
+    <property name="margin-bottom">3</property>
+    <property name="orientation">horizontal</property>
+    <property name="max-columns">6</property>
+    <property name="min-columns">6</property>
+    <property name="enable-rubberband">False</property>
+    <style>
+      <class name="month-grid"/>
+    </style>
+    <property name="factory">
+      <object class="GtkBuilderListItemFactory">
+        <property name="resource">/org/gnome/control-center/datetime/cc-month-row.ui</property>
+      </object>
+    </property>
+    <property name="model">
+      <object class="GtkSingleSelection" id="month_model">
+        <property name="autoselect">False</property>
+        <signal name="selection-changed" handler="on_month_selection_changed_cb" swapped="yes"/>
+        <property name="model">
+          <object class="GtkStringList">
+            <items>
+              <item translatable="yes">January</item>
+              <item translatable="yes">February</item>
+              <item translatable="yes">March</item>
+              <item translatable="yes">April</item>
+              <item translatable="yes">May</item>
+              <item translatable="yes">June</item>
+              <item translatable="yes">July</item>
+              <item translatable="yes">August</item>
+              <item translatable="yes">September</item>
+              <item translatable="yes">October</item>
+              <item translatable="yes">November</item>
+              <item translatable="yes">December</item>
+            </items>
+          </object>
+        </property>
+      </object>
+    </property>
+  </object>
+
 </interface>

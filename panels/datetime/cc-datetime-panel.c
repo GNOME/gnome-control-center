@@ -98,7 +98,9 @@ struct _CcDateTimePanel
   GtkLockButton *lock_button;
   GtkListBox *date_box;
   GtkListBoxRow *day_row;
-  AdwComboRow *month_row;
+  GtkSingleSelection *month_model;
+  GtkPopover  *month_popover;
+  GtkListBoxRow *month_row;
   GtkListBoxRow *year_row;
   GtkWidget *network_time_switch;
   GtkWidget *time_editor;
@@ -254,7 +256,7 @@ update_time (CcDateTimePanel *self)
     }
 
   self->month = g_date_time_get_month (self->date);
-  adw_combo_row_set_selected (self->month_row, self->month - 1);
+  gtk_single_selection_set_selected (self->month_model, self->month - 1);
   gtk_label_set_text (GTK_LABEL (self->datetime_label), label);
 }
 
@@ -578,20 +580,29 @@ month_year_changed (CcDateTimePanel *self)
 }
 
 static void
-on_month_row_selected_changed_cb (AdwComboRow     *month_row,
-                                  GParamSpec      *pspec,
-                                  CcDateTimePanel *self)
+on_date_box_row_activated_cb (CcDateTimePanel *self,
+                              GtkListBoxRow   *row)
 {
-  unsigned int i;
+  g_assert (CC_IS_DATE_TIME_PANEL (self));
+
+  if (row == self->month_row)
+    gtk_popover_popup (self->month_popover);
+}
+
+static void
+on_month_selection_changed_cb (CcDateTimePanel *self)
+{
+  guint i;
 
   g_assert (CC_IS_DATE_TIME_PANEL (self));
-  g_assert (ADW_IS_COMBO_ROW (month_row));
 
-  i = adw_combo_row_get_selected (month_row);
+  i = gtk_single_selection_get_selected (self->month_model);
   g_assert (i >= 0 && i < 12);
 
   self->month = i + 1;
   month_year_changed (self);
+
+  gtk_popover_popdown (self->month_popover);
 }
 
 static void
@@ -853,6 +864,9 @@ setup_datetime_dialog (CcDateTimePanel *self)
                                    ".gnome-control-center-datetime-setup-time>label {\n"
                                    "    font-size: 250%;\n"
                                    "}\n"
+                                   "gridview.month-grid > child {\n"
+                                   "  background: transparent;\n"
+                                   "}\n"
                                    ".gnome-control-center-datetime-setup-time>spinbutton>entry {\n"
                                    "    padding: 8px 13px;\n"
                                    "}", -1);
@@ -882,7 +896,7 @@ setup_datetime_dialog (CcDateTimePanel *self)
 
   /* Month */
   self->month = g_date_time_get_month (self->date);
-  adw_combo_row_set_selected (self->month_row, self->month - 1);
+  gtk_single_selection_set_selected (self->month_model, self->month - 1);
 }
 
 static int
@@ -956,6 +970,8 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, day_spinbutton);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, timeformat_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, lock_button);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_model);
+  gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_popover);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, month_row);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, network_time_switch);
   gtk_widget_class_bind_template_child (widget_class, CcDateTimePanel, time_editor);
@@ -970,7 +986,8 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, time_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, change_clock_settings);
   gtk_widget_class_bind_template_callback (widget_class, format_clock_name_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_month_row_selected_changed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_date_box_row_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_month_selection_changed_cb);
 
   bind_textdomain_codeset (GETTEXT_PACKAGE_TIMEZONES, "UTF-8");
 
