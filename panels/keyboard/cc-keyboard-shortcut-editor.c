@@ -34,7 +34,6 @@ struct _CcKeyboardShortcutEditor
   GtkEntry           *command_entry;
   GtkGrid            *custom_grid;
   GtkShortcutLabel   *custom_shortcut_accel_label;
-  GtkStack           *custom_shortcut_stack;
   GtkBox             *edit_box;
   GtkHeaderBar       *headerbar;
   GtkEntry           *name_entry;
@@ -331,9 +330,9 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
 
           /* We have to check if the current accelerator is empty in order to
            * decide if we show the "Set Shortcut" button or the accelerator label */
-          gtk_stack_set_visible_child (self->custom_shortcut_stack,
-                                       is_accel_empty ? GTK_WIDGET (self->change_custom_shortcut_button) : GTK_WIDGET (self->custom_shortcut_accel_label));
           gtk_widget_set_visible (GTK_WIDGET (self->reset_custom_button), !is_accel_empty);
+          gtk_widget_set_visible (GTK_WIDGET (self->change_custom_shortcut_button), is_accel_empty);
+          gtk_widget_set_visible (GTK_WIDGET (self->custom_shortcut_accel_label), !is_accel_empty);
         }
 
       valid = accel_valid &&
@@ -492,8 +491,10 @@ reset_custom_clicked_cb (CcKeyboardShortcutEditor *self)
   if (self->item)
     cc_keyboard_manager_reset_shortcut (self->manager, self->item);
 
-  gtk_stack_set_visible_child (self->custom_shortcut_stack, GTK_WIDGET (self->change_custom_shortcut_button));
-  gtk_widget_set_visible (GTK_WIDGET (self->reset_custom_button), FALSE);
+
+  gtk_widget_hide (GTK_WIDGET (self->custom_shortcut_accel_label));
+  gtk_widget_hide (GTK_WIDGET (self->reset_custom_button));
+  gtk_widget_show (GTK_WIDGET (self->change_custom_shortcut_button));
 }
 
 static void
@@ -592,9 +593,8 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
       /* If there is no accelerator set for this custom shortcut, show the "Set Shortcut" button. */
       is_accel_empty = !accel || accel[0] == '\0';
 
-      gtk_stack_set_visible_child (self->custom_shortcut_stack,
-                                   is_accel_empty ? GTK_WIDGET (self->change_custom_shortcut_button) : GTK_WIDGET (self->custom_shortcut_accel_label));
-
+      gtk_widget_set_visible (GTK_WIDGET (self->change_custom_shortcut_button), is_accel_empty);
+      gtk_widget_set_visible (GTK_WIDGET (self->custom_shortcut_accel_label), !is_accel_empty);
       gtk_widget_set_visible (GTK_WIDGET (self->reset_custom_button), !is_accel_empty);
 
       g_signal_handlers_unblock_by_func (self->command_entry, command_entry_changed_cb, self);
@@ -848,7 +848,6 @@ cc_keyboard_shortcut_editor_class_init (CcKeyboardShortcutEditorClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, command_entry);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, custom_grid);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, custom_shortcut_accel_label);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, custom_shortcut_stack);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, edit_box);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, headerbar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutEditor, name_entry);
@@ -962,10 +961,6 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
   self->mode = mode;
   is_create_mode = mode == CC_SHORTCUT_EDITOR_CREATE;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->new_shortcut_conflict_label), is_create_mode);
-  gtk_stack_set_visible_child (self->custom_shortcut_stack,
-                               is_create_mode ? GTK_WIDGET (self->change_custom_shortcut_button) : GTK_WIDGET (self->custom_shortcut_accel_label));
-
   if (mode == CC_SHORTCUT_EDITOR_CREATE)
     {
       /* Cleanup whatever was set before */
@@ -979,6 +974,14 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
       gtk_widget_set_sensitive (GTK_WIDGET (self->name_entry), TRUE);
       gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
-      gtk_widget_set_visible (GTK_WIDGET (self->reset_custom_button), FALSE);
+      gtk_widget_hide (GTK_WIDGET (self->custom_shortcut_accel_label));
+      gtk_widget_show (GTK_WIDGET (self->change_custom_shortcut_button));
+      gtk_widget_hide (GTK_WIDGET (self->reset_custom_button));
+      gtk_widget_set_visible (GTK_WIDGET (self->new_shortcut_conflict_label), !is_create_mode);
+    }
+  else
+    {
+        gtk_widget_set_visible (GTK_WIDGET (self->new_shortcut_conflict_label), is_create_mode);
     }
 }
+

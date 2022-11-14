@@ -190,7 +190,6 @@
                 </child>
                 <child>
                   <object class="GtkLabel" id="new_shortcut_conflict_label">
-                    <property name="hexpand">True</property>
                     <property name="wrap">True</property>
                     <property name="wrap_mode">word-char</property>
                     <property name="width_chars">15</property>
@@ -199,7 +198,7 @@
                     <layout>
                       <property name="column">0</property>
                       <property name="row">3</property>
-                      <property name="column-span">2</property>
+                      <property name="column-span">3</property>
                     </layout>
                   </object>
                 </child>
@@ -243,24 +242,25 @@
                   </object>
                 </child>
                 <child>
-                  <object class="GtkStack" id="custom_shortcut_stack">
+                  <object class="GtkShortcutLabel" id="custom_shortcut_accel_label">
+                    <property name="halign">start</property>
+                    <property name="disabled-text" translatable="yes">None</property>
                     <layout>
                       <property name="column">1</property>
                       <property name="row">2</property>
                     </layout>
-                    <child>
-                      <object class="GtkButton" id="change_custom_shortcut_button">
-                        <property name="label" translatable="yes">Set Shortcut…</property>
-                        <signal name="clicked" handler="change_custom_shortcut_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkShortcutLabel" id="custom_shortcut_accel_label">
-                        <property name="halign">start</property>
-                        <property name="hexpand">True</property>
-                        <property name="disabled-text" translatable="yes">None</property>
-                      </object>
-                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="change_custom_shortcut_button">
+                    <property name="label" translatable="yes">Set Shortcut…</property>
+                    <property name="hexpand">True</property>
+                    <signal name="clicked" handler="change_custom_shortcut_button_clicked_cb" object="CcKeyboardShortcutEditor" swapped="yes" />
+                    <layout>
+                      <property name="column">1</property>
+                      <property name="row">2</property>
+                      <property name="column-span">2</property>
+                    </layout>
                   </object>
                 </child>
               </object>
@@ -286,3 +286,4 @@
     </widgets>
   </object>
 </interface>
+
