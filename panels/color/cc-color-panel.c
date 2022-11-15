@@ -1642,7 +1642,8 @@ gcm_prefs_update_device_list_extra_entry (CcColorPanel *prefs)
   gtk_widget_set_visible (prefs->box_devices, first_row != NULL);
 
   /* if we have only one device expand it by default */
-  if (gtk_list_box_get_row_at_index (prefs->list_box, 1) == NULL)
+  if (first_row != NULL &&
+      gtk_list_box_get_row_at_index (prefs->list_box, 1) == NULL)
     cc_color_device_set_expanded (CC_COLOR_DEVICE (first_row), TRUE);
 }
 
