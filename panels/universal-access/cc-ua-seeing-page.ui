@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcUaSeeingPage" parent="AdwPreferencesPage">
+
+    <child>
+      <object class="AdwPreferencesGroup">
+
+        <child>
+          <object class="CcListRow" id="high_contrast_row">
+            <property name="title" translatable="yes">_High Contrast</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcListRow" id="animations_row">
+            <property name="title" translatable="yes">_Animations Effects</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcListRow" id="large_text_row">
+            <property name="title" translatable="yes">_Large Text</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcListRow" id="cursor_size_row">
+            <property name="title" translatable="yes">_Cursor Size</property>
+            <property name="use-underline">True</property>
+            <signal name="activated" handler="ua_cursor_row_activated_cb" swapped="yes"/>
+            <property name="show-arrow">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcListRow" id="sound_keys_row">
+            <property name="title" translatable="yes">_Sound Keys</property>
+            <property name="subtitle" translatable="yes">Beep when Num Lock or Caps Lock are turned on or off.</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcListRow" id="overlay_scrollbars_row">
+            <property name="title" translatable="yes">_Overlay Scrollbars</property>
+            <property name="subtitle" translatable="yes">Use scrollbars that overlay the content and automatically hide.</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwPreferencesGroup">
+        <child>
+          <object class="CcListRow" id="screen_reader_row">
+            <property name="title" translatable="yes">Screen _Reader</property>
+            <property name="subtitle" translatable="yes">The screen reader reads displayed text as you move the focus.</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+  </template>
+</interface>

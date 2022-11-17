@@ -17,6 +17,7 @@ sources = files(
   'cc-repeat-keys-dialog.c',
   'cc-typing-dialog.c',
   'cc-ua-panel.c',
+  'cc-ua-seeing-page.c',
   'cc-visual-alerts-dialog.c',
   'cc-zoom-options-dialog.c'
 )
@@ -33,6 +34,7 @@ resource_data = files(
   'cc-pointing-dialog.ui',
   'cc-repeat-keys-dialog.ui',
   'cc-typing-dialog.ui',
+  'cc-ua-seeing-page.ui',
   'cc-visual-alerts-dialog.ui',
   'cc-zoom-options-dialog.ui'
 )
