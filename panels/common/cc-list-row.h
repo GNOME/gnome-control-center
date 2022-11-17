@@ -37,7 +37,6 @@ void     cc_list_row_set_show_arrow       (CcListRow   *self,
 void     cc_list_row_set_show_switch      (CcListRow   *self,
                                            gboolean     show_switch);
 gboolean cc_list_row_get_active           (CcListRow   *self);
-void     cc_list_row_activate             (CcListRow   *self);
 void     cc_list_row_set_secondary_label  (CcListRow   *self,
                                            const gchar *label);
 void     cc_list_row_set_secondary_markup (CcListRow   *self,
