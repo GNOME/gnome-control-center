@@ -62,36 +62,6 @@ enum {
 static GParamSpec *properties[N_PROPS];
 
 static void
-cc_list_row_activated_cb (CcListRow     *self,
-                          GtkListBoxRow *row)
-{
-  g_assert (CC_IS_LIST_ROW (self));
-
-  if (!self->show_switch || row != GTK_LIST_BOX_ROW (self))
-    return;
-
-  cc_list_row_activate (self);
-}
-
-static void
-cc_list_row_parent_changed_cb (CcListRow *self)
-{
-  GtkWidget *parent;
-
-  g_assert (CC_IS_LIST_ROW (self));
-
-  parent = gtk_widget_get_parent (GTK_WIDGET (self));
-
-  if (!parent)
-    return;
-
-  g_return_if_fail (GTK_IS_LIST_BOX (parent));
-  g_signal_connect_object (parent, "row-activated",
-                           G_CALLBACK (cc_list_row_activated_cb),
-                           self, G_CONNECT_SWAPPED);
-}
-
-static void
 cc_list_row_switch_active_cb (CcListRow *self)
 {
   gboolean switch_active;
@@ -228,9 +198,6 @@ cc_list_row_init (CcListRow *self)
   g_resources_register (cc_common_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
-  g_signal_connect_object (self, "notify::parent",
-                           G_CALLBACK (cc_list_row_parent_changed_cb),
-                           self, G_CONNECT_SWAPPED);
 }
 
 void
@@ -270,18 +237,6 @@ cc_list_row_get_active (CcListRow *self)
   g_return_val_if_fail (self->show_switch, FALSE);
 
   return self->switch_active;
-}
-
-void
-cc_list_row_activate (CcListRow *self)
-{
-  g_return_if_fail (CC_IS_LIST_ROW (self));
-  g_return_if_fail (self->show_switch);
-
-  self->switch_active = !self->switch_active;
-  g_object_notify_by_pspec (G_OBJECT (self), properties[PROP_ACTIVE]);
-
-  gtk_widget_activate (GTK_WIDGET (self->enable_switch));
 }
 
 void
