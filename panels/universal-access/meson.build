@@ -19,6 +19,7 @@ sources = files(
   'cc-ua-panel.c',
   'cc-ua-hearing-page.c',
   'cc-ua-seeing-page.c',
+  'cc-ua-typing-page.c',
   'cc-visual-alerts-dialog.c',
   'cc-zoom-options-dialog.c'
 )
@@ -37,6 +38,7 @@ resource_data = files(
   'cc-typing-dialog.ui',
   'cc-ua-hearing-page.ui',
   'cc-ua-seeing-page.ui',
+  'cc-ua-typing-page.ui',
   'cc-visual-alerts-dialog.ui',
   'cc-zoom-options-dialog.ui'
 )
