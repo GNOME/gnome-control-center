@@ -21,6 +21,7 @@ sources = files(
   'cc-ua-mouse-page.c',
   'cc-ua-seeing-page.c',
   'cc-ua-typing-page.c',
+  'cc-ua-zoom-page.c',
   'cc-visual-alerts-dialog.c',
   'cc-zoom-options-dialog.c'
 )
@@ -41,6 +42,7 @@ resource_data = files(
   'cc-ua-mouse-page.ui',
   'cc-ua-seeing-page.ui',
   'cc-ua-typing-page.ui',
+  'cc-ua-zoom-page.ui',
   'cc-visual-alerts-dialog.ui',
   'cc-zoom-options-dialog.ui'
 )

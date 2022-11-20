@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcUaZoomPage" parent="AdwPreferencesPage">
+
+    <child>
+      <object class="AdwPreferencesGroup">
+        <child>
+          <object class="CcListRow" id="desktop_zoom_row">
+            <property name="title" translatable="yes">_Desktop Zoom</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Magnifier</property>
+
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Magnification Factor</property>
+            <child type="suffix">
+              <object class="GtkSpinButton" id="magnify_factor_spin">
+                <property name="valign">center</property>
+                <property name="digits">2</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">1</property>
+                    <property name="upper">20</property>
+                    <property name="value">2</property>
+                    <property name="step-increment">0.25</property>
+                    <property name="page-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwComboRow" id="magnify_view_row">
+            <property name="title" translatable="yes">_Magnifier View</property>
+            <property name="use-underline">True</property>
+            <signal name="notify::selected" handler="ua_zoom_magnify_postion_row_changed_cb" swapped="yes" />
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="yes">Follow Mouse Cursor</item>
+                  <item translatable="yes">Screen Area</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcListRow" id="magnify_outside_screen_row">
+            <property name="title" translatable="yes">_Extend Outside Screen Edges</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwComboRow" id="zoom_screen_area_row">
+            <property name="sensitive" bind-source="magnify_outside_screen_row" bind-flags="sync-create"/>
+            <signal name="notify::selected" handler="ua_zoom_screen_area_row_changed_cb" swapped="yes"/>
+            <property name="title" translatable="yes">Screen Area</property>
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="yes">Full Screen</item>
+                  <item translatable="yes">Top Half</item>
+                  <item translatable="yes">Bottom Half</item>
+                  <item translatable="yes">Left Half</item>
+                  <item translatable="yes">Right Half</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwComboRow" id="zoom_follow_behaviour_row">
+            <property name="sensitive" bind-source="magnify_outside_screen_row" bind-flags="sync-create"/>
+            <property name="title" translatable="yes">Follow Behaviour</property>
+            <signal name="notify::selected" handler="ua_zoom_behaviour_row_changed_cb" swapped="yes" />
+            <property name="model">
+              <object class="GtkStringList">
+                <items>
+                  <item translatable="yes">Moves with Contents</item>
+                  <item translatable="yes">Pushes Contents Around</item>
+                  <item translatable="yes">Remains Cented</item>
+                </items>
+              </object>
+            </property>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Crosshairs</property>
+        <child type="header-suffix">
+          <object class="GtkSwitch" id="crosshair_switch">
+            <property name="valign">center</property>
+            <property name="margin-end">14</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="CcListRow" id="crosshair_overlap_mouse_row">
+            <property name="title" translatable="yes">_Overlap Mouse Cursor</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Thickness</property>
+            <child type="suffix">
+              <object class="GtkScale" id="crosshair_thickness_scale">
+                <marks>
+                  <mark value="1" translatable="yes">Thin</mark>
+                  <mark value="100" translatable="yes">Thick</mark>
+                </marks>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">1</property>
+                    <property name="upper">100</property>
+                    <property name="value">8</property>
+                    <property name="step-increment">1</property>
+                    <property name="page-increment">10</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesRow">
+            <property name="activatable">False</property>
+            <property name="selectable">False</property>
+            <child>
+              <object class="GtkBox">
+                <property name="margin-start">12</property>
+                <property name="margin-end">12</property>
+                <property name="margin-top">6</property>
+                <property name="margin-bottom">6</property>
+                <property name="orientation">vertical</property>
+                <property name="spacing">6</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="xalign">0.0</property>
+                    <property name="label" translatable="yes">Length</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkScale" id="crosshair_length_scale">
+                    <property name="hexpand">True</property>
+                    <marks>
+                      <mark value="20" translatable="yes">Short</mark>
+                      <mark value="1024" translatable="yes">1/4 screen</mark>
+                      <mark value="2048" translatable="yes">1/2 Screen</mark>
+                      <mark value="3072" translatable="yes">3/4 Screen</mark>
+                      <mark value="4096" translatable="yes">Long</mark>
+                    </marks>
+                    <property name="adjustment">
+                      <object class="GtkAdjustment">
+                        <property name="lower">20</property>
+                        <property name="upper">4096</property>
+                        <property name="value">4096</property>
+                        <property name="step-increment">1</property>
+                        <property name="page-increment">100</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Color</property>
+            <child>
+              <object class="GtkColorButton" id="crosshair_color_button">
+                <property name="valign">center</property>
+                <signal name="color-set" handler="ua_zoom_crosshair_color_set_cb" swapped="yes"/>
+              </object>
+            </child>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+    <child>
+      <object class="AdwPreferencesGroup">
+        <property name="title" translatable="yes">Color Filters</property>
+
+        <child>
+          <object class="CcListRow" id="color_inverted_row">
+            <property name="title" translatable="yes">_Inverted</property>
+            <property name="subtitle" translatable="yes">Reverse colors in the magnifier region</property>
+            <property name="use-underline">True</property>
+            <property name="show-switch">True</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Brightness</property>
+            <child type="suffix">
+              <object class="GtkScale" id="brightness_scale">
+                <property name="width-request">240</property>
+                <marks>
+                  <mark value="-0.75" translatable="yes">Low</mark>
+                  <mark value="0.75" translatable="yes">High</mark>
+                </marks>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-0.75</property>
+                    <property name="upper">0.75</property>
+                    <property name="step-increment">0.1</property>
+                    <property name="page-increment">0.1</property>
+                    <signal name="value-changed" handler="ua_zoom_brightness_value_changed_cb" swapped="yes"/>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Contrast</property>
+            <child type="suffix">
+              <object class="GtkScale" id="contrast_scale">
+                <marks>
+                  <mark value="-0.75" translatable="yes">Low</mark>
+                  <mark value="0.75" translatable="yes">High</mark>
+                </marks>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-0.75</property>
+                    <property name="upper">0.75</property>
+                    <property name="step_increment">0.1</property>
+                    <property name="page_increment">0.1</property>
+                    <signal name="value-changed" handler="ua_zoom_contrast_value_changed_cb" swapped="yes"/>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Color</property>
+            <child type="suffix">
+              <object class="GtkScale" id="grayscale_scale">
+                <marks>
+                  <mark value="0" translatable="yes">None</mark>
+                  <mark value="1" translatable="yes">Full</mark>
+                </marks>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="upper">1</property>
+                    <property name="step-increment">0.1</property>
+                    <property name="page-increment">0.2</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+      </object>
+    </child>
+
+  </template>
+  <object class="GtkSizeGroup">
+    <property name="mode">horizontal</property>
+    <widgets>
+      <widget name="crosshair_thickness_scale"/>
+      <widget name="brightness_scale"/>
+      <widget name="contrast_scale"/>
+      <widget name="grayscale_scale"/>
+    </widgets>
+  </object>
+</interface>
