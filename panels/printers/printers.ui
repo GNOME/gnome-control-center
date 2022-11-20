@@ -140,39 +140,17 @@
       <object class="GtkStackPage">
         <property name="name">empty-state</property>
         <property name="child">
-          <object class="GtkBox">
-            <property name="spacing">10</property>
-            <property name="orientation">vertical</property>
-            <property name="valign">center</property>
-            <child>
-              <object class="GtkImage">
-                <property name="valign">start</property>
-                <property name="pixel_size">80</property>
-                <property name="icon_name">printer-symbolic</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel">
-                <property name="margin_bottom">15</property>
-                <property name="label" translatable="yes">No printers</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-                <attributes>
-                  <attribute name="scale" value="1.2"/>
-                </attributes>
-              </object>
-            </child>
+          <object class="AdwStatusPage">
+            <property name="icon_name">printer-symbolic</property>
+            <property name="title" translatable="yes">No Printers</property>
             <child>
               <object class="GtkButton" id="printer-add-button2">
-                <property name="label" translatable="yes" comments="Translators: This button adds new printer.">Add Printer…</property>
+                <property name="label" translatable="yes" comments="Translators: This button adds a new printer.">Add Printer…</property>
                 <property name="receives_default">True</property>
                 <property name="halign">center</property>
                 <style>
                   <class name="suggested-action"/>
+                  <class name="pill"/>
                 </style>
               </object>
             </child>
@@ -185,36 +163,10 @@
       <object class="GtkStackPage">
         <property name="name">no-cups-page</property>
         <property name="child">
-          <object class="GtkBox">
-            <property name="spacing">10</property>
-            <property name="orientation">vertical</property>
-            <property name="valign">center</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes" comments="Translators: The CUPS server is not running (we can not connect to it).">Sorry! The system printing service
-    doesn’t seem to be available.</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-                <attributes>
-                    <attribute name="scale" value="1.2"/>
-                </attributes>
-              </object>
-            </child>
-            <child>
-              <object class="GtkImage">
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="valign">start</property>
-                <property name="pixel_size">80</property>
-                <property name="icon_name">computer-fail-symbolic</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
+          <object class="AdwStatusPage">
+            <property name="icon_name">computer-fail-symbolic</property>
+            <property name="title" translatable="yes" comments="Translators: Title if the CUPS server is not running (we can not connect to it).">No Print Service</property>
+            <property name="description" translatable="yes" comments="Translators: Description if the CUPS server is not running (we can not connect to it).">The system printing service doesn’t seem to be available.</property>
           </object>
         </property>
       </object>
