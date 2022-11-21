@@ -11,19 +11,13 @@ i18n.merge_file(
 )
 
 sources = files(
-  'cc-cursor-blinking-dialog.c',
   'cc-cursor-size-dialog.c',
-  'cc-pointing-dialog.c',
-  'cc-repeat-keys-dialog.c',
-  'cc-typing-dialog.c',
   'cc-ua-panel.c',
   'cc-ua-hearing-page.c',
   'cc-ua-mouse-page.c',
   'cc-ua-seeing-page.c',
   'cc-ua-typing-page.c',
   'cc-ua-zoom-page.c',
-  'cc-visual-alerts-dialog.c',
-  'cc-zoom-options-dialog.c'
 )
 
 resource_data = files(
@@ -38,18 +32,12 @@ resource_data = files(
   'left_ptr_48px.png',
   'left_ptr_64px.png',
   'left_ptr_96px.png',
-  'cc-cursor-blinking-dialog.ui',
   'cc-cursor-size-dialog.ui',
-  'cc-pointing-dialog.ui',
-  'cc-repeat-keys-dialog.ui',
-  'cc-typing-dialog.ui',
   'cc-ua-hearing-page.ui',
   'cc-ua-mouse-page.ui',
   'cc-ua-seeing-page.ui',
   'cc-ua-typing-page.ui',
   'cc-ua-zoom-page.ui',
-  'cc-visual-alerts-dialog.ui',
-  'cc-zoom-options-dialog.ui'
 )
 
 sources += gnome.compile_resources(
