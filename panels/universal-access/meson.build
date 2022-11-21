@@ -28,6 +28,11 @@ sources = files(
 
 resource_data = files(
   'cc-ua-panel.ui',
+  'hearing-symbolic.svg',
+  'pointing-symbolic.svg',
+  'seeing-symbolic.svg',
+  'typing-symbolic.svg',
+  'zoom-symbolic.svg',
   'left_ptr_24px.png',
   'left_ptr_32px.png',
   'left_ptr_48px.png',
