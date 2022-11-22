@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcUaPanel" parent="CcPanel">
+    <signal name="notify::folded" handler="ua_panel_update_back_button_cb" swapped="yes"/>
 
     <!-- Header Bar -->
     <child type="titlebar">
