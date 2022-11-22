@@ -85,7 +85,6 @@ struct _CcUserPanel {
         GtkRevealer     *notification_revealer;
         AdwPreferencesGroup *other_users;
         GtkListBox      *other_users_listbox;
-        AdwPreferencesRow *other_users_row;
         GtkLabel        *password_button_label;
 #ifdef HAVE_MALCONTENT
         GtkLabel        *parental_controls_button_label;
@@ -103,6 +102,7 @@ struct _CcUserPanel {
         GPermission *permission;
         CcLanguageChooser *language_chooser;
         GListStore *other_users_model;
+        GtkFlattenListModel *other_users_flat_model;
 
         CcAvatarChooser *avatar_chooser;
 
@@ -166,7 +166,11 @@ set_selected_user (CcUserPanel  *self,
                    AdwActionRow *row)
 {
         uid_t uid;
- 
+
+        /* The user clicked "Add User…" row */
+        if (!g_object_get_data (G_OBJECT (row), "uid"))
+                return;
+
         uid = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (row), "uid"));
         g_set_object (&self->selected_user,
                       act_user_manager_get_user_by_id (self->um, uid));
@@ -233,16 +237,34 @@ setup_avatar_for_user (AdwAvatar *avatar, ActUser *user)
         }
 }
 
+static void add_user (CcUserPanel *self);
+
 static GtkWidget *
 create_user_row (gpointer item,
                  gpointer user_data)
 {
-        ActUser *user = ACT_USER (item);
+        CcUserPanel *self = user_data;
+        ActUser *user;
         GtkWidget *row, *user_image;
 
         row = adw_action_row_new ();
+        gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE);
+
+        if (GTK_IS_STRING_OBJECT (item)) {
+                g_assert (!self->add_user_button);
+                self->add_user_button = row;
+
+                adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
+                                               _("Add User…"));
+                adw_action_row_set_icon_name (ADW_ACTION_ROW (row), "list-add-symbolic");
+                g_signal_connect_object (row, "activated",
+                                         G_CALLBACK (add_user),
+                                         self, G_CONNECT_SWAPPED);
+                return row;
+        }
+
+        user = item;
         g_object_set_data (G_OBJECT (row), "uid", GINT_TO_POINTER (act_user_get_uid (user)));
-        gtk_list_box_row_set_activatable (GTK_LIST_BOX_ROW (row), TRUE); 
         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
                                        get_real_or_user_name (user));
         user_image = adw_avatar_new (48, NULL, TRUE);
@@ -282,7 +304,6 @@ static void
 user_changed (CcUserPanel *self, ActUser *user)
 {
         GSList *user_list, *l;
-        gboolean show;
 
         g_list_store_remove_all (self->other_users_model);
         user_list = act_user_manager_list_users (self->um);
@@ -305,9 +326,6 @@ user_changed (CcUserPanel *self, ActUser *user)
 
         if (self->selected_user == user)
                 show_user (user, self);
-
-        show = g_list_model_get_n_items (G_LIST_MODEL (self->other_users_model)) > 0;
-        gtk_widget_set_visible (GTK_WIDGET (self->other_users_row), show);
 }
 
 static void
@@ -1375,6 +1393,32 @@ on_permission_changed (CcUserPanel *self)
         }
 }
 
+/*
+ * This is a workaround to add an additional item to the end
+ * of the users list, which will be used to show "Add User…"
+ * row.  We do this way instead of appending a row to avoid
+ * some imperfections in the GUI.  See
+ * https://gitlab.gnome.org/GNOME/gnome-control-center/-/issues/1926
+ */
+static void
+setup_other_users_list (CcUserPanel *self)
+{
+        g_autoptr(GListStore) add_user = NULL;
+        g_autoptr(GtkStringObject) str = NULL;
+        GListStore *users_store;
+
+        users_store = g_list_store_new (G_TYPE_LIST_MODEL);
+        add_user = g_list_store_new (GTK_TYPE_STRING_OBJECT);
+
+        str = gtk_string_object_new ("add-user");
+        g_list_store_append (add_user, str);
+
+        g_list_store_append (users_store, self->other_users_model);
+        g_list_store_append (users_store, add_user);
+
+        self->other_users_flat_model = gtk_flatten_list_model_new (G_LIST_MODEL (users_store));
+}
+
 static void
 setup_main_window (CcUserPanel *self)
 {
@@ -1382,8 +1426,11 @@ setup_main_window (CcUserPanel *self)
         gboolean loaded;
 
         self->other_users_model = g_list_store_new (ACT_TYPE_USER);
+
+        setup_other_users_list (self);
+
         gtk_list_box_bind_model (self->other_users_listbox,
-                                 G_LIST_MODEL (self->other_users_model),
+                                 G_LIST_MODEL (self->other_users_flat_model),
                                  (GtkListBoxCreateWidgetFunc)create_user_row,
                                  self,
                                  NULL);
@@ -1520,7 +1567,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_settings_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_type_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, account_type_switch);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, add_user_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_switch);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, back_button);
@@ -1534,7 +1580,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users_listbox);
 #ifdef HAVE_MALCONTENT
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, parental_controls_button_label);
