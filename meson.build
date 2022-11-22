@@ -35,6 +35,13 @@ python = py.find_installation('python3')
 
 config_h.set_quoted('TEST_NM_PYTHON', python.path())
 
+if get_option('profile') == 'development'
+    profile = 'Devel'
+else
+    profile = ''
+endif
+application_id = 'org.gnome.Settings@0@'.format(profile)
+
 # defines
 set_defines = [
   # package
