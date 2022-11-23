@@ -383,18 +383,16 @@ setup_custom_shortcut (CcKeyboardShortcutEditor *self)
     {
       GtkLabel *label;
       g_autofree gchar *friendly_accelerator = NULL;
-      g_autofree gchar *accelerator_text = NULL;
       g_autofree gchar *collision_text = NULL;
 
       friendly_accelerator = convert_keysym_state_to_string (self->custom_combo);
 
-      accelerator_text = g_strdup_printf ("<b>%s</b>", friendly_accelerator);
-      collision_text = g_strdup_printf (_("%s is already being used for %s. If you "
-                                          "replace it, %s will be disabled"),
-                                        accelerator_text,
-                                        cc_keyboard_item_get_description (collision_item),
-                                        cc_keyboard_item_get_description (collision_item));
-
+      /* TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used */
+      collision_text = g_markup_printf_escaped (_("<b>%s</b> is already being used for %s. If you "
+                                                  "replace it, %s will be disabled"),
+                                                friendly_accelerator,
+                                                cc_keyboard_item_get_description (collision_item),
+                                                cc_keyboard_item_get_description (collision_item));
       label = is_custom_shortcut (self) ? self->new_shortcut_conflict_label : self->shortcut_conflict_label;
 
       gtk_label_set_markup (label, collision_text);
@@ -529,7 +527,6 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   CcKeyCombo combo;
   gboolean is_custom;
   g_autofree gchar *accel = NULL;
-  g_autofree gchar *description_text = NULL;
   g_autofree gchar *text = NULL;
 
   if (!item) {
@@ -557,9 +554,12 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
   gtk_widget_hide (GTK_WIDGET (self->replace_button));
 
   /* Setup the top label */
-  description_text = g_strdup_printf ("<b>%s</b>", cc_keyboard_item_get_description (item));
-  /* TRANSLATORS: %s is replaced with a description of the keyboard shortcut */
-  text = g_strdup_printf (_("Enter new shortcut to change %s."), description_text);
+  /*
+   * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
+   * don't translate/transliterate <b>%s</b>
+   */
+  text = g_markup_printf_escaped (_("Enter new shortcut to change <b>%s</b>"),
+                                  cc_keyboard_item_get_description (item));
 
   gtk_label_set_markup (self->top_info_label, text);
 
