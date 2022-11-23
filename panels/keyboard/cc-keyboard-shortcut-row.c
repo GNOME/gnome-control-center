@@ -64,6 +64,16 @@ cc_keyboard_shortcut_row_init (CcKeyboardShortcutRow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
+static void
+cc_kbd_shortcut_is_default_changed_cb (CcKeyboardShortcutRow *self)
+{
+  /* Embolden the label when the shortcut is modified */
+  if (cc_keyboard_item_is_value_default (self->item))
+    gtk_widget_remove_css_class (GTK_WIDGET (self->accelerator_label), "heading");
+  else
+    gtk_widget_add_css_class (GTK_WIDGET (self->accelerator_label), "heading");
+}
+
 static gboolean
 transform_binding_to_accel (GBinding     *binding,
                             const GValue *from_value,
@@ -76,21 +86,7 @@ transform_binding_to_accel (GBinding     *binding,
 
   item = CC_KEYBOARD_ITEM (g_binding_dup_source (binding));
   combo = cc_keyboard_item_get_primary_combo (item);
-
   accelerator = convert_keysym_state_to_string (&combo);
-  /* Embolden the label when the shortcut is modified */
-  if (!cc_keyboard_item_is_value_default (item))
-    {
-      g_autofree gchar *tmp = NULL;
-
-      tmp = convert_keysym_state_to_string (&combo);
-
-      accelerator = g_strdup_printf ("<b>%s</b>", tmp);
-    }
-  else
-    {
-      accelerator = convert_keysym_state_to_string (&combo);
-    }
 
   g_value_take_string (to_value, accelerator);
 
@@ -123,6 +119,11 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
                                G_BINDING_SYNC_CREATE,
                                transform_binding_to_accel,
                                NULL, NULL, NULL);
+
+  g_signal_connect_object (item, "notify::is-value-default",
+                           G_CALLBACK (cc_kbd_shortcut_is_default_changed_cb),
+                           self, G_CONNECT_SWAPPED);
+  cc_kbd_shortcut_is_default_changed_cb (self);
 
   gtk_size_group_add_widget(size_group,
                             GTK_WIDGET (self->accelerator_label));
