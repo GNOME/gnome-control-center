@@ -152,7 +152,7 @@ ua_seeing_a11y_high_contrast_changed_cb (CcUaSeeingPage *self)
     }
   else
     {
-      if (self->old_icon_theme)
+      if (self->old_icon_theme && !g_str_equal (self->old_gtk_theme, HIGH_CONTRAST_THEME))
         g_settings_set_string (self->interface_settings, KEY_ICON_THEME, self->old_icon_theme);
       else
         g_settings_reset (self->interface_settings, KEY_ICON_THEME);
