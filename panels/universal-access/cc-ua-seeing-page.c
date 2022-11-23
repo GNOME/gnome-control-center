@@ -255,7 +255,7 @@ cc_ua_seeing_page_init (CcUaSeeingPage *self)
   /* Enable Animations */
   g_settings_bind (self->interface_settings, KEY_ENABLE_ANIMATIONS,
                    self->animations_row, "active",
-                   G_SETTINGS_BIND_DEFAULT);
+                   G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   /* Large Text */
   g_settings_bind_with_mapping (self->interface_settings, KEY_TEXT_SCALING_FACTOR,
