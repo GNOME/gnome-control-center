@@ -1,6 +1,7 @@
 /* cc-keyboard-shortcut-row.c
  *
  * Copyright (C) 2020 System76, Inc.
+ * Copyright (C) 2022 Purism SPC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -63,13 +64,6 @@ cc_keyboard_shortcut_row_init (CcKeyboardShortcutRow *self)
   gtk_widget_init_template (GTK_WIDGET (self));
 }
 
-static void
-shortcut_modified_changed_cb (CcKeyboardShortcutRow *self)
-{
-  gtk_revealer_set_reveal_child (self->reset_revealer,
-		                !cc_keyboard_item_is_value_default (self->item));
-}
-
 static gboolean
 transform_binding_to_accel (GBinding     *binding,
                             const GValue *from_value,
@@ -83,6 +77,7 @@ transform_binding_to_accel (GBinding     *binding,
   item = CC_KEYBOARD_ITEM (g_binding_dup_source (binding));
   combo = cc_keyboard_item_get_primary_combo (item);
 
+  accelerator = convert_keysym_state_to_string (&combo);
   /* Embolden the label when the shortcut is modified */
   if (!cc_keyboard_item_is_value_default (item))
     {
@@ -115,8 +110,12 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
   self->manager = manager;
   self->shortcut_editor = shortcut_editor;
 
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self), cc_keyboard_item_get_description (item));
-
+  g_object_bind_property (item, "description",
+                          self, "title",
+                          G_BINDING_SYNC_CREATE);
+  g_object_bind_property (item, "is-value-default",
+                          self->reset_revealer, "reveal-child",
+                          G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
   g_object_bind_property_full (item,
                                "key-combos",
                                self->accelerator_label,
@@ -124,13 +123,6 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
                                G_BINDING_SYNC_CREATE,
                                transform_binding_to_accel,
                                NULL, NULL, NULL);
-
-  gtk_revealer_set_reveal_child (self->reset_revealer,
-                                 !cc_keyboard_item_is_value_default (item));
-  g_signal_connect_object (item,
-                           "notify::key-combos",
-                           G_CALLBACK (shortcut_modified_changed_cb),
-                           self, G_CONNECT_SWAPPED);
 
   gtk_size_group_add_widget(size_group,
                             GTK_WIDGET (self->accelerator_label));
