@@ -147,17 +147,11 @@ ua_seeing_a11y_high_contrast_changed_cb (CcUaSeeingPage *self)
 
   if (g_settings_get_boolean (self->a11y_interface_settings, KEY_HIGH_CONTRAST))
     {
-      g_settings_set_string (self->interface_settings, KEY_GTK_THEME, HIGH_CONTRAST_THEME);
       /* xxx: Should we not set high contrast icons? */
       g_settings_set_string (self->interface_settings, KEY_ICON_THEME, HIGH_CONTRAST_THEME);
     }
   else
     {
-      if (self->old_gtk_theme)
-        g_settings_set_string (self->interface_settings, KEY_GTK_THEME, self->old_gtk_theme);
-      else
-        g_settings_reset (self->interface_settings, KEY_GTK_THEME);
-
       if (self->old_icon_theme)
         g_settings_set_string (self->interface_settings, KEY_ICON_THEME, self->old_icon_theme);
       else
