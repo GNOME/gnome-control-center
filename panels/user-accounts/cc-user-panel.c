@@ -267,7 +267,7 @@ create_user_row (gpointer item,
         g_object_set_data (G_OBJECT (row), "uid", GINT_TO_POINTER (act_user_get_uid (user)));
         adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row),
                                        get_real_or_user_name (user));
-        user_image = adw_avatar_new (48, NULL, TRUE);
+        user_image = adw_avatar_new (32, NULL, TRUE);
         setup_avatar_for_user (ADW_AVATAR (user_image), user);
         adw_action_row_add_prefix (ADW_ACTION_ROW (row), user_image);
 
