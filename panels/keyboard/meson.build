@@ -49,6 +49,7 @@ endforeach
 sources = files(
   'cc-xkb-modifier-dialog.c',
   'cc-keyboard-shortcut-row.c',
+  'cc-keyboard-shortcut-group.c',
   'cc-keyboard-shortcut-dialog.c',
   'cc-keyboard-panel.c',
   'cc-keyboard-item.c',
