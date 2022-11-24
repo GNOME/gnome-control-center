@@ -54,6 +54,7 @@ enum
   SHORTCUT_ADDED,
   SHORTCUT_CHANGED,
   SHORTCUT_REMOVED,
+  SHORTCUTS_LOADED,
   LAST_SIGNAL
 };
 
@@ -262,6 +263,8 @@ add_shortcuts (CcKeyboardManager *self)
 
       can_continue = gtk_tree_model_iter_next (sections_model, &sections_iter);
     }
+
+  g_signal_emit (self, signals[SHORTCUTS_LOADED], 0);
 }
 
 static void
@@ -819,6 +822,17 @@ cc_keyboard_manager_class_init (CcKeyboardManagerClass *klass)
                                             G_TYPE_NONE,
                                             1,
                                             CC_TYPE_KEYBOARD_ITEM);
+
+  /**
+   * CcKeyboardManager:shortcuts-loaded:
+   *
+   * Emitted after all shortcuts are loaded.
+   */
+  signals[SHORTCUTS_LOADED] = g_signal_new ("shortcuts-loaded",
+                                            CC_TYPE_KEYBOARD_MANAGER,
+                                            G_SIGNAL_RUN_FIRST,
+                                            0, NULL, NULL, NULL,
+                                            G_TYPE_NONE, 0);
 }
 
 static void
