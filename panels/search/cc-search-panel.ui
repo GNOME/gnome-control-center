@@ -18,16 +18,12 @@
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="settings_row">
+              <object class="CcListRow" id="settings_row">
                 <property name="title" translatable="yes">Search Locations</property>
                 <property name="subtitle" translatable="yes">Folders which are searched by system applications.</property>
                 <property name="activatable">True</property>
+                <property name="show-arrow">True</property>
                 <signal name="activated" handler="settings_row_activated" object="CcSearchPanel" swapped="no"/>
-                <child type="suffix">
-                  <object class="GtkImage">
-                    <property name="icon-name">go-next-symbolic</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
