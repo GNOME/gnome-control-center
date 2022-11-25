@@ -43,6 +43,7 @@
 #include <libmalcontent/malcontent.h>
 #endif
 
+#include "cc-list-row.h"
 #include "cc-add-user-dialog.h"
 #include "cc-avatar-chooser.h"
 #include "cc-language-chooser.h"
@@ -73,16 +74,13 @@ struct _CcUserPanel {
         GtkListBoxRow   *autologin_row;
         GtkSwitch       *autologin_switch;
         GtkButton       *back_button;
-        GtkLabel        *fingerprint_state_label;
-        GtkListBoxRow   *fingerprint_row;
+        CcListRow       *fingerprint_row;
         GtkStack        *full_name_stack;
         GtkLabel        *full_name_label;
         GtkToggleButton *full_name_edit_button;
         GtkEntry        *full_name_entry;
-        GtkLabel        *language_button_label;
-        GtkListBoxRow   *language_row;
-        GtkLabel        *last_login_button_label;
-        GtkListBoxRow   *last_login_row;
+        CcListRow       *language_row;
+        CcListRow       *last_login_row;
         GtkWidget       *no_users_box;
         GtkRevealer     *notification_revealer;
         AdwPreferencesGroup *other_users;
@@ -93,7 +91,7 @@ struct _CcUserPanel {
         GtkLabel        *parental_controls_button_label;
         GtkListBoxRow   *parental_controls_row;
 #endif
-        GtkListBoxRow   *password_row;
+        CcListRow           *password_row;
         CcPermissionInfobar *permission_infobar;
         GtkButton       *remove_user_button;
         GtkStack        *stack;
@@ -799,9 +797,9 @@ update_fingerprint_row_state (CcUserPanel *self, GParamSpec *spec, CcFingerprint
                                   state != CC_FINGERPRINT_STATE_UPDATING);
 
         if (state == CC_FINGERPRINT_STATE_ENABLED)
-                gtk_label_set_text (self->fingerprint_state_label, _("Enabled"));
+                cc_list_row_set_secondary_label (self->fingerprint_row, _("Enabled"));
         else if (state == CC_FINGERPRINT_STATE_DISABLED)
-                gtk_label_set_text (self->fingerprint_state_label, _("Disabled"));
+                cc_list_row_set_secondary_label (self->fingerprint_row, _("Disabled"));
 }
 
 static void
@@ -860,7 +858,7 @@ show_user (ActUser *user, CcUserPanel *self)
         } else {
                 name = g_strdup ("—");
         }
-        gtk_label_set_label (self->language_button_label, name);
+        cc_list_row_set_secondary_label (self->language_row, name);
 
         /* Fingerprint: show when self, local, enabled, and possible */
         show = (act_user_get_uid (user) == getuid() &&
@@ -927,7 +925,7 @@ show_user (ActUser *user, CcUserPanel *self)
                 g_autofree gchar *text = NULL;
 
                 text = get_login_time_text (user);
-                gtk_label_set_label (self->last_login_button_label, text);
+                cc_list_row_set_secondary_label (self->last_login_row, text);
         }
         gtk_widget_set_visible (GTK_WIDGET (self->last_login_row), show);
 
@@ -1077,7 +1075,7 @@ language_response (CcUserPanel *self,
                 }
 
                 name = gnome_get_language_from_locale (lang, NULL);
-                gtk_label_set_label (self->language_button_label, name);
+                cc_list_row_set_secondary_label (self->language_row, name);
         }
 
         gtk_widget_hide (GTK_WIDGET (dialog));
@@ -1526,15 +1524,12 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, autologin_switch);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, back_button);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_state_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, fingerprint_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_stack);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_edit_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_entry);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_button_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_row);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_button_label);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
