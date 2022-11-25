@@ -59,36 +59,20 @@
             <property name="title" translatable="yes">Special Character Entry</property>
             <property name="description" translatable="yes">Methods for entering symbols and letter variants using the keyboard.</property>
             <child>
-              <object class="AdwActionRow" id="alt_chars_row">
+              <object class="CcListRow" id="alt_chars_row">
                 <property name="title" translatable="yes">Alternate Characters Key</property>
                 <property name="activatable">True</property>
+                <property name="show-arrow">True</property>
+                <property name="secondary-label" translatable="no">Right Alt</property>
                 <signal name="activated" handler="special_chars_activated" object="CcKeyboardPanel" swapped="no" />
-                <child>
-                  <object class="GtkLabel" id="value_alternate_chars">
-                    <property name="label" translatable="no">Right Alt</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon_name">go-next-symbolic</property>
-                  </object>
-                </child>
               </object>
             </child>
             <child>
-              <object class="AdwActionRow" id="compose_row">
+              <object class="CcListRow" id="compose_row">
                 <property name="title" translatable="yes">Compose Key</property>
+                <property name="show-arrow">True</property>
                 <property name="activatable">True</property>
                 <signal name="activated" handler="special_chars_activated" object="CcKeyboardPanel" swapped="no" />
-                <child>
-                  <object class="GtkLabel" id="value_compose">
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon_name">go-next-symbolic</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -97,15 +81,11 @@
           <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Keyboard Shortcuts</property>
             <child>
-              <object class="AdwActionRow" id="common_shortcuts_row">
+              <object class="CcListRow" id="common_shortcuts_row">
                 <property name="title" translatable="yes">View and Customize Shortcuts</property>
                 <property name="activatable">True</property>
+                <property name="show-arrow">True</property>
                 <signal name="activated" handler="keyboard_shortcuts_activated" object="CcKeyboardPanel" swapped="no" />
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon_name">go-next-symbolic</property>
-                  </object>
-                </child>
               </object>
             </child>
           </object>

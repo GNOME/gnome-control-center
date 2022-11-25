@@ -31,6 +31,7 @@
 #include "cc-keyboard-shortcut-dialog.h"
 #include "cc-input-list-box.h"
 #include "cc-xkb-modifier-dialog.h"
+#include "cc-list-row.h"
 
 #include "keyboard-shortcuts.h"
 
@@ -44,10 +45,8 @@ struct _CcKeyboardPanel
 
   GSettings           *input_source_settings;
   AdwPreferencesGroup *input_switch_group;
-  AdwActionRow        *alt_chars_row;
-  AdwActionRow        *compose_row;
-  GtkWidget           *value_alternate_chars;
-  GtkWidget           *value_compose;
+  CcListRow           *alt_chars_row;
+  CcListRow           *compose_row;
 
   AdwActionRow        *common_shortcuts_row;
 };
@@ -105,9 +104,9 @@ special_chars_activated (AdwActionRow    *row,
 
   window = GTK_WINDOW (cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self))));
 
-  if (row == self->alt_chars_row)
+  if (row == (gpointer)self->alt_chars_row)
     modifier = &LV3_MODIFIER;
-  else if (row == self->compose_row)
+  else if (row == (gpointer)self->compose_row)
     modifier = &COMPOSE_MODIFIER;
   else
     return;
@@ -191,8 +190,6 @@ cc_keyboard_panel_class_init (CcKeyboardPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, same_source);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, alt_chars_row);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, compose_row);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, value_alternate_chars);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, value_compose);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardPanel, common_shortcuts_row);
 
   gtk_widget_class_bind_template_callback (widget_class, special_chars_activated);
@@ -247,8 +244,8 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
   /* "Type Special Characters" section */
   g_settings_bind_with_mapping (self->input_source_settings,
                                 "xkb-options",
-                                self->value_alternate_chars,
-                                "label",
+                                self->alt_chars_row,
+                                "secondary-label",
                                 G_SETTINGS_BIND_GET,
                                 xcb_modifier_transform_binding_to_label,
                                 NULL,
@@ -256,8 +253,8 @@ cc_keyboard_panel_init (CcKeyboardPanel *self)
                                 NULL);
   g_settings_bind_with_mapping (self->input_source_settings,
                                 "xkb-options",
-                                self->value_compose,
-                                "label",
+                                self->compose_row,
+                                "secondary-label",
                                 G_SETTINGS_BIND_GET,
                                 xcb_modifier_transform_binding_to_label,
                                 NULL,
