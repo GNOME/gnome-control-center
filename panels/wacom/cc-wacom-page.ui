@@ -36,15 +36,11 @@
           </object>
         </child>
         <child>
-          <object class="AdwActionRow" id="tablet_map_buttons">
+          <object class="CcListRow" id="tablet_map_buttons">
             <property name="title" translatable="yes">Map Buttons</property>
             <property name="activatable">True</property>
+            <property name="show-arrow">True</property>
             <signal name="activated" handler="on_map_buttons_activated" object="CcWacomPage" swapped="yes" />
-            <child type="suffix">
-              <object class="GtkImage">
-                <property name="icon-name">go-next-symbolic</property>
-              </object>
-            </child>
           </object>
         </child>
       </object>
@@ -72,15 +68,11 @@
           </object>
         </child>
         <child>
-          <object class="AdwActionRow" id="tablet_calibrate">
+          <object class="CcListRow" id="tablet_calibrate">
             <property name="title" translatable="yes">Calibrate</property>
             <property name="activatable">True</property>
+            <property name="show-arrow">True</property>
             <signal name="activated" handler="on_calibrate_activated" object="CcWacomPage" swapped="yes" />
-            <child type="suffix">
-              <object class="GtkImage">
-                <property name="icon-name">go-next-symbolic</property>
-              </object>
-            </child>
           </object>
         </child>
       </object>
