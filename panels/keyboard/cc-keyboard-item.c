@@ -640,6 +640,9 @@ binding_changed (CcKeyboardItem *item,
   item->editable = g_settings_is_writable (item->settings, item->key);
 
   g_object_notify (G_OBJECT (item), "key-combos");
+  g_object_notify (G_OBJECT (item), "is-value-default");
+  if (item->reverse_item)
+    g_object_notify (G_OBJECT (item->reverse_item), "is-value-default");
 }
 
 gboolean
