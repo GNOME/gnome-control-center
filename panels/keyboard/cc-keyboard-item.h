@@ -51,6 +51,9 @@ typedef struct
 
 CcKeyboardItem*    cc_keyboard_item_new                      (CcKeyboardItemType  type);
 
+gboolean           cc_keyboard_item_matches_string           (CcKeyboardItem *self,
+                                                              GStrv           search_terms);
+
 gboolean           cc_keyboard_item_load_from_gsettings_path (CcKeyboardItem     *item,
                                                               const char         *path,
                                                               gboolean            reset);

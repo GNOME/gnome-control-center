@@ -26,9 +26,12 @@
 #include <gio/gio.h>
 #include <glib/gi18n-lib.h>
 
+#include "cc-util.h"
+#include "keyboard-shortcuts.h"
 #include "cc-keyboard-item.h"
 
 #define CUSTOM_KEYS_SCHEMA "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding"
+#define SHORTCUT_DELIMITERS "+ "
 
 struct _CcKeyboardItem
 {
@@ -357,6 +360,126 @@ cc_keyboard_item_new (CcKeyboardItemType type)
                          NULL);
 
   return CC_KEYBOARD_ITEM (object);
+}
+
+/* Copied from cc-keyboard-shortcut-dialog.c */
+static gboolean
+strv_contains_prefix_or_match (char       **strv,
+                               const char  *prefix)
+{
+  const struct {
+    const gchar *key;
+    const gchar *untranslated;
+    const gchar *synonym;
+  } key_aliases[] =
+    {
+      { "ctrl",   "Ctrl",  "ctrl" },
+      { "win",    "Super", "super" },
+      { "option",  NULL,   "alt" },
+      { "command", NULL,   "super" },
+      { "apple",   NULL,   "super" },
+    };
+
+  for (guint i = 0; strv[i]; i++)
+    {
+      if (g_str_has_prefix (strv[i], prefix))
+        return TRUE;
+    }
+
+  for (guint i = 0; i < G_N_ELEMENTS (key_aliases); i++)
+    {
+      g_autofree char *alias = NULL;
+      const char *synonym;
+
+      if (!g_str_has_prefix (key_aliases[i].key, prefix))
+        continue;
+
+      if (key_aliases[i].untranslated)
+        {
+          const char *translated_label;
+
+          /* Steal GTK+'s translation */
+          translated_label = g_dpgettext2 ("gtk40", "keyboard label", key_aliases[i].untranslated);
+          alias = g_utf8_strdown (translated_label, -1);
+        }
+
+      synonym = key_aliases[i].synonym;
+
+      /* If a translation or synonym of the key is in the accelerator, and we typed
+       * the key, also consider that a prefix */
+      if ((alias && g_strv_contains ((const char * const *) strv, alias)) ||
+          (synonym && g_strv_contains ((const char * const *) strv, synonym)))
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
+/* Copied from cc-keyboard-shortcut-dialog.c */
+static gboolean
+search_match_shortcut (CcKeyboardItem *item,
+                       const char     *search)
+{
+  g_auto(GStrv) shortcut_tokens = NULL, search_tokens = NULL;
+  g_autofree char *normalized_accel = NULL;
+  g_autofree char *accel = NULL;
+  GList *key_combos;
+  CcKeyCombo *combo;
+  gboolean match = TRUE;
+
+  key_combos = cc_keyboard_item_get_key_combos (item);
+  for (GList *l = key_combos; l != NULL; l = l->next)
+    {
+      combo = l->data;
+
+      if (is_empty_binding (combo))
+        continue;
+
+      accel = convert_keysym_state_to_string (combo);
+      normalized_accel = cc_util_normalize_casefold_and_unaccent (accel);
+
+      shortcut_tokens = g_strsplit_set (normalized_accel, SHORTCUT_DELIMITERS, -1);
+      search_tokens = g_strsplit_set (search, SHORTCUT_DELIMITERS, -1);
+
+      for (guint i = 0; search_tokens[i]; i++)
+        {
+          match = match && strv_contains_prefix_or_match (shortcut_tokens, search_tokens[i]);
+
+          if (!match)
+            break;
+        }
+
+      if (match)
+        return TRUE;
+    }
+
+  return FALSE;
+}
+
+gboolean
+cc_keyboard_item_matches_string (CcKeyboardItem *self,
+                                 GStrv           search_terms)
+{
+  g_autofree char *name = NULL;
+
+  g_return_val_if_fail (CC_IS_KEYBOARD_ITEM (self), FALSE);
+
+  if (!search_terms || !*search_terms || !self->description)
+    return TRUE;
+
+  name = cc_util_normalize_casefold_and_unaccent (self->description);
+
+  for (guint i = 0; search_terms[i]; i++)
+    {
+      gboolean match;
+
+      match = strstr (name, search_terms[i]) || search_match_shortcut (self, search_terms[i]);
+
+      if (!match)
+        return FALSE;
+    }
+
+  return TRUE;
 }
 
 static guint *
