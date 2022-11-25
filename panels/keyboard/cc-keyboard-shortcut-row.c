@@ -130,3 +130,11 @@ cc_keyboard_shortcut_row_new (CcKeyboardItem           *item,
 
   return self;
 }
+
+CcKeyboardItem *
+cc_keyboard_shortcut_row_get_item (CcKeyboardShortcutRow *self)
+{
+  g_return_val_if_fail (CC_IS_KEYBOARD_SHORTCUT_ROW (self), NULL);
+
+  return self->item;
+}

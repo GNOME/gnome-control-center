@@ -34,5 +34,6 @@ CcKeyboardShortcutRow *cc_keyboard_shortcut_row_new (CcKeyboardItem           *i
                                                      CcKeyboardManager        *manager,
                                                      CcKeyboardShortcutEditor *editor,
                                                      GtkSizeGroup             *size_group);
+CcKeyboardItem        *cc_keyboard_shortcut_row_get_item  (CcKeyboardShortcutRow   *self);
 
 G_END_DECLS
