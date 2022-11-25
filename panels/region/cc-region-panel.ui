@@ -51,34 +51,22 @@
                 <property name="title" translatable="yes">Your Account</property>
 
                 <child>
-                  <object class="AdwActionRow" id="language_row">
+                  <object class="CcListRow" id="language_row">
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes">_Language</property>
                     <property name="activatable">True</property>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="on_user_language_row_activated_cb" object="CcRegionPanel" swapped="no" />
-
-                    <child>
-                      <object class="GtkImage">
-                        <property name="valign">center</property>
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
 
                 <child>
-                  <object class="AdwActionRow" id="formats_row">
+                  <object class="CcListRow" id="formats_row">
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes">_Formats</property>
                     <property name="activatable">True</property>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="on_user_formats_row_activated_cb" object="CcRegionPanel" swapped="no" />
-
-                    <child>
-                      <object class="GtkImage">
-                        <property name="valign">center</property>
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
 
@@ -90,34 +78,22 @@
                 <property name="title" translatable="yes">Login Screen</property>
 
                 <child>
-                  <object class="AdwActionRow" id="login_language_row">
+                  <object class="CcListRow" id="login_language_row">
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes">_Language</property>
                     <property name="activatable">True</property>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="on_login_language_row_activated_cb" object="CcRegionPanel" swapped="no" />
-
-                    <child>
-                      <object class="GtkImage">
-                        <property name="valign">center</property>
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
 
                 <child>
-                  <object class="AdwActionRow" id="login_formats_row">
+                  <object class="CcListRow" id="login_formats_row">
                     <property name="use-underline">True</property>
                     <property name="title" translatable="yes">_Formats</property>
                     <property name="activatable">True</property>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="on_login_formats_row_activated_cb" object="CcRegionPanel" swapped="no" />
-
-                    <child>
-                      <object class="GtkImage">
-                        <property name="valign">center</property>
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
 

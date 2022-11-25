@@ -31,6 +31,7 @@
 #include "cc-region-resources.h"
 #include "cc-language-chooser.h"
 #include "cc-format-chooser.h"
+#include "cc-list-row.h"
 
 #include "cc-common-language.h"
 
@@ -53,12 +54,12 @@ typedef enum {
 struct _CcRegionPanel {
         CcPanel          parent_instance;
 
-        GtkListBoxRow   *formats_row;
+        CcListRow       *formats_row;
         GtkInfoBar      *infobar;
         GtkSizeGroup    *input_size_group;
-        AdwActionRow    *login_formats_row;
+        CcListRow       *login_formats_row;
         GtkWidget       *login_group;
-        AdwActionRow    *login_language_row;
+        CcListRow       *login_language_row;
         GtkListBoxRow   *language_row;
         GtkButton       *restart_button;
 
@@ -584,7 +585,7 @@ update_login_language (CcRegionPanel *self)
         if (!name)
                 name = gnome_get_language_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
 
-        adw_action_row_set_subtitle (self->login_language_row, name);
+        adw_action_row_set_subtitle (ADW_ACTION_ROW (self->login_language_row), name);
         update_login_region (self);
 }
 
