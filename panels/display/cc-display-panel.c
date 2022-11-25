@@ -29,6 +29,7 @@
 #include "shell/cc-object-storage.h"
 #include <libupower-glib/upower.h>
 
+#include "cc-list-row.h"
 #include "cc-display-config-manager-dbus.h"
 #include "cc-display-config.h"
 #include "cc-display-arrangement.h"
@@ -74,7 +75,7 @@ struct _CcDisplayPanel
   guint           focus_id;
 
   CcNightLightPage *night_light_page;
-  GtkLabel *night_light_state_label;
+  CcListRow        *night_light_row;
 
   UpClient *up_client;
   gboolean lid_is_closed;
@@ -489,9 +490,9 @@ on_night_light_enabled_changed_cb (GSettings      *settings,
                                    CcDisplayPanel *self)
 {
   if (g_settings_get_boolean (self->display_settings, "night-light-enabled"))
-    gtk_label_set_label (self->night_light_state_label, _("On"));
+    cc_list_row_set_secondary_label (self->night_light_row, _("On"));
   else
-    gtk_label_set_label (self->night_light_state_label, _("Off"));
+    cc_list_row_set_secondary_label (self->night_light_row, _("Off"));
 }
 
 static void
@@ -595,7 +596,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, escape_shortcut);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, leaflet);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_page);
-  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_state_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, night_light_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, primary_display_row);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, single_display_settings_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, toplevel_shortcuts);

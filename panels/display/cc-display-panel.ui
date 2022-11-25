@@ -172,23 +172,11 @@
                         <child>
                           <object class="AdwPreferencesGroup">
                             <child>
-                              <object class="AdwActionRow">
+                              <object class="CcListRow" id="night_light_row">
                                 <property name="activatable">True</property>
                                 <property name="title" translatable="yes" comments="This is the redshift functionality where we suppress blue light when the sun has gone down">Night Light</property>
+                                <property name="show-arrow">True</property>
                                 <signal name="activated" handler="on_night_light_row_activated_cb" object="CcDisplayPanel" swapped="no" />
-
-                                <child type="suffix">
-                                  <object class="GtkLabel" id="night_light_state_label">
-                                    <property name="label">On</property>
-                                  </object>
-                                </child>
-
-                                <child type="suffix">
-                                  <object class="GtkImage">
-                                    <property name="icon-name">go-next-symbolic</property>
-                                  </object>
-                                </child>
-
                               </object>
                             </child>
                           </object>
