@@ -274,16 +274,12 @@
               <object class="AdwPreferencesGroup" id="enterprise_group">
                 <property name="visible">False</property>
                 <child>
-                  <object class="AdwActionRow" id="enterprise_button">
+                  <object class="CcListRow" id="enterprise_button">
                     <property name="title" translatable="yes">Enterprise Login</property>
                     <property name="subtitle" translatable="yes">User accounts which are managed by a company or organization.</property>
                     <property name="activatable">True</property>
+                    <property name="show-arrow">True</property>
                     <signal name="activated" handler="enterprise_button_toggled_cb" object="CcAddUserDialog" swapped="yes"/> 
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon-name">go-next-symbolic</property>
-                      </object>
-                    </child>
                   </object>
                 </child>
               </object>

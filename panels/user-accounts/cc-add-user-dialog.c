@@ -28,6 +28,7 @@
 
 #include "cc-add-user-dialog.h"
 #include "cc-realm-manager.h"
+#include "cc-list-row.h"
 #include "user-utils.h"
 #include "pw-utils.h"
 
@@ -59,7 +60,7 @@ struct _CcAddUserDialog {
         GtkDialog parent_instance;
 
         GtkButton          *add_button;
-        AdwActionRow       *enterprise_button;
+        CcListRow          *enterprise_button;
         GtkComboBox        *enterprise_domain_combo;
         GtkEntry           *enterprise_domain_entry;
         GtkLabel           *enterprise_domain_hint;
