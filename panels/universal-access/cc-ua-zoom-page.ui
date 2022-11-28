@@ -85,14 +85,14 @@
         <child>
           <object class="AdwComboRow" id="zoom_follow_behaviour_row">
             <property name="sensitive" bind-source="magnify_outside_screen_row" bind-flags="sync-create"/>
-            <property name="title" translatable="yes">Follow Behaviour</property>
+            <property name="title" translatable="yes">Follow Behavior</property>
             <signal name="notify::selected" handler="ua_zoom_behaviour_row_changed_cb" swapped="yes" />
             <property name="model">
               <object class="GtkStringList">
                 <items>
                   <item translatable="yes">Moves with Contents</item>
                   <item translatable="yes">Pushes Contents Around</item>
-                  <item translatable="yes">Remains Cented</item>
+                  <item translatable="yes">Remains Centered</item>
                 </items>
               </object>
             </property>
