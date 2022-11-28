@@ -553,6 +553,8 @@ set_virtualization_label (CcInfoOverviewPanel *self,
   if (virt == NULL || *virt == '\0')
     {
       gtk_widget_hide (GTK_WIDGET (self->virtualization_row));
+      gtk_widget_hide (GTK_WIDGET (self->firmware_version_row));
+
       return;
     }
 
