@@ -128,7 +128,6 @@ set_dialog_item_layer1 (CcFirmwareSecurityDialog *self,
         break;
       case 3:
       case 4:
-      case 5:
         gtk_widget_add_css_class (self->dialog_hsi_circle_box, "level3");
         gtk_widget_add_css_class (self->dialog_hsi_circle_number, "hsi3");
         break;
@@ -142,9 +141,6 @@ set_dialog_item_layer1 (CcFirmwareSecurityDialog *self,
 static void
 update_dialog (CcFirmwareSecurityDialog *self)
 {
-  g_autofree gchar *hsi_str = NULL;
-  g_autofree gchar *hsi_title = NULL;
-
   switch (self->hsi_number)
     {
     case 0:
@@ -175,13 +171,9 @@ update_dialog (CcFirmwareSecurityDialog *self)
 
     case 3:
     case 4:
-    case 5:
-      hsi_str = g_strdup_printf ("%d", self->hsi_number);
-      /* TRANSLATOR: the HSI status title should look like for example: "Security Level 3" */
-      hsi_title = g_strdup_printf ( _("%1$s %2$d"), _("Security Level"), self->hsi_number);
       set_dialog_item_layer1 (self,
-                              hsi_str,
-                              hsi_title,
+                              "3",
+                              _("Security Level 3"),
                               _("This device has extended protection against hardware security issues. This "
                                 "is the highest device security level and provides protection against "
                                 "advanced security threats."));

@@ -439,37 +439,35 @@ set_hsi_button_view_contain (CcfirmwareSecurityPanel *self,
                              gchar                   *title,
                              const gchar             *description)
 {
-  g_autofree gchar *hsi_str = NULL;
-
-  hsi_str = g_strdup_printf ("%d", hsi_number);
   switch (hsi_number)
     {
       case 0:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "0");
         gtk_widget_add_css_class (self->hsi_circle_box, "level0");
         gtk_widget_add_css_class (self->hsi_circle_number, "hsi0");
         break;
       case 1:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "1");
         gtk_widget_add_css_class (self->hsi_circle_box, "level1");
         gtk_widget_add_css_class (self->hsi_circle_number, "hsi1");
         break;
       case 2:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "2");
         gtk_widget_add_css_class (self->hsi_circle_box, "level2");
         gtk_widget_add_css_class (self->hsi_circle_number, "hsi2");
         break;
       case 3:
       case 4:
-      case 5:
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "3");
         gtk_widget_add_css_class (self->hsi_circle_box, "level3");
         gtk_widget_add_css_class (self->hsi_circle_number, "hsi3");
         break;
       default:
-        g_free (hsi_str);
-        hsi_str = g_strdup_printf ("?");
+        gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), "?");
         gtk_widget_add_css_class (self->hsi_circle_box, "level1");
         gtk_widget_add_css_class (self->hsi_circle_number, "hsi1");
         break;
     }
-  gtk_label_set_label (GTK_LABEL (self->hsi_circle_number), hsi_str);
 
   gtk_label_set_text (GTK_LABEL (self->hsi_label), title);
   gtk_label_set_text (GTK_LABEL (self->hsi_description), description);
@@ -490,31 +488,29 @@ set_hsi_button_view (CcfirmwareSecurityPanel *self)
       case 1:
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 1/5 stars */
+                                     /* TRANSLATORS: in reference to firmware protection: 1/4 stars */
                                      _("Security Level 1"),
                                      _("Limited protection against simple security threats."));
         break;
       case 2:
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 2/5 stars */
+                                     /* TRANSLATORS: in reference to firmware protection: 2/4 stars */
                                      _("Security Level 2"),
                                      _("Protected against common security threats."));
         break;
       case 3:
         set_hsi_button_view_contain (self,
                                      self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 3/5 stars */
+                                     /* TRANSLATORS: in reference to firmware protection: 3/4 stars */
                                      _("Security Level 3"),
                                      _("Protected against a wide range of security threats."));
         break;
       case 4:
-      case 5:
         set_hsi_button_view_contain (self,
-                                     /* The scale of HSI is 0-5. If it is greater than 3,
-                                        "comprehensive protection" is shown */
-                                     self->hsi_number,
-                                     /* TRANSLATORS: in reference to firmware protection: 4/5 and 5/5 stars */
+                                     /* Based on current HSI definition, the max HSI value would be 3. */
+                                     3,
+                                     /* TRANSLATORS: in reference to firmware protection: 4/4 stars */
                                      _("Comprehensive Protection"),
                                      _("Protected against a wide range of security threats."));
         break;
