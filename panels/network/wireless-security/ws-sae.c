@@ -212,8 +212,8 @@ ws_sae_new (NMConnection *connection)
                                 (HelperSecretFunc) nm_setting_wireless_security_get_psk);
 	  }
 
-  g_signal_connect (self->show_password_check, "toggled",
-                    G_CALLBACK (show_toggled_cb), self);
+  g_signal_connect_swapped (self->show_password_check, "toggled",
+                            G_CALLBACK (show_toggled_cb), self);
 
   /* Hide WPA/RSN for now since this can be autodetected by NM and the
    * supplicant when connecting to the AP.
