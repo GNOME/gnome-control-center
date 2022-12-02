@@ -48,7 +48,6 @@
 #include <unistd.h>
 #include <pwd.h>
 
-static void cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self, GtkWidget *label);
 static GtkWidget *cc_sharing_panel_new_media_sharing_row (const char     *uri_or_path,
                                                           CcSharingPanel *self);
 
@@ -302,48 +301,6 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 
   g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
-}
-
-static void
-cc_sharing_panel_run_dialog (CcSharingPanel *self,
-                             GtkWidget      *dialog)
-{
-  GtkWidget *parent;
-
-  /* ensure labels with the hostname are updated if the hostname has changed */
-  cc_sharing_panel_setup_label_with_hostname (self,
-                                              self->remote_desktop_address_label);
-  cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_label);
-  cc_sharing_panel_setup_label_with_hostname (self,
-                                              self->personal_file_sharing_label);
-
-
-  parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
-
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (parent));
-  gtk_window_present (GTK_WINDOW (dialog));
-}
-
-static void
-cc_sharing_panel_main_list_box_row_activated (CcSharingPanel *self,
-                                              GtkListBoxRow  *row)
-{
-  GtkWidget *dialog;
-
-  if (row == GTK_LIST_BOX_ROW (self->media_sharing_row))
-    dialog = self->media_sharing_dialog;
-  else if (row == GTK_LIST_BOX_ROW (self->personal_file_sharing_row))
-    dialog = self->personal_file_sharing_dialog;
-  else if (row == GTK_LIST_BOX_ROW (self->remote_login_row))
-    dialog = self->remote_login_dialog;
-  else if (row == GTK_LIST_BOX_ROW (self->remote_desktop_row))
-    dialog = self->remote_desktop_dialog;
-  else
-    return;
-
-  gtk_list_box_select_row (GTK_LIST_BOX (self->main_list_box), NULL);
-
-  cc_sharing_panel_run_dialog (self, dialog);
 }
 
 static gboolean
@@ -743,11 +700,13 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
 }
 
 static void
-cc_sharing_panel_setup_label (CcSharingPanel *self,
-                              GtkWidget      *label,
-                              const gchar    *hostname)
+cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
+                                            GtkWidget      *label)
 {
   g_autofree gchar *text = NULL;
+  const gchar *hostname;
+
+  hostname = gtk_editable_get_text (GTK_EDITABLE (self->hostname_entry));
 
   if (label == self->personal_file_sharing_label)
     {
@@ -769,109 +728,6 @@ cc_sharing_panel_setup_label (CcSharingPanel *self,
     g_assert_not_reached ();
 
   gtk_label_set_label (GTK_LABEL (label), text);
-}
-
-typedef struct
-{
-  CcSharingPanel *panel;
-  GtkWidget *label;
-} GetHostNameData;
-
-G_DEFINE_AUTOPTR_CLEANUP_FUNC (GetHostNameData, g_free);
-
-static void
-cc_sharing_panel_get_host_name_fqdn_done (GObject         *object,
-                                          GAsyncResult    *res,
-                                          gpointer         user_data)
-{
-  GDBusConnection *connection = G_DBUS_CONNECTION (object);
-  g_autoptr(GetHostNameData) data = user_data;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(GVariant) variant = NULL;
-  const gchar *fqdn;
-
-  variant = g_dbus_connection_call_finish (connection, res, &error);
-
-  if (variant == NULL)
-    {
-      /* Avahi service may not be available */
-      g_debug ("Error calling GetHostNameFqdn: %s", error->message);
-
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_autofree gchar *hostname = NULL;
-
-          hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (data->panel->hostname_entry));
-
-          cc_sharing_panel_setup_label (data->panel, data->label, hostname);
-        }
-
-      return;
-    }
-
-  g_variant_get (variant, "(&s)", &fqdn);
-
-  cc_sharing_panel_setup_label (data->panel, data->label, fqdn);
-}
-
-static void
-cc_sharing_panel_bus_ready (GObject         *object,
-                            GAsyncResult    *res,
-                            gpointer         user_data)
-{
-  g_autoptr(GDBusConnection) connection = NULL;
-  g_autoptr(GetHostNameData) data = user_data;
-  g_autoptr(GError) error = NULL;
-
-  connection = g_bus_get_finish (res, &error);
-
-  if (connection == NULL)
-    {
-      g_warning ("Could not connect to system bus: %s", error->message);
-
-      if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        {
-          g_autofree gchar *hostname = NULL;
-
-          hostname = cc_hostname_entry_get_hostname (CC_HOSTNAME_ENTRY (data->panel->hostname_entry));
-
-          cc_sharing_panel_setup_label (data->panel, data->label, hostname);
-        }
-
-      return;
-    }
-
-  g_dbus_connection_call (connection,
-                          "org.freedesktop.Avahi",
-                          "/",
-                          "org.freedesktop.Avahi.Server",
-                          "GetHostNameFqdn",
-                          NULL,
-                          (GVariantType*)"(s)",
-                          G_DBUS_CALL_FLAGS_NONE,
-                          -1,
-                          cc_panel_get_cancellable (CC_PANEL (data->panel)),
-                          cc_sharing_panel_get_host_name_fqdn_done,
-                          data);
-  g_steal_pointer (&data);
-}
-
-
-static void
-cc_sharing_panel_setup_label_with_hostname (CcSharingPanel *self,
-                                            GtkWidget      *label)
-
-{
-  GetHostNameData *get_hostname_data;
-
-  /* set the hostname */
-  get_hostname_data = g_new (GetHostNameData, 1);
-  get_hostname_data->panel = self;
-  get_hostname_data->label = label;
-  g_bus_get (G_BUS_TYPE_SYSTEM,
-             cc_panel_get_cancellable (CC_PANEL (self)),
-             cc_sharing_panel_bus_ready,
-             get_hostname_data);
 }
 
 static gboolean
@@ -915,9 +771,6 @@ cc_sharing_panel_setup_personal_file_sharing_dialog (CcSharingPanel *self)
                                            self->personal_file_sharing_password_label,
                                            NULL);
 
-  cc_sharing_panel_setup_label_with_hostname (self,
-                                              self->personal_file_sharing_label);
-
   /* the password cannot be read, so just make sure the entry is not empty */
   gtk_editable_set_text (GTK_EDITABLE (self->personal_file_sharing_password_entry),
                          "password");
@@ -960,8 +813,6 @@ cc_sharing_panel_setup_remote_login_dialog (CcSharingPanel *self)
 {
   cc_sharing_panel_bind_switch_to_label (self, self->remote_login_switch,
                                          self->remote_login_row);
-
-  cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_label);
 
   g_signal_connect_object (self->remote_login_switch, "notify::active",
                            G_CALLBACK (remote_login_switch_activate), self, G_CONNECT_SWAPPED);
@@ -1398,8 +1249,6 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
   cc_sharing_panel_bind_switch_to_label (self, self->remote_desktop_switch,
                                          self->remote_desktop_row);
 
-  cc_sharing_panel_setup_label_with_hostname (self, self->remote_desktop_address_label);
-
   rdp_settings = g_settings_new (GNOME_REMOTE_DESKTOP_RDP_SCHEMA_ID);
 
   g_settings_bind (rdp_settings,
@@ -1514,6 +1363,7 @@ sharing_proxy_ready (GObject      *source,
 {
   CcSharingPanel *self;
   GDBusProxy *proxy;
+  GtkWidget *parent;
   g_autoptr(GError) error = NULL;
 
   proxy = G_DBUS_PROXY (gsd_sharing_proxy_new_for_bus_finish (res, &error));
@@ -1541,6 +1391,19 @@ sharing_proxy_ready (GObject      *source,
   /* screen sharing */
   check_remote_desktop_available (self);
   gtk_widget_hide (self->remote_desktop_row);
+
+  parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
+  gtk_window_set_transient_for (GTK_WINDOW (self->media_sharing_dialog),
+                                GTK_WINDOW (parent));
+  gtk_window_set_transient_for (GTK_WINDOW (self->personal_file_sharing_dialog),
+                                GTK_WINDOW (parent));
+  gtk_window_set_transient_for (GTK_WINDOW (self->remote_login_dialog),
+                                GTK_WINDOW (parent));
+  gtk_window_set_transient_for (GTK_WINDOW (self->remote_desktop_dialog),
+                                GTK_WINDOW (parent));
+
+  cc_sharing_panel_setup_label_with_hostname (self, self->personal_file_sharing_label);
+  cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_label);
 }
 
 static void
@@ -1552,9 +1415,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  g_signal_connect_object (self->main_list_box, "row-activated",
-                           G_CALLBACK (cc_sharing_panel_main_list_box_row_activated), self, G_CONNECT_SWAPPED);
-
   g_signal_connect (self->media_sharing_dialog, "response",
                     G_CALLBACK (gtk_widget_hide), NULL);
   g_signal_connect (self->personal_file_sharing_dialog, "response",
@@ -1563,9 +1423,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
                     G_CALLBACK (gtk_widget_hide), NULL);
   g_signal_connect (self->remote_desktop_dialog, "response",
                     G_CALLBACK (gtk_widget_hide), NULL);
-
-  gtk_list_box_set_activate_on_single_click (GTK_LIST_BOX (self->main_list_box),
-                                             TRUE);
 
   /* start the panel in the disabled state */
   gtk_switch_set_active (GTK_SWITCH (self->master_switch), FALSE);
@@ -1580,10 +1437,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
                                  cc_panel_get_cancellable (CC_PANEL (self)),
                                  sharing_proxy_ready,
                                  self);
-
-  /* make sure the hostname entry isn't focused by default */
-  g_signal_connect_swapped (self, "map", G_CALLBACK (gtk_widget_grab_focus),
-                            self->main_list_box);
 
   provider = gtk_css_provider_new ();
   gtk_css_provider_load_from_resource (provider,

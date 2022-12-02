@@ -19,13 +19,13 @@
 
 #pragma once
 
-#include <gtk/gtk.h>
+#include <adwaita.h>
 
 G_BEGIN_DECLS
 
 #define CC_TYPE_HOSTNAME_ENTRY (cc_hostname_entry_get_type())
 
-G_DECLARE_FINAL_TYPE (CcHostnameEntry, cc_hostname_entry, CC, HOSTNAME_ENTRY, GtkEntry)
+G_DECLARE_FINAL_TYPE (CcHostnameEntry, cc_hostname_entry, CC, HOSTNAME_ENTRY, AdwEntryRow)
 
 CcHostnameEntry *cc_hostname_entry_new (void);
 gchar* cc_hostname_entry_get_hostname (CcHostnameEntry *entry);

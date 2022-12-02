@@ -27,13 +27,13 @@
 
 struct _CcHostnameEntry
 {
-  GtkEntry             parent;
+  AdwEntryRow          parent;
 
   GDBusProxy          *hostnamed_proxy;
   guint                set_hostname_timeout_source_id;
 };
 
-G_DEFINE_TYPE (CcHostnameEntry, cc_hostname_entry, GTK_TYPE_ENTRY)
+G_DEFINE_TYPE (CcHostnameEntry, cc_hostname_entry, ADW_TYPE_ENTRY_ROW)
 
 #define SET_HOSTNAME_TIMEOUT 1
 
@@ -235,6 +235,8 @@ cc_hostname_entry_constructed (GObject *object)
     gtk_editable_set_text (GTK_EDITABLE (self), "");
 
   g_signal_connect (self, "changed", G_CALLBACK (text_changed_cb), NULL);
+
+  adw_entry_row_set_show_apply_button (ADW_ENTRY_ROW (self), TRUE);
 }
 
 static void

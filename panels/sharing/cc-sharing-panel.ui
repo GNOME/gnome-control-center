@@ -12,75 +12,49 @@
     </child>
 
     <child type="content">
-      <object class="GtkScrolledWindow" id="sharing_panel">
-        <property name="hscrollbar-policy">never</property>
+      <object class="AdwPreferencesPage" id="sharing_panel">
         <child>
-          <object class="AdwClamp">
-            <property name="margin_top">32</property>
-            <property name="margin_bottom">32</property>
-            <property name="margin_start">12</property>
-            <property name="margin_end">12</property>
+          <object class="AdwPreferencesGroup">
+            <property name="margin-bottom">12</property>
             <child>
-              <object class="GtkBox">
-                <property name="hexpand">True</property>
-                <property name="orientation">vertical</property>
-                <child>
-                  <object class="GtkLabel" id="label6">
-                    <property name="margin_bottom">12</property>
-                    <property name="xalign">0</property>
-                    <property name="label" translatable="yes">_Computer Name</property>
-                    <property name="use_underline">True</property>
-                    <property name="mnemonic_widget">hostname_entry</property>
-                    <attributes>
-                     <attribute name="weight" value="bold"/>
-                    </attributes>
-                  </object>
-                </child>
-                <child>
-                  <object class="CcHostnameEntry" id="hostname_entry">
-                    <property name="margin_bottom">32</property>
-                    <property name="invisible_char">●</property>
-                    <accessibility>
-                      <relation name="labelled-by">label6</relation>
-                    </accessibility>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkListBox" id="main_list_box">
-                    <property name="selection-mode">none</property>
-                    <style>
-                      <class name="boxed-list" />
-                    </style>
-                    <child>
-                      <object class="CcListRow" id="personal_file_sharing_row">
-                        <property name="show-arrow">True</property>
-                        <property name="use-underline">True</property>
-                        <property name="title" translatable="yes">_File Sharing</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcListRow" id="remote_desktop_row">
-                        <property name="show-arrow">True</property>
-                        <property name="use-underline">True</property>
-                        <property name="title" translatable="yes">Remote _Desktop</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcListRow" id="media_sharing_row">
-                        <property name="show-arrow">True</property>
-                        <property name="use-underline">True</property>
-                        <property name="title" translatable="yes">_Media Sharing</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="CcListRow" id="remote_login_row">
-                        <property name="show-arrow">True</property>
-                        <property name="use-underline">True</property>
-                        <property name="title" translatable="yes">_Remote Login</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+              <object class="CcHostnameEntry" id="hostname_entry">
+                <property name="title" translatable="yes">Computer Name</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup" id="main_list_box">
+            <child>
+              <object class="CcListRow" id="personal_file_sharing_row">
+                <property name="show-arrow">True</property>
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes">_File Sharing</property>
+                <signal name="activated" handler="gtk_window_present" object="personal_file_sharing_dialog"/>
+              </object>
+            </child>
+            <child>
+              <object class="CcListRow" id="remote_desktop_row">
+                <property name="show-arrow">True</property>
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes">Remote _Desktop</property>
+                <signal name="activated" handler="gtk_window_present" object="remote_desktop_dialog"/>
+              </object>
+            </child>
+            <child>
+              <object class="CcListRow" id="media_sharing_row">
+                <property name="show-arrow">True</property>
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes">_Media Sharing</property>
+                <signal name="activated" handler="gtk_window_present" object="media_sharing_dialog"/>
+              </object>
+            </child>
+            <child>
+              <object class="CcListRow" id="remote_login_row">
+                <property name="show-arrow">True</property>
+                <property name="use-underline">True</property>
+                <property name="title" translatable="yes">_Remote Login</property>
+                <signal name="activated" handler="gtk_window_present" object="remote_login_dialog"/>
               </object>
             </child>
           </object>
@@ -308,6 +282,7 @@
                         <child>
                           <object class="GtkLabel" id="remote_desktop_device_name_label">
                             <property name="selectable">True</property>
+                            <property name="label" bind-source="hostname_entry" bind-property="text"/>
                           </object>
                         </child>
                         <child>

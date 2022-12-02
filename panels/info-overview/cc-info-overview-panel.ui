@@ -29,11 +29,8 @@
 
             <!-- Device name -->
             <child>
-              <object class="CcListRow" id="hostname_row">
+              <object class="CcHostnameEntry" id="hostname_row">
                 <property name="title" translatable="yes">Device Name</property>
-                <property name="secondary-label" bind-source="hostname_entry" bind-property="text" bind-flags="sync-create" />
-                <property name="show-arrow">True</property>
-                <signal name="activated" handler="cc_info_panel_row_activated_cb" swapped="yes"/>
               </object>
             </child>
 
@@ -167,7 +164,7 @@
               <object class="AdwActionRow" id="software_updates_row">
                 <property name="activatable">True</property>
                 <property name="title" translatable="yes">Software Updates</property>
-                <signal name="activated" handler="cc_info_panel_row_activated_cb" swapped="yes"/>
+                <signal name="activated" handler="cc_info_panel_open_software_update" swapped="yes"/>
                 <child type="suffix">
                   <object class="GtkImage">
                     <property name="valign">center</property>
@@ -183,69 +180,4 @@
       </object>
     </child>
   </template>
-
-  <object class="GtkDialog" id="hostname_editor">
-    <property name="visible">False</property>
-    <property name="modal">True</property>
-    <property name="use-header-bar">1</property>
-    <property name="default-height">24</property>
-    <property name="hide-on-close">True</property>
-    <property name="title" translatable="yes">Rename Device</property>
-    <signal name="response" handler="on_hostname_editor_dialog_response_cb" object="CcInfoOverviewPanel" swapped="no" />
-
-    <child>
-      <object class="GtkBox">
-        <property name="margin-top">18</property>
-        <property name="margin-start">12</property>
-        <property name="margin-end">12</property>
-        <property name="margin-bottom">18</property>
-        <property name="orientation">vertical</property>
-        <child>
-          <object class="GtkLabel" id="device_name_description">
-            <property name="margin-bottom">18</property>
-            <property name="wrap">True</property>
-            <property name="max-width-chars">35</property>
-            <property name="xalign">0.0</property>
-            <property name="label" translatable="yes">The device name is used to identify this device when it is viewed over the network, or when pairing Bluetooth devices.</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkEntry" id="device_name_entry">
-            <accessibility>
-              <property name="label" translatable="yes">Device name</property>
-              <relation name="described-by">device_name_description</relation>
-            </accessibility>
-            <signal name="changed" handler="on_device_name_entry_changed" swapped="yes"/>
-            <signal name="activate" handler="on_device_name_entry_activated_cb" swapped="yes" />
-          </object>
-        </child>
-      </object>
-    </child>
-
-    <!-- Rename button -->
-    <child type="action">
-      <object class="GtkButton" id="rename_button">
-        <property name="use-underline">True</property>
-        <property name="label" translatable="yes">_Rename</property>
-      </object>
-    </child>
-
-    <!-- Cancel button -->
-    <child type="action">
-      <object class="GtkButton" id="cancel_button">
-        <property name="use-underline">True</property>
-        <property name="label" translatable="yes">_Cancel</property>
-      </object>
-    </child>
-
-    <action-widgets>
-      <action-widget response="apply" default="true">rename_button</action-widget>
-      <action-widget response="cancel">cancel_button</action-widget>
-    </action-widgets>
-  </object>
-
-  <object class="CcHostnameEntry" id="hostname_entry">
-    <property name="visible">0</property>
-  </object>
-
 </interface>

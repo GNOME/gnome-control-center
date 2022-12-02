@@ -57,16 +57,11 @@ struct _CcInfoOverviewPanel
 {
   CcPanel          parent_instance;
 
-  GtkEntry        *device_name_entry;
-  GtkWidget       *rename_button;
   CcListRow       *disk_row;
   CcListRow       *gnome_version_row;
   CcListRow       *graphics_row;
   CcListRow       *hardware_model_row;
   CcListRow       *firmware_version_row;
-  GtkDialog       *hostname_editor;
-  CcHostnameEntry *hostname_entry;
-  CcListRow       *hostname_row;
   CcListRow       *kernel_row;
   CcListRow       *memory_row;
   GtkPicture      *os_logo;
@@ -820,7 +815,7 @@ does_gpk_update_viewer_exist (void)
 }
 
 static void
-open_software_update (CcInfoOverviewPanel *self)
+cc_info_panel_open_software_update (CcInfoOverviewPanel *self)
 {
   g_autoptr(GError) error = NULL;
   gboolean ret;
@@ -840,83 +835,6 @@ open_software_update (CcInfoOverviewPanel *self)
   ret = g_spawn_async (NULL, argv, NULL, G_SPAWN_SEARCH_PATH, NULL, NULL, NULL, &error);
   if (!ret)
       g_warning ("Failed to spawn %s: %s", argv[0], error->message);
-}
-
-static void
-on_device_name_entry_changed (CcInfoOverviewPanel *self)
-{
-  const gchar *current_hostname, *new_hostname;
-
-  current_hostname = gtk_editable_get_text (GTK_EDITABLE (self->hostname_entry));
-  new_hostname = gtk_editable_get_text (GTK_EDITABLE (self->device_name_entry));
-  gtk_widget_set_sensitive (self->rename_button,
-                            g_strcmp0 (current_hostname, new_hostname) != 0);
-}
-
-static void
-update_device_name (CcInfoOverviewPanel *self)
-{
-  const gchar *hostname;
-
-  /* We simply change the CcHostnameEntry text. CcHostnameEntry
-   * listens to changes and updates hostname on change.
-   */
-  hostname = gtk_editable_get_text (GTK_EDITABLE (self->device_name_entry));
-  gtk_editable_set_text (GTK_EDITABLE (self->hostname_entry), hostname);
-}
-
-static void
-on_hostname_editor_dialog_response_cb (GtkDialog           *dialog,
-                                       gint                 response,
-                                       CcInfoOverviewPanel *self)
-{
-  if (response == GTK_RESPONSE_APPLY)
-    {
-      update_device_name (self);
-    }
-
-  gtk_window_close (GTK_WINDOW (dialog));
-}
-
-static void
-on_device_name_entry_activated_cb (CcInfoOverviewPanel *self)
-{
-  update_device_name (self);
-  gtk_window_close (GTK_WINDOW (self->hostname_editor));
-}
-
-static void
-open_hostname_edit_dialog (CcInfoOverviewPanel *self)
-{
-  GtkWindow *toplevel;
-  CcShell *shell;
-  const gchar *hostname;
-
-  g_assert (CC_IS_INFO_OVERVIEW_PANEL (self));
-
-  shell = cc_panel_get_shell (CC_PANEL (self));
-  toplevel = GTK_WINDOW (cc_shell_get_toplevel (shell));
-  gtk_window_set_transient_for (GTK_WINDOW (self->hostname_editor), toplevel);
-
-  hostname = gtk_editable_get_text (GTK_EDITABLE (self->hostname_entry));
-  gtk_editable_set_text (GTK_EDITABLE (self->device_name_entry), hostname);
-  gtk_widget_grab_focus (GTK_WIDGET (self->device_name_entry));
-
-  gtk_window_present (GTK_WINDOW (self->hostname_editor));
-
-}
-
-static void
-cc_info_panel_row_activated_cb (CcInfoOverviewPanel *self,
-                                AdwActionRow        *row)
-{
-  g_assert (CC_IS_INFO_OVERVIEW_PANEL (self));
-  g_assert (ADW_IS_ACTION_ROW (row));
-
-  if (row == ADW_ACTION_ROW (self->hostname_row))
-    open_hostname_edit_dialog (self);
-  else if (row == self->software_updates_row)
-    open_software_update (self);
 }
 
 #if !defined(DISTRIBUTOR_LOGO) || defined(DARK_MODE_DISTRIBUTOR_LOGO)
@@ -980,15 +898,11 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, device_name_entry);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, gnome_version_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, graphics_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hardware_model_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, firmware_version_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_editor);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, hostname_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, kernel_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, memory_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_logo);
@@ -996,18 +910,13 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_build_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, os_type_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, processor_row);
-  gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, rename_button);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, software_updates_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, virtualization_row);
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, windowing_system_row);
 
-  gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_row_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_device_name_entry_changed);
-  gtk_widget_class_bind_template_callback (widget_class, on_device_name_entry_activated_cb);
-  gtk_widget_class_bind_template_callback (widget_class, on_hostname_editor_dialog_response_cb);
+  gtk_widget_class_bind_template_callback (widget_class, cc_info_panel_open_software_update);
 
   g_type_ensure (CC_TYPE_LIST_ROW);
-  g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
 }
 
 static void
