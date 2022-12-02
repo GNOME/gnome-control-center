@@ -968,6 +968,8 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 static void
 cc_info_overview_panel_init (CcInfoOverviewPanel *self)
 {
+  AdwStyleManager *style_manager;
+
   gtk_widget_init_template (GTK_WIDGET (self));
 
   g_resources_register (cc_info_overview_get_resource ());
@@ -978,6 +980,8 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
 
+  style_manager = adw_style_manager_get_default ();
+  g_signal_connect_swapped (style_manager, "notify::dark", G_CALLBACK (setup_os_logo), self);
   setup_os_logo (self);
 }
 
