@@ -37,6 +37,7 @@ prettify_info (const char *info)
   int   i;
   static const ReplaceStrings rs[] = {
     { "Mesa DRI ", ""},
+    { "Mesa Intel", "Intel"},
     { "[(]R[)]", "\302\256"},
     { "[(](tm|TM)[)]", "\342\204\242"},
     { "(ATI|EPYC|AMD FX|Radeon|Ryzen|Threadripper|GeForce RTX) ", "\\1\342\204\242 "},
