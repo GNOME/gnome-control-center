@@ -34,7 +34,6 @@ struct _CcLocationPanel
 {
   CcPanel       parent_instance;
 
-  GtkStack     *stack;
   GtkListBox   *location_apps_list_box;
   GtkSwitch    *main_switch;
 
@@ -89,6 +88,10 @@ on_perm_store_set_done (GObject      *source_object,
   data = (LocationAppStateData *) user_data;
   data->changing_state = FALSE;
   gtk_switch_set_state (GTK_SWITCH (data->widget), data->pending_state);
+
+  // Enable location services when enabling an app
+  if (data->pending_state)
+    gtk_switch_set_state (data->self->main_switch, TRUE);
 }
 
 static gboolean
@@ -196,9 +199,7 @@ add_location_app (CcLocationPanel *self,
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
-  g_settings_bind (self->location_settings, LOCATION_ENABLED,
-                   w, "sensitive",
-                   G_SETTINGS_BIND_DEFAULT);
+
   g_hash_table_insert (self->location_app_switches,
                        g_strdup (app_id),
                        g_object_ref (w));
@@ -216,17 +217,24 @@ add_location_app (CcLocationPanel *self,
                          0);
 }
 
-static gboolean
-to_child_name (GBinding     *binding,
-               const GValue *from,
-               GValue       *to,
-               gpointer      user_data)
+static void
+foreach_location_app_switch (gpointer key,
+                             gpointer value,
+                             gpointer user_data)
 {
-  if (g_value_get_boolean (from))
-    g_value_set_string (to, "content");
-  else
-    g_value_set_string (to, "empty");
-  return TRUE;
+  CcLocationPanel *self = CC_LOCATION_PANEL (user_data);
+  GtkSwitch *app_switch = GTK_SWITCH (value);
+
+  if (!gtk_switch_get_active (self->main_switch))
+    gtk_switch_set_active (app_switch, FALSE);
+}
+
+static void
+on_main_switch_toggled (CcLocationPanel *self)
+{
+  g_hash_table_foreach (self->location_app_switches,
+                        (GHFunc) foreach_location_app_switch,
+                        self);
 }
 
 /* Steals permissions and permissions_data references */
@@ -380,9 +388,10 @@ cc_location_panel_class_init (CcLocationPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/location/cc-location-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_apps_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, main_switch);
+
+  gtk_widget_class_bind_template_callback (widget_class, on_main_switch_toggled);
 }
 
 static void
@@ -395,25 +404,17 @@ cc_location_panel_init (CcLocationPanel *self)
   self->location_icon_size_group = gtk_size_group_new (GTK_SIZE_GROUP_BOTH);
   self->location_settings = g_settings_new ("org.gnome.system.location");
 
+  self->location_app_switches = g_hash_table_new_full (g_str_hash,
+                                                       g_str_equal,
+                                                       g_free,
+                                                       g_object_unref);
+
   g_settings_bind (self->location_settings,
                    LOCATION_ENABLED,
                    self->main_switch,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
-
-  g_object_bind_property_full  (self->main_switch,
-                                "active",
-                                self->stack,
-                                "visible-child-name",
-                                G_BINDING_SYNC_CREATE,
-                                to_child_name,
-                                NULL,
-                                NULL, NULL);
-
-  self->location_app_switches = g_hash_table_new_full (g_str_hash,
-                                                       g_str_equal,
-                                                       g_free,
-                                                       g_object_unref);
+  on_main_switch_toggled (self);
 
   g_dbus_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                             G_DBUS_PROXY_FLAGS_NONE,
