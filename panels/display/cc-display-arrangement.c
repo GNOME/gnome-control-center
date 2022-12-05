@@ -949,18 +949,15 @@ cc_display_arrangement_set_selected_output (CcDisplayArrangement *self,
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_SELECTED_OUTPUT]);
 }
 
-void
-cc_display_config_snap_output (CcDisplayConfig  *config,
-                               CcDisplayMonitor *output)
+static gboolean
+try_snap_output (CcDisplayConfig  *config,
+                 CcDisplayMonitor *output)
 {
   SnapData snap_data;
   gint x, y, w, h;
 
   if (!cc_display_monitor_is_useful (output))
-    return;
-
-  if (cc_display_config_count_useful_monitors (config) <= 1)
-    return;
+    return FALSE;
 
   get_scaled_geometry (config, output, &x, &y, &w, &h);
 
@@ -974,5 +971,34 @@ cc_display_config_snap_output (CcDisplayConfig  *config,
 
   find_best_snapping (config, output, &snap_data);
 
-  cc_display_monitor_set_position (output, snap_data.mon_x, snap_data.mon_y);
+  if (x != snap_data.mon_x || y != snap_data.mon_y)
+    {
+      cc_display_monitor_set_position (output, snap_data.mon_x, snap_data.mon_y);
+      return TRUE;
+    }
+
+  return FALSE;
+}
+
+void
+cc_display_config_snap_output (CcDisplayConfig  *config,
+                               CcDisplayMonitor *output)
+{
+  gboolean changed;
+  GList *l;
+
+  if (cc_display_config_count_useful_monitors (config) <= 1)
+    return;
+
+  (void) (try_snap_output (config, output));
+
+  do
+    {
+      changed = FALSE;
+      for (l = cc_display_config_get_monitors (config); l; l = l->next)
+        {
+          changed |= try_snap_output (config, l->data);
+        }
+    }
+  while (changed);
 }
