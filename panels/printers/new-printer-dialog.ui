@@ -176,31 +176,9 @@
                           <object class="GtkStackPage">
                             <property name="name">no-printers-page</property>
                             <property name="child">
-                              <object class="GtkBox">
-                                <property name="orientation">GTK_ORIENTATION_VERTICAL</property>
-                                <property name="valign">GTK_ALIGN_CENTER</property>
-                                <property name="spacing">10</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="valign">GTK_ALIGN_START</property>
-                                    <property name="pixel_size">80</property>
-                                    <property name="icon_name">printer-symbolic</property>
-                                    <property name="opacity">0.6</property>
-                                    <style>
-                                      <class name="dim-label"/>
-                                    </style>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel" id="no-devices-label">
-                                    <property name="sensitive">False</property>
-                                    <property name="label" translatable="yes" comments="Translators: No printers were detected">No Printers Found</property>
-                                    <property name="opacity">0.6</property>
-                                    <attributes>
-                                      <attribute name="weight" value="bold"/>
-                                    </attributes>
-                                  </object>
-                                </child>
+                              <object class="AdwStatusPage">
+                                <property name="icon-name">printer-symbolic</property>
+                                <property name="title" translatable="yes" comments="Translators: No printers were detected">No Printers Found</property>
                               </object>
                             </property>
                           </object>
