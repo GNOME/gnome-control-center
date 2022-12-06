@@ -847,7 +847,7 @@ add_static_permissions (CcApplicationsPanel *self,
   if (str && g_str_equal (str, "talk"))
     added += add_static_permission_row (self, _("Settings"), _("Can change settings"));
 
-  text = g_strdup_printf (_("%s has the following permissions built-in. These cannot be altered. If you are concerned about these permissions, consider removing this application."), g_app_info_get_display_name (info));
+  text = g_strdup_printf (_("%s requires access to the following system resources. To stop this access, the application must be removed."), g_app_info_get_display_name (info));
   adw_preferences_group_set_description (self->builtin_group, text);
 
   return added > 0;
