@@ -334,10 +334,6 @@ add_custom_shortcut_clicked_cb (CcKeyboardShortcutDialog *self)
 static void
 back_button_clicked_cb (CcKeyboardShortcutDialog *self)
 {
-  gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
-  gtk_widget_show (GTK_WIDGET (self->search_entry));
-
-  self->visible_section = NULL;
   adw_leaflet_navigate (self->main_leaflet, ADW_NAVIGATION_DIRECTION_BACK);
 }
 
@@ -435,9 +431,18 @@ shortcut_dialog_visible_child_changed_cb (CcKeyboardShortcutDialog *self)
   is_main_view = visible_child == self->main_box;
 
   if (is_main_view)
-    visible_child = self->main_header_bar;
+    {
+      visible_child = self->main_header_bar;
+
+      gtk_editable_set_text (GTK_EDITABLE (self->search_entry), "");
+      gtk_widget_grab_focus (GTK_WIDGET (self->search_entry));
+
+      self->visible_section = NULL;
+    }
   else
-    visible_child = self->subview_header_bar;
+    {
+      visible_child = self->subview_header_bar;
+    }
 
   adw_leaflet_set_visible_child (self->header_bar_leaflet, visible_child);
 
