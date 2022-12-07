@@ -179,7 +179,6 @@ shortuct_custom_items_changed (CcKeyboardShortcutDialog *self)
         page = GTK_WIDGET (self->empty_custom_shortcut_page);
 
       adw_leaflet_set_visible_child (self->main_leaflet, page);
-      gtk_widget_set_visible (GTK_WIDGET (self->search_entry), n_items > 0);
     }
 }
 
