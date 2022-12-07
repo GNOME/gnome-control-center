@@ -460,7 +460,10 @@ shortcut_search_entry_changed_cb (CcKeyboardShortcutDialog *self)
   guint n_items;
 
   g_assert (CC_IS_KEYBOARD_SHORTCUT_DIALOG (self));
-  g_assert (!self->visible_section);
+
+  /* Don't update search if we are in a subview */
+  if (self->visible_section)
+    return;
 
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
   search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
