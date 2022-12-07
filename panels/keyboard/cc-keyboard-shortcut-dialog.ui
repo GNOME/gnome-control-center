@@ -70,17 +70,23 @@
 
                 <!-- Search Entry -->
                 <child>
-                  <object class="GtkSearchEntry" id="search_entry">
-                    <property name="halign">center</property>
-                    <property name="margin-start">6</property>
-                    <property name="margin-end">6</property>
-                    <property name="margin-top">6</property>
-                    <property name="margin-bottom">6</property>
-                    <property name="width-chars">28</property>
-                    <signal name="search-changed" handler="shortcut_search_entry_changed_cb" swapped="yes" />
-                    <accessibility>
-                      <property name="label" translatable="yes">Search Shortcuts</property>
-                    </accessibility>
+                  <object class="GtkSearchBar">
+                    <property name="search-mode-enabled">True</property>
+                    <property name="child">
+                      <!-- xxx: Pack the search entry inside a box so that Escape key won't hide the bar -->
+                      <object class="GtkBox">
+                        <child>
+                          <object class="GtkSearchEntry" id="search_entry">
+                            <property name="halign">center</property>
+                            <property name="width-chars">28</property>
+                            <signal name="search-changed" handler="shortcut_search_entry_changed_cb" swapped="yes" />
+                            <accessibility>
+                              <property name="label" translatable="yes">Search Shortcuts</property>
+                            </accessibility>
+                          </object>
+                        </child>
+                      </object>
+                    </property>
                   </object>
                 </child>
 

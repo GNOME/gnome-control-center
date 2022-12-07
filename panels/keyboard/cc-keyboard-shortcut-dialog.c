@@ -577,21 +577,7 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 static void
 cc_keyboard_shortcut_dialog_init (CcKeyboardShortcutDialog *self)
 {
-  g_autoptr(GtkCssProvider) provider = NULL;
-  GdkDisplay *display;
-
   gtk_widget_init_template (GTK_WIDGET (self));
-
-  provider = gtk_css_provider_new ();
-  gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider),
-                                   ".shortcut-list undershoot.top {"
-                                   "  box-shadow: inset 0 1px @borders;"
-                                   "}", -1);
-  display = gdk_display_get_default ();
-  gtk_style_context_add_provider_for_display (display,
-                                              GTK_STYLE_PROVIDER (provider),
-                                              GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-
   gtk_search_entry_set_key_capture_widget (self->search_entry, GTK_WIDGET (self));
   shortcut_dialog_visible_child_changed_cb (self);
 
