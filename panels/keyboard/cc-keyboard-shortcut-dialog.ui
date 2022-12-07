@@ -72,9 +72,11 @@
                 <child>
                   <object class="GtkSearchEntry" id="search_entry">
                     <property name="halign">center</property>
+                    <property name="margin-start">6</property>
+                    <property name="margin-end">6</property>
                     <property name="margin-top">6</property>
                     <property name="margin-bottom">6</property>
-                    <property name="width-chars">32</property>
+                    <property name="width-chars">28</property>
                     <signal name="search-changed" handler="shortcut_search_entry_changed_cb" swapped="yes" />
                     <accessibility>
                       <property name="label" translatable="yes">Search Shortcuts</property>
