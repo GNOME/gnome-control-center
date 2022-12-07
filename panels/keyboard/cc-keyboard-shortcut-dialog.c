@@ -60,7 +60,6 @@ struct _CcKeyboardShortcutDialog
   AdwStatusPage        *empty_results_page;
 
   GtkStack             *shortcut_list_stack;
-  AdwPreferencesPage   *empty_subpage_results_page;
 
   AdwStatusPage        *empty_custom_shortcut_page;
   GtkSizeGroup         *accelerator_size_group;
@@ -461,6 +460,7 @@ shortcut_search_entry_changed_cb (CcKeyboardShortcutDialog *self)
   guint n_items;
 
   g_assert (CC_IS_KEYBOARD_SHORTCUT_DIALOG (self));
+  g_assert (!self->visible_section);
 
   n_items = g_list_model_get_n_items (G_LIST_MODEL (self->sections));
   search_text = gtk_editable_get_text (GTK_EDITABLE (self->search_entry));
@@ -472,25 +472,6 @@ shortcut_search_entry_changed_cb (CcKeyboardShortcutDialog *self)
 
   /* "Reset all..." button should be sensitive only if the search is not active */
   gtk_widget_set_sensitive (GTK_WIDGET (self->reset_all_button), !self->search_terms);
-
-  /* If we already showing a section, filter that group only */
-  if (self->visible_section)
-    {
-      CcKeyboardShortcutGroup *group;
-      GtkWidget *child;
-      gboolean is_empty;
-
-      group = g_object_get_data (G_OBJECT (self->visible_section), "group");
-      child = g_object_get_data (G_OBJECT (self->visible_section), "page");
-      cc_keyboard_shortcut_group_set_filter (group, self->search_terms);
-      g_object_get (group, "empty", &is_empty, NULL);
-
-      if (is_empty)
-        child = GTK_WIDGET (self->empty_subpage_results_page);
-
-      gtk_stack_set_visible_child (self->shortcut_list_stack, child);
-      return;
-    }
 
   for (guint i = 0; i < n_items; i++)
     {
@@ -580,7 +561,6 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, empty_results_page);
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, shortcut_list_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, empty_subpage_results_page);
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, empty_custom_shortcut_page);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, accelerator_size_group);
