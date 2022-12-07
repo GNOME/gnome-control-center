@@ -44,9 +44,11 @@ struct _CcKeyboardShortcutDialog
 {
   AdwWindow             parent_instance;
 
-  AdwHeaderBar         *header_bar;
-  GtkButton            *back_button;
+  AdwLeaflet           *header_bar_leaflet;
+  AdwHeaderBar         *main_header_bar;
   GtkButton            *reset_all_button;
+  AdwHeaderBar         *subview_header_bar;
+  GtkButton            *back_button;
   GtkSearchEntry       *search_entry;
 
   AdwLeaflet           *main_leaflet;
@@ -376,6 +378,22 @@ on_reset_all_dialog_response_cb (GtkDialog                *dialog,
 }
 
 static void
+shortcut_header_bar_visible_child_changed_cb (CcKeyboardShortcutDialog *self)
+{
+  gpointer visible_child;
+  gboolean is_main_view;
+
+  visible_child = adw_leaflet_get_visible_child (self->header_bar_leaflet);
+  is_main_view = visible_child == self->main_header_bar;
+
+  g_assert (CC_IS_KEYBOARD_SHORTCUT_DIALOG (self));
+
+  /* If we switched to the main view, act the same as if the back button was clicked */
+  if (is_main_view)
+    back_button_clicked_cb (self);
+}
+
+static void
 reset_all_clicked_cb (CcKeyboardShortcutDialog *self)
 {
   GtkWidget *dialog, *button;
@@ -411,12 +429,17 @@ shortcut_dialog_visible_child_changed_cb (CcKeyboardShortcutDialog *self)
 {
   gpointer visible_child;
   const char *title;
-  gboolean show_back;
+  gboolean is_main_view;
 
   visible_child = adw_leaflet_get_visible_child (self->main_leaflet);
-  show_back = visible_child != self->main_box;
+  is_main_view = visible_child == self->main_box;
 
-  gtk_widget_set_visible (GTK_WIDGET (self->back_button), show_back);
+  if (is_main_view)
+    visible_child = self->main_header_bar;
+  else
+    visible_child = self->subview_header_bar;
+
+  adw_leaflet_set_visible_child (self->header_bar_leaflet, visible_child);
 
   if (self->visible_section)
     title = g_object_get_data (G_OBJECT (self->visible_section), "title");
@@ -537,9 +560,11 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
                                                "/org/gnome/control-center/"
                                                "keyboard/cc-keyboard-shortcut-dialog.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, header_bar);
-  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, back_button);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, header_bar_leaflet);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, main_header_bar);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, reset_all_button);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, subview_header_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, back_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, search_entry);
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, main_leaflet);
@@ -558,6 +583,7 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, add_custom_shortcut_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, back_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, shortcut_header_bar_visible_child_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, reset_all_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, shortcut_dialog_visible_child_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, shortcut_search_entry_changed_cb);
