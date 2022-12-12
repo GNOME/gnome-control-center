@@ -34,6 +34,8 @@
                 <child>
                   <object class="GtkCheckButton" id="automatic_radio">
                     <property name="label" translatable="yes">Automatic</property>
+                    <property name="action-name">ip6page.ip6method</property>
+                    <property name="action-target">'automatic'</property>
                     <layout>
                       <property name="row">0</property>
                       <property name="column">1</property>
@@ -43,7 +45,8 @@
                 <child>
                   <object class="GtkCheckButton" id="dhcp_radio">
                     <property name="label" translatable="yes">Automatic, DHCP only</property>
-                    <property name="group">automatic_radio</property>
+                    <property name="action-name">ip6page.ip6method</property>
+                    <property name="action-target">'dhcp'</property>
                     <layout>
                       <property name="row">0</property>
                       <property name="column">2</property>
@@ -53,7 +56,8 @@
                 <child>
                   <object class="GtkCheckButton" id="local_radio">
                     <property name="label" translatable="yes">Link-Local Only</property>
-                    <property name="group">automatic_radio</property>
+                    <property name="action-name">ip6page.ip6method</property>
+                    <property name="action-target">'local'</property>
                     <layout>
                       <property name="row">1</property>
                       <property name="column">1</property>
@@ -63,7 +67,8 @@
                 <child>
                   <object class="GtkCheckButton" id="manual_radio">
                     <property name="label" translatable="yes">Manual</property>
-                    <property name="group">automatic_radio</property>
+                    <property name="action-name">ip6page.ip6method</property>
+                    <property name="action-target">'manual'</property>
                     <layout>
                       <property name="row">1</property>
                       <property name="column">2</property>
@@ -73,7 +78,8 @@
                 <child>
                   <object class="GtkCheckButton" id="disabled_radio">
                     <property name="label" translatable="yes">Disable</property>
-                    <property name="group">automatic_radio</property>
+                    <property name="action-name">ip6page.ip6method</property>
+                    <property name="action-target">'disabled'</property>
                     <layout>
                       <property name="row">2</property>
                       <property name="column">1</property>
@@ -83,7 +89,8 @@
                 <child>
                   <object class="GtkCheckButton" id="shared_radio">
                     <property name="label" translatable="yes">Shared to other computers</property>
-                    <property name="group">automatic_radio</property>
+                    <property name="action-name">ip6page.ip6method</property>
+                    <property name="action-target">'shared'</property>
                     <layout>
                       <property name="row">2</property>
                       <property name="column">2</property>

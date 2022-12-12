@@ -47,13 +47,10 @@ struct _CEPageIP4
         GtkSizeGroup      *address_sizegroup;
         GtkSwitch         *auto_dns_switch;
         GtkSwitch         *auto_routes_switch;
-        GtkCheckButton    *automatic_radio;
         GtkBox            *content_box;
         GtkCheckButton    *disabled_radio;
         GtkEntry          *dns_entry;
-        GtkCheckButton    *local_radio;
         GtkGrid           *main_box;
-        GtkCheckButton    *manual_radio;
         GtkCheckButton    *never_default_check;
         GtkLabel          *routes_address_label;
         GtkBox            *routes_box;
@@ -68,6 +65,8 @@ struct _CEPageIP4
 
         GtkWidget      *address_list;
         GtkWidget      *routes_list;
+
+        GActionGroup      *method_group;
 };
 
 static void ce_page_iface_init (CEPageInterface *);
@@ -80,30 +79,27 @@ enum {
         METHOD_COL_METHOD
 };
 
-enum {
-        IP4_METHOD_AUTO,
-        IP4_METHOD_MANUAL,
-        IP4_METHOD_LINK_LOCAL,
-        IP4_METHOD_SHARED,
-        IP4_METHOD_DISABLED
-};
-
 static void
 method_changed (CEPageIP4 *self)
 {
         gboolean addr_enabled;
         gboolean dns_enabled;
         gboolean routes_enabled;
+        g_autoptr(GVariant) method_variant = NULL;
+        const gchar *method;
 
-        if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->disabled_radio)) ||
-            gtk_check_button_get_active (GTK_CHECK_BUTTON (self->shared_radio))) {
+        method_variant = g_action_group_get_action_state (self->method_group, "ip4method");
+        method = g_variant_get_string (method_variant, NULL);
+
+        if (g_str_equal (method, "disabled") ||
+            g_str_equal (method, "shared")) {
                 addr_enabled = FALSE;
                 dns_enabled = FALSE;
                 routes_enabled = FALSE;
         } else {
-                addr_enabled = gtk_check_button_get_active (GTK_CHECK_BUTTON (self->manual_radio));
-                routes_enabled = !gtk_check_button_get_active (GTK_CHECK_BUTTON (self->local_radio));
-                if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->local_radio)))
+                addr_enabled = g_str_equal (method, "manual");
+                routes_enabled = !g_str_equal (method, "local");
+                if (g_str_equal (method, "local"))
                         dns_enabled = FALSE;
                 else
                         dns_enabled = !gtk_switch_get_active (self->auto_dns_switch);
@@ -483,7 +479,7 @@ static void
 connect_ip4_page (CEPageIP4 *self)
 {
         const gchar *str_method;
-        guint method;
+        gchar *method;
 
         add_address_box (self);
         add_dns_section (self);
@@ -500,45 +496,22 @@ connect_ip4_page (CEPageIP4 *self)
                                 self->content_box, "sensitive",
                                 G_BINDING_SYNC_CREATE | G_BINDING_INVERT_BOOLEAN);
 
-        method = IP4_METHOD_AUTO;
+        method = "automatic";
         if (g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL) == 0) {
-                method = IP4_METHOD_LINK_LOCAL;
+                method = "local";
         } else if (g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL) == 0) {
-                method = IP4_METHOD_MANUAL;
+                method = "manual";
         } else if (g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_SHARED) == 0) {
-                method = IP4_METHOD_SHARED;
+                method = "shared";
         } else if (g_strcmp0 (str_method, NM_SETTING_IP4_CONFIG_METHOD_DISABLED) == 0) {
-                method = IP4_METHOD_DISABLED;
+                method = "disabled";
         }
 
         gtk_check_button_set_active (GTK_CHECK_BUTTON (self->never_default_check),
                                      nm_setting_ip_config_get_never_default (self->setting));
         g_signal_connect_object (self->never_default_check, "toggled", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
 
-        g_signal_connect_object (self->automatic_radio, "toggled", G_CALLBACK (method_changed), self, G_CONNECT_SWAPPED);
-        g_signal_connect_object (self->local_radio, "toggled", G_CALLBACK (method_changed), self, G_CONNECT_SWAPPED);
-        g_signal_connect_object (self->manual_radio, "toggled", G_CALLBACK (method_changed), self, G_CONNECT_SWAPPED);
-        g_signal_connect_object (self->disabled_radio, "toggled", G_CALLBACK (method_changed), self, G_CONNECT_SWAPPED);
-
-        switch (method) {
-        case IP4_METHOD_AUTO:
-                gtk_check_button_set_active (GTK_CHECK_BUTTON (self->automatic_radio), TRUE);
-                break;
-        case IP4_METHOD_LINK_LOCAL:
-                gtk_check_button_set_active (GTK_CHECK_BUTTON (self->local_radio), TRUE);
-                break;
-        case IP4_METHOD_MANUAL:
-                gtk_check_button_set_active (GTK_CHECK_BUTTON (self->manual_radio), TRUE);
-                break;
-        case IP4_METHOD_SHARED:
-                gtk_check_button_set_active (GTK_CHECK_BUTTON (self->shared_radio), TRUE);
-                break;
-        case IP4_METHOD_DISABLED:
-                gtk_check_button_set_active (GTK_CHECK_BUTTON (self->disabled_radio), TRUE);
-                break;
-        default:
-                break;
-        }
+        g_action_group_change_action_state (self->method_group, "ip4method", g_variant_new_string (method));
 
         method_changed (self);
 }
@@ -547,6 +520,7 @@ static gboolean
 ui_to_setting (CEPageIP4 *self)
 {
         const gchar *method;
+        g_autoptr(GVariant) method_variant = NULL;
         gboolean ignore_auto_dns;
         gboolean ignore_auto_routes;
         gboolean never_default;
@@ -562,16 +536,20 @@ ui_to_setting (CEPageIP4 *self)
         gchar *dns_text = NULL;
         guint i;
 
-        if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->disabled_radio)))
+        method_variant = g_action_group_get_action_state (self->method_group, "ip4method");
+        method = g_variant_get_string (method_variant, NULL);
+        if (g_str_equal (method, "disabled"))
                 method = NM_SETTING_IP4_CONFIG_METHOD_DISABLED;
-        else if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->automatic_radio)))
+        else if (g_str_equal (method, "automatic"))
                 method = NM_SETTING_IP4_CONFIG_METHOD_AUTO;
-        else if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->local_radio)))
+        else if (g_str_equal (method, "local"))
                 method = NM_SETTING_IP4_CONFIG_METHOD_LINK_LOCAL;
-        else if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->manual_radio)))
+        else if (g_str_equal (method, "manual"))
                 method = NM_SETTING_IP4_CONFIG_METHOD_MANUAL;
-        else if (gtk_check_button_get_active (GTK_CHECK_BUTTON (self->shared_radio)))
+        else if (g_str_equal (method, "shared"))
                 method = NM_SETTING_IP4_CONFIG_METHOD_SHARED;
+        else
+                g_assert_not_reached ();
 
         addresses = g_ptr_array_new_with_free_func ((GDestroyNotify) nm_ip_address_unref);
         add_addresses = g_str_equal (method, NM_SETTING_IP4_CONFIG_METHOD_MANUAL);
@@ -768,6 +746,17 @@ out:
         return ret;
 }
 
+static void
+on_ip4_method_activated_cb (GSimpleAction* action,
+                            GVariant* parameter,
+                            gpointer user_data)
+{
+        CEPageIP4 *self = CE_PAGE_IP4 (user_data);
+        g_simple_action_set_state (action, parameter);
+
+        method_changed (self);
+}
+
 static const gchar *
 ce_page_ip4_get_title (CEPage *page)
 {
@@ -788,6 +777,14 @@ ce_page_ip4_validate (CEPage        *self,
 static void
 ce_page_ip4_init (CEPageIP4 *self)
 {
+        const GActionEntry ip4_entries[] = {
+                { "ip4method", on_ip4_method_activated_cb, "s", "'automatic'", NULL},
+        };
+        self->method_group = G_ACTION_GROUP (g_simple_action_group_new ());
+
+        g_action_map_add_action_entries (G_ACTION_MAP (self->method_group), ip4_entries, G_N_ELEMENTS (ip4_entries), self);
+        gtk_widget_insert_action_group (GTK_WIDGET (self), "ip4page", G_ACTION_GROUP (self->method_group));
+
         gtk_widget_init_template (GTK_WIDGET (self));
 }
 
@@ -802,13 +799,10 @@ ce_page_ip4_class_init (CEPageIP4Class *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_sizegroup);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_dns_switch);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, auto_routes_switch);
-        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, automatic_radio);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, content_box);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, disabled_radio);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, dns_entry);
-        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, local_radio);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, main_box);
-        gtk_widget_class_bind_template_child (widget_class, CEPageIP4, manual_radio);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, never_default_check);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_address_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageIP4, address_netmask_label);
