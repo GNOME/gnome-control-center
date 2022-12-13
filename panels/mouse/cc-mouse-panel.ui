@@ -87,6 +87,49 @@
                   </object>
                 </child>
                 <child>
+                  <object class="AdwActionRow" id="mouse_accel_profile">
+                    <property name="title" translatable="yes">Pointer Assistance</property>
+                    <property name="subtitle" translatable="yes">Recommended for most users and applications</property>
+                    <property name="activatable-widget">mouse_accel_switch</property>
+                    <child type="suffix">
+                      <object class="GtkMenuButton">
+                        <property name="valign">center</property>
+                        <property name="icon-name">help-about-symbolic</property>
+                        <style>
+                          <class name="flat"/>
+                        </style>
+                        <property name="popover">
+                          <object class="GtkPopover">
+                            <child>
+                              <object class="GtkLabel">
+                                <property name="margin-start">8</property>
+                                <property name="margin-end">8</property>
+                                <property name="margin-top">8</property>
+                                <property name="margin-bottom">8</property>
+                                <property name="halign">center</property>
+                                <property name="valign">center</property>
+                                <property name="wrap">True</property>
+                                <property name="label" translatable="yes" comments="Translators: Preserve the line-break separating the two paragraphs.">Turning pointer assistance off can allow faster and more precise movements, but can also make the mouse more difficult to use.
+
+Pointer assistance is also known as pointer acceleration.</property>
+                                <property name="max-width-chars">36</property>
+                              </object>
+                            </child>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child type="suffix">
+                      <object class="GtkSwitch" id="mouse_accel_switch">
+                        <property name="valign">center</property>
+                        <accessibility>
+                          <property name="label" translatable="yes">Pointer Assistance</property>
+                        </accessibility>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
                   <object class="AdwActionRow" id="mouse_natural_scrolling_row">
                     <property name="title" translatable="yes" comments="Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.">Natural Scrolling</property>
                     <property name="subtitle" translatable="yes">Scrolling moves the content, not the view.</property>

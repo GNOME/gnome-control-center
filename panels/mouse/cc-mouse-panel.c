@@ -22,6 +22,7 @@
  */
 
 #include <gdesktop-enums.h>
+#include <glib/gi18n.h>
 #include <gtk/gtk.h>
 
 #include "cc-mouse-caps-helper.h"
@@ -37,6 +38,7 @@ struct _CcMousePanel
 
   GtkListBoxRow     *edge_scrolling_row;
   GtkSwitch         *edge_scrolling_switch;
+  GtkSwitch         *mouse_accel_switch;
   AdwPreferencesGroup *mouse_group;
   GtkSwitch         *mouse_natural_scrolling_switch;
   GtkScale          *mouse_speed_scale;
@@ -203,6 +205,27 @@ handle_secondary_button (CcMousePanel    *self,
   gtk_widget_add_controller (GTK_WIDGET (button), GTK_EVENT_CONTROLLER (gesture));
 }
 
+static gboolean
+mouse_accel_get_mapping (GValue    *value,
+                         GVariant  *variant,
+                         gpointer   user_data)
+{
+    gboolean enabled;
+
+    enabled = g_strcmp0 (g_variant_get_string (variant, NULL), "flat") != 0;
+    g_value_set_boolean (value, enabled);
+
+    return TRUE;
+}
+
+static GVariant *
+mouse_accel_set_mapping (const GValue       *value,
+                         const GVariantType *type,
+                         gpointer            user_data)
+{
+    return g_variant_new_string (g_value_get_boolean (value) ? "default" : "flat");
+}
+
 /* Set up the property editors in the dialog. */
 static void
 setup_dialog (CcMousePanel *self)
@@ -240,6 +263,13 @@ setup_dialog (CcMousePanel *self)
   g_settings_bind (self->mouse_settings, "speed",
                    gtk_range_get_adjustment (GTK_RANGE (self->mouse_speed_scale)), "value",
                    G_SETTINGS_BIND_DEFAULT);
+
+  g_settings_bind_with_mapping (self->mouse_settings, "accel-profile",
+                                self->mouse_accel_switch, "active",
+                                G_SETTINGS_BIND_DEFAULT,
+                                mouse_accel_get_mapping,
+                                mouse_accel_set_mapping,
+                                NULL, NULL);
 
   /* Touchpad section */
   gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_switch), show_touchpad_enabling_switch (self));
@@ -387,6 +417,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, edge_scrolling_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, edge_scrolling_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_accel_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_natural_scrolling_switch);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_speed_scale);
