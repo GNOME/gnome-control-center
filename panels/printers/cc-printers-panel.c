@@ -1025,9 +1025,11 @@ update_sensitivity (gpointer user_data)
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "search-button");
   gtk_widget_set_visible (widget, !no_cups);
+  gtk_widget_set_sensitive (widget, !empty_state);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "search-bar");
   gtk_widget_set_visible (widget, !no_cups);
+  gtk_widget_set_sensitive (widget, !empty_state);
 
   widget = (GtkWidget*) gtk_builder_get_object (self->builder, "printer-add-button");
   gtk_widget_set_visible (widget, !empty_state);
