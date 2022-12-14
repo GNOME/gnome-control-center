@@ -11,7 +11,7 @@
             <child>
               <object class="AdwComboRow" id="blank_screen_row">
                 <property name="title" translatable="yes">Blank Screen Delay</property>
-                <property name="subtitle" translatable="yes">Period of inactivity after which the screen will go blank.</property>
+                <property name="subtitle" translatable="yes">Period of inactivity until screen blanks</property>
                 <property name="subtitle-lines">2</property>
                 <property name="use-underline">true</property>
                 <signal name="notify::selected-item" handler="on_blank_screen_delay_changed_cb"/>
@@ -47,7 +47,7 @@
             <child>
               <object class="AdwComboRow" id="lock_after_row">
                 <property name="title" translatable="yes">Automatic _Screen Lock Delay</property>
-                <property name="subtitle" translatable="yes">Period after the screen blanks when the screen is automatically locked.</property>
+                <property name="subtitle" translatable="yes">Time from screen blank to screen lock</property>
                 <property name="subtitle-lines">2</property>
                 <property name="use-underline">true</property>
                 <signal name="notify::selected-item" handler="on_lock_combo_changed_cb"/>
