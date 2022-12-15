@@ -27,4 +27,6 @@ G_BEGIN_DECLS
 
 G_DECLARE_FINAL_TYPE (CcBoltPanel, cc_bolt_panel, CC, BOLT_PANEL, CcPanel);
 
+void cc_thunderbolt_panel_static_init_func (void);
+
 G_END_DECLS

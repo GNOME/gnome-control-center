@@ -24,6 +24,7 @@
 #include <glib/gi18n.h>
 #include <polkit/polkit.h>
 
+#include "shell/cc-application.h"
 #include "cc-bolt-device-dialog.h"
 #include "cc-bolt-device-entry.h"
 
@@ -143,6 +144,63 @@ static void      on_permission_notify_cb (GPermission *permission,
                                           CcBoltPanel *panel);
 
 CC_PANEL_REGISTER (CcBoltPanel, cc_bolt_panel);
+
+/* Static init function */
+static void
+set_panel_visibility (gboolean visible)
+{
+  CcApplication *application;
+
+  application = CC_APPLICATION (g_application_get_default ());
+  cc_shell_model_set_panel_visibility (cc_application_get_model (application),
+                                       "thunderbolt",
+                                       visible ? CC_PANEL_VISIBLE : CC_PANEL_VISIBLE_IN_SEARCH);
+  g_debug ("Thunderbolt panel visible: %s", visible ? "yes" : "no");
+}
+
+static void
+update_visibility (BoltClient  *client,
+                   const char  *path,
+                   gpointer     user_data)
+{
+  g_autoptr(GPtrArray) devices = NULL;
+
+  devices = bolt_client_list_devices (client, NULL, NULL);
+  set_panel_visibility (devices->len > 0);
+}
+
+static void
+on_visibility_client_ready (GObject      *source,
+                            GAsyncResult *res,
+                            gpointer      user_data)
+{
+  BoltClient *client;
+
+  client = bolt_client_new_finish (res, NULL);
+  if (client == NULL)
+    {
+      set_panel_visibility (FALSE);
+      return;
+    }
+
+  g_signal_connect_object (client,
+                           "device-added",
+                           G_CALLBACK (update_visibility),
+                           NULL,
+                           0);
+  g_signal_connect_object (client,
+                           "device-removed",
+                           G_CALLBACK (update_visibility),
+                           NULL,
+                           0);
+  update_visibility (client, NULL, NULL);
+}
+
+void
+cc_thunderbolt_panel_static_init_func (void)
+{
+  bolt_client_new_async (NULL, on_visibility_client_ready, NULL);
+}
 
 static void
 bolt_client_ready (GObject      *source,

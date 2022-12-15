@@ -78,6 +78,9 @@ extern GType cc_diagnostics_panel_get_type (void);
 
 /* Static init functions */
 extern void cc_diagnostics_panel_static_init_func (void);
+#ifdef BUILD_THUNDERBOLT
+extern void cc_thunderbolt_panel_static_init_func (void);
+#endif /* BUILD_THUNDERBOLT */
 #ifdef BUILD_NETWORK
 extern void cc_wifi_panel_static_init_func (void);
 #endif /* BUILD_NETWORK */
@@ -132,7 +135,7 @@ static CcPanelLoaderVtable default_panels[] =
   PANEL_TYPE("sharing",          cc_sharing_panel_get_type,              NULL),
   PANEL_TYPE("sound",            cc_sound_panel_get_type,                NULL),
 #ifdef BUILD_THUNDERBOLT
-  PANEL_TYPE("thunderbolt",      cc_bolt_panel_get_type,                 NULL),
+  PANEL_TYPE("thunderbolt",      cc_bolt_panel_get_type,                 cc_thunderbolt_panel_static_init_func),
 #endif
   PANEL_TYPE("universal-access", cc_ua_panel_get_type,                   NULL),
   PANEL_TYPE("usage",            cc_usage_panel_get_type,                NULL),
