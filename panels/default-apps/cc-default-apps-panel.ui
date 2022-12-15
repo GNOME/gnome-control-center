@@ -2,129 +2,71 @@
 <interface>
   <template class="CcDefaultAppsPanel" parent="CcPanel">
     <child type="content">
-      <object class="GtkBox">
-        <property name="hexpand">True</property>
-        <property name="vexpand">True</property>
-        <property name="margin_top">32</property>
-        <property name="margin_bottom">32</property>
-        <property name="margin_start">24</property>
-        <property name="margin_end">24</property>
-        <property name="halign">center</property>
-        <property name="valign">start</property>
-        <property name="spacing">10</property>
-        <property name="orientation">vertical</property>
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="GtkGrid" id="default_apps_grid">
-            <property name="column_spacing">12</property>
-            <property name="row_spacing">12</property>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Links &amp;amp; Files</property>
+            <property name="description">Applications which are used to open common links and files.</property>
             <child>
-              <object class="GtkLabel" id="web_label">
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">_Web</property>
-                <property name="use_underline">True</property>
-                <style>
-                 <class name="dim-label"/>
-                </style>
+              <object class="CcDefaultAppsRow" id="web_row">
+                <property name="title" translatable="yes">_Web</property>
+                <property name="use-underline">True</property>
+                <property name="content-type">x-scheme-handler/http</property>
+                <property name="filters">text/html;application/xhtml+xml;x-scheme-handler/https</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="mail_label">
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">_Mail</property>
+              <object class="CcDefaultAppsRow" id="mail_row">
+                <property name="title" translatable="yes">_Mail</property>
                 <property name="use_underline">True</property>
-                <layout>
-                  <property name="row">1</property>
-                  <property name="column">0</property>
-                </layout>
-                <style>
-                 <class name="dim-label"/>
-                </style>
+                <property name="content-type">x-scheme-handler/mailto</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="calendar_label">
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">_Calendar</property>
-                <property name="use_underline">True</property>
-                <layout>
-                  <property name="row">2</property>
-                  <property name="column">0</property>
-                </layout>
-                <style>
-                 <class name="dim-label"/>
-                </style>
+              <object class="CcDefaultAppsRow" id="calendar_row">
+                <property name="title" translatable="yes">_Calendar</property>
+                <property name="use-underline">True</property>
+                <property name="content-type">text/calendar</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="music_label">
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">M_usic</property>
-                <property name="use_underline">True</property>
-                <layout>
-                  <property name="row">3</property>
-                  <property name="column">0</property>
-                </layout>
-                <style>
-                 <class name="dim-label"/>
-                </style>
+              <object class="CcDefaultAppsRow" id="music_row">
+                <property name="title" translatable="yes">M_usic</property>
+                <property name="use-underline">True</property>
+                <property name="content-type">audio/x-vorbis+ogg</property>
+                <property name="filters">audio/*</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="video_label">
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">_Video</property>
-                <property name="use_underline">True</property>
-                <layout>
-                  <property name="row">4</property>
-                  <property name="column">0</property>
-                </layout>
-                <style>
-                 <class name="dim-label"/>
-                </style>
+              <object class="CcDefaultAppsRow" id="video_row">
+                <property name="title" translatable="yes">_Video</property>
+                <property name="use-underline">True</property>
+                <property name="content-type">video/x-ogm+ogg</property>
+                <property name="filters">video/*</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="photos_label">
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">_Photos</property>
-                <property name="use_underline">True</property>
-                <layout>
-                  <property name="row">5</property>
-                  <property name="column">0</property>
-                </layout>
-                <style>
-                 <class name="dim-label"/>
-                </style>
+              <object class="CcDefaultAppsRow" id="photos_row">
+                <property name="title" translatable="yes">_Photos</property>
+                <property name="use-underline">True</property>
+                <property name="content-type">image/jpeg</property>
+                <property name="filters">image/*</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="calls_label">
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">Ca_lls</property>
-                <property name="use_underline">True</property>
+              <object class="CcDefaultAppsRow" id="calls_row">
                 <property name="visible">False</property>
-                <layout>
-                  <property name="row">6</property>
-                  <property name="column">0</property>
-                </layout>
-                <style>
-                 <class name="dim-label"/>
-                </style>
+                <property name="title" translatable="yes">_Calls</property>
+                <property name="use-underline">True</property>
+                <property name="content-type">x-scheme-handler/tel</property>
               </object>
             </child>
             <child>
-              <object class="GtkLabel" id="sms_label">
-                <property name="xalign">1</property>
-                <property name="label" translatable="yes">_SMS</property>
-                <property name="use_underline">True</property>
+              <object class="CcDefaultAppsRow" id="sms_row">
                 <property name="visible">False</property>
-                <layout>
-                  <property name="row">7</property>
-                  <property name="column">0</property>
-                </layout>
-                <style>
-                 <class name="dim-label"/>
-                </style>
+                <property name="title" translatable="yes">_SMS</property>
+                <property name="use-underline">True</property>
+                <property name="content-type">x-scheme-handler/sms</property>
               </object>
             </child>
           </object>

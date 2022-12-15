@@ -16,7 +16,8 @@ i18n.merge_file(
 )
 
 sources = files(
-  'cc-default-apps-panel.c'
+  'cc-default-apps-panel.c',
+  'cc-default-apps-row.c'
 )
 
 sources += gnome.compile_resources(

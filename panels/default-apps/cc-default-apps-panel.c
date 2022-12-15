@@ -25,6 +25,7 @@
 #endif
 
 #include "cc-default-apps-panel.h"
+#include "cc-default-apps-row.h"
 #include "cc-default-apps-resources.h"
 
 #include "shell/cc-object-storage.h"
@@ -32,7 +33,6 @@
 typedef struct
 {
   const char *content_type;
-  gint label_offset;
   /* Patterns used to filter supported mime types
      when changing preferred applications. NULL
      means no other types should be changed */
@@ -45,14 +45,14 @@ struct _CcDefaultAppsPanel
 
   GtkWidget *default_apps_grid;
 
-  GtkWidget *web_label;
-  GtkWidget *mail_label;
-  GtkWidget *calendar_label;
-  GtkWidget *music_label;
-  GtkWidget *video_label;
-  GtkWidget *photos_label;
-  GtkWidget *calls_label;
-  GtkWidget *sms_label;
+  GtkWidget *web_row;
+  GtkWidget *mail_row;
+  GtkWidget *calendar_row;
+  GtkWidget *music_row;
+  GtkWidget *video_row;
+  GtkWidget *photos_row;
+  GtkWidget *calls_row;
+  GtkWidget *sms_row;
 
 #ifdef BUILD_WWAN
   MMManager *mm_manager;
@@ -62,147 +62,18 @@ struct _CcDefaultAppsPanel
 
 G_DEFINE_TYPE (CcDefaultAppsPanel, cc_default_apps_panel, CC_TYPE_PANEL)
 
-static void
-default_app_changed (CcDefaultAppsPanel  *self,
-                     GtkAppChooserButton *button)
-{
-  g_autoptr(GAppInfo) info = NULL;
-  g_autoptr(GError) error = NULL;
-  DefaultAppData *app_data;
-  int i;
-
-  info = gtk_app_chooser_get_app_info (GTK_APP_CHOOSER (button));
-  app_data = g_object_get_data (G_OBJECT (button), "cc-default-app-data");
-
-  if (g_app_info_set_as_default_for_type (info, app_data->content_type, &error) == FALSE)
-    {
-      g_warning ("Failed to set '%s' as the default application for '%s': %s",
-                 g_app_info_get_name (info), app_data->content_type, error->message);
-    }
-  else
-    {
-      g_debug ("Set '%s' as the default handler for '%s'",
-               g_app_info_get_name (info), app_data->content_type);
-    }
-
-  if (app_data->extra_type_filter)
-    {
-      g_auto(GStrv) entries = NULL;
-      const char *const *mime_types;
-      g_autoptr(GPtrArray) patterns = NULL;
-
-      entries = g_strsplit (app_data->extra_type_filter, ";", -1);
-      patterns = g_ptr_array_new_with_free_func ((GDestroyNotify) g_pattern_spec_free);
-      for (i = 0; entries[i] != NULL; i++)
-        {
-          GPatternSpec *pattern = g_pattern_spec_new (entries[i]);
-          g_ptr_array_add (patterns, pattern);
-        }
-
-      mime_types = g_app_info_get_supported_types (info);
-      for (i = 0; mime_types && mime_types[i]; i++)
-        {
-          int j;
-          gboolean matched = FALSE;
-          g_autoptr(GError) local_error = NULL;
-
-          for (j = 0; j < patterns->len; j++)
-            {
-              GPatternSpec *pattern = g_ptr_array_index (patterns, j);
-              if (g_pattern_spec_match_string (pattern, mime_types[i]))
-                matched = TRUE;
-            }
-          if (!matched)
-            continue;
-
-          if (g_app_info_set_as_default_for_type (info, mime_types[i], &local_error) == FALSE)
-            {
-              g_warning ("Failed to set '%s' as the default application for secondary "
-                         "content type '%s': %s",
-                         g_app_info_get_name (info), mime_types[i], local_error->message);
-            }
-          else
-            {
-              g_debug ("Set '%s' as the default handler for '%s'",
-              g_app_info_get_name (info), mime_types[i]);
-            }
-        }
-    }
-}
-
-#define OFFSET(x)             (G_STRUCT_OFFSET (CcDefaultAppsPanel, x))
-#define WIDGET_FROM_OFFSET(x) (G_STRUCT_MEMBER (GtkWidget*, self, x))
-
-static void
-info_panel_setup_default_app (CcDefaultAppsPanel *self,
-                              DefaultAppData     *data,
-                              guint               column,
-                              guint               row)
-{
-  GtkWidget *button;
-  GtkWidget *label;
-
-  button = gtk_app_chooser_button_new (data->content_type);
-  g_object_set_data (G_OBJECT (button), "cc-default-app-data", data);
-
-  gtk_app_chooser_button_set_show_default_item (GTK_APP_CHOOSER_BUTTON (button), TRUE);
-  gtk_grid_attach (GTK_GRID (self->default_apps_grid), button, column, row, 1, 1);
-  g_signal_connect_object (G_OBJECT (button), "changed",
-                           G_CALLBACK (default_app_changed), self, G_CONNECT_SWAPPED);
-
-  label = WIDGET_FROM_OFFSET (data->label_offset);
-  gtk_label_set_mnemonic_widget (GTK_LABEL (label), button);
-
-  g_object_bind_property (G_OBJECT (label), "visible", G_OBJECT (button), "visible", G_BINDING_SYNC_CREATE);
-}
-
-static DefaultAppData preferred_app_infos[] = {
-  { "x-scheme-handler/http", OFFSET (web_label), "text/html;application/xhtml+xml;x-scheme-handler/https" },
-  { "x-scheme-handler/mailto", OFFSET (mail_label), NULL },
-  { "text/calendar", OFFSET (calendar_label), NULL },
-  { "audio/x-vorbis+ogg", OFFSET (music_label), "audio/*" },
-  { "video/x-ogm+ogg", OFFSET (video_label), "video/*" },
-  { "image/jpeg", OFFSET (photos_label), "image/*" },
-  { "x-scheme-handler/tel", OFFSET(calls_label), NULL},
-  { "x-scheme-handler/sms", OFFSET(sms_label), NULL},
-};
-
-static void
-info_panel_setup_default_apps (CcDefaultAppsPanel *self)
-{
-  int i;
-
-  for (i = 0; i < G_N_ELEMENTS (preferred_app_infos); i++)
-    {
-      info_panel_setup_default_app (self, &preferred_app_infos[i],
-                                    1, i);
-    }
-}
-
 #ifdef BUILD_WWAN
 static void
 update_modem_apps_visibility (CcDefaultAppsPanel *self)
 {
   GList *devices;
-  GtkWidget *calls_button;
-  GtkWidget *sms_button;
-  int count, row;
-  gboolean visible;
+  gboolean has_mm_objects;
 
   devices = g_dbus_object_manager_get_objects (G_DBUS_OBJECT_MANAGER (self->mm_manager));
-  count = g_list_length (devices);
+  has_mm_objects = g_list_length (devices) > 0;
 
-  gtk_grid_query_child (GTK_GRID (self->default_apps_grid), self->calls_label, NULL, &row, NULL, NULL);
-  calls_button = gtk_grid_get_child_at (GTK_GRID (self->default_apps_grid), 1, row);
-
-  gtk_grid_query_child (GTK_GRID (self->default_apps_grid), self->sms_label, NULL, &row, NULL, NULL);
-  sms_button = gtk_grid_get_child_at (GTK_GRID (self->default_apps_grid), 1, row);
-
-  visible = count > 0;
-  gtk_widget_set_visible (self->calls_label, visible);
-  gtk_widget_set_visible (self->sms_label, visible);
-  gtk_widget_set_visible (calls_button, visible);
-  gtk_widget_set_visible (sms_button, visible);
+  gtk_widget_set_visible (self->calls_row, has_mm_objects);
+  gtk_widget_set_visible (self->sms_row, has_mm_objects);
 
   g_list_free_full (devices, (GDestroyNotify)g_object_unref);
 }
@@ -214,15 +85,14 @@ cc_default_apps_panel_class_init (CcDefaultAppsPanelClass *klass)
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/default-apps/cc-default-apps-panel.ui");
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, default_apps_grid);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, web_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, mail_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calendar_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, music_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, video_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, photos_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calls_label);
-  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, sms_label);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, web_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, mail_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calendar_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, music_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, video_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, photos_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, calls_row);
+  gtk_widget_class_bind_template_child (widget_class, CcDefaultAppsPanel, sms_row);
 }
 
 static void
@@ -230,9 +100,9 @@ cc_default_apps_panel_init (CcDefaultAppsPanel *self)
 {
   g_resources_register (cc_default_apps_get_resource ());
 
-  gtk_widget_init_template (GTK_WIDGET (self));
+  g_type_ensure (CC_TYPE_DEFAULT_APPS_ROW);
 
-  info_panel_setup_default_apps (self);
+  gtk_widget_init_template (GTK_WIDGET (self));
 
 #ifdef BUILD_WWAN
   if (cc_object_storage_has_object ("CcObjectStorage::mm-manager"))
