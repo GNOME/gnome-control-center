@@ -409,12 +409,6 @@ search_panel_add_one_app_info (CcSearchPanel *self,
 {
   CcSearchPanelRow *row;
 
-  /* gnome-control-center is special cased in the shell,
-     and is not configurable */
-  if (g_strcmp0 (g_app_info_get_id (app_info),
-                 "gnome-control-center.desktop") == 0)
-    return;
-
   /* reset valignment of the list box */
   gtk_widget_set_valign (self->list_box, GTK_ALIGN_FILL);
 
