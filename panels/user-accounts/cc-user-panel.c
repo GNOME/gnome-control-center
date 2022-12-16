@@ -47,7 +47,6 @@
 #include "cc-add-user-dialog.h"
 #include "cc-avatar-chooser.h"
 #include "cc-language-chooser.h"
-#include "cc-login-history-dialog.h"
 #include "cc-password-dialog.h"
 #include "cc-realm-manager.h"
 #include "cc-user-accounts-resources.h"
@@ -80,7 +79,6 @@ struct _CcUserPanel {
         GtkToggleButton *full_name_edit_button;
         GtkEntry        *full_name_entry;
         CcListRow       *language_row;
-        CcListRow       *last_login_row;
         GtkWidget       *no_users_box;
         GtkRevealer     *notification_revealer;
         AdwPreferencesGroup *other_users;
@@ -722,36 +720,6 @@ autologin_changed (CcUserPanel *self)
         }
 }
 
-static gchar *
-get_login_time_text (ActUser *user)
-{
-        gint64 time;
-
-        time = act_user_get_login_time (user);
-        if (act_user_is_logged_in (user)) {
-                return g_strdup (_("Logged in"));
-        }
-        else if (time > 0) {
-                g_autoptr(GDateTime) date_time = NULL;
-                g_autofree gchar *date_str = NULL;
-                g_autofree gchar *time_str = NULL;
-
-                date_time = g_date_time_new_from_unix_local (time);
-                date_str = cc_util_get_smart_date (date_time);
-
-                /* Translators: This is a time format string in the style of "22:58".
-                   It indicates a login time which follows a date. */
-                time_str = g_date_time_format (date_time, C_("login date-time", "%k:%M"));
-
-                /* Translators: This indicates a login date-time.
-                   The first %s is a date, and the second %s a time. */
-                return g_strdup_printf(C_("login date-time", "%s, %s"), date_str, time_str);
-        }
-        else {
-                return g_strdup ("—");
-        }
-}
-
 static gboolean
 get_autologin_possible (ActUser *user)
 {
@@ -963,21 +931,6 @@ show_user (ActUser *user, CcUserPanel *self)
         show_or_hide_back_button(self);
         gtk_widget_set_visible (GTK_WIDGET (self->other_users), show);
 
-        /* Last login: show when administrator or current user */
-        current = act_user_manager_get_user_by_id (self->um, getuid ());
-        show = act_user_get_uid (user) == getuid () ||
-               act_user_get_account_type (current) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR;
-        if (show) {
-                g_autofree gchar *text = NULL;
-
-                text = get_login_time_text (user);
-                cc_list_row_set_secondary_label (self->last_login_row, text);
-        }
-        gtk_widget_set_visible (GTK_WIDGET (self->last_login_row), show);
-
-        enable = act_user_get_login_history (user) != NULL;
-        gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), enable);
-
         if (self->permission != NULL)
                 on_permission_changed (self);
 }
@@ -1187,22 +1140,6 @@ change_fingerprint (CcUserPanel *self)
         gtk_window_present (GTK_WINDOW (dialog));
 }
 
-static void
-show_history (CcUserPanel *self)
-{
-        CcLoginHistoryDialog *dialog;
-        ActUser *user;
-        GtkWindow *parent;
-
-        user = get_selected_user (self);
-        dialog = cc_login_history_dialog_new (user);
-
-        parent = (GtkWindow *) gtk_widget_get_native (GTK_WIDGET (self));
-        gtk_window_set_transient_for (GTK_WINDOW (dialog), parent);
-
-        gtk_window_present (GTK_WINDOW (dialog));
-}
-
 #ifdef HAVE_MALCONTENT
 static void
 spawn_malcontent_control (CcUserPanel *self)
@@ -1399,9 +1336,6 @@ on_permission_changed (CcUserPanel *self)
                 gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row),
                                           fingerprint_state != CC_FINGERPRINT_STATE_UPDATING);
                 remove_unlock_tooltip (GTK_WIDGET (self->fingerprint_row));
-
-                gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), TRUE);
-                remove_unlock_tooltip (GTK_WIDGET (self->last_login_row));
         }
         else {
                 gtk_widget_set_sensitive (GTK_WIDGET (self->user_avatar_edit_button), FALSE);
@@ -1415,9 +1349,6 @@ on_permission_changed (CcUserPanel *self)
 
                 gtk_widget_set_sensitive (GTK_WIDGET (self->fingerprint_row), FALSE);
                 add_unlock_tooltip (GTK_WIDGET (self->fingerprint_row));
-
-                gtk_widget_set_sensitive (GTK_WIDGET (self->last_login_row), FALSE);
-                add_unlock_tooltip (GTK_WIDGET (self->last_login_row));
         }
 }
 
@@ -1605,7 +1536,6 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_edit_button);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, full_name_entry);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, language_row);
-        gtk_widget_class_bind_template_child (widget_class, CcUserPanel, last_login_row);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, no_users_box);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, notification_revealer);
         gtk_widget_class_bind_template_child (widget_class, CcUserPanel, other_users);
@@ -1637,5 +1567,4 @@ cc_user_panel_class_init (CcUserPanelClass *klass)
         gtk_widget_class_bind_template_callback (widget_class, restart_now);
         gtk_widget_class_bind_template_callback (widget_class, set_selected_user);
         gtk_widget_class_bind_template_callback (widget_class, on_back_button_clicked_cb);
-        gtk_widget_class_bind_template_callback (widget_class, show_history);
 }

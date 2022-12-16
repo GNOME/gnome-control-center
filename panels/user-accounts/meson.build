@@ -95,7 +95,6 @@ common_sources = files(
 resource_data = files(
   'cc-add-user-dialog.ui',
   'cc-avatar-chooser.ui',
-  'cc-login-history-dialog.ui',
   'cc-password-dialog.ui',
   'cc-user-panel.ui',
   'cc-fingerprint-dialog.ui',
@@ -147,7 +146,6 @@ sources = common_sources + files(
   'cc-crop-area.c',
   'cc-fingerprint-manager.c',
   'cc-fingerprint-dialog.c',
-  'cc-login-history-dialog.c',
   'cc-password-dialog.c',
   'cc-user-panel.c',
   'run-passwd.c',
