@@ -1,6 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
- *
- * Copyright (C) 2018 Canonical Ltd.
+/*
+ * Copyright (C) 2022 Marco Melorio
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,16 +18,14 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include <gvc-mixer-ui-device.h>
-#include <pulse/pulseaudio.h>
 #include <gvc-mixer-stream.h>
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_OUTPUT_TEST_DIALOG (cc_output_test_dialog_get_type ())
-G_DECLARE_FINAL_TYPE (CcOutputTestDialog, cc_output_test_dialog, CC, OUTPUT_TEST_DIALOG, GtkDialog)
+#define CC_TYPE_OUTPUT_TEST_WHEEL (cc_output_test_wheel_get_type ())
+G_DECLARE_FINAL_TYPE (CcOutputTestWheel, cc_output_test_wheel, CC, OUTPUT_TEST_WHEEL, GtkWidget)
 
-CcOutputTestDialog *cc_output_test_dialog_new (GvcMixerUIDevice *device,
-                                               GvcMixerStream   *stream);
+void cc_output_test_wheel_set_stream (CcOutputTestWheel *self,
+                                      GvcMixerStream    *stream);
 
 G_END_DECLS

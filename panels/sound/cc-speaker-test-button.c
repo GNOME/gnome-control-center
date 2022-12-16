@@ -24,15 +24,11 @@
 
 struct _CcSpeakerTestButton
 {
-  GtkDialog             parent_instance;
-
-  GtkImage             *image;
-  GtkLabel             *label;
+  GtkButton             parent_instance;
 
   GCancellable         *cancellable;
   GSoundContext        *context;
   pa_channel_position_t position;
-  gboolean              playing;
   gint                  event_index;
 };
 
@@ -49,29 +45,28 @@ get_icon_name (CcSpeakerTestButton *self)
   switch (self->position)
     {
   case PA_CHANNEL_POSITION_FRONT_LEFT:
-    return self->playing ? "audio-speaker-left-testing" : "audio-speaker-left";
+    return "audio-speaker-left";
   case PA_CHANNEL_POSITION_FRONT_RIGHT:
-    return self->playing ? "audio-speaker-right-testing" : "audio-speaker-right";
+    return "audio-speaker-right";
   case PA_CHANNEL_POSITION_FRONT_CENTER:
-    return self->playing ? "audio-speaker-center-testing" : "audio-speaker-center";
-  case PA_CHANNEL_POSITION_REAR_LEFT:
-    return self->playing ? "audio-speaker-left-back-testing" : "audio-speaker-left-back";
-  case PA_CHANNEL_POSITION_REAR_RIGHT:
-    return self->playing ? "audio-speaker-right-back-testing" : "audio-speaker-right-back";
-  case PA_CHANNEL_POSITION_REAR_CENTER:
-    return self->playing ? "audio-speaker-center-back-testing" : "audio-speaker-center-back";
-  case PA_CHANNEL_POSITION_LFE:
-    return self->playing ? "audio-subwoofer-testing" : "audio-subwoofer";
-  case PA_CHANNEL_POSITION_SIDE_LEFT:
-    return self->playing ? "audio-speaker-left-side-testing" : "audio-speaker-left-side";
-  case PA_CHANNEL_POSITION_SIDE_RIGHT:
-    return self->playing ? "audio-speaker-right-side-testing" : "audio-speaker-right-side";
-  case PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER:
-    return self->playing ? "audio-speaker-front-left-of-center-testing" : "audio-speaker-front-left-of-center";
-  case PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER:
-    return self->playing ? "audio-speaker-front-right-of-center-testing" : "audio-speaker-front-right-of-center";
   case PA_CHANNEL_POSITION_MONO:
-    return self->playing ? "audio-speaker-mono-testing" : "audio-speaker-mono";
+    return "audio-speaker-center";
+  case PA_CHANNEL_POSITION_REAR_LEFT:
+    return "audio-speaker-left-back";
+  case PA_CHANNEL_POSITION_REAR_RIGHT:
+    return "audio-speaker-right-back";
+  case PA_CHANNEL_POSITION_REAR_CENTER:
+    return "audio-speaker-center-back";
+  case PA_CHANNEL_POSITION_LFE:
+    return "audio-subwoofer";
+  case PA_CHANNEL_POSITION_SIDE_LEFT:
+    return "audio-speaker-left-side";
+  case PA_CHANNEL_POSITION_SIDE_RIGHT:
+    return "audio-speaker-right-side";
+  case PA_CHANNEL_POSITION_FRONT_LEFT_OF_CENTER:
+    return "audio-speaker-front-left-of-center";
+  case PA_CHANNEL_POSITION_FRONT_RIGHT_OF_CENTER:
+    return "audio-speaker-front-right-of-center";
   default:
     return "audio-speakers";
   }
@@ -80,7 +75,7 @@ get_icon_name (CcSpeakerTestButton *self)
 static void
 update_icon (CcSpeakerTestButton *self)
 {
-  gtk_image_set_from_icon_name (self->image, get_icon_name (self));
+  gtk_button_set_icon_name (GTK_BUTTON (self), get_icon_name (self));
 }
 
 static GStrv
@@ -136,8 +131,7 @@ finish_cb (GObject      *object,
       g_warning ("Failed to play sound: %s", error->message);
     }
 
-  self->playing = FALSE;
-  update_icon (self);
+  gtk_widget_remove_css_class (GTK_WIDGET (self), "playing");
 }
 
 static gboolean
@@ -172,8 +166,7 @@ clicked_cb (CcSpeakerTestButton *self)
   if (self->context == NULL)
     return;
 
-  self->playing = TRUE;
-  update_icon (self);
+  gtk_widget_add_css_class (GTK_WIDGET (self), "playing");
 
   /* Play the per-channel sound name or a generic sound */
   self->event_index = 0;
@@ -196,46 +189,42 @@ void
 cc_speaker_test_button_class_init (CcSpeakerTestButtonClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
-  GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
   object_class->dispose = cc_speaker_test_button_dispose;
-
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-speaker-test-button.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcSpeakerTestButton, image);
-  gtk_widget_class_bind_template_child (widget_class, CcSpeakerTestButton, label);
-
-  gtk_widget_class_bind_template_callback (widget_class, clicked_cb);
 }
 
 void
 cc_speaker_test_button_init (CcSpeakerTestButton *self)
 {
-  g_resources_register (cc_sound_get_resource ());
-
-  gtk_widget_init_template (GTK_WIDGET (self));
-
   self->cancellable = g_cancellable_new ();
 
   update_icon (self);
+
+  g_signal_connect (self, "clicked", G_CALLBACK (clicked_cb), NULL);
 }
 
 CcSpeakerTestButton *
-cc_speaker_test_button_new (void)
+cc_speaker_test_button_new (GSoundContext         *context,
+                            pa_channel_position_t  position)
 {
-  return g_object_new (CC_TYPE_SPEAKER_TEST_BUTTON, NULL);
+  CcSpeakerTestButton *self = g_object_new (CC_TYPE_SPEAKER_TEST_BUTTON, NULL);
+
+  self->context = g_object_ref (context);
+  self->position = position;
+  update_icon (self);
+
+  return self;
 }
 
 void
 cc_speaker_test_button_set_channel_position (CcSpeakerTestButton  *self,
-                                             GSoundContext        *context,
                                              pa_channel_position_t position)
 {
   g_return_if_fail (CC_IS_SPEAKER_TEST_BUTTON (self));
 
-  g_clear_object (&self->context);
-  self->context = g_object_ref (context);
+  if (self->position == position)
+    return;
+
   self->position = position;
-  gtk_label_set_label (self->label, pa_channel_position_to_pretty_string (position));
   update_icon (self);
 }

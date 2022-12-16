@@ -35,7 +35,7 @@
 #include "cc-device-combo-box.h"
 #include "cc-fade-slider.h"
 #include "cc-level-bar.h"
-#include "cc-output-test-dialog.h"
+#include "cc-output-test-window.h"
 #include "cc-profile-combo-box.h"
 #include "cc-sound-panel.h"
 #include "cc-sound-resources.h"
@@ -200,7 +200,7 @@ test_output_configuration_button_clicked_cb (CcSoundPanel *self)
 {
   GvcMixerUIDevice *device;
   GvcMixerStream *stream = NULL;
-  CcOutputTestDialog *dialog;
+  CcOutputTestWindow *window;
   GtkWidget *toplevel;
   CcShell *shell;
 
@@ -211,9 +211,9 @@ test_output_configuration_button_clicked_cb (CcSoundPanel *self)
   shell = cc_panel_get_shell (CC_PANEL (self));
   toplevel = cc_shell_get_toplevel (shell);
 
-  dialog = cc_output_test_dialog_new (device, stream);
-  gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
-  gtk_window_present (GTK_WINDOW (dialog));
+  window = cc_output_test_window_new (stream);
+  gtk_window_set_transient_for (GTK_WINDOW (window), GTK_WINDOW (toplevel));
+  gtk_window_present (GTK_WINDOW (window));
 }
 
 static const char *
