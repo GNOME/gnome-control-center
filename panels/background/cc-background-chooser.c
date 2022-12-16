@@ -228,26 +228,31 @@ on_item_activated_cb (CcBackgroundChooser *self,
 }
 
 static void
-on_file_chooser_response_cb (GtkDialog           *filechooser,
-                             gint                 response,
-                             CcBackgroundChooser *self)
+file_dialog_open_cb (GObject      *source_object,
+                     GAsyncResult *res,
+                     gpointer      user_data)
 {
-  if (response == GTK_RESPONSE_ACCEPT)
+  CcBackgroundChooser *self = CC_BACKGROUND_CHOOSER (user_data);
+  GtkFileDialog *file_dialog = GTK_FILE_DIALOG (source_object);
+  g_autoptr(GListModel) files = NULL;
+  g_autoptr(GError) error = NULL;
+  guint i;
+
+  files = gtk_file_dialog_open_multiple_finish (file_dialog, res, &error);
+
+  if (error != NULL)
     {
-      g_autoptr(GListModel) files = NULL;
-      guint i;
-
-      files = gtk_file_chooser_get_files (GTK_FILE_CHOOSER (filechooser));
-      for (i = 0; i < g_list_model_get_n_items (files); i++)
-        {
-          g_autoptr(GFile) file = g_list_model_get_item (files, i);
-          g_autofree gchar *filename = g_file_get_path (file);
-
-          bg_recent_source_add_file (self->recent_source, filename);
-        }
+     g_warning ("Failed to pick backgrounds: %s", error->message);
+     return;
     }
 
-  gtk_window_destroy (GTK_WINDOW (filechooser));
+  for (i = 0; i < g_list_model_get_n_items (files); i++)
+    {
+      g_autoptr(GFile) file = g_list_model_get_item (files, i);
+      g_autofree gchar *filename = g_file_get_path (file);
+
+      bg_recent_source_add_file (self->recent_source, filename);
+    }
 }
 
 /* GObject overrides */
@@ -303,35 +308,31 @@ cc_background_chooser_select_file (CcBackgroundChooser *self)
 {
   g_autoptr(GFile) pictures_folder = NULL;
   GtkFileFilter *filter;
-  GtkWidget *filechooser;
+  GtkFileDialog *file_dialog;
   GtkWindow *toplevel;
+  GListStore *filters;
 
   g_return_if_fail (CC_IS_BACKGROUND_CHOOSER (self));
 
   toplevel = (GtkWindow*) gtk_widget_get_native (GTK_WIDGET (self));
-  filechooser = gtk_file_chooser_dialog_new (_("Select a picture"),
-                                             toplevel,
-                                             GTK_FILE_CHOOSER_ACTION_OPEN,
-                                             _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                             _("_Open"), GTK_RESPONSE_ACCEPT,
-                                             NULL);
-  gtk_window_set_modal (GTK_WINDOW (filechooser), TRUE);
+
+  file_dialog = gtk_file_dialog_new ();
+  gtk_file_dialog_set_title (file_dialog, _("Select a picture"));
+  gtk_file_dialog_set_modal (file_dialog, TRUE);
 
   filter = gtk_file_filter_new ();
   gtk_file_filter_add_pixbuf_formats (filter);
-  gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (filechooser), filter);
-  gtk_file_chooser_set_select_multiple (GTK_FILE_CHOOSER (filechooser), TRUE);
+
+  filters = g_list_store_new (GTK_TYPE_FILE_FILTER);
+  g_list_store_append (filters, filter);
+  gtk_file_dialog_set_filters (file_dialog, G_LIST_MODEL (filters));
 
   pictures_folder = g_file_new_for_path (g_get_user_special_dir (G_USER_DIRECTORY_PICTURES));
-  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (filechooser),
-                                       pictures_folder,
-                                       NULL);
+  gtk_file_dialog_set_initial_folder (file_dialog, pictures_folder);
 
-  g_signal_connect_object (filechooser,
-                           "response",
-                           G_CALLBACK (on_file_chooser_response_cb),
-                           self,
-                           0);
-
-  gtk_window_present (GTK_WINDOW (filechooser));
+  gtk_file_dialog_open_multiple (file_dialog,
+                                 toplevel,
+                                 NULL,
+                                 file_dialog_open_cb,
+                                 self);
 }
