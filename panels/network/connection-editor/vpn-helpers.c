@@ -26,6 +26,7 @@
 #include <string.h>
 #include <glib.h>
 #include <gmodule.h>
+#include <adwaita.h>
 #include <gtk/gtk.h>
 #include <glib/gi18n.h>
 #include <NetworkManager.h>
@@ -96,6 +97,7 @@ vpn_get_plugins (void)
 typedef struct {
 	VpnImportCallback callback;
 	gpointer user_data;
+	GtkWindow *parent;
 } ActionInfo;
 
 static void
@@ -132,10 +134,21 @@ import_vpn_from_file_cb (GObject *source_object, GAsyncResult *result, gpointer 
 	}
 
 	if (!connection) {
+		GtkWidget *err_dialog;
 		g_autofree gchar *bname;
 
 		bname = g_path_get_basename (filename);
-		g_warning ("Failed to read “%s”: %s", bname, error ? error->message : "unknown error");
+		err_dialog = adw_message_dialog_new (info->parent,
+											 _("Cannot Import VPN Connection"),
+											 NULL);
+
+		adw_message_dialog_format_body (ADW_MESSAGE_DIALOG (err_dialog),
+										_("The file “%s” could not be read or does not contain recognized VPN connection information\n\nError: %s."),
+										bname, error ? error->message : "unknown error");
+		adw_message_dialog_add_response (ADW_MESSAGE_DIALOG (err_dialog),
+										 "close", _("_Close"));
+
+		gtk_window_present (GTK_WINDOW (err_dialog));
 	}
 
 	info->callback (connection, info->user_data);
@@ -158,6 +171,7 @@ vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 	info = g_malloc0 (sizeof (ActionInfo));
 	info->callback = callback;
 	info->user_data = user_data;
+	info->parent = parent;
 
 	gtk_file_dialog_open (dialog, parent, NULL, import_vpn_from_file_cb, info);
 }
