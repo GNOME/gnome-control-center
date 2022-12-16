@@ -640,47 +640,45 @@ populate_list_boxes (CcSearchLocationsDialog *self)
 }
 
 static void
-add_file_chooser_response (CcSearchLocationsDialog *self,
-                           GtkResponseType response,
-                           GtkWidget *widget)
+add_file_chooser_response (GObject      *source,
+                           GAsyncResult *res,
+                           gpointer      user_data)
 {
+  CcSearchLocationsDialog *self = CC_SEARCH_LOCATIONS_DIALOG (user_data);
+  GtkFileDialog *file_dialog = GTK_FILE_DIALOG (source);
   g_autoptr(Place) place = NULL;
   g_autoptr(GPtrArray) new_values = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GFile) file = NULL;
 
-  if (response != GTK_RESPONSE_OK)
+  file = gtk_file_dialog_select_folder_finish (file_dialog, res, &error);
+  if (!file)
     {
-      gtk_window_destroy (GTK_WINDOW (widget));
+      g_warning ("Failed to add search location: %s", error->message);
       return;
     }
 
-  place = place_new (self,
-                     gtk_file_chooser_get_file (GTK_FILE_CHOOSER (widget)),
-                     NULL,
-                     0);
+  place = place_new (self, file, NULL, 0);
 
   place->settings_key = TRACKER_KEY_RECURSIVE_DIRECTORIES;
 
   new_values = place_get_new_settings_values (self, place, FALSE);
   g_settings_set_strv (self->tracker_preferences, place->settings_key, (const gchar **) new_values->pdata);
-
-  gtk_window_destroy (GTK_WINDOW (widget));
 }
 
 static void
 add_button_clicked (CcSearchLocationsDialog *self)
 {
-  GtkWidget *file_chooser;
+  GtkFileDialog *file_dialog;
 
-  file_chooser = gtk_file_chooser_dialog_new (_("Select Location"),
-                                              GTK_WINDOW (self),
-                                              GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER,
-                                              _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                              _("_OK"), GTK_RESPONSE_OK,
-                                              NULL);
-  gtk_window_set_modal (GTK_WINDOW (file_chooser), TRUE);
-  g_signal_connect_swapped (file_chooser, "response",
-                            G_CALLBACK (add_file_chooser_response), self);
-  gtk_window_present (GTK_WINDOW (file_chooser));
+  file_dialog = gtk_file_dialog_new ();
+  gtk_file_dialog_set_title (file_dialog, _("Select Location"));
+  gtk_file_dialog_set_modal (file_dialog, TRUE);
+
+  gtk_file_dialog_select_folder (file_dialog, GTK_WINDOW (self),
+                                 NULL,
+                                 add_file_chooser_response,
+                                 self);
 }
 
 static void
