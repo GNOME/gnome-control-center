@@ -127,6 +127,7 @@ enum {
 /* max number of devices and profiles to cause auto-expand at startup */
 #define GCM_PREFS_MAX_DEVICES_PROFILES_EXPANDED         5
 
+static void gcm_prefs_profile_add_cb (CcColorPanel *self);
 static void gcm_prefs_refresh_toolbar_buttons (CcColorPanel *self);
 
 static void
@@ -216,78 +217,63 @@ gcm_prefs_default_cb (CcColorPanel *self)
                error->message);
 }
 
-typedef struct
+static void
+icc_prefs_imported_cb (GObject      *source,
+                       GAsyncResult *res,
+                       gpointer      user_data)
 {
-  GtkResponseType response;
-  GMainLoop *mainloop;
-} DialogRunData;
+  CcColorPanel *self = CC_COLOR_PANEL (user_data);
+  GtkFileDialog *dialog = GTK_FILE_DIALOG (source);
+  g_autoptr(GFile) file = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(CdProfile) profile = NULL;
+
+  file = gtk_file_dialog_open_finish (dialog, res, &error);
+  if (file == NULL)
+    {
+      g_warning ("Failed to get ICC file: %s", error->message);
+      gtk_widget_set_visible (GTK_WIDGET (self->dialog_assign), FALSE);
+      return;
+    }
+
+#if CD_CHECK_VERSION(0,1,12)
+  profile = cd_client_import_profile_sync (self->client,
+                                           file,
+                                           cc_panel_get_cancellable (CC_PANEL (self)),
+                                           &error);
+  if (profile == NULL)
+    {
+      g_warning ("failed to get imported profile: %s", error->message);
+      return;
+    }
+#endif
+
+  /* add to list view */
+  gcm_prefs_profile_add_cb (self);
+}
 
 static void
-dialog_response_cb (GtkDialog       *dialog,
-                    GtkResponseType  response,
-                    DialogRunData   *run_data)
-{
-  run_data->response = response;
-  g_main_loop_quit (run_data->mainloop);
-}
-
-static gboolean
-dialog_close_cb (GtkDialog       *dialog,
-                 GtkResponseType  response,
-                 DialogRunData   *run_data)
-{
-  g_main_loop_quit (run_data->mainloop);
-  return GDK_EVENT_PROPAGATE;
-}
-
-static GtkResponseType
-run_dialog (GtkDialog *dialog)
-{
-  g_autoptr(GMainLoop) mainloop = NULL;
-  DialogRunData run_data;
-  guint response_id;
-  guint close_id;
-
-  mainloop = g_main_loop_new (NULL, FALSE);
-
-  run_data = (DialogRunData) {
-    .response = GTK_RESPONSE_DELETE_EVENT,
-    .mainloop = mainloop,
-  };
-
-  response_id = g_signal_connect (dialog, "response", G_CALLBACK (dialog_response_cb), &run_data);
-  close_id = g_signal_connect (dialog, "close-request", G_CALLBACK (dialog_close_cb), &run_data);
-
-  gtk_window_present (GTK_WINDOW (dialog));
-
-  g_main_loop_run (mainloop);
-
-  g_signal_handler_disconnect (dialog, response_id);
-  g_signal_handler_disconnect (dialog, close_id);
-
-  return run_data.response;
-}
-
-static GFile *
 gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *self)
 {
   g_autoptr(GFile) current_folder = NULL;
   GtkWindow *window;
-  GtkWidget *dialog;
-  GFile *file = NULL;
+  GtkFileDialog *dialog;
   GtkFileFilter *filter;
+  GListStore *filters;
 
   /* create new dialog */
   window = GTK_WINDOW (self->dialog_assign);
+  dialog = gtk_file_dialog_new ();
   /* TRANSLATORS: an ICC profile is a file containing colorspace data */
-  dialog = gtk_file_chooser_dialog_new (_("Select ICC Profile File"), window,
-                                        GTK_FILE_CHOOSER_ACTION_OPEN,
-                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                        _("_Import"), GTK_RESPONSE_ACCEPT,
-                                        NULL);
+  gtk_file_dialog_set_title (dialog, _("Select ICC Profile File"));
+  gtk_file_dialog_set_modal (dialog, TRUE);
+
+  gtk_file_dialog_set_accept_label (dialog, _("Import"));
   current_folder = g_file_new_for_path (g_get_home_dir ());
-  gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER(dialog), current_folder, NULL);
-  gtk_file_chooser_set_create_folders (GTK_FILE_CHOOSER(dialog), FALSE);
+  gtk_file_dialog_set_initial_folder (dialog, current_folder);
+
+  filters = g_list_store_new (GTK_TYPE_FILE_FILTER);
+  gtk_file_dialog_set_filters (dialog, G_LIST_MODEL (filters));
 
   /* setup the filter */
   filter = gtk_file_filter_new ();
@@ -295,24 +281,17 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *self)
 
   /* TRANSLATORS: filter name on the file->open dialog */
   gtk_file_filter_set_name (filter, _("Supported ICC profiles"));
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER(dialog), filter);
+  g_list_store_append (filters, filter);
 
   /* setup the all files filter */
   filter = gtk_file_filter_new ();
   gtk_file_filter_add_pattern (filter, "*");
   /* TRANSLATORS: filter name on the file->open dialog */
   gtk_file_filter_set_name (filter, _("All files"));
-  gtk_file_chooser_add_filter (GTK_FILE_CHOOSER(dialog), filter);
+  g_list_store_append (filters, filter);
 
-  /* did user choose file */
-  if (run_dialog (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-    file = gtk_file_chooser_get_file (GTK_FILE_CHOOSER(dialog));
-
-  /* we're done */
-  gtk_window_destroy (GTK_WINDOW (dialog));
-
-  /* or NULL for missing */
-  return file;
+  gtk_file_dialog_open (dialog, window, NULL,
+                        icc_prefs_imported_cb, self);
 }
 
 static void
@@ -820,15 +799,45 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *self,
 }
 
 static void
+profile_exported_cb (GObject      *source_object,
+                     GAsyncResult *res,
+                     gpointer      user_data)
+{
+  CdProfile *profile = CD_PROFILE (user_data);
+  GtkFileDialog *dialog = GTK_FILE_DIALOG (source_object);
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GFile) source = NULL;
+  g_autoptr(GFile) destination = NULL;
+  gboolean ret;
+
+  source = g_file_new_for_path (cd_profile_get_filename (profile));
+  destination = gtk_file_dialog_save_finish (dialog, res, &error);
+
+  if (!destination)
+    {
+      g_warning ("Failed to copy profile: %s", error->message);
+      return;
+    }
+
+  ret = g_file_copy (source,
+                     destination,
+                     G_FILE_COPY_OVERWRITE,
+                     NULL,
+                     NULL,
+                     NULL,
+                     &error);
+  if (!ret)
+    g_warning ("Failed to copy profile: %s", error->message);
+}
+
+static void
 gcm_prefs_calib_export_cb (CcColorPanel *self)
 {
   CdProfile *profile;
   gboolean ret;
   g_autofree gchar *default_name = NULL;
   g_autoptr(GError) error = NULL;
-  g_autoptr(GFile) destination = NULL;
-  g_autoptr(GFile) source = NULL;
-  GtkWidget *dialog;
+  GtkFileDialog *dialog;
 
   profile = cc_color_calibrate_get_profile (self->calibrate);
   ret = cd_profile_connect_sync (profile, NULL, &error);
@@ -838,33 +847,19 @@ gcm_prefs_calib_export_cb (CcColorPanel *self)
       return;
     }
 
+  dialog = gtk_file_dialog_new ();
   /* TRANSLATORS: this is the dialog to save the ICC profile */
-  dialog = gtk_file_chooser_dialog_new (_("Save Profile"),
-                                        GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))),
-                                        GTK_FILE_CHOOSER_ACTION_SAVE,
-                                        _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                        _("_Save"), GTK_RESPONSE_ACCEPT,
-                                        NULL);
+  gtk_file_dialog_set_title (dialog, _("Save Profile"));
+  gtk_file_dialog_set_modal (dialog, TRUE);
 
   default_name = g_strdup_printf ("%s.icc", cd_profile_get_title (profile));
-  gtk_file_chooser_set_current_name (GTK_FILE_CHOOSER (dialog), default_name);
+  gtk_file_dialog_set_initial_name (dialog, default_name);
 
-  if (run_dialog (GTK_DIALOG (dialog)) == GTK_RESPONSE_ACCEPT)
-    {
-      source = g_file_new_for_path (cd_profile_get_filename (profile));
-      destination = gtk_file_chooser_get_file (GTK_FILE_CHOOSER (dialog));
-      ret = g_file_copy (source,
-                         destination,
-                         G_FILE_COPY_OVERWRITE,
-                         NULL,
-                         NULL,
-                         NULL,
-                         &error);
-      if (!ret)
-        g_warning ("Failed to copy profile: %s", error->message);
-    }
-
-  gtk_window_destroy (GTK_WINDOW (dialog));
+  gtk_file_dialog_save (dialog,
+                        GTK_WINDOW (gtk_widget_get_root (GTK_WIDGET (self))),
+                        NULL,
+                        profile_exported_cb,
+                        profile);
 }
 
 static void
@@ -1287,32 +1282,7 @@ gcm_prefs_profiles_row_activated_cb (CcColorPanel *self,
 static void
 gcm_prefs_button_assign_import_cb (CcColorPanel *self)
 {
-  g_autoptr(GFile) file = NULL;
-  g_autoptr(GError) error = NULL;
-  g_autoptr(CdProfile) profile = NULL;
-
-  file = gcm_prefs_file_chooser_get_icc_profile (self);
-  if (file == NULL)
-    {
-      g_warning ("failed to get ICC file");
-      gtk_widget_set_visible (GTK_WIDGET (self->dialog_assign), FALSE);
-      return;
-    }
-
-#if CD_CHECK_VERSION(0,1,12)
-  profile = cd_client_import_profile_sync (self->client,
-                                           file,
-                                           cc_panel_get_cancellable (CC_PANEL (self)),
-                                           &error);
-  if (profile == NULL)
-    {
-      g_warning ("failed to get imported profile: %s", error->message);
-      return;
-    }
-#endif
-
-  /* add to list view */
-  gcm_prefs_profile_add_cb (self);
+  gcm_prefs_file_chooser_get_icc_profile (self);
 }
 
 static void
