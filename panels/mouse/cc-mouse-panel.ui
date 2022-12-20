@@ -80,6 +80,7 @@
                   <object class="AdwActionRow" id="mouse_natural_scrolling_row">
                     <property name="title" translatable="yes" comments="Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.">Natural Scrolling</property>
                     <property name="subtitle" translatable="yes">Scrolling moves the content, not the view.</property>
+                    <property name="activatable-widget">mouse_natural_scrolling_switch</property>
                     <child>
                       <object class="GtkSwitch" id="mouse_natural_scrolling_switch">
                         <property name="valign">center</property>
@@ -96,6 +97,7 @@
                 <child>
                   <object class="AdwActionRow" id="touchpad_toggle_row">
                     <property name="title" translatable="yes">Touchpad</property>
+                    <property name="activatable-widget">touchpad_toggle_switch</property>
                     <child>
                       <object class="GtkSwitch" id="touchpad_toggle_switch">
                         <property name="valign">center</property>
@@ -107,6 +109,7 @@
                   <object class="AdwActionRow" id="touchpad_natural_scrolling_row">
                     <property name="title" translatable="yes" comments="Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible. ">Natural Scrolling</property>
                     <property name="subtitle" translatable="yes">Scrolling moves the content, not the view.</property>
+                    <property name="activatable-widget">touchpad_natural_scrolling_switch</property>
                     <child>
                       <object class="GtkSwitch" id="touchpad_natural_scrolling_switch">
                         <property name="valign">center</property>
@@ -134,6 +137,7 @@
                   <object class="AdwActionRow" id="tap_to_click_row">
                     <property name="visible">False</property>
                     <property name="title" translatable="yes">Tap to Click</property>
+                    <property name="activatable-widget">tap_to_click_switch</property>
                     <child>
                       <object class="GtkSwitch" id="tap_to_click_switch">
                         <property name="valign">center</property>
@@ -145,6 +149,7 @@
                   <object class="AdwActionRow" id="two_finger_scrolling_row">
                     <property name="visible">False</property>
                     <property name="title" translatable="yes">Two-finger Scrolling</property>
+                    <property name="activatable-widget">two_finger_scrolling_switch</property>
                     <child>
                       <object class="GtkSwitch" id="two_finger_scrolling_switch">
                         <property name="valign">center</property>
@@ -157,6 +162,7 @@
                   <object class="AdwActionRow" id="edge_scrolling_row">
                     <property name="visible">False</property>
                     <property name="title" translatable="yes">Edge Scrolling</property>
+                    <property name="activatable-widget">edge_scrolling_switch</property>
                     <child>
                       <object class="GtkSwitch" id="edge_scrolling_switch">
                         <property name="valign">center</property>
