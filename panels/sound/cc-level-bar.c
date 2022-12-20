@@ -26,28 +26,23 @@ struct _CcLevelBar
 
   GtkLevelBar *level_bar;
   pa_stream   *level_stream;
-  gdouble      last_input_peak;
 };
 
 G_DEFINE_TYPE (CcLevelBar, cc_level_bar, GTK_TYPE_WIDGET)
 
-#define DECAY_STEP .15
+#define SMOOTHING 0.3
 
 static void
-set_peak (CcLevelBar *self,
-          gdouble     value)
+update_level (CcLevelBar *self,
+              gdouble     value)
 {
-  if (value < 0)
-     value = 0;
-  if (value > 1)
-     value = 1;
+  /* Use Exponential Moving Average (EMA) to smooth out value changes and
+   * reduce fluctuation and jitter.
+   */
+  double prev_ema = gtk_level_bar_get_value (self->level_bar);
+  double ema = (value * SMOOTHING) + (prev_ema * (1.0 - SMOOTHING));
 
-  if (self->last_input_peak >= DECAY_STEP &&
-      value < self->last_input_peak - DECAY_STEP)
-    value = self->last_input_peak - DECAY_STEP;
-  self->last_input_peak = value;
-
-  gtk_level_bar_set_value (self->level_bar, value);
+  gtk_level_bar_set_value (self->level_bar, ema);
 }
 
 static void
@@ -78,7 +73,7 @@ read_cb (pa_stream *stream,
 
   pa_stream_drop (stream);
 
-  set_peak (self, value);
+  update_level (self, value);
 }
 
 static void
