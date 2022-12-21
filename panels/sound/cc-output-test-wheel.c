@@ -94,6 +94,26 @@ allocate_speaker_button (CcSpeakerTestButton *button,
 }
 
 static void
+cc_output_test_wheel_measure (GtkWidget      *widget,
+                              GtkOrientation  orientation,
+                              int             for_size,
+                              int            *minimum,
+                              int            *natural,
+                              int            *minimum_baseline,
+                              int            *natural_baseline)
+{
+  CcOutputTestWheel *self = CC_OUTPUT_TEST_WHEEL (widget);
+
+  /* Just measure the label to make GTK not complain about allocating children
+   * without measuring anything. Measuring all the buttons is an overkill
+   * because we expect this widget to have the minimum size overwritten by CSS
+   * either way.
+   */
+  gtk_widget_measure (self->label, orientation, for_size,
+                      minimum, natural, NULL, NULL);
+}
+
+static void
 cc_output_test_wheel_size_allocate (GtkWidget *widget,
                                     int        width,
                                     int        height,
@@ -157,6 +177,7 @@ cc_output_test_wheel_class_init (CcOutputTestWheelClass *klass)
 
   object_class->dispose = cc_output_test_wheel_dispose;
 
+  widget_class->measure = cc_output_test_wheel_measure;
   widget_class->size_allocate = cc_output_test_wheel_size_allocate;
 
   gtk_widget_class_set_css_name (widget_class, "wheel");
