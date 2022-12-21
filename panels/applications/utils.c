@@ -53,7 +53,7 @@ file_remove_thread_func (GTask        *task,
   GFile *file = source_object;
   g_autofree gchar *path = g_file_get_path (file);
 
-  nftw (path, ftw_remove_cb, 20, FTW_DEPTH);
+  nftw (path, ftw_remove_cb, 20, FTW_PHYS | FTW_DEPTH);
 
   if (g_task_set_return_on_cancel (task, FALSE))
     g_task_return_boolean (task, TRUE);
