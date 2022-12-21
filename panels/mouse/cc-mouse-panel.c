@@ -335,12 +335,14 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-test_button_toggled_cb (CcMousePanel *self)
+show_test_page_cb (CcMousePanel *self)
 {
-  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->test_button)))
-    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->mouse_test));
-  else
-    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->preferences));
+  gboolean show_test_page;
+
+  show_test_page = gtk_stack_get_visible_child (self->stack) == GTK_WIDGET (self->preferences);
+  gtk_stack_set_visible_child (self->stack,
+                               show_test_page ? GTK_WIDGET (self->mouse_test) : GTK_WIDGET (self->preferences));
+  gtk_widget_set_visible (GTK_WIDGET (self->test_button), !show_test_page);
 }
 
 static void
@@ -409,6 +411,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, two_finger_scrolling_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, edge_scrolling_changed_event);
-  gtk_widget_class_bind_template_callback (widget_class, test_button_toggled_cb);
+  gtk_widget_class_bind_template_callback (widget_class, show_test_page_cb);
   gtk_widget_class_bind_template_callback (widget_class, two_finger_scrolling_changed_event);
 }

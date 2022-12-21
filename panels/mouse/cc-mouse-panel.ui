@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <template class="CcMousePanel" parent="CcPanel">
+    <child type="titlebar-start">
+      <object class="GtkButton" id="back_button">
+        <property name="visible">False</property>
+        <property name="icon-name">go-previous-symbolic</property>
+        <signal name="clicked" handler="show_test_page_cb" object="CcMousePanel" swapped="yes"/>
+        <accessibility>
+          <property name="label" translatable="yes">Back</property>
+        </accessibility>
+      </object>
+    </child>
 
     <child type="titlebar-end">
-      <object class="GtkToggleButton" id="test_button">
+      <object class="GtkButton" id="test_button">
+        <property name="visible" bind-source="back_button" bind-property="visible" bind-flags="sync-create|invert-boolean|bidirectional"/>
         <property name="use_underline">True</property>
         <property name="valign">center</property>
         <property name="label" translatable="yes">Test _Settings</property>
-        <signal name="toggled" handler="test_button_toggled_cb" object="CcMousePanel" swapped="yes"/>
+        <signal name="clicked" handler="show_test_page_cb" object="CcMousePanel" swapped="yes"/>
         <style>
           <class name="text-button"/>
         </style>
