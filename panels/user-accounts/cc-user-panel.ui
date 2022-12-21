@@ -211,7 +211,13 @@
                             <property name="title" translatable="yes">A_utomatic Login</property>
                             <property name="use_underline">True</property>
                             <property name="activatable_widget">autologin_switch</property>
-                            <child>
+                            <child type="suffix">
+                              <object class="CcListRowInfoButton">
+                                <property name="valign">center</property>
+                                <property name="text" translatable="yes">Automatic login opens the user account when the device starts, without requiring authentication. Authentication is still required at other times, such as when unlocking the screen.</property>
+                              </object>
+                            </child>
+                            <child type="suffix">
                               <object class="GtkSwitch" id="autologin_switch">
                                 <property name="valign">center</property>
                                 <signal name="notify::active" handler="autologin_changed" object="CcUserPanel" swapped="yes"/>

@@ -44,6 +44,7 @@
 #endif
 
 #include "cc-list-row.h"
+#include "cc-list-row-info-button.h"
 #include "cc-add-user-dialog.h"
 #include "cc-avatar-chooser.h"
 #include "cc-language-chooser.h"
@@ -1473,6 +1474,7 @@ cc_user_panel_init (CcUserPanel *self)
         type = cc_permission_infobar_get_type ();
         g_type_ensure (CC_TYPE_AVATAR_CHOOSER);
         g_type_ensure (CC_TYPE_LIST_ROW);
+        g_type_ensure (CC_TYPE_LIST_ROW_INFO_BUTTON);
 
         gtk_widget_init_template (GTK_WIDGET (self));
 
