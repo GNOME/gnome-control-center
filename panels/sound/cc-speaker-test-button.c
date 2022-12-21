@@ -212,6 +212,11 @@ cc_speaker_test_button_new (GSoundContext         *context,
   self->context = g_object_ref (context);
   self->position = position;
   update_icon (self);
+  gtk_accessible_update_property (GTK_ACCESSIBLE (self),
+                                  GTK_ACCESSIBLE_PROPERTY_LABEL,
+                                  pa_channel_position_to_pretty_string (position),
+                                  -1);
+
 
   return self;
 }
