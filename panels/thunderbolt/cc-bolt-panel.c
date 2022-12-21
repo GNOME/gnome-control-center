@@ -164,9 +164,16 @@ update_visibility (BoltClient  *client,
                    gpointer     user_data)
 {
   g_autoptr(GPtrArray) devices = NULL;
+  gboolean visible = FALSE;
 
-  devices = bolt_client_list_devices (client, NULL, NULL);
-  set_panel_visibility (devices->len > 0);
+  if (client)
+    {
+      devices = bolt_client_list_devices (client, NULL, NULL);
+      if (devices)
+        visible = devices->len > 0;
+    }
+
+  set_panel_visibility (visible);
 }
 
 static void
