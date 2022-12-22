@@ -80,7 +80,6 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
                    GvcMixerControl *mixer_control)
 {
   CcStreamRow *self;
-  g_autoptr(GtkIconPaintable) icon_paintable = NULL;
   g_autoptr(GIcon) gicon = NULL;
   const gchar *stream_name;
   const gchar *icon_name;
@@ -92,20 +91,9 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
   icon_name = gvc_mixer_stream_get_icon_name (stream);
   stream_name = gvc_mixer_stream_get_name (stream);
 
-  /* Explicitly lookup for the icon, since some streams may give us an
-   * icon name (e.g. "audio") that doesn't really exist in the theme.
-   */
-  icon_paintable = gtk_icon_theme_lookup_icon (gtk_icon_theme_get_for_display (gdk_display_get_default ()),
-                                               icon_name,
-                                               NULL,
-                                               24,
-                                               gtk_widget_get_scale_factor (GTK_WIDGET (self)),
-                                               GTK_TEXT_DIR_RTL,
-                                               0);
-
   if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
     gicon = g_themed_icon_new_with_default_fallbacks ("org.gnome.Settings-accessibility");
-  else if (icon_paintable)
+  else if (gtk_icon_theme_has_icon (gtk_icon_theme_get_for_display (gdk_display_get_default ()), icon_name))
     gicon = g_themed_icon_new_with_default_fallbacks (icon_name);
   else
     gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable");
