@@ -84,7 +84,6 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
   g_autoptr(GIcon) gicon = NULL;
   const gchar *stream_name;
   const gchar *icon_name;
-  g_autofree gchar *symbolic_icon_name = NULL;
 
   self = g_object_new (CC_TYPE_STREAM_ROW, NULL);
   self->stream = g_object_ref (stream);
@@ -92,11 +91,6 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
 
   icon_name = gvc_mixer_stream_get_icon_name (stream);
   stream_name = gvc_mixer_stream_get_name (stream);
-
-  if (g_str_has_suffix (icon_name, "-symbolic"))
-          symbolic_icon_name = strdup (icon_name);
-  else
-          symbolic_icon_name = g_strconcat (icon_name, "-symbolic", NULL);
 
   /* Explicitly lookup for the icon, since some streams may give us an
    * icon name (e.g. "audio") that doesn't really exist in the theme.
@@ -110,11 +104,11 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
                                                0);
 
   if (icon_paintable)
-    gicon = g_themed_icon_new_with_default_fallbacks (symbolic_icon_name);
+    gicon = g_themed_icon_new_with_default_fallbacks (icon_name);
   else if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
-    gicon = g_themed_icon_new_with_default_fallbacks ("org.gnome.Settings-accessibility-symbolic");
+    gicon = g_themed_icon_new_with_default_fallbacks ("org.gnome.Settings-accessibility");
   else
-    gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable-symbolic");
+    gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable");
 
   gtk_image_set_from_gicon (self->icon_image, gicon);
 
