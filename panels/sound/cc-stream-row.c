@@ -103,10 +103,10 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
                                                GTK_TEXT_DIR_RTL,
                                                0);
 
-  if (icon_paintable)
-    gicon = g_themed_icon_new_with_default_fallbacks (icon_name);
-  else if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
+  if (g_str_has_prefix (stream_name, SPEECH_DISPATCHER_PREFIX))
     gicon = g_themed_icon_new_with_default_fallbacks ("org.gnome.Settings-accessibility");
+  else if (icon_paintable)
+    gicon = g_themed_icon_new_with_default_fallbacks (icon_name);
   else
     gicon = g_themed_icon_new_with_default_fallbacks ("application-x-executable");
 
