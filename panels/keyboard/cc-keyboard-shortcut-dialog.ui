@@ -7,17 +7,18 @@
     <signal name="map" handler="gtk_widget_grab_focus" object="search_entry" swapped="yes"/>
 
     <child>
-      <object class="GtkBox">
-        <property name="orientation">vertical</property>
+      <object class="AdwLeaflet" id="leaflet">
+        <property name="can-unfold">False</property>
+        <property name="can-navigate-forward">False</property>
+        <property name="can-navigate-back">True</property>
+        <signal name="notify::visible-child" handler="shortcut_dialog_visible_child_changed_cb" swapped="yes"/>
 
         <child>
-          <object class="AdwLeaflet" id="header_bar_leaflet">
-            <property name="can-navigate-back">True</property>
-            <property name="can-unfold">False</property>
-            <signal name="notify::visible-child" handler="shortcut_header_bar_visible_child_changed_cb" swapped="yes"/>
+          <object class="GtkBox" id="main_box">
+            <property name="orientation">vertical</property>
 
             <child>
-              <object class="AdwHeaderBar" id="main_header_bar">
+              <object class="AdwHeaderBar">
 
                 <!-- Reset All… button -->
                 <child>
@@ -31,10 +32,76 @@
               </object> <!-- ./AdwHeaderBar main_header_bar -->
             </child>
 
+            <!-- Search Entry -->
             <child>
-              <object class="AdwHeaderBar" id="subview_header_bar">
+              <object class="GtkSearchBar">
+                <property name="search-mode-enabled">True</property>
+                <property name="child">
+                  <!-- xxx: Pack the search entry inside a box so that Escape key won't hide the bar -->
+                  <object class="GtkBox">
+                    <child>
+                      <object class="GtkSearchEntry" id="search_entry">
+                        <property name="halign">center</property>
+                        <property name="width-chars">28</property>
+                        <signal name="search-changed" handler="shortcut_search_entry_changed_cb" swapped="yes" />
+                        <accessibility>
+                          <property name="label" translatable="yes">Search Shortcuts</property>
+                        </accessibility>
+                      </object>
+                    </child>
+                  </object>
+                </property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkStack" id="section_stack">
+                <property name="vhomogeneous">False</property>
+                <property name="css-classes">shortcut-list</property>
 
-                <!-- Back button -->
+                <!-- Shortcut section title rows -->
+                <child>
+                  <object class="AdwPreferencesPage" id="section_list_page">
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <child>
+                          <object class="GtkListBox" id="section_list_box">
+                            <property name="selection-mode">none</property>
+                            <signal name="row-activated" handler="shortcut_section_row_activated_cb" swapped="yes"/>
+                            <style>
+                              <class name="boxed-list"/>
+                            </style>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+
+                <child>
+                  <object class="AdwPreferencesPage" id="search_result_page"/>
+                </child>
+                <child>
+                  <object class="AdwStatusPage" id="empty_results_page">
+                    <property name="vexpand">True</property>
+                    <property name="icon_name">edit-find-symbolic</property>
+                    <property name="title" translatable="yes">No keyboard shortcut found</property>
+                    <property name="description" translatable="yes">Try a different search.</property>
+                  </object>
+                </child>
+
+              </object> <!-- ./GtkStack section_stack -->
+            </child>
+
+          </object>  <!-- ./GtkBox main_box -->
+        </child>
+
+        <child>
+          <object class="GtkBox" id="subview_box">
+            <property name="orientation">vertical</property>
+
+            <!-- Back button -->
+            <child>
+              <object class="AdwHeaderBar">
                 <child>
                   <object class="GtkButton" id="back_button">
                     <property name="icon-name">go-previous-symbolic</property>
@@ -47,104 +114,19 @@
                     </style>
                   </object>
                 </child>
-
               </object> <!-- ./AdwHeaderBar subview_header_bar -->
             </child>
 
-          </object>
-        </child>
-
-        <child>
-          <object class="AdwLeaflet" id="main_leaflet">
-            <property name="can-unfold">False</property>
-            <property name="can-navigate-back">True</property>
-            <signal name="notify::visible-child" handler="shortcut_dialog_visible_child_changed_cb" swapped="yes"/>
-
             <child>
-              <object class="GtkBox" id="main_box">
-                <property name="orientation">vertical</property>
-
-                <!-- Search Entry -->
-                <child>
-                  <object class="GtkSearchBar">
-                    <property name="search-mode-enabled">True</property>
-                    <property name="child">
-                      <!-- xxx: Pack the search entry inside a box so that Escape key won't hide the bar -->
-                      <object class="GtkBox">
-                        <child>
-                          <object class="GtkSearchEntry" id="search_entry">
-                            <property name="halign">center</property>
-                            <property name="width-chars">28</property>
-                            <signal name="search-changed" handler="shortcut_search_entry_changed_cb" swapped="yes" />
-                            <accessibility>
-                              <property name="label" translatable="yes">Search Shortcuts</property>
-                            </accessibility>
-                          </object>
-                        </child>
-                      </object>
-                    </property>
-                  </object>
-                </child>
+              <object class="GtkStack" id="subview_stack">
 
                 <child>
-                  <object class="GtkStack" id="section_stack">
-                    <property name="vhomogeneous">False</property>
-                    <property name="css-classes">shortcut-list</property>
-
-                    <!-- Shortcut section title rows -->
-                    <child>
-                      <object class="AdwPreferencesPage" id="section_list_page">
-                        <child>
-                          <object class="AdwPreferencesGroup">
-                            <child>
-                              <object class="GtkListBox" id="section_list_box">
-                                <property name="selection-mode">none</property>
-                                <signal name="row-activated" handler="shortcut_section_row_activated_cb" swapped="yes"/>
-                                <style>
-                                 <class name="boxed-list"/>
-                                </style>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-
-                    <!-- Shortcut search results list -->
-                    <child>
-                      <object class="AdwPreferencesPage" id="search_result_page"/>
-                    </child>
-
-                    <child>
-                      <object class="AdwStatusPage" id="empty_results_page">
-                        <property name="vexpand">True</property>
-                        <property name="icon_name">edit-find-symbolic</property>
-                        <property name="title" translatable="yes">No keyboard shortcut found</property>
-                        <property name="description" translatable="yes">Try a different search.</property>
-                      </object>
-                    </child>
-
-                  </object>
-                </child>
-
-              </object>
-            </child>
-
-            <child>
-              <object class="AdwLeafletPage">
-                <property name="navigatable">False</property>
-                <property name="child">
                   <object class="GtkStack" id="shortcut_list_stack">
                     <property name="vhomogeneous">False</property>
                   </object>
-                </property>
-              </object>
-            </child>
+                </child>
 
-            <child>
-              <object class="AdwLeafletPage">
-                <property name="navigatable">False</property>
-                <property name="child">
+                <child>
                   <object class="AdwStatusPage" id="empty_custom_shortcut_page">
                     <property name="vexpand">True</property>
                     <property name="icon-name">input-keyboard-symbolic</property>
@@ -162,14 +144,15 @@
                       </object>
                     </child>
                   </object>
-                </property>
-              </object>
+                </child>
+
+              </object>  <!-- ./GtkStack subview_stack -->
             </child>
 
-          </object> <!-- ./AdwLeaflet -->
+          </object>  <!-- ./GtkBox subview_box -->
         </child>
 
-      </object> <!-- ./GtkBox -->
+      </object>  <!-- ./AdwLeaflet leaflet -->
     </child>
 
   </template>
