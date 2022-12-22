@@ -4,6 +4,7 @@
     <property name="modal">True</property>
     <property name="default-width">600</property>
     <property name="default-height">540</property>
+    <property name="title" translatable="yes">Keyboard Shortcuts</property>
     <signal name="map" handler="gtk_widget_grab_focus" object="search_entry" swapped="yes"/>
 
     <child>
@@ -99,9 +100,13 @@
           <object class="GtkBox" id="subview_box">
             <property name="orientation">vertical</property>
 
-            <!-- Back button -->
             <child>
               <object class="AdwHeaderBar">
+                <property name="title-widget">
+                  <object class="AdwWindowTitle" id="subview_title" />
+                </property>
+
+                <!-- Back button -->
                 <child>
                   <object class="GtkButton" id="back_button">
                     <property name="icon-name">go-previous-symbolic</property>

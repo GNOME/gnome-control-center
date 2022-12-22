@@ -55,6 +55,7 @@ struct _CcKeyboardShortcutDialog
   AdwStatusPage        *empty_results_page;
 
   GtkBox               *subview_box;
+  AdwWindowTitle       *subview_title;
   GtkButton            *back_button;
   GtkStack             *subview_stack;
   GtkStack             *shortcut_list_stack;
@@ -403,7 +404,6 @@ static void
 shortcut_dialog_visible_child_changed_cb (CcKeyboardShortcutDialog *self)
 {
   gpointer visible_child;
-  const char *title;
   gboolean is_main_view;
 
   visible_child = adw_leaflet_get_visible_child (self->leaflet);
@@ -416,13 +416,13 @@ shortcut_dialog_visible_child_changed_cb (CcKeyboardShortcutDialog *self)
 
       self->visible_section = NULL;
     }
+  else if (self->visible_section)
+    {
+      const char *title;
 
-  if (self->visible_section)
-    title = g_object_get_data (G_OBJECT (self->visible_section), "title");
-  else
-    title = "Keyboard Shortcuts";
-
-  gtk_window_set_title (GTK_WINDOW (self), _(title));
+      title = g_object_get_data (G_OBJECT (self->visible_section), "title");
+      adw_window_title_set_title (self->subview_title, _(title) ?: "");
+    }
 }
 
 static void
@@ -532,6 +532,7 @@ cc_keyboard_shortcut_dialog_class_init (CcKeyboardShortcutDialogClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, empty_results_page);
 
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, subview_box);
+  gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, subview_title);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, back_button);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, subview_stack);
   gtk_widget_class_bind_template_child (widget_class, CcKeyboardShortcutDialog, shortcut_list_stack);
