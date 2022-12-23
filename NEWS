@@ -3,6 +3,65 @@ Version 42.4
 ================
 
 - Updated translations
+- Added various accessibility labels
+- Initialize locale early
+
+About
+- Don't load version.xml info we don't use
+
+Applications
+- Don't recurse into symlinks when clearing app cache
+
+Color
+- Fix crash when there's no device rows to show
+
+Cellular
+- Improve dbus error messaging
+- Handle cases when SIM ID is not present
+- Prevent duplicate entries in the SIM providers list
+
+Keyboard
+- Fix activation of input source toggle button
+- Fix permission_acquired always returning FALSE
+
+Mouse
+- Set rows as actiavatable widgets
+
+Network
+- Fix crashes when EAP password is missing
+- Fix wrong signal of SEA password visibility toggle
+- Prevent crash when disconnecting wifi device
+- Use mime-types for file chooser filtering TLS files
+
+Online Accounts
+- Fix crash when failing to find GOA helper executable
+
+Power
+- Prevent terminal from getting spammed with ALS logs
+
+Printers
+- Fix loading of UI resources
+- Show empty-state when removing the last printer
+
+Region
+- Fix creating rows for locales without a country
+- Fix critical when changing language
+- Fix permission_acquired always returning FALSE
+
+Search
+- Fix reordering of list rows
+
+Users
+- Show a fallback avatar when failing to load one
+
+Wifi
+- Allow accessing settings of known wifi networks
+
+================
+Version 42.4
+================
+
+- Updated translations
 
 Background
 - Restore support for multiple file selection
