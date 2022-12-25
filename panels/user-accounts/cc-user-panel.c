@@ -1456,7 +1456,7 @@ cc_user_panel_constructed (GObject *object)
         G_OBJECT_CLASS (cc_user_panel_parent_class)->constructed (object);
 
         cc_permission_infobar_set_permission (self->permission_infobar, self->permission);
-        cc_permission_infobar_set_title (self->permission_infobar, _("Unlock to Add Users and Change Settings"));
+        cc_permission_infobar_set_title (self->permission_infobar, _("Unlock to add users and change settings"));
 }
 
 static void

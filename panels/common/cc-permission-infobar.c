@@ -28,6 +28,7 @@
 #endif
 
 #include <glib/gi18n.h>
+#include <adwaita.h>
 
 #include "cc-permission-infobar.h"
 
@@ -35,9 +36,10 @@ struct _CcPermissionInfobar
 {
   AdwBin         parent_instance;
 
-  GtkRevealer   *revealer;
-  GtkLabel      *title;
-  GtkLockButton *lock_button;
+  AdwBanner     *banner;
+  GPermission   *permission;
+
+  GCancellable *cancellable;
 };
 
 G_DEFINE_TYPE (CcPermissionInfobar, cc_permission_infobar, ADW_TYPE_BIN)
@@ -45,27 +47,109 @@ G_DEFINE_TYPE (CcPermissionInfobar, cc_permission_infobar, ADW_TYPE_BIN)
 static void
 on_permission_changed (CcPermissionInfobar *self)
 {
-  GPermission *permission;
-  gboolean is_authorized;
+  gboolean is_authorized = g_permission_get_allowed (self->permission);
 
-  permission = gtk_lock_button_get_permission (self->lock_button);
-  is_authorized = g_permission_get_allowed (permission);
+  adw_banner_set_revealed (self->banner, !is_authorized);
+}
 
-  gtk_revealer_set_reveal_child (self->revealer, !is_authorized);
+static void
+acquire_cb (GObject      *source,
+            GAsyncResult *result,
+            gpointer      user_data)
+{
+  CcPermissionInfobar *self = CC_PERMISSION_INFOBAR (user_data);
+  g_autoptr (GError) error = NULL;
+
+  if (!g_permission_acquire_finish (self->permission, result, &error))
+    {
+      g_warning ("Error acquiring permission: %s", error->message);
+    }
+
+  g_clear_object (&self->cancellable);
+}
+
+static void
+release_cb (GObject      *source,
+            GAsyncResult *result,
+            gpointer      user_data)
+{
+  CcPermissionInfobar *self = CC_PERMISSION_INFOBAR (user_data);
+  g_autoptr (GError) error = NULL;
+
+  if (!g_permission_release_finish (self->permission, result, &error))
+    {
+      g_warning ("Error releasing permission: %s", error->message);
+      g_error_free (error);
+    }
+
+  g_clear_object (&self->cancellable);
+}
+
+static void
+banner_button_clicked_cb (CcPermissionInfobar *self)
+{
+  /* if we already have a pending interactive check or permission is not set,
+   * then do nothing
+   */
+  if (self->cancellable != NULL || self->permission == NULL)
+    return;
+
+  if (g_permission_get_allowed (self->permission))
+    {
+      if (g_permission_get_can_release (self->permission))
+        {
+          self->cancellable = g_cancellable_new ();
+
+          g_permission_release_async (self->permission,
+                                      self->cancellable,
+                                      release_cb,
+                                      self);
+        }
+    }
+  else
+    {
+      if (g_permission_get_can_acquire (self->permission))
+        {
+          self->cancellable = g_cancellable_new ();
+
+          g_permission_acquire_async (self->permission,
+                                      self->cancellable,
+                                      acquire_cb,
+                                      self);
+        }
+    }
+}
+
+static void
+cc_permission_infobar_dispose (GObject *object)
+{
+  CcPermissionInfobar *self = CC_PERMISSION_INFOBAR (object);
+
+  if (self->cancellable != NULL)
+    {
+      g_cancellable_cancel (self->cancellable);
+    }
+
+  g_clear_object (&self->cancellable);
+
+  G_OBJECT_CLASS (cc_permission_infobar_parent_class)->dispose (object);
 }
 
 static void
 cc_permission_infobar_class_init (CcPermissionInfobarClass *klass)
 {
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+  object_class->dispose = cc_permission_infobar_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/"
                                                "common/cc-permission-infobar.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, revealer);
-  gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, title);
-  gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, lock_button);
+  gtk_widget_class_bind_template_child (widget_class, CcPermissionInfobar, banner);
+  gtk_widget_class_bind_template_callback (widget_class,
+                                           banner_button_clicked_cb);
 }
 
 static void
@@ -82,8 +166,9 @@ cc_permission_infobar_set_permission (CcPermissionInfobar *self,
                                       GPermission         *permission)
 {
   g_return_if_fail (CC_IS_PERMISSION_INFOBAR (self));
+  g_return_if_fail (G_IS_PERMISSION (permission));
 
-  gtk_lock_button_set_permission (self->lock_button, permission);
+  self->permission = permission;
 
   g_signal_connect_object (permission, "notify",
                            G_CALLBACK (on_permission_changed),
@@ -108,5 +193,5 @@ cc_permission_infobar_set_title (CcPermissionInfobar *self,
   if (title == NULL)
     title = _("Unlock to Change Settings");
 
-  gtk_label_set_text (self->title, title);
+  adw_banner_set_title (self->banner, title);
 }
