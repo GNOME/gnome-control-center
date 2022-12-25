@@ -7,33 +7,10 @@
         <property name="orientation">vertical</property>
 
         <child>
-          <object class="GtkInfoBar" id="infobar">
-            <property name="revealed">False</property>
-            <property name="message-type">info</property>
-
-            <child>
-              <object class="GtkLabel">
-                <property name="hexpand">True</property>
-                <property name="wrap">True</property>
-                <property name="xalign">0.0</property>
-                <property name="label" translatable="yes">Language and format will be changed after next login</property>
-                <style>
-                  <class name="heading" />
-                </style>
-              </object>
-            </child>
-
-            <child type="action">
-              <object class="GtkButton" id="restart_button">
-                <property name="valign">center</property>
-                <property name="label" translatable="yes">Logout…</property>
-                <style>
-                  <class name="suggested-action"/>
-                </style>
-                <signal name="clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
-              </object>
-            </child>
-
+          <object class="AdwBanner" id="banner">
+            <property name="title" translatable="yes">Language and format will be changed after next login</property>
+            <property name="button-label" translatable="yes">Log Out…</property>
+            <signal name="button-clicked" handler="restart_now" object="CcRegionPanel" swapped="yes"/>
           </object>
         </child>
 

@@ -25,6 +25,7 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 #include <gtk/gtk.h>
+#include <adwaita.h>
 #include <polkit/polkit.h>
 
 #include "cc-region-panel.h"
@@ -55,13 +56,12 @@ struct _CcRegionPanel {
         CcPanel          parent_instance;
 
         CcListRow       *formats_row;
-        GtkInfoBar      *infobar;
+        AdwBanner       *banner;
         GtkSizeGroup    *input_size_group;
         CcListRow       *login_formats_row;
         GtkWidget       *login_group;
         CcListRow       *login_language_row;
         GtkListBoxRow   *language_row;
-        GtkButton       *restart_button;
 
         gboolean     login_auto_apply;
         GPermission *permission;
@@ -130,7 +130,7 @@ set_restart_notification_visible (CcRegionPanel *self,
                 }
         }
 
-        gtk_info_bar_set_revealed (self->infobar, visible);
+        adw_banner_set_revealed (self->banner, visible);
 
         file = get_needs_restart_file ();
 
@@ -838,12 +838,11 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-region-panel.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, infobar);
+        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, banner);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_formats_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_group);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, login_language_row);
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, language_row);
-        gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, restart_button);
 
         gtk_widget_class_bind_template_callback (widget_class, on_login_formats_row_activated_cb);
         gtk_widget_class_bind_template_callback (widget_class, on_login_language_row_activated_cb);
