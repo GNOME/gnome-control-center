@@ -323,4 +323,32 @@
       </object>
     </child>
   </template>
+
+  <object class="AdwMessageDialog" id="local_user_dialog">
+    <property name="modal">True</property>
+    <property name="hide-on-close">True</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="body" translatable="yes">The user will not be able to use this device once their account has been removed.</property>
+    <property name="default-response">cancel</property>
+    <property name="close-response">cancel</property>
+    <signal name="response" handler="delete_user_response" object="CcUserPanel" swapped="yes"/>
+    <responses>
+      <response id="cancel" translatable="yes">_Cancel</response>
+      <response id="remove" translatable="yes" appearance="destructive">_Remove</response>
+    </responses>
+    <child type="extra-child">
+      <object class="AdwPreferencesGroup">
+        <child>
+          <object class="AdwActionRow">
+            <property name="title" translatable="yes">Delete Files and Settings</property>
+            <child type="suffix">
+              <object class="GtkSwitch" id="local_user_choice">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
 </interface>
