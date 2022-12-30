@@ -187,6 +187,7 @@ update_modem_apps_visibility (CcDefaultAppsPanel *self)
   GtkWidget *calls_button;
   GtkWidget *sms_button;
   int count, row;
+  gboolean visible;
 
   devices = g_dbus_object_manager_get_objects (G_DBUS_OBJECT_MANAGER (self->mm_manager));
   count = g_list_length (devices);
@@ -197,20 +198,11 @@ update_modem_apps_visibility (CcDefaultAppsPanel *self)
   gtk_grid_query_child (GTK_GRID (self->default_apps_grid), self->sms_label, NULL, &row, NULL, NULL);
   sms_button = gtk_grid_get_child_at (GTK_GRID (self->default_apps_grid), 1, row);
 
-  if (count > 0)
-    {
-      gtk_widget_show (self->calls_label);
-      gtk_widget_show (self->sms_label);
-      gtk_widget_show (calls_button);
-      gtk_widget_show (sms_button);
-    }
-  else
-    {
-      gtk_widget_hide (self->calls_label);
-      gtk_widget_hide (self->sms_label);
-      gtk_widget_hide (calls_button);
-      gtk_widget_hide (sms_button);
-    }
+  visible = count > 0;
+  gtk_widget_set_visible (self->calls_label, visible);
+  gtk_widget_set_visible (self->sms_label, visible);
+  gtk_widget_set_visible (calls_button, visible);
+  gtk_widget_set_visible (sms_button, visible);
 
   g_list_free_full (devices, (GDestroyNotify)g_object_unref);
 }
