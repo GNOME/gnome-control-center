@@ -547,13 +547,13 @@ set_virtualization_label (CcInfoOverviewPanel *self,
 
   if (virt == NULL || *virt == '\0')
     {
-      gtk_widget_hide (GTK_WIDGET (self->virtualization_row));
-      gtk_widget_hide (GTK_WIDGET (self->firmware_version_row));
+      gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->firmware_version_row), FALSE);
 
       return;
     }
 
-  gtk_widget_show (GTK_WIDGET (self->virtualization_row));
+  gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), TRUE);
 
   display_name = NULL;
   for (i = 0; i < G_N_ELEMENTS (virt_tech); i++)
@@ -929,7 +929,7 @@ cc_info_overview_panel_init (CcInfoOverviewPanel *self)
   g_resources_register (cc_info_overview_get_resource ());
 
   if ((!does_gnome_software_exist () || !does_gnome_software_allow_updates ()) && !does_gpk_update_viewer_exist ())
-    gtk_widget_hide (GTK_WIDGET (self->software_updates_row));
+    gtk_widget_set_visible (GTK_WIDGET (self->software_updates_row), FALSE);
 
   info_overview_panel_setup_overview (self);
   info_overview_panel_setup_virt (self);
