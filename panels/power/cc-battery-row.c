@@ -277,10 +277,10 @@ cc_battery_row_new (UpDevice *device,
   if (is_kind_battery && icon_name != NULL && icon_name[0] != '\0')
     {
       gtk_image_set_from_icon_name (self->icon, icon_name);
-      gtk_widget_show (GTK_WIDGET (self->icon));
+      gtk_widget_set_visible (GTK_WIDGET (self->icon), TRUE);
     }
   else
-    gtk_widget_hide (GTK_WIDGET (self->icon));
+    gtk_widget_set_visible (GTK_WIDGET (self->icon), FALSE);
 
   /* Percentage label */
   if (battery_level == UP_DEVICE_LEVEL_NONE)
