@@ -148,7 +148,7 @@ format_chooser_back_button_clicked_cb (CcFormatChooser *self)
   gtk_window_set_title (GTK_WINDOW (self), _("Formats"));
   adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->region_box);
   gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
-  gtk_widget_show (self->done_button);
+  gtk_widget_set_visible (self->done_button, TRUE);
 }
 
 static void
@@ -196,7 +196,7 @@ format_chooser_leaflet_fold_changed_cb (CcFormatChooser *self)
       gtk_window_set_title (GTK_WINDOW (self), _("Formats"));
       adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->region_box);
       gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->cancel_button);
-      gtk_widget_show (self->done_button);
+      gtk_widget_set_visible (self->done_button, TRUE);
     }
 }
 
@@ -219,7 +219,7 @@ preview_button_clicked_cb (CcFormatChooser *self,
 
   adw_leaflet_set_visible_child (ADW_LEAFLET (self->main_leaflet), self->preview_box);
   gtk_stack_set_visible_child (GTK_STACK (self->title_buttons), self->back_button);
-  gtk_widget_hide (self->done_button);
+  gtk_widget_set_visible (self->done_button, FALSE);
 
   if (locale_name)
     gtk_window_set_title (GTK_WINDOW (self), locale_name);
@@ -255,7 +255,6 @@ region_widget_new (CcFormatChooser *self,
         button = gtk_button_new_from_icon_name ("view-layout-symbolic");
         g_signal_connect_object (button, "clicked", G_CALLBACK (preview_button_clicked_cb),
                                  self, G_CONNECT_SWAPPED);
-        gtk_widget_show (button);
         gtk_box_append (GTK_BOX (box), button);
 
         g_object_set_data (G_OBJECT (row), "check", check);
