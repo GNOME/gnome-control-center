@@ -401,7 +401,7 @@ reset_titlebar (CcDisplayPanel *self)
 {
   gtk_event_controller_set_propagation_phase (GTK_EVENT_CONTROLLER (self->toplevel_shortcuts),
                                               GTK_PHASE_NONE);
-  gtk_widget_hide (self->apply_titlebar);
+  gtk_widget_set_visible (self->apply_titlebar, FALSE);
 }
 
 static void
@@ -697,7 +697,7 @@ move_display_settings_to_main_page (CcDisplayPanel *self)
                              GTK_WIDGET (self->settings));
   g_object_unref (self->settings);
 
-  gtk_widget_show (GTK_WIDGET (self->single_display_settings_group));
+  gtk_widget_set_visible (GTK_WIDGET (self->single_display_settings_group), TRUE);
 }
 
 static void
@@ -715,7 +715,7 @@ move_display_settings_to_separate_page (CcDisplayPanel *self)
                      GTK_WIDGET (self->settings));
   g_object_unref (self->settings);
 
-  gtk_widget_hide (GTK_WIDGET (self->single_display_settings_group));
+  gtk_widget_set_visible (GTK_WIDGET (self->single_display_settings_group), FALSE);
 }
 
 static void
@@ -922,7 +922,7 @@ on_screen_changed (CcDisplayPanel *panel)
 static void
 show_apply_titlebar (CcDisplayPanel *panel, gboolean is_applicable)
 {
-  gtk_widget_show (panel->apply_titlebar);
+  gtk_widget_set_visible (panel->apply_titlebar, TRUE);
   gtk_widget_set_sensitive (panel->apply_button, is_applicable);
 
   if (is_applicable)
