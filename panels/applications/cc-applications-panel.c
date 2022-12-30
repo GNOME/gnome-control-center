@@ -901,7 +901,7 @@ update_integration_section (CcApplicationsPanel *self,
     }
   else
     {
-      gtk_widget_hide (GTK_WIDGET (self->shortcuts));
+      gtk_widget_set_visible (GTK_WIDGET (self->shortcuts), FALSE);
     }
 
 #ifdef HAVE_SNAP
@@ -970,17 +970,17 @@ update_integration_section (CcApplicationsPanel *self,
       gtk_widget_set_visible (GTK_WIDGET (self->notification), set);
       has_any |= set;
 
-      gtk_widget_hide (GTK_WIDGET (self->background));
-      gtk_widget_hide (GTK_WIDGET (self->wallpaper));
-      gtk_widget_hide (GTK_WIDGET (self->screenshot));
-      gtk_widget_hide (GTK_WIDGET (self->sound));
-      gtk_widget_hide (GTK_WIDGET (self->no_sound));
-      gtk_widget_hide (GTK_WIDGET (self->camera));
-      gtk_widget_hide (GTK_WIDGET (self->no_camera));
-      gtk_widget_hide (GTK_WIDGET (self->microphone));
-      gtk_widget_hide (GTK_WIDGET (self->no_microphone));
-      gtk_widget_hide (GTK_WIDGET (self->location));
-      gtk_widget_hide (GTK_WIDGET (self->no_location));
+      gtk_widget_set_visible (GTK_WIDGET (self->background), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->wallpaper), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->screenshot), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->sound), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->no_sound), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->camera), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->no_camera), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->microphone), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->no_microphone), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->location), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->no_location), FALSE);
     }
 
   gtk_widget_set_visible (GTK_WIDGET (self->integration_section), has_any);
@@ -1029,7 +1029,7 @@ add_scheme (CcApplicationsPanel *self,
   g_object_set_data_full (G_OBJECT (button), "type", g_strdup (type), g_free);
   g_signal_connect_object (button, "clicked", G_CALLBACK (unset_cb), self, G_CONNECT_SWAPPED);
 
-  gtk_widget_show (GTK_WIDGET (self->handler_link_group));
+  gtk_widget_set_visible (GTK_WIDGET (self->handler_link_group), TRUE);
   adw_preferences_group_add (self->handler_link_group, GTK_WIDGET (row));
 
   self->link_handler_rows = g_list_prepend (self->link_handler_rows, row);
@@ -1061,7 +1061,7 @@ add_file_type (CcApplicationsPanel *self,
   g_object_set_data_full (G_OBJECT (button), "type", g_strdup (type), g_free);
   g_signal_connect_object (button, "clicked", G_CALLBACK (unset_cb), self, G_CONNECT_SWAPPED);
 
-  gtk_widget_show (GTK_WIDGET (self->handler_file_group));
+  gtk_widget_set_visible (GTK_WIDGET (self->handler_file_group), TRUE);
   adw_preferences_group_add (self->handler_file_group, GTK_WIDGET (row));
 
   self->file_handler_rows = g_list_prepend (self->file_handler_rows, row);
@@ -1071,7 +1071,7 @@ static void
 add_handler_row (CcApplicationsPanel *self,
                  const gchar         *type)
 {
-  gtk_widget_show (GTK_WIDGET (self->handler_row));
+  gtk_widget_set_visible (GTK_WIDGET (self->handler_row), TRUE);
 
   if (g_content_type_is_a (type, "x-scheme-handler/*"))
     add_scheme (self, type);
@@ -1154,9 +1154,9 @@ update_handler_dialog (CcApplicationsPanel *self,
 
   remove_all_handler_rows (self);
 
-  gtk_widget_hide (GTK_WIDGET (self->handler_row));
-  gtk_widget_hide (GTK_WIDGET (self->handler_file_group));
-  gtk_widget_hide (GTK_WIDGET (self->handler_link_group));
+  gtk_widget_set_visible (GTK_WIDGET (self->handler_row), FALSE);
+  gtk_widget_set_visible (GTK_WIDGET (self->handler_file_group), FALSE);
+  gtk_widget_set_visible (GTK_WIDGET (self->handler_link_group), FALSE);
 
   types = g_app_info_get_supported_types (info);
   if (types == NULL || types[0] == NULL)
@@ -1414,7 +1414,7 @@ update_panel (CcApplicationsPanel *self,
     {
       adw_window_title_set_title (self->header_title, _("Applications"));
       gtk_stack_set_visible_child (self->stack, self->empty_box);
-      gtk_widget_hide (GTK_WIDGET (GTK_WIDGET (self->view_details_button)));
+      gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), FALSE);
       return;
     }
 
