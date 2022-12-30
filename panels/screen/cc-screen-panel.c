@@ -230,7 +230,7 @@ on_usb_protection_param_ready (GObject      *source_object,
                      error->message);
         }
 
-      gtk_widget_hide (GTK_WIDGET (self->usb_protection_row));
+      gtk_widget_set_visible (GTK_WIDGET (self->usb_protection_row), FALSE);
       return;
     }
   self->usb_proxy = proxy;
