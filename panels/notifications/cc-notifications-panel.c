@@ -458,7 +458,7 @@ select_app (CcNotificationsPanel *panel,
 
   dialog = cc_app_notifications_dialog_new (app_id, g_app_info_get_name (app->app_info), app->settings, panel->master_settings, panel->perm_store);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static int
