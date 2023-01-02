@@ -575,12 +575,11 @@ setup_language_section (CcRegionPage *self)
 static void
 update_login_region (CcRegionPage *self)
 {
+        const gchar *region = get_effective_region (self, SYSTEM);
         g_autofree gchar *name = NULL;
 
-        if (self->system_region)
-                name = gnome_get_country_from_locale (self->system_region, self->system_region);
-        else if (self->system_language)
-                name = gnome_get_country_from_locale (self->system_language, self->system_language);
+        if (region)
+                name = gnome_get_country_from_locale (region, region);
 
         if (!name)
                 name = gnome_get_country_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
