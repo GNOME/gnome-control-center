@@ -75,7 +75,6 @@
             "config-opts" : [
                 "--disable-polkitd",
                 "--disable-man-pages",
-                "--disable-introspection",
                 "--disable-examples",
                 "--disable-gtk-doc",
                 "--disable-libelogind",
@@ -616,6 +615,141 @@
                 }
             ]
         },
+        {
+            "name" : "mutter",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dgles2=false",
+                "-Dglx=false",
+                "-Dwayland=false",
+                "-Dsystemd=false",
+                "-Dnative_backend=false",
+                "-Dremote_desktop=false",
+                "-Degl_device=false",
+                "-Dudev=false",
+                "-Dstartup_notification=false",
+                "-Dsm=false",
+                "-Dintrospection=true",
+                "-Ddocs=false",
+                "-Dtests=false",
+                "-Dprofiler=false"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "branch" : "main",
+                    "url" : "https://gitlab.gnome.org/gnome/mutter.git"
+                }
+            ]
+        },
+        {
+            "name" : "libical",
+            "buildsystem" : "cmake",
+            "config-opts" : [
+                "-DICAL_BUILD_DOCS=false",
+                "-DICAL_GLIB=true",
+                "-DLIBICAL_BUILD_TESTING=false"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/libical/libical.git"
+                }
+            ]
+        },
+        {
+            "name" : "evolution-data-server",
+            "buildsystem" : "cmake",
+            "config-opts" : [
+                "-DWITH_LIBDB=OFF"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/evolution-data-server.git"
+                }
+            ]
+        },
+        {
+            "name" : "libstartup-notification",
+            "buildsystem" : "autotools",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.freedesktop.org/xdg/startup-notification.git"
+                }
+            ]
+        },
+        {
+            "name" : "sassc",
+            "buildsystem" : "simple",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/sass/libsass"
+                },
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/sass/sassc.git",
+                    "dest" : "sassc"
+                }
+            ],
+            "build-commands" : [
+                "make -C sassc",
+                "PREFIX=/app make -C sassc install"
+            ]
+        },
+        {
+            "name" : "cogl",
+            "buildsystem" : "autotools",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "tag" : "cogl-1.22",
+                    "url" : "https://gitlab.gnome.org/Archive/cogl.git"
+                }
+            ]
+        },
+        {
+            "name" : "clutter",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dbackends='system'",
+                "-Ddrivers='all'",
+                "-Dbuild_tests=false",
+                "-Dbuild_examples=false",
+                "-Ddocumentation=false",
+                "-Dintrospection=true",
+                "-Dpixbuf_tests=false"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://gitlab.gnome.org/GNOME/clutter.git"
+                }
+            ]
+        },
+        {
+            "name" : "gnome-shell",
+            "buildsystem" : "meson",
+            "config-opts" : [
+                "-Dextensions_tool=false",
+                "-Dextensions_app=false",
+                "-Dgtk_doc=false",
+                "-Dman=false",
+                "-Dtests=false",
+                "-Dnetworkmanager=false",
+                "-Dsystemd=false"
+            ],
+            "sources" : [
+                {
+                    "type" : "git",
+                    "branch" : "main",
+                    "url" : "https://gitlab.gnome.org/GNOME/gnome-shell.git"
+                }
+            ]
+        },
+
         {
             "name" : "gnome-backgrounds",
             "buildsystem" : "meson",
