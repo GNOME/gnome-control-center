@@ -26,7 +26,7 @@ widget_set_error (GtkWidget *widget)
 {
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	gtk_style_context_add_class (gtk_widget_get_style_context (widget), "error");
+	gtk_widget_add_css_class (widget, "error");
 }
 
 void
@@ -34,5 +34,5 @@ widget_unset_error (GtkWidget *widget)
 {
 	g_return_if_fail (GTK_IS_WIDGET (widget));
 
-	gtk_style_context_remove_class (gtk_widget_get_style_context (widget), "error");
+	gtk_widget_remove_css_class (widget, "error");
 }

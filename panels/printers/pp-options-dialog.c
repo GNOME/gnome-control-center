@@ -331,7 +331,6 @@ ipp_option_add (IPPAttribute *attr_supported,
                 GtkWidget    *grid,
                 gboolean      sensitive)
 {
-  GtkStyleContext *context;
   GtkWidget       *widget;
   GtkWidget       *label;
   gint             position;
@@ -349,8 +348,7 @@ ipp_option_add (IPPAttribute *attr_supported,
       label = gtk_label_new (option_display_name);
       gtk_widget_show (GTK_WIDGET (label));
       gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
-      context = gtk_widget_get_style_context (label);
-      gtk_style_context_add_class (context, "dim-label");
+      gtk_widget_add_css_class (label, "dim-label");
       gtk_widget_set_halign (label, GTK_ALIGN_END);
       gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
       gtk_widget_set_margin_start (label, 10);
@@ -369,7 +367,6 @@ ppd_option_add (ppd_option_t  option,
                 GtkWidget    *grid,
                 gboolean      sensitive)
 {
-  GtkStyleContext *context;
   GtkWidget       *widget;
   GtkWidget       *label;
   gint             position;
@@ -383,8 +380,7 @@ ppd_option_add (ppd_option_t  option,
 
       label = gtk_label_new (ppd_option_name_translate (&option));
       gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
-      context = gtk_widget_get_style_context (label);
-      gtk_style_context_add_class (context, "dim-label");
+      gtk_widget_add_css_class (label, "dim-label");
       gtk_widget_set_halign (label, GTK_ALIGN_END);
       gtk_widget_set_valign (label, GTK_ALIGN_CENTER);
       gtk_widget_set_margin_start (label, 10);

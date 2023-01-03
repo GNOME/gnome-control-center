@@ -142,7 +142,7 @@ run_warning (CcUsagePanel *self,
   gtk_dialog_set_default_response (GTK_DIALOG (dialog), FALSE);
 
   button = gtk_dialog_get_widget_for_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-  gtk_style_context_add_class (gtk_widget_get_style_context (button), "destructive-action");
+  gtk_widget_add_css_class (button, "destructive-action");
 
   gtk_window_present (GTK_WINDOW (dialog));
 

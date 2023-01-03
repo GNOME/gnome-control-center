@@ -577,7 +577,7 @@ create_row_for_place (CcSearchLocationsDialog *self, Place *place)
       remove_button = gtk_button_new_from_icon_name ("window-close-symbolic");
       g_object_set_data (G_OBJECT (remove_button), "place", place);
       gtk_widget_set_valign (remove_button, GTK_ALIGN_CENTER);
-      gtk_style_context_add_class (gtk_widget_get_style_context (remove_button), "flat");
+      gtk_widget_add_css_class (remove_button, "flat");
       adw_action_row_add_suffix (ADW_ACTION_ROW (widgets->row), remove_button);
 
       g_signal_connect_swapped (remove_button, "clicked",

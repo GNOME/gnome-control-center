@@ -186,7 +186,7 @@ add_location_app (CcLocationPanel *self,
   last_used_str = cc_util_get_smart_date (t);
   w = gtk_label_new (last_used_str);
   g_free (last_used_str);
-  gtk_style_context_add_class (gtk_widget_get_style_context (w), "dim-label");
+  gtk_widget_add_css_class (w, "dim-label");
   gtk_widget_set_margin_start (w, 12);
   gtk_widget_set_margin_end (w, 12);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);

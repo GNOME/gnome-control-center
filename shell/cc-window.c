@@ -865,7 +865,7 @@ cc_window_init (CcWindow *self)
 
   /* Add a custom CSS class on development builds */
   if (in_flatpak_sandbox ())
-    gtk_style_context_add_class (gtk_widget_get_style_context (GTK_WIDGET (self)), "devel");
+    gtk_widget_add_css_class (GTK_WIDGET (self), "devel");
 }
 
 CcWindow *

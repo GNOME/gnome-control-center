@@ -253,7 +253,6 @@ cc_color_device_clicked_expander_cb (CcColorDevice *color_device)
 static void
 cc_color_device_init (CcColorDevice *color_device)
 {
-  GtkStyleContext *context;
   GtkWidget *box;
 
   /* description */
@@ -290,8 +289,7 @@ cc_color_device_init (CcColorDevice *color_device)
 
   /* not calibrated */
   color_device->widget_nocalib = gtk_label_new (_("Not calibrated"));
-  context = gtk_widget_get_style_context (color_device->widget_nocalib);
-  gtk_style_context_add_class (context, "dim-label");
+  gtk_widget_add_css_class (color_device->widget_nocalib, "dim-label");
   gtk_widget_set_margin_end (color_device->widget_nocalib, 18);
   gtk_box_append (GTK_BOX (box), color_device->widget_nocalib);
 

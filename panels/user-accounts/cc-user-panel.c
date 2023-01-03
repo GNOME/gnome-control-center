@@ -913,8 +913,6 @@ show_user (ActUser *user, CcUserPanel *self)
             malcontent_control_path == NULL) {
                 gtk_widget_hide (GTK_WIDGET (self->parental_controls_row));
         } else {
-                GtkStyleContext *context = gtk_widget_get_style_context (GTK_WIDGET (self->parental_controls_button_label));
-
                 if (is_parental_controls_enabled_for_user (user))
                         /* TRANSLATORS: Status of Parental Controls setup */
                         gtk_label_set_text (self->parental_controls_button_label, _("Enabled"));
@@ -922,7 +920,7 @@ show_user (ActUser *user, CcUserPanel *self)
                         /* TRANSLATORS: Status of Parental Controls setup */
                         gtk_label_set_text (self->parental_controls_button_label, _("Disabled"));
 
-                gtk_style_context_remove_class (context, "dim-label");
+                gtk_widget_remove_css_class (GTK_WIDGET (self->parental_controls_button_label), "dim-label");
                 gtk_widget_show (GTK_WIDGET (self->parental_controls_row));
         }
 #endif

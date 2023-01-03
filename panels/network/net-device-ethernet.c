@@ -58,7 +58,7 @@ add_details_row (GtkWidget *details, gint top, const gchar *heading, const gchar
         GtkWidget *value_label;
 
         heading_label = gtk_label_new (heading);
-        gtk_style_context_add_class (gtk_widget_get_style_context (heading_label), "dim-label");
+        gtk_widget_add_css_class (heading_label, "dim-label");
         gtk_widget_set_halign (heading_label, GTK_ALIGN_END);
         gtk_widget_set_valign (heading_label, GTK_ALIGN_START);
         gtk_widget_set_hexpand (heading_label, TRUE);

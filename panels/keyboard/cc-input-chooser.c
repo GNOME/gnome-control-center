@@ -149,7 +149,7 @@ padded_label_new (const gchar        *text,
   set_row_widget_margins (label);
   gtk_box_append (GTK_BOX (widget), label);
   if (dim_label)
-    gtk_style_context_add_class (gtk_widget_get_style_context (label), "dim-label");
+    gtk_widget_add_css_class (label, "dim-label");
 
   if (direction == ROW_TRAVEL_DIRECTION_FORWARD)
     {

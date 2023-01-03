@@ -183,18 +183,18 @@ cc_wwan_apn_entry_changed_cb (CcWwanApnDialog *self)
   valid_name = str && *str;
 
   if (valid_name)
-    gtk_style_context_remove_class (gtk_widget_get_style_context (widget), "error");
+    gtk_widget_remove_css_class (widget, "error");
   else
-    gtk_style_context_add_class (gtk_widget_get_style_context (widget), "error");
+    gtk_widget_add_css_class (widget, "error");
 
   widget = GTK_WIDGET (self->apn_entry);
   str = gtk_editable_get_text (GTK_EDITABLE (self->apn_entry));
   valid_apn = str && *str;
 
   if (valid_apn)
-    gtk_style_context_remove_class (gtk_widget_get_style_context (widget), "error");
+    gtk_widget_remove_css_class (widget, "error");
   else
-    gtk_style_context_add_class (gtk_widget_get_style_context (widget), "error");
+    gtk_widget_add_css_class (widget, "error");
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->save_button), valid_name && valid_apn);
 }
@@ -253,7 +253,6 @@ cc_wwan_apn_dialog_row_new (CcWwanDataApn   *apn,
 {
   CcWwanApnRow *row;
   GtkWidget *grid, *name_label, *apn_label, *radio, *edit_button;
-  GtkStyleContext *context;
 
   row = g_object_new (CC_TYPE_WWAN_APN_ROW, NULL);
 
@@ -286,8 +285,7 @@ cc_wwan_apn_dialog_row_new (CcWwanDataApn   *apn,
   apn_label = gtk_label_new (cc_wwan_data_apn_get_apn (apn));
   gtk_label_set_ellipsize (GTK_LABEL (apn_label), PANGO_ELLIPSIZE_END);
   gtk_widget_set_halign (apn_label, GTK_ALIGN_START);
-  context = gtk_widget_get_style_context (apn_label);
-  gtk_style_context_add_class (context, "dim-label");
+  gtk_widget_add_css_class (apn_label, "dim-label");
   gtk_grid_attach (GTK_GRID (grid), apn_label, 1, 1, 1, 1);
 
   edit_button = gtk_button_new_from_icon_name ("emblem-system-symbolic");

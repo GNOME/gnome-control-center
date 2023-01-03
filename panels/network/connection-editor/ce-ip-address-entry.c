@@ -40,13 +40,11 @@ static void
 ce_ip_address_entry_changed (GtkEditable *editable)
 {
   CEIPAddressEntry *self = CE_IP_ADDRESS_ENTRY (editable);
-  GtkStyleContext *context;
 
-  context = gtk_widget_get_style_context (GTK_WIDGET (self));
   if (ce_ip_address_entry_is_valid (self))
-    gtk_style_context_remove_class (context, "error");
+    gtk_widget_remove_css_class (GTK_WIDGET (self), "error");
   else
-    gtk_style_context_add_class (context, "error");
+    gtk_widget_add_css_class (GTK_WIDGET (self), "error");
 }
 
 static void

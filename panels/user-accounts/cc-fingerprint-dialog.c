@@ -331,7 +331,6 @@ fingerprint_icon_new (const char *icon_name,
                       GtkWidget **out_icon,
                       GtkWidget **out_label)
 {
-  GtkStyleContext *context;
   GtkWidget *box;
   GtkWidget *label;
   GtkWidget *image;
@@ -362,14 +361,12 @@ fingerprint_icon_new (const char *icon_name,
 
   gtk_box_append (GTK_BOX (box), icon_widget);
 
-  context = gtk_widget_get_style_context (icon_widget);
-  gtk_style_context_add_class (context, "circular");
+  gtk_widget_add_css_class (icon_widget, "circular");
 
   label = gtk_label_new_with_mnemonic (label_text);
   gtk_box_append (GTK_BOX (box), label);
 
-  context = gtk_widget_get_style_context (box);
-  gtk_style_context_add_class (context, "fingerprint-icon");
+  gtk_widget_add_css_class (box, "fingerprint-icon");
 
   if (out_icon)
     *out_icon = icon_widget;
@@ -646,13 +643,10 @@ set_enroll_result_message (CcFingerprintDialog *self,
                            EnrollState          enroll_state,
                            const char          *message)
 {
-  GtkStyleContext *style_context;
   const char *icon_name;
   guint i;
 
   g_return_if_fail (enroll_state >= 0 && enroll_state < N_ENROLL_STATES);
-
-  style_context = gtk_widget_get_style_context (self->enroll_result_icon);
 
   switch (enroll_state)
     {
@@ -668,9 +662,9 @@ set_enroll_result_message (CcFingerprintDialog *self,
     }
 
   for (i = 0; i < N_ENROLL_STATES; ++i)
-    gtk_style_context_remove_class (style_context, ENROLL_STATE_CLASSES[i]);
+    gtk_widget_remove_css_class (self->enroll_result_icon, ENROLL_STATE_CLASSES[i]);
 
-  gtk_style_context_add_class (style_context, ENROLL_STATE_CLASSES[enroll_state]);
+  gtk_widget_add_css_class (self->enroll_result_icon, ENROLL_STATE_CLASSES[enroll_state]);
 
   gtk_image_set_from_icon_name (self->enroll_result_image, icon_name);
   gtk_label_set_label (self->enroll_result_message, message);
@@ -941,8 +935,6 @@ enroll_finger (CcFingerprintDialog *self,
 static void
 populate_enrollment_view (CcFingerprintDialog *self)
 {
-  GtkStyleContext *style_context;
-
   self->enroll_result_icon =
     fingerprint_icon_new ("fingerprint-detection-symbolic",
                           NULL,
@@ -953,8 +945,7 @@ populate_enrollment_view (CcFingerprintDialog *self)
 
   gtk_box_prepend (GTK_BOX (self->enroll_print_bin), self->enroll_result_icon);
 
-  style_context = gtk_widget_get_style_context (self->enroll_result_icon);
-  gtk_style_context_add_class (style_context,  "enroll-status");
+  gtk_widget_add_css_class (self->enroll_result_icon,  "enroll-status");
 }
 
 static void
@@ -1003,7 +994,6 @@ populate_prints_gallery (CcFingerprintDialog *self)
 {
   const char *add_print_label;
   GtkWidget *button;
-  GtkStyleContext *style_context;
   guint i;
 
   g_return_if_fail (!GTK_IS_WIDGET (self->add_print_icon));
@@ -1040,8 +1030,7 @@ populate_prints_gallery (CcFingerprintDialog *self)
   add_print_label = _("Scan new fingerprint");
   self->add_print_icon = fingerprint_menu_button ("list-add-symbolic",
                                                   add_print_label);
-  style_context = gtk_widget_get_style_context (self->add_print_icon);
-  gtk_style_context_add_class (style_context, "fingerprint-print-add");
+  gtk_widget_add_css_class (self->add_print_icon, "fingerprint-print-add");
 
   populate_add_print_popover (self);
   button = g_object_get_data (G_OBJECT (self->add_print_icon), "button");
