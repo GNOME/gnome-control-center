@@ -50,7 +50,6 @@ struct _CcMousePanel
   GtkStack          *stack;
   CcIllustratedRow  *tap_to_click_row;
   GtkSwitch         *tap_to_click_switch;
-  GtkButton         *test_button;
   AdwPreferencesGroup *touchpad_group;
   CcSplitRow        *touchpad_scroll_direction_row;
   CcSplitRow        *touchpad_scroll_method_row;
@@ -252,6 +251,8 @@ setup_dialog (CcMousePanel *self)
 {
   GtkToggleButton *button;
 
+  self->mouse_test = CC_MOUSE_TEST (cc_mouse_test_new ());
+
   gtk_widget_set_direction (GTK_WIDGET (self->primary_button_box), GTK_TEXT_DIR_LTR);
 
   self->left_handed = g_settings_get_boolean (self->mouse_settings, "left-handed");
@@ -386,12 +387,13 @@ cc_mouse_panel_get_help_uri (CcPanel *panel)
 }
 
 static void
-test_button_toggled_cb (CcMousePanel *self)
+test_button_clicked_cb (CcMousePanel *self)
 {
-  if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (self->test_button)))
-    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->mouse_test));
-  else
-    gtk_stack_set_visible_child (self->stack, GTK_WIDGET (self->preferences));
+  CcShell *shell = cc_panel_get_shell (CC_PANEL (self));
+
+  gtk_window_set_transient_for (GTK_WINDOW (self->mouse_test),
+                                GTK_WINDOW (cc_shell_get_toplevel (shell)));
+  gtk_window_present (GTK_WINDOW (self->mouse_test));
 }
 
 static void
@@ -442,7 +444,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_scroll_direction_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_speed_scale);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, mouse_test);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_box);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_left);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, primary_button_right);
@@ -450,7 +451,6 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, tap_to_click_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, test_button);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_group);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_scroll_direction_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_scroll_method_row);
@@ -459,5 +459,5 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, on_touchpad_scroll_method_changed_cb);
-  gtk_widget_class_bind_template_callback (widget_class, test_button_toggled_cb);
+  gtk_widget_class_bind_template_callback (widget_class, test_button_clicked_cb);
 }

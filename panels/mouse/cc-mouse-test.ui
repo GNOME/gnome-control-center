@@ -7,12 +7,25 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <template class="CcMouseTest" parent="AdwBin">
+  <template class="CcMouseTest" parent="AdwWindow">
+    <property name="width-request">1024</property>
+    <property name="height-request">600</property>
+    <property name="modal">True</property>
+    <property name="hide-on-close">True</property>
     <child>
       <object class="GtkBox" id="test_widget">
         <property name="hexpand">True</property>
         <property name="vexpand">True</property>
         <property name="orientation">vertical</property>
+        <child>
+          <object class="AdwHeaderBar">
+            <property name="title-widget">
+              <object class="AdwWindowTitle">
+                <property name="title" translatable="yes">Test Mouse &amp; Touchpad</property>
+              </object>
+            </property>
+          </object>
+        </child>
         <child>
           <object class="GtkScrolledWindow" id="scrolledwindow">
             <property name="hexpand">True</property>

@@ -12,11 +12,11 @@
           </object>
         </property>
         <child type="end">
-          <object class="GtkToggleButton" id="test_button">
+          <object class="GtkButton" id="test_button">
             <property name="use_underline">True</property>
             <property name="valign">center</property>
             <property name="label" translatable="yes">Test _Settings</property>
-            <signal name="toggled" handler="test_button_toggled_cb" object="CcMousePanel" swapped="yes"/>
+            <signal name="clicked" handler="test_button_clicked_cb" object="CcMousePanel" swapped="yes"/>
             <style>
               <class name="text-button"/>
             </style>
@@ -263,11 +263,6 @@ Pointer assistance is also known as pointer acceleration.</property>
               </object>
             </property>
 
-          </object>
-        </child>
-
-        <child>
-          <object class="CcMouseTest" id="mouse_test">
           </object>
         </child>
       </object>

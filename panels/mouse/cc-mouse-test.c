@@ -54,7 +54,7 @@ enum
 
 struct _CcMouseTest
 {
-	AdwBin parent_instance;
+	AdwWindow  parent_instance;
 
 	GtkWidget *button_drawing_area;
 	GtkWidget *information_label;
@@ -73,7 +73,7 @@ struct _CcMouseTest
 	gint scroll_image_timeout_id;
 };
 
-G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_BIN);
+G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_WINDOW);
 
 /* Timeout for the double click test */
 
