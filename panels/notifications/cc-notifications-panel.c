@@ -277,6 +277,26 @@ add_application (CcNotificationsPanel *self,
   g_hash_table_add (self->known_applications, g_strdup (app->canonical_app_id));
 }
 
+static gboolean
+app_is_system_service (GDesktopAppInfo *app)
+{
+  g_auto(GStrv) split = NULL;
+  const gchar *categories;
+
+  categories = g_desktop_app_info_get_categories (app);
+  if (categories == NULL || categories[0] == '\0')
+    return FALSE;
+
+  split = g_strsplit (categories, ";", -1);
+  if (g_strv_contains ((const gchar* const*) split, "X-GNOME-Settings-Panel") ||
+      g_strv_contains ((const gchar* const*) split, "Settings") ||
+      g_strv_contains ((const gchar* const*) split, "System")) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
 static void
 maybe_add_app_id (CcNotificationsPanel *self,
                   const char *canonical_app_id)
@@ -304,6 +324,11 @@ maybe_add_app_id (CcNotificationsPanel *self,
     g_debug ("Not adding application '%s' (canonical app ID: %s)",
              full_app_id, canonical_app_id);
     /* The application cannot be found, probably it was uninstalled */
+    return;
+  }
+
+  if (app_is_system_service (G_DESKTOP_APP_INFO (app_info))) {
+    /* We don't want to show system services in the notification list */
     return;
   }
 
@@ -396,6 +421,11 @@ load_apps (CcNotificationsPanel *self)
 
       app = iter->data;
       if (g_desktop_app_info_get_boolean (app, "X-GNOME-UsesNotifications")) {
+        if (app_is_system_service (app)) {
+          g_debug ("Skipped app '%s', as it is a system service", g_app_info_get_id (G_APP_INFO (app)));
+          continue;
+        }
+
         process_app_info (self, G_APP_INFO (app));
         g_debug ("Processing app '%s'", g_app_info_get_id (G_APP_INFO (app)));
       } else {
