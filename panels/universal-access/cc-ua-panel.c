@@ -223,6 +223,7 @@ cc_ua_panel_init (CcUaPanel *self)
                                     "/org/gnome/control-center/universal-access/icons");
 
   gtk_widget_init_template (GTK_WIDGET (self));
+  ua_panel_visible_child_changed_cb (self);
 
   self->a11y_settings = g_settings_new (A11Y_SETTINGS);
   g_settings_bind (self->a11y_settings, KEY_ALWAYS_SHOW_STATUS,
