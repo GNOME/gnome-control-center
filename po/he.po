@@ -5,15 +5,15 @@
 # Gil 'Dolfin' Osher <dolfin@rpg.org.il>, 2002,2003.
 # Yuval Tanny, 2005.
 # Yaron Shahrabani <sh.yaron@gmail.com>, 2010, 2011.
-# Yosef Or Boczko <yoseforb@gmail.com>, 2013-2022.
+# Yosef Or Boczko <yoseforb@gmail.com>, 2013-2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-11-26 12:27+0000\n"
-"PO-Revision-Date: 2022-12-05 10:42+0200\n"
+"POT-Creation-Date: 2023-01-04 19:16+0000\n"
+"PO-Revision-Date: 2023-01-05 13:33+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <>\n"
 "Language: he\n"
@@ -50,7 +50,7 @@ msgid "Full access to /dev"
 msgstr "גישה מלאה אל ‎/dev"
 
 #: panels/applications/cc-applications-panel.c:832
-#: panels/network/cc-network-panel.c:770
+#: panels/network/cc-network-panel.c:758
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
 #: panels/wwan/cc-wwan-network-dialog.ui:5
@@ -92,11 +92,11 @@ msgstr "ניתן לשנות הגדרות"
 #: panels/applications/cc-applications-panel.c:850
 #, c-format
 msgid ""
-"%s has the following permissions built-in. These cannot be altered. If you "
-"are concerned about these permissions, consider removing this application."
+"%s requires access to the following system resources. To stop this access, "
+"the application must be removed."
 msgstr ""
-"ליישום %s יש את ההרשאות הבאות בצורה מובנית. לא ניתן לשנות זאת. אם הדבר מדאיג "
-"אותך, כדאי לשקול את הסרת היישום."
+"היישום ‏%s דורש גישה למשאבי המערכת הבאים. על מנת למנוע את הגישה, יש להסיר את "
+"היישום."
 
 #: panels/applications/cc-applications-panel.c:1192
 #, c-format
@@ -135,20 +135,18 @@ msgid "Install some…"
 msgstr "מתבצעת התקנה…"
 
 #: panels/applications/cc-applications-panel.ui:84
-#: panels/network/wireless-security/ws-file-chooser-button.c:96
 msgid "Open"
 msgstr "פתיחה"
 
 #: panels/applications/cc-applications-panel.ui:94
-msgid "View Details"
-msgstr "הצגת פרטים"
+msgid "App Details"
+msgstr "פרטי יישום"
 
 #: panels/applications/cc-applications-panel.ui:112
 #: panels/applications/cc-applications-panel.ui:119
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:75
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:63
-#: panels/printers/new-printer-dialog.ui:252
+#: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
 #: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
 msgid "Search"
@@ -156,8 +154,8 @@ msgstr "חיפוש"
 
 #: panels/applications/cc-applications-panel.ui:113
 #: panels/applications/cc-applications-panel.ui:120
-msgid "Receive system searches and send results."
-msgstr "קבלת חיפושי מערכת ושליחת התוצאות."
+msgid "Receive system searches and send results"
+msgstr "קבלת חיפושי מערכת ושליחת התוצאות"
 
 #. This label is displayed in a treeview cell displaying
 #. * a disabled accelerator key combination.
@@ -173,9 +171,9 @@ msgstr "קבלת חיפושי מערכת ושליחת התוצאות."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:802
-#: panels/user-accounts/cc-user-panel.c:905
-#: panels/wwan/cc-wwan-device-page.c:478
+#: panels/user-accounts/cc-user-panel.c:820
+#: panels/user-accounts/cc-user-panel.c:923
+#: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "מושבת"
@@ -186,24 +184,24 @@ msgid "Notifications"
 msgstr "התראות"
 
 #: panels/applications/cc-applications-panel.ui:127
-msgid "Show system notifications."
-msgstr "הצגת התראות מערכת."
+msgid "Show system notifications"
+msgstr "הצגת התראות מערכת"
 
 #: panels/applications/cc-applications-panel.ui:133
 msgid "Run in Background"
 msgstr "פעילות ברקע"
 
 #: panels/applications/cc-applications-panel.ui:134
-msgid "Allow activity when the app is closed."
-msgstr "לאפשר פעילות כשהיישום סגור."
+msgid "Allow activity when the app is closed"
+msgstr "לאפשר פעילות כשהיישום סגור"
 
 #: panels/applications/cc-applications-panel.ui:140
 msgid "Screenshots"
 msgstr "צילומי מסך"
 
 #: panels/applications/cc-applications-panel.ui:141
-msgid "Take pictures of the screen at any time."
-msgstr "צילום המסך בכל רגע."
+msgid "Take pictures of the screen at any time"
+msgstr "צילום המסך בכל רגע"
 
 #: panels/applications/cc-applications-panel.ui:147
 msgid "Change Wallpaper"
@@ -219,17 +217,20 @@ msgid "Sounds"
 msgstr "שמע"
 
 #: panels/applications/cc-applications-panel.ui:155
-#: panels/applications/cc-applications-panel.ui:162
 msgid "Reproduce sounds."
 msgstr "הפקת צלילים."
+
+#: panels/applications/cc-applications-panel.ui:162
+msgid "Reproduce sounds"
+msgstr "הפקת צלילים"
 
 #: panels/applications/cc-applications-panel.ui:168
 msgid "Inhibit Shortcuts"
 msgstr "מניעת צירופי מקשים"
 
 #: panels/applications/cc-applications-panel.ui:169
-msgid "Block standard keyboard shortcuts."
-msgstr "חסימת צירופי מקשי המערכת הרגילים."
+msgid "Block standard keyboard shortcuts"
+msgstr "חסימת צירופי מקשי המערכת הרגילים"
 
 #: panels/applications/cc-applications-panel.ui:175
 #: panels/applications/cc-applications-panel.ui:182
@@ -239,8 +240,8 @@ msgstr "מצלמה"
 
 #: panels/applications/cc-applications-panel.ui:176
 #: panels/applications/cc-applications-panel.ui:183
-msgid "Take pictures with the camera."
-msgstr "צילום עם המצלמה."
+msgid "Take pictures with the camera"
+msgstr "צילום תמונות עם המצלמה"
 
 #: panels/applications/cc-applications-panel.ui:189
 #: panels/applications/cc-applications-panel.ui:196
@@ -250,8 +251,8 @@ msgstr "מיקרופון"
 
 #: panels/applications/cc-applications-panel.ui:190
 #: panels/applications/cc-applications-panel.ui:197
-msgid "Record audio with the microphone."
-msgstr "הקלטת שמע עם המיקרופון."
+msgid "Record audio with the microphone"
+msgstr "הקלטת שמע עם המיקרופון"
 
 #: panels/applications/cc-applications-panel.ui:203
 #: panels/applications/cc-applications-panel.ui:210
@@ -261,17 +262,17 @@ msgstr "שירותי איכון"
 
 #: panels/applications/cc-applications-panel.ui:204
 #: panels/applications/cc-applications-panel.ui:211
-msgid "Access device location data."
-msgstr "גישה לנתוני המיקום של המכשיר."
+msgid "Access device location data"
+msgstr "גישה לנתוני המיקום של המכשיר"
 
 #: panels/applications/cc-applications-panel.ui:222
 #: panels/applications/cc-applications-panel.ui:326
-msgid "Built-in Permissions"
-msgstr "הרשאות מובנות"
+msgid "Required Access"
+msgstr "גישה נדרשת"
 
 #: panels/applications/cc-applications-panel.ui:223
 msgid "System access that is required by the app"
-msgstr "גישה למערכת לדרישת היישום"
+msgstr "גישה למערכת הנדרשת על ידי היישום"
 
 #: panels/applications/cc-applications-panel.ui:231
 msgid "File &amp; Link Associations"
@@ -286,9 +287,7 @@ msgstr "אחסון"
 msgid "No results found"
 msgstr "לא נמצאו תוצאות"
 
-#: panels/applications/cc-applications-panel.ui:311
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:210
-#: shell/cc-panel-list.ui:117
+#: panels/applications/cc-applications-panel.ui:311 shell/cc-panel-list.ui:117
 msgid "Try a different search"
 msgstr "יש לנסות חיפוש שונה"
 
@@ -353,9 +352,7 @@ msgstr "בחירת תמונה"
 #: panels/background/cc-background-chooser.c:315
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:31
-#: panels/info-overview/cc-info-overview-panel.ui:237
-#: panels/keyboard/cc-input-chooser.ui:11
+#: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:886
@@ -367,14 +364,14 @@ msgstr "בחירת תמונה"
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:522 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:479 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:592
 #: panels/user-accounts/cc-user-panel.c:610
+#: panels/user-accounts/cc-user-panel.c:628
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -385,7 +382,7 @@ msgstr "_ביטול"
 #: panels/background/cc-background-chooser.c:316
 #: panels/network/connection-editor/vpn-helpers.c:222
 #: panels/printers/pp-details-dialog.c:270
-#: panels/sharing/cc-sharing-panel.c:523
+#: panels/sharing/cc-sharing-panel.c:480
 #: panels/user-accounts/cc-avatar-chooser.c:168
 msgid "_Open"
 msgstr "_פתיחה"
@@ -444,9 +441,9 @@ msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr "רקע;תמונת רקע;צג;מסך;שולחן עבודה;סגנון;בהיר;כהה;סטייל;מראה;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
-#: panels/datetime/cc-datetime-panel.ui:172
+#: panels/datetime/cc-datetime-panel.ui:130
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
-#: panels/display/cc-night-light-page.ui:122
+#: panels/display/cc-night-light-page.ui:124
 #: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "לאפשר"
@@ -507,7 +504,9 @@ msgid "Camera is Turned Off"
 msgstr "המצלמה כבויה"
 
 #: panels/camera/cc-camera-panel.ui:25
-msgid "No applications can capture photos or video."
+#, fuzzy
+#| msgid "No applications can capture photos or video."
+msgid "No sandboxed applications can capture photos or video."
 msgstr "אף יישום לא יכול לצלם תמונה או סרטון."
 
 #: panels/camera/cc-camera-panel.ui:39
@@ -719,7 +718,6 @@ msgstr "פרופילי ICC נתמכים"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: panels/color/cc-color-panel.c:303
-#: panels/network/wireless-security/eap-method-fast.c:357
 msgid "All files"
 msgstr "כל הקבצים"
 
@@ -895,7 +893,7 @@ msgstr "_ייבוא קובץ…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:503
+#: panels/network/connection-editor/net-connection-editor.c:589
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1277,26 +1275,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "נקודה חמה"
 
-#: panels/datetime/cc-datetime-panel.c:175
+#: panels/datetime/cc-datetime-panel.c:165
 msgid "24-hour"
 msgstr "24 שעות"
 
-#: panels/datetime/cc-datetime-panel.c:177
+#: panels/datetime/cc-datetime-panel.c:167
 msgid "AM / PM"
 msgstr "AM / PM"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:248
+#: panels/datetime/cc-datetime-panel.c:238
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e ב%B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:253
+#: panels/datetime/cc-datetime-panel.c:243
 msgid "%e %B %Y, %R"
 msgstr "%e ב%B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:423
+#: panels/datetime/cc-datetime-panel.c:394
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1304,150 +1302,126 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:450
+#: panels/datetime/cc-datetime-panel.c:411
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#. Translators: UTC here means the Coordinated Universal Time.
-#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:457
-msgid "UTC%:::z"
-msgstr "UTC%:::z"
-
-#. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:462
-msgid "%l:%M %p"
-msgstr "‎%l:%M %p"
-
-#. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:467
-msgid "%R"
-msgstr "%R"
-
-#. Update the text bubble in the timezone map
-#. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:472
-#, c-format
-msgctxt "timezone map"
-msgid "%s (%s)"
-msgstr "%s (%s)"
-
-#: panels/datetime/cc-datetime-panel.ui:15
+#: panels/datetime/cc-datetime-panel.ui:9
 #: panels/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "תאריך ושעה"
 
-#: panels/datetime/cc-datetime-panel.ui:50
+#: panels/datetime/cc-datetime-panel.ui:45
 msgid "Year"
 msgstr "שנה"
 
-#: panels/datetime/cc-datetime-panel.ui:66
+#: panels/datetime/cc-datetime-panel.ui:61
 msgid "Month"
 msgstr "חודש"
 
-#: panels/datetime/cc-datetime-panel.ui:71
-msgid "January"
-msgstr "ינואר"
-
-#: panels/datetime/cc-datetime-panel.ui:72
-msgid "February"
-msgstr "פברואר"
-
-#: panels/datetime/cc-datetime-panel.ui:73
-msgid "March"
-msgstr "מרץ"
-
-#: panels/datetime/cc-datetime-panel.ui:74
-msgid "April"
-msgstr "אפריל"
-
-#: panels/datetime/cc-datetime-panel.ui:75
-msgid "May"
-msgstr "מאי"
-
-#: panels/datetime/cc-datetime-panel.ui:76
-msgid "June"
-msgstr "יוני"
-
-#: panels/datetime/cc-datetime-panel.ui:77
-msgid "July"
-msgstr "יולי"
-
-#: panels/datetime/cc-datetime-panel.ui:78
-msgid "August"
-msgstr "אוגוסט"
-
-#: panels/datetime/cc-datetime-panel.ui:79
-msgid "September"
-msgstr "ספטמבר"
-
-#: panels/datetime/cc-datetime-panel.ui:80
-msgid "October"
-msgstr "אוקטובר"
-
-#: panels/datetime/cc-datetime-panel.ui:81
-msgid "November"
-msgstr "נובמבר"
-
-#: panels/datetime/cc-datetime-panel.ui:82
-msgid "December"
-msgstr "דצמבר"
-
-#: panels/datetime/cc-datetime-panel.ui:92
+#: panels/datetime/cc-datetime-panel.ui:88
 msgid "Day"
 msgstr "יום"
 
-#: panels/datetime/cc-datetime-panel.ui:113
-msgid "Time Zone"
-msgstr "זמן"
-
-#: panels/datetime/cc-datetime-panel.ui:130
-msgid "Search for a city"
-msgstr "חיפוש עיר"
-
-#: panels/datetime/cc-datetime-panel.ui:164
+#: panels/datetime/cc-datetime-panel.ui:122
 msgid "Automatic _Date &amp; Time"
 msgstr "תאריך ושעה _אוטומטיים"
 
-#: panels/datetime/cc-datetime-panel.ui:165
+#: panels/datetime/cc-datetime-panel.ui:123
 msgid "Requires internet access"
 msgstr "נדרש חיבור לאינטרנט"
 
-#: panels/datetime/cc-datetime-panel.ui:180
+#: panels/datetime/cc-datetime-panel.ui:138
 msgid "Date &amp; _Time"
 msgstr "תאריך ו_שעה"
 
-#: panels/datetime/cc-datetime-panel.ui:204
+#: panels/datetime/cc-datetime-panel.ui:162
 msgid "Automatic Time _Zone"
 msgstr "אזור _זמן אוטומטי"
 
-#: panels/datetime/cc-datetime-panel.ui:205
+#: panels/datetime/cc-datetime-panel.ui:163
 msgid "Requires location services enabled and internet access"
 msgstr "נדרשת גישה לשירותי מיקום וחיבור לאינטרנט"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/datetime/cc-datetime-panel.ui:212
+#: panels/datetime/cc-datetime-panel.ui:170
 #: panels/display/cc-display-settings.ui:23
-#: panels/firmware-security/cc-firmware-security-utils.c:247
+#: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:39
 #: panels/screen/cc-screen-panel.ui:75 panels/screen/cc-screen-panel.ui:95
-#: panels/user-accounts/cc-user-panel.c:800
-#: panels/user-accounts/cc-user-panel.c:902
-#: panels/wwan/cc-wwan-device-page.c:476
+#: panels/user-accounts/cc-user-panel.c:818
+#: panels/user-accounts/cc-user-panel.c:920
+#: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "פעיל"
 
-#: panels/datetime/cc-datetime-panel.ui:220
+#: panels/datetime/cc-datetime-panel.ui:178
 msgid "Time Z_one"
 msgstr "_אזור זמן"
 
-#: panels/datetime/cc-datetime-panel.ui:245
+#: panels/datetime/cc-datetime-panel.ui:203
 msgid "Time _Format"
 msgstr "_תבנית זמן"
+
+#: panels/datetime/cc-datetime-panel.ui:247
+msgid "January"
+msgstr "ינואר"
+
+#: panels/datetime/cc-datetime-panel.ui:248
+msgid "February"
+msgstr "פברואר"
+
+#: panels/datetime/cc-datetime-panel.ui:249
+msgid "March"
+msgstr "מרץ"
+
+#: panels/datetime/cc-datetime-panel.ui:250
+msgid "April"
+msgstr "אפריל"
+
+#: panels/datetime/cc-datetime-panel.ui:251
+msgid "May"
+msgstr "מאי"
+
+#: panels/datetime/cc-datetime-panel.ui:252
+msgid "June"
+msgstr "יוני"
+
+#: panels/datetime/cc-datetime-panel.ui:253
+msgid "July"
+msgstr "יולי"
+
+#: panels/datetime/cc-datetime-panel.ui:254
+msgid "August"
+msgstr "אוגוסט"
+
+#: panels/datetime/cc-datetime-panel.ui:255
+msgid "September"
+msgstr "ספטמבר"
+
+#: panels/datetime/cc-datetime-panel.ui:256
+msgid "October"
+msgstr "אוקטובר"
+
+#: panels/datetime/cc-datetime-panel.ui:257
+msgid "November"
+msgstr "נובמבר"
+
+#: panels/datetime/cc-datetime-panel.ui:258
+msgid "December"
+msgstr "דצמבר"
+
+#: panels/datetime/cc-tz-dialog.ui:6
+msgid "Select Time Zone"
+msgstr "בחירת אזור זמן"
+
+#: panels/datetime/cc-tz-dialog.ui:40
+msgid "No Results"
+msgstr "לא נמצאו תוצאות"
 
 #: panels/datetime/gnome-datetime-panel.desktop.in:4
 msgid "Change the date and time, including time zone"
@@ -1612,7 +1586,7 @@ msgstr "צג ראשי"
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.ui:177
 #: panels/display/cc-display-panel.ui:216
-#: panels/display/cc-night-light-page.ui:115
+#: panels/display/cc-night-light-page.ui:117
 msgid "Night Light"
 msgstr "תאורת לילה"
 
@@ -1659,17 +1633,21 @@ msgstr "תדירות רענון"
 msgid "Adjust for TV"
 msgstr "התאמה לטלויזיה"
 
-#: panels/display/cc-display-settings.ui:78
-#: panels/display/cc-display-settings.ui:93
+#: panels/display/cc-display-settings.ui:79
+#: panels/display/cc-display-settings.ui:94
 msgctxt "display setting"
 msgid "Scale"
 msgstr "גודל"
 
-#: panels/display/cc-night-light-page.ui:22
-msgid "Night Light unavailable"
+#: panels/display/cc-night-light-page.c:269
+msgid "Night Light cannot be used from a virtual machine."
+msgstr "לא ניתן להשתמש בתאורת לילה ממכונה וירטואלית."
+
+#: panels/display/cc-night-light-page.ui:25
+msgid "Night Light Unavailable"
 msgstr "תאורת לילה לא זמינה"
 
-#: panels/display/cc-night-light-page.ui:31
+#: panels/display/cc-night-light-page.ui:33
 msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely"
@@ -1677,16 +1655,16 @@ msgstr ""
 "יתכן וזה כתוצאה מההתקן הגרפי שבשימוש, או מכך ששולחן העבודה בשימוש מרחוק"
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.ui:58
+#: panels/display/cc-night-light-page.ui:60
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "להשבית באופן זמני עד מחר"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.ui:72
+#: panels/display/cc-night-light-page.ui:74
 msgid "Restart Filter"
 msgstr "הפעלה מחדש של המסננים"
 
-#: panels/display/cc-night-light-page.ui:95
+#: panels/display/cc-night-light-page.ui:97
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1694,59 +1672,59 @@ msgstr ""
 "תאורת לילה משנה את צבע המסך לצבע חם יותר. אפשרות זו מפחיתה את העומס על "
 "העיניים הגורם לעייפות."
 
-#: panels/display/cc-night-light-page.ui:132
+#: panels/display/cc-night-light-page.ui:134
 msgid "Schedule"
 msgstr "לוח זמנים"
 
-#: panels/display/cc-night-light-page.ui:140
+#: panels/display/cc-night-light-page.ui:142
 msgid "Sunset to Sunrise"
 msgstr "מהשקיעה עד לזריחה"
 
-#: panels/display/cc-night-light-page.ui:141
+#: panels/display/cc-night-light-page.ui:143
 msgid "Manual Schedule"
 msgstr "לוח זמנים מותאם"
 
-#: panels/display/cc-night-light-page.ui:154
+#: panels/display/cc-night-light-page.ui:156
 #: panels/region/cc-format-preview.ui:35
 msgid "Times"
 msgstr "זמנים"
 
-#: panels/display/cc-night-light-page.ui:167
+#: panels/display/cc-night-light-page.ui:169
 msgid "From"
 msgstr "מ־"
 
-#: panels/display/cc-night-light-page.ui:192
-#: panels/display/cc-night-light-page.ui:279
+#: panels/display/cc-night-light-page.ui:194
+#: panels/display/cc-night-light-page.ui:281
 msgid "Hour"
 msgstr "שעה"
 
-#: panels/display/cc-night-light-page.ui:198
-#: panels/display/cc-night-light-page.ui:285
+#: panels/display/cc-night-light-page.ui:200
+#: panels/display/cc-night-light-page.ui:287
 msgid ":"
 msgstr ":"
 
-#: panels/display/cc-night-light-page.ui:215
-#: panels/display/cc-night-light-page.ui:302
+#: panels/display/cc-night-light-page.ui:217
+#: panels/display/cc-night-light-page.ui:304
 msgid "Minute"
 msgstr "דקה"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.ui:225
-#: panels/display/cc-night-light-page.ui:312
+#: panels/display/cc-night-light-page.ui:227
+#: panels/display/cc-night-light-page.ui:314
 msgid "AM"
 msgstr "AM"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.ui:237
-#: panels/display/cc-night-light-page.ui:324
+#: panels/display/cc-night-light-page.ui:239
+#: panels/display/cc-night-light-page.ui:326
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.ui:254
+#: panels/display/cc-night-light-page.ui:256
 msgid "To"
 msgstr "עד"
 
-#: panels/display/cc-night-light-page.ui:360
+#: panels/display/cc-night-light-page.ui:362
 msgid "Color Temperature"
 msgstr "טמפרטורת הצבע"
 
@@ -1755,8 +1733,8 @@ msgid "Displays"
 msgstr "צגים"
 
 #: panels/display/gnome-display-panel.desktop.in:4
-msgid "Choose how to use connected monitors and projectors"
-msgstr "בחירה כיצד להשתמש בצגים ובמקרנים מחוברים"
+msgid "Use Night Light and choose how to use connected monitors and projectors"
+msgstr "שימוש בתאורת לילה ובחירה כיצד להשתמש בצגים ובמקרנים מחוברים"
 
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in:15
@@ -1769,7 +1747,7 @@ msgstr ""
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
-#: panels/firmware-security/cc-firmware-security-panel.c:112
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "Secure Boot is Active"
 msgstr "הפעלה מאובטחת פעילה"
 
@@ -1847,159 +1825,185 @@ msgstr ""
 "\n"
 "למידע נוסף, יש ליצור קשר עם יצרן החומרה או עם תמיכת IT."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:96
-#: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-dialog.c:100
-msgid "Passed"
-msgstr "עבר"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:96
-#: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-dialog.c:100
-msgid "Failed"
-msgstr "נכשל"
-
-#. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
-#, c-format
-msgid "Device conforms to HSI level %d"
-msgstr "ההתקן תואם לרמת HSI (מזהה אבטחת מארח)‏ %d"
-
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:149
-#: panels/firmware-security/cc-firmware-security-panel.c:485
-msgid "Security Level 0"
-msgstr "רמת אבטחה 0"
+#: panels/firmware-security/cc-firmware-security-dialog.c:113
+#: panels/firmware-security/cc-firmware-security-panel.c:544
+msgid "Checks Failed"
+msgstr "בדיקות נכשלו"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:150
+#. TRANSLATORS: This is the description to describe the failure on
+#. checking the security items.
+#: panels/firmware-security/cc-firmware-security-dialog.c:116
 msgid ""
-"This device has no protection against hardware security issues. This could "
-"be because of a hardware or firmware configuration issue. It is recommended "
-"to contact your IT support provider."
+"Hardware does not pass checks. This means that you are not protected against "
+"common hardware security issues.\n"
+"\n"
+"It may be possible to resolve hardware security issues by updating your "
+"firmware or changing device configuration options. However, failures can "
+"stem from the physical hardware itself, and may not be reversible."
 msgstr ""
-"להתקן זה אין הגנה כנגד בעיות אבטחת חָמְרָה. יתכן וזה נובע מהגדרות חומרה או "
-"קָשְחה. מומלץ ליצור קשר עם ספק תמיכת ה־IT שלך."
+"החָמְרה לא עברה את הבדיקות. המשמעות לכך היא שההתקן שלך לא מוגן מפני בעיות "
+"אבטחה נפוצות.\n"
+"\n"
+"יתכן וניתן לפתור בעיות אבטחת חָמְרה אלו על ידי עדכון הקָשְחה או עם שינוי "
+"אפשרויות תצורת ההתקן. אולם, כישלון עשוי לנבוע מהחָמְרה הפיזית עצמה, ואף יתכן "
+"שהוא אינו הפיך."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:158
-#: panels/firmware-security/cc-firmware-security-dialog.c:357
-#: panels/firmware-security/cc-firmware-security-panel.c:492
-msgid "Security Level 1"
-msgstr "רמת אבטחה 1"
+#: panels/firmware-security/cc-firmware-security-dialog.c:127
+#: panels/firmware-security/cc-firmware-security-panel.c:551
+msgid "Checks Passed"
+msgstr "בדיקה עברה"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:159
+#. TRANSLATORS: This description describes the device passing the
+#. minimum requirement of security check.
+#: panels/firmware-security/cc-firmware-security-dialog.c:130
 msgid ""
-"This device has minimal protection against hardware security issues. This is "
-"the lowest device security level and only provides protection against simple "
-"security threats."
-msgstr ""
-"להתקן זה הגנה מזערית כנגד בעיות אבטחת חָמְרָה. זוהי הרמה הנמוכה ביותר של הגנת "
-"התקן המספקת הגנה למול איומי אבטחה בסיסיים בלבד."
+"Hardware meets security requirements. This device has protection against "
+"common hardware security threats."
+msgstr "החָמְרָה עומדת בדרישות האבטחה. להתקן זה הגנה מפני איומי אבטחה נפוצים."
 
-#. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:167
-#: panels/firmware-security/cc-firmware-security-dialog.c:362
-#: panels/firmware-security/cc-firmware-security-panel.c:499
-msgid "Security Level 2"
-msgstr "רמת אבטחה 2"
+#. TRANSLATORS: in reference to firmware protection: 2~4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:141
+#: panels/firmware-security/cc-firmware-security-panel.c:560
+msgid "Protected"
+msgstr "מוגן"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:168
+#. TRANSLATOR: This description describes the devices passing
+#. the extended security check.
+#: panels/firmware-security/cc-firmware-security-dialog.c:144
 msgid ""
-"This device has basic protection against hardware security issues. This "
-"provides protection against some common security threats."
+"Device hardware meets security requirements. This device has protection "
+"against a range of the most common hardware security threats."
 msgstr ""
-"להתקן זה הגנה בסיסית כנגד בעיות אבטחת חָמְרָה. זה מספק הגנה מפני איומי אבטחה "
-"נפוצים."
-
-#. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:176
-#: panels/firmware-security/cc-firmware-security-dialog.c:367
-#: panels/firmware-security/cc-firmware-security-panel.c:506
-msgid "Security Level 3"
-msgstr "רמת אבטחה 3"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:177
-msgid ""
-"This device has extended protection against hardware security issues. This "
-"is the highest device security level and provides protection against "
-"advanced security threats."
-msgstr ""
-"להתקן זה אבטחה מורחבת כנגד בעיות אבטחת חָמְרָה. זוהי הרמה הגבוה ביותר של הגנת "
-"התקן המספקת הגנה מפני איומי אבטחה מתקדמים."
+"התקן החָמְרָה עומד בדרישות האבטחה. להתקן זה הגנה מפני מנעד של מרבית איומי אבטחת "
+"החָמְרָה הנפוצים."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:185
-#: panels/firmware-security/cc-firmware-security-dialog.ui:22
-#: panels/firmware-security/cc-firmware-security-panel.c:521
-msgid "Security Level"
-msgstr "רמת אבטחה"
+#: panels/firmware-security/cc-firmware-security-dialog.c:152
+#: panels/firmware-security/cc-firmware-security-panel.c:567
+msgid "Checks Unavailable"
+msgstr "בדיקות לא זמינות"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:186
-#: panels/firmware-security/cc-firmware-security-panel.c:522
-msgid "Security levels are not available for this device."
-msgstr "רמות אבטחה אינן זמינות עבור התקן זה."
-
-#. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:201
-#: panels/firmware-security/cc-firmware-security-dialog.c:211
-#: panels/firmware-security/cc-firmware-security-dialog.c:218
-msgid "Contact your hardware manufacturer for help with security updates."
-msgstr "יש ליצור קשר עם יצרן החָמְרָה לעזרה בנושא עדכוני אבטחה."
-
-#. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:203
+#. TRANSLATORS: When the security result is unavailable, this description is shown.
+#: panels/firmware-security/cc-firmware-security-dialog.c:154
 msgid ""
-"It might be possible to resolve this issue in the device’s UEFI firmware "
-"settings, or by a support technician."
+"Device security checks are not available for this device. It is not possible "
+"to tell whether it meets security requirements."
 msgstr ""
-"יתכן שניתן לפתור בעיה זו בהגדרות קָשְחת UEFI של ההתקן, או על ידי תמיכה טכנית."
+"בדיקת אבטחת התקן אינה זמינה להתקן זה. לא ניתן לדעת האם ההתקן עומד בדרישות "
+"האבטחה."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:212
-#: panels/firmware-security/cc-firmware-security-dialog.c:223
+#: panels/firmware-security/cc-firmware-security-dialog.c:188
+#: panels/info-overview/cc-info-overview-panel.c:294
+#: panels/info-overview/cc-info-overview-panel.c:314
+#: panels/info-overview/cc-info-overview-panel.c:355
+#: panels/info-overview/cc-info-overview-panel.c:385
+#: panels/wwan/cc-wwan-details-dialog.c:100
+msgid "Unknown"
+msgstr "לא ידוע"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:270
+msgid "Device Security Report"
+msgstr "דו״ח אבטחת התקן"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:273
+msgid "Report details"
+msgstr "פרטי דיווח"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:277
+msgid "Date generated:"
+msgstr "תאריך יצירה:"
+
+#. TRANSLATOR: This is the title for showing the version of fwupd service.
+#: panels/firmware-security/cc-firmware-security-dialog.c:285
+msgid "fwupd version:"
+msgstr "גרסת fwupd:"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:294
+msgid "Hardware model:"
+msgstr "דגם חָמְרה:"
+
+#. TRANSLATOR: "Processor" indicates the CPU model name.
+#: panels/firmware-security/cc-firmware-security-dialog.c:301
+msgid "Processor:"
+msgstr "מעבד:"
+
+#. TRANSLATOR: "OS" indicates the OS name, ex: Fedora 38.
+#: panels/firmware-security/cc-firmware-security-dialog.c:307
+msgid "OS:"
+msgstr "מערכת הפעלה:"
+
+#. TRANSLATOR: This is the title for device security level.
+#: panels/firmware-security/cc-firmware-security-dialog.c:313
+msgid "Security level:"
+msgstr "רמת אבטחה:"
+
+#. TRANSLATOR: This is the postfix of "HSI-n Tests" title.
+#: panels/firmware-security/cc-firmware-security-dialog.c:343
+msgid "Tests"
+msgstr "בדיקות"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:348
+msgid "Runtime Tests"
+msgstr "בדיקות זמן ריצה"
+
+#. Passed
+#. TRANSLATOR: If the status for security attribute is success, "Pass " is shown.
+#. TRANSLATOR: This is the text event status output when the event status is "success"
+#: panels/firmware-security/cc-firmware-security-dialog.c:367
+#: panels/firmware-security/cc-firmware-security-panel.c:231
+msgid "Pass"
+msgstr "עבר"
+
+#. Failed
+#. TRANSLATOR: If the status for security attribute is success, "! Fail " is shown.
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
+#: panels/firmware-security/cc-firmware-security-dialog.c:374
+#: panels/firmware-security/cc-firmware-security-panel.c:234
+msgid "! Fail"
+msgstr "נכשל!"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:386
+msgid "Host security events"
+msgstr "אירועי אבטחת המארח"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:390
 msgid ""
-"It might be possible to resolve this issue in the device’s UEFI firmware "
-"settings."
-msgstr "יתכן שניתן לפתור בעיה זו בהגדרות קָשְחת UEFI של ההתקן."
+"For information on the contents of this report, see https://fwupd.github.io/"
+"hsi.html"
+msgstr "מידע על תוכן הדיווח באתר https://fwupd.github.io/hsi.html"
 
-#. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:229
-msgid "It might be possible for a support technician to resolve this issue."
-msgstr "ייתכן שניתן לפתור בעיה זו על ידי תמיכה טכנית."
+#: panels/firmware-security/cc-firmware-security-dialog.c:395
+msgid "Report copied to clipboard"
+msgstr "הדיווח הועתק ללוח הגזירים"
 
-#: panels/firmware-security/cc-firmware-security-dialog.ui:88
-msgid "Level 1"
-msgstr "רמת 1"
+#: panels/firmware-security/cc-firmware-security-dialog.ui:22
+msgid "Device Security Status"
+msgstr "מצב אבטחת התקן"
 
-#: panels/firmware-security/cc-firmware-security-dialog.ui:124
-msgid "Level 2"
-msgstr "רמת 2"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:160
-msgid "Level 3"
-msgstr "רמת 3"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:113
+#: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Protected against malicious software when the device starts."
 msgstr "הגנה כנגד תכנות זדוניות בזמן הפעלת ההתקן."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:119
+#: panels/firmware-security/cc-firmware-security-panel.c:126
 msgid "Secure Boot has Problems"
 msgstr "יש בעיות בהפעלה מאובטחת"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:120
+#: panels/firmware-security/cc-firmware-security-panel.c:127
 msgid "Some protection when the device is started."
 msgstr "קצת הגנה בזמן שההתקן מופעל."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:125
+#: panels/firmware-security/cc-firmware-security-panel.c:132
 msgid "Secure Boot is Off"
 msgstr "הפעלה מאובטחת כבויה"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:126
+#: panels/firmware-security/cc-firmware-security-panel.c:133
 msgid "No protection when the device is started."
 msgstr "אין הגנה בזמן שההתקן מופעל."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:145
+#: panels/firmware-security/cc-firmware-security-panel.c:152
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -2009,7 +2013,7 @@ msgstr ""
 "או בגלל תכנה זדונית במערכת זו."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:153
+#: panels/firmware-security/cc-firmware-security-panel.c:160
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
@@ -2018,7 +2022,7 @@ msgstr ""
 "זו."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:160
+#: panels/firmware-security/cc-firmware-security-panel.c:167
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
@@ -2026,287 +2030,109 @@ msgstr ""
 "יתכן ובעיה זו נגרמה בגלל שינוי תצורת מערכת ההפעלה או בגלל תכנה זדונית במערכת "
 "זו."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:486
-msgid "Exposed to serious security threats."
-msgstr "חשוף לאיומי אבטחה רציניים."
+#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
+#. for example: 2022-08-01 22:48:00
+#: panels/firmware-security/cc-firmware-security-panel.c:225
+#, c-format
+msgid "%1$s"
+msgstr "%1$s"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:493
-msgid "Limited protection against simple security threats."
-msgstr "הגנה מוגבלת כנגד איומי אבטחה פשוטים."
+#: panels/firmware-security/cc-firmware-security-panel.c:237
+#, c-format
+msgctxt "timezone loc"
+msgid "(%1$s → %2$s)"
+msgstr "‏‏(%1$s ← %2$s)"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:500
-msgid "Protected against common security threats."
-msgstr "הגנה כנגד איומי אבטחה נפוצים."
+#: panels/firmware-security/cc-firmware-security-panel.c:545
+msgid "Hardware does not pass checks."
+msgstr "החָמְרה לא עברה בדיקות."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:507
-#: panels/firmware-security/cc-firmware-security-panel.c:515
-msgid "Protected against a wide range of security threats."
-msgstr "הגנה כנגד מנעד רחב של אימוי אבטחה."
+#: panels/firmware-security/cc-firmware-security-panel.c:552
+msgid "Hardware meets security requirements."
+msgstr "החָמְרה עומדת בדרישות האבטחה."
 
-#. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:514
-msgid "Comprehensive Protection"
-msgstr "הגנה מקיפה"
+#: panels/firmware-security/cc-firmware-security-panel.c:561
+msgid "Hardware has a good level of protection."
+msgstr "לחָמְרה רמת אבטחה טובה."
 
-#: panels/firmware-security/cc-firmware-security-panel.ui:150
+#: panels/firmware-security/cc-firmware-security-panel.c:568
+msgid "Security levels are not available for this device."
+msgstr "רמות אבטחה אינן זמינות עבור התקן זה."
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:76
+msgid "Device Security Unavailable"
+msgstr "אבטחת התקן אינה זמינה"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:216
+msgid "Security Events"
+msgstr "אירועי אבטחה"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:226
 msgid "No Events"
 msgstr "אין אירועים"
 
-#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:37
-msgid "Firmware Write Protection"
-msgstr "הגנת כתיבה לקָשְחה"
-
-#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:42
-msgid "Firmware Write Protection Lock"
-msgstr "נעילת הגנת כתיבת קושחה"
-
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:47
-msgid "Firmware BIOS Region"
-msgstr "תחום קָשְחת BIOS"
-
-#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:52
-msgid "Firmware BIOS Descriptor"
-msgstr "תיאור קָשְחת BIOS"
-
-#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
-#: panels/firmware-security/cc-firmware-security-utils.c:57
-msgid "Pre-boot DMA Protection"
-msgstr "הגנת DMA קדם־אתחול"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel
-#: panels/firmware-security/cc-firmware-security-utils.c:62
-msgid "Intel BootGuard"
-msgstr "Intel BootGuard"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * verified boot refers to the way the boot process is verified
-#: panels/firmware-security/cc-firmware-security-utils.c:68
-msgid "Intel BootGuard Verified Boot"
-msgstr "טעינה מאומתת של Intel BootGuard"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * ACM means to verify the integrity of Initial Boot Block
-#: panels/firmware-security/cc-firmware-security-utils.c:74
-msgid "Intel BootGuard ACM Protected"
-msgstr "ACM מוגן של Intel BootGuard"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * error policy is what to do on failure
-#: panels/firmware-security/cc-firmware-security-utils.c:80
-msgid "Intel BootGuard Error Policy"
-msgstr "מדיניות שגיאה של Intel BootGuard"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel
-#: panels/firmware-security/cc-firmware-security-utils.c:85
-msgid "Intel BootGuard Fuse"
-msgstr "מיזוג של Intel BootGuard"
-
-#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
-#. * enabled means supported by the processor
-#: panels/firmware-security/cc-firmware-security-utils.c:91
-msgid "Intel CET Enabled"
-msgstr "Intel CET מאופשר"
-
-#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
-#. * active means being used by the OS
-#: panels/firmware-security/cc-firmware-security-utils.c:97
-msgid "Intel CET Active"
-msgstr "Intel CET פעיל"
-
-#. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
-#: panels/firmware-security/cc-firmware-security-utils.c:102
-msgid "Intel SMAP"
-msgstr "Intel SMAP"
-
-#. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
-#: panels/firmware-security/cc-firmware-security-utils.c:107
-msgid "Encrypted RAM"
-msgstr "‏RAM מוצפן"
-
-#. TRANSLATORS: Title:
-#. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
-#: panels/firmware-security/cc-firmware-security-utils.c:113
-msgid "IOMMU Protection"
-msgstr "הגנת IOMMU"
-
-#. TRANSLATORS: Title: lockdown is a security mode of the kernel
-#: panels/firmware-security/cc-firmware-security-utils.c:118
-msgid "Linux Kernel Lockdown"
-msgstr "נעילת ליבת לינוקס"
-
-#. TRANSLATORS: Title: if it's tainted or not
-#: panels/firmware-security/cc-firmware-security-utils.c:123
-msgid "Linux Kernel Verification"
-msgstr "אימות ליבת לינוקס"
-
-#. TRANSLATORS: Title: swap space or swap partition
-#: panels/firmware-security/cc-firmware-security-utils.c:128
-msgid "Linux Swap"
-msgstr "מחיצת החלפה לינוקס"
-
-#. TRANSLATORS: Title: sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:133
-msgid "Suspend To RAM"
-msgstr "השהיה ל־RAM"
-
-#. TRANSLATORS: Title: a better sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:138
-msgid "Suspend To Idle"
-msgstr "השהיה להמתנה"
-
-#. TRANSLATORS: Title: PK is the 'platform key' for the machine
-#: panels/firmware-security/cc-firmware-security-utils.c:143
-msgid "UEFI Platform Key"
-msgstr "מפתח פלטפורמת UEFI"
-
-#. TRANSLATORS: Title: SB is a way of locking down UEFI
-#: panels/firmware-security/cc-firmware-security-utils.c:148
-msgid "UEFI Secure Boot"
-msgstr "אתחול UEFI מאובטח"
-
-#. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be empty
-#: panels/firmware-security/cc-firmware-security-utils.c:153
-msgid "TPM Platform Configuration"
-msgstr "הגדרות פלטפורמת TPM"
-
-#. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
-#: panels/firmware-security/cc-firmware-security-utils.c:158
-msgid "TPM Reconstruction"
-msgstr "בנייה מחדש של TPM"
-
-#. TRANSLATORS: Title: TPM = Trusted Platform Module
-#: panels/firmware-security/cc-firmware-security-utils.c:163
-msgid "TPM v2.0"
-msgstr "TPM v2.0"
-
-#. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:168
-msgid "Intel Management Engine Manufacturing Mode"
-msgstr "מצב ייצור של מנוע הניהול של אינטל"
-
-#. TRANSLATORS: Title: MEI = Intel Management Engine, and the "override" is enabled
-#. * with a jumper -- luckily it is probably not accessible to end users on consumer
-#. * boards
-#: panels/firmware-security/cc-firmware-security-utils.c:175
-msgid "Intel Management Engine Override"
-msgstr "מעקף של מנגנון הניהול של אינטל"
-
-#. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:180
-msgid "Intel Management Engine Version"
-msgstr "גרסת מנגנון הניהול של אינטל"
-
-#. TRANSLATORS: Title: if firmware updates are available
-#: panels/firmware-security/cc-firmware-security-utils.c:185
-msgid "Firmware Updates"
-msgstr "עדכוני קָשְחה"
-
-#. TRANSLATORS: Title: if we can verify the firmware checksums
-#: panels/firmware-security/cc-firmware-security-utils.c:190
-msgid "Firmware Attestation"
-msgstr "תעודת קָשְחה"
-
-#. TRANSLATORS: Title: if the fwupd plugins are all present and correct
-#: panels/firmware-security/cc-firmware-security-utils.c:195
-msgid "Firmware Updater Verification"
-msgstr "עדכון אימות קָשְחה"
-
-#. TRANSLATORS: Title: Allows debugging of parts using proprietary hardware
-#: panels/firmware-security/cc-firmware-security-utils.c:201
-msgid "Platform Debugging"
-msgstr "ניפוי שגיאות בפלטפורמה"
-
-#. TRANSLATORS: Title: if fwupd supports HSI on this chip
-#: panels/firmware-security/cc-firmware-security-utils.c:206
-msgid "Processor Security Checks"
-msgstr "בדיקות אבטחת מעבד"
-
-#. TRANSLATORS: Title: if firmware enforces rollback protection
-#: panels/firmware-security/cc-firmware-security-utils.c:211
-msgid "AMD Rollback Protection"
-msgstr "הגנת שחזור של AMD"
-
-#. TRANSLATORS: Title: if hardware enforces control of SPI replays
-#: panels/firmware-security/cc-firmware-security-utils.c:216
-msgid "AMD Firmware Replay Protection"
-msgstr "הגנת הפעלה מחדש של קושחת AMD"
-
-#. TRANSLATORS: Title: if hardware enforces control of SPI writes
-#: panels/firmware-security/cc-firmware-security-utils.c:221
-msgid "AMD Firmware Write Protection"
-msgstr "הגנת כתיב לקושחת AMD"
-
-#. TRANSLATORS: Title: if the part has been fused
-#: panels/firmware-security/cc-firmware-security-utils.c:226
-msgid "Fused Platform"
-msgstr "פלטפורמה ממוזגת"
-
 #. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:237
+#: panels/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
 msgstr "תקף"
 
 #. TRANSLATORS: if the status or key is not valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:242
+#: panels/firmware-security/cc-firmware-security-utils.c:40
 msgid "Not Valid"
 msgstr "לא תקף"
 
 #. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
-#: panels/firmware-security/cc-firmware-security-utils.c:252
+#: panels/firmware-security/cc-firmware-security-utils.c:50
 msgid "Not Enabled"
 msgstr "לא מאופשר"
 
 #. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
-#: panels/firmware-security/cc-firmware-security-utils.c:257
+#: panels/firmware-security/cc-firmware-security-utils.c:55
 msgid "Locked"
 msgstr "נעולה"
 
 #. TRANSLATORS: the memory space or system mode is not locked.
-#: panels/firmware-security/cc-firmware-security-utils.c:262
+#: panels/firmware-security/cc-firmware-security-utils.c:60
 msgid "Not Locked"
 msgstr "לא נעול"
 
 #. TRANSLATORS: The data is encrypted to prevent from malicious reading.
-#: panels/firmware-security/cc-firmware-security-utils.c:267
+#: panels/firmware-security/cc-firmware-security-utils.c:65
 msgid "Encrypted"
 msgstr "מוצפן"
 
 #. TRANSLATORS: the data in memory is plane text.
-#: panels/firmware-security/cc-firmware-security-utils.c:272
+#: panels/firmware-security/cc-firmware-security-utils.c:70
 msgid "Not Encrypted"
 msgstr "לא מוצפן"
 
 #. TRANSLATORS: Linux kernel is tainted by third party kernel module.
-#: panels/firmware-security/cc-firmware-security-utils.c:277
+#: panels/firmware-security/cc-firmware-security-utils.c:75
 msgid "Tainted"
 msgstr "מזוהם"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
-#: panels/firmware-security/cc-firmware-security-utils.c:282
+#: panels/firmware-security/cc-firmware-security-utils.c:80
 msgid "Not Tainted"
 msgstr "לא מזוהם"
 
 #. TRANSLATORS: the feature can be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:287
+#: panels/firmware-security/cc-firmware-security-utils.c:85
 msgid "Found"
 msgstr "נמצא"
 
 #. TRANSLATORS: the feature can't be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:292
+#: panels/firmware-security/cc-firmware-security-utils.c:90
 msgid "Not Found"
 msgstr "לא נמצא"
 
 #. TRANSLATORS: the function is supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:297
+#: panels/firmware-security/cc-firmware-security-utils.c:95
 msgid "Supported"
 msgstr "נתמך"
 
 #. TRANSLATORS: the function isn't supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:302
+#: panels/firmware-security/cc-firmware-security-utils.c:100
 msgid "Not Supported"
 msgstr "לא נתמך"
 
@@ -2327,42 +2153,34 @@ msgstr ""
 "מסך;צד;נעילה;ניתוח;דיאגנוסטיקה;קריסה;פרטיות;פרטי;אחרונים;אחרון;זמני;זמניים;"
 "מפתח;אינדקס;שם;רשת;זהות;פרטיות;"
 
-#: panels/info-overview/cc-info-overview-panel.c:299
-#: panels/info-overview/cc-info-overview-panel.c:319
-#: panels/info-overview/cc-info-overview-panel.c:360
-#: panels/info-overview/cc-info-overview-panel.c:390
-#: panels/wwan/cc-wwan-details-dialog.c:100
-msgid "Unknown"
-msgstr "לא ידוע"
-
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:337
+#: panels/info-overview/cc-info-overview-panel.c:332
 #, c-format
 msgid "64-bit"
 msgstr "64 סיביות"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:340
+#: panels/info-overview/cc-info-overview-panel.c:335
 #, c-format
 msgid "32-bit"
 msgstr "32 סיביות"
 
-#: panels/info-overview/cc-info-overview-panel.c:625
+#: panels/info-overview/cc-info-overview-panel.c:622
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:629
+#: panels/info-overview/cc-info-overview-panel.c:626
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:631
+#: panels/info-overview/cc-info-overview-panel.c:628
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "לא ידוע"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:709
+#: panels/info-overview/cc-info-overview-panel.c:706
 msgid "Not Available"
 msgstr "לא זמין"
 
@@ -2371,95 +2189,77 @@ msgid "System Logo"
 msgstr "לוגו המערכת"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:304
+#: panels/sharing/cc-sharing-panel.ui:21 panels/sharing/cc-sharing-panel.ui:278
 msgid "Device Name"
 msgstr "שם ההתקן"
 
-#: panels/info-overview/cc-info-overview-panel.ui:51
+#: panels/info-overview/cc-info-overview-panel.ui:48
 msgid "Hardware Model"
 msgstr "דגם חומרה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:60
+#: panels/info-overview/cc-info-overview-panel.ui:57
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "גרסת קושחה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:68
+#: panels/info-overview/cc-info-overview-panel.ui:65
 msgid "Memory"
 msgstr "זיכרון"
 
-#: panels/info-overview/cc-info-overview-panel.ui:76
+#: panels/info-overview/cc-info-overview-panel.ui:73
 msgid "Processor"
 msgstr "מעבד"
 
-#: panels/info-overview/cc-info-overview-panel.ui:84
+#: panels/info-overview/cc-info-overview-panel.ui:81
 msgid "Graphics"
 msgstr "גרפיקה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:92
+#: panels/info-overview/cc-info-overview-panel.ui:89
 msgid "Disk Capacity"
 msgstr "קיבלות דיסק"
 
-#: panels/info-overview/cc-info-overview-panel.ui:93
+#: panels/info-overview/cc-info-overview-panel.ui:90
 msgid "Calculating…"
 msgstr "מתבצע חישוב…"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:108
+#: panels/info-overview/cc-info-overview-panel.ui:105
 msgid "OS Name"
 msgstr "שם מערכת הפעלה"
 
 #. translators: this field contains the distro build ID
-#: panels/info-overview/cc-info-overview-panel.ui:117
+#: panels/info-overview/cc-info-overview-panel.ui:114
 msgid "OS Build ID"
 msgstr "מזהה בניית מערכת הפעלה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:125
+#: panels/info-overview/cc-info-overview-panel.ui:122
 msgid "OS Type"
 msgstr "סוג מערכת הפעלה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:133
+#: panels/info-overview/cc-info-overview-panel.ui:130
 msgid "GNOME Version"
 msgstr "גרסת GNOME"
 
 #. translators: this is a placeholder while the GNOME version is being fetched
-#: panels/info-overview/cc-info-overview-panel.ui:135
+#: panels/info-overview/cc-info-overview-panel.ui:132
 msgid "Loading…"
 msgstr "בטעינה…"
 
-#: panels/info-overview/cc-info-overview-panel.ui:143
+#: panels/info-overview/cc-info-overview-panel.ui:140
 msgid "Windowing System"
 msgstr "מערכת חלונות"
 
-#: panels/info-overview/cc-info-overview-panel.ui:151
+#: panels/info-overview/cc-info-overview-panel.ui:148
 msgid "Virtualization"
 msgstr "הדמייה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:160
+#: panels/info-overview/cc-info-overview-panel.ui:157
 msgid "Kernel Version"
 msgstr "גרסת ליבה"
 
-#: panels/info-overview/cc-info-overview-panel.ui:169
+#: panels/info-overview/cc-info-overview-panel.ui:166
 msgid "Software Updates"
 msgstr "עדכוני תכנה"
-
-#: panels/info-overview/cc-info-overview-panel.ui:193
-msgid "Rename Device"
-msgstr "שינוי שם התקן"
-
-#: panels/info-overview/cc-info-overview-panel.ui:209
-msgid ""
-"The device name is used to identify this device when it is viewed over the "
-"network, or when pairing Bluetooth devices."
-msgstr "שם ההתקן משמש לזיהוי ההתקן על גבי הרשת, או בעת צימוד לבלוטות'."
-
-#: panels/info-overview/cc-info-overview-panel.ui:215
-msgid "Device name"
-msgstr "שם התקן"
-
-#: panels/info-overview/cc-info-overview-panel.ui:229
-msgid "_Rename"
-msgstr "_שינוי שם"
 
 #: panels/info-overview/gnome-info-overview-panel.desktop.in:3
 msgid "About"
@@ -2666,13 +2466,13 @@ msgid "View Keyboard Layout"
 msgstr "הצגת פריסת המקלדת"
 
 #: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
-#: panels/sharing/cc-sharing-panel.c:646
+#: panels/sharing/cc-sharing-panel.c:603
 msgid "Remove"
 msgstr "הסרה"
 
-#: panels/keyboard/cc-keyboard-manager.c:485
-#: panels/keyboard/cc-keyboard-manager.c:493
-#: panels/keyboard/cc-keyboard-manager.c:922
+#: panels/keyboard/cc-keyboard-manager.c:488
+#: panels/keyboard/cc-keyboard-manager.c:496
+#: panels/keyboard/cc-keyboard-manager.c:936
 msgid "Custom Shortcuts"
 msgstr "צירופי מקשים מותאמים"
 
@@ -2794,9 +2594,7 @@ msgstr "מילוי תווים מיוחדים"
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "שיטות למילוי סימנים והגווני אותיות באמצעות המקלדת."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
+#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "צירופי מקשים"
 
@@ -2804,20 +2602,11 @@ msgstr "צירופי מקשים"
 msgid "View and Customize Shortcuts"
 msgstr "הצגה והתאמה של קיצורי מקשים"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:296
-#, c-format
-msgid "%d modified"
-msgid_plural "%d modified"
-msgstr[0] "‫%d נערך"
-msgstr[1] "‫%d נערכו"
-msgstr[2] "‫%d נערכו"
-msgstr[3] "‫%d נערכו"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:463
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:387
 msgid "Reset All Shortcuts?"
 msgstr "איפוס כל צירופי המקשים?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:466
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2825,76 +2614,80 @@ msgstr ""
 "איפוס צירופי המקשים עשוי להשפיע על ההתאמה האישית של המקלדת שלך. לא נתן לבטל "
 "פעולה זאת."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:470
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:394
 #: panels/network/cc-network-panel.ui:26
-#: panels/network/wireless-security/ws-file-chooser-button.c:94
 #: panels/printers/ppd-selection-dialog.ui:83
-#: panels/wwan/cc-wwan-device-page.c:189
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "ביטול"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:471
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:395
 msgid "Reset All"
 msgstr "איפוס הכול"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:35
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:33
 msgid "Reset All…"
 msgstr "איפוס של הכול…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:36
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "איפוס כל צירופי המקשים לערכי ברירת המחדל"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
-msgid "Section"
-msgstr "אגף"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:65
+msgid "Search Shortcuts"
+msgstr "חיפוש קיצורי מקשים"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:111
-msgid "Shortcuts"
-msgstr "צירופי מקשים"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:120
-msgid "Add a shortcut"
-msgstr "הוספת צירוף מקשים"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:155
-msgid "Add Custom Shortcuts"
-msgstr "הוספת צירוף מקשים מותאם"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:163
-msgid "Set up custom shortcuts for launching apps, running scripts, and more."
-msgstr "הגדרת צירופי מקשים מותאמים להפעלת יישומים, הרצת תסריטים ועוד."
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:169
-msgid "Add Shortcut"
-msgstr "הוספת קיצור דרך"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:201
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:102
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
 msgid "No keyboard shortcut found"
 msgstr "לא נמצאו צירופי מקשים"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:392
-#, c-format
-msgid "%s is already being used for %s. If you replace it, %s will be disabled"
-msgstr "‫%s כבר בשימוש על ידי %s. החלפה שלו, תשבית את %s"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:103
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+msgid "Try a different search."
+msgstr "יש לנסות חיפוש שונה."
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:536
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:140
+msgid "Add Custom Shortcuts"
+msgstr "הוספת צירוף מקשים מותאם"
+
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:141
+msgid "Set up custom shortcuts for launching apps, running scripts, and more."
+msgstr "הגדרת צירופי מקשים מותאמים להפעלת יישומים, הרצת תסריטים ועוד."
+
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:145
+msgid "Add Shortcut"
+msgstr "הוספת קיצור דרך"
+
+#. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:391
+#, c-format
+msgid ""
+"<b>%s</b> is already being used for %s. If you replace it, %s will be "
+"disabled"
+msgstr "‏<b>%s</b> כבר בשימוש על ידי %s. החלפה שלו, תשבית את %s"
+
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:533
 msgid "Enter the new shortcut"
 msgstr "יש להקיש את צירוף המקשים החדש"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:551
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
 msgid "Set Custom Shortcut"
 msgstr "הגדרת צירופי מקשים מותאמים אישית"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:551
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
 msgid "Set Shortcut"
 msgstr "הגדרת צירופי מקשים"
 
-#. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:562
+#. Setup the top label
+#.
+#. * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
+#. * don't translate/transliterate <b>%s</b>
+#.
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:561
 #, c-format
-msgid "Enter new shortcut to change %s."
-msgstr "יש להקיש צירופי מקשים חדשים לשינוי ‏%s."
+msgid "Enter new shortcut to change <b>%s</b>"
+msgstr "יש להקיש צירופי מקשים חדשים לשינוי <b>%s</b>"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:977
 msgid "Add Custom Shortcut"
@@ -2944,6 +2737,19 @@ msgstr "הגדרת צירופי מקשים…"
 msgid "None"
 msgstr "ללא"
 
+#: panels/keyboard/cc-keyboard-shortcut-group.c:131
+#, c-format
+msgid "%d modified"
+msgid_plural "%d modified"
+msgstr[0] "‫%d נערך"
+msgstr[1] "‫%d נערכו"
+msgstr[2] "‫%d נערכו"
+msgstr[3] "‫%d נערכו"
+
+#: panels/keyboard/cc-keyboard-shortcut-group.c:154
+msgid "Add a Shortcut"
+msgstr "הוספת צירוף מקשים"
+
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:23
 msgid "Reset the shortcut to its default value"
 msgstr "איפוס צירופי המקשים לערך בררת המחדל"
@@ -2972,7 +2778,9 @@ msgid "Location Services Turned Off"
 msgstr "שירותי האיכון מושבתים"
 
 #: panels/location/cc-location-panel.ui:24
-msgid "No applications can obtain location information."
+#, fuzzy
+#| msgid "No applications can obtain location information."
+msgid "No sandboxed applications can obtain location information."
 msgstr "אף יישום לא יכול לקבל מידע על המיקום שלך."
 
 #: panels/location/cc-location-panel.ui:38
@@ -3007,7 +2815,9 @@ msgid "Microphone Turned Off"
 msgstr "המיקרופון כובה"
 
 #: panels/microphone/cc-microphone-panel.ui:24
-msgid "No applications can record sound."
+#, fuzzy
+#| msgid "No applications can record sound."
+msgid "No sandboxed applications can record sound."
 msgstr "אף יישום לא יכול להקליט שמע."
 
 #: panels/microphone/cc-microphone-panel.ui:37
@@ -3032,9 +2842,9 @@ msgstr "הגנה על השיחות שלך"
 msgid "microphone;recording;application;privacy;"
 msgstr "מיקרופון;הקלטה;יישום;פרטיות;"
 
-#: panels/mouse/cc-mouse-panel.ui:9 panels/wacom/cc-wacom-panel.ui:9
-msgid "Test Your _Settings"
-msgstr "ב_דיקת ההגדרות שלך"
+#: panels/mouse/cc-mouse-panel.ui:9
+msgid "Test _Settings"
+msgstr "ב_דיקת ההגדרות"
 
 #: panels/mouse/cc-mouse-panel.ui:23
 #: panels/multitasking/cc-multitasking-panel.ui:9
@@ -3065,39 +2875,61 @@ msgstr "עכבר"
 msgid "Mouse Speed"
 msgstr "מהירות העכבר"
 
+#: panels/mouse/cc-mouse-panel.ui:70
+msgid "Mouse speed"
+msgstr "מהירות העכבר"
+
+#: panels/mouse/cc-mouse-panel.ui:73 panels/mouse/cc-mouse-panel.ui:149
+#: panels/universal-access/cc-ua-typing-page.ui:53
+#: panels/universal-access/cc-ua-typing-page.ui:111
+msgctxt "keyboard, speed"
+msgid "Slow"
+msgstr "אטי"
+
+#: panels/mouse/cc-mouse-panel.ui:75 panels/mouse/cc-mouse-panel.ui:151
+#: panels/universal-access/cc-ua-typing-page.ui:50
+#: panels/universal-access/cc-ua-typing-page.ui:108
+msgctxt "keyboard, speed"
+msgid "Fast"
+msgstr "מהיר"
+
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:87
-#: panels/mouse/cc-mouse-panel.ui:114 panels/mouse/cc-mouse-panel.ui:120
+#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:98
+#: panels/mouse/cc-mouse-panel.ui:126 panels/mouse/cc-mouse-panel.ui:133
 msgid "Natural Scrolling"
 msgstr "גלילה טבעית"
 
-#: panels/mouse/cc-mouse-panel.ui:82 panels/mouse/cc-mouse-panel.ui:115
+#: panels/mouse/cc-mouse-panel.ui:92 panels/mouse/cc-mouse-panel.ui:127
 msgid "Scrolling moves the content, not the view."
 msgstr "גלילה מזיזה את התוכן, לא את התצוגה."
 
-#: panels/mouse/cc-mouse-panel.ui:98 panels/mouse/cc-mouse-panel.ui:101
-#: panels/mouse/cc-mouse-panel.ui:106
+#: panels/mouse/cc-mouse-panel.ui:109 panels/mouse/cc-mouse-panel.ui:112
+#: panels/mouse/cc-mouse-panel.ui:118
 msgid "Touchpad"
 msgstr "משטח מגע"
 
-#: panels/mouse/cc-mouse-panel.ui:128
+#: panels/mouse/cc-mouse-panel.ui:141
 msgid "Touchpad Speed"
 msgstr "מהירות משטח מגע"
 
-#: panels/mouse/cc-mouse-panel.ui:145
+#: panels/mouse/cc-mouse-panel.ui:146
+msgid "Touchpad speed"
+msgstr "מהירות משטח מגע"
+
+#: panels/mouse/cc-mouse-panel.ui:168
 msgid "Tap to Click"
 msgstr "הקשה היא לחיצה"
 
-#: panels/mouse/cc-mouse-panel.ui:150
+#: panels/mouse/cc-mouse-panel.ui:174
 msgid "Tap to click"
 msgstr "הקשה היא לחיצה"
 
-#: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:164
+#: panels/mouse/cc-mouse-panel.ui:183 panels/mouse/cc-mouse-panel.ui:189
 msgid "Two-finger Scrolling"
 msgstr "גלילה בשתי אצבעות"
 
-#: panels/mouse/cc-mouse-panel.ui:174 panels/mouse/cc-mouse-panel.ui:179
+#: panels/mouse/cc-mouse-panel.ui:199 panels/mouse/cc-mouse-panel.ui:205
 msgid "Edge Scrolling"
 msgstr "קצה גלילה"
 
@@ -3230,16 +3062,20 @@ msgstr ""
 "שינוי;עריכה;שולחן עבודה;התאמה אישית;נקודה חמה;פינה חמה;שולחנות עבודה;מרחבי "
 "עבודה;שולחן עבודה;מרחב עבודה;"
 
-#: panels/network/cc-network-panel.c:670 panels/network/cc-wifi-panel.ui:303
-msgid "Oops, something has gone wrong. Please contact your software vendor."
-msgstr "אופס, משהו השתבש. נא ליצור קשר עם ספק התכנה שלך."
+#: panels/network/cc-network-panel.c:667
+msgid "Can’t Connect to Network"
+msgstr "לא ניתן להתחבר לרשת"
 
-#: panels/network/cc-network-panel.c:677
-msgid "NetworkManager needs to be running."
-msgstr "‏NetworkManager צריך לפעול."
+#: panels/network/cc-network-panel.c:669
+msgid ""
+"NetworkManager needs to be running to view or make connections. Contact a "
+"system administrator or the software vendor."
+msgstr ""
+"‏NetworkManager צריך לפעול על מנת להציג או ליצור התחברויות. יש ליצור קשר עם "
+"מנהל המערכת או ספק התכנה שלך."
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-network-panel.c:766 panels/network/cc-network-panel.ui:140
+#: panels/network/cc-network-panel.c:754 panels/network/cc-network-panel.ui:140
 #: panels/network/cc-network-panel.ui:149
 msgid "Proxy"
 msgstr "מתווך"
@@ -3253,7 +3089,7 @@ msgid "Other Devices"
 msgstr "התקנים אחרים"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:586
+#: panels/network/connection-editor/net-connection-editor.c:672
 msgid "VPN"
 msgstr "VPN"
 
@@ -3272,7 +3108,6 @@ msgstr "לא מוגדר"
 #: panels/network/connection-editor/ip6-page.ui:36
 #: panels/network/connection-editor/ip6-page.ui:185
 #: panels/network/connection-editor/ip6-page.ui:237
-#: panels/network/wireless-security/eap-method-peap.ui:33
 #: panels/wacom/cc-wacom-page.c:656
 msgid "Automatic"
 msgstr "אוטומטי"
@@ -3284,8 +3119,8 @@ msgstr "אוטומטי"
 msgid "Manual"
 msgstr "ידני"
 
-#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:110
-#: panels/sound/cc-sound-panel.ui:275
+#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:111
+#: panels/sound/cc-sound-panel.ui:279
 msgid "Configuration"
 msgstr "הגדרה"
 
@@ -3341,11 +3176,11 @@ msgstr "הפתחה של מתווך ה־FTP"
 
 #: panels/network/cc-net-proxy-page.ui:215
 msgid "SOCKS Host"
-msgstr ""
+msgstr "‏SOCKS מארח"
 
 #: panels/network/cc-net-proxy-page.ui:245
 msgid "SOCKS host port"
-msgstr ""
+msgstr "פתחת מארח SOCKS"
 
 #: panels/network/cc-net-proxy-page.ui:261
 msgid "Ignored Hosts"
@@ -3432,8 +3267,8 @@ msgstr "שם הרשת"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
-#: panels/printers/new-printer-dialog.ui:338
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:384
+#: panels/printers/new-printer-dialog.ui:316
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:359
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:360
@@ -3511,12 +3346,16 @@ msgstr "רשתות גלויות"
 msgid "NetworkManager needs to be running"
 msgstr "‏NetworkManager צריך להיות פעיל"
 
+#: panels/network/cc-wifi-panel.ui:303
+msgid "Oops, something has gone wrong. Please contact your software vendor."
+msgstr "אופס, משהו השתבש. נא ליצור קשר עם ספק התכנה שלך."
+
 #: panels/network/connection-editor/8021x-security-page.ui:16
 msgid "802.1x _Security"
 msgstr "_אבטחת 802.1x"
 
-#: panels/network/connection-editor/ce-page-8021x-security.c:109
-#: panels/network/connection-editor/ce-page-security.c:419
+#: panels/network/connection-editor/ce-page-8021x-security.c:108
+#: panels/network/connection-editor/ce-page-security.c:416
 #: panels/network/connection-editor/details-page.ui:78
 msgid "Security"
 msgstr "אבטחה"
@@ -3571,7 +3410,7 @@ msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
 #: panels/network/connection-editor/ce-page-details.c:113
-#: panels/network/connection-editor/ce-page-security.c:274
+#: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "פתוחה מורחבת"
 
@@ -3747,38 +3586,36 @@ msgstr "IPv4"
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:263
+#: panels/network/connection-editor/ce-page-security.c:260
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "ללא"
 
-#: panels/network/connection-editor/ce-page-security.c:298
+#: panels/network/connection-editor/ce-page-security.c:295
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "מפתח WEP 40‏/128-סיביות (הקסדצימלי או ASCII)"
 
-#: panels/network/connection-editor/ce-page-security.c:308
+#: panels/network/connection-editor/ce-page-security.c:305
 msgid "WEP 128-bit Passphrase"
 msgstr "מילת צופן WEP‏ 128-סיביות"
 
-#: panels/network/connection-editor/ce-page-security.c:321
-#: panels/network/wireless-security/ws-dynamic-wep.ui:20
-#: panels/network/wireless-security/ws-wpa-eap.ui:25
+#: panels/network/connection-editor/ce-page-security.c:318
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:334
+#: panels/network/connection-editor/ce-page-security.c:331
 msgid "Dynamic WEP (802.1x)"
 msgstr "‏WEP דינמי (802.1x)"
 
-#: panels/network/connection-editor/ce-page-security.c:348
+#: panels/network/connection-editor/ce-page-security.c:345
 msgid "WPA & WPA2 Personal"
 msgstr "‏WPA ו־WPA2 אישי"
 
-#: panels/network/connection-editor/ce-page-security.c:362
+#: panels/network/connection-editor/ce-page-security.c:359
 msgid "WPA & WPA2 Enterprise"
 msgstr "‏WPA ו־WPA2 ארגוני"
 
-#: panels/network/connection-editor/ce-page-security.c:376
+#: panels/network/connection-editor/ce-page-security.c:373
 msgid "WPA3 Personal"
 msgstr "‏WPA3 אישי"
 
@@ -3949,29 +3786,29 @@ msgstr "אוטומטי, DHCP בלבד"
 msgid "Prefix"
 msgstr "קידומת"
 
-#: panels/network/connection-editor/net-connection-editor.c:277
+#: panels/network/connection-editor/net-connection-editor.c:363
 msgid "Unable to open connection editor"
 msgstr "לא ניתן לפתוח את עורך החיבורים"
 
-#: panels/network/connection-editor/net-connection-editor.c:293
+#: panels/network/connection-editor/net-connection-editor.c:379
 msgid "New Profile"
 msgstr "פרופיל חדש"
 
-#: panels/network/connection-editor/net-connection-editor.c:360
+#: panels/network/connection-editor/net-connection-editor.c:446
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "הגדרה %s לא תקפה: ‏%s"
 
-#: panels/network/connection-editor/net-connection-editor.c:363
+#: panels/network/connection-editor/net-connection-editor.c:449
 #, c-format
 msgid "Invalid setting %s"
 msgstr "הגדרה %s לא תקפה"
 
-#: panels/network/connection-editor/net-connection-editor.c:721
+#: panels/network/connection-editor/net-connection-editor.c:807
 msgid "Import from file…"
 msgstr "יבוא מקובץ…"
 
-#: panels/network/connection-editor/net-connection-editor.c:747
+#: panels/network/connection-editor/net-connection-editor.c:833
 msgid "Add VPN"
 msgstr "הוספת VPN"
 
@@ -4438,388 +4275,6 @@ msgstr "הקושחה חסרה"
 msgid "Cable unplugged"
 msgstr "הכבל מנותק"
 
-#: panels/network/wireless-security/eap-method.c:92
-msgid "undefined error in 802.1X security (wpa-eap)"
-msgstr "שגיאה לא מוגדרת באבטחת 802.1x ‏(wpa-eap)"
-
-#: panels/network/wireless-security/eap-method.c:196
-msgid "no file selected"
-msgstr "לא נבחר קובץ"
-
-#: panels/network/wireless-security/eap-method.c:224
-msgid "unspecified error validating eap-method file"
-msgstr "שגיאה לא ידועה באימות קובץ eap-method"
-
-#: panels/network/wireless-security/eap-method.c:394
-msgid "DER, PEM, PKCS#12, or PGP private keys"
-msgstr "מפתחות פרטיים מסוג DER, PEM, PKCS#12 או PGP"
-
-#: panels/network/wireless-security/eap-method.c:397
-msgid "DER or PEM certificates"
-msgstr "אישורי DER או PEM"
-
-#: panels/network/wireless-security/eap-method-fast.c:88
-msgid "missing EAP-FAST PAC file"
-msgstr "חסרים הקבצים EAP-FAST PAC"
-
-#: panels/network/wireless-security/eap-method-fast.c:353
-msgid "PAC files (*.pac)"
-msgstr "קובצי PAC‏ (‎*.pac)"
-
-#: panels/network/wireless-security/eap-method-fast.ui:13
-#: panels/network/wireless-security/eap-method-peap.ui:21
-#: panels/network/wireless-security/eap-method-ttls.ui:37
-msgid "GTC"
-msgstr "GTC"
-
-#: panels/network/wireless-security/eap-method-fast.ui:17
-#: panels/network/wireless-security/eap-method-peap.ui:13
-#: panels/network/wireless-security/eap-method-ttls.ui:21
-msgid "MSCHAPv2"
-msgstr "MSCHAPv2"
-
-#: panels/network/wireless-security/eap-method-fast.ui:29
-msgid "Anonymous"
-msgstr "אלמוני"
-
-#: panels/network/wireless-security/eap-method-fast.ui:32
-msgid "Authenticated"
-msgstr "עם אימות"
-
-#: panels/network/wireless-security/eap-method-fast.ui:35
-msgid "Both"
-msgstr "שניהם"
-
-#: panels/network/wireless-security/eap-method-fast.ui:46
-#: panels/network/wireless-security/eap-method-peap.ui:49
-#: panels/network/wireless-security/eap-method-ttls.ui:48
-msgid "Anony_mous identity"
-msgstr "זהות _אלמונית"
-
-#: panels/network/wireless-security/eap-method-fast.ui:67
-msgid "PAC _file"
-msgstr "_קובץ PAC"
-
-#: panels/network/wireless-security/eap-method-fast.ui:79
-msgid "Choose a PAC file"
-msgstr "בחירת קובץ PAC"
-
-#: panels/network/wireless-security/eap-method-fast.ui:99
-#: panels/network/wireless-security/eap-method-peap.ui:131
-#: panels/network/wireless-security/eap-method-ttls.ui:122
-msgid "_Inner authentication"
-msgstr "אימות _פנימי"
-
-#: panels/network/wireless-security/eap-method-fast.ui:126
-msgid "Allow automatic PAC pro_visioning"
-msgstr "אפשור הקצאת PAC _אוטומטית"
-
-#: panels/network/wireless-security/eap-method-leap.c:65
-msgid "missing EAP-LEAP username"
-msgstr "חסר שם משתמש EAP-LEAP"
-
-#: panels/network/wireless-security/eap-method-leap.c:80
-msgid "missing EAP-LEAP password"
-msgstr "חסרה ססמת EAP-LEAP"
-
-#: panels/network/wireless-security/eap-method-leap.ui:11
-#: panels/network/wireless-security/eap-method-simple.ui:11
-#: panels/network/wireless-security/ws-leap.ui:11
-msgid "_Username"
-msgstr "_שם משתמש"
-
-#: panels/network/wireless-security/eap-method-leap.ui:23
-#: panels/network/wireless-security/eap-method-simple.ui:23
-#: panels/network/wireless-security/ws-leap.ui:23
-#: panels/network/wireless-security/ws-sae.ui:10
-#: panels/network/wireless-security/ws-wpa-psk.ui:10
-#: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:182
-msgid "_Password"
-msgstr "_ססמה"
-
-#: panels/network/wireless-security/eap-method-leap.ui:44
-#: panels/network/wireless-security/eap-method-simple.ui:61
-#: panels/network/wireless-security/eap-method-tls.ui:129
-#: panels/network/wireless-security/ws-leap.ui:44
-#: panels/network/wireless-security/ws-sae.ui:45
-#: panels/network/wireless-security/ws-wpa-psk.ui:53
-msgid "Sho_w password"
-msgstr "ה_צגת ססמה"
-
-#: panels/network/wireless-security/eap-method-peap.c:88
-#, c-format
-msgid "invalid EAP-PEAP CA certificate: %s"
-msgstr "אישור EAP-PEAP CA לא תקף: %s"
-
-#: panels/network/wireless-security/eap-method-peap.c:97
-msgid "invalid EAP-PEAP CA certificate: no certificate specified"
-msgstr "אישור EAP-PEAP CA לא תקף: לא סופקו אישורים"
-
-#: panels/network/wireless-security/eap-method-peap.ui:17
-#: panels/network/wireless-security/eap-method-ttls.ui:33
-#: panels/network/wireless-security/ws-wpa-eap.ui:15
-msgid "MD5"
-msgstr "MD5"
-
-#: panels/network/wireless-security/eap-method-peap.ui:36
-msgid "Version 0"
-msgstr "גרסה 0"
-
-#: panels/network/wireless-security/eap-method-peap.ui:39
-msgid "Version 1"
-msgstr "גרסה 0"
-
-#: panels/network/wireless-security/eap-method-peap.ui:70
-#: panels/network/wireless-security/eap-method-tls.ui:54
-#: panels/network/wireless-security/eap-method-ttls.ui:89
-msgid "C_A certificate"
-msgstr "אישור C_A"
-
-#: panels/network/wireless-security/eap-method-peap.ui:82
-#: panels/network/wireless-security/eap-method-tls.c:524
-#: panels/network/wireless-security/eap-method-tls.ui:44
-#: panels/network/wireless-security/eap-method-tls.ui:66
-msgid "Choose a Certificate Authority certificate"
-msgstr "בחירת אישור של רשות אישורים"
-
-#: panels/network/wireless-security/eap-method-peap.ui:91
-#: panels/network/wireless-security/eap-method-tls.ui:75
-#: panels/network/wireless-security/eap-method-ttls.ui:110
-msgid "No CA certificate is _required"
-msgstr "לא נ_דרש אישור CA"
-
-#: panels/network/wireless-security/eap-method-peap.ui:103
-msgid "PEAP _version"
-msgstr "_גרסת PEAP"
-
-#: panels/network/wireless-security/eap-method-simple.c:78
-msgid "missing EAP username"
-msgstr "חסר שם משתמש EAP"
-
-#: panels/network/wireless-security/eap-method-simple.c:91
-msgid "missing EAP password"
-msgstr "חסרה ססמת EAP"
-
-#: panels/network/wireless-security/eap-method-tls.c:93
-msgid "missing EAP-TLS identity"
-msgstr "חסר מזהה EAP-TLS"
-
-#: panels/network/wireless-security/eap-method-tls.c:103
-#, c-format
-msgid "invalid EAP-TLS CA certificate: %s"
-msgstr "אישור EAP-TLS CA לא תקף: %s"
-
-#: panels/network/wireless-security/eap-method-tls.c:113
-msgid "invalid EAP-TLS CA certificate: no certificate specified"
-msgstr "אישור EAP-TLS CA לא תקף: לא סופק אישור"
-
-#: panels/network/wireless-security/eap-method-tls.c:130
-#, c-format
-msgid "invalid EAP-TLS private-key: %s"
-msgstr "מפתח פרטי EAP-TLS לא תקף: %s"
-
-#: panels/network/wireless-security/eap-method-tls.c:140
-#, c-format
-msgid "invalid EAP-TLS user-certificate: %s"
-msgstr "משתמש אישור EAP-TLS לא תקף: %s"
-
-#: panels/network/wireless-security/eap-method-tls.c:279
-msgid "Unencrypted private keys are insecure"
-msgstr "מפתחות פרטיים בלתי מוצפנים אינם בטוחים"
-
-#: panels/network/wireless-security/eap-method-tls.c:282
-msgid ""
-"The selected private key does not appear to be protected by a password. This "
-"could allow your security credentials to be compromised. Please select a "
-"password-protected private key.\n"
-"\n"
-"(You can password-protect your private key with openssl)"
-msgstr ""
-"נראה שהמפתח הפרטי הנבחר לא מוגן על ידי ססמה. זה עלול לסכן את אישורי האבטחה "
-"שלך. נא לבחור מפתח פרטי המוגן בססמה.\n"
-"\n"
-"(ניתן להגן על המפתח הפרטי שלך עם openssl)"
-
-#: panels/network/wireless-security/eap-method-tls.c:517
-msgid "Choose your personal certificate"
-msgstr "נא לבחור את האישור האישי שלך"
-
-#: panels/network/wireless-security/eap-method-tls.c:531
-msgid "Choose your private key"
-msgstr "בחירת המפתח הפרטי שלך"
-
-#: panels/network/wireless-security/eap-method-tls.ui:11
-msgid "I_dentity"
-msgstr "_זהות"
-
-#: panels/network/wireless-security/eap-method-tls.ui:32
-msgid "_User certificate"
-msgstr "_אישור המשתמש"
-
-#: panels/network/wireless-security/eap-method-tls.ui:87
-msgid "Private _key"
-msgstr "מפתח _פרטי"
-
-#: panels/network/wireless-security/eap-method-tls.ui:108
-msgid "_Private key password"
-msgstr "ססמה למפתח ה_פרטי"
-
-#: panels/network/wireless-security/eap-method-ttls.c:99
-#, c-format
-msgid "invalid EAP-TTLS CA certificate: %s"
-msgstr "אישור רשות אישורים מסוג EAP-TTLS לא תקף: %s"
-
-#: panels/network/wireless-security/eap-method-ttls.c:107
-msgid "invalid EAP-TTLS CA certificate: no certificate specified"
-msgstr "אישור רשות אישורים מסוג EAP-TTLS לא תקף: לא צוין אישור"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:13
-msgid "PAP"
-msgstr "PAP"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:17
-msgid "MSCHAP"
-msgstr "MSCHAP"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:25
-msgid "MSCHAPv2 (no EAP)"
-msgstr "‏MSCHAPv2 ‏(לא EAP)"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:29
-msgid "CHAP"
-msgstr "CHAP"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:68
-#: panels/user-accounts/data/join-dialog.ui:90
-msgid "_Domain"
-msgstr "מ_תחם"
-
-#: panels/network/wireless-security/wireless-security.c:71
-msgid "Unknown error validating 802.1X security"
-msgstr "שגיאת אימות אבטחת 802.1x לא ידועה"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:15
-#: panels/network/wireless-security/ws-wpa-eap.ui:20
-msgid "TLS"
-msgstr "TLS"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:25
-#: panels/network/wireless-security/ws-wpa-eap.ui:30
-msgid "PWD"
-msgstr "PWD"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:30
-#: panels/network/wireless-security/ws-wpa-eap.ui:35
-msgid "FAST"
-msgstr "FAST"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:35
-#: panels/network/wireless-security/ws-wpa-eap.ui:40
-msgid "Tunneled TLS"
-msgstr "TLS מתועל"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:40
-#: panels/network/wireless-security/ws-wpa-eap.ui:45
-msgid "Protected EAP (PEAP)"
-msgstr "EAP מאובטח (PEAP)"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:52
-#: panels/network/wireless-security/ws-wep-key.ui:87
-#: panels/network/wireless-security/ws-wpa-eap.ui:57
-msgid "Au_thentication"
-msgstr "_אימות"
-
-#: panels/network/wireless-security/ws-file-chooser-button.c:49
-msgid "Select a file"
-msgstr "בחירת קובץ"
-
-#: panels/network/wireless-security/ws-leap.c:66
-msgid "missing leap-username"
-msgstr "חסר שם משתמש leap"
-
-#: panels/network/wireless-security/ws-leap.c:81
-msgid "missing leap-password"
-msgstr "חסרה ססמת leap"
-
-#: panels/network/wireless-security/ws-sae.c:77
-msgid "Wi-Fi password is missing."
-msgstr "חסרה ססמת רשת אלחוטית."
-
-#: panels/network/wireless-security/ws-sae.ui:33
-#: panels/network/wireless-security/ws-wpa-psk.ui:33
-msgid "_Type"
-msgstr "_סוג"
-
-#: panels/network/wireless-security/ws-wep-key.c:114
-msgid "missing wep-key"
-msgstr "חסר מפתח wep"
-
-#: panels/network/wireless-security/ws-wep-key.c:123
-#, c-format
-msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
-msgstr "מפתח wep לא תקף: מפתח באורך %zu חייב להכיל ספרות הקסדצימליות בלבד"
-
-#: panels/network/wireless-security/ws-wep-key.c:131
-#, c-format
-msgid ""
-"invalid wep-key: key with a length of %zu must contain only ascii characters"
-msgstr "מפתח wep לא תקף: מפתח באורך %zu חייב להכיל אך ורך תווי ascii"
-
-#: panels/network/wireless-security/ws-wep-key.c:137
-#, c-format
-msgid ""
-"invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
-"(ascii) or 10/26 (hex)"
-msgstr ""
-"מפתח wep לא תקף: אורך מפתח %zu שגוי. מפתח חייב להיות או באורך 5/13 (‏ascii) "
-"או 10/26 (הקסדצימלי)"
-
-#: panels/network/wireless-security/ws-wep-key.c:144
-msgid "invalid wep-key: passphrase must be non-empty"
-msgstr "מפתח wep לא תקף: ססמה לא יכולה להיות ריקה"
-
-#: panels/network/wireless-security/ws-wep-key.c:146
-msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-msgstr "מפתח wep לא תקף: ססמה חייבת להיות קצרה מ־64 תווים"
-
-#: panels/network/wireless-security/ws-wep-key.ui:11
-msgid "1 (Default)"
-msgstr "1 (בררת מחדל)"
-
-#: panels/network/wireless-security/ws-wep-key.ui:31
-msgid "Open System"
-msgstr "מערכת פתוחה"
-
-#: panels/network/wireless-security/ws-wep-key.ui:34
-msgid "Shared Key"
-msgstr "מפתח משותף"
-
-#: panels/network/wireless-security/ws-wep-key.ui:44
-msgid "_Key"
-msgstr "מ_פתח"
-
-#: panels/network/wireless-security/ws-wep-key.ui:75
-msgid "Sho_w key"
-msgstr "ה_צגת מפתח"
-
-#: panels/network/wireless-security/ws-wep-key.ui:115
-msgid "WEP inde_x"
-msgstr "מ_פתח ה־WEP"
-
-#: panels/network/wireless-security/ws-wpa-psk.c:77
-#, c-format
-msgid ""
-"invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
-"digits"
-msgstr ""
-"‏wpa-psk לא תקף: %zu אורך מפתח לא תקף. חייב להיות [8,63] בתים או 64 ספרות "
-"הקסדצימליות"
-
-#: panels/network/wireless-security/ws-wpa-psk.c:86
-msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-msgstr "‏wpa-psk לא תקף: לא נתן לפענח מפתח עם 64 בתים כהקסדצילמי"
-
 #. This is the per application switch for message tray usage.
 #: panels/notifications/cc-app-notifications-dialog.ui:15
 msgctxt "notifications"
@@ -4863,7 +4318,9 @@ msgstr "הצגת _תוכן הודעה במסך נעילה"
 msgid "_Do Not Disturb"
 msgstr "_נא לא להפריע"
 
+#. Translators: Whether to show notifications on the lock screen
 #: panels/notifications/cc-notifications-panel.ui:17
+#: panels/screen/cc-screen-panel.ui:68
 msgid "_Lock Screen Notifications"
 msgstr "התראות במסך _נעילה"
 
@@ -5293,21 +4750,25 @@ msgstr "פעולת כפתור _כיבוי"
 msgid "Show Battery _Percentage"
 msgstr "הצגת אחוז ה_סוללה"
 
-#: panels/power/cc-power-panel.ui:244
+#: panels/power/cc-power-panel.ui:209
+msgid "Show exact charge level in the top bar"
+msgstr "הצגת אחוז מדויק של טעינת הסוללה בלוח העליון"
+
+#: panels/power/cc-power-panel.ui:245
 msgid "Automatic Suspend"
 msgstr "השהיה אוטומטית"
 
-#: panels/power/cc-power-panel.ui:267
+#: panels/power/cc-power-panel.ui:268
 msgid "_Plugged In"
 msgstr "ב_חיבור לחשמל"
 
-#: panels/power/cc-power-panel.ui:279
+#: panels/power/cc-power-panel.ui:280
 msgid "On _Battery Power"
 msgstr "על _סוללה"
 
-#: panels/power/cc-power-panel.ui:312 panels/power/cc-power-panel.ui:348
+#: panels/power/cc-power-panel.ui:313 panels/power/cc-power-panel.ui:349
 #: panels/universal-access/cc-ua-mouse-page.ui:100
-#: panels/universal-access/cc-ua-typing-page.ui:126
+#: panels/universal-access/cc-ua-typing-page.ui:127
 msgid "Delay"
 msgstr "השהיה"
 
@@ -5367,12 +4828,12 @@ msgid "Failed to add new printer."
 msgstr "הוספת המדפסת החדשה נכשלה."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1247
+#: panels/printers/cc-printers-panel.c:1249
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "לא ניתן לטעון את מנשק המשתמש: %s"
 
-#: panels/printers/cc-printers-panel.c:1315
+#: panels/printers/cc-printers-panel.c:1317
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "שחרור להוספת מדפסות ולשינוי הגדרות"
 
@@ -5406,25 +4867,25 @@ msgid "_Unlock"
 msgstr "_שחרור"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:197
+#: panels/printers/new-printer-dialog.ui:181
 msgid "No Printers Found"
 msgstr "לא נמצא מדפסות"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:247
+#: panels/printers/new-printer-dialog.ui:225
 msgid "Enter a network address or search for a printer"
 msgstr "יש להזין כתובת רשת או חיפוש מדפסת"
 
-#: panels/printers/new-printer-dialog.ui:292
+#: panels/printers/new-printer-dialog.ui:270
 msgid "Authentication Required"
 msgstr "נדרש אימות"
 
-#: panels/printers/new-printer-dialog.ui:308
+#: panels/printers/new-printer-dialog.ui:286
 msgid "Enter username and password to view printers on Print Server."
 msgstr "יש להזין שם משתמש וססמה להצגת מדפסות זמינות על שרת ההדפסה."
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:317
+#: panels/printers/new-printer-dialog.ui:295
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/user-accounts/cc-add-user-dialog.ui:94
 #: panels/user-accounts/cc-add-user-dialog.ui:339
@@ -6015,23 +5476,24 @@ msgid "Restart"
 msgstr "הפעלה מחדש"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:10 panels/printers/printers.ui:171
+#. Translators: This button adds a new printer.
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:148
 msgid "Add Printer…"
 msgstr "הוספת מדפסת…"
 
-#: panels/printers/printers.ui:160
-msgid "No printers"
+#: panels/printers/printers.ui:145
+msgid "No Printers"
 msgstr "אין מדפסות בנמצא"
 
-#. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:196
-msgid ""
-"Sorry! The system printing service\n"
-"    doesn’t seem to be available."
-msgstr ""
-"כפי הנראה, שירותי ההדפסה של המערכת\n"
-"‬\n"
-"‫    ‫‫‬‫‬אינם זמינים, עמך הסליחה."
+#. Translators: Title if the CUPS server is not running (we can not connect to it).
+#: panels/printers/printers.ui:168
+msgid "No Print Service"
+msgstr "אין שרת הדפסה"
+
+#. Translators: Description if the CUPS server is not running (we can not connect to it).
+#: panels/printers/printers.ui:169
+msgid "The system printing service doesn’t seem to be available."
+msgstr "כפי הנראה, שירותי ההדפסה של המערכת אינם זמינים."
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
 #: panels/region/cc-format-chooser.ui:4
@@ -6419,10 +5881,6 @@ msgstr "זמן _נעילת מסך אוטומטית"
 msgid "Period after the screen blanks when the screen is automatically locked."
 msgstr "פרק הזמן שלאחר החשכת המסך כאשר המסך ננעל באופן אוטומטי."
 
-#: panels/screen/cc-screen-panel.ui:68
-msgid "Show _Notifications on Lock Screen"
-msgstr "הצגת הת_ראות במסך נעילה"
-
 #: panels/screen/cc-screen-panel.ui:86
 msgid "Forbid new _USB devices"
 msgstr "מניעת התקני _USB חדשים"
@@ -6532,40 +5990,40 @@ msgstr "לא נבחרו רשתות לשיתוף"
 msgid "Networks"
 msgstr "רשתות"
 
-#: panels/sharing/cc-sharing-panel.c:366
+#: panels/sharing/cc-sharing-panel.c:323
 msgctxt "service is enabled"
 msgid "On"
 msgstr "פעיל"
 
-#: panels/sharing/cc-sharing-panel.c:368 panels/sharing/cc-sharing-panel.c:395
+#: panels/sharing/cc-sharing-panel.c:325 panels/sharing/cc-sharing-panel.c:352
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "כבוי"
 
-#: panels/sharing/cc-sharing-panel.c:398
+#: panels/sharing/cc-sharing-panel.c:355
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "מופעל"
 
-#: panels/sharing/cc-sharing-panel.c:401
+#: panels/sharing/cc-sharing-panel.c:358
 msgctxt "service is active"
 msgid "Active"
 msgstr "פעיל"
 
-#: panels/sharing/cc-sharing-panel.c:519
+#: panels/sharing/cc-sharing-panel.c:476
 msgid "Choose a Folder"
 msgstr "נא לבחור בתיקייה"
 
-#: panels/sharing/cc-sharing-panel.c:672 panels/wwan/cc-wwan-apn-dialog.ui:33
+#: panels/sharing/cc-sharing-panel.c:629 panels/wwan/cc-wwan-apn-dialog.ui:33
 msgid "Add"
 msgstr "הוספה"
 
-#: panels/sharing/cc-sharing-panel.c:736
+#: panels/sharing/cc-sharing-panel.c:693
 msgid "Enable media sharing"
 msgstr "הפעלת שיתוף מדיה"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:756
+#: panels/sharing/cc-sharing-panel.c:715
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6575,7 +6033,7 @@ msgstr ""
 "הנוכחית שלך באמצעות: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:762
+#: panels/sharing/cc-sharing-panel.c:721
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -6586,23 +6044,23 @@ msgstr ""
 "במעטפת מאובטחת: \n"
 "%s"
 
-#: panels/sharing/cc-sharing-panel.c:942
+#: panels/sharing/cc-sharing-panel.c:795
 msgid "Enable personal media sharing"
 msgstr "הפעלת שיתוף מדיה פרטי"
 
-#: panels/sharing/cc-sharing-panel.c:1308
+#: panels/sharing/cc-sharing-panel.c:1159
 msgid "Device name copied"
 msgstr "שם ההתקן הועתק"
 
-#: panels/sharing/cc-sharing-panel.c:1319
+#: panels/sharing/cc-sharing-panel.c:1170
 msgid "Device address copied"
 msgstr "כתובת ההתקן הועתקה"
 
-#: panels/sharing/cc-sharing-panel.c:1330
+#: panels/sharing/cc-sharing-panel.c:1181
 msgid "Username copied"
 msgstr "שם המשתמש הועתק"
 
-#: panels/sharing/cc-sharing-panel.c:1341
+#: panels/sharing/cc-sharing-panel.c:1192
 msgid "Password copied"
 msgstr "ססמה הועתקה"
 
@@ -6611,117 +6069,118 @@ msgstr "ססמה הועתקה"
 msgid "Sharing"
 msgstr "שיתוף"
 
-#: panels/sharing/cc-sharing-panel.ui:31
-msgid "_Computer Name"
-msgstr "שם ה_מחשב"
-
-#: panels/sharing/cc-sharing-panel.ui:58
+#: panels/sharing/cc-sharing-panel.ui:32
 msgid "_File Sharing"
 msgstr "שיתוף _קבצים"
 
-#: panels/sharing/cc-sharing-panel.ui:65
+#: panels/sharing/cc-sharing-panel.ui:40
 msgid "Remote _Desktop"
 msgstr "_שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:72
+#: panels/sharing/cc-sharing-panel.ui:48
 msgid "_Media Sharing"
 msgstr "שיתוף _מדיה"
 
-#: panels/sharing/cc-sharing-panel.ui:79
+#: panels/sharing/cc-sharing-panel.ui:56
 msgid "_Remote Login"
 msgstr "כניסה מ_רוחקת"
 
-#: panels/sharing/cc-sharing-panel.ui:92
+#: panels/sharing/cc-sharing-panel.ui:66
 msgid "File Sharing"
 msgstr "שיתוף קבצים"
 
-#: panels/sharing/cc-sharing-panel.ui:138
+#: panels/sharing/cc-sharing-panel.ui:112
 msgid "_Require Password"
 msgstr "ד_רישת ססמה"
 
-#: panels/sharing/cc-sharing-panel.ui:195
-#: panels/sharing/cc-sharing-panel.ui:231
+#: panels/sharing/cc-sharing-panel.ui:126
+#: panels/user-accounts/cc-user-panel.ui:182
+msgid "_Password"
+msgstr "_ססמה"
+
+#: panels/sharing/cc-sharing-panel.ui:169
+#: panels/sharing/cc-sharing-panel.ui:205
 msgid "Remote Login"
 msgstr "התחברות מרוחקת"
 
-#: panels/sharing/cc-sharing-panel.ui:251
-#: panels/sharing/cc-sharing-panel.ui:270
+#: panels/sharing/cc-sharing-panel.ui:225
+#: panels/sharing/cc-sharing-panel.ui:244
 msgid "Remote Desktop"
 msgstr "שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:266
+#: panels/sharing/cc-sharing-panel.ui:240
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
 msgstr "שולחן עבודה מרוחק מאפשר צפייה ושליטה בשולחן העבודה שלך ממחשב אחר."
 
-#: panels/sharing/cc-sharing-panel.ui:271
+#: panels/sharing/cc-sharing-panel.ui:245
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr "הפעלה או השבתה של התחברות מרוחקת לשולחן העבודה של מחשב זה."
 
-#: panels/sharing/cc-sharing-panel.ui:284
+#: panels/sharing/cc-sharing-panel.ui:258
 msgid "Remote Control"
 msgstr "שליטה מרחוק"
 
-#: panels/sharing/cc-sharing-panel.ui:285
+#: panels/sharing/cc-sharing-panel.ui:259
 msgid "Allows remote connections to control the screen."
 msgstr "לאפשר להתחברויות מרוחקות לשלוט במסך זה."
 
-#: panels/sharing/cc-sharing-panel.ui:299
+#: panels/sharing/cc-sharing-panel.ui:273
 msgid "How to Connect"
 msgstr "כיצד להתחבר"
 
-#: panels/sharing/cc-sharing-panel.ui:300
+#: panels/sharing/cc-sharing-panel.ui:274
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr "התחברות למחשב זה באמצעות שם ההתקן או כתובת שולחן העבודה המרוחק."
 
-#: panels/sharing/cc-sharing-panel.ui:318
-#: panels/sharing/cc-sharing-panel.ui:345
-#: panels/sharing/cc-sharing-panel.ui:372
-#: panels/sharing/cc-sharing-panel.ui:390
+#: panels/sharing/cc-sharing-panel.ui:293
+#: panels/sharing/cc-sharing-panel.ui:320
+#: panels/sharing/cc-sharing-panel.ui:347
+#: panels/sharing/cc-sharing-panel.ui:365
 msgid "Copy"
 msgstr "העתקה"
 
-#: panels/sharing/cc-sharing-panel.ui:331
+#: panels/sharing/cc-sharing-panel.ui:306
 msgid "Remote Desktop Address"
 msgstr "כתובת שולחן עבודה מרוחק"
 
-#: panels/sharing/cc-sharing-panel.ui:361
+#: panels/sharing/cc-sharing-panel.ui:336
 msgid "Authentication"
 msgstr "אימות"
 
-#: panels/sharing/cc-sharing-panel.ui:362
+#: panels/sharing/cc-sharing-panel.ui:337
 msgid "The user name and password are required to connect to this computer."
 msgstr "שם משתמש וססמה נדרשים על מנת להתחבר למחשב זה."
 
-#: panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:341
 msgid "User Name"
 msgstr "שם משתמש"
 
-#: panels/sharing/cc-sharing-panel.ui:405
+#: panels/sharing/cc-sharing-panel.ui:380
 msgid "Verify Encryption"
 msgstr "אימות הצפנה"
 
-#: panels/sharing/cc-sharing-panel.ui:434
+#: panels/sharing/cc-sharing-panel.ui:409
 msgid "Encryption Fingerprint"
 msgstr "הצפנת טביעת אצבע"
 
-#: panels/sharing/cc-sharing-panel.ui:435
+#: panels/sharing/cc-sharing-panel.ui:410
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
 msgstr "הצפנת טביעת האצבע ניתנת לצפייה בצד הלקוח המתחבר וצריכה להיות זהה."
 
-#: panels/sharing/cc-sharing-panel.ui:467
+#: panels/sharing/cc-sharing-panel.ui:442
 msgid "Media Sharing"
 msgstr "שיתוף מדיה"
 
-#: panels/sharing/cc-sharing-panel.ui:489
+#: panels/sharing/cc-sharing-panel.ui:464
 msgid "Share music, photos and videos over the network."
 msgstr "שיתוף מוזיקה, תמונות וסרטים ברשת."
 
-#: panels/sharing/cc-sharing-panel.ui:502
+#: panels/sharing/cc-sharing-panel.ui:477
 msgid "Folders"
 msgstr "תיקיות"
 
@@ -6746,7 +6205,7 @@ msgstr "הפעלה או השבתה של התחברות מרוחקת"
 msgid "Authentication is required to enable or disable remote login"
 msgstr "נדרש אימות כדי להפעיל או להשבית התחברות מרחוק"
 
-#: panels/sound/cc-alert-chooser.c:153
+#: panels/sound/cc-alert-chooser.c:172
 msgid "Custom"
 msgstr "התאמה אישית"
 
@@ -6766,11 +6225,11 @@ msgstr "הנפה"
 msgid "Hum"
 msgstr "המהום"
 
-#: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:144
+#: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:145
 msgid "Balance"
 msgstr "איזון"
 
-#: panels/sound/cc-fade-slider.ui:13 panels/sound/cc-sound-panel.ui:170
+#: panels/sound/cc-fade-slider.ui:13 panels/sound/cc-sound-panel.ui:171
 msgid "Fade"
 msgstr "עמעום"
 
@@ -6782,14 +6241,13 @@ msgstr "אחורי"
 msgid "Front"
 msgstr "קדמי"
 
-#: panels/sound/cc-output-test-dialog.c:134
-#, c-format
-msgid "Testing %s"
-msgstr "‏%s בבדיקה"
+#: panels/sound/cc-output-test-wheel.c:185
+msgid "Select a Speaker"
+msgstr "יש לבחור רמקול"
 
-#: panels/sound/cc-output-test-dialog.ui:131
-msgid "Click a speaker to test"
-msgstr "יש ללחוץ על רמקול לבדיקה"
+#: panels/sound/cc-output-test-window.ui:4
+msgid "Test Speakers"
+msgstr "בדיקת רמקולים"
 
 #: panels/sound/cc-sound-panel.ui:8
 msgid "System Volume"
@@ -6807,32 +6265,32 @@ msgstr "דרגות עצמת שמע"
 msgid "Output"
 msgstr "פלט"
 
-#: panels/sound/cc-sound-panel.ui:59
+#: panels/sound/cc-sound-panel.ui:70
 msgid "Output Device"
 msgstr "התקן פלט"
 
-#: panels/sound/cc-sound-panel.ui:81
+#: panels/sound/cc-sound-panel.ui:87
 #: panels/universal-access/cc-ua-hearing-page.ui:69
 msgid "Test"
 msgstr "בדיקה"
 
-#: panels/sound/cc-sound-panel.ui:196 panels/sound/cc-subwoofer-slider.ui:13
+#: panels/sound/cc-sound-panel.ui:197 panels/sound/cc-subwoofer-slider.ui:13
 msgid "Subwoofer"
 msgstr "סאבוופר"
 
-#: panels/sound/cc-sound-panel.ui:214
+#: panels/sound/cc-sound-panel.ui:215
 msgid "Input"
 msgstr "קלט"
 
-#: panels/sound/cc-sound-panel.ui:235
+#: panels/sound/cc-sound-panel.ui:242
 msgid "Input Device"
 msgstr "התקני קלט"
 
-#: panels/sound/cc-sound-panel.ui:309 panels/sound/cc-volume-slider.ui:13
+#: panels/sound/cc-sound-panel.ui:313 panels/sound/cc-volume-slider.ui:13
 msgid "Volume"
 msgstr "עצמה"
 
-#: panels/sound/cc-sound-panel.ui:327
+#: panels/sound/cc-sound-panel.ui:331
 msgid "Alert Sound"
 msgstr "צליל התראה"
 
@@ -6975,21 +6433,21 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "אומת"
 
-#: panels/thunderbolt/cc-bolt-panel.c:169
+#: panels/thunderbolt/cc-bolt-panel.c:234
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr "מערכת הבת של Thunderbolt ‏(boltd) אינה מותקנת או לא מוגדרת כראוי."
 
-#: panels/thunderbolt/cc-bolt-panel.c:425
+#: panels/thunderbolt/cc-bolt-panel.c:490
 #: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "לאפשר גישה ישירה להתקנים דוגמת תחנות עגינה ומעבדים גרפיים חיצוניים."
 
-#: panels/thunderbolt/cc-bolt-panel.c:426
+#: panels/thunderbolt/cc-bolt-panel.c:491
 msgid "Only USB and Display Port devices can attach."
 msgstr "רק התקני USB ו־DisplayPort ניתנים לצירוף."
 
-#: panels/thunderbolt/cc-bolt-panel.c:461
+#: panels/thunderbolt/cc-bolt-panel.c:526
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -6999,15 +6457,15 @@ msgstr ""
 "או שהמערכת חסרת תמיכה ב־Thunderbolt, או שהיא הושבתה ב־BIOS או שהיא הוגדרה "
 "כשכבת אבטחה לא נתמכת ב־BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:505
+#: panels/thunderbolt/cc-bolt-panel.c:570
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "תמיכה ב־Thunderbolt הושבתה ב־BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:509
+#: panels/thunderbolt/cc-bolt-panel.c:574
 msgid "Thunderbolt security level could not be determined."
 msgstr "שכבת האבטחה של Thunderbolt לא ניתנת לקביעה."
 
-#: panels/thunderbolt/cc-bolt-panel.c:614
+#: panels/thunderbolt/cc-bolt-panel.c:679
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "שגיאה בשינוי המצב הישיר: %s"
@@ -7048,11 +6506,6 @@ msgstr "Thunderbolt;פרטיות;"
 #: panels/universal-access/cc-cursor-size-dialog.ui:5
 msgid "Cursor Size"
 msgstr "גודל סמן"
-
-#: panels/universal-access/cc-cursor-size-dialog.ui:22
-msgid ""
-"Cursor size can be combined with zoom to make it easier to see the cursor."
-msgstr "סמן העכבר ניתן להגדלה על מנת להקל עליך לראות אותו."
 
 #: panels/universal-access/cc-ua-hearing-page.ui:9
 msgid "_Overamplification"
@@ -7114,9 +6567,9 @@ msgstr "פרק זמן לחיצה _כפולה"
 #: panels/universal-access/cc-ua-mouse-page.ui:34
 #: panels/universal-access/cc-ua-mouse-page.ui:72
 #: panels/universal-access/cc-ua-mouse-page.ui:105
-#: panels/universal-access/cc-ua-typing-page.ui:131
-#: panels/universal-access/cc-ua-typing-page.ui:185
-#: panels/universal-access/cc-ua-typing-page.ui:235
+#: panels/universal-access/cc-ua-typing-page.ui:132
+#: panels/universal-access/cc-ua-typing-page.ui:186
+#: panels/universal-access/cc-ua-typing-page.ui:236
 #: panels/universal-access/cc-ua-zoom-page.ui:168
 msgctxt "secondary click"
 msgid "Short"
@@ -7125,9 +6578,9 @@ msgstr "קצר"
 #: panels/universal-access/cc-ua-mouse-page.ui:37
 #: panels/universal-access/cc-ua-mouse-page.ui:75
 #: panels/universal-access/cc-ua-mouse-page.ui:108
-#: panels/universal-access/cc-ua-typing-page.ui:134
-#: panels/universal-access/cc-ua-typing-page.ui:188
-#: panels/universal-access/cc-ua-typing-page.ui:238
+#: panels/universal-access/cc-ua-typing-page.ui:135
+#: panels/universal-access/cc-ua-typing-page.ui:189
+#: panels/universal-access/cc-ua-typing-page.ui:239
 #: panels/universal-access/cc-ua-zoom-page.ui:172
 msgctxt "secondary click delay"
 msgid "Long"
@@ -7146,8 +6599,8 @@ msgid "Secondary click by holding down the primary mouse button"
 msgstr "הפעלת לחיצה משנית על ידי החזקת הכפתור הראשי"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:67
-#: panels/universal-access/cc-ua-typing-page.ui:180
-#: panels/universal-access/cc-ua-typing-page.ui:230
+#: panels/universal-access/cc-ua-typing-page.ui:181
+#: panels/universal-access/cc-ua-typing-page.ui:231
 msgid "Acceptance Delay"
 msgstr "השהיית קבלה"
 
@@ -7257,44 +6710,56 @@ msgstr[3] "‏‫%d פיקסלים"
 msgid "_High Contrast"
 msgstr "ניגודיות _גבוהה"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:18
+#: panels/universal-access/cc-ua-seeing-page.ui:11
+msgid "Increase color contrast of foreground and background interface elements"
+msgstr "הגדלת ניגודיות הצבע של חזית ורקע רכיבי ממשק"
+
+#: panels/universal-access/cc-ua-seeing-page.ui:19
 msgctxt "Thunderbolt Device Status"
 msgid "_Reduce Animation"
 msgstr "ה_פחתת הנפשות"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:19
+#: panels/universal-access/cc-ua-seeing-page.ui:20
 msgid "Reduce animations in the user interface to reduce motion"
 msgstr "הפחתת הנפשות בממשק המשתמש להפחתת תנועה"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:27
+#: panels/universal-access/cc-ua-seeing-page.ui:28
 msgid "_Large Text"
 msgstr "טקסט _גדול"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:35
+#: panels/universal-access/cc-ua-seeing-page.ui:29
+msgid "Increase the size of all text in the user interface"
+msgstr "הגדלת הגודל של כל הטקסט בממשק המשתמש"
+
+#: panels/universal-access/cc-ua-seeing-page.ui:37
 msgid "_Cursor Size"
 msgstr "גודל _סמן"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:44
+#: panels/universal-access/cc-ua-seeing-page.ui:38
+msgid "The size of the cursor can be increased to make it easier to see"
+msgstr "סמן העכבר ניתן להגדלה על מנת להקל עליך לראות אותו"
+
+#: panels/universal-access/cc-ua-seeing-page.ui:47
 msgid "_Sound Keys"
 msgstr "_צלילי מקשים"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:45
+#: panels/universal-access/cc-ua-seeing-page.ui:48
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "צפצוף כאשר Num Lock או Caps Lock מופעלים או מושבתים"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:53
+#: panels/universal-access/cc-ua-seeing-page.ui:56
 msgid "_Overlay Scrollbars"
 msgstr "ה_סתרת פסי גלילה"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:54
+#: panels/universal-access/cc-ua-seeing-page.ui:57
 msgid "Use scrollbars that overlay the content and automatically hide"
 msgstr "שימוש בפסי גלילה המכסים את התוכן ומוסתרים באופן אוטומטי"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:67
+#: panels/universal-access/cc-ua-seeing-page.ui:70
 msgid "Screen _Reader"
 msgstr "מ_קריא מסך"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:68
+#: panels/universal-access/cc-ua-seeing-page.ui:71
 msgid "The screen reader reads displayed text as you move the focus"
 msgstr "קורא המסך קורא את הטקסט המוצג כאשר המוקד זז"
 
@@ -7302,112 +6767,104 @@ msgstr "קורא המסך קורא את הטקסט המוצג כאשר המוק�
 msgid "_Screen Keyboard"
 msgstr "מקלדת _מסך"
 
-#: panels/universal-access/cc-ua-typing-page.ui:16
+#: panels/universal-access/cc-ua-typing-page.ui:10
+msgid "Use the on-screen keyboard to type in input fields"
+msgstr "שימוש במקלדת על המסך על מנת להקליד בשדות קלט"
+
+#: panels/universal-access/cc-ua-typing-page.ui:17
 msgid "_Enable by Keyboard"
 msgstr "הפעלה באמצעות המ_קלדת"
 
-#: panels/universal-access/cc-ua-typing-page.ui:17
+#: panels/universal-access/cc-ua-typing-page.ui:18
 msgid "Turn accessibility features on or off using the keyboard"
 msgstr "הפעלת וכיבוי של תכונות נגישות באמצעות המקלדת"
 
-#: panels/universal-access/cc-ua-typing-page.ui:27
+#: panels/universal-access/cc-ua-typing-page.ui:28
 msgid "Text Cursor"
 msgstr "סמן טקסט"
 
-#: panels/universal-access/cc-ua-typing-page.ui:31
+#: panels/universal-access/cc-ua-typing-page.ui:32
 msgid "_Cursor Blinking"
 msgstr "הבהוב _סמן"
 
-#: panels/universal-access/cc-ua-typing-page.ui:32
+#: panels/universal-access/cc-ua-typing-page.ui:33
 msgid "Change if the cursor blinks in text fields"
 msgstr "הגדרה אם על הסמן להבהב בשדות הטקסט"
 
-#: panels/universal-access/cc-ua-typing-page.ui:40
+#: panels/universal-access/cc-ua-typing-page.ui:41
 msgid "_Blink Speed"
 msgstr "מהירות ה_בהוב"
 
-#: panels/universal-access/cc-ua-typing-page.ui:46
+#: panels/universal-access/cc-ua-typing-page.ui:47
 msgid "Blink Speed"
 msgstr "מהירות הבהוב"
 
-#: panels/universal-access/cc-ua-typing-page.ui:49
-#: panels/universal-access/cc-ua-typing-page.ui:107
-msgctxt "keyboard, speed"
-msgid "Fast"
-msgstr "מהיר"
-
-#: panels/universal-access/cc-ua-typing-page.ui:52
-#: panels/universal-access/cc-ua-typing-page.ui:110
-msgctxt "keyboard, speed"
-msgid "Slow"
-msgstr "אטי"
-
-#: panels/universal-access/cc-ua-typing-page.ui:76
+#: panels/universal-access/cc-ua-typing-page.ui:77
 msgid "Test Entry"
 msgstr "בדיקת הקלדה"
 
-#: panels/universal-access/cc-ua-typing-page.ui:81
+#: panels/universal-access/cc-ua-typing-page.ui:82
 msgid "Type to test"
 msgstr "יש להקליד כדי לבדוק"
 
-#: panels/universal-access/cc-ua-typing-page.ui:92
+#: panels/universal-access/cc-ua-typing-page.ui:93
 msgid "Typing Assist"
 msgstr "מסייע ההקלדה"
 
-#: panels/universal-access/cc-ua-typing-page.ui:96
+#: panels/universal-access/cc-ua-typing-page.ui:97
 msgid "_Repeat Keys"
 msgstr "מקשים _חוזרים"
 
-#: panels/universal-access/cc-ua-typing-page.ui:97
+#: panels/universal-access/cc-ua-typing-page.ui:98
 msgid "Key presses repeat when the key is held down"
 msgstr "לחיצות מקש חוזרות בעת לחיצה רצופה"
 
-#: panels/universal-access/cc-ua-typing-page.ui:102
+#: panels/universal-access/cc-ua-typing-page.ui:103
 msgid "Speed"
 msgstr "מהירות"
 
-#: panels/universal-access/cc-ua-typing-page.ui:153
+#: panels/universal-access/cc-ua-typing-page.ui:154
 msgid "_Sticky Keys"
 msgstr "מקשים _דביקים"
 
-#: panels/universal-access/cc-ua-typing-page.ui:154
-msgid "Sequences of modifier keys act as a key combinations"
+#: panels/universal-access/cc-ua-typing-page.ui:155
+msgid "Sequences of modifier keys act as a key combination"
 msgstr "התייחסות לרצף של מקשי החלפה כצירוף מקשים"
 
-#: panels/universal-access/cc-ua-typing-page.ui:159
+#: panels/universal-access/cc-ua-typing-page.ui:160
 msgid "Disable if two keys are pressed together"
 msgstr "השבתה אם שני מקשים נלחצים ביחד"
 
-#: panels/universal-access/cc-ua-typing-page.ui:165
+#: panels/universal-access/cc-ua-typing-page.ui:166
 msgid "Beep when modifier key is pressed"
 msgstr "צפצוף בעת לחיצה על מקש החלפה"
 
-#: panels/universal-access/cc-ua-typing-page.ui:174
+#: panels/universal-access/cc-ua-typing-page.ui:175
 msgid "S_low Keys"
 msgstr "מקשים _אטיים"
 
-#: panels/universal-access/cc-ua-typing-page.ui:175
+#: panels/universal-access/cc-ua-typing-page.ui:176
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr "הוספת השהיה בין לחיצת המקש לבין קבלת הלחיצה"
 
-#: panels/universal-access/cc-ua-typing-page.ui:203
+#: panels/universal-access/cc-ua-typing-page.ui:204
 msgid "Beep when a key is pressed"
 msgstr "צפצוף כאשר מקש נלחץ"
 
-#: panels/universal-access/cc-ua-typing-page.ui:209
+#: panels/universal-access/cc-ua-typing-page.ui:210
 msgid "Beep when a key is accepted"
 msgstr "צפצוף כאשר מקש מתקבל"
 
-#: panels/universal-access/cc-ua-typing-page.ui:215
-#: panels/universal-access/cc-ua-typing-page.ui:253
+#: panels/universal-access/cc-ua-typing-page.ui:216
+#: panels/universal-access/cc-ua-typing-page.ui:254
 msgid "Beep when a key is rejected"
 msgstr "צפצוף בעת דחיית לחיצת מקש"
 
-#: panels/universal-access/cc-ua-typing-page.ui:224
+#: panels/universal-access/cc-ua-typing-page.ui:225
 msgid "_Bounce Keys"
 msgstr "מקשים _חוזרים"
 
-#: panels/universal-access/cc-ua-typing-page.ui:225
+#: panels/universal-access/cc-ua-typing-page.ui:226
 msgid "Ignore fast duplicate keypresses"
 msgstr "התעלמות מלחיצות מקש כפולות מהירות"
 
@@ -7416,7 +6873,11 @@ msgctxt "Sound event"
 msgid "_Desktop Zoom"
 msgstr "תקריב _שולחן העבודה"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:19
+#: panels/universal-access/cc-ua-zoom-page.ui:10
+msgid "Magnify the entire screen"
+msgstr "הגדלת המסך כולו"
+
+#: panels/universal-access/cc-ua-zoom-page.ui:20
 msgid "Magnifier"
 msgstr "זכוכית מגדלת"
 
@@ -7462,8 +6923,8 @@ msgid "Right Half"
 msgstr "החצי הימני"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:88
-msgid "Follow Behaviour"
-msgstr "התנהגות סמן ההגדלה"
+msgid "Follow Behavior"
+msgstr "התנהגות ההגדלה"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:93
 msgid "Moves with Contents"
@@ -7474,7 +6935,7 @@ msgid "Pushes Contents Around"
 msgstr "דחיפת התכנים סביב"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:95
-msgid "Remains Cented"
+msgid "Remains Centered"
 msgstr "נשאר ממורכז"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:107
@@ -7524,12 +6985,12 @@ msgid "_Inverted"
 msgstr "הי_פוך"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:212
-msgid "Reverse colors in the magnifier region"
+msgid "Invert colors in the magnifier region"
 msgstr "היפוך צבעים באזור ההגדלה"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:220
 msgid "Brightness"
-msgstr "_בהירות"
+msgstr "בהירות"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:225
 #: panels/universal-access/cc-ua-zoom-page.ui:248
@@ -8017,10 +7478,8 @@ msgid "Fingerprint device storage is full"
 msgstr "אחסון התקן טביעת האצבע מלא"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:786
-#, fuzzy
-#| msgid "Fingerprint Device"
 msgid "Fingerprint is duplicate"
-msgstr "התקן טביעת אצבע"
+msgstr "טביעת אצבע כפולה"
 
 #: panels/user-accounts/cc-fingerprint-dialog.c:790
 msgid "Failed to enroll new fingerprint"
@@ -8112,7 +7571,7 @@ msgstr "‏%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:725
+#: panels/user-accounts/cc-user-panel.c:743
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -8120,7 +7579,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:729
+#: panels/user-accounts/cc-user-panel.c:747
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -8212,37 +7671,41 @@ msgstr "הססמה שגויה, נא לנסות שוב"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "לא ניתן להתחבר אל התחום %s:‏ %s"
 
-#: panels/user-accounts/cc-user-panel.c:354
+#: panels/user-accounts/cc-user-panel.c:258
+msgid "Add User…"
+msgstr "הוספת משתמש…"
+
+#: panels/user-accounts/cc-user-panel.c:372
 msgid "Failed to delete user"
 msgstr "מחיקת משתמש נכשלה"
 
-#: panels/user-accounts/cc-user-panel.c:411
-#: panels/user-accounts/cc-user-panel.c:466
-#: panels/user-accounts/cc-user-panel.c:512
+#: panels/user-accounts/cc-user-panel.c:429
+#: panels/user-accounts/cc-user-panel.c:484
+#: panels/user-accounts/cc-user-panel.c:530
 msgid "Failed to revoke remotely managed user"
 msgstr "ביטול המשתמש המנוהל מרחוק נכשל"
 
-#: panels/user-accounts/cc-user-panel.c:561
+#: panels/user-accounts/cc-user-panel.c:579
 msgid "You cannot delete your own account."
 msgstr "מחיקת החשבון שלך על ידיך אינה אפשרית."
 
-#: panels/user-accounts/cc-user-panel.c:570
+#: panels/user-accounts/cc-user-panel.c:588
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s עדיין במערכת"
 
-#: panels/user-accounts/cc-user-panel.c:574
+#: panels/user-accounts/cc-user-panel.c:592
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "מחיקת משתמש כשהוא מחובר עלולה להשאיר את המערכת במצב בלתי יציב."
 
-#: panels/user-accounts/cc-user-panel.c:583
+#: panels/user-accounts/cc-user-panel.c:601
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "לשמור על הקבצים של %s?"
 
-#: panels/user-accounts/cc-user-panel.c:587
+#: panels/user-accounts/cc-user-panel.c:605
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8250,60 +7713,60 @@ msgstr ""
 "ניתן לשמור על תיקיית הבית, מאגר הדואר והקבצים הזמניים בהישג ידך לאחר מחיקת "
 "משתמש."
 
-#: panels/user-accounts/cc-user-panel.c:590
+#: panels/user-accounts/cc-user-panel.c:608
 msgid "_Delete Files"
 msgstr "_מחיקת הקבצים"
 
-#: panels/user-accounts/cc-user-panel.c:591
+#: panels/user-accounts/cc-user-panel.c:609
 msgid "_Keep Files"
 msgstr "_שמירת הקבצים"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:623
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "לשלול את החשבון של %s שמנוהל מרחוק?"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:627
 msgid "_Delete"
 msgstr "מ_חיקה"
 
-#: panels/user-accounts/cc-user-panel.c:659
+#: panels/user-accounts/cc-user-panel.c:677
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "חשבון מושבת"
 
-#: panels/user-accounts/cc-user-panel.c:667
+#: panels/user-accounts/cc-user-panel.c:685
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "להגדרה בהתחברות הבאה"
 
-#: panels/user-accounts/cc-user-panel.c:670
+#: panels/user-accounts/cc-user-panel.c:688
 msgctxt "Password mode"
 msgid "None"
 msgstr "אין"
 
-#: panels/user-accounts/cc-user-panel.c:713
+#: panels/user-accounts/cc-user-panel.c:731
 msgid "Logged in"
 msgstr "נכנסת"
 
-#: panels/user-accounts/cc-user-panel.c:1200
+#: panels/user-accounts/cc-user-panel.c:1218
 msgid "Failed to contact the accounts service"
 msgstr "לא ניתן ליצור קשר עם שירות החשבונות"
 
-#: panels/user-accounts/cc-user-panel.c:1202
+#: panels/user-accounts/cc-user-panel.c:1220
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "נא לוודא ששירות החשבונות (AccountService) מותקן ומופעל."
 
-#: panels/user-accounts/cc-user-panel.c:1224
+#: panels/user-accounts/cc-user-panel.c:1242
 msgid "This panel must be unlocked to change this setting"
 msgstr "יש הכרח לשחרר לוח זה על מנת לשנות הגדרה זו"
 
-#: panels/user-accounts/cc-user-panel.c:1291
+#: panels/user-accounts/cc-user-panel.c:1309
 msgid "Delete the selected user account"
 msgstr "מחיקת חשבון המשתמש הנבחר"
 
-#: panels/user-accounts/cc-user-panel.c:1295
-#: panels/user-accounts/cc-user-panel.c:1407
+#: panels/user-accounts/cc-user-panel.c:1313
+#: panels/user-accounts/cc-user-panel.c:1454
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8311,7 +7774,7 @@ msgstr ""
 "כדי למחוק את המשתמש הנבחר\n"
 "ראשית יש ללחוץ על הסמל *"
 
-#: panels/user-accounts/cc-user-panel.c:1453
+#: panels/user-accounts/cc-user-panel.c:1500
 msgid "Unlock to Add Users and Change Settings"
 msgstr "שחרור להוספת משתמשים ולשינוי הגדרות"
 
@@ -8385,16 +7848,12 @@ msgstr "הסרת משתמש…"
 msgid "Other Users"
 msgstr "משתמשים אחרים"
 
-#: panels/user-accounts/cc-user-panel.ui:318
-msgid "Add User…"
-msgstr "הוספת משתמש…"
-
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:346
+#: panels/user-accounts/cc-user-panel.ui:337
 msgid "No Users Found"
 msgstr "לא נמצאו משתמשים"
 
-#: panels/user-accounts/cc-user-panel.ui:355
+#: panels/user-accounts/cc-user-panel.ui:346
 msgid "Unlock to add a user account."
 msgstr "שחרור על מנת להוסיף משתמש."
 
@@ -8431,6 +7890,10 @@ msgstr ""
 "כדי להשתמש בכניסה ארגונית, על מחשב זה להיות רשום\n"
 "במתחם. נא לבקש ממנהל הרשת להקליד את ססמת המתחם\n"
 "שלו להלן."
+
+#: panels/user-accounts/data/join-dialog.ui:90
+msgid "_Domain"
+msgstr "מ_תחם"
 
 #: panels/user-accounts/data/join-dialog.ui:112
 msgid "Administrator _Name"
@@ -8727,6 +8190,10 @@ msgstr "שימוש חלק במשטח מחשב הלוח על מנת לשמור ע
 #: panels/wacom/cc-wacom-page.ui:72
 msgid "Calibrate"
 msgstr "כיול"
+
+#: panels/wacom/cc-wacom-panel.ui:9
+msgid "Test Your _Settings"
+msgstr "ב_דיקת ההגדרות שלך"
 
 #: panels/wacom/cc-wacom-panel.ui:56
 msgid "No tablet detected"
@@ -9067,33 +8534,33 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "לא ידוע"
 
-#: panels/wwan/cc-wwan-device-page.c:187
+#: panels/wwan/cc-wwan-device-page.c:186
 msgid "Unlock SIM card"
 msgstr "שחרור כרטיס SIM"
 
-#: panels/wwan/cc-wwan-device-page.c:188 panels/wwan/cc-wwan-device-page.c:236
+#: panels/wwan/cc-wwan-device-page.c:187 panels/wwan/cc-wwan-device-page.c:235
 msgid "Unlock"
 msgstr "שחרור"
 
-#: panels/wwan/cc-wwan-device-page.c:193
+#: panels/wwan/cc-wwan-device-page.c:192
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "נא לספק קוד PIN עבור SIM %d"
 
-#: panels/wwan/cc-wwan-device-page.c:194
+#: panels/wwan/cc-wwan-device-page.c:193
 msgid "Enter PIN to unlock your SIM card"
 msgstr "נא להקליד PIN לשחרור כרטיס ה־SIM שלך"
 
-#: panels/wwan/cc-wwan-device-page.c:198
+#: panels/wwan/cc-wwan-device-page.c:197
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "נא לספק קוד PUK ל־SIM %d"
 
-#: panels/wwan/cc-wwan-device-page.c:199
+#: panels/wwan/cc-wwan-device-page.c:198
 msgid "Enter PUK to unlock your SIM card"
 msgstr "נא להקליד PUK לשחרור כרטיס ה־SIM שלך"
 
-#: panels/wwan/cc-wwan-device-page.c:217
+#: panels/wwan/cc-wwan-device-page.c:216
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
@@ -9102,7 +8569,7 @@ msgstr[1] "הוקלדה ססמה שגויה. נותרו לך עוד שני ני�
 msgstr[2] "הוקלדה ססמה שגויה. נותרו לך עוד %1$u ניסיונות"
 msgstr[3] "הוקלדה ססמה שגויה. נותרו לך עוד %1$u ניסיונות"
 
-#: panels/wwan/cc-wwan-device-page.c:220
+#: panels/wwan/cc-wwan-device-page.c:219
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
@@ -9111,23 +8578,23 @@ msgstr[1] "נותרו לך שני ניסיונות"
 msgstr[2] "נותרו לך %u ניסיונות"
 msgstr[3] "נותרו לך %u ניסיונות"
 
-#: panels/wwan/cc-wwan-device-page.c:225
+#: panels/wwan/cc-wwan-device-page.c:224
 msgid "Wrong password entered."
 msgstr "הססמה שהוקלדה שגויה."
 
-#: panels/wwan/cc-wwan-device-page.c:270
+#: panels/wwan/cc-wwan-device-page.c:269
 msgid "PUK code should be an 8 digit number"
 msgstr "קוד ה־PUK אמור להיות באורך 8 ספרות"
 
-#: panels/wwan/cc-wwan-device-page.c:294
+#: panels/wwan/cc-wwan-device-page.c:293
 msgid "Enter New PIN"
 msgstr "נא להקליד PIN חדש"
 
-#: panels/wwan/cc-wwan-device-page.c:298
+#: panels/wwan/cc-wwan-device-page.c:297
 msgid "PIN code should be a 4-8 digit number"
 msgstr "קוד ה־PIN אמור להיות מספר באורך 4-8 ספרות"
 
-#: panels/wwan/cc-wwan-device-page.c:316
+#: panels/wwan/cc-wwan-device-page.c:315
 msgid "Unlocking…"
 msgstr "מתבצע שחרור…"
 
@@ -9371,27 +8838,27 @@ msgstr "הגדרות הוא הממשק העיקרי להגדיר את המערכ
 msgid "The GNOME Project"
 msgstr "מיזם GNOME"
 
-#: shell/cc-application.c:59
+#: shell/cc-application.c:64
 msgid "Display version number"
 msgstr "הצגת מספר הגרסה"
 
-#: shell/cc-application.c:60
+#: shell/cc-application.c:65
 msgid "Enable verbose mode"
 msgstr "הפעלת מצב מפורט"
 
-#: shell/cc-application.c:61
+#: shell/cc-application.c:66
 msgid "Search for the string"
 msgstr "חיפוש אחר מחרוזת"
 
-#: shell/cc-application.c:62
+#: shell/cc-application.c:67
 msgid "List possible panel names and exit"
 msgstr "הצגת שמות הלוחות האפשריים ואז לצאת"
 
-#: shell/cc-application.c:63
+#: shell/cc-application.c:68
 msgid "Panel to display"
 msgstr "לוח להצגה"
 
-#: shell/cc-application.c:63
+#: shell/cc-application.c:68
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[PANEL] [ARGUMENT…]"
 
@@ -9403,7 +8870,7 @@ msgstr "קטגוריות הגדרות"
 msgid "Privacy"
 msgstr "פרטיות"
 
-#: shell/cc-panel-loader.c:304
+#: shell/cc-panel-loader.c:307
 msgid "Available panels:"
 msgstr "לוחות זמינים:"
 
@@ -9432,32 +8899,42 @@ msgstr ""
 msgid "Help"
 msgstr "עזרה"
 
-#: shell/help-overlay.ui:15
+#: shell/help-overlay.ui:13
 msgctxt "shortcut window"
 msgid "General"
 msgstr "כללי"
 
-#: shell/help-overlay.ui:20
+#: shell/help-overlay.ui:17
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "יציאה"
 
-#: shell/help-overlay.ui:27 shell/help-overlay.ui:57
+#: shell/help-overlay.ui:23 shell/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "חיפוש"
 
+#: shell/help-overlay.ui:29
+msgctxt "shortcut window"
+msgid "Show help"
+msgstr "הצגת עזרה"
+
 #: shell/help-overlay.ui:35
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "צירופי מקשים"
+
+#: shell/help-overlay.ui:42
 msgctxt "shortcut window"
 msgid "Panels"
 msgstr "לוחות"
 
-#: shell/help-overlay.ui:41 shell/help-overlay.ui:49
+#: shell/help-overlay.ui:47 shell/help-overlay.ui:54
 msgctxt "shortcut window"
 msgid "Go back to previous panel"
 msgstr "חזרה ללוח הקודם"
 
-#: shell/help-overlay.ui:62
+#: shell/help-overlay.ui:65
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "ביטול החיפוש"
@@ -9524,6 +9001,524 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#, c-format
+#~ msgid ""
+#~ "%s has the following permissions built-in. These cannot be altered. If "
+#~ "you are concerned about these permissions, consider removing this "
+#~ "application."
+#~ msgstr ""
+#~ "ליישום %s יש את ההרשאות הבאות בצורה מובנית. לא ניתן לשנות זאת. אם הדבר "
+#~ "מדאיג אותך, כדאי לשקול את הסרת היישום."
+
+#~ msgid "View Details"
+#~ msgstr "הצגת פרטים"
+
+#~ msgid "Built-in Permissions"
+#~ msgstr "הרשאות מובנות"
+
+#~ msgid "UTC%:::z"
+#~ msgstr "UTC%:::z"
+
+#~ msgid "%l:%M %p"
+#~ msgstr "‎%l:%M %p"
+
+#~ msgid "%R"
+#~ msgstr "%R"
+
+#, c-format
+#~ msgctxt "timezone map"
+#~ msgid "%s (%s)"
+#~ msgstr "%s (%s)"
+
+#~ msgid "Search for a city"
+#~ msgstr "חיפוש עיר"
+
+#, c-format
+#~ msgid "Device conforms to HSI level %d"
+#~ msgstr "ההתקן תואם לרמת HSI (מזהה אבטחת מארח)‏ %d"
+
+#~ msgid "Security Level 0"
+#~ msgstr "רמת אבטחה 0"
+
+#~ msgid ""
+#~ "This device has no protection against hardware security issues. This "
+#~ "could be because of a hardware or firmware configuration issue. It is "
+#~ "recommended to contact your IT support provider."
+#~ msgstr ""
+#~ "להתקן זה אין הגנה כנגד בעיות אבטחת חָמְרָה. יתכן וזה נובע מהגדרות חומרה או "
+#~ "קָשְחה. מומלץ ליצור קשר עם ספק תמיכת ה־IT שלך."
+
+#~ msgid "Security Level 1"
+#~ msgstr "רמת אבטחה 1"
+
+#~ msgid ""
+#~ "This device has minimal protection against hardware security issues. This "
+#~ "is the lowest device security level and only provides protection against "
+#~ "simple security threats."
+#~ msgstr ""
+#~ "להתקן זה הגנה מזערית כנגד בעיות אבטחת חָמְרָה. זוהי הרמה הנמוכה ביותר של "
+#~ "הגנת התקן המספקת הגנה למול איומי אבטחה בסיסיים בלבד."
+
+#~ msgid "Security Level 2"
+#~ msgstr "רמת אבטחה 2"
+
+#~ msgid "Security Level 3"
+#~ msgstr "רמת אבטחה 3"
+
+#~ msgid ""
+#~ "This device has extended protection against hardware security issues. "
+#~ "This is the highest device security level and provides protection against "
+#~ "advanced security threats."
+#~ msgstr ""
+#~ "להתקן זה אבטחה מורחבת כנגד בעיות אבטחת חָמְרָה. זוהי הרמה הגבוה ביותר של "
+#~ "הגנת התקן המספקת הגנה מפני איומי אבטחה מתקדמים."
+
+#~ msgid "Contact your hardware manufacturer for help with security updates."
+#~ msgstr "יש ליצור קשר עם יצרן החָמְרָה לעזרה בנושא עדכוני אבטחה."
+
+#~ msgid ""
+#~ "It might be possible to resolve this issue in the device’s UEFI firmware "
+#~ "settings, or by a support technician."
+#~ msgstr ""
+#~ "יתכן שניתן לפתור בעיה זו בהגדרות קָשְחת UEFI של ההתקן, או על ידי תמיכה "
+#~ "טכנית."
+
+#~ msgid ""
+#~ "It might be possible to resolve this issue in the device’s UEFI firmware "
+#~ "settings."
+#~ msgstr "יתכן שניתן לפתור בעיה זו בהגדרות קָשְחת UEFI של ההתקן."
+
+#~ msgid "It might be possible for a support technician to resolve this issue."
+#~ msgstr "ייתכן שניתן לפתור בעיה זו על ידי תמיכה טכנית."
+
+#~ msgid "Level 1"
+#~ msgstr "רמת 1"
+
+#~ msgid "Level 2"
+#~ msgstr "רמת 2"
+
+#~ msgid "Level 3"
+#~ msgstr "רמת 3"
+
+#~ msgid "Exposed to serious security threats."
+#~ msgstr "חשוף לאיומי אבטחה רציניים."
+
+#~ msgid "Limited protection against simple security threats."
+#~ msgstr "הגנה מוגבלת כנגד איומי אבטחה פשוטים."
+
+#~ msgid "Protected against common security threats."
+#~ msgstr "הגנה כנגד איומי אבטחה נפוצים."
+
+#~ msgid "Protected against a wide range of security threats."
+#~ msgstr "הגנה כנגד מנעד רחב של אימוי אבטחה."
+
+#~ msgid "Comprehensive Protection"
+#~ msgstr "הגנה מקיפה"
+
+#~ msgid "Firmware Write Protection"
+#~ msgstr "הגנת כתיבה לקָשְחה"
+
+#~ msgid "Firmware Write Protection Lock"
+#~ msgstr "נעילת הגנת כתיבת קושחה"
+
+#~ msgid "Firmware BIOS Region"
+#~ msgstr "תחום קָשְחת BIOS"
+
+#~ msgid "Firmware BIOS Descriptor"
+#~ msgstr "תיאור קָשְחת BIOS"
+
+#~ msgid "Pre-boot DMA Protection"
+#~ msgstr "הגנת DMA קדם־אתחול"
+
+#~ msgid "Intel BootGuard"
+#~ msgstr "Intel BootGuard"
+
+#~ msgid "Intel BootGuard Verified Boot"
+#~ msgstr "טעינה מאומתת של Intel BootGuard"
+
+#~ msgid "Intel BootGuard ACM Protected"
+#~ msgstr "ACM מוגן של Intel BootGuard"
+
+#~ msgid "Intel BootGuard Error Policy"
+#~ msgstr "מדיניות שגיאה של Intel BootGuard"
+
+#~ msgid "Intel BootGuard Fuse"
+#~ msgstr "מיזוג של Intel BootGuard"
+
+#~ msgid "Intel CET Enabled"
+#~ msgstr "Intel CET מאופשר"
+
+#~ msgid "Intel CET Active"
+#~ msgstr "Intel CET פעיל"
+
+#~ msgid "Intel SMAP"
+#~ msgstr "Intel SMAP"
+
+#~ msgid "Encrypted RAM"
+#~ msgstr "‏RAM מוצפן"
+
+#~ msgid "IOMMU Protection"
+#~ msgstr "הגנת IOMMU"
+
+#~ msgid "Linux Kernel Lockdown"
+#~ msgstr "נעילת ליבת לינוקס"
+
+#~ msgid "Linux Kernel Verification"
+#~ msgstr "אימות ליבת לינוקס"
+
+#~ msgid "Linux Swap"
+#~ msgstr "מחיצת החלפה לינוקס"
+
+#~ msgid "Suspend To RAM"
+#~ msgstr "השהיה ל־RAM"
+
+#~ msgid "Suspend To Idle"
+#~ msgstr "השהיה להמתנה"
+
+#~ msgid "UEFI Platform Key"
+#~ msgstr "מפתח פלטפורמת UEFI"
+
+#~ msgid "UEFI Secure Boot"
+#~ msgstr "אתחול UEFI מאובטח"
+
+#~ msgid "TPM Platform Configuration"
+#~ msgstr "הגדרות פלטפורמת TPM"
+
+#~ msgid "TPM Reconstruction"
+#~ msgstr "בנייה מחדש של TPM"
+
+#~ msgid "TPM v2.0"
+#~ msgstr "TPM v2.0"
+
+#~ msgid "Intel Management Engine Manufacturing Mode"
+#~ msgstr "מצב ייצור של מנוע הניהול של אינטל"
+
+#~ msgid "Intel Management Engine Override"
+#~ msgstr "מעקף של מנגנון הניהול של אינטל"
+
+#~ msgid "Intel Management Engine Version"
+#~ msgstr "גרסת מנגנון הניהול של אינטל"
+
+#~ msgid "Firmware Updates"
+#~ msgstr "עדכוני קָשְחה"
+
+#~ msgid "Firmware Attestation"
+#~ msgstr "תעודת קָשְחה"
+
+#~ msgid "Firmware Updater Verification"
+#~ msgstr "עדכון אימות קָשְחה"
+
+#~ msgid "Platform Debugging"
+#~ msgstr "ניפוי שגיאות בפלטפורמה"
+
+#~ msgid "Processor Security Checks"
+#~ msgstr "בדיקות אבטחת מעבד"
+
+#~ msgid "AMD Rollback Protection"
+#~ msgstr "הגנת שחזור של AMD"
+
+#~ msgid "AMD Firmware Replay Protection"
+#~ msgstr "הגנת הפעלה מחדש של קושחת AMD"
+
+#~ msgid "AMD Firmware Write Protection"
+#~ msgstr "הגנת כתיב לקושחת AMD"
+
+#~ msgid "Fused Platform"
+#~ msgstr "פלטפורמה ממוזגת"
+
+#~ msgid "Rename Device"
+#~ msgstr "שינוי שם התקן"
+
+#~ msgid ""
+#~ "The device name is used to identify this device when it is viewed over "
+#~ "the network, or when pairing Bluetooth devices."
+#~ msgstr "שם ההתקן משמש לזיהוי ההתקן על גבי הרשת, או בעת צימוד לבלוטות'."
+
+#~ msgid "Device name"
+#~ msgstr "שם התקן"
+
+#~ msgid "_Rename"
+#~ msgstr "_שינוי שם"
+
+#~ msgid "Section"
+#~ msgstr "אגף"
+
+#~ msgid "Shortcuts"
+#~ msgstr "צירופי מקשים"
+
+#~ msgid "NetworkManager needs to be running."
+#~ msgstr "‏NetworkManager צריך לפעול."
+
+#~ msgid "undefined error in 802.1X security (wpa-eap)"
+#~ msgstr "שגיאה לא מוגדרת באבטחת 802.1x ‏(wpa-eap)"
+
+#~ msgid "no file selected"
+#~ msgstr "לא נבחר קובץ"
+
+#~ msgid "unspecified error validating eap-method file"
+#~ msgstr "שגיאה לא ידועה באימות קובץ eap-method"
+
+#~ msgid "DER, PEM, PKCS#12, or PGP private keys"
+#~ msgstr "מפתחות פרטיים מסוג DER, PEM, PKCS#12 או PGP"
+
+#~ msgid "DER or PEM certificates"
+#~ msgstr "אישורי DER או PEM"
+
+#~ msgid "missing EAP-FAST PAC file"
+#~ msgstr "חסרים הקבצים EAP-FAST PAC"
+
+#~ msgid "PAC files (*.pac)"
+#~ msgstr "קובצי PAC‏ (‎*.pac)"
+
+#~ msgid "GTC"
+#~ msgstr "GTC"
+
+#~ msgid "MSCHAPv2"
+#~ msgstr "MSCHAPv2"
+
+#~ msgid "Anonymous"
+#~ msgstr "אלמוני"
+
+#~ msgid "Authenticated"
+#~ msgstr "עם אימות"
+
+#~ msgid "Both"
+#~ msgstr "שניהם"
+
+#~ msgid "Anony_mous identity"
+#~ msgstr "זהות _אלמונית"
+
+#~ msgid "PAC _file"
+#~ msgstr "_קובץ PAC"
+
+#~ msgid "Choose a PAC file"
+#~ msgstr "בחירת קובץ PAC"
+
+#~ msgid "_Inner authentication"
+#~ msgstr "אימות _פנימי"
+
+#~ msgid "Allow automatic PAC pro_visioning"
+#~ msgstr "אפשור הקצאת PAC _אוטומטית"
+
+#~ msgid "missing EAP-LEAP username"
+#~ msgstr "חסר שם משתמש EAP-LEAP"
+
+#~ msgid "missing EAP-LEAP password"
+#~ msgstr "חסרה ססמת EAP-LEAP"
+
+#~ msgid "_Username"
+#~ msgstr "_שם משתמש"
+
+#~ msgid "Sho_w password"
+#~ msgstr "ה_צגת ססמה"
+
+#, c-format
+#~ msgid "invalid EAP-PEAP CA certificate: %s"
+#~ msgstr "אישור EAP-PEAP CA לא תקף: %s"
+
+#~ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
+#~ msgstr "אישור EAP-PEAP CA לא תקף: לא סופקו אישורים"
+
+#~ msgid "MD5"
+#~ msgstr "MD5"
+
+#~ msgid "Version 0"
+#~ msgstr "גרסה 0"
+
+#~ msgid "Version 1"
+#~ msgstr "גרסה 0"
+
+#~ msgid "C_A certificate"
+#~ msgstr "אישור C_A"
+
+#~ msgid "Choose a Certificate Authority certificate"
+#~ msgstr "בחירת אישור של רשות אישורים"
+
+#~ msgid "No CA certificate is _required"
+#~ msgstr "לא נ_דרש אישור CA"
+
+#~ msgid "PEAP _version"
+#~ msgstr "_גרסת PEAP"
+
+#~ msgid "missing EAP username"
+#~ msgstr "חסר שם משתמש EAP"
+
+#~ msgid "missing EAP password"
+#~ msgstr "חסרה ססמת EAP"
+
+#~ msgid "missing EAP-TLS identity"
+#~ msgstr "חסר מזהה EAP-TLS"
+
+#, c-format
+#~ msgid "invalid EAP-TLS CA certificate: %s"
+#~ msgstr "אישור EAP-TLS CA לא תקף: %s"
+
+#~ msgid "invalid EAP-TLS CA certificate: no certificate specified"
+#~ msgstr "אישור EAP-TLS CA לא תקף: לא סופק אישור"
+
+#, c-format
+#~ msgid "invalid EAP-TLS private-key: %s"
+#~ msgstr "מפתח פרטי EAP-TLS לא תקף: %s"
+
+#, c-format
+#~ msgid "invalid EAP-TLS user-certificate: %s"
+#~ msgstr "משתמש אישור EAP-TLS לא תקף: %s"
+
+#~ msgid "Unencrypted private keys are insecure"
+#~ msgstr "מפתחות פרטיים בלתי מוצפנים אינם בטוחים"
+
+#~ msgid ""
+#~ "The selected private key does not appear to be protected by a password. "
+#~ "This could allow your security credentials to be compromised. Please "
+#~ "select a password-protected private key.\n"
+#~ "\n"
+#~ "(You can password-protect your private key with openssl)"
+#~ msgstr ""
+#~ "נראה שהמפתח הפרטי הנבחר לא מוגן על ידי ססמה. זה עלול לסכן את אישורי "
+#~ "האבטחה שלך. נא לבחור מפתח פרטי המוגן בססמה.\n"
+#~ "\n"
+#~ "(ניתן להגן על המפתח הפרטי שלך עם openssl)"
+
+#~ msgid "Choose your personal certificate"
+#~ msgstr "נא לבחור את האישור האישי שלך"
+
+#~ msgid "Choose your private key"
+#~ msgstr "בחירת המפתח הפרטי שלך"
+
+#~ msgid "I_dentity"
+#~ msgstr "_זהות"
+
+#~ msgid "_User certificate"
+#~ msgstr "_אישור המשתמש"
+
+#~ msgid "Private _key"
+#~ msgstr "מפתח _פרטי"
+
+#~ msgid "_Private key password"
+#~ msgstr "ססמה למפתח ה_פרטי"
+
+#, c-format
+#~ msgid "invalid EAP-TTLS CA certificate: %s"
+#~ msgstr "אישור רשות אישורים מסוג EAP-TTLS לא תקף: %s"
+
+#~ msgid "invalid EAP-TTLS CA certificate: no certificate specified"
+#~ msgstr "אישור רשות אישורים מסוג EAP-TTLS לא תקף: לא צוין אישור"
+
+#~ msgid "PAP"
+#~ msgstr "PAP"
+
+#~ msgid "MSCHAP"
+#~ msgstr "MSCHAP"
+
+#~ msgid "MSCHAPv2 (no EAP)"
+#~ msgstr "‏MSCHAPv2 ‏(לא EAP)"
+
+#~ msgid "CHAP"
+#~ msgstr "CHAP"
+
+#~ msgid "Unknown error validating 802.1X security"
+#~ msgstr "שגיאת אימות אבטחת 802.1x לא ידועה"
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid "PWD"
+#~ msgstr "PWD"
+
+#~ msgid "FAST"
+#~ msgstr "FAST"
+
+#~ msgid "Tunneled TLS"
+#~ msgstr "TLS מתועל"
+
+#~ msgid "Protected EAP (PEAP)"
+#~ msgstr "EAP מאובטח (PEAP)"
+
+#~ msgid "Au_thentication"
+#~ msgstr "_אימות"
+
+#~ msgid "missing leap-username"
+#~ msgstr "חסר שם משתמש leap"
+
+#~ msgid "missing leap-password"
+#~ msgstr "חסרה ססמת leap"
+
+#~ msgid "Wi-Fi password is missing."
+#~ msgstr "חסרה ססמת רשת אלחוטית."
+
+#~ msgid "_Type"
+#~ msgstr "_סוג"
+
+#~ msgid "missing wep-key"
+#~ msgstr "חסר מפתח wep"
+
+#, c-format
+#~ msgid ""
+#~ "invalid wep-key: key with a length of %zu must contain only hex-digits"
+#~ msgstr "מפתח wep לא תקף: מפתח באורך %zu חייב להכיל ספרות הקסדצימליות בלבד"
+
+#, c-format
+#~ msgid ""
+#~ "invalid wep-key: key with a length of %zu must contain only ascii "
+#~ "characters"
+#~ msgstr "מפתח wep לא תקף: מפתח באורך %zu חייב להכיל אך ורך תווי ascii"
+
+#, c-format
+#~ msgid ""
+#~ "invalid wep-key: wrong key length %zu. A key must be either of length "
+#~ "5/13 (ascii) or 10/26 (hex)"
+#~ msgstr ""
+#~ "מפתח wep לא תקף: אורך מפתח %zu שגוי. מפתח חייב להיות או באורך 5/13 "
+#~ "(‏ascii) או 10/26 (הקסדצימלי)"
+
+#~ msgid "invalid wep-key: passphrase must be non-empty"
+#~ msgstr "מפתח wep לא תקף: ססמה לא יכולה להיות ריקה"
+
+#~ msgid "invalid wep-key: passphrase must be shorter than 64 characters"
+#~ msgstr "מפתח wep לא תקף: ססמה חייבת להיות קצרה מ־64 תווים"
+
+#~ msgid "1 (Default)"
+#~ msgstr "1 (בררת מחדל)"
+
+#~ msgid "Open System"
+#~ msgstr "מערכת פתוחה"
+
+#~ msgid "Shared Key"
+#~ msgstr "מפתח משותף"
+
+#~ msgid "_Key"
+#~ msgstr "מ_פתח"
+
+#~ msgid "Sho_w key"
+#~ msgstr "ה_צגת מפתח"
+
+#~ msgid "WEP inde_x"
+#~ msgstr "מ_פתח ה־WEP"
+
+#, c-format
+#~ msgid ""
+#~ "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
+#~ "digits"
+#~ msgstr ""
+#~ "‏wpa-psk לא תקף: %zu אורך מפתח לא תקף. חייב להיות [8,63] בתים או 64 ספרות "
+#~ "הקסדצימליות"
+
+#~ msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
+#~ msgstr "‏wpa-psk לא תקף: לא נתן לפענח מפתח עם 64 בתים כהקסדצילמי"
+
+#~ msgid "Show _Notifications on Lock Screen"
+#~ msgstr "הצגת הת_ראות במסך נעילה"
+
+#~ msgid "_Computer Name"
+#~ msgstr "שם ה_מחשב"
+
+#, c-format
+#~ msgid "Testing %s"
+#~ msgstr "‏%s בבדיקה"
+
+#~ msgid "Click a speaker to test"
+#~ msgstr "יש ללחוץ על רמקול לבדיקה"
 
 #~ msgid ""
 #~ "Use of the camera allows applications to capture photos and video. "
@@ -9659,9 +9654,6 @@ msgstr "צלילי מערכת"
 #~ msgid "Double-Click Delay"
 #~ msgstr "פרק זמן ללחיצה כפולה"
 
-#~ msgid "Flash the entire _screen"
-#~ msgstr "הבהוב המסך _כולו"
-
 #~ msgid "Flash the entire _window"
 #~ msgstr "הבהוב המסך _כולו"
 
@@ -9790,10 +9782,6 @@ msgstr "צלילי מערכת"
 #~| msgid "Manufacturer"
 #~ msgid "MEI manufacturing mode"
 #~ msgstr "יצרן"
-
-#~| msgid "PEAP _version"
-#~ msgid "MEI version"
-#~ msgstr "גרסת MEI"
 
 #~| msgctxt "Password mode"
 #~| msgid "Account disabled"
@@ -9949,9 +9937,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Save a screenshot of an area to $PICTURES"
 #~ msgstr "שמירת צילום מסך של אזור מסוים לתיקייה $PICTURES"
-
-#~ msgid "Copy a screenshot to clipboard"
-#~ msgstr "העתקת צילום מסך ללוח הגזירים"
 
 #~ msgid "Copy a screenshot of a window to clipboard"
 #~ msgstr "העתקת צילום של חלון ללוח הגזירים"
@@ -11125,9 +11110,6 @@ msgstr "צלילי מערכת"
 #~ msgid "_Profile:"
 #~ msgstr "_פרופיל:"
 
-#~ msgid "_Test Speakers"
-#~ msgstr "בדיקת ה_רמקולים"
-
 #~ msgid "Peak detect"
 #~ msgstr "זיהוי עצמה מרבית"
 
@@ -11597,9 +11579,6 @@ msgstr "צלילי מערכת"
 #~ msgid "When battery power is _critical"
 #~ msgstr "כאשר עצמת הסוללה _חלשה מאוד"
 
-#~ msgid "Show help options"
-#~ msgstr "Show help options"
-
 #~ msgid ""
 #~ "%s\n"
 #~ "Run '%s --help' to see a full list of available command line options.\n"
@@ -12055,9 +12034,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "accepted"
 #~ msgstr "התקבל"
-
-#~ msgid "rejected"
-#~ msgstr "נדחה"
 
 #~ msgid "Acc_eptance delay:"
 #~ msgstr "השהיית _קבלה:"
@@ -13260,9 +13236,6 @@ msgstr "צלילי מערכת"
 
 #~ msgid "Keyboard _model:"
 #~ msgstr "דגם המ_קלדת:"
-
-#~ msgid "Move the selected keyboard layout up in the list"
-#~ msgstr "הזזת פריסת המקלדת הנבחרת במעלה הרשימה"
 
 #~ msgid "Print a diagram of the selected keyboard layout"
 #~ msgstr "הדפסת תרשים של פריסת המקלדת הנבחרת"
