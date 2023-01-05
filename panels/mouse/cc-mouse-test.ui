@@ -6,12 +6,14 @@
     <property name="value">100</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
+    <signal name="value-changed" handler="on_scroll_adjustment_changed_cb"/>
   </object>
   <template class="CcMouseTest" parent="AdwWindow">
-    <property name="width-request">1024</property>
-    <property name="height-request">600</property>
     <property name="modal">True</property>
     <property name="hide-on-close">True</property>
+    <property name="width-request">600</property>
+    <property name="height-request">800</property>
+    <signal name="show" handler="on_mouse_test_show_cb"/>
     <child>
       <object class="GtkBox" id="test_widget">
         <property name="hexpand">True</property>
@@ -27,36 +29,53 @@
           </object>
         </child>
         <child>
-          <object class="GtkScrolledWindow" id="scrolledwindow">
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
             <property name="hexpand">True</property>
             <property name="vexpand">True</property>
-            <property name="vadjustment">scrolled_window_adjustment</property>
-            <property name="hscrollbar_policy">automatic</property>
-            <property name="vscrollbar_policy">always</property>
-            <property name="max_content_height">440</property>
+            <property name="margin-start">30</property>
+            <property name="margin-end">30</property>
+            <property name="margin-top">30</property>
+            <property name="margin-bottom">30</property>
             <child>
-              <object class="GtkViewport" id="viewport">
+              <object class="GtkOverlay">
+                <child type="overlay">
+                  <object class="GtkImage" id="arrow_up">
+                    <property name="icon-name">go-up-symbolic</property>
+                    <property name="pixel-size">72</property>
+                    <property name="valign">start</property>
+                    <style>
+                      <class name="mouse-test-arrow"/>
+                    </style>
+                  </object>
+                </child>
+                <child type="overlay">
+                  <object class="GtkImage" id="arrow_down">
+                    <property name="icon-name">go-down-symbolic</property>
+                    <property name="pixel-size">72</property>
+                    <property name="valign">end</property>
+                    <style>
+                      <class name="mouse-test-arrow"/>
+                    </style>
+                  </object>
+                </child>
                 <child>
-                  <object class="GtkOverlay" id="grid1">
+                  <object class="GtkScrolledWindow" id="scrolledwindow">
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="vadjustment">scrolled_window_adjustment</property>
+                    <property name="hscrollbar_policy">never</property>
+                    <property name="vscrollbar_policy">external</property>
+                    <property name="max_content_height">440</property>
                     <child>
-                      <object class="GtkPicture" id="image">
-                        <property name="margin_start">25</property>
-                        <property name="margin_end">25</property>
-                        <property name="can-shrink">False</property>
-                        <property name="file">resource:///org/gnome/control-center/mouse/scroll-test.svg</property>
-                      </object>
-                    </child>
-                    <child type="overlay">
-                      <object class="GtkDrawingArea" id="button_drawing_area">
-                        <property name="width_request">120</property>
-                        <property name="height_request">120</property>
-                        <property name="valign">start</property>
-                        <property name="margin_top">215</property>
-                        <property name="margin_start">250</property>
+                      <object class="GtkViewport" id="viewport">
+                        <style>
+                          <class name="mouse-test-viewport"/>
+                        </style>
                         <child>
-                          <object class="GtkGestureClick">
-                            <property name="button">0</property>
-                            <signal name="pressed" handler="button_drawing_area_button_pressed_cb" object="CcMouseTest" swapped="no"/>
+                          <object class="GtkPicture" id="image">
+                            <property name="can-shrink">False</property>
+                            <property name="file">resource:///org/gnome/control-center/mouse/scroll-test.svg</property>
                           </object>
                         </child>
                       </object>
@@ -65,15 +84,45 @@
                 </child>
               </object>
             </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkLabel" id="information_label">
-            <property name="margin_top">10</property>
-            <property name="margin_bottom">5</property>
-            <property name="hexpand">True</property>
-            <property name="label" translatable="yes">Try clicking, double clicking, scrolling</property>
-            <property name="wrap">True</property>
+            <child>
+              <object class="GtkBox">
+                <property name="homogeneous">True</property>
+                <property name="valign">center</property>
+                <property name="margin-start">60</property>
+                <property name="margin-end">60</property>
+                <property name="margin-top">30</property>
+                <property name="spacing">20</property>
+
+                <child>
+                  <object class="GtkButton" id="single_click_button">
+                    <property name="label" translatable="yes">Single Click</property>
+                    <style>
+                      <class name="pill"/>
+                    </style>
+                    <child>
+                      <object class="GtkGestureClick">
+                        <property name="propagation-phase">capture</property>
+                        <signal name="pressed" handler="on_test_button_clicked_cb"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="double_click_button">
+                    <property name="label" translatable="yes">Double Click</property>
+                    <style>
+                      <class name="pill"/>
+                    </style>
+                    <child>
+                      <object class="GtkGestureClick">
+                        <property name="propagation-phase">capture</property>
+                        <signal name="pressed" handler="on_test_button_clicked_cb"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </child>
       </object>

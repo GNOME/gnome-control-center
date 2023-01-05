@@ -3,6 +3,7 @@
  * Copyright (C) 2012 Red Hat, Inc.
  *
  * Written by: Ondrej Holy <oholy@redhat.com>,
+ *             Felipe Borges <felipeborges@gnome.org>,
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,369 +22,153 @@
 #include <config.h>
 
 #include <glib/gi18n.h>
-#include <string.h>
-#include <gdk/gdk.h>
-#include <gdk/x11/gdkx.h>
-#include <math.h>
 
 #include "cc-mouse-test.h"
 
-#include <sys/types.h>
-#include <sys/stat.h>
-
-/* Click test button sizes. */
-#define SHADOW_SIZE (10.0 / 180 * size)
-#define SHADOW_SHIFT_Y (-1.0 / 180 * size)
-#define SHADOW_OPACITY (0.15 / 180 * size)
-#define OUTER_CIRCLE_SIZE (22.0 / 180 * size)
-#define ANNULUS_SIZE (6.0 / 180 * size)
-#define INNER_CIRCLE_SIZE (52.0 / 180 * size)
-
-static void setup_information_label (CcMouseTest *self);
-static void setup_scroll_image (CcMouseTest *self);
-
-enum
-{
-	DOUBLE_CLICK_TEST_OFF,
-	DOUBLE_CLICK_TEST_MAYBE,
-	DOUBLE_CLICK_TEST_ON,
-	DOUBLE_CLICK_TEST_STILL_ON,
-	DOUBLE_CLICK_TEST_ALMOST_THERE,
-	DOUBLE_CLICK_TEST_GEGL
-};
+#define RESET_TEST_BUTTON_STATE_INTERVAL 1
 
 struct _CcMouseTest
 {
-	AdwWindow  parent_instance;
+    AdwWindow  parent_instance;
 
-	GtkWidget *button_drawing_area;
-	GtkWidget *information_label;
-	GtkWidget *image;
-	GtkWidget *scrolled_window_adjustment;
-	GtkWidget *viewport;
+    GtkWidget *arrow_down;
+    GtkWidget *arrow_up;
+    GtkWidget *double_click_button;
+    GtkWidget *image;
+    GtkAdjustment *scrolled_window_adjustment;
+    GtkWidget *single_click_button;
+    GtkWidget *viewport;
 
-	guint32 double_click_timestamp;
-	gint double_click_state;
-	gint button_state;
-
-	GSettings *mouse_settings;
-
-	gint information_label_timeout_id;
-	gint button_drawing_area_timeout_id;
-	gint scroll_image_timeout_id;
+    gint test_buttons_timeout_id;
+    gint double_click_button_timeout_id;
 };
 
 G_DEFINE_TYPE (CcMouseTest, cc_mouse_test, ADW_TYPE_WINDOW);
 
-/* Timeout for the double click test */
+static void
+on_scroll_adjustment_changed_cb (GtkAdjustment *adjustment,
+                                 gpointer       user_data)
+{
+    CcMouseTest *self = CC_MOUSE_TEST (user_data);
+    gboolean is_bottom, is_top;
+    gdouble value;
+
+    value = gtk_adjustment_get_value (adjustment);
+    is_top = value == gtk_adjustment_get_lower (adjustment);
+    is_bottom = value == (gtk_adjustment_get_upper (adjustment) - gtk_adjustment_get_page_size (adjustment));
+
+    gtk_widget_set_visible (self->arrow_up, !is_top);
+    gtk_widget_set_visible (self->arrow_down, !is_bottom);
+}
 
 static gboolean
-test_maybe_timeout (CcMouseTest *self)
+test_buttons_timeout (CcMouseTest *self)
 {
-	self->double_click_state = DOUBLE_CLICK_TEST_OFF;
+    gtk_widget_remove_css_class (self->single_click_button, "success");
+    gtk_button_set_label (GTK_BUTTON (self->single_click_button), _("Single Click"));
+    gtk_widget_remove_css_class (self->double_click_button, "success");
+    gtk_button_set_label (GTK_BUTTON (self->double_click_button), _("Double Click"));
 
-	gtk_widget_queue_draw (self->button_drawing_area);
+    self->test_buttons_timeout_id = 0;
 
-	self->button_drawing_area_timeout_id = 0;
-
-	return FALSE;
-}
-
-/* Timeout for the information label */
-
-static gboolean
-information_label_timeout (CcMouseTest *self)
-{
-	setup_information_label (self);
-
-	self->information_label_timeout_id = 0;
-
-	return FALSE;
-}
-
-/* Timeout for the scroll image */
-
-static gboolean
-scroll_image_timeout (CcMouseTest *self)
-{
-	setup_scroll_image (self);
-
-	self->scroll_image_timeout_id = 0;
-
-	return FALSE;
-}
-
-/* Set information label */
-
-static void
-setup_information_label (CcMouseTest *self)
-{
-	const gchar *message = NULL;
-	g_autofree gchar *label_text = NULL;
-	gboolean double_click;
-
-	if (self->information_label_timeout_id != 0) {
-		g_source_remove (self->information_label_timeout_id);
-		self->information_label_timeout_id = 0;
-	}
-
-	if (self->double_click_state == DOUBLE_CLICK_TEST_OFF) {
-		gtk_label_set_label (GTK_LABEL (self->information_label), _("Try clicking, double clicking, scrolling"));
-		return;
-	}
-
-	if (self->double_click_state == DOUBLE_CLICK_TEST_GEGL) {
-		message = _("Five clicks, GEGL time!");
-	} else {
-		double_click = (self->double_click_state >= DOUBLE_CLICK_TEST_ON);
-		switch (self->button_state) {
-		case 1:
-			message = (double_click) ? _("Double click, primary button") : _("Single click, primary button");
-			break;
-		case 2:
-			message = (double_click) ? _("Double click, middle button") : _("Single click, middle button");
-			break;
-		case 3:
-			message = (double_click) ? _("Double click, secondary button") : _("Single click, secondary button");
-			break;
-		}
-	}
-
-	label_text = g_strconcat ("<b>", message, "</b>", NULL);
-	gtk_label_set_markup (GTK_LABEL (self->information_label), label_text);
-
-	self->information_label_timeout_id = g_timeout_add (2500, (GSourceFunc) information_label_timeout, self);
-}
-
-/* Update scroll image */
-
-static void
-setup_scroll_image (CcMouseTest *self)
-{
-	const char *resource;
-
-	if (self->scroll_image_timeout_id != 0) {
-		g_source_remove (self->scroll_image_timeout_id);
-		self->scroll_image_timeout_id = 0;
-	}
-
-	if (self->double_click_state == DOUBLE_CLICK_TEST_GEGL)
-		resource = "/org/gnome/control-center/mouse/scroll-test-gegl.svg";
-	else
-		resource = "/org/gnome/control-center/mouse/scroll-test.svg";
-	gtk_picture_set_resource (GTK_PICTURE (self->image), resource);
-
-	if (self->double_click_state != DOUBLE_CLICK_TEST_GEGL)
-		return;
-
-	self->scroll_image_timeout_id = g_timeout_add (5000, (GSourceFunc) scroll_image_timeout, self);
-}
-
-/* Callback issued when the user clicks the double click testing area. */
-
-static void
-button_drawing_area_button_pressed_cb (GtkGestureClick *click_gesture,
-                                       gint             n_press,
-                                       gdouble          x,
-                                       gdouble          y,
-                                       CcMouseTest     *self)
-{
-	guint32 event_time;
-	guint current_button;
-	gint double_click_time;
-
-	current_button = gtk_gesture_single_get_current_button (GTK_GESTURE_SINGLE (click_gesture));
-
-	if (current_button > 3)
-		return;
-
-	double_click_time = g_settings_get_int (self->mouse_settings, "double-click");
-
-	if (self->button_drawing_area_timeout_id != 0) {
-		g_source_remove (self->button_drawing_area_timeout_id);
-		self->button_drawing_area_timeout_id = 0;
-	}
-
-	/* Ignore fake double click using different buttons. */
-	if (self->double_click_state != DOUBLE_CLICK_TEST_OFF && self->button_state != current_button)
-		self->double_click_state = DOUBLE_CLICK_TEST_OFF;
-
-	event_time = gtk_event_controller_get_current_event_time (GTK_EVENT_CONTROLLER (click_gesture));
-	switch (self->double_click_state) {
-	case DOUBLE_CLICK_TEST_OFF:
-		self->double_click_state = DOUBLE_CLICK_TEST_MAYBE;
-		self->button_drawing_area_timeout_id = g_timeout_add (double_click_time, (GSourceFunc) test_maybe_timeout, self);
-		break;
-	case DOUBLE_CLICK_TEST_MAYBE:
-	case DOUBLE_CLICK_TEST_ON:
-	case DOUBLE_CLICK_TEST_STILL_ON:
-	case DOUBLE_CLICK_TEST_ALMOST_THERE:
-		if (event_time - self->double_click_timestamp < double_click_time) {
-			self->double_click_state++;
-			self->button_drawing_area_timeout_id = g_timeout_add (2500, (GSourceFunc) test_maybe_timeout, self);
-		} else {
-			test_maybe_timeout (self);
-		}
-		break;
-	case DOUBLE_CLICK_TEST_GEGL:
-		self->double_click_state = DOUBLE_CLICK_TEST_OFF;
-		break;
-	}
-
-	self->double_click_timestamp = event_time;
-
-	gtk_widget_queue_draw (self->button_drawing_area);
-
-	self->button_state = current_button;
-	setup_information_label (self);
-	setup_scroll_image (self);
+    return FALSE;
 }
 
 static void
-button_drawing_area_draw_func (GtkDrawingArea *drawing_area,
-                               cairo_t        *cr,
-                               int             width,
-                               int             height,
-                               gpointer        user_data)
+on_test_button_clicked_cb (GtkGestureClick *gesture,
+                           gint             n_press,
+                           gdouble          x,
+                           gdouble          y,
+                           gpointer         user_data)
 {
-	CcMouseTest *self = CC_MOUSE_TEST (user_data);
-	gdouble center_x, center_y, size;
-	GdkRGBA inner_color, outer_color;
-	cairo_pattern_t *pattern;
+    CcMouseTest *self = CC_MOUSE_TEST (user_data);
+    GtkWidget *button = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (gesture));
+    guint n_success_press = (button == self->single_click_button) ? 1 : 2;
 
-	size = MAX (MIN (width, height), 1);
-	center_x = width / 2.0;
-	center_y = height / 2.0;
+    if (n_press == n_success_press) {
+        gtk_widget_add_css_class (button, "success");
+        gtk_button_set_icon_name (GTK_BUTTON (button), "object-select-symbolic");
+    } else {
+        gtk_widget_remove_css_class (button, "success");
+        gtk_button_set_icon_name (GTK_BUTTON (button), "process-stop-symbolic");
+    }
 
-	switch (self->double_click_state) {
-	case DOUBLE_CLICK_TEST_ON:
-	case DOUBLE_CLICK_TEST_STILL_ON:
-	case DOUBLE_CLICK_TEST_ALMOST_THERE:
-	case DOUBLE_CLICK_TEST_GEGL:
-		gdk_rgba_parse (&outer_color, "#729fcf");
-		gdk_rgba_parse (&inner_color, "#729fcf");
-		break;
-	case DOUBLE_CLICK_TEST_MAYBE:
-		gdk_rgba_parse (&outer_color, "#729fcf");
-		gdk_rgba_parse (&inner_color, "#ffffff");
-		break;
-	case DOUBLE_CLICK_TEST_OFF:
-		gdk_rgba_parse (&outer_color, "#ffffff");
-		gdk_rgba_parse (&inner_color, "#ffffff");
-		break;
-	}
+    if (self->test_buttons_timeout_id != 0) {
+        g_source_remove (self->test_buttons_timeout_id);
+        self->test_buttons_timeout_id = 0;
+    }
 
-	/* Draw shadow. */
-	cairo_rectangle (cr, center_x - size / 2,  center_y - size / 2, size, size);
-	pattern = cairo_pattern_create_radial (center_x, center_y, 0, center_x, center_y, size);
-	cairo_pattern_add_color_stop_rgba (pattern, 0.5 - SHADOW_SIZE / size, 0, 0, 0, SHADOW_OPACITY);
-	cairo_pattern_add_color_stop_rgba (pattern, 0.5, 0, 0, 0, 0);
-	cairo_set_source (cr, pattern);
-	cairo_fill (cr);
+    self->test_buttons_timeout_id =
+        g_timeout_add_seconds (RESET_TEST_BUTTON_STATE_INTERVAL, (GSourceFunc) test_buttons_timeout, self);
+}
 
-	/* Draw outer circle. */
-	cairo_set_line_width (cr, OUTER_CIRCLE_SIZE);
-	cairo_arc (cr, center_x, center_y + SHADOW_SHIFT_Y,
-		   INNER_CIRCLE_SIZE + ANNULUS_SIZE + OUTER_CIRCLE_SIZE / 2,
-		   0, 2 * G_PI);
-	gdk_cairo_set_source_rgba (cr, &outer_color);
-	cairo_stroke (cr);
-
-	/* Draw inner circle. */
-	cairo_set_line_width (cr, 0);
-	cairo_arc (cr, center_x, center_y + SHADOW_SHIFT_Y,
-		   INNER_CIRCLE_SIZE,
-		   0, 2 * G_PI);
-	gdk_cairo_set_source_rgba (cr, &inner_color);
-	cairo_fill (cr);
+static void
+on_mouse_test_show_cb (CcMouseTest *self)
+{
+    /* Always scroll back to the top */
+    gtk_adjustment_set_value (self->scrolled_window_adjustment, 0);
 }
 
 static void
 setup_dialog (CcMouseTest *self)
 {
-	GtkAdjustment *adjustment;
-	GtkStyleProvider *provider;
+    g_autoptr(GtkCssProvider) provider = NULL;
 
-	adjustment = GTK_ADJUSTMENT (self->scrolled_window_adjustment);
-	gtk_adjustment_set_value (adjustment,
-				  gtk_adjustment_get_upper (adjustment));
-
-	provider = GTK_STYLE_PROVIDER (gtk_css_provider_new ());
-	gtk_css_provider_load_from_data (GTK_CSS_PROVIDER (provider), "* {background: #26a269;}", -1);
-	gtk_style_context_add_provider (gtk_widget_get_style_context (self->viewport),
-					provider,
-					GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-	g_object_unref (provider);
+    provider = gtk_css_provider_new ();
+    gtk_css_provider_load_from_resource (provider, "/org/gnome/control-center/mouse/mouse-test.css");
+    gtk_style_context_add_provider_for_display (gdk_display_get_default (),
+                                                GTK_STYLE_PROVIDER (provider),
+                                                GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
 }
 
 static void
 cc_mouse_test_finalize (GObject *object)
 {
-	CcMouseTest *self = CC_MOUSE_TEST (object);
+    CcMouseTest *self = CC_MOUSE_TEST (object);
 
-	g_clear_object (&self->mouse_settings);
+    if (self->test_buttons_timeout_id != 0) {
+        g_source_remove (self->test_buttons_timeout_id);
+        self->test_buttons_timeout_id = 0;
+    }
 
-	if (self->information_label_timeout_id != 0) {
-		g_source_remove (self->information_label_timeout_id);
-		self->information_label_timeout_id = 0;
-	}
-
-	if (self->scroll_image_timeout_id != 0) {
-		g_source_remove (self->scroll_image_timeout_id);
-		self->scroll_image_timeout_id = 0;
-	}
-
-	if (self->button_drawing_area_timeout_id != 0) {
-		g_source_remove (self->button_drawing_area_timeout_id);
-		self->button_drawing_area_timeout_id = 0;
-	}
-
-	G_OBJECT_CLASS (cc_mouse_test_parent_class)->finalize (object);
+    G_OBJECT_CLASS (cc_mouse_test_parent_class)->finalize (object);
 }
 
 static void
 cc_mouse_test_class_init (CcMouseTestClass *klass)
 {
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+    GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+    GObjectClass *object_class = G_OBJECT_CLASS (klass);
 
-	object_class->finalize = cc_mouse_test_finalize;
+    object_class->finalize = cc_mouse_test_finalize;
 
-	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/cc-mouse-test.ui");
+    gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/cc-mouse-test.ui");
 
-	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, button_drawing_area);
-	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, information_label);
-	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, image);
-	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, scrolled_window_adjustment);
-	gtk_widget_class_bind_template_child (widget_class, CcMouseTest, viewport);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, arrow_down);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, arrow_up);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, double_click_button);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, image);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, scrolled_window_adjustment);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, single_click_button);
+    gtk_widget_class_bind_template_child (widget_class, CcMouseTest, viewport);
 
-	gtk_widget_class_bind_template_callback (widget_class, button_drawing_area_button_pressed_cb);
+    gtk_widget_class_bind_template_callback (widget_class, on_mouse_test_show_cb);
+    gtk_widget_class_bind_template_callback (widget_class, on_scroll_adjustment_changed_cb);
+    gtk_widget_class_bind_template_callback (widget_class, on_test_button_clicked_cb);
 }
 
 static void
 cc_mouse_test_init (CcMouseTest *self)
 {
-	gtk_widget_init_template (GTK_WIDGET (self));
+    gtk_widget_init_template (GTK_WIDGET (self));
 
-	gtk_drawing_area_set_draw_func (GTK_DRAWING_AREA (self->button_drawing_area),
-					button_drawing_area_draw_func,
-					self, NULL);
+    self->test_buttons_timeout_id = 0;
 
-	self->double_click_timestamp = 0;
-	self->double_click_state = DOUBLE_CLICK_TEST_OFF;
-	self->button_state = 0;
-
-	self->mouse_settings = g_settings_new ("org.gnome.desktop.peripherals.mouse");
-
-	self->information_label_timeout_id = 0;
-	self->button_drawing_area_timeout_id = 0;
-	self->scroll_image_timeout_id = 0;
-
-	setup_dialog (self);
+    setup_dialog (self);
 }
 
 GtkWidget *
 cc_mouse_test_new (void)
 {
-	return (GtkWidget *) g_object_new (CC_TYPE_MOUSE_TEST, NULL);
+    return (GtkWidget *) g_object_new (CC_TYPE_MOUSE_TEST, NULL);
 }

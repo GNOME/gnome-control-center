@@ -13,7 +13,6 @@ i18n.merge_file(
 resource_data = files(
   'cc-mouse-panel.ui',
   'cc-mouse-test.ui',
-  'scroll-test-gegl.svg',
   'scroll-test.svg',
   'assets/edge-scroll-d.webm',
   'assets/edge-scroll-l.webm',
