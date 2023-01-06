@@ -1090,6 +1090,10 @@ cc_panel_list_add_sidebar_widget (CcPanelList *self,
       gtk_stack_add_named (self->stack, widget, "custom-widget");
       switch_to_view (self, CC_PANEL_LIST_WIDGET);
     }
+  else
+    {
+      switch_to_view (self, CC_PANEL_LIST_MAIN);
+    }
 }
 
 void
