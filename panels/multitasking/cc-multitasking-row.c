@@ -315,6 +315,7 @@ cc_multitasking_row_buildable_add_child (GtkBuildable *buildable,
   else if (!type && GTK_IS_WIDGET (child))
     {
       gtk_box_append (self->suffixes, GTK_WIDGET (child));
+      gtk_widget_show (GTK_WIDGET (self->suffixes));
     }
   else
     parent_buildable_iface->add_child (buildable, builder, child, type);
@@ -518,6 +519,7 @@ cc_multitasking_row_add_prefix (CcMultitaskingRow *self,
   g_return_if_fail (GTK_IS_WIDGET (self));
 
   gtk_box_append (self->prefixes, widget);
+  gtk_widget_show (GTK_WIDGET (self->prefixes));
 }
 
 void
@@ -533,6 +535,7 @@ cc_multitasking_row_add_artwork (CcMultitaskingRow *self,
   gtk_widget_set_margin_top (GTK_WIDGET (self->header), 12);
 
   gtk_box_append (self->artwork_box, widget);
+  gtk_widget_show (GTK_WIDGET (self->artwork_box));
 }
 
 void
