@@ -26,7 +26,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_SUBWOOFER_SLIDER (cc_subwoofer_slider_get_type ())
-G_DECLARE_FINAL_TYPE (CcSubwooferSlider, cc_subwoofer_slider, CC, SUBWOOFER_SLIDER, GtkBox)
+G_DECLARE_FINAL_TYPE (CcSubwooferSlider, cc_subwoofer_slider, CC, SUBWOOFER_SLIDER, GtkWidget)
 
 void cc_subwoofer_slider_set_mixer_control (CcSubwooferSlider *slider,
                                             GvcMixerControl   *mixer_control);

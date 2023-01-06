@@ -25,15 +25,16 @@
 
 struct _CcSubwooferSlider
 {
-  GtkBox           parent_instance;
+  GtkWidget      parent_instance;
 
-  GtkAdjustment   *adjustment;
+  GtkWidget     *scale;
+  GtkAdjustment *adjustment;
 
-  GvcChannelMap   *channel_map;
-  guint            volume_changed_handler_id;
+  GvcChannelMap *channel_map;
+  guint          volume_changed_handler_id;
 };
 
-G_DEFINE_TYPE (CcSubwooferSlider, cc_subwoofer_slider, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcSubwooferSlider, cc_subwoofer_slider, GTK_TYPE_WIDGET)
 
 static void
 changed_cb (CcSubwooferSlider *self)
@@ -68,6 +69,8 @@ cc_subwoofer_slider_dispose (GObject *object)
 {
   CcSubwooferSlider *self = CC_SUBWOOFER_SLIDER (object);
 
+  g_clear_pointer (&self->scale, gtk_widget_unparent);
+
   g_clear_object (&self->channel_map);
 
   G_OBJECT_CLASS (cc_subwoofer_slider_parent_class)->dispose (object);
@@ -83,9 +86,12 @@ cc_subwoofer_slider_class_init (CcSubwooferSliderClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-subwoofer-slider.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcSubwooferSlider, scale);
   gtk_widget_class_bind_template_child (widget_class, CcSubwooferSlider, adjustment);
 
   gtk_widget_class_bind_template_callback (widget_class, changed_cb);
+
+  gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BIN_LAYOUT);
 }
 
 void
