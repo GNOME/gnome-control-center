@@ -1,21 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <!-- interface-requires gtk+ 3.0 -->
   <template class="CcBalanceSlider" parent="GtkWidget">
     <child>
       <object class="GtkScale" id="scale">
-        <property name="visible">True</property>
-        <property name="hexpand">True</property>
-        <property name="draw_value">False</property>
-        <property name="has_origin">False</property>
+        <property name="has-origin">False</property>
         <property name="adjustment">adjustment</property>
         <accessibility>
           <property name="label" translatable="yes">Balance</property>
         </accessibility>
         <marks>
-          <mark value="-1" translatable="yes">Left</mark>
           <mark value="0"/>
-          <mark value="1" translatable="yes">Right</mark>
         </marks>
       </object>
     </child>
