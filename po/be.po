@@ -9,17 +9,17 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2022-11-26 12:27+0000\n"
-"PO-Revision-Date: 2022-12-07 01:46+0300\n"
+"POT-Creation-Date: 2023-01-04 19:16+0000\n"
+"PO-Revision-Date: 2023-01-06 17:25+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 3.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: panels/applications/cc-applications-panel.c:822
 msgid "System Bus"
@@ -47,7 +47,7 @@ msgid "Full access to /dev"
 msgstr "Поўны доступ да /dev"
 
 #: panels/applications/cc-applications-panel.c:832
-#: panels/network/cc-network-panel.c:770
+#: panels/network/cc-network-panel.c:758
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
 #: panels/wwan/cc-wwan-network-dialog.ui:5
@@ -89,11 +89,11 @@ msgstr "Можа змяняць налады"
 #: panels/applications/cc-applications-panel.c:850
 #, c-format
 msgid ""
-"%s has the following permissions built-in. These cannot be altered. If you "
-"are concerned about these permissions, consider removing this application."
+"%s requires access to the following system resources. To stop this access, "
+"the application must be removed."
 msgstr ""
-"%s мае наступныя ўбудаваныя дазволы, іх немагчыма змяніць. Калі гэтыя "
-"дазволы вас непакояць, падумайце ці не варта выдаліць праграму."
+"%s патрабуе доступу да наступных рэсурсаў сістэмы. Каб спыніць доступ, "
+"неабходна выдаліць праграму."
 
 #: panels/applications/cc-applications-panel.c:1192
 #, c-format
@@ -132,20 +132,18 @@ msgid "Install some…"
 msgstr "Усталяваць…"
 
 #: panels/applications/cc-applications-panel.ui:84
-#: panels/network/wireless-security/ws-file-chooser-button.c:96
 msgid "Open"
 msgstr "Адкрыць"
 
 #: panels/applications/cc-applications-panel.ui:94
-msgid "View Details"
-msgstr "Паказаць падрабязнасці"
+msgid "App Details"
+msgstr "Падрабязнасці праграмы"
 
 #: panels/applications/cc-applications-panel.ui:112
 #: panels/applications/cc-applications-panel.ui:119
 #: panels/keyboard/01-launchers.xml.in:16
 #: panels/keyboard/cc-input-chooser.ui:75
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:63
-#: panels/printers/new-printer-dialog.ui:252
+#: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
 #: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
 msgid "Search"
@@ -153,8 +151,8 @@ msgstr "Пошук"
 
 #: panels/applications/cc-applications-panel.ui:113
 #: panels/applications/cc-applications-panel.ui:120
-msgid "Receive system searches and send results."
-msgstr "Атрымліваць пошукавых запытаў сістэмы і адпраўляць вынікі."
+msgid "Receive system searches and send results"
+msgstr "Атрыманне пошукавых запытаў сістэмы і адпраўленне вынікаў"
 
 #. This label is displayed in a treeview cell displaying
 #. * a disabled accelerator key combination.
@@ -170,9 +168,9 @@ msgstr "Атрымліваць пошукавых запытаў сістэмы 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:802
-#: panels/user-accounts/cc-user-panel.c:905
-#: panels/wwan/cc-wwan-device-page.c:478
+#: panels/user-accounts/cc-user-panel.c:820
+#: panels/user-accounts/cc-user-panel.c:923
+#: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Адключана"
@@ -183,24 +181,24 @@ msgid "Notifications"
 msgstr "Апавяшчэнні"
 
 #: panels/applications/cc-applications-panel.ui:127
-msgid "Show system notifications."
-msgstr "Паказваць сістэмныя апавяшчэнні."
+msgid "Show system notifications"
+msgstr "Паказваць сістэмныя апавяшчэнні"
 
 #: panels/applications/cc-applications-panel.ui:133
 msgid "Run in Background"
 msgstr "Запуск у фонавым рэжыме"
 
 #: panels/applications/cc-applications-panel.ui:134
-msgid "Allow activity when the app is closed."
-msgstr "Дазволіць актыўнасць, калі праграма закрыта."
+msgid "Allow activity when the app is closed"
+msgstr "Дазволіць актыўнасць, калі праграма закрыта"
 
 #: panels/applications/cc-applications-panel.ui:140
 msgid "Screenshots"
 msgstr "Здымкі экрана"
 
 #: panels/applications/cc-applications-panel.ui:141
-msgid "Take pictures of the screen at any time."
-msgstr "Рабіць здымкі экрана ў любы часы."
+msgid "Take pictures of the screen at any time"
+msgstr "Рабіць здымкі экрана ў любы часы"
 
 #: panels/applications/cc-applications-panel.ui:147
 msgid "Change Wallpaper"
@@ -216,17 +214,20 @@ msgid "Sounds"
 msgstr "Гукі"
 
 #: panels/applications/cc-applications-panel.ui:155
-#: panels/applications/cc-applications-panel.ui:162
 msgid "Reproduce sounds."
 msgstr "Прайграванне гуку."
+
+#: panels/applications/cc-applications-panel.ui:162
+msgid "Reproduce sounds"
+msgstr "Прайграванне гуку"
 
 #: panels/applications/cc-applications-panel.ui:168
 msgid "Inhibit Shortcuts"
 msgstr "Забараняць спалучэнні клавіш"
 
 #: panels/applications/cc-applications-panel.ui:169
-msgid "Block standard keyboard shortcuts."
-msgstr "Блакіраваць стандартныя спалучэнні клавіш."
+msgid "Block standard keyboard shortcuts"
+msgstr "Блакіраваць стандартныя спалучэнні клавіш"
 
 #: panels/applications/cc-applications-panel.ui:175
 #: panels/applications/cc-applications-panel.ui:182
@@ -236,8 +237,8 @@ msgstr "Камера"
 
 #: panels/applications/cc-applications-panel.ui:176
 #: panels/applications/cc-applications-panel.ui:183
-msgid "Take pictures with the camera."
-msgstr "Рабіць здымкі праз камеру."
+msgid "Take pictures with the camera"
+msgstr "Рабіць здымкі праз камеру"
 
 #: panels/applications/cc-applications-panel.ui:189
 #: panels/applications/cc-applications-panel.ui:196
@@ -247,8 +248,8 @@ msgstr "Мікрафон"
 
 #: panels/applications/cc-applications-panel.ui:190
 #: panels/applications/cc-applications-panel.ui:197
-msgid "Record audio with the microphone."
-msgstr "Запісваць гук праз мікрафон."
+msgid "Record audio with the microphone"
+msgstr "Запісваць гук праз мікрафон"
 
 #: panels/applications/cc-applications-panel.ui:203
 #: panels/applications/cc-applications-panel.ui:210
@@ -258,13 +259,13 @@ msgstr "Сэрвісы месцазнаходжання"
 
 #: panels/applications/cc-applications-panel.ui:204
 #: panels/applications/cc-applications-panel.ui:211
-msgid "Access device location data."
-msgstr "Доступ да звестак пра месцазнаходжанне прылады."
+msgid "Access device location data"
+msgstr "Доступ да звестак пра месцазнаходжанне прылады"
 
 #: panels/applications/cc-applications-panel.ui:222
 #: panels/applications/cc-applications-panel.ui:326
-msgid "Built-in Permissions"
-msgstr "Убудаваныя дазволы"
+msgid "Required Access"
+msgstr "Запатрабаваны доступ"
 
 #: panels/applications/cc-applications-panel.ui:223
 msgid "System access that is required by the app"
@@ -283,9 +284,7 @@ msgstr "Сховішча"
 msgid "No results found"
 msgstr "Нічога не знойдзена"
 
-#: panels/applications/cc-applications-panel.ui:311
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:210
-#: shell/cc-panel-list.ui:117
+#: panels/applications/cc-applications-panel.ui:311 shell/cc-panel-list.ui:117
 msgid "Try a different search"
 msgstr "Паспрабуйце змяніць пошукавы запыт"
 
@@ -349,9 +348,7 @@ msgstr "Выберыце выяву"
 #: panels/background/cc-background-chooser.c:315
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:31
-#: panels/info-overview/cc-info-overview-panel.ui:237
-#: panels/keyboard/cc-input-chooser.ui:11
+#: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:886
@@ -363,14 +360,14 @@ msgstr "Выберыце выяву"
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
 #: panels/search/cc-search-locations-dialog.c:677
-#: panels/sharing/cc-sharing-panel.c:522 panels/usage/cc-usage-panel.c:139
+#: panels/sharing/cc-sharing-panel.c:479 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:592
 #: panels/user-accounts/cc-user-panel.c:610
+#: panels/user-accounts/cc-user-panel.c:628
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -381,7 +378,7 @@ msgstr "_Скасаваць"
 #: panels/background/cc-background-chooser.c:316
 #: panels/network/connection-editor/vpn-helpers.c:222
 #: panels/printers/pp-details-dialog.c:270
-#: panels/sharing/cc-sharing-panel.c:523
+#: panels/sharing/cc-sharing-panel.c:480
 #: panels/user-accounts/cc-avatar-chooser.c:168
 msgid "_Open"
 msgstr "_Адкрыць"
@@ -440,9 +437,9 @@ msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr "Фон;шпалеры;экран;стыль;светлы;цёмны;выгляд;тэма;працоўны стол;"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
-#: panels/datetime/cc-datetime-panel.ui:172
+#: panels/datetime/cc-datetime-panel.ui:130
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
-#: panels/display/cc-night-light-page.ui:122
+#: panels/display/cc-night-light-page.ui:124
 #: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "Уключыць"
@@ -503,8 +500,8 @@ msgid "Camera is Turned Off"
 msgstr "Камера выключана"
 
 #: panels/camera/cc-camera-panel.ui:25
-msgid "No applications can capture photos or video."
-msgstr "Няма праграм, якія могуць здымаць фота або відэа."
+msgid "No sandboxed applications can capture photos or video."
+msgstr "У «пясочніцы» няма праграм, якія могуць здымаць фота або відэа."
 
 #: panels/camera/cc-camera-panel.ui:39
 msgid ""
@@ -721,7 +718,6 @@ msgstr "Вядомыя профілі ICC"
 
 #. TRANSLATORS: filter name on the file->open dialog
 #: panels/color/cc-color-panel.c:303
-#: panels/network/wireless-security/eap-method-fast.c:357
 msgid "All files"
 msgstr "Усе файлы"
 
@@ -879,9 +875,9 @@ msgstr "Патрабуецца носьбіт з магчымасцю запіс
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a href=\"linux"
-"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
-"\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a "
+"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
+"href=\"windows\">Microsoft Windows</a> systems useful."
 msgstr ""
 "Вам могуць прыдацца наступныя інструкцыі аб тым, як можна выкарыстаць гэты "
 "профіль на сістэмах <a href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple "
@@ -896,8 +892,8 @@ msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr ""
-"Выяўлены праблемы. Профіль можа працаваць няправільна. <a href="
-"\"\">Падрабязнасці.</a>"
+"Выяўлены праблемы. Профіль можа працаваць няправільна. <a "
+"href=\"\">Падрабязнасці.</a>"
 
 #: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
@@ -905,7 +901,7 @@ msgstr "_Імпартаваць файл…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:503
+#: panels/network/connection-editor/net-connection-editor.c:589
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1296,26 +1292,26 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Хот-спот"
 
-#: panels/datetime/cc-datetime-panel.c:175
+#: panels/datetime/cc-datetime-panel.c:165
 msgid "24-hour"
 msgstr "24 гадзіны"
 
-#: panels/datetime/cc-datetime-panel.c:177
+#: panels/datetime/cc-datetime-panel.c:167
 msgid "AM / PM"
 msgstr "AM / PM"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:248
+#: panels/datetime/cc-datetime-panel.c:238
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%e %B %Y, %l:%M %p"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:253
+#: panels/datetime/cc-datetime-panel.c:243
 msgid "%e %B %Y, %R"
 msgstr "%e %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:423
+#: panels/datetime/cc-datetime-panel.c:394
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1323,150 +1319,126 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:450
+#: panels/datetime/cc-datetime-panel.c:411
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#. Translators: UTC here means the Coordinated Universal Time.
-#. * %:::z will be replaced by the offset from UTC e.g. UTC+02
-#: panels/datetime/cc-datetime-panel.c:457
-msgid "UTC%:::z"
-msgstr "UTC%:::z"
-
-#. Translators: This is the time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:462
-msgid "%l:%M %p"
-msgstr "%l:%M %p"
-
-#. Translators: This is the time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:467
-msgid "%R"
-msgstr "%R"
-
-#. Update the text bubble in the timezone map
-#. Translators: "timezone (utc shift)"
-#: panels/datetime/cc-datetime-panel.c:472
-#, c-format
-msgctxt "timezone map"
-msgid "%s (%s)"
-msgstr "%s (%s)"
-
-#: panels/datetime/cc-datetime-panel.ui:15
+#: panels/datetime/cc-datetime-panel.ui:9
 #: panels/datetime/gnome-datetime-panel.desktop.in:3
 msgid "Date & Time"
 msgstr "Дата і час"
 
-#: panels/datetime/cc-datetime-panel.ui:50
+#: panels/datetime/cc-datetime-panel.ui:45
 msgid "Year"
 msgstr "Год"
 
-#: panels/datetime/cc-datetime-panel.ui:66
+#: panels/datetime/cc-datetime-panel.ui:61
 msgid "Month"
 msgstr "Месяц"
 
-#: panels/datetime/cc-datetime-panel.ui:71
-msgid "January"
-msgstr "Студзень"
-
-#: panels/datetime/cc-datetime-panel.ui:72
-msgid "February"
-msgstr "Люты"
-
-#: panels/datetime/cc-datetime-panel.ui:73
-msgid "March"
-msgstr "Сакавік"
-
-#: panels/datetime/cc-datetime-panel.ui:74
-msgid "April"
-msgstr "Красавік"
-
-#: panels/datetime/cc-datetime-panel.ui:75
-msgid "May"
-msgstr "Май"
-
-#: panels/datetime/cc-datetime-panel.ui:76
-msgid "June"
-msgstr "Чэрвень"
-
-#: panels/datetime/cc-datetime-panel.ui:77
-msgid "July"
-msgstr "Ліпень"
-
-#: panels/datetime/cc-datetime-panel.ui:78
-msgid "August"
-msgstr "Жнівень"
-
-#: panels/datetime/cc-datetime-panel.ui:79
-msgid "September"
-msgstr "Верасень"
-
-#: panels/datetime/cc-datetime-panel.ui:80
-msgid "October"
-msgstr "Кастрычнік"
-
-#: panels/datetime/cc-datetime-panel.ui:81
-msgid "November"
-msgstr "Лістапад"
-
-#: panels/datetime/cc-datetime-panel.ui:82
-msgid "December"
-msgstr "Снежань"
-
-#: panels/datetime/cc-datetime-panel.ui:92
+#: panels/datetime/cc-datetime-panel.ui:88
 msgid "Day"
 msgstr "Дзень"
 
-#: panels/datetime/cc-datetime-panel.ui:113
-msgid "Time Zone"
-msgstr "Часавы пояс"
-
-#: panels/datetime/cc-datetime-panel.ui:130
-msgid "Search for a city"
-msgstr "Пошук горада"
-
-#: panels/datetime/cc-datetime-panel.ui:164
+#: panels/datetime/cc-datetime-panel.ui:122
 msgid "Automatic _Date &amp; Time"
 msgstr "_Аўтаматычнае вызначэнне даты і часу"
 
-#: panels/datetime/cc-datetime-panel.ui:165
+#: panels/datetime/cc-datetime-panel.ui:123
 msgid "Requires internet access"
 msgstr "Патрабуецца доступ да інтэрнэту"
 
-#: panels/datetime/cc-datetime-panel.ui:180
+#: panels/datetime/cc-datetime-panel.ui:138
 msgid "Date &amp; _Time"
 msgstr "Дата і _час"
 
-#: panels/datetime/cc-datetime-panel.ui:204
+#: panels/datetime/cc-datetime-panel.ui:162
 msgid "Automatic Time _Zone"
 msgstr "Аўтаматычнае _вызначэнне часавага пояса"
 
-#: panels/datetime/cc-datetime-panel.ui:205
+#: panels/datetime/cc-datetime-panel.ui:163
 msgid "Requires location services enabled and internet access"
 msgstr "Патрабуецца ўключэнне сэрвісаў месцазнаходжання і доступ да інтэрнэту"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/datetime/cc-datetime-panel.ui:212
+#: panels/datetime/cc-datetime-panel.ui:170
 #: panels/display/cc-display-settings.ui:23
-#: panels/firmware-security/cc-firmware-security-utils.c:247
+#: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:39
 #: panels/screen/cc-screen-panel.ui:75 panels/screen/cc-screen-panel.ui:95
-#: panels/user-accounts/cc-user-panel.c:800
-#: panels/user-accounts/cc-user-panel.c:902
-#: panels/wwan/cc-wwan-device-page.c:476
+#: panels/user-accounts/cc-user-panel.c:818
+#: panels/user-accounts/cc-user-panel.c:920
+#: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Уключана"
 
-#: panels/datetime/cc-datetime-panel.ui:220
+#: panels/datetime/cc-datetime-panel.ui:178
 msgid "Time Z_one"
 msgstr "Часавы п_ояс"
 
-#: panels/datetime/cc-datetime-panel.ui:245
+#: panels/datetime/cc-datetime-panel.ui:203
 msgid "Time _Format"
 msgstr "_Фармат часу"
+
+#: panels/datetime/cc-datetime-panel.ui:247
+msgid "January"
+msgstr "Студзень"
+
+#: panels/datetime/cc-datetime-panel.ui:248
+msgid "February"
+msgstr "Люты"
+
+#: panels/datetime/cc-datetime-panel.ui:249
+msgid "March"
+msgstr "Сакавік"
+
+#: panels/datetime/cc-datetime-panel.ui:250
+msgid "April"
+msgstr "Красавік"
+
+#: panels/datetime/cc-datetime-panel.ui:251
+msgid "May"
+msgstr "Май"
+
+#: panels/datetime/cc-datetime-panel.ui:252
+msgid "June"
+msgstr "Чэрвень"
+
+#: panels/datetime/cc-datetime-panel.ui:253
+msgid "July"
+msgstr "Ліпень"
+
+#: panels/datetime/cc-datetime-panel.ui:254
+msgid "August"
+msgstr "Жнівень"
+
+#: panels/datetime/cc-datetime-panel.ui:255
+msgid "September"
+msgstr "Верасень"
+
+#: panels/datetime/cc-datetime-panel.ui:256
+msgid "October"
+msgstr "Кастрычнік"
+
+#: panels/datetime/cc-datetime-panel.ui:257
+msgid "November"
+msgstr "Лістапад"
+
+#: panels/datetime/cc-datetime-panel.ui:258
+msgid "December"
+msgstr "Снежань"
+
+#: panels/datetime/cc-tz-dialog.ui:6
+msgid "Select Time Zone"
+msgstr "Выберыце часавы пояс"
+
+#: panels/datetime/cc-tz-dialog.ui:40
+msgid "No Results"
+msgstr "Нічога не знойдзена"
 
 #: panels/datetime/gnome-datetime-panel.desktop.in:4
 msgid "Change the date and time, including time zone"
@@ -1631,7 +1603,7 @@ msgstr "Асноўны дысплэй"
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
 #: panels/display/cc-display-panel.ui:177
 #: panels/display/cc-display-panel.ui:216
-#: panels/display/cc-night-light-page.ui:115
+#: panels/display/cc-night-light-page.ui:117
 msgid "Night Light"
 msgstr "Начное святло"
 
@@ -1678,17 +1650,21 @@ msgstr "Частата абнаўлення"
 msgid "Adjust for TV"
 msgstr "Падстроіць для ТБ"
 
-#: panels/display/cc-display-settings.ui:78
-#: panels/display/cc-display-settings.ui:93
+#: panels/display/cc-display-settings.ui:79
+#: panels/display/cc-display-settings.ui:94
 msgctxt "display setting"
 msgid "Scale"
 msgstr "Маштабаванне"
 
-#: panels/display/cc-night-light-page.ui:22
-msgid "Night Light unavailable"
+#: panels/display/cc-night-light-page.c:269
+msgid "Night Light cannot be used from a virtual machine."
+msgstr "Нельга выкарыстоўваць начное святло на віртуальнай машыне."
+
+#: panels/display/cc-night-light-page.ui:25
+msgid "Night Light Unavailable"
 msgstr "Начное святло недаступна"
 
-#: panels/display/cc-night-light-page.ui:31
+#: panels/display/cc-night-light-page.ui:33
 msgid ""
 "This could be the result of the graphics driver being used, or the desktop "
 "being used remotely"
@@ -1697,16 +1673,16 @@ msgstr ""
 "аддаленага працоўнага стала"
 
 #. Inhibit the redshift functionality until the next day starts
-#: panels/display/cc-night-light-page.ui:58
+#: panels/display/cc-night-light-page.ui:60
 msgid "Temporarily Disabled Until Tomorrow"
 msgstr "Часова адключана да заўтра"
 
 #. This cancels the redshift inhibit.
-#: panels/display/cc-night-light-page.ui:72
+#: panels/display/cc-night-light-page.ui:74
 msgid "Restart Filter"
 msgstr "Перазапусціць фільтр"
 
-#: panels/display/cc-night-light-page.ui:95
+#: panels/display/cc-night-light-page.ui:97
 msgid ""
 "Night light makes the screen color warmer. This can help to prevent eye "
 "strain and sleeplessness."
@@ -1714,59 +1690,59 @@ msgstr ""
 "Начное святло робіць колеры на экране цяплейшымі. Гэта можа дапамагчы ад "
 "стамлення вачэй і бяссонніцы."
 
-#: panels/display/cc-night-light-page.ui:132
+#: panels/display/cc-night-light-page.ui:134
 msgid "Schedule"
 msgstr "Расклад"
 
-#: panels/display/cc-night-light-page.ui:140
+#: panels/display/cc-night-light-page.ui:142
 msgid "Sunset to Sunrise"
 msgstr "Ад заходу да ўсходу"
 
-#: panels/display/cc-night-light-page.ui:141
+#: panels/display/cc-night-light-page.ui:143
 msgid "Manual Schedule"
 msgstr "Вызначаецца ўручную"
 
-#: panels/display/cc-night-light-page.ui:154
+#: panels/display/cc-night-light-page.ui:156
 #: panels/region/cc-format-preview.ui:35
 msgid "Times"
 msgstr "Час"
 
-#: panels/display/cc-night-light-page.ui:167
+#: panels/display/cc-night-light-page.ui:169
 msgid "From"
 msgstr "З"
 
-#: panels/display/cc-night-light-page.ui:192
-#: panels/display/cc-night-light-page.ui:279
+#: panels/display/cc-night-light-page.ui:194
+#: panels/display/cc-night-light-page.ui:281
 msgid "Hour"
 msgstr "Гадзіны"
 
-#: panels/display/cc-night-light-page.ui:198
-#: panels/display/cc-night-light-page.ui:285
+#: panels/display/cc-night-light-page.ui:200
+#: panels/display/cc-night-light-page.ui:287
 msgid ":"
 msgstr ":"
 
-#: panels/display/cc-night-light-page.ui:215
-#: panels/display/cc-night-light-page.ui:302
+#: panels/display/cc-night-light-page.ui:217
+#: panels/display/cc-night-light-page.ui:304
 msgid "Minute"
 msgstr "Хвіліны"
 
 #. This is the short form for the time period in the morning
-#: panels/display/cc-night-light-page.ui:225
-#: panels/display/cc-night-light-page.ui:312
+#: panels/display/cc-night-light-page.ui:227
+#: panels/display/cc-night-light-page.ui:314
 msgid "AM"
 msgstr "AM"
 
 #. This is the short form for the time period in the afternoon
-#: panels/display/cc-night-light-page.ui:237
-#: panels/display/cc-night-light-page.ui:324
+#: panels/display/cc-night-light-page.ui:239
+#: panels/display/cc-night-light-page.ui:326
 msgid "PM"
 msgstr "PM"
 
-#: panels/display/cc-night-light-page.ui:254
+#: panels/display/cc-night-light-page.ui:256
 msgid "To"
 msgstr "Да"
 
-#: panels/display/cc-night-light-page.ui:360
+#: panels/display/cc-night-light-page.ui:362
 msgid "Color Temperature"
 msgstr "Колеравая тэмпература"
 
@@ -1775,8 +1751,9 @@ msgid "Displays"
 msgstr "Дысплэі"
 
 #: panels/display/gnome-display-panel.desktop.in:4
-msgid "Choose how to use connected monitors and projectors"
-msgstr "Выберыце як выкарыстоўваць падлучаныя маніторы і праектары"
+msgid "Use Night Light and choose how to use connected monitors and projectors"
+msgstr ""
+"Начное святло і выбар спосабаў выкарыстання падлучаных манітораў і праектараў"
 
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in:15
@@ -1789,7 +1766,7 @@ msgstr ""
 
 #. TRANSLATORS: secure boot refers to the system firmware security mode
 #: panels/firmware-security/cc-firmware-security-boot-dialog.c:72
-#: panels/firmware-security/cc-firmware-security-panel.c:112
+#: panels/firmware-security/cc-firmware-security-panel.c:119
 msgid "Secure Boot is Active"
 msgstr "Secure Boot актыўна"
 
@@ -1874,165 +1851,189 @@ msgstr ""
 "Каб атрымаць дадатковыя звесткі, звярніцеся да вытворцы вашага абсталявання "
 "або да службы абслугоўвання і падтрымкі."
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:96
-#: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-dialog.c:100
-msgid "Passed"
-msgstr "Пройдзена"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:96
-#: panels/firmware-security/cc-firmware-security-dialog.c:98
-#: panels/firmware-security/cc-firmware-security-dialog.c:100
-msgid "Failed"
-msgstr "Няўдача"
-
-#. TRANSLATORS: HSI stands for Host Security ID and device refers to the computer as a whole
-#: panels/firmware-security/cc-firmware-security-dialog.c:137
-#, c-format
-msgid "Device conforms to HSI level %d"
-msgstr "Прылада адпавядае %d узроўню HSI"
-
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:149
-#: panels/firmware-security/cc-firmware-security-panel.c:485
-msgid "Security Level 0"
-msgstr "Узровень бяспекі 0"
+#: panels/firmware-security/cc-firmware-security-dialog.c:113
+#: panels/firmware-security/cc-firmware-security-panel.c:544
+msgid "Checks Failed"
+msgstr "Праверкі не пройдзены"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:150
+#. TRANSLATORS: This is the description to describe the failure on
+#. checking the security items.
+#: panels/firmware-security/cc-firmware-security-dialog.c:116
 msgid ""
-"This device has no protection against hardware security issues. This could "
-"be because of a hardware or firmware configuration issue. It is recommended "
-"to contact your IT support provider."
+"Hardware does not pass checks. This means that you are not protected against "
+"common hardware security issues.\n"
+"\n"
+"It may be possible to resolve hardware security issues by updating your "
+"firmware or changing device configuration options. However, failures can "
+"stem from the physical hardware itself, and may not be reversible."
 msgstr ""
-"Гэта прылада не мае абароны ад праблем бяспекі ў апаратнага забеспячэння. "
-"Магчыма праблема з-за канфігурацыі апаратнага забеспячэння або ўбудаванага "
-"ПЗ. Рэкамендуецца звярнуцца да службы абслугоўвання і падтрымкі."
+"Абсталяванне не прайшло праверку бяспекі. Гэта азначае, што вы не абаронены "
+"ад распаўсюджаных праблем бяспекі ў апаратнага забеспячэння.\n"
+"\n"
+"Магчыма праблема можа быць вырашана праз абнаўленне ўбудаванага ПЗ або "
+"змяненне налад прылады. Аднак, прычынай могуць быць характарыстыкі самога "
+"абсталявання, тады рашэння няма."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:158
-#: panels/firmware-security/cc-firmware-security-dialog.c:357
-#: panels/firmware-security/cc-firmware-security-panel.c:492
-msgid "Security Level 1"
-msgstr "Узровень бяспекі 1"
+#: panels/firmware-security/cc-firmware-security-dialog.c:127
+#: panels/firmware-security/cc-firmware-security-panel.c:551
+msgid "Checks Passed"
+msgstr "Праверкі пройдзены"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:159
+#. TRANSLATORS: This description describes the device passing the
+#. minimum requirement of security check.
+#: panels/firmware-security/cc-firmware-security-dialog.c:130
 msgid ""
-"This device has minimal protection against hardware security issues. This is "
-"the lowest device security level and only provides protection against simple "
-"security threats."
+"Hardware meets security requirements. This device has protection against "
+"common hardware security threats."
 msgstr ""
-"Прылада мае мінімальную абарону ад праблем бяспекі ў апаратнага "
-"забеспячэння. Гэта самы нізкі ўзровень бяспекі прылады, які забяспечвае "
-"абарону толькі ад простых пагроз бяспекі."
+"Абсталяванне адпавядае патрабаванням бяспекі. Гэта прылада абаронена ад "
+"распаўсюджаных пагроз бяспекі."
 
-#. TRANSLATORS: in reference to firmware protection: 2/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:167
-#: panels/firmware-security/cc-firmware-security-dialog.c:362
-#: panels/firmware-security/cc-firmware-security-panel.c:499
-msgid "Security Level 2"
-msgstr "Узровень бяспекі 2"
+#. TRANSLATORS: in reference to firmware protection: 2~4 stars
+#: panels/firmware-security/cc-firmware-security-dialog.c:141
+#: panels/firmware-security/cc-firmware-security-panel.c:560
+msgid "Protected"
+msgstr "Абаронена"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:168
+#. TRANSLATOR: This description describes the devices passing
+#. the extended security check.
+#: panels/firmware-security/cc-firmware-security-dialog.c:144
 msgid ""
-"This device has basic protection against hardware security issues. This "
-"provides protection against some common security threats."
+"Device hardware meets security requirements. This device has protection "
+"against a range of the most common hardware security threats."
 msgstr ""
-"Прылада мае базавую абарону ад праблем бяспекі ў апаратнага забеспячэння. "
-"Гэта забяспечвае абарону ад некаторых распаўсюджаных пагроз бяспекі."
-
-#. TRANSLATORS: in reference to firmware protection: 3/4 stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:176
-#: panels/firmware-security/cc-firmware-security-dialog.c:367
-#: panels/firmware-security/cc-firmware-security-panel.c:506
-msgid "Security Level 3"
-msgstr "Узровень бяспекі 3"
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:177
-msgid ""
-"This device has extended protection against hardware security issues. This "
-"is the highest device security level and provides protection against "
-"advanced security threats."
-msgstr ""
-"Прылада мае пашыраную абарону ад праблем бяспекі ў апаратнага забеспячэння. "
-"Гэта самы высокі ўзровень бяспекі прылады, які забяспечвае абарону ад "
-"сучасных пагроз бяспекі."
+"Абсталяванне прылады адпавядае патрабаванням бяспекі. Гэта прылада абаронена "
+"ад рада найбольш распаўсюджаных пагроз бяспекі."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
-#: panels/firmware-security/cc-firmware-security-dialog.c:185
+#: panels/firmware-security/cc-firmware-security-dialog.c:152
+#: panels/firmware-security/cc-firmware-security-panel.c:567
+msgid "Checks Unavailable"
+msgstr "Праверкі недаступны"
+
+#. TRANSLATORS: When the security result is unavailable, this description is shown.
+#: panels/firmware-security/cc-firmware-security-dialog.c:154
+msgid ""
+"Device security checks are not available for this device. It is not possible "
+"to tell whether it meets security requirements."
+msgstr ""
+"Для гэтай прылады недаступны праверкі бяспекі. Немагчыма сказаць, ці "
+"адпавядае яна патрабаванням бяспекі."
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:188
+#: panels/info-overview/cc-info-overview-panel.c:294
+#: panels/info-overview/cc-info-overview-panel.c:314
+#: panels/info-overview/cc-info-overview-panel.c:355
+#: panels/info-overview/cc-info-overview-panel.c:385
+#: panels/wwan/cc-wwan-details-dialog.c:100
+msgid "Unknown"
+msgstr "Невядома"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:270
+msgid "Device Security Report"
+msgstr "Справаздача пра бяспеку прылады"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:273
+msgid "Report details"
+msgstr "Падрабязнасці справаздачы"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:277
+msgid "Date generated:"
+msgstr "Дата стварэння:"
+
+#. TRANSLATOR: This is the title for showing the version of fwupd service.
+#: panels/firmware-security/cc-firmware-security-dialog.c:285
+msgid "fwupd version:"
+msgstr "версія fwupd:"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:294
+msgid "Hardware model:"
+msgstr "Мадэль абсталявання:"
+
+#. TRANSLATOR: "Processor" indicates the CPU model name.
+#: panels/firmware-security/cc-firmware-security-dialog.c:301
+msgid "Processor:"
+msgstr "Працэсар:"
+
+#. TRANSLATOR: "OS" indicates the OS name, ex: Fedora 38.
+#: panels/firmware-security/cc-firmware-security-dialog.c:307
+msgid "OS:"
+msgstr "АС:"
+
+#. TRANSLATOR: This is the title for device security level.
+#: panels/firmware-security/cc-firmware-security-dialog.c:313
+msgid "Security level:"
+msgstr "Узровень бяспекі:"
+
+#. TRANSLATOR: This is the postfix of "HSI-n Tests" title.
+#: panels/firmware-security/cc-firmware-security-dialog.c:343
+msgid "Tests"
+msgstr "Праверкі"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:348
+msgid "Runtime Tests"
+msgstr "Праверкі асяроддзя выканання"
+
+#. Passed
+#. TRANSLATOR: If the status for security attribute is success, "Pass " is shown.
+#. TRANSLATOR: This is the text event status output when the event status is "success"
+#: panels/firmware-security/cc-firmware-security-dialog.c:367
+#: panels/firmware-security/cc-firmware-security-panel.c:231
+msgid "Pass"
+msgstr "Пройдзена"
+
+#. Failed
+#. TRANSLATOR: If the status for security attribute is success, "! Fail " is shown.
+#. TRANSLATOR: This is the text event status output when the event status is not "success"
+#: panels/firmware-security/cc-firmware-security-dialog.c:374
+#: panels/firmware-security/cc-firmware-security-panel.c:234
+msgid "! Fail"
+msgstr "! Не пройдзена"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:386
+msgid "Host security events"
+msgstr "Падзеі бяспекі хоста"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:390
+msgid ""
+"For information on the contents of this report, see https://fwupd.github.io/"
+"hsi.html"
+msgstr ""
+"Каб даведацца, якія звесткі змяшчае справаздача, глядзіце https://fwupd."
+"github.io/hsi.html"
+
+#: panels/firmware-security/cc-firmware-security-dialog.c:395
+msgid "Report copied to clipboard"
+msgstr "Справаздача скапіявана ў буфер абмену"
+
 #: panels/firmware-security/cc-firmware-security-dialog.ui:22
-#: panels/firmware-security/cc-firmware-security-panel.c:521
-msgid "Security Level"
-msgstr "Узровень бяспекі"
+msgid "Device Security Status"
+msgstr "Статус бяспекі прылады"
 
-#: panels/firmware-security/cc-firmware-security-dialog.c:186
-#: panels/firmware-security/cc-firmware-security-panel.c:522
-msgid "Security levels are not available for this device."
-msgstr "Для гэтай прылады недаступны ўзроўні бяспекі."
-
-#. TRANSLATORS: hardware manufacturer as in OEM
-#: panels/firmware-security/cc-firmware-security-dialog.c:201
-#: panels/firmware-security/cc-firmware-security-dialog.c:211
-#: panels/firmware-security/cc-firmware-security-dialog.c:218
-msgid "Contact your hardware manufacturer for help with security updates."
-msgstr ""
-"Звярніцеся да вытворцы вашага абсталявання, каб атрымаць дапамогу з "
-"абнаўленнямі бяспекі."
-
-#. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:203
-msgid ""
-"It might be possible to resolve this issue in the device’s UEFI firmware "
-"settings, or by a support technician."
-msgstr ""
-"Магчыма праблема можа быць вырашана праз налады ўбудаванага ПЗ UEFI або праз "
-"службу тэхнічнай падтрымкі."
-
-#: panels/firmware-security/cc-firmware-security-dialog.c:212
-#: panels/firmware-security/cc-firmware-security-dialog.c:223
-msgid ""
-"It might be possible to resolve this issue in the device’s UEFI firmware "
-"settings."
-msgstr "Магчыма праблема можа быць вырашана праз налады ўбудаванага ПЗ UEFI."
-
-#. TRANSLATORS: support technician as in someone with root
-#: panels/firmware-security/cc-firmware-security-dialog.c:229
-msgid "It might be possible for a support technician to resolve this issue."
-msgstr "Магчыма праблема можа быць вырашана праз службу тэхнічнай падтрымкі."
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:88
-msgid "Level 1"
-msgstr "Узровень 1"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:124
-msgid "Level 2"
-msgstr "Узровень 2"
-
-#: panels/firmware-security/cc-firmware-security-dialog.ui:160
-msgid "Level 3"
-msgstr "Узровень 2"
-
-#: panels/firmware-security/cc-firmware-security-panel.c:113
+#: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Protected against malicious software when the device starts."
 msgstr "Абаронена ад шкоднага праграмнага забеспячэння падчас запуску прылады."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:119
+#: panels/firmware-security/cc-firmware-security-panel.c:126
 msgid "Secure Boot has Problems"
 msgstr "Праблемы з Secure Boot"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:120
+#: panels/firmware-security/cc-firmware-security-panel.c:127
 msgid "Some protection when the device is started."
 msgstr "Маецца абарона падчас запуску прылады."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:125
+#: panels/firmware-security/cc-firmware-security-panel.c:132
 msgid "Secure Boot is Off"
 msgstr "Secure Boot выключана"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:126
+#: panels/firmware-security/cc-firmware-security-panel.c:133
 msgid "No protection when the device is started."
 msgstr "Няма абароны падчас запуску прылады."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:145
+#: panels/firmware-security/cc-firmware-security-panel.c:152
 msgid ""
 "This issue could have been caused by a change in UEFI firmware settings, an "
 "operating system configuration change, or because of malicious software on "
@@ -2043,7 +2044,7 @@ msgstr ""
 "забеспячэння ў гэтай сістэме."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:153
+#: panels/firmware-security/cc-firmware-security-panel.c:160
 msgid ""
 "This issue could have been caused by a change in the UEFI firmware settings, "
 "or because of malicious software on this system."
@@ -2052,7 +2053,7 @@ msgstr ""
 "дзеяннямі шкоднага праграмнага забеспячэння ў гэтай сістэме."
 
 #. TRANSLATORS: this is to explain an event that has already happened
-#: panels/firmware-security/cc-firmware-security-panel.c:160
+#: panels/firmware-security/cc-firmware-security-panel.c:167
 msgid ""
 "This issue could have been caused by an operating system configuration "
 "change, or because of malicious software on this system."
@@ -2060,288 +2061,108 @@ msgstr ""
 "Праблема магла быць выклікана змяненнем канфігурацыі аперацыйнай сістэмы або "
 "дзеяннямі шкоднага праграмнага забеспячэння ў гэтай сістэме."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:486
-msgid "Exposed to serious security threats."
-msgstr "Маюцца сур'ёзныя пагрозы бяспекі."
+#. TRANSLATOR: this is the date in "%Y-%m-%d %H:%M:%S" format,
+#. for example: 2022-08-01 22:48:00
+#: panels/firmware-security/cc-firmware-security-panel.c:225
+#, c-format
+msgid "%1$s"
+msgstr "%1$s"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:493
-msgid "Limited protection against simple security threats."
-msgstr "Абмежаваная абарона ад простых пагроз бяспекі."
+#: panels/firmware-security/cc-firmware-security-panel.c:237
+#, c-format
+msgid "(%1$s → %2$s)"
+msgstr "(%1$s → %2$s)"
 
-#: panels/firmware-security/cc-firmware-security-panel.c:500
-msgid "Protected against common security threats."
-msgstr "Абаронена ад распаўсюджаных пагроз бяспекі."
+#: panels/firmware-security/cc-firmware-security-panel.c:545
+msgid "Hardware does not pass checks."
+msgstr "Абсталяванне не прайшло праверку бяспекі."
 
-#: panels/firmware-security/cc-firmware-security-panel.c:507
-#: panels/firmware-security/cc-firmware-security-panel.c:515
-msgid "Protected against a wide range of security threats."
-msgstr "Абаронена ад шырокага спектру пагроз бяспекі."
+#: panels/firmware-security/cc-firmware-security-panel.c:552
+msgid "Hardware meets security requirements."
+msgstr "Абсталяванне адпавядае патрабаванням бяспекі."
 
-#. TRANSLATORS: in reference to firmware protection: 4/4 stars
-#: panels/firmware-security/cc-firmware-security-panel.c:514
-msgid "Comprehensive Protection"
-msgstr "Комплексная абарона"
+#: panels/firmware-security/cc-firmware-security-panel.c:561
+msgid "Hardware has a good level of protection."
+msgstr "Абсталяванне мае добры ўзровень абароны."
 
-#: panels/firmware-security/cc-firmware-security-panel.ui:150
+#: panels/firmware-security/cc-firmware-security-panel.c:568
+msgid "Security levels are not available for this device."
+msgstr "Для гэтай прылады недаступны ўзроўні бяспекі."
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:76
+msgid "Device Security Unavailable"
+msgstr "Для прылады недаступны праверкі бяспекі"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:216
+msgid "Security Events"
+msgstr "Падзеі бяспекі"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:226
 msgid "No Events"
 msgstr "Няма падзей"
 
-#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:37
-msgid "Firmware Write Protection"
-msgstr "Абарона ад перазапісу ўбудаванага ПЗ"
-
-#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:42
-msgid "Firmware Write Protection Lock"
-msgstr "Блакаванне абароны ад перазапісу ўбудаванага ПЗ"
-
-#. TRANSLATORS: Title: SPI refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:47
-msgid "Firmware BIOS Region"
-msgstr "Рэгіён убудаванага ПЗ BIOS"
-
-#. TRANSLATORS: Title: firmware refers to the flash chip in the computer
-#: panels/firmware-security/cc-firmware-security-utils.c:52
-msgid "Firmware BIOS Descriptor"
-msgstr "Дэскрыптар убудаванага ПЗ BIOS"
-
-#. TRANSLATORS: Title: DMA as in https://en.wikipedia.org/wiki/DMA_attack
-#: panels/firmware-security/cc-firmware-security-utils.c:57
-msgid "Pre-boot DMA Protection"
-msgstr "Перадзагрузачная абарона DMA"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel
-#: panels/firmware-security/cc-firmware-security-utils.c:62
-msgid "Intel BootGuard"
-msgstr "Intel BootGuard"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * verified boot refers to the way the boot process is verified
-#: panels/firmware-security/cc-firmware-security-utils.c:68
-msgid "Intel BootGuard Verified Boot"
-msgstr "Правераная загрузка Intel BootGuard"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * ACM means to verify the integrity of Initial Boot Block
-#: panels/firmware-security/cc-firmware-security-utils.c:74
-msgid "Intel BootGuard ACM Protected"
-msgstr "Абаронена Intel BootGuard ACM"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel,
-#. * error policy is what to do on failure
-#: panels/firmware-security/cc-firmware-security-utils.c:80
-msgid "Intel BootGuard Error Policy"
-msgstr "Палітыка памылак Intel BootGuard"
-
-#. TRANSLATORS: Title: BootGuard is a trademark from Intel
-#: panels/firmware-security/cc-firmware-security-utils.c:85
-msgid "Intel BootGuard Fuse"
-msgstr "Засцерагальнік Intel BootGuard"
-
-#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
-#. * enabled means supported by the processor
-#: panels/firmware-security/cc-firmware-security-utils.c:91
-msgid "Intel CET Enabled"
-msgstr "Intel CET уключана"
-
-#. TRANSLATORS: Title: CET = Control-flow Enforcement Technology,
-#. * active means being used by the OS
-#: panels/firmware-security/cc-firmware-security-utils.c:97
-msgid "Intel CET Active"
-msgstr "Intel CET актыўна"
-
-#. TRANSLATORS: Title: SMAP = Supervisor Mode Access Prevention
-#: panels/firmware-security/cc-firmware-security-utils.c:102
-msgid "Intel SMAP"
-msgstr "Intel SMAP"
-
-#. TRANSLATORS: Title: Memory contents are encrypted, e.g. Intel TME
-#: panels/firmware-security/cc-firmware-security-utils.c:107
-msgid "Encrypted RAM"
-msgstr "Зашыфраваная RAM"
-
-#. TRANSLATORS: Title:
-#. * https://en.wikipedia.org/wiki/Input%E2%80%93output_memory_management_unit
-#: panels/firmware-security/cc-firmware-security-utils.c:113
-msgid "IOMMU Protection"
-msgstr "Абарона IOMMU"
-
-#. TRANSLATORS: Title: lockdown is a security mode of the kernel
-#: panels/firmware-security/cc-firmware-security-utils.c:118
-msgid "Linux Kernel Lockdown"
-msgstr "Linux Kernel Lockdown"
-
-#. TRANSLATORS: Title: if it's tainted or not
-#: panels/firmware-security/cc-firmware-security-utils.c:123
-msgid "Linux Kernel Verification"
-msgstr "Linux Kernel Verification"
-
-#. TRANSLATORS: Title: swap space or swap partition
-#: panels/firmware-security/cc-firmware-security-utils.c:128
-msgid "Linux Swap"
-msgstr "Linux Swap"
-
-#. TRANSLATORS: Title: sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:133
-msgid "Suspend To RAM"
-msgstr "Прыпыненне працы ў рэжым сна"
-
-#. TRANSLATORS: Title: a better sleep state
-#: panels/firmware-security/cc-firmware-security-utils.c:138
-msgid "Suspend To Idle"
-msgstr "Прыпыненне працы ў рэжым чакання"
-
-#. TRANSLATORS: Title: PK is the 'platform key' for the machine
-#: panels/firmware-security/cc-firmware-security-utils.c:143
-msgid "UEFI Platform Key"
-msgstr "Ключ платформы UEFI"
-
-#. TRANSLATORS: Title: SB is a way of locking down UEFI
-#: panels/firmware-security/cc-firmware-security-utils.c:148
-msgid "UEFI Secure Boot"
-msgstr "UEFI Secure Boot"
-
-#. TRANSLATORS: Title: PCRs (Platform Configuration Registers) shouldn't be empty
-#: panels/firmware-security/cc-firmware-security-utils.c:153
-msgid "TPM Platform Configuration"
-msgstr "Канфігурацыя платформы TPM"
-
-#. TRANSLATORS: Title: the PCR is rebuilt from the TPM event log
-#: panels/firmware-security/cc-firmware-security-utils.c:158
-msgid "TPM Reconstruction"
-msgstr "Рэканструкцыя TPM"
-
-#. TRANSLATORS: Title: TPM = Trusted Platform Module
-#: panels/firmware-security/cc-firmware-security-utils.c:163
-msgid "TPM v2.0"
-msgstr "TPM v2.0"
-
-#. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:168
-msgid "Intel Management Engine Manufacturing Mode"
-msgstr "Вытворчы рэжым Intel Management Engine"
-
-#. TRANSLATORS: Title: MEI = Intel Management Engine, and the "override" is enabled
-#. * with a jumper -- luckily it is probably not accessible to end users on consumer
-#. * boards
-#: panels/firmware-security/cc-firmware-security-utils.c:175
-msgid "Intel Management Engine Override"
-msgstr "Перавызначэнне Intel Management Engine"
-
-#. TRANSLATORS: Title: MEI = Intel Management Engine
-#: panels/firmware-security/cc-firmware-security-utils.c:180
-msgid "Intel Management Engine Version"
-msgstr "Версія Intel Management Engine"
-
-#. TRANSLATORS: Title: if firmware updates are available
-#: panels/firmware-security/cc-firmware-security-utils.c:185
-msgid "Firmware Updates"
-msgstr "Абнаўленні ўбудаванага ПЗ"
-
-#. TRANSLATORS: Title: if we can verify the firmware checksums
-#: panels/firmware-security/cc-firmware-security-utils.c:190
-msgid "Firmware Attestation"
-msgstr "Атэстацыя ўбудаванага ПЗ"
-
-#. TRANSLATORS: Title: if the fwupd plugins are all present and correct
-#: panels/firmware-security/cc-firmware-security-utils.c:195
-msgid "Firmware Updater Verification"
-msgstr "Праверка сродку абнаўлення ўбудаванага ПЗ"
-
-#. TRANSLATORS: Title: Allows debugging of parts using proprietary hardware
-#: panels/firmware-security/cc-firmware-security-utils.c:201
-msgid "Platform Debugging"
-msgstr "Адладка платформы"
-
-#. TRANSLATORS: Title: if fwupd supports HSI on this chip
-#: panels/firmware-security/cc-firmware-security-utils.c:206
-msgid "Processor Security Checks"
-msgstr "Праверка бяспекі працэсара"
-
-#. TRANSLATORS: Title: if firmware enforces rollback protection
-#: panels/firmware-security/cc-firmware-security-utils.c:211
-msgid "AMD Rollback Protection"
-msgstr "Абарона ад паніжэння версіі ўбудаванага ПЗ AMD"
-
-#. TRANSLATORS: Title: if hardware enforces control of SPI replays
-#: panels/firmware-security/cc-firmware-security-utils.c:216
-msgid "AMD Firmware Replay Protection"
-msgstr "Абарона ад пераўсталявання ўбудаванага ПЗ AMD"
-
-#. TRANSLATORS: Title: if hardware enforces control of SPI writes
-#: panels/firmware-security/cc-firmware-security-utils.c:221
-msgid "AMD Firmware Write Protection"
-msgstr "Абарона ад перазапісу ўбудаванага ПЗ AMD"
-
-# Нешта пра PCH, перапальванне рэгістраў у крысталае на апаратным узроўні і гэта блок ад перазапісу. Незразумела, але добра, калі перапалілі. https://fwupd.github.io/libfwupdplugin/hsi.html#part-is-fused
-#. TRANSLATORS: Title: if the part has been fused
-#: panels/firmware-security/cc-firmware-security-utils.c:226
-msgid "Fused Platform"
-msgstr "Сплаўленая платформа"
-
 #. TRANSLATORS: if the stauts is valid. For example security check is valid and key is valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:237
+#: panels/firmware-security/cc-firmware-security-utils.c:35
 msgid "Valid"
 msgstr "Сапраўдны"
 
 #. TRANSLATORS: if the status or key is not valid.
-#: panels/firmware-security/cc-firmware-security-utils.c:242
+#: panels/firmware-security/cc-firmware-security-utils.c:40
 msgid "Not Valid"
 msgstr "Несапраўдны"
 
 #. TRANSLATORS: if the function is not enabled through BIOS or OS settings.
-#: panels/firmware-security/cc-firmware-security-utils.c:252
+#: panels/firmware-security/cc-firmware-security-utils.c:50
 msgid "Not Enabled"
 msgstr "Не ўключана"
 
 #. TRANSLATORS: the memory space or system mode is locked to prevent from malicious modification.
-#: panels/firmware-security/cc-firmware-security-utils.c:257
+#: panels/firmware-security/cc-firmware-security-utils.c:55
 msgid "Locked"
 msgstr "Заблакавана"
 
 #. TRANSLATORS: the memory space or system mode is not locked.
-#: panels/firmware-security/cc-firmware-security-utils.c:262
+#: panels/firmware-security/cc-firmware-security-utils.c:60
 msgid "Not Locked"
 msgstr "Не заблакавана"
 
 #. TRANSLATORS: The data is encrypted to prevent from malicious reading.
-#: panels/firmware-security/cc-firmware-security-utils.c:267
+#: panels/firmware-security/cc-firmware-security-utils.c:65
 msgid "Encrypted"
 msgstr "Зашыфравана"
 
 #. TRANSLATORS: the data in memory is plane text.
-#: panels/firmware-security/cc-firmware-security-utils.c:272
+#: panels/firmware-security/cc-firmware-security-utils.c:70
 msgid "Not Encrypted"
 msgstr "Не зашыфравана"
 
 #. TRANSLATORS: Linux kernel is tainted by third party kernel module.
-#: panels/firmware-security/cc-firmware-security-utils.c:277
+#: panels/firmware-security/cc-firmware-security-utils.c:75
 msgid "Tainted"
 msgstr "Сапсавана"
 
 #. TRANSLATORS: All the loaded kernel module are licensed.
-#: panels/firmware-security/cc-firmware-security-utils.c:282
+#: panels/firmware-security/cc-firmware-security-utils.c:80
 msgid "Not Tainted"
 msgstr "Не сапсавана"
 
 #. TRANSLATORS: the feature can be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:287
+#: panels/firmware-security/cc-firmware-security-utils.c:85
 msgid "Found"
 msgstr "Знойдзена"
 
 #. TRANSLATORS: the feature can't be detected.
-#: panels/firmware-security/cc-firmware-security-utils.c:292
+#: panels/firmware-security/cc-firmware-security-utils.c:90
 msgid "Not Found"
 msgstr "Не знойдзена"
 
 #. TRANSLATORS: the function is supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:297
+#: panels/firmware-security/cc-firmware-security-utils.c:95
 msgid "Supported"
 msgstr "Падтрымліваецца"
 
 #. TRANSLATORS: the function isn't supported by hardware.
-#: panels/firmware-security/cc-firmware-security-utils.c:302
+#: panels/firmware-security/cc-firmware-security-utils.c:100
 msgid "Not Supported"
 msgstr "Не падтрымліваецца"
 
@@ -2362,42 +2183,34 @@ msgstr ""
 "экран;блакіраванне;заблакіраваць;дыягностыка;аварыя;прыватны;нядаўні;часовы;"
 "назва;імя;сетка;сеціва;ідэнтыфікацыя;асоба;прыватнасць;"
 
-#: panels/info-overview/cc-info-overview-panel.c:299
-#: panels/info-overview/cc-info-overview-panel.c:319
-#: panels/info-overview/cc-info-overview-panel.c:360
-#: panels/info-overview/cc-info-overview-panel.c:390
-#: panels/wwan/cc-wwan-details-dialog.c:100
-msgid "Unknown"
-msgstr "Невядома"
-
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:337
+#: panels/info-overview/cc-info-overview-panel.c:332
 #, c-format
 msgid "64-bit"
 msgstr "64-бітная"
 
 #. translators: This is the type of architecture for the OS
-#: panels/info-overview/cc-info-overview-panel.c:340
+#: panels/info-overview/cc-info-overview-panel.c:335
 #, c-format
 msgid "32-bit"
 msgstr "32-бітная"
 
-#: panels/info-overview/cc-info-overview-panel.c:625
+#: panels/info-overview/cc-info-overview-panel.c:622
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:629
+#: panels/info-overview/cc-info-overview-panel.c:626
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:631
+#: panels/info-overview/cc-info-overview-panel.c:628
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Невядома"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:709
+#: panels/info-overview/cc-info-overview-panel.c:706
 msgid "Not Available"
 msgstr "Недаступна"
 
@@ -2406,97 +2219,77 @@ msgid "System Logo"
 msgstr "Лагатып сістэмы"
 
 #: panels/info-overview/cc-info-overview-panel.ui:33
-#: panels/sharing/cc-sharing-panel.ui:304
+#: panels/sharing/cc-sharing-panel.ui:21 panels/sharing/cc-sharing-panel.ui:278
 msgid "Device Name"
 msgstr "Імя прылады"
 
-#: panels/info-overview/cc-info-overview-panel.ui:51
+#: panels/info-overview/cc-info-overview-panel.ui:48
 msgid "Hardware Model"
 msgstr "Мадэль абсталявання"
 
-#: panels/info-overview/cc-info-overview-panel.ui:60
+#: panels/info-overview/cc-info-overview-panel.ui:57
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
 msgstr "Версія ўбудаванага ПЗ"
 
-#: panels/info-overview/cc-info-overview-panel.ui:68
+#: panels/info-overview/cc-info-overview-panel.ui:65
 msgid "Memory"
 msgstr "Памяць"
 
-#: panels/info-overview/cc-info-overview-panel.ui:76
+#: panels/info-overview/cc-info-overview-panel.ui:73
 msgid "Processor"
 msgstr "Працэсар"
 
-#: panels/info-overview/cc-info-overview-panel.ui:84
+#: panels/info-overview/cc-info-overview-panel.ui:81
 msgid "Graphics"
 msgstr "Графіка"
 
-#: panels/info-overview/cc-info-overview-panel.ui:92
+#: panels/info-overview/cc-info-overview-panel.ui:89
 msgid "Disk Capacity"
 msgstr "Ёмістасць дыска"
 
-#: panels/info-overview/cc-info-overview-panel.ui:93
+#: panels/info-overview/cc-info-overview-panel.ui:90
 msgid "Calculating…"
 msgstr "Вылічэнне…"
 
 #. translators: this field contains the distro name and version
-#: panels/info-overview/cc-info-overview-panel.ui:108
+#: panels/info-overview/cc-info-overview-panel.ui:105
 msgid "OS Name"
 msgstr "Назва АС"
 
 #. translators: this field contains the distro build ID
-#: panels/info-overview/cc-info-overview-panel.ui:117
+#: panels/info-overview/cc-info-overview-panel.ui:114
 msgid "OS Build ID"
 msgstr "ID зборкі АС"
 
-#: panels/info-overview/cc-info-overview-panel.ui:125
+#: panels/info-overview/cc-info-overview-panel.ui:122
 msgid "OS Type"
 msgstr "Тып АС"
 
-#: panels/info-overview/cc-info-overview-panel.ui:133
+#: panels/info-overview/cc-info-overview-panel.ui:130
 msgid "GNOME Version"
 msgstr "Версія GNOME"
 
 #. translators: this is a placeholder while the GNOME version is being fetched
-#: panels/info-overview/cc-info-overview-panel.ui:135
+#: panels/info-overview/cc-info-overview-panel.ui:132
 msgid "Loading…"
 msgstr "Загрузка…"
 
-#: panels/info-overview/cc-info-overview-panel.ui:143
+#: panels/info-overview/cc-info-overview-panel.ui:140
 msgid "Windowing System"
 msgstr "Аконны інтэрфейс"
 
-#: panels/info-overview/cc-info-overview-panel.ui:151
+#: panels/info-overview/cc-info-overview-panel.ui:148
 msgid "Virtualization"
 msgstr "Віртуалізацыя"
 
-#: panels/info-overview/cc-info-overview-panel.ui:160
+#: panels/info-overview/cc-info-overview-panel.ui:157
 msgid "Kernel Version"
 msgstr "Версія ядра"
 
-#: panels/info-overview/cc-info-overview-panel.ui:169
+#: panels/info-overview/cc-info-overview-panel.ui:166
 msgid "Software Updates"
 msgstr "Абнаўленне ПЗ"
-
-#: panels/info-overview/cc-info-overview-panel.ui:193
-msgid "Rename Device"
-msgstr "Перайменаваць прыладу"
-
-#: panels/info-overview/cc-info-overview-panel.ui:209
-msgid ""
-"The device name is used to identify this device when it is viewed over the "
-"network, or when pairing Bluetooth devices."
-msgstr ""
-"Імя прылады выкарыстоўваецца для яе апазнавання ў сетцы або пры спалучэнні "
-"прылад Bluetooth."
-
-#: panels/info-overview/cc-info-overview-panel.ui:215
-msgid "Device name"
-msgstr "Імя прылады"
-
-#: panels/info-overview/cc-info-overview-panel.ui:229
-msgid "_Rename"
-msgstr "_Перайменаваць"
 
 #: panels/info-overview/gnome-info-overview-panel.desktop.in:3
 msgid "About"
@@ -2702,13 +2495,13 @@ msgid "View Keyboard Layout"
 msgstr "Прагляд раскладкі клавіятуры"
 
 #: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
-#: panels/sharing/cc-sharing-panel.c:646
+#: panels/sharing/cc-sharing-panel.c:603
 msgid "Remove"
 msgstr "Выдаліць"
 
-#: panels/keyboard/cc-keyboard-manager.c:485
-#: panels/keyboard/cc-keyboard-manager.c:493
-#: panels/keyboard/cc-keyboard-manager.c:922
+#: panels/keyboard/cc-keyboard-manager.c:488
+#: panels/keyboard/cc-keyboard-manager.c:496
+#: panels/keyboard/cc-keyboard-manager.c:936
 msgid "Custom Shortcuts"
 msgstr "Кіраванне спалучэннямі клавіш"
 
@@ -2830,9 +2623,7 @@ msgstr "Увод спецыяльных знакаў"
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Спосабы ўводу сімвалаў і варыянтаў літар з клавіятуры."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:319
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:334 shell/cc-window.ui:160
+#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:160
 msgid "Keyboard Shortcuts"
 msgstr "Спалучэнні клавіш"
 
@@ -2840,19 +2631,11 @@ msgstr "Спалучэнні клавіш"
 msgid "View and Customize Shortcuts"
 msgstr "Прагляд і змяненне спалучэнняў клавіш"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:296
-#, c-format
-msgid "%d modified"
-msgid_plural "%d modified"
-msgstr[0] "%d зменена"
-msgstr[1] "%d зменена"
-msgstr[2] "%d зменена"
-
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:463
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:387
 msgid "Reset All Shortcuts?"
 msgstr "Скінуць усе спалучэнні клавіш?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:466
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2860,80 +2643,84 @@ msgstr ""
 "Скідванне спалучэнняў клавіш можа закрануць і ўласныя спалучэнні клавіш. "
 "Гэта дзеянне немагчыма адрабіць."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:470
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:394
 #: panels/network/cc-network-panel.ui:26
-#: panels/network/wireless-security/ws-file-chooser-button.c:94
 #: panels/printers/ppd-selection-dialog.ui:83
-#: panels/wwan/cc-wwan-device-page.c:189
+#: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Скасаваць"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:471
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:395
 msgid "Reset All"
 msgstr "Скінуць усе"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:35
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:33
 msgid "Reset All…"
 msgstr "Скінуць усе…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:36
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Скінуць усе спалучэнні клавіш на прадвызначаныя значэнні"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
-msgid "Section"
-msgstr "Раздзел"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:65
+msgid "Search Shortcuts"
+msgstr "Пошук спалучэння клавіш"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:111
-msgid "Shortcuts"
-msgstr "Спалучэнні клавіш"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:102
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
+msgid "No keyboard shortcut found"
+msgstr "Спалучэнне клавіш не знойдзена"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:120
-msgid "Add a shortcut"
-msgstr "Дадаць спалучэнне клавіш"
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:103
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+msgid "Try a different search."
+msgstr "Паспрабуйце іншы пошукавы запыт."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:155
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:140
 msgid "Add Custom Shortcuts"
 msgstr "Дадаць уласныя спалучэнні клавіш"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:163
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:141
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr ""
 "Задаць уласныя спалучэнні клавіш для запуску праграм, скрыптоў і іншых "
 "дзеянняў."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:169
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:145
 msgid "Add Shortcut"
 msgstr "Дадаць спалучэнне клавіш"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:201
-msgid "No keyboard shortcut found"
-msgstr "Спалучэнне клавіш не знойдзена"
-
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:392
+#. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:391
 #, c-format
-msgid "%s is already being used for %s. If you replace it, %s will be disabled"
+msgid ""
+"<b>%s</b> is already being used for %s. If you replace it, %s will be "
+"disabled"
 msgstr ""
-"%s ужо выклікае функцыю %s. Калі вы націсніце замяніць, спалучэнне для "
-"функцыі %s будзе адключана"
+"<b>%s</b> ужо выкарыстоўваецца для функцыі %s. Калі вы націсніце замяніць, "
+"спалучэнне для функцыі %s будзе адключана"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:536
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:533
 msgid "Enter the new shortcut"
 msgstr "Увядзіце новае спалучэнне клавіш"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:551
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
 msgid "Set Custom Shortcut"
 msgstr "Задаць уласнае спалучэнне клавіш"
 
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:551
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:548
 msgid "Set Shortcut"
 msgstr "Задаць спалучэнне клавіш"
 
-#. TRANSLATORS: %s is replaced with a description of the keyboard shortcut
-#: panels/keyboard/cc-keyboard-shortcut-editor.c:562
+#. Setup the top label
+#.
+#. * TRANSLATORS: %s is replaced with a description of the keyboard shortcut,
+#. * don't translate/transliterate <b>%s</b>
+#.
+#: panels/keyboard/cc-keyboard-shortcut-editor.c:561
 #, c-format
-msgid "Enter new shortcut to change %s."
-msgstr "Увядзіце новае спалучэнне клавіш для функцыі %s."
+msgid "Enter new shortcut to change <b>%s</b>"
+msgstr "Увядзіце новае спалучэнне клавіш, каб змяніць <b>%s</b>"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:977
 msgid "Add Custom Shortcut"
@@ -2983,6 +2770,18 @@ msgstr "Задаць спалучэнне клавіш…"
 msgid "None"
 msgstr "Няма"
 
+#: panels/keyboard/cc-keyboard-shortcut-group.c:131
+#, c-format
+msgid "%d modified"
+msgid_plural "%d modified"
+msgstr[0] "%d зменена"
+msgstr[1] "%d зменена"
+msgstr[2] "%d зменена"
+
+#: panels/keyboard/cc-keyboard-shortcut-group.c:154
+msgid "Add a Shortcut"
+msgstr "Дадаць спалучэнне клавіш"
+
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:23
 msgid "Reset the shortcut to its default value"
 msgstr "Скінуць спалучэнне клавіш на прадвызначанае значэнне"
@@ -3012,8 +2811,9 @@ msgid "Location Services Turned Off"
 msgstr "Сэрвісы месцазнаходжання выключаны"
 
 #: panels/location/cc-location-panel.ui:24
-msgid "No applications can obtain location information."
-msgstr "Няма праграм, якія могуць атрымліваць звесткі пра месцазнаходжанне."
+msgid "No sandboxed applications can obtain location information."
+msgstr ""
+"У «пясочніцы» няма праграм, якія могуць атрымаць даныя аб месцазнаходжанні."
 
 #: panels/location/cc-location-panel.ui:38
 msgid ""
@@ -3055,8 +2855,8 @@ msgid "Microphone Turned Off"
 msgstr "Мікрафон выключаны"
 
 #: panels/microphone/cc-microphone-panel.ui:24
-msgid "No applications can record sound."
-msgstr "Няма праграм, якія могуць запісваць гук."
+msgid "No sandboxed applications can record sound."
+msgstr "У «пясочніцы» няма праграм, якія могуць запісваць гук."
 
 #: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
@@ -3083,8 +2883,8 @@ msgstr "Абараніце свае размовы"
 msgid "microphone;recording;application;privacy;"
 msgstr "мікрафон;запіс;праграма;прыватнасць;"
 
-#: panels/mouse/cc-mouse-panel.ui:9 panels/wacom/cc-wacom-panel.ui:9
-msgid "Test Your _Settings"
+#: panels/mouse/cc-mouse-panel.ui:9
+msgid "Test _Settings"
 msgstr "_Праверыць налады"
 
 #: panels/mouse/cc-mouse-panel.ui:23
@@ -3116,39 +2916,59 @@ msgstr "Мыш"
 msgid "Mouse Speed"
 msgstr "Хуткасць указальніка мышы"
 
+#: panels/mouse/cc-mouse-panel.ui:70
+msgid "Mouse speed"
+msgstr "Хуткасць указальніка мышы"
+
+#: panels/mouse/cc-mouse-panel.ui:73 panels/mouse/cc-mouse-panel.ui:149
+#: panels/universal-access/cc-ua-typing-page.ui:53
+#: panels/universal-access/cc-ua-typing-page.ui:111
+msgid "Slow"
+msgstr "Павольна"
+
+#: panels/mouse/cc-mouse-panel.ui:75 panels/mouse/cc-mouse-panel.ui:151
+#: panels/universal-access/cc-ua-typing-page.ui:50
+#: panels/universal-access/cc-ua-typing-page.ui:108
+msgid "Fast"
+msgstr "Хутка"
+
 #. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
 #. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:87
-#: panels/mouse/cc-mouse-panel.ui:114 panels/mouse/cc-mouse-panel.ui:120
+#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:98
+#: panels/mouse/cc-mouse-panel.ui:126 panels/mouse/cc-mouse-panel.ui:133
 msgid "Natural Scrolling"
 msgstr "Натуральная прагортка"
 
-#: panels/mouse/cc-mouse-panel.ui:82 panels/mouse/cc-mouse-panel.ui:115
+#: panels/mouse/cc-mouse-panel.ui:92 panels/mouse/cc-mouse-panel.ui:127
 msgid "Scrolling moves the content, not the view."
 msgstr "Прагортка перамяшчае змесціва, а не паласу прагорткі (інверсія)."
 
-#: panels/mouse/cc-mouse-panel.ui:98 panels/mouse/cc-mouse-panel.ui:101
-#: panels/mouse/cc-mouse-panel.ui:106
+#: panels/mouse/cc-mouse-panel.ui:109 panels/mouse/cc-mouse-panel.ui:112
+#: panels/mouse/cc-mouse-panel.ui:118
 msgid "Touchpad"
 msgstr "Сэнсарная панэль"
 
-#: panels/mouse/cc-mouse-panel.ui:128
+#: panels/mouse/cc-mouse-panel.ui:141
 msgid "Touchpad Speed"
 msgstr "Хуткасць указальніка сэнсарнай панэлі"
 
-#: panels/mouse/cc-mouse-panel.ui:145
+#: panels/mouse/cc-mouse-panel.ui:146
+msgid "Touchpad speed"
+msgstr "Хуткасць указальніка сэнсарнай панэлі"
+
+#: panels/mouse/cc-mouse-panel.ui:168
 msgid "Tap to Click"
 msgstr "Націсканне дотыкам"
 
-#: panels/mouse/cc-mouse-panel.ui:150
+#: panels/mouse/cc-mouse-panel.ui:174
 msgid "Tap to click"
 msgstr "Націсканне дотыкам"
 
-#: panels/mouse/cc-mouse-panel.ui:159 panels/mouse/cc-mouse-panel.ui:164
+#: panels/mouse/cc-mouse-panel.ui:183 panels/mouse/cc-mouse-panel.ui:189
 msgid "Two-finger Scrolling"
 msgstr "Прагортка двума пальцамі"
 
-#: panels/mouse/cc-mouse-panel.ui:174 panels/mouse/cc-mouse-panel.ui:179
+#: panels/mouse/cc-mouse-panel.ui:199 panels/mouse/cc-mouse-panel.ui:205
 msgid "Edge Scrolling"
 msgstr "Прагортка па краі"
 
@@ -3284,17 +3104,21 @@ msgstr ""
 "Шматзадачнасць;Прадукцыйнасць;Працоўны стол;Кастамізацыя;Актыўны кут;Гарачы "
 "кут;Працоўныя прасторы;"
 
-#: panels/network/cc-network-panel.c:670 panels/network/cc-wifi-panel.ui:303
-msgid "Oops, something has gone wrong. Please contact your software vendor."
-msgstr ""
-"Нешта пайшло не так. Звяжыцеся з пастаўшчыком праграмнага забеспячэння."
+#: panels/network/cc-network-panel.c:667
+msgid "Can’t Connect to Network"
+msgstr "Немагчыма падлучыцца да сеткі"
 
-#: panels/network/cc-network-panel.c:677
-msgid "NetworkManager needs to be running."
-msgstr "NetworkManager павінен быць запушчаны."
+#: panels/network/cc-network-panel.c:669
+msgid ""
+"NetworkManager needs to be running to view or make connections. Contact a "
+"system administrator or the software vendor."
+msgstr ""
+"Для прагляду або стварэння злучэнняў, павінен быць запушчаны NetworkManager. "
+"Звярніцеся да сістэмнага адміністратара або да пастаўшчыка праграмнага "
+"забеспячэння."
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-network-panel.c:766 panels/network/cc-network-panel.ui:140
+#: panels/network/cc-network-panel.c:754 panels/network/cc-network-panel.ui:140
 #: panels/network/cc-network-panel.ui:149
 msgid "Proxy"
 msgstr "Проксі"
@@ -3308,7 +3132,7 @@ msgid "Other Devices"
 msgstr "Іншыя прылады"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:586
+#: panels/network/connection-editor/net-connection-editor.c:672
 msgid "VPN"
 msgstr "VPN"
 
@@ -3327,7 +3151,6 @@ msgstr "Не наладжана"
 #: panels/network/connection-editor/ip6-page.ui:36
 #: panels/network/connection-editor/ip6-page.ui:185
 #: panels/network/connection-editor/ip6-page.ui:237
-#: panels/network/wireless-security/eap-method-peap.ui:33
 #: panels/wacom/cc-wacom-page.c:656
 msgid "Automatic"
 msgstr "Аўтаматычна"
@@ -3339,8 +3162,8 @@ msgstr "Аўтаматычна"
 msgid "Manual"
 msgstr "Уручную"
 
-#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:110
-#: panels/sound/cc-sound-panel.ui:275
+#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:111
+#: panels/sound/cc-sound-panel.ui:279
 msgid "Configuration"
 msgstr "Канфігурацыя"
 
@@ -3487,8 +3310,8 @@ msgstr "Назва сеткі"
 
 #. Translators: This is a password needed for printing.
 #: panels/network/cc-wifi-hotspot-dialog.ui:75
-#: panels/printers/new-printer-dialog.ui:338
-#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:384
+#: panels/printers/new-printer-dialog.ui:316
+#: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:359
 #: panels/user-accounts/cc-add-user-dialog.ui:145
 #: panels/user-accounts/cc-add-user-dialog.ui:181
 #: panels/user-accounts/cc-add-user-dialog.ui:360
@@ -3566,12 +3389,17 @@ msgstr "Бачныя сеткі"
 msgid "NetworkManager needs to be running"
 msgstr "NetworkManager павінен быць запушчаны"
 
+#: panels/network/cc-wifi-panel.ui:303
+msgid "Oops, something has gone wrong. Please contact your software vendor."
+msgstr ""
+"Нешта пайшло не так. Звяжыцеся з пастаўшчыком праграмнага забеспячэння."
+
 #: panels/network/connection-editor/8021x-security-page.ui:16
 msgid "802.1x _Security"
 msgstr "_Бяспека 802.1x"
 
-#: panels/network/connection-editor/ce-page-8021x-security.c:109
-#: panels/network/connection-editor/ce-page-security.c:419
+#: panels/network/connection-editor/ce-page-8021x-security.c:108
+#: panels/network/connection-editor/ce-page-security.c:416
 #: panels/network/connection-editor/details-page.ui:78
 msgid "Security"
 msgstr "Бяспека"
@@ -3626,7 +3454,7 @@ msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
 #: panels/network/connection-editor/ce-page-details.c:113
-#: panels/network/connection-editor/ce-page-security.c:274
+#: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
@@ -3801,38 +3629,36 @@ msgstr "IPv4"
 msgid "IPv6"
 msgstr "IPv6"
 
-#: panels/network/connection-editor/ce-page-security.c:263
+#: panels/network/connection-editor/ce-page-security.c:260
 msgctxt "Wi-Fi/Ethernet security"
 msgid "None"
 msgstr "Няма"
 
-#: panels/network/connection-editor/ce-page-security.c:298
+#: panels/network/connection-editor/ce-page-security.c:295
 msgid "WEP 40/128-bit Key (Hex or ASCII)"
 msgstr "WEP, 40/128-бітны ключ (Hex або ASCII)"
 
-#: panels/network/connection-editor/ce-page-security.c:308
+#: panels/network/connection-editor/ce-page-security.c:305
 msgid "WEP 128-bit Passphrase"
 msgstr "WEP, 128-бітная парольная фраза"
 
-#: panels/network/connection-editor/ce-page-security.c:321
-#: panels/network/wireless-security/ws-dynamic-wep.ui:20
-#: panels/network/wireless-security/ws-wpa-eap.ui:25
+#: panels/network/connection-editor/ce-page-security.c:318
 msgid "LEAP"
 msgstr "LEAP"
 
-#: panels/network/connection-editor/ce-page-security.c:334
+#: panels/network/connection-editor/ce-page-security.c:331
 msgid "Dynamic WEP (802.1x)"
 msgstr "Дынамічны WEP (802.1x)"
 
-#: panels/network/connection-editor/ce-page-security.c:348
+#: panels/network/connection-editor/ce-page-security.c:345
 msgid "WPA & WPA2 Personal"
 msgstr "WPA і WPA2 Personal"
 
-#: panels/network/connection-editor/ce-page-security.c:362
+#: panels/network/connection-editor/ce-page-security.c:359
 msgid "WPA & WPA2 Enterprise"
 msgstr "WPA і WPA2 Enterprise"
 
-#: panels/network/connection-editor/ce-page-security.c:376
+#: panels/network/connection-editor/ce-page-security.c:373
 msgid "WPA3 Personal"
 msgstr "WPA3 Personal"
 
@@ -4007,29 +3833,29 @@ msgstr "Аўтаматычна, толькі DHCP"
 msgid "Prefix"
 msgstr "Прэфікс"
 
-#: panels/network/connection-editor/net-connection-editor.c:277
+#: panels/network/connection-editor/net-connection-editor.c:363
 msgid "Unable to open connection editor"
 msgstr "Немагчыма адкрыць рэдактар злучэння"
 
-#: panels/network/connection-editor/net-connection-editor.c:293
+#: panels/network/connection-editor/net-connection-editor.c:379
 msgid "New Profile"
 msgstr "Новы профіль"
 
-#: panels/network/connection-editor/net-connection-editor.c:360
+#: panels/network/connection-editor/net-connection-editor.c:446
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Памылковы параметр %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:363
+#: panels/network/connection-editor/net-connection-editor.c:449
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Памылковы параметр %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:721
+#: panels/network/connection-editor/net-connection-editor.c:807
 msgid "Import from file…"
 msgstr "Імпартаваць з файла…"
 
-#: panels/network/connection-editor/net-connection-editor.c:747
+#: panels/network/connection-editor/net-connection-editor.c:833
 msgid "Add VPN"
 msgstr "Дадаць VPN"
 
@@ -4497,394 +4323,6 @@ msgstr "Убудаванае ПЗ адсутнічае"
 msgid "Cable unplugged"
 msgstr "Кабель адключаны"
 
-#: panels/network/wireless-security/eap-method.c:92
-msgid "undefined error in 802.1X security (wpa-eap)"
-msgstr "невядомая памылка бяспекі 802.1X (wpa-eap)"
-
-#: panels/network/wireless-security/eap-method.c:196
-msgid "no file selected"
-msgstr "файлы не выбраны"
-
-#: panels/network/wireless-security/eap-method.c:224
-msgid "unspecified error validating eap-method file"
-msgstr "нявызначаная памылка праверкі файла eap-method"
-
-#: panels/network/wireless-security/eap-method.c:394
-msgid "DER, PEM, PKCS#12, or PGP private keys"
-msgstr "Закрытыя ключы DER, PEM, PKCS#12 або PGP"
-
-#: panels/network/wireless-security/eap-method.c:397
-msgid "DER or PEM certificates"
-msgstr "Сертыфікаты DER або PEM"
-
-#: panels/network/wireless-security/eap-method-fast.c:88
-msgid "missing EAP-FAST PAC file"
-msgstr "адсутнічае PAC-файл EAP-FAST"
-
-#: panels/network/wireless-security/eap-method-fast.c:353
-msgid "PAC files (*.pac)"
-msgstr "PAC-файлы (*.pac)"
-
-#: panels/network/wireless-security/eap-method-fast.ui:13
-#: panels/network/wireless-security/eap-method-peap.ui:21
-#: panels/network/wireless-security/eap-method-ttls.ui:37
-msgid "GTC"
-msgstr "GTC"
-
-#: panels/network/wireless-security/eap-method-fast.ui:17
-#: panels/network/wireless-security/eap-method-peap.ui:13
-#: panels/network/wireless-security/eap-method-ttls.ui:21
-msgid "MSCHAPv2"
-msgstr "MSCHAPv2"
-
-#: panels/network/wireless-security/eap-method-fast.ui:29
-msgid "Anonymous"
-msgstr "Ананімна"
-
-#: panels/network/wireless-security/eap-method-fast.ui:32
-msgid "Authenticated"
-msgstr "Сапраўднасць пацверджана"
-
-#: panels/network/wireless-security/eap-method-fast.ui:35
-msgid "Both"
-msgstr "Абодва"
-
-#: panels/network/wireless-security/eap-method-fast.ui:46
-#: panels/network/wireless-security/eap-method-peap.ui:49
-#: panels/network/wireless-security/eap-method-ttls.ui:48
-msgid "Anony_mous identity"
-msgstr "_Ананімная ідэнтычнасць"
-
-#: panels/network/wireless-security/eap-method-fast.ui:67
-msgid "PAC _file"
-msgstr "PAC-ф_айл"
-
-#: panels/network/wireless-security/eap-method-fast.ui:79
-msgid "Choose a PAC file"
-msgstr "Выберыце PAC-файл"
-
-#: panels/network/wireless-security/eap-method-fast.ui:99
-#: panels/network/wireless-security/eap-method-peap.ui:131
-#: panels/network/wireless-security/eap-method-ttls.ui:122
-msgid "_Inner authentication"
-msgstr "_Унутраная праверка сапраўднасці"
-
-#: panels/network/wireless-security/eap-method-fast.ui:126
-msgid "Allow automatic PAC pro_visioning"
-msgstr "Дазволіць аўтаматычную падрыхтоўку PAC"
-
-#: panels/network/wireless-security/eap-method-leap.c:65
-msgid "missing EAP-LEAP username"
-msgstr "адсутнічае імя карыстальніка EAP-LEAP"
-
-#: panels/network/wireless-security/eap-method-leap.c:80
-msgid "missing EAP-LEAP password"
-msgstr "адсутнічае пароль EAP-LEAP"
-
-#: panels/network/wireless-security/eap-method-leap.ui:11
-#: panels/network/wireless-security/eap-method-simple.ui:11
-#: panels/network/wireless-security/ws-leap.ui:11
-msgid "_Username"
-msgstr "І_мя карыстальніка"
-
-#: panels/network/wireless-security/eap-method-leap.ui:23
-#: panels/network/wireless-security/eap-method-simple.ui:23
-#: panels/network/wireless-security/ws-leap.ui:23
-#: panels/network/wireless-security/ws-sae.ui:10
-#: panels/network/wireless-security/ws-wpa-psk.ui:10
-#: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:182
-msgid "_Password"
-msgstr "Пар_оль"
-
-#: panels/network/wireless-security/eap-method-leap.ui:44
-#: panels/network/wireless-security/eap-method-simple.ui:61
-#: panels/network/wireless-security/eap-method-tls.ui:129
-#: panels/network/wireless-security/ws-leap.ui:44
-#: panels/network/wireless-security/ws-sae.ui:45
-#: panels/network/wireless-security/ws-wpa-psk.ui:53
-msgid "Sho_w password"
-msgstr "_Паказваць пароль"
-
-#: panels/network/wireless-security/eap-method-peap.c:88
-#, c-format
-msgid "invalid EAP-PEAP CA certificate: %s"
-msgstr "памылковы сертыфікат EAP-PEAP CA: %s"
-
-#: panels/network/wireless-security/eap-method-peap.c:97
-msgid "invalid EAP-PEAP CA certificate: no certificate specified"
-msgstr "памылковы сертыфікат EAP-PEAP CA: сертыфікат не ўказаны"
-
-#: panels/network/wireless-security/eap-method-peap.ui:17
-#: panels/network/wireless-security/eap-method-ttls.ui:33
-#: panels/network/wireless-security/ws-wpa-eap.ui:15
-msgid "MD5"
-msgstr "MD5"
-
-#: panels/network/wireless-security/eap-method-peap.ui:36
-msgid "Version 0"
-msgstr "Версія 0"
-
-#: panels/network/wireless-security/eap-method-peap.ui:39
-msgid "Version 1"
-msgstr "Версія 1"
-
-#: panels/network/wireless-security/eap-method-peap.ui:70
-#: panels/network/wireless-security/eap-method-tls.ui:54
-#: panels/network/wireless-security/eap-method-ttls.ui:89
-msgid "C_A certificate"
-msgstr "_Сертыфікат CA"
-
-#: panels/network/wireless-security/eap-method-peap.ui:82
-#: panels/network/wireless-security/eap-method-tls.c:524
-#: panels/network/wireless-security/eap-method-tls.ui:44
-#: panels/network/wireless-security/eap-method-tls.ui:66
-msgid "Choose a Certificate Authority certificate"
-msgstr "Выберыце сертыфікат цэнтра сертыфікацыі"
-
-#: panels/network/wireless-security/eap-method-peap.ui:91
-#: panels/network/wireless-security/eap-method-tls.ui:75
-#: panels/network/wireless-security/eap-method-ttls.ui:110
-msgid "No CA certificate is _required"
-msgstr "Сертыфікат CA не патрабуецца"
-
-#: panels/network/wireless-security/eap-method-peap.ui:103
-msgid "PEAP _version"
-msgstr "_Версія PEAP"
-
-#: panels/network/wireless-security/eap-method-simple.c:78
-msgid "missing EAP username"
-msgstr "адсутнічае імя карыстальніка EAP"
-
-#: panels/network/wireless-security/eap-method-simple.c:91
-msgid "missing EAP password"
-msgstr "адсутнічае пароль EAP"
-
-#: panels/network/wireless-security/eap-method-tls.c:93
-msgid "missing EAP-TLS identity"
-msgstr "адсутнічае ідэнтычнасць EAP-TLS"
-
-#: panels/network/wireless-security/eap-method-tls.c:103
-#, c-format
-msgid "invalid EAP-TLS CA certificate: %s"
-msgstr "памылковы сертыфікат EAP-TLS CA: %s"
-
-#: panels/network/wireless-security/eap-method-tls.c:113
-msgid "invalid EAP-TLS CA certificate: no certificate specified"
-msgstr "памылковы сертыфікат EAP-TLS CA: сертыфікат не вызначаны"
-
-#: panels/network/wireless-security/eap-method-tls.c:130
-#, c-format
-msgid "invalid EAP-TLS private-key: %s"
-msgstr "памылковы закрыты ключ EAP-TLS: %s"
-
-#: panels/network/wireless-security/eap-method-tls.c:140
-#, c-format
-msgid "invalid EAP-TLS user-certificate: %s"
-msgstr "памылковы сертыфікат карыстальніка EAP-TLS: %s"
-
-#: panels/network/wireless-security/eap-method-tls.c:279
-msgid "Unencrypted private keys are insecure"
-msgstr "Незашыфраваныя закрытыя ключы небяспечныя"
-
-#: panels/network/wireless-security/eap-method-tls.c:282
-msgid ""
-"The selected private key does not appear to be protected by a password. This "
-"could allow your security credentials to be compromised. Please select a "
-"password-protected private key.\n"
-"\n"
-"(You can password-protect your private key with openssl)"
-msgstr ""
-"Падобна, што выбраны закрыты ключ не абаронены паролем. Гэта можа прывесці "
-"да кампраметавання ўліковых даных. Выберыце закрыты ключ, абаронены "
-"паролем.\n"
-"\n"
-"(Вы можаце абараніць закрыты ключ паролем праз openssl)"
-
-#: panels/network/wireless-security/eap-method-tls.c:517
-msgid "Choose your personal certificate"
-msgstr "Выберыце асабісты сертыфікат"
-
-#: panels/network/wireless-security/eap-method-tls.c:531
-msgid "Choose your private key"
-msgstr "Выберыце закрыты ключ"
-
-#: panels/network/wireless-security/eap-method-tls.ui:11
-msgid "I_dentity"
-msgstr "Ід_энтычнасць"
-
-#: panels/network/wireless-security/eap-method-tls.ui:32
-msgid "_User certificate"
-msgstr "Сертыфікат _карыстальніка"
-
-#: panels/network/wireless-security/eap-method-tls.ui:87
-msgid "Private _key"
-msgstr "_Закрыты ключ"
-
-#: panels/network/wireless-security/eap-method-tls.ui:108
-msgid "_Private key password"
-msgstr "_Пароль для закрытага ключа"
-
-#: panels/network/wireless-security/eap-method-ttls.c:99
-#, c-format
-msgid "invalid EAP-TTLS CA certificate: %s"
-msgstr "памылковы сертыфікат EAP-TTLS CA: %s"
-
-#: panels/network/wireless-security/eap-method-ttls.c:107
-msgid "invalid EAP-TTLS CA certificate: no certificate specified"
-msgstr "памылковы сертыфікат EAP-TTLS CA: сертыфікат не ўказаны"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:13
-msgid "PAP"
-msgstr "PAP"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:17
-msgid "MSCHAP"
-msgstr "MSCHAP"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:25
-msgid "MSCHAPv2 (no EAP)"
-msgstr "MSCHAPv2 (без EAP)"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:29
-msgid "CHAP"
-msgstr "CHAP"
-
-#: panels/network/wireless-security/eap-method-ttls.ui:68
-#: panels/user-accounts/data/join-dialog.ui:90
-msgid "_Domain"
-msgstr "_Дамен"
-
-#: panels/network/wireless-security/wireless-security.c:71
-msgid "Unknown error validating 802.1X security"
-msgstr "Невядомая памылка праверкі бяспекі 802.1X"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:15
-#: panels/network/wireless-security/ws-wpa-eap.ui:20
-msgid "TLS"
-msgstr "TLS"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:25
-#: panels/network/wireless-security/ws-wpa-eap.ui:30
-msgid "PWD"
-msgstr "PWD"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:30
-#: panels/network/wireless-security/ws-wpa-eap.ui:35
-msgid "FAST"
-msgstr "FAST"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:35
-#: panels/network/wireless-security/ws-wpa-eap.ui:40
-msgid "Tunneled TLS"
-msgstr "Тунэльны TLS"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:40
-#: panels/network/wireless-security/ws-wpa-eap.ui:45
-msgid "Protected EAP (PEAP)"
-msgstr "Абаронены EAP (PEAP)"
-
-#: panels/network/wireless-security/ws-dynamic-wep.ui:52
-#: panels/network/wireless-security/ws-wep-key.ui:87
-#: panels/network/wireless-security/ws-wpa-eap.ui:57
-msgid "Au_thentication"
-msgstr "Пра_верка сапраўднасці"
-
-#: panels/network/wireless-security/ws-file-chooser-button.c:49
-msgid "Select a file"
-msgstr "Выбраць файл"
-
-#: panels/network/wireless-security/ws-leap.c:66
-msgid "missing leap-username"
-msgstr "адсутнічае імя карыстальніка LEAP"
-
-#: panels/network/wireless-security/ws-leap.c:81
-msgid "missing leap-password"
-msgstr "адсутнічае пароль LEAP"
-
-#: panels/network/wireless-security/ws-sae.c:77
-msgid "Wi-Fi password is missing."
-msgstr "Адсутнічае пароль Wi-Fi."
-
-#: panels/network/wireless-security/ws-sae.ui:33
-#: panels/network/wireless-security/ws-wpa-psk.ui:33
-msgid "_Type"
-msgstr "_Тып"
-
-#: panels/network/wireless-security/ws-wep-key.c:114
-msgid "missing wep-key"
-msgstr "адсутнічае ключ WEP"
-
-#: panels/network/wireless-security/ws-wep-key.c:123
-#, c-format
-msgid "invalid wep-key: key with a length of %zu must contain only hex-digits"
-msgstr ""
-"памылковы ключ WEP. Ключ даўжынёй %zu павінен змяшчаць толькі шаснаццатковыя "
-"лічбы"
-
-#: panels/network/wireless-security/ws-wep-key.c:131
-#, c-format
-msgid ""
-"invalid wep-key: key with a length of %zu must contain only ascii characters"
-msgstr ""
-"памылковы ключ WEP. Ключ даўжынёй %zu павінен змяшчаць толькі сімвалы ASCII"
-
-#: panels/network/wireless-security/ws-wep-key.c:137
-#, c-format
-msgid ""
-"invalid wep-key: wrong key length %zu. A key must be either of length 5/13 "
-"(ascii) or 10/26 (hex)"
-msgstr ""
-"памылковы ключ WEP. Няправільная даўжыня ключа %zu. Даўжыня ключа павінна "
-"быць 5/13 (ASCII) або 10/26 (HEX)"
-
-#: panels/network/wireless-security/ws-wep-key.c:144
-msgid "invalid wep-key: passphrase must be non-empty"
-msgstr "памылковы ключ WEP. Парольная фраза не можа быць пустой"
-
-#: panels/network/wireless-security/ws-wep-key.c:146
-msgid "invalid wep-key: passphrase must be shorter than 64 characters"
-msgstr ""
-"памылковы ключ WEP. Парольная фраза павінна быль карацейшай за 64 сімвалы"
-
-#: panels/network/wireless-security/ws-wep-key.ui:11
-msgid "1 (Default)"
-msgstr "1 (прадвызначана)"
-
-#: panels/network/wireless-security/ws-wep-key.ui:31
-msgid "Open System"
-msgstr "Адкрытая сістэма"
-
-#: panels/network/wireless-security/ws-wep-key.ui:34
-msgid "Shared Key"
-msgstr "Агульны ключ"
-
-#: panels/network/wireless-security/ws-wep-key.ui:44
-msgid "_Key"
-msgstr "_Ключ"
-
-#: panels/network/wireless-security/ws-wep-key.ui:75
-msgid "Sho_w key"
-msgstr "Паказаць к_люч"
-
-#: panels/network/wireless-security/ws-wep-key.ui:115
-msgid "WEP inde_x"
-msgstr "WEP-і_ндэкс"
-
-#: panels/network/wireless-security/ws-wpa-psk.c:77
-#, c-format
-msgid ""
-"invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
-"digits"
-msgstr ""
-"памылковы wpa-psk. Памылковая даўжыня ключа  %zu. Павінна быць [8,63] байт "
-"або 64 шаснаццатковыя лічбы"
-
-#: panels/network/wireless-security/ws-wpa-psk.c:86
-msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
-msgstr ""
-"памылковы wpa-psk. Немагчыма інтэрпрэтаваць ключ з 64 байтаў як шаснаццатковы"
-
 #. This is the per application switch for message tray usage.
 #: panels/notifications/cc-app-notifications-dialog.ui:15
 msgctxt "notifications"
@@ -4930,7 +4368,9 @@ msgstr "Паказваць з_месціва паведамлення на эк�
 msgid "_Do Not Disturb"
 msgstr "_Не турбаваць"
 
+#. Translators: Whether to show notifications on the lock screen
 #: panels/notifications/cc-notifications-panel.ui:17
+#: panels/screen/cc-screen-panel.ui:68
 msgid "_Lock Screen Notifications"
 msgstr "Апавяшчэнні на экране _блакіравання"
 
@@ -5363,21 +4803,25 @@ msgstr "Дзеянне для кнопкі _выключэння"
 msgid "Show Battery _Percentage"
 msgstr "Узровень зараду батарэі ў працэнтах"
 
-#: panels/power/cc-power-panel.ui:244
+#: panels/power/cc-power-panel.ui:209
+msgid "Show exact charge level in the top bar"
+msgstr "Паказваць дакладны ўзровень зараду на верхняй панэлі"
+
+#: panels/power/cc-power-panel.ui:245
 msgid "Automatic Suspend"
 msgstr "Аўтаматычнае прыпыненне працы"
 
-#: panels/power/cc-power-panel.ui:267
+#: panels/power/cc-power-panel.ui:268
 msgid "_Plugged In"
 msgstr "Ад _электрасеткі"
 
-#: panels/power/cc-power-panel.ui:279
+#: panels/power/cc-power-panel.ui:280
 msgid "On _Battery Power"
 msgstr "Ад _батарэі"
 
-#: panels/power/cc-power-panel.ui:312 panels/power/cc-power-panel.ui:348
+#: panels/power/cc-power-panel.ui:313 panels/power/cc-power-panel.ui:349
 #: panels/universal-access/cc-ua-mouse-page.ui:100
-#: panels/universal-access/cc-ua-typing-page.ui:126
+#: panels/universal-access/cc-ua-typing-page.ui:127
 msgid "Delay"
 msgstr "Затрымка"
 
@@ -5437,12 +4881,12 @@ msgid "Failed to add new printer."
 msgstr "Не ўдалося дадаць новы прынтар."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1247
+#: panels/printers/cc-printers-panel.c:1249
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "Не ўдалося загрузіць інтэрфейс: %s"
 
-#: panels/printers/cc-printers-panel.c:1315
+#: panels/printers/cc-printers-panel.c:1317
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "Разблакіруйце, каб дадаваць прынтары і змяняць налады"
 
@@ -5476,26 +4920,26 @@ msgid "_Unlock"
 msgstr "_Разблакіраваць"
 
 #. Translators: No printers were detected
-#: panels/printers/new-printer-dialog.ui:197
+#: panels/printers/new-printer-dialog.ui:181
 msgid "No Printers Found"
 msgstr "Прынтары не знойдзены"
 
 #. Translators: The entered text should contain network address of a printer or a text which will filter found devices (their names and locations)
-#: panels/printers/new-printer-dialog.ui:247
+#: panels/printers/new-printer-dialog.ui:225
 msgid "Enter a network address or search for a printer"
 msgstr "Увядзіце сеткавы адрас прынтара або пашукайце па назве"
 
-#: panels/printers/new-printer-dialog.ui:292
+#: panels/printers/new-printer-dialog.ui:270
 msgid "Authentication Required"
 msgstr "Патрабуецца праверка сапраўднасці"
 
-#: panels/printers/new-printer-dialog.ui:308
+#: panels/printers/new-printer-dialog.ui:286
 msgid "Enter username and password to view printers on Print Server."
 msgstr ""
 "Увядзіце імя карыстальніка і пароль для прагляду прынтараў на серверы друку."
 
 #. Translators: This is a username on a print server.
-#: panels/printers/new-printer-dialog.ui:317
+#: panels/printers/new-printer-dialog.ui:295
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/user-accounts/cc-add-user-dialog.ui:94
 #: panels/user-accounts/cc-add-user-dialog.ui:339
@@ -6085,22 +5529,24 @@ msgid "Restart"
 msgstr "Перазапусціць"
 
 #. Translators: This button adds new printer.
-#: panels/printers/printers.ui:10 panels/printers/printers.ui:171
+#. Translators: This button adds a new printer.
+#: panels/printers/printers.ui:10 panels/printers/printers.ui:148
 msgid "Add Printer…"
 msgstr "Дадаць прынтар…"
 
-#: panels/printers/printers.ui:160
-msgid "No printers"
+#: panels/printers/printers.ui:145
+msgid "No Printers"
 msgstr "Няма прынтараў"
 
-#. Translators: The CUPS server is not running (we can not connect to it).
-#: panels/printers/printers.ui:196
-msgid ""
-"Sorry! The system printing service\n"
-"    doesn’t seem to be available."
-msgstr ""
-"На жаль, сістэмны сэрвіс друку\n"
-"    недаступны або не запушчаны."
+#. Translators: Title if the CUPS server is not running (we can not connect to it).
+#: panels/printers/printers.ui:168
+msgid "No Print Service"
+msgstr "Няма сэрвісу друку"
+
+#. Translators: Description if the CUPS server is not running (we can not connect to it).
+#: panels/printers/printers.ui:169
+msgid "The system printing service doesn’t seem to be available."
+msgstr "Здаецца, сістэмны сэрвіс друку недаступны."
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
 #: panels/region/cc-format-chooser.ui:4
@@ -6491,10 +5937,6 @@ msgstr "Затрымка да аўтаматычнага блакіраванн�
 msgid "Period after the screen blanks when the screen is automatically locked."
 msgstr "Час да аўтаматычнага блакіравання экрана пасля яго адключэння."
 
-#: panels/screen/cc-screen-panel.ui:68
-msgid "Show _Notifications on Lock Screen"
-msgstr "Паказваць _апавяшчэнні на экране блакіравання"
-
 #: panels/screen/cc-screen-panel.ui:86
 msgid "Forbid new _USB devices"
 msgstr "_Забараняць новыя USB-прылады"
@@ -6608,40 +6050,40 @@ msgstr "Сеткі для супольнага карыстання не выб�
 msgid "Networks"
 msgstr "Сеткі"
 
-#: panels/sharing/cc-sharing-panel.c:366
+#: panels/sharing/cc-sharing-panel.c:323
 msgctxt "service is enabled"
 msgid "On"
 msgstr "Уключана"
 
-#: panels/sharing/cc-sharing-panel.c:368 panels/sharing/cc-sharing-panel.c:395
+#: panels/sharing/cc-sharing-panel.c:325 panels/sharing/cc-sharing-panel.c:352
 msgctxt "service is disabled"
 msgid "Off"
 msgstr "Выключана"
 
-#: panels/sharing/cc-sharing-panel.c:398
+#: panels/sharing/cc-sharing-panel.c:355
 msgctxt "service is enabled"
 msgid "Enabled"
 msgstr "Уключана"
 
-#: panels/sharing/cc-sharing-panel.c:401
+#: panels/sharing/cc-sharing-panel.c:358
 msgctxt "service is active"
 msgid "Active"
 msgstr "Актыўна"
 
-#: panels/sharing/cc-sharing-panel.c:519
+#: panels/sharing/cc-sharing-panel.c:476
 msgid "Choose a Folder"
 msgstr "Выберыце папку"
 
-#: panels/sharing/cc-sharing-panel.c:672 panels/wwan/cc-wwan-apn-dialog.ui:33
+#: panels/sharing/cc-sharing-panel.c:629 panels/wwan/cc-wwan-apn-dialog.ui:33
 msgid "Add"
 msgstr "Дадаць"
 
-#: panels/sharing/cc-sharing-panel.c:736
+#: panels/sharing/cc-sharing-panel.c:693
 msgid "Enable media sharing"
 msgstr "Уключыць супольны доступ да медыяфайлаў"
 
 #. TRANSLATORS: %s is replaced with a link to a dav://<hostname> URL
-#: panels/sharing/cc-sharing-panel.c:756
+#: panels/sharing/cc-sharing-panel.c:715
 #, c-format
 msgid ""
 "File Sharing allows you to share your Public folder with others on your "
@@ -6651,7 +6093,7 @@ msgstr ""
 "карыстальнікам вашай сеткі праз: %s"
 
 #. TRANSLATORS: %s is replaced with a link to a "ssh <hostname>" command to run
-#: panels/sharing/cc-sharing-panel.c:762
+#: panels/sharing/cc-sharing-panel.c:721
 #, c-format
 msgid ""
 "When remote login is enabled, remote users can connect using the Secure "
@@ -6662,23 +6104,23 @@ msgstr ""
 "праз каманду Secure Shell:\n"
 "%s"
 
-#: panels/sharing/cc-sharing-panel.c:942
+#: panels/sharing/cc-sharing-panel.c:795
 msgid "Enable personal media sharing"
 msgstr "Уключыць супольны доступ да асабістых медыяфайлаў"
 
-#: panels/sharing/cc-sharing-panel.c:1308
+#: panels/sharing/cc-sharing-panel.c:1159
 msgid "Device name copied"
 msgstr "Імя прылады скапіявана"
 
-#: panels/sharing/cc-sharing-panel.c:1319
+#: panels/sharing/cc-sharing-panel.c:1170
 msgid "Device address copied"
 msgstr "Адрас прылады скапіяваны"
 
-#: panels/sharing/cc-sharing-panel.c:1330
+#: panels/sharing/cc-sharing-panel.c:1181
 msgid "Username copied"
 msgstr "Імя карыстальніка скапіявана"
 
-#: panels/sharing/cc-sharing-panel.c:1341
+#: panels/sharing/cc-sharing-panel.c:1192
 msgid "Password copied"
 msgstr "Пароль скапіяваны"
 
@@ -6687,45 +6129,46 @@ msgstr "Пароль скапіяваны"
 msgid "Sharing"
 msgstr "Супольны доступ"
 
-#: panels/sharing/cc-sharing-panel.ui:31
-msgid "_Computer Name"
-msgstr "Імя _камп'ютара"
-
-#: panels/sharing/cc-sharing-panel.ui:58
+#: panels/sharing/cc-sharing-panel.ui:32
 msgid "_File Sharing"
 msgstr "Супольны доступ да _файлаў"
 
-#: panels/sharing/cc-sharing-panel.ui:65
+#: panels/sharing/cc-sharing-panel.ui:40
 msgid "Remote _Desktop"
 msgstr "Аддалены працоўны _стол"
 
-#: panels/sharing/cc-sharing-panel.ui:72
+#: panels/sharing/cc-sharing-panel.ui:48
 msgid "_Media Sharing"
 msgstr "Супольны доступ да _медыяфайлаў"
 
-#: panels/sharing/cc-sharing-panel.ui:79
+#: panels/sharing/cc-sharing-panel.ui:56
 msgid "_Remote Login"
 msgstr "_Аддалены ўваход у сістэму"
 
-#: panels/sharing/cc-sharing-panel.ui:92
+#: panels/sharing/cc-sharing-panel.ui:66
 msgid "File Sharing"
 msgstr "Супольны доступ да файлаў"
 
-#: panels/sharing/cc-sharing-panel.ui:138
+#: panels/sharing/cc-sharing-panel.ui:112
 msgid "_Require Password"
 msgstr "_Патрабаваць пароль"
 
-#: panels/sharing/cc-sharing-panel.ui:195
-#: panels/sharing/cc-sharing-panel.ui:231
+#: panels/sharing/cc-sharing-panel.ui:126
+#: panels/user-accounts/cc-user-panel.ui:182
+msgid "_Password"
+msgstr "Пар_оль"
+
+#: panels/sharing/cc-sharing-panel.ui:169
+#: panels/sharing/cc-sharing-panel.ui:205
 msgid "Remote Login"
 msgstr "Аддалены ўваход у сістэму"
 
-#: panels/sharing/cc-sharing-panel.ui:251
-#: panels/sharing/cc-sharing-panel.ui:270
+#: panels/sharing/cc-sharing-panel.ui:225
+#: panels/sharing/cc-sharing-panel.ui:244
 msgid "Remote Desktop"
 msgstr "Аддалены працоўны стол"
 
-#: panels/sharing/cc-sharing-panel.ui:266
+#: panels/sharing/cc-sharing-panel.ui:240
 msgid ""
 "Remote desktop allows viewing and controlling your desktop from another "
 "computer."
@@ -6733,64 +6176,64 @@ msgstr ""
 "Аддалены працоўны стол дазваляе праглядаць і кіраваць вашым працоўным сталом "
 "з іншага камп'ютара."
 
-#: panels/sharing/cc-sharing-panel.ui:271
+#: panels/sharing/cc-sharing-panel.ui:245
 msgid "Enable or disable remote desktop connections to this computer."
 msgstr ""
 "Уключыць або адключыць падлучэнне да гэтага камп'ютара праз аддалены "
 "працоўны стол."
 
-#: panels/sharing/cc-sharing-panel.ui:284
+#: panels/sharing/cc-sharing-panel.ui:258
 msgid "Remote Control"
 msgstr "Аддаленае кіраванне"
 
-#: panels/sharing/cc-sharing-panel.ui:285
+#: panels/sharing/cc-sharing-panel.ui:259
 msgid "Allows remote connections to control the screen."
 msgstr "Дазваляе кіраванне экранам праз аддаленае злучэнне."
 
-#: panels/sharing/cc-sharing-panel.ui:299
+#: panels/sharing/cc-sharing-panel.ui:273
 msgid "How to Connect"
 msgstr "Як злучыцца"
 
-#: panels/sharing/cc-sharing-panel.ui:300
+#: panels/sharing/cc-sharing-panel.ui:274
 msgid ""
 "Connect to this computer using the device name or remote desktop address."
 msgstr ""
 "Падлучайцеся да гэтага камп'ютара праз імя прылады або адрас аддаленага "
 "працоўнага стала."
 
-#: panels/sharing/cc-sharing-panel.ui:318
-#: panels/sharing/cc-sharing-panel.ui:345
-#: panels/sharing/cc-sharing-panel.ui:372
-#: panels/sharing/cc-sharing-panel.ui:390
+#: panels/sharing/cc-sharing-panel.ui:293
+#: panels/sharing/cc-sharing-panel.ui:320
+#: panels/sharing/cc-sharing-panel.ui:347
+#: panels/sharing/cc-sharing-panel.ui:365
 msgid "Copy"
 msgstr "Капіяваць"
 
-#: panels/sharing/cc-sharing-panel.ui:331
+#: panels/sharing/cc-sharing-panel.ui:306
 msgid "Remote Desktop Address"
 msgstr "Адрас аддаленага працоўнага стала"
 
-#: panels/sharing/cc-sharing-panel.ui:361
+#: panels/sharing/cc-sharing-panel.ui:336
 msgid "Authentication"
 msgstr "Праверка сапраўднасці"
 
-#: panels/sharing/cc-sharing-panel.ui:362
+#: panels/sharing/cc-sharing-panel.ui:337
 msgid "The user name and password are required to connect to this computer."
 msgstr ""
 "Каб падлучыцца да гэтага камп'ютара, патрабуецца імя карыстальніка і пароль."
 
-#: panels/sharing/cc-sharing-panel.ui:366
+#: panels/sharing/cc-sharing-panel.ui:341
 msgid "User Name"
 msgstr "Імя карыстальніка"
 
-#: panels/sharing/cc-sharing-panel.ui:405
+#: panels/sharing/cc-sharing-panel.ui:380
 msgid "Verify Encryption"
 msgstr "Праверыць шыфраванне"
 
-#: panels/sharing/cc-sharing-panel.ui:434
+#: panels/sharing/cc-sharing-panel.ui:409
 msgid "Encryption Fingerprint"
 msgstr "Лічбавы адбітак для шыфравання"
 
-#: panels/sharing/cc-sharing-panel.ui:435
+#: panels/sharing/cc-sharing-panel.ui:410
 msgid ""
 "The encryption fingerprint can be seen in connecting clients and should be "
 "identical."
@@ -6798,15 +6241,15 @@ msgstr ""
 "Лічбавы адбітак для шыфравання можа сустракацца пры падлучэннні кліентаў і "
 "тады ён павінен быць аднолькавым."
 
-#: panels/sharing/cc-sharing-panel.ui:467
+#: panels/sharing/cc-sharing-panel.ui:442
 msgid "Media Sharing"
 msgstr "Супольны доступ да медыяфайлаў"
 
-#: panels/sharing/cc-sharing-panel.ui:489
+#: panels/sharing/cc-sharing-panel.ui:464
 msgid "Share music, photos and videos over the network."
 msgstr "Супольны доступ да вашай музыкі, фота і відэа праз сетку."
 
-#: panels/sharing/cc-sharing-panel.ui:502
+#: panels/sharing/cc-sharing-panel.ui:477
 msgid "Folders"
 msgstr "Папкі"
 
@@ -6834,7 +6277,7 @@ msgstr ""
 "Для ўключэння ці адключэння аддаленага ўваходу патрабуецца праверка "
 "сапраўднасці"
 
-#: panels/sound/cc-alert-chooser.c:153
+#: panels/sound/cc-alert-chooser.c:172
 msgid "Custom"
 msgstr "Уласны"
 
@@ -6854,11 +6297,11 @@ msgstr "Узмах"
 msgid "Hum"
 msgstr "Бэм"
 
-#: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:144
+#: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:145
 msgid "Balance"
 msgstr "Баланс"
 
-#: panels/sound/cc-fade-slider.ui:13 panels/sound/cc-sound-panel.ui:170
+#: panels/sound/cc-fade-slider.ui:13 panels/sound/cc-sound-panel.ui:171
 msgid "Fade"
 msgstr "Згасанне"
 
@@ -6870,14 +6313,13 @@ msgstr "Тыл"
 msgid "Front"
 msgstr "Фронт"
 
-#: panels/sound/cc-output-test-dialog.c:134
-#, c-format
-msgid "Testing %s"
-msgstr "Праверка %s"
+#: panels/sound/cc-output-test-wheel.c:185
+msgid "Select a Speaker"
+msgstr "Выберыце дынамік"
 
-#: panels/sound/cc-output-test-dialog.ui:131
-msgid "Click a speaker to test"
-msgstr "Націсніце на дынамік, каб праверыць"
+#: panels/sound/cc-output-test-window.ui:4
+msgid "Test Speakers"
+msgstr "Праверка дынамікаў"
 
 #: panels/sound/cc-sound-panel.ui:8
 msgid "System Volume"
@@ -6895,32 +6337,32 @@ msgstr "Узроўні гучнасці"
 msgid "Output"
 msgstr "Выхад"
 
-#: panels/sound/cc-sound-panel.ui:59
+#: panels/sound/cc-sound-panel.ui:70
 msgid "Output Device"
 msgstr "Выхадная прылада"
 
-#: panels/sound/cc-sound-panel.ui:81
+#: panels/sound/cc-sound-panel.ui:87
 #: panels/universal-access/cc-ua-hearing-page.ui:69
 msgid "Test"
 msgstr "Праверыць"
 
-#: panels/sound/cc-sound-panel.ui:196 panels/sound/cc-subwoofer-slider.ui:13
+#: panels/sound/cc-sound-panel.ui:197 panels/sound/cc-subwoofer-slider.ui:13
 msgid "Subwoofer"
 msgstr "Сабвуфер"
 
-#: panels/sound/cc-sound-panel.ui:214
+#: panels/sound/cc-sound-panel.ui:215
 msgid "Input"
 msgstr "Уваход"
 
-#: panels/sound/cc-sound-panel.ui:235
+#: panels/sound/cc-sound-panel.ui:242
 msgid "Input Device"
 msgstr "Уваходная прылада"
 
-#: panels/sound/cc-sound-panel.ui:309 panels/sound/cc-volume-slider.ui:13
+#: panels/sound/cc-sound-panel.ui:313 panels/sound/cc-volume-slider.ui:13
 msgid "Volume"
 msgstr "Гучнасць"
 
-#: panels/sound/cc-sound-panel.ui:327
+#: panels/sound/cc-sound-panel.ui:331
 msgid "Alert Sound"
 msgstr "Гук абвестак"
 
@@ -7063,22 +6505,22 @@ msgctxt "Thunderbolt Device Status"
 msgid "Authorized"
 msgstr "Аўтарызавана"
 
-#: panels/thunderbolt/cc-bolt-panel.c:169
+#: panels/thunderbolt/cc-bolt-panel.c:234
 msgid ""
 "The Thunderbolt subsystem (boltd) is not installed or not set up properly."
 msgstr ""
 "Падсістэма Thunderbolt (boltd) не ўсталявана ці не наладжана належным чынам."
 
-#: panels/thunderbolt/cc-bolt-panel.c:425
+#: panels/thunderbolt/cc-bolt-panel.c:490
 #: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "Дазволіць прамы доступ да прылад накшталт док-станцый і знешніх GPU."
 
-#: panels/thunderbolt/cc-bolt-panel.c:426
+#: panels/thunderbolt/cc-bolt-panel.c:491
 msgid "Only USB and Display Port devices can attach."
 msgstr "Далучыцца могуць толькі прылады USB і Display Port."
 
-#: panels/thunderbolt/cc-bolt-panel.c:461
+#: panels/thunderbolt/cc-bolt-panel.c:526
 msgid ""
 "Thunderbolt could not be detected.\n"
 "Either the system lacks Thunderbolt support, it has been disabled in the "
@@ -7088,15 +6530,15 @@ msgstr ""
 "Thunderbolt можа не падтрымлівацца сістэмай ці быць адключаным у BIOS або не "
 "падтрымлівацца праз зададзены ў BIOS ўзровень бяспекі."
 
-#: panels/thunderbolt/cc-bolt-panel.c:505
+#: panels/thunderbolt/cc-bolt-panel.c:570
 msgid "Thunderbolt support has been disabled in the BIOS."
 msgstr "Падтрымка Thunderbolt адключана ў BIOS."
 
-#: panels/thunderbolt/cc-bolt-panel.c:509
+#: panels/thunderbolt/cc-bolt-panel.c:574
 msgid "Thunderbolt security level could not be determined."
 msgstr "Не ўдалося вызначыць узровень бяспекі Thunderbolt."
 
-#: panels/thunderbolt/cc-bolt-panel.c:614
+#: panels/thunderbolt/cc-bolt-panel.c:679
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Памылка пераключэння рэжыму прамога доступу: %s"
@@ -7137,13 +6579,6 @@ msgstr "Thunderbolt;privacy;прыватнасць;канфідэнцыйнас�
 #: panels/universal-access/cc-cursor-size-dialog.ui:5
 msgid "Cursor Size"
 msgstr "Памер курсора"
-
-#: panels/universal-access/cc-cursor-size-dialog.ui:22
-msgid ""
-"Cursor size can be combined with zoom to make it easier to see the cursor."
-msgstr ""
-"Каб палепшыць бачнасць курсора, змяненне яго памеру можна спалучаць з "
-"маштабаваннем."
 
 #: panels/universal-access/cc-ua-hearing-page.ui:9
 msgid "_Overamplification"
@@ -7205,9 +6640,9 @@ msgstr "_Затрымка для падвойнага націскання"
 #: panels/universal-access/cc-ua-mouse-page.ui:34
 #: panels/universal-access/cc-ua-mouse-page.ui:72
 #: panels/universal-access/cc-ua-mouse-page.ui:105
-#: panels/universal-access/cc-ua-typing-page.ui:131
-#: panels/universal-access/cc-ua-typing-page.ui:185
-#: panels/universal-access/cc-ua-typing-page.ui:235
+#: panels/universal-access/cc-ua-typing-page.ui:132
+#: panels/universal-access/cc-ua-typing-page.ui:186
+#: panels/universal-access/cc-ua-typing-page.ui:236
 #: panels/universal-access/cc-ua-zoom-page.ui:168
 msgid "Short"
 msgstr "Кароткая"
@@ -7215,9 +6650,9 @@ msgstr "Кароткая"
 #: panels/universal-access/cc-ua-mouse-page.ui:37
 #: panels/universal-access/cc-ua-mouse-page.ui:75
 #: panels/universal-access/cc-ua-mouse-page.ui:108
-#: panels/universal-access/cc-ua-typing-page.ui:134
-#: panels/universal-access/cc-ua-typing-page.ui:188
-#: panels/universal-access/cc-ua-typing-page.ui:238
+#: panels/universal-access/cc-ua-typing-page.ui:135
+#: panels/universal-access/cc-ua-typing-page.ui:189
+#: panels/universal-access/cc-ua-typing-page.ui:239
 #: panels/universal-access/cc-ua-zoom-page.ui:172
 msgid "Long"
 msgstr "Доўгая"
@@ -7235,8 +6670,8 @@ msgid "Secondary click by holding down the primary mouse button"
 msgstr "Націскання правай кнопкай пры зацісканні асноўнай кнопкі мышы"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:67
-#: panels/universal-access/cc-ua-typing-page.ui:180
-#: panels/universal-access/cc-ua-typing-page.ui:230
+#: panels/universal-access/cc-ua-typing-page.ui:181
+#: panels/universal-access/cc-ua-typing-page.ui:231
 msgid "Acceptance Delay"
 msgstr "Затрымка да прыняцця"
 
@@ -7343,44 +6778,58 @@ msgstr[2] "%d пікселяў"
 msgid "_High Contrast"
 msgstr "_Высокая кантраснасць"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:18
+#: panels/universal-access/cc-ua-seeing-page.ui:11
+msgid "Increase color contrast of foreground and background interface elements"
+msgstr ""
+"Павелічэнне кантраснасці колеру для элементаў інтэрфейсу на пярэднім і "
+"заднім плане"
+
+#: panels/universal-access/cc-ua-seeing-page.ui:19
 msgid "_Reduce Animation"
 msgstr "_Абмяжоўванне анімацыі"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:19
+#: panels/universal-access/cc-ua-seeing-page.ui:20
 msgid "Reduce animations in the user interface to reduce motion"
 msgstr ""
 "Абмяжоўваць анімацыю ў інтэрфейсе карыстальніка, каб панізіць хуткасць руху"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:27
+#: panels/universal-access/cc-ua-seeing-page.ui:28
 msgid "_Large Text"
 msgstr "_Вялікі тэкст"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:35
+#: panels/universal-access/cc-ua-seeing-page.ui:29
+msgid "Increase the size of all text in the user interface"
+msgstr "Павелічэнне памеру ўсяго тэксту ў інтэрфейсе карыстальніка"
+
+#: panels/universal-access/cc-ua-seeing-page.ui:37
 msgid "_Cursor Size"
 msgstr "_Памер курсора"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:44
+#: panels/universal-access/cc-ua-seeing-page.ui:38
+msgid "The size of the cursor can be increased to make it easier to see"
+msgstr "Памер курсора, можна павялічыць, каб яго было прасцей убачыць"
+
+#: panels/universal-access/cc-ua-seeing-page.ui:47
 msgid "_Sound Keys"
 msgstr "_Агучванне клавіш"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:45
+#: panels/universal-access/cc-ua-seeing-page.ui:48
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "Гукавы сігнал пры націсканні на Num Lock або Caps Lock"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:53
+#: panels/universal-access/cc-ua-seeing-page.ui:56
 msgid "_Overlay Scrollbars"
 msgstr "Накладанне палос прагорткі"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:54
+#: panels/universal-access/cc-ua-seeing-page.ui:57
 msgid "Use scrollbars that overlay the content and automatically hide"
 msgstr "Выкарыстоўваць накладанне палос прагорткі на змесціва і іх аўтахаванне"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:67
+#: panels/universal-access/cc-ua-seeing-page.ui:70
 msgid "Screen _Reader"
 msgstr "_Чытанне з экрана"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:68
+#: panels/universal-access/cc-ua-seeing-page.ui:71
 msgid "The screen reader reads displayed text as you move the focus"
 msgstr "Праз чытанне з экрана прамаўляецца тэкст, на які пераходзіць фокус"
 
@@ -7388,110 +6837,104 @@ msgstr "Праз чытанне з экрана прамаўляецца тэк�
 msgid "_Screen Keyboard"
 msgstr "_Экранная клавіятура"
 
-#: panels/universal-access/cc-ua-typing-page.ui:16
+#: panels/universal-access/cc-ua-typing-page.ui:10
+msgid "Use the on-screen keyboard to type in input fields"
+msgstr "Выкарыстанне экраннай клавіятуры для набору тэксту ў палях уводу"
+
+#: panels/universal-access/cc-ua-typing-page.ui:17
 msgid "_Enable by Keyboard"
 msgstr "_Уключэнне з клавіятуры"
 
-#: panels/universal-access/cc-ua-typing-page.ui:17
+#: panels/universal-access/cc-ua-typing-page.ui:18
 msgid "Turn accessibility features on or off using the keyboard"
 msgstr "Уключэнне і выключэнне спецыяльных магчымасцей з дапамогай клавіятуры"
 
-#: panels/universal-access/cc-ua-typing-page.ui:27
+#: panels/universal-access/cc-ua-typing-page.ui:28
 msgid "Text Cursor"
 msgstr "Тэкставы курсор"
 
-#: panels/universal-access/cc-ua-typing-page.ui:31
+#: panels/universal-access/cc-ua-typing-page.ui:32
 msgid "_Cursor Blinking"
 msgstr "_Мільганне курсора"
 
-#: panels/universal-access/cc-ua-typing-page.ui:32
+#: panels/universal-access/cc-ua-typing-page.ui:33
 msgid "Change if the cursor blinks in text fields"
 msgstr "Змяніце, калі курсор мільгае ў тэкставых палях"
 
-#: panels/universal-access/cc-ua-typing-page.ui:40
+#: panels/universal-access/cc-ua-typing-page.ui:41
 msgid "_Blink Speed"
 msgstr "_Хуткасць мільгання"
 
-#: panels/universal-access/cc-ua-typing-page.ui:46
+#: panels/universal-access/cc-ua-typing-page.ui:47
 msgid "Blink Speed"
 msgstr "Хуткасць мільгання"
 
-#: panels/universal-access/cc-ua-typing-page.ui:49
-#: panels/universal-access/cc-ua-typing-page.ui:107
-msgid "Fast"
-msgstr "Хутка"
-
-#: panels/universal-access/cc-ua-typing-page.ui:52
-#: panels/universal-access/cc-ua-typing-page.ui:110
-msgid "Slow"
-msgstr "Павольна"
-
-#: panels/universal-access/cc-ua-typing-page.ui:76
+#: panels/universal-access/cc-ua-typing-page.ui:77
 msgid "Test Entry"
 msgstr "Праверка ўводу"
 
-#: panels/universal-access/cc-ua-typing-page.ui:81
+#: panels/universal-access/cc-ua-typing-page.ui:82
 msgid "Type to test"
 msgstr "Увядзіце тэкст, каб праверыць"
 
-#: panels/universal-access/cc-ua-typing-page.ui:92
+#: panels/universal-access/cc-ua-typing-page.ui:93
 msgid "Typing Assist"
 msgstr "Дапамога з уводам"
 
-#: panels/universal-access/cc-ua-typing-page.ui:96
+#: panels/universal-access/cc-ua-typing-page.ui:97
 msgid "_Repeat Keys"
 msgstr "_Паўтор клавіш"
 
-#: panels/universal-access/cc-ua-typing-page.ui:97
+#: panels/universal-access/cc-ua-typing-page.ui:98
 msgid "Key presses repeat when the key is held down"
 msgstr "Паўтараць увод, пакуль утрымліваецца націснутая клавіша"
 
-#: panels/universal-access/cc-ua-typing-page.ui:102
+#: panels/universal-access/cc-ua-typing-page.ui:103
 msgid "Speed"
 msgstr "Хуткасць"
 
-#: panels/universal-access/cc-ua-typing-page.ui:153
+#: panels/universal-access/cc-ua-typing-page.ui:154
 msgid "_Sticky Keys"
 msgstr "_Ліпкія клавішы"
 
-#: panels/universal-access/cc-ua-typing-page.ui:154
-msgid "Sequences of modifier keys act as a key combinations"
+#: panels/universal-access/cc-ua-typing-page.ui:155
+msgid "Sequences of modifier keys act as a key combination"
 msgstr "Паслядоўнасці клавіш-мадыфікатараў дзейнічаюць як камбінацыі клавіш"
 
-#: panels/universal-access/cc-ua-typing-page.ui:159
+#: panels/universal-access/cc-ua-typing-page.ui:160
 msgid "Disable if two keys are pressed together"
 msgstr "Адключаць пры адначасовым націсканні дзвюх клавіш"
 
-#: panels/universal-access/cc-ua-typing-page.ui:165
+#: panels/universal-access/cc-ua-typing-page.ui:166
 msgid "Beep when modifier key is pressed"
 msgstr "Гукавы сігнал пры націсканні клавішы-мадыфікатара"
 
-#: panels/universal-access/cc-ua-typing-page.ui:174
+#: panels/universal-access/cc-ua-typing-page.ui:175
 msgid "S_low Keys"
 msgstr "_Павольныя клавішы"
 
-#: panels/universal-access/cc-ua-typing-page.ui:175
+#: panels/universal-access/cc-ua-typing-page.ui:176
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr "Затрымка паміж націсканнем клавішы і яе прыняццем"
 
-#: panels/universal-access/cc-ua-typing-page.ui:203
+#: panels/universal-access/cc-ua-typing-page.ui:204
 msgid "Beep when a key is pressed"
 msgstr "Гукавы сігнал пры націсканні клавішы"
 
-#: panels/universal-access/cc-ua-typing-page.ui:209
+#: panels/universal-access/cc-ua-typing-page.ui:210
 msgid "Beep when a key is accepted"
 msgstr "Гукавы сігнал, калі клавіша прынята"
 
-#: panels/universal-access/cc-ua-typing-page.ui:215
-#: panels/universal-access/cc-ua-typing-page.ui:253
+#: panels/universal-access/cc-ua-typing-page.ui:216
+#: panels/universal-access/cc-ua-typing-page.ui:254
 msgid "Beep when a key is rejected"
 msgstr "Гукавы сігнал, калі клавіша не прынята"
 
-#: panels/universal-access/cc-ua-typing-page.ui:224
+#: panels/universal-access/cc-ua-typing-page.ui:225
 msgid "_Bounce Keys"
 msgstr "_Пругкія клавішы"
 
-#: panels/universal-access/cc-ua-typing-page.ui:225
+#: panels/universal-access/cc-ua-typing-page.ui:226
 msgid "Ignore fast duplicate keypresses"
 msgstr "Ігнараванне хуткага паўторнага націскання клавіш"
 
@@ -7499,7 +6942,11 @@ msgstr "Ігнараванне хуткага паўторнага націск�
 msgid "_Desktop Zoom"
 msgstr "Павелічэнне працоўнага _стала"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:19
+#: panels/universal-access/cc-ua-zoom-page.ui:10
+msgid "Magnify the entire screen"
+msgstr "Мільганне ўсім экранам"
+
+#: panels/universal-access/cc-ua-zoom-page.ui:20
 msgid "Magnifier"
 msgstr "Лупа"
 
@@ -7545,8 +6992,8 @@ msgid "Right Half"
 msgstr "Правая палавіна"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:88
-msgid "Follow Behaviour"
-msgstr "Паводіны"
+msgid "Follow Behavior"
+msgstr "Паводзіны"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:93
 msgid "Moves with Contents"
@@ -7557,7 +7004,7 @@ msgid "Pushes Contents Around"
 msgstr "Ссоўваць змесціва экрана навокал"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:95
-msgid "Remains Cented"
+msgid "Remains Centered"
 msgstr "Знаходзіцца ў цэнтры"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:107
@@ -7605,7 +7052,7 @@ msgid "_Inverted"
 msgstr "_Негатыў"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:212
-msgid "Reverse colors in the magnifier region"
+msgid "Invert colors in the magnifier region"
 msgstr "Адваротныя колеры ў вобласці павелічэння"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:220
@@ -8199,7 +7646,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:725
+#: panels/user-accounts/cc-user-panel.c:743
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -8207,7 +7654,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:729
+#: panels/user-accounts/cc-user-panel.c:747
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -8299,26 +7746,30 @@ msgstr "Памылковы пароль, паўтарыце спробу"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Не ўдалося злучыцца з даменам %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:354
+#: panels/user-accounts/cc-user-panel.c:258
+msgid "Add User…"
+msgstr "Дадаць карыстальніка…"
+
+#: panels/user-accounts/cc-user-panel.c:372
 msgid "Failed to delete user"
 msgstr "Не ўдалося выдаліць карыстальніка"
 
-#: panels/user-accounts/cc-user-panel.c:411
-#: panels/user-accounts/cc-user-panel.c:466
-#: panels/user-accounts/cc-user-panel.c:512
+#: panels/user-accounts/cc-user-panel.c:429
+#: panels/user-accounts/cc-user-panel.c:484
+#: panels/user-accounts/cc-user-panel.c:530
 msgid "Failed to revoke remotely managed user"
 msgstr "Не ўдалося ануляваць аддаленага карыстальніка"
 
-#: panels/user-accounts/cc-user-panel.c:561
+#: panels/user-accounts/cc-user-panel.c:579
 msgid "You cannot delete your own account."
 msgstr "Нельга выдаліць уласны ўліковы запіс."
 
-#: panels/user-accounts/cc-user-panel.c:570
+#: panels/user-accounts/cc-user-panel.c:588
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s не выйшаў з сістэмы"
 
-#: panels/user-accounts/cc-user-panel.c:574
+#: panels/user-accounts/cc-user-panel.c:592
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -8326,12 +7777,12 @@ msgstr ""
 "Выдаленне карыстальніка, які не выйшаў з сістэмы, можа прывесці сістэму ў "
 "супярэчлівы стан."
 
-#: panels/user-accounts/cc-user-panel.c:583
+#: panels/user-accounts/cc-user-panel.c:601
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Пакінуць файлы карыстальніка %s?"
 
-#: panels/user-accounts/cc-user-panel.c:587
+#: panels/user-accounts/cc-user-panel.c:605
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8339,60 +7790,60 @@ msgstr ""
 "Пры выдаленні ўліковага запісу карыстальніка можна пакінуць яго хатні "
 "каталог, пошту і часовыя файлы."
 
-#: panels/user-accounts/cc-user-panel.c:590
+#: panels/user-accounts/cc-user-panel.c:608
 msgid "_Delete Files"
 msgstr "_Выдаліць файлы"
 
-#: panels/user-accounts/cc-user-panel.c:591
+#: panels/user-accounts/cc-user-panel.c:609
 msgid "_Keep Files"
 msgstr "_Захаваць файлы"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:623
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Сапраўды ануляваць уліковы запіс аддаленага карыстальніка %s?"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:627
 msgid "_Delete"
 msgstr "_Выдаліць"
 
-#: panels/user-accounts/cc-user-panel.c:659
+#: panels/user-accounts/cc-user-panel.c:677
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Уліковы запіс адключаны"
 
-#: panels/user-accounts/cc-user-panel.c:667
+#: panels/user-accounts/cc-user-panel.c:685
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Будзе зададзена пры наступным уваходзе"
 
-#: panels/user-accounts/cc-user-panel.c:670
+#: panels/user-accounts/cc-user-panel.c:688
 msgctxt "Password mode"
 msgid "None"
 msgstr "Няма"
 
-#: panels/user-accounts/cc-user-panel.c:713
+#: panels/user-accounts/cc-user-panel.c:731
 msgid "Logged in"
 msgstr "У сістэме"
 
-#: panels/user-accounts/cc-user-panel.c:1200
+#: panels/user-accounts/cc-user-panel.c:1218
 msgid "Failed to contact the accounts service"
 msgstr "Не ўдалося звязацца з сэрвісам уліковых запісаў"
 
-#: panels/user-accounts/cc-user-panel.c:1202
+#: panels/user-accounts/cc-user-panel.c:1220
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Праверце, ці ўсталяваны і ўключаны AccountService."
 
-#: panels/user-accounts/cc-user-panel.c:1224
+#: panels/user-accounts/cc-user-panel.c:1242
 msgid "This panel must be unlocked to change this setting"
 msgstr "Каб змяняць налады, трэба разблакіраваць гэту панэль"
 
-#: panels/user-accounts/cc-user-panel.c:1291
+#: panels/user-accounts/cc-user-panel.c:1309
 msgid "Delete the selected user account"
 msgstr "Выдаліць вылучаны ўліковы запіс карыстальніка"
 
-#: panels/user-accounts/cc-user-panel.c:1295
-#: panels/user-accounts/cc-user-panel.c:1407
+#: panels/user-accounts/cc-user-panel.c:1313
+#: panels/user-accounts/cc-user-panel.c:1454
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8400,7 +7851,7 @@ msgstr ""
 "Каб выдаліць уліковы запіс вылучанага карыстальніка,\n"
 "спачатку націсніце на значок *"
 
-#: panels/user-accounts/cc-user-panel.c:1453
+#: panels/user-accounts/cc-user-panel.c:1500
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Разблакіруйце, каб дадаваць карыстальнікаў і змяняць налады"
 
@@ -8475,16 +7926,12 @@ msgstr "Выдаліць карыстальніка…"
 msgid "Other Users"
 msgstr "Іншыя карыстальнікі"
 
-#: panels/user-accounts/cc-user-panel.ui:318
-msgid "Add User…"
-msgstr "Дадаць карыстальніка…"
-
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:346
+#: panels/user-accounts/cc-user-panel.ui:337
 msgid "No Users Found"
 msgstr "Не знойдзена карыстальнікаў"
 
-#: panels/user-accounts/cc-user-panel.ui:355
+#: panels/user-accounts/cc-user-panel.ui:346
 msgid "Unlock to add a user account."
 msgstr "Разблакіруйце, каб дадаць уліковы запіс карыстальніка."
 
@@ -8520,6 +7967,10 @@ msgstr ""
 "Для карыстання сістэмай карпаратыўнага ўваходу ў сеанс трэба\n"
 "зарэгістраваць гэты камп'ютар у дамене. Папрасіце адміністратара\n"
 "сеткі ўвесці сюды пароль для дамена."
+
+#: panels/user-accounts/data/join-dialog.ui:90
+msgid "_Domain"
+msgstr "_Дамен"
 
 #: panels/user-accounts/data/join-dialog.ui:112
 msgid "Administrator _Name"
@@ -8824,6 +8275,10 @@ msgstr ""
 #: panels/wacom/cc-wacom-page.ui:72
 msgid "Calibrate"
 msgstr "Адкалібраваць"
+
+#: panels/wacom/cc-wacom-panel.ui:9
+msgid "Test Your _Settings"
+msgstr "_Праверыць налады"
 
 #: panels/wacom/cc-wacom-panel.ui:56
 msgid "No tablet detected"
@@ -9164,33 +8619,33 @@ msgctxt "Network mode"
 msgid "Unknown"
 msgstr "Невядома"
 
-#: panels/wwan/cc-wwan-device-page.c:187
+#: panels/wwan/cc-wwan-device-page.c:186
 msgid "Unlock SIM card"
 msgstr "Разблакіраванне SIM-карты"
 
-#: panels/wwan/cc-wwan-device-page.c:188 panels/wwan/cc-wwan-device-page.c:236
+#: panels/wwan/cc-wwan-device-page.c:187 panels/wwan/cc-wwan-device-page.c:235
 msgid "Unlock"
 msgstr "Разблакіраваць"
 
-#: panels/wwan/cc-wwan-device-page.c:193
+#: panels/wwan/cc-wwan-device-page.c:192
 #, c-format
 msgid "Please provide PIN code for SIM %d"
 msgstr "Увядзіце PIN-код для SIM-карты %d"
 
-#: panels/wwan/cc-wwan-device-page.c:194
+#: panels/wwan/cc-wwan-device-page.c:193
 msgid "Enter PIN to unlock your SIM card"
 msgstr "Увядзіце PIN-код, каб разблакіраваць SIM-карту"
 
-#: panels/wwan/cc-wwan-device-page.c:198
+#: panels/wwan/cc-wwan-device-page.c:197
 #, c-format
 msgid "Please provide PUK code for SIM %d"
 msgstr "Увядзіце PUK-код для SIM-карты %d"
 
-#: panels/wwan/cc-wwan-device-page.c:199
+#: panels/wwan/cc-wwan-device-page.c:198
 msgid "Enter PUK to unlock your SIM card"
 msgstr "Увядзіце PUK-код, каб разблакіраваць SIM-карту"
 
-#: panels/wwan/cc-wwan-device-page.c:217
+#: panels/wwan/cc-wwan-device-page.c:216
 #, c-format
 msgid "Wrong password entered. You have %1$u try left"
 msgid_plural "Wrong password entered. You have %1$u tries left"
@@ -9198,7 +8653,7 @@ msgstr[0] "Уведзены няправільны пароль. Застала�
 msgstr[1] "Уведзены няправільны пароль. Засталося %1$u спробы"
 msgstr[2] "Уведзены няправільны пароль. Засталося %1$u спроб"
 
-#: panels/wwan/cc-wwan-device-page.c:220
+#: panels/wwan/cc-wwan-device-page.c:219
 #, c-format
 msgid "You have %u try left"
 msgid_plural "You have %u tries left"
@@ -9206,23 +8661,23 @@ msgstr[0] "Засталася %1$u спроба"
 msgstr[1] "Засталося %1$u спробы"
 msgstr[2] "Засталося %1$u спроб"
 
-#: panels/wwan/cc-wwan-device-page.c:225
+#: panels/wwan/cc-wwan-device-page.c:224
 msgid "Wrong password entered."
 msgstr "Уведзены няправільны пароль."
 
-#: panels/wwan/cc-wwan-device-page.c:270
+#: panels/wwan/cc-wwan-device-page.c:269
 msgid "PUK code should be an 8 digit number"
 msgstr "PUK-код павінен змяшчаць 8 лічбаў"
 
-#: panels/wwan/cc-wwan-device-page.c:294
+#: panels/wwan/cc-wwan-device-page.c:293
 msgid "Enter New PIN"
 msgstr "Увядзіце новы PIN-код"
 
-#: panels/wwan/cc-wwan-device-page.c:298
+#: panels/wwan/cc-wwan-device-page.c:297
 msgid "PIN code should be a 4-8 digit number"
 msgstr "PIN-код павінен павінен змяшчаць ад 4 да 8 лічбаў"
 
-#: panels/wwan/cc-wwan-device-page.c:316
+#: panels/wwan/cc-wwan-device-page.c:315
 msgid "Unlocking…"
 msgstr "Разблакіраванне…"
 
@@ -9466,27 +8921,27 @@ msgstr "Налады — гэта асноўны інтэрфейс для ка�
 msgid "The GNOME Project"
 msgstr "Праект GNOME"
 
-#: shell/cc-application.c:59
+#: shell/cc-application.c:64
 msgid "Display version number"
 msgstr "Паказаць нумар версіі"
 
-#: shell/cc-application.c:60
+#: shell/cc-application.c:65
 msgid "Enable verbose mode"
 msgstr "Уключыць падрабязны рэжым"
 
-#: shell/cc-application.c:61
+#: shell/cc-application.c:66
 msgid "Search for the string"
 msgstr "Пошук радка"
 
-#: shell/cc-application.c:62
+#: shell/cc-application.c:67
 msgid "List possible panel names and exit"
 msgstr "Вывесці спіс магчымых назваў панэляў і выйсці"
 
-#: shell/cc-application.c:63
+#: shell/cc-application.c:68
 msgid "Panel to display"
 msgstr "Панэль для паказу"
 
-#: shell/cc-application.c:63
+#: shell/cc-application.c:68
 msgid "[PANEL] [ARGUMENT…]"
 msgstr "[ПАНЭЛЬ] [АРГУМЕНТ…]"
 
@@ -9498,7 +8953,7 @@ msgstr "Катэгорыі налад"
 msgid "Privacy"
 msgstr "Прыватнасць"
 
-#: shell/cc-panel-loader.c:304
+#: shell/cc-panel-loader.c:307
 msgid "Available panels:"
 msgstr "Даступныя панэлі:"
 
@@ -9527,32 +8982,42 @@ msgstr ""
 msgid "Help"
 msgstr "Даведка"
 
-#: shell/help-overlay.ui:15
+#: shell/help-overlay.ui:13
 msgctxt "shortcut window"
 msgid "General"
 msgstr "Агульныя"
 
-#: shell/help-overlay.ui:20
+#: shell/help-overlay.ui:17
 msgctxt "shortcut window"
 msgid "Quit"
 msgstr "Выйсці"
 
-#: shell/help-overlay.ui:27 shell/help-overlay.ui:57
+#: shell/help-overlay.ui:23 shell/help-overlay.ui:61
 msgctxt "shortcut window"
 msgid "Search"
 msgstr "Пошук"
 
+#: shell/help-overlay.ui:29
+msgctxt "shortcut window"
+msgid "Show help"
+msgstr "Паказаць даведку"
+
 #: shell/help-overlay.ui:35
+msgctxt "shortcut window"
+msgid "Keyboard shortcuts"
+msgstr "Спалучэнні клавіш"
+
+#: shell/help-overlay.ui:42
 msgctxt "shortcut window"
 msgid "Panels"
 msgstr "Панэлі"
 
-#: shell/help-overlay.ui:41 shell/help-overlay.ui:49
+#: shell/help-overlay.ui:47 shell/help-overlay.ui:54
 msgctxt "shortcut window"
 msgid "Go back to previous panel"
 msgstr "Да папярэдняй панэлі"
 
-#: shell/help-overlay.ui:62
+#: shell/help-overlay.ui:65
 msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "Скасаваць пошук"
@@ -9618,6 +9083,646 @@ msgstr[2] "%u уваходаў"
 #: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Сістэмныя гукі"
+
+#, c-format
+#~ msgid ""
+#~ "%s has the following permissions built-in. These cannot be altered. If "
+#~ "you are concerned about these permissions, consider removing this "
+#~ "application."
+#~ msgstr ""
+#~ "%s мае наступныя ўбудаваныя дазволы, іх немагчыма змяніць. Калі гэтыя "
+#~ "дазволы вас непакояць, падумайце ці не варта выдаліць праграму."
+
+#~ msgid "View Details"
+#~ msgstr "Паказаць падрабязнасці"
+
+#~ msgid "Receive system searches and send results."
+#~ msgstr "Атрымліваць пошукавых запытаў сістэмы і адпраўляць вынікі."
+
+#~ msgid "Show system notifications."
+#~ msgstr "Паказваць сістэмныя апавяшчэнні."
+
+#~ msgid "Allow activity when the app is closed."
+#~ msgstr "Дазволіць актыўнасць, калі праграма закрыта."
+
+#~ msgid "Take pictures of the screen at any time."
+#~ msgstr "Рабіць здымкі экрана ў любы часы."
+
+#~ msgid "Block standard keyboard shortcuts."
+#~ msgstr "Блакіраваць стандартныя спалучэнні клавіш."
+
+#~ msgid "Take pictures with the camera."
+#~ msgstr "Рабіць здымкі праз камеру."
+
+#~ msgid "Record audio with the microphone."
+#~ msgstr "Запісваць гук праз мікрафон."
+
+#~ msgid "Access device location data."
+#~ msgstr "Доступ да звестак пра месцазнаходжанне прылады."
+
+#~ msgid "Built-in Permissions"
+#~ msgstr "Убудаваныя дазволы"
+
+#~ msgid "No applications can capture photos or video."
+#~ msgstr "Няма праграм, якія могуць здымаць фота або відэа."
+
+#~ msgid "UTC%:::z"
+#~ msgstr "UTC%:::z"
+
+#~ msgid "%l:%M %p"
+#~ msgstr "%l:%M %p"
+
+#~ msgid "%R"
+#~ msgstr "%R"
+
+#, c-format
+#~ msgctxt "timezone map"
+#~ msgid "%s (%s)"
+#~ msgstr "%s (%s)"
+
+#~ msgid "Time Zone"
+#~ msgstr "Часавы пояс"
+
+#~ msgid "Search for a city"
+#~ msgstr "Пошук горада"
+
+#~ msgid "Night Light unavailable"
+#~ msgstr "Начное святло недаступна"
+
+#~ msgid "Choose how to use connected monitors and projectors"
+#~ msgstr "Выберыце як выкарыстоўваць падлучаныя маніторы і праектары"
+
+#~ msgid "Passed"
+#~ msgstr "Пройдзена"
+
+#~ msgid "Failed"
+#~ msgstr "Няўдача"
+
+#, c-format
+#~ msgid "Device conforms to HSI level %d"
+#~ msgstr "Прылада адпавядае %d узроўню HSI"
+
+#~ msgid "Security Level 0"
+#~ msgstr "Узровень бяспекі 0"
+
+#~ msgid ""
+#~ "This device has no protection against hardware security issues. This "
+#~ "could be because of a hardware or firmware configuration issue. It is "
+#~ "recommended to contact your IT support provider."
+#~ msgstr ""
+#~ "Гэта прылада не мае абароны ад праблем бяспекі ў апаратнага забеспячэння. "
+#~ "Магчыма праблема з-за канфігурацыі апаратнага забеспячэння або "
+#~ "ўбудаванага ПЗ. Рэкамендуецца звярнуцца да службы абслугоўвання і "
+#~ "падтрымкі."
+
+#~ msgid "Security Level 1"
+#~ msgstr "Узровень бяспекі 1"
+
+#~ msgid ""
+#~ "This device has minimal protection against hardware security issues. This "
+#~ "is the lowest device security level and only provides protection against "
+#~ "simple security threats."
+#~ msgstr ""
+#~ "Прылада мае мінімальную абарону ад праблем бяспекі ў апаратнага "
+#~ "забеспячэння. Гэта самы нізкі ўзровень бяспекі прылады, які забяспечвае "
+#~ "абарону толькі ад простых пагроз бяспекі."
+
+#~ msgid "Security Level 2"
+#~ msgstr "Узровень бяспекі 2"
+
+#~ msgid ""
+#~ "This device has basic protection against hardware security issues. This "
+#~ "provides protection against some common security threats."
+#~ msgstr ""
+#~ "Прылада мае базавую абарону ад праблем бяспекі ў апаратнага забеспячэння. "
+#~ "Гэта забяспечвае абарону ад некаторых распаўсюджаных пагроз бяспекі."
+
+#~ msgid "Security Level 3"
+#~ msgstr "Узровень бяспекі 3"
+
+#~ msgid ""
+#~ "This device has extended protection against hardware security issues. "
+#~ "This is the highest device security level and provides protection against "
+#~ "advanced security threats."
+#~ msgstr ""
+#~ "Прылада мае пашыраную абарону ад праблем бяспекі ў апаратнага "
+#~ "забеспячэння. Гэта самы высокі ўзровень бяспекі прылады, які забяспечвае "
+#~ "абарону ад сучасных пагроз бяспекі."
+
+#~ msgid "Security Level"
+#~ msgstr "Узровень бяспекі"
+
+#~ msgid "Contact your hardware manufacturer for help with security updates."
+#~ msgstr ""
+#~ "Звярніцеся да вытворцы вашага абсталявання, каб атрымаць дапамогу з "
+#~ "абнаўленнямі бяспекі."
+
+#~ msgid ""
+#~ "It might be possible to resolve this issue in the device’s UEFI firmware "
+#~ "settings, or by a support technician."
+#~ msgstr ""
+#~ "Магчыма праблема можа быць вырашана праз налады ўбудаванага ПЗ UEFI або "
+#~ "праз службу тэхнічнай падтрымкі."
+
+#~ msgid ""
+#~ "It might be possible to resolve this issue in the device’s UEFI firmware "
+#~ "settings."
+#~ msgstr ""
+#~ "Магчыма праблема можа быць вырашана праз налады ўбудаванага ПЗ UEFI."
+
+#~ msgid "It might be possible for a support technician to resolve this issue."
+#~ msgstr ""
+#~ "Магчыма праблема можа быць вырашана праз службу тэхнічнай падтрымкі."
+
+#~ msgid "Level 1"
+#~ msgstr "Узровень 1"
+
+#~ msgid "Level 2"
+#~ msgstr "Узровень 2"
+
+#~ msgid "Level 3"
+#~ msgstr "Узровень 2"
+
+#~ msgid "Exposed to serious security threats."
+#~ msgstr "Маюцца сур'ёзныя пагрозы бяспекі."
+
+#~ msgid "Limited protection against simple security threats."
+#~ msgstr "Абмежаваная абарона ад простых пагроз бяспекі."
+
+#~ msgid "Protected against common security threats."
+#~ msgstr "Абаронена ад распаўсюджаных пагроз бяспекі."
+
+#~ msgid "Protected against a wide range of security threats."
+#~ msgstr "Абаронена ад шырокага спектру пагроз бяспекі."
+
+#~ msgid "Comprehensive Protection"
+#~ msgstr "Комплексная абарона"
+
+#~ msgid "Firmware Write Protection"
+#~ msgstr "Абарона ад перазапісу ўбудаванага ПЗ"
+
+#~ msgid "Firmware Write Protection Lock"
+#~ msgstr "Блакаванне абароны ад перазапісу ўбудаванага ПЗ"
+
+#~ msgid "Firmware BIOS Region"
+#~ msgstr "Рэгіён убудаванага ПЗ BIOS"
+
+#~ msgid "Firmware BIOS Descriptor"
+#~ msgstr "Дэскрыптар убудаванага ПЗ BIOS"
+
+#~ msgid "Pre-boot DMA Protection"
+#~ msgstr "Перадзагрузачная абарона DMA"
+
+#~ msgid "Intel BootGuard"
+#~ msgstr "Intel BootGuard"
+
+#~ msgid "Intel BootGuard Verified Boot"
+#~ msgstr "Правераная загрузка Intel BootGuard"
+
+#~ msgid "Intel BootGuard ACM Protected"
+#~ msgstr "Абаронена Intel BootGuard ACM"
+
+#~ msgid "Intel BootGuard Error Policy"
+#~ msgstr "Палітыка памылак Intel BootGuard"
+
+#~ msgid "Intel BootGuard Fuse"
+#~ msgstr "Засцерагальнік Intel BootGuard"
+
+#~ msgid "Intel CET Enabled"
+#~ msgstr "Intel CET уключана"
+
+#~ msgid "Intel CET Active"
+#~ msgstr "Intel CET актыўна"
+
+#~ msgid "Intel SMAP"
+#~ msgstr "Intel SMAP"
+
+#~ msgid "Encrypted RAM"
+#~ msgstr "Зашыфраваная RAM"
+
+#~ msgid "IOMMU Protection"
+#~ msgstr "Абарона IOMMU"
+
+#~ msgid "Linux Kernel Lockdown"
+#~ msgstr "Linux Kernel Lockdown"
+
+#~ msgid "Linux Kernel Verification"
+#~ msgstr "Linux Kernel Verification"
+
+#~ msgid "Linux Swap"
+#~ msgstr "Linux Swap"
+
+#~ msgid "Suspend To RAM"
+#~ msgstr "Прыпыненне працы ў рэжым сна"
+
+#~ msgid "Suspend To Idle"
+#~ msgstr "Прыпыненне працы ў рэжым чакання"
+
+#~ msgid "UEFI Platform Key"
+#~ msgstr "Ключ платформы UEFI"
+
+#~ msgid "UEFI Secure Boot"
+#~ msgstr "UEFI Secure Boot"
+
+#~ msgid "TPM Platform Configuration"
+#~ msgstr "Канфігурацыя платформы TPM"
+
+#~ msgid "TPM Reconstruction"
+#~ msgstr "Рэканструкцыя TPM"
+
+#~ msgid "TPM v2.0"
+#~ msgstr "TPM v2.0"
+
+#~ msgid "Intel Management Engine Manufacturing Mode"
+#~ msgstr "Вытворчы рэжым Intel Management Engine"
+
+#~ msgid "Intel Management Engine Override"
+#~ msgstr "Перавызначэнне Intel Management Engine"
+
+#~ msgid "Intel Management Engine Version"
+#~ msgstr "Версія Intel Management Engine"
+
+#~ msgid "Firmware Updates"
+#~ msgstr "Абнаўленні ўбудаванага ПЗ"
+
+#~ msgid "Firmware Attestation"
+#~ msgstr "Атэстацыя ўбудаванага ПЗ"
+
+#~ msgid "Firmware Updater Verification"
+#~ msgstr "Праверка сродку абнаўлення ўбудаванага ПЗ"
+
+#~ msgid "Platform Debugging"
+#~ msgstr "Адладка платформы"
+
+#~ msgid "Processor Security Checks"
+#~ msgstr "Праверка бяспекі працэсара"
+
+#~ msgid "AMD Rollback Protection"
+#~ msgstr "Абарона ад паніжэння версіі ўбудаванага ПЗ AMD"
+
+#~ msgid "AMD Firmware Replay Protection"
+#~ msgstr "Абарона ад пераўсталявання ўбудаванага ПЗ AMD"
+
+#~ msgid "AMD Firmware Write Protection"
+#~ msgstr "Абарона ад перазапісу ўбудаванага ПЗ AMD"
+
+# Нешта пра PCH, перапальванне рэгістраў у крысталае на апаратным узроўні і гэта блок ад перазапісу. Незразумела, але добра, калі перапалілі. https://fwupd.github.io/libfwupdplugin/hsi.html#part-is-fused
+#~ msgid "Fused Platform"
+#~ msgstr "Сплаўленая платформа"
+
+#~ msgid "Rename Device"
+#~ msgstr "Перайменаваць прыладу"
+
+#~ msgid ""
+#~ "The device name is used to identify this device when it is viewed over "
+#~ "the network, or when pairing Bluetooth devices."
+#~ msgstr ""
+#~ "Імя прылады выкарыстоўваецца для яе апазнавання ў сетцы або пры "
+#~ "спалучэнні прылад Bluetooth."
+
+#~ msgid "Device name"
+#~ msgstr "Імя прылады"
+
+#~ msgid "_Rename"
+#~ msgstr "_Перайменаваць"
+
+#~ msgid "Section"
+#~ msgstr "Раздзел"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Спалучэнні клавіш"
+
+#~ msgid "Add a shortcut"
+#~ msgstr "Дадаць спалучэнне клавіш"
+
+#, c-format
+#~ msgid ""
+#~ "%s is already being used for %s. If you replace it, %s will be disabled"
+#~ msgstr ""
+#~ "%s ужо выклікае функцыю %s. Калі вы націсніце замяніць, спалучэнне для "
+#~ "функцыі %s будзе адключана"
+
+#, c-format
+#~ msgid "Enter new shortcut to change %s."
+#~ msgstr "Увядзіце новае спалучэнне клавіш для функцыі %s."
+
+#~ msgid "No applications can obtain location information."
+#~ msgstr "Няма праграм, якія могуць атрымліваць звесткі пра месцазнаходжанне."
+
+#~ msgid "No applications can record sound."
+#~ msgstr "Няма праграм, якія могуць запісваць гук."
+
+#~ msgid "NetworkManager needs to be running."
+#~ msgstr "NetworkManager павінен быць запушчаны."
+
+#~ msgid "undefined error in 802.1X security (wpa-eap)"
+#~ msgstr "невядомая памылка бяспекі 802.1X (wpa-eap)"
+
+#~ msgid "no file selected"
+#~ msgstr "файлы не выбраны"
+
+#~ msgid "unspecified error validating eap-method file"
+#~ msgstr "нявызначаная памылка праверкі файла eap-method"
+
+#~ msgid "DER, PEM, PKCS#12, or PGP private keys"
+#~ msgstr "Закрытыя ключы DER, PEM, PKCS#12 або PGP"
+
+#~ msgid "DER or PEM certificates"
+#~ msgstr "Сертыфікаты DER або PEM"
+
+#~ msgid "missing EAP-FAST PAC file"
+#~ msgstr "адсутнічае PAC-файл EAP-FAST"
+
+#~ msgid "PAC files (*.pac)"
+#~ msgstr "PAC-файлы (*.pac)"
+
+#~ msgid "GTC"
+#~ msgstr "GTC"
+
+#~ msgid "MSCHAPv2"
+#~ msgstr "MSCHAPv2"
+
+#~ msgid "Anonymous"
+#~ msgstr "Ананімна"
+
+#~ msgid "Authenticated"
+#~ msgstr "Сапраўднасць пацверджана"
+
+#~ msgid "Both"
+#~ msgstr "Абодва"
+
+#~ msgid "Anony_mous identity"
+#~ msgstr "_Ананімная ідэнтычнасць"
+
+#~ msgid "PAC _file"
+#~ msgstr "PAC-ф_айл"
+
+#~ msgid "Choose a PAC file"
+#~ msgstr "Выберыце PAC-файл"
+
+#~ msgid "_Inner authentication"
+#~ msgstr "_Унутраная праверка сапраўднасці"
+
+#~ msgid "Allow automatic PAC pro_visioning"
+#~ msgstr "Дазволіць аўтаматычную падрыхтоўку PAC"
+
+#~ msgid "missing EAP-LEAP username"
+#~ msgstr "адсутнічае імя карыстальніка EAP-LEAP"
+
+#~ msgid "missing EAP-LEAP password"
+#~ msgstr "адсутнічае пароль EAP-LEAP"
+
+#~ msgid "_Username"
+#~ msgstr "І_мя карыстальніка"
+
+#~ msgid "Sho_w password"
+#~ msgstr "_Паказваць пароль"
+
+#, c-format
+#~ msgid "invalid EAP-PEAP CA certificate: %s"
+#~ msgstr "памылковы сертыфікат EAP-PEAP CA: %s"
+
+#~ msgid "invalid EAP-PEAP CA certificate: no certificate specified"
+#~ msgstr "памылковы сертыфікат EAP-PEAP CA: сертыфікат не ўказаны"
+
+#~ msgid "MD5"
+#~ msgstr "MD5"
+
+#~ msgid "Version 0"
+#~ msgstr "Версія 0"
+
+#~ msgid "Version 1"
+#~ msgstr "Версія 1"
+
+#~ msgid "C_A certificate"
+#~ msgstr "_Сертыфікат CA"
+
+#~ msgid "Choose a Certificate Authority certificate"
+#~ msgstr "Выберыце сертыфікат цэнтра сертыфікацыі"
+
+#~ msgid "No CA certificate is _required"
+#~ msgstr "Сертыфікат CA не патрабуецца"
+
+#~ msgid "PEAP _version"
+#~ msgstr "_Версія PEAP"
+
+#~ msgid "missing EAP username"
+#~ msgstr "адсутнічае імя карыстальніка EAP"
+
+#~ msgid "missing EAP password"
+#~ msgstr "адсутнічае пароль EAP"
+
+#~ msgid "missing EAP-TLS identity"
+#~ msgstr "адсутнічае ідэнтычнасць EAP-TLS"
+
+#, c-format
+#~ msgid "invalid EAP-TLS CA certificate: %s"
+#~ msgstr "памылковы сертыфікат EAP-TLS CA: %s"
+
+#~ msgid "invalid EAP-TLS CA certificate: no certificate specified"
+#~ msgstr "памылковы сертыфікат EAP-TLS CA: сертыфікат не вызначаны"
+
+#, c-format
+#~ msgid "invalid EAP-TLS private-key: %s"
+#~ msgstr "памылковы закрыты ключ EAP-TLS: %s"
+
+#, c-format
+#~ msgid "invalid EAP-TLS user-certificate: %s"
+#~ msgstr "памылковы сертыфікат карыстальніка EAP-TLS: %s"
+
+#~ msgid "Unencrypted private keys are insecure"
+#~ msgstr "Незашыфраваныя закрытыя ключы небяспечныя"
+
+#~ msgid ""
+#~ "The selected private key does not appear to be protected by a password. "
+#~ "This could allow your security credentials to be compromised. Please "
+#~ "select a password-protected private key.\n"
+#~ "\n"
+#~ "(You can password-protect your private key with openssl)"
+#~ msgstr ""
+#~ "Падобна, што выбраны закрыты ключ не абаронены паролем. Гэта можа "
+#~ "прывесці да кампраметавання ўліковых даных. Выберыце закрыты ключ, "
+#~ "абаронены паролем.\n"
+#~ "\n"
+#~ "(Вы можаце абараніць закрыты ключ паролем праз openssl)"
+
+#~ msgid "Choose your personal certificate"
+#~ msgstr "Выберыце асабісты сертыфікат"
+
+#~ msgid "Choose your private key"
+#~ msgstr "Выберыце закрыты ключ"
+
+#~ msgid "I_dentity"
+#~ msgstr "Ід_энтычнасць"
+
+#~ msgid "_User certificate"
+#~ msgstr "Сертыфікат _карыстальніка"
+
+#~ msgid "Private _key"
+#~ msgstr "_Закрыты ключ"
+
+#~ msgid "_Private key password"
+#~ msgstr "_Пароль для закрытага ключа"
+
+#, c-format
+#~ msgid "invalid EAP-TTLS CA certificate: %s"
+#~ msgstr "памылковы сертыфікат EAP-TTLS CA: %s"
+
+#~ msgid "invalid EAP-TTLS CA certificate: no certificate specified"
+#~ msgstr "памылковы сертыфікат EAP-TTLS CA: сертыфікат не ўказаны"
+
+#~ msgid "PAP"
+#~ msgstr "PAP"
+
+#~ msgid "MSCHAP"
+#~ msgstr "MSCHAP"
+
+#~ msgid "MSCHAPv2 (no EAP)"
+#~ msgstr "MSCHAPv2 (без EAP)"
+
+#~ msgid "CHAP"
+#~ msgstr "CHAP"
+
+#~ msgid "Unknown error validating 802.1X security"
+#~ msgstr "Невядомая памылка праверкі бяспекі 802.1X"
+
+#~ msgid "TLS"
+#~ msgstr "TLS"
+
+#~ msgid "PWD"
+#~ msgstr "PWD"
+
+#~ msgid "FAST"
+#~ msgstr "FAST"
+
+#~ msgid "Tunneled TLS"
+#~ msgstr "Тунэльны TLS"
+
+#~ msgid "Protected EAP (PEAP)"
+#~ msgstr "Абаронены EAP (PEAP)"
+
+#~ msgid "Au_thentication"
+#~ msgstr "Пра_верка сапраўднасці"
+
+#~ msgid "Select a file"
+#~ msgstr "Выбраць файл"
+
+#~ msgid "missing leap-username"
+#~ msgstr "адсутнічае імя карыстальніка LEAP"
+
+#~ msgid "missing leap-password"
+#~ msgstr "адсутнічае пароль LEAP"
+
+#~ msgid "Wi-Fi password is missing."
+#~ msgstr "Адсутнічае пароль Wi-Fi."
+
+#~ msgid "_Type"
+#~ msgstr "_Тып"
+
+#~ msgid "missing wep-key"
+#~ msgstr "адсутнічае ключ WEP"
+
+#, c-format
+#~ msgid ""
+#~ "invalid wep-key: key with a length of %zu must contain only hex-digits"
+#~ msgstr ""
+#~ "памылковы ключ WEP. Ключ даўжынёй %zu павінен змяшчаць толькі "
+#~ "шаснаццатковыя лічбы"
+
+#, c-format
+#~ msgid ""
+#~ "invalid wep-key: key with a length of %zu must contain only ascii "
+#~ "characters"
+#~ msgstr ""
+#~ "памылковы ключ WEP. Ключ даўжынёй %zu павінен змяшчаць толькі сімвалы "
+#~ "ASCII"
+
+#, c-format
+#~ msgid ""
+#~ "invalid wep-key: wrong key length %zu. A key must be either of length "
+#~ "5/13 (ascii) or 10/26 (hex)"
+#~ msgstr ""
+#~ "памылковы ключ WEP. Няправільная даўжыня ключа %zu. Даўжыня ключа павінна "
+#~ "быць 5/13 (ASCII) або 10/26 (HEX)"
+
+#~ msgid "invalid wep-key: passphrase must be non-empty"
+#~ msgstr "памылковы ключ WEP. Парольная фраза не можа быць пустой"
+
+#~ msgid "invalid wep-key: passphrase must be shorter than 64 characters"
+#~ msgstr ""
+#~ "памылковы ключ WEP. Парольная фраза павінна быль карацейшай за 64 сімвалы"
+
+#~ msgid "1 (Default)"
+#~ msgstr "1 (прадвызначана)"
+
+#~ msgid "Open System"
+#~ msgstr "Адкрытая сістэма"
+
+#~ msgid "Shared Key"
+#~ msgstr "Агульны ключ"
+
+#~ msgid "_Key"
+#~ msgstr "_Ключ"
+
+#~ msgid "Sho_w key"
+#~ msgstr "Паказаць к_люч"
+
+#~ msgid "WEP inde_x"
+#~ msgstr "WEP-і_ндэкс"
+
+#, c-format
+#~ msgid ""
+#~ "invalid wpa-psk: invalid key-length %zu. Must be [8,63] bytes or 64 hex "
+#~ "digits"
+#~ msgstr ""
+#~ "памылковы wpa-psk. Памылковая даўжыня ключа  %zu. Павінна быць [8,63] "
+#~ "байт або 64 шаснаццатковыя лічбы"
+
+#~ msgid "invalid wpa-psk: cannot interpret key with 64 bytes as hex"
+#~ msgstr ""
+#~ "памылковы wpa-psk. Немагчыма інтэрпрэтаваць ключ з 64 байтаў як "
+#~ "шаснаццатковы"
+
+#~ msgid "No printers"
+#~ msgstr "Няма прынтараў"
+
+#~ msgid ""
+#~ "Sorry! The system printing service\n"
+#~ "    doesn’t seem to be available."
+#~ msgstr ""
+#~ "На жаль, сістэмны сэрвіс друку\n"
+#~ "    недаступны або не запушчаны."
+
+#~ msgid "Show _Notifications on Lock Screen"
+#~ msgstr "Паказваць _апавяшчэнні на экране блакіравання"
+
+#~ msgid "_Computer Name"
+#~ msgstr "Імя _камп'ютара"
+
+#, c-format
+#~ msgid "Testing %s"
+#~ msgstr "Праверка %s"
+
+#~ msgid "Click a speaker to test"
+#~ msgstr "Націсніце на дынамік, каб праверыць"
+
+#~ msgid ""
+#~ "Cursor size can be combined with zoom to make it easier to see the cursor."
+#~ msgstr ""
+#~ "Каб палепшыць бачнасць курсора, змяненне яго памеру можна спалучаць з "
+#~ "маштабаваннем."
+
+#~ msgid "Sequences of modifier keys act as a key combinations"
+#~ msgstr "Паслядоўнасці клавіш-мадыфікатараў дзейнічаюць як камбінацыі клавіш"
+
+#~ msgid "Follow Behaviour"
+#~ msgstr "Паводіны"
+
+#~ msgid "Remains Cented"
+#~ msgstr "Знаходзіцца ў цэнтры"
+
+#~ msgid "Reverse colors in the magnifier region"
+#~ msgstr "Адваротныя колеры ў вобласці павелічэння"
 
 #~ msgid ""
 #~ "Use of the camera allows applications to capture photos and video. "
@@ -10029,11 +10134,11 @@ msgstr "Сістэмныя гукі"
 #~ msgstr "Немагчыма змяніць"
 
 #~ msgid ""
-#~ "Individual permissions for applications can be reviewed in the <a href="
-#~ "\"privacy\">Privacy</a> Settings."
+#~ "Individual permissions for applications can be reviewed in the <a "
+#~ "href=\"privacy\">Privacy</a> Settings."
 #~ msgstr ""
-#~ "Асобныя дазволы для праграм можна пераглядзець у раздзеле налад <a href="
-#~ "\"privacy\">Прыватнасць</a>."
+#~ "Асобныя дазволы для праграм можна пераглядзець у раздзеле налад <a "
+#~ "href=\"privacy\">Прыватнасць</a>."
 
 #~ msgid "Integration"
 #~ msgstr "Інтэграцыя"
