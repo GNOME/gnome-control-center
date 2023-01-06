@@ -24,6 +24,7 @@ struct _CcBalanceSlider
 {
   GtkBox           parent_instance;
 
+  GtkWidget       *scale;
   GtkAdjustment   *adjustment;
 
   GvcChannelMap   *channel_map;
@@ -80,6 +81,7 @@ cc_balance_slider_class_init (CcBalanceSliderClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-balance-slider.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcBalanceSlider, scale);
   gtk_widget_class_bind_template_child (widget_class, CcBalanceSlider, adjustment);
 
   gtk_widget_class_bind_template_callback (widget_class, changed_cb);
@@ -91,6 +93,9 @@ cc_balance_slider_init (CcBalanceSlider *self)
   g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  // Don't flip the slider with RTL locale
+  gtk_widget_set_direction (self->scale, GTK_TEXT_DIR_LTR);
 }
 
 void
