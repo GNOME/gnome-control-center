@@ -28,7 +28,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_VOLUME_SLIDER (cc_volume_slider_get_type ())
-G_DECLARE_FINAL_TYPE (CcVolumeSlider, cc_volume_slider, CC, VOLUME_SLIDER, GtkBox)
+G_DECLARE_FINAL_TYPE (CcVolumeSlider, cc_volume_slider, CC, VOLUME_SLIDER, GtkWidget)
 
 void cc_volume_slider_set_mixer_control (CcVolumeSlider  *slider,
                                          GvcMixerControl *mixer_control);

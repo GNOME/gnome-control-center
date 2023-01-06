@@ -26,7 +26,7 @@
 
 struct _CcVolumeSlider
 {
-  GtkBox           parent_instance;
+  GtkWidget        parent_instance;
 
   GtkToggleButton *mute_button;
   GtkAdjustment   *volume_adjustment;
@@ -39,7 +39,7 @@ struct _CcVolumeSlider
   guint            notify_is_muted_handler_id;
 };
 
-G_DEFINE_TYPE (CcVolumeSlider, cc_volume_slider, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcVolumeSlider, cc_volume_slider, GTK_TYPE_WIDGET)
 
 static void
 update_volume_icon (CcVolumeSlider *self)
@@ -150,6 +150,9 @@ cc_volume_slider_dispose (GObject *object)
 {
   CcVolumeSlider *self = CC_VOLUME_SLIDER (object);
 
+  g_clear_pointer ((GtkWidget **) &self->volume_scale, gtk_widget_unparent);
+  g_clear_pointer ((GtkWidget **) &self->mute_button, gtk_widget_unparent);
+
   g_clear_object (&self->mixer_control);
   g_clear_object (&self->stream);
 
@@ -172,14 +175,21 @@ cc_volume_slider_class_init (CcVolumeSliderClass *klass)
 
   gtk_widget_class_bind_template_callback (widget_class, mute_button_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, volume_changed_cb);
+
+  gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BOX_LAYOUT);
 }
 
 void
 cc_volume_slider_init (CcVolumeSlider *self)
 {
+  GtkLayoutManager *box_layout;
+
   g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  box_layout = gtk_widget_get_layout_manager (GTK_WIDGET (self));
+  gtk_box_layout_set_spacing (GTK_BOX_LAYOUT (box_layout), 6);
 }
 
 void
