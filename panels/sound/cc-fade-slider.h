@@ -25,7 +25,7 @@
 G_BEGIN_DECLS
 
 #define CC_TYPE_FADE_SLIDER (cc_fade_slider_get_type ())
-G_DECLARE_FINAL_TYPE (CcFadeSlider, cc_fade_slider, CC, FADE_SLIDER, GtkBox)
+G_DECLARE_FINAL_TYPE (CcFadeSlider, cc_fade_slider, CC, FADE_SLIDER, GtkWidget)
 
 void cc_fade_slider_set_channel_map (CcFadeSlider  *slider,
                                      GvcChannelMap *channel_map);
