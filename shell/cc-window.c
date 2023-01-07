@@ -834,8 +834,6 @@ cc_window_class_init (CcWindowClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, update_list_title);
 
   gtk_widget_class_add_binding (widget_class, GDK_KEY_Left, GDK_ALT_MASK, go_back_shortcut_cb, NULL);
-  gtk_widget_class_add_binding (widget_class, GDK_KEY_s, GDK_CONTROL_MASK, search_shortcut_cb, NULL);
-  gtk_widget_class_add_binding (widget_class, GDK_KEY_S, GDK_CONTROL_MASK, search_shortcut_cb, NULL);
   gtk_widget_class_add_binding (widget_class, GDK_KEY_f, GDK_CONTROL_MASK, search_shortcut_cb, NULL);
   gtk_widget_class_add_binding (widget_class, GDK_KEY_F, GDK_CONTROL_MASK, search_shortcut_cb, NULL);
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_q, GDK_CONTROL_MASK, "window.close", NULL);
