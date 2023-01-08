@@ -661,7 +661,7 @@ cc_sharing_panel_setup_media_sharing_dialog (CcSharingPanel *self)
   path = g_find_program_in_path ("rygel");
   if (path == NULL)
     {
-      gtk_widget_hide (self->media_sharing_row);
+      gtk_widget_set_visible (self->media_sharing_row, FALSE);
       return;
     }
 
@@ -1383,14 +1383,14 @@ sharing_proxy_ready (GObject      *source,
   if (cc_sharing_panel_check_schema_available (self, FILE_SHARING_SCHEMA_ID))
     cc_sharing_panel_setup_personal_file_sharing_dialog (self);
   else
-    gtk_widget_hide (self->personal_file_sharing_row);
+    gtk_widget_set_visible (self->personal_file_sharing_row, FALSE);
 
   /* remote login */
   cc_sharing_panel_setup_remote_login_dialog (self);
 
   /* screen sharing */
   check_remote_desktop_available (self);
-  gtk_widget_hide (self->remote_desktop_row);
+  gtk_widget_set_visible (self->remote_desktop_row, FALSE);
 
   parent = cc_shell_get_toplevel (cc_panel_get_shell (CC_PANEL (self)));
   gtk_window_set_transient_for (GTK_WINDOW (self->media_sharing_dialog),

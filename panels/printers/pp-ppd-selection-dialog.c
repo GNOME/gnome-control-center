@@ -162,10 +162,10 @@ fill_ppds_list (PpPPDSelectionDialog *self)
   GtkTreeIter      *preselect_iter = NULL;
   gint              i;
 
-  gtk_widget_hide (GTK_WIDGET (self->ppd_spinner));
+  gtk_widget_set_visible (GTK_WIDGET (self->ppd_spinner), FALSE);
   gtk_spinner_stop (self->ppd_spinner);
 
-  gtk_widget_hide (GTK_WIDGET (self->progress_label));
+  gtk_widget_set_visible (GTK_WIDGET (self->progress_label), FALSE);
 
   treeview = self->ppd_selection_manufacturers_treeview;
 

@@ -322,7 +322,7 @@ update_jobs_list_cb (GObject      *source_object,
     }
   else
     {
-      gtk_widget_hide (GTK_WIDGET (self->authentication_infobar));
+      gtk_widget_set_visible (GTK_WIDGET (self->authentication_infobar), FALSE);
     }
 
   authenticate_popover_update (self);

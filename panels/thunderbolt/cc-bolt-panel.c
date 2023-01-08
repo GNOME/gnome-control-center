@@ -451,7 +451,7 @@ cc_bolt_panel_del_device_entry (CcBoltPanel       *panel,
   dev = cc_bolt_device_entry_get_device (entry);
   if (cc_bolt_device_dialog_device_equal (panel->device_dialog, dev))
     {
-      gtk_widget_hide (GTK_WIDGET (panel->device_dialog));
+      gtk_widget_set_visible (GTK_WIDGET (panel->device_dialog), FALSE);
       cc_bolt_device_dialog_set_device (panel->device_dialog, NULL, NULL);
     }
 
@@ -548,7 +548,7 @@ cc_bolt_panel_name_owner_changed (CcBoltPanel *panel)
     {
       cc_bolt_panel_set_no_thunderbolt (panel, NULL);
       devices_table_clear_entries (panel->devices, panel);
-      gtk_widget_hide (GTK_WIDGET (panel->headerbar_box));
+      gtk_widget_set_visible (GTK_WIDGET (panel->headerbar_box), FALSE);
       return;
     }
 

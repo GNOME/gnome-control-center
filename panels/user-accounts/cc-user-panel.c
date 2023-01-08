@@ -908,7 +908,7 @@ show_user (ActUser *user, CcUserPanel *self)
 
         if (act_user_get_account_type (user) == ACT_USER_ACCOUNT_TYPE_ADMINISTRATOR ||
             malcontent_control_path == NULL) {
-                gtk_widget_hide (GTK_WIDGET (self->parental_controls_row));
+                gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row), FALSE);
         } else {
                 if (is_parental_controls_enabled_for_user (user))
                         /* TRANSLATORS: Status of Parental Controls setup */
@@ -1058,7 +1058,7 @@ language_response (CcUserPanel *self,
         const gchar *lang, *account_language;
 
         if (response_id != GTK_RESPONSE_OK) {
-                gtk_widget_hide (GTK_WIDGET (dialog));
+                gtk_widget_set_visible (GTK_WIDGET (dialog), FALSE);
                 return;
         }
 
@@ -1076,7 +1076,7 @@ language_response (CcUserPanel *self,
                 cc_list_row_set_secondary_label (self->language_row, name);
         }
 
-        gtk_widget_hide (GTK_WIDGET (dialog));
+        gtk_widget_set_visible (GTK_WIDGET (dialog), FALSE);
 }
 
 static void

@@ -97,7 +97,7 @@ cc_wwan_pin_apply_clicked_cb (CcWwanSimLockDialog *self)
   const gchar *pin, *new_pin;
   gboolean row_enabled, lock_enabled;
 
-  gtk_widget_hide (GTK_WIDGET (self));
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 
   lock_enabled = cc_wwan_device_get_sim_lock (self->device);
   row_enabled = cc_list_row_get_active (self->lock_row);

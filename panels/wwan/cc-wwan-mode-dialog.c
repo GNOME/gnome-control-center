@@ -97,7 +97,7 @@ cc_wwan_mode_changed_cb (CcWwanModeDialog *self,
   gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
 
   if (self->selected_row)
-    gtk_widget_hide (GTK_WIDGET (self->selected_row->ok_emblem));
+    gtk_widget_set_visible (GTK_WIDGET (self->selected_row->ok_emblem), FALSE);
 
   self->selected_row = row;
 }
@@ -119,7 +119,7 @@ cc_wwan_mode_dialog_ok_clicked_cb (CcWwanModeDialog *self)
       g_return_if_reached ();
     }
 
-  gtk_widget_hide (GTK_WIDGET (self));
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 }
 
 static GtkWidget *
@@ -155,7 +155,7 @@ cc_wwan_mode_dialog_row_new (CcWwanModeDialog *self,
 
   /* image should be hidden by default */
   image = gtk_image_new_from_icon_name ("emblem-ok-symbolic");
-  gtk_widget_hide (image);
+  gtk_widget_set_visible (image, FALSE);
   row->ok_emblem = GTK_IMAGE (image);
   gtk_box_append (GTK_BOX (box), image);
 
@@ -259,7 +259,7 @@ cc_wwan_mode_dialog_update_mode (CcWwanModeRow    *row,
       gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
     }
   else
-    gtk_widget_hide (GTK_WIDGET (row->ok_emblem));
+    gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), FALSE);
 }
 
 static void

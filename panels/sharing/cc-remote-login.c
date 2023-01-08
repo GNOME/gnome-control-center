@@ -110,7 +110,7 @@ path_ready_callback (GObject      *source_object,
 
       /* hide the remote login button, since the service is not available */
       if (callback_data->button)
-        gtk_widget_hide (callback_data->button);
+        gtk_widget_set_visible (callback_data->button, FALSE);
 
       return;
     }
@@ -158,7 +158,7 @@ state_ready_callback (GObject      *source_object,
 
       /* hide the remote login button, since the service is not available */
       if (callback_data->button)
-        gtk_widget_hide (callback_data->button);
+        gtk_widget_set_visible (callback_data->button, FALSE);
 
       return;
     }

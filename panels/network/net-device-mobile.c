@@ -403,10 +403,10 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 
                 route4_text = nm_ip_config_get_gateway (ipv4_config);
         } else {
-                gtk_widget_hide (GTK_WIDGET (self->ipv4_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->ipv4_label));
-                gtk_widget_hide (GTK_WIDGET (self->dns4_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->dns4_label));
+                gtk_widget_set_visible (GTK_WIDGET (self->ipv4_heading_label), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->ipv4_label), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns4_heading_label), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns4_label), FALSE);
         }
 
         ipv6_config = nm_device_get_ip6_config (self->device);
@@ -431,10 +431,10 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
 
                 route6_text =  nm_ip_config_get_gateway (ipv6_config);
         } else {
-                gtk_widget_hide (GTK_WIDGET (self->ipv6_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->ipv6_label));
-                gtk_widget_hide (GTK_WIDGET (self->dns6_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->dns6_label));
+                gtk_widget_set_visible (GTK_WIDGET (self->ipv6_heading_label), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->ipv6_label), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns6_heading_label), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->dns6_label), FALSE);
         }
 
         if (have_ipv4_address && have_ipv6_address) {
@@ -469,8 +469,8 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
                 gtk_widget_set_valign (GTK_WIDGET (self->route_heading_label), GTK_ALIGN_START);
                 gtk_widget_set_visible (GTK_WIDGET (self->route_label), routes_text != NULL);
         } else {
-                gtk_widget_hide (GTK_WIDGET (self->route_heading_label));
-                gtk_widget_hide (GTK_WIDGET (self->route_label));
+                gtk_widget_set_visible (GTK_WIDGET (self->route_heading_label), FALSE);
+                gtk_widget_set_visible (GTK_WIDGET (self->route_label), FALSE);
         }
 }
 

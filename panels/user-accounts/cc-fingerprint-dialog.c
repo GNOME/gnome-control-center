@@ -544,7 +544,7 @@ update_prints_store (CcFingerprintDialog *self)
     return;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->add_print_icon), FALSE);
-  gtk_widget_hide (GTK_WIDGET (self->delete_prints_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->delete_prints_button), FALSE);
 
   g_clear_pointer (&self->enrolled_fingers, g_strfreev);
 
@@ -1220,9 +1220,9 @@ on_stack_child_changed (CcFingerprintDialog *self)
   g_debug ("Fingerprint dialog child changed: %s",
            gtk_stack_get_visible_child_name (self->stack));
 
-  gtk_widget_hide (GTK_WIDGET (self->back_button));
-  gtk_widget_hide (GTK_WIDGET (self->cancel_button));
-  gtk_widget_hide (GTK_WIDGET (self->done_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->back_button), FALSE);
+  gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), FALSE);
+  gtk_widget_set_visible (GTK_WIDGET (self->done_button), FALSE);
 
   adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (self->titlebar), TRUE);
   adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), TRUE);
@@ -1389,7 +1389,7 @@ back_button_clicked_cb (CcFingerprintDialog *self)
 static void
 confirm_deletion_button_clicked_cb (CcFingerprintDialog *self)
 {
-  gtk_widget_hide (self->delete_confirmation_infobar);
+  gtk_widget_set_visible (self->delete_confirmation_infobar, FALSE);
   delete_enrolled_prints (self);
 }
 
@@ -1397,7 +1397,7 @@ static void
 cancel_deletion_button_clicked_cb (CcFingerprintDialog *self)
 {
   gtk_widget_set_sensitive (self->prints_manager, TRUE);
-  gtk_widget_hide (self->delete_confirmation_infobar);
+  gtk_widget_set_visible (self->delete_confirmation_infobar, FALSE);
 }
 
 static void

@@ -325,7 +325,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     gtk_widget_set_sensitive (self->current_switch, available);
     //FIXME add a subtitle explaining why it's disabled
   } else {
-    gtk_widget_hide (self->current_row);
+    gtk_widget_set_visible (self->current_row, FALSE);
     current_visible = FALSE;
   }
 
@@ -354,7 +354,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
       !current_visible) {
     gtk_widget_set_visible (self->no_network_row, TRUE);
   } else {
-    gtk_widget_hide (self->no_network_row);
+    gtk_widget_set_visible (self->no_network_row, FALSE);
   }
 
   cc_sharing_networks_update_status (self);

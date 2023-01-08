@@ -318,7 +318,7 @@ row_data_new (CcPanelCategory     category,
   gtk_widget_set_hexpand (label, TRUE);
   gtk_label_set_max_width_chars (GTK_LABEL (label), 25);
   gtk_label_set_wrap (GTK_LABEL (label), TRUE);
-  gtk_widget_hide (label);
+  gtk_widget_set_visible (label, FALSE);
 
   if (has_sidebar)
     {

@@ -194,7 +194,7 @@ cancel_editing (CcKeyboardShortcutEditor *self)
   cc_keyboard_shortcut_editor_set_item (self, NULL);
   clear_custom_entries (self);
 
-  gtk_widget_hide (GTK_WIDGET (self));
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 }
 
 static gboolean
@@ -440,7 +440,7 @@ add_button_clicked_cb (CcKeyboardShortcutEditor *self)
 
   cc_keyboard_manager_add_custom_shortcut (self->manager, item);
 
-  gtk_widget_hide (GTK_WIDGET (self));
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 }
 
 static void
@@ -473,7 +473,7 @@ name_entry_changed_cb (CcKeyboardShortcutEditor *self)
 static void
 remove_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
-  gtk_widget_hide (GTK_WIDGET (self));
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 
   cc_keyboard_manager_remove_custom_shortcut (self->manager, self->item);
 }
@@ -494,7 +494,7 @@ reset_custom_clicked_cb (CcKeyboardShortcutEditor *self)
     cc_keyboard_manager_reset_shortcut (self->manager, self->item);
 
   gtk_stack_set_visible_child (self->custom_shortcut_stack, GTK_WIDGET (self->change_custom_shortcut_button));
-  gtk_widget_hide (GTK_WIDGET (self->reset_custom_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->reset_custom_button), FALSE);
 }
 
 static void
@@ -517,7 +517,7 @@ static void
 set_button_clicked_cb (CcKeyboardShortcutEditor *self)
 {
   update_shortcut (self);
-  gtk_widget_hide (GTK_WIDGET (self));
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 }
 
 static void
@@ -549,9 +549,9 @@ setup_keyboard_item (CcKeyboardShortcutEditor *self,
 
   set_header_mode (self, is_custom ? HEADER_MODE_CUSTOM_EDIT : HEADER_MODE_NONE);
 
-  gtk_widget_hide (GTK_WIDGET (self->add_button));
-  gtk_widget_hide (GTK_WIDGET (self->cancel_button));
-  gtk_widget_hide (GTK_WIDGET (self->replace_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->add_button), FALSE);
+  gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), FALSE);
+  gtk_widget_set_visible (GTK_WIDGET (self->replace_button), FALSE);
 
   /* Setup the top label */
   /*
@@ -980,6 +980,6 @@ cc_keyboard_shortcut_editor_set_mode (CcKeyboardShortcutEditor *self,
       gtk_widget_set_sensitive (GTK_WIDGET (self->name_entry), TRUE);
       gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
-      gtk_widget_hide (GTK_WIDGET (self->reset_custom_button));
+      gtk_widget_set_visible (GTK_WIDGET (self->reset_custom_button), FALSE);
     }
 }

@@ -1013,7 +1013,7 @@ on_filter_entry_key_release_event_cb (CcInputChooser *self, GdkEventKey *event)
   if (event->keyval == GDK_KEY_Escape) {
     self->showing_extra = FALSE;
     gtk_entry_set_text (GTK_ENTRY (self->filter_entry), "");
-    gtk_widget_hide (GTK_WIDGET (self->filter_entry));
+    gtk_widget_set_visible (GTK_WIDGET (self->filter_entry), FALSE);
     g_clear_pointer (&self->filter_words, g_strfreev);
     show_locale_rows (self);
   }

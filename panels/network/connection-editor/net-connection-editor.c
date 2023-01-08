@@ -198,7 +198,7 @@ static void
 update_complete (NetConnectionEditor *self,
                  gboolean             success)
 {
-        gtk_widget_hide (GTK_WIDGET (self));
+        gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
         g_signal_emit (self, signals[DONE], 0, success);
 }
 
@@ -910,7 +910,7 @@ net_connection_editor_add_connection (NetConnectionEditor *self)
         adw_bin_set_child (self->add_connection_frame, GTK_WIDGET (list));
 
         gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->add_connection_box));
-        gtk_widget_hide (GTK_WIDGET (self->apply_button));
+        gtk_widget_set_visible (GTK_WIDGET (self->apply_button), FALSE);
         gtk_window_set_title (GTK_WINDOW (self), _("Add VPN"));
 }
 

@@ -53,7 +53,7 @@ static void
 mtu_changed (CEPageEthernet *self)
 {
         if (gtk_spin_button_get_value_as_int (self->mtu_spin) == 0)
-                gtk_widget_hide (self->mtu_label);
+                gtk_widget_set_visible (self->mtu_label, FALSE);
         else
                 gtk_widget_set_visible (self->mtu_label, TRUE);
 }

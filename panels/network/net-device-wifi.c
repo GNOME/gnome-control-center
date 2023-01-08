@@ -707,7 +707,7 @@ on_wifi_hotspot_dialog_respnse_cb (GtkDialog     *dialog,
                                                                      self);
         }
 
-        gtk_widget_hide (GTK_WIDGET (self->hotspot_dialog));
+        gtk_widget_set_visible (GTK_WIDGET (self->hotspot_dialog), FALSE);
 }
 
 static void
@@ -843,7 +843,7 @@ really_forget (GtkDialog *dialog, gint response, gpointer data)
                 row = r->data;
                 connection = NM_REMOTE_CONNECTION (cc_wifi_connection_row_get_connection (row));
                 nm_remote_connection_delete_async (connection, self->cancellable, really_forgotten, g_object_ref (data));
-                gtk_widget_hide (GTK_WIDGET (row));
+                gtk_widget_set_visible (GTK_WIDGET (row), FALSE);
         }
         g_list_free (rows);
 }

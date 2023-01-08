@@ -175,7 +175,7 @@ finish_action (CcAddUserDialog *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->enterprise_button), TRUE);
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), TRUE);
 
-        gtk_widget_hide (GTK_WIDGET (self->spinner));
+        gtk_widget_set_visible (GTK_WIDGET (self->spinner), FALSE);
         gtk_spinner_stop (self->spinner);
 }
 
@@ -965,7 +965,7 @@ on_join_response (CcAddUserDialog *self,
                   gint response,
                   GtkDialog *dialog)
 {
-        gtk_widget_hide (GTK_WIDGET (dialog));
+        gtk_widget_set_visible (GTK_WIDGET (dialog), FALSE);
         if (response != GTK_RESPONSE_OK) {
                 finish_action (self);
                 return;
@@ -1360,7 +1360,7 @@ on_realmd_disappeared (GDBusConnection *unused1,
 
         clear_realm_manager (self);
         gtk_list_store_clear (self->enterprise_realm_model);
-        gtk_widget_hide (GTK_WIDGET (self->enterprise_group));
+        gtk_widget_set_visible (GTK_WIDGET (self->enterprise_group), FALSE);
         mode_change (self, MODE_LOCAL);
 }
 

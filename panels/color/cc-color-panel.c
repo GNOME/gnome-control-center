@@ -317,7 +317,7 @@ gcm_prefs_file_chooser_get_icc_profile (CcColorPanel *prefs)
 static void
 gcm_prefs_calib_cancel_cb (CcColorPanel *prefs)
 {
-  gtk_widget_hide (prefs->assistant_calib);
+  gtk_widget_set_visible (prefs->assistant_calib, FALSE);
 }
 
 static gboolean
@@ -373,14 +373,14 @@ gcm_prefs_calib_apply_cb (CcColorPanel *prefs)
   if (!ret)
     {
       g_warning ("failed to start calibrate: %s", error->message);
-      gtk_widget_hide (GTK_WIDGET (window));
+      gtk_widget_set_visible (GTK_WIDGET (window), FALSE);
       return;
     }
 
   /* if we are a LiveCD then don't close the window as there is another
    * summary pane with the export button */
   if (!prefs->is_live_cd)
-    gtk_widget_hide (GTK_WIDGET (window));
+    gtk_widget_set_visible (GTK_WIDGET (window), FALSE);
 }
 
 static void
@@ -764,7 +764,7 @@ gcm_prefs_add_profiles_suitable_for_devices (CcColorPanel *prefs,
                                    gcm_prefs_combo_sort_func_cb,
                                    prefs->liststore_assign, NULL);
 
-  gtk_widget_hide (prefs->label_assign_warning);
+  gtk_widget_set_visible (prefs->label_assign_warning, FALSE);
 
   /* get profiles */
   profile_array = cd_client_get_profiles_sync (prefs->client,
@@ -1059,7 +1059,7 @@ gcm_prefs_button_assign_ok_cb (CcColorPanel *prefs)
   GtkTreeSelection *selection;
 
   /* hide window */
-  gtk_widget_hide (GTK_WIDGET (prefs->dialog_assign));
+  gtk_widget_set_visible (GTK_WIDGET (prefs->dialog_assign), FALSE);
 
   /* get the selected profile */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_assign));
@@ -1294,7 +1294,7 @@ gcm_prefs_button_assign_import_cb (CcColorPanel *prefs)
   if (file == NULL)
     {
       g_warning ("failed to get ICC file");
-      gtk_widget_hide (GTK_WIDGET (prefs->dialog_assign));
+      gtk_widget_set_visible (GTK_WIDGET (prefs->dialog_assign), FALSE);
       return;
     }
 

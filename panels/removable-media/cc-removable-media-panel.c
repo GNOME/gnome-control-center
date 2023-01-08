@@ -312,7 +312,7 @@ on_other_type_combo_box_changed (CcRemovableMediaPanel *self)
 static void
 on_extra_options_dialog_response (CcRemovableMediaPanel *self)
 {
-  gtk_widget_hide (GTK_WIDGET (self->other_type_dialog));
+  gtk_widget_set_visible (GTK_WIDGET (self->other_type_dialog), FALSE);
 
   if (self->other_application_chooser != NULL) {
     gtk_box_remove (self->other_action_box, GTK_WIDGET (self->other_application_chooser));

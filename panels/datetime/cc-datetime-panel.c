@@ -565,9 +565,9 @@ on_permission_changed (CcDateTimePanel *self)
 
   /* Hide the subdialogs if we no longer have permissions */
   if (!allowed)
-      gtk_widget_hide (GTK_WIDGET (self->datetime_dialog));
+      gtk_widget_set_visible (GTK_WIDGET (self->datetime_dialog), FALSE);
   if (!allowed && !tz_allowed)
-      gtk_widget_hide (GTK_WIDGET (self->timezone_dialog));
+      gtk_widget_set_visible (GTK_WIDGET (self->timezone_dialog), FALSE);
 }
 
 static void

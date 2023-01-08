@@ -881,7 +881,7 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   cc_color_calibrate_inhibit (calibrate, parent);
 
   g_main_loop_run (calibrate->loop);
-  gtk_widget_hide (GTK_WIDGET (window));
+  gtk_widget_set_visible (GTK_WIDGET (window), FALSE);
 
   /* we can go idle now */
   cc_color_calibrate_uninhibit (calibrate);

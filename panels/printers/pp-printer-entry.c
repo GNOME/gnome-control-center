@@ -912,8 +912,8 @@ pp_printer_entry_update (PpPrinterEntry *self,
 
   if (self->printer_make_and_model == NULL || self->printer_make_and_model[0] == '\0')
     {
-      gtk_widget_hide (GTK_WIDGET (self->printer_model_label));
-      gtk_widget_hide (GTK_WIDGET (self->printer_model));
+      gtk_widget_set_visible (GTK_WIDGET (self->printer_model_label), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->printer_model), FALSE);
     }
   else
     {
@@ -922,8 +922,8 @@ pp_printer_entry_update (PpPrinterEntry *self,
 
   if (location != NULL && location[0] == '\0')
     {
-      gtk_widget_hide (GTK_WIDGET (self->printer_location_label));
-      gtk_widget_hide (GTK_WIDGET (self->printer_location_address_label));
+      gtk_widget_set_visible (GTK_WIDGET (self->printer_location_label), FALSE);
+      gtk_widget_set_visible (GTK_WIDGET (self->printer_location_address_label), FALSE);
     }
   else
     {

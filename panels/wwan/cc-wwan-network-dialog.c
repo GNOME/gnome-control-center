@@ -117,7 +117,7 @@ cc_wwan_network_changed_cb (CcWwanNetworkDialog *self,
   gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
 
   if (self->selected_row)
-    gtk_widget_hide (GTK_WIDGET (self->selected_row->ok_emblem));
+    gtk_widget_set_visible (GTK_WIDGET (self->selected_row->ok_emblem), FALSE);
 
   self->selected_row = row;
 }
@@ -154,7 +154,7 @@ cc_wwan_network_dialog_row_new (CcWwanNetworkDialog *self,
   gtk_box_append (GTK_BOX (box), label);
 
   image = gtk_image_new_from_icon_name ("emblem-ok-symbolic");
-  gtk_widget_hide (image);
+  gtk_widget_set_visible (image, FALSE);
   row->ok_emblem = GTK_IMAGE (image);
   gtk_box_append (GTK_BOX (box), image);
 
@@ -286,7 +286,7 @@ cc_wwan_network_dialog_apply_clicked_cb (CcWwanNetworkDialog *self)
   else
     g_warn_if_reached ();
 
-  gtk_widget_hide (GTK_WIDGET (self));
+  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 }
 
 static void
@@ -311,7 +311,7 @@ cc_wwan_auto_network_changed_cb (CcWwanNetworkDialog *self,
   self->selected_row = NULL;
   gtk_widget_set_visible (GTK_WIDGET (self->network_search_title), !is_auto);
   gtk_widget_set_sensitive (GTK_WIDGET (self->operator_list_box), !is_auto);
-  gtk_widget_hide (GTK_WIDGET (self->operator_list_box));
+  gtk_widget_set_visible (GTK_WIDGET (self->operator_list_box), FALSE);
 
   if (is_auto)
     {

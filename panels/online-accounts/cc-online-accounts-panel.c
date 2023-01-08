@@ -82,7 +82,7 @@ hide_row_for_account_cb (CcOnlineAccountsPanel *self,
                          GtkWidget             *row,
                          GList                 *other_rows)
 {
-  gtk_widget_hide (row);
+  gtk_widget_set_visible (row, FALSE);
   gtk_widget_set_visible (GTK_WIDGET (self->accounts_frame), other_rows != NULL);
 }
 

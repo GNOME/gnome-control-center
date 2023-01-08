@@ -63,7 +63,7 @@ G_DEFINE_TYPE (CcCalibArea, cc_calib_area, GTK_TYPE_WINDOW)
 static void
 cc_calib_area_notify_finish (CcCalibArea *area)
 {
-  gtk_widget_hide (GTK_WIDGET (area));
+  gtk_widget_set_visible (GTK_WIDGET (area), FALSE);
 
   (*area->callback) (area, area->user_data);
 }
