@@ -5,26 +5,6 @@
       <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">System Volume</property>
-            <child>
-              <object class="AdwPreferencesRow">
-                <accessibility>
-                  <property name="label" translatable="yes">Master volume</property>
-                </accessibility>
-                <child>
-                  <object class="CcVolumeSlider" id="output_volume_slider">
-                    <property name="margin-top">12</property>
-                    <property name="margin-bottom">12</property>
-                    <property name="margin-start">12</property>
-                    <property name="margin-end">12</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Output</property>
             <property name="header-suffix">
               <object class="GtkBox">
@@ -112,6 +92,35 @@
                                 </accessibility>
                               </object>
                             </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="AdwPreferencesRow">
+                    <property name="activatable">False</property>
+                    <accessibility>
+                      <property name="label" translatable="yes">Master volume</property>
+                    </accessibility>
+                    <child>
+                      <object class="GtkBox">
+                        <property name="margin-top">12</property>
+                        <property name="margin-bottom">12</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
+                        <property name="spacing">12</property>
+                        <child>
+                          <object class="GtkLabel" id="output_volume_label">
+                            <property name="ellipsize">end</property>
+                            <property name="xalign">0</property>
+                            <property name="label" translatable="yes">Output Volume</property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="CcVolumeSlider" id="output_volume_slider">
+                            <property name="hexpand">True</property>
                           </object>
                         </child>
                       </object>
@@ -350,6 +359,7 @@
     <widgets>
       <widget name="output_device_label"/>
       <widget name="output_configuration_label"/>
+      <widget name="output_volume_label"/>
       <widget name="output_balance_label"/>
       <widget name="output_fade_label"/>
       <widget name="output_subwoofer_label"/>
