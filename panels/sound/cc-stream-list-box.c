@@ -31,8 +31,9 @@ struct _CcStreamListBox
 
   GtkListBox      *listbox;
   GtkSizeGroup    *label_size_group;
+
   GvcMixerControl *mixer_control;
-  CcStreamType     stream_type;
+  GListStore      *stream_list;
   guint            stream_added_handler_id;
   guint            stream_removed_handler_id;
 };
@@ -46,94 +47,114 @@ enum
 };
 
 static gint
-sort_cb (GtkListBoxRow *row1,
-         GtkListBoxRow *row2,
-         gpointer       user_data)
+sort_stream (gconstpointer a,
+             gconstpointer b,
+             gpointer      user_data)
 {
   CcStreamListBox *self = user_data;
-  GvcMixerStream *stream1, *stream2, *event_sink;
-  g_autofree gchar *name1 = NULL;
-  g_autofree gchar *name2 = NULL;
+  GvcMixerStream *stream_a, *stream_b, *event_sink;
+  g_autofree gchar *name_a = NULL;
+  g_autofree gchar *name_b = NULL;
 
-  stream1 = cc_stream_row_get_stream (CC_STREAM_ROW (row1));
-  stream2 = cc_stream_row_get_stream (CC_STREAM_ROW (row2));
+  stream_a = GVC_MIXER_STREAM (a);
+  stream_b = GVC_MIXER_STREAM (b);
 
   /* Put the system sound events control at the top */
   event_sink = gvc_mixer_control_get_event_sink_input (self->mixer_control);
-  if (stream1 == event_sink)
+  if (stream_a == event_sink)
     return -1;
-  else if (stream2 == event_sink)
+  else if (stream_b == event_sink)
     return 1;
 
-  name1 = g_utf8_casefold (gvc_mixer_stream_get_name (stream1), -1);
-  name2 = g_utf8_casefold (gvc_mixer_stream_get_name (stream2), -1);
+  name_a = g_utf8_casefold (gvc_mixer_stream_get_name (stream_a), -1);
+  name_b = g_utf8_casefold (gvc_mixer_stream_get_name (stream_b), -1);
 
-  return g_strcmp0 (name1, name2);
+  return g_strcmp0 (name_a, name_b);
+}
+
+static gboolean
+filter_stream (gpointer item,
+               gpointer user_data)
+{
+  GvcMixerStream *stream = item;
+  const gchar *app_id = gvc_mixer_stream_get_application_id (stream);
+
+  /* Filter out master volume controls */
+  if (g_strcmp0 (app_id, "org.gnome.VolumeControl") == 0 ||
+      g_strcmp0 (app_id, "org.PulseAudio.pavucontrol") == 0)
+    {
+      return FALSE;
+    }
+
+  /* Filter out streams that aren't volume controls */
+  if (GVC_IS_MIXER_SOURCE (stream) ||
+      GVC_IS_MIXER_SINK (stream) ||
+      gvc_mixer_stream_is_virtual (stream) ||
+      gvc_mixer_stream_is_event_stream (stream))
+    {
+      return FALSE;
+    }
+
+  return TRUE;
+}
+
+static GtkWidget *
+create_stream_row (gpointer item,
+                   gpointer user_data)
+{
+  CcStreamListBox *self = user_data;
+  GvcMixerStream *stream = item;
+  guint id;
+  CcStreamRow *row;
+
+  id = gvc_mixer_stream_get_id (stream);
+  row = cc_stream_row_new (self->label_size_group, stream, id, CC_STREAM_TYPE_OUTPUT, self->mixer_control);
+
+  return GTK_WIDGET (row);
 }
 
 static void
 stream_added_cb (CcStreamListBox *self,
                  guint            id)
 {
-  GvcMixerStream *stream;
-  const gchar *app_id;
-  CcStreamRow *row;
+  GvcMixerStream *stream = gvc_mixer_control_lookup_stream_id (self->mixer_control, id);
 
-  stream = gvc_mixer_control_lookup_stream_id (self->mixer_control, id);
   if (stream == NULL)
     return;
 
-  app_id = gvc_mixer_stream_get_application_id (stream);
-
-  /* Skip master volume controls */
-  if (g_strcmp0 (app_id, "org.gnome.VolumeControl") == 0 ||
-      g_strcmp0 (app_id, "org.PulseAudio.pavucontrol") == 0)
-    {
-      return;
-    }
-
-  /* Skip streams that aren't volume controls */
-  if (GVC_IS_MIXER_SOURCE (stream) ||
-      GVC_IS_MIXER_SINK (stream) ||
-      gvc_mixer_stream_is_virtual (stream) ||
-      gvc_mixer_stream_is_event_stream (stream))
-    {
-      return;
-    }
-
-  row = cc_stream_row_new (self->label_size_group, stream, id, self->stream_type, self->mixer_control);
-  gtk_list_box_append (self->listbox, GTK_WIDGET (row));
-}
-
-static GtkWidget *
-find_row (CcStreamListBox *self,
-          guint            id)
-{
-  GtkWidget *child;
-
-  for (child = gtk_widget_get_first_child (GTK_WIDGET (self->listbox));
-       child;
-       child = gtk_widget_get_next_sibling (child))
-    {
-      if (!CC_IS_STREAM_ROW (child))
-        continue;
-
-      if (id == cc_stream_row_get_id (CC_STREAM_ROW (child)))
-        return child;
-    }
-
-  return NULL;
+  g_list_store_append (self->stream_list, G_OBJECT (stream));
 }
 
 static void
 stream_removed_cb (CcStreamListBox *self,
                    guint            id)
 {
-  GtkWidget *row;
+  guint n_items = g_list_model_get_n_items (G_LIST_MODEL (self->stream_list));
 
-  row = find_row (self, id);
-  if (row != NULL)
-    gtk_list_box_remove (self->listbox, row);
+  for (guint i = 0; i < n_items; i++)
+    {
+      g_autoptr(GObject) item;
+      guint stream_id;
+
+      item = g_list_model_get_item (G_LIST_MODEL (self->stream_list), i);
+      stream_id = gvc_mixer_stream_get_id (GVC_MIXER_STREAM (item));
+
+      if (id == stream_id)
+        {
+          g_list_store_remove (self->stream_list, i);
+          return;
+        }
+    }
+}
+
+static void
+add_stream (gpointer data,
+            gpointer user_data)
+{
+  CcStreamListBox *self = user_data;
+  GvcMixerStream *stream = data;
+
+  g_list_store_append (self->stream_list, G_OBJECT (stream));
 }
 
 static void
@@ -205,17 +226,33 @@ cc_stream_list_box_class_init (CcStreamListBoxClass *klass)
 void
 cc_stream_list_box_init (CcStreamListBox *self)
 {
-  g_resources_register (cc_sound_get_resource ());
+  GtkFilter *filter;
+  GtkFilterListModel *filter_model;
+  GtkSorter *sorter;
+  GtkSortListModel *sort_model;
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
-  gtk_list_box_set_sort_func (self->listbox, sort_cb, self, NULL);
+  self->stream_list = g_list_store_new (GVC_TYPE_MIXER_STREAM);
+
+  filter = GTK_FILTER (gtk_custom_filter_new (filter_stream, NULL, NULL));
+  filter_model = gtk_filter_list_model_new (G_LIST_MODEL (self->stream_list), filter);
+
+  sorter = GTK_SORTER (gtk_custom_sorter_new (sort_stream, self, NULL));
+  sort_model = gtk_sort_list_model_new (G_LIST_MODEL (filter_model), sorter);
+
+  gtk_list_box_bind_model (self->listbox,
+                           G_LIST_MODEL (sort_model),
+                           create_stream_row,
+                           self, NULL);
 }
 
 void
 cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
                                       GvcMixerControl *mixer_control)
 {
+  g_autoptr(GSList) streams = NULL;
+
   g_return_if_fail (CC_IS_STREAM_LIST_BOX (self));
 
   if (self->mixer_control != NULL)
@@ -229,6 +266,9 @@ cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
 
   self->mixer_control = g_object_ref (mixer_control);
 
+  streams = gvc_mixer_control_get_streams (self->mixer_control);
+  g_slist_foreach (streams, add_stream, self);
+
   self->stream_added_handler_id = g_signal_connect_object (self->mixer_control,
                                                            "stream-added",
                                                            G_CALLBACK (stream_added_cb),
@@ -237,12 +277,4 @@ cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
                                                              "stream-removed",
                                                              G_CALLBACK (stream_removed_cb),
                                                              self, G_CONNECT_SWAPPED);
-}
-
-void cc_stream_list_box_set_stream_type   (CcStreamListBox *self,
-                                           CcStreamType     stream_type)
-{
-  g_return_if_fail (CC_IS_STREAM_LIST_BOX (self));
-
-  self->stream_type = stream_type;
 }

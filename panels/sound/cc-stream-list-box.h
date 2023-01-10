@@ -29,10 +29,7 @@ G_BEGIN_DECLS
 #define CC_TYPE_STREAM_LIST_BOX (cc_stream_list_box_get_type ())
 G_DECLARE_FINAL_TYPE (CcStreamListBox, cc_stream_list_box, CC, STREAM_LIST_BOX, GtkBox)
 
-void cc_stream_list_box_set_mixer_control (CcStreamListBox *combo_box,
+void cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
                                            GvcMixerControl *mixer_control);
-
-void cc_stream_list_box_set_stream_type   (CcStreamListBox *combo_box,
-                                           CcStreamType     type);
 
 G_END_DECLS
