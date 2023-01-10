@@ -34,9 +34,9 @@ sources = files(
   'cc-profile-combo-box.c',
   'cc-sound-panel.c',
   'cc-speaker-test-button.c',
-  'cc-stream-list-box.c',
   'cc-stream-row.c',
   'cc-subwoofer-slider.c',
+  'cc-volume-levels-window.c',
   'cc-volume-slider.c',
 )
 
@@ -58,6 +58,7 @@ resource_data = files(
   'cc-sound-panel.ui',
   'cc-stream-row.ui',
   'cc-subwoofer-slider.ui',
+  'cc-volume-levels-window.ui',
   'cc-volume-slider.ui',
   'output-test-wheel.css',
 )

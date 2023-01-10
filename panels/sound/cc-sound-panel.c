@@ -39,8 +39,8 @@
 #include "cc-profile-combo-box.h"
 #include "cc-sound-panel.h"
 #include "cc-sound-resources.h"
-#include "cc-stream-list-box.h"
 #include "cc-subwoofer-slider.h"
+#include "cc-volume-levels-window.h"
 #include "cc-volume-slider.h"
 
 struct _CcSoundPanel
@@ -56,7 +56,6 @@ struct _CcSoundPanel
   CcProfileComboBox *input_profile_combo_box;
   GtkListBoxRow     *input_profile_row;
   CcVolumeSlider    *input_volume_slider;
-  GtkSizeGroup      *label_size_group;
   CcDeviceComboBox  *output_device_combo_box;
   GtkListStore      *output_device_model;
   CcLevelBar        *output_level_bar;
@@ -64,7 +63,6 @@ struct _CcSoundPanel
   CcProfileComboBox *output_profile_combo_box;
   GtkListBoxRow     *output_profile_row;
   CcVolumeSlider    *output_volume_slider;
-  CcStreamListBox   *stream_list_box;
   GtkListBoxRow     *subwoofer_row;
   CcSubwooferSlider *subwoofer_slider;
 
@@ -216,6 +214,21 @@ test_output_configuration_button_clicked_cb (CcSoundPanel *self)
   gtk_window_present (GTK_WINDOW (window));
 }
 
+static void
+volume_levels_activated_cb (CcSoundPanel *self)
+{
+  CcVolumeLevelsWindow *volume_levels;
+  GtkWindow *toplevel;
+  CcShell *shell;
+
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = GTK_WINDOW (cc_shell_get_toplevel (shell));
+
+  volume_levels = cc_volume_levels_window_new (self->mixer_control);
+  gtk_window_set_transient_for (GTK_WINDOW (volume_levels), toplevel);
+  gtk_window_present (GTK_WINDOW (volume_levels));
+}
+
 static const char *
 cc_sound_panel_get_help_uri (CcPanel *panel)
 {
@@ -255,20 +268,19 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_volume_slider);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, label_size_group);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_device_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_level_bar);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_volume_slider);
-  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, stream_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, subwoofer_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, subwoofer_slider);
 
   gtk_widget_class_bind_template_callback (widget_class, input_device_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, output_device_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, test_output_configuration_button_clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, volume_levels_activated_cb);
 
   g_type_ensure (CC_TYPE_ALERT_CHOOSER);
   g_type_ensure (CC_TYPE_BALANCE_SLIDER);
@@ -276,7 +288,6 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   g_type_ensure (CC_TYPE_FADE_SLIDER);
   g_type_ensure (CC_TYPE_LEVEL_BAR);
   g_type_ensure (CC_TYPE_PROFILE_COMBO_BOX);
-  g_type_ensure (CC_TYPE_STREAM_LIST_BOX);
   g_type_ensure (CC_TYPE_SUBWOOFER_SLIDER);
   g_type_ensure (CC_TYPE_VOLUME_SLIDER);
 }
@@ -299,7 +310,6 @@ cc_sound_panel_init (CcSoundPanel *self)
   self->mixer_control = gvc_mixer_control_new ("GNOME Settings");
   gvc_mixer_control_open (self->mixer_control);
 
-  cc_stream_list_box_set_mixer_control (self->stream_list_box, self->mixer_control);
   cc_volume_slider_set_mixer_control (self->input_volume_slider, self->mixer_control);
   cc_volume_slider_set_mixer_control (self->output_volume_slider, self->mixer_control);
   cc_subwoofer_slider_set_mixer_control (self->subwoofer_slider, self->mixer_control);

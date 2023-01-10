@@ -1,6 +1,6 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
- *
+/*
  * Copyright (C) 2018 Canonical Ltd.
+ * Copyright (C) 2023 Marco Melorio
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,38 +20,28 @@
 #include <gvc-mixer-sink.h>
 #include <gvc-mixer-source.h>
 
-#include "cc-stream-list-box.h"
 #include "cc-stream-row.h"
-#include "cc-sound-enums.h"
-#include "cc-sound-resources.h"
+#include "cc-volume-levels-window.h"
 
-struct _CcStreamListBox
+struct _CcVolumeLevelsWindow
 {
-  GtkBox           parent_instance;
+  GtkWindow        parent_instance;
 
   GtkListBox      *listbox;
   GtkSizeGroup    *label_size_group;
 
   GvcMixerControl *mixer_control;
   GListStore      *stream_list;
-  guint            stream_added_handler_id;
-  guint            stream_removed_handler_id;
 };
 
-G_DEFINE_TYPE (CcStreamListBox, cc_stream_list_box, GTK_TYPE_BOX)
-
-enum
-{
-  PROP_0,
-  PROP_LABEL_SIZE_GROUP
-};
+G_DEFINE_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, GTK_TYPE_WINDOW)
 
 static gint
 sort_stream (gconstpointer a,
              gconstpointer b,
              gpointer      user_data)
 {
-  CcStreamListBox *self = user_data;
+  CcVolumeLevelsWindow *self = user_data;
   GvcMixerStream *stream_a, *stream_b, *event_sink;
   g_autofree gchar *name_a = NULL;
   g_autofree gchar *name_b = NULL;
@@ -102,7 +92,7 @@ static GtkWidget *
 create_stream_row (gpointer item,
                    gpointer user_data)
 {
-  CcStreamListBox *self = user_data;
+  CcVolumeLevelsWindow *self = user_data;
   GvcMixerStream *stream = item;
   guint id;
   CcStreamRow *row;
@@ -114,8 +104,8 @@ create_stream_row (gpointer item,
 }
 
 static void
-stream_added_cb (CcStreamListBox *self,
-                 guint            id)
+stream_added_cb (CcVolumeLevelsWindow *self,
+                 guint                 id)
 {
   GvcMixerStream *stream = gvc_mixer_control_lookup_stream_id (self->mixer_control, id);
 
@@ -126,8 +116,8 @@ stream_added_cb (CcStreamListBox *self,
 }
 
 static void
-stream_removed_cb (CcStreamListBox *self,
-                   guint            id)
+stream_removed_cb (CcVolumeLevelsWindow *self,
+                   guint                 id)
 {
   guint n_items = g_list_model_get_n_items (G_LIST_MODEL (self->stream_list));
 
@@ -151,80 +141,38 @@ static void
 add_stream (gpointer data,
             gpointer user_data)
 {
-  CcStreamListBox *self = user_data;
+  CcVolumeLevelsWindow *self = user_data;
   GvcMixerStream *stream = data;
 
   g_list_store_append (self->stream_list, G_OBJECT (stream));
 }
 
 static void
-cc_stream_list_box_set_property (GObject      *object,
-                                 guint         property_id,
-                                 const GValue *value,
-                                 GParamSpec   *pspec)
+cc_volume_levels_window_dispose (GObject *object)
 {
-  CcStreamListBox *self = CC_STREAM_LIST_BOX (object);
-
-  switch (property_id) {
-  case PROP_LABEL_SIZE_GROUP:
-    self->label_size_group = g_value_dup_object (value);
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-  }
-}
-
-static void
-cc_stream_list_box_get_property (GObject    *object,
-                                 guint       property_id,
-                                 GValue     *value,
-                                 GParamSpec *pspec)
-{
-  CcStreamListBox *self = CC_STREAM_LIST_BOX (object);
-
-  switch (property_id) {
-  case PROP_LABEL_SIZE_GROUP:
-    g_value_set_object (value, self->label_size_group);
-    break;
-  default:
-    G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-  }
-}
-
-static void
-cc_stream_list_box_dispose (GObject *object)
-{
-  CcStreamListBox *self = CC_STREAM_LIST_BOX (object);
+  CcVolumeLevelsWindow *self = CC_VOLUME_LEVELS_WINDOW (object);
 
   g_clear_object (&self->mixer_control);
 
-  G_OBJECT_CLASS (cc_stream_list_box_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_volume_levels_window_parent_class)->dispose (object);
 }
 
 void
-cc_stream_list_box_class_init (CcStreamListBoxClass *klass)
+cc_volume_levels_window_class_init (CcVolumeLevelsWindowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->set_property = cc_stream_list_box_set_property;
-  object_class->get_property = cc_stream_list_box_get_property;
-  object_class->dispose = cc_stream_list_box_dispose;
+  object_class->dispose = cc_volume_levels_window_dispose;
 
-  g_object_class_install_property (object_class, PROP_LABEL_SIZE_GROUP,
-                                   g_param_spec_object ("label-size-group",
-                                                        NULL,
-                                                        NULL,
-                                                        GTK_TYPE_SIZE_GROUP,
-                                                        G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-volume-levels-window.ui");
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-stream-list-box.ui");
-
-  gtk_widget_class_bind_template_child (widget_class, CcStreamListBox, listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsWindow, listbox);
+  gtk_widget_class_bind_template_child (widget_class, CcVolumeLevelsWindow, label_size_group);
 }
 
 void
-cc_stream_list_box_init (CcStreamListBox *self)
+cc_volume_levels_window_init (CcVolumeLevelsWindow *self)
 {
   GtkFilter *filter;
   GtkFilterListModel *filter_model;
@@ -247,34 +195,27 @@ cc_stream_list_box_init (CcStreamListBox *self)
                            self, NULL);
 }
 
-void
-cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
-                                      GvcMixerControl *mixer_control)
+CcVolumeLevelsWindow *
+cc_volume_levels_window_new (GvcMixerControl *mixer_control)
 {
+  CcVolumeLevelsWindow *self;
   g_autoptr(GSList) streams = NULL;
 
-  g_return_if_fail (CC_IS_STREAM_LIST_BOX (self));
-
-  if (self->mixer_control != NULL)
-    {
-      g_signal_handler_disconnect (self->mixer_control, self->stream_added_handler_id);
-      self->stream_added_handler_id = 0;
-      g_signal_handler_disconnect (self->mixer_control, self->stream_removed_handler_id);
-      self->stream_removed_handler_id = 0;
-    }
-  g_clear_object (&self->mixer_control);
+  self = g_object_new (CC_TYPE_VOLUME_LEVELS_WINDOW, NULL);
 
   self->mixer_control = g_object_ref (mixer_control);
 
   streams = gvc_mixer_control_get_streams (self->mixer_control);
   g_slist_foreach (streams, add_stream, self);
 
-  self->stream_added_handler_id = g_signal_connect_object (self->mixer_control,
-                                                           "stream-added",
-                                                           G_CALLBACK (stream_added_cb),
-                                                           self, G_CONNECT_SWAPPED);
-  self->stream_removed_handler_id = g_signal_connect_object (self->mixer_control,
-                                                             "stream-removed",
-                                                             G_CALLBACK (stream_removed_cb),
-                                                             self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->mixer_control,
+                           "stream-added",
+                           G_CALLBACK (stream_added_cb),
+                           self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->mixer_control,
+                           "stream-removed",
+                           G_CALLBACK (stream_removed_cb),
+                           self, G_CONNECT_SWAPPED);
+
+  return self;
 }

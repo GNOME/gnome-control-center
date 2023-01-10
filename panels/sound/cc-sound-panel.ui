@@ -25,16 +25,6 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Volume Levels</property>
-            <child>
-              <object class="CcStreamListBox" id="stream_list_box">
-                <property name="label-size-group">label_size_group</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="AdwPreferencesGroup">
             <property name="title" translatable="yes">Output</property>
             <property name="header-suffix">
               <object class="GtkBox">
@@ -328,7 +318,23 @@
         </child>
         <child>
           <object class="AdwPreferencesGroup">
-            <property name="title" translatable="yes">Alert Sound</property>
+            <property name="title" translatable="yes">Sounds</property>
+            <child>
+              <object class="AdwActionRow">
+                <property name="title" translatable="yes">Volume Levels</property>
+                <property name="activatable">True</property>
+                <signal name="activated" handler="volume_levels_activated_cb" swapped="yes"/>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">go-next-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwPreferencesGroup">
             <child>
               <object class="CcAlertChooser">
                 <property name="hexpand">True</property>
@@ -339,7 +345,7 @@
       </object>
     </child>
   </template>
-  <object class="GtkSizeGroup" id="label_size_group">
+  <object class="GtkSizeGroup">
     <property name="mode">horizontal</property>
     <widgets>
       <widget name="output_device_label"/>

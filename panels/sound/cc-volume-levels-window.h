@@ -1,6 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
- *
- * Copyright (C) 2018 Canonical Ltd.
+/*
+ * Copyright (C) 2023 Marco Melorio
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -19,17 +18,13 @@
 #pragma once
 
 #include <gtk/gtk.h>
-#include <pulse/pulseaudio.h>
 #include <gvc-mixer-control.h>
-
-#include "cc-sound-enums.h"
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_STREAM_LIST_BOX (cc_stream_list_box_get_type ())
-G_DECLARE_FINAL_TYPE (CcStreamListBox, cc_stream_list_box, CC, STREAM_LIST_BOX, GtkBox)
+#define CC_TYPE_VOLUME_LEVELS_WINDOW (cc_volume_levels_window_get_type ())
+G_DECLARE_FINAL_TYPE (CcVolumeLevelsWindow, cc_volume_levels_window, CC, VOLUME_LEVELS_WINDOW, GtkWindow)
 
-void cc_stream_list_box_set_mixer_control (CcStreamListBox *self,
-                                           GvcMixerControl *mixer_control);
+CcVolumeLevelsWindow *cc_volume_levels_window_new (GvcMixerControl *mixer_control);
 
 G_END_DECLS
