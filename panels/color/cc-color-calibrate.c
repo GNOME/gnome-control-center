@@ -860,7 +860,7 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
                                                "dialog_calibrate"));
   gtk_window_set_modal (window, TRUE);
-  gtk_widget_set_visible (GTK_WIDGET (window), TRUE);
+  gtk_window_present (window);
 
   /* show correct buttons */
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
@@ -878,7 +878,7 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   cc_color_calibrate_inhibit (calibrate, parent);
 
   g_main_loop_run (calibrate->loop);
-  gtk_widget_set_visible (GTK_WIDGET (window), FALSE);
+  gtk_window_close (window);
 
   /* we can go idle now */
   cc_color_calibrate_uninhibit (calibrate);

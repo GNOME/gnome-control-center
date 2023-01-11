@@ -373,14 +373,14 @@ gcm_prefs_calib_apply_cb (CcColorPanel *prefs)
   if (!ret)
     {
       g_warning ("failed to start calibrate: %s", error->message);
-      gtk_widget_set_visible (GTK_WIDGET (window), FALSE);
+      gtk_window_close (window);
       return;
     }
 
   /* if we are a LiveCD then don't close the window as there is another
    * summary pane with the export button */
   if (!prefs->is_live_cd)
-    gtk_widget_set_visible (GTK_WIDGET (window), FALSE);
+    gtk_window_close (window);
 }
 
 static void
@@ -1059,7 +1059,7 @@ gcm_prefs_button_assign_ok_cb (CcColorPanel *prefs)
   GtkTreeSelection *selection;
 
   /* hide window */
-  gtk_widget_set_visible (GTK_WIDGET (prefs->dialog_assign), FALSE);
+  gtk_window_close (GTK_WINDOW (prefs->dialog_assign));
 
   /* get the selected profile */
   selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (prefs->treeview_assign));
