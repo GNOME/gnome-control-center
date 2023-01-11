@@ -2,15 +2,6 @@
 <interface>
   <template class="CcVolumeSlider" parent="GtkWidget">
     <child>
-      <object class="GtkScale" id="volume_scale">
-        <property name="adjustment">volume_adjustment</property>
-        <property name="hexpand">True</property>
-        <accessibility>
-          <property name="label" translatable="yes">Volume</property>
-        </accessibility>
-      </object>
-    </child>
-    <child>
       <object class="GtkToggleButton" id="mute_button">
         <property name="icon_name">audio-volume-muted-symbolic</property>
         <accessibility>
@@ -20,6 +11,15 @@
         <style>
           <class name="flat" />
         </style>
+      </object>
+    </child>
+    <child>
+      <object class="GtkScale" id="volume_scale">
+        <property name="adjustment">volume_adjustment</property>
+        <property name="hexpand">True</property>
+        <accessibility>
+          <property name="label" translatable="yes">Volume</property>
+        </accessibility>
       </object>
     </child>
   </template>
