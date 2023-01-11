@@ -16,6 +16,7 @@
  * along with this program; if not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "cc-level-bar.h"
 #include "cc-sound-resources.h"
 #include "cc-stream-row.h"
 #include "cc-volume-slider.h"
@@ -31,6 +32,7 @@ struct _CcStreamRow
   GtkLabel       *name_label;
   GtkImage       *icon_image;
   CcVolumeSlider *volume_slider;
+  CcLevelBar     *level_bar;
 
   GvcMixerStream *stream;
   guint           id;
@@ -62,6 +64,7 @@ cc_stream_row_class_init (CcStreamRowClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcStreamRow, icon_image);
   gtk_widget_class_bind_template_child (widget_class, CcStreamRow, name_label);
   gtk_widget_class_bind_template_child (widget_class, CcStreamRow, volume_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcStreamRow, level_bar);
 }
 
 void
@@ -103,6 +106,7 @@ cc_stream_row_new (GtkSizeGroup    *size_group,
   gtk_label_set_label (self->name_label, gvc_mixer_stream_get_name (stream));
   cc_volume_slider_set_stream (self->volume_slider, stream, stream_type);
   cc_volume_slider_set_mixer_control (self->volume_slider, mixer_control);
+  cc_level_bar_set_stream (self->level_bar, stream);
 
   gtk_size_group_add_widget (size_group, GTK_WIDGET (self->label_box));
 
