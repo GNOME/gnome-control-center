@@ -146,7 +146,6 @@ int main (int argc, char **argv)
 	devices = create_fake_h610pro ();
 	add_page (devices, notebook);
 
-	gtk_widget_set_visible (window, TRUE);
 
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
     g_main_context_iteration (NULL, TRUE);

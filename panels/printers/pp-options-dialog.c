@@ -346,7 +346,6 @@ ipp_option_add (IPPAttribute *attr_supported,
       position = grid_get_height (grid);
 
       label = gtk_label_new (option_display_name);
-      gtk_widget_set_visible (GTK_WIDGET (label), TRUE);
       gtk_label_set_mnemonic_widget (GTK_LABEL (label), widget);
       gtk_widget_add_css_class (label, "dim-label");
       gtk_widget_set_halign (label, GTK_ALIGN_END);

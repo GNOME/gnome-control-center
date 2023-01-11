@@ -138,7 +138,6 @@ cc_wwan_mode_dialog_row_new (CcWwanModeDialog *self,
   row->preferred = preferred;
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_set_visible (box, TRUE);
   g_object_set (box,
                 "margin-top", 18,
                 "margin-bottom", 18,

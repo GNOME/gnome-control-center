@@ -139,7 +139,6 @@ cc_wwan_network_dialog_row_new (CcWwanNetworkDialog *self,
   row = g_object_new (CC_TYPE_WWAN_NETWORK_ROW, NULL);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_set_visible (box, TRUE);
   g_object_set (box,
                 "margin-top", 18,
                 "margin-bottom", 18,

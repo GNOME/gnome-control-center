@@ -724,7 +724,6 @@ add_printer_entry (CcPrintersPanel *self,
   content = (GtkWidget*) gtk_builder_get_object (self->builder, "content");
 
   printer_entry = pp_printer_entry_new (printer, self->is_authorized);
-  gtk_widget_set_visible (GTK_WIDGET (printer_entry), TRUE);
 
   widgets = pp_printer_entry_get_size_group_widgets (printer_entry);
   for (l = widgets; l != NULL; l = l->next)

@@ -371,7 +371,6 @@ cc_calib_area_new (GdkDisplay     *display,
   else
     gtk_window_fullscreen (GTK_WINDOW (calib_area));
 
-  gtk_widget_set_visible (GTK_WIDGET (calib_area), TRUE);
 
   return calib_area;
 }

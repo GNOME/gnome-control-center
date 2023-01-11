@@ -68,7 +68,6 @@ add_all_languages (CcLanguageChooser *self)
                         continue;
 
                 row = cc_language_row_new (locale_ids[i]);
-                gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
                 is_initial = (g_hash_table_lookup (initial, locale_ids[i]) != NULL);
                 cc_language_row_set_is_extra (row, !is_initial);
                 gtk_list_box_prepend (self->language_listbox, GTK_WIDGET (row));

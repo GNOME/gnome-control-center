@@ -107,7 +107,6 @@ cc_avatar_chooser_crop (CcAvatarChooser *self,
 
         /* Content */
         self->crop_area = cc_crop_area_new ();
-        gtk_widget_set_visible (self->crop_area, TRUE);
         cc_crop_area_set_min_size (CC_CROP_AREA (self->crop_area), 48, 48);
         cc_crop_area_set_paintable (CC_CROP_AREA (self->crop_area),
                                     GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf)));
@@ -118,7 +117,6 @@ cc_avatar_chooser_crop (CcAvatarChooser *self,
 
         gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
 
-        gtk_widget_set_visible (dialog, TRUE);
 }
 
 static void

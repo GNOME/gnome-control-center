@@ -240,7 +240,6 @@ populate_dialog (PpPPDSelectionDialog *self)
   header = gtk_label_new (gtk_tree_view_column_get_title (column));
   gtk_widget_set_margin_start (header, 10);
   gtk_tree_view_column_set_widget (column, header);
-  gtk_widget_set_visible (header, TRUE);
   gtk_tree_view_append_column (models_treeview, column);
 
 

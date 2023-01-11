@@ -281,7 +281,6 @@ cc_color_device_init (CcColorDevice *color_device)
   gtk_widget_set_valign (color_device->widget_button, GTK_ALIGN_CENTER);
   gtk_widget_add_css_class (color_device->widget_button, "flat");
   gtk_button_set_child (GTK_BUTTON (color_device->widget_button), color_device->widget_arrow);
-  gtk_widget_set_visible (color_device->widget_arrow, TRUE);
   gtk_widget_set_margin_top (color_device->widget_button, 9);
   gtk_widget_set_margin_bottom (color_device->widget_button, 9);
   gtk_widget_set_margin_end (color_device->widget_button, 12);

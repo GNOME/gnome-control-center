@@ -680,7 +680,6 @@ add_default_row (CcInputChooser *self,
   info->default_input_source_row = input_source_row_new (self, type, id);
   if (info->default_input_source_row)
     {
-      gtk_widget_set_visible (GTK_WIDGET (info->default_input_source_row), TRUE);
       g_object_ref_sink (GTK_WIDGET (info->default_input_source_row));
       g_object_set_data (G_OBJECT (info->default_input_source_row), "default", GINT_TO_POINTER (TRUE));
       g_object_set_data (G_OBJECT (info->default_input_source_row), "locale-info", info);
@@ -713,7 +712,6 @@ add_rows_to_table (CcInputChooser *self,
       if (g_strcmp0 (id, default_id))
         {
           row = input_source_row_new (self, type, id);
-          gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
           if (row)
             {
               g_object_set_data (G_OBJECT (row), "locale-info", info);

@@ -237,7 +237,6 @@ cc_wacom_button_row_new (guint      button,
   row->settings = g_object_ref (settings);
 
   grid = gtk_grid_new ();
-  gtk_widget_set_visible (grid, TRUE);
   gtk_grid_set_row_homogeneous (GTK_GRID (grid), TRUE);
   gtk_grid_set_column_homogeneous (GTK_GRID (grid), TRUE);
 
@@ -257,7 +256,6 @@ cc_wacom_button_row_new (guint      button,
   shortcut_button = gsd_wacom_key_shortcut_button_new ();
   g_object_set (shortcut_button, "mode", GSD_WACOM_KEY_SHORTCUT_BUTTON_MODE_ALL, NULL);
   gtk_grid_attach (GTK_GRID (grid), shortcut_button, 2, 0, 1, 1);
-  gtk_widget_set_visible (shortcut_button, TRUE);
   row->key_shortcut_button = GSD_WACOM_KEY_SHORTCUT_BUTTON (shortcut_button);
   g_signal_connect_object (shortcut_button, "key-shortcut-cleared",
                            G_CALLBACK (on_key_shortcut_cleared),
