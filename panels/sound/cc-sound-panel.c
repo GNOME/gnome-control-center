@@ -48,7 +48,9 @@ struct _CcSoundPanel
   CcPanel            parent_instance;
 
   CcLevelBar        *output_level_bar;
+  GtkListBox        *output_list_box;
   CcDeviceComboBox  *output_device_combo_box;
+  GtkButton         *output_test_button;
   GtkListBoxRow     *output_profile_row;
   CcProfileComboBox *output_profile_combo_box;
   CcVolumeSlider    *output_volume_slider;
@@ -57,11 +59,14 @@ struct _CcSoundPanel
   CcFadeSlider      *fade_slider;
   GtkListBoxRow     *subwoofer_row;
   CcSubwooferSlider *subwoofer_slider;
+  AdwActionRow      *output_no_devices_row;
   CcLevelBar        *input_level_bar;
+  GtkListBox        *input_list_box;
   CcDeviceComboBox  *input_device_combo_box;
   GtkListBoxRow     *input_profile_row;
   CcProfileComboBox *input_profile_combo_box;
   CcVolumeSlider    *input_volume_slider;
+  AdwActionRow      *input_no_devices_row;
   GtkLabel          *alert_sound_label;
 
   GvcMixerControl   *mixer_control;
@@ -124,6 +129,11 @@ output_device_changed_cb (CcSoundPanel *self)
 
   device = cc_device_combo_box_get_device (self->output_device_combo_box);
 
+  gtk_widget_set_visible (GTK_WIDGET (self->output_level_bar), device != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->output_test_button), device != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->output_list_box), device != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->output_no_devices_row), device == NULL);
+
   if (device != NULL)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
 
@@ -148,6 +158,10 @@ input_device_changed_cb (CcSoundPanel *self)
   GvcMixerStream *stream = NULL;
 
   device = cc_device_combo_box_get_device (self->input_device_combo_box);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->input_level_bar), device != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->input_list_box), device != NULL);
+  gtk_widget_set_visible (GTK_WIDGET (self->input_no_devices_row), device == NULL);
 
   if (device != NULL)
     stream = gvc_mixer_control_get_stream_from_device (self->mixer_control, device);
@@ -285,7 +299,9 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-sound-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_level_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_device_combo_box);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_test_button);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_profile_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_volume_slider);
@@ -294,11 +310,14 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, fade_slider);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, subwoofer_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, subwoofer_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_no_devices_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_level_bar);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_device_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_profile_combo_box);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_volume_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, input_no_devices_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, alert_sound_label);
 
   gtk_widget_class_bind_template_callback (widget_class, input_device_changed_cb);
