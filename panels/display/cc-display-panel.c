@@ -796,12 +796,8 @@ rebuild_ui (CcDisplayPanel *panel)
   n_outputs = g_list_length (outputs);
   type = config_get_current_type (panel);
 
-  if (n_outputs == 2 && n_usable_outputs == 2)
+  if (n_usable_outputs > 1)
     {
-      /* We only show the top chooser with two monitors that are
-       * both usable (i.e. two monitors incl. internal and lid not closed).
-       * In this case, the arrangement widget is shown if we are in JOIN mode.
-       */
       if (type > CC_DISPLAY_CONFIG_LAST_VALID)
         type = CC_DISPLAY_CONFIG_JOIN;
 
@@ -813,21 +809,6 @@ rebuild_ui (CcDisplayPanel *panel)
         move_display_settings_to_main_page (panel);
       else
         move_display_settings_to_separate_page (panel);
-    }
-  else if (n_usable_outputs > 1)
-    {
-      /* We have more than one usable monitor. In this case there is no chooser,
-       * and we always show the arrangement widget.
-       */
-      gtk_widget_set_visible (panel->display_settings_group, TRUE);
-      gtk_widget_set_visible (panel->display_multiple_displays, FALSE);
-      gtk_widget_set_visible (panel->arrangement_row, TRUE);
-
-      /* Mirror is also invalid as it cannot be configured using this UI. */
-      if (type == CC_DISPLAY_CONFIG_CLONE || type > CC_DISPLAY_CONFIG_LAST_VALID)
-        type = CC_DISPLAY_CONFIG_JOIN;
-
-      move_display_settings_to_separate_page (panel);
     }
   else
     {

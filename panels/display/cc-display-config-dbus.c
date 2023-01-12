@@ -1265,8 +1265,12 @@ cc_display_config_dbus_set_cloning (CcDisplayConfig *pself,
     {
       logical_monitor = g_object_new (CC_TYPE_DISPLAY_LOGICAL_MONITOR, NULL);
       for (l = self->monitors; l != NULL; l = l->next)
-        cc_display_monitor_dbus_set_logical_monitor (CC_DISPLAY_MONITOR_DBUS (l->data),
-                                                     logical_monitor);
+        {
+          if (!cc_display_monitor_is_usable (l->data))
+            continue;
+          cc_display_monitor_dbus_set_logical_monitor (CC_DISPLAY_MONITOR_DBUS (l->data),
+                                                       logical_monitor);
+        }
       register_logical_monitor (self, logical_monitor);
     }
   else if (!clone && is_cloning)
