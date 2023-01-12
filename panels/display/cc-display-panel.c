@@ -878,6 +878,9 @@ reset_current_config (CcDisplayPanel *panel)
           if (cc_display_monitor_is_builtin (output) && panel->lid_is_closed)
             cc_display_monitor_set_usable (output, FALSE);
         }
+
+      /* Recalculate UI numbers after the monitor usability is determined to skip numbering gaps. */
+      cc_display_config_update_ui_numbers_names(panel->current_config);
     }
 
   cc_display_arrangement_set_config (panel->arrangement, panel->current_config);

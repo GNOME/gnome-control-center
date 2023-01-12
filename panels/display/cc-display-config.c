@@ -465,7 +465,6 @@ cc_display_config_constructed (GObject *object)
   CcDisplayConfigPrivate *priv = cc_display_config_get_instance_private (self);
   GList *monitors = cc_display_config_get_monitors (self);
   GList *item;
-  gint ui_number = 1;
 
   for (item = monitors; item != NULL; item = item->next)
     {
@@ -477,16 +476,7 @@ cc_display_config_constructed (GObject *object)
         priv->ui_sorted_monitors = g_list_append (priv->ui_sorted_monitors, monitor);
     }
 
-  for (item = priv->ui_sorted_monitors; item != NULL; item = item->next)
-    {
-      CcDisplayMonitor *monitor = item->data;
-      char *ui_name;
-      ui_name = make_output_ui_name (monitor);
-
-      cc_display_monitor_set_ui_info (monitor, ui_number, ui_name);
-
-      ui_number += 1;
-    }
+  cc_display_config_update_ui_numbers_names(self);
 }
 
 static void
@@ -662,4 +652,31 @@ gboolean
 cc_display_config_get_panel_orientation_managed (CcDisplayConfig *self)
 {
   return CC_DISPLAY_CONFIG_GET_CLASS (self)->get_panel_orientation_managed (self);
+}
+
+void
+cc_display_config_update_ui_numbers_names (CcDisplayConfig *self)
+{
+  CcDisplayConfigPrivate *priv = cc_display_config_get_instance_private (self);
+  GList *item;
+  gint ui_number = 1;
+  for (item = priv->ui_sorted_monitors; item != NULL; item = item->next)
+    {
+      CcDisplayMonitor *monitor = item->data;
+      char *ui_name;
+      gint current_ui_number = 0;
+
+      ui_name = make_output_ui_name (monitor);
+
+      /* Prevents gaps in monitor numbering. Monitors
+       * with number 0 will not be visible in the UI.
+       */
+      if (cc_display_monitor_is_usable (monitor))
+        {
+          current_ui_number = ui_number;
+          ui_number += 1;
+        }
+
+      cc_display_monitor_set_ui_info (monitor, current_ui_number, ui_name);
+    }
 }
