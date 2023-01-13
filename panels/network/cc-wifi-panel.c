@@ -853,11 +853,11 @@ on_stack_visible_child_changed_cb (GtkStack    *stack,
 }
 
 static void
-on_stop_hotspot_dialog_response_cb (GtkDialog   *dialog,
-                                    gint         response,
-                                    CcWifiPanel *self)
+on_stop_hotspot_dialog_response_cb (AdwMessageDialog   *dialog,
+                                    gchar              *response,
+                                    CcWifiPanel        *self)
 {
-  if (response == GTK_RESPONSE_OK)
+  if (g_strcmp0 (response, "turn-off") == 0)
     {
       NetDeviceWifi *child;
 
@@ -877,19 +877,25 @@ hotspot_stop_clicked_cb (CcWifiPanel *self)
   g_assert (CC_IS_WIFI_PANEL (self));
 
   native = gtk_widget_get_native (GTK_WIDGET (self));
-  dialog = gtk_message_dialog_new (GTK_WINDOW (native),
-                                   GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                   GTK_MESSAGE_OTHER,
-                                   GTK_BUTTONS_NONE,
-                                   _("Stop hotspot and disconnect any users?"));
-  gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                          _("_Cancel"), GTK_RESPONSE_CANCEL,
-                          _("_Stop Hotspot"), GTK_RESPONSE_OK,
-                          NULL);
+
+  /* message dialog */
+  dialog = adw_message_dialog_new (GTK_WINDOW (native),
+                                   NULL,
+                                   _("Turning off will disconnect any devices that are using the hotspot."));
+
+  adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dialog), _("Turn Off Hotspot?"));
+
+  /* added responses to message dialog */
+  adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
+                                    "cancel",  _("_Cancel"),
+                                    "turn-off", _("_Turn Off"),
+                                    NULL);
+  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "turn-off", ADW_RESPONSE_DESTRUCTIVE);
+  adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
+  adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
 
   g_signal_connect (dialog, "response", G_CALLBACK (on_stop_hotspot_dialog_response_cb), self);
   gtk_window_present (GTK_WINDOW (dialog));
-
 }
 
 /* Overrides */
