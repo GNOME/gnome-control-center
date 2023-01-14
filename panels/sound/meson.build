@@ -24,7 +24,7 @@ cflags += [
 ]
 
 sources = files(
-  'cc-alert-chooser.c',
+  'cc-alert-chooser-window.c',
   'cc-balance-slider.c',
   'cc-device-combo-box.c',
   'cc-fade-slider.c',
@@ -49,7 +49,7 @@ resource_data = files(
   'icons/audio-speaker-right-back.svg',
   'icons/audio-speaker-right-side.svg',
   'icons/audio-speaker-right.svg',
-  'cc-alert-chooser.ui',
+  'cc-alert-chooser-window.ui',
   'cc-balance-slider.ui',
   'cc-device-combo-box.ui',
   'cc-fade-slider.ui',

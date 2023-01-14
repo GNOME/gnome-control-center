@@ -30,7 +30,7 @@
 #include <pulse/pulseaudio.h>
 #include <gvc-mixer-control.h>
 
-#include "cc-alert-chooser.h"
+#include "cc-alert-chooser-window.h"
 #include "cc-balance-slider.h"
 #include "cc-device-combo-box.h"
 #include "cc-fade-slider.h"
@@ -65,6 +65,7 @@ struct _CcSoundPanel
   CcVolumeSlider    *output_volume_slider;
   GtkListBoxRow     *subwoofer_row;
   CcSubwooferSlider *subwoofer_slider;
+  GtkLabel          *alert_sound_label;
 
   GvcMixerControl   *mixer_control;
   GSettings         *sound_settings;
@@ -79,6 +80,13 @@ enum
 };
 
 #define KEY_SOUNDS_SCHEMA "org.gnome.desktop.sound"
+
+static void
+update_alert_sound_label (CcSoundPanel *self)
+{
+  const gchar *alert_name = get_selected_alert_display_name ();
+  gtk_label_set_label (self->alert_sound_label, alert_name);
+}
 
 static void
 allow_amplified_changed_cb (CcSoundPanel *self)
@@ -229,6 +237,26 @@ volume_levels_activated_cb (CcSoundPanel *self)
   gtk_window_present (GTK_WINDOW (volume_levels));
 }
 
+static void
+alert_sound_activated_cb (CcSoundPanel *self)
+{
+  CcAlertChooserWindow *alert_chooser;
+  GtkWindow *toplevel;
+  CcShell *shell;
+
+  shell = cc_panel_get_shell (CC_PANEL (self));
+  toplevel = GTK_WINDOW (cc_shell_get_toplevel (shell));
+
+  alert_chooser = cc_alert_chooser_window_new ();
+  gtk_window_set_transient_for (GTK_WINDOW (alert_chooser), toplevel);
+
+  g_signal_connect_object (alert_chooser, "destroy",
+                           G_CALLBACK (update_alert_sound_label),
+                           self, G_CONNECT_SWAPPED);
+
+  gtk_window_present (GTK_WINDOW (alert_chooser));
+}
+
 static const char *
 cc_sound_panel_get_help_uri (CcPanel *panel)
 {
@@ -276,13 +304,14 @@ cc_sound_panel_class_init (CcSoundPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, output_volume_slider);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, subwoofer_row);
   gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, subwoofer_slider);
+  gtk_widget_class_bind_template_child (widget_class, CcSoundPanel, alert_sound_label);
 
   gtk_widget_class_bind_template_callback (widget_class, input_device_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, output_device_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, test_output_configuration_button_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, volume_levels_activated_cb);
+  gtk_widget_class_bind_template_callback (widget_class, alert_sound_activated_cb);
 
-  g_type_ensure (CC_TYPE_ALERT_CHOOSER);
   g_type_ensure (CC_TYPE_BALANCE_SLIDER);
   g_type_ensure (CC_TYPE_DEVICE_COMBO_BOX);
   g_type_ensure (CC_TYPE_FADE_SLIDER);
@@ -325,4 +354,6 @@ cc_sound_panel_init (CcSoundPanel *self)
                            G_CALLBACK (input_device_update_cb),
                            self,
                            G_CONNECT_SWAPPED);
+
+  update_alert_sound_label (self);
 }

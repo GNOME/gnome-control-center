@@ -1,6 +1,6 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
- *
+/*
  * Copyright (C) 2018 Canonical Ltd.
+ * Copyright (C) 2023 Marco Melorio
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -20,28 +20,24 @@
 #include <gsound.h>
 
 #include "config.h"
-#include "cc-alert-chooser.h"
-#include "cc-sound-resources.h"
+#include "cc-alert-chooser-window.h"
 
 #define KEY_SOUNDS_SCHEMA "org.gnome.desktop.sound"
 
-struct _CcAlertChooser
+struct _CcAlertChooserWindow
 {
-  GtkBox         parent_instance;
+  GtkWindow       parent_instance;
 
-  GtkToggleButton *click_button;
-  GtkToggleButton *hum_button;
-  GtkToggleButton *string_button;
-  GtkToggleButton *swing_button;
+  GtkCheckButton *click_button;
+  GtkCheckButton *string_button;
+  GtkCheckButton *swing_button;
+  GtkCheckButton *hum_button;
 
-  GSoundContext *context;
-  GSettings     *sound_settings;
+  GSoundContext  *context;
+  GSettings      *sound_settings;
 };
 
-static void clicked_cb (CcAlertChooser *self,
-                        GtkToggleButton  *button);
-
-G_DEFINE_TYPE (CcAlertChooser, cc_alert_chooser, GTK_TYPE_BOX)
+G_DEFINE_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, GTK_TYPE_WINDOW)
 
 #define CUSTOM_THEME_NAME "__custom"
 
@@ -145,8 +141,8 @@ update_dir_mtime (const char *dir_path)
 }
 
 static void
-set_custom_theme (CcAlertChooser *self,
-                  const gchar    *name)
+set_custom_theme (CcAlertChooserWindow *self,
+                  const gchar          *name)
 {
   g_autofree gchar *dir_path = NULL;
   g_autofree gchar *theme_path = NULL;
@@ -198,8 +194,8 @@ set_custom_theme (CcAlertChooser *self,
 }
 
 static void
-select_sound (CcAlertChooser *self,
-              const gchar    *name)
+play_sound (CcAlertChooserWindow *self,
+            const gchar          *name)
 {
   g_autofree gchar *path = NULL;
   g_autoptr(GError) error = NULL;
@@ -211,80 +207,79 @@ select_sound (CcAlertChooser *self,
     {
       g_warning ("Failed to play alert sound %s: %s", path, error->message);
     }
-
-  set_custom_theme (self, name);
 }
 
 static void
-set_button (CcAlertChooser *self,
-            GtkToggleButton  *button,
-            gboolean        active)
+activate_cb (CcAlertChooserWindow *self)
 {
-  g_signal_handlers_block_by_func (button, clicked_cb, self);
-  gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), active);
-  g_signal_handlers_unblock_by_func (button, clicked_cb, self);
+  if (gtk_check_button_get_active (self->click_button))
+    play_sound (self, "click");
+  else if (gtk_check_button_get_active (self->string_button))
+    play_sound (self, "string");
+  else if (gtk_check_button_get_active (self->swing_button))
+    play_sound (self, "swing");
+  else if (gtk_check_button_get_active (self->hum_button))
+    play_sound (self, "hum");
 }
 
 static void
-clicked_cb (CcAlertChooser *self,
-            GtkToggleButton  *button)
+toggled_cb (CcAlertChooserWindow *self)
 {
-  if (button == self->click_button)
-    select_sound (self, "click");
-  else if (button == self->hum_button)
-    select_sound (self, "hum");
-  else if (button == self->string_button)
-    select_sound (self, "string");
-  else if (button == self->swing_button)
-    select_sound (self, "swing");
-
-  set_button (self, button, TRUE);
-  if (button != self->click_button)
-    set_button (self, self->click_button, FALSE);
-  if (button != self->hum_button)
-    set_button (self, self->hum_button, FALSE);
-  if (button != self->string_button)
-    set_button (self, self->string_button, FALSE);
-  if (button != self->swing_button)
-    set_button (self, self->swing_button, FALSE);
+  if (gtk_check_button_get_active (self->click_button))
+    set_custom_theme (self, "click");
+  else if (gtk_check_button_get_active (self->string_button))
+    set_custom_theme (self, "string");
+  else if (gtk_check_button_get_active (self->swing_button))
+    set_custom_theme (self, "swing");
+  else if (gtk_check_button_get_active (self->hum_button))
+    set_custom_theme (self, "hum");
 }
 
 static void
-cc_alert_chooser_dispose (GObject *object)
+set_button_active (CcAlertChooserWindow *self,
+                   GtkCheckButton       *button,
+                   gboolean              active)
 {
-  CcAlertChooser *self = CC_ALERT_CHOOSER (object);
+  g_signal_handlers_block_by_func (button, toggled_cb, self);
+  gtk_check_button_set_active (button, active);
+  g_signal_handlers_unblock_by_func (button, toggled_cb, self);
+}
+
+static void
+cc_alert_chooser_window_dispose (GObject *object)
+{
+  CcAlertChooserWindow *self = CC_ALERT_CHOOSER_WINDOW (object);
 
   g_clear_object (&self->context);
   g_clear_object (&self->sound_settings);
 
-  G_OBJECT_CLASS (cc_alert_chooser_parent_class)->dispose (object);
+  G_OBJECT_CLASS (cc_alert_chooser_window_parent_class)->dispose (object);
 }
 
 void
-cc_alert_chooser_class_init (CcAlertChooserClass *klass)
+cc_alert_chooser_window_class_init (CcAlertChooserWindowClass *klass)
 {
-  GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+  GObjectClass *object_class = G_OBJECT_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
-  object_class->dispose = cc_alert_chooser_dispose;
+  object_class->dispose = cc_alert_chooser_window_dispose;
 
-  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser.ui");
+  gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser-window.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, click_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, hum_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, string_button);
-  gtk_widget_class_bind_template_child (widget_class, CcAlertChooser, swing_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, click_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, string_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, swing_button);
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, hum_button);
 
-  gtk_widget_class_bind_template_callback (widget_class, clicked_cb);
+  gtk_widget_class_bind_template_callback (widget_class, activate_cb);
+  gtk_widget_class_bind_template_callback (widget_class, toggled_cb);
 }
 
 void
-cc_alert_chooser_init (CcAlertChooser *self)
+cc_alert_chooser_window_init (CcAlertChooserWindow *self)
 {
   g_autofree gchar *alert_name = NULL;
   g_autoptr(GError) error = NULL;
-
-  g_resources_register (cc_sound_get_resource ());
 
   gtk_widget_init_template (GTK_WIDGET (self));
 
@@ -308,13 +303,38 @@ cc_alert_chooser_init (CcAlertChooser *self)
     }
 
   if (g_strcmp0 (alert_name, "click") == 0)
-    set_button (self, self->click_button, TRUE);
+    set_button_active (self, self->click_button, TRUE);
   else if (g_strcmp0 (alert_name, "hum") == 0)
-    set_button (self, self->hum_button, TRUE);
+    set_button_active (self, self->hum_button, TRUE);
   else if (g_strcmp0 (alert_name, "string") == 0)
-    set_button (self, self->string_button, TRUE);
+    set_button_active (self, self->string_button, TRUE);
   else if (g_strcmp0 (alert_name, "swing") == 0)
-    set_button (self, self->swing_button, TRUE);
+    set_button_active (self, self->swing_button, TRUE);
   else if (alert_name != NULL)
     g_warning ("Current alert sound has unknown name %s", alert_name);
+}
+
+CcAlertChooserWindow *
+cc_alert_chooser_window_new (void)
+{
+  return g_object_new (CC_TYPE_ALERT_CHOOSER_WINDOW, NULL);
+}
+
+const gchar *
+get_selected_alert_display_name (void)
+{
+  g_autofree gchar *alert_name = NULL;
+
+  alert_name = get_alert_name ();
+
+  if (g_strcmp0 (alert_name, "click") == 0)
+    return _("Click");
+  else if (g_strcmp0 (alert_name, "hum") == 0)
+    return _("Hum");
+  else if (g_strcmp0 (alert_name, "string") == 0)
+    return _("String");
+  else if (g_strcmp0 (alert_name, "swing") == 0)
+    return _("Swing");
+  else
+    return _("Unknown");
 }

@@ -1,6 +1,5 @@
-/* -*- Mode: C; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 8 -*-
- *
- * Copyright (C) 2018 Canonical Ltd.
+/*
+ * Copyright (C) 2023 Marco Melorio
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -22,7 +21,11 @@
 
 G_BEGIN_DECLS
 
-#define CC_TYPE_ALERT_CHOOSER (cc_alert_chooser_get_type ())
-G_DECLARE_FINAL_TYPE (CcAlertChooser, cc_alert_chooser, CC, ALERT_CHOOSER, GtkBox)
+#define CC_TYPE_ALERT_CHOOSER_WINDOW (cc_alert_chooser_window_get_type ())
+G_DECLARE_FINAL_TYPE (CcAlertChooserWindow, cc_alert_chooser_window, CC, ALERT_CHOOSER_WINDOW, GtkWindow)
+
+CcAlertChooserWindow *cc_alert_chooser_window_new (void);
+
+const gchar *get_selected_alert_display_name (void);
 
 G_END_DECLS
