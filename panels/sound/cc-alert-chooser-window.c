@@ -28,6 +28,7 @@ struct _CcAlertChooserWindow
 {
   GtkWindow       parent_instance;
 
+  GtkCheckButton *none_button;
   GtkCheckButton *click_button;
   GtkCheckButton *string_button;
   GtkCheckButton *swing_button;
@@ -225,7 +226,9 @@ activate_cb (CcAlertChooserWindow *self)
 static void
 toggled_cb (CcAlertChooserWindow *self)
 {
-  if (gtk_check_button_get_active (self->click_button))
+  if (gtk_check_button_get_active (self->none_button))
+    g_settings_set_boolean (self->sound_settings, "event-sounds", FALSE);
+  else if (gtk_check_button_get_active (self->click_button))
     set_custom_theme (self, "click");
   else if (gtk_check_button_get_active (self->string_button))
     set_custom_theme (self, "string");
@@ -266,6 +269,7 @@ cc_alert_chooser_window_class_init (CcAlertChooserWindowClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/sound/cc-alert-chooser-window.ui");
 
+  gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, none_button);
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, click_button);
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, string_button);
   gtk_widget_class_bind_template_child (widget_class, CcAlertChooserWindow, swing_button);
@@ -302,7 +306,9 @@ cc_alert_chooser_window_init (CcAlertChooserWindow *self)
       alert_name = g_strdup ("click");
     }
 
-  if (g_strcmp0 (alert_name, "click") == 0)
+  if (!g_settings_get_boolean (self->sound_settings, "event-sounds"))
+    set_button_active (self, self->none_button, TRUE);
+  else if (g_strcmp0 (alert_name, "click") == 0)
     set_button_active (self, self->click_button, TRUE);
   else if (g_strcmp0 (alert_name, "hum") == 0)
     set_button_active (self, self->hum_button, TRUE);
@@ -324,10 +330,15 @@ const gchar *
 get_selected_alert_display_name (void)
 {
   g_autofree gchar *alert_name = NULL;
+  g_autoptr(GSettings) sound_settings = NULL;
+
+  sound_settings = g_settings_new (KEY_SOUNDS_SCHEMA);
 
   alert_name = get_alert_name ();
 
-  if (g_strcmp0 (alert_name, "click") == 0)
+  if (!g_settings_get_boolean (sound_settings, "event-sounds"))
+    return _("None");
+  else if (g_strcmp0 (alert_name, "click") == 0)
     return _("Click");
   else if (g_strcmp0 (alert_name, "hum") == 0)
     return _("Hum");
