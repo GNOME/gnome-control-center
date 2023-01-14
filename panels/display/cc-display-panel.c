@@ -840,7 +840,7 @@ rebuild_ui (CcDisplayPanel *panel)
     }
 
   cc_display_settings_set_multimonitor (panel->settings,
-                                        n_outputs > 1 &&
+                                        n_usable_outputs > 1 &&
                                         type != CC_DISPLAY_CONFIG_CLONE);
 
   cc_panel_set_selected_type (panel, type);
