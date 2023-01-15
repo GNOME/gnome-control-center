@@ -28,7 +28,7 @@ struct _CcVolumeSlider
 {
   GtkWidget        parent_instance;
 
-  GtkToggleButton *mute_button;
+  GtkButton       *mute_button;
   GtkAdjustment   *volume_adjustment;
   GtkScale        *volume_scale;
 
@@ -50,7 +50,7 @@ update_volume_icon (CcVolumeSlider *self)
   volume = gtk_adjustment_get_value (self->volume_adjustment);
   fraction = (100.0 * volume) / gtk_adjustment_get_upper (self->volume_adjustment);
 
-  if (gtk_toggle_button_get_active (self->mute_button))
+  if (fraction == 0.0)
     icon_name = "audio-volume-muted-symbolic";
   else if (fraction < 30.0)
     icon_name = "audio-volume-low-symbolic";
@@ -73,27 +73,22 @@ volume_changed_cb (CcVolumeSlider *self)
   volume = gtk_adjustment_get_value (self->volume_adjustment);
   rounded = round (volume);
 
-  gtk_toggle_button_set_active (self->mute_button, volume == 0.0);
+  // If the stream is muted, unmute it
+  if (gvc_mixer_stream_get_is_muted (self->stream))
+    gvc_mixer_stream_change_is_muted (self->stream, FALSE);
 
   if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t) rounded))
       gvc_mixer_stream_push_volume (self->stream);
-
-  update_volume_icon (self);
 }
 
 static void
 notify_volume_cb (CcVolumeSlider *self)
 {
   g_signal_handlers_block_by_func (self->volume_adjustment, volume_changed_cb, self);
-
-  if (gtk_toggle_button_get_active (self->mute_button))
-    gtk_adjustment_set_value (self->volume_adjustment, 0.0);
-  else
-    gtk_adjustment_set_value (self->volume_adjustment, gvc_mixer_stream_get_volume (self->stream));
+  gtk_adjustment_set_value (self->volume_adjustment, gvc_mixer_stream_get_volume (self->stream));
+  g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
 
   update_volume_icon (self);
-
-  g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
 }
 
 static void
@@ -126,23 +121,33 @@ update_ranges (CcVolumeSlider *self)
 }
 
 static void
-mute_button_toggled_cb (CcVolumeSlider *self)
+mute_cb (GtkWidget  *widget,
+         const char *action_name,
+         GVariant   *parameter)
 {
+  CcVolumeSlider *self = CC_VOLUME_SLIDER (widget);
+
   if (self->stream == NULL)
     return;
 
-  gvc_mixer_stream_change_is_muted (self->stream, gtk_toggle_button_get_active (self->mute_button));
-
-  update_volume_icon (self);
+  gvc_mixer_stream_change_is_muted (self->stream, !gvc_mixer_stream_get_is_muted (self->stream));
 }
 
 static void
 notify_is_muted_cb (CcVolumeSlider *self)
 {
-  g_signal_handlers_block_by_func (self->mute_button, mute_button_toggled_cb, self);
-  gtk_toggle_button_set_active (self->mute_button, gvc_mixer_stream_get_is_muted (self->stream));
-  g_signal_handlers_unblock_by_func (self->mute_button, mute_button_toggled_cb, self);
-  notify_volume_cb (self);
+  if (gvc_mixer_stream_get_is_muted (self->stream))
+    {
+      g_signal_handlers_block_by_func (self->volume_adjustment, volume_changed_cb, self);
+      gtk_adjustment_set_value (self->volume_adjustment, 0.0);
+      g_signal_handlers_unblock_by_func (self->volume_adjustment, volume_changed_cb, self);
+
+      update_volume_icon (self);
+    }
+  else
+    {
+      notify_volume_cb (self);
+    }
 }
 
 static void
@@ -173,8 +178,9 @@ cc_volume_slider_class_init (CcVolumeSliderClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcVolumeSlider, volume_adjustment);
   gtk_widget_class_bind_template_child (widget_class, CcVolumeSlider, volume_scale);
 
-  gtk_widget_class_bind_template_callback (widget_class, mute_button_toggled_cb);
   gtk_widget_class_bind_template_callback (widget_class, volume_changed_cb);
+
+  gtk_widget_class_install_action (widget_class, "volume-slider.mute", NULL, mute_cb);
 
   gtk_widget_class_set_layout_manager_type (widget_class, GTK_TYPE_BOX_LAYOUT);
 }
