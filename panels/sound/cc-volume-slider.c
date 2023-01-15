@@ -35,6 +35,7 @@ struct _CcVolumeSlider
   gboolean         is_amplified;
   GvcMixerControl *mixer_control;
   GvcMixerStream  *stream;
+  CcStreamType     type;
   guint            notify_volume_handler_id;
   guint            notify_is_muted_handler_id;
 };
@@ -50,14 +51,34 @@ update_volume_icon (CcVolumeSlider *self)
   volume = gtk_adjustment_get_value (self->volume_adjustment);
   fraction = (100.0 * volume) / gtk_adjustment_get_upper (self->volume_adjustment);
 
-  if (fraction == 0.0)
-    icon_name = "audio-volume-muted-symbolic";
-  else if (fraction < 30.0)
-    icon_name = "audio-volume-low-symbolic";
-  else if (fraction > 30.0 && fraction < 70.0)
-    icon_name = "audio-volume-medium-symbolic";
-  else
-    icon_name = "audio-volume-high-symbolic";
+  switch (self->type)
+    {
+    case CC_STREAM_TYPE_INPUT:
+      if (fraction == 0.0)
+        icon_name = "microphone-sensitivity-muted-symbolic";
+      else if (fraction < 30.0)
+        icon_name = "microphone-sensitivity-low-symbolic";
+      else if (fraction > 30.0 && fraction < 70.0)
+        icon_name = "microphone-sensitivity-medium-symbolic";
+      else
+        icon_name = "microphone-sensitivity-high-symbolic";
+      break;
+
+    case CC_STREAM_TYPE_OUTPUT:
+      if (fraction == 0.0)
+        icon_name = "audio-volume-muted-symbolic";
+      else if (fraction < 30.0)
+        icon_name = "audio-volume-low-symbolic";
+      else if (fraction > 30.0 && fraction < 70.0)
+        icon_name = "audio-volume-medium-symbolic";
+      else
+        icon_name = "audio-volume-high-symbolic";
+      break;
+
+    default:
+      g_assert_not_reached ();
+      break;
+    }
 
   gtk_button_set_icon_name (GTK_BUTTON (self->mute_button), icon_name);
 }
@@ -236,22 +257,7 @@ cc_volume_slider_set_stream (CcVolumeSlider *self,
     }
   g_clear_object (&self->stream);
 
-  switch (type)
-    {
-    case CC_STREAM_TYPE_INPUT:
-      gtk_button_set_icon_name (GTK_BUTTON (self->mute_button),
-                                "microphone-sensitivity-muted-symbolic");
-      break;
-
-    case CC_STREAM_TYPE_OUTPUT:
-      gtk_button_set_icon_name (GTK_BUTTON (self->mute_button),
-                                "audio-volume-muted-symbolic");
-      break;
-
-    default:
-      g_assert_not_reached ();
-      break;
-    }
+  self->type = type;
 
   if (stream != NULL)
     {
