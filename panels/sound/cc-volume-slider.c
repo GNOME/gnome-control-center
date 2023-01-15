@@ -130,7 +130,18 @@ mute_cb (GtkWidget  *widget,
   if (self->stream == NULL)
     return;
 
-  gvc_mixer_stream_change_is_muted (self->stream, !gvc_mixer_stream_get_is_muted (self->stream));
+  if (!gvc_mixer_stream_get_is_muted (self->stream) &&
+      gvc_mixer_stream_get_volume (self->stream) == 0.0)
+    {
+      gdouble default_volume = gvc_mixer_control_get_vol_max_norm (self->mixer_control) * 0.25;
+
+      if (gvc_mixer_stream_set_volume (self->stream, (pa_volume_t) default_volume))
+        gvc_mixer_stream_push_volume (self->stream);
+    }
+  else
+    {
+      gvc_mixer_stream_change_is_muted (self->stream, !gvc_mixer_stream_get_is_muted (self->stream));
+    }
 }
 
 static void
