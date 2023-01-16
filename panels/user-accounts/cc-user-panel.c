@@ -1094,6 +1094,7 @@ change_language (CcUserPanel *self)
         }
         else {
                 self->language_chooser = cc_language_chooser_new ();
+                gtk_window_set_hide_on_close (GTK_WINDOW (self->language_chooser), TRUE);
                 gtk_window_set_transient_for (GTK_WINDOW (self->language_chooser),
                                               GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (self))));
 
