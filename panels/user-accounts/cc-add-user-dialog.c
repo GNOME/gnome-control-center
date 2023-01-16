@@ -160,7 +160,7 @@ begin_action (CcAddUserDialog *self)
         gtk_widget_set_sensitive (GTK_WIDGET (self->enterprise_button), FALSE);
         gtk_widget_set_sensitive (GTK_WIDGET (self->add_button), FALSE);
 
-        gtk_widget_show (GTK_WIDGET (self->spinner));
+        gtk_widget_set_visible (GTK_WIDGET (self->spinner), TRUE);
         gtk_spinner_start (self->spinner);
 }
 
@@ -1336,7 +1336,7 @@ on_realm_manager_created (GObject *source,
                                    NULL, NULL);
 
         /* Show the 'Enterprise Login' stuff, and update mode */
-        gtk_widget_show (GTK_WIDGET (self->enterprise_group));
+        gtk_widget_set_visible (GTK_WIDGET (self->enterprise_group), TRUE);
         mode_change (self, self->mode);
 }
 

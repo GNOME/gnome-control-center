@@ -225,7 +225,7 @@ select_ppd_in_dialog (PpDetailsDialog *self)
         gtk_window_set_transient_for (GTK_WINDOW (self->pp_ppd_selection_dialog),
                                       GTK_WINDOW (self));
 
-        gtk_widget_show (GTK_WIDGET (self->pp_ppd_selection_dialog));
+        gtk_widget_set_visible (GTK_WIDGET (self->pp_ppd_selection_dialog), TRUE);
     }
 }
 
@@ -281,7 +281,7 @@ select_ppd_manually (PpDetailsDialog *self)
 
   gtk_file_chooser_set_filter (GTK_FILE_CHOOSER (dialog), filter);
 
-  gtk_widget_show (dialog);
+  gtk_widget_set_visible (dialog, TRUE);
 
   g_signal_connect (dialog, "response", G_CALLBACK (ppd_file_select_response_cb), self);
 }

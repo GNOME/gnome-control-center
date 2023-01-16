@@ -299,7 +299,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     gboolean available;
     const char *carrier_type, *icon_name, *current_network_name;
 
-    gtk_widget_show (self->current_row);
+    gtk_widget_set_visible (self->current_row, TRUE);
     current_visible = TRUE;
 
     /* Network name */
@@ -346,13 +346,13 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
 				       net->network_name,
 				       net->carrier_type,
 				       self);
-    gtk_widget_show (row);
+    gtk_widget_set_visible (row, TRUE);
     gtk_list_box_insert (GTK_LIST_BOX (self->listbox), row, -1);
   }
 
   if (self->networks == NULL &&
       !current_visible) {
-    gtk_widget_show (self->no_network_row);
+    gtk_widget_set_visible (self->no_network_row, TRUE);
   } else {
     gtk_widget_hide (self->no_network_row);
   }

@@ -354,7 +354,7 @@ nm_device_mobile_refresh_ui (NetDeviceMobile *self)
         const gchar *route4_text = NULL, *route6_text = NULL;
 
         /* set up the device on/off switch */
-        gtk_widget_show (GTK_WIDGET (self->device_off_switch));
+        gtk_widget_set_visible (GTK_WIDGET (self->device_off_switch), TRUE);
         mobilebb_enabled_toggled (self);
 
         /* set device state, with status */

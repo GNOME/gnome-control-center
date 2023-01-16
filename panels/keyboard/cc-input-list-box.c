@@ -300,7 +300,7 @@ add_input_row (CcInputListBox *self, CcInputSource *source)
   gtk_widget_set_visible (GTK_WIDGET (self->no_inputs_row), FALSE);
 
   row = cc_input_row_new (source);
-  gtk_widget_show (GTK_WIDGET (row));
+  gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
   g_signal_connect_object (row, "show-settings", G_CALLBACK (row_settings_cb), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (row, "show-layout", G_CALLBACK (row_layout_cb), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (row, "move-row", G_CALLBACK (row_moved_cb), self, G_CONNECT_SWAPPED);

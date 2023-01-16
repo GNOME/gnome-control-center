@@ -332,7 +332,7 @@ show_input_sources_for_locale (CcInputChooser *self,
       GtkEventController *controller;
 
       info->back_row = g_object_ref_sink (back_row_new (info->name));
-      gtk_widget_show (GTK_WIDGET (info->back_row));
+      gtk_widget_set_visible (GTK_WIDGET (info->back_row), TRUE);
       g_object_set_data (G_OBJECT (info->back_row), "back", GINT_TO_POINTER (TRUE));
       g_object_set_data (G_OBJECT (info->back_row), "locale-info", info);
 
@@ -386,7 +386,7 @@ show_locale_rows (CcInputChooser *self)
       if (!info->locale_row)
         {
           info->locale_row = g_object_ref_sink (locale_row_new (info->name));
-          gtk_widget_show (GTK_WIDGET (info->locale_row));
+          gtk_widget_set_visible (GTK_WIDGET (info->locale_row), TRUE);
           g_object_set_data (G_OBJECT (info->locale_row), "locale-info", info);
 
           if (!self->showing_extra &&
@@ -611,7 +611,7 @@ on_filter_entry_search_changed_cb (CcInputChooser *self)
 static void
 show_more (CcInputChooser *self)
 {
-  gtk_widget_show (GTK_WIDGET (self->filter_entry));
+  gtk_widget_set_visible (GTK_WIDGET (self->filter_entry), TRUE);
   gtk_widget_grab_focus (GTK_WIDGET (self->filter_entry));
 
   self->showing_extra = TRUE;
@@ -680,7 +680,7 @@ add_default_row (CcInputChooser *self,
   info->default_input_source_row = input_source_row_new (self, type, id);
   if (info->default_input_source_row)
     {
-      gtk_widget_show (GTK_WIDGET (info->default_input_source_row));
+      gtk_widget_set_visible (GTK_WIDGET (info->default_input_source_row), TRUE);
       g_object_ref_sink (GTK_WIDGET (info->default_input_source_row));
       g_object_set_data (G_OBJECT (info->default_input_source_row), "default", GINT_TO_POINTER (TRUE));
       g_object_set_data (G_OBJECT (info->default_input_source_row), "locale-info", info);
@@ -713,7 +713,7 @@ add_rows_to_table (CcInputChooser *self,
       if (g_strcmp0 (id, default_id))
         {
           row = input_source_row_new (self, type, id);
-          gtk_widget_show (GTK_WIDGET (row));
+          gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
           if (row)
             {
               g_object_set_data (G_OBJECT (row), "locale-info", info);
@@ -1086,15 +1086,15 @@ cc_input_chooser_new (gboolean      is_login,
     self->ibus_engines = g_hash_table_ref (ibus_engines);
 
   self->more_row = g_object_ref_sink (more_row_new ());
-  gtk_widget_show (GTK_WIDGET (self->more_row));
+  gtk_widget_set_visible (GTK_WIDGET (self->more_row), TRUE);
   self->no_results = g_object_ref_sink (no_results_widget_new ());
-  gtk_widget_show (self->no_results);
+  gtk_widget_set_visible (self->no_results, TRUE);
 
   gtk_list_box_set_filter_func (self->input_sources_listbox, list_filter, self, NULL);
   gtk_list_box_set_sort_func (self->input_sources_listbox, list_sort, self, NULL);
 
   if (self->is_login)
-    gtk_widget_show (GTK_WIDGET (self->login_label));
+    gtk_widget_set_visible (GTK_WIDGET (self->login_label), TRUE);
 
   get_locale_infos (self);
 #ifdef HAVE_IBUS

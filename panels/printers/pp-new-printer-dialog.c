@@ -1746,7 +1746,7 @@ new_printer_dialog_response_cb (PpNewPrinterDialog *self,
                                             GTK_WINDOW (self));
 
               /* New device will be set at return from ppd selection */
-              gtk_widget_show (GTK_WIDGET (self->ppd_selection_dialog));
+              gtk_widget_set_visible (GTK_WIDGET (self->ppd_selection_dialog), TRUE);
             }
           else
             {

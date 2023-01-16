@@ -114,7 +114,7 @@ special_chars_activated (AdwActionRow    *row,
   dialog = GTK_WINDOW (cc_xkb_modifier_dialog_new (self->input_source_settings, modifier));
 
   gtk_window_set_transient_for (dialog, window);
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_set_visible (GTK_WIDGET (dialog), TRUE);
 }
 
 static void
@@ -130,7 +130,7 @@ keyboard_shortcuts_activated (AdwActionRow    *row,
 
       shortcut_dialog = cc_keyboard_shortcut_dialog_new ();
       gtk_window_set_transient_for (GTK_WINDOW (shortcut_dialog), window);
-      gtk_widget_show (GTK_WIDGET (shortcut_dialog));
+      gtk_widget_set_visible (GTK_WIDGET (shortcut_dialog), TRUE);
     }
 }
 

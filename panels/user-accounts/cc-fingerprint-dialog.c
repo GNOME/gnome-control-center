@@ -530,7 +530,7 @@ list_enrolled_cb (GObject      *object,
     gtk_widget_set_sensitive (self->add_print_icon, FALSE);
 
   if (n_enrolled_fingers > 0)
-    gtk_widget_show (GTK_WIDGET (self->delete_prints_button));
+    gtk_widget_set_visible (GTK_WIDGET (self->delete_prints_button), TRUE);
 }
 
 static void
@@ -1243,10 +1243,10 @@ on_stack_child_changed (CcFingerprintDialog *self)
       adw_header_bar_set_show_start_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
       adw_header_bar_set_show_end_title_buttons (ADW_HEADER_BAR (self->titlebar), FALSE);
 
-      gtk_widget_show (GTK_WIDGET (self->cancel_button));
+      gtk_widget_set_visible (GTK_WIDGET (self->cancel_button), TRUE);
       gtk_widget_set_sensitive (GTK_WIDGET (self->cancel_button), TRUE);
 
-      gtk_widget_show (GTK_WIDGET (self->done_button));
+      gtk_widget_set_visible (GTK_WIDGET (self->done_button), TRUE);
       gtk_widget_set_sensitive (GTK_WIDGET (self->done_button), FALSE);
     }
   else
@@ -1404,7 +1404,7 @@ static void
 delete_prints_button_clicked_cb (CcFingerprintDialog *self)
 {
   gtk_widget_set_sensitive (self->prints_manager, FALSE);
-  gtk_widget_show (self->delete_confirmation_infobar);
+  gtk_widget_set_visible (self->delete_confirmation_infobar, TRUE);
 }
 
 static void

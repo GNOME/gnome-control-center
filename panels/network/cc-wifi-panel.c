@@ -238,7 +238,7 @@ add_wifi_device (CcWifiPanel *self,
   net_device = net_device_wifi_new (CC_PANEL (self),
                                     self->client,
                                     device);
-  gtk_widget_show (GTK_WIDGET (net_device));
+  gtk_widget_set_visible (GTK_WIDGET (net_device), TRUE);
 
   /* And add to the header widgets */
   header_widget = net_device_wifi_get_header_widget (net_device);

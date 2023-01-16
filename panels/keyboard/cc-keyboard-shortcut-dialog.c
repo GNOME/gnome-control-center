@@ -324,7 +324,7 @@ add_custom_shortcut_clicked_cb (CcKeyboardShortcutDialog *self)
   cc_keyboard_shortcut_editor_set_mode (editor, CC_SHORTCUT_EDITOR_CREATE);
   cc_keyboard_shortcut_editor_set_item (editor, NULL);
 
-  gtk_widget_show (self->shortcut_editor);
+  gtk_widget_set_visible (self->shortcut_editor, TRUE);
 }
 
 static void

@@ -318,7 +318,7 @@ update_jobs_list_cb (GObject      *source_object,
       text = g_strdup_printf (ngettext ("%u Job Requires Authentication", "%u Jobs Require Authentication", num_of_auth_jobs), num_of_auth_jobs);
       gtk_label_set_text (self->authenticate_jobs_label, text);
 
-      gtk_widget_show (GTK_WIDGET (self->authentication_infobar));
+      gtk_widget_set_visible (GTK_WIDGET (self->authentication_infobar), TRUE);
     }
   else
     {

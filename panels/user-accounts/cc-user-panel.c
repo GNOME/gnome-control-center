@@ -918,7 +918,7 @@ show_user (ActUser *user, CcUserPanel *self)
                         gtk_label_set_text (self->parental_controls_button_label, _("Disabled"));
 
                 gtk_widget_remove_css_class (GTK_WIDGET (self->parental_controls_button_label), "dim-label");
-                gtk_widget_show (GTK_WIDGET (self->parental_controls_row));
+                gtk_widget_set_visible (GTK_WIDGET (self->parental_controls_row), TRUE);
         }
 #endif
 
@@ -1185,7 +1185,7 @@ users_loaded (CcUserPanel *self)
                 g_signal_connect (dialog, "response",
                                   G_CALLBACK (gtk_window_destroy),
                                   NULL);
-                gtk_widget_show (dialog);
+                gtk_widget_set_visible (dialog, TRUE);
 
                 gtk_stack_set_visible_child (self->stack, self->no_users_box);
         } else {

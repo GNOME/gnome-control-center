@@ -533,7 +533,7 @@ header_func (GtkListBoxRow *row,
 
       separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
       gtk_widget_set_hexpand (separator, TRUE);
-      gtk_widget_show (separator);
+      gtk_widget_set_visible (separator, TRUE);
 
       gtk_list_box_row_set_header (row, separator);
     }
@@ -967,7 +967,7 @@ cc_panel_list_add_panel (CcPanelList        *self,
 
   /* Only show the Devices/Details rows when there's at least one panel */
   if (category == CC_CATEGORY_PRIVACY)
-    gtk_widget_show (GTK_WIDGET (self->privacy_row));
+    gtk_widget_set_visible (GTK_WIDGET (self->privacy_row), TRUE);
 }
 
 /**
@@ -1017,7 +1017,7 @@ cc_panel_list_set_active_panel (CcPanelList *self,
   listbox = gtk_widget_get_parent (data->row);
 
   /* The row might be hidden now, so make sure it's visible */
-  gtk_widget_show (data->row);
+  gtk_widget_set_visible (data->row, TRUE);
 
   gtk_list_box_select_row (GTK_LIST_BOX (listbox), GTK_LIST_BOX_ROW (data->row));
   gtk_widget_grab_focus (data->row);

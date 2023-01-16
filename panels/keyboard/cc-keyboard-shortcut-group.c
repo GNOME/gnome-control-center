@@ -89,7 +89,7 @@ shortcut_group_row_activated_cb (CcKeyboardShortcutGroup *self,
       cc_keyboard_shortcut_editor_set_item (self->shortcut_editor, NULL);
     }
 
-  gtk_widget_show (GTK_WIDGET (self->shortcut_editor));
+  gtk_widget_set_visible (GTK_WIDGET (self->shortcut_editor), TRUE);
 }
 
 static void

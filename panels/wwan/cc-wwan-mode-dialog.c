@@ -94,7 +94,7 @@ cc_wwan_mode_changed_cb (CcWwanModeDialog *self,
   if (row == self->selected_row)
     return;
 
-  gtk_widget_show (GTK_WIDGET (row->ok_emblem));
+  gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
 
   if (self->selected_row)
     gtk_widget_hide (GTK_WIDGET (self->selected_row->ok_emblem));
@@ -138,7 +138,7 @@ cc_wwan_mode_dialog_row_new (CcWwanModeDialog *self,
   row->preferred = preferred;
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (box);
+  gtk_widget_set_visible (box, TRUE);
   g_object_set (box,
                 "margin-top", 18,
                 "margin-bottom", 18,
@@ -256,7 +256,7 @@ cc_wwan_mode_dialog_update_mode (CcWwanModeRow    *row,
   if (self->allowed == row->allowed && self->preferred == row->preferred)
     {
       self->selected_row = row;
-      gtk_widget_show (GTK_WIDGET (row->ok_emblem));
+      gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
     }
   else
     gtk_widget_hide (GTK_WIDGET (row->ok_emblem));

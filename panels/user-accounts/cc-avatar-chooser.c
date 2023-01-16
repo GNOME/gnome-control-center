@@ -107,7 +107,7 @@ cc_avatar_chooser_crop (CcAvatarChooser *self,
 
         /* Content */
         self->crop_area = cc_crop_area_new ();
-        gtk_widget_show (self->crop_area);
+        gtk_widget_set_visible (self->crop_area, TRUE);
         cc_crop_area_set_min_size (CC_CROP_AREA (self->crop_area), 48, 48);
         cc_crop_area_set_paintable (CC_CROP_AREA (self->crop_area),
                                     GDK_PAINTABLE (gdk_texture_new_for_pixbuf (pixbuf)));
@@ -118,7 +118,7 @@ cc_avatar_chooser_crop (CcAvatarChooser *self,
 
         gtk_window_set_default_size (GTK_WINDOW (dialog), 400, 300);
 
-        gtk_widget_show (dialog);
+        gtk_widget_set_visible (dialog, TRUE);
 }
 
 static void
@@ -220,7 +220,7 @@ create_face_widget (gpointer item,
         if (source_pixbuf == NULL) {
                 image = gtk_image_new_from_icon_name ("image-missing");
                 gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
-                gtk_widget_show (image);
+                gtk_widget_set_visible (image, TRUE);
 
                 g_object_set_data_full (G_OBJECT (image),
                                         "filename", g_steal_pointer (&image_path), g_free);
@@ -231,7 +231,7 @@ create_face_widget (gpointer item,
         pixbuf = round_image (source_pixbuf);
         image = gtk_image_new_from_pixbuf (pixbuf);
         gtk_image_set_pixel_size (GTK_IMAGE (image), AVATAR_CHOOSER_PIXEL_SIZE);
-        gtk_widget_show (image);
+        gtk_widget_set_visible (image, TRUE);
 
         g_object_set_data_full (G_OBJECT (image),
                                 "filename", g_steal_pointer (&image_path), g_free);

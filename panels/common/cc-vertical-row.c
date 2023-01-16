@@ -323,7 +323,7 @@ cc_vertical_row_buildable_add_child (GtkBuildable *buildable,
   else if (!type && GTK_IS_WIDGET (child))
     {
       gtk_box_append (priv->suffixes, GTK_WIDGET (child));
-      gtk_widget_show (GTK_WIDGET (priv->suffixes));
+      gtk_widget_set_visible (GTK_WIDGET (priv->suffixes), TRUE);
     }
   else
     parent_buildable_iface->add_child (buildable, builder, child, type);
@@ -549,7 +549,7 @@ cc_vertical_row_add_prefix (CcVerticalRow *self,
   g_return_if_fail (GTK_IS_WIDGET (self));
 
   gtk_box_append (priv->prefixes, widget);
-  gtk_widget_show (GTK_WIDGET (priv->prefixes));
+  gtk_widget_set_visible (GTK_WIDGET (priv->prefixes), TRUE);
 }
 
 void

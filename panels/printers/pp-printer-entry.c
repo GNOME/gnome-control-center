@@ -446,7 +446,7 @@ check_clean_heads_maintenance_command_cb (GObject      *source_object,
 
   if (is_supported)
     {
-      gtk_widget_show (GTK_WIDGET (self->clean_heads_menuitem));
+      gtk_widget_set_visible (GTK_WIDGET (self->clean_heads_menuitem), TRUE);
     }
 }
 

@@ -593,7 +593,7 @@ gcm_prefs_calibrate_display (CcColorPanel *prefs)
   /* show ui */
   gtk_window_set_transient_for (GTK_WINDOW (prefs->assistant_calib),
                                 GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (prefs))));
-  gtk_widget_show (prefs->assistant_calib);
+  gtk_widget_set_visible (prefs->assistant_calib, TRUE);
 }
 
 static void
@@ -891,7 +891,7 @@ gcm_prefs_profile_add_cb (CcColorPanel *prefs)
   gtk_window_set_transient_for (GTK_WINDOW (prefs->dialog_assign),
                                 GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (prefs))));
 
-  gtk_widget_show (prefs->dialog_assign);
+  gtk_widget_set_visible (prefs->dialog_assign, TRUE);
 }
 
 static void

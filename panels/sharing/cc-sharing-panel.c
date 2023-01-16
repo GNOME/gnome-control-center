@@ -1335,7 +1335,7 @@ remote_desktop_name_appeared (GDBusConnection *connection,
   self->remote_desktop_name_watch = 0;
 
   cc_sharing_panel_setup_remote_desktop_dialog (self);
-  gtk_widget_show (self->remote_desktop_row);
+  gtk_widget_set_visible (self->remote_desktop_row, TRUE);
 }
 
 static void

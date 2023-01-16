@@ -472,7 +472,7 @@ update_widget_real (PpPPDOptionWidget *self)
         }
 
       if (option->conflicted)
-        gtk_widget_show (self->image);
+        gtk_widget_set_visible (self->image, TRUE);
       else
         gtk_widget_hide (self->image);
     }

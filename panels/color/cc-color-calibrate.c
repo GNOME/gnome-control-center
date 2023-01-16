@@ -861,7 +861,7 @@ cc_color_calibrate_start (CcColorCalibrate *calibrate,
   window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,
                                                "dialog_calibrate"));
   gtk_window_set_modal (window, TRUE);
-  gtk_widget_show (GTK_WIDGET (window));
+  gtk_widget_set_visible (GTK_WIDGET (window), TRUE);
 
   /* show correct buttons */
   widget = GTK_WIDGET (gtk_builder_get_object (calibrate->builder,
@@ -976,7 +976,7 @@ cc_color_calibrate_init (CcColorCalibrate *calibrate)
                                                "button_cancel"));
   g_signal_connect_object (widget, "clicked",
                            G_CALLBACK (cc_color_calibrate_button_cancel_cb), calibrate, G_CONNECT_SWAPPED);
-  gtk_widget_show (widget);
+  gtk_widget_set_visible (widget, TRUE);
 
   /* setup the specialist calibration window */
   window = GTK_WINDOW (gtk_builder_get_object (calibrate->builder,

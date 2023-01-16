@@ -487,7 +487,7 @@ cc_bolt_device_dialog_set_device (CcBoltDeviceDialog *dialog,
 				   parents->len), parents->len);
 
   gtk_label_set_label (dialog->parents_label, msg);
-  gtk_widget_show (GTK_WIDGET (dialog->parents_expander));
+  gtk_widget_set_visible (GTK_WIDGET (dialog->parents_expander), TRUE);
 
   for (i = 0; i < parents->len; i++)
     {

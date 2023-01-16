@@ -93,7 +93,7 @@ update_password_strength (CcPasswordDialog *self)
                 gtk_widget_remove_css_class (GTK_WIDGET (self->password_entry), "error");
         } else if (strlen (password) == 0) {
                 //gtk_widget_hide (GTK_WIDGET (self->password_entry_status_icon));
-                //gtk_widget_show (GTK_WIDGET (self->generate_password_button));
+                //gtk_widget_set_visible (GTK_WIDGET (self->generate_password_button), TRUE);
         } else {
                 gtk_widget_add_css_class (GTK_WIDGET (self->password_entry), "error");
         }
@@ -512,7 +512,7 @@ cc_password_dialog_new (ActUser *user)
         }
         else {
                 mode_change (self, ACT_USER_PASSWORD_MODE_SET_AT_LOGIN);
-                gtk_widget_show (GTK_WIDGET (self->password_on_next_login_group));
+                gtk_widget_set_visible (GTK_WIDGET (self->password_on_next_login_group), TRUE);
 
                 gtk_widget_hide (GTK_WIDGET (self->old_password_entry));
                 self->old_password_ok = TRUE;

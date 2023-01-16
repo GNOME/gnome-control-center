@@ -428,7 +428,7 @@ show_button_mapping_dialog (CcWacomPage *page)
 	g_signal_connect_object (dialog, "response",
 	                         G_CALLBACK (button_mapping_dialog_closed), page, G_CONNECT_SWAPPED);
 
-	gtk_widget_show (dialog);
+	gtk_widget_set_visible (dialog, TRUE);
 
 	page->button_map = GTK_WINDOW (dialog);
 	g_object_add_weak_pointer (G_OBJECT (dialog), (gpointer *) &page->button_map);

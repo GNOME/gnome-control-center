@@ -100,8 +100,8 @@ show_row_for_account_cb (CcOnlineAccountsPanel *self,
                          GtkWidget             *row,
                          GList                 *other_rows)
 {
-  gtk_widget_show (row);
-  gtk_widget_show (GTK_WIDGET (self->accounts_frame));
+  gtk_widget_set_visible (row, TRUE);
+  gtk_widget_set_visible (GTK_WIDGET (self->accounts_frame), TRUE);
 }
 
 static void
@@ -380,7 +380,7 @@ add_provider_row (CcOnlineAccountsPanel *self,
 
   row = cc_online_account_provider_row_new (provider);
 
-  gtk_widget_show (GTK_WIDGET (row));
+  gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
   gtk_list_box_append (self->providers_listbox, GTK_WIDGET (row));
 }
 
@@ -426,7 +426,7 @@ add_account (CcOnlineAccountsPanel *self,
 
   /* Add to the listbox */
   gtk_list_box_append (self->accounts_listbox, GTK_WIDGET (row));
-  gtk_widget_show (GTK_WIDGET (self->accounts_frame));
+  gtk_widget_set_visible (GTK_WIDGET (self->accounts_frame), TRUE);
 }
 
 static void

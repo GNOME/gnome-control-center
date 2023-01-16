@@ -47,7 +47,7 @@ add_page (GList *devices,
 
 	widget = cc_wacom_page_new (NULL, stylus);
 	gtk_notebook_append_page (GTK_NOTEBOOK (notebook), widget, NULL);
-	gtk_widget_show (widget);
+	gtk_widget_set_visible (widget, TRUE);
 }
 
 static GList *
@@ -129,7 +129,7 @@ int main (int argc, char **argv)
 	gtk_notebook_set_show_border (GTK_NOTEBOOK (notebook), FALSE);
 	gtk_widget_set_vexpand (notebook, TRUE);
 	gtk_window_set_child (GTK_WINDOW (window), notebook);
-	gtk_widget_show (notebook);
+	gtk_widget_set_visible (notebook, TRUE);
 
 	devices = create_fake_intuos4 ();
 	add_page (devices, notebook);
@@ -146,7 +146,7 @@ int main (int argc, char **argv)
 	devices = create_fake_h610pro ();
 	add_page (devices, notebook);
 
-	gtk_widget_show (window);
+	gtk_widget_set_visible (window, TRUE);
 
   while (g_list_model_get_n_items (gtk_window_get_toplevels ()) > 0)
     g_main_context_iteration (NULL, TRUE);

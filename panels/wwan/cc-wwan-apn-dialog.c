@@ -119,7 +119,7 @@ cc_wwan_apn_back_clicked_cb (CcWwanApnDialog *self)
   if (view == GTK_WIDGET (self->apn_edit_view))
     {
       gtk_widget_hide (GTK_WIDGET (self->save_button));
-      gtk_widget_show (GTK_WIDGET (self->add_button));
+      gtk_widget_set_visible (GTK_WIDGET (self->add_button), TRUE);
       gtk_stack_set_visible_child (self->apn_settings_stack,
                                    GTK_WIDGET (self->apn_list_view));
     }
@@ -138,7 +138,7 @@ cc_wwan_apn_add_clicked_cb (CcWwanApnDialog *self)
   gtk_editable_set_text (GTK_EDITABLE (self->password_entry), "");
 
   gtk_widget_hide (GTK_WIDGET (self->add_button));
-  gtk_widget_show (GTK_WIDGET (self->save_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->save_button), TRUE);
   self->apn_to_save = NULL;
   gtk_stack_set_visible_child (self->apn_settings_stack,
                                GTK_WIDGET (self->apn_edit_view));
@@ -235,7 +235,7 @@ cc_wwan_apn_edit_clicked_cb (CcWwanApnDialog *self,
   apn = row->apn;
   self->apn_to_save = apn;
 
-  gtk_widget_show (GTK_WIDGET (self->save_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->save_button), TRUE);
   gtk_widget_hide (GTK_WIDGET (self->add_button));
 
   gtk_editable_set_text (GTK_EDITABLE (self->name_entry), cc_wwan_data_apn_get_name (apn));
@@ -353,7 +353,7 @@ cc_wwan_apn_dialog_show (GtkWidget *widget)
   CcWwanApnDialog *self = (CcWwanApnDialog *)widget;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->save_button), FALSE);
-  gtk_widget_show (GTK_WIDGET (self->add_button));
+  gtk_widget_set_visible (GTK_WIDGET (self->add_button), TRUE);
   gtk_widget_hide (GTK_WIDGET (self->save_button));
   gtk_stack_set_visible_child (self->apn_settings_stack,
                                GTK_WIDGET (self->apn_list_view));

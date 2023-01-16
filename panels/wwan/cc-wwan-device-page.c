@@ -161,7 +161,7 @@ wwan_data_show_apn_dialog (CcWwanDevicePage *self)
                                self, G_CONNECT_SWAPPED);
     }
 
-  gtk_widget_show (GTK_WIDGET (self->apn_dialog));
+  gtk_widget_set_visible (GTK_WIDGET (self->apn_dialog), TRUE);
 }
 
 static GcrPrompt *
@@ -383,7 +383,7 @@ wwan_network_settings_activated_cb (CcWwanDevicePage *self,
       return;
     }
 
-  gtk_widget_show (dialog);
+  gtk_widget_set_visible (dialog, TRUE);
 }
 
 static void
@@ -398,13 +398,13 @@ wwan_advanced_settings_activated_cb (CcWwanDevicePage *self,
     {
       if (!self->sim_lock_dialog)
         self->sim_lock_dialog = cc_wwan_sim_lock_dialog_new (top_level, self->device);
-      gtk_widget_show (GTK_WIDGET (self->sim_lock_dialog));
+      gtk_widget_set_visible (GTK_WIDGET (self->sim_lock_dialog), TRUE);
     }
   else if (row == self->details_row)
     {
       if (!self->details_dialog)
         self->details_dialog = cc_wwan_details_dialog_new (top_level, self->device);
-      gtk_widget_show (GTK_WIDGET (self->details_dialog));
+      gtk_widget_set_visible (GTK_WIDGET (self->details_dialog), TRUE);
     }
   else if (row == self->apn_settings_row)
     {

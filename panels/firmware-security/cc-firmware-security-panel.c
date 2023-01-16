@@ -465,7 +465,7 @@ on_hsi_button_clicked_cb (GtkWidget *widget,
   shell = cc_panel_get_shell (CC_PANEL (self));
   toplevel = cc_shell_get_toplevel (shell);
   gtk_window_set_transient_for (GTK_WINDOW (dialog), GTK_WINDOW (toplevel));
-  gtk_widget_show (GTK_WIDGET (dialog));
+  gtk_widget_set_visible (GTK_WIDGET (dialog), TRUE);
 }
 
 static void
@@ -481,7 +481,7 @@ on_secure_boot_button_clicked_cb (GtkWidget *widget,
   shell = cc_panel_get_shell (CC_PANEL (self));
   toplevel = cc_shell_get_toplevel (shell);
   gtk_window_set_transient_for (GTK_WINDOW (boot_dialog), GTK_WINDOW (toplevel));
-  gtk_widget_show (boot_dialog);
+  gtk_widget_set_visible (boot_dialog, TRUE);
 }
 
 static void

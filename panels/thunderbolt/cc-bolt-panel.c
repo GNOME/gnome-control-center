@@ -417,14 +417,14 @@ cc_bolt_panel_add_device (CcBoltPanel *panel,
   if (bolt_status_is_pending (status))
     {
       gtk_list_box_append (panel->pending_list, GTK_WIDGET (entry));
-      gtk_widget_show (GTK_WIDGET (panel->pending_list));
-      gtk_widget_show (GTK_WIDGET (panel->pending_box));
+      gtk_widget_set_visible (GTK_WIDGET (panel->pending_list), TRUE);
+      gtk_widget_set_visible (GTK_WIDGET (panel->pending_box), TRUE);
     }
   else
     {
       gtk_list_box_append (panel->devices_list, GTK_WIDGET (entry));
-      gtk_widget_show (GTK_WIDGET (panel->devices_list));
-      gtk_widget_show (GTK_WIDGET (panel->devices_box));
+      gtk_widget_set_visible (GTK_WIDGET (panel->devices_list), TRUE);
+      gtk_widget_set_visible (GTK_WIDGET (panel->devices_box), TRUE);
     }
 
   g_signal_connect_object (entry,
@@ -506,7 +506,7 @@ cc_panel_list_box_migrate (CcBoltPanel       *panel,
 
   gtk_list_box_remove (from, target);
   gtk_list_box_append (to, target);
-  gtk_widget_show (GTK_WIDGET (to));
+  gtk_widget_set_visible (GTK_WIDGET (to), TRUE);
 
   from_box = cc_bolt_panel_box_for_listbox (panel, from);
   to_box = cc_bolt_panel_box_for_listbox (panel, to);
@@ -584,7 +584,7 @@ cc_bolt_panel_name_owner_changed (CcBoltPanel *panel)
 
   if (panel->permission)
     {
-      gtk_widget_show (GTK_WIDGET (panel->headerbar_box));
+      gtk_widget_set_visible (GTK_WIDGET (panel->headerbar_box), TRUE);
     }
   else
     {
@@ -772,7 +772,7 @@ on_device_entry_row_activated_cb (CcBoltPanel   *panel,
   cc_bolt_device_dialog_set_device (panel->device_dialog, device, parents);
 
   gtk_window_set_default_size (GTK_WINDOW (panel->device_dialog), 1, 1);
-  gtk_widget_show (GTK_WIDGET (panel->device_dialog));
+  gtk_widget_set_visible (GTK_WIDGET (panel->device_dialog), TRUE);
 }
 
 static void

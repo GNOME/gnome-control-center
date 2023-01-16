@@ -731,7 +731,7 @@ finish_add_connection (NetConnectionEditor *self, NMConnection *connection)
 {
         adw_bin_set_child (self->add_connection_frame, NULL);
         gtk_stack_set_visible_child (self->toplevel_stack, GTK_WIDGET (self->notebook));
-        gtk_widget_show (GTK_WIDGET (self->apply_button));
+        gtk_widget_set_visible (GTK_WIDGET (self->apply_button), TRUE);
 
         if (connection)
                 net_connection_editor_set_connection (self, connection);

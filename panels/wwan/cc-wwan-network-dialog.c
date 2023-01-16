@@ -114,7 +114,7 @@ cc_wwan_network_changed_cb (CcWwanNetworkDialog *self,
     return;
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->button_apply), TRUE);
-  gtk_widget_show (GTK_WIDGET (row->ok_emblem));
+  gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
 
   if (self->selected_row)
     gtk_widget_hide (GTK_WIDGET (self->selected_row->ok_emblem));
@@ -139,7 +139,7 @@ cc_wwan_network_dialog_row_new (CcWwanNetworkDialog *self,
   row = g_object_new (CC_TYPE_WWAN_NETWORK_ROW, NULL);
 
   box = gtk_box_new (GTK_ORIENTATION_HORIZONTAL, 12);
-  gtk_widget_show (box);
+  gtk_widget_set_visible (box, TRUE);
   g_object_set (box,
                 "margin-top", 18,
                 "margin-bottom", 18,
@@ -189,7 +189,7 @@ cc_wwan_network_dialog_update_current_network (CcWwanNetworkDialog *self)
 
   row = cc_wwan_network_dialog_row_new (self, operator_name, "");
   self->selected_row = row;
-  gtk_widget_show (GTK_WIDGET (row->ok_emblem));
+  gtk_widget_set_visible (GTK_WIDGET (row->ok_emblem), TRUE);
   gtk_list_box_append (GTK_LIST_BOX (self->operator_list_box), GTK_WIDGET (row));
 }
 
@@ -242,7 +242,7 @@ cc_wwan_network_scan_complete_cb (GObject      *object,
   if (!error)
     {
       cc_wwan_network_dialog_update (self);
-      gtk_widget_show (GTK_WIDGET (self->operator_list_box));
+      gtk_widget_set_visible (GTK_WIDGET (self->operator_list_box), TRUE);
     }
   else if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
     {
@@ -255,7 +255,7 @@ cc_wwan_network_scan_complete_cb (GObject      *object,
       toast = adw_toast_new (cc_wwan_error_get_message (error));
       adw_toast_overlay_add_toast (self->toast_overlay, toast);
 
-      gtk_widget_show (GTK_WIDGET (self->operator_list_box));
+      gtk_widget_set_visible (GTK_WIDGET (self->operator_list_box), TRUE);
       g_warning ("Error: scanning networks failed: %s", error->message);
     }
 }
