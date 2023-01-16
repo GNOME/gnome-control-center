@@ -380,7 +380,6 @@ add_provider_row (CcOnlineAccountsPanel *self,
 
   row = cc_online_account_provider_row_new (provider);
 
-  gtk_widget_set_visible (GTK_WIDGET (row), TRUE);
   gtk_list_box_append (self->providers_listbox, GTK_WIDGET (row));
 }
 

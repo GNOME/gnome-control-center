@@ -471,10 +471,7 @@ update_widget_real (PpPPDOptionWidget *self)
             }
         }
 
-      if (option->conflicted)
-        gtk_widget_set_visible (self->image, TRUE);
-      else
-        gtk_widget_set_visible (self->image, FALSE);
+      gtk_widget_set_visible (self->image, option->conflicted);
     }
 }
 

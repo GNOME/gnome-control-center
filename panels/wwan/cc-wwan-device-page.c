@@ -383,7 +383,7 @@ wwan_network_settings_activated_cb (CcWwanDevicePage *self,
       return;
     }
 
-  gtk_widget_set_visible (dialog, TRUE);
+  gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static void

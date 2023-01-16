@@ -166,7 +166,6 @@ wireless_dialog_response_cb (GtkDialog *foo,
 	}
 
 done:
-	gtk_widget_set_visible (GTK_WIDGET (dialog), FALSE);
 	gtk_window_destroy (GTK_WINDOW (dialog));
 }
 

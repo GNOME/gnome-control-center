@@ -586,7 +586,7 @@ on_development_warning_dialog_responded_cb (CcWindow *self)
   g_debug ("Disabling development build warning dialog");
   g_settings_set_boolean (self->settings, "show-development-warning", FALSE);
 
-  gtk_widget_set_visible (GTK_WIDGET (self->development_warning_dialog), FALSE);
+  gtk_window_close (GTK_WINDOW (self->development_warning_dialog));
 }
 
 static void

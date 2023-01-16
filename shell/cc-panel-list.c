@@ -533,7 +533,6 @@ header_func (GtkListBoxRow *row,
 
       separator = gtk_separator_new (GTK_ORIENTATION_HORIZONTAL);
       gtk_widget_set_hexpand (separator, TRUE);
-      gtk_widget_set_visible (separator, TRUE);
 
       gtk_list_box_row_set_header (row, separator);
     }

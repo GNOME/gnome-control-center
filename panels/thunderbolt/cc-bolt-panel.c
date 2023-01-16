@@ -451,7 +451,7 @@ cc_bolt_panel_del_device_entry (CcBoltPanel       *panel,
   dev = cc_bolt_device_entry_get_device (entry);
   if (cc_bolt_device_dialog_device_equal (panel->device_dialog, dev))
     {
-      gtk_widget_set_visible (GTK_WIDGET (panel->device_dialog), FALSE);
+      gtk_window_close (GTK_WINDOW (panel->device_dialog));
       cc_bolt_device_dialog_set_device (panel->device_dialog, NULL, NULL);
     }
 
@@ -772,7 +772,7 @@ on_device_entry_row_activated_cb (CcBoltPanel   *panel,
   cc_bolt_device_dialog_set_device (panel->device_dialog, device, parents);
 
   gtk_window_set_default_size (GTK_WINDOW (panel->device_dialog), 1, 1);
-  gtk_widget_set_visible (GTK_WIDGET (panel->device_dialog), TRUE);
+  gtk_window_present (GTK_WINDOW (panel->device_dialog));
 }
 
 static void

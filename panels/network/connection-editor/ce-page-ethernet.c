@@ -52,10 +52,8 @@ G_DEFINE_TYPE_WITH_CODE (CEPageEthernet, ce_page_ethernet, GTK_TYPE_GRID,
 static void
 mtu_changed (CEPageEthernet *self)
 {
-        if (gtk_spin_button_get_value_as_int (self->mtu_spin) == 0)
-                gtk_widget_set_visible (self->mtu_label, FALSE);
-        else
-                gtk_widget_set_visible (self->mtu_label, TRUE);
+        gtk_widget_set_visible (self->mtu_label,
+                                gtk_spin_button_get_value_as_int (self->mtu_spin) != 0);
 }
 
 static void

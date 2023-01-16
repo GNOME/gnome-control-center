@@ -891,7 +891,7 @@ gcm_prefs_profile_add_cb (CcColorPanel *prefs)
   gtk_window_set_transient_for (GTK_WINDOW (prefs->dialog_assign),
                                 GTK_WINDOW (gtk_widget_get_native (GTK_WIDGET (prefs))));
 
-  gtk_widget_set_visible (prefs->dialog_assign, TRUE);
+  gtk_window_present (GTK_WINDOW (prefs->dialog_assign));
 }
 
 static void

@@ -940,7 +940,7 @@ printer_add_async_cb (GObject      *source_object,
                             "response",
                             G_CALLBACK (gtk_window_destroy),
                             NULL);
-          gtk_widget_set_visible (message_dialog, TRUE);
+          gtk_window_present (GTK_WINDOW (message_dialog));
         }
     }
 

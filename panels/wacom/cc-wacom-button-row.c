@@ -244,11 +244,9 @@ cc_wacom_button_row_new (guint      button,
   label = gtk_label_new (name);
   g_object_set (label, "halign", GTK_ALIGN_START, NULL);
   gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
-  gtk_widget_set_visible (label, TRUE);
 
   combo = create_actions_combo ();
   gtk_grid_attach (GTK_GRID (grid), combo, 1, 0, 1, 1);
-  gtk_widget_set_visible (combo, TRUE);
   row->action_combo = GTK_COMBO_BOX (combo);
   g_signal_connect_object (combo, "changed",
                            G_CALLBACK (on_row_action_combo_box_changed), row, G_CONNECT_SWAPPED);

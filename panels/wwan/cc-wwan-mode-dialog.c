@@ -119,7 +119,7 @@ cc_wwan_mode_dialog_ok_clicked_cb (CcWwanModeDialog *self)
       g_return_if_reached ();
     }
 
-  gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
+  gtk_window_close (GTK_WINDOW (self));
 }
 
 static GtkWidget *

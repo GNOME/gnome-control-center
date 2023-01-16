@@ -332,7 +332,6 @@ show_input_sources_for_locale (CcInputChooser *self,
       GtkEventController *controller;
 
       info->back_row = g_object_ref_sink (back_row_new (info->name));
-      gtk_widget_set_visible (GTK_WIDGET (info->back_row), TRUE);
       g_object_set_data (G_OBJECT (info->back_row), "back", GINT_TO_POINTER (TRUE));
       g_object_set_data (G_OBJECT (info->back_row), "locale-info", info);
 
@@ -1084,15 +1083,12 @@ cc_input_chooser_new (gboolean      is_login,
     self->ibus_engines = g_hash_table_ref (ibus_engines);
 
   self->more_row = g_object_ref_sink (more_row_new ());
-  gtk_widget_set_visible (GTK_WIDGET (self->more_row), TRUE);
   self->no_results = g_object_ref_sink (no_results_widget_new ());
-  gtk_widget_set_visible (self->no_results, TRUE);
 
   gtk_list_box_set_filter_func (self->input_sources_listbox, list_filter, self, NULL);
   gtk_list_box_set_sort_func (self->input_sources_listbox, list_sort, self, NULL);
 
-  if (self->is_login)
-    gtk_widget_set_visible (GTK_WIDGET (self->login_label), TRUE);
+  gtk_widget_set_visible (GTK_WIDGET (self->login_label), self->is_login);
 
   get_locale_infos (self);
 #ifdef HAVE_IBUS

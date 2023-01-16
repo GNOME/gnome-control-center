@@ -1058,7 +1058,7 @@ language_response (CcUserPanel *self,
         const gchar *lang, *account_language;
 
         if (response_id != GTK_RESPONSE_OK) {
-                gtk_widget_set_visible (GTK_WIDGET (dialog), FALSE);
+                gtk_window_close (GTK_WINDOW (dialog));
                 return;
         }
 
@@ -1076,7 +1076,7 @@ language_response (CcUserPanel *self,
                 cc_list_row_set_secondary_label (self->language_row, name);
         }
 
-        gtk_widget_set_visible (GTK_WIDGET (dialog), FALSE);
+        gtk_window_close (GTK_WINDOW (dialog));
 }
 
 static void
@@ -1185,7 +1185,7 @@ users_loaded (CcUserPanel *self)
                 g_signal_connect (dialog, "response",
                                   G_CALLBACK (gtk_window_destroy),
                                   NULL);
-                gtk_widget_set_visible (dialog, TRUE);
+                gtk_window_present (GTK_WINDOW (dialog));
 
                 gtk_stack_set_visible_child (self->stack, self->no_users_box);
         } else {
