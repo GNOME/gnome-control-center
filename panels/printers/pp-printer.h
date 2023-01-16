@@ -55,6 +55,10 @@ gboolean     pp_printer_delete_finish (PpPrinter            *printer,
                                        GAsyncResult         *res,
                                        GError              **error);
 
+gboolean     pp_printer_delete_sync   (PpPrinter            *self,
+                                       GCancellable         *cancellable,
+                                       GError              **error);
+
 void         pp_printer_get_jobs_async (PpPrinter           *printer,
                                         gboolean             myjobs,
                                         gint                 which_jobs,

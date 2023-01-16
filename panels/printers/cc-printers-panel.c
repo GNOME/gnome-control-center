@@ -287,10 +287,7 @@ cc_printers_panel_dispose (GObject *object)
   if (self->deleted_printer_name != NULL)
     {
       g_autoptr(PpPrinter) printer = pp_printer_new (self->deleted_printer_name);
-      pp_printer_delete_async (printer,
-                               NULL,
-                               printer_removed_cb,
-                               NULL);
+      pp_printer_delete_sync (printer, NULL, NULL);
     }
 
   g_clear_object (&self->cups);

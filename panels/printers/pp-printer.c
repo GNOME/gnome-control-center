@@ -446,6 +446,53 @@ pp_printer_delete_finish (PpPrinter     *self,
   return g_task_propagate_boolean (G_TASK (res), error);
 }
 
+gboolean
+pp_printer_delete_sync (PpPrinter     *self,
+                        GCancellable  *cancellable,
+                        GError       **error)
+{
+  g_autoptr(GDBusConnection)  bus = NULL;
+  g_autoptr(GVariant)         output = NULL;
+  g_autoptr(GError)           tmp_error = NULL;
+  const gchar                *ret_error;
+  gboolean                    result = FALSE;
+
+  bus = g_bus_get_sync (G_BUS_TYPE_SYSTEM, cancellable, &tmp_error);
+  if (bus == NULL)
+    {
+      g_warning ("Failed to get system bus: %s", tmp_error->message);
+      *error = g_error_copy (tmp_error);
+      return result;
+    }
+
+  output = g_dbus_connection_call_sync (bus,
+                                        MECHANISM_BUS,
+                                        "/",
+                                        MECHANISM_BUS,
+                                        "PrinterDelete",
+                                        g_variant_new ("(s)", self->printer_name),
+                                        G_VARIANT_TYPE ("(s)"),
+                                        G_DBUS_CALL_FLAGS_NONE,
+                                        -1,
+                                        cancellable,
+                                        &tmp_error);
+
+  if (output == NULL)
+    {
+      g_warning ("%s", tmp_error->message);
+      *error = g_error_copy (tmp_error);
+      return result;
+    }
+
+  g_variant_get (output, "(&s)", &ret_error);
+  if (ret_error[0] != '\0')
+    g_warning ("cups-pk-helper: removing of printer %s failed: %s", self->printer_name, ret_error);
+  else
+    result = TRUE;
+
+  return result;
+}
+
 typedef struct
 {
   gchar *filename;
