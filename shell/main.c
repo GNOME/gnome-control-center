@@ -33,15 +33,6 @@
 #include "cc-log.h"
 #include "cc-application.h"
 
-static void
-initialize_dependencies (gint    *argc,
-                         gchar ***argv)
-{
-  #ifdef GDK_WINDOWING_X11
-    XInitThreads ();
-  #endif
-}
-
 int
 main (gint    argc,
       gchar **argv)
@@ -54,8 +45,6 @@ main (gint    argc,
 
   setlocale (LC_ALL, "");
   cc_log_init ();
-
-  initialize_dependencies (&argc, &argv);
 
   application = cc_application_new ();
 
