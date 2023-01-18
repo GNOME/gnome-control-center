@@ -117,6 +117,19 @@ libgvc_dep = libgvc.get_variable('libgvc_dep')
 goa_req_version = '>= 3.25.3'
 pulse_req_version = '>= 2.0'
 
+gtk_dep = dependency(
+  'gtk4',
+  version: '>= 4.9.3',
+  fallback: ['gtk', 'gtk_dep'],
+  default_options: [
+    'introspection=disabled',
+    'demos=false',
+    'build-testsuite=false',
+    'build-tests=false',
+    'build-examples=false',
+  ]
+)
+
 libadwaita_dep = dependency(
   'libadwaita-1',
   version: '>= 1.2.alpha',
@@ -155,7 +168,7 @@ common_deps = [
   libadwaita_dep,
   dependency('gio-unix-2.0'),
   dependency('gthread-2.0'),
-  dependency('gtk4', version: '>= 4.8'),
+  gtk_dep,
 ]
 
 polkit_gobject_dep = dependency('polkit-gobject-1', version: '>= 0.103')
