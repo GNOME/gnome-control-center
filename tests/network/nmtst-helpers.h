@@ -252,7 +252,7 @@ nmtst_set_device_state (NMTstcServiceInfo *sinfo, NMDevice *device, NMDeviceStat
 	                        &error);
 	g_assert_no_error (error);
 
-	WAIT_DEVICE(device, 1, "state-reason")
+	WAIT_DEVICE(device, 2, "state-reason", "state")
 	WAIT_FINISHED(5)
 }
 
