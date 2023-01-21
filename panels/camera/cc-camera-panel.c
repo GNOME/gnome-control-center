@@ -20,6 +20,7 @@
 
 #include "cc-camera-panel.h"
 #include "cc-camera-resources.h"
+#include "cc-list-row.h"
 #include "cc-util.h"
 
 #include <adwaita.h>
@@ -34,7 +35,7 @@ struct _CcCameraPanel
   CcPanel       parent_instance;
 
   GtkListBox   *camera_apps_list_box;
-  GtkSwitch    *main_switch;
+  CcListRow    *camera_row;
 
   GSettings    *privacy_settings;
 
@@ -358,7 +359,7 @@ cc_camera_panel_class_init (CcCameraPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/camera/cc-camera-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, camera_apps_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, main_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, camera_row);
 }
 
 static void
@@ -373,7 +374,7 @@ cc_camera_panel_init (CcCameraPanel *self)
   self->privacy_settings = g_settings_new ("org.gnome.desktop.privacy");
 
   g_settings_bind (self->privacy_settings, "disable-camera",
-                   self->main_switch, "active",
+                   self->camera_row, "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
   self->camera_app_switches = g_hash_table_new_full (g_str_hash,

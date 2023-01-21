@@ -2,19 +2,24 @@
 <interface>
   <template class="CcCameraPanel" parent="CcPanel">
 
-    <child type="titlebar-end">
-      <object class="GtkSwitch" id="main_switch">
-        <accessibility>
-          <property name="label" translatable="yes">Enable</property>
-        </accessibility>
-        <property name="valign">center</property>
-      </object>
-    </child>
-
     <child type="content">
       <object class="AdwPreferencesPage">
         <child>
           <object class="AdwPreferencesGroup">
+            <child>
+              <object class="CcListRow" id="camera_row">
+                <property name="title" translatable="yes">_Camera Access</property>
+                <property name="subtitle" translatable="yes">Allow permitted apps to use cameras</property>
+                <property name="use-underline">True</property>
+                <property name="show-switch">True</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="AdwPreferencesGroup">
+            <property name="title" translatable="yes">Permitted Apps</property>
             <property name="description" translatable="yes">The following sandboxed apps have been given permission to use cameras. Apps that are not sandboxed can use cameras without asking for permission.</property>
             <child>
               <object class="GtkListBox" id="camera_apps_list_box">
