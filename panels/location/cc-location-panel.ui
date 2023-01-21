@@ -12,63 +12,38 @@
     </child>
 
     <child type="content">
-      <object class="GtkStack" id="stack">
-
+      <object class="AdwPreferencesPage">
         <child>
-          <object class="GtkStackPage">
-            <property name="name">empty</property>
-            <property name="child">
-              <object class="AdwStatusPage">
-                <property name="icon-name">location-services-disabled-symbolic</property>
-                <property name="title" translatable="yes">Location Services Turned Off</property>
-                <property name="description" translatable="yes">No sandboxed apps can obtain location information.</property>
-              </object>
-
-            </property>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkStackPage">
-            <property name="name">content</property>
-            <property name="child">
-              <object class="AdwPreferencesPage">
-                <child>
-                  <object class="AdwPreferencesGroup">
-                    <property name="description" translatable="yes">Location services use GPS, Wi-Fi and cellular connections to determine the approximate location of this device. &lt;a href=&apos;https://location.services.mozilla.com/privacy&apos;&gt;Learn about what data is collected, and how it is used.&lt;/a&gt;
+          <object class="AdwPreferencesGroup">
+            <property name="description" translatable="yes">Location services use GPS, Wi-Fi and cellular connections to determine the approximate location of this device. &lt;a href=&apos;https://location.services.mozilla.com/privacy&apos;&gt;Learn about what data is collected, and how it is used.&lt;/a&gt;
 
 The following sandboxed apps have been given access to location data. Apps that are not sandboxed can access location data without asking for permission.</property>
-                    <child>
-                      <object class="GtkListBox" id="location_apps_list_box">
-                        <property name="selection-mode">none</property>
-                        <style>
-                          <class name="boxed-list"/>
-                        </style>
+            <child>
+              <object class="GtkListBox" id="location_apps_list_box">
+                <property name="selection-mode">none</property>
+                <style>
+                  <class name="boxed-list"/>
+                </style>
 
-                        <child type="placeholder">
-                          <object class="GtkLabel">
-                            <property name="margin_top">18</property>
-                            <property name="margin_bottom">18</property>
-                            <property name="margin_start">18</property>
-                            <property name="margin_end">18</property>
-                            <property name="label" translatable="yes">No sandboxed apps have asked for location access</property>
-                            <property name="wrap">true</property>
-                            <property name="max-width-chars">50</property>
-                            <style>
-                              <class name="dim-label" />
-                            </style>
-                          </object>
-                        </child>
-
-                      </object>
-                    </child>
+                <child type="placeholder">
+                  <object class="GtkLabel">
+                    <property name="margin_top">18</property>
+                    <property name="margin_bottom">18</property>
+                    <property name="margin_start">18</property>
+                    <property name="margin_end">18</property>
+                    <property name="label" translatable="yes">No sandboxed apps have asked for location access</property>
+                    <property name="wrap">true</property>
+                    <property name="max-width-chars">50</property>
+                    <style>
+                      <class name="dim-label" />
+                    </style>
                   </object>
                 </child>
+
               </object>
-            </property>
+            </child>
           </object>
         </child>
-
       </object>
     </child>
   </template>

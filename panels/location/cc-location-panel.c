@@ -34,7 +34,6 @@ struct _CcLocationPanel
 {
   CcPanel       parent_instance;
 
-  GtkStack     *stack;
   GtkListBox   *location_apps_list_box;
   GtkSwitch    *main_switch;
 
@@ -216,19 +215,6 @@ add_location_app (CcLocationPanel *self,
                          0);
 }
 
-static gboolean
-to_child_name (GBinding     *binding,
-               const GValue *from,
-               GValue       *to,
-               gpointer      user_data)
-{
-  if (g_value_get_boolean (from))
-    g_value_set_string (to, "content");
-  else
-    g_value_set_string (to, "empty");
-  return TRUE;
-}
-
 /* Steals permissions and permissions_data references */
 static void
 update_perm_store (CcLocationPanel *self,
@@ -380,7 +366,6 @@ cc_location_panel_class_init (CcLocationPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/location/cc-location-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_apps_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, main_switch);
 }
@@ -400,15 +385,6 @@ cc_location_panel_init (CcLocationPanel *self)
                    self->main_switch,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
-
-  g_object_bind_property_full  (self->main_switch,
-                                "active",
-                                self->stack,
-                                "visible-child-name",
-                                G_BINDING_SYNC_CREATE,
-                                to_child_name,
-                                NULL,
-                                NULL, NULL);
 
   self->location_app_switches = g_hash_table_new_full (g_str_hash,
                                                        g_str_equal,
