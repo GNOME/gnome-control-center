@@ -18,6 +18,7 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
+#include "cc-list-row.h"
 #include "cc-microphone-panel.h"
 #include "cc-microphone-resources.h"
 #include "cc-util.h"
@@ -32,7 +33,7 @@ struct _CcMicrophonePanel
 {
   CcPanel       parent_instance;
 
-  GtkSwitch    *main_switch;
+  CcListRow    *microphone_row;
   GtkListBox   *microphone_apps_list_box;
 
   GSettings    *privacy_settings;
@@ -351,7 +352,7 @@ cc_microphone_panel_class_init (CcMicrophonePanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/microphone/cc-microphone-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, main_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, microphone_row);
   gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, microphone_apps_list_box);
 }
 
@@ -368,7 +369,7 @@ cc_microphone_panel_init (CcMicrophonePanel *self)
 
   g_settings_bind (self->privacy_settings,
                    "disable-microphone",
-                   self->main_switch,
+                   self->microphone_row,
                    "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
 
