@@ -33,7 +33,6 @@ struct _CcCameraPanel
 {
   CcPanel       parent_instance;
 
-  GtkStack     *stack;
   GtkListBox   *camera_apps_list_box;
   GtkSwitch    *main_switch;
 
@@ -213,20 +212,6 @@ add_camera_app (CcCameraPanel *self,
 }
 
 /* Steals permissions and permissions_data references */
-
-static gboolean
-to_child_name (GBinding     *binding,
-               const GValue *from,
-               GValue       *to,
-               gpointer      user_data)
-{
-  if (g_value_get_boolean (from))
-    g_value_set_string (to, "content");
-  else
-    g_value_set_string (to, "empty");
-  return TRUE;
-}
-
 static void
 update_perm_store (CcCameraPanel *self,
                    GVariant      *permissions,
@@ -372,7 +357,6 @@ cc_camera_panel_class_init (CcCameraPanelClass *klass)
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/camera/cc-camera-panel.ui");
 
-  gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, camera_apps_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcCameraPanel, main_switch);
 }
@@ -391,13 +375,6 @@ cc_camera_panel_init (CcCameraPanel *self)
   g_settings_bind (self->privacy_settings, "disable-camera",
                    self->main_switch, "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-  g_object_bind_property_full  (self->main_switch, "active",
-                                self->stack, "visible-child-name",
-                                G_BINDING_SYNC_CREATE,
-                                to_child_name,
-                                NULL,
-                                NULL, NULL);
 
   self->camera_app_switches = g_hash_table_new_full (g_str_hash,
                                                      g_str_equal,
