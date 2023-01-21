@@ -34,7 +34,6 @@ struct _CcMicrophonePanel
 
   GtkSwitch    *main_switch;
   GtkListBox   *microphone_apps_list_box;
-  GtkStack     *stack;
 
   GSettings    *privacy_settings;
 
@@ -206,19 +205,6 @@ add_microphone_app (CcMicrophonePanel *self,
                          0);
 }
 
-static gboolean
-to_child_name (GBinding *binding,
-               const GValue *from,
-               GValue *to,
-               gpointer user_data)
-{
-  if (g_value_get_boolean (from))
-    g_value_set_string (to, "content");
-  else
-    g_value_set_string (to, "empty");
-  return TRUE;
-}
-
 /* Steals permissions and permissions_data references */
 static void
 update_perm_store (CcMicrophonePanel *self,
@@ -366,7 +352,6 @@ cc_microphone_panel_class_init (CcMicrophonePanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/microphone/cc-microphone-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, main_switch);
-  gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, stack);
   gtk_widget_class_bind_template_child (widget_class, CcMicrophonePanel, microphone_apps_list_box);
 }
 
@@ -386,15 +371,6 @@ cc_microphone_panel_init (CcMicrophonePanel *self)
                    self->main_switch,
                    "active",
                    G_SETTINGS_BIND_INVERT_BOOLEAN);
-
-  g_object_bind_property_full  (self->main_switch,
-                                "active",
-                                self->stack,
-                                "visible-child-name",
-                                G_BINDING_SYNC_CREATE,
-                                to_child_name,
-                                NULL,
-                                NULL, NULL);
 
   self->microphone_app_switches = g_hash_table_new_full (g_str_hash,
                                                        g_str_equal,
