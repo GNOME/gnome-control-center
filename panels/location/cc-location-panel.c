@@ -18,6 +18,7 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
+#include "cc-list-row.h"
 #include "cc-location-panel.h"
 #include "cc-location-resources.h"
 #include "cc-util.h"
@@ -35,7 +36,7 @@ struct _CcLocationPanel
   CcPanel       parent_instance;
 
   GtkListBox   *location_apps_list_box;
-  GtkSwitch    *main_switch;
+  CcListRow    *location_row;
 
   GSettings    *location_settings;
 
@@ -367,7 +368,7 @@ cc_location_panel_class_init (CcLocationPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/location/cc-location-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_apps_list_box);
-  gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, main_switch);
+  gtk_widget_class_bind_template_child (widget_class, CcLocationPanel, location_row);
 }
 
 static void
@@ -382,7 +383,7 @@ cc_location_panel_init (CcLocationPanel *self)
 
   g_settings_bind (self->location_settings,
                    LOCATION_ENABLED,
-                   self->main_switch,
+                   self->location_row,
                    "active",
                    G_SETTINGS_BIND_DEFAULT);
 
