@@ -43,8 +43,9 @@ struct _CcWifiHotspotDialog
 
   GtkLabel        *connection_label;
   GtkEntry        *name_entry;
+  GtkLabel        *name_error_label;
   GtkEntry        *password_entry;
-  GtkLabel        *error_label;
+  GtkLabel        *password_error_label;
   GtkButton       *ok_button;
 
   GCancellable    *cancellable;
@@ -235,7 +236,7 @@ hotspot_password_is_valid (CcWifiHotspotDialog *self,
 static void
 hotspot_entry_changed_cb (CcWifiHotspotDialog *self)
 {
-  const gchar *ssid, *password, *error_label;
+  const gchar *ssid, *ssid_error_label, *password, *password_error_label;
   gboolean valid_ssid, valid_password;
 
   g_assert (CC_IS_WIFI_HOTSPOT_DIALOG (self));
@@ -244,38 +245,49 @@ hotspot_entry_changed_cb (CcWifiHotspotDialog *self)
   ssid = gtk_editable_get_text (GTK_EDITABLE (self->name_entry));
   password = gtk_editable_get_text (GTK_EDITABLE (self->password_entry));
 
-  if (ssid && *ssid)
+  if (!ssid || !*ssid)
     {
-      valid_ssid = TRUE;
-      widget_unset_error (GTK_WIDGET (self->name_entry));
+      ssid_error_label = _("Network name cannot be empty");
+      widget_set_error (GTK_WIDGET (self->name_entry));
+    }
+  else if (strlen (ssid) > 32)
+    {
+      /* SSID length needs to be in the 1-32 byte range */
+      ssid_error_label = _("Network name is too long");
+      widget_set_error (GTK_WIDGET (self->name_entry));
     }
   else
-    widget_set_error (GTK_WIDGET (self->name_entry));
+    {
+      valid_ssid = TRUE;
+      ssid_error_label = "";
+      widget_unset_error (GTK_WIDGET (self->name_entry));
+    }
 
   valid_password = hotspot_password_is_valid (self, password);
 
   if (valid_password)
     {
-      error_label = "";
+      password_error_label = "";
       widget_unset_error (GTK_WIDGET (self->password_entry));
     }
   else
     {
       if (strlen (password) < 8)
         {
-          error_label = _("Must have a minimum of 8 characters");
+          password_error_label = _("Must have a minimum of 8 characters");
         }
       else
         {
           guint max_chars = self->wpa_supported ? 63 : 16;
-          error_label = g_strdup_printf (ngettext ("Must have a maximum of %d character",
-                                                   "Must have a maximum of %d characters", max_chars), max_chars);
+          password_error_label = g_strdup_printf (ngettext ("Must have a maximum of %d character",
+                                                            "Must have a maximum of %d characters", max_chars), max_chars);
         }
 
       widget_set_error (GTK_WIDGET(self->password_entry));
     }
 
-  gtk_label_set_label (self->error_label, error_label);
+  gtk_label_set_label (self->name_error_label, ssid_error_label);
+  gtk_label_set_label (self->password_error_label, password_error_label);
   gtk_widget_set_sensitive (GTK_WIDGET (self->ok_button),
                             valid_ssid && valid_password);
 }
@@ -468,8 +480,9 @@ cc_wifi_hotspot_dialog_class_init (CcWifiHotspotDialogClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, connection_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, name_entry);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, name_error_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, password_entry);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, error_label);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, password_error_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiHotspotDialog, ok_button);
 
   gtk_widget_class_bind_template_callback (widget_class, hotspot_entry_changed_cb);

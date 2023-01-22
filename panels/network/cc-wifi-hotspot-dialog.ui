@@ -69,6 +69,23 @@
               </object>
             </child>
 
+            <!-- SSID Error Label -->
+            <child>
+              <object class="GtkLabel" id="name_error_label">
+                <property name="halign">start</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
+                <style>
+                  <class name="dim-label" />
+                </style>
+                <attributes>
+                  <attribute name="scale" value="0.83"/>
+                </attributes>
+              </object>
+            </child>
+
             <!-- Hotspot Password -->
             <child>
               <object class="GtkLabel">
@@ -77,7 +94,7 @@
                 <property name="mnemonic_widget">password_entry</property>
                 <layout>
                   <property name="column">0</property>
-                  <property name="row">1</property>
+                  <property name="row">2</property>
                 </layout>
               </object>
             </child>
@@ -91,18 +108,18 @@
                 <signal name="changed" handler="hotspot_entry_changed_cb" swapped="yes" />
                 <layout>
                   <property name="column">1</property>
-                  <property name="row">1</property>
+                  <property name="row">2</property>
                 </layout>
               </object>
             </child>
 
-            <!-- Error Label -->
+            <!-- Password Error Label -->
             <child>
-              <object class="GtkLabel" id="error_label">
+              <object class="GtkLabel" id="password_error_label">
                 <property name="halign">start</property>
                 <layout>
                   <property name="column">1</property>
-                  <property name="row">2</property>
+                  <property name="row">3</property>
                 </layout>
                 <style>
                   <class name="dim-label" />
