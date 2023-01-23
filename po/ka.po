@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-01-04 19:16+0000\n"
-"PO-Revision-Date: 2023-01-20 17:17+0100\n"
+"POT-Creation-Date: 2023-01-23 17:49+0000\n"
+"PO-Revision-Date: 2023-01-23 20:49+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <http://mail.gnome.org/mailman/listinfo/gnome-ge-"
 "list>\n"
@@ -52,7 +52,7 @@ msgid "Full access to /dev"
 msgstr "სრული წვდომა /dev-თან"
 
 #: panels/applications/cc-applications-panel.c:832
-#: panels/network/cc-network-panel.c:758
+#: panels/network/cc-network-panel.c:763
 #: panels/network/gnome-network-panel.desktop.in:3
 #: panels/network/network-mobile.ui:235 panels/wwan/cc-wwan-device-page.ui:61
 #: panels/wwan/cc-wwan-network-dialog.ui:5
@@ -82,7 +82,7 @@ msgstr "ფაილური სისტემა"
 #: panels/applications/cc-applications-panel.c:848
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:880 shell/cc-window.ui:22
+#: shell/cc-window.c:878 shell/cc-window.ui:22
 #: shell/org.gnome.Settings.desktop.in:3
 msgid "Settings"
 msgstr "მორგება"
@@ -95,7 +95,7 @@ msgstr "პარამეტრები შეცვლადია"
 #, c-format
 msgid ""
 "%s requires access to the following system resources. To stop this access, "
-"the application must be removed."
+"the app must be removed."
 msgstr ""
 
 #: panels/applications/cc-applications-panel.c:1192
@@ -115,16 +115,14 @@ msgstr "<b>%s</b> გამოიყენება შემდეგი ტი
 msgid "%s of disk space used."
 msgstr "დისკზე დაკავებული ადგილი: %s."
 
-#. List of applications.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "აპლიკაციები"
+msgid "Apps"
+msgstr "აპები"
 
 #: panels/applications/cc-applications-panel.ui:31
-msgid "No applications"
+msgid "No apps"
 msgstr "აპლიკაციების გარეშე"
 
 #: panels/applications/cc-applications-panel.ui:34
@@ -169,9 +167,9 @@ msgstr "სისტემის ძებნის მიღება და �
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
 #: panels/user-accounts/cc-user-panel.c:820
-#: panels/user-accounts/cc-user-panel.c:923
+#: panels/user-accounts/cc-user-panel.c:921
 #: panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1908
+#: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
 msgstr "გამორთული"
 
@@ -210,6 +208,7 @@ msgstr "ფონის სურათის შეცვლა."
 
 #: panels/applications/cc-applications-panel.ui:154
 #: panels/applications/cc-applications-panel.ui:161
+#: panels/sound/cc-sound-panel.ui:361
 msgid "Sounds"
 msgstr "ხმები"
 
@@ -308,13 +307,12 @@ msgid "Reset"
 msgstr "საწყისი პარამეტრები"
 
 #: panels/applications/cc-applications-panel.ui:417
-msgid ""
-"How much disk space this application is occupying with app data and caches."
+msgid "How much disk space this app is occupying with app data and caches."
 msgstr "რამდენი ადგილი მიაქვს აპლიკაციას, მონაცემების და ქეშის ჩათვლით."
 
 #: panels/applications/cc-applications-panel.ui:420
-msgid "Application"
-msgstr "აპლიკაცია"
+msgid "App"
+msgstr "აპი"
 
 #: panels/applications/cc-applications-panel.ui:426
 msgid "Data"
@@ -333,10 +331,10 @@ msgid "Clear Cache…"
 msgstr "ქეშის გასუფთავება…"
 
 #: panels/applications/gnome-applications-panel.desktop.in:4
-msgid "Control various application permissions and settings"
+msgid "Control various app permissions and settings"
 msgstr "აპლიკაციის სხვადასხვა პარამეტრებისა და წვდომების კონტროლი"
 
-#. Translators: Search terms to find the Applications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/applications/gnome-applications-panel.desktop.in:16
 msgid "application;flatpak;permission;setting;"
 msgstr "application;flatpak;permission;setting;"
@@ -353,8 +351,8 @@ msgstr "აირჩიეთ სურათი"
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:886
 #: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/connection-editor/vpn-helpers.c:221
-#: panels/network/connection-editor/vpn-helpers.c:341
+#: panels/network/connection-editor/vpn-helpers.c:226
+#: panels/network/connection-editor/vpn-helpers.c:346
 #: panels/network/net-device-wifi.c:866
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
@@ -376,7 +374,7 @@ msgid "_Cancel"
 msgstr "_გაუქმება"
 
 #: panels/background/cc-background-chooser.c:316
-#: panels/network/connection-editor/vpn-helpers.c:222
+#: panels/network/connection-editor/vpn-helpers.c:227
 #: panels/printers/pp-details-dialog.c:270
 #: panels/sharing/cc-sharing-panel.c:480
 #: panels/user-accounts/cc-avatar-chooser.c:168
@@ -457,7 +455,7 @@ msgid "Bluetooth Turned Off"
 msgstr "Bluetooth გამორთულია"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:32
-msgid "Turn on to connect devices and receive file transfers."
+msgid "Turn on to connect devices and receive file transfers"
 msgstr ""
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:38
@@ -465,18 +463,18 @@ msgid "Airplane Mode is On"
 msgstr "თვითმფრინავის რეჟიმი ჩართულია"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:39
-msgid "Bluetooth is disabled when airplane mode is on."
+msgid "Bluetooth is disabled when airplane mode is on"
 msgstr ""
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:42
 msgid "Turn Off Airplane Mode"
 msgstr "თვითმფრინავის რეჟმის გამორთვა"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:56
+#: panels/bluetooth/cc-bluetooth-panel.ui:57
 msgid "Hardware Airplane Mode is On"
 msgstr "აპარატურული თვითმფრინავის რეჟიმი ჩართულია"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:57
+#: panels/bluetooth/cc-bluetooth-panel.ui:58
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
 msgstr ""
 
@@ -500,18 +498,17 @@ msgid "Camera is Turned Off"
 msgstr "კამერა გამოღთულია"
 
 #: panels/camera/cc-camera-panel.ui:25
-msgid "No sandboxed applications can capture photos or video."
-msgstr ""
+msgid "No sandboxed apps can capture photos or video."
+msgstr "შეზღუდულ აპლიკაციებს ხმის და ვიდეოს ჩაწერა არ შეუძლიათ."
 
 #: panels/camera/cc-camera-panel.ui:39
 msgid ""
-"The following sandboxed applications have been given permission to use "
-"cameras. Applications that are not sandboxed can use cameras without asking "
-"for permission."
+"The following sandboxed apps have been given permission to use cameras. Apps "
+"that are not sandboxed can use cameras without asking for permission."
 msgstr ""
 
 #: panels/camera/cc-camera-panel.ui:53
-msgid "No sandboxed applications have asked for camera access"
+msgid "No sandboxed apps have asked for camera access"
 msgstr ""
 
 #: panels/camera/gnome-camera-panel.desktop.in:4
@@ -521,7 +518,7 @@ msgstr "დაიცავით თქვენი სურათები"
 #. Translators: Search terms to find the Camera panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/camera/gnome-camera-panel.desktop.in:16
 msgid "camera;photos;video;webcam;lock;private;privacy;"
-msgstr ""
+msgstr "camera;photos;video;webcam;lock;private;privacy;"
 
 #. TRANSLATORS: The user has to attach the sensor to the screen
 #: panels/color/cc-color-calibrate.c:347
@@ -670,7 +667,7 @@ msgid "Show color profiles for %s"
 msgstr "%s-თვის ფერის პროფილების ნახვა"
 
 #. not calibrated
-#: panels/color/cc-color-device.c:292
+#: panels/color/cc-color-device.c:291
 msgid "Not calibrated"
 msgstr "კალიბრირებული არაა"
 
@@ -721,7 +718,7 @@ msgid "Save Profile"
 msgstr "პროფილის შენახვა"
 
 #: panels/color/cc-color-panel.c:845
-#: panels/network/connection-editor/vpn-helpers.c:342
+#: panels/network/connection-editor/vpn-helpers.c:347
 #: panels/wwan/cc-wwan-apn-dialog.ui:43
 msgid "_Save"
 msgstr "შ_ენახვა"
@@ -875,7 +872,7 @@ msgstr "_ფაილის შემოტანა…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:589
+#: panels/network/connection-editor/net-connection-editor.c:591
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1189,8 +1186,6 @@ msgstr "%b %e, %Y"
 #. and "Yesterday, 10:10:10 AM"
 #: panels/common/cc-util.c:162
 #, c-format
-#| msgctxt "timezone loc"
-#| msgid "%s, %s"
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
@@ -1335,10 +1330,10 @@ msgstr ""
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:39
-#: panels/screen/cc-screen-panel.ui:75 panels/screen/cc-screen-panel.ui:95
+#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
+#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
 #: panels/user-accounts/cc-user-panel.c:818
-#: panels/user-accounts/cc-user-panel.c:920
+#: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "ჩართულია"
@@ -1451,21 +1446,21 @@ msgstr "_ფოტოები"
 
 #: panels/default-apps/cc-default-apps-panel.ui:103
 msgid "Ca_lls"
-msgstr ""
+msgstr "_ზარები"
 
 #: panels/default-apps/cc-default-apps-panel.ui:118
 msgid "_SMS"
-msgstr ""
+msgstr "_SMS"
 
 #: panels/default-apps/gnome-default-apps-panel.desktop.in:3
-msgid "Default Applications"
-msgstr "ნაგულისხმევი აპლიკაციები"
+msgid "Default Apps"
+msgstr "ნაგულისხმები აპები"
 
 #: panels/default-apps/gnome-default-apps-panel.desktop.in:4
-msgid "Configure Default Applications"
+msgid "Configure Default Apps"
 msgstr "ნაგულისხმევი აპლიკაციების მორგება"
 
-#. Translators: Search terms to find the Default Applications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Default Apps panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/default-apps/gnome-default-apps-panel.desktop.in:15
 msgid "default;application;preferred;media;"
 msgstr "default;application;preferred;media;"
@@ -1701,7 +1696,7 @@ msgstr "PM"
 
 #: panels/display/cc-night-light-page.ui:256
 msgid "To"
-msgstr ""
+msgstr "ვის"
 
 #: panels/display/cc-night-light-page.ui:362
 msgid "Color Temperature"
@@ -1848,11 +1843,14 @@ msgid ""
 "to tell whether it meets security requirements."
 msgstr ""
 
+#. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/firmware-security/cc-firmware-security-dialog.c:188
 #: panels/info-overview/cc-info-overview-panel.c:294
 #: panels/info-overview/cc-info-overview-panel.c:314
 #: panels/info-overview/cc-info-overview-panel.c:355
 #: panels/info-overview/cc-info-overview-panel.c:385
+#: panels/network/connection-editor/ce-page-wireguard.c:368
+#: panels/sound/cc-alert-chooser-window.c:350
 #: panels/wwan/cc-wwan-details-dialog.c:100
 msgid "Unknown"
 msgstr "უცნობი"
@@ -1936,6 +1934,46 @@ msgstr ""
 msgid "Device Security Status"
 msgstr "მოწყობილობის უსაფრთხოების მდგომარეობა"
 
+#: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
+msgid "About Device Security"
+msgstr "მოწყობილობის უსაფრთხოების შესახებ"
+
+#: panels/firmware-security/cc-firmware-security-help-dialog.ui:31
+msgid ""
+"Device security provides information about how protected your device is "
+"against security issues which target the hardware itself."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-help-dialog.ui:51
+msgid "Aspects of hardware that affect security include:"
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-help-dialog.ui:69
+msgid "• security features that are built into a hardware itself;"
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-help-dialog.ui:79
+msgid "• how the hardware is configured to protect against security issues;"
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-help-dialog.ui:89
+msgid "• the security of the software runs directly on the hardware."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-help-dialog.ui:107
+msgid ""
+"Security threats which affect hardware include malware and viruses that "
+"target the software that runs directly on the hardware. It also includes "
+"physical tampering, such as physical connection to the hardware to read data "
+"and implant malware."
+msgstr ""
+
+#: panels/firmware-security/cc-firmware-security-help-dialog.ui:125
+msgid ""
+"Device security is just one aspect of security, and does not reflect the "
+"overall security status of the system and applications."
+msgstr ""
+
 #: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Protected against malicious software when the device starts."
 msgstr ""
@@ -1983,12 +2021,12 @@ msgstr ""
 #: panels/firmware-security/cc-firmware-security-panel.c:225
 #, c-format
 msgid "%1$s"
-msgstr ""
+msgstr "%1$s"
 
 #: panels/firmware-security/cc-firmware-security-panel.c:237
 #, c-format
 msgid "(%1$s → %2$s)"
-msgstr ""
+msgstr "(%1$s → %2$s)"
 
 #: panels/firmware-security/cc-firmware-security-panel.c:545
 msgid "Hardware does not pass checks."
@@ -2006,9 +2044,19 @@ msgstr ""
 msgid "Security levels are not available for this device."
 msgstr ""
 
+#: panels/firmware-security/cc-firmware-security-panel.ui:50
+msgid "Starting Device Security…"
+msgstr "მოწყობილობის უსაფრთხოების გაშვება…"
+
 #: panels/firmware-security/cc-firmware-security-panel.ui:76
 msgid "Device Security Unavailable"
 msgstr "მოწყობილობის უსაფრთხოება მიუწვდომელია"
+
+#: panels/firmware-security/cc-firmware-security-panel.ui:78
+msgid ""
+"Device Security is only available on physical hardware. No physical hardware "
+"has been detected."
+msgstr ""
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:216
 msgid "Security Events"
@@ -2664,6 +2712,8 @@ msgid "Set Shortcut…"
 msgstr "მალსახმობის დაყენება…"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:261
+#: panels/sound/cc-alert-chooser-window.c:340
+#: panels/sound/cc-alert-chooser-window.ui:20
 #: panels/universal-access/cc-ua-zoom-page.ui:271
 msgid "None"
 msgstr "არა"
@@ -2696,6 +2746,7 @@ msgstr ""
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
+"Hotkey;"
 msgstr ""
 
 #: panels/location/cc-location-panel.ui:23
@@ -2703,8 +2754,8 @@ msgid "Location Services Turned Off"
 msgstr "მდებარეობის სერვისები გამორთულია"
 
 #: panels/location/cc-location-panel.ui:24
-msgid "No sandboxed applications can obtain location information."
-msgstr ""
+msgid "No sandboxed apps can obtain location information."
+msgstr "შეზღუდულ აპლიკაციებს მდგომარეობის მოთხოვნა არ შეუძლიათ."
 
 #: panels/location/cc-location-panel.ui:38
 msgid ""
@@ -2713,13 +2764,13 @@ msgid ""
 "mozilla.com/privacy'>Learn about what data is collected, and how it is used."
 "</a>\n"
 "\n"
-"The following sandboxed applications have been given access to location "
-"data. Applications that are not sandboxed can access location data without "
-"asking for permission."
+"The following sandboxed apps have been given access to location data. Apps "
+"that are not sandboxed can access location data without asking for "
+"permission."
 msgstr ""
 
 #: panels/location/cc-location-panel.ui:54
-msgid "No sandboxed applications have asked for location access"
+msgid "No sandboxed apps have asked for location access"
 msgstr ""
 
 #: panels/location/gnome-location-panel.desktop.in:4
@@ -2736,18 +2787,18 @@ msgid "Microphone Turned Off"
 msgstr "მიკროფონი გამორთულია"
 
 #: panels/microphone/cc-microphone-panel.ui:24
-msgid "No sandboxed applications can record sound."
+msgid "No sandboxed apps can record sound."
 msgstr "შეზღუდულ აპლიკაციებს ხმის ჩაწერა არ შეუძლიათ."
 
 #: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
-"The following sandboxed applications have been given permission to use "
-"microphones. Applications that are not sandboxed can use microphones without "
-"asking for permission."
+"The following sandboxed apps have been given permission to use microphones. "
+"Apps that are not sandboxed can use microphones without asking for "
+"permission."
 msgstr ""
 
 #: panels/microphone/cc-microphone-panel.ui:52
-msgid "No sandboxed applications have asked for microphone access"
+msgid "No sandboxed apps have asked for microphone access"
 msgstr ""
 
 #: panels/microphone/gnome-microphone-panel.desktop.in:4
@@ -2776,11 +2827,11 @@ msgstr "ძირითადი ღილაკი"
 msgid "Sets the order of physical buttons on mice and touchpads."
 msgstr ""
 
-#: panels/mouse/cc-mouse-panel.ui:41 panels/sound/cc-balance-slider.ui:16
+#: panels/mouse/cc-mouse-panel.ui:41
 msgid "Left"
 msgstr "მარცხნივ"
 
-#: panels/mouse/cc-mouse-panel.ui:48 panels/sound/cc-balance-slider.ui:18
+#: panels/mouse/cc-mouse-panel.ui:48
 msgid "Right"
 msgstr "მარჯვნივ"
 
@@ -2948,15 +2999,15 @@ msgid "Workspaces on all d_isplays"
 msgstr ""
 
 #: panels/multitasking/cc-multitasking-panel.ui:184
-msgid "Application Switching"
+msgid "App Switching"
 msgstr "აპლიკაციების გადართვა"
 
 #: panels/multitasking/cc-multitasking-panel.ui:190
-msgid "Include applications from all _workspaces"
+msgid "Include apps from all _workspaces"
 msgstr ""
 
 #: panels/multitasking/cc-multitasking-panel.ui:204
-msgid "Include applications from the _current workspace only"
+msgid "Include apps from the _current workspace only"
 msgstr ""
 
 #: panels/multitasking/gnome-multitasking-panel.desktop.in:3
@@ -2973,18 +3024,18 @@ msgid ""
 "Multitasking;Multitask;Productivity;Customize;Desktop;Hot Corner;Workspaces;"
 msgstr ""
 
-#: panels/network/cc-network-panel.c:667
+#: panels/network/cc-network-panel.c:672
 msgid "Can’t Connect to Network"
 msgstr "ქსელთან მიერთების შეცდომა"
 
-#: panels/network/cc-network-panel.c:669
+#: panels/network/cc-network-panel.c:674
 msgid ""
 "NetworkManager needs to be running to view or make connections. Contact a "
 "system administrator or the software vendor."
 msgstr ""
 
 #. xxx: Added to avoid confusion with the preceding VPN row
-#: panels/network/cc-network-panel.c:754 panels/network/cc-network-panel.ui:140
+#: panels/network/cc-network-panel.c:759 panels/network/cc-network-panel.ui:140
 #: panels/network/cc-network-panel.ui:149
 msgid "Proxy"
 msgstr "პროქსი"
@@ -2998,7 +3049,7 @@ msgid "Other Devices"
 msgstr "სხვა მოწყობილობები"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:672
+#: panels/network/connection-editor/net-connection-editor.c:679
 msgid "VPN"
 msgstr "VPN"
 
@@ -3028,8 +3079,8 @@ msgstr "ავტომატური"
 msgid "Manual"
 msgstr "ხელით"
 
-#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:111
-#: panels/sound/cc-sound-panel.ui:279
+#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:84
+#: panels/sound/cc-sound-panel.ui:296
 msgid "Configuration"
 msgstr "გამართვა"
 
@@ -3052,7 +3103,7 @@ msgstr "HTTP პროქსი"
 #: panels/network/cc-net-proxy-page.ui:181
 #: panels/network/cc-net-proxy-page.ui:226
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: panels/network/cc-net-proxy-page.ui:98
 #: panels/network/cc-net-proxy-page.ui:143
@@ -3083,11 +3134,11 @@ msgstr "_FTP პროქსის პორტი"
 
 #: panels/network/cc-net-proxy-page.ui:215
 msgid "SOCKS Host"
-msgstr ""
+msgstr "Socks-ის ჰოსტი"
 
 #: panels/network/cc-net-proxy-page.ui:245
 msgid "SOCKS host port"
-msgstr ""
+msgstr "SOCKS-ის ჰოსტის პორტი"
 
 #: panels/network/cc-net-proxy-page.ui:261
 msgid "Ignored Hosts"
@@ -3170,15 +3221,15 @@ msgstr "ქსელის სახელი"
 #: panels/printers/new-printer-dialog.ui:316
 #: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:359
 #: panels/user-accounts/cc-add-user-dialog.ui:145
-#: panels/user-accounts/cc-add-user-dialog.ui:181
-#: panels/user-accounts/cc-add-user-dialog.ui:360
+#: panels/user-accounts/cc-add-user-dialog.ui:180
+#: panels/user-accounts/cc-add-user-dialog.ui:359
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "პაროლი"
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:88
 msgid "Generate Random Password"
-msgstr ""
+msgstr "შემთხვევითი პაროლის გენერაცია"
 
 #: panels/network/cc-wifi-hotspot-dialog.ui:89
 msgid "Autogenerate Password"
@@ -3200,7 +3251,7 @@ msgstr ""
 
 #: panels/network/cc-wifi-panel.c:887
 msgid "_Stop Hotspot"
-msgstr ""
+msgstr "Hotspot-ის _გაჩერება"
 
 #: panels/network/cc-wifi-panel.ui:75
 msgid "Airplane Mode"
@@ -3210,43 +3261,43 @@ msgstr "თვითმფრინავის რეჟიმი"
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
 msgstr ""
 
-#: panels/network/cc-wifi-panel.ui:113
+#: panels/network/cc-wifi-panel.ui:96
 msgid "No Wi-Fi Adapter Found"
 msgstr ""
 
-#: panels/network/cc-wifi-panel.ui:123
+#: panels/network/cc-wifi-panel.ui:97
 msgid "Make sure you have a Wi-Fi adapter plugged and turned on"
 msgstr ""
 
-#: panels/network/cc-wifi-panel.ui:155 panels/wwan/cc-wwan-panel.ui:102
+#: panels/network/cc-wifi-panel.ui:110 panels/wwan/cc-wwan-panel.ui:102
 msgid "Airplane Mode On"
 msgstr "თვითმფრინავის რეჟიმი ჩართულია"
 
-#: panels/network/cc-wifi-panel.ui:165
+#: panels/network/cc-wifi-panel.ui:111
 msgid "Turn off to use Wi-Fi"
 msgstr ""
 
-#: panels/network/cc-wifi-panel.ui:202
+#: panels/network/cc-wifi-panel.ui:146
 msgid "Wi-Fi Hotspot Active"
 msgstr ""
 
-#: panels/network/cc-wifi-panel.ui:212
+#: panels/network/cc-wifi-panel.ui:156
 msgid "Mobile devices can scan the QR code to connect."
 msgstr ""
 
-#: panels/network/cc-wifi-panel.ui:220
+#: panels/network/cc-wifi-panel.ui:164
 msgid "Turn Off Hotspot…"
 msgstr ""
 
-#: panels/network/cc-wifi-panel.ui:240
+#: panels/network/cc-wifi-panel.ui:184
 msgid "Visible Networks"
 msgstr "ხილული ქსელები"
 
-#: panels/network/cc-wifi-panel.ui:297
+#: panels/network/cc-wifi-panel.ui:241
 msgid "NetworkManager needs to be running"
 msgstr ""
 
-#: panels/network/cc-wifi-panel.ui:303
+#: panels/network/cc-wifi-panel.ui:247
 msgid "Oops, something has gone wrong. Please contact your software vendor."
 msgstr ""
 
@@ -3444,11 +3495,11 @@ msgstr "შეერთების დავიწყება"
 msgid "Remove Connection Profile"
 msgstr ""
 
-#: panels/network/connection-editor/ce-page-details.c:481
+#: panels/network/connection-editor/ce-page-details.c:482
 msgid "Remove VPN"
 msgstr "VPN-ის წაშლა"
 
-#: panels/network/connection-editor/ce-page-details.c:499
+#: panels/network/connection-editor/ce-page-details.c:500
 msgid "Details"
 msgstr "დეტალები"
 
@@ -3512,6 +3563,15 @@ msgstr "WPA & WPA2 საწარმოო"
 #: panels/network/connection-editor/ce-page-security.c:373
 msgid "WPA3 Personal"
 msgstr "WPA3 პერსონალური"
+
+#: panels/network/connection-editor/ce-page-wireguard.c:106
+#: panels/network/connection-editor/net-connection-editor.c:835
+msgid "WireGuard"
+msgstr "WireGuard"
+
+#: panels/network/connection-editor/ce-page-wireguard.c:405
+msgid "Unsaved peer"
+msgstr ""
 
 #: panels/network/connection-editor/details-page.ui:14
 #: panels/wwan/cc-wwan-details-dialog.ui:73
@@ -3580,6 +3640,7 @@ msgid "_Cloned Address"
 msgstr "_კლონირებული მისამართი"
 
 #: panels/network/connection-editor/ethernet-page.ui:104
+#: panels/network/connection-editor/wireguard-page.ui:187
 msgid "bytes"
 msgstr "ბაიტები"
 
@@ -3680,29 +3741,36 @@ msgstr "ავტომატური (მხოლოდ DHCP)"
 msgid "Prefix"
 msgstr "პრეფიქსი"
 
-#: panels/network/connection-editor/net-connection-editor.c:363
+#: panels/network/connection-editor/net-connection-editor.c:364
 msgid "Unable to open connection editor"
 msgstr "შეერთების ჩამსწორებლის გახსნის შეცდომა"
 
-#: panels/network/connection-editor/net-connection-editor.c:379
+#: panels/network/connection-editor/net-connection-editor.c:380
 msgid "New Profile"
 msgstr "ახალი პროფილი"
 
-#: panels/network/connection-editor/net-connection-editor.c:446
+#: panels/network/connection-editor/net-connection-editor.c:447
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "არასწორი პარამეტრი %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:449
+#: panels/network/connection-editor/net-connection-editor.c:450
 #, c-format
 msgid "Invalid setting %s"
 msgstr "არასწორი პარამეტრი: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:807
+#. Translators: VPN add dialog Wireguard description
+#: panels/network/connection-editor/net-connection-editor.c:823
+msgid ""
+"Free and open-source VPN solution designed for ease of use, high speed "
+"performance and low attack surface."
+msgstr ""
+
+#: panels/network/connection-editor/net-connection-editor.c:859
 msgid "Import from file…"
 msgstr "ფაილიდან შემოტანა…"
 
-#: panels/network/connection-editor/net-connection-editor.c:833
+#: panels/network/connection-editor/net-connection-editor.c:885
 msgid "Add VPN"
 msgstr "_VPN-ის დამატება"
 
@@ -3710,11 +3778,11 @@ msgstr "_VPN-ის დამატება"
 msgid "S_ecurity"
 msgstr "_უსაფრთხოება"
 
-#: panels/network/connection-editor/vpn-helpers.c:186
+#: panels/network/connection-editor/vpn-helpers.c:191
 msgid "Cannot import VPN connection"
 msgstr "VPN შეერთების შემოტანის შეცდომა"
 
-#: panels/network/connection-editor/vpn-helpers.c:188
+#: panels/network/connection-editor/vpn-helpers.c:193
 #, c-format
 msgid ""
 "The file “%s” could not be read or does not contain recognized VPN "
@@ -3723,29 +3791,29 @@ msgid ""
 "Error: %s."
 msgstr ""
 
-#: panels/network/connection-editor/vpn-helpers.c:218
+#: panels/network/connection-editor/vpn-helpers.c:223
 msgid "Select file to import"
 msgstr "აირჩიეთ შემოსატანი ფაილი"
 
-#: panels/network/connection-editor/vpn-helpers.c:271
+#: panels/network/connection-editor/vpn-helpers.c:276
 #, c-format
 msgid "A file named “%s” already exists."
 msgstr "ფაილი სახელით %s უკვე არსებობს."
 
-#: panels/network/connection-editor/vpn-helpers.c:273
+#: panels/network/connection-editor/vpn-helpers.c:278
 msgid "_Replace"
 msgstr "_შეცვლა"
 
-#: panels/network/connection-editor/vpn-helpers.c:275
+#: panels/network/connection-editor/vpn-helpers.c:280
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
 msgstr ""
 
-#: panels/network/connection-editor/vpn-helpers.c:310
+#: panels/network/connection-editor/vpn-helpers.c:315
 msgid "Cannot export VPN connection"
 msgstr "VPN შეერთების გატანის შეცდომა"
 
-#: panels/network/connection-editor/vpn-helpers.c:312
+#: panels/network/connection-editor/vpn-helpers.c:317
 #, c-format
 msgid ""
 "The VPN connection “%s” could not be exported to %s.\n"
@@ -3753,7 +3821,7 @@ msgid ""
 "Error: %s."
 msgstr ""
 
-#: panels/network/connection-editor/vpn-helpers.c:338
+#: panels/network/connection-editor/vpn-helpers.c:343
 msgid "Export VPN connection"
 msgstr "VPN შეერთების გატანა"
 
@@ -3768,6 +3836,70 @@ msgstr "_SSID"
 #: panels/network/connection-editor/wifi-page.ui:28
 msgid "_BSSID"
 msgstr "_BSSID"
+
+#: panels/network/connection-editor/wireguard-page.ui:22
+msgid "_Connection Name"
+msgstr "შეერთების _სახელი"
+
+#: panels/network/connection-editor/wireguard-page.ui:44
+msgid "_Interface Name"
+msgstr "ინტერფეისის _სახელი"
+
+#: panels/network/connection-editor/wireguard-page.ui:54
+msgid "The name of the wireguard interface to create."
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-page.ui:66
+msgid "_Private Key"
+msgstr "_პირადი გასაღები"
+
+#: panels/network/connection-editor/wireguard-page.ui:76
+msgid "The 256 bit private key in base64 encoding"
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-page.ui:81
+msgid "Show/hide private key"
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-page.ui:93
+msgid "_Listen Port"
+msgstr "პორტის _მოსმენა"
+
+#: panels/network/connection-editor/wireguard-page.ui:104
+msgid ""
+"A port to listen on. If set to 'automatic', the port will be chosen randomly "
+"when the interface comes up."
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-page.ui:105
+#: panels/network/connection-editor/wireguard-page.ui:138
+msgid "0"
+msgstr "0"
+
+#: panels/network/connection-editor/wireguard-page.ui:126
+msgid "_fwmark"
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-page.ui:137
+msgid ""
+"A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark."
+msgstr ""
+
+#: panels/network/connection-editor/wireguard-page.ui:158
+msgid "_MTU"
+msgstr "_MTU"
+
+#: panels/network/connection-editor/wireguard-page.ui:197
+msgid "_Add peer routes"
+msgstr "პარტნიორის რაუტების _დამატება"
+
+#: panels/network/connection-editor/wireguard-page.ui:222
+msgid "_Peers"
+msgstr "_პარტნიორები"
+
+#: panels/network/connection-editor/wireguard-page.ui:257
+msgid "No peers set up"
+msgstr "პარტნიორი მორგებული არაა"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -3828,8 +3960,8 @@ msgid "_Forget"
 msgstr "_დავიწყება"
 
 #: panels/network/net-device-wifi.c:1048
-msgid "Known Wi-Fi Networks"
-msgstr "ნაცნობი Wi-Fi ქსელები"
+msgid "Saved Wi-Fi Networks"
+msgstr "შენახული Wi-Fi ქსელები"
 
 #. translators: This is the label for the "Forget wireless network" functionality
 #: panels/network/net-device-wifi.c:1067
@@ -3899,8 +4031,8 @@ msgid "_Turn On Wi-Fi Hotspot…"
 msgstr ""
 
 #: panels/network/network-wifi.ui:143
-msgid "_Known Wi-Fi Networks"
-msgstr ""
+msgid "_Saved Networks"
+msgstr "შენახული _ქსელები"
 
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:37
@@ -4157,7 +4289,7 @@ msgstr "მიკროკოდის გარეშე"
 msgid "Cable unplugged"
 msgstr "კაბელი გამოერთებულია"
 
-#. This is the per application switch for message tray usage.
+#. This is the per app switch for message tray usage.
 #: panels/notifications/cc-app-notifications-dialog.ui:15
 msgctxt "notifications"
 msgid "_Notifications"
@@ -4202,9 +4334,14 @@ msgstr "_არ შემაწუხო"
 
 #. Translators: Whether to show notifications on the lock screen
 #: panels/notifications/cc-notifications-panel.ui:17
-#: panels/screen/cc-screen-panel.ui:68
+#: panels/screen/cc-screen-panel.ui:69
 msgid "_Lock Screen Notifications"
 msgstr "_ეკრანის ბლოკირების გაფრთხილებები"
+
+#. List of apps.
+#: panels/notifications/cc-notifications-panel.ui:26
+msgid "Applications"
+msgstr "აპლიკაციები"
 
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
@@ -4679,23 +4816,23 @@ msgid ""
 msgstr ""
 
 #. Translators: %s is the printer name
-#: panels/printers/cc-printers-panel.c:685
+#: panels/printers/cc-printers-panel.c:682
 #, c-format
 msgid "Printer “%s” has been deleted"
 msgstr ""
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:942
+#: panels/printers/cc-printers-panel.c:939
 msgid "Failed to add new printer."
 msgstr "ახალი პრინტერის დამატების შეცდომა."
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1249
+#: panels/printers/cc-printers-panel.c:1246
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "UI-ის ჩატვირთვის შეცდომა: %s"
 
-#: panels/printers/cc-printers-panel.c:1317
+#: panels/printers/cc-printers-panel.c:1314
 msgid "Unlock to Add Printers and Change Settings"
 msgstr ""
 
@@ -4750,7 +4887,7 @@ msgstr ""
 #: panels/printers/new-printer-dialog.ui:295
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:339
+#: panels/user-accounts/cc-add-user-dialog.ui:338
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "მომხმარებლის სახელი"
@@ -4952,7 +5089,7 @@ msgstr ""
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
-#: panels/user-accounts/cc-add-user-dialog.ui:296
+#: panels/user-accounts/cc-add-user-dialog.ui:295
 msgid "Domain"
 msgstr "დომენი"
 
@@ -5054,77 +5191,77 @@ msgid "GhostScript pre-filtering"
 msgstr "GhostScript-ის პრეფილტრი"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:517
+#: panels/printers/pp-options-dialog.c:513
 msgid "Pages per side"
 msgstr ""
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:529
+#: panels/printers/pp-options-dialog.c:525
 msgid "Two-sided"
 msgstr "ორმხრივი"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:541
+#: panels/printers/pp-options-dialog.c:537
 msgid "Orientation"
 msgstr "ორიენტაცია"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:638
+#: panels/printers/pp-options-dialog.c:634
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "ზოგადი"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:641
+#: panels/printers/pp-options-dialog.c:637
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "გვერდის მორგება"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:644
+#: panels/printers/pp-options-dialog.c:640
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "დაყენების ვარიანტები"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:647
+#: panels/printers/pp-options-dialog.c:643
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "დავალება"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:650
+#: panels/printers/pp-options-dialog.c:646
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "გამოსახულების ხარისხი"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:653
+#: panels/printers/pp-options-dialog.c:649
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "ფერი"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:656
+#: panels/printers/pp-options-dialog.c:652
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "სრულდება"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:659
+#: panels/printers/pp-options-dialog.c:655
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "დამატებით"
 
 #. Translators: Name of job which makes printer to print test page
 #. Translators: This button triggers the printing of a test page.
-#: panels/printers/pp-options-dialog.c:844
+#: panels/printers/pp-options-dialog.c:840
 #: panels/printers/pp-options-dialog.ui:14
 msgid "Test Page"
 msgstr "სატესტო გვერდი"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:857
+#: panels/printers/pp-options-dialog.c:853
 msgid "Test page"
 msgstr "სატესტო გვერდი"
 
@@ -5569,7 +5706,7 @@ msgid "_Other Media…"
 msgstr "_სხვა მედია…"
 
 #: panels/removable-media/cc-removable-media-panel.ui:195
-msgid "_Never prompt or start programs on media insertion"
+msgid "_Never prompt or start apps on media insertion"
 msgstr ""
 
 #: panels/removable-media/cc-removable-media-panel.ui:225
@@ -5718,36 +5855,40 @@ msgid "Blank Screen Delay"
 msgstr ""
 
 #: panels/screen/cc-screen-panel.ui:14
-msgid "Period of inactivity after which the screen will go blank."
+msgid "Period of inactivity until screen blanks"
 msgstr ""
 
 #: panels/screen/cc-screen-panel.ui:32
 msgid "Automatic Screen _Lock"
 msgstr ""
 
-#: panels/screen/cc-screen-panel.ui:49
+#: panels/screen/cc-screen-panel.ui:33
+msgid "Locks the screen after it blanks"
+msgstr "ეკრანის ჩაქრობისას მისი დაბლოკვა"
+
+#: panels/screen/cc-screen-panel.ui:50
 msgid "Automatic _Screen Lock Delay"
 msgstr ""
 
-#: panels/screen/cc-screen-panel.ui:50
-msgid "Period after the screen blanks when the screen is automatically locked."
-msgstr ""
-
-#: panels/screen/cc-screen-panel.ui:86
-msgid "Forbid new _USB devices"
+#: panels/screen/cc-screen-panel.ui:51
+msgid "Time from screen blank to screen lock"
 msgstr ""
 
 #: panels/screen/cc-screen-panel.ui:87
+msgid "Forbid new _USB devices"
+msgstr ""
+
+#: panels/screen/cc-screen-panel.ui:88
 msgid ""
 "Prevent new USB devices from interacting with the system when the screen is "
 "locked."
 msgstr ""
 
-#: panels/screen/cc-screen-panel.ui:107
+#: panels/screen/cc-screen-panel.ui:108
 msgid "Screen Privacy"
 msgstr "ეკრანის კონფიდენციალობა"
 
-#: panels/screen/cc-screen-panel.ui:112
+#: panels/screen/cc-screen-panel.ui:113
 msgid "Restrict Viewing Angle"
 msgstr ""
 
@@ -5779,8 +5920,7 @@ msgstr ""
 
 #: panels/search/cc-search-locations-dialog.ui:13
 msgid ""
-"Folders which are searched by system applications, such as Files, Photos and "
-"Videos."
+"Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr ""
 
 #: panels/search/cc-search-locations-dialog.ui:18
@@ -5800,19 +5940,19 @@ msgid "Add Location"
 msgstr "მდებარეობის დამატება"
 
 #: panels/search/cc-search-panel.c:165
-msgid "No applications found"
+msgid "No apps found"
 msgstr "აპლიკაციები ნაპოვნი არაა"
 
 #: panels/search/cc-search-panel.ui:10
-msgid "Application Search"
-msgstr "აპლიკაციის მოძებნა"
+msgid "App Search"
+msgstr "აპის ძებნა"
 
 #: panels/search/cc-search-panel.ui:11
-msgid "Include application-provided search results."
+msgid "Include app-provided search results."
 msgstr ""
 
 #: panels/search/cc-search-panel.ui:23
-msgid "Folders which are searched by system applications."
+msgid "Folders which are searched by system apps."
 msgstr ""
 
 #: panels/search/cc-search-panel.ui:33
@@ -5824,8 +5964,7 @@ msgid "Results are displayed according to the list order."
 msgstr ""
 
 #: panels/search/gnome-search-panel.desktop.in:4
-msgid ""
-"Control which applications show search results in the Activities Overview"
+msgid "Control which apps show search results in the Activities Overview"
 msgstr ""
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
@@ -5845,7 +5984,7 @@ msgstr "ქსელები"
 #: panels/sharing/cc-sharing-panel.c:323
 msgctxt "service is enabled"
 msgid "On"
-msgstr ""
+msgstr "ჩართული"
 
 #: panels/sharing/cc-sharing-panel.c:325 panels/sharing/cc-sharing-panel.c:352
 msgctxt "service is disabled"
@@ -6050,41 +6189,41 @@ msgstr ""
 msgid "Authentication is required to enable or disable remote login"
 msgstr ""
 
-#: panels/sound/cc-alert-chooser.c:172
+#: panels/sound/cc-alert-chooser-window.c:169
 msgid "Custom"
 msgstr "სხვა"
 
-#: panels/sound/cc-alert-chooser.ui:12
+#: panels/sound/cc-alert-chooser-window.c:342
+#: panels/sound/cc-alert-chooser-window.ui:32
 msgid "Click"
 msgstr "დააწკაპუნეთ"
 
-#: panels/sound/cc-alert-chooser.ui:20
-msgid "String"
-msgstr "სტრიქონი"
-
-#: panels/sound/cc-alert-chooser.ui:28
-msgid "Swing"
-msgstr "სვინგი"
-
-#: panels/sound/cc-alert-chooser.ui:36
+#: panels/sound/cc-alert-chooser-window.c:344
+#: panels/sound/cc-alert-chooser-window.ui:74
 msgid "Hum"
 msgstr ""
 
-#: panels/sound/cc-balance-slider.ui:13 panels/sound/cc-sound-panel.ui:145
+#: panels/sound/cc-alert-chooser-window.c:346
+#: panels/sound/cc-alert-chooser-window.ui:46
+msgid "String"
+msgstr "სტრიქონი"
+
+#: panels/sound/cc-alert-chooser-window.c:348
+#: panels/sound/cc-alert-chooser-window.ui:60
+msgid "Swing"
+msgstr "სვინგი"
+
+#: panels/sound/cc-alert-chooser-window.ui:4 panels/sound/cc-sound-panel.ui:376
+msgid "Alert Sound"
+msgstr "განგაშის ხმა"
+
+#: panels/sound/cc-balance-slider.ui:9 panels/sound/cc-sound-panel.ui:147
 msgid "Balance"
 msgstr "ბალანსი"
 
-#: panels/sound/cc-fade-slider.ui:13 panels/sound/cc-sound-panel.ui:171
+#: panels/sound/cc-fade-slider.ui:9 panels/sound/cc-sound-panel.ui:173
 msgid "Fade"
 msgstr "მინავლება"
-
-#: panels/sound/cc-fade-slider.ui:16
-msgid "Rear"
-msgstr "უკანა"
-
-#: panels/sound/cc-fade-slider.ui:18
-msgid "Front"
-msgstr "წინა"
 
 #: panels/sound/cc-output-test-wheel.c:185
 msgid "Select a Speaker"
@@ -6095,58 +6234,66 @@ msgid "Test Speakers"
 msgstr "დინამიკების დატესტვა"
 
 #: panels/sound/cc-sound-panel.ui:8
-msgid "System Volume"
-msgstr "სისტემური საცავი"
-
-#: panels/sound/cc-sound-panel.ui:12
-msgid "Master volume"
-msgstr "ძირითადი ტომი"
-
-#: panels/sound/cc-sound-panel.ui:28
-msgid "Volume Levels"
-msgstr "ხმის დონეები"
-
-#: panels/sound/cc-sound-panel.ui:38
 msgid "Output"
 msgstr "გამოტანა"
 
-#: panels/sound/cc-sound-panel.ui:70
+#: panels/sound/cc-sound-panel.ui:42 panels/sound/cc-sound-panel.ui:215
 msgid "Output Device"
 msgstr "გამოტანის მოწყობილობები"
 
-#: panels/sound/cc-sound-panel.ui:87
+#: panels/sound/cc-sound-panel.ui:60
 #: panels/universal-access/cc-ua-hearing-page.ui:69
 msgid "Test"
 msgstr "შემოწმება"
 
-#: panels/sound/cc-sound-panel.ui:197 panels/sound/cc-subwoofer-slider.ui:13
+#: panels/sound/cc-sound-panel.ui:108
+msgid "Master volume"
+msgstr "ძირითადი ტომი"
+
+#: panels/sound/cc-sound-panel.ui:121
+msgid "Output Volume"
+msgstr "გამოტანის ხმა"
+
+#: panels/sound/cc-sound-panel.ui:199 panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
 msgstr "საბვუფერი"
 
-#: panels/sound/cc-sound-panel.ui:215
+#: panels/sound/cc-sound-panel.ui:218
+msgid "No Output Devices"
+msgstr "გამოტანის მოწყობილობების გარეშე"
+
+#: panels/sound/cc-sound-panel.ui:230
 msgid "Input"
 msgstr "შეყვანა"
 
-#: panels/sound/cc-sound-panel.ui:242
+#: panels/sound/cc-sound-panel.ui:259 panels/sound/cc-sound-panel.ui:346
 msgid "Input Device"
 msgstr "შეყვანის მოწყობილობა"
 
-#: panels/sound/cc-sound-panel.ui:313 panels/sound/cc-volume-slider.ui:13
-msgid "Volume"
-msgstr "ხმის სიმაღლე"
+#: panels/sound/cc-sound-panel.ui:330
+msgid "Input Volume"
+msgstr "შეყვანის ხმა"
 
-#: panels/sound/cc-sound-panel.ui:331
-msgid "Alert Sound"
-msgstr "განგაშის ხმა"
+#: panels/sound/cc-sound-panel.ui:349
+msgid "No Input Devices"
+msgstr "შეყვანის მოწყობილობის გარეშე"
 
-#: panels/sound/cc-volume-slider.c:116
+#: panels/sound/cc-sound-panel.ui:364 panels/sound/cc-volume-levels-window.ui:4
+msgid "Volume Levels"
+msgstr "ხმის დონეები"
+
+#: panels/sound/cc-volume-slider.c:131
 msgctxt "volume"
 msgid "100%"
 msgstr "100%"
 
-#: panels/sound/cc-volume-slider.ui:22
+#: panels/sound/cc-volume-slider.ui:9
 msgid "Mute"
 msgstr "დადუმება"
+
+#: panels/sound/cc-volume-slider.ui:21
+msgid "Volume"
+msgstr "ხმის სიმაღლე"
 
 #: panels/sound/gnome-sound-panel.desktop.in:3
 msgid "Sound"
@@ -6960,6 +7107,18 @@ msgctxt "retain_history"
 msgid "Forever"
 msgstr "სამუდამოდ"
 
+#: panels/usage/cc-usage-panel.c:347
+msgid "Delete all the recent files?"
+msgstr ""
+
+#: panels/usage/cc-usage-panel.c:348
+msgid "All the recent files will be permanently deleted."
+msgstr "უახლესი ფაილები სამუდამოდ წაიშლება."
+
+#: panels/usage/cc-usage-panel.c:349
+msgid "_Clear History"
+msgstr "ისტორიის _გასუფთავება"
+
 #: panels/usage/cc-usage-panel.ui:9
 msgid "File History"
 msgstr "ფაილის ისტორია"
@@ -6967,8 +7126,8 @@ msgstr "ფაილის ისტორია"
 #: panels/usage/cc-usage-panel.ui:10
 msgid ""
 "File history keeps a record of files that you have used. This information is "
-"shared between applications, and makes it easier to find files that you "
-"might want to use."
+"shared between apps, and makes it easier to find files that you might want "
+"to use."
 msgstr ""
 
 #: panels/usage/cc-usage-panel.ui:13
@@ -7097,23 +7256,23 @@ msgstr ""
 msgid "Set password now"
 msgstr "_პაროლის დაყენება"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:224
+#: panels/user-accounts/cc-add-user-dialog.ui:223
 msgid "Confirm"
 msgstr "დადასტურება"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:278
+#: panels/user-accounts/cc-add-user-dialog.ui:277
 msgid "Enterprise Login"
 msgstr "კომპანიის საიტზე შესვლა"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:279
+#: panels/user-accounts/cc-add-user-dialog.ui:278
 msgid "User accounts which are managed by a company or organization."
 msgstr ""
 
-#: panels/user-accounts/cc-add-user-dialog.ui:384
+#: panels/user-accounts/cc-add-user-dialog.ui:383
 msgid "You are Offline"
 msgstr "ხაზზე არ ბრძანდებით"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:385
+#: panels/user-accounts/cc-add-user-dialog.ui:384
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -7220,127 +7379,127 @@ msgstr ""
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:513
+#: panels/user-accounts/cc-fingerprint-dialog.c:510
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "ანაბეჭდების ჩამოთვლის შეცდომა: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:580
+#: panels/user-accounts/cc-fingerprint-dialog.c:577
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:611
+#: panels/user-accounts/cc-fingerprint-dialog.c:608
 msgid "Left thumb"
 msgstr "მარცხენა ცერა"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:613
+#: panels/user-accounts/cc-fingerprint-dialog.c:610
 msgid "Left middle finger"
 msgstr "მარცხენა შუა თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:615
+#: panels/user-accounts/cc-fingerprint-dialog.c:612
 msgid "_Left index finger"
 msgstr "_მარცხენა საჩვენებელი თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:617
+#: panels/user-accounts/cc-fingerprint-dialog.c:614
 msgid "Left ring finger"
 msgstr "მარცხენა ბეჭედი თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:619
+#: panels/user-accounts/cc-fingerprint-dialog.c:616
 msgid "Left little finger"
 msgstr "მარცხენა პატარა თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:621
+#: panels/user-accounts/cc-fingerprint-dialog.c:618
 msgid "Right thumb"
 msgstr "მარჯვენა ცერა"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:623
+#: panels/user-accounts/cc-fingerprint-dialog.c:620
 msgid "Right middle finger"
 msgstr "მარჯვენა შუა თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:625
+#: panels/user-accounts/cc-fingerprint-dialog.c:622
 msgid "_Right index finger"
 msgstr "_მარჯვენა საჩვენებელი თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:627
+#: panels/user-accounts/cc-fingerprint-dialog.c:624
 msgid "Right ring finger"
 msgstr "მარჯვენა ბეჭედი თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:629
+#: panels/user-accounts/cc-fingerprint-dialog.c:626
 msgid "Right little finger"
 msgstr "მარჯვენა პატარა თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:631
+#: panels/user-accounts/cc-fingerprint-dialog.c:628
 msgid "Unknown Finger"
 msgstr "უცნობი თითი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:765
+#: panels/user-accounts/cc-fingerprint-dialog.c:759
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "დასრულებულია"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:776
+#: panels/user-accounts/cc-fingerprint-dialog.c:770
 msgid "Fingerprint device disconnected"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:782
+#: panels/user-accounts/cc-fingerprint-dialog.c:776
 msgid "Fingerprint device storage is full"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:786
+#: panels/user-accounts/cc-fingerprint-dialog.c:780
 msgid "Fingerprint is duplicate"
 msgstr "დუბლირებული ანაბეჭდი"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:790
+#: panels/user-accounts/cc-fingerprint-dialog.c:784
 msgid "Failed to enroll new fingerprint"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:821
+#: panels/user-accounts/cc-fingerprint-dialog.c:815
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:829
+#: panels/user-accounts/cc-fingerprint-dialog.c:823
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:860
+#: panels/user-accounts/cc-fingerprint-dialog.c:854
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:906
+#: panels/user-accounts/cc-fingerprint-dialog.c:900
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1025
+#: panels/user-accounts/cc-fingerprint-dialog.c:1015
 msgid "_Re-enroll this finger…"
 msgstr ""
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1040
+#: panels/user-accounts/cc-fingerprint-dialog.c:1030
 msgid "Scan new fingerprint"
 msgstr "ახალი ანაბეჭდის სკანირება"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1078
+#: panels/user-accounts/cc-fingerprint-dialog.c:1067
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1150
+#: panels/user-accounts/cc-fingerprint-dialog.c:1139
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "მოწყობილობის წაკითხვის შეცდოა"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1185
+#: panels/user-accounts/cc-fingerprint-dialog.c:1174
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr ""
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1336
+#: panels/user-accounts/cc-fingerprint-dialog.c:1325
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr ""
@@ -7376,7 +7535,7 @@ msgstr "%b %e, %Y"
 #, c-format
 msgctxt "login history week label"
 msgid "%s — %s"
-msgstr ""
+msgstr "%s — %s"
 
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
@@ -7393,7 +7552,7 @@ msgstr "%k:%M"
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
-msgstr ""
+msgstr "%s, %s"
 
 #: panels/user-accounts/cc-login-history-dialog.c:238
 msgid "Session Ended"
@@ -7557,30 +7716,30 @@ msgstr "არა"
 msgid "Logged in"
 msgstr "შესული"
 
-#: panels/user-accounts/cc-user-panel.c:1218
+#: panels/user-accounts/cc-user-panel.c:1216
 msgid "Failed to contact the accounts service"
 msgstr "ანგარიშების სერვისთან კავშირის შეცდომა"
 
-#: panels/user-accounts/cc-user-panel.c:1220
+#: panels/user-accounts/cc-user-panel.c:1218
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "გთხოვთ დარწმუნდეთ, რომ AccountService სწორადაა დაყენებული და ჩართულია."
 
-#: panels/user-accounts/cc-user-panel.c:1242
+#: panels/user-accounts/cc-user-panel.c:1240
 msgid "This panel must be unlocked to change this setting"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:1309
+#: panels/user-accounts/cc-user-panel.c:1307
 msgid "Delete the selected user account"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:1313
-#: panels/user-accounts/cc-user-panel.c:1454
+#: panels/user-accounts/cc-user-panel.c:1311
+#: panels/user-accounts/cc-user-panel.c:1452
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
 msgstr ""
 
-#: panels/user-accounts/cc-user-panel.c:1500
+#: panels/user-accounts/cc-user-panel.c:1498
 msgid "Unlock to Add Users and Change Settings"
 msgstr ""
 
@@ -7610,7 +7769,7 @@ msgid "Full name"
 msgstr "სრული სახელი"
 
 #: panels/user-accounts/cc-user-panel.ui:171
-#: panels/wwan/cc-wwan-apn-dialog.c:295
+#: panels/wwan/cc-wwan-apn-dialog.c:293
 msgid "Edit"
 msgstr "რედაქტირება"
 
@@ -7642,7 +7801,7 @@ msgid "_Parental Controls"
 msgstr "მშობლის კონტროლი"
 
 #: panels/user-accounts/cc-user-panel.ui:256
-msgid "Open the Parental Controls application."
+msgid "Open the Parental Controls app."
 msgstr "მშობლის კონტროლის აპლიკაციის გახსნა."
 
 #: panels/user-accounts/cc-user-panel.ui:293
@@ -8722,7 +8881,7 @@ msgctxt "shortcut window"
 msgid "Cancel search"
 msgstr "ძებნის გაუქმება"
 
-#. Translators: Search terms to find this application. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find this app. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: shell/org.gnome.Settings.desktop.in:13
 msgid "Preferences;Settings;"
 msgstr "მორგება;"
@@ -8752,13 +8911,13 @@ msgstr "ფანჯრის საწყისი მდგომარეო�
 
 #: shell/org.gnome.Settings.gschema.xml:21
 msgid ""
-"A tuple containing the initial width, height and maximized state of the "
-"application window."
+"A tuple containing the initial width, height and maximized state of the app "
+"window."
 msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1915
+#: subprojects/gvc/gvc-mixer-control.c:1907
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -8766,15 +8925,33 @@ msgstr[0] "%u გამოტანა"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1925
+#: subprojects/gvc/gvc-mixer-control.c:1917
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u შეტანა"
 
-#: subprojects/gvc/gvc-mixer-control.c:2876
+#: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "სისტემური ხმები"
+
+#~ msgid "Application"
+#~ msgstr "აპლიკაცია"
+
+#~ msgid "Default Applications"
+#~ msgstr "ნაგულისხმევი აპლიკაციები"
+
+#~ msgid "Application Search"
+#~ msgstr "აპლიკაციის მოძებნა"
+
+#~ msgid "Rear"
+#~ msgstr "უკანა"
+
+#~ msgid "Front"
+#~ msgstr "წინა"
+
+#~ msgid "System Volume"
+#~ msgstr "სისტემური საცავი"
 
 #, c-format
 #~ msgid ""
@@ -9044,9 +9221,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "I_dentity"
 #~ msgstr "_იდენტიფიკატორი"
-
-#~ msgid "_Private key password"
-#~ msgstr "_პირადი გასაღების პაროლი"
 
 #~ msgid "PAP"
 #~ msgstr "PAP"
@@ -9735,9 +9909,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "Icons"
 #~ msgstr "ხატულები"
-
-#~ msgid "Interface"
-#~ msgstr "ინტერფეისი"
 
 #~ msgid "N_one"
 #~ msgstr "არა_ფერი"
@@ -10577,9 +10748,6 @@ msgstr "სისტემური ხმები"
 
 #~ msgid "_Country:"
 #~ msgstr "ქვ_ეყანა:"
-
-#~ msgid "_Lock screen to enforce typing break"
-#~ msgstr "კრეფის დასასრულებლად _ეკრანის ჩაკეტვა"
 
 #~ msgid "_Models:"
 #~ msgstr "_მოდელები:"
