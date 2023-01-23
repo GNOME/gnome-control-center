@@ -847,7 +847,7 @@ add_static_permissions (CcApplicationsPanel *self,
   if (str && g_str_equal (str, "talk"))
     added += add_static_permission_row (self, _("Settings"), _("Can change settings"));
 
-  text = g_strdup_printf (_("%s requires access to the following system resources. To stop this access, the application must be removed."), g_app_info_get_display_name (info));
+  text = g_strdup_printf (_("%s requires access to the following system resources. To stop this access, the app must be removed."), g_app_info_get_display_name (info));
   adw_preferences_group_set_description (self->builtin_group, text);
 
   return added > 0;
@@ -1412,7 +1412,7 @@ update_panel (CcApplicationsPanel *self,
 
   if (row == NULL)
     {
-      adw_window_title_set_title (self->header_title, _("Applications"));
+      adw_window_title_set_title (self->header_title, _("Apps"));
       gtk_stack_set_visible_child (self->stack, self->empty_box);
       gtk_widget_set_visible (GTK_WIDGET (self->view_details_button), FALSE);
       return;

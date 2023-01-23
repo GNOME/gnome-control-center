@@ -162,7 +162,7 @@ search_panel_set_no_providers (CcSearchPanel *self)
   gtk_widget_set_valign (self->list_box, GTK_ALIGN_CENTER);
 
   gtk_list_box_append (GTK_LIST_BOX (self->list_box),
-                       gtk_label_new (_("No applications found")));
+                       gtk_label_new (_("No apps found")));
 }
 
 static void
