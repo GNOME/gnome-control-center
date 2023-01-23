@@ -202,11 +202,28 @@ update_complete (NetConnectionEditor *self,
 }
 
 static void
+device_reapply_cb (GObject      *source_object,
+                   GAsyncResult *res,
+                   gpointer      user_data)
+{
+        NetConnectionEditor *self = user_data;
+        g_autoptr(GError) error = NULL;
+        gboolean success = TRUE;
+
+        if (!nm_device_reapply_finish (NM_DEVICE (source_object), res, &error)) {
+                g_warning ("Failed to reapply changes on device: %s", error->message);
+                success = FALSE;
+        }
+
+        update_complete (self, success);
+}
+
+static void
 updated_connection_cb (GObject            *source_object,
                        GAsyncResult       *res,
                        gpointer            user_data)
 {
-        NetConnectionEditor *self;
+        NetConnectionEditor *self = user_data;
         g_autoptr(GError) error = NULL;
         gboolean success = TRUE;
 
@@ -214,13 +231,14 @@ updated_connection_cb (GObject            *source_object,
                                                          res, &error)) {
                 g_warning ("Failed to commit changes: %s", error->message);
                 success = FALSE;
-                //return; FIXME return if cancelled
+                update_complete (self, success);
+                return;
         }
 
         nm_connection_clear_secrets (NM_CONNECTION (source_object));
 
-        self = user_data;
-        update_complete (self, success);
+        nm_device_reapply_async (self->device, NM_CONNECTION (self->orig_connection),
+                                 0, 0, NULL, device_reapply_cb, self);
 }
 
 static void
@@ -228,7 +246,7 @@ added_connection_cb (GObject            *source_object,
                      GAsyncResult       *res,
                      gpointer            user_data)
 {
-        NetConnectionEditor *self;
+        NetConnectionEditor *self = user_data;
         g_autoptr(GError) error = NULL;
         gboolean success = TRUE;
 
@@ -236,11 +254,12 @@ added_connection_cb (GObject            *source_object,
                 g_warning ("Failed to add connection: %s", error->message);
                 success = FALSE;
                 /* Leave the editor open */
-                // return; FIXME return if cancelled
+                update_complete (self, success);
+                return;
         }
 
-        self = user_data;
-        update_complete (self, success);
+        nm_device_reapply_async (self->device, NM_CONNECTION (self->orig_connection),
+                                 0, 0, NULL, device_reapply_cb, self);
 }
 
 static void
