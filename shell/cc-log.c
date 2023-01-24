@@ -33,6 +33,7 @@
 #include "cc-log.h"
 
 #define DEFAULT_DOMAIN_PREFIX "cc"
+#define BLUETOOTH_DOMAIN_PREFIX "Bluetooth"
 
 char *domains;
 static int verbosity;
@@ -135,7 +136,9 @@ should_log (const char     *log_domain,
     return verbosity >= 4;
   }
 
-  if (!domains && g_str_has_prefix (log_domain, DEFAULT_DOMAIN_PREFIX))
+  if (!domains &&
+      (g_str_has_prefix (log_domain, DEFAULT_DOMAIN_PREFIX) ||
+       g_str_has_prefix (log_domain, BLUETOOTH_DOMAIN_PREFIX)))
     return should_show_log_for_level (log_level, verbosity);
 
   if (domains && matches_domain (domains, log_domain))
