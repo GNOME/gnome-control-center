@@ -48,7 +48,7 @@ panels_list = []
 panels_libs = []
 foreach cappletname: panels
   cflags = [
-    '-DG_LOG_DOMAIN="@0@-cc-panel"'.format(cappletname),
+    '-DG_LOG_DOMAIN="cc-@0@-panel"'.format(cappletname),
     '-DPANEL_ID="@0@"'.format(cappletname)
   ]
 
