@@ -66,6 +66,7 @@ struct _NetConnectionEditor
         gboolean          is_new_connection;
         gboolean          is_changed;
         NMAccessPoint    *ap;
+        GCancellable     *cancellable;
 
         GSList *initializing_pages;
 
@@ -211,7 +212,8 @@ device_reapply_cb (GObject      *source_object,
         gboolean success = TRUE;
 
         if (!nm_device_reapply_finish (NM_DEVICE (source_object), res, &error)) {
-                g_warning ("Failed to reapply changes on device: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to reapply changes on device: %s", error->message);
                 success = FALSE;
         }
 
@@ -229,7 +231,8 @@ updated_connection_cb (GObject            *source_object,
 
         if (!nm_remote_connection_commit_changes_finish (NM_REMOTE_CONNECTION (source_object),
                                                          res, &error)) {
-                g_warning ("Failed to commit changes: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to commit changes: %s", error->message);
                 success = FALSE;
                 update_complete (self, success);
                 return;
@@ -238,7 +241,7 @@ updated_connection_cb (GObject            *source_object,
         nm_connection_clear_secrets (NM_CONNECTION (source_object));
 
         nm_device_reapply_async (self->device, NM_CONNECTION (self->orig_connection),
-                                 0, 0, NULL, device_reapply_cb, self);
+                                 0, 0, self->cancellable, device_reapply_cb, self);
 }
 
 static void
@@ -251,7 +254,8 @@ added_connection_cb (GObject            *source_object,
         gboolean success = TRUE;
 
         if (!nm_client_add_connection_finish (NM_CLIENT (source_object), res, &error)) {
-                g_warning ("Failed to add connection: %s", error->message);
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to add connection: %s", error->message);
                 success = FALSE;
                 /* Leave the editor open */
                 update_complete (self, success);
@@ -259,7 +263,7 @@ added_connection_cb (GObject            *source_object,
         }
 
         nm_device_reapply_async (self->device, NM_CONNECTION (self->orig_connection),
-                                 0, 0, NULL, device_reapply_cb, self);
+                                 0, 0, self->cancellable, device_reapply_cb, self);
 }
 
 static void
@@ -273,13 +277,13 @@ apply_clicked_cb (NetConnectionEditor *self)
                 nm_client_add_connection_async (self->client,
                                                 self->orig_connection,
                                                 TRUE,
-                                                NULL,
+                                                self->cancellable,
                                                 added_connection_cb,
                                                 self);
         } else {
                 nm_remote_connection_commit_changes_async (NM_REMOTE_CONNECTION (self->orig_connection),
                                                            TRUE,
-                                                           NULL,
+                                                           self->cancellable,
                                                            updated_connection_cb, self);
         }
 }
@@ -300,6 +304,8 @@ net_connection_editor_finalize (GObject *object)
         g_clear_object (&self->device);
         g_clear_object (&self->client);
         g_clear_object (&self->ap);
+        g_cancellable_cancel (self->cancellable);
+        g_clear_object (&self->cancellable);
 
         G_OBJECT_CLASS (net_connection_editor_parent_class)->finalize (object);
 }
@@ -552,8 +558,11 @@ get_secrets_cb (GObject *source_object,
         connection = NM_REMOTE_CONNECTION (source_object);
         variant = nm_remote_connection_get_secrets_finish (connection, res, &error);
 
-        if (!variant && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        if (!variant) {
+                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        g_warning ("Failed to get secrets: %s", error->message);
                 return;
+        }
 
         ce_page_complete_init (info->page, info->editor->connection, info->setting_name, variant, g_steal_pointer (&error));
 }
@@ -572,7 +581,7 @@ get_secrets_for_page (NetConnectionEditor *self,
 
         nm_remote_connection_get_secrets_async (NM_REMOTE_CONNECTION (self->orig_connection),
                                                 setting_name,
-                                                NULL, //FIXME
+                                                self->cancellable,
                                                 get_secrets_cb,
                                                 info);
 }
@@ -745,7 +754,7 @@ vpn_import_complete (NMConnection *connection, gpointer user_data)
                 complete_vpn_connection (self, connection, NM_TYPE_SETTING_WIREGUARD);
         else
                 complete_vpn_connection (self, connection, NM_TYPE_SETTING_VPN);
-        
+
         /* Mark the connection as private to this user, and non-autoconnect */
         s_con = nm_connection_get_setting_connection (connection);
         g_object_set (s_con, NM_SETTING_CONNECTION_AUTOCONNECT, FALSE, NULL);
@@ -933,6 +942,8 @@ net_connection_editor_new (NMConnection     *connection,
                              "use-header-bar", 1,
                              NULL);
 
+        self->cancellable = g_cancellable_new ();
+
         if (ap)
                 self->ap = g_object_ref (ap);
         if (device)
@@ -975,7 +986,7 @@ void
 net_connection_editor_forget (NetConnectionEditor *self)
 {
         nm_remote_connection_delete_async (NM_REMOTE_CONNECTION (self->orig_connection),
-                                           NULL, forgotten_cb, self);
+                                           self->cancellable, forgotten_cb, self);
 }
 
 void
