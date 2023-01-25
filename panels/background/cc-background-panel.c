@@ -57,7 +57,6 @@ struct _CcBackgroundPanel
   GSettings *lock_settings;
   GSettings *interface_settings;
 
-  GnomeDesktopThumbnailFactory *thumb_factory;
   GDBusProxy *proxy;
 
   CcBackgroundItem *current_background;
@@ -355,7 +354,6 @@ cc_background_panel_dispose (GObject *object)
   g_clear_object (&panel->settings);
   g_clear_object (&panel->lock_settings);
   g_clear_object (&panel->interface_settings);
-  g_clear_object (&panel->thumb_factory);
   g_clear_object (&panel->proxy);
 
   G_OBJECT_CLASS (cc_background_panel_parent_class)->dispose (object);
@@ -414,8 +412,6 @@ cc_background_panel_init (CcBackgroundPanel *panel)
   gtk_widget_init_template (GTK_WIDGET (panel));
 
   panel->connection = g_application_get_dbus_connection (g_application_get_default ());
-
-  panel->thumb_factory = gnome_desktop_thumbnail_factory_new (GNOME_DESKTOP_THUMBNAIL_SIZE_LARGE);
 
   panel->settings = g_settings_new (WP_PATH_ID);
   g_settings_delay (panel->settings);
