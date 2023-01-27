@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-01-24 21:33+0000\n"
-"PO-Revision-Date: 2023-01-25 09:07+0200\n"
+"POT-Creation-Date: 2023-01-26 20:30+0000\n"
+"PO-Revision-Date: 2023-01-27 10:59+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <>\n"
 "Language: he\n"
@@ -400,7 +400,7 @@ msgstr "%d ×‏ %d"
 msgid "No Desktop Background"
 msgstr "אין רקע לשולחן העבודה"
 
-#: panels/background/cc-background-panel.c:227
+#: panels/background/cc-background-panel.c:226
 msgid "Current background"
 msgstr "הרקע הנוכחי"
 
@@ -502,22 +502,20 @@ msgid "Camera is Turned Off"
 msgstr "המצלמה כבויה"
 
 #: panels/camera/cc-camera-panel.ui:25
-#, fuzzy
-#| msgid "No applications can capture photos or video."
 msgid "No sandboxed apps can capture photos or video."
-msgstr "אף יישום לא יכול לצלם תמונה או סרטון."
+msgstr "אף יישום מבודד לא יכול לצלם תמונה או סרטון."
 
 #: panels/camera/cc-camera-panel.ui:39
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
 msgstr ""
+"היישומים המבודדים הבאים קיבלו הרשאה להשתמש במצלמה. יישומים שאינם מבודדים "
+"יכולים להשתמש במצלמה ללא בקשת אישור."
 
 #: panels/camera/cc-camera-panel.ui:53
-#, fuzzy
-#| msgid "No Applications Have Asked for Camera Access"
 msgid "No sandboxed apps have asked for camera access"
-msgstr "אף יישום לא ביקש גישה למצלמה"
+msgstr "אף יישום מבודד לא ביקש גישה למצלמה"
 
 #: panels/camera/gnome-camera-panel.desktop.in:4
 msgid "Protect your pictures"
@@ -1199,12 +1197,12 @@ msgstr "%e ב%b"
 msgid "%b %e, %Y"
 msgstr "%e ב%b, 2013"
 
+# msgctxt "timezone loc"
 #. TRANSLATORS: This is the datetime format in the style of
 #. "Aug 1, 10:10:10 PM", "Feb 24, 2013, 10:10:10 PM", "Today, 10:10:10 AM",
 #. and "Yesterday, 10:10:10 AM"
 #: panels/common/cc-util.c:162
 #, c-format
-# msgctxt "timezone loc"
 msgid "%1$s, %2$s"
 msgstr "‏%1$s,‏ ‏‎%2$s"
 
@@ -2094,9 +2092,9 @@ msgstr ""
 msgid "%1$s"
 msgstr "%1$s"
 
+# msgctxt "timezone loc"
 #: panels/firmware-security/cc-firmware-security-panel.c:237
 #, c-format
-# msgctxt "timezone loc"
 msgid "(%1$s → %2$s)"
 msgstr "‏‏(%1$s ← %2$s)"
 
@@ -2848,10 +2846,8 @@ msgid "Location Services Turned Off"
 msgstr "שירותי האיכון מושבתים"
 
 #: panels/location/cc-location-panel.ui:24
-#, fuzzy
-#| msgid "No applications can obtain location information."
 msgid "No sandboxed apps can obtain location information."
-msgstr "אף יישום לא יכול לקבל מידע על המיקום שלך."
+msgstr "אף יישום מבודד לא יכול לקבל מידע על המיקום שלך."
 
 #: panels/location/cc-location-panel.ui:38
 msgid ""
@@ -2864,12 +2860,16 @@ msgid ""
 "that are not sandboxed can access location data without asking for "
 "permission."
 msgstr ""
+"שירותי המיקום עושים שימוש ב־GPS, רשת אלחוטית והתחברויות סלולר, על מנת לקבוע "
+"את המיקום המשוער של התקן זה. <a href='https://location.services.mozilla.com/"
+"privacy'>מידע נוסף על המידע שנאסף וכיצד נעשה בו שימוש</a>.\n"
+"\n"
+"היישומים המבודדים הבאים קיבלו גישה למידע על המיקום שלך. יישומים שאינם "
+"מבודדים יכולים לקבל גישה למיקום שלך ללא בקשת אישור."
 
 #: panels/location/cc-location-panel.ui:54
-#, fuzzy
-#| msgid "No Applications Have Asked for Location Access"
 msgid "No sandboxed apps have asked for location access"
-msgstr "אף יישום לא ביקש גישה למיקום"
+msgstr "אף יישום מבודד לא ביקש גישה למיקום"
 
 #: panels/location/gnome-location-panel.desktop.in:4
 msgid "Protect your location information"
@@ -2885,10 +2885,8 @@ msgid "Microphone Turned Off"
 msgstr "המיקרופון כובה"
 
 #: panels/microphone/cc-microphone-panel.ui:24
-#, fuzzy
-#| msgid "No applications can record sound."
 msgid "No sandboxed apps can record sound."
-msgstr "אף יישום לא יכול להקליט שמע."
+msgstr "אף יישום מבודד לא יכול להקליט שמע."
 
 #: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
@@ -2896,12 +2894,12 @@ msgid ""
 "Apps that are not sandboxed can use microphones without asking for "
 "permission."
 msgstr ""
+"היישומים המבודדים הבאים קיבלו גישה למיקרופון שלך. יישומים שאינם מבודדים "
+"יכולים להשתמש במיקרופון שלך ללא בקשת אישור."
 
 #: panels/microphone/cc-microphone-panel.ui:52
-#, fuzzy
-#| msgid "No Applications Have Asked for Microphone Access"
 msgid "No sandboxed apps have asked for microphone access"
-msgstr "אף יישום לא דרש גישה למיקרופון"
+msgstr "אף יישום מבודד לא ביקש גישה למיקרופון"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in:4
 msgid "Protect your conversations"
@@ -2949,17 +2947,17 @@ msgstr "מהירות העכבר"
 msgid "Mouse speed"
 msgstr "מהירות העכבר"
 
+# msgctxt "keyboard, speed"
 #: panels/mouse/cc-mouse-panel.ui:73 panels/mouse/cc-mouse-panel.ui:149
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
-# msgctxt "keyboard, speed"
 msgid "Slow"
 msgstr "אטי"
 
+# msgctxt "keyboard, speed"
 #: panels/mouse/cc-mouse-panel.ui:75 panels/mouse/cc-mouse-panel.ui:151
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
-# msgctxt "keyboard, speed"
 msgid "Fast"
 msgstr "מהיר"
 
@@ -6701,8 +6699,8 @@ msgstr "התראות ח_זותיות"
 msgid "_Flash Area"
 msgstr "אזור ה_בהוב"
 
-#: panels/universal-access/cc-ua-hearing-page.ui:52
 # msgctxt "keyboard key"
+#: panels/universal-access/cc-ua-hearing-page.ui:52
 msgid "Entire Screen"
 msgstr "כל המסך"
 
@@ -6734,6 +6732,7 @@ msgstr "הדגשת מיקום הזמן בלחיצה על Ctrl שמאלי"
 msgid "_Double-Click Delay"
 msgstr "פרק זמן לחיצה _כפולה"
 
+# msgctxt "secondary click"
 #: panels/universal-access/cc-ua-mouse-page.ui:34
 #: panels/universal-access/cc-ua-mouse-page.ui:72
 #: panels/universal-access/cc-ua-mouse-page.ui:105
@@ -6741,10 +6740,10 @@ msgstr "פרק זמן לחיצה _כפולה"
 #: panels/universal-access/cc-ua-typing-page.ui:186
 #: panels/universal-access/cc-ua-typing-page.ui:236
 #: panels/universal-access/cc-ua-zoom-page.ui:168
-# msgctxt "secondary click"
 msgid "Short"
 msgstr "קצר"
 
+# msgctxt "secondary click delay"
 #: panels/universal-access/cc-ua-mouse-page.ui:37
 #: panels/universal-access/cc-ua-mouse-page.ui:75
 #: panels/universal-access/cc-ua-mouse-page.ui:108
@@ -6752,7 +6751,6 @@ msgstr "קצר"
 #: panels/universal-access/cc-ua-typing-page.ui:189
 #: panels/universal-access/cc-ua-typing-page.ui:239
 #: panels/universal-access/cc-ua-zoom-page.ui:172
-# msgctxt "secondary click delay"
 msgid "Long"
 msgstr "ארוך"
 
@@ -6786,13 +6784,13 @@ msgstr "הפעלת לחיצה כאשר העכבר עובר מעל"
 msgid "Motion Threshold"
 msgstr "סף תנועה"
 
-#: panels/universal-access/cc-ua-mouse-page.ui:131
 # msgctxt "dwell click threshold"
+#: panels/universal-access/cc-ua-mouse-page.ui:131
 msgid "Small"
 msgstr "קטן"
 
-#: panels/universal-access/cc-ua-mouse-page.ui:134
 # msgctxt "dwell click threshold"
+#: panels/universal-access/cc-ua-mouse-page.ui:134
 msgid "Large"
 msgstr "גדול"
 
@@ -6884,8 +6882,8 @@ msgstr "ניגודיות _גבוהה"
 msgid "Increase color contrast of foreground and background interface elements"
 msgstr "הגדלת ניגודיות הצבע של חזית ורקע רכיבי ממשק"
 
-#: panels/universal-access/cc-ua-seeing-page.ui:19
 # msgctxt "Thunderbolt Device Status"
+#: panels/universal-access/cc-ua-seeing-page.ui:19
 msgid "_Reduce Animation"
 msgstr "ה_פחתת הנפשות"
 
@@ -7038,8 +7036,8 @@ msgstr "מקשים _חוזרים"
 msgid "Ignore fast duplicate keypresses"
 msgstr "התעלמות מלחיצות מקש כפולות מהירות"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:9
 # msgctxt "Sound event"
+#: panels/universal-access/cc-ua-zoom-page.ui:9
 msgid "_Desktop Zoom"
 msgstr "תקריב _שולחן העבודה"
 
@@ -7120,13 +7118,13 @@ msgstr "_חופף את סמן העכבר"
 msgid "Thickness"
 msgstr "עובי"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:129
 # msgctxt "universal access, thickness"
+#: panels/universal-access/cc-ua-zoom-page.ui:129
 msgid "Thin"
 msgstr "צר"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:130
 # msgctxt "universal access, thickness"
+#: panels/universal-access/cc-ua-zoom-page.ui:130
 msgid "Thick"
 msgstr "עבה"
 
@@ -7162,15 +7160,15 @@ msgstr "היפוך צבעים באזור ההגדלה"
 msgid "Brightness"
 msgstr "בהירות"
 
+# msgctxt "Calibration quality"
 #: panels/universal-access/cc-ua-zoom-page.ui:225
 #: panels/universal-access/cc-ua-zoom-page.ui:248
-# msgctxt "Calibration quality"
 msgid "Low"
 msgstr "נמוכה"
 
+# msgctxt "Calibration quality"
 #: panels/universal-access/cc-ua-zoom-page.ui:226
 #: panels/universal-access/cc-ua-zoom-page.ui:249
-# msgctxt "Calibration quality"
 msgid "High"
 msgstr "גבוהה"
 
@@ -7178,8 +7176,8 @@ msgstr "גבוהה"
 msgid "Contrast"
 msgstr "ניגודיות"
 
-#: panels/universal-access/cc-ua-zoom-page.ui:272
 # msgctxt "universal access, color"
+#: panels/universal-access/cc-ua-zoom-page.ui:272
 msgid "Full"
 msgstr "מלא"
 
