@@ -52,7 +52,6 @@ struct _CEPageDetails
         GtkLabel *mac_heading_label;
         GtkLabel *mac_label;
         GtkCheckButton *restrict_data_check;
-        GtkBox *restrict_data_check_container;
         GtkLabel *route_heading_label;
         GtkLabel *route_label;
         GtkLabel *security_heading_label;
@@ -228,7 +227,6 @@ update_restrict_data (CEPageDetails *self)
 
         gtk_check_button_set_active (GTK_CHECK_BUTTON (self->restrict_data_check),
                                      metered == NM_METERED_YES || metered == NM_METERED_GUESS_YES);
-        gtk_widget_show (GTK_WIDGET (self->restrict_data_check_container));
 
         g_signal_connect_object (self->restrict_data_check, "notify::active", G_CALLBACK (restrict_data_changed), self, G_CONNECT_SWAPPED);
         g_signal_connect_object (self->restrict_data_check, "notify::active", G_CALLBACK (ce_page_changed), self, G_CONNECT_SWAPPED);
@@ -534,7 +532,6 @@ ce_page_details_class_init (CEPageDetailsClass *klass)
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, mac_heading_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, mac_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, restrict_data_check);
-        gtk_widget_class_bind_template_child (widget_class, CEPageDetails, restrict_data_check_container);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, route_heading_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, route_label);
         gtk_widget_class_bind_template_child (widget_class, CEPageDetails, security_heading_label);

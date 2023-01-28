@@ -393,19 +393,15 @@
 
     <!-- "Restrict Data Usage" section -->
     <child>
-      <object class="GtkBox" id="restrict_data_check_container">
+      <object class="GtkCheckButton" id="restrict_data_check">
         <layout>
           <property name="column">0</property>
           <property name="row">13</property>
           <property name="column-span">2</property>
           <property name="row-span">1</property>
         </layout>
-        <child>
-          <object class="GtkCheckButton" id="restrict_data_check">
-            <property name="margin_bottom">12</property>
-          </object>
-        </child>
-        <child>
+        <property name="margin_bottom">12</property>
+        <property name="child">
           <object class="GtkBox">
             <property name="orientation">vertical</property>
             <child>
@@ -432,7 +428,7 @@
               </object>
             </child>
           </object>
-        </child>
+        </property>
       </object>
     </child>
 
