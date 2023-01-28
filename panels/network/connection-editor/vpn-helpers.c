@@ -202,17 +202,6 @@ out:
 	g_free (info);
 }
 
-static gboolean
-destroy_import_chooser (GtkWidget *dialog, gpointer user_data)
-{
-	ActionInfo *info = (ActionInfo *) user_data;
-
-	info->callback (NULL, info->user_data);
-	g_free (info);
-
-	return FALSE;
-}
-
 void
 vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 {
@@ -234,7 +223,6 @@ vpn_import (GtkWindow *parent, VpnImportCallback callback, gpointer user_data)
 	info->callback = callback;
 	info->user_data = user_data;
 
-	g_signal_connect (G_OBJECT (dialog), "close-request", G_CALLBACK (destroy_import_chooser), info);
 	g_signal_connect (G_OBJECT (dialog), "response", G_CALLBACK (import_vpn_from_file_cb), info);
 	gtk_window_present (GTK_WINDOW (dialog));
 }
