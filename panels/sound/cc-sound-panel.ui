@@ -18,187 +18,187 @@
                 </child>
               </object>
             </property>
+            <child>
+              <object class="AdwPreferencesRow">
+                <property name="activatable">False</property>
                 <child>
-                  <object class="AdwPreferencesRow">
-                    <property name="activatable">False</property>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
                     <child>
-                      <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="output_device_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Output Device</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="CcDeviceComboBox" id="output_device_combo_box">
-                                <property name="hexpand">True</property>
-                                <accessibility>
-                                  <relation name="labelled-by">output_device_label</relation>
-                                </accessibility>
-                                <signal name="changed" handler="output_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkButton">
-                                <property name="label" translatable="yes">Test</property>
-                                <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundPanel" swapped="yes"/>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
+                      <object class="GtkLabel" id="output_device_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Output Device</property>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwPreferencesRow" id="output_profile_row">
-                    <property name="activatable">False</property>
                     <child>
                       <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
+                        <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="output_configuration_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Configuration</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="CcProfileComboBox" id="output_profile_combo_box">
-                                <property name="hexpand">True</property>
-                                <accessibility>
-                                  <relation name="labelled-by">output_configuration_label</relation>
-                                </accessibility>
-                              </object>
-                            </child>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="AdwPreferencesRow">
-                    <property name="activatable">False</property>
-                    <accessibility>
-                      <property name="label" translatable="yes">Master volume</property>
-                    </accessibility>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="output_volume_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Output Volume</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="CcVolumeSlider" id="output_volume_slider">
+                          <object class="CcDeviceComboBox" id="output_device_combo_box">
                             <property name="hexpand">True</property>
+                            <accessibility>
+                              <relation name="labelled-by">output_device_label</relation>
+                            </accessibility>
+                            <signal name="changed" handler="output_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton">
+                            <property name="label" translatable="yes">Test</property>
+                            <signal name="clicked" handler="test_output_configuration_button_clicked_cb" object="CcSoundPanel" swapped="yes"/>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow" id="output_profile_row">
+                <property name="activatable">False</property>
                 <child>
-                  <object class="AdwPreferencesRow">
-                    <property name="activatable">False</property>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel" id="output_configuration_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Configuration</property>
+                      </object>
+                    </child>
                     <child>
                       <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
+                        <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="output_balance_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Balance</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="CcBalanceSlider" id="balance_slider">
+                          <object class="CcProfileComboBox" id="output_profile_combo_box">
                             <property name="hexpand">True</property>
+                            <accessibility>
+                              <relation name="labelled-by">output_configuration_label</relation>
+                            </accessibility>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow">
+                <property name="activatable">False</property>
+                <accessibility>
+                  <property name="label" translatable="yes">Master volume</property>
+                </accessibility>
                 <child>
-                  <object class="AdwPreferencesRow" id="fade_row">
-                    <property name="activatable">False</property>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
                     <child>
-                      <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="output_fade_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Fade</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="CcFadeSlider" id="fade_slider">
-                            <property name="hexpand">True</property>
-                          </object>
-                        </child>
+                      <object class="GtkLabel" id="output_volume_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Output Volume</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcVolumeSlider" id="output_volume_slider">
+                        <property name="hexpand">True</property>
                       </object>
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow">
+                <property name="activatable">False</property>
                 <child>
-                  <object class="AdwPreferencesRow" id="subwoofer_row">
-                    <property name="activatable">False</property>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
                     <child>
-                      <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="output_subwoofer_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Subwoofer</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="CcSubwooferSlider" id="subwoofer_slider">
-                            <property name="hexpand">True</property>
-                          </object>
-                        </child>
+                      <object class="GtkLabel" id="output_balance_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Balance</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcBalanceSlider" id="balance_slider">
+                        <property name="hexpand">True</property>
                       </object>
                     </child>
                   </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow" id="fade_row">
+                <property name="activatable">False</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel" id="output_fade_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Fade</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcFadeSlider" id="fade_slider">
+                        <property name="hexpand">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow" id="subwoofer_row">
+                <property name="activatable">False</property>
+                <child>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel" id="output_subwoofer_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Subwoofer</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcSubwooferSlider" id="subwoofer_slider">
+                        <property name="hexpand">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
             </child>
           </object>
         </child>
@@ -230,102 +230,102 @@
                 <property name="width-request">40</property>
               </object>
             </property>
+            <child>
+              <object class="AdwPreferencesRow">
+                <property name="activatable">False</property>
                 <child>
-                  <object class="AdwPreferencesRow">
-                    <property name="activatable">False</property>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel" id="input_device_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Input Device</property>
+                      </object>
+                    </child>
                     <child>
                       <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
+                        <property name="orientation">vertical</property>
+                        <property name="hexpand">True</property>
+                        <property name="spacing">9</property>
                         <child>
-                          <object class="GtkLabel" id="input_device_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Input Device</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
+                          <object class="CcDeviceComboBox" id="input_device_combo_box">
                             <property name="hexpand">True</property>
-                            <property name="spacing">9</property>
-                            <child>
-                              <object class="CcDeviceComboBox" id="input_device_combo_box">
-                                <property name="hexpand">True</property>
-                                <accessibility>
-                                  <relation name="labelled-by">input_device_label</relation>
-                                </accessibility>
-                                <signal name="changed" handler="input_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
-                              </object>
-                            </child>
+                            <accessibility>
+                              <relation name="labelled-by">input_device_label</relation>
+                            </accessibility>
+                            <signal name="changed" handler="input_device_changed_cb" object="CcSoundPanel" swapped="yes"/>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow" id="input_profile_row">
+                <property name="activatable">False</property>
                 <child>
-                  <object class="AdwPreferencesRow" id="input_profile_row">
-                    <property name="activatable">False</property>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
+                    <child>
+                      <object class="GtkLabel" id="input_configuration_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Configuration</property>
+                      </object>
+                    </child>
                     <child>
                       <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
+                        <property name="spacing">6</property>
                         <child>
-                          <object class="GtkLabel" id="input_configuration_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Configuration</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkBox">
-                            <property name="spacing">6</property>
-                            <child>
-                              <object class="CcProfileComboBox" id="input_profile_combo_box">
-                                <property name="hexpand">True</property>
-                                <accessibility>
-                                  <relation name="labelled-by">input_configuration_label</relation>
-                                </accessibility>
-                              </object>
-                            </child>
+                          <object class="CcProfileComboBox" id="input_profile_combo_box">
+                            <property name="hexpand">True</property>
+                            <accessibility>
+                              <relation name="labelled-by">input_configuration_label</relation>
+                            </accessibility>
                           </object>
                         </child>
                       </object>
                     </child>
                   </object>
                 </child>
+              </object>
+            </child>
+            <child>
+              <object class="AdwPreferencesRow">
+                <property name="activatable">False</property>
                 <child>
-                  <object class="AdwPreferencesRow">
-                    <property name="activatable">False</property>
+                  <object class="GtkBox">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">12</property>
+                    <property name="margin-start">12</property>
+                    <property name="margin-end">12</property>
+                    <property name="spacing">12</property>
                     <child>
-                      <object class="GtkBox">
-                        <property name="margin-top">12</property>
-                        <property name="margin-bottom">12</property>
-                        <property name="margin-start">12</property>
-                        <property name="margin-end">12</property>
-                        <property name="spacing">12</property>
-                        <child>
-                          <object class="GtkLabel" id="input_volume_label">
-                            <property name="ellipsize">end</property>
-                            <property name="xalign">0</property>
-                            <property name="label" translatable="yes">Input Volume</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="CcVolumeSlider" id="input_volume_slider">
-                            <property name="hexpand">True</property>
-                          </object>
-                        </child>
+                      <object class="GtkLabel" id="input_volume_label">
+                        <property name="ellipsize">end</property>
+                        <property name="xalign">0</property>
+                        <property name="label" translatable="yes">Input Volume</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="CcVolumeSlider" id="input_volume_slider">
+                        <property name="hexpand">True</property>
                       </object>
                     </child>
                   </object>
+                </child>
+              </object>
             </child>
           </object>
         </child>
