@@ -30,7 +30,7 @@ config_h = configuration_data()
 py = import('python')
 python = py.find_installation('python3')
 
-config_h.set_quoted('TEST_NM_PYTHON', python.path())
+config_h.set_quoted('TEST_NM_PYTHON', python.full_path())
 
 if get_option('profile') == 'development'
     profile = 'Devel'
