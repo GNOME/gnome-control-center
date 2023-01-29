@@ -90,6 +90,8 @@ typedef struct
   GHashTable *engine_rows_by_id;
 } LocaleInfo;
 
+static void on_input_sources_listbox_row_activated_cb (CcInputChooser *self, GtkListBoxRow  *row);
+
 static void
 locale_info_free (gpointer data)
 {
@@ -304,6 +306,22 @@ add_input_source_rows_for_locale (CcInputChooser *self,
 }
 
 static void
+on_back_row_click_released_cb (GtkGestureClick *click,
+                               int              n_press,
+                               double           x,
+                               double           y,
+                               CcInputChooser  *self)
+{
+  GtkWidget *widget;
+  GtkListBoxRow *row;
+
+  widget = gtk_event_controller_get_widget (GTK_EVENT_CONTROLLER (click));
+  row = GTK_LIST_BOX_ROW (widget);
+  if (row)
+    on_input_sources_listbox_row_activated_cb (self, row);
+}
+
+static void
 show_input_sources_for_locale (CcInputChooser *self,
                                LocaleInfo     *info)
 {
@@ -311,10 +329,17 @@ show_input_sources_for_locale (CcInputChooser *self,
 
   if (!info->back_row)
     {
+      GtkEventController *controller;
+
       info->back_row = g_object_ref_sink (back_row_new (info->name));
       gtk_widget_show (GTK_WIDGET (info->back_row));
       g_object_set_data (G_OBJECT (info->back_row), "back", GINT_TO_POINTER (TRUE));
       g_object_set_data (G_OBJECT (info->back_row), "locale-info", info);
+
+      controller = GTK_EVENT_CONTROLLER (gtk_gesture_click_new ());
+      gtk_gesture_single_set_button (GTK_GESTURE_SINGLE (controller), 0);
+      g_signal_connect (controller, "released", G_CALLBACK (on_back_row_click_released_cb), self);
+      gtk_widget_add_controller (GTK_WIDGET (info->back_row), controller);
     }
   gtk_list_box_append (self->input_sources_listbox, GTK_WIDGET (info->back_row));
 
