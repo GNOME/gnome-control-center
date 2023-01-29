@@ -112,7 +112,7 @@ move_up_cb (GtkWidget  *widget,
   gint previous_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) - 1;
   GtkListBoxRow *previous_row = gtk_list_box_get_row_at_index (list_box, previous_idx);
 
-  if (previous_row == NULL)
+  if (previous_row == NULL || !CC_IS_INPUT_ROW (previous_row))
     return;
 
   g_signal_emit (self,
@@ -131,7 +131,7 @@ move_down_cb (GtkWidget  *widget,
   gint next_idx = gtk_list_box_row_get_index (GTK_LIST_BOX_ROW (self)) + 1;
   GtkListBoxRow *next_row = gtk_list_box_get_row_at_index (list_box, next_idx);
 
-  if (next_row == NULL)
+  if (next_row == NULL || !CC_IS_INPUT_ROW (next_row))
     return;
 
   g_signal_emit (next_row,
