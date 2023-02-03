@@ -851,6 +851,25 @@ add_ids_to_set (GHashTable *set,
     }
 }
 
+static GList *
+layout_lists_intersection (GList *first_list, GList *second_list)
+{
+  g_autoptr(GList) intersection_list = NULL;
+  g_autoptr(GList) l = NULL;
+
+  for (l = first_list; l != NULL; l = l->next)
+    {
+      gpointer element_data = l->data;
+      if (g_list_find (second_list, (gconstpointer) element_data) &&
+          !g_list_find (intersection_list, (gconstpointer) element_data))
+        {
+          intersection_list = g_list_append (intersection_list, element_data);
+        }
+    }
+
+  return g_steal_pointer (&intersection_list);
+}
+
 static void
 get_locale_infos (CcInputChooser *self)
 {
@@ -878,6 +897,7 @@ get_locale_infos (CcInputChooser *self)
       const gchar *type = NULL;
       const gchar *id = NULL;
       g_autoptr(GList) language_layouts = NULL;
+      g_autoptr(GList) locale_layouts = NULL;
 
       if (!gnome_parse_locale (*locale, &lang_code, &country_code, NULL, NULL))
         continue;
@@ -914,15 +934,19 @@ get_locale_infos (CcInputChooser *self)
                                                        NULL, g_object_unref);
 
       language_layouts = gnome_xkb_info_get_layouts_for_language (self->xkb_info, lang_code);
-      add_rows_to_table (self, info, language_layouts, INPUT_SOURCE_TYPE_XKB, id);
-      add_ids_to_set (layouts_with_locale, language_layouts);
 
       if (country_code != NULL)
         {
           g_autoptr(GList) country_layouts = gnome_xkb_info_get_layouts_for_country (self->xkb_info, country_code);
-          add_rows_to_table (self, info, country_layouts, INPUT_SOURCE_TYPE_XKB, id);
-          add_ids_to_set (layouts_with_locale, country_layouts);
+          locale_layouts = layout_lists_intersection (language_layouts, country_layouts);
         }
+      else
+        {
+          locale_layouts = g_steal_pointer (&language_layouts);
+        }
+
+      add_rows_to_table (self, info, locale_layouts, INPUT_SOURCE_TYPE_XKB, id);
+      add_ids_to_set (layouts_with_locale, locale_layouts);
     }
 
   /* Add a "Other" locale to hold the remaining input sources */
