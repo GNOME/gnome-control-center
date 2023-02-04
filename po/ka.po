@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-01-23 17:49+0000\n"
-"PO-Revision-Date: 2023-01-23 20:49+0100\n"
+"POT-Creation-Date: 2023-02-03 14:58+0000\n"
+"PO-Revision-Date: 2023-02-04 08:48+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <http://mail.gnome.org/mailman/listinfo/gnome-ge-"
 "list>\n"
@@ -208,7 +208,7 @@ msgstr "ფონის სურათის შეცვლა."
 
 #: panels/applications/cc-applications-panel.ui:154
 #: panels/applications/cc-applications-panel.ui:161
-#: panels/sound/cc-sound-panel.ui:361
+#: panels/sound/cc-sound-panel.ui:352
 msgid "Sounds"
 msgstr "ხმები"
 
@@ -230,7 +230,6 @@ msgstr "კლავიატურის სტანდართული მ�
 
 #: panels/applications/cc-applications-panel.ui:175
 #: panels/applications/cc-applications-panel.ui:182
-#: panels/camera/gnome-camera-panel.desktop.in:3
 msgid "Camera"
 msgstr "კამერა"
 
@@ -241,7 +240,6 @@ msgstr "გადაიღეთ სურათები კამერით"
 
 #: panels/applications/cc-applications-panel.ui:189
 #: panels/applications/cc-applications-panel.ui:196
-#: panels/microphone/gnome-microphone-panel.desktop.in:3
 msgid "Microphone"
 msgstr "მიკროფონი"
 
@@ -351,8 +349,8 @@ msgstr "აირჩიეთ სურათი"
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:886
 #: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/connection-editor/vpn-helpers.c:226
-#: panels/network/connection-editor/vpn-helpers.c:346
+#: panels/network/connection-editor/vpn-helpers.c:215
+#: panels/network/connection-editor/vpn-helpers.c:334
 #: panels/network/net-device-wifi.c:866
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
@@ -374,7 +372,7 @@ msgid "_Cancel"
 msgstr "_გაუქმება"
 
 #: panels/background/cc-background-chooser.c:316
-#: panels/network/connection-editor/vpn-helpers.c:227
+#: panels/network/connection-editor/vpn-helpers.c:216
 #: panels/printers/pp-details-dialog.c:270
 #: panels/sharing/cc-sharing-panel.c:480
 #: panels/user-accounts/cc-avatar-chooser.c:168
@@ -396,7 +394,7 @@ msgstr "%d × %d"
 msgid "No Desktop Background"
 msgstr "სამუშაო მაგიდის ფონის გარეშე"
 
-#: panels/background/cc-background-panel.c:227
+#: panels/background/cc-background-panel.c:226
 msgid "Current background"
 msgstr "მიმდინარე ფონი"
 
@@ -511,11 +509,15 @@ msgstr ""
 msgid "No sandboxed apps have asked for camera access"
 msgstr ""
 
-#: panels/camera/gnome-camera-panel.desktop.in:4
-msgid "Protect your pictures"
-msgstr "დაიცავით თქვენი სურათები"
+#: panels/camera/gnome-camera-panel.desktop.in:3
+msgid "Cameras"
+msgstr "კამერები"
 
-#. Translators: Search terms to find the Camera panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/camera/gnome-camera-panel.desktop.in:4
+msgid "Restrict camera access"
+msgstr ""
+
+#. Translators: Search terms to find the Cameras panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/camera/gnome-camera-panel.desktop.in:16
 msgid "camera;photos;video;webcam;lock;private;privacy;"
 msgstr "camera;photos;video;webcam;lock;private;privacy;"
@@ -718,7 +720,7 @@ msgid "Save Profile"
 msgstr "პროფილის შენახვა"
 
 #: panels/color/cc-color-panel.c:845
-#: panels/network/connection-editor/vpn-helpers.c:347
+#: panels/network/connection-editor/vpn-helpers.c:335
 #: panels/wwan/cc-wwan-apn-dialog.ui:43
 msgid "_Save"
 msgstr "შ_ენახვა"
@@ -872,7 +874,7 @@ msgstr "_ფაილის შემოტანა…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:591
+#: panels/network/connection-editor/net-connection-editor.c:619
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1162,12 +1164,12 @@ msgid "Decrement Minute"
 msgstr "წუთის შემცირება"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:168
+#: panels/network/connection-editor/ce-page-details.c:167
 msgid "Today"
 msgstr "დღეს"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:170
+#: panels/network/connection-editor/ce-page-details.c:169
 msgid "Yesterday"
 msgstr "გუშინ"
 
@@ -1486,8 +1488,8 @@ msgid "Diagnostics"
 msgstr "დიაგნოსტიკა"
 
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in:4
-msgid "Report your problems"
-msgstr "პრობლემის შესახებ შეტყობინება"
+msgid "Settings for automatically problem reporting"
+msgstr "პრობლემების ავტომატური გადაგზავნის პარამეტრები"
 
 #. Translators: Search terms to find the Diagnostics panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in:16
@@ -2136,8 +2138,8 @@ msgid "Device Security"
 msgstr "მოწყობილობის უსაფრთხოება"
 
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in:4
-msgid "Host firmware security status"
-msgstr "ჰოსტის მიკროკოდის უსაფრთხოების მდგომარეობა"
+msgid "Protection against hardware security threats"
+msgstr "აპარატურული უსაფრთხოების მოწყვლადობებისგან დაცვა"
 
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in:16
@@ -2774,8 +2776,8 @@ msgid "No sandboxed apps have asked for location access"
 msgstr ""
 
 #: panels/location/gnome-location-panel.desktop.in:4
-msgid "Protect your location information"
-msgstr "თქვენი მდებარეობის ინფორმაციის დაცვა"
+msgid "Control access to your location"
+msgstr ""
 
 #. Translators: Search terms to find the Location panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/location/gnome-location-panel.desktop.in:16
@@ -2801,11 +2803,15 @@ msgstr ""
 msgid "No sandboxed apps have asked for microphone access"
 msgstr ""
 
+#: panels/microphone/gnome-microphone-panel.desktop.in:3
+msgid "Microphones"
+msgstr "მიკროფონები"
+
 #: panels/microphone/gnome-microphone-panel.desktop.in:4
-msgid "Protect your conversations"
+msgid "Restrict microphone access"
 msgstr ""
 
-#. Translators: Search terms to find the Microphone panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Microphones panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/microphone/gnome-microphone-panel.desktop.in:16
 msgid "microphone;recording;application;privacy;"
 msgstr ""
@@ -3049,7 +3055,7 @@ msgid "Other Devices"
 msgstr "სხვა მოწყობილობები"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:679
+#: panels/network/connection-editor/net-connection-editor.c:707
 msgid "VPN"
 msgstr "VPN"
 
@@ -3079,8 +3085,8 @@ msgstr "ავტომატური"
 msgid "Manual"
 msgstr "ხელით"
 
-#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:84
-#: panels/sound/cc-sound-panel.ui:296
+#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:76
+#: panels/sound/cc-sound-panel.ui:284
 msgid "Configuration"
 msgstr "გამართვა"
 
@@ -3279,7 +3285,7 @@ msgstr ""
 
 #: panels/network/cc-wifi-panel.ui:146
 msgid "Wi-Fi Hotspot Active"
-msgstr ""
+msgstr "Wi-Fi ჰოტსპოტი აქტიურია"
 
 #: panels/network/cc-wifi-panel.ui:156
 msgid "Mobile devices can scan the QR code to connect."
@@ -3340,120 +3346,120 @@ msgid "Profile %d"
 msgstr "პროფილი %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:98
+#: panels/network/connection-editor/ce-page-details.c:97
 #: panels/network/net-device-wifi.c:229
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:102
+#: panels/network/connection-editor/ce-page-details.c:101
 #: panels/network/net-device-wifi.c:234
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:108
+#: panels/network/connection-editor/ce-page-details.c:107
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:113
+#: panels/network/connection-editor/ce-page-details.c:112
 #: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "დამატებითი გახსნა"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:125
+#: panels/network/connection-editor/ce-page-details.c:124
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:131
+#: panels/network/connection-editor/ce-page-details.c:130
 msgid "Enterprise"
 msgstr "კომპანიის"
 
-#: panels/network/connection-editor/ce-page-details.c:136
+#: panels/network/connection-editor/ce-page-details.c:135
 #: panels/network/net-device-wifi.c:219
 msgctxt "Wifi security"
 msgid "None"
 msgstr "არა"
 
-#: panels/network/connection-editor/ce-page-details.c:157
+#: panels/network/connection-editor/ce-page-details.c:156
 msgid "Never"
 msgstr "არასდროს"
 
-#: panels/network/connection-editor/ce-page-details.c:172
+#: panels/network/connection-editor/ce-page-details.c:171
 #: panels/network/net-device-ethernet.c:105
 #, c-format
 msgid "%i day ago"
 msgid_plural "%i days ago"
 msgstr[0] "%i დღის წინ"
 
-#: panels/network/connection-editor/ce-page-details.c:297
+#: panels/network/connection-editor/ce-page-details.c:295
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d მბ/წმ (%1.1f გჰც)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:299
+#: panels/network/connection-editor/ce-page-details.c:297
 #: panels/network/net-device-ethernet.c:217
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d მბ/წმ"
 
-#: panels/network/connection-editor/ce-page-details.c:314
+#: panels/network/connection-editor/ce-page-details.c:312
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 გჰც / 5 გჰც"
 
-#: panels/network/connection-editor/ce-page-details.c:316
+#: panels/network/connection-editor/ce-page-details.c:314
 msgid "2.4 GHz"
 msgstr "2.4 გჰც"
 
-#: panels/network/connection-editor/ce-page-details.c:318
+#: panels/network/connection-editor/ce-page-details.c:316
 msgid "5 GHz"
 msgstr "5 გჰც"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:336
 msgctxt "Signal strength"
 msgid "None"
 msgstr "არა"
 
-#: panels/network/connection-editor/ce-page-details.c:340
+#: panels/network/connection-editor/ce-page-details.c:338
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "სუსტი"
 
-#: panels/network/connection-editor/ce-page-details.c:342
+#: panels/network/connection-editor/ce-page-details.c:340
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "დიახ"
 
-#: panels/network/connection-editor/ce-page-details.c:344
+#: panels/network/connection-editor/ce-page-details.c:342
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "კარგი"
 
-#: panels/network/connection-editor/ce-page-details.c:346
+#: panels/network/connection-editor/ce-page-details.c:344
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "გადასარევი"
 
-#: panels/network/connection-editor/ce-page-details.c:413
+#: panels/network/connection-editor/ce-page-details.c:411
 #: panels/network/connection-editor/details-page.ui:94
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "IPv4 მისამართი"
 
-#: panels/network/connection-editor/ce-page-details.c:414
+#: panels/network/connection-editor/ce-page-details.c:412
 #: panels/network/connection-editor/details-page.ui:110
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "IPv6 მისამართი"
 
-#: panels/network/connection-editor/ce-page-details.c:416
-#: panels/network/connection-editor/ce-page-details.c:417
+#: panels/network/connection-editor/ce-page-details.c:414
+#: panels/network/connection-editor/ce-page-details.c:415
 #: panels/network/net-device-ethernet.c:149
 #: panels/network/net-device-ethernet.c:151
 #: panels/network/net-device-mobile.c:445
@@ -3461,20 +3467,20 @@ msgstr "IPv6 მისამართი"
 msgid "IP Address"
 msgstr "IP მისამართი"
 
-#: panels/network/connection-editor/ce-page-details.c:421
+#: panels/network/connection-editor/ce-page-details.c:419
 #: panels/network/net-device-ethernet.c:166
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:422
+#: panels/network/connection-editor/ce-page-details.c:420
 #: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:424
-#: panels/network/connection-editor/ce-page-details.c:425
+#: panels/network/connection-editor/ce-page-details.c:422
+#: panels/network/connection-editor/ce-page-details.c:423
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
 #: panels/network/connection-editor/ip4-page.ui:165
@@ -3487,19 +3493,19 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:477
+#: panels/network/connection-editor/ce-page-details.c:475
 msgid "Forget Connection"
 msgstr "შეერთების დავიწყება"
 
-#: panels/network/connection-editor/ce-page-details.c:479
+#: panels/network/connection-editor/ce-page-details.c:477
 msgid "Remove Connection Profile"
 msgstr ""
 
-#: panels/network/connection-editor/ce-page-details.c:482
+#: panels/network/connection-editor/ce-page-details.c:480
 msgid "Remove VPN"
 msgstr "VPN-ის წაშლა"
 
-#: panels/network/connection-editor/ce-page-details.c:500
+#: panels/network/connection-editor/ce-page-details.c:498
 msgid "Details"
 msgstr "დეტალები"
 
@@ -3565,7 +3571,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 პერსონალური"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:835
+#: panels/network/connection-editor/net-connection-editor.c:863
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3611,11 +3617,11 @@ msgstr "_ავტომატურად დაკავშირება"
 msgid "Make available to _other users"
 msgstr ""
 
-#: panels/network/connection-editor/details-page.ui:414
+#: panels/network/connection-editor/details-page.ui:410
 msgid "_Metered connection: has data limits or can incur charges"
 msgstr ""
 
-#: panels/network/connection-editor/details-page.ui:423
+#: panels/network/connection-editor/details-page.ui:419
 msgid ""
 "Software updates and other large downloads will not be started automatically."
 msgstr ""
@@ -3741,36 +3747,36 @@ msgstr "ავტომატური (მხოლოდ DHCP)"
 msgid "Prefix"
 msgstr "პრეფიქსი"
 
-#: panels/network/connection-editor/net-connection-editor.c:364
+#: panels/network/connection-editor/net-connection-editor.c:389
 msgid "Unable to open connection editor"
 msgstr "შეერთების ჩამსწორებლის გახსნის შეცდომა"
 
-#: panels/network/connection-editor/net-connection-editor.c:380
+#: panels/network/connection-editor/net-connection-editor.c:405
 msgid "New Profile"
 msgstr "ახალი პროფილი"
 
-#: panels/network/connection-editor/net-connection-editor.c:447
+#: panels/network/connection-editor/net-connection-editor.c:472
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "არასწორი პარამეტრი %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:450
+#: panels/network/connection-editor/net-connection-editor.c:475
 #, c-format
 msgid "Invalid setting %s"
 msgstr "არასწორი პარამეტრი: %s"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:823
+#: panels/network/connection-editor/net-connection-editor.c:851
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
 msgstr ""
 
-#: panels/network/connection-editor/net-connection-editor.c:859
+#: panels/network/connection-editor/net-connection-editor.c:887
 msgid "Import from file…"
 msgstr "ფაილიდან შემოტანა…"
 
-#: panels/network/connection-editor/net-connection-editor.c:885
+#: panels/network/connection-editor/net-connection-editor.c:913
 msgid "Add VPN"
 msgstr "_VPN-ის დამატება"
 
@@ -3791,29 +3797,29 @@ msgid ""
 "Error: %s."
 msgstr ""
 
-#: panels/network/connection-editor/vpn-helpers.c:223
+#: panels/network/connection-editor/vpn-helpers.c:212
 msgid "Select file to import"
 msgstr "აირჩიეთ შემოსატანი ფაილი"
 
-#: panels/network/connection-editor/vpn-helpers.c:276
+#: panels/network/connection-editor/vpn-helpers.c:264
 #, c-format
 msgid "A file named “%s” already exists."
 msgstr "ფაილი სახელით %s უკვე არსებობს."
 
-#: panels/network/connection-editor/vpn-helpers.c:278
+#: panels/network/connection-editor/vpn-helpers.c:266
 msgid "_Replace"
 msgstr "_შეცვლა"
 
-#: panels/network/connection-editor/vpn-helpers.c:280
+#: panels/network/connection-editor/vpn-helpers.c:268
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
 msgstr ""
 
-#: panels/network/connection-editor/vpn-helpers.c:315
+#: panels/network/connection-editor/vpn-helpers.c:303
 msgid "Cannot export VPN connection"
 msgstr "VPN შეერთების გატანის შეცდომა"
 
-#: panels/network/connection-editor/vpn-helpers.c:317
+#: panels/network/connection-editor/vpn-helpers.c:305
 #, c-format
 msgid ""
 "The VPN connection “%s” could not be exported to %s.\n"
@@ -3821,7 +3827,7 @@ msgid ""
 "Error: %s."
 msgstr ""
 
-#: panels/network/connection-editor/vpn-helpers.c:343
+#: panels/network/connection-editor/vpn-helpers.c:331
 msgid "Export VPN connection"
 msgstr "VPN შეერთების გატანა"
 
@@ -5897,8 +5903,8 @@ msgid "Screen Lock"
 msgstr "ეკრანის დაბლოკვა"
 
 #: panels/screen/gnome-screen-panel.desktop.in:4
-msgid "Screen Settings"
-msgstr "ეკრანის მორგება"
+msgid "Automatically lock the screen"
+msgstr "ეკრანის ავტომატური დაბლოკვა"
 
 #. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/screen/gnome-screen-panel.desktop.in:16
@@ -6213,19 +6219,19 @@ msgstr "სტრიქონი"
 msgid "Swing"
 msgstr "სვინგი"
 
-#: panels/sound/cc-alert-chooser-window.ui:4 panels/sound/cc-sound-panel.ui:376
+#: panels/sound/cc-alert-chooser-window.ui:4 panels/sound/cc-sound-panel.ui:367
 msgid "Alert Sound"
 msgstr "განგაშის ხმა"
 
-#: panels/sound/cc-balance-slider.ui:9 panels/sound/cc-sound-panel.ui:147
+#: panels/sound/cc-balance-slider.ui:9 panels/sound/cc-sound-panel.ui:139
 msgid "Balance"
 msgstr "ბალანსი"
 
-#: panels/sound/cc-fade-slider.ui:9 panels/sound/cc-sound-panel.ui:173
+#: panels/sound/cc-fade-slider.ui:9 panels/sound/cc-sound-panel.ui:165
 msgid "Fade"
 msgstr "მინავლება"
 
-#: panels/sound/cc-output-test-wheel.c:185
+#: panels/sound/cc-output-test-wheel.c:206
 msgid "Select a Speaker"
 msgstr "აირჩიეთ დინამიკი"
 
@@ -6233,52 +6239,52 @@ msgstr "აირჩიეთ დინამიკი"
 msgid "Test Speakers"
 msgstr "დინამიკების დატესტვა"
 
-#: panels/sound/cc-sound-panel.ui:8
+#: panels/sound/cc-sound-panel.ui:8 panels/sound/cc-sound-panel.ui:207
 msgid "Output"
 msgstr "გამოტანა"
 
-#: panels/sound/cc-sound-panel.ui:42 panels/sound/cc-sound-panel.ui:215
+#: panels/sound/cc-sound-panel.ui:35 panels/sound/cc-sound-panel.ui:210
 msgid "Output Device"
 msgstr "გამოტანის მოწყობილობები"
 
-#: panels/sound/cc-sound-panel.ui:60
+#: panels/sound/cc-sound-panel.ui:52
 #: panels/universal-access/cc-ua-hearing-page.ui:69
 msgid "Test"
 msgstr "შემოწმება"
 
-#: panels/sound/cc-sound-panel.ui:108
+#: panels/sound/cc-sound-panel.ui:100
 msgid "Master volume"
 msgstr "ძირითადი ტომი"
 
-#: panels/sound/cc-sound-panel.ui:121
+#: panels/sound/cc-sound-panel.ui:113
 msgid "Output Volume"
 msgstr "გამოტანის ხმა"
 
-#: panels/sound/cc-sound-panel.ui:199 panels/sound/cc-subwoofer-slider.ui:8
+#: panels/sound/cc-sound-panel.ui:191 panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
 msgstr "საბვუფერი"
 
-#: panels/sound/cc-sound-panel.ui:218
+#: panels/sound/cc-sound-panel.ui:213
 msgid "No Output Devices"
 msgstr "გამოტანის მოწყობილობების გარეშე"
 
-#: panels/sound/cc-sound-panel.ui:230
+#: panels/sound/cc-sound-panel.ui:225 panels/sound/cc-sound-panel.ui:334
 msgid "Input"
 msgstr "შეყვანა"
 
-#: panels/sound/cc-sound-panel.ui:259 panels/sound/cc-sound-panel.ui:346
+#: panels/sound/cc-sound-panel.ui:247 panels/sound/cc-sound-panel.ui:337
 msgid "Input Device"
 msgstr "შეყვანის მოწყობილობა"
 
-#: panels/sound/cc-sound-panel.ui:330
+#: panels/sound/cc-sound-panel.ui:318
 msgid "Input Volume"
 msgstr "შეყვანის ხმა"
 
-#: panels/sound/cc-sound-panel.ui:349
+#: panels/sound/cc-sound-panel.ui:340
 msgid "No Input Devices"
 msgstr "შეყვანის მოწყობილობის გარეშე"
 
-#: panels/sound/cc-sound-panel.ui:364 panels/sound/cc-volume-levels-window.ui:4
+#: panels/sound/cc-sound-panel.ui:355 panels/sound/cc-volume-levels-window.ui:4
 msgid "Volume Levels"
 msgstr "ხმის დონეები"
 
@@ -6479,8 +6485,8 @@ msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:4
-msgid "Manage Thunderbolt devices"
-msgstr "Thunderbolt მოწყობილობის მართვა"
+msgid "Manage Thunderbolt device access"
+msgstr "Thunderbolt მოწყობილობებთან წვდომის მართვა"
 
 #. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:15
@@ -7177,8 +7183,8 @@ msgid "File History & Trash"
 msgstr "ფაილის ისტორია & ნაგავი"
 
 #: panels/usage/gnome-usage-panel.desktop.in:4
-msgid "Don't leave traces"
-msgstr "კვალის არ დატოვება"
+msgid "Control data and files that are kept on your device"
+msgstr ""
 
 #. Translators: Search terms to find the Usage panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/usage/gnome-usage-panel.desktop.in:16
@@ -8934,6 +8940,21 @@ msgstr[0] "%u შეტანა"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "სისტემური ხმები"
+
+#~ msgid "Protect your pictures"
+#~ msgstr "დაიცავით თქვენი სურათები"
+
+#~ msgid "Report your problems"
+#~ msgstr "პრობლემის შესახებ შეტყობინება"
+
+#~ msgid "Protect your location information"
+#~ msgstr "თქვენი მდებარეობის ინფორმაციის დაცვა"
+
+#~ msgid "Screen Settings"
+#~ msgstr "ეკრანის მორგება"
+
+#~ msgid "Don't leave traces"
+#~ msgstr "კვალის არ დატოვება"
 
 #~ msgid "Application"
 #~ msgstr "აპლიკაცია"
