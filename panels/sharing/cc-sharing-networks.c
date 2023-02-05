@@ -334,7 +334,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     if (g_strcmp0 (net->uuid, current_network) == 0) {
       g_signal_handlers_block_by_func (self->current_switch,
 				       cc_sharing_networks_enable_network, self);
-      gtk_switch_set_state (GTK_SWITCH (self->current_switch), TRUE);
+      gtk_switch_set_active (GTK_SWITCH (self->current_switch), TRUE);
       g_signal_handlers_unblock_by_func (self->current_switch,
 					 cc_sharing_networks_enable_network, self);
       continue;
