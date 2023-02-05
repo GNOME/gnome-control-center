@@ -1256,7 +1256,7 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
                    self->remote_control_switch,
                    "active",
                    G_SETTINGS_BIND_DEFAULT | G_SETTINGS_BIND_INVERT_BOOLEAN);
-  g_object_bind_property (self->remote_desktop_switch, "state",
+  g_object_bind_property (self->remote_desktop_switch, "active",
                           self->remote_control_switch, "sensitive",
                           G_BINDING_SYNC_CREATE);
 
