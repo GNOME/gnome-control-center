@@ -301,6 +301,13 @@ set_using_ntp_cb (GObject      *source,
       /* TODO: display any error in a user friendly way */
       g_warning ("Could not set system to use NTP: %s", error->message);
     }
+  else
+    {
+      gboolean ntp_on;
+
+      g_object_get (self->dtm, "ntp", &ntp_on, NULL);
+      gtk_switch_set_state (GTK_SWITCH (self->network_time_switch), ntp_on);
+    }
 }
 
 static void
@@ -321,12 +328,9 @@ queue_set_datetime (CcDateTimePanel *self)
 }
 
 static void
-queue_set_ntp (CcDateTimePanel *self)
+queue_set_ntp (CcDateTimePanel *self,
+               gboolean         using_ntp)
 {
-  gboolean using_ntp;
-  /* for now just do it */
-  using_ntp = gtk_switch_get_active (GTK_SWITCH (self->network_time_switch));
-
   timedate1_call_set_ntp (self->dtm,
                           using_ntp,
                           TRUE,
@@ -498,9 +502,10 @@ on_clock_changed (CcDateTimePanel *panel,
 }
 
 static gboolean
-change_ntp (CcDateTimePanel *self)
+change_ntp (CcDateTimePanel *self,
+            gboolean         state)
 {
-  queue_set_ntp (self);
+  queue_set_ntp (self, state);
 
   /* The new state will be visible once we see the reply. */
   return TRUE;
@@ -516,7 +521,7 @@ on_ntp_changed (CcDateTimePanel *self)
   g_signal_handlers_block_by_func (self->network_time_switch, change_ntp, self);
 
   g_object_set (self->network_time_switch,
-                "state", ntp_on,
+                "active", ntp_on,
                 NULL);
 
   g_signal_handlers_unblock_by_func (self->network_time_switch, change_ntp, self);
