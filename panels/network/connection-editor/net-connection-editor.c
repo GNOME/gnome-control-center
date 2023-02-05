@@ -559,9 +559,10 @@ get_secrets_cb (GObject *source_object,
         variant = nm_remote_connection_get_secrets_finish (connection, res, &error);
 
         if (!variant) {
-                if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-                        g_warning ("Failed to get secrets: %s", error->message);
-                return;
+                if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+                        return;
+
+                g_warning ("Failed to get secrets: %s", error->message);
         }
 
         ce_page_complete_init (info->page, info->editor->connection, info->setting_name, variant, g_steal_pointer (&error));
