@@ -481,7 +481,7 @@ cc_bolt_panel_authmode_sync (CcBoltPanel *panel)
 
   g_signal_handlers_block_by_func (panel->authmode_switch, on_authmode_state_set_cb, panel);
 
-  gtk_switch_set_state (panel->authmode_switch, enabled);
+  gtk_switch_set_active (panel->authmode_switch, enabled);
 
   g_signal_handlers_unblock_by_func (panel->authmode_switch, on_authmode_state_set_cb, panel);
 
@@ -666,11 +666,22 @@ on_authmode_ready (GObject      *source_object,
                    gpointer      user_data)
 {
   g_autoptr(GError) error = NULL;
+  BoltClient *client = BOLT_CLIENT (source_object);
   CcBoltPanel *panel;
   gboolean ok;
 
-  ok = bolt_client_set_authmode_finish (BOLT_CLIENT (source_object), res, &error);
-  if (!ok)
+  ok = bolt_client_set_authmode_finish (client, res, &error);
+  if (ok)
+    {
+      BoltAuthMode mode;
+      gboolean enabled;
+
+      panel = CC_BOLT_PANEL (user_data);
+      mode = bolt_client_get_authmode (client);
+      enabled = (mode & BOLT_AUTH_ENABLED) != 0;
+      gtk_switch_set_state (panel->authmode_switch, enabled);
+    }
+  else
     {
       g_autofree char *text = NULL;
 
@@ -688,7 +699,6 @@ on_authmode_ready (GObject      *source_object,
       cc_bolt_panel_authmode_sync (panel);
     }
 
-  panel = CC_BOLT_PANEL (user_data);
   gtk_spinner_stop (panel->authmode_spinner);
   gtk_widget_set_sensitive (GTK_WIDGET (panel->authmode_switch), TRUE);
 }
