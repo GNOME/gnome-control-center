@@ -1063,9 +1063,9 @@ enable_gnome_remote_desktop (CcSharingPanel *self)
 }
 
 static void
-on_remote_desktop_state_changed (GtkWidget      *widget,
-                                 GParamSpec     *pspec,
-                                 CcSharingPanel *self)
+on_remote_desktop_active_changed (GtkWidget      *widget,
+                                  GParamSpec     *pspec,
+                                  CcSharingPanel *self)
 {
   if (gtk_switch_get_active (GTK_SWITCH (widget)))
     enable_gnome_remote_desktop (self);
@@ -1313,8 +1313,8 @@ cc_sharing_panel_setup_remote_desktop_dialog (CcSharingPanel *self)
                     "clicked", G_CALLBACK (on_password_copy_clicked),
                     self);
 
-  g_signal_connect (self->remote_desktop_switch, "notify::state",
-                    G_CALLBACK (on_remote_desktop_state_changed), self);
+  g_signal_connect (self->remote_desktop_switch, "notify::active",
+                    G_CALLBACK (on_remote_desktop_active_changed), self);
 
   if (is_remote_desktop_enabled (self))
     {
