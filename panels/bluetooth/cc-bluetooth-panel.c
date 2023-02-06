@@ -80,15 +80,18 @@ airplane_mode_changed_cb (GObject *source_object,
 {
 	g_autoptr(GVariant) ret = NULL;
 	g_autoptr(GError) error = NULL;
-	gboolean state = GPOINTER_TO_UINT (user_data);
 
 	if (!g_dbus_proxy_call_finish (G_DBUS_PROXY (source_object),
 				       res, &error)) {
-		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+		if (!g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED)) {
+			CcBluetoothPanel *self = CC_BLUETOOTH_PANEL (user_data);
+			gboolean state = gtk_switch_get_active (self->enable_switch);
 			g_warning ("Failed to change Bluetooth killswitch state to %s: %s",
 				   state ? "on" : "off", error->message);
+		}
 	} else {
-		CcBluetoothPanel *self = user_data;
+		CcBluetoothPanel *self = CC_BLUETOOTH_PANEL (user_data);
+		gboolean state = gtk_switch_get_active (self->enable_switch);
 
 		g_debug ("Changed Bluetooth killswitch state to %s",
 			 state ? "on" : "off");
