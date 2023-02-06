@@ -98,7 +98,7 @@ airplane_mode_changed_cb (GObject *source_object,
 	}
 }
 
-static void
+static gboolean
 enable_switch_state_set_cb (CcBluetoothPanel *self, gboolean state)
 {
 	g_debug ("Power switched to %s", state ? "on" : "off");
@@ -110,6 +110,8 @@ enable_switch_state_set_cb (CcBluetoothPanel *self, gboolean state)
 			   -1,
 			   cc_panel_get_cancellable (CC_PANEL (self)),
 			   airplane_mode_changed_cb, self);
+
+	return TRUE;
 }
 
 static void
