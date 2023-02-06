@@ -878,19 +878,18 @@ hotspot_stop_clicked_cb (CcWifiPanel *self)
 
   native = gtk_widget_get_native (GTK_WIDGET (self));
 
-  /* message dialog */
   dialog = adw_message_dialog_new (GTK_WINDOW (native),
                                    NULL,
                                    _("Turning off will disconnect any devices that are using the hotspot."));
 
   adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dialog), _("Turn Off Hotspot?"));
-
-  /* added responses to message dialog */
   adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
                                     "cancel",  _("_Cancel"),
                                     "turn-off", _("_Turn Off"),
                                     NULL);
-  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "turn-off", ADW_RESPONSE_DESTRUCTIVE);
+  adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+                                              "turn-off",
+                                              ADW_RESPONSE_DESTRUCTIVE);
   adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
   adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
 
