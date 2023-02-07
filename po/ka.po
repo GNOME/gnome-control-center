@@ -14,8 +14,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-03 14:58+0000\n"
-"PO-Revision-Date: 2023-02-04 08:48+0100\n"
+"POT-Creation-Date: 2023-02-06 13:35+0000\n"
+"PO-Revision-Date: 2023-02-07 09:55+0100\n"
 "Last-Translator: Ekaterine Papava <papava.e@gtu.ge>\n"
 "Language-Team: Georgian <http://mail.gnome.org/mailman/listinfo/gnome-ge-"
 "list>\n"
@@ -347,7 +347,7 @@ msgstr "აირჩიეთ სურათი"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:886
+#: panels/network/cc-wifi-panel.c:890
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
@@ -874,7 +874,7 @@ msgstr "_ფაილის შემოტანა…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:619
+#: panels/network/connection-editor/net-connection-editor.c:620
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1867,7 +1867,7 @@ msgstr "ანგარიშის დეტალები"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:277
 msgid "Date generated:"
-msgstr ""
+msgstr "გენერირების თარიღი"
 
 #. TRANSLATOR: This is the title for showing the version of fwupd service.
 #: panels/firmware-security/cc-firmware-security-dialog.c:285
@@ -2777,7 +2777,7 @@ msgstr ""
 
 #: panels/location/gnome-location-panel.desktop.in:4
 msgid "Control access to your location"
-msgstr ""
+msgstr "თქვენ მდებარეობაზე წვდომის კონტროლი"
 
 #. Translators: Search terms to find the Location panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/location/gnome-location-panel.desktop.in:16
@@ -2809,7 +2809,7 @@ msgstr "მიკროფონები"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in:4
 msgid "Restrict microphone access"
-msgstr ""
+msgstr "მიკროფონთან წვდომის შეზღუდვა"
 
 #. Translators: Search terms to find the Microphones panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/microphone/gnome-microphone-panel.desktop.in:16
@@ -3055,7 +3055,7 @@ msgid "Other Devices"
 msgstr "სხვა მოწყობილობები"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:707
+#: panels/network/connection-editor/net-connection-editor.c:708
 msgid "VPN"
 msgstr "VPN"
 
@@ -3252,12 +3252,16 @@ msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
 #: panels/network/cc-wifi-panel.c:884
-msgid "Stop hotspot and disconnect any users?"
+msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr ""
 
-#: panels/network/cc-wifi-panel.c:887
-msgid "_Stop Hotspot"
-msgstr "Hotspot-ის _გაჩერება"
+#: panels/network/cc-wifi-panel.c:886
+msgid "Turn Off Hotspot?"
+msgstr ""
+
+#: panels/network/cc-wifi-panel.c:891
+msgid "_Turn Off"
+msgstr "_გამორთვა"
 
 #: panels/network/cc-wifi-panel.ui:75
 msgid "Airplane Mode"
@@ -3571,7 +3575,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 პერსონალური"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:863
+#: panels/network/connection-editor/net-connection-editor.c:864
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3766,17 +3770,17 @@ msgid "Invalid setting %s"
 msgstr "არასწორი პარამეტრი: %s"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:851
+#: panels/network/connection-editor/net-connection-editor.c:852
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
 msgstr ""
 
-#: panels/network/connection-editor/net-connection-editor.c:887
+#: panels/network/connection-editor/net-connection-editor.c:888
 msgid "Import from file…"
 msgstr "ფაილიდან შემოტანა…"
 
-#: panels/network/connection-editor/net-connection-editor.c:913
+#: panels/network/connection-editor/net-connection-editor.c:914
 msgid "Add VPN"
 msgstr "_VPN-ის დამატება"
 
@@ -4463,7 +4467,7 @@ msgstr[0] "წუთი"
 #: panels/power/cc-battery-row.c:117
 #, c-format
 msgid "%s until fully charged"
-msgstr ""
+msgstr "%s სრულად დამუხტვამდე"
 
 #. TRANSLATORS: %1 is a time string, e.g. "1 hour 5 minutes"
 #: panels/power/cc-battery-row.c:124
@@ -6613,11 +6617,11 @@ msgstr "დიდი"
 
 #: panels/universal-access/cc-ua-panel.c:118
 msgid "Seeing"
-msgstr ""
+msgstr "მხედველობა"
 
 #: panels/universal-access/cc-ua-panel.c:120
 msgid "Hearing"
-msgstr ""
+msgstr "სმენა"
 
 #: panels/universal-access/cc-ua-panel.c:124
 msgid "Pointing & Clicking"
@@ -6637,7 +6641,7 @@ msgstr ""
 
 #: panels/universal-access/cc-ua-panel.ui:64
 msgid "_Seeing"
-msgstr ""
+msgstr "_მხედველობა"
 
 #: panels/universal-access/cc-ua-panel.ui:74
 msgid "_Hearing"
@@ -6764,7 +6768,7 @@ msgstr ""
 
 #: panels/universal-access/cc-ua-typing-page.ui:28
 msgid "Text Cursor"
-msgstr ""
+msgstr "ტექსტის კურსორი"
 
 #: panels/universal-access/cc-ua-typing-page.ui:32
 msgid "_Cursor Blinking"
@@ -6866,7 +6870,7 @@ msgstr "გამადიდებელი"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:23
 msgid "Magnification Factor"
-msgstr ""
+msgstr "გადიდების კოეფიციენტი"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:44
 msgid "_Magnifier View"
@@ -8940,6 +8944,9 @@ msgstr[0] "%u შეტანა"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "სისტემური ხმები"
+
+#~ msgid "_Stop Hotspot"
+#~ msgstr "Hotspot-ის _გაჩერება"
 
 #~ msgid "Protect your pictures"
 #~ msgstr "დაიცავით თქვენი სურათები"
