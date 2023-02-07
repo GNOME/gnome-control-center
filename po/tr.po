@@ -20,16 +20,16 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-06 13:35+0000\n"
-"PO-Revision-Date: 2023-02-06 23:22+0300\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
-"Language-Team: Turkish <gnometurk@gnome.org>\n"
+"POT-Creation-Date: 2023-02-07 17:56+0000\n"
+"PO-Revision-Date: 2023-02-07 21:09+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Generator: Gtranslator 42.0\n"
 
 #: panels/applications/cc-applications-panel.c:822
 msgid "System Bus"
@@ -356,7 +356,7 @@ msgstr "Resim seç"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:890
+#: panels/network/cc-wifi-panel.c:887
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
@@ -443,11 +443,10 @@ msgstr ""
 "Arka plan;Arkaplan;Duvar kağıdı;Ekran;Masaüstü;Biçim;Biçem;Stil;Aydınlık;"
 "Açık;Karanlık;Koyu;Görünüm;Görünüş;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/bluetooth/cc-bluetooth-panel.ui:11
 #: panels/datetime/cc-datetime-panel.ui:130
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:124
-#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "Etkinleştir"
 
@@ -502,15 +501,20 @@ msgstr "Bluetooth’u açıp kapatın ve aygıtlarınızı bağlayın"
 msgid "share;sharing;bluetooth;obex;"
 msgstr "paylaş;paylaşım;bluetooth;obex;"
 
-#: panels/camera/cc-camera-panel.ui:24
-msgid "Camera is Turned Off"
-msgstr "Kamera Kapatıldı"
+#: panels/camera/cc-camera-panel.ui:11
+msgid "_Camera Access"
+msgstr "_Kamera Erişimi"
 
-#: panels/camera/cc-camera-panel.ui:25
-msgid "No sandboxed apps can capture photos or video."
-msgstr "Hiçbir yalıtılmış uygulama fotoğraf veya video yakalayamaz."
+#: panels/camera/cc-camera-panel.ui:12
+msgid "Allow permitted apps to use cameras"
+msgstr "İzinli uygulamaların kameraları kullanmasını sağla"
 
-#: panels/camera/cc-camera-panel.ui:39
+#: panels/camera/cc-camera-panel.ui:22 panels/location/cc-location-panel.ui:23
+#: panels/microphone/cc-microphone-panel.ui:22
+msgid "Permitted Apps"
+msgstr "İzinli Uygulamalar"
+
+#: panels/camera/cc-camera-panel.ui:23
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
@@ -518,7 +522,7 @@ msgstr ""
 "Aşağıdaki yalıtılmış uygulamalara kameraları kullanma izni verildi. "
 "Yalıtılmamış uygulamalar, izin istemeden kameraları kullanabilir."
 
-#: panels/camera/cc-camera-panel.ui:53
+#: panels/camera/cc-camera-panel.ui:37
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Hiçbir yalıtılmış uygulama kamera erişimi isteği yapmadı"
 
@@ -1363,9 +1367,8 @@ msgstr "Konum hizmetlerinin etkin olmasını ve İnternet erişimi gerektirir"
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
-#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
-#: panels/user-accounts/cc-user-panel.c:818
+#: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
 #: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
@@ -1878,11 +1881,11 @@ msgstr "Denetimler Başarılı"
 #. minimum requirement of security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:130
 msgid ""
-"Hardware meets security requirements. This device has protection against "
-"common hardware security threats."
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
 msgstr ""
-"Donanım, güvenlik gereksinimlerini karşılıyor. Bu aygıtın yaygın donanım "
-"güvenliği tehditlerine karşı koruması var."
+"Bu aygıt, temel güvenlik gereksinimlerini karşılıyor. Donanımı, bazı yaygın "
+"güvenlik tehditlerine karşı korunmaktadır."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
@@ -1894,11 +1897,11 @@ msgstr "Korumalı"
 #. the extended security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:144
 msgid ""
-"Device hardware meets security requirements. This device has protection "
-"against a range of the most common hardware security threats."
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
 msgstr ""
-"Aygıt donanımı güvenlik gereksinimlerini karşılıyor. Bu aygıtın yaygın "
-"donanım güvenliği tehditlerine karşı koruması var."
+"Bu aygıt şu anki güvenlik sınamalarını geçiyor. Donanımı, çoğu güvenlik "
+"tehditlerine karşı korunmaktadır."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
@@ -2122,8 +2125,8 @@ msgid "Hardware does not pass checks."
 msgstr "Donanım, denetimleri geçemedi."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:552
-msgid "Hardware meets security requirements."
-msgstr "Donanım, güvenlik gereksinimlerini karşılıyor."
+msgid "Hardware meets basic security requirements."
+msgstr "Donanım, temel güvenlik gereksinimlerini karşılıyor."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:561
 msgid "Hardware has a good level of protection."
@@ -2864,34 +2867,36 @@ msgstr ""
 "Kısayol;Çalışma alanı;Pencere;Yeniden boyutlandır;Yakınlaşma;Karşıtlık;Girdi;"
 "Kaynak;Kilit;Ses;Kısayol tuşu;Kestirme tuşu;Geçiş tuşu;Hotkey;"
 
-#: panels/location/cc-location-panel.ui:23
-msgid "Location Services Turned Off"
-msgstr "Konum Hizmetleri Kapalı"
-
-#: panels/location/cc-location-panel.ui:24
-msgid "No sandboxed apps can obtain location information."
-msgstr "Hiçbir yalıtılmış uygulama konum bilgisi toplayamaz."
-
-#: panels/location/cc-location-panel.ui:38
+#: panels/location/cc-location-panel.ui:9
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
 "mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>\n"
-"\n"
+"</a>"
+msgstr ""
+"Konum hizmetleri, bu aygıtın yaklaşık konumunu saptamak için GPS, kablosuz "
+"ve hücresel bağlantıları kullanır. <a href='https://location.services."
+"mozilla.com/privacy'>Hangi verinin toplandığını ve nasıl kullanıldığını "
+"öğrenin.</a>"
+
+#: panels/location/cc-location-panel.ui:12
+msgid "_Location Services"
+msgstr "_Konum Hizmetleri"
+
+#: panels/location/cc-location-panel.ui:13
+msgid "Allow permitted apps to access location data"
+msgstr "İzinli uygulamaların konum verisine erişmesini sağla"
+
+#: panels/location/cc-location-panel.ui:24
+msgid ""
 "The following sandboxed apps have been given access to location data. Apps "
 "that are not sandboxed can access location data without asking for "
 "permission."
 msgstr ""
-"Konum hizmetleri, bu aygıtın yaklaşık konumunu saptamak için GPS, kablosuz "
-"ve hücresel bağlantıları kullanır. <a href='https://location.services."
-"mozilla.com/privacy'>Hangi verilerin toplandığını ve nasıl kullanıldığını "
-"öğrenin.</a>\n"
-"\n"
-"Aşağıdaki yalıtılmış uygulamalara konum verisi kullanma izni verildi. "
-"Yalıtılmamış uygulamalar, izin istemeden konum verilerini kullanabilir."
+"Aşağıdaki yalıtılmış uygulamalara konum verisine erişim izni verildi. "
+"Yalıtılmamış uygulamalar, izin istemeden konum verisini kullanabilir."
 
-#: panels/location/cc-location-panel.ui:54
+#: panels/location/cc-location-panel.ui:38
 msgid "No sandboxed apps have asked for location access"
 msgstr "Hiçbir yalıtılmış uygulama konum erişimi isteği yapmadı"
 
@@ -2904,15 +2909,15 @@ msgstr "Konum erişimini denetle"
 msgid "location;gps;private;privacy;"
 msgstr "konum;lokasyon;gps;özel;gizlilik;"
 
+#: panels/microphone/cc-microphone-panel.ui:11
+msgid "_Microphone Access"
+msgstr "_Mikrofon Erişimi"
+
+#: panels/microphone/cc-microphone-panel.ui:12
+msgid "Allow permitted apps to use microphones"
+msgstr "İzinli uygulamaların mikrofonları kullanmasını sağla"
+
 #: panels/microphone/cc-microphone-panel.ui:23
-msgid "Microphone Turned Off"
-msgstr "Mikrofon Kapalı"
-
-#: panels/microphone/cc-microphone-panel.ui:24
-msgid "No sandboxed apps can record sound."
-msgstr "Hiçbir yalıtılmış uygulama ses kaydedemez."
-
-#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "The following sandboxed apps have been given permission to use microphones. "
 "Apps that are not sandboxed can use microphones without asking for "
@@ -2921,7 +2926,7 @@ msgstr ""
 "Aşağıdaki yalıtılmış uygulamalara mikrofonları kullanma izni verildi. "
 "Yalıtılmamış uygulamalar, izin istemeden mikrofonları kullanabilir."
 
-#: panels/microphone/cc-microphone-panel.ui:52
+#: panels/microphone/cc-microphone-panel.ui:38
 msgid "No sandboxed apps have asked for microphone access"
 msgstr "Hiçbir yalıtılmış uygulama mikrofon erişimi isteği yapmadı"
 
@@ -3388,17 +3393,17 @@ msgstr "_Aç"
 msgid "Wi-Fi"
 msgstr "Kablosuz"
 
-#: panels/network/cc-wifi-panel.c:884
+#: panels/network/cc-wifi-panel.c:883
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr ""
 "Kablosuz erişim noktasını kapatmak, kullanan tüm aygıtların bağlantısını "
 "kesecek."
 
-#: panels/network/cc-wifi-panel.c:886
+#: panels/network/cc-wifi-panel.c:885
 msgid "Turn Off Hotspot?"
 msgstr "Kablosuz Erişim Noktası Kapatılsın Mı?"
 
-#: panels/network/cc-wifi-panel.c:891
+#: panels/network/cc-wifi-panel.c:888
 msgid "_Turn Off"
 msgstr "_Kapat"
 
@@ -9215,6 +9220,31 @@ msgstr[0] "%u Girdi"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistem Sesleri"
+
+#~ msgid "Camera is Turned Off"
+#~ msgstr "Kamera Kapatıldı"
+
+#~ msgid "No sandboxed apps can capture photos or video."
+#~ msgstr "Hiçbir yalıtılmış uygulama fotoğraf veya video yakalayamaz."
+
+#~ msgid ""
+#~ "Hardware meets security requirements. This device has protection against "
+#~ "common hardware security threats."
+#~ msgstr ""
+#~ "Donanım, güvenlik gereksinimlerini karşılıyor. Bu aygıtın yaygın donanım "
+#~ "güvenliği tehditlerine karşı koruması var."
+
+#~ msgid "Location Services Turned Off"
+#~ msgstr "Konum Hizmetleri Kapalı"
+
+#~ msgid "No sandboxed apps can obtain location information."
+#~ msgstr "Hiçbir yalıtılmış uygulama konum bilgisi toplayamaz."
+
+#~ msgid "Microphone Turned Off"
+#~ msgstr "Mikrofon Kapalı"
+
+#~ msgid "No sandboxed apps can record sound."
+#~ msgstr "Hiçbir yalıtılmış uygulama ses kaydedemez."
 
 #~ msgid "Stop hotspot and disconnect any users?"
 #~ msgstr ""
