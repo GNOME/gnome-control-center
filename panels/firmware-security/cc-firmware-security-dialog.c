@@ -127,8 +127,8 @@ update_dialog (CcFirmwareSecurityDialog *self)
                               _("Checks Passed"),
                               /* TRANSLATORS: This description describes the device passing the
                                  minimum requirement of security check.*/
-                              _("Hardware meets security requirements. "
-                                "This device has protection against common hardware security threats."));
+                              _("This device meets basic security requirements. "
+                                "Its hardware has protection against some of the most common security threats."));
       break;
 
     case 2:
@@ -141,8 +141,8 @@ update_dialog (CcFirmwareSecurityDialog *self)
                               _("Protected"),
                               /* TRANSLATOR: This description describes the devices passing
                                  the extended security check. */
-                              _("Device hardware meets security requirements. "
-                                "This device has protection against a range of the most common hardware security threats."));
+                              _("This device passes current security tests. "
+                                "Its hardware is protected against the majority of security threats."));
       break;
 
     default:

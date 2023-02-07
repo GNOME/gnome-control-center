@@ -549,7 +549,7 @@ set_hsi_button_view (CcfirmwareSecurityPanel *self)
                                      self->hsi_number,
                                      /* TRANSLATORS: in reference to firmware protection: 1/4 stars */
                                      _("Checks Passed"),
-                                     _("Hardware meets security requirements."));
+                                     _("Hardware meets basic security requirements."));
         break;
       case 2:
       case 3:
