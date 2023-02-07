@@ -103,12 +103,15 @@ on_microphone_app_state_set (GtkSwitch *widget,
   const gchar *key;
   gchar **value;
   GVariantBuilder builder;
+  gboolean active_microphone;
 
   if (data->changing_state)
     return TRUE;
 
+  active_microphone = !g_settings_get_boolean (self->privacy_settings,
+                                               "disable-microphone");
   data->changing_state = TRUE;
-  data->pending_state = state;
+  data->pending_state = active_microphone && state;
 
   g_variant_iter_init (&iter, self->microphone_apps_perms);
   g_variant_builder_init (&builder, G_VARIANT_TYPE_ARRAY);
@@ -142,6 +145,26 @@ on_microphone_app_state_set (GtkSwitch *widget,
 
   return TRUE;
 }
+
+static gboolean
+update_app_switch_state (GValue   *value,
+                         GVariant *variant,
+                         gpointer  data)
+{
+  GtkSwitch *w = GTK_SWITCH (data);
+  gboolean active_microphone;
+  gboolean active_app;
+  gboolean state;
+
+  active_microphone = !g_variant_get_boolean (variant);
+  active_app = gtk_switch_get_active (w);
+  state = active_microphone && active_app;
+
+  g_value_set_boolean (value, state);
+
+  return TRUE;
+}
+
 
 static void
 add_microphone_app (CcMicrophonePanel *self,
@@ -184,11 +207,17 @@ add_microphone_app (CcMicrophonePanel *self,
   gtk_switch_set_active (GTK_SWITCH (w), enabled);
   gtk_widget_set_valign (w, GTK_ALIGN_CENTER);
   adw_action_row_add_suffix (ADW_ACTION_ROW (row), w);
-  g_settings_bind (self->privacy_settings,
-                   "disable-microphone",
-                   w,
-                   "sensitive",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+
+  g_settings_bind_with_mapping (self->privacy_settings,
+                                "disable-microphone",
+                                w,
+                                "state",
+                                G_SETTINGS_BIND_GET,
+                                update_app_switch_state,
+                                NULL,
+                                g_object_ref (w),
+                                g_object_unref);
+
   g_hash_table_insert (self->microphone_app_switches,
                        g_strdup (app_id),
                        g_object_ref (w));
