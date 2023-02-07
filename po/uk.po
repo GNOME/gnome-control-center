@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/iss"
 "ues\n"
-"POT-Creation-Date: 2023-02-03 14:58+0000\n"
-"PO-Revision-Date: 2023-02-03 21:32+0200\n"
+"POT-Creation-Date: 2023-02-07 13:46+0000\n"
+"PO-Revision-Date: 2023-02-07 17:09+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -352,7 +352,7 @@ msgstr "Виберіть зображення"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:886
+#: panels/network/cc-wifi-panel.c:887
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
@@ -439,11 +439,10 @@ msgstr ""
 "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;Тло;Фон;"
 "Шпалери;Екран;Стільниця;Стиль;Світлий;Світла;Темний;Темна;Вигляд;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/bluetooth/cc-bluetooth-panel.ui:11
 #: panels/datetime/cc-datetime-panel.ui:130
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:124
-#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "Увімкнути"
 
@@ -498,15 +497,22 @@ msgstr "Увімкнути або вимкнути з'єднання з прис
 msgid "share;sharing;bluetooth;obex;"
 msgstr "оприлюднення;поділитись;блютуз;obex;"
 
-#: panels/camera/cc-camera-panel.ui:24
-msgid "Camera is Turned Off"
-msgstr "Камеру вимкнено"
+#: panels/camera/cc-camera-panel.ui:11
+#| msgid "Cameras"
+msgid "_Camera Access"
+msgstr "Доступ до _камери"
 
-#: panels/camera/cc-camera-panel.ui:25
-msgid "No sandboxed apps can capture photos or video."
-msgstr "Немає програм пісочниці, які здатні знімати фотографії та відео."
+#: panels/camera/cc-camera-panel.ui:12
+#| msgid "Allow the applications below to use your camera."
+msgid "Allow permitted apps to use cameras"
+msgstr "Дозволити дозволеним програмам використовувати камери"
 
-#: panels/camera/cc-camera-panel.ui:39
+#: panels/camera/cc-camera-panel.ui:22 panels/location/cc-location-panel.ui:23
+#: panels/microphone/cc-microphone-panel.ui:22
+msgid "Permitted Apps"
+msgstr "Дозволені програми"
+
+#: panels/camera/cc-camera-panel.ui:23
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
@@ -515,17 +521,15 @@ msgstr ""
 "Програми, які не перебувають у пісочниці, можуть використовувати камери без "
 "запитів щодо доступу."
 
-#: panels/camera/cc-camera-panel.ui:53
+#: panels/camera/cc-camera-panel.ui:37
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Немає програм пісочниці, які надсилають запит щодо доступу до камери"
 
 #: panels/camera/gnome-camera-panel.desktop.in:3
-#| msgid "Camera"
 msgid "Cameras"
 msgstr "Камери"
 
 #: panels/camera/gnome-camera-panel.desktop.in:4
-#| msgid "Requires internet access"
 msgid "Restrict camera access"
 msgstr "Обмеження доступу до відеокамери"
 
@@ -910,7 +914,7 @@ msgstr "_Імпортувати файл…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:619
+#: panels/network/connection-editor/net-connection-editor.c:620
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1379,9 +1383,8 @@ msgstr ""
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
-#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
-#: panels/user-accounts/cc-user-panel.c:818
+#: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
 #: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
@@ -1537,7 +1540,6 @@ msgid "Diagnostics"
 msgstr "Діагностика"
 
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in:4
-#| msgid "_Automatic Problem Reporting"
 msgid "Settings for automatically problem reporting"
 msgstr "Параметри автоматичного звітування про проблеми"
 
@@ -1899,12 +1901,15 @@ msgstr "Перевірки пройдено"
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:130
+#| msgid ""
+#| "Device hardware meets security requirements. This device has protection "
+#| "against a range of the most common hardware security threats."
 msgid ""
-"Hardware meets security requirements. This device has protection against "
-"common hardware security threats."
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
 msgstr ""
-"Обладнання відповідає вимогам безпеки. Цей пристрій захищено від типових "
-"загроз безпеці."
+"Цей пристрій відповідає базовим вимогам до захисту. У його апаратній частині"
+" передбачено захист від більшості типових загроз безпеці."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
@@ -1915,12 +1920,15 @@ msgstr "Захищено"
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:144
+#| msgid ""
+#| "Device hardware meets security requirements. This device has protection "
+#| "against a range of the most common hardware security threats."
 msgid ""
-"Device hardware meets security requirements. This device has protection "
-"against a range of the most common hardware security threats."
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
 msgstr ""
-"Цей пристрій має базовий захист від апаратних проблем із безпекою. Цей "
-"рівень захисту надає захист від більшості типових загроз безпеці."
+"Цим пристроєм пройдено поточні перевірки щодо захисту. Його апаратну частину"
+" захищено від більшості загроз безпеці."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
@@ -2146,8 +2154,9 @@ msgid "Hardware does not pass checks."
 msgstr "Обладнання не пройшло перевірок."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:552
-msgid "Hardware meets security requirements."
-msgstr "Обладнання задовольняє вимоги захисту."
+#| msgid "Hardware meets security requirements."
+msgid "Hardware meets basic security requirements."
+msgstr "Обладнання задовольняє базові вимоги захисту."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:561
 msgid "Hardware has a good level of protection."
@@ -2251,7 +2260,6 @@ msgid "Device Security"
 msgstr "Безпека пристрою"
 
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in:4
-#| msgid "Protected against a wide range of security threats."
 msgid "Protection against hardware security threats"
 msgstr "Захист від загроз безпеці з боку обладнання"
 
@@ -2897,36 +2905,52 @@ msgstr ""
 "Джерело;Блокування;Том;скорочення;Shortcut;Workspace;Window;Resize;Zoom;"
 "Contrast;Input;Source;Lock;Volume;Hotkey;"
 
-#: panels/location/cc-location-panel.ui:23
-msgid "Location Services Turned Off"
-msgstr "Служби даних місця перебування вимкнено"
-
-#: panels/location/cc-location-panel.ui:24
-msgid "No sandboxed apps can obtain location information."
-msgstr ""
-"Немає програм пісочниці, які здатні отримувати дані щодо місця перебування."
-
-#: panels/location/cc-location-panel.ui:38
+#: panels/location/cc-location-panel.ui:9
+#| msgid ""
+#| "Location services use GPS, Wi-Fi and cellular connections to determine "
+#| "the approximate location of this device. <a href='https://location."
+#| "services.mozilla.com/privacy'>Learn about what data is collected, and how "
+#| "it is used.</a>\n"
+#| "\n"
+#| "The following sandboxed apps have been given access to location data. "
+#| "Apps that are not sandboxed can access location data without asking for "
+#| "permission."
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
 "mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>\n"
-"\n"
-"The following sandboxed apps have been given access to location data. Apps "
-"that are not sandboxed can access location data without asking for "
-"permission."
+"</a>"
 msgstr ""
 "У службах визначення місця перебування використовують дані GPS, Wi-Fi та "
 "стільникового з'єднання для визначення приблизного місця перебування цього "
 "пристрою. <a href='https://location.services.mozilla.com/privacy'>Дізнайтеся "
-"більше про те, які дані буде зібрано, і як їх буде використано.</a>\n"
-"\n"
-"Вказаним нижче програмам з пісочниці надано доступ до даних щодо місця "
-"перебування. Програми, які не перебувають у пісочниці, можуть отримувати "
-"дані щодо місця перебування без запитів щодо прав доступу."
+"більше про те, які дані буде зібрано, і як їх буде використано.</a>"
 
-#: panels/location/cc-location-panel.ui:54
+#: panels/location/cc-location-panel.ui:12
+#| msgid "Location Services"
+msgid "_Location Services"
+msgstr "Служби _розташування"
+
+#: panels/location/cc-location-panel.ui:13
+msgid "Allow permitted apps to access location data"
+msgstr "Дозволити дозволеним програмам доступ до даних щодо місця перебування"
+
+#: panels/location/cc-location-panel.ui:24
+#| msgid ""
+#| "The following sandboxed apps have been given permission to use cameras. "
+#| "Apps that are not sandboxed can use cameras without asking for permission."
+msgid ""
+"The following sandboxed apps have been given access to location data. Apps "
+"that are not sandboxed can access location data without asking for "
+"permission."
+msgstr ""
+"Вказаним нижче програмам пісочниці було надано дозвіл на отримання доступу"
+" до даних щодо місця перебування. "
+"Програми, які не перебувають у пісочниці, можуть отримувати доступ до даних"
+" щодо місця перебування без "
+"запитів щодо доступу."
+
+#: panels/location/cc-location-panel.ui:38
 msgid "No sandboxed apps have asked for location access"
 msgstr ""
 "Немає програм пісочниці, які б надсилали запит щодо доступу до даних щодо "
@@ -2943,15 +2967,17 @@ msgstr ""
 "location;gps;private;privacy;місце;перебування;конфіденційність;приватність;"
 "приватний"
 
+#: panels/microphone/cc-microphone-panel.ui:11
+#| msgid "Microphones"
+msgid "_Microphone Access"
+msgstr "Доступ до _мікрофона"
+
+#: panels/microphone/cc-microphone-panel.ui:12
+#| msgid "Allow the applications below to use your microphone."
+msgid "Allow permitted apps to use microphones"
+msgstr "Дозволити дозволеним програмам використовувати мікрофони"
+
 #: panels/microphone/cc-microphone-panel.ui:23
-msgid "Microphone Turned Off"
-msgstr "Мікрофон вимкнено"
-
-#: panels/microphone/cc-microphone-panel.ui:24
-msgid "No sandboxed apps can record sound."
-msgstr "Немає програм пісочниці, які можуть записувати звук."
-
-#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "The following sandboxed apps have been given permission to use microphones. "
 "Apps that are not sandboxed can use microphones without asking for "
@@ -2961,18 +2987,16 @@ msgstr ""
 "мікрофонів. Програми, які не перебувають у пісочниці, можуть використовувати "
 "мікрофони без запитів щодо доступу."
 
-#: panels/microphone/cc-microphone-panel.ui:52
+#: panels/microphone/cc-microphone-panel.ui:38
 msgid "No sandboxed apps have asked for microphone access"
 msgstr ""
 "Немає програм пісочниці, які б надсилали запит щодо доступу до мікрофона"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in:3
-#| msgid "Microphone"
 msgid "Microphones"
 msgstr "Мікрофони"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in:4
-#| msgid "Requires internet access"
 msgid "Restrict microphone access"
 msgstr "Обмеження доступу до мікрофона"
 
@@ -3230,7 +3254,7 @@ msgid "Other Devices"
 msgstr "Інші пристрої"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:707
+#: panels/network/connection-editor/net-connection-editor.c:708
 msgid "VPN"
 msgstr "VPN"
 
@@ -3438,13 +3462,20 @@ msgstr "_Увімкнути"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:884
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Зупинити гарячу точку й від'єднати користувачів?"
+#: panels/network/cc-wifi-panel.c:883
+msgid "Turning off will disconnect any devices that are using the hotspot."
+msgstr ""
+"Вимикання призведе до вимикання усіх пристроїв, які використовують хот-спот."
 
-#: panels/network/cc-wifi-panel.c:887
-msgid "_Stop Hotspot"
-msgstr "_Зупинити гарячу точку"
+#: panels/network/cc-wifi-panel.c:885
+#| msgid "Turn Off Hotspot…"
+msgid "Turn Off Hotspot?"
+msgstr "Вимкнути точку доступу Wi-Fi?"
+
+#: panels/network/cc-wifi-panel.c:888
+#| msgid "_Turn On"
+msgid "_Turn Off"
+msgstr "_Вимкнути"
 
 #: panels/network/cc-wifi-panel.ui:75
 msgid "Airplane Mode"
@@ -3766,7 +3797,7 @@ msgid "WPA3 Personal"
 msgstr "Особистий WPA3"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:863
+#: panels/network/connection-editor/net-connection-editor.c:864
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3965,7 +3996,7 @@ msgid "Invalid setting %s"
 msgstr "Некоректний параметр %s"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:851
+#: panels/network/connection-editor/net-connection-editor.c:852
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3973,11 +4004,11 @@ msgstr ""
 "Вільні рішення VPN з відкритим кодом створено для спрощення користування, "
 "швидкодії та зниження ймовірності атак."
 
-#: panels/network/connection-editor/net-connection-editor.c:887
+#: panels/network/connection-editor/net-connection-editor.c:888
 msgid "Import from file…"
 msgstr "Імпортувати з файла…"
 
-#: panels/network/connection-editor/net-connection-editor.c:913
+#: panels/network/connection-editor/net-connection-editor.c:914
 msgid "Add VPN"
 msgstr "Додати VPN"
 
@@ -6165,7 +6196,6 @@ msgid "Screen Lock"
 msgstr "Блокування екрана"
 
 #: panels/screen/gnome-screen-panel.desktop.in:4
-#| msgid "Automatically Delete _Period"
 msgid "Automatically lock the screen"
 msgstr "Автоматичне блокування екрана"
 
@@ -6781,7 +6811,6 @@ msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:4
-#| msgid "Manage Thunderbolt devices"
 msgid "Manage Thunderbolt device access"
 msgstr "Керування доступом до пристроїв Thunderbolt"
 
@@ -9326,6 +9355,39 @@ msgstr[3] "%u вхід"
 msgid "System Sounds"
 msgstr "Системні звуки"
 
+#~ msgid "Camera is Turned Off"
+#~ msgstr "Камеру вимкнено"
+
+#~ msgid "No sandboxed apps can capture photos or video."
+#~ msgstr "Немає програм пісочниці, які здатні знімати фотографії та відео."
+
+#~ msgid ""
+#~ "Hardware meets security requirements. This device has protection against "
+#~ "common hardware security threats."
+#~ msgstr ""
+#~ "Обладнання відповідає вимогам безпеки. Цей пристрій захищено від типових "
+#~ "загроз безпеці."
+
+#~ msgid "Location Services Turned Off"
+#~ msgstr "Служби даних місця перебування вимкнено"
+
+#~ msgid "No sandboxed apps can obtain location information."
+#~ msgstr ""
+#~ "Немає програм пісочниці, які здатні отримувати дані щодо місця "
+#~ "перебування."
+
+#~ msgid "Microphone Turned Off"
+#~ msgstr "Мікрофон вимкнено"
+
+#~ msgid "No sandboxed apps can record sound."
+#~ msgstr "Немає програм пісочниці, які можуть записувати звук."
+
+#~ msgid "Stop hotspot and disconnect any users?"
+#~ msgstr "Зупинити гарячу точку й від'єднати користувачів?"
+
+#~ msgid "_Stop Hotspot"
+#~ msgstr "_Зупинити гарячу точку"
+
 #~ msgid "Protect your pictures"
 #~ msgstr "Захистіть ваші зображення"
 
@@ -10307,9 +10369,6 @@ msgstr "Системні звуки"
 #~ msgid "Show the screen recording UI"
 #~ msgstr "Показати інтерфейс запису з екрана"
 
-#~ msgid "Allow the applications below to use your microphone."
-#~ msgstr "Дозволити вказаним нижче програмам доступ до мікрофона."
-
 #~ msgid "Standard"
 #~ msgstr "Стандартно"
 
@@ -10566,9 +10625,6 @@ msgstr "Системні звуки"
 
 #~ msgid "Active Display"
 #~ msgstr "Активний дисплей"
-
-#~ msgid "Allow the applications below to use your camera."
-#~ msgstr "Дозволити вказаним нижче програмам доступ до камери."
 
 #~ msgid ""
 #~ "Location services allow applications to know your location. Using Wi-Fi "
