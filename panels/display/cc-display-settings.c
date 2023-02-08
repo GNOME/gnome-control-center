@@ -152,6 +152,9 @@ make_aspect_string (gint width,
     case 23:
       aspect = "21∶9";
       break;
+    case 35:
+      aspect = "32∶9";
+      break;
     case 12:
       aspect = "5∶4";
       break;
