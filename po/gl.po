@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-03 14:58+0000\n"
-"PO-Revision-Date: 2023-02-05 21:49+0100\n"
+"POT-Creation-Date: 2023-02-08 06:23+0000\n"
+"PO-Revision-Date: 2023-02-08 20:02+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -363,7 +363,7 @@ msgstr "Seleccione unha imaxe"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:886
+#: panels/network/cc-wifi-panel.c:887
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
@@ -448,11 +448,10 @@ msgstr "Cambie a súa imaxe de fondo ou as cores da interface"
 msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr "Fondo de pantalla;Pantalla;Escritorio;Estilo;Claro;Escuro;Aparencia;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/bluetooth/cc-bluetooth-panel.ui:11
 #: panels/datetime/cc-datetime-panel.ui:130
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:124
-#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "Activar"
 
@@ -508,15 +507,20 @@ msgstr "Active ou desactive o Bluetooth e conecte os seus dispositivos"
 msgid "share;sharing;bluetooth;obex;"
 msgstr "compartir;compartición;bluetooth;obex;"
 
-#: panels/camera/cc-camera-panel.ui:24
-msgid "Camera is Turned Off"
-msgstr "A cámara está apagada"
+#: panels/camera/cc-camera-panel.ui:11
+msgid "_Camera Access"
+msgstr "_Acceso á cámara"
 
-#: panels/camera/cc-camera-panel.ui:25
-msgid "No sandboxed apps can capture photos or video."
-msgstr "Non hai ningunha aplicación illada que poida capturar fotos ou vídeos."
+#: panels/camera/cc-camera-panel.ui:12
+msgid "Allow permitted apps to use cameras"
+msgstr "Todas as aplicacións con uso da cámara permitido"
 
-#: panels/camera/cc-camera-panel.ui:39
+#: panels/camera/cc-camera-panel.ui:22 panels/location/cc-location-panel.ui:23
+#: panels/microphone/cc-microphone-panel.ui:22
+msgid "Permitted Apps"
+msgstr "Aplicacións permitidas"
+
+#: panels/camera/cc-camera-panel.ui:23
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
@@ -525,7 +529,7 @@ msgstr ""
 "aplicacións que non están illadas poden usar as cámaras sen solicitarlle "
 "permiso."
 
-#: panels/camera/cc-camera-panel.ui:53
+#: panels/camera/cc-camera-panel.ui:37
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Ningunha aplicación illada solicitou acceder á cámara"
 
@@ -913,7 +917,7 @@ msgstr "_Importar ficheiro…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:619
+#: panels/network/connection-editor/net-connection-editor.c:620
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1378,9 +1382,8 @@ msgstr "Require ter activos os servizos de localización e acceso a internet"
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
-#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
-#: panels/user-accounts/cc-user-panel.c:818
+#: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
 #: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
@@ -1895,11 +1898,11 @@ msgstr "Comprobacións pasadas"
 #. minimum requirement of security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:130
 msgid ""
-"Hardware meets security requirements. This device has protection against "
-"common hardware security threats."
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
 msgstr ""
-"O hardware cumpre os requirimentos de seguranza. Este dispositivo ten "
-"protección fronte ás ameazas de seguranza de hardware comúns."
+"Este dispositivo cumpre cos requirimentos de seguranza básicos. O seu "
+"hardware ten protección fronte ao conxunto máis común de amezas de seguranza."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
@@ -1911,12 +1914,11 @@ msgstr "Protexido"
 #. the extended security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:144
 msgid ""
-"Device hardware meets security requirements. This device has protection "
-"against a range of the most common hardware security threats."
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
 msgstr ""
-"Este dispositivo ten protección básica fronte a problemas de seguranza de "
-"hardware. Isto fornece protección fronte ao conxunto máis común de amezas de "
-"seguranza."
+"Este dispositivo pasa as probas de seguranza actuais. O seu hardware está "
+"protexido fronte á maioría das ameazas de seguranza."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
@@ -2144,8 +2146,8 @@ msgid "Hardware does not pass checks."
 msgstr "O hardware non pasa as comprobacións."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:552
-msgid "Hardware meets security requirements."
-msgstr "O hardware cumpre cos requirimentos de seguranza."
+msgid "Hardware meets basic security requirements."
+msgstr "O hardware cumpre cos requirimentos de seguranza básicos."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:561
 msgid "Hardware has a good level of protection."
@@ -2888,31 +2890,37 @@ msgstr ""
 "Atallo;Espazo de traballo;Xanela;Redimensionar;Zoom;Contraste;Entrada;Orixe;"
 "Bloqueo;Volume;"
 
-#: panels/location/cc-location-panel.ui:23
-msgid "Location Services Turned Off"
-msgstr "Os servizos de localización están desactivados"
-
-#: panels/location/cc-location-panel.ui:24
-msgid "No sandboxed apps can obtain location information."
-msgstr "Ningunha aplicación illada pode obter información da localización."
-
-#: panels/location/cc-location-panel.ui:38
+#: panels/location/cc-location-panel.ui:9
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
 "mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>\n"
-"\n"
-"The following sandboxed apps have been given access to location data. Apps "
-"that are not sandboxed can access location data without asking for "
-"permission."
+"</a>"
 msgstr ""
 "Os servizos de localización usan GPS e as conexións Wifi e de banda larga "
 "determina a localización aproximada deste dispositivo. <a href='https://"
 "location.services.mozilla.com/privacy'>Saiba máis sobre que datos se "
 "recollen e como se usan.</a>"
 
-#: panels/location/cc-location-panel.ui:54
+#: panels/location/cc-location-panel.ui:12
+msgid "_Location Services"
+msgstr "Servizos de _localización"
+
+#: panels/location/cc-location-panel.ui:13
+msgid "Allow permitted apps to access location data"
+msgstr "Todas as aplicacións con acceso permitido aos datos de localización"
+
+#: panels/location/cc-location-panel.ui:24
+msgid ""
+"The following sandboxed apps have been given access to location data. Apps "
+"that are not sandboxed can access location data without asking for "
+"permission."
+msgstr ""
+"As seguintes aplicacións illadas teñen acceso concedido para acceder aos "
+"datos de localización. As aplicacións que non están illadas poden acceder "
+"aos datos de localización sen solicitarlle permiso."
+
+#: panels/location/cc-location-panel.ui:38
 msgid "No sandboxed apps have asked for location access"
 msgstr "Ningunha aplicación illada que solicitara acceso á localización"
 
@@ -2925,15 +2933,15 @@ msgstr "Control de acceso á súa localización"
 msgid "location;gps;private;privacy;"
 msgstr "localización;gps;privado;privacidade;"
 
+#: panels/microphone/cc-microphone-panel.ui:11
+msgid "_Microphone Access"
+msgstr "Acceso ao _micrófono"
+
+#: panels/microphone/cc-microphone-panel.ui:12
+msgid "Allow permitted apps to use microphones"
+msgstr "Todas as aplicacións con uso do micrófono permitido."
+
 #: panels/microphone/cc-microphone-panel.ui:23
-msgid "Microphone Turned Off"
-msgstr "O micrófono está apagado"
-
-#: panels/microphone/cc-microphone-panel.ui:24
-msgid "No sandboxed apps can record sound."
-msgstr "Non hai aplicacións que poidan gravar son."
-
-#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "The following sandboxed apps have been given permission to use microphones. "
 "Apps that are not sandboxed can use microphones without asking for "
@@ -2943,7 +2951,7 @@ msgstr ""
 "aplicacións que non están illadas poden usar o seu micrófono sen solicitar "
 "permiso."
 
-#: panels/microphone/cc-microphone-panel.ui:52
+#: panels/microphone/cc-microphone-panel.ui:38
 msgid "No sandboxed apps have asked for microphone access"
 msgstr "Ningunha aplicación illada solicitou acceso ao micrófono"
 
@@ -3208,7 +3216,7 @@ msgid "Other Devices"
 msgstr "Outros dispositivos"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:707
+#: panels/network/connection-editor/net-connection-editor.c:708
 msgid "VPN"
 msgstr "VPN"
 
@@ -3412,13 +3420,19 @@ msgstr "_Activar"
 msgid "Wi-Fi"
 msgstr "Wifi"
 
-#: panels/network/cc-wifi-panel.c:884
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Desexa deter o «hotspot» e desconectar aos usuarios?"
+#: panels/network/cc-wifi-panel.c:883
+msgid "Turning off will disconnect any devices that are using the hotspot."
+msgstr ""
+"Ao apagar desconectarase calquera dispositivo que están usando o punto de "
+"acceso sen fíos."
 
-#: panels/network/cc-wifi-panel.c:887
-msgid "_Stop Hotspot"
-msgstr "_Deter «hotspot»"
+#: panels/network/cc-wifi-panel.c:885
+msgid "Turn Off Hotspot?"
+msgstr "Desexa apagar o punto de acceso sen fíos?"
+
+#: panels/network/cc-wifi-panel.c:888
+msgid "_Turn Off"
+msgstr "_Apagar"
 
 #: panels/network/cc-wifi-panel.ui:75
 msgid "Airplane Mode"
@@ -3684,21 +3698,21 @@ msgstr "automático"
 msgid "Identity"
 msgstr "Identidade"
 
-#: panels/network/connection-editor/ce-page-ip4.c:261
-#: panels/network/connection-editor/ce-page-ip6.c:242
+#: panels/network/connection-editor/ce-page-ip4.c:264
+#: panels/network/connection-editor/ce-page-ip6.c:245
 msgid "Delete Address"
 msgstr "Eliminar enderezo"
 
-#: panels/network/connection-editor/ce-page-ip4.c:420
-#: panels/network/connection-editor/ce-page-ip6.c:389
+#: panels/network/connection-editor/ce-page-ip4.c:423
+#: panels/network/connection-editor/ce-page-ip6.c:392
 msgid "Delete Route"
 msgstr "Quitar ruta"
 
-#: panels/network/connection-editor/ce-page-ip4.c:770
+#: panels/network/connection-editor/ce-page-ip4.c:774
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:740
+#: panels/network/connection-editor/ce-page-ip6.c:744
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3736,7 +3750,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 Persoal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:863
+#: panels/network/connection-editor/net-connection-editor.c:864
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3933,7 +3947,7 @@ msgid "Invalid setting %s"
 msgstr "Preferencia %s non válida"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:851
+#: panels/network/connection-editor/net-connection-editor.c:852
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3941,11 +3955,11 @@ msgstr ""
 "Solución de VPN libre e software libre deseñada para facilitarlle o uso, un "
 "rendemento de alta velocidade e unha superficie de ataque baixo."
 
-#: panels/network/connection-editor/net-connection-editor.c:887
+#: panels/network/connection-editor/net-connection-editor.c:888
 msgid "Import from file…"
 msgstr "Importar desde ficheiro…"
 
-#: panels/network/connection-editor/net-connection-editor.c:913
+#: panels/network/connection-editor/net-connection-editor.c:914
 msgid "Add VPN"
 msgstr "Engadir VPN"
 
@@ -9265,6 +9279,38 @@ msgstr[1] "%u entradas"
 msgid "System Sounds"
 msgstr "Sons do sistema"
 
+#~ msgid "Camera is Turned Off"
+#~ msgstr "A cámara está apagada"
+
+#~ msgid "No sandboxed apps can capture photos or video."
+#~ msgstr ""
+#~ "Non hai ningunha aplicación illada que poida capturar fotos ou vídeos."
+
+#~ msgid ""
+#~ "Hardware meets security requirements. This device has protection against "
+#~ "common hardware security threats."
+#~ msgstr ""
+#~ "O hardware cumpre os requirimentos de seguranza. Este dispositivo ten "
+#~ "protección fronte ás ameazas de seguranza de hardware comúns."
+
+#~ msgid "Location Services Turned Off"
+#~ msgstr "Os servizos de localización están desactivados"
+
+#~ msgid "No sandboxed apps can obtain location information."
+#~ msgstr "Ningunha aplicación illada pode obter información da localización."
+
+#~ msgid "Microphone Turned Off"
+#~ msgstr "O micrófono está apagado"
+
+#~ msgid "No sandboxed apps can record sound."
+#~ msgstr "Non hai aplicacións que poidan gravar son."
+
+#~ msgid "Stop hotspot and disconnect any users?"
+#~ msgstr "Desexa deter o «hotspot» e desconectar aos usuarios?"
+
+#~ msgid "_Stop Hotspot"
+#~ msgstr "_Deter «hotspot»"
+
 #~ msgid "Protect your pictures"
 #~ msgstr "Protexer as súas fotografías"
 
@@ -10165,9 +10211,6 @@ msgstr "Sons do sistema"
 #~ msgid "Show the screen recording UI"
 #~ msgstr "Mostrar a UI de gravación de pantalla"
 
-#~ msgid "Allow the applications below to use your microphone."
-#~ msgstr "Permitirlle ás aplicacións de embaixo usar o seu micrófono."
-
 #~ msgid ""
 #~ "Choose the format for numbers, dates and currencies. Changes take effect "
 #~ "on next login."
@@ -10400,9 +10443,6 @@ msgstr "Sons do sistema"
 
 #~ msgid "Open in Software"
 #~ msgstr "Abrir en Software"
-
-#~ msgid "Allow the applications below to use your camera."
-#~ msgstr "Permitir que os aplicativos de abaixo usar a súa cámara."
 
 #~ msgid "Display Mode"
 #~ msgstr "Modo de pantalla"
@@ -10783,9 +10823,6 @@ msgstr "Sons do sistema"
 
 #~ msgid "∶"
 #~ msgstr "∶"
-
-#~ msgid "Universal Access"
-#~ msgstr "Acceso universal"
 
 #~ msgid "Switch off to connect to a Wi-Fi network"
 #~ msgstr "Apagar para conectarse a unha rede sen fíos"
