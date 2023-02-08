@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-01-26 20:30+0000\n"
-"PO-Revision-Date: 2023-01-27 23:11+0000\n"
+"POT-Creation-Date: 2023-02-08 06:23+0000\n"
+"PO-Revision-Date: 2023-02-08 10:41+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -215,7 +215,7 @@ msgstr "Alterar o papel de parede da área de trabalho."
 
 #: panels/applications/cc-applications-panel.ui:154
 #: panels/applications/cc-applications-panel.ui:161
-#: panels/sound/cc-sound-panel.ui:361
+#: panels/sound/cc-sound-panel.ui:352
 msgid "Sounds"
 msgstr "Sons"
 
@@ -237,7 +237,6 @@ msgstr "Bloquear teclas de atalho predefinidas"
 
 #: panels/applications/cc-applications-panel.ui:175
 #: panels/applications/cc-applications-panel.ui:182
-#: panels/camera/gnome-camera-panel.desktop.in:3
 msgid "Camera"
 msgstr "Câmara"
 
@@ -248,7 +247,6 @@ msgstr "Tirar fotos com a câmara"
 
 #: panels/applications/cc-applications-panel.ui:189
 #: panels/applications/cc-applications-panel.ui:196
-#: panels/microphone/gnome-microphone-panel.desktop.in:3
 msgid "Microphone"
 msgstr "Microfone"
 
@@ -358,10 +356,10 @@ msgstr "Selecionar uma foto"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:886
+#: panels/network/cc-wifi-panel.c:887
 #: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/connection-editor/vpn-helpers.c:226
-#: panels/network/connection-editor/vpn-helpers.c:346
+#: panels/network/connection-editor/vpn-helpers.c:215
+#: panels/network/connection-editor/vpn-helpers.c:334
 #: panels/network/net-device-wifi.c:866
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
@@ -383,7 +381,7 @@ msgid "_Cancel"
 msgstr "_Cancelar"
 
 #: panels/background/cc-background-chooser.c:316
-#: panels/network/connection-editor/vpn-helpers.c:227
+#: panels/network/connection-editor/vpn-helpers.c:216
 #: panels/printers/pp-details-dialog.c:270
 #: panels/sharing/cc-sharing-panel.c:480
 #: panels/user-accounts/cc-avatar-chooser.c:168
@@ -444,11 +442,10 @@ msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr ""
 "Fundo;Papel de parede;Ecrã;Área de trabalho;Estilo;Claro;Escuro;Aparência;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/bluetooth/cc-bluetooth-panel.ui:11
 #: panels/datetime/cc-datetime-panel.ui:130
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:124
-#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "Ativo"
 
@@ -509,15 +506,20 @@ msgstr "Ativar e desativar o Bluetooth e ligar os seus dispositivos"
 msgid "share;sharing;bluetooth;obex;"
 msgstr "partilhar;partilha;bluetooth;obex;"
 
-#: panels/camera/cc-camera-panel.ui:24
-msgid "Camera is Turned Off"
-msgstr "A câmara está desligada"
+#: panels/camera/cc-camera-panel.ui:11
+msgid "_Camera Access"
+msgstr "Acesso à _câmara"
 
-#: panels/camera/cc-camera-panel.ui:25
-msgid "No sandboxed apps can capture photos or video."
-msgstr "Nenhuma aplicação em \"sandbox\" pode capturar fotos ou vídeos."
+#: panels/camera/cc-camera-panel.ui:12
+msgid "Allow permitted apps to use cameras"
+msgstr "Permitir que as aplicações permitidas utilizem câmaras"
 
-#: panels/camera/cc-camera-panel.ui:39
+#: panels/camera/cc-camera-panel.ui:22 panels/location/cc-location-panel.ui:23
+#: panels/microphone/cc-microphone-panel.ui:22
+msgid "Permitted Apps"
+msgstr "Aplicações permitidas"
+
+#: panels/camera/cc-camera-panel.ui:23
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
@@ -526,15 +528,19 @@ msgstr ""
 "As aplicações que não estão sandbox podem utilizar câmaras sem pedir "
 "autorização."
 
-#: panels/camera/cc-camera-panel.ui:53
+#: panels/camera/cc-camera-panel.ui:37
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Nenhuma aplicação em \"sandbox\" requisitou acesso à câmara"
 
-#: panels/camera/gnome-camera-panel.desktop.in:4
-msgid "Protect your pictures"
-msgstr "Proteja as suas fotos"
+#: panels/camera/gnome-camera-panel.desktop.in:3
+msgid "Cameras"
+msgstr "Câmaras"
 
-#. Translators: Search terms to find the Camera panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/camera/gnome-camera-panel.desktop.in:4
+msgid "Restrict camera access"
+msgstr "Restringir o acesso à câmara"
+
+#. Translators: Search terms to find the Cameras panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/camera/gnome-camera-panel.desktop.in:16
 msgid "camera;photos;video;webcam;lock;private;privacy;"
 msgstr "câmara;fotos;vídeo;webcam;bloquear;privado;privacidade;"
@@ -743,7 +749,7 @@ msgid "Save Profile"
 msgstr "Gravar o perfil"
 
 #: panels/color/cc-color-panel.c:845
-#: panels/network/connection-editor/vpn-helpers.c:347
+#: panels/network/connection-editor/vpn-helpers.c:335
 #: panels/wwan/cc-wwan-apn-dialog.ui:43
 msgid "_Save"
 msgstr "_Gravar"
@@ -915,7 +921,7 @@ msgstr "_Importar ficheiro…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:591
+#: panels/network/connection-editor/net-connection-editor.c:620
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1209,12 +1215,12 @@ msgid "Decrement Minute"
 msgstr "Decremento de minuto"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:168
+#: panels/network/connection-editor/ce-page-details.c:167
 msgid "Today"
 msgstr "Hoje"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:170
+#: panels/network/connection-editor/ce-page-details.c:169
 msgid "Yesterday"
 msgstr "Ontem"
 
@@ -1233,8 +1239,6 @@ msgstr "%e de %b, %Y"
 #. and "Yesterday, 10:10:10 AM"
 #: panels/common/cc-util.c:162
 #, c-format
-#| msgctxt "timezone loc"
-#| msgid "%s, %s"
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
@@ -1382,9 +1386,8 @@ msgstr "Requer serviço de localização ativado e acesso à Internet"
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
-#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
-#: panels/user-accounts/cc-user-panel.c:818
+#: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
 #: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
@@ -1541,8 +1544,8 @@ msgid "Diagnostics"
 msgstr "Diagnósticos"
 
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in:4
-msgid "Report your problems"
-msgstr "Relate os seus problemas"
+msgid "Settings for automatically problem reporting"
+msgstr "Definições para relatar problemas automaticamente"
 
 #. Translators: Search terms to find the Diagnostics panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in:16
@@ -1901,11 +1904,11 @@ msgstr "Verificações aprovadas"
 #. minimum requirement of security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:130
 msgid ""
-"Hardware meets security requirements. This device has protection against "
-"common hardware security threats."
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
 msgstr ""
-"O equipamento cumpre os requisitos de segurança. Este dispositivo tem "
-"proteção contra ameaças de segurança de equipamento comum."
+"Este dispositivo cumpre os requisitos básicos de segurança. O seu "
+"equipamento tem proteção contra algumas das ameaças de segurança mais comuns."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
@@ -1917,12 +1920,11 @@ msgstr "Protegido"
 #. the extended security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:144
 msgid ""
-"Device hardware meets security requirements. This device has protection "
-"against a range of the most common hardware security threats."
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
 msgstr ""
-"O hardware do dispositivo cumpre os requisitos de segurança. Este "
-"dispositivo tem proteção contra uma série das ameaças de segurança de "
-"hardware mais comuns."
+"Este dispositivo passa nos testes de segurança atuais. O seu equipamento "
+"está protegido contra a maioria das ameaças à segurança."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
@@ -2149,8 +2151,8 @@ msgid "Hardware does not pass checks."
 msgstr "O equipamento não passa nas verificações."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:552
-msgid "Hardware meets security requirements."
-msgstr "O equipamento cumpre os requisitos de segurança."
+msgid "Hardware meets basic security requirements."
+msgstr "O equipamento cumpre os requisitos básicos de segurança."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:561
 msgid "Hardware has a good level of protection."
@@ -2254,8 +2256,8 @@ msgid "Device Security"
 msgstr "Segurança do dispositivo"
 
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in:4
-msgid "Host firmware security status"
-msgstr "Estado de segurança do firmware anfitrião"
+msgid "Protection against hardware security threats"
+msgstr "Proteção contra ameaças à segurança do equipamento"
 
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in:16
@@ -2891,56 +2893,58 @@ msgstr ""
 "Atalho;Área de trabalho;Janela;Redimensionar;Zoom;Contraste;Inserir;Fonte;"
 "Bloquear;Volume;Trancar;Tecla de atalho;"
 
-#: panels/location/cc-location-panel.ui:23
-msgid "Location Services Turned Off"
-msgstr "Serviços de localização desligados"
-
-#: panels/location/cc-location-panel.ui:24
-msgid "No sandboxed apps can obtain location information."
-msgstr "Nenhuma aplicação em \"sandbox\" pode obter informação de localização."
-
-#: panels/location/cc-location-panel.ui:38
+#: panels/location/cc-location-panel.ui:9
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
 "mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>\n"
-"\n"
+"</a>"
+msgstr ""
+"Os serviços de localização usam GPS, Wi-Fi e ligações celulares para "
+"determinar a localização aproximada deste dispositivo. <a href='https://"
+"location.services.mozilla.com/privacy'> Saiba quais os dados que são "
+"recolhidos, e como são usados.</a>"
+
+#: panels/location/cc-location-panel.ui:12
+msgid "_Location Services"
+msgstr "_Localização dos serviços"
+
+#: panels/location/cc-location-panel.ui:13
+msgid "Allow permitted apps to access location data"
+msgstr "Permitir o acesso de aplicações permitidas aos dados de localização"
+
+#: panels/location/cc-location-panel.ui:24
+msgid ""
 "The following sandboxed apps have been given access to location data. Apps "
 "that are not sandboxed can access location data without asking for "
 "permission."
 msgstr ""
-"Os serviços de localização utilizam GPS, Wi-Fi e ligações celulares para "
-"determinar a localização aproximada deste dispositivo. <a href='https://"
-"location.services.mozilla.com/privacy'> Saiba quais os dados que são "
-"recolhidos, e como são utilizados.</a>\n"
-"\n"
 "Foi dado acesso aos dados de localização às seguintes aplicações em "
 "\"sandbox\". As aplicações que não estão em \"sandbox\" podem aceder aos "
 "dados de localização sem pedir autorização."
 
-#: panels/location/cc-location-panel.ui:54
+#: panels/location/cc-location-panel.ui:38
 msgid "No sandboxed apps have asked for location access"
 msgstr "Nenhuma aplicação em \"sandbox\" requisitou acesso à localização"
 
 #: panels/location/gnome-location-panel.desktop.in:4
-msgid "Protect your location information"
-msgstr "Proteger os seus dados de localização"
+msgid "Control access to your location"
+msgstr "Controlar o acesso à sua localização"
 
 #. Translators: Search terms to find the Location panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/location/gnome-location-panel.desktop.in:16
 msgid "location;gps;private;privacy;"
 msgstr "localização;gps;privado;privacidade;"
 
+#: panels/microphone/cc-microphone-panel.ui:11
+msgid "_Microphone Access"
+msgstr "Acesso ao _microfone"
+
+#: panels/microphone/cc-microphone-panel.ui:12
+msgid "Allow permitted apps to use microphones"
+msgstr "Permitir a utilização de microfones nas aplicações permitidas"
+
 #: panels/microphone/cc-microphone-panel.ui:23
-msgid "Microphone Turned Off"
-msgstr "Microfone desligado"
-
-#: panels/microphone/cc-microphone-panel.ui:24
-msgid "No sandboxed apps can record sound."
-msgstr "Nenhuma aplicação em \"sandbox\" pode gravar som."
-
-#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "The following sandboxed apps have been given permission to use microphones. "
 "Apps that are not sandboxed can use microphones without asking for "
@@ -2950,15 +2954,19 @@ msgstr ""
 "microfones. As aplicações que não estão em \"sandbox\" podem utilizar "
 "microfones sem pedir autorização."
 
-#: panels/microphone/cc-microphone-panel.ui:52
+#: panels/microphone/cc-microphone-panel.ui:38
 msgid "No sandboxed apps have asked for microphone access"
 msgstr "Nenhuma aplicação em \"sandbox\" requisitou acesso ao microfone"
 
-#: panels/microphone/gnome-microphone-panel.desktop.in:4
-msgid "Protect your conversations"
-msgstr "Proteja as suas conversas"
+#: panels/microphone/gnome-microphone-panel.desktop.in:3
+msgid "Microphones"
+msgstr "Microfones"
 
-#. Translators: Search terms to find the Microphone panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/microphone/gnome-microphone-panel.desktop.in:4
+msgid "Restrict microphone access"
+msgstr "Restringir o acesso ao microfone"
+
+#. Translators: Search terms to find the Microphones panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/microphone/gnome-microphone-panel.desktop.in:16
 msgid "microphone;recording;application;privacy;"
 msgstr "microfone;gravação;aplicação;privacidade;"
@@ -3211,7 +3219,7 @@ msgid "Other Devices"
 msgstr "Outros dispositivos"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:679
+#: panels/network/connection-editor/net-connection-editor.c:708
 msgid "VPN"
 msgstr "VPN"
 
@@ -3241,8 +3249,8 @@ msgstr "Automático"
 msgid "Manual"
 msgstr "Manual"
 
-#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:84
-#: panels/sound/cc-sound-panel.ui:296
+#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:76
+#: panels/sound/cc-sound-panel.ui:284
 msgid "Configuration"
 msgstr "Configuração"
 
@@ -3282,7 +3290,6 @@ msgid "HTTP proxy port"
 msgstr "Porta do proxy HTTP"
 
 #: panels/network/cc-net-proxy-page.ui:125
-#| msgid "H_TTPS Proxy"
 msgid "HTTPS Proxy"
 msgstr "Proxy HTTPS"
 
@@ -3417,13 +3424,19 @@ msgstr "_Ligar"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:884
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Parar o ponto de acesso e desligar quaisquer utilizadores?"
+#: panels/network/cc-wifi-panel.c:883
+msgid "Turning off will disconnect any devices that are using the hotspot."
+msgstr ""
+"O desligar irá desativar quaisquer dispositivos que estejam a utilizar o "
+"ponto de acesso."
 
-#: panels/network/cc-wifi-panel.c:887
-msgid "_Stop Hotspot"
-msgstr "_Parar o ponto de acesso"
+#: panels/network/cc-wifi-panel.c:885
+msgid "Turn Off Hotspot?"
+msgstr "Desligar o ponto de acesso?"
+
+#: panels/network/cc-wifi-panel.c:888
+msgid "_Turn Off"
+msgstr "_Desligar"
 
 # Em alternativa, em Portugal também se pode usar a expressão "Modo de voo"
 #: panels/network/cc-wifi-panel.ui:75
@@ -3518,49 +3531,49 @@ msgid "Profile %d"
 msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:98
+#: panels/network/connection-editor/ce-page-details.c:97
 #: panels/network/net-device-wifi.c:229
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:102
+#: panels/network/connection-editor/ce-page-details.c:101
 #: panels/network/net-device-wifi.c:234
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:108
+#: panels/network/connection-editor/ce-page-details.c:107
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:113
+#: panels/network/connection-editor/ce-page-details.c:112
 #: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "Aberta (Otimizada)"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:125
+#: panels/network/connection-editor/ce-page-details.c:124
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:131
+#: panels/network/connection-editor/ce-page-details.c:130
 msgid "Enterprise"
 msgstr "Empresarial"
 
-#: panels/network/connection-editor/ce-page-details.c:136
+#: panels/network/connection-editor/ce-page-details.c:135
 #: panels/network/net-device-wifi.c:219
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nenhuma"
 
-#: panels/network/connection-editor/ce-page-details.c:157
+#: panels/network/connection-editor/ce-page-details.c:156
 msgid "Never"
 msgstr "Nunca"
 
-#: panels/network/connection-editor/ce-page-details.c:172
+#: panels/network/connection-editor/ce-page-details.c:171
 #: panels/network/net-device-ethernet.c:105
 #, c-format
 msgid "%i day ago"
@@ -3568,71 +3581,71 @@ msgid_plural "%i days ago"
 msgstr[0] "%i dia atrás"
 msgstr[1] "%i dias atrás"
 
-#: panels/network/connection-editor/ce-page-details.c:297
+#: panels/network/connection-editor/ce-page-details.c:295
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:299
+#: panels/network/connection-editor/ce-page-details.c:297
 #: panels/network/net-device-ethernet.c:217
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:314
+#: panels/network/connection-editor/ce-page-details.c:312
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:316
+#: panels/network/connection-editor/ce-page-details.c:314
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:318
+#: panels/network/connection-editor/ce-page-details.c:316
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:336
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Nenhum"
 
-#: panels/network/connection-editor/ce-page-details.c:340
+#: panels/network/connection-editor/ce-page-details.c:338
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Fraca"
 
-#: panels/network/connection-editor/ce-page-details.c:342
+#: panels/network/connection-editor/ce-page-details.c:340
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Normal"
 
-#: panels/network/connection-editor/ce-page-details.c:344
+#: panels/network/connection-editor/ce-page-details.c:342
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Boa"
 
-#: panels/network/connection-editor/ce-page-details.c:346
+#: panels/network/connection-editor/ce-page-details.c:344
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelente"
 
-#: panels/network/connection-editor/ce-page-details.c:413
+#: panels/network/connection-editor/ce-page-details.c:411
 #: panels/network/connection-editor/details-page.ui:94
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "Endereço IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:414
+#: panels/network/connection-editor/ce-page-details.c:412
 #: panels/network/connection-editor/details-page.ui:110
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "Endereço IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:416
-#: panels/network/connection-editor/ce-page-details.c:417
+#: panels/network/connection-editor/ce-page-details.c:414
+#: panels/network/connection-editor/ce-page-details.c:415
 #: panels/network/net-device-ethernet.c:149
 #: panels/network/net-device-ethernet.c:151
 #: panels/network/net-device-mobile.c:445
@@ -3640,20 +3653,20 @@ msgstr "Endereço IPv6"
 msgid "IP Address"
 msgstr "Endereço IP"
 
-#: panels/network/connection-editor/ce-page-details.c:421
+#: panels/network/connection-editor/ce-page-details.c:419
 #: panels/network/net-device-ethernet.c:166
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:422
+#: panels/network/connection-editor/ce-page-details.c:420
 #: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:424
-#: panels/network/connection-editor/ce-page-details.c:425
+#: panels/network/connection-editor/ce-page-details.c:422
+#: panels/network/connection-editor/ce-page-details.c:423
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
 #: panels/network/connection-editor/ip4-page.ui:165
@@ -3666,19 +3679,19 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:477
+#: panels/network/connection-editor/ce-page-details.c:475
 msgid "Forget Connection"
 msgstr "Esquecer a ligação"
 
-#: panels/network/connection-editor/ce-page-details.c:479
+#: panels/network/connection-editor/ce-page-details.c:477
 msgid "Remove Connection Profile"
 msgstr "Eliminar o perfil de ligação"
 
-#: panels/network/connection-editor/ce-page-details.c:482
+#: panels/network/connection-editor/ce-page-details.c:480
 msgid "Remove VPN"
 msgstr "Eliminar VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:500
+#: panels/network/connection-editor/ce-page-details.c:498
 msgid "Details"
 msgstr "Detalhes"
 
@@ -3692,21 +3705,21 @@ msgstr "automático"
 msgid "Identity"
 msgstr "Identidade"
 
-#: panels/network/connection-editor/ce-page-ip4.c:261
-#: panels/network/connection-editor/ce-page-ip6.c:242
+#: panels/network/connection-editor/ce-page-ip4.c:264
+#: panels/network/connection-editor/ce-page-ip6.c:245
 msgid "Delete Address"
 msgstr "Eliminar endereço"
 
-#: panels/network/connection-editor/ce-page-ip4.c:420
-#: panels/network/connection-editor/ce-page-ip6.c:389
+#: panels/network/connection-editor/ce-page-ip4.c:423
+#: panels/network/connection-editor/ce-page-ip6.c:392
 msgid "Delete Route"
 msgstr "Eliminar rota"
 
-#: panels/network/connection-editor/ce-page-ip4.c:770
+#: panels/network/connection-editor/ce-page-ip4.c:774
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:740
+#: panels/network/connection-editor/ce-page-ip6.c:744
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3744,8 +3757,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 pessoal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:835
-#| msgid "Wired"
+#: panels/network/connection-editor/net-connection-editor.c:864
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3791,12 +3803,12 @@ msgstr "Ligar _automaticamente"
 msgid "Make available to _other users"
 msgstr "Disponibilizar a _outros utilizadores"
 
-#: panels/network/connection-editor/details-page.ui:414
+#: panels/network/connection-editor/details-page.ui:410
 msgid "_Metered connection: has data limits or can incur charges"
 msgstr ""
 "_Ligação com tráfego limitado: tem limite de dados ou pode decorrer encargos"
 
-#: panels/network/connection-editor/details-page.ui:423
+#: panels/network/connection-editor/details-page.ui:419
 msgid ""
 "Software updates and other large downloads will not be started automatically."
 msgstr ""
@@ -3924,26 +3936,26 @@ msgstr "Automático, apenas DHCP"
 msgid "Prefix"
 msgstr "Prefixo"
 
-#: panels/network/connection-editor/net-connection-editor.c:364
+#: panels/network/connection-editor/net-connection-editor.c:389
 msgid "Unable to open connection editor"
 msgstr "Impossível abrir o editor de ligação"
 
-#: panels/network/connection-editor/net-connection-editor.c:380
+#: panels/network/connection-editor/net-connection-editor.c:405
 msgid "New Profile"
 msgstr "Novo perfil"
 
-#: panels/network/connection-editor/net-connection-editor.c:447
+#: panels/network/connection-editor/net-connection-editor.c:472
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Definição inválida %s: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:450
+#: panels/network/connection-editor/net-connection-editor.c:475
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Definição inválida %s"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:823
+#: panels/network/connection-editor/net-connection-editor.c:852
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
@@ -3951,11 +3963,11 @@ msgstr ""
 "Solução VPN gratuita e de código aberto concebida para facilidade de "
 "utilização, desempenho de alta velocidade e baixa superfície de ataque."
 
-#: panels/network/connection-editor/net-connection-editor.c:859
+#: panels/network/connection-editor/net-connection-editor.c:888
 msgid "Import from file…"
 msgstr "Importar de ficheiro…"
 
-#: panels/network/connection-editor/net-connection-editor.c:885
+#: panels/network/connection-editor/net-connection-editor.c:914
 msgid "Add VPN"
 msgstr "Adicionar VPN"
 
@@ -3980,29 +3992,29 @@ msgstr ""
 "\n"
 "Erro: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:223
+#: panels/network/connection-editor/vpn-helpers.c:212
 msgid "Select file to import"
 msgstr "Selecionar o ficheiro a importar"
 
-#: panels/network/connection-editor/vpn-helpers.c:276
+#: panels/network/connection-editor/vpn-helpers.c:264
 #, c-format
 msgid "A file named “%s” already exists."
 msgstr "Já existe um ficheiro com o nome “%s”."
 
-#: panels/network/connection-editor/vpn-helpers.c:278
+#: panels/network/connection-editor/vpn-helpers.c:266
 msgid "_Replace"
 msgstr "Substitui_r"
 
-#: panels/network/connection-editor/vpn-helpers.c:280
+#: panels/network/connection-editor/vpn-helpers.c:268
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
 msgstr "Deseja substituir %s com a ligação VPN que está a gravar?"
 
-#: panels/network/connection-editor/vpn-helpers.c:315
+#: panels/network/connection-editor/vpn-helpers.c:303
 msgid "Cannot export VPN connection"
 msgstr "Impossível exportar a ligação VPN"
 
-#: panels/network/connection-editor/vpn-helpers.c:317
+#: panels/network/connection-editor/vpn-helpers.c:305
 #, c-format
 msgid ""
 "The VPN connection “%s” could not be exported to %s.\n"
@@ -4013,7 +4025,7 @@ msgstr ""
 "\n"
 "Erro: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:343
+#: panels/network/connection-editor/vpn-helpers.c:331
 msgid "Export VPN connection"
 msgstr "Exportar a ligação VPN"
 
@@ -6134,8 +6146,8 @@ msgid "Screen Lock"
 msgstr "Bloqueio de ecrã"
 
 #: panels/screen/gnome-screen-panel.desktop.in:4
-msgid "Screen Settings"
-msgstr "Definições do ecrã"
+msgid "Automatically lock the screen"
+msgstr "Bloquear automaticamente o ecrã"
 
 #. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/screen/gnome-screen-panel.desktop.in:16
@@ -6470,19 +6482,19 @@ msgstr "Corda"
 msgid "Swing"
 msgstr "Movimento"
 
-#: panels/sound/cc-alert-chooser-window.ui:4 panels/sound/cc-sound-panel.ui:376
+#: panels/sound/cc-alert-chooser-window.ui:4 panels/sound/cc-sound-panel.ui:367
 msgid "Alert Sound"
 msgstr "Alerta sonoro"
 
-#: panels/sound/cc-balance-slider.ui:9 panels/sound/cc-sound-panel.ui:147
+#: panels/sound/cc-balance-slider.ui:9 panels/sound/cc-sound-panel.ui:139
 msgid "Balance"
 msgstr "Balanço"
 
-#: panels/sound/cc-fade-slider.ui:9 panels/sound/cc-sound-panel.ui:173
+#: panels/sound/cc-fade-slider.ui:9 panels/sound/cc-sound-panel.ui:165
 msgid "Fade"
 msgstr "Desvanecimento"
 
-#: panels/sound/cc-output-test-wheel.c:185
+#: panels/sound/cc-output-test-wheel.c:206
 msgid "Select a Speaker"
 msgstr "Selecionar uma coluna"
 
@@ -6490,52 +6502,52 @@ msgstr "Selecionar uma coluna"
 msgid "Test Speakers"
 msgstr "Testar as colunas"
 
-#: panels/sound/cc-sound-panel.ui:8
+#: panels/sound/cc-sound-panel.ui:8 panels/sound/cc-sound-panel.ui:207
 msgid "Output"
 msgstr "Saída"
 
-#: panels/sound/cc-sound-panel.ui:42 panels/sound/cc-sound-panel.ui:215
+#: panels/sound/cc-sound-panel.ui:35 panels/sound/cc-sound-panel.ui:210
 msgid "Output Device"
 msgstr "Dispositivos de saída"
 
-#: panels/sound/cc-sound-panel.ui:60
+#: panels/sound/cc-sound-panel.ui:52
 #: panels/universal-access/cc-ua-hearing-page.ui:69
 msgid "Test"
 msgstr "Teste"
 
-#: panels/sound/cc-sound-panel.ui:108
+#: panels/sound/cc-sound-panel.ui:100
 msgid "Master volume"
 msgstr "Volume principal"
 
-#: panels/sound/cc-sound-panel.ui:121
+#: panels/sound/cc-sound-panel.ui:113
 msgid "Output Volume"
 msgstr "Volume de saída"
 
-#: panels/sound/cc-sound-panel.ui:199 panels/sound/cc-subwoofer-slider.ui:8
+#: panels/sound/cc-sound-panel.ui:191 panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
 msgstr "Subwoofer"
 
-#: panels/sound/cc-sound-panel.ui:218
+#: panels/sound/cc-sound-panel.ui:213
 msgid "No Output Devices"
 msgstr "Sem dispositivos de saída"
 
-#: panels/sound/cc-sound-panel.ui:230
+#: panels/sound/cc-sound-panel.ui:225 panels/sound/cc-sound-panel.ui:334
 msgid "Input"
 msgstr "Entrada"
 
-#: panels/sound/cc-sound-panel.ui:259 panels/sound/cc-sound-panel.ui:346
+#: panels/sound/cc-sound-panel.ui:247 panels/sound/cc-sound-panel.ui:337
 msgid "Input Device"
 msgstr "Dispositivos de entrada"
 
-#: panels/sound/cc-sound-panel.ui:330
+#: panels/sound/cc-sound-panel.ui:318
 msgid "Input Volume"
 msgstr "Volume de entrada"
 
-#: panels/sound/cc-sound-panel.ui:349
+#: panels/sound/cc-sound-panel.ui:340
 msgid "No Input Devices"
 msgstr "Sem dispositivos de entrada"
 
-#: panels/sound/cc-sound-panel.ui:364 panels/sound/cc-volume-levels-window.ui:4
+#: panels/sound/cc-sound-panel.ui:355 panels/sound/cc-volume-levels-window.ui:4
 msgid "Volume Levels"
 msgstr "Níveis de volume"
 
@@ -6744,8 +6756,8 @@ msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:4
-msgid "Manage Thunderbolt devices"
-msgstr "Gerir dispositivos Thunderbolt"
+msgid "Manage Thunderbolt device access"
+msgstr "Gerir o acesso a dispositivos Thunderbolt"
 
 #. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:15
@@ -6991,7 +7003,7 @@ msgstr "Teclas _sonorizadas"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:48
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
-msgstr "Apitar quando o Num Lock ou o Caps Lock são ligados ou desligados."
+msgstr "Apitar quando o Num Lock ou o Caps Lock são ligados ou desligados"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:56
 msgid "_Overlay Scrollbars"
@@ -7216,12 +7228,10 @@ msgid "1/4 screen"
 msgstr "1/4 de ecrã"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:170
-#| msgid "Screen"
 msgid "1/2 Screen"
 msgstr "1/2 de ecrã"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:171
-#| msgid "Screen"
 msgid "3/4 Screen"
 msgstr "3/4 de ecrã"
 
@@ -7460,8 +7470,8 @@ msgid "File History & Trash"
 msgstr "Histórico de ficheiros e Lixo"
 
 #: panels/usage/gnome-usage-panel.desktop.in:4
-msgid "Don't leave traces"
-msgstr "Não deixar rastros"
+msgid "Control data and files that are kept on your device"
+msgstr "Dados e ficheiros de controlo que são mantidos no seu dispositivo"
 
 #. Translators: Search terms to find the Usage panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/usage/gnome-usage-panel.desktop.in:16
@@ -9284,6 +9294,59 @@ msgstr[1] "%u entradas"
 msgid "System Sounds"
 msgstr "Sons do sistema"
 
+#~ msgid "Camera is Turned Off"
+#~ msgstr "A câmara está desligada"
+
+#~ msgid "No sandboxed apps can capture photos or video."
+#~ msgstr "Nenhuma aplicação em \"sandbox\" pode capturar fotos ou vídeos."
+
+#~ msgid "Protect your pictures"
+#~ msgstr "Proteja as suas fotos"
+
+#~ msgid "Report your problems"
+#~ msgstr "Relate os seus problemas"
+
+#~ msgid ""
+#~ "Hardware meets security requirements. This device has protection against "
+#~ "common hardware security threats."
+#~ msgstr ""
+#~ "O equipamento cumpre os requisitos de segurança. Este dispositivo tem "
+#~ "proteção contra ameaças de segurança de equipamento comum."
+
+#~ msgid "Host firmware security status"
+#~ msgstr "Estado de segurança do firmware anfitrião"
+
+#~ msgid "Location Services Turned Off"
+#~ msgstr "Serviços de localização desligados"
+
+#~ msgid "No sandboxed apps can obtain location information."
+#~ msgstr ""
+#~ "Nenhuma aplicação em \"sandbox\" pode obter informação de localização."
+
+#~ msgid "Protect your location information"
+#~ msgstr "Proteger os seus dados de localização"
+
+#~ msgid "Microphone Turned Off"
+#~ msgstr "Microfone desligado"
+
+#~ msgid "No sandboxed apps can record sound."
+#~ msgstr "Nenhuma aplicação em \"sandbox\" pode gravar som."
+
+#~ msgid "Protect your conversations"
+#~ msgstr "Proteja as suas conversas"
+
+#~ msgid "Stop hotspot and disconnect any users?"
+#~ msgstr "Parar o ponto de acesso e desligar quaisquer utilizadores?"
+
+#~ msgid "_Stop Hotspot"
+#~ msgstr "_Parar o ponto de acesso"
+
+#~ msgid "Screen Settings"
+#~ msgstr "Definições do ecrã"
+
+#~ msgid "Don't leave traces"
+#~ msgstr "Não deixar rastros"
+
 #, c-format
 #~ msgid ""
 #~ "%s has the following permissions built-in. These cannot be altered. If "
@@ -9418,9 +9481,6 @@ msgstr "Sons do sistema"
 
 #~ msgid "Protected against common security threats."
 #~ msgstr "Protegido contra ameaças comuns à segurança."
-
-#~ msgid "Protected against a wide range of security threats."
-#~ msgstr "Protegido contra uma ampla gama de ameaças à segurança."
 
 #~ msgid "Comprehensive Protection"
 #~ msgstr "Proteção abrangente"
@@ -10248,9 +10308,6 @@ msgstr "Sons do sistema"
 #~ msgid "Move down"
 #~ msgstr "Mover abaixo"
 
-#~ msgid "Allow the applications below to use your microphone."
-#~ msgstr "Permitir que as aplicações abaixo usem o seu microfone."
-
 #~ msgid "Standard"
 #~ msgstr "Padrão"
 
@@ -10512,9 +10569,6 @@ msgstr "Sons do sistema"
 
 #~ msgid "Active Display"
 #~ msgstr "Ecrã ativo"
-
-#~ msgid "Allow the applications below to use your camera."
-#~ msgstr "Permitir que as aplicações abaixo usem a câmara."
 
 #~ msgid ""
 #~ "Location services allow applications to know your location. Using Wi-Fi "
@@ -10864,9 +10918,6 @@ msgstr "Sons do sistema"
 
 #~ msgid "Show your existing view on both displays"
 #~ msgstr "Mostrar a sua vista existente em ambos os ecrãs"
-
-#~ msgid "Turn Off"
-#~ msgstr "Desligar"
 
 #~ msgid "Don't use this display"
 #~ msgstr "Não utilizar este ecrã"
@@ -11307,9 +11358,6 @@ msgstr "Sons do sistema"
 
 #~ msgid "_Send software usage statistics"
 #~ msgstr "_Enviar estatísticas de utilização de aplicações"
-
-#~ msgid "_Location Services"
-#~ msgstr "_Localização dos serviços"
 
 #~ msgid "Switch to previous source"
 #~ msgstr "Alternar para fonte anterior"
