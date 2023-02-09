@@ -852,19 +852,32 @@ add_ids_to_set (GHashTable *set,
 }
 
 static GList *
-layout_lists_intersection (GList *first_list, GList *second_list)
+layout_lists_intersection (GList *first_list,
+                           GList *second_list)
 {
+  g_autoptr(GHashTable) first_set = NULL;
   g_autoptr(GList) intersection_list = NULL;
-  g_autoptr(GList) l = NULL;
 
-  for (l = first_list; l != NULL; l = l->next)
+  first_set = g_hash_table_new (g_str_hash, g_str_equal);
+
+  while (first_list != NULL)
     {
-      gpointer element_data = l->data;
-      if (g_list_find (second_list, (gconstpointer) element_data) &&
-          !g_list_find (intersection_list, (gconstpointer) element_data))
-        {
-          intersection_list = g_list_append (intersection_list, element_data);
-        }
+      const char *layout;
+
+      layout = first_list->data;
+      g_hash_table_insert (first_set, layout, layout);
+      first_list = first_list->next;
+    }
+
+  while (second_list != NULL)
+    {
+      const char *layout;
+
+      layout = second_list->data;
+      if (g_hash_table_remove (first_set, layout))
+        intersection_list = g_list_prepend (intersection_list, layout);
+
+      second_list = second_list->next;
     }
 
   return g_steal_pointer (&intersection_list);
