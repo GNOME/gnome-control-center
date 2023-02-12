@@ -1451,6 +1451,10 @@ setup_main_window (CcUserPanel *self)
         gtk_widget_set_tooltip_text (GTK_WIDGET (self->remove_user_button),
                                      _("To delete the selected user account,\nclick the * icon first"));
 
+        self->avatar_chooser = cc_avatar_chooser_new (GTK_WIDGET (self));
+        gtk_menu_button_set_popover (self->user_avatar_edit_button,
+                                     GTK_WIDGET (self->avatar_chooser));
+
         g_object_get (self->um, "is-loaded", &loaded, NULL);
         if (loaded) {
                 users_loaded (self);
@@ -1458,10 +1462,6 @@ setup_main_window (CcUserPanel *self)
         } else {
                 g_signal_connect_object (self->um, "notify::is-loaded", G_CALLBACK (users_loaded), self, G_CONNECT_SWAPPED);
         }
-
-        self->avatar_chooser = cc_avatar_chooser_new (GTK_WIDGET (self));
-        gtk_menu_button_set_popover (self->user_avatar_edit_button,
-                                     GTK_WIDGET (self->avatar_chooser));
 }
 
 static GSettings *
