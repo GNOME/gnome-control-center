@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-05 20:50+0000\n"
-"PO-Revision-Date: 2023-02-05 23:08+0200\n"
+"POT-Creation-Date: 2023-02-13 09:19+0000\n"
+"PO-Revision-Date: 2023-02-13 23:26+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -281,7 +281,7 @@ msgid "File &amp; Link Associations"
 msgstr "Failų bei saitų susiejimai"
 
 #: panels/applications/cc-applications-panel.ui:239
-#: panels/applications/cc-applications-panel.ui:406
+#: panels/applications/cc-applications-panel.ui:412
 msgid "Storage"
 msgstr "Saugykla"
 
@@ -293,47 +293,47 @@ msgstr "Nerasta rezultatų"
 msgid "Try a different search"
 msgstr "Bandykite kitą paiešką"
 
-#: panels/applications/cc-applications-panel.ui:351
+#: panels/applications/cc-applications-panel.ui:355
 msgid "File & Link Associations"
 msgstr "Failų bei saitų susiejimai"
 
-#: panels/applications/cc-applications-panel.ui:374
+#: panels/applications/cc-applications-panel.ui:380
 msgid "File Types"
 msgstr "Failų tipai"
 
-#: panels/applications/cc-applications-panel.ui:380
+#: panels/applications/cc-applications-panel.ui:386
 msgid "Link Types"
 msgstr "Saitų tipai"
 
-#: panels/applications/cc-applications-panel.ui:390
+#: panels/applications/cc-applications-panel.ui:396
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:234
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "Atstatyti"
 
-#: panels/applications/cc-applications-panel.ui:417
+#: panels/applications/cc-applications-panel.ui:423
 msgid "How much disk space this app is occupying with app data and caches."
 msgstr ""
 "Kiek disko vietos užima šį programa su programos duomenimis bei podėliu."
 
-#: panels/applications/cc-applications-panel.ui:420
+#: panels/applications/cc-applications-panel.ui:426
 msgid "App"
 msgstr "Programa"
 
-#: panels/applications/cc-applications-panel.ui:426
+#: panels/applications/cc-applications-panel.ui:432
 msgid "Data"
 msgstr "Duomenys"
 
-#: panels/applications/cc-applications-panel.ui:432
+#: panels/applications/cc-applications-panel.ui:438
 msgid "Cache"
 msgstr "Podėlis"
 
-#: panels/applications/cc-applications-panel.ui:438
+#: panels/applications/cc-applications-panel.ui:444
 msgid "<b>Total</b>"
 msgstr "<b>Iš viso</b>"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:454
 msgid "Clear Cache…"
 msgstr "Išvalyti podėlį…"
 
@@ -356,7 +356,7 @@ msgstr "Pasirinkite paveikslėlį"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:886
+#: panels/network/cc-wifi-panel.c:887
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
@@ -441,11 +441,10 @@ msgstr "Pakeiskite fono paveikslėlį arba sąsajos spalvas"
 msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr "Fonas;Ekranas;Darbastalis;Darbalaukis;Stilius;Šviesus;Tamsus;Išvaizda;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/bluetooth/cc-bluetooth-panel.ui:11
 #: panels/datetime/cc-datetime-panel.ui:130
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:124
-#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "Įjungti"
 
@@ -500,16 +499,20 @@ msgstr "Įjunkite arba išjunkite Bluetooth ir junkitės prie savo įrenginių"
 msgid "share;sharing;bluetooth;obex;"
 msgstr "dalinimasis;dalytis;bendrinti;bluetooth;obex;"
 
-#: panels/camera/cc-camera-panel.ui:24
-msgid "Camera is Turned Off"
-msgstr "Kamera išjungta"
+#: panels/camera/cc-camera-panel.ui:11
+msgid "_Camera Access"
+msgstr "_Kameros prieiga"
 
-#: panels/camera/cc-camera-panel.ui:25
-msgid "No sandboxed apps can capture photos or video."
-msgstr ""
-"Jokia apribota programa negali daryti nuotraukų ar įrašinėti vaizdo įrašų."
+#: panels/camera/cc-camera-panel.ui:12
+msgid "Allow permitted apps to use cameras"
+msgstr "Leisti programoms naudoti kameras"
 
-#: panels/camera/cc-camera-panel.ui:39
+#: panels/camera/cc-camera-panel.ui:22 panels/location/cc-location-panel.ui:23
+#: panels/microphone/cc-microphone-panel.ui:22
+msgid "Permitted Apps"
+msgstr "Leidžiamos programos"
+
+#: panels/camera/cc-camera-panel.ui:23
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
@@ -517,7 +520,7 @@ msgstr ""
 "Šioms programoms suteiktas leidimas naudoti kameras. Neapribotos programos "
 "gali naudoti kamerą be leidimo."
 
-#: panels/camera/cc-camera-panel.ui:53
+#: panels/camera/cc-camera-panel.ui:37
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Jokia apribota programa neprašė prieigos prie kameros"
 
@@ -1371,9 +1374,8 @@ msgstr "Reikalauja vietos tarnybų bei interneto ryšio"
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
-#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
-#: panels/user-accounts/cc-user-panel.c:818
+#: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
 #: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
@@ -1630,7 +1632,7 @@ msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Gulsčias (apverstas)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:180
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1888,11 +1890,11 @@ msgstr "Patikrinimai sėkmingi"
 #. minimum requirement of security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:130
 msgid ""
-"Hardware meets security requirements. This device has protection against "
-"common hardware security threats."
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
 msgstr ""
-"Aparatinė įranga atitinka saugumo reikalavimus. Šis įrenginys turi apsaugą "
-"nuo dažnų aparatinių saugumo problemų."
+"Įrenginys atitinka bazinius saugumo reikalavimus. Šis įrenginys turi apsaugą "
+"nuo daugumos saugumo problemų."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
@@ -1904,11 +1906,11 @@ msgstr "Apsaugota"
 #. the extended security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:144
 msgid ""
-"Device hardware meets security requirements. This device has protection "
-"against a range of the most common hardware security threats."
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
 msgstr ""
-"Įrenginys atitinka saugumo reikalavimus. Šis įrenginys turi apsaugą nuo "
-"daugumos aparatinių saugumo problemų."
+"Įrenginys atitinka dabartinius saugumo reikalavimus. Šis įrenginys turi "
+"apsaugą nuo daugumos saugumo grėsmių."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
@@ -2132,8 +2134,8 @@ msgid "Hardware does not pass checks."
 msgstr "Aparatūra praėjo patikrinimus."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:552
-msgid "Hardware meets security requirements."
-msgstr "Aparatūra atitinka saugos reikalavimus."
+msgid "Hardware meets basic security requirements."
+msgstr "Aparatūra atitinka bazinius saugos reikalavimus."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:561
 msgid "Hardware has a good level of protection."
@@ -2523,7 +2525,7 @@ msgstr "Įjungti arba išjungti didelį kontrastą"
 msgid "No input sources found"
 msgstr "Nerasta įvesties šaltinių"
 
-#: panels/keyboard/cc-input-chooser.c:931
+#: panels/keyboard/cc-input-chooser.c:968
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Kita"
@@ -2873,35 +2875,36 @@ msgstr ""
 "Trumpinys;Darbo sritis;Langas;Dydžio keitimas;Mastelis;Kontrastas;Įvestis;"
 "Šaltinis;Rakinimas;Garsas;"
 
-#: panels/location/cc-location-panel.ui:23
-msgid "Location Services Turned Off"
-msgstr "Vietos tarnybos išjungtos"
-
-#: panels/location/cc-location-panel.ui:24
-msgid "No sandboxed apps can obtain location information."
-msgstr "Jokia apribota programa negali gauti vietovės informacijos."
-
-#: panels/location/cc-location-panel.ui:38
+#: panels/location/cc-location-panel.ui:9
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
 "mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>\n"
-"\n"
-"The following sandboxed apps have been given access to location data. Apps "
-"that are not sandboxed can access location data without asking for "
-"permission."
+"</a>"
 msgstr ""
 "Vietovės tarnybos naudoja GPS, Wi-Fi ir mobilųjį ryšius apytiksliai "
 "įrenginio vietai nustatyti. <a href='https://location.services.mozilla.com/"
 "privacy'>Sužinokite daugiau apie renkamą informaciją ir kaip ji naudojama.</"
-"a>\n"
-"\n"
-"Šioms apribotoms programoms buvo suteikta prieiga prie vietovės "
-"informacijos. Neapribotos programos gali prieiti vietovės informaciją be "
-"leidimo."
+"a>"
 
-#: panels/location/cc-location-panel.ui:54
+#: panels/location/cc-location-panel.ui:12
+msgid "_Location Services"
+msgstr "_Vietos tarnybos"
+
+#: panels/location/cc-location-panel.ui:13
+msgid "Allow permitted apps to access location data"
+msgstr "Leisti programoms pasiekti vietovės informaciją"
+
+#: panels/location/cc-location-panel.ui:24
+msgid ""
+"The following sandboxed apps have been given access to location data. Apps "
+"that are not sandboxed can access location data without asking for "
+"permission."
+msgstr ""
+"Šioms apribotoms programoms suteiktas leidimas gauti vietovės informaciją. "
+"Neapribotos programos gali gauti vietovės informaciją be leidimo."
+
+#: panels/location/cc-location-panel.ui:38
 msgid "No sandboxed apps have asked for location access"
 msgstr "Jokia apribota programa neprašė prieigos prie vietovės informacijos"
 
@@ -2914,15 +2917,15 @@ msgstr "Valdykite prieigą prie savo buvimo vietos"
 msgid "location;gps;private;privacy;"
 msgstr "vieta;gps;privatus;privatumas;"
 
+#: panels/microphone/cc-microphone-panel.ui:11
+msgid "_Microphone Access"
+msgstr "_Mikrofono prieiga"
+
+#: panels/microphone/cc-microphone-panel.ui:12
+msgid "Allow permitted apps to use microphones"
+msgstr "Leisti programoms naudoti mikrofonus"
+
 #: panels/microphone/cc-microphone-panel.ui:23
-msgid "Microphone Turned Off"
-msgstr "Mikrofonas yra išjungtas"
-
-#: panels/microphone/cc-microphone-panel.ui:24
-msgid "No sandboxed apps can record sound."
-msgstr "Jokia apribota programa negali įrašyti garso."
-
-#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "The following sandboxed apps have been given permission to use microphones. "
 "Apps that are not sandboxed can use microphones without asking for "
@@ -2931,7 +2934,7 @@ msgstr ""
 "Šioms apribotoms programoms buvo suteiktas leidimas naudoti mikrofonus. "
 "Neapribotos programos gali naudoti mikrofonus neprašydamos leidimo."
 
-#: panels/microphone/cc-microphone-panel.ui:52
+#: panels/microphone/cc-microphone-panel.ui:38
 msgid "No sandboxed apps have asked for microphone access"
 msgstr "Jokia apribota programa neprašė prieigos prie mikrofono"
 
@@ -3401,13 +3404,17 @@ msgstr "Į_jungti"
 msgid "Wi-Fi"
 msgstr "Belaidis"
 
-#: panels/network/cc-wifi-panel.c:884
-msgid "Stop hotspot and disconnect any users?"
-msgstr "Stabdyti prieigos tašką ir atjungti visus naudotojus?"
+#: panels/network/cc-wifi-panel.c:883
+msgid "Turning off will disconnect any devices that are using the hotspot."
+msgstr "Išjungus atsijungs visi įrenginiai, kurie naudoja prieigos tašką"
 
-#: panels/network/cc-wifi-panel.c:887
-msgid "_Stop Hotspot"
-msgstr "_Stabdyti prieigos tašką"
+#: panels/network/cc-wifi-panel.c:885
+msgid "Turn Off Hotspot?"
+msgstr "Išjungti prieigos tašką?"
+
+#: panels/network/cc-wifi-panel.c:888
+msgid "_Turn Off"
+msgstr "Iš_jungti"
 
 #: panels/network/cc-wifi-panel.ui:75
 msgid "Airplane Mode"
@@ -3449,14 +3456,17 @@ msgstr "Išjungti belaidį prieigos tašką…"
 msgid "Visible Networks"
 msgstr "Matomi tinklai"
 
-#: panels/network/cc-wifi-panel.ui:241
-msgid "NetworkManager needs to be running"
-msgstr "NetworkManager turi būti paleistas"
+#: panels/network/cc-wifi-panel.ui:221
+msgid "Wi-Fi Unavailable"
+msgstr "Wi-Fi nepasiekiamas"
 
-#: panels/network/cc-wifi-panel.ui:247
-msgid "Oops, something has gone wrong. Please contact your software vendor."
+#: panels/network/cc-wifi-panel.ui:222
+msgid ""
+"An error has occurred and Wi-Fi cannot be used.\n"
+"Error details: NetworkManager not running."
 msgstr ""
-"Oi, atsitiko kažkas negero. Susisiekite su savo programinės įrangos tiekėju."
+"Kilo klaida ir Wi-Fi negali būti naudojamas.\n"
+"Klaidos informacija: NetworkManager neveikia."
 
 #: panels/network/connection-editor/8021x-security-page.ui:16
 msgid "802.1x _Security"
@@ -3675,21 +3685,21 @@ msgstr "automatinis"
 msgid "Identity"
 msgstr "Tapatybė"
 
-#: panels/network/connection-editor/ce-page-ip4.c:261
-#: panels/network/connection-editor/ce-page-ip6.c:242
+#: panels/network/connection-editor/ce-page-ip4.c:264
+#: panels/network/connection-editor/ce-page-ip6.c:245
 msgid "Delete Address"
 msgstr "Ištrinti adresą"
 
-#: panels/network/connection-editor/ce-page-ip4.c:420
-#: panels/network/connection-editor/ce-page-ip6.c:389
+#: panels/network/connection-editor/ce-page-ip4.c:423
+#: panels/network/connection-editor/ce-page-ip6.c:392
 msgid "Delete Route"
 msgstr "Ištrinti kelią"
 
-#: panels/network/connection-editor/ce-page-ip4.c:770
+#: panels/network/connection-editor/ce-page-ip4.c:774
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:740
+#: panels/network/connection-editor/ce-page-ip6.c:744
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -9184,7 +9194,7 @@ msgid "Cancel search"
 msgstr "Atšaukti paiešką"
 
 #. Translators: Search terms to find this app. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: shell/org.gnome.Settings.desktop.in:13
+#: shell/org.gnome.Settings.desktop.in:14
 msgid "Preferences;Settings;"
 msgstr "Nuostatos;Nustatymai;"
 
@@ -9243,6 +9253,46 @@ msgstr[2] "%u įvesčių"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistemos garsai"
+
+#~ msgid "Camera is Turned Off"
+#~ msgstr "Kamera išjungta"
+
+#~ msgid "No sandboxed apps can capture photos or video."
+#~ msgstr ""
+#~ "Jokia apribota programa negali daryti nuotraukų ar įrašinėti vaizdo įrašų."
+
+#~ msgid ""
+#~ "Hardware meets security requirements. This device has protection against "
+#~ "common hardware security threats."
+#~ msgstr ""
+#~ "Aparatinė įranga atitinka saugumo reikalavimus. Šis įrenginys turi "
+#~ "apsaugą nuo dažnų aparatinių saugumo problemų."
+
+#~ msgid "Location Services Turned Off"
+#~ msgstr "Vietos tarnybos išjungtos"
+
+#~ msgid "No sandboxed apps can obtain location information."
+#~ msgstr "Jokia apribota programa negali gauti vietovės informacijos."
+
+#~ msgid "Microphone Turned Off"
+#~ msgstr "Mikrofonas yra išjungtas"
+
+#~ msgid "No sandboxed apps can record sound."
+#~ msgstr "Jokia apribota programa negali įrašyti garso."
+
+#~ msgid "Stop hotspot and disconnect any users?"
+#~ msgstr "Stabdyti prieigos tašką ir atjungti visus naudotojus?"
+
+#~ msgid "_Stop Hotspot"
+#~ msgstr "_Stabdyti prieigos tašką"
+
+#~ msgid "NetworkManager needs to be running"
+#~ msgstr "NetworkManager turi būti paleistas"
+
+#~ msgid "Oops, something has gone wrong. Please contact your software vendor."
+#~ msgstr ""
+#~ "Oi, atsitiko kažkas negero. Susisiekite su savo programinės įrangos "
+#~ "tiekėju."
 
 #~ msgid "Protect your pictures"
 #~ msgstr "Apsaugokite savo paveikslėlius"
@@ -10232,9 +10282,6 @@ msgstr "Sistemos garsai"
 #~ msgid "Move down"
 #~ msgstr "Nuleisti"
 
-#~ msgid "Allow the applications below to use your microphone."
-#~ msgstr "Leisti žemiau nurodytoms programoms naudoti jūsų mikrofoną."
-
 #~ msgid "%s VPN"
 #~ msgstr "%s VPN"
 
@@ -10384,9 +10431,6 @@ msgstr "Sistemos garsai"
 
 #~ msgid "Open in Software"
 #~ msgstr "Atverti Programinėje įrangoje"
-
-#~ msgid "Allow the applications below to use your camera."
-#~ msgstr "Leisti žemiau nurodytoms programoms naudoti kamerą."
 
 #~ msgid "Display Mode"
 #~ msgstr "Rodymo veiksena"
@@ -10676,9 +10720,6 @@ msgstr "Sistemos garsai"
 
 #~ msgid "Left+Right Alt"
 #~ msgstr "Kairėn+dešinysis alt"
-
-#~ msgid "Universal Access"
-#~ msgstr "Universali prieiga"
 
 #~ msgid "Switch off to connect to a Wi-Fi network"
 #~ msgstr "Išjungti prisijungimui prie belaidžio tinklo"
@@ -11174,12 +11215,6 @@ msgstr "Sistemos garsai"
 #~ msgid "_Camera"
 #~ msgstr "_Kamera"
 
-#~ msgid "_Microphone"
-#~ msgstr "_Mikrofonas"
-
-#~ msgid "_Location Services"
-#~ msgstr "_Vietos tarnybos"
-
 #~ msgid "Protect your personal information and control what others might see"
 #~ msgstr "Apsaugokite asmeninę informaciją ir valdykite, ką kiti gali matyti"
 
@@ -11664,9 +11699,6 @@ msgstr "Sistemos garsai"
 
 #~ msgid "Show your existing view on both displays"
 #~ msgstr "Rodyti jūsų esamą vaizdą abiejuose vaizduokliuose"
-
-#~ msgid "Turn Off"
-#~ msgstr "Išjungti"
 
 #~ msgid "Don’t use this display"
 #~ msgstr "Nenaudoti šio vaizduoklio"
