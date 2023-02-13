@@ -417,27 +417,9 @@
                 <property name="hexpand">True</property>
                 <child>
                   <object class="GtkBox" id="hbox3">
-                    <property name="spacing">9</property>
                     <child>
-                      <object class="GtkLabel" id="label_intro">
-                        <property name="xalign">0</property>
-                        <property name="label" translatable="yes">Each device needs an up to date color profile to be color managed.</property>
-                        <property name="wrap">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="label_padding">
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLinkButton" id="linkbutton_help">
-                        <property name="label" translatable="yes">Learn more</property>
-                        <property name="has_tooltip">True</property>
-                        <property name="tooltip_text" translatable="yes">Learn more about color management</property>
-                        <property name="uri">help:gnome-help/color-whyimportant</property>
-                        <accessibility>
-                          <relation name="labelled-by">label_intro</relation>
-                        </accessibility>
+                      <object class="AdwPreferencesGroup">
+                        <property name="description" translatable="yes">Each device needs an up to date color profile to be color managed. &lt;a href='help:gnome-help/color-whyimportant'&gt;Learn more&lt;/a&gt;</property>
                       </object>
                     </child>
                   </object>
