@@ -10,26 +10,15 @@
 
             <!-- Hot Corner -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="CcIllustratedRow" id="hot_corner_row">
                 <property name="activatable-widget">hot_corner_switch</property>
                 <property name="title" translatable="yes">_Hot Corner</property>
                 <property name="subtitle" translatable="yes">Touch the top-left corner to open the Activities Overview.</property>
                 <property name="use_underline">True</property>
+                <property name="resource">/org/gnome/control-center/multitasking/assets/hot-corner.svg</property>
                 <child>
                   <object class="GtkSwitch" id="hot_corner_switch">
                     <property name="valign">center</property>
-                  </object>
-                </child>
-                <child type="artwork">
-                  <object class="GtkPicture" id="hot_corner_picture">
-                    <property name="hexpand">True</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">18</property>
-                    <property name="margin-bottom">18</property>
-                    <property name="margin-start">18</property>
-                    <property name="margin-end">18</property>
-                    <property name="can-shrink">False</property>
-                    <property name="file">resource:///org/gnome/control-center/multitasking/assets/hot-corner.svg</property>
                   </object>
                 </child>
               </object>
@@ -37,26 +26,15 @@
 
             <!-- Active Screen Edges -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="CcIllustratedRow" id="active_screen_edges_row">
                 <property name="activatable-widget">active_screen_edges_switch</property>
                 <property name="title" translatable="yes">_Active Screen Edges</property>
                 <property name="subtitle" translatable="yes">Drag windows against the top, left, and right screen edges to resize them.</property>
                 <property name="use_underline">True</property>
+                <property name="resource">/org/gnome/control-center/multitasking/assets/active-screen-edges.svg</property>
                 <child>
                   <object class="GtkSwitch" id="active_screen_edges_switch">
                     <property name="valign">center</property>
-                  </object>
-                </child>
-                <child type="artwork">
-                  <object class="GtkPicture" id="active_screen_edges_picture">
-                    <property name="hexpand">True</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">18</property>
-                    <property name="margin-bottom">18</property>
-                    <property name="margin-start">18</property>
-                    <property name="margin-end">18</property>
-                    <property name="can-shrink">False</property>
-                    <property name="file">resource:///org/gnome/control-center/multitasking/assets/active-screen-edges.svg</property>
                   </object>
                 </child>
               </object>
@@ -71,7 +49,7 @@
 
             <!-- Dynamic Workspaces -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="AdwActionRow">
                 <property name="activatable-widget">dynamic_workspaces_radio</property>
                 <property name="title" translatable="yes">_Dynamic workspaces</property>
                 <property name="subtitle" translatable="yes">Automatically removes empty workspaces.</property>
@@ -86,7 +64,7 @@
 
             <!-- Fixed Number of Workspaces -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="AdwActionRow">
                 <property name="activatable-widget">fixed_workspaces_radio</property>
                 <property name="title" translatable="yes">_Fixed number of workspaces</property>
                 <property name="subtitle" translatable="yes">Specify a number of permanent workspaces.</property>
@@ -102,7 +80,7 @@
 
             <!-- Number of Workspaces -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="AdwActionRow">
                 <property name="sensitive" bind-source="fixed_workspaces_radio" bind-property="active" bind-flags="default|sync-create" />
                 <property name="activatable-widget">number_of_workspaces_spin</property>
                 <property name="title" translatable="yes">_Number of Workspaces</property>
@@ -125,25 +103,14 @@
 
             <!-- Primary Display -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="CcIllustratedRow">
                 <property name="activatable-widget">workspaces_primary_display_radio</property>
                 <property name="title" translatable="yes">Workspaces on _primary display only</property>
                 <property name="use_underline">True</property>
+                <property name="resource">/org/gnome/control-center/multitasking/assets/workspaces-primary-display.svg</property>
                 <child type="prefix">
                   <object class="GtkCheckButton" id="workspaces_primary_display_radio">
                     <property name="valign">center</property>
-                  </object>
-                </child>
-                <child type="artwork">
-                  <object class="GtkPicture">
-                    <property name="hexpand">True</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">18</property>
-                    <property name="margin-bottom">18</property>
-                    <property name="margin-start">18</property>
-                    <property name="margin-end">18</property>
-                    <property name="can-shrink">False</property>
-                    <property name="file">resource:///org/gnome/control-center/multitasking/assets/workspaces-primary-display.svg</property>
                   </object>
                 </child>
               </object>
@@ -151,26 +118,15 @@
 
             <!-- Span Displays -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="CcIllustratedRow">
                 <property name="activatable-widget">workspaces_span_displays_radio</property>
                 <property name="title" translatable="yes">Workspaces on all d_isplays</property>
                 <property name="use_underline">True</property>
+                <property name="resource">/org/gnome/control-center/multitasking/assets/workspaces-span-displays.svg</property>
                 <child type="prefix">
                   <object class="GtkCheckButton" id="workspaces_span_displays_radio">
                     <property name="valign">center</property>
                     <property name="group">workspaces_primary_display_radio</property>
-                  </object>
-                </child>
-                <child type="artwork">
-                  <object class="GtkPicture">
-                    <property name="hexpand">True</property>
-                    <property name="halign">center</property>
-                    <property name="margin-top">18</property>
-                    <property name="margin-bottom">18</property>
-                    <property name="margin-start">18</property>
-                    <property name="margin-end">18</property>
-                    <property name="can-shrink">False</property>
-                    <property name="file">resource:///org/gnome/control-center/multitasking/assets/workspaces-span-displays.svg</property>
                   </object>
                 </child>
               </object>
@@ -185,7 +141,7 @@
 
             <!-- All Workspaces -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="AdwActionRow">
                 <property name="activatable-widget">all_workspaces_radio</property>
                 <property name="title" translatable="yes">Include apps from all _workspaces</property>
                 <property name="use_underline">True</property>
@@ -199,7 +155,7 @@
 
             <!-- Current Workspace -->
             <child>
-              <object class="CcMultitaskingRow">
+              <object class="AdwActionRow">
                 <property name="activatable-widget">current_workspace_radio</property>
                 <property name="title" translatable="yes">Include apps from the _current workspace only</property>
                 <property name="use_underline">True</property>

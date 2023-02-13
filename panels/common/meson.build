@@ -25,11 +25,13 @@ common_sources += gnome.mkenums(
 )
 
 resource_data = files(
+  'cc-illustrated-row.ui',
   'cc-language-chooser.ui',
   'cc-language-row.ui',
   'cc-list-row.ui',
   'cc-time-editor.ui',
   'cc-permission-infobar.ui',
+  'cc-vertical-row.ui',
 )
 
 common_sources += gnome.compile_resources(
@@ -63,11 +65,13 @@ libwidgets_dep = declare_dependency(
 
 sources = common_sources + files(
   'cc-common-language.c',
+  'cc-illustrated-row.c',
   'cc-language-chooser.c',
   'cc-language-row.c',
   'cc-list-row.c',
   'cc-time-editor.c',
   'cc-permission-infobar.c',
+  'cc-vertical-row.c',
   'cc-util.c'
 )
 

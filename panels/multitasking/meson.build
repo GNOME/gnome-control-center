@@ -12,7 +12,6 @@ i18n.merge_file(
 
 sources = files(
   'cc-multitasking-panel.c',
-  'cc-multitasking-row.c',
 )
 
 resource_data = files(

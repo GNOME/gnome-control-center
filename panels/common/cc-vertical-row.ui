@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <template class="CcMultitaskingRow" parent="AdwPreferencesRow">
+  <template class="CcVerticalRow" parent="AdwPreferencesRow">
     <property name="activatable">False</property>
     <accessibility>
       <relation name="labelled-by">title</relation>
@@ -45,7 +45,7 @@
                     <property name="ellipsize">end</property>
                     <property name="halign">start</property>
                     <property name="hexpand">True</property>
-                    <property name="label" bind-source="CcMultitaskingRow" bind-property="title" bind-flags="sync-create"/>
+                    <property name="label" bind-source="CcVerticalRow" bind-property="title" bind-flags="sync-create"/>
                     <property name="lines">1</property>
                     <property name="wrap">True</property>
                     <property name="wrap-mode">word-char</property>
@@ -82,15 +82,9 @@
         </child>
 
         <child>
-          <object class="GtkBox" id="artwork_box">
+          <object class="GtkBox" id="content_box">
             <property name="visible">False</property>
             <property name="hexpand">True</property>
-            <property name="margin-top">12</property>
-            <property name="margin-bottom">12</property>
-            <style>
-              <class name="frame" />
-              <class name="background" />
-            </style>
           </object>
         </child>
 
