@@ -31,6 +31,7 @@ resource_data = files(
   'cc-list-row.ui',
   'cc-time-editor.ui',
   'cc-permission-infobar.ui',
+  'cc-split-row.ui',
   'cc-vertical-row.ui',
 )
 
@@ -71,6 +72,7 @@ sources = common_sources + files(
   'cc-list-row.c',
   'cc-time-editor.c',
   'cc-permission-infobar.c',
+  'cc-split-row.c',
   'cc-vertical-row.c',
   'cc-util.c'
 )
