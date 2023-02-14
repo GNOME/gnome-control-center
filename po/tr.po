@@ -20,9 +20,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-10 13:43+0000\n"
-"PO-Revision-Date: 2023-02-10 19:19+0300\n"
-"Last-Translator: Sabri Ünal <libreajans@gmail.com>\n"
+"POT-Creation-Date: 2023-02-14 17:16+0000\n"
+"PO-Revision-Date: 2023-02-14 20:35+0300\n"
+"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>\n"
 "Language-Team: Turkish <gnome-turk@gnome.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -1162,7 +1162,7 @@ msgid "No languages found"
 msgstr "Dil bulunamadı"
 
 #: panels/common/cc-language-chooser.ui:69
-#: panels/keyboard/cc-input-chooser.c:173
+#: panels/keyboard/cc-input-chooser.c:175
 msgid "More…"
 msgstr "Daha çok…"
 
@@ -2512,11 +2512,11 @@ msgstr "Yazıyı küçült"
 msgid "High contrast on or off"
 msgstr "Yüksek karşıtlık açık ya da kapalı"
 
-#: panels/keyboard/cc-input-chooser.c:186
+#: panels/keyboard/cc-input-chooser.c:188
 msgid "No input sources found"
 msgstr "Girdi kaynağı bulunamadı"
 
-#: panels/keyboard/cc-input-chooser.c:968
+#: panels/keyboard/cc-input-chooser.c:993
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Diğer"
@@ -2943,95 +2943,141 @@ msgstr "Mikrofon erişimini kısıtla"
 msgid "microphone;recording;application;privacy;"
 msgstr "mikrofon;kayıt;kaydetme;uygulama;gizlilik;"
 
-#: panels/mouse/cc-mouse-panel.ui:9
+#: panels/mouse/cc-mouse-panel.ui:18
 msgid "Test _Settings"
 msgstr "_Ayarları Sına"
 
-#: panels/mouse/cc-mouse-panel.ui:23
+#: panels/mouse/cc-mouse-panel.ui:32 panels/mouse/cc-mouse-panel.ui:78
+msgid "Mouse"
+msgstr "Fare"
+
+#: panels/mouse/cc-mouse-panel.ui:39
 #: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "Genel"
 
-#: panels/mouse/cc-mouse-panel.ui:26
+#: panels/mouse/cc-mouse-panel.ui:42
 msgid "Primary Button"
 msgstr "Birincil Düğme"
 
-#: panels/mouse/cc-mouse-panel.ui:27
-msgid "Sets the order of physical buttons on mice and touchpads."
-msgstr ""
-"Fare ve dokunmatik yüzeyler üzerindeki fiziksel tuşların sırasını ayarlar."
+#: panels/mouse/cc-mouse-panel.ui:43
+msgid "Order of physical buttons on mice and touchpads."
+msgstr "Fare ve dokunmatik yüzeylerdeki fiziksel düğmelerin sırası."
 
-#: panels/mouse/cc-mouse-panel.ui:41
+#: panels/mouse/cc-mouse-panel.ui:57
 msgid "Left"
 msgstr "Sol"
 
-#: panels/mouse/cc-mouse-panel.ui:48
+#: panels/mouse/cc-mouse-panel.ui:64
 msgid "Right"
 msgstr "Sağ"
 
-#: panels/mouse/cc-mouse-panel.ui:62
-msgid "Mouse"
-msgstr "Fare"
+#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:86
+#: panels/mouse/cc-mouse-panel.ui:189
+msgid "Pointer Speed"
+msgstr "İmleç Hızı"
 
-#: panels/mouse/cc-mouse-panel.ui:65
-msgid "Mouse Speed"
-msgstr "Fare Hızı"
-
-#: panels/mouse/cc-mouse-panel.ui:70
-msgid "Mouse speed"
-msgstr "Fare hızı"
-
-#: panels/mouse/cc-mouse-panel.ui:73 panels/mouse/cc-mouse-panel.ui:149
+#: panels/mouse/cc-mouse-panel.ui:89 panels/mouse/cc-mouse-panel.ui:197
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Yavaş"
 
-#: panels/mouse/cc-mouse-panel.ui:75 panels/mouse/cc-mouse-panel.ui:151
+#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:199
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Hızlı"
 
-#. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
-#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:98
-#: panels/mouse/cc-mouse-panel.ui:126 panels/mouse/cc-mouse-panel.ui:133
-msgid "Natural Scrolling"
-msgstr "Doğal Kaydırma"
+#: panels/mouse/cc-mouse-panel.ui:107 panels/mouse/cc-mouse-panel.ui:142
+msgid "Pointer Assistance"
+msgstr "İmleç Yardımı"
 
-#: panels/mouse/cc-mouse-panel.ui:92 panels/mouse/cc-mouse-panel.ui:127
-msgid "Scrolling moves the content, not the view."
-msgstr "Kaydırma, görünümü değil içeriği hareket ettirir."
+#: panels/mouse/cc-mouse-panel.ui:108
+msgid "Recommended for most users and applications"
+msgstr "Çoğu kullanıcı ve uygulama için önerilir"
 
-#: panels/mouse/cc-mouse-panel.ui:109 panels/mouse/cc-mouse-panel.ui:112
-#: panels/mouse/cc-mouse-panel.ui:118
+#. Translators: Preserve the line-break separating the two paragraphs.
+#: panels/mouse/cc-mouse-panel.ui:128
+msgid ""
+"Turning pointer assistance off can allow faster and more precise movements, "
+"but can also make the mouse more difficult to use.\n"
+"\n"
+"Pointer assistance is also known as pointer acceleration."
+msgstr ""
+"İmleç yardımını kapatmak daha hızlı ve kusursuz hareketler sağlar ancak "
+"aynı zamanda farenin kullanımını zorlaştırır.\n"
+"\n"
+"İmleç yardımı, imleç hızlandırıcı olarak da bilinir."
+
+#: panels/mouse/cc-mouse-panel.ui:150 panels/mouse/cc-mouse-panel.ui:253
+msgid "Scroll Direction"
+msgstr "Kaydırma Yönü"
+
+#: panels/mouse/cc-mouse-panel.ui:151 panels/mouse/cc-mouse-panel.ui:254
+msgid "Traditional"
+msgstr "Geleneksel"
+
+#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:255
+msgid "Scrolling moves the view"
+msgstr "Kaydırma, görünümü oynatır"
+
+#: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:256
+msgid "Natural"
+msgstr "Doğal"
+
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:257
+msgid "Scrolling moves the content"
+msgstr "Kaydırma, içeriği oynatır"
+
+#: panels/mouse/cc-mouse-panel.ui:168 panels/mouse/cc-mouse-panel.ui:175
+#: panels/mouse/cc-mouse-panel.ui:181
 msgid "Touchpad"
 msgstr "Dokunmatik Yüzey"
 
-#: panels/mouse/cc-mouse-panel.ui:141
-msgid "Touchpad Speed"
-msgstr "Dokunmatik Yüzey Hızı"
+#: panels/mouse/cc-mouse-panel.ui:194
+msgid "Pointer speed"
+msgstr "İmleç hızı"
 
-#: panels/mouse/cc-mouse-panel.ui:146
-msgid "Touchpad speed"
-msgstr "Dokunmatik yüzey hızı"
+#: panels/mouse/cc-mouse-panel.ui:217
+msgid "Clicking"
+msgstr "Tıklama"
 
-#: panels/mouse/cc-mouse-panel.ui:168
+#: panels/mouse/cc-mouse-panel.ui:222
 msgid "Tap to Click"
 msgstr "Tıklamak için Dokun"
 
-#: panels/mouse/cc-mouse-panel.ui:174
+#: panels/mouse/cc-mouse-panel.ui:223
+msgid "Quickly touch the touchpad to click"
+msgstr "Tıklamak için dokunmatik yüzeye hızlıca dokun"
+
+#: panels/mouse/cc-mouse-panel.ui:229
 msgid "Tap to click"
 msgstr "Tıklamak için dokun"
 
-#: panels/mouse/cc-mouse-panel.ui:183 panels/mouse/cc-mouse-panel.ui:189
-msgid "Two-finger Scrolling"
-msgstr "İki Parmak Kaydırma"
+#: panels/mouse/cc-mouse-panel.ui:240
+msgid "Scrolling"
+msgstr "Kaydırma"
 
-#: panels/mouse/cc-mouse-panel.ui:199 panels/mouse/cc-mouse-panel.ui:205
-msgid "Edge Scrolling"
-msgstr "Kenar Kaydırma"
+#: panels/mouse/cc-mouse-panel.ui:243
+msgid "Scroll Method"
+msgstr "Kaydırma Yöntemi"
+
+#: panels/mouse/cc-mouse-panel.ui:244
+msgid "Two Finger"
+msgstr "Çift Parmak"
+
+#: panels/mouse/cc-mouse-panel.ui:245
+msgid "Drag two fingers on the touchpad"
+msgstr "Dokunmatik yüzeyde çift parmak kaydır"
+
+#: panels/mouse/cc-mouse-panel.ui:246
+msgid "Edge"
+msgstr "Kenar"
+
+#: panels/mouse/cc-mouse-panel.ui:247
+msgid "Drag one finger on the edge"
+msgstr "Kenarda tek parmak kaydır"
 
 #: panels/mouse/cc-mouse-test.c:131 panels/mouse/cc-mouse-test.ui:62
 msgid "Try clicking, double clicking, scrolling"
@@ -3090,60 +3136,60 @@ msgstr "_Sıcak Köşe"
 msgid "Touch the top-left corner to open the Activities Overview."
 msgstr "Etkinlikler Genel Görünümünü açmak için sol üst köşeye dokun."
 
-#: panels/multitasking/cc-multitasking-panel.ui:42
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "_Active Screen Edges"
 msgstr "_Etkin Ekran Köşeleri"
 
-#: panels/multitasking/cc-multitasking-panel.ui:43
+#: panels/multitasking/cc-multitasking-panel.ui:32
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them."
 msgstr "Pencereleri üste, sola ve sağa sürükleyerek yeniden boyutlandır."
 
-#: panels/multitasking/cc-multitasking-panel.ui:70
+#: panels/multitasking/cc-multitasking-panel.ui:48
 msgid "Workspaces"
 msgstr "Çalışma Alanları"
 
-#: panels/multitasking/cc-multitasking-panel.ui:76
+#: panels/multitasking/cc-multitasking-panel.ui:54
 msgid "_Dynamic workspaces"
 msgstr "_Dinamik çalışma alanları"
 
-#: panels/multitasking/cc-multitasking-panel.ui:77
+#: panels/multitasking/cc-multitasking-panel.ui:55
 msgid "Automatically removes empty workspaces."
 msgstr "Boş çalışma alanlarını kendiliğinden kaldırır."
 
-#: panels/multitasking/cc-multitasking-panel.ui:91
+#: panels/multitasking/cc-multitasking-panel.ui:69
 msgid "_Fixed number of workspaces"
 msgstr "_Belirli sayıda çalışma alanları"
 
-#: panels/multitasking/cc-multitasking-panel.ui:92
+#: panels/multitasking/cc-multitasking-panel.ui:70
 msgid "Specify a number of permanent workspaces."
 msgstr "Kalıcı çalışma alanı sayısını belirt."
 
-#: panels/multitasking/cc-multitasking-panel.ui:108
+#: panels/multitasking/cc-multitasking-panel.ui:86
 msgid "_Number of Workspaces"
 msgstr "Çalışma Alanı _Sayısı"
 
-#: panels/multitasking/cc-multitasking-panel.ui:124
+#: panels/multitasking/cc-multitasking-panel.ui:102
 msgid "Multi-Monitor"
 msgstr "Çoklu Monitör"
 
-#: panels/multitasking/cc-multitasking-panel.ui:130
+#: panels/multitasking/cc-multitasking-panel.ui:108
 msgid "Workspaces on _primary display only"
 msgstr "Çalışma alanları yalnızca _birincil ekranda"
 
-#: panels/multitasking/cc-multitasking-panel.ui:156
+#: panels/multitasking/cc-multitasking-panel.ui:123
 msgid "Workspaces on all d_isplays"
 msgstr "Çalışma alanları tüm _ekranlarda"
 
-#: panels/multitasking/cc-multitasking-panel.ui:184
+#: panels/multitasking/cc-multitasking-panel.ui:140
 msgid "App Switching"
 msgstr "Uygulama Geçişi"
 
-#: panels/multitasking/cc-multitasking-panel.ui:190
+#: panels/multitasking/cc-multitasking-panel.ui:146
 msgid "Include apps from all _workspaces"
 msgstr "Tüm _çalışma alanlarından uygulamaları içer"
 
-#: panels/multitasking/cc-multitasking-panel.ui:204
+#: panels/multitasking/cc-multitasking-panel.ui:160
 msgid "Include apps from the _current workspace only"
 msgstr "Yalnızca _geçerli çalışma alanından uygulamaları içer"
 
@@ -9224,6 +9270,21 @@ msgstr[0] "%u Girdi"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistem Sesleri"
+
+#~ msgid "Mouse speed"
+#~ msgstr "Fare hızı"
+
+#~ msgid "Natural Scrolling"
+#~ msgstr "Doğal Kaydırma"
+
+#~ msgid "Touchpad Speed"
+#~ msgstr "Dokunmatik Yüzey Hızı"
+
+#~ msgid "Touchpad speed"
+#~ msgstr "Dokunmatik yüzey hızı"
+
+#~ msgid "Two-finger Scrolling"
+#~ msgstr "İki Parmak Kaydırma"
 
 #~ msgid "NetworkManager needs to be running"
 #~ msgstr "NetworkManager’in çalışması gerekir"
