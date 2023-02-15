@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center-master-po-gl-72290.merged\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-14 18:15+0000\n"
-"PO-Revision-Date: 2023-02-14 20:56+0100\n"
+"POT-Creation-Date: 2023-02-14 22:15+0000\n"
+"PO-Revision-Date: 2023-02-15 12:08+0100\n"
 "Last-Translator: Fran Dieguez <frandieguez@gnome.org>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -363,11 +363,11 @@ msgstr "Seleccione unha imaxe"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:887
+#: panels/network/cc-wifi-panel.c:745
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
-#: panels/network/net-device-wifi.c:866
+#: panels/network/net-device-wifi.c:867
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
@@ -2705,7 +2705,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr ""
 "Métodos para introducir símbolos e variantes de letra usando o teclado."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:160
+#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:161
 msgid "Keyboard Shortcuts"
 msgstr "Atallos de teclado"
 
@@ -3045,7 +3045,7 @@ msgstr "Tradicional"
 
 #: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:255
 msgid "Scrolling moves the view"
-msgstr "O Desprazamento move a vista"
+msgstr "O desprazamento move a vista"
 
 #: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:256
 msgid "Natural"
@@ -3074,7 +3074,7 @@ msgstr "Tocar para facer clic"
 
 #: panels/mouse/cc-mouse-panel.ui:223
 msgid "Quickly touch the touchpad to click"
-msgstr "Tocar rapidamente a área táctil para clicar"
+msgstr "Toque rapidamente a área táctil para facer clic"
 
 #: panels/mouse/cc-mouse-panel.ui:229
 msgid "Tap to click"
@@ -3094,7 +3094,7 @@ msgstr "Dous dedos"
 
 #: panels/mouse/cc-mouse-panel.ui:245
 msgid "Drag two fingers on the touchpad"
-msgstr "Arrastrara dous dedos pola área táctil"
+msgstr "Arrastre dous dedos pola área táctil"
 
 #: panels/mouse/cc-mouse-panel.ui:246
 msgid "Edge"
@@ -3341,29 +3341,29 @@ msgid "Ignored Hosts"
 msgstr "Equipos ignorados"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:216
+#: panels/network/cc-wifi-connection-row.c:218
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:275
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Insecure network (WEP)"
 msgstr "Rede non segura (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:279
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network (WPA)"
 msgstr "Rede segura (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:286
 msgid "Secure network (WPA2)"
 msgstr "Rede segura (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:287
+#: panels/network/cc-wifi-connection-row.c:290
 msgid "Secure network (WPA3)"
 msgstr "Rede segura (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:291
+#: panels/network/cc-wifi-connection-row.c:294
 msgid "Secure network"
 msgstr "Rede segura"
 
@@ -3373,6 +3373,10 @@ msgid "Connected"
 msgstr "Conectado"
 
 #: panels/network/cc-wifi-connection-row.ui:62
+msgid "Show QR-Code"
+msgstr ""
+
+#: panels/network/cc-wifi-connection-row.ui:77
 #: panels/network/net-device-ethernet.c:325
 #: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
 #: panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
@@ -3441,23 +3445,23 @@ msgstr "Autoxerar un contrasinal"
 msgid "_Turn On"
 msgstr "_Activar"
 
-#: panels/network/cc-wifi-panel.c:549
+#: panels/network/cc-wifi-panel.c:407
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:66
 msgid "Wi-Fi"
 msgstr "Wifi"
 
-#: panels/network/cc-wifi-panel.c:883
+#: panels/network/cc-wifi-panel.c:741
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr ""
 "Ao apagar desconectarase calquera dispositivo que están usando o punto de "
 "acceso sen fíos."
 
-#: panels/network/cc-wifi-panel.c:885
+#: panels/network/cc-wifi-panel.c:743
 msgid "Turn Off Hotspot?"
 msgstr "Desexa apagar o punto de acceso sen fíos?"
 
-#: panels/network/cc-wifi-panel.c:888
+#: panels/network/cc-wifi-panel.c:746
 msgid "_Turn Off"
 msgstr "_Apagar"
 
@@ -3556,13 +3560,13 @@ msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:229
+#: panels/network/net-device-wifi.c:230
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:101
-#: panels/network/net-device-wifi.c:234
+#: panels/network/net-device-wifi.c:235
 msgid "WPA"
 msgstr "WPA"
 
@@ -3588,7 +3592,7 @@ msgid "Enterprise"
 msgstr "Empresarial"
 
 #: panels/network/connection-editor/ce-page-details.c:135
-#: panels/network/net-device-wifi.c:219
+#: panels/network/net-device-wifi.c:220
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ningunha"
@@ -4180,7 +4184,7 @@ msgstr "Con fíos"
 msgid "Add new connection"
 msgstr "Engadir nova conexión"
 
-#: panels/network/net-device-wifi.c:863
+#: panels/network/net-device-wifi.c:864
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -4188,25 +4192,25 @@ msgstr ""
 "Perderase a información das redes seleccionadas, incluíndo os contrasinais e "
 "calquera configuración personalizada."
 
-#: panels/network/net-device-wifi.c:867
+#: panels/network/net-device-wifi.c:868
 msgid "_Forget"
 msgstr "_Esquecer"
 
-#: panels/network/net-device-wifi.c:1048
+#: panels/network/net-device-wifi.c:1067
 msgid "Saved Wi-Fi Networks"
 msgstr "Redes Wifi gardadas"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1067
+#: panels/network/net-device-wifi.c:1086
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Esquecer"
 
-#: panels/network/net-device-wifi.c:1221
+#: panels/network/net-device-wifi.c:1244
 msgid "System policy prohibits use as a Hotspot"
 msgstr "A normativa do sistema prohibe o uso un «Hotspot»"
 
-#: panels/network/net-device-wifi.c:1224
+#: panels/network/net-device-wifi.c:1247
 msgid "Wireless device does not support Hotspot mode"
 msgstr "O dispositivo Wireless non é compatíbel co modo «Hotspot»"
 
@@ -9184,15 +9188,18 @@ msgstr "Paneis dispoñíbeis:"
 msgid "All Settings"
 msgstr "Todas as preferencias"
 
-#: shell/cc-window.ui:54
-msgid "Primary Menu"
-msgstr "Menú principal"
+#: shell/cc-window.ui:53 shell/cc-window.ui:55
+#, fuzzy
+#| msgctxt "Battery name"
+#| msgid "Main"
+msgid "Main Menu"
+msgstr "Principal"
 
-#: shell/cc-window.ui:152
+#: shell/cc-window.ui:153
 msgid "Warning: Development Version"
 msgstr "Aviso: versión para desenvolvemento"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:154
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9202,7 +9209,7 @@ msgstr ""
 "Pode experimentar un comportamento incorrecto do sistema, perda de datos e "
 "outros problemas inesperados. "
 
-#: shell/cc-window.ui:164
+#: shell/cc-window.ui:165
 msgid "Help"
 msgstr "Axuda"
 
@@ -9309,6 +9316,9 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "Primary Menu"
+#~ msgstr "Menú principal"
 
 #~ msgid "Mouse speed"
 #~ msgstr "Velocidade do rato"
