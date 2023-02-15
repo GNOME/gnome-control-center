@@ -22,8 +22,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-01-26 20:30+0000\n"
-"PO-Revision-Date: 2023-02-01 18:18+0100\n"
+"POT-Creation-Date: 2023-02-14 22:15+0000\n"
+"PO-Revision-Date: 2023-02-15 12:08+0100\n"
 "Last-Translator: Daniel Mustieles García <daniel.mustieles@gmail.com>\n"
 "Language-Team: Spanish - Spain <gnome-es-list@gnome.org>\n"
 "Language: es_ES\n"
@@ -104,6 +104,8 @@ msgid ""
 "%s requires access to the following system resources. To stop this access, "
 "the app must be removed."
 msgstr ""
+"%s necesita acceso a los siguientes recursos del sistema. Para revocar este "
+"acceso se debe quitar la aplicacion."
 
 #: panels/applications/cc-applications-panel.c:1192
 #, c-format
@@ -217,7 +219,7 @@ msgstr "Cambiar el fondo del escritorio."
 
 #: panels/applications/cc-applications-panel.ui:154
 #: panels/applications/cc-applications-panel.ui:161
-#: panels/sound/cc-sound-panel.ui:361
+#: panels/sound/cc-sound-panel.ui:352
 msgid "Sounds"
 msgstr "Sonidos"
 
@@ -239,7 +241,6 @@ msgstr "Bloquear los atajos estándar del teclado"
 
 #: panels/applications/cc-applications-panel.ui:175
 #: panels/applications/cc-applications-panel.ui:182
-#: panels/camera/gnome-camera-panel.desktop.in:3
 msgid "Camera"
 msgstr "Cámara"
 
@@ -250,7 +251,6 @@ msgstr "Hacer fotos con la cámara"
 
 #: panels/applications/cc-applications-panel.ui:189
 #: panels/applications/cc-applications-panel.ui:196
-#: panels/microphone/gnome-microphone-panel.desktop.in:3
 msgid "Microphone"
 msgstr "Micrófono"
 
@@ -284,7 +284,7 @@ msgid "File &amp; Link Associations"
 msgstr "Asociaciones de archivos y enlaces"
 
 #: panels/applications/cc-applications-panel.ui:239
-#: panels/applications/cc-applications-panel.ui:406
+#: panels/applications/cc-applications-panel.ui:412
 msgid "Storage"
 msgstr "Almacenamiento"
 
@@ -296,48 +296,48 @@ msgstr "No se han encontrado resultados"
 msgid "Try a different search"
 msgstr "Pruebe una búsqueda diferente"
 
-#: panels/applications/cc-applications-panel.ui:351
+#: panels/applications/cc-applications-panel.ui:355
 msgid "File & Link Associations"
 msgstr "Asociaciones de archivos y enlaces"
 
-#: panels/applications/cc-applications-panel.ui:374
+#: panels/applications/cc-applications-panel.ui:380
 msgid "File Types"
 msgstr "Tipos de archivos"
 
-#: panels/applications/cc-applications-panel.ui:380
+#: panels/applications/cc-applications-panel.ui:386
 msgid "Link Types"
 msgstr "Tipos de enlaces"
 
-#: panels/applications/cc-applications-panel.ui:390
+#: panels/applications/cc-applications-panel.ui:396
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:131
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:234
 #: panels/keyboard/cc-keyboard-shortcut-row.ui:25
 msgid "Reset"
 msgstr "Reiniciar"
 
-#: panels/applications/cc-applications-panel.ui:417
+#: panels/applications/cc-applications-panel.ui:423
 msgid "How much disk space this app is occupying with app data and caches."
 msgstr ""
 "Cuánto espacio en disco está usando esta aplicación incluyendo los datos de "
 "la aplicación y las cachés."
 
-#: panels/applications/cc-applications-panel.ui:420
+#: panels/applications/cc-applications-panel.ui:426
 msgid "App"
 msgstr "Aplicación"
 
-#: panels/applications/cc-applications-panel.ui:426
+#: panels/applications/cc-applications-panel.ui:432
 msgid "Data"
 msgstr "Datos"
 
-#: panels/applications/cc-applications-panel.ui:432
+#: panels/applications/cc-applications-panel.ui:438
 msgid "Cache"
 msgstr "Caché"
 
-#: panels/applications/cc-applications-panel.ui:438
+#: panels/applications/cc-applications-panel.ui:444
 msgid "<b>Total</b>"
 msgstr "<b>Total</b>"
 
-#: panels/applications/cc-applications-panel.ui:448
+#: panels/applications/cc-applications-panel.ui:454
 msgid "Clear Cache…"
 msgstr "Limpiar la caché…"
 
@@ -360,11 +360,11 @@ msgstr "Seleccionar una imagen"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:886
+#: panels/network/cc-wifi-panel.c:745
 #: panels/network/connection-editor/connection-editor.ui:14
-#: panels/network/connection-editor/vpn-helpers.c:226
-#: panels/network/connection-editor/vpn-helpers.c:346
-#: panels/network/net-device-wifi.c:866
+#: panels/network/connection-editor/vpn-helpers.c:215
+#: panels/network/connection-editor/vpn-helpers.c:334
+#: panels/network/net-device-wifi.c:867
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
@@ -385,7 +385,7 @@ msgid "_Cancel"
 msgstr "_Cancelar"
 
 #: panels/background/cc-background-chooser.c:316
-#: panels/network/connection-editor/vpn-helpers.c:227
+#: panels/network/connection-editor/vpn-helpers.c:216
 #: panels/printers/pp-details-dialog.c:270
 #: panels/sharing/cc-sharing-panel.c:480
 #: panels/user-accounts/cc-avatar-chooser.c:168
@@ -446,11 +446,10 @@ msgid "Background;Wallpaper;Screen;Desktop;Style;Light;Dark;Appearance;"
 msgstr ""
 "Fondo;Pantalla;Escritorio;Estilo;Oscuro;Claro;Estilo;Oscuro;Claro;Apariencia;"
 
-#: panels/bluetooth/cc-bluetooth-panel.ui:11 panels/camera/cc-camera-panel.ui:8
+#: panels/bluetooth/cc-bluetooth-panel.ui:11
 #: panels/datetime/cc-datetime-panel.ui:130
 #: panels/diagnostics/cc-diagnostics-panel.ui:18
 #: panels/display/cc-night-light-page.ui:124
-#: panels/microphone/cc-microphone-panel.ui:9
 msgid "Enable"
 msgstr "Activar"
 
@@ -506,29 +505,38 @@ msgstr "Activar y desactivar Bluetooth y conectar sus dispositivos"
 msgid "share;sharing;bluetooth;obex;"
 msgstr "compartir;compartición;bluetooth;obex;"
 
-#: panels/camera/cc-camera-panel.ui:24
-msgid "Camera is Turned Off"
-msgstr "La cámara está apagada"
+#: panels/camera/cc-camera-panel.ui:11
+msgid "_Camera Access"
+msgstr "Acceso a la _cámara"
 
-#: panels/camera/cc-camera-panel.ui:25
-msgid "No sandboxed apps can capture photos or video."
-msgstr "Ninguna aplicación aislada puede capturar fotos o vídeo."
+#: panels/camera/cc-camera-panel.ui:12
+msgid "Allow permitted apps to use cameras"
+msgstr "Permitir a las aplicaciones autorizadas usar las cámaras"
 
-#: panels/camera/cc-camera-panel.ui:39
+#: panels/camera/cc-camera-panel.ui:22 panels/location/cc-location-panel.ui:23
+#: panels/microphone/cc-microphone-panel.ui:22
+msgid "Permitted Apps"
+msgstr "Aplicaciones permitidas"
+
+#: panels/camera/cc-camera-panel.ui:23
 msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
 msgstr ""
 
-#: panels/camera/cc-camera-panel.ui:53
+#: panels/camera/cc-camera-panel.ui:37
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Ninguna aplicación aislada ha solicitado acceso a la cámara"
 
-#: panels/camera/gnome-camera-panel.desktop.in:4
-msgid "Protect your pictures"
-msgstr "Proteger sus imágenes"
+#: panels/camera/gnome-camera-panel.desktop.in:3
+msgid "Cameras"
+msgstr "Cámaras"
 
-#. Translators: Search terms to find the Camera panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#: panels/camera/gnome-camera-panel.desktop.in:4
+msgid "Restrict camera access"
+msgstr "Restringir el acceso a la cámara"
+
+#. Translators: Search terms to find the Cameras panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/camera/gnome-camera-panel.desktop.in:16
 msgid "camera;photos;video;webcam;lock;private;privacy;"
 msgstr "cámara;fotos;vídeo;webcam;web;bloqueo;privado;privacidad;"
@@ -736,7 +744,7 @@ msgid "Save Profile"
 msgstr "Guardar perfil"
 
 #: panels/color/cc-color-panel.c:845
-#: panels/network/connection-editor/vpn-helpers.c:347
+#: panels/network/connection-editor/vpn-helpers.c:335
 #: panels/wwan/cc-wwan-apn-dialog.ui:43
 msgid "_Save"
 msgstr "_Guardar"
@@ -906,7 +914,7 @@ msgstr "_Importar archivo…"
 
 #: panels/color/cc-color-panel.ui:390 panels/keyboard/cc-input-chooser.ui:18
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:41
-#: panels/network/connection-editor/net-connection-editor.c:591
+#: panels/network/connection-editor/net-connection-editor.c:620
 #: panels/printers/new-printer-dialog.ui:87
 #: panels/user-accounts/cc-add-user-dialog.ui:39
 msgid "_Add"
@@ -1164,7 +1172,7 @@ msgid "No languages found"
 msgstr "No se han encontrado idiomas"
 
 #: panels/common/cc-language-chooser.ui:69
-#: panels/keyboard/cc-input-chooser.c:173
+#: panels/keyboard/cc-input-chooser.c:175
 msgid "More…"
 msgstr "Más…"
 
@@ -1201,12 +1209,12 @@ msgid "Decrement Minute"
 msgstr "Reducir minuto"
 
 #: panels/common/cc-util.c:127
-#: panels/network/connection-editor/ce-page-details.c:168
+#: panels/network/connection-editor/ce-page-details.c:167
 msgid "Today"
 msgstr "Hoy"
 
 #: panels/common/cc-util.c:131
-#: panels/network/connection-editor/ce-page-details.c:170
+#: panels/network/connection-editor/ce-page-details.c:169
 msgid "Yesterday"
 msgstr "Ayer"
 
@@ -1372,9 +1380,8 @@ msgstr "Requiere activar los servicios de ubicación y el acceso a Internet"
 #: panels/display/cc-display-settings.ui:23
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
-#: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
-#: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
-#: panels/user-accounts/cc-user-panel.c:818
+#: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
 #: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
@@ -1531,8 +1538,8 @@ msgid "Diagnostics"
 msgstr "Diagnósticos"
 
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in:4
-msgid "Report your problems"
-msgstr "Informar de problemas"
+msgid "Settings for automatically problem reporting"
+msgstr "Configuración para informar de un problema automáticamente"
 
 #. Translators: Search terms to find the Diagnostics panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in:16
@@ -1632,7 +1639,7 @@ msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Horizontal (dada la vuelta)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:180
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -1884,17 +1891,12 @@ msgstr "comprobaciones realizadas correctamente"
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:130
-#, fuzzy
-#| msgid ""
-#| "This device has basic protection against hardware security issues. This "
-#| "provides protection against some common security threats."
 msgid ""
-"Hardware meets security requirements. This device has protection against "
-"common hardware security threats."
+"This device meets basic security requirements. Its hardware has protection "
+"against some of the most common security threats."
 msgstr ""
-"Este dispositivo tiene protección básica contra problemas de seguridad de "
-"hardware. Esto proporciona protección contra algunas amenazas de seguridad "
-"comunes."
+"Este dispositivo cumple los requisitos de protección básica. Este hardware "
+"tiene protección contra algunas de las amenazas de seguridad más comunes."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
@@ -1910,8 +1912,8 @@ msgstr "Protegido"
 #| "This device has basic protection against hardware security issues. This "
 #| "provides protection against some common security threats."
 msgid ""
-"Device hardware meets security requirements. This device has protection "
-"against a range of the most common hardware security threats."
+"This device passes current security tests. Its hardware is protected against "
+"the majority of security threats."
 msgstr ""
 "Este dispositivo tiene protección básica contra problemas de seguridad de "
 "hardware. Esto proporciona protección contra algunas amenazas de seguridad "
@@ -1943,10 +1945,8 @@ msgid "Unknown"
 msgstr "Desconocido"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:270
-#, fuzzy
-#| msgid "Device Security"
 msgid "Device Security Report"
-msgstr "Seguridad del dispositivo"
+msgstr "Informe de seguridad del dispositivo"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:273
 msgid "Report details"
@@ -1954,7 +1954,7 @@ msgstr "Detalles del informe"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:277
 msgid "Date generated:"
-msgstr ""
+msgstr "Fecha generada:"
 
 #. TRANSLATOR: This is the title for showing the version of fwupd service.
 #: panels/firmware-security/cc-firmware-security-dialog.c:285
@@ -1987,7 +1987,7 @@ msgstr "Pruebas"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:348
 msgid "Runtime Tests"
-msgstr ""
+msgstr "Pruebas de tiempo de ejecución"
 
 #. Passed
 #. TRANSLATOR: If the status for security attribute is success, "Pass " is shown.
@@ -2016,10 +2016,8 @@ msgid ""
 msgstr ""
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:395
-#, fuzzy
-#| msgid "Copy a screenshot to clipboard"
 msgid "Report copied to clipboard"
-msgstr "Copiar una captura de pantalla al portapapeles"
+msgstr "Informe copiado al portapapeles"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:22
 msgid "Device Security Status"
@@ -2128,31 +2126,27 @@ msgstr "(%1$s → %2$s)"
 
 #: panels/firmware-security/cc-firmware-security-panel.c:545
 msgid "Hardware does not pass checks."
-msgstr ""
+msgstr "El hardware no ha superado las pruebas."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:552
-msgid "Hardware meets security requirements."
-msgstr ""
+msgid "Hardware meets basic security requirements."
+msgstr "El hardware cumple los requisitos básicos de seguridad."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:561
 msgid "Hardware has a good level of protection."
-msgstr ""
+msgstr "El hardware tiene un buen nivel de protección."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:568
 msgid "Security levels are not available for this device."
 msgstr "Los niveles de seguridad no están disponibles para este dispositivo."
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:50
-#, fuzzy
-#| msgid "Device Security"
 msgid "Starting Device Security…"
-msgstr "Seguridad del dispositivo"
+msgstr "Iniciando seguridad del dispositivo…"
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:76
-#, fuzzy
-#| msgid "Device Security"
 msgid "Device Security Unavailable"
-msgstr "Seguridad del dispositivo"
+msgstr "Seguridad del dispositivo no disponible"
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:78
 msgid ""
@@ -2238,8 +2232,8 @@ msgid "Device Security"
 msgstr "Seguridad del dispositivo"
 
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in:4
-msgid "Host firmware security status"
-msgstr "Estado de la seguridad del firmware del equipo"
+msgid "Protection against hardware security threats"
+msgstr "Protección contra amenazas de seguridad hardware."
 
 #. Translators: Search terms to find the Privacy panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in:16
@@ -2520,11 +2514,11 @@ msgstr "Reducir el tamaño del texto:"
 msgid "High contrast on or off"
 msgstr "Contraste alto activado o desactivado"
 
-#: panels/keyboard/cc-input-chooser.c:186
+#: panels/keyboard/cc-input-chooser.c:188
 msgid "No input sources found"
 msgstr "No se han encontrado fuentes de entrada"
 
-#: panels/keyboard/cc-input-chooser.c:931
+#: panels/keyboard/cc-input-chooser.c:993
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Otra"
@@ -2692,7 +2686,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr ""
 "Métodos para introducir símbolos y variantes de letras usando el teclado."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:160
+#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:161
 msgid "Keyboard Shortcuts"
 msgstr "Atajos del teclado"
 
@@ -2761,13 +2755,11 @@ msgstr "Añadir atajo"
 
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
-#, fuzzy, c-format
-#| msgid ""
-#| "%s is already being used for %s. If you replace it, %s will be disabled"
+#, c-format
 msgid ""
 "<b>%s</b> is already being used for %s. If you replace it, %s will be "
 "disabled"
-msgstr "%s ya está en uso por %s. Si lo reemplaza, %s se desactivará"
+msgstr "<b>%s</b> ya está en uso por %s. Si lo reemplaza, %s se desactivará"
 
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:533
 msgid "Enter the new shortcut"
@@ -2871,207 +2863,226 @@ msgstr ""
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
-#, fuzzy
-#| msgid ""
-#| "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 "Hotkey;"
 msgstr ""
 "atajo;área;trabajo;ventana:redimensionar;ampliación;contraste;fuente;entrada;"
-"bloqueo;volumen;"
+"bloqueo;volumen;tecla;rápida;"
 
-#: panels/location/cc-location-panel.ui:23
-msgid "Location Services Turned Off"
-msgstr "Servicios de ubicación apagados"
-
-#: panels/location/cc-location-panel.ui:24
-#, fuzzy
-#| msgid "No applications can obtain location information."
-msgid "No sandboxed apps can obtain location information."
-msgstr "Ninguna aplicación puede obtener información sobre la ubicación."
-
-#: panels/location/cc-location-panel.ui:38
+#: panels/location/cc-location-panel.ui:9
 msgid ""
 "Location services use GPS, Wi-Fi and cellular connections to determine the "
 "approximate location of this device. <a href='https://location.services."
 "mozilla.com/privacy'>Learn about what data is collected, and how it is used."
-"</a>\n"
-"\n"
+"</a>"
+msgstr ""
+
+#: panels/location/cc-location-panel.ui:12
+msgid "_Location Services"
+msgstr "Servicios de ubicación"
+
+#: panels/location/cc-location-panel.ui:13
+msgid "Allow permitted apps to access location data"
+msgstr ""
+
+#: panels/location/cc-location-panel.ui:24
+msgid ""
 "The following sandboxed apps have been given access to location data. Apps "
 "that are not sandboxed can access location data without asking for "
 "permission."
 msgstr ""
 
-#: panels/location/cc-location-panel.ui:54
-#, fuzzy
-#| msgid "No Applications Have Asked for Location Access"
+#: panels/location/cc-location-panel.ui:38
 msgid "No sandboxed apps have asked for location access"
-msgstr "Ninguna aplicación ha solicitado acceso a su ubicación"
+msgstr "Ninguna aplicación aislada ha solicitado acceso a su ubicación"
 
 #: panels/location/gnome-location-panel.desktop.in:4
-msgid "Protect your location information"
-msgstr "Proteger la información sobre su ubicación"
+msgid "Control access to your location"
+msgstr "Controlar el acceso a su ubicación"
 
 #. Translators: Search terms to find the Location panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/location/gnome-location-panel.desktop.in:16
 msgid "location;gps;private;privacy;"
 msgstr "ubicación;gps;privado;privacidad;"
 
+#: panels/microphone/cc-microphone-panel.ui:11
+msgid "_Microphone Access"
+msgstr "Acceso al _micrófono"
+
+#: panels/microphone/cc-microphone-panel.ui:12
+msgid "Allow permitted apps to use microphones"
+msgstr "Permitir a las aplicaciones autorizadas usar los micrófonos"
+
 #: panels/microphone/cc-microphone-panel.ui:23
-msgid "Microphone Turned Off"
-msgstr "Micrófono está apagado"
-
-#: panels/microphone/cc-microphone-panel.ui:24
-#, fuzzy
-#| msgid "No applications can record sound."
-msgid "No sandboxed apps can record sound."
-msgstr "Ninguna aplicación puede grabar sonidos."
-
-#: panels/microphone/cc-microphone-panel.ui:37
 msgid ""
 "The following sandboxed apps have been given permission to use microphones. "
 "Apps that are not sandboxed can use microphones without asking for "
 "permission."
 msgstr ""
 
-#: panels/microphone/cc-microphone-panel.ui:52
-#, fuzzy
-#| msgid "No Applications Have Asked for Microphone Access"
+#: panels/microphone/cc-microphone-panel.ui:38
 msgid "No sandboxed apps have asked for microphone access"
-msgstr "Ninguna aplicación ha solicitado acceso al micrófono"
+msgstr "Ninguna aplicación aislada ha solicitado acceso al micrófono"
+
+#: panels/microphone/gnome-microphone-panel.desktop.in:3
+msgid "Microphones"
+msgstr "Micrófonos"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in:4
-msgid "Protect your conversations"
-msgstr "Proteger sus conversaciones"
+msgid "Restrict microphone access"
+msgstr "Restringir el acceso al micrófono"
 
-#. Translators: Search terms to find the Microphone panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
+#. Translators: Search terms to find the Microphones panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/microphone/gnome-microphone-panel.desktop.in:16
 msgid "microphone;recording;application;privacy;"
 msgstr "micrófono;grabación;privado;privacidad;"
 
-#: panels/mouse/cc-mouse-panel.ui:9
+#: panels/mouse/cc-mouse-panel.ui:18
 msgid "Test _Settings"
 msgstr "_Probar la configuración"
 
-#: panels/mouse/cc-mouse-panel.ui:23
+#: panels/mouse/cc-mouse-panel.ui:32 panels/mouse/cc-mouse-panel.ui:78
+msgid "Mouse"
+msgstr "Ratón"
+
+#: panels/mouse/cc-mouse-panel.ui:39
 #: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "General"
 
-#: panels/mouse/cc-mouse-panel.ui:26
+#: panels/mouse/cc-mouse-panel.ui:42
 msgid "Primary Button"
 msgstr "Botón primario"
 
-#: panels/mouse/cc-mouse-panel.ui:27
-msgid "Sets the order of physical buttons on mice and touchpads."
-msgstr ""
-"Establece el orden de los botones físicos en ratones y paneles táctiles."
+#: panels/mouse/cc-mouse-panel.ui:43
+msgid "Order of physical buttons on mice and touchpads."
+msgstr "Orden de los botones físicos en ratones y paneles táctiles."
 
-#: panels/mouse/cc-mouse-panel.ui:41
+#: panels/mouse/cc-mouse-panel.ui:57
 msgid "Left"
 msgstr "Izquierda"
 
-#: panels/mouse/cc-mouse-panel.ui:48
+#: panels/mouse/cc-mouse-panel.ui:64
 msgid "Right"
 msgstr "Derecha"
 
-#: panels/mouse/cc-mouse-panel.ui:62
-msgid "Mouse"
-msgstr "Ratón"
+#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:86
+#: panels/mouse/cc-mouse-panel.ui:189
+msgid "Pointer Speed"
+msgstr "Velocidad del puntero"
 
-#: panels/mouse/cc-mouse-panel.ui:65
-msgid "Mouse Speed"
-msgstr "Velocidad del ratón"
-
-#: panels/mouse/cc-mouse-panel.ui:70
-msgid "Mouse speed"
-msgstr "Velocidad del ratón"
-
-#: panels/mouse/cc-mouse-panel.ui:73 panels/mouse/cc-mouse-panel.ui:149
+#: panels/mouse/cc-mouse-panel.ui:89 panels/mouse/cc-mouse-panel.ui:197
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Lento"
 
-#: panels/mouse/cc-mouse-panel.ui:75 panels/mouse/cc-mouse-panel.ui:151
+#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:199
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Rápido"
 
-#. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
-#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:98
-#: panels/mouse/cc-mouse-panel.ui:126 panels/mouse/cc-mouse-panel.ui:133
-msgid "Natural Scrolling"
-msgstr "Desplazamiento natural"
+#: panels/mouse/cc-mouse-panel.ui:107 panels/mouse/cc-mouse-panel.ui:142
+msgid "Pointer Assistance"
+msgstr "Asistencia del puntero"
 
-#: panels/mouse/cc-mouse-panel.ui:92 panels/mouse/cc-mouse-panel.ui:127
-msgid "Scrolling moves the content, not the view."
-msgstr "El desplazamiento mueve la vista, no el contenido."
+#: panels/mouse/cc-mouse-panel.ui:108
+#, fuzzy
+#| msgid "Read system and application logs"
+msgid "Recommended for most users and applications"
+msgstr "Leer registros del sistema y de aplicaciones"
 
-#: panels/mouse/cc-mouse-panel.ui:109 panels/mouse/cc-mouse-panel.ui:112
-#: panels/mouse/cc-mouse-panel.ui:118
+#. Translators: Preserve the line-break separating the two paragraphs.
+#: panels/mouse/cc-mouse-panel.ui:128
+msgid ""
+"Turning pointer assistance off can allow faster and more precise movements, "
+"but can also make the mouse more difficult to use.\n"
+"\n"
+"Pointer assistance is also known as pointer acceleration."
+msgstr ""
+
+#: panels/mouse/cc-mouse-panel.ui:150 panels/mouse/cc-mouse-panel.ui:253
+msgid "Scroll Direction"
+msgstr "Dirección del desplazamiento"
+
+#: panels/mouse/cc-mouse-panel.ui:151 panels/mouse/cc-mouse-panel.ui:254
+msgid "Traditional"
+msgstr "Tradicional"
+
+#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:255
+msgid "Scrolling moves the view"
+msgstr "El desplazamiento mueve la vista"
+
+#: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:256
+msgid "Natural"
+msgstr "Natural"
+
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:257
+msgid "Scrolling moves the content"
+msgstr "El desplazamiento mueve el contenido"
+
+#: panels/mouse/cc-mouse-panel.ui:168 panels/mouse/cc-mouse-panel.ui:175
+#: panels/mouse/cc-mouse-panel.ui:181
 msgid "Touchpad"
 msgstr "Panel táctil"
 
-#: panels/mouse/cc-mouse-panel.ui:141
-msgid "Touchpad Speed"
-msgstr "Velocidad del panel táctil"
+#: panels/mouse/cc-mouse-panel.ui:194
+msgid "Pointer speed"
+msgstr "Velocidad del puntero"
 
-#: panels/mouse/cc-mouse-panel.ui:146
-msgid "Touchpad speed"
-msgstr "Velocidad del panel táctil"
+#: panels/mouse/cc-mouse-panel.ui:217
+msgid "Clicking"
+msgstr "Pulsacioń"
 
-#: panels/mouse/cc-mouse-panel.ui:168
+#: panels/mouse/cc-mouse-panel.ui:222
 msgid "Tap to Click"
 msgstr "Tocar para pulsar"
 
-#: panels/mouse/cc-mouse-panel.ui:174
+#: panels/mouse/cc-mouse-panel.ui:223
+msgid "Quickly touch the touchpad to click"
+msgstr ""
+
+#: panels/mouse/cc-mouse-panel.ui:229
 msgid "Tap to click"
 msgstr "Tocar para pulsar"
 
-#: panels/mouse/cc-mouse-panel.ui:183 panels/mouse/cc-mouse-panel.ui:189
-msgid "Two-finger Scrolling"
-msgstr "Desplazamiento con dos dedos"
+#: panels/mouse/cc-mouse-panel.ui:240
+msgid "Scrolling"
+msgstr "Desplazamiento"
 
-#: panels/mouse/cc-mouse-panel.ui:199 panels/mouse/cc-mouse-panel.ui:205
-msgid "Edge Scrolling"
-msgstr "Desplazamiento en el borde"
+#: panels/mouse/cc-mouse-panel.ui:243
+msgid "Scroll Method"
+msgstr "Método de desplazamiento"
 
-#: panels/mouse/cc-mouse-test.c:131 panels/mouse/cc-mouse-test.ui:62
-msgid "Try clicking, double clicking, scrolling"
-msgstr ""
-"Pruebe a pulsar una vez, dos veces o a desplazarse con la rueda del ratón"
+#: panels/mouse/cc-mouse-panel.ui:244
+msgid "Two Finger"
+msgstr "Dos dedos"
 
-#: panels/mouse/cc-mouse-test.c:136
-msgid "Five clicks, GEGL time!"
-msgstr "Cinco pulsaciones, es tiempo de GEGL."
+#: panels/mouse/cc-mouse-panel.ui:245
+msgid "Drag two fingers on the touchpad"
+msgstr "Arrastre dos dedos sobre el panel táctil"
 
-#: panels/mouse/cc-mouse-test.c:141
-msgid "Double click, primary button"
-msgstr "Doble pulsación, botón primario"
+#: panels/mouse/cc-mouse-panel.ui:246
+msgid "Edge"
+msgstr "Borde"
 
-#: panels/mouse/cc-mouse-test.c:141
-msgid "Single click, primary button"
-msgstr "Una sola pulsación, botón primario"
+#: panels/mouse/cc-mouse-panel.ui:247
+msgid "Drag one finger on the edge"
+msgstr "Arrastre un dedo por el borde"
 
-#: panels/mouse/cc-mouse-test.c:144
-msgid "Double click, middle button"
-msgstr "Doble pulsación, botón central"
+#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:98
+msgid "Single Click"
+msgstr "Una sola pulsación"
 
-#: panels/mouse/cc-mouse-test.c:144
-msgid "Single click, middle button"
-msgstr "Una sola pulsación, botón central"
+#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:112
+msgid "Double Click"
+msgstr "Pulsación doble"
 
-#: panels/mouse/cc-mouse-test.c:147
-msgid "Double click, secondary button"
-msgstr "Doble pulsación, botón secundario"
-
-#: panels/mouse/cc-mouse-test.c:147
-msgid "Single click, secondary button"
-msgstr "Una sola pulsación, botón secundario"
+#: panels/mouse/cc-mouse-test.ui:26
+msgid "Test Mouse & Touchpad"
+msgstr "Probar el ratón y el panel táctil"
 
 #: panels/mouse/gnome-mouse-panel.desktop.in:3
 msgid "Mouse & Touchpad"
@@ -3098,64 +3109,62 @@ msgstr "_Esquina activa"
 msgid "Touch the top-left corner to open the Activities Overview."
 msgstr "Toque la esquina superior izquierda para abrir la vista de Actividades"
 
-#: panels/multitasking/cc-multitasking-panel.ui:42
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "_Active Screen Edges"
 msgstr "_Activar bordes de la pantalla"
 
-#: panels/multitasking/cc-multitasking-panel.ui:43
+#: panels/multitasking/cc-multitasking-panel.ui:32
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them."
 msgstr ""
 "Arrastre ventanas a los bordes superior, izquierdo y derecho para "
 "redimensionarlas."
 
-#: panels/multitasking/cc-multitasking-panel.ui:70
+#: panels/multitasking/cc-multitasking-panel.ui:48
 msgid "Workspaces"
 msgstr "Áreas de trabajo"
 
-#: panels/multitasking/cc-multitasking-panel.ui:76
+#: panels/multitasking/cc-multitasking-panel.ui:54
 msgid "_Dynamic workspaces"
 msgstr "Áreas de trabajo _dinámicas"
 
-#: panels/multitasking/cc-multitasking-panel.ui:77
+#: panels/multitasking/cc-multitasking-panel.ui:55
 msgid "Automatically removes empty workspaces."
 msgstr "Quita las áreas de trabajo vacías automáticamente"
 
-#: panels/multitasking/cc-multitasking-panel.ui:91
+#: panels/multitasking/cc-multitasking-panel.ui:69
 msgid "_Fixed number of workspaces"
 msgstr "Número _fijo de áreas de trabajo"
 
-#: panels/multitasking/cc-multitasking-panel.ui:92
+#: panels/multitasking/cc-multitasking-panel.ui:70
 msgid "Specify a number of permanent workspaces."
 msgstr "Especifique un número de áreas de trabajo permanentes."
 
-#: panels/multitasking/cc-multitasking-panel.ui:108
+#: panels/multitasking/cc-multitasking-panel.ui:86
 msgid "_Number of Workspaces"
 msgstr "_Número de áreas de trabajo"
 
-#: panels/multitasking/cc-multitasking-panel.ui:124
+#: panels/multitasking/cc-multitasking-panel.ui:102
 msgid "Multi-Monitor"
 msgstr "Multi-pantalla"
 
-#: panels/multitasking/cc-multitasking-panel.ui:130
+#: panels/multitasking/cc-multitasking-panel.ui:108
 msgid "Workspaces on _primary display only"
 msgstr "Áreas de trabajo sólo en la pantalla _primaria"
 
-#: panels/multitasking/cc-multitasking-panel.ui:156
+#: panels/multitasking/cc-multitasking-panel.ui:123
 msgid "Workspaces on all d_isplays"
 msgstr "Áreas de trabajo en todas las pa_ntallas"
 
-#: panels/multitasking/cc-multitasking-panel.ui:184
+#: panels/multitasking/cc-multitasking-panel.ui:140
 msgid "App Switching"
 msgstr "Cambio de aplicaciones"
 
-#: panels/multitasking/cc-multitasking-panel.ui:190
-#, fuzzy
-#| msgid "Include applications from all _workspaces"
+#: panels/multitasking/cc-multitasking-panel.ui:146
 msgid "Include apps from all _workspaces"
-msgstr "Incluir aplicaciones de todas las áreas de trabajo"
+msgstr "Incluir aplicaciones de _todas las áreas de trabajo"
 
-#: panels/multitasking/cc-multitasking-panel.ui:204
+#: panels/multitasking/cc-multitasking-panel.ui:160
 #, fuzzy
 #| msgid "Include applications from the _current workspace only"
 msgid "Include apps from the _current workspace only"
@@ -3178,10 +3187,8 @@ msgstr ""
 "trabajo;"
 
 #: panels/network/cc-network-panel.c:672
-#, fuzzy
-#| msgid "_Connect to Hidden Network…"
 msgid "Can’t Connect to Network"
-msgstr "Conectar a una red oculta…"
+msgstr "No se puede conectar a la red"
 
 #: panels/network/cc-network-panel.c:674
 msgid ""
@@ -3204,7 +3211,7 @@ msgid "Other Devices"
 msgstr "Otros dispositivos"
 
 #: panels/network/cc-network-panel.ui:91 panels/network/cc-network-panel.ui:125
-#: panels/network/connection-editor/net-connection-editor.c:679
+#: panels/network/connection-editor/net-connection-editor.c:708
 msgid "VPN"
 msgstr "VPN"
 
@@ -3234,8 +3241,8 @@ msgstr "Automático"
 msgid "Manual"
 msgstr "Manual"
 
-#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:84
-#: panels/sound/cc-sound-panel.ui:296
+#: panels/network/cc-net-proxy-page.ui:17 panels/sound/cc-sound-panel.ui:76
+#: panels/sound/cc-sound-panel.ui:284
 msgid "Configuration"
 msgstr "Configuración"
 
@@ -3244,15 +3251,12 @@ msgid "Configuration URL"
 msgstr "URL de configuración"
 
 #: panels/network/cc-net-proxy-page.ui:63
-#, fuzzy
-#| msgid ""
-#| "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided. "
 "This is not recommended for untrusted public networks."
 msgstr ""
 "Se usa el autodiscubrimiento del proxy web cuando no se proporciona un URL "
-"de configuración."
+"de configuración. Esto se no recomienda en redes públicas no confiables."
 
 #: panels/network/cc-net-proxy-page.ui:80
 msgid "HTTP Proxy"
@@ -3305,29 +3309,29 @@ msgid "Ignored Hosts"
 msgstr "Equipos ignorados"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:216
+#: panels/network/cc-wifi-connection-row.c:218
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:275
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Insecure network (WEP)"
 msgstr "Red insegura (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:279
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network (WPA)"
 msgstr "Red segura (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:286
 msgid "Secure network (WPA2)"
 msgstr "Red segura (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:287
+#: panels/network/cc-wifi-connection-row.c:290
 msgid "Secure network (WPA3)"
 msgstr "Red segura (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:291
+#: panels/network/cc-wifi-connection-row.c:294
 msgid "Secure network"
 msgstr "Red segura"
 
@@ -3337,6 +3341,10 @@ msgid "Connected"
 msgstr "Conectado"
 
 #: panels/network/cc-wifi-connection-row.ui:62
+msgid "Show QR-Code"
+msgstr "Mostrar código QR"
+
+#: panels/network/cc-wifi-connection-row.ui:77
 #: panels/network/net-device-ethernet.c:325
 #: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
 #: panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
@@ -3406,19 +3414,23 @@ msgstr "Generar una contraseña automáticamente"
 msgid "_Turn On"
 msgstr "_Activar"
 
-#: panels/network/cc-wifi-panel.c:549
+#: panels/network/cc-wifi-panel.c:407
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:66
 msgid "Wi-Fi"
 msgstr "Inalámbrica"
 
-#: panels/network/cc-wifi-panel.c:884
-msgid "Stop hotspot and disconnect any users?"
-msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
+#: panels/network/cc-wifi-panel.c:741
+msgid "Turning off will disconnect any devices that are using the hotspot."
+msgstr ""
 
-#: panels/network/cc-wifi-panel.c:887
-msgid "_Stop Hotspot"
-msgstr "_Detener «hotspot»"
+#: panels/network/cc-wifi-panel.c:743
+msgid "Turn Off Hotspot?"
+msgstr "¿Apagar el punto de acceso inalámbrico?"
+
+#: panels/network/cc-wifi-panel.c:746
+msgid "_Turn Off"
+msgstr "_Apagar"
 
 #: panels/network/cc-wifi-panel.ui:75
 msgid "Airplane Mode"
@@ -3460,13 +3472,15 @@ msgstr "Apagar el punto de acceso inalámbrico…"
 msgid "Visible Networks"
 msgstr "Redes visibles"
 
-#: panels/network/cc-wifi-panel.ui:241
-msgid "NetworkManager needs to be running"
-msgstr "NetworkManager debe estar en ejecución"
+#: panels/network/cc-wifi-panel.ui:221
+msgid "Wi-Fi Unavailable"
+msgstr "Red inalámbrica disponible"
 
-#: panels/network/cc-wifi-panel.ui:247
-msgid "Oops, something has gone wrong. Please contact your software vendor."
-msgstr "Algo ha fallado. Contacte con el fabricante del software."
+#: panels/network/cc-wifi-panel.ui:222
+msgid ""
+"An error has occurred and Wi-Fi cannot be used.\n"
+"Error details: NetworkManager not running."
+msgstr ""
 
 #: panels/network/connection-editor/8021x-security-page.ui:16
 msgid "802.1x _Security"
@@ -3510,49 +3524,49 @@ msgid "Profile %d"
 msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
-#: panels/network/connection-editor/ce-page-details.c:98
-#: panels/network/net-device-wifi.c:229
+#: panels/network/connection-editor/ce-page-details.c:97
+#: panels/network/net-device-wifi.c:230
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:102
-#: panels/network/net-device-wifi.c:234
+#: panels/network/connection-editor/ce-page-details.c:101
+#: panels/network/net-device-wifi.c:235
 msgid "WPA"
 msgstr "WPA"
 
 #. TRANSLATORS: this WPA3 WiFi security
-#: panels/network/connection-editor/ce-page-details.c:108
+#: panels/network/connection-editor/ce-page-details.c:107
 msgid "WPA3"
 msgstr "WPA3"
 
 #. TRANSLATORS: this Enhanced Open WiFi security
-#: panels/network/connection-editor/ce-page-details.c:113
+#: panels/network/connection-editor/ce-page-details.c:112
 #: panels/network/connection-editor/ce-page-security.c:271
 msgid "Enhanced Open"
 msgstr "Enhanced Open"
 
 #. TRANSLATORS: this WPA WiFi security
-#: panels/network/connection-editor/ce-page-details.c:125
+#: panels/network/connection-editor/ce-page-details.c:124
 msgid "WPA2"
 msgstr "WPA2"
 
 #. TRANSLATORS: this Enterprise WiFi security
-#: panels/network/connection-editor/ce-page-details.c:131
+#: panels/network/connection-editor/ce-page-details.c:130
 msgid "Enterprise"
 msgstr "Empresa"
 
-#: panels/network/connection-editor/ce-page-details.c:136
-#: panels/network/net-device-wifi.c:219
+#: panels/network/connection-editor/ce-page-details.c:135
+#: panels/network/net-device-wifi.c:220
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Ninguna"
 
-#: panels/network/connection-editor/ce-page-details.c:157
+#: panels/network/connection-editor/ce-page-details.c:156
 msgid "Never"
 msgstr "Nunca"
 
-#: panels/network/connection-editor/ce-page-details.c:172
+#: panels/network/connection-editor/ce-page-details.c:171
 #: panels/network/net-device-ethernet.c:105
 #, c-format
 msgid "%i day ago"
@@ -3560,71 +3574,71 @@ msgid_plural "%i days ago"
 msgstr[0] "hace %i día"
 msgstr[1] "hace %i días"
 
-#: panels/network/connection-editor/ce-page-details.c:297
+#: panels/network/connection-editor/ce-page-details.c:295
 #, c-format
 msgid "%d Mb/s (%1.1f GHz)"
 msgstr "%d Mb/s (%1.1f GHz)"
 
 #. Translators: network device speed
-#: panels/network/connection-editor/ce-page-details.c:299
+#: panels/network/connection-editor/ce-page-details.c:297
 #: panels/network/net-device-ethernet.c:217
 #, c-format
 msgid "%d Mb/s"
 msgstr "%d Mb/s"
 
-#: panels/network/connection-editor/ce-page-details.c:314
+#: panels/network/connection-editor/ce-page-details.c:312
 msgid "2.4 GHz / 5 GHz"
 msgstr "2.4 GHz / 5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:316
+#: panels/network/connection-editor/ce-page-details.c:314
 msgid "2.4 GHz"
 msgstr "2.4 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:318
+#: panels/network/connection-editor/ce-page-details.c:316
 msgid "5 GHz"
 msgstr "5 GHz"
 
-#: panels/network/connection-editor/ce-page-details.c:338
+#: panels/network/connection-editor/ce-page-details.c:336
 msgctxt "Signal strength"
 msgid "None"
 msgstr "Ninguna"
 
-#: panels/network/connection-editor/ce-page-details.c:340
+#: panels/network/connection-editor/ce-page-details.c:338
 msgctxt "Signal strength"
 msgid "Weak"
 msgstr "Débil"
 
-#: panels/network/connection-editor/ce-page-details.c:342
+#: panels/network/connection-editor/ce-page-details.c:340
 msgctxt "Signal strength"
 msgid "Ok"
 msgstr "Aceptar"
 
-#: panels/network/connection-editor/ce-page-details.c:344
+#: panels/network/connection-editor/ce-page-details.c:342
 msgctxt "Signal strength"
 msgid "Good"
 msgstr "Buena"
 
-#: panels/network/connection-editor/ce-page-details.c:346
+#: panels/network/connection-editor/ce-page-details.c:344
 msgctxt "Signal strength"
 msgid "Excellent"
 msgstr "Excelente"
 
-#: panels/network/connection-editor/ce-page-details.c:413
+#: panels/network/connection-editor/ce-page-details.c:411
 #: panels/network/connection-editor/details-page.ui:94
 #: panels/network/net-device-ethernet.c:144
 #: panels/network/net-device-mobile.c:441
 msgid "IPv4 Address"
 msgstr "Dirección IPv4"
 
-#: panels/network/connection-editor/ce-page-details.c:414
+#: panels/network/connection-editor/ce-page-details.c:412
 #: panels/network/connection-editor/details-page.ui:110
 #: panels/network/net-device-ethernet.c:146
 #: panels/network/net-device-mobile.c:442 panels/network/network-mobile.ui:177
 msgid "IPv6 Address"
 msgstr "Dirección IPv6"
 
-#: panels/network/connection-editor/ce-page-details.c:416
-#: panels/network/connection-editor/ce-page-details.c:417
+#: panels/network/connection-editor/ce-page-details.c:414
+#: panels/network/connection-editor/ce-page-details.c:415
 #: panels/network/net-device-ethernet.c:149
 #: panels/network/net-device-ethernet.c:151
 #: panels/network/net-device-mobile.c:445
@@ -3632,20 +3646,20 @@ msgstr "Dirección IPv6"
 msgid "IP Address"
 msgstr "Dirección IP"
 
-#: panels/network/connection-editor/ce-page-details.c:421
+#: panels/network/connection-editor/ce-page-details.c:419
 #: panels/network/net-device-ethernet.c:166
 #: panels/network/net-device-mobile.c:450
 msgid "DNS4"
 msgstr "DNS4"
 
-#: panels/network/connection-editor/ce-page-details.c:422
+#: panels/network/connection-editor/ce-page-details.c:420
 #: panels/network/net-device-ethernet.c:167
 #: panels/network/net-device-mobile.c:451
 msgid "DNS6"
 msgstr "DNS6"
 
-#: panels/network/connection-editor/ce-page-details.c:424
-#: panels/network/connection-editor/ce-page-details.c:425
+#: panels/network/connection-editor/ce-page-details.c:422
+#: panels/network/connection-editor/ce-page-details.c:423
 #: panels/network/connection-editor/details-page.ui:175
 #: panels/network/connection-editor/details-page.ui:192
 #: panels/network/connection-editor/ip4-page.ui:165
@@ -3658,19 +3672,19 @@ msgstr "DNS6"
 msgid "DNS"
 msgstr "DNS"
 
-#: panels/network/connection-editor/ce-page-details.c:477
+#: panels/network/connection-editor/ce-page-details.c:475
 msgid "Forget Connection"
 msgstr "Olvidar conexión"
 
-#: panels/network/connection-editor/ce-page-details.c:479
+#: panels/network/connection-editor/ce-page-details.c:477
 msgid "Remove Connection Profile"
 msgstr "Eliminar perfil de conexión"
 
-#: panels/network/connection-editor/ce-page-details.c:482
+#: panels/network/connection-editor/ce-page-details.c:480
 msgid "Remove VPN"
 msgstr "Quitar VPN"
 
-#: panels/network/connection-editor/ce-page-details.c:500
+#: panels/network/connection-editor/ce-page-details.c:498
 msgid "Details"
 msgstr "Detalles"
 
@@ -3684,21 +3698,21 @@ msgstr "automático"
 msgid "Identity"
 msgstr "Identidad"
 
-#: panels/network/connection-editor/ce-page-ip4.c:261
-#: panels/network/connection-editor/ce-page-ip6.c:242
+#: panels/network/connection-editor/ce-page-ip4.c:264
+#: panels/network/connection-editor/ce-page-ip6.c:245
 msgid "Delete Address"
 msgstr "Eliminar dirección"
 
-#: panels/network/connection-editor/ce-page-ip4.c:420
-#: panels/network/connection-editor/ce-page-ip6.c:389
+#: panels/network/connection-editor/ce-page-ip4.c:423
+#: panels/network/connection-editor/ce-page-ip6.c:392
 msgid "Delete Route"
 msgstr "Eliminar ruta"
 
-#: panels/network/connection-editor/ce-page-ip4.c:770
+#: panels/network/connection-editor/ce-page-ip4.c:774
 msgid "IPv4"
 msgstr "IPv4"
 
-#: panels/network/connection-editor/ce-page-ip6.c:740
+#: panels/network/connection-editor/ce-page-ip6.c:744
 msgid "IPv6"
 msgstr "IPv6"
 
@@ -3736,7 +3750,7 @@ msgid "WPA3 Personal"
 msgstr "WPA3 personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
-#: panels/network/connection-editor/net-connection-editor.c:835
+#: panels/network/connection-editor/net-connection-editor.c:864
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -3782,11 +3796,11 @@ msgstr "Conectar _automáticamente"
 msgid "Make available to _other users"
 msgstr "Hacer disponible para _otros usuarios"
 
-#: panels/network/connection-editor/details-page.ui:414
+#: panels/network/connection-editor/details-page.ui:410
 msgid "_Metered connection: has data limits or can incur charges"
 msgstr "Conexión _medida: tiene límite de datos o puede incurrir en cargos"
 
-#: panels/network/connection-editor/details-page.ui:423
+#: panels/network/connection-editor/details-page.ui:419
 msgid ""
 "Software updates and other large downloads will not be started automatically."
 msgstr ""
@@ -3914,36 +3928,36 @@ msgstr "Automático, DHCP únicamente"
 msgid "Prefix"
 msgstr "Prefijo"
 
-#: panels/network/connection-editor/net-connection-editor.c:364
+#: panels/network/connection-editor/net-connection-editor.c:389
 msgid "Unable to open connection editor"
 msgstr "No se pudo abrir el editor de conexiones"
 
-#: panels/network/connection-editor/net-connection-editor.c:380
+#: panels/network/connection-editor/net-connection-editor.c:405
 msgid "New Profile"
 msgstr "Perfil nuevo"
 
-#: panels/network/connection-editor/net-connection-editor.c:447
+#: panels/network/connection-editor/net-connection-editor.c:472
 #, c-format
 msgid "Invalid setting %s: %s"
 msgstr "Ajuste %s no válido: %s"
 
-#: panels/network/connection-editor/net-connection-editor.c:450
+#: panels/network/connection-editor/net-connection-editor.c:475
 #, c-format
 msgid "Invalid setting %s"
 msgstr "Ajuste no válido %s"
 
 #. Translators: VPN add dialog Wireguard description
-#: panels/network/connection-editor/net-connection-editor.c:823
+#: panels/network/connection-editor/net-connection-editor.c:852
 msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
 msgstr ""
 
-#: panels/network/connection-editor/net-connection-editor.c:859
+#: panels/network/connection-editor/net-connection-editor.c:888
 msgid "Import from file…"
 msgstr "Importar desde un archivo…"
 
-#: panels/network/connection-editor/net-connection-editor.c:885
+#: panels/network/connection-editor/net-connection-editor.c:914
 msgid "Add VPN"
 msgstr "Añadir VPN"
 
@@ -3968,29 +3982,29 @@ msgstr ""
 "\n"
 "Error: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:223
+#: panels/network/connection-editor/vpn-helpers.c:212
 msgid "Select file to import"
 msgstr "Seleccione el archivo que importar"
 
-#: panels/network/connection-editor/vpn-helpers.c:276
+#: panels/network/connection-editor/vpn-helpers.c:264
 #, c-format
 msgid "A file named “%s” already exists."
 msgstr "Ya existe un archivo llamado «%s»."
 
-#: panels/network/connection-editor/vpn-helpers.c:278
+#: panels/network/connection-editor/vpn-helpers.c:266
 msgid "_Replace"
 msgstr "_Reemplazar"
 
-#: panels/network/connection-editor/vpn-helpers.c:280
+#: panels/network/connection-editor/vpn-helpers.c:268
 #, c-format
 msgid "Do you want to replace %s with the VPN connection you are saving?"
 msgstr "¿Quiere reemplazar %s con la conexión VP que está guardando?"
 
-#: panels/network/connection-editor/vpn-helpers.c:315
+#: panels/network/connection-editor/vpn-helpers.c:303
 msgid "Cannot export VPN connection"
 msgstr "No se puede exportar la conexión VPN"
 
-#: panels/network/connection-editor/vpn-helpers.c:317
+#: panels/network/connection-editor/vpn-helpers.c:305
 #, c-format
 msgid ""
 "The VPN connection “%s” could not be exported to %s.\n"
@@ -4001,7 +4015,7 @@ msgstr ""
 "\n"
 "Error: %s."
 
-#: panels/network/connection-editor/vpn-helpers.c:343
+#: panels/network/connection-editor/vpn-helpers.c:331
 msgid "Export VPN connection"
 msgstr "Exportar conexión VPN"
 
@@ -4038,16 +4052,12 @@ msgid "The 256 bit private key in base64 encoding"
 msgstr "La clave privada de 256 bits en base64"
 
 #: panels/network/connection-editor/wireguard-page.ui:81
-#, fuzzy
-#| msgid "Choose your private key"
 msgid "Show/hide private key"
-msgstr "Elija su clave privada"
+msgstr "Mostrar/ocultar la clave privada"
 
 #: panels/network/connection-editor/wireguard-page.ui:93
-#, fuzzy
-#| msgid "Listen"
 msgid "_Listen Port"
-msgstr "Listen"
+msgstr "_Escuchar puerto"
 
 #: panels/network/connection-editor/wireguard-page.ui:104
 msgid ""
@@ -4086,10 +4096,8 @@ msgid "_Peers"
 msgstr "_Pares"
 
 #: panels/network/connection-editor/wireguard-page.ui:257
-#, fuzzy
-#| msgid "Not set up"
 msgid "No peers set up"
-msgstr "No configurada"
+msgstr "No hay pares configurados"
 
 #: panels/network/gnome-network-panel.desktop.in:4
 msgid "Control how you connect to the Internet"
@@ -4140,7 +4148,7 @@ msgstr "Cableada"
 msgid "Add new connection"
 msgstr "Añadir una conexión nueva"
 
-#: panels/network/net-device-wifi.c:863
+#: panels/network/net-device-wifi.c:864
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -4148,25 +4156,25 @@ msgstr ""
 "Se perderán los detalles de las redes seleccionadas, incluyendo la "
 "contraseña y cualquier configuración personalizada."
 
-#: panels/network/net-device-wifi.c:867
+#: panels/network/net-device-wifi.c:868
 msgid "_Forget"
 msgstr "_Olvidar"
 
-#: panels/network/net-device-wifi.c:1048
+#: panels/network/net-device-wifi.c:1067
 msgid "Saved Wi-Fi Networks"
 msgstr "Redes inalámbricas guardadas"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1067
+#: panels/network/net-device-wifi.c:1086
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Olvidar"
 
-#: panels/network/net-device-wifi.c:1221
+#: panels/network/net-device-wifi.c:1244
 msgid "System policy prohibits use as a Hotspot"
 msgstr "La política del sistema prohíbe usarlo como punto de acceso"
 
-#: panels/network/net-device-wifi.c:1224
+#: panels/network/net-device-wifi.c:1247
 msgid "Wireless device does not support Hotspot mode"
 msgstr "El dispositivo inalámbrico no soporta el modo de punto de acceso"
 
@@ -4961,7 +4969,7 @@ msgstr "Mostrar _porcentaje de la batería"
 
 #: panels/power/cc-power-panel.ui:209
 msgid "Show exact charge level in the top bar"
-msgstr ""
+msgstr "Mostrar el nivel exacto de carga en la barra superior"
 
 #: panels/power/cc-power-panel.ui:245
 msgid "Automatic Suspend"
@@ -5706,14 +5714,8 @@ msgstr "No hay servicio de impresión"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:169
-#, fuzzy
-#| msgid ""
-#| "Sorry! The system printing service\n"
-#| "    doesn’t seem to be available."
 msgid "The system printing service doesn’t seem to be available."
-msgstr ""
-"El servicio del sistema de impresión\n"
-"    parece no estar disponible."
+msgstr "El servicio del sistema de impresión parece no estar disponible."
 
 #: panels/region/cc-format-chooser.c:148 panels/region/cc-format-chooser.c:196
 #: panels/region/cc-format-chooser.ui:4
@@ -5936,8 +5938,6 @@ msgid "_Other Media…"
 msgstr "_Otros soportes…"
 
 #: panels/removable-media/cc-removable-media-panel.ui:195
-#, fuzzy
-#| msgid "_Never prompt or start programs on media insertion"
 msgid "_Never prompt or start apps on media insertion"
 msgstr "_Nunca preguntar ni iniciar programas al introducir soportes"
 
@@ -6091,20 +6091,16 @@ msgid "Blank Screen Delay"
 msgstr "Retardo para apagar la pantalla"
 
 #: panels/screen/cc-screen-panel.ui:14
-#, fuzzy
-#| msgid "Period of inactivity after which the screen will go blank."
 msgid "Period of inactivity until screen blanks"
-msgstr "Período de inactividad después del que se apagará la pantalla."
+msgstr "Período de inactividad hasta que se apaga la pantalla"
 
 #: panels/screen/cc-screen-panel.ui:32
 msgid "Automatic Screen _Lock"
 msgstr "_Bloque de pantalla automático"
 
 #: panels/screen/cc-screen-panel.ui:33
-#, fuzzy
-#| msgid "Lock screen _after blank for"
 msgid "Locks the screen after it blanks"
-msgstr "B_loquear la pantalla después de"
+msgstr "Bloquear la pantalla después de apagarse"
 
 #: panels/screen/cc-screen-panel.ui:50
 msgid "Automatic _Screen Lock Delay"
@@ -6139,8 +6135,8 @@ msgid "Screen Lock"
 msgstr "Bloqueo de pantalla"
 
 #: panels/screen/gnome-screen-panel.desktop.in:4
-msgid "Screen Settings"
-msgstr "Configuración de la pantalla"
+msgid "Automatically lock the screen"
+msgstr "Bloquear la pantalla automáticamente"
 
 #. Translators: Search terms to find the Screen panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/screen/gnome-screen-panel.desktop.in:16
@@ -6161,10 +6157,6 @@ msgid "Search Locations"
 msgstr "Buscar ubicaciones"
 
 #: panels/search/cc-search-locations-dialog.ui:13
-#, fuzzy
-#| msgid ""
-#| "Folders which are searched by system applications, such as Files, Photos "
-#| "and Videos."
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr ""
@@ -6196,14 +6188,10 @@ msgid "App Search"
 msgstr "Buscar aplicación"
 
 #: panels/search/cc-search-panel.ui:11
-#, fuzzy
-#| msgid "Include application-provided search results."
 msgid "Include app-provided search results."
 msgstr "Incluir resultados de búsqueda proporcionados por las aplicaciones."
 
 #: panels/search/cc-search-panel.ui:23
-#, fuzzy
-#| msgid "Folders which are searched by system applications."
 msgid "Folders which are searched by system apps."
 msgstr "Carpetas en las que buscan las aplicaciones del sistema."
 
@@ -6216,9 +6204,6 @@ msgid "Results are displayed according to the list order."
 msgstr "Los resultados se muestran siguiendo el orden de la lista."
 
 #: panels/search/gnome-search-panel.desktop.in:4
-#, fuzzy
-#| msgid ""
-#| "Control which applications show search results in the Activities Overview"
 msgid "Control which apps show search results in the Activities Overview"
 msgstr ""
 "Controlar qué aplicaciones muestran resultados de búsqueda en la vista de "
@@ -6487,19 +6472,19 @@ msgstr "Cadena"
 msgid "Swing"
 msgstr "Swing"
 
-#: panels/sound/cc-alert-chooser-window.ui:4 panels/sound/cc-sound-panel.ui:376
+#: panels/sound/cc-alert-chooser-window.ui:4 panels/sound/cc-sound-panel.ui:367
 msgid "Alert Sound"
 msgstr "Sonido de alerta"
 
-#: panels/sound/cc-balance-slider.ui:9 panels/sound/cc-sound-panel.ui:147
+#: panels/sound/cc-balance-slider.ui:9 panels/sound/cc-sound-panel.ui:139
 msgid "Balance"
 msgstr "Balance"
 
-#: panels/sound/cc-fade-slider.ui:9 panels/sound/cc-sound-panel.ui:173
+#: panels/sound/cc-fade-slider.ui:9 panels/sound/cc-sound-panel.ui:165
 msgid "Fade"
 msgstr "Desvanecer"
 
-#: panels/sound/cc-output-test-wheel.c:185
+#: panels/sound/cc-output-test-wheel.c:206
 msgid "Select a Speaker"
 msgstr "Seleccione un altavoz"
 
@@ -6507,52 +6492,52 @@ msgstr "Seleccione un altavoz"
 msgid "Test Speakers"
 msgstr "Probar los altavoces"
 
-#: panels/sound/cc-sound-panel.ui:8
+#: panels/sound/cc-sound-panel.ui:8 panels/sound/cc-sound-panel.ui:207
 msgid "Output"
 msgstr "Salida"
 
-#: panels/sound/cc-sound-panel.ui:42 panels/sound/cc-sound-panel.ui:215
+#: panels/sound/cc-sound-panel.ui:35 panels/sound/cc-sound-panel.ui:210
 msgid "Output Device"
 msgstr "Dispositivo de salida"
 
-#: panels/sound/cc-sound-panel.ui:60
+#: panels/sound/cc-sound-panel.ui:52
 #: panels/universal-access/cc-ua-hearing-page.ui:69
 msgid "Test"
 msgstr "Probar"
 
-#: panels/sound/cc-sound-panel.ui:108
+#: panels/sound/cc-sound-panel.ui:100
 msgid "Master volume"
 msgstr "Volumen maestro"
 
-#: panels/sound/cc-sound-panel.ui:121
+#: panels/sound/cc-sound-panel.ui:113
 msgid "Output Volume"
 msgstr "Volumen de salida"
 
-#: panels/sound/cc-sound-panel.ui:199 panels/sound/cc-subwoofer-slider.ui:8
+#: panels/sound/cc-sound-panel.ui:191 panels/sound/cc-subwoofer-slider.ui:8
 msgid "Subwoofer"
 msgstr "Subwoofer"
 
-#: panels/sound/cc-sound-panel.ui:218
+#: panels/sound/cc-sound-panel.ui:213
 msgid "No Output Devices"
 msgstr "No hay dispositivos de entrada"
 
-#: panels/sound/cc-sound-panel.ui:230
+#: panels/sound/cc-sound-panel.ui:225 panels/sound/cc-sound-panel.ui:334
 msgid "Input"
 msgstr "Entrada"
 
-#: panels/sound/cc-sound-panel.ui:259 panels/sound/cc-sound-panel.ui:346
+#: panels/sound/cc-sound-panel.ui:247 panels/sound/cc-sound-panel.ui:337
 msgid "Input Device"
 msgstr "Dispositivo de entrada"
 
-#: panels/sound/cc-sound-panel.ui:330
+#: panels/sound/cc-sound-panel.ui:318
 msgid "Input Volume"
 msgstr "Volumen de entrada"
 
-#: panels/sound/cc-sound-panel.ui:349
+#: panels/sound/cc-sound-panel.ui:340
 msgid "No Input Devices"
 msgstr "No hay dispositivos de entrada"
 
-#: panels/sound/cc-sound-panel.ui:364 panels/sound/cc-volume-levels-window.ui:4
+#: panels/sound/cc-sound-panel.ui:355 panels/sound/cc-volume-levels-window.ui:4
 msgid "Volume Levels"
 msgstr "Niveles de volumen"
 
@@ -6761,8 +6746,8 @@ msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:4
-msgid "Manage Thunderbolt devices"
-msgstr "Gestionar dispositivos Thunderbolt"
+msgid "Manage Thunderbolt device access"
+msgstr "Gestionar el acceso a dispositivos Thunderbolt"
 
 #. Translators: those are keywords for the thunderbolt control-center panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:15
@@ -6780,6 +6765,8 @@ msgstr "_Sobreamplificación"
 #: panels/universal-access/cc-ua-hearing-page.ui:10
 msgid "Allow volume to exceed 100%. This will result in quality loss"
 msgstr ""
+"Permitir que el volumen supere el 100%. Esto puede provocar pérdidas de "
+"calidad"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:32
 msgid "Visual Alerts"
@@ -6817,7 +6804,7 @@ msgstr "Teclas del _ratón"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:11
 msgid "Use numeric keypad to move your mouse pointer"
-msgstr ""
+msgstr "Usar el teclado numérico para mover el puntero el ratón"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:19
 msgid "_Locate Pointer"
@@ -6825,7 +6812,7 @@ msgstr "_Localizar puntero"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:20
 msgid "Reveal pointer location by pressing Left Ctrl"
-msgstr ""
+msgstr "Mostrar la ubicación del puntero pulsando Ctrl izquierdo"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:28
 msgid "_Double-Click Delay"
@@ -6860,19 +6847,14 @@ msgid "_Simulated Secondary Click"
 msgstr "Pulsación secundaria _simulada"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:62
-#, fuzzy
-#| msgid "_Trigger secondary click by holding down the primary button"
 msgid "Secondary click by holding down the primary mouse button"
-msgstr ""
-"_Disparar la pulsación secundaria al mantener pulsado el botón primario"
+msgstr "Realizar la pulsación secundaria al mantener pulsado el botón primario"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:67
 #: panels/universal-access/cc-ua-typing-page.ui:181
 #: panels/universal-access/cc-ua-typing-page.ui:231
-#, fuzzy
-#| msgid "A_cceptance delay:"
 msgid "Acceptance Delay"
-msgstr "R_etardo de aceptación:"
+msgstr "Retardo de aceptación"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:93
 msgid "_Hover Click"
@@ -6916,7 +6898,7 @@ msgstr "Menú de _accesibilidad"
 
 #: panels/universal-access/cc-ua-panel.ui:43
 msgid "Display menu for Accessibility settings in top bar"
-msgstr ""
+msgstr "Mostrar el menú de configuración de accesibilidad en la barra superior"
 
 #: panels/universal-access/cc-ua-panel.ui:64
 msgid "_Seeing"
@@ -6979,6 +6961,8 @@ msgstr "Alto _contraste"
 #: panels/universal-access/cc-ua-seeing-page.ui:11
 msgid "Increase color contrast of foreground and background interface elements"
 msgstr ""
+"Aumentar el contraste de color de los elementos de la interfaz en primer "
+"plano y en el fondo"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:19
 msgid "_Reduce Animation"
@@ -7001,27 +6985,21 @@ msgid "_Cursor Size"
 msgstr "_Tamaño del cursor"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:38
-#, fuzzy
-#| msgid ""
-#| "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgid "The size of the cursor can be increased to make it easier to see"
 msgstr ""
-"El tamaño del cursor se puede combinar con la ampliación para hacer que sea "
-"más fácil verlo."
+"El tamaño del cursor se puede ampliar para hacer que sea más fácil verlo"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:47
 msgid "_Sound Keys"
 msgstr "Teclas _sonoras"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:48
-#, fuzzy
-#| msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "Pitar cuando se activen o desactiven las teclas Bloq Num o Bloq Mayús."
 
 #: panels/universal-access/cc-ua-seeing-page.ui:56
 msgid "_Overlay Scrollbars"
-msgstr ""
+msgstr "_Superponer barras de desplazamiento"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:57
 msgid "Use scrollbars that overlay the content and automatically hide"
@@ -7032,8 +7010,6 @@ msgid "Screen _Reader"
 msgstr "Lecto_r de pantalla"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:71
-#, fuzzy
-#| msgid "The screen reader reads displayed text as you move the focus."
 msgid "The screen reader reads displayed text as you move the focus"
 msgstr ""
 "El lector de pantalla lee el texto mostrado a medida que mueve el foco."
@@ -7053,10 +7029,9 @@ msgid "_Enable by Keyboard"
 msgstr "_Activar por teclado"
 
 #: panels/universal-access/cc-ua-typing-page.ui:18
-#, fuzzy
-#| msgid "Turn accessibility features on and off using the keyboard"
 msgid "Turn accessibility features on or off using the keyboard"
-msgstr "Activar las características de accesibilidad usando el teclado"
+msgstr ""
+"Activar o desactivar las características de accesibilidad usando el teclado"
 
 #: panels/universal-access/cc-ua-typing-page.ui:28
 msgid "Text Cursor"
@@ -7067,10 +7042,8 @@ msgid "_Cursor Blinking"
 msgstr "Parpadeo del _cursor"
 
 #: panels/universal-access/cc-ua-typing-page.ui:33
-#, fuzzy
-#| msgid "Cursor blinks in text fields."
 msgid "Change if the cursor blinks in text fields"
-msgstr "El cursor parpadea en los campos de texto."
+msgstr "Cambiar si el cursor parpadea en los campos de texto"
 
 #: panels/universal-access/cc-ua-typing-page.ui:41
 msgid "_Blink Speed"
@@ -7097,11 +7070,9 @@ msgid "_Repeat Keys"
 msgstr "_Repetición de teclas"
 
 #: panels/universal-access/cc-ua-typing-page.ui:98
-#, fuzzy
-#| msgid "Key presses repeat when key is held down."
 msgid "Key presses repeat when the key is held down"
 msgstr ""
-"La pulsaciones de teclas se repiten cuando la tecla se mantiene pulsada."
+"La pulsaciones de teclas se repiten cuando la tecla se mantiene pulsada"
 
 #: panels/universal-access/cc-ua-typing-page.ui:103
 msgid "Speed"
@@ -7112,16 +7083,12 @@ msgid "_Sticky Keys"
 msgstr "Teclas persistente_s"
 
 #: panels/universal-access/cc-ua-typing-page.ui:155
-#, fuzzy
-#| msgid "Treats a sequence of modifier keys as a key combination"
 msgid "Sequences of modifier keys act as a key combination"
-msgstr "Trata una secuencia de teclas modificadoras como un atajo del teclado"
+msgstr "Una secuencia de teclas modificadoras actúa como un atajo del teclado"
 
 #: panels/universal-access/cc-ua-typing-page.ui:160
-#, fuzzy
-#| msgid "_Disable if two keys are pressed together"
 msgid "Disable if two keys are pressed together"
-msgstr "_Desactivar si se pulsan dos teclas a la vez"
+msgstr "Desactivar si se pulsan dos teclas a la vez"
 
 #: panels/universal-access/cc-ua-typing-page.ui:166
 msgid "Beep when modifier key is pressed"
@@ -7132,10 +7099,8 @@ msgid "S_low Keys"
 msgstr "Teclas _lentas"
 
 #: panels/universal-access/cc-ua-typing-page.ui:176
-#, fuzzy
-#| msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgid "Delay between when a key is pressed and when it is accepted"
-msgstr "Introduce un retardo al pulsar una tecla y cuando esta se acepta"
+msgstr "Retardo entre la pulsación de una tecla y cuando esta se acepta"
 
 #: panels/universal-access/cc-ua-typing-page.ui:204
 msgid "Beep when a key is pressed"
@@ -7155,10 +7120,8 @@ msgid "_Bounce Keys"
 msgstr "_Rechazo de teclas"
 
 #: panels/universal-access/cc-ua-typing-page.ui:226
-#, fuzzy
-#| msgid "_Ignore fast duplicate keypresses"
 msgid "Ignore fast duplicate keypresses"
-msgstr "_Ignorar pulsaciones duplicadas rápidas"
+msgstr "Ignorar pulsaciones duplicadas rápidas"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:9
 #, fuzzy
@@ -7168,10 +7131,8 @@ msgid "_Desktop Zoom"
 msgstr "Escritorio"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:10
-#, fuzzy
-#| msgid "Flash the entire _screen"
 msgid "Magnify the entire screen"
-msgstr "De_stello de la pantalla completa"
+msgstr "Magnificar pantalla completa"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:20
 msgid "Magnifier"
@@ -7229,26 +7190,20 @@ msgid "Moves with Contents"
 msgstr "Se mueve con el contenido"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:94
-#, fuzzy
-#| msgid "Magnifier cursor _pushes contents around"
 msgid "Pushes Contents Around"
-msgstr "El cursor del magnificador _empuja el contenido a su alrededor"
+msgstr "Empuja el contenido a su alrededor"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:95
-#, fuzzy
-#| msgid "Registered"
 msgid "Remains Centered"
-msgstr "Registrado"
+msgstr "Permanece centrado"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:107
 msgid "Crosshairs"
 msgstr "Cruces"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:117
-#, fuzzy
-#| msgid "_Overlaps mouse cursor"
 msgid "_Overlap Mouse Cursor"
-msgstr "_Solapa el cursor del ratón"
+msgstr "_Solapar el cursor del ratón"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:125
 msgid "Thickness"
@@ -7288,7 +7243,7 @@ msgstr "_Invertido"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:212
 msgid "Invert colors in the magnifier region"
-msgstr ""
+msgstr "Invertir colores en la región del magnificador"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:220
 msgid "Brightness"
@@ -7520,8 +7475,8 @@ msgid "File History & Trash"
 msgstr "Histórico de archivos y papelera"
 
 #: panels/usage/gnome-usage-panel.desktop.in:4
-msgid "Don't leave traces"
-msgstr "No dejar trazas"
+msgid "Control data and files that are kept on your device"
+msgstr ""
 
 #. Translators: Search terms to find the Usage panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/usage/gnome-usage-panel.desktop.in:16
@@ -8169,8 +8124,6 @@ msgid "_Parental Controls"
 msgstr "Controles _parentales"
 
 #: panels/user-accounts/cc-user-panel.ui:256
-#, fuzzy
-#| msgid "Open the Parental Controls application."
 msgid "Open the Parental Controls app."
 msgstr "Abrir la aplicación de control parental."
 
@@ -9216,15 +9169,15 @@ msgstr "Paneles disponibles:"
 msgid "All Settings"
 msgstr "Todas las configuraciones"
 
-#: shell/cc-window.ui:54
-msgid "Primary Menu"
-msgstr "Menú primario"
+#: shell/cc-window.ui:53 shell/cc-window.ui:55
+msgid "Main Menu"
+msgstr "Menú principal"
 
-#: shell/cc-window.ui:152
+#: shell/cc-window.ui:153
 msgid "Warning: Development Version"
 msgstr "Advertencia: versión de desarrollo"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:154
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9234,7 +9187,7 @@ msgstr ""
 "Puede experimentar un comportamiento incorrecto del sistema, pérdida de "
 "datos y otros problemas inesperados."
 
-#: shell/cc-window.ui:164
+#: shell/cc-window.ui:165
 msgid "Help"
 msgstr "Ayuda"
 
@@ -9279,7 +9232,7 @@ msgid "Cancel search"
 msgstr "Cancelar búsqueda"
 
 #. Translators: Search terms to find this app. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
-#: shell/org.gnome.Settings.desktop.in:13
+#: shell/org.gnome.Settings.desktop.in:14
 msgid "Preferences;Settings;"
 msgstr "Preferencias;Configuración;"
 
@@ -9312,10 +9265,6 @@ msgid "Initial state of the window"
 msgstr "Estado inicial de la ventana"
 
 #: shell/org.gnome.Settings.gschema.xml:21
-#, fuzzy
-#| msgid ""
-#| "A tuple containing the initial width, height and maximized state of the "
-#| "application window."
 msgid ""
 "A tuple containing the initial width, height and maximized state of the app "
 "window."
@@ -9344,6 +9293,119 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sonidos del sistema"
+
+#~ msgid "Camera is Turned Off"
+#~ msgstr "La cámara está apagada"
+
+#~ msgid "No sandboxed apps can capture photos or video."
+#~ msgstr "Ninguna aplicación aislada puede capturar fotos o vídeo."
+
+#~ msgid "Protect your pictures"
+#~ msgstr "Proteger sus imágenes"
+
+#~ msgid "Report your problems"
+#~ msgstr "Informar de problemas"
+
+#, fuzzy
+#~| msgid ""
+#~| "This device has basic protection against hardware security issues. This "
+#~| "provides protection against some common security threats."
+#~ msgid ""
+#~ "Hardware meets security requirements. This device has protection against "
+#~ "common hardware security threats."
+#~ msgstr ""
+#~ "Este dispositivo tiene protección básica contra problemas de seguridad de "
+#~ "hardware. Esto proporciona protección contra algunas amenazas de "
+#~ "seguridad comunes."
+
+#~ msgid "Host firmware security status"
+#~ msgstr "Estado de la seguridad del firmware del equipo"
+
+#~ msgid "Location Services Turned Off"
+#~ msgstr "Servicios de ubicación apagados"
+
+#, fuzzy
+#~| msgid "No applications can obtain location information."
+#~ msgid "No sandboxed apps can obtain location information."
+#~ msgstr "Ninguna aplicación puede obtener información sobre la ubicación."
+
+#~ msgid "Protect your location information"
+#~ msgstr "Proteger la información sobre su ubicación"
+
+#~ msgid "Microphone Turned Off"
+#~ msgstr "Micrófono está apagado"
+
+#, fuzzy
+#~| msgid "No applications can record sound."
+#~ msgid "No sandboxed apps can record sound."
+#~ msgstr "Ninguna aplicación puede grabar sonidos."
+
+#~ msgid "Protect your conversations"
+#~ msgstr "Proteger sus conversaciones"
+
+#~ msgid "Mouse Speed"
+#~ msgstr "Velocidad del ratón"
+
+#~ msgid "Mouse speed"
+#~ msgstr "Velocidad del ratón"
+
+#~ msgid "Natural Scrolling"
+#~ msgstr "Desplazamiento natural"
+
+#~ msgid "Touchpad Speed"
+#~ msgstr "Velocidad del panel táctil"
+
+#~ msgid "Touchpad speed"
+#~ msgstr "Velocidad del panel táctil"
+
+#~ msgid "Two-finger Scrolling"
+#~ msgstr "Desplazamiento con dos dedos"
+
+#~ msgid "Try clicking, double clicking, scrolling"
+#~ msgstr ""
+#~ "Pruebe a pulsar una vez, dos veces o a desplazarse con la rueda del ratón"
+
+#~ msgid "Five clicks, GEGL time!"
+#~ msgstr "Cinco pulsaciones, es tiempo de GEGL."
+
+#~ msgid "Double click, primary button"
+#~ msgstr "Doble pulsación, botón primario"
+
+#~ msgid "Single click, primary button"
+#~ msgstr "Una sola pulsación, botón primario"
+
+#~ msgid "Double click, middle button"
+#~ msgstr "Doble pulsación, botón central"
+
+#~ msgid "Single click, middle button"
+#~ msgstr "Una sola pulsación, botón central"
+
+#~ msgid "Double click, secondary button"
+#~ msgstr "Doble pulsación, botón secundario"
+
+#~ msgid "Single click, secondary button"
+#~ msgstr "Una sola pulsación, botón secundario"
+
+#~ msgid "Stop hotspot and disconnect any users?"
+#~ msgstr "¿Detener el «hotspot» y desconectar a los usuarios?"
+
+#~ msgid "_Stop Hotspot"
+#~ msgstr "_Detener «hotspot»"
+
+#~ msgid "NetworkManager needs to be running"
+#~ msgstr "NetworkManager debe estar en ejecución"
+
+#~ msgid "Oops, something has gone wrong. Please contact your software vendor."
+#~ msgstr "Algo ha fallado. Contacte con el fabricante del software."
+
+#~ msgid "Screen Settings"
+#~ msgstr "Configuración de la pantalla"
+
+#~ msgid "Don't leave traces"
+#~ msgstr "No dejar trazas"
+
+#~ msgid "Primary Menu"
+#~ msgstr "Menú primario"
 
 #, c-format
 #~ msgid ""
@@ -9478,9 +9540,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Protected against common security threats."
 #~ msgstr "Protegido contra amenazas de seguridad habituales."
-
-#~ msgid "Protected against a wide range of security threats."
-#~ msgstr "Protegido contra una amplia variedad de amenazas de seguridad."
 
 #~ msgid "Comprehensive Protection"
 #~ msgstr "Protección integral"
@@ -10037,9 +10096,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "_Click Assist"
 #~ msgstr "_Asistente de pulsación"
 
-#~ msgid "Double-Click Delay"
-#~ msgstr "Retardo de la pulsación doble"
-
 #~ msgid "Flash the entire _window"
 #~ msgstr "De_stello de la pantalla completa"
 
@@ -10278,9 +10334,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Move down"
 #~ msgstr "Bajar"
-
-#~ msgid "Allow the applications below to use your microphone."
-#~ msgstr "Permitir a las siguientes aplicaciones usar el micrófono."
 
 #~ msgid "%s VPN"
 #~ msgstr "VPN «%s»"
@@ -10530,9 +10583,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Activities"
 #~ msgstr "Actividades"
-
-#~ msgid "Allow the applications below to use your camera."
-#~ msgstr "Permitir a las siguientes aplicaciones usar su cámara."
 
 #~ msgid "Display Mode"
 #~ msgstr "Modo de la pantalla"
@@ -10818,9 +10868,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "Password"
 #~ msgstr "Contraseña"
 
-#~ msgid "Universal Access"
-#~ msgstr "Acceso universal"
-
 #~ msgid "Enable Fingerprint Login"
 #~ msgstr "Activar el inicio de sesión con huella"
 
@@ -10935,9 +10982,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Change location settings and providers"
 #~ msgstr "Cambiar la configuración de ubicación y proveedores"
-
-#~ msgid "Read system and application logs"
-#~ msgstr "Leer registros del sistema y de aplicaciones"
 
 #~ msgid "access the media-hub service"
 #~ msgstr "acceder al servicio de media-hub"
@@ -11180,12 +11224,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "_Camera"
 #~ msgstr "_Cámara"
-
-#~ msgid "_Microphone"
-#~ msgstr "_Micrófono"
-
-#~ msgid "_Location Services"
-#~ msgstr "Servicios de ubicación"
 
 #~ msgid "Protect your personal information and control what others might see"
 #~ msgstr "Proteger su información personal y controlar qué pueden ver otros"
@@ -11773,9 +11811,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "Swipe your right little finger across %s"
 #~ msgstr "Pase su dedo meñique derecho sobre %s"
 
-#~ msgid "Place your finger on the reader again"
-#~ msgstr "Ponga de nuevo su dedo en el lector"
-
 #~ msgid "Swipe your finger again"
 #~ msgstr "Pase su dedo de nuevo"
 
@@ -11904,9 +11939,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Show your existing view on both displays"
 #~ msgstr "Mostrar la vista existente en ambas pantallas"
-
-#~ msgid "Turn Off"
-#~ msgstr "Apagar"
 
 #~ msgid "Don’t use this display"
 #~ msgstr "No usar esta pantalla"
@@ -12206,9 +12238,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "Scroll Up"
 #~ msgstr "Desplazar hacia arriba"
 
-#~ msgid "Scroll Down"
-#~ msgstr "Desplazar hacia abajo"
-
 #~ msgid "Scroll Right"
 #~ msgstr "Desplazar hacia la derecha"
 
@@ -12453,9 +12482,6 @@ msgstr "Sonidos del sistema"
 #~ msgctxt "mouse, right button as primary"
 #~ msgid "_Right"
 #~ msgstr "_Derecho"
-
-#~ msgid "_Pointer speed"
-#~ msgstr "_Velocidad del puntero"
 
 #~ msgctxt "mouse pointer, speed"
 #~ msgid "Slow"
@@ -13978,9 +14004,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "---"
 #~ msgstr "---"
 
-#~ msgid "Current network location"
-#~ msgstr "Ubicación de red actual"
-
 #~ msgid "More backgrounds URL"
 #~ msgstr "URL para más fondos"
 
@@ -14272,9 +14295,6 @@ msgstr "Sonidos del sistema"
 #~ msgid "_Initiate click when stopping pointer movement"
 #~ msgstr "_Iniciar la pulsación cuando se pare el movimiento del puntero"
 
-#~ msgid "_Single click:"
-#~ msgstr "Pulsación _simple:"
-
 #~ msgid "Example preferences panel"
 #~ msgstr "Preferencias del panel de ejemplo"
 
@@ -14289,9 +14309,6 @@ msgstr "Sonidos del sistema"
 
 #~ msgid "Start the preferred visual assistive technology"
 #~ msgstr "Iniciar la tecnología de asistencia visual preferida"
-
-#~ msgid "Visual Assistance"
-#~ msgstr "Asistencia visual"
 
 #~ msgid "Error setting default browser: %s"
 #~ msgstr "Error al establecer el navegador predeterminado: %s"
