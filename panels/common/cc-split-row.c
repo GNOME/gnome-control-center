@@ -84,6 +84,7 @@ on_option_focus_leave_cb (GtkEventControllerMotion *controller,
 
   stream = GTK_MEDIA_STREAM (paintable);
   gtk_media_stream_set_loop (stream, FALSE);
+  gtk_media_stream_pause (stream);
 }
 
 static void

@@ -50,6 +50,7 @@ on_picture_leave_cb (CcIllustratedRow *self)
   GtkMediaStream *stream = GTK_MEDIA_STREAM (gtk_image_get_paintable (self->picture));
 
   gtk_media_stream_set_loop (stream, FALSE);
+  gtk_media_stream_pause (stream);
 }
 
 static void
