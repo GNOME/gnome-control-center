@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: 3.8\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-14 17:16+0000\n"
-"PO-Revision-Date: 2023-02-14 17:24+0000\n"
+"POT-Creation-Date: 2023-02-14 22:15+0000\n"
+"PO-Revision-Date: 2023-02-16 18:06+0000\n"
 "Last-Translator: Hugo Carvalho <hugokarvalho@hotmail.com>\n"
 "Language-Team: Portuguese <https://l10n.gnome.org/teams/pt/>\n"
 "Language: pt\n"
@@ -356,11 +356,11 @@ msgstr "Selecionar uma foto"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:887
+#: panels/network/cc-wifi-panel.c:745
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
-#: panels/network/net-device-wifi.c:866
+#: panels/network/net-device-wifi.c:867
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
@@ -2709,7 +2709,7 @@ msgstr "Entrada de caracteres especiais"
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Métodos para inserir símbolos e variantes de letras usando o teclado."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:160
+#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:161
 msgid "Keyboard Shortcuts"
 msgstr "Atalhos de teclado"
 
@@ -3107,37 +3107,17 @@ msgstr "Margem"
 msgid "Drag one finger on the edge"
 msgstr "Arraste um dedo na margem"
 
-#: panels/mouse/cc-mouse-test.c:131 panels/mouse/cc-mouse-test.ui:62
-msgid "Try clicking, double clicking, scrolling"
-msgstr "Tente clicar, realizar duplo clique e deslocar"
+#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:98
+msgid "Single Click"
+msgstr "Clique único"
 
-#: panels/mouse/cc-mouse-test.c:136
-msgid "Five clicks, GEGL time!"
-msgstr "Cinco cliques, hora de GEGL!"
+#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:112
+msgid "Double Click"
+msgstr "Clique duplo"
 
-#: panels/mouse/cc-mouse-test.c:141
-msgid "Double click, primary button"
-msgstr "Clique duplo, botão principal"
-
-#: panels/mouse/cc-mouse-test.c:141
-msgid "Single click, primary button"
-msgstr "Clique único, botão principal"
-
-#: panels/mouse/cc-mouse-test.c:144
-msgid "Double click, middle button"
-msgstr "Clique duplo, botão do meio"
-
-#: panels/mouse/cc-mouse-test.c:144
-msgid "Single click, middle button"
-msgstr "Clique único, botão do meio"
-
-#: panels/mouse/cc-mouse-test.c:147
-msgid "Double click, secondary button"
-msgstr "Clique duplo, botão secundário"
-
-#: panels/mouse/cc-mouse-test.c:147
-msgid "Single click, secondary button"
-msgstr "Clique único, botão secundário"
+#: panels/mouse/cc-mouse-test.ui:26
+msgid "Test Mouse & Touchpad"
+msgstr "Testar Rato e Painel tátil"
 
 #: panels/mouse/gnome-mouse-panel.desktop.in:3
 msgid "Mouse & Touchpad"
@@ -3365,29 +3345,29 @@ msgid "Ignored Hosts"
 msgstr "Hosts ignorados"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:216
+#: panels/network/cc-wifi-connection-row.c:218
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:275
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Insecure network (WEP)"
 msgstr "Rede insegura (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:279
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network (WPA)"
 msgstr "Rede segura (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:286
 msgid "Secure network (WPA2)"
 msgstr "Rede segura (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:287
+#: panels/network/cc-wifi-connection-row.c:290
 msgid "Secure network (WPA3)"
 msgstr "Rede segura (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:291
+#: panels/network/cc-wifi-connection-row.c:294
 msgid "Secure network"
 msgstr "Rede segura"
 
@@ -3397,6 +3377,10 @@ msgid "Connected"
 msgstr "Ligado"
 
 #: panels/network/cc-wifi-connection-row.ui:62
+msgid "Show QR-Code"
+msgstr "Mostrar o código-QR"
+
+#: panels/network/cc-wifi-connection-row.ui:77
 #: panels/network/net-device-ethernet.c:325
 #: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
 #: panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
@@ -3465,23 +3449,23 @@ msgstr "Auto-gerar palavra-passe"
 msgid "_Turn On"
 msgstr "_Ligar"
 
-#: panels/network/cc-wifi-panel.c:549
+#: panels/network/cc-wifi-panel.c:407
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:66
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:883
+#: panels/network/cc-wifi-panel.c:741
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr ""
 "O desligar irá desativar quaisquer dispositivos que estejam a utilizar o "
 "ponto de acesso."
 
-#: panels/network/cc-wifi-panel.c:885
+#: panels/network/cc-wifi-panel.c:743
 msgid "Turn Off Hotspot?"
 msgstr "Desligar o ponto de acesso?"
 
-#: panels/network/cc-wifi-panel.c:888
+#: panels/network/cc-wifi-panel.c:746
 msgid "_Turn Off"
 msgstr "_Desligar"
 
@@ -3583,13 +3567,13 @@ msgstr "Perfil %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:229
+#: panels/network/net-device-wifi.c:230
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:101
-#: panels/network/net-device-wifi.c:234
+#: panels/network/net-device-wifi.c:235
 msgid "WPA"
 msgstr "WPA"
 
@@ -3615,7 +3599,7 @@ msgid "Enterprise"
 msgstr "Empresarial"
 
 #: panels/network/connection-editor/ce-page-details.c:135
-#: panels/network/net-device-wifi.c:219
+#: panels/network/net-device-wifi.c:220
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nenhuma"
@@ -4211,7 +4195,7 @@ msgstr "Com cabo"
 msgid "Add new connection"
 msgstr "Adicionar uma nova ligação"
 
-#: panels/network/net-device-wifi.c:863
+#: panels/network/net-device-wifi.c:864
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -4219,25 +4203,25 @@ msgstr ""
 "Os detalhes de rede das redes selecionadas, incluindo palavras-passe e "
 "quaisquer configurações personalizadas, serão perdidos."
 
-#: panels/network/net-device-wifi.c:867
+#: panels/network/net-device-wifi.c:868
 msgid "_Forget"
 msgstr "_Esquecer"
 
-#: panels/network/net-device-wifi.c:1048
+#: panels/network/net-device-wifi.c:1067
 msgid "Saved Wi-Fi Networks"
 msgstr "Redes Wi-Fi guardadas"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1067
+#: panels/network/net-device-wifi.c:1086
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Esquecer"
 
-#: panels/network/net-device-wifi.c:1221
+#: panels/network/net-device-wifi.c:1244
 msgid "System policy prohibits use as a Hotspot"
 msgstr "A política de sistema proíbe o uso como ponto de acesso"
 
-#: panels/network/net-device-wifi.c:1224
+#: panels/network/net-device-wifi.c:1247
 msgid "Wireless device does not support Hotspot mode"
 msgstr "O dispositivo sem-fio não suporta o modo ponto de acesso"
 
@@ -9219,15 +9203,15 @@ msgstr "Painéis disponíveis:"
 msgid "All Settings"
 msgstr "Todas as definições"
 
-#: shell/cc-window.ui:54
-msgid "Primary Menu"
+#: shell/cc-window.ui:53 shell/cc-window.ui:55
+msgid "Main Menu"
 msgstr "Menu principal"
 
-#: shell/cc-window.ui:152
+#: shell/cc-window.ui:153
 msgid "Warning: Development Version"
 msgstr "Aviso: versão em desenvolvimento"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:154
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9237,7 +9221,7 @@ msgstr ""
 "incorrer em comportamento anormal do sistema, perda de dados, e outras "
 "falhas inesperadas. "
 
-#: shell/cc-window.ui:164
+#: shell/cc-window.ui:165
 msgid "Help"
 msgstr "Ajuda"
 
@@ -9344,6 +9328,33 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons do sistema"
+
+#~ msgid "Try clicking, double clicking, scrolling"
+#~ msgstr "Tente clicar, realizar duplo clique e deslocar"
+
+#~ msgid "Five clicks, GEGL time!"
+#~ msgstr "Cinco cliques, hora de GEGL!"
+
+#~ msgid "Double click, primary button"
+#~ msgstr "Clique duplo, botão principal"
+
+#~ msgid "Single click, primary button"
+#~ msgstr "Clique único, botão principal"
+
+#~ msgid "Double click, middle button"
+#~ msgstr "Clique duplo, botão do meio"
+
+#~ msgid "Single click, middle button"
+#~ msgstr "Clique único, botão do meio"
+
+#~ msgid "Double click, secondary button"
+#~ msgstr "Clique duplo, botão secundário"
+
+#~ msgid "Single click, secondary button"
+#~ msgstr "Clique único, botão secundário"
+
+#~ msgid "Primary Menu"
+#~ msgstr "Menu principal"
 
 #~ msgid "Mouse speed"
 #~ msgstr "Velocidade do rato"
@@ -10088,9 +10099,6 @@ msgstr "Sons do sistema"
 #~ msgid "_Click Assist"
 #~ msgstr "Assistente de _clique"
 
-#~ msgid "Double-Click Delay"
-#~ msgstr "Atraso do clique duplo"
-
 #~ msgid "Flash the entire _window"
 #~ msgstr "Piscar a _janela inteira"
 
@@ -10628,9 +10636,6 @@ msgstr "Sons do sistema"
 
 #~ msgid "Join Displays"
 #~ msgstr "Juntar ecrãs"
-
-#~ msgid "Single Display"
-#~ msgstr "Ecrã único"
 
 #~ msgid ""
 #~ "Drag displays to match your physical display setup. Select a display to "
