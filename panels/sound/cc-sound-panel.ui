@@ -366,6 +366,9 @@
               <object class="AdwActionRow">
                 <property name="title" translatable="yes">Alert Sound</property>
                 <property name="activatable">True</property>
+                <accessibility>
+                  <relation name="described-by">alert_sound_label</relation>
+                </accessibility>
                 <signal name="activated" handler="alert_sound_activated_cb" swapped="yes"/>
                 <child>
                   <object class="GtkLabel" id="alert_sound_label"/>
