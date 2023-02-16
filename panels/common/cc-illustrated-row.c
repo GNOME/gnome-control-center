@@ -27,7 +27,7 @@ struct _CcIllustratedRow
   CcVerticalRow      parent;
 
   GtkBox            *picture_box;
-  GtkImage          *picture;
+  GtkPicture        *picture;
   const gchar       *resource_path;
 
   GtkMediaStream    *media_stream;
@@ -47,7 +47,7 @@ static GParamSpec *props[N_PROPS] = { NULL, };
 static void
 on_picture_leave_cb (CcIllustratedRow *self)
 {
-  GtkMediaStream *stream = GTK_MEDIA_STREAM (gtk_image_get_paintable (self->picture));
+  GtkMediaStream *stream = GTK_MEDIA_STREAM (gtk_picture_get_paintable (self->picture));
 
   gtk_media_stream_set_loop (stream, FALSE);
   gtk_media_stream_pause (stream);
@@ -56,7 +56,7 @@ on_picture_leave_cb (CcIllustratedRow *self)
 static void
 on_picture_hover_cb (CcIllustratedRow *self)
 {
-  GtkMediaStream *stream = GTK_MEDIA_STREAM (gtk_image_get_paintable (self->picture));
+  GtkMediaStream *stream = GTK_MEDIA_STREAM (gtk_picture_get_paintable (self->picture));
 
   gtk_media_stream_set_loop (stream, TRUE);
   gtk_media_stream_play (stream);
@@ -143,7 +143,7 @@ cc_illustrated_row_set_resource (CcIllustratedRow *self,
   self->resource_path = resource_path;
   self->media_stream = gtk_media_file_new_for_resource (resource_path);
 
-  gtk_image_set_from_paintable (self->picture, GDK_PAINTABLE (self->media_stream));
+  gtk_picture_set_paintable (self->picture, GDK_PAINTABLE (self->media_stream));
   gtk_widget_set_visible (GTK_WIDGET (self->picture_box),
                           resource_path != NULL && g_strcmp0 (resource_path, "") != 0);
 

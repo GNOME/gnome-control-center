@@ -26,8 +26,8 @@ struct _CcSplitRow
 {
   CcVerticalRow      parent;
 
-  GtkImage          *default_option_picture;
-  GtkImage          *alternative_option_picture;
+  GtkPicture        *default_option_picture;
+  GtkPicture        *alternative_option_picture;
 
   GtkCheckButton    *alternative_option_checkbutton;
   GtkCheckButton    *default_option_checkbutton;
@@ -77,7 +77,7 @@ on_option_focus_leave_cb (GtkEventControllerMotion *controller,
   GtkMediaStream *stream;
   GdkPaintable *paintable;
 
-  paintable = gtk_image_get_paintable (GTK_IMAGE (picture));
+  paintable = gtk_picture_get_paintable (GTK_PICTURE (picture));
 
   if (!GTK_IS_MEDIA_STREAM (paintable))
     return;
@@ -96,7 +96,7 @@ on_option_focus_enter_cb (GtkEventControllerMotion *controller,
   GtkMediaStream *stream;
   GdkPaintable *paintable;
 
-  paintable = gtk_image_get_paintable (GTK_IMAGE (picture));
+  paintable = gtk_picture_get_paintable (GTK_PICTURE (picture));
 
   if (!GTK_IS_MEDIA_STREAM (paintable))
     return;
@@ -289,7 +289,7 @@ cc_split_row_set_default_illustration_resource (CcSplitRow  *self,
   self->default_resource_path = resource_path;
   media_file = gtk_media_file_new_for_resource (resource_path);
 
-  gtk_image_set_from_paintable (self->default_option_picture, GDK_PAINTABLE (media_file));
+  gtk_picture_set_paintable (self->default_option_picture, GDK_PAINTABLE (media_file));
   gtk_widget_set_visible (GTK_WIDGET (self->default_option_picture),
                           resource_path != NULL && g_strcmp0 (resource_path, "") != 0);
 
@@ -314,7 +314,7 @@ cc_split_row_set_alternative_illustration_resource (CcSplitRow  *self,
   media_file = gtk_media_file_new_for_resource (resource_path);
   gtk_media_stream_set_loop (media_file, TRUE);
 
-  gtk_image_set_from_paintable (self->alternative_option_picture, GDK_PAINTABLE (media_file));
+  gtk_picture_set_paintable (self->alternative_option_picture, GDK_PAINTABLE (media_file));
   gtk_widget_set_visible (GTK_WIDGET (self->alternative_option_picture),
                           resource_path != NULL && g_strcmp0 (resource_path, "") != 0);
 
