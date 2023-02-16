@@ -99,6 +99,7 @@ struct _CcUserPanel {
         GtkOverlay      *users_overlay;
 
         ActUser *selected_user;
+        ActUser *pending_show_user;
         GPermission *permission;
         CcLanguageChooser *language_chooser;
         GListStore *other_users_model;
@@ -834,6 +835,18 @@ show_or_hide_back_button (CcUserPanel *self)
 }
 
 static void
+on_pending_show_user_is_loaded (ActUser     *user,
+                                GParamSpec  *param,
+                                CcUserPanel *self)
+{
+        if (!act_user_is_loaded (user)) {
+                return;
+        }
+
+        show_user (user, self);
+}
+
+static void
 show_user (ActUser *user, CcUserPanel *self)
 {
         g_autofree gchar *lang = NULL;
@@ -843,6 +856,23 @@ show_user (ActUser *user, CcUserPanel *self)
 #ifdef HAVE_MALCONTENT
         g_autofree gchar *malcontent_control_path = NULL;
 #endif
+
+        if (self->pending_show_user != NULL) {
+                g_signal_handlers_disconnect_by_func (G_OBJECT (self->pending_show_user),
+                                                      on_pending_show_user_is_loaded,
+                                                      self);
+                g_clear_object (&self->pending_show_user);
+        }
+
+        if (!act_user_is_loaded (user)) {
+                g_set_object (&self->pending_show_user, user);
+                g_signal_connect_object (G_OBJECT (self->pending_show_user),
+                                         "notify::is-loaded",
+                                         G_CALLBACK (on_pending_show_user_is_loaded),
+                                         self,
+                                         0);
+                return;
+        }
 
         g_set_object (&self->selected_user, user);
 
@@ -1535,6 +1565,7 @@ cc_user_panel_dispose (GObject *object)
         CcUserPanel *self = CC_USER_PANEL (object);
 
         g_clear_object (&self->selected_user);
+        g_clear_object (&self->pending_show_user);
         g_clear_object (&self->login_screen_settings);
         g_clear_pointer ((GtkWindow **)&self->language_chooser, gtk_window_destroy);
         g_clear_object (&self->permission);
