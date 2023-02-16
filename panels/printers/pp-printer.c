@@ -516,58 +516,28 @@ print_file_thread (GTask        *task,
 {
   PpPrinter        *self = PP_PRINTER (source_object);
   PrintFileData    *print_file_data;
-  cups_ptype_t      type = 0;
   cups_dest_t      *dest = NULL;
-  const gchar      *printer_type = NULL;
   gboolean          ret = FALSE;
-  g_autofree gchar *printer_uri = NULL;
-  g_autofree gchar *resource = NULL;
-  ipp_t            *response = NULL;
-  ipp_t            *request;
+  gint              job_id = 0;
 
   dest = cupsGetNamedDest (CUPS_HTTP_DEFAULT, self->printer_name, NULL);
-  if (dest != NULL)
-    {
-      printer_type = cupsGetOption ("printer-type",
-                                    dest->num_options,
-                                    dest->options);
-      cupsFreeDests (1, dest);
 
-      if (printer_type)
-        type = atoi (printer_type);
-    }
-
-  if (type & CUPS_PRINTER_CLASS)
+  if (dest == NULL)
     {
-      printer_uri = g_strdup_printf ("ipp://localhost/classes/%s", self->printer_name);
-      resource = g_strdup_printf ("/classes/%s", self->printer_name);
-    }
-  else
-    {
-      printer_uri = g_strdup_printf ("ipp://localhost/printers/%s", self->printer_name);
-      resource = g_strdup_printf ("/printers/%s", self->printer_name);
+      g_warning ("Failed to get the destination %s - %s.", self->printer_name, cupsLastErrorString ());
+      g_task_return_boolean (task, ret);
     }
 
   print_file_data = g_task_get_task_data (task);
 
-  request = ippNewRequest (IPP_PRINT_JOB);
-  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_URI,
-                "printer-uri", NULL, printer_uri);
-  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
-                "requesting-user-name", NULL, cupsUser ());
-  ippAddString (request, IPP_TAG_OPERATION, IPP_TAG_NAME,
-                "job-name", NULL, print_file_data->job_name);
-  response = cupsDoFileRequest (CUPS_HTTP_DEFAULT, request, resource, print_file_data->filename);
+  job_id = cupsPrintFile2 (CUPS_HTTP_DEFAULT, dest->name, print_file_data->filename, print_file_data->job_name, dest->num_options, dest->options);
 
-  if (response != NULL)
-    {
-      if (ippGetState (response) == IPP_ERROR)
-        g_warning ("An error has occurred during printing of test page.");
-      if (ippGetState (response) == IPP_STATE_IDLE)
-        ret = TRUE;
+  if (job_id < 1)
+    g_warning ("An error has occurred during printing of test page - %s", cupsLastErrorString ());
+  else
+    ret = TRUE;
 
-      ippDelete (response);
-    }
+  cupsFreeDests (1, dest);
 
   if (g_task_set_return_on_cancel (task, FALSE))
     {
