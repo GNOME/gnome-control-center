@@ -273,6 +273,19 @@ on_motion (GtkEventControllerMotion *controller,
 }
 
 static void
+on_leave (GtkEventControllerMotion *controller,
+           void                     *user_data)
+{
+    CcCropArea *area = CC_CROP_AREA (user_data);
+
+    if (area->paintable == NULL)
+        return;
+
+    /* Restore 'default' cursor */
+    update_cursor (area, 0, 0);
+}
+
+static void
 on_drag_begin (GtkGestureDrag *gesture,
                double          start_x,
                double          start_y,
@@ -585,6 +598,7 @@ cc_crop_area_init (CcCropArea *area)
     /* Add handlers for motion events */
     controller = gtk_event_controller_motion_new ();
     g_signal_connect (controller, "motion", G_CALLBACK (on_motion), area);
+    g_signal_connect (controller, "leave", G_CALLBACK (on_leave), area);
     gtk_widget_add_controller (GTK_WIDGET (area), GTK_EVENT_CONTROLLER (controller));
 
     area->scale = 0.0;
