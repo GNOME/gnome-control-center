@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-13 09:19+0000\n"
-"PO-Revision-Date: 2023-02-13 23:26+0200\n"
+"POT-Creation-Date: 2023-02-18 12:28+0000\n"
+"PO-Revision-Date: 2023-02-19 21:11+0200\n"
 "Last-Translator: Aurimas Černius <aurisc4@gmail.com>\n"
 "Language-Team: Lietuvių <gnome-lt@lists.akl.lt>\n"
 "Language: lt\n"
@@ -174,8 +174,8 @@ msgstr "Gauti sistemos paieškas bei siųsti rezultatus"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:820
-#: panels/user-accounts/cc-user-panel.c:921
+#: panels/user-accounts/cc-user-panel.c:821
+#: panels/user-accounts/cc-user-panel.c:951
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -356,11 +356,11 @@ msgstr "Pasirinkite paveikslėlį"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:887
+#: panels/network/cc-wifi-panel.c:745
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
-#: panels/network/net-device-wifi.c:866
+#: panels/network/net-device-wifi.c:867
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
@@ -371,8 +371,8 @@ msgstr "Pasirinkite paveikslėlį"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:610
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:629
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -1163,7 +1163,7 @@ msgid "No languages found"
 msgstr "Nerasta kalbų"
 
 #: panels/common/cc-language-chooser.ui:69
-#: panels/keyboard/cc-input-chooser.c:173
+#: panels/keyboard/cc-input-chooser.c:175
 msgid "More…"
 msgstr "Daugiau…"
 
@@ -1375,8 +1375,8 @@ msgstr "Reikalauja vietos tarnybų bei interneto ryšio"
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
-#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
-#: panels/user-accounts/cc-user-panel.c:918
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:819
+#: panels/user-accounts/cc-user-panel.c:948
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Įjungta"
@@ -2521,11 +2521,11 @@ msgstr "Sumažinti teksto dydį"
 msgid "High contrast on or off"
 msgstr "Įjungti arba išjungti didelį kontrastą"
 
-#: panels/keyboard/cc-input-chooser.c:186
+#: panels/keyboard/cc-input-chooser.c:188
 msgid "No input sources found"
 msgstr "Nerasta įvesties šaltinių"
 
-#: panels/keyboard/cc-input-chooser.c:968
+#: panels/keyboard/cc-input-chooser.c:993
 msgctxt "Input Source"
 msgid "Other"
 msgstr "Kita"
@@ -2690,7 +2690,7 @@ msgstr "Specialiųjų simbolių įvestis"
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Metodai simbolių bei raidžių variantų įvedimui naudojant klaviatūrą."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:160
+#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:161
 msgid "Keyboard Shortcuts"
 msgstr "Klaviatūros trumpiniai"
 
@@ -2951,126 +2951,153 @@ msgstr "Riboti prieigą prie mikrofonų"
 msgid "microphone;recording;application;privacy;"
 msgstr "mikrofonas,įrašymas;programa;privatumas;"
 
-#: panels/mouse/cc-mouse-panel.ui:9
+#: panels/mouse/cc-mouse-panel.ui:18
 msgid "Test _Settings"
 msgstr "Tikrinti _nustatymus"
 
-#: panels/mouse/cc-mouse-panel.ui:23
+#: panels/mouse/cc-mouse-panel.ui:32 panels/mouse/cc-mouse-panel.ui:78
+msgid "Mouse"
+msgstr "Pelė"
+
+#: panels/mouse/cc-mouse-panel.ui:39
 #: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "Bendri"
 
-#: panels/mouse/cc-mouse-panel.ui:26
+#: panels/mouse/cc-mouse-panel.ui:42
 msgid "Primary Button"
 msgstr "Pagrindinis mygtukas"
 
-#: panels/mouse/cc-mouse-panel.ui:27
-msgid "Sets the order of physical buttons on mice and touchpads."
-msgstr "Nustato pelių ir jutiklinių kilimėlių mygtukų fizinę tvarką"
+#: panels/mouse/cc-mouse-panel.ui:43
+msgid "Order of physical buttons on mice and touchpads."
+msgstr "Nustato pelių ir jutiklinių kilimėlių mygtukų fizinę tvarką."
 
-#: panels/mouse/cc-mouse-panel.ui:41
+#: panels/mouse/cc-mouse-panel.ui:57
 msgid "Left"
 msgstr "Kairysis"
 
-#: panels/mouse/cc-mouse-panel.ui:48
+#: panels/mouse/cc-mouse-panel.ui:64
 msgid "Right"
 msgstr "Dešinysis"
 
-#: panels/mouse/cc-mouse-panel.ui:62
-msgid "Mouse"
-msgstr "Pelė"
+#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:86
+#: panels/mouse/cc-mouse-panel.ui:189
+msgid "Pointer Speed"
+msgstr "Žymeklio greitis"
 
-#: panels/mouse/cc-mouse-panel.ui:65
-msgid "Mouse Speed"
-msgstr "Pelės greitis"
-
-#: panels/mouse/cc-mouse-panel.ui:70
-msgid "Mouse speed"
-msgstr "Pelės greitis"
-
-#: panels/mouse/cc-mouse-panel.ui:73 panels/mouse/cc-mouse-panel.ui:149
+#: panels/mouse/cc-mouse-panel.ui:89 panels/mouse/cc-mouse-panel.ui:197
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Lėtas"
 
-#: panels/mouse/cc-mouse-panel.ui:75 panels/mouse/cc-mouse-panel.ui:151
+#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:199
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Greitas"
 
-#. Translators: This switch reverses the scrolling direction for mices. The term used comes from OS X so use the same translation if possible.
-#. Translators: This switch reverses the scrolling direction for touchpads. The term used comes from OS X so use the same translation if possible.
-#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:98
-#: panels/mouse/cc-mouse-panel.ui:126 panels/mouse/cc-mouse-panel.ui:133
-msgid "Natural Scrolling"
-msgstr "Natūralus slinkimas"
+#: panels/mouse/cc-mouse-panel.ui:107 panels/mouse/cc-mouse-panel.ui:142
+msgid "Pointer Assistance"
+msgstr "Žymeklio asistentas"
 
-#: panels/mouse/cc-mouse-panel.ui:92 panels/mouse/cc-mouse-panel.ui:127
-msgid "Scrolling moves the content, not the view."
-msgstr "Slinkimas perkelia turinį, o ne rodinį."
+#: panels/mouse/cc-mouse-panel.ui:108
+msgid "Recommended for most users and applications"
+msgstr "Rekomenduojama daugumai naudotojų ir programų"
 
-#: panels/mouse/cc-mouse-panel.ui:109 panels/mouse/cc-mouse-panel.ui:112
-#: panels/mouse/cc-mouse-panel.ui:118
+#. Translators: Preserve the line-break separating the two paragraphs.
+#: panels/mouse/cc-mouse-panel.ui:128
+msgid ""
+"Turning pointer assistance off can allow faster and more precise movements, "
+"but can also make the mouse more difficult to use.\n"
+"\n"
+"Pointer assistance is also known as pointer acceleration."
+msgstr ""
+"Žymeklio asistento išjungimas leidžia greitesnius bei tikslesnius judesius, "
+"bet gali būti sunkiau naudoti pelę.\n"
+"\n"
+"Žymeklio asistentas dar žinomas kaip žymeklio spartinimas."
+
+#: panels/mouse/cc-mouse-panel.ui:150 panels/mouse/cc-mouse-panel.ui:253
+msgid "Scroll Direction"
+msgstr "Slinkimo kryptis"
+
+#: panels/mouse/cc-mouse-panel.ui:151 panels/mouse/cc-mouse-panel.ui:254
+msgid "Traditional"
+msgstr "Įprastinė"
+
+#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:255
+msgid "Scrolling moves the view"
+msgstr "Slinkimas perkelia rodinį"
+
+#: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:256
+msgid "Natural"
+msgstr "Natūrali"
+
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:257
+msgid "Scrolling moves the content"
+msgstr "Slinkimas perkelia turinį"
+
+#: panels/mouse/cc-mouse-panel.ui:168 panels/mouse/cc-mouse-panel.ui:175
+#: panels/mouse/cc-mouse-panel.ui:181
 msgid "Touchpad"
 msgstr "Jutiklinis kilimėlis"
 
-#: panels/mouse/cc-mouse-panel.ui:141
-msgid "Touchpad Speed"
-msgstr "Jutiklinio kilimėlio greitis"
+#: panels/mouse/cc-mouse-panel.ui:194
+msgid "Pointer speed"
+msgstr "Žymeklio greitis"
 
-#: panels/mouse/cc-mouse-panel.ui:146
-msgid "Touchpad speed"
-msgstr "Jutiklinio kilimėlio greitis"
+#: panels/mouse/cc-mouse-panel.ui:217
+msgid "Clicking"
+msgstr "Spaudimas"
 
-#: panels/mouse/cc-mouse-panel.ui:168
+#: panels/mouse/cc-mouse-panel.ui:222
 msgid "Tap to Click"
 msgstr "Bakstelėti _paspaudimui"
 
-#: panels/mouse/cc-mouse-panel.ui:174
+#: panels/mouse/cc-mouse-panel.ui:223
+msgid "Quickly touch the touchpad to click"
+msgstr "Greitai palieskite jutiklinį kilimėlį paspaudimui"
+
+#: panels/mouse/cc-mouse-panel.ui:229
 msgid "Tap to click"
 msgstr "Pasieti paspaudimui"
 
-#: panels/mouse/cc-mouse-panel.ui:183 panels/mouse/cc-mouse-panel.ui:189
-msgid "Two-finger Scrolling"
-msgstr "Slinktis dviem pirštais"
+#: panels/mouse/cc-mouse-panel.ui:240
+msgid "Scrolling"
+msgstr "Slinkimas"
 
-#: panels/mouse/cc-mouse-panel.ui:199 panels/mouse/cc-mouse-panel.ui:205
-msgid "Edge Scrolling"
-msgstr "Slinkimas kraštuose"
+#: panels/mouse/cc-mouse-panel.ui:243
+msgid "Scroll Method"
+msgstr "Slinkimo metodas"
 
-#: panels/mouse/cc-mouse-test.c:131 panels/mouse/cc-mouse-test.ui:62
-msgid "Try clicking, double clicking, scrolling"
-msgstr "Mėginkite spausti, dvigubą paspaudimą, slinkti"
+#: panels/mouse/cc-mouse-panel.ui:244
+msgid "Two Finger"
+msgstr "Dviem pirštais"
 
-#: panels/mouse/cc-mouse-test.c:136
-msgid "Five clicks, GEGL time!"
-msgstr "Penki paspaudimai, GEGL laikas!"
+#: panels/mouse/cc-mouse-panel.ui:245
+msgid "Drag two fingers on the touchpad"
+msgstr "Tempkite du pirštus ant jutiklinio kilimėlio"
 
-#: panels/mouse/cc-mouse-test.c:141
-msgid "Double click, primary button"
-msgstr "Dvigubas paspaudimas, pagrindinis mygtukas"
+#: panels/mouse/cc-mouse-panel.ui:246
+msgid "Edge"
+msgstr "Kraštas"
 
-#: panels/mouse/cc-mouse-test.c:141
-msgid "Single click, primary button"
-msgstr "Vienas paspaudimas, pagrindinis mygtukas"
+#: panels/mouse/cc-mouse-panel.ui:247
+msgid "Drag one finger on the edge"
+msgstr "Tempkite pirštą pakraščiu"
 
-#: panels/mouse/cc-mouse-test.c:144
-msgid "Double click, middle button"
-msgstr "Dvigubas paspaudimas, vidurinysis mygtukas"
+#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:98
+msgid "Single Click"
+msgstr "Viengubas paspaudimas"
 
-#: panels/mouse/cc-mouse-test.c:144
-msgid "Single click, middle button"
-msgstr "Vienas paspaudimas, vidurinysis klavišas"
+#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:112
+msgid "Double Click"
+msgstr "Dvigubas paspaudimas"
 
-#: panels/mouse/cc-mouse-test.c:147
-msgid "Double click, secondary button"
-msgstr "Dvigubas paspaudimas, antraeilis mygtukas"
-
-#: panels/mouse/cc-mouse-test.c:147
-msgid "Single click, secondary button"
-msgstr "Vienas paspaudimas, antraeilis mygtukas"
+#: panels/mouse/cc-mouse-test.ui:26
+msgid "Test Mouse & Touchpad"
+msgstr "Tikrinti pelę ir jutiklinį kilimėlį"
 
 #: panels/mouse/gnome-mouse-panel.desktop.in:3
 msgid "Mouse & Touchpad"
@@ -3098,62 +3125,62 @@ msgstr "_Karštas kampas"
 msgid "Touch the top-left corner to open the Activities Overview."
 msgstr "Paspauskite viršutinį kairįjį kampą veiklų apžvalgai atverti."
 
-#: panels/multitasking/cc-multitasking-panel.ui:42
+#: panels/multitasking/cc-multitasking-panel.ui:31
 msgid "_Active Screen Edges"
 msgstr "_Aktyvūs ekrano kraštai"
 
-#: panels/multitasking/cc-multitasking-panel.ui:43
+#: panels/multitasking/cc-multitasking-panel.ui:32
 msgid ""
 "Drag windows against the top, left, and right screen edges to resize them."
 msgstr ""
 "Tempkite langus į viršutinį, kairį bei dešinį ekrano kraštus jų dydžiui "
 "pakeisti."
 
-#: panels/multitasking/cc-multitasking-panel.ui:70
+#: panels/multitasking/cc-multitasking-panel.ui:48
 msgid "Workspaces"
 msgstr "Darbo sritys"
 
-#: panels/multitasking/cc-multitasking-panel.ui:76
+#: panels/multitasking/cc-multitasking-panel.ui:54
 msgid "_Dynamic workspaces"
 msgstr "_Dinaminės darbo sritys"
 
-#: panels/multitasking/cc-multitasking-panel.ui:77
+#: panels/multitasking/cc-multitasking-panel.ui:55
 msgid "Automatically removes empty workspaces."
 msgstr "Automatiškai pašalina tuščias darbo sritis."
 
-#: panels/multitasking/cc-multitasking-panel.ui:91
+#: panels/multitasking/cc-multitasking-panel.ui:69
 msgid "_Fixed number of workspaces"
 msgstr "_Fiksuotas darbo sričių skaičius"
 
-#: panels/multitasking/cc-multitasking-panel.ui:92
+#: panels/multitasking/cc-multitasking-panel.ui:70
 msgid "Specify a number of permanent workspaces."
 msgstr "Nurodykite nuolatinių darbo sričių skaičių."
 
-#: panels/multitasking/cc-multitasking-panel.ui:108
+#: panels/multitasking/cc-multitasking-panel.ui:86
 msgid "_Number of Workspaces"
 msgstr "_Darbo sričių skaičius"
 
-#: panels/multitasking/cc-multitasking-panel.ui:124
+#: panels/multitasking/cc-multitasking-panel.ui:102
 msgid "Multi-Monitor"
 msgstr "Keli monitoriai"
 
-#: panels/multitasking/cc-multitasking-panel.ui:130
+#: panels/multitasking/cc-multitasking-panel.ui:108
 msgid "Workspaces on _primary display only"
 msgstr "Darbo sritys tik _pirminiame vaizduoklyje"
 
-#: panels/multitasking/cc-multitasking-panel.ui:156
+#: panels/multitasking/cc-multitasking-panel.ui:123
 msgid "Workspaces on all d_isplays"
 msgstr "Darbo sritys v_isuose vaizduokliuose"
 
-#: panels/multitasking/cc-multitasking-panel.ui:184
+#: panels/multitasking/cc-multitasking-panel.ui:140
 msgid "App Switching"
 msgstr "Programų perjungimas"
 
-#: panels/multitasking/cc-multitasking-panel.ui:190
+#: panels/multitasking/cc-multitasking-panel.ui:146
 msgid "Include apps from all _workspaces"
 msgstr "Įtraukti programas iš visų darbo _sričių"
 
-#: panels/multitasking/cc-multitasking-panel.ui:204
+#: panels/multitasking/cc-multitasking-panel.ui:160
 msgid "Include apps from the _current workspace only"
 msgstr "Įtraukti programas tik iš _dabartinės darbo srities"
 
@@ -3296,30 +3323,51 @@ msgstr "SOCKS serverio prievadas"
 msgid "Ignored Hosts"
 msgstr "Nepaisomi kompiuteriai"
 
+#.
+#. * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
+#. * The string placeholder will be replaced by the Wi-Fi networks SSID.
+#.
+#: panels/network/cc-qr-code-dialog.c:128
+#, c-format
+msgid "Scan the QR code to connect to the network <b>%s</b>."
+msgstr "Nuskaitykite QA kodą prisijungimui prie tinklo <b>%s</b>."
+
+#: panels/network/cc-qr-code-dialog.ui:9
+msgid "Share Network"
+msgstr "Bendrinti tinklą"
+
+#: panels/network/cc-qr-code-dialog.ui:36
+msgid "QR Code"
+msgstr "QR kodas"
+
+#: panels/network/cc-qr-code-dialog.ui:46
+msgid "Scan to Connect"
+msgstr "Nuskaitykite prisijungimui"
+
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:216
+#: panels/network/cc-wifi-connection-row.c:218
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:275
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Insecure network (WEP)"
 msgstr "Nesaugus tinklas (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:279
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network (WPA)"
 msgstr "Saugus tinklas (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:286
 msgid "Secure network (WPA2)"
 msgstr "Saugus tinklas (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:287
+#: panels/network/cc-wifi-connection-row.c:290
 msgid "Secure network (WPA3)"
 msgstr "Saugus tinklas (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:291
+#: panels/network/cc-wifi-connection-row.c:294
 msgid "Secure network"
 msgstr "Saugus tinklas"
 
@@ -3329,6 +3377,10 @@ msgid "Connected"
 msgstr "Prisijungta"
 
 #: panels/network/cc-wifi-connection-row.ui:62
+msgid "Show QR-Code"
+msgstr "Rodyti QR-kodą"
+
+#: panels/network/cc-wifi-connection-row.ui:77
 #: panels/network/net-device-ethernet.c:325
 #: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
 #: panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
@@ -3398,21 +3450,21 @@ msgstr "Automatiškai generuoti slaptažodį"
 msgid "_Turn On"
 msgstr "Į_jungti"
 
-#: panels/network/cc-wifi-panel.c:549
+#: panels/network/cc-wifi-panel.c:407
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:66
 msgid "Wi-Fi"
 msgstr "Belaidis"
 
-#: panels/network/cc-wifi-panel.c:883
+#: panels/network/cc-wifi-panel.c:741
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr "Išjungus atsijungs visi įrenginiai, kurie naudoja prieigos tašką"
 
-#: panels/network/cc-wifi-panel.c:885
+#: panels/network/cc-wifi-panel.c:743
 msgid "Turn Off Hotspot?"
 msgstr "Išjungti prieigos tašką?"
 
-#: panels/network/cc-wifi-panel.c:888
+#: panels/network/cc-wifi-panel.c:746
 msgid "_Turn Off"
 msgstr "Iš_jungti"
 
@@ -3511,13 +3563,13 @@ msgstr "Profilis %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:229
+#: panels/network/net-device-wifi.c:230
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:101
-#: panels/network/net-device-wifi.c:234
+#: panels/network/net-device-wifi.c:235
 msgid "WPA"
 msgstr "WPA"
 
@@ -3543,7 +3595,7 @@ msgid "Enterprise"
 msgstr "Enterprise"
 
 #: panels/network/connection-editor/ce-page-details.c:135
-#: panels/network/net-device-wifi.c:219
+#: panels/network/net-device-wifi.c:220
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Nėra"
@@ -4135,7 +4187,7 @@ msgstr "Laidinis"
 msgid "Add new connection"
 msgstr "Pridėti naują ryšį"
 
-#: panels/network/net-device-wifi.c:863
+#: panels/network/net-device-wifi.c:864
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -4143,25 +4195,25 @@ msgstr ""
 "Tinklo nustatymai pasirinktiems tinklams įskaitant slaptažodžius ir bet "
 "kokius asmeninius nustatymus bus prarasti."
 
-#: panels/network/net-device-wifi.c:867
+#: panels/network/net-device-wifi.c:868
 msgid "_Forget"
 msgstr "_Pamiršti"
 
-#: panels/network/net-device-wifi.c:1048
+#: panels/network/net-device-wifi.c:1067
 msgid "Saved Wi-Fi Networks"
 msgstr "Įrašyti belaidžiai tinklai"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1067
+#: panels/network/net-device-wifi.c:1086
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Pamiršti"
 
-#: panels/network/net-device-wifi.c:1221
+#: panels/network/net-device-wifi.c:1244
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Sistemos taisyklės neleidžia naudoti kaip prieigos taško"
 
-#: panels/network/net-device-wifi.c:1224
+#: panels/network/net-device-wifi.c:1247
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Belaidis įrenginys nepalaiko prieigos taško veiksenos"
 
@@ -7819,7 +7871,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:743
+#: panels/user-accounts/cc-user-panel.c:744
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7827,7 +7879,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:747
+#: panels/user-accounts/cc-user-panel.c:748
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7919,30 +7971,30 @@ msgstr "Netinkamas slaptažodis, bandykite dar kartą"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nepavyko prisijungti prie %s srities: %s"
 
-#: panels/user-accounts/cc-user-panel.c:258
+#: panels/user-accounts/cc-user-panel.c:259
 msgid "Add User…"
 msgstr "Pridėti naudotoją…"
 
-#: panels/user-accounts/cc-user-panel.c:372
+#: panels/user-accounts/cc-user-panel.c:373
 msgid "Failed to delete user"
 msgstr "Nepavyko ištrinti naudotojo"
 
-#: panels/user-accounts/cc-user-panel.c:429
-#: panels/user-accounts/cc-user-panel.c:484
-#: panels/user-accounts/cc-user-panel.c:530
+#: panels/user-accounts/cc-user-panel.c:430
+#: panels/user-accounts/cc-user-panel.c:485
+#: panels/user-accounts/cc-user-panel.c:531
 msgid "Failed to revoke remotely managed user"
 msgstr "Nepavyko atimti teisių iš nutolusio naudotojo"
 
-#: panels/user-accounts/cc-user-panel.c:579
+#: panels/user-accounts/cc-user-panel.c:580
 msgid "You cannot delete your own account."
 msgstr "Jūs negalite ištrinti savo paskyros."
 
-#: panels/user-accounts/cc-user-panel.c:588
+#: panels/user-accounts/cc-user-panel.c:589
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s vis dar prisijungęs"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:593
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7950,73 +8002,73 @@ msgstr ""
 "Naudotojų ištrynimas, kai jie yra prisijungę, gali palikti sistemą "
 "nekorektiškoje būsenoje."
 
-#: panels/user-accounts/cc-user-panel.c:601
+#: panels/user-accounts/cc-user-panel.c:602
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Ar norite palikti naudotojo %s failus?"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:606
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr ""
 "Trinant naudotoją galima palikti namų katalogą, paštą ir laikinus failus."
 
-#: panels/user-accounts/cc-user-panel.c:608
+#: panels/user-accounts/cc-user-panel.c:609
 msgid "_Delete Files"
 msgstr "_Ištrinti failus"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:610
 msgid "_Keep Files"
 msgstr "_Palikti failus"
 
-#: panels/user-accounts/cc-user-panel.c:623
+#: panels/user-accounts/cc-user-panel.c:624
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "Ar tikrai norite atimti teises iš nuotoliniu būdu tvarkomos paskyros %s?"
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:628
 msgid "_Delete"
 msgstr "_Ištrinti"
 
-#: panels/user-accounts/cc-user-panel.c:677
+#: panels/user-accounts/cc-user-panel.c:678
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Paskyra išjungta"
 
-#: panels/user-accounts/cc-user-panel.c:685
+#: panels/user-accounts/cc-user-panel.c:686
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Bus nustatyta kito prisijungimo metu"
 
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:689
 msgctxt "Password mode"
 msgid "None"
 msgstr "Joks"
 
-#: panels/user-accounts/cc-user-panel.c:731
+#: panels/user-accounts/cc-user-panel.c:732
 msgid "Logged in"
 msgstr "Prisijunges prie"
 
-#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1246
 msgid "Failed to contact the accounts service"
 msgstr "Nepavyko susisiekti su paskyrų tarnyba"
 
-#: panels/user-accounts/cc-user-panel.c:1218
+#: panels/user-accounts/cc-user-panel.c:1248
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Įsitikinkite, kad AccountService yra įdiegta ir įjungta."
 
-#: panels/user-accounts/cc-user-panel.c:1240
+#: panels/user-accounts/cc-user-panel.c:1270
 msgid "This panel must be unlocked to change this setting"
 msgstr "Šis skydelis turi būti atrakintas, norint keisti šią nuostatą"
 
-#: panels/user-accounts/cc-user-panel.c:1307
+#: panels/user-accounts/cc-user-panel.c:1337
 msgid "Delete the selected user account"
 msgstr "Ištrinti pasirinktą naudotoją"
 
-#: panels/user-accounts/cc-user-panel.c:1311
-#: panels/user-accounts/cc-user-panel.c:1452
+#: panels/user-accounts/cc-user-panel.c:1341
+#: panels/user-accounts/cc-user-panel.c:1482
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8024,7 +8076,7 @@ msgstr ""
 "Pasirinktam naudotojui ištrinti,\n"
 "pirma paspauskite * piktogramą"
 
-#: panels/user-accounts/cc-user-panel.c:1498
+#: panels/user-accounts/cc-user-panel.c:1528
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Atrakinkite naudotojų pridėjimui bei nustatymų keitimui"
 
@@ -9132,15 +9184,15 @@ msgstr "Prieinami skydeliai:"
 msgid "All Settings"
 msgstr "Visi nustatymai"
 
-#: shell/cc-window.ui:54
-msgid "Primary Menu"
+#: shell/cc-window.ui:53 shell/cc-window.ui:55
+msgid "Main Menu"
 msgstr "Pagrindinis meniu"
 
-#: shell/cc-window.ui:152
+#: shell/cc-window.ui:153
 msgid "Warning: Development Version"
 msgstr "Įspėjimas: kuriama versija"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:154
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9149,7 +9201,7 @@ msgstr ""
 "Ši Nustatymų versija turėtų būti naudojama tik kūrimo reikmėms. Sistema gali "
 "veikti nekorektiškai, gali būti prarasti duomenys ar kilti kitų problemų."
 
-#: shell/cc-window.ui:164
+#: shell/cc-window.ui:165
 msgid "Help"
 msgstr "Pagalba"
 
@@ -9253,6 +9305,51 @@ msgstr[2] "%u įvesčių"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistemos garsai"
+
+#~ msgid "Mouse Speed"
+#~ msgstr "Pelės greitis"
+
+#~ msgid "Mouse speed"
+#~ msgstr "Pelės greitis"
+
+#~ msgid "Natural Scrolling"
+#~ msgstr "Natūralus slinkimas"
+
+#~ msgid "Touchpad Speed"
+#~ msgstr "Jutiklinio kilimėlio greitis"
+
+#~ msgid "Touchpad speed"
+#~ msgstr "Jutiklinio kilimėlio greitis"
+
+#~ msgid "Two-finger Scrolling"
+#~ msgstr "Slinktis dviem pirštais"
+
+#~ msgid "Try clicking, double clicking, scrolling"
+#~ msgstr "Mėginkite spausti, dvigubą paspaudimą, slinkti"
+
+#~ msgid "Five clicks, GEGL time!"
+#~ msgstr "Penki paspaudimai, GEGL laikas!"
+
+#~ msgid "Double click, primary button"
+#~ msgstr "Dvigubas paspaudimas, pagrindinis mygtukas"
+
+#~ msgid "Single click, primary button"
+#~ msgstr "Vienas paspaudimas, pagrindinis mygtukas"
+
+#~ msgid "Double click, middle button"
+#~ msgstr "Dvigubas paspaudimas, vidurinysis mygtukas"
+
+#~ msgid "Single click, middle button"
+#~ msgstr "Vienas paspaudimas, vidurinysis klavišas"
+
+#~ msgid "Double click, secondary button"
+#~ msgstr "Dvigubas paspaudimas, antraeilis mygtukas"
+
+#~ msgid "Single click, secondary button"
+#~ msgstr "Vienas paspaudimas, antraeilis mygtukas"
+
+#~ msgid "Primary Menu"
+#~ msgstr "Pagrindinis meniu"
 
 #~ msgid "Camera is Turned Off"
 #~ msgstr "Kamera išjungta"
@@ -9986,9 +10083,6 @@ msgstr "Sistemos garsai"
 #~ msgid "_Click Assist"
 #~ msgstr "_Paspaudimo pagalba"
 
-#~ msgid "Double-Click Delay"
-#~ msgstr "Dvigubas paspaudimo delsa"
-
 #~ msgid "Flash the entire _window"
 #~ msgstr "Blykstelti visą _langą"
 
@@ -10438,9 +10532,6 @@ msgstr "Sistemos garsai"
 #~ msgid "Join Displays"
 #~ msgstr "Sujungti ekranus"
 
-#~ msgid "Single Display"
-#~ msgstr "Vienas ekranas"
-
 #~ msgid ""
 #~ "Drag displays to match your physical display setup. Select a display to "
 #~ "change its settings."
@@ -10721,9 +10812,6 @@ msgstr "Sistemos garsai"
 #~ msgid "Left+Right Alt"
 #~ msgstr "Kairėn+dešinysis alt"
 
-#~ msgid "Switch off to connect to a Wi-Fi network"
-#~ msgstr "Išjungti prisijungimui prie belaidžio tinklo"
-
 #~ msgctxt "Wi-Fi passkey"
 #~ msgid "Password"
 #~ msgstr "Slaptažodis"
@@ -10832,9 +10920,6 @@ msgstr "Sistemos garsai"
 
 #~ msgid "Change location settings and providers"
 #~ msgstr "Keisti vietos nustatymus bei tiekėjus"
-
-#~ msgid "Read system and application logs"
-#~ msgstr "Skaityti sistemos ir programų žurnalus"
 
 #~ msgid "access the media-hub service"
 #~ msgstr "pasiekti media-hub tarnybą"
@@ -11565,9 +11650,6 @@ msgstr "Sistemos garsai"
 #~ msgid "Swipe your right little finger on %s"
 #~ msgstr "Perbraukite dešiniuoju mažuoju pirštu per %s"
 
-#~ msgid "Place your finger on the reader again"
-#~ msgstr "Uždėkite pirštą ant skaityklės dar kartą"
-
 #~ msgid "Swipe your finger again"
 #~ msgstr "Perbraukite pirštu dar kartą"
 
@@ -11977,9 +12059,6 @@ msgstr "Sistemos garsai"
 #~ msgid "Scroll Up"
 #~ msgstr "Slinkimas aukštyn"
 
-#~ msgid "Scroll Down"
-#~ msgstr "Slinkimas žemyn"
-
 #~ msgid "Scroll Right"
 #~ msgstr "Slinkimas dešinėn"
 
@@ -12203,9 +12282,6 @@ msgstr "Sistemos garsai"
 #~ msgctxt "mouse, right button as primary"
 #~ msgid "_Right"
 #~ msgstr "_Dešinė"
-
-#~ msgid "_Pointer speed"
-#~ msgstr "Žymeklio _greitis"
 
 #~ msgctxt "mouse pointer, speed"
 #~ msgid "Slow"
