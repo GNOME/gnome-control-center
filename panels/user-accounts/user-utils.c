@@ -71,6 +71,7 @@ gboolean
 is_valid_name (const gchar *name)
 {
         gboolean is_empty = TRUE;
+        gboolean found_comma = FALSE;
         const gchar *c;
 
         if (name == NULL)
@@ -79,6 +80,7 @@ is_valid_name (const gchar *name)
         /* Valid names must contain:
          *   1) at least one character.
          *   2) at least one non-"space" character.
+         *   3) comma character not allowed. Issue #888
          */
         for (c = name; *c; c++) {
                 gunichar unichar;
@@ -90,13 +92,17 @@ is_valid_name (const gchar *name)
                         break;
 
                 /* Check for non-space character */
-                if (!g_unichar_isspace (unichar)) {
+                if (is_empty && !g_unichar_isspace (unichar)) {
                         is_empty = FALSE;
+                }
+
+                if (unichar == ',') {
+                        found_comma = TRUE;
                         break;
                 }
         }
 
-        return !is_empty;
+        return !is_empty && !found_comma;
 }
 
 typedef struct {
