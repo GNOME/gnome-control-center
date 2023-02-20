@@ -11,8 +11,6 @@
   <template class="CcMouseTest" parent="AdwWindow">
     <property name="modal">True</property>
     <property name="hide-on-close">True</property>
-    <property name="width-request">600</property>
-    <property name="height-request">800</property>
     <signal name="show" handler="on_mouse_test_show_cb"/>
     <child>
       <object class="GtkBox" id="test_widget">
@@ -66,7 +64,7 @@
                     <property name="vadjustment">scrolled_window_adjustment</property>
                     <property name="hscrollbar_policy">never</property>
                     <property name="vscrollbar_policy">external</property>
-                    <property name="max_content_height">440</property>
+                    <property name="min_content_height">440</property>
                     <child>
                       <object class="GtkViewport" id="viewport">
                         <style>
