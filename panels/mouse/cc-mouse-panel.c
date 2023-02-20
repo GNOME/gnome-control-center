@@ -51,6 +51,7 @@ struct _CcMousePanel
   CcIllustratedRow  *tap_to_click_row;
   GtkSwitch         *tap_to_click_switch;
   AdwPreferencesGroup *touchpad_group;
+  AdwViewStackPage  *touchpad_stack_page;
   CcSplitRow        *touchpad_scroll_direction_row;
   CcSplitRow        *touchpad_scroll_method_row;
   GtkListBoxRow     *touchpad_speed_row;
@@ -127,13 +128,13 @@ setup_touchpad_options (CcMousePanel *self)
   gboolean have_tap_to_click;
 
   if (self->have_synaptics || !self->have_touchpad) {
-    gtk_widget_set_visible (GTK_WIDGET (self->touchpad_group), FALSE);
+    adw_view_stack_page_set_visible (self->touchpad_stack_page, FALSE);
     return;
   }
 
   cc_touchpad_check_capabilities (&have_two_finger_scrolling, &have_edge_scrolling, &have_tap_to_click);
 
-  gtk_widget_set_visible (GTK_WIDGET (self->touchpad_group), TRUE);
+  adw_view_stack_page_set_visible (self->touchpad_stack_page, TRUE);
 
   gtk_widget_set_visible (GTK_WIDGET (self->touchpad_scroll_method_row), have_two_finger_scrolling);
   gtk_widget_set_visible (GTK_WIDGET (self->tap_to_click_row), have_tap_to_click);
@@ -455,6 +456,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_scroll_direction_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_scroll_method_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_speed_row);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_stack_page);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_speed_scale);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_switch);
 
