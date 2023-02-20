@@ -174,6 +174,8 @@ cc_qr_code_dialog_class_init (CcQrCodeDialogClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-qr-code-dialog.ui");
   gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_image);
   gtk_widget_class_bind_template_child (widget_class, CcQrCodeDialog, qr_subtitle);
+
+  gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
 }
 
 void
