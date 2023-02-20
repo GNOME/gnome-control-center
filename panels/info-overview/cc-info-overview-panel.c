@@ -548,10 +548,11 @@ set_virtualization_label (CcInfoOverviewPanel *self,
   if (virt == NULL || *virt == '\0')
     {
       gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), FALSE);
-      gtk_widget_set_visible (GTK_WIDGET (self->firmware_version_row), FALSE);
 
       return;
     }
+
+  gtk_widget_set_visible (GTK_WIDGET (self->firmware_version_row), FALSE);
 
   gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), TRUE);
 
