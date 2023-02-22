@@ -5,7 +5,7 @@
     <child type="titlebar">
       <object class="AdwHeaderBar">
         <property name="show-end-title-buttons">True</property>
-        <property name="show-start-title-buttons">False</property>
+        <property name="show-start-title-buttons" bind-source="CcMousePanel" bind-property="folded" bind-flags="default|sync-create" />
         <property name="title-widget">
           <object class="AdwViewSwitcherTitle">
             <property name="title" bind-source="CcMousePanel" bind-property="title" bind-flags="default|sync-create" />

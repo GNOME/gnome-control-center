@@ -17,7 +17,7 @@
     <child type="titlebar">
       <object class="AdwHeaderBar">
         <property name="show-end-title-buttons">True</property>
-        <property name="show-start-title-buttons">False</property>
+        <property name="show-start-title-buttons" bind-source="CcUserPanel" bind-property="folded" bind-flags="default|sync-create" />
         <property name="title-widget">
           <object class="AdwWindowTitle">
             <property name="title" translatable="yes">Users</property>

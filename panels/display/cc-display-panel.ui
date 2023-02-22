@@ -200,7 +200,7 @@
                     <!-- Night Light titlebar -->
                     <child>
                       <object class="AdwHeaderBar" id="night_light_titlebar">
-                        <property name="show-start-title-buttons">True</property>
+                        <property name="show-start-title-buttons" bind-source="CcDisplayPanel" bind-property="folded" bind-flags="default|sync-create" />
                         <property name="show-end-title-buttons">True</property>
                         <child type="start">
                           <object class="GtkButton">
@@ -239,7 +239,7 @@
                     <!-- Display Settings titlebar -->
                     <child>
                       <object class="AdwHeaderBar" id="display_settings_titlebar">
-                        <property name="show-start-title-buttons">True</property>
+                        <property name="show-start-title-buttons" bind-source="CcDisplayPanel" bind-property="folded" bind-flags="default|sync-create" />
                         <property name="show-end-title-buttons">True</property>
                         <child type="start">
                           <object class="GtkButton">
