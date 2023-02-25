@@ -253,6 +253,12 @@ up_client_changed (CcPowerPanel *self)
 
   if (n_batteries > 1)
     adw_preferences_group_set_title (self->battery_section, _("Batteries"));
+  else if (on_ups)
+    {
+      /* Translators: UPS is an Uninterruptible Power Supply:
+       * https://en.wikipedia.org/wiki/Uninterruptible_power_supply */
+      adw_preferences_group_set_title (self->battery_section, _("UPS"));
+    }
   else
     adw_preferences_group_set_title (self->battery_section, _("Battery"));
 
