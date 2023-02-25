@@ -73,9 +73,38 @@ G_DEFINE_TYPE_WITH_CODE (CEPageDetails, ce_page_details, GTK_TYPE_GRID,
                          G_IMPLEMENT_INTERFACE (ce_page_get_type (), ce_page_iface_init))
 
 static void
+on_forget_cb (AdwMessageDialog   *dialog,
+              gchar              *response,
+              CEPageDetails      *self)
+{
+        if (g_strcmp0 (response, "forget") == 0)
+                net_connection_editor_forget (self->editor);
+}
+
+static void
 forget_cb (CEPageDetails *self)
 {
-        net_connection_editor_forget (self->editor);
+        GtkWidget *dialog;
+        GtkNative *native;
+
+        native = gtk_widget_get_native (GTK_WIDGET (self));
+
+        dialog = adw_message_dialog_new (GTK_WINDOW (native),
+                                        _("Forget Connection?"),
+                                        _("Network details for the selected networks, including passwords and any custom configuration will be lost."));
+
+        adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
+                                          "cancel",  _("_Cancel"),
+                                          "forget", _("Forget"),
+                                          NULL);
+        adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog),
+                                                    "forget",
+                                                    ADW_RESPONSE_DESTRUCTIVE);
+        adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
+        adw_message_dialog_set_close_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
+
+        g_signal_connect (dialog, "response", G_CALLBACK (on_forget_cb), self);
+        gtk_window_present (GTK_WINDOW (dialog));
 }
 
 static gchar *
