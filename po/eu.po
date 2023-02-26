@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2023-02-14 22:15+0000\n"
-"PO-Revision-Date: 2023-02-18 14:00+0100\n"
+"POT-Creation-Date: 2023-02-25 13:00+0000\n"
+"PO-Revision-Date: 2023-02-26 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -161,8 +161,8 @@ msgstr "Jaso sistema-bilaketak eta bidali emaitzak"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:820
-#: panels/user-accounts/cc-user-panel.c:921
+#: panels/user-accounts/cc-user-panel.c:821
+#: panels/user-accounts/cc-user-panel.c:951
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -357,8 +357,8 @@ msgstr "Hautatu argazki bat"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:610
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:629
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -1333,8 +1333,8 @@ msgstr "Kokaleku-zerbitzuek gaituta egon behar dute eta Interneterako sarbide ed
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
-#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
-#: panels/user-accounts/cc-user-panel.c:918
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:819
+#: panels/user-accounts/cc-user-panel.c:948
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Gaituta"
@@ -2163,22 +2163,22 @@ msgstr "64 bit"
 msgid "32-bit"
 msgstr "32 bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:622
+#: panels/info-overview/cc-info-overview-panel.c:623
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:626
+#: panels/info-overview/cc-info-overview-panel.c:627
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:628
+#: panels/info-overview/cc-info-overview-panel.c:629
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:706
+#: panels/info-overview/cc-info-overview-panel.c:707
 msgid "Not Available"
 msgstr "Ez dago erabilgarri"
 
@@ -3180,6 +3180,27 @@ msgstr "SOCKS ostalariaren ataka"
 #: panels/network/cc-net-proxy-page.ui:261
 msgid "Ignored Hosts"
 msgstr "Ezikusitako ostalariak"
+
+#.
+#. * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
+#. * The string placeholder will be replaced by the Wi-Fi networks SSID.
+#.
+#: panels/network/cc-qr-code-dialog.c:128
+#, c-format
+msgid "Scan the QR code to connect to the network <b>%s</b>."
+msgstr "Eskaneatu QR kodea <b>%s</b> sarearekin konektatzeko."
+
+#: panels/network/cc-qr-code-dialog.ui:9
+msgid "Share Network"
+msgstr "Partekatu sarea"
+
+#: panels/network/cc-qr-code-dialog.ui:36
+msgid "QR Code"
+msgstr "QR kodea"
+
+#: panels/network/cc-qr-code-dialog.ui:46
+msgid "Scan to Connect"
+msgstr "Eskaneatu konektatzeko"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
 #: panels/network/cc-wifi-connection-row.c:218
@@ -7597,7 +7618,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:743
+#: panels/user-accounts/cc-user-panel.c:744
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7605,7 +7626,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:747
+#: panels/user-accounts/cc-user-panel.c:748
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7697,107 +7718,107 @@ msgstr "Baliogabeko pasahitza, saiatu berriro"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Ezin izan da %s domeinuarekin konektatu: %s"
 
-#: panels/user-accounts/cc-user-panel.c:258
+#: panels/user-accounts/cc-user-panel.c:259
 msgid "Add User…"
 msgstr "Gehitu erabiltzailea…"
 
-#: panels/user-accounts/cc-user-panel.c:372
+#: panels/user-accounts/cc-user-panel.c:373
 msgid "Failed to delete user"
 msgstr "Huts egin du erabiltzailea ezabatzean"
 
-#: panels/user-accounts/cc-user-panel.c:429
-#: panels/user-accounts/cc-user-panel.c:484
-#: panels/user-accounts/cc-user-panel.c:530
+#: panels/user-accounts/cc-user-panel.c:430
+#: panels/user-accounts/cc-user-panel.c:485
+#: panels/user-accounts/cc-user-panel.c:531
 msgid "Failed to revoke remotely managed user"
 msgstr "Huts egin du urrunetik kudeatzeko erabiltzailea errebokatzean"
 
-#: panels/user-accounts/cc-user-panel.c:579
+#: panels/user-accounts/cc-user-panel.c:580
 msgid "You cannot delete your own account."
 msgstr "Ezin duzu zeure kontua ezabatu."
 
-#: panels/user-accounts/cc-user-panel.c:588
+#: panels/user-accounts/cc-user-panel.c:589
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s oraindik saioan sartuta dago"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:593
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "Erabiltzailea ezabatzen bada saioan sartuta dagoen bitartean, sistema egoera inkoherentean utz daiteke."
 
-#: panels/user-accounts/cc-user-panel.c:601
+#: panels/user-accounts/cc-user-panel.c:602
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "%s(r)en fitxategiak mantentzea nahi dituzu?"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:606
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr "Karpeta nagusia, postaren ilara eta aldi baterako fitxategiak gordetzeko aukera dago erabiltzaile baten kontua ezabatzean."
 
-#: panels/user-accounts/cc-user-panel.c:608
+#: panels/user-accounts/cc-user-panel.c:609
 msgid "_Delete Files"
 msgstr "_Ezabatu fitxategiak"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:610
 msgid "_Keep Files"
 msgstr "_Mantendu fitxategiak"
 
-#: panels/user-accounts/cc-user-panel.c:623
+#: panels/user-accounts/cc-user-panel.c:624
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Ziur zaude urrunetik kudeatutako “%s”(r)en kontua errebokatzea nahi duzula?"
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:628
 msgid "_Delete"
 msgstr "Ez_abatu"
 
-#: panels/user-accounts/cc-user-panel.c:677
+#: panels/user-accounts/cc-user-panel.c:678
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Kontua desgaituta"
 
-#: panels/user-accounts/cc-user-panel.c:685
+#: panels/user-accounts/cc-user-panel.c:686
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Hurrengo saioan ezartzeko"
 
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:689
 msgctxt "Password mode"
 msgid "None"
 msgstr "Bat ere ez"
 
-#: panels/user-accounts/cc-user-panel.c:731
+#: panels/user-accounts/cc-user-panel.c:732
 msgid "Logged in"
 msgstr "Saioan sartuta"
 
-#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1246
 msgid "Failed to contact the accounts service"
 msgstr "Huts egin du kontuaren zerbitzuarekin kontaktatzean"
 
-#: panels/user-accounts/cc-user-panel.c:1218
+#: panels/user-accounts/cc-user-panel.c:1248
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Ziurtatu zaitez kontuen zerbitzua instalatuta eta gaituta dagoela."
 
-#: panels/user-accounts/cc-user-panel.c:1240
+#: panels/user-accounts/cc-user-panel.c:1270
 msgid "This panel must be unlocked to change this setting"
 msgstr "Panel hau desblokeatu behar da ezarpen hori aldatzeko"
 
-#: panels/user-accounts/cc-user-panel.c:1307
+#: panels/user-accounts/cc-user-panel.c:1337
 msgid "Delete the selected user account"
 msgstr "Ezabatu hautatutako erabiltzailearen kontua"
 
-#: panels/user-accounts/cc-user-panel.c:1311
-#: panels/user-accounts/cc-user-panel.c:1452
+#: panels/user-accounts/cc-user-panel.c:1341
+#: panels/user-accounts/cc-user-panel.c:1482
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
 msgstr "Hautatutako erabiltzailearen kontua ezabatzeko\n"
 "aurrenik egin klik * ikonoan"
 
-#: panels/user-accounts/cc-user-panel.c:1498
+#: panels/user-accounts/cc-user-panel.c:1528
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Desblokeatu erabiltzaileak gehitzeko eta ezarpenak aldatzeko"
 
@@ -8078,17 +8099,17 @@ msgstr "Pasahitz berriak ez dauzka nahikoa karaktere desberdin"
 msgid "Unknown error"
 msgstr "Errore ezezaguna"
 
-#: panels/user-accounts/user-utils.c:144
+#: panels/user-accounts/user-utils.c:150
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
 msgstr "Erabiltzaile-izenak honako karaktereak soilik eduki ditzake:  alfabetoko a-z arteko hizki minuskulak, digituak eta '.', '-' eta '_' karaktereak."
 
-#: panels/user-accounts/user-utils.c:148
+#: panels/user-accounts/user-utils.c:154
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Erabiltzaile-izen hori ez dago erabilgarri. Saiatu beste batekin."
 
-#: panels/user-accounts/user-utils.c:190
+#: panels/user-accounts/user-utils.c:196
 msgid "The username is too long."
 msgstr "Erabiltzaile-izena luzeegia da."
 
@@ -10555,9 +10576,6 @@ msgstr "Sistemaren soinuak"
 
 #~ msgid "Left+Right Alt"
 #~ msgstr "Ezker+Eskuineko Alt"
-
-#~ msgid "Switch off to connect to a Wi-Fi network"
-#~ msgstr "Itzali haririk gabeko sarera konektatzeko"
 
 #~ msgctxt "Wi-Fi passkey"
 #~ msgid "Password"
