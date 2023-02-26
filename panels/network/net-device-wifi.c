@@ -820,7 +820,9 @@ really_forgotten (GObject              *source_object,
 }
 
 static void
-really_forget (GtkDialog *dialog, gint response, gpointer data)
+really_forget (AdwMessageDialog* dialog,
+	        gchar* response,
+	        gpointer data)
 {
         GtkWidget *forget = data;
         CcWifiConnectionRow *row;
@@ -829,9 +831,7 @@ really_forget (GtkDialog *dialog, gint response, gpointer data)
         NMRemoteConnection *connection;
         NetDeviceWifi *self;
 
-        gtk_window_destroy (GTK_WINDOW (dialog));
-
-        if (response != GTK_RESPONSE_OK)
+        if (g_strcmp0 (response, "cancel") == 0)
                 return;
 
         self = NET_DEVICE_WIFI (g_object_get_data (G_OBJECT (forget), "net"));
@@ -852,18 +852,21 @@ forget_selected (GtkButton *forget, CcWifiConnectionList *list)
         GtkWidget *dialog;
 
         native = gtk_widget_get_native (GTK_WIDGET (forget));
-        dialog = gtk_message_dialog_new (GTK_WINDOW (native),
-                                         GTK_DIALOG_MODAL | GTK_DIALOG_DESTROY_WITH_PARENT,
-                                         GTK_MESSAGE_OTHER,
-                                         GTK_BUTTONS_NONE,
-                                         NULL);
-        gtk_message_dialog_set_markup (GTK_MESSAGE_DIALOG (dialog),
-                                       _("Network details for the selected networks, including passwords and any custom configuration will be lost."));
 
-        gtk_dialog_add_buttons (GTK_DIALOG (dialog),
-                                _("_Cancel"), GTK_RESPONSE_CANCEL,
-                                _("_Forget"), GTK_RESPONSE_OK,
-                                NULL);
+        dialog = adw_message_dialog_new (GTK_WINDOW (native),
+                                         NULL,
+                                         _("Network details for the selected networks, including passwords and any custom configuration will be lost."));
+
+        adw_message_dialog_format_heading (ADW_MESSAGE_DIALOG (dialog), _("Forget Connection?"));
+
+        adw_message_dialog_add_responses (ADW_MESSAGE_DIALOG (dialog),
+                                          "cancel",  _("_Cancel"),
+                                          "forget", _("_Forget"),
+                                          NULL);
+
+        adw_message_dialog_set_response_appearance (ADW_MESSAGE_DIALOG (dialog), "forget", ADW_RESPONSE_DESTRUCTIVE);
+        adw_message_dialog_set_default_response (ADW_MESSAGE_DIALOG (dialog), "cancel");
+
         g_signal_connect (dialog, "response",
                           G_CALLBACK (really_forget), list);
         gtk_window_present (GTK_WINDOW (dialog));
