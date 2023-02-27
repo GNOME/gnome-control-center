@@ -102,19 +102,24 @@ cc_qr_code_dialog_constructed (GObject *object)
                                               NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
                                               NULL,
                                               &error);
-  if (!variant)
+  if (variant)
     {
-      g_warning ("Couldn't get secrets: %s", error->message);
-      return;
+      if (!nm_connection_update_secrets (self->connection,
+                                         NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
+                                         variant,
+                                         &error))
+        {
+          g_warning ("Couldn't update secrets: %s", error->message);
+          return;
+        }
     }
-
-  if (!nm_connection_update_secrets (self->connection,
-                                     NM_SETTING_WIRELESS_SECURITY_SETTING_NAME,
-                                     variant,
-                                     &error))
+  else
     {
-      g_warning ("Couldn't update secrets: %s", error->message);
-      return;
+      if (!g_error_matches (error, NM_CONNECTION_ERROR, NM_CONNECTION_ERROR_SETTING_NOT_FOUND))
+        {
+          g_warning ("Couldn't get secrets: %s", error->message);
+          return;
+        }
     }
 
   setting = nm_connection_get_setting_wireless (self->connection);
