@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-14 21:13+0000\n"
-"PO-Revision-Date: 2023-02-15 00:26+0300\n"
+"POT-Creation-Date: 2023-02-28 21:16+0000\n"
+"PO-Revision-Date: 2023-03-01 13:41+0300\n"
 "Last-Translator: Yuras Shumovich <shumovichy@gmail.com>\n"
 "Language-Team: Belarusian <i18n-bel-gnome@googlegroups.com>\n"
 "Language: be\n"
@@ -166,8 +166,8 @@ msgstr "Атрыманне пошукавых запытаў сістэмы і �
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:820
-#: panels/user-accounts/cc-user-panel.c:921
+#: panels/user-accounts/cc-user-panel.c:821
+#: panels/user-accounts/cc-user-panel.c:951
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -348,11 +348,11 @@ msgstr "Выберыце выяву"
 #: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:887
+#: panels/network/cc-wifi-panel.c:745
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
-#: panels/network/net-device-wifi.c:866
+#: panels/network/net-device-wifi.c:867
 #: panels/printers/new-printer-dialog.ui:50
 #: panels/printers/pp-details-dialog.c:269
 #: panels/region/cc-format-chooser.ui:24
@@ -363,8 +363,8 @@ msgstr "Выберыце выяву"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:610
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:629
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -1376,8 +1376,8 @@ msgstr "Патрабуецца ўключэнне сэрвісаў месцаз�
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
-#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
-#: panels/user-accounts/cc-user-panel.c:918
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:819
+#: panels/user-accounts/cc-user-panel.c:948
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Уключана"
@@ -2273,22 +2273,22 @@ msgstr "64-бітная"
 msgid "32-bit"
 msgstr "32-бітная"
 
-#: panels/info-overview/cc-info-overview-panel.c:622
+#: panels/info-overview/cc-info-overview-panel.c:623
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:626
+#: panels/info-overview/cc-info-overview-panel.c:627
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:628
+#: panels/info-overview/cc-info-overview-panel.c:629
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Невядома"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:706
+#: panels/info-overview/cc-info-overview-panel.c:707
 msgid "Not Available"
 msgstr "Недаступна"
 
@@ -3002,17 +3002,17 @@ msgid "Right"
 msgstr "Правая"
 
 #: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:86
-#: panels/mouse/cc-mouse-panel.ui:189
+#: panels/mouse/cc-mouse-panel.ui:190
 msgid "Pointer Speed"
 msgstr "Хуткасць указальніка мышы"
 
-#: panels/mouse/cc-mouse-panel.ui:89 panels/mouse/cc-mouse-panel.ui:197
+#: panels/mouse/cc-mouse-panel.ui:89 panels/mouse/cc-mouse-panel.ui:198
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Павольна"
 
-#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:199
+#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:200
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
@@ -3040,84 +3040,84 @@ msgstr ""
 "Дапамога з перамяшчэннем указальніка таксама вядома як паскарэнне "
 "ўказальніка."
 
-#: panels/mouse/cc-mouse-panel.ui:150 panels/mouse/cc-mouse-panel.ui:253
+#: panels/mouse/cc-mouse-panel.ui:150 panels/mouse/cc-mouse-panel.ui:254
 msgid "Scroll Direction"
 msgstr "Напрамак прагорткі"
 
-#: panels/mouse/cc-mouse-panel.ui:151 panels/mouse/cc-mouse-panel.ui:254
+#: panels/mouse/cc-mouse-panel.ui:151 panels/mouse/cc-mouse-panel.ui:255
 msgid "Traditional"
 msgstr "Традыцыйны"
 
-#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:255
+#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:256
 msgid "Scrolling moves the view"
 msgstr "Прагортка перамяшчае вобласць прагляду"
 
-#: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:256
+#: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:257
 msgid "Natural"
 msgstr "Натуральны"
 
-#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:257
+#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:258
 msgid "Scrolling moves the content"
 msgstr "Прагортка перамяшчае змесціва (інверсія)"
 
-#: panels/mouse/cc-mouse-panel.ui:168 panels/mouse/cc-mouse-panel.ui:175
-#: panels/mouse/cc-mouse-panel.ui:181
+#: panels/mouse/cc-mouse-panel.ui:169 panels/mouse/cc-mouse-panel.ui:176
+#: panels/mouse/cc-mouse-panel.ui:182
 msgid "Touchpad"
 msgstr "Сэнсарная панэль"
 
-#: panels/mouse/cc-mouse-panel.ui:194
+#: panels/mouse/cc-mouse-panel.ui:195
 msgid "Pointer speed"
 msgstr "Хуткасць указальніка мышы"
 
-#: panels/mouse/cc-mouse-panel.ui:217
+#: panels/mouse/cc-mouse-panel.ui:218
 msgid "Clicking"
 msgstr "Націсканне"
 
-#: panels/mouse/cc-mouse-panel.ui:222
+#: panels/mouse/cc-mouse-panel.ui:223
 msgid "Tap to Click"
 msgstr "Націсканне дотыкам"
 
-#: panels/mouse/cc-mouse-panel.ui:223
+#: panels/mouse/cc-mouse-panel.ui:224
 msgid "Quickly touch the touchpad to click"
 msgstr "Хуткае крананне сэнсарнай панэлі выклікае націсканне"
 
-#: panels/mouse/cc-mouse-panel.ui:229
+#: panels/mouse/cc-mouse-panel.ui:230
 msgid "Tap to click"
 msgstr "Націсканне дотыкам"
 
-#: panels/mouse/cc-mouse-panel.ui:240
+#: panels/mouse/cc-mouse-panel.ui:241
 msgid "Scrolling"
 msgstr "Прагортка"
 
-#: panels/mouse/cc-mouse-panel.ui:243
+#: panels/mouse/cc-mouse-panel.ui:244
 msgid "Scroll Method"
 msgstr "Спосаб прагорткі"
 
-#: panels/mouse/cc-mouse-panel.ui:244
+#: panels/mouse/cc-mouse-panel.ui:245
 msgid "Two Finger"
 msgstr "Двума пальцамі"
 
-#: panels/mouse/cc-mouse-panel.ui:245
+#: panels/mouse/cc-mouse-panel.ui:246
 msgid "Drag two fingers on the touchpad"
 msgstr "Трэба правесці двума пальцамі па сэнсарнай панэлі"
 
-#: panels/mouse/cc-mouse-panel.ui:246
+#: panels/mouse/cc-mouse-panel.ui:247
 msgid "Edge"
 msgstr "Па краі"
 
-#: panels/mouse/cc-mouse-panel.ui:247
+#: panels/mouse/cc-mouse-panel.ui:248
 msgid "Drag one finger on the edge"
 msgstr "Трэба правесці адным пальцам па краі"
 
-#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:98
+#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:96
 msgid "Single Click"
 msgstr "Адзінарнае націсканне"
 
-#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:112
+#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:110
 msgid "Double Click"
 msgstr "Падвойнае націсканне"
 
-#: panels/mouse/cc-mouse-test.ui:26
+#: panels/mouse/cc-mouse-test.ui:24
 msgid "Test Mouse & Touchpad"
 msgstr "Праверыць мышь і сэнсарную панэль"
 
@@ -3348,30 +3348,51 @@ msgstr "Порт хоста SOCKS"
 msgid "Ignored Hosts"
 msgstr "Хосты, якія ігнаруюцца"
 
+#.
+#. * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
+#. * The string placeholder will be replaced by the Wi-Fi networks SSID.
+#.
+#: panels/network/cc-qr-code-dialog.c:133
+#, c-format
+msgid "Scan the QR code to connect to the network <b>%s</b>."
+msgstr "Адскануйце QR-код, каб падлучыцца да сеткі <b>%s</b>."
+
+#: panels/network/cc-qr-code-dialog.ui:9
+msgid "Share Network"
+msgstr "Абагуліць сетку"
+
+#: panels/network/cc-qr-code-dialog.ui:36
+msgid "QR Code"
+msgstr "QR-код"
+
+#: panels/network/cc-qr-code-dialog.ui:46
+msgid "Scan to Connect"
+msgstr "Адскануйце, каб падлучыцца"
+
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:216
+#: panels/network/cc-wifi-connection-row.c:218
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:275
+#: panels/network/cc-wifi-connection-row.c:278
 msgid "Insecure network (WEP)"
 msgstr "Небяспечная сетка (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:279
+#: panels/network/cc-wifi-connection-row.c:282
 msgid "Secure network (WPA)"
 msgstr "Бяспечная сетка (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:283
+#: panels/network/cc-wifi-connection-row.c:286
 msgid "Secure network (WPA2)"
 msgstr "Бяспечная сетка (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:287
+#: panels/network/cc-wifi-connection-row.c:290
 msgid "Secure network (WPA3)"
 msgstr "Бяспечная сетка (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:291
+#: panels/network/cc-wifi-connection-row.c:294
 msgid "Secure network"
 msgstr "Бяспечная сетка"
 
@@ -3381,6 +3402,10 @@ msgid "Connected"
 msgstr "Злучана"
 
 #: panels/network/cc-wifi-connection-row.ui:62
+msgid "Show QR-Code"
+msgstr "Паказаць QR-код"
+
+#: panels/network/cc-wifi-connection-row.ui:77
 #: panels/network/net-device-ethernet.c:325
 #: panels/network/network-bluetooth.ui:22 panels/network/network-ethernet.ui:56
 #: panels/network/network-mobile.ui:329 panels/network/network-vpn.ui:21
@@ -3450,22 +3475,22 @@ msgstr "Аўтаматычна генерыраваць пароль"
 msgid "_Turn On"
 msgstr "_Уключыць"
 
-#: panels/network/cc-wifi-panel.c:549
+#: panels/network/cc-wifi-panel.c:407
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:66
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:883
+#: panels/network/cc-wifi-panel.c:741
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr ""
 "Выключэнне прывядзе да адлучэння ўсіх прылад, якія выкарыстоўваюць хот-спот."
 
-#: panels/network/cc-wifi-panel.c:885
+#: panels/network/cc-wifi-panel.c:743
 msgid "Turn Off Hotspot?"
 msgstr "Выключыць хот-спот?"
 
-#: panels/network/cc-wifi-panel.c:888
+#: panels/network/cc-wifi-panel.c:746
 msgid "_Turn Off"
 msgstr "_Выключыць"
 
@@ -3564,13 +3589,13 @@ msgstr "Профіль %d"
 
 #. TRANSLATORS: this WEP WiFi security
 #: panels/network/connection-editor/ce-page-details.c:97
-#: panels/network/net-device-wifi.c:229
+#: panels/network/net-device-wifi.c:230
 msgid "WEP"
 msgstr "WEP"
 
 #. TRANSLATORS: this WPA WiFi security
 #: panels/network/connection-editor/ce-page-details.c:101
-#: panels/network/net-device-wifi.c:234
+#: panels/network/net-device-wifi.c:235
 msgid "WPA"
 msgstr "WPA"
 
@@ -3596,7 +3621,7 @@ msgid "Enterprise"
 msgstr "Enterprise"
 
 #: panels/network/connection-editor/ce-page-details.c:135
-#: panels/network/net-device-wifi.c:219
+#: panels/network/net-device-wifi.c:220
 msgctxt "Wifi security"
 msgid "None"
 msgstr "Няма"
@@ -4195,7 +4220,7 @@ msgstr "Правадное"
 msgid "Add new connection"
 msgstr "Дадаць новае злучэнне"
 
-#: panels/network/net-device-wifi.c:863
+#: panels/network/net-device-wifi.c:864
 msgid ""
 "Network details for the selected networks, including passwords and any "
 "custom configuration will be lost."
@@ -4203,25 +4228,25 @@ msgstr ""
 "Сеткавыя звесткі для вылучаныя сетак, у тым ліку паролі і карыстальніцкія "
 "налады, будуць страчаны."
 
-#: panels/network/net-device-wifi.c:867
+#: panels/network/net-device-wifi.c:868
 msgid "_Forget"
 msgstr "_Забыць"
 
-#: panels/network/net-device-wifi.c:1048
+#: panels/network/net-device-wifi.c:1067
 msgid "Saved Wi-Fi Networks"
 msgstr "Захаваныя сеткі Wi-Fi"
 
 #. translators: This is the label for the "Forget wireless network" functionality
-#: panels/network/net-device-wifi.c:1067
+#: panels/network/net-device-wifi.c:1086
 msgctxt "Wi-Fi Network"
 msgid "_Forget"
 msgstr "_Забыць"
 
-#: panels/network/net-device-wifi.c:1221
+#: panels/network/net-device-wifi.c:1244
 msgid "System policy prohibits use as a Hotspot"
 msgstr "Палітыка сістэмы забараняе рэжым хот-спота"
 
-#: panels/network/net-device-wifi.c:1224
+#: panels/network/net-device-wifi.c:1247
 msgid "Wireless device does not support Hotspot mode"
 msgstr "Бесправадная прылада не падтрымлівае рэжым хот-спота"
 
@@ -7898,7 +7923,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:743
+#: panels/user-accounts/cc-user-panel.c:744
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7906,7 +7931,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:747
+#: panels/user-accounts/cc-user-panel.c:748
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7998,30 +8023,30 @@ msgstr "Памылковы пароль, паўтарыце спробу"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Не ўдалося злучыцца з даменам %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:258
+#: panels/user-accounts/cc-user-panel.c:259
 msgid "Add User…"
 msgstr "Дадаць карыстальніка…"
 
-#: panels/user-accounts/cc-user-panel.c:372
+#: panels/user-accounts/cc-user-panel.c:373
 msgid "Failed to delete user"
 msgstr "Не ўдалося выдаліць карыстальніка"
 
-#: panels/user-accounts/cc-user-panel.c:429
-#: panels/user-accounts/cc-user-panel.c:484
-#: panels/user-accounts/cc-user-panel.c:530
+#: panels/user-accounts/cc-user-panel.c:430
+#: panels/user-accounts/cc-user-panel.c:485
+#: panels/user-accounts/cc-user-panel.c:531
 msgid "Failed to revoke remotely managed user"
 msgstr "Не ўдалося ануляваць аддаленага карыстальніка"
 
-#: panels/user-accounts/cc-user-panel.c:579
+#: panels/user-accounts/cc-user-panel.c:580
 msgid "You cannot delete your own account."
 msgstr "Нельга выдаліць уласны ўліковы запіс."
 
-#: panels/user-accounts/cc-user-panel.c:588
+#: panels/user-accounts/cc-user-panel.c:589
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s не выйшаў з сістэмы"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:593
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -8029,12 +8054,12 @@ msgstr ""
 "Выдаленне карыстальніка, які не выйшаў з сістэмы, можа прывесці сістэму ў "
 "супярэчлівы стан."
 
-#: panels/user-accounts/cc-user-panel.c:601
+#: panels/user-accounts/cc-user-panel.c:602
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Пакінуць файлы карыстальніка %s?"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:606
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8042,60 +8067,60 @@ msgstr ""
 "Пры выдаленні ўліковага запісу карыстальніка можна пакінуць яго хатні "
 "каталог, пошту і часовыя файлы."
 
-#: panels/user-accounts/cc-user-panel.c:608
+#: panels/user-accounts/cc-user-panel.c:609
 msgid "_Delete Files"
 msgstr "_Выдаліць файлы"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:610
 msgid "_Keep Files"
 msgstr "_Захаваць файлы"
 
-#: panels/user-accounts/cc-user-panel.c:623
+#: panels/user-accounts/cc-user-panel.c:624
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Сапраўды ануляваць уліковы запіс аддаленага карыстальніка %s?"
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:628
 msgid "_Delete"
 msgstr "_Выдаліць"
 
-#: panels/user-accounts/cc-user-panel.c:677
+#: panels/user-accounts/cc-user-panel.c:678
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Уліковы запіс адключаны"
 
-#: panels/user-accounts/cc-user-panel.c:685
+#: panels/user-accounts/cc-user-panel.c:686
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Будзе зададзена пры наступным уваходзе"
 
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:689
 msgctxt "Password mode"
 msgid "None"
 msgstr "Няма"
 
-#: panels/user-accounts/cc-user-panel.c:731
+#: panels/user-accounts/cc-user-panel.c:732
 msgid "Logged in"
 msgstr "У сістэме"
 
-#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1246
 msgid "Failed to contact the accounts service"
 msgstr "Не ўдалося звязацца з сэрвісам уліковых запісаў"
 
-#: panels/user-accounts/cc-user-panel.c:1218
+#: panels/user-accounts/cc-user-panel.c:1248
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Праверце, ці ўсталяваны і ўключаны AccountService."
 
-#: panels/user-accounts/cc-user-panel.c:1240
+#: panels/user-accounts/cc-user-panel.c:1270
 msgid "This panel must be unlocked to change this setting"
 msgstr "Каб змяняць налады, трэба разблакіраваць гэту панэль"
 
-#: panels/user-accounts/cc-user-panel.c:1307
+#: panels/user-accounts/cc-user-panel.c:1337
 msgid "Delete the selected user account"
 msgstr "Выдаліць вылучаны ўліковы запіс карыстальніка"
 
-#: panels/user-accounts/cc-user-panel.c:1311
-#: panels/user-accounts/cc-user-panel.c:1452
+#: panels/user-accounts/cc-user-panel.c:1341
+#: panels/user-accounts/cc-user-panel.c:1482
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8103,7 +8128,7 @@ msgstr ""
 "Каб выдаліць уліковы запіс вылучанага карыстальніка,\n"
 "спачатку націсніце на значок *"
 
-#: panels/user-accounts/cc-user-panel.c:1498
+#: panels/user-accounts/cc-user-panel.c:1528
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Разблакіруйце, каб дадаваць карыстальнікаў і змяняць налады"
 
@@ -8400,7 +8425,7 @@ msgstr "Новы пароль не змяшчае дастатковай кол�
 msgid "Unknown error"
 msgstr "Невядомая памылка"
 
-#: panels/user-accounts/user-utils.c:144
+#: panels/user-accounts/user-utils.c:150
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
@@ -8408,11 +8433,11 @@ msgstr ""
 "Звычайна імя карыстальніка можа ўтрымліваць толькі лацінскія літары ў ніжнім "
 "рэгістры, лічбы і наступныя сімвалы: - _"
 
-#: panels/user-accounts/user-utils.c:148
+#: panels/user-accounts/user-utils.c:154
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Гэтае імя карыстальніка недаступна. Паспрабуйце іншае."
 
-#: panels/user-accounts/user-utils.c:190
+#: panels/user-accounts/user-utils.c:196
 msgid "The username is too long."
 msgstr "Імя карыстальніка занадта доўгае."
 
