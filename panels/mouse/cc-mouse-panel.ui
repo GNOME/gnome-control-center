@@ -8,6 +8,7 @@
         <property name="show-start-title-buttons">False</property>
         <property name="title-widget">
           <object class="AdwViewSwitcherTitle">
+            <property name="title" bind-source="CcMousePanel" bind-property="title" bind-flags="default|sync-create" />
             <property name="stack">stack</property>
           </object>
         </property>
