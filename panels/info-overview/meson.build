@@ -17,6 +17,7 @@ cflags += [
 
 sources = files(
   'cc-info-overview-panel.c',
+  'cc-info-entry.c',
   'info-cleanup.c'
 )
 

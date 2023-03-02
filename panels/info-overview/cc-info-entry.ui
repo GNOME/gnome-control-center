@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <template class="CcInfoEntry" parent="GtkBox">
+    <property name="orientation">horizontal</property>
+    <property name="margin-top">6</property>
+    <property name="margin-bottom">6</property>
+
+    <!-- Prop -->
+    <child>
+      <object class="GtkLabel" id="prop">
+        <property name="halign">start</property>
+        <property name="hexpand">true</property>
+        <property name="margin-end">12</property>
+      </object>
+    </child>
+
+    <!-- Value -->
+    <child>
+      <object class="GtkLabel" id="value">
+        <property name="halign">end</property>
+        <property name="hexpand">true</property>
+        <property name="ellipsize">end</property>
+        <property name="selectable">true</property>
+      </object>
+    </child>
+
+    <style>
+      <class name="dim-label"/>
+    </style>
+  </template>
+</interface>
