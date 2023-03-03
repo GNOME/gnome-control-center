@@ -1404,6 +1404,7 @@ sharing_proxy_ready (GObject      *source,
 
   cc_sharing_panel_setup_label_with_hostname (self, self->personal_file_sharing_label);
   cc_sharing_panel_setup_label_with_hostname (self, self->remote_login_label);
+  cc_sharing_panel_setup_label_with_hostname (self, self->remote_desktop_address_label);
 }
 
 static void
