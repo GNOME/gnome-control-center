@@ -26,8 +26,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-18 12:28+0000\n"
-"PO-Revision-Date: 2023-03-01 22:50+0200\n"
+"POT-Creation-Date: 2023-03-03 18:27+0000\n"
+"PO-Revision-Date: 2023-03-04 12:40+0200\n"
 "Last-Translator: Jiri Grönroos <jiri.gronroos+l10n@iki.fi>\n"
 "Language-Team: suomi <lokalisointi-lista@googlegroups.com>\n"
 "Language: fi\n"
@@ -1235,8 +1235,6 @@ msgstr "%e. %b %Y"
 #. and "Yesterday, 10:10:10 AM"
 #: panels/common/cc-util.c:162
 #, c-format
-#| msgctxt "timezone loc"
-#| msgid "%s, %s"
 msgid "%1$s, %2$s"
 msgstr "%1$s, %2$s"
 
@@ -1327,7 +1325,7 @@ msgid "%e %B %Y, %R"
 msgstr "%e. %Bta %Y, %H.%M"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:394
+#: panels/datetime/cc-datetime-panel.c:398
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1335,7 +1333,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:411
+#: panels/datetime/cc-datetime-panel.c:415
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1580,8 +1578,8 @@ msgid "_Apply"
 msgstr "_Toteuta"
 
 #: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/network/cc-wifi-panel.ui:16
-#: panels/printers/new-printer-dialog.ui:64
+#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
 #: panels/user-accounts/cc-fingerprint-dialog.ui:44
@@ -2006,7 +2004,6 @@ msgstr "Läpäisty"
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
 #: panels/firmware-security/cc-firmware-security-dialog.c:374
 #: panels/firmware-security/cc-firmware-security-panel.c:234
-#| msgid "Failed"
 msgid "! Fail"
 msgstr "! Hylätty"
 
@@ -2156,7 +2153,6 @@ msgid "Security levels are not available for this device."
 msgstr "Suojaustasot eivät ole saatavilla tälle laitteelle."
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:50
-#| msgid "Device Security"
 msgid "Starting Device Security…"
 msgstr "Käynnistetään laitteen suojaus…"
 
@@ -2275,22 +2271,22 @@ msgstr "64-bit"
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:622
+#: panels/info-overview/cc-info-overview-panel.c:623
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:626
+#: panels/info-overview/cc-info-overview-panel.c:627
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:628
+#: panels/info-overview/cc-info-overview-panel.c:629
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Tuntematon"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:706
+#: panels/info-overview/cc-info-overview-panel.c:707
 msgid "Not Available"
 msgstr "Ei saatavilla"
 
@@ -2705,7 +2701,8 @@ msgstr "Erikoismerkkien kirjoitus"
 msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Tavat eri symbolien ja kirjainmuunnelmien syöttämiseen näppäimistöllä."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:161
+#: panels/keyboard/cc-keyboard-panel.ui:82
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:161
 msgid "Keyboard Shortcuts"
 msgstr "Pikanäppäimet"
 
@@ -2713,11 +2710,11 @@ msgstr "Pikanäppäimet"
 msgid "View and Customize Shortcuts"
 msgstr "Katsele ja mukauta pikanäppäimiä"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:387
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
 msgid "Reset All Shortcuts?"
 msgstr "Palautetaanko kaikkien pikanäppäinten oletukset?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:384
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2725,50 +2722,48 @@ msgstr ""
 "Pikanäppäinten oletusten palauttaminen vaikuttaa asettamiisi pikanäppäimiin. "
 "Tätä toimintoa ei voi perua."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:394
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:388
 #: panels/network/cc-network-panel.ui:26
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Peru"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:395
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
 msgid "Reset All"
 msgstr "Palauta kaikki oletusasetukset"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:33
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:27
 msgid "Reset All…"
 msgstr "Palauta kaikki oletusasetukset…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:28
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Palauta kaikki pikanäppäimet oletusarvoihin"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:65
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:49
 msgid "Search Shortcuts"
 msgstr "Etsi pikanäppäimiä"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:102
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:88
 msgid "No keyboard shortcut found"
 msgstr "Näppäimistön pikanäppäintä ei löytynyt"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:103
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
 msgid "Try a different search."
 msgstr "Kokeile eri hakuehtoja."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:140
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:138
 msgid "Add Custom Shortcuts"
 msgstr "Lisää mukautettu pikanäppäin"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:141
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:139
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr ""
 "Aseta mukautettuja pikanäppäimiä sovellusten käynnistämiseksi, "
 "komentorivisarjojen suorittamiseksi ja niin edelleen."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:145
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:143
 msgid "Add Shortcut"
 msgstr "Lisää pikanäppäin"
 
@@ -2884,8 +2879,6 @@ msgstr ""
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
-#| msgid ""
-#| "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 "Hotkey;"
@@ -2973,151 +2966,150 @@ msgstr ""
 "microphone;recording;application;privacy;mikrofoni;nauhoitus;tallennus;"
 "sovellus;yksityisyys;tietosuoja;"
 
-#: panels/mouse/cc-mouse-panel.ui:18
+#: panels/mouse/cc-mouse-panel.ui:30
 msgid "Test _Settings"
 msgstr "_Testaa asetukset"
 
-#: panels/mouse/cc-mouse-panel.ui:32 panels/mouse/cc-mouse-panel.ui:78
+#: panels/mouse/cc-mouse-panel.ui:44 panels/mouse/cc-mouse-panel.ui:90
 msgid "Mouse"
 msgstr "Hiiri"
 
-#: panels/mouse/cc-mouse-panel.ui:39
+#: panels/mouse/cc-mouse-panel.ui:51
 #: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "Yleiset"
 
-#: panels/mouse/cc-mouse-panel.ui:42
+#: panels/mouse/cc-mouse-panel.ui:54
 msgid "Primary Button"
 msgstr "Ensisijainen painike"
 
-#: panels/mouse/cc-mouse-panel.ui:43
+#: panels/mouse/cc-mouse-panel.ui:55
 msgid "Order of physical buttons on mice and touchpads."
 msgstr "Fyysisten painikkeiden järjestys hiiressä ja kosketuslevyssä."
 
-#: panels/mouse/cc-mouse-panel.ui:57
+#: panels/mouse/cc-mouse-panel.ui:69
 msgid "Left"
 msgstr "Vasen"
 
-#: panels/mouse/cc-mouse-panel.ui:64
+#: panels/mouse/cc-mouse-panel.ui:76
 msgid "Right"
 msgstr "Oikea"
 
-#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:86
-#: panels/mouse/cc-mouse-panel.ui:189
+#: panels/mouse/cc-mouse-panel.ui:93 panels/mouse/cc-mouse-panel.ui:98
+#: panels/mouse/cc-mouse-panel.ui:200
 msgid "Pointer Speed"
 msgstr "Osoittimen nopeus"
 
-#: panels/mouse/cc-mouse-panel.ui:89 panels/mouse/cc-mouse-panel.ui:197
+#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:208
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Hidas"
 
-#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:199
+#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:210
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Nopea"
 
-#: panels/mouse/cc-mouse-panel.ui:107 panels/mouse/cc-mouse-panel.ui:142
-msgid "Pointer Assistance"
-msgstr "Osoittimen avustus"
+#: panels/mouse/cc-mouse-panel.ui:119
+msgid "Mouse Acceleration"
+msgstr "Hiiren kiihdytys"
 
-#: panels/mouse/cc-mouse-panel.ui:108
+#: panels/mouse/cc-mouse-panel.ui:120
 msgid "Recommended for most users and applications"
 msgstr "Suositeltu useimmille käyttäjille ja sovelluksille"
 
-#. Translators: Preserve the line-break separating the two paragraphs.
-#: panels/mouse/cc-mouse-panel.ui:128
+#: panels/mouse/cc-mouse-panel.ui:140
 msgid ""
-"Turning pointer assistance off can allow faster and more precise movements, "
-"but can also make the mouse more difficult to use.\n"
-"\n"
-"Pointer assistance is also known as pointer acceleration."
+"Turning mouse acceleration off can allow faster and more precise movements, "
+"but can also make the mouse more difficult to use."
 msgstr ""
-"Osoittimen avustuksen kytkeminen pois voi mahdollistaa nopeammat ja "
-"tarkemmat liikkeet, mutta saattaa tehdä hiiren käytöstä vaikeampaa.\n"
-"\n"
-"Osoittimen avustus tunnetaan myös nimellä osoittimen kiihtyvyys."
+"Hiiren kiihdytyksen kytkeminen pois voi mahdollistaa nopeammat ja tarkemmat "
+"liikkeet, mutta saattaa tehdä hiiren käytöstä vaikeampaa."
 
-#: panels/mouse/cc-mouse-panel.ui:150 panels/mouse/cc-mouse-panel.ui:253
+#: panels/mouse/cc-mouse-panel.ui:152
+msgid "Pointer Assistance"
+msgstr "Osoittimen avustus"
+
+#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:264
 msgid "Scroll Direction"
 msgstr "Vierityksen suunta"
 
-#: panels/mouse/cc-mouse-panel.ui:151 panels/mouse/cc-mouse-panel.ui:254
+#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:265
 msgid "Traditional"
 msgstr "Perinteinen"
 
-#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:255
+#: panels/mouse/cc-mouse-panel.ui:162 panels/mouse/cc-mouse-panel.ui:266
 msgid "Scrolling moves the view"
 msgstr "Vieritys liikuttaa näkymää"
 
-#: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:256
+#: panels/mouse/cc-mouse-panel.ui:163 panels/mouse/cc-mouse-panel.ui:267
 msgid "Natural"
 msgstr "Luonnollinen"
 
-#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:257
+#: panels/mouse/cc-mouse-panel.ui:164 panels/mouse/cc-mouse-panel.ui:268
 msgid "Scrolling moves the content"
 msgstr "Vieritys liikuttaa sisältöä"
 
-#: panels/mouse/cc-mouse-panel.ui:168 panels/mouse/cc-mouse-panel.ui:175
-#: panels/mouse/cc-mouse-panel.ui:181
+#: panels/mouse/cc-mouse-panel.ui:179 panels/mouse/cc-mouse-panel.ui:186
+#: panels/mouse/cc-mouse-panel.ui:192
 msgid "Touchpad"
 msgstr "Kosketuslevy"
 
-#: panels/mouse/cc-mouse-panel.ui:194
+#: panels/mouse/cc-mouse-panel.ui:205
 msgid "Pointer speed"
 msgstr "Osoittimen nopeus"
 
-#: panels/mouse/cc-mouse-panel.ui:217
+#: panels/mouse/cc-mouse-panel.ui:228
 msgid "Clicking"
 msgstr "Napsautus"
 
-#: panels/mouse/cc-mouse-panel.ui:222
+#: panels/mouse/cc-mouse-panel.ui:233
 msgid "Tap to Click"
 msgstr "Napsauta napauttamalla"
 
-#: panels/mouse/cc-mouse-panel.ui:223
+#: panels/mouse/cc-mouse-panel.ui:234
 msgid "Quickly touch the touchpad to click"
 msgstr "Kosketa kosketuslevyä nopeasti napsauttaaksesi"
 
-#: panels/mouse/cc-mouse-panel.ui:229
+#: panels/mouse/cc-mouse-panel.ui:240
 msgid "Tap to click"
 msgstr "Napsauta napauttamalla"
 
-#: panels/mouse/cc-mouse-panel.ui:240
+#: panels/mouse/cc-mouse-panel.ui:251
 msgid "Scrolling"
 msgstr "Vieritys"
 
-#: panels/mouse/cc-mouse-panel.ui:243
+#: panels/mouse/cc-mouse-panel.ui:254
 msgid "Scroll Method"
 msgstr "Vieritystapa"
 
-#: panels/mouse/cc-mouse-panel.ui:244
+#: panels/mouse/cc-mouse-panel.ui:255
 msgid "Two Finger"
 msgstr "Kaksi sormea"
 
-#: panels/mouse/cc-mouse-panel.ui:245
+#: panels/mouse/cc-mouse-panel.ui:256
 msgid "Drag two fingers on the touchpad"
 msgstr "Vedä kahta sormea kosketuslevyllä"
 
-#: panels/mouse/cc-mouse-panel.ui:246
+#: panels/mouse/cc-mouse-panel.ui:257
 msgid "Edge"
 msgstr "Reuna"
 
-#: panels/mouse/cc-mouse-panel.ui:247
+#: panels/mouse/cc-mouse-panel.ui:258
 msgid "Drag one finger on the edge"
 msgstr "Vedä yhtä sormea reunalla"
 
-#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:98
+#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:96
 msgid "Single Click"
 msgstr "Kertanapsautus"
 
-#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:112
+#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:110
 msgid "Double Click"
 msgstr "Kaksoisnapsautus"
 
-#: panels/mouse/cc-mouse-test.ui:26
+#: panels/mouse/cc-mouse-test.ui:24
 msgid "Test Mouse & Touchpad"
 msgstr "Testaa hiirtä ja kosketuslevyä"
 
@@ -3352,9 +3344,8 @@ msgstr "Ohitettavat koneet"
 #. * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
 #. * The string placeholder will be replaced by the Wi-Fi networks SSID.
 #.
-#: panels/network/cc-qr-code-dialog.c:128
+#: panels/network/cc-qr-code-dialog.c:133
 #, c-format
-#| msgid "Switch off to connect to a Wi-Fi network"
 msgid "Scan the QR code to connect to the network <b>%s</b>."
 msgstr "Skannaa QR-koodi yhdistääksesi <b>%s</b>."
 
@@ -3816,7 +3807,6 @@ msgstr "WPA3-Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
 #: panels/network/connection-editor/net-connection-editor.c:864
-#| msgid "Wired"
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -6789,7 +6779,7 @@ msgstr "Thunderbolt-tuki on poistettu käytöstä BIOS:in kautta."
 msgid "Thunderbolt security level could not be determined."
 msgstr "Thunderbolt-turvatasoa ei voitu määrittää."
 
-#: panels/thunderbolt/cc-bolt-panel.c:679
+#: panels/thunderbolt/cc-bolt-panel.c:694
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Virhe vaihtaessa direct-tilaan: %s"
@@ -7285,17 +7275,14 @@ msgid "Length"
 msgstr "Pituus"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:169
-#| msgid "Lock screen"
 msgid "1/4 screen"
 msgstr "1/4 näyttöä"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:170
-#| msgid "Screen"
 msgid "1/2 Screen"
 msgstr "1/2 näyttöä"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:171
-#| msgid "Screen"
 msgid "3/4 Screen"
 msgstr "3/4 näyttöä"
 
@@ -8415,7 +8402,7 @@ msgstr "Uusi salasana ei sisällä riittävästi eri merkkejä"
 msgid "Unknown error"
 msgstr "Tuntematon virhe"
 
-#: panels/user-accounts/user-utils.c:144
+#: panels/user-accounts/user-utils.c:150
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
@@ -8423,13 +8410,13 @@ msgstr ""
 "Käyttäjätunnuksen tulisi yleensä koostua vain pienistä kirjaimista välillä a-"
 "z, numeroista sekä seuraavista merkeistä: - _"
 
-#: panels/user-accounts/user-utils.c:148
+#: panels/user-accounts/user-utils.c:154
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr ""
 "Valitettavasti kyseinen käyttäjätunnus ei ole saatavilla. Valitse toinen "
 "käyttäjätunnus."
 
-#: panels/user-accounts/user-utils.c:190
+#: panels/user-accounts/user-utils.c:196
 msgid "The username is too long."
 msgstr "Käyttäjätunnus on liian pitkä."
 
