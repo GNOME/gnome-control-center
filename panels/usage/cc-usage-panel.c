@@ -344,8 +344,8 @@ clear_recent (CcUsagePanel *self)
   GtkDialog *dialog;
 
   dialog = run_warning (self,
-                        _("Delete all the recent files?"),
-                        _("All the recent files will be permanently deleted."),
+                        _("Clear File History?"),
+                        _("After clearing, lists of recently used files will appear empty."),
                         _("_Clear History"));
 
   g_signal_connect_object (dialog,
