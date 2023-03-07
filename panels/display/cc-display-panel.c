@@ -457,7 +457,7 @@ on_monitor_settings_updated_cb (CcDisplayPanel    *panel,
                                 CcDisplaySettings *settings)
 {
   if (monitor)
-    cc_display_config_snap_output (panel->current_config, monitor);
+    cc_display_config_snap_outputs (panel->current_config);
   update_apply_button (panel);
 }
 

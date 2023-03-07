@@ -981,16 +981,13 @@ try_snap_output (CcDisplayConfig  *config,
 }
 
 void
-cc_display_config_snap_output (CcDisplayConfig  *config,
-                               CcDisplayMonitor *output)
+cc_display_config_snap_outputs (CcDisplayConfig  *config)
 {
   gboolean changed;
   GList *l;
 
   if (cc_display_config_count_useful_monitors (config) <= 1)
     return;
-
-  (void) (try_snap_output (config, output));
 
   do
     {
