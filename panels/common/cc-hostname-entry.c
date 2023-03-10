@@ -234,7 +234,7 @@ cc_hostname_entry_constructed (GObject *object)
   else
     gtk_editable_set_text (GTK_EDITABLE (self), "");
 
-  g_signal_connect (self, "changed", G_CALLBACK (text_changed_cb), NULL);
+  g_signal_connect (self, "apply", G_CALLBACK (text_changed_cb), NULL);
 
   adw_entry_row_set_show_apply_button (ADW_ENTRY_ROW (self), TRUE);
 }
