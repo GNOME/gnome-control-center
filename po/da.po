@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-14 22:15+0000\n"
-"PO-Revision-Date: 2023-02-18 11:03+0100\n"
+"POT-Creation-Date: 2023-03-10 23:31+0000\n"
+"PO-Revision-Date: 2023-03-11 11:43+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -189,8 +189,8 @@ msgstr "Modtag systemsøgninger og send resultater"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:820
-#: panels/user-accounts/cc-user-panel.c:921
+#: panels/user-accounts/cc-user-panel.c:821
+#: panels/user-accounts/cc-user-panel.c:951
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -388,8 +388,8 @@ msgstr "Vælg et billede"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:610
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:629
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -1238,8 +1238,6 @@ msgstr "%e. %b, %Y"
 #. and "Yesterday, 10:10:10 AM"
 #: panels/common/cc-util.c:162
 #, c-format
-#| msgctxt "timezone loc"
-#| msgid "%s, %s"
 msgid "%1$s, %2$s"
 msgstr "%1$s %2$s"
 
@@ -1330,7 +1328,7 @@ msgid "%e %B %Y, %R"
 msgstr "%e. %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:394
+#: panels/datetime/cc-datetime-panel.c:398
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1338,7 +1336,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:411
+#: panels/datetime/cc-datetime-panel.c:415
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1388,8 +1386,8 @@ msgstr "Kræver internetadgang og at placeringstjenester er aktiverede"
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
-#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:818
-#: panels/user-accounts/cc-user-panel.c:918
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:819
+#: panels/user-accounts/cc-user-panel.c:948
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "Aktiveret"
@@ -1582,8 +1580,8 @@ msgid "_Apply"
 msgstr "_Anvend"
 
 #: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/network/cc-wifi-panel.ui:16
-#: panels/printers/new-printer-dialog.ui:64
+#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
 #: panels/user-accounts/cc-fingerprint-dialog.ui:44
@@ -2276,22 +2274,22 @@ msgstr "64-bit"
 msgid "32-bit"
 msgstr "32-bit"
 
-#: panels/info-overview/cc-info-overview-panel.c:622
+#: panels/info-overview/cc-info-overview-panel.c:623
 msgid "X11"
 msgstr "X11"
 
-#: panels/info-overview/cc-info-overview-panel.c:626
+#: panels/info-overview/cc-info-overview-panel.c:627
 msgid "Wayland"
 msgstr "Wayland"
 
-#: panels/info-overview/cc-info-overview-panel.c:628
+#: panels/info-overview/cc-info-overview-panel.c:629
 msgctxt "Windowing system (Wayland, X11, or Unknown)"
 msgid "Unknown"
 msgstr "Ukendt"
 
 #. translators: this is the placeholder string when the GNOME Shell
 #. * version couldn't be loaded, eg. “GNOME Version: Not Available”
-#: panels/info-overview/cc-info-overview-panel.c:706
+#: panels/info-overview/cc-info-overview-panel.c:707
 msgid "Not Available"
 msgstr "Ikke tilgængelig"
 
@@ -2706,7 +2704,8 @@ msgstr ""
 "Metoder til indtastning af symboler og bogstavvarianter med brug af "
 "tastaturet."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:161
+#: panels/keyboard/cc-keyboard-panel.ui:82
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:161
 msgid "Keyboard Shortcuts"
 msgstr "Tastaturgenveje"
 
@@ -2714,11 +2713,11 @@ msgstr "Tastaturgenveje"
 msgid "View and Customize Shortcuts"
 msgstr "Gennemse og tilpas genveje"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:387
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
 msgid "Reset All Shortcuts?"
 msgstr "Nulstil alle genveje?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:384
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2726,48 +2725,46 @@ msgstr ""
 "Nulstilling af genvejene kan påvirke dine brugertilpassede genveje. Dette "
 "kan ikke fortrydes."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:394
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:388
 #: panels/network/cc-network-panel.ui:26
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Annullér"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:395
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
 msgid "Reset All"
 msgstr "Nulstil alle"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:33
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:27
 msgid "Reset All…"
 msgstr "Nulstil alle …"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:28
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Nulstil alle genveje til deres standardbindinger"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:65
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:49
 msgid "Search Shortcuts"
 msgstr "Søg genveje"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:102
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:88
 msgid "No keyboard shortcut found"
 msgstr "Ingen tastaturgenvej fundet"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:103
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
 msgid "Try a different search."
 msgstr "Prøv en anden søgning."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:140
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:138
 msgid "Add Custom Shortcuts"
 msgstr "Tilføj brugertilpassede genveje"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:141
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:139
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr "Indstil brugertilpassede genveje til kørsel af programmer, scripts mv."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:145
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:143
 msgid "Add Shortcut"
 msgstr "Tilføj genvej"
 
@@ -2970,151 +2967,150 @@ msgstr "Begræns adgang til mikrofon"
 msgid "microphone;recording;application;privacy;"
 msgstr "mikrofon;optagelse;program;privatliv;"
 
-#: panels/mouse/cc-mouse-panel.ui:18
+#: panels/mouse/cc-mouse-panel.ui:30
 msgid "Test _Settings"
 msgstr "_Afprøv indstillinger"
 
-#: panels/mouse/cc-mouse-panel.ui:32 panels/mouse/cc-mouse-panel.ui:78
+#: panels/mouse/cc-mouse-panel.ui:44 panels/mouse/cc-mouse-panel.ui:90
 msgid "Mouse"
 msgstr "Mus"
 
-#: panels/mouse/cc-mouse-panel.ui:39
+#: panels/mouse/cc-mouse-panel.ui:51
 #: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "Generelt"
 
-#: panels/mouse/cc-mouse-panel.ui:42
+#: panels/mouse/cc-mouse-panel.ui:54
 msgid "Primary Button"
 msgstr "Primær knap"
 
-#: panels/mouse/cc-mouse-panel.ui:43
+#: panels/mouse/cc-mouse-panel.ui:55
 msgid "Order of physical buttons on mice and touchpads."
 msgstr "Rækkefølgen for fysiske knapper på mus og pegeplader."
 
-#: panels/mouse/cc-mouse-panel.ui:57
+#: panels/mouse/cc-mouse-panel.ui:69
 msgid "Left"
 msgstr "Venstre"
 
-#: panels/mouse/cc-mouse-panel.ui:64
+#: panels/mouse/cc-mouse-panel.ui:76
 msgid "Right"
 msgstr "Højre"
 
-#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:86
-#: panels/mouse/cc-mouse-panel.ui:189
+#: panels/mouse/cc-mouse-panel.ui:93 panels/mouse/cc-mouse-panel.ui:98
+#: panels/mouse/cc-mouse-panel.ui:200
 msgid "Pointer Speed"
 msgstr "Markørhastighed"
 
-#: panels/mouse/cc-mouse-panel.ui:89 panels/mouse/cc-mouse-panel.ui:197
+#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:208
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Langsom"
 
-#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:199
+#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:210
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
 msgstr "Hurtig"
 
-#: panels/mouse/cc-mouse-panel.ui:107 panels/mouse/cc-mouse-panel.ui:142
-msgid "Pointer Assistance"
-msgstr "Markørassistance"
+#: panels/mouse/cc-mouse-panel.ui:119
+msgid "Mouse Acceleration"
+msgstr "Museacceleration"
 
-#: panels/mouse/cc-mouse-panel.ui:108
+#: panels/mouse/cc-mouse-panel.ui:120
 msgid "Recommended for most users and applications"
 msgstr "Anbefalet til de fleste brugere og programmer"
 
-#. Translators: Preserve the line-break separating the two paragraphs.
-#: panels/mouse/cc-mouse-panel.ui:128
+#: panels/mouse/cc-mouse-panel.ui:140
 msgid ""
-"Turning pointer assistance off can allow faster and more precise movements, "
-"but can also make the mouse more difficult to use.\n"
-"\n"
-"Pointer assistance is also known as pointer acceleration."
+"Turning mouse acceleration off can allow faster and more precise movements, "
+"but can also make the mouse more difficult to use."
 msgstr ""
-"Deaktivering af markørassistance kan tillade hurtigere og mere præcise "
-"bevægelser, men kan også gøre musen sværere at bruge.\n"
-"\n"
-"Markørassistance er også kendt som markøracceleration."
+"Deaktivering af museacceleration kan muliggøre hurtigere og mere præcise "
+"bevægelser, men kan også gøre musen sværere at bruge."
 
-#: panels/mouse/cc-mouse-panel.ui:150 panels/mouse/cc-mouse-panel.ui:253
+#: panels/mouse/cc-mouse-panel.ui:152
+msgid "Pointer Assistance"
+msgstr "Markørassistance"
+
+#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:264
 msgid "Scroll Direction"
 msgstr "Rulleretning"
 
-#: panels/mouse/cc-mouse-panel.ui:151 panels/mouse/cc-mouse-panel.ui:254
+#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:265
 msgid "Traditional"
 msgstr "Traditionel"
 
-#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:255
+#: panels/mouse/cc-mouse-panel.ui:162 panels/mouse/cc-mouse-panel.ui:266
 msgid "Scrolling moves the view"
 msgstr "Rulning flytter visningen"
 
-#: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:256
+#: panels/mouse/cc-mouse-panel.ui:163 panels/mouse/cc-mouse-panel.ui:267
 msgid "Natural"
 msgstr "Naturlig"
 
-#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:257
+#: panels/mouse/cc-mouse-panel.ui:164 panels/mouse/cc-mouse-panel.ui:268
 msgid "Scrolling moves the content"
 msgstr "Rulning flytter indholdet"
 
-#: panels/mouse/cc-mouse-panel.ui:168 panels/mouse/cc-mouse-panel.ui:175
-#: panels/mouse/cc-mouse-panel.ui:181
+#: panels/mouse/cc-mouse-panel.ui:179 panels/mouse/cc-mouse-panel.ui:186
+#: panels/mouse/cc-mouse-panel.ui:192
 msgid "Touchpad"
 msgstr "Pegeplade"
 
-#: panels/mouse/cc-mouse-panel.ui:194
+#: panels/mouse/cc-mouse-panel.ui:205
 msgid "Pointer speed"
 msgstr "Markørhastighed"
 
-#: panels/mouse/cc-mouse-panel.ui:217
+#: panels/mouse/cc-mouse-panel.ui:228
 msgid "Clicking"
 msgstr "Klikning"
 
-#: panels/mouse/cc-mouse-panel.ui:222
+#: panels/mouse/cc-mouse-panel.ui:233
 msgid "Tap to Click"
 msgstr "Tryk for at klikke"
 
-#: panels/mouse/cc-mouse-panel.ui:223
+#: panels/mouse/cc-mouse-panel.ui:234
 msgid "Quickly touch the touchpad to click"
 msgstr "Berør pegepladen hurtigt for at klikke"
 
-#: panels/mouse/cc-mouse-panel.ui:229
+#: panels/mouse/cc-mouse-panel.ui:240
 msgid "Tap to click"
 msgstr "Tryk for at klikke"
 
-#: panels/mouse/cc-mouse-panel.ui:240
+#: panels/mouse/cc-mouse-panel.ui:251
 msgid "Scrolling"
 msgstr "Rulning"
 
-#: panels/mouse/cc-mouse-panel.ui:243
+#: panels/mouse/cc-mouse-panel.ui:254
 msgid "Scroll Method"
 msgstr "Rullemetode"
 
-#: panels/mouse/cc-mouse-panel.ui:244
+#: panels/mouse/cc-mouse-panel.ui:255
 msgid "Two Finger"
 msgstr "Tofinger"
 
-#: panels/mouse/cc-mouse-panel.ui:245
+#: panels/mouse/cc-mouse-panel.ui:256
 msgid "Drag two fingers on the touchpad"
 msgstr "Træk to fingre på pegepladen"
 
-#: panels/mouse/cc-mouse-panel.ui:246
+#: panels/mouse/cc-mouse-panel.ui:257
 msgid "Edge"
 msgstr "Kant"
 
-#: panels/mouse/cc-mouse-panel.ui:247
+#: panels/mouse/cc-mouse-panel.ui:258
 msgid "Drag one finger on the edge"
 msgstr "Træk en finger langs med kanten"
 
-#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:98
+#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:96
 msgid "Single Click"
 msgstr "Enkeltklik"
 
-#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:112
+#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:110
 msgid "Double Click"
 msgstr "Dobbeltklik"
 
-#: panels/mouse/cc-mouse-test.ui:26
+#: panels/mouse/cc-mouse-test.ui:24
 msgid "Test Mouse & Touchpad"
 msgstr "Test mus & pegeplade"
 
@@ -3341,6 +3337,27 @@ msgstr "SOCKS-værtsport"
 #: panels/network/cc-net-proxy-page.ui:261
 msgid "Ignored Hosts"
 msgstr "Ignorerede værter"
+
+#.
+#. * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
+#. * The string placeholder will be replaced by the Wi-Fi networks SSID.
+#.
+#: panels/network/cc-qr-code-dialog.c:133
+#, c-format
+msgid "Scan the QR code to connect to the network <b>%s</b>."
+msgstr "Skan QR-koden for at forbinde til netværket <b>%s</b>."
+
+#: panels/network/cc-qr-code-dialog.ui:9
+msgid "Share Network"
+msgstr "Del netværk"
+
+#: panels/network/cc-qr-code-dialog.ui:36
+msgid "QR Code"
+msgstr "QR-kode"
+
+#: panels/network/cc-qr-code-dialog.ui:46
+msgid "Scan to Connect"
+msgstr "Skan for at forbinde"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
 #: panels/network/cc-wifi-connection-row.c:218
@@ -6721,7 +6738,7 @@ msgstr ""
 #: panels/thunderbolt/cc-bolt-panel.ui:156
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr ""
-"Tillad direkte adgang til enheder såsom dockingstations og eksterne GPU'er."
+"Tillad direkte adgang til enheder såsom dockingstationer og eksterne GPU'er."
 
 #: panels/thunderbolt/cc-bolt-panel.c:491
 msgid "Only USB and Display Port devices can attach."
@@ -6746,7 +6763,7 @@ msgstr "Understøttelse for Thunderbolt er blevet slået fra i BIOS."
 msgid "Thunderbolt security level could not be determined."
 msgstr "Sikkerhedsniveau for Thunderbolt kunne ikke bestemmes."
 
-#: panels/thunderbolt/cc-bolt-panel.c:679
+#: panels/thunderbolt/cc-bolt-panel.c:694
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Fejl ved skift til direkte tilstand: %s"
@@ -7859,7 +7876,7 @@ msgstr "%s — %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:743
+#: panels/user-accounts/cc-user-panel.c:744
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%k:%M"
@@ -7867,7 +7884,7 @@ msgstr "%k:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:747
+#: panels/user-accounts/cc-user-panel.c:748
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7959,30 +7976,30 @@ msgstr "Ugyldig adgangskode; prøv venligst igen"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Kunne ikke forbinde til domænet %s: %s"
 
-#: panels/user-accounts/cc-user-panel.c:258
+#: panels/user-accounts/cc-user-panel.c:259
 msgid "Add User…"
 msgstr "Tilføj bruger …"
 
-#: panels/user-accounts/cc-user-panel.c:372
+#: panels/user-accounts/cc-user-panel.c:373
 msgid "Failed to delete user"
 msgstr "Kunne ikke slette bruger"
 
-#: panels/user-accounts/cc-user-panel.c:429
-#: panels/user-accounts/cc-user-panel.c:484
-#: panels/user-accounts/cc-user-panel.c:530
+#: panels/user-accounts/cc-user-panel.c:430
+#: panels/user-accounts/cc-user-panel.c:485
+#: panels/user-accounts/cc-user-panel.c:531
 msgid "Failed to revoke remotely managed user"
 msgstr "Kunne ikke tilbagekalde fjernhåndteret bruger"
 
-#: panels/user-accounts/cc-user-panel.c:579
+#: panels/user-accounts/cc-user-panel.c:580
 msgid "You cannot delete your own account."
 msgstr "Du kan ikke slette din egen konto."
 
-#: panels/user-accounts/cc-user-panel.c:588
+#: panels/user-accounts/cc-user-panel.c:589
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s er stadig logget ind"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:593
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7990,12 +8007,12 @@ msgstr ""
 "Sletning af en bruger, mens denne stadig er logget ind, kan bringe systemet "
 "i en inkonsistent tilstand."
 
-#: panels/user-accounts/cc-user-panel.c:601
+#: panels/user-accounts/cc-user-panel.c:602
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Vil du beholde %ss filer?"
 
-#: panels/user-accounts/cc-user-panel.c:605
+#: panels/user-accounts/cc-user-panel.c:606
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8003,62 +8020,62 @@ msgstr ""
 "Det er muligt at beholde hjemmemappen, postarkivet samt midlertidige filer, "
 "når en brugerkonto slettes."
 
-#: panels/user-accounts/cc-user-panel.c:608
+#: panels/user-accounts/cc-user-panel.c:609
 msgid "_Delete Files"
 msgstr "_Slet filer"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:610
 msgid "_Keep Files"
 msgstr "_Behold filer"
 
-#: panels/user-accounts/cc-user-panel.c:623
+#: panels/user-accounts/cc-user-panel.c:624
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr ""
 "Er du sikker på, at du vil tilbagekalde den fjernhåndterede konto tilhørende "
 "%s?"
 
-#: panels/user-accounts/cc-user-panel.c:627
+#: panels/user-accounts/cc-user-panel.c:628
 msgid "_Delete"
 msgstr "_Slet"
 
-#: panels/user-accounts/cc-user-panel.c:677
+#: panels/user-accounts/cc-user-panel.c:678
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Konto deaktiveret"
 
-#: panels/user-accounts/cc-user-panel.c:685
+#: panels/user-accounts/cc-user-panel.c:686
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Vælges ved næste login"
 
-#: panels/user-accounts/cc-user-panel.c:688
+#: panels/user-accounts/cc-user-panel.c:689
 msgctxt "Password mode"
 msgid "None"
 msgstr "Intet"
 
-#: panels/user-accounts/cc-user-panel.c:731
+#: panels/user-accounts/cc-user-panel.c:732
 msgid "Logged in"
 msgstr "Logget ind"
 
-#: panels/user-accounts/cc-user-panel.c:1216
+#: panels/user-accounts/cc-user-panel.c:1246
 msgid "Failed to contact the accounts service"
 msgstr "Kunne ikke kontakte kontotjenesten"
 
-#: panels/user-accounts/cc-user-panel.c:1218
+#: panels/user-accounts/cc-user-panel.c:1248
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Kontrollér venligst at AccountService er installeret og aktiveret."
 
-#: panels/user-accounts/cc-user-panel.c:1240
+#: panels/user-accounts/cc-user-panel.c:1270
 msgid "This panel must be unlocked to change this setting"
 msgstr "Panelet skal låses op for at ændre denne indstilling"
 
-#: panels/user-accounts/cc-user-panel.c:1307
+#: panels/user-accounts/cc-user-panel.c:1337
 msgid "Delete the selected user account"
 msgstr "Slet den valgte brugerkonto"
 
-#: panels/user-accounts/cc-user-panel.c:1311
-#: panels/user-accounts/cc-user-panel.c:1452
+#: panels/user-accounts/cc-user-panel.c:1341
+#: panels/user-accounts/cc-user-panel.c:1482
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8066,7 +8083,7 @@ msgstr ""
 "Klik først *-ikonet\n"
 "for at slette den valgte brugerkonto"
 
-#: panels/user-accounts/cc-user-panel.c:1498
+#: panels/user-accounts/cc-user-panel.c:1528
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Lås op for at tilføje brugere og ændre indstillinger"
 
@@ -8357,7 +8374,7 @@ msgstr "Den nye adgangskode indeholder ikke nok forskellige tegn"
 msgid "Unknown error"
 msgstr "Ukendt fejl"
 
-#: panels/user-accounts/user-utils.c:144
+#: panels/user-accounts/user-utils.c:150
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
@@ -8365,11 +8382,11 @@ msgstr ""
 "Brugernavnet består typisk kun af små bogstaver fra a til z, tal og følgende "
 "tegn: - _"
 
-#: panels/user-accounts/user-utils.c:148
+#: panels/user-accounts/user-utils.c:154
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Beklager, men det brugernavn er ikke tilgængeligt. Prøv et andet."
 
-#: panels/user-accounts/user-utils.c:190
+#: panels/user-accounts/user-utils.c:196
 msgid "The username is too long."
 msgstr "Brugernavnet er for langt."
 
@@ -10812,9 +10829,6 @@ msgstr "Systemlyde"
 
 #~ msgid "∶"
 #~ msgstr "∶"
-
-#~ msgid "Switch off to connect to a Wi-Fi network"
-#~ msgstr "Slå fra for at forbinde til et wi-fi-netværk"
 
 #~ msgctxt "Wi-Fi passkey"
 #~ msgid "Password"
