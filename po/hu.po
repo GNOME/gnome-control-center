@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2023-03-03 18:27+0000\n"
-"PO-Revision-Date: 2023-03-08 09:03+0100\n"
+"POT-Creation-Date: 2023-03-14 21:01+0000\n"
+"PO-Revision-Date: 2023-03-15 00:13+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -101,8 +101,8 @@ msgid ""
 "%s requires access to the following system resources. To stop this access, "
 "the app must be removed."
 msgstr ""
-"A(z) %s hozzáférést igényel a következő rendszererőforrásokhoz. A hozzáférés"
-" leállításához el kell távolítani az alkalmazást."
+"A(z) %s hozzáférést igényel a következő rendszererőforrásokhoz. A hozzáférés "
+"leállításához el kell távolítani az alkalmazást."
 
 #: panels/applications/cc-applications-panel.c:1192
 #, c-format
@@ -124,14 +124,15 @@ msgstr ""
 msgid "%s of disk space used."
 msgstr "%s lemezterület van használatban."
 
+#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "Alkalmazások"
 
 #: panels/applications/cc-applications-panel.ui:31
-#| msgid "No applications"
 msgid "No apps"
 msgstr "Nincsenek alkalmazások"
 
@@ -144,7 +145,6 @@ msgid "Open"
 msgstr "Megnyitás"
 
 #: panels/applications/cc-applications-panel.ui:94
-#| msgid "Details"
 msgid "App Details"
 msgstr "Alkalmazás részletei"
 
@@ -160,7 +160,6 @@ msgstr "Keresés"
 
 #: panels/applications/cc-applications-panel.ui:113
 #: panels/applications/cc-applications-panel.ui:120
-#| msgid "Receive system searches and send results."
 msgid "Receive system searches and send results"
 msgstr "Rendszerkeresések fogadása és a találatok küldése"
 
@@ -191,7 +190,6 @@ msgid "Notifications"
 msgstr "Értesítések"
 
 #: panels/applications/cc-applications-panel.ui:127
-#| msgid "Show system notifications."
 msgid "Show system notifications"
 msgstr "Rendszerértesítések megjelenítése"
 
@@ -200,7 +198,6 @@ msgid "Run in Background"
 msgstr "Futtatás a háttérben"
 
 #: panels/applications/cc-applications-panel.ui:134
-#| msgid "Allow activity when the app is closed."
 msgid "Allow activity when the app is closed"
 msgstr "Tevékenység engedélyezése, ha az alkalmazás be van zárva"
 
@@ -209,7 +206,6 @@ msgid "Screenshots"
 msgstr "Képernyőképek"
 
 #: panels/applications/cc-applications-panel.ui:141
-#| msgid "Take pictures of the screen at any time."
 msgid "Take pictures of the screen at any time"
 msgstr "Képek készítése a képernyőről bármikor"
 
@@ -232,7 +228,6 @@ msgid "Reproduce sounds."
 msgstr "Hangok reprodukálása."
 
 #: panels/applications/cc-applications-panel.ui:162
-#| msgid "Reproduce sounds."
 msgid "Reproduce sounds"
 msgstr "Hangok reprodukálása"
 
@@ -241,7 +236,6 @@ msgid "Inhibit Shortcuts"
 msgstr "Gyorsbillentyűk elnyomása"
 
 #: panels/applications/cc-applications-panel.ui:169
-#| msgid "Block standard keyboard shortcuts."
 msgid "Block standard keyboard shortcuts"
 msgstr "A szabványos gyorsbillentyűk tiltása"
 
@@ -252,7 +246,6 @@ msgstr "Kamera"
 
 #: panels/applications/cc-applications-panel.ui:176
 #: panels/applications/cc-applications-panel.ui:183
-#| msgid "Take pictures with the camera."
 msgid "Take pictures with the camera"
 msgstr "Fényképek készítése a kamerával"
 
@@ -263,7 +256,6 @@ msgstr "Mikrofon"
 
 #: panels/applications/cc-applications-panel.ui:190
 #: panels/applications/cc-applications-panel.ui:197
-#| msgid "Record audio with the microphone."
 msgid "Record audio with the microphone"
 msgstr "Hang rögzítése a mikrofonnal"
 
@@ -275,13 +267,11 @@ msgstr "Helymeghatározó szolgáltatások"
 
 #: panels/applications/cc-applications-panel.ui:204
 #: panels/applications/cc-applications-panel.ui:211
-#| msgid "Access device location data."
 msgid "Access device location data"
 msgstr "Hozzáférés az eszköz helyadataihoz"
 
 #: panels/applications/cc-applications-panel.ui:222
 #: panels/applications/cc-applications-panel.ui:326
-#| msgid "Direct Access"
 msgid "Required Access"
 msgstr "Szükséges hozzáférés"
 
@@ -326,15 +316,11 @@ msgid "Reset"
 msgstr "Visszaállítás"
 
 #: panels/applications/cc-applications-panel.ui:423
-#| msgid ""
-#| "How much disk space this application is occupying with app data and "
-#| "caches."
 msgid "How much disk space this app is occupying with app data and caches."
 msgstr ""
 "Mennyi tárhelyet foglal ez az alkalmazás az adataival és a gyorsítótáraival"
 
 #: panels/applications/cc-applications-panel.ui:426
-#| msgid "_Apply"
 msgid "App"
 msgstr "Alkalmazás"
 
@@ -355,7 +341,6 @@ msgid "Clear Cache…"
 msgstr "Gyorsítótár ürítése…"
 
 #: panels/applications/gnome-applications-panel.desktop.in:4
-#| msgid "Control various application permissions and settings"
 msgid "Control various app permissions and settings"
 msgstr "Különböző alkalmazások jogosultságainak és beállításainak szabályozása"
 
@@ -479,7 +464,6 @@ msgid "Bluetooth Turned Off"
 msgstr "Bluetooth kikapcsolva"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:32
-#| msgid "Turn on to connect devices and receive file transfers."
 msgid "Turn on to connect devices and receive file transfers"
 msgstr "Kapcsolja be eszközök csatlakoztatásához és fájlátvitelek fogadásához"
 
@@ -488,7 +472,6 @@ msgid "Airplane Mode is On"
 msgstr "A repülési üzemmód be van kapcsolva"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:39
-#| msgid "Bluetooth is disabled when airplane mode is on."
 msgid "Bluetooth is disabled when airplane mode is on"
 msgstr "A Bluetooth le van tiltva repülési üzemmódban"
 
@@ -520,7 +503,6 @@ msgid "share;sharing;bluetooth;obex;"
 msgstr "share;megosztás;bluetooth;obex;"
 
 #: panels/camera/cc-camera-panel.ui:11
-#| msgid "Camera"
 msgid "_Camera Access"
 msgstr "_Kamera-hozzáférés"
 
@@ -539,22 +521,19 @@ msgid ""
 "The following sandboxed apps have been given permission to use cameras. Apps "
 "that are not sandboxed can use cameras without asking for permission."
 msgstr ""
-"A következő védőfalas alkalmazások kaptak jogosultságot a kamerák"
-" használatára. A nem védőfalas alkalmazások jogosultság kérése nélkül"
-" használhatják a kamerákat."
+"A következő védőfalas alkalmazások kaptak jogosultságot a kamerák "
+"használatára. A nem védőfalas alkalmazások jogosultság kérése nélkül "
+"használhatják a kamerákat."
 
 #: panels/camera/cc-camera-panel.ui:37
-#| msgid "No Applications Have Asked for Camera Access"
 msgid "No sandboxed apps have asked for camera access"
 msgstr "Egyetlen védőfalas alkalmazás sem kért hozzáférést a kamerához"
 
 #: panels/camera/gnome-camera-panel.desktop.in:3
-#| msgid "Camera"
 msgid "Cameras"
 msgstr "Kamerák"
 
 #: panels/camera/gnome-camera-panel.desktop.in:4
-#| msgid "Requires internet access"
 msgid "Restrict camera access"
 msgstr "Kamera-hozzáférés korlátozása"
 
@@ -1259,7 +1238,7 @@ msgstr[0] "%d óra"
 msgstr[1] "%d óra"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1388,8 +1367,8 @@ msgstr "Automatikus idő_zóna"
 #: panels/datetime/cc-datetime-panel.ui:163
 msgid "Requires location services enabled and internet access"
 msgstr ""
-"A helymeghatározó szolgáltatások engedélyezését és internet-hozzáférést"
-" igényel"
+"A helymeghatározó szolgáltatások engedélyezését és internet-hozzáférést "
+"igényel"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
 #. TRANSLATORS: Status of Parental Controls setup
@@ -1461,12 +1440,10 @@ msgid "December"
 msgstr "december"
 
 #: panels/datetime/cc-tz-dialog.ui:6
-#| msgid "Time Zone"
 msgid "Select Time Zone"
 msgstr "Időzóna kiválasztása"
 
 #: panels/datetime/cc-tz-dialog.ui:40
-#| msgid "No Search Results"
 msgid "No Results"
 msgstr "Nincs találat"
 
@@ -1521,12 +1498,10 @@ msgid "_SMS"
 msgstr "_SMS"
 
 #: panels/default-apps/gnome-default-apps-panel.desktop.in:3
-#| msgid "Default: "
 msgid "Default Apps"
 msgstr "Alapértelmezett alkalmazások"
 
 #: panels/default-apps/gnome-default-apps-panel.desktop.in:4
-#| msgid "Configure Default Applications"
 msgid "Configure Default Apps"
 msgstr "Alapértelmezett alkalmazások beállítása"
 
@@ -1559,7 +1534,6 @@ msgid "Diagnostics"
 msgstr "Diagnosztika"
 
 #: panels/diagnostics/gnome-diagnostics-panel.desktop.in:4
-#| msgid "_Automatic Problem Reporting"
 msgid "Settings for automatically problem reporting"
 msgstr "Automatikus hibajelentés beállításai"
 
@@ -1570,13 +1544,13 @@ msgstr "diagnosztika;összeomlás;"
 
 #: panels/display/cc-display-panel.c:493
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Be"
 
 #: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Ki"
 
@@ -1695,7 +1669,6 @@ msgid "Night Light cannot be used from a virtual machine."
 msgstr "Az éjszakai fény nem használható virtuális gépről."
 
 #: panels/display/cc-night-light-page.ui:25
-#| msgid "Night Light unavailable"
 msgid "Night Light Unavailable"
 msgstr "Az éjszakai fény nem érhető el"
 
@@ -1786,11 +1759,10 @@ msgid "Displays"
 msgstr "Ki­jel­zők"
 
 #: panels/display/gnome-display-panel.desktop.in:4
-#| msgid "Choose how to use connected monitors and projectors"
 msgid "Use Night Light and choose how to use connected monitors and projectors"
 msgstr ""
-"Éjszakai fény használata és a csatlakoztatott monitorok és projektorok"
-" használati módjának kiválasztása"
+"Éjszakai fény használata és a csatlakoztatott monitorok és projektorok "
+"használati módjának kiválasztása"
 
 #. Translators: Search terms to find the Displays panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/display/gnome-display-panel.desktop.in:15
@@ -1892,7 +1864,6 @@ msgstr ""
 #. TRANSLATORS: in reference to firmware protection: 0/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:113
 #: panels/firmware-security/cc-firmware-security-panel.c:544
-#| msgid "PIN check failed"
 msgid "Checks Failed"
 msgstr "Az ellenőrzések sikertelenek"
 
@@ -1907,58 +1878,49 @@ msgid ""
 "firmware or changing device configuration options. However, failures can "
 "stem from the physical hardware itself, and may not be reversible."
 msgstr ""
-"A hardver nem felel meg az ellenőrzéseknek. Ez azt jelenti, hogy Ön nem"
-" védett a gyakori hardverbiztonsági problémákkal szemben.\n"
+"A hardver nem felel meg az ellenőrzéseknek. Ez azt jelenti, hogy Ön nem "
+"védett a gyakori hardverbiztonsági problémákkal szemben.\n"
 "\n"
-"A hardverbiztonsági problémák megoldhatók a belső vezérlőprogram"
-" frissítésével vagy az eszköz konfigurációs beállításainak"
-" megváltoztatásával. Azonban a hibák magából a fizikai hardverből is"
-" eredhetnek, és nem biztos, hogy visszafordíthatók."
+"A hardverbiztonsági problémák megoldhatók a belső vezérlőprogram "
+"frissítésével vagy az eszköz konfigurációs beállításainak "
+"megváltoztatásával. Azonban a hibák magából a fizikai hardverből is "
+"eredhetnek, és nem biztos, hogy visszafordíthatók."
 
 #. TRANSLATORS: in reference to firmware protection: 1/4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:127
 #: panels/firmware-security/cc-firmware-security-panel.c:551
-#| msgid "Change Password"
 msgid "Checks Passed"
 msgstr "Az ellenőrzések sikeresek"
 
 #. TRANSLATORS: This description describes the device passing the
 #. minimum requirement of security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:130
-#| msgid ""
-#| "This device has basic protection against hardware security issues. This "
-#| "provides protection against some common security threats."
 msgid ""
 "This device meets basic security requirements. Its hardware has protection "
 "against some of the most common security threats."
 msgstr ""
-"Ez az eszköz megfelel az alapvető biztonsági követelményeknek. A hardvere"
-" védelmet nyújt a leggyakoribb biztonsági fenyegetések némelyike ellen."
+"Ez az eszköz megfelel az alapvető biztonsági követelményeknek. A hardvere "
+"védelmet nyújt a leggyakoribb biztonsági fenyegetések némelyike ellen."
 
 #. TRANSLATORS: in reference to firmware protection: 2~4 stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:141
 #: panels/firmware-security/cc-firmware-security-panel.c:560
-#| msgid "Connected"
 msgid "Protected"
 msgstr "Védett"
 
 #. TRANSLATOR: This description describes the devices passing
 #. the extended security check.
 #: panels/firmware-security/cc-firmware-security-dialog.c:144
-#| msgid ""
-#| "This device has basic protection against hardware security issues. This "
-#| "provides protection against some common security threats."
 msgid ""
 "This device passes current security tests. Its hardware is protected against "
 "the majority of security threats."
 msgstr ""
-"Ez az eszköz átmegy a jelenlegi biztonsági teszteken. A hardvere védett a"
-" biztonsági fenyegetések jelentős részével szemben."
+"Ez az eszköz átmegy a jelenlegi biztonsági teszteken. A hardvere védett a "
+"biztonsági fenyegetések jelentős részével szemben."
 
 #. TRANSLATORS: in reference to firmware protection: ??? stars
 #: panels/firmware-security/cc-firmware-security-dialog.c:152
 #: panels/firmware-security/cc-firmware-security-panel.c:567
-#| msgid "Unavailable"
 msgid "Checks Unavailable"
 msgstr "Az ellenőrzések nem érhetők el"
 
@@ -1968,8 +1930,8 @@ msgid ""
 "Device security checks are not available for this device. It is not possible "
 "to tell whether it meets security requirements."
 msgstr ""
-"Az eszközbiztonsági ellenőrzések nem érhetők el ennél az eszköznél. Nem lehet"
-" megmondani, hogy megfelel-e a biztonsági követelményeknek."
+"Az eszközbiztonsági ellenőrzések nem érhetők el ennél az eszköznél. Nem "
+"lehet megmondani, hogy megfelel-e a biztonsági követelményeknek."
 
 #. Translators: Unknown endpoint host for WireGuard (invalid setting)
 #: panels/firmware-security/cc-firmware-security-dialog.c:188
@@ -1984,12 +1946,10 @@ msgid "Unknown"
 msgstr "Ismeretlen"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:270
-#| msgid "Device Security"
 msgid "Device Security Report"
 msgstr "Eszközbiztonsági jelentés"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:273
-#| msgid "_View details"
 msgid "Report details"
 msgstr "Jelentés részletei"
 
@@ -2003,13 +1963,11 @@ msgid "fwupd version:"
 msgstr "Az fwupd verziója:"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:294
-#| msgid "Hardware Model"
 msgid "Hardware model:"
 msgstr "Hardvermodell:"
 
 #. TRANSLATOR: "Processor" indicates the CPU model name.
 #: panels/firmware-security/cc-firmware-security-dialog.c:301
-#| msgid "Processor"
 msgid "Processor:"
 msgstr "Processzor:"
 
@@ -2020,13 +1978,11 @@ msgstr "Operációs rendszer:"
 
 #. TRANSLATOR: This is the title for device security level.
 #: panels/firmware-security/cc-firmware-security-dialog.c:313
-#| msgid "Security Level"
 msgid "Security level:"
 msgstr "Biztonsági szint:"
 
 #. TRANSLATOR: This is the postfix of "HSI-n Tests" title.
 #: panels/firmware-security/cc-firmware-security-dialog.c:343
-#| msgid "Test"
 msgid "Tests"
 msgstr "Tesztek"
 
@@ -2039,7 +1995,6 @@ msgstr "Futtatókörnyezet tesztjei"
 #. TRANSLATOR: This is the text event status output when the event status is "success"
 #: panels/firmware-security/cc-firmware-security-dialog.c:367
 #: panels/firmware-security/cc-firmware-security-panel.c:231
-#| msgid "Passed"
 msgid "Pass"
 msgstr "Sikeres"
 
@@ -2048,12 +2003,10 @@ msgstr "Sikeres"
 #. TRANSLATOR: This is the text event status output when the event status is not "success"
 #: panels/firmware-security/cc-firmware-security-dialog.c:374
 #: panels/firmware-security/cc-firmware-security-panel.c:234
-#| msgid "Failed"
 msgid "! Fail"
 msgstr "! Sikertelen"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:386
-#| msgid "Host firmware security status"
 msgid "Host security events"
 msgstr "A gép biztonsági eseményei"
 
@@ -2062,20 +2015,18 @@ msgid ""
 "For information on the contents of this report, see https://fwupd.github.io/"
 "hsi.html"
 msgstr ""
-"A jelentés tartalmával kapcsolatos információkért nézze meg a"
-" https://fwupd.github.io/hsi.html oldalt."
+"A jelentés tartalmával kapcsolatos információkért nézze meg a https://fwupd."
+"github.io/hsi.html oldalt."
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:395
 msgid "Report copied to clipboard"
 msgstr "Jelentés másolva a vágólapra"
 
 #: panels/firmware-security/cc-firmware-security-dialog.ui:22
-#| msgid "Device Security"
 msgid "Device Security Status"
 msgstr "Eszközbiztonsági állapot"
 
 #: panels/firmware-security/cc-firmware-security-help-dialog.ui:6
-#| msgid "Device Security"
 msgid "About Device Security"
 msgstr "Az eszközbiztonságról"
 
@@ -2084,8 +2035,8 @@ msgid ""
 "Device security provides information about how protected your device is "
 "against security issues which target the hardware itself."
 msgstr ""
-"Az eszközbiztonság információt nyújt arról, hogy az eszköz mennyire védett a"
-" hardvert érintő biztonsági problémákkal szemben."
+"Az eszközbiztonság információt nyújt arról, hogy az eszköz mennyire védett a "
+"hardvert érintő biztonsági problémákkal szemben."
 
 #: panels/firmware-security/cc-firmware-security-help-dialog.ui:51
 msgid "Aspects of hardware that affect security include:"
@@ -2111,19 +2062,19 @@ msgid ""
 "physical tampering, such as physical connection to the hardware to read data "
 "and implant malware."
 msgstr ""
-"A hardvert érintő biztonsági fenyegetések közé tartoznak az olyan"
-" rosszindulatú programok és vírusok, amelyek a közvetlenül a hardveren futó"
-" szoftvereket célozzák. Ide tartozik továbbá a fizikai manipuláció, például a"
-" hardverhez való fizikai csatlakozás az adatok kiolvasása és a rosszindulatú"
-" szoftverek beültetése céljából."
+"A hardvert érintő biztonsági fenyegetések közé tartoznak az olyan "
+"rosszindulatú programok és vírusok, amelyek a közvetlenül a hardveren futó "
+"szoftvereket célozzák. Ide tartozik továbbá a fizikai manipuláció, például a "
+"hardverhez való fizikai csatlakozás az adatok kiolvasása és a rosszindulatú "
+"szoftverek beültetése céljából."
 
 #: panels/firmware-security/cc-firmware-security-help-dialog.ui:125
 msgid ""
 "Device security is just one aspect of security, and does not reflect the "
 "overall security status of the system and applications."
 msgstr ""
-"Az eszközbiztonság csak egy nézőpontja a biztonságnak, és nem tükrözi a"
-" rendszer és az alkalmazások általános biztonsági állapotát."
+"Az eszközbiztonság csak egy nézőpontja a biztonságnak, és nem tükrözi a "
+"rendszer és az alkalmazások általános biztonsági állapotát."
 
 #: panels/firmware-security/cc-firmware-security-panel.c:120
 msgid "Protected against malicious software when the device starts."
@@ -2183,7 +2134,6 @@ msgstr "%1$s"
 
 #: panels/firmware-security/cc-firmware-security-panel.c:237
 #, c-format
-#| msgid "%1$s, %2$s"
 msgid "(%1$s → %2$s)"
 msgstr "(%1$s → %2$s)"
 
@@ -2204,12 +2154,10 @@ msgid "Security levels are not available for this device."
 msgstr "A biztonsági szintek nem érhetők el ehhez az eszközhöz."
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:50
-#| msgid "Device Security"
 msgid "Starting Device Security…"
 msgstr "Eszközbiztonság indítása…"
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:76
-#| msgid "Device Security"
 msgid "Device Security Unavailable"
 msgstr "Az eszközbiztonság nem érhető el"
 
@@ -2218,11 +2166,10 @@ msgid ""
 "Device Security is only available on physical hardware. No physical hardware "
 "has been detected."
 msgstr ""
-"Az eszközbiztonság csak fizikai hardveren érhető el. Nem lett fizikai hardver"
-" észlelve."
+"Az eszközbiztonság csak fizikai hardveren érhető el. Nem lett fizikai "
+"hardver észlelve."
 
 #: panels/firmware-security/cc-firmware-security-panel.ui:216
-#| msgid "Security Level"
 msgid "Security Events"
 msgstr "Biztonsági események"
 
@@ -2300,7 +2247,6 @@ msgid "Device Security"
 msgstr "Eszközbiztonság"
 
 #: panels/firmware-security/gnome-firmware-security-panel.desktop.in:4
-#| msgid "Protected against a wide range of security threats."
 msgid "Protection against hardware security threats"
 msgstr "Védelem a hardveres biztonsági fenyegetések ellen"
 
@@ -2796,7 +2742,6 @@ msgid "Reset all shortcuts to their default keybindings"
 msgstr "Az összes gyorsbillentyű visszaállítása az alapértelmezett értékekre"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:49
-#| msgid "Set Shortcut"
 msgid "Search Shortcuts"
 msgstr "Gyorsbillentyűk keresése"
 
@@ -2805,7 +2750,6 @@ msgid "No keyboard shortcut found"
 msgstr "Nem található gyorsbillentyű"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
-#| msgid "Try a different search"
 msgid "Try a different search."
 msgstr "Próbáljon valami mást keresni."
 
@@ -2826,8 +2770,6 @@ msgstr "Gyorsbillentyű hozzáadása"
 #. TRANSLATORS: Don't translate/transliterate <b>%s</b>, which is the accelerator used
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:391
 #, c-format
-#| msgid ""
-#| "%s is already being used for %s. If you replace it, %s will be disabled"
 msgid ""
 "<b>%s</b> is already being used for %s. If you replace it, %s will be "
 "disabled"
@@ -2854,7 +2796,6 @@ msgstr "Gyorsbillentyű beállítása"
 #.
 #: panels/keyboard/cc-keyboard-shortcut-editor.c:561
 #, c-format
-#| msgid "Enter new shortcut to change %s."
 msgid "Enter new shortcut to change <b>%s</b>"
 msgstr "Adja meg az új gyorsbillentyűt a(z) <b>%s</b> megváltoztatásához"
 
@@ -2918,7 +2859,6 @@ msgstr[0] "%d módosítva"
 msgstr[1] "%d módosítva"
 
 #: panels/keyboard/cc-keyboard-shortcut-group.c:154
-#| msgid "Add a shortcut"
 msgid "Add a Shortcut"
 msgstr "Gyorsbillentyű hozzáadása"
 
@@ -2940,8 +2880,6 @@ msgstr ""
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/keyboard/gnome-keyboard-panel.desktop.in:15
-#| msgid ""
-#| "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 msgid ""
 "Shortcut;Workspace;Window;Resize;Zoom;Contrast;Input;Source;Lock;Volume;"
 "Hotkey;"
@@ -2956,21 +2894,20 @@ msgid ""
 "mozilla.com/privacy'>Learn about what data is collected, and how it is used."
 "</a>"
 msgstr ""
-"A helymeghatározó szolgáltatások GPS, Wi-Fi és mobilkapcsolatokat használnak"
-" az eszköz hozzávetőleges helyének meghatározásához. <a"
-" href='https://location.services.mozilla.com/privacy'>Ismerje meg, milyen"
-" adatokat gyűjtenek és hogyan használják fel.</a>"
+"A helymeghatározó szolgáltatások GPS, Wi-Fi és mobilkapcsolatokat használnak "
+"az eszköz hozzávetőleges helyének meghatározásához. <a href='https://"
+"location.services.mozilla.com/privacy'>Ismerje meg, milyen adatokat "
+"gyűjtenek és hogyan használják fel.</a>"
 
 #: panels/location/cc-location-panel.ui:12
-#| msgid "Location Services"
 msgid "_Location Services"
 msgstr "_Helymeghatározó szolgáltatások"
 
 #: panels/location/cc-location-panel.ui:13
 msgid "Allow permitted apps to access location data"
 msgstr ""
-"Lehetővé tétel az engedélyezett alkalmazásoknak, hogy hozzáférjenek a"
-" helyadatokhoz"
+"Lehetővé tétel az engedélyezett alkalmazásoknak, hogy hozzáférjenek a "
+"helyadatokhoz"
 
 #: panels/location/cc-location-panel.ui:24
 msgid ""
@@ -2978,12 +2915,11 @@ msgid ""
 "that are not sandboxed can access location data without asking for "
 "permission."
 msgstr ""
-"A következő védőfalas alkalmazások kaptak hozzáférést a helyadatokhoz. A nem"
-" védőfalas alkalmazások jogosultság kérése nélkül férhetnek hozzá a"
-" helyadatokhoz."
+"A következő védőfalas alkalmazások kaptak hozzáférést a helyadatokhoz. A nem "
+"védőfalas alkalmazások jogosultság kérése nélkül férhetnek hozzá a "
+"helyadatokhoz."
 
 #: panels/location/cc-location-panel.ui:38
-#| msgid "No Applications Have Asked for Location Access"
 msgid "No sandboxed apps have asked for location access"
 msgstr "Egyetlen védőfalas alkalmazás sem kért hozzáférést a helyadatokhoz"
 
@@ -2997,15 +2933,14 @@ msgid "location;gps;private;privacy;"
 msgstr "hely;gps;személyes;adatvédelem;"
 
 #: panels/microphone/cc-microphone-panel.ui:11
-#| msgid "Microphone"
 msgid "_Microphone Access"
 msgstr "_Mikrofon-hozzáférés"
 
 #: panels/microphone/cc-microphone-panel.ui:12
 msgid "Allow permitted apps to use microphones"
 msgstr ""
-"Lehetővé tétel az engedélyezett alkalmazásoknak, hogy használják a"
-" mikrofonokat"
+"Lehetővé tétel az engedélyezett alkalmazásoknak, hogy használják a "
+"mikrofonokat"
 
 #: panels/microphone/cc-microphone-panel.ui:23
 msgid ""
@@ -3013,22 +2948,19 @@ msgid ""
 "Apps that are not sandboxed can use microphones without asking for "
 "permission."
 msgstr ""
-"A következő védőfalas alkalmazások kaptak jogosultságot a mikrofonok"
-" használatára. A nem védőfalas alkalmazások jogosultság kérése nélkül"
-" használhatják a mikrofonokat."
+"A következő védőfalas alkalmazások kaptak jogosultságot a mikrofonok "
+"használatára. A nem védőfalas alkalmazások jogosultság kérése nélkül "
+"használhatják a mikrofonokat."
 
 #: panels/microphone/cc-microphone-panel.ui:38
-#| msgid "No Applications Have Asked for Microphone Access"
 msgid "No sandboxed apps have asked for microphone access"
 msgstr "Egyetlen védőfalas alkalmazás sem kért hozzáférést a mikrofonhoz"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in:3
-#| msgid "Microphone"
 msgid "Microphones"
 msgstr "Mikrofonok"
 
 #: panels/microphone/gnome-microphone-panel.desktop.in:4
-#| msgid "Requires internet access"
 msgid "Restrict microphone access"
 msgstr "Mikrofon-hozzáférés korlátozása"
 
@@ -3038,7 +2970,6 @@ msgid "microphone;recording;application;privacy;"
 msgstr "mikrofon;felvétel;alkalmazás;adatvédelem;"
 
 #: panels/mouse/cc-mouse-panel.ui:30
-#| msgid "Test Your _Settings"
 msgid "Test _Settings"
 msgstr "_Beállítások tesztelése"
 
@@ -3056,7 +2987,6 @@ msgid "Primary Button"
 msgstr "Elsődleges gomb"
 
 #: panels/mouse/cc-mouse-panel.ui:55
-#| msgid "Sets the order of physical buttons on mice and touchpads."
 msgid "Order of physical buttons on mice and touchpads."
 msgstr "Fizikai gombok sorrendje egereken és érintőtáblákon."
 
@@ -3070,7 +3000,6 @@ msgstr "Jobb"
 
 #: panels/mouse/cc-mouse-panel.ui:93 panels/mouse/cc-mouse-panel.ui:98
 #: panels/mouse/cc-mouse-panel.ui:200
-#| msgid "Mouse Speed"
 msgid "Pointer Speed"
 msgstr "Mutató sebessége"
 
@@ -3099,15 +3028,14 @@ msgid ""
 "Turning mouse acceleration off can allow faster and more precise movements, "
 "but can also make the mouse more difficult to use."
 msgstr ""
-"Az egér gyorsításának kikapcsolása gyorsabb és pontosabb mozgatásokat tesz"
-" lehetővé, de nehezebbé is teheti az egér használatát."
+"Az egér gyorsításának kikapcsolása gyorsabb és pontosabb mozgatásokat tesz "
+"lehetővé, de nehezebbé is teheti az egér használatát."
 
 #: panels/mouse/cc-mouse-panel.ui:152
 msgid "Pointer Assistance"
 msgstr "Mutató segítség"
 
 #: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:264
-#| msgid "Section"
 msgid "Scroll Direction"
 msgstr "Görgetés iránya"
 
@@ -3116,7 +3044,6 @@ msgid "Traditional"
 msgstr "Hagyományos"
 
 #: panels/mouse/cc-mouse-panel.ui:162 panels/mouse/cc-mouse-panel.ui:266
-#| msgid "Scrolling moves the content, not the view."
 msgid "Scrolling moves the view"
 msgstr "A görgetés a nézetet mozgatja"
 
@@ -3125,7 +3052,6 @@ msgid "Natural"
 msgstr "Természetes"
 
 #: panels/mouse/cc-mouse-panel.ui:164 panels/mouse/cc-mouse-panel.ui:268
-#| msgid "Scrolling moves the content, not the view."
 msgid "Scrolling moves the content"
 msgstr "A görgetés a tartalmat mozgatja"
 
@@ -3135,12 +3061,10 @@ msgid "Touchpad"
 msgstr "Érintőtábla"
 
 #: panels/mouse/cc-mouse-panel.ui:205
-#| msgid "Link speed"
 msgid "Pointer speed"
 msgstr "Mutató sebessége"
 
 #: panels/mouse/cc-mouse-panel.ui:228
-#| msgid "Click"
 msgid "Clicking"
 msgstr "Kattintás"
 
@@ -3157,18 +3081,14 @@ msgid "Tap to click"
 msgstr "Koppintás a kattintáshoz"
 
 #: panels/mouse/cc-mouse-panel.ui:251
-#| msgid "Edge Scrolling"
 msgid "Scrolling"
 msgstr "Görgetés"
 
 #: panels/mouse/cc-mouse-panel.ui:254
-#| msgctxt "keyboard key"
-#| msgid "Scroll Lock"
 msgid "Scroll Method"
 msgstr "Görgetési módszer"
 
 #: panels/mouse/cc-mouse-panel.ui:255
-#| msgid "Unknown Finger"
 msgid "Two Finger"
 msgstr "Két ujj"
 
@@ -3189,12 +3109,10 @@ msgid "Single Click"
 msgstr "Egyetlen kattintás"
 
 #: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:110
-#| msgid "Double-Click Delay"
 msgid "Double Click"
 msgstr "Dupla kattintás"
 
 #: panels/mouse/cc-mouse-test.ui:24
-#| msgid "Mouse & Touchpad"
 msgid "Test Mouse & Touchpad"
 msgstr "E­gér és é­rin­tő­táb­la tesztelése"
 
@@ -3272,17 +3190,14 @@ msgid "Workspaces on all d_isplays"
 msgstr "Munkaterületek az összes _kijelzőn"
 
 #: panels/multitasking/cc-multitasking-panel.ui:140
-#| msgid "Application Switching"
 msgid "App Switching"
 msgstr "Alkalmazásváltás"
 
 #: panels/multitasking/cc-multitasking-panel.ui:146
-#| msgid "Include applications from all _workspaces"
 msgid "Include apps from all _workspaces"
 msgstr "Az összes _munkaterületen lévő alkalmazás belevétele"
 
 #: panels/multitasking/cc-multitasking-panel.ui:160
-#| msgid "Include applications from the _current workspace only"
 msgid "Include apps from the _current workspace only"
 msgstr "Csak a _jelenlegi munkaterületen lévő alkalmazások belevétele"
 
@@ -3303,7 +3218,6 @@ msgstr ""
 "Asztal;Forró sarok;Munkaterületek;"
 
 #: panels/network/cc-network-panel.c:672
-#| msgid "_Connect to Hidden Network…"
 msgid "Can’t Connect to Network"
 msgstr "Nem lehet kapcsolódni a hálózathoz"
 
@@ -3312,19 +3226,17 @@ msgid ""
 "NetworkManager needs to be running to view or make connections. Contact a "
 "system administrator or the software vendor."
 msgstr ""
-"A Hálózatkezelő programnak futnia kell a kapcsolatok megtekintéséhez vagy"
-" létrehozásához. Vegye fel a kapcsolatot a rendszergazdával vagy a szoftver"
-" gyártójával."
+"A Hálózatkezelő programnak futnia kell a kapcsolatok megtekintéséhez vagy "
+"létrehozásához. Vegye fel a kapcsolatot a rendszergazdával vagy a szoftver "
+"gyártójával."
 
 #. xxx: Added to avoid confusion with the preceding VPN row
 #: panels/network/cc-network-panel.c:759 panels/network/cc-network-panel.ui:140
 #: panels/network/cc-network-panel.ui:149
-#| msgid "_FTP Proxy"
 msgid "Proxy"
 msgstr "Proxy"
 
 #: panels/network/cc-network-panel.ui:34
-#| msgid "_Save"
 msgid "Save"
 msgstr "Mentés"
 
@@ -3369,22 +3281,18 @@ msgid "Configuration"
 msgstr "Beállítások"
 
 #: panels/network/cc-net-proxy-page.ui:53
-#| msgid "_Configuration URL"
 msgid "Configuration URL"
 msgstr "Konfigurációs URL"
 
 #: panels/network/cc-net-proxy-page.ui:63
-#| msgid ""
-#| "Web Proxy Autodiscovery is used when a Configuration URL is not provided."
 msgid ""
 "Web Proxy Autodiscovery is used when a Configuration URL is not provided. "
 "This is not recommended for untrusted public networks."
 msgstr ""
-"Az automatikus webproxy-felderítés akkor használatos, ha nincs megadva"
-" konfigurációs URL. Ez nem ajánlott nem megbízható nyilvános hálózatoknál."
+"Az automatikus webproxy-felderítés akkor használatos, ha nincs megadva "
+"konfigurációs URL. Ez nem ajánlott nem megbízható nyilvános hálózatoknál."
 
 #: panels/network/cc-net-proxy-page.ui:80
-#| msgid "_HTTP Proxy"
 msgid "HTTP Proxy"
 msgstr "HTTP-proxy"
 
@@ -3399,7 +3307,6 @@ msgstr "URL"
 #: panels/network/cc-net-proxy-page.ui:143
 #: panels/network/cc-net-proxy-page.ui:188
 #: panels/network/cc-net-proxy-page.ui:233
-#| msgid "Portrait"
 msgid "Port"
 msgstr "Port"
 
@@ -3408,7 +3315,6 @@ msgid "HTTP proxy port"
 msgstr "HTTP proxy port"
 
 #: panels/network/cc-net-proxy-page.ui:125
-#| msgid "H_TTPS Proxy"
 msgid "HTTPS Proxy"
 msgstr "HTTPS-proxy"
 
@@ -3417,7 +3323,6 @@ msgid "HTTPS proxy port"
 msgstr "HTTPS proxy port"
 
 #: panels/network/cc-net-proxy-page.ui:170
-#| msgid "_FTP Proxy"
 msgid "FTP Proxy"
 msgstr "FTP-proxy"
 
@@ -3434,7 +3339,6 @@ msgid "SOCKS host port"
 msgstr "SOCKS-kiszolgáló portja"
 
 #: panels/network/cc-net-proxy-page.ui:261
-#| msgid "_Ignore Hosts"
 msgid "Ignored Hosts"
 msgstr "Mellőzött kiszolgálók"
 
@@ -3448,7 +3352,6 @@ msgid "Scan the QR code to connect to the network <b>%s</b>."
 msgstr "Olvassa be a QR-kódot a(z) <b>%s</b> hálózathoz való kapcsolódáshoz."
 
 #: panels/network/cc-qr-code-dialog.ui:9
-#| msgid "Choose Network"
 msgid "Share Network"
 msgstr "Hálózat megosztása"
 
@@ -3457,7 +3360,6 @@ msgid "QR Code"
 msgstr "QR-kód"
 
 #: panels/network/cc-qr-code-dialog.ui:46
-#| msgid "How to Connect"
 msgid "Scan to Connect"
 msgstr "Beolvasás a kapcsolódáshoz"
 
@@ -3576,16 +3478,14 @@ msgstr "Wi-Fi"
 #: panels/network/cc-wifi-panel.c:741
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr ""
-"A kikapcsolás leválasztja az összes olyan eszközt, amely a hotspotot"
-" használja."
+"A kikapcsolás leválasztja az összes olyan eszközt, amely a hotspotot "
+"használja."
 
 #: panels/network/cc-wifi-panel.c:743
-#| msgid "Turn Off Hotspot…"
 msgid "Turn Off Hotspot?"
 msgstr "Kikapcsolja a hotspotot?"
 
 #: panels/network/cc-wifi-panel.c:746
-#| msgid "_Turn On"
 msgid "_Turn Off"
 msgstr "_Kikapcsolás"
 
@@ -3631,7 +3531,6 @@ msgid "Visible Networks"
 msgstr "Látható hálózatok"
 
 #: panels/network/cc-wifi-panel.ui:221
-#| msgid "Unavailable"
 msgid "Wi-Fi Unavailable"
 msgstr "A Wi-Fi nem érhető el"
 
@@ -3912,7 +3811,6 @@ msgstr "WPA3 Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
 #: panels/network/connection-editor/net-connection-editor.c:864
-#| msgid "Wired"
 msgid "WireGuard"
 msgstr "WireGuard"
 
@@ -4115,8 +4013,8 @@ msgid ""
 "Free and open-source VPN solution designed for ease of use, high speed "
 "performance and low attack surface."
 msgstr ""
-"Ingyenes és nyílt forráskódú VPN-megoldás, amelyet egyszerű használatra, nagy"
-" sebességű teljesítményre és alacsony támadási felületűre terveztek."
+"Ingyenes és nyílt forráskódú VPN-megoldás, amelyet egyszerű használatra, "
+"nagy sebességű teljesítményre és alacsony támadási felületűre terveztek."
 
 #: panels/network/connection-editor/net-connection-editor.c:888
 msgid "Import from file…"
@@ -4197,12 +4095,10 @@ msgid "_BSSID"
 msgstr "BSS_ID"
 
 #: panels/network/connection-editor/wireguard-page.ui:22
-#| msgid "Connection failed"
 msgid "_Connection Name"
 msgstr "_Kapcsolat neve"
 
 #: panels/network/connection-editor/wireguard-page.ui:44
-#| msgid "_Computer Name"
 msgid "_Interface Name"
 msgstr "_Csatoló neve"
 
@@ -4211,7 +4107,6 @@ msgid "The name of the wireguard interface to create."
 msgstr "A létrehozandó wireguard-csatoló neve."
 
 #: panels/network/connection-editor/wireguard-page.ui:66
-#| msgid "Private _key"
 msgid "_Private Key"
 msgstr "_Személyes kulcs"
 
@@ -4220,7 +4115,6 @@ msgid "The 256 bit private key in base64 encoding"
 msgstr "A 256 bites személyes kulcs Base64 kódolással"
 
 #: panels/network/connection-editor/wireguard-page.ui:81
-#| msgid "Choose your private key"
 msgid "Show/hide private key"
 msgstr "Személyes kulcs megjelenítése vagy elrejtése"
 
@@ -4233,9 +4127,9 @@ msgid ""
 "A port to listen on. If set to 'automatic', the port will be chosen randomly "
 "when the interface comes up."
 msgstr ""
-"Egy port, amelyet figyelni kell. Ha „automatikus” értékre van beállítva,"
-" akkor a port véletlenszerűen kerül kiválasztásra, ha a csatoló elérhetővé"
-" válik."
+"Egy port, amelyet figyelni kell. Ha „automatikus” értékre van beállítva, "
+"akkor a port véletlenszerűen kerül kiválasztásra, ha a csatoló elérhetővé "
+"válik."
 
 #: panels/network/connection-editor/wireguard-page.ui:105
 #: panels/network/connection-editor/wireguard-page.ui:138
@@ -4250,15 +4144,14 @@ msgstr "_fwmark"
 msgid ""
 "A 32-bit fwmark for outgoing packets. Leave it to 'off' to disable fwmark."
 msgstr ""
-"Egy 32 bites fwmark a kimenő csomagokhoz. Hagyja „ki” állapotban az fwmark"
-" letiltásához."
+"Egy 32 bites fwmark a kimenő csomagokhoz. Hagyja „ki” állapotban az fwmark "
+"letiltásához."
 
 #: panels/network/connection-editor/wireguard-page.ui:158
 msgid "_MTU"
 msgstr "_MTU"
 
 #: panels/network/connection-editor/wireguard-page.ui:197
-#| msgid "_Add profile"
 msgid "_Add peer routes"
 msgstr "Partnerútvonalak _hozzáadása"
 
@@ -4267,7 +4160,6 @@ msgid "_Peers"
 msgstr "_Partnerek"
 
 #: panels/network/connection-editor/wireguard-page.ui:257
-#| msgid "Not set up"
 msgid "No peers set up"
 msgstr "Nincsenek partnerek beállítva"
 
@@ -4333,7 +4225,6 @@ msgid "_Forget"
 msgstr "_Elfelejtés"
 
 #: panels/network/net-device-wifi.c:1067
-#| msgid "Known Wi-Fi Networks"
 msgid "Saved Wi-Fi Networks"
 msgstr "Mentett Wi-Fi-hálózatok"
 
@@ -4405,7 +4296,6 @@ msgid "_Turn On Wi-Fi Hotspot…"
 msgstr "Wi-Fi hotspot be_kapcsolása…"
 
 #: panels/network/network-wifi.ui:143
-#| msgid "Networks"
 msgid "_Saved Networks"
 msgstr "_Mentett hálózatok"
 
@@ -4715,11 +4605,6 @@ msgstr "_Ne zavarjanak"
 msgid "_Lock Screen Notifications"
 msgstr "_Zárolási képernyő értesítések"
 
-#. List of apps.
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "Alkalmazások"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr ""
@@ -4926,7 +4811,7 @@ msgid "Gaming input device"
 msgstr "Bemeneti eszköz játékokhoz"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "Akkumulátor"
@@ -4945,51 +4830,58 @@ msgstr "Extra"
 msgid "Batteries"
 msgstr "Akkumulátorok"
 
-#: panels/power/cc-power-panel.c:514
+#. Translators: UPS is an Uninterruptible Power Supply:
+#. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
+#: panels/power/cc-power-panel.c:260
+#| msgid "USB"
+msgid "UPS"
+msgstr "UPS"
+
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "Ü_resjáratban"
 
-#: panels/power/cc-power-panel.c:674
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "Felfüggesztés"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "Kikapcsolás"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "Hibernálás"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "Ne tegyen semmit"
 
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "Akkumulátoron"
 
-#: panels/power/cc-power-panel.c:735
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "Ha csatlakoztatva van"
 
-#: panels/power/cc-power-panel.c:856
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Soha"
 
-#: panels/power/cc-power-panel.c:940
+#: panels/power/cc-power-panel.c:946
 msgid "Automatic suspend"
 msgstr "Automatikus felfüggesztés"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1042
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "A teljesítményközpontú mód átmenetileg letiltva a magas működési hőmérséklet "
 "miatt."
 
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1044
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4997,11 +4889,11 @@ msgstr ""
 "Ölben használat észlelve: a teljesítményközpontú mód átmenetileg nem érhető "
 "el. A helyreállításhoz helyezze stabil felületre az eszközt."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1046
 msgid "Performance mode temporarily disabled."
 msgstr "Teljesítményközpontú mód átmenetileg letiltva."
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1088
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -5010,13 +4902,13 @@ msgstr ""
 "amint elég töltés lesz az akkumulátorban."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1090
+#: panels/power/cc-power-panel.c:1096
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "A(z) „%s” aktiválta az energiatakarékos módot."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1094
+#: panels/power/cc-power-panel.c:1100
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "A(z) „%s” aktiválta az teljesítményközpontú módot."
@@ -5879,21 +5771,16 @@ msgid "Add Printer…"
 msgstr "Nyomtató hozzáadása…"
 
 #: panels/printers/printers.ui:145
-#| msgid "No printers"
 msgid "No Printers"
 msgstr "Nincsenek nyomtatók"
 
 #. Translators: Title if the CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:168
-#| msgid "Unlock Print Server"
 msgid "No Print Service"
 msgstr "Nincs nyomtatási szolgáltatás"
 
 #. Translators: Description if the CUPS server is not running (we can not connect to it).
 #: panels/printers/printers.ui:169
-#| msgid ""
-#| "Sorry! The system printing service\n"
-#| "    doesn’t seem to be available."
 msgid "The system printing service doesn’t seem to be available."
 msgstr "A rendszer nyomtatószolgáltatása nem tűnik elérhetőnek."
 
@@ -6118,7 +6005,6 @@ msgid "_Other Media…"
 msgstr "_Egyéb adathordozók…"
 
 #: panels/removable-media/cc-removable-media-panel.ui:195
-#| msgid "_Never prompt or start programs on media insertion"
 msgid "_Never prompt or start apps on media insertion"
 msgstr ""
 "Soha _ne kérdezzen vagy indítson alkalmazásokat adathordozó behelyezésekor"
@@ -6274,7 +6160,6 @@ msgid "Blank Screen Delay"
 msgstr "Képernyő elsötétítésének késleltetése"
 
 #: panels/screen/cc-screen-panel.ui:14
-#| msgid "Period of inactivity after which the screen will go blank."
 msgid "Period of inactivity until screen blanks"
 msgstr "A képernyő elsötétítéséig tartó tétlenség időtartama"
 
@@ -6319,7 +6204,6 @@ msgid "Screen Lock"
 msgstr "Képernyőzár"
 
 #: panels/screen/gnome-screen-panel.desktop.in:4
-#| msgid "Automatically Delete _Period"
 msgid "Automatically lock the screen"
 msgstr "A képernyő automatikus zárolása"
 
@@ -6342,9 +6226,6 @@ msgid "Search Locations"
 msgstr "Keresési helyek"
 
 #: panels/search/cc-search-locations-dialog.ui:13
-#| msgid ""
-#| "Folders which are searched by system applications, such as Files, Photos "
-#| "and Videos."
 msgid ""
 "Folders which are searched by system apps, such as Files, Photos and Videos."
 msgstr ""
@@ -6368,22 +6249,18 @@ msgid "Add Location"
 msgstr "Hely hozzáadása"
 
 #: panels/search/cc-search-panel.c:165
-#| msgid "No applications found"
 msgid "No apps found"
 msgstr "Nem találhatók alkalmazások"
 
 #: panels/search/cc-search-panel.ui:10
-#| msgid "Search"
 msgid "App Search"
 msgstr "Alkalmazáskereső"
 
 #: panels/search/cc-search-panel.ui:11
-#| msgid "Include application-provided search results."
 msgid "Include app-provided search results."
 msgstr "Tartalmazza az alkalmazás által biztosított keresési eredményeket."
 
 #: panels/search/cc-search-panel.ui:23
-#| msgid "Folders which are searched by system applications."
 msgid "Folders which are searched by system apps."
 msgstr "Azok a mappák, amelyeket a rendszer alkalmazásai keresnek."
 
@@ -6396,12 +6273,10 @@ msgid "Results are displayed according to the list order."
 msgstr "A találatok a lista sorrendje szerint vannak megjelenítve."
 
 #: panels/search/gnome-search-panel.desktop.in:4
-#| msgid ""
-#| "Control which applications show search results in the Activities Overview"
 msgid "Control which apps show search results in the Activities Overview"
 msgstr ""
-"Annak szabályozása, hogy mely alkalmazások jelenítsenek meg keresési"
-" eredményeket a Tevékenységek áttekintésében"
+"Annak szabályozása, hogy mely alkalmazások jelenítsenek meg keresési "
+"eredményeket a Tevékenységek áttekintésében"
 
 #. Translators: Search terms to find the Search panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/search/gnome-search-panel.desktop.in:15
@@ -6679,12 +6554,10 @@ msgid "Fade"
 msgstr "Elhalás"
 
 #: panels/sound/cc-output-test-wheel.c:206
-#| msgid "Select a file"
 msgid "Select a Speaker"
 msgstr "Hangszóró kiválasztása"
 
 #: panels/sound/cc-output-test-window.ui:4
-#| msgid "Test page"
 msgid "Test Speakers"
 msgstr "Hangszórók tesztelése"
 
@@ -6706,7 +6579,6 @@ msgid "Master volume"
 msgstr "Fő hangerő"
 
 #: panels/sound/cc-sound-panel.ui:113
-#| msgid "Output"
 msgid "Output Volume"
 msgstr "Kimeneti hangerő"
 
@@ -6715,7 +6587,6 @@ msgid "Subwoofer"
 msgstr "Mélysugárzó"
 
 #: panels/sound/cc-sound-panel.ui:213
-#| msgid "Output Device"
 msgid "No Output Devices"
 msgstr "Nincsenek kimeneti eszközök"
 
@@ -6728,12 +6599,10 @@ msgid "Input Device"
 msgstr "Bemeneti eszköz"
 
 #: panels/sound/cc-sound-panel.ui:318
-#| msgid "Input Sources"
 msgid "Input Volume"
 msgstr "Bemeneti hangerő"
 
 #: panels/sound/cc-sound-panel.ui:340
-#| msgid "Input Device"
 msgid "No Input Devices"
 msgstr "Nincsenek bemeneti eszközök"
 
@@ -6947,7 +6816,6 @@ msgid "Thunderbolt"
 msgstr "Thunderbolt"
 
 #: panels/thunderbolt/gnome-thunderbolt-panel.desktop.in:4
-#| msgid "Manage Thunderbolt devices"
 msgid "Manage Thunderbolt device access"
 msgstr "Thunderbolt-eszköz hozzáférésének kezelése"
 
@@ -6961,22 +6829,20 @@ msgid "Cursor Size"
 msgstr "Kurzorméret"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:9
-#| msgid "_Magnification:"
 msgid "_Overamplification"
 msgstr "_Túlerősítés"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:10
 msgid "Allow volume to exceed 100%. This will result in quality loss"
 msgstr ""
-"Lehetővé teszi, hogy a hangerő meghaladja a 100%-ot, de ez minőségromláshoz"
-" vezet"
+"Lehetővé teszi, hogy a hangerő meghaladja a 100%-ot, de ez minőségromláshoz "
+"vezet"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:32
 msgid "Visual Alerts"
 msgstr "Vizuális figyelmeztetések"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:33
-#| msgid "Use a visual indication when an alert sound occurs."
 msgid "Use a visual indication when an alert sound occurs"
 msgstr "Vizuális jelzés használata figyelmeztető hang esetén"
 
@@ -6989,8 +6855,6 @@ msgid "_Flash Area"
 msgstr "Terület _villantása"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:52
-#| msgctxt "keyboard key"
-#| msgid "Print Screen"
 msgid "Entire Screen"
 msgstr "Teljes képernyő"
 
@@ -6999,7 +6863,6 @@ msgid "Entire Window"
 msgstr "Teljes ablak"
 
 #: panels/universal-access/cc-ua-hearing-page.ui:63
-#| msgid "_Test flash"
 msgid "_Test Flash"
 msgstr "_Villanás tesztelése"
 
@@ -7030,8 +6893,6 @@ msgstr "_Dupla kattintás késleltetése"
 #: panels/universal-access/cc-ua-typing-page.ui:186
 #: panels/universal-access/cc-ua-typing-page.ui:236
 #: panels/universal-access/cc-ua-zoom-page.ui:168
-#| msgctxt "secondary click"
-#| msgid "Short"
 msgid "Short"
 msgstr "Rövid"
 
@@ -7042,8 +6903,6 @@ msgstr "Rövid"
 #: panels/universal-access/cc-ua-typing-page.ui:189
 #: panels/universal-access/cc-ua-typing-page.ui:239
 #: panels/universal-access/cc-ua-zoom-page.ui:172
-#| msgctxt "secondary click delay"
-#| msgid "Long"
 msgid "Long"
 msgstr "Hosszú"
 
@@ -7056,14 +6915,12 @@ msgid "_Simulated Secondary Click"
 msgstr "Szim_ulált másodlagos kattintás"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:62
-#| msgid "Trigger a secondary click by holding down the primary button"
 msgid "Secondary click by holding down the primary mouse button"
 msgstr "Másodlagos kattintás az elsődleges egérgomb nyomva tartásával"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:67
 #: panels/universal-access/cc-ua-typing-page.ui:181
 #: panels/universal-access/cc-ua-typing-page.ui:231
-#| msgid "A_cceptance delay:"
 msgid "Acceptance Delay"
 msgstr "Elfogadás késleltetése"
 
@@ -7076,19 +6933,14 @@ msgid "Trigger a click when the pointer hovers"
 msgstr "Kattintás kezdeményezése a mutató mozgásának megállásakor"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:126
-#| msgid "Motion _threshold:"
 msgid "Motion Threshold"
 msgstr "Mozgás küszöbszintje"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:131
-#| msgctxt "dwell click threshold"
-#| msgid "Small"
 msgid "Small"
 msgstr "Kicsi"
 
 #: panels/universal-access/cc-ua-mouse-page.ui:134
-#| msgctxt "dwell click threshold"
-#| msgid "Large"
 msgid "Large"
 msgstr "Nagy"
 
@@ -7101,17 +6953,14 @@ msgid "Hearing"
 msgstr "Hallás"
 
 #: panels/universal-access/cc-ua-panel.c:124
-#| msgid "Pointing &amp; Clicking"
 msgid "Pointing & Clicking"
 msgstr "Mutatás és kattintás"
 
 #: panels/universal-access/cc-ua-panel.c:126
-#| msgid "_Zoom"
 msgid "Zoom"
 msgstr "Nagyítás"
 
 #: panels/universal-access/cc-ua-panel.ui:42
-#| msgid "Accessibility"
 msgid "_Accessibility Menu"
 msgstr "_Akadálymentesítési menü"
 
@@ -7120,22 +6969,18 @@ msgid "Display menu for Accessibility settings in top bar"
 msgstr "Menü megjelenítése az akadálymentesítési beállításokhoz a felső sávban"
 
 #: panels/universal-access/cc-ua-panel.ui:64
-#| msgid "Seeing"
 msgid "_Seeing"
 msgstr "_Látás"
 
 #: panels/universal-access/cc-ua-panel.ui:74
-#| msgid "Hearing"
 msgid "_Hearing"
 msgstr "_Hallás"
 
 #: panels/universal-access/cc-ua-panel.ui:84
-#| msgid "Typing"
 msgid "_Typing"
 msgstr "_Gépelés"
 
 #: panels/universal-access/cc-ua-panel.ui:94
-#| msgid "Pointing &amp; Clicking"
 msgid "_Pointing and Clicking"
 msgstr "_Mutatás és kattintás"
 
@@ -7187,8 +7032,6 @@ msgstr ""
 "Az előtérben és a háttérben lévő felületi elem színkontrasztjának növelése"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:19
-#| msgctxt "Thunderbolt Device Status"
-#| msgid "Reduced Functionality"
 msgid "_Reduce Animation"
 msgstr "Animáció _csökkentése"
 
@@ -7206,13 +7049,10 @@ msgid "Increase the size of all text in the user interface"
 msgstr "A felhasználói felületen lévő összes szöveg méretének növelése"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:37
-#| msgid "Cursor Size"
 msgid "_Cursor Size"
 msgstr "_Kurzorméret"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:38
-#| msgid ""
-#| "Cursor size can be combined with zoom to make it easier to see the cursor."
 msgid "The size of the cursor can be increased to make it easier to see"
 msgstr "A kurzor mérete növelhető, hogy könnyebben látható legyen"
 
@@ -7221,7 +7061,6 @@ msgid "_Sound Keys"
 msgstr "Billentyű_hangok"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:48
-#| msgid "Beep when Num Lock or Caps Lock are turned on or off."
 msgid "Beep when Num Lock or Caps Lock are turned on or off"
 msgstr "Hangjelzés a Num Lock vagy Caps Lock ki- és bekapcsolásakor"
 
@@ -7239,19 +7078,16 @@ msgid "Screen _Reader"
 msgstr "_Képernyőolvasó"
 
 #: panels/universal-access/cc-ua-seeing-page.ui:71
-#| msgid "The screen reader reads displayed text as you move the focus."
 msgid "The screen reader reads displayed text as you move the focus"
 msgstr ""
 "A képernyőolvasó felolvassa a megjelenített szöveget a fókusz mozgatása "
 "közben"
 
 #: panels/universal-access/cc-ua-typing-page.ui:9
-#| msgid "Screen _Keyboard"
 msgid "_Screen Keyboard"
 msgstr "_Képernyő-billentyűzet"
 
 #: panels/universal-access/cc-ua-typing-page.ui:10
-#| msgid "Turn on-screen keyboard on or off"
 msgid "Use the on-screen keyboard to type in input fields"
 msgstr ""
 "A képernyő-billentyűzet használata a beviteli mezőkbe történő gépeléshez"
@@ -7261,7 +7097,6 @@ msgid "_Enable by Keyboard"
 msgstr "Enge_délyezés billentyűzetről"
 
 #: panels/universal-access/cc-ua-typing-page.ui:18
-#| msgid "Turn accessibility features on and off using the keyboard"
 msgid "Turn accessibility features on or off using the keyboard"
 msgstr ""
 "Akadálymentesítési szolgáltatások be- vagy kikapcsolása a billentyűzetről"
@@ -7271,22 +7106,18 @@ msgid "Text Cursor"
 msgstr "Szövegkurzor"
 
 #: panels/universal-access/cc-ua-typing-page.ui:32
-#| msgid "Cursor Blinking"
 msgid "_Cursor Blinking"
 msgstr "_Kurzor villogtatása"
 
 #: panels/universal-access/cc-ua-typing-page.ui:33
-#| msgid "Cursor blinks in text fields."
 msgid "Change if the cursor blinks in text fields"
 msgstr "Annak megváltoztatása, hogy a kurzor villogjon-e a szövegmezőkben"
 
 #: panels/universal-access/cc-ua-typing-page.ui:41
-#| msgid "Link speed"
 msgid "_Blink Speed"
 msgstr "_Villogás sebessége"
 
 #: panels/universal-access/cc-ua-typing-page.ui:47
-#| msgid "Link speed"
 msgid "Blink Speed"
 msgstr "Villogás sebessége"
 
@@ -7303,12 +7134,10 @@ msgid "Typing Assist"
 msgstr "Gépelési segéd"
 
 #: panels/universal-access/cc-ua-typing-page.ui:97
-#| msgid "Repeat Keys"
 msgid "_Repeat Keys"
 msgstr "Billentyűk _ismétlése"
 
 #: panels/universal-access/cc-ua-typing-page.ui:98
-#| msgid "Key presses repeat when key is held down."
 msgid "Key presses repeat when the key is held down"
 msgstr "A billentyűlenyomások ismétlése a gomb nyomva tartásakor"
 
@@ -7321,17 +7150,14 @@ msgid "_Sticky Keys"
 msgstr "_Ragadós billentyűk"
 
 #: panels/universal-access/cc-ua-typing-page.ui:155
-#| msgid "Treats a sequence of modifier keys as a key combination"
 msgid "Sequences of modifier keys act as a key combination"
 msgstr "A módosítóbillentyűk sorozata billentyűkombinációként működik"
 
 #: panels/universal-access/cc-ua-typing-page.ui:160
-#| msgid "_Disable if two keys are pressed together"
 msgid "Disable if two keys are pressed together"
 msgstr "Letiltás két billentyű egyidejű lenyomásakor"
 
 #: panels/universal-access/cc-ua-typing-page.ui:166
-#| msgid "Beep when a _modifier key is pressed"
 msgid "Beep when modifier key is pressed"
 msgstr "Hangjelzés módosító billentyű lenyomásakor"
 
@@ -7340,23 +7166,19 @@ msgid "S_low Keys"
 msgstr "_Lassú billentyűk"
 
 #: panels/universal-access/cc-ua-typing-page.ui:176
-#| msgid "Puts a delay between when a key is pressed and when it is accepted"
 msgid "Delay between when a key is pressed and when it is accepted"
 msgstr "Késleltetés a billentyű lenyomása és elfogadása között"
 
 #: panels/universal-access/cc-ua-typing-page.ui:204
-#| msgid "Beep when a key is pr_essed"
 msgid "Beep when a key is pressed"
 msgstr "Hangjelzés billentyű lenyomásakor"
 
 #: panels/universal-access/cc-ua-typing-page.ui:210
-#| msgid "Beep when a key is _accepted"
 msgid "Beep when a key is accepted"
 msgstr "Hangjelzés billentyű elfogadásakor"
 
 #: panels/universal-access/cc-ua-typing-page.ui:216
 #: panels/universal-access/cc-ua-typing-page.ui:254
-#| msgid "Beep when a key is _rejected"
 msgid "Beep when a key is rejected"
 msgstr "Hangjelzés billentyű elutasításakor"
 
@@ -7365,7 +7187,6 @@ msgid "_Bounce Keys"
 msgstr "Billentyűs_zűrés"
 
 #: panels/universal-access/cc-ua-typing-page.ui:226
-#| msgid "Ignores fast duplicate keypresses"
 msgid "Ignore fast duplicate keypresses"
 msgstr "Ismételt leütések figyelmen kívül hagyása"
 
@@ -7374,7 +7195,6 @@ msgid "_Desktop Zoom"
 msgstr "_Asztal nagyítása"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:10
-#| msgid "Flash the entire _screen"
 msgid "Magnify the entire screen"
 msgstr "A teljes képernyő nagyítása"
 
@@ -7383,28 +7203,23 @@ msgid "Magnifier"
 msgstr "Nagyító"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:23
-#| msgid "_Magnification:"
 msgid "Magnification Factor"
 msgstr "Nagyítási tényező"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:44
-#| msgid "Magnifier"
 msgid "_Magnifier View"
 msgstr "_Nagyító nézet"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:50
-#| msgid "_Follow mouse cursor"
 msgid "Follow Mouse Cursor"
 msgstr "Egérkurzor követése"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:51
 #: panels/universal-access/cc-ua-zoom-page.ui:70
-#| msgid "Screen Privacy"
 msgid "Screen Area"
 msgstr "Képernyőterület"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:60
-#| msgid "_Active Screen Edges"
 msgid "_Extend Outside Screen Edges"
 msgstr "Külső képernyőszélek kiterjesztése"
 
@@ -7433,17 +7248,14 @@ msgid "Follow Behavior"
 msgstr "Követési viselkedés"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:93
-#| msgid "Magnifier cursor moves with _contents"
 msgid "Moves with Contents"
 msgstr "Mozgás a tartalmakkal"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:94
-#| msgid "Magnifier cursor _pushes contents around"
 msgid "Pushes Contents Around"
 msgstr "Nyomás a tartalmak körül"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:95
-#| msgid "Registered"
 msgid "Remains Centered"
 msgstr "Középpontban marad"
 
@@ -7452,49 +7264,38 @@ msgid "Crosshairs"
 msgstr "Szálkeresztek"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:117
-#| msgid "_Overlaps mouse cursor"
 msgid "_Overlap Mouse Cursor"
 msgstr "Egérkurzor átfe_dése"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:125
-#| msgid "_Thickness:"
 msgid "Thickness"
 msgstr "Vastagság"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:129
-#| msgctxt "universal access, thickness"
-#| msgid "Thin"
 msgid "Thin"
 msgstr "Vékony"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:130
-#| msgctxt "universal access, thickness"
-#| msgid "Thick"
 msgid "Thick"
 msgstr "Vastag"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:161
-#| msgid "_Length:"
 msgid "Length"
 msgstr "Hossz"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:169
-#| msgid "Lock screen"
 msgid "1/4 screen"
 msgstr "1/4 képernyő"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:170
-#| msgid "Screen"
 msgid "1/2 Screen"
 msgstr "1/2 képernyő"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:171
-#| msgid "Screen"
 msgid "3/4 Screen"
 msgstr "3/4 képernyő"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:207
-#| msgid "Color Effects"
 msgid "Color Filters"
 msgstr "Színszűrők"
 
@@ -7507,32 +7308,24 @@ msgid "Invert colors in the magnifier region"
 msgstr "A színek megfordítása a nagyító tartományában"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:220
-#| msgid "_Brightness:"
 msgid "Brightness"
 msgstr "Fényerő"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:225
 #: panels/universal-access/cc-ua-zoom-page.ui:248
-#| msgctxt "Calibration quality"
-#| msgid "Low"
 msgid "Low"
 msgstr "Alacsony"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:226
 #: panels/universal-access/cc-ua-zoom-page.ui:249
-#| msgctxt "Calibration quality"
-#| msgid "High"
 msgid "High"
 msgstr "Magas"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:244
-#| msgid "_Contrast:"
 msgid "Contrast"
 msgstr "Kontraszt"
 
 #: panels/universal-access/cc-ua-zoom-page.ui:272
-#| msgctxt "universal access, color"
-#| msgid "Full"
 msgid "Full"
 msgstr "Teljes"
 
@@ -7662,17 +7455,14 @@ msgid "Forever"
 msgstr "Örökké"
 
 #: panels/usage/cc-usage-panel.c:347
-#| msgid "Delete all the temporary files?"
 msgid "Delete all the recent files?"
 msgstr "Törli az összes legutóbbi fájlt?"
 
 #: panels/usage/cc-usage-panel.c:348
-#| msgid "All the temporary files will be permanently deleted."
 msgid "All the recent files will be permanently deleted."
 msgstr "Az összes legutóbbi fájl véglegesen törlésre kerül."
 
 #: panels/usage/cc-usage-panel.c:349
-#| msgid "_Clear History…"
 msgid "_Clear History"
 msgstr "Előzmények _törlése"
 
@@ -7681,10 +7471,6 @@ msgid "File History"
 msgstr "Fájlelőzmények"
 
 #: panels/usage/cc-usage-panel.ui:10
-#| msgid ""
-#| "File history keeps a record of files that you have used. This information "
-#| "is shared between applications, and makes it easier to find files that "
-#| "you might want to use."
 msgid ""
 "File history keeps a record of files that you have used. This information is "
 "shared between apps, and makes it easier to find files that you might want "
@@ -8390,7 +8176,6 @@ msgid "_Parental Controls"
 msgstr "Szülői _felügyelet"
 
 #: panels/user-accounts/cc-user-panel.ui:256
-#| msgid "Open the Parental Controls application."
 msgid "Open the Parental Controls app."
 msgstr "A Szülői felügyelet alkalmazás megnyitása."
 
@@ -9437,8 +9222,6 @@ msgid "All Settings"
 msgstr "Minden beállítás"
 
 #: shell/cc-window.ui:53 shell/cc-window.ui:55
-#| msgctxt "Battery name"
-#| msgid "Main"
 msgid "Main Menu"
 msgstr "Főmenü"
 
@@ -9481,7 +9264,6 @@ msgid "Show help"
 msgstr "Súgó megjelenítése"
 
 #: shell/help-overlay.ui:35
-#| msgid "Keyboard Shortcuts"
 msgctxt "shortcut window"
 msgid "Keyboard shortcuts"
 msgstr "Gyorsbillentyűk"
@@ -9536,9 +9318,6 @@ msgid "Initial state of the window"
 msgstr "Az ablak kezdeti állapota"
 
 #: shell/org.gnome.Settings.gschema.xml:21
-#| msgid ""
-#| "A tuple containing the initial width, height and maximized state of the "
-#| "application window."
 msgid ""
 "A tuple containing the initial width, height and maximized state of the app "
 "window."
