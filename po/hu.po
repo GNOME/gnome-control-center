@@ -1,5 +1,5 @@
 # Hungarian translation for gnome-control-center.
-# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022 Free Software Foundation, Inc.
+# Copyright (C) 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-control-center package.
 #
 # Szabolcs Ban <shooby at gnome dot hu>, 1998, 1999, 2000.
@@ -12,15 +12,15 @@
 # Mate ORY <orymate at gmail d0t com>, 2006.
 # Richard Somloi <ricsipontaz at gmail dot com>, 2011, 2012.
 # Peter Trombitas <trombipeti at gmail dot com>, 2012.
-# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Balázs Úr <ur.balazs at fsf dot hu>, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Balázs Meskó <mesko.balazs at fsf dot hu>, 2019, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2022-07-10 13:36+0000\n"
-"PO-Revision-Date: 2022-09-03 01:08+0200\n"
+"POT-Creation-Date: 2023-01-06 09:33+0000\n"
+"PO-Revision-Date: 2023-03-14 01:19+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 19.12.3\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 #: panels/applications/cc-applications-panel.c:790
 msgid "System Bus"
@@ -85,7 +85,7 @@ msgstr "Fájlrendszer"
 #: panels/applications/cc-applications-panel.c:816
 #: panels/keyboard/01-launchers.xml.in:6
 #: shell/appdata/org.gnome.Settings.appdata.xml.in:7 shell/cc-window.c:246
-#: shell/cc-window.c:878 shell/cc-window.ui:22
+#: shell/cc-window.c:880 shell/cc-window.ui:22
 #: shell/org.gnome.Settings.desktop.in.in:3
 msgid "Settings"
 msgstr "Beállítások"
@@ -175,8 +175,8 @@ msgstr "Rendszerkeresések fogadása és a találatok küldése."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:118
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:105
-#: panels/user-accounts/cc-user-panel.c:789
-#: panels/user-accounts/cc-user-panel.c:879
+#: panels/user-accounts/cc-user-panel.c:804
+#: panels/user-accounts/cc-user-panel.c:907
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
@@ -363,8 +363,8 @@ msgstr "Fénykép kiválasztása"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:18
-#: panels/user-accounts/cc-user-panel.c:579
-#: panels/user-accounts/cc-user-panel.c:597
+#: panels/user-accounts/cc-user-panel.c:594
+#: panels/user-accounts/cc-user-panel.c:612
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:139
@@ -2301,7 +2301,7 @@ msgstr ""
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:153
 #: panels/printers/pp-details-dialog.ui:39
 #: panels/user-accounts/cc-add-user-dialog.ui:68
-#: panels/user-accounts/cc-user-panel.ui:132
+#: panels/user-accounts/cc-user-panel.ui:135
 #: panels/wwan/cc-wwan-apn-dialog.ui:96
 msgid "Name"
 msgstr "Név"
@@ -2413,8 +2413,6 @@ msgstr "3 perc"
 
 #. Translators: Option for "Lock screen after blank" in "Screen Lock" panel
 #: panels/lock/cc-lock-panel.c:77
-#| msgctxt "blank_screen"
-#| msgid "5 minutes"
 msgctxt "lock_screen"
 msgid "5 minutes"
 msgstr "5 perc"
@@ -2636,7 +2634,7 @@ msgstr "Kétujjas görgetés"
 
 #: panels/mouse/cc-mouse-panel.ui:159
 msgid "Edge Scrolling"
-msgstr "Görgetés a szélen"
+msgstr "Széleken történő görgetés"
 
 #: panels/mouse/cc-mouse-test.c:131 panels/mouse/cc-mouse-test.ui:62
 msgid "Try clicking, double clicking, scrolling"
@@ -2790,29 +2788,29 @@ msgid "Not set up"
 msgstr "Nincs beállítva"
 
 #. TRANSLATORS: This happens when the connection name does not contain the SSID.
-#: panels/network/cc-wifi-connection-row.c:207
+#: panels/network/cc-wifi-connection-row.c:209
 #, c-format
 msgctxt "Wi-Fi Connection"
 msgid "%s (SSID: %s)"
 msgstr "%s (SSID: %s)"
 
-#: panels/network/cc-wifi-connection-row.c:266
+#: panels/network/cc-wifi-connection-row.c:268
 msgid "Insecure network (WEP)"
 msgstr "Nem biztonságos hálózat (WEP)"
 
-#: panels/network/cc-wifi-connection-row.c:270
+#: panels/network/cc-wifi-connection-row.c:272
 msgid "Secure network (WPA)"
 msgstr "Biztonságos hálózat (WPA)"
 
-#: panels/network/cc-wifi-connection-row.c:274
+#: panels/network/cc-wifi-connection-row.c:276
 msgid "Secure network (WPA2)"
 msgstr "Biztonságos hálózat (WPA2)"
 
-#: panels/network/cc-wifi-connection-row.c:278
+#: panels/network/cc-wifi-connection-row.c:280
 msgid "Secure network (WPA3)"
 msgstr "Biztonságos hálózat (WPA3)"
 
-#: panels/network/cc-wifi-connection-row.c:282
+#: panels/network/cc-wifi-connection-row.c:284
 msgid "Secure network"
 msgstr "Biztonságos hálózat"
 
@@ -4025,7 +4023,7 @@ msgstr "_Felhasználónév"
 #: panels/network/wireless-security/ws-sae.ui:10
 #: panels/network/wireless-security/ws-wpa-psk.ui:10
 #: panels/sharing/cc-sharing-panel.ui:152
-#: panels/user-accounts/cc-user-panel.ui:175
+#: panels/user-accounts/cc-user-panel.ui:178
 msgid "_Password"
 msgstr "Jels_zó"
 
@@ -4623,14 +4621,14 @@ msgstr "Soha"
 msgid "Automatic suspend"
 msgstr "Automatikus felfüggesztés"
 
-#: panels/power/cc-power-panel.c:1030
+#: panels/power/cc-power-panel.c:1033
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "A teljesítményközpontú mód átmenetileg letiltva a magas működési hőmérséklet "
 "miatt."
 
-#: panels/power/cc-power-panel.c:1032
+#: panels/power/cc-power-panel.c:1035
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4638,11 +4636,11 @@ msgstr ""
 "Ölben használat észlelve: a teljesítményközpontú mód átmenetileg nem érhető "
 "el. A helyreállításhoz helyezze stabil felületre az eszközt."
 
-#: panels/power/cc-power-panel.c:1034
+#: panels/power/cc-power-panel.c:1037
 msgid "Performance mode temporarily disabled."
 msgstr "Teljesítményközpontú mód átmenetileg letiltva."
 
-#: panels/power/cc-power-panel.c:1076
+#: panels/power/cc-power-panel.c:1079
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4651,13 +4649,13 @@ msgstr ""
 "amint elég töltés lesz az akkumulátorban."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1084
+#: panels/power/cc-power-panel.c:1087
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "A(z) „%s” aktiválta az energiatakarékos módot."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1088
+#: panels/power/cc-power-panel.c:1091
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "A(z) „%s” aktiválta az teljesítményközpontú módot."
@@ -5133,7 +5131,7 @@ msgid "_Authenticate"
 msgstr "_Hitelesítés"
 
 #. Translators: this label describes the dialog empty state, with no jobs listed.
-#: panels/printers/pp-jobs-dialog.ui:214
+#: panels/printers/pp-jobs-dialog.ui:216
 msgid "No Active Printer Jobs"
 msgstr "Nincsenek aktív nyomtatási feladatok"
 
@@ -5524,6 +5522,7 @@ msgid "Formats"
 msgstr "Formátumok"
 
 #: panels/region/cc-format-chooser.ui:37
+#: panels/user-accounts/cc-user-panel.ui:31
 #: panels/wacom/cc-wacom-stylus-page.ui:136
 #: panels/wwan/cc-wwan-apn-dialog.ui:21
 msgid "Back"
@@ -5606,7 +5605,7 @@ msgid "Your Account"
 msgstr "Az Ön fiókja"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:95
-#: panels/user-accounts/cc-user-panel.ui:299
+#: panels/user-accounts/cc-user-panel.ui:302
 msgid "_Language"
 msgstr "_Nyelv"
 
@@ -7258,93 +7257,93 @@ msgstr "Nem sikerült kommunikálni az ujjlenyomat-olvasóval"
 msgid "Failed to communicate with the fingerprint daemon"
 msgstr "Nem sikerült kommunikálni az ujjlenyomat-démonnal"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:539
+#: panels/user-accounts/cc-fingerprint-dialog.c:513
 #, c-format
 msgid "Failed to list fingerprints: %s"
 msgstr "Az ujjlenyomatok felsorolása sikertelen: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:606
+#: panels/user-accounts/cc-fingerprint-dialog.c:580
 #, c-format
 msgid "Failed to delete saved fingerprints: %s"
 msgstr "A mentett ujjlenyomatok törlése sikertelen: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:637
+#: panels/user-accounts/cc-fingerprint-dialog.c:611
 msgid "Left thumb"
 msgstr "Bal hüvelykujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:639
+#: panels/user-accounts/cc-fingerprint-dialog.c:613
 msgid "Left middle finger"
 msgstr "Bal középső ujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:641
+#: panels/user-accounts/cc-fingerprint-dialog.c:615
 msgid "_Left index finger"
 msgstr "_Bal mutatóujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:643
+#: panels/user-accounts/cc-fingerprint-dialog.c:617
 msgid "Left ring finger"
 msgstr "Bal gyűrűsujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:645
+#: panels/user-accounts/cc-fingerprint-dialog.c:619
 msgid "Left little finger"
 msgstr "Bal kisujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:647
+#: panels/user-accounts/cc-fingerprint-dialog.c:621
 msgid "Right thumb"
 msgstr "Jobb hüvelykujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:649
+#: panels/user-accounts/cc-fingerprint-dialog.c:623
 msgid "Right middle finger"
 msgstr "Jobb középső ujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:651
+#: panels/user-accounts/cc-fingerprint-dialog.c:625
 msgid "_Right index finger"
 msgstr "_Jobb mutatóujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:653
+#: panels/user-accounts/cc-fingerprint-dialog.c:627
 msgid "Right ring finger"
 msgstr "Jobb gyűrűsujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:655
+#: panels/user-accounts/cc-fingerprint-dialog.c:629
 msgid "Right little finger"
 msgstr "Jobb kisujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:657
+#: panels/user-accounts/cc-fingerprint-dialog.c:631
 msgid "Unknown Finger"
 msgstr "Ismeretlen ujj"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:791
+#: panels/user-accounts/cc-fingerprint-dialog.c:765
 msgctxt "Fingerprint enroll state"
 msgid "Complete"
 msgstr "Kész"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:802
+#: panels/user-accounts/cc-fingerprint-dialog.c:776
 msgid "Fingerprint device disconnected"
 msgstr "Ujjlenyomatos eszköz leválasztva"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:808
+#: panels/user-accounts/cc-fingerprint-dialog.c:782
 msgid "Fingerprint device storage is full"
 msgstr "Ujjlenyomatos eszköz tárhelye megtelt"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:812
+#: panels/user-accounts/cc-fingerprint-dialog.c:786
 msgid "Failed to enroll new fingerprint"
 msgstr "Az új ujjlenyomat bevitele sikertelen"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:843
+#: panels/user-accounts/cc-fingerprint-dialog.c:817
 #, c-format
 msgid "Failed to start enrollment: %s"
 msgstr "A bevitel elindítása sikertelen: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:851
+#: panels/user-accounts/cc-fingerprint-dialog.c:825
 msgctxt "Fingerprint enroll state"
 msgid "Failed to enroll new fingerprint"
 msgstr "Az új ujjlenyomat bevitele sikertelen"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:882
+#: panels/user-accounts/cc-fingerprint-dialog.c:856
 #, c-format
 msgid "Failed to stop enrollment: %s"
 msgstr "A bevitel leállítása sikertelen: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:928
+#: panels/user-accounts/cc-fingerprint-dialog.c:902
 msgid ""
 "Repeatedly lift and place your finger on the reader to enroll your "
 "fingerprint"
@@ -7352,31 +7351,31 @@ msgstr ""
 "Ismételten emelje fel, majd helyezze az ujját az olvasóra az ujjlenyomat "
 "beviteléhez"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1047
+#: panels/user-accounts/cc-fingerprint-dialog.c:1021
 msgid "_Re-enroll this finger…"
 msgstr "Ujj ú_jbóli bevitele…"
 
 #. TRANSLATORS: This is the label for the button to enroll a new finger
-#: panels/user-accounts/cc-fingerprint-dialog.c:1062
+#: panels/user-accounts/cc-fingerprint-dialog.c:1036
 msgid "Scan new fingerprint"
 msgstr "Új ujjlenyomat leolvasása"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1100
+#: panels/user-accounts/cc-fingerprint-dialog.c:1074
 #, c-format
 msgid "Failed to release fingerprint device %s: %s"
 msgstr "A(z) %s ujjlenyomatos eszköz kiadása sikertelen: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1172
+#: panels/user-accounts/cc-fingerprint-dialog.c:1146
 msgctxt "Fingerprint enroll state"
 msgid "Problem Reading Device"
 msgstr "Probléma az eszköz olvasásakor"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1207
+#: panels/user-accounts/cc-fingerprint-dialog.c:1181
 #, c-format
 msgid "Failed to claim fingerprint device %s: %s"
 msgstr "A(z) %s ujjlenyomatos eszköz megszerzése sikertelen: %s"
 
-#: panels/user-accounts/cc-fingerprint-dialog.c:1358
+#: panels/user-accounts/cc-fingerprint-dialog.c:1332
 #, c-format
 msgid "Failed to get fingerprint devices: %s"
 msgstr "Az ujjlenyomatos eszközök lekérése sikertelen: %s"
@@ -7417,7 +7416,7 @@ msgstr "%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:712
+#: panels/user-accounts/cc-user-panel.c:727
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%H:%M"
@@ -7425,7 +7424,7 @@ msgstr "%H:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:716
+#: panels/user-accounts/cc-user-panel.c:731
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -7509,26 +7508,26 @@ msgstr "Érvénytelen jelszó, próbálja újra"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nem lehet csatlakozni a(z) %s tartományhoz: %s"
 
-#: panels/user-accounts/cc-user-panel.c:341
+#: panels/user-accounts/cc-user-panel.c:356
 msgid "Failed to delete user"
 msgstr "A felhasználó törlése meghiúsult"
 
-#: panels/user-accounts/cc-user-panel.c:398
-#: panels/user-accounts/cc-user-panel.c:453
-#: panels/user-accounts/cc-user-panel.c:499
+#: panels/user-accounts/cc-user-panel.c:413
+#: panels/user-accounts/cc-user-panel.c:468
+#: panels/user-accounts/cc-user-panel.c:514
 msgid "Failed to revoke remotely managed user"
 msgstr "A távmenedzselt felhasználó visszavonása meghiúsult"
 
-#: panels/user-accounts/cc-user-panel.c:548
+#: panels/user-accounts/cc-user-panel.c:563
 msgid "You cannot delete your own account."
 msgstr "Nem törölheti saját fiókját."
 
-#: panels/user-accounts/cc-user-panel.c:557
+#: panels/user-accounts/cc-user-panel.c:572
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s még be van jelentkezve"
 
-#: panels/user-accounts/cc-user-panel.c:561
+#: panels/user-accounts/cc-user-panel.c:576
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -7536,12 +7535,12 @@ msgstr ""
 "A bejelentkezett felhasználók törlése a rendszert inkonzisztens állapotban "
 "hagyhatja."
 
-#: panels/user-accounts/cc-user-panel.c:570
+#: panels/user-accounts/cc-user-panel.c:585
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Meg szeretné tartani %s fájljait?"
 
-#: panels/user-accounts/cc-user-panel.c:574
+#: panels/user-accounts/cc-user-panel.c:589
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -7549,67 +7548,67 @@ msgstr ""
 "Felhasználói fiók törlésekor lehetősége van a saját könyvtár, a levelezési "
 "várólista és az ideiglenes fájlok megtartására."
 
-#: panels/user-accounts/cc-user-panel.c:577
+#: panels/user-accounts/cc-user-panel.c:592
 msgid "_Delete Files"
 msgstr "Fájlok _törlése"
 
-#: panels/user-accounts/cc-user-panel.c:578
+#: panels/user-accounts/cc-user-panel.c:593
 msgid "_Keep Files"
 msgstr "Fájlok _megtartása"
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:607
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Biztosan vissza szeretné vonni a távmenedzselt %s fiókját?"
 
-#: panels/user-accounts/cc-user-panel.c:596
+#: panels/user-accounts/cc-user-panel.c:611
 msgid "_Delete"
 msgstr "_Törlés"
 
-#: panels/user-accounts/cc-user-panel.c:646
+#: panels/user-accounts/cc-user-panel.c:661
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Fiók letiltva"
 
-#: panels/user-accounts/cc-user-panel.c:654
+#: panels/user-accounts/cc-user-panel.c:669
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Következő belépéskor állítandó be"
 
-#: panels/user-accounts/cc-user-panel.c:657
+#: panels/user-accounts/cc-user-panel.c:672
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nincs"
 
-#: panels/user-accounts/cc-user-panel.c:700
+#: panels/user-accounts/cc-user-panel.c:715
 msgid "Logged in"
 msgstr "Bejelentkezve"
 
 #. TRANSLATORS: Status of Parental Controls setup
-#: panels/user-accounts/cc-user-panel.c:787
-#: panels/user-accounts/cc-user-panel.c:876
+#: panels/user-accounts/cc-user-panel.c:802
+#: panels/user-accounts/cc-user-panel.c:904
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Engedélyezve"
 
-#: panels/user-accounts/cc-user-panel.c:1173
+#: panels/user-accounts/cc-user-panel.c:1202
 msgid "Failed to contact the accounts service"
 msgstr "A fiókszolgáltatás nem érhető el"
 
-#: panels/user-accounts/cc-user-panel.c:1175
+#: panels/user-accounts/cc-user-panel.c:1204
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Győződjön meg róla, hogy az AccountService telepítve van és fut."
 
-#: panels/user-accounts/cc-user-panel.c:1197
+#: panels/user-accounts/cc-user-panel.c:1226
 msgid "This panel must be unlocked to change this setting"
 msgstr "Ezt a panelt fel kell oldani a beállítás megváltoztatásához"
 
-#: panels/user-accounts/cc-user-panel.c:1264
+#: panels/user-accounts/cc-user-panel.c:1293
 msgid "Delete the selected user account"
 msgstr "Kijelölt felhasználói fiók törlése"
 
-#: panels/user-accounts/cc-user-panel.c:1268
-#: panels/user-accounts/cc-user-panel.c:1377
+#: panels/user-accounts/cc-user-panel.c:1297
+#: panels/user-accounts/cc-user-panel.c:1406
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7617,7 +7616,7 @@ msgstr ""
 "A kijelölt felhasználói fiók törléséhez\n"
 "először kattintson a * ikonra"
 
-#: panels/user-accounts/cc-user-panel.c:1423
+#: panels/user-accounts/cc-user-panel.c:1452
 msgid "Unlock to Add Users and Change Settings"
 msgstr "Feloldás a felhasználók hozzáadásához és a beállítások módosításához"
 
@@ -7626,32 +7625,32 @@ msgstr "Feloldás a felhasználók hozzáadásához és a beállítások módos�
 msgid "Users"
 msgstr "Felhasználók"
 
-#: panels/user-accounts/cc-user-panel.ui:60
+#: panels/user-accounts/cc-user-panel.ui:63
 msgid "Your session needs to be restarted for changes to take effect"
 msgstr "A változtatások életbe léptetéséhez lépjen ki, majd újra be"
 
-#: panels/user-accounts/cc-user-panel.ui:67
+#: panels/user-accounts/cc-user-panel.ui:70
 msgid "Restart Now"
 msgstr "Újraindítás most"
 
 #. FIXME
-#: panels/user-accounts/cc-user-panel.ui:195
+#: panels/user-accounts/cc-user-panel.ui:198
 msgid "_Fingerprint Login"
 msgstr "_Ujjlenyomatos bejelentkezés"
 
-#: panels/user-accounts/cc-user-panel.ui:218
+#: panels/user-accounts/cc-user-panel.ui:221
 msgid "A_utomatic Login"
 msgstr "A_utomatikus bejelentkezés"
 
-#: panels/user-accounts/cc-user-panel.ui:231
+#: panels/user-accounts/cc-user-panel.ui:234
 msgid "Account Activity"
 msgstr "Fióktevékenység"
 
-#: panels/user-accounts/cc-user-panel.ui:259
+#: panels/user-accounts/cc-user-panel.ui:262
 msgid "_Administrator"
 msgstr "_Rendszergazda"
 
-#: panels/user-accounts/cc-user-panel.ui:260
+#: panels/user-accounts/cc-user-panel.ui:263
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
@@ -7659,32 +7658,32 @@ msgstr ""
 "A rendszergazdák hozzáadhatnak és eltávolíthatnak más felhasználókat, és "
 "módosíthatják az összes felhasználó beállításait."
 
-#: panels/user-accounts/cc-user-panel.ui:276
+#: panels/user-accounts/cc-user-panel.ui:279
 msgid "_Parental Controls"
 msgstr "Szülői _felügyeleti eszközök"
 
-#: panels/user-accounts/cc-user-panel.ui:277
+#: panels/user-accounts/cc-user-panel.ui:280
 msgid "Open the Parental Controls application."
 msgstr "A Szülői felügyeleti eszközök alkalmazás megnyitása."
 
-#: panels/user-accounts/cc-user-panel.ui:328
+#: panels/user-accounts/cc-user-panel.ui:331
 msgid "Remove User…"
 msgstr "Felhasználó eltávolítása…"
 
-#: panels/user-accounts/cc-user-panel.ui:340
+#: panels/user-accounts/cc-user-panel.ui:343
 msgid "Other Users"
 msgstr "Egyéb felhasználók"
 
-#: panels/user-accounts/cc-user-panel.ui:353
+#: panels/user-accounts/cc-user-panel.ui:356
 msgid "Add User…"
 msgstr "Felhasználó hozzáadása…"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:381
+#: panels/user-accounts/cc-user-panel.ui:384
 msgid "No Users Found"
 msgstr "Nem találhatók felhasználók"
 
-#: panels/user-accounts/cc-user-panel.ui:390
+#: panels/user-accounts/cc-user-panel.ui:393
 msgid "Unlock to add a user account."
 msgstr "Feloldás felhasználói fiók hozzáadásához."
 
@@ -8032,12 +8031,10 @@ msgstr "Hegy nyomásérzékenysége"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:21
 #: panels/wacom/cc-wacom-stylus-page.ui:82
-#| msgid "_Software"
 msgid "Soft"
 msgstr "Lágy"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:35
-#| msgid "Standard stylus with pressure"
 msgid "Stylus tip pressure"
 msgstr "Toll hegyének nyomása"
 
@@ -8066,13 +8063,10 @@ msgid "Eraser Pressure Feel"
 msgstr "Radír nyomásérzékenysége"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:96
-#| msgid "Eraser Pressure Feel"
 msgid "Eraser pressure"
 msgstr "Radír nyomása"
 
 #: panels/wacom/cc-wacom-stylus-page.ui:133
-#| msgctxt "cursor size"
-#| msgid "Default"
 msgid "Default"
 msgstr "Alapértelmezett"
 
