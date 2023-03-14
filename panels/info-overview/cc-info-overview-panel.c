@@ -265,7 +265,10 @@ get_renderer_from_switcheroo (void)
     {
       GpuData *data = l->data;
       if (renderers_string->len > 0)
-        g_string_append (renderers_string, " / ");
+        {
+          /* Show each GPU in its own line */
+          g_string_append_c (renderers_string, '\n');
+        }
       g_string_append (renderers_string, data->name);
     }
   g_slist_free_full (renderers, (GDestroyNotify) gpu_data_free);
