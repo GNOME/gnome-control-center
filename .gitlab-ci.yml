@@ -31,6 +31,12 @@ stages:
 
 .Build procedure: &build_procedure
   echo "== Building ==" &&
+  git clone https://gitlab.gnome.org/GNOME/gtk.git &&
+  cd gtk &&
+  dnf install -y dnf-plugins-core && dnf builddep -y gtk4 &&
+  meson setup . _build -Dprefix=/usr -Dlibdir=lib64 &&
+  ninja -C _build install &&
+  cd .. &&
   rm -rf _build/ &&
   meson . _build ${BUILD_OPTS} -Dprofile=development &&
   ninja -C _build 2>&1 | tee compilation.log
