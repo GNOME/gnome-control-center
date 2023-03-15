@@ -30,9 +30,9 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-02 15:52+0000\n"
-"PO-Revision-Date: 2023-03-02 19:57+0100\n"
-"Last-Translator: Philipp Kiemle <philipp.kiemle@gmail.com>\n"
+"POT-Creation-Date: 2023-03-15 13:38+0000\n"
+"PO-Revision-Date: 2023-03-15 14:57+0100\n"
+"Last-Translator: Jürgen Benvenuti <gastornis@posteo.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -136,9 +136,11 @@ msgstr ""
 msgid "%s of disk space used."
 msgstr "%s des Speicherplatzes wird verwendet."
 
+#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "Anwendungen"
 
@@ -164,7 +166,8 @@ msgstr "Anwendungsdetails"
 #: panels/keyboard/cc-input-chooser.ui:75
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
+#: shell/cc-window.ui:42
 msgid "Search"
 msgstr "Suchen"
 
@@ -907,13 +910,13 @@ msgstr "Erfordert ein schreibbares Speichermedium"
 
 #: panels/color/cc-color-panel.ui:313
 msgid ""
-"You may find these instructions on how to use the profile on <a "
-"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a "
-"href=\"windows\">Microsoft Windows</a> systems useful."
+"You may find these instructions on how to use the profile on <a href=\"linux"
+"\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> and <a href=\"windows"
+"\">Microsoft Windows</a> systems useful."
 msgstr ""
-"Eventuell sind diese Anweisungen hilfreich, wie ein Profil unter <a "
-"href=\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> und <a "
-"href=\"windows\">Microsoft Windows</a> eingesetzt wird."
+"Eventuell sind diese Anweisungen hilfreich, wie ein Profil unter <a href="
+"\"linux\">GNU/Linux</a>, <a href=\"osx\">Apple OS X</a> und <a href=\"windows"
+"\">Microsoft Windows</a> eingesetzt wird."
 
 #: panels/color/cc-color-panel.ui:335
 msgid "Add Profile"
@@ -924,8 +927,8 @@ msgid ""
 "Problems detected. The profile may not work correctly. <a href=\"\">Show "
 "details.</a>"
 msgstr ""
-"Probleme entdeckt. Das Profil funktioniert eventuell nicht richtig. <a "
-"href=\"\">Details anzeigen.</a>"
+"Probleme entdeckt. Das Profil funktioniert eventuell nicht richtig. <a href="
+"\"\">Details anzeigen.</a>"
 
 #: panels/color/cc-color-panel.ui:384
 msgid "_Import File…"
@@ -1262,7 +1265,7 @@ msgstr[0] "%d Stunde"
 msgstr[1] "%d Stunden"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1341,7 +1344,7 @@ msgid "%e %B %Y, %R"
 msgstr "%e. %B %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:394
+#: panels/datetime/cc-datetime-panel.c:398
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1349,7 +1352,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:411
+#: panels/datetime/cc-datetime-panel.c:415
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1568,13 +1571,13 @@ msgstr "diagnostics;crash;Fehlerdiagnose;Absturz;"
 
 #: panels/display/cc-display-panel.c:493
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "An"
 
 #: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Aus"
 
@@ -2728,7 +2731,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "Methoden, um mit der Tastatur Symbole und Zeichenvarianten einzugeben."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:161
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:162
 msgid "Keyboard Shortcuts"
 msgstr "Tastenkombinationen"
 
@@ -2993,7 +2996,7 @@ msgstr ""
 "microphone;recording;application;privacy;Mikrofon;Mikrophon;Aufnahme;"
 "Anwendung;Programm;Datenschutz;"
 
-#: panels/mouse/cc-mouse-panel.ui:30
+#: panels/mouse/cc-mouse-panel.ui:30 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
 msgstr "_Einstellungen testen"
 
@@ -4636,11 +4639,6 @@ msgstr "_Nicht stören"
 msgid "_Lock Screen Notifications"
 msgstr "Benachrichtigungen auf dem Sperrbi_ldschirm"
 
-#. List of apps.
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "Anwendungen"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "Legt fest, wie Nachrichten angezeigt werden und was diese anzeigen"
@@ -4850,7 +4848,7 @@ msgid "Gaming input device"
 msgstr "Spiel-Eingabegerät"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "Akku"
@@ -4869,44 +4867,51 @@ msgstr "Extra"
 msgid "Batteries"
 msgstr "Akku"
 
-#: panels/power/cc-power-panel.c:514
+# https://de.wikipedia.org/wiki/Unterbrechungsfreie_Stromversorgung
+#. Translators: UPS is an Uninterruptible Power Supply:
+#. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
+#: panels/power/cc-power-panel.c:260
+msgid "UPS"
+msgstr "USV"
+
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "Wenn _inaktiv"
 
-#: panels/power/cc-power-panel.c:674
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "Bereitschaft"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "Ausschalten"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "Ruhezustand"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "Nichts"
 
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "Wenn im Akkubetrieb"
 
-#: panels/power/cc-power-panel.c:735
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "Wenn angeschlossen"
 
-#: panels/power/cc-power-panel.c:856
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Nie"
 
-#: panels/power/cc-power-panel.c:940
+#: panels/power/cc-power-panel.c:946
 msgid "Automatic suspend"
 msgstr "Automatisch in Bereitschaft gehen"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1042
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
@@ -4914,7 +4919,7 @@ msgstr ""
 "verfügbar."
 
 # Klingt komisch, ist aber so :) https://gitlab.freedesktop.org/hadess/power-profiles-daemon/-/blob/main/src/net.hadess.PowerProfiles.xml
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1044
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4923,11 +4928,11 @@ msgstr ""
 "Sie das Gerät auf eine stabile Oberfläche, um in den Leistungsmodus wechseln "
 "zu können."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1046
 msgid "Performance mode temporarily disabled."
 msgstr "Leistungsmodus vorübergehend deaktiviert."
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1088
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4936,13 +4941,13 @@ msgstr ""
 "wieder verwendet, wenn der Akku ausreichend geladen ist."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1090
+#: panels/power/cc-power-panel.c:1096
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Energiesparmodus durch »%s« aktiviert."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1094
+#: panels/power/cc-power-panel.c:1100
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Leistungsmodus durch »%s« aktiviert."
@@ -6827,7 +6832,7 @@ msgstr "Die Unterstützung für Thunderbolt wurde im BIOS deaktiviert."
 msgid "Thunderbolt security level could not be determined."
 msgstr "Die Sicherheitsstufe von Thunderbolt konnte nicht ermittelt werden."
 
-#: panels/thunderbolt/cc-bolt-panel.c:679
+#: panels/thunderbolt/cc-bolt-panel.c:694
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Fehler beim Wechsel in den Direktmodus: %s"
@@ -7499,12 +7504,13 @@ msgid "Forever"
 msgstr "Für immer"
 
 #: panels/usage/cc-usage-panel.c:347
-msgid "Delete all the recent files?"
-msgstr "Alle kürzlich verwendeten Dateien löschen?"
+msgid "Clear File History?"
+msgstr "Dateichronik löschen?"
 
 #: panels/usage/cc-usage-panel.c:348
-msgid "All the recent files will be permanently deleted."
-msgstr "Alle kürzlich verwendeten Dateien werden dauerhaft gelöscht."
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr ""
+"Nach dem Löschen erscheinen die Listen der zuletzt verwendeten Datei leer."
 
 #: panels/usage/cc-usage-panel.c:349
 msgid "_Clear History"
@@ -8618,10 +8624,6 @@ msgstr ""
 msgid "Calibrate"
 msgstr "Kalibrieren"
 
-#: panels/wacom/cc-wacom-panel.ui:9
-msgid "Test Your _Settings"
-msgstr "_Testen Sie Ihre Einstellungen"
-
 #: panels/wacom/cc-wacom-panel.ui:56
 msgid "No tablet detected"
 msgstr "Kein Grafiktablett erkannt"
@@ -9312,15 +9314,15 @@ msgstr "Verfügbare Leisten:"
 msgid "All Settings"
 msgstr "Alle Einstellungen"
 
-#: shell/cc-window.ui:53 shell/cc-window.ui:55
+#: shell/cc-window.ui:54 shell/cc-window.ui:56
 msgid "Main Menu"
 msgstr "Hauptmenü"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:154
 msgid "Warning: Development Version"
 msgstr "Warnung: Entwicklerversion"
 
-#: shell/cc-window.ui:154
+#: shell/cc-window.ui:155
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9330,7 +9332,7 @@ msgstr ""
 "werden. Die Verwendung kann zu inkorrektem Verhalten des Systems, "
 "Datenverlust und weiteren unerwarteten Ereignissen führen. "
 
-#: shell/cc-window.ui:165
+#: shell/cc-window.ui:166
 msgid "Help"
 msgstr "Hilfe"
 
@@ -9437,6 +9439,18 @@ msgstr[1] "%u Eingänge"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Systemklänge"
+
+#~ msgid "Delete all the recent files?"
+#~ msgstr "Alle kürzlich verwendeten Dateien löschen?"
+
+#~ msgid "All the recent files will be permanently deleted."
+#~ msgstr "Alle kürzlich verwendeten Dateien werden dauerhaft gelöscht."
+
+#~ msgid "Test Your _Settings"
+#~ msgstr "_Testen Sie Ihre Einstellungen"
+
+#~ msgid "Applications"
+#~ msgstr "Anwendungen"
 
 #~ msgid "Application"
 #~ msgstr "Anwendung"
@@ -10434,11 +10448,11 @@ msgstr "Systemklänge"
 #~ msgstr "Kann nicht geändert werden"
 
 #~ msgid ""
-#~ "Individual permissions for applications can be reviewed in the <a "
-#~ "href=\"privacy\">Privacy</a> Settings."
+#~ "Individual permissions for applications can be reviewed in the <a href="
+#~ "\"privacy\">Privacy</a> Settings."
 #~ msgstr ""
-#~ "Individuelle Berechtigungen für Anwendungen können in den <a "
-#~ "href=\"privacy\">Privatsphäre</a>-Einstellungen eingesehen werden."
+#~ "Individuelle Berechtigungen für Anwendungen können in den <a href="
+#~ "\"privacy\">Privatsphäre</a>-Einstellungen eingesehen werden."
 
 #~ msgid "Integration"
 #~ msgstr "Integration"
