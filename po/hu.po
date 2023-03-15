@@ -19,8 +19,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
 "es\n"
-"POT-Creation-Date: 2023-03-14 21:01+0000\n"
-"PO-Revision-Date: 2023-03-15 00:13+0100\n"
+"POT-Creation-Date: 2023-03-15 13:38+0000\n"
+"PO-Revision-Date: 2023-03-15 15:53+0100\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
 "Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
 "Language: hu\n"
@@ -154,7 +154,8 @@ msgstr "Alkalmazás részletei"
 #: panels/keyboard/cc-input-chooser.ui:75
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
+#: shell/cc-window.ui:42
 msgid "Search"
 msgstr "Keresés"
 
@@ -2702,7 +2703,7 @@ msgstr ""
 "Módok a szimbólumok és betűváltozatok beírására a billentyűzet segítségével."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:161
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:162
 msgid "Keyboard Shortcuts"
 msgstr "Gyorsbillentyűk"
 
@@ -2969,7 +2970,7 @@ msgstr "Mikrofon-hozzáférés korlátozása"
 msgid "microphone;recording;application;privacy;"
 msgstr "mikrofon;felvétel;alkalmazás;adatvédelem;"
 
-#: panels/mouse/cc-mouse-panel.ui:30
+#: panels/mouse/cc-mouse-panel.ui:30 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
 msgstr "_Beállítások tesztelése"
 
@@ -4833,7 +4834,6 @@ msgstr "Akkumulátorok"
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
 #: panels/power/cc-power-panel.c:260
-#| msgid "USB"
 msgid "UPS"
 msgstr "UPS"
 
@@ -7455,12 +7455,13 @@ msgid "Forever"
 msgstr "Örökké"
 
 #: panels/usage/cc-usage-panel.c:347
-msgid "Delete all the recent files?"
-msgstr "Törli az összes legutóbbi fájlt?"
+#| msgid "_Clear History"
+msgid "Clear File History?"
+msgstr "Törli a fájlelőzményeket?"
 
 #: panels/usage/cc-usage-panel.c:348
-msgid "All the recent files will be permanently deleted."
-msgstr "Az összes legutóbbi fájl véglegesen törlésre kerül."
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr "Törlés után a legutóbb használt fájlok listái üresen jelennek meg."
 
 #: panels/usage/cc-usage-panel.c:349
 msgid "_Clear History"
@@ -8536,10 +8537,6 @@ msgstr ""
 msgid "Calibrate"
 msgstr "Kalibrálás"
 
-#: panels/wacom/cc-wacom-panel.ui:9
-msgid "Test Your _Settings"
-msgstr "Beállítás_ok tesztelése"
-
 #: panels/wacom/cc-wacom-panel.ui:56
 msgid "No tablet detected"
 msgstr "Nem található rajztábla"
@@ -9221,15 +9218,15 @@ msgstr "Elérhető panelek:"
 msgid "All Settings"
 msgstr "Minden beállítás"
 
-#: shell/cc-window.ui:53 shell/cc-window.ui:55
+#: shell/cc-window.ui:54 shell/cc-window.ui:56
 msgid "Main Menu"
 msgstr "Főmenü"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:154
 msgid "Warning: Development Version"
 msgstr "Figyelmeztetés: fejlesztői verzió"
 
-#: shell/cc-window.ui:154
+#: shell/cc-window.ui:155
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9239,7 +9236,7 @@ msgstr ""
 "megfelelő rendszerműködést, adatvesztést és más váratlan problémákat "
 "tapasztalhat. "
 
-#: shell/cc-window.ui:165
+#: shell/cc-window.ui:166
 msgid "Help"
 msgstr "Súgó"
 
