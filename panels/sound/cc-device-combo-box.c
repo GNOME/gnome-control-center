@@ -33,6 +33,8 @@ struct _CcDeviceComboBox
 
 G_DEFINE_TYPE (CcDeviceComboBox, cc_device_combo_box, GTK_TYPE_COMBO_BOX)
 
+static gboolean get_iter (CcDeviceComboBox *self, guint id, GtkTreeIter *iter);
+
 static void
 device_added_cb (CcDeviceComboBox *self,
                  guint             id)
@@ -65,7 +67,9 @@ device_added_cb (CcDeviceComboBox *self,
   if (gvc_mixer_ui_device_get_icon_name (device) != NULL)
     icon_name = g_strdup_printf ("%s-symbolic", gvc_mixer_ui_device_get_icon_name (device));
 
-  gtk_list_store_append (self->device_model, &iter);
+  if (!get_iter (self, id, &iter))
+    gtk_list_store_append (self->device_model, &iter);
+
   gtk_list_store_set (self->device_model, &iter,
                       0, label,
                       1, icon_name,
