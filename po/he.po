@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center.HEAD.he\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-03 18:27+0000\n"
-"PO-Revision-Date: 2023-03-04 20:38+0200\n"
+"POT-Creation-Date: 2023-03-16 16:23+0000\n"
+"PO-Revision-Date: 2023-03-16 18:45+0200\n"
 "Last-Translator: Yosef Or Boczko <yoseforb@gmail.com>\n"
 "Language-Team: Hebrew <>\n"
 "Language: he\n"
@@ -118,9 +118,11 @@ msgstr "‫<b>%s</b> משמש לפתיחת סוגי הקבצים והקישור�
 msgid "%s of disk space used."
 msgstr "‫%s משטח הכונן מנוצלים."
 
+#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "יישומים"
 
@@ -1222,7 +1224,7 @@ msgstr[2] "‫%d שעות"
 msgstr[3] "‫%d שעות"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1529,13 +1531,13 @@ msgstr "אבחון;אבחנה;קריסה;"
 
 #: panels/display/cc-display-panel.c:493
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "פעיל"
 
 #: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "כבוי"
 
@@ -4549,11 +4551,6 @@ msgstr "_נא לא להפריע"
 msgid "_Lock Screen Notifications"
 msgstr "התראות במסך _נעילה"
 
-#. List of apps.
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "יישומים"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "שליטה בהתראות שתוצגנה ומה הן תצגנה"
@@ -4767,7 +4764,7 @@ msgid "Gaming input device"
 msgstr "התקני קלט למשחקים"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "סוללה"
@@ -4786,49 +4783,55 @@ msgstr "נוסף"
 msgid "Batteries"
 msgstr "סוללות"
 
-#: panels/power/cc-power-panel.c:514
+#. Translators: UPS is an Uninterruptible Power Supply:
+#. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
+#: panels/power/cc-power-panel.c:260
+msgid "UPS"
+msgstr "אל־פסק"
+
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "ב_חוסר פעילות"
 
-#: panels/power/cc-power-panel.c:674
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "השהיה"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "כיבוי"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "מצב תרדמת"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "לא לעשות דבר"
 
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "בעת הפעלה מהסוללה"
 
-#: panels/power/cc-power-panel.c:735
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "עם חיבור לחשמל"
 
-#: panels/power/cc-power-panel.c:856
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "לעולם לא"
 
-#: panels/power/cc-power-panel.c:940
+#: panels/power/cc-power-panel.c:946
 msgid "Automatic suspend"
 msgstr "השהיה אוטומטית"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1042
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr "מצב הביצועים הושבת זמנית עקב טמפרטורה גבוהה בזמן הפעילות."
 
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1044
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4836,11 +4839,11 @@ msgstr ""
 "זוהו ירכיים: מצב הביצועים אינו זמין באופן זמני. יש להעביר את המכשיר למשטח "
 "יציב כדי לשחזר את המצב הקודם."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1046
 msgid "Performance mode temporarily disabled."
 msgstr "מצב הביצועים מושבת זמנית."
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1088
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4849,13 +4852,13 @@ msgstr ""
 "מספק."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1090
+#: panels/power/cc-power-panel.c:1096
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "מצב החיסכון בחשמל הופעל על ידי „%s”."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1094
+#: panels/power/cc-power-panel.c:1100
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "מצב הביצועים מופעל על ידי „%s”."
@@ -7378,12 +7381,12 @@ msgid "Forever"
 msgstr "לעד"
 
 #: panels/usage/cc-usage-panel.c:347
-msgid "Delete all the recent files?"
-msgstr "למחוק את כל הקבצים האחרונים?"
+msgid "Clear File History?"
+msgstr "למחוק את היסטוריית הקבצים?"
 
 #: panels/usage/cc-usage-panel.c:348
-msgid "All the recent files will be permanently deleted."
-msgstr "כל הקבצים האחרונים ימחקו לצמיתות."
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr "לאחר המחיקה, רשימת הקבצים שנעשה בהם שימוש לאחרונה תישאר ריקה."
 
 #: panels/usage/cc-usage-panel.c:349
 msgid "_Clear History"
@@ -9251,6 +9254,15 @@ msgstr[3] "‏‫%u ערוצי קלט"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "צלילי מערכת"
+
+#~ msgid "Applications"
+#~ msgstr "יישומים"
+
+#~ msgid "Delete all the recent files?"
+#~ msgstr "למחוק את כל הקבצים האחרונים?"
+
+#~ msgid "All the recent files will be permanently deleted."
+#~ msgstr "כל הקבצים האחרונים ימחקו לצמיתות."
 
 #~ msgid "Mouse Speed"
 #~ msgstr "מהירות העכבר"
