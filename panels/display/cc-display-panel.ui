@@ -26,6 +26,17 @@
             <property name="show-end-title-buttons">False</property>
 
             <child type="start">
+              <object class="GtkButton" id="apply_titlebar_back_button">
+                <property name="visible">False</property>
+                <property name="icon-name">go-previous-symbolic</property>
+                <accessibility>
+                  <property name="label" translatable="yes">Back</property>
+                </accessibility>
+                <signal name="clicked" handler="on_apply_titlebar_back_button_clicked" object="CcDisplayPanel" swapped="yes" />
+              </object>
+            </child>
+
+            <child type="start">
               <object class="GtkButton" id="cancel_button">
                 <property name="use-underline">True</property>
                 <property name="label" translatable="yes">_Cancel</property>
