@@ -86,6 +86,7 @@ struct _CcDisplayPanel
   GtkWidget      *apply_button;
   GtkWidget      *cancel_button;
   AdwWindowTitle *apply_titlebar_title_widget;
+  GtkButton      *apply_titlebar_back_button;
 
   GListStore     *primary_display_list;
   GList          *monitor_rows;
@@ -116,6 +117,8 @@ static void
 update_apply_button (CcDisplayPanel *panel);
 static void
 apply_current_configuration (CcDisplayPanel *self);
+static void
+on_apply_titlebar_back_button_clicked (CcDisplayPanel *self);
 static void
 reset_current_config (CcDisplayPanel *panel);
 static void
@@ -583,6 +586,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_titlebar);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_titlebar_title_widget);
+  gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, apply_titlebar_back_button);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, display_settings_disabled_group);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_bin);
   gtk_widget_class_bind_template_child (widget_class, CcDisplayPanel, arrangement_row);
@@ -608,6 +612,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   gtk_widget_class_bind_template_callback (widget_class, on_primary_display_selected_item_changed_cb);
   gtk_widget_class_bind_template_callback (widget_class, on_screen_changed);
   gtk_widget_class_bind_template_callback (widget_class, on_toplevel_escape_pressed_cb);
+  gtk_widget_class_bind_template_callback (widget_class, on_apply_titlebar_back_button_clicked);
 }
 
 static void
@@ -982,6 +987,19 @@ apply_current_configuration (CcDisplayPanel *self)
 }
 
 static void
+on_apply_titlebar_back_button_clicked (CcDisplayPanel *self)
+{
+  adw_leaflet_set_visible_child_name (self->leaflet, "displays");
+}
+
+static void
+on_leaflet_visible_child_changed (CcDisplayPanel *self)
+{
+  gtk_widget_set_visible (GTK_WIDGET (self->apply_titlebar_back_button),
+    g_strcmp0 (adw_leaflet_get_visible_child_name (self->leaflet), "display-settings") == 0);
+}
+
+static void
 mapped_cb (CcDisplayPanel *panel)
 {
   CcShell *shell;
@@ -1075,6 +1093,9 @@ cc_display_panel_init (CcDisplayPanel *self)
   g_signal_connect_object (self->arrangement, "notify::selected-output",
 			   G_CALLBACK (on_arrangement_selected_ouptut_changed_cb), self,
 			   G_CONNECT_SWAPPED);
+  g_signal_connect_object (self->leaflet, "notify::visible-child",
+                           G_CALLBACK (on_leaflet_visible_child_changed),
+                           self, G_CONNECT_SWAPPED);
 
   self->settings = cc_display_settings_new ();
   adw_bin_set_child (self->display_settings_bin, GTK_WIDGET (self->settings));
