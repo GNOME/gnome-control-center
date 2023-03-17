@@ -147,6 +147,10 @@ on_touchpad_scroll_method_changed_cb (CcMousePanel *self)
 
   two_finger = cc_split_row_get_use_default (self->touchpad_scroll_method_row);
 
+  if (g_settings_get_boolean (self->touchpad_settings,
+                              "two-finger-scrolling-enabled") == two_finger)
+    return;
+
   g_settings_set_boolean (self->touchpad_settings, "two-finger-scrolling-enabled", two_finger);
 }
 
