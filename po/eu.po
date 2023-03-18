@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2023-03-10 23:31+0000\n"
-"PO-Revision-Date: 2023-03-12 14:00+0100\n"
+"POT-Creation-Date: 2023-03-17 16:56+0000\n"
+"PO-Revision-Date: 2023-03-18 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -110,9 +110,11 @@ msgstr "<b>%s</b> hurrengo fitxategi motak eta estekak irekitzeko erabiltzen da.
 msgid "%s of disk space used."
 msgstr "Erabilitako disko-espazioa: %s."
 
+#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "Aplikazioak"
 
@@ -1196,7 +1198,7 @@ msgstr[0] "ordu %d"
 msgstr[1] "%d ordu"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1497,13 +1499,13 @@ msgstr "diagnostikoak;kraskadura;"
 
 #: panels/display/cc-display-panel.c:493
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Aktibatuta"
 
 #: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Desaktibatuta"
 
@@ -4413,11 +4415,6 @@ msgstr "Ez _gogaitu"
 msgid "_Lock Screen Notifications"
 msgstr "Pantaila b_lokeatzearen jakinarazpenak"
 
-#. List of apps.
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "Aplikazioak"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "Kontrolatu jakinarazpenak nola bistaratzen diren eta zer erakusten duten"
@@ -4621,7 +4618,7 @@ msgid "Gaming input device"
 msgstr "Jokoetarako sarrerako gailua"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "Bateria"
@@ -4640,72 +4637,78 @@ msgstr "Gehigarria"
 msgid "Batteries"
 msgstr "Bateriak"
 
-#: panels/power/cc-power-panel.c:514
+#. Translators: UPS is an Uninterruptible Power Supply:
+#. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
+#: panels/power/cc-power-panel.c:260
+msgid "UPS"
+msgstr "UPS"
+
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "_Inaktibo dagoenean"
 
-#: panels/power/cc-power-panel.c:674
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "Eseki"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "Itzali"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "Hibernatu"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "Ezer ez"
 
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "Bateriaren energiarekin"
 
-#: panels/power/cc-power-panel.c:735
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "Entxufea konektatutakoan"
 
-#: panels/power/cc-power-panel.c:856
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Inoiz ere ez"
 
-#: panels/power/cc-power-panel.c:940
+#: panels/power/cc-power-panel.c:946
 msgid "Automatic suspend"
 msgstr "Eseki automatikoki"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1042
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr "Errendimendu modua desgaitu egin da aldi batez laneko tenperatura asko igo delako."
 
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1044
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
 msgstr "Eramangarria detektatu da: errendimendu modua ez dago erabilgarri momentu honetan. Eraman gailua gainazal egonkor batera hura leheneratzeko."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1046
 msgid "Performance mode temporarily disabled."
 msgstr "Errendimendu modua desgaitu egin da aldi batez."
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1088
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
 msgstr "Bateria gutxi: energia aurrezteko modua gaitu da. Bateria nahiko kargatuta dagoenean aurreko modua leheneratuko da."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1090
+#: panels/power/cc-power-panel.c:1096
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Energia aurrezteko modua aktibatuta: “%s”."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1094
+#: panels/power/cc-power-panel.c:1100
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Errendimendu modua aktibatuta: “%s”."
@@ -7187,12 +7190,12 @@ msgid "Forever"
 msgstr "Beti"
 
 #: panels/usage/cc-usage-panel.c:347
-msgid "Delete all the recent files?"
-msgstr "Ezabatu azken aldiko fitxategi guztiak?"
+msgid "Clear File History?"
+msgstr "Garbitu fitxategi-historia?"
 
 #: panels/usage/cc-usage-panel.c:348
-msgid "All the recent files will be permanently deleted."
-msgstr "Azken aldiko fitxategi guztiak betirako ezabatuko dira."
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr "Garbitu ondoren azken aldian erabilitako fitxategien zerrenda hutsik agertuko da."
 
 #: panels/usage/cc-usage-panel.c:349
 msgid "_Clear History"
@@ -9017,6 +9020,15 @@ msgstr[1] "%u sarrera"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sistemaren soinuak"
+
+#~ msgid "Applications"
+#~ msgstr "Aplikazioak"
+
+#~ msgid "Delete all the recent files?"
+#~ msgstr "Ezabatu azken aldiko fitxategi guztiak?"
+
+#~ msgid "All the recent files will be permanently deleted."
+#~ msgstr "Azken aldiko fitxategi guztiak betirako ezabatuko dira."
 
 #~ msgid "Camera is Turned Off"
 #~ msgstr "Kamera itzalita dago"
