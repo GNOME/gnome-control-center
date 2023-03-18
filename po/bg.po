@@ -20,8 +20,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center main\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-04 20:06+0000\n"
-"PO-Revision-Date: 2023-03-06 11:09+0200\n"
+"POT-Creation-Date: 2023-03-17 16:56+0000\n"
+"PO-Revision-Date: 2023-03-18 13:23+0200\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>\n"
 "Language-Team: Bulgarian <dict@fsa-bg.org>\n"
 "Language: bg\n"
@@ -122,9 +122,11 @@ msgstr "<b>%s</b> отваря следните видове файлове и �
 msgid "%s of disk space used."
 msgstr "Ползват се %s от дисковото пространство."
 
+#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "Програми"
 
@@ -1248,7 +1250,7 @@ msgstr[0] "%d час"
 msgstr[1] "%d часа"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1557,13 +1559,13 @@ msgstr "диагностика;забиване;блокиране;diagnostics;c
 
 #: panels/display/cc-display-panel.c:493
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Включване"
 
 #: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Изключване"
 
@@ -4632,11 +4634,6 @@ msgstr "_Не безпокойте"
 msgid "_Lock Screen Notifications"
 msgstr "Известия при _заключен екран"
 
-#. List of apps.
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "Програми"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "Управление на известията и тяхната детайлност"
@@ -4850,7 +4847,7 @@ msgid "Gaming input device"
 msgstr "Контролер за игри"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "Батерия"
@@ -4869,51 +4866,57 @@ msgstr "Допълнителна"
 msgid "Batteries"
 msgstr "Батерии"
 
-#: panels/power/cc-power-panel.c:514
+#. Translators: UPS is an Uninterruptible Power Supply:
+#. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
+#: panels/power/cc-power-panel.c:260
+msgid "UPS"
+msgstr "UPS"
+
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "При _бездействие"
 
-#: panels/power/cc-power-panel.c:674
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "приспиване"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "Изключване"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "дълбоко приспиване"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "нищо"
 
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "При работа от батерии"
 
-#: panels/power/cc-power-panel.c:735
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "При включване на захранването"
 
-#: panels/power/cc-power-panel.c:856
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Никога"
 
-#: panels/power/cc-power-panel.c:940
+#: panels/power/cc-power-panel.c:946
 msgid "Automatic suspend"
 msgstr "Автоматично приспиване"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1042
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Режимът на висока производителност е изключен поради прекалено високата "
 "температура на хардуера."
 
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1044
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4922,11 +4925,11 @@ msgstr ""
 "производителност е недостъпен. Сложете устройството на стабилна повърхност, "
 "за се върне достъпът до този режим."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1046
 msgid "Performance mode temporarily disabled."
 msgstr "Високата производителност временно е изключена."
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1088
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4935,13 +4938,13 @@ msgstr ""
 "Предишният режим ще се включи отново след достатъчно зареждане на батерията."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1090
+#: panels/power/cc-power-panel.c:1096
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Енергоспестяването е включено от „%s“."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1094
+#: panels/power/cc-power-panel.c:1100
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Високата производителност е включена от „%s“."
@@ -7496,12 +7499,12 @@ msgid "Forever"
 msgstr "Завинаги"
 
 #: panels/usage/cc-usage-panel.c:347
-msgid "Delete all the recent files?"
-msgstr "Да се изчистят ли всички скорошни файлове?"
+msgid "Clear File History?"
+msgstr "Изчистване на историята на файловете?"
 
 #: panels/usage/cc-usage-panel.c:348
-msgid "All the recent files will be permanently deleted."
-msgstr "Всички скорошни файлове ще бъдат окончателно изтрити."
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr "След изчистване спъсъкът със скоро ползваните файлове е празен."
 
 #: panels/usage/cc-usage-panel.c:349
 msgid "_Clear History"
@@ -9384,6 +9387,15 @@ msgstr[1] "%u входа"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системни звуци"
+
+#~ msgid "Applications"
+#~ msgstr "Програми"
+
+#~ msgid "Delete all the recent files?"
+#~ msgstr "Да се изчистят ли всички скорошни файлове?"
+
+#~ msgid "All the recent files will be permanently deleted."
+#~ msgstr "Всички скорошни файлове ще бъдат окончателно изтрити."
 
 #, c-format
 #~ msgid ""
