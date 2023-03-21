@@ -333,23 +333,28 @@ setup_dialog (CcMousePanel *self)
 
   g_settings_bind (self->touchpad_settings, "natural-scroll",
                    self->touchpad_scroll_direction_row, "use-default",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+                   G_SETTINGS_BIND_INVERT_BOOLEAN |
+                   G_SETTINGS_BIND_NO_SENSITIVITY);
 
   g_settings_bind (self->touchpad_settings, "speed",
                    gtk_range_get_adjustment (GTK_RANGE (self->touchpad_speed_scale)), "value",
-                   G_SETTINGS_BIND_DEFAULT);
+                   G_SETTINGS_BIND_DEFAULT |
+                   G_SETTINGS_BIND_NO_SENSITIVITY);
 
   g_settings_bind (self->touchpad_settings, "tap-to-click",
                    self->tap_to_click_switch, "active",
-                   G_SETTINGS_BIND_DEFAULT);
+                   G_SETTINGS_BIND_DEFAULT |
+                   G_SETTINGS_BIND_NO_SENSITIVITY);
 
   g_settings_bind (self->touchpad_settings, "two-finger-scrolling-enabled",
                    self->touchpad_scroll_method_row, "use-default",
-                   G_SETTINGS_BIND_DEFAULT);
+                   G_SETTINGS_BIND_DEFAULT |
+                   G_SETTINGS_BIND_NO_SENSITIVITY);
 
   g_settings_bind (self->touchpad_settings, "edge-scrolling-enabled",
                    self->touchpad_scroll_method_row, "use-default",
-                   G_SETTINGS_BIND_INVERT_BOOLEAN);
+                   G_SETTINGS_BIND_INVERT_BOOLEAN |
+                   G_SETTINGS_BIND_NO_SENSITIVITY);
 
   setup_touchpad_options (self);
 
