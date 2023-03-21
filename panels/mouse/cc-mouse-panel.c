@@ -306,30 +306,6 @@ setup_dialog (CcMousePanel *self)
                                 touchpad_enabled_get_mapping,
                                 touchpad_enabled_set_mapping,
                                 NULL, NULL);
-  g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-                                self->touchpad_scroll_direction_row, "sensitive",
-                                G_SETTINGS_BIND_GET,
-                                touchpad_enabled_get_mapping,
-                                touchpad_enabled_set_mapping,
-                                NULL, NULL);
-  g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-                                self->touchpad_scroll_method_row, "sensitive",
-                                G_SETTINGS_BIND_GET,
-                                touchpad_enabled_get_mapping,
-                                touchpad_enabled_set_mapping,
-                                NULL, NULL);
-  g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-                                self->touchpad_speed_row, "sensitive",
-                                G_SETTINGS_BIND_GET,
-                                touchpad_enabled_get_mapping,
-                                touchpad_enabled_set_mapping,
-                                NULL, NULL);
-  g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
-                                self->tap_to_click_row, "sensitive",
-                                G_SETTINGS_BIND_GET,
-                                touchpad_enabled_get_mapping,
-                                touchpad_enabled_set_mapping,
-                                NULL, NULL);
 
   g_settings_bind (self->touchpad_settings, "natural-scroll",
                    self->touchpad_scroll_direction_row, "use-default",

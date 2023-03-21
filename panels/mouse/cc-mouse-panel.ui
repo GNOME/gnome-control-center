@@ -198,6 +198,7 @@
                     <child>
                       <object class="AdwActionRow" id="touchpad_speed_row">
                         <property name="title" translatable="yes">Pointer Speed</property>
+                        <property name="sensitive" bind-source="touchpad_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
                         <child type="suffix">
                           <object class="GtkScale" id="touchpad_speed_scale">
                             <property name="hexpand">True</property>
@@ -233,6 +234,7 @@
                         <property name="title" translatable="yes">Tap to Click</property>
                         <property name="subtitle" translatable="yes">Quickly touch the touchpad to click</property>
                         <property name="activatable-widget">tap_to_click_switch</property>
+                        <property name="sensitive" bind-source="touchpad_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
                         <child>
                           <object class="GtkSwitch" id="tap_to_click_switch">
                             <property name="valign">center</property>
@@ -256,6 +258,7 @@
                         <property name="default-option-subtitle" translatable="yes">Drag two fingers on the touchpad</property>
                         <property name="alternative-option-title" translatable="yes">Edge</property>
                         <property name="alternative-option-subtitle" translatable="yes">Drag one finger on the edge</property>
+                        <property name="sensitive" bind-source="touchpad_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
                         <signal name="notify::use-default" handler="on_touchpad_scroll_method_changed_cb" object="CcMousePanel" swapped="yes"/>
                       </object>
                     </child>
@@ -265,6 +268,7 @@
                         <property name="default-option-title" translatable="yes">Traditional</property>
                         <property name="default-option-subtitle" translatable="yes">Scrolling moves the view</property>
                         <property name="alternative-option-title" translatable="yes">Natural</property>
+                        <property name="sensitive" bind-source="touchpad_toggle_switch" bind-property="active" bind-flags="default|sync-create" />
                         <property name="alternative-option-subtitle" translatable="yes">Scrolling moves the content</property>
                       </object>
                     </child>
