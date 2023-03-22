@@ -118,6 +118,32 @@ set_ignore_hosts (const GValue       *value,
 }
 
 /*
+ * Get the currently selected mode, which may not have saved
+ * to settings yet.  This method will always return one of
+ * %MODE_AUTOMATIC or %MODE_MANUAL, regardless of whether the
+ * proxy is enabled or not.
+ */
+static ProxyMode
+proxy_get_selected_mode (CcNetProxyPage *self)
+{
+  guint selected;
+
+  g_assert (CC_IS_NET_PROXY_PAGE (self));
+
+  selected = adw_combo_row_get_selected (self->proxy_type_row);
+
+  if (selected == ROW_AUTOMATIC)
+    return MODE_AUTOMATIC;
+
+  if (selected == ROW_MANUAL)
+    return MODE_MANUAL;
+
+  g_assert_not_reached ();
+
+  return -1;
+}
+
+/*
  * Get the current mode, which may not have saved
  * to settings yet
  */
@@ -125,7 +151,6 @@ static ProxyMode
 proxy_get_current_mode (CcNetProxyPage *self)
 {
   ProxyMode mode;
-  guint selected;
 
   g_assert (CC_IS_NET_PROXY_PAGE (self));
 
@@ -140,17 +165,7 @@ proxy_get_current_mode (CcNetProxyPage *self)
   if (self->is_loading)
     return mode;
 
-  selected = adw_combo_row_get_selected (self->proxy_type_row);
-
-  if (selected == ROW_AUTOMATIC)
-    return MODE_AUTOMATIC;
-
-  if (selected == ROW_MANUAL)
-    return MODE_MANUAL;
-
-  g_assert_not_reached ();
-
-  return -1;
+  return proxy_get_selected_mode (self);
 }
 
 static void
