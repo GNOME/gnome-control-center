@@ -420,9 +420,11 @@ cc_net_proxy_page_set_enabled (CcNetProxyPage *self,
     return;
 
   if (enable)
-    g_settings_set_enum (self->settings, "mode", MODE_AUTOMATIC);
+    mode = proxy_get_selected_mode (self);
   else
-    g_settings_set_enum (self->settings, "mode", MODE_DISABLED);
+    mode = MODE_DISABLED;
+
+  g_settings_set_enum (self->settings, "mode", mode);
 
   /* Apply changes immediately */
   cc_net_proxy_page_save_changes (self);
