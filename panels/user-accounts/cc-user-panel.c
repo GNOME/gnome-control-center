@@ -820,7 +820,6 @@ show_user (ActUser *user, CcUserPanel *self)
         g_autofree gchar *lang = NULL;
         g_autofree gchar *name = NULL;
         gboolean show, enable;
-        ActUser *current;
 #ifdef HAVE_MALCONTENT
         g_autofree gchar *malcontent_control_path = NULL;
 #endif
