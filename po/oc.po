@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-02-25 13:00+0000\n"
-"PO-Revision-Date: 2023-02-28 22:15+0100\n"
+"POT-Creation-Date: 2023-03-17 16:43+0000\n"
+"PO-Revision-Date: 2023-03-22 09:13+0100\n"
 "Last-Translator: Quentin PAGÈS\n"
 "Language-Team: Tot en òc\n"
 "Language: oc\n"
@@ -112,9 +112,11 @@ msgstr "<b>%s</b> dubrís aquestes tipes de fichièrs e ligams."
 msgid "%s of disk space used."
 msgstr "%s de l’espaci disc utilizat."
 
+#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
+#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "Aplicacions"
 
@@ -140,7 +142,8 @@ msgstr "Detalhs de l’aplicacion"
 #: panels/keyboard/cc-input-chooser.ui:75
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
+#: shell/cc-window.ui:42
 msgid "Search"
 msgstr "Recercar"
 
@@ -1258,7 +1261,7 @@ msgstr[0] "%d ora"
 msgstr[1] "%d oras"
 
 #. Translators: Option for "Blank Screen" in "Power" panel
-#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:849
+#: panels/common/cc-util.c:183 panels/power/cc-power-panel.c:855
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
@@ -1337,7 +1340,7 @@ msgid "%e %B %Y, %R"
 msgstr "%e %B de %Y, %R"
 
 #. Translators: "city, country"
-#: panels/datetime/cc-datetime-panel.c:394
+#: panels/datetime/cc-datetime-panel.c:398
 #, c-format
 msgctxt "timezone loc"
 msgid "%s, %s"
@@ -1345,7 +1348,7 @@ msgstr "%s, %s"
 
 #. Update the timezone on the listbow row
 #. Translators: "timezone (details)"
-#: panels/datetime/cc-datetime-panel.c:411
+#: panels/datetime/cc-datetime-panel.c:415
 #, c-format
 msgctxt "timezone desc"
 msgid "%s (%s)"
@@ -1565,13 +1568,13 @@ msgstr "diagnostics;crash;plantatge;avaria;fracàs;"
 
 #: panels/display/cc-display-panel.c:493
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:744
+#: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "I"
 
 #: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
-#: panels/power/cc-power-panel.c:731 panels/power/cc-power-panel.c:742
+#: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "O"
 
@@ -1593,8 +1596,8 @@ msgid "_Apply"
 msgstr "_Aplicar"
 
 #: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/network/cc-wifi-panel.ui:16
-#: panels/printers/new-printer-dialog.ui:64
+#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
 #: panels/user-accounts/cc-fingerprint-dialog.ui:44
@@ -2737,7 +2740,8 @@ msgstr ""
 "Metòdes per picar de simbòls e de variantas de letras en utilizant lo "
 "clavièr."
 
-#: panels/keyboard/cc-keyboard-panel.ui:82 shell/cc-window.ui:161
+#: panels/keyboard/cc-keyboard-panel.ui:82
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:162
 msgid "Keyboard Shortcuts"
 msgstr "Acorchis de clavièr"
 
@@ -2745,11 +2749,11 @@ msgstr "Acorchis de clavièr"
 msgid "View and Customize Shortcuts"
 msgstr "Veire e personalizar los acorchis"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:387
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
 msgid "Reset All Shortcuts?"
 msgstr "Reïnicializar totes los acorchis ?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:384
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2757,50 +2761,48 @@ msgstr ""
 "Reïnicializar totes los acorchis pòt tanben afectar vòstres acorchis "
 "personalizats. Aquesta accion es irreversibla."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:394
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:388
 #: panels/network/cc-network-panel.ui:26
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Anullar"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:395
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
 msgid "Reset All"
 msgstr "Reïnicializar tot"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:33
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:27
 msgid "Reset All…"
 msgstr "Reïnicializar tot…"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:34
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:28
 msgid "Reset all shortcuts to their default keybindings"
 msgstr "Reïnicializar totes los acorchis a lors combinasons per defaut"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:65
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:49
 msgid "Search Shortcuts"
 msgstr "Cercar d’acorchis"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:102
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:124
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:88
 msgid "No keyboard shortcut found"
 msgstr "Cap d'acorchi de clavièr pas trobat"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:103
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:125
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:89
 msgid "Try a different search."
 msgstr "Ensajatz una autra recèrca."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:140
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:138
 msgid "Add Custom Shortcuts"
 msgstr "Apondre un acorchi personalizat"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:141
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:139
 msgid "Set up custom shortcuts for launching apps, running scripts, and more."
 msgstr ""
 "Definir d'acorchis personalizats per lançar las aplicacions, executar de "
 "scripts e encara mai."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:145
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:143
 msgid "Add Shortcut"
 msgstr "Apondre un acorchi"
 
@@ -2999,54 +3001,54 @@ msgstr "Necessita una connexion Internet"
 msgid "microphone;recording;application;privacy;"
 msgstr "microfòn;enregistrament;aplicacion;confidencialitat;"
 
-#: panels/mouse/cc-mouse-panel.ui:18
+#: panels/mouse/cc-mouse-panel.ui:30 panels/wacom/cc-wacom-panel.ui:9
 #, fuzzy
 #| msgid "Test Your _Settings"
 msgid "Test _Settings"
 msgstr "Testar vòstres p_aramètres"
 
-#: panels/mouse/cc-mouse-panel.ui:32 panels/mouse/cc-mouse-panel.ui:78
+#: panels/mouse/cc-mouse-panel.ui:44 panels/mouse/cc-mouse-panel.ui:90
 msgid "Mouse"
 msgstr "Mirga"
 
-#: panels/mouse/cc-mouse-panel.ui:39
+#: panels/mouse/cc-mouse-panel.ui:51
 #: panels/multitasking/cc-multitasking-panel.ui:9
 msgid "General"
 msgstr "General"
 
-#: panels/mouse/cc-mouse-panel.ui:42
+#: panels/mouse/cc-mouse-panel.ui:54
 msgid "Primary Button"
 msgstr "Boton principal"
 
-#: panels/mouse/cc-mouse-panel.ui:43
+#: panels/mouse/cc-mouse-panel.ui:55
 #, fuzzy
 #| msgid "Sets the order of physical buttons on mice and touchpads."
 msgid "Order of physical buttons on mice and touchpads."
 msgstr ""
 "Definís l’òrdre dels botons fisics sus las mirgas e los pavats tactils."
 
-#: panels/mouse/cc-mouse-panel.ui:57
+#: panels/mouse/cc-mouse-panel.ui:69
 msgid "Left"
 msgstr "Esquèrra"
 
-#: panels/mouse/cc-mouse-panel.ui:64
+#: panels/mouse/cc-mouse-panel.ui:76
 msgid "Right"
 msgstr "Dreita"
 
-#: panels/mouse/cc-mouse-panel.ui:81 panels/mouse/cc-mouse-panel.ui:86
-#: panels/mouse/cc-mouse-panel.ui:189
+#: panels/mouse/cc-mouse-panel.ui:93 panels/mouse/cc-mouse-panel.ui:98
+#: panels/mouse/cc-mouse-panel.ui:200
 #, fuzzy
 #| msgid "_Pointer speed"
 msgid "Pointer Speed"
 msgstr "_Velocitat del puntador"
 
-#: panels/mouse/cc-mouse-panel.ui:89 panels/mouse/cc-mouse-panel.ui:197
+#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:208
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "Lenta"
 
-#: panels/mouse/cc-mouse-panel.ui:91 panels/mouse/cc-mouse-panel.ui:199
+#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:210
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 #, fuzzy
@@ -3055,113 +3057,114 @@ msgstr "Lenta"
 msgid "Fast"
 msgstr "Rapida"
 
-#: panels/mouse/cc-mouse-panel.ui:107 panels/mouse/cc-mouse-panel.ui:142
+#: panels/mouse/cc-mouse-panel.ui:119
+msgid "Mouse Acceleration"
+msgstr ""
+
+#: panels/mouse/cc-mouse-panel.ui:120
+msgid "Recommended for most users and applications"
+msgstr ""
+
+#: panels/mouse/cc-mouse-panel.ui:140
+msgid ""
+"Turning mouse acceleration off can allow faster and more precise movements, "
+"but can also make the mouse more difficult to use."
+msgstr ""
+
+#: panels/mouse/cc-mouse-panel.ui:152
 #, fuzzy
 #| msgid "_Pointer speed"
 msgid "Pointer Assistance"
 msgstr "_Velocitat del puntador"
 
-#: panels/mouse/cc-mouse-panel.ui:108
-msgid "Recommended for most users and applications"
-msgstr ""
-
-#. Translators: Preserve the line-break separating the two paragraphs.
-#: panels/mouse/cc-mouse-panel.ui:128
-msgid ""
-"Turning pointer assistance off can allow faster and more precise movements, "
-"but can also make the mouse more difficult to use.\n"
-"\n"
-"Pointer assistance is also known as pointer acceleration."
-msgstr ""
-
-#: panels/mouse/cc-mouse-panel.ui:150 panels/mouse/cc-mouse-panel.ui:253
+#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:264
 msgid "Scroll Direction"
 msgstr "Direccion del defilament"
 
-#: panels/mouse/cc-mouse-panel.ui:151 panels/mouse/cc-mouse-panel.ui:254
+#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:265
 msgid "Traditional"
 msgstr ""
 
-#: panels/mouse/cc-mouse-panel.ui:152 panels/mouse/cc-mouse-panel.ui:255
+#: panels/mouse/cc-mouse-panel.ui:162 panels/mouse/cc-mouse-panel.ui:266
 #, fuzzy
 #| msgid "Scrolling moves the content, not the view."
 msgid "Scrolling moves the view"
 msgstr "Lo compte sul servidor serà pas suprimit."
 
-#: panels/mouse/cc-mouse-panel.ui:153 panels/mouse/cc-mouse-panel.ui:256
+#: panels/mouse/cc-mouse-panel.ui:163 panels/mouse/cc-mouse-panel.ui:267
 msgid "Natural"
 msgstr ""
 
-#: panels/mouse/cc-mouse-panel.ui:154 panels/mouse/cc-mouse-panel.ui:257
+#: panels/mouse/cc-mouse-panel.ui:164 panels/mouse/cc-mouse-panel.ui:268
 #, fuzzy
 #| msgid "Scrolling moves the content, not the view."
 msgid "Scrolling moves the content"
 msgstr "Lo compte sul servidor serà pas suprimit."
 
-#: panels/mouse/cc-mouse-panel.ui:168 panels/mouse/cc-mouse-panel.ui:175
-#: panels/mouse/cc-mouse-panel.ui:181
+#: panels/mouse/cc-mouse-panel.ui:179 panels/mouse/cc-mouse-panel.ui:186
+#: panels/mouse/cc-mouse-panel.ui:192
 msgid "Touchpad"
 msgstr "Pavat tactil"
 
-#: panels/mouse/cc-mouse-panel.ui:194
+#: panels/mouse/cc-mouse-panel.ui:205
 #, fuzzy
 #| msgid "_Pointer speed"
 msgid "Pointer speed"
 msgstr "_Velocitat del puntador"
 
-#: panels/mouse/cc-mouse-panel.ui:217
+#: panels/mouse/cc-mouse-panel.ui:228
 #, fuzzy
 #| msgid "Click"
 msgid "Clicking"
 msgstr "Click"
 
-#: panels/mouse/cc-mouse-panel.ui:222
+#: panels/mouse/cc-mouse-panel.ui:233
 msgid "Tap to Click"
 msgstr "Picar per clicar"
 
-#: panels/mouse/cc-mouse-panel.ui:223
+#: panels/mouse/cc-mouse-panel.ui:234
 msgid "Quickly touch the touchpad to click"
 msgstr ""
 
-#: panels/mouse/cc-mouse-panel.ui:229
+#: panels/mouse/cc-mouse-panel.ui:240
 msgid "Tap to click"
 msgstr "Tocar per clicar"
 
-#: panels/mouse/cc-mouse-panel.ui:240
+#: panels/mouse/cc-mouse-panel.ui:251
 msgid "Scrolling"
 msgstr "Defilament"
 
-#: panels/mouse/cc-mouse-panel.ui:243
+#: panels/mouse/cc-mouse-panel.ui:254
 msgid "Scroll Method"
 msgstr "Metòde de defilament"
 
-#: panels/mouse/cc-mouse-panel.ui:244
+#: panels/mouse/cc-mouse-panel.ui:255
 msgid "Two Finger"
 msgstr "Dos dets"
 
-#: panels/mouse/cc-mouse-panel.ui:245
+#: panels/mouse/cc-mouse-panel.ui:256
 msgid "Drag two fingers on the touchpad"
 msgstr ""
 
-#: panels/mouse/cc-mouse-panel.ui:246
+#: panels/mouse/cc-mouse-panel.ui:257
 msgid "Edge"
 msgstr ""
 
-#: panels/mouse/cc-mouse-panel.ui:247
+#: panels/mouse/cc-mouse-panel.ui:258
 msgid "Drag one finger on the edge"
 msgstr ""
 
-#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:98
+#: panels/mouse/cc-mouse-test.c:68 panels/mouse/cc-mouse-test.ui:96
 msgid "Single Click"
 msgstr "Clic simple"
 
-#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:112
+#: panels/mouse/cc-mouse-test.c:70 panels/mouse/cc-mouse-test.ui:110
 #, fuzzy
 #| msgid "Double-Click Delay"
 msgid "Double Click"
 msgstr "Relambi del clic doble"
 
-#: panels/mouse/cc-mouse-test.ui:26
+#: panels/mouse/cc-mouse-test.ui:24
 #, fuzzy
 #| msgid "Mouse & Touchpad"
 msgid "Test Mouse & Touchpad"
@@ -3404,7 +3407,7 @@ msgstr "_Ignorar los òstes"
 #. * translators: This is the format string for the text shown underneath the Wi-Fi QR code.
 #. * The string placeholder will be replaced by the Wi-Fi networks SSID.
 #.
-#: panels/network/cc-qr-code-dialog.c:128
+#: panels/network/cc-qr-code-dialog.c:133
 #, fuzzy, c-format
 #| msgid "Switch off to connect to a Wi-Fi network"
 msgid "Scan the QR code to connect to the network <b>%s</b>."
@@ -4656,11 +4659,6 @@ msgstr "Destorbar _pas"
 msgid "_Lock Screen Notifications"
 msgstr "Notificacions sus _l'ecran de verrolhatge"
 
-#. List of apps.
-#: panels/notifications/cc-notifications-panel.ui:26
-msgid "Applications"
-msgstr "Aplicacions"
-
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "Controlar quinas notificacions s'afichan e lor contengut"
@@ -4868,7 +4866,7 @@ msgid "Gaming input device"
 msgstr "Periferic d’entrada per jòcs"
 
 #. TRANSLATORS: secondary battery, misc
-#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:257
+#: panels/power/cc-battery-row.c:218 panels/power/cc-power-panel.c:263
 #: panels/power/cc-power-panel.ui:58
 msgid "Battery"
 msgstr "Batariá"
@@ -4887,51 +4885,59 @@ msgstr "Segondària"
 msgid "Batteries"
 msgstr "Batariás"
 
-#: panels/power/cc-power-panel.c:514
+#. Translators: UPS is an Uninterruptible Power Supply:
+#. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
+#: panels/power/cc-power-panel.c:260
+#, fuzzy
+#| msgid "USB"
+msgid "UPS"
+msgstr "USB"
+
+#: panels/power/cc-power-panel.c:520
 msgid "When _idle"
 msgstr "Quand _inactiu"
 
-#: panels/power/cc-power-panel.c:674
+#: panels/power/cc-power-panel.c:680
 msgid "Suspend"
 msgstr "Metre en velha"
 
-#: panels/power/cc-power-panel.c:675
+#: panels/power/cc-power-panel.c:681
 msgid "Power Off"
 msgstr "Atudar"
 
-#: panels/power/cc-power-panel.c:676
+#: panels/power/cc-power-panel.c:682
 msgid "Hibernate"
 msgstr "Ivernar"
 
-#: panels/power/cc-power-panel.c:677
+#: panels/power/cc-power-panel.c:683
 msgid "Nothing"
 msgstr "Pas res"
 
-#: panels/power/cc-power-panel.c:733
+#: panels/power/cc-power-panel.c:739
 msgid "When on battery power"
 msgstr "Quand sus batariá"
 
-#: panels/power/cc-power-panel.c:735
+#: panels/power/cc-power-panel.c:741
 msgid "When plugged in"
 msgstr "Quand lo cable es brancat"
 
-#: panels/power/cc-power-panel.c:856
+#: panels/power/cc-power-panel.c:862
 msgctxt "Idle time"
 msgid "Never"
 msgstr "Pas jamai"
 
-#: panels/power/cc-power-panel.c:940
+#: panels/power/cc-power-panel.c:946
 msgid "Automatic suspend"
 msgstr "Mesa en _velha automatica"
 
-#: panels/power/cc-power-panel.c:1036
+#: panels/power/cc-power-panel.c:1042
 msgid ""
 "Performance mode temporarily disabled due to high operating temperature."
 msgstr ""
 "Mòde performança temporàriament indisponible a causa d’una temperatura de "
 "foncionament nauta."
 
-#: panels/power/cc-power-panel.c:1038
+#: panels/power/cc-power-panel.c:1044
 msgid ""
 "Lap detected: performance mode temporarily unavailable. Move the device to a "
 "stable surface to restore."
@@ -4939,11 +4945,11 @@ msgstr ""
 "Lap detectada : mòde performança temporàriament desactivat.Desplaçatz lo "
 "periferic sus una susfàcia establa per restaurar."
 
-#: panels/power/cc-power-panel.c:1040
+#: panels/power/cc-power-panel.c:1046
 msgid "Performance mode temporarily disabled."
 msgstr "Mòde performança temporàriament indisponible."
 
-#: panels/power/cc-power-panel.c:1082
+#: panels/power/cc-power-panel.c:1088
 msgid ""
 "Low battery: power saver enabled. Previous mode will be restored when "
 "battery is sufficiently charged."
@@ -4952,13 +4958,13 @@ msgstr ""
 "restablit un còp que la batariá aja sufisentament cargat."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1090
+#: panels/power/cc-power-panel.c:1096
 #, c-format
 msgid "Power Saver mode activated by “%s”."
 msgstr "Mòde estalvi activat per « %s »."
 
 #. translators: "%s" is an application name
-#: panels/power/cc-power-panel.c:1094
+#: panels/power/cc-power-panel.c:1100
 #, c-format
 msgid "Performance mode activated by “%s”."
 msgstr "Mòde performança activat per « %s »."
@@ -5312,7 +5318,7 @@ msgstr "Imprimenta LPD"
 #: panels/printers/pp-ipp-option-widget.c:64
 #: panels/printers/pp-ppd-option-widget.c:69
 msgid "One Sided"
-msgstr "Recto"
+msgstr "Rècto"
 
 #. Translators: this is an option of "Two Sided"
 #: panels/printers/pp-ipp-option-widget.c:66
@@ -5511,7 +5517,7 @@ msgstr "Lo servidor necessita una autentificacion"
 
 #: panels/printers/pp-options-dialog.c:87
 msgid "Two Sided"
-msgstr "Recto verso"
+msgstr "Rècto vèrso"
 
 #: panels/printers/pp-options-dialog.c:88
 msgid "Paper Type"
@@ -5542,7 +5548,7 @@ msgstr "Paginas per costat"
 #. Translators: This option sets whether to print on both sides of paper
 #: panels/printers/pp-options-dialog.c:525
 msgid "Two-sided"
-msgstr "Recto-verso"
+msgstr "Rècto vèrso"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
 #: panels/printers/pp-options-dialog.c:537
@@ -6864,7 +6870,7 @@ msgstr "La presa en carga de Thunderbolt es estada desactivada dins lo BIOS."
 msgid "Thunderbolt security level could not be determined."
 msgstr "Lo nivèl de seguretat Thunderbolt a pas pogut èsser determinat."
 
-#: panels/thunderbolt/cc-bolt-panel.c:679
+#: panels/thunderbolt/cc-bolt-panel.c:694
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Error de bascula en mòde dirècte : %s"
@@ -7621,15 +7627,13 @@ msgstr "Totjorn"
 
 #: panels/usage/cc-usage-panel.c:347
 #, fuzzy
-#| msgid "Delete all the temporary files?"
-msgid "Delete all the recent files?"
-msgstr "Suprimir totes los fichièrs temporaris ?"
+#| msgid "_Clear History"
+msgid "Clear File History?"
+msgstr "_Escafar l’istoric"
 
 #: panels/usage/cc-usage-panel.c:348
-#, fuzzy
-#| msgid "All the temporary files will be permanently deleted."
-msgid "All the recent files will be permanently deleted."
-msgstr "Totes los fichièrs temporaris seràn definitivament suprimits."
+msgid "After clearing, lists of recently used files will appear empty."
+msgstr ""
 
 #: panels/usage/cc-usage-panel.c:349
 msgid "_Clear History"
@@ -8721,10 +8725,6 @@ msgstr ""
 msgid "Calibrate"
 msgstr "Calibrar"
 
-#: panels/wacom/cc-wacom-panel.ui:9
-msgid "Test Your _Settings"
-msgstr "Testar vòstres p_aramètres"
-
 #: panels/wacom/cc-wacom-panel.ui:56
 msgid "No tablet detected"
 msgstr "Cap de tauleta  pas detectada"
@@ -9404,15 +9404,15 @@ msgstr "Panèls disponibles :"
 msgid "All Settings"
 msgstr "Totes los paramètres"
 
-#: shell/cc-window.ui:53 shell/cc-window.ui:55
+#: shell/cc-window.ui:54 shell/cc-window.ui:56
 msgid "Main Menu"
 msgstr "Menú principal"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:154
 msgid "Warning: Development Version"
 msgstr "Avertiment : version de desvolopament"
 
-#: shell/cc-window.ui:154
+#: shell/cc-window.ui:155
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9422,7 +9422,7 @@ msgstr ""
 "desvolopament. Poiriatz rescontrar de compòrtaments incorrèctes del sistèma, "
 "de pèrdas de donadas e d’autres problèmas imprevistes. "
 
-#: shell/cc-window.ui:165
+#: shell/cc-window.ui:166
 msgid "Help"
 msgstr "Ajuda"
 
@@ -9533,6 +9533,22 @@ msgstr[1] "%u entradas"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Sons sistèma"
+
+#~ msgid "Applications"
+#~ msgstr "Aplicacions"
+
+#, fuzzy
+#~| msgid "Delete all the temporary files?"
+#~ msgid "Delete all the recent files?"
+#~ msgstr "Suprimir totes los fichièrs temporaris ?"
+
+#, fuzzy
+#~| msgid "All the temporary files will be permanently deleted."
+#~ msgid "All the recent files will be permanently deleted."
+#~ msgstr "Totes los fichièrs temporaris seràn definitivament suprimits."
+
+#~ msgid "Test Your _Settings"
+#~ msgstr "Testar vòstres p_aramètres"
 
 #~ msgid "Camera is Turned Off"
 #~ msgstr "La camèra es inactiva"
