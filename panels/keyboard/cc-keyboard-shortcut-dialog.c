@@ -340,6 +340,8 @@ on_reset_all_dialog_response_cb (GtkDialog                *dialog,
 {
   guint n_items, j_items;
 
+  gtk_window_destroy (GTK_WINDOW (dialog));
+
   if (response != GTK_RESPONSE_ACCEPT)
     return;
 
