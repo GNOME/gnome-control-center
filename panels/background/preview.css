@@ -49,11 +49,11 @@ background-preview .window.front.dark .header-bar {
 }
 
 .background-preview-button:checked {
-  box-shadow: 0 0 0 3px @accent_color;
+  box-shadow: 0 0 0 3px @accent_bg_color;
 }
 
 .background-preview-button:focus:focus-visible {
-  box-shadow: 0 0 0 3px alpha(@accent_color, .3);
+  box-shadow: 0 0 0 3px @accent_bg_color, 0 0 0 6px alpha(@accent_color, .3);
 }
 
 .background-preview-button:checked:focus:focus-visible {
@@ -94,4 +94,68 @@ flowboxchild.active-item .selected-check {
   min-width: 0;
   min-height: 0;
   margin: 6px;
+}
+
+.accent-button {
+  border-radius: 9999px;
+  padding: 3px;
+  background: var(--accent-bg-color);
+  min-width: 24px;
+  min-height: 24px;
+  outline: none;
+  background-clip: content-box;
+  box-shadow: none;
+}
+
+.accent-button:checked {
+  box-shadow: 0 0 0 3px var(--accent-bg-color);
+}
+
+.accent-button:focus:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.accent-button:checked:focus:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-bg-color),
+              0 0 0 6px color-mix(in srgb, var(--accent-color) 30%, transparent);
+}
+
+.blue, .teal, .green, .yellow, .orange, .red, .pink, .purple, .slate {
+  --accent-color: oklab(from var(--accent-bg-color) var(--standalone-color-oklab));
+}
+
+.blue {
+  --accent-bg-color: var(--accent-blue);
+}
+
+.teal {
+  --accent-bg-color: var(--accent-teal);
+}
+
+.green {
+  --accent-bg-color: var(--accent-green);
+}
+
+.yellow {
+  --accent-bg-color: var(--accent-yellow);
+}
+
+.orange {
+  --accent-bg-color: var(--accent-orange);
+}
+
+.red {
+  --accent-bg-color: var(--accent-red);
+}
+
+.pink {
+  --accent-bg-color: var(--accent-pink);
+}
+
+.purple {
+  --accent-bg-color: var(--accent-purple);
+}
+
+.slate {
+  --accent-bg-color: var(--accent-slate);
 }
