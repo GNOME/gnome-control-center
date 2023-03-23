@@ -32,8 +32,8 @@ struct _CcSplitRow
   GtkCheckButton    *alternative_option_checkbutton;
   GtkCheckButton    *default_option_checkbutton;
 
-  const gchar       *alternative_resource_path;
-  const gchar       *default_resource_path;
+  gchar             *alternative_resource_path;
+  gchar             *default_resource_path;
 
   gchar             *alternative_option_title;
   gchar             *alternative_option_subtitle;
@@ -117,6 +117,8 @@ cc_split_row_dispose (GObject *object)
 {
   CcSplitRow *self = CC_SPLIT_ROW (object);
 
+  g_clear_pointer (&self->default_resource_path, g_free);
+  g_clear_pointer (&self->alternative_resource_path, g_free);
   g_clear_pointer (&self->alternative_option_title, g_free);
   g_clear_pointer (&self->alternative_option_subtitle, g_free);
   g_clear_pointer (&self->default_option_title, g_free);
@@ -286,7 +288,7 @@ cc_split_row_set_default_illustration_resource (CcSplitRow  *self,
 
   g_return_if_fail (CC_IS_SPLIT_ROW (self));
 
-  self->default_resource_path = resource_path;
+  g_set_str (&self->default_resource_path, resource_path);
   media_file = gtk_media_file_new_for_resource (resource_path);
 
   gtk_picture_set_paintable (self->default_option_picture, GDK_PAINTABLE (media_file));
@@ -310,7 +312,7 @@ cc_split_row_set_alternative_illustration_resource (CcSplitRow  *self,
 
   g_return_if_fail (CC_IS_SPLIT_ROW (self));
 
-  self->alternative_resource_path = resource_path;
+  g_set_str (&self->alternative_resource_path, resource_path);
   media_file = gtk_media_file_new_for_resource (resource_path);
   gtk_media_stream_set_loop (media_file, TRUE);
 

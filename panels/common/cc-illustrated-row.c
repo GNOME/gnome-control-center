@@ -28,7 +28,7 @@ struct _CcIllustratedRow
 
   GtkBox            *picture_box;
   GtkPicture        *picture;
-  const gchar       *resource_path;
+  gchar             *resource_path;
 
   GtkMediaStream    *media_stream;
 };
@@ -99,6 +99,15 @@ cc_illustrated_row_set_property (GObject      *object,
 }
 
 static void
+cc_illustrated_row_finalize (GObject *object)
+{
+  CcIllustratedRow *self = CC_ILLUSTRATED_ROW (object);
+
+  g_clear_pointer (&self->resource_path, g_free);
+  G_OBJECT_CLASS (cc_illustrated_row_parent_class)->finalize (object);
+}
+
+static void
 cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 {
   GObjectClass *object_class = G_OBJECT_CLASS (klass);
@@ -106,6 +115,7 @@ cc_illustrated_row_class_init (CcIllustratedRowClass *klass)
 
   object_class->get_property = cc_illustrated_row_get_property;
   object_class->set_property = cc_illustrated_row_set_property;
+  object_class->finalize = cc_illustrated_row_finalize;
 
   props[PROP_RESOURCE] =
     g_param_spec_string ("resource",
@@ -140,12 +150,13 @@ cc_illustrated_row_set_resource (CcIllustratedRow *self,
   if (self->media_stream != NULL)
     g_clear_object (&self->media_stream);
 
-  self->resource_path = resource_path;
-  self->media_stream = gtk_media_file_new_for_resource (resource_path);
+  g_set_str (&self->resource_path, resource_path);
+  self->media_stream = gtk_media_file_new_for_resource (self->resource_path);
 
   gtk_picture_set_paintable (self->picture, GDK_PAINTABLE (self->media_stream));
   gtk_widget_set_visible (GTK_WIDGET (self->picture_box),
-                          resource_path != NULL && g_strcmp0 (resource_path, "") != 0);
+                          self->resource_path != NULL &&
+                          g_strcmp0 (self->resource_path, "") != 0);
 
   g_object_notify_by_pspec (G_OBJECT (self), props[PROP_RESOURCE]);
 }
