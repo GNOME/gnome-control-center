@@ -203,6 +203,7 @@ cc_sharing_networks_new_row (const char        *uuid,
   const char *icon_name;
 
   row = adw_action_row_new ();
+  adw_preferences_row_set_use_markup (ADW_PREFERENCES_ROW (row), FALSE);
 
   if (g_strcmp0 (carrier_type, "802-11-wireless") == 0) {
     icon_name = "network-wireless-offline-symbolic";
@@ -238,6 +239,7 @@ cc_sharing_networks_new_current_row (CcSharingNetworks *self)
   GtkWidget *row, *w;
 
   row = adw_action_row_new ();
+  adw_preferences_row_set_use_markup (ADW_PREFERENCES_ROW (row), FALSE);
 
   /* Icon */
   w = gtk_image_new_from_icon_name ("image-missing");
