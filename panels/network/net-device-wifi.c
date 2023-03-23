@@ -54,7 +54,7 @@ struct _NetDeviceWifi
         AdwBin                   parent;
 
         AdwWindowTitle          *wifi_headerbar_title;
-        GtkListBoxRow           *connect_hidden_row;
+        AdwPreferencesGroup     *details_box;
         GtkSwitch               *device_off_switch;
         GtkBox                  *header_box;
         GtkPopover              *header_button_popover;
@@ -64,7 +64,11 @@ struct _NetDeviceWifi
         CcListRow               *hotspot_password_row;
         GtkBox                  *listbox_box;
         GtkStack                *stack;
-        GtkListBoxRow           *start_hotspot_row;
+
+        CcListRow *device_enable_row;
+        CcListRow *saved_network_row;
+        CcListRow *connect_hidden_row;
+        CcListRow *hotspot_row;
 
         CcPanel                 *panel;
         NMClient                *client;
@@ -113,7 +117,7 @@ wireless_enabled_toggled (NetDeviceWifi *self)
         enabled = nm_client_wireless_get_enabled (self->client);
 
         self->updating_device = TRUE;
-        gtk_switch_set_active (self->device_off_switch, enabled);
+        g_object_set (self->device_enable_row, "active", enabled, NULL);
         if (!enabled)
                 disable_scan_timeout (self);
         gtk_widget_set_sensitive (GTK_WIDGET (self->connect_hidden_row), enabled);
@@ -374,7 +378,7 @@ device_off_switch_changed_cb (NetDeviceWifi *self)
         if (self->updating_device)
                 return;
 
-        active = gtk_switch_get_active (self->device_off_switch);
+        active = cc_list_row_get_active (self->device_enable_row);
         nm_client_dbus_set_property (self->client,
                                      NM_DBUS_PATH,
                                      NM_DBUS_INTERFACE,
@@ -392,7 +396,6 @@ connect_hidden (NetDeviceWifi *self)
 {
         GtkNative *native = gtk_widget_get_native (GTK_WIDGET (self));
         cc_network_panel_connect_to_hidden_network (GTK_WIDGET (native), self->client);
-        gtk_popover_popdown (self->header_button_popover);
 }
 
 static void
@@ -729,7 +732,6 @@ start_hotspot (NetDeviceWifi *self)
 
         g_signal_connect_after (self->hotspot_dialog, "response", G_CALLBACK (on_wifi_hotspot_dialog_respnse_cb), self);
         gtk_window_present (GTK_WINDOW (self->hotspot_dialog));
-        gtk_popover_popdown (self->header_button_popover);
 }
 
 static void
@@ -1116,22 +1118,24 @@ show_history (NetDeviceWifi *self)
           }
 
         gtk_window_present (GTK_WINDOW (dialog));
-        gtk_popover_popdown (self->header_button_popover);
 }
 
 static void
-on_popover_row_activated_cb (GtkListBox     *list,
-                             GtkListBoxRow  *row,
-                             gpointer        user_data)
+on_show_saved_network (NetDeviceWifi *self)
 {
-        NetDeviceWifi *self = user_data;
+        show_history (self);
+}
 
-        if (row == self->connect_hidden_row)
-                connect_hidden (self);
-        else if (row == self->start_hotspot_row)
-                start_hotspot (self);
-        else
-                show_history (self);
+static void
+on_connect_hidden_network (NetDeviceWifi *self)
+{
+        connect_hidden (self);
+}
+
+static void
+on_wifi_hotspot_network (NetDeviceWifi *self)
+{
+        start_hotspot (self);
 }
 
 static void
@@ -1188,20 +1192,22 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-wifi.ui");
 
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, wifi_headerbar_title);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, device_enable_row);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, saved_network_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, connect_hidden_row);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, device_off_switch);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, header_box);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, header_button_popover);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_row);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, details_box);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_box);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_name_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_security_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, hotspot_password_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, listbox_box);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, stack);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, start_hotspot_row);
 
         gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
-        gtk_widget_class_bind_template_callback (widget_class, on_popover_row_activated_cb);
+        gtk_widget_class_bind_template_callback (widget_class, on_show_saved_network);
+        gtk_widget_class_bind_template_callback (widget_class, on_connect_hidden_network);
+        gtk_widget_class_bind_template_callback (widget_class, on_wifi_hotspot_network);
 }
 
 static void
@@ -1228,13 +1234,13 @@ nm_client_on_permission_change (NetDeviceWifi *self) {
         caps = nm_device_wifi_get_capabilities (NM_DEVICE_WIFI (self->device));
         if (perm != NM_CLIENT_PERMISSION_RESULT_YES &&
                 perm != NM_CLIENT_PERMISSION_RESULT_AUTH) {
-                gtk_widget_set_tooltip_text (GTK_WIDGET (self->start_hotspot_row), _("System policy prohibits use as a Hotspot"));
-                gtk_widget_set_sensitive (GTK_WIDGET (self->start_hotspot_row), FALSE);
+                gtk_widget_set_tooltip_text (GTK_WIDGET (self->hotspot_row), _("System policy prohibits use as a Hotspot"));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->hotspot_row), FALSE);
         } else if (!(caps & (NM_WIFI_DEVICE_CAP_AP | NM_WIFI_DEVICE_CAP_ADHOC))) {
-                gtk_widget_set_tooltip_text (GTK_WIDGET (self->start_hotspot_row), _("Wireless device does not support Hotspot mode"));
-                gtk_widget_set_sensitive (GTK_WIDGET (self->start_hotspot_row), FALSE);
+                gtk_widget_set_tooltip_text (GTK_WIDGET (self->hotspot_row), _("Wireless device does not support Hotspot mode"));
+                gtk_widget_set_sensitive (GTK_WIDGET (self->hotspot_row), FALSE);
         } else
-                gtk_widget_set_sensitive (GTK_WIDGET (self->start_hotspot_row), TRUE);
+                gtk_widget_set_sensitive (GTK_WIDGET (self->hotspot_row), TRUE);
 
 }
 
@@ -1295,7 +1301,7 @@ GtkWidget *
 net_device_wifi_get_header_widget (NetDeviceWifi *self)
 {
         g_return_val_if_fail (NET_IS_DEVICE_WIFI (self), NULL);
-        return GTK_WIDGET (self->header_box);
+        return GTK_WIDGET (self->details_box);
 }
 
 GtkWidget *

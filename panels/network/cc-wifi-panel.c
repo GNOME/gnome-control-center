@@ -54,7 +54,7 @@ struct _CcWifiPanel
 
   /* Main widgets */
   GtkStack           *center_stack;
-  GtkStack           *header_stack;
+  GtkStack           *device_stack;
   GtkBox             *hotspot_box;
   GtkLabel           *list_label;
   GtkStack           *main_stack;
@@ -240,7 +240,7 @@ add_wifi_device (CcWifiPanel *self,
   /* And add to the header widgets */
   header_widget = net_device_wifi_get_header_widget (net_device);
 
-  gtk_stack_add_named (self->header_stack, header_widget, nm_device_get_udi (device));
+  gtk_stack_add_named (self->device_stack, header_widget, nm_device_get_udi (device));
 
   /* Setup custom title properties */
   g_ptr_array_add (self->devices, net_device);
@@ -288,8 +288,8 @@ remove_wifi_device (CcWifiPanel *self,
   child = gtk_stack_get_child_by_name (self->stack, id);
   gtk_stack_remove (self->stack, child);
 
-  child = gtk_stack_get_child_by_name (self->header_stack, id);
-  gtk_stack_remove (self->header_stack, child);
+  child = gtk_stack_get_child_by_name (self->device_stack, id);
+  gtk_stack_remove (self->device_stack, child);
 
   /* Update the title widget */
   update_devices_names (self);
@@ -854,7 +854,7 @@ cc_wifi_panel_class_init (CcWifiPanelClass *klass)
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/cc-wifi-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, center_stack);
-  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, header_stack);
+  gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, device_stack);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, hotspot_box);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, list_label);
   gtk_widget_class_bind_template_child (widget_class, CcWifiPanel, main_stack);

@@ -62,75 +62,58 @@
   </object>
 
   <!-- Box with the On/Off switch + menu button -->
-  <object class="GtkBox" id="header_box">
-    <property name="spacing">6</property>
-    <property name="halign">end</property>
+  <object class="AdwPreferencesGroup" id="details_box">
+
+    <!-- Enable Wi-Fi -->
     <child>
-      <object class="GtkSwitch" id="device_off_switch">
-        <property name="valign">center</property>
+      <object class="CcListRow" id="device_enable_row">
+        <property name="title" translatable="yes">Wi-Fi</property>
+        <property name="show-switch">True</property>
+        <property name="activatable">True</property>
         <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceWifi" swapped="yes"/>
         <accessibility>
           <property name="label" translatable="yes">Turn Wi-Fi off</property>
         </accessibility>
       </object>
     </child>
+
+    <!-- Saved Networks -->
     <child>
-      <object class="GtkMenuButton" id="header_button">
-        <property name="popover">header_button_popover</property>
-        <property name="icon_name">view-more-symbolic</property>
+      <object class="CcListRow" id="saved_network_row">
+        <property name="title" translatable="yes">Saved Networks</property>
+        <property name="show-arrow">True</property>
+        <property name="activatable">True</property>
+        <signal name="activated" handler="on_show_saved_network" object="NetDeviceWifi" swapped="yes"/>
         <accessibility>
-          <property name="label" translatable="yes">More options…</property>
+          <property name="label" translatable="yes">Show Saved Networks</property>
         </accessibility>
       </object>
     </child>
-  </object>
 
-  <!-- Menu Popover -->
-  <object class="GtkPopover" id="header_button_popover">
-    <style>
-      <class name="menu" />
-    </style>
+    <!-- Connect To Hidden -->
     <child>
-      <object class="GtkListBox">
-        <property name="selection_mode">none</property>
-        <signal name="row_activated" handler="on_popover_row_activated_cb" />
-        <child>
-          <object class="GtkListBoxRow" id="connect_hidden_row">
-            <property name="activatable">True</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">_Connect to Hidden Network…</property>
-                <property name="use_underline">True</property>
-                <property name="xalign">0</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkListBoxRow" id="start_hotspot_row">
-            <property name="activatable">True</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">_Turn On Wi-Fi Hotspot…</property>
-                <property name="use_underline">True</property>
-                <property name="xalign">0</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkListBoxRow">
-            <property name="activatable">True</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">_Saved Networks</property>
-                <property name="use_underline">True</property>
-                <property name="xalign">0</property>
-              </object>
-            </child>
-          </object>
-        </child>
+      <object class="CcListRow" id="connect_hidden_row">
+        <property name="title" translatable="yes">_Connect to Hidden Network…</property>
+        <property name="use_underline">True</property>
+        <property name="show-arrow">True</property>
+        <property name="activatable">True</property>
+        <signal name="activated" handler="on_connect_hidden_network" object="NetDeviceWifi" swapped="yes"/>
+        <accessibility>
+          <property name="label" translatable="yes">Show Saved Networks</property>
+        </accessibility>
       </object>
     </child>
+
+    <!-- Enable Wi-Fi Hotspot -->
+    <child>
+      <object class="CcListRow" id="hotspot_row">
+        <property name="title" translatable="yes">_Turn On Wi-Fi Hotspot…</property>
+        <property name="use_underline">True</property>
+        <property name="show-arrow">True</property>
+        <property name="activatable">True</property>
+        <signal name="activated" handler="on_wifi_hotspot_network" object="NetDeviceWifi" swapped="yes"/>
+      </object>
+    </child>
+
   </object>
 </interface>
