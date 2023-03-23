@@ -272,6 +272,8 @@ static void
 cc_split_row_init (CcSplitRow *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+  gtk_widget_set_name (GTK_WIDGET (self), "split-row");
+  gtk_widget_add_css_class (GTK_WIDGET (self), "split-row");
 }
 
 const gchar *
