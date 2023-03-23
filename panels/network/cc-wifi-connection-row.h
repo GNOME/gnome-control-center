@@ -31,13 +31,15 @@ CcWifiConnectionRow *cc_wifi_connection_row_new                 (NMDeviceWifi  *
                                                                  NMConnection  *connection,
                                                                  GPtrArray     *aps,
                                                                  gboolean       checkable,
-                                                                 gboolean       known_connection);
+                                                                 gboolean       known_connection,
+                                                                 gboolean       forgettable);
 
 gboolean             cc_wifi_connection_row_get_checkable       (CcWifiConnectionRow   *row);
 gboolean             cc_wifi_connection_row_get_checked         (CcWifiConnectionRow   *row);
 NMDeviceWifi        *cc_wifi_connection_row_get_device          (CcWifiConnectionRow   *row);
 const GPtrArray     *cc_wifi_connection_row_get_access_points   (CcWifiConnectionRow   *row);
 NMConnection        *cc_wifi_connection_row_get_connection      (CcWifiConnectionRow   *row);
+gboolean             cc_wifi_connection_row_get_forgettable     (CcWifiConnectionRow   *row);
 
 void                 cc_wifi_connection_row_set_checked         (CcWifiConnectionRow   *row,
                                                                  gboolean               value);

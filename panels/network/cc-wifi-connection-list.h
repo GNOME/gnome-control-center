@@ -30,7 +30,8 @@ CcWifiConnectionList *cc_wifi_connection_list_new (NMClient     *client,
                                                    NMDeviceWifi *device,
                                                    gboolean      hide_unavailable,
                                                    gboolean      show_aps,
-                                                   gboolean      checkable);
+                                                   gboolean      checkable,
+                                                   gboolean      forgettable );
 
 
 void                  cc_wifi_connection_list_freeze (CcWifiConnectionList  *list);

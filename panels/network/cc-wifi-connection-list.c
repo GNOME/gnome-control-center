@@ -28,6 +28,7 @@ struct _CcWifiConnectionList
   gboolean       updating;
 
   gboolean       checkable;
+  gboolean       forgettable;
   gboolean       hide_unavailable;
   gboolean       show_aps;
 
@@ -59,7 +60,9 @@ static void on_device_ap_removed_cb (CcWifiConnectionList *self,
                                      NMAccessPoint        *ap,
                                      NMDeviceWifi         *device);
 static void on_row_configured_cb    (CcWifiConnectionList *self,
-                                    CcWifiConnectionRow  *row);
+                                     CcWifiConnectionRow  *row);
+static void on_row_forget_cb        (CcWifiConnectionList *self,
+                                     CcWifiConnectionRow  *row);
 static void on_row_show_qr_code_cb (CcWifiConnectionList *self,
                                     CcWifiConnectionRow  *row);
 
@@ -73,6 +76,7 @@ enum
   PROP_SHOW_APS,
   PROP_CLIENT,
   PROP_DEVICE,
+  PROP_FORGETTABLE,
   PROP_LAST
 };
 
@@ -132,10 +136,12 @@ cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
                                     connection,
                                     aps,
                                     self->checkable,
-                                    known_connection);
+                                    known_connection,
+                                    self->forgettable);
   gtk_list_box_append (self->listbox, GTK_WIDGET (res));
 
   g_signal_connect_object (res, "configure", G_CALLBACK (on_row_configured_cb), self, G_CONNECT_SWAPPED);
+  g_signal_connect_object (res, "forget", G_CALLBACK (on_row_forget_cb), self, G_CONNECT_SWAPPED);
   g_signal_connect_object (res, "show-qr-code", G_CALLBACK (on_row_show_qr_code_cb), self, G_CONNECT_SWAPPED);
 
   g_signal_emit_by_name (self, "add-row", res);
@@ -252,6 +258,12 @@ static void
 on_row_configured_cb (CcWifiConnectionList *self, CcWifiConnectionRow *row)
 {
   g_signal_emit_by_name (self, "configure", row);
+}
+
+static void
+on_row_forget_cb (CcWifiConnectionList *self, CcWifiConnectionRow *row)
+{
+  g_signal_emit_by_name (self, "forget", row);
 }
 
 static void
@@ -634,6 +646,10 @@ cc_wifi_connection_list_get_property (GObject    *object,
       g_value_set_object (value, self->device);
       break;
 
+    case PROP_FORGETTABLE:
+      g_value_set_object (value, self->forgettable);
+      break;
+
     default:
       G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
     }
@@ -667,6 +683,10 @@ cc_wifi_connection_list_set_property (GObject      *object,
 
     case PROP_DEVICE:
       self->device = g_value_dup_object (value);
+      break;
+
+    case PROP_FORGETTABLE:
+      self->forgettable = g_value_get_boolean (value);
       break;
 
     default:
@@ -714,6 +734,11 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
                          "The WiFi Device for this connection list",
                          NM_TYPE_DEVICE_WIFI,
                          G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
+  props[PROP_FORGETTABLE] =
+      g_param_spec_boolean ("forgettable", "forgettable",
+                           "Passed to the created rows to show/hide the checkbox for deletion",
+                           FALSE,
+                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY | G_PARAM_STATIC_STRINGS);
 
   g_object_class_install_properties (object_class,
                                      PROP_LAST,
@@ -729,6 +754,11 @@ cc_wifi_connection_list_class_init (CcWifiConnectionListClass *klass)
                 G_SIGNAL_RUN_LAST,
                 0, NULL, NULL, NULL,
                 G_TYPE_NONE, 1, CC_TYPE_WIFI_CONNECTION_ROW);
+  g_signal_new ("forget",
+               CC_TYPE_WIFI_CONNECTION_LIST,
+               G_SIGNAL_RUN_LAST,
+               0, NULL, NULL, NULL,
+               G_TYPE_NONE, 1, CC_TYPE_WIFI_CONNECTION_ROW);
   g_signal_new ("add-row",
                 CC_TYPE_WIFI_CONNECTION_LIST,
                 G_SIGNAL_RUN_LAST,
@@ -766,7 +796,8 @@ cc_wifi_connection_list_new (NMClient     *client,
                              NMDeviceWifi *device,
                              gboolean      hide_unavailable,
                              gboolean      show_aps,
-                             gboolean      checkable)
+                             gboolean      checkable,
+                             gboolean      forgettable)
 {
   return g_object_new (CC_TYPE_WIFI_CONNECTION_LIST,
                        "client", client,
@@ -774,6 +805,7 @@ cc_wifi_connection_list_new (NMClient     *client,
                        "hide-unavailable", hide_unavailable,
                        "show-aps", show_aps,
                        "checkable", checkable,
+                       "forgettable", forgettable,
                        NULL);
 }
 
