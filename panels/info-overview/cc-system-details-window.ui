@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<interface>
+  <template class="CcSystemDetailsWindow" parent="AdwWindow">
+    <property name="title" translatable="yes">System Details</property>
+    <property name="modal">True</property>
+    <property name="hide-on-close">True</property>
+    <property name="destroy_with_parent">True</property>
+    <property name="default-width">640</property>
+    <property name="default-height">420</property>
+    <property name="content">
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="AdwHeaderBar">
+            <child type="start">
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Copy</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+        </child>
+      </object>
+    </property>
+  </template>
+</interface>
