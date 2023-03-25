@@ -567,6 +567,8 @@ update_login_region (CcRegionPanel *self)
 
         if (self->system_region)
                 name = gnome_get_country_from_locale (self->system_region, self->system_region);
+        else if (self->system_language)
+                name = gnome_get_country_from_locale (self->system_language, self->system_language);
 
         if (!name)
                 name = gnome_get_country_from_locale (DEFAULT_LOCALE, DEFAULT_LOCALE);
