@@ -113,200 +113,82 @@
               <object class="GtkStackPage">
                 <property name="name">devices-listing</property>
                 <property name="child">
-                  <object class="GtkScrolledWindow">
-                    <property name="hscrollbar-policy">never</property>
-
+                  <object class="AdwPreferencesPage">
+                    <!-- Auth Mode -->
                     <child>
-                      <object class="GtkViewport">
-
+                      <object class="AdwPreferencesGroup">
+                        <property name="title" translatable="yes">Direct Access</property>
                         <child>
-                          <object class="GtkBox">
-                            <property name="orientation">horizontal</property>
-                            <property name="valign">start</property>
-
-                            <!-- Stub box -->
-                            <child>
+                          <object class="AdwActionRow" id="direct_access_row">
+                            <property name="title" translatable="yes" >Allow direct access to devices such as docks and external GPUs.</property>
+                            <child type="suffix">
                               <object class="GtkBox">
-                                <property name="hexpand">True</property>
-                              </object>
-                            </child>
+                                <property name="orientation">horizontal</property>
+                                <property name="spacing">6</property>
+                                <property name="halign">end</property>
+                                <property name="valign">center</property>
 
-                            <!-- center/content box -->
-                            <child>
-                              <object class="GtkBox">
-                                <property name="hexpand">True</property>
-                                <property name="spacing">32</property>
-                                <property name="margin_top">32</property>
-                                <property name="margin_bottom">32</property>
-                                <property name="margin-start">18</property>
-                                <property name="margin-end">18</property>
-                                <property name="orientation">vertical</property>
-
-                                <!-- Auth Mode -->
                                 <child>
-                                  <object class="GtkBox" id="authmode_box">
-                                    <property name="orientation">horizontal</property>
-                                    <property name="spacing">12</property>
-                                    <child>
-                                      <object class="AdwPreferencesGroup">
-                                        <property name="title" translatable="yes">Direct Access</property>
-
-                                        <child>
-                                          <object class="AdwActionRow" id="direct_access_row">
-                                            <property name="title" translatable="yes" >Allow direct access to devices such as docks and external GPUs.</property>
-                                            <child type="suffix">
-                                              <object class="GtkBox">
-                                                <property name="orientation">horizontal</property>
-                                                <property name="spacing">6</property>
-                                                <property name="halign">end</property>
-                                                <property name="valign">center</property>
-
-                                                <child>
-                                                  <object class="GtkSpinner" id="authmode_spinner">
-                                                    <property name="spinning">False</property>
-                                                  </object>
-                                                </child>
-
-                                                <child>
-                                                  <object class="GtkSwitch" id="authmode_switch">
-                                                    <property name="halign">end</property>
-                                                    <property name="active">True</property>
-                                                    <signal name="state-set"
-                                                            handler="on_authmode_state_set_cb"
-                                                            object="CcBoltPanel"
-                                                            swapped="yes" />
-                                                  </object>
-                                                </child>
-                                              </object>
-                                            </child>
-                                          </object>
-                                        </child>
-
-                                      </object>
-                                    </child>
+                                  <object class="GtkSpinner" id="authmode_spinner">
+                                    <property name="spinning">False</property>
                                   </object>
                                 </child>
 
-                                <!-- Stack: devices/no-devices -->
                                 <child>
-                                  <object class="GtkStack" id="devices_stack">
-                                    <property name="transition-type">crossfade</property>
+                                  <object class="GtkSwitch" id="authmode_switch">
+                                    <property name="halign">end</property>
+                                    <property name="active">True</property>
+                                    <signal name="state-set"
+                                            handler="on_authmode_state_set_cb"
+                                            object="CcBoltPanel"
+                                            swapped="yes" />
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
 
+                    <!-- Devices Group-->
+                    <child>
+                      <object class="AdwPreferencesGroup">
+                        <!-- Stack: devices/no-devices -->
+                        <child>
+                          <object class="GtkStack" id="devices_stack">
+                            <property name="transition-type">crossfade</property>
+
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="name">have-devices</property>
+                                <property name="child">
+                                  <object class="GtkBox">
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">32</property>
+
+                                    <!-- Pending Device List -->
                                     <child>
-                                      <object class="GtkStackPage">
-                                        <property name="name">have-devices</property>
-                                        <property name="child">
-                                          <object class="GtkBox">
-                                            <property name="orientation">vertical</property>
-                                            <property name="spacing">32</property>
+                                      <object class="GtkBox" id="pending_box">
+                                        <property name="visible">False</property>
+                                        <property name="orientation">vertical</property>
+                                        <property name="spacing">12</property>
 
-                                            <!-- Pending Device List -->
-                                            <child>
-                                              <object class="GtkBox" id="pending_box">
-                                                <property name="visible">False</property>
-                                                <property name="orientation">vertical</property>
-                                                <property name="spacing">12</property>
-
-                                                <!-- Pending Device List: Header  -->
-                                                <child>
-                                                  <object class="GtkBox" id="pending_header">
-                                                    <property name="hexpand">True</property>
-                                                    <property name="halign">start</property>
-                                                    <property name="spacing">6</property>
-                                                    <child>
-                                                      <object class="GtkImage">
-                                                        <property name="icon_name">dialog-warning-symbolic</property>
-                                                        <property name="icon_size">1</property>
-                                                      </object>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkLabel">
-                                                        <property name="label" translatable="yes">Pending Devices</property>
-                                                        <property name="xalign">0.0</property>
-                                                        <attributes>
-                                                          <attribute name="weight" value="bold"/>
-                                                        </attributes>
-                                                      </object>
-                                                    </child>
-                                                    <child>
-                                                      <object class="GtkSpinner" id="pending_spinner">
-                                                        <property name="hexpand">True</property>
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
-
-                                                <!-- Pending List: Devices  -->
-                                                <child>
-                                                  <object class="GtkFrame">
-                                                    <property name="valign">start</property>
-                                                    <property name="vexpand">False</property>
-                                                    <style>
-                                                      <class name="view" />
-                                                    </style>
-                                                    <child>
-                                                      <object class="GtkListBox" id="pending_list">
-                                                        <property name="selection-mode">none</property>
-                                                        <property name="can_focus">True</property>
-                                                        <signal name="row-activated"
-                                                                handler="on_device_entry_row_activated_cb"
-                                                                object="CcBoltPanel"
-                                                                swapped="yes" />
-                                                      </object>
-                                                    </child>
-                                                  </object>
-                                                </child>
-                                              </object>
-                                            </child>
-
-                                            <!-- Device List  -->
-                                            <child>
-                                              <object class="AdwPreferencesGroup" id="devices_box">
-                                                <property name="title" translatable="yes">Devices</property>
-                                                <property name="visible">False</property>
-
-
-                                                <!-- Device List: Devices  -->
-                                                <child>
-                                                  <object class="GtkListBox" id="devices_list">
-                                                    <property name="selection-mode">none</property>
-                                                    <signal name="row-activated"
-                                                            handler="on_device_entry_row_activated_cb"
-                                                            object="CcBoltPanel"
-                                                            swapped="yes" />
-                                                        <style>
-                                                          <class name="boxed-list"/>
-                                                        </style>
-                                                  </object>
-                                                </child>
-
-                                                <child>
-                                                  <object class="GtkSpinner" id="probing_spinner">
-                                                    <property name="halign">start</property>
-                                                  </object>
-                                                </child>
-
-                                              </object>
-                                            </child>
-
-                                          </object>
-                                        </property>
-                                      </object>
-                                    </child>
-
-                                    <!-- No Devices  -->
-                                    <child>
-                                      <object class="GtkStackPage">
-                                        <property name="name">no-devices</property>
-                                        <property name="child">
-                                          <object class="GtkBox">
+                                        <!-- Pending Device List: Header  -->
+                                        <child>
+                                          <object class="GtkBox" id="pending_header">
                                             <property name="hexpand">True</property>
                                             <property name="halign">start</property>
-                                            <property name="orientation">vertical</property>
                                             <property name="spacing">6</property>
                                             <child>
+                                              <object class="GtkImage">
+                                                <property name="icon_name">dialog-warning-symbolic</property>
+                                                <property name="icon_size">1</property>
+                                              </object>
+                                            </child>
+                                            <child>
                                               <object class="GtkLabel">
-                                                <property name="label" translatable="yes">Devices</property>
+                                                <property name="label" translatable="yes">Pending Devices</property>
                                                 <property name="xalign">0.0</property>
                                                 <attributes>
                                                   <attribute name="weight" value="bold"/>
@@ -314,33 +196,103 @@
                                               </object>
                                             </child>
                                             <child>
-                                              <object class="GtkLabel">
-                                                <property name="label" translatable="yes">No devices attached</property>
-                                                <property name="xalign">0.0</property>
+                                              <object class="GtkSpinner" id="pending_spinner">
+                                                <property name="hexpand">True</property>
                                               </object>
                                             </child>
                                           </object>
-                                        </property>
+                                        </child>
+
+                                        <!-- Pending List: Devices  -->
+                                        <child>
+                                          <object class="GtkFrame">
+                                            <property name="valign">start</property>
+                                            <property name="vexpand">False</property>
+                                            <style>
+                                              <class name="view" />
+                                            </style>
+                                            <child>
+                                              <object class="GtkListBox" id="pending_list">
+                                                <property name="selection-mode">none</property>
+                                                <property name="can_focus">True</property>
+                                                <signal name="row-activated"
+                                                        handler="on_device_entry_row_activated_cb"
+                                                        object="CcBoltPanel"
+                                                        swapped="yes" />
+                                              </object>
+                                            </child>
+                                          </object>
+                                        </child>
                                       </object>
-                                    </child> <!-- End of: No Devices  -->
+                                    </child>
+
+                                    <!-- Device List  -->
+                                    <child>
+                                      <object class="AdwPreferencesGroup" id="devices_box">
+                                        <property name="title" translatable="yes">Devices</property>
+                                        <property name="visible">False</property>
+
+
+                                        <!-- Device List: Devices  -->
+                                        <child>
+                                          <object class="GtkListBox" id="devices_list">
+                                            <property name="selection-mode">none</property>
+                                            <signal name="row-activated"
+                                                    handler="on_device_entry_row_activated_cb"
+                                                    object="CcBoltPanel"
+                                                    swapped="yes" />
+                                                <style>
+                                                  <class name="boxed-list"/>
+                                                </style>
+                                          </object>
+                                        </child>
+
+                                        <child>
+                                          <object class="GtkSpinner" id="probing_spinner">
+                                            <property name="halign">start</property>
+                                          </object>
+                                        </child>
+
+                                      </object>
+                                    </child>
 
                                   </object>
-                                </child> <!-- End of Stack: devices/no-devices -->
-
-                              </object>
-                            </child> <!-- End of enter/content box -->
-
-
-                            <!-- Stub box -->
-                            <child>
-                              <object class="GtkBox">
-                                <property name="hexpand">True</property>
+                                </property>
                               </object>
                             </child>
 
-                            <!-- End of content -->
+                            <!-- No Devices  -->
+                            <child>
+                              <object class="GtkStackPage">
+                                <property name="name">no-devices</property>
+                                <property name="child">
+                                  <object class="GtkBox">
+                                    <property name="hexpand">True</property>
+                                    <property name="halign">start</property>
+                                    <property name="orientation">vertical</property>
+                                    <property name="spacing">6</property>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label" translatable="yes">Devices</property>
+                                        <property name="xalign">0.0</property>
+                                        <attributes>
+                                          <attribute name="weight" value="bold"/>
+                                        </attributes>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkLabel">
+                                        <property name="label" translatable="yes">No devices attached</property>
+                                        <property name="xalign">0.0</property>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </property>
+                              </object>
+                            </child> <!-- End of: No Devices  -->
+
                           </object>
-                        </child>
+                        </child> <!-- End of Stack: devices/no-devices -->
                       </object>
                     </child>
                   </object>
