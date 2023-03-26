@@ -42,7 +42,6 @@ struct _CcNightLightPage {
   GtkWidget           *infobar_unsupported;
   GtkWidget           *infobar_unsupported_description;
   GtkWidget           *infobar_disabled;
-  GtkListBox          *listbox;
   GtkWidget           *scale_color_temperature;
   GtkWidget           *night_light_toggle_switch;
   GtkComboBox         *schedule_type_combo;
@@ -665,7 +664,6 @@ cc_night_light_page_class_init (CcNightLightPageClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_unsupported_description);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, infobar_disabled);
-  gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, listbox);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, night_light_toggle_switch);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, schedule_type_combo);
   gtk_widget_class_bind_template_child (widget_class, CcNightLightPage, scale_color_temperature);
