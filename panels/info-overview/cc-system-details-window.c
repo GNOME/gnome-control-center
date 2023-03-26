@@ -57,7 +57,7 @@ struct _CcSystemDetailsWindow
   CcInfoEntry       *firmware_version_row;
   CcInfoEntry       *memory_row;
   CcInfoEntry       *processor_row;
-  CcInfoEntry       *graphics_row;
+  GtkBox            *graphics_row;
   CcInfoEntry       *disk_row;
 
   /* Hardware Information */
@@ -176,15 +176,14 @@ gpu_data_free (GpuData *data)
   g_free (data);
 }
 
-static char *
+static GSList *
 get_renderer_from_switcheroo (void)
 {
   g_autoptr(GDBusProxy) switcheroo_proxy = NULL;
   g_autoptr(GVariant) variant = NULL;
   g_autoptr(GError) error = NULL;
-  GString *renderers_string;
   guint i, num_children;
-  GSList *renderers, *l;
+  GSList *renderers;
 
   switcheroo_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                     G_DBUS_PROXY_FLAGS_NONE,
@@ -208,7 +207,6 @@ get_renderer_from_switcheroo (void)
       return NULL;
     }
 
-  renderers_string = g_string_new (NULL);
   num_children = g_variant_n_children (variant);
   renderers = NULL;
   for (i = 0; i < num_children; i++)
@@ -257,38 +255,53 @@ get_renderer_from_switcheroo (void)
     }
 
   renderers = g_slist_sort (renderers, gpu_data_sort);
-  for (l = renderers; l != NULL; l = l->next)
-    {
-      GpuData *data = l->data;
-      if (renderers_string->len > 0)
-        g_string_append (renderers_string, " / ");
-      g_string_append (renderers_string, data->name);
-    }
-  g_slist_free_full (renderers, (GDestroyNotify) gpu_data_free);
 
-  if (renderers_string->len == 0)
-    {
-      g_string_free (renderers_string, TRUE);
-      return NULL;
-    }
-
-  return g_string_free (renderers_string, FALSE);
+  return renderers;
 }
 
-static gchar *
-get_graphics_hardware_string (void)
+static GSList *
+get_graphics_hardware_list (void)
 {
-  g_autofree char *discrete_renderer = NULL;
-  g_autofree char *renderer = NULL;
+  GSList *renderers = NULL;
 
-  renderer = get_renderer_from_switcheroo ();
-  if (!renderer)
-    renderer = get_renderer_from_session ();
-  if (!renderer)
-    renderer = get_renderer_from_helper (NULL);
-  if (!renderer)
-    return g_strdup (_("Unknown"));
-  return g_strdup (renderer);
+  renderers = get_renderer_from_switcheroo ();
+  
+  if (!renderers)
+    {
+      GpuData *gpu_data;
+      g_autofree char *renderer;
+      renderer = get_renderer_from_session ();
+      if (!renderer)
+        renderer = get_renderer_from_helper (NULL);
+      if (!renderer)
+        renderer = g_strdup (_("Unknown"));
+      
+      gpu_data = g_new0 (GpuData, 1);
+      gpu_data->name = g_strdup (renderer);
+      gpu_data->is_default = TRUE;
+      renderers = g_slist_prepend (renderers, gpu_data);
+    }
+  
+  return renderers;
+}
+
+static void
+create_graphics_rows (CcSystemDetailsWindow *self, GSList *devices)
+{
+  GSList *l;
+  guint i = 0;
+  GtkWidget *gpu_entry;
+
+  for (l = devices; l != NULL; l = l->next)
+    {
+      GpuData *data = l->data;
+      g_autofree char *name = data->name;
+      g_autofree char *label = g_strdup_printf (_("Graphics %d"), i++);
+      
+      gpu_entry = cc_info_entry_new (label, name);
+
+      gtk_box_append (self->graphics_row, gpu_entry);
+    }
 }
 
 char *
@@ -717,7 +730,7 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
   g_autofree char *hardware_model_text = NULL;
   g_autofree char *firmware_version_text = NULL;
   g_autofree char *kernel_version_text = NULL;
-  g_autofree gchar *graphics_hardware_string = NULL;
+  g_autofree GSList *graphics_hardware_list = NULL;
   g_autofree gchar *disk_capacity_string = NULL;
 
   cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
@@ -747,8 +760,8 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
   cpu_text = get_cpu_info ();
   cc_info_entry_set_value (self->processor_row, cpu_text);
 
-  graphics_hardware_string = get_graphics_hardware_string ();
-  cc_info_entry_set_value (self->graphics_row, graphics_hardware_string);
+  graphics_hardware_list = get_graphics_hardware_list ();
+  create_graphics_rows (self, graphics_hardware_list);
 
   disk_capacity_string = get_primary_disk_info ();
   if (disk_capacity_string == NULL)
