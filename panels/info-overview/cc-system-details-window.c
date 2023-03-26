@@ -296,7 +296,12 @@ create_graphics_rows (CcSystemDetailsWindow *self, GSList *devices)
     {
       GpuData *data = l->data;
       g_autofree char *name = data->name;
-      g_autofree char *label = g_strdup_printf (_("Graphics %d"), i++);
+      g_autofree char *label = NULL;
+
+      if (data->is_default)
+        label = g_strdup (_("Graphics"));
+      else
+        label = g_strdup_printf (_("Graphics %d"), ++i);
       
       gpu_entry = cc_info_entry_new (label, name);
 
