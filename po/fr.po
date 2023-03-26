@@ -39,8 +39,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center HEAD\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-18 11:25+0000\n"
-"PO-Revision-Date: 2023-03-01 11:54+0100\n"
+"POT-Creation-Date: 2023-03-26 06:33+0000\n"
+"PO-Revision-Date: 2023-03-26 11:49+0200\n"
 "Last-Translator: Guillaume Bernard <associations@guillaume-bernard.fr>\n"
 "Language-Team: GNOME French Team <gnomefr@traduc.org>\n"
 "Language: fr\n"
@@ -178,8 +178,7 @@ msgstr "Détails de l’application"
 #: panels/keyboard/cc-input-chooser.ui:75
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
-#: shell/cc-window.ui:42
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
 msgid "Search"
 msgstr "Recherche"
 
@@ -381,7 +380,7 @@ msgstr "Sélectionner une image"
 #: panels/background/cc-background-chooser.c:315
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
+#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:745
@@ -1581,37 +1580,33 @@ msgstr "Paramètres pour le signalement automatique de problèmes"
 msgid "diagnostics;crash;"
 msgstr "diagnostics;crash;plantage;"
 
-#: panels/display/cc-display-panel.c:493
+#: panels/display/cc-display-panel.c:496
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Activé"
 
-#: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
+#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Désactivé"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:936
 msgid "Apply Changes?"
 msgstr "Appliquer les changements ?"
 
-#: panels/display/cc-display-panel.c:936
+#: panels/display/cc-display-panel.c:941
 msgid "Changes Cannot be Applied"
 msgstr "Les changements ne peuvent être appliqués"
 
-#: panels/display/cc-display-panel.c:938
+#: panels/display/cc-display-panel.c:943
 msgid "This could be due to hardware limitations."
 msgstr "Cela peut venir de limitations matérielles."
 
-#: panels/display/cc-display-panel.ui:43
-#: panels/network/connection-editor/connection-editor.ui:21
-msgid "_Apply"
-msgstr "_Appliquer"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:89
+#: panels/display/cc-display-panel.ui:220
+#: panels/display/cc-display-panel.ui:259 panels/mouse/cc-mouse-panel.ui:22
 #: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
@@ -1622,34 +1617,39 @@ msgstr "_Appliquer"
 msgid "Back"
 msgstr "Précédent"
 
-#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:54
+#: panels/network/connection-editor/connection-editor.ui:21
+msgid "_Apply"
+msgstr "_Appliquer"
+
+#: panels/display/cc-display-panel.ui:111
 msgid "Display Settings Disabled"
 msgstr "Paramètres d’affichage désactivés"
 
-#: panels/display/cc-display-panel.ui:111
+#: panels/display/cc-display-panel.ui:122
 msgid "Multiple Displays"
 msgstr "Affichages multiples"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:120
+#: panels/display/cc-display-panel.ui:131
 msgid "Join"
 msgstr "Joindre"
 
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:138
 msgid "Mirror"
 msgstr "Cloner"
 
-#: panels/display/cc-display-panel.ui:155
+#: panels/display/cc-display-panel.ui:166
 msgid "Contains top bar and Activities"
 msgstr "Contient la barre supérieure et les activités"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:167
 msgid "Primary Display"
 msgstr "Écran principal"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:177
-#: panels/display/cc-display-panel.ui:216
+#: panels/display/cc-display-panel.ui:188
+#: panels/display/cc-display-panel.ui:227
 #: panels/display/cc-night-light-page.ui:117
 msgid "Night Light"
 msgstr "Mode nuit"
@@ -2751,7 +2751,7 @@ msgstr ""
 "clavier."
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:162
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:161
 msgid "Keyboard Shortcuts"
 msgstr "Raccourcis clavier"
 
@@ -2759,11 +2759,11 @@ msgstr "Raccourcis clavier"
 msgid "View and Customize Shortcuts"
 msgstr "Voir et personnaliser les raccourcis"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:382
 msgid "Reset All Shortcuts?"
 msgstr "Réinitialiser tous les raccourcis ?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:384
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:385
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2771,14 +2771,14 @@ msgstr ""
 "Réinitialiser tous les raccourcis peut aussi affecter vos raccourcis "
 "personnalisés. Cette action est irréversible."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:388
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
 #: panels/network/cc-network-panel.ui:26
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Annuler"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
 msgid "Reset All"
 msgstr "Tout réinitialiser"
 
@@ -3020,7 +3020,7 @@ msgstr "Restreindre l’accès au micro"
 msgid "microphone;recording;application;privacy;"
 msgstr "microphone;enregistrement;application;confidentialité;vie privée;"
 
-#: panels/mouse/cc-mouse-panel.ui:30 panels/wacom/cc-wacom-panel.ui:9
+#: panels/mouse/cc-mouse-panel.ui:30
 msgid "Test _Settings"
 msgstr "Tester les p_aramètres"
 
@@ -3068,7 +3068,7 @@ msgstr "Rapide"
 
 #: panels/mouse/cc-mouse-panel.ui:119
 msgid "Mouse Acceleration"
-msgstr ""
+msgstr "Accélération de la souris"
 
 #: panels/mouse/cc-mouse-panel.ui:120
 msgid "Recommended for most users and applications"
@@ -4887,10 +4887,8 @@ msgstr "Batteries"
 #. Translators: UPS is an Uninterruptible Power Supply:
 #. * https://en.wikipedia.org/wiki/Uninterruptible_power_supply
 #: panels/power/cc-power-panel.c:260
-#, fuzzy
-#| msgid "USB"
 msgid "UPS"
-msgstr "USB"
+msgstr "ASI"
 
 #: panels/power/cc-power-panel.c:520
 msgid "When _idle"
@@ -8616,6 +8614,10 @@ msgstr ""
 msgid "Calibrate"
 msgstr "Étalonner"
 
+#: panels/wacom/cc-wacom-panel.ui:9
+msgid "Test Your _Settings"
+msgstr "Tester vos p_aramètres"
+
 #: panels/wacom/cc-wacom-panel.ui:56
 msgid "No tablet detected"
 msgstr "Aucune tablette détectée"
@@ -9297,15 +9299,15 @@ msgstr "Volets disponibles :"
 msgid "All Settings"
 msgstr "Tous les paramètres"
 
-#: shell/cc-window.ui:54 shell/cc-window.ui:56
+#: shell/cc-window.ui:53 shell/cc-window.ui:55
 msgid "Main Menu"
 msgstr "Menu principal"
 
-#: shell/cc-window.ui:154
+#: shell/cc-window.ui:153
 msgid "Warning: Development Version"
 msgstr "Avertissement : version de développement"
 
-#: shell/cc-window.ui:155
+#: shell/cc-window.ui:154
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9315,7 +9317,7 @@ msgstr ""
 "développement. Vous pourriez rencontrer des comportements incorrects du "
 "système, des pertes de données et d’autres problèmes inattendus. "
 
-#: shell/cc-window.ui:166
+#: shell/cc-window.ui:165
 msgid "Help"
 msgstr "Aide"
 
@@ -9431,9 +9433,6 @@ msgstr "Sons système"
 
 #~ msgid "All the recent files will be permanently deleted."
 #~ msgstr "Tous les fichiers récents seront définitivement supprimés."
-
-#~ msgid "Test Your _Settings"
-#~ msgstr "Tester vos p_aramètres"
 
 #, c-format
 #~ msgid ""
