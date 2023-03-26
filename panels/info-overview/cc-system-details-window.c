@@ -17,15 +17,760 @@
  *
  */
 
+#include <config.h>
+
+#include "shell/cc-object-storage.h"
+
+#include "info-cleanup.h"
+
+#include <glib.h>
+#include <glib/gi18n.h>
+#include <gio/gio.h>
+#include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
+
+#include <glibtop/fsusage.h>
+#include <glibtop/mountlist.h>
+#include <glibtop/mem.h>
+#include <glibtop/sysinfo.h>
+#include <udisks/udisks.h>
+#include <gudev/gudev.h>
+
+#include <gdk/gdk.h>
+
+#ifdef GDK_WINDOWING_WAYLAND
+#include <gdk/wayland/gdkwayland.h>
+#endif
+#ifdef GDK_WINDOWING_X11
+#include <gdk/x11/gdkx.h>
+#endif
+
 #include "cc-system-details-window.h"
+#include "cc-info-entry.h"
 
 struct _CcSystemDetailsWindow
 {
   AdwWindow parent;
 
+  /* Hardware Information */
+  CcInfoEntry       *hardware_model_row;
+  CcInfoEntry       *firmware_version_row;
+  CcInfoEntry       *memory_row;
+  CcInfoEntry       *processor_row;
+  CcInfoEntry       *graphics_row;
+  CcInfoEntry       *disk_row;
+
+  /* Hardware Information */
+  CcInfoEntry       *os_name_row;
+  CcInfoEntry       *os_build_row;
+  CcInfoEntry       *os_type_row;
+  CcInfoEntry       *gnome_version_row;
+  CcInfoEntry       *windowing_system_row;
+  CcInfoEntry       *virtualization_row;
+  CcInfoEntry       *kernel_row;
 };
 
 G_DEFINE_TYPE (CcSystemDetailsWindow, cc_system_details_window, ADW_TYPE_WINDOW)
+
+static char *
+get_renderer_from_session (void)
+{
+  g_autoptr(GDBusProxy) session_proxy = NULL;
+  g_autoptr(GVariant) renderer_variant = NULL;
+  char *renderer;
+  g_autoptr(GError) error = NULL;
+
+  session_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SESSION,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 NULL,
+                                                 "org.gnome.SessionManager",
+                                                 "/org/gnome/SessionManager",
+                                                 "org.gnome.SessionManager",
+                                                 NULL, &error);
+  if (error != NULL)
+    {
+      g_warning ("Unable to connect to create a proxy for org.gnome.SessionManager: %s",
+                 error->message);
+      return NULL;
+    }
+
+  renderer_variant = g_dbus_proxy_get_cached_property (session_proxy, "Renderer");
+
+  if (!renderer_variant)
+    {
+      g_warning ("Unable to retrieve org.gnome.SessionManager.Renderer property");
+      return NULL;
+    }
+
+  renderer = info_cleanup (g_variant_get_string (renderer_variant, NULL));
+
+  return renderer;
+}
+
+/* @env is an array of strings with each pair of strings being the
+ * key followed by the value */
+static char *
+get_renderer_from_helper (const char **env)
+{
+  int status;
+  char *argv[] = { LIBEXECDIR "/gnome-control-center-print-renderer", NULL };
+  g_auto(GStrv) envp = NULL;
+  g_autofree char *renderer = NULL;
+  g_autoptr(GError) error = NULL;
+
+  g_debug ("About to launch '%s'", argv[0]);
+
+  if (env != NULL)
+    {
+      guint i;
+      g_debug ("With environment:");
+      envp = g_get_environ ();
+      for (i = 0; env != NULL && env[i] != NULL; i = i + 2)
+        {
+          g_debug ("  %s = %s", env[i], env[i+1]);
+          envp = g_environ_setenv (envp, env[i], env[i+1], TRUE);
+        }
+    }
+  else
+    {
+      g_debug ("No additional environment variables");
+    }
+
+  if (!g_spawn_sync (NULL, (char **) argv, envp, 0, NULL, NULL, &renderer, NULL, &status, &error))
+    {
+      g_debug ("Failed to get GPU: %s", error->message);
+      return NULL;
+    }
+
+  if (!g_spawn_check_wait_status (status, NULL))
+    return NULL;
+
+  if (renderer == NULL || *renderer == '\0')
+    return NULL;
+
+  return info_cleanup (renderer);
+}
+
+typedef struct {
+  char *name;
+  gboolean is_default;
+} GpuData;
+
+static int
+gpu_data_sort (gconstpointer a, gconstpointer b)
+{
+  GpuData *gpu_a = (GpuData *) a;
+  GpuData *gpu_b = (GpuData *) b;
+
+  if (gpu_a->is_default)
+    return 1;
+  if (gpu_b->is_default)
+    return -1;
+  return 0;
+}
+
+static void
+gpu_data_free (GpuData *data)
+{
+  g_free (data->name);
+  g_free (data);
+}
+
+static char *
+get_renderer_from_switcheroo (void)
+{
+  g_autoptr(GDBusProxy) switcheroo_proxy = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autoptr(GError) error = NULL;
+  GString *renderers_string;
+  guint i, num_children;
+  GSList *renderers, *l;
+
+  switcheroo_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                    G_DBUS_PROXY_FLAGS_NONE,
+                                                    NULL,
+                                                    "net.hadess.SwitcherooControl",
+                                                    "/net/hadess/SwitcherooControl",
+                                                    "net.hadess.SwitcherooControl",
+                                                    NULL, &error);
+  if (switcheroo_proxy == NULL)
+    {
+      g_debug ("Unable to connect to create a proxy for net.hadess.SwitcherooControl: %s",
+               error->message);
+      return NULL;
+    }
+
+  variant = g_dbus_proxy_get_cached_property (switcheroo_proxy, "GPUs");
+
+  if (!variant)
+    {
+      g_debug ("Unable to retrieve net.hadess.SwitcherooControl.GPUs property, the daemon is likely not running");
+      return NULL;
+    }
+
+  renderers_string = g_string_new (NULL);
+  num_children = g_variant_n_children (variant);
+  renderers = NULL;
+  for (i = 0; i < num_children; i++)
+    {
+      g_autoptr(GVariant) gpu;
+      g_autoptr(GVariant) name = NULL;
+      g_autoptr(GVariant) env = NULL;
+      g_autoptr(GVariant) default_variant = NULL;
+      const char *name_s;
+      g_autofree const char **env_s = NULL;
+      gsize env_len;
+      g_autofree char *renderer = NULL;
+      GpuData *gpu_data;
+
+      gpu = g_variant_get_child_value (variant, i);
+      if (!gpu ||
+          !g_variant_is_of_type (gpu, G_VARIANT_TYPE ("a{s*}")))
+        continue;
+
+      name = g_variant_lookup_value (gpu, "Name", NULL);
+      env = g_variant_lookup_value (gpu, "Environment", NULL);
+      if (!name || !env)
+        continue;
+      name_s = g_variant_get_string (name, NULL);
+      g_debug ("Getting renderer from helper for GPU '%s'", name_s);
+      env_s = g_variant_get_strv (env, &env_len);
+      if (env_s != NULL && env_len % 2 != 0)
+        {
+          g_autofree char *debug = NULL;
+          debug = g_strjoinv ("\n", (char **) env_s);
+          g_warning ("Invalid environment returned from switcheroo:\n%s", debug);
+          g_clear_pointer (&env_s, g_free);
+        }
+
+      renderer = get_renderer_from_helper (env_s);
+      default_variant = g_variant_lookup_value (gpu, "Default", NULL);
+
+      /* We could give up if we don't have a renderer, but that
+       * might just mean gnome-session isn't installed. We fall back
+       * to the device name in udev instead, which is better than nothing */
+
+      gpu_data = g_new0 (GpuData, 1);
+      gpu_data->name = g_strdup (renderer ? renderer : name_s);
+      gpu_data->is_default = default_variant ? g_variant_get_boolean (default_variant) : FALSE;
+      renderers = g_slist_prepend (renderers, gpu_data);
+    }
+
+  renderers = g_slist_sort (renderers, gpu_data_sort);
+  for (l = renderers; l != NULL; l = l->next)
+    {
+      GpuData *data = l->data;
+      if (renderers_string->len > 0)
+        g_string_append (renderers_string, " / ");
+      g_string_append (renderers_string, data->name);
+    }
+  g_slist_free_full (renderers, (GDestroyNotify) gpu_data_free);
+
+  if (renderers_string->len == 0)
+    {
+      g_string_free (renderers_string, TRUE);
+      return NULL;
+    }
+
+  return g_string_free (renderers_string, FALSE);
+}
+
+static gchar *
+get_graphics_hardware_string (void)
+{
+  g_autofree char *discrete_renderer = NULL;
+  g_autofree char *renderer = NULL;
+
+  renderer = get_renderer_from_switcheroo ();
+  if (!renderer)
+    renderer = get_renderer_from_session ();
+  if (!renderer)
+    renderer = get_renderer_from_helper (NULL);
+  if (!renderer)
+    return g_strdup (_("Unknown"));
+  return g_strdup (renderer);
+}
+
+char *
+get_os_name (void)
+{
+  g_autofree gchar *name = NULL;
+  g_autofree gchar *version_id = NULL;
+  g_autofree gchar *pretty_name = NULL;
+
+  name = g_get_os_info (G_OS_INFO_KEY_NAME);
+  version_id = g_get_os_info (G_OS_INFO_KEY_VERSION_ID);
+  pretty_name = g_get_os_info (G_OS_INFO_KEY_PRETTY_NAME);
+
+  if (pretty_name)
+    return g_steal_pointer (&pretty_name);
+  else if (name && version_id)
+    return g_strdup_printf ("%s %s", name, version_id);
+  else
+    return g_strdup (_("Unknown"));
+}
+
+static char *
+get_os_build_id (void)
+{
+  char *build_id = NULL;
+
+  build_id = g_get_os_info ("BUILD_ID");
+
+  return build_id;
+}
+
+static char *
+get_os_type (void)
+{
+  if (GLIB_SIZEOF_VOID_P == 8)
+    /* translators: This is the type of architecture for the OS */
+    return g_strdup_printf (_("64-bit"));
+  else
+    /* translators: This is the type of architecture for the OS */
+    return g_strdup_printf (_("32-bit"));
+}
+
+char *
+get_primary_disk_info (void)
+{
+  g_autoptr(UDisksClient) client = NULL;
+  GDBusObjectManager *manager;
+  g_autolist(GDBusObject) objects = NULL;
+  GList *l;
+  guint64 total_size;
+  g_autoptr(GError) error = NULL;
+
+  total_size = 0;
+
+  client = udisks_client_new_sync (NULL, &error);
+  if (client == NULL)
+    {
+      g_warning ("Unable to get UDisks client: %s. Disk information will not be available.",
+                 error->message);
+      return NULL;
+    }
+
+  manager = udisks_client_get_object_manager (client);
+  objects = g_dbus_object_manager_get_objects (manager);
+
+  for (l = objects; l != NULL; l = l->next)
+    {
+      UDisksDrive *drive;
+      drive = udisks_object_peek_drive (UDISKS_OBJECT (l->data));
+
+      /* Skip removable devices */
+      if (drive == NULL ||
+          udisks_drive_get_removable (drive) ||
+          udisks_drive_get_ejectable (drive))
+        {
+          continue;
+        }
+
+      total_size += udisks_drive_get_size (drive);
+    }
+
+  if (total_size > 0)
+      return g_format_size (total_size);
+
+  return NULL;
+}
+
+static char *
+get_hostnamed_property (const char *property_name)
+{
+  g_autoptr(GDBusProxy) hostnamed_proxy = NULL;
+  g_autoptr(GVariant) property_variant = NULL;
+  g_autoptr(GError) error = NULL;
+
+  hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                   G_DBUS_PROXY_FLAGS_NONE,
+                                                   NULL,
+                                                   "org.freedesktop.hostname1",
+                                                   "/org/freedesktop/hostname1",
+                                                   "org.freedesktop.hostname1",
+                                                   NULL,
+                                                   &error);
+  if (hostnamed_proxy == NULL)
+    {
+      g_debug ("Couldn't get hostnamed to start, bailing: %s", error->message);
+      return NULL;
+    }
+
+  property_variant = g_dbus_proxy_get_cached_property (hostnamed_proxy, property_name);
+  if (!property_variant)
+    {
+      g_debug ("Unable to retrieve org.freedesktop.hostname1.%s property", property_name);
+      return NULL;
+    }
+
+  return g_variant_dup_string (property_variant, NULL);
+}
+
+char *
+get_hardware_model_string (void)
+{
+  g_autofree char *vendor_string = NULL;
+  g_autofree char *model_string = NULL;
+
+  vendor_string = get_hostnamed_property ("HardwareVendor");
+  if (!vendor_string || g_strcmp0 (vendor_string, "") == 0)
+    return NULL;
+
+  model_string = get_hostnamed_property ("HardwareModel");
+  if (!model_string || g_strcmp0 (model_string, "") == 0)
+    return NULL;
+
+  return g_strdup_printf ("%s %s", vendor_string, model_string);
+}
+
+static char *
+get_firmware_version_string ()
+{
+  g_autofree char *firmware_version_string = NULL;
+
+  firmware_version_string = get_hostnamed_property ("FirmwareVersion");
+  if (!firmware_version_string || g_strcmp0 (firmware_version_string, "") == 0)
+    return NULL;
+
+  return g_steal_pointer (&firmware_version_string);
+}
+
+static char *
+get_kernel_version_string ()
+{
+  g_autofree char *kernel_name = NULL;
+  g_autofree char *kernel_release = NULL;
+
+  kernel_name = get_hostnamed_property ("KernelName");
+  if (!kernel_name || g_strcmp0 (kernel_name, "") == 0)
+    return NULL;
+
+  kernel_release = get_hostnamed_property ("KernelRelease");
+  if (!kernel_release || g_strcmp0 (kernel_release, "") == 0)
+    return NULL;
+
+  return g_strdup_printf ("%s %s", kernel_name, kernel_release);
+}
+
+char *
+get_cpu_info ()
+{
+  g_autoptr(GHashTable) counts = NULL;
+  g_autoptr(GString) cpu = NULL;
+  const glibtop_sysinfo *info;
+  GHashTableIter iter;
+  gpointer       key, value;
+  int            i;
+  int            j;
+
+  counts = g_hash_table_new (g_str_hash, g_str_equal);
+  info = glibtop_get_sysinfo ();
+
+  /* count duplicates */
+  for (i = 0; i != info->ncpu; ++i)
+    {
+      const char * const keys[] = { "model name", "cpu", "Processor" };
+      char *model;
+      int  *count;
+
+      model = NULL;
+
+      for (j = 0; model == NULL && j != G_N_ELEMENTS (keys); ++j)
+        {
+          model = g_hash_table_lookup (info->cpuinfo[i].values,
+                                       keys[j]);
+        }
+
+      if (model == NULL)
+          continue;
+
+      count = g_hash_table_lookup (counts, model);
+      if (count == NULL)
+        g_hash_table_insert (counts, model, GINT_TO_POINTER (1));
+      else
+        g_hash_table_replace (counts, model, GINT_TO_POINTER (GPOINTER_TO_INT (count) + 1));
+    }
+
+  cpu = g_string_new (NULL);
+  g_hash_table_iter_init (&iter, counts);
+  while (g_hash_table_iter_next (&iter, &key, &value))
+    {
+      g_autofree char *cleanedup = NULL;
+      int count;
+
+      count = GPOINTER_TO_INT (value);
+      cleanedup = info_cleanup ((const char *) key);
+      if (cpu->len != 0)
+        g_string_append_printf (cpu, " ");
+      if (count > 1)
+        g_string_append_printf (cpu, "%s \303\227 %d", cleanedup, count);
+      else
+        g_string_append_printf (cpu, "%s", cleanedup);
+    }
+
+  return g_strdup (cpu->str);
+}
+
+static struct {
+  const char *id;
+  const char *display;
+} const virt_tech[] = {
+  { "kvm", "KVM" },
+  { "qemu", "QEmu" },
+  { "vmware", "VMware" },
+  { "microsoft", "Microsoft" },
+  { "oracle", "Oracle" },
+  { "xen", "Xen" },
+  { "bochs", "Bochs" },
+  { "chroot", "chroot" },
+  { "openvz", "OpenVZ" },
+  { "lxc", "LXC" },
+  { "lxc-libvirt", "LXC (libvirt)" },
+  { "systemd-nspawn", "systemd (nspawn)" }
+};
+
+static void
+set_virtualization_label (CcSystemDetailsWindow *self,
+                          const char            *virt)
+{
+  const char *display_name;
+  guint i;
+
+  if (virt == NULL || *virt == '\0')
+    {
+      gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), FALSE);
+
+      return;
+    }
+
+  gtk_widget_set_visible (GTK_WIDGET (self->firmware_version_row), FALSE);
+
+  gtk_widget_set_visible (GTK_WIDGET (self->virtualization_row), TRUE);
+
+  display_name = NULL;
+  for (i = 0; i < G_N_ELEMENTS (virt_tech); i++)
+    {
+      if (g_str_equal (virt_tech[i].id, virt))
+        {
+          display_name = _(virt_tech[i].display);
+          break;
+        }
+    }
+
+  cc_info_entry_set_value (self->virtualization_row, display_name ? display_name : virt);
+}
+
+static void
+system_details_window_setup_virt (CcSystemDetailsWindow *self)
+{
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GDBusProxy) systemd_proxy = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  GVariant *inner;
+
+  systemd_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
+                                                 G_DBUS_PROXY_FLAGS_NONE,
+                                                 NULL,
+                                                 "org.freedesktop.systemd1",
+                                                 "/org/freedesktop/systemd1",
+                                                 "org.freedesktop.systemd1",
+                                                 NULL,
+                                                 &error);
+
+  if (systemd_proxy == NULL)
+    {
+      g_debug ("systemd not available, bailing: %s", error->message);
+      set_virtualization_label (self, NULL);
+      return;
+    }
+
+  variant = g_dbus_proxy_call_sync (systemd_proxy,
+                                    "org.freedesktop.DBus.Properties.Get",
+                                    g_variant_new ("(ss)", "org.freedesktop.systemd1.Manager", "Virtualization"),
+                                    G_DBUS_CALL_FLAGS_NONE,
+                                    -1,
+                                    NULL,
+                                    &error);
+  if (variant == NULL)
+    {
+      g_debug ("Failed to get property '%s': %s", "Virtualization", error->message);
+      set_virtualization_label (self, NULL);
+      return;
+    }
+
+  g_variant_get (variant, "(v)", &inner);
+  set_virtualization_label (self, g_variant_get_string (inner, NULL));
+}
+
+static const char *
+get_windowing_system (void)
+{
+  GdkDisplay *display;
+
+  display = gdk_display_get_default ();
+
+#if defined(GDK_WINDOWING_X11)
+  if (GDK_IS_X11_DISPLAY (display))
+    return _("X11");
+#endif /* GDK_WINDOWING_X11 */
+#if defined(GDK_WINDOWING_WAYLAND)
+  if (GDK_IS_WAYLAND_DISPLAY (display))
+    return _("Wayland");
+#endif /* GDK_WINDOWING_WAYLAND */
+  return C_("Windowing system (Wayland, X11, or Unknown)", "Unknown");
+}
+
+guint64
+get_ram_size_libgtop (void)
+{
+  glibtop_mem mem;
+
+  glibtop_get_mem (&mem);
+  return mem.total;
+}
+
+guint64
+get_ram_size_dmi (void)
+{
+  g_autoptr(GUdevClient) client = NULL;
+  g_autoptr(GUdevDevice) dmi = NULL;
+  const gchar * const subsystems[] = {"dmi", NULL };
+  guint64 ram_total = 0;
+  guint64 num_ram;
+  guint i;
+
+  client = g_udev_client_new (subsystems);
+  dmi = g_udev_client_query_by_sysfs_path (client, "/sys/devices/virtual/dmi/id");
+  if (!dmi)
+    return 0;
+  num_ram = g_udev_device_get_property_as_uint64 (dmi, "MEMORY_ARRAY_NUM_DEVICES");
+  for (i = 0; i < num_ram ; i++) {
+    g_autofree char *prop = NULL;
+
+    prop = g_strdup_printf ("MEMORY_DEVICE_%d_SIZE", i);
+    ram_total += g_udev_device_get_property_as_uint64 (dmi, prop);
+  }
+  return ram_total;
+}
+
+static char *
+get_gnome_version (GDBusProxy *proxy)
+{
+  g_autoptr(GVariant) variant = NULL;
+  const char *gnome_version = NULL;
+  if (!proxy)
+    return NULL;
+
+  variant = g_dbus_proxy_get_cached_property (proxy, "ShellVersion");
+  if (!variant)
+    return NULL;
+
+  gnome_version = g_variant_get_string (variant, NULL);
+  if (!gnome_version || *gnome_version == '\0')
+    return NULL;
+  return g_strdup (gnome_version);
+}
+
+static void
+shell_proxy_ready (GObject                *source,
+                   GAsyncResult           *res,
+                   CcSystemDetailsWindow  *self)
+{
+  g_autoptr(GDBusProxy) proxy = NULL;
+  g_autoptr(GError) error = NULL;
+  g_autoptr(GVariant) variant = NULL;
+  g_autofree char *gnome_version = NULL;
+
+  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
+  if (!proxy)
+    {
+      if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+        return;
+      g_warning ("Failed to contact gnome-shell: %s", error->message);
+    }
+
+  gnome_version = get_gnome_version (proxy);
+
+  if (!gnome_version)
+    {
+      /* translators: this is the placeholder string when the GNOME Shell
+       * version couldn't be loaded, eg. “GNOME Version: Not Available” */
+      cc_info_entry_set_value (self->gnome_version_row, _("Not Available"));
+    }
+  else
+    {
+      cc_info_entry_set_value (self->gnome_version_row, gnome_version);
+    }
+}
+
+static void
+system_details_window_setup_overview (CcSystemDetailsWindow *self)
+{
+  g_autofree gchar *gnome_version = NULL;
+  guint64 ram_size;
+  g_autofree char *memory_text = NULL;
+  g_autofree char *cpu_text = NULL;
+  g_autofree char *os_type_text = NULL;
+  g_autofree char *os_name_text = NULL;
+  g_autofree char *os_build_text = NULL;
+  g_autofree char *hardware_model_text = NULL;
+  g_autofree char *firmware_version_text = NULL;
+  g_autofree char *kernel_version_text = NULL;
+  g_autofree gchar *graphics_hardware_string = NULL;
+  g_autofree gchar *disk_capacity_string = NULL;
+
+  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
+                                       G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
+                                       G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+                                       "org.gnome.Shell",
+                                       "/org/gnome/Shell",
+                                       "org.gnome.Shell",
+                                       NULL,
+                                       (GAsyncReadyCallback) shell_proxy_ready,
+                                       self);
+
+  hardware_model_text = get_hardware_model_string ();
+  cc_info_entry_set_value (self->hardware_model_row, hardware_model_text);
+  gtk_widget_set_visible (GTK_WIDGET (self->hardware_model_row), hardware_model_text != NULL);
+
+  firmware_version_text = get_firmware_version_string ();
+  cc_info_entry_set_value (self->firmware_version_row, firmware_version_text);
+  gtk_widget_set_visible (GTK_WIDGET (self->firmware_version_row), firmware_version_text != NULL);
+
+  ram_size = get_ram_size_dmi ();
+  if (ram_size == 0)
+    ram_size = get_ram_size_libgtop ();
+  memory_text = g_format_size_full (ram_size, G_FORMAT_SIZE_IEC_UNITS);
+  cc_info_entry_set_value (self->memory_row, memory_text);
+
+  cpu_text = get_cpu_info ();
+  cc_info_entry_set_value (self->processor_row, cpu_text);
+
+  graphics_hardware_string = get_graphics_hardware_string ();
+  cc_info_entry_set_value (self->graphics_row, graphics_hardware_string);
+
+  disk_capacity_string = get_primary_disk_info ();
+  if (disk_capacity_string == NULL)
+    disk_capacity_string = g_strdup (_("Unknown"));
+  cc_info_entry_set_value (self->disk_row, disk_capacity_string);
+
+  os_name_text = get_os_name ();
+  cc_info_entry_set_value (self->os_name_row, os_name_text);
+
+  os_build_text = get_os_build_id ();
+  cc_info_entry_set_value (self->os_build_row, os_build_text);
+  gtk_widget_set_visible (GTK_WIDGET (self->os_build_row), os_build_text != NULL);
+
+  os_type_text = get_os_type ();
+  cc_info_entry_set_value (self->os_type_row, os_type_text);
+
+  cc_info_entry_set_value (self->windowing_system_row, get_windowing_system ());
+
+  kernel_version_text = get_kernel_version_string ();
+  cc_info_entry_set_value (self->kernel_row, kernel_version_text);
+  gtk_widget_set_visible (GTK_WIDGET (self->kernel_row), kernel_version_text != NULL);
+}
 
 static void
 cc_system_details_window_class_init (CcSystemDetailsWindowClass *klass)
@@ -35,12 +780,33 @@ cc_system_details_window_class_init (CcSystemDetailsWindowClass *klass)
   gtk_widget_class_add_binding_action (widget_class, GDK_KEY_Escape, 0, "window.close", NULL);
   
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-system-details-window.ui");
+
+
+
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, disk_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, gnome_version_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, graphics_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, hardware_model_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, firmware_version_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, kernel_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, memory_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, os_name_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, os_build_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, os_type_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, processor_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, virtualization_row);
+  gtk_widget_class_bind_template_child (widget_class, CcSystemDetailsWindow, windowing_system_row);
+
+  g_type_ensure (CC_TYPE_INFO_ENTRY);
 }
 
 static void
 cc_system_details_window_init (CcSystemDetailsWindow *self)
 {
   gtk_widget_init_template (GTK_WIDGET (self));
+
+  system_details_window_setup_overview (self);
+  system_details_window_setup_virt (self);
 }
 
 CcSystemDetailsWindow *

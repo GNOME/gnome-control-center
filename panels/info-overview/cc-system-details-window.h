@@ -26,6 +26,11 @@ G_BEGIN_DECLS
 #define CC_TYPE_SYSTEM_DETAILS_WINDOW (cc_system_details_window_get_type ())
 G_DECLARE_FINAL_TYPE (CcSystemDetailsWindow, cc_system_details_window, CC, SYSTEM_DETAILS_WINDOW, AdwWindow)
 
-CcSystemDetailsWindow *cc_system_details_window_new (void);
-
+CcSystemDetailsWindow   *cc_system_details_window_new   (void);
+char                    *get_hardware_model_string      (void);
+char                    *get_cpu_info                   (void);
+char                    *get_os_name                    (void);
+guint64                  get_ram_size_dmi               (void);
+guint64                  get_ram_size_libgtop           (void);
+char                    *get_primary_disk_info          (void);
 G_END_DECLS
