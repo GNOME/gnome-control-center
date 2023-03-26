@@ -169,13 +169,6 @@ gpu_data_sort (gconstpointer a, gconstpointer b)
   return 0;
 }
 
-static void
-gpu_data_free (GpuData *data)
-{
-  g_free (data->name);
-  g_free (data);
-}
-
 static GSList *
 get_renderer_from_switcheroo (void)
 {
