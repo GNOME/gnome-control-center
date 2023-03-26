@@ -163,9 +163,9 @@ gpu_data_sort (gconstpointer a, gconstpointer b)
   GpuData *gpu_b = (GpuData *) b;
 
   if (gpu_a->is_default)
-    return 1;
-  if (gpu_b->is_default)
     return -1;
+  if (gpu_b->is_default)
+    return 1;
   return 0;
 }
 
