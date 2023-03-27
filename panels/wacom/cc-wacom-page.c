@@ -35,6 +35,7 @@
 #include <gdk/wayland/gdkwayland.h>
 #endif
 
+#include "cc-list-row.h"
 #include "cc-wacom-device.h"
 #include "cc-wacom-button-row.h"
 #include "cc-wacom-page.h"
@@ -571,6 +572,8 @@ cc_wacom_page_class_init (CcWacomPageClass *klass)
 	object_class->get_property = cc_wacom_page_get_property;
 	object_class->set_property = cc_wacom_page_set_property;
 	object_class->dispose = cc_wacom_page_dispose;
+
+	g_type_ensure (CC_TYPE_LIST_ROW);
 
 	gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/wacom/cc-wacom-page.ui");
 

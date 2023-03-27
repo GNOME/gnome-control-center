@@ -1,6 +1,7 @@
 deps = common_deps + wacom_deps + [
   gnome_rr_dep,
   gnome_settings_dep,
+  liblanguage_dep,
   x11_dep,
   xi_dep
 ]
