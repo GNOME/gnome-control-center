@@ -1540,6 +1540,8 @@ cc_user_panel_init (CcUserPanel *self)
 
         /* register types that the builder might need */
         type = cc_permission_infobar_get_type ();
+        g_type_ensure (CC_TYPE_AVATAR_CHOOSER);
+        g_type_ensure (CC_TYPE_LIST_ROW);
 
         gtk_widget_init_template (GTK_WIDGET (self));
 

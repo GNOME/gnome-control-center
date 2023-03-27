@@ -18,6 +18,7 @@
  * Author: Cosimo Cecchi <cosimoc@gnome.org>
  */
 
+#include "cc-list-row.h"
 #include "cc-search-panel.h"
 #include "cc-search-panel-row.h"
 #include "cc-search-locations-dialog.h"
@@ -663,6 +664,8 @@ cc_search_panel_class_init (CcSearchPanelClass *klass)
   GObjectClass *oclass = G_OBJECT_CLASS (klass);
 
   oclass->finalize = cc_search_panel_finalize;
+
+  g_type_ensure (CC_TYPE_LIST_ROW);
 
   gtk_widget_class_set_template_from_resource (widget_class,
                                                "/org/gnome/control-center/search/cc-search-panel.ui");

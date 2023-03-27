@@ -574,6 +574,7 @@ cc_display_panel_class_init (CcDisplayPanelClass *klass)
   CcPanelClass *panel_class = CC_PANEL_CLASS (klass);
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  g_type_ensure (CC_TYPE_LIST_ROW);
   g_type_ensure (CC_TYPE_NIGHT_LIGHT_PAGE);
 
   panel_class->get_help_uri = cc_display_panel_get_help_uri;

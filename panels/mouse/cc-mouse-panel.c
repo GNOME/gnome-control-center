@@ -442,6 +442,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
 
   object_class->dispose = cc_mouse_panel_dispose;
 
+  g_type_ensure (CC_TYPE_ILLUSTRATED_ROW);
   g_type_ensure (CC_TYPE_SPLIT_ROW);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/mouse/cc-mouse-panel.ui");
