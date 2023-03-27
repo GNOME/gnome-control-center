@@ -13,8 +13,23 @@
         <child>
           <object class="AdwHeaderBar">
             <child type="start">
-              <object class="GtkButton">
-                <property name="label" translatable="yes">Copy</property>
+              <object class="GtkButton" id="details_copy_button">
+                <child>
+                  <object class="GtkBox">
+                  <property name="spacing">6</property>
+                    <child>
+                      <object class="GtkImage">
+                        <property name="icon-name">edit-copy-symbolic</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="label">Copy</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+                <signal name="clicked" handler="on_copy_button_clicked_cb" swapped="no" />
               </object>
             </child>
           </object>
