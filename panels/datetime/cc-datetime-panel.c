@@ -20,6 +20,7 @@
  */
 
 #include "config.h"
+#include "cc-list-row.h"
 #include "cc-time-editor.h"
 #include "cc-datetime-panel.h"
 #include "cc-datetime-resources.h"
@@ -811,6 +812,9 @@ cc_date_time_panel_class_init (CcDateTimePanelClass *klass)
   object_class->dispose = cc_date_time_panel_dispose;
 
   panel_class->get_help_uri = cc_date_time_panel_get_help_uri;
+
+  g_type_ensure (CC_TYPE_LIST_ROW);
+  g_type_ensure (CC_TYPE_TZ_DIALOG);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/datetime/cc-datetime-panel.ui");
 

@@ -900,6 +900,8 @@ cc_info_overview_panel_class_init (CcInfoOverviewPanelClass *klass)
 {
   GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
 
+  g_type_ensure (CC_TYPE_HOSTNAME_ENTRY);
+
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/info-overview/cc-info-overview-panel.ui");
 
   gtk_widget_class_bind_template_child (widget_class, CcInfoOverviewPanel, disk_row);

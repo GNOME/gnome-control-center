@@ -835,6 +835,8 @@ cc_region_panel_class_init (CcRegionPanelClass * klass)
 
         object_class->finalize = cc_region_panel_finalize;
 
+        g_type_ensure (CC_TYPE_LIST_ROW);
+
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/region/cc-region-panel.ui");
 
         gtk_widget_class_bind_template_child (widget_class, CcRegionPanel, formats_row);
