@@ -318,10 +318,15 @@ update_ui (CcWifiConnectionRow *self)
 
       g_object_set (self->strength_icon, "icon-name", icon_name, NULL);
       gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), TRUE);
+      gtk_accessible_update_property (GTK_ACCESSIBLE (self->strength_icon),
+                                      GTK_ACCESSIBLE_PROPERTY_DESCRIPTION,
+                                      g_strdup_printf(_("Signal strength %d%%"), strength),
+                                      -1);
     }
   else
     {
       gtk_widget_set_child_visible (GTK_WIDGET (self->strength_icon), FALSE);
+      gtk_accessible_reset_property (GTK_ACCESSIBLE (self->strength_icon), GTK_ACCESSIBLE_PROPERTY_DESCRIPTION);
     }
 }
 
@@ -538,6 +543,11 @@ cc_wifi_connection_row_init (CcWifiConnectionRow *self)
   g_object_bind_property (self, "checked",
                           self->checkbutton, "active",
                           G_BINDING_BIDIRECTIONAL | G_BINDING_SYNC_CREATE);
+
+  gtk_accessible_update_relation (GTK_ACCESSIBLE (self),
+                                  GTK_ACCESSIBLE_RELATION_DESCRIBED_BY,
+                                  self->encrypted_icon, self->strength_icon, NULL,
+                                  -1);
 }
 
 CcWifiConnectionRow *
