@@ -666,53 +666,44 @@ get_ram_size_dmi (void)
 }
 
 static char *
-get_gnome_version (GDBusProxy *proxy)
+get_gnome_version ()
 {
-  g_autoptr(GVariant) variant = NULL;
-  const char *gnome_version = NULL;
-  if (!proxy)
-    return NULL;
-
-  variant = g_dbus_proxy_get_cached_property (proxy, "ShellVersion");
-  if (!variant)
-    return NULL;
-
-  gnome_version = g_variant_get_string (variant, NULL);
-  if (!gnome_version || *gnome_version == '\0')
-    return NULL;
-  return g_strdup (gnome_version);
-}
-
-static void
-shell_proxy_ready (GObject                *source,
-                   GAsyncResult           *res,
-                   CcSystemDetailsWindow  *self)
-{
-  g_autoptr(GDBusProxy) proxy = NULL;
+  GDBusProxy *shell_proxy;
   g_autoptr(GError) error = NULL;
   g_autoptr(GVariant) variant = NULL;
-  g_autofree char *gnome_version = NULL;
+  const char *gnome_version = NULL;
 
-  proxy = cc_object_storage_create_dbus_proxy_finish (res, &error);
-  if (!proxy)
+  shell_proxy = cc_object_storage_create_dbus_proxy_sync (
+      G_BUS_TYPE_SESSION,
+      G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
+      G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
+      "org.gnome.Shell",
+      "/org/gnome/Shell",
+      "org.gnome.Shell",
+      NULL,
+      &error);
+
+
+  if (!shell_proxy)
     {
       if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
-        return;
+        return g_strdup (_("Not Available"));
       g_warning ("Failed to contact gnome-shell: %s", error->message);
     }
 
-  gnome_version = get_gnome_version (proxy);
+  variant = g_dbus_proxy_get_cached_property (shell_proxy, "ShellVersion");
+  if (!variant)
+    return g_strdup (_("Not Available"));
 
-  if (!gnome_version)
+  gnome_version = g_variant_get_string (variant, NULL);
+  if (!gnome_version || *gnome_version == '\0')
     {
       /* translators: this is the placeholder string when the GNOME Shell
        * version couldn't be loaded, eg. “GNOME Version: Not Available” */
-      cc_info_entry_set_value (self->gnome_version_row, _("Not Available"));
+      return g_strdup (_("Not Available"));
     }
   else
-    {
-      cc_info_entry_set_value (self->gnome_version_row, gnome_version);
-    }
+    return g_strdup (gnome_version);
 }
 
 static void
@@ -725,21 +716,12 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
   g_autofree char *os_type_text = NULL;
   g_autofree char *os_name_text = NULL;
   g_autofree char *os_build_text = NULL;
+  g_autofree char *gnome_version_text = NULL;
   g_autofree char *hardware_model_text = NULL;
   g_autofree char *firmware_version_text = NULL;
   g_autofree char *kernel_version_text = NULL;
   g_autofree GSList *graphics_hardware_list = NULL;
   g_autofree gchar *disk_capacity_string = NULL;
-
-  cc_object_storage_create_dbus_proxy (G_BUS_TYPE_SESSION,
-                                       G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS |
-                                       G_DBUS_PROXY_FLAGS_DO_NOT_AUTO_START,
-                                       "org.gnome.Shell",
-                                       "/org/gnome/Shell",
-                                       "org.gnome.Shell",
-                                       NULL,
-                                       (GAsyncReadyCallback) shell_proxy_ready,
-                                       self);
 
   hardware_model_text = get_hardware_model_string ();
   cc_info_entry_set_value (self->hardware_model_row, hardware_model_text);
@@ -775,6 +757,9 @@ system_details_window_setup_overview (CcSystemDetailsWindow *self)
 
   os_type_text = get_os_type ();
   cc_info_entry_set_value (self->os_type_row, os_type_text);
+
+  gnome_version_text = get_gnome_version ();
+  cc_info_entry_set_value (self->gnome_version_row, gnome_version_text);
 
   cc_info_entry_set_value (self->windowing_system_row, get_windowing_system ());
 
