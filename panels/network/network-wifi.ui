@@ -57,25 +57,8 @@
   </template>
 
   <!-- Center widget -->
-  <object class="GtkBox" id="center_box">
-    <property name="orientation">vertical</property>
-    <property name="halign">center</property>
-    <property name="valign">center</property>
-    <child>
-      <object class="GtkLabel" id="title_label">
-        <property name="label" translatable="yes">Wi-Fi</property>
-        <style>
-          <class name="title" />
-        </style>
-      </object>
-    </child>
-    <child>
-      <object class="GtkLabel" id="status_label">
-        <style>
-          <class name="subtitle" />
-        </style>
-      </object>
-    </child>
+  <object class="AdwWindowTitle" id="wifi_headerbar_title">
+    <property name="title" translatable="yes">Wi-Fi</property>
   </object>
 
   <!-- Box with the On/Off switch + menu button -->

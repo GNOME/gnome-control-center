@@ -53,7 +53,7 @@ struct _NetDeviceWifi
 {
         AdwBin                   parent;
 
-        GtkBox                  *center_box;
+        AdwWindowTitle          *wifi_headerbar_title;
         GtkListBoxRow           *connect_hidden_row;
         GtkSwitch               *device_off_switch;
         GtkBox                  *header_box;
@@ -65,8 +65,6 @@ struct _NetDeviceWifi
         GtkBox                  *listbox_box;
         GtkStack                *stack;
         GtkListBoxRow           *start_hotspot_row;
-        GtkLabel                *status_label;
-        GtkLabel                *title_label;
 
         CcPanel                 *panel;
         NMClient                *client;
@@ -363,8 +361,7 @@ nm_device_wifi_refresh_ui (NetDeviceWifi *self)
         wireless_enabled_toggled (self);
 
         status = panel_device_status_to_localized_string (self->device, NULL);
-        gtk_label_set_label (self->status_label, status);
-
+        adw_window_title_set_subtitle (self->wifi_headerbar_title, status);
         /* update list of APs */
         show_wifi_list (self);
 }
@@ -1198,7 +1195,7 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
 
         gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/network/network-wifi.ui");
 
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, center_box);
+        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, wifi_headerbar_title);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, connect_hidden_row);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, device_off_switch);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, header_box);
@@ -1210,8 +1207,6 @@ net_device_wifi_class_init (NetDeviceWifiClass *klass)
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, listbox_box);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, stack);
         gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, start_hotspot_row);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, status_label);
-        gtk_widget_class_bind_template_child (widget_class, NetDeviceWifi, title_label);
 
         gtk_widget_class_bind_template_callback (widget_class, device_off_switch_changed_cb);
         gtk_widget_class_bind_template_callback (widget_class, on_popover_row_activated_cb);
@@ -1301,7 +1296,7 @@ void
 net_device_wifi_set_title (NetDeviceWifi *self, const gchar *title)
 {
         g_return_if_fail (NET_IS_DEVICE_WIFI (self));
-        gtk_label_set_label (self->title_label, title);
+        adw_window_title_set_title (self->wifi_headerbar_title, title);
 }
 
 GtkWidget *
@@ -1315,7 +1310,7 @@ GtkWidget *
 net_device_wifi_get_title_widget (NetDeviceWifi *self)
 {
         g_return_val_if_fail (NET_IS_DEVICE_WIFI (self), NULL);
-        return GTK_WIDGET (self->center_box);
+        return GTK_WIDGET (self->wifi_headerbar_title);
 }
 
 void
