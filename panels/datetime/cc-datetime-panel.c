@@ -509,22 +509,6 @@ change_ntp (CcDateTimePanel *self,
   return TRUE;
 }
 
-static void
-on_ntp_changed (CcDateTimePanel *self)
-{
-  gboolean ntp_on;
-
-  g_object_get (self->dtm, "ntp", &ntp_on, NULL);
-
-  g_signal_handlers_block_by_func (self->network_time_switch, change_ntp, self);
-
-  g_object_set (self->network_time_switch,
-                "active", ntp_on,
-                NULL);
-
-  g_signal_handlers_unblock_by_func (self->network_time_switch, change_ntp, self);
-}
-
 static gboolean
 is_ntp_available (CcDateTimePanel *self)
 {
@@ -924,12 +908,13 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   /* set up network time switch */
   bind_switch_to_row (self,
                       self->network_time_switch,
-                      GTK_WIDGET (self->datetime_row));
-  g_signal_connect_object (self->dtm, "notify::ntp",
-                           G_CALLBACK (on_ntp_changed), self, G_CONNECT_SWAPPED);
+                      self->datetime_row);
+  g_object_bind_property (self->dtm, "ntp",
+                          self->network_time_switch, "active",
+                          G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
+
   g_signal_connect_object (self->network_time_switch, "state-set",
                            G_CALLBACK (change_ntp), self, G_CONNECT_SWAPPED);
-  on_ntp_changed (self);
 
   gtk_widget_set_visible (GTK_WIDGET (self->auto_datetime_row), is_ntp_available (self));
 
