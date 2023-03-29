@@ -103,6 +103,8 @@ struct _CcDateTimePanel
   Timedate1 *dtm;
   GCancellable *cancellable;
 
+  gboolean pending_ntp_state;
+
   GPermission *permission;
   GPermission *tz_permission;
   GSettings *location_settings;
@@ -303,10 +305,7 @@ set_using_ntp_cb (GObject      *source,
     }
   else
     {
-      gboolean ntp_on;
-
-      g_object_get (self->dtm, "ntp", &ntp_on, NULL);
-      gtk_switch_set_state (self->network_time_switch, ntp_on);
+      gtk_switch_set_state (self->network_time_switch, self->pending_ntp_state);
     }
 }
 
@@ -331,6 +330,7 @@ static void
 queue_set_ntp (CcDateTimePanel *self,
                gboolean         using_ntp)
 {
+  self->pending_ntp_state = using_ntp;
   timedate1_call_set_ntp (self->dtm,
                           using_ntp,
                           TRUE,
@@ -908,7 +908,7 @@ cc_date_time_panel_init (CcDateTimePanel *self)
   /* set up network time switch */
   bind_switch_to_row (self,
                       self->network_time_switch,
-                      self->datetime_row);
+                      GTK_WIDGET (self->datetime_row));
   g_object_bind_property (self->dtm, "ntp",
                           self->network_time_switch, "active",
                           G_BINDING_DEFAULT | G_BINDING_SYNC_CREATE);
