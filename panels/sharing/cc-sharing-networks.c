@@ -213,7 +213,7 @@ cc_sharing_networks_new_row (const char        *uuid,
   }
 
   adw_action_row_set_icon_name (ADW_ACTION_ROW (row), icon_name);
-  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (self->current_row), network_name);
+  adw_preferences_row_set_title (ADW_PREFERENCES_ROW (row), network_name);
 
   /* Remove button */
   w = gtk_button_new_from_icon_name ("window-close-symbolic");
