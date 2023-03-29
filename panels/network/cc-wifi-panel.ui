@@ -50,22 +50,13 @@
       <object class="AdwPreferencesPage">
         <!-- Airplane Mode Toggle -->
         <child>
-          <object class="AdwPreferencesGroup">
+          <object class="AdwPreferencesGroup" id="rfkill_widget">
             <child>
-              <object class="GtkListBox" id="rfkill_widget">
-                <property name="margin_bottom">32</property>
-                <property name="selection-mode">none</property>
-                <style>
-                  <class name="boxed-list"/>
-                </style>
-                <child>
-                  <object class="CcListRow" id="rfkill_row">
-                    <property name="show-switch">True</property>
-                    <property name="title" translatable="yes">Airplane Mode</property>
-                    <property name="subtitle" translatable="yes">Disables Wi-Fi, Bluetooth and mobile broadband</property>
-                    <signal name="notify::active" handler="rfkill_switch_notify_activate_cb" object="CcWifiPanel" swapped="no" />
-                  </object>
-                </child>
+              <object class="CcListRow" id="rfkill_row">
+                <property name="show-switch">True</property>
+                <property name="title" translatable="yes">Airplane Mode</property>
+                <property name="subtitle" translatable="yes">Disables Wi-Fi, Bluetooth and mobile broadband</property>
+                <signal name="notify::active" handler="rfkill_switch_notify_activate_cb" object="CcWifiPanel" swapped="no" />
               </object>
             </child>
           </object>
