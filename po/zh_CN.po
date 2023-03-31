@@ -35,8 +35,8 @@ msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-30 23:42+0000\n"
-"PO-Revision-Date: 2023-03-30 21:10-0400\n"
+"POT-Creation-Date: 2023-03-31 01:10+0000\n"
+"PO-Revision-Date: 2023-03-30 21:34-0400\n"
 "Last-Translator: Boyuan Yang <073plan@gmail.com>\n"
 "Language-Team: Chinese - China <i18n-zh@googlegroups.com>\n"
 "Language: zh_CN\n"
@@ -62,8 +62,8 @@ msgid "Session Bus"
 msgstr "会话总线"
 
 #: panels/applications/cc-applications-panel.c:828
-#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:265
-#: panels/thunderbolt/cc-bolt-panel.ui:309
+#: panels/power/cc-power-panel.ui:75 panels/thunderbolt/cc-bolt-panel.ui:232
+#: panels/thunderbolt/cc-bolt-panel.ui:276
 msgid "Devices"
 msgstr "设备"
 
@@ -135,11 +135,9 @@ msgstr "<b>%s</b> 用来打开下列文件和链接类型。"
 msgid "%s of disk space used."
 msgstr "已占用 %s 磁盘空间。"
 
-#. List of apps.
 #: panels/applications/cc-applications-panel.c:1415
 #: panels/applications/cc-applications-panel.ui:19
 #: panels/applications/gnome-applications-panel.desktop.in:3
-#: panels/notifications/cc-notifications-panel.ui:26
 msgid "Apps"
 msgstr "应用"
 
@@ -165,7 +163,8 @@ msgstr "应用详情"
 #: panels/keyboard/cc-input-chooser.ui:75
 #: panels/printers/new-printer-dialog.ui:230
 #: panels/region/cc-format-chooser.ui:82
-#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:41
+#: panels/search/gnome-search-panel.desktop.in:3 shell/cc-window.ui:40
+#: shell/cc-window.ui:42
 msgid "Search"
 msgstr "搜索"
 
@@ -188,8 +187,8 @@ msgstr "接收系统搜索并发送结果"
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367
-#: panels/user-accounts/cc-user-panel.c:821
-#: panels/user-accounts/cc-user-panel.c:951
+#: panels/user-accounts/cc-user-panel.c:789
+#: panels/user-accounts/cc-user-panel.c:918
 #: panels/wwan/cc-wwan-device-page.c:477
 #: subprojects/gvc/gvc-mixer-control.c:1900
 msgid "Disabled"
@@ -369,8 +368,8 @@ msgstr "选择图片"
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
 #: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
-#: panels/network/cc-wifi-hotspot-dialog.ui:125
-#: panels/network/cc-wifi-panel.c:745
+#: panels/network/cc-wifi-hotspot-dialog.ui:142
+#: panels/network/cc-wifi-panel.c:744
 #: panels/network/connection-editor/connection-editor.ui:14
 #: panels/network/connection-editor/vpn-helpers.c:215
 #: panels/network/connection-editor/vpn-helpers.c:334
@@ -382,11 +381,11 @@ msgstr "选择图片"
 #: panels/sharing/cc-sharing-panel.c:479 panels/usage/cc-usage-panel.c:139
 #: panels/user-accounts/cc-add-user-dialog.ui:25
 #: panels/user-accounts/cc-avatar-chooser.c:96
-#: panels/user-accounts/cc-avatar-chooser.c:167
+#: panels/user-accounts/cc-avatar-chooser.c:166
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:611
-#: panels/user-accounts/cc-user-panel.c:629
+#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:627
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -398,7 +397,7 @@ msgstr "取消(_C)"
 #: panels/network/connection-editor/vpn-helpers.c:216
 #: panels/printers/pp-details-dialog.c:270
 #: panels/sharing/cc-sharing-panel.c:480
-#: panels/user-accounts/cc-avatar-chooser.c:168
+#: panels/user-accounts/cc-avatar-chooser.c:167
 msgid "_Open"
 msgstr "打开(_O)"
 
@@ -607,25 +606,25 @@ msgid "The target whitepoint was not obtainable."
 msgstr "无法获取目标白点。"
 
 #. TRANSLATORS: the display calibration process is finished
-#: panels/color/cc-color-calibrate.c:452
+#: panels/color/cc-color-calibrate.c:451
 msgid "Complete!"
 msgstr "完成！"
 
 #. TRANSLATORS: the display calibration failed, and we also show
 #. * the translated (or untranslated) error string after this
-#: panels/color/cc-color-calibrate.c:460
+#: panels/color/cc-color-calibrate.c:459
 msgid "Calibration failed!"
 msgstr "校准失败！"
 
 #. TRANSLATORS: The user can now remove the sensor from the screen
-#: panels/color/cc-color-calibrate.c:467
+#: panels/color/cc-color-calibrate.c:466
 msgid "You can remove the calibration device."
 msgstr "您现在可以移除校准设备。"
 
 #. TRANSLATORS: The user has to be careful not to knock the
 #. * display off the screen (although we do cope if this is
 #. * detected early enough)
-#: panels/color/cc-color-calibrate.c:535
+#: panels/color/cc-color-calibrate.c:534
 msgid "Do not disturb the calibration device while in progress"
 msgstr "校准过程中不要干扰校准设备"
 
@@ -701,7 +700,7 @@ msgid "Show color profiles for %s"
 msgstr "为 %s 显示颜色管理"
 
 #. not calibrated
-#: panels/color/cc-color-device.c:291
+#: panels/color/cc-color-device.c:290
 msgid "Not calibrated"
 msgstr "未校准"
 
@@ -1368,8 +1367,8 @@ msgstr "需要启用定位服务和互联网连接"
 #: panels/firmware-security/cc-firmware-security-utils.c:45
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/screen/cc-screen-panel.ui:40 panels/screen/cc-screen-panel.ui:76
-#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:819
-#: panels/user-accounts/cc-user-panel.c:948
+#: panels/screen/cc-screen-panel.ui:96 panels/user-accounts/cc-user-panel.c:787
+#: panels/user-accounts/cc-user-panel.c:915
 #: panels/wwan/cc-wwan-device-page.c:475
 msgid "Enabled"
 msgstr "已启用"
@@ -1536,7 +1535,7 @@ msgstr "diagnostics;crash;诊断;崩溃;"
 msgid "On"
 msgstr "开"
 
-#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:166
+#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:181
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
@@ -2481,7 +2480,7 @@ msgstr "高对比度开关"
 msgid "No input sources found"
 msgstr "无输入源"
 
-#: panels/keyboard/cc-input-chooser.c:993
+#: panels/keyboard/cc-input-chooser.c:990
 msgctxt "Input Source"
 msgid "Other"
 msgstr "其他"
@@ -2518,7 +2517,7 @@ msgstr "首选项"
 msgid "View Keyboard Layout"
 msgstr "查看键盘布局"
 
-#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:223
+#: panels/keyboard/cc-input-row.ui:54 panels/sharing/cc-sharing-networks.c:224
 #: panels/sharing/cc-sharing-panel.c:603
 msgid "Remove"
 msgstr "移除"
@@ -2645,7 +2644,7 @@ msgid "Methods for entering symbols and letter variants using the keyboard."
 msgstr "使用键盘输入符号和字母变体的方法。"
 
 #: panels/keyboard/cc-keyboard-panel.ui:82
-#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:161
+#: panels/keyboard/cc-keyboard-shortcut-dialog.ui:7 shell/cc-window.ui:162
 msgid "Keyboard Shortcuts"
 msgstr "键盘快捷键"
 
@@ -2894,7 +2893,7 @@ msgid "microphone;recording;application;privacy;"
 msgstr ""
 "microphone;recording;application;privacy;麦克风;话筒;录制;应用程序;隐私;"
 
-#: panels/mouse/cc-mouse-panel.ui:30
+#: panels/mouse/cc-mouse-panel.ui:30 panels/wacom/cc-wacom-panel.ui:9
 msgid "Test _Settings"
 msgstr "测试设置(_S)"
 
@@ -2928,13 +2927,13 @@ msgstr "右"
 msgid "Pointer Speed"
 msgstr "指针速度"
 
-#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:208
+#: panels/mouse/cc-mouse-panel.ui:101 panels/mouse/cc-mouse-panel.ui:209
 #: panels/universal-access/cc-ua-typing-page.ui:53
 #: panels/universal-access/cc-ua-typing-page.ui:111
 msgid "Slow"
 msgstr "慢"
 
-#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:210
+#: panels/mouse/cc-mouse-panel.ui:103 panels/mouse/cc-mouse-panel.ui:211
 #: panels/universal-access/cc-ua-typing-page.ui:50
 #: panels/universal-access/cc-ua-typing-page.ui:108
 msgid "Fast"
@@ -2958,23 +2957,23 @@ msgstr "关闭鼠标加速可以允许更快、更精确的移动，但也会使
 msgid "Pointer Assistance"
 msgstr "指针辅助"
 
-#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:264
+#: panels/mouse/cc-mouse-panel.ui:160 panels/mouse/cc-mouse-panel.ui:267
 msgid "Scroll Direction"
 msgstr "滚动方向"
 
-#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:265
+#: panels/mouse/cc-mouse-panel.ui:161 panels/mouse/cc-mouse-panel.ui:268
 msgid "Traditional"
 msgstr "传统"
 
-#: panels/mouse/cc-mouse-panel.ui:162 panels/mouse/cc-mouse-panel.ui:266
+#: panels/mouse/cc-mouse-panel.ui:162 panels/mouse/cc-mouse-panel.ui:269
 msgid "Scrolling moves the view"
 msgstr "滚动移动视图"
 
-#: panels/mouse/cc-mouse-panel.ui:163 panels/mouse/cc-mouse-panel.ui:267
+#: panels/mouse/cc-mouse-panel.ui:163 panels/mouse/cc-mouse-panel.ui:270
 msgid "Natural"
 msgstr "自然"
 
-#: panels/mouse/cc-mouse-panel.ui:164 panels/mouse/cc-mouse-panel.ui:268
+#: panels/mouse/cc-mouse-panel.ui:164 panels/mouse/cc-mouse-panel.ui:272
 msgid "Scrolling moves the content"
 msgstr "滚动移动内容"
 
@@ -2983,47 +2982,47 @@ msgstr "滚动移动内容"
 msgid "Touchpad"
 msgstr "触摸板"
 
-#: panels/mouse/cc-mouse-panel.ui:205
+#: panels/mouse/cc-mouse-panel.ui:206
 msgid "Pointer speed"
 msgstr "指针速度"
 
-#: panels/mouse/cc-mouse-panel.ui:228
+#: panels/mouse/cc-mouse-panel.ui:229
 msgid "Clicking"
 msgstr "点击"
 
-#: panels/mouse/cc-mouse-panel.ui:233
+#: panels/mouse/cc-mouse-panel.ui:234
 msgid "Tap to Click"
 msgstr "轻触以点击"
 
-#: panels/mouse/cc-mouse-panel.ui:234
+#: panels/mouse/cc-mouse-panel.ui:235
 msgid "Quickly touch the touchpad to click"
 msgstr "快速触摸触摸板以点击"
 
-#: panels/mouse/cc-mouse-panel.ui:240
+#: panels/mouse/cc-mouse-panel.ui:242
 msgid "Tap to click"
 msgstr "轻触以点击"
 
-#: panels/mouse/cc-mouse-panel.ui:251
+#: panels/mouse/cc-mouse-panel.ui:253
 msgid "Scrolling"
 msgstr "滚动"
 
-#: panels/mouse/cc-mouse-panel.ui:254
+#: panels/mouse/cc-mouse-panel.ui:256
 msgid "Scroll Method"
 msgstr "滚动方式"
 
-#: panels/mouse/cc-mouse-panel.ui:255
+#: panels/mouse/cc-mouse-panel.ui:257
 msgid "Two Finger"
 msgstr "双指"
 
-#: panels/mouse/cc-mouse-panel.ui:256
+#: panels/mouse/cc-mouse-panel.ui:258
 msgid "Drag two fingers on the touchpad"
 msgstr "在触摸板上拖动两根手指"
 
-#: panels/mouse/cc-mouse-panel.ui:257
+#: panels/mouse/cc-mouse-panel.ui:259
 msgid "Edge"
 msgstr "边缘"
 
-#: panels/mouse/cc-mouse-panel.ui:258
+#: panels/mouse/cc-mouse-panel.ui:260
 msgid "Drag one finger on the edge"
 msgstr "在边缘拖动一根手指"
 
@@ -3174,7 +3173,7 @@ msgstr "添加连接"
 msgid "Not set up"
 msgstr "未设置"
 
-#: panels/network/cc-net-proxy-page.c:168
+#: panels/network/cc-net-proxy-page.c:183
 #: panels/network/cc-net-proxy-page.ui:24
 #: panels/network/connection-editor/ip4-page.ui:175
 #: panels/network/connection-editor/ip4-page.ui:227
@@ -3185,7 +3184,7 @@ msgstr "未设置"
 msgid "Automatic"
 msgstr "自动"
 
-#: panels/network/cc-net-proxy-page.c:170
+#: panels/network/cc-net-proxy-page.c:185
 #: panels/network/cc-net-proxy-page.ui:25
 #: panels/network/connection-editor/ip4-page.ui:55
 #: panels/network/connection-editor/ip6-page.ui:65
@@ -3306,6 +3305,11 @@ msgstr "安全网络（WPA3）"
 msgid "Secure network"
 msgstr "安全网络"
 
+#: panels/network/cc-wifi-connection-row.c:323
+#, c-format
+msgid "Signal strength %d%%"
+msgstr "信号强度 %d%%"
+
 #. TRANSLATORS: device status
 #: panels/network/cc-wifi-connection-row.ui:41 panels/network/panel-common.c:63
 msgid "Connected"
@@ -3323,18 +3327,27 @@ msgid "Options…"
 msgstr "选项…"
 
 #. TRANSLATORS: ‘%s’ is a Wi-Fi Network(SSID) name
-#: panels/network/cc-wifi-hotspot-dialog.c:133
+#: panels/network/cc-wifi-hotspot-dialog.c:134
 #, c-format
 msgid ""
 "Turning on the hotspot will disconnect from %s, and it will not be possible "
 "to access the internet through Wi-Fi."
 msgstr "开启热点将从 %s 断开连接，并将无法通过 Wi-Fi 连接网络。"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:266
+#: panels/network/cc-wifi-hotspot-dialog.c:250
+msgid "Network name cannot be empty"
+msgstr "网络名称不能为空"
+
+#. SSID length needs to be in the 1-32 byte range
+#: panels/network/cc-wifi-hotspot-dialog.c:256
+msgid "Network name is too long"
+msgstr "网络名称过长"
+
+#: panels/network/cc-wifi-hotspot-dialog.c:277
 msgid "Must have a minimum of 8 characters"
 msgstr "至少包含 8 个字符"
 
-#: panels/network/cc-wifi-hotspot-dialog.c:271
+#: panels/network/cc-wifi-hotspot-dialog.c:282
 #, c-format
 msgid "Must have a maximum of %d character"
 msgid_plural "Must have a maximum of %d characters"
@@ -3358,7 +3371,7 @@ msgid "Network Name"
 msgstr "网络名称"
 
 #. Translators: This is a password needed for printing.
-#: panels/network/cc-wifi-hotspot-dialog.ui:75
+#: panels/network/cc-wifi-hotspot-dialog.ui:92
 #: panels/printers/new-printer-dialog.ui:316
 #: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:359
 #: panels/user-accounts/cc-add-user-dialog.ui:145
@@ -3368,33 +3381,33 @@ msgstr "网络名称"
 msgid "Password"
 msgstr "密码"
 
-#: panels/network/cc-wifi-hotspot-dialog.ui:88
+#: panels/network/cc-wifi-hotspot-dialog.ui:105
 msgid "Generate Random Password"
 msgstr "生成随机密码"
 
-#: panels/network/cc-wifi-hotspot-dialog.ui:89
+#: panels/network/cc-wifi-hotspot-dialog.ui:106
 msgid "Autogenerate Password"
 msgstr "自动生成密码"
 
-#: panels/network/cc-wifi-hotspot-dialog.ui:131
+#: panels/network/cc-wifi-hotspot-dialog.ui:148
 msgid "_Turn On"
 msgstr "打开(_T)"
 
-#: panels/network/cc-wifi-panel.c:407
+#: panels/network/cc-wifi-panel.c:406
 #: panels/network/gnome-wifi-panel.desktop.in:3
 #: panels/network/network-wifi.ui:66
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: panels/network/cc-wifi-panel.c:741
+#: panels/network/cc-wifi-panel.c:740
 msgid "Turning off will disconnect any devices that are using the hotspot."
 msgstr "关闭将与所有正在使用热点的设备断开连接。"
 
-#: panels/network/cc-wifi-panel.c:743
+#: panels/network/cc-wifi-panel.c:742
 msgid "Turn Off Hotspot?"
 msgstr "关闭热点?"
 
-#: panels/network/cc-wifi-panel.c:746
+#: panels/network/cc-wifi-panel.c:745
 msgid "_Turn Off"
 msgstr "关闭(_T)"
 
@@ -3654,11 +3667,11 @@ msgstr "移除 VPN"
 msgid "Details"
 msgstr "详细信息"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:71
+#: panels/network/connection-editor/ce-page-ethernet.c:69
 msgid "automatic"
 msgstr "自动"
 
-#: panels/network/connection-editor/ce-page-ethernet.c:144
+#: panels/network/connection-editor/ce-page-ethernet.c:142
 #: panels/network/connection-editor/ce-page-vpn.c:148
 #: panels/network/connection-editor/ce-page-wifi.c:129
 msgid "Identity"
@@ -4499,6 +4512,11 @@ msgstr "勿扰(_D)"
 msgid "_Lock Screen Notifications"
 msgstr "锁屏通知(_L)"
 
+#. List of apps.
+#: panels/notifications/cc-notifications-panel.ui:26
+msgid "App Notifications"
+msgstr "应用通知"
+
 #: panels/notifications/gnome-notifications-panel.desktop.in:4
 msgid "Control which notifications are displayed and what they show"
 msgstr "控制显示的通知种类及内容"
@@ -4522,7 +4540,7 @@ msgstr "其他"
 msgid "%s removed"
 msgstr "%s 已移除"
 
-#: panels/online-accounts/cc-online-accounts-panel.c:695
+#: panels/online-accounts/cc-online-accounts-panel.c:694
 msgid "Error removing account"
 msgstr "移除帐号出错"
 
@@ -4991,17 +5009,17 @@ msgid "Printer “%s” has been deleted"
 msgstr "已删除打印机“%s”"
 
 #. Translators: Addition of the new printer failed.
-#: panels/printers/cc-printers-panel.c:939
+#: panels/printers/cc-printers-panel.c:938
 msgid "Failed to add new printer."
 msgstr "添加新打印机失败。"
 
 #. Translators: The XML file containing user interface can not be loaded
-#: panels/printers/cc-printers-panel.c:1246
+#: panels/printers/cc-printers-panel.c:1245
 #, c-format
 msgid "Could not load ui: %s"
 msgstr "无法载入界面：%s"
 
-#: panels/printers/cc-printers-panel.c:1314
+#: panels/printers/cc-printers-panel.c:1313
 msgid "Unlock to Add Printers and Change Settings"
 msgstr "解锁以添加打印机及更改设置"
 
@@ -5360,77 +5378,77 @@ msgid "GhostScript pre-filtering"
 msgstr "GhostScript 预过滤"
 
 #. Translators: This option sets number of pages printed on one sheet
-#: panels/printers/pp-options-dialog.c:513
+#: panels/printers/pp-options-dialog.c:512
 msgid "Pages per side"
 msgstr "每面页数"
 
 #. Translators: This option sets whether to print on both sides of paper
-#: panels/printers/pp-options-dialog.c:525
+#: panels/printers/pp-options-dialog.c:524
 msgid "Two-sided"
 msgstr "双面"
 
 #. Translators: This option sets orientation of print (portrait, landscape...)
-#: panels/printers/pp-options-dialog.c:537
+#: panels/printers/pp-options-dialog.c:536
 msgid "Orientation"
 msgstr "方向"
 
 #. Translators: "General" tab contains general printer options
-#: panels/printers/pp-options-dialog.c:634
+#: panels/printers/pp-options-dialog.c:633
 msgctxt "Printer Option Group"
 msgid "General"
 msgstr "常规"
 
 #. Translators: "Page Setup" tab contains settings related to pages (page size, paper source, etc.)
-#: panels/printers/pp-options-dialog.c:637
+#: panels/printers/pp-options-dialog.c:636
 msgctxt "Printer Option Group"
 msgid "Page Setup"
 msgstr "页面设置"
 
 #. Translators: "Installable Options" tab contains settings of presence of installed options (amount of RAM, duplex unit, etc.)
-#: panels/printers/pp-options-dialog.c:640
+#: panels/printers/pp-options-dialog.c:639
 msgctxt "Printer Option Group"
 msgid "Installable Options"
 msgstr "可安装选项"
 
 #. Translators: "Job" tab contains settings for jobs
-#: panels/printers/pp-options-dialog.c:643
+#: panels/printers/pp-options-dialog.c:642
 msgctxt "Printer Option Group"
 msgid "Job"
 msgstr "任务"
 
 #. Translators: "Image Quality" tab contains settings for quality of output print (e.g. resolution)
-#: panels/printers/pp-options-dialog.c:646
+#: panels/printers/pp-options-dialog.c:645
 msgctxt "Printer Option Group"
 msgid "Image Quality"
 msgstr "图像质量"
 
 #. Translators: "Color" tab contains color settings (e.g. color printing)
-#: panels/printers/pp-options-dialog.c:649
+#: panels/printers/pp-options-dialog.c:648
 msgctxt "Printer Option Group"
 msgid "Color"
 msgstr "色彩"
 
 #. Translators: "Finishing" tab contains finishing settings (e.g. booklet printing)
-#: panels/printers/pp-options-dialog.c:652
+#: panels/printers/pp-options-dialog.c:651
 msgctxt "Printer Option Group"
 msgid "Finishing"
 msgstr "正在完成"
 
 #. Translators: "Advanced" tab contains all others settings
-#: panels/printers/pp-options-dialog.c:655
+#: panels/printers/pp-options-dialog.c:654
 msgctxt "Printer Option Group"
 msgid "Advanced"
 msgstr "高级"
 
 #. Translators: Name of job which makes printer to print test page
 #. Translators: This button triggers the printing of a test page.
-#: panels/printers/pp-options-dialog.c:840
+#: panels/printers/pp-options-dialog.c:839
 #: panels/printers/pp-options-dialog.ui:14
 msgid "Test Page"
 msgstr "测试页"
 
 #. Translators: Name of job which makes printer to print test page
-#: panels/printers/pp-options-dialog.c:853
+#: panels/printers/pp-options-dialog.c:852
 msgid "Test page"
 msgstr "测试页"
 
@@ -5736,7 +5754,7 @@ msgid "Your Account"
 msgstr "您的帐号"
 
 #: panels/region/cc-region-panel.ui:56 panels/region/cc-region-panel.ui:83
-#: panels/user-accounts/cc-user-panel.ui:278
+#: panels/user-accounts/cc-user-panel.ui:269
 msgid "_Language"
 msgstr "语言(_L)"
 
@@ -6147,7 +6165,7 @@ msgstr ""
 "Search;Find;Index;Hide;Privacy;Results;搜索;查找;寻找;索引;隐藏;隐私;结果;"
 
 #. Label
-#: panels/sharing/cc-sharing-networks.c:268
+#: panels/sharing/cc-sharing-networks.c:270
 msgid "No networks selected for sharing"
 msgstr "未选择要共享的网络"
 
@@ -6607,7 +6625,7 @@ msgid ""
 msgstr "雷电接口子系统（boltd）未安装或配置不正确。"
 
 #: panels/thunderbolt/cc-bolt-panel.c:490
-#: panels/thunderbolt/cc-bolt-panel.ui:156
+#: panels/thunderbolt/cc-bolt-panel.ui:123
 msgid "Allow direct access to devices such as docks and external GPUs."
 msgstr "允许直接访问底座和外置图形处理器一类的设备。"
 
@@ -6646,15 +6664,15 @@ msgstr "无雷电接口支持"
 msgid "Could not connect to the thunderbolt subsystem."
 msgstr "无法连接到雷电接口子系统。"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:152
+#: panels/thunderbolt/cc-bolt-panel.ui:120
 msgid "Direct Access"
 msgstr "直接访问"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:224
+#: panels/thunderbolt/cc-bolt-panel.ui:191
 msgid "Pending Devices"
 msgstr "等待中的设备"
 
-#: panels/thunderbolt/cc-bolt-panel.ui:318
+#: panels/thunderbolt/cc-bolt-panel.ui:285
 msgid "No devices attached"
 msgstr "未连接设备"
 
@@ -7480,7 +7498,7 @@ msgstr ""
 "企业登录允许在本设备上使用已有的、集中管理的用户帐号。您也可以使用此帐号访问"
 "公司在互联网上的资源。"
 
-#: panels/user-accounts/cc-avatar-chooser.c:164
+#: panels/user-accounts/cc-avatar-chooser.c:163
 msgid "Browse for more pictures"
 msgstr "浏览更多图片"
 
@@ -7702,79 +7720,6 @@ msgstr "无法请求指纹设备 %s：%s"
 msgid "Failed to get fingerprint devices: %s"
 msgstr "获取指纹设备失败：%s"
 
-#: panels/user-accounts/cc-login-history-dialog.c:71
-msgid "This Week"
-msgstr "本周"
-
-#: panels/user-accounts/cc-login-history-dialog.c:74
-msgid "Last Week"
-msgstr "上周"
-
-#. Translators: This is a date format string in the style of "Feb 18",
-#. shown as the first day of a week on login history dialog.
-#. Translators: This is a date format string in the style of "Feb 24",
-#. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:84
-#: panels/user-accounts/cc-login-history-dialog.c:88
-msgctxt "login history week label"
-msgid "%b %e"
-msgstr "%b %e"
-
-#. Translators: This is a date format string in the style of "Feb 24, 2013",
-#. shown as the last day of a week on login history dialog.
-#: panels/user-accounts/cc-login-history-dialog.c:93
-msgctxt "login history week label"
-msgid "%b %e, %Y"
-msgstr "%Y %b %e"
-
-#. Translators: This indicates a week label on a login history.
-#. The first %s is the first day of a week, and the second %s the last day.
-#: panels/user-accounts/cc-login-history-dialog.c:98
-#, c-format
-msgctxt "login history week label"
-msgid "%s — %s"
-msgstr "%s — %s"
-
-#. Translators: This is a time format string in the style of "22:58".
-#. It indicates a login time which follows a date.
-#: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:744
-msgctxt "login date-time"
-msgid "%k:%M"
-msgstr "%k:%M"
-
-#. Translators: This indicates a login date-time.
-#. The first %s is a date, and the second %s a time.
-#: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:748
-#, c-format
-msgctxt "login date-time"
-msgid "%s, %s"
-msgstr "%s，%s"
-
-#: panels/user-accounts/cc-login-history-dialog.c:238
-msgid "Session Ended"
-msgstr "会话结束"
-
-#: panels/user-accounts/cc-login-history-dialog.c:244
-msgid "Session Started"
-msgstr "会话开始"
-
-#. Translators: This is the title of the "Account Activity" dialog.
-#. The %s is the user real name.
-#: panels/user-accounts/cc-login-history-dialog.c:339
-#, c-format
-msgid "%s — Account Activity"
-msgstr "%s — 帐号活动"
-
-#: panels/user-accounts/cc-login-history-dialog.ui:30
-msgid "Previous"
-msgstr "上页"
-
-#: panels/user-accounts/cc-login-history-dialog.ui:40
-msgid "Next"
-msgstr "下页"
-
 #: panels/user-accounts/cc-password-dialog.c:127
 msgid "Please choose another password."
 msgstr "请选择另一个密码。"
@@ -7838,100 +7783,96 @@ msgstr "无效密码，请重试"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "无法连接到 %s 域：%s"
 
-#: panels/user-accounts/cc-user-panel.c:259
+#: panels/user-accounts/cc-user-panel.c:257
 msgid "Add User…"
 msgstr "添加用户…"
 
-#: panels/user-accounts/cc-user-panel.c:373
+#: panels/user-accounts/cc-user-panel.c:371
 msgid "Failed to delete user"
 msgstr "删除用户失败"
 
-#: panels/user-accounts/cc-user-panel.c:430
-#: panels/user-accounts/cc-user-panel.c:485
-#: panels/user-accounts/cc-user-panel.c:531
+#: panels/user-accounts/cc-user-panel.c:428
+#: panels/user-accounts/cc-user-panel.c:483
+#: panels/user-accounts/cc-user-panel.c:529
 msgid "Failed to revoke remotely managed user"
 msgstr "吊销远程管理的用户失败"
 
-#: panels/user-accounts/cc-user-panel.c:580
+#: panels/user-accounts/cc-user-panel.c:578
 msgid "You cannot delete your own account."
 msgstr "不能删除自己的帐号。"
 
-#: panels/user-accounts/cc-user-panel.c:589
+#: panels/user-accounts/cc-user-panel.c:587
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s 已经登录"
 
-#: panels/user-accounts/cc-user-panel.c:593
+#: panels/user-accounts/cc-user-panel.c:591
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
 msgstr "删除已登录帐号可能导致系统不一致。"
 
-#: panels/user-accounts/cc-user-panel.c:602
+#: panels/user-accounts/cc-user-panel.c:600
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "要保留 %s 的文件吗？"
 
-#: panels/user-accounts/cc-user-panel.c:606
+#: panels/user-accounts/cc-user-panel.c:604
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
 msgstr "删除用户时可以保留其主目录、电子邮件目录和临时文件。"
 
-#: panels/user-accounts/cc-user-panel.c:609
+#: panels/user-accounts/cc-user-panel.c:607
 msgid "_Delete Files"
 msgstr "删除文件(_D)"
 
-#: panels/user-accounts/cc-user-panel.c:610
+#: panels/user-accounts/cc-user-panel.c:608
 msgid "_Keep Files"
 msgstr "保留文件(_K)"
 
-#: panels/user-accounts/cc-user-panel.c:624
+#: panels/user-accounts/cc-user-panel.c:622
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "您确定要吊销远程管理的帐号 %s 吗？"
 
-#: panels/user-accounts/cc-user-panel.c:628
+#: panels/user-accounts/cc-user-panel.c:626
 msgid "_Delete"
 msgstr "删除(_D)"
 
-#: panels/user-accounts/cc-user-panel.c:678
+#: panels/user-accounts/cc-user-panel.c:676
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "帐号已禁用"
 
-#: panels/user-accounts/cc-user-panel.c:686
+#: panels/user-accounts/cc-user-panel.c:684
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "下次登录时设置"
 
-#: panels/user-accounts/cc-user-panel.c:689
+#: panels/user-accounts/cc-user-panel.c:687
 msgctxt "Password mode"
 msgid "None"
 msgstr "无"
 
-#: panels/user-accounts/cc-user-panel.c:732
-msgid "Logged in"
-msgstr "已登录"
-
-#: panels/user-accounts/cc-user-panel.c:1246
+#: panels/user-accounts/cc-user-panel.c:1183
 msgid "Failed to contact the accounts service"
 msgstr "联系帐号服务失败"
 
-#: panels/user-accounts/cc-user-panel.c:1248
+#: panels/user-accounts/cc-user-panel.c:1185
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "请确定帐号服务已正确安装并启用。"
 
-#: panels/user-accounts/cc-user-panel.c:1270
+#: panels/user-accounts/cc-user-panel.c:1207
 msgid "This panel must be unlocked to change this setting"
 msgstr "该面板必须解锁才能更改设置"
 
-#: panels/user-accounts/cc-user-panel.c:1337
+#: panels/user-accounts/cc-user-panel.c:1274
 msgid "Delete the selected user account"
 msgstr "删除选中的用户帐号"
 
-#: panels/user-accounts/cc-user-panel.c:1341
-#: panels/user-accounts/cc-user-panel.c:1482
+#: panels/user-accounts/cc-user-panel.c:1278
+#: panels/user-accounts/cc-user-panel.c:1413
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -7939,7 +7880,7 @@ msgstr ""
 "要删除选中的用户帐号，\n"
 "请先点击 * 图标"
 
-#: panels/user-accounts/cc-user-panel.c:1528
+#: panels/user-accounts/cc-user-panel.c:1459
 msgid "Unlock to Add Users and Change Settings"
 msgstr "解锁以允许用户更改设置"
 
@@ -7982,42 +7923,38 @@ msgstr "指纹登录(_F)"
 msgid "A_utomatic Login"
 msgstr "自动登录(_U)"
 
-#: panels/user-accounts/cc-user-panel.ui:224
-msgid "Account Activity"
-msgstr "帐号活动"
-
-#: panels/user-accounts/cc-user-panel.ui:238
+#: panels/user-accounts/cc-user-panel.ui:229
 msgid "_Administrator"
 msgstr "管理员(_A)"
 
-#: panels/user-accounts/cc-user-panel.ui:239
+#: panels/user-accounts/cc-user-panel.ui:230
 msgid ""
 "Administrators can add and remove other users, and can change settings for "
 "all users."
 msgstr "管理员可以增删用户，也能为所有用户更改设置。"
 
-#: panels/user-accounts/cc-user-panel.ui:255
+#: panels/user-accounts/cc-user-panel.ui:246
 msgid "_Parental Controls"
 msgstr "家长控制(_P)"
 
-#: panels/user-accounts/cc-user-panel.ui:256
+#: panels/user-accounts/cc-user-panel.ui:247
 msgid "Open the Parental Controls app."
 msgstr "打开家长控制应用。"
 
-#: panels/user-accounts/cc-user-panel.ui:293
+#: panels/user-accounts/cc-user-panel.ui:284
 msgid "Remove User…"
 msgstr "移除用户…"
 
-#: panels/user-accounts/cc-user-panel.ui:305
+#: panels/user-accounts/cc-user-panel.ui:296
 msgid "Other Users"
 msgstr "其它用户"
 
 #. Translators: This is the empty state page label which states that there are no users to show in the panel.
-#: panels/user-accounts/cc-user-panel.ui:337
+#: panels/user-accounts/cc-user-panel.ui:328
 msgid "No Users Found"
 msgstr "未找到用户"
 
-#: panels/user-accounts/cc-user-panel.ui:346
+#: panels/user-accounts/cc-user-panel.ui:337
 msgid "Unlock to add a user account."
 msgstr "解锁以添加用户帐号。"
 
@@ -8269,7 +8206,7 @@ msgstr "请触摸屏幕上出现的标记以校准平板电脑。"
 msgid "Mis-click detected, restarting…"
 msgstr "检测到误点击，重新开始校准…"
 
-#: panels/wacom/cc-wacom-button-row.c:244
+#: panels/wacom/cc-wacom-button-row.c:243
 #, c-format
 msgid "Button %d"
 msgstr "按键 %d"
@@ -8349,10 +8286,6 @@ msgstr "仅使用数位板表面的一部分来保持显示器宽高比"
 #: panels/wacom/cc-wacom-page.ui:72
 msgid "Calibrate"
 msgstr "校准"
-
-#: panels/wacom/cc-wacom-panel.ui:9
-msgid "Test Your _Settings"
-msgstr "测试您的设置(_S)"
 
 #: panels/wacom/cc-wacom-panel.ui:56
 msgid "No tablet detected"
@@ -9031,15 +8964,15 @@ msgstr "可用面板："
 msgid "All Settings"
 msgstr "全部设置"
 
-#: shell/cc-window.ui:53 shell/cc-window.ui:55
+#: shell/cc-window.ui:54 shell/cc-window.ui:56
 msgid "Main Menu"
 msgstr "主菜单"
 
-#: shell/cc-window.ui:153
+#: shell/cc-window.ui:154
 msgid "Warning: Development Version"
 msgstr "警告：开发版本"
 
-#: shell/cc-window.ui:154
+#: shell/cc-window.ui:155
 msgid ""
 "This version of Settings should only be used for development purposes. You "
 "may experience incorrect system behavior, data loss, and other unexpected "
@@ -9048,7 +8981,7 @@ msgstr ""
 "该版本的 GNOME 设置仅适用于开发工作。您可能会遇到不正常的系统行为、数据丢失及"
 "其他未预期的问题。 "
 
-#: shell/cc-window.ui:165
+#: shell/cc-window.ui:166
 msgid "Help"
 msgstr "帮助"
 
@@ -9145,6 +9078,59 @@ msgstr[0] "%u 路输入"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "系统声音"
+
+#~ msgid "This Week"
+#~ msgstr "本周"
+
+#~ msgid "Last Week"
+#~ msgstr "上周"
+
+#~ msgctxt "login history week label"
+#~ msgid "%b %e"
+#~ msgstr "%b %e"
+
+#~ msgctxt "login history week label"
+#~ msgid "%b %e, %Y"
+#~ msgstr "%Y %b %e"
+
+#, c-format
+#~ msgctxt "login history week label"
+#~ msgid "%s — %s"
+#~ msgstr "%s — %s"
+
+#~ msgctxt "login date-time"
+#~ msgid "%k:%M"
+#~ msgstr "%k:%M"
+
+#, c-format
+#~ msgctxt "login date-time"
+#~ msgid "%s, %s"
+#~ msgstr "%s，%s"
+
+#~ msgid "Session Ended"
+#~ msgstr "会话结束"
+
+#~ msgid "Session Started"
+#~ msgstr "会话开始"
+
+#, c-format
+#~ msgid "%s — Account Activity"
+#~ msgstr "%s — 帐号活动"
+
+#~ msgid "Previous"
+#~ msgstr "上页"
+
+#~ msgid "Next"
+#~ msgstr "下页"
+
+#~ msgid "Logged in"
+#~ msgstr "已登录"
+
+#~ msgid "Account Activity"
+#~ msgstr "帐号活动"
+
+#~ msgid "Test Your _Settings"
+#~ msgstr "测试您的设置(_S)"
 
 #, c-format
 #~ msgid ""
