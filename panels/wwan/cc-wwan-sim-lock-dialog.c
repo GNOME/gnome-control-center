@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 
-#include "cc-list-row.h"
 #include "cc-wwan-sim-lock-dialog.h"
 #include "cc-wwan-resources.h"
 
@@ -49,7 +48,7 @@ struct _CcWwanSimLockDialog
   GtkButton    *apply_button;
   GtkStack     *button_stack;
   GtkGrid      *lock_change_grid;
-  CcListRow    *lock_row;
+  AdwSwitchRow *lock_row;
   GtkEntry     *new_pin_entry;
   GtkButton    *next_button;
   GtkEntry     *pin_confirm_entry;
@@ -74,7 +73,7 @@ cc_wwan_sim_lock_changed_cb (CcWwanSimLockDialog *self)
   gboolean row_enabled, lock_enabled;
 
   lock_enabled = cc_wwan_device_get_sim_lock (self->device);
-  row_enabled = cc_list_row_get_active (self->lock_row);
+  row_enabled = adw_switch_row_get_active (self->lock_row);
 
   gtk_widget_set_sensitive (GTK_WIDGET (self->next_button), lock_enabled != row_enabled);
   gtk_widget_set_visible (GTK_WIDGET (self->lock_change_grid), row_enabled && lock_enabled);
@@ -100,7 +99,7 @@ cc_wwan_pin_apply_clicked_cb (CcWwanSimLockDialog *self)
   gtk_widget_set_visible (GTK_WIDGET (self), FALSE);
 
   lock_enabled = cc_wwan_device_get_sim_lock (self->device);
-  row_enabled = cc_list_row_get_active (self->lock_row);
+  row_enabled = adw_switch_row_get_active (self->lock_row);
   pin = gtk_editable_get_text (GTK_EDITABLE (self->pin_entry));
   new_pin = gtk_editable_get_text (GTK_EDITABLE (self->new_pin_entry));
 

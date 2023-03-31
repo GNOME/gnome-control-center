@@ -29,7 +29,6 @@
 #include <glib/gi18n.h>
 #include <libmm-glib.h>
 
-#include "cc-list-row.h"
 #include "cc-wwan-errors-private.h"
 #include "cc-wwan-network-dialog.h"
 #include "cc-wwan-resources.h"
@@ -46,7 +45,7 @@ struct _CcWwanNetworkDialog
   GtkDialog     parent_instance;
 
   AdwToastOverlay *toast_overlay;
-  CcListRow    *automatic_row;
+  AdwSwitchRow *automatic_row;
   GtkButton    *button_apply;
   GtkSpinner   *loading_spinner;
   GtkBox       *network_search_title;
@@ -276,7 +275,7 @@ cc_wwan_network_dialog_apply_clicked_cb (CcWwanNetworkDialog *self)
 
   g_assert (CC_IS_WWAN_NETWORK_DIALOG (self));
 
-  is_auto = cc_list_row_get_active (self->automatic_row);
+  is_auto = adw_switch_row_get_active (self->automatic_row);
 
   if (is_auto)
     cc_wwan_device_register_network (self->device, "", NULL, NULL, NULL);
@@ -291,14 +290,14 @@ cc_wwan_network_dialog_apply_clicked_cb (CcWwanNetworkDialog *self)
 static void
 cc_wwan_auto_network_changed_cb (CcWwanNetworkDialog *self,
                                  GParamSpec          *pspec,
-                                 CcListRow           *auto_network_row)
+                                 AdwSwitchRow        *auto_network_row)
 {
   gboolean is_auto;
 
   g_assert (CC_IS_WWAN_NETWORK_DIALOG (self));
-  g_assert (CC_IS_LIST_ROW (auto_network_row));
+  g_assert (ADW_IS_SWITCH_ROW (auto_network_row));
 
-  is_auto = cc_list_row_get_active (auto_network_row);
+  is_auto = adw_switch_row_get_active (auto_network_row);
   gtk_widget_set_sensitive (GTK_WIDGET (self->button_apply), is_auto);
 
   if (self->no_update_network)

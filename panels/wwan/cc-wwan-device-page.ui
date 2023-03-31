@@ -71,9 +71,8 @@
 
                         <!-- Enable/Disable Data -->
                         <child>
-                          <object class="CcListRow" id="data_enable_row">
+                          <object class="AdwSwitchRow" id="data_enable_row">
                             <property name="use-underline">True</property>
-                            <property name="show-switch">True</property>
                             <property name="title" translatable="yes">_Mobile Data</property>
                             <property name="subtitle" translatable="yes">Access data using mobile network</property>
                             <signal name="notify::active" handler="wwan_data_settings_changed_cb" swapped="yes"/>
@@ -82,9 +81,8 @@
 
                         <!-- Data Roaming -->
                         <child>
-                          <object class="CcListRow" id="data_roaming_row">
+                          <object class="AdwSwitchRow" id="data_roaming_row">
                             <property name="use-underline">True</property>
-                            <property name="show-switch">True</property>
                             <property name="title" translatable="yes">_Data Roaming</property>
                             <property name="subtitle" translatable="yes">Use mobile data when roaming</property>
                             <signal name="notify::active" handler="wwan_data_settings_changed_cb" swapped="yes"/>

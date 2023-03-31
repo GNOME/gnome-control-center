@@ -85,8 +85,7 @@
                                   <class name="frame"/>
                                 </style>
                                 <child>
-                                  <object class="CcListRow" id="lock_row">
-                                    <property name="show-switch">True</property>
+                                  <object class="AdwSwitchRow" id="lock_row">
                                     <property name="use-underline">True</property>
                                     <property name="title" translatable="yes">_Lock SIM with PIN</property>
                                     <signal name="notify::active" handler="cc_wwan_sim_lock_changed_cb" swapped="yes"/>

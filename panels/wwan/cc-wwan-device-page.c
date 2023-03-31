@@ -61,8 +61,8 @@ struct _CcWwanDevicePage
 
   GtkListBox    *advanced_settings_list;
   CcListRow     *apn_settings_row;
-  CcListRow     *data_enable_row;
-  CcListRow     *data_roaming_row;
+  AdwSwitchRow  *data_enable_row;
+  AdwSwitchRow  *data_roaming_row;
   GtkListBox    *data_settings_list;
   CcListRow     *details_row;
   GtkStack      *main_stack;
@@ -106,7 +106,7 @@ static GParamSpec *properties[N_PROPS];
 
 static void
 wwan_device_page_handle_data_row (CcWwanDevicePage *self,
-                                  CcListRow        *data_row)
+                                  AdwSwitchRow     *data_row)
 {
   gboolean active;
 
@@ -119,7 +119,7 @@ wwan_device_page_handle_data_row (CcWwanDevicePage *self,
       return;
     }
 
-  active = cc_list_row_get_active (data_row);
+  active = adw_switch_row_get_active (data_row);
 
   if (data_row == self->data_enable_row)
     cc_wwan_data_set_enabled (self->wwan_data, active);
@@ -132,7 +132,7 @@ wwan_device_page_handle_data_row (CcWwanDevicePage *self,
 static gboolean
 wwan_apn_dialog_closed_cb (CcWwanDevicePage *self)
 {
-  CcListRow *data_row;
+  AdwSwitchRow *data_row;
 
   if (gtk_widget_in_destruction (GTK_WIDGET (self)))
     return FALSE;
@@ -336,7 +336,7 @@ wwan_device_unlock_clicked_cb (CcWwanDevicePage *self)
 static void
 wwan_data_settings_changed_cb (CcWwanDevicePage *self,
                                GParamSpec       *pspec,
-                               CcListRow        *data_row)
+                               AdwSwitchRow     *data_row)
 {
   if (self->is_self_change)
     {

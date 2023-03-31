@@ -32,8 +32,7 @@
                       <class name="boxed-list"/>
                     </style>
                     <child>
-                      <object class="CcListRow" id="automatic_row">
-                        <property name="show-switch">True</property>
+                      <object class="AdwSwitchRow" id="automatic_row">
                         <property name="use-underline">True</property>
                         <property name="title" translatable="yes">_Automatic</property>
                         <signal name="notify::active" handler="cc_wwan_auto_network_changed_cb" swapped="yes"/>
