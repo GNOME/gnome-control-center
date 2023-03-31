@@ -334,9 +334,9 @@
     <property name="width-request">360</property>
     <property name="height-request">294</property>
     <child>
-      <object class="AdwPreferencesPage">
+      <object class="AdwPreferencesPage" id="builtin_page">
         <child>
-          <object class="AdwPreferencesGroup" id="builtin_group">
+          <object class="AdwPreferencesGroup">
             <child>
               <object class="GtkListBox" id="builtin_list">
                 <property name="selection-mode">none</property>
@@ -363,18 +363,7 @@
     <property name="width-request">360</property>
     <property name="height-request">294</property>
     <child>
-      <object class="AdwPreferencesPage">
-
-        <child>
-          <object class="AdwPreferencesGroup">
-            <child>
-              <object class="GtkLabel" id="handler_title_label">
-                <property name="wrap">True</property>
-                <property name="xalign">0.0</property>
-              </object>
-            </child>
-          </object>
-        </child>
+      <object class="AdwPreferencesPage" id="handler_page">
 
         <child>
           <object class="AdwPreferencesGroup" id="handler_file_group">
