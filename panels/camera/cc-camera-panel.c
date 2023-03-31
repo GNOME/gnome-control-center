@@ -20,7 +20,6 @@
 
 #include "cc-camera-panel.h"
 #include "cc-camera-resources.h"
-#include "cc-list-row.h"
 #include "cc-util.h"
 
 #include <adwaita.h>
@@ -35,7 +34,7 @@ struct _CcCameraPanel
   CcPanel       parent_instance;
 
   GtkListBox   *camera_apps_list_box;
-  CcListRow    *camera_row;
+  AdwSwitchRow *camera_row;
 
   GSettings    *privacy_settings;
 

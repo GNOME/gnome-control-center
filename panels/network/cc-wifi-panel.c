@@ -23,7 +23,6 @@
 #include "net-device-wifi.h"
 #include "network-dialogs.h"
 #include "panel-common.h"
-#include "cc-list-row.h"
 
 #include "shell/cc-application.h"
 #include "shell/cc-log.h"
@@ -49,7 +48,7 @@ struct _CcWifiPanel
 
   /* RFKill (Airplane Mode) */
   GDBusProxy         *rfkill_proxy;
-  CcListRow          *rfkill_row;
+  AdwSwitchRow       *rfkill_row;
   GtkWidget          *rfkill_widget;
 
   /* Main widgets */
@@ -304,7 +303,7 @@ check_main_stack_page (CcWifiPanel *self)
 
   nm_version = nm_client_get_version (self->client);
   wireless_enabled = nm_client_wireless_get_enabled (self->client);
-  airplane_mode_active = cc_list_row_get_active (self->rfkill_row);
+  airplane_mode_active = adw_switch_row_get_active (self->rfkill_row);
 
   if (!nm_version)
     gtk_stack_set_visible_child_name (self->main_stack, "nm-not-running");
@@ -368,7 +367,7 @@ sync_airplane_mode_switch (CcWifiPanel *self)
 
   enabled |= hw_enabled;
 
-  if (enabled != cc_list_row_get_active (self->rfkill_row))
+  if (enabled != adw_switch_row_get_active (self->rfkill_row))
     {
       g_signal_handlers_block_by_func (self->rfkill_row,
                                        rfkill_switch_notify_activate_cb,
@@ -380,7 +379,7 @@ sync_airplane_mode_switch (CcWifiPanel *self)
                                          self);
   }
 
-  cc_list_row_set_switch_sensitive (self->rfkill_row, !hw_enabled);
+  gtk_widget_set_sensitive (GTK_WIDGET (self->rfkill_row), !hw_enabled);
 
   check_main_stack_page (self);
 }
@@ -661,7 +660,7 @@ rfkill_switch_notify_activate_cb (CcWifiPanel *self)
 {
   gboolean enable;
 
-  enable = cc_list_row_get_active (self->rfkill_row);
+  enable = adw_switch_row_get_active (self->rfkill_row);
 
   g_dbus_proxy_call (self->rfkill_proxy,
                      "org.freedesktop.DBus.Properties.Set",

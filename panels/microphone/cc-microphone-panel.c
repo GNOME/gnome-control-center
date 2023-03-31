@@ -18,7 +18,6 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-list-row.h"
 #include "cc-microphone-panel.h"
 #include "cc-microphone-resources.h"
 #include "cc-util.h"
@@ -33,7 +32,7 @@ struct _CcMicrophonePanel
 {
   CcPanel       parent_instance;
 
-  CcListRow    *microphone_row;
+  AdwSwitchRow *microphone_row;
   GtkListBox   *microphone_apps_list_box;
 
   GSettings    *privacy_settings;

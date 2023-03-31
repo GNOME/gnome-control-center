@@ -26,7 +26,6 @@
 #include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
 
-#include "cc-list-row.h"
 #include "cc-notifications-panel.h"
 #include "cc-notifications-resources.h"
 #include "cc-app-notifications-dialog.h"
@@ -39,8 +38,8 @@ struct _CcNotificationsPanel {
   CcPanel            parent_instance;
 
   GtkListBox        *app_listbox;
-  CcListRow         *lock_screen_row;
-  CcListRow         *dnd_row;
+  AdwSwitchRow      *lock_screen_row;
+  AdwSwitchRow      *dnd_row;
   GtkSizeGroup      *sizegroup1;
 
   GSettings         *master_settings;
@@ -184,8 +183,6 @@ cc_notifications_panel_class_init (CcNotificationsPanelClass *klass)
    * gets finalized */
   object_class->dispose = cc_notifications_panel_dispose;
   object_class->finalize = cc_notifications_panel_finalize;
-
-  g_type_ensure (CC_TYPE_LIST_ROW);
 
   gtk_widget_class_set_template_from_resource (widget_class, "/org/gnome/control-center/notifications/cc-notifications-panel.ui");
 

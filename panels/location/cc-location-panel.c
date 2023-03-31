@@ -18,7 +18,6 @@
  * Author: Matthias Clasen <mclasen@redhat.com>
  */
 
-#include "cc-list-row.h"
 #include "cc-location-panel.h"
 #include "cc-location-resources.h"
 #include "cc-util.h"
@@ -36,7 +35,7 @@ struct _CcLocationPanel
   CcPanel       parent_instance;
 
   GtkListBox   *location_apps_list_box;
-  CcListRow    *location_row;
+  AdwSwitchRow *location_row;
 
   GSettings    *location_settings;
 
