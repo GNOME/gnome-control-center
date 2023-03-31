@@ -41,19 +41,17 @@
 
 #include "shell/cc-shell.h"
 #include "cc-ua-macros.h"
-#include "cc-list-row.h"
 #include "cc-ua-hearing-page.h"
 
 struct _CcUaHearingPage
 {
   AdwPreferencesPage  parent_instance;
 
-  CcListRow          *overamplification_row;
+  AdwSwitchRow       *overamplification_row;
   GtkLabel           *sound_settings_label;
 
-  CcListRow          *visual_alerts_row;
+  AdwSwitchRow       *visual_alerts_row;
   AdwComboRow        *flash_type_row;
-  CcListRow          *test_flash_row;
 
   GSettings          *sound_settings;
   GSettings          *wm_settings;
@@ -140,7 +138,6 @@ cc_ua_hearing_page_class_init (CcUaHearingPageClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcUaHearingPage, visual_alerts_row);
   gtk_widget_class_bind_template_child (widget_class, CcUaHearingPage, flash_type_row);
-  gtk_widget_class_bind_template_child (widget_class, CcUaHearingPage, test_flash_row);
 
   gtk_widget_class_bind_template_callback (widget_class, ua_hearing_sound_settings_clicked_cb);
   gtk_widget_class_bind_template_callback (widget_class, ua_hearing_flash_type_row_changed_cb);

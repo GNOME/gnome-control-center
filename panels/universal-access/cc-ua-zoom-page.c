@@ -36,7 +36,6 @@
 # include "config.h"
 #endif
 
-#include "cc-list-row.h"
 #include "cc-ua-macros.h"
 #include "cc-ua-zoom-page.h"
 
@@ -44,21 +43,21 @@ struct _CcUaZoomPage
 {
   AdwPreferencesPage  parent_instance;
 
-  CcListRow          *desktop_zoom_row;
+  AdwSwitchRow       *desktop_zoom_row;
   GtkSpinButton      *magnify_factor_spin;
   AdwComboRow        *magnify_view_row;
 
-  CcListRow          *magnify_outside_screen_row;
+  AdwSwitchRow       *magnify_outside_screen_row;
   AdwComboRow        *zoom_screen_area_row;
   AdwComboRow        *zoom_follow_behaviour_row;
 
   GtkSwitch          *crosshair_switch;
-  CcListRow          *crosshair_overlap_mouse_row;
+  AdwSwitchRow       *crosshair_overlap_mouse_row;
   GtkScale           *crosshair_thickness_scale;
   GtkScale           *crosshair_length_scale;
   GtkColorButton     *crosshair_color_button;
 
-  CcListRow          *color_inverted_row;
+  AdwSwitchRow       *color_inverted_row;
   GtkScale           *brightness_scale;
   GtkScale           *contrast_scale;
   GtkScale           *grayscale_scale;

@@ -38,7 +38,6 @@
 
 #include <gdesktop-enums.h>
 
-#include "cc-list-row.h"
 #include "cc-ua-macros.h"
 #include "cc-ua-typing-page.h"
 
@@ -46,31 +45,30 @@ struct _CcUaTypingPage
 {
   AdwPreferencesPage  parent_instance;
 
-  CcListRow          *screen_kb_row;
-  CcListRow          *shortcuts_by_kb_row;
+  AdwSwitchRow       *screen_kb_row;
+  AdwSwitchRow       *shortcuts_by_kb_row;
 
-  CcListRow          *cursor_blink_row;
+  AdwSwitchRow       *cursor_blink_row;
   GtkScale           *blink_time_scale;
   AdwComboRow        *flash_type_row;
-  CcListRow          *test_flash_row;
 
   AdwExpanderRow     *repeat_keys_row;
   GtkScale           *repeat_speed_scale;
   GtkScale           *repeat_delay_scale;
 
   AdwExpanderRow     *sticky_keys_row;
-  CcListRow          *disable_sticky_keys_row;
-  CcListRow          *beep_sticky_keys_row;
+  AdwSwitchRow       *disable_sticky_keys_row;
+  AdwSwitchRow       *beep_sticky_keys_row;
 
   AdwExpanderRow     *slow_keys_row;
   GtkScale           *slow_keys_delay_scale;
-  CcListRow          *slow_keys_beep_row;
-  CcListRow          *slow_keys_beep_accept_row;
-  CcListRow          *slow_keys_beep_reject_row;
+  AdwSwitchRow       *slow_keys_beep_row;
+  AdwSwitchRow       *slow_keys_beep_accept_row;
+  AdwSwitchRow       *slow_keys_beep_reject_row;
 
   AdwExpanderRow     *bounce_keys_row;
   GtkScale           *bounce_keys_delay_scale;
-  CcListRow          *bounce_keys_beep_reject_row;
+  AdwSwitchRow       *bounce_keys_beep_reject_row;
 
   GSettings          *application_settings;
   GSettings          *interface_settings;

@@ -52,7 +52,7 @@ struct _CcUaPanel
 
   AdwPreferencesPage *main_page;
   AdwLeaflet         *main_leaflet;
-  CcListRow          *show_ua_menu_row;
+  AdwSwitchRow       *show_ua_menu_row;
   CcListRow          *seeing_row;
   CcListRow          *hearing_row;
   CcListRow          *typing_row;

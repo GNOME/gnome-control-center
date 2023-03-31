@@ -36,7 +36,6 @@
 # include "config.h"
 #endif
 
-#include "cc-list-row.h"
 #include "cc-ua-macros.h"
 #include "cc-ua-mouse-page.h"
 
@@ -44,8 +43,8 @@ struct _CcUaMousePage
 {
   AdwPreferencesPage  parent_instance;
 
-  CcListRow          *mouse_keys_row;
-  CcListRow          *locate_pointer_row;
+  AdwSwitchRow       *mouse_keys_row;
+  AdwSwitchRow       *locate_pointer_row;
   GtkScale           *double_click_delay_scale;
 
   AdwExpanderRow     *secondary_click_row;

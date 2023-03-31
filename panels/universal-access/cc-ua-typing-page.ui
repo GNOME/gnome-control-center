@@ -5,19 +5,17 @@
     <child>
       <object class="AdwPreferencesGroup">
         <child>
-          <object class="CcListRow" id="screen_kb_row">
+          <object class="AdwSwitchRow" id="screen_kb_row">
             <property name="title" translatable="yes">_Screen Keyboard</property>
             <property name="subtitle" translatable="yes">Use the on-screen keyboard to type in input fields</property>
             <property name="use-underline">True</property>
-            <property name="show-switch">True</property>
           </object>
         </child>
         <child>
-          <object class="CcListRow" id="shortcuts_by_kb_row">
+          <object class="AdwSwitchRow" id="shortcuts_by_kb_row">
             <property name="title" translatable="yes">_Enable by Keyboard</property>
             <property name="subtitle" translatable="yes">Turn accessibility features on or off using the keyboard</property>
             <property name="use-underline">True</property>
-            <property name="show-switch">True</property>
           </object>
         </child>
       </object>
@@ -28,11 +26,10 @@
         <property name="title" translatable="yes">Text Cursor</property>
 
         <child>
-          <object class="CcListRow" id="cursor_blink_row">
+          <object class="AdwSwitchRow" id="cursor_blink_row">
             <property name="title" translatable="yes">_Cursor Blinking</property>
             <property name="subtitle" translatable="yes">Change if the cursor blinks in text fields</property>
             <property name="use-underline">True</property>
-            <property name="show-switch">True</property>
           </object>
         </child>
 
@@ -156,15 +153,13 @@
             <property name="use-underline">True</property>
             <property name="show-enable-switch">True</property>
             <child>
-              <object class="CcListRow" id="disable_sticky_keys_row">
+              <object class="AdwSwitchRow" id="disable_sticky_keys_row">
                 <property name="title" translatable="yes">Disable if two keys are pressed together</property>
-                <property name="show-switch">True</property>
               </object>
             </child>
             <child>
-              <object class="CcListRow" id="beep_sticky_keys_row">
+              <object class="AdwSwitchRow" id="beep_sticky_keys_row">
                 <property name="title" translatable="yes">Beep when modifier key is pressed</property>
-                <property name="show-switch">True</property>
               </object>
             </child>
           </object>
@@ -200,21 +195,18 @@
               </object>
             </child>
             <child>
-              <object class="CcListRow" id="slow_keys_beep_row">
+              <object class="AdwSwitchRow" id="slow_keys_beep_row">
                 <property name="title" translatable="yes">Beep when a key is pressed</property>
-                <property name="show-switch">True</property>
               </object>
             </child>
             <child>
-              <object class="CcListRow" id="slow_keys_beep_accept_row">
+              <object class="AdwSwitchRow" id="slow_keys_beep_accept_row">
                 <property name="title" translatable="yes">Beep when a key is accepted</property>
-                <property name="show-switch">True</property>
               </object>
             </child>
             <child>
-              <object class="CcListRow" id="slow_keys_beep_reject_row">
+              <object class="AdwSwitchRow" id="slow_keys_beep_reject_row">
                 <property name="title" translatable="yes">Beep when a key is rejected</property>
-                <property name="show-switch">True</property>
               </object>
             </child>
           </object>
@@ -250,9 +242,8 @@
               </object>
             </child>
             <child>
-              <object class="CcListRow" id="bounce_keys_beep_reject_row">
+              <object class="AdwSwitchRow" id="bounce_keys_beep_reject_row">
                 <property name="title" translatable="yes">Beep when a key is rejected</property>
-                <property name="show-switch">True</property>
               </object>
             </child>
           </object>

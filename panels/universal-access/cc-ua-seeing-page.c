@@ -47,14 +47,14 @@ struct _CcUaSeeingPage
 {
   AdwPreferencesPage  parent_instance;
 
-  CcListRow          *high_contrast_row;
-  CcListRow          *animations_row;
-  CcListRow          *large_text_row;
+  AdwSwitchRow       *high_contrast_row;
+  AdwSwitchRow       *animations_row;
+  AdwSwitchRow       *large_text_row;
   CcListRow          *cursor_size_row;
-  CcListRow          *sound_keys_row;
-  CcListRow          *overlay_scrollbars_row;
+  AdwSwitchRow       *sound_keys_row;
+  AdwSwitchRow       *overlay_scrollbars_row;
 
-  CcListRow          *screen_reader_row;
+  AdwSwitchRow       *screen_reader_row;
 
   GSettings          *kb_settings;
   GSettings          *interface_settings;

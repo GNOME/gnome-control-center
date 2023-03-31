@@ -5,11 +5,10 @@
     <child>
       <object class="AdwPreferencesGroup">
         <child>
-          <object class="CcListRow" id="overamplification_row">
+          <object class="AdwSwitchRow" id="overamplification_row">
             <property name="title" translatable="yes">_Overamplification</property>
             <property name="subtitle" translatable="yes">Allow volume to exceed 100%. This will result in quality loss</property>
             <property name="use-underline">True</property>
-            <property name="show-switch">True</property>
           </object>
         </child>
         <child>
@@ -33,10 +32,9 @@
         <property name="description" translatable="yes">Use a visual indication when an alert sound occurs</property>
 
         <child>
-          <object class="CcListRow" id="visual_alerts_row">
+          <object class="AdwSwitchRow" id="visual_alerts_row">
             <property name="title" translatable="yes">_Visual Alerts</property>
             <property name="use-underline">True</property>
-            <property name="show-switch">True</property>
           </object>
         </child>
 
@@ -58,7 +56,7 @@
         </child>
 
         <child>
-          <object class="AdwActionRow" id="test_flash_row">
+          <object class="AdwActionRow">
             <property name="sensitive" bind-source="visual_alerts_row" bind-property="active" bind-flags="sync-create"/>
             <property name="title" translatable="yes">_Test Flash</property>
             <property name="use-underline">True</property>
