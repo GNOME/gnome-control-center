@@ -110,7 +110,7 @@ struct _CcApplicationsPanel
   CcInfoRow       *no_microphone;
   CcInfoRow       *builtin;
   GtkDialog       *builtin_dialog;
-  AdwPreferencesGroup *builtin_group;
+  AdwPreferencesPage *builtin_page;
   GtkListBox      *builtin_list;
 #ifdef HAVE_SNAP
   GList           *snap_permission_rows;
@@ -118,8 +118,8 @@ struct _CcApplicationsPanel
 
   GtkButton       *handler_reset;
   GtkDialog       *handler_dialog;
+  AdwPreferencesPage *handler_page;
   CcInfoRow       *handler_row;
-  GtkLabel        *handler_title_label;
   AdwPreferencesGroup *handler_file_group;
   AdwPreferencesGroup *handler_link_group;
   GList           *file_handler_rows;
@@ -848,7 +848,7 @@ add_static_permissions (CcApplicationsPanel *self,
     added += add_static_permission_row (self, _("Settings"), _("Can change settings"));
 
   text = g_strdup_printf (_("%s requires access to the following system resources. To stop this access, the app must be removed."), g_app_info_get_display_name (info));
-  adw_preferences_group_set_description (self->builtin_group, text);
+  adw_preferences_page_set_description (self->builtin_page, text);
 
   return added > 0;
 }
@@ -1198,7 +1198,7 @@ update_handler_dialog (CcApplicationsPanel *self,
 
   header_title = g_strdup_printf (_("<b>%s</b> is used to open the following types of files and links."),
                                   g_app_info_get_display_name (info));
-  gtk_label_set_markup (self->handler_title_label, header_title);
+  adw_preferences_page_set_description (self->handler_page, header_title);
 }
 
 /* --- usage section --- */
@@ -1751,7 +1751,7 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, app_name_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_dialog);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_group);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, builtin_list);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, cache);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, camera);
@@ -1759,11 +1759,11 @@ cc_applications_panel_class_init (CcApplicationsPanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, data);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, empty_box);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_dialog);
+  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_page);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_file_group);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_link_group);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_row);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_reset);
-  gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, handler_title_label);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, header_title);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, install_button);
   gtk_widget_class_bind_template_child (widget_class, CcApplicationsPanel, integration_section);
