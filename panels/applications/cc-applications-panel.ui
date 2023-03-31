@@ -111,10 +111,10 @@
             <child>
               <object class="AdwPreferencesGroup" id="integration_section">
                 <child>
-                  <object class="CcToggleRow" id="search">
+                  <object class="AdwSwitchRow" id="search">
                     <property name="title" translatable="yes">Search</property>
                     <property name="subtitle" translatable="yes">Receive system searches and send results</property>
-                    <signal name="notify::allowed" handler="search_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <signal name="notify::active" handler="search_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
                 <child>
@@ -125,38 +125,38 @@
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="notification">
+                  <object class="AdwSwitchRow" id="notification">
                     <property name="title" translatable="yes">Notifications</property>
                     <property name="subtitle" translatable="yes">Show system notifications</property>
-                    <signal name="notify::allowed" handler="notification_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <signal name="notify::active" handler="notification_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="background">
+                  <object class="AdwSwitchRow" id="background">
                     <property name="title" translatable="yes">Run in Background</property>
                     <property name="subtitle" translatable="yes">Allow activity when the app is closed</property>
-                    <signal name="notify::allowed" handler="background_cb" swapped="yes"/>
+                    <signal name="notify::active" handler="background_cb" swapped="yes"/>
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="screenshot">
+                  <object class="AdwSwitchRow" id="screenshot">
                     <property name="title" translatable="yes">Screenshots</property>
                     <property name="subtitle" translatable="yes">Take pictures of the screen at any time</property>
-                    <signal name="notify::allowed" handler="screenshot_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <signal name="notify::active" handler="screenshot_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="wallpaper">
+                  <object class="AdwSwitchRow" id="wallpaper">
                     <property name="title" translatable="yes">Change Wallpaper</property>
                     <property name="subtitle" translatable="yes">Change the desktop wallpaper.</property>
-                    <signal name="notify::allowed" handler="wallpaper_cb" swapped="yes"/>
+                    <signal name="notify::active" handler="wallpaper_cb" swapped="yes"/>
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="sound">
+                  <object class="AdwSwitchRow" id="sound">
                     <property name="title" translatable="yes">Sounds</property>
                     <property name="subtitle" translatable="yes">Reproduce sounds.</property>
-                    <signal name="notify::allowed" handler="sound_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <signal name="notify::active" handler="sound_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
                 <child>
@@ -167,17 +167,17 @@
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="shortcuts">
+                  <object class="AdwSwitchRow" id="shortcuts">
                     <property name="title" translatable="yes">Inhibit Shortcuts</property>
                     <property name="subtitle" translatable="yes">Block standard keyboard shortcuts</property>
-                    <signal name="notify::allowed" handler="shortcuts_cb" swapped="yes"/>
+                    <signal name="notify::active" handler="shortcuts_cb" swapped="yes"/>
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="camera">
+                  <object class="AdwSwitchRow" id="camera">
                     <property name="title" translatable="yes">Camera</property>
                     <property name="subtitle" translatable="yes">Take pictures with the camera</property>
-                    <signal name="notify::allowed" handler="camera_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <signal name="notify::active" handler="camera_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
                 <child>
@@ -188,10 +188,10 @@
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="microphone">
+                  <object class="AdwSwitchRow" id="microphone">
                     <property name="title" translatable="yes">Microphone</property>
                     <property name="subtitle" translatable="yes">Record audio with the microphone</property>
-                    <signal name="notify::allowed" handler="microphone_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <signal name="notify::active" handler="microphone_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
                 <child>
@@ -202,10 +202,10 @@
                   </object>
                 </child>
                 <child>
-                  <object class="CcToggleRow" id="location">
+                  <object class="AdwSwitchRow" id="location">
                     <property name="title" translatable="yes">Location Services</property>
                     <property name="subtitle" translatable="yes">Access device location data</property>
-                    <signal name="notify::allowed" handler="location_cb" object="CcApplicationsPanel" swapped="yes"/>
+                    <signal name="notify::active" handler="location_cb" object="CcApplicationsPanel" swapped="yes"/>
                   </object>
                 </child>
                 <child>
