@@ -42,7 +42,15 @@
 
     <child type="content">
       <object class="AdwPreferencesPage">
-        <!-- Airplane Mode Toggle -->
+        <child>
+          <object class="AdwPreferencesGroup">
+            <child>
+              <object class="GtkStack" id="device_stack" />
+            </child>
+          </object>
+        </child>
+
+        <!-- Airplane Mode -->
         <child>
           <object class="AdwPreferencesGroup" id="rfkill_widget">
             <child>
