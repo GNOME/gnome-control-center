@@ -1182,6 +1182,7 @@ update_handler_dialog (CcApplicationsPanel *self, GAppInfo *info)
 
         if (!app_info_recommended_for (info, ctype)) {
             gtk_widget_set_sensitive (GTK_WIDGET (self->handler_reset_button_row), TRUE);
+            gtk_widget_set_visible (GTK_WIDGET (self->handler_row), TRUE);
             continue;
         }
 
@@ -1191,17 +1192,26 @@ update_handler_dialog (CcApplicationsPanel *self, GAppInfo *info)
         n_associations++;
     }
 
+    formatted_name = g_strdup_printf ("<b>%s</b>", g_app_info_get_display_name (info));
+
     if (n_associations > 0) {
         g_autofree gchar *types_number = NULL;
 
         types_number =
             g_strdup_printf (g_dngettext (GETTEXT_PACKAGE, "%u type", "%u types", n_associations), n_associations);
         cc_list_row_set_secondary_label (self->handler_row, types_number);
+
+        /* TRANSLATORS: %s is an app name. */
+        header_title = g_strdup_printf (_("%s is used to open the following types of files and links"), formatted_name);
+    } else {
+        cc_list_row_set_secondary_label (self->handler_row, _("None"));
+
+        /* TRANSLATORS: %s is an app name. */
+        header_title = g_strdup_printf (_("%s is not used to open any types of files and links. Resetting will "
+                                          "associate all recommended types with it"),
+                                          formatted_name);
     }
 
-    formatted_name = g_strdup_printf ("<b>%s</b>", g_app_info_get_display_name (info));
-    /* TRANSLATORS: %s is an app name. */
-    header_title = g_strdup_printf (_("%s is used to open the following types of files and links"), formatted_name);
     adw_preferences_page_set_description (self->handler_page, header_title);
 }
 
