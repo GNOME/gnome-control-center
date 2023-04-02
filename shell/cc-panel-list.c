@@ -968,6 +968,48 @@ cc_panel_list_add_panel (CcPanelList        *self,
     gtk_widget_set_visible (GTK_WIDGET (self->privacy_row), TRUE);
 }
 
+/* Scrolls sibebar so that @row is at middle of the visible part of list */
+static void
+cc_panel_list_scroll_to_center_row (CcPanelList *self,
+                                    GtkWidget *row)
+{
+  double target_value;
+  graphene_point_t p;
+  GtkAdjustment *adj;
+  GtkWidget *scrolled_window;
+
+  g_return_if_fail (GTK_IS_LIST_BOX_ROW (row));
+
+  scrolled_window = gtk_widget_get_ancestor (row, GTK_TYPE_SCROLLED_WINDOW);
+  adj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (scrolled_window));
+  if (!adj)
+    return;
+
+  if (!gtk_widget_compute_point (row, scrolled_window, &GRAPHENE_POINT_INIT (0, 0), &p))
+    return;
+
+  target_value = p.y + gtk_widget_get_height (row) / 2;
+
+  gtk_adjustment_set_value (adj, target_value - gtk_adjustment_get_page_size (adj) / 2);
+}
+
+typedef struct {
+  CcPanelList *panel_list;
+  GtkWidget *row;
+} ScrollData;
+
+static gboolean
+scroll_to_idle_cb (ScrollData *data)
+{
+  cc_panel_list_scroll_to_center_row (data->panel_list, data->row);
+
+  g_object_unref (data->panel_list);
+  g_object_unref (data->row);
+  g_free (data);
+
+  return FALSE;
+}
+
 /**
  * cc_panel_list_set_active_panel:
  * @self: a #CcPanelList
@@ -981,6 +1023,7 @@ cc_panel_list_set_active_panel (CcPanelList *self,
 {
   GtkWidget *listbox;
   RowData *data;
+  ScrollData *sdata;
 
   g_return_if_fail (CC_IS_PANEL_LIST (self));
 
@@ -1031,6 +1074,14 @@ cc_panel_list_set_active_panel (CcPanelList *self,
   /* Store the current panel id */
   g_clear_pointer (&self->current_panel_id, g_free);
   self->current_panel_id = g_strdup (id);
+
+  /* Scroll the sidebar to the selected panel row, as that row may be
+   * out of view when panel is launched from a search or from cli */
+  sdata = g_new (ScrollData, 1);
+  sdata->panel_list = g_object_ref (self);
+  sdata->row = g_object_ref (data->row);
+
+  g_idle_add (G_SOURCE_FUNC (scroll_to_idle_cb), sdata);
 }
 
 /**
