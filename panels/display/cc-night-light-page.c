@@ -630,6 +630,7 @@ cc_night_light_page_finalize (GObject *object)
   g_cancellable_cancel (self->cancellable);
 
   g_clear_object (&self->cancellable);
+  g_clear_object (&self->config_manager);
   g_clear_object (&self->proxy_color);
   g_clear_object (&self->proxy_color_props);
   g_clear_object (&self->settings_display);
