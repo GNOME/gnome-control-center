@@ -782,8 +782,9 @@ cc_night_light_page_init (CcNightLightPage *self)
     }
 
   self->config_manager = cc_display_config_manager_dbus_new ();
-  g_signal_connect (self->config_manager, "changed",
-                    G_CALLBACK (config_manager_changed_cb), self);
+  g_signal_connect_object (self->config_manager, "changed",
+                           G_CALLBACK (config_manager_changed_cb), self,
+                           G_CONNECT_DEFAULT);
 
   dialog_update_state (self);
 }
