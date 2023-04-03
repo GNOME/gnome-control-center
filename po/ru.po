@@ -24,8 +24,8 @@ msgstr ""
 "Project-Id-Version: ru\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
 "issues\n"
-"POT-Creation-Date: 2023-03-16 16:46+0000\n"
-"PO-Revision-Date: 2023-03-16 20:11+0300\n"
+"POT-Creation-Date: 2023-03-24 08:48+0000\n"
+"PO-Revision-Date: 2023-03-24 13:01+0300\n"
 "Last-Translator: Aleksandr Melman <Alexmelman88@gmail.com>\n"
 "Language-Team: Русский <gnome-cyr@gnome.org>\n"
 "Language: ru\n"
@@ -362,7 +362,7 @@ msgstr "Выберите изображение"
 #: panels/background/cc-background-chooser.c:315
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
+#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:745
@@ -1556,37 +1556,33 @@ msgstr "Настройки для автоматического сообщен�
 msgid "diagnostics;crash;"
 msgstr "диагностика;крах;"
 
-#: panels/display/cc-display-panel.c:493
+#: panels/display/cc-display-panel.c:496
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Включено"
 
-#: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
+#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Выключено"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:936
 msgid "Apply Changes?"
 msgstr "Применить изменения?"
 
-#: panels/display/cc-display-panel.c:936
+#: panels/display/cc-display-panel.c:941
 msgid "Changes Cannot be Applied"
 msgstr "Изменения не могут быть применены"
 
-#: panels/display/cc-display-panel.c:938
+#: panels/display/cc-display-panel.c:943
 msgid "This could be due to hardware limitations."
 msgstr "Это может быть связано с аппаратными ограничениями."
 
-#: panels/display/cc-display-panel.ui:43
-#: panels/network/connection-editor/connection-editor.ui:21
-msgid "_Apply"
-msgstr "_Применить"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:89
+#: panels/display/cc-display-panel.ui:220
+#: panels/display/cc-display-panel.ui:259 panels/mouse/cc-mouse-panel.ui:22
 #: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
@@ -1597,34 +1593,39 @@ msgstr "_Применить"
 msgid "Back"
 msgstr "Назад"
 
-#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:54
+#: panels/network/connection-editor/connection-editor.ui:21
+msgid "_Apply"
+msgstr "_Применить"
+
+#: panels/display/cc-display-panel.ui:111
 msgid "Display Settings Disabled"
 msgstr "Настройки дисплея отключены"
 
-#: panels/display/cc-display-panel.ui:111
+#: panels/display/cc-display-panel.ui:122
 msgid "Multiple Displays"
 msgstr "Несколько дисплеев"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:120
+#: panels/display/cc-display-panel.ui:131
 msgid "Join"
 msgstr "Объединить"
 
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:138
 msgid "Mirror"
 msgstr "Зеркальное отображение"
 
-#: panels/display/cc-display-panel.ui:155
+#: panels/display/cc-display-panel.ui:166
 msgid "Contains top bar and Activities"
 msgstr "Содержит верхнюю панель и меню Обзор"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:167
 msgid "Primary Display"
 msgstr "Основной дисплей"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:177
-#: panels/display/cc-display-panel.ui:216
+#: panels/display/cc-display-panel.ui:188
+#: panels/display/cc-display-panel.ui:227
 #: panels/display/cc-night-light-page.ui:117
 msgid "Night Light"
 msgstr "Ночной свет"
@@ -2458,7 +2459,7 @@ msgstr "Извлечь"
 #: panels/keyboard/01-input-sources.xml.in:4
 #: panels/universal-access/cc-ua-panel.c:122
 msgid "Typing"
-msgstr "Ввод"
+msgstr "Ввод текста"
 
 #: panels/keyboard/01-input-sources.xml.in:8
 msgid "Switch to next input source"
@@ -2728,11 +2729,11 @@ msgstr "Комбинации клавиш"
 msgid "View and Customize Shortcuts"
 msgstr "Просмотр и изменение комбинаций клавиш"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:382
 msgid "Reset All Shortcuts?"
 msgstr "Сбросить все комбинации клавиш?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:384
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:385
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2740,14 +2741,14 @@ msgstr ""
 "Сброс комбинаций клавиш может также повлиять на пользовательские комбинации "
 "клавиш. Это действие нельзя отменить."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:388
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
 #: panels/network/cc-network-panel.ui:26
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Отменить"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
 msgid "Reset All"
 msgstr "Сбросить все"
 
@@ -3628,7 +3629,7 @@ msgstr "WPA2"
 #. TRANSLATORS: this Enterprise WiFi security
 #: panels/network/connection-editor/ce-page-details.c:130
 msgid "Enterprise"
-msgstr "Предприятие"
+msgstr "Enterprise"
 
 #: panels/network/connection-editor/ce-page-details.c:135
 #: panels/network/net-device-wifi.c:220
@@ -3810,19 +3811,19 @@ msgstr "LEAP"
 
 #: panels/network/connection-editor/ce-page-security.c:331
 msgid "Dynamic WEP (802.1x)"
-msgstr "Динамический WEP (802.1x)"
+msgstr "Dynamic WEP (802.1x)"
 
 #: panels/network/connection-editor/ce-page-security.c:345
 msgid "WPA & WPA2 Personal"
-msgstr "Персональный WPA и WPA2"
+msgstr "WPA & WPA2 Personal"
 
 #: panels/network/connection-editor/ce-page-security.c:359
 msgid "WPA & WPA2 Enterprise"
-msgstr "Корпоративный WPA и WPA2"
+msgstr "WPA & WPA2 Enterprise"
 
 #: panels/network/connection-editor/ce-page-security.c:373
 msgid "WPA3 Personal"
-msgstr "Персональный WPA3"
+msgstr "WPA3 Personal"
 
 #: panels/network/connection-editor/ce-page-wireguard.c:106
 #: panels/network/connection-editor/net-connection-editor.c:864
@@ -6993,7 +6994,7 @@ msgstr "Наведение и нажатие"
 
 #: panels/universal-access/cc-ua-panel.c:126
 msgid "Zoom"
-msgstr "Масштаб"
+msgstr "Масштабирование"
 
 #: panels/universal-access/cc-ua-panel.ui:42
 msgid "_Accessibility Menu"
@@ -9394,6 +9395,12 @@ msgstr[2] "%u входов"
 #: subprojects/gvc/gvc-mixer-control.c:2867
 msgid "System Sounds"
 msgstr "Системные звуки"
+
+#~ msgid "Network name cannot be empty"
+#~ msgstr "Имя сети не может быть пустым"
+
+#~ msgid "Network name is too long"
+#~ msgstr "Имя сети слишком длинное"
 
 #~ msgid "Applications"
 #~ msgstr "Приложения"
