@@ -139,7 +139,6 @@ cc_wifi_connection_list_row_add (CcWifiConnectionList *self,
   g_signal_connect_object (res, "show-qr-code", G_CALLBACK (on_row_show_qr_code_cb), self, G_CONNECT_SWAPPED);
 
   g_signal_emit_by_name (self, "add-row", res);
-  gtk_widget_set_visible (GTK_WIDGET (self->listbox), g_hash_table_size (self->ssid_to_row) > 0);
 
   return res;
 }
@@ -164,7 +163,6 @@ clear_widget (CcWifiConnectionList *self)
       g_hash_table_iter_remove (&iter);
       g_signal_emit_by_name (self, "remove-row", row);
       gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-      gtk_widget_set_visible (GTK_WIDGET (self->listbox), g_hash_table_size (self->ssid_to_row) > 0);
     }
 
   /* Remove all connection rows */
@@ -177,7 +175,6 @@ clear_widget (CcWifiConnectionList *self)
       g_ptr_array_index (self->connections_row, i) = NULL;
       g_signal_emit_by_name (self, "remove-row", row);
       gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-      gtk_widget_set_visible (GTK_WIDGET (self->listbox), g_hash_table_size (self->ssid_to_row) > 0);
     }
 
   /* Reset the internal state */
@@ -432,7 +429,6 @@ on_device_ap_removed_cb (CcWifiConnectionList *self,
               g_ptr_array_index (self->connections_row, i) = NULL;
               g_signal_emit_by_name (self, "remove-row", row);
               gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-              gtk_widget_set_visible (GTK_WIDGET (self->listbox), g_hash_table_size (self->ssid_to_row) > 0);
             }
         }
     }
@@ -455,7 +451,6 @@ on_device_ap_removed_cb (CcWifiConnectionList *self,
       g_hash_table_remove (self->ssid_to_row, ssid);
       g_signal_emit_by_name (self, "remove-row", row);
       gtk_list_box_remove (self->listbox, GTK_WIDGET (row));
-      gtk_widget_set_visible (GTK_WIDGET (self->listbox), g_hash_table_size (self->ssid_to_row) > 0);
     }
 }
 
@@ -753,7 +748,6 @@ cc_wifi_connection_list_init (CcWifiConnectionList *self)
   gtk_list_box_set_selection_mode (GTK_LIST_BOX (self->listbox), GTK_SELECTION_NONE);
   gtk_widget_set_valign (GTK_WIDGET (self->listbox), GTK_ALIGN_START);
   gtk_widget_add_css_class (GTK_WIDGET (self->listbox), "boxed-list");
-  gtk_widget_set_visible(GTK_WIDGET (self->listbox), FALSE);
   adw_bin_set_child (ADW_BIN (self), GTK_WIDGET (self->listbox));
 
   self->hide_unavailable = TRUE;
