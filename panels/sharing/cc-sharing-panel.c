@@ -65,7 +65,6 @@ struct _CcSharingPanel
 
   GtkWidget *hostname_entry;
   GtkWidget *main_list_box;
-  GtkWidget *master_switch;
   GtkWidget *media_sharing_dialog;
   GtkWidget *media_sharing_headerbar;
   GtkWidget *media_sharing_row;
@@ -115,29 +114,7 @@ struct _CcSharingPanel
 
 CC_PANEL_REGISTER (CcSharingPanel, cc_sharing_panel)
 
-#define OFF_IF_VISIBLE(x, y) { if (gtk_widget_is_visible(x) && (y) != NULL && gtk_widget_is_sensitive(y)) gtk_switch_set_active (GTK_SWITCH(y), FALSE); }
-
 static gboolean store_remote_desktop_credentials_timeout (gpointer user_data);
-
-static void
-cc_sharing_panel_master_switch_notify (CcSharingPanel *self)
-{
-  gboolean active;
-
-  active = gtk_switch_get_active (GTK_SWITCH (self->master_switch));
-
-  if (!active)
-    {
-      /* disable all services if the master switch is not active */
-      OFF_IF_VISIBLE(self->media_sharing_row, self->media_sharing_switch);
-      OFF_IF_VISIBLE(self->personal_file_sharing_row, self->personal_file_sharing_switch);
-      OFF_IF_VISIBLE(self->remote_desktop_row, self->remote_desktop_switch);
-
-      gtk_switch_set_active (GTK_SWITCH (self->remote_login_switch), FALSE);
-    }
-
-  gtk_widget_set_sensitive (self->main_list_box, active);
-}
 
 static void
 cc_sharing_panel_dispose (GObject *object)
@@ -261,7 +238,6 @@ cc_sharing_panel_class_init (CcSharingPanelClass *klass)
 
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, hostname_entry);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, shared_folders_grid);
-  gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, master_switch);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, main_list_box);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_dialog);
   gtk_widget_class_bind_template_child (widget_class, CcSharingPanel, media_sharing_headerbar);
@@ -324,10 +300,6 @@ cc_sharing_panel_switch_to_label_transform_func (GBinding       *binding,
   else
     g_value_set_string (target_value, C_("service is disabled", "Off"));
 
-  /* ensure the master switch is active if one of the services is active */
-  if (active)
-    gtk_switch_set_active (GTK_SWITCH (self->master_switch), TRUE);
-
   return TRUE;
 }
 
@@ -360,10 +332,6 @@ cc_sharing_panel_networks_to_label_transform_func (GBinding       *binding,
   default:
     return FALSE;
   }
-
-  /* ensure the master switch is active if one of the services is active */
-  if (status != CC_SHARING_STATUS_OFF)
-    gtk_switch_set_active (GTK_SWITCH (self->master_switch), TRUE);
 
   return TRUE;
 }
@@ -1424,12 +1392,6 @@ cc_sharing_panel_init (CcSharingPanel *self)
                     G_CALLBACK (gtk_widget_hide), NULL);
   g_signal_connect (self->remote_desktop_dialog, "response",
                     G_CALLBACK (gtk_widget_hide), NULL);
-
-  /* start the panel in the disabled state */
-  gtk_switch_set_active (GTK_SWITCH (self->master_switch), FALSE);
-  gtk_widget_set_sensitive (self->main_list_box, FALSE);
-  g_signal_connect_object (self->master_switch, "notify::active",
-                           G_CALLBACK (cc_sharing_panel_master_switch_notify), self, G_CONNECT_SWAPPED);
 
   gsd_sharing_proxy_new_for_bus (G_BUS_TYPE_SESSION,
                                  G_DBUS_PROXY_FLAGS_NONE,
