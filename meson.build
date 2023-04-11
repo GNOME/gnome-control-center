@@ -1,6 +1,6 @@
 project(
   'gnome-control-center', 'c',
-        version : '44.0',
+        version : '45.alpha',
         license : 'GPL2+',
   meson_version : '>= 0.57.0'
 )
