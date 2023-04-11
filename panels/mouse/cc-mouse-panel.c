@@ -56,6 +56,7 @@ struct _CcMousePanel
   CcSplitRow        *touchpad_scroll_method_row;
   GtkListBoxRow     *touchpad_speed_row;
   GtkScale          *touchpad_speed_scale;
+  AdwActionRow      *touchpad_toggle_row;
   GtkSwitch         *touchpad_toggle_switch;
 
   GSettings         *mouse_settings;
@@ -165,12 +166,12 @@ get_touchpad_enabled (GSettings *settings)
 }
 
 static gboolean
-show_touchpad_enabling_switch (CcMousePanel *self)
+can_disable_touchpad (CcMousePanel *self)
 {
   if (!self->have_touchpad)
     return FALSE;
 
-  g_debug ("Should we show the touchpad disable switch: have_mouse: %s have_touchscreen: %s\n",
+  g_debug ("Should we show the row to enable touchpad: have_mouse: %s have_touchscreen: %s\n",
      self->have_mouse ? "true" : "false",
      self->have_touchscreen ? "true" : "false");
 
@@ -298,7 +299,7 @@ setup_dialog (CcMousePanel *self)
                                 NULL, NULL);
 
   /* Touchpad section */
-  gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_switch), show_touchpad_enabling_switch (self));
+  gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_row), can_disable_touchpad (self));
 
   g_settings_bind_with_mapping (self->touchpad_settings, "send-events",
                                 self->touchpad_toggle_switch, "active",
@@ -371,7 +372,7 @@ device_changed (CcMousePanel *self)
 
   self->have_mouse = mouse_is_present ();
   gtk_widget_set_visible (GTK_WIDGET (self->mouse_group), self->have_mouse);
-  gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_switch), show_touchpad_enabling_switch (self));
+  gtk_widget_set_visible (GTK_WIDGET (self->touchpad_toggle_row), can_disable_touchpad (self));
 }
 
 static void
@@ -462,6 +463,7 @@ cc_mouse_panel_class_init (CcMousePanelClass *klass)
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_speed_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_stack_page);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_speed_scale);
+  gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_row);
   gtk_widget_class_bind_template_child (widget_class, CcMousePanel, touchpad_toggle_switch);
 
   gtk_widget_class_bind_template_callback (widget_class, on_touchpad_scroll_method_changed_cb);
