@@ -41,9 +41,6 @@
                 <child>
                   <object class="GtkSwitch" id="device_off_switch">
                     <property name="valign">center</property>
-                    <accessibility>
-                      <property name="label" translatable="yes">Active</property>
-                    </accessibility>
                     <signal name="notify::active" handler="device_off_switch_changed_cb" object="NetDeviceEthernet" swapped="yes"/>
                   </object>
                 </child>
