@@ -269,6 +269,54 @@ create_save_dir (void)
 }
 
 static void
+reset_settings_if_defaults (CcBackgroundPanel *panel,
+                            GSettings         *settings,
+                            gboolean           check_dark)
+{
+  gsize i;
+  const char *keys[] = {
+    WP_URI_KEY,       /* this key needs to be first */
+    WP_URI_DARK_KEY,
+    WP_OPTIONS_KEY,
+    WP_SHADING_KEY,
+    WP_PCOLOR_KEY,
+    WP_SCOLOR_KEY,
+    NULL
+  };
+
+  for (i = 0; keys[i] != NULL; i++)
+    {
+      g_autoptr (GVariant) default_value = NULL;
+      g_autoptr (GVariant) user_value = NULL;
+      gboolean setting_is_default;
+
+      if (!check_dark && g_str_equal (keys[i], WP_URI_DARK_KEY))
+        continue;
+
+      default_value = g_settings_get_default_value (settings, keys[i]);
+      user_value = g_settings_get_value (settings, keys[i]);
+
+      setting_is_default = g_variant_equal (default_value, user_value);
+
+      /* As a courtesy to distros that are a little lackadaisical about making sure
+       * schema defaults match the settings in the background item with the default
+       * picture, we only look at the URI to determine if we shouldn't clean out dconf.
+       *
+       * In otherwords, we still clean out the picture-uri key from dconf when a user
+       * selects the default background in control-center, even if after selecting it
+       * e.g., primary-color still mismatches with schema defaults.
+       */
+      if (g_str_equal (keys[i], WP_URI_KEY) && !setting_is_default)
+        return;
+
+      if (setting_is_default)
+        g_settings_reset (settings, keys[i]);
+    }
+
+  g_settings_apply (settings);
+}
+
+static void
 set_background (CcBackgroundPanel *panel,
                 GSettings         *settings,
                 CcBackgroundItem  *item,
@@ -319,6 +367,9 @@ set_background (CcBackgroundPanel *panel,
 
   /* Apply all changes */
   g_settings_apply (settings);
+
+  /* Clean out dconf if the user went back to distro defaults */
+  reset_settings_if_defaults (panel, settings, set_dark);
 
   /* Save the source XML if there is one */
   filename = get_save_path ();
