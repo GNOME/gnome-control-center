@@ -1291,6 +1291,8 @@ on_permission_changed (CcUserPanel *self)
                 if (get_autologin_possible (user)) {
                         gtk_widget_set_visible (GTK_WIDGET (self->autologin_row), TRUE);
                         gtk_widget_set_sensitive (GTK_WIDGET (self->autologin_row), TRUE);
+
+                        remove_unlock_tooltip (GTK_WIDGET (self->autologin_row));
                 }
         }
         else {
