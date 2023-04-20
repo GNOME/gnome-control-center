@@ -207,9 +207,6 @@ cc_hostname_entry_constructed (GObject *object)
       gtk_widget_set_sensitive (GTK_WIDGET (self), FALSE);
     }
 
-  gtk_widget_set_sensitive (GTK_WIDGET (self),
-                            g_permission_get_allowed (permission));
-
   self->hostnamed_proxy = g_dbus_proxy_new_for_bus_sync (G_BUS_TYPE_SYSTEM,
                                                          G_DBUS_PROXY_FLAGS_NONE,
                                                          NULL,
