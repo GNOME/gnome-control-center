@@ -32,6 +32,7 @@
             <property name="hexpand">True</property>
             <child>
               <object class="GtkSearchEntry" id="language_filter_entry">
+                <property name="placeholder_text" translatable="yes">Language or country</property>
                 <property name="width_chars">30</property>
                 <signal name="search-changed" handler="language_filter_entry_search_changed_cb" object="CcLanguageChooser" swapped="yes"/>
               </object>

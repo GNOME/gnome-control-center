@@ -68,6 +68,7 @@
                 <property name="search_mode_enabled" bind-source="search_button" bind-property="active" bind-flags="sync-create|bidirectional" />
                 <child>
                   <object class="GtkSearchEntry" id="search_entry">
+                    <property name="placeholder_text" translatable="yes">Search settings</property>
                     <property name="width_chars">25</property>
                     <property name="max_width_chars">25</property>
                     <signal name="activate" handler="search_entry_activate_cb" object="CcWindow" swapped="yes" />
