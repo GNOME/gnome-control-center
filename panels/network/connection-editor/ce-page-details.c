@@ -90,7 +90,7 @@ forget_cb (CEPageDetails *self)
 
         native = gtk_widget_get_native (GTK_WIDGET (self));
         /* Translators: "%s" is the user visible name of the network */
-        message = g_strdup_printf (_("Saved details for %s will be permanently lost. This includes passwords and any network changes."),
+        message = g_strdup_printf (_("Saved details for “%s” will be permanently lost. This includes passwords and any network changes."),
                                    nm_connection_get_id (self->connection));
         dialog = adw_message_dialog_new (GTK_WINDOW (native),
                                         _("Forget Connection?"),
