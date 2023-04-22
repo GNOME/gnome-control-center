@@ -10,8 +10,8 @@
 msgid ""
 msgstr "Project-Id-Version: gnome-control-center master\n"
 "Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issues\n"
-"POT-Creation-Date: 2023-03-17 16:56+0000\n"
-"PO-Revision-Date: 2023-03-18 14:00+0100\n"
+"POT-Creation-Date: 2023-03-22 20:43+0000\n"
+"PO-Revision-Date: 2023-04-22 14:00+0100\n"
 "Last-Translator: Asier Sarasua Garmendia <asiersarasua@ni.eus>\n"
 "Language-Team: Basque <librezale@librezale.eus>\n"
 "Language: eu\n"
@@ -341,7 +341,7 @@ msgstr "Hautatu argazki bat"
 #: panels/background/cc-background-chooser.c:315
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
+#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:745
@@ -438,7 +438,7 @@ msgstr "Gaitu"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:24
 msgid "No Bluetooth Found"
-msgstr "Ez da Bluetooth-ik aurkitu"
+msgstr "Ez da Bluetoothik aurkitu"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:25
 msgid "Plug in a dongle to use Bluetooth."
@@ -446,7 +446,7 @@ msgstr "Konektatu Bluetooth gailua erabiltzeko"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:31
 msgid "Bluetooth Turned Off"
-msgstr "Bluetooth-a itzalita"
+msgstr "Bluetootha itzalita"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:32
 msgid "Turn on to connect devices and receive file transfers"
@@ -458,7 +458,7 @@ msgstr "Hegazkin modua piztuta dago"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:39
 msgid "Bluetooth is disabled when airplane mode is on"
-msgstr "Bluetooth-a desaktibatuta dago hegazkinaren modua piztuta agoenean"
+msgstr "Bluetootha desaktibatuta dago hegazkinaren modua piztuta dagoenean"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:42
 msgid "Turn Off Airplane Mode"
@@ -470,22 +470,22 @@ msgstr "Hardwarearen hegazkin modua piztuta dago"
 
 #: panels/bluetooth/cc-bluetooth-panel.ui:58
 msgid "Turn off the Airplane mode switch to enable Bluetooth."
-msgstr "Itzali hegazkin modua Bluetooth-a gaitzeko."
+msgstr "Itzali hegazkin modua Bluetootha gaitzeko."
 
 #. Translators: The found device is a printer connected via Bluetooth
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:3
 #: panels/printers/pp-new-printer-dialog.c:1383
 msgid "Bluetooth"
-msgstr "Bluetooth"
+msgstr "Bluetootha"
 
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:4
 msgid "Turn Bluetooth on and off and connect your devices"
-msgstr "Aktibatu eta desaktibatu Bluetooth eta konektatu gailuak"
+msgstr "Aktibatu eta desaktibatu Bluetootha eta konektatu gailuak"
 
 #. Translators: Search terms to find the Bluetooth panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/bluetooth/gnome-bluetooth-panel.desktop.in:15
 msgid "share;sharing;bluetooth;obex;"
-msgstr "partekatu;partekatzea;bluetooth;obex;"
+msgstr "partekatu;partekatzea;bluetootha;obex;"
 
 #: panels/camera/cc-camera-panel.ui:11
 msgid "_Camera Access"
@@ -1497,37 +1497,33 @@ msgstr "Arazoak automatikoki jakinarazteko ezarpenak"
 msgid "diagnostics;crash;"
 msgstr "diagnostikoak;kraskadura;"
 
-#: panels/display/cc-display-panel.c:493
+#: panels/display/cc-display-panel.c:496
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Aktibatuta"
 
-#: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
+#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Desaktibatuta"
 
-#: panels/display/cc-display-panel.c:931
+#: panels/display/cc-display-panel.c:936
 msgid "Apply Changes?"
 msgstr "Aplikatu aldaketak?"
 
-#: panels/display/cc-display-panel.c:936
+#: panels/display/cc-display-panel.c:941
 msgid "Changes Cannot be Applied"
 msgstr "Aldaketak ezin dira aplikatu"
 
-#: panels/display/cc-display-panel.c:938
+#: panels/display/cc-display-panel.c:943
 msgid "This could be due to hardware limitations."
 msgstr "Hardwarearen mugen erruz izan daiteke."
 
-#: panels/display/cc-display-panel.ui:43
-#: panels/network/connection-editor/connection-editor.ui:21
-msgid "_Apply"
-msgstr "_Aplikatu"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:89
+#: panels/display/cc-display-panel.ui:220
+#: panels/display/cc-display-panel.ui:259 panels/mouse/cc-mouse-panel.ui:22
 #: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
@@ -1538,34 +1534,39 @@ msgstr "_Aplikatu"
 msgid "Back"
 msgstr "Atzera"
 
-#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:54
+#: panels/network/connection-editor/connection-editor.ui:21
+msgid "_Apply"
+msgstr "_Aplikatu"
+
+#: panels/display/cc-display-panel.ui:111
 msgid "Display Settings Disabled"
 msgstr "Pantaila-ezarpenak desgaituta"
 
-#: panels/display/cc-display-panel.ui:111
+#: panels/display/cc-display-panel.ui:122
 msgid "Multiple Displays"
 msgstr "Pantaila anitz"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:120
+#: panels/display/cc-display-panel.ui:131
 msgid "Join"
 msgstr "Elkartu"
 
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:138
 msgid "Mirror"
 msgstr "Ispilutu"
 
-#: panels/display/cc-display-panel.ui:155
+#: panels/display/cc-display-panel.ui:166
 msgid "Contains top bar and Activities"
 msgstr "Goiko barra eta 'Jarduerak' ditu"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:167
 msgid "Primary Display"
 msgstr "Pantaila nagusia"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:177
-#: panels/display/cc-display-panel.ui:216
+#: panels/display/cc-display-panel.ui:188
+#: panels/display/cc-display-panel.ui:227
 #: panels/display/cc-night-light-page.ui:117
 msgid "Night Light"
 msgstr "Gaueko argia"
@@ -1881,7 +1882,7 @@ msgstr "fwupd bertsioa:"
 
 #: panels/firmware-security/cc-firmware-security-dialog.c:294
 msgid "Hardware model:"
-msgstr "Hardware-eredua:"
+msgstr "Hardwarearen modeloa:"
 
 #. TRANSLATOR: "Processor" indicates the CPU model name.
 #: panels/firmware-security/cc-firmware-security-dialog.c:301
@@ -2195,7 +2196,7 @@ msgstr "Gailuaren izena"
 
 #: panels/info-overview/cc-info-overview-panel.ui:48
 msgid "Hardware Model"
-msgstr "Hardware-eredua"
+msgstr "Hardwarearen modeloa"
 
 #: panels/info-overview/cc-info-overview-panel.ui:57
 #: panels/wwan/cc-wwan-details-dialog.ui:210
@@ -2225,12 +2226,12 @@ msgstr "Kalkulatzen…"
 #. translators: this field contains the distro name and version
 #: panels/info-overview/cc-info-overview-panel.ui:105
 msgid "OS Name"
-msgstr "SE izena"
+msgstr "SEaren izena"
 
 #. translators: this field contains the distro build ID
 #: panels/info-overview/cc-info-overview-panel.ui:114
 msgid "OS Build ID"
-msgstr "SE eraikuntzaren IDa"
+msgstr "SEaren eraikuntzaren IDa"
 
 #: panels/info-overview/cc-info-overview-panel.ui:122
 msgid "OS Type"
@@ -2238,7 +2239,7 @@ msgstr "SE mota"
 
 #: panels/info-overview/cc-info-overview-panel.ui:130
 msgid "GNOME Version"
-msgstr "GNOME bertsioa"
+msgstr "GNOMEren bertsioa"
 
 #. translators: this is a placeholder while the GNOME version is being fetched
 #: panels/info-overview/cc-info-overview-panel.ui:132
@@ -2577,7 +2578,7 @@ msgstr "Aldatu sarrerako iturburua ba_naka leiho bakoitzean"
 
 #: panels/keyboard/cc-keyboard-panel.ui:59
 msgid "Special Character Entry"
-msgstr "Karaktere bereziaren sarrera"
+msgstr "Karaktere berezien sarrera"
 
 #: panels/keyboard/cc-keyboard-panel.ui:60
 msgid "Methods for entering symbols and letter variants using the keyboard."
@@ -3328,7 +3329,7 @@ msgstr "Hegazkin modua"
 
 #: panels/network/cc-wifi-panel.ui:76
 msgid "Disables Wi-Fi, Bluetooth and mobile broadband"
-msgstr "Haririk gabea, Bluetooth eta mugikorren banda zabala desgaitzen du"
+msgstr "Haririk gabea, bluetootha eta mugikorren banda zabala desgaitzen du"
 
 #: panels/network/cc-wifi-panel.ui:96
 msgid "No Wi-Fi Adapter Found"
@@ -3985,7 +3986,7 @@ msgstr "Kontrolatu nola konektatzen zaren Internetera"
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in:15
 msgid "Network;IP;LAN;Proxy;WAN;Broadband;Modem;Bluetooth;vpn;DNS;"
-msgstr "Sarea;IPa;LANa;Proxya;WANa;Bandazabala;Modema;Bluetooth-aa;VPNa;DNSa;"
+msgstr "Sarea;IPa;LANa;Proxya;WANa;Bandazabala;Modema;Bluetootha;VPNa;DNSa;"
 
 #: panels/network/gnome-wifi-panel.desktop.in:4
 msgid "Control how you connect to Wi-Fi networks"
@@ -6390,7 +6391,7 @@ msgstr "Aldatu soinuaren bolumena, sarrerak, irteerak eta eta alerten soinuak"
 #: panels/sound/gnome-sound-panel.desktop.in:15
 msgid ""
 "Card;Microphone;Volume;Fade;Balance;Bluetooth;Headset;Audio;Output;Input;"
-msgstr "Txartela;Mikrofonoa;Bolumena;Iraungi;Balantzea;Bluetooth-a;Entzungailua;Audioa;Irteera;Sarrera;"
+msgstr "Txartela;Mikrofonoa;Bolumena;Iraungi;Balantzea;Bluetootha;Entzungailua;Audioa;Irteera;Sarrera;"
 
 #: panels/thunderbolt/cc-bolt-device-dialog.c:92
 #: panels/thunderbolt/cc-bolt-device-entry.c:123
