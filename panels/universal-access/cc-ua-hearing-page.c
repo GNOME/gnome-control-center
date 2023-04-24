@@ -37,6 +37,7 @@
 #endif
 
 #include <gdesktop-enums.h>
+#include <glib/gi18n-lib.h>
 
 #include "shell/cc-shell.h"
 #include "cc-ua-macros.h"
@@ -155,7 +156,7 @@ cc_ua_hearing_page_init (CcUaHearingPage *self)
 
   /* '#' is a dummy target to make 'Sound' clickable */
   /* TRANSLATORS: Don't translate  <a href='#'> and </a> */
-  label = "System volume can be adjusted in <a href='#'>Sound</a> settings.";
+  label = _("System volume can be adjusted in <a href='#'>Sound</a> settings.");
   gtk_label_set_label (self->sound_settings_label, label);
 
   self->sound_settings = g_settings_new (SOUND_SETTINGS);
