@@ -85,8 +85,7 @@ cc_sharing_networks_update_status (CcSharingNetworks *self)
 
   if (self->networks == NULL)
     status = CC_SHARING_STATUS_OFF;
-  else if (gtk_widget_is_visible (self->current_switch) &&
-	   gtk_switch_get_active (GTK_SWITCH (self->current_switch)))
+  else if (gtk_switch_get_active (GTK_SWITCH (self->current_switch)))
     status = CC_SHARING_STATUS_ACTIVE;
   else
     status = CC_SHARING_STATUS_ENABLED;
@@ -280,7 +279,7 @@ static void
 cc_sharing_update_networks_box (CcSharingNetworks *self)
 {
   GtkWidget *child;
-  gboolean current_visible;
+  gboolean current_visible, current_network_enabled = FALSE;
   const char *current_network;
   GList *l;
 
@@ -334,11 +333,7 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     GtkWidget *row;
 
     if (g_strcmp0 (net->uuid, current_network) == 0) {
-      g_signal_handlers_block_by_func (self->current_switch,
-				       cc_sharing_networks_enable_network, self);
-      gtk_switch_set_active (GTK_SWITCH (self->current_switch), TRUE);
-      g_signal_handlers_unblock_by_func (self->current_switch,
-					 cc_sharing_networks_enable_network, self);
+      current_network_enabled = TRUE;
       continue;
     }
 
@@ -349,6 +344,12 @@ cc_sharing_update_networks_box (CcSharingNetworks *self)
     gtk_widget_set_visible (row, TRUE);
     gtk_list_box_insert (GTK_LIST_BOX (self->listbox), row, -1);
   }
+
+  g_signal_handlers_block_by_func (self->current_switch,
+                                   cc_sharing_networks_enable_network, self);
+  gtk_switch_set_active (GTK_SWITCH (self->current_switch), current_network_enabled);
+  g_signal_handlers_unblock_by_func (self->current_switch,
+                                     cc_sharing_networks_enable_network, self);
 
   if (self->networks == NULL &&
       !current_visible) {
