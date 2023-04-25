@@ -238,8 +238,9 @@ config_h.set('HAVE_MALCONTENT', enable_malcontent,
              description: 'Define to 1 if malcontent support is enabled')
 
 if host_is_linux
-  # network manager
+  # ModemManager
   mm_dep =  dependency('mm-glib', version: '>= 0.7')
+  # NetworkManager
   network_manager_deps = [
     dependency('libnm', version: '>= 1.24.0'),
     dependency('libnma-gtk4', version: '>= 1.10.2'),
@@ -285,8 +286,8 @@ gnome = import('gnome')
 i18n = import('i18n')
 pkg = import('pkgconfig')
 
-po_dir = join_paths(meson.source_root(), 'po')
-its_dir = join_paths(meson.source_root(), 'gettext')
+po_dir = join_paths(meson.project_source_root(), 'po')
+its_dir = join_paths(meson.project_source_root(), 'gettext')
 
 install_subdir(
   'gettext',

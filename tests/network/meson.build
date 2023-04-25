@@ -5,7 +5,7 @@ cflags = [
   '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
   '-DNETWORKMANAGER_COMPILATION=NM_NETWORKMANAGER_COMPILATION_WITH_GLIB',
   '-DNETWORKMANAGER_COMPILATION_TEST',
-  '-DTEST_NM_SERVICE="@0@"'.format(join_paths(meson.source_root(), 'tests', 'network', 'nm-utils', 'test-networkmanager-service.py')),
+  '-DTEST_NM_SERVICE="@0@"'.format(join_paths(meson.project_source_root(), 'tests', 'network', 'nm-utils', 'test-networkmanager-service.py')),
 ]
 
 exe = executable(
