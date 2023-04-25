@@ -14,7 +14,7 @@ env = [
 ]
 cflags = [
   '-DTEST_SRCDIR="@0@"'.format(meson.current_source_dir()),
-  '-DSRCDIR="@0@"'.format(meson.source_root() + '/panels/datetime')
+  '-DSRCDIR="@0@"'.format(meson.project_source_root() + '/panels/datetime')
 ]
 
 foreach unit: test_units

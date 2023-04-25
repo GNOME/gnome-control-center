@@ -19,7 +19,7 @@ common_sources = []
 
 enums = 'gdesktop-enums-types'
 enums_header = files(
-  gsettings_desktop_dep.get_pkgconfig_variable('prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
+  gsettings_desktop_dep.get_variable(pkgconfig: 'prefix') + '/include/gsettings-desktop-schemas/gdesktop-enums.h',
   'cc-background-item.h'
 )
 
