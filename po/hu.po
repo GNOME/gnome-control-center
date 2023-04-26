@@ -17,12 +17,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
-"es\n"
-"POT-Creation-Date: 2023-03-03 15:42+0000\n"
-"PO-Revision-Date: 2023-03-14 01:21+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
+"issues\n"
+"POT-Creation-Date: 2023-04-12 09:08+0000\n"
+"PO-Revision-Date: 2023-04-26 23:29+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
-"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
+"Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgstr "Eszközök"
 
 #: panels/applications/cc-applications-panel.c:828
 msgid "Full access to /dev"
-msgstr "Teljes hozzáférés a /dev-hez"
+msgstr "Teljes hozzáférés a /dev könyvtárhoz"
 
 #: panels/applications/cc-applications-panel.c:832
 #: panels/network/gnome-network-panel.desktop.in.in:3
@@ -92,7 +92,7 @@ msgstr "Beállítások"
 
 #: panels/applications/cc-applications-panel.c:848
 msgid "Can change settings"
-msgstr "Módosíthatja a beállításokat"
+msgstr "Megváltoztathatja a beállításokat"
 
 #: panels/applications/cc-applications-panel.c:850
 #, c-format
@@ -179,12 +179,12 @@ msgstr "Rendszerkeresések fogadása és a találatok küldése."
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:123
 #: panels/keyboard/cc-xkb-modifier-dialog.c:344
 #: panels/keyboard/keyboard-shortcuts.c:367 panels/network/network-proxy.ui:107
-#: panels/user-accounts/cc-user-panel.c:804
-#: panels/user-accounts/cc-user-panel.c:907
+#: panels/user-accounts/cc-user-panel.c:805
+#: panels/user-accounts/cc-user-panel.c:937
 #: panels/wwan/cc-wwan-device-page.c:478
 #: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
-msgstr "Tiltva"
+msgstr "Letiltva"
 
 #: panels/applications/cc-applications-panel.ui:126
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:3
@@ -379,8 +379,8 @@ msgstr "Fénykép kiválasztása"
 #: panels/user-accounts/cc-avatar-chooser.c:167
 #: panels/user-accounts/cc-fingerprint-dialog.ui:32
 #: panels/user-accounts/cc-password-dialog.ui:20
-#: panels/user-accounts/cc-user-panel.c:594
-#: panels/user-accounts/cc-user-panel.c:612
+#: panels/user-accounts/cc-user-panel.c:595
+#: panels/user-accounts/cc-user-panel.c:613
 #: panels/user-accounts/data/join-dialog.ui:17
 #: panels/wwan/cc-wwan-mode-dialog.ui:32
 #: panels/wwan/cc-wwan-network-dialog.ui:108
@@ -1175,7 +1175,7 @@ msgstr "Tovább…"
 
 #: panels/common/cc-permission-infobar.c:109
 msgid "Unlock to Change Settings"
-msgstr "Feloldás a beállítások módosításához"
+msgstr "Feloldás a beállítások megváltoztatásához"
 
 #: panels/common/cc-permission-infobar.ui:42
 msgid "Some settings must be unlocked before they can be changed."
@@ -1442,7 +1442,7 @@ msgstr "Automatikus idő_zóna"
 #: panels/datetime/cc-datetime-panel.ui:205
 msgid "Requires location services enabled and internet access"
 msgstr ""
-"A helymeghatározó szolgáltatások engedélyezését és internetkapcsolatot "
+"A helymeghatározó szolgáltatások engedélyezését és internet-hozzáférést "
 "igényel"
 
 #. TRANSLATORS: if the function is enabled through BIOS or OS settings.
@@ -1453,8 +1453,8 @@ msgstr ""
 #: panels/keyboard/cc-xkb-modifier-dialog.ui:43
 #: panels/location/cc-location-panel.ui:9 panels/screen/cc-screen-panel.ui:40
 #: panels/screen/cc-screen-panel.ui:76 panels/screen/cc-screen-panel.ui:96
-#: panels/user-accounts/cc-user-panel.c:802
-#: panels/user-accounts/cc-user-panel.c:904
+#: panels/user-accounts/cc-user-panel.c:803
+#: panels/user-accounts/cc-user-panel.c:934
 #: panels/wwan/cc-wwan-device-page.c:476
 msgid "Enabled"
 msgstr "Engedélyezve"
@@ -1469,7 +1469,7 @@ msgstr "Idő_formátum"
 
 #: panels/datetime/gnome-datetime-panel.desktop.in.in:4
 msgid "Change the date and time, including time zone"
-msgstr "Dátum, idő és időzóna módosítása"
+msgstr "Dátum, idő és időzóna megváltoztatása"
 
 #. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/datetime/gnome-datetime-panel.desktop.in.in:15
@@ -1478,11 +1478,11 @@ msgstr "Óra;Időzóna;Hely;"
 
 #: panels/datetime/org.gnome.controlcenter.datetime.policy.in:11
 msgid "Change system time and date settings"
-msgstr "Rendszer dátum- és időbeállításainak módosítása"
+msgstr "Rendszer dátum- és időbeállításainak megváltoztatása"
 
 #: panels/datetime/org.gnome.controlcenter.datetime.policy.in:12
 msgid "To change time or date settings, you need to authenticate."
-msgstr "Hitelesítés szükséges a dátum- és időbeállítások módosításához."
+msgstr "Hitelesítés szükséges a dátum- és időbeállítások megváltoztatásához."
 
 #: panels/default-apps/cc-default-apps-panel.ui:23
 msgid "_Web"
@@ -1578,11 +1578,11 @@ msgstr "Ki"
 
 #: panels/display/cc-display-panel.c:930
 msgid "Apply Changes?"
-msgstr "Módosítások alkalmazása?"
+msgstr "Alkalmazza a változtatásokat?"
 
 #: panels/display/cc-display-panel.c:935
 msgid "Changes Cannot be Applied"
-msgstr "A módosítások nem alkalmazhatóak"
+msgstr "A változtatások nem alkalmazhatóak"
 
 #: panels/display/cc-display-panel.c:937
 msgid "This could be due to hardware limitations."
@@ -1656,7 +1656,7 @@ msgctxt "Display rotation"
 msgid "Landscape (flipped)"
 msgstr "Fekvő (fordított)"
 
-#: panels/display/cc-display-settings.c:177
+#: panels/display/cc-display-settings.c:180
 #, c-format
 msgid "%.2lf Hz"
 msgstr "%.2lf Hz"
@@ -2848,7 +2848,7 @@ msgstr[1] "%d módosítva"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:463
 msgid "Reset All Shortcuts?"
-msgstr "Minden gyorsbillentyű visszaállítása?"
+msgstr "Visszaállítja az összes gyorsbillentyűt?"
 
 #: panels/keyboard/cc-keyboard-shortcut-dialog.c:466
 msgid ""
@@ -2994,7 +2994,7 @@ msgid ""
 "Change keyboard shortcuts and set your typing preferences, keyboard layouts "
 "and input sources"
 msgstr ""
-"Gyorsbillentyűk módosítása és gépelési beállítások megadása, "
+"Gyorsbillentyűk megváltoztatása és gépelési beállítások megadása, "
 "billentyűzetkiosztások és bemeneti források"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
@@ -3189,7 +3189,8 @@ msgstr "E­gér és é­rin­tő­táb­la"
 msgid ""
 "Change your mouse or touchpad sensitivity and select right or left-handed"
 msgstr ""
-"Egér vagy érintőtábla érzékenységének, bal vagy jobb kezességének módosítása"
+"Egér vagy érintőtábla érzékenységének, bal vagy jobb kezességének "
+"megváltoztatása"
 
 #. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/mouse/gnome-mouse-panel.desktop.in.in:19
@@ -3392,8 +3393,8 @@ msgstr "Hálózat neve"
 #: panels/printers/new-printer-dialog.ui:338
 #: panels/printers/pp-jobs-dialog.ui:54 panels/sharing/cc-sharing-panel.ui:384
 #: panels/user-accounts/cc-add-user-dialog.ui:145
-#: panels/user-accounts/cc-add-user-dialog.ui:181
-#: panels/user-accounts/cc-add-user-dialog.ui:364
+#: panels/user-accounts/cc-add-user-dialog.ui:180
+#: panels/user-accounts/cc-add-user-dialog.ui:363
 #: panels/wwan/cc-wwan-apn-dialog.ui:175
 msgid "Password"
 msgstr "Jelszó"
@@ -4023,7 +4024,7 @@ msgstr "BSS_ID"
 
 #: panels/network/gnome-network-panel.desktop.in.in:4
 msgid "Control how you connect to the Internet"
-msgstr "Internetkapcsolatok beállítása"
+msgstr "Az Internethez való kapcsolódás módjának szabályozása"
 
 #. Translators: Search terms to find the Network panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-network-panel.desktop.in.in:19
@@ -4032,7 +4033,7 @@ msgstr "Hálózat;IP;LAN;Proxy;WAN;Széles sáv;Szélessáv;Modem;Bluetooth;vpn;
 
 #: panels/network/gnome-wifi-panel.desktop.in.in:4
 msgid "Control how you connect to Wi-Fi networks"
-msgstr "Wi-Fi hálózati kapcsolat beállítása"
+msgstr "A Wi-Fi-hálózatokhoz való kapcsolódás módjának szabályozása"
 
 #. Translators: Search terms to find the Wi-Fi panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/network/gnome-wifi-panel.desktop.in.in:19
@@ -4415,7 +4416,7 @@ msgstr "A PIN ellenőrzése sikertelen"
 #. TRANSLATORS: device status reason
 #: panels/network/panel-common.c:220
 msgid "Firmware for the device may be missing"
-msgstr "Az eszközhöz firmware hiányozhat"
+msgstr "Az eszközhöz belső vezérlőprogram hiányozhat"
 
 #. TRANSLATORS: device status reason
 #: panels/network/panel-common.c:224
@@ -4465,7 +4466,7 @@ msgstr "Kapcsolódás függősége meghiúsult"
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:327
 msgid "Firmware missing"
-msgstr "Hiányzó firmware"
+msgstr "Hiányzó belső vezérlőprogram"
 
 #. TRANSLATORS: device status
 #: panels/network/panel-common.c:331
@@ -4913,7 +4914,8 @@ msgstr "_Zárolási képernyő értesítések"
 
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:4
 msgid "Control which notifications are displayed and what they show"
-msgstr "Az értesítések megjelenítésének és tartalmuk beállítása"
+msgstr ""
+"Annak szabályozása, hogy mely értesítések jelenjenek meg és mit mutassanak"
 
 #. Translators: Search terms to find the Notifications panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/notifications/gnome-notifications-panel.desktop.in.in:20
@@ -5385,7 +5387,7 @@ msgstr "Energiagazdálkodás"
 msgid "View your battery status and change power saving settings"
 msgstr ""
 "Akkumulátorállapot megjelenítése és energiagazdálkodási beállítások "
-"módosítása"
+"megváltoztatása"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in.in:19
@@ -5415,7 +5417,7 @@ msgstr "A felület nem tölthető be: %s"
 
 #: panels/printers/cc-printers-panel.c:1315
 msgid "Unlock to Add Printers and Change Settings"
-msgstr "Feloldás a nyomtatók hozzáadásához és a beállítások módosításához"
+msgstr "Feloldás a nyomtatók hozzáadásához és a beállítások megváltoztatásához"
 
 #: panels/printers/gnome-printers-panel.desktop.in.in:3
 msgid "Printers"
@@ -5472,7 +5474,7 @@ msgstr ""
 #: panels/printers/new-printer-dialog.ui:317
 #: panels/printers/pp-jobs-dialog.ui:42
 #: panels/user-accounts/cc-add-user-dialog.ui:94
-#: panels/user-accounts/cc-add-user-dialog.ui:343
+#: panels/user-accounts/cc-add-user-dialog.ui:342
 #: panels/wwan/cc-wwan-apn-dialog.ui:150
 msgid "Username"
 msgstr "Felhasználónév"
@@ -5675,7 +5677,7 @@ msgstr "Hitelesítési adatok megadása a következőről történő nyomtatásh
 
 #. Translators: This is a windows domain used with SMB protocol.
 #: panels/printers/pp-jobs-dialog.ui:30
-#: panels/user-accounts/cc-add-user-dialog.ui:300
+#: panels/user-accounts/cc-add-user-dialog.ui:299
 msgid "Domain"
 msgstr "Tartomány"
 
@@ -6786,7 +6788,7 @@ msgstr "Mappák"
 
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:4
 msgid "Control what you want to share with others"
-msgstr "Megosztások beállítása"
+msgstr "Annak szabályozása, hogy mit szeretne megosztani másokkal"
 
 #. Translators: Search terms to find the Sharing panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sharing/gnome-sharing-panel.desktop.in.in:16
@@ -6816,7 +6818,7 @@ msgstr "Kattintás"
 
 #: panels/sound/cc-alert-chooser.ui:20
 msgid "String"
-msgstr "Karakterlánc"
+msgstr "Húr"
 
 #: panels/sound/cc-alert-chooser.ui:28
 msgid "Swing"
@@ -6914,7 +6916,7 @@ msgstr "Hang"
 
 #: panels/sound/gnome-sound-panel.desktop.in.in:4
 msgid "Change sound levels, inputs, outputs, and alert sounds"
-msgstr "Hangerő, bemenetek, kimenetek és riasztáshangok módosítása"
+msgstr "Hangerő, bemenetek, kimenetek és riasztáshangok megváltoztatása"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in.in:20
@@ -7071,7 +7073,7 @@ msgstr "A Thunderbolt támogatás le lett tiltva a BIOS-ban."
 msgid "Thunderbolt security level could not be determined."
 msgstr "A Thunderbolt biztonsági szintje nem határozható meg."
 
-#: panels/thunderbolt/cc-bolt-panel.c:614
+#: panels/thunderbolt/cc-bolt-panel.c:618
 #, c-format
 msgid "Error switching direct mode: %s"
 msgstr "Hiba a közvetlen módra váltáskor: %s"
@@ -7198,12 +7200,12 @@ msgstr "M_ozgás küszöbszintje:"
 #: panels/universal-access/cc-pointing-dialog.ui:213
 msgctxt "dwell click threshold"
 msgid "Small"
-msgstr "Alacsony"
+msgstr "Kicsi"
 
 #: panels/universal-access/cc-pointing-dialog.ui:231
 msgctxt "dwell click threshold"
 msgid "Large"
-msgstr "Magas"
+msgstr "Nagy"
 
 #: panels/universal-access/cc-repeat-keys-dialog.ui:5
 msgid "Repeat Keys"
@@ -7355,7 +7357,7 @@ msgstr "Nagy k_ontraszt"
 
 #: panels/universal-access/cc-ua-panel.ui:46
 msgid "_Large Text"
-msgstr "Nagy s_zöveg"
+msgstr "_Nagy szöveg"
 
 #: panels/universal-access/cc-ua-panel.ui:58
 msgid "Enable A_nimations"
@@ -7728,7 +7730,7 @@ msgstr "Törli az összes ideiglenes fájlt?"
 
 #: panels/usage/cc-usage-panel.c:219
 msgid "All the temporary files will be permanently deleted."
-msgstr "Minden ideiglenes fájl véglegesen törlésre kerül."
+msgstr "Az összes ideiglenes fájl véglegesen törlésre kerül."
 
 #: panels/usage/cc-usage-panel.c:220
 msgid "_Purge Temporary Files"
@@ -7898,8 +7900,8 @@ msgid ""
 "all users. Parental controls cannot be applied to administrators."
 msgstr ""
 "A rendszergazdák hozzáadhatnak és eltávolíthatnak más felhasználókat, és "
-"módosíthatják az összes felhasználó beállításait. A szülői felügyelet nem "
-"alkalmazható rendszergazdákra."
+"megváltoztathatják az összes felhasználó beállításait. A szülői felügyelet "
+"nem alkalmazható rendszergazdákra."
 
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 msgid "User sets password on first login"
@@ -7909,23 +7911,23 @@ msgstr "A felhasználó az első bejelentkezéskor állít be jelszót"
 msgid "Set password now"
 msgstr "Jelszó beállítása most"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:224
+#: panels/user-accounts/cc-add-user-dialog.ui:223
 msgid "Confirm"
 msgstr "Megerősítés"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:278
+#: panels/user-accounts/cc-add-user-dialog.ui:277
 msgid "Enterprise Login"
 msgstr "Vállalati bejelentkezés"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:279
+#: panels/user-accounts/cc-add-user-dialog.ui:278
 msgid "User accounts which are managed by a company or organization."
 msgstr "Felhasználói fiókok, amelyeket egy vállalat vagy szervezet kezel."
 
-#: panels/user-accounts/cc-add-user-dialog.ui:388
+#: panels/user-accounts/cc-add-user-dialog.ui:387
 msgid "You are Offline"
 msgstr "Kapcsolat nélkül"
 
-#: panels/user-accounts/cc-add-user-dialog.ui:389
+#: panels/user-accounts/cc-add-user-dialog.ui:388
 msgid ""
 "Enterprise login allows an existing centrally managed user account to be "
 "used on this device. You can also use this account to access company "
@@ -8195,7 +8197,7 @@ msgstr "%s – %s"
 #. Translators: This is a time format string in the style of "22:58".
 #. It indicates a login time which follows a date.
 #: panels/user-accounts/cc-login-history-dialog.c:179
-#: panels/user-accounts/cc-user-panel.c:727
+#: panels/user-accounts/cc-user-panel.c:728
 msgctxt "login date-time"
 msgid "%k:%M"
 msgstr "%H:%M"
@@ -8203,7 +8205,7 @@ msgstr "%H:%M"
 #. Translators: This indicates a login date-time.
 #. The first %s is a date, and the second %s a time.
 #: panels/user-accounts/cc-login-history-dialog.c:182
-#: panels/user-accounts/cc-user-panel.c:731
+#: panels/user-accounts/cc-user-panel.c:732
 #, c-format
 msgctxt "login date-time"
 msgid "%s, %s"
@@ -8266,7 +8268,7 @@ msgstr "Jelszó megerősítése"
 
 #: panels/user-accounts/cc-password-dialog.ui:153
 msgid "Allow user to change their password on next login"
-msgstr "A felhasználó módosíthatja a jelszót a következő bejelentkezéskor"
+msgstr "A felhasználó megváltoztathatja a jelszót a következő bejelentkezéskor"
 
 #: panels/user-accounts/cc-password-dialog.ui:165
 msgid "Set a password now"
@@ -8295,26 +8297,26 @@ msgstr "Érvénytelen jelszó, próbálja újra"
 msgid "Couldn’t connect to the %s domain: %s"
 msgstr "Nem lehet csatlakozni a(z) %s tartományhoz: %s"
 
-#: panels/user-accounts/cc-user-panel.c:356
+#: panels/user-accounts/cc-user-panel.c:357
 msgid "Failed to delete user"
 msgstr "A felhasználó törlése meghiúsult"
 
-#: panels/user-accounts/cc-user-panel.c:413
-#: panels/user-accounts/cc-user-panel.c:468
-#: panels/user-accounts/cc-user-panel.c:514
+#: panels/user-accounts/cc-user-panel.c:414
+#: panels/user-accounts/cc-user-panel.c:469
+#: panels/user-accounts/cc-user-panel.c:515
 msgid "Failed to revoke remotely managed user"
 msgstr "A távmenedzselt felhasználó visszavonása meghiúsult"
 
-#: panels/user-accounts/cc-user-panel.c:563
+#: panels/user-accounts/cc-user-panel.c:564
 msgid "You cannot delete your own account."
 msgstr "Nem törölheti saját fiókját."
 
-#: panels/user-accounts/cc-user-panel.c:572
+#: panels/user-accounts/cc-user-panel.c:573
 #, c-format
 msgid "%s is still logged in"
 msgstr "%s még be van jelentkezve"
 
-#: panels/user-accounts/cc-user-panel.c:576
+#: panels/user-accounts/cc-user-panel.c:577
 msgid ""
 "Deleting a user while they are logged in can leave the system in an "
 "inconsistent state."
@@ -8322,12 +8324,12 @@ msgstr ""
 "A bejelentkezett felhasználók törlése a rendszert inkonzisztens állapotban "
 "hagyhatja."
 
-#: panels/user-accounts/cc-user-panel.c:585
+#: panels/user-accounts/cc-user-panel.c:586
 #, c-format
 msgid "Do you want to keep %s’s files?"
 msgstr "Meg szeretné tartani %s fájljait?"
 
-#: panels/user-accounts/cc-user-panel.c:589
+#: panels/user-accounts/cc-user-panel.c:590
 msgid ""
 "It is possible to keep the home directory, mail spool and temporary files "
 "around when deleting a user account."
@@ -8335,60 +8337,60 @@ msgstr ""
 "Felhasználói fiók törlésekor lehetősége van a saját könyvtár, a levelezési "
 "várólista és az ideiglenes fájlok megtartására."
 
-#: panels/user-accounts/cc-user-panel.c:592
+#: panels/user-accounts/cc-user-panel.c:593
 msgid "_Delete Files"
 msgstr "Fájlok _törlése"
 
-#: panels/user-accounts/cc-user-panel.c:593
+#: panels/user-accounts/cc-user-panel.c:594
 msgid "_Keep Files"
 msgstr "Fájlok _megtartása"
 
-#: panels/user-accounts/cc-user-panel.c:607
+#: panels/user-accounts/cc-user-panel.c:608
 #, c-format
 msgid "Are you sure you want to revoke remotely managed %s’s account?"
 msgstr "Biztosan vissza szeretné vonni a távmenedzselt %s fiókját?"
 
-#: panels/user-accounts/cc-user-panel.c:611
+#: panels/user-accounts/cc-user-panel.c:612
 msgid "_Delete"
 msgstr "_Törlés"
 
-#: panels/user-accounts/cc-user-panel.c:661
+#: panels/user-accounts/cc-user-panel.c:662
 msgctxt "Password mode"
 msgid "Account disabled"
 msgstr "Fiók letiltva"
 
-#: panels/user-accounts/cc-user-panel.c:669
+#: panels/user-accounts/cc-user-panel.c:670
 msgctxt "Password mode"
 msgid "To be set at next login"
 msgstr "Következő belépéskor állítandó be"
 
-#: panels/user-accounts/cc-user-panel.c:672
+#: panels/user-accounts/cc-user-panel.c:673
 msgctxt "Password mode"
 msgid "None"
 msgstr "Nincs"
 
-#: panels/user-accounts/cc-user-panel.c:715
+#: panels/user-accounts/cc-user-panel.c:716
 msgid "Logged in"
 msgstr "Bejelentkezve"
 
-#: panels/user-accounts/cc-user-panel.c:1202
+#: panels/user-accounts/cc-user-panel.c:1232
 msgid "Failed to contact the accounts service"
 msgstr "A fiókszolgáltatás nem érhető el"
 
-#: panels/user-accounts/cc-user-panel.c:1204
+#: panels/user-accounts/cc-user-panel.c:1234
 msgid "Please make sure that the AccountService is installed and enabled."
 msgstr "Győződjön meg róla, hogy az AccountService telepítve van és fut."
 
-#: panels/user-accounts/cc-user-panel.c:1226
+#: panels/user-accounts/cc-user-panel.c:1256
 msgid "This panel must be unlocked to change this setting"
 msgstr "Ezt a panelt fel kell oldani a beállítás megváltoztatásához"
 
-#: panels/user-accounts/cc-user-panel.c:1293
+#: panels/user-accounts/cc-user-panel.c:1323
 msgid "Delete the selected user account"
 msgstr "Kijelölt felhasználói fiók törlése"
 
-#: panels/user-accounts/cc-user-panel.c:1297
-#: panels/user-accounts/cc-user-panel.c:1409
+#: panels/user-accounts/cc-user-panel.c:1327
+#: panels/user-accounts/cc-user-panel.c:1439
 msgid ""
 "To delete the selected user account,\n"
 "click the * icon first"
@@ -8396,9 +8398,10 @@ msgstr ""
 "A kijelölt felhasználói fiók törléséhez\n"
 "először kattintson a * ikonra"
 
-#: panels/user-accounts/cc-user-panel.c:1455
+#: panels/user-accounts/cc-user-panel.c:1485
 msgid "Unlock to Add Users and Change Settings"
-msgstr "Feloldás a felhasználók hozzáadásához és a beállítások módosításához"
+msgstr ""
+"Feloldás a felhasználók hozzáadásához és a beállítások megváltoztatásához"
 
 #: panels/user-accounts/cc-user-panel.ui:23
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:3
@@ -8453,11 +8456,11 @@ msgid ""
 "all users."
 msgstr ""
 "A rendszergazdák hozzáadhatnak és eltávolíthatnak más felhasználókat, és "
-"módosíthatják az összes felhasználó beállításait."
+"megváltoztathatják az összes felhasználó beállításait."
 
 #: panels/user-accounts/cc-user-panel.ui:283
 msgid "_Parental Controls"
-msgstr "Szülői _felügyeleti eszközök"
+msgstr "Szülői _felügyelet"
 
 #: panels/user-accounts/cc-user-panel.ui:284
 msgid "Open the Parental Controls application."
@@ -8486,7 +8489,7 @@ msgstr "Feloldás felhasználói fiók hozzáadásához."
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:4
 msgid "Add or remove users and change your password"
-msgstr "Felhasználók hozzáadása vagy eltávolítása és jelszómódosítás"
+msgstr "Felhasználók hozzáadása vagy eltávolítása és jelszóváltoztatás"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in.in:20
@@ -8531,7 +8534,7 @@ msgstr "Felhasználói fiókok kezelése"
 
 #: panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Hitelesítés szükséges a felhasználói adatok módosításához"
+msgstr "Hitelesítés szükséges a felhasználói adatok megváltoztatásához"
 
 #: panels/user-accounts/pw-utils.c:94
 msgctxt "Password hint"
@@ -8689,7 +8692,7 @@ msgstr "Az új jelszó nem tartalmaz elég eltérő karaktert"
 msgid "Unknown error"
 msgstr "Ismeretlen hiba"
 
-#: panels/user-accounts/user-utils.c:144
+#: panels/user-accounts/user-utils.c:150
 msgid ""
 "The username should usually only consist of lower case letters from a-z, "
 "digits and the following characters: - _"
@@ -8697,11 +8700,11 @@ msgstr ""
 "A felhasználónév általában csak a-z közötti kisbetűkből, számjegyekből és a "
 "következő karakterekből állhat: - _"
 
-#: panels/user-accounts/user-utils.c:148
+#: panels/user-accounts/user-utils.c:154
 msgid "Sorry, that user name isn’t available. Please try another."
 msgstr "Ez a felhasználónév nem érhető el. Próbáljon egy másikat."
 
-#: panels/user-accounts/user-utils.c:190
+#: panels/user-accounts/user-utils.c:196
 msgid "The username is too long."
 msgstr "A felhasználónév túl hosszú."
 
@@ -8904,7 +8907,8 @@ msgstr "Wacom rajztábla"
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:4
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
 msgstr ""
-"Rajztáblák gombleképezéseinek beállítása és a toll érzékenységének módosítása"
+"Rajztáblák gombleképezéseinek beállítása és a toll érzékenységének "
+"megváltoztatása"
 
 #. Translators: Search terms to find the Wacom Tablet panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in.in:19
@@ -8923,15 +8927,15 @@ msgstr "Hozzáférési pontok"
 msgid "APN"
 msgstr "APN"
 
-#: panels/wwan/cc-wwan-data.c:542
+#: panels/wwan/cc-wwan-data.c:571
 msgid "Operation Cancelled"
 msgstr "Művelet megszakítva"
 
-#: panels/wwan/cc-wwan-data.c:545
+#: panels/wwan/cc-wwan-data.c:574
 msgid "<b>Error:</b> Access denied changing settings"
-msgstr "<b>Hiba:</b> Hozzáférés megtagadva a beállítások módosításakor"
+msgstr "<b>Hiba:</b> Hozzáférés megtagadva a beállítások megváltoztatásakor"
 
-#: panels/wwan/cc-wwan-data.c:548
+#: panels/wwan/cc-wwan-data.c:577
 msgid "<b>Error:</b> Mobile Equipment Error"
 msgstr "<b>Hiba:</b> Mobilfelszerelést érintő hiba"
 
@@ -8985,7 +8989,7 @@ msgstr "Eszköz adatai"
 
 #: panels/wwan/cc-wwan-details-dialog.ui:210
 msgid "Firmware Version"
-msgstr "Firmware verzió"
+msgstr "Belső vezérlőprogram verziója"
 
 #: panels/wwan/cc-wwan-device.c:988
 msgid "2G Only"
@@ -9432,13 +9436,13 @@ msgstr "SIM-kártya _zárolása PIN-kóddal"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:107
 msgid "Change PIN"
-msgstr "PIN-kód módosítása"
+msgstr "PIN-kód megváltoztatása"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:202
 msgid "Enter current PIN to change SIM lock settings"
 msgstr ""
 "Adja meg a jelenlegi PIN-kódot a SIM-kártya zárolási beállításainak "
-"módosításához"
+"megváltoztatásához"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in.in:3
 msgid "Mobile Network"
