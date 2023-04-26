@@ -17,12 +17,12 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-control-center master\n"
-"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/issu"
-"es\n"
-"POT-Creation-Date: 2023-03-16 16:23+0000\n"
-"PO-Revision-Date: 2023-03-16 17:28+0100\n"
+"Report-Msgid-Bugs-To: https://gitlab.gnome.org/GNOME/gnome-control-center/"
+"issues\n"
+"POT-Creation-Date: 2023-04-25 00:26+0000\n"
+"PO-Revision-Date: 2023-04-26 23:25+0200\n"
 "Last-Translator: Balázs Úr <ur.balazs at fsf dot hu>\n"
-"Language-Team: Hungarian <gnome-hu-list at gnome dot org>\n"
+"Language-Team: Hungarian <openscope at fsf dot hu>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -93,7 +93,7 @@ msgstr "Beállítások"
 
 #: panels/applications/cc-applications-panel.c:848
 msgid "Can change settings"
-msgstr "Módosíthatja a beállításokat"
+msgstr "Megváltoztathatja a beállításokat"
 
 #: panels/applications/cc-applications-panel.c:850
 #, c-format
@@ -180,7 +180,7 @@ msgstr "Rendszerkeresések fogadása és a találatok küldése"
 #: panels/user-accounts/cc-user-panel.c:821
 #: panels/user-accounts/cc-user-panel.c:951
 #: panels/wwan/cc-wwan-device-page.c:477
-#: subprojects/gvc/gvc-mixer-control.c:1900
+#: subprojects/gvc/gvc-mixer-control.c:1908
 msgid "Disabled"
 msgstr "Letiltva"
 
@@ -356,7 +356,7 @@ msgstr "Fénykép kiválasztása"
 #: panels/background/cc-background-chooser.c:315
 #: panels/color/cc-color-calibrate.ui:22 panels/color/cc-color-panel.c:284
 #: panels/color/cc-color-panel.c:844 panels/common/cc-language-chooser.ui:21
-#: panels/display/cc-display-panel.ui:31 panels/keyboard/cc-input-chooser.ui:11
+#: panels/display/cc-display-panel.ui:42 panels/keyboard/cc-input-chooser.ui:11
 #: panels/keyboard/cc-keyboard-shortcut-editor.ui:23
 #: panels/network/cc-wifi-hotspot-dialog.ui:125
 #: panels/network/cc-wifi-panel.c:745
@@ -1172,7 +1172,7 @@ msgstr "Tovább…"
 
 #: panels/common/cc-permission-infobar.c:109
 msgid "Unlock to Change Settings"
-msgstr "Feloldás a beállítások módosításához"
+msgstr "Feloldás a beállítások megváltoztatásához"
 
 #: panels/common/cc-permission-infobar.ui:42
 msgid "Some settings must be unlocked before they can be changed."
@@ -1298,21 +1298,21 @@ msgctxt "hotspot"
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: panels/datetime/cc-datetime-panel.c:165
+#: panels/datetime/cc-datetime-panel.c:167
 msgid "24-hour"
 msgstr "24 órás"
 
-#: panels/datetime/cc-datetime-panel.c:167
+#: panels/datetime/cc-datetime-panel.c:169
 msgid "AM / PM"
 msgstr "12 órás"
 
 #. Translators: This is the full date and time format used in 12-hour mode.
-#: panels/datetime/cc-datetime-panel.c:238
+#: panels/datetime/cc-datetime-panel.c:240
 msgid "%e %B %Y, %l:%M %p"
 msgstr "%Y. %B %-e. %H:%M"
 
 #. Translators: This is the full date and time format used in 24-hour mode.
-#: panels/datetime/cc-datetime-panel.c:243
+#: panels/datetime/cc-datetime-panel.c:245
 msgid "%e %B %Y, %R"
 msgstr "%Y. %B %-e. %R"
 
@@ -1449,7 +1449,7 @@ msgstr "Nincs találat"
 
 #: panels/datetime/gnome-datetime-panel.desktop.in:4
 msgid "Change the date and time, including time zone"
-msgstr "Dátum, idő és időzóna módosítása"
+msgstr "Dátum, idő és időzóna megváltoztatása"
 
 #. Translators: Search terms to find the Date and Time panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/datetime/gnome-datetime-panel.desktop.in:15
@@ -1458,11 +1458,11 @@ msgstr "Óra;Időzóna;Hely;"
 
 #: panels/datetime/org.gnome.controlcenter.datetime.policy.in:11
 msgid "Change system time and date settings"
-msgstr "Rendszer dátum- és időbeállításainak módosítása"
+msgstr "Rendszer dátum- és időbeállításainak megváltoztatása"
 
 #: panels/datetime/org.gnome.controlcenter.datetime.policy.in:12
 msgid "To change time or date settings, you need to authenticate."
-msgstr "Hitelesítés szükséges a dátum- és időbeállítások módosításához."
+msgstr "Hitelesítés szükséges a dátum- és időbeállítások megváltoztatásához."
 
 #: panels/default-apps/cc-default-apps-panel.ui:23
 msgid "_Web"
@@ -1542,37 +1542,33 @@ msgstr "Automatikus hibajelentés beállításai"
 msgid "diagnostics;crash;"
 msgstr "diagnosztika;összeomlás;"
 
-#: panels/display/cc-display-panel.c:493
+#: panels/display/cc-display-panel.c:496
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:743 panels/power/cc-power-panel.c:750
 msgid "On"
 msgstr "Be"
 
-#: panels/display/cc-display-panel.c:495 panels/network/cc-net-proxy-page.c:166
+#: panels/display/cc-display-panel.c:498 panels/network/cc-net-proxy-page.c:166
 #: panels/notifications/cc-notifications-panel.c:217
 #: panels/power/cc-power-panel.c:737 panels/power/cc-power-panel.c:748
 msgid "Off"
 msgstr "Ki"
 
-#: panels/display/cc-display-panel.c:931
-msgid "Apply Changes?"
-msgstr "Módosítások alkalmazása?"
-
 #: panels/display/cc-display-panel.c:936
-msgid "Changes Cannot be Applied"
-msgstr "A módosítások nem alkalmazhatóak"
+msgid "Apply Changes?"
+msgstr "Alkalmazza a változtatásokat?"
 
-#: panels/display/cc-display-panel.c:938
+#: panels/display/cc-display-panel.c:941
+msgid "Changes Cannot be Applied"
+msgstr "A változtatások nem alkalmazhatóak"
+
+#: panels/display/cc-display-panel.c:943
 msgid "This could be due to hardware limitations."
 msgstr "Ez hardveres korlátozások miatt is lehet."
 
-#: panels/display/cc-display-panel.ui:43
-#: panels/network/connection-editor/connection-editor.ui:21
-msgid "_Apply"
-msgstr "_Alkalmaz"
-
-#: panels/display/cc-display-panel.ui:78 panels/display/cc-display-panel.ui:209
-#: panels/display/cc-display-panel.ui:248 panels/mouse/cc-mouse-panel.ui:22
+#: panels/display/cc-display-panel.ui:33 panels/display/cc-display-panel.ui:89
+#: panels/display/cc-display-panel.ui:220
+#: panels/display/cc-display-panel.ui:259 panels/mouse/cc-mouse-panel.ui:22
 #: panels/network/cc-wifi-panel.ui:16 panels/printers/new-printer-dialog.ui:64
 #: panels/region/cc-format-chooser.ui:37
 #: panels/universal-access/cc-ua-panel.ui:19
@@ -1583,34 +1579,39 @@ msgstr "_Alkalmaz"
 msgid "Back"
 msgstr "Vissza"
 
-#: panels/display/cc-display-panel.ui:100
+#: panels/display/cc-display-panel.ui:54
+#: panels/network/connection-editor/connection-editor.ui:21
+msgid "_Apply"
+msgstr "_Alkalmaz"
+
+#: panels/display/cc-display-panel.ui:111
 msgid "Display Settings Disabled"
 msgstr "Megjelenítési beállítások letiltva"
 
-#: panels/display/cc-display-panel.ui:111
+#: panels/display/cc-display-panel.ui:122
 msgid "Multiple Displays"
 msgstr "Több kijelző"
 
 #. 'Join' as in 'Join displays'
-#: panels/display/cc-display-panel.ui:120
+#: panels/display/cc-display-panel.ui:131
 msgid "Join"
 msgstr "Összekapcsolás"
 
-#: panels/display/cc-display-panel.ui:127
+#: panels/display/cc-display-panel.ui:138
 msgid "Mirror"
 msgstr "Tükrözés"
 
-#: panels/display/cc-display-panel.ui:155
+#: panels/display/cc-display-panel.ui:166
 msgid "Contains top bar and Activities"
 msgstr "A felső sávot és a tevékenységet tartalmazza"
 
-#: panels/display/cc-display-panel.ui:156
+#: panels/display/cc-display-panel.ui:167
 msgid "Primary Display"
 msgstr "Elsődleges kijelző"
 
 #. This is the redshift functionality where we suppress blue light when the sun has gone down
-#: panels/display/cc-display-panel.ui:177
-#: panels/display/cc-display-panel.ui:216
+#: panels/display/cc-display-panel.ui:188
+#: panels/display/cc-display-panel.ui:227
 #: panels/display/cc-night-light-page.ui:117
 msgid "Night Light"
 msgstr "Éjszakai fény"
@@ -2710,11 +2711,11 @@ msgstr "Gyorsbillentyűk"
 msgid "View and Customize Shortcuts"
 msgstr "Gyorsbillentyűk megtekintése és testreszabása"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:381
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:382
 msgid "Reset All Shortcuts?"
 msgstr "Visszaállítja az összes gyorsbillentyűt?"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:384
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:385
 msgid ""
 "Resetting the shortcuts may affect your custom shortcuts. This cannot be "
 "undone."
@@ -2722,14 +2723,14 @@ msgstr ""
 "A gyorsbillentyűk visszaállítása az egyéni gyorsbillentyűket is érintheti. "
 "Ez nem vonható vissza."
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:388
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
 #: panels/network/cc-network-panel.ui:26
 #: panels/printers/ppd-selection-dialog.ui:83
 #: panels/wwan/cc-wwan-device-page.c:188
 msgid "Cancel"
 msgstr "Mégse"
 
-#: panels/keyboard/cc-keyboard-shortcut-dialog.c:389
+#: panels/keyboard/cc-keyboard-shortcut-dialog.c:390
 msgid "Reset All"
 msgstr "Összes visszaállítása"
 
@@ -2875,7 +2876,7 @@ msgid ""
 "Change keyboard shortcuts and set your typing preferences, keyboard layouts "
 "and input sources"
 msgstr ""
-"Gyorsbillentyűk módosítása és gépelési beállítások megadása, "
+"Gyorsbillentyűk megváltoztatása és gépelési beállítások megadása, "
 "billentyűzetkiosztások és bemeneti források"
 
 #. Translators: Search terms to find the Keyboard panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
@@ -3124,7 +3125,8 @@ msgstr "E­gér és é­rin­tő­táb­la"
 msgid ""
 "Change your mouse or touchpad sensitivity and select right or left-handed"
 msgstr ""
-"Egér vagy érintőtábla érzékenységének, bal vagy jobb kezességének módosítása"
+"Egér vagy érintőtábla érzékenységének, bal vagy jobb kezességének "
+"megváltoztatása"
 
 #. Translators: Search terms to find the Mouse and Touchpad panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/mouse/gnome-mouse-panel.desktop.in:15
@@ -5091,7 +5093,7 @@ msgstr "Energiagazdálkodás"
 msgid "View your battery status and change power saving settings"
 msgstr ""
 "Akkumulátorállapot megjelenítése és energiagazdálkodási beállítások "
-"módosítása"
+"megváltoztatása"
 
 #. Translators: Search terms to find the Power panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/power/gnome-power-panel.desktop.in:15
@@ -5121,7 +5123,7 @@ msgstr "A felület nem tölthető be: %s"
 
 #: panels/printers/cc-printers-panel.c:1314
 msgid "Unlock to Add Printers and Change Settings"
-msgstr "Feloldás a nyomtatók hozzáadásához és a beállítások módosításához"
+msgstr "Feloldás a nyomtatók hozzáadásához és a beállítások megváltoztatásához"
 
 #: panels/printers/gnome-printers-panel.desktop.in:3
 msgid "Printers"
@@ -6533,7 +6535,7 @@ msgstr "Hümmögés"
 #: panels/sound/cc-alert-chooser-window.c:346
 #: panels/sound/cc-alert-chooser-window.ui:46
 msgid "String"
-msgstr "Karakterlánc"
+msgstr "Húr"
 
 #: panels/sound/cc-alert-chooser-window.c:348
 #: panels/sound/cc-alert-chooser-window.ui:60
@@ -6628,7 +6630,7 @@ msgstr "Hang"
 
 #: panels/sound/gnome-sound-panel.desktop.in:4
 msgid "Change sound levels, inputs, outputs, and alert sounds"
-msgstr "Hangerő, bemenetek, kimenetek és riasztáshangok módosítása"
+msgstr "Hangerő, bemenetek, kimenetek és riasztáshangok megváltoztatása"
 
 #. Translators: Search terms to find the Sound panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/sound/gnome-sound-panel.desktop.in:15
@@ -7454,7 +7456,6 @@ msgid "Forever"
 msgstr "Örökké"
 
 #: panels/usage/cc-usage-panel.c:347
-#| msgid "_Clear History"
 msgid "Clear File History?"
 msgstr "Törli a fájlelőzményeket?"
 
@@ -7606,8 +7607,8 @@ msgid ""
 "all users. Parental controls cannot be applied to administrators."
 msgstr ""
 "A rendszergazdák hozzáadhatnak és eltávolíthatnak más felhasználókat, és "
-"módosíthatják az összes felhasználó beállításait. A szülői felügyelet nem "
-"alkalmazható rendszergazdákra."
+"megváltoztathatják az összes felhasználó beállításait. A szülői felügyelet "
+"nem alkalmazható rendszergazdákra."
 
 #: panels/user-accounts/cc-add-user-dialog.ui:149
 msgid "User sets password on first login"
@@ -7978,7 +7979,7 @@ msgstr "Jelszó megerősítése"
 
 #: panels/user-accounts/cc-password-dialog.ui:141
 msgid "Allow user to change their password on next login"
-msgstr "A felhasználó módosíthatja a jelszót a következő bejelentkezéskor"
+msgstr "A felhasználó megváltoztathatja a jelszót a következő bejelentkezéskor"
 
 #: panels/user-accounts/cc-password-dialog.ui:153
 msgid "Set a password now"
@@ -8114,7 +8115,8 @@ msgstr ""
 
 #: panels/user-accounts/cc-user-panel.c:1528
 msgid "Unlock to Add Users and Change Settings"
-msgstr "Feloldás a felhasználók hozzáadásához és a beállítások módosításához"
+msgstr ""
+"Feloldás a felhasználók hozzáadásához és a beállítások megváltoztatásához"
 
 #: panels/user-accounts/cc-user-panel.ui:23
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:3
@@ -8169,7 +8171,7 @@ msgid ""
 "all users."
 msgstr ""
 "A rendszergazdák hozzáadhatnak és eltávolíthatnak más felhasználókat, és "
-"módosíthatják az összes felhasználó beállításait."
+"megváltoztathatják az összes felhasználó beállításait."
 
 #: panels/user-accounts/cc-user-panel.ui:255
 msgid "_Parental Controls"
@@ -8198,7 +8200,7 @@ msgstr "Feloldás felhasználói fiók hozzáadásához."
 
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:4
 msgid "Add or remove users and change your password"
-msgstr "Felhasználók hozzáadása vagy eltávolítása és jelszómódosítás"
+msgstr "Felhasználók hozzáadása vagy eltávolítása és jelszóváltoztatás"
 
 #. Translators: Search terms to find the Users panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/user-accounts/data/gnome-user-accounts-panel.desktop.in:15
@@ -8247,7 +8249,7 @@ msgstr "Felhasználói fiókok kezelése"
 
 #: panels/user-accounts/org.gnome.controlcenter.user-accounts.policy.in:12
 msgid "Authentication is required to change user data"
-msgstr "Hitelesítés szükséges a felhasználói adatok módosításához"
+msgstr "Hitelesítés szükséges a felhasználói adatok megváltoztatásához"
 
 #: panels/user-accounts/pw-utils.c:94
 msgctxt "Password hint"
@@ -8624,7 +8626,8 @@ msgstr "Wacom rajztábla"
 #: panels/wacom/gnome-wacom-panel.desktop.in:4
 msgid "Set button mappings and adjust stylus sensitivity for graphics tablets"
 msgstr ""
-"Rajztáblák gombleképezéseinek beállítása és a toll érzékenységének módosítása"
+"Rajztáblák gombleképezéseinek beállítása és a toll érzékenységének "
+"megváltoztatása"
 
 #. Translators: Search terms to find the Wacom Tablet panel. Do NOT translate or localize the semicolons! The list MUST also end with a semicolon!
 #: panels/wacom/gnome-wacom-panel.desktop.in:15
@@ -8649,7 +8652,7 @@ msgstr "Művelet megszakítva"
 
 #: panels/wwan/cc-wwan-data.c:574
 msgid "<b>Error:</b> Access denied changing settings"
-msgstr "<b>Hiba:</b> Hozzáférés megtagadva a beállítások módosításakor"
+msgstr "<b>Hiba:</b> Hozzáférés megtagadva a beállítások megváltoztatásakor"
 
 #: panels/wwan/cc-wwan-data.c:577
 msgid "<b>Error:</b> Mobile Equipment Error"
@@ -9148,13 +9151,13 @@ msgstr "SIM-kártya _zárolása PIN-kóddal"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:107
 msgid "Change PIN"
-msgstr "PIN-kód módosítása"
+msgstr "PIN-kód megváltoztatása"
 
 #: panels/wwan/cc-wwan-sim-lock-dialog.ui:202
 msgid "Enter current PIN to change SIM lock settings"
 msgstr ""
 "Adja meg a jelenlegi PIN-kódot a SIM-kártya zárolási beállításainak "
-"módosításához"
+"megváltoztatásához"
 
 #: panels/wwan/gnome-wwan-panel.desktop.in:3
 msgid "Mobile Network"
@@ -9327,7 +9330,7 @@ msgstr ""
 
 #. translators:
 #. * The number of sound outputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1907
+#: subprojects/gvc/gvc-mixer-control.c:1915
 #, c-format
 msgid "%u Output"
 msgid_plural "%u Outputs"
@@ -9336,13 +9339,13 @@ msgstr[1] "%u kimenet"
 
 #. translators:
 #. * The number of sound inputs on a particular device
-#: subprojects/gvc/gvc-mixer-control.c:1917
+#: subprojects/gvc/gvc-mixer-control.c:1925
 #, c-format
 msgid "%u Input"
 msgid_plural "%u Inputs"
 msgstr[0] "%u bemenet"
 msgstr[1] "%u bemenet"
 
-#: subprojects/gvc/gvc-mixer-control.c:2867
+#: subprojects/gvc/gvc-mixer-control.c:2876
 msgid "System Sounds"
 msgstr "Rendszerhangok"
